@@ -31,13 +31,13 @@ stimuli:
       Do not compile or generate an SDK in this bounded handoff.
     environment: &a1
       files:
-        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/customization-mcp.mjs
+        - src: ../../../azure-typespec-sdk-naming/evals/fixtures/customization-mcp.mjs
           dest: customization-mcp.mjs
-        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/standalone-apply/main.tsp
+        - src: ../../../azure-typespec-sdk-naming/evals/fixtures/standalone-apply/main.tsp
           dest: main.tsp
-        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/standalone-apply/tspconfig.yaml
+        - src: ../../../azure-typespec-sdk-naming/evals/fixtures/standalone-apply/tspconfig.yaml
           dest: tspconfig.yaml
-        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/standalone-apply/existing-client.tsp
+        - src: ../../../azure-typespec-sdk-naming/evals/fixtures/standalone-apply/existing-client.tsp
           dest: client.tsp
       mcpServers:
         azure-sdk-mcp:
@@ -52,7 +52,7 @@ stimuli:
       - type: skill-invocation
         config:
           required:
-            - azsdk-common-typespec-naming
+            - azure-typespec-sdk-naming
       - &a3
         type: tool-calls
         config:
@@ -106,7 +106,7 @@ stimuli:
         config:
           required:
             - azure-typespec-author
-            - azsdk-common-typespec-naming
+            - azure-typespec-sdk-naming
       - *a3
       - *a4
       - *a5

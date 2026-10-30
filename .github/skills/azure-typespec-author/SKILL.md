@@ -3,7 +3,7 @@ name: azure-typespec-author
 license: MIT
 metadata:
   version: "1.0.0"
-description: "Authors Azure TypeSpec API specifications. MUST BE USED for all .tsp changes except naming-only client.tsp SDK overrides handled by azsdk-common-typespec-naming. WHEN: versions, resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO for ARM or data-plane. DO NOT USE FOR: naming-only client.tsp overrides, SDK generation/releases, single MCP calls. INVOKES: azure-sdk-mcp:azsdk_typespec_retrieve_knowledge, azure-sdk-mcp:azsdk_run_typespec_validation."
+description: "Authors Azure TypeSpec API specifications. MUST BE USED for all .tsp changes except naming-only client.tsp SDK overrides handled by azure-typespec-sdk-naming. WHEN: versions, resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO for ARM or data-plane. DO NOT USE FOR: naming-only client.tsp overrides, SDK generation/releases, single MCP calls. INVOKES: azure-sdk-mcp:azsdk_typespec_retrieve_knowledge, azure-sdk-mcp:azsdk_run_typespec_validation."
 compatibility: "Optionally uses the azure-sdk-mcp server with azure-sdk-mcp:azsdk_typespec_retrieve_knowledge and azure-sdk-mcp:azsdk_run_typespec_validation tools"
 ---
 
@@ -19,7 +19,7 @@ DO NOT USE FOR: naming-only client.tsp SDK overrides, SDK generation, releasing 
 
 The `azure-typespec-author` skill **must** be invoked immediately in all modes (including plan mode) for any task that involves creating and modifying TypeSpec (`.tsp`) files except naming-only `client.tsp` SDK overrides. **This skill MUST be used regardless of how simple the task appears** — there are no "simple" TypeSpec source edits. Even trivial-seeming changes (adding a single enum value, one property, one operation) require the full workflow because versioning decorators, validation, and compliance checks are mandatory.
 
-For naming-only `client.tsp` requests, invoke `azsdk-common-typespec-naming` directly; it applies authorized SDK overrides through scoped direct edits, not the customization tool. Other SDK customizations remain with the existing customization workflow. This exception does not bypass naming guidance.
+For naming-only `client.tsp` requests, invoke `azure-typespec-sdk-naming` directly; it applies authorized SDK overrides through scoped direct edits, not the customization tool. Other SDK customizations remain with the existing customization workflow. This exception does not bypass naming guidance.
 
 This includes but is not limited to:
 
@@ -45,11 +45,11 @@ case-specific checks.
 An exposed tool that returns an error, times out, or fails authentication is not
 unavailable. Report that failure instead of silently taking its fallback.
 
-Install `azsdk-common-typespec-naming` alongside this skill. Invoke it by name for naming guidance; do not copy its rules into this skill. If unavailable, report the naming coverage gap rather than inventing a replacement.
+Install `azure-typespec-sdk-naming` alongside this skill. Invoke it by name for naming guidance; do not copy its rules into this skill. If unavailable, report the naming coverage gap rather than inventing a replacement.
 
 ## Rules
 
-- **Do NOT skip this skill for "simple" declaration tasks** — there are no simple TypeSpec source edits. A single property addition can require `@added` decorators, version gating, and validation. The only `.tsp` exception is a naming-only `client.tsp` SDK override routed directly to `azsdk-common-typespec-naming`.
+- **Do NOT skip this skill for "simple" declaration tasks** — there are no simple TypeSpec source edits. A single property addition can require `@added` decorators, version gating, and validation. The only `.tsp` exception is a naming-only `client.tsp` SDK override routed directly to `azure-typespec-sdk-naming`.
 - **Always follow the full source-authoring workflow** — even seemingly simple changes (e.g. adding a default value) can require complex versioning decorator changes. Never skip required steps.
 - **Mandatory for ordinary `.tsp` edits** — even a single `?` change can be breaking. Do not invoke this skill for the naming-only `client.tsp` exception.
 - **Minimal, scoped edits** — only change what the request requires.
@@ -97,7 +97,7 @@ See [authoring-plan.md](references/authoring-plan.md).
 ### Step 4: Client Configuration Unless Opted Out
 
 See [client-configuration.md](references/client-configuration.md). Invoke
-`azsdk-common-typespec-naming` for SDK-visible changes unless the user explicitly
+`azure-typespec-sdk-naming` for SDK-visible changes unless the user explicitly
 opts out. Skip this step without prompting for unrelated or documentation-only
 requests that cannot affect the generated client surface. Do not pause source
 authoring to confirm the recommended default, and do not invoke the naming skill
@@ -107,7 +107,7 @@ when the user opts out.
 
 Make minimal `.tsp` declaration edits following the source plan from Step 3. If
 Step 4 produced a client configuration plan, use
-`azsdk-common-typespec-naming` in apply mode; it directly edits scoped naming
+`azure-typespec-sdk-naming` in apply mode; it directly edits scoped naming
 overrides and necessary imports/loading without calling the customization tool.
 Do not bypass that workflow. Resolve missing material source decisions during
 intake before applying changes; do not reconfirm decisions already supplied.

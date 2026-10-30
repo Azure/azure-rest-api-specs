@@ -1,5 +1,5 @@
 ---
-name: azsdk-common-typespec-naming
+name: azure-typespec-sdk-naming
 description: 'Apply shared SDK naming guidance during TypeSpec authoring, customization, and read-only review. WHEN: "plan SDK names", "check TypeSpec SDK naming", "review SDK naming conventions", "fix naming in client.tsp", "add a language-scoped clientName override". Initially covers C# management SDKs.'
 license: MIT
 metadata:
