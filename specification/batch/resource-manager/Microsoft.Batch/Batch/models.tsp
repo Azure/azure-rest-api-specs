@@ -3636,13 +3636,6 @@ model StartTask {
 }
 
 /**
- * A resource file URL that may contain credentials or other sensitive information.
- */
-@added(Versions.v2026_10_01)
-@secret
-scalar ResourceFileUrl extends string;
-
-/**
  * A single file or multiple files to be downloaded to a compute node.
  */
 @summary("A single file or multiple files to be downloaded to a compute node.")
@@ -3658,16 +3651,14 @@ model ResourceFile {
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @summary("The URL of the blob container within Azure Blob Storage.")
-  @typeChangedFrom(Versions.v2026_10_01, string)
-  storageContainerUrl?: ResourceFileUrl;
+  storageContainerUrl?: string;
 
   /**
    * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @summary("The URL of the file to download.")
-  @typeChangedFrom(Versions.v2026_10_01, string)
-  httpUrl?: ResourceFileUrl;
+  httpUrl?: string;
 
   /**
    * The property is valid only when autoStorageContainerName or storageContainerUrl is used. This prefix can be a partial filename or a subdirectory. If a prefix is not specified, all the files in the container will be downloaded.
