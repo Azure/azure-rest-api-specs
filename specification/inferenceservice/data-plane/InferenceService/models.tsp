@@ -17,6 +17,7 @@ union DocumentType {
 }
 
 /** The input for a semantic reranking operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "This request model is the options bag passed to SemanticRerank, so the Options suffix is intended."
 model SemanticRerankingInferenceContent {
   /** The query used to rank the documents. */
   @maxLength(2147483647)
@@ -51,8 +52,10 @@ model SemanticRerankingInferenceContent {
    * This property is required for JSON documents. Use dot notation for a nested property, for example `meta.content`.
    * You can specify multiple property paths separated by commas, for example `meta.content,id`.
    */
-  @maxLength(2147483647)
-  targetPaths?: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The service contract takes the paths as one comma-separated string; commaDelimited encoding lets SDKs expose a string collection while sending that string."
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "AutoRest cannot express array delimiter encoding, so the OpenAPI keeps the existing string definition, which matches the wire contract."
+  @encode(ArrayEncoding.commaDelimited)
+  targetPaths?: string[];
 
   /** The name of the model used for the semantic reranking operation. */
   @maxLength(2147483647)

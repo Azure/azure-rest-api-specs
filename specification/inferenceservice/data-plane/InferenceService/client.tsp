@@ -24,3 +24,22 @@ using Azure.Data.AI;
 // `details` lists nested errors. Python and JavaScript expose both on ProblemDetails, so
 // rename `detail` in those clients only; the wire name (detail) is unchanged.
 @@clientName(ProblemDetails.detail, "explanation", "python, javascript");
+
+// The response envelope is renamed first so the operation result model can take the
+// SemanticRerankingResult name.
+@@clientName(
+  SemanticRerankingResult,
+  "SemanticRerankingOperationResult",
+  "csharp"
+);
+@@clientName(
+  SemanticRerankingInferenceResult,
+  "SemanticRerankingResult",
+  "csharp"
+);
+@@clientName(
+  SemanticRerankingInferenceContent,
+  "SemanticRerankingOptions",
+  "csharp"
+);
+@@clientName(MetaResult, "SemanticRerankingMetadata", "csharp");
