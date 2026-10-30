@@ -14,6 +14,14 @@ using Placement.V1;
 
 namespace Microsoft.ContainerService;
 
+@added(Versions.v2026_11_02_preview)
+scalar FleetMemberResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/fleets/members",
+    }
+  ]>;
+
 @doc("A fleet managed namespace.")
 @resource("managedNamespaces")
 @added(Versions.v2025_08_01_preview)
@@ -59,6 +67,11 @@ model FleetManagedNamespaceProperties {
   @visibility(Lifecycle.Read)
   @doc("The Azure Portal FQDN of the Fleet hub.")
   portalFqdn?: string;
+
+  @added(Versions.v2026_11_02_preview)
+  @visibility(Lifecycle.Read)
+  @doc("The resource IDs of the Fleet members where the current-generation ClusterResourcePlacement status reports the managed namespace as successfully applied. This property is omitted while current-generation placement status is unavailable, including while an update is being scheduled. An empty array indicates that current-generation placement status is available but the managed namespace is not successfully applied to any members.")
+  placedMemberIds?: FleetMemberResourceId[];
 }
 
 @added(Versions.v2025_08_01_preview)
@@ -71,6 +84,63 @@ model FleetManagedNamespaceStatus {
   @visibility(Lifecycle.Read)
   @doc("The last operation error of the fleet managed namespace")
   lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("One managed namespace credential result item.")
+model FleetManagedNamespaceCredentialResult {
+  @visibility(Lifecycle.Read)
+  @doc("The name of the credential.")
+  name?: string;
+
+  @secret
+  @visibility(Lifecycle.Read)
+  @doc("Base64-encoded Kubernetes configuration file.")
+  value?: bytes;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The managed namespace credential results.")
+model FleetManagedNamespaceCredentialResults {
+  @visibility(Lifecycle.Read)
+  @doc("Array of base64-encoded Kubernetes configuration files.")
+  @identifiers(#["name"])
+  kubeconfigs?: FleetManagedNamespaceCredentialResult[];
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The credential request result for a Fleet member scoped to a managed namespace.")
+model FleetMemberManagedNamespaceCredentialResult {
+  @visibility(Lifecycle.Read)
+  @doc("The name of the Fleet member.")
+  name: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The status of the credential request.")
+  status: FleetMemberCredentialStatus;
+
+  @secret
+  @visibility(Lifecycle.Read)
+  @doc("The base64-encoded Kubernetes configuration file when credential retrieval succeeds.")
+  kubeconfig?: bytes;
+
+  @visibility(Lifecycle.Read)
+  @doc("The error details when credential retrieval fails.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The Fleet member credential results scoped to a managed namespace.")
+model FleetMemberManagedNamespaceCredentialResults {
+  @identifiers(#["name"])
+  @visibility(Lifecycle.Read)
+  @doc("The Fleet member credential results for this response.")
+  value: FleetMemberManagedNamespaceCredentialResult[];
+
+  @secret
+  @visibility(Lifecycle.Read)
+  @doc("The opaque continuation token to use in a subsequent request when the initial request omitted memberNames. This property is omitted for explicit memberNames requests and when there are no more results.")
+  continuationToken?: string;
 }
 
 @doc("The namespace properties for the fleet managed namespace.")
@@ -238,6 +308,24 @@ interface FleetManagedNamespaces {
     FleetManagedNamespacePatch,
     Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
       IfMatchParameters<FleetManagedNamespace>
+  >;
+
+  @added(Versions.v2026_11_02_preview)
+  @action("listCredentials")
+  @doc("Lists the Fleet hub credentials scoped to the managed namespace.")
+  listCredentials is ArmResourceActionSync<
+    FleetManagedNamespace,
+    void,
+    FleetManagedNamespaceCredentialResults
+  >;
+
+  @added(Versions.v2026_11_02_preview)
+  @action("listMemberCredentials")
+  @doc("Lists the Fleet member credentials scoped to the managed namespace.")
+  listMemberCredentials is ArmResourceActionSync<
+    FleetManagedNamespace,
+    FleetMemberCredentialRequest,
+    FleetMemberManagedNamespaceCredentialResults
   >;
 }
 
