@@ -38,7 +38,7 @@ export function renderMarkdownDoc(doc: MarkdownDoc, heading = 1): string {
 }
 
 /** Escapes plain text for an HTML element's text content, not an attribute. */
-function escapeHtml(value: string): string {
+export function escapeHtml(value: string): string {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
