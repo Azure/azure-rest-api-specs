@@ -6074,15 +6074,17 @@
       "description": "The configuration of service URI and custom headers for the webhook.",
       "properties": {
         "serviceUri": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "The service URI for the webhook to post notifications."
         },
         "customHeaders": {
           "type": "object",
+          "format": "password",
           "description": "Custom headers that will be added to the webhook notifications.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -8408,7 +8410,7 @@
           "description": "The password name."
         },
         "value": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "The password value."
         }
       }

@@ -1,3 +1,5 @@
+using TypeSpec.Versioning;
+
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -418,12 +420,23 @@ model CallbackConfig {
   /**
    * The service URI for the webhook to post notifications.
    */
-  serviceUri: string;
+  @typeChangedFrom(Versions.vLatestPreview, string)
+  serviceUri: SecretString;
 
   /**
    * Custom headers that will be added to the webhook notifications.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.vLatestPreview)
+  @renamedFrom(Versions.vLatestPreview, "customHeaders")
+  customHeadersLegacy?: Record<string>;
+
+  /**
+   * Custom headers that will be added to the webhook notifications.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.vLatestPreview)
+  @secret
   customHeaders?: Record<string>;
 }
 
