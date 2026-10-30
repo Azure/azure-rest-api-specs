@@ -376,12 +376,14 @@ model SignedIdentifier {
 /** The access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Start")
   @encode("rfc3339-fixed-width")
   start?: utcDateTime;
 
   /** The date-time the policy expires. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Expiry")
   @encode("rfc3339-fixed-width")
@@ -610,6 +612,7 @@ alias PopReceiptResponseHeaderPrivate = {
 /** The private time next visible response header. */
 alias TimeNextVisibleResponseHeaderPrivate = {
   /** A UTC date/time value that represents when the message will be visible on the queue. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @access(Access.internal)
   @encode("rfc7231")
   @header("x-ms-time-next-visible")

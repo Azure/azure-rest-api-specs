@@ -880,12 +880,14 @@ enum LeaseStatus {
 /** Represents an access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Start")
   @encode("rfc3339-fixed-width")
   start?: utcDateTime;
 
   /** The date-time the policy expires. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Expiry")
   @encode("rfc3339-fixed-width")
@@ -1864,6 +1866,7 @@ alias AccessTierChangeTimeResponseHeader = {
 /** The access tier change time response header */
 alias AccessTierChangeTimeResponseHeaderV2026_10_06 = {
   /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @added(Versions.v2026_10_06)
   @encode("rfc7231")
   @header("x-ms-access-tier-change-time")
@@ -2450,6 +2453,7 @@ alias SourceIfNoneMatchParameter = {
 /** The source if modified since parameter. */
 alias SourceIfModifiedSinceParameter = {
   /** Specify this value to operate only on a source blob if it has been modified since the specified date-time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @header("x-ms-source-if-modified-since")
   @encode("rfc7231")
   sourceIfModifiedSince?: utcDateTime;
