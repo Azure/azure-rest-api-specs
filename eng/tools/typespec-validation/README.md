@@ -104,9 +104,12 @@ their service when it exists; deleted service folders are skipped. Projects are
 deduplicated, sorted, and validated sequentially.
 
 Changes to core tooling, root configuration, shared common types, or the root
-suppression file trigger all-project validation. ARM lease metadata and
-`eng/common` do not trigger this fallback. Use `--ignore-core-files` to disable
-the fallback. The PR workflow enables the fallback only for PRs targeting `main`
+suppression file trigger all-project validation. Skill files under `.github/skills/`,
+ARM lease metadata, and `eng/common` do not trigger this fallback. Skill-only changes
+select no service projects and succeed without running service validation. Mixed changes
+still select affected services or trigger all-project validation when core files change.
+Use `--ignore-core-files` to disable the fallback. The PR workflow enables the
+fallback only for PRs targeting `main`
 or `RPSaaSMaster`; other target branches pass `--ignore-core-files`.
 
 Changed-project validation retains the base/head commits in the suppression context.
