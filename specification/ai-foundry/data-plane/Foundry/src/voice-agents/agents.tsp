@@ -276,7 +276,7 @@ model VoiceAgentPostCallConfig {
   @maxItems(10)
   destinations: VoiceAgentPostCallDestination[];
 
-  @doc("Additional content to include in each delivery. The transcript is always delivered.")
+  @doc("Additional content to include in each delivery. The transcript is always delivered. `audio` is not supported in this preview; the service rejects it when the agent version is saved.")
   include?: VoiceAgentPostCallIncludeOption[];
 }
 
@@ -330,7 +330,7 @@ model VoiceAgentRoutinePostCallDestination
 union VoiceAgentPostCallIncludeOption {
   string,
 
-  @doc("A URL to the merged call recording.")
+  @doc("A URL to the merged call recording. Not supported in this preview: the service rejects `audio` when the agent version is saved.")
   audio: "audio",
 }
 
