@@ -146,6 +146,7 @@ interface ApplicationGateways {
       /**
        * Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing backendHealth POST contract uses $expand in the query; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -165,6 +166,7 @@ interface ApplicationGateways {
       /**
        * Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing backendHealthOnDemand POST contract uses $expand in the query; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
