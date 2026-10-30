@@ -1,5 +1,5 @@
 name: azure-typespec-assessment-eval
-description: Routing and minimal capability coverage for azure-typespec-assessment.
+description: Routing, coordinator ordering, and no-changes capability coverage for azure-typespec-assessment.
 type: capability
 
 tags:
@@ -8,9 +8,9 @@ tags:
 
 defaults:
   runs: 1
-  timeout: "120s"
-  model: gpt-5.4
-  judge_model: gpt-5.4
+  timeout: "1200s"
+  model: gpt-5.6-sol
+  judge_model: gpt-5.6-sol
   executor: copilot-sdk
 
 scoring:
@@ -18,8 +18,8 @@ scoring:
 
 stimuli:
   - name: trigger-assess-current-typespec-diff
-    prompt: "Load the skill appropriate for reviewing the current TypeSpec diff under C:\\workspace\\azure-rest-api-specs\\specification\\contoso\\widget. State which skill applies, but do not inspect files or start the assessment."
-    environment:
+    prompt: "Load the skill appropriate for reviewing the current TypeSpec diff under specification/contoso/widget. State which skill applies, but do not inspect files or start the assessment."
+    agent_environment:
       skills:
         - ..
     graders:
@@ -32,7 +32,7 @@ stimuli:
 
   - name: trigger-review-typespec-pr
     prompt: "Load the skill appropriate for assessing https://github.com/Azure/azure-rest-api-specs/pull/44988. State which skill applies, but do not inspect the PR or start the assessment."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -41,20 +41,90 @@ stimuli:
           required: ["azure-typespec-assessment"]
     constraints: *routing_constraints
 
-  - name: capability-no-changes-assessment
+  - name: invoke-pr-coordinator-first
     tags:
-      case: capability
-    prompt: "Use azure-typespec-assessment to assess the current TypeSpec changes under specification/contoso against HEAD. The repository is prepared and intentionally has no changes. Run the coordinator immediately with assessment-work as the output directory, do not inspect or modify source files, and report the result."
-    environment:
-      skills:
-        - ..
+      behavior: assess-pr
+    prompt: |
+      Use azure-typespec-assessment to assess PR https://github.com/Azure/azure-rest-api-specs/pull/43308
+    agent_environment:
+      git:
+        type: worktree
+        ref: main
+        source: ../../../../artifacts/specs-cache/azure-rest-api-specs
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-typespec-assessment"]
+      - type: prompt
+        config:
+          scoring: binary
+          threshold: 1
+    rubric:
+      - |
+        Inspect the ordered transcript and tool arguments. The first operational
+        command after loading the skill must invoke the installed skill's
+        scripts/run-assessment-analysis.ts with --pr, --repo, and --output.
+        Shell variable assignments used to construct that invocation are allowed.
+        Fail if the agent first runs separate gh pr, gh api, git status,
+        git diff, git fetch, git worktree, dependency, glob, or project discovery
+        commands. A failed direct coordinator invocation still passes the
+        ordering requirement. A command pointing at a nonexistent or obsolete
+        script does not pass.
+    constraints:
+      max_turns: 3
+      max_tokens: 100000
+
+  - name: invoke-local-coordinator-first
+    tags:
+      behavior: direct-coordinator
+    prompt: |
+      Use azure-typespec-assessment to assess the local TypeSpec changes under
+      specification/contoso against HEAD, with assessment-work as the output
+      directory. The repository is prepared and intentionally has no changes.
+      Invoke the coordinator as your first operational command and report the result.
+    agent_environment: &no_changes_environment
       commands:
         - git init
         - git config user.email eval@example.com
         - git config user.name "Assessment Eval"
-        - node -e "const fs=require('fs');fs.mkdirSync('specification/contoso',{recursive:true});fs.writeFileSync('specification/contoso/main.tsp','namespace Contoso;\\n');"
+        - node -e "const fs=require('fs');fs.mkdirSync('specification/contoso',{recursive:true});fs.writeFileSync('specification/contoso/main.tsp','namespace Contoso;'+String.fromCharCode(10));"
         - git add specification/contoso/main.tsp
-        - git commit -m baseline
+        - git -c commit.gpgsign=false commit -m baseline
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-typespec-assessment"]
+      - type: prompt
+        config:
+          scoring: binary
+          threshold: 1
+    rubric:
+      - |
+        Inspect the ordered transcript and tool arguments. Because the baseline
+        and specification are supplied, the first operational command after
+        loading the skill must invoke the installed skill's
+        scripts/run-assessment-analysis.ts with --base HEAD,
+        --specification specification/contoso, --repo, and --output.
+        Shell variable assignments used to construct that invocation are allowed.
+        Fail if the agent first runs git status, git diff, git fetch, git worktree,
+        dependency, glob, or project discovery commands, or asks the user to
+        confirm the already supplied baseline. A failed direct coordinator
+        invocation still passes the ordering requirement. A command pointing at
+        a nonexistent or obsolete script does not pass.
+    constraints:
+      max_turns: 3
+      max_tokens: 20000
+
+  - name: capability-no-changes-assessment
+    tags:
+      case: capability
+    prompt: |
+      Use azure-typespec-assessment to assess the current TypeSpec changes under
+      specification/contoso against HEAD. The repository is prepared and
+      intentionally has no changes. Run the coordinator immediately with
+      assessment-work as the output directory, do not inspect or modify source
+      files, and report the result.
+    agent_environment: *no_changes_environment
     graders:
       - type: skill-invocation
         config:
@@ -73,7 +143,12 @@ stimuli:
       - type: run-command
         config:
           command: >-
-            node -e "const fs=require('fs');const input=JSON.parse(fs.readFileSync('assessment-work/model-input.json','utf8'));const state=JSON.parse(fs.readFileSync('assessment-work/workflow-state.json','utf8'));if(input.status!=='no-changes'||state.state!=='complete')process.exit(1);"
+            node -e "const fs=require('fs');const input=JSON.parse(fs.readFileSync('assessment-work/model-input.json','utf8'));const state=JSON.parse(fs.readFileSync('assessment-work/workflow-state.json','utf8'));if(input.status!=='no-changes'||state.state!=='complete')throw new Error('Expected completed no-changes assessment');"
+          expected_exit_code: 0
+      - type: run-command
+        config:
+          command: >-
+            node -e "const{execFileSync}=require('child_process');const fs=require('fs');if(execFileSync('git',['status','--porcelain','--','specification/contoso'],{encoding:'utf8'}).trim()||fs.readFileSync('specification/contoso/main.tsp','utf8')!=='namespace Contoso;'+String.fromCharCode(10))throw new Error('Assessed source was modified');"
           expected_exit_code: 0
       - type: output-matches
         config:
@@ -84,7 +159,7 @@ stimuli:
 
   - name: anti-trigger-author-typespec
     prompt: "Load the skill appropriate for adding stable API version 2026-09-01 under specification/contoso/widget. State which skill applies, but do not inspect or modify files."
-    environment:
+    agent_environment:
       skills:
         - ..
         - ../../azure-typespec-author
@@ -97,7 +172,7 @@ stimuli:
 
   - name: anti-trigger-generate-sdk
     prompt: "Load the skill appropriate for generating the Python package azure-contoso-widget from specification/contoso/widget. State which skill applies, but do not generate code or run tests."
-    environment:
+    agent_environment:
       skills:
         - ..
         - ../../azsdk-common-generate-sdk-locally
