@@ -98308,7 +98308,8 @@
       "SimulationSeedDataGenerationJobConfiguration": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "max_samples"
         ],
         "properties": {
           "type": {
@@ -98317,6 +98318,13 @@
               "simulation_seed"
             ],
             "description": "The data generation job type, which is SimulationSeed for this model."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000,
+            "description": "Maximum number of samples to generate, up to service-defined limits."
           }
         },
         "allOf": [
