@@ -696,8 +696,9 @@ interface AgentTelephony {
   @post
   @route("/agents/{agent_name}/telephony/call_jobs")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  createTelephonyCallJob is FoundryDataPlanePreviewOperation<
+  createTelephonyCallJob is postJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    TelephonyCallJob,
     {
       /** The name of the voice agent that executes the call. */
       @path agent_name: string;
@@ -752,7 +753,7 @@ interface AgentTelephony {
   @delete
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  deleteTelephonyCallJob is FoundryDataPlaneRequiredPreviewOperation<
+  deleteTelephonyCallJob is deleteJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The owning voice agent. */
@@ -761,7 +762,8 @@ interface AgentTelephony {
       /** The call-job identifier. */
       @path call_job_id: TelephonyCallJobId;
     },
-    NoContentResponse
+    NoContentResponse,
+    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 
   /** Retrieves a durable direct or campaign-created outbound call job. */
@@ -769,8 +771,9 @@ interface AgentTelephony {
   @get
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  getTelephonyCallJob is FoundryDataPlanePreviewOperation<
+  getTelephonyCallJob is queryJobStatusPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    TelephonyCallJob,
     {
       /** The name of the voice agent that owns the call job. */
       @path agent_name: string;
@@ -786,8 +789,9 @@ interface AgentTelephony {
   @post
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  cancelTelephonyCallJob is FoundryDataPlanePreviewOperation<
+  cancelTelephonyCallJob is cancelJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    TelephonyCallJob,
     {
       /** The name of the voice agent that owns the call job. */
       @path agent_name: string;
