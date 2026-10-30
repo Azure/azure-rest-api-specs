@@ -468,7 +468,7 @@ and Critic verification remain the same.
    version, not to override this classification.
 6. **Skip PR-only mechanics explicitly.** Step 5.5 input is the literal
    `reconciliation skipped`. The Step 6 summary uses `Local target`, `Repository
-HEAD`, `Local snapshot`, and previous-version source instead of PR metadata.
+   HEAD`, `Local snapshot`, and previous-version source instead of PR metadata.
    Approval labels, comment telemetry, posting, thread resolution, and Step 9
    label changes are `N/A`. Omit approval-context paragraphs, posting actions,
    reconciliation tables, and per-comment telemetry markers from the local
@@ -485,8 +485,10 @@ HEAD`, `Local snapshot`, and previous-version source instead of PR metadata.
    ID, and any files skipped or unreadable, then run the read-only local form of
    Step 10.
 
-Apply the Step 1 size guardrail to local directory reviews using supported-file
-count and total source lines. If the target exceeds 500 files or 50,000 lines,
+Apply the Step 1 size guardrail to local directory reviews using non-example
+supported-file count and total source lines, excluding files in any `examples`
+directory from both counts. Examples remain in review scope. If the target
+exceeds 500 non-example files or 50,000 non-example source lines,
 ask the human to select a subset, split into service/RP batches, or explicitly
 accept reduced recall. Record the selected scope in the report.
 
@@ -538,12 +540,12 @@ Use these to verify claims, check the latest guidelines, or investigate edge cas
 - [ARM wiki / RP guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/rpguidelines.html) - supplementary ARM guidance
 - [Repository documentation](https://github.com/Azure/azure-rest-api-specs/tree/main/documentation)
 - [OpenAPI authoring automated guidelines](../../documentation/openapi-authoring-automated-guidelines.md) - automated validation rule IDs and descriptions
-- [Breaking changes guidelines](../../documentation/Breaking%20changes%20guidelines.md) - what constitutes a breaking change
+- [Breaking changes policy](https://aka.ms/AzBreakingChangesPolicy) - what constitutes a breaking change
 - [Uniform versioning](../../documentation/uniform-versioning.md) - API version immutability and folder structure
-- [Directory structure](../../documentation/directory-structure.md) - specification folder layout conventions
+- [Directory structure](https://aka.ms/azsdk/spec-dirs) - specification folder layout conventions
 - [CI fix guide](../../documentation/ci-fix.md) - troubleshooting PR validation failures
-- [Swagger extensions](../../documentation/swagger-extensions.md) - x-ms extension documentation
-- [TypeSpec dev process](../../documentation/typespec-rest-api-dev-process.md) - end-to-end TypeSpec workflow
+- [Swagger extensions](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md) - x-ms extension documentation
+- [TypeSpec dev process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec) - end-to-end TypeSpec workflow
 - [Getting started with TypeSpec](../../documentation/Getting-started-with-TypeSpec-specifications.md) - TypeSpec project checklist
 - [TypeSpec Azure docs](https://azure.github.io/typespec-azure/docs/intro/) - Azure TypeSpec library reference
 - [TypeSpec language docs](https://typespec.io/docs/) - TypeSpec language reference
@@ -687,7 +689,17 @@ binds every previous-version fetch.
 3. Fast-path findings still need `[NEW]` / `[EXISTING]` classification. If the classification requires non-trivial previous-version comparison, **escalate to full review** before reporting.
 4. If the fast-path review surfaces any blocking finding that suggests broader risk (e.g., a description change that reveals the schema is wrong, an example that references a property not in the spec), **escalate to full review** before reporting.
 
-**Size guardrail (full-review track only).** If the PR touches > 500 spec files **or** > 50000 added+deleted lines across spec files, stop before Step 2 and ask the human to choose:
+**Size guardrail (full-review track only).** Count spec files and their
+added+deleted lines, excluding any path with an `examples` directory segment
+from both counts. This excludes both TypeSpec source examples
+(`specification/<service>/<project>/examples/**`) and compiled Swagger examples
+(`specification/<service>/resource-manager/**/examples/**`). For a renamed or
+moved file, count it once with its added+deleted lines if either its old or new
+path is a non-example `specification/` path. Examples remain in review scope;
+their file or line counts alone must not trigger this guardrail.
+
+If the PR touches > 500 non-example spec files **or** > 50000 added+deleted lines
+across non-example spec files, stop before Step 2 and ask the human to choose:
 
 - (a) Review a specified subset of files (human provides the list).
 - (b) Split into per-service or per-RP batches reviewed sequentially as separate sessions.
@@ -704,6 +716,8 @@ For each file type present in the PR, read the corresponding instruction file(s)
 - OpenAPI JSON (data-plane or unknown) -> `openapi-review.instructions.md`
 - ARM resource-manager JSON -> `openapi-review.instructions.md` + `arm-api-review.instructions.md`
 - TypeSpec `.tsp` files -> `typespec-review.instructions.md` **and** `typespec-project.instructions.md` (both files; the review file explicitly directs reviewers to apply the foundational project file too)
+- TypeSpec `.tsp` files or generated OpenAPI changed alongside its owning TypeSpec source -> also load `azure-api-review/references/typespec-openapi-extensions.md`; it controls raw-extension fixes and generated `x-ms-*` diff classification
+- An ARM `x-ms-long-running-operation*` diff in TypeSpec-owned OpenAPI -> also load `azure-api-review/references/lro-final-state-via.md`; verify the async template, `LroHeaders`, logical `FinalResult`, initial response headers, and generated behavior
 - `tspconfig.yaml` -> TypeSpec config rules from `typespec-review.instructions.md` section 7 (all subsections) **and** the `tspconfig.yaml` / emitter rules in `typespec-project.instructions.md`
 - Examples only (fast path) -> section 22 (EX-\*) of `openapi-review.instructions.md` only
 - `readme.md` only -> the suppression-continuity guidance in Step 4 of this file; do not load the full OpenAPI rule set
@@ -725,6 +739,8 @@ Load the shared `azure-api-review` skill references only when a cross-cutting ru
 - For OpenAPI JSON: Locate the prior version folder (e.g., `stable/2024-01-01/` vs. `stable/2024-07-01/`) and diff the schemas.
 - For TypeSpec: Check the `Versions` enum for prior versions and review uses of `@added`, `@removed`, `@typeChangedFrom`.
 - Flag: removed properties, removed operations, type changes, narrowed enums, optional-to-required transitions, renamed paths.
+- Before treating a generated `x-ms-*` metadata diff as a published-version or breaking-change finding, apply `typespec-openapi-extensions.md`. Require evidence of a REST wire, ARM platform, or native semantic change. Never propose `@OpenAPI.extension(...)` or a `no-openapi-client-extensions` suppression to restore legacy output.
+- For an ARM LRO metadata diff, apply `lro-final-state-via.md`. Generic advice to add `@pollingOperation` or `@finalOperation` is insufficient when an Azure.ResourceManager async template and its `LroHeaders` parameter control the generated contract.
 - If no previous version exists (new service), note this and skip the comparison.
 - **Record the previous version path and full base commit SHA** - both will be needed in Step 4a and by the Critic to classify issues as new vs. existing.
 
@@ -965,6 +981,15 @@ Edit there only; do not duplicate the procedure in this file.
 **Reviewer obligations.** Before producing any in-scope finding
 (scope criteria in the reference) the Reviewer **MUST**:
 
+0. For TypeSpec-owned generated OpenAPI, apply
+   [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md)
+   before retaining an `x-ms-*` compatibility finding. Drop extension-only
+   cleanup findings that show no wire or ARM semantic change, and replace any
+   raw-extension suggested fix with the native TypeSpec construct.
+   For an ARM LRO, also apply
+   [`lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md)
+   and verify the async template, `LroHeaders`, logical `FinalResult`, initial
+   response headers, and generated behavior.
 1. Author the finding as a multi-option recommendation matching the
    dedicated reference file's option set (not a directive), default
    severity Suggestion unless the property unambiguously meets the
@@ -1334,7 +1359,7 @@ must always be present; missing required fields return
 8. **Considered-and-declined list** -- prior-iteration advisory candidates the Reviewer evaluated and chose not to promote. Defaults to empty.
 9. **Graphs status** -- pass exactly one of: `Graphs: true`;
    `Graphs: false; graph-mode: fast-path`; `Graphs: false; graph-mode:
-size-downgrade`; or `Graphs: false; graph-mode: derivation-failed`. The mode
+   size-downgrade`; or `Graphs: false; graph-mode: derivation-failed`. The mode
    is required whenever graphs are false. `size-downgrade` and
    `derivation-failed` both require the Critic to re-derive the
    sensitive-data-flow view in summary form; only `derivation-failed` requires
@@ -1615,7 +1640,7 @@ Substitution rules:
   failed, use `Critic unavailable; reviewer self-check only`. Never combine
 - `<overflow disclosure>`: when the 20-comment limit excludes candidates, use
   `N additional findings were identified but not individually verified or
-posted. Key themes: [list].` Otherwise omit the line. Never combine
+  posted. Key themes: [list].` Otherwise omit the line. Never combine
   `critic-verified` with an unavailable outcome.
 - `<outcome>`: one of `converged` (Critic returned PASS or WARN with no unresolved corrections), `manual decision` (the report's `Next-step recommendation` was `MANUAL DECISION REQUIRED` and the human approved posting anyway), `override applied` (one or more findings carry a `critic: override` marker), or `unavailable -- reviewer self-check` (all Critic dispatch attempts failed; auto-unavailable fallback fired). Pick the **highest-severity** label that applies; precedence is `unavailable` > `manual decision` > `override applied` > `converged`.
 - `<short-sha>`: the **first 7 characters** of the session SHA pinned in Step 1, used as the link's display text.

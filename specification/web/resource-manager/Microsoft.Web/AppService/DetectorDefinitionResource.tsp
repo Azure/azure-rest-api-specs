@@ -97,18 +97,21 @@ interface DetectorDefinitionResources {
       /**
        * Start Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteDetector POST contract uses startTime in the query; preserve wire compatibility."
       @query("startTime")
       startTime?: utcDateTime;
 
       /**
        * End Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteDetector POST contract uses endTime in the query; preserve wire compatibility."
       @query("endTime")
       endTime?: utcDateTime;
 
       /**
        * Time Grain
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteDetector POST contract uses timeGrain in the query; preserve wire compatibility."
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
@@ -188,18 +191,21 @@ interface DetectorDefinitionResourceOperationGroup {
       /**
        * Start Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteDetectorSlot POST contract uses startTime in the query; preserve wire compatibility."
       @query("startTime")
       startTime?: utcDateTime;
 
       /**
        * End Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteDetectorSlot POST contract uses endTime in the query; preserve wire compatibility."
       @query("endTime")
       endTime?: utcDateTime;
 
       /**
        * Time Grain
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteDetectorSlot POST contract uses timeGrain in the query; preserve wire compatibility."
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;

@@ -903,12 +903,12 @@
         "dataplaneUri": {
           "type": "string",
           "format": "uri",
-          "description": "The workspace data plane service API URI.",
+          "description": "The API endpoint for workspace data plane operations.",
           "readOnly": true
         },
         "regionalAffinity": {
           "type": "string",
-          "description": "Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created.",
+          "description": "Specifies where client workers connect to cloud-hosted browsers. When Enabled, workers connect to browsers in the nearest Azure region to reduce latency. When Disabled, workers connect to browsers in the workspace's Azure region.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -933,7 +933,7 @@
         },
         "localAuth": {
           "type": "string",
-          "description": "Enables the workspace to use local authentication through service access tokens for operations.",
+          "description": "Specifies whether service access tokens can be used to authenticate workspace operations.",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -966,7 +966,7 @@
         },
         "reporting": {
           "type": "string",
-          "description": "Indicates whether reporting is enabled for the workspace. When set to true, reports will be generated and available for the workspace.",
+          "description": "Specifies whether test reporting is enabled for the workspace.",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -992,12 +992,12 @@
         "storageUri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI of the Azure storage account used to store workspace artifacts, test results, and reports."
+          "description": "The URI of the Azure Storage account used to store workspace artifacts, test results, and reports."
         },
         "subnetId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM resource ID of the virtual network subnet to inject the workspace into for private network connectivity. This is of the form '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}'. This value cannot be changed after the workspace is created.",
+          "description": "The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before creating the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}. This value cannot be changed after workspace creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1093,20 +1093,20 @@
       "properties": {
         "regionalAffinity": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created."
+          "description": "Specifies where client workers connect to cloud-hosted browsers. When Enabled, workers connect to browsers in the nearest Azure region to reduce latency. When Disabled, workers connect to browsers in the workspace's Azure region."
         },
         "localAuth": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "Enables the workspace to use local authentication through service access tokens for operations."
+          "description": "Specifies whether service access tokens can be used to authenticate workspace operations."
         },
         "reporting": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "Indicates whether reporting is enabled for the workspace. When set to true, reports will be generated and available for the workspace."
+          "description": "Specifies whether test reporting is enabled for the workspace."
         },
         "storageUri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI of the Azure storage account used to store workspace artifacts, test results, and reports."
+          "description": "The URI of the Azure Storage account used to store workspace artifacts, test results, and reports."
         }
       }
     },

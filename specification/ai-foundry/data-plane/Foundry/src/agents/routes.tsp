@@ -54,7 +54,6 @@ interface Agents {
   @route("/agents:generate")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   @tag("Agents")
-  @removed(Versions.v1)
   generateAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {

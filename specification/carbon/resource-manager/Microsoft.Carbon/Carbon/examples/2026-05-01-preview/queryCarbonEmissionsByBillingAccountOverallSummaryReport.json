@@ -1,0 +1,36 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReportsByBillingAccount",
+  "title": "QueryCarbonEmission By BillingAccount Overall Summary Report",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345678",
+    "queryParameters": {
+      "reportType": "OverallSummaryReport",
+      "carbonScopeList": [
+        "Scope1",
+        "Scope2",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2024-01-01",
+        "end": "2024-06-01"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for overall summary report scoped to a billing account.",
+      "body": {
+        "value": [
+          {
+            "dataType": "OverallSummaryData",
+            "latestMonthEmissions": 5.25,
+            "previousMonthEmissions": 4.80,
+            "monthOverMonthEmissionsChangeRatio": 0.09375,
+            "monthlyEmissionsChangeValue": 0.45
+          }
+        ]
+      }
+    }
+  }
+}
