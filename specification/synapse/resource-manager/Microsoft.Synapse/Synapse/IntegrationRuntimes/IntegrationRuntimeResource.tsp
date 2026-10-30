@@ -182,7 +182,8 @@ interface IntegrationRuntimeResources {
   stop is IntegrationRuntimeOps.ActionAsync<
     IntegrationRuntimeResource,
     void,
-    OkResponse
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -207,7 +208,8 @@ interface IntegrationRuntimeResources {
   enableInteractiveQuery is IntegrationRuntimeOps.ActionAsync<
     IntegrationRuntimeResource,
     void,
-    OkResponse
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -218,7 +220,8 @@ interface IntegrationRuntimeResources {
   disableInteractiveQuery is IntegrationRuntimeOps.ActionAsync<
     IntegrationRuntimeResource,
     void,
-    OkResponse
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
