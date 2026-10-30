@@ -22,6 +22,9 @@ parameters:
     type: string
     default: ""
     displayName: "SDK release type"
+  - name: TypeSpecEmitter
+    type: string
+    default: ""
   - name: CreatePullRequest
     type: boolean
     default: false
@@ -297,6 +300,7 @@ stages:
               continueOnError: true
             env:
               npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+              TYPESPEC_EMITTER: ${{ parameters.TypeSpecEmitter }}
 
           - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
             parameters:

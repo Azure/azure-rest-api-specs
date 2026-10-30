@@ -26,6 +26,13 @@ parameters:
       - "stable"
     default: "none"
     displayName: "SDK release type"
+  - name: TypeSpecEmitter
+    type: string
+    values:
+      - "@azure-tools/typespec-ts"
+      - "@azure-tools/typespec-ts-provisioning"
+    default: "@azure-tools/typespec-ts"
+    displayName: "TypeSpec emitter"
   - name: CreatePullRequest
     type: boolean
     default: false
@@ -55,6 +62,7 @@ extends:
     ConfigPath: ${{ parameters.ConfigPath }}
     ApiVersion: ${{ parameters.ApiVersion }}
     SdkReleaseType: ${{ parameters.SdkReleaseType }}
+    TypeSpecEmitter: ${{ parameters.TypeSpecEmitter }}
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
     ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
     ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}
