@@ -73,6 +73,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.FirewallRuleCreateAcceptedResponse,
+  "HorizonDBFirewallRuleCreateAcceptedResult",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.ParameterGroup,
   "HorizonDBParameterGroup",
   "csharp"

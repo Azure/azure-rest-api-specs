@@ -492,7 +492,7 @@
         "tags": [
           "Clusters"
         ],
-        "description": "Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata; all other new-cluster configuration comes from the request or service defaults. Same-location restore requires and honors pointInTimeUtc and allows creationSourceClusterLocation to be omitted. Cross-location restore requires creationSourceClusterLocation to identify the source cluster's Azure location and requires pointInTimeUtc, but ignores the supplied timestamp and restores the latest available backup. Cross-location responses omit pointInTimeUtc.",
+        "description": "Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata. During restore creation, the service ignores the requested backup.geoRedundancy value and configures the new cluster with the same geo-redundancy setting as the source cluster; this applies to both same-location and cross-location restores. All remaining new-cluster configuration comes from the request or service defaults. Same-location restore requires and honors pointInTimeUtc and allows creationSourceClusterLocation to be omitted. Cross-location restore requires creationSourceClusterLocation to identify the source cluster's Azure location and requires pointInTimeUtc, but ignores the supplied timestamp and restores the latest available backup. Cross-location responses omit pointInTimeUtc.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3682,7 +3682,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Creates a new HorizonDB pool or replaces an existing pool, including its node allocation, compute model, high-availability configuration, or associated parameter group. nodeCount and highAvailability.mode are required and have no service defaults. nodeCount must be 1 through 16. Disabled is valid only when nodeCount is 1. AnyZone and ZoneRedundant are valid only when nodeCount is 2 through 16. AnyZone permits same-zone or cross-zone placement, while ZoneRedundant requires nodes to be allocated across availability zones. Node allocation and high-availability reconfiguration are atomic: if all requested nodes or the required zonal topology cannot be provisioned, the long-running operation fails and the previous resource state is preserved. A pool name must differ from its parent cluster name because the Cluster-scoped ReadWrite Endpoint is named after the Cluster and the Pool-scoped ReadOnly Endpoint is named after the Pool; the service rejects a request whose names would collide. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically designates it to host the cluster's read-write node when an eligible node is available. A Cluster must contain at least one Pool before a private endpoint connection can be created or approved. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. parameterGroup, parameterGroupResourceId, and applyMethod are required. When creating a new pool in this API version, parameterGroupResourceId must identify the corresponding default parameter group; a customer-created parameter group is rejected. When replacing an existing pool, the request can switch its association in either direction between the corresponding default parameter group and a customer-created parameter group. applyMethod controls when dynamic parameter changes become effective. Static parameter changes always require a customer-initiated Restart; Stop followed by Start and scheduled maintenance do not apply pending changes. Subtype-specific compute constraints are validated before the resource is changed.",
+        "description": "Creates a new HorizonDB pool or replaces an existing pool, including its node allocation, compute model, high-availability configuration, or associated parameter group. nodeCount and highAvailability.mode are required and have no service defaults. nodeCount must be 1 through 16. Disabled is valid only when nodeCount is 1. AnyZone and ZoneRedundant are valid only when nodeCount is 2 through 16. AnyZone permits same-zone or cross-zone placement, while ZoneRedundant requires nodes to be allocated across availability zones. Node allocation and high-availability reconfiguration are atomic: if all requested nodes or the required zonal topology cannot be provisioned, the long-running operation fails and the previous resource state is preserved. A pool name must differ from its parent cluster name because the Cluster-scoped ReadWrite Endpoint is named after the Cluster and the Pool-scoped ReadOnly Endpoint is named after the Pool; the service rejects a request whose names would collide. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically designates it to host the cluster's read-write node when an eligible node is available. A Cluster must contain at least one Pool before a private endpoint connection can be created or approved. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. parameterGroup is optional during creation. When omitted during creation, the service applies the default parameter group compatible with the parent cluster's PostgreSQL version. When parameterGroup is supplied, parameterGroupResourceId and applyMethod are required. When creating a new pool in this API version, a supplied parameterGroupResourceId must identify the corresponding default parameter group; a customer-created parameter group is rejected. When replacing an existing pool, the request can switch its association in either direction between the corresponding default parameter group and a customer-created parameter group. applyMethod controls when dynamic parameter changes become effective. Static parameter changes always require a customer-initiated Restart; Stop followed by Start and scheduled maintenance do not apply pending changes. Subtype-specific compute constraints are validated before the resource is changed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3766,7 +3766,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a minimum provisioned HorizonDB pool": {
+          "Create a minimum provisioned HorizonDB pool using the default parameter group": {
             "$ref": "./examples/Pools_CreateOrReplace.json"
           }
         },
@@ -4058,12 +4058,12 @@
           {
             "name": "firewallRuleName",
             "in": "path",
-            "description": "The name of the HorizonDB pool firewall rule.",
+            "description": "The name of the HorizonDB pool firewall rule. The name must be 1 through 80 characters, contain only ASCII letters, digits, underscores, periods, and hyphens, start with a letter or digit, and end with a letter, digit, or underscore.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
           }
         ],
         "responses": {
@@ -4125,12 +4125,12 @@
           {
             "name": "firewallRuleName",
             "in": "path",
-            "description": "The name of the HorizonDB pool firewall rule.",
+            "description": "The name of the HorizonDB pool firewall rule. The name must be 1 through 80 characters, contain only ASCII letters, digits, underscores, periods, and hyphens, start with a letter or digit, and end with a letter, digit, or underscore.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
           },
           {
             "name": "resource",
@@ -4161,7 +4161,7 @@
             }
           },
           "201": {
-            "description": "Resource 'FirewallRule' create operation succeeded",
+            "description": "The response returned when asynchronous HorizonDB firewall rule creation is accepted and is in progress.",
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             },
@@ -4234,12 +4234,12 @@
           {
             "name": "firewallRuleName",
             "in": "path",
-            "description": "The name of the HorizonDB pool firewall rule.",
+            "description": "The name of the HorizonDB pool firewall rule. The name must be 1 through 80 characters, contain only ASCII letters, digits, underscores, periods, and hyphens, start with a letter or digit, and end with a letter, digit, or underscore.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
           }
         ],
         "responses": {
@@ -5894,7 +5894,7 @@
       "properties": {
         "geoRedundancy": {
           "$ref": "#/definitions/GeoRedundancyState",
-          "description": "The geo-redundancy state. Geo-redundant backup is not supported when dataEncryption.type is AzureKeyVault.",
+          "description": "The geo-redundancy state. When creationMode is PointInTimeRestore, the service ignores the requested value during cluster creation and configures the new cluster with the same geo-redundancy setting as the source cluster, for both same-location and cross-location restores. The response reports the inherited setting. Geo-redundant backup is not supported when dataEncryption.type is AzureKeyVault.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7366,7 +7366,7 @@
         },
         "creationMode": {
           "$ref": "#/definitions/ClusterCreateMode",
-          "description": "The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.",
+          "description": "The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. During PointInTimeRestore creation, the service ignores the requested backup.geoRedundancy value and configures the new cluster with the same geo-redundancy setting as the source cluster. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9497,13 +9497,6 @@
         "properties": {
           "$ref": "#/definitions/PoolProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [
@@ -9672,13 +9665,6 @@
       "type": "object",
       "description": "HorizonDB pool for update operations.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/PoolPropertiesForPatchUpdate",
           "description": "The properties that can be updated for a HorizonDB pool."
@@ -9788,7 +9774,7 @@
         "parameterGroupResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the associated parameter group. Initial pool creation in this API version requires the corresponding Microsoft.HorizonDb/locations/parameterGroups resource. For an existing pool, PUT can specify either the corresponding default group or a customer-created Microsoft.HorizonDb/parameterGroups resource.",
+          "description": "The Azure resource ID of the associated parameter group. When the parameter group is supplied during initial pool creation in this API version, the ID must identify the corresponding Microsoft.HorizonDb/locations/parameterGroups resource. For an existing pool, PUT can specify either the corresponding default group or a customer-created Microsoft.HorizonDb/parameterGroups resource.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -9894,7 +9880,7 @@
         },
         "parameterGroup": {
           "$ref": "#/definitions/PoolParameterGroupReference",
-          "description": "The required parameter group associated with the pool. When creating a new pool in this API version, the caller must supply the corresponding default parameter group; customer-created parameter groups are not accepted during creation. For an existing pool, PUT or PATCH can associate either the corresponding default parameter group or a customer-created parameter group. The create-visible shape intentionally supports both resource ID forms so a future API version can allow customer-created parameter groups during creation without a breaking schema change.",
+          "description": "The parameter group associated with the pool. When omitted during creation, the service applies the default parameter group compatible with the parent cluster's PostgreSQL version. When supplied during creation in this API version, it must reference the corresponding default parameter group; customer-created parameter groups are not accepted during creation. For an existing pool, PUT or PATCH can associate either the corresponding default parameter group or a customer-created parameter group. The create-visible shape intentionally supports both resource ID forms so a future API version can allow customer-created parameter groups during creation without a breaking schema change.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -9919,8 +9905,7 @@
       "required": [
         "computeModel",
         "nodeCount",
-        "highAvailability",
-        "parameterGroup"
+        "highAvailability"
       ]
     },
     "PoolPropertiesForPatchUpdate": {
@@ -10254,7 +10239,8 @@
         "Failed",
         "Canceled",
         "InProgress",
-        "Provisioning"
+        "Provisioning",
+        "Updating"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -10284,6 +10270,11 @@
             "name": "Provisioning",
             "value": "Provisioning",
             "description": "The HorizonDB resource is still provisioning."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
           }
         ]
       },

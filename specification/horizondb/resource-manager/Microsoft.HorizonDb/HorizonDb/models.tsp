@@ -93,8 +93,6 @@ model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
   @path
   @segment("pools")
   name: PoolName;
-
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @doc("An IPv4 address in dotted-decimal notation.")
@@ -105,10 +103,10 @@ scalar DottedDecimalIpv4Address extends string;
 @parentResource(Pool)
 model FirewallRule
   is Azure.ResourceManager.ProxyResource<FirewallRuleProperties> {
-  @doc("The name of the HorizonDB pool firewall rule.")
-  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @doc("The name of the HorizonDB pool firewall rule. The name must be 1 through 80 characters, contain only ASCII letters, digits, underscores, periods, and hyphens, start with a letter or digit, and end with a letter, digit, or underscore.")
+  @pattern("^[a-zA-Z0-9](?:[a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$")
   @minLength(1)
-  @maxLength(128)
+  @maxLength(80)
   @key("firewallRuleName")
   @path
   @segment("firewallRules")
@@ -202,7 +200,7 @@ model ClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   postgreSqlVersion?: PostgreSqlVersion;
 
-  @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
+  @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. During PointInTimeRestore creation, the service ignores the requested backup.geoRedundancy value and configures the new cluster with the same geo-redundancy setting as the source cluster. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationMode?: ClusterCreateMode;
 
@@ -297,6 +295,12 @@ model PoolCreateAcceptedResponse {
   body: Pool;
 }
 
+@doc("The response returned when asynchronous HorizonDB firewall rule creation is accepted and is in progress.")
+model FirewallRuleCreateAcceptedResponse is ArmResourceCreatedResponse<
+  FirewallRule,
+  HorizonDbResourceLroHeaders<FirewallRule>
+>;
+
 @doc("Properties of a HorizonDB cluster for update operations.")
 model ClusterPropertiesForPatchUpdate {
   @doc("The network configuration to update for the cluster.")
@@ -343,9 +347,9 @@ model PoolProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   highAvailability: PoolHighAvailability;
 
-  @doc("The required parameter group associated with the pool. When creating a new pool in this API version, the caller must supply the corresponding default parameter group; customer-created parameter groups are not accepted during creation. For an existing pool, PUT or PATCH can associate either the corresponding default parameter group or a customer-created parameter group. The create-visible shape intentionally supports both resource ID forms so a future API version can allow customer-created parameter groups during creation without a breaking schema change.")
+  @doc("The parameter group associated with the pool. When omitted during creation, the service applies the default parameter group compatible with the parent cluster's PostgreSQL version. When supplied during creation in this API version, it must reference the corresponding default parameter group; customer-created parameter groups are not accepted during creation. For an existing pool, PUT or PATCH can associate either the corresponding default parameter group or a customer-created parameter group. The create-visible shape intentionally supports both resource ID forms so a future API version can allow customer-created parameter groups during creation without a breaking schema change.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  parameterGroup: PoolParameterGroupReference;
+  parameterGroup?: PoolParameterGroupReference;
 
   @doc("The scheduled maintenance configuration for the pool. The properties available depend on the selected maintenance management type.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
@@ -409,7 +413,7 @@ union PoolHighAvailabilityMode {
 
 @doc("A reference to the parameter group associated with a HorizonDB pool. The schema represents both default and customer-created parameter groups for create and update compatibility. In this API version, initial pool creation accepts only the corresponding default parameter group; PUT updates to an existing pool can associate either group type.")
 model PoolParameterGroupReference {
-  @doc("The Azure resource ID of the associated parameter group. Initial pool creation in this API version requires the corresponding Microsoft.HorizonDb/locations/parameterGroups resource. For an existing pool, PUT can specify either the corresponding default group or a customer-created Microsoft.HorizonDb/parameterGroups resource.")
+  @doc("The Azure resource ID of the associated parameter group. When the parameter group is supplied during initial pool creation in this API version, the ID must identify the corresponding Microsoft.HorizonDb/locations/parameterGroups resource. For an existing pool, PUT can specify either the corresponding default group or a customer-created Microsoft.HorizonDb/parameterGroups resource.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   parameterGroupResourceId: armResourceIdentifier<[
     {
@@ -449,8 +453,6 @@ model PoolParameterGroupReferenceForPatchUpdate {
 
 @doc("HorizonDB pool for update operations.")
 model PoolForPatchUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
   @doc("The properties that can be updated for a HorizonDB pool.")
   properties?: PoolPropertiesForPatchUpdate;
 }
@@ -761,7 +763,7 @@ model HorizonDbClusterDataEncryptionForPatchUpdate {
 
 @doc("Backup configuration properties for a HorizonDB cluster.")
 model BackupProperties {
-  @doc("The geo-redundancy state. Geo-redundant backup is not supported when dataEncryption.type is AzureKeyVault.")
+  @doc("The geo-redundancy state. When creationMode is PointInTimeRestore, the service ignores the requested value during cluster creation and configures the new cluster with the same geo-redundancy setting as the source cluster, for both same-location and cross-location restores. The response reports the inherited setting. Geo-redundant backup is not supported when dataEncryption.type is AzureKeyVault.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   geoRedundancy: GeoRedundancyState;
 
@@ -1018,6 +1020,9 @@ union ProvisioningState {
 
   /** The HorizonDB resource is still provisioning. */
   Provisioning: "Provisioning",
+
+  /** The resource is being updated. */
+  Updating: "Updating",
 }
 
 @doc("Properties of a HorizonDB parameter group.")
