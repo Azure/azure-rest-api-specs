@@ -860,11 +860,11 @@ model AccessBoundaryAuthorizationScheme
 @doc("A conversation-independent policy for delivering inbound messages to an Autopilot.")
 model ReadAccessPolicy {
   @doc("""
-    The allowed sender audiences. Only `allowlisted` is supported: it uses the instance's existing interaction allowlist,
+    The senders allowed to prompt the Autopilot. Only `allowlisted` is supported: it uses the instance's existing interaction allowlist,
     which implicitly includes the instance manager. An empty array denies user messages.
-    Trusted lifecycle events are not governed by the sender audience policy.
+    Trusted lifecycle events are not governed by this policy.
     """)
-  audiences: "allowlisted"[];
+  allowed_prompters: "allowlisted"[];
 }
 
 union AgentEndpointAuthorizationSchemeType {
