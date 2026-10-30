@@ -12,6 +12,14 @@ The deterministic scripts identify review units, facts, and candidates. The Agen
 
 REST and downstream decisions are independent. A REST-compatible change can still break generated SDK users. Never use TCGC to classify REST compatibility or AutoRest to infer SDK surface.
 
+For a `new-api-version` comparison, assess substantive REST candidates as
+cross-version migration compatibility. Do not reject them merely because a
+version was added. Use the supplied previous-version and target-version
+projections and their source commits. Only proven API-version selector literal
+changes are excluded; request/response visibility is already reflected in the
+candidate facts. Missing or ambiguous contract evidence remains blocked rather
+than proving compatibility.
+
 ## Decision rules
 
 For every candidate, compare its `actual` current behavior with its `expected` compatibility behavior and explain the caller-visible consequence.
