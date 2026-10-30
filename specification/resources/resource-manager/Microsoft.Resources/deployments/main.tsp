@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./DeploymentExtended.tsp";
+import "./DeploymentModule.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -47,4 +48,10 @@ enum Versions {
    * The 2026-06-01 API version.
    */
   v2026_06_01: "2026-06-01",
+
+  /**
+   * The 2026-10-05-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_10_05_preview: "2026-10-05-preview",
 }

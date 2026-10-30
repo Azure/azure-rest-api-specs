@@ -270,6 +270,25 @@ using Microsoft.Resources;
   "!csharp"
 );
 
+// C# SDK: Use the generic at-scope module operations for all scopes.
+@@scope(DeploymentModules.getAtTenantScope, "!csharp");
+@@scope(DeploymentModules.listAtTenantScope, "!csharp");
+@@scope(DeploymentModules.getAtManagementGroupScope, "!csharp");
+@@scope(DeploymentModules.listAtManagementGroupScope, "!csharp");
+@@scope(DeploymentModules.getAtSubscriptionScope, "!csharp");
+@@scope(DeploymentModules.listAtSubscriptionScope, "!csharp");
+@@scope(DeploymentModules.get, "!csharp");
+@@scope(DeploymentModules.listByResourceGroup, "!csharp");
+
+@@scope(DeploymentModuleOperations.getAtTenantScope, "!csharp");
+@@scope(DeploymentModuleOperations.listAtTenantScope, "!csharp");
+@@scope(DeploymentModuleOperations.getAtManagementGroupScope, "!csharp");
+@@scope(DeploymentModuleOperations.listAtManagementGroupScope, "!csharp");
+@@scope(DeploymentModuleOperations.getAtSubscriptionScope, "!csharp");
+@@scope(DeploymentModuleOperations.listAtSubscriptionScope, "!csharp");
+@@scope(DeploymentModuleOperations.get, "!csharp");
+@@scope(DeploymentModuleOperations.list, "!csharp");
+
 @@scope(DeploymentOperationsOperationGroup.get, "!csharp");
 @@scope(DeploymentOperationsOperationGroup.list, "!csharp");
 
