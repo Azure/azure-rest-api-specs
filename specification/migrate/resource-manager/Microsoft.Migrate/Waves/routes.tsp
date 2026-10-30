@@ -118,6 +118,15 @@ interface Waves {
   @added(ApiVersions.v2025_03_30_preview)
   create is ArmResourceCreateOrUpdateAsync<Wave>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The Wave PATCH contract returns a Wave resource in its initial 202 Accepted response."
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Updates a wave.")
+  update is ArmCustomPatchAsync<
+    Wave,
+    WavePatch,
+    Response = ArmResponse<Wave> | WaveAcceptedResponse
+  >;
+
   @added(ApiVersions.v2025_03_30_preview)
   get is ArmResourceRead<Wave>;
 
@@ -127,11 +136,44 @@ interface Waves {
   @added(ApiVersions.v2025_03_30_preview)
   delete is ArmResourceDeleteWithoutOkAsync<Wave>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The Wave refresh contract returns a Wave resource in its initial 202 Accepted response."
   @added(ApiVersions.v2025_03_30_preview)
+  @returnTypeChangedFrom(
+    ApiVersions.v2026_09_01_preview,
+    WaveProperties | Azure.ResourceManager.ErrorResponse
+  )
   @doc("Refresh operation to update wave")
+  @returnsDoc("Azure operation completed successfully.")
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "java")
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "csharp")
-  refresh is ArmResourceActionSync<Wave, void, WaveProperties>;
+  refresh is ArmResourceActionAsyncBase<
+    Wave,
+    void,
+    ArmResponse<Wave> | WaveAcceptedResponse,
+    Azure.ResourceManager.Foundations.BaseParameters<Wave>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The associateInventory contract returns a Wave resource in its initial 202 Accepted response."
+  @added(ApiVersions.v2026_09_01_preview)
+  @action("associateInventory")
+  @doc("Associates discovered applications and workloads with a wave asynchronously. At least one resource identifier is required across applicationIds and workloadIds.")
+  associateInventory is ArmResourceActionAsyncBase<
+    Wave,
+    WaveInventoryRequest,
+    ArmResponse<Wave> | WaveAcceptedResponse,
+    Azure.ResourceManager.Foundations.BaseParameters<Wave>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The dissociateInventory contract returns a Wave resource in its initial 202 Accepted response."
+  @added(ApiVersions.v2026_09_01_preview)
+  @action("dissociateInventory")
+  @doc("Dissociates discovered applications and workloads from a wave asynchronously. At least one resource identifier is required across applicationIds and workloadIds.")
+  dissociateInventory is ArmResourceActionAsyncBase<
+    Wave,
+    WaveInventoryRequest,
+    ArmResponse<Wave> | WaveAcceptedResponse,
+    Azure.ResourceManager.Foundations.BaseParameters<Wave>
+  >;
 
   @added(ApiVersions.v2026_09_01_preview)
   @doc("Export the workload configuration of a wave as a CSV and return a read-only download SAS URI. Long-running operation.")

@@ -107,6 +107,11 @@ model MigrationEntityProperties is AzureResourceProperties {
   @visibility(Lifecycle.Read)
   executionMode?: ExecutionMode;
 
+  @doc("The normalized migration status of the migration entity.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  migrationStatus?: MigrationStatus;
+
   @doc("The current execution step name.")
   @added(ApiVersions.v2026_09_01_preview)
   @visibility(Lifecycle.Read)
@@ -136,6 +141,10 @@ model MigrationEntityPatchProperties {
 
   @doc("Execution status of the migration entity.")
   executionStatus?: string;
+
+  @doc("The normalized migration status of the migration entity.")
+  @added(ApiVersions.v2026_09_01_preview)
+  migrationStatus?: MigrationStatus;
 
   @doc("Migration status reported by the migration tool.")
   toolReportedMigrationStatus?: string;

@@ -77,6 +77,35 @@ union ExecutionMode {
   string,
 }
 
+namespace Microsoft.Migrate {
+  @doc("The normalized migration status of a wave, migration entity, or migration entity group.")
+  @added(ApiVersions.v2026_09_01_preview)
+  union MigrationStatus {
+    @doc("Configuration is required before execution can start.")
+    NeedsConfiguration: "NeedsConfiguration",
+
+    @doc("The resource is ready, but execution has not started.")
+    NotStarted: "NotStarted",
+
+    @doc("Execution is progressing without requiring user action.")
+    InProgress: "InProgress",
+
+    @doc("Execution requires user action.")
+    NeedsAction: "NeedsAction",
+
+    @doc("Execution has failed.")
+    Failed: "Failed",
+
+    @doc("Execution is complete.")
+    Completed: "Completed",
+
+    @doc("Migration is not applicable to the resource.")
+    NotApplicable: "NotApplicable",
+
+    string,
+  }
+}
+
 @doc("Runbook scope type.")
 @added(ApiVersions.v2026_08_01_preview)
 union RunbookScopeType {

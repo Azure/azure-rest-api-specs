@@ -1,0 +1,49 @@
+{
+  "title": "Waves_DissociateInventory_MaximumSet",
+  "operationId": "Waves_DissociateInventory",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "waveName": "wave1",
+    "body": {
+      "applicationIds": [],
+      "workloadIds": [
+        "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.OffAzure/VMwareSites/vmwareSite1/machines/payroll-web-01"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/waves/wave1",
+        "name": "wave1",
+        "type": "Microsoft.Migrate/migrateProjects/waves",
+        "properties": {
+          "displayName": "Payroll application wave",
+          "provisioningState": "Succeeded",
+          "executionMode": "RunbookBased",
+          "migrationStatus": "NeedsConfiguration"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/providers/Microsoft.Migrate/locations/eastus/operationStatuses/dissociate-wave1-inventory",
+        "Retry-After": 30
+      },
+      "body": {
+        "id": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/waves/wave1",
+        "name": "wave1",
+        "type": "Microsoft.Migrate/migrateProjects/waves",
+        "properties": {
+          "displayName": "Payroll application wave",
+          "provisioningState": "Updating",
+          "executionMode": "RunbookBased",
+          "migrationStatus": "NeedsConfiguration"
+        }
+      }
+    }
+  }
+}

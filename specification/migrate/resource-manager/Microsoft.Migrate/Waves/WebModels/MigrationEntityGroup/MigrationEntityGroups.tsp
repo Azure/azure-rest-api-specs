@@ -63,4 +63,9 @@ model MigrationEntityGroupProperties is AzureResourceProperties {
   @added(ApiVersions.v2026_09_01_preview)
   @visibility(Lifecycle.Read)
   executionMode?: ExecutionMode;
+
+  @doc("The normalized migration status of the migration entity group.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  migrationStatus?: MigrationStatus;
 }

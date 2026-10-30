@@ -3461,10 +3461,99 @@
         "x-ms-examples": {
           "Waves_Create_MaximumSet": {
             "$ref": "./examples/Waves_Create_MaximumSet_Gen.json"
+          },
+          "Waves_Create_MinimumSet": {
+            "$ref": "./examples/Waves_Create_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Waves_Update",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Updates a wave.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WavePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            }
+          },
+          "202": {
+            "description": "A wave operation accepted for asynchronous processing.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_Update_ClearDependencies": {
+            "$ref": "./examples/Waves_Update_ClearDependencies.json"
+          },
+          "Waves_Update_MaximumSet": {
+            "$ref": "./examples/Waves_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -3529,6 +3618,179 @@
         "x-ms-examples": {
           "Waves_Delete_MaximumSet": {
             "$ref": "./examples/Waves_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/associateInventory": {
+      "post": {
+        "operationId": "Waves_AssociateInventory",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Associates discovered applications and workloads with a wave asynchronously. At least one resource identifier is required across applicationIds and workloadIds.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WaveInventoryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            }
+          },
+          "202": {
+            "description": "A wave operation accepted for asynchronous processing.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_AssociateInventory_ApplicationsOnly": {
+            "$ref": "./examples/Waves_AssociateInventory_ApplicationsOnly.json"
+          },
+          "Waves_AssociateInventory_MaximumSet": {
+            "$ref": "./examples/Waves_AssociateInventory_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/dissociateInventory": {
+      "post": {
+        "operationId": "Waves_DissociateInventory",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Dissociates discovered applications and workloads from a wave asynchronously. At least one resource identifier is required across applicationIds and workloadIds.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WaveInventoryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            }
+          },
+          "202": {
+            "description": "A wave operation accepted for asynchronous processing.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_DissociateInventory_MaximumSet": {
+            "$ref": "./examples/Waves_DissociateInventory_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3718,7 +3980,24 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WaveProperties"
+              "$ref": "#/definitions/Wave"
+            }
+          },
+          "202": {
+            "description": "A wave operation accepted for asynchronous processing.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -3732,7 +4011,11 @@
           "Waves_Refresh_MaximumSet": {
             "$ref": "./examples/Waves_Refresh_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/validateWorkloadConfiguration": {
@@ -4539,6 +4822,11 @@
           "$ref": "#/definitions/ExecutionMode",
           "description": "The execution mode for the migration process.",
           "readOnly": true
+        },
+        "migrationStatus": {
+          "$ref": "#/definitions/MigrationStatus",
+          "description": "The normalized migration status of the migration entity group.",
+          "readOnly": true
         }
       },
       "required": [
@@ -4588,6 +4876,10 @@
         "executionStatus": {
           "type": "string",
           "description": "Execution status of the migration entity."
+        },
+        "migrationStatus": {
+          "$ref": "#/definitions/MigrationStatus",
+          "description": "The normalized migration status of the migration entity."
         },
         "toolReportedMigrationStatus": {
           "type": "string",
@@ -4737,6 +5029,11 @@
           "description": "The execution mode for the migration process.",
           "readOnly": true
         },
+        "migrationStatus": {
+          "$ref": "#/definitions/MigrationStatus",
+          "description": "The normalized migration status of the migration entity.",
+          "readOnly": true
+        },
         "currentStepName": {
           "type": "string",
           "description": "The current execution step name.",
@@ -4795,6 +5092,60 @@
           {
             "name": "ServerMigration",
             "value": "ServerMigration"
+          }
+        ]
+      }
+    },
+    "MigrationStatus": {
+      "type": "string",
+      "description": "The normalized migration status of a wave, migration entity, or migration entity group.",
+      "enum": [
+        "NeedsConfiguration",
+        "NotStarted",
+        "InProgress",
+        "NeedsAction",
+        "Failed",
+        "Completed",
+        "NotApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NeedsConfiguration",
+            "value": "NeedsConfiguration",
+            "description": "Configuration is required before execution can start."
+          },
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The resource is ready, but execution has not started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Execution is progressing without requiring user action."
+          },
+          {
+            "name": "NeedsAction",
+            "value": "NeedsAction",
+            "description": "Execution requires user action."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Execution has failed."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Execution is complete."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "Migration is not applicable to the resource."
           }
         ]
       }
@@ -6289,6 +6640,62 @@
         }
       ]
     },
+    "WaveDependency": {
+      "type": "object",
+      "description": "A wave dependency and the reason for the dependency.",
+      "properties": {
+        "waveArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full Azure resource identifier of the wave on which this wave depends.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects/waves"
+              }
+            ]
+          }
+        },
+        "reasons": {
+          "type": "string",
+          "description": "The reason for the dependency."
+        }
+      },
+      "required": [
+        "waveArmId"
+      ]
+    },
+    "WaveInventoryRequest": {
+      "type": "object",
+      "description": "Inventory to associate with or dissociate from a wave. At least one application or workload resource identifier must be supplied across applicationIds and workloadIds. Either list may be omitted or empty when the other list contains an identifier.",
+      "properties": {
+        "applicationIds": {
+          "type": "array",
+          "description": "Full Azure resource identifiers of discovered applications.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/discoveryHubs/applications"
+                }
+              ]
+            }
+          }
+        },
+        "workloadIds": {
+          "type": "array",
+          "description": "Full Azure resource identifiers of discovered workloads.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      }
+    },
     "WaveListResult": {
       "type": "object",
       "description": "The response of a Wave list operation.",
@@ -6309,6 +6716,50 @@
       "required": [
         "value"
       ]
+    },
+    "WavePatch": {
+      "type": "object",
+      "description": "Patch request for a wave.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WavePatchProperties",
+          "description": "Properties to update on the wave."
+        }
+      }
+    },
+    "WavePatchProperties": {
+      "type": "object",
+      "description": "Properties that can be updated on a wave. Omitted properties retain their existing values.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the wave."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the wave."
+        },
+        "plannedStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Planned start date of the wave."
+        },
+        "plannedCompletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Planned completion date of the wave."
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Waves on which this wave depends. An empty list clears all dependencies. Omit to retain the existing dependencies.",
+          "items": {
+            "$ref": "#/definitions/WaveDependency"
+          },
+          "x-ms-identifiers": [
+            "waveArmId"
+          ]
+        }
+      }
     },
     "WavePlanListItem": {
       "type": "object",
@@ -6494,12 +6945,37 @@
           "$ref": "#/definitions/ExecutionMode",
           "description": "The execution mode for the migration process.",
           "readOnly": true
+        },
+        "migrationStatus": {
+          "$ref": "#/definitions/MigrationStatus",
+          "description": "The normalized migration status of the wave.",
+          "readOnly": true
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Waves on which this wave depends. An empty list clears all dependencies. Omit to retain the existing dependencies on update.",
+          "items": {
+            "$ref": "#/definitions/WaveDependency"
+          },
+          "x-ms-identifiers": [
+            "waveArmId"
+          ]
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp when the wave was created.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp when the wave was last updated.",
+          "readOnly": true
         }
       },
       "required": [
-        "displayName",
-        "arg",
-        "plannedStartDate"
+        "displayName"
       ]
     },
     "WaveSelectionItem": {
