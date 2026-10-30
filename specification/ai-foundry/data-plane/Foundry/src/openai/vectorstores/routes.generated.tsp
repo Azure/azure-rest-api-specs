@@ -424,6 +424,7 @@ interface VectorStores {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing retrieveVectorStoreFileContent SDK method name; renaming it would break client compatibility."
   @summary("Get a vector store file content")
   @route("{vector_store_id}/files/{file_id}/content")
   @get

@@ -58,6 +58,7 @@ interface AdminRequestApprovalsResources {
   /**
    * Get list of admin request approvals
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing adminRequestApprovalsList SDK method name; renaming it would break client compatibility."
   adminRequestApprovalsList is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     AdminRequestApprovalsResource,
     Response = ArmResponse<AdminRequestApprovalsList>,

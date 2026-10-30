@@ -102,6 +102,7 @@ interface VirtualMachineDiagnosticRunCommands {
   /**
    * The operation to get all diagnostic run commands of a Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing diagnosticListByVirtualMachine SDK method name; renaming it would break client compatibility."
   @list
   @added(Versions.v2026_04_01)
   diagnosticListByVirtualMachine is VirtualMachineDiagnosticRunCommandOps.List<
@@ -195,6 +196,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
    * The operation to get all diagnostic run commands of an instance in Virtual Machine Scaleset.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing diagnosticList SDK method name; renaming it would break client compatibility."
   @added(Versions.v2026_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_List")
   @list

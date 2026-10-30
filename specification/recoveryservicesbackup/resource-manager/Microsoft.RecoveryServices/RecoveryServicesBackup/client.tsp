@@ -471,6 +471,7 @@ using Microsoft.RecoveryServices;
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing bmsPrepareDataMoveOperationResultGet SDK method name; renaming it would break client compatibility."
 op bmsPrepareDataMoveOperationResultGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -600,6 +601,7 @@ op backupPoliciesList(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing backupResourceEncryptionConfigsGet SDK method name; renaming it would break client compatibility."
 op backupResourceEncryptionConfigsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -657,6 +659,7 @@ op backupResourceEncryptionConfigsUpdate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing backupResourceStorageConfigsNonCRRGet SDK method name; renaming it would break client compatibility."
 op backupResourceStorageConfigsNonCRRGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -804,6 +807,7 @@ op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing backupResourceVaultConfigsGet SDK method name; renaming it would break client compatibility."
 op backupResourceVaultConfigsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -967,6 +971,7 @@ op backupsTrigger(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing recoveryPointsGet SDK method name; renaming it would break client compatibility."
 op recoveryPointsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1118,6 +1123,7 @@ op recoveryPointsRecommendedForMoveList(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing backupResourceConfigOperationStatusesGetOperationStatus SDK method name; renaming it would break client compatibility."
 op backupResourceConfigOperationStatusesGetOperationStatus(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1149,6 +1155,7 @@ op backupResourceConfigOperationStatusesGetOperationStatus(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing exportJobsOperationResultsGet SDK method name; renaming it would break client compatibility."
 op exportJobsOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1293,6 +1300,7 @@ op jobCancellationsTrigger(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing jobDetailsGet SDK method name; renaming it would break client compatibility."
 op jobDetailsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1316,6 +1324,7 @@ op jobDetailsGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing jobOperationResultsGet SDK method name; renaming it would break client compatibility."
 op jobOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1347,6 +1356,7 @@ op jobOperationResultsGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateEndpointConnectionResourcesGet SDK method name; renaming it would break client compatibility."
 op privateEndpointConnectionResourcesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1404,6 +1414,7 @@ op privateEndpointConnectionResourcesPut(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateEndpointConnectionResourcesDelete SDK method name; renaming it would break client compatibility."
 op privateEndpointConnectionResourcesDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1431,6 +1442,7 @@ op privateEndpointConnectionResourcesDelete(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateEndpointOperationStatusesGetOperationStatus SDK method name; renaming it would break client compatibility."
 op privateEndpointOperationStatusesGetOperationStatus(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1462,6 +1474,7 @@ op privateEndpointOperationStatusesGetOperationStatus(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectedItemOperationResultsGet SDK method name; renaming it would break client compatibility."
 op protectedItemOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1501,6 +1514,7 @@ op protectedItemOperationResultsGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectedItemOperationStatusesGet SDK method name; renaming it would break client compatibility."
 op protectedItemOperationStatusesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1580,6 +1594,7 @@ op protectedItemsCreateOrUpdate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectedItemsDelete SDK method name; renaming it would break client compatibility."
 op protectedItemsDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1648,6 +1663,7 @@ op protectedItemsGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectionContainerOperationResultsGet SDK method name; renaming it would break client compatibility."
 op protectionContainerOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1716,6 +1732,7 @@ op protectionContainersRegister(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectionContainersGet SDK method name; renaming it would break client compatibility."
 op protectionContainersGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1781,6 +1798,7 @@ op protectionContainersInquire(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectionContainersUnregister SDK method name; renaming it would break client compatibility."
 op protectionContainersUnregister(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1845,6 +1863,7 @@ op protectionIntentResourcesCreateOrUpdate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectionIntentResourcesDelete SDK method name; renaming it would break client compatibility."
 op protectionIntentResourcesDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1875,6 +1894,7 @@ op protectionIntentResourcesDelete(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectionIntentResourcesGet SDK method name; renaming it would break client compatibility."
 op protectionIntentResourcesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1906,6 +1926,7 @@ op protectionIntentResourcesGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectionPoliciesGet SDK method name; renaming it would break client compatibility."
 op protectionPoliciesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1964,6 +1985,7 @@ op protectionPoliciesCreateOrUpdate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectionPoliciesDelete SDK method name; renaming it would break client compatibility."
 op protectionPoliciesDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1991,6 +2013,7 @@ op protectionPoliciesDelete(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectionPolicyOperationResultsGet SDK method name; renaming it would break client compatibility."
 op protectionPolicyOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2022,6 +2045,7 @@ op protectionPolicyOperationResultsGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing resourceGuardProxiesGet SDK method name; renaming it would break client compatibility."
 op resourceGuardProxiesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2045,6 +2069,7 @@ op resourceGuardProxiesGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing resourceGuardProxyDelete SDK method name; renaming it would break client compatibility."
 op resourceGuardProxyDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2071,6 +2096,7 @@ op resourceGuardProxyDelete(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing resourceGuardProxyGet SDK method name; renaming it would break client compatibility."
 op resourceGuardProxyGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2197,6 +2223,7 @@ op restoresTrigger(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing protectionPolicyOperationStatusesGet SDK method name; renaming it would break client compatibility."
 op protectionPolicyOperationStatusesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,

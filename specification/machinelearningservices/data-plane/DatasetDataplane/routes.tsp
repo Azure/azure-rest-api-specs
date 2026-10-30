@@ -318,6 +318,7 @@ interface DataVersionOps {
   /** Check if a data version exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing exists SDK method name; renaming it would break client compatibility."
   @route("/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/{name}/versions/{version}/exists")
   @get
   exists is Azure.Core.Foundations.Operation<

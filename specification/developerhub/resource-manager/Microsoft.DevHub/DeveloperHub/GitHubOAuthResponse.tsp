@@ -50,6 +50,7 @@ interface GitHubOAuthResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing gitHubOAuthCallback SDK method name; renaming it would break client compatibility."
   @summary("Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.")
   @tag("GitHubOAuth")
   @operationId("GitHubOAuthCallback")

@@ -36,5 +36,6 @@ interface MapsTimezoneClient {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Backwards compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing convertWindowsTimezoneToIana SDK method name; renaming it would break client compatibility."
   convertWindowsTimezoneToIana is Timezone.getWindowsToIana;
 }

@@ -196,6 +196,7 @@ union AssociationEntityProvisioningState {
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing replaceGetByName SDK method name; renaming it would break client compatibility."
 op replaceGetByName(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -225,6 +226,7 @@ op replaceGetByName(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "matches the original DeletedServiceContracts.purge operation"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "matches the original DeletedServiceContracts.purge operation"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing replacePurge SDK method name; renaming it would break client compatibility."
 op replacePurge(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
