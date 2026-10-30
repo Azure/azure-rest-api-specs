@@ -123,6 +123,59 @@ using Microsoft.NetApp;
 @@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
 @@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");
 
+@@clientName(ExternalSvms, "ExternalSVMs", "go");
+@@clientName(SvmPeers, "SVMPeers", "go");
+
+// ARM synthesizes these path parameters, so rename them through Go-only overrides.
+/** Microsoft NetApp Files Azure Resource Provider specification */
+namespace Microsoft.NetApp {
+  namespace GoCustomizations {
+    /** Shared path and API version parameters for the Go ExternalCaches overrides. */
+    model ExternalCacheParentParameters {
+      ...Azure.ResourceManager.Foundations.ResourceGroupBaseParameters;
+      ...Azure.ResourceManager.ProviderNamespace<Microsoft.NetApp.ExternalCache>;
+
+      /** The name of the ExternalCluster */
+      @TypeSpec.Http.path
+      externalClusterName: string;
+
+      /** The name of the ExternalSvm */
+      @TypeSpec.Http.path
+      @clientName("externalSVMName", "go")
+      externalSvmName: string;
+    }
+
+    /** Template signatures customize Go methods without declaring additional REST operations. */
+    interface ExternalCaches<
+      Parameters extends {} = ExternalCacheParentParameters
+    > {
+      /** Get the External Cache */
+      get(
+        ...Parameters,
+
+        /** The externalCacheName with unique identifier added and leading underscores (if any) removed. */
+        @TypeSpec.Http.path
+        externalCacheResourceName: string,
+      ): Microsoft.NetApp.ExternalCache;
+
+      /** List all External Caches under an External SVM */
+      @list
+      listByParent(...Parameters): Microsoft.NetApp.ExternalCacheList;
+    }
+  }
+}
+
+@@override(
+  ExternalCaches.get,
+  Microsoft.NetApp.GoCustomizations.ExternalCaches.get,
+  "go"
+);
+@@override(
+  ExternalCaches.listByParent,
+  Microsoft.NetApp.GoCustomizations.ExternalCaches.listByParent,
+  "go"
+);
+
 // =============================================================================
 // C# customizations (csharp scope)
 // =============================================================================
