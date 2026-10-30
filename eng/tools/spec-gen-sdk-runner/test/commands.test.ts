@@ -12,7 +12,7 @@ import * as emitterCheck from "../src/emitter-check.ts";
 import * as log from "../src/log.ts";
 import { LogLevel } from "../src/log.ts";
 import * as pythonPypiValidation from "../src/python-pypi-validation.ts";
-import * as reviewBundle from "../src/review-bundle.ts";
+import * as reviewMetadata from "../src/sdk-review-metadata.ts";
 import * as sdkValidationConfig from "../src/sdk-validation-config.ts";
 import * as changeFiles from "../src/spec-helpers.ts";
 import type { ExecutionReport } from "../src/types.ts";
@@ -295,6 +295,79 @@ describe("generateSdkForSpecPr", () => {
     );
   });
 
+  test("adds captured changed files to existing APIView request data", async () => {
+    const stagedArtifactsFolder = "C:\\work\\artifacts";
+    const mockCommandInput = {
+      localSdkRepoPath: "C:\\work\\azure-sdk-for-net",
+      localSpecRepoPath: "C:\\work\\azure-rest-api-specs",
+      workingFolder: "C:\\work",
+      runMode: "spec-pull-request",
+      sdkRepoName: "azure-sdk-for-net",
+      sdkLanguage: SdkName.Net,
+      specCommitSha: "38865cd3b650b3510e2a5b8bf9f990d0668a8810",
+      specRepoHttpsUrl: "https://github.com/Azure/azure-rest-api-specs",
+      prNumber: "47607",
+    };
+    const mockChangedSpecs = [
+      {
+        specs: ["specification/widget/Widget/client.tsp"],
+        typespecProject: "specification/widget/Widget/tspconfig.yaml",
+      },
+    ];
+    const mockExecutionReport: ExecutionReport = {
+      executionResult: "succeeded",
+      generateFromTypeSpec: true,
+      stagedArtifactsFolder,
+      packages: [
+        {
+          packageName: "Azure.Widget",
+          packageRootPath: "sdk/widget/Azure.Widget",
+          apiViewArtifact: path.join(stagedArtifactsFolder, "Azure.Widget.1.0.0.nupkg"),
+          result: "succeeded",
+        },
+      ],
+    };
+    const capturedReviewMetadata = {
+      packageRootPath: "sdk/widget/Azure.Widget",
+      changedFiles: ["sdk/widget/Azure.Widget/api/Azure.Widget.netstandard2.0.cs"],
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(commandHelpers, "selectGenerationTool").mockReturnValue("spec-gen-sdk");
+    vi.spyOn(commandHelpers, "installLanguageToolchain").mockResolvedValue(undefined);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
+    vi.spyOn(reviewMetadata, "captureSdkReviewMetadata").mockResolvedValue(
+      new Map([["Azure.Widget", capturedReviewMetadata]]),
+    );
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+
+    const result = await generateSdkForSpecPr();
+
+    expect(result.statusCode).toBe(0);
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "succeeded",
+      false,
+      false,
+      true,
+      stagedArtifactsFolder,
+      [
+        {
+          packageName: "Azure.Widget",
+          filePath: "Azure.Widget.1.0.0.nupkg",
+          ...capturedReviewMetadata,
+        },
+      ],
+      true,
+    );
+  });
+
   test("uses a pinned SDK branch and restores main for the next unpinned spec", async () => {
     const mockCommandInput = {
       localSdkRepoPath: "path/to/local/repo",
@@ -406,31 +479,15 @@ describe("generateSdkForSpecPr", () => {
       new Error("azsdk setup failed"),
     );
     const captureSpy = vi
-      .spyOn(reviewBundle, "captureSdkReviewBundleEntriesForSpec")
-      .mockResolvedValue([]);
-    const writeManifestSpy = vi
-      .spyOn(reviewBundle, "writeSdkReviewBundleManifest")
-      .mockReturnValue(undefined);
+      .spyOn(reviewMetadata, "captureSdkReviewMetadata")
+      .mockResolvedValue(new Map());
     vi.spyOn(log, "logMessage").mockImplementation(() => {});
 
     const result = await generateSdkForSpecPr();
 
     expect(result.statusCode).toBe(1);
     expect(captureSpy).toHaveBeenCalledOnce();
-    expect(captureSpy).toHaveBeenCalledWith(
-      expect.objectContaining({
-        executionReport: firstReport,
-        tspConfigPath: mockChangedSpecs[0].typespecProject,
-      }),
-    );
-    expect(writeManifestSpy).toHaveBeenCalledWith(
-      mockCommandInput,
-      expect.objectContaining({
-        captureStatus: "failed",
-        expectedEntryCount: 1,
-        entries: [],
-      }),
-    );
+    expect(captureSpy).toHaveBeenCalledWith(mockCommandInput, firstReport);
   });
 
   test("should validate Python PR package registration on PyPI", async () => {

@@ -306,12 +306,6 @@ stages:
 
           - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
             parameters:
-              ArtifactName: $(SdkReviewBundleName)
-              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SdkReviewBundlePath)"
-              CustomCondition: and(succeededOrFailed(), ne(variables['SdkReviewBundleName'], ''))
-
-          - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
-            parameters:
               ArtifactName: $(PipelineArtifactsName)
               ArtifactPath: $(StagedArtifactsFolder)
               CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))

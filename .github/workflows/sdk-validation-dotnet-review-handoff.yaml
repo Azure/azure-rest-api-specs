@@ -1,4 +1,4 @@
-name: "SDK Validation - .NET Bundle Validation"
+name: "SDK Validation - .NET Naming Review Input"
 
 on:
   check_run:
@@ -8,11 +8,11 @@ permissions:
   contents: read # for actions/checkout
 
 concurrency:
-  group: sdk-validation-dotnet-bundle-validation-${{ github.event.check_run.head_sha }}
+  group: sdk-validation-dotnet-review-input-${{ github.event.check_run.head_sha }}
   cancel-in-progress: false
 
 jobs:
-  validate-review-bundle:
+  validate-review-input:
     permissions:
       contents: read
       pull-requests: read
@@ -21,7 +21,7 @@ jobs:
       github.event.check_run.app.slug == 'azure-pipelines' &&
       github.event.check_run.name == 'SDK Validation - .NET' &&
       !endsWith(github.repository, '-pr')
-    name: "Validate Review Bundle (Read-Only)"
+    name: "Validate Naming Review Input (Read-Only)"
     runs-on: ubuntu-slim
 
     steps:
@@ -35,7 +35,7 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - id: review-handoff
-        name: Validate bundle identity and download files
+        name: Validate existing SDK generation artifact
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
@@ -43,10 +43,10 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-handoff.ts');
             return await runSdkValidationDotnetReviewHandoff({ github, context, core });
 
-      - name: Upload validated SDK review bundle
-        if: ${{ steps.review-handoff.outputs.handoff_status == 'validated' && steps.review-handoff.outputs.bundle_dir }}
+      - name: Upload validated SDK naming review input
+        if: ${{ steps.review-handoff.outputs.handoff_status == 'validated' && steps.review-handoff.outputs.input_dir }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: sdk-review-bundle-build-${{ steps.review-handoff.outputs.build_id }}
-          path: ${{ steps.review-handoff.outputs.bundle_dir }}
+          name: sdk-naming-review-input-build-${{ steps.review-handoff.outputs.build_id }}
+          path: ${{ steps.review-handoff.outputs.input_dir }}
           if-no-files-found: error

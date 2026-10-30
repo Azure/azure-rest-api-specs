@@ -1,7 +1,4 @@
-import {
-  type APIViewRequestData,
-  type SdkReviewBundleEntry,
-} from "@azure-tools/specs-shared/sdk-types";
+import { type APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
@@ -38,11 +35,9 @@ import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
 import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
 import {
-  captureSdkReviewBundleEntriesForSpec,
-  createSdkReviewCaptureErrorSummary,
-  discardSdkReviewBundleOutput,
-  writeSdkReviewBundleManifest,
-} from "./review-bundle.ts";
+  captureSdkReviewMetadata,
+  type SdkReviewPackageChanges,
+} from "./sdk-review-metadata.ts";
 import { resolveSdkRepoBranch } from "./sdk-validation-config.ts";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
@@ -393,20 +388,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
-  const sdkReviewBundleEntries: SdkReviewBundleEntry[] = [];
-  const sdkReviewBundleCaptureErrors: string[] = [];
-  let sdkReviewBundleExpectedEntryCount = 0;
-  let sdkReviewBundleCaptureFailed = false;
-  const failSdkReviewBundleCapture = (error: unknown): void => {
-    const captureError = createSdkReviewCaptureErrorSummary(error);
-    sdkReviewBundleCaptureFailed = true;
-    sdkReviewBundleEntries.length = 0;
-    if (!sdkReviewBundleCaptureErrors.includes(captureError)) {
-      sdkReviewBundleCaptureErrors.push(captureError);
-    }
-    discardSdkReviewBundleOutput(commandInput.workingFolder);
-    logMessage(`Runner: SDK review bundle capture is incomplete:${captureError}`, LogLevel.Warn);
-  };
+  let sdkReviewMetadata = new Map<string, SdkReviewPackageChanges>();
   const breakingChangeDetectionEnabled = isBreakingChangeDetectionEnabled();
   // Tracks whether the SDK repo is currently checked out on a non-`main` branch
   // due to a `sdk-validation.yaml` pin from a previous spec in this run.
@@ -421,6 +403,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
   for (const changedSpec of changedSpecs) {
     executionReport = undefined;
+    sdkReviewMetadata = new Map<string, SdkReviewPackageChanges>();
 
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
@@ -440,9 +423,6 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
         LogLevel.Error,
       );
       statusCode = 1;
-      failSdkReviewBundleCapture(
-        `SDK generation was not available for '${changedSpec.typespecProject ?? changedSpec.readmeMd}'`,
-      );
       logMessage("ending group logging", LogLevel.EndGroup);
       continue;
     }
@@ -492,7 +472,6 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       } catch (error) {
         logMessage(`Runner: error in azsdk generation:${inspect(error)}`, LogLevel.Error);
         statusCode = 1;
-        failSdkReviewBundleCapture(error);
       }
     } else {
       // Existing spec-gen-sdk path
@@ -519,7 +498,6 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       } catch (error) {
         logMessage(`Runner: error executing command:${inspect(error)}`, LogLevel.Error);
         statusCode = 1;
-        failSdkReviewBundleCapture(error);
       }
       // Pop the spec config path from specGenSdkCommand
       for (let index = 0; index < pushedSpecConfigCount * 2; index++) {
@@ -553,7 +531,6 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
         logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
         statusCode = 1;
         executionReport = undefined;
-        failSdkReviewBundleCapture(error);
       }
     }
 
@@ -583,13 +560,24 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
           hasTypeSpecProjects = true;
         }
 
+        try {
+          sdkReviewMetadata = await captureSdkReviewMetadata(commandInput, executionReport);
+        } catch (error) {
+          logMessage(
+            `Runner: failed capturing SDK review metadata:${inspect(error)}`,
+            LogLevel.Warn,
+          );
+        }
+
         if (executionReport.stagedArtifactsFolder) {
           stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
           for (const pkg of executionReport.packages) {
             if (pkg.apiViewArtifact && pkg.packageName) {
+              const reviewMetadata = sdkReviewMetadata.get(pkg.packageName);
               apiViewRequestData.push({
                 packageName: pkg.packageName,
                 filePath: path.relative(stagedArtifactsFolder, pkg.apiViewArtifact),
+                ...(reviewMetadata ?? {}),
               });
             }
           }
@@ -601,33 +589,13 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
         currentRunHasBreakingChange = getBreakingChangeInfo(executionReport);
         overallRunHasBreakingChange = overallRunHasBreakingChange || currentRunHasBreakingChange;
         logMessage(`Runner command execution result:${currentExecutionResult}`);
-
-        sdkReviewBundleExpectedEntryCount += executionReport.packages.length;
-        if (!sdkReviewBundleCaptureFailed) {
-          try {
-            const capturedEntries = await captureSdkReviewBundleEntriesForSpec({
-              commandInput,
-              executionReport,
-              tspConfigPath: changedSpec.typespecProject,
-              readmePath: changedSpec.readmeMd,
-              existingEntriesCount: sdkReviewBundleEntries.length,
-            });
-            sdkReviewBundleEntries.push(...capturedEntries);
-          } catch (error) {
-            failSdkReviewBundleCapture(error);
-          }
-        }
       } else {
         overallExecutionResult = "failed";
-        failSdkReviewBundleCapture(
-          `SDK generation did not produce an execution report for '${changedSpecPathText}'`,
-        );
       }
     } catch (error) {
       logMessage(`Runner: error processing execution report:${inspect(error)}`, LogLevel.Error);
       statusCode = 1;
       overallExecutionResult = "failed";
-      failSdkReviewBundleCapture(error);
     }
     logMessage("ending group logging", LogLevel.EndGroup);
     if (executionReport?.vsoLogPath) {
@@ -638,21 +606,6 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       }
     }
   }
-  writeSdkReviewBundleManifest(
-    commandInput,
-    sdkReviewBundleCaptureFailed
-      ? {
-          captureStatus: "failed",
-          expectedEntryCount: sdkReviewBundleExpectedEntryCount,
-          captureErrors: sdkReviewBundleCaptureErrors,
-          entries: [],
-        }
-      : {
-          captureStatus: "complete",
-          expectedEntryCount: sdkReviewBundleExpectedEntryCount,
-          entries: sdkReviewBundleEntries,
-        },
-  );
   // Process the spec-gen-sdk artifacts
   statusCode =
     generateArtifact(

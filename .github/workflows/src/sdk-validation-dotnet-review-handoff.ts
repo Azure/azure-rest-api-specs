@@ -1,22 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
-import { Unzip, UnzipInflate } from "fflate";
 import * as z from "zod";
 import {
-  isSafeRelativePosixPath,
-  hasSdkReviewBundlePatch,
-  SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
-  SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY,
-  SDK_REVIEW_BUNDLE_MAX_ENTRIES,
-  SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES,
-  SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME,
-  SdkName,
-  SdkReviewBundleManifestSchema,
-  type SdkReviewBundleEntry,
-  type SdkReviewBundleManifest,
-  type NonEmptySdkReviewBundleEntry,
+    isSafeRelativePosixPath,
+    SdkName,
+    SpecGenSdkArtifactInfoSchema,
+    type SpecGenSdkArtifactInfo,
 } from "../../shared/src/sdk-types.ts";
-import { downloadAzurePipelineArtifactArchive, resolveAzurePipelineArtifact } from "./artifacts.ts";
+import { downloadAzurePipelineArtifactFile, resolveAzurePipelineArtifact } from "./artifacts.ts";
 import type { Context, Core, GitHub, GitHubScriptArgs } from "./github.ts";
 import type { RetryOptions } from "./retries.ts";
 
@@ -26,93 +17,71 @@ export const EXPECTED_AZURE_PIPELINES_APP_SLUG = "azure-pipelines" as const;
 export const EXPECTED_ADO_HOST = "dev.azure.com" as const;
 export const EXPECTED_ADO_ORG = "azure-sdk" as const;
 export const EXPECTED_ADO_DEFINITION_ID = 7516 as const;
-export const MAX_SDK_REVIEW_MANIFEST_BYTES = 1024 * 1024;
-export const MAX_SDK_REVIEW_PATCH_BYTES = 16 * 1024 * 1024;
-export const MAX_SDK_REVIEW_TOTAL_PATCH_BYTES = 16 * 1024 * 1024;
-export const MAX_SDK_REVIEW_ARCHIVE_BYTES = 24 * 1024 * 1024;
-export const MAX_SDK_REVIEW_EXPANDED_BYTES =
-  MAX_SDK_REVIEW_MANIFEST_BYTES + MAX_SDK_REVIEW_TOTAL_PATCH_BYTES;
-export {
-  SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY as MAX_SDK_REVIEW_CHANGED_FILES_PER_ENTRY,
-  SDK_REVIEW_BUNDLE_MAX_ENTRIES as MAX_SDK_REVIEW_ENTRIES,
-  SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES as MAX_SDK_REVIEW_TOTAL_CHANGED_FILES,
-};
+export const SPEC_GEN_SDK_ARTIFACT_NAME = "spec-gen-sdk-artifact" as const;
+export const SPEC_GEN_SDK_ARTIFACT_FILE_NAME = `${SPEC_GEN_SDK_ARTIFACT_NAME}.json` as const;
+export const MAX_SPEC_GEN_SDK_ARTIFACT_BYTES = 1024 * 1024;
+export const MAX_SDK_REVIEW_PACKAGES = 128;
 
 const CheckRunAppSchema = z
-  .object({
-    id: z.number().optional(),
-    slug: z.string().optional(),
-    name: z.string().optional(),
-  })
-  .optional();
+    .object({
+        id: z.number().optional(),
+        slug: z.string().optional(),
+        name: z.string().optional(),
+    })
+    .optional();
 
 const CheckRunPullRequestSchema = z.object({
-  number: z.number().int().positive(),
-  head: z
-    .object({
-      sha: z.string().optional(),
-    })
-    .optional(),
+    number: z.number().int().positive(),
+    head: z
+        .object({
+            sha: z.string().optional(),
+        })
+        .optional(),
 });
 
 const CheckRunEventPayloadSchema = z.object({
-  check_run: z.object({
-    name: z.string(),
-    head_sha: z.string().regex(/^[0-9a-f]{40}$/i, "Expected a 40-char check_run.head_sha"),
-    details_url: z.string(),
-    external_id: z.string(),
-    status: z.string().optional(),
-    conclusion: z.string().nullable().optional(),
-    app: CheckRunAppSchema,
-    check_suite: z
-      .object({
+    check_run: z.object({
+        name: z.string(),
+        head_sha: z.string().regex(/^[0-9a-f]{40}$/i, "Expected a 40-char check_run.head_sha"),
+        details_url: z.string(),
+        external_id: z.string(),
+        status: z.string().optional(),
+        conclusion: z.string().nullable().optional(),
         app: CheckRunAppSchema,
-      })
-      .optional(),
-    pull_requests: z.array(CheckRunPullRequestSchema).optional(),
-  }),
+        check_suite: z
+            .object({
+                app: CheckRunAppSchema,
+            })
+            .optional(),
+        pull_requests: z.array(CheckRunPullRequestSchema).optional(),
+    }),
 });
 
 export type ValidatedAdoBuildTarget = {
-  projectUrl: string;
-  organization: string;
-  project: string;
-  buildId: string;
+    projectUrl: string;
+    organization: string;
+    project: string;
+    buildId: string;
 };
 
 export type ValidatedCheckRunEvent = {
-  checkName: string;
-  headSha: string;
-  conclusion: string | null | undefined;
-  adoBuild: ValidatedAdoBuildTarget;
-  eventPrNumbers: number[];
-};
-
-export type DownloadedBundleEntry = {
-  entry: SdkReviewBundleEntry;
-  localPatchPath?: string;
-};
-
-type CompleteSdkReviewBundleManifest = Extract<
-  SdkReviewBundleManifest,
-  { captureStatus: "complete" }
->;
-
-type ValidatedArchiveBundle = {
-  manifest: SdkReviewBundleManifest;
-  files: Map<string, Uint8Array>;
+    checkName: string;
+    headSha: string;
+    conclusion: string | null | undefined;
+    adoBuild: ValidatedAdoBuildTarget;
+    eventPrNumbers: number[];
 };
 
 export type SdkReviewHandoffResult = {
-  status: "validated" | "skipped";
-  reason?: string;
-  buildId?: string;
-  prNumber?: number;
-  headSha?: string;
-  bundleDirectory?: string;
-  manifestPath?: string;
-  summaryPath?: string;
-  entryCount: number;
+    status: "validated" | "skipped";
+    reason?: string;
+    buildId?: string;
+    prNumber?: number;
+    headSha?: string;
+    inputDirectory?: string;
+    artifactPath?: string;
+    summaryPath?: string;
+    entryCount: number;
 };
 
 /**
@@ -122,698 +91,411 @@ export type SdkReviewHandoffResult = {
  * `7516|<details_url buildId>|<details_url project>`.
  */
 export function parseAndValidateAdoBuildDetailsUrl(
-  detailsUrl: string | null | undefined,
-  externalId?: string | null,
+    detailsUrl: string | null | undefined,
+    externalId?: string | null,
 ): ValidatedAdoBuildTarget {
-  if (!detailsUrl) {
-    throw new Error("Missing check_run.details_url for SDK Validation - .NET");
-  }
+    if (!detailsUrl) {
+        throw new Error("Missing check_run.details_url for SDK Validation - .NET");
+    }
 
-  let parsedUrl: URL;
-  try {
-    parsedUrl = new URL(detailsUrl);
-  } catch (error) {
-    throw new Error(`Invalid check_run.details_url '${detailsUrl}'`, { cause: error });
-  }
+    let parsedUrl: URL;
+    try {
+        parsedUrl = new URL(detailsUrl);
+    } catch (error) {
+        throw new Error(`Invalid check_run.details_url '${detailsUrl}'`, { cause: error });
+    }
 
-  if (parsedUrl.protocol !== "https:" || parsedUrl.hostname !== EXPECTED_ADO_HOST) {
-    throw new Error(
-      `Untrusted Azure DevOps host in details_url '${detailsUrl}' (expected https://${EXPECTED_ADO_HOST})`,
-    );
-  }
-  if (parsedUrl.username || parsedUrl.password || parsedUrl.port) {
-    throw new Error(`Disallowed credentials or port in details_url '${detailsUrl}'`);
-  }
+    if (parsedUrl.protocol !== "https:" || parsedUrl.hostname !== EXPECTED_ADO_HOST) {
+        throw new Error(
+            `Untrusted Azure DevOps host in details_url '${detailsUrl}' (expected https://${EXPECTED_ADO_HOST})`,
+        );
+    }
+    if (parsedUrl.username || parsedUrl.password || parsedUrl.port) {
+        throw new Error(`Disallowed credentials or port in details_url '${detailsUrl}'`);
+    }
 
-  const pathSegments = parsedUrl.pathname.split("/").filter((segment) => segment.length > 0);
-  if (
-    pathSegments.length !== 4 ||
-    pathSegments[0] !== EXPECTED_ADO_ORG ||
-    pathSegments[2] !== "_build" ||
-    pathSegments[3] !== "results"
-  ) {
-    throw new Error(
-      `Unexpected Azure DevOps path in details_url '${detailsUrl}' (expected /${EXPECTED_ADO_ORG}/<project>/_build/results)`,
-    );
-  }
+    const pathSegments = parsedUrl.pathname.split("/").filter((segment) => segment.length > 0);
+    if (
+        pathSegments.length !== 4 ||
+        pathSegments[0] !== EXPECTED_ADO_ORG ||
+        pathSegments[2] !== "_build" ||
+        pathSegments[3] !== "results"
+    ) {
+        throw new Error(
+            `Unexpected Azure DevOps path in details_url '${detailsUrl}' (expected /${EXPECTED_ADO_ORG}/<project>/_build/results)`,
+        );
+    }
 
-  const project = pathSegments[1];
-  if (!/^[A-Za-z0-9-]+$/.test(project)) {
-    throw new Error(`Invalid Azure DevOps project identifier '${project}' in details_url`);
-  }
+    const project = pathSegments[1];
+    if (!/^[A-Za-z0-9-]+$/.test(project)) {
+        throw new Error(`Invalid Azure DevOps project identifier '${project}' in details_url`);
+    }
 
-  const buildId = parsedUrl.searchParams.get("buildId") ?? "";
-  if (!/^[1-9]\d*$/.test(buildId)) {
-    throw new Error(`Invalid or non-numeric buildId '${buildId}' in details_url '${detailsUrl}'`);
-  }
+    const buildId = parsedUrl.searchParams.get("buildId") ?? "";
+    if (!/^[1-9]\d*$/.test(buildId)) {
+        throw new Error(
+            `Invalid or non-numeric buildId '${buildId}' in details_url '${detailsUrl}'`,
+        );
+    }
+    if (!externalId) {
+        throw new Error("Missing check_run.external_id for SDK Validation - .NET");
+    }
 
-  if (!externalId) {
-    throw new Error("Missing check_run.external_id for SDK Validation - .NET");
-  }
+    const externalParts = externalId.split("|");
+    if (externalParts.length !== 3 || externalParts.some((part) => part.length === 0)) {
+        throw new Error(
+            `Malformed check_run.external_id '${externalId}' (expected <definitionId>|<buildId>|<projectId>)`,
+        );
+    }
+    const [definitionId, externalBuildId, externalProjectId] = externalParts;
+    if (definitionId !== String(EXPECTED_ADO_DEFINITION_ID)) {
+        throw new Error(
+            `Unexpected Azure Pipelines definition ID '${definitionId}' (expected '${EXPECTED_ADO_DEFINITION_ID}')`,
+        );
+    }
+    if (externalBuildId !== buildId) {
+        throw new Error(
+            `Mismatch between details_url buildId '${buildId}' and check_run.external_id '${externalId}'`,
+        );
+    }
+    if (externalProjectId !== project) {
+        throw new Error(
+            `Mismatch between details_url project '${project}' and check_run.external_id '${externalId}'`,
+        );
+    }
 
-  const externalParts = externalId.split("|");
-  if (externalParts.length !== 3 || externalParts.some((part) => part.length === 0)) {
-    throw new Error(
-      `Malformed check_run.external_id '${externalId}' (expected <definitionId>|<buildId>|<projectId>)`,
-    );
-  }
-  const [definitionId, externalBuildId, externalProjectId] = externalParts;
-  if (definitionId !== String(EXPECTED_ADO_DEFINITION_ID)) {
-    throw new Error(
-      `Unexpected Azure Pipelines definition ID '${definitionId}' (expected '${EXPECTED_ADO_DEFINITION_ID}')`,
-    );
-  }
-  if (externalBuildId !== buildId) {
-    throw new Error(
-      `Mismatch between details_url buildId '${buildId}' and check_run.external_id '${externalId}'`,
-    );
-  }
-  if (externalProjectId !== project) {
-    throw new Error(
-      `Mismatch between details_url project '${project}' and check_run.external_id '${externalId}'`,
-    );
-  }
-
-  return {
-    projectUrl: `https://${EXPECTED_ADO_HOST}/${EXPECTED_ADO_ORG}/${project}`,
-    organization: EXPECTED_ADO_ORG,
-    project,
-    buildId,
-  };
+    return {
+        projectUrl: `https://${EXPECTED_ADO_HOST}/${EXPECTED_ADO_ORG}/${project}`,
+        organization: EXPECTED_ADO_ORG,
+        project,
+        buildId,
+    };
 }
 
-/**
- * Validates the `check_run` event payload for `SDK Validation - .NET` from `Azure Pipelines`.
- * Returns `undefined` when the event is for a different check name or app so the workflow
- * can exit cleanly without failing unrelated check runs.
- */
 export function validateCheckRunEventPayload(payload: unknown): {
-  matched: boolean;
-  reason?: string;
-  event?: ValidatedCheckRunEvent;
+    matched: boolean;
+    reason?: string;
+    event?: ValidatedCheckRunEvent;
 } {
-  const parsed = CheckRunEventPayloadSchema.safeParse(payload);
-  if (!parsed.success) {
-    return {
-      matched: false,
-      reason: `Event payload does not match check_run schema: ${parsed.error.message}`,
-    };
-  }
+    const parsed = CheckRunEventPayloadSchema.safeParse(payload);
+    if (!parsed.success) {
+        return {
+            matched: false,
+            reason: `Event payload does not match check_run schema: ${parsed.error.message}`,
+        };
+    }
 
-  const checkRun = parsed.data.check_run;
-  if (checkRun.name !== EXPECTED_DOTNET_CHECK_NAME) {
-    return {
-      matched: false,
-      reason: `Ignoring check_run '${checkRun.name}' (expected '${EXPECTED_DOTNET_CHECK_NAME}')`,
-    };
-  }
+    const checkRun = parsed.data.check_run;
+    if (checkRun.name !== EXPECTED_DOTNET_CHECK_NAME) {
+        return {
+            matched: false,
+            reason: `Ignoring check_run '${checkRun.name}' (expected '${EXPECTED_DOTNET_CHECK_NAME}')`,
+        };
+    }
 
-  const appName = checkRun.app?.name ?? checkRun.check_suite?.app?.name;
-  const appSlug = checkRun.app?.slug ?? checkRun.check_suite?.app?.slug;
-  if (appName !== EXPECTED_AZURE_PIPELINES_APP_NAME) {
-    return {
-      matched: false,
-      reason: `Ignoring check_run from app '${appName ?? "missing"}' (expected '${EXPECTED_AZURE_PIPELINES_APP_NAME}')`,
-    };
-  }
-  if (appSlug !== EXPECTED_AZURE_PIPELINES_APP_SLUG) {
-    return {
-      matched: false,
-      reason: `Ignoring check_run from app slug '${appSlug ?? "missing"}' (expected '${EXPECTED_AZURE_PIPELINES_APP_SLUG}')`,
-    };
-  }
-  if (checkRun.status !== "completed") {
-    return {
-      matched: false,
-      reason: `Ignoring non-terminal check_run with status '${checkRun.status ?? "unknown"}'`,
-    };
-  }
+    const appName = checkRun.app?.name ?? checkRun.check_suite?.app?.name;
+    const appSlug = checkRun.app?.slug ?? checkRun.check_suite?.app?.slug;
+    if (appName !== EXPECTED_AZURE_PIPELINES_APP_NAME) {
+        return {
+            matched: false,
+            reason: `Ignoring check_run from app '${appName ?? "missing"}' (expected '${EXPECTED_AZURE_PIPELINES_APP_NAME}')`,
+        };
+    }
+    if (appSlug !== EXPECTED_AZURE_PIPELINES_APP_SLUG) {
+        return {
+            matched: false,
+            reason: `Ignoring check_run from app slug '${appSlug ?? "missing"}' (expected '${EXPECTED_AZURE_PIPELINES_APP_SLUG}')`,
+        };
+    }
+    if (checkRun.status !== "completed") {
+        return {
+            matched: false,
+            reason: `Ignoring non-terminal check_run with status '${checkRun.status ?? "unknown"}'`,
+        };
+    }
 
-  const adoBuild = parseAndValidateAdoBuildDetailsUrl(checkRun.details_url, checkRun.external_id);
-  const eventPrNumbers = (checkRun.pull_requests ?? []).map((pr) => pr.number);
-
-  return {
-    matched: true,
-    event: {
-      checkName: checkRun.name,
-      headSha: checkRun.head_sha,
-      conclusion: checkRun.conclusion,
-      adoBuild,
-      eventPrNumbers,
-    },
-  };
+    return {
+        matched: true,
+        event: {
+            checkName: checkRun.name,
+            headSha: checkRun.head_sha,
+            conclusion: checkRun.conclusion,
+            adoBuild: parseAndValidateAdoBuildDetailsUrl(
+                checkRun.details_url,
+                checkRun.external_id,
+            ),
+            eventPrNumbers: (checkRun.pull_requests ?? []).map((pr) => pr.number),
+        },
+    };
 }
 
 function validatePullRequestRepository(
-  context: Context,
-  prNumber: number,
-  pullRequest: {
-    base: { repo?: { full_name?: string | null } | null };
-  },
+    context: Context,
+    prNumber: number,
+    pullRequest: {
+        base: { repo?: { full_name?: string | null } | null };
+    },
 ): void {
-  const expectedRepository = `${context.repo.owner}/${context.repo.repo}`;
-  const actualRepository = pullRequest.base.repo?.full_name;
-  if (actualRepository && actualRepository.toLowerCase() !== expectedRepository.toLowerCase()) {
-    throw new Error(`PR #${prNumber} targets '${actualRepository}', not '${expectedRepository}'`);
-  }
-}
-
-/**
- * Resolves a candidate file path inside `baseDir` and throws if it escapes `baseDir`.
- */
-export function resolveSafeChildPath(baseDir: string, relativeFileName: string): string {
-  if (!isSafeRelativePosixPath(relativeFileName) || relativeFileName.includes("/")) {
-    throw new Error(`Unsafe bundle file name '${relativeFileName}'`);
-  }
-  const resolvedBase = path.resolve(baseDir);
-  const resolvedTarget = path.resolve(resolvedBase, relativeFileName);
-  const relative = path.relative(resolvedBase, resolvedTarget);
-  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
-    throw new Error(`Bundle file path '${relativeFileName}' escapes '${resolvedBase}'`);
-  }
-  return resolvedTarget;
-}
-
-/**
- * Validates the parsed review bundle manifest against the check_run event and build metadata.
- */
-export function verifyManifestAgainstCheckRun(
-  manifest: SdkReviewBundleManifest,
-  event: ValidatedCheckRunEvent,
-): number {
-  if (manifest.sdkLanguage !== SdkName.Net || manifest.sdkRepoName !== SdkName.Net) {
-    throw new Error(
-      `Unexpected SDK language/repo in manifest: ${manifest.sdkLanguage} / ${manifest.sdkRepoName}`,
-    );
-  }
-
-  if (manifest.specHeadSha.toLowerCase() !== event.headSha.toLowerCase()) {
-    throw new Error(
-      `Manifest specHeadSha '${manifest.specHeadSha}' does not match check_run.head_sha '${event.headSha}'`,
-    );
-  }
-
-  if (manifest.buildId && manifest.buildId !== event.adoBuild.buildId) {
-    throw new Error(
-      `Manifest buildId '${manifest.buildId}' does not match check_run buildId '${event.adoBuild.buildId}'`,
-    );
-  }
-
-  const prNumber = Number.parseInt(manifest.specPrNumber, 10);
-  if (!Number.isSafeInteger(prNumber) || prNumber <= 0) {
-    throw new Error(`Invalid specPrNumber '${manifest.specPrNumber}' in manifest`);
-  }
-
-  if (event.eventPrNumbers.length > 0 && !event.eventPrNumbers.includes(prNumber)) {
-    throw new Error(
-      `Manifest specPrNumber #${prNumber} is not in check_run.pull_requests [${event.eventPrNumbers.join(", ")}]`,
-    );
-  }
-
-  if (manifest.captureStatus === "failed") {
-    throw new Error(
-      `SDK review bundle capture failed for build ${event.adoBuild.buildId}: ${manifest.captureErrors.join("; ")}`,
-    );
-  }
-
-  const seenEntryIds = new Set<string>();
-  const seenPatchFiles = new Set<string>();
-  let totalChangedFileCount = 0;
-  let totalPatchBytes = 0;
-  for (const entry of manifest.entries) {
-    if (seenEntryIds.has(entry.entryId)) {
-      throw new Error(`Duplicate entryId '${entry.entryId}' in review bundle manifest`);
-    }
-    seenEntryIds.add(entry.entryId);
-
-    if (entry.changedFileCount !== entry.changedFiles.length) {
-      throw new Error(
-        `Entry '${entry.entryId}' changedFileCount (${entry.changedFileCount}) does not match changedFiles length (${entry.changedFiles.length})`,
-      );
-    }
-
-    const seenChangedFiles = new Set<string>();
-    for (const changedFile of entry.changedFiles) {
-      if (!changedFile.startsWith(`${entry.packageRootPath}/`)) {
+    const expectedRepository = `${context.repo.owner}/${context.repo.repo}`;
+    const actualRepository = pullRequest.base.repo?.full_name;
+    if (actualRepository && actualRepository.toLowerCase() !== expectedRepository.toLowerCase()) {
         throw new Error(
-          `Entry '${entry.entryId}' changed file '${changedFile}' is not a strict descendant of packageRootPath '${entry.packageRootPath}'`,
+            `PR #${prNumber} targets '${actualRepository}', not '${expectedRepository}'`,
         );
-      }
-      if (seenChangedFiles.has(changedFile)) {
-        throw new Error(`Entry '${entry.entryId}' has duplicate changed file '${changedFile}'`);
-      }
-      seenChangedFiles.add(changedFile);
     }
-
-    if (!hasSdkReviewBundlePatch(entry)) {
-      continue;
-    }
-    if (seenPatchFiles.has(entry.patchFile)) {
-      throw new Error(`Duplicate patchFile '${entry.patchFile}' in review bundle manifest`);
-    }
-    seenPatchFiles.add(entry.patchFile);
-    if (entry.patchBytes > MAX_SDK_REVIEW_PATCH_BYTES) {
-      throw new Error(
-        `Entry '${entry.entryId}' patchBytes (${entry.patchBytes}) exceeds ${MAX_SDK_REVIEW_PATCH_BYTES}`,
-      );
-    }
-    totalChangedFileCount += entry.changedFiles.length;
-    totalPatchBytes += entry.patchBytes;
-  }
-
-  if (manifest.entries.length > SDK_REVIEW_BUNDLE_MAX_ENTRIES) {
-    throw new Error(`Manifest exceeds ${SDK_REVIEW_BUNDLE_MAX_ENTRIES} entries`);
-  }
-  if (totalChangedFileCount > SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES) {
-    throw new Error(
-      `Manifest has ${totalChangedFileCount} changed files; maximum is ${SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES}`,
-    );
-  }
-  if (totalPatchBytes > MAX_SDK_REVIEW_TOTAL_PATCH_BYTES) {
-    throw new Error(
-      `Manifest declares ${totalPatchBytes} patch bytes; maximum is ${MAX_SDK_REVIEW_TOTAL_PATCH_BYTES}`,
-    );
-  }
-
-  return prNumber;
 }
 
-function validateArchiveEntryName(name: string): void {
-  if (
-    !name ||
-    name === "." ||
-    name === ".." ||
-    name.startsWith("/") ||
-    name.includes("/") ||
-    name.includes("\\") ||
-    /^[A-Za-z]:/.test(name) ||
-    /[\u0000-\u001f\u007f]/.test(name)
-  ) {
-    throw new Error(`Unsafe ZIP entry '${name}'`);
-  }
-}
-
-export function extractAndValidateSdkReviewBundleArchive(
-  archiveBytes: Uint8Array,
-): ValidatedArchiveBundle {
-  const seenEntryNames = new Map<string, string>();
-  const extractedFiles = new Map<string, Uint8Array>();
-  let totalExpandedBytes = 0;
-  let entryCount = 0;
-
-  const unzip = new Unzip((file) => {
-    validateArchiveEntryName(file.name);
-    const normalizedName = file.name.toLowerCase();
-    if (seenEntryNames.has(normalizedName)) {
-      throw new Error(`Duplicate ZIP entry '${file.name}'`);
+export function verifyReviewInputAgainstCheckRun(
+    artifact: SpecGenSdkArtifactInfo,
+    event: ValidatedCheckRunEvent,
+): number {
+    if (artifact.language !== SdkName.Net) {
+        throw new Error(
+            `Unexpected SDK language '${artifact.language}' in spec generation artifact`,
+        );
     }
-    seenEntryNames.set(normalizedName, file.name);
-    entryCount += 1;
-    if (entryCount > SDK_REVIEW_BUNDLE_MAX_ENTRIES + 1) {
-      throw new Error(`ZIP has more than ${SDK_REVIEW_BUNDLE_MAX_ENTRIES + 1} entries`);
+    if (!/^[0-9a-f]{40}$/i.test(artifact.headSha)) {
+        throw new Error(`Invalid headSha '${artifact.headSha}' in spec generation artifact`);
+    }
+    if (artifact.headSha.toLowerCase() !== event.headSha.toLowerCase()) {
+        throw new Error(
+            `Artifact headSha '${artifact.headSha}' does not match check_run.head_sha '${event.headSha}'`,
+        );
     }
 
-    const chunks: Uint8Array[] = [];
-    let fileExpandedBytes = 0;
-    const maxFileBytes =
-      file.name === SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME
-        ? MAX_SDK_REVIEW_MANIFEST_BYTES
-        : MAX_SDK_REVIEW_PATCH_BYTES;
-    file.ondata = (error, chunk, final) => {
-      if (error) {
-        throw error;
-      }
-      fileExpandedBytes += chunk.byteLength;
-      totalExpandedBytes += chunk.byteLength;
-      if (fileExpandedBytes > maxFileBytes) {
-        throw new Error(`ZIP entry '${file.name}' exceeds ${maxFileBytes} bytes`);
-      }
-      if (totalExpandedBytes > MAX_SDK_REVIEW_EXPANDED_BYTES) {
-        throw new Error(`ZIP expanded content exceeds ${MAX_SDK_REVIEW_EXPANDED_BYTES} bytes`);
-      }
-      if (chunk.byteLength > 0) {
-        chunks.push(chunk.slice());
-      }
-      if (final) {
-        const fileBytes = new Uint8Array(fileExpandedBytes);
-        let offset = 0;
-        for (const fileChunk of chunks) {
-          fileBytes.set(fileChunk, offset);
-          offset += fileChunk.byteLength;
+    const prNumber = Number.parseInt(artifact.prNumber ?? "", 10);
+    if (!Number.isSafeInteger(prNumber) || prNumber <= 0) {
+        throw new Error(
+            `Invalid prNumber '${artifact.prNumber ?? ""}' in spec generation artifact`,
+        );
+    }
+    if (event.eventPrNumbers.length > 0 && !event.eventPrNumbers.includes(prNumber)) {
+        throw new Error(
+            `Artifact PR #${prNumber} is not in check_run.pull_requests [${event.eventPrNumbers.join(", ")}]`,
+        );
+    }
+    if (artifact.apiViewRequestData.length > MAX_SDK_REVIEW_PACKAGES) {
+        throw new Error(
+            `Artifact has ${artifact.apiViewRequestData.length} APIView entries; maximum is ${MAX_SDK_REVIEW_PACKAGES}`,
+        );
+    }
+
+    const seenPackages = new Set<string>();
+    for (const request of artifact.apiViewRequestData) {
+        if (!request.packageRootPath || !request.changedFiles) {
+            throw new Error(
+                `APIView entry '${request.packageName}' is missing packageRootPath or changedFiles`,
+            );
         }
-        extractedFiles.set(file.name, fileBytes);
-      }
-    };
-    file.start();
-  });
-  unzip.register(UnzipInflate);
-  unzip.push(archiveBytes, true);
+        if (!isSafeRelativePosixPath(request.filePath)) {
+            throw new Error(
+                `APIView entry '${request.packageName}' has unsafe artifact path '${request.filePath}'`,
+            );
+        }
+        if (seenPackages.has(request.packageName)) {
+            throw new Error(`Duplicate APIView package '${request.packageName}'`);
+        }
+        seenPackages.add(request.packageName);
+    }
 
-  if (extractedFiles.size !== entryCount) {
-    throw new Error("ZIP archive contains an incomplete entry");
-  }
-
-  const manifestBytes = extractedFiles.get(SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME);
-  if (!manifestBytes) {
-    throw new Error(`Missing '${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}' in artifact archive`);
-  }
-
-  let parsedJson: unknown;
-  try {
-    parsedJson = JSON.parse(new TextDecoder().decode(manifestBytes));
-  } catch (error) {
-    throw new Error(`Invalid JSON in '${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}'`, { cause: error });
-  }
-  const manifest = SdkReviewBundleManifestSchema.parse(parsedJson);
-  const expectedFiles = new Set([SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME]);
-  for (const entry of manifest.entries) {
-    if (!hasSdkReviewBundlePatch(entry)) {
-      continue;
-    }
-    expectedFiles.add(entry.patchFile);
-    const actualFileName = seenEntryNames.get(entry.patchFile.toLowerCase());
-    const patchBytes = extractedFiles.get(entry.patchFile);
-    if (actualFileName !== entry.patchFile || !patchBytes) {
-      throw new Error(`Missing declared patch '${entry.patchFile}' in artifact archive`);
-    }
-    if (patchBytes.byteLength !== entry.patchBytes) {
-      throw new Error(
-        `Patch size mismatch for '${entry.patchFile}': expected ${entry.patchBytes} bytes, got ${patchBytes.byteLength}`,
-      );
-    }
-  }
-  for (const fileName of extractedFiles.keys()) {
-    if (!expectedFiles.has(fileName)) {
-      throw new Error(`Unexpected ZIP entry '${fileName}'`);
-    }
-  }
-
-  const files = new Map<string, Uint8Array>();
-  for (const fileName of expectedFiles) {
-    const fileBytes = extractedFiles.get(fileName);
-    if (!fileBytes) {
-      throw new Error(`Missing ZIP entry '${fileName}'`);
-    }
-    files.set(fileName, fileBytes);
-  }
-  return { manifest, files };
+    return prNumber;
 }
 
-export function verifyPatchPaths(entry: NonEmptySdkReviewBundleEntry, patchText: string): void {
-  const patchFiles = new Set<string>();
-  for (const line of patchText.split(/\r?\n/)) {
-    if (!line.startsWith("diff --git ")) {
-      continue;
-    }
-
-    const header = line.slice("diff --git ".length);
-    if (header.includes('"')) {
-      throw new Error(`Patch '${entry.patchFile}' uses unsupported quoted diff paths`);
-    }
-    const matchedFile = entry.changedFiles.find(
-      (changedFile) => header === `a/${changedFile} b/${changedFile}`,
-    );
-    if (!matchedFile) {
-      throw new Error(
-        `Patch '${entry.patchFile}' has an undeclared, renamed, or unsupported diff header '${line}'`,
-      );
-    }
-    if (!isSafeRelativePosixPath(matchedFile)) {
-      throw new Error(`Patch '${entry.patchFile}' contains an unsafe diff path '${matchedFile}'`);
-    }
-    if (patchFiles.has(matchedFile)) {
-      throw new Error(`Patch '${entry.patchFile}' contains duplicate diff path '${matchedFile}'`);
-    }
-    patchFiles.add(matchedFile);
-  }
-
-  const declaredFiles = new Set(entry.changedFiles);
-  const undeclaredFiles = [...patchFiles].filter((filePath) => !declaredFiles.has(filePath));
-  const missingFiles = entry.changedFiles.filter((filePath) => !patchFiles.has(filePath));
-  if (patchFiles.size === 0 && patchText.trim().length > 0) {
-    throw new Error(`Patch '${entry.patchFile}' has content without a diff header`);
-  }
-  if (undeclaredFiles.length > 0 || missingFiles.length > 0) {
-    throw new Error(
-      `Patch '${entry.patchFile}' paths do not match changedFiles (undeclared: ${undeclaredFiles.join(", ") || "none"}; missing: ${missingFiles.join(", ") || "none"})`,
-    );
-  }
-}
-
-/**
- * Verifies with the GitHub Pulls API that the pull request is open in the current
- * repository and its current head SHA still matches `expectedHeadSha`.
- */
 export async function verifyPullRequestFreshness(params: {
-  github: GitHub;
-  context: Context;
-  prNumber: number;
-  expectedHeadSha: string;
+    github: GitHub;
+    context: Context;
+    prNumber: number;
+    expectedHeadSha: string;
 }): Promise<{ currentHeadSha: string; isFresh: boolean; state: string }> {
-  const { github, context, prNumber, expectedHeadSha } = params;
-  const { data: pullRequest } = await github.rest.pulls.get({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    pull_number: prNumber,
-  });
+    const { github, context, prNumber, expectedHeadSha } = params;
+    const { data: pullRequest } = await github.rest.pulls.get({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        pull_number: prNumber,
+    });
 
-  validatePullRequestRepository(context, prNumber, pullRequest);
-
-  const currentHeadSha = pullRequest.head.sha;
-  const isFresh =
-    pullRequest.state === "open" && currentHeadSha.toLowerCase() === expectedHeadSha.toLowerCase();
-
-  return {
-    currentHeadSha,
-    isFresh,
-    state: pullRequest.state,
-  };
+    validatePullRequestRepository(context, prNumber, pullRequest);
+    const currentHeadSha = pullRequest.head.sha;
+    return {
+        currentHeadSha,
+        isFresh:
+            pullRequest.state === "open" &&
+            currentHeadSha.toLowerCase() === expectedHeadSha.toLowerCase(),
+        state: pullRequest.state,
+    };
 }
 
-/**
- * Renders a deterministic markdown summary for the report-only handoff workflow.
- */
 export function formatReviewHandoffSummary(params: {
-  event: ValidatedCheckRunEvent;
-  manifest: CompleteSdkReviewBundleManifest;
-  prNumber: number;
-  downloadedEntries: DownloadedBundleEntry[];
+    event: ValidatedCheckRunEvent;
+    artifact: SpecGenSdkArtifactInfo;
+    prNumber: number;
 }): string {
-  const { event, manifest, prNumber, downloadedEntries } = params;
-  const lines = [
-    "## SDK Validation - .NET Review Bundle Handoff (Report-Only)",
-    "",
-    `- **Spec PR**: #${prNumber}`,
-    `- **Spec Head SHA**: \`${manifest.specHeadSha}\``,
-    `- **Azure Pipelines Build ID**: \`${event.adoBuild.buildId}\``,
-    `- **Check Conclusion**: \`${event.conclusion ?? "unknown"}\``,
-    `- **SDK Repository**: \`${manifest.sdkRepoName}\``,
-    `- **Captured Package Entries**: ${downloadedEntries.length}`,
-    "",
-    "| Entry ID | Package | SDK Base Commit | Result | Changed Files | Patch Bytes |",
-    "| --- | --- | --- | --- | ---: | ---: |",
-  ];
+    const { event, artifact, prNumber } = params;
+    const lines = [
+        "## SDK Validation - .NET Naming Review Input (Report-Only)",
+        "",
+        `- **Spec PR**: #${prNumber}`,
+        `- **Spec Head SHA**: \`${artifact.headSha}\``,
+        `- **Azure Pipelines Build ID**: \`${event.adoBuild.buildId}\``,
+        `- **Check Conclusion**: \`${event.conclusion ?? "unknown"}\``,
+        `- **APIView Package Entries**: ${artifact.apiViewRequestData.length}`,
+        "",
+        "| Package | Package Root | Changed Files | APIView Artifact |",
+        "| --- | --- | ---: | --- |",
+    ];
 
-  for (const { entry } of downloadedEntries) {
-    const patchBytes = hasSdkReviewBundlePatch(entry) ? String(entry.patchBytes) : "N/A";
-    lines.push(
-      `| \`${entry.entryId}\` | \`${entry.packageName}\` (\`${entry.packageRootPath}\`) | \`${entry.sdkBaseCommitSha.slice(0, 12)}\` | \`${entry.executionResult}\` | ${entry.changedFileCount} | ${patchBytes} |`,
-    );
-  }
+    for (const request of artifact.apiViewRequestData) {
+        lines.push(
+            `| \`${request.packageName}\` | \`${request.packageRootPath}\` | ${request.changedFiles?.length ?? 0} | \`${request.filePath}\` |`,
+        );
+    }
 
-  return `${lines.join("\n")}\n`;
+    return `${lines.join("\n")}\n`;
 }
 
 export type RunSdkValidationDotnetReviewHandoffOptions = {
-  github: GitHub;
-  context: Context;
-  core: Core;
-  outputRootDir?: string;
-  token?: string;
-  retryOptions?: RetryOptions;
+    github: GitHub;
+    context: Context;
+    core: Core;
+    outputRootDir?: string;
+    token?: string;
+    retryOptions?: RetryOptions;
 };
 
-/**
- * Executes the consumer-side handoff validation and artifact download for
- * `SDK Validation - .NET` in report-only mode (no PR comments or issue mutations).
- */
 export async function runSdkValidationDotnetReviewHandoffImpl(
-  options: RunSdkValidationDotnetReviewHandoffOptions,
+    options: RunSdkValidationDotnetReviewHandoffOptions,
 ): Promise<SdkReviewHandoffResult> {
-  const {
-    github,
-    context,
-    core,
-    outputRootDir = path.join(process.cwd(), "out", "sdk-review-handoff"),
-    token = process.env.ADO_TOKEN,
-    retryOptions,
-  } = options;
+    const {
+        github,
+        context,
+        core,
+        outputRootDir = path.join(process.cwd(), "out", "sdk-review-handoff"),
+        token = process.env.ADO_TOKEN,
+        retryOptions,
+    } = options;
 
-  const eventValidation = validateCheckRunEventPayload(context.payload);
-  if (!eventValidation.matched || !eventValidation.event) {
-    const reason = eventValidation.reason ?? "Check run did not match target filter";
-    core.info(reason);
-    return {
-      status: "skipped",
-      reason,
-      entryCount: 0,
-    };
-  }
+    const eventValidation = validateCheckRunEventPayload(context.payload);
+    if (!eventValidation.matched || !eventValidation.event) {
+        const reason = eventValidation.reason ?? "Check run did not match target filter";
+        core.info(reason);
+        return { status: "skipped", reason, entryCount: 0 };
+    }
 
-  const event = eventValidation.event;
-  core.info(
-    `Validated check_run '${event.checkName}' for head '${event.headSha}' and Azure Pipelines build '${event.adoBuild.buildId}'`,
-  );
+    const event = eventValidation.event;
+    if (event.eventPrNumbers.length > 0) {
+        const primaryPrNumber = event.eventPrNumbers[0];
+        const prStatus = await verifyPullRequestFreshness({
+            github,
+            context,
+            prNumber: primaryPrNumber,
+            expectedHeadSha: event.headSha,
+        });
+        if (!prStatus.isFresh) {
+            const reason = `Skipping stale or closed PR #${primaryPrNumber}: state='${prStatus.state}', currentHeadSha='${prStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
+            core.info(reason);
+            return {
+                status: "skipped",
+                reason,
+                buildId: event.adoBuild.buildId,
+                prNumber: primaryPrNumber,
+                headSha: event.headSha,
+                entryCount: 0,
+            };
+        }
+    }
 
-  // If check_run.pull_requests is populated in the event payload, pre-check PR freshness
-  // before downloading artifacts from Azure DevOps.
-  if (event.eventPrNumbers.length > 0) {
-    const primaryPrNumber = event.eventPrNumbers[0];
+    const artifactResolution = await resolveAzurePipelineArtifact({
+        ado_project_url: event.adoBuild.projectUrl,
+        ado_build_id: event.adoBuild.buildId,
+        artifactName: SPEC_GEN_SDK_ARTIFACT_NAME,
+        token,
+        core,
+        fallbackToFailedArtifact: true,
+        retryOptions,
+    });
+    if (artifactResolution.status === "not-found") {
+        const reason = `No '${SPEC_GEN_SDK_ARTIFACT_NAME}' artifact found on build ${event.adoBuild.buildId}`;
+        core.info(reason);
+        return {
+            status: "skipped",
+            reason,
+            buildId: event.adoBuild.buildId,
+            headSha: event.headSha,
+            entryCount: 0,
+        };
+    }
+
+    const artifactData = await downloadAzurePipelineArtifactFile({
+        artifact: artifactResolution.artifact,
+        artifactFileName: SPEC_GEN_SDK_ARTIFACT_FILE_NAME,
+        retryOptions,
+        maxBytes: MAX_SPEC_GEN_SDK_ARTIFACT_BYTES,
+    });
+
+    let parsedArtifact: unknown;
+    try {
+        parsedArtifact = JSON.parse(artifactData);
+    } catch (error) {
+        throw new Error(`Invalid JSON in '${SPEC_GEN_SDK_ARTIFACT_FILE_NAME}'`, { cause: error });
+    }
+    const artifact = SpecGenSdkArtifactInfoSchema.parse(parsedArtifact);
+    const prNumber = verifyReviewInputAgainstCheckRun(artifact, event);
+
     const prStatus = await verifyPullRequestFreshness({
-      github,
-      context,
-      prNumber: primaryPrNumber,
-      expectedHeadSha: event.headSha,
+        github,
+        context,
+        prNumber,
+        expectedHeadSha: event.headSha,
     });
     if (!prStatus.isFresh) {
-      const reason = `Skipping stale or closed PR #${primaryPrNumber}: state='${prStatus.state}', currentHeadSha='${prStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
-      core.info(reason);
-      return {
-        status: "skipped",
-        reason,
-        buildId: event.adoBuild.buildId,
-        prNumber: primaryPrNumber,
-        headSha: event.headSha,
-        entryCount: 0,
-      };
+        const reason = `Skipping stale or closed PR #${prNumber}: state='${prStatus.state}', currentHeadSha='${prStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
+        core.info(reason);
+        return {
+            status: "skipped",
+            reason,
+            buildId: event.adoBuild.buildId,
+            prNumber,
+            headSha: event.headSha,
+            entryCount: 0,
+        };
     }
-  }
 
-  const artifactResolution = await resolveAzurePipelineArtifact({
-    ado_project_url: event.adoBuild.projectUrl,
-    ado_build_id: event.adoBuild.buildId,
-    artifactName: SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
-    token,
-    core,
-    fallbackToFailedArtifact: true,
-    retryOptions,
-  });
+    const inputDirectory = path.resolve(outputRootDir, `build-${event.adoBuild.buildId}`);
+    fs.mkdirSync(inputDirectory, { recursive: true });
+    const artifactPath = path.join(inputDirectory, SPEC_GEN_SDK_ARTIFACT_FILE_NAME);
+    fs.writeFileSync(artifactPath, JSON.stringify(artifact, undefined, 2), "utf8");
 
-  if (artifactResolution.status === "not-found") {
-    const reason = `No '${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}' artifact found on build ${event.adoBuild.buildId}`;
-    core.info(reason);
-    return {
-      status: "skipped",
-      reason,
-      buildId: event.adoBuild.buildId,
-      headSha: event.headSha,
-      entryCount: 0,
-    };
-  }
-
-  const archiveBytes = await downloadAzurePipelineArtifactArchive({
-    artifact: artifactResolution.artifact,
-    retryOptions,
-    maxBytes: MAX_SDK_REVIEW_ARCHIVE_BYTES,
-  });
-  const { manifest, files } = extractAndValidateSdkReviewBundleArchive(archiveBytes);
-  const prNumber = verifyManifestAgainstCheckRun(manifest, event);
-  if (manifest.captureStatus !== "complete") {
-    throw new Error(
-      `SDK review bundle capture did not complete for build ${event.adoBuild.buildId}`,
+    const summaryMarkdown = formatReviewHandoffSummary({ event, artifact, prNumber });
+    const summaryPath = path.resolve(
+        outputRootDir,
+        `build-${event.adoBuild.buildId}-review-handoff-summary.md`,
     );
-  }
+    fs.writeFileSync(summaryPath, summaryMarkdown, "utf8");
+    await core.summary.addRaw(summaryMarkdown).write();
 
-  const prStatus = await verifyPullRequestFreshness({
-    github,
-    context,
-    prNumber,
-    expectedHeadSha: event.headSha,
-  });
-  if (!prStatus.isFresh) {
-    const reason = `Skipping stale or closed PR #${prNumber}: state='${prStatus.state}', currentHeadSha='${prStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
-    core.info(reason);
+    core.setOutput("handoff_status", "validated");
+    core.setOutput("input_dir", inputDirectory);
+    core.setOutput("summary_path", summaryPath);
+    core.setOutput("pr_number", String(prNumber));
+    core.setOutput("head_sha", event.headSha);
+    core.setOutput("build_id", event.adoBuild.buildId);
+
     return {
-      status: "skipped",
-      reason,
-      buildId: event.adoBuild.buildId,
-      prNumber,
-      headSha: event.headSha,
-      entryCount: 0,
+        status: "validated",
+        buildId: event.adoBuild.buildId,
+        prNumber,
+        headSha: event.headSha,
+        inputDirectory,
+        artifactPath,
+        summaryPath,
+        entryCount: artifact.apiViewRequestData.length,
     };
-  }
-
-  const bundleDirectory = path.resolve(outputRootDir, `build-${event.adoBuild.buildId}`);
-  fs.mkdirSync(bundleDirectory, { recursive: true });
-
-  const downloadedEntries: DownloadedBundleEntry[] = [];
-  for (const entry of manifest.entries) {
-    if (!hasSdkReviewBundlePatch(entry)) {
-      downloadedEntries.push({ entry });
-      continue;
-    }
-    const localPatchPath = resolveSafeChildPath(bundleDirectory, entry.patchFile);
-    const patchBuffer = Buffer.from(files.get(entry.patchFile)!);
-    if (patchBuffer.byteLength !== entry.patchBytes) {
-      throw new Error(
-        `Patch size mismatch for '${entry.patchFile}': expected ${entry.patchBytes} bytes, got ${patchBuffer.byteLength}`,
-      );
-    }
-
-    const patchData = patchBuffer.toString("utf8");
-    verifyPatchPaths(entry, patchData);
-    downloadedEntries.push({ entry, localPatchPath });
-  }
-
-  const manifestPath = resolveSafeChildPath(bundleDirectory, SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME);
-  fs.writeFileSync(manifestPath, files.get(SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME)!);
-  for (const { entry, localPatchPath } of downloadedEntries) {
-    if (localPatchPath && hasSdkReviewBundlePatch(entry)) {
-      fs.writeFileSync(localPatchPath, files.get(entry.patchFile)!);
-    }
-  }
-
-  const summaryMarkdown = formatReviewHandoffSummary({
-    event,
-    manifest,
-    prNumber,
-    downloadedEntries,
-  });
-  const summaryPath = resolveSafeChildPath(
-    outputRootDir,
-    `build-${event.adoBuild.buildId}-review-handoff-summary.md`,
-  );
-  fs.writeFileSync(summaryPath, summaryMarkdown, "utf8");
-
-  await core.summary.addRaw(summaryMarkdown).write();
-
-  core.setOutput("handoff_status", "validated");
-  core.setOutput("bundle_dir", bundleDirectory);
-  core.setOutput("summary_path", summaryPath);
-  core.setOutput("pr_number", String(prNumber));
-  core.setOutput("head_sha", event.headSha);
-  core.setOutput("build_id", event.adoBuild.buildId);
-
-  return {
-    status: "validated",
-    buildId: event.adoBuild.buildId,
-    prNumber,
-    headSha: event.headSha,
-    bundleDirectory,
-    manifestPath,
-    summaryPath,
-    entryCount: downloadedEntries.length,
-  };
 }
 
 export default async function runSdkValidationDotnetReviewHandoff({
-  github,
-  context,
-  core,
-}: GitHubScriptArgs): Promise<SdkReviewHandoffResult> {
-  return runSdkValidationDotnetReviewHandoffImpl({
     github,
     context,
     core,
-  });
+}: GitHubScriptArgs): Promise<SdkReviewHandoffResult> {
+    return runSdkValidationDotnetReviewHandoffImpl({ github, context, core });
 }
