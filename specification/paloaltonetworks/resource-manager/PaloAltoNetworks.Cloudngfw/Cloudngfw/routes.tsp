@@ -5,11 +5,13 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 
@@ -54,5 +56,37 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
     Response = SupportInfoModel,
     Scope = SubscriptionActionScope,
     Parameters = {}
+  >;
+
+  /**
+   * Resolve a Strata Cloud Manager link code into the Strata Cloud Manager instance it is bound to,
+   * so the instance can be shown to the customer before it is committed onto a firewall.
+   */
+  @added(Versions.v2026_09_25_preview)
+  @autoRoute
+  resolveStrataCloudManager is ArmProviderActionSync<
+    Request = ScmLinkCodeRequest,
+    Response = StrataCloudManagerInstance,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
+}
+
+@armResourceOperations
+interface MarketplaceOffers {
+  /**
+   * Get a single Marketplace offer and the plans visible to the subscription.
+   */
+  @added(Versions.v2026_09_25_preview)
+  get is ArmResourceRead<OfferPlanGroup>;
+
+  /**
+   * List the Marketplace offers, and the plans within each offer, that are available to the
+   * subscription, each plan annotated with the firewall mode it provisions.
+   */
+  @added(Versions.v2026_09_25_preview)
+  listBySubscription is ArmListBySubscription<
+    OfferPlanGroup,
+    Response = ArmResponse<MarketplaceOffersResult>
   >;
 }
