@@ -4,6 +4,12 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.AIInfraOptimization;
 
+@@clientName(
+  Microsoft.AIInfraOptimization,
+  "AIInfraOptimizationMgmtClient",
+  "python"
+);
+
 @@clientName(RecommendVmSkuRequest, "RecommendVmSkuContent", "csharp");
 @@clientName(RecommendVmSkuResponse, "RecommendVmSkuResult", "csharp");
 @@clientName(

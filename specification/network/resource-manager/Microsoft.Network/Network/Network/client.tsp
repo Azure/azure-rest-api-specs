@@ -2332,6 +2332,11 @@ union ProvisioningStateUnion {
   "NetworkProxyResourceData",
   "csharp"
 );
+@@alternateType(
+  Microsoft.Network.ProxyResourceWithReadOnlyID,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
   "RequestTimeoutInSeconds",
@@ -5852,6 +5857,18 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 );
 
 @@clientName(Microsoft.Network.Resource.type, "ResourceType", "csharp");
+@@clientName(Microsoft.Network.ChildResource.type, "ResourceType", "csharp");
+@@alternateType(
+  Microsoft.Network.ChildResource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(Microsoft.Network.ProxyResource.type, "ResourceType", "csharp");
+@@alternateType(
+  Microsoft.Network.ProxyResource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
 
 @@clientName(Microsoft.Network.SubResourceModel.type, "ResourceType", "csharp");
 
@@ -6458,6 +6475,31 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 @@alternateType(
   Microsoft.Network.VpnGatewayIpConfiguration.id,
   armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosDetectionRule.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosMitigationRule.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLagLink.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLagMember.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ResourceNavigationLink.id,
+  Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(
@@ -8170,6 +8212,41 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 @@alternateType(
   Microsoft.Network.ExpressRoutePortAuthorization.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLagAuthorization.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosMitigationRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLink.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteProviderPort.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkVirtualApplianceSku.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PeerExpressRouteCircuitConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnSiteLinkConnection.etag,
   Azure.Core.eTag,
   "csharp"
 );
