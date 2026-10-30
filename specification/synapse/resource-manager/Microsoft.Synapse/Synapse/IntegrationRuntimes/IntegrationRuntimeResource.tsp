@@ -85,7 +85,8 @@ interface IntegrationRuntimeResources {
       /**
        * ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Parameter is named after the published header so the emitted OpenAPI keeps the exact If-None-Match parameter without a client-name override."
+      @header("If-None-Match")
       `If-None-Match`?: string;
     }
   >;
@@ -102,7 +103,8 @@ interface IntegrationRuntimeResources {
       /**
        * ETag of the integration runtime entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Parameter is named after the published header so the emitted OpenAPI keeps the exact If-Match parameter without a client-name override."
+      @header("If-Match")
       `If-Match`?: string;
     },
     Response =
