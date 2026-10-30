@@ -473,14 +473,12 @@ enum FileLastWrittenMode {
 /** An Access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage requires 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage requires 7 digit precision"
   @Xml.name("Start")
   @encode("rfc3339-fixed-width")
   start?: utcDateTime;
 
   /** The date-time the policy expires. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage requires 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage requires 7 digit precision"
   @Xml.name("Expiry")
   @encode("rfc3339-fixed-width")
@@ -2270,7 +2268,6 @@ alias FileHttpContentResponseHeaders = {
 
 /** File creation time header (string type, for rename/copy/symlink operations). */
 alias FileCreationTimeParameter<TDoc extends valueof string> = {
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
   @encode("rfc3339-fixed-width")
@@ -2280,7 +2277,6 @@ alias FileCreationTimeParameter<TDoc extends valueof string> = {
 
 /** File creation time header (string type, for rename/copy/symlink operations). */
 alias FileCreationTimeResponseHeader<TDoc extends valueof string> = {
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
   @encode("rfc3339-fixed-width")
@@ -2290,7 +2286,6 @@ alias FileCreationTimeResponseHeader<TDoc extends valueof string> = {
 
 /** File last write time header (string type, for rename/copy/symlink operations). */
 alias FileLastWriteTimeParameter<TDoc extends valueof string> = {
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
   @encode("rfc3339-fixed-width")
@@ -2300,7 +2295,6 @@ alias FileLastWriteTimeParameter<TDoc extends valueof string> = {
 
 /** File last write time header (string type, for rename/copy/symlink operations). */
 alias FileLastWriteTimeResponseHeader<TDoc extends valueof string> = {
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
   @encode("rfc3339-fixed-width")
@@ -2310,7 +2304,6 @@ alias FileLastWriteTimeResponseHeader<TDoc extends valueof string> = {
 
 /** File change time header (string type, for rename/copy operations). */
 alias FileChangeTimeParameter<TDoc extends valueof string> = {
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
   @encode("rfc3339-fixed-width")
@@ -2320,7 +2313,6 @@ alias FileChangeTimeParameter<TDoc extends valueof string> = {
 
 /** File change time header (string type, for rename/copy operations). */
 alias FileChangeTimeResponseHeader<TDoc extends valueof string> = {
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
   @encode("rfc3339-fixed-width")

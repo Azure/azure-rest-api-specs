@@ -497,7 +497,6 @@ model CreateSessionResponse {
   @Xml.name("Id") id?: string;
 
   /** The time when the session will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Expiration")
   expiration?: utcDateTime;
@@ -688,7 +687,6 @@ model ContainerItem {
 /** The properties of a container. */
 model ContainerProperties {
   /** The date-time that the container was last modified. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
@@ -722,7 +720,6 @@ model ContainerProperties {
   preventEncryptionScopeOverride?: boolean;
 
   /** The date-time the container was deleted. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeletedTime")
   deletedTime?: utcDateTime;
@@ -747,7 +744,6 @@ model GeoReplication {
   @Xml.name("Status") status: GeoReplicationStatusType;
 
   /** A date-time value that indicates where all primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastSyncTime")
   lastSyncTime: utcDateTime;
@@ -884,14 +880,12 @@ enum LeaseStatus {
 /** Represents an access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Start")
   @encode("rfc3339-fixed-width")
   start?: utcDateTime;
 
   /** The date-time the policy expires. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Expiry")
   @encode("rfc3339-fixed-width")
@@ -1036,13 +1030,11 @@ model BlobItem {
 @Xml.name("Properties")
 model BlobProperties {
   /** The date-time the blob was created. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Creation-Time")
   creationTime?: utcDateTime;
 
   /** The date-time the blob was last modified. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
@@ -1099,7 +1091,6 @@ model BlobProperties {
   @Xml.name("CopyProgress") copyProgress?: string;
 
   /** The copy completion date-time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("CopyCompletionTime")
   copyCompletionTime?: utcDateTime;
@@ -1117,7 +1108,6 @@ model BlobProperties {
   @Xml.name("DestinationSnapshot") destinationSnapshot?: string;
 
   /** The date-time the blob was deleted. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeletedTime")
   deletedTime?: utcDateTime;
@@ -1146,7 +1136,6 @@ model BlobProperties {
   @Xml.name("EncryptionScope") encryptionScope?: string;
 
   /** The date-time that the access tier of the blob changed. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("AccessTierChangeTime")
   accessTierChangeTime?: utcDateTime;
@@ -1155,7 +1144,6 @@ model BlobProperties {
   @Xml.name("TagCount") tagCount?: int32;
 
   /** The expiry time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Expiry-Time")
   expiresOn?: utcDateTime;
@@ -1168,13 +1156,11 @@ model BlobProperties {
   @Xml.name("RehydratePriority") rehydratePriority?: RehydratePriority;
 
   /** The date-time the blob was last accessed. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastAccessTime")
   lastAccessedOn?: utcDateTime;
 
   /** The date-time the immutability policy of the blob expires. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("ImmutabilityPolicyUntilDate")
   immutabilityPolicyExpiresOn?: utcDateTime;
@@ -1579,7 +1565,6 @@ alias BlobLayoutResponseHeaders = {
   archiveStatus?: ArchiveStatus;
 
   /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-access-tier-change-time")
   accessTierChangeTime?: utcDateTime;
@@ -1830,7 +1815,6 @@ alias RehydratePriorityResponseHeader = {
 /** The expiry time parameter. */
 alias ExpiryTimeParameter = {
   /** The date-time this blob will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-expiry-time")
   expiresOn?: utcDateTime;
@@ -1839,7 +1823,6 @@ alias ExpiryTimeParameter = {
 /** The expiry time response header. */
 alias ExpiryTimeResponseHeader = {
   /** The date-time this blob will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-expiry-time")
   expiresOn?: utcDateTime;
@@ -1848,7 +1831,6 @@ alias ExpiryTimeResponseHeader = {
 /** The immutability policy expires on response header. */
 alias ImmutabilityPolicyExpiresOnResponseHeader = {
   /** The date-time that indicates the time at which the blob immutability policy will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   immutabilityPolicyExpiresOn?: utcDateTime;
@@ -1857,7 +1839,6 @@ alias ImmutabilityPolicyExpiresOnResponseHeader = {
 /** The immutability policy expires on response header. (Internal) */
 alias ImmutabilityPolicyExpiresOnResponseHeaderPrivate = {
   /** The date-time that indicates the time at which the blob immutability policy will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @access(Access.internal)
   @header("x-ms-immutability-policy-until-date")
@@ -1867,7 +1848,6 @@ alias ImmutabilityPolicyExpiresOnResponseHeaderPrivate = {
 /** The last accessed response header. */
 alias LastAccessedResponseHeader = {
   /** The date-time value that indicates the time at which the blob was last read or written. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-last-access-time")
   lastAccessed?: utcDateTime;
@@ -1876,7 +1856,6 @@ alias LastAccessedResponseHeader = {
 /** The access tier change time response header */
 alias AccessTierChangeTimeResponseHeader = {
   /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-access-tier-change-time")
   accessTierChangeTime?: utcDateTime;
@@ -1885,7 +1864,6 @@ alias AccessTierChangeTimeResponseHeader = {
 /** The access tier change time response header */
 alias AccessTierChangeTimeResponseHeaderV2026_10_06 = {
   /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @added(Versions.v2026_10_06)
   @encode("rfc7231")
   @header("x-ms-access-tier-change-time")
@@ -1972,7 +1950,6 @@ alias CopyStatusDescriptionResponseHeader = {
 /** The copy completion time response header. */
 alias CopyCompletionTimeResponseHeader = {
   /** If this blob was the destination of a copy, specifies the completion time of the last attempted copy operation. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-copy-completion-time")
   copyCompletionTime?: utcDateTime;
@@ -2109,7 +2086,6 @@ alias CopyIdResponseHeader = {
 /** The source if unmodified since parameter. */
 alias SourceIfUnmodifiedSinceParameter = {
   /** Specify this header value to operate only on a blob if it has not been modified since the specified date-time. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-source-if-unmodified-since")
   sourceIfUnmodifiedSince?: utcDateTime;
@@ -2323,7 +2299,6 @@ alias VersionIdResponseHeaderPrivate = {
 /** The creation time response header. */
 alias CreationTimeResponseHeader = {
   /** The date-time the blob was created. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-creation-time")
   creationTime: utcDateTime;
@@ -2332,7 +2307,6 @@ alias CreationTimeResponseHeader = {
 /** The blob creation time response header. */
 alias BlobCreationTimeResponseHeader = {
   /** The date-time the blob was created. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-blob-creation-time")
   blobCreationTime?: utcDateTime;
@@ -2341,7 +2315,6 @@ alias BlobCreationTimeResponseHeader = {
 /** The last modified response header. */
 alias LastModifiedResponseHeader = {
   /** The date-time that the resource was last modified. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("Last-Modified")
   lastModified: utcDateTime;
@@ -2350,7 +2323,6 @@ alias LastModifiedResponseHeader = {
 /** The last modified response header. (Internal) */
 alias LastModifiedResponseHeaderPrivate = {
   /** The date-time that the resource was last modified. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @access(Access.internal)
   @header("Last-Modified")
@@ -2360,7 +2332,6 @@ alias LastModifiedResponseHeaderPrivate = {
 /** The Date response header. */
 alias DateResponseHeader = {
   /** Date-time value generated by the service that indicates the time at which the response was initiated. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("Date")
   date: utcDateTime;
@@ -2369,7 +2340,6 @@ alias DateResponseHeader = {
 /** The Date response header. (Internal) */
 alias DateResponseHeaderPrivate = {
   /** Date-time value generated by the service that indicates the time at which the response was initiated. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @access(Access.internal)
   @header("Date")
@@ -2480,7 +2450,6 @@ alias SourceIfNoneMatchParameter = {
 /** The source if modified since parameter. */
 alias SourceIfModifiedSinceParameter = {
   /** Specify this value to operate only on a source blob if it has been modified since the specified date-time. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @header("x-ms-source-if-modified-since")
   @encode("rfc7231")
   sourceIfModifiedSince?: utcDateTime;
@@ -2524,7 +2493,6 @@ alias ImmutabilityPolicyModeParameter = {
 /** The immutability policy expiration parameter. */
 alias ImmutabilityPolicyExpiryRequiredParameter = {
   /** The date-time that indicates the time at which the blob immutability policy will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   expiry: utcDateTime;
@@ -2533,7 +2501,6 @@ alias ImmutabilityPolicyExpiryRequiredParameter = {
 /** The immutability policy expiration parameter. */
 alias ImmutabilityPolicyExpiryParameter = {
   /** The date-time that indicates the time at which the blob immutability policy will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   immutabilityPolicyExpiry?: utcDateTime;
@@ -2938,7 +2905,6 @@ alias ObjectReplicationHeaders = {
 /** The If-Unmodified-Since header. */
 alias IfUnmodifiedSinceParameter = {
   /** Specify this value to operate only on a blob if it has not been modified since the specified date-time. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("If-Unmodified-Since")
   ifUnmodifiedSince?: utcDateTime;
@@ -2947,7 +2913,6 @@ alias IfUnmodifiedSinceParameter = {
 /** The If-Modified-Since header. */
 alias IfModifiedSinceParameter = {
   /** Specify this value to operate only on a blob if it has been modified since the specified date-time. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("If-Modified-Since")
   ifModifiedSince?: utcDateTime;
