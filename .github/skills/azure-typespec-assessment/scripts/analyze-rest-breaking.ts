@@ -25,6 +25,8 @@ type PreparationProject = import("./runtime-types.ts").PreparationProject;
 
 type SourceIndex = import("./runtime-types.ts").SourceIndex;
 
+type SchemaDirection = "request" | "response";
+
 const WIRE_CONSTRAINT_FIELDS = [
   "maximum",
   "exclusiveMaximum",
@@ -123,6 +125,58 @@ function same(left: unknown, right: unknown) {
     : canonicalJson(left) === canonicalJson(right);
 }
 
+function changedUnresolvedEvidence(before: unknown, after: unknown): boolean {
+  if (same(before, after)) return false;
+  const isObject = (value: unknown): value is Record<string, unknown> =>
+    value !== null && typeof value === "object";
+  if (
+    [before, after].some(
+      (value) =>
+        isObject(value) &&
+        (value.unresolved === true || typeof value.unresolvedReference === "string"),
+    )
+  ) {
+    return true;
+  }
+  const baseline = isObject(before) ? before : {};
+  const target = isObject(after) ? after : {};
+  return [...new Set([...Object.keys(baseline), ...Object.keys(target)])].some((key) =>
+    changedUnresolvedEvidence(baseline[key], target[key]),
+  );
+}
+
+function ambiguousVisibilityEvidence(value: unknown): boolean {
+  if (value === null || typeof value !== "object") return false;
+  if (Array.isArray(value)) return value.some(ambiguousVisibilityEvidence);
+  const record = value as Record<string, unknown>;
+  if ("readOnly" in record && typeof record.readOnly !== "boolean") return true;
+  if (
+    "mutability" in record &&
+    (!Array.isArray(record.mutability) ||
+      !record.mutability.length ||
+      record.mutability.some(
+        (item) =>
+          typeof item !== "string" || !["create", "read", "update"].includes(item.toLowerCase()),
+      ))
+  ) {
+    return true;
+  }
+  return Object.values(record).some(ambiguousVisibilityEvidence);
+}
+
+function visibleIn(schema: NormalizedSchema, direction: SchemaDirection): boolean {
+  const mutability = Array.isArray(schema.mutability)
+    ? schema.mutability
+        .filter((item): item is string => typeof item === "string")
+        .map((item) => item.toLowerCase())
+    : undefined;
+  if (direction === "request") {
+    if (schema.readOnly === true) return false;
+    return !mutability?.length || mutability.includes("create") || mutability.includes("update");
+  }
+  return !mutability?.length || mutability.includes("read");
+}
+
 function pairs(base: NormalizedAutorestOperation[], current: NormalizedAutorestOperation[]) {
   const currentByKey = new Map(current.map((item) => [logicalKey(item), item]));
   const used = new Set();
@@ -144,6 +198,7 @@ function schemaChanges(
   before: NormalizedSchema | undefined,
   after: NormalizedSchema | undefined,
   location: string = "body",
+  direction: SchemaDirection = "request",
 ): BreakingChange[] {
   if (same(before, after)) return [];
   if (!before || !after) return [{ rule: "wire-schema-changed", location }];
@@ -165,9 +220,15 @@ function schemaChanges(
     changes.push({ rule: "wire-schema-changed", location });
   }
   if (before.kind === "object" || before.kind === "intersection") {
-    const beforeProperties = new Map((before.properties ?? []).map((item) => [item.name, item]));
-    const afterProperties = new Map((after.properties ?? []).map((item) => [item.name, item]));
-    for (const property of before.properties ?? []) {
+    const beforeVisibleProperties = (before.properties ?? []).filter((item) =>
+      visibleIn(item.schema, direction),
+    );
+    const afterVisibleProperties = (after.properties ?? []).filter((item) =>
+      visibleIn(item.schema, direction),
+    );
+    const beforeProperties = new Map(beforeVisibleProperties.map((item) => [item.name, item]));
+    const afterProperties = new Map(afterVisibleProperties.map((item) => [item.name, item]));
+    for (const property of beforeVisibleProperties) {
       const current = afterProperties.get(property.name);
       if (!current) {
         changes.push({
@@ -180,10 +241,15 @@ function schemaChanges(
         changes.push({ rule: "property-required", location: `${location}.${property.name}` });
       }
       changes.push(
-        ...schemaChanges(property.schema, current.schema, `${location}.${property.name}`),
+        ...schemaChanges(
+          property.schema,
+          current.schema,
+          `${location}.${property.name}`,
+          direction,
+        ),
       );
     }
-    for (const property of after.properties ?? []) {
+    for (const property of afterVisibleProperties) {
       if (!beforeProperties.has(property.name) && property.required) {
         changes.push({ rule: "required-property-added", location: `${location}.${property.name}` });
       }
@@ -198,12 +264,14 @@ function schemaChanges(
         changes.push({ rule: "wire-schema-changed", location });
       } else {
         for (let index = 0; index < beforeParts.length; index += 1) {
-          changes.push(...schemaChanges(beforeParts[index], afterParts[index], location));
+          changes.push(
+            ...schemaChanges(beforeParts[index], afterParts[index], location, direction),
+          );
         }
       }
     }
   } else if (before.kind === "array") {
-    changes.push(...schemaChanges(before.items, after.items, `${location}[]`));
+    changes.push(...schemaChanges(before.items, after.items, `${location}[]`, direction));
   } else if (before.kind === "enum") {
     const currentValues = new Set(after.values ?? []);
     const removed = (before.values ?? []).filter((item) => !currentValues.has(item));
@@ -296,6 +364,7 @@ function description(change: BreakingChange, operationId: string) {
 function compareOperation(
   before: NormalizedAutorestOperation,
   after: NormalizedAutorestOperation | undefined,
+  newApiVersion: boolean = false,
 ): BreakingChange[] {
   if (!after) return [{ rule: "operation-removed" }];
 
@@ -320,11 +389,24 @@ function compareOperation(
       });
       continue;
     }
+    if (
+      newApiVersion &&
+      parameter.in === "query" &&
+      parameter.name === "api-version" &&
+      before.apiVersion &&
+      after.apiVersion &&
+      before.apiVersion !== after.apiVersion &&
+      parameter.required === current.required &&
+      parameter.collectionFormat === current.collectionFormat &&
+      selectorSchemaOnly(parameter.schema, current.schema, before.apiVersion, after.apiVersion)
+    ) {
+      continue;
+    }
     if (!parameter.required && current.required) {
       changes.push({ rule: "parameter-required", location: parameter.name });
     }
     if (
-      schemaChanges(parameter.schema, current.schema, parameter.name).length ||
+      schemaChanges(parameter.schema, current.schema, parameter.name, "request").length ||
       parameter.collectionFormat !== current.collectionFormat
     ) {
       changes.push({ rule: "parameter-wire-type-changed", location: parameter.name });
@@ -347,7 +429,9 @@ function compareOperation(
     if (before.request.kind !== after.request.kind)
       changes.push({ rule: "wire-schema-changed", location: "request body" });
     else if (before.request.kind === "body") {
-      changes.push(...schemaChanges(before.request.schema, after.request.schema, "request body"));
+      changes.push(
+        ...schemaChanges(before.request.schema, after.request.schema, "request body", "request"),
+      );
     } else {
       const beforeRequestMembers = before.request.members;
       const afterRequestMembers = after.request.members;
@@ -370,7 +454,7 @@ function compareOperation(
           schema: item.schema,
         })),
       } as unknown as NormalizedSchema;
-      changes.push(...schemaChanges(beforeMembers, afterMembers, "multipart request"));
+      changes.push(...schemaChanges(beforeMembers, afterMembers, "multipart request", "request"));
     }
   }
 
@@ -391,12 +475,14 @@ function compareOperation(
     if (response.statusKind !== current.statusKind) {
       changes.push({ rule: "response-classification-changed", location: response.status });
     }
-    changes.push(...schemaChanges(response.schema, current.schema, `response ${response.status}`));
+    changes.push(
+      ...schemaChanges(response.schema, current.schema, `response ${response.status}`, "response"),
+    );
     const currentHeaders = new Map(current.headers.map((item) => [item.name.toLowerCase(), item]));
     for (const header of response.headers) {
       const currentHeader = currentHeaders.get(header.name.toLowerCase());
       if (!currentHeader) changes.push({ rule: "response-header-removed", location: header.name });
-      else if (schemaChanges(header.schema, currentHeader.schema, header.name).length) {
+      else if (schemaChanges(header.schema, currentHeader.schema, header.name, "response").length) {
         changes.push({ rule: "response-header-changed", location: header.name });
       }
     }
@@ -412,6 +498,32 @@ function compareOperation(
     const key = canonicalJson(item);
     return seen.has(key) ? false : (seen.add(key), true);
   });
+}
+
+function selectorSchemaOnly(
+  before: NormalizedSchema | undefined,
+  after: NormalizedSchema | undefined,
+  baselineVersion: string,
+  targetVersion: string,
+): boolean {
+  const normalize = (schema: NormalizedSchema | undefined, version: string) => {
+    if (
+      schema?.kind !== "enum" ||
+      schema.values?.length !== 1 ||
+      schema.values[0] !== version ||
+      (schema.default !== undefined && schema.default !== version)
+    ) {
+      return undefined;
+    }
+    return {
+      ...schema,
+      values: ["<api-version>"],
+      ...(schema.default !== undefined ? { default: "<api-version>" } : {}),
+    };
+  };
+  const baseline = normalize(before, baselineVersion);
+  const target = normalize(after, targetVersion);
+  return baseline !== undefined && target !== undefined && same(baseline, target);
 }
 
 export function analyzeRestBreaking(options: {
@@ -447,11 +559,23 @@ export function analyzeRestBreaking(options: {
       const base = normalizeAutorestContract({ workRoot, artifact: baseArtifact });
       const current = normalizeAutorestContract({ workRoot, artifact: currentArtifact });
       const source = evidence(project, sourceIndex);
+      const unresolvedOperations: string[] = [];
       for (const { before, after } of pairs(base.operations, current.operations)) {
         if (!before) continue;
-        const changes = compareOperation(before, after);
+        const changes = compareOperation(
+          before,
+          after,
+          project.artifactComparison?.mode === "new-api-version",
+        );
+        if (
+          after &&
+          (changedUnresolvedEvidence(before, after) ||
+            (!same(before, after) &&
+              (ambiguousVisibilityEvidence(before) || ambiguousVisibilityEvidence(after))))
+        ) {
+          unresolvedOperations.push(before.operationId);
+        }
         if (!changes.length) continue;
-        if (project.artifactComparison?.mode === "new-api-version") continue;
         const beforeFactId = operationFact(facts, project, "baseline", before);
         const afterFactId = after ? operationFact(facts, project, "target", after) : undefined;
         for (const change of changes) {
@@ -471,6 +595,16 @@ export function analyzeRestBreaking(options: {
           const id = stableId("rest", candidate);
           candidates.push({ id, ...candidate, contractChange: change });
         }
+      }
+      if (unresolvedOperations.length) {
+        blockers.push({
+          code: "autorest-contract-unresolved",
+          projectId: project.id,
+          message:
+            `Changed AutoRest contracts for ${unresolvedOperations.length} operations in ${project.id} ` +
+            `contain unresolved references or ambiguous visibility metadata (${unresolvedOperations.slice(0, 3).join(", ")}). ` +
+            "Their effective compatibility cannot be established from incomplete contract evidence.",
+        });
       }
       analyzedProjects += 1;
     } catch (error) {

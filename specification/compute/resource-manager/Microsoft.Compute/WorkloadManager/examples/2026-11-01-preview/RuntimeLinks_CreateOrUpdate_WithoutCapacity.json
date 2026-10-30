@@ -1,0 +1,49 @@
+{
+  "title": "Create a runtime link without capacity intent",
+  "operationId": "RuntimeLinks_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-workload",
+    "spaceName": "managed-agents-prod",
+    "linkName": "without-capacity",
+    "api-version": "2026-11-01-preview",
+    "resource": {
+      "properties": {
+        "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
+        "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeLinks/without-capacity",
+        "name": "without-capacity",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeLinks",
+        "properties": {
+          "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
+          "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
+          "provisioningState": "Succeeded",
+          "state": "Pending"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/workloadSpaceOperationStatuses/00000000-0000-0000-0000-000000000014?api-version=2026-11-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeLinks/without-capacity",
+        "name": "without-capacity",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeLinks",
+        "properties": {
+          "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
+          "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
+          "provisioningState": "Accepted",
+          "state": "Pending"
+        }
+      }
+    }
+  }
+}

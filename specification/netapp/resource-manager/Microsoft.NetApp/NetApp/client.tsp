@@ -123,6 +123,42 @@ using Microsoft.NetApp;
 @@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
 @@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");
 
+@@clientName(ExternalSvm, "ExternalSVM", "go");
+@@clientName(ExternalSvmProperties, "ExternalSVMProperties", "go");
+@@clientName(ExternalSvmList, "ExternalSVMList", "go");
+@@clientName(ExternalSvms, "ExternalSVMs", "go");
+@@clientName(ExternalSvmProperties.ontapSvmName, "ontapSVMName", "go");
+@@clientName(
+  ExternalSvmProperties.svmPeerResourceIds,
+  "SVMPeerResourceIDs",
+  "go"
+);
+
+@@clientName(SvmPeer, "SVMPeer", "go");
+@@clientName(SvmPeerProperties, "SVMPeerProperties", "go");
+@@clientName(SvmPeerList, "SVMPeerList", "go");
+@@clientName(SvmPeers, "SVMPeers", "go");
+@@clientName(SvmPeerStatus, "SVMPeerStatus", "go");
+@@clientName(SvmPeerType, "SVMPeerType", "go");
+@@clientName(SvmPeerProperties.anfSvmName, "anfSVMName", "go");
+@@clientName(
+  SvmPeerProperties.externalSvmResourceId,
+  "externalSVMResourceID",
+  "go"
+);
+
+@@clientName(ExternalCacheProperties.originSvmName, "originSVMName", "go");
+@@clientName(
+  ExternalCacheConnectionProperties.externalSvmResourceId,
+  "externalSVMResourceID",
+  "go"
+);
+@@clientName(
+  ExternalCacheConnectionProperties.svmPeerResourceId,
+  "SVMPeerResourceID",
+  "go"
+);
+
 // =============================================================================
 // C# customizations (csharp scope)
 // =============================================================================
@@ -636,8 +672,14 @@ using Microsoft.NetApp;
 
 // C# property name casing fixes
 @@clientName(AccountProperties.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
+@@clientName(AccountPropertiesPatch.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
 @@clientName(QuotaReport, "NetAppVolumeQuotaReport", "csharp");
 @@clientName(QuotaReportFilterRequest, "QuotaReportFilterContent", "csharp");
+
+// Account PATCH reuses the shipped 1.18.0 ActiveDirectory/AccountEncryption types
+// (analogous to the Java alternateType above); the wire shape is unchanged.
+@@alternateType(ActiveDirectoryPatch, ActiveDirectory, "csharp");
+@@alternateType(AccountEncryptionPatch, AccountEncryption, "csharp");
 
 // C# enum-member casing fixes (formerly exposed with these spellings)
 @@clientName(ApplicationType.`SAP-HANA`, "SapHana", "csharp");

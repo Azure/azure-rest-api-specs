@@ -22,7 +22,8 @@ options:
       UpdateAgentDetailsPatchRequest: UpdateAgentDetailsOptions
       AgentsPagedResultOptimizationCandidate: OptimizationCandidatePagedResult
       RealtimeClientEventSessionUpdateSessionTruncation1: RealtimeClientEventSessionUpdateSessionTruncationRetentionRatio
-      VoiceResponseBaseObject1: VoiceResponseBaseObject
+      VoiceResponseObject: VoiceResponseObjectType
+      VoiceResponseObject1: VoiceResponseObjectType
       PickPropertiesVoiceAgentAudioConfig: VoiceAgentResponseAudioConfig
     customization-class: customizations/src/main/java/AgentsCustomizations.java
     flavor: azure
@@ -67,11 +68,12 @@ options:
     namespace: com.azure.ai.agents
     manual-entries: >-
       AgentEndpointProtocol::VOICE,
+      AgentEndpointProtocol::VOICE_CONVERSATION_ENGINE,
       AgentKind::VOICE,
       AudioTranscriptionModel,
       RealtimeSessionCreateRequestGAAudioOutputVoice,
       VoiceAgentResponseAudioConfig,
-      VoiceResponseBaseObject
+      VoiceResponseObjectType
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"

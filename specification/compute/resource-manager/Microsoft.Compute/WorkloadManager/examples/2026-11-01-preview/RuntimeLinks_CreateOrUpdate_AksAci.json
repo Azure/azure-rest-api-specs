@@ -8,7 +8,6 @@
     "linkName": "default",
     "api-version": "2026-11-01-preview",
     "resource": {
-      "location": "eastus2",
       "properties": {
         "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
         "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
@@ -25,7 +24,6 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeLinks/default",
         "name": "default",
         "type": "Microsoft.Compute/workloadSpaces/runtimeLinks",
-        "location": "eastus2",
         "properties": {
           "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
           "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
@@ -33,20 +31,20 @@
             "minimumNodes": 1,
             "maximumNodes": 100
           },
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "state": "Pending"
         }
       }
     },
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000015?api-version=2026-11-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/workloadSpaceOperationStatuses/00000000-0000-0000-0000-000000000015?api-version=2026-11-01-preview",
         "Retry-After": 10
       },
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeLinks/default",
         "name": "default",
         "type": "Microsoft.Compute/workloadSpaces/runtimeLinks",
-        "location": "eastus2",
         "properties": {
           "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
           "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
@@ -54,7 +52,8 @@
             "minimumNodes": 1,
             "maximumNodes": 100
           },
-          "provisioningState": "Provisioning"
+          "provisioningState": "Accepted",
+          "state": "Pending"
         }
       }
     }

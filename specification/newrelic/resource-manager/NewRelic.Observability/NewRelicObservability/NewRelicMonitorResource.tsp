@@ -217,6 +217,7 @@ interface NewRelicMonitorResources {
     ArmResponse<BillingInfoResponse>
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing list retains its request-body shape; preserve wire compatibility."
   @list
   @action("listConnectedPartnerResources")
   @summary("List of all active deployments that are associated with the marketplace subscription linked to the given monitor.")
