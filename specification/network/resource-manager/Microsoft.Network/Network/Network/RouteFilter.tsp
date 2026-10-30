@@ -3,27 +3,20 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * Route Filter Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model RouteFilter extends TrackedResourceWithSettableIdOptionalLocation {
-  properties?: RouteFilterPropertiesFormat;
-
+@featureFile(Features.expressRoute)
+model RouteFilter
+  is TrackedResourceWithSettableIdOptionalLocationInstance<RouteFilterPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("routeFilterName")
@@ -60,8 +53,7 @@ alias RouteFilterRuleOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface RouteFilters {
   /**

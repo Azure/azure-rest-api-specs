@@ -4,28 +4,20 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * FirewallPolicy Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model FirewallPolicy extends Common.Resource {
-  properties?: FirewallPolicyPropertiesFormat;
-
+@featureFile(Features.firewallPolicy)
+model FirewallPolicy is ResourceInstance<FirewallPolicyPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("firewallPolicyName")
@@ -41,11 +33,10 @@ model FirewallPolicy extends Common.Resource {
    * The identity of the firewall policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@featureFile(Features.firewallPolicy)
 @armResourceOperations(#{ omitTags: true })
 interface FirewallPolicies {
   /**

@@ -3,27 +3,20 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * VpnGateway Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model VpnGateway extends TrackedResourceWithSettableIdOptionalLocation {
-  properties?: VpnGatewayProperties;
-
+@featureFile(Features.virtualWAN)
+model VpnGateway
+  is TrackedResourceWithSettableIdOptionalLocationInstance<VpnGatewayProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("gatewayName")
@@ -84,8 +77,7 @@ alias VpnConnection2Ops = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface VpnGateways {
   /**
