@@ -12,6 +12,12 @@ The deterministic scripts identify review units, facts, and candidates. The Agen
 
 REST and downstream decisions are independent. A REST-compatible change can still break generated SDK users. Never use TCGC to classify REST compatibility or AutoRest to infer SDK surface.
 
+Downstream method/model candidates are supplied only after deterministic
+identity resolution. Exact cross-language definition identity and explicit
+`@renamedFrom` lineage are admissible; names, routes, shapes, property overlap,
+and contextual proximity are not. Preserve identity blockers rather than
+describing an unsupported rename or replacement.
+
 For a `new-api-version` comparison, assess substantive REST candidates as
 cross-version migration compatibility. Do not reject them merely because a
 version was added. Use the supplied previous-version and target-version

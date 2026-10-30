@@ -1055,6 +1055,7 @@ The downstream analyzer emits these candidate rules:
 | Category       | Rule                            | Detected change                                                             |
 | -------------- | ------------------------------- | --------------------------------------------------------------------------- |
 | Method         | `method-removed`                | An existing SDK method is no longer generated.                              |
+| Method         | `method-identity-changed`       | A deterministically paired method changes generated identity or name.       |
 | Method         | `method-location-changed`       | A method moves to another client or operation group.                        |
 | Method         | `method-kind-changed`           | `basic`, `paging`, `lro`, or `lropaging` changes.                           |
 | Method         | `method-parameters-changed`     | The ordered public parameter contract changes.                              |
@@ -1063,6 +1064,7 @@ The downstream analyzer emits these candidate rules:
 | Method         | `method-paging-changed`         | Language-neutral paging metadata or behavior changes.                       |
 | Method         | `method-lro-changed`            | Language-neutral long-running-operation behavior changes.                   |
 | Model          | `model-property-removed`        | A public model property is removed.                                         |
+| Model          | `model-identity-changed`        | Explicit rename lineage changes generated model identity or name.           |
 | Model          | `model-property-changed`        | Property type, optionality, flattening, or access changes.                  |
 | Model          | `model-property-added-required` | A required property is added.                                               |
 | Enum           | `enum-values-removed`           | An enum value is removed or its SDK-facing identity changes.                |
@@ -1076,6 +1078,17 @@ approves or rejects each candidate according to
 `references/downstream-breaking-cases.md`; only approved candidates become
 findings. Root causes are separate deterministic aggregation records that
 connect related candidates and facts but are not candidate rules.
+
+Method and model comparison requires deterministic identity evidence. An exact,
+unique `crossLanguageDefinitionId` pairs the same symbol across baseline and
+target. A changed identity may be paired only through unique source-owned
+`@renamedFrom` metadata whose old and new qualified declarations resolve to
+unique cross-language definitions. Generated display names, HTTP routes,
+request/response shapes, property overlap, and coincident additions/removals
+never establish identity. Missing or ambiguous evidence emits an
+evidence-backed downstream blocker and preserves the baseline/target facts
+instead of fabricating a replacement. Additions and removals remain independent
+when no canonical relationship exists.
 
 For `model-property-added-required` candidates, Agent judgment must use the
 model's effective direction:
