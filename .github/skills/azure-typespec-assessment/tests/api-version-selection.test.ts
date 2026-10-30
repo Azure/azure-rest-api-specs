@@ -26,6 +26,85 @@ void test("extracts decorated backtick members, explicit values, and mixed versi
   });
 });
 
+void test("extracts versions from a custom enum name", () => {
+  const versions = extractApiVersions([
+    `
+@versioned(ApiVersions)
+namespace Contoso;
+`,
+    `
+namespace Contoso;
+enum ApiVersions {
+  v2026_02_01_preview: "2026-02-01-preview",
+  v2026_06_01_preview: "2026-06-01-preview",
+}
+`,
+  ]);
+
+  assert.deepEqual(versions, {
+    versioned: true,
+    versions: ["2026-02-01-preview", "2026-06-01-preview"],
+  });
+});
+
+void test("resolves qualified version enum references", () => {
+  const versions = extractApiVersions([
+    `
+@versioned(Contoso.ApiVersion)
+namespace Contoso;
+
+enum ApiVersion {
+  v2025_09_01: "2025-09-01",
+  v2026_10_01_preview: "2026-10-01-preview",
+}
+`,
+    `
+namespace Fabrikam;
+enum ApiVersion {
+  v2099_01_01: "2099-01-01",
+}
+`,
+  ]);
+
+  assert.deepEqual(versions, {
+    versioned: true,
+    versions: ["2025-09-01", "2026-10-01-preview"],
+  });
+});
+
+void test("does not extract members from unrelated enums", () => {
+  const versions = extractApiVersions([
+    `
+@versioned(ApiVersions)
+namespace Contoso;
+
+enum ApiVersions {
+  v2026_01_01: "2026-01-01",
+}
+
+enum Versions {
+  v2099_01_01: "2099-01-01",
+}
+
+enum DeploymentStages {
+  preview: "preview",
+}
+`,
+  ]);
+
+  assert.deepEqual(versions, {
+    versioned: true,
+    versions: ["2026-01-01"],
+  });
+});
+
+void test("preserves support for the conventional Versions enum", () => {
+  assert.deepEqual(extractApiVersions([source('v2025_01_01: "2025-01-01",')]), {
+    versioned: true,
+    versions: ["2025-01-01"],
+  });
+});
+
 void test("selects the latest stable baseline for a newly added backtick preview version", () => {
   const base = extractApiVersions([source("`2026-04-06-preview`, `2026-06-06`,")]);
   const current = extractApiVersions([
