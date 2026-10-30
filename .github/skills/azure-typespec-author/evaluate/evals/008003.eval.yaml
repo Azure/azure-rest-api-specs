@@ -17,18 +17,18 @@ stimuli:
       mode: forced
       language: go
     prompt: |
-      @azure-typespec-author Continue TypeSpec authoring at default SDK client
+      @azure-typespec-author Continue TypeSpec authoring at default client
       configuration planning only. Analysis, intake, grounding, and the source plan are
-      complete, and the user has not opted out. The ARM SDK targets Go. Its complete
-      pre-change SDK baseline includes FooAbcOperation, DeviceRoleToR,
-      NetworkDeviceRoleToR, and NetworkDeviceRoleNameToR. The approved new identifiers are
-      BarAbcOperation in the same operation family as FooAbcOperation and
-      NetworkFabricRefreshDeviceTypesToR for a new refresh-device union variant. ABC is
-      a confirmed acronym with the same meaning in both operations. ToR means top of rack
-      in all four device-role/refresh names. The confirmed default Go names without
-      overrides are BarAbcOperation and NetworkFabricRefreshDeviceTypesToR. These new
-      names have never shipped; there are no collisions or overrides. Use the supplied facts and installed
-      naming guidance only; no network, MCP, edits, compilation, or generation.
+      complete, and the user has not opted out. The ARM TypeSpec project targets Go.
+      Before this change, the spec declares operation FooAbcOperation and union members
+      DeviceRole.ToR, NetworkDeviceRole.ToR, and NetworkDeviceRoleName.ToR. The approved
+      additions are operation BarAbcOperation in the same family as FooAbcOperation and
+      union member NetworkFabricRefreshDeviceTypes.ToR. TypeSpec documentation confirms
+      ABC has the same meaning in both operations, and ToR means top of rack in all
+      four unions. The confirmed default Go names for the new targets without overrides
+      are BarAbcOperation and NetworkFabricRefreshDeviceTypesToR. There are no collisions
+      or clientName overrides. Use only these TypeSpec facts and installed naming
+      guidance; no network, MCP, edits, compilation, or generation.
       Return JSON with a top-level "names" object mapping "existingOperation",
       "newOperation", and "newDeviceType" directly to planned Go name strings. Also include
       "decorators" listing proposed casing overrides, "scope", "applied", and
