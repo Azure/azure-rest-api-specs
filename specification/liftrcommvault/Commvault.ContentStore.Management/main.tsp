@@ -402,11 +402,12 @@ union Vendor {
 @doc("Class of Commvault Storage")
 union StorageClassType {
   @doc("Cold storage class")
-  Cool: "COLD",
+  @renamedFrom(Versions.v10_preview, "Cool")
+  Cold: "COLD",
 
-  @doc("Cool storage class. Accepted as an alias of COLD; the service normalizes it to COLD.")
+  @doc("Cool (infrequent-access) storage class. This is the supported value for the infrequent-access tier. Requests that use COLD are rejected.")
   @added(Versions.v10_preview)
-  CoolInfrequent: "COOL",
+  Cool: "COOL",
 
   @doc("Hot storage class")
   Hot: "HOT",
