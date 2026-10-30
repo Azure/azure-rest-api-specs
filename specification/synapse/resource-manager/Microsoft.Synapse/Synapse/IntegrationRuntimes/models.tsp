@@ -407,6 +407,7 @@ model IntegrationRuntime {
   /**
    * Type of integration runtime.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "The published IntegrationRuntime schema uses 'type' as its polymorphic discriminator inside the resource properties bag."
   type: IntegrationRuntimeType;
 
   /**
