@@ -4648,20 +4648,17 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Operation items on this page",
+          "description": "The list of operations supported by the resource provider.",
           "items": {
             "$ref": "#/definitions/Operation"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to get the next set of operation list results if there are any.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "OptimizedAutoscale": {
       "type": "object",

@@ -705,7 +705,20 @@ enum Type {
 /**
  * Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.
  */
-model OperationListResult is Azure.Core.Page<Operation>;
+model OperationListResult {
+  /**
+   * The list of operations supported by the resource provider.
+   */
+  @pageItems
+  value?: Operation[];
+
+  /**
+   * The URL to get the next set of operation list results if there are any.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * A REST API operation
