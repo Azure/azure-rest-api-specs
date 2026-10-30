@@ -108,7 +108,7 @@ model BulkCreateCustomEnvelope {
   placement?: Placement;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved for compatibility with earlier preview versions; removed from GA."
   @doc("Resource tags.")
   tags?: Record<string>;
 
@@ -116,6 +116,7 @@ model BulkCreateCustomEnvelope {
   ...ResourcePlanProperty;
 }
 
+@@removed(BulkCreateCustomEnvelope.tags, Versions.`2026-10-16`);
 @@added(
   BulkCreateCustomEnvelope.extendedLocation,
   Versions.`2026-10-06-preview`
