@@ -165,6 +165,7 @@ interface IntegrationRuntimeResources {
   /**
    * Start an integration runtime
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The published operation polls via Azure-AsyncOperation (final-state-via: azure-async-operation); adding Location would change the polling metadata."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimes_Start")
   start is IntegrationRuntimeOps.ActionAsync<
@@ -253,6 +254,7 @@ interface IntegrationRuntimeResources {
   /**
    * Refresh the object metadata in an integration runtime
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The published operation polls via Azure-AsyncOperation (final-state-via: azure-async-operation); adding Location would change the polling metadata."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimeObjectMetadata_Refresh")
   @action("refreshObjectMetadata")
