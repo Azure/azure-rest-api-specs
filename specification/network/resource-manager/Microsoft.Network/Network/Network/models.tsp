@@ -6551,6 +6551,12 @@ model ApplicationGatewayPropertiesFormat {
   enableFips?: boolean;
 
   /**
+   * Whether Confidential Compute is enabled on the application gateway resource.
+   */
+  @added(Versions.v2026_05_01)
+  enableConfidentialCompute?: boolean;
+
+  /**
    * Autoscale Configuration.
    */
   autoscaleConfiguration?: ApplicationGatewayAutoscaleConfiguration;
