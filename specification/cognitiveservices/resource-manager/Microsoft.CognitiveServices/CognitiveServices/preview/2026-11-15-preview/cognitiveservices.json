@@ -4123,7 +4123,7 @@
         "tags": [
           "CostControls"
         ],
-        "description": "Gets an account-owned cost control, or returns 304 when the supplied entity tag matches.",
+        "description": "Gets an account-owned cost control and its representation entity tag. Successful reads return 200 with the resource body.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4153,9 +4153,6 @@
             "minLength": 1,
             "maxLength": 64,
             "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
-          },
-          {
-            "$ref": "#/parameters/CostControlReadHeaders"
           }
         ],
         "responses": {
@@ -4171,15 +4168,6 @@
               }
             }
           },
-          "304": {
-            "description": "The client has made a conditional request and the resource has not been modified.",
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The current opaque entity tag for this representation."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4188,7 +4176,7 @@
           }
         },
         "x-ms-examples": {
-          "Get an account-owned budget conditionally": {
+          "Get an account-owned budget": {
             "$ref": "./examples/CostControl/get.json"
           }
         }
@@ -4456,23 +4444,11 @@
             "minLength": 1,
             "maxLength": 64,
             "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
-          },
-          {
-            "$ref": "#/parameters/CostControlReadHeaders"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The current opaque entity tag for this representation."
-              }
-            }
-          },
-          "304": {
-            "description": "The client has made a conditional request and the resource has not been modified.",
             "headers": {
               "ETag": {
                 "type": "string",
@@ -9554,9 +9530,6 @@
             "minLength": 2,
             "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "$ref": "#/parameters/CostControlReadHeaders"
           }
         ],
         "responses": {
@@ -9565,15 +9538,6 @@
             "schema": {
               "$ref": "#/definitions/ProjectCostControlListResult"
             },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The current opaque entity tag for this representation."
-              }
-            }
-          },
-          "304": {
-            "description": "The client has made a conditional request and the resource has not been modified.",
             "headers": {
               "ETag": {
                 "type": "string",
@@ -9604,7 +9568,7 @@
         "tags": [
           "ProjectCostControls"
         ],
-        "description": "Gets a project-owned cost control, or returns 304 when the supplied entity tag matches.",
+        "description": "Gets a project-owned cost control and its representation entity tag. Successful reads return 200 with the resource body.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9644,9 +9608,6 @@
             "minLength": 1,
             "maxLength": 64,
             "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
-          },
-          {
-            "$ref": "#/parameters/CostControlReadHeaders"
           }
         ],
         "responses": {
@@ -9662,15 +9623,6 @@
               }
             }
           },
-          "304": {
-            "description": "The client has made a conditional request and the resource has not been modified.",
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The current opaque entity tag for this representation."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -9679,7 +9631,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a project-owned budget conditionally": {
+          "Get a project-owned budget": {
             "$ref": "./examples/ProjectCostControl/get.json"
           }
         }
@@ -9987,23 +9939,11 @@
             "minLength": 1,
             "maxLength": 64,
             "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
-          },
-          {
-            "$ref": "#/parameters/CostControlReadHeaders"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The current opaque entity tag for this representation."
-              }
-            }
-          },
-          "304": {
-            "description": "The client has made a conditional request and the resource has not been modified.",
             "headers": {
               "ETag": {
                 "type": "string",
@@ -25546,15 +25486,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "ifMatch"
-    },
-    "CostControlReadHeaders": {
-      "name": "If-None-Match",
-      "in": "header",
-      "description": "Returns 304 without a body when this entity tag matches the selected representation.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifNoneMatch"
     },
     "RaiBindingListParameters": {
       "name": "$top",

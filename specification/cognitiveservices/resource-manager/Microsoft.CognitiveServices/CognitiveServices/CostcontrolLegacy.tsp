@@ -553,3 +553,10 @@ interface CostControlsLegacy {
     Response = CostControlListResultLegacy
   >;
 }
+
+// Both version-specific contracts use the same account resource routes.
+@@sharedRoute(CostControls.get);
+@@sharedRoute(CostControls.createOrUpdate);
+@@sharedRoute(CostControls.update);
+@@sharedRoute(CostControls.delete);
+@@sharedRoute(CostControls.list);

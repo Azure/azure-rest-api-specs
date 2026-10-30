@@ -439,28 +439,11 @@ model CostControlIfMatchHeader {
   ifMatch?: string;
 }
 
-/** A conditional header accepted when reading a cost control. */
-@added(Versions.v2026_11_15_preview)
-model CostControlReadHeaders {
-  /** Returns 304 without a body when this entity tag matches the selected representation. */
-  @header("If-None-Match")
-  ifNoneMatch?: string;
-}
-
 /** The entity tag returned with a cost control. */
 alias CostControlEtagHeader = {
   /** The current opaque entity tag for this representation. */
   @header("ETag")
   etag: string;
-};
-
-/** A conditional read whose selected representation has not changed. */
-alias CostControlNotModifiedResponse = {
-  /** The HTTP status code indicating that the representation has not changed. */
-  @statusCode
-  statusCode: 304;
-
-  ...CostControlEtagHeader;
 };
 
 /** A successful existence check without a response body. */
@@ -480,25 +463,19 @@ alias CostControlHeadResponse = {
 @added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface CostControls {
-  /** Gets an account-owned cost control, or returns 304 when the supplied entity tag matches. */
-  @sharedRoute
+  /** Gets an account-owned cost control and its representation entity tag. Successful reads return 200 with the resource body. */
   get is ArmResourceRead<
     CostControl,
-    Parameters = CostControlReadHeaders,
-    Response =
-      | (ArmResponse<CostControl> & CostControlEtagHeader)
-      | CostControlNotModifiedResponse
+    Response = ArmResponse<CostControl> & CostControlEtagHeader
   >;
 
   /** Checks whether an account-owned cost control exists without returning its body. */
   checkExistence is ArmResourceCheckExistence<
     CostControl,
-    Parameters = CostControlReadHeaders,
-    Response = CostControlHeadResponse | CostControlNotModifiedResponse
+    Response = CostControlHeadResponse
   >;
 
   /** Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered. */
-  @sharedRoute
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -508,7 +485,6 @@ interface CostControls {
   >;
 
   /** Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection. */
-  @sharedRoute
   update is ArmCustomPatchSync<
     CostControl,
     CostControlPatch,
@@ -517,14 +493,12 @@ interface CostControls {
   >;
 
   /** Deletes an account-owned cost control synchronously. An existing legacy attachment must be removed before its control can be deleted. */
-  @sharedRoute
   delete is ArmResourceDeleteSync<
     CostControl,
     Parameters = CostControlIfMatchHeader
   >;
 
   /** Lists account-owned cost controls using the budget representation. An unrepresentable legacy entry causes the complete list request to fail. */
-  @sharedRoute
   list is ArmResourceListByParent<
     CostControl,
     Response = ArmResponse<CostControlListResult>
@@ -538,20 +512,16 @@ interface CostControls {
 @added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface ProjectCostControls {
-  /** Gets a project-owned cost control, or returns 304 when the supplied entity tag matches. */
+  /** Gets a project-owned cost control and its representation entity tag. Successful reads return 200 with the resource body. */
   get is ArmResourceRead<
     ProjectCostControl,
-    Parameters = CostControlReadHeaders,
-    Response =
-      | (ArmResponse<ProjectCostControl> & CostControlEtagHeader)
-      | CostControlNotModifiedResponse
+    Response = ArmResponse<ProjectCostControl> & CostControlEtagHeader
   >;
 
   /** Checks whether a project-owned cost control exists without returning its body. */
   checkExistence is ArmResourceCheckExistence<
     ProjectCostControl,
-    Parameters = CostControlReadHeaders,
-    Response = CostControlHeadResponse | CostControlNotModifiedResponse
+    Response = CostControlHeadResponse
   >;
 
   /** Creates or replaces a project-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. Omitted grouping selects the Foundry project's default counter; explicit project grouping is rejected. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered. */
@@ -581,10 +551,7 @@ interface ProjectCostControls {
   /** Lists project-owned cost controls using the budget representation. An unrepresentable legacy entry causes the complete list request to fail. */
   list is ArmResourceListByParent<
     ProjectCostControl,
-    Parameters = CostControlReadHeaders,
-    Response =
-      | (ArmResponse<ProjectCostControlListResult> & CostControlEtagHeader)
-      | CostControlNotModifiedResponse
+    Response = ArmResponse<ProjectCostControlListResult> & CostControlEtagHeader
   >;
 }
 
