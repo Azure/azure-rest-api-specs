@@ -56,3 +56,8 @@ interface KustoPoolsOperationGroup {
     Parameters = LocationParameter
   >;
 }
+
+@@doc(
+  KustoPoolsOperationGroup.checkNameAvailability::parameters.body,
+  "The name of the cluster."
+);

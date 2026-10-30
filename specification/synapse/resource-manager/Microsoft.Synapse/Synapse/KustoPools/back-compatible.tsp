@@ -182,3 +182,7 @@ namespace KustoPools;
 
 @@clientLocation(KustoPoolsOperationGroup.listSkus, KustoPools);
 @@clientLocation(KustoPoolsOperationGroup.checkNameAvailability, KustoPools);
+@@clientName(
+  KustoPoolsOperationGroup.checkNameAvailability::parameters.body,
+  "kustoPoolName"
+);
