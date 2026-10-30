@@ -80,8 +80,8 @@ model VoiceConversation {
 // Shared voice response audio
 // ---------------------------------------------------------------------------
 //
-// Live WebSocket events and persisted responses use the same flat output projection so provider and
-// locale extensions stay aligned with the OpenAI-compatible voice and format fields.
+// Live WebSocket responses include provider and locale extensions alongside the
+// OpenAI-compatible voice and format fields.
 
 @doc("The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -106,16 +106,6 @@ model VoiceResponseAudio {
   output?: VoiceResponseAudioOutput;
 }
 
-@doc("Properties shared by persisted voice responses.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponseBase {
-  ...OmitProperties<
-    OpenAI.RealtimeResponse,
-    "audio" | "output" | "metadata" | "conversation_id" | "id"
-  >;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the persisted projection replaces audio, output, and metadata."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
@@ -125,21 +115,11 @@ model VoiceResponseBase {
   durable ordering extensions.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponse extends VoiceResponseBase {
-  @doc("The unique id of the response.")
-  id: string;
-
-  @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
-  output?: OpenAI.RealtimeConversationItem[];
-
-  @doc("The id of the conversation this response belongs to.")
-  conversation_id: string;
+model VoiceResponse {
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio">;
 
   @doc("The audio configuration used for the response, including the voice and audio format used for output.")
   audio?: VoiceResponseAudio;
-
-  @doc("A set of key-value pairs attached to the response.")
-  metadata?: Record<string>;
 
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
@@ -456,8 +436,8 @@ scalar TelephonyTransferTargetName extends string;
 union TelephonyProvider {
   string,
 
-  @doc("Microsoft Teams Phone Extension.")
-  teams_phone_extension: "teams_phone_extension",
+  @doc("Microsoft Teams Phone extensibility.")
+  teams_phone_extensibility: "teams_phone_extensibility",
 
   @doc("Twilio Programmable Voice.")
   twilio: "twilio",
@@ -570,13 +550,13 @@ model CreateTelephonyBindingRequest {
   label?: string;
 }
 
-@doc("The request to create a Microsoft Teams Phone Extension binding.")
+@doc("The request to create a Microsoft Teams Phone extensibility binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTeamsPhoneExtensionTelephonyBindingContent", "csharp")
-model CreateTeamsPhoneExtensionTelephonyBindingRequest
+@clientName("CreateTeamsPhoneExtensibilityTelephonyBindingContent", "csharp")
+model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
   extends CreateTelephonyBindingRequest {
-  @doc("The Microsoft Teams Phone Extension provider.")
-  provider: TelephonyProvider.teams_phone_extension;
+  @doc("The Microsoft Teams Phone extensibility provider.")
+  provider: TelephonyProvider.teams_phone_extensibility;
 
   @doc("The optional display phone number for the Teams resource account.")
   @maxLength(64)
@@ -610,12 +590,12 @@ model UpdateTelephonyBindingRequest {
   @maxLength(128)
   label?: string | null;
 
-  @doc("The replacement Foundry connection name. This property is valid only for a Teams Phone Extension binding; a Twilio binding's connection is immutable.")
+  @doc("The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable.")
   @minLength(1)
   @maxLength(256)
   connection_name?: string;
 
-  @doc("The replacement Teams Phone Extension display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone Extension binding.")
+  @doc("The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding.")
   @maxLength(64)
   phone_number?: string | null;
 }
@@ -646,11 +626,11 @@ model TelephonyBinding {
   incoming_call_url: url;
 }
 
-@doc("A Microsoft Teams Phone Extension binding owned by a voice agent.")
+@doc("A Microsoft Teams Phone extensibility binding owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TeamsPhoneExtensionTelephonyBinding extends TelephonyBinding {
-  @doc("The Microsoft Teams Phone Extension provider.")
-  provider: TelephonyProvider.teams_phone_extension;
+model TeamsPhoneExtensibilityTelephonyBinding extends TelephonyBinding {
+  @doc("The Microsoft Teams Phone extensibility provider.")
+  provider: TelephonyProvider.teams_phone_extensibility;
 
   @doc("The optional display phone number for the Teams resource account.")
   @maxLength(64)
@@ -701,12 +681,12 @@ model TelephonyBindingListItem {
   etag: Azure.Core.eTag;
 }
 
-@doc("A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.")
+@doc("A Microsoft Teams Phone extensibility binding returned in a list, including its entity tag.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TeamsPhoneExtensionTelephonyBindingListItem
+model TeamsPhoneExtensibilityTelephonyBindingListItem
   extends TelephonyBindingListItem {
-  @doc("The Microsoft Teams Phone Extension provider.")
-  provider: TelephonyProvider.teams_phone_extension;
+  @doc("The Microsoft Teams Phone extensibility provider.")
+  provider: TelephonyProvider.teams_phone_extensibility;
 
   @doc("The optional display phone number for the Teams resource account.")
   @maxLength(64)
@@ -963,8 +943,8 @@ union TelephonyCallLifecycleEventSource {
   @doc("The Foundry telephony gateway supplied the observation.")
   gateway: "gateway",
 
-  @doc("Microsoft Teams Phone Extension supplied the observation.")
-  teams_phone_extension: "teams_phone_extension",
+  @doc("Microsoft Teams Phone extensibility supplied the observation.")
+  teams_phone_extensibility: "teams_phone_extensibility",
 
   @doc("Twilio supplied the observation.")
   twilio: "twilio",
@@ -1269,7 +1249,7 @@ model TelephonyCallSummary {
   @maxLength(64)
   caller_number?: string;
 
-  @doc("The Teams Phone Extension or Twilio number that received the call.")
+  @doc("The Teams Phone extensibility or Twilio number that received the call.")
   @maxLength(64)
   provider_number?: string;
 
@@ -1439,12 +1419,12 @@ model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyOutboundDestination;
 
-  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
+  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
 
-  @doc("The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
+  @doc("The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
   @minLength(1)
   source: TelephonyOutboundSource;
 
