@@ -126,8 +126,7 @@ model TokenPassword {
   name?: TokenPasswordName;
 
   /**
-   * The password value, returned only by the GenerateCredentials operation.
-   * Omitted from GET, PUT, and PATCH responses.
+   * The password value.
    */
   @typeChangedFrom(Versions.vLatestPreview, string)
   @visibility(Lifecycle.Read)
