@@ -1,23 +1,28 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
+import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.ts";
+import type { Core, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
 const execFileAsync = promisify(execFile);
 
 // Keep this check dependency-free: it runs before the workflow installs packages.
-export async function checkAvocadoApplicability({
+export async function checkServiceCheckApplicability({
   context,
   core,
   cwd,
-}: Pick<GitHubScriptArgs, "context" | "core"> & { cwd?: string }): Promise<void> {
+  checkName,
+}: Pick<GitHubScriptArgs, "context" | "core"> & {
+  cwd?: string;
+  checkName: string;
+}): Promise<boolean> {
   if (context.eventName !== "pull_request") {
-    throw new Error("Avocado applicability requires a pull_request event");
+    throw new Error("Service check applicability requires a pull_request event");
   }
   const { pull_request: pullRequest } = context.payload as WebhookEvent<"pull-request">;
   const base = pullRequest?.base.sha;
   const head = pullRequest?.head.sha;
   if (!base || !head || !/^[a-f0-9]{40}$/i.test(base) || !/^[a-f0-9]{40}$/i.test(head)) {
-    throw new Error("Avocado applicability requires valid pull request base and head SHAs");
+    throw new Error("Service check applicability requires valid pull request base and head SHAs");
   }
 
   const { stdout } = await execFileAsync(
@@ -30,10 +35,18 @@ export async function checkAvocadoApplicability({
 
   if (skillsOnly) {
     const message =
-      "Avocado is not applicable: all changed paths are under .github/skills/. " +
+      `${checkName} is not applicable: all changed paths are under .github/skills/. ` +
       "Skipping dependency installation and Swagger analysis.";
     core.info(message);
     await core.summary.addRaw(message).write();
   }
-  core.setOutput("run-avocado", !skillsOnly);
+  core.setOutput("run-analysis", !skillsOnly);
+  return !skillsOnly;
+}
+
+export function setNoReviewRequiredOutputs(core: Core): void {
+  core.setOutput("breakingChangeReviewLabelName", REVIEW_REQUIRED_LABELS.BREAKING_CHANGE);
+  core.setOutput("breakingChangeReviewLabelValue", "false");
+  core.setOutput("versioningReviewLabelName", REVIEW_REQUIRED_LABELS.VERSIONING);
+  core.setOutput("versioningReviewLabelValue", "false");
 }

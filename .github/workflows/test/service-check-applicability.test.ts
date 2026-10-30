@@ -2,10 +2,13 @@ import { execFileSync } from "node:child_process";
 import { mkdtemp, mkdir, rename, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { checkAvocadoApplicability } from "../src/avocado-applicability.ts";
+import {
+  checkServiceCheckApplicability,
+  setNoReviewRequiredOutputs,
+} from "../src/service-check-applicability.ts";
 import { createMockContext, createMockCore } from "./mocks.ts";
 
-describe("Avocado applicability", () => {
+describe("Service check applicability", () => {
   let directory: string;
   let base: string;
 
@@ -32,12 +35,18 @@ describe("Avocado applicability", () => {
     return {
       context,
       core,
-      run: () => checkAvocadoApplicability({ context, core, cwd: directory }),
+      run: () =>
+        checkServiceCheckApplicability({
+          context,
+          core,
+          cwd: directory,
+          checkName: "Swagger validation",
+        }),
     };
   }
 
   beforeEach(async () => {
-    directory = await mkdtemp(join(process.cwd(), ".avocado-applicability-"));
+    directory = await mkdtemp(join(process.cwd(), ".service-check-applicability-"));
     git("init", "-q");
     await write(".github/skills/example/SKILL.md");
     await write("service.json");
@@ -59,10 +68,10 @@ describe("Avocado applicability", () => {
         await rename(join(directory, path), join(directory, ".github/skills/example/renamed.md"));
       }
       const { core, run } = setup();
-      await run();
-      expect(core.setOutput).toHaveBeenCalledWith("run-avocado", false);
+      await expect(run()).resolves.toBe(false);
+      expect(core.setOutput).toHaveBeenCalledWith("run-analysis", false);
       expect(core.summary.addRaw).toHaveBeenCalledWith(
-        expect.stringContaining("Avocado is not applicable"),
+        expect.stringContaining("Swagger validation is not applicable"),
       );
       expect(core.summary.write).toHaveBeenCalledOnce();
     },
@@ -74,8 +83,8 @@ describe("Avocado applicability", () => {
       await write(".github/skills/example/SKILL.md", "updated");
       await write(path, "updated");
       const { core, run } = setup();
-      await run();
-      expect(core.setOutput).toHaveBeenCalledWith("run-avocado", true);
+      await expect(run()).resolves.toBe(true);
+      expect(core.setOutput).toHaveBeenCalledWith("run-analysis", true);
       expect(core.summary.write).not.toHaveBeenCalled();
     },
   );
@@ -90,7 +99,7 @@ describe("Avocado applicability", () => {
     }
     const { core, run } = setup();
     await run();
-    expect(core.setOutput).toHaveBeenCalledWith("run-avocado", true);
+    expect(core.setOutput).toHaveBeenCalledWith("run-analysis", true);
   });
 
   it("runs for a mixed PR deleting a non-skill file", async () => {
@@ -98,7 +107,7 @@ describe("Avocado applicability", () => {
     await rm(join(directory, "service.json"));
     const { core, run } = setup();
     await run();
-    expect(core.setOutput).toHaveBeenCalledWith("run-avocado", true);
+    expect(core.setOutput).toHaveBeenCalledWith("run-analysis", true);
   });
 
   it("checks all PR commits rather than just the last commit", async () => {
@@ -107,7 +116,7 @@ describe("Avocado applicability", () => {
     await write(".github/skills/example/SKILL.md", "updated");
     const { core, run } = setup();
     await run();
-    expect(core.setOutput).toHaveBeenCalledWith("run-avocado", true);
+    expect(core.setOutput).toHaveBeenCalledWith("run-analysis", true);
   });
 
   it("ignores changes made only on the base branch after divergence", async () => {
@@ -118,13 +127,13 @@ describe("Avocado applicability", () => {
     base = commit();
     const { core, run } = setup(head);
     await run();
-    expect(core.setOutput).toHaveBeenCalledWith("run-avocado", false);
+    expect(core.setOutput).toHaveBeenCalledWith("run-analysis", false);
   });
 
   it("does not skip an empty diff", async () => {
     const { core, run } = setup(base);
     await run();
-    expect(core.setOutput).toHaveBeenCalledWith("run-avocado", true);
+    expect(core.setOutput).toHaveBeenCalledWith("run-analysis", true);
   });
 
   it("fails explicitly if git cannot resolve the PR commits", async () => {
@@ -161,5 +170,30 @@ describe("Avocado applicability", () => {
     core.summary.write.mockRejectedValueOnce(new Error("Cannot write summary"));
     await expect(run()).rejects.toThrow("Cannot write summary");
     expect(core.setOutput).not.toHaveBeenCalled();
+  });
+
+  it("preserves explicit label-removal outputs for a skipped breaking-change check", async () => {
+    await write(".github/skills/example/SKILL.md", "updated");
+    const { core, run } = setup();
+    if (!(await run())) setNoReviewRequiredOutputs(core);
+
+    expect(core.setOutput).toHaveBeenCalledWith(
+      "breakingChangeReviewLabelName",
+      "BreakingChangeReviewRequired",
+    );
+    expect(core.setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
+    expect(core.setOutput).toHaveBeenCalledWith(
+      "versioningReviewLabelName",
+      "VersioningReviewRequired",
+    );
+    expect(core.setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
+  });
+
+  it("does not clear review labels for a PR requiring analysis", async () => {
+    await write("service.json", "updated");
+    const { core, run } = setup();
+    if (!(await run())) setNoReviewRequiredOutputs(core);
+
+    expect(core.setOutput).toHaveBeenCalledExactlyOnceWith("run-analysis", true);
   });
 });
