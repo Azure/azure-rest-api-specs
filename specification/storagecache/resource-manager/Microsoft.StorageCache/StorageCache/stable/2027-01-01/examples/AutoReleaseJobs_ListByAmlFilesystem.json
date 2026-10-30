@@ -1,0 +1,237 @@
+{
+  "parameters": {
+    "amlFilesystemName": "fs1",
+    "api-version": "2027-01-01",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "job1",
+            "type": "Microsoft.StorageCache/amlFilesystems/autoReleaseJobs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/autoReleaseJobs/job1",
+            "properties": {
+              "adminStatus": "Enable",
+              "policies": [
+                {
+                  "name": "Critical File Release",
+                  "priority": 0,
+                  "start": {
+                    "type": "CapacityPercentAbove",
+                    "value": 90
+                  },
+                  "stop": {
+                    "type": "CapacityPercentBelow",
+                    "value": 85
+                  },
+                  "prefixes": [
+                    "/"
+                  ],
+                  "filters": [
+                    {
+                      "mode": "Include",
+                      "type": "SizeAbove",
+                      "value": "1M"
+                    },
+                    {
+                      "mode": "Include",
+                      "type": "LastAccessOlderThan",
+                      "value": "PT1H"
+                    },
+                    {
+                      "mode": "Include",
+                      "type": "LastRestoreOlderThan",
+                      "value": "PT1H"
+                    },
+                    {
+                      "mode": "Exclude",
+                      "type": "Suffix",
+                      "value": [
+                        ".keep"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Scheduled Release",
+                  "priority": 1,
+                  "start": {
+                    "type": "CronTime",
+                    "value": "0 2 * * *"
+                  },
+                  "stop": {
+                    "type": "ReleasedSizeAbove",
+                    "value": "100G"
+                  },
+                  "prefixes": [
+                    "/archive"
+                  ],
+                  "filters": [
+                    {
+                      "mode": "Include",
+                      "type": "LastChangeOlderThan",
+                      "value": "P7D"
+                    }
+                  ]
+                },
+                {
+                  "name": "One Time Release",
+                  "priority": 2,
+                  "start": {
+                    "type": "OnceAt",
+                    "value": "2027-01-15T00:00:00Z"
+                  },
+                  "prefixes": [
+                    "/cold"
+                  ]
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "status": {
+                "state": "InProgress",
+                "capacityPercentage": 92,
+                "passCount": 4,
+                "activePolicy": "Critical File Release",
+                "policies": [
+                  {
+                    "name": "Critical File Release",
+                    "state": "Running"
+                  },
+                  {
+                    "name": "Scheduled Release",
+                    "state": "Waiting"
+                  },
+                  {
+                    "name": "One Time Release",
+                    "state": "Ready"
+                  }
+                ],
+                "passStartTime": "2027-01-10T02:00:00Z",
+                "passEndTime": "2027-01-10T02:30:00Z",
+                "filesReleased": 1250,
+                "bytesReleased": 107374182400,
+                "filesSkipped": 25,
+                "filesFailed": 2
+              }
+            }
+          },
+          {
+            "name": "job2",
+            "type": "Microsoft.StorageCache/amlFilesystems/autoReleaseJobs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/autoReleaseJobs/job2",
+            "properties": {
+              "adminStatus": "Disable",
+              "policies": [
+                {
+                  "name": "Critical File Release",
+                  "priority": 0,
+                  "start": {
+                    "type": "CapacityPercentAbove",
+                    "value": 90
+                  },
+                  "stop": {
+                    "type": "CapacityPercentBelow",
+                    "value": 85
+                  },
+                  "prefixes": [
+                    "/"
+                  ],
+                  "filters": [
+                    {
+                      "mode": "Include",
+                      "type": "SizeAbove",
+                      "value": "1M"
+                    },
+                    {
+                      "mode": "Include",
+                      "type": "LastAccessOlderThan",
+                      "value": "PT1H"
+                    },
+                    {
+                      "mode": "Include",
+                      "type": "LastRestoreOlderThan",
+                      "value": "PT1H"
+                    },
+                    {
+                      "mode": "Exclude",
+                      "type": "Suffix",
+                      "value": [
+                        ".keep"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Scheduled Release",
+                  "priority": 1,
+                  "start": {
+                    "type": "CronTime",
+                    "value": "0 2 * * *"
+                  },
+                  "stop": {
+                    "type": "ReleasedSizeAbove",
+                    "value": "100G"
+                  },
+                  "prefixes": [
+                    "/archive"
+                  ],
+                  "filters": [
+                    {
+                      "mode": "Include",
+                      "type": "LastChangeOlderThan",
+                      "value": "P7D"
+                    }
+                  ]
+                },
+                {
+                  "name": "One Time Release",
+                  "priority": 2,
+                  "start": {
+                    "type": "OnceAt",
+                    "value": "2027-01-15T00:00:00Z"
+                  },
+                  "prefixes": [
+                    "/cold"
+                  ]
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "status": {
+                "state": "Disabled",
+                "capacityPercentage": 92,
+                "passCount": 4,
+                "activePolicy": "",
+                "policies": [
+                  {
+                    "name": "Critical File Release",
+                    "state": "Waiting"
+                  },
+                  {
+                    "name": "Scheduled Release",
+                    "state": "Waiting"
+                  },
+                  {
+                    "name": "One Time Release",
+                    "state": "Ready"
+                  }
+                ],
+                "passStartTime": "2027-01-10T02:00:00Z",
+                "passEndTime": "2027-01-10T02:30:00Z",
+                "filesReleased": 1250,
+                "bytesReleased": 107374182400,
+                "filesSkipped": 25,
+                "filesFailed": 2
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AutoReleaseJobs_ListByAmlFilesystem",
+  "title": "AutoReleaseJobs_ListByAmlFilesystem"
+}
+
