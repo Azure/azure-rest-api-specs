@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2026-07
+tag: package-2026-08
 ```
 
 ### Suppression
@@ -100,6 +100,50 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log"]
     reason: MSDeploy is the intentional name matching the existing service API.
+  - suppress: PutResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"].put
+    reason: The implemented silo PUT returns 202 with the silo resource body, Location, Azure-AsyncOperation, and Retry-After when create or update work is queued, or 200 when no update is needed. BuildSiteSiloResponse and BuildServerFarmSiloResponse use CsmHelper.CreateAsyncResponse, which returns 202 rather than 201. This exception is limited to these two PUT operations and requires explicit ARM async-contract approval; it does not assert that 202 is the standard ARM PUT contract.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"].put
+    reason: The implemented silo PUT has no 201 response. Its 202 response carries the silo resource with provisioningState InProgress and polling headers, while the synchronous no-op 200 response carries provisioningState Succeeded. The rule expects provisioningState on a 201 response. This exception is limited to these two PUT operations and requires explicit ARM async-contract approval.
+  - suppress: LroErrorContent
+    from: openapi.json
+    reason: Every Microsoft.Web operation in this specification returns the App Service error schema (DefaultErrorResponse) rather than the common-types ARM ErrorResponse, including the long-running silo PUT and DELETE operations introduced by API version 2026-08-01. A single consistent error contract across the whole App Service surface is required for compatibility with existing clients that parse the service native error format, and changing the already published legacy operations would be a breaking change. This suppression cannot be narrowed with a where clause because LroErrorContent reports on the schema.$ref node inside each error response rather than on the path or the operation, and autorest suppression selectors must match the reported json path exactly, so a path scoped or operation scoped where clause never matches. The only long-running operations added in 2026-08-01 are the PUT and DELETE on sites/{name}/silos/{siloName} and on serverfarms/{name}/silos/{siloName}.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork"]
+    reason: The silo virtual network connection is a singleton child resource whose resource name is the fixed literal virtualNetwork, so the path already has an even number of segments. The rule reports it only because it treats default as the sole acceptable singleton name literal, which is the known TypeSpec singleton false positive tracked by https://github.com/Azure/azure-openapi-validator/issues/646. The virtualNetwork literal is required for consistency with the existing App Service singleton /sites/{name}/networkConfig/virtualNetwork, which exposes the same SwiftVirtualNetwork resource and is reported by this same rule in every prior API version.
+  - suppress: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork"]
+    reason: The silo virtual network connection is a singleton child resource, so its final segment is the fixed literal virtualNetwork rather than a name template parameter. The rule accepts only a template parameter or the literal default for a nested resource name, so this is a false positive for a singleton. The virtualNetwork literal is required for consistency with the existing App Service singleton /sites/{name}/networkConfig/virtualNetwork, which exposes the same SwiftVirtualNetwork resource and is reported by this same rule in every prior API version.
+  - suppress: XmsPageableForListCalls
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}/virtualNetworkIntegrations"].get
+    reason: This GET inspects the virtual network integrations of a single silo and returns one nonpaged object. Its properties array contains the bounded set of subnet integrations and their allocation metadata, while its root metadata identifies the backing plan's virtual network integrations. It is not a resource collection and has no continuation contract, value property, or nextLink. Adding x-ms-pageable would incorrectly advertise pagination for this inspection response.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}/virtualNetworkIntegrations"].get.responses["200"].schema.properties
+    reason: This GET returns a nonpaged inspection result, not a collection of addressable resources. GetSiloVnetIntegrationsAsync delegates to GetVnetIntegrationsFromServerFarm, which returns ResponseMessageEnvelope<List<SwiftVirtualNetwork>> with subnet entries under properties. Replacing the deployed envelope with value and nextLink would change the service contract. This suppression is limited to this operation's response properties.
+  - suppress: LocationMustHaveXmsMutability
+    from: openapi.json
+    where: $.definitions.ServerFarmSiloVnetIntegrationsResult.properties.location
+    reason: This location is read-only metadata in a GET-only inspection result, not the location of a resource that clients create or update. The result has no create operation, so adding create mutability would misrepresent the implemented contract. This exception is limited to the inspection result's location property.
+```
+
+### Tag: package-2026-08
+
+These settings apply only when `--tag=package-2026-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08'
+input-file:
+    - stable/2026-08-01/openapi.json
 ```
 
 ### Tag: package-2026-07
