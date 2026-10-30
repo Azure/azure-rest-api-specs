@@ -5,7 +5,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ### Tag: package-2025-03-python
 
-``` yaml $(tag) == 'package-2025-03-python'
+```yaml $(tag) == 'package-2025-03-python'
 input-file:
   - stable/2025-03-01/AppServiceEnvironments.json
   - stable/2025-03-01/AppServicePlans.json
@@ -30,7 +30,7 @@ input-file:
   - ../../../../domainregistration/resource-manager/Microsoft.DomainRegistration/DomainRegistration/stable/2024-11-01/TopLevelDomains.json
 ```
 
-``` yaml $(python)
+```yaml $(python)
 title: WebSiteManagementClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
@@ -40,7 +40,7 @@ package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python)
+```yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web
 ```
