@@ -63,41 +63,6 @@ The `npx tsv .` has a console spew that shows the diff between current and stage
 changes. Once you `git add` all the changed files and run `npx tsv .` again, there should
 no longer be any diffs to show.
 
-## Extending job templates
-
-The job templates in `src/common/servicepatterns.tsp` retain the default Foundry
-job contract. `postJob`, `queryJobStatus`, `cancelJob`, and `deleteJob` accept
-trailing request-parameter and response-model arguments for specialized contracts.
-`putJob` requires explicit parameters and responses for named resource creation
-or replacement, rather than overriding the HTTP verb of `postJob`.
-The corresponding preview templates also accept a preview-header model, defaulting
-to `WithConditionalFoundryPreviewHeader`. Pass `WithRequiredFoundryPreviewHeader`
-for a preview-only operation; do not make an existing required opt-in optional.
-
-Use the extension points to preserve nested path parameters, concurrency and
-idempotency headers, accepted responses, and independent action monitors.
-Concrete LRO operations still supply their own `@pollingOperation` and
-`@finalOperation` mappings. A template cannot infer the completion boundary,
-operation ID, or guarded final resource read from the resource type.
-
-Telephony illustrates the distinction: Campaign validation, cancellation, and
-deletion use independent `JobLike` monitors, while a CallJob remains a durable
-business resource with its existing lifecycle, `Idempotency-Key`, 202 acceptance,
-and asynchronous cancellation. Reusing an operation template does not make that
-resource an action monitor, add automatic SDK polling, or approve its deviations
-from the default job guidelines. `JobLike`'s `TStatus` supports custom status
-unions, but classifying business states as LRO success/failure remains a separate
-design decision. The telephony POC intentionally does not change those states.
-
-Run the compiler/HTTP/LRO metadata regression tests from the repository root:
-
-```cmd
-node --test specification\ai-foundry\data-plane\Foundry\tests\lro-templates.test.mjs
-```
-
-These are specification-level checks, not service execution or generated SDK
-validation.
-
 ## Emitting Python code
 
 Please do not emit SDKs in the public Python repo. SDK originated from TypeSpec that is private should not be pushed into a branch in a public GitHub repo.
