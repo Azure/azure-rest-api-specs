@@ -20,9 +20,9 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_11_15_preview)
 @parentResource(Account)
-model CostControl is ProxyResource<CostControlProperties> {
+model AccountCostControl is ProxyResource<CostControlProperties> {
   ...ResourceNameParameter<
-    Resource = CostControl,
+    Resource = AccountCostControl,
     KeyName = "costControlName",
     SegmentName = "costControls",
     NamePattern = "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
@@ -403,7 +403,7 @@ model CostControlListResult {
   /** The cost controls in this page. */
   @pageItems
   @identifiers(#["name"])
-  value: CostControl[];
+  value: AccountCostControl[];
 }
 
 /** A page of cost controls owned by a Foundry project. */
@@ -456,57 +456,55 @@ alias CostControlHeadResponse = {
 };
 
 /**
- * Operations for account-owned cost controls. This API version accepts and returns only the budget contract.
- * Legacy resource-ID filters are projected to owner-scoped names without rewriting storage. Historical agent selections become independent project and agent lists, which can match additional project/agent combinations.
- * Legacy Audit thresholds and alerts without an explicit or fallback Event Grid destination are omitted. Unsupported legacy definitions return a compatibility conflict rather than a partial or mixed representation.
+ * Operations for Foundry account-owned cost controls.
  */
 @added(Versions.v2026_11_15_preview)
 @armResourceOperations
-interface CostControls {
+interface AccountCostControls {
   /** Gets an account-owned cost control and its representation entity tag. Successful reads return 200 with the resource body. */
   get is ArmResourceRead<
-    CostControl,
-    Response = ArmResponse<CostControl> & CostControlEtagHeader
+    AccountCostControl,
+    Response = ArmResponse<AccountCostControl> & CostControlEtagHeader
   >;
 
   /** Checks whether an account-owned cost control exists without returning its body. */
   checkExistence is ArmResourceCheckExistence<
-    CostControl,
+    AccountCostControl,
     Response = CostControlHeadResponse
   >;
 
   /** Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
-    CostControl,
+    AccountCostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
     Response =
-      | (ArmResourceUpdatedResponse<CostControl> & CostControlEtagHeader)
-      | (ArmResourceCreatedSyncResponse<CostControl> & CostControlEtagHeader)
+      | (ArmResourceUpdatedResponse<AccountCostControl> & CostControlEtagHeader)
+      | (ArmResourceCreatedSyncResponse<AccountCostControl> & CostControlEtagHeader)
   >;
 
   /** Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection. */
   update is ArmCustomPatchSync<
-    CostControl,
+    AccountCostControl,
     CostControlPatch,
     Parameters = CostControlIfMatchHeader,
-    Response = ArmResponse<CostControl> & CostControlEtagHeader
+    Response = ArmResponse<AccountCostControl> & CostControlEtagHeader
   >;
 
   /** Deletes an account-owned cost control synchronously. An existing legacy attachment must be removed before its control can be deleted. */
   delete is ArmResourceDeleteSync<
-    CostControl,
+    AccountCostControl,
     Parameters = CostControlIfMatchHeader
   >;
 
   /** Lists account-owned cost controls using the budget representation. An unrepresentable legacy entry causes the complete list request to fail. */
   list is ArmResourceListByParent<
-    CostControl,
+    AccountCostControl,
     Response = ArmResponse<CostControlListResult>
   >;
 }
 
 /**
- * Operations for project-owned cost controls. Budgets remain confined to their owning Foundry project.
+ * Operations for Foundry project-owned cost controls. Budgets remain confined to their owning Foundry project.
  * This API version accepts and returns only the budget contract, without attachment-ID properties.
  */
 @added(Versions.v2026_11_15_preview)
@@ -555,10 +553,10 @@ interface ProjectCostControls {
   >;
 }
 
-@@minLength(CostControl.name, 1);
-@@maxLength(CostControl.name, 64);
+@@minLength(AccountCostControl.name, 1);
+@@maxLength(AccountCostControl.name, 64);
 @@doc(
-  CostControl.name,
+  AccountCostControl.name,
   "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated."
 );
 @@minLength(ProjectCostControl.name, 1);

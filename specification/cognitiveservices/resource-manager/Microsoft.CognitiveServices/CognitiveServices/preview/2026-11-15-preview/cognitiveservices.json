@@ -151,7 +151,7 @@
       "name": "ManagedComputeCapacities"
     },
     {
-      "name": "CostControls"
+      "name": "AccountCostControls"
     },
     {
       "name": "ProjectCostControls"
@@ -4067,9 +4067,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls": {
       "get": {
-        "operationId": "CostControls_List",
+        "operationId": "AccountCostControls_List",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
         "description": "Lists account-owned cost controls using the budget representation. An unrepresentable legacy entry causes the complete list request to fail.",
         "parameters": [
@@ -4107,11 +4107,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List budgets owned by an account": {
-            "$ref": "./examples/CostControl/list.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -4119,9 +4114,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls/{costControlName}": {
       "get": {
-        "operationId": "CostControls_Get",
+        "operationId": "AccountCostControls_Get",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
         "description": "Gets an account-owned cost control and its representation entity tag. Successful reads return 200 with the resource body.",
         "parameters": [
@@ -4159,7 +4154,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             },
             "headers": {
               "ETag": {
@@ -4174,17 +4169,12 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get an account-owned budget": {
-            "$ref": "./examples/CostControl/get.json"
-          }
         }
       },
       "put": {
-        "operationId": "CostControls_CreateOrUpdate",
+        "operationId": "AccountCostControls_CreateOrUpdate",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
         "description": "Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered.",
         "parameters": [
@@ -4229,7 +4219,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             }
           }
         ],
@@ -4237,7 +4227,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             },
             "headers": {
               "ETag": {
@@ -4249,7 +4239,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             },
             "headers": {
               "ETag": {
@@ -4264,17 +4254,12 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or replace an account cost budget": {
-            "$ref": "./examples/CostControl/createOrUpdate.json"
-          }
         }
       },
       "patch": {
-        "operationId": "CostControls_Update",
+        "operationId": "AccountCostControls_Update",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
         "description": "Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection.",
         "parameters": [
@@ -4324,7 +4309,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             },
             "headers": {
               "ETag": {
@@ -4339,20 +4324,12 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Clear filters and remove named notifications and blocking actions": {
-            "$ref": "./examples/CostControl/clearOptionalSettings.json"
-          },
-          "Merge named budget settings and restore owner-default grouping": {
-            "$ref": "./examples/CostControl/update.json"
-          }
         }
       },
       "delete": {
-        "operationId": "CostControls_Delete",
+        "operationId": "AccountCostControls_Delete",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
         "description": "Deletes an account-owned cost control synchronously. An existing legacy attachment must be removed before its control can be deleted.",
         "parameters": [
@@ -4402,17 +4379,12 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Delete a budget conditionally": {
-            "$ref": "./examples/CostControl/delete.json"
-          }
         }
       },
       "head": {
-        "operationId": "CostControls_CheckExistence",
+        "operationId": "AccountCostControls_CheckExistence",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
         "description": "Checks whether an account-owned cost control exists without returning its body.",
         "parameters": [
@@ -4461,11 +4433,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Check for a budget without returning its body": {
-            "$ref": "./examples/CostControl/checkExistence.json"
           }
         }
       }
@@ -13554,6 +13521,26 @@
         }
       ]
     },
+    "AccountCostControl": {
+      "type": "object",
+      "description": "A budget that measures consumption and optionally alerts or blocks requests within an account.\nThis API version does not require Microsoft.CognitiveServices/CostControls subscription registration.\nReading, deleting, and enforcing stored identity selections do not require Microsoft.CognitiveServices/CostControlsByIdentity registration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CostControlProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The opaque entity tag used for optimistic concurrency.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "AccountKeyAuthTypeConnectionProperties": {
       "type": "object",
       "description": "This connection type covers the account key connection for Azure storage",
@@ -17507,26 +17494,6 @@
         ]
       }
     },
-    "CostControl": {
-      "type": "object",
-      "description": "A budget that measures consumption and optionally alerts or blocks requests within an account.\nThis API version does not require Microsoft.CognitiveServices/CostControls subscription registration.\nReading, deleting, and enforcing stored identity selections do not require Microsoft.CognitiveServices/CostControlsByIdentity registration.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CostControlProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "The opaque entity tag used for optimistic concurrency.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "CostControlAction": {
       "type": "object",
       "description": "Blocks requests when consumption reaches the explicitly configured threshold. No implicit blocking action is created.",
@@ -17796,7 +17763,7 @@
           "type": "array",
           "description": "The cost controls in this page.",
           "items": {
-            "$ref": "#/definitions/CostControl"
+            "$ref": "#/definitions/AccountCostControl"
           },
           "x-ms-identifiers": [
             "name"
