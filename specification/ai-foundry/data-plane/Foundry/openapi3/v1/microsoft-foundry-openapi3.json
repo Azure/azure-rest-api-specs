@@ -46535,6 +46535,45 @@
           ]
         }
       },
+      "MCPToolboxRequestHeaderBinding": {
+        "type": "object",
+        "required": [
+          "header_name",
+          "source",
+          "required"
+        ],
+        "properties": {
+          "header_name": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[!#$%&'*+.^_`|~0-9A-Za-z-]+(?![\\s\\S])",
+            "description": "The name of the HTTP header to forward to the MCP server. Must be a non-empty HTTP field-name token."
+          },
+          "source": {
+            "$ref": "#/components/schemas/MCPToolboxRequestHeaderBindingSource",
+            "description": "The source of the header value, for example `client_headers`."
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether the client must supply this header."
+          }
+        },
+        "description": "A binding that supplies a request header to an MCP server."
+      },
+      "MCPToolboxRequestHeaderBindingSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "client_headers"
+            ]
+          }
+        ],
+        "description": "The source used to resolve a request header value for an MCP server."
+      },
       "MCPToolboxTool": {
         "type": "object",
         "required": [
@@ -46652,6 +46691,13 @@
           "project_connection_id": {
             "type": "string",
             "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
+          },
+          "request_header_bindings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MCPToolboxRequestHeaderBinding"
+            },
+            "description": "Bindings that supply request headers to this MCP server."
           }
         },
         "allOf": [
