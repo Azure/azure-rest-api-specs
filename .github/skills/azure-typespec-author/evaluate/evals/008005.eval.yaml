@@ -17,18 +17,12 @@ stimuli:
       mode: forced
       language: go
     prompt: |
-      @azure-typespec-author Continue TypeSpec authoring with default client
-      configuration planning only. Analysis, intake, grounding, and the source plan are
-      complete, and the user has not opted out. This is a new data-plane TypeSpec project
-      at specification/widget/data-plane/Widget, with a Go emitter in tspconfig.yaml.
-      The approved new operations have parameters userId and recordAcsId, with the same
-      starting Go name candidates. Their TypeSpec documentation confirms ID means
-      identifier and ACS means Azure Communication Services. There are no pre-existing
-      declarations, related signature patterns, overrides, or collisions. Use only these
-      TypeSpec facts and installed naming guidance; no network, MCP, edits, compilation, or
-      generation. Return JSON with a top-level "names" object mapping "userId" and
-      "recordAcsId" directly to planned Go parameter name strings, plus top-level "scope",
-      "applied", and "generatedNamesVerified".
+      Use the azure-typespec-author skill to check Go casing for new TypeSpec
+      parameters userId and recordAcsId in a new data-plane project. ID means identifier; ACS means
+      Azure Communication Services. There are no related existing parameters.
+    rubric:
+      - Recommends userID and recordACSID for the new Go parameter names.
+      - Any proposed naming overrides are Go-scoped rather than renaming the TypeSpec parameters.
     constraints:
       max_turns: 14
       max_tokens: 20000
@@ -45,19 +39,13 @@ stimuli:
               pattern: go-naming\.md
           disallowed:
             - name: azsdk_
-            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
-      - type: output-matches
+            - name: ^(edit|create|apply_patch)$
+      - type: prompt
         config:
-          pattern: '"userId"\s*:\s*"userID"'
-      - type: output-matches
-        config:
-          pattern: '"recordAcsId"\s*:\s*"recordACSID"'
-      - type: output-matches
-        config:
-          pattern: '"scope"\s*:\s*"go"'
-      - type: output-matches
-        config:
-          pattern: '"applied"\s*:\s*false'
-      - type: output-matches
-        config:
-          pattern: '"generatedNamesVerified"\s*:\s*false'
+          model: gpt-5.6-sol
+          scoring: binary
+          threshold: 1
+          prompt: >-
+            Pass only if all rubric criteria are met. Judge naming recommendations,
+            not response formatting. Reject unsupported claims that changes were
+            applied or generated names were verified.

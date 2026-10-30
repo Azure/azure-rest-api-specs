@@ -17,23 +17,13 @@ stimuli:
       mode: forced
       language: go
     prompt: |
-      @azure-typespec-author Continue TypeSpec authoring with default client
-      configuration planning only. Analysis, intake, grounding, and the source plan are
-      complete, and the user has not opted out. The ARM TypeSpec project targets Go.
-      Before this change, union IdentityKeyStore declares member Tpm, and the loaded
-      client.tsp contains the existing override:
-      @@clientName(IdentityKeyStore.Tpm, "TPM", "go");
-      The approved addition is union member IdentityKeyStore.TpmTransition. Its starting
-      Go constant name candidate is IdentityKeyStoreTpmTransition. TypeSpec documentation
-      confirms TPM means trusted platform module for both members. Go constants in this
-      plan combine the union name with the member's Go name. There are no other related
-      patterns, overrides, or collisions. Installed TCGC supports scoped clientName on
-      this union member. Use only these TypeSpec facts and installed naming guidance;
-      no network, MCP, edits, compilation, or generation.
-      Return JSON with a top-level "names" object mapping "existing" and "added" directly
-      to planned Go constant name strings. Also return "override" as an object with the
-      real TypeSpec "target", member-only "name", and language "scope", plus top-level
-      "applied" and "generatedNamesVerified".
+      Use the azure-typespec-author skill to suggest a Go clientName override for the new
+      IdentityKeyStore.TpmTransition union member. Existing IdentityKeyStore.Tpm has
+      @@clientName(IdentityKeyStore.Tpm, "TPM", "go").
+      TPM means trusted platform module.
+    rubric:
+      - Recommends TPMTransition for the new member and preserves the existing TPM override.
+      - Identifies IdentityKeyStore.TpmTransition as the target of a Go-scoped override with the member-only name TPMTransition, not a synthesized constant name.
     constraints:
       max_turns: 14
       max_tokens: 20000
@@ -50,25 +40,13 @@ stimuli:
               pattern: go-naming\.md
           disallowed:
             - name: azsdk_
-            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
-      - type: output-matches
+            - name: ^(edit|create|apply_patch)$
+      - type: prompt
         config:
-          pattern: '"existing"\s*:\s*"IdentityKeyStoreTPM"'
-      - type: output-matches
-        config:
-          pattern: '"added"\s*:\s*"IdentityKeyStoreTPMTransition"'
-      - type: output-matches
-        config:
-          pattern: '"target"\s*:\s*"IdentityKeyStore\.TpmTransition"'
-      - type: output-matches
-        config:
-          pattern: '"name"\s*:\s*"TPMTransition"'
-      - type: output-matches
-        config:
-          pattern: '"scope"\s*:\s*"go"'
-      - type: output-matches
-        config:
-          pattern: '"applied"\s*:\s*false'
-      - type: output-matches
-        config:
-          pattern: '"generatedNamesVerified"\s*:\s*false'
+          model: gpt-5.6-sol
+          scoring: binary
+          threshold: 1
+          prompt: >-
+            Pass only if all rubric criteria are met. Judge naming recommendations,
+            not response formatting. Reject unsupported claims that changes were
+            applied or generated names were verified.

@@ -17,22 +17,13 @@ stimuli:
       mode: forced
       language: go
     prompt: |
-      @azure-typespec-author Continue TypeSpec authoring with default client
-      configuration planning only. Analysis, intake, grounding, and the source plan are
-      complete, and the user has not opted out. The Widget ARM TypeSpec project targets
-      Go. The pre-change TypeSpec declares operation FooAbcOperation in a stable API
-      version, model ExistingTpmDetails in a preview API version, and model
-      ExistingAciSettings in an unreleased API version. Their current planned Go names
-      match their TypeSpec names, and there are no clientName overrides. Their TypeSpec
-      documentation confirms ABC, TPM, and ACI as acronyms. None of these identifiers is
-      newly introduced by this change. The only approved addition is
-      WidgetProperties.count: int32, whose current proposed Go field name is Count.
-      There are no collisions or other naming changes. Use only these TypeSpec facts
-      and installed naming guidance; no network, MCP, edits, compilation, or generation.
-      Return JSON with a top-level "names" object mapping "stable", "preview",
-      "unreleased", and "count" directly to planned Go name strings, plus "decorators"
-      listing any proposed casing overrides, "scope", "applied", and
-      "generatedNamesVerified".
+      Use the azure-typespec-author skill to review Go naming for this ARM TypeSpec change.
+      Only WidgetProperties.count: int32 is new. Existing names are FooAbcOperation
+      (stable), ExistingTpmDetails (preview), and ExistingAciSettings (unreleased).
+      Their docs define ABC, TPM, and ACI as acronyms. Should I clean up their casing too?
+    rubric:
+      - Leaves all three existing names unchanged, including the preview and unreleased names.
+      - Uses Count for the new count property without recommending redundant clientName overrides or unrelated cleanup.
     constraints:
       max_turns: 14
       max_tokens: 20000
@@ -49,28 +40,13 @@ stimuli:
               pattern: go-naming\.md
           disallowed:
             - name: azsdk_
-            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
-      - type: output-matches
+            - name: ^(edit|create|apply_patch)$
+      - type: prompt
         config:
-          pattern: '"stable"\s*:\s*"FooAbcOperation"'
-      - type: output-matches
-        config:
-          pattern: '"preview"\s*:\s*"ExistingTpmDetails"'
-      - type: output-matches
-        config:
-          pattern: '"unreleased"\s*:\s*"ExistingAciSettings"'
-      - type: output-matches
-        config:
-          pattern: '"count"\s*:\s*"Count"'
-      - type: output-matches
-        config:
-          pattern: '"decorators"\s*:\s*\[\s*\]'
-      - type: output-matches
-        config:
-          pattern: '"scope"\s*:\s*"go"'
-      - type: output-matches
-        config:
-          pattern: '"applied"\s*:\s*false'
-      - type: output-matches
-        config:
-          pattern: '"generatedNamesVerified"\s*:\s*false'
+          model: gpt-5.6-sol
+          scoring: binary
+          threshold: 1
+          prompt: >-
+            Pass only if all rubric criteria are met. Judge naming recommendations,
+            not response formatting. Reject unsupported claims that changes were
+            applied or generated names were verified.

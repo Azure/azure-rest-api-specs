@@ -17,22 +17,12 @@ stimuli:
       mode: forced
       language: go
     prompt: |
-      @azure-typespec-author Continue TypeSpec authoring with default client
-      configuration planning only. Analysis, intake, grounding, and the source plan are
-      complete, and the user has not opted out. The ARM TypeSpec project targets golang,
-      C#, Java, and Python. Analyze only the Go naming for newly added union variant
-      ControllerType.CiscoAci. TypeSpec documentation confirms Cisco ACI; the starting
-      Go constant name candidate is ControllerTypeCiscoAci. The pre-change TypeSpec has
-      no related declarations or Go overrides for this new API family. The approved
-      client.tsp already contains member-specific clientName overrides for this addition: "CiscoAci" in
-      scope csharp, "CISCO_ACI" in scope java, and "CISCO_ACI" in scope python. Those
-      choices are final; do not revisit them. There are no collisions. Use only these
-      TypeSpec facts and installed naming guidance; no network, MCP, edits, compilation,
-      or generation. Return JSON with "clientNames" containing all four keys "go",
-      "csharp", "java", and "python", mapping the normalized language scopes directly to
-      planned clientName strings for this member, not the synthesized constant names.
-      Include the unchanged other-language entries. Also return "otherLanguagesChanged",
-      "applied", and "generatedNamesVerified".
+      Use the azure-typespec-author skill to suggest the Go name for new ControllerType.CiscoAci
+      (Cisco ACI) in a new ARM TypeSpec project. client.tsp already uses CiscoAci
+      for csharp and CISCO_ACI for java and python.
+    rubric:
+      - Recommends CiscoACI for the new member, with any new clientName override scoped to Go.
+      - Leaves the existing csharp, java, and python overrides unchanged.
     constraints:
       max_turns: 14
       max_tokens: 20000
@@ -49,25 +39,13 @@ stimuli:
               pattern: go-naming\.md
           disallowed:
             - name: azsdk_
-            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
-      - type: output-matches
+            - name: ^(edit|create|apply_patch)$
+      - type: prompt
         config:
-          pattern: '"go"\s*:\s*"CiscoACI"'
-      - type: output-matches
-        config:
-          pattern: '"csharp"\s*:\s*"CiscoAci"'
-      - type: output-matches
-        config:
-          pattern: '"java"\s*:\s*"CISCO_ACI"'
-      - type: output-matches
-        config:
-          pattern: '"python"\s*:\s*"CISCO_ACI"'
-      - type: output-matches
-        config:
-          pattern: '"otherLanguagesChanged"\s*:\s*false'
-      - type: output-matches
-        config:
-          pattern: '"applied"\s*:\s*false'
-      - type: output-matches
-        config:
-          pattern: '"generatedNamesVerified"\s*:\s*false'
+          model: gpt-5.6-sol
+          scoring: binary
+          threshold: 1
+          prompt: >-
+            Pass only if all rubric criteria are met. Judge naming recommendations,
+            not response formatting. Reject unsupported claims that changes were
+            applied or generated names were verified.
