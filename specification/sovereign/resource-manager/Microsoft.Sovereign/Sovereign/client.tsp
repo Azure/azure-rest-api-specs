@@ -10,3 +10,15 @@ using Azure.ClientGenerator.Core;
   "SovereignCheckNameAvailabilityRequestContent",
   "csharp"
 );
+
+@@clientName(
+  Microsoft.Sovereign.SovereignViewComplianceDetailResource,
+  "SovereignViewComplianceDetailResourceInfo",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Sovereign.SovereignViewResidencyRemediationResource,
+  "SovereignViewResidencyRemediationResourceInfo",
+  "csharp"
+);
