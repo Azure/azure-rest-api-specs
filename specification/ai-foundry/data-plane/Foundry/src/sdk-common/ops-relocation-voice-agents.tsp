@@ -7,6 +7,15 @@ namespace Azure.AI.Projects.Beta {
 }
 
 namespace Azure.AI.Projects.Beta.VoiceAgents {
+  interface Campaigns {}
+  @@clientLocation(TelephonyCampaigns.getOperation, Campaigns);
+  @@clientLocation(TelephonyCampaigns.create, Campaigns);
+  @@clientLocation(TelephonyCampaigns.get, Campaigns);
+  @@clientLocation(TelephonyCampaigns.list, Campaigns);
+  @@clientLocation(TelephonyCampaigns.cancel, Campaigns);
+  @@clientLocation(TelephonyCampaigns.delete, Campaigns);
+  @@clientLocation(TelephonyCampaigns.listValidationErrors, Campaigns);
+
   interface Conversations {}
   @@clientLocation(
     AgentEndpointConversations.listAgentConversations,
@@ -79,5 +88,7 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
   @@clientLocation(AgentTelephony.replaceTelephonyTransferTargets, Telephony);
   @@clientLocation(AgentTelephony.createTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.getTelephonyCallJob, Telephony);
+  @@clientLocation(AgentTelephony.listTelephonyCallJobs, Telephony);
+  @@clientLocation(AgentTelephony.deleteTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.cancelTelephonyCallJob, Telephony);
 }

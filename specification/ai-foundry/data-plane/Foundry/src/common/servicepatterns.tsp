@@ -454,30 +454,44 @@ alias WithOperationId = {
   operationId?: string;
 };
 
+/** Default inputs for job creation; replace the parameter model for nested or domain-specific jobs. */
+alias JobCreateParameters<TJob extends TypeSpec.Reflection.Model> = {
+  ...WithOperationId;
+
+  /** The job to create. */
+  @body job: TJob;
+};
+
 // ---- Operation templates ----
 
-/** Create a new job. Returns 201 Created. Accepts an optional Operation-Id header for idempotent retries. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
+@doc("Create a job. Defaults to 201 and Operation-Id; explicit parameter/response models preserve specialized contracts.")
 @post
-op postJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
-  {
-    ...WithOperationId;
+op postJob<
+  TJob extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model = JobCreateParameters<TJob>,
+  TResponse = JobCreatedResponse<TJob>
+> is FoundryDataPlaneOperation<TParams, TResponse>;
 
-    /** The job to create. */
-    @body job: TJob;
-  },
-  JobCreatedResponse<TJob>
->;
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Concrete operations supply their operation-specific @pollingOperation links."
+@doc("Create or replace a named job resource, with an explicit request and response contract.")
+@put
+op putJob<
+  TJob extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse
+> is FoundryDataPlaneOperation<TParams, TResponse>;
 
 /** Get a job by ID with an optional Retry-After header for polling guidance. */
 @get
-op queryJobStatus<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
-  {
+op queryJobStatus<
+  TJob extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model = {
     /** The ID of the job. */
     @path jobId: string;
   },
-  JobStatusResponse<TJob>
->;
+  TResponse = JobStatusResponse<TJob>
+> is FoundryDataPlaneOperation<TParams, TResponse>;
 
 /** List jobs with cursor-based pagination and optional filters. */
 @get @list op listJobs<
@@ -492,55 +506,86 @@ op queryJobStatus<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOpe
 >;
 
 /** Cancel a running job. Returns 200 with the updated job. */
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Concrete operations supply their operation-specific @pollingOperation links."
 @post
-op cancelJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
-  {
+op cancelJob<
+  TJob extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model = {
     /** The ID of the job to cancel. */
     @path jobId: string;
   },
-  OkResponse & TJob
->;
+  TResponse = OkResponse & TJob
+> is FoundryDataPlaneOperation<TParams, TResponse>;
 
 /** Delete a job. Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Concrete operations supply their operation-specific @pollingOperation links."
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "An asynchronous DELETE may acknowledge acceptance with a bodyless 202; its polling operation returns the monitor."
 @delete
-op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
-  {
+op deleteJob<
+  TJob extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model = {
     /** The ID of the job to delete. */
     @path jobId: string;
   },
-  NoContentResponse
->;
+  TResponse = NoContentResponse
+> is FoundryDataPlaneOperation<TParams, TResponse>;
 
 // ---- Preview operation templates ----
 
-/** Create a new job (preview). Includes optional Foundry-Features header and Operation-Id for idempotent retries. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
-@post op postJobPreview<
+@doc("Create a preview job. Override parameters, response and preview header only for an explicitly reviewed specialized contract.")
+@post
+op postJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
-  TJob extends TypeSpec.Reflection.Model
-> is FoundryDataPlanePreviewOperation<
-  AreaPreviewLabel,
+  TJob extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model = JobCreateParameters<TJob>,
+  TResponse = JobCreatedResponse<TJob>,
+  TPreviewHeader extends TypeSpec.Reflection.Model = WithConditionalFoundryPreviewHeader<AreaPreviewLabel>
+> is postJob<
+  TJob,
   {
-    ...WithOperationId;
-
-    /** The job to create. */
-    @body job: TJob;
+    ...TPreviewHeader;
+    ...TParams;
   },
-  JobCreatedResponse<TJob>
+  TResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Concrete operations supply their operation-specific @pollingOperation links."
+@doc("Create or replace a named preview job resource; supports a required preview header without weakening it.")
+@put
+op putJobPreview<
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
+  TJob extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse,
+  TPreviewHeader extends TypeSpec.Reflection.Model = WithConditionalFoundryPreviewHeader<AreaPreviewLabel>
+> is putJob<
+  TJob,
+  {
+    ...TPreviewHeader;
+    ...TParams;
+  },
+  TResponse
 >;
 
 /** Get a job by ID (preview). Includes optional Foundry-Features header. */
 @get op queryJobStatusPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
-  TJob extends TypeSpec.Reflection.Model
-> is FoundryDataPlanePreviewOperation<
-  AreaPreviewLabel,
-  {
+  TJob extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model = {
     /** The ID of the job. */
     @path jobId: string;
   },
-  JobStatusResponse<TJob>
+  TResponse = JobStatusResponse<TJob>,
+  TPreviewHeader extends TypeSpec.Reflection.Model = WithConditionalFoundryPreviewHeader<AreaPreviewLabel>
+> is queryJobStatus<
+  TJob,
+  {
+    ...TPreviewHeader;
+    ...TParams;
+  },
+  TResponse
 >;
 
 /** List jobs with cursor-based pagination (preview). Includes optional Foundry-Features header. */
@@ -558,30 +603,45 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
 >;
 
 /** Cancel a running job (preview). Returns 200 with the updated job. */
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Concrete operations supply their operation-specific @pollingOperation links."
 @post op cancelJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
-  TJob extends TypeSpec.Reflection.Model
-> is FoundryDataPlanePreviewOperation<
-  AreaPreviewLabel,
-  {
+  TJob extends TypeSpec.Reflection.Model,
+  TParams extends TypeSpec.Reflection.Model = {
     /** The ID of the job to cancel. */
     @path jobId: string;
   },
-  OkResponse & TJob
+  TResponse = OkResponse & TJob,
+  TPreviewHeader extends TypeSpec.Reflection.Model = WithConditionalFoundryPreviewHeader<AreaPreviewLabel>
+> is cancelJob<
+  TJob,
+  {
+    ...TPreviewHeader;
+    ...TParams;
+  },
+  TResponse
 >;
 
 /** Delete a job (preview). Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Concrete operations supply their operation-specific @pollingOperation links."
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "An asynchronous DELETE may acknowledge acceptance with a bodyless 202; its polling operation returns the monitor."
 @delete
 op deleteJobPreview<
-  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys
-> is FoundryDataPlanePreviewOperation<
-  AreaPreviewLabel,
-  {
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
+  TParams extends TypeSpec.Reflection.Model = {
     /** The ID of the job to delete. */
     @path jobId: string;
   },
-  NoContentResponse
+  TResponse = NoContentResponse,
+  TPreviewHeader extends TypeSpec.Reflection.Model = WithConditionalFoundryPreviewHeader<AreaPreviewLabel>
+> is deleteJob<
+  {},
+  {
+    ...TPreviewHeader;
+    ...TParams;
+  },
+  TResponse
 >;
 
 // ============================================================================
