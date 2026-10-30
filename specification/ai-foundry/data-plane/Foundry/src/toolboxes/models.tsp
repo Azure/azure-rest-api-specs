@@ -232,18 +232,32 @@ model ShellToolboxTool extends ToolboxTool {
 }
 
 /**
+ * The source used to resolve a request header value for an MCP server.
+ */
+union MCPToolboxRequestHeaderBindingSource {
+  string,
+
+  /**
+   * Resolve the value from headers supplied by the client.
+   */
+  client_headers: "client_headers",
+}
+
+/**
  * A binding that supplies a request header to an MCP server.
  */
 model MCPToolboxRequestHeaderBinding {
   /**
-   * The name of the HTTP header to forward to the MCP server.
+   * The name of the HTTP header to forward to the MCP server. Must be a non-empty HTTP field-name token.
    */
+  @minLength(1)
+  @pattern("^[!#$%&'*+.^_`|~0-9A-Za-z-]+(?![\\s\\S])")
   header_name: string;
 
   /**
    * The source of the header value, for example `client_headers`.
    */
-  source: string;
+  source: MCPToolboxRequestHeaderBindingSource;
 
   /**
    * Whether the client must supply this header.

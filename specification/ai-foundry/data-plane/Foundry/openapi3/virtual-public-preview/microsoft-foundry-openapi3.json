@@ -50354,10 +50354,12 @@
         "properties": {
           "header_name": {
             "type": "string",
-            "description": "The name of the HTTP header to forward to the MCP server."
+            "minLength": 1,
+            "pattern": "^[!#$%&'*+.^_`|~0-9A-Za-z-]+(?![\\s\\S])",
+            "description": "The name of the HTTP header to forward to the MCP server. Must be a non-empty HTTP field-name token."
           },
           "source": {
-            "type": "string",
+            "$ref": "#/components/schemas/MCPToolboxRequestHeaderBindingSource",
             "description": "The source of the header value, for example `client_headers`."
           },
           "required": {
@@ -50366,6 +50368,20 @@
           }
         },
         "description": "A binding that supplies a request header to an MCP server."
+      },
+      "MCPToolboxRequestHeaderBindingSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "client_headers"
+            ]
+          }
+        ],
+        "description": "The source used to resolve a request header value for an MCP server."
       },
       "MCPToolboxTool": {
         "type": "object",
