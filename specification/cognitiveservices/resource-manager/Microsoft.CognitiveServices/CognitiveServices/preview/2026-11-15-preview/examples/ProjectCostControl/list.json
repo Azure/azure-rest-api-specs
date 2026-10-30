@@ -6,7 +6,8 @@
     "resourceGroupName": "foundry-resource-group",
     "accountName": "foundry-account",
     "projectName": "production",
-    "api-version": "2026-11-15-preview"
+    "api-version": "2026-11-15-preview",
+    "If-None-Match": "\"00000000-0000-0000-0000-000000000001\""
   },
   "responses": {
     "200": {
@@ -61,6 +62,11 @@
             }
           }
         ]
+      }
+    },
+    "304": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000001\""
       }
     }
   }
