@@ -50271,6 +50271,31 @@ components:
             - Must start and end with alphanumeric characters,
             - Can contain hyphens in the middle
             - Must not exceed 63 characters.
+    CreateSipTelephonyBindingRequest:
+      type: object
+      required:
+        - provider
+      properties:
+        provider:
+          type: string
+          enum:
+            - sip
+        phone_number:
+          type: string
+          maxLength: 64
+          description: For UI display only.
+        allowed_calling_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SipAllowedCallingNumber'
+          maxItems: 64
+          description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
+      allOf:
+        - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
+      description: The request to create an inbound SIP binding.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     CreateSkillVersionFromFilesBody:
       type: object
       properties:
@@ -50330,6 +50355,7 @@ components:
         mapping:
           teams_phone_extensibility: '#/components/schemas/CreateTeamsPhoneExtensibilityTelephonyBindingRequest'
           twilio: '#/components/schemas/CreateTwilioTelephonyBindingRequest'
+          sip: '#/components/schemas/CreateSipTelephonyBindingRequest'
       description: The request to create a telephony binding.
       x-ms-foundry-meta:
         required_previews:
@@ -50348,7 +50374,7 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.
+          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SIP. No inbound telephony binding is required.
         source:
           $ref: '#/components/schemas/TelephonyOutboundSource'
           minLength: 1
@@ -89360,6 +89386,67 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobConfiguration'
       description: The configuration for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
+    SipAllowedCallingNumber:
+      type: string
+      maxLength: 256
+      pattern: ^(?:\+[1-9][0-9]{1,14}|\^\\\+(?:[1-9]|\[1-9\])(?:(?:[0-9]|\[[0-9](?:-[0-9])?\])(?:\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\})?)+\$)$
+      description: |-
+        An exact E.164 caller number or a restricted pattern matched against the entire normalized number.
+        `+14255550123` allows only that number; `^\+1425[0-9]{7}$` allows numbers starting with `+1425`
+        followed by exactly seven digits.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipTelephonyBinding:
+      type: object
+      required:
+        - provider
+      properties:
+        provider:
+          type: string
+          enum:
+            - sip
+        phone_number:
+          type: string
+          maxLength: 64
+          description: For UI display only.
+        allowed_calling_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SipAllowedCallingNumber'
+          maxItems: 64
+          description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyBinding'
+      description: A SIP binding.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipTelephonyBindingListItem:
+      type: object
+      required:
+        - provider
+      properties:
+        provider:
+          type: string
+          enum:
+            - sip
+        phone_number:
+          type: string
+          maxLength: 64
+          description: For UI display only.
+        allowed_calling_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SipAllowedCallingNumber'
+          maxItems: 64
+          description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyBindingListItem'
+      description: A SIP binding returned in a list, including its entity tag.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     SipTelephonyTransferDestination:
       type: object
       required:
@@ -90103,12 +90190,13 @@ components:
         incoming_call_url:
           type: string
           format: uri
-          description: The service-generated webhook URL to configure with the telephony provider.
+          description: The service-generated webhook URL to configure with the telephony provider. For SIP bindings, this is a SIP URI.
       discriminator:
         propertyName: provider
         mapping:
           teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBinding'
           twilio: '#/components/schemas/TwilioTelephonyBinding'
+          sip: '#/components/schemas/SipTelephonyBinding'
       description: A telephony binding owned by a voice agent.
       x-ms-foundry-meta:
         required_previews:
@@ -90152,7 +90240,7 @@ components:
         incoming_call_url:
           type: string
           format: uri
-          description: The service-generated webhook URL to configure with the telephony provider.
+          description: The service-generated webhook URL to configure with the telephony provider. For SIP bindings, this is a SIP URI.
         etag:
           $ref: '#/components/schemas/Azure.Core.eTag'
           description: The entity tag to send in the `If-Match` header when updating or deleting this binding.
@@ -90162,6 +90250,7 @@ components:
         mapping:
           teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem'
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
+          sip: '#/components/schemas/SipTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
       x-ms-foundry-meta:
         required_previews:
@@ -90258,7 +90347,7 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.
+          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SIP. No inbound telephony binding is required.
         source:
           $ref: '#/components/schemas/TelephonyOutboundSource'
           minLength: 1
@@ -90978,6 +91067,7 @@ components:
           enum:
             - teams_phone_extensibility
             - twilio
+            - sip
       description: A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
@@ -91949,13 +92039,19 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable.
+          description: The replacement Foundry connection name. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable.
         phone_number:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 64
-          description: The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding.
+          description: The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for Teams Phone extensibility and SIP bindings.
+        allowed_calling_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SipAllowedCallingNumber'
+          maxItems: 64
+          description: SIP only. Omit to preserve the restriction; send [] to allow any caller.
       description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
       x-ms-foundry-meta:
         required_previews:
