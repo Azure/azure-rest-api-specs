@@ -1,0 +1,49 @@
+{
+  "operationId": "ProjectCostControls_Update",
+  "title": "Clear filters and remove named notifications and blocking actions",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "foundry-resource-group",
+    "accountName": "foundry-account",
+    "projectName": "production",
+    "api-version": "2026-11-15-preview",
+    "costControlName": "project-token-budget",
+    "If-Match": "\"00000000-0000-0000-0000-000000000001\"",
+    "properties": {
+      "properties": {
+        "filter": null,
+        "notifications": {
+          "usageAlert": null
+        },
+        "providerProperties": {
+          "actions": {
+            "stopRequests": null
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000002\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/projects/production/costControls/project-token-budget",
+        "name": "project-token-budget",
+        "type": "Microsoft.CognitiveServices/accounts/projects/costControls",
+        "etag": "\"00000000-0000-0000-0000-000000000002\"",
+        "properties": {
+          "provider": "Microsoft.CognitiveServices",
+          "category": "Tokens",
+          "amount": 1000000,
+          "timeGrain": "Daily",
+          "timePeriod": {
+            "startDate": "2026-11-15T00:00:00Z",
+            "endDate": "2027-11-15T00:00:00Z"
+          }
+        }
+      }
+    }
+  }
+}

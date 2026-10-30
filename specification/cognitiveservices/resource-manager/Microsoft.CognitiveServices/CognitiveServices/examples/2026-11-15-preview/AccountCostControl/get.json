@@ -1,0 +1,91 @@
+{
+  "operationId": "AccountCostControls_Get",
+  "title": "Get an account-owned budget",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "foundry-resource-group",
+    "accountName": "foundry-account",
+    "api-version": "2026-11-15-preview",
+    "costControlName": "production-agents"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000002\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/costControls/production-agents",
+        "name": "production-agents",
+        "type": "Microsoft.CognitiveServices/accounts/costControls",
+        "etag": "\"00000000-0000-0000-0000-000000000002\"",
+        "properties": {
+          "provider": "Microsoft.CognitiveServices",
+          "grouping": [
+            {
+              "name": "agent",
+              "type": "TagKey"
+            }
+          ],
+          "category": "Cost",
+          "amount": 1500,
+          "timeGrain": "Monthly",
+          "timePeriod": {
+            "startDate": "2026-11-15T00:00:00Z",
+            "endDate": "2027-11-15T00:00:00Z"
+          },
+          "filter": {
+            "and": [
+              {
+                "tags": {
+                  "name": "project",
+                  "operator": "In",
+                  "values": [
+                    "production"
+                  ]
+                }
+              },
+              {
+                "tags": {
+                  "name": "agent",
+                  "operator": "In",
+                  "values": [
+                    "customer-support",
+                    "order-assistant"
+                  ]
+                }
+              },
+              {
+                "tags": {
+                  "name": "deployment",
+                  "operator": "In",
+                  "values": [
+                    "customer-support-model"
+                  ]
+                }
+              }
+            ]
+          },
+          "notifications": {
+            "usageAlert": {
+              "eventGridConnectionId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/connections/budget-alerts",
+              "thresholdType": "Percentage",
+              "threshold": 80,
+              "enabled": true,
+              "operator": "GreaterThanOrEqualTo"
+            }
+          },
+          "providerProperties": {
+            "actions": {
+              "stopRequests": {
+                "type": "Block",
+                "thresholdType": "Percentage",
+                "threshold": 100,
+                "operator": "GreaterThanOrEqualTo"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
