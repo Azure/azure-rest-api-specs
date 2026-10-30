@@ -27,7 +27,13 @@
       "name": "Voice Agent WebSocket"
     },
     {
+      "name": "Voice Agent Live WebSocket"
+    },
+    {
       "name": "Agent Conversations"
+    },
+    {
+      "name": "Agent Live Conversations"
     },
     {
       "name": "Agent Telephony"
@@ -3560,11 +3566,22 @@
             "name": "structured_inputs",
             "in": "query",
             "required": false,
-            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.",
+            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.\nMutually exclusive with `structured_input`; sending both returns `400 Bad Request`.",
             "schema": {
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "structured_input",
+            "in": "query",
+            "required": false,
+            "description": "Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false,
+            "deprecated": true
           },
           {
             "name": "x-agent-version-override",
@@ -5196,6 +5213,1074 @@
             "VoiceAgents=V1Preview"
           ]
         }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_listLiveAgentConversations",
+        "summary": "List Live voice agent conversations",
+        "description": "Lists stored Live conversations for this agent, including sessions stored via an override.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceAgentLiveConversation"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversation",
+        "summary": "Get a Live voice agent conversation",
+        "description": "Gets a stored Live conversation; fetch items separately. Returns 404 if absent or not stored.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentLiveConversation"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentEndpointLiveConversations_deleteLiveAgentConversation",
+        "summary": "Delete a Live voice agent conversation",
+        "description": "Deletes the stored conversation and its items/audio, without closing the Live session.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationAudio",
+        "summary": "Get a Live conversation's merged recording metadata",
+        "description": "Gets merged stereo recording metadata (user left, assistant right). BYOS uses unsigned blob_uri. Returns 404 for no audio, or 409 recording_not_ready/recording_unavailable for pending/failed finalization; pending responses may include Retry-After.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceRecording"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio/content": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationAudioContent",
+        "summary": "Stream a Live conversation's merged recording",
+        "description": "Streams the merged stereo WAV. BYOS returns 409; use blob_uri. Returns 404 for no audio, or 409 recording_not_ready/recording_unavailable for pending/failed finalization.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.",
+            "content": {
+              "audio/wav": {
+                "schema": {
+                  "contentMediaType": "audio/wav"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_listLiveAgentConversationItems",
+        "summary": "List items in a Live voice agent conversation",
+        "description": "Lists stored speech and delegation items in order; cursors use item IDs. Returns 404 if the conversation is absent or unstored.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationItem",
+        "summary": "Get a Live voice agent conversation item",
+        "description": "Gets a stored item by ID. Returns 404 if the item or conversation is absent.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id returned on the persisted item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationAudioItem",
+        "summary": "Get a Live conversation item's audio metadata",
+        "description": "Gets captured speech-audio metadata. BYOS uses unsigned blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id returned on the persisted item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAudioItem"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio/content": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationAudioItemContent",
+        "summary": "Stream a Live conversation item's audio",
+        "description": "Streams captured speech as WAV. BYOS returns 409; use blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id returned on the persisted item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.",
+            "content": {
+              "audio/wav": {
+                "schema": {
+                  "contentMediaType": "audio/wav"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/sessions": {
+      "get": {
+        "operationId": "VoiceAgentLiveWebSocket_connectLiveVoiceAgent",
+        "summary": "Connect to a GPT Live voice agent",
+        "description": "Opens a Live session. Foundry sends session.start; clients wait for session.started.\nDo not negotiate the realtime WebSocket subprotocol on this route.\nsession.update changes backend settings, not the Foundry delegation target.\nFoundry translates validated [thinking]/[commentary] sections into session.thinking.append/\nsession.commentary.append; permitted backend events use response.event.\nCredentials and private reasoning are not forwarded.\nresponse.item.create and response.create are Responses-delegation-only commands.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "Live voice agent name in this project.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "foundry_features",
+            "in": "query",
+            "required": false,
+            "description": "Query alternative to the Foundry-Features opt-in header.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            },
+            "explode": false
+          },
+          {
+            "name": "x-agent-version-override",
+            "in": "query",
+            "required": false,
+            "description": "Agent version to connect to.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "structured_inputs",
+            "in": "query",
+            "required": false,
+            "description": "URL-encoded JSON values for instruction and greeting templates. Mutually exclusive with structured_input; sending both returns 400 Bad Request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "structured_input",
+            "in": "query",
+            "required": false,
+            "description": "Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false,
+            "deprecated": true
+          },
+          {
+            "name": "store",
+            "in": "query",
+            "required": false,
+            "description": "Overrides Foundry conversation and audio persistence for this session.",
+            "schema": {
+              "type": "boolean"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "101": {
+            "description": "A successful Live WebSocket upgrade."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agent Live WebSocket"
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/protocols/voice_conversation_engine": {
@@ -37199,7 +38284,7 @@
             "workflow": "#/components/schemas/WorkflowAgentDefinition",
             "external": "#/components/schemas/ExternalAgentDefinition",
             "container_app": "#/components/schemas/ContainerAppAgentDefinition",
-            "voice": "#/components/schemas/VoiceAgentDefinition"
+            "voice": "#/components/schemas/VoiceAgentBaseDefinition"
           }
         }
       },
@@ -63455,6 +64540,25 @@
           "daybreak_red"
         ]
       },
+      "OpenAI.DelegationType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "client",
+              "responses"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "OpenAI.DeleteAssistantResponse": {
         "type": "object",
         "required": [
@@ -76144,6 +77248,1687 @@
           "has_more": {
             "type": "boolean"
           }
+        }
+      },
+      "OpenAI.LiveAllowedToolsChoiceParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "tools"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "allowed_tools"
+            ],
+            "description": "The tool choice type. Always `allowed_tools`.",
+            "x-stainless-const": true,
+            "default": "allowed_tools"
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveFunctionToolChoiceParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveMCPToolChoiceParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificFileSearchParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificWebSearchParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificWebSearchPreviewParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificImageGenParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificComputerParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificCodeInterpreterParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificProgrammaticToolCallingParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificFunctionShellParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificCustomToolParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveSpecificApplyPatchParam"
+                }
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 128,
+            "description": "The tools that the delegated Responses model may call."
+          },
+          "mode": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveToolChoiceValueEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveApplyPatchToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "apply_patch"
+            ],
+            "x-stainless-const": true,
+            "default": "apply_patch"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveAudioFormat": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.LiveAudioFormatType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "audio/pcm": "#/components/schemas/OpenAI.LiveSessionAudioFormatPCMParam",
+            "audio/pcmu": "#/components/schemas/OpenAI.LiveSessionAudioFormatPCMUParam",
+            "audio/pcma": "#/components/schemas/OpenAI.LiveSessionAudioFormatPCMAParam"
+          }
+        },
+        "description": "Audio encoding and sample rate for audio sent and received over a Live WebSocket connection. WebRTC and SIP negotiate their media format separately.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveAudioFormatType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "audio/pcm",
+              "audio/pcmu",
+              "audio/pcma"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveClientDelegationParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "client"
+            ],
+            "description": "The delegation owner. Always `client` for tasks handled by your application.",
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.delegation"
+          }
+        ],
+        "description": "Delegate tasks to your application. The Live session emits delegation events that your backend handles.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveCodeInterpreterToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "code_interpreter"
+            ],
+            "x-stainless-const": true,
+            "default": "code_interpreter"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveComputerToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "computer"
+            ],
+            "x-stainless-const": true,
+            "default": "computer"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveContainerMemoryLimit": {
+        "type": "string",
+        "enum": [
+          "1g",
+          "4g",
+          "16g",
+          "64g"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveContainerNetworkPolicyDisabledParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "disabled"
+            ],
+            "description": "Disable outbound network access. Always `disabled`.",
+            "x-stainless-const": true,
+            "default": "disabled"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveContainerReferenceParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "container_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "container_reference"
+            ],
+            "description": "References a container created with the /v1/containers endpoint",
+            "x-stainless-const": true,
+            "default": "container_reference"
+          },
+          "container_id": {
+            "type": "string",
+            "description": "The ID of the referenced container."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveCustomToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "custom"
+            ],
+            "x-stainless-const": true,
+            "default": "custom"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveCustomVoiceParam": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveDelegationReasoningInputParam": {
+        "type": "object",
+        "properties": {
+          "effort": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveReasoningEffort"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveReasoningSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "Reasoning options for Responses requests made on behalf of the Live session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveDelegationTextInputParam": {
+        "type": "object",
+        "properties": {
+          "verbosity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveTextVerbosity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "Text generation options for the Live session’s Responses backend.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveFileSearchToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "file_search"
+            ],
+            "x-stainless-const": true,
+            "default": "file_search"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveFunctionToolChoiceParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "function"
+            ],
+            "description": "The tool to call. Always `function`.",
+            "x-stainless-const": true,
+            "default": "function"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the function tool to call."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveFunctionToolInputParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "function"
+            ],
+            "description": "The tool type. Always `function`.",
+            "x-stainless-const": true,
+            "default": "function"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name the delegated Responses model uses when calling this function."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "parameters": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": {}
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "strict": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "A function tool available to the Responses backend when the Live model delegates a task.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveHostedShellContainerAutoParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "container_auto"
+            ],
+            "description": "Automatically creates a container for this request",
+            "x-stainless-const": true,
+            "default": "container_auto"
+          },
+          "file_ids": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "memory_limit": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveContainerMemoryLimit"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "network_policy": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveContainerNetworkPolicyDisabledParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveHostedShellNetworkPolicyAllowlistParam"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "skills": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/OpenAI.LiveSkillReferenceParam"
+                    },
+                    {
+                      "$ref": "#/components/schemas/OpenAI.LiveInlineSkillParam"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveHostedShellNetworkPolicyAllowlistParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "allowed_domains"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "allowlist"
+            ],
+            "description": "Allow outbound network access only to specified domains. Always `allowlist`.",
+            "x-stainless-const": true,
+            "default": "allowlist"
+          },
+          "allowed_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "A list of allowed domains when type is `allowlist`."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveHostedShellToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "shell"
+            ],
+            "x-stainless-const": true,
+            "default": "shell"
+          },
+          "environment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveHostedShellContainerAutoParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveContainerReferenceParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveLocalEnvironmentParam"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "A Responses shell tool. Use a hosted container or return local shell results with response.item.create. Domain secrets are not supported.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveImageGenerationToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "image_generation"
+            ],
+            "x-stainless-const": true,
+            "default": "image_generation"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveInitialSessionAudioOutputParam": {
+        "type": "object",
+        "properties": {
+          "voice": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "alloy",
+                  "ash",
+                  "ballad",
+                  "beacon",
+                  "bossa",
+                  "brise",
+                  "cedar",
+                  "cinder",
+                  "coral",
+                  "delta",
+                  "echo",
+                  "flitz",
+                  "gleam",
+                  "harema",
+                  "juni",
+                  "marin",
+                  "meridian",
+                  "nira",
+                  "noeul",
+                  "nuri",
+                  "quartz",
+                  "ripple",
+                  "sage",
+                  "shida",
+                  "shimmer",
+                  "sillage",
+                  "stone",
+                  "tempo",
+                  "verse",
+                  "vesper",
+                  "willow"
+                ]
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveCustomVoiceParam"
+              }
+            ],
+            "description": "The voice used for Live speech, as a built-in voice name or a custom voice object containing its ID. Defaults to `marin` and cannot change after startup."
+          }
+        },
+        "description": "Settings for speech generated by the Live model. Choose the voice before starting the session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveInitialSessionAudioParam": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/OpenAI.LiveAudioFormat",
+            "description": "Audio encoding and sample rate for audio sent and received over a Live WebSocket connection. WebRTC and SIP negotiate their media format separately."
+          },
+          "output": {
+            "$ref": "#/components/schemas/OpenAI.LiveInitialSessionAudioOutputParam",
+            "description": "The voice used for speech generated by the Live model."
+          }
+        },
+        "description": "Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC and SIP negotiate their media format. Voice and format are immutable after startup.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveInlineSkillParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "description",
+          "source"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "inline"
+            ],
+            "description": "Defines an inline skill for this request.",
+            "x-stainless-const": true,
+            "default": "inline"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the skill."
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the skill."
+          },
+          "source": {
+            "$ref": "#/components/schemas/OpenAI.LiveInlineSkillSourceParam",
+            "description": "Inline skill payload"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveInlineSkillSourceParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "media_type",
+          "data"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "base64"
+            ],
+            "description": "The type of the inline skill source. Must be `base64`.",
+            "x-stainless-const": true,
+            "default": "base64"
+          },
+          "media_type": {
+            "type": "string",
+            "enum": [
+              "application/zip"
+            ],
+            "description": "The media type of the inline skill payload. Must be `application/zip`.",
+            "x-stainless-const": true,
+            "default": "application/zip"
+          },
+          "data": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 70254592,
+            "description": "Base64-encoded skill zip bundle."
+          }
+        },
+        "description": "Inline skill payload",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveLocalEnvironmentParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "local"
+            ],
+            "description": "Use a local computer environment.",
+            "x-stainless-const": true,
+            "default": "local"
+          },
+          "skills": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/OpenAI.LiveLocalSkillParam"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveLocalSkillParam": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "path"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the skill."
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the skill."
+          },
+          "path": {
+            "type": "string",
+            "description": "The path to the directory containing the skill."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveMCPToolChoiceParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "server_label"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp"
+            ],
+            "description": "The tool to call. Always `mcp`.",
+            "x-stainless-const": true,
+            "default": "mcp"
+          },
+          "server_label": {
+            "type": "string",
+            "description": "The label of the MCP server to call."
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveMCPToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp"
+            ],
+            "x-stainless-const": true,
+            "default": "mcp"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveNamespaceToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "namespace"
+            ],
+            "x-stainless-const": true,
+            "default": "namespace"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveProgrammaticToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "programmatic_tool_calling"
+            ],
+            "x-stainless-const": true,
+            "default": "programmatic_tool_calling"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveReasoningEffort": {
+        "type": "string",
+        "enum": [
+          "none",
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveReasoningSummary": {
+        "type": "string",
+        "enum": [
+          "concise",
+          "detailed",
+          "auto"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveResponsesDelegationParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "responses"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "responses"
+            ],
+            "description": "The delegation owner. Always `responses` for tasks handled by the Responses API.",
+            "x-stainless-const": true
+          },
+          "responses": {
+            "$ref": "#/components/schemas/OpenAI.LiveResponsesDelegationSettingsInputParam",
+            "description": "Backend model, prompt, and tools used when the Live session delegates a task to Responses."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.delegation"
+          }
+        ],
+        "description": "Delegate tasks to a Responses model managed by the Live session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveResponsesDelegationSettingsInputParam": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "The model used for server-owned Responses delegations."
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max_output_tokens": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "service_tier": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveResponsesServiceTier"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reasoning": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveDelegationReasoningInputParam"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "text": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveDelegationTextInputParam"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveFunctionToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveWebSearchToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveFileSearchToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveCodeInterpreterToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveHostedShellToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveImageGenerationToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveMCPToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveCustomToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveNamespaceToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveToolSearchToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveProgrammaticToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveComputerToolInputParam"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.LiveApplyPatchToolInputParam"
+                }
+              ]
+            },
+            "description": "Tools available to the Responses backend while it handles tasks delegated by the Live model."
+          },
+          "tool_choice": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveToolChoiceEnum"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveFunctionToolChoiceParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveMCPToolChoiceParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificFileSearchParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificWebSearchParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificWebSearchPreviewParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificImageGenParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificComputerParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificCodeInterpreterParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificProgrammaticToolCallingParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificFunctionShellParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificCustomToolParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveSpecificApplyPatchParam"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.LiveAllowedToolsChoiceParam"
+              }
+            ],
+            "description": "Controls which tool the Responses backend uses when handling a task delegated by the Live model."
+          },
+          "parallel_tool_calls": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "Model, prompt, and tool settings for tasks delegated by the Live session to a Responses backend.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveResponsesServiceTier": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "default",
+          "fast_tier_temp_pilot",
+          "flex",
+          "priority",
+          "ultrafast"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSessionAudioFormatPCMAParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "rate"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "audio/pcma"
+            ],
+            "description": "The audio encoding. Always `audio/pcma`.",
+            "x-stainless-const": true
+          },
+          "rate": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "minimum": 8000,
+            "maximum": 8000,
+            "description": "Audio sample rate in hertz. G.711 audio uses 8000 Hz."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.LiveAudioFormat"
+          }
+        ],
+        "description": "Raw, mono G.711 A-law audio for a Live WebSocket connection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSessionAudioFormatPCMParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "rate"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "audio/pcm"
+            ],
+            "description": "The audio encoding. Always `audio/pcm`.",
+            "x-stainless-const": true
+          },
+          "rate": {
+            "type": "number",
+            "enum": [
+              16000,
+              24000
+            ],
+            "description": "Audio sample rate in hertz. Live WebSocket PCM audio supports 16000 or 24000 Hz."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.LiveAudioFormat"
+          }
+        ],
+        "description": "Raw, mono 16-bit little-endian PCM audio for a Live WebSocket connection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSessionAudioFormatPCMUParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "rate"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "audio/pcmu"
+            ],
+            "description": "The audio encoding. Always `audio/pcmu`.",
+            "x-stainless-const": true
+          },
+          "rate": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "minimum": 8000,
+            "maximum": 8000,
+            "description": "Audio sample rate in hertz. G.711 audio uses 8000 Hz."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.LiveAudioFormat"
+          }
+        ],
+        "description": "Raw, mono G.711 μ-law audio for a Live WebSocket connection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSessionUsage": {
+        "type": "object",
+        "required": [
+          "seconds"
+        ],
+        "properties": {
+          "seconds": {
+            "$ref": "#/components/schemas/OpenAI.numeric",
+            "description": "The cumulative Live audio duration in seconds. Do not sum this value across usage events."
+          }
+        },
+        "description": "Cumulative audio duration for a Live session. Values are totals for the session, not increments to sum across usage events.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSkillReferenceParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "skill_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "skill_reference"
+            ],
+            "description": "References a skill created with the /v1/skills endpoint.",
+            "x-stainless-const": true,
+            "default": "skill_reference"
+          },
+          "skill_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "The ID of the referenced skill."
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificApplyPatchParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "apply_patch"
+            ],
+            "description": "The tool to call. Always `apply_patch`.",
+            "x-stainless-const": true,
+            "default": "apply_patch"
+          }
+        },
+        "description": "Forces the model to call the apply_patch tool when executing a tool call.",
+        "title": "Specific apply patch tool choice",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificCodeInterpreterParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "code_interpreter"
+            ],
+            "description": "The tool to call. Always `code_interpreter`.",
+            "x-stainless-const": true,
+            "default": "code_interpreter"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificComputerParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "computer"
+            ],
+            "description": "The tool to call. Always `computer`.",
+            "x-stainless-const": true,
+            "default": "computer"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificCustomToolParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "custom"
+            ],
+            "description": "The tool to call. Always `custom`.",
+            "x-stainless-const": true,
+            "default": "custom"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the custom tool to call."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificFileSearchParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "file_search"
+            ],
+            "description": "The tool to call. Always `file_search`.",
+            "x-stainless-const": true,
+            "default": "file_search"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificFunctionShellParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "shell"
+            ],
+            "description": "The tool to call. Always `shell`.",
+            "x-stainless-const": true,
+            "default": "shell"
+          }
+        },
+        "description": "Forces the model to call the shell tool when a tool call is required.",
+        "title": "Specific shell tool choice",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificImageGenParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "image_generation"
+            ],
+            "description": "The tool to call. Always `image_generation`.",
+            "x-stainless-const": true,
+            "default": "image_generation"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificProgrammaticToolCallingParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "programmatic_tool_calling"
+            ],
+            "description": "The tool to call. Always `programmatic_tool_calling`.",
+            "x-stainless-const": true,
+            "default": "programmatic_tool_calling"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificWebSearchParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "web_search"
+            ],
+            "description": "The tool to call. Always `web_search`.",
+            "x-stainless-const": true,
+            "default": "web_search"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveSpecificWebSearchPreviewParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "web_search_preview"
+            ],
+            "description": "The tool to call. Always `web_search_preview`.",
+            "x-stainless-const": true,
+            "default": "web_search_preview"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveTextVerbosity": {
+        "type": "string",
+        "enum": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveToolChoiceEnum": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "none",
+          "required"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveToolChoiceValueEnum": {
+        "type": "string",
+        "enum": [
+          "none",
+          "auto",
+          "required"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveToolSearchToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "tool_search"
+            ],
+            "x-stainless-const": true,
+            "default": "tool_search"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.LiveWebSearchToolInputParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "web_search"
+            ],
+            "description": "The tool type. Always `web_search`.",
+            "x-stainless-const": true,
+            "default": "web_search"
+          }
+        },
+        "description": "A web search tool available to the Live session’s Responses backend.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.LocalEnvironmentResource": {
@@ -93745,6 +96530,30 @@
           }
         }
       },
+      "OpenAI.delegation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.DelegationType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "responses": "#/components/schemas/OpenAI.LiveResponsesDelegationParam",
+            "client": "#/components/schemas/OpenAI.LiveClientDelegationParam"
+          }
+        },
+        "description": "Who handles tasks delegated by the Live model. Omitted or null selects your application; use `responses` to let the API manage a Responses backend.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "OpenAI.integer": {
         "type": "integer",
         "format": "int64"
@@ -103131,7 +105940,7 @@
           ]
         }
       },
-      "VoiceAgentDefinition": {
+      "VoiceAgentBaseDefinition": {
         "type": "object",
         "required": [
           "kind"
@@ -103142,7 +105951,58 @@
             "enum": [
               "voice"
             ],
-            "description": "The kind discriminator for a voice agent definition. Always `voice`."
+            "description": "Always voice."
+          },
+          "sub_protocol": {
+            "$ref": "#/components/schemas/VoiceAgentSubProtocol",
+            "description": "Omission selects Realtime. Null and unknown values are invalid. Reads preserve omission."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Frontend instructions, templated with structured_inputs. Backend instructions belong in delegation.responses."
+          },
+          "structured_inputs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/StructuredInputDefinition"
+            },
+            "description": "Template inputs for session instructions and supported greetings."
+          },
+          "store": {
+            "type": "boolean",
+            "description": "Persists conversation content and audio in Foundry, not native Live recordings. Defaults to false.",
+            "default": false
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinition"
+          }
+        ],
+        "description": "Shared voice-agent settings; protocol-specific fields remain flat on each subtype.\nCreates and updates produce immutable versions. An agent's protocol cannot change across versions.",
+        "discriminator": {
+          "propertyName": "sub_protocol",
+          "mapping": {
+            "realtime": "#/components/schemas/VoiceAgentDefinition",
+            "live": "#/components/schemas/VoiceAgentLiveDefinition"
+          },
+          "defaultMapping": "#/components/schemas/VoiceAgentDefinition"
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentDefinition": {
+        "type": "object",
+        "properties": {
+          "sub_protocol": {
+            "type": "string",
+            "enum": [
+              "realtime"
+            ],
+            "description": "Selects Realtime. May be omitted for legacy agents."
           },
           "model_type": {
             "$ref": "#/components/schemas/VoiceModelType",
@@ -103155,10 +106015,6 @@
           "conversation_engine": {
             "$ref": "#/components/schemas/VoiceConversationEngine",
             "description": "The engine that owns conversation handling for this voice agent. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the engine owns the conversation logic. The initial implementation supports a hosted-agent engine."
-          },
-          "instructions": {
-            "type": "string",
-            "description": "A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts."
           },
           "greeting": {
             "$ref": "#/components/schemas/VoiceAgentGreetingConfig",
@@ -103217,13 +106073,6 @@
             "type": "boolean",
             "description": "Whether the model may call multiple tools in parallel."
           },
-          "structured_inputs": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/StructuredInputDefinition"
-            },
-            "description": "Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts."
-          },
           "subagent_config": {
             "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
             "description": "Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists."
@@ -103236,16 +106085,11 @@
                 "VoiceAgents=V1Preview"
               ]
             }
-          },
-          "store": {
-            "type": "boolean",
-            "description": "Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to\n`false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event\ntimeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate\naudio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.\ntime-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and\nis not part of the persisted conversation content.",
-            "default": false
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/AgentDefinition"
+            "$ref": "#/components/schemas/VoiceAgentBaseDefinition"
           }
         ],
         "description": "The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a\nmanaged speech-to-speech experience. Establish realtime voice sessions through\n`GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.",
@@ -103649,6 +106493,535 @@
           }
         ],
         "description": "A condition that may trigger an interim response.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveClientDelegationConversationItem": {
+        "type": "object",
+        "required": [
+          "target"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "enum": [
+              "client"
+            ]
+          },
+          "commentary": {
+            "type": "string",
+            "description": "Guidance for Live to communicate to the user, when accepted."
+          },
+          "thinking": {
+            "type": "string",
+            "description": "Accepted background context, not private reasoning or a request to speak."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+          }
+        ],
+        "description": "Results supplied by the application for client delegation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveConversation": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique id of the conversation."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "voice.conversation"
+            ],
+            "description": "The object type. Always `voice.conversation`."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceConversationStatus",
+            "description": "The lifecycle status of the conversation."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the conversation was created."
+          },
+          "completed_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when session and persistence finalization reached the terminal `completed` or `failed` status. Absent while `status` is `in_progress`."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "A set of key-value pairs attached to the conversation."
+          },
+          "last_error": {
+            "$ref": "#/components/schemas/OpenAI.Error",
+            "description": "The terminal error that prevented persistence finalization. Present only when `status` is `failed`."
+          },
+          "usage": {
+            "$ref": "#/components/schemas/OpenAI.LiveSessionUsage",
+            "description": "Cumulative Live audio usage, excluding delegated-model tokens. May be absent after abnormal close."
+          }
+        },
+        "description": "A Live session persisted when effective store is true. Uses voice-conversation lifecycle and retention; items are retrieved separately.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveConversationItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentLiveConversationItemType",
+            "description": "The persisted item kind."
+          },
+          "id": {
+            "type": "string",
+            "description": "Item ID used for retrieval. Foundry assigns speech IDs; delegation IDs retain their native value."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "input": "#/components/schemas/VoiceAgentLiveInputConversationItem",
+            "output": "#/components/schemas/VoiceAgentLiveOutputConversationItem",
+            "delegation": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+          }
+        },
+        "description": "A stored speech segment or delegation. Speech segments are not native turns or proof of playback; delegation results are separate from spoken transcripts.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveConversationItemType": {
+        "type": "string",
+        "enum": [
+          "input",
+          "output",
+          "delegation"
+        ],
+        "description": "The kind of a persisted Live conversation item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveDefinition": {
+        "type": "object",
+        "required": [
+          "sub_protocol",
+          "model_type",
+          "model"
+        ],
+        "properties": {
+          "sub_protocol": {
+            "type": "string",
+            "enum": [
+              "live"
+            ],
+            "description": "Selects the Live protocol."
+          },
+          "model_type": {
+            "type": "string",
+            "enum": [
+              "self_deployed"
+            ],
+            "description": "Uses a Foundry model deployment."
+          },
+          "model": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The GPT Live deployment name."
+          },
+          "greeting": {
+            "$ref": "#/components/schemas/VoiceAgentTemplateGreetingConfig",
+            "description": "Template-only startup greeting, rendered with session structured inputs. Foundry-only; not sent in native Live settings."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/OpenAI.LiveInitialSessionAudioParam",
+            "description": "Startup audio formats and output voice."
+          },
+          "delegation": {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegation",
+            "description": "Delegation settings. Omit for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentBaseDefinition"
+          }
+        ],
+        "description": "The Live voice agent definition. Its configuration (model, instructions, audio, and delegation) drives a\nmanaged speech-to-speech experience using a Foundry GPT Live deployment. Establish Live voice sessions through\n`GET /agents/{agent_name}/endpoint/protocols/voice/live/sessions`. Every create or update produces a new immutable version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveDelegation": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.LiveClientDelegationParam"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.LiveResponsesDelegationParam"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveManagedAgentDelegation"
+          }
+        ],
+        "description": "Who handles delegated work for a Live voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveDelegationConversationItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "target",
+          "created_at"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "delegation"
+            ],
+            "description": "The object type, always `delegation`.",
+            "x-stainless-const": true,
+            "default": "delegation"
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The ID of the Responses API response associated with a Responses delegation. Omitted for client delegations."
+          },
+          "target": {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationTarget",
+            "description": "The configured delegation owner."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Observed delegation creation time, in Unix seconds."
+          }
+        },
+        "discriminator": {
+          "propertyName": "target",
+          "mapping": {
+            "client": "#/components/schemas/VoiceAgentLiveClientDelegationConversationItem",
+            "responses": "#/components/schemas/VoiceAgentLiveResponsesDelegationConversationItem",
+            "foundry_managed_agent": "#/components/schemas/VoiceAgentLiveFoundryManagedAgentDelegationItem"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+          }
+        ],
+        "description": "A stored delegation using native fields with Foundry-specific targets. Its id is the native delegation ID.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveDelegationResultItem": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "commentary": {
+                "type": "string",
+                "description": "Guidance for Live to communicate to the user."
+              },
+              "thinking": {
+                "type": "string",
+                "description": "Background context, not private reasoning or a request to speak."
+              }
+            },
+            "required": [
+              "commentary"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "commentary": {
+                "type": "string",
+                "description": "Guidance for Live to communicate to the user."
+              },
+              "thinking": {
+                "type": "string",
+                "description": "Background context, not private reasoning or a request to speak."
+              }
+            },
+            "required": [
+              "thinking"
+            ]
+          }
+        ],
+        "description": "Persisted guidance accepted by Live, with commentary, thinking, or both. Agent delegation section markers are removed before storage.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveDelegationStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "completed",
+              "failed",
+              "incomplete",
+              "cancelled"
+            ]
+          }
+        ],
+        "description": "Persisted delegation outcome, not speech or playback status.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveDelegationTarget": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "responses",
+              "client",
+              "foundry_managed_agent"
+            ]
+          }
+        ],
+        "description": "Delegation owner. Foundry agent targets use native client delegation upstream.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveFoundryManagedAgentDelegationItem": {
+        "type": "object",
+        "required": [
+          "target",
+          "agent_name",
+          "agent_version",
+          "offset_ms",
+          "output",
+          "status"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "enum": [
+              "foundry_managed_agent"
+            ]
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "Target agent name in the same project."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "Target version pinned at connection start."
+          },
+          "offset_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Native delegation offset from session start, in milliseconds."
+          },
+          "backend_conversation_id": {
+            "type": "string",
+            "description": "Backend conversation ID, distinct from the voice conversation and Live session IDs."
+          },
+          "output": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentLiveDelegationResultItem"
+            },
+            "description": "Accepted guidance in order; empty until a result is accepted. Entries have no individual IDs, are noncumulative, and are independent of backend output_index. Partial results survive failure or cancellation."
+          },
+          "delegation_context": {
+            "type": "string",
+            "description": "Task context sent to the target agent, not the full request body."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationStatus",
+            "description": "The persisted delegation outcome."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+          }
+        ],
+        "description": "Stored prompt-agent delegation state and accepted results.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveInputConversationItem": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input"
+            ]
+          },
+          "transcription": {
+            "type": "string",
+            "description": "Captured user transcription, when available."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/VoiceAudioItem",
+            "description": "Captured audio metadata; audio.item_id matches this item's id."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+          }
+        ],
+        "description": "A stored user speech segment.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveManagedAgentDelegation": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "foundry_managed_agent"
+            ],
+            "description": "Canonical delegation type; legacy managed_prompt_agent values are returned as foundry_managed_agent."
+          },
+          "agent_name": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$",
+            "description": "Name of a prompt agent in the same project."
+          },
+          "agent_version": {
+            "type": "string",
+            "pattern": "^[1-9][0-9]{0,19}$",
+            "description": "Agent version, pinned per connection. Omit to select the active version."
+          }
+        },
+        "description": "Delegates to a same-project prompt agent using native client delegation. Requires [thinking] and/or [commentary] output sections.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveOutputConversationItem": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "output"
+            ]
+          },
+          "transcription": {
+            "type": "string",
+            "description": "Captured assistant transcription, not backend output or commentary guidance."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/VoiceAudioItem",
+            "description": "Captured audio metadata; audio.item_id matches this item's id."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+          }
+        ],
+        "description": "A stored assistant speech segment.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveResponsesDelegationConversationItem": {
+        "type": "object",
+        "required": [
+          "target"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "enum": [
+              "responses"
+            ]
+          },
+          "output": {
+            "type": "string",
+            "description": "Final backend text, omitted when unavailable; excludes raw tool output."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+          }
+        ],
+        "description": "Stored Responses delegation output, separate from Live speech.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -104380,6 +107753,19 @@
           }
         ],
         "description": "A static interim response selected from configured text.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentSubProtocol": {
+        "type": "string",
+        "enum": [
+          "realtime",
+          "live"
+        ],
+        "description": "Voice protocol; realtime includes cascaded models.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

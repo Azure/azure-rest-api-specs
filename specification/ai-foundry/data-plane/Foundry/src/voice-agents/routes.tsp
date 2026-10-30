@@ -95,8 +95,14 @@ interface VoiceAgentWebSocket {
        * URL-encoded as this query parameter. Supplied values override definition defaults when rendering the
        * agent's instructions and session-start greeting for this session only. The decoded value must be a JSON
        * object no larger than 32 KiB with a maximum nesting depth of 16.
+       * Mutually exclusive with `structured_input`; sending both returns `400 Bad Request`.
        */
       @query structured_inputs?: string;
+
+      #deprecated "Use structured_inputs instead."
+      @doc("Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.")
+      @query
+      structured_input?: string;
 
       /** Selects a specific version of the voice agent for this session. */
       @query("x-agent-version-override") agent_version_override?: string;
@@ -106,6 +112,59 @@ interface VoiceAgentWebSocket {
       websocket_subprotocol?: VoiceAgentWebSocketSubprotocol;
     },
     VoiceAgentWebSocketUpgradeResponse
+  >;
+}
+
+/** A successful Live WebSocket upgrade. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveWebSocketUpgradeResult {
+  @statusCode
+  status_code: 101;
+}
+
+/** WebSocket sessions for Live voice agents. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
+@tag("Voice Agent Live WebSocket")
+interface VoiceAgentLiveWebSocket {
+  /**
+   * Opens a Live session. Foundry sends session.start; clients wait for session.started.
+   * Do not negotiate the realtime WebSocket subprotocol on this route.
+   * session.update changes backend settings, not the Foundry delegation target.
+   * Foundry translates validated [thinking]/[commentary] sections into session.thinking.append/
+   * session.commentary.append; permitted backend events use response.event.
+   * Credentials and private reasoning are not forwarded.
+   * response.item.create and response.create are Responses-delegation-only commands.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "The successful WebSocket 101 upgrade has no HTTP entity body."
+  @summary("Connect to a GPT Live voice agent")
+  @get
+  @sharedRoute
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/sessions")
+  connectLiveVoiceAgent is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** Live voice agent name in this project. */
+      @path agent_name: string;
+
+      /** Query alternative to the Foundry-Features opt-in header. */
+      @query("foundry_features")
+      foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
+
+      /** Agent version to connect to. */
+      @query("x-agent-version-override") agent_version_override?: string;
+
+      /** URL-encoded JSON values for instruction and greeting templates. Mutually exclusive with structured_input; sending both returns 400 Bad Request. */
+      @query structured_inputs?: string;
+
+      #deprecated "Use structured_inputs instead."
+      @doc("Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.")
+      @query
+      structured_input?: string;
+
+      /** Overrides Foundry conversation and audio persistence for this session. */
+      @query store?: boolean;
+    },
+    VoiceAgentLiveWebSocketUpgradeResult
   >;
 }
 
@@ -462,6 +521,177 @@ interface AgentEndpointConversations {
       @path agent_name: string;
 
       /** The id of the conversation whose merged recording is streamed. */
+      @path conversation_id: string;
+    },
+    VoiceAudioStream
+  >;
+}
+
+/** Read or delete stored Live conversations and captured audio; no item writes or native turn resources. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Live endpoint-scoped read-only conversation, item, and audio projection does not match a standard resource operation template."
+@tag("Agent Live Conversations")
+@extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+interface AgentEndpointLiveConversations {
+  /** Lists stored Live conversations for this agent, including sessions stored via an override. */
+  @summary("List Live voice agent conversations")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations")
+  @list
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  listLiveAgentConversations is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<VoiceAgentLiveConversation>
+  >;
+
+  /** Gets a stored Live conversation; fetch items separately. Returns 404 if absent or not stored. */
+  @summary("Get a Live voice agent conversation")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+    },
+    VoiceAgentLiveConversation
+  >;
+
+  /** Deletes the stored conversation and its items/audio, without closing the Live session. */
+  @summary("Delete a Live voice agent conversation")
+  @delete
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  deleteLiveAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+    },
+    NoContentResponse
+  >;
+
+  /** Lists stored speech and delegation items in order; cursors use item IDs. Returns 404 if the conversation is absent or unstored. */
+  @summary("List items in a Live voice agent conversation")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items")
+  @list
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  listLiveAgentConversationItems is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<VoiceAgentLiveConversationItem>
+  >;
+
+  /** Gets a stored item by ID. Returns 404 if the item or conversation is absent. */
+  @summary("Get a Live voice agent conversation item")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationItem is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+
+      /** The id returned on the persisted item. */
+      @path item_id: string;
+    },
+    VoiceAgentLiveConversationItem
+  >;
+
+  /** Gets captured speech-audio metadata. BYOS uses unsigned blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items. */
+  @summary("Get a Live conversation item's audio metadata")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationAudioItem is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+
+      /** The id returned on the persisted item. */
+      @path item_id: string;
+    },
+    VoiceAudioItem
+  >;
+
+  /** Streams captured speech as WAV. BYOS returns 409; use blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items. */
+  @summary("Stream a Live conversation item's audio")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio/content")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+
+      /** The id returned on the persisted item. */
+      @path item_id: string;
+    },
+    VoiceAudioStream
+  >;
+
+  /** Gets merged stereo recording metadata (user left, assistant right). BYOS uses unsigned blob_uri. Returns 404 for no audio, or 409 recording_not_ready/recording_unavailable for pending/failed finalization; pending responses may include Retry-After. */
+  @summary("Get a Live conversation's merged recording metadata")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationAudio is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+    },
+    VoiceRecording
+  >;
+
+  /** Streams the merged stereo WAV. BYOS returns 409; use blob_uri. Returns 404 for no audio, or 409 recording_not_ready/recording_unavailable for pending/failed finalization. */
+  @summary("Stream a Live conversation's merged recording")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio/content")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationAudioContent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
       @path conversation_id: string;
     },
     VoiceAudioStream
