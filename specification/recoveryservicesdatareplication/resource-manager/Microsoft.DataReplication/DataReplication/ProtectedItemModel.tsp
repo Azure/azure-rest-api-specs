@@ -25,19 +25,6 @@ model ProtectedItemModel
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(
-  ProtectedItem.create::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(
-  ProtectedItem.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
-);
-
 @armResourceOperations
 interface ProtectedItem {
   /**

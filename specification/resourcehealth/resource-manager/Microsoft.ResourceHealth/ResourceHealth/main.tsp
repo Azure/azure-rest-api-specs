@@ -45,6 +45,11 @@ enum Versions {
    * The 2025-05-01 API version.
    */
   v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2026-07-01 API version.
+   */
+  v2026_07_01: "2026-07-01",
 }
 
 @armResourceOperations
@@ -52,7 +57,9 @@ interface Operations {
   /**
    * Lists available operations for the resourcehealth resource provider
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("operations")
   list(

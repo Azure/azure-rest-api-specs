@@ -182,6 +182,11 @@ using Azure.ClientGenerator.Core;
 @@alternateType(Replica.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(
+  PrivateEndpointConnectionReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
   KeyValueProperties.eTag,
   Azure.Core.EtagProperty.etag,
   "csharp"
@@ -214,5 +219,36 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Azure.ResourceManager.CommonTypes.IssueType,
   "AppConfigurationIssueType",
+  "csharp"
+);
+
+// Preserve provisioning metadata from the reflection-based generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning compatibility"
+@@clientOption(
+  ConfigurationStore,
+  "resource-rbac-roles",
+  #{
+    AppConfigurationDataOwner: "5ae67dd6-50cb-40e7-96ff-dc2bfa4b606b",
+    AppConfigurationDataReader: "516239f1-63e1-4d78-a4de-a74fb236a071",
+  },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  ConfigurationStore,
+  "resource-name-constraint",
+  #{ minLength: 5, maxLength: 50, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  Replica,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9]+$" },
   "csharp"
 );

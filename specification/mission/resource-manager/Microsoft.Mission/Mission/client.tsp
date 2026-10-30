@@ -4,6 +4,58 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Mission;
 
+@@clientName(
+  GovernedServiceItemOption,
+  "VirtualEnclaveGovernedServiceItemOption",
+  "csharp"
+);
+@@clientName(
+  GovernedServiceItemEnforcement,
+  "VirtualEnclaveGovernedServiceItemEnforcement",
+  "csharp"
+);
+@@clientName(
+  GovernedServiceItemPolicyAction,
+  "VirtualEnclaveGovernedServiceItemPolicyAction",
+  "csharp"
+);
+@@clientName(
+  MaintenanceModeConfigurationModelMode,
+  "VirtualEnclaveMaintenanceModeConfigurationMode",
+  "csharp"
+);
+@@clientName(
+  MaintenanceModeConfigurationModelMode.CanNotDelete,
+  "CannotDelete",
+  "csharp"
+);
+@@clientName(
+  MaintenanceModeConfigurationModelJustification,
+  "VirtualEnclaveMaintenanceModeJustification",
+  "csharp"
+);
+@@clientName(PrincipalType, "VirtualEnclavePrincipalType", "csharp");
+@@clientName(
+  ApprovalCallbackRequestResourceRequestAction,
+  "VirtualEnclaveApprovalCallbackResourceAction",
+  "csharp"
+);
+@@clientName(
+  ApprovalDeletionCallbackRequestResourceRequestAction,
+  "VirtualEnclaveApprovalDeletionCallbackResourceAction",
+  "csharp"
+);
+@@clientName(
+  CommunityPropertiesPolicyOverride,
+  "CommunityPolicyOverride",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.MoboBrokerResource,
+  "VirtualEnclaveManagedOnBehalfOfBroker",
+  "csharp"
+);
+
 @@clientName(ApprovalResource, "VirtualEnclaveApproval", "csharp");
 @@clientName(ApprovalProperties, "VirtualEnclaveApprovalProperties", "csharp");
 @@clientName(

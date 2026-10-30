@@ -107,6 +107,8 @@ using Microsoft.DevOpsInfrastructure;
 
 @@clientName(StorageProfile, "DevOpsStorageProfile", "csharp");
 
+@@clientName(VmSize, "DevOpsVmSize", "csharp");
+
 @@clientName(VmssFabricProfile, "DevOpsVmssFabricProfile", "csharp");
 @@clientName(
   CheckNameAvailabilityResult,
@@ -141,11 +143,11 @@ using Microsoft.DevOpsInfrastructure;
 
 @@clientName(
   StorageAccountType.StandardSSDLRS,
-  "$DO_NOT_NORMALIZE$StandardSSDLRS",
+  exact("StandardSSDLRS"),
   "javascript"
 );
 @@clientName(
   StorageAccountType.StandardSSDZRS,
-  "$DO_NOT_NORMALIZE$StandardSSDZRS",
+  exact("StandardSSDZRS"),
   "javascript"
 );

@@ -212,6 +212,7 @@ interface VirtualMachineScaleSets {
       /**
        * Optional parameter to hibernate a virtual machine from the VM scale set. (This feature is available for VMSS with Flexible OrchestrationMode only)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing deallocate POST contract uses hibernate in the query; preserve wire compatibility."
       @query("hibernate")
       hibernate?: boolean;
     },
@@ -233,6 +234,7 @@ interface VirtualMachineScaleSets {
       /**
        * Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing deleteInstances POST contract uses forceDeletion in the query; preserve wire compatibility."
       @query("forceDeletion")
       forceDeletion?: boolean;
     },
@@ -251,18 +253,21 @@ interface VirtualMachineScaleSets {
       /**
        * The platform update domain for which a manual recovery walk is requested
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing forceRecoveryServiceFabricPlatformUpdateDomainWalk POST contract uses platformUpdateDomain in the query; preserve wire compatibility."
       @query("platformUpdateDomain")
       platformUpdateDomain: int32;
 
       /**
        * The zone in which the manual recovery walk is requested for cross zone virtual machine scale set
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing forceRecoveryServiceFabricPlatformUpdateDomainWalk POST contract uses zone in the query; preserve wire compatibility."
       @query("zone")
       zone?: string;
 
       /**
        * The placement group id for which the manual recovery walk is requested.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing forceRecoveryServiceFabricPlatformUpdateDomainWalk POST contract uses placementGroupId in the query; preserve wire compatibility."
       @query("placementGroupId")
       placementGroupId?: string;
     }
@@ -271,6 +276,7 @@ interface VirtualMachineScaleSets {
   /**
    * Gets the status of a VM scale set instance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("VirtualMachineScaleSets")
   @get
   @action("instanceView")
@@ -296,6 +302,7 @@ interface VirtualMachineScaleSets {
    * Gets list of OS upgrades on a VM scale set instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("VirtualMachineScaleSets")
   @get
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
@@ -333,6 +340,7 @@ interface VirtualMachineScaleSets {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing powerOff POST contract uses skipShutdown in the query; preserve wire compatibility."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },
@@ -419,6 +427,7 @@ interface VirtualMachineScaleSets {
   /**
    * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("VirtualMachineScaleSets")
   @get
   @action("skus")
@@ -496,6 +505,20 @@ interface VirtualMachineScaleSets {
     Response = OkResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Migrates one or more virtual machines in a VM scale set to an availability zone.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "migrateVMAvailabilityZone is a no-body LRO POST; 202+204 is the accurate contract per LintDiff PostResponseCodes requirements"
+  @tag("VirtualMachineScaleSets")
+  @added(Versions.v2026_04_01)
+  @action("migrateVMAvailabilityZone")
+  migrateVMAvailabilityZone is ComputeResourceActionAsync<
+    VirtualMachineScaleSet,
+    MigrateVMAvailabilityZoneInput,
+    Response = ArmNoContentResponse<"Resource operation accepted.">,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
@@ -566,4 +589,8 @@ interface VirtualMachineScaleSets {
 @@doc(
   VirtualMachineScaleSets.scaleOut::parameters.body,
   "The input object for ScaleOut API."
+);
+@@doc(
+  VirtualMachineScaleSets.migrateVMAvailabilityZone::parameters.body,
+  "The input object for the MigrateVMAvailabilityZone API."
 );

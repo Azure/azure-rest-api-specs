@@ -53,7 +53,7 @@ interface Skills {
   /**
    * Removes the specified skill and its associated versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @summary("Delete a skill")
   @delete
   @route("/skills/{name}")
@@ -102,7 +102,10 @@ interface Skills {
       @path
       name: SkillName;
 
+      /** The content type of the request body. */
       @header contentType: "multipart/form-data";
+
+      /** The multipart request content. */
       @multipartBody content: CreateSkillVersionFromFilesBody;
     } & SkillsPreviewHeader,
     SkillVersion

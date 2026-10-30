@@ -1088,13 +1088,16 @@ model ScheduleEntityResponse {
   /**
    * Execution scope defining which data products and assets are included in scheduled runs
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Execution scope for data products and assets")
   scope?: {
     items: Array<{
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       dataProduct: {
         referenceId: string;
         type: string;
       };
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       dataAsset: {
         referenceId: string;
         type: string;
@@ -1105,9 +1108,11 @@ model ScheduleEntityResponse {
   /**
    * Trigger configuration defining when and how often the schedule executes
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Trigger configuration for schedule timing")
   trigger?: {
     type: string;
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     typeProperties: {
       timezone?: string;
       isScheduled?: boolean;
@@ -1177,17 +1182,20 @@ model ScheduleEntity {
   /**
    * Trigger configuration defining execution timing and scheduling behavior
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Trigger configuration for execution timing and scheduling")
   trigger?: {
     /**
      * Trigger type classification (Manual, TimeBased, EventDriven)
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     @doc("Trigger type classification")
     type: string;
 
     /**
      * Type-specific configuration properties for trigger behavior
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     @doc("Type-specific trigger configuration properties")
     typeProperties: {
       /**
@@ -1213,6 +1221,7 @@ model ScheduleEntity {
   /**
    * Execution scope defining the data products and assets targeted for quality scanning
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Execution scope for data quality scanning")
   scope?: {
     /**
@@ -1223,6 +1232,7 @@ model ScheduleEntity {
       /**
        * Reference to the data product containing the target assets
        */
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       @doc("Data product reference within scope")
       dataProduct: {
         /**
@@ -1241,6 +1251,7 @@ model ScheduleEntity {
       /**
        * Reference to the specific data asset to be scanned
        */
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       @doc("Data asset reference within scope")
       dataAsset: {
         /**
@@ -1252,6 +1263,7 @@ model ScheduleEntity {
         /**
          * Reference type classification for data asset
          */
+        #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
         @doc("Data asset reference type")
         type: string;
       };
@@ -1261,6 +1273,7 @@ model ScheduleEntity {
   /**
    * Reference to the parent business domain that governs this schedule
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Reference to the governing business domain")
   businessDomain?: {
     /**
@@ -1328,6 +1341,7 @@ model ScheduleEntityRequestResponse {
   /**
    * Trigger configuration defining execution timing and scheduling behavior
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Trigger configuration for execution timing and scheduling")
   trigger?: {
     /**
@@ -1339,6 +1353,7 @@ model ScheduleEntityRequestResponse {
     /**
      * Type-specific configuration properties for trigger behavior
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     @doc("Type-specific trigger configuration properties")
     typeProperties: {
       /**
@@ -1356,6 +1371,7 @@ model ScheduleEntityRequestResponse {
       /**
        * Next scheduled execution time in UTC format
        */
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       @doc("Next scheduled execution time (UTC)")
       triggerTime?: utcDateTime;
     };
@@ -1364,6 +1380,7 @@ model ScheduleEntityRequestResponse {
   /**
    * Execution scope defining the data products and assets targeted for quality scanning
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Execution scope for data quality scanning")
   scope?: {
     /**
@@ -1374,6 +1391,7 @@ model ScheduleEntityRequestResponse {
       /**
        * Reference to the data product containing the target assets
        */
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       @doc("Data product reference within scope")
       dataProduct: {
         /**
@@ -1392,11 +1410,13 @@ model ScheduleEntityRequestResponse {
       /**
        * Reference to the specific data asset to be scanned
        */
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       @doc("Data asset reference within scope")
       dataAsset: {
         /**
          * Unique identifier of the referenced data asset
          */
+        #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
         @doc("Data asset unique identifier")
         referenceId: string;
 
@@ -1412,6 +1432,7 @@ model ScheduleEntityRequestResponse {
   /**
    * Reference to the parent business domain that governs this schedule
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Reference to the governing business domain")
   businessDomain?: {
     /**
@@ -2409,6 +2430,7 @@ model DataSourceEntity {
   /**
    * Indicates whether the data source is configured for Virtual Network connectivity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already existing body parameter"
   @doc("Virtual Network connectivity flag.")
   isVNetEnabled?: boolean;
@@ -2422,6 +2444,7 @@ model DataSourceEntity {
   /**
    * Reference to the business domain that governs this data source.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Business domain governance reference for this data source.")
   businessDomain?: {
     /**
@@ -2455,6 +2478,7 @@ model DataSourceEntity {
   @doc("ISO 8601 timestamp representing the creation time.")
   createdAt?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already existing body parameter"
   @doc("Entity tag for concurrency control and change detection.")
   ETag?: string;
@@ -2474,11 +2498,13 @@ model DataSourceEntity {
   /**
    * Authentication credential information for accessing the data source.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Authentication credential configuration for data source access.")
   credential?: {
     /**
      * Type of credential (e.g., ServicePrincipal, ManagedIdentity, UsernamePassword).
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     @doc("Credential type for authentication.")
     type: string;
 
@@ -2498,6 +2524,7 @@ model DataSourceEntity {
   /**
    * Consolidated configuration properties covering all supported data source types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Combined configuration properties for all supported data source platforms.")
   typeProperties?: {
     // ---------- Azure SQL ----------
@@ -2619,6 +2646,7 @@ model DataSourceEntity {
     /**
      * Scope configuration defining access boundaries and included objects.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     @doc("Scope configuration defining inclusion and exclusion boundaries.")
     scope: {
       /**
@@ -2685,6 +2713,7 @@ model DataSourceEntityResponse {
   /**
    * Unique system identifier for the data source entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Unique data source identifier.")
   id: string;
 
@@ -2704,6 +2733,7 @@ model DataSourceEntityResponse {
   /**
    * Reference to the business domain that governs this data source.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Business domain governance reference for this data source.")
   businessDomain?: {
     /**
@@ -2751,6 +2781,7 @@ model DataSourceEntityResponse {
     /**
      * Scope configuration defining access boundaries and included objects.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     @doc("Scope configuration defining inclusion and exclusion boundaries.")
     scope: {
       /**
@@ -2775,6 +2806,7 @@ model DataSourceEntityResponse {
     /**
      * Authentication credential information for accessing the data source.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     @doc("Authentication credential configuration for data source access.")
     credential?: {
       /**
@@ -2836,6 +2868,7 @@ model ScheduleScanMonitoringResponse {
   /**
    * Collection of monitoring entities with execution metrics, timing, and status details
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Collection of schedule scan monitoring entities")
   value: ScheduleScanMonitoringEntity[];
 }
@@ -2844,6 +2877,7 @@ model ScheduleScanMonitoringResponse {
  * Profile entity configuration for data profiling and analysis operations.
  * Defines data source locations, key columns, and profiling parameters for quality assessment.
  */
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
 @doc("Profile entity for data profiling and quality analysis configuration")
 model ProfileEntity {
   /**
@@ -2855,6 +2889,7 @@ model ProfileEntity {
   /**
    * Type-specific configuration properties including location definitions and access parameters
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Type-specific profiling configuration properties")
   typeProperties: {
     /**
@@ -2869,6 +2904,7 @@ model ProfileEntity {
       /**
        * Location-specific properties defining file system and path details
        */
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       typeProperties: {
         /**
          * File system or container name where data resides
@@ -2892,6 +2928,7 @@ model ProfileEntity {
   /**
    * Profiling configuration including key column definitions and analysis parameters
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Profiling configuration with key columns and parameters")
   configuration: {
     /**
@@ -2944,6 +2981,7 @@ model DataQualitySnapshotResponse {
   /**
    * Identifier of the business domain associated with this snapshot.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Identifier of the business domain associated with this snapshot.")
   businessDomainId: string;
 
@@ -2968,6 +3006,7 @@ model DataQualitySnapshotResponse {
   /**
    * Detailed snapshot data containing observer and rule information.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Detailed snapshot data containing observer and rule information.")
   snapshot: {
     /**
@@ -2990,6 +3029,7 @@ model DataQualitySnapshotResponse {
       /**
        * Reference to the data asset being observed.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       @doc("Reference to the data asset being observed.")
       dataAsset: {
         /**
@@ -3002,6 +3042,7 @@ model DataQualitySnapshotResponse {
       /**
        * Observer-specific configuration properties.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       @doc("Observer-specific configuration properties.")
       typeProperties: {
         /**
@@ -3025,6 +3066,7 @@ model DataQualitySnapshotResponse {
           /**
            * Dataset configuration and metadata.
            */
+          #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
           @doc("Dataset configuration and metadata.")
           dataset: {
             /**
@@ -3037,6 +3079,7 @@ model DataQualitySnapshotResponse {
             /**
              * Schema summary information for the dataset.
              */
+            #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
             @doc("Schema summary information for the dataset.")
             schemaSummary: {
               /**
@@ -3053,6 +3096,7 @@ model DataQualitySnapshotResponse {
                 /**
                  * Name of the column.
                  */
+                #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
                 @doc("Name of the column.")
                 name: string;
 
@@ -3083,6 +3127,7 @@ model DataQualitySnapshotResponse {
     /**
      * Summary of data quality rules associated with this snapshot.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     @doc("Summary of data quality rules associated with this snapshot.")
     rulesSummary: {
       /**

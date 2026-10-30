@@ -2,21 +2,25 @@
 # https://github.com/Azure/azure-sdk/blob/main/docs/policies/opensource.md#codeowners
 
 #########
+# Default ownership
+#########
+
+# The last matching entry wins, so defaults must precede explicit owners.
+# GitHub supports these defaults; the SDK linter exceptions are in CODEOWNERS_baseline_errors.txt.
+* @Azure/azure-rest-api-specs-maintainers
+
+# Unlisted services use normal reviewer approval, not a default code owner.
+/specification/
+
+#########
 # Specification
 #########
 
-#########
-# Codeowner assignments are made from the _last_ matching entry in CODEOWNERS, so catch-all entries must come first
-#########
-
 # PRLabel: %Schema Registry
-/specification/schemaregistry/ @hmlam @nickghardwick @lmazuel @deyaaeldeen @JoshLove-msft @swathipil @conniey @minhanh-phan
-
-# PRLabel: %Cognitive Services
-/dev/cognitiveservices/data-plane/Language/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan
+/specification/schemaregistry/ @hmlam @nickghardwick @lmazuel @JoshLove-msft @conniey @minhanh-phan
 
 # PRLabel: %Foundry  %Client
-/specification/ai-foundry/data-plane/Foundry @johanste @trrwilson @glecaros @balapv @dargilco
+/specification/ai-foundry/data-plane/Foundry @glecaros @dargilco @rhurey @glharper
 
 # PRLabel: %Analysis Services
 /specification/analysisservices/ @taiwu
@@ -37,7 +41,7 @@
 /specification/applicationinsights/data-plane/LiveMetrics/ @ramthi @rajkumar-rangaraj @hectorhdzg
 
 # PRLabel: %Container Apps
-/specification/app/ @jijohn14 @Juliehzl
+/specification/app/ @jijohn14 @Juliehzl @vturecek @Tratcher @vinisoto
 
 /specification/asazure/ @athipp
 
@@ -50,16 +54,13 @@
 /specification/azsadmin/ @deathly809
 
 # PRLabel: %Batch
-/specification/batch/ @wiboris @dpwatrous @skapur12 @cRui861 @wanghoppe @ReneOv-MSFT
-
-# PRLabel: %BatchAI
-/specification/batchai/ @alexanderyukhanov
+/specification/batch/ @wiboris @dpwatrous @skapur12 @cRui861 @wanghoppe @xingwu1 @iwang2 @lilinvictorms
 
 # PRLabel: %Billing
 /specification/billing/ @wilcobmsft @asarkar84
 
 # PRLabel: %Network - CDN
-/specification/cdn/ @yunhemsft @jessicl-ms @rrahulms @ChenglongLiu @Ptnan7 @zhuofudeng
+/specification/cdn/ @yunhemsft @jessicl-ms @rrahulms @ChenglongLiu @Ptnan7
 
 # PRLabel: %Network - Edge Actions
 /specification/cdn/resource-manager/Microsoft.Cdn/EdgeActions/ @tundwed @anamikanupur
@@ -67,27 +68,30 @@
 # PRLabel: %Cognitive Services
 /specification/cognitiveservices/ @rkuthala @fmabroukmsft
 
+# PRLabel: %Cognitive - Content Safety
+/specification/cognitiveservices/data-plane/ContentSafety/ @Azure/azure-sdk-write-contentsafety
+
 # PRLabel: %Cognitive Services - Form Recognizer
-/specification/cognitiveservices/data-plane/FormRecognizer/ @bojunehsu @nizi1127 @johanste
+/specification/cognitiveservices/data-plane/FormRecognizer/ @bojunehsu @nizi1127
 
 # PRLabel: %Cognitive - Language
-/specification/cognitiveservices/data-plane/LanguageAnalyzeConversations/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeConversations/ @assafi @rokulka @ChongTang @heaths @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageAnalyzeConversationsAuthoring/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeConversationsAuthoring/ @assafi @rokulka @ChongTang @heaths @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageAnalyzeDocuments/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeDocuments/ @assafi @rokulka @ChongTang @heaths @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageAnalyzeText/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeText/ @assafi @rokulka @ChongTang @heaths @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageAnalyzeTextAuthoring/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeTextAuthoring/ @assafi @rokulka @ChongTang @heaths @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageQuestionAnswering/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageQuestionAnswering/ @assafi @rokulka @ChongTang @heaths @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageQuestionAnsweringAuthoring/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageQuestionAnsweringAuthoring/ @assafi @rokulka @ChongTang @heaths @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
 
 # PRLabel: %Compute
-/specification/compute/ @xinzewang233 @ookoka @audreyttt @haagha @bilaakpan-ms @grizzlytheodore @mabhard @danielli90 @smotwani @ppatwa @vikramd-ms @yunusm @ZhidongPeng @nkuchta @maheshnemichand @najams @changov
+/specification/compute/ @haagha @audreyttt
 
 /specification/consumption/ @arusing @micahbresette
 
@@ -98,10 +102,10 @@
 /specification/containerregistry/ @djyou
 
 # PRLabel: %Container Service
-/specification/containerservice/ @palma21 @weinong @seguler @alvinli222 @justindavies @matthchr @robbiezhang @paulgmiller @yizhang4321 @circy9 @qike-ms
+/specification/containerservice/ @palma21 @weinong @seguler @alvinli222 @justindavies @matthchr @robbiezhang @paulgmiller @yizhang4321 @qike-ms
 
 # PRLabel: %Container Service Fleet
-/specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/ @circy9 @serbrech @matthchr
+/specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/ @serbrech @matthchr
 
 # PRLabel: %Cosmos
 /specification/cosmos-db/ @pjohari-ms @MehaKaushik
@@ -110,7 +114,7 @@
 /specification/customer-insights/ @tjlvtao
 
 # PRLabel: %Data Factory
-/specification/datafactory/ @Frey-Wang @ruowan @davidzhaoyue
+/specification/datafactory/ @msyyc @v-jiaodi
 
 # PRLabel: %Data Lake Analytics
 /specification/datalake-analytics/ @ro-joowan
@@ -119,25 +123,23 @@
 /specification/datalake-store/ @ro-joowan
 
 # PRLabel: %Data Migration
-/specification/datamigration/ @hitenjava @gansach @amarjeetkr
+/specification/datamigration/ @hitenjava @amarjeetkr
 
 /specification/deploymentmanager/ @netrock
 
 # PRLabel: %Device Registry
-/specification/deviceregistry/ @atastrophic @siongithub @mryanlo @hmmorales @chgennar @sofia-geislinger @mfsmoot
+/specification/deviceregistry/ @atastrophic @siongithub @hmmorales @chgennar @sofia-geislinger @mfsmoot
 
 /specification/documentdb/ @dmakwana
 
 /specification/domainservices/ @jihochang
 
 # PRLabel: %Event Grid
-/specification/eventgrid/resource-manager/ @shankarsama @Kishp01 @a-hamad
-/specification/eventgrid/ @Kishp01 @shankarsama @rajeshka
+/specification/eventgrid/resource-manager/ @shankarsama @Kishp01 @Nishanth-MS
+/specification/eventgrid/ @Kishp01 @shankarsama @Nishanth-MS
 
 # PRLabel: %Event Hubs
-/specification/eventhub/ @v-ajnava @dsouzaarun @damodaravadhani
-
-/specification/graphrbac/ @lmazuel @yugangw-msft @amarzavery
+/specification/eventhub/ @dsouzaarun @damodaravadhani
 
 # PRLabel: %HDInsight
 /specification/hdinsight/ @pulkittomar @wawon-msft
@@ -154,9 +156,6 @@
 /specification/keyvault/resource-manager/ @Azure/azure-sdk-write-keyvault
 
 # PRLabel: %KeyVault
-/specification/keyvault/Security.*/ @Azure/azure-sdk-write-keyvault @heaths
-
-# PRLabel: %KeyVault
 /specification/keyvault/data-plane/ @Azure/azure-sdk-write-keyvault @heaths
 
 # PRLabel: %Logic App
@@ -170,14 +169,11 @@
 
 /specification/managementpartner/ @jeffrey-ace
 
-# PRLabel: %Media Services
-/specification/mediaservices/ @giakas
-
 # PRLabel: %Monitor
 /specification/monitor/ @gucalder
 
 # PRLabel: %Network
-/specification/network/ @kamboj-prjwl
+/specification/network/ @ArcturusZhang @msyyc
 
 # PRLabel: %Notification Hub
 /specification/notificationhubs/ @amolr @smithab
@@ -217,7 +213,7 @@
 /specification/redis/ @siddharthchatrolams @timlovellsmith
 
 # PRLabel: %Relay
-/specification/relay/ @v-ajnava @dsouzaarun @damodaravadhani
+/specification/relay/ @dsouzaarun @damodaravadhani
 
 /specification/resources/ @Azure/arm-template-deployments @rajshah11 @vivsriaus
 
@@ -225,10 +221,10 @@
 /specification/scheduler/ @pinwang81
 
 # PRLabel: %Search
-/specification/search/data-plane/ @BevLoh @giulianob @xiangyan99 @yangylu91 @efrainretana @admayber @Draconicida @xiong-qiao
+/specification/search/data-plane/ @BevLoh @giulianob @xiangyan99 @yangylu91 @efrainretana @Draconicida @xiong-qiao
 
 # PRLabel: %Search
-/specification/search/resource-manager/ @BevLoh @efrainretana @yangylu91 @admayber @Draconicida @xiong-qiao
+/specification/search/resource-manager/ @BevLoh @efrainretana @yangylu91 @Draconicida @xiong-qiao @lc48t @hillarykhuu
 
 /specification/serialconsole/ @amitchat @craigw @asinn826
 
@@ -236,17 +232,17 @@
 /specification/service-map/ @daveirwin1
 
 # PRLabel: %Service Bus
-/specification/servicebus/ @v-ajnava @dsouzaarun @damodaravadhani
+/specification/servicebus/ @dsouzaarun @damodaravadhani
 
 # PRLabel: %Service Fabric
-/specification/servicefabric/ @a-santamaria @iliu816
-/specification/servicefabricmanagedclusters/ @a-santamaria @iliu816
+/specification/servicefabric/ @a-santamaria
+/specification/servicefabricmanagedclusters/ @a-santamaria
 
 # PRLabel: %SQL
-/specification/sql/ @jamestao @ericshape @jeremyfrosti @mitesh-pv @achyuth-ms
+/specification/sql/ @jamestao @ericshape @jeremyfrosti @achyuth-ms
 
 # PRLabel: %Storage
-/specification/storage/resource-manager/ @blueww @yifanz7
+/specification/storage/resource-manager/ @msyyc @nateprewitt
 /specification/storage/data-plane/ @seanmcc-msft
 
 # PRLabel: %Import Export
@@ -255,9 +251,6 @@
 # PRLabel: %StorageSync
 /specification/storagesync/ @ankushbindlish2
 
-# PRLabel: %Storsimple
-/specification/storsimple8000series/ @manaas-microsoft
-
 # PRLabel: %Stream Analytics
 /specification/streamanalytics/ @atpham256
 
@@ -265,7 +258,7 @@
 /specification/subscriptions/ @navysingla
 
 # PRLabel: %Synapses
-/specification/synapse/ @wanyang7 @yanjungao718
+/specification/synapse/ @yanjungao718
 
 # PRLabel: %TimeseriesInsights
 /specification/timeseriesinsights/ @sandshadow
@@ -274,10 +267,10 @@
 /specification/trafficmanager/ @allencal @hrkulkarmsft
 
 # PRLabel: %Web Apps
-/specification/web/ @naveedaz @reillyanderson @jocawtho @1tariq @danielw5
+/specification/web/ @naveedaz @jocawtho @1tariq @danielw5
 
 # PRLabel: %Video Indexer
-/specification/vi/ @dazilb @tshoham @omerhaimov @bermanraz @Einav94
+/specification/vi/ @v-xuto
 
 # PRLabel: %AzureML - Compute Instance
 /specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/**/machineLearningServices.json @Azure/aml-compute-instance
@@ -285,27 +278,16 @@
 # PRLabel: %Profile
 /profile/ @shahabhijeet
 
-/specification/contosowidgetmanager/ @mikeharder @raych1 @maririos
+/specification/contosowidgetmanager/ @raych1 @Azure/azure-rest-api-specs-maintainers
 
 ###########
 # Eng Sys
 ###########
-/.gitattributes     @mikeharder @benbp
-/.gitignore         @mikeharder @benbp
-/.prettierrc.json   @mikeharder @benbp
-/package-lock.json  @mikeharder @benbp
-/package.json       @mikeharder @benbp
-/tsconfig.json      @mikeharder @benbp
-/.azure-pipelines/  @mikeharder @benbp
-/.github/           @mikeharder @benbp
-/.vscode/           @mikeharder @benbp
-/dev/               @mikeharder @benbp
-/eng/               @mikeharder @benbp
-/eng/common/        @Azure/azure-sdk-eng
+/eng/common/        @Azure/azure-sdk-eng @Azure/azure-sdk-sync-approvers
 /eng/tools/typespec-migration-validation @pshao25 @live1206
-/eng/tools/typespec-validation/**/sdk-tspconfig-validation*.ts @marygao @raych1 @maririos
-/scripts/           @mikeharder @benbp
-/specification/suppressions.yaml @mikeharder @benbp @raych1 @marygao @maririos @qiaozha
+/eng/tools/typespec-suppressions @timotheeguerin @markcowl @catalinaperalta @iscai-msft
+/eng/tools/typespec-validation/**/sdk-tspconfig-validation*.ts @marygao @raych1
+/specification/suppressions.yaml @raych1 @marygao @qiaozha
 /.github/CODEOWNERS @Azure/azure-sdk-eng
 /.github/skills     @Azure/azure-sdk-eng @chunyu3 @lirenhe @ArthurMa1978 @haolingdong-msft
 
@@ -314,11 +296,11 @@
 
 ## Copilot
 
-/.github/copilot-instructions.md         @praveenkuttappan @maririos
+/.github/copilot-instructions.md         @praveenkuttappan
 /.github/copilot-review-instructions.md  @ravimeda @praveenkuttappan
-/.github/prompts/                        @praveenkuttappan @maririos
-/.github/instructions/                   @praveenkuttappan @maririos
-/.github/chatmodes/                      @praveenkuttappan @maririos
+/.github/prompts/                        @praveenkuttappan
+/.github/instructions/                   @praveenkuttappan
+/.github/chatmodes/                      @praveenkuttappan
 
 ## ARM API Reviewer
 
@@ -328,11 +310,13 @@
 
 ## ARM API Modeling Reviewers
 
-/.github/arm-leases/     @raosuhas @tejaswiminnu @akhilailla @msevanhi @vikeshi26 @vidapour @bubbles4096
+/.github/arm-leases/     @raosuhas @tejaswiminnu @akhilailla @msevanhi @vikeshi26 @vidapour @bubbles4096 @naeisner @ifeoluwaokunoren @shahjoy
 /.github/workflows/**/arm-*     @raosuhas @tejaswiminnu @akhilailla @msevanhi
 
 ## package-name-approval
 /.github/**/package-name-approval/          @samvaity @praveenkuttappan
 
-# Add owners for notifications for specific pipelines
-/eng/common/pipelines/codeowners-linter.yml
+## typespec-suppressions
+/.github/workflows/typespec-suppressions-*.yaml   @timotheeguerin @markcowl @catalinaperalta @iscai-msft
+/.github/workflows/src/typespec-suppressions/     @timotheeguerin @markcowl @catalinaperalta @iscai-msft
+/.github/workflows/test/typespec-suppressions/    @timotheeguerin @markcowl @catalinaperalta @iscai-msft

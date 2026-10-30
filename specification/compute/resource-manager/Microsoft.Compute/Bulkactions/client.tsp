@@ -8,6 +8,7 @@ namespace Microsoft.Compute;
 @@clientName(Microsoft.Compute, "ComputeBulkActionsMgmtClient", "python");
 @@clientName(NetworkApiVersion.`2020-11-01`, "ENUM_2020_11_01", "python");
 @@clientName(NetworkApiVersion.`2022-11-01`, "ENUM_2022_11_01", "python");
+
 @@clientName(
   VirtualMachineBulkOperations.bulkDeallocate,
   "BulkDeallocateOperation",
@@ -55,7 +56,7 @@ namespace Microsoft.Compute;
 );
 
 // Disambiguate LaunchBulkInstancesOperation's custom InnerError from the standard
-// Azure.Core.Foundations.InnerError that the folded ScheduledActions error models pull in
+// Azure.Core.Foundations.InnerError that the recurring bulk action error models pull in
 // (via Azure.Core.Foundations.Error). Flattening-language SDKs (C#/Java/Python) require unique
 // client names; the standard type keeps "InnerError", BA's custom one is renamed.
 @@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "csharp");
@@ -67,6 +68,11 @@ namespace Microsoft.Compute;
 );
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
+@@clientName(
+  CapacityRecommendationParameters,
+  "BulkActionsCapacityRecommendationParametersContent",
+  "csharp"
+);
 @@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
 @@clientName(
   DeallocateResourceOperationResponse,
@@ -207,6 +213,26 @@ namespace Microsoft.Compute;
 // =====================================================================
 // .NET naming convention fixes (C# only)
 // =====================================================================
+@@clientName(
+  BulkCreateCustomResource,
+  "BulkCreateCustomResolvedItem",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationParameters.availabilityZones,
+  "isAvailabilityZoneEnabled",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.availabilityZones,
+  "isSplitByAvailabilityZone",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.recommendationRequestedAtUtc,
+  "recommendationRequestedAt",
+  "csharp"
+);
 // Expand "Op" abbreviation to "Operation".
 @@clientName(ResourceOperationDetails.opType, "operationKind", "csharp");
 @@clientName(FallbackOperationInfo.lastOpType, "lastOperationKind", "csharp");
@@ -291,7 +317,8 @@ namespace Microsoft.Compute;
 // ARMCOMMON001: avoid redefining the ARM-framework "ResourceType"; use a domain-scoped name.
 @@clientName(ResourceType, "ScheduledActionsResourceType", "csharp");
 // ARMCOMMON001: avoid redefining the ARM-framework "SubResource"; use a domain-scoped name.
-@@clientName(SubResource, "ComputeBulkActionsSubResource", "csharp");
+// Suffix avoids ending in "Resource", which is reserved for ArmResource-derived types.
+@@clientName(SubResource, "ComputeBulkActionsSubResourceInfo", "csharp");
 // Contextual naming: "Language" is too generic and collides across packages.
 @@clientName(Language, "ScheduledActionLanguage", "csharp");
 // Contextual naming: scope the generic "ProvisioningState" to its operation.
@@ -451,8 +478,8 @@ namespace Microsoft.Compute;
 );
 @@clientName(DelayRequest, "DelayRequestContent", "csharp");
 @@clientName(
-  RecurringScheduledActionsExecutionParameters,
-  "RecurringScheduledActionsExecutionParametersContent",
+  ScheduledActionsExecutionParameters,
+  "ScheduledActionsExecutionParametersContent",
   "csharp"
 );
 @@clientName(ResourceAttachRequest, "ResourceAttachRequestContent", "csharp");
@@ -463,3 +490,33 @@ namespace Microsoft.Compute;
   "csharp"
 );
 @@clientName(ResourcePatchRequest, "ResourcePatchRequestContent", "csharp");
+
+// Model types must not end in "Resource" (reserved for ArmResource-derived classes);
+// these plain models collide with the ScheduledAction/Occurrence ARM resource classes.
+@@clientName(
+  ScheduledActionResource,
+  "ScheduledActionResourceMetadata",
+  "csharp"
+);
+@@clientName(OccurrenceResource, "OccurrenceResourceMetadata", "csharp");
+@@clientName(OccurrenceExtensionResource, "OccurrenceExtension", "csharp");
+
+// APIView naming feedback: give the generic single-word resource/model/enum
+// names an RP/domain prefix so they are self-descriptive in .NET IntelliSense.
+@@clientName(Occurrence, "ScheduledActionOccurrence", "csharp");
+@@clientName(DelayRequest.delay, "scheduleAt", "csharp");
+@@clientName(Mode, "ProxyAgentMode", "csharp");
+@@clientName(Modes, "ImdsAccessControlMode", "csharp");
+// "Placement" is ambiguous in .NET IntelliSense next to DiffDiskPlacement in this
+// package and VirtualMachinePlacement in Azure.ResourceManager.Compute.
+@@clientName(Placement, "BulkActionsVirtualMachinePlacement", "csharp");
+
+// .NET flattens unbound subscription-scoped operations into SubscriptionResource
+// extension methods named from the operationId suffix, so BulkCreate and
+// BulkCreateCustom both generated GetAsyncOperationStatus and failed with CS0111.
+// BulkCreateCustom keeps the original name because it already shipped in 1.2.0-beta.2.
+@@clientName(
+  BulkCreate.getAsyncOperationStatus,
+  "getBulkCreateAsyncOperationStatus",
+  "csharp"
+);

@@ -28,6 +28,7 @@ interface ProductsAndConfigurationsOperationGroup {
       /**
        * $skipToken is supported on list of configurations, which provides the next page in the list of configurations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listConfigurations POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -45,12 +46,14 @@ interface ProductsAndConfigurationsOperationGroup {
       /**
        * $expand is supported on configurations parameter for product, which provides details on the configurations for the product.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listProductFamilies POST contract uses $expand in the query; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * $skipToken is supported on list of product families, which provides the next page in the list of product families.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listProductFamilies POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -68,6 +71,7 @@ interface ProductsAndConfigurationsOperationGroup {
       /**
        * $skipToken is supported on list of product families metadata, which provides the next page in the list of product families metadata.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listProductFamiliesMetadata POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -103,7 +107,9 @@ interface OrdersOperationGroup {
   /**
    * List orders at resource group level.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders")
   @get
   @list
