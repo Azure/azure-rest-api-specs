@@ -40,6 +40,11 @@ using Microsoft.EventHub;
 @@clientName(EHNamespaces.privateLinkResourcesGet, "Get");
 @@clientLocation(EHNamespaces.checkNameAvailability, DisasterRecoveryConfigs);
 @@clientName(EHNamespaces.checkNameAvailability::parameters.body, "parameters");
+@@clientLocation(EHNamespaces.triggerMigration, "Namespaces");
+@@clientName(EHNamespaces.triggerMigration::parameters.body, "parameters");
+@@clientLocation(EHNamespaces.getMigration, "Namespaces");
+@@clientLocation(EHNamespaces.terminateMigration, "Namespaces");
+@@clientLocation(EHNamespaces.getMigrationReplicationLags, "Namespaces");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EHNamespace.properties);
 

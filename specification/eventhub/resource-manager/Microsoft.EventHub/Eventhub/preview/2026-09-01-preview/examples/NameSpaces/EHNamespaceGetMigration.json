@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "namespaceName": "sdk-Namespace-8980",
+    "resourceGroupName": "ResurceGroupSample",
+    "subscriptionId": "SampleSubscription"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8980/migration",
+        "name": "sdk-Namespace-8980",
+        "type": "Microsoft.EventHub/namespaces/migration",
+        "location": "West US",
+        "sku": {
+          "name": "Dedicated"
+        },
+        "properties": {
+          "migration": {
+            "locations": [
+              {
+                "locationName": "eastus",
+                "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/sampleCluster",
+                "replicaState": "Ready"
+              }
+            ],
+            "status": "InProgress"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Namespaces_GetMigration",
+  "title": "NamespaceGetMigration"
+}
