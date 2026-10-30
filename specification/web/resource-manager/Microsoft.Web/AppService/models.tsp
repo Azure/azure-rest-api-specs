@@ -5381,7 +5381,9 @@ model CertificateProperties {
   canonicalName?: string;
 
   /**
-   * Method of domain validation for free cert
+   * Domain validation method for an App Service Managed Certificate. Supported values are
+   * `http-token` (HTTP token validation) and `cname-delegation` (CNAME delegation).
+   * HTTP token validation is used for apex domains and when CNAME validation is disabled.
    */
   domainValidationMethod?: string;
 }
@@ -5520,7 +5522,9 @@ model CertificatePatchResourceProperties {
   canonicalName?: string;
 
   /**
-   * Method of domain validation for free cert
+   * Domain validation method for an App Service Managed Certificate. Supported values are
+   * `http-token` (HTTP token validation) and `cname-delegation` (CNAME delegation).
+   * HTTP token validation is used for apex domains and when CNAME validation is disabled.
    */
   domainValidationMethod?: string;
 }
