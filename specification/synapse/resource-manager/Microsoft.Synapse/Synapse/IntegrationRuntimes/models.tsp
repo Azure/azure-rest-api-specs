@@ -1251,6 +1251,7 @@ model SecretBase {
   /**
    * Type of the secret.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "The published schema declares this discriminator as a plain string with no enum."
   type: string;
 }
 
@@ -1312,6 +1313,7 @@ model CustomSetupBase {
   /**
    * The type of custom setup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "The published schema declares this discriminator as a plain string with no enum."
   type: string;
 }
 
@@ -1470,6 +1472,7 @@ model LinkedIntegrationRuntimeType {
   /**
    * The authorization type for integration runtime sharing.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "The published schema declares this discriminator as a plain string with no enum."
   authorizationType: string;
 }
 
