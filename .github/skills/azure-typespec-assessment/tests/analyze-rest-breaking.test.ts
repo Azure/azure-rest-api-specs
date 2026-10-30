@@ -50,6 +50,7 @@ void test("emits explicit REST candidates for parameters, required properties, e
       },
     },
   });
+
   writeJson(path.join(work, "base.json"), document(false));
   writeJson(path.join(work, "current.json"), document(true));
 
@@ -100,6 +101,40 @@ void test("emits explicit REST candidates for parameters, required properties, e
     result.candidates.map((item) => item.id),
     result.candidates.map((item) => item.id).sort(),
   );
+});
+
+void test("new projects are complete and non-breaking without baseline artifacts", () => {
+  const result = analyzeRestBreaking({
+    manifest: {
+      projects: [
+        {
+          id: "project-new",
+          classification: "new",
+          sourceChangeIds: ["source-new"],
+          artifacts: {},
+          artifactComparison: {
+            mode: "new-project",
+            baseline: {
+              sourceRevision: "absent",
+              reason: "No pre-existing REST contract exists.",
+            },
+            target: {
+              sourceRevision: "current",
+              commit: "head",
+              reason: "unversioned",
+            },
+            addedCurrentVersions: [],
+            available: { base: [], current: [] },
+          },
+        },
+      ],
+    },
+    sourceIndex: { sourceChanges: [] },
+  } as unknown as Parameters<typeof analyzeRestBreaking>[0]);
+
+  assert.equal(result.status, "ready");
+  assert.deepEqual(result.candidates, []);
+  assert.deepEqual(result.blockers, []);
 });
 
 void test("ignores PR 43308-style string format annotations across intersected response models", (context) => {

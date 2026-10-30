@@ -466,7 +466,7 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
       errors.push(`Artifact comparison references unknown project ${comparison.projectId}.`);
     }
     if (
-      !["new-api-version", "existing-api-version", "unversioned", "legacy"].includes(
+      !["new-project", "new-api-version", "existing-api-version", "unversioned", "legacy"].includes(
         comparison.mode ?? "",
       )
     ) {
@@ -474,12 +474,14 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
     }
     for (const role of ["baseline", "target"] as const) {
       const selection = comparison[role];
-      if (!selection || !["base", "current"].includes(selection.sourceRevision)) {
+      const newProjectBaseline = comparison.mode === "new-project" && role === "baseline";
+      const allowedRevisions = newProjectBaseline ? ["absent"] : ["base", "current"];
+      if (!selection || !allowedRevisions.includes(selection.sourceRevision)) {
         errors.push(
           `Artifact comparison ${comparison.projectId} has invalid ${role} source revision.`,
         );
       }
-      if (!selection?.commit) {
+      if (!newProjectBaseline && !selection?.commit) {
         errors.push(`Artifact comparison ${comparison.projectId} is missing ${role} commit.`);
       }
       if (!selection?.reason) {
@@ -497,6 +499,17 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
     ) {
       errors.push(
         `New-version artifact comparison ${comparison.projectId} must compile both roles from the head source.`,
+      );
+    }
+    if (
+      comparison.mode === "new-project" &&
+      (comparison.baseline?.sourceRevision !== "absent" ||
+        comparison.baseline.commit !== undefined ||
+        comparison.target?.sourceRevision !== "current" ||
+        comparison.target?.commit !== assessment.comparison.headCommit)
+    ) {
+      errors.push(
+        `New-project artifact comparison ${comparison.projectId} must omit the baseline commit and compile only the target from the head source.`,
       );
     }
   }
