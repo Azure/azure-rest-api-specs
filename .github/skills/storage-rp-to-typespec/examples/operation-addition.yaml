@@ -1,0 +1,51 @@
+# Synthetic contract; this is not a real Microsoft.Storage API.
+schemaVersion: 1
+provider: Microsoft.Storage
+typespecProject: specification/storage/Storage.Management
+baseline:
+  branch: feature/example-storage-release
+  commit: "1111111111111111111111111111111111111111"
+changes:
+  - kind: operation
+    action: add
+    target: ExampleResources.restart
+    apiVersions: ["2026-09-01-preview"]
+    after:
+      method: POST
+      path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/exampleResources/{resourceName}/restart
+      parameters:
+        - wireName: subscriptionId
+          location: path
+          type: string
+          required: true
+        - wireName: resourceGroupName
+          location: path
+          type: string
+          required: true
+        - wireName: resourceName
+          location: path
+          type: string
+          required: true
+        - wireName: api-version
+          location: query
+          type: string
+          required: true
+      requestBodyType: void
+      responses:
+        - statusCodes: ["202"]
+          bodyType: void
+          headers:
+            - wireName: Azure-AsyncOperation
+              type: string
+              required: true
+            - wireName: Location
+              type: string
+              required: true
+            - wireName: Retry-After
+              type: int32
+              required: false
+        - statusCodes: ["default"]
+          bodyType: ErrorResponse
+      longRunning: true
+      pollingHeaders: [Azure-AsyncOperation, Location]
+      finalResponseType: void

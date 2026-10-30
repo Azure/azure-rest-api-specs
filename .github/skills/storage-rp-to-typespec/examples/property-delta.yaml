@@ -1,0 +1,81 @@
+# Synthetic contract; these are not real Microsoft.Storage features.
+schemaVersion: 1
+provider: Microsoft.Storage
+typespecProject: specification/storage/Storage.Management
+baseline:
+  branch: feature/example-storage-release
+  commit: "1111111111111111111111111111111111111111"
+changes:
+  - kind: model
+    action: add
+    target: ExampleConnection
+    apiVersions: ["2026-09-01"]
+    after:
+      description: A synthetic connection configured when creating a resource.
+      properties:
+        - wireName: name
+          type: string
+          required: true
+          nullable: false
+          visibility: [read, create]
+          constraints:
+            minLength: 1
+        - wireName: uniqueId
+          type: string
+          required:
+            read: true
+            create: false
+          nullable: false
+          visibility: [read, create]
+          description: If omitted on create, the service resolves and persists the identifier.
+  - kind: property
+    action: add
+    target: ExampleResourceProperties.connection
+    apiVersions: ["2026-09-01"]
+    after:
+      wireName: connection
+      type: ExampleConnection
+      required: false
+      nullable: false
+      visibility: [read, create]
+      description: Immutable after resource creation.
+  - kind: property
+    action: modify
+    target: ExampleResourceProperties.displayName
+    apiVersions: ["2026-09-01"]
+    before:
+      wireName: displayName
+      type: string
+      required: false
+      nullable: false
+      visibility: [read, create, update]
+    after:
+      wireName: displayName
+      type: string
+      required: false
+      nullable: false
+      visibility: [read, create, update]
+      constraints:
+        maxLength: 128
+  - kind: property
+    action: remove
+    target: ExampleResourceProperties.legacyLabel
+    apiVersions: ["2026-09-01"]
+    before:
+      wireName: legacyLabel
+      type: string
+      required: false
+      nullable: false
+      visibility: [read, create, update]
+  - kind: enum
+    action: modify
+    target: ExampleMode
+    apiVersions: ["2026-09-01"]
+    before:
+      type: string
+      extensible: true
+      values: [Standard]
+    after:
+      type: string
+      extensible: true
+      values: [Standard, Enhanced]
