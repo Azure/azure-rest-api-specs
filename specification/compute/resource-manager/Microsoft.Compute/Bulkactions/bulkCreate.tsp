@@ -93,7 +93,7 @@ model BulkCreateEnvelope {
   placement?: Placement;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved for compatibility with earlier preview versions; removed from GA."
   @doc("Resource tags.")
   tags?: Record<string>;
 
@@ -101,6 +101,7 @@ model BulkCreateEnvelope {
   ...ResourcePlanProperty;
 }
 
+@@removed(BulkCreateEnvelope.tags, Versions.`2026-10-16`);
 @@added(BulkCreateEnvelope.extendedLocation, Versions.`2026-10-06-preview`);
 @@doc(
   BulkCreateEnvelope.extendedLocation,
@@ -207,7 +208,7 @@ model BulkCreateOperationStatusListResult {
 }
 
 // ============================================================
-// Routes: BulkCreate interface (8 operations)
+// Routes: BulkCreate interface
 // ============================================================
 
 @added(Versions.`2026-09-06-preview`)
@@ -241,18 +242,28 @@ interface BulkCreate {
     | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
 
-  @doc("Creates or updates BulkCreates.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  @renamedFrom(Versions.`2026-10-16`, "createOrUpdate")
+  @doc("Creates virtual machines in bulk.")
+  create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreate,
-    Parameters = BulkCreateId
+    Parameters = BulkCreateId,
+    Response =
+      | BulkCreateUpdatedResponse<LocationBasedBulkCreate>
+      | ArmResourceCreatedResponse<
+          LocationBasedBulkCreate,
+          ArmAsyncOperationHeader<FinalResult = LocationBasedBulkCreate> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
+  @removed(Versions.`2026-10-16`)
   @doc("Deletes BulkCreates.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Resource = LocationBasedBulkCreate,
     Parameters = BulkCreateId & BulkCreateDeleteInstancesParameter
   >;
 
+  @removed(Versions.`2026-10-16`)
   @doc("Cancels BulkCreate instances that have not yet launched.")
   cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedBulkCreate,
