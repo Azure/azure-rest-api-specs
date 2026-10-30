@@ -27,7 +27,7 @@ interface AgentSessionFiles {
   @summary("Upload a session file")
   @put
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
-  uploadSessionFile is FoundryDataPlaneOperation<
+  uploadSessionFile is AgentDataPlaneOperation<
     {
       ...UploadSessionFileParams;
     },
@@ -41,11 +41,14 @@ interface AgentSessionFiles {
   @summary("Download a session file")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
-  downloadSessionFile is FoundryDataPlaneOperation<
+  downloadSessionFile is AgentDataPlaneOperation<
     {
       ...DownloadSessionFileParams;
     },
-    bytes
+    {
+      /** The streamed file content. */
+      @body body: bytes;
+    }
   >;
 
   /**
@@ -56,7 +59,7 @@ interface AgentSessionFiles {
   @get
   @list
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
-  listSessionFiles is FoundryDataPlaneOperation<
+  listSessionFiles is AgentDataPlaneOperation<
     {
       ...ListSessionFilesParams;
       ...CommonPageQueryParameters;
@@ -71,10 +74,10 @@ interface AgentSessionFiles {
   @summary("Delete a session file")
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
-  deleteSessionFile is FoundryDataPlaneOperation<
+  deleteSessionFile is AgentDataPlaneOperation<
     {
       ...DeleteSessionFileParams;
     },
-    void
+    NoContentResponse
   >;
 }

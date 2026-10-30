@@ -1,5 +1,6 @@
 import "./models.tsp";
 import "../../common/models.tsp";
+import "../../common/debug-latency-headers.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -28,9 +29,13 @@ interface Responses {
     OpenAI.CreateResponse &
       UserDelegationHeader &
       SessionAffinityRequestHeader,
-    | (AgentSessionIdResponseHeader & OpenAI.Response)
     | (AgentSessionIdResponseHeader &
-        SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
+        ErrorSourceResponseHeader &
+        OpenAI.Response)
+    | (AgentSessionIdResponseHeader &
+        ErrorSourceResponseHeader &
+        SseResponseOf<OpenAI.CreateResponseStreamingResponse>),
+    AgentErrorResult
   >;
 
   /**
@@ -64,13 +69,19 @@ interface Responses {
       @query starting_after?: int32;
 
       ...UserDelegationHeader;
+      ...DebugLatencyRequestHeader;
     },
-    | (AgentSessionIdResponseHeader & {
-        /** The request body. */
-        @body body: OpenAI.Response;
-      })
     | (AgentSessionIdResponseHeader &
-        SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
+        ErrorSourceResponseHeader &
+        PersistedDebugLatencyResponseHeaders & {
+          /** The request body. */
+          @body body: OpenAI.Response;
+        })
+    | (AgentSessionIdResponseHeader &
+        ErrorSourceResponseHeader &
+        PersistedDebugLatencyResponseHeaders &
+        SseResponseOf<OpenAI.CreateResponseStreamingResponse>),
+    AgentErrorResult
   >;
 
   /**
@@ -91,10 +102,12 @@ interface Responses {
 
       ...UserDelegationHeader;
     },
-    AgentSessionIdResponseHeader & {
-      /** The request body. */
-      @body body: DeleteResponseResult;
-    }
+    AgentSessionIdResponseHeader &
+      ErrorSourceResponseHeader & {
+        /** The request body. */
+        @body body: DeleteResponseResult;
+      },
+    AgentErrorResult
   >;
 
   /**
@@ -115,10 +128,12 @@ interface Responses {
 
       ...UserDelegationHeader;
     },
-    AgentSessionIdResponseHeader & {
-      /** The request body. */
-      @body body: OpenAI.Response;
-    }
+    AgentSessionIdResponseHeader &
+      ErrorSourceResponseHeader & {
+        /** The request body. */
+        @body body: OpenAI.Response;
+      },
+    AgentErrorResult
   >;
 
   /**
@@ -138,11 +153,15 @@ interface Responses {
 
       ...CommonPageQueryParameters;
       ...UserDelegationHeader;
+      ...DebugLatencyRequestHeader;
     },
-    AgentSessionIdResponseHeader & {
-      /** The request body. */
-      @body body: AgentsPagedResult<OpenAI.ItemResource>;
-    }
+    AgentSessionIdResponseHeader &
+      ErrorSourceResponseHeader &
+      PersistedDebugLatencyResponseHeaders & {
+        /** The request body. */
+        @body body: AgentsPagedResult<OpenAI.ItemResource>;
+      },
+    AgentErrorResult
   >;
 
   /**
@@ -160,7 +179,8 @@ interface Responses {
       ...ConversationIdQueryParam;
       ...UserDelegationHeader;
     },
-    AgentsPagedResult<OpenAI.Response>
+    AgentsPagedResult<OpenAI.Response> & ErrorSourceResponseHeader,
+    AgentErrorResult
   >;
 
   /**
@@ -172,6 +192,7 @@ interface Responses {
   @route("compact")
   Compactconversation is OpenAIOperation<
     OpenAI.CompactResponseMethodPublicBody,
-    OpenAI.CompactResource
+    OpenAI.CompactResource & ErrorSourceResponseHeader,
+    AgentErrorResult
   >;
 }

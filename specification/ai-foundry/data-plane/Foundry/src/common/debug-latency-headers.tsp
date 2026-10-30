@@ -58,7 +58,13 @@ alias DebugLatencyPlatformResponseHeaders = {
   @minValue(0)
   @header("x-ms-debug-latency-infra-setup-ms")
   debugLatencyInfraSetupMs?: int64;
+};
 
+/**
+ * Customer-container latency headers for hosted-agent requests.
+ * Durations are whole milliseconds. Unavailable measurements are omitted.
+ */
+alias DebugLatencyCustomerResponseHeaders = {
   /**
    * Time from sandbox creation to successful container readiness. Omitted on warm
    * requests or when provisioning boundaries were not captured.
@@ -66,16 +72,6 @@ alias DebugLatencyPlatformResponseHeaders = {
   @minValue(0)
   @header("x-ms-debug-latency-container-readiness-ms")
   debugLatencyContainerReadinessMs?: int64;
-};
-
-/**
- * Live latency response headers for successful hosted-agent invoke and endpoint-response calls.
- * Platform preprocessing, infrastructure setup, container readiness, and container
- * response sum to response-begin time. During recovery, resumed provisioning is
- * excluded from container-response time to avoid double counting.
- */
-alias DebugLatencyResponseHeaders = {
-  ...DebugLatencyPlatformResponseHeaders;
 
   /**
    * Time from proxy forwarding start to client response-header commit, including
@@ -96,10 +92,20 @@ alias DebugLatencyResponseHeaders = {
 };
 
 /**
+ * Live latency response headers for successful hosted-agent invoke and endpoint-response calls.
+ * Platform preprocessing, infrastructure setup, container readiness, and container
+ * response sum to response-begin time. During recovery, resumed provisioning is
+ * excluded from container-response time to avoid double counting.
+ * Asynchronous creates omit container-response and response-begin measurements.
+ */
+alias DebugLatencyResponseHeaders = DebugLatencyPlatformResponseHeaders &
+  DebugLatencyCustomerResponseHeaders;
+
+/**
  * Persisted latency response headers on GET responses and invocations.
  * Values describe the original create call, not the GET. Persistence is eventually
  * consistent, so a GET immediately after creation may return no measurements.
- * For asynchronous creates, only platform-side measurements are available;
+ * For asynchronous creates, only provisioning measurements are available;
  * container-response, response-begin, and body-completion measurements are omitted.
  * These are ordinary response headers; GET does not emit the final trailer.
  */
@@ -140,6 +146,10 @@ alias PersistedDebugLatencyResponseHeaders = {
  */
 alias SessionDebugLatencyResponseHeaders = {
   ...DebugLatencyPlatformResponseHeaders;
+  ...PickProperties<
+    DebugLatencyCustomerResponseHeaders,
+    "debugLatencyContainerReadinessMs"
+  >;
 
   /**
    * Time from session-provisioning start to successful container readiness, excluding

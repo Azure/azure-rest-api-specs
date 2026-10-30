@@ -1591,18 +1591,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -1695,6 +1731,18 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -1720,12 +1768,36 @@ paths:
                 description: The response data for a requested list of items.
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -1754,18 +1826,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -1810,18 +1918,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -1875,18 +2019,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteAgentResponse'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -1915,18 +2095,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -1983,6 +2199,17 @@ paths:
             can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
             of the content-type label.
           headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
             x-ms-agent-version:
               required: true
               description: The version of the agent whose code zip is returned in the response body.
@@ -1994,12 +2221,36 @@ paths:
                 contentMediaType: application/zip
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -2031,6 +2282,25 @@ paths:
           description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
+        - name: x-ms-debug-latency-enabled
+          in: header
+          required: false
+          description: |-
+            When omitted, live latency headers and persistence for later retrieval are
+            enabled. `true` additionally requests the best-effort `x-ms-debug-latency-final`
+            HTTP response trailer on supported HTTP/2+ transports. `false` disables live
+            reporting and persistence, or suppresses an existing snapshot on a GET.
+            Empty, malformed, or multi-valued values also disable reporting.
+
+            The final trailer is not an ordinary response header. Its semicolon-delimited
+            fields are `v=1`, `start`, `platform_pre_ms`, `infra_ms`, `ready_ms`,
+            `container_response_ms`, `response_begin_ms`, optional `first_byte_ms`, and
+            `total_last_byte_ms`. Provisioning fields are omitted on warm requests.
+            `post_upstream_finalize_ms` is reserved and is not currently emitted.
+            The trailer may be absent on errors, cancellation, disconnect, WebSocket
+            upgrade, or transports that do not preserve trailers. Clients must not require it.
+          schema:
+            type: boolean
         - name: api-version
           in: query
           required: true
@@ -2042,6 +2312,59 @@ paths:
         '200':
           description: The request has succeeded.
           headers:
+            x-ms-debug-latency-session-start-type:
+              required: false
+              description: 'The session start type: `cold`, `warm`, or `resume`.'
+              schema:
+                type: string
+            x-ms-debug-latency-platform-preprocessing-ms:
+              required: false
+              description: |-
+                Residual platform service time not attributed to infrastructure setup or container
+                readiness. For session provisioning, this starts at session-provisioning start
+                and excludes the triggering request's admission, authentication, and routing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-infra-setup-ms:
+              required: false
+              description: |-
+                Infrastructure session-resource provisioning time. Omitted on warm requests.
+                If ordered provisioning boundaries were not captured, this measurement is
+                omitted and its time is included in platform preprocessing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-readiness-ms:
+              required: false
+              description: |-
+                Time from sandbox creation to successful container readiness. Omitted on warm
+                requests or when provisioning boundaries were not captured.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-response-ms:
+              required: false
+              description: |-
+                Time from proxy forwarding start to client response-header commit, including
+                request transfer, connection setup, agent handling, retries, and output-policy
+                buffering, but excluding separately attributed resumed provisioning.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-response-begin-ms:
+              required: false
+              description: |-
+                Time from request acceptance to client response-header commit. This is not
+                time to the first response-body byte or first server-sent event.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
             x-agent-invocation-id:
               required: true
               description: Unique identifier for this invocation.
@@ -2052,17 +2375,52 @@ paths:
               description: Session ID for this invocation. Returns the provided session ID or an auto-generated one if not provided in the request.
               schema:
                 type: string
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             '*/*':
               schema: {}
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -2099,6 +2457,18 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -2106,12 +2476,36 @@ paths:
                 additionalProperties: {}
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -2144,6 +2538,25 @@ paths:
           description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
+        - name: x-ms-debug-latency-enabled
+          in: header
+          required: false
+          description: |-
+            When omitted, live latency headers and persistence for later retrieval are
+            enabled. `true` additionally requests the best-effort `x-ms-debug-latency-final`
+            HTTP response trailer on supported HTTP/2+ transports. `false` disables live
+            reporting and persistence, or suppresses an existing snapshot on a GET.
+            Empty, malformed, or multi-valued values also disable reporting.
+
+            The final trailer is not an ordinary response header. Its semicolon-delimited
+            fields are `v=1`, `start`, `platform_pre_ms`, `infra_ms`, `ready_ms`,
+            `container_response_ms`, `response_begin_ms`, optional `first_byte_ms`, and
+            `total_last_byte_ms`. Provisioning fields are omitted on warm requests.
+            `post_upstream_finalize_ms` is reserved and is not currently emitted.
+            The trailer may be absent on errors, cancellation, disconnect, WebSocket
+            upgrade, or transports that do not preserve trailers. Clients must not require it.
+          schema:
+            type: boolean
         - name: api-version
           in: query
           required: true
@@ -2155,9 +2568,101 @@ paths:
         '200':
           description: The request has succeeded.
           headers:
+            x-ms-debug-latency-session-start-type:
+              required: false
+              description: 'The session start type: `cold`, `warm`, or `resume`.'
+              schema:
+                type: string
+            x-ms-debug-latency-platform-preprocessing-ms:
+              required: false
+              description: |-
+                Residual platform service time not attributed to infrastructure setup or container
+                readiness. For session provisioning, this starts at session-provisioning start
+                and excludes the triggering request's admission, authentication, and routing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-infra-setup-ms:
+              required: false
+              description: |-
+                Infrastructure session-resource provisioning time. Omitted on warm requests.
+                If ordered provisioning boundaries were not captured, this measurement is
+                omitted and its time is included in platform preprocessing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-readiness-ms:
+              required: false
+              description: |-
+                Time from sandbox creation to successful container readiness. Omitted on warm
+                requests or when provisioning boundaries were not captured.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-response-ms:
+              required: false
+              description: |-
+                Time from proxy forwarding start to client response-header commit, including
+                request transfer, connection setup, agent handling, retries, and output-policy
+                buffering, but excluding separately attributed resumed provisioning.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-response-begin-ms:
+              required: false
+              description: |-
+                Time from request acceptance to client response-header commit. This is not
+                time to the first response-body byte or first server-sent event.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-first-byte-ms:
+              required: false
+              description: |-
+                Time from request acceptance to the first response-body byte. Omitted when
+                no first byte was captured, including an empty-body response.
+                On live create calls this measurement is available only in the final trailer.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-post-upstream-finalize-ms:
+              required: false
+              description: |-
+                Time from upstream response-body completion to forwarding completion.
+                Best-effort and currently not emitted.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-total-last-byte-ms:
+              required: false
+              description: |-
+                Time from request acceptance to response-body forwarding completion.
+                On live create calls this measurement is available only in the final trailer.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
             x-agent-session-id:
               required: true
               description: Session ID for this invocation. Returns the session ID associated with the invocation.
+              schema:
+                type: string
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
               schema:
                 type: string
           content:
@@ -2165,12 +2670,36 @@ paths:
               schema: {}
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -2219,17 +2748,52 @@ paths:
               description: Session ID for this invocation. Returns the session ID associated with the invocation.
               schema:
                 type: string
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             '*/*':
               schema: {}
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -2268,6 +2832,25 @@ paths:
           schema:
             type: string
           explode: false
+        - name: x-ms-debug-latency-enabled
+          in: header
+          required: false
+          description: |-
+            When omitted, live latency headers and persistence for later retrieval are
+            enabled. `true` additionally requests the best-effort `x-ms-debug-latency-final`
+            HTTP response trailer on supported HTTP/2+ transports. `false` disables live
+            reporting and persistence, or suppresses an existing snapshot on a GET.
+            Empty, malformed, or multi-valued values also disable reporting.
+
+            The final trailer is not an ordinary response header. Its semicolon-delimited
+            fields are `v=1`, `start`, `platform_pre_ms`, `infra_ms`, `ready_ms`,
+            `container_response_ms`, `response_begin_ms`, optional `first_byte_ms`, and
+            `total_last_byte_ms`. Provisioning fields are omitted on warm requests.
+            `post_upstream_finalize_ms` is reserved and is not currently emitted.
+            The trailer may be absent on errors, cancellation, disconnect, WebSocket
+            upgrade, or transports that do not preserve trailers. Clients must not require it.
+          schema:
+            type: boolean
         - name: api-version
           in: query
           required: true
@@ -2284,17 +2867,52 @@ paths:
               description: Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.
               schema:
                 type: string
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema: {}
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -3569,6 +4187,25 @@ paths:
           description: The name of the agent to create a session for.
           schema:
             type: string
+        - name: x-ms-debug-latency-enabled
+          in: header
+          required: false
+          description: |-
+            When omitted, live latency headers and persistence for later retrieval are
+            enabled. `true` additionally requests the best-effort `x-ms-debug-latency-final`
+            HTTP response trailer on supported HTTP/2+ transports. `false` disables live
+            reporting and persistence, or suppresses an existing snapshot on a GET.
+            Empty, malformed, or multi-valued values also disable reporting.
+
+            The final trailer is not an ordinary response header. Its semicolon-delimited
+            fields are `v=1`, `start`, `platform_pre_ms`, `infra_ms`, `ready_ms`,
+            `container_response_ms`, `response_begin_ms`, optional `first_byte_ms`, and
+            `total_last_byte_ms`. Provisioning fields are omitted on warm requests.
+            `post_upstream_finalize_ms` is reserved and is not currently emitted.
+            The trailer may be absent on errors, cancellation, disconnect, WebSocket
+            upgrade, or transports that do not preserve trailers. Clients must not require it.
+          schema:
+            type: boolean
         - name: api-version
           in: query
           required: true
@@ -3579,18 +4216,99 @@ paths:
       responses:
         '201':
           description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            x-ms-debug-latency-session-start-type:
+              required: false
+              description: 'The session start type: `cold`, `warm`, or `resume`.'
+              schema:
+                type: string
+            x-ms-debug-latency-platform-preprocessing-ms:
+              required: false
+              description: |-
+                Residual platform service time not attributed to infrastructure setup or container
+                readiness. For session provisioning, this starts at session-provisioning start
+                and excludes the triggering request's admission, authentication, and routing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-infra-setup-ms:
+              required: false
+              description: |-
+                Infrastructure session-resource provisioning time. Omitted on warm requests.
+                If ordered provisioning boundaries were not captured, this measurement is
+                omitted and its time is included in platform preprocessing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-readiness-ms:
+              required: false
+              description: |-
+                Time from sandbox creation to successful container readiness. Omitted on warm
+                requests or when provisioning boundaries were not captured.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-session-total-ms:
+              required: false
+              description: |-
+                Time from session-provisioning start to successful container readiness, excluding
+                the triggering request's admission, authentication, and routing.
+                Platform preprocessing, infrastructure setup, and container readiness sum to
+                this total. GET values describe the original provisioning, not the GET.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentSessionResource'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -3664,6 +4382,18 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -3689,12 +4419,36 @@ paths:
                 description: The response data for a requested list of items.
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -3778,18 +4532,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SessionDirectoryListResponse'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -3840,14 +4630,50 @@ paths:
       responses:
         '204':
           description: 'There is no content to send for this request, but the headers may be useful. '
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -3891,18 +4717,54 @@ paths:
       responses:
         '201':
           description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SessionFileWriteResponse'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -3951,18 +4813,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/octet-stream:
               schema:
                 contentMediaType: application/octet-stream
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -3987,6 +4885,25 @@ paths:
           description: The session identifier.
           schema:
             type: string
+        - name: x-ms-debug-latency-enabled
+          in: header
+          required: false
+          description: |-
+            When omitted, live latency headers and persistence for later retrieval are
+            enabled. `true` additionally requests the best-effort `x-ms-debug-latency-final`
+            HTTP response trailer on supported HTTP/2+ transports. `false` disables live
+            reporting and persistence, or suppresses an existing snapshot on a GET.
+            Empty, malformed, or multi-valued values also disable reporting.
+
+            The final trailer is not an ordinary response header. Its semicolon-delimited
+            fields are `v=1`, `start`, `platform_pre_ms`, `infra_ms`, `ready_ms`,
+            `container_response_ms`, `response_begin_ms`, optional `first_byte_ms`, and
+            `total_last_byte_ms`. Provisioning fields are omitted on warm requests.
+            `post_upstream_finalize_ms` is reserved and is not currently emitted.
+            The trailer may be absent on errors, cancellation, disconnect, WebSocket
+            upgrade, or transports that do not preserve trailers. Clients must not require it.
+          schema:
+            type: boolean
         - name: api-version
           in: query
           required: true
@@ -3997,18 +4914,99 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-debug-latency-session-start-type:
+              required: false
+              description: 'The session start type: `cold`, `warm`, or `resume`.'
+              schema:
+                type: string
+            x-ms-debug-latency-platform-preprocessing-ms:
+              required: false
+              description: |-
+                Residual platform service time not attributed to infrastructure setup or container
+                readiness. For session provisioning, this starts at session-provisioning start
+                and excludes the triggering request's admission, authentication, and routing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-infra-setup-ms:
+              required: false
+              description: |-
+                Infrastructure session-resource provisioning time. Omitted on warm requests.
+                If ordered provisioning boundaries were not captured, this measurement is
+                omitted and its time is included in platform preprocessing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-readiness-ms:
+              required: false
+              description: |-
+                Time from sandbox creation to successful container readiness. Omitted on warm
+                requests or when provisioning boundaries were not captured.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-session-total-ms:
+              required: false
+              description: |-
+                Time from session-provisioning start to successful container readiness, excluding
+                the triggering request's admission, authentication, and routing.
+                Platform preprocessing, infrastructure setup, and container readiness sum to
+                this total. GET values describe the original provisioning, not the GET.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentSessionResource'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -4043,15 +5041,51 @@ paths:
           explode: false
       responses:
         '204':
-          description: There is no content to send for this request, but the headers may be useful.
+          description: 'There is no content to send for this request, but the headers may be useful. '
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -4085,15 +5119,51 @@ paths:
           explode: false
       responses:
         '204':
-          description: There is no content to send for this request, but the headers may be useful.
+          description: 'There is no content to send for this request, but the headers may be useful. '
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -4124,18 +5194,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5387,18 +6493,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentVersionObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5509,6 +6651,18 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5534,12 +6688,36 @@ paths:
                 description: The response data for a requested list of items.
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5577,18 +6755,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentVersionObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5633,18 +6847,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteAgentVersionResponse'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5711,18 +6961,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             text/event-stream:
               schema:
                 $ref: '#/components/schemas/SessionLogEvent'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5756,18 +7042,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentVersionObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5804,15 +7126,51 @@ paths:
           explode: false
       responses:
         '204':
-          description: There is no content to send for this request, but the headers may be useful.
+          description: 'There is no content to send for this request, but the headers may be useful. '
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5842,15 +7200,51 @@ paths:
           explode: false
       responses:
         '204':
-          description: There is no content to send for this request, but the headers may be useful.
+          description: 'There is no content to send for this request, but the headers may be useful. '
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5883,18 +7277,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5927,18 +7357,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -27380,6 +28846,17 @@ paths:
               description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
               schema:
                 type: string
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -27588,12 +29065,36 @@ paths:
                 $ref: '#/components/schemas/OpenAI.CreateResponseStreamingResponse'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -29436,6 +30937,18 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -29461,12 +30974,36 @@ paths:
                 description: The response data for a requested list of items.
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -29482,18 +31019,54 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.CompactResource'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -29724,6 +31297,25 @@ paths:
           description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
+        - name: x-ms-debug-latency-enabled
+          in: header
+          required: false
+          description: |-
+            When omitted, live latency headers and persistence for later retrieval are
+            enabled. `true` additionally requests the best-effort `x-ms-debug-latency-final`
+            HTTP response trailer on supported HTTP/2+ transports. `false` disables live
+            reporting and persistence, or suppresses an existing snapshot on a GET.
+            Empty, malformed, or multi-valued values also disable reporting.
+
+            The final trailer is not an ordinary response header. Its semicolon-delimited
+            fields are `v=1`, `start`, `platform_pre_ms`, `infra_ms`, `ready_ms`,
+            `container_response_ms`, `response_begin_ms`, optional `first_byte_ms`, and
+            `total_last_byte_ms`. Provisioning fields are omitted on warm requests.
+            `post_upstream_finalize_ms` is reserved and is not currently emitted.
+            The trailer may be absent on errors, cancellation, disconnect, WebSocket
+            upgrade, or transports that do not preserve trailers. Clients must not require it.
+          schema:
+            type: boolean
       responses:
         '200':
           description: The request has succeeded.
@@ -29733,6 +31325,98 @@ paths:
               description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
               schema:
                 type: string
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
+            x-ms-debug-latency-session-start-type:
+              required: false
+              description: 'The session start type: `cold`, `warm`, or `resume`.'
+              schema:
+                type: string
+            x-ms-debug-latency-platform-preprocessing-ms:
+              required: false
+              description: |-
+                Residual platform service time not attributed to infrastructure setup or container
+                readiness. For session provisioning, this starts at session-provisioning start
+                and excludes the triggering request's admission, authentication, and routing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-infra-setup-ms:
+              required: false
+              description: |-
+                Infrastructure session-resource provisioning time. Omitted on warm requests.
+                If ordered provisioning boundaries were not captured, this measurement is
+                omitted and its time is included in platform preprocessing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-readiness-ms:
+              required: false
+              description: |-
+                Time from sandbox creation to successful container readiness. Omitted on warm
+                requests or when provisioning boundaries were not captured.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-response-ms:
+              required: false
+              description: |-
+                Time from proxy forwarding start to client response-header commit, including
+                request transfer, connection setup, agent handling, retries, and output-policy
+                buffering, but excluding separately attributed resumed provisioning.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-response-begin-ms:
+              required: false
+              description: |-
+                Time from request acceptance to client response-header commit. This is not
+                time to the first response-body byte or first server-sent event.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-first-byte-ms:
+              required: false
+              description: |-
+                Time from request acceptance to the first response-body byte. Omitted when
+                no first byte was captured, including an empty-body response.
+                On live create calls this measurement is available only in the final trailer.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-post-upstream-finalize-ms:
+              required: false
+              description: |-
+                Time from upstream response-body completion to forwarding completion.
+                Best-effort and currently not emitted.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-total-last-byte-ms:
+              required: false
+              description: |-
+                Time from request acceptance to response-body forwarding completion.
+                On live create calls this measurement is available only in the final trailer.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
           content:
             application/json:
               schema:
@@ -29742,12 +31426,36 @@ paths:
                 $ref: '#/components/schemas/OpenAI.CreateResponseStreamingResponse'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -29928,18 +31636,53 @@ paths:
               description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
               schema:
                 type: string
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteResponseResult'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -30055,18 +31798,53 @@ paths:
               description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
               schema:
                 type: string
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.Response'
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -30265,6 +32043,25 @@ paths:
           description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
+        - name: x-ms-debug-latency-enabled
+          in: header
+          required: false
+          description: |-
+            When omitted, live latency headers and persistence for later retrieval are
+            enabled. `true` additionally requests the best-effort `x-ms-debug-latency-final`
+            HTTP response trailer on supported HTTP/2+ transports. `false` disables live
+            reporting and persistence, or suppresses an existing snapshot on a GET.
+            Empty, malformed, or multi-valued values also disable reporting.
+
+            The final trailer is not an ordinary response header. Its semicolon-delimited
+            fields are `v=1`, `start`, `platform_pre_ms`, `infra_ms`, `ready_ms`,
+            `container_response_ms`, `response_begin_ms`, optional `first_byte_ms`, and
+            `total_last_byte_ms`. Provisioning fields are omitted on warm requests.
+            `post_upstream_finalize_ms` is reserved and is not currently emitted.
+            The trailer may be absent on errors, cancellation, disconnect, WebSocket
+            upgrade, or transports that do not preserve trailers. Clients must not require it.
+          schema:
+            type: boolean
       responses:
         '200':
           description: The request has succeeded.
@@ -30274,6 +32071,98 @@ paths:
               description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
               schema:
                 type: string
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
+            x-ms-debug-latency-session-start-type:
+              required: false
+              description: 'The session start type: `cold`, `warm`, or `resume`.'
+              schema:
+                type: string
+            x-ms-debug-latency-platform-preprocessing-ms:
+              required: false
+              description: |-
+                Residual platform service time not attributed to infrastructure setup or container
+                readiness. For session provisioning, this starts at session-provisioning start
+                and excludes the triggering request's admission, authentication, and routing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-infra-setup-ms:
+              required: false
+              description: |-
+                Infrastructure session-resource provisioning time. Omitted on warm requests.
+                If ordered provisioning boundaries were not captured, this measurement is
+                omitted and its time is included in platform preprocessing.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-readiness-ms:
+              required: false
+              description: |-
+                Time from sandbox creation to successful container readiness. Omitted on warm
+                requests or when provisioning boundaries were not captured.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-container-response-ms:
+              required: false
+              description: |-
+                Time from proxy forwarding start to client response-header commit, including
+                request transfer, connection setup, agent handling, retries, and output-policy
+                buffering, but excluding separately attributed resumed provisioning.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-response-begin-ms:
+              required: false
+              description: |-
+                Time from request acceptance to client response-header commit. This is not
+                time to the first response-body byte or first server-sent event.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-first-byte-ms:
+              required: false
+              description: |-
+                Time from request acceptance to the first response-body byte. Omitted when
+                no first byte was captured, including an empty-body response.
+                On live create calls this measurement is available only in the final trailer.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-post-upstream-finalize-ms:
+              required: false
+              description: |-
+                Time from upstream response-body completion to forwarding completion.
+                Best-effort and currently not emitted.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
+            x-ms-debug-latency-total-last-byte-ms:
+              required: false
+              description: |-
+                Time from request acceptance to response-body forwarding completion.
+                On live create calls this measurement is available only in the final trailer.
+              schema:
+                type: integer
+                format: int64
+                minimum: 0
           content:
             application/json:
               schema:
@@ -30299,12 +32188,36 @@ paths:
                 description: The response data for a requested list of items.
         4XX:
           description: Client error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
+          headers:
+            x-ms-error-source:
+              required: false
+              description: |-
+                The request-outcome classification available before response headers are sent.
+                Known values include `customer`, `platform`, and `none`, but any string is valid.
+                A present, empty value means that no classification was available; it is distinct
+                from an absent header, which can occur when service-side emission is disabled.
+                Attribution determined after a streaming response or WebSocket upgrade has
+                committed its headers is not reflected in this value.
+              schema:
+                type: string
           content:
             application/json:
               schema:
