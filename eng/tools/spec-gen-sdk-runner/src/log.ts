@@ -57,7 +57,11 @@ export function vsoLogIssue(message: string, type: LogIssueType = LogIssueType.E
 }
 
 export function setVsoVariable(variable: string, value: string, isOutput = false): void {
+  const escapedValue = value
+    .replaceAll("%", "%AZP25")
+    .replaceAll("\r", "%0D")
+    .replaceAll("\n", "%0A");
   console.log(
-    `##vso[task.setVariable variable=${variable}${isOutput ? ";isoutput=true" : ""}]${value}`,
+    `##vso[task.setVariable variable=${variable}${isOutput ? ";isoutput=true" : ""}]${escapedValue}`,
   );
 }
