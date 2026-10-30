@@ -774,6 +774,7 @@ model IntegrationRuntimeNodeMonitoringData {
   /**
    * Available memory (MB) on the integration runtime node.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Published JSON property name; renaming would change the wire payload."
   @visibility(Lifecycle.Read)
   availableMemoryInMB?: int32;
 
@@ -1089,6 +1090,7 @@ model IntegrationRuntimeDataFlowProperties {
 /**
  * VNet properties for managed integration runtime.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published definition name; renaming would change the OpenAPI definition and SDK type name."
 model IntegrationRuntimeVNetProperties {
   ...Record<unknown>;
 
@@ -1105,6 +1107,7 @@ model IntegrationRuntimeVNetProperties {
   /**
    * Resource IDs of the public IP addresses that this integration runtime will use.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Published JSON property name; renaming would change the wire payload."
   publicIPs?: string[];
 
   /**
@@ -1766,6 +1769,7 @@ model SelfHostedIntegrationRuntimeStatusTypeProperties {
   /**
    * The estimated time when the self-hosted integration runtime will be updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Published JSON property name; renaming would change the wire payload."
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   autoUpdateETA?: utcDateTime;
