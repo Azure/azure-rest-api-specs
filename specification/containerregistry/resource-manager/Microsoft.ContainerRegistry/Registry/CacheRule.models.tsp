@@ -56,6 +56,17 @@ union AdditionalAuthenticationType {
    * Google Artifact Registry (GAR) authentication via workload identity federation.
    */
   GoogleArtifactRegistry: "GoogleArtifactRegistry",
+
+  /**
+   * Amazon Elastic Container Registry (ECR) authentication via workload identity federation.
+   */
+  AwsElasticContainerRegistry: "AwsElasticContainerRegistry",
+
+  /**
+   * Microsoft Entra authentication via a federated identity credential on an application
+   * in another tenant.
+   */
+  EntraFederatedIdentityCredential: "EntraFederatedIdentityCredential",
 }
 
 /**
@@ -101,6 +112,85 @@ model GarAuthenticationProperties extends AdditionalAuthenticationProperties {
   @maxLength(32)
   @pattern("^[a-z][a-z0-9-]{2,30}[a-z0-9]$")
   workloadIdentityProvider: string;
+}
+
+/**
+ * Amazon Elastic Container Registry (ECR) authentication configuration.
+ */
+@added(Versions.vLatestPreview)
+model EcrAuthenticationProperties extends AdditionalAuthenticationProperties {
+  authenticationType: "AwsElasticContainerRegistry";
+
+  /**
+   * The AWS account that owns the IAM role used for authentication.
+   * The IAM role is assumed via AWS Security Token Service (STS) when exchanging a
+   * federated Entra access token for an ECR access token. The full IAM role ARN is
+   * derived from `accountNumber`, `rolePath`, and `roleName` as
+   * `arn:aws:iam::{accountNumber}:role{rolePath}{roleName}` (the path defaults to `/`).
+   */
+  @minLength(12)
+  @maxLength(12)
+  @pattern("^[0-9]{12}$")
+  accountNumber: string;
+
+  /**
+   * The AWS region of the upstream Elastic Container Registry (e.g. `us-west-2`).
+   * Only commercial AWS regions are supported; the GovCloud (`us-gov-*`), China
+   * (`cn-*`), and Secret/Top Secret ISO (`us-iso*`) partitions are rejected. The
+   * pattern stays forward-compatible for new commercial regions without requiring a
+   * contract change.
+   */
+  @minLength(6)
+  @maxLength(20)
+  @pattern("^(?!cn-)(?!us-gov-)(?!us-iso)[a-z]{2,3}(-[a-z]+){1,2}-[0-9]{1,2}$")
+  region: string;
+
+  /**
+   * The name of the AWS IAM role assumed for authentication.
+   * This is the role name only, not the full ARN; the IAM path is supplied separately
+   * via `rolePath`, so '/' is not permitted here.
+   */
+  @minLength(1)
+  @maxLength(64)
+  @pattern("^[A-Za-z0-9_+=,.@-]{1,64}$")
+  roleName: string;
+
+  /**
+   * Optional IAM path of the role (for example `/team/` or `/division/team/`). The value
+   * must be supplied in canonical form with a leading and trailing '/'; it is validated
+   * as-is and is never normalized. A non-root path must contain at least one character
+   * between the surrounding slashes. When omitted, the role is assumed to live at the path
+   * root (`/`).
+   */
+  @minLength(1)
+  @maxLength(512)
+  @pattern("^/$|^/[!-~]{1,510}/$")
+  rolePath?: string;
+}
+
+/**
+ * Microsoft Entra federated identity credential authentication configuration.
+ */
+@added(Versions.vLatestPreview)
+model EntraFederatedIdentityCredentialAuthenticationProperties
+  extends AdditionalAuthenticationProperties {
+  authenticationType: "EntraFederatedIdentityCredential";
+
+  /**
+   * The upstream tenant that issues the token for `federatedApplicationClientId` and contains
+   * the application's enterprise application (service principal).
+   */
+  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
+  sourceTenantId: string;
+
+  /**
+   * The client ID of the multi-tenant application. Its application registration and
+   * federated identity credential must be in the cache rule managed identity's home tenant.
+   * The credential's subject is the managed identity's principal/object ID, not its client ID.
+   * Its enterprise application (service principal) must exist in `sourceTenantId`.
+   */
+  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
+  federatedApplicationClientId: string;
 }
 
 /**
