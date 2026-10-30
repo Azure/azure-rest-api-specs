@@ -173,6 +173,11 @@ namespace Azure.AI.Projects {
     "IdleTimeout"
   );
   @@clientName(VoiceAgentSubagent.invoke_timeout_seconds, "InvokeTimeout");
+  @@clientName(
+    VoiceAgentSoundscapeWorkingTrackConfig.delay_ms,
+    "Delay",
+    "csharp"
+  );
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
