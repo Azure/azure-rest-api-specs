@@ -6497,6 +6497,25 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "enableSmbDirectoryLease"
+          },
+          {
+            "name": "x-ms-file-enable-change-feed",
+            "in": "header",
+            "description": "Optional. Boolean. Default if not specified is false. This property enables change feed on the share.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "enableChangeFeed"
+          },
+          {
+            "name": "x-ms-file-change-feed-retention-in-days",
+            "in": "header",
+            "description": "Optional. Integer. Specifies the number of days that change feed records are retained, between 1 and 365. Default if not specified is 7 days.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 365,
+            "x-ms-client-name": "changeFeedRetentionInDays"
           }
         ],
         "responses": {
@@ -6853,6 +6872,21 @@
               "x-ms-enabled-protocols": {
                 "type": "string",
                 "description": "The enabled protocols for the share."
+              },
+              "x-ms-file-blob-container-for-xfiles-change-feed": {
+                "type": "string",
+                "description": "The blob container in which change feed records are stored, in the format \"$fileschangefeed-<guid>\"."
+              },
+              "x-ms-file-change-feed-retention-in-days": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The number of days that change feed records are retained.",
+                "minimum": 1,
+                "maximum": 365
+              },
+              "x-ms-file-enable-change-feed": {
+                "type": "boolean",
+                "description": "Whether change feed is enabled."
               },
               "x-ms-lease-duration": {
                 "type": "string",
@@ -8570,6 +8604,25 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "enableSmbDirectoryLease"
+          },
+          {
+            "name": "x-ms-file-enable-change-feed",
+            "in": "header",
+            "description": "Optional. Boolean. Default if not specified is false. This property enables change feed on the share.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "enableChangeFeed"
+          },
+          {
+            "name": "x-ms-file-change-feed-retention-in-days",
+            "in": "header",
+            "description": "Optional. Integer. Specifies the number of days that change feed records are retained, between 1 and 365. Default if not specified is 7 days.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 365,
+            "x-ms-client-name": "changeFeedRetentionInDays"
           }
         ],
         "responses": {
