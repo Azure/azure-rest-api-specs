@@ -644,6 +644,7 @@ model IntegrationRuntimeConnectionInfo {
   /**
    * The token generated in service. Callers use this token to authenticate to integration runtime.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Read-only token intentionally returned by the POST getConnectionInfo action; the published schema has no x-ms-secret, and @secret would change it (format: password)."
   @visibility(Lifecycle.Read)
   serviceToken?: string;
 
