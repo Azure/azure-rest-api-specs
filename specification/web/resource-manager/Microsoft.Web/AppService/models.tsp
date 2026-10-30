@@ -16649,7 +16649,7 @@ model SiteSiloProperties {
   /**
    * Traffic mode for the site silo's Traffic Manager profile.
    */
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   trafficMode?: SiloFailOverMode;
 
   /**

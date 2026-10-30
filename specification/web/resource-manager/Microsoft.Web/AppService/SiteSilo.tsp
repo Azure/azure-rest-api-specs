@@ -94,6 +94,29 @@ interface SiteSiloResources {
   >;
 }
 
+/**
+ * The singleton virtual network connection of a Web App silo.
+ */
+@added(Versions.v2026_08_01)
+@singleton("virtualNetwork")
+@parentResource(SiteSilo)
+model SiteSiloVirtualNetworkConnection
+  is Azure.ResourceManager.ProxyResource<SwiftVirtualNetworkProperties> {
+  ...ResourceNameParameter<
+    Resource = SiteSiloVirtualNetworkConnection,
+    KeyName = "virtualNetwork",
+    SegmentName = "virtualNetworkConnections",
+    NamePattern = ""
+  >;
+}
+
+/**
+ * Collection of virtual network connections for a Web App silo.
+ */
+@added(Versions.v2026_08_01)
+model SiteSiloVirtualNetworkConnectionCollection
+  is Azure.Core.Page<SwiftVirtualNetwork>;
+
 @added(Versions.v2026_08_01)
 @armResourceOperations
 interface SiteSiloVirtualNetworkConnectionOps
@@ -131,6 +154,15 @@ interface SiteSiloVirtualNetworkConnectionOps
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
 interface SiteSiloVirtualNetworkConnections {
+  /**
+   * Lists the virtual network connections of a Web App silo. Returns the singleton virtualNetwork connection when configured, or an empty collection otherwise.
+   */
+  listSiteSiloVnetConnections is ArmResourceListByParent<
+    SiteSiloVirtualNetworkConnection,
+    Response = ArmResponse<SiteSiloVirtualNetworkConnectionCollection>,
+    Error = DefaultErrorResponse
+  >;
+
   /**
    * Gets the virtual network the silo is connected to.
    */
