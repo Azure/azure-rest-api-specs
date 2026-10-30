@@ -352,6 +352,9 @@
           }
         },
         "x-ms-examples": {
+          "Get wave plans whose status has not yet been checked": {
+            "$ref": "./examples/MigrateProjects_GetWavePlans_NullTimestamps.json"
+          },
           "MigrateProjects_GetWavePlans_MaximumSet": {
             "$ref": "./examples/MigrateProjects_GetWavePlans_MaximumSet_Gen.json"
           }
@@ -1485,7 +1488,7 @@
         "tags": [
           "MigrateProjects"
         ],
-        "description": "Validate a customer-uploaded wave-plan CSV without applying it, and report the row and wave counts together with any findings. Long-running operation.",
+        "description": "Validate a customer-uploaded wave-plan CSV without applying it, and report the validated workload count together with any findings. Long-running operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1809,6 +1812,180 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/associateInventory": {
+      "post": {
+        "operationId": "Waves_AssociateInventory",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Associate the selected applications and discovered workloads with a wave. Long-running operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WaveInventory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Associate inventory with a wave": {
+            "$ref": "./examples/Waves_AssociateInventory.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/dissociateInventory": {
+      "post": {
+        "operationId": "Waves_DissociateInventory",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Dissociate the selected applications and discovered workloads from a wave. Long-running operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WaveInventory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wave"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dissociate inventory from a wave": {
+            "$ref": "./examples/Waves_DissociateInventory.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/exportWorkloadConfiguration": {
       "post": {
         "operationId": "Waves_ExportWorkloadConfiguration",
@@ -2107,6 +2284,11 @@
         "versionId": {
           "type": "string",
           "description": "The Artifact Store version id for the run's committed files.",
+          "readOnly": true
+        },
+        "wavePlanConfigArtifactId": {
+          "type": "string",
+          "description": "The Azure resource ID of the artifact containing the wave-plan configuration used for this plan.",
           "readOnly": true
         }
       },
@@ -3021,13 +3203,15 @@
         "lastCheckedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC time when the plan status was last established.",
+          "description": "The UTC time when the plan status was last established. Null when the status has not been established.",
+          "x-nullable": true,
           "readOnly": true
         },
         "outdatedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The first UTC time when the current materialized plan was found outdated. Absent while the plan is up to date.",
+          "description": "The first UTC time when the current materialized plan was found outdated. Null while the plan is up to date.",
+          "x-nullable": true,
           "readOnly": true
         }
       },
@@ -3485,10 +3669,17 @@
           "$ref": "#/definitions/ValidationErrorFile",
           "description": "Download access to the error CSV describing the validation findings. Present only when findings were produced.",
           "readOnly": true
+        },
+        "workloadsImportedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of workloads validated from the uploaded wave-plan CSV.",
+          "readOnly": true
         }
       },
       "required": [
-        "status"
+        "status",
+        "workloadsImportedCount"
       ]
     },
     "ValidateWorkloadConfigurationResponse": {
@@ -3578,6 +3769,30 @@
         }
       ]
     },
+    "WaveInventory": {
+      "type": "object",
+      "description": "Inventory whose membership in a wave is changed. Specify at least one application or workload resource ID across the two lists. Omitted lists are treated as empty.",
+      "properties": {
+        "applicationIds": {
+          "type": "array",
+          "description": "The fully qualified Azure resource IDs of the applications whose wave membership is changed.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "workloadIds": {
+          "type": "array",
+          "description": "The fully qualified Azure resource IDs of the discovered workloads whose wave membership is changed.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      }
+    },
     "WaveListResult": {
       "type": "object",
       "description": "The response of a Wave list operation.",
@@ -3654,13 +3869,15 @@
         "lastCheckedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC time when the plan status was last established.",
+          "description": "The UTC time when the plan status was last established. Null when the status has not been established.",
+          "x-nullable": true,
           "readOnly": true
         },
         "outdatedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The first UTC time when the current materialized plan was found outdated. Absent while the plan is up to date.",
+          "description": "The first UTC time when the current materialized plan was found outdated. Null while the plan is up to date.",
+          "x-nullable": true,
           "readOnly": true
         }
       },
@@ -3679,9 +3896,11 @@
       "type": "string",
       "description": "The reason a materialized wave plan is considered outdated.",
       "enum": [
-        "ProposedWorkloadCommitted",
+        "ProposedWorkloadCommited",
         "CommittedWorkloadRemoved",
-        "CommittedWorkloadUpdated"
+        "CommittedWorkloadUpdated",
+        "CommittedWaveNotExists",
+        "CommittedWorkloadNotExistsInWave"
       ],
       "x-ms-enum": {
         "name": "WavePlanOutdatedReason",
@@ -3689,7 +3908,7 @@
         "values": [
           {
             "name": "ProposedWorkloadCommitted",
-            "value": "ProposedWorkloadCommitted",
+            "value": "ProposedWorkloadCommited",
             "description": "A proposed workload was committed to an already-created wave."
           },
           {
@@ -3701,6 +3920,16 @@
             "name": "CommittedWorkloadUpdated",
             "value": "CommittedWorkloadUpdated",
             "description": "A workload in an already-created wave changed."
+          },
+          {
+            "name": "CommittedWaveNotExists",
+            "value": "CommittedWaveNotExists",
+            "description": "A wave referenced by the materialized plan no longer exists."
+          },
+          {
+            "name": "CommittedWorkloadNotExistsInWave",
+            "value": "CommittedWorkloadNotExistsInWave",
+            "description": "A committed workload no longer exists in its assigned wave."
           }
         ]
       }

@@ -92,7 +92,7 @@ interface MigrateProjects {
   >;
 
   @added(ApiVersions.v2026_09_01_preview)
-  @doc("Validate a customer-uploaded wave-plan CSV without applying it, and report the row and wave counts together with any findings. Long-running operation.")
+  @doc("Validate a customer-uploaded wave-plan CSV without applying it, and report the validated workload count together with any findings. Long-running operation.")
   @action("validateWavePlan")
   validateWavePlan is ArmResourceActionAsync<
     MigrateProject,
@@ -129,6 +129,28 @@ interface Waves {
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "java")
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "csharp")
   refresh is ArmResourceActionSync<Wave, void, WaveProperties>;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Associate the selected applications and discovered workloads with a wave. Long-running operation.")
+  @action("associateInventory")
+  associateInventory is ArmResourceActionAsync<
+    Wave,
+    WaveInventory,
+    Wave,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Wave> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Dissociate the selected applications and discovered workloads from a wave. Long-running operation.")
+  @action("dissociateInventory")
+  dissociateInventory is ArmResourceActionAsync<
+    Wave,
+    WaveInventory,
+    Wave,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Wave> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @added(ApiVersions.v2026_09_01_preview)
   @doc("Export the workload configuration of a wave as a CSV and return a read-only download SAS URI. Long-running operation.")

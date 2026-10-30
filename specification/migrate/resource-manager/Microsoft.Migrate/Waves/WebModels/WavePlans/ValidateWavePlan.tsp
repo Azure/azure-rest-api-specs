@@ -51,4 +51,8 @@ model ValidateWavePlanResponse {
   @doc("Download access to the error CSV describing the validation findings. Present only when findings were produced.")
   @visibility(Lifecycle.Read)
   validationErrorFile?: ValidationErrorFile;
+
+  @doc("The number of workloads validated from the uploaded wave-plan CSV.")
+  @visibility(Lifecycle.Read)
+  workloadsImportedCount: int32;
 }

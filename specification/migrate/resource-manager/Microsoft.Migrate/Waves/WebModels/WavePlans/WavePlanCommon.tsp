@@ -25,13 +25,19 @@ union PlanSource {
 @added(ApiVersions.v2026_09_01_preview)
 union WavePlanOutdatedReason {
   @doc("A proposed workload was committed to an already-created wave.")
-  ProposedWorkloadCommitted: "ProposedWorkloadCommitted",
+  ProposedWorkloadCommitted: "ProposedWorkloadCommited",
 
   @doc("A workload was removed from an already-created wave or from the assessment.")
   CommittedWorkloadRemoved: "CommittedWorkloadRemoved",
 
   @doc("A workload in an already-created wave changed.")
   CommittedWorkloadUpdated: "CommittedWorkloadUpdated",
+
+  @doc("A wave referenced by the materialized plan no longer exists.")
+  CommittedWaveNotExists: "CommittedWaveNotExists",
+
+  @doc("A committed workload no longer exists in its assigned wave.")
+  CommittedWorkloadNotExistsInWave: "CommittedWorkloadNotExistsInWave",
 
   string,
 }
@@ -49,15 +55,17 @@ model WavePlanOutdatedStatus {
   @visibility(Lifecycle.Read)
   outdatedReasons: WavePlanOutdatedReason[];
 
-  @doc("The UTC time when the plan status was last established.")
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service explicitly serializes null when the plan status has not been established."
+  @doc("The UTC time when the plan status was last established. Null when the status has not been established.")
   @added(ApiVersions.v2026_09_01_preview)
   @visibility(Lifecycle.Read)
-  lastCheckedTime?: utcDateTime;
+  lastCheckedTime?: utcDateTime | null;
 
-  @doc("The first UTC time when the current materialized plan was found outdated. Absent while the plan is up to date.")
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service explicitly serializes null while the materialized plan is up to date."
+  @doc("The first UTC time when the current materialized plan was found outdated. Null while the plan is up to date.")
   @added(ApiVersions.v2026_09_01_preview)
   @visibility(Lifecycle.Read)
-  outdatedTime?: utcDateTime;
+  outdatedTime?: utcDateTime | null;
 }
 
 @doc("Artifact Store identity for a wave plan run. Consumers use the artifact ARM id and version id to reference or share the committed artifact and resolve time-bound download access.")
@@ -70,6 +78,11 @@ model ArtifactProperties {
   @doc("The Artifact Store version id for the run's committed files.")
   @visibility(Lifecycle.Read)
   versionId: string;
+
+  @doc("The Azure resource ID of the artifact containing the wave-plan configuration used for this plan.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  wavePlanConfigArtifactId?: string;
 }
 
 @doc("Plan-level summary surfaced on the generateWavePlan and getWavePlans responses.")
