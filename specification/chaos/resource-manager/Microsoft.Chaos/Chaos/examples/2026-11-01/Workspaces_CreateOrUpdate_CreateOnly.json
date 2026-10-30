@@ -1,0 +1,48 @@
+{
+  "title": "Create a workspace only when absent, or return 412 when it already exists",
+  "operationId": "Workspaces_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace",
+    "If-None-Match": "*",
+    "resource": {
+      "location": "westus2",
+      "properties": {
+        "scopes": [
+          "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/operationStatuses/4bdadd97-207c-4de8-9bba-08339ae099c7?api-version=2026-11-01",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+        "name": "exampleWorkspace",
+        "type": "Microsoft.Chaos/workspaces",
+        "location": "westus2",
+        "properties": {
+          "scopes": [
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+          ],
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "PreconditionFailed",
+          "message": "The workspace already exists. The create-only precondition failed.",
+          "target": "If-None-Match"
+        }
+      }
+    }
+  }
+}
