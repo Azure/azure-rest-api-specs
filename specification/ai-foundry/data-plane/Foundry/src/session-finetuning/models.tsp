@@ -594,11 +594,17 @@ model ForwardBackwardInput {
   loss_fn_config?: LossFnConfig;
 }
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/forward_backward. */
+/**
+ * Request body for POST /fine_tuning_sessions/{sessionId}/forward_backward.
+ * Supply exactly one of forward_backward_input and text_only_input.
+ */
 @Azure.ClientGenerator.Core.clientName("ForwardBackwardContent", "csharp")
 model ForwardBackwardRequest {
   /** Batch inputs for the combined forward and backward pass. */
-  forward_backward_input: ForwardBackwardInput;
+  forward_backward_input?: ForwardBackwardInput | null;
+
+  /** Opaque sample references and scalar advantages for protected text-only training. */
+  text_only_input?: FineTuningTextOnlyTrainingInput | null;
 }
 
 /**
@@ -609,21 +615,21 @@ model ForwardInput {
   ...ForwardBackwardInput;
 }
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/forward. */
+/** Request body for POST /fine_tuning_sessions/{sessionId}/forward. */
 @Azure.ClientGenerator.Core.clientName("ForwardContent", "csharp")
 model ForwardRequest {
   /** Batch inputs for the forward-only pass. */
   forward_input: ForwardInput;
 }
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/optim_step. */
+/** Request body for POST /fine_tuning_sessions/{sessionId}/optim_step. */
 @Azure.ClientGenerator.Core.clientName("OptimStepContent", "csharp")
 model OptimStepRequest {
   /** Adam optimizer parameters used to apply accumulated gradients. */
   adam_params: AdamParams;
 }
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint. */
+/** Request body for POST /fine_tuning_sessions/{sessionId}/checkpoint. */
 @Azure.ClientGenerator.Core.clientName("SaveCheckpointContent", "csharp")
 model SaveCheckpointRequest {
   /**
@@ -644,7 +650,7 @@ model SaveCheckpointRequest {
 }
 
 /**
- * Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint_sample.
+ * Request body for POST /fine_tuning_sessions/{sessionId}/checkpoint_sample.
  * Supply either path or both sampling_session_seq_id and seq_id. The service
  * validates this requirement at runtime.
  */
@@ -666,14 +672,22 @@ model SaveSamplerWeightsRequest {
   type?: "save_weights_for_sampler" = "save_weights_for_sampler";
 }
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/sample. */
+/**
+ * Request body for POST /fine_tuning_sessions/{sessionId}/sample.
+ * Supply exactly one of prompt and text_only_input. Text-only mode requires
+ * a positive num_samples and does not support prompt log-probabilities,
+ * response_format, or caller-selected stopping criteria.
+ */
 @Azure.ClientGenerator.Core.clientName("FineTuningSampleContent", "csharp")
 model FineTuningSampleRequest {
   /** Number of independent completions to generate. If omitted, the service defaults to 1. */
   num_samples?: int32 = 1;
 
   /** Tokenised input prompt. */
-  prompt: FineTuningModelInput;
+  prompt?: FineTuningModelInput | null;
+
+  /** Complete public message history and optional function definitions for text-only sampling. */
+  text_only_input?: FineTuningTextOnlySampleInput | null;
 
   /** Parameters controlling token generation. */
   sampling_params: FineTuningSamplingParams;
@@ -712,7 +726,7 @@ model FineTuningCheckpointList {
   checkpoints: FineTuningCheckpoint[];
 }
 
-/** Response from POST /fine_tuning/sessions/{sessionId}/complete. */
+/** Response from POST /fine_tuning_sessions/{sessionId}/complete. */
 @Azure.ClientGenerator.Core.clientName("FineTuningCompleteResult", "csharp")
 model FineTuningCompleteResponse {
   /** Identifier of the session being unloaded. */
@@ -724,7 +738,7 @@ model FineTuningCompleteResponse {
   request_id: string;
 }
 
-/** Response from DELETE /fine_tuning/sessions/{sessionId}. */
+/** Response from DELETE /fine_tuning_sessions/{sessionId}. */
 @Azure.ClientGenerator.Core.clientName(
   "FineTuningDeleteSessionResult",
   "csharp"
@@ -738,7 +752,7 @@ model FineTuningDeleteSessionResponse {
   deleted: boolean;
 }
 
-/** Response from POST /fine_tuning/sessions/{sessionId}/heartbeat. */
+/** Response from POST /fine_tuning_sessions/{sessionId}/heartbeat. */
 @Azure.ClientGenerator.Core.clientName("FineTuningHeartbeatResult", "csharp")
 model FineTuningHeartbeatResponse {
   /** Identifier of the session whose heartbeat was refreshed, when included by the service. */
@@ -758,4 +772,308 @@ model FineTuningSampledSequence {
 
   /** Log-probabilities of the generated tokens, when available. */
   logprobs?: float64[] | null;
+}
+
+/** A public function call with JSON-object-encoded arguments. */
+model FineTuningTextOnlyFunctionCall {
+  /** Function name containing 1-64 letters, digits, underscores, or hyphens. */
+  @pattern("^[a-zA-Z0-9_-]{1,64}$")
+  name: string;
+
+  /** A string encoding a finite JSON object, not private model evidence. */
+  arguments: string;
+}
+
+/** A public assistant function call with a unique conversation-local identifier. */
+model FineTuningTextOnlyToolCall {
+  /** Nonempty identifier without whitespace, unique across the supplied history. */
+  @minLength(1)
+  @maxLength(256)
+  id: string;
+
+  /** The supported tool-call kind. */
+  type: "function";
+
+  /** Public function name and arguments. */
+  function: FineTuningTextOnlyFunctionCall;
+}
+
+/** Supported text-only context-message roles. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The text-only service validates this closed role set."
+union FineTuningTextOnlyContextRole {
+  /** System instructions. */
+  system: "system",
+
+  /** User input. */
+  user: "user",
+}
+
+/** A system or user message in the public text-only history. */
+model FineTuningTextOnlyContextMessage {
+  /** Source of this message. */
+  role: FineTuningTextOnlyContextRole;
+
+  /** Public text content. */
+  content: string;
+}
+
+/** A public assistant message containing text, function calls, or both. */
+model FineTuningTextOnlyAssistantMessage {
+  /** Source of this message. */
+  role: "assistant";
+
+  /** Public text, required unless at least one tool call is supplied. */
+  content?: string | null;
+
+  /** Function calls made by the assistant. */
+  tool_calls?: FineTuningTextOnlyToolCall[];
+}
+
+/** A public function result. */
+model FineTuningTextOnlyToolMessage {
+  /** Source of this message. */
+  role: "tool";
+
+  /** Identifier of the function call that produced this result. */
+  @minLength(1)
+  @maxLength(256)
+  tool_call_id: string;
+
+  /** Public function-result text. */
+  content: string;
+
+  /** Function name, required if its preceding call is absent from the history. */
+  @pattern("^[a-zA-Z0-9_-]{1,64}$")
+  name?: string;
+}
+
+/** An editable public message without private tokens or reasoning. */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "The existing wire alternatives are flat message objects; retain stable syntax without the experimental union-extends feature."
+union FineTuningTextOnlyMessage {
+  FineTuningTextOnlyContextMessage,
+  FineTuningTextOnlyAssistantMessage,
+  FineTuningTextOnlyToolMessage,
+}
+
+/** A public function definition whose parameters describe a JSON object. */
+model FineTuningTextOnlyFunctionDefinition {
+  /** Function name, unique among the supplied definitions. */
+  @pattern("^[a-zA-Z0-9_-]{1,64}$")
+  name: string;
+
+  /** Optional public function description. */
+  description?: string;
+
+  /** JSON schema with type equal to object. */
+  parameters: Record<unknown>;
+}
+
+/** A function available to a public text-only conversation. */
+model FineTuningTextOnlyTool {
+  /** The supported tool kind. */
+  type: "function";
+
+  /** Public function definition. */
+  function: FineTuningTextOnlyFunctionDefinition;
+}
+
+/** Complete public input for opt-in text-only sampling. */
+model FineTuningTextOnlySampleInput {
+  /** Ordered public history. Only system, user, assistant, and tool roles are supported. */
+  @minItems(1)
+  messages: FineTuningTextOnlyMessage[];
+
+  /** Optional public function definitions. */
+  tools?: FineTuningTextOnlyTool[];
+}
+
+/** One opaque sample reference and its finite scalar training advantage. */
+model FineTuningTextOnlyTrainingSample {
+  /** Opaque server locator, not an authorization credential. References in one batch must be unique. */
+  @minLength(1)
+  sample_ref: string;
+
+  /** Finite scalar advantage assigned to this exact generated sample. */
+  advantage: float64;
+}
+
+/** Supported loss functions for opaque-reference training. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The text-only service rejects loss functions outside this closed set."
+union FineTuningTextOnlyLossFn {
+  /** Importance-sampling policy-gradient loss. */
+  importance_sampling: "importance_sampling",
+
+  /** Proximal policy optimization. */
+  ppo: "ppo",
+
+  /** Clipped importance-sampled policy optimization. */
+  cispo: "cispo",
+
+  /** Soft adaptive policy optimization. */
+  sapo: "sapo",
+}
+
+/** Reference-based training input. Token batches must not accompany this input. */
+model FineTuningTextOnlyTrainingInput {
+  /** Exact generated samples to train on. */
+  @minItems(1)
+  samples: FineTuningTextOnlyTrainingSample[];
+
+  /** Supported reference loss function. Defaults to importance_sampling on the service. */
+  loss_fn?: FineTuningTextOnlyLossFn = "importance_sampling";
+
+  /** Optional configuration for the selected reference loss function. */
+  loss_fn_config?: Record<unknown> | null;
+}
+
+/** Common identity of an intact generated completion. */
+model FineTuningTextOnlySampleChoice {
+  /** Unique nonnegative index of the choice. */
+  @minValue(0)
+  index: int32;
+
+  /** Opaque reference to the exact generated evidence; not an authorization credential. */
+  @minLength(1)
+  sample_ref: string;
+}
+
+/** Supported termination of a valid public assistant completion. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The public text-only parser validates these exact completion outcomes."
+union FineTuningTextOnlyFinishReason {
+  /** The assistant completed its response. */
+  stop: "stop",
+
+  /** The assistant emitted function calls. */
+  tool_calls: "tool_calls",
+}
+
+/** Safe classifications for an intact but non-public generated completion. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Unknown classifications cannot be exposed as validated public completion metadata."
+union FineTuningTextOnlyInvalidReason {
+  /** The output token limit was reached. */
+  output_token_limit: "output_token_limit",
+
+  /** The expected private/public boundary was absent. */
+  missing_private_boundary: "missing_private_boundary",
+
+  /** A function call was malformed. */
+  malformed_tool_call: "malformed_tool_call",
+
+  /** Function arguments were not a valid JSON object. */
+  invalid_tool_arguments: "invalid_tool_arguments",
+
+  /** The completion could not be represented as a public assistant action. */
+  invalid_public_output: "invalid_public_output",
+}
+
+/** Recorded termination of an invalid, still-trainable completion. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service exposes only these recorded terminations for invalid completions."
+union FineTuningTextOnlyInvalidFinishReason {
+  /** Generation ended without reaching its output limit. */
+  stop: "stop",
+
+  /** Generation reached its output limit. */
+  length: "length",
+}
+
+/** A valid public completion and its opaque reference. */
+model FineTuningTextOnlyValidSampleChoice {
+  ...FineTuningTextOnlySampleChoice;
+
+  /** Public assistant output, without private reasoning or token evidence. */
+  message: FineTuningTextOnlyAssistantMessage;
+
+  /** Completion termination, consistent with the presence of tool calls. */
+  finish_reason: FineTuningTextOnlyFinishReason;
+}
+
+/** An intact trainable completion that has no safe public message. */
+model FineTuningTextOnlyInvalidSampleChoice {
+  ...FineTuningTextOnlySampleChoice;
+
+  /** Classification of this choice, not a failure of the sampling operation. */
+  outcome: "invalid_model_output";
+
+  /** Safe classification, never generated text or private evidence. */
+  reason: FineTuningTextOnlyInvalidReason;
+
+  /** Recorded termination. Length occurs exactly when the reason is output_token_limit. */
+  finish_reason: FineTuningTextOnlyInvalidFinishReason;
+}
+
+/** A public completion or a safely classified, still-trainable invalid completion. */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "The existing wire alternatives are flat objects without a shared discriminator; retain stable syntax without the experimental union-extends feature."
+union FineTuningTextOnlyChoice {
+  FineTuningTextOnlyValidSampleChoice,
+  FineTuningTextOnlyInvalidSampleChoice,
+}
+
+/** Public result payload for a completed text-only sample request. */
+model FineTuningTextOnlySampleResult {
+  /** Valid public completions or safely classified, still-trainable invalid choices. */
+  @minItems(1)
+  choices: FineTuningTextOnlyChoice[];
+}
+
+/** Scalar-only result payload for completed reference-based training. */
+model FineTuningTextOnlyTrainingResult {
+  /** Reference training exposes only scalar metrics. */
+  loss_fn_output_type: "scalar";
+
+  /** Always empty; private per-token outputs are not returned. */
+  @maxItems(0)
+  loss_fn_outputs: unknown[];
+
+  /** Finite numeric metrics for the completed training request. */
+  metrics: Record<float64>;
+}
+
+/** Metadata for one version-bound file in an authorized staged checkpoint copy. */
+model FineTuningCheckpointDownloadFile {
+  /** Opaque generation-bound file identifier. */
+  @pattern("^[0-9a-f]{64}$")
+  file_id: string;
+
+  /** Portable relative filename within the checkpoint, never an absolute or traversal path. */
+  filename: string;
+
+  /** Exact file size in bytes. */
+  @minValue(0)
+  size_bytes: int64;
+
+  /** Strong entity tag required as If-Match when reading this exact file generation. */
+  etag: string;
+
+  /** Request-relative API locator resolved against the successful preparation URL, not a storage URL. */
+  download_url: string;
+}
+
+/** Supported checkpoint preparation states. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Preparation uses the existing closed state machine, independently of request-status polling."
+union FineTuningCheckpointDownloadStatus {
+  /** The checkpoint copy is still being prepared. */
+  pending: "Pending",
+
+  /** Preparation succeeded and produced the file inventory. */
+  succeeded: "Succeeded",
+
+  /** Preparation failed without delivering files. */
+  failed: "Failed",
+}
+
+/**
+ * Checkpoint preparation response. HTTP 202 is used only for Pending.
+ * HTTP 200 reports Succeeded with files, or Failed without an inventory.
+ */
+@Azure.ClientGenerator.Core.clientName(
+  "FineTuningCheckpointDownloadResult",
+  "csharp"
+)
+model FineTuningCheckpointDownloadResponse {
+  /** Current preparation state. */
+  status: FineTuningCheckpointDownloadStatus;
+
+  /** Complete version-bound file inventory, present only after successful preparation. */
+  @minItems(1)
+  files?: FineTuningCheckpointDownloadFile[];
 }

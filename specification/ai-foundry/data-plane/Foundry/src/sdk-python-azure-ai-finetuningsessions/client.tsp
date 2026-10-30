@@ -24,6 +24,10 @@ namespace Azure.AI.FineTuning.Sessions;
 // raw operation-group methods would be a separate additive API change.
 @@scope(FineTuningSessions.delete, "!python");
 @@scope(Training.forward, "!python");
+// Preparation remains in maintained checkpoint hooks; file delivery is not
+// implemented by the current Python convenience SDK.
+@@scope(CheckpointDownloads.prepare, "!python");
+@@scope(CheckpointDownloads.getFile, "!python");
 
 // Named SDK locations create the existing flat groups without defining HTTP
 // interfaces or copying operations. Routes remain on the service operations.
@@ -251,6 +255,11 @@ namespace Azure.AI.FineTuning.Sessions;
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningSampleRequest,
   Loom.SampleRequest,
+  "python"
+);
+@@alternateType(
+  Azure.AI.Projects.SessionFineTuning.ForwardBackwardRequest,
+  Loom.ForwardBackwardRequest,
   "python"
 );
 @@alternateType(

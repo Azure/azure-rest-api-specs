@@ -9904,7 +9904,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PendingUploadRequest'
         description: The pending upload request parameters
-  /fine_tuning/sessions:
+  /fine_tuning_sessions:
     post:
       operationId: FineTuningSessions_create
       summary: Create a fine-tuning session
@@ -10039,7 +10039,7 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
-  /fine_tuning/sessions/{sessionId}:
+  /fine_tuning_sessions/{sessionId}:
     get:
       operationId: FineTuningSessions_get
       summary: Get a fine-tuning session
@@ -10162,7 +10162,7 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
-  /fine_tuning/sessions/{sessionId}/checkpoint:
+  /fine_tuning_sessions/{sessionId}/checkpoint:
     post:
       operationId: Checkpoints_save
       summary: Save a training checkpoint
@@ -10232,7 +10232,7 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.SaveCheckpointRequest'
         description: Identifier and optional training metadata for the checkpoint.
-  /fine_tuning/sessions/{sessionId}/checkpoint_sample:
+  /fine_tuning_sessions/{sessionId}/checkpoint_sample:
     post:
       operationId: Checkpoints_saveSamplerWeights
       summary: Save sampler weights
@@ -10302,7 +10302,7 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.SaveSamplerWeightsRequest'
         description: Explicit checkpoint identifier or sequence identifiers for the sampler weights.
-  /fine_tuning/sessions/{sessionId}/checkpoints:
+  /fine_tuning_sessions/{sessionId}/checkpoints:
     get:
       operationId: Checkpoints_list
       summary: List checkpoints
@@ -10363,7 +10363,7 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
-  /fine_tuning/sessions/{sessionId}/checkpoints/{checkpointId}:
+  /fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}:
     get:
       operationId: Checkpoints_get
       summary: Get checkpoint info
@@ -10431,7 +10431,189 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
-  /fine_tuning/sessions/{sessionId}/complete:
+  /fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}/download:
+    post:
+      operationId: CheckpointDownloads_prepare
+      summary: Prepare a checkpoint download
+      description: |-
+        Prepare a checkpoint export without a request body. Repeat this operation
+        while HTTP 202 reports Pending. HTTP 200 reports Succeeded with the file
+        inventory or Failed. This is not the Azure LRO protocol and does not
+        deliver files to the caller's filesystem.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the session that owns the checkpoint.
+          schema:
+            type: string
+            minLength: 1
+        - name: checkpointId
+          in: path
+          required: true
+          description: Identifier of the registered sampler checkpoint to prepare.
+          schema:
+            type: string
+            minLength: 1
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionFineTuning.FineTuningCheckpointDownloadResponse'
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionFineTuning.FineTuningCheckpointDownloadResponse'
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Checkpoints
+  /fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}/download/files/{fileId}:
+    get:
+      operationId: CheckpointDownloads_getFile
+      summary: Read an authorized checkpoint file
+      description: |-
+        Stream one advertised file from a completed, owned checkpoint export.
+        Rechecks download admission and ownership. If-Match must contain the
+        advertised strong ETag; arbitrary storage URLs and unversioned reads are
+        not accepted. This read does not create or renew a checkpoint copy.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the session that owns the checkpoint.
+          schema:
+            type: string
+            minLength: 1
+        - name: checkpointId
+          in: path
+          required: true
+          description: Identifier of the registered sampler checkpoint.
+          schema:
+            type: string
+            minLength: 1
+        - name: fileId
+          in: path
+          required: true
+          description: Opaque file identifier from the successful preparation response.
+          schema:
+            type: string
+            pattern: ^[0-9a-f]{64}$
+        - name: If-Match
+          in: header
+          required: true
+          description: The advertised strong ETag for the exact file generation to read.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            ETag:
+              required: true
+              description: Strong ETag of the returned file generation.
+              schema:
+                type: string
+            Content-Length:
+              required: true
+              description: Exact number of bytes in the file.
+              schema:
+                type: integer
+                format: int64
+            Cache-Control:
+              required: true
+              description: Private file bytes must not be cached or transformed.
+              schema:
+                type: string
+                enum:
+                  - no-store, no-transform
+          content:
+            application/octet-stream:
+              schema:
+                contentMediaType: application/octet-stream
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Checkpoints
+  /fine_tuning_sessions/{sessionId}/complete:
     post:
       operationId: FineTuningSessions_unload
       summary: Unload a fine-tuning session
@@ -10495,7 +10677,7 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
-  /fine_tuning/sessions/{sessionId}/forward:
+  /fine_tuning_sessions/{sessionId}/forward:
     post:
       operationId: Training_forward
       summary: Forward-only pass
@@ -10565,7 +10747,7 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.ForwardRequest'
         description: Training batch and loss configuration for the forward-only pass.
-  /fine_tuning/sessions/{sessionId}/forward_backward:
+  /fine_tuning_sessions/{sessionId}/forward_backward:
     post:
       operationId: Training_forwardBackward
       summary: Forward and backward pass
@@ -10636,7 +10818,7 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.ForwardBackwardRequest'
         description: Training batch and loss configuration for the forward-backward pass.
-  /fine_tuning/sessions/{sessionId}/heartbeat:
+  /fine_tuning_sessions/{sessionId}/heartbeat:
     post:
       operationId: FineTuningSessions_heartbeat
       summary: Session heartbeat
@@ -10699,7 +10881,7 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
-  /fine_tuning/sessions/{sessionId}/optim_step:
+  /fine_tuning_sessions/{sessionId}/optim_step:
     post:
       operationId: Training_optimizerStep
       summary: Optimizer step
@@ -10769,7 +10951,7 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.OptimStepRequest'
         description: Adam optimizer configuration for applying accumulated gradients.
-  /fine_tuning/sessions/{sessionId}/request/{requestId}:
+  /fine_tuning_sessions/{sessionId}/request/{requestId}:
     get:
       operationId: Operations_get
       summary: Poll request status
@@ -10840,7 +11022,7 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Operations
-  /fine_tuning/sessions/{sessionId}/sample:
+  /fine_tuning_sessions/{sessionId}/sample:
     post:
       operationId: Sampling_sample
       summary: Generate completions
@@ -92003,6 +92185,58 @@ components:
           description: Metrics stored with the checkpoint, retaining their JSON value types.
           readOnly: true
       description: A checkpoint item returned in GET /fine_tuning/sessions/{sessionId}/checkpoints.
+    SessionFineTuning.FineTuningCheckpointDownloadFile:
+      type: object
+      required:
+        - file_id
+        - filename
+        - size_bytes
+        - etag
+        - download_url
+      properties:
+        file_id:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+          description: Opaque generation-bound file identifier.
+        filename:
+          type: string
+          description: Portable relative filename within the checkpoint, never an absolute or traversal path.
+        size_bytes:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Exact file size in bytes.
+        etag:
+          type: string
+          description: Strong entity tag required as If-Match when reading this exact file generation.
+        download_url:
+          type: string
+          description: Request-relative API locator resolved against the successful preparation URL, not a storage URL.
+      description: Metadata for one version-bound file in an authorized staged checkpoint copy.
+    SessionFineTuning.FineTuningCheckpointDownloadResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningCheckpointDownloadStatus'
+          description: Current preparation state.
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionFineTuning.FineTuningCheckpointDownloadFile'
+          minItems: 1
+          description: Complete version-bound file inventory, present only after successful preparation.
+      description: |-
+        Checkpoint preparation response. HTTP 202 is used only for Pending.
+        HTTP 200 reports Succeeded with files, or Failed without an inventory.
+    SessionFineTuning.FineTuningCheckpointDownloadStatus:
+      type: string
+      enum:
+        - Pending
+        - Succeeded
+        - Failed
+      description: Supported checkpoint preparation states.
     SessionFineTuning.FineTuningCheckpointInfo:
       type: object
       required:
@@ -92055,7 +92289,7 @@ components:
           type: string
           minLength: 1
           description: Request identifier used to poll for completion of the unload request.
-      description: Response from POST /fine_tuning/sessions/{sessionId}/complete.
+      description: Response from POST /fine_tuning_sessions/{sessionId}/complete.
     SessionFineTuning.FineTuningCursor:
       type: object
       required:
@@ -92102,7 +92336,7 @@ components:
         deleted:
           type: boolean
           description: Whether the session is marked as deleted.
-      description: Response from DELETE /fine_tuning/sessions/{sessionId}.
+      description: Response from DELETE /fine_tuning_sessions/{sessionId}.
     SessionFineTuning.FineTuningFromCheckpoint:
       type: object
       required:
@@ -92129,7 +92363,7 @@ components:
           type: string
           minLength: 1
           description: Identifier of the session whose heartbeat was refreshed, when included by the service.
-      description: Response from POST /fine_tuning/sessions/{sessionId}/heartbeat.
+      description: Response from POST /fine_tuning_sessions/{sessionId}/heartbeat.
     SessionFineTuning.FineTuningImageFormat:
       anyOf:
         - type: string
@@ -92272,7 +92506,6 @@ components:
     SessionFineTuning.FineTuningSampleRequest:
       type: object
       required:
-        - prompt
         - sampling_params
       properties:
         num_samples:
@@ -92281,8 +92514,15 @@ components:
           description: Number of independent completions to generate. If omitted, the service defaults to 1.
           default: 1
         prompt:
-          $ref: '#/components/schemas/SessionFineTuning.FineTuningModelInput'
+          anyOf:
+            - $ref: '#/components/schemas/SessionFineTuning.FineTuningModelInput'
+            - type: 'null'
           description: Tokenised input prompt.
+        text_only_input:
+          anyOf:
+            - $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlySampleInput'
+            - type: 'null'
+          description: Complete public message history and optional function definitions for text-only sampling.
         sampling_params:
           $ref: '#/components/schemas/SessionFineTuning.FineTuningSamplingParams'
           description: Parameters controlling token generation.
@@ -92304,7 +92544,11 @@ components:
           maximum: 20
           description: Number of top-k log-probabilities per prompt token. If omitted, the service defaults to 0. Zero disables this output; maximum 20.
           default: 0
-      description: Request body for POST /fine_tuning/sessions/{sessionId}/sample.
+      description: |-
+        Request body for POST /fine_tuning_sessions/{sessionId}/sample.
+        Supply exactly one of prompt and text_only_input. Text-only mode requires
+        a positive num_samples and does not support prompt log-probabilities,
+        response_format, or caller-selected stopping criteria.
     SessionFineTuning.FineTuningSampledSequence:
       type: object
       required:
@@ -92508,6 +92752,339 @@ components:
       description: |-
         Stop criteria for generation — either a list of token IDs or a list of
         strings, but never both.
+    SessionFineTuning.FineTuningTextOnlyAssistantMessage:
+      type: object
+      required:
+        - role
+      properties:
+        role:
+          type: string
+          enum:
+            - assistant
+          description: Source of this message.
+        content:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Public text, required unless at least one tool call is supplied.
+        tool_calls:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyToolCall'
+          description: Function calls made by the assistant.
+      description: A public assistant message containing text, function calls, or both.
+    SessionFineTuning.FineTuningTextOnlyChoice:
+      anyOf:
+        - $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyValidSampleChoice'
+        - $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyInvalidSampleChoice'
+      description: A public completion or a safely classified, still-trainable invalid completion.
+    SessionFineTuning.FineTuningTextOnlyContextMessage:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyContextRole'
+          description: Source of this message.
+        content:
+          type: string
+          description: Public text content.
+      description: A system or user message in the public text-only history.
+    SessionFineTuning.FineTuningTextOnlyContextRole:
+      type: string
+      enum:
+        - system
+        - user
+      description: Supported text-only context-message roles.
+    SessionFineTuning.FineTuningTextOnlyFinishReason:
+      type: string
+      enum:
+        - stop
+        - tool_calls
+      description: Supported termination of a valid public assistant completion.
+    SessionFineTuning.FineTuningTextOnlyFunctionCall:
+      type: object
+      required:
+        - name
+        - arguments
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9_-]{1,64}$
+          description: Function name containing 1-64 letters, digits, underscores, or hyphens.
+        arguments:
+          type: string
+          description: A string encoding a finite JSON object, not private model evidence.
+      description: A public function call with JSON-object-encoded arguments.
+    SessionFineTuning.FineTuningTextOnlyFunctionDefinition:
+      type: object
+      required:
+        - name
+        - parameters
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9_-]{1,64}$
+          description: Function name, unique among the supplied definitions.
+        description:
+          type: string
+          description: Optional public function description.
+        parameters:
+          type: object
+          additionalProperties: {}
+          description: JSON schema with type equal to object.
+      description: A public function definition whose parameters describe a JSON object.
+    SessionFineTuning.FineTuningTextOnlyInvalidFinishReason:
+      type: string
+      enum:
+        - stop
+        - length
+      description: Recorded termination of an invalid, still-trainable completion.
+    SessionFineTuning.FineTuningTextOnlyInvalidReason:
+      type: string
+      enum:
+        - output_token_limit
+        - missing_private_boundary
+        - malformed_tool_call
+        - invalid_tool_arguments
+        - invalid_public_output
+      description: Safe classifications for an intact but non-public generated completion.
+    SessionFineTuning.FineTuningTextOnlyInvalidSampleChoice:
+      type: object
+      required:
+        - index
+        - sample_ref
+        - outcome
+        - reason
+        - finish_reason
+      properties:
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Unique nonnegative index of the choice.
+        sample_ref:
+          type: string
+          minLength: 1
+          description: Opaque reference to the exact generated evidence; not an authorization credential.
+        outcome:
+          type: string
+          enum:
+            - invalid_model_output
+          description: Classification of this choice, not a failure of the sampling operation.
+        reason:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyInvalidReason'
+          description: Safe classification, never generated text or private evidence.
+        finish_reason:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyInvalidFinishReason'
+          description: Recorded termination. Length occurs exactly when the reason is output_token_limit.
+      description: An intact trainable completion that has no safe public message.
+    SessionFineTuning.FineTuningTextOnlyLossFn:
+      type: string
+      enum:
+        - importance_sampling
+        - ppo
+        - cispo
+        - sapo
+      description: Supported loss functions for opaque-reference training.
+    SessionFineTuning.FineTuningTextOnlyMessage:
+      anyOf:
+        - $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyContextMessage'
+        - $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyAssistantMessage'
+        - $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyToolMessage'
+      description: An editable public message without private tokens or reasoning.
+    SessionFineTuning.FineTuningTextOnlySampleChoice:
+      type: object
+      required:
+        - index
+        - sample_ref
+      properties:
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Unique nonnegative index of the choice.
+        sample_ref:
+          type: string
+          minLength: 1
+          description: Opaque reference to the exact generated evidence; not an authorization credential.
+      description: Common identity of an intact generated completion.
+    SessionFineTuning.FineTuningTextOnlySampleInput:
+      type: object
+      required:
+        - messages
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyMessage'
+          minItems: 1
+          description: Ordered public history. Only system, user, assistant, and tool roles are supported.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyTool'
+          description: Optional public function definitions.
+      description: Complete public input for opt-in text-only sampling.
+    SessionFineTuning.FineTuningTextOnlySampleResult:
+      type: object
+      required:
+        - choices
+      properties:
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyChoice'
+          minItems: 1
+          description: Valid public completions or safely classified, still-trainable invalid choices.
+      description: Public result payload for a completed text-only sample request.
+    SessionFineTuning.FineTuningTextOnlyTool:
+      type: object
+      required:
+        - type
+        - function
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: The supported tool kind.
+        function:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyFunctionDefinition'
+          description: Public function definition.
+      description: A function available to a public text-only conversation.
+    SessionFineTuning.FineTuningTextOnlyToolCall:
+      type: object
+      required:
+        - id
+        - type
+        - function
+      properties:
+        id:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: Nonempty identifier without whitespace, unique across the supplied history.
+        type:
+          type: string
+          enum:
+            - function
+          description: The supported tool-call kind.
+        function:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyFunctionCall'
+          description: Public function name and arguments.
+      description: A public assistant function call with a unique conversation-local identifier.
+    SessionFineTuning.FineTuningTextOnlyToolMessage:
+      type: object
+      required:
+        - role
+        - tool_call_id
+        - content
+      properties:
+        role:
+          type: string
+          enum:
+            - tool
+          description: Source of this message.
+        tool_call_id:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: Identifier of the function call that produced this result.
+        content:
+          type: string
+          description: Public function-result text.
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9_-]{1,64}$
+          description: Function name, required if its preceding call is absent from the history.
+      description: A public function result.
+    SessionFineTuning.FineTuningTextOnlyTrainingInput:
+      type: object
+      required:
+        - samples
+      properties:
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyTrainingSample'
+          minItems: 1
+          description: Exact generated samples to train on.
+        loss_fn:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyLossFn'
+          description: Supported reference loss function. Defaults to importance_sampling on the service.
+          default: importance_sampling
+        loss_fn_config:
+          anyOf:
+            - type: object
+              additionalProperties: {}
+            - type: 'null'
+          description: Optional configuration for the selected reference loss function.
+      description: Reference-based training input. Token batches must not accompany this input.
+    SessionFineTuning.FineTuningTextOnlyTrainingResult:
+      type: object
+      required:
+        - loss_fn_output_type
+        - loss_fn_outputs
+        - metrics
+      properties:
+        loss_fn_output_type:
+          type: string
+          enum:
+            - scalar
+          description: Reference training exposes only scalar metrics.
+        loss_fn_outputs:
+          type: array
+          items: {}
+          maxItems: 0
+          description: Always empty; private per-token outputs are not returned.
+        metrics:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+          description: Finite numeric metrics for the completed training request.
+      description: Scalar-only result payload for completed reference-based training.
+    SessionFineTuning.FineTuningTextOnlyTrainingSample:
+      type: object
+      required:
+        - sample_ref
+        - advantage
+      properties:
+        sample_ref:
+          type: string
+          minLength: 1
+          description: Opaque server locator, not an authorization credential. References in one batch must be unique.
+        advantage:
+          type: number
+          format: double
+          description: Finite scalar advantage assigned to this exact generated sample.
+      description: One opaque sample reference and its finite scalar training advantage.
+    SessionFineTuning.FineTuningTextOnlyValidSampleChoice:
+      type: object
+      required:
+        - index
+        - sample_ref
+        - message
+        - finish_reason
+      properties:
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Unique nonnegative index of the choice.
+        sample_ref:
+          type: string
+          minLength: 1
+          description: Opaque reference to the exact generated evidence; not an authorization credential.
+        message:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyAssistantMessage'
+          description: Public assistant output, without private reasoning or token evidence.
+        finish_reason:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyFinishReason'
+          description: Completion termination, consistent with the presence of tool calls.
+      description: A valid public completion and its opaque reference.
     SessionFineTuning.FineTuningTrainingType:
       anyOf:
         - type: string
@@ -92537,13 +93114,20 @@ components:
       description: Inner payload for a forward-backward request.
     SessionFineTuning.ForwardBackwardRequest:
       type: object
-      required:
-        - forward_backward_input
       properties:
         forward_backward_input:
-          $ref: '#/components/schemas/SessionFineTuning.ForwardBackwardInput'
+          anyOf:
+            - $ref: '#/components/schemas/SessionFineTuning.ForwardBackwardInput'
+            - type: 'null'
           description: Batch inputs for the combined forward and backward pass.
-      description: Request body for POST /fine_tuning/sessions/{sessionId}/forward_backward.
+        text_only_input:
+          anyOf:
+            - $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyTrainingInput'
+            - type: 'null'
+          description: Opaque sample references and scalar advantages for protected text-only training.
+      description: |-
+        Request body for POST /fine_tuning_sessions/{sessionId}/forward_backward.
+        Supply exactly one of forward_backward_input and text_only_input.
     SessionFineTuning.ForwardInput:
       type: object
       required:
@@ -92572,7 +93156,7 @@ components:
         forward_input:
           $ref: '#/components/schemas/SessionFineTuning.ForwardInput'
           description: Batch inputs for the forward-only pass.
-      description: Request body for POST /fine_tuning/sessions/{sessionId}/forward.
+      description: Request body for POST /fine_tuning_sessions/{sessionId}/forward.
     SessionFineTuning.LoRAConfig:
       type: object
       required:
@@ -92654,7 +93238,7 @@ components:
         adam_params:
           $ref: '#/components/schemas/SessionFineTuning.AdamParams'
           description: Adam optimizer parameters used to apply accumulated gradients.
-      description: Request body for POST /fine_tuning/sessions/{sessionId}/optim_step.
+      description: Request body for POST /fine_tuning_sessions/{sessionId}/optim_step.
     SessionFineTuning.PendingFineTuningRequest:
       type: object
       required:
@@ -92695,7 +93279,7 @@ components:
           type: object
           additionalProperties: {}
           description: Per-step evaluation metrics at checkpoint time. Optional.
-      description: Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint.
+      description: Request body for POST /fine_tuning_sessions/{sessionId}/checkpoint.
     SessionFineTuning.SaveSamplerWeightsRequest:
       type: object
       properties:
@@ -92720,7 +93304,7 @@ components:
           description: Existing request command tag for saving sampler-compatible weights. If omitted, the service defaults to "save_weights_for_sampler".
           default: save_weights_for_sampler
       description: |-
-        Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint_sample.
+        Request body for POST /fine_tuning_sessions/{sessionId}/checkpoint_sample.
         Supply either path or both sampling_session_seq_id and seq_id. The service
         validates this requirement at runtime.
     SessionFineTuning.TensorData:
