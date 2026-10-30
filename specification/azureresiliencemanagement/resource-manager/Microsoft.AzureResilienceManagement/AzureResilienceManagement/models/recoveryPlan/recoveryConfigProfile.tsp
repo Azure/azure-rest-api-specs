@@ -28,6 +28,14 @@ union RecoveryType {
   @doc("Recovery targets an alternate location.")
   AlternateLocation: "AlternateLocation",
 
+  @added(Versions.v2026_11_30_preview)
+  @doc("Recovery restores the workload as disks.")
+  RestoreAsDisks: "RestoreAsDisks",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Recovery restores the workload as files.")
+  RestoreAsFiles: "RestoreAsFiles",
+
   string,
 }
 
@@ -37,14 +45,6 @@ union TargetProvisioningMode {
   @added(Versions.v2026_11_30_preview)
   @doc("An existing target resource is used.")
   Existing: "Existing",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("A new target resource is created during recovery.")
-  Created: "Created",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("A target resource is provisioned outside the recovery orchestration service.")
-  ExternallyProvisioned: "ExternallyProvisioned",
 
   string,
 }
@@ -184,7 +184,7 @@ model TargetResourceSpec {
   provisioningMode?: TargetProvisioningMode = TargetProvisioningMode.Existing;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The Azure resource identifier of the target. Required only when provisioningMode is Existing; omit for Created and ExternallyProvisioned.")
+  @doc("The Azure resource identifier of the existing target. Required when provisioningMode is Existing.")
   resourceId?: armResourceIdentifier;
 
   @added(Versions.v2026_11_30_preview)
@@ -281,26 +281,6 @@ model DatabaseRecoveryConfig extends WorkloadConfig {
   instanceName?: string;
 }
 
-@added(Versions.v2026_11_30_preview)
-@doc("A mapping from a SQL restore source directory to a target directory.")
-model SqlDataDirectoryMapping {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The directory mapping type.")
-  mappingType: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The source logical name.")
-  sourceLogicalName?: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The source directory path.")
-  sourcePath?: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The target directory path.")
-  targetPath?: string;
-}
-
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for a SQL database in an Azure virtual machine.")
@@ -311,28 +291,6 @@ model SqlDatabaseInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
 
   @added(Versions.v2026_11_30_preview)
   @doc("Indicates whether the database is left in the NORECOVERY state after restore.")
-  isNonRecoverable?: boolean;
-
-  @added(Versions.v2026_11_30_preview)
-  @identifiers(#[])
-  @doc("The alternate data directory mappings.")
-  alternateDirectoryPaths?: SqlDataDirectoryMapping[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
-@added(Versions.v2026_11_30_preview)
-@doc("Recovery configuration for a SQL Server instance in an Azure virtual machine.")
-model SqlServerInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The workload type represented by this configuration.")
-  workloadType: WorkloadType.SqlServerInAzureVm;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The managed identities used for restore. User-assigned identities are keyed by their Azure resource identifiers, which include the identity names.")
-  userAssignedManagedIdentityDetails?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Indicates whether the restored SQL Server databases are left in the NORECOVERY state.")
   isNonRecoverable?: boolean;
 }
 

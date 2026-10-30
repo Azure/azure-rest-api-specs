@@ -3196,9 +3196,6 @@
           },
           "RecoveryConfigProfiles_Update_SqlDatabase": {
             "$ref": "./examples/RecoveryConfigProfiles_Update_SqlDatabase.json"
-          },
-          "RecoveryConfigProfiles_Update_SqlServer": {
-            "$ref": "./examples/RecoveryConfigProfiles_Update_SqlServer.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6067,7 +6064,9 @@
           "default": "AlternateLocation",
           "enum": [
             "CreateNewVM",
-            "AlternateLocation"
+            "AlternateLocation",
+            "RestoreAsDisks",
+            "RestoreAsFiles"
           ],
           "x-ms-enum": {
             "name": "RecoveryType",
@@ -6082,6 +6081,16 @@
                 "name": "AlternateLocation",
                 "value": "AlternateLocation",
                 "description": "Recovery targets an alternate location."
+              },
+              {
+                "name": "RestoreAsDisks",
+                "value": "RestoreAsDisks",
+                "description": "Recovery restores the workload as disks."
+              },
+              {
+                "name": "RestoreAsFiles",
+                "value": "RestoreAsFiles",
+                "description": "Recovery restores the workload as files."
               }
             ]
           }
@@ -11033,7 +11042,9 @@
       "description": "The supported workload recovery behavior.",
       "enum": [
         "CreateNewVM",
-        "AlternateLocation"
+        "AlternateLocation",
+        "RestoreAsDisks",
+        "RestoreAsFiles"
       ],
       "x-ms-enum": {
         "name": "RecoveryType",
@@ -11048,6 +11059,16 @@
             "name": "AlternateLocation",
             "value": "AlternateLocation",
             "description": "Recovery targets an alternate location."
+          },
+          {
+            "name": "RestoreAsDisks",
+            "value": "RestoreAsDisks",
+            "description": "Recovery restores the workload as disks."
+          },
+          {
+            "name": "RestoreAsFiles",
+            "value": "RestoreAsFiles",
+            "description": "Recovery restores the workload as files."
           }
         ]
       }
@@ -12509,31 +12530,6 @@
         ]
       }
     },
-    "SqlDataDirectoryMapping": {
-      "type": "object",
-      "description": "A mapping from a SQL restore source directory to a target directory.",
-      "properties": {
-        "mappingType": {
-          "type": "string",
-          "description": "The directory mapping type."
-        },
-        "sourceLogicalName": {
-          "type": "string",
-          "description": "The source logical name."
-        },
-        "sourcePath": {
-          "type": "string",
-          "description": "The source directory path."
-        },
-        "targetPath": {
-          "type": "string",
-          "description": "The target directory path."
-        }
-      },
-      "required": [
-        "mappingType"
-      ]
-    },
     "SqlDatabaseInAzureVmRecoveryConfig": {
       "type": "object",
       "description": "Recovery configuration for a SQL database in an Azure virtual machine.",
@@ -12551,14 +12547,6 @@
         "isNonRecoverable": {
           "type": "boolean",
           "description": "Indicates whether the database is left in the NORECOVERY state after restore."
-        },
-        "alternateDirectoryPaths": {
-          "type": "array",
-          "description": "The alternate data directory mappings.",
-          "items": {
-            "$ref": "#/definitions/SqlDataDirectoryMapping"
-          },
-          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -12570,39 +12558,6 @@
         }
       ],
       "x-ms-discriminator-value": "SqlDatabaseInAzureVm"
-    },
-    "SqlServerInAzureVmRecoveryConfig": {
-      "type": "object",
-      "description": "Recovery configuration for a SQL Server instance in an Azure virtual machine.",
-      "properties": {
-        "workloadType": {
-          "type": "string",
-          "description": "The workload type represented by this configuration.",
-          "enum": [
-            "SqlServerInAzureVm"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed identities used for restore. User-assigned identities are keyed by their Azure resource identifiers, which include the identity names."
-        },
-        "isNonRecoverable": {
-          "type": "boolean",
-          "description": "Indicates whether the restored SQL Server databases are left in the NORECOVERY state."
-        }
-      },
-      "required": [
-        "workloadType"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatabaseRecoveryConfig"
-        }
-      ],
-      "x-ms-discriminator-value": "SqlServerInAzureVm"
     },
     "SupportedVerbsForStage": {
       "type": "object",
@@ -12702,9 +12657,7 @@
       "type": "string",
       "description": "How a target resource is provisioned.",
       "enum": [
-        "Existing",
-        "Created",
-        "ExternallyProvisioned"
+        "Existing"
       ],
       "x-ms-enum": {
         "name": "TargetProvisioningMode",
@@ -12714,16 +12667,6 @@
             "name": "Existing",
             "value": "Existing",
             "description": "An existing target resource is used."
-          },
-          {
-            "name": "Created",
-            "value": "Created",
-            "description": "A new target resource is created during recovery."
-          },
-          {
-            "name": "ExternallyProvisioned",
-            "value": "ExternallyProvisioned",
-            "description": "A target resource is provisioned outside the recovery orchestration service."
           }
         ]
       }
@@ -12741,9 +12684,7 @@
           "description": "How the target resource is provisioned.",
           "default": "Existing",
           "enum": [
-            "Existing",
-            "Created",
-            "ExternallyProvisioned"
+            "Existing"
           ],
           "x-ms-enum": {
             "name": "TargetProvisioningMode",
@@ -12753,16 +12694,6 @@
                 "name": "Existing",
                 "value": "Existing",
                 "description": "An existing target resource is used."
-              },
-              {
-                "name": "Created",
-                "value": "Created",
-                "description": "A new target resource is created during recovery."
-              },
-              {
-                "name": "ExternallyProvisioned",
-                "value": "ExternallyProvisioned",
-                "description": "A target resource is provisioned outside the recovery orchestration service."
               }
             ]
           }
@@ -12770,7 +12701,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource identifier of the target. Required only when provisioningMode is Existing; omit for Created and ExternallyProvisioned."
+          "description": "The Azure resource identifier of the existing target. Required when provisioningMode is Existing."
         },
         "dependsOn": {
           "type": "array",
@@ -13351,7 +13282,9 @@
           "default": "CreateNewVM",
           "enum": [
             "CreateNewVM",
-            "AlternateLocation"
+            "AlternateLocation",
+            "RestoreAsDisks",
+            "RestoreAsFiles"
           ],
           "x-ms-enum": {
             "name": "RecoveryType",
@@ -13366,6 +13299,16 @@
                 "name": "AlternateLocation",
                 "value": "AlternateLocation",
                 "description": "Recovery targets an alternate location."
+              },
+              {
+                "name": "RestoreAsDisks",
+                "value": "RestoreAsDisks",
+                "description": "Recovery restores the workload as disks."
+              },
+              {
+                "name": "RestoreAsFiles",
+                "value": "RestoreAsFiles",
+                "description": "Recovery restores the workload as files."
               }
             ]
           }
@@ -13439,7 +13382,6 @@
       "enum": [
         "AzureVm",
         "SqlDatabaseInAzureVm",
-        "SqlServerInAzureVm",
         "SapHanaInAzureVm",
         "SapAseInAzureVm",
         "OracleInAzureVm",
@@ -13458,11 +13400,6 @@
             "name": "SqlDatabaseInAzureVm",
             "value": "SqlDatabaseInAzureVm",
             "description": "A SQL database workload hosted in an Azure virtual machine."
-          },
-          {
-            "name": "SqlServerInAzureVm",
-            "value": "SqlServerInAzureVm",
-            "description": "A SQL Server instance workload hosted in an Azure virtual machine."
           },
           {
             "name": "SapHanaInAzureVm",

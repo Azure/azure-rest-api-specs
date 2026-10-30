@@ -28,10 +28,6 @@ union WorkloadType {
   SqlDatabaseInAzureVm: "SqlDatabaseInAzureVm",
 
   @added(Versions.v2026_11_30_preview)
-  @doc("A SQL Server instance workload hosted in an Azure virtual machine.")
-  SqlServerInAzureVm: "SqlServerInAzureVm",
-
-  @added(Versions.v2026_11_30_preview)
   @doc("An SAP HANA workload hosted in an Azure virtual machine.")
   SapHanaInAzureVm: "SapHanaInAzureVm",
 
