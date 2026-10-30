@@ -71,7 +71,7 @@ model VoiceAgentHandoffCondition {
   @doc("The target subagent identifier or `$entrypoint`. The containing subagent supplies the source.")
   target: VoiceAgentHandoffNodeReference;
 
-  @doc("Natural-language routing guidance supplied alongside the active subagent instructions. This is not an executable Boolean predicate.")
+  @doc("Natural-language routing guidance supplied alongside the active subagent instructions, from 1 through 500 characters. This is not an executable Boolean predicate.")
   @minLength(1)
   @maxLength(500)
   condition: string;
@@ -108,7 +108,7 @@ model InlineVoiceSubagent {
   @doc("The interaction interface. This phase supports only `voice`; text delegation is deferred.")
   `interface`: "voice";
 
-  @doc("A display-only description of the specialist behavior. This value is not provided to the model.")
+  @doc("A non-empty display-only description of the specialist behavior. This value is not provided to the model.")
   @encodedName("application/json", "description")
   @minLength(1)
   display_description: string;
@@ -131,7 +131,7 @@ model InlineVoiceSubagent {
   @doc("The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; a supplied object replaces the voice-specific settings.")
   audio_output?: VoiceAgentVoiceConfig;
 
-  @doc("The sampling temperature for a compatible subagent model.")
+  @doc("The sampling temperature for a compatible subagent model, from 0 through 2.")
   @minValue(0)
   @maxValue(2)
   temperature?: float32 | null;
@@ -148,7 +148,7 @@ model InlineVoiceSubagent {
   @doc("Interim-response settings for this subagent. Null disables interim responses.")
   interim_response?: VoiceAgentInterimResponseConfig | null;
 
-  @doc("Whether this subagent may call customer tools in parallel. Subagents with outgoing handoff conditions must use `false`.")
+  @doc("Whether this subagent may call customer tools in parallel. If omitted, the service defaults to false. Subagents with outgoing handoff conditions must use `false`.")
   parallel_tool_calls?: boolean = false;
 
   @doc("Outgoing handoffs from this subagent. The containing subagent supplies each condition's source. The service permits at most 128 conditions across the entire Agent.")

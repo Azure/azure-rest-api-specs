@@ -44301,7 +44301,7 @@
           "description": {
             "type": "string",
             "minLength": 1,
-            "description": "A display-only description of the specialist behavior. This value is not provided to the model."
+            "description": "A non-empty display-only description of the specialist behavior. This value is not provided to the model."
           },
           "model": {
             "type": "string",
@@ -44365,7 +44365,7 @@
             ],
             "minimum": 0,
             "maximum": 2,
-            "description": "The sampling temperature for a compatible subagent model."
+            "description": "The sampling temperature for a compatible subagent model, from 0 through 2."
           },
           "max_response_output_tokens": {
             "anyOf": [
@@ -44413,7 +44413,7 @@
           },
           "parallel_tool_calls": {
             "type": "boolean",
-            "description": "Whether this subagent may call customer tools in parallel. Subagents with outgoing handoff conditions must use `false`.",
+            "description": "Whether this subagent may call customer tools in parallel. If omitted, the service defaults to false. Subagents with outgoing handoff conditions must use `false`.",
             "default": false
           },
           "handoff_conditions": {
@@ -95297,7 +95297,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 500,
-            "description": "Natural-language routing guidance supplied alongside the active subagent instructions. This is not an executable Boolean predicate."
+            "description": "Natural-language routing guidance supplied alongside the active subagent instructions, from 1 through 500 characters. This is not an executable Boolean predicate."
           },
           "cancel_on_interruption": {
             "type": "boolean",
