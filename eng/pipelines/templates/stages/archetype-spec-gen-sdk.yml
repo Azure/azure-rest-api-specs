@@ -230,7 +230,13 @@ stages:
           - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
             parameters:
               SourceRootPath: $(SpecRepoDirectory)
-              Condition: and(succeeded(), or(contains(variables['SdkRepoName'], 'rust'), ne(variables['Build.Reason'], 'PullRequest')))
+              Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
+
+          - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+            parameters:
+              SourceRootPath: $(SpecRepoDirectory)
+              Condition: and(succeeded(), not(contains(variables['SdkRepoName'], 'rust')), ne(variables['Build.Reason'], 'PullRequest'))
+              ContinueOnError: true
 
           - script: |
               set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
