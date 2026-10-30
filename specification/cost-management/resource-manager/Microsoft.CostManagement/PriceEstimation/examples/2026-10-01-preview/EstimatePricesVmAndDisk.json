@@ -1,0 +1,334 @@
+{
+  "title": "Estimate a Linux VM and a separately counted premium disk",
+  "operationId": "PriceEstimation_EstimatePrices",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-10-01-preview",
+    "body": {
+      "resources": [
+        {
+          "resourceType": "Microsoft.Compute/virtualMachines",
+          "resourceApiVersion": "2024-07-01",
+          "inputs": [
+            {
+              "name": "resource",
+              "value": {
+                "kind": "object",
+                "members": [
+                  {
+                    "name": "location",
+                    "value": {
+                      "kind": "string",
+                      "value": "eastus"
+                    }
+                  },
+                  {
+                    "name": "properties",
+                    "value": {
+                      "kind": "object",
+                      "members": [
+                        {
+                          "name": "hardwareProfile",
+                          "value": {
+                            "kind": "object",
+                            "members": [
+                              {
+                                "name": "vmSize",
+                                "value": {
+                                  "kind": "string",
+                                  "value": "Standard_D2s_v5"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "storageProfile",
+                          "value": {
+                            "kind": "object",
+                            "members": [
+                              {
+                                "name": "osDisk",
+                                "value": {
+                                  "kind": "object",
+                                  "members": [
+                                    {
+                                      "name": "osType",
+                                      "value": {
+                                        "kind": "string",
+                                        "value": "Linux"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "usage",
+              "value": {
+                "kind": "object",
+                "members": [
+                  {
+                    "name": "purchaseOption",
+                    "value": {
+                      "kind": "string",
+                      "value": "PayAsYouGo"
+                    }
+                  },
+                  {
+                    "name": "instanceCount",
+                    "value": {
+                      "kind": "number",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "name": "hoursPerMonth",
+                    "value": {
+                      "kind": "number",
+                      "value": 730
+                    }
+                  },
+                  {
+                    "name": "bandwidth",
+                    "value": {
+                      "kind": "array",
+                      "items": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "resourceType": "Microsoft.Compute/disks",
+          "resourceApiVersion": "2024-03-02",
+          "inputs": [
+            {
+              "name": "resource",
+              "value": {
+                "kind": "object",
+                "members": [
+                  {
+                    "name": "location",
+                    "value": {
+                      "kind": "string",
+                      "value": "eastus"
+                    }
+                  },
+                  {
+                    "name": "sku",
+                    "value": {
+                      "kind": "object",
+                      "members": [
+                        {
+                          "name": "name",
+                          "value": {
+                            "kind": "string",
+                            "value": "Premium_LRS"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "properties",
+                    "value": {
+                      "kind": "object",
+                      "members": [
+                        {
+                          "name": "diskSizeGB",
+                          "value": {
+                            "kind": "number",
+                            "value": 128
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "usage",
+              "value": {
+                "kind": "object",
+                "members": [
+                  {
+                    "name": "count",
+                    "value": {
+                      "kind": "number",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "name": "purchaseOption",
+                    "value": {
+                      "kind": "string",
+                      "value": "PayAsYouGo"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "currency": "USD",
+        "pricingAsOf": "2026-10-01T00:00:00Z",
+        "coverage": "SubmittedPricingInputs",
+        "results": [
+          {
+            "inputIndex": 0,
+            "configuration": {
+              "resourceType": "Microsoft.Compute/virtualMachines",
+              "resourceApiVersion": "2024-07-01",
+              "inputs": {
+                "resource": {
+                  "location": "eastus",
+                  "properties": {
+                    "hardwareProfile": {
+                      "vmSize": "Standard_D2s_v5"
+                    },
+                    "storageProfile": {
+                      "osDisk": {
+                        "osType": "Linux"
+                      }
+                    },
+                    "licenseType": "None"
+                  }
+                },
+                "usage": {
+                  "purchaseOption": "PayAsYouGo",
+                  "instanceCount": 1,
+                  "hoursPerMonth": 730,
+                  "bandwidth": [],
+                  "software": {
+                    "family": "OSOnly",
+                    "purchaseOption": "LicenseIncluded"
+                  }
+                }
+              },
+              "defaultedFields": [
+                "/resource/properties/licenseType",
+                "/usage/software/family",
+                "/usage/software/purchaseOption"
+              ],
+              "assumedUsageFields": []
+            },
+            "monthly": {
+              "status": "Complete",
+              "amount": 70.08
+            },
+            "upfront": {
+              "status": "Complete",
+              "amount": 0
+            },
+            "components": [
+              {
+                "component": "compute",
+                "meterIds": [
+                  "a1b2c3d4-0000-4000-8000-000000000001"
+                ],
+                "monthly": {
+                  "status": "Complete",
+                  "amount": 70.08
+                },
+                "upfront": {
+                  "status": "Complete",
+                  "amount": 0
+                }
+              }
+            ],
+            "issues": [],
+            "assumptions": []
+          },
+          {
+            "inputIndex": 1,
+            "configuration": {
+              "resourceType": "Microsoft.Compute/disks",
+              "resourceApiVersion": "2024-03-02",
+              "inputs": {
+                "resource": {
+                  "location": "eastus",
+                  "sku": {
+                    "name": "Premium_LRS"
+                  },
+                  "properties": {
+                    "diskSizeGB": 128
+                  }
+                },
+                "usage": {
+                  "count": 1,
+                  "purchaseOption": "PayAsYouGo",
+                  "hoursPerMonth": 730
+                }
+              },
+              "defaultedFields": [],
+              "assumedUsageFields": [
+                "/usage/hoursPerMonth"
+              ]
+            },
+            "monthly": {
+              "status": "Complete",
+              "amount": 19.71
+            },
+            "upfront": {
+              "status": "Complete",
+              "amount": 0
+            },
+            "components": [
+              {
+                "component": "capacity",
+                "meterIds": [
+                  "a1b2c3d4-0000-4000-8000-000000000002"
+                ],
+                "monthly": {
+                  "status": "Complete",
+                  "amount": 19.71
+                },
+                "upfront": {
+                  "status": "Complete",
+                  "amount": 0
+                }
+              }
+            ],
+            "issues": [],
+            "assumptions": []
+          }
+        ],
+        "totals": {
+          "monthly": {
+            "status": "Complete",
+            "amount": 89.79
+          },
+          "upfront": {
+            "status": "Complete",
+            "amount": 0
+          }
+        },
+        "assumptions": []
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/estimatePricesOperationResults/2f0d4b7a9c1e4d6f8a3b5c7d9e1f2a4b?api-version=2026-10-01-preview",
+        "Retry-After": "1"
+      }
+    }
+  }
+}
