@@ -7,6 +7,7 @@ import "./openai-preview-models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.Core.Experimental;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
@@ -430,7 +431,7 @@ scalar TelephonyCallId extends string;
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyTransferTargetName extends string;
 
-@doc("A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.")
+@doc("A telephony provider associated with an agent binding or call. In v1, Genesys AudioHook (`genesys-audiohook`) is supported only for call records and call-list filtering, not binding management. Known values are stable; additional values may be added over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyProvider {
   string,
@@ -440,6 +441,10 @@ union TelephonyProvider {
 
   @doc("Twilio Programmable Voice.")
   twilio: "twilio",
+
+  @added(Versions.v1)
+  @doc("Genesys AudioHook. Supported for call records and call-list filtering, not binding management.")
+  genesys_audiohook: "genesys-audiohook",
 }
 
 @doc("The lifecycle status of a telephony binding.")
