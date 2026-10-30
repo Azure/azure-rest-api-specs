@@ -1,0 +1,53 @@
+name: azure-typespec-author-eval
+description: isolate go acronym naming from other languages
+version: "1.0"
+type: capability
+tags:
+  area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 008006-isolate-go-acronym-naming-forced
+    tags:
+      suite: naming
+      mode: forced
+      language: go
+    prompt: |
+      Use the azure-typespec-author skill to suggest the Go name for new ControllerType.CiscoAci
+      (Cisco ACI) in a new ARM TypeSpec project. client.tsp already uses CiscoAci
+      for csharp and CISCO_ACI for java and python.
+    rubric:
+      - Recommends CiscoACI for the new member, with any new clientName override scoped to Go.
+      - Leaves the existing csharp, java, and python overrides unchanged.
+    constraints:
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: go-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch)$
+      - type: prompt
+        config:
+          model: gpt-5.6-sol
+          scoring: binary
+          threshold: 1
+          prompt: >-
+            Pass only if all rubric criteria are met. Judge naming recommendations,
+            not response formatting. Reject unsupported claims that changes were
+            applied or generated names were verified.

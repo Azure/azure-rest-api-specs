@@ -1,0 +1,54 @@
+name: azure-typespec-author-eval
+description: follow existing uppercase acronym patterns for new go names
+version: "1.0"
+type: capability
+tags:
+  area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 008004-follow-existing-uppercase-go-patterns-forced
+    tags:
+      suite: naming
+      mode: forced
+      language: go
+    prompt: |
+      Use the azure-typespec-author skill to suggest a Go clientName override for the new
+      IdentityKeyStore.TpmTransition union member. Existing IdentityKeyStore.Tpm has
+      @@clientName(IdentityKeyStore.Tpm, "TPM", "go").
+      TPM means trusted platform module.
+    rubric:
+      - Recommends TPMTransition for the new member and preserves the existing TPM override.
+      - Identifies IdentityKeyStore.TpmTransition as the target of a Go-scoped override with the member-only name TPMTransition, not a synthesized constant name.
+    constraints:
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: go-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch)$
+      - type: prompt
+        config:
+          model: gpt-5.6-sol
+          scoring: binary
+          threshold: 1
+          prompt: >-
+            Pass only if all rubric criteria are met. Judge naming recommendations,
+            not response formatting. Reject unsupported claims that changes were
+            applied or generated names were verified.

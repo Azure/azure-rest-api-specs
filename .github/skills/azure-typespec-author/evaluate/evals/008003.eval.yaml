@@ -1,0 +1,54 @@
+name: azure-typespec-author-eval
+description: preserve related mixed case patterns for new go names
+version: "1.0"
+type: capability
+tags:
+  area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 008003-preserve-related-mixed-case-go-patterns-forced
+    tags:
+      suite: naming
+      mode: forced
+      language: go
+    prompt: |
+      Use the azure-typespec-author skill to check Go naming for new TypeSpec declarations
+      BarAbcOperation and NetworkFabricRefreshDeviceTypes.ToR.
+      The spec already has FooAbcOperation and DeviceRole.ToR.
+      Abc is the same acronym in both operations; ToR means top of rack.
+    rubric:
+      - Keeps Abc in BarAbcOperation and ToR in the new union member to match the related existing declarations.
+      - Does not recommend casing renames or redundant clientName overrides for these already-consistent additions.
+    constraints:
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: go-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch)$
+      - type: prompt
+        config:
+          model: gpt-5.6-sol
+          scoring: binary
+          threshold: 1
+          prompt: >-
+            Pass only if all rubric criteria are met. Judge naming recommendations,
+            not response formatting. Reject unsupported claims that changes were
+            applied or generated names were verified.

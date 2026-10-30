@@ -116,6 +116,8 @@ Naming cases `007001` through `007008` compare trigger, forced, and no-skill beh
 client configuration planning, direct-edit handoffs, opt-outs, and documentation-only changes.
 Cases `007009` through `007014` check routing boundaries in trigger mode only.
 
+Go naming cases `008001` through `008006` run in forced mode through `azure-typespec-author` and the shared naming skill. They use the same `azsdk-mcp` environment and `naming-forced` suite as the .NET cases. They cover new acronym names, preservation of existing names and related casing patterns, parameter names, and language isolation. Prompts are short naming-review requests with only the relevant TypeSpec context. Semantic rubrics check the recommendations without requiring JSON or a particular response format.
+
 ### Local forced smoke test
 
 Use these commands for the usual local check. Use forced mode only for this remediation work:

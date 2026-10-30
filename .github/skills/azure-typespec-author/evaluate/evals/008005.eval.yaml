@@ -1,0 +1,53 @@
+name: azure-typespec-author-eval
+description: plan new go parameter acronym names
+version: "1.0"
+type: capability
+tags:
+  area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 008005-plan-new-go-parameter-acronym-names-forced
+    tags:
+      suite: naming
+      mode: forced
+      language: go
+    prompt: |
+      Use the azure-typespec-author skill to check Go casing for new TypeSpec
+      parameters userId and recordAcsId in a new data-plane project. ID means identifier; ACS means
+      Azure Communication Services. There are no related existing parameters.
+    rubric:
+      - Recommends userID and recordACSID for the new Go parameter names.
+      - Any proposed naming overrides are Go-scoped rather than renaming the TypeSpec parameters.
+    constraints:
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: go-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch)$
+      - type: prompt
+        config:
+          model: gpt-5.6-sol
+          scoring: binary
+          threshold: 1
+          prompt: >-
+            Pass only if all rubric criteria are met. Judge naming recommendations,
+            not response formatting. Reject unsupported claims that changes were
+            applied or generated names were verified.
