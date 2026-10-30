@@ -5,7 +5,7 @@ import { simpleGit } from "simple-git";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { checkProtectedFiles } from "../src/protected-files.ts";
-import { createMockContext, createMockCore } from "./mocks.ts";
+import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
 vi.mock("../../shared/src/changed-files.ts", () => ({ getChangedFiles: vi.fn() }));
 
@@ -13,9 +13,44 @@ function setup(author = "spec-author") {
   const context = createMockContext();
   context.eventName = "pull_request";
   context.actor = "azure-sdk";
-  context.payload = { pull_request: { number: 1, user: { login: author } } };
+  context.sha = "HEAD";
+  const payload = {
+    pull_request: {
+      number: 1,
+      user: { login: author },
+      base: { sha: "HEAD^" },
+    },
+  };
+  context.payload = payload;
   const core = createMockCore();
-  return { core, context, run: () => checkProtectedFiles({ context, core }) };
+  const github = createMockGithub();
+  return {
+    core,
+    context,
+    github,
+    payload,
+    run: () => checkProtectedFiles({ github, context, core }),
+  };
+}
+
+function labelEvent(actor: string | null, event = "labeled") {
+  return {
+    event,
+    label: { name: "protected-files-approved" },
+    actor: actor ? { login: actor } : null,
+  };
+}
+
+function setupApproval() {
+  const test = setup();
+  vi.mocked(getChangedFiles).mockResolvedValue(["package.json"]);
+  test.github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+    data: [{ name: "protected-files-approved" }],
+  });
+  test.github.rest.issues.listEvents.mockResolvedValue({
+    data: [labelEvent("TimotheeGuerin")],
+  });
+  return test;
 }
 
 describe("Protected Files", () => {
@@ -32,13 +67,14 @@ describe("Protected Files", () => {
     "timotheeguerin",
     "marygao",
   ])("passes for trusted PR author %s without reading changed files", async (author) => {
-    const { core, context, run } = setup(author);
+    const { core, context, github, run } = setup(author);
     context.actor = "spec-author";
     expect((await run()).conclusion).toBe("success");
     expect(core.info).toHaveBeenCalledWith(
       `Account '${author}' is allowed to update protected files`,
     );
     expect(getChangedFiles).not.toHaveBeenCalled();
+    expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
     expect(core.setFailed).not.toHaveBeenCalled();
   });
 
@@ -53,7 +89,7 @@ describe("Protected Files", () => {
       ]);
       await run();
       expect(core.error).toHaveBeenCalledWith(
-        expect.stringContaining("Remove this change from your PR."),
+        expect.stringContaining("Remove this change from your PR"),
         { file: "package.json" },
       );
       expect(core.setFailed).toHaveBeenCalledOnce();
@@ -123,12 +159,13 @@ describe("Protected Files", () => {
       ["documentation/ci-fix.md", "README.md", "specification/widgets/package.json"],
     ].map((files) => ({ files })),
   )("passes for unprotected changes $files", async ({ files }) => {
-    const { core, run } = setup();
+    const { core, github, run } = setup();
     vi.mocked(getChangedFiles).mockResolvedValue(files);
     await run();
     expect(core.error).not.toHaveBeenCalled();
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.info).toHaveBeenCalledWith("No changes to protected files.");
+    expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
   });
 
   it("reports only protected files in a mixed PR", async () => {
@@ -149,9 +186,98 @@ describe("Protected Files", () => {
       file: "pnpm-lock.yaml",
     });
     expect(core.setFailed).toHaveBeenCalledWith(
-      "Only allowed repository maintainers may change protected files. See https://aka.ms/ci-fix#protected-files.",
+      expect.stringContaining("'protected-files-approved' applied by an allowed maintainer"),
     );
   });
+
+  it("allows protected changes when the label's latest application is by an allowed account", async () => {
+    const { core, context, github, run } = setupApproval();
+    context.actor = "external-contributor";
+    const result = await run();
+    expect(result.conclusion).toBe("success");
+    expect(result.summary).toContain("TimotheeGuerin");
+    expect(core.setFailed).not.toHaveBeenCalled();
+    expect(github.rest.issues.listEvents).toHaveBeenCalledWith({
+      owner: "owner",
+      repo: "repo",
+      issue_number: 1,
+      per_page: 100,
+    });
+  });
+
+  it("does not accept an unauthorized reapplication after an earlier valid approval", async () => {
+    const { core, context, github, run } = setupApproval();
+    context.actor = "timotheeguerin";
+    github.rest.issues.listEvents.mockResolvedValue({
+      data: [
+        labelEvent("timotheeguerin"),
+        labelEvent("spec-author", "unlabeled"),
+        labelEvent("spec-author"),
+      ],
+    });
+    expect((await run()).conclusion).toBe("failure");
+    expect(core.warning).toHaveBeenCalledWith(
+      expect.stringContaining("Account 'spec-author' is not allowed"),
+    );
+    expect(core.setFailed).toHaveBeenCalledOnce();
+  });
+
+  it("accepts a maintainer reapplication after an unauthorized application", async () => {
+    const { github, run } = setupApproval();
+    github.rest.issues.listEvents.mockResolvedValue({
+      data: [
+        labelEvent("spec-author"),
+        labelEvent("azure-sdk", "unlabeled"),
+        labelEvent("timotheeguerin"),
+        { event: "labeled", label: { name: "unrelated-label" }, actor: { login: "spec-author" } },
+      ],
+    });
+    expect((await run()).conclusion).toBe("success");
+  });
+
+  it.each([
+    [],
+    [labelEvent(null)],
+    [labelEvent("timotheeguerin"), labelEvent("spec-author", "unlabeled")],
+  ])(
+    "does not bypass protection without a verifiable current application: %j",
+    async (...events) => {
+      const { core, github, run } = setupApproval();
+      github.rest.issues.listEvents.mockResolvedValue({ data: events });
+      expect((await run()).conclusion).toBe("failure");
+      expect(core.warning).toHaveBeenCalledWith(
+        expect.stringContaining("Cannot verify who applied"),
+      );
+      expect(core.setFailed).toHaveBeenCalledOnce();
+    },
+  );
+
+  it("uses live labels rather than an old event payload after approval is removed", async () => {
+    const { core, context, github, payload, run } = setupApproval();
+    context.payload = {
+      ...payload,
+      pull_request: {
+        ...payload.pull_request,
+        labels: [{ name: "protected-files-approved" }],
+      },
+    };
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({ data: [] });
+    expect((await run()).conclusion).toBe("failure");
+    expect(github.rest.issues.listEvents).not.toHaveBeenCalled();
+    expect(core.setFailed).toHaveBeenCalledOnce();
+  });
+
+  it.each(["listLabelsOnIssue", "listEvents"] as const)(
+    "propagates %s API failures instead of granting a bypass",
+    async (method) => {
+      const { core, github, run } = setupApproval();
+      github.rest.issues[method].mockRejectedValueOnce(new Error("GitHub API unavailable"));
+      await expect(run()).rejects.toThrow("GitHub API unavailable");
+      expect(core.info).not.toHaveBeenCalledWith(
+        expect.stringContaining("Protected file changes approved"),
+      );
+    },
+  );
 
   it.each([
     "eng/common/script.ps1",
@@ -207,6 +333,7 @@ describe("Protected Files", () => {
       await writeFile(join(directory, from), "test content\n");
       await git.add(["--all"]);
       await git.commit("Initial file");
+      const baseSha = await git.revparse(["HEAD"]);
       if (to) {
         await mkdir(dirname(join(directory, to)), { recursive: true });
         await rename(join(directory, from), join(directory, to));
@@ -215,6 +342,8 @@ describe("Protected Files", () => {
       }
       await git.add(["--all"]);
       await git.commit("Change file");
+      const mergeSha = await git.revparse(["HEAD"]);
+      await git.checkout(baseSha);
 
       const actual = await vi.importActual<typeof import("../../shared/src/changed-files.ts")>(
         "../../shared/src/changed-files.ts",
@@ -222,7 +351,9 @@ describe("Protected Files", () => {
       vi.mocked(getChangedFiles).mockImplementationOnce((options) =>
         actual.getChangedFiles({ ...options, cwd: directory }),
       );
-      const { core, run } = setup();
+      const { core, context, payload, run } = setup();
+      payload.pull_request.base.sha = baseSha;
+      context.sha = mergeSha;
       expect((await run()).conclusion).toBe("failure");
       for (const file of [from, to].filter((file) => file?.startsWith(".github/"))) {
         expect(core.error).toHaveBeenCalledWith(expect.any(String), { file });
@@ -252,6 +383,15 @@ describe("Protected Files", () => {
     const { context, run } = setup();
     context.payload = {};
     await expect(run()).rejects.toThrow("Protected Files requires a pull request author");
+    expect(getChangedFiles).not.toHaveBeenCalled();
+  });
+
+  it("rejects a missing merge SHA rather than comparing the wrong commits", async () => {
+    const { context, run } = setup();
+    context.sha = "";
+    await expect(run()).rejects.toThrow(
+      "Protected Files requires pull request base and merge SHAs",
+    );
     expect(getChangedFiles).not.toHaveBeenCalled();
   });
 });
