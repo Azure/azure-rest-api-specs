@@ -954,6 +954,7 @@ model KustoPoolProperties {
   /**
    * The workspace unique identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Published wire name of the property; renaming it would change the JSON payload of the existing API."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   workspaceUID?: string;
 }
