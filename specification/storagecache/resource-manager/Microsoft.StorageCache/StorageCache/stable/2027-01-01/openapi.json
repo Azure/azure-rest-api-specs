@@ -52,9 +52,6 @@
       "name": "autoExportJob"
     },
     {
-      "name": "autoReleaseJobs"
-    },
-    {
       "name": "importJobs"
     },
     {
@@ -65,6 +62,9 @@
     },
     {
       "name": "rebalanceJobs"
+    },
+    {
+      "name": "autoReleaseJobs"
     },
     {
       "name": "Caches"
@@ -1682,7 +1682,7 @@
         "tags": [
           "autoReleaseJobs"
         ],
-        "description": "Creates an AutoRelease job or replaces the complete policy set of an enabled job.",
+        "description": "Creates an AutoRelease job or updates only its administrative status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1716,7 +1716,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Object containing the complete AutoRelease policy set. If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the complete policy set when creating an AutoRelease job. For an existing job, only adminStatus can be modified; when omitted, the service applies Enable. If read-only properties are included, they must match the existing values of those properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AutoReleaseJob"
@@ -1804,7 +1804,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Object containing the AutoRelease properties to update. A supplied policies array replaces the complete policy set.",
+            "description": "Object containing the administrative status to update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AutoReleaseJobUpdate"
@@ -6657,7 +6657,7 @@
         },
         "adminStatus": {
           "type": "string",
-          "description": "Current administrative status. Initial creation defaults to Enable.",
+          "description": "Current administrative status. If omitted from PUT, the service applies Enable.",
           "default": "Enable",
           "enum": [
             "Enable",
@@ -6687,7 +6687,7 @@
         },
         "policies": {
           "type": "array",
-          "description": "Complete policy set.",
+          "description": "Complete policy set. Policies are immutable after creation.",
           "minItems": 1,
           "maxItems": 10,
           "items": {
@@ -6698,7 +6698,6 @@
           ],
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -6889,18 +6888,6 @@
         "adminStatus": {
           "$ref": "#/definitions/AutoReleaseJobAdminStatus",
           "description": "Administrative status to apply."
-        },
-        "policies": {
-          "type": "array",
-          "description": "Complete replacement policy set.",
-          "minItems": 1,
-          "maxItems": 10,
-          "items": {
-            "$ref": "#/definitions/AutoReleasePolicy"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
         }
       }
     },
@@ -6949,6 +6936,9 @@
         "prefixes": {
           "type": "array",
           "description": "Filesystem-root-relative paths. When omitted during creation, the service uses the root path.",
+          "default": [
+            "/"
+          ],
           "minItems": 1,
           "maxItems": 100,
           "items": {

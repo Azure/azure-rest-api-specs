@@ -34,7 +34,7 @@ interface AutoReleaseJobs {
   @tag("autoReleaseJobs")
   get is ArmResourceRead<AutoReleaseJob, Error = ErrorResponse>;
 
-  /** Creates an AutoRelease job or replaces the complete policy set of an enabled job. */
+  /** Creates an AutoRelease job or updates only its administrative status. */
   @tag("autoReleaseJobs")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AutoReleaseJob,
@@ -77,8 +77,8 @@ interface AutoReleaseJobs {
 );
 @@doc(AutoReleaseJob.properties, "Properties of the AutoRelease job.");
 @@doc(AutoReleaseJobs.createOrUpdate::parameters.resource,
-  "Object containing the complete AutoRelease policy set. If read-only properties are included, they must match the existing values of those properties."
+  "Object containing the complete policy set when creating an AutoRelease job. For an existing job, only adminStatus can be modified; when omitted, the service applies Enable. If read-only properties are included, they must match the existing values of those properties."
 );
 @@doc(AutoReleaseJobs.update::parameters.properties,
-  "Object containing the AutoRelease properties to update. A supplied policies array replaces the complete policy set."
+  "Object containing the administrative status to update."
 );

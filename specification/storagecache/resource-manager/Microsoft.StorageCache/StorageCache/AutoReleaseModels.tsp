@@ -308,7 +308,7 @@ model AutoReleasePolicy {
   /** Filesystem-root-relative paths. When omitted during creation, the service uses the root path. */
   @minItems(1)
   @maxItems(100)
-  prefixes?: string[];
+  prefixes?: string[] = #["/"];
 
   /** Ordered filters applied to candidate files. */
   @identifiers(#[])
@@ -322,12 +322,12 @@ model AutoReleaseJobProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: AutoReleaseJobProvisioningState;
 
-  /** Current administrative status. Initial creation defaults to Enable. */
+  /** Current administrative status. If omitted from PUT, the service applies Enable. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   adminStatus?: AutoReleaseJobAdminStatus = AutoReleaseJobAdminStatus.Enable;
 
-  /** Complete policy set. */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  /** Complete policy set. Policies are immutable after creation. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minItems(1)
   @maxItems(10)
   @identifiers(#["name"])
@@ -418,10 +418,4 @@ model AutoReleaseJobUpdate {
 model AutoReleaseJobUpdateProperties {
   /** Administrative status to apply. */
   adminStatus?: AutoReleaseJobAdminStatus;
-
-  /** Complete replacement policy set. */
-  @minItems(1)
-  @maxItems(10)
-  @identifiers(#["name"])
-  policies?: AutoReleasePolicy[];
 }
