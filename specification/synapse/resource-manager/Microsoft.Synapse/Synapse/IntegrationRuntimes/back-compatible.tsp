@@ -5,9 +5,6 @@ using Azure.ClientGenerator.Core;
 namespace IntegrationRuntimes;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(IntegrationRuntimeStatusResponse.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ManagedIntegrationRuntime.typeProperties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ManagedIntegrationRuntime.managedVirtualNetwork);
@@ -153,5 +150,3 @@ namespace IntegrationRuntimes;
   IntegrationRuntimeResources.integrationRuntimeEnableInteractivequery,
   "Get"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(IntegrationRuntimeResource.properties);
