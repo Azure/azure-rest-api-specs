@@ -1783,6 +1783,9 @@
         "x-ms-examples": {
           "Get Account": {
             "$ref": "./examples/GetAccount.json"
+          },
+          "Get an account with private CA trust": {
+            "$ref": "./examples/GetAccountWithTrustedCertificateSources.json"
           }
         }
       },
@@ -1875,6 +1878,9 @@
           },
           "Create a Foundry account with customer-owned AKS hosting": {
             "$ref": "./examples/CreateAccountWithAgentHostingConfiguration.json"
+          },
+          "Create an account with private CA trust": {
+            "$ref": "./examples/CreateAccountWithTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1951,8 +1957,17 @@
           }
         },
         "x-ms-examples": {
+          "Clear account private CA trust using an empty array": {
+            "$ref": "./examples/UpdateAccountClearTrustedCertificateSources.json"
+          },
+          "Rotate a pinned CA bundle while retaining other references": {
+            "$ref": "./examples/UpdateAccountRotateTrustedCertificateSources.json"
+          },
           "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
+          },
+          "Update account tags while preserving private CA trust with null": {
+            "$ref": "./examples/UpdateAccountPreserveTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13337,6 +13352,23 @@
             "create"
           ]
         },
+        "trustedCertificateSources": {
+          "type": "array",
+          "description": "Private CA trust sources for supported features in an AIServices account with allowProjectManagement enabled. Supports one Azure Key Vault source containing version-pinned references to secrets with PEM-encoded CA certificates or certificate bundles. On PUT or PATCH, a non-null array replaces the complete configuration, so include all references to retain. Omit this property or send null to preserve the existing configuration; send an empty array to clear it.",
+          "maxItems": 1,
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/TrustedCertificateSource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "costControlIds": {
           "type": "array",
           "description": "The full resource IDs of cost controls directly attached to this account.\nAt the moment the service only supports a single cost control. This will be expanded in future API versions.",
@@ -15125,6 +15157,30 @@
           }
         }
       }
+    },
+    "CertificateBundleReference": {
+      "type": "object",
+      "description": "A reference to a specific version of a Key Vault secret containing a PEM-encoded CA certificate or certificate bundle.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the Key Vault secret containing the CA certificate or certificate bundle.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Required, pinned version of the Key Vault secret. Newer secret versions are not followed automatically. To rotate a bundle, update this value and resubmit the complete account trust configuration.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        }
+      },
+      "required": [
+        "secretName",
+        "secretVersion"
+      ]
     },
     "ChannelsBuiltInAuthorizationPolicy": {
       "type": "object",
@@ -23849,6 +23905,64 @@
           "format": "int32",
           "description": "Gets or sets the percentage of traffic allocated to this instance."
         }
+      }
+    },
+    "TrustedCertificateSource": {
+      "type": "object",
+      "description": "An Azure resource containing the CA certificate bundles trusted by supported features in the account.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TrustedCertificateSourceType",
+          "description": "Type of resource containing the certificate bundles. Currently only AzureKeyVault is supported."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the Key Vault containing the referenced secrets. The account identity must have permission to read these secrets.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "certificateBundleReferences": {
+          "type": "array",
+          "description": "References to secrets containing one or more PEM-encoded CA certificates. Each secret name and version pair must be unique within the source, using case-insensitive comparison. The same secret name can be referenced with different versions.",
+          "minItems": 1,
+          "maxItems": 25,
+          "items": {
+            "$ref": "#/definitions/CertificateBundleReference"
+          },
+          "x-ms-identifiers": [
+            "secretName",
+            "secretVersion"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "resourceId",
+        "certificateBundleReferences"
+      ]
+    },
+    "TrustedCertificateSourceType": {
+      "type": "string",
+      "description": "Type of Azure resource containing trusted CA certificate bundles.",
+      "enum": [
+        "AzureKeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "TrustedCertificateSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault",
+            "description": "Azure Key Vault secrets containing CA certificates or certificate bundles."
+          }
+        ]
       }
     },
     "UnitType": {
