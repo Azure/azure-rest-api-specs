@@ -6,8 +6,11 @@ import "../toolboxes/models.tsp";
 import "../agents/models.tsp";
 import "../skills/models.tsp";
 
+import "@typespec/http-client-csharp";
+
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using TypeSpec.HttpClient.CSharp;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @clientNamespace("Azure.AI.Extensions.OpenAI")
@@ -936,6 +939,33 @@ namespace Azure.AI.Projects {
     "OutputDefinition",
     "csharp"
   );
+
+  @@dynamicModel(A2AToolCall);
+  @@dynamicModel(A2AToolCallOutput);
+  @@dynamicModel(StructuredOutputsOutputItem);
+  @@dynamicModel(BingGroundingToolCall);
+  @@dynamicModel(BingGroundingToolCallOutput);
+  @@dynamicModel(WorkflowActionOutputItem);
+  @@dynamicModel(AzureAISearchToolCall);
+  @@dynamicModel(AzureAISearchToolCallOutput);
+  @@dynamicModel(AzureFunctionToolCall);
+  @@dynamicModel(AzureFunctionToolCallOutput);
+  @@dynamicModel(BingCustomSearchToolCall);
+  @@dynamicModel(BingCustomSearchToolCallOutput);
+  @@dynamicModel(BrowserAutomationToolCall);
+  @@dynamicModel(BrowserAutomationToolCallOutput);
+  @@dynamicModel(FabricDataAgentToolCall);
+  @@dynamicModel(FabricDataAgentToolCallOutput);
+  @@dynamicModel(MemoryCommandToolCall);
+  @@dynamicModel(MemoryCommandToolCallOutput);
+  @@dynamicModel(MemorySearchToolCall);
+  @@dynamicModel(OAuthConsentRequestOutputItem);
+  @@dynamicModel(OpenApiToolCall);
+  @@dynamicModel(OpenApiToolCallOutput);
+  @@dynamicModel(SharepointGroundingToolCall);
+  @@dynamicModel(SharepointGroundingToolCallOutput);
+
+  // Mark response items as a dynamic models.
 
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
