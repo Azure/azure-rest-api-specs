@@ -49690,6 +49690,167 @@
         },
         "description": "Run-wide estimated inference cost for the evaluation target.\n\nThe estimate is derived from reported token counts and list prices. It excludes evaluator\nand runtime usage and does not account for negotiated pricing, commitments, or discounts."
       },
+      "InlineVoiceSubagent": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "interface",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The subagent identifier. New Handoff authoring requires `$entrypoint` as the first subagent; other values use the normal handoff ID grammar."
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "inline"
+            ],
+            "description": "The definition source. This phase supports only `inline`; referenced Agent resources are deferred."
+          },
+          "interface": {
+            "type": "string",
+            "enum": [
+              "voice"
+            ],
+            "description": "The interaction interface. This phase supports only `voice`; text delegation is deferred."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A non-empty display-only description of the specialist behavior. This value is not provided to the model."
+          },
+          "model": {
+            "type": "string",
+            "description": "The target model for a cascaded graph. Realtime graphs reject this property and retain the connection model."
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Subagent-specific instructions. With default inheritance, non-empty instructions follow the original top-level instructions. Omission, null, or an empty string adds nothing after that base. With inheritance disabled, only this value applies."
+          },
+          "inherit_base_instructions": {
+            "type": "boolean",
+            "description": "Whether the subagent inherits the original top-level instructions before applying its own non-empty instructions. Defaults to true; set to false to opt out.",
+            "default": true
+          },
+          "tools": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/VoiceAgentTool"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Customer tools available to this subagent. Omission or null selects an empty customer tool set."
+          },
+          "tool_choice": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentToolChoice"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Tool-selection behavior for this subagent. If omitted, the service defaults to auto. Null also selects auto.",
+            "default": "auto"
+          },
+          "audio_output": {
+            "$ref": "#/components/schemas/VoiceAgentVoiceConfig",
+            "description": "The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; a supplied object replaces the voice-specific settings."
+          },
+          "temperature": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0,
+            "maximum": 2,
+            "description": "The sampling temperature for a compatible subagent model, from 0 through 2."
+          },
+          "max_response_output_tokens": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentHandoffMaxOutputTokens"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The maximum output-token count for one response while this subagent is active."
+          },
+          "reasoning_effort": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentHandoffReasoningEffort"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Reasoning effort for a compatible subagent model."
+          },
+          "voice_adaptation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentHandoffVoiceAdaptation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Voice-optimized instruction adaptation for this subagent. Null disables adaptation."
+          },
+          "interim_response": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Interim-response settings for this subagent. Null disables interim responses."
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether this subagent may call customer tools in parallel. If omitted, the service defaults to false. Subagents with outgoing handoff conditions must use `false`.",
+            "default": false
+          },
+          "handoff_conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentHandoffCondition"
+            },
+            "maxItems": 128,
+            "description": "Outgoing handoffs from this subagent. The containing subagent supplies each condition's source. The service permits at most 128 conditions across the entire Agent."
+          }
+        },
+        "description": "One inline voice subagent owned and versioned with its parent Voice Agent, not a separate Agent resource.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "InputData": {
         "type": "object",
         "required": [
@@ -103226,7 +103387,7 @@
           },
           "subagent_config": {
             "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
-            "description": "Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists."
+            "description": "Optional subagent configuration. Omit `subagent_type` or set it to `delegate` for delegated background specialists; inline voice subagents require `subagent_type: inline`."
           },
           "store": {
             "type": "boolean",
@@ -103240,6 +103401,45 @@
           }
         ],
         "description": "The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a\nmanaged speech-to-speech experience. Establish realtime voice sessions through\n`GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentDelegateSubagentConfig": {
+        "type": "object",
+        "required": [
+          "subagents"
+        ],
+        "properties": {
+          "subagent_type": {
+            "type": "string",
+            "enum": [
+              "delegate"
+            ],
+            "description": "The subagent mode. May be omitted for compatibility with existing delegate configurations."
+          },
+          "subagents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentSubagent"
+            },
+            "minItems": 1,
+            "description": "The sibling Foundry text agents, in the same project, that this Voice Agent may consult."
+          }
+        },
+        "description": "Configuration for referenced Foundry agents invoked as delegated background specialists.",
+        "examples": [
+          {
+            "subagents": [
+              {
+                "agent_name": "order-agent",
+                "agent_capabilities": "Look up customer orders."
+              }
+            ]
+          }
+        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -103447,6 +103647,213 @@
           }
         },
         "description": "Session-start greeting configuration for a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffCondition": {
+        "type": "object",
+        "required": [
+          "id",
+          "target",
+          "condition"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffId",
+            "description": "The handoff condition identifier."
+          },
+          "target": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The target subagent identifier or `$entrypoint`. The containing subagent supplies the source."
+          },
+          "condition": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "Natural-language routing guidance supplied alongside the active subagent instructions, from 1 through 500 characters. This is not an executable Boolean predicate."
+          },
+          "cancel_on_interruption": {
+            "type": "boolean",
+            "description": "Whether user interruption before commit cancels the pending handoff. If omitted, the service defaults to false.",
+            "default": false
+          },
+          "delay_ms": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 10000,
+            "description": "The minimum delay before target activation, in milliseconds, from 0 through 10000. If omitted, the service defaults to 0.",
+            "default": 0
+          },
+          "transfer_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "maxLength": 500,
+            "description": "Optional deterministic source-voice announcement played before target activation. Supported by cascaded\npipelines and realtime pipelines using local Azure TTS; model-native realtime voice requires omission or null.\nAt most 500 characters. If omitted or null, no announcement is played."
+          },
+          "target_response": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffTargetResponse",
+            "description": "Whether Voice Live automatically starts a response after target activation. If omitted, the service defaults to `auto`.",
+            "default": "auto"
+          }
+        },
+        "description": "One allowed outgoing handoff from an inline voice subagent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffId": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+        "description": "A case-sensitive identifier for an inlined subagent or handoff condition."
+      },
+      "VoiceAgentHandoffMaxOutputTokenCount": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 1,
+        "description": "A positive output-token limit for one handoff-node response."
+      },
+      "VoiceAgentHandoffMaxOutputTokens": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentHandoffMaxOutputTokenCount"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "inf"
+            ]
+          }
+        ],
+        "description": "The maximum output-token count or the literal `inf` for a handoff node.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffNodeReference": {
+        "type": "string",
+        "pattern": "^(?:\\$entrypoint|[a-z][a-z0-9_-]{0,63})$",
+        "description": "A handoff node reference: either `$entrypoint` or a configured node identifier."
+      },
+      "VoiceAgentHandoffPolicy": {
+        "type": "object",
+        "properties": {
+          "max_transfers": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "The maximum number of successfully completed handoffs in one session, from 1 through 100. If omitted, the service defaults to 16.",
+            "default": 16
+          },
+          "max_attempts": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "The maximum number of attempted handoffs, from 1 through 100. If omitted, the service uses `max_transfers`. The service requires this value to be greater than or equal to `max_transfers`."
+          }
+        },
+        "description": "Session-wide limits shared by all handoff conditions in one Voice Agent session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffReasoningEffort": {
+        "type": "string",
+        "enum": [
+          "none",
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "description": "Reasoning effort applied by a compatible handoff-node model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffTargetResponse": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "none"
+        ],
+        "description": "Whether Voice Live automatically starts a response after a handoff target becomes active.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffVoiceAdaptation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "auto"
+            ],
+            "description": "The adaptation strategy. Currently only `auto` is supported."
+          }
+        },
+        "description": "Voice-optimized instruction adaptation applied while a handoff node is active.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentInlineSubagentConfig": {
+        "type": "object",
+        "required": [
+          "subagent_type",
+          "subagents"
+        ],
+        "properties": {
+          "subagent_type": {
+            "type": "string",
+            "enum": [
+              "inline"
+            ],
+            "description": "The subagent mode. Inline voice subagents require the explicit value `inline`."
+          },
+          "subagents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InlineVoiceSubagent"
+            },
+            "minItems": 2,
+            "maxItems": 32,
+            "description": "Inline voice subagents owned and versioned with the parent Voice Agent. `$entrypoint` must be first, followed\nby at least one specialist and at most 31 additional subagents. Each subagent declares its outgoing\n`handoff_conditions`; condition identifiers and the 128-condition limit apply across the entire Agent."
+          },
+          "handoff_policy": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffPolicy",
+            "description": "Session-wide Handoff limits. Requires `$entrypoint` with at least one outgoing condition. When omitted, the service permits up to 16 completed and 16 attempted handoffs."
+          }
+        },
+        "description": "Configuration for inline voice subagents that may become active through Handoff.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -104253,21 +104660,15 @@
         }
       },
       "VoiceAgentSubagentConfig": {
-        "type": "object",
-        "required": [
-          "subagents"
-        ],
-        "properties": {
-          "subagents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentSubagent"
-            },
-            "minItems": 1,
-            "description": "The sibling Foundry text agents, in the same project, that this voice agent may consult."
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentDelegateSubagentConfig"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentInlineSubagentConfig"
           }
-        },
-        "description": "Configuration for sibling Foundry text agents that a voice agent may consult.",
+        ],
+        "description": "Configuration for delegated background specialists or inline voice subagents. Existing delegate configurations may omit `subagent_type`; inline configurations must explicitly select `inline`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -104595,6 +104996,80 @@
           }
         ],
         "description": "The turn-detection strategy. Additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentVoiceConfig": {
+        "type": "object",
+        "properties": {
+          "voice": {
+            "type": "string",
+            "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar."
+          },
+          "voice_type": {
+            "$ref": "#/components/schemas/VoiceType",
+            "description": "The voice implementation."
+          },
+          "voice_locale": {
+            "type": "string",
+            "description": "The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "speed": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0.25,
+            "maximum": 1.5,
+            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values."
+          },
+          "voice_temperature": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "custom_lexicon_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "custom_text_normalization_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "prefer_locales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "style": {
+            "type": "string",
+            "description": "The voice speaking style. Applies only when `voice_type` is `azure-standard`."
+          },
+          "pitch": {
+            "type": "string",
+            "description": "The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "volume": {
+            "type": "string",
+            "description": "The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "custom_voice_endpoint_id": {
+            "type": "string",
+            "description": "The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`."
+          },
+          "personal_voice_model": {
+            "type": "string",
+            "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
+          }
+        },
+        "description": "Voice-specific output overrides for an inline subagent. Session-level output format and timestamp settings are\nintentionally excluded.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
