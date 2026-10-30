@@ -1,0 +1,37 @@
+{
+  "title": "Get wave plans whose status has not yet been checked",
+  "operationId": "MigrateProjects_GetWavePlans",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "body": {
+      "assessmentArmId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/project1/groups/group1/assessments/assessment1",
+      "migrationPath": "AzureVM"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "wavePlanName": "WavePlan_assessment1_AzureVM",
+            "assessmentArmId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/project1/groups/group1/assessments/assessment1",
+            "migrationPath": "AzureVM",
+            "provisioningState": "Succeeded",
+            "planSource": "SystemGenerated",
+            "artifactProperties": {
+              "artifactId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/artifacts/wavePlan1",
+              "versionId": "1"
+            },
+            "isOutdated": false,
+            "outdatedReasons": [],
+            "lastCheckedTime": null,
+            "outdatedTime": null
+          }
+        ]
+      }
+    }
+  }
+}
