@@ -7,13 +7,30 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(
-  Search.Versions.v2025_11_01_preview,
-  Search.Versions.v2026_04_01,
-  Search.Versions.v2026_05_01_preview,
-  Search.Versions.v2026_08_01_preview
-)
+@versioned(CustomizationVersions)
 namespace Customizations;
+
+/** The service API versions supported by client customizations. */
+enum CustomizationVersions {
+  /** Client customizations for the 2025-11-01-preview API version. */
+  @useDependency(Search.Versions.v2025_11_01_preview)
+  v2025_11_01_preview: "2025-11-01-preview",
+
+  /** Client customizations for the 2026-04-01 API version. */
+  @useDependency(Search.Versions.v2026_04_01)
+  v2026_04_01: "2026-04-01",
+
+  /** Client customizations for the 2026-05-01-preview API version. */
+  @useDependency(Search.Versions.v2026_05_01_preview)
+  v2026_05_01_preview: "2026-05-01-preview",
+
+  /** Client customizations for the 2026-08-01-preview API version. */
+  @useDependency(Search.Versions.v2026_08_01_preview)
+  v2026_08_01_preview: "2026-08-01-preview",
+
+  @useDependency(Search.Versions.v2026_10_01)
+  v2026_10_01: "2026-10-01",
+}
 
 @client({
   name: "SearchClient",
@@ -22,6 +39,7 @@ namespace Customizations;
 @clientInitialization(Search.SearchIndexClientOptions)
 @clientNamespace("Azure.Search.Documents")
 @clientNamespace("com.azure.search.documents", "java")
+@versioned(CustomizationVersions)
 namespace SearchClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -66,6 +84,7 @@ namespace SearchClient {
 })
 @clientNamespace("Azure.Search.Documents.Indexes")
 @clientNamespace("com.azure.search.documents.indexes", "java")
+@versioned(CustomizationVersions)
 namespace SearchIndexClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -103,24 +122,20 @@ namespace SearchIndexClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listIndexes is Search.Indexes.list;
 
-  // Offset-paging list op (Search.Indexes.listOffsetPaged is @removed at
-  // v2026_08_01_preview, while the server-driven Search.Indexes.list is @added at the same
-  // version). The two service ops are version-disjoint, so binding both here and emitting
-  // them under the same client method name ("listIndexes") keeps a single `GetIndexes`
-  // method in every SDK version and avoids a customer breaking change.
+  // Offset-paging and server-driven operations are version-disjoint. C# keeps
+  // their existing shared SDK name for compatibility.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  op listIndexesOffsetPaged is Search.Indexes.listOffsetPaged;
+  op listIndexesOffsetPaged is Search.LegacyIndexes.list;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listIndexesWithSelectedProperties is Search.Indexes.listWithSelectedProperties;
 
-  // Offset-paging counterpart of `listIndexesWithSelectedProperties`; same
-  // version-disjoint unification as `listIndexesOffsetPaged` above.
+  // Preserve the selected-properties variant of the legacy offset-paging API.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  op listIndexesWithSelectedPropertiesOffsetPaged is Search.Indexes.listWithSelectedPropertiesOffsetPaged;
+  op listIndexesWithSelectedPropertiesOffsetPaged is Search.LegacyIndexes.listWithSelectedProperties;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -232,6 +247,7 @@ namespace SearchIndexClient {
 })
 @clientNamespace("Azure.Search.Documents.Indexes")
 @clientNamespace("com.azure.search.documents.indexes", "java")
+@versioned(CustomizationVersions)
 namespace SearchIndexerClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -331,6 +347,7 @@ model KnowledgeBaseRetrievalClientOptions {
 })
 @clientNamespace("Azure.Search.Documents.KnowledgeBases")
 @clientNamespace("com.azure.search.documents.knowledgebases", "java")
+@versioned(CustomizationVersions)
 namespace KnowledgeBaseRetrievalClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -356,11 +373,6 @@ namespace KnowledgeBaseRetrievalClient {
   KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
   "outputTokensCount",
   "!autorest"
-);
-@@clientName(
-  KnowledgeBaseActivityRecord.elapsedMs,
-  "elapsedInMs",
-  "javascript"
 );
 
 @@access(ListingSearchType, Access.public);
@@ -667,19 +679,19 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchClient.suggestPost, Access.public, "java");
 @@clientName(SearchClient.suggestPost, "suggest", "java");
 @@access(SearchClient.index, Access.internal);
-@@access(SearchIndexerClient.listDataSources, Access.internal);
+@@access(SearchIndexerClient.listDataSources, Access.public, "csharp");
 @@access(SearchIndexerClient.createOrUpdateDataSource, Access.internal);
 @@access(SearchIndexerClient.deleteDataSource, Access.internal, "python");
-@@access(SearchIndexerClient.listIndexers, Access.internal);
+@@access(SearchIndexerClient.listIndexers, Access.public, "csharp");
 @@access(SearchIndexerClient.createOrUpdateIndexer, Access.internal);
 @@access(SearchIndexerClient.resetDocs, Access.internal, "python");
 @@access(SearchIndexerClient.deleteIndexer, Access.internal, "python");
 @@access(SearchIndexerClient.resync, Access.internal, "python");
-@@access(SearchIndexerClient.listSkillsets, Access.internal);
+@@access(SearchIndexerClient.listSkillsets, Access.public, "csharp");
 @@access(SearchIndexerClient.createOrUpdateSkillset, Access.internal);
 @@access(SearchIndexerClient.deleteSkillset, Access.internal, "python");
 @@access(SearchIndexerClient.resetSkills, Access.internal, "python");
-@@access(SearchIndexClient.listSynonymMaps, Access.internal);
+@@access(SearchIndexClient.listSynonymMaps, Access.public, "csharp");
 @@access(SearchIndexClient.createOrUpdateSynonymMap, Access.internal);
 @@access(SearchIndexClient.deleteSynonymMap, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateIndex, Access.internal);
@@ -2415,6 +2427,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeSourceFileCapacity,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceFileCapacity,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
   Search.ListKnowledgeSourceFilesResult,
   "Azure.Search.Documents.Indexes"
 );
@@ -2663,6 +2684,15 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.ListIndexesResult, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.ListIndexesResult,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.ListIndexesSelectedResult,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.ListIndexesSelectedResult,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -3765,9 +3795,9 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@clientName(SearchClient.count, "getDocumentCount", "!autorest");
 @@clientName(SearchClient.get, "getDocument", "!autorest");
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops are unified under one C# method name (see listIndexesOffsetPaged comment above)."
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
 @@clientName(SearchIndexClient.listIndexes, "listIndexes", "!autorest");
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops are unified under one C# method name (see listIndexesOffsetPaged comment above)."
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
 @@clientName(
   SearchIndexClient.listIndexesWithSelectedProperties,
   "listIndexesWithSelectedProperties",
@@ -3787,7 +3817,7 @@ namespace KnowledgeBaseRetrievalClient {
   "!autorest"
 );
 @@clientName(SearchIndexClient.analyze, "analyzeText", "!autorest");
-@@clientName(SearchIndexClient.listSynonymMaps, "getSynonymMaps", "!autorest");
+@@clientName(SearchIndexClient.listSynonymMaps, "listSynonymMaps", "!autorest");
 @@clientName(SearchIndexClient.getSynonymMap, "getSynonymMap", "!autorest");
 @@clientName(
   SearchIndexClient.deleteSynonymMap,
@@ -3869,6 +3899,11 @@ namespace KnowledgeBaseRetrievalClient {
   "!autorest"
 );
 @@clientName(
+  SearchIndexClient.listKnowledgeSourceFiles,
+  "listKnowledgeSourceFiles",
+  "!autorest"
+);
+@@clientName(
   SearchIndexClient.getKnowledgeSourceStatus,
   "getKnowledgeSourceStatus",
   "!autorest"
@@ -3881,7 +3916,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(SearchIndexerClient.deleteIndexer, "deleteIndexer", "!autorest");
 @@clientName(SearchIndexerClient.getIndexer, "getIndexer", "!autorest");
-@@clientName(SearchIndexerClient.listIndexers, "getIndexers", "!autorest");
+@@clientName(SearchIndexerClient.listIndexers, "listIndexers", "!autorest");
 @@clientName(SearchIndexerClient.runIndexer, "runIndexer", "!autorest");
 @@clientName(SearchIndexerClient.resetIndexer, "resetIndexer", "!autorest");
 @@clientName(SearchIndexerClient.resetDocs, "resetDocuments", "!autorest");
@@ -3908,7 +3943,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(
   SearchIndexerClient.listDataSources,
-  "getDataSourceConnections",
+  "listDataSourceConnections",
   "!autorest"
 );
 @@clientName(
@@ -3923,8 +3958,36 @@ namespace KnowledgeBaseRetrievalClient {
   "!autorest"
 );
 @@clientName(SearchIndexerClient.getSkillset, "getSkillset", "!autorest");
-@@clientName(SearchIndexerClient.listSkillsets, "getSkillsets", "!autorest");
+@@clientName(SearchIndexerClient.listSkillsets, "listSkillsets", "!autorest");
 @@clientName(SearchIndexerClient.deleteSkillset, "deleteSkillset", "!autorest");
+
+// Existing pageable APIs retain their names; only new paging APIs use GetAll.
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
+@@clientName(SearchIndexClient.listIndexes, "listIndexes", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
+@@clientName(
+  SearchIndexClient.listIndexesWithSelectedProperties,
+  "listIndexesWithSelectedProperties",
+  "csharp"
+);
+@@clientName(SearchIndexClient.listSynonymMaps, "GetAllSynonymMaps", "csharp");
+@@clientName(
+  SearchIndexClient.getIndexStatsSummary,
+  "GetAllIndexStatsSummary",
+  "csharp"
+);
+@@clientName(
+  SearchIndexClient.listKnowledgeSourceFiles,
+  "GetAllKnowledgeSourceFiles",
+  "csharp"
+);
+@@clientName(SearchIndexerClient.listIndexers, "GetAllIndexers", "csharp");
+@@clientName(
+  SearchIndexerClient.listDataSources,
+  "GetAllDataSourceConnections",
+  "csharp"
+);
+@@clientName(SearchIndexerClient.listSkillsets, "GetAllSkillsets", "csharp");
 
 @@clientName(VectorQuery.k, "kNearestNeighbors", "!autorest");
 @@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp,javascript");
@@ -3937,16 +4000,10 @@ namespace KnowledgeBaseRetrievalClient {
   "NextLink",
   "!autorest"
 );
-// Unify offset-paging list ops with their server-driven counterparts so the
-// C# SDK exposes a single `listIndexes` / `listIndexesWithSelectedProperties` method
-// in every api-version. Scoped to csharp: the underlying service ops are
-// version-disjoint (listOffsetPaged is @removed and list is @added at
-// v2026_08_01_preview), which the C# generator handles (it emits a per-version
-// method), so the duplicate name is only a warning there. Other language scopes
-// treat a duplicate client name as a hard error and keep the distinct op names.
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops unified under one C# method name (see comment above)."
+// Legacy offset-paging methods share the server-driven names in C# only.
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
 @@clientName(SearchIndexClient.listIndexesOffsetPaged, "listIndexes", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops unified under one C# method name (see comment above)."
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
 @@clientName(
   SearchIndexClient.listIndexesWithSelectedPropertiesOffsetPaged,
   "listIndexesWithSelectedProperties",
@@ -5670,3 +5727,85 @@ namespace KnowledgeBaseRetrievalClient {
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "clientRequired for java"
 @@clientOption(Search.acceptHeaderNone.accept, "clientRequired", true, "java");
+
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStartedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStartedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityStartedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityStartedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityCompletedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityCompletedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseAnswerCompletedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseAnswerCompletedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseReferencesCompletedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseReferencesCompletedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseErrorStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseErrorStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseResponseCompletedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseResponseCompletedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+
+@@access(Search.KnowledgeBaseRetrievalStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseRetrievalStartedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseActivityStartedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseActivityCompletedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseAnswerCompletedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseReferencesCompletedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseErrorStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseResponseCompletedStreamEvent, Access.public);

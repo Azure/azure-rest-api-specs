@@ -25,6 +25,53 @@ using Microsoft.Monitor;
 @@clientName(IssueProperties, "MonitorIssueProperties", "csharp");
 @@clientName(MetricsContainerResource, "MonitorMetricsContainer", "csharp");
 @@clientName(MetricsContainer, "MonitorMetricsContainerProperties", "csharp");
+@@clientName(MetricConfigurationResource, "MetricConfiguration", "csharp");
+@@clientName(MetricNamespaceResource, "MetricNamespace", "csharp");
+@@clientName(TraceAssociation, "TraceAssociationProperties", "csharp");
+@@clientName(TraceAssociationResource, "TraceAssociation", "csharp");
+@@clientName(
+  TraceAssociationsAtResourceGroup,
+  "TraceAssociationAtResourceGroup",
+  "csharp"
+);
+@@clientName(
+  TraceAssociationsAtSubscription,
+  "TraceAssociationAtSubscription",
+  "csharp"
+);
+@@clientName(TraceContainer, "TraceContainerProperties", "csharp");
+@@clientName(TraceContainerResource, "TraceContainer", "csharp");
+@@clientName(
+  DefaultActionGroupResource,
+  "DefaultActionGroupReference",
+  "csharp"
+);
+@@clientName(
+  MetricAggregationConfiguration.storeAggregatedData,
+  "ShouldStoreAggregatedData",
+  "csharp"
+);
+@@clientName(
+  MetricConfigurationProperties.storeRawData,
+  "ShouldStoreRawData",
+  "csharp"
+);
+@@clientName(
+  MetricNamespaceProperties.provisioningState,
+  "ProvisioningState",
+  "csharp"
+);
+@@clientName(AzureMonitorWorkspaceEndpoints.query, "QueryEndpoint", "csharp");
+@@clientName(
+  AzureMonitorWorkspaceActions.defaultActionGroups,
+  "DefaultActionGroups",
+  "csharp"
+);
+@@clientName(
+  TraceAssociation.azureMonitorWorkspaceResourceId,
+  "AzureMonitorWorkspaceResourceId",
+  "csharp"
+);
 @@clientName(AddedByType, "MonitorEntityType", "csharp");
 @@clientName(Origin, "MonitorEntityOrigin", "csharp");
 @@clientName(

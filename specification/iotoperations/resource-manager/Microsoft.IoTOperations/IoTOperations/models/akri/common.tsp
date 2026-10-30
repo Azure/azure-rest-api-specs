@@ -156,6 +156,71 @@ model AkriConnectorsRegistrySettings {
   registrySettingsType: AkriConnectorsRegistrySettingsType;
 }
 
+/** Diagnostics settings for an application. */
+@added(Versions.`2026-11-01-preview`)
+model AioApplicationConfigurationDiagnostics {
+  /** The log settings for the application. */
+  logs: AkriConnectorsDiagnosticsLogs;
+}
+
+/** A set of compute quantities for an application container. */
+@added(Versions.`2026-11-01-preview`)
+model AioApplicationResourceQuantities {
+  /** The CPU quantity uses the same units as Kubernetes CPU limits. See [Meaning of CPU](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu). */
+  cpu?: string;
+
+  /** The memory quantity uses the same units as Kubernetes memory limits. See [Meaning of memory](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory). */
+  memory?: string;
+}
+
+/** A network service that exposes an application inside the cluster. */
+@added(Versions.`2026-11-01-preview`)
+model AioApplicationExposedService {
+  /** The name of the service. Must be unique within the application. */
+  name: NonEmptyString;
+
+  /** Kubernetes Service type of this service. */
+  serviceType?: ServiceType = ServiceType.ClusterIp;
+
+  /** The ports exposed by the service. */
+  @identifiers(#["name"])
+  @minItems(1)
+  ports: AioApplicationExposedServicePort[];
+}
+
+/** A port exposed by an application service. */
+@added(Versions.`2026-11-01-preview`)
+model AioApplicationExposedServicePort {
+  /** The name of the service port. Must be unique within the service. */
+  name: NonEmptyString;
+
+  /** The port exposed by the service. */
+  @minValue(1)
+  @maxValue(65535)
+  port: int32;
+
+  /** The protocol spoken on the port. */
+  protocol?: AioApplicationExposedServiceProtocol = AioApplicationExposedServiceProtocol.Http;
+}
+
+/** The protocol spoken on an application service port. */
+@added(Versions.`2026-11-01-preview`)
+union AioApplicationExposedServiceProtocol {
+  string,
+
+  /** Uses HTTP. */
+  Http: "Http",
+
+  /** HTTP over TLS. */
+  Https: "Https",
+
+  /** Uses gRPC. */
+  Grpc: "Grpc",
+
+  /** AIO Mrpc. */
+  Mrpc: "Mrpc",
+}
+
 /** AkriConnectorsRegistrySettings properties. */
 @added(Versions.`2025-07-01-preview`)
 union AkriConnectorsRegistrySettingsType {
