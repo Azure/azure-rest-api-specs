@@ -2,7 +2,8 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability # capability | regression
-area: "versioning"
+tags:
+  area: "versioning"
 # Root-level environment
 environment: azsdk-mcp
 # Execution configuration
@@ -28,8 +29,8 @@ stimuli:
           dest: main.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/check-node-dependencies.js
-          dest: check-node-dependencies.js
+        - src: ../scripts/check-node-dependencies.ts
+          dest: check-node-dependencies.ts
         - src: ../fixtures/001008-version-add-stable-after-stable/readme.md
           dest: readme.md
         - src: ../fixtures/001008-version-add-stable-after-stable/shared.tsp
@@ -114,11 +115,11 @@ stimuli:
             - azure-sdk-mcp-azsdk_typespec_retrieve_knowledge
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js node_modules"
+          command: "node check-node-dependencies.ts node_modules"
           expected_exit_code: 0
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js packages"
+          command: "node check-node-dependencies.ts packages"
           expected_exit_code: 0
       - type: "run-command"
         config:
@@ -130,7 +131,6 @@ stimuli:
           path: "examples/2024-10-01/Employees_Get_MaximumSet_Gen.json"
       - &file_exists_example
         type: "file-exists"
-        name: "file-exists-example"
         config:
           path: "examples/2025-01-01/Employees_Get_MaximumSet_Gen.json"
       - &file_matches
@@ -140,13 +140,11 @@ stimuli:
           path: "main.tsp"
       - &file_matches_old_version
         type: "file-matches"
-        name: "file-matches-old-version"
         config:
           pattern: "2024-10-01"
           path: "main.tsp"
       - &file_matches_new_version
         type: "file-matches"
-        name: "file-matches-new-version"
         config:
           pattern: "2025-01-01"
           path: "main.tsp"

@@ -105,6 +105,7 @@ interface NspAssociations {
   /**
    * Reconcile NSP association
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing reconcile retains its request-body shape; preserve wire compatibility."
   @tag("NetworkSecurityPerimeterAssociations")
   reconcile is ArmResourceActionSync<
     NspAssociation,
