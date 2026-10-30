@@ -1,11 +1,22 @@
 {
-  "title": "ObservabilityAgents_Get",
-  "operationId": "ObservabilityAgents_Get",
+  "title": "ObservabilityAgents_Update_ClearConfiguration",
+  "operationId": "ObservabilityAgents_Update",
   "parameters": {
-    "api-version": "2026-05-01-preview",
+    "api-version": "2026-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "observabilityAgentName": "myObservabilityAgent"
+    "observabilityAgentName": "myObservabilityAgent",
+    "properties": {
+      "properties": {
+        "description": null,
+        "monitoringAccountId": null,
+        "autonomousOperationsEnabled": false,
+        "instructions": null,
+        "investigation": null,
+        "usageCap": null,
+        "monitoredResources": null
+      }
+    }
   },
   "responses": {
     "200": {
@@ -27,20 +38,7 @@
           }
         },
         "properties": {
-          "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
-          "enabled": true,
-          "operations": [
-            {
-              "type": "IssueCreation",
-              "mode": "Auto",
-              "instructions": "use includeAlertsFromGlobalRules"
-            },
-            {
-              "type": "Investigation",
-              "mode": "Auto",
-              "instructions": "focus on recent issues"
-            }
-          ]
+          "autonomousOperationsEnabled": false
         },
         "systemData": {
           "createdBy": "user1",

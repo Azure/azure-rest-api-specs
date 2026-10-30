@@ -2,7 +2,7 @@
   "title": "ObservabilityAgents_ListBySubscription",
   "operationId": "ObservabilityAgents_ListBySubscription",
   "parameters": {
-    "api-version": "2026-05-01-preview",
+    "api-version": "2026-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -27,18 +27,34 @@
               }
             },
             "properties": {
+              "description": "Investigates application health alerts.",
               "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
-              "enabled": true,
-              "operations": [
+              "autonomousOperationsEnabled": true,
+              "instructions": "Focus on application availability and recent changes.",
+              "investigation": {
+                "instructions": "Correlate alerts with application telemetry.",
+                "policies": [
+                  {
+                    "policyName": "ApplicationHealth",
+                    "description": "Investigate application health alerts in eastus.",
+                    "minimumSeverity": "2",
+                    "ruleNameContains": [
+                      "availability"
+                    ],
+                    "ruleResourceId": [
+                      "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Insights/metricAlerts/myAvailabilityAlert"
+                    ],
+                    "locationFilter": "eastus"
+                  }
+                ]
+              },
+              "usageCap": {
+                "amountAAC": 100
+              },
+              "monitoredResources": [
                 {
-                  "type": "IssueCreation",
-                  "mode": "Auto",
-                  "instructions": "use includeAlertsFromGlobalRules"
-                },
-                {
-                  "type": "Investigation",
-                  "mode": "Auto",
-                  "instructions": "focus on recent issues"
+                  "name": "myApplication",
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Insights/components/myApplication"
                 }
               ]
             },
