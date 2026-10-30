@@ -95517,7 +95517,8 @@
       "SimulationSeedDataGenerationJobConfiguration": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "max_samples"
         ],
         "properties": {
           "type": {
@@ -95526,6 +95527,13 @@
               "simulation_seed"
             ],
             "description": "The data generation job type, which is SimulationSeed for this model."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000,
+            "description": "Maximum number of samples to generate, up to service-defined limits."
           }
         },
         "allOf": [
@@ -100367,6 +100375,15 @@
           "subagent_config": {
             "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
             "description": "Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists."
+          },
+          "post_call": {
+            "$ref": "#/components/schemas/VoiceAgentPostCallConfig",
+            "description": "Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
           }
         },
         "allOf": [
@@ -100518,6 +100535,40 @@
           }
         ],
         "description": "The sensitivity threshold for semantic end-of-utterance detection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentEventGridPostCallDestination": {
+        "type": "object",
+        "required": [
+          "type",
+          "connection_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "event_grid"
+            ]
+          },
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The name of the Event Grid connection.",
+            "examples": [
+              "post-call-events"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentPostCallDestination"
+          }
+        ],
+        "description": "An Event Grid connection that receives post-call events.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -101537,6 +101588,100 @@
           ]
         }
       },
+      "VoiceAgentPostCallConfig": {
+        "type": "object",
+        "required": [
+          "destinations"
+        ],
+        "properties": {
+          "destinations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentPostCallDestination"
+            },
+            "minItems": 1,
+            "maxItems": 10,
+            "description": "The destinations to notify."
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentPostCallIncludeOption"
+            },
+            "description": "Additional content to include in each delivery. The transcript is always delivered. `audio` is not supported in this preview; the service rejects it when the agent version is saved."
+          }
+        },
+        "description": "Post-call delivery configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentPostCallDestination": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentPostCallDestinationType",
+            "description": "The destination type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "event_grid": "#/components/schemas/VoiceAgentEventGridPostCallDestination",
+            "routine": "#/components/schemas/VoiceAgentRoutinePostCallDestination"
+          }
+        },
+        "description": "A post-call destination.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentPostCallDestinationType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "event_grid",
+              "routine"
+            ]
+          }
+        ],
+        "description": "The type of a post-call destination.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentPostCallIncludeOption": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "audio"
+            ]
+          }
+        ],
+        "description": "Content that can be included in a post-call delivery.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentProfanityFilterMode": {
         "anyOf": [
           {
@@ -101552,6 +101697,41 @@
           }
         ],
         "description": "The supported input-transcript profanity filtering modes.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentRoutinePostCallDestination": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "routine"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The name of the routine.",
+            "examples": [
+              "archive"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentPostCallDestination"
+          }
+        ],
+        "description": "A routine that is dispatched with the post-call event.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

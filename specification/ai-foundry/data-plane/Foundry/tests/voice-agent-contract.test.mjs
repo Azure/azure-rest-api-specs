@@ -92,6 +92,7 @@ const realtimeVoiceFields = [
   "tool_choice",
   "parallel_tool_calls",
   "subagent_config",
+  "post_call",
 ];
 
 function type(name, context = program) {
