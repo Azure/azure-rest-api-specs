@@ -801,6 +801,7 @@ model SkuDescription {
    * Locations and zones
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   locationInfo?: SkuLocationInfoItem[];
 
   /**
@@ -992,6 +993,7 @@ model LanguageExtensionsList {
    * The list of language extensions.
    */
   @pageItems
+  @identifiers(#[])
   value?: LanguageExtension[];
 }
 
@@ -1036,6 +1038,7 @@ model ListResourceSkusResult {
    * The collection of available SKUs for an existing resource.
    */
   @pageItems
+  @identifiers(#[])
   value?: AzureResourceSku[];
 }
 
@@ -1107,6 +1110,7 @@ model FollowerDatabaseListResult {
    * The list of follower database result.
    */
   @pageItems
+  @identifiers(#[])
   value?: FollowerDatabaseDefinition[];
 }
 
@@ -1263,6 +1267,7 @@ model DataConnectionValidationListResult {
    * The list of Kusto data connection validation errors.
    */
   @pageItems
+  @identifiers(#[])
   value?: DataConnectionValidationResult[];
 }
 
