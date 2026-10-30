@@ -27,6 +27,7 @@ model KustoPool is Azure.ResourceManager.TrackedResource<KustoPoolProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku: AzureSku;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "EntityTagProperty models the read-only etag that the published KustoPool resource already returns."
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
