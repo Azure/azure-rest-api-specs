@@ -1,0 +1,78 @@
+{
+  "title": "Members_CreateOrUpdate_ACI_SandboxGroup",
+  "operationId": "Members_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity",
+    "agentFabricName": "testAIFabric",
+    "memberName": "testAciMember",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "workload": {
+          "type": "ACI",
+          "memberGuid": "11111111-2222-3333-4444-555555555555",
+          "resourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgaci/providers/Microsoft.ContainerInstance/sandboxGroups/testSandboxGroup"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "eastus",
+        "properties": {
+          "workload": {
+            "type": "ACI",
+            "workloadId": "abc12345-def6-7890-abcd-ef1234567890",
+            "memberGuid": "11111111-2222-3333-4444-555555555555",
+            "resourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgaci/providers/Microsoft.ContainerInstance/sandboxGroups/testSandboxGroup"
+          },
+          "spiffeId": "spiffe://microsoft.agentfabric/testaifabric/testacimember",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/members/testAciMember",
+        "name": "testAciMember",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/members",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-10-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-10-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.NetworkSecurity/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-10-07-preview"
+      },
+      "body": {
+        "location": "eastus",
+        "properties": {
+          "workload": {
+            "type": "ACI",
+            "workloadId": "abc12345-def6-7890-abcd-ef1234567890",
+            "memberGuid": "11111111-2222-3333-4444-555555555555",
+            "resourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgaci/providers/Microsoft.ContainerInstance/sandboxGroups/testSandboxGroup"
+          },
+          "spiffeId": "spiffe://microsoft.agentfabric/testaifabric/testacimember",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/members/testAciMember",
+        "name": "testAciMember",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/members",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-10-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-10-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "title": "AgentFabrics_CreateOrUpdate_WithoutContentInspection",
+  "operationId": "AgentFabrics_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity",
+    "agentFabricName": "testAIFabric",
+    "resource": {
+      "properties": {
+        "defaultPolicyGroups": [
+          "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/testPolicyGroup"
+        ],
+        "trustDomain": "contoso.agentfabric"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "tags": {},
+      "location": "westus3"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "resourceGuid": "6f1a2b3c-4d5e-4678-9abc-def012345678",
+          "defaultPolicyGroups": [
+            "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/testPolicyGroup"
+          ],
+          "trustDomain": "contoso.agentfabric",
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-2222-3333-4444-555555555555",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "tags": {},
+        "location": "westus3",
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric",
+        "name": "testAIFabric",
+        "type": "Microsoft.NetworkSecurity/agentFabrics",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.NetworkSecurity/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-10-07-preview"
+      },
+      "body": {
+        "properties": {
+          "resourceGuid": "6f1a2b3c-4d5e-4678-9abc-def012345678",
+          "defaultPolicyGroups": [
+            "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/testPolicyGroup"
+          ],
+          "trustDomain": "contoso.agentfabric",
+          "provisioningState": "Accepted"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-2222-3333-4444-555555555555",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "tags": {},
+        "location": "westus3",
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric",
+        "name": "testAIFabric",
+        "type": "Microsoft.NetworkSecurity/agentFabrics",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}
