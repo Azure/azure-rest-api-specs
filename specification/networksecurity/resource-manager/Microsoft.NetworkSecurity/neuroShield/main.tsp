@@ -7,6 +7,7 @@ import "./NeuroShield.tsp";
 import "./NeuroShieldProtectedResource.tsp";
 import "./NeuroShieldFinding.tsp";
 import "./NeuroShieldMitigation.tsp";
+import "./client.tsp";
 
 using Http;
 using Rest;

@@ -33,9 +33,11 @@ The language options in `tspconfig.yaml` target these shared package identities:
 
 For TypeSpec SDK generation, select this directory's `tspconfig.yaml`. The SDK
 generator loads `client.tsp`, which imports `main.tsp` and applies language-scoped
-client naming. Only the public NeuroShield service is included. `main.tsp`
-remains the REST entry point; the SDK naming overrides do not change routes,
-API versions, wire models, operation IDs, or paging parameters.
+client naming. The REST entry point `main.tsp` also imports `client.tsp`, as
+required by repository validation, so both entry points load the same SDK
+customizations. Only the public NeuroShield service is included. The SDK naming
+overrides do not change routes, API versions, wire models, operation IDs, or
+paging parameters.
 
 Outputs are rooted at `sdk/networksecurity`, with a package-specific subdirectory
 for each language. Go instead uses
