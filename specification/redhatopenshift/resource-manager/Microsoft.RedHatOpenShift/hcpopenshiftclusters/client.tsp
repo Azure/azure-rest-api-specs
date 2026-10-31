@@ -9,6 +9,256 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.RedHatOpenShift;
 
+// Client name overrides for azure-sdk-for-net
+namespace Microsoft.RedHatOpenShift {
+  // request-body model names must not end with 'Request'
+  @@clientName(
+    HcpOpenShiftClusterAdminCredentialRequest,
+    "HcpOpenShiftClusterAdminCredentialRequestContent",
+    "csharp"
+  );
+
+  // boolean property missing an "Is/Has/Should/Can" prefix
+  @@clientName(NodePoolProperties.autoRepair, "canAutoRepair", "csharp");
+
+  // DateTimeOffset properties must end in "On"
+  @@clientName(
+    HcpOpenShiftClusterAdminCredential.expirationTimestamp,
+    "expirationTimestampOn",
+    "csharp"
+  );
+  @@clientName(
+    HcpOpenShiftVersionProperties.endOfLifeTimestamp,
+    "endOfLifeTimestampOn",
+    "csharp"
+  );
+
+  // Use "PascalCase" for acronyms
+  @@clientName(KmsKeyVaultType.ManagedHSM, "ManagedHsm", "csharp");
+
+  // Add top-level resource name prefix to cluster model and type names
+  @@clientName(ApiProfile, "HcpOpenShiftClusterApiProfile", "csharp");
+  @@clientName(
+    ClusterActiveVersion,
+    "HcpOpenShiftClusterActiveVersion",
+    "csharp"
+  );
+  @@clientName(
+    ClusterAutoscalingProfile,
+    "HcpOpenShiftClusterAutoscalingProfile",
+    "csharp"
+  );
+  @@clientName(
+    ClusterImageRegistryProfile,
+    "HcpOpenShiftClusterImageRegistryProfile",
+    "csharp"
+  );
+  @@clientName(
+    ClusterImageRegistryState,
+    "HcpOpenShiftClusterImageRegistryState",
+    "csharp"
+  );
+  @@clientName(
+    ClusterResourceStatus,
+    "HcpOpenShiftClusterResourceStatus",
+    "csharp"
+  );
+  @@clientName(Condition, "HcpOpenShiftClusterCondition", "csharp");
+  @@clientName(ConditionType, "HcpOpenShiftClusterConditionType", "csharp");
+  @@clientName(ConsoleProfile, "HcpOpenShiftClusterConsoleProfile", "csharp");
+  @@clientName(
+    CustomerManagedEncryptionProfile,
+    "HcpOpenShiftClusterCustomerManagedEncryptionProfile",
+    "csharp"
+  );
+  @@clientName(
+    CustomerManagedEncryptionType,
+    "HcpOpenShiftClusterCustomerManagedEncryptionType",
+    "csharp"
+  );
+  @@clientName(DnsProfile, "HcpOpenShiftClusterDnsProfile", "csharp");
+  @@clientName(
+    EtcdDataEncryptionKeyManagementModeType,
+    "HcpOpenShiftClusterEtcdDataEncryptionKeyManagementModeType",
+    "csharp"
+  );
+  @@clientName(
+    EtcdDataEncryptionProfile,
+    "HcpOpenShiftClusterEtcdDataEncryptionProfile",
+    "csharp"
+  );
+  @@clientName(EtcdProfile, "HcpOpenShiftClusterEtcdProfile", "csharp");
+  @@clientName(
+    ImageDigestMirror,
+    "HcpOpenShiftClusterImageDigestMirror",
+    "csharp"
+  );
+  @@clientName(ImageRepository, "HcpOpenShiftClusterImageRepository", "csharp");
+  @@clientName(IngressProfile, "HcpOpenShiftClusterIngressProfile", "csharp");
+  @@clientName(IngressType, "HcpOpenShiftClusterIngressType", "csharp");
+  @@clientName(
+    KeyVaultVisibility,
+    "HcpOpenShiftClusterKeyVaultVisibility",
+    "csharp"
+  );
+  @@clientName(
+    KmsEncryptionProfile,
+    "HcpOpenShiftClusterKmsEncryptionProfile",
+    "csharp"
+  );
+  @@clientName(KmsKey, "HcpOpenShiftClusterKmsKey", "csharp");
+  @@clientName(KmsKeyVaultType, "HcpOpenShiftClusterKmsKeyVaultType", "csharp");
+  @@clientName(NetworkProfile, "HcpOpenShiftClusterNetworkProfile", "csharp");
+  @@clientName(NetworkType, "HcpOpenShiftClusterNetworkType", "csharp");
+  @@clientName(
+    OperatorsAuthenticationProfile,
+    "HcpOpenShiftClusterOperatorsAuthenticationProfile",
+    "csharp"
+  );
+  @@clientName(OutboundType, "HcpOpenShiftClusterOutboundType", "csharp");
+  @@clientName(PlatformProfile, "HcpOpenShiftClusterPlatformProfile", "csharp");
+  @@clientName(
+    ResourceStatus,
+    "HcpOpenShiftClusterBaseResourceStatus",
+    "csharp"
+  );
+  @@clientName(StatusType, "HcpOpenShiftClusterConditionStatusType", "csharp");
+  @@clientName(
+    UserAssignedIdentitiesProfile,
+    "HcpOpenShiftClusterUserAssignedIdentitiesProfile",
+    "csharp"
+  );
+  @@clientName(VersionProfile, "HcpOpenShiftClusterVersionProfile", "csharp");
+  @@clientName(Visibility, "HcpOpenShiftClusterApiVisibility", "csharp");
+
+  // Add top-level resource name prefix to node pool model and type names
+  @@clientName(
+    DiskStorageAccountType,
+    "HcpOpenShiftClusterNodePoolDiskStorageAccountType",
+    "csharp"
+  );
+  @@clientName(Effect, "HcpOpenShiftClusterNodePoolTaintEffect", "csharp");
+  @@clientName(Label, "HcpOpenShiftClusterNodePoolLabel", "csharp");
+  @@clientName(NodePool, "HcpOpenShiftClusterNodePool", "csharp");
+  @@clientName(
+    NodePoolAutoScaling,
+    "HcpOpenShiftClusterNodePoolAutoScaling",
+    "csharp"
+  );
+  @@clientName(
+    NodePoolActiveVersion,
+    "HcpOpenShiftClusterNodePoolActiveVersion",
+    "csharp"
+  );
+  @@clientName(
+    NodePoolPlatformProfile,
+    "HcpOpenShiftClusterNodePoolPlatformProfile",
+    "csharp"
+  );
+  @@clientName(
+    NodePoolProperties,
+    "HcpOpenShiftClusterNodePoolProperties",
+    "csharp"
+  );
+  @@clientName(
+    NodePoolResourceStatus,
+    "HcpOpenShiftClusterNodePoolResourceStatus",
+    "csharp"
+  );
+  @@clientName(
+    NodePoolVersionProfile,
+    "HcpOpenShiftClusterNodePoolVersionProfile",
+    "csharp"
+  );
+  @@clientName(NodePools, "HcpOpenShiftClusterNodePools", "csharp");
+  @@clientName(
+    OsDiskProfile,
+    "HcpOpenShiftClusterNodePoolOsDiskProfile",
+    "csharp"
+  );
+  @@clientName(OsDiskType, "HcpOpenShiftClusterNodePoolOsDiskType", "csharp");
+  @@clientName(Taint, "HcpOpenShiftClusterNodePoolTaint", "csharp");
+
+  // Add top-level resource name prefix to external auth model and type names
+  @@clientName(ExternalAuth, "HcpOpenShiftClusterExternalAuth", "csharp");
+  @@clientName(
+    ExternalAuthClaimProfile,
+    "HcpOpenShiftClusterExternalAuthClaimProfile",
+    "csharp"
+  );
+  @@clientName(
+    ExternalAuthClientComponentProfile,
+    "HcpOpenShiftClusterExternalAuthClientComponentProfile",
+    "csharp"
+  );
+  @@clientName(
+    ExternalAuthClientProfile,
+    "HcpOpenShiftClusterExternalAuthClientProfile",
+    "csharp"
+  );
+  @@clientName(
+    ExternalAuthClientType,
+    "HcpOpenShiftClusterExternalAuthClientType",
+    "csharp"
+  );
+  @@clientName(
+    ExternalAuthCondition,
+    "HcpOpenShiftClusterExternalAuthCondition",
+    "csharp"
+  );
+  @@clientName(
+    ExternalAuthConditionType,
+    "HcpOpenShiftClusterExternalAuthConditionType",
+    "csharp"
+  );
+  @@clientName(
+    ExternalAuthProperties,
+    "HcpOpenShiftClusterExternalAuthProperties",
+    "csharp"
+  );
+  @@clientName(ExternalAuths, "HcpOpenShiftClusterExternalAuths", "csharp");
+  @@clientName(
+    GroupClaimProfile,
+    "HcpOpenShiftClusterExternalAuthGroupClaimProfile",
+    "csharp"
+  );
+  @@clientName(
+    TokenClaimMappingsProfile,
+    "HcpOpenShiftClusterExternalAuthTokenClaimMappingsProfile",
+    "csharp"
+  );
+  @@clientName(
+    TokenClaimValidationRule,
+    "HcpOpenShiftClusterExternalAuthTokenClaimValidationRule",
+    "csharp"
+  );
+  @@clientName(
+    TokenIssuerProfile,
+    "HcpOpenShiftClusterExternalAuthTokenIssuerProfile",
+    "csharp"
+  );
+  @@clientName(
+    TokenRequiredClaim,
+    "HcpOpenShiftClusterExternalAuthTokenRequiredClaim",
+    "csharp"
+  );
+  @@clientName(
+    TokenValidationRuleType,
+    "HcpOpenShiftClusterExternalAuthTokenValidationRuleType",
+    "csharp"
+  );
+  @@clientName(
+    UsernameClaimPrefixPolicy,
+    "HcpOpenShiftClusterExternalAuthUsernameClaimPrefixPolicy",
+    "csharp"
+  );
+  @@clientName(
+    UsernameClaimProfile,
+    "HcpOpenShiftClusterExternalAuthUsernameClaimProfile",
+    "csharp"
+  );
+}
+
 // JavaScript SDK visibility workaround:
 // For write operations whose body models contain server-side read-only properties
 // that are also required, provide write-specific models that omit those fields so
@@ -47,6 +297,10 @@ namespace Microsoft.RedHatOpenShift {
 
     /** The configuration for operator authentication to Azure. */
     operatorsAuthentication: OperatorsAuthenticationProfile;
+
+    /** Azure Container Registry configuration for authenticating image pulls on the cluster's worker nodes. */
+    @added(Versions.v2026_10_01)
+    containerRegistry?: ContainerRegistryProfile;
   }
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Omitting provisioningState in this create/update model because it is a server-side read-only field"
@@ -141,7 +395,14 @@ namespace Microsoft.RedHatOpenShift {
     @minValue(0)
     replicas?: int32;
 
-    /** Auto-repair */
+    /** autoRepair specifies whether health checks should be enabled for machines
+     * in the NodePool. Enabling this feature will cause the controller to
+     * automatically delete unhealthy machines. The unhealthy criteria are
+     * determined by checking the Node Ready condition and a timeout that might
+     * vary depending on the platform provider. autoRepair will not take action
+     * when more than 2 Nodes are unhealthy at the same time, giving time for
+     * the cluster to stabilize or for the user to manually intervene.
+     */
     @visibility(Lifecycle.Read, Lifecycle.Create)
     autoRepair?: boolean = true;
 
@@ -151,7 +412,7 @@ namespace Microsoft.RedHatOpenShift {
 
     /** Kubernetes labels to propagate to the NodePool Nodes
      * Note that when the labels are updated this is only applied to newly
-     * create nodes in the Nodepool, existing node labels remain unchanged.
+     * created nodes in the Nodepool, existing node labels remain unchanged.
      */
     @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
     @identifiers(#["key", "value"])
@@ -200,4 +461,10 @@ model HcpOpenShiftClusterUpdate is UpdateableProperties<HcpOpenShiftCluster>;
   NodePools.update::parameters.properties,
   UpdateableProperties<NodePoolProperties>,
   "javascript"
+);
+
+@@clientName(
+  Microsoft.RedHatOpenShift,
+  "RedHatOpenShiftHcpMgmtClient",
+  "python"
 );

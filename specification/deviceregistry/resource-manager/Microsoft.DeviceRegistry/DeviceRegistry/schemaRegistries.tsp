@@ -14,7 +14,7 @@ namespace Microsoft.DeviceRegistry;
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Schema registry definition.")
 model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   @doc("Schema registry name parameter.")
@@ -23,15 +23,21 @@ model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @path
   @minLength(3)
-  @maxLength(63)
+  @maxLength(64)
   name: string;
 
-  ...ManagedSystemAssignedIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Explicit identity property required for @typeChangedFrom versioning"
+  @doc("The managed service identities assigned to this resource.")
+  @typeChangedFrom(
+    Versions.v2026_11_01,
+    Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
+  )
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Defines the schema registry properties.")
 model SchemaRegistryProperties {
   @doc("Globally unique, immutable, non-reusable id.")
@@ -53,7 +59,12 @@ model SchemaRegistryProperties {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The Storage Account's Container URL where schemas will be stored.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  storageAccountContainerUrl: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  storageAccountContainerUrl: url;
+
+  @added(Versions.v2026_11_01)
+  @doc("The identity used for outbound calls from the ADR schema registry. If not specified and the schema registry has a system-assigned identity enabled, the system-assigned identity is used by default.")
+  outboundIdentity?: OutboundIdentity;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -62,7 +73,7 @@ model SchemaRegistryProperties {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @parentResource(SchemaRegistry)
 @doc("Schema definition.")
 model Schema is ProxyResource<SchemaProperties> {
@@ -78,7 +89,7 @@ model Schema is ProxyResource<SchemaProperties> {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Defines the schema properties.")
 model SchemaProperties {
   @doc("Globally unique, immutable, non-reusable id.")
@@ -103,7 +114,7 @@ model SchemaProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Customer-defined schema tags: keys are arbitrary user-supplied strings that cannot be predefined, so a Record<string> map is required."
   @doc("Schema tags.")
   // Allowed scenario as per user-defined tags: https://github.com/Azure/azure-openapi-validator/blob/main/docs/avoid-additional-properties.md
   tags?: Record<string>;
@@ -111,7 +122,7 @@ model SchemaProperties {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Defines the schema format.")
 union Format {
   @doc("JSON Schema version draft 7 format")
@@ -120,23 +131,35 @@ union Format {
   @doc("Delta format")
   Delta_1_0: "Delta/1.0",
 
+  @added(Versions.v2026_11_01)
+  @doc("W3C Web of Things JSON-LD format")
+  JsonLD_1_1: "JsonLD/1.1",
+
   string,
 }
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Defines the schema type.")
 union SchemaType {
   @doc("Message Schema schema type")
   MessageSchema: "MessageSchema",
 
+  @added(Versions.v2026_11_01)
+  @doc("W3C Web of Things Thing Model document")
+  ThingModel: "ThingModel",
+
+  @added(Versions.v2026_11_01)
+  @doc("W3C Web of Things Thing Description document")
+  ThingDescription: "ThingDescription",
+
   string,
 }
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @parentResource(Schema)
 @doc("Schema version's definition.")
 model SchemaVersion is ProxyResource<SchemaVersionProperties> {
@@ -152,7 +175,7 @@ model SchemaVersion is ProxyResource<SchemaVersionProperties> {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Defines the schema version properties.")
 model SchemaVersionProperties {
   @doc("Globally unique, immutable, non-reusable id.")
@@ -177,7 +200,7 @@ model SchemaVersionProperties {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @armResourceOperations
 interface SchemaRegistries {
   get is ArmResourceRead<SchemaRegistry>;
@@ -199,15 +222,13 @@ interface SchemaRegistries {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @armResourceOperations
 interface Schemas {
   get is ArmResourceRead<Schema>;
   createOrReplace is ArmResourceCreateOrReplaceSync<Schema>;
   @added(Versions.v2024_09_01_preview)
   @removed(Versions.v2024_11_01)
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
   @sharedRoute
   @renamedFrom(Versions.v2025_10_01, "delete")
   deleteSync is ArmResourceDeleteSync<Schema>;
@@ -220,15 +241,13 @@ interface Schemas {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @armResourceOperations
 interface SchemaVersions {
   get is ArmResourceRead<SchemaVersion>;
   createOrReplace is ArmResourceCreateOrReplaceSync<SchemaVersion>;
   @added(Versions.v2024_09_01_preview)
   @removed(Versions.v2024_11_01)
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
   @sharedRoute
   @renamedFrom(Versions.v2025_10_01, "delete")
   deleteSync is ArmResourceDeleteSync<SchemaVersion>;

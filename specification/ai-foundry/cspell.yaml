@@ -19,6 +19,20 @@ words:
   - logprobs
   - dedup
 overrides:
+  # Fine-tuning algorithms, SDK tooling, and preserved preview documentation.
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/src/session-finetuning/**'
+    - '**/specification/ai-foundry/data-plane/Foundry/src/sdk-python-azure-ai-finetuningsessions/**'
+    - '**/specification/ai-foundry/data-plane/Foundry/openapi3/**/microsoft-foundry-openapi3.*'
+    words:
+      - CISPO # Clipped Importance-Sampled Policy Optimization
+      - initialisation
+      - regularisation
+      - SAPO # Soft Adaptive Policy Optimization
+      - serialised
+      - TCGC # TypeSpec Client Generator Core
+      - Tokenised
+      - topk
   # OpenAI related terms
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/src/openai/**'
@@ -92,9 +106,12 @@ overrides:
     words:
     - BYOM # Bring your own model
     - flac # Lossless audio format
+    - kbps # Audio bitrate unit
     - nmcp # CSpell joins an escaped newline with the following MCP identifier in generated JSON
     - pcma # Audio codec
     - pcmu # Audio codec
+    - pstn # Public switched telephone network
+    - viseme # Visual representation of a speech sound
     - webrtc # Web Real-Time Communication
   # Voice agent terms
   - filename:
@@ -150,6 +167,21 @@ overrides:
       - logit_bias
       - apim-request-id
       - davinci # legacy OpenAI model name
+  # Generated voice-agent event reference terms and opaque IDs in embedded examples
+  - filename: '**/specification/ai-foundry/data-plane/Foundry/event-schemas/voice-agent-events.json'
+    words:
+      - byot # Bring your own thread
+      - dall
+      - inpainting
+      - mcphttp # MCP over HTTP transport
+      - pcma # Audio codec
+      - pcmu # Audio codec
+      - uhhm
+      - viseme # Visual representation of a speech sound
+      - webrtc # Web Real-Time Communication
+      - xhigh # Image generation quality level
+    ignoreRegExpList:
+      - '\\"(?:id|.*_id|.*_checkpoint|.*_model)\\"\s*:\s*\\"[^"\\]*\\"' # Ignore IDs in JSON-encoded examples
   # Agents optimization terms
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/src/agents-optimization'
@@ -163,6 +195,6 @@ overrides:
     words:
       - fdoc
       - reemits
-  - filename: '**/specification/ai-foundry/data-plane/Foundry/src/sdk-python-js-azure-ai-projects/sdk-validation.yaml'
+  - filename: '**/specification/ai-foundry/data-plane/Foundry/src/*/sdk-validation.yaml'
     words:
       - vnext

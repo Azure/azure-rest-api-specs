@@ -38,29 +38,17 @@ using Microsoft.ProviderHub;
   ProviderRegistrations.deleteResources::parameters.body,
   "properties"
 );
-@@clientLocation(
-  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
-  NewRegionFrontloadRelease
-);
-@@clientName(
-  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
-  "GenerateManifest"
-);
-@@clientName(
-  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest::parameters.body,
-  "properties"
-);
 
 @@clientName(
   ResourceTypeRegistrations.createOrUpdate::parameters.resource,
   "properties"
 );
-
-@@clientName(DefaultRollouts.createOrUpdate::parameters.resource, "properties");
 @@clientName(
-  NewRegionFrontloadRelease.createOrUpdate::parameters.resource,
+  ResourceTypeRegistrations.createOrUpdateNestedResourceTypeFirst::parameters.resource,
   "properties"
 );
+
+@@clientName(DefaultRollouts.createOrUpdate::parameters.resource, "properties");
 
 @@clientName(
   NotificationRegistrations.createOrUpdate::parameters.resource,

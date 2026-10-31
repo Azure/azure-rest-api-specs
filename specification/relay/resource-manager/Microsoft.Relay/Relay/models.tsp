@@ -407,6 +407,12 @@ model RelayNamespaceProperties {
    */
   @added(Versions.v2026_01_01)
   minimumTlsVersion?: TlsVersion;
+
+  /**
+   * Cluster ARM ID of the Namespace.
+   */
+  @added(Versions.v2026_07_01_preview)
+  clusterArmId?: string;
 }
 
 /**

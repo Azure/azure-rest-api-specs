@@ -385,12 +385,14 @@ alias BillingRoleAssignmentsResolveByInvoiceSectionParameters = {
   /**
    * Resolves the scope display name for each of the role assignments.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing POST contracts using BillingRoleAssignmentsResolveByInvoiceSectionParameters.resolveScopeDisplayNames retain the resolveScopeDisplayNames query parameter for wire compatibility."
   @query("resolveScopeDisplayNames")
   resolveScopeDisplayNames?: boolean = false;
 
   /**
    * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing POST contracts using BillingRoleAssignmentsResolveByInvoiceSectionParameters.filter retain the filter query parameter for wire compatibility."
   @query("filter")
   filter?: string;
 };

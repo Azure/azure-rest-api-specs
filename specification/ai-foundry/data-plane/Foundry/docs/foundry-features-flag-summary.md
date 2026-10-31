@@ -78,5 +78,18 @@ in order to successfully complete operations using these routes.
 | Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required: `DataGenerationJobs=V1Preview` |
 | Data Generation Jobs | Cancel | POST | `/data_generation_jobs/{jobId}:cancel` | Required: `DataGenerationJobs=V1Preview` |
 | Data Generation Jobs | Delete | DELETE | `/data_generation_jobs/{jobId}` | Required: `DataGenerationJobs=V1Preview` |
+| Agent Insight Monitors | List | GET | `/agent_insight_monitors` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Create | POST | `/agent_insight_monitors` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Get | GET | `/agent_insight_monitors/{monitor_id}` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Delete | DELETE | `/agent_insight_monitors/{monitor_id}` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Update | PATCH | `/agent_insight_monitors/{monitor_id}` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Reset | POST | `/agent_insight_monitors/{monitor_id}:reset` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Create Run | POST | `/agent_insight_monitors/{monitor_id}/runs` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | List Runs | GET | `/agent_insight_monitors/{monitor_id}/runs` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Get Run | GET | `/agent_insight_monitors/{monitor_id}/runs/{run_id}` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Cancel Run | POST | `/agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | List Insights | GET | `/agent_insight_monitors/{monitor_id}/insights` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Get Insight | GET | `/agent_insight_monitors/{monitor_id}/insights/{insight_id}` | Required: `AgentInsights=V1Preview` |
+| Agent Insight Monitors | Update Insight | PATCH | `/agent_insight_monitors/{monitor_id}/insights/{insight_id}` | Required: `AgentInsights=V1Preview` |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
