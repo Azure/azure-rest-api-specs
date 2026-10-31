@@ -17,6 +17,17 @@ export const SdkNameSchema: import("zod").ZodType<SdkName> = z.enum(Object.value
 
 export const SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE = 2_048;
 export const SDK_REVIEW_MAX_TOTAL_CHANGED_FILES = 4_096;
+export const SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE = 20_000;
+export const SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES = 40_000;
+export const SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE = 32 * 1024 * 1024;
+export const SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES = 64 * 1024 * 1024;
+
+function containsControlCharacter(value: string): boolean {
+    return [...value].some((character) => {
+        const codePoint = character.codePointAt(0) ?? 0;
+        return codePoint <= 0x1f || codePoint === 0x7f;
+    });
+}
 
 /**
  * Validates that a relative POSIX path has no root prefix, parent traversal (`..`),
@@ -30,7 +41,7 @@ export function isSafeRelativePosixPath(value: string): boolean {
         value.startsWith("/") ||
         value.endsWith("/") ||
         value.includes("\\") ||
-        /[\u0000-\u001f\u007f]/.test(value) ||
+        containsControlCharacter(value) ||
         /^[A-Za-z]:/.test(value)
     ) {
         return false;
@@ -42,6 +53,8 @@ export function isSafeRelativePosixPath(value: string): boolean {
 export const SafeRelativePosixPathSchema = z
     .string()
     .refine(isSafeRelativePosixPath, "Expected a safe normalized relative POSIX path");
+
+const GitCommitShaSchema = z.string().regex(/^[0-9a-f]{40}$/i, "Expected a 40-char git SHA");
 
 /*
  * Data for the API view request.
@@ -55,12 +68,35 @@ export const APIViewRequestDataSchema = z
             .array(SafeRelativePosixPathSchema)
             .max(SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE)
             .optional(),
+    sdkBaseCommitSha: GitCommitShaSchema.optional(),
+    reviewInputPath: SafeRelativePosixPathSchema.optional(),
+    reviewInputFileCount: z
+      .number()
+      .int()
+      .positive()
+      .max(SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE)
+      .optional(),
+    reviewInputBytes: z
+      .number()
+      .int()
+      .positive()
+      .max(SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE)
+      .optional(),
     })
     .superRefine((request, context) => {
-        if ((request.packageRootPath === undefined) !== (request.changedFiles === undefined)) {
+    const reviewFields = [
+      request.packageRootPath,
+      request.changedFiles,
+      request.sdkBaseCommitSha,
+      request.reviewInputPath,
+      request.reviewInputFileCount,
+      request.reviewInputBytes,
+    ];
+    const definedReviewFields = reviewFields.filter((value) => value !== undefined).length;
+    if (definedReviewFields !== 0 && definedReviewFields !== reviewFields.length) {
             context.addIssue({
                 code: "custom",
-                message: "packageRootPath and changedFiles must be provided together",
+        message: "SDK review input fields must be provided together",
             });
             return;
         }
@@ -114,6 +150,30 @@ export const SpecGenSdkArtifactInfoSchema = z
                 message: `Artifact has ${totalChangedFiles} changed files; maximum is ${SDK_REVIEW_MAX_TOTAL_CHANGED_FILES}`,
             });
         }
+
+    const totalSnapshotBytes = artifact.apiViewRequestData.reduce(
+      (total, request) => total + (request.reviewInputBytes ?? 0),
+      0,
+    );
+    if (totalSnapshotBytes > SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES) {
+      context.addIssue({
+        code: "custom",
+        path: ["apiViewRequestData"],
+        message: `Artifact has ${totalSnapshotBytes} snapshot bytes; maximum is ${SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES}`,
+      });
+    }
+
+    const totalSnapshotFiles = artifact.apiViewRequestData.reduce(
+      (total, request) => total + (request.reviewInputFileCount ?? 0),
+      0,
+    );
+    if (totalSnapshotFiles > SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES) {
+      context.addIssue({
+        code: "custom",
+        path: ["apiViewRequestData"],
+        message: `Artifact has ${totalSnapshotFiles} snapshot files; maximum is ${SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES}`,
+      });
+    }
     });
 export type SpecGenSdkArtifactInfo = import("zod").infer<typeof SpecGenSdkArtifactInfoSchema>;
 

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
     isSafeRelativePosixPath,
     SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE,
+  SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE,
     sdkLabels,
     SpecGenSdkArtifactInfoSchema,
 } from "../src/sdk-types.ts";
@@ -57,11 +58,14 @@ describe("sdk-types", () => {
 
         const enrichedArtifact = structuredClone(baseArtifact);
         Object.assign(enrichedArtifact.apiViewRequestData[0], {
-            packageRootPath:
-                "sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager",
+      packageRootPath: "sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager",
             changedFiles: [
                 "sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager/api/Azure.ResourceManager.PrivateTrafficManager.netstandard2.0.cs",
             ],
+      sdkBaseCommitSha: "0123456789abcdef0123456789abcdef01234567",
+      reviewInputPath: "Azure.ResourceManager.PrivateTrafficManager/review-input",
+      reviewInputFileCount: 42,
+      reviewInputBytes: 12_345,
         });
         expect(SpecGenSdkArtifactInfoSchema.parse(enrichedArtifact)).toEqual(enrichedArtifact);
 
@@ -76,7 +80,7 @@ describe("sdk-types", () => {
                     },
                 ],
             }),
-        ).toThrow("provided together");
+    ).toThrow("SDK review input fields must be provided together");
 
         expect(() =>
             SpecGenSdkArtifactInfoSchema.parse({
@@ -87,6 +91,10 @@ describe("sdk-types", () => {
                         packageRootPath:
                             "sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager",
                         changedFiles: ["sdk/other/Azure.Other/Foo.cs"],
+            sdkBaseCommitSha: "0123456789abcdef0123456789abcdef01234567",
+            reviewInputPath: "Azure.ResourceManager.PrivateTrafficManager/review-input",
+            reviewInputFileCount: 42,
+            reviewInputBytes: 12_345,
                     },
                 ],
             }),
@@ -106,6 +114,28 @@ describe("sdk-types", () => {
                         packageRootPath:
                             "sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager",
                         changedFiles: tooManyChangedFiles,
+            sdkBaseCommitSha: "0123456789abcdef0123456789abcdef01234567",
+            reviewInputPath: "Azure.ResourceManager.PrivateTrafficManager/review-input",
+            reviewInputFileCount: 42,
+            reviewInputBytes: 12_345,
+          },
+        ],
+      }),
+    ).toThrow();
+
+    expect(() =>
+      SpecGenSdkArtifactInfoSchema.parse({
+        ...baseArtifact,
+        apiViewRequestData: [
+          {
+            ...baseArtifact.apiViewRequestData[0],
+            packageRootPath:
+              "sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager",
+            changedFiles: [],
+            sdkBaseCommitSha: "0123456789abcdef0123456789abcdef01234567",
+            reviewInputPath: "Azure.ResourceManager.PrivateTrafficManager/review-input",
+            reviewInputFileCount: 42,
+            reviewInputBytes: SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE + 1,
                     },
                 ],
             }),

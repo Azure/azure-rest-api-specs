@@ -330,6 +330,10 @@ describe("generateSdkForSpecPr", () => {
     const capturedReviewMetadata = {
       packageRootPath: "sdk/widget/Azure.Widget",
       changedFiles: ["sdk/widget/Azure.Widget/api/Azure.Widget.netstandard2.0.cs"],
+      sdkBaseCommitSha: "0123456789abcdef0123456789abcdef01234567",
+      reviewInputPath: "Azure.Widget/review-input",
+      reviewInputFileCount: 42,
+      reviewInputBytes: 12_345,
     };
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
