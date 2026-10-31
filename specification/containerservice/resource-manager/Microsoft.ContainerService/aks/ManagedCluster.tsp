@@ -84,6 +84,15 @@ model RunCommandRequest {
   /**
    * AuthToken issued for AKS AAD Server App.
    */
+  @renamedFrom(Versions.v2026_09_01, "clusterToken")
+  @removed(Versions.v2026_09_01)
+  legacyClusterToken?: string;
+
+  /**
+   * AuthToken issued for AKS AAD Server App.
+   */
+  @secret
+  @added(Versions.v2026_09_01)
   clusterToken?: string;
 }
 
@@ -216,6 +225,13 @@ model PrivateLinkResourcesListResult {
    */
   @pageItems
   value?: PrivateLinkResource[];
+
+  /**
+   * The link to the next page, if any. Omitted when all results are returned in a single response.
+   */
+  @added(Versions.v2026_09_01)
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -323,7 +339,7 @@ interface ManagedClusters {
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-      @added(Versions.v2026_08_02_preview)
+      @added(Versions.v2026_09_02_preview)
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
     }
@@ -576,7 +592,7 @@ interface ManagedClusters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @tag("ManagedClusters")
-  @added(Versions.v2026_08_02_preview)
+  @added(Versions.v2026_09_02_preview)
   rebalanceLoadBalancers is ArmResourceActionAsync<
     ManagedCluster,
     RebalanceLoadBalancersRequestBody,
@@ -605,6 +621,7 @@ interface ManagedClusters {
   @get
   @action("privateLinkResources")
   @summary("Gets a list of private link resources in the specified managed cluster.")
+  @list
   privateLinkResourcesList is ArmResourceActionSync<
     ManagedCluster,
     void,
@@ -629,7 +646,7 @@ interface ManagedClusters {
   @list
   @get
   @action("operations")
-  @added(Versions.v2026_08_02_preview)
+  @added(Versions.v2026_09_02_preview)
   operationStatusResultList is ArmResourceActionSync<
     ManagedCluster,
     void,
@@ -642,7 +659,7 @@ interface ManagedClusters {
   @tag("ManagedClusters")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/operations/{operationId}")
-  @added(Versions.v2026_08_02_preview)
+  @added(Versions.v2026_09_02_preview)
   operationStatusResultGet is ManagedClusterOps.ActionSync<
     ManagedCluster,
     void,
@@ -658,7 +675,7 @@ interface ManagedClusters {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Legacy routing helper consumed by the decorated ManagedClusters resource interface; it does not expose independent resource operations."
 interface ManagedClusterOps
   extends Azure.ResourceManager.Legacy.RoutedOperations<
       {
