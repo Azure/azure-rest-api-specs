@@ -144,7 +144,7 @@ interface Incidents {
     Request = ManualTriggerRequestBody,
     Response = NoContentResponse & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @added(Versions.v2025_10_01_preview)
+      @added(Versions.v2026_08_01_preview)
       @body
       body: unknown;
     },

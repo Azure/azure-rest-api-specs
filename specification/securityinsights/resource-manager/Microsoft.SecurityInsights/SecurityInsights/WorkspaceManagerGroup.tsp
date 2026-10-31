@@ -94,5 +94,5 @@ interface WorkspaceManagerGroups {
   "The workspace manager group object"
 );
 
-@@added(WorkspaceManagerGroup, Versions.v2025_10_01_preview);
-@@added(WorkspaceManagerGroups, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerGroup, Versions.v2026_08_01_preview);
+@@added(WorkspaceManagerGroups, Versions.v2026_08_01_preview);
