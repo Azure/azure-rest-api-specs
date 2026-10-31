@@ -1,0 +1,66 @@
+{
+  "title": "ClusterAssociations_CreateOrUpdate_AciSandboxGroup",
+  "operationId": "ClusterAssociations_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity",
+    "agentFabricName": "testAIFabric",
+    "clusterAssociationName": "testSandboxGroupAssoc",
+    "If-None-Match": "*",
+    "resource": {
+      "properties": {
+        "clusterResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgaci/providers/Microsoft.ContainerInstance/sandboxGroups/testSandboxGroup",
+        "sku": "Standard"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "clusterResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgaci/providers/Microsoft.ContainerInstance/sandboxGroups/testSandboxGroup",
+          "sku": "Standard",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/clusterAssociations/testSandboxGroupAssoc",
+        "name": "testSandboxGroupAssoc",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/clusterAssociations",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-10-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-10-01T00:00:00.000Z"
+        },
+        "location": "eastus"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.NetworkSecurity/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-10-07-preview"
+      },
+      "body": {
+        "properties": {
+          "clusterResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgaci/providers/Microsoft.ContainerInstance/sandboxGroups/testSandboxGroup",
+          "sku": "Standard",
+          "provisioningState": "Creating"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/clusterAssociations/testSandboxGroupAssoc",
+        "name": "testSandboxGroupAssoc",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/clusterAssociations",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-10-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-10-01T00:00:00.000Z"
+        },
+        "location": "eastus"
+      }
+    }
+  }
+}

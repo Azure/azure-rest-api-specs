@@ -1,0 +1,10 @@
+- tool: LintDiff
+  reason: >
+    ARM API reviewer requested format: uuid for resourceGuid and memberGuid
+    to tighten their typing. These are
+    plain correlation identifiers, not ARM resource references, so they
+    cannot use an armResourceIdentifier/common-types GUID reference instead.
+  rules: [GuidUsage]
+  paths:
+    - preview/2026-10-07-preview/agentFabric.json
+    - preview/2026-11-01-preview/agentFabric.json
