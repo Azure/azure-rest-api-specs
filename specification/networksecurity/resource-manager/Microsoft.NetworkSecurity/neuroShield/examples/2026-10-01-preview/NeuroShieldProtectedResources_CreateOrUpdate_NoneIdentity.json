@@ -1,0 +1,54 @@
+{
+  "operationId": "NeuroShieldProtectedResources_CreateOrUpdate",
+  "title": "Create or update protected resource with explicit None identity",
+  "description": "Explicit None in properties.targetIdentity is supported on create. Inapplicable identifiers and the identity map are omitted.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "protectedResourceName": "vm-01",
+    "api-version": "2026-10-01-preview",
+    "neuroShieldName": "myNeuroShield",
+    "resource": {
+      "properties": {
+        "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachines/vm-01",
+        "targetIdentity": {
+          "type": "None"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vm-01",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.networksecurity/neuroShields/myNeuroShield/protectedResources/vm-01",
+        "type": "microsoft.networksecurity/neuroShields/protectedResources",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachines/vm-01",
+          "targetIdentity": {
+            "type": "None"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetworkSecurity/locations/eastus2/neuroShieldOperationStatuses/60000000-0000-0000-0000-000000000000?api-version=2026-10-01-preview",
+        "Retry-After": 30
+      },
+      "body": {
+        "name": "vm-01",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.networksecurity/neuroShields/myNeuroShield/protectedResources/vm-01",
+        "type": "microsoft.networksecurity/neuroShields/protectedResources",
+        "properties": {
+          "provisioningState": "Creating",
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachines/vm-01",
+          "targetIdentity": {
+            "type": "None"
+          }
+        }
+      }
+    }
+  }
+}

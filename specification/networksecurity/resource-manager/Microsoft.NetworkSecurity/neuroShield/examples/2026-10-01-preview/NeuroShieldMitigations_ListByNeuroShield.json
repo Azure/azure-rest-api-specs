@@ -1,0 +1,36 @@
+{
+  "operationId": "NeuroShieldMitigations_ListByNeuroShield",
+  "title": "List mitigations by NeuroShield",
+  "description": "Lists mitigations across all protected resources under a NeuroShield resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "neuroShieldName": "myNeuroShield",
+    "$top": 50,
+    "api-version": "2026-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mitigation-01",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.networksecurity/neuroShields/myNeuroShield/protectedResources/vm-01/mitigations/mitigation-01",
+            "type": "microsoft.networksecurity/neuroShields/protectedResources/mitigations",
+            "properties": {
+              "findingId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.networksecurity/neuroShields/myNeuroShield/protectedResources/vm-01/findings/CVE-2026-12345-vm-01",
+              "cveId": "CVE-2026-12345",
+              "virtualMachineArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachines/vm-01",
+              "score": 92,
+              "commandsSummary": "Updates the affected kernel package to the latest approved version.",
+              "isRollbackable": true,
+              "status": "AwaitingApproval",
+              "statusDetails": "Waiting for customer approval."
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.NetworkSecurity/neuroShields/myNeuroShield/mitigations?$skipToken=next-page-token&api-version=2026-10-01-preview"
+      }
+    }
+  }
+}
