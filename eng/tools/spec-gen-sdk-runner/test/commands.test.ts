@@ -323,7 +323,6 @@ describe("generateSdkForSpecPr", () => {
           packageName: "Azure.Widget",
           packageRootPath: "sdk/widget/Azure.Widget",
           apiViewArtifact: path.join(stagedArtifactsFolder, "Azure.Widget.1.0.0.nupkg"),
-          result: "succeeded",
         },
       ],
     };
@@ -461,7 +460,6 @@ describe("generateSdkForSpecPr", () => {
         {
           packageName: "Azure.First",
           packageRootPath: "sdk/first/Azure.First",
-          result: "succeeded",
         },
       ],
     };

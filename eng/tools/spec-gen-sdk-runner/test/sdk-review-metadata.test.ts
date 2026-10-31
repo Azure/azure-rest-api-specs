@@ -141,7 +141,6 @@ describe("sdk-review-metadata", () => {
           packageName: "Azure.Widget",
           packageRootPath: "./sdk/widget/Azure.Widget",
           apiViewArtifact,
-          result: "succeeded",
         },
       ],
     };
