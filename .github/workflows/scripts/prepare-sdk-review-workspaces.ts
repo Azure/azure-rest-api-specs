@@ -2,14 +2,50 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
+type ReviewInputEntry = {
+  packageName: string;
+  packageRootPath: string;
+  changedFiles: string[];
+  sdkBaseCommitSha: string;
+  reviewInputPath: string;
+};
+
+type ReviewManifest = {
+  prNumber: string;
+  headSha: string;
+  language: string;
+  apiViewRequestData: ReviewInputEntry[];
+};
+
+type CanonicalSkill = {
+  skillRevision: string;
+  skillPath: string;
+};
+
 const SDK_REPOSITORY_URL =
   process.env.SDK_REVIEW_REPOSITORY_URL ?? "https://github.com/Azure/azure-sdk-for-net.git";
 const MANIFEST_FILE_NAME = "spec-gen-sdk-artifact.json";
 const SHA_PATTERN = /^[0-9a-f]{40}$/i;
-const SAFE_PATH_PATTERN =
-  /^(?![A-Za-z]:)(?!\/)(?!.*\\)(?!.*(?:^|\/)\.{1,2}(?:\/|$))[^\u0000-\u001f\u007f]+$/;
+const SAFE_PATH_PATTERN = /^(?![A-Za-z]:)(?!\/)(?!.*\\)(?!.*(?:^|\/)\.{1,2}(?:\/|$)).+$/;
 
-function runGit(workingDirectory, args) {
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function containsControlCharacter(value: string): boolean {
+  return [...value].some((character) => {
+    const codePoint = character.codePointAt(0) ?? 0;
+    return codePoint <= 0x1f || codePoint === 0x7f;
+  });
+}
+
+/**
+ * Runs Git without inheriting interactive input and returns trimmed stdout.
+ *
+ * @param workingDirectory Repository or directory in which Git should run.
+ * @param args Git arguments excluding the executable name.
+ */
+function runGit(workingDirectory: string, args: string[]): string {
   return execFileSync("git", args, {
     cwd: workingDirectory,
     encoding: "utf8",
@@ -17,14 +53,28 @@ function runGit(workingDirectory, args) {
   }).trim();
 }
 
-function requireSafeRelativePath(value, fieldName) {
-  if (typeof value !== "string" || !SAFE_PATH_PATTERN.test(value)) {
-    throw new Error(`Invalid ${fieldName} '${value}'`);
+/**
+ * Validates an artifact or repository path before it is resolved on disk.
+ *
+ * @throws When the value is absolute, contains traversal, backslashes, or
+ * control characters.
+ */
+function requireSafeRelativePath(value: unknown, fieldName: string): string {
+  if (
+    typeof value !== "string" ||
+    !SAFE_PATH_PATTERN.test(value) ||
+    containsControlCharacter(value)
+  ) {
+    throw new Error(`Invalid ${fieldName} '${String(value)}'`);
   }
   return value;
 }
 
-function resolveWithin(root, relativePath, fieldName) {
+/**
+ * Resolves a validated relative path and verifies the result remains under the
+ * trusted root.
+ */
+function resolveWithin(root: string, relativePath: string, fieldName: string): string {
   const resolvedRoot = path.resolve(root);
   const resolvedPath = path.resolve(resolvedRoot, ...relativePath.split("/"));
   if (resolvedPath !== resolvedRoot && !resolvedPath.startsWith(`${resolvedRoot}${path.sep}`)) {
@@ -33,14 +83,72 @@ function resolveWithin(root, relativePath, fieldName) {
   return resolvedPath;
 }
 
-function parseNullSeparatedPaths(value) {
+function parseNullSeparatedPaths(value: string): string[] {
   return value
     .split("\0")
     .filter(Boolean)
     .map((filePath) => filePath.replaceAll("\\", "/"));
 }
 
-function cloneCommit(destination, commitSha) {
+function parseReviewInputEntry(value: unknown, index: number): ReviewInputEntry {
+  if (!isRecord(value)) {
+    throw new Error(`SDK review input entry #${index + 1} must be an object`);
+  }
+  const packageName = value.packageName;
+  const sdkBaseCommitSha = value.sdkBaseCommitSha;
+  if (typeof packageName !== "string" || !packageName) {
+    throw new Error(`SDK review input entry #${index + 1} has an invalid packageName`);
+  }
+  if (typeof sdkBaseCommitSha !== "string" || !SHA_PATTERN.test(sdkBaseCommitSha)) {
+    throw new Error(`Invalid sdkBaseCommitSha for '${packageName}'`);
+  }
+  if (
+    !Array.isArray(value.changedFiles) ||
+    !value.changedFiles.every((filePath): filePath is string => typeof filePath === "string")
+  ) {
+    throw new Error(`Invalid changedFiles for '${packageName}'`);
+  }
+
+  return {
+    packageName,
+    sdkBaseCommitSha,
+    packageRootPath: requireSafeRelativePath(value.packageRootPath, "packageRootPath"),
+    reviewInputPath: requireSafeRelativePath(value.reviewInputPath, "reviewInputPath"),
+    changedFiles: value.changedFiles.map((filePath) =>
+      requireSafeRelativePath(filePath, "changedFiles"),
+    ),
+  };
+}
+
+/**
+ * Parses the validated handoff manifest into the subset required to rebuild
+ * SDK workspaces. The GitHub handoff already performs the full shared-schema
+ * validation; this boundary validates every field used for filesystem access.
+ */
+function parseReviewManifest(value: unknown): ReviewManifest {
+  if (
+    !isRecord(value) ||
+    typeof value.prNumber !== "string" ||
+    typeof value.headSha !== "string" ||
+    typeof value.language !== "string" ||
+    !Array.isArray(value.apiViewRequestData) ||
+    value.apiViewRequestData.length === 0
+  ) {
+    throw new Error("SDK review input manifest is missing required fields");
+  }
+
+  return {
+    prNumber: value.prNumber,
+    headSha: value.headSha,
+    language: value.language,
+    apiViewRequestData: value.apiViewRequestData.map(parseReviewInputEntry),
+  };
+}
+
+/**
+ * Creates a detached, shallow checkout for one exact SDK baseline commit.
+ */
+function cloneCommit(destination: string, commitSha: string): void {
   fs.mkdirSync(destination, { recursive: true });
   runGit(destination, ["init"]);
   runGit(destination, ["remote", "add", "origin", SDK_REPOSITORY_URL]);
@@ -49,7 +157,11 @@ function cloneCommit(destination, commitSha) {
   runGit(destination, ["config", "core.fileMode", "false"]);
 }
 
-function cloneCanonicalSkill(destination) {
+/**
+ * Resolves the current canonical skill revision, sparsely checks out only the
+ * skill directory, and returns the exact revision and SKILL.md path.
+ */
+function cloneCanonicalSkill(destination: string): CanonicalSkill {
   const mainReference = runGit(process.cwd(), ["ls-remote", SDK_REPOSITORY_URL, "refs/heads/main"]);
   const skillRevision = mainReference.split(/\s+/)[0];
   if (!SHA_PATTERN.test(skillRevision)) {
@@ -75,7 +187,10 @@ function cloneCanonicalSkill(destination) {
   return { skillRevision, skillPath };
 }
 
-function collectWorkspaceChanges(workspace, packageRoots) {
+/**
+ * Returns tracked and untracked package changes in normalized repository paths.
+ */
+function collectWorkspaceChanges(workspace: string, packageRoots: string[]): string[] {
   const pathArguments = ["--", ...packageRoots];
   const tracked = parseNullSeparatedPaths(
     execFileSync("git", ["diff", "--name-only", "-z", "HEAD", ...pathArguments], {
@@ -99,34 +214,16 @@ if (!process.env.SDK_REVIEW_INPUT_ROOT || !process.env.SDK_REVIEW_WORKSPACE_ROOT
 }
 
 const manifestPath = path.join(inputRoot, MANIFEST_FILE_NAME);
-const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
-if (!Array.isArray(manifest.apiViewRequestData) || manifest.apiViewRequestData.length === 0) {
-  throw new Error("SDK review input manifest has no package entries");
-}
+const parsedManifest: unknown = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+const manifest = parseReviewManifest(parsedManifest);
 
 fs.rmSync(outputRoot, { recursive: true, force: true });
 fs.mkdirSync(outputRoot, { recursive: true });
 
-const entriesByBaseline = new Map();
+const entriesByBaseline = new Map<string, ReviewInputEntry[]>();
 for (const entry of manifest.apiViewRequestData) {
-  if (!SHA_PATTERN.test(entry.sdkBaseCommitSha ?? "")) {
-    throw new Error(`Invalid sdkBaseCommitSha for '${entry.packageName}'`);
-  }
-  const packageRootPath = requireSafeRelativePath(entry.packageRootPath, "packageRootPath");
-  const reviewInputPath = requireSafeRelativePath(entry.reviewInputPath, "reviewInputPath");
-  if (!Array.isArray(entry.changedFiles)) {
-    throw new Error(`Invalid changedFiles for '${entry.packageName}'`);
-  }
-  const normalizedEntry = {
-    ...entry,
-    packageRootPath,
-    reviewInputPath,
-    changedFiles: entry.changedFiles.map((filePath) =>
-      requireSafeRelativePath(filePath, "changedFiles"),
-    ),
-  };
   const entries = entriesByBaseline.get(entry.sdkBaseCommitSha) ?? [];
-  entries.push(normalizedEntry);
+  entries.push(entry);
   entriesByBaseline.set(entry.sdkBaseCommitSha, entries);
 }
 
@@ -172,15 +269,16 @@ for (const [baselineCommitSha, entries] of entriesByBaseline) {
 
 const canonicalSkill = cloneCanonicalSkill(path.join(outputRoot, "canonical-skill"));
 if (process.env.SDK_REVIEW_SKILL_INSTALL_ROOT) {
-    const installedSkillRoot = path.resolve(process.env.SDK_REVIEW_SKILL_INSTALL_ROOT);
-    fs.rmSync(installedSkillRoot, { recursive: true, force: true });
-    fs.mkdirSync(path.dirname(installedSkillRoot), { recursive: true });
-    fs.cpSync(path.dirname(canonicalSkill.skillPath), installedSkillRoot, {
-        recursive: true,
-        force: true,
-    });
-    canonicalSkill.skillPath = path.join(installedSkillRoot, "SKILL.md");
+  const installedSkillRoot = path.resolve(process.env.SDK_REVIEW_SKILL_INSTALL_ROOT);
+  fs.rmSync(installedSkillRoot, { recursive: true, force: true });
+  fs.mkdirSync(path.dirname(installedSkillRoot), { recursive: true });
+  fs.cpSync(path.dirname(canonicalSkill.skillPath), installedSkillRoot, {
+    recursive: true,
+    force: true,
+  });
+  canonicalSkill.skillPath = path.join(installedSkillRoot, "SKILL.md");
 }
+
 const context = {
   schemaVersion: 1,
   source: {

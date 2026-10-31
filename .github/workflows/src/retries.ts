@@ -52,6 +52,7 @@ export async function fetchWithRetry(
   url: string,
   options: object = {},
   retryOptions: RetryOptions = {},
+  fetchImpl: typeof fetch = fetch,
 ): Promise<Response> {
-  return retry(() => fetch(url, options), retryOptions);
+  return retry(() => fetchImpl(url, options), retryOptions);
 }

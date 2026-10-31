@@ -7,8 +7,8 @@ import { afterEach, describe, expect, it } from "vitest";
 
 const temporaryDirectories: string[] = [];
 type ReviewContext = {
-    canonicalSkill: { skillRevision: string; skillPath: string };
-    workspaces: Array<{ baselineCommitSha: string; workspace: string }>;
+  canonicalSkill: { skillRevision: string; skillPath: string };
+  workspaces: Array<{ baselineCommitSha: string; workspace: string }>;
 };
 
 function runGit(workingDirectory: string, args: string[]): string {
@@ -77,14 +77,14 @@ describe("prepare-sdk-review-workspaces", () => {
 
     const outputRoot = path.join(testRoot, "output");
     const installedSkillRoot = path.join(
-        testRoot,
-        "agent-workspace",
-        ".github",
-        "skills",
-        "code-review",
+      testRoot,
+      "agent-workspace",
+      ".github",
+      "skills",
+      "code-review",
     );
     const scriptPath = fileURLToPath(
-      new URL("../scripts/prepare-sdk-review-workspaces.mjs", import.meta.url),
+      new URL("../scripts/prepare-sdk-review-workspaces.ts", import.meta.url),
     );
     execFileSync(process.execPath, [scriptPath], {
       cwd: testRoot,
@@ -104,11 +104,9 @@ describe("prepare-sdk-review-workspaces", () => {
     const context = parsedContext as ReviewContext;
     expect(context.canonicalSkill.skillRevision).toBe(skillRevision);
     expect(context.canonicalSkill.skillPath).toBe(path.join(installedSkillRoot, "SKILL.md"));
-    expect(
-        fs
-            .readFileSync(context.canonicalSkill.skillPath, "utf8")
-            .replaceAll("\r\n", "\n"),
-    ).toBe("# Canonical code review\n");
+    expect(fs.readFileSync(context.canonicalSkill.skillPath, "utf8").replaceAll("\r\n", "\n")).toBe(
+      "# Canonical code review\n",
+    );
     expect(context.workspaces).toHaveLength(1);
     expect(context.workspaces[0].baselineCommitSha).toBe(baselineCommitSha);
     const workspace = context.workspaces[0].workspace;

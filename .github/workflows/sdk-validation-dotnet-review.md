@@ -49,7 +49,7 @@ permissions:
   copilot-requests: write
 checkout:
   sparse-checkout: |
-    .github/workflows/scripts/prepare-sdk-review-workspaces.mjs
+    .github/workflows/scripts/prepare-sdk-review-workspaces.ts
 engine:
   id: copilot
   args: ["--excluded-tools=task"]
@@ -69,7 +69,7 @@ steps:
       SDK_REVIEW_INPUT_ROOT: /tmp/gh-aw/sdk-review-input
       SDK_REVIEW_WORKSPACE_ROOT: /tmp/gh-aw/sdk-review-workspaces
       SDK_REVIEW_SKILL_INSTALL_ROOT: ${{ github.workspace }}/.github/skills/code-review
-    run: node .github/workflows/scripts/prepare-sdk-review-workspaces.mjs
+    run: node .github/workflows/scripts/prepare-sdk-review-workspaces.ts
 network:
   allowed:
     - defaults

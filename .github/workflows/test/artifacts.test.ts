@@ -138,10 +138,14 @@ describe("getAzurePipelineArtifact function", () => {
         headers: expectedHeaders,
       }),
     );
-    expect(mockFetch).toHaveBeenCalledTimes(2);
-    expect(String(mockFetch.mock.calls[0][0])).toContain("artifacts?api-version=7.0");
-    expect(String(mockFetch.mock.calls[0][0])).not.toContain("artifactName=");
-    expect(String(mockFetch.mock.calls[1][0])).toContain("format=file&subPath=");
+    expect(mockFetch).toHaveBeenCalledTimes(4);
+    expect(String(mockFetch.mock.calls[0][0])).toContain(`artifactName=${inputs.artifactName}`);
+    expect(String(mockFetch.mock.calls[1][0])).toContain("artifacts?api-version=7.0");
+    expect(String(mockFetch.mock.calls[1][0])).not.toContain("artifactName=");
+    expect(String(mockFetch.mock.calls[2][0])).toContain(
+      "artifactName=spec-gen-sdk-artifact-FailedAttempt1",
+    );
+    expect(String(mockFetch.mock.calls[3][0])).toContain("format=file&subPath=");
   });
 
   it("should include authorization header when token is provided", async () => {
@@ -777,12 +781,23 @@ describe("fetchFailedArtifact function", () => {
       status: 200,
       statusText: "OK",
     };
+    const mockSelectedArtifactResponse = {
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        name: "spec-gen-sdk-artifact-FailedAttempt1",
+        resource: { downloadUrl: "https://example.com/download1" },
+      }),
+      status: 200,
+      statusText: "OK",
+    };
 
     // Setup fetch with a spy to capture the headers
-    mockFetch.mockImplementation((_url, options) => {
+    mockFetch.mockImplementation((url, options) => {
       // Verify that the custom headers are included in all requests
       expect(options?.headers).toEqual(customHeaders);
-      return Promise.resolve(mockListResponse);
+      return Promise.resolve(
+        url.includes("artifactName=") ? mockSelectedArtifactResponse : mockListResponse,
+      );
     });
 
     // Call the function with custom headers
@@ -803,6 +818,7 @@ describe("fetchFailedArtifact function", () => {
         headers: customHeaders,
       }),
     );
+    expect(mockFetch).toHaveBeenCalledTimes(2);
   });
 
   it("should fetch the failed artifact successfully", async () => {
@@ -832,8 +848,16 @@ describe("fetchFailedArtifact function", () => {
       status: 200,
       statusText: "OK",
     };
+    const mockSelectedArtifactResponse = {
+      ok: true,
+      json: vi.fn().mockResolvedValue(mockArtifacts.value[0]),
+      status: 200,
+      statusText: "OK",
+    };
 
-    mockFetch.mockResolvedValue(mockListResponse);
+    mockFetch
+      .mockResolvedValueOnce(mockListResponse)
+      .mockResolvedValueOnce(mockSelectedArtifactResponse);
 
     // Call the function
     const response = await fetchFailedArtifact(defaultParams);
@@ -842,24 +866,31 @@ describe("fetchFailedArtifact function", () => {
       name: "spec-gen-sdk-artifact-FailedAttempt2",
       resource: { downloadUrl: "https://example.com/download1" },
     });
-    expect(mockFetch).toHaveBeenCalledOnce();
+    expect(mockFetch).toHaveBeenCalledTimes(2);
   });
 
   it("prefers the exact artifact over matching failed artifacts", async () => {
-    mockFetch.mockResolvedValue({
+    const mockArtifacts = {
+      value: [
+        {
+          name: "spec-gen-sdk-artifact-FailedAttempt9",
+          resource: { downloadUrl: "https://example.com/failed" },
+        },
+        {
+          name: "spec-gen-sdk-artifact",
+          resource: { downloadUrl: "https://example.com/exact" },
+        },
+      ],
+    };
+    mockFetch.mockResolvedValueOnce({
       ok: true,
-      json: vi.fn().mockResolvedValue({
-        value: [
-          {
-            name: "spec-gen-sdk-artifact-FailedAttempt9",
-            resource: { downloadUrl: "https://example.com/failed" },
-          },
-          {
-            name: "spec-gen-sdk-artifact",
-            resource: { downloadUrl: "https://example.com/exact" },
-          },
-        ],
-      }),
+      json: vi.fn().mockResolvedValue(mockArtifacts),
+      status: 200,
+      statusText: "OK",
+    });
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: vi.fn().mockResolvedValue(mockArtifacts.value[1]),
       status: 200,
       statusText: "OK",
     });
@@ -869,7 +900,7 @@ describe("fetchFailedArtifact function", () => {
       name: "spec-gen-sdk-artifact",
       resource: { downloadUrl: "https://example.com/exact" },
     });
-    expect(mockFetch).toHaveBeenCalledOnce();
+    expect(mockFetch).toHaveBeenCalledTimes(2);
   });
 
   it("should return 404 when no matching artifacts are found", async () => {
@@ -891,7 +922,6 @@ describe("fetchFailedArtifact function", () => {
       status: 200,
       statusText: "OK",
     };
-
     mockFetch.mockResolvedValue(mockListResponse);
 
     // Call the function and expect it to return a 404 response
@@ -942,8 +972,17 @@ describe("fetchFailedArtifact function", () => {
       status: 200,
       statusText: "OK",
     };
+    const selectedArtifact = {
+      name: "spec-gen-sdk-artifact-FailedAttempt3",
+      resource: { downloadUrl: "https://example.com/download3" },
+    };
 
-    mockFetch.mockResolvedValue(mockListResponse);
+    mockFetch.mockResolvedValueOnce(mockListResponse).mockResolvedValueOnce({
+      ok: true,
+      json: vi.fn().mockResolvedValue(selectedArtifact),
+      status: 200,
+      statusText: "OK",
+    });
 
     // Call the function
     const response = await fetchFailedArtifact(defaultParams);
@@ -952,6 +991,6 @@ describe("fetchFailedArtifact function", () => {
       name: "spec-gen-sdk-artifact-FailedAttempt3",
       resource: { downloadUrl: "https://example.com/download3" },
     });
-    expect(mockFetch).toHaveBeenCalledOnce();
+    expect(mockFetch).toHaveBeenCalledTimes(2);
   });
 });

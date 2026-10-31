@@ -58,6 +58,7 @@ type GetAzurePipelineArtifactOptions = {
   token?: string;
   strict?: boolean;
   maxBytes?: number;
+  fetchImpl?: typeof fetch;
 };
 
 type ResolveAzurePipelineArtifactOptions = Omit<
@@ -70,12 +71,14 @@ type DownloadAzurePipelineArtifactFileOptions = {
   artifactFileName: string;
   retryOptions?: import("./retries.ts").RetryOptions;
   maxBytes?: number;
+  fetchImpl?: typeof fetch;
 };
 
 type DownloadAzurePipelineArtifactArchiveOptions = {
   artifact: ResolvedAzurePipelineArtifact;
   retryOptions?: import("./retries.ts").RetryOptions;
   maxBytes: number;
+  fetchImpl?: typeof fetch;
 };
 
 type ByteStreamReadResult = { done: true; value?: undefined } | { done: false; value: Uint8Array };
@@ -188,25 +191,30 @@ export async function resolveAzurePipelineArtifact({
   retryOptions = {},
   fallbackToFailedArtifact = false,
   token = undefined,
+  fetchImpl = fetch,
 }: ResolveAzurePipelineArtifactOptions): Promise<AzurePipelineArtifactResolution> {
   const headers = getArtifactHeaders(token);
-  const response = fallbackToFailedArtifact
-    ? await fetchFailedArtifact({
-        ado_build_id,
-        ado_project_url,
-        artifactName,
-        core,
-        retryOptions,
-        headers,
-      })
-    : await fetchWithRetry(
-        `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`,
-        {
-          method: "GET",
-          headers,
-        },
-        retryOptions,
-      );
+  let response = await fetchWithRetry(
+    `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`,
+    {
+      method: "GET",
+      headers,
+    },
+    retryOptions,
+    fetchImpl,
+  );
+
+  if (response.status === 404 && fallbackToFailedArtifact) {
+    response = await fetchFailedArtifact({
+      ado_build_id,
+      ado_project_url,
+      artifactName,
+      core,
+      retryOptions,
+      headers,
+      fetchImpl,
+    });
+  }
 
   if (response.status === 404) {
     core.info(`Artifact '${artifactName}' not found (404)`);
@@ -241,6 +249,7 @@ export async function downloadAzurePipelineArtifactFile({
   artifactFileName,
   retryOptions = {},
   maxBytes,
+  fetchImpl = fetch,
 }: DownloadAzurePipelineArtifactFileOptions): Promise<string> {
   const separator = artifact.downloadUrl.includes("?") ? "&" : "?";
   const url = `${artifact.downloadUrl}${separator}format=file&subPath=/${artifactFileName}`;
@@ -251,6 +260,7 @@ export async function downloadAzurePipelineArtifactFile({
       headers: artifact.headers,
     },
     retryOptions,
+    fetchImpl,
   );
   if (!artifactResponse.ok) {
     throw new Error(
@@ -268,6 +278,7 @@ export async function downloadAzurePipelineArtifactArchive({
   artifact,
   retryOptions = {},
   maxBytes,
+  fetchImpl = fetch,
 }: DownloadAzurePipelineArtifactArchiveOptions): Promise<Uint8Array> {
   const parsedUrl = new URL(artifact.downloadUrl);
   parsedUrl.searchParams.set("format", "zip");
@@ -279,6 +290,7 @@ export async function downloadAzurePipelineArtifactArchive({
       headers: artifact.headers,
     },
     retryOptions,
+    fetchImpl,
   );
   if (!artifactResponse.ok) {
     throw new Error(
@@ -305,6 +317,7 @@ export async function getAzurePipelineArtifact({
   token = undefined,
   strict = false,
   maxBytes,
+  fetchImpl = fetch,
 }: GetAzurePipelineArtifactOptions): Promise<
   AzurePipelineArtifactResult | StrictAzurePipelineArtifactResult
 > {
@@ -317,6 +330,7 @@ export async function getAzurePipelineArtifact({
       retryOptions,
       fallbackToFailedArtifact,
       token,
+      fetchImpl,
     });
     if (resolution.status === "not-found") {
       return strict ? { status: "not-found", artifactData: "" } : { artifactData: "" };
@@ -327,6 +341,7 @@ export async function getAzurePipelineArtifact({
       artifactFileName,
       retryOptions,
       maxBytes,
+      fetchImpl,
     });
     return strict ? { status: "found", artifactData } : { artifactData };
   } catch (error) {
@@ -361,6 +376,7 @@ export async function fetchFailedArtifact({
   core,
   retryOptions = {},
   headers,
+  fetchImpl = fetch,
 }: {
   ado_build_id: string;
   ado_project_url: string;
@@ -368,6 +384,7 @@ export async function fetchFailedArtifact({
   core: Core;
   retryOptions?: import("./retries.ts").RetryOptions;
   headers?: object;
+  fetchImpl?: typeof fetch;
 }): Promise<Response> {
   const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?api-version=7.0`;
   core.info(`List the artifacts: ${apiUrl}`);
@@ -378,6 +395,7 @@ export async function fetchFailedArtifact({
       headers,
     },
     retryOptions,
+    fetchImpl,
   );
   if (!response.ok) {
     throw new Error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
@@ -401,8 +419,15 @@ export async function fetchFailedArtifact({
       headers: { "Content-Type": "text/plain" },
     });
   }
-  return new Response(JSON.stringify(selectedArtifact), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  const selectedArtifactUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${selectedArtifact.name}&api-version=7.0`;
+  core.info(`Fetching the failed artifact: ${selectedArtifactUrl}`);
+  return await fetchWithRetry(
+    selectedArtifactUrl,
+    {
+      method: "GET",
+      headers,
+    },
+    retryOptions,
+    fetchImpl,
+  );
 }

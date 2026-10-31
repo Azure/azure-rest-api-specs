@@ -26,8 +26,8 @@ const EXCLUDED_PACKAGE_DIR_SEGMENTS = new Set([
 const EXCLUDED_PACKAGE_FILE_NAMES = new Set(["log.txt"]);
 
 export type SdkReviewPackageChanges = {
-    packageRootPath: string;
-    changedFiles: string[];
+  packageRootPath: string;
+  changedFiles: string[];
   sdkBaseCommitSha: string;
   reviewInputPath: string;
   reviewInputFileCount: number;
@@ -39,21 +39,21 @@ export type SdkReviewPackageChanges = {
  * it stays within `repoRootPath` without traversal segments.
  */
 export function normalizePackageRootPath(
-    repoRootPath: string,
-    rawPackageRootPath: string,
+  repoRootPath: string,
+  rawPackageRootPath: string,
 ): string | undefined {
-    const trimmed = rawPackageRootPath.trim();
-    if (!trimmed) {
-        return undefined;
-    }
+  const trimmed = rawPackageRootPath.trim();
+  if (!trimmed) {
+    return undefined;
+  }
 
-    const resolvedRepoRoot = path.resolve(repoRootPath);
-    const candidateAbsolute = path.isAbsolute(trimmed)
-        ? path.resolve(trimmed)
-        : path.resolve(resolvedRepoRoot, trimmed);
-    const relativePath = path.relative(resolvedRepoRoot, candidateAbsolute).replaceAll("\\", "/");
+  const resolvedRepoRoot = path.resolve(repoRootPath);
+  const candidateAbsolute = path.isAbsolute(trimmed)
+    ? path.resolve(trimmed)
+    : path.resolve(resolvedRepoRoot, trimmed);
+  const relativePath = path.relative(resolvedRepoRoot, candidateAbsolute).replaceAll("\\", "/");
 
-    return isSafeRelativePosixPath(relativePath) ? relativePath : undefined;
+  return isSafeRelativePosixPath(relativePath) ? relativePath : undefined;
 }
 
 /**
@@ -61,77 +61,77 @@ export function normalizePackageRootPath(
  * is a build intermediate or scratch log that should not be reviewed.
  */
 export function isExcludedGeneratedPackagePath(
-    packageRootPath: string,
-    repoRelativePosixPath: string,
+  packageRootPath: string,
+  repoRelativePosixPath: string,
 ): boolean {
-    const prefix = `${packageRootPath}/`;
-    const relativeToPackage = repoRelativePosixPath.startsWith(prefix)
-        ? repoRelativePosixPath.slice(prefix.length)
-        : repoRelativePosixPath;
-    const segments = relativeToPackage.split("/");
+  const prefix = `${packageRootPath}/`;
+  const relativeToPackage = repoRelativePosixPath.startsWith(prefix)
+    ? repoRelativePosixPath.slice(prefix.length)
+    : repoRelativePosixPath;
+  const segments = relativeToPackage.split("/");
   if (segments.some((segment) => EXCLUDED_PACKAGE_DIR_SEGMENTS.has(segment.toLowerCase()))) {
-        return true;
-    }
+    return true;
+  }
   return EXCLUDED_PACKAGE_FILE_NAMES.has((segments.at(-1) ?? "").toLowerCase());
 }
 
 function isStrictPackageDescendant(packageRootPath: string, filePath: string): boolean {
-    return filePath.startsWith(`${packageRootPath}/`);
+  return filePath.startsWith(`${packageRootPath}/`);
 }
 
 async function runGitStdout(repoPath: string, args: string[]): Promise<string> {
-    const { stdout } = await execFileAsync("git", args, {
-        cwd: repoPath,
-        maxBuffer: GIT_MAX_BUFFER_BYTES,
-        windowsHide: true,
-    });
-    return stdout;
+  const { stdout } = await execFileAsync("git", args, {
+    cwd: repoPath,
+    maxBuffer: GIT_MAX_BUFFER_BYTES,
+    windowsHide: true,
+  });
+  return stdout;
 }
 
 function parseGitPathList(output: string, packageRootPath: string): string[] {
-    return output
-        .split("\0")
-        .map((entry) => entry.trim().replaceAll("\\", "/"))
-        .filter(
-            (entry) =>
-                entry.length > 0 &&
-                isSafeRelativePosixPath(entry) &&
-                !isExcludedGeneratedPackagePath(packageRootPath, entry),
-        );
+  return output
+    .split("\0")
+    .map((entry) => entry.trim().replaceAll("\\", "/"))
+    .filter(
+      (entry) =>
+        entry.length > 0 &&
+        isSafeRelativePosixPath(entry) &&
+        !isExcludedGeneratedPackagePath(packageRootPath, entry),
+    );
 }
 
 async function listChangedPackageFiles(
-    sdkRepoPath: string,
-    packageRootPath: string,
+  sdkRepoPath: string,
+  packageRootPath: string,
 ): Promise<string[]> {
-    const [trackedOutput, untrackedOutput] = await Promise.all([
-        runGitStdout(sdkRepoPath, [
-            "-c",
-            "core.quotepath=false",
-            "diff",
-            "--no-renames",
-            "--name-only",
-            "-z",
-            "HEAD",
-            "--",
-            packageRootPath,
-        ]),
-        runGitStdout(sdkRepoPath, [
-            "ls-files",
-            "--others",
-            "--exclude-standard",
-            "-z",
-            "--",
-            packageRootPath,
-        ]),
-    ]);
+  const [trackedOutput, untrackedOutput] = await Promise.all([
+    runGitStdout(sdkRepoPath, [
+      "-c",
+      "core.quotepath=false",
+      "diff",
+      "--no-renames",
+      "--name-only",
+      "-z",
+      "HEAD",
+      "--",
+      packageRootPath,
+    ]),
+    runGitStdout(sdkRepoPath, [
+      "ls-files",
+      "--others",
+      "--exclude-standard",
+      "-z",
+      "--",
+      packageRootPath,
+    ]),
+  ]);
 
-    return [
-        ...new Set([
-            ...parseGitPathList(trackedOutput, packageRootPath),
-            ...parseGitPathList(untrackedOutput, packageRootPath),
-        ]),
-    ].sort();
+  return [
+    ...new Set([
+      ...parseGitPathList(trackedOutput, packageRootPath),
+      ...parseGitPathList(untrackedOutput, packageRootPath),
+    ]),
+  ].sort();
 }
 
 function resolveReviewInputPath(
@@ -164,6 +164,15 @@ function resolveReviewInputPath(
   };
 }
 
+/**
+ * Copies the generated package root into the existing staged packages artifact.
+ *
+ * Build outputs, dependency folders, scratch logs, and symbolic links are
+ * excluded. The copy fails when the snapshot exceeds the shared file or byte
+ * limits so an incomplete review input is never published.
+ *
+ * @returns The number of copied files and their total expanded size.
+ */
 async function copyPackageSnapshot(
   packageRootAbsolutePath: string,
   packageRootPath: string,
@@ -245,27 +254,34 @@ async function copyPackageSnapshot(
  * `.NET` APIView request entries.
  */
 export function shouldCaptureSdkReviewMetadata(commandInput: SpecGenSdkCmdInput): boolean {
-    return (
-        commandInput.runMode === "spec-pull-request" &&
-        commandInput.sdkLanguage === SdkName.Net &&
-        typeof commandInput.prNumber === "string" &&
-        /^[1-9]\d*$/.test(commandInput.prNumber) &&
-        /^[0-9a-f]{40}$/i.test(commandInput.specCommitSha)
-    );
+  return (
+    commandInput.runMode === "spec-pull-request" &&
+    commandInput.sdkLanguage === SdkName.Net &&
+    typeof commandInput.prNumber === "string" &&
+    /^[1-9]\d*$/.test(commandInput.prNumber) &&
+    /^[0-9a-f]{40}$/i.test(commandInput.specCommitSha)
+  );
 }
 
 /**
- * Captures package roots and generated changed-file paths before the next SDK
- * checkout reset. APIView/package artifacts remain the source of review content.
+ * Captures the exact SDK baseline, generated changed files, and filtered
+ * package source snapshot before the next SDK checkout reset.
+ *
+ * The returned metadata is added to the existing APIView request entry while
+ * the source snapshot is written into the existing packages artifact.
+ *
+ * @returns Review metadata keyed by generated package name.
+ * @throws When required package paths are missing, unsafe, duplicated, or the
+ * source snapshot cannot be captured completely.
  */
 export async function captureSdkReviewMetadata(
-    commandInput: SpecGenSdkCmdInput,
-    executionReport: ExecutionReport,
+  commandInput: SpecGenSdkCmdInput,
+  executionReport: ExecutionReport,
 ): Promise<Map<string, SdkReviewPackageChanges>> {
-    const captured = new Map<string, SdkReviewPackageChanges>();
-    if (!shouldCaptureSdkReviewMetadata(commandInput)) {
-        return captured;
-    }
+  const captured = new Map<string, SdkReviewPackageChanges>();
+  if (!shouldCaptureSdkReviewMetadata(commandInput)) {
+    return captured;
+  }
   if (!executionReport.stagedArtifactsFolder) {
     throw new Error("Cannot capture SDK review input: missing stagedArtifactsFolder");
   }
@@ -277,36 +293,36 @@ export async function captureSdkReviewMetadata(
     throw new Error(`Cannot capture SDK review input: invalid SDK commit '${sdkBaseCommitSha}'`);
   }
 
-    for (const [packageIndex, pkg] of executionReport.packages.entries()) {
-        const packageName = pkg.packageName?.trim();
+  for (const [packageIndex, pkg] of executionReport.packages.entries()) {
+    const packageName = pkg.packageName?.trim();
     if (!packageName || !pkg.packageRootPath || !pkg.apiViewArtifact) {
-            throw new Error(
+      throw new Error(
         `Cannot capture SDK review input for package #${packageIndex + 1}: missing packageName, packageRootPath, or apiViewArtifact`,
-            );
-        }
-        if (captured.has(packageName)) {
+      );
+    }
+    if (captured.has(packageName)) {
       throw new Error(`Cannot capture SDK review metadata: duplicate package '${packageName}'`);
-        }
+    }
 
-        const packageRootPath = normalizePackageRootPath(
-            commandInput.localSdkRepoPath,
-            pkg.packageRootPath,
-        );
-        if (!packageRootPath) {
-            throw new Error(
-                `Cannot capture SDK review metadata for '${packageName}': unsafe packageRootPath '${pkg.packageRootPath}'`,
-            );
-        }
+    const packageRootPath = normalizePackageRootPath(
+      commandInput.localSdkRepoPath,
+      pkg.packageRootPath,
+    );
+    if (!packageRootPath) {
+      throw new Error(
+        `Cannot capture SDK review metadata for '${packageName}': unsafe packageRootPath '${pkg.packageRootPath}'`,
+      );
+    }
 
-        const changedFiles = await listChangedPackageFiles(
-            commandInput.localSdkRepoPath,
-            packageRootPath,
-        );
+    const changedFiles = await listChangedPackageFiles(
+      commandInput.localSdkRepoPath,
+      packageRootPath,
+    );
     if (changedFiles.some((filePath) => !isStrictPackageDescendant(packageRootPath, filePath))) {
-            throw new Error(
-                `Cannot capture SDK review metadata for '${packageName}': changed file outside packageRootPath '${packageRootPath}'`,
-            );
-        }
+      throw new Error(
+        `Cannot capture SDK review metadata for '${packageName}': changed file outside packageRootPath '${packageRootPath}'`,
+      );
+    }
 
     const { absolutePath: reviewInputAbsolutePath, relativePath: reviewInputPath } =
       resolveReviewInputPath(
@@ -332,11 +348,11 @@ export async function captureSdkReviewMetadata(
       reviewInputFileCount: snapshot.fileCount,
       reviewInputBytes: snapshot.bytes,
     });
-        logMessage(
+    logMessage(
       `Captured SDK review input for '${packageName}' (${changedFiles.length} changed files, ${snapshot.fileCount} snapshot files, ${snapshot.bytes} bytes)`,
-            LogLevel.Info,
-        );
-    }
+      LogLevel.Info,
+    );
+  }
 
-    return captured;
+  return captured;
 }

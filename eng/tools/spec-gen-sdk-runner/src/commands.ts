@@ -34,10 +34,7 @@ import {
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
 import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
-import {
-  captureSdkReviewMetadata,
-  type SdkReviewPackageChanges,
-} from "./sdk-review-metadata.ts";
+import { captureSdkReviewMetadata, type SdkReviewPackageChanges } from "./sdk-review-metadata.ts";
 import { resolveSdkRepoBranch } from "./sdk-validation-config.ts";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
@@ -388,7 +385,6 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
-  let sdkReviewMetadata = new Map<string, SdkReviewPackageChanges>();
   const breakingChangeDetectionEnabled = isBreakingChangeDetectionEnabled();
   // Tracks whether the SDK repo is currently checked out on a non-`main` branch
   // due to a `sdk-validation.yaml` pin from a previous spec in this run.
@@ -403,7 +399,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
   for (const changedSpec of changedSpecs) {
     executionReport = undefined;
-    sdkReviewMetadata = new Map<string, SdkReviewPackageChanges>();
+    let sdkReviewMetadata = new Map<string, SdkReviewPackageChanges>();
 
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
