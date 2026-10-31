@@ -144,15 +144,18 @@ describe("buildExecutionReport", () => {
   });
 
   test("returns succeeded when all steps succeed", () => {
+    const packageRootPath = "/tmp/azure-sdk-for-net/sdk/test/test-package";
     const report = buildExecutionReport(
       succeededGenerate,
       succeededPack,
       enabledEmitter,
       succeededBuild,
+      packageRootPath,
     );
     expect(report.executionResult).toBe("succeeded");
     expect(report.packages).toHaveLength(1);
     expect(report.packages[0].packageName).toBe("test-package");
+    expect(report.packages[0].packageRootPath).toBe(packageRootPath);
     expect(report.generateFromTypeSpec).toBe(true);
   });
 
