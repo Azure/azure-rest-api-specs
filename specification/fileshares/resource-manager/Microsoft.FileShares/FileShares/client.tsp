@@ -96,26 +96,58 @@ using Microsoft.FileShares;
 @@clientName(PublicNetworkAccess, "FileSharePublicNetworkAccess", "csharp");
 @@clientName(
   StartRedundancyConversionRequest,
-  "StartRedundancyConversionContent",
+  "FileShareRedundancyConversionContent",
   "csharp"
 );
 @@clientName(
   StartRedundancyConversionInput,
-  "StartRedundancyConversionInputProperties",
+  "FileShareRedundancyConversionInputProperties",
   "csharp"
 );
 @@clientName(
   RedundancyConversionStatusResponse,
-  "RedundancyConversionStatusResult",
+  "FileShareRedundancyConversionStatusResult",
   "csharp"
 );
 @@clientName(
   RedundancyConversionStatusOutput,
-  "RedundancyConversionStatusOutputProperties",
+  "FileShareRedundancyConversionStatusOutputProperties",
+  "csharp"
+);
+@@clientName(
+  RedundancyConversionStatus,
+  "FileShareRedundancyConversionStatus",
+  "csharp"
+);
+@@clientName(
+  MigrationState.redundancyConversionInProgress,
+  "IsRedundancyConversionInProgress",
   "csharp"
 );
 @@clientName(MediaTier, "FileShareMediaTier", "csharp");
 @@clientName(MediaTier.SSD, "Ssd", "csharp");
+@@clientName(MediaTier.HDD, "Hdd", "csharp");
+@@clientName(ScaleMode, "FileShareScaleMode", "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.InfrastructureEncryption,
+  "FileShareInfrastructureEncryption",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
+  "FileShareCustomerManagedKeyEncryption",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+  "FileShareKeyEncryptionKeyIdentity",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
+  "FileShareKeyEncryptionKeyIdentityType",
+  "csharp"
+);
 @@clientName(Redundancy, "FileShareRedundancyLevel", "csharp");
 @@clientName(Protocol, "FileShareProtocol", "csharp");
 @@clientName(Protocol.NFS, "Nfs", "csharp");
