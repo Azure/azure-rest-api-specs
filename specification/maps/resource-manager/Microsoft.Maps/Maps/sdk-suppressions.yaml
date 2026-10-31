@@ -19,3 +19,67 @@ suppressions:
         - Method `MapsAccountUpdateParameters.__init__` parameter `kind` changed default value from `str` to `none`
         - Model `Creator` deleted or renamed its instance variable `system_data`
         - Model `MapsAccount` deleted or renamed its instance variable `system_data`
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/maps/armmaps'
+      breaking-changes:
+        - Function `NewClient` parameter(s) have been changed from `(subscriptionID string, credential azcore.TokenCredential, options *arm.ClientOptions)` to `(credential azcore.TokenCredential, options *arm.ClientOptions)`
+        - Type of `AccountProperties.ProvisioningState` has been changed from `*string` to `*ResourceProvisioningState`
+        - Type of `AccountUpdateParameters.SKU` has been changed from `*SKU` to `*SKUUpdate`
+        - Type of `CustomerManagedKeyEncryption.KeyEncryptionKeyIdentity` has been changed from `*CustomerManagedKeyEncryptionKeyIdentity` to `*KeyEncryptionKeyIdentity`
+        - '`KindGen1` from enum `Kind` has been removed'
+        - '`NameS0`, `NameS1` from enum `Name` has been removed'
+        - Enum `IdentityType` has been removed
+        - Function `*Client.NewListSubscriptionOperationsPager` has been removed
+        - Function `*ClientFactory.NewCreatorsClient` has been removed
+        - Function `NewCreatorsClient` has been removed
+        - Function `*CreatorsClient.CreateOrUpdate` has been removed
+        - Function `*CreatorsClient.Delete` has been removed
+        - Function `*CreatorsClient.Get` has been removed
+        - Function `*CreatorsClient.NewListByAccountPager` has been removed
+        - Function `*CreatorsClient.Update` has been removed
+        - Operation `*AccountsClient.CreateOrUpdate` has been changed to LRO, use `*AccountsClient.BeginCreateOrUpdate` instead.
+        - Operation `*AccountsClient.Delete` has been changed to LRO, use `*AccountsClient.BeginDelete` instead.
+        - Operation `*AccountsClient.Update` has been changed to LRO, use `*AccountsClient.BeginUpdate` instead.
+        - Struct `Creator` has been removed
+        - Struct `CreatorList` has been removed
+        - Struct `CreatorProperties` has been removed
+        - Struct `CreatorUpdateParameters` has been removed
+        - Struct `CustomerManagedKeyEncryptionKeyIdentity` has been removed
+        - Struct `Dimension` has been removed
+        - Struct `ErrorResponse` has been removed
+        - Struct `MetricSpecification` has been removed
+        - Struct `OperationDetail` has been removed
+        - Struct `OperationProperties` has been removed
+        - Struct `Operations` has been removed
+        - Struct `Resource` has been removed
+        - Struct `ServiceSpecification` has been removed
+        - Struct `TrackedResource` has been removed
+        - Field `Operations` of struct `ClientListOperationsResponse` has been removed
+  azure-sdk-for-js:
+    - package: '@azure/arm-maps'
+      breaking-changes:
+        - Operation Accounts.update has a new signature
+        - Removed Interface Creator
+        - Removed Interface CreatorList
+        - Removed Interface CreatorProperties
+        - Removed Interface Creators
+        - Removed Interface CreatorsCreateOrUpdateOptionalParams
+        - Removed Interface CreatorsDeleteOptionalParams
+        - Removed Interface CreatorsGetOptionalParams
+        - Removed Interface CreatorsListByAccountOptionalParams
+        - Removed Interface CreatorsUpdateOptionalParams
+        - Removed Interface CreatorUpdateParameters
+        - Removed Interface Dimension
+        - Removed Interface MapsAccounts
+        - Removed Interface MapsListSubscriptionOperationsOptionalParams
+        - Removed Interface MetricSpecification
+        - Removed Interface OperationDetail
+        - Removed Interface ServiceSpecification
+        - Removed operation Maps.listSubscriptionOperations
+        - Type of parameter sku of interface MapsAccountUpdateParameters is changed from Sku to SkuUpdate
+        - Class AzureMapsManagementClient has a new signature
+        - Class AzureMapsManagementClient no longer has parameter creators
+        - Removed Type Alias KeyType_2
+        - Enum KnownKind no longer has value Gen1
+        - Enum KnownName no longer has value S0
+        - Enum KnownName no longer has value S1
