@@ -7,6 +7,7 @@ import "./typespec/routes.tsp";
 import "./typespec/accesstokens.tsp";
 import "./typespec/testruns.tsp";
 import "./typespec/browsersessions.tsp";
+import "./typespec/proxyconfigs.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -66,4 +67,8 @@ enum Versions {
 
   @doc("Preview version 2026-10-01-preview with experimental features.")
   v2026_10_01_preview: "2026-10-01-preview",
+
+  @doc("Preview version 2026-11-01-preview with Browser Proxy support feature for Playwright workspaces.")
+  @Azure.Core.previewVersion
+  v2026_11_01_preview: "2026-11-01-preview",
 }

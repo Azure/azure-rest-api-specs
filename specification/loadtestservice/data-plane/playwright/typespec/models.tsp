@@ -1,7 +1,9 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 namespace Playwright;
 
 // Models ////////////////////
@@ -56,6 +58,52 @@ model Workspace {
   @doc("When set on Playwright workspace resource, it provides the URI of the Azure storage account used to store workspace artifacts, test results, and reports.")
   @visibility(Lifecycle.Read)
   storageUri?: url;
+
+  @doc("The Azure Key Vault linked with the playwright workspace.")
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  linkedKeyVault?: LinkedKeyVaultProperties;
+
+  @doc("The browser proxy enablement status for the workspace.")
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  browserProxy?: EnablementStatus = EnablementStatus.Enabled;
+}
+
+@doc("The linked Azure Key Vault and managed identity for the playwright workspace.")
+@added(Versions.v2026_11_01_preview)
+model LinkedKeyVaultProperties {
+  @doc("The vault's base HTTPS URI. The vault must belong to the workspace tenant. Secret paths, query strings, fragments, user information, and non-default ports are not allowed.")
+  @visibility(Lifecycle.Read)
+  vaultUri?: url;
+
+  @doc("The workspace managed identity authorized to read secrets from the linked vault.")
+  @visibility(Lifecycle.Read)
+  vaultIdentity?: LinkedIdentityProperties;
+}
+
+@doc("A workspace managed identity used to access a linked Azure resource.")
+@added(Versions.v2026_11_01_preview)
+model LinkedIdentityProperties {
+  @doc("The type of managed identity used to access the linked resource.")
+  @visibility(Lifecycle.Read)
+  type?: IdentityType;
+
+  @doc("The fully qualified Azure resource ID of the user-assigned managed identity. Required for UserAssigned and omitted for SystemAssigned.")
+  @visibility(Lifecycle.Read)
+  resourceId?: string;
+}
+
+@doc("The type of managed identity used to access a linked Azure resource.")
+@added(Versions.v2026_11_01_preview)
+union IdentityType {
+  string,
+
+  @doc("The workspace's system-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("A user-assigned managed identity assigned to the workspace.")
+  UserAssigned: "UserAssigned",
 }
 
 @doc("The Playwright workspace state.")
