@@ -925,7 +925,7 @@ union DataConnectorKind {
   PurviewAudit: "PurviewAudit",
 
   /**
-   * Push
+   * Push data connector
    */
   @added(Versions.v2026_07_01)
   Push: "Push",
@@ -3066,7 +3066,7 @@ union CcpAuthType {
   None: "None",
 
   /**
-   * Push
+   * Push authentication
    */
   @added(Versions.v2026_07_01)
   Push: "Push",
