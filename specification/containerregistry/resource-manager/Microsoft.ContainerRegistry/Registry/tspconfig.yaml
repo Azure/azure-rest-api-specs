@@ -55,6 +55,18 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-ts-provisioning":
+    emitter-output-dir: "{output-dir}/{service-dir}/provisioning-container-registry"
+    azure-sdk-for-js: true
+    generate-test: true
+    package-details:
+      name: "@azure/provisioning-container-registry"
+    api-version: "2025-11-01"
+    resource-overrides:
+      - resourceType: "Microsoft.ContainerRegistry/registries"
+        namingRules:
+          abbreviation: "cr"
+          scope: "global"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
