@@ -95427,7 +95427,7 @@
         "properties": {
           "session_affinity": {
             "$ref": "#/components/schemas/SessionAffinityConfiguration",
-            "description": "Session affinity configuration for reusing an eligible model across requests in the same conversation.\nIf omitted, sticky affinity is used when a supported conversation identifier is available.",
+            "description": "Session affinity configuration for reusing an eligible model across requests in the same conversation.\nIf omitted, adaptive affinity is used when a supported conversation identifier is available.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "ModelRouterControls=V1Preview"
@@ -95892,10 +95892,15 @@
       "SessionAffinityConfiguration": {
         "type": "object",
         "properties": {
+          "strategy": {
+            "$ref": "#/components/schemas/SessionAffinityRequestStrategy",
+            "description": "Controls how session affinity influences model selection for this request. When omitted, adaptive affinity is used.",
+            "default": "adaptive"
+          },
           "mode": {
-            "$ref": "#/components/schemas/SessionAffinityRequestMode",
-            "description": "Controls whether Model Router applies session affinity to this request.",
-            "default": "sticky"
+            "$ref": "#/components/schemas/SessionAffinityRequestStrategy",
+            "description": "Deprecated request alias for `strategy`. Ignored when `strategy` is also supplied.",
+            "deprecated": true
           },
           "session_id": {
             "type": "string",
@@ -95933,16 +95938,16 @@
       "SessionAffinityDetails": {
         "type": "object",
         "required": [
-          "mode"
+          "strategy"
         ],
         "properties": {
-          "mode": {
-            "$ref": "#/components/schemas/SessionAffinityMode",
-            "description": "The effective session affinity mode."
+          "strategy": {
+            "$ref": "#/components/schemas/SessionAffinityStrategy",
+            "description": "The effective session affinity strategy."
           },
           "source": {
             "$ref": "#/components/schemas/SessionAffinitySource",
-            "description": "The identity source selected after applying precedence. `conversation` and `previous_response_id` apply only to the Responses API. Omitted when affinity is disabled."
+            "description": "The identity source selected after applying precedence. Omitted when affinity is disabled."
           },
           "decision": {
             "$ref": "#/components/schemas/SessionAffinityDecision",
@@ -95956,33 +95961,14 @@
           ]
         }
       },
-      "SessionAffinityMode": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "sticky",
-              "none"
-            ]
-          }
-        ],
-        "description": "Effective modes reported for Model Router session affinity.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "ModelRouterControls=V1Preview"
-          ]
-        }
-      },
-      "SessionAffinityRequestMode": {
+      "SessionAffinityRequestStrategy": {
         "type": "string",
         "enum": [
           "sticky",
+          "adaptive",
           "none"
         ],
-        "description": "Request modes supported by Model Router session affinity.",
+        "description": "Request strategies supported by Model Router session affinity.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "ModelRouterControls=V1Preview"
@@ -96000,12 +95986,32 @@
               "session_id_payload",
               "session_id_header",
               "not_available",
-              "conversation",
-              "previous_response_id"
+              "derived_fingerprint"
             ]
           }
         ],
         "description": "Conversation identifier sources supported by Model Router session affinity.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ModelRouterControls=V1Preview"
+          ]
+        }
+      },
+      "SessionAffinityStrategy": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "sticky",
+              "adaptive",
+              "none"
+            ]
+          }
+        ],
+        "description": "Effective strategies reported for Model Router session affinity.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "ModelRouterControls=V1Preview"
