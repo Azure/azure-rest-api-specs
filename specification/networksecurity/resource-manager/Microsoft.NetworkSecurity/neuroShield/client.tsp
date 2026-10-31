@@ -10,3 +10,14 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 @@clientName(NeuroShield.Management, "NetworkSecurityManagementClient", "java");
+
+@@clientName(
+  NeuroShield.Management.NeuroShieldFindings.listByNeuroShield,
+  "GetNeuroShieldFindings",
+  "csharp"
+);
+@@clientName(
+  NeuroShield.Management.NeuroShieldMitigations.listByNeuroShield,
+  "GetNeuroShieldMitigations",
+  "csharp"
+);
