@@ -123,8 +123,9 @@ model TasksetDatasetVersion extends DatasetVersion {
 
   /**
    * Set when validation fails, with code `invalid_tasks` or `validation_timeout`. `details` holds the
-   * first 100 problems in Task order, each with a `param` such as `lines[11].graders[0].actual`,
-   * `tasks[3].id` or `delete_task_ids[0]`.
+   * first 100 problems in Task order, each with a `param` such as `lines[11].graders[0].actual`; it
+   * is empty for `validation_timeout`. A rejected inline create returns the same object as its `400`
+   * body, with a `param` such as `tasks[3].id` or `delete_task_ids[0]`.
    */
   @visibility(Lifecycle.Read)
   error?: ApiError;
@@ -163,8 +164,9 @@ model NewDatasetVersion {
  * Creates a `taskset` version. Without `base_version`, supply exactly one of `tasks` or
  * `pending_upload_id`. With `base_version`, supply at most one of them, plus optional
  * `delete_task_ids`, and change at least one Task: a Task whose `id` matches a base Task replaces
- * it in place, new Tasks follow in order, and deleted IDs are removed. Invalid Task content never
- * returns `400`; it fails the version with `invalid_tasks`.
+ * it in place, new Tasks follow in order, and deleted IDs are removed. Invalid inline Tasks or a
+ * broken edit rule return `400 invalid_tasks` without creating a version; invalid uploaded Tasks
+ * fail the version with `invalid_tasks`.
  */
 @removed(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)

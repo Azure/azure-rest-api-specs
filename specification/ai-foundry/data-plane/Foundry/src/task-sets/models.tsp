@@ -67,7 +67,7 @@ model Task {
 
   /** Inline graders that run in addition to the Job's graders. */
   @maxItems(32)
-  graders?: InlineGrader[];
+  graders?: TaskGrader[];
 
   /** Limits for each TaskRun attempt of this Task. */
   constraints?: EvaluationTaskConstraints;

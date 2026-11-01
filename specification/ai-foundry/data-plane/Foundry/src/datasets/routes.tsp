@@ -10,13 +10,24 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias ListDatasetVersionsParameters = {};
+alias ListDatasetVersionsParameters = {
+  /** The page size, 1-100; defaults to 20. */
+  @removed(Versions.v1)
+  @query
+  limit?: int32 = 20;
+
+  /** The opaque token carried in the previous page's `nextLink`; follow `nextLink` as is. */
+  @removed(Versions.v1)
+  @query
+  continuation_token?: string;
+};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @doc("""
   Dataset operations. For a `taskset`, native `PATCH` and `credentials` return
-  `400 operation_not_supported_for_type`, and deletes return `409 dataset_in_use` while a Job
-  version still needs the Dataset or version.
+  `400 operation_not_supported_for_type`, deletes take no `If-Match` and return `409 dataset_in_use`
+  while a Job version still needs the Dataset or version, and a version read accepts `latest` for
+  the newest succeeded version.
   """)
 @tag("Datasets")
 interface Datasets
@@ -27,10 +38,13 @@ interface Datasets
       ListDatasetVersionsParameters
     > {
   /**
-   * Creates a `taskset` version with the next service-assigned version, records it as `queued` and
-   * starts validation; the first version creates the Dataset. A name that holds another Dataset type
-   * returns `409 dataset_type_conflict`; a `base_version` that has not succeeded returns
-   * `409 dataset_version_not_ready`. Poll the returned URL until `validation_status` is terminal.
+   * Creates a `taskset` version with the next service-assigned version; the first version creates
+   * the Dataset. Invalid inline Tasks or a broken edit rule return `400 invalid_tasks` and create no
+   * version. Inline creates are normally validated within the request and return `succeeded`;
+   * otherwise, and for uploads, the version is returned `queued` with `Retry-After`. Poll the
+   * returned URL until `validation_status` is terminal. A name that holds another Dataset type returns
+   * `409 dataset_type_conflict`; a `base_version` that has not succeeded returns
+   * `409 dataset_version_not_ready`; an inline body over 8 MiB returns `413 content_too_large`.
    */
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Clients poll the version URL in Operation-Location."
   @summary("Create a Dataset version")
@@ -57,7 +71,7 @@ interface Datasets
         /** URL of the created version. */
         @header("Location") location: string;
 
-        /** Recommended delay before polling, in seconds. */
+        /** Recommended delay before polling, in seconds; set only while the version is `queued` or `in_progress`. */
         @header("Retry-After") retry_after?: int32;
       }
   >;
@@ -78,9 +92,11 @@ interface Datasets
   >;
 
   /**
-   * Lists a succeeded `taskset` version's Tasks in version order, in canonical JSON. Another
-   * validation status returns `409 dataset_version_not_ready`; a missing Dataset, version or Task returns
-   * `404 resource_not_found`, and an unavailable Dataset service returns `503 dependency_unavailable`.
+   * Lists a succeeded `taskset` version's Tasks in version order, in canonical JSON; `after` holds a
+   * Task `id`, and an `after` ID not in the version returns `400 invalid_cursor`. Another
+   * validation status returns `409 dataset_version_not_ready`; a missing Dataset or version, or
+   * `latest` with no succeeded version, returns `404 resource_not_found`, and an unavailable Dataset
+   * service returns `503 dependency_unavailable`.
    */
   @summary("List Tasks")
   @get
@@ -94,7 +110,7 @@ interface Datasets
       /** Dataset name. */
       @path name: string;
 
-      /** Dataset version. */
+      /** Dataset version, or `latest` for the newest succeeded version. */
       @path version: string;
 
       ...PageLimitQueryParameter;
@@ -115,7 +131,7 @@ interface Datasets
       /** Dataset name. */
       @path name: string;
 
-      /** Dataset version. */
+      /** Dataset version, or `latest` for the newest succeeded version. */
       @path version: string;
 
       /** Task ID. */

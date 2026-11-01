@@ -7157,6 +7157,22 @@ paths:
       description: List the latest version of each DatasetVersion
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: limit
+          in: query
+          required: false
+          description: The page size, 1-100; defaults to 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: continuation_token
+          in: query
+          required: false
+          description: The opaque token carried in the previous page's `nextLink`; follow `nextLink` as is.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -7203,6 +7219,22 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: limit
+          in: query
+          required: false
+          description: The page size, 1-100; defaults to 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: continuation_token
+          in: query
+          required: false
+          description: The opaque token carried in the previous page's `nextLink`; follow `nextLink` as is.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -7240,10 +7272,13 @@ paths:
       operationId: Datasets_createVersion
       summary: Create a Dataset version
       description: |-
-        Creates a `taskset` version with the next service-assigned version, records it as `queued` and
-        starts validation; the first version creates the Dataset. A name that holds another Dataset type
-        returns `409 dataset_type_conflict`; a `base_version` that has not succeeded returns
-        `409 dataset_version_not_ready`. Poll the returned URL until `validation_status` is terminal.
+        Creates a `taskset` version with the next service-assigned version; the first version creates
+        the Dataset. Invalid inline Tasks or a broken edit rule return `400 invalid_tasks` and create no
+        version. Inline creates are normally validated within the request and return `succeeded`;
+        otherwise, and for uploads, the version is returned `queued` with `Retry-After`. Poll the
+        returned URL until `validation_status` is terminal. A name that holds another Dataset type returns
+        `409 dataset_type_conflict`; a `base_version` that has not succeeded returns
+        `409 dataset_version_not_ready`; an inline body over 8 MiB returns `413 content_too_large`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7288,7 +7323,7 @@ paths:
                 type: string
             Retry-After:
               required: false
-              description: Recommended delay before polling, in seconds.
+              description: Recommended delay before polling, in seconds; set only while the version is `queued` or `in_progress`.
               schema:
                 type: integer
                 format: int32
@@ -7599,9 +7634,11 @@ paths:
       operationId: Datasets_listTasks
       summary: List Tasks
       description: |-
-        Lists a succeeded `taskset` version's Tasks in version order, in canonical JSON. Another
-        validation status returns `409 dataset_version_not_ready`; a missing Dataset, version or Task returns
-        `404 resource_not_found`, and an unavailable Dataset service returns `503 dependency_unavailable`.
+        Lists a succeeded `taskset` version's Tasks in version order, in canonical JSON; `after` holds a
+        Task `id`, and an `after` ID not in the version returns `400 invalid_cursor`. Another
+        validation status returns `409 dataset_version_not_ready`; a missing Dataset or version, or
+        `latest` with no succeeded version, returns `404 resource_not_found`, and an unavailable Dataset
+        service returns `503 dependency_unavailable`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7620,7 +7657,7 @@ paths:
         - name: version
           in: path
           required: true
-          description: Dataset version.
+          description: Dataset version, or `latest` for the newest succeeded version.
           schema:
             type: string
         - name: limit
@@ -7717,7 +7754,7 @@ paths:
         - name: version
           in: path
           required: true
-          description: Dataset version.
+          description: Dataset version, or `latest` for the newest succeeded version.
           schema:
             type: string
         - name: task_id
@@ -7933,7 +7970,10 @@ paths:
     get:
       operationId: EvaluationJobs_list
       summary: List EvaluationJobs
-      description: Lists Jobs, each with its latest version.
+      description: |-
+        Lists Jobs, each with its latest version, newest first by the Job's `created_at` unless
+        `order=asc`; Jobs being deleted are omitted. A cursor Job that was deleted between pages
+        returns `400 invalid_cursor`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8037,7 +8077,7 @@ paths:
     get:
       operationId: EvaluationJobs_get
       summary: Get an EvaluationJob
-      description: Retrieves a Job with its latest version.
+      description: 'Retrieves a Job with its latest version; a Job being deleted has `state: deleting` and `Retry-After`.'
       parameters:
         - name: Foundry-Features
           in: header
@@ -8064,6 +8104,12 @@ paths:
         '200':
           description: The request has succeeded.
           headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
             ETag:
               required: true
               description: The current resource version, for use with `If-Match`.
@@ -8093,7 +8139,10 @@ paths:
     delete:
       operationId: EvaluationJobs_delete
       summary: Delete an EvaluationJob
-      description: Deletes the Job and all its versions; its Runs are unaffected.
+      description: |-
+        Starts deleting the Job and all its versions; its Runs are unaffected. The Job reads as
+        `deleting` until removal, then returns `404`. A repeated delete of a deleting Job returns `202`
+        whatever its `If-Match`. A missing `If-Match` returns `428`; a stale one `412`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8132,13 +8181,11 @@ paths:
               schema:
                 type: string
             Retry-After:
-              required: false
+              required: true
               description: Recommended number of seconds to wait before polling.
               schema:
                 type: integer
                 format: int32
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
         4XX:
           description: Client error
           content:
@@ -8160,7 +8207,9 @@ paths:
     post:
       operationId: EvaluationJobs_createVersion
       summary: Create an EvaluationJob version
-      description: Publishes a new immutable version and creates the Job on first publication.
+      description: |-
+        Publishes a new immutable version and creates the Job on first publication. Publishing to a
+        Job that is being deleted returns `409`; a body over 8 MiB returns `413 content_too_large`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8225,8 +8274,8 @@ paths:
               type: object
               properties:
                 dataset:
-                  $ref: '#/components/schemas/ResourceVersionReference'
-                  description: An Eval-owned `agent_invocation` Dataset.
+                  $ref: '#/components/schemas/DatasetVersionReference'
+                  description: 'A native `taskset` Dataset whose version has `validation_status: succeeded`.'
                 inline_dataset:
                   $ref: '#/components/schemas/InlineDataset'
                   description: Tasks embedded in this definition.
@@ -8270,7 +8319,7 @@ paths:
     get:
       operationId: EvaluationJobs_listVersions
       summary: List EvaluationJob versions
-      description: Lists a Job's versions.
+      description: Lists a Job's versions, newest first.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8442,7 +8491,9 @@ paths:
     delete:
       operationId: EvaluationJobs_deleteVersion
       summary: Delete an EvaluationJob version
-      description: Deletes one version; `latest` moves to the newest remaining version.
+      description: |-
+        Deletes one version; `latest` moves to the newest remaining version. A missing `If-Match`
+        returns `428`; a stale one `412`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8501,7 +8552,10 @@ paths:
     post:
       operationId: EvaluationRuns_create
       summary: Create an EvaluationRun
-      description: Creates a Run in `queued` status; an equivalent `Operation-Id` retry returns the original Run with `201`.
+      description: |-
+        Accepts a Run in `queued` status once scheduling is confirmed. An equivalent `Operation-Id`
+        retry returns the original Run with `202`; the same key with different content returns
+        `409 idempotency_conflict`. Oversized content returns `413 content_too_large`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8525,8 +8579,8 @@ paths:
             type: string
           explode: false
       responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
           headers:
             ETag:
               required: true
@@ -8574,7 +8628,7 @@ paths:
     get:
       operationId: EvaluationRuns_list
       summary: List EvaluationRuns
-      description: Lists Runs in the project, including Runs of deleted Jobs.
+      description: Lists Runs in the project, newest first by default, including Runs of deleted Jobs.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8754,7 +8808,9 @@ paths:
     delete:
       operationId: EvaluationRuns_delete
       summary: Delete an EvaluationRun
-      description: Deletes a terminal Run.
+      description: |-
+        Deletes a terminal Run; a nonterminal Run returns `409 run_not_terminal`. A missing, blank or
+        repeated `If-Match` returns `428`, and a stale one `412`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -9016,7 +9072,9 @@ paths:
     post:
       operationId: EvaluationRuns_cancel
       summary: Cancel an EvaluationRun
-      description: Requests cancellation of a queued or in-progress Run and returns its current `cancelling` or `cancelled` view.
+      description: |-
+        Requests cancellation of a queued or in-progress Run and returns its current `cancelling` or
+        `cancelled` view; repeating it is `200`. Another terminal Run returns `409 run_already_terminal`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -50744,18 +50802,15 @@ components:
           minimum: 0
           maximum: 1
           description: The minimum 0-1 `score` that passes; defaults to the catalog adapter's threshold.
-        data_mapping:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: Overrides the adapter's standard mapping from evidence templates to the grader's declared inputs.
         settings:
           type: object
           unevaluatedProperties: {}
           description: Settings that this catalog grader declares.
       allOf:
         - $ref: '#/components/schemas/EvaluationGrader'
-      description: A grader from the Foundry evaluator catalog, resolved and pinned at Run creation.
+      description: |-
+        A grader from the Foundry evaluator catalog, resolved and pinned at Run creation. Its binding to
+        Task evidence is fixed by the pinned `grader_version`; there is no per-Job `data_mapping`.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52286,6 +52341,21 @@ components:
           uri_folder: '#/components/schemas/FolderDatasetVersion'
           taskset: '#/components/schemas/TasksetDatasetVersion'
       description: DatasetVersion Definition
+    DatasetVersionReference:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The native Dataset name.
+        version:
+          type: string
+          description: The exact version; when omitted, each Run resolves and pins the latest succeeded version.
+      description: A native Dataset name, as written, and an optional version; an omitted version resolves to the latest succeeded version at Run creation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     DatasetVersionUpdate:
       type: object
       required:
@@ -53677,8 +53747,8 @@ components:
         - target
       properties:
         dataset:
-          $ref: '#/components/schemas/ResourceVersionReference'
-          description: An Eval-owned `agent_invocation` Dataset.
+          $ref: '#/components/schemas/DatasetVersionReference'
+          description: 'A native `taskset` Dataset whose version has `validation_status: succeeded`.'
         inline_dataset:
           $ref: '#/components/schemas/InlineDataset'
           description: Tasks embedded in this definition.
@@ -53710,7 +53780,8 @@ components:
         What an evaluation runs. It is the Job-version create body and is flattened into the direct
         Run-create body. Exactly one of `dataset` or `inline_dataset` is required. A field the schema does
         not define returns `400 invalid_request`; a recognized value that is not yet supported, such as a
-        Later grader feature, returns `400 unsupported_feature`.
+        Later grader feature, returns `400 unsupported_feature`. A Run over 100,000 TaskRuns returns
+        `400 too_many_task_runs`.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -53816,8 +53887,8 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this version was published.
         dataset:
-          $ref: '#/components/schemas/ResourceVersionReference'
-          description: An Eval-owned `agent_invocation` Dataset.
+          $ref: '#/components/schemas/DatasetVersionReference'
+          description: 'A native `taskset` Dataset whose version has `validation_status: succeeded`.'
         inline_dataset:
           $ref: '#/components/schemas/InlineDataset'
           description: Tasks embedded in this definition.
@@ -53945,6 +54016,7 @@ components:
           type: integer
           format: int32
           minimum: 1
+          maximum: 10
           description: TaskRuns created for every Task.
           default: 1
       description: The number of TaskRuns created for every Task.
@@ -54230,8 +54302,8 @@ components:
             - type: 'null'
           description: Optional non-unique display label of 1-64 Unicode scalar values.
         dataset:
-          $ref: '#/components/schemas/ResourceVersionReference'
-          description: An Eval-owned `agent_invocation` Dataset.
+          $ref: '#/components/schemas/DatasetVersionReference'
+          description: 'A native `taskset` Dataset whose version has `validation_status: succeeded`.'
         inline_dataset:
           $ref: '#/components/schemas/InlineDataset'
           description: Tasks embedded in this definition.
@@ -56541,19 +56613,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Task'
+          minItems: 1
+          maxItems: 1000
           description: The Tasks to run; IDs are unique within the list.
-      description: Agent-invocation Tasks embedded in the definition instead of a published Dataset.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    InlineGrader:
-      anyOf:
-        - $ref: '#/components/schemas/ExactMatchGrader'
-        - $ref: '#/components/schemas/SubstringMatchGrader'
-        - $ref: '#/components/schemas/RegexCheckGrader'
-        - $ref: '#/components/schemas/NumericRangeGrader'
-        - $ref: '#/components/schemas/RubricGrader'
-      description: A grader allowed in a Job version or a Dataset Task.
+      description: |-
+        Agent-invocation Tasks embedded in the definition instead of a published Dataset, validated like
+        a Dataset version; invalid Tasks return `400`.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -56960,7 +57025,7 @@ components:
       description: Identifies how evaluation input items are prepared before evaluation.
     JobGrader:
       anyOf:
-        - $ref: '#/components/schemas/InlineGrader'
+        - $ref: '#/components/schemas/TaskGrader'
         - $ref: '#/components/schemas/CatalogGrader'
       description: 'A grader allowed in a Job version: an inline grader or a catalog grader.'
       x-ms-foundry-meta:
@@ -58333,8 +58398,9 @@ components:
         Creates a `taskset` version. Without `base_version`, supply exactly one of `tasks` or
         `pending_upload_id`. With `base_version`, supply at most one of them, plus optional
         `delete_task_ids`, and change at least one Task: a Task whose `id` matches a base Task replaces
-        it in place, new Tasks follow in order, and deleted IDs are removed. Invalid Task content never
-        returns `400`; it fails the version with `invalid_tasks`.
+        it in place, new Tasks follow in order, and deleted IDs are removed. Invalid inline Tasks or a
+        broken edit rule return `400 invalid_tasks` without creating a version; invalid uploaded Tasks
+        fail the version with `invalid_tasks`.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -88104,11 +88170,11 @@ components:
       properties:
         name:
           type: string
-          description: The resource name.
+          description: The Job name.
         version:
           type: string
           description: The exact version; when omitted, each Run resolves and pins the latest version.
-      description: A named resource and an optional version; an omitted version resolves to the latest at Run creation.
+      description: A Job name and an optional version; an omitted version resolves to the latest at Run creation.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -90766,7 +90832,7 @@ components:
         graders:
           type: array
           items:
-            $ref: '#/components/schemas/InlineGrader'
+            $ref: '#/components/schemas/TaskGrader'
           maxItems: 32
           description: Inline graders that run in addition to the Job's graders.
         constraints:
@@ -90777,6 +90843,17 @@ components:
         and optional Task-specific graders. Unknown fields are invalid. Graders read Task values through
         `{{inputs.*}}`, `{{expected.*}}` and `{{metadata.*}}`, and the agent's answer through
         `{{outputs.text}}` and `{{outputs.data.*}}`.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    TaskGrader:
+      anyOf:
+        - $ref: '#/components/schemas/ExactMatchGrader'
+        - $ref: '#/components/schemas/SubstringMatchGrader'
+        - $ref: '#/components/schemas/RegexCheckGrader'
+        - $ref: '#/components/schemas/NumericRangeGrader'
+        - $ref: '#/components/schemas/RubricGrader'
+      description: An inline grader, allowed in a Dataset Task or a Job version.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -91047,8 +91124,9 @@ components:
           $ref: '#/components/schemas/OpenAI.Error'
           description: |-
             Set when validation fails, with code `invalid_tasks` or `validation_timeout`. `details` holds the
-            first 100 problems in Task order, each with a `param` such as `lines[11].graders[0].actual`,
-            `tasks[3].id` or `delete_task_ids[0]`.
+            first 100 problems in Task order, each with a `param` such as `lines[11].graders[0].actual`; it
+            is empty for `validation_timeout`. A rejected inline create returns the same object as its `400`
+            body, with a `param` such as `tasks[3].id` or `delete_task_ids[0]`.
           readOnly: true
         base_version:
           anyOf:

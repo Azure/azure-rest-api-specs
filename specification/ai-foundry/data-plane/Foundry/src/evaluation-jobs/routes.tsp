@@ -21,7 +21,7 @@ alias EvaluationJobDeleteAcceptedResponse = AcceptedResponse & {
   @header("Location") location: string;
 
   /** Recommended number of seconds to wait before polling. */
-  @header("Retry-After") retry_after?: int32;
+  @header("Retry-After") retry_after: int32;
 };
 
 /** Operations for EvaluationJobs and their immutable versions. */
@@ -29,7 +29,10 @@ alias EvaluationJobDeleteAcceptedResponse = AcceptedResponse & {
 @tag("EvaluationJobs")
 @removed(Versions.v1)
 interface EvaluationJobs {
-  /** Publishes a new immutable version and creates the Job on first publication. */
+  /**
+   * Publishes a new immutable version and creates the Job on first publication. Publishing to a
+   * Job that is being deleted returns `409`; a body over 8 MiB returns `413 content_too_large`.
+   */
   @summary("Create an EvaluationJob version")
   @post
   @route("/evaluation_jobs/{name}/versions")
@@ -49,7 +52,11 @@ interface EvaluationJobs {
     WithEvaluationETag<EvaluationJobVersion>
   >;
 
-  /** Lists Jobs, each with its latest version. */
+  /**
+   * Lists Jobs, each with its latest version, newest first by the Job's `created_at` unless
+   * `order=asc`; Jobs being deleted are omitted. A cursor Job that was deleted between pages
+   * returns `400 invalid_cursor`.
+   */
   @summary("List EvaluationJobs")
   @get
   @list
@@ -61,7 +68,7 @@ interface EvaluationJobs {
     AgentsPagedResult<EvaluationJob>
   >;
 
-  /** Retrieves a Job with its latest version. */
+  /** Retrieves a Job with its latest version; a Job being deleted has `state: deleting` and `Retry-After`. */
   @summary("Get an EvaluationJob")
   @get
   @route("/evaluation_jobs/{name}")
@@ -72,10 +79,14 @@ interface EvaluationJobs {
       /** The Job name. */
       @path name: string;
     },
-    WithEvaluationETag<EvaluationJob>
+    WithEvaluationETag<JobStatusResponse<EvaluationJob>>
   >;
 
-  /** Deletes the Job and all its versions; its Runs are unaffected. */
+  /**
+   * Starts deleting the Job and all its versions; its Runs are unaffected. The Job reads as
+   * `deleting` until removal, then returns `404`. A repeated delete of a deleting Job returns `202`
+   * whatever its `If-Match`. A missing `If-Match` returns `428`; a stale one `412`.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Asynchronous deletion returns 202 with Location and no body."
   @summary("Delete an EvaluationJob")
   @delete
@@ -90,10 +101,10 @@ interface EvaluationJobs {
       /** The Job's current ETag. */
       @header("If-Match") if_match: string;
     },
-    NoContentResponse | EvaluationJobDeleteAcceptedResponse
+    EvaluationJobDeleteAcceptedResponse
   >;
 
-  /** Lists a Job's versions. */
+  /** Lists a Job's versions, newest first. */
   @summary("List EvaluationJob versions")
   @get
   @list
@@ -127,7 +138,10 @@ interface EvaluationJobs {
     WithEvaluationETag<EvaluationJobVersion>
   >;
 
-  /** Deletes one version; `latest` moves to the newest remaining version. */
+  /**
+   * Deletes one version; `latest` moves to the newest remaining version. A missing `If-Match`
+   * returns `428`; a stale one `412`.
+   */
   @summary("Delete an EvaluationJob version")
   @delete
   @route("/evaluation_jobs/{name}/versions/{version}")

@@ -24,7 +24,11 @@ alias EvaluationRunListFilters = {
 @tag("EvaluationRuns")
 @removed(Versions.v1)
 interface EvaluationRuns {
-  /** Creates a Run in `queued` status; an equivalent `Operation-Id` retry returns the original Run with `201`. */
+  /**
+   * Accepts a Run in `queued` status once scheduling is confirmed. An equivalent `Operation-Id`
+   * retry returns the original Run with `202`; the same key with different content returns
+   * `409 idempotency_conflict`. Oversized content returns `413 content_too_large`.
+   */
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Clients poll the Location URL."
   @summary("Create an EvaluationRun")
   @post
@@ -39,7 +43,7 @@ interface EvaluationRuns {
       /** A direct definition or a saved Job reference. */
       @body request: EvaluationRunCreateRequest;
     },
-    CreatedResponse &
+    AcceptedResponse &
       WithEvaluationETag<EvaluationRun> & {
         /** URL to poll for the Run status. */
         @header("Operation-Location") operationLocation: string;
@@ -63,7 +67,7 @@ interface EvaluationRuns {
     WithEvaluationETag<JobStatusResponse<EvaluationRun>>
   >;
 
-  /** Lists Runs in the project, including Runs of deleted Jobs. */
+  /** Lists Runs in the project, newest first by default, including Runs of deleted Jobs. */
   @summary("List EvaluationRuns")
   @get
   @list
@@ -78,7 +82,10 @@ interface EvaluationRuns {
     AgentsPagedResult<EvaluationRun>
   >;
 
-  /** Requests cancellation of a queued or in-progress Run and returns its current `cancelling` or `cancelled` view. */
+  /**
+   * Requests cancellation of a queued or in-progress Run and returns its current `cancelling` or
+   * `cancelled` view; repeating it is `200`. Another terminal Run returns `409 run_already_terminal`.
+   */
   @summary("Cancel an EvaluationRun")
   @post
   @route("/evaluation_runs/{run_id}:cancel")
@@ -92,7 +99,10 @@ interface EvaluationRuns {
     OkResponse & WithEvaluationETag<EvaluationRun>
   >;
 
-  /** Deletes a terminal Run. */
+  /**
+   * Deletes a terminal Run; a nonterminal Run returns `409 run_not_terminal`. A missing, blank or
+   * repeated `If-Match` returns `428`, and a stale one `412`.
+   */
   @summary("Delete an EvaluationRun")
   @delete
   @route("/evaluation_runs/{run_id}")

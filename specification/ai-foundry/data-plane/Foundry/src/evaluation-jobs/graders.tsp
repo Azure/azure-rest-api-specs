@@ -187,7 +187,10 @@ model RubricGrader extends EvaluationGrader {
   judge?: Judge;
 }
 
-/** A grader from the Foundry evaluator catalog, resolved and pinned at Run creation. */
+/**
+ * A grader from the Foundry evaluator catalog, resolved and pinned at Run creation. Its binding to
+ * Task evidence is fixed by the pinned `grader_version`; there is no per-Job `data_mapping`.
+ */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model CatalogGrader extends EvaluationGrader {
   /** The catalog grader type. */
@@ -207,16 +210,13 @@ model CatalogGrader extends EvaluationGrader {
   @maxValue(1)
   pass_threshold?: float64;
 
-  /** Overrides the adapter's standard mapping from evidence templates to the grader's declared inputs. */
-  data_mapping?: Record<string>;
-
   /** Settings that this catalog grader declares. */
   settings?: Record<unknown>;
 }
 
-/** A grader allowed in a Job version or a Dataset Task. */
+/** An inline grader, allowed in a Dataset Task or a Job version. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union InlineGrader {
+union TaskGrader {
   ExactMatchGrader,
   SubstringMatchGrader,
   RegexCheckGrader,
@@ -227,7 +227,7 @@ union InlineGrader {
 /** A grader allowed in a Job version: an inline grader or a catalog grader. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 union JobGrader {
-  InlineGrader,
+  TaskGrader,
   CatalogGrader,
 }
 

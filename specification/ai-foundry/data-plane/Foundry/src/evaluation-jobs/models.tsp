@@ -10,13 +10,23 @@ using TypeSpec.Rest;
 
 namespace Azure.AI.Projects;
 
-/** A named resource and an optional version; an omitted version resolves to the latest at Run creation. */
+/** A Job name and an optional version; an omitted version resolves to the latest at Run creation. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model ResourceVersionReference {
-  /** The resource name. */
+  /** The Job name. */
   name: string;
 
   /** The exact version; when omitted, each Run resolves and pins the latest version. */
+  version?: string;
+}
+
+/** A native Dataset name, as written, and an optional version; an omitted version resolves to the latest succeeded version at Run creation. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model DatasetVersionReference {
+  /** The native Dataset name. */
+  name: string;
+
+  /** The exact version; when omitted, each Run resolves and pins the latest succeeded version. */
   version?: string;
 }
 
@@ -51,10 +61,15 @@ model FoundryAgentEvaluationTarget extends EvaluationTargetDefinition {
   version?: string;
 }
 
-/** Agent-invocation Tasks embedded in the definition instead of a published Dataset. */
+/**
+ * Agent-invocation Tasks embedded in the definition instead of a published Dataset, validated like
+ * a Dataset version; invalid Tasks return `400`.
+ */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model InlineDataset {
   /** The Tasks to run; IDs are unique within the list. */
+  @minItems(1)
+  @maxItems(1000)
   tasks: Task[];
 }
 
@@ -63,6 +78,7 @@ model InlineDataset {
 model EvaluationRepetitions {
   /** TaskRuns created for every Task. */
   @minValue(1)
+  @maxValue(10)
   count: int32 = 1;
 }
 
@@ -70,12 +86,13 @@ model EvaluationRepetitions {
  * What an evaluation runs. It is the Job-version create body and is flattened into the direct
  * Run-create body. Exactly one of `dataset` or `inline_dataset` is required. A field the schema does
  * not define returns `400 invalid_request`; a recognized value that is not yet supported, such as a
- * Later grader feature, returns `400 unsupported_feature`.
+ * Later grader feature, returns `400 unsupported_feature`. A Run over 100,000 TaskRuns returns
+ * `400 too_many_task_runs`.
  */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationDefinition {
-  /** An Eval-owned `agent_invocation` Dataset. */
-  dataset?: ResourceVersionReference;
+  /** A native `taskset` Dataset whose version has `validation_status: succeeded`. */
+  dataset?: DatasetVersionReference;
 
   /** Tasks embedded in this definition. */
   inline_dataset?: InlineDataset;
