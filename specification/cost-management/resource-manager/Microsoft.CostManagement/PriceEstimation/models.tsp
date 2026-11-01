@@ -177,7 +177,7 @@ model EstimateResourceResult {
   @maxValue(99)
   inputIndex: int32;
 
-  /** The validated, default-completed configuration that was priced. Absent only when a catalog failure prevented complete validation. */
+  /** What the server set or changed in the priced configuration. Absent only when a catalog failure prevented complete validation. */
   @visibility(Lifecycle.Read)
   configuration?: EstimateEffectiveConfiguration;
 
@@ -205,7 +205,7 @@ model EstimateResourceResult {
   assumptions: EstimateDiagnostic[];
 }
 
-/** The configuration actually priced for one entry, for display and revision. */
+/** What the server set or changed when completing one entry's configuration, for display and revision. */
 @added(Versions.v2026_10_01_preview)
 model EstimateEffectiveConfiguration {
   /** The supported resource type, in its canonical spelling. */
@@ -216,11 +216,6 @@ model EstimateEffectiveConfiguration {
   @visibility(Lifecycle.Read)
   resourceApiVersion: string;
 
-  /** Decoded resource and usage objects after canonicalization and default completion. Resubmit changes in the typed input encoding. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The decoded configuration is resource-type specific; its schema is published per resource type and API version by the pricing profile discovery service, and it mirrors the typed inputs the caller submitted."
-  @visibility(Lifecycle.Read)
-  inputs: Record<unknown>;
-
   /** JSON Pointers of configuration defaults the server applied to omitted inputs. */
   @visibility(Lifecycle.Read)
   defaultedFields: string[];
@@ -228,6 +223,23 @@ model EstimateEffectiveConfiguration {
   /** JSON Pointers of usage quantities the caller omitted and the server assumed, such as /usage/storedGB. A non-empty list means the price rests on quantities the caller did not state. */
   @visibility(Lifecycle.Read)
   assumedUsageFields: string[];
+
+  /** Every field the server set or changed: defaulted fields, assumed usage quantities and canonicalized spellings. Every other priced value is exactly what the caller submitted. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["field"])
+  appliedValues: EstimateAppliedValue[];
+}
+
+/** One input value the server set or changed, in the same typed encoding as request inputs. */
+@added(Versions.v2026_10_01_preview)
+model EstimateAppliedValue {
+  /** JSON Pointer of the field within the decoded resource and usage inputs, such as /usage/accessTier. */
+  @visibility(Lifecycle.Read)
+  field: string;
+
+  /** The value the server priced for this field. */
+  @visibility(Lifecycle.Read)
+  value: EstimateValue;
 }
 
 /** A server-defined billable component, such as compute, licensing, disk capacity or bandwidth. */

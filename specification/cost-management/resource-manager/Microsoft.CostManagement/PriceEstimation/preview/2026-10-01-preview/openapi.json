@@ -151,6 +151,26 @@
     }
   },
   "definitions": {
+    "EstimateAppliedValue": {
+      "type": "object",
+      "description": "One input value the server set or changed, in the same typed encoding as request inputs.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "JSON Pointer of the field within the decoded resource and usage inputs, such as /usage/accessTier.",
+          "readOnly": true
+        },
+        "value": {
+          "$ref": "#/definitions/EstimateValue",
+          "description": "The value the server priced for this field.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "field",
+        "value"
+      ]
+    },
     "EstimateArrayValue": {
       "type": "object",
       "description": "A complete ordered array; individual elements cannot be supplied through separate paths.",
@@ -339,7 +359,7 @@
     },
     "EstimateEffectiveConfiguration": {
       "type": "object",
-      "description": "The configuration actually priced for one entry, for display and revision.",
+      "description": "What the server set or changed when completing one entry's configuration, for display and revision.",
       "properties": {
         "resourceType": {
           "type": "string",
@@ -349,12 +369,6 @@
         "resourceApiVersion": {
           "type": "string",
           "description": "The supported source resource API version.",
-          "readOnly": true
-        },
-        "inputs": {
-          "type": "object",
-          "description": "Decoded resource and usage objects after canonicalization and default completion. Resubmit changes in the typed input encoding.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "defaultedFields": {
@@ -372,14 +386,25 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "appliedValues": {
+          "type": "array",
+          "description": "Every field the server set or changed: defaulted fields, assumed usage quantities and canonicalized spellings. Every other priced value is exactly what the caller submitted.",
+          "items": {
+            "$ref": "#/definitions/EstimateAppliedValue"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "field"
+          ]
         }
       },
       "required": [
         "resourceType",
         "resourceApiVersion",
-        "inputs",
         "defaultedFields",
-        "assumedUsageFields"
+        "assumedUsageFields",
+        "appliedValues"
       ]
     },
     "EstimateNamedValue": {
@@ -498,7 +523,7 @@
         },
         "configuration": {
           "$ref": "#/definitions/EstimateEffectiveConfiguration",
-          "description": "The validated, default-completed configuration that was priced. Absent only when a catalog failure prevented complete validation.",
+          "description": "What the server set or changed in the priced configuration. Absent only when a catalog failure prevented complete validation.",
           "readOnly": true
         },
         "monthly": {

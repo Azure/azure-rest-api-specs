@@ -197,38 +197,35 @@
             "configuration": {
               "resourceType": "Microsoft.Compute/virtualMachines",
               "resourceApiVersion": "2024-07-01",
-              "inputs": {
-                "resource": {
-                  "location": "eastus",
-                  "properties": {
-                    "hardwareProfile": {
-                      "vmSize": "Standard_D2s_v5"
-                    },
-                    "storageProfile": {
-                      "osDisk": {
-                        "osType": "Linux"
-                      }
-                    },
-                    "licenseType": "None"
-                  }
-                },
-                "usage": {
-                  "purchaseOption": "PayAsYouGo",
-                  "instanceCount": 1,
-                  "hoursPerMonth": 730,
-                  "bandwidth": [],
-                  "software": {
-                    "family": "OSOnly",
-                    "purchaseOption": "LicenseIncluded"
-                  }
-                }
-              },
               "defaultedFields": [
                 "/resource/properties/licenseType",
                 "/usage/software/family",
                 "/usage/software/purchaseOption"
               ],
-              "assumedUsageFields": []
+              "assumedUsageFields": [],
+              "appliedValues": [
+                {
+                  "field": "/resource/properties/licenseType",
+                  "value": {
+                    "kind": "string",
+                    "value": "None"
+                  }
+                },
+                {
+                  "field": "/usage/software/family",
+                  "value": {
+                    "kind": "string",
+                    "value": "OSOnly"
+                  }
+                },
+                {
+                  "field": "/usage/software/purchaseOption",
+                  "value": {
+                    "kind": "string",
+                    "value": "LicenseIncluded"
+                  }
+                }
+              ]
             },
             "monthly": {
               "status": "Complete",
@@ -262,25 +259,18 @@
             "configuration": {
               "resourceType": "Microsoft.Compute/disks",
               "resourceApiVersion": "2024-03-02",
-              "inputs": {
-                "resource": {
-                  "location": "eastus",
-                  "sku": {
-                    "name": "Premium_LRS"
-                  },
-                  "properties": {
-                    "diskSizeGB": 128
-                  }
-                },
-                "usage": {
-                  "count": 1,
-                  "purchaseOption": "PayAsYouGo",
-                  "hoursPerMonth": 730
-                }
-              },
               "defaultedFields": [],
               "assumedUsageFields": [
                 "/usage/hoursPerMonth"
+              ],
+              "appliedValues": [
+                {
+                  "field": "/usage/hoursPerMonth",
+                  "value": {
+                    "kind": "number",
+                    "value": 730
+                  }
+                }
               ]
             },
             "monthly": {
