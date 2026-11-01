@@ -183,8 +183,9 @@ model EndpointEvaluatorTraceInput {
   @doc("Span attribute name prefixes to include. When omitted, all attributes are included.")
   attribute_allowlist?: string[];
 
-  @doc("Whether to include annotations attached to the spans, such as human feedback. Defaults to `false`.")
-  include_annotations?: boolean = false;
+  @doc("Names of span events to send with the spans, such as human feedback or expected-output events. When omitted, no events are sent.")
+  @maxItems(20)
+  event_names?: string[];
 }
 
 @doc("Contract version for an endpoint-based evaluator.")

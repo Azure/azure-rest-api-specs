@@ -48122,10 +48122,12 @@ components:
           items:
             type: string
           description: Span attribute name prefixes to include. When omitted, all attributes are included.
-        include_annotations:
-          type: boolean
-          description: Whether to include annotations attached to the spans, such as human feedback. Defaults to `false`.
-          default: false
+        event_names:
+          type: array
+          items:
+            type: string
+          maxItems: 20
+          description: Names of span events to send with the spans, such as human feedback or expected-output events. When omitted, no events are sent.
       description: Settings for sending OpenTelemetry spans to an endpoint-based evaluator.
     EntraAuthorizationScheme:
       type: object
