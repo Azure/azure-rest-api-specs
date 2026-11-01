@@ -173,6 +173,13 @@ alias VoiceConversationItemPersistence = {
   OpenAI.RealtimeConversationItemMessageUser,
   {
     ...VoiceConversationItemPersistence,
+
+    @doc("""
+      `true` when `speech_start_detection` rejected this speech as a backchannel, such as "mm-hm": it did not
+      interrupt the agent and got no response. Omitted otherwise.
+      """)
+    @visibility(Lifecycle.Read)
+    backchannel?: boolean,
   }
 );
 

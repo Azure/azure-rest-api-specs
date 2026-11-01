@@ -1,0 +1,121 @@
+{
+  "title": "Agents_CreateVoiceAgent_SpeechStartDetection",
+  "operationId": "Agents_createAgent_Agents_createAgentFromCode",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "name": "support-dynamic-vad-agent",
+    "description": "A support agent that keeps speaking when the caller says a backchannel such as \"okay\".",
+    "definition": {
+      "kind": "voice",
+      "model_type": "managed",
+      "model": "gpt-4.1",
+      "instructions": "Help callers with their support requests.",
+      "audio": {
+        "input": {
+          "noise_reduction": {
+            "type": "azure_deep_noise_suppression"
+          },
+          "turn_detection": {
+            "type": "azure_semantic_vad",
+            "threshold": 0.5,
+            "silence_duration_ms": 500,
+            "interrupt_response": true,
+            "speech_start_detection": {
+              "while_assistant_speaking": {
+                "num_words": 2,
+                "acknowledgement_phrases": [
+                  "okay",
+                  "yeah",
+                  "i see"
+                ],
+                "interruption_phrases": [
+                  "stop",
+                  "wait"
+                ]
+              },
+              "while_assistant_not_speaking": {
+                "num_words": 1
+              }
+            }
+          },
+          "transcription": {
+            "model": "azure-speech-streaming",
+            "language": "en-US"
+          }
+        },
+        "output": {
+          "voice": "en-US-AvaMultilingualNeural",
+          "voice_type": "azure-standard",
+          "voice_locale": "en-US"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "agent",
+        "id": "agent_support_dynamic_vad",
+        "name": "support-dynamic-vad-agent",
+        "state": "enabled",
+        "configuration_state": "enabled",
+        "versions": {
+          "latest": {
+            "metadata": null,
+            "object": "agent.version",
+            "id": "agent_support_dynamic_vad:1",
+            "name": "support-dynamic-vad-agent",
+            "version": "1",
+            "created_at": 1793404800,
+            "definition": {
+              "kind": "voice",
+              "model_type": "managed",
+              "model": "gpt-4.1",
+              "instructions": "Help callers with their support requests.",
+              "audio": {
+                "input": {
+                  "noise_reduction": {
+                    "type": "azure_deep_noise_suppression"
+                  },
+                  "turn_detection": {
+                    "type": "azure_semantic_vad",
+                    "threshold": 0.5,
+                    "silence_duration_ms": 500,
+                    "interrupt_response": true,
+                    "speech_start_detection": {
+                      "while_assistant_speaking": {
+                        "num_words": 2,
+                        "acknowledgement_phrases": [
+                          "okay",
+                          "yeah",
+                          "i see"
+                        ],
+                        "interruption_phrases": [
+                          "stop",
+                          "wait"
+                        ]
+                      },
+                      "while_assistant_not_speaking": {
+                        "num_words": 1
+                      }
+                    }
+                  },
+                  "transcription": {
+                    "model": "azure-speech-streaming",
+                    "language": "en-US"
+                  }
+                },
+                "output": {
+                  "voice": "en-US-AvaMultilingualNeural",
+                  "voice_type": "azure-standard",
+                  "voice_locale": "en-US"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
