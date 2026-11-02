@@ -67,6 +67,7 @@ input-file:
   - preview/2026-11-01-preview/dataWarehouseUserActivities.json
   - preview/2026-11-01-preview/deletedServers.json
   - preview/2026-11-01-preview/distributedAvailabilityGroups.json
+  - preview/2026-11-01-preview/distributedAvailabilityGroupsDatabaseOperations.json
   - preview/2026-11-01-preview/elasticPoolOperations.json
   - preview/2026-11-01-preview/elasticPools.json
   - preview/2026-11-01-preview/encryptionProtectors.json

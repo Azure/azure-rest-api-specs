@@ -501,6 +501,10 @@ using Microsoft.Sql;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DistributedAvailabilityGroup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps client flattening consistent with the parent DistributedAvailabilityGroup resource."
+@@Legacy.flattenProperty(
+  DistributedAvailabilityGroupDatabaseOperation.properties
+);
 
 @@clientName(ElasticPools.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ElasticPools.update::parameters.properties, "parameters");
