@@ -1157,23 +1157,76 @@ namespace Azure.AI.Projects {
 // compiled with targeted OPENAI001 suppressions instead of a package-wide one. No attribute is
 // emitted for these: their declarations live in the OpenAI library.
 // ============================================================================
-@@TypeSpec.HttpClient.experimental(OpenAI.OutputItem, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.InputItem, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.ItemMessage, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.Tool, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.Response, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.ResponseError, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.Annotation, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.ComputerAction, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.ConversationParam, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.ResponseUsage, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.OutputItem,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.InputItem,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ItemMessage,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.Tool,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.Response,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ResponseError,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.Annotation,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ComputerAction,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ConversationParam,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ResponseUsage,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
 
 // Public models that expose or derive from those OpenAI types forward the same diagnostic ID,
 // so consumers opt in to the OpenAI experiment rather than to a separate AgentServer one.
-@@TypeSpec.HttpClient.experimental(OpenAI.CustomToolCallResource, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.CustomToolCallOutputResource, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.CompactResource, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.ItemFieldAdditionalTools, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.ItemFieldComputerToolCall, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.ItemFieldToolSearchOutput, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
-@@TypeSpec.HttpClient.experimental(OpenAI.MessageContentOutputTextContent, #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" });
+// Template instances (AgentsPagedResult<OpenAI.OutputItem>) and anonymous operation responses
+// cannot be targeted by augment decorators; their members still get targeted suppressions.
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.CustomToolCallResource,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.CustomToolCallOutputResource,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.CompactResource,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ItemFieldAdditionalTools,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ItemFieldComputerToolCall,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ItemFieldToolSearchOutput,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.MessageContentOutputTextContent,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
