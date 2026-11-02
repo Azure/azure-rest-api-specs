@@ -3922,6 +3922,7 @@ model UpgradePolicy {
   automaticOSUpgradePolicy?: AutomaticOsUpgradePolicy;
 
   @doc("The configuration parameters used while performing a rolling upgrade.")
+  @typeChangedFrom(Versions.v2026_10_01, Historical.RollingUpgradePolicy)
   rollingUpgradePolicy?: RollingUpgradePolicy;
 }
 
@@ -3946,6 +3947,7 @@ model AutomaticOsUpgradePolicy {
 }
 
 @doc("The configuration parameters used while performing a rolling upgrade.")
+@added(Versions.v2026_10_01)
 model RollingUpgradePolicy {
   @doc("Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto. Auto placement is supported starting with API version 2026-10-01.")
   enableCrossZoneUpgrade?: boolean;
@@ -3967,6 +3969,19 @@ model RollingUpgradePolicy {
 
   @doc("Rollback failed instances to previous model if the Rolling Upgrade policy is violated.")
   rollbackFailedInstancesOnPolicyBreach?: boolean;
+}
+
+namespace Historical {
+  @doc("The configuration parameters used while performing a rolling upgrade.")
+  @removed(Versions.v2026_10_01)
+  model RollingUpgradePolicy {
+    ...Azure.Batch.RollingUpgradePolicy;
+  }
+
+  @@doc(
+    RollingUpgradePolicy.enableCrossZoneUpgrade,
+    "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal."
+  );
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"

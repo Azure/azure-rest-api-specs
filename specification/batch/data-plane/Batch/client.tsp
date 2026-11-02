@@ -302,6 +302,16 @@ interface BatchClient {
   "isCrossZoneUpgradeEnabled",
   "csharp"
 );
+@@clientName(
+  Azure.Batch.Historical.RollingUpgradePolicy,
+  "RollingUpgradePolicy",
+  "autorest"
+);
+@@clientNamespace(
+  Azure.Batch.Historical.RollingUpgradePolicy,
+  "Azure.Batch",
+  "go,javascript"
+);
 @@clientName(Azure.Batch.BatchTaskGroup.value, "tasks", "csharp");
 @@clientName(Azure.Batch.BatchNode.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchTaskInfo.taskUrl, "taskUri", "csharp");
