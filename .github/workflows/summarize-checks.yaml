@@ -1,6 +1,19 @@
 name: "Summarize Checks"
 
 on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
+  # ARM signoff only: Universal dispatches Update Labels, and a run started by a GITHUB_TOKEN
+  # dispatch does not fire the "Update Labels" workflow_run trigger below when it completes. That
+  # Update Labels run dispatches this one instead. All other routes are unchanged.
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number to summarize"
+        required: true
+        type: string
+      head_sha:
+        description: "PR head SHA evaluated by the dispatching Update Labels run"
+        required: true
+        type: string
   workflow_run:
     workflows:
       - "Breaking Change(Cross-Version) - Set Status"
@@ -16,6 +29,7 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
       - "Swagger SemanticValidation - Set Status"
       - "TypeSpec Suppressions - Set Status"
       - "TypeSpec Validation"
+      - "Spec Change Policies"
       - "Update Labels"
     types:
       - completed
@@ -31,16 +45,23 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
       - converted_to_draft
 
 permissions:
-  actions: read # to inspect workflow_run metadata
   contents: read # for actions/checkout
-  checks: read # for octokit.rest.checks.listForRef
-  statuses: write # for octokit.rest.repos.getCombinedStatusForRef and octokit.rest.repos.createCommitStatus
-  issues: write # to post comments via the Issues API
-  pull-requests: write # to post comments via the Pull Requests API
 
 jobs:
   run-summarize-checks:
+    permissions:
+      actions: read
+      contents: read
+      checks: read
+      statuses: write
+      issues: write
+      pull-requests: write
+    outputs:
+      issue_number: ${{ steps.summarize-checks.outputs.issue_number }}
+      head_sha: ${{ steps.summarize-checks.outputs.head_sha }}
+      arm_review_ready: ${{ steps.summarize-checks.outputs.arm_review_ready }}
     if: >-
+      github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
       (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped')
     name: "Summarize Checks"
@@ -86,7 +107,7 @@ jobs:
       # May be used by downstream workflows
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-checks.outputs.summary }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: job-summary
           path: ${{ steps.summarize-checks.outputs.summary }}
@@ -109,3 +130,32 @@ jobs:
         with:
           name: head-sha
           value: ${{ steps.summarize-checks.outputs.head_sha }}
+
+  dispatch-arm-review:
+    needs: run-summarize-checks
+    if: needs.run-summarize-checks.outputs.arm_review_ready == 'true'
+    runs-on: ubuntu-slim
+    permissions:
+      actions: write
+      contents: read
+      pull-requests: write # reserve the PR-level initial-review marker
+      statuses: write
+    concurrency:
+      group: arm-initial-review-dispatch-${{ needs.run-summarize-checks.outputs.issue_number }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+      - name: Dispatch initial ARM review
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          ARM_REVIEW_PR_NUMBER: ${{ needs.run-summarize-checks.outputs.issue_number }}
+          ARM_REVIEW_HEAD_SHA: ${{ needs.run-summarize-checks.outputs.head_sha }}
+        with:
+          script: |
+            const { default: dispatchInitialArmReview } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-review-dispatch.ts');
+            await dispatchInitialArmReview({ github, context, core });

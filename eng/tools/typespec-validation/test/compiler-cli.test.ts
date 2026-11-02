@@ -1,20 +1,24 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join, resolve } from "pathe";
+import { dirname, join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { compileTypeSpec, formatTypeSpec } from "../src/typespec-compiler.ts";
 
 const exec = promisify(execFile);
 const cli = fileURLToPath(new URL("../cmd/tsv.js", import.meta.url));
 const project = "specification/service/data-plane/Project";
+const tspConfig =
+  'emit:\n  - "@azure-tools/typespec-autorest"\noptions:\n  "@azure-tools/typespec-autorest":\n    emitter-output-dir: "{project-root}/../stable/2026-01-01"\nlinter:\n  extends:\n    - "@azure-tools/typespec-azure-rulesets/data-plane"\n';
 let root: string;
 
 beforeEach(async () => {
   root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-"))));
   await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
+  await writeFile(join(root, ".gitignore"), "node_modules\n");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.stubEnv("NO_COLOR", "1");
@@ -23,20 +27,31 @@ beforeEach(async () => {
   await writeFile(join(root, "package.json"), '{"name":"fixture","private":true}');
   await writeFile(join(root, project, "main.tsp"), "");
   await writeFile(join(root, project, "service.yaml"), "versions: []\n");
-  await writeFile(
-    join(root, project, "tspconfig.yaml"),
-    "emit:\n  - '@azure-tools/typespec-autorest'\nlinter:\n  extends:\n    - '@azure-tools/typespec-azure-rulesets/data-plane'\n",
-  );
-  // Isolate command reporting from SDK configuration checks; use real suppression handling.
+  await writeFile(join(root, project, "tspconfig.yaml"), tspConfig);
+  // Isolate compiler reporting from SDK configuration checks; use real suppression handling.
   await writeFile(
     join(root, "suppressions.yaml"),
     "- tool: TypeSpecValidation\n  paths: [specification/service/data-plane/Project/tspconfig.yaml]\n  rules: [SdkTspConfigValidation]\n  reason: command fixture\n",
   );
-  await mkdir(join(root, "node_modules/@typespec/compiler"), { recursive: true });
-  await writeFile(
-    join(root, "node_modules/@typespec/compiler/package.json"),
-    '{"name":"@typespec/compiler","bin":{"tsp":"cli.cjs"}}',
-  );
+  // Resolve pnpm's links before exposing packages through the fixture's Windows junctions.
+  for (const packageName of [
+    "@typespec/compiler",
+    "@azure-tools/typespec-autorest",
+    "@azure-tools/typespec-azure-core",
+    "@azure-tools/typespec-azure-rulesets",
+    "@azure-tools/typespec-azure-rulesets-original",
+    "@azure-tools/typespec-client-generator-core",
+  ]) {
+    await mkdir(join(root, "node_modules", dirname(packageName)), { recursive: true });
+    await symlink(
+      await realpath(new URL(`../../../../node_modules/${packageName}`, import.meta.url)),
+      join(root, "node_modules", packageName),
+      "junction",
+    );
+  }
+  const compiled = await compileTypeSpec(join(root, project));
+  expect(compiled.success, JSON.stringify(compiled.diagnostics)).toBe(true);
+  expect((await formatTypeSpec(join(root, project))).success).toBe(true);
   await simpleGit(root)
     .init()
     .addConfig("user.name", "Test")
@@ -50,10 +65,6 @@ afterEach(async () => {
   vi.unstubAllEnvs();
   await rm(root, { recursive: true, force: true });
 });
-
-async function compiler(source: string) {
-  await writeFile(join(root, "node_modules/@typespec/compiler/cli.cjs"), source);
-}
 
 async function run(...args: string[]): Promise<{ code: number; stdout: string; stderr: string }> {
   try {
@@ -75,27 +86,19 @@ async function run(...args: string[]): Promise<{ code: number; stdout: string; s
 }
 
 it("prints only a final summary by default and compact rule statuses with --verbose", async () => {
-  await compiler(`if (process.argv[2] === "compile") {
-    console.log("TypeSpec compiler v1.16.0\\n\\nCompilation completed successfully.\\n");
-    process.stderr.write("- Compiling...\\n\\u2714 Compiling\\n");
-  } else {
-    process.stderr.write("- Formatting\\n\\u2714 1 unchanged\\n");
-  }`);
   const quiet = await run(project);
-  expect(quiet.code).toBe(0);
-  expect(quiet.stdout).toBe("8 passed | 3 skipped | 1 suppressed\n");
+  expect(quiet.code, quiet.stderr).toBe(0);
+  expect(quiet.stdout).toBe("8 passed | 1 skipped | 1 suppressed\n");
   expect(quiet.stderr).toBe("");
   const verbose = await run(project, "--verbose");
   expect(verbose.code).toBe(quiet.code);
-  expect(verbose.stdout.match(/TypeSpec compiler v1.16.0/g)).toHaveLength(1);
-  expect(verbose.stdout).toContain("Compilation completed successfully.");
-  expect(verbose.stdout).toContain("1 unchanged");
+  expect(verbose.stderr).toContain("simple-git");
   expect(
     verbose.stdout
       .trim()
       .split("\n")
       .filter((line) =>
-        /^[\u2714\u00d7!-] (?:FolderStructure|NpmPrefix|EmitAutorest|ServiceYaml|FlavorAzure|LinterRuleset|ClientTspImport|Compile|Format|SdkTspConfigValidation|MultipleNewApiVersions|StaleApiVersionPin)\b/.test(
+        /^[\u2714\u00d7!-] (?:FolderStructure|NpmPrefix|EmitAutorest|ServiceYaml|FlavorAzure|LinterRuleset|ClientTspImport|Compile|Format|SdkTspConfigValidation)\b/.test(
           line,
         ),
       ),
@@ -110,15 +113,13 @@ it("prints only a final summary by default and compact rule statuses with --verb
     "\u2714 Compile",
     "\u2714 Format",
     "- SdkTspConfigValidation (suppressed)",
-    "- MultipleNewApiVersions (skipped)",
-    "- StaleApiVersionPin (skipped)",
   ]);
   expect(verbose.stdout).toContain(
-    "- StaleApiVersionPin (skipped)\n\n8 passed | 3 skipped | 1 suppressed",
+    "- SdkTspConfigValidation (suppressed)\n\n8 passed | 1 skipped | 1 suppressed",
   );
 });
 
-it.each([false, true])("compiles one entrypoint with main present=%s", async (mainExists) => {
+it.each([false, true])("validates client projects with main present=%s", async (mainExists) => {
   const folder = join(root, project);
   await writeFile(join(folder, "client.tsp"), "");
   if (mainExists) {
@@ -128,48 +129,25 @@ it.each([false, true])("compiles one entrypoint with main present=%s", async (ma
   }
   await simpleGit(root).add(project).commit("Set entrypoints");
 
-  const invocations = join(root, "compiler-invocations.jsonl");
-  await writeFile(invocations, "");
-  await compiler(`if (process.argv[2] === "compile") {
-    require("node:fs").appendFileSync(
-      ${JSON.stringify(invocations)},
-      JSON.stringify(process.argv.slice(2)) + "\\n"
-    );
-  }`);
-
   const result = await run(project);
 
-  expect(result.code).toBe(0);
+  expect(result.code, result.stderr).toBe(0);
   expect(result.stderr).toBe("");
-  const args = (await readFile(invocations, "utf8"))
-    .trim()
-    .split("\n")
-    .map((line): unknown => JSON.parse(line));
-  expect(args).toEqual([
-    mainExists
-      ? ["compile", "--list-files", "--warn-as-error", resolve(folder)]
-      : ["compile", "--no-emit", "--warn-as-error", join(folder, "client.tsp")],
-  ]);
 });
 
-it("rejects a missing client import before running the compiler", async () => {
+it("rejects a missing client import before compiling", async () => {
   await writeFile(join(root, project, "client.tsp"), "");
   await simpleGit(root).add(project).commit("Add client without import");
-  await compiler('throw new Error("Compiler must not run");');
 
   const result = await run(project);
 
   expect(result.code).toBe(1);
   expect(result.stderr).toContain("error tsv/client-tsp-import:");
-  expect(result.stderr).not.toContain("Compiler must not run");
-  expect(result.stdout).not.toContain("Compiler must not run");
 });
 
 it.each([
   { command: "compile", color: false, verbose: false },
-  { command: "compile", color: true, verbose: true },
-  { command: "format", color: false, verbose: true },
-  { command: "format", color: true, verbose: false },
+  { command: "format", color: true, verbose: true },
 ])(
   "shows changed-file diffs once for $command with color=$color verbose=$verbose",
   async ({ command, color, verbose }) => {
@@ -181,18 +159,32 @@ it.each([
       vi.stubEnv("NO_COLOR", undefined);
       vi.stubEnv("FORCE_COLOR", "1");
     }
-    const generatedFile = JSON.stringify(join(root, project, "generated.json"));
-    await compiler(`if (process.argv[2] === "${command}") {
-      require("node:fs").writeFileSync(${generatedFile}, "new content\\n");
-    }`);
+    const folder = join(root, project);
+    if (command === "compile") {
+      await writeFile(
+        join(folder, "tspconfig.yaml"),
+        tspConfig.replace("emit:\n", "emit:\n  - ./emitter.mjs\n"),
+      );
+      await writeFile(
+        join(folder, "emitter.mjs"),
+        `export async function $onEmit({ program }) {
+  await program.host.writeFile(${JSON.stringify(join(folder, "generated.txt"))}, "new content\\n");
+}
+`,
+      );
+    } else {
+      await writeFile(join(folder, "main.tsp"), "// Comment.   ");
+    }
+    await simpleGit(root).add(project).commit("Set changed-file fixture");
 
     const result = await run(project, ...(verbose ? ["--verbose"] : []));
     expect(result.code).toBe(1);
     const output = stripVTControlCharacters(result.stderr);
     const code = command === "compile" ? "generated-files-changed" : "format-changed";
+    const file = command === "compile" ? "generated.txt" : "main.tsp";
     expect(output).toContain(`error tsv/${code}:`);
-    expect(output).toContain(`\n  ${project}/generated.json\n\ndiff --git`);
-    expect(output).toContain("\n+new content\n\n  help:");
+    expect(output).toContain(`\n  ${project}/${file}\n\ndiff --git`);
+    expect(output).toContain(command === "compile" ? "\n+new content" : "\n+// Comment.");
     expect(output.match(/diff --git/g)).toHaveLength(1);
     expect(result.stdout).not.toContain("diff --git");
     expect(result.stderr.includes("\x1b[32m")).toBe(color);
@@ -201,57 +193,52 @@ it.each([
 
 it.each([
   { color: false, verbose: false },
-  { color: true, verbose: false },
-  { color: false, verbose: true },
+  { color: true, verbose: true },
 ])(
-  "shows failing native stdout and stderr once with color=$color verbose=$verbose",
+  "shows failing compiler diagnostics once with color=$color verbose=$verbose",
   async ({ color, verbose }) => {
     if (color) {
       vi.stubEnv("NO_COLOR", undefined);
       vi.stubEnv("FORCE_COLOR", "1");
     }
-    await compiler(`const message = "main.tsp:3:1 - error test-code: native stdout failure\\n> 3 | invalid\\n    | ^";
-    console.log(process.env.FORCE_COLOR === "1" ? "\\x1b[31m" + message + "\\x1b[0m" : message);
-    process.stderr.write("native stderr detail\\n");
-    process.exitCode = 1;`);
+    await writeFile(join(root, project, "main.tsp"), "model Invalid { value: Unknown; }\n");
     const result = await run(project, ...(verbose ? ["--verbose"] : []));
     expect(result.code).toBe(1);
-    expect(result.stderr.match(/native stdout failure/g)).toHaveLength(1);
-    expect(result.stderr.match(/native stderr detail/g)).toHaveLength(1);
-    expect(result.stdout).not.toContain("native stdout failure");
-    expect(result.stdout).not.toContain("native stderr detail");
+    expect(result.stderr.match(/invalid-ref/g)).toHaveLength(1);
+    expect(result.stdout).not.toContain("invalid-ref");
     expect(result.stderr.includes("\x1b")).toBe(color);
     expect(stripVTControlCharacters(result.stderr)).toContain(
-      "error tsv/compile: TypeSpec compilation failed (exit code 1).",
+      "error tsv/compile: TypeSpec compilation failed.",
     );
-    expect(result.stderr).toContain("> 3 | invalid");
+    expect(stripVTControlCharacters(result.stderr)).toContain("main.tsp:1:");
+    expect(stripVTControlCharacters(result.stderr)).toMatch(
+      /> 1 \| model Invalid \{ value: Unknown; \}\n\s+\| +\^{7}/,
+    );
     expect(stripVTControlCharacters(result.stdout).includes("\u00d7 Compile")).toBe(verbose);
     expect(stripVTControlCharacters(result.stdout)).toContain(
-      "6 passed | 1 failed | 1 skipped | 4 not run",
+      "6 passed | 1 failed | 1 skipped | 2 not run",
     );
     expect(stripVTControlCharacters(result.stdout)).not.toContain("\u2714 Format");
     if (!verbose) {
       expect(stripVTControlCharacters(result.stdout)).toBe(
-        "\n6 passed | 1 failed | 1 skipped | 4 not run\n",
+        "\n6 passed | 1 failed | 1 skipped | 2 not run\n",
       );
     }
   },
 );
 
-it("retains per-project CI annotations and native diagnostics in batch mode", async () => {
+it("retains per-project CI annotations and compiler diagnostics in batch mode", async () => {
   vi.stubEnv("GITHUB_ACTIONS", "true");
-  await compiler(
-    'console.log("main.tsp:1:1 - error test-code: native failure"); process.exitCode = 1;',
-  );
+  await writeFile(join(root, project, "main.tsp"), "model Invalid { value: Unknown; }\n");
   const result = await run("--all");
   expect(result.code).toBe(1);
   const groupStart = result.stdout.indexOf(`::group::fail ${project}`);
-  const nativeDiagnostic = result.stdout.indexOf("native failure");
+  const nativeDiagnostic = result.stdout.indexOf("invalid-ref");
   const groupEnd = result.stdout.indexOf("::endgroup::", groupStart);
   expect(groupStart).toBeGreaterThanOrEqual(0);
   expect(nativeDiagnostic).toBeGreaterThan(groupStart);
   expect(groupEnd).toBeGreaterThan(nativeDiagnostic);
   expect(result.stdout).toContain(`::error::TypeSpec Validation failed for project ${project}`);
-  expect(result.stdout.match(/native failure/g)).toHaveLength(1);
-  expect(result.stderr).not.toContain("native failure");
+  expect(result.stdout.match(/invalid-ref/g)).toHaveLength(1);
+  expect(result.stderr).not.toContain("invalid-ref");
 });

@@ -48,6 +48,7 @@ union VoiceAgentHandoffReasoningEffort {
 @minValue(1)
 scalar VoiceAgentHandoffMaxOutputTokenCount extends int32;
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The maximum output-token count or the literal `inf` for a handoff node.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 union VoiceAgentHandoffMaxOutputTokens {

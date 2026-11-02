@@ -39,6 +39,7 @@ union VoiceAgentSessionIncludeOption {
   file_search_call_results: "file_search_call.results",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The maximum output-token count or the literal `inf`.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentMaxOutputTokens {
@@ -174,6 +175,10 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Optional subagent configuration. Omit `subagent_type` or set it to `delegate` for delegated background specialists; inline voice subagents require `subagent_type: inline`.")
   subagent_config?: VoiceAgentSubagentConfig;
 
+  @doc("Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  post_call?: VoiceAgentPostCallConfig;
+
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
@@ -264,6 +269,72 @@ union VoiceAgentSoundscapeSound {
   ding2: "ding2",
 }
 
+@doc("Post-call delivery configuration.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCallConfig {
+  @doc("The destinations to notify.")
+  @minItems(1)
+  @maxItems(10)
+  destinations: VoiceAgentPostCallDestination[];
+
+  @doc("Additional content to include in each delivery. The transcript is always delivered. `audio` is not supported in this preview; the service rejects it when the agent version is saved.")
+  include?: VoiceAgentPostCallIncludeOption[];
+}
+
+@doc("The type of a post-call destination.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentPostCallDestinationType {
+  string,
+
+  @doc("An Event Grid connection.")
+  event_grid: "event_grid",
+
+  @doc("A routine.")
+  routine: "routine",
+}
+
+@doc("A post-call destination.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCallDestination {
+  @doc("The destination type.")
+  type: VoiceAgentPostCallDestinationType;
+}
+
+@doc("An Event Grid connection that receives post-call events.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentEventGridPostCallDestination
+  extends VoiceAgentPostCallDestination {
+  type: VoiceAgentPostCallDestinationType.event_grid;
+
+  @doc("The name of the Event Grid connection.")
+  @minLength(1)
+  @example("post-call-events")
+  connection_name: string;
+}
+
+@doc("A routine that is dispatched with the post-call event.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentRoutinePostCallDestination
+  extends VoiceAgentPostCallDestination {
+  type: VoiceAgentPostCallDestinationType.routine;
+
+  @doc("The name of the routine.")
+  @minLength(1)
+  @maxLength(128)
+  @example("archive")
+  name: string;
+}
+
+@doc("Content that can be included in a post-call delivery.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentPostCallIncludeOption {
+  string,
+
+  @doc("A URL to the merged call recording. Not supported in this preview: the service rejects `audio` when the agent version is saved.")
+  audio: "audio",
+}
+
 @doc("The subagent configuration mode. Additional modes may be added over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSubagentType {
@@ -276,6 +347,7 @@ union VoiceAgentSubagentType {
   inline: "inline",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve legacy delegate payloads without a discriminator and the existing API and SDK union representation."
 @doc("Configuration for delegated background specialists or inline voice subagents. Existing delegate configurations may omit `subagent_type`; inline configurations must explicitly select `inline`.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -472,6 +544,7 @@ model VoiceAgentFunctionTool extends VoiceAgentTool {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Tool choice may be a mode, a forced function, or an MCP tool."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("Tool-selection behavior for a voice agent.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -1222,6 +1295,7 @@ model GenerateVoiceAgentRequest {
   draft?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The kind-specific inputs for generating and creating an agent.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)

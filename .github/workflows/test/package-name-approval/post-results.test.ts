@@ -1,18 +1,20 @@
-import { describe, expect, it, vi } from "vitest";
-import {
+import { unlink } from "node:fs/promises";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import postResults, {
+  buildCommentBody,
   getApprovers,
   parseCommentTable,
   resolveResetApprovers,
   shouldRemoveStaleMgmtLabel,
 } from "../../src/package-name-approval/post-results.ts";
-import { createApproversConfig } from "../../src/package-name-approval/approvers.ts";
-import { createMockGithub } from "../mocks.ts";
-
-// Import only the pure functions we can test without heavy mocking
-// buildCommentBody and getApprovers are the key testable units
-
-// We need to import the module, but it has side-effect imports.
-// Use dynamic import with mocks.
+import {
+  createApproversConfig,
+  loadApproversConfig,
+} from "../../src/package-name-approval/approvers.ts";
+import { execFile } from "../../../shared/src/exec.ts";
+import { commentOrUpdate } from "../../src/comment.ts";
+import { extractInputs } from "../../src/context.ts";
+import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
 vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
@@ -37,7 +39,84 @@ vi.mock("../../src/context.ts", () => ({
   extractInputs: vi.fn(),
 }));
 
+vi.mock("../../src/package-name-approval/approvers.ts", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("../../src/package-name-approval/approvers.ts")>()),
+  loadApproversConfig: vi.fn(),
+}));
+
 describe("post-results", () => {
+  describe("artifact compatibility", () => {
+    afterEach(() => {
+      vi.clearAllMocks();
+      vi.unstubAllEnvs();
+    });
+
+    it.each([
+      {},
+      {
+        typespecPath: "specification/compute/Compute.Management",
+        typespecPaths: ["specification/compute/Compute.Management"],
+      },
+      {
+        typespecPath: null,
+        typespecPaths: [
+          "specification/compute/Compute.Management",
+          "specification/storage/Storage.Management",
+        ],
+      },
+    ])("preserves review labels and comments with path metadata %j", async (paths) => {
+      vi.stubEnv("RUNNER_TEMP", process.cwd());
+      const github = createMockGithub();
+      const context = createMockContext();
+      const core = createMockCore();
+      vi.mocked(extractInputs).mockResolvedValue({
+        owner: "owner",
+        repo: "repo",
+        head_sha: "head-sha",
+        issue_number: 42,
+        run_id: 123,
+      });
+      vi.mocked(loadApproversConfig).mockResolvedValue({
+        "data-plane": { python: ["approver"] },
+      });
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: { artifacts: [{ id: 1 }] },
+      });
+      vi.mocked(execFile).mockResolvedValue({
+        stdout: JSON.stringify({
+          namespacesFound: { python: "azure-compute" },
+          isMgmt: false,
+          isDataPlane: true,
+          prNumber: 42,
+          ...paths,
+        }),
+        stderr: "",
+      });
+      vi.mocked(unlink).mockResolvedValue(undefined);
+      github.rest.pulls.get.mockResolvedValue({
+        data: { labels: [], base: { ref: "main" } },
+      });
+
+      await postResults({ github, context, core });
+
+      expect(github.rest.issues.addLabels.mock.calls).toEqual(
+        ["package-name-review-required", "data-plane", "package-name-python-pending"].map(
+          (label) => [{ owner: "owner", repo: "repo", issue_number: 42, labels: [label] }],
+        ),
+      );
+      expect(commentOrUpdate).toHaveBeenCalledWith(
+        github,
+        core,
+        "owner",
+        "repo",
+        42,
+        expect.stringContaining("| python | `azure-compute` |"),
+        "package-name-review-bot",
+      );
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+    });
+  });
+
   describe("getApprovers with unprotected planes (#46728)", () => {
     const config = createApproversConfig({
       globalApprovers: [],
@@ -51,6 +130,7 @@ describe("post-results", () => {
           "data-plane": ["dp-approver"],
         },
       },
+      tier1: {},
     });
 
     it("returns 'unprotected' for a data-plane plane opted out (no throw)", () => {
@@ -341,6 +421,96 @@ describe("post-results", () => {
   });
 
   describe("comment body generation", () => {
+    const options: Parameters<typeof buildCommentBody>[0] = {
+      approversConfig: {
+        "data-plane": { java: ["java-approver"], dotnet: ["dotnet-approver"] },
+        "management-plane": { all: ["mgmt-approver"] },
+        unprotected: { "data-plane": ["python"] },
+      },
+      namespacesFound: { java: "azure-messaging-example" },
+      namespaces: { java: "com.azure.messaging.example" },
+      allConfiguredPackageNames: { dotnet: "Azure.Messaging.Example" },
+      allConfiguredNamespaces: { dotnet: "Azure.Messaging.Example" },
+      formatResults: [{ language: "java", namespace: "com.azure.messaging.example", valid: true }],
+      isMgmt: false,
+      baseRef: "main",
+      allLanguages: ["java", "dotnet", "python"],
+    };
+
+    it("renders guidance and references around changed, unchanged and missing package names", () => {
+      expect(buildCommentBody(options)).toMatchInlineSnapshot(`
+        "## Package Name Review Required
+
+        **Plane:** Data Plane
+
+        | Language | Package Name | Namespace | Format | Status | Approvers |
+        |----------|--------------|-----------|--------|--------|----------|
+        | java | \`azure-messaging-example\` | \`com.azure.messaging.example\` | ✅ | ⏳ Pending | @java-approver |
+        | dotnet | \`Azure.Messaging.Example\` | \`Azure.Messaging.Example\` | — | ⏳ Pending _(unchanged)_ | @dotnet-approver |
+        | python | _(not yet configured)_ | — | — | ⏳ Pending | _anyone_ |
+
+        **How to approve:**
+        - Per language: apply \`package-name-<language>-approved\` label
+        - All at once: apply \`package-name-approved-all\` label (shortcut for mgmt plane)
+
+        Merge is blocked until all languages are approved.
+
+        _Approver list: [.github/protected-labels.yml](../blob/main/.github/protected-labels.yml)_
+        _Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/main/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_
+        _Package names extracted via tsp compile with typespec-metadata emitter_"
+      `);
+    });
+
+    it("separates format issues and reset warnings without changing multiline diagnostics", () => {
+      expect(
+        buildCommentBody({
+          ...options,
+          isMgmt: true,
+          baseRef: "release/example",
+          formatResults: [
+            {
+              language: "java",
+              namespace: "com.azure.messaging.example",
+              valid: false,
+              error: "Invalid package name.\n    Preserve this indentation.",
+            },
+          ],
+          resetLanguages: ["java"],
+          preservedApprovals: new Map([
+            ["java", { namespace: "azure-messaging-example", status: "✅ Approved by @reviewer" }],
+          ]),
+        }),
+      ).toMatchInlineSnapshot(`
+        "## Package Name Review Required
+
+        **Plane:** Management Plane
+
+        | Language | Package Name | Namespace | Format | Status | Approvers |
+        |----------|--------------|-----------|--------|--------|----------|
+        | java | \`azure-messaging-example\` | \`com.azure.messaging.example\` | ⚠️ Invalid | ✅ Approved by @reviewer | @mgmt-approver |
+        | dotnet | \`Azure.Messaging.Example\` | \`Azure.Messaging.Example\` | — | ⏳ Pending _(unchanged)_ | @mgmt-approver |
+        | python | _(not yet configured)_ | — | — | ⏳ Pending | @mgmt-approver |
+
+        > **⚠️ Format issues detected:**
+        > - **java:** Invalid package name.
+            Preserve this indentation.
+        >
+        > _Format validation does not block approval but should be reviewed._
+
+        **How to approve:**
+        - Per language: apply \`package-name-<language>-approved\` label
+        - All at once: apply \`package-name-approved-all\` label (shortcut for mgmt plane)
+
+        Merge is blocked until all languages are approved.
+
+        > ⚠️ **Package name changed** -- approvals for java have been reset.
+
+        _Approver list: [.github/protected-labels.yml](../blob/release/example/.github/protected-labels.yml)_
+        _Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/release/example/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_
+        _Package names extracted via tsp compile with typespec-metadata emitter_"
+      `);
+    });
+
     it("should generate a 6-column table that matches validate-approval regex", () => {
       const body = [
         "## Package Name Review Required",
