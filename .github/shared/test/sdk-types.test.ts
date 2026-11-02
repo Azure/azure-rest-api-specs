@@ -146,7 +146,7 @@ describe("sdk-types", () => {
     ).toThrow();
   });
 
-  it("rejects duplicate changed files and aggregate review input limits", () => {
+  it("rejects duplicate changed files without applying review-only aggregate limits", () => {
     const artifact = {
       language: "azure-sdk-for-net",
       result: "succeeded",
@@ -185,49 +185,44 @@ describe("sdk-types", () => {
       }),
     ).toThrow("changedFiles must not contain duplicates");
 
-    expect(() =>
-      SpecGenSdkArtifactInfoSchema.parse({
-        ...artifact,
-        apiViewRequestData: [
-          createReviewRequest(0, {
-            changedFiles: createChangedFiles(0, SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE),
-          }),
-          createReviewRequest(1, {
-            changedFiles: createChangedFiles(1, SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE),
-          }),
-          createReviewRequest(2, { changedFiles: createChangedFiles(2, 1) }),
-        ],
-      }),
-    ).toThrow(`maximum is ${SDK_REVIEW_MAX_TOTAL_CHANGED_FILES}`);
-
-    expect(() =>
-      SpecGenSdkArtifactInfoSchema.parse({
-        ...artifact,
-        apiViewRequestData: [
-          createReviewRequest(0, {
-            reviewInputBytes: SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE,
-          }),
-          createReviewRequest(1, {
-            reviewInputBytes: SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE,
-          }),
-          createReviewRequest(2),
-        ],
-      }),
-    ).toThrow(`maximum is ${SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES}`);
-
-    expect(() =>
-      SpecGenSdkArtifactInfoSchema.parse({
-        ...artifact,
-        apiViewRequestData: [
-          createReviewRequest(0, {
-            reviewInputFileCount: SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE,
-          }),
-          createReviewRequest(1, {
-            reviewInputFileCount: SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE,
-          }),
-          createReviewRequest(2),
-        ],
-      }),
-    ).toThrow(`maximum is ${SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES}`);
+    const overReviewBudgetArtifact = {
+      ...artifact,
+      apiViewRequestData: [
+        createReviewRequest(0, {
+          changedFiles: createChangedFiles(0, SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE),
+          reviewInputFileCount: SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE,
+          reviewInputBytes: SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE,
+        }),
+        createReviewRequest(1, {
+          changedFiles: createChangedFiles(1, SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE),
+          reviewInputFileCount: SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE,
+          reviewInputBytes: SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE,
+        }),
+        createReviewRequest(2, {
+          changedFiles: createChangedFiles(2, 1),
+        }),
+      ],
+    };
+    expect(SpecGenSdkArtifactInfoSchema.parse(overReviewBudgetArtifact)).toEqual(
+      overReviewBudgetArtifact,
+    );
+    expect(
+      overReviewBudgetArtifact.apiViewRequestData.reduce(
+        (total, request) => total + request.changedFiles.length,
+        0,
+      ),
+    ).toBeGreaterThan(SDK_REVIEW_MAX_TOTAL_CHANGED_FILES);
+    expect(
+      overReviewBudgetArtifact.apiViewRequestData.reduce(
+        (total, request) => total + request.reviewInputFileCount,
+        0,
+      ),
+    ).toBeGreaterThan(SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES);
+    expect(
+      overReviewBudgetArtifact.apiViewRequestData.reduce(
+        (total, request) => total + request.reviewInputBytes,
+        0,
+      ),
+    ).toBeGreaterThan(SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES);
   });
 });

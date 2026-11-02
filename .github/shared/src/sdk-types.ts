@@ -129,53 +129,15 @@ export type APIViewRequestData = z.infer<typeof APIViewRequestDataSchema>;
 /**
  * Represents the result of the spec-gen-sdk generation process.
  */
-export const SpecGenSdkArtifactInfoSchema = z
-  .object({
-    language: SdkNameSchema,
-    result: z.string(),
-    headSha: z.string(),
-    prNumber: z.string().optional(),
-    labelAction: z.boolean().optional(),
-    isSpecGenSdkCheckRequired: z.boolean(),
-    apiViewRequestData: z.array(APIViewRequestDataSchema),
-  })
-  .superRefine((artifact, context) => {
-    const totalChangedFiles = artifact.apiViewRequestData.reduce(
-      (total, request) => total + (request.changedFiles?.length ?? 0),
-      0,
-    );
-    if (totalChangedFiles > SDK_REVIEW_MAX_TOTAL_CHANGED_FILES) {
-      context.addIssue({
-        code: "custom",
-        path: ["apiViewRequestData"],
-        message: `Artifact has ${totalChangedFiles} changed files; maximum is ${SDK_REVIEW_MAX_TOTAL_CHANGED_FILES}`,
-      });
-    }
-
-    const totalSnapshotBytes = artifact.apiViewRequestData.reduce(
-      (total, request) => total + (request.reviewInputBytes ?? 0),
-      0,
-    );
-    if (totalSnapshotBytes > SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES) {
-      context.addIssue({
-        code: "custom",
-        path: ["apiViewRequestData"],
-        message: `Artifact has ${totalSnapshotBytes} snapshot bytes; maximum is ${SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES}`,
-      });
-    }
-
-    const totalSnapshotFiles = artifact.apiViewRequestData.reduce(
-      (total, request) => total + (request.reviewInputFileCount ?? 0),
-      0,
-    );
-    if (totalSnapshotFiles > SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES) {
-      context.addIssue({
-        code: "custom",
-        path: ["apiViewRequestData"],
-        message: `Artifact has ${totalSnapshotFiles} snapshot files; maximum is ${SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES}`,
-      });
-    }
-  });
+export const SpecGenSdkArtifactInfoSchema = z.object({
+  language: SdkNameSchema,
+  result: z.string(),
+  headSha: z.string(),
+  prNumber: z.string().optional(),
+  labelAction: z.boolean().optional(),
+  isSpecGenSdkCheckRequired: z.boolean(),
+  apiViewRequestData: z.array(APIViewRequestDataSchema),
+});
 export type SpecGenSdkArtifactInfo = import("zod").infer<typeof SpecGenSdkArtifactInfoSchema>;
 
 export type SdkLabelInfo = {

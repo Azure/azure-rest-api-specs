@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { strToU8, zipSync } from "fflate";
+import { strToU8, Zip, ZipDeflate, zipSync } from "fflate";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SdkName, type SpecGenSdkArtifactInfo } from "../../shared/src/sdk-types.ts";
 import {
@@ -121,6 +121,37 @@ function setFirstCentralDirectoryOriginalSize(archive: Uint8Array, size: number)
   throw new Error("ZIP central directory not found");
 }
 
+function createStreamingZip(entries: Record<string, Uint8Array>): Promise<Uint8Array> {
+  return new Promise((resolve, reject) => {
+    const chunks: Uint8Array[] = [];
+    const zip = new Zip((error, chunk, final) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      chunks.push(chunk);
+      if (!final) {
+        return;
+      }
+      const totalBytes = chunks.reduce((total, value) => total + value.byteLength, 0);
+      const archive = new Uint8Array(totalBytes);
+      let offset = 0;
+      for (const value of chunks) {
+        archive.set(value, offset);
+        offset += value.byteLength;
+      }
+      resolve(archive);
+    });
+
+    for (const [name, content] of Object.entries(entries)) {
+      const file = new ZipDeflate(name, { level: 9 });
+      zip.add(file);
+      file.push(content, true);
+    }
+    zip.end();
+  });
+}
+
 describe("sdk-validation-dotnet-review-handoff", () => {
   beforeEach(() => {
     mockFetch.mockReset();
@@ -220,6 +251,27 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     ).toThrow("unsafe artifact path");
   });
 
+  it("enforces aggregate review budgets only at the handoff boundary", () => {
+    const event = validateCheckRunEventPayload(createSampleCheckRunPayload()).event!;
+    const request = createSampleArtifact().apiViewRequestData[0];
+    const apiViewRequestData = Array.from({ length: 3 }, (_, index) => {
+      const packageName = `Azure.Widget${index}`;
+      return {
+        ...request,
+        packageName,
+        filePath: `${packageName}.1.0.0.nupkg`,
+        packageRootPath: `sdk/widget/${packageName}`,
+        changedFiles: [`sdk/widget/${packageName}/src/Generated/WidgetClient.cs`],
+        reviewInputPath: `${packageName}/review-input`,
+        reviewInputBytes: 24 * 1024 * 1024,
+      };
+    });
+
+    expect(() =>
+      verifyReviewInputAgainstCheckRun(createSampleArtifact({ apiViewRequestData }), event),
+    ).toThrow("snapshot bytes; maximum");
+  });
+
   it("extracts only declared source snapshots and verifies declared counts", () => {
     const outputDirectory = createTempOutputDir();
     const artifact = createSampleArtifact();
@@ -249,6 +301,27 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         createTempOutputDir(),
       ),
     ).toThrow("expected 2 files");
+  });
+
+  it("extracts streamed ZIP entries that use data descriptors", async () => {
+    const outputDirectory = createTempOutputDir();
+    const archive = await createStreamingZip(SAMPLE_SNAPSHOT_FILES);
+
+    expect(new DataView(archive.buffer, archive.byteOffset).getUint16(6, true) & 0x08).toBe(0x08);
+    extractAndValidateSdkReviewInputArchive(archive, createSampleArtifact(), outputDirectory);
+    expect(
+      fs.readFileSync(
+        path.join(
+          outputDirectory,
+          "Azure.Widget",
+          "review-input",
+          "src",
+          "Generated",
+          "WidgetClient.cs",
+        ),
+        "utf8",
+      ),
+    ).toBe("public class WidgetClient {}");
   });
 
   it("rejects highly compressible oversized entries before extraction", () => {
