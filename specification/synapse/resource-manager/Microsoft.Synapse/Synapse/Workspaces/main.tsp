@@ -33,14 +33,14 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Synapse Analytics APIs
+ * Azure Synapse Analytics management API for workspaces, workspace administrators and security settings, firewall rules, keys, private endpoints, private link resources and private link hubs.
  */
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Synapse")
 @service(#{ title: "SynapseManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Synapse;
+namespace Workspaces;
 
 /**
  * The available API versions.

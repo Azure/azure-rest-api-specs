@@ -9,7 +9,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Synapse;
+namespace Workspaces;
 
 /**
  * Enable or Disable public network access to workspace
