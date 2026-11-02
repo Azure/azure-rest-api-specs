@@ -18,7 +18,8 @@ env:
   user-allowed: >-
     ${{
       github.event.pull_request.user.login == 'azure-sdk' ||
-      github.event.pull_request.user.login == 'azure-sdk-automation[bot]'
+      github.event.pull_request.user.login == 'azure-sdk-automation[bot]' ||
+      github.event.pull_request.user.login == 'dependabot[bot]'
     }}
 
 jobs:

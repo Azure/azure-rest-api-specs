@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalClusterName": "contoso-external-cluster",
+    "externalSvmName": "contoso-svm",
+    "api-version": "2026-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/externalSvms/contoso-svm",
+        "name": "contoso-svm",
+        "type": "Microsoft.NetApp/externalClusters/externalSvms",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ontapSvmName": "contoso-svm",
+          "svmPeerResourceIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/clusterPeers/peerA/svmPeers/contosoSvmPeerA"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "ExternalSvms_Get",
+  "title": "ExternalSvms_Get"
+}
