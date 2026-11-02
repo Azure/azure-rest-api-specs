@@ -18,9 +18,11 @@ input-file:
 
 ## Review scope
 
-This is an in-development contract for the existing Non-RPaaS `Microsoft.CostManagement` provider. There are no
-customers yet; the intended first release is private preview. It supersedes the earlier `estimateCosts` draft
-(azure-rest-api-specs-pr#30664), which was renamed to `estimatePrices` and made long-running.
+This is the public-preview, asynchronous `estimatePrices` API contract for the existing Non-RPaaS
+`Microsoft.CostManagement` provider, using API version `2026-10-01-preview`. The specification targets the public
+repository's `main` branch and is published under `preview/2026-10-01-preview`; this is not a GA release. It supersedes
+the earlier `estimateCosts` draft (azure-rest-api-specs-pr#30664), which was renamed to `estimatePrices` and made
+long-running.
 
 The only new business operation is a subscription-scoped long-running action:
 
@@ -30,8 +32,8 @@ POST /subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/estimate
 
 The standard provider Operations listing is included for ARM tooling. This specification introduces no new resource
 provider and does not change the existing CostManagement project's versions, operations, models or examples. The
-implementation host is the existing pricing service. SDK packaging requires SDK and service-owner review; this
-configuration emits OpenAPI only.
+implementation host is the existing pricing service. SDK emitter and package settings are included in
+`tspconfig.yaml`; package names require the standard SDK architect approval. The default compilation emits OpenAPI.
 
 ## Long-running behavior
 
@@ -40,10 +42,12 @@ so the action follows the ARM asynchronous pattern with `final-state-via: locati
 
 1. The POST validates the whole request synchronously. Invalid input fails the POST itself with HTTP 400 and is never
    priced.
-2. A valid request returns HTTP 202 with `Location` and `Retry-After`.
-3. Polling `Location` returns 202 while pricing runs, then HTTP 200 with the estimate, or an ARM error such as
-   `AuthorizationFailed` (403), `PriceSourceUnavailable` or `EstimationTimeout` (503), or `EstimationInterrupted`
-   (500, resubmit).
+2. A valid request returns HTTP 202 with no response body, an absolute ARM `Location` polling URL, and `Retry-After`.
+   The specification examples use `Retry-After: 30` seconds.
+3. Clients wait for the `Retry-After` interval before polling `Location`. While pricing runs, polling returns HTTP
+   202 with no response body, `Location`, and `Retry-After`. On completion, it returns HTTP 200 with the estimate, or
+   an ARM error such as `AuthorizationFailed` (403), `PriceSourceUnavailable` or `EstimationTimeout` (503), or
+   `EstimationInterrupted` (500, resubmit).
 4. Only the principal that started the operation can read it; results are retained for 30 minutes, after which the
    poll returns 404.
 
@@ -76,10 +80,11 @@ Prices apply to the authorized subscription and its billing currency; unavailabl
 to retail prices. Monthly and upfront charges remain separate at every level. `Complete` requires `amount`; `Partial`
 requires only `knownAmount`; `Unavailable` contains neither. Missing prices are reported as issues, not zeros.
 
-Each result returns the effective `configuration`: the decoded, default-completed inputs; `defaultedFields`, the
-configuration defaults the server applied; and `assumedUsageFields`, usage quantities the caller omitted and the server
-assumed (for example `/usage/storedGB`). A non-empty `assumedUsageFields` means the price rests on quantities the
-caller did not state.
+Each result returns the effective `configuration`, including `defaultedFields`, the configuration defaults the server
+applied; `assumedUsageFields`, usage quantities the caller omitted and the server assumed (for example
+`/usage/storedGB`); and typed `appliedValues` for every field the server set or changed. Every other priced value is
+exactly what the caller submitted. A non-empty `assumedUsageFields` means the price rests on quantities the caller
+did not state.
 
 Calculations use decimal arithmetic. Component amounts are rounded once to six fractional places, midpoint away from
 zero; entry and request totals sum those amounts. Examples use deterministic illustrative prices, not live quotes.
@@ -123,9 +128,3 @@ when the profile declares it, with its allowed values or a choice lookup path wh
   }
 }
 ```
-
-## Suppressions
-
-`EstimateEffectiveConfiguration.inputs` is a `Record<unknown>` (`arm-no-record`): the decoded configuration is
-resource-type specific, its schema is published per resource type and API version by the discovery profiles, and it
-mirrors the typed inputs the caller submitted.
