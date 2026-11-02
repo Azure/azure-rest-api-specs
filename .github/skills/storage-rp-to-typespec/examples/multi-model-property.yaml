@@ -1,0 +1,77 @@
+# Synthetic contract; these are not real Microsoft.Storage features.
+schemaVersion: 1
+provider: Microsoft.Storage
+typespecProject: specification/storage/Storage.Management
+baseline:
+  branch: feature/example-storage-release
+  commit: "1111111111111111111111111111111111111111"
+changes:
+  - kind: enum
+    action: add
+    target: ExamplePlacementMode
+    apiVersions: ["2027-02-01"]
+    after:
+      type: string
+      extensible: true
+      values: [Managed, Paused]
+  - kind: model
+    action: add
+    target: ExamplePlacement
+    apiVersions: ["2027-02-01"]
+    after:
+      properties:
+        - wireName: mode
+          type: ExamplePlacementMode
+          required:
+            read: true
+            create: true
+            update: false
+          nullable: false
+          visibility: [read, create, update]
+        - wireName: fillPercent
+          type: int32
+          required: false
+          nullable: false
+          visibility: [read, create, update]
+          description: >-
+            The valid range is 15 to 95. When mode is Managed and this property
+            has no supplied or previously persisted value, the service uses 40.
+            No default is applied when mode is Paused.
+          constraints:
+            minimum: 15
+            maximum: 95
+  - kind: property
+    action: add
+    target: ExampleAccountPropertiesCreateParameters.placement
+    apiVersions: ["2027-02-01"]
+    after:
+      wireName: placement
+      type: ExamplePlacement
+      required: false
+      nullable: false
+      visibility: [create]
+      description: If omitted, the account is created without placement configuration.
+  - kind: property
+    action: add
+    target: ExampleAccountPropertiesUpdateParameters.placement
+    apiVersions: ["2027-02-01"]
+    after:
+      wireName: placement
+      type: ExamplePlacement
+      required: false
+      nullable: true
+      visibility: [update]
+      description: >-
+        If omitted from PATCH, the existing placement configuration is preserved.
+        Explicit null removes the configuration.
+  - kind: property
+    action: add
+    target: ExampleAccountProperties.placement
+    apiVersions: ["2027-02-01"]
+    after:
+      wireName: placement
+      type: ExamplePlacement
+      required: false
+      nullable: false
+      visibility: [read]
+      description: Omitted when the account has no placement configuration.
