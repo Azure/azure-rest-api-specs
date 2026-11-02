@@ -1253,6 +1253,7 @@ model PrivateEndpointConnectionForPrivateLinkHub_ResourceCollectionResponse {
    * The private endpoint connections in this page.
    */
   @pageItems
+  @identifiers(#[])
   value?: PrivateEndpointConnectionForPrivateLinkHub[];
 
   /**
