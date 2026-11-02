@@ -169,3 +169,38 @@ namespace Microsoft.Synapse;
   "SqlPoolAcceptedResult",
   "csharp"
 ); // no shipped name (pause/resume 202 envelope)
+
+// --- Python names (python scope only) ---
+// Merged-client name clashes. Shipped names stay on the released types: KustoPools.ResourceProvisioningState
+// and the workspace-level SqlPools.BlobAuditingPolicyName are both classes in azure-mgmt-synapse 2.1.0b7.
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
+  "ArmResourceProvisioningState",
+  "python"
+);
+
+// Single-value path parameters shipped as fixed constants (Literal) in azure-mgmt-synapse 2.1.0b7.
+@@alternateType(SqlPools.DataMaskingPolicyName, "Default", "python");
+@@alternateType(
+  SqlPools.SqlPoolLevel.BlobAuditingPolicyName,
+  "default",
+  "python"
+);
+@@alternateType(SqlPools.WritableSensitivityLabelSource, "current", "python");
+@@alternateType(
+  SqlPools.RecommendedSensitivityLabelSource,
+  "recommended",
+  "python"
+);
+
+// Operations that were not pageable in azure-mgmt-synapse 2.1.0b7 (they returned the list model).
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released Python non-pageable signature"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  KustoPools.KustoPools.listByWorkspace,
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released Python non-pageable signature"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  IntegrationRuntimes.IntegrationRuntimeResources.listOutboundNetworkDependenciesEndpoints,
+  "python"
+);
