@@ -479,13 +479,11 @@ model BlobPrefixGo {
 @clientName("BlobProperties", "go")
 model BlobPropertiesGo {
   /** The date-time the blob was created in RFC1123 format. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Creation-Time")
   creationTime?: utcDateTime;
 
   /** The date-time the blob was last modified in RFC1123 format. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
@@ -542,7 +540,6 @@ model BlobPropertiesGo {
   @Xml.name("CopyProgress") copyProgress?: string;
 
   /** The copy completion time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("CopyCompletionTime")
   copyCompletionTime?: utcDateTime;
@@ -560,7 +557,6 @@ model BlobPropertiesGo {
   @Xml.name("DestinationSnapshot") destinationSnapshot?: string;
 
   /** The time the blob was deleted. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeletedTime")
   deletedTime?: utcDateTime;
@@ -589,7 +585,6 @@ model BlobPropertiesGo {
   @Xml.name("EncryptionScope") encryptionScope?: string;
 
   /** The access tier change time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("AccessTierChangeTime")
   accessTierChangeTime?: utcDateTime;
@@ -598,7 +593,6 @@ model BlobPropertiesGo {
   @Xml.name("TagCount") tagCount?: int32;
 
   /** The expire time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Expiry-Time")
   expiresOn?: utcDateTime;
@@ -611,13 +605,11 @@ model BlobPropertiesGo {
   @Xml.name("RehydratePriority") rehydratePriority?: RehydratePriority;
 
   /** The last access time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastAccessTime")
   lastAccessedOn?: utcDateTime;
 
   /** The immutability policy until time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("ImmutabilityPolicyUntilDate")
   immutabilityPolicyExpiresOn?: utcDateTime;
@@ -901,7 +893,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 /** The immutability policy expiration parameter. */
 alias ImmutabilityPolicyExpiryOptionalParameter = {
   /** Specifies the date time when the blobs immutability policy is set to expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   @clientName("immutabilityPolicyExpiry")
