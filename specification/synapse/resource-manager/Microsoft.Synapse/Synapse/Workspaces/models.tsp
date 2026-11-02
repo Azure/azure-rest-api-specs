@@ -374,6 +374,7 @@ model PrivateEndpointConnectionProperties {
 /**
  * Private endpoint details
  */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model PrivateEndpoint {
   /**
    * Resource id of the private endpoint.
@@ -590,9 +591,13 @@ model ManagedIdentity {
   /**
    * The user assigned managed identities.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<UserAssignedManagedIdentity>;
+  userAssignedIdentities?: UserAssignedManagedIdentities;
 }
+
+/**
+ * The User Assigned Managed Identities.
+ */
+model UserAssignedManagedIdentities is Record<UserAssignedManagedIdentity>;
 
 /**
  * User Assigned Managed Identity
@@ -604,7 +609,7 @@ model UserAssignedManagedIdentity {
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
   @format("uuid")
-  clientId?: string;
+  clientId?: string | null;
 
   /**
    * The principal ID.
@@ -612,7 +617,7 @@ model UserAssignedManagedIdentity {
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
   @format("uuid")
-  principalId?: string;
+  principalId?: string | null;
 }
 
 /**
