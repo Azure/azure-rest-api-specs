@@ -3128,7 +3128,7 @@
         "tags": [
           "RecoveryConfigProfiles"
         ],
-        "description": "Updates a recovery configuration profile. Properties omitted from the request remain unchanged.",
+        "description": "Replaces the complete writable configuration of a recovery configuration profile. The request must include the same required writable fields as create.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -9764,17 +9764,20 @@
     },
     "RecoveryConfigProfilePatch": {
       "type": "object",
-      "description": "The request body for partially updating a recovery configuration profile.",
+      "description": "The request body for replacing the complete writable configuration of a recovery configuration profile.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RecoveryConfigProfilePatchProperties",
-          "description": "The profile properties to update. Omitted properties remain unchanged."
+          "description": "The complete replacement profile configuration, with the same required writable fields as create."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "RecoveryConfigProfilePatchProperties": {
       "type": "object",
-      "description": "The writable properties of a recovery configuration profile that can be updated.",
+      "description": "The complete writable configuration that replaces the existing recovery configuration profile.",
       "properties": {
         "targetScope": {
           "$ref": "#/definitions/TargetScope",
@@ -9788,7 +9791,11 @@
           "$ref": "#/definitions/RecoveryPointPolicy",
           "description": "Default recovery point selection."
         }
-      }
+      },
+      "required": [
+        "targetScope",
+        "workloadConfig"
+      ]
     },
     "RecoveryConfigProfileProperties": {
       "type": "object",

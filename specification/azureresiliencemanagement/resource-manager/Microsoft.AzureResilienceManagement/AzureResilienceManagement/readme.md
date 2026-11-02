@@ -133,10 +133,7 @@ suppressions:
     from: openapi.json
     where: $.definitions.ServiceGroupTenantParameters.properties.skipToken
     reason: skipToken is the standard Azure OData paging continuation token ($skipToken), not a secret. The linter flags it due to the Token substring in the name; the property carries opaque pagination state and is not sensitive.
-```
 
-```yaml $(tag) == 'package-2026-11-30-preview'
-suppressions:
   - code: GuidUsage
     from: preview/2026-11-30-preview/openapi.json
     where: $.definitions["Azure.Core.uuid"].format
@@ -147,4 +144,25 @@ suppressions:
       https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716959,
       https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716968,
       and https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716988.
+
+  - code: PatchBodyParametersSchema
+    from: preview/2026-11-30-preview/openapi.json
+    where: $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}"].patch.parameters[3].schema.properties.properties
+    reason: >-
+      The resiliencyPlanProperties object is polymorphic. Its resiliencyType
+      discriminator is required when the object is supplied so the service can
+      identify the complete resiliency-specific configuration. This exception
+      applies only to the recovery plan PATCH request in this preview version.
+
+  - code: PatchBodyParametersSchema
+    from: preview/2026-11-30-preview/openapi.json
+    where:
+      - $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryConfigProfiles/{recoveryConfigProfileName}"].patch.parameters[4].schema
+      - $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryConfigProfiles/{recoveryConfigProfileName}"].patch.parameters[4].schema.properties.properties
+    reason: >-
+      This endpoint intentionally replaces the complete writable profile rather
+      than merging individual fields. The properties, targetScope, workloadConfig,
+      and their nested required fields use the same requirements as create.
+      Polymorphic workload configurations require their workloadType discriminator.
+      Read-only profile properties are excluded from the request.
 ```

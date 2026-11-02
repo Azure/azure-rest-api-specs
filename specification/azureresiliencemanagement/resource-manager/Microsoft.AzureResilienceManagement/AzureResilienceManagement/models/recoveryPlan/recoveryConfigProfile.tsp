@@ -115,7 +115,7 @@ union CopyOptions {
 
 @added(Versions.v2026_11_30_preview)
 @doc("The behavior when a database restore target already exists.")
-union OverwriteOptions {
+union OverwriteOptions extends int32 {
   @added(Versions.v2026_11_30_preview)
   @doc("The overwrite option is invalid or unspecified.")
   Invalid: 0,
@@ -412,15 +412,15 @@ model RecoveryConfigProfile is ProxyResource<RecoveryConfigProfileProperties> {
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("The writable properties of a recovery configuration profile that can be updated.")
+@doc("The complete writable configuration that replaces the existing recovery configuration profile.")
 model RecoveryConfigProfilePatchProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The subscription and location targeted by this profile.")
-  targetScope?: TargetScope;
+  targetScope: TargetScope;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The workload-specific recovery configuration.")
-  workloadConfig?: WorkloadConfig;
+  workloadConfig: WorkloadConfig;
 
   @added(Versions.v2026_11_30_preview)
   @doc("Default recovery point selection.")
@@ -428,9 +428,9 @@ model RecoveryConfigProfilePatchProperties {
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("The request body for partially updating a recovery configuration profile.")
+@doc("The request body for replacing the complete writable configuration of a recovery configuration profile.")
 model RecoveryConfigProfilePatch {
   @added(Versions.v2026_11_30_preview)
-  @doc("The profile properties to update. Omitted properties remain unchanged.")
-  properties?: RecoveryConfigProfilePatchProperties;
+  @doc("The complete replacement profile configuration, with the same required writable fields as create.")
+  properties: RecoveryConfigProfilePatchProperties;
 }
