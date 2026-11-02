@@ -91,14 +91,15 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     where:
       - $.definitions.EdgeActionOperationStatus
-    reason: This flat operation-status record is not an ARM resource envelope and has no resource type.
+      - $.definitions.EdgeActionOperationResultPayload
+    reason: Polling records and heterogeneous operation results are not fixed ARM resource envelopes.
   - code: BodyTopLevelProperties
     where:
       - $.definitions.EdgeActionOperationStatus
     reason: The Azure-AsyncOperation record exposes standard top-level status, error, and timestamps, not an ARM resource properties envelope.
   - code: PatchSkuProperty
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}"].patch.parameters[?(@.in == 'body')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}"].patch.parameters[4]
     reason: The preview intentionally supports tags-only PATCH; SKU is not a PATCH input.
   - code: PostResponseCodes
     where:

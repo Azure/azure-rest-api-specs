@@ -114,6 +114,7 @@ describe("EdgeActions preview contracts", () => {
   });
 
   it("keeps parent and version PATCH tags-only and version state response-only", () => {
+    expect(operation("EdgeActions_Update").parameters?.[4].in).toBe("body");
     for (const id of ["EdgeActions_Update", "EdgeActionVersions_Update"]) {
       expect(Object.keys(schemaProperties(requestBody(operation(id)), file))).toEqual(["tags"]);
     }
