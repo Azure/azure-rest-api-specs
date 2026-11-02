@@ -211,7 +211,6 @@ describe("SDK breaking-change summary", () => {
         42,
         headSha,
         "workflow_run",
-        "main",
         workflowUrl,
       );
 
@@ -260,7 +259,6 @@ describe("SDK breaking-change summary", () => {
       42,
       headSha,
       "workflow_run",
-      "main",
       workflowUrl,
     );
 
