@@ -1,81 +1,83 @@
 {
   "parameters": {
-    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "api-version": "2021-06-01-preview",
     "resourceGroupName": "ExampleResourceGroup",
-    "workspaceName": "ExampleWorkspace",
-    "api-version": "2021-06-01-preview"
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "workspaceName": "ExampleWorkspace"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "",
         "value": [
           {
-            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/bigDataPools/ExamplePool",
-            "type": "Microsoft.Synapse/workspaces/bigDataPools",
-            "location": "West US 2",
             "name": "ExamplePool",
-            "tags": {},
+            "type": "Microsoft.Synapse/workspaces/bigDataPools",
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/bigDataPools/ExamplePool",
+            "location": "West US 2",
             "properties": {
-              "provisioningState": "Succeeded",
-              "sparkVersion": "3.3",
+              "autoPause": {
+                "delayInMinutes": 15,
+                "enabled": true
+              },
+              "autoScale": {
+                "enabled": true,
+                "maxNodeCount": 50,
+                "minNodeCount": 3
+              },
+              "creationDate": "1970-01-01T00:00:00Z",
+              "defaultSparkLogFolder": "/logs",
+              "isAutotuneEnabled": false,
+              "libraryRequirements": {
+                "content": "",
+                "filename": "requirements.txt",
+                "time": "1970-01-01T00:00:00Z"
+              },
               "nodeCount": 4,
               "nodeSize": "Medium",
               "nodeSizeFamily": "MemoryOptimized",
-              "autoScale": {
-                "enabled": true,
-                "minNodeCount": 3,
-                "maxNodeCount": 50
-              },
-              "autoPause": {
-                "enabled": true,
-                "delayInMinutes": 15
-              },
-              "creationDate": "1970-01-01T00:00:00Z",
+              "provisioningState": "Succeeded",
               "sparkEventsFolder": "/events",
-              "libraryRequirements": {
-                "time": "1970-01-01T00:00:00Z",
-                "content": "",
-                "filename": "requirements.txt"
-              },
-              "defaultSparkLogFolder": "/logs",
-              "isAutotuneEnabled": false
-            }
+              "sparkVersion": "3.3"
+            },
+            "tags": {}
           },
           {
-            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/bigDataPools/ExamplePool2",
-            "type": "Microsoft.Synapse/workspaces/bigDataPools",
-            "location": "West US 2",
             "name": "ExamplePool2",
-            "tags": {},
+            "type": "Microsoft.Synapse/workspaces/bigDataPools",
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/bigDataPools/ExamplePool2",
+            "location": "West US 2",
             "properties": {
-              "provisioningState": "Succeeded",
-              "sparkVersion": "3.3",
+              "autoPause": {
+                "delayInMinutes": 15,
+                "enabled": true
+              },
+              "autoScale": {
+                "enabled": true,
+                "maxNodeCount": 50,
+                "minNodeCount": 3
+              },
+              "creationDate": "1970-01-01T00:00:00Z",
+              "defaultSparkLogFolder": "/logs",
+              "isAutotuneEnabled": false,
+              "libraryRequirements": {
+                "content": "",
+                "filename": "requirements.txt",
+                "time": "1970-01-01T00:00:00Z"
+              },
               "nodeCount": 4,
               "nodeSize": "Medium",
               "nodeSizeFamily": "MemoryOptimized",
-              "autoScale": {
-                "enabled": true,
-                "minNodeCount": 3,
-                "maxNodeCount": 50
-              },
-              "autoPause": {
-                "enabled": true,
-                "delayInMinutes": 15
-              },
-              "creationDate": "1970-01-01T00:00:00Z",
+              "provisioningState": "Succeeded",
               "sparkEventsFolder": "/events",
-              "libraryRequirements": {
-                "time": "1970-01-01T00:00:00Z",
-                "content": "",
-                "filename": "requirements.txt"
-              },
-              "defaultSparkLogFolder": "/logs",
-              "isAutotuneEnabled": false
-            }
+              "sparkVersion": "3.3"
+            },
+            "tags": {}
           }
-        ],
-        "nextLink": ""
+        ]
       }
     }
-  }
+  },
+  "operationId": "BigDataPools_ListByWorkspace",
+  "title": "List Big Data pools in a workspace"
 }
