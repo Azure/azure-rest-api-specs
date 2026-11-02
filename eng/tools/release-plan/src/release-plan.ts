@@ -92,7 +92,8 @@ function buildDetails(context: ReleasePlanCommandContext): EnsureReleasePlanResu
  * @param prUrl GitHub PR URL (e.g., https://github.com/owner/repo/pull/123)
  * @param apiReleaseType API release type to match
  * @param runner Function to execute azsdk commands
- * @returns Release plan object if found, null if not found or error occurred
+ * @returns Release plan object if found, null if not found
+ * @throws Error if the lookup fails or returns invalid JSON
  */
 function runGetReleasePlanByPr(
   prUrl: string,
@@ -118,7 +119,8 @@ function runGetReleasePlanByPr(
  * @param apiVersion API version to match
  * @param apiReleaseType API release type (Private Preview, Public Preview, or GA)
  * @param runner Function to execute azsdk commands
- * @returns Release plan object if found, null if not found or error occurred
+ * @returns Release plan object if found, null if not found
+ * @throws Error if the lookup fails or returns invalid JSON
  */
 function runGetReleasePlanByPath(
   tspProjectPath: string,
@@ -144,25 +146,41 @@ function runGetReleasePlanByPath(
 /**
  * Parses release plan command result.
  * @param result Command execution result with exit code and output
- * @returns Parsed release plan object if successful, null if failed or empty
+ * @returns Parsed release plan object if successful, null if not found
+ * @throws Error if the lookup fails or returns invalid JSON
  */
 function parseReleasePlanResult(result: CommandResult): ReleasePlanData | null {
-  if (result.exitCode !== 0) {
-    return null;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(result.stdout);
+  } catch (error) {
+    if (result.exitCode !== 0) {
+      throw new Error(`Release plan get failed. ${result.stderr || result.stdout}`, {
+        cause: error,
+      });
+    }
+    throw new Error(`Failed to parse JSON from azsdk output: ${result.stdout}`, { cause: error });
   }
 
-  try {
-    const parsed: unknown = JSON.parse(result.stdout);
-    if (parsed === null) {
+  if (parsed !== null && typeof parsed === "object" && "response_error" in parsed) {
+    // The CLI uses this exact response, with exit code 1, when a lookup finds no plan.
+    if (parsed.response_error === "Failed to get release plan details.") {
       return null;
     }
-    if (typeof parsed !== "object" || Array.isArray(parsed)) {
-      return null;
+    if (typeof parsed.response_error === "string" && parsed.response_error) {
+      throw new Error(`Release plan get failed. ${parsed.response_error}`);
     }
-    return parsed as ReleasePlanData;
-  } catch {
+  }
+  if (result.exitCode !== 0) {
+    throw new Error(`Release plan get failed. ${result.stderr || result.stdout}`);
+  }
+  if (parsed === null) {
     return null;
   }
+  if (typeof parsed !== "object" || Array.isArray(parsed)) {
+    throw new Error(`Expected JSON object or null from azsdk output: ${result.stdout}`);
+  }
+  return parsed as ReleasePlanData;
 }
 
 /**

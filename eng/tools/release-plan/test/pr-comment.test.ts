@@ -14,6 +14,40 @@ type CreateCommentParams = {
 };
 
 describe("PR comment creation", () => {
+  it.each(["2026-03-01", "multiple-versions", "all"])(
+    "posts manual-action guidance for API version %s without claiming creation",
+    async (apiVersion) => {
+      const createComment = vi.fn<(params: CreateCommentParams) => Promise<unknown>>();
+      await postReleasePlanComment({
+        octokit: { rest: { issues: { createComment } } },
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        prNumber: 47691,
+        apiVersion,
+        tspProjectPath: "specification/compute/resource-manager/Microsoft.Compute/Compute",
+        manualCreationRequired: true,
+      });
+
+      expect(createComment).toHaveBeenCalledOnce();
+      const [comment] = createComment.mock.calls[0];
+      expect(comment.issue_number).toBe(47691);
+      expect(comment.body).toContain("Manual Release Plan Required");
+      expect(comment.body).toContain("new-api-version");
+      expect(comment.body).toContain("tspconfig.yaml");
+      expect(comment.body).toContain("https://aka.ms/azsdk/releaseplan-dashboard");
+      expect(comment.body).toContain(
+        "specification/compute/resource-manager/Microsoft.Compute/Compute",
+      );
+      expect(comment.body).not.toContain("Release Plan Created");
+      if (apiVersion === "all" || apiVersion === "multiple-versions") {
+        expect(comment.body).toContain("select the intended version");
+        expect(comment.body).not.toContain(`\`${apiVersion}\``);
+      } else {
+        expect(comment.body).toContain(`\`${apiVersion}\``);
+      }
+    },
+  );
+
   it("reports all ambiguous projects and explains manual release plan creation", async () => {
     const createComment = vi
       .fn<(params: CreateCommentParams) => Promise<unknown>>()

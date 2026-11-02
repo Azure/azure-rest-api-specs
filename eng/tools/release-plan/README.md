@@ -168,8 +168,20 @@ The target release month is next month.
 
 Successful creation comments include the plan link/ID, API version, and resolved
 TypeSpec project path. Reusing an existing plan does not post a creation comment.
-API-version resolution errors are reported on the associated PR; failures from
-the subsequent plan operation are commented when creation was eligible.
+If TypeSpec changes need processing but no plan is returned and creation is not
+allowed, the tool emits an Azure Pipelines warning and posts a **Manual Release
+Plan Required** comment on the associated PR. The comment links to Release
+Planner and asks the author to create or link a plan. For `all` or
+`multiple-versions`, it asks the author to select the intended API version.
+The result remains `not_found` with a null plan, so downstream steps skip safely.
+Without an associated PR, the warning still explains the required action.
+
+Intentional skips and existing plans, including completed plans, do not produce
+manual-action guidance. API-version resolution errors and failures from the
+subsequent plan operation are reported on the associated PR. Lookup command
+failures and invalid JSON are errors, not normal missing-plan results. The CLI's
+explicit `Failed to get release plan details.` no-match response is treated as
+no plan; other lookup errors stop processing.
 
 ### Pipeline integration
 

@@ -29,6 +29,7 @@ export interface PrCommentParams {
   apiVersion: string;
   /** TypeSpec project path */
   tspProjectPath: string;
+  manualCreationRequired?: boolean;
 }
 
 /**
@@ -48,13 +49,24 @@ export interface PrCommentParams {
  * });
  */
 export async function postReleasePlanComment(params: PrCommentParams): Promise<void> {
-  const { octokit, owner, repo, prNumber, planId, planLink, apiVersion, tspProjectPath } = params;
+  const {
+    octokit,
+    owner,
+    repo,
+    prNumber,
+    planId,
+    planLink,
+    apiVersion,
+    tspProjectPath,
+    manualCreationRequired,
+  } = params;
 
   const body = buildReleaseplanCommentBody({
     planId,
     planLink,
     apiVersion,
     tspProjectPath,
+    manualCreationRequired,
   });
 
   try {
@@ -88,6 +100,7 @@ export interface CommentBodyParams {
   apiVersion: string;
   /** TypeSpec project path */
   tspProjectPath: string;
+  manualCreationRequired?: boolean;
 }
 
 /**
@@ -96,7 +109,22 @@ export interface CommentBodyParams {
  * @returns Formatted markdown comment body
  */
 export function buildReleaseplanCommentBody(params: CommentBodyParams): string {
-  const { planId, planLink, apiVersion, tspProjectPath } = params;
+  const { planId, planLink, apiVersion, tspProjectPath, manualCreationRequired } = params;
+
+  if (manualCreationRequired) {
+    return (
+      "### Manual Release Plan Required\n\n" +
+      "TypeSpec changes were found, but no existing release plan was returned. " +
+      "This PR has neither the `new-api-version` label nor a `tspconfig.yaml` change, " +
+      "so no release plan was created automatically.\n\n" +
+      "Create or link the release plan manually in " +
+      "[Release Planner](https://aka.ms/azsdk/releaseplan-dashboard).\n\n" +
+      (apiVersion === "multiple-versions" || apiVersion === "all"
+        ? "**API version:** Multiple versions; select the intended version in Release Planner.\n\n"
+        : `**API version:** \`${apiVersion}\`\n\n`) +
+      `**TypeSpec project:** \`${tspProjectPath}\`\n`
+    );
+  }
 
   let body = `### ✅ Release Plan Created\n\n`;
   body += `| Field | Value |\n|-------|-------|\n`;

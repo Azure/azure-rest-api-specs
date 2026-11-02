@@ -286,6 +286,53 @@ describe("ensureReleasePlan", () => {
     expect(runner).toHaveBeenCalledTimes(2);
   });
 
+  it("accepts the CLI's explicit no-plan response in get-only mode", () => {
+    const runner = vi.fn<AzsdkRunner>(() => ({
+      exitCode: 1,
+      stdout: JSON.stringify({
+        response_error: "Failed to get release plan details.",
+        operation_status: "Failed",
+      }),
+      stderr: "",
+    }));
+
+    expect(ensureReleasePlan(baseContext, runner, false)).toMatchObject({
+      outcome: "not_found",
+      releasePlan: null,
+    });
+    expect(runner).toHaveBeenCalledTimes(2);
+  });
+
+  it.each([
+    { exitCode: 1, stdout: "", stderr: "Access denied", error: "Access denied" },
+    {
+      exitCode: 1,
+      stdout: JSON.stringify({
+        response_error: "Failed to get release plan details: Access denied",
+      }),
+      stderr: "",
+      error: "Access denied",
+    },
+    { exitCode: 0, stdout: "{ invalid JSON", stderr: "", error: "Failed to parse JSON" },
+    { exitCode: 0, stdout: "[]", stderr: "", error: "Expected JSON object or null" },
+    { exitCode: 0, stdout: '"unexpected"', stderr: "", error: "Expected JSON object or null" },
+  ])("does not turn a failed lookup into not_found: $error ($stdout)", (response) => {
+    const runner = vi.fn<AzsdkRunner>(() => response);
+
+    expect(() => ensureReleasePlan(baseContext, runner, false)).toThrow(response.error);
+    expect(runner).toHaveBeenCalledOnce();
+  });
+
+  it("reports a path lookup failure after a successful PR lookup with no match", () => {
+    const runner = vi
+      .fn<AzsdkRunner>()
+      .mockReturnValueOnce({ exitCode: 0, stdout: "null", stderr: "" })
+      .mockReturnValueOnce({ exitCode: 1, stdout: "", stderr: "Service unavailable" });
+
+    expect(() => ensureReleasePlan(baseContext, runner, false)).toThrow("Service unavailable");
+    expect(runner).toHaveBeenCalledTimes(2);
+  });
+
   it.each(["Public Preview", "GA", "Private Preview"] as const)(
     "filters PR lookup by %s and does not update during discovery",
     (apiReleaseType) => {
