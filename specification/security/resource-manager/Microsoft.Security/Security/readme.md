@@ -291,7 +291,6 @@ These settings apply only when `--tag=package-2026-09-01` is specified on the co
 ```yaml $(tag) == 'package-2026-09-01'
 input-file:
   - stable/2026-09-01/defenderForStorageSettings.json
-  - stable/2026-09-01/security-Operations.json
 ```
 
 ### Tag: package-preview-2026-03-01-preview
@@ -831,7 +830,7 @@ input-file:
 - stable/2025-05-04/security-Assessment.json
 - stable/2026-09-01/defenderForStorageSettings.json
 - preview/2025-11-01-preview/securityConnectorsDevOps.json
-- stable/2026-09-01/security-Operations.json
+- preview/2025-10-01-preview/security-Operations.json
 - stable/2017-08-01/complianceResults.json
 - stable/2019-01-01/advancedThreatProtectionSettings.json
 - stable/2019-08-01/security-IoTSecurity.json
