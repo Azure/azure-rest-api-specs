@@ -9,7 +9,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Synapse;
+namespace SqlPools;
 
 /**
  * Specifies the mode of sql pool creation.

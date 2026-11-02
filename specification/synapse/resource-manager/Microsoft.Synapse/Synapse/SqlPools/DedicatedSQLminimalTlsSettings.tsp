@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Synapse;
+namespace SqlPools;
 /**
  * Dedicated Sql Minimal Tls Settings Info
  */

@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Synapse;
+namespace SqlPools;
 // FIXME: SqlPoolTable has no properties property
 /**
  * A Sql pool table resource.
