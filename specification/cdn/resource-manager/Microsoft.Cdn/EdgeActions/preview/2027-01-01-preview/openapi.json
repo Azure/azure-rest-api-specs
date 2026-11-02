@@ -77,8 +77,7 @@
           "200": {
             "description": "Completion with the originating operation's synchronous response body, whose schema varies by operation.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/EdgeActionOperationResultPayload"
             }
           },
           "202": {
@@ -1782,6 +1781,11 @@
         "value"
       ]
     },
+    "EdgeActionOperationResultPayload": {
+      "type": "object",
+      "description": "The synchronous result's JSON object, whose fields depend on the originating operation.",
+      "additionalProperties": {}
+    },
     "EdgeActionOperationStatus": {
       "type": "object",
       "description": "The preview operation-status record served by Azure-AsyncOperation, not the operation's final result.",
@@ -1824,9 +1828,8 @@
           "readOnly": true
         },
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/EdgeActionOperationResultPayload",
           "description": "The originating operation's synchronous response snapshot, present only after success.",
-          "additionalProperties": {},
           "readOnly": true
         }
       },

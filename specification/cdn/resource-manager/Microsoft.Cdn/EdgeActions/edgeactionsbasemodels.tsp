@@ -381,6 +381,11 @@ model EdgeActionOperation is EdgeActionOperationProperties;
 @@Azure.Core.lroStatus(EdgeActionOperation.status);
 @@Azure.Core.lroErrorResult(EdgeActionOperation.error);
 
+/** The synchronous result's JSON object, whose fields depend on the originating operation. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Operation results and success snapshots have heterogeneous response fields, not user-editable resource configuration."
+@added(Versions.`2027-01-01-preview`)
+model EdgeActionOperationResultPayload is Record<unknown>;
+
 /** The preview operation-status record served by Azure-AsyncOperation, not the operation's final result. */
 @added(Versions.`2027-01-01-preview`)
 model EdgeActionOperationStatus {
@@ -413,9 +418,8 @@ model EdgeActionOperationStatus {
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 
   /** The originating operation's synchronous response snapshot, present only after success. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The success snapshot varies by originating operation and cannot have a single resource schema."
   @visibility(Lifecycle.Read)
-  properties?: Record<unknown>;
+  properties?: EdgeActionOperationResultPayload;
 }
 
 @@Azure.Core.lroStatus(EdgeActionOperationStatus.status);
@@ -449,8 +453,7 @@ model EdgeActionOperationCompletedResult {
   @statusCode statusCode: 200;
 
   /** The originating operation's synchronous result, whose JSON shape varies by operation. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Every content-bearing result is a JSON object, but its properties vary by originating operation. A fixed resource or status envelope would misrepresent other operations."
-  @body body: Record<unknown>;
+  @body body: EdgeActionOperationResultPayload;
 }
 
 /** Error details for operations */

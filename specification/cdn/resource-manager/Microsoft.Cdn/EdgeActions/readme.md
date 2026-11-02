@@ -79,6 +79,27 @@ modelerfour:
 suppressions:
   - code: OperationsAPIImplementation
     reason: Operations API implemented in central Cdn swagger, not duplicated in EdgeActions.
+  - code: GetResponseCodes
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/edgeActionOperationResults/{operationId}"].get
+    reason: This Location polling endpoint returns pending 202, a content-bearing final 200, or a bodyless final 204.
+  - code: AvoidAdditionalProperties
+    where:
+      - $.definitions.EdgeActionOperationResultPayload
+      - $.definitions.EdgeActionOperationStatus.properties.properties
+    reason: Operation results and optional success snapshots have heterogeneous response fields; they are not writable resource configuration.
+  - code: RequiredPropertiesMissingInResourceModel
+    where:
+      - $.definitions.EdgeActionOperationStatus
+    reason: This flat operation-status record is not an ARM resource envelope and has no resource type.
+  - code: BodyTopLevelProperties
+    where:
+      - $.definitions.EdgeActionOperationStatus
+    reason: The Azure-AsyncOperation record exposes standard top-level status, error, and timestamps, not an ARM resource properties envelope.
+  - code: PatchSkuProperty
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}"].patch.parameters[?(@.in == 'body')]
+    reason: The preview intentionally supports tags-only PATCH; SKU is not a PATCH input.
   - code: PostResponseCodes
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post

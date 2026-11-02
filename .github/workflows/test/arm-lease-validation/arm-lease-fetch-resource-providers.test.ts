@@ -1,7 +1,8 @@
 import fs from "node:fs";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import {
   findRepoRoot,
@@ -13,15 +14,21 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Check if specification directory exists (may not exist in sparse checkouts)
-const hasSpecificationDir = () => {
-  try {
-    const repoRoot = findRepoRoot(__dirname);
-    return fs.existsSync(path.join(repoRoot, "specification"));
-  } catch {
-    return false;
+let fixtureRoot: string;
+
+beforeAll(() => {
+  fixtureRoot = fs.mkdtempSync(path.join(tmpdir(), "arm-lease-resource-providers-"));
+  for (const folder of [
+    "storage/resource-manager/Microsoft.Storage/stable",
+    "compute/resource-manager/Microsoft.Compute/Compute/stable",
+  ]) {
+    fs.mkdirSync(path.join(fixtureRoot, "specification", folder), { recursive: true });
   }
-};
+});
+
+afterAll(() => {
+  fs.rmSync(fixtureRoot, { recursive: true, force: true });
+});
 
 describe("fetch-resource-providers", () => {
   describe("findRepoRoot", () => {
@@ -38,14 +45,7 @@ describe("fetch-resource-providers", () => {
 
   describe("findResourceProviders (without service names)", () => {
     it("finds resource providers without service names", () => {
-      const repoRoot = findRepoRoot(__dirname);
-      const rps = findResourceProviders(repoRoot, false);
-
-      // In sparse checkouts, specification/ may not exist, so rps could be empty
-      if (!hasSpecificationDir()) {
-        expect(rps).toEqual([]);
-        return;
-      }
+      const rps = findResourceProviders(fixtureRoot, false);
 
       expect(rps.length).toBeGreaterThan(0);
       expect(rps.every((rp) => rp.rpNamespace && rp.orgName && rp.path)).toBe(true);
@@ -57,14 +57,7 @@ describe("fetch-resource-providers", () => {
 
   describe("findResourceProviders (with service names)", () => {
     it("finds resource providers with service names", () => {
-      const repoRoot = findRepoRoot(__dirname);
-      const rps = findResourceProviders(repoRoot, true);
-
-      // In sparse checkouts, specification/ may not exist, so rps could be empty
-      if (!hasSpecificationDir()) {
-        expect(rps).toEqual([]);
-        return;
-      }
+      const rps = findResourceProviders(fixtureRoot, true);
 
       expect(rps.length).toBeGreaterThan(0);
       expect(rps.every((rp) => rp.rpNamespace && rp.orgName && rp.path && rp.serviceNames)).toBe(
@@ -78,6 +71,26 @@ describe("fetch-resource-providers", () => {
       expect(compute?.serviceNames?.includes("Compute")).toBe(true);
       expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Storage")).toBe(false);
     });
+  });
+
+  it("supports a partial checkout without Storage or Compute", () => {
+    const partialRoot = path.join(fixtureRoot, "partial-checkout");
+    fs.mkdirSync(
+      path.join(
+        partialRoot,
+        "specification/cdn/resource-manager/Microsoft.Cdn/EdgeActions/preview",
+      ),
+      { recursive: true },
+    );
+    expect(findResourceProviders(partialRoot, false)).toEqual([]);
+    expect(findResourceProviders(partialRoot, true)).toEqual([
+      {
+        rpNamespace: "Microsoft.Cdn",
+        path: path.join("specification", "cdn", "resource-manager", "Microsoft.Cdn"),
+        orgName: "cdn",
+        serviceNames: ["EdgeActions"],
+      },
+    ]);
   });
 
   describe("formatOutput", () => {

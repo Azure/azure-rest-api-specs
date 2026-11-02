@@ -160,7 +160,13 @@ describe("EdgeActions preview contracts", () => {
     ).toBe(false);
     expect(Object.keys(swagger.definitions.VersionCode.properties ?? {})).toEqual(["content"]);
     const result = operation("EdgeActionOperationResults_Get");
-    expect(result.responses["200"].schema).toEqual({ type: "object", additionalProperties: {} });
+    expect(result.responses["200"].schema?.$ref).toBe(
+      "#/definitions/EdgeActionOperationResultPayload",
+    );
+    expect(resolveSchema(result.responses["200"].schema!, file).schema).toMatchObject({
+      type: "object",
+      additionalProperties: {},
+    });
     expect(result.responses["202"].schema).toBeUndefined();
     expect(result.responses["202"].headers).toHaveProperty("Location");
     expect(result.responses["204"].schema).toBeUndefined();

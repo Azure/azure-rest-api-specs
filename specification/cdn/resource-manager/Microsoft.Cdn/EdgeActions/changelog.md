@@ -17,10 +17,12 @@
 - Remove the unnecessary Content-Type input from bodyless `swapDefault`, retaining asynchronous 202 and no-content 204 behavior.
 - Add `Deleting` to provisioning state without removing `Provisioning` or `Upgrading`.
 - Add the resource-group-scoped operation-status GET and preview monitor from the closed PR, with `id`/`name` replacing `resourceId`/`operationId`, optional success snapshots, and standard structured errors; a failed operation remains HTTP 200 at this status endpoint.
-- Add the separate subscription-scoped operation-result GET from the closed PR, with an unconstrained JSON object 200 result, bodyless terminal 204, and bodyless pending 202 that repeats Location; declare the heterogeneous result body explicitly so generators do not discard it, and use HTTP error responses rather than status envelopes for failures.
+- Add the separate subscription-scoped operation-result GET from the closed PR, with an unconstrained JSON object 200 result, bodyless terminal 204, and bodyless pending 202 that repeats Location; reference a shared named result payload so generators do not discard it or create anonymous models, and use HTTP error responses rather than status envelopes for failures.
 - Align preview status-monitor types, final-result types, canonical polling headers, 10-to-600-second Retry-After bounds, and example polling routes without adding Location to resource PUT.
 - Add preview examples for resource creation/replacement, updates, deployment states, execution states, synchronous code retrieval, status polling, and pending/content/no-content result polling.
 - Add generic schema-path regression tests for ancestor/child mutability, GET-to-PUT update reachability, optional writable PATCH fields, read-only filtering, references/composition, polling metadata, source/generated examples, and preview configuration selection.
+- Scope preview Swagger lint exceptions to the non-resource status monitor, heterogeneous result/snapshot responses, terminal 204 result polling, and deliberately tags-only PATCH; retain API-review approval as a release gate.
+- Make resource-provider discovery tests use isolated fixtures and cover partial specification checkouts, avoiding assumptions that the new EdgeActions/common-types sparse checkout contains Storage and Compute.
 
 ### SDK evidence and release boundary
 
