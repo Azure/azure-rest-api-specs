@@ -9,11 +9,7 @@ import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { findChangedProjects } from "../src/find-projects.ts";
 import { runChanged } from "../src/run-projects.ts";
-import { checkNoJavaScriptOrTypeScript } from "../src/rules/no-javascript-or-typescript.ts";
 
-vi.mock("../src/rules/no-javascript-or-typescript.ts", () => ({
-  checkNoJavaScriptOrTypeScript: vi.fn(),
-}));
 vi.mock("../src/find-projects.ts", async (importOriginal) => ({
   ...(await importOriginal()),
   findChangedProjects: vi.fn(),
@@ -35,7 +31,6 @@ beforeEach(async () => {
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
-  vi.mocked(checkNoJavaScriptOrTypeScript).mockReset().mockResolvedValue({ success: true });
   vi.mocked(findChangedProjects)
     .mockReset()
     .mockResolvedValue({

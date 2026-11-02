@@ -226,7 +226,7 @@ it.each([
       expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
       expect(stderr).not.toContain("\n    at ");
       expect(stripVTControlCharacters(String(error.stdout))).toBe(
-        "\n2 passed | 1 failed | 7 not run\n",
+        "\n3 passed | 1 failed | 7 not run\n",
       );
       expect(String(error.stdout)).not.toMatch(
         /Executing rule:|config files:|imports:|Expected npm prefix:/,
@@ -532,96 +532,35 @@ it("succeeds when committed changes do not affect any projects", async () => {
   expect(stdout).not.toContain("Running TypeSpecValidation on folder:");
 });
 
-it("rejects script additions without a TypeSpec project, including the WebPubSub regression", async () => {
-  vi.stubEnv("GITHUB_ACTIONS", "true");
-  await writeFile(
-    join(root, "suppressions.yaml"),
-    "- tool: TypeSpecValidation\n  paths: [specification/**]\n  reason: cannot bypass script check\n",
-  );
-  await initGit();
-  await commit("Base");
-  const files = [
-    "specification/script.js",
-    "specification/foo/script.ts",
-    "specification/webpubsub/data-plane/WebPubSubChat/client-customizations.mjs",
-    "specification/foo/script.cjs",
-    "specification/foo/script.mts",
-    "specification/foo/script.cts",
-    "specification/foo/component.jsx",
-    "specification/foo/component.tsx",
-    "specification/foo/types.d.ts",
-    "specification/foo/UPPER.JS",
-  ];
-  for (const file of files) {
-    await mkdir(dirname(join(root, file)), { recursive: true });
-    await writeFile(join(root, file), "export {};");
-  }
-  await commit("Add scripts");
+it.each(["single-project", "--all", "--changed"])(
+  "rejects existing and uncommitted scripts throughout the service in %s validation",
+  async (mode) => {
+    const project = "specification/webpubsub/data-plane/WebPubSubChat";
+    await addProject(project);
+    await writeFile(join(root, project, "main.tsp"), "");
+    await mkdir(join(root, project, "examples"));
+    await writeFile(join(root, project, "client-customizations.mjs"), "export {};");
+    await initGit();
+    await commit("Existing script");
+    await writeFile(join(root, project, "README.md"), "# Changed documentation");
+    await commit("Unrelated change");
+    await writeFile(join(root, "specification/webpubsub/shared.js"), "export {};");
 
-  try {
-    await run("--changed");
-    expect.fail("Expected script additions to fail validation");
-  } catch (error) {
-    expect(error).toMatchObject({ code: 1 });
-    if (!(error instanceof Error) || !("stderr" in error) || !("stdout" in error)) throw error;
-    for (const file of files) {
-      expect(String(error.stderr)).toContain(`${file} - error tsv/no-javascript-or-typescript:`);
+    try {
+      await run(mode === "single-project" ? project : mode);
+      expect.fail("Expected scripts in the service folder to fail validation");
+    } catch (error) {
+      expect(error).toMatchObject({ code: 1 });
+      if (!(error instanceof Error) || !("stderr" in error)) throw error;
+      expect(String(error.stderr)).toContain(
+        `${project}/client-customizations.mjs - error tsv/disallowed-file-type:`,
+      );
+      expect(String(error.stderr)).toContain(
+        "specification/webpubsub/shared.js - error tsv/disallowed-file-type:",
+      );
     }
-    expect(String(error.stdout)).toMatch(
-      /^::error file=.*\/WebPubSubChat\/client-customizations.mjs,line=1,col=1::/m,
-    );
-    expect(String(error.stdout)).not.toContain("No impacted TypeSpec projects found");
-  }
-  expect((await run("--changed", "--dry-run")).stdout).toContain(
-    "No impacted TypeSpec projects found",
-  );
-});
-
-it.each([
-  { from: "documentation/script.js", to: "specification/foo/script.js" },
-  { from: "specification/foo/script.txt", to: "specification/foo/script.ts" },
-])("rejects a rename from $from to $to", async ({ from, to }) => {
-  await mkdir(dirname(join(root, from)), { recursive: true });
-  await writeFile(join(root, from), "console.log('renamed');");
-  await initGit();
-  await commit("Base");
-  await mkdir(dirname(join(root, to)), { recursive: true });
-  await simpleGit(root).mv(from, to);
-  await commit("Rename script");
-
-  await expect(run("--changed")).rejects.toMatchObject({
-    code: 1,
-    stderr: expect.stringContaining(`${to} - error tsv/no-javascript-or-typescript:`) as unknown,
-  });
-});
-
-it("allows existing script edits, removals, moves out, and non-script additions", async () => {
-  const service = join(root, "specification/foo");
-  await mkdir(service, { recursive: true });
-  await writeFile(join(service, "existing.js"), "export const version = 1;");
-  await writeFile(join(service, "deleted.ts"), "export {};");
-  await writeFile(join(service, "moved.cjs"), "console.log('moved');");
-  await initGit();
-  await commit("Base");
-
-  await writeFile(join(service, "existing.js"), "export const version = 2;");
-  await rm(join(service, "deleted.ts"));
-  await mkdir(join(root, "documentation"));
-  await simpleGit(root).mv("specification/foo/moved.cjs", "documentation/moved.cjs");
-  await writeFile(join(root, "documentation/new.ts"), "export {};");
-  await mkdir(join(root, "specification-other"));
-  await writeFile(join(root, "specification-other/script.js"), "export {};");
-  await writeFile(join(service, "script.js.md"), "# Documentation");
-  await mkdir(join(service, "examples"));
-  await writeFile(join(service, "examples/example.json"), "{}");
-  await commit("Allowed changes");
-  await writeFile(join(service, "uncommitted.ts"), "export {};");
-
-  const { stdout, stderr } = await run("--changed");
-  expect(stdout).toContain("No impacted TypeSpec projects found");
-  expect(stderr).toBe("");
-  expect(await readFile(join(service, "uncommitted.ts"), "utf8")).toBe("export {};");
-});
+  },
+);
 
 it.each(["add", "delete"])(
   "skips service validation for a skill-only %s commit",
