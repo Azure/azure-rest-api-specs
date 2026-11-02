@@ -56,8 +56,10 @@ interface AutoReleaseJobs {
   @tag("autoReleaseJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     AutoReleaseJob,
-    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -72,13 +74,16 @@ interface AutoReleaseJobs {
 
 @@maxLength(AutoReleaseJob.name, 80);
 @@minLength(AutoReleaseJob.name, 2);
-@@doc(AutoReleaseJob.name,
+@@doc(
+  AutoReleaseJob.name,
   "Name for the AutoRelease job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric."
 );
 @@doc(AutoReleaseJob.properties, "Properties of the AutoRelease job.");
-@@doc(AutoReleaseJobs.createOrUpdate::parameters.resource,
+@@doc(
+  AutoReleaseJobs.createOrUpdate::parameters.resource,
   "Object containing the complete policy set when creating an AutoRelease job. For an existing job, only adminStatus can be modified; when omitted, the service applies Enable. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(AutoReleaseJobs.update::parameters.properties,
+@@doc(
+  AutoReleaseJobs.update::parameters.properties,
   "Object containing the administrative status to update."
 );

@@ -1539,12 +1539,6 @@ model AmlFilesystemPropertiesHsm {
   settings?: AmlFilesystemHsmSettings;
 
   /**
-   * Controls how additional properties are handled during HSM export.
-   */
-  @added(Versions.v2027_01_01)
-  exportAdditionalProperties?: AmlFilesystemExportAdditionalProperties;
-
-  /**
    * Archive status
    */
   @visibility(Lifecycle.Read)
@@ -1565,6 +1559,12 @@ model AmlFilesystemHsmSettings {
    * Resource ID of storage container used for logging events and errors.  Must be a separate container in the same storage account as the hydration and archive container. The resource provider must have permission to create SAS tokens on the storage account.
    */
   loggingContainer: string;
+
+  /**
+   * Controls how additional properties are handled during HSM export.
+   */
+  @added(Versions.v2027_01_01)
+  exportAdditionalProperties?: AmlFilesystemExportAdditionalProperties;
 
   /**
    * Only blobs in the non-logging container that start with this path/prefix get imported into the cluster namespace. This is only used during initial creation of the AML file system. It automatically creates an import job resource that can be deleted.

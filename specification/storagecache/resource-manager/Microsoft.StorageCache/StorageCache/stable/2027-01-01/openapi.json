@@ -5098,6 +5098,10 @@
           "type": "string",
           "description": "Resource ID of storage container used for logging events and errors.  Must be a separate container in the same storage account as the hydration and archive container. The resource provider must have permission to create SAS tokens on the storage account."
         },
+        "exportAdditionalProperties": {
+          "$ref": "#/definitions/AmlFilesystemExportAdditionalProperties",
+          "description": "Controls how additional properties are handled during HSM export."
+        },
         "importPrefix": {
           "type": "string",
           "description": "Only blobs in the non-logging container that start with this path/prefix get imported into the cluster namespace. This is only used during initial creation of the AML file system. It automatically creates an import job resource that can be deleted.",
@@ -5251,10 +5255,6 @@
         "settings": {
           "$ref": "#/definitions/AmlFilesystemHsmSettings",
           "description": "Specifies HSM settings of the AML file system."
-        },
-        "exportAdditionalProperties": {
-          "$ref": "#/definitions/AmlFilesystemExportAdditionalProperties",
-          "description": "Controls how additional properties are handled during HSM export."
         },
         "archiveStatus": {
           "type": "array",
@@ -6829,13 +6829,13 @@
             "name"
           ]
         },
-        "passStartTime": {
+        "passStartTimeUtc": {
           "type": "string",
           "format": "date-time",
           "description": "Current or most recent pass start time.",
           "readOnly": true
         },
-        "passEndTime": {
+        "passEndTimeUtc": {
           "type": "string",
           "format": "date-time",
           "description": "Current or most recent pass end time, when available.",
@@ -7024,7 +7024,7 @@
     "AutoReleaseSize": {
       "type": "string",
       "description": "A size represented by an integer followed by B, K, M, G, T, or P.",
-      "pattern": "^[0-9]+[BKMGTP]$"
+      "pattern": "^[0-9]+(B|K|M|G|T|P)$"
     },
     "AutoReleaseSuffix": {
       "type": "string",

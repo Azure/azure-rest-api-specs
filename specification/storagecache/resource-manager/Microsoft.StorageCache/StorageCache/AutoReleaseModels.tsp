@@ -153,7 +153,7 @@ scalar AutoReleaseSuffix extends string;
 
 /** A size represented by an integer followed by B, K, M, G, T, or P. */
 @added(Versions.v2027_01_01)
-@pattern("^[0-9]+[BKMGTP]$")
+@pattern("^[0-9]+(B|K|M|G|T|P)$")
 scalar AutoReleaseSize extends string;
 
 /** A trigger that starts or stops an AutoRelease policy. */
@@ -367,11 +367,11 @@ model AutoReleaseJobStatus {
 
   /** Current or most recent pass start time. */
   @visibility(Lifecycle.Read)
-  passStartTime?: utcDateTime;
+  passStartTimeUtc?: utcDateTime;
 
   /** Current or most recent pass end time, when available. */
   @visibility(Lifecycle.Read)
-  passEndTime?: utcDateTime;
+  passEndTimeUtc?: utcDateTime;
 
   /** Files released in the current or most recent pass. */
   @visibility(Lifecycle.Read)
