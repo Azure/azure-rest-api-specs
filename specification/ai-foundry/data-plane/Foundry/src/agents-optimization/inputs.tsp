@@ -286,29 +286,26 @@ model AgentOptimizationCandidateSearchConfiguration {
   max_candidates?: int32 = 1;
 }
 
-/** Shared evaluation inputs for agent and skill optimization. All fields are optional in the schema; the service validates required combinations for the selected optimization type and rejects invalid requests. */
+/** Reusable quality-measurement configuration for agent optimization. */
 model AgentOptimizationEvaluationConfiguration {
-  @doc("Required by the service for agent optimization to guide the search. Not accepted for skill optimization, where evaluation is reporting-only. Inline data supports up to 2,000 test cases when a separate validation set is supplied; otherwise it is also used for validation and is limited to 500.")
-  training_set?: AgentOptimizationEvaluationSet;
+  @doc("Evaluation set used to guide the optimization search. Inline data supports up to 2,000 test cases when a separate validation set is supplied; otherwise it is also used for validation and is limited to 500.")
+  training_set: AgentOptimizationEvaluationSet;
 
-  @doc("Held-out evaluation set used for full candidate evaluation, limited to 500 inline test cases. Agent optimization reuses training_set when omitted. Skill evaluation requires a caller-supplied validation_set, reused unchanged for the baseline and learned candidate; the service rejects omission rather than generating a dataset from traces.")
+  @doc("Held-out evaluation set used for full candidate evaluation, limited to 500 inline test cases. The training set is reused and subject to the same 500-test-case validation limit when omitted.")
   validation_set?: AgentOptimizationEvaluationSet;
 
-  @doc("Existing evaluator references. Required by the service for agent optimization. Skill evaluation requires these references, evaluator_generation_configuration, or both; when both are supplied, use their combined evaluator set. After skill evaluation preparation, contains the resolved exact versions used unchanged for baseline and learned-candidate evaluation.")
+  @doc("Evaluator references used to score candidate quality.")
   @minItems(1)
   @maxItems(20)
-  evaluators?: AgentOptimizationEvaluator[];
+  evaluators: AgentOptimizationEvaluator[];
 
-  @doc("Model configuration used by model-based evaluators and conversation simulation. Required by the service for agent optimization and when skill evaluation is requested.")
-  evaluation_model?: EvaluationModelConfiguration;
+  @doc("Model configuration used by model-based evaluators and conversation simulation.")
+  evaluation_model: EvaluationModelConfiguration;
 
   @doc("Maximum number of target-agent runs executed concurrently during each single-turn evaluation. If omitted, the service defaults to 1. Conversation evaluation supports only 1.")
   @minValue(1)
   @maxValue(10)
   max_concurrent_agent_runs?: int32 = 1;
-
-  @doc("Opt-in creation of evaluators for skill optimization using the job's optimization_model_configuration, not evaluation_model. No separate generation model is accepted. Resolved exact versions are returned in evaluators after preparation. Not accepted for agent optimization; use existing evaluator references there.")
-  evaluator_generation_configuration?: AgentOptimizationEvaluatorGenerationConfiguration;
 }
 
 /** Optimization job configuration types. */
@@ -380,9 +377,8 @@ model SteeringPromptOptimizationContext extends OptimizationContext {
   @doc("Optimization context type discriminator.")
   type: OptimizationContextType.steering_prompt;
 
-  @doc("Developer guidance describing the desired changes, from 1 to 102,400 characters. Maximum UTF-8 encoded size is 100 KiB (102,400 bytes), enforced by the service. The character limit is an additional bound, not a substitute for UTF-8 byte-size validation.")
+  @doc("Developer guidance describing the desired changes.")
   @minLength(1)
-  @maxLength(102400)
   prompt: string;
 }
 
@@ -521,7 +517,7 @@ union AgentOptimizationEvaluatorGenerationSourceType {
   agent_traces: "agent_traces",
 }
 
-/** Base configuration for service-generated optimization evaluators. Currently supported for skill optimization only. Uses the job's optimization_model_configuration; no separate generation model is accepted. */
+/** Base configuration for service-generated optimization evaluators. Currently supported for skill optimization only. Uses evaluation_configuration.evaluation_model; no separate generation model is accepted. */
 @discriminator("type")
 model AgentOptimizationEvaluatorGenerationConfiguration {
   @doc("Evaluator generation source discriminator.")
@@ -538,18 +534,40 @@ model AgentOptimizationTraceEvaluatorGenerationConfiguration
   type: AgentOptimizationEvaluatorGenerationSourceType.agent_traces;
 }
 
+/** Skill-only evaluation inputs. Training-trace grading can inform single-shot learning; supported before/after comparison reports impact without gating publication. */
+model SkillOptimizationEvaluationConfiguration {
+  @doc("Optional target-completion validation data, limited to 500 inline test cases. When omitted, the service generates data from the selected traces and partitions it for supported before/after comparison. Both comparison runs reuse the same frozen validation dataset. Caller-supplied training_set is not accepted.")
+  validation_set?: AgentOptimizationTargetCompletionEvaluationSet;
+
+  @doc("Existing evaluator reference. At submission, supply exactly one reference or evaluator_generation_configuration, not both; the service validates this combination. After preparation, contains the resolved exact evaluator version used for training grading and supported baseline and learned-candidate evaluation.")
+  @minItems(1)
+  @maxItems(1)
+  evaluators?: AgentOptimizationEvaluator[];
+
+  @doc("Required model configuration used for evaluation. Its model also supplies evaluator-generation requests when generation is selected.")
+  evaluation_model: EvaluationModelConfiguration;
+
+  @doc("Maximum number of target-agent runs executed concurrently during each target-completion evaluation, from 1 to 10. If omitted, the service defaults to 1.")
+  @minValue(1)
+  @maxValue(10)
+  max_concurrent_agent_runs?: int32 = 1;
+
+  @doc("Alternative to an existing evaluator reference at submission. Generates an evaluator using evaluation_model.model. Resolved exact versions are returned in evaluators after preparation.")
+  evaluator_generation_configuration?: AgentOptimizationEvaluatorGenerationConfiguration;
+}
+
 /** Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. Optional evaluation reuses a non-generated baseline candidate. */
 model SkillOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
   @doc("Skill optimization discriminator.")
   type: AgentOptimizationConfigurationType.skill_optimization;
 
-  @doc("At least one context item containing trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines.")
+  @doc("At least one context item containing trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines. For skill optimization only, a steering prompt must be non-empty and at most 100 KiB (102,400 UTF-8 bytes), enforced by the service; oversized prompts are rejected rather than truncated.")
   @minItems(1)
   context: OptimizationContext[];
 
-  @doc("Optional before/after evaluation using the shared evaluation configuration. The service requires target_configuration, validation_set, evaluation_model, and existing evaluators or evaluator_generation_configuration. Training sets are not accepted. Evaluate the same pinned target with baseline skills and proposed skills using the same validation set and resolved evaluator versions. Scores do not guide generation, ranking, selection, or publication. Omitted to skip performance evaluation.")
-  evaluation_configuration?: AgentOptimizationEvaluationConfiguration;
+  @doc("Optional historical training-trace grading and before/after comparison for supported registered targets. Requires target_configuration, evaluation_model, and one existing evaluator or evaluator_generation_configuration. Training verdicts can inform learning; separate before/after scores report impact and do not drive candidate search, selection, or publication. Omitted to skip new training grading and comparison.")
+  evaluation_configuration?: SkillOptimizationEvaluationConfiguration;
 }
 
 @doc("Inputs for estimating an agent-optimization job.")
