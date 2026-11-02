@@ -53,6 +53,7 @@ it("searches affected services recursively, deduplicates, and sorts projects", a
   expect(getChangedFiles).toHaveBeenCalledWith({
     cwd: root,
     ...revisions,
+    gitOptions: ["--no-renames"],
   });
 });
 
@@ -100,6 +101,7 @@ it.each([
   ".github/workflows/typespec-validation.yaml",
   ".github/shared/src/changed-files.ts",
   ".github/arm-leases-other/lease.yaml",
+  ".github/skills-other/script.ts",
   "eng/tools/typespec-validation/src/index.ts",
   "eng/scripts/Get-TypeSpec-Folders.ps1",
 ])("validates all projects when %s changes", async (file) => {
@@ -116,6 +118,10 @@ it.each([
 it.each([
   ".github/arm-leases/service/lease.yaml",
   ".github/CODEOWNERS",
+  ".github/skills/azure-typespec-author/SKILL.md",
+  ".github/skills/azure-typespec-author/evaluate/scripts/run.ts",
+  ".github/skills/azure-typespec-author/evaluate/.vally.yaml",
+  ".github/skills/azure-typespec-author/evaluate/fixtures/example/main.tsp",
   "eng/common/scripts/common.ps1",
   "eng/scripts/ChangedFiles-Functions.ps1",
   "eng/scripts/Tests/ChangedFiles-Functions.Tests.ps1",
@@ -147,6 +153,39 @@ it("ignores core-file changes without dropping scoped spec changes", async () =>
       checkingAllSpecs: false,
     },
   );
+});
+
+it("keeps service validation scoped when skills also change", async () => {
+  const project = await addProject("specification/service/Project");
+  await addProject("specification/unaffected/Other");
+  vi.mocked(getChangedFiles).mockResolvedValue([
+    ".github/skills/azure-typespec-author/SKILL.md",
+    "specification/service/Project/main.tsp",
+  ]);
+
+  await expect(findChangedProjects(root, revisions)).resolves.toEqual({
+    projects: [project],
+    checkingAllSpecs: false,
+  });
+});
+
+it.each([
+  "pnpm-lock.yaml",
+  ".github/workflows/typespec-validation.yaml",
+  ".github/shared/src/changed-files.ts",
+  "eng/tools/typespec-validation/src/find-projects.ts",
+])("retains all-project validation when skills and %s change", async (file) => {
+  const first = await addProject("specification/first/Project");
+  const second = await addProject("specification/second/Project");
+  vi.mocked(getChangedFiles).mockResolvedValue([
+    ".github/skills/azure-typespec-author/SKILL.md",
+    file,
+  ]);
+
+  await expect(findChangedProjects(root, revisions)).resolves.toEqual({
+    projects: [first, second],
+    checkingAllSpecs: true,
+  });
 });
 
 it("returns an empty selection when no files changed", async () => {
