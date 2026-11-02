@@ -57,7 +57,7 @@ interface BigDataPoolResourceInfos {
        * Whether to stop any running jobs in the Big Data pool
        */
       @query("force")
-      force?: boolean;
+      force?: boolean = false;
     },
     Response =
       | ArmResourceUpdatedResponse<BigDataPoolResourceInfo>
