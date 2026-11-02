@@ -117,6 +117,8 @@ using Microsoft.IoTFirmwareDefense;
 @@clientName(CryptoKey.keyType, "CryptoKeyType", "csharp");
 @@clientName(CryptoKey.usage, "CryptoKeyUsage", "csharp");
 @@clientName(PairedKey.type, "PairedKeyType", "csharp");
+@@clientName(FunctionCall, "FirmwareFunctionCallCount", "csharp");
+@@clientName(KevProperties.dateAdded, "AddedOn", "csharp");
 @@clientName(CertificateUsage.OCSPSigning, "OcspSigning", "csharp");
 
 @@usage(Workspace, Usage.input, "csharp");
