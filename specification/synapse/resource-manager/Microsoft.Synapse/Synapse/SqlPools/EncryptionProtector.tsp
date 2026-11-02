@@ -78,7 +78,10 @@ interface EncryptionProtectors {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceManagedSqlServerEncryptionProtector_List")
-  list is EncryptionProtectorOps.List<EncryptionProtector>;
+  list is EncryptionProtectorOps.List<
+    EncryptionProtector,
+    Response = ArmResponse<EncryptionProtectorListResult>
+  >;
 
   /**
    * Revalidates workspace managed sql server's existing encryption protector.
@@ -88,7 +91,9 @@ interface EncryptionProtectors {
   revalidate is EncryptionProtectorOps.ActionAsync<
     EncryptionProtector,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

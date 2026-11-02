@@ -11,18 +11,22 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace SqlPools;
-// FIXME: SqlPoolSchema has no properties property
 /**
  * A Sql pool schema resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield conversion: the published API defines SqlPoolSchema with no properties bag, which the standard ProxyResource<T> template cannot express."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "customAzureResource marks this hand-shaped resource as an Azure resource so it keeps the published OpenAPI shape."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Applies the same payload metadata handling that ProxyResource<T> applies, so the read-only name key stays out of request bodies and routes."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance from the common ProxyResource is required so the published allOf reference to common-types ProxyResource is preserved."
 @parentResource(SqlPool)
-model SqlPoolSchema is Azure.ResourceManager.ProxyResource<{}> {
-  ...ResourceNameParameter<
-    Resource = SqlPoolSchema,
-    KeyName = "schemaName",
-    SegmentName = "schemas",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model SqlPoolSchema extends Azure.ResourceManager.Foundations.ProxyResource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key("schemaName")
+  @segment("schemas")
+  name: string;
 }
 
 alias SqlPoolSchemaOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -48,6 +52,7 @@ interface SqlPoolSchemas {
    */
   list is SqlPoolSchemaOps.List<
     SqlPoolSchema,
+    Response = ArmResponse<SqlPoolSchemaListResult>,
     Parameters = {
       /**
        * An OData filter expression that filters elements in the collection.

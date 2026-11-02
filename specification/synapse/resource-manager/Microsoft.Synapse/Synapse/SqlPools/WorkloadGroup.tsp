@@ -82,7 +82,10 @@ interface WorkloadGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolWorkloadGroup_List")
-  list is WorkloadGroupOps.List<WorkloadGroup>;
+  list is WorkloadGroupOps.List<
+    WorkloadGroup,
+    Response = ArmResponse<WorkloadGroupListResult>
+  >;
 }
 
 @@doc(WorkloadGroup.name, "The name of the workload group.");

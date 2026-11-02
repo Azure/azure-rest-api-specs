@@ -52,7 +52,10 @@ interface ExtendedSqlPoolBlobAuditingPolicies {
   /**
    * Lists extended auditing settings of a Sql pool.
    */
-  listBySqlPool is ExtendedSqlPoolBlobAuditingPolicyOps.List<ExtendedSqlPoolBlobAuditingPolicy>;
+  listBySqlPool is ExtendedSqlPoolBlobAuditingPolicyOps.List<
+    ExtendedSqlPoolBlobAuditingPolicy,
+    Response = ArmResponse<ExtendedSqlPoolBlobAuditingPolicyListResult>
+  >;
 }
 
 @@doc(ExtendedSqlPoolBlobAuditingPolicy.name, "");

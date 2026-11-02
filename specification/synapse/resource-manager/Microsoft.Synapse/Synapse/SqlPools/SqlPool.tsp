@@ -64,7 +64,10 @@ interface SqlPools {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is SqlPoolOps.CreateOrUpdateAsync<
     SqlPool,
-    Response = ArmResourceUpdatedResponse<SqlPool> | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<SqlPool>
+      | ArmAcceptedLroResponse
+      | SqlPoolNotFoundResponse,
     LroHeaders = ArmLroLocationHeader<FinalResult = SqlPool> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -93,12 +96,24 @@ interface SqlPools {
   /**
    * Pause a SQL pool
    */
-  pause is SqlPoolOps.ActionAsync<SqlPool, void, ArmResponse<SqlPool>>;
+  pause is SqlPoolOps.ActionAsync<
+    SqlPool,
+    void,
+    ArmResponse<SqlPool>,
+    LroHeaders = ArmLroLocationHeader<FinalResult = SqlPool> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Resume a SQL pool
    */
-  resume is SqlPoolOps.ActionAsync<SqlPool, void, ArmResponse<SqlPool>>;
+  resume is SqlPoolOps.ActionAsync<
+    SqlPool,
+    void,
+    ArmResponse<SqlPool>,
+    LroHeaders = ArmLroLocationHeader<FinalResult = SqlPool> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Creates a restore point for a data warehouse.
@@ -109,7 +124,9 @@ interface SqlPools {
   sqlPoolRestorePointsCreate is SqlPoolOps.ActionAsync<
     SqlPool,
     CreateSqlPoolRestorePointDefinition,
-    ArmResponse<RestorePoint> | ArmResourceCreatedResponse<RestorePoint>
+    ArmResponse<RestorePoint> | ArmResourceCreatedResponse<RestorePoint>,
+    LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -123,7 +140,7 @@ interface SqlPools {
   list is SqlPoolOps.ActionSync<
     SqlPool,
     void,
-    ArmResponse<ResourceListResult<SqlPoolOperation>>
+    ArmResponse<SqlPoolBlobAuditingPolicySqlPoolOperationListResult>
   >;
 
   /**
@@ -151,7 +168,7 @@ interface SqlPools {
   listCurrent is SqlPoolOps.ActionSync<
     SqlPool,
     void,
-    ArmResponse<ResourceListResult<SensitivityLabel>>,
+    ArmResponse<SensitivityLabelListResult>,
     Parameters = {
       /**
        * An OData filter expression that filters elements in the collection.
@@ -185,7 +202,7 @@ interface SqlPools {
   listRecommended is SqlPoolOps.ActionSync<
     SqlPool,
     void,
-    ArmResponse<ResourceListResult<SensitivityLabel>>,
+    ArmResponse<SensitivityLabelListResult>,
     Parameters = {
       /**
        * Specifies whether to include disabled recommendations or not.
@@ -253,6 +270,8 @@ interface SqlPoolOperationResults {
   /**
    * Get the status of a SQL pool operation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "For backward compatibility: the original OpenAPI marks this GET as long-running (released SDKs expose begin_get_location_header_result)"
+  @extension("x-ms-long-running-operation", true)
   getLocationHeaderResult is SqlPoolOperationResultOps.Read<
     SqlPool,
     Response =
@@ -269,7 +288,10 @@ interface SqlPoolOperationResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPools_ListByWorkspace")
-  listByWorkspace is SqlPoolOps.List<SqlPool>;
+  listByWorkspace is SqlPoolOps.List<
+    SqlPool,
+    Response = ArmResponse<SqlPoolInfoListResult>
+  >;
 }
 
 @@doc(SqlPool.name, "SQL pool name");
@@ -285,3 +307,13 @@ interface SqlPoolOperationResults {
 );
 @@doc(SqlPools.sqlPoolSensitivityLabelsUpdate::parameters.body, "");
 @@doc(SqlPools.sqlPoolRecommendedSensitivityLabelsUpdate::parameters.body, "");
+
+/**
+ * The SQL pool was not found (returned by SqlPools_Create for backward compatibility).
+ */
+@error
+model SqlPoolNotFoundResponse {
+  /** The 404 status code. */
+  @statusCode
+  _: 404;
+}

@@ -57,7 +57,10 @@ interface ReplicationLinks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolReplicationLinks_List")
-  list is ReplicationLinkOps.List<ReplicationLink>;
+  list is ReplicationLinkOps.List<
+    ReplicationLink,
+    Response = ArmResponse<ReplicationLinkListResult>
+  >;
 }
 
 @@doc(ReplicationLink.name, "The ID of the replication link.");

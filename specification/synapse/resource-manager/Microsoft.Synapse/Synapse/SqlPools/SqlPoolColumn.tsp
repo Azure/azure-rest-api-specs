@@ -50,6 +50,7 @@ interface SqlPoolColumns {
   @operationId("SqlPoolTableColumns_ListByTableName")
   listByTableName is SqlPoolColumnOps.List<
     SqlPoolColumn,
+    Response = ArmResponse<SqlPoolColumnListResult>,
     Parameters = {
       /**
        * An OData filter expression that filters elements in the collection.

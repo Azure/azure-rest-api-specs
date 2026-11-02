@@ -82,7 +82,10 @@ interface WorkloadClassifiers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolWorkloadClassifier_List")
-  list is WorkloadClassifierOps.List<WorkloadClassifier>;
+  list is WorkloadClassifierOps.List<
+    WorkloadClassifier,
+    Response = ArmResponse<WorkloadClassifierListResult>
+  >;
 }
 
 @@doc(WorkloadClassifier.name, "The name of the workload classifier.");

@@ -1359,7 +1359,7 @@ model SqlPoolBlobAuditingPolicyProperties {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    *
    */
-  isAzureMonitorTargetEnabled?: boolean;
+  isAzureMonitorTargetEnabled?: boolean = false;
 }
 
 /**
@@ -1467,7 +1467,21 @@ model SqlPoolOperationProperties {
 /**
  * The response to a list Sql pool usages request.
  */
-model SqlPoolUsageListResult is Azure.Core.Page<SqlPoolUsage>;
+model SqlPoolUsageListResult {
+  /**
+   * The list of usages for the Sql pool.
+   */
+  @pageItems
+  @identifiers(#[])
+  value: SqlPoolUsage[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * The Sql pool usages.
@@ -1869,8 +1883,21 @@ model SqlPoolVulnerabilityAssessmentScanExportProperties {
 /**
  * A list of SQL pool security alert policies.
  */
-model ListSqlPoolSecurityAlertPolicies
-  is Azure.Core.Page<SqlPoolSecurityAlertPolicy>;
+model ListSqlPoolSecurityAlertPolicies {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SqlPoolSecurityAlertPolicy[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Properties of a security alert policy.
@@ -2667,7 +2694,21 @@ model EncryptionProtectorProperties {
 /**
  * Represents the response to a list server metrics request.
  */
-model ServerUsageListResult is Azure.Core.Page<ServerUsage>;
+model ServerUsageListResult {
+  /**
+   * The list of server metrics for the server.
+   */
+  @pageItems
+  @identifiers(#[])
+  value: ServerUsage[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Represents server metrics.
@@ -2952,4 +2993,419 @@ union RecommendedSensitivityLabelSource {
    * recommended
    */
   recommended: "recommended",
+}
+
+/**
+ * List of SQL pools
+ */
+model SqlPoolInfoListResult {
+  /**
+   * List of SQL pools
+   */
+  @pageItems
+  value?: SqlPool[];
+
+  /**
+   * Link to the next page of results
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * A list of sql pool extended auditing settings.
+ */
+model ExtendedSqlPoolBlobAuditingPolicyListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ExtendedSqlPoolBlobAuditingPolicy[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of Sql pool auditing settings.
+ */
+model SqlPoolBlobAuditingPolicyListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SqlPoolBlobAuditingPolicy[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Represents the response to a List Sql pool replication link request.
+ */
+model ReplicationLinkListResult {
+  /**
+   * The list of Sql pool replication links housed in the Sql pool.
+   */
+  @pageItems
+  value?: ReplicationLink[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of long term retention backups.
+ */
+model RestorePointListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: RestorePoint[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of Sql pool schemas.
+ */
+model SqlPoolSchemaListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SqlPoolSchema[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of Sql pool columns.
+ */
+model SqlPoolColumnListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SqlPoolColumn[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of Sql pool tables.
+ */
+model SqlPoolTableListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SqlPoolTable[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of transparent data encryption configurations.
+ */
+model TransparentDataEncryptionListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: TransparentDataEncryption[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of vulnerability assessment scan records.
+ */
+model VulnerabilityAssessmentScanRecordListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: VulnerabilityAssessmentScanRecord[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of the Sql pool's vulnerability assessments.
+ */
+model SqlPoolVulnerabilityAssessmentListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SqlPoolVulnerabilityAssessment[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of workload classifiers for a workload group.
+ */
+model WorkloadClassifierListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: WorkloadClassifier[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of workload groups.
+ */
+model WorkloadGroupListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: WorkloadGroup[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of server auditing settings.
+ */
+model ServerBlobAuditingPolicyListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ServerBlobAuditingPolicy[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of the server's dedicated sql minimal tls settings.
+ */
+model DedicatedSQLminimalTlsSettingsListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: DedicatedSQLminimalTlsSettings[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of server encryption protectors.
+ */
+model EncryptionProtectorListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: EncryptionProtector[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of server extended auditing settings.
+ */
+model ExtendedServerBlobAuditingPolicyListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ExtendedServerBlobAuditingPolicy[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * The response to a list recoverable sql pools request
+ */
+model RecoverableSqlPoolListResult {
+  /**
+   * A list of recoverable sql pool
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: RecoverableSqlPool[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of the workspace managed sql server's security alert policies.
+ */
+model ServerSecurityAlertPolicyListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ServerSecurityAlertPolicy[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of the server's vulnerability assessments.
+ */
+model ServerVulnerabilityAssessmentListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ServerVulnerabilityAssessment[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * The response to a list Sql pool operations request
+ */
+model SqlPoolBlobAuditingPolicySqlPoolOperationListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SqlPoolOperation[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of sensitivity labels.
+ */
+model SensitivityLabelListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SensitivityLabel[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }

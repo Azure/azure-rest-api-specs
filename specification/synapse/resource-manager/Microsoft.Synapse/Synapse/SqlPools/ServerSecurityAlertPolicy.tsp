@@ -64,7 +64,10 @@ interface ServerSecurityAlertPolicies {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceManagedSqlServerSecurityAlertPolicy_List")
-  list is ServerSecurityAlertPolicyOps.List<ServerSecurityAlertPolicy>;
+  list is ServerSecurityAlertPolicyOps.List<
+    ServerSecurityAlertPolicy,
+    Response = ArmResponse<ServerSecurityAlertPolicyListResult>
+  >;
 }
 
 @@doc(ServerSecurityAlertPolicy.name, "The name of the security alert policy.");

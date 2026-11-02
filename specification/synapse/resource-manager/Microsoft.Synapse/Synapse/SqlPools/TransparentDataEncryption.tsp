@@ -65,7 +65,10 @@ interface TransparentDataEncryptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolTransparentDataEncryptions_List")
-  list is TransparentDataEncryptionOps.List<TransparentDataEncryption>;
+  list is TransparentDataEncryptionOps.List<
+    TransparentDataEncryption,
+    Response = ArmResponse<TransparentDataEncryptionListResult>
+  >;
 }
 
 @@doc(

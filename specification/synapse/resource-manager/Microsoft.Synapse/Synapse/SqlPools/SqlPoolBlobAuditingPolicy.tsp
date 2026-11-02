@@ -59,7 +59,10 @@ interface SqlPoolBlobAuditingPolicies {
   /**
    * Lists auditing settings of a Sql pool.
    */
-  listBySqlPool is SqlPoolBlobAuditingPolicyOps.List<SqlPoolBlobAuditingPolicy>;
+  listBySqlPool is SqlPoolBlobAuditingPolicyOps.List<
+    SqlPoolBlobAuditingPolicy,
+    Response = ArmResponse<SqlPoolBlobAuditingPolicyListResult>
+  >;
 }
 
 @@doc(SqlPoolBlobAuditingPolicy.name, "");

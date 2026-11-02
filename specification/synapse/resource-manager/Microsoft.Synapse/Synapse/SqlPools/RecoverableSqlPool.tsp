@@ -48,7 +48,10 @@ interface RecoverableSqlPools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceManagedSqlServerRecoverableSqlPools_List")
-  list is RecoverableSqlPoolOps.List<RecoverableSqlPool>;
+  list is RecoverableSqlPoolOps.List<
+    RecoverableSqlPool,
+    Response = ArmResponse<RecoverableSqlPoolListResult>
+  >;
 }
 
 @@doc(RecoverableSqlPool.name, "The name of the sql pool");

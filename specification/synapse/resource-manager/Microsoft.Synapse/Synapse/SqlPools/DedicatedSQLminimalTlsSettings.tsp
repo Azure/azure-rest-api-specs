@@ -75,7 +75,10 @@ interface WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettings {
   /**
    * List workspace managed sql server's minimal tls settings.
    */
-  list is DedicatedSQLminimalTlsSettingsWriteOps.List<DedicatedSQLminimalTlsSettings>;
+  list is DedicatedSQLminimalTlsSettingsWriteOps.List<
+    DedicatedSQLminimalTlsSettings,
+    Response = ArmResponse<DedicatedSQLminimalTlsSettingsListResult>
+  >;
 }
 
 @@doc(

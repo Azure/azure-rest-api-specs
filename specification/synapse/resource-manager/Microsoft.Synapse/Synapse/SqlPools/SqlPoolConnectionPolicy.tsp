@@ -56,6 +56,7 @@ interface SqlPoolConnectionPolicies {
   /**
    * Get a Sql pool's connection policy, which is used with table auditing.
    */
+  #deprecated "This operation is deprecated."
   get is SqlPoolConnectionPolicyOps.Read<SqlPoolConnectionPolicy>;
 }
 

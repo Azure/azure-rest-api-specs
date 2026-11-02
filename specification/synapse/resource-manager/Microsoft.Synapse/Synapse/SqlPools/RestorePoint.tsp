@@ -64,7 +64,10 @@ interface RestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolRestorePoints_List")
-  list is RestorePointOps.List<RestorePoint>;
+  list is RestorePointOps.List<
+    RestorePoint,
+    Response = ArmResponse<RestorePointListResult>
+  >;
 }
 
 @@doc(RestorePoint.name, "The name of the restore point.");

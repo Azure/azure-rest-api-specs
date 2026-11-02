@@ -21,6 +21,7 @@ interface WorkspaceManagedSqlServerUsagesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get list of usages metric for the server.")
   @operationId("WorkspaceManagedSqlServerUsages_List")
+  @list
   @autoRoute
   @get
   @action("sqlUsages")

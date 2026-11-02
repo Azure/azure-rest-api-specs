@@ -64,7 +64,10 @@ interface ServerBlobAuditingPolicies {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceManagedSqlServerBlobAuditingPolicies_ListByWorkspace")
-  listByWorkspace is ServerBlobAuditingPolicyOps.List<ServerBlobAuditingPolicy>;
+  listByWorkspace is ServerBlobAuditingPolicyOps.List<
+    ServerBlobAuditingPolicy,
+    Response = ArmResponse<ServerBlobAuditingPolicyListResult>
+  >;
 }
 
 @@doc(ServerBlobAuditingPolicy.name, "The name of the blob auditing policy.");
