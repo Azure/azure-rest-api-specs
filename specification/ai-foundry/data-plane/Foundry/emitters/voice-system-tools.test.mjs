@@ -191,6 +191,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
         "digits",
         "message",
         "completion_mode",
+        "handoff",
       ]) {
         assert.equal(
           properties[invocationOnly],
@@ -226,6 +227,24 @@ for (const version of ["v1", "virtual-public-preview"]) {
       Object.keys(schemas.VoiceAgentTransferRouting.properties).sort(),
       ["ring_timeout_seconds", "strategy"],
     );
+  });
+
+  test(`${version}: transfer handoff requirement is optional configuration, not invocation content`, () => {
+    const { properties, required } = flatten(
+      schemas,
+      schemas.VoiceAgentTransferSystemTool,
+    );
+    assert.equal(properties.require_handoff.type, "boolean");
+    assert.equal(properties.require_handoff.default, false);
+    assert.ok(!required.includes("require_handoff"));
+    assert.match(properties.require_handoff.description, /non-blank handoff summary/);
+    assert.equal(properties.handoff, undefined);
+    assert.equal(schemas.VoiceAgentTransferTarget.properties.require_handoff, undefined);
+    for (const [name, schemaName] of Object.entries(toolNames)) {
+      if (name !== "transfer") {
+        assert.equal(flatten(schemas, schemas[schemaName]).properties.require_handoff, undefined);
+      }
+    }
   });
 
   test(`${version}: transfer destinations require canonical type without legacy aliases`, () => {

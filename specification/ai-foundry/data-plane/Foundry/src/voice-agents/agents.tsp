@@ -694,6 +694,9 @@ model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
   @doc("The service-managed control action. Always `transfer`.")
   name: VoiceAgentSystemToolName.transfer;
 
+  @doc("Require a non-blank handoff summary in each model-generated transfer call. Defaults to false; does not guarantee delivery to the recipient.")
+  require_handoff?: boolean = false;
+
   @doc("The non-empty set of logical targets that the model may select.")
   @minItems(1)
   targets: VoiceAgentTransferTarget[];
