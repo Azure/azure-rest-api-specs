@@ -274,6 +274,8 @@ union KeySource {
 @added(Versions.v2026_06_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_08_01)
+@added(Versions.v2026_08_15_preview)
 union ElasticKeySource {
   string,
 

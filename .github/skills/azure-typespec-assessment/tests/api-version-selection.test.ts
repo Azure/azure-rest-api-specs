@@ -8,6 +8,44 @@ enum Versions {
 ${members}
 }`;
 
+void test("extracts decorated backtick members, explicit values, and mixed version syntax", () => {
+  const versions = extractApiVersions([
+    source(`
+  /** Example \`2099-01-01\`, not an enum member. */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  \`2026-04-06-preview\`,
+  // \`2099-02-01\`,
+  v2026_06_06: "2026-06-06",
+  \`previewAlias\`: "2026-07-06-preview"
+  `),
+  ]);
+
+  assert.deepEqual(versions, {
+    versioned: true,
+    versions: ["2026-04-06-preview", "2026-06-06", "2026-07-06-preview"],
+  });
+});
+
+void test("selects the latest stable baseline for a newly added backtick preview version", () => {
+  const base = extractApiVersions([source("`2026-04-06-preview`, `2026-06-06`,")]);
+  const current = extractApiVersions([
+    source("`2026-04-06-preview`, `2026-06-06`, `2026-07-06-preview`,"),
+  ]);
+  const pair = selectApiVersionPair({
+    base,
+    current,
+    baseCommit: "base-sha",
+    headCommit: "head-sha",
+  });
+
+  assert.equal(pair.mode, "new-api-version");
+  assert.equal(pair.baseline.sourceRevision, "current");
+  assert.equal(pair.baseline.commit, "head-sha");
+  assert.equal(pair.baseline.apiVersion, "2026-06-06");
+  assert.equal(pair.target.apiVersion, "2026-07-06-preview");
+  assert.deepEqual(pair.addedCurrentVersions, ["2026-07-06-preview"]);
+});
+
 void test("selects a newly added head version and the latest stable base version", () => {
   const base = extractApiVersions([
     source(`
