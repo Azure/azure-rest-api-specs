@@ -831,6 +831,11 @@ using Azure.AI.Projects;
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
+@@clientName(
+  HostedAgentDefinition.enable_memory_snapshot,
+  "memorySnapshotEnabled",
+  "java"
+);
 
 @@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
 @@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
@@ -976,6 +981,27 @@ using Azure.AI.Projects;
 );
 
 // Voice Agent Renames
+@@clientName(
+  VoiceAgentSoundscapeConfig,
+  "VoiceAgentSoundscapeConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeTrackConfig,
+  "VoiceAgentSoundscapeTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeWorkingTrackConfig,
+  "VoiceAgentSoundscapeWorkingTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeSourceConfig,
+  "VoiceAgentSoundscapeSourceConfiguration",
+  "java"
+);
+@@clientName(VoiceAgentSoundscapeWorkingTrackConfig.delay_ms, "delay", "java");
 @@clientName(
   Azure.AI.Projects.Agents.generateAgent,
   "createAgentFromPrompt",
@@ -1166,6 +1192,22 @@ using Azure.AI.Projects;
 @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
 @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
 
+// Preserve the existing Java paging overloads that accept an initial continuation token.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  PageAfterQueryParameter.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  AgentOptimizationCandidatePageQueryParameters.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
@@ -1210,6 +1252,7 @@ using Azure.AI.Projects;
 // Structurally replace every emitted tool_choice property with an opaque union so Java exposes the wire value as
 // BinaryData. The Java emitter already emits these tool choice union as BinaryData, this type override makes the
 // tool choice discriminated hierarchy unreachable and prevents its emission in the generated Java code.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union ToolChoiceValue {
   string,
   object: Record<unknown>,
@@ -1411,6 +1454,7 @@ model OpenAIRealtimeSessionOutputModality {}
 )
 model OpenAIRealtimeTruncationRetentionRatio {}
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union OpenAIRealtimeTruncationUnion {
   auto: "auto",
   disabled: "disabled",

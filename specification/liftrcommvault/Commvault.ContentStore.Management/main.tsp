@@ -55,6 +55,14 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v3_preview")
   @useDependency(LiftrBase.Versions.v3_preview)
   v9_preview: "2026-08-01-preview",
+
+  @doc("The 2026-09-30 stable API version, dependent on LiftrBase.Versions.v3_preview.")
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v2026_09_30: "2026-09-30",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v3_preview")
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v10_preview: "2026-10-15-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -174,7 +182,14 @@ model LatestLinkedSaaSResponse {
 interface CloudAccounts {
   get is ArmResourceRead<CloudAccount>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudAccount>;
-  update is ArmResourcePatchAsync<CloudAccount, CloudAccountProperties>;
+  @removed(Versions.v10_preview)
+  @renamedFrom(Versions.v10_preview, "update")
+  @sharedRoute
+  updateV1 is ArmResourcePatchAsync<CloudAccount, CloudAccountProperties>;
+
+  @added(Versions.v10_preview)
+  @sharedRoute
+  update is ArmCustomPatchAsync<CloudAccount, CloudAccountUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
   listByResourceGroup is ArmResourceListByParent<CloudAccount>;
   listBySubscription is ArmListBySubscription<CloudAccount>;
@@ -199,6 +214,85 @@ interface CloudAccounts {
     void,
     ArmResponse<LatestLinkedSaaSResponse>
   >;
+}
+
+// An alias keeps this out of the emitted Swagger; ResourceUpdateModel names the PATCH schema.
+alias CloudAccountPatchProperties = {
+  ...OmitProperties<CloudAccountProperties, "marketplace" | "user">;
+
+  @doc("Marketplace details of the resource.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  marketplace?: CloudAccountMarketplaceUpdate;
+
+  @doc("Details of the user.")
+  user?: CloudAccountUserUpdate;
+};
+
+@doc("Managed service identity (system assigned and/or user assigned identities)")
+@added(Versions.v10_preview)
+model CloudAccountIdentityUpdate {
+  ...OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>>;
+}
+
+// Identity is replaced so a PATCH can omit identity.type, as the previous contract allowed.
+@doc("The type used for update operations of the CloudAccount.")
+@added(Versions.v10_preview)
+model CloudAccountUpdate {
+  ...OmitProperties<
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CloudAccount,
+      CloudAccountPatchProperties
+    >,
+    "identity"
+  >;
+
+  @doc("The managed service identities assigned to this resource.")
+  identity?: CloudAccountIdentityUpdate;
+}
+
+@doc("Marketplace details that can be updated on a Commvault Cloud Account.")
+@added(Versions.v10_preview)
+model CloudAccountMarketplaceUpdate {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    LiftrBase.MarketplaceDetails,
+    "subscriptionId" | "offerDetails"
+  >>>;
+
+  @doc("Azure subscription id for the the marketplace offer is purchased from")
+  subscriptionId?: string;
+
+  @doc("Offer details for the marketplace that is selected by the user")
+  offerDetails?: CloudAccountOfferDetailsUpdate;
+}
+
+@doc("Marketplace offer details that can be updated on a Commvault Cloud Account.")
+@added(Versions.v10_preview)
+model CloudAccountOfferDetailsUpdate {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    LiftrBase.OfferDetails,
+    "planId"
+  >>>;
+
+  @doc("Plan Id for the marketplace offer")
+  planId?: string;
+}
+
+@doc("User details that can be updated on a Commvault Cloud Account.")
+@added(Versions.v10_preview)
+model CloudAccountUserUpdate {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    LiftrBase.UserDetails,
+    "firstName" | "lastName" | "emailAddress"
+  >>>;
+
+  @doc("First name of the user")
+  firstName?: string;
+
+  @doc("Last name of the user")
+  lastName?: string;
+
+  @doc("Email address of the user")
+  emailAddress?: LiftrBase.email;
 }
 
 @doc("Properties specific to Commvault Cloud Account resource")

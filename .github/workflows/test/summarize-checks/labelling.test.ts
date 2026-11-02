@@ -1,84 +1,72 @@
 import { describe, expect, it } from "vitest";
 import { processArmReviewLabels } from "../../src/summarize-checks/labelling.ts";
+import type { ImpactAssessment, ServiceImpact } from "../../../shared/src/impact.ts";
+import type { ReviewContext } from "../../src/summarize-checks/review-requirements.ts";
 import { updateLabels } from "../../src/summarize-checks/summarize-checks.ts";
 
+const managementService: ServiceImpact = {
+  path: "specification/example",
+  plane: "resource-manager",
+  changes: ["api"],
+  hasAffectedReadme: false,
+  typeSpec: true,
+  newApiVersions: [],
+  suppressionsChanged: false,
+  resourceProvider: {
+    newNamespaces: [],
+    usesRpaas: false,
+    hasAddedDefinitions: false,
+    registered: false,
+  },
+};
+
+function impact(service: Partial<ServiceImpact> = {}): ImpactAssessment {
+  return { schemaVersion: 2, services: [{ ...managementService, ...service }] };
+}
+
 describe("update labels", () => {
-  const testCases = [
+  const newProvider = {
+    ...managementService.resourceProvider,
+    newNamespaces: ["specification/example/resource-manager/Microsoft.Example"],
+    hasAddedDefinitions: true,
+  };
+  const testCases: {
+    description: string;
+    existingLabels: string[];
+    expectedLabelsToAdd: string[];
+    expectedLabelsToRemove: string[];
+    impactAssessment: ImpactAssessment;
+    context?: ReviewContext;
+  }[] = [
     {
       description: "Add ARMReview and resource-manager labels when existing labels are empty",
       existingLabels: ["other-label"],
       expectedLabelsToAdd: ["ARMReview", "resource-manager", "TypeSpec", "WaitForARMFeedback"],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: false,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact(),
     },
     {
-      description: "Shouldn't add ARM review if resourceManagerRequired is false",
+      description: "Shouldn't add ARM review if no management service changed",
       existingLabels: ["other-label"],
       expectedLabelsToAdd: ["TypeSpec"],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: false,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: false,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({ plane: "unknown" }),
     },
     {
       description: "Shouldn't add ARM review if not targeting a release branch",
       existingLabels: ["other-label"],
       expectedLabelsToAdd: ["TypeSpec", "resource-manager"],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: false,
-        isDraft: false,
-        targetBranch: "a-test-branch",
-      },
+      impactAssessment: impact(),
+      context: { isDraft: false, targetBranch: "a-test-branch" },
     },
     {
       description: "Shouldn't add add new-api-version if not targeting a release branch",
       existingLabels: ["other-label"],
       expectedLabelsToAdd: ["TypeSpec", "resource-manager"],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "a-test-branch",
-      },
+      impactAssessment: impact({ newApiVersions: ["2026-01-01"] }),
+      context: { isDraft: false, targetBranch: "a-test-branch" },
     },
     {
       description: "Should add new-api-version correctly",
@@ -91,57 +79,34 @@ describe("update labels", () => {
         "WaitForARMFeedback",
       ],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({ newApiVersions: ["2026-01-01"] }),
     },
     {
-      description: "Should add CI-NewRPNamespaceWithoutRPaaS label properly",
+      description: "Should add CI-NewRPNamespaceWithoutRPaaS for a new non-RPaaS namespace",
       existingLabels: ["other-label"],
-      expectedLabelsToAdd: ["TypeSpec", "resource-manager", "CI-NewRPNamespaceWithoutRPaaS"],
+      expectedLabelsToAdd: [
+        "TypeSpec",
+        "resource-manager",
+        "new-rp-namespace",
+        "CI-NewRPNamespaceWithoutRPaaS",
+        "ARMReview",
+        "NotReadyForARMReview",
+      ],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: true,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "a-test-branch",
-      },
+      impactAssessment: impact({ resourceProvider: newProvider }),
     },
     {
-      description: "Shouldn't remove RPaasException label accidentally",
+      description: "Shouldn't remove RPaaSException when a new namespace needs it",
       existingLabels: ["other-label", "CI-NewRPNamespaceWithoutRPaaS", "RPaaSException"],
-      expectedLabelsToAdd: ["TypeSpec", "resource-manager"],
+      expectedLabelsToAdd: [
+        "TypeSpec",
+        "resource-manager",
+        "new-rp-namespace",
+        "ARMReview",
+        "WaitForARMFeedback",
+      ],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: true,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "a-test-branch",
-      },
+      impactAssessment: impact({ resourceProvider: newProvider }),
     },
     {
       description: "Shouldn't add any ARM process updates when not ready for ARM review",
@@ -153,21 +118,13 @@ describe("update labels", () => {
         "NotReadyForARMReview",
         "ARMReview",
         "new-api-version",
+        "new-rp-namespace",
       ],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: true,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({
+        resourceProvider: newProvider,
+        newApiVersions: ["2026-01-01"],
+      }),
     },
     {
       description:
@@ -184,19 +141,10 @@ describe("update labels", () => {
       ],
       expectedLabelsToAdd: [],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: true,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: false,
-        isDraft: false,
-        targetBranch: "RPSaaSMaster",
-      },
+      impactAssessment: impact({
+        resourceProvider: { ...managementService.resourceProvider, usesRpaas: true },
+      }),
+      context: { isDraft: false, targetBranch: "RPSaaSMaster" },
     },
     {
       description:
@@ -214,19 +162,10 @@ describe("update labels", () => {
       ],
       expectedLabelsToAdd: ["WaitForARMFeedback"],
       expectedLabelsToRemove: ["NotReadyForARMReview"],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: true,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: false,
-        isDraft: false,
-        targetBranch: "RPSaaSMaster",
-      },
+      impactAssessment: impact({
+        resourceProvider: { ...managementService.resourceProvider, usesRpaas: true },
+      }),
+      context: { isDraft: false, targetBranch: "RPSaaSMaster" },
     },
     {
       description:
@@ -243,19 +182,10 @@ describe("update labels", () => {
       ],
       expectedLabelsToAdd: ["WaitForARMFeedback"],
       expectedLabelsToRemove: ["NotReadyForARMReview"],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: true,
-        rpaasRPMissing: true,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({
+        resourceProvider: newProvider,
+        newApiVersions: ["2026-01-01"],
+      }),
     },
     {
       description:
@@ -273,19 +203,10 @@ describe("update labels", () => {
       ],
       expectedLabelsToAdd: [],
       expectedLabelsToRemove: ["WaitForARMFeedback"],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: true,
-        rpaasRPMissing: true,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({
+        resourceProvider: newProvider,
+        newApiVersions: ["2026-01-01"],
+      }),
     },
     {
       description:
@@ -304,19 +225,10 @@ describe("update labels", () => {
       ],
       expectedLabelsToAdd: [],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        suppressionReviewRequired: false,
-        isNewApiVersion: true,
-        rpaasRpNotInPrivateRepo: true,
-        rpaasChange: true,
-        newRP: true,
-        rpaasRPMissing: false,
-        typeSpecChanged: true,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({
+        resourceProvider: { ...newProvider, usesRpaas: true },
+        newApiVersions: ["2026-01-01"],
+      }),
     },
     {
       description:
@@ -334,19 +246,10 @@ describe("update labels", () => {
       ],
       expectedLabelsToAdd: ["NotReadyForARMReview"],
       expectedLabelsToRemove: ["ARMSignedOff"],
-      impactAssessment: {
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        suppressionReviewRequired: false,
-        isNewApiVersion: true,
-        rpaasRpNotInPrivateRepo: true,
-        rpaasChange: true,
-        newRP: true,
-        rpaasRPMissing: false,
-        typeSpecChanged: true,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({
+        resourceProvider: { ...newProvider, usesRpaas: true },
+        newApiVersions: ["2026-01-01"],
+      }),
     },
     {
       description:
@@ -359,38 +262,14 @@ describe("update labels", () => {
         "data-plane-review-requested",
       ],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: false,
-        dataPlaneRequired: true,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({ plane: "data-plane", newApiVersions: ["2026-01-01"] }),
     },
     {
       description: "Shouldn't add SuppressionReviewRequired for a data-plane PR",
       existingLabels: ["other-label"],
       expectedLabelsToAdd: ["TypeSpec", "data-plane"],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: true,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: false,
-        dataPlaneRequired: true,
-        typeSpecChanged: true,
-        isNewApiVersion: false,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({ plane: "data-plane", suppressionsChanged: true }),
     },
     {
       description: "Should add SuppressionReviewRequired for a resource-manager PR",
@@ -403,19 +282,7 @@ describe("update labels", () => {
         "WaitForARMFeedback",
       ],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: true,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: true,
-        dataPlaneRequired: false,
-        typeSpecChanged: true,
-        isNewApiVersion: false,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({ suppressionsChanged: true }),
     },
     {
       description:
@@ -428,19 +295,7 @@ describe("update labels", () => {
         "data-plane-review-requested",
       ],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: false,
-        dataPlaneRequired: true,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({ plane: "data-plane", newApiVersions: ["2026-01-01"] }),
     },
     {
       description:
@@ -455,19 +310,7 @@ describe("update labels", () => {
       ],
       expectedLabelsToAdd: [],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: false,
-        dataPlaneRequired: true,
-        typeSpecChanged: true,
-        isNewApiVersion: true,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: impact({ plane: "data-plane", newApiVersions: ["2026-01-01"] }),
     },
     {
       description:
@@ -475,30 +318,135 @@ describe("update labels", () => {
       existingLabels: ["data-plane-review-requested", "other-label"],
       expectedLabelsToAdd: [],
       expectedLabelsToRemove: [],
-      impactAssessment: {
-        suppressionReviewRequired: false,
-        rpaasChange: false,
-        newRP: false,
-        rpaasRPMissing: false,
-        rpaasRpNotInPrivateRepo: false,
-        resourceManagerRequired: false,
-        dataPlaneRequired: false,
-        typeSpecChanged: false,
-        isNewApiVersion: false,
-        isDraft: false,
-        targetBranch: "main",
-      },
+      impactAssessment: { schemaVersion: 2, services: [] },
     },
   ];
   it.each(testCases)(
     "$description",
-    ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
-      const labelContext = updateLabels(existingLabels, impactAssessment);
+    ({
+      existingLabels,
+      expectedLabelsToAdd,
+      expectedLabelsToRemove,
+      impactAssessment,
+      context = { isDraft: false, targetBranch: "main" },
+    }) => {
+      const labelContext = updateLabels(existingLabels, impactAssessment, context);
 
       expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
     },
   );
+
+  it.each([
+    { targetBranch: "release-network-2025-03-01", requiresReview: true },
+    { targetBranch: "ARMCoreRPDev", requiresReview: true },
+    { targetBranch: "feature/release-network-2025-03-01", requiresReview: false },
+    { targetBranch: "feature/main", requiresReview: false },
+    { targetBranch: "RPSaaSMaster-feature", requiresReview: false },
+    { targetBranch: "ARMCoreRPDev-feature", requiresReview: false },
+    // cspell:ignore releas
+    { targetBranch: "releas", requiresReview: false },
+  ])(
+    "only adds review labels for release branches: $targetBranch",
+    ({ targetBranch, requiresReview }) => {
+      const labelContext = updateLabels([], impact({ newApiVersions: ["2026-01-01"] }), {
+        isDraft: false,
+        targetBranch,
+      });
+
+      expect([...labelContext.toAdd].sort()).toEqual(
+        (requiresReview
+          ? ["ARMReview", "TypeSpec", "WaitForARMFeedback", "new-api-version", "resource-manager"]
+          : ["TypeSpec", "resource-manager"]
+        ).sort(),
+      );
+      expect([...labelContext.toRemove]).toEqual([]);
+    },
+  );
+
+  it("does not request data-plane review for a feature branch containing a release name", () => {
+    const labelContext = updateLabels(
+      [],
+      impact({ plane: "data-plane", newApiVersions: ["2026-01-01"] }),
+      { isDraft: false, targetBranch: "feature/release-network-2025-03-01" },
+    );
+
+    expect([...labelContext.toAdd].sort()).toEqual(["TypeSpec", "data-plane"]);
+    expect([...labelContext.toRemove]).toEqual([]);
+  });
+});
+
+describe("service-scoped impact labels", () => {
+  const service = managementService;
+  const context = { isDraft: false, targetBranch: "main" };
+
+  it("keeps the resource-manager label but removes ARMReview for a configuration-only change", () => {
+    const labels = updateLabels(
+      ["ARMReview"],
+      { schemaVersion: 2, services: [{ ...service, changes: ["sdk-configuration"] }] },
+      context,
+    );
+    expect([...labels.toAdd].sort()).toEqual(["TypeSpec", "resource-manager"]);
+    expect([...labels.toRemove]).toEqual(["ARMReview"]);
+  });
+
+  it.each([true, false])(
+    "requires ARM review for other changes only when they affect an owning README: %s",
+    (hasAffectedReadme) => {
+      const labels = updateLabels(
+        [],
+        impact({ changes: ["other"], typeSpec: false, hasAffectedReadme }),
+        context,
+      );
+      expect([...labels.toAdd].sort()).toEqual(
+        (hasAffectedReadme
+          ? ["ARMReview", "WaitForARMFeedback", "resource-manager"]
+          : ["resource-manager"]
+        ).sort(),
+      );
+      expect([...labels.toRemove]).toEqual([]);
+    },
+  );
+
+  it("does not combine an ARM version addition with data-plane suppression changes", () => {
+    const labels = updateLabels(
+      [],
+      {
+        schemaVersion: 2,
+        services: [
+          { ...service, newApiVersions: ["2026-01-01"] },
+          {
+            ...service,
+            plane: "data-plane",
+            suppressionsChanged: true,
+          },
+        ],
+      },
+      context,
+    );
+    expect([...labels.toAdd].sort()).toEqual(
+      [
+        "ARMReview",
+        "TypeSpec",
+        "WaitForARMFeedback",
+        "resource-manager",
+        "data-plane",
+        "new-api-version",
+      ].sort(),
+    );
+  });
+
+  it("evaluates the same artifact against current draft and branch state", () => {
+    const impact = { schemaVersion: 2 as const, services: [service] };
+    for (const current of [
+      { isDraft: true, targetBranch: "main" },
+      { isDraft: false, targetBranch: "feature/example" },
+    ]) {
+      const labels = updateLabels([], impact, current);
+      expect([...labels.toAdd].sort()).toEqual(["TypeSpec", "resource-manager"]);
+    }
+    expect(updateLabels([], impact, context).toAdd.has("ARMReview")).toBe(true);
+  });
 });
 
 describe("ARM review process labelling", () => {
