@@ -24,14 +24,14 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Synapse Analytics APIs
+ * Azure Synapse Analytics management API for Apache Spark (big data) pools, workspace libraries and Spark configurations.
  */
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Synapse")
 @service(#{ title: "SynapseManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Synapse;
+namespace BigDataPools;
 
 /**
  * The available API versions.

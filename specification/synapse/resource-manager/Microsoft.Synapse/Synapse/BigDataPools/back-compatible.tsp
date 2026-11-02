@@ -1,7 +1,8 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Synapse;
+
+namespace BigDataPools;
 
 @@clientLocation(BigDataPoolResourceInfos.get, "BigDataPools");
 @@clientLocation(BigDataPoolResourceInfos.createOrUpdate, "BigDataPools");

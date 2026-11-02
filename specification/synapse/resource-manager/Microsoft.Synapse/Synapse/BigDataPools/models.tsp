@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Synapse;
+namespace BigDataPools;
 
 /**
  * The type of the spark config properties file.
