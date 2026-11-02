@@ -98,6 +98,13 @@ gh run rerun <run-id> --debug --repo Azure/azure-rest-api-specs
 `--head` (default `HEAD`). It validates the current checkout, not a separate
 checkout of `--head`. Uncommitted changes do not affect project selection.
 
+Before project validation, `--changed` rejects added or renamed JavaScript and
+TypeScript files under `specification/` (`.js`, `.ts`, `.mjs`, `.cjs`, `.mts`,
+`.cts`, `.jsx`, and `.tsx`, case-insensitive, including declaration files).
+This check runs even when no TypeSpec projects are found and cannot be suppressed.
+Existing files may still be edited, deleted, or moved out. Single-project,
+`--all`, and `--dry-run` modes do not enforce this committed-additions check.
+
 For changes under `specification/<service>/`, it discovers every project in that
 service folder, including sibling and nested projects. Deleted files still select
 their service when it exists; deleted service folders are skipped. Projects are

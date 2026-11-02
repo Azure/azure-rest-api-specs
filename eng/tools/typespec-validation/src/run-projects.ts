@@ -8,9 +8,15 @@ import { relative, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
-import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
+import {
+  formatRuleSummary,
+  reportDiagnostics,
+  supportsColor,
+  type RuleCounts,
+} from "./diagnostics.ts";
 import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 import { cleanWorktree } from "./git-cleanup.ts";
+import { checkNoJavaScriptOrTypeScript } from "./rules/no-javascript-or-typescript.ts";
 
 interface RunOptions {
   gitClean?: boolean;
@@ -77,11 +83,33 @@ export async function runChanged(
 ): Promise<boolean> {
   const root = resolve(await getRootFolder(folder));
   const { baseCommitish = "HEAD^", headCommitish = "HEAD", ignoreCoreFiles } = options;
+  const logger = new ConsoleLogger(options.verbose);
+  if (!options.dryRun) {
+    const result = await checkNoJavaScriptOrTypeScript(root, {
+      baseCommitish,
+      headCommitish,
+      logger,
+    });
+    reportDiagnostics(result.diagnostics ?? [], logger);
+    if (!result.success) {
+      if (process.env.GITHUB_ACTIONS === "true") {
+        for (const diagnostic of result.diagnostics ?? []) {
+          const escape = (value: string) =>
+            value.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
+          const path = escape(diagnostic.path ?? "")
+            .replaceAll(":", "%3A")
+            .replaceAll(",", "%2C");
+          console.log(`::error file=${path},line=1,col=1::${escape(diagnostic.message)}`);
+        }
+      }
+      return false;
+    }
+  }
   const { projects, checkingAllSpecs } = await findChangedProjects(root, {
     baseCommitish,
     headCommitish,
     ignoreCoreFiles,
-    logger: new ConsoleLogger(options.verbose),
+    logger,
   });
   if (projects.length === 0) {
     if (checkingAllSpecs) {

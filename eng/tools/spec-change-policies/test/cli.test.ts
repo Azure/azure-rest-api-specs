@@ -64,21 +64,4 @@ describe("PR CLI", () => {
       "::warning file=C%3A/folder%2Ca.json,line=2,col=3::line%251%0Aline2",
     );
   });
-
-  it("fails with a file annotation when a script is added under specification", async () => {
-    const path = "specification/foo/script.ts";
-    const { root } = await createRepo({}, { [path]: "export {};" });
-    const result = await execa(process.execPath, [script, "--base=HEAD^"], {
-      cwd: root,
-      env: { GITHUB_ACTIONS: "true", NO_COLOR: "1" },
-      reject: false,
-    });
-    expect(result.exitCode).toBe(1);
-    expect(result.stdout).toMatch(
-      /^::error file=.*\/specification\/foo\/script.ts,line=1,col=1::/m,
-    );
-    expect(result.stdout).toContain(
-      "JavaScript and TypeScript files must not be added under specification/.",
-    );
-  });
 });
