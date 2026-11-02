@@ -406,3 +406,71 @@ void test("compiler evidence preserves parsed decorators and source links", asyn
   );
   assert.equal(required(declaration.compilerEvidence).kind, "semantic-type");
 });
+
+void test("source indexing retains versioning decorators on interface operations", () => {
+  const baseText = `interface Widgets {
+  read is Foundations.ResourceRead<Widget>;
+}
+`;
+  const currentText = `interface Widgets {
+  @renamedFrom(Versions.v2, "read")
+  get is Foundations.ResourceRead<Widget>;
+}
+`;
+  const sourceIndex = buildSourceIndex({
+    repo: "repo",
+    mergeBase: "base",
+    headCommit: "head",
+    changedFiles: [{ path: "main.tsp", status: "modified", origins: [] }],
+    remoteUrl: "https://github.com/contoso/widgets.git",
+    readFile: (revision) => (revision === "base" ? baseText : currentText),
+    diffFile: () => `@@ -1,3 +1,4 @@
+ interface Widgets {
+-  read is Foundations.ResourceRead<Widget>;
++  @renamedFrom(Versions.v2, "read")
++  get is Foundations.ResourceRead<Widget>;
+ }
+`,
+  });
+  const declaration = required(
+    required(sourceIndex.sourceChanges[0]).declarations.find(
+      (item) => item.qualifiedName === "Widgets.get",
+    ),
+  );
+
+  assert.deepEqual(declaration.decorators, ['@renamedFrom(Versions.v2, "read")']);
+  assert.deepEqual(declaration.versionedMembers, ['@renamedFrom(Versions.v2, "read")']);
+});
+
+void test("source indexing does not carry decorators across interface operations", () => {
+  const text = `interface Widgets {
+  @renamedFrom(Versions.v2, "read")
+  get is Foundations.ResourceRead<Widget>;
+  list is Foundations.ResourceList<Widget>;
+}
+`;
+  const sourceIndex = buildSourceIndex({
+    repo: "repo",
+    mergeBase: "base",
+    headCommit: "head",
+    changedFiles: [{ path: "main.tsp", status: "modified", origins: [] }],
+    remoteUrl: "https://github.com/contoso/widgets.git",
+    readFile: () => text,
+    diffFile: () => `@@ -1,5 +1,5 @@
+ interface Widgets {
+   @renamedFrom(Versions.v2, "read")
+   get is Foundations.ResourceRead<Widget>;
+-  list is Foundations.ResourceList<Widget>;
++  list is Foundations.ResourceListAll<Widget>;
+ }
+`,
+  });
+  const declaration = required(
+    required(sourceIndex.sourceChanges[0]).declarations.find(
+      (item) => item.qualifiedName === "Widgets.list",
+    ),
+  );
+
+  assert.deepEqual(declaration.decorators, []);
+  assert.deepEqual(declaration.versionedMembers, []);
+});

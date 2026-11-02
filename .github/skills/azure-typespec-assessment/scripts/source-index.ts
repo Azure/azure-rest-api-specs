@@ -163,6 +163,35 @@ function declarations(
     }
     return undefined;
   };
+  const precedingDecorators = (line: number) => {
+    const decorators: string[] = [];
+    let pending: string[] | undefined;
+    let parenthesisDepth = 0;
+    for (const rawLine of lines.slice(Math.max(0, line - 8), line)) {
+      const text = rawLine.trim();
+      if (pending) {
+        pending.push(text);
+        parenthesisDepth += (text.match(/\(/g) ?? []).length;
+        parenthesisDepth -= (text.match(/\)/g) ?? []).length;
+        if (parenthesisDepth <= 0) {
+          decorators.push(pending.join(" "));
+          pending = undefined;
+        }
+        continue;
+      }
+      if (text.startsWith("@")) {
+        pending = [text];
+        parenthesisDepth = (text.match(/\(/g) ?? []).length - (text.match(/\)/g) ?? []).length;
+        if (parenthesisDepth <= 0) {
+          decorators.push(text);
+          pending = undefined;
+        }
+      } else if (text) {
+        decorators.length = 0;
+      }
+    }
+    return pending ? [] : decorators;
+  };
   for (let line = 0; line < lines.length; line += 1) {
     const match = pattern.exec(lines[line]);
     if (!match) continue;
@@ -180,11 +209,7 @@ function declarations(
       return range && range.endLine >= startLine && range.startLine <= endLine;
     });
     if (!related.length) continue;
-    const decoratorStart = Math.max(0, line - 8);
-    const decorators = lines
-      .slice(decoratorStart, line)
-      .filter((item) => item.trim().startsWith("@"))
-      .map((item) => item.trim());
+    const decorators = precedingDecorators(line);
     const qualifiedName = match[2];
     spans.push({
       kind: match[1] === "op" ? "operation" : match[1],
@@ -222,12 +247,15 @@ function declarations(
     const related = relatedHunks(lineNumber);
     if (!related.length) continue;
     const qualifiedName = `${owner}.${member[1]}`;
+    const decorators = precedingDecorators(line);
     results.push({
       id: id("declaration", `${file}:${revision}:operation:${qualifiedName}:${lineNumber}`),
       kind: "operation",
       qualifiedName,
-      decorators: [],
-      versionedMembers: [],
+      decorators,
+      versionedMembers: decorators.filter((item) =>
+        /^@(added|removed|renamedFrom|typeChangedFrom)\b/.test(item),
+      ),
       hunkIds: related.map((item) => item.id),
       source: {
         revision,
