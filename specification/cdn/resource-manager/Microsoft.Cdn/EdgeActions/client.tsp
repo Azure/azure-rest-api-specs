@@ -37,6 +37,11 @@ using Microsoft.Cdn;
   "content",
   "csharp"
 );
+@@clientName(
+  EdgeActionVersions.deployVersionCodeStable::parameters.body,
+  "content",
+  "csharp"
+);
 
 @@clientName(Microsoft.Cdn, "EdgeActionsMgmtClient", "python");
 @@clientName(Microsoft.Cdn, "EdgeActionsManagementClient", "javascript");

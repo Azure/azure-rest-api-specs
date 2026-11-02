@@ -1,0 +1,34 @@
+{
+  "operationId": "EdgeActionOperationResults_Get",
+  "title": "GetEdgeActionOperationResult",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2027-01-01-preview",
+    "operationId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1",
+        "name": "edgeAction1",
+        "type": "Microsoft.Cdn/edgeActions",
+        "location": "global",
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "attachments": []
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Cdn/edgeActionOperationResults/11111111-2222-3333-4444-555555555555?api-version=2027-01-01-preview",
+        "Retry-After": 10
+      }
+    },
+    "204": {}
+  }
+}
