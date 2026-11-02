@@ -8047,7 +8047,7 @@ union DatabaseOperationType {
 }
 
 /**
- * Contains details about the error that occured.
+ * Contains details about the error that occurred.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits generated specifications by feature."
 @added(Versions.v2026_11_01_preview)

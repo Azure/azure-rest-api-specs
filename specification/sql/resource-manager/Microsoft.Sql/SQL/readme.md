@@ -224,6 +224,12 @@ suppressions:
     from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].get.parameters..description
     reason: The policy supports only default. Its enum metadata is inherited unchanged from ManagedShortTermRetentionPolicyName, which is shared with existing retention APIs.
+  - code: ResourceNameRestriction
+    from: distributedAvailabilityGroupsDatabaseOperations.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/databaseOperations"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/databaseOperations/{operationId}"]
+    reason: "managedInstanceName and distributedAvailabilityGroupName are existing parent identifiers shared with the managed instance and distributed availability group APIs, which define no pattern; adding one here would introduce a client-side naming restriction inconsistent with the parent resources. operationId is a UUID. ARM exception approval is required."
 ```
 
 ### Tag: package-preview-2026-08-01-preview
