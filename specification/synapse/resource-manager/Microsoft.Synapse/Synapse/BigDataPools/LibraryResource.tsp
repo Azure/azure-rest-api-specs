@@ -26,6 +26,17 @@ model LibraryResource is Azure.ResourceManager.ProxyResource<
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias LibraryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  WorkspaceParentParameters,
+  {
+    /** Library name */
+    @segment("libraries")
+    @key
+    @path
+    libraryName: string;
+  }
+>;
+
 @armResourceOperations
 interface LibraryResources {
   /**
@@ -33,14 +44,14 @@ interface LibraryResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Library_Get")
-  get is ArmResourceRead<LibraryResource>;
+  get is LibraryOps.Read<LibraryResource>;
 
   /**
    * List libraries in a workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Libraries_ListByWorkspace")
-  listByWorkspace is ArmResourceListByParent<
+  listByWorkspace is LibraryOps.List<
     LibraryResource,
     Response = ArmResponse<LibraryListResponse>
   >;

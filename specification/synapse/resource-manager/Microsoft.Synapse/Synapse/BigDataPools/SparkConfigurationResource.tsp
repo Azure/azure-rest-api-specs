@@ -26,6 +26,17 @@ model SparkConfigurationResource is Azure.ResourceManager.ProxyResource<
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias SparkConfigurationOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  WorkspaceParentParameters,
+  {
+    /** SparkConfiguration name */
+    @segment("sparkconfigurations")
+    @key
+    @path
+    sparkConfigurationName: string;
+  }
+>;
+
 @armResourceOperations
 interface SparkConfigurationResources {
   /**
@@ -33,14 +44,14 @@ interface SparkConfigurationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SparkConfiguration_Get")
-  get is ArmResourceRead<SparkConfigurationResource>;
+  get is SparkConfigurationOps.Read<SparkConfigurationResource>;
 
   /**
    * List sparkConfigurations in a workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SparkConfigurations_ListByWorkspace")
-  listByWorkspace is ArmResourceListByParent<
+  listByWorkspace is SparkConfigurationOps.List<
     SparkConfigurationResource,
     Response = ArmResponse<SparkConfigurationListResponse>
   >;

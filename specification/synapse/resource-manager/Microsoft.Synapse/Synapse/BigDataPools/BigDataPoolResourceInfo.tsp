@@ -23,6 +23,17 @@ model BigDataPoolResourceInfo
   >;
 }
 
+alias BigDataPoolOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  WorkspaceParentParameters,
+  {
+    /** Big Data pool name */
+    @segment("bigDataPools")
+    @key
+    @path
+    bigDataPoolName: string;
+  }
+>;
+
 @armResourceOperations
 interface BigDataPoolResourceInfos {
   /**
@@ -30,7 +41,7 @@ interface BigDataPoolResourceInfos {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BigDataPools_Get")
-  get is ArmResourceRead<BigDataPoolResourceInfo>;
+  get is BigDataPoolOps.Read<BigDataPoolResourceInfo>;
 
   /**
    * Create a new Big Data pool.
@@ -39,7 +50,7 @@ interface BigDataPoolResourceInfos {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("BigDataPools_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is BigDataPoolOps.CreateOrUpdateAsync<
     BigDataPoolResourceInfo,
     Parameters = {
       /**
@@ -62,7 +73,7 @@ interface BigDataPoolResourceInfos {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BigDataPools_Update")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is BigDataPoolOps.CustomPatchSync<
     BigDataPoolResourceInfo,
     PatchModel = BigDataPoolPatchInfo
   >;
@@ -74,7 +85,7 @@ interface BigDataPoolResourceInfos {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("BigDataPools_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is BigDataPoolOps.DeleteWithoutOkAsync<
     BigDataPoolResourceInfo,
     Response =
       | ArmResponse<BigDataPoolResourceInfo>
@@ -91,7 +102,7 @@ interface BigDataPoolResourceInfos {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BigDataPools_ListByWorkspace")
-  listByWorkspace is ArmResourceListByParent<BigDataPoolResourceInfo>;
+  listByWorkspace is BigDataPoolOps.List<BigDataPoolResourceInfo>;
 }
 
 @@doc(BigDataPoolResourceInfo.name, "Big Data pool name");
