@@ -133,7 +133,8 @@ model RecoveryPlanResiliencyProperties {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Infrastructure resiliency properties for a recovery plan.")
-model InfrastructureResiliencyPlanProperties extends RecoveryPlanResiliencyProperties {
+model InfrastructureResiliencyPlanProperties
+  extends RecoveryPlanResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.InfrastructureResiliency;

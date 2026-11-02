@@ -118,7 +118,8 @@ model RecoveryGroupResiliencyProperties {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Infrastructure resiliency properties for a recovery orchestration group.")
-model InfrastructureResiliencyGroupProperties extends RecoveryGroupResiliencyProperties {
+model InfrastructureResiliencyGroupProperties
+  extends RecoveryGroupResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.InfrastructureResiliency;
