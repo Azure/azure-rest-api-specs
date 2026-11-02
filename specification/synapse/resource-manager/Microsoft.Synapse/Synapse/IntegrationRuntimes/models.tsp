@@ -417,12 +417,6 @@ model IntegrationRuntime {
 }
 
 /**
- * Azure Synapse nested resource, which belongs to a workspace.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model SubResource extends AzureEntityResource {}
-
-/**
  * The IP address of self-hosted integration runtime node.
  */
 model IntegrationRuntimeNodeIpAddress {
