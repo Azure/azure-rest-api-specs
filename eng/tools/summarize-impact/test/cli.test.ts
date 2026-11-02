@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import type { ImpactAssessment } from "../src/ImpactAssessment.ts";
+import type { ImpactAssessment } from "@azure-tools/specs-shared/impact";
 import { PRContext } from "../src/PRContext.ts";
 import { evaluateImpact, getRPaaSFolderList } from "../src/impact.ts";
 
@@ -106,9 +106,13 @@ describe("CLI PR comparison", () => {
     const impact = JSON.parse(
       readFileSync(path.join(sourceDirectory, "summary.json"), "utf8"),
     ) as ImpactAssessment;
-    expect(impact.dataPlaneRequired).toBe(plane === "data-plane");
-    expect(impact.resourceManagerRequired).toBe(plane === "resource-manager");
-    expect(impact.isNewApiVersion).toBe(true);
+    expect(impact.services).toEqual([
+      expect.objectContaining({
+        path: "specification/contosowidgetmanager",
+        plane,
+        newApiVersions: ["2026-01-01"],
+      }),
+    ]);
   });
 });
 
@@ -128,27 +132,18 @@ describe("Check Changes", () => {
           cwd: sourceDirectory,
           baseCommitish: "origin/main",
         });
-
         const rpaaSFolderList = getRPaaSFolderList(targetDirectory);
 
         const prContext = new PRContext(sourceDirectory, targetDirectory, {
-          sha: "ad7c74cb27d2cf3ba83996aaea36b07caa4d16c8",
-          sourceBranch: "dev/nandiniy/DTLTypeSpec",
-          targetBranch: "main",
-          repo: "azure-rest-api-specs",
-          prNumber: "35346",
-          owner: "Azure",
           fileList: changedFileDetails,
-          isDraft: false,
         });
 
         const result = await evaluateImpact(prContext, rpaaSFolderList);
 
-        expect(result).toBeDefined();
-        expect(result.typeSpecChanged).toBeTruthy();
-        expect(result.dataPlaneRequired).toBeFalsy();
-        expect(result.resourceManagerRequired).toBeTruthy();
-        expect(result.suppressionReviewRequired).toBeTruthy();
+        expect(result.services.some((service) => service.typeSpec)).toBe(true);
+        expect(result.services.some((service) => service.plane === "data-plane")).toBe(false);
+        expect(result.services.some((service) => service.plane === "resource-manager")).toBe(true);
+        expect(result.services.some((service) => service.suppressionsChanged)).toBe(true);
         expect(changedFileDetails).toBeDefined();
         expect(changedFileDetails.total).toEqual(293);
       } finally {
@@ -174,25 +169,15 @@ describe("Check Changes", () => {
           cwd: sourceDirectory,
           baseCommitish: "origin/main",
         });
-
         const prContext = new PRContext(sourceDirectory, targetDirectory, {
-          sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
-          sourceBranch: "features/users/deepika/cosmos-connectors-confluent",
-          targetBranch: "main",
-          repo: "azure-rest-api-specs",
-          prNumber: "35982",
-          owner: "Azure",
           fileList: changedFileDetails,
-          isDraft: false,
         });
 
         const result = await evaluateImpact(prContext, []);
-        expect(result.isNewApiVersion).toBeTruthy();
-        expect(result.typeSpecChanged).toBeTruthy();
-        expect(result.resourceManagerRequired).toBeTruthy();
-        expect(result.isNewApiVersion).toBeTruthy();
-        expect(result.rpaasChange).toBeTruthy();
-        expect(result).toBeDefined();
+        expect(result.services.some((service) => service.newApiVersions.length > 0)).toBe(true);
+        expect(result.services.some((service) => service.typeSpec)).toBe(true);
+        expect(result.services.some((service) => service.plane === "resource-manager")).toBe(true);
+        expect(result.services.some((service) => service.resourceProvider.usesRpaas)).toBe(true);
       } finally {
         // Restore original directory
         process.chdir(originalCwd);
