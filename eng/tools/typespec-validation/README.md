@@ -101,6 +101,8 @@ in single-project, `--all`, and `--changed` validation. Existing and uncommitted
 files are checked too. Installed `node_modules` and `.git` directories are excluded.
 The disallowed extensions are `.js`, `.ts`, `.mjs`, `.cjs`, `.mts`, `.cts`, `.jsx`,
 and `.tsx` (case-insensitive, including declaration files).
+File-specific `TypeSpecValidation` suppressions with `rules: [DisallowedFileTypes]`
+can grandfather existing scripts without allowing new scripts in the same service.
 
 `--changed` compares committed changes between `--base` (default `HEAD^`) and
 `--head` (default `HEAD`). It validates the current checkout, not a separate

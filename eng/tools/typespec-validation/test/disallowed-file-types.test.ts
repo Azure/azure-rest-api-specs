@@ -1,3 +1,4 @@
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "pathe";
@@ -40,7 +41,7 @@ it("rejects script files throughout the service without needing Git history", as
   ];
   await writeFiles(files);
 
-  const result = await new DisallowedFileTypesRule().execute(project);
+  const result = await new DisallowedFileTypesRule().execute(project, defaultLogger);
   expect(result.success).toBe(false);
   expect(result.diagnostics?.map(({ path }) => path)).toEqual(
     files.map((file) => join(root, file)).sort(),
@@ -66,7 +67,35 @@ it("allows specification files and excludes dependencies and other services", as
     "eng/script.mjs",
   ]);
 
-  const result = await new DisallowedFileTypesRule().execute(project);
+  const result = await new DisallowedFileTypesRule().execute(project, defaultLogger);
   expect(result.success).toBe(true);
   expect(result.diagnostics).toEqual([]);
+});
+
+it("grandfathers only the files suppressed for this rule, not new scripts in the same service", async () => {
+  const existing = "specification/service/data-plane/Project/existing.mjs";
+  const added = "specification/service/data-plane/Project/new.mjs";
+  await writeFiles([existing]);
+  await writeFile(
+    join(root, "specification/suppressions.yaml"),
+    `- tool: TypeSpecValidation
+  rules: [DisallowedFileTypes]
+  paths: [service/data-plane/Project/existing.mjs]
+  reason: Existing emitter pending relocation
+- tool: TypeSpecValidation
+  rules: [Compile]
+  paths: [service/data-plane/Project/new.mjs]
+  reason: Unrelated exception
+`,
+  );
+  const rule = new DisallowedFileTypesRule();
+  const grandfathered = await rule.execute(project, defaultLogger);
+  expect(grandfathered.success).toBe(true);
+  expect(grandfathered.diagnostics).toEqual([]);
+  expect(grandfathered.suppressed).toBe("Existing emitter pending relocation");
+
+  await writeFiles([added]);
+  const result = await rule.execute(project, defaultLogger);
+  expect(result.success).toBe(false);
+  expect(result.diagnostics?.map(({ path }) => path)).toEqual([join(root, added)]);
 });
