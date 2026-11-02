@@ -54,7 +54,11 @@ interface ServerSecurityAlertPolicies {
     ServerSecurityAlertPolicy,
     Response =
       | ArmResourceUpdatedResponse<ServerSecurityAlertPolicy>
-      | ArmAcceptedLroResponse,
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = ServerSecurityAlertPolicy> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     LroHeaders = ArmLroLocationHeader<FinalResult = ServerSecurityAlertPolicy> &
       Azure.Core.Foundations.RetryAfterHeader
   >;

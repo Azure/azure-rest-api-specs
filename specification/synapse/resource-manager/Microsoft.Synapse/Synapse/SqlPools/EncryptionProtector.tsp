@@ -68,7 +68,11 @@ interface EncryptionProtectors {
     EncryptionProtector,
     Response =
       | ArmResourceUpdatedResponse<EncryptionProtector>
-      | ArmAcceptedLroResponse,
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = EncryptionProtector> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     LroHeaders = ArmLroLocationHeader<FinalResult = EncryptionProtector> &
       Azure.Core.Foundations.RetryAfterHeader
   >;

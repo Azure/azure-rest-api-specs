@@ -68,7 +68,11 @@ interface WorkspaceAadAdminInfos {
     WorkspaceAadAdminInfo,
     Response =
       | ArmResourceUpdatedResponse<WorkspaceAadAdminInfo>
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = WorkspaceAadAdminInfo> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
           @bodyRoot
           _: WorkspaceAadAdminInfo;
         }),
@@ -128,7 +132,11 @@ interface WorkspaceSqlAadAdmins {
     WorkspaceAadAdminInfo,
     Response =
       | ArmResourceUpdatedResponse<WorkspaceAadAdminInfo>
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = WorkspaceAadAdminInfo> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
           @bodyRoot
           _: WorkspaceAadAdminInfo;
         }),

@@ -87,7 +87,8 @@ interface Workspaces {
     Workspace,
     Response =
       | ArmResponse<Workspace>
-      | (ArmDeleteAcceptedLroResponse & {
+      | (ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = Workspace> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: Workspace;
         })

@@ -71,7 +71,11 @@ interface WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettings {
     DedicatedSQLminimalTlsSettings,
     Response =
       | ArmResourceUpdatedResponse<DedicatedSQLminimalTlsSettings>
-      | ArmAcceptedLroResponse,
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = DedicatedSQLminimalTlsSettings> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     LroHeaders = ArmLroLocationHeader<FinalResult = DedicatedSQLminimalTlsSettings> &
       Azure.Core.Foundations.RetryAfterHeader
   >;

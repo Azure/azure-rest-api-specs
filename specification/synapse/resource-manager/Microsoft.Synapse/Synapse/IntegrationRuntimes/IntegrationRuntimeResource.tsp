@@ -111,7 +111,11 @@ interface IntegrationRuntimeResources {
     },
     Response =
       | ArmResourceUpdatedResponse<IntegrationRuntimeResource>
-      | ArmAcceptedLroResponse,
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = IntegrationRuntimeResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     LroHeaders = ArmLroLocationHeader<FinalResult = IntegrationRuntimeResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;

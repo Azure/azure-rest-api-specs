@@ -84,7 +84,11 @@ interface DataConnections {
     PatchModel = DataConnection,
     Response =
       | ArmResponse<DataConnection>
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = DataConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
           @bodyRoot
           _: DataConnection;
         })

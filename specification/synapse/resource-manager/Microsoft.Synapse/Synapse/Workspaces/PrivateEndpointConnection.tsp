@@ -46,7 +46,8 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnection,
     Response =
       | ArmDeletedResponse
-      | (ArmDeleteAcceptedLroResponse & {
+      | (ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = OperationResource> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: OperationResource;
         })

@@ -66,7 +66,11 @@ interface SqlPools {
     SqlPool,
     Response =
       | ArmResourceUpdatedResponse<SqlPool>
-      | ArmAcceptedLroResponse
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = SqlPool> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
       | SqlPoolNotFoundResponse,
     LroHeaders = ArmLroLocationHeader<FinalResult = SqlPool> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -86,7 +90,8 @@ interface SqlPools {
     SqlPool,
     Response =
       | ArmResponse<SqlPool>
-      | (ArmDeleteAcceptedLroResponse & {
+      | (ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = SqlPool> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: SqlPool;
         })

@@ -84,7 +84,11 @@ interface Databases {
     PatchModel = Database,
     Response =
       | ArmResponse<Database>
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = Database> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
           @bodyRoot
           _: Database;
         })
@@ -133,7 +137,9 @@ interface Databases {
   dataConnectionValidation is DatabaseOps.ActionAsync<
     Database,
     DataConnectionValidation,
-    ArmResponse<DataConnectionValidationListResult>
+    ArmResponse<DataConnectionValidationListResult>,
+    LroHeaders = ArmLroLocationHeader<FinalResult = DataConnectionValidationListResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -62,7 +62,8 @@ interface IpFirewallRuleInfos {
     IpFirewallRuleInfo,
     Response =
       | ArmResponse<IpFirewallRuleInfo>
-      | ArmDeleteAcceptedLroResponse
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = IpFirewallRuleInfo> &
+          Azure.Core.Foundations.RetryAfterHeader>
       | ArmDeletedNoContentResponse
   >;
 

@@ -54,7 +54,11 @@ interface ServerBlobAuditingPolicies {
     ServerBlobAuditingPolicy,
     Response =
       | ArmResourceUpdatedResponse<ServerBlobAuditingPolicy>
-      | ArmAcceptedLroResponse,
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = ServerBlobAuditingPolicy> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     LroHeaders = ArmLroLocationHeader<FinalResult = ServerBlobAuditingPolicy> &
       Azure.Core.Foundations.RetryAfterHeader
   >;

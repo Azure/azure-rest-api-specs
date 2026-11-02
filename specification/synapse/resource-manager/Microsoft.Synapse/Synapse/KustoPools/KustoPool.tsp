@@ -88,7 +88,11 @@ interface KustoPools {
     },
     Response =
       | ArmResponse<KustoPool>
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = KustoPool> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
           @bodyRoot
           _: KustoPool;
         })
@@ -117,12 +121,24 @@ interface KustoPools {
   /**
    * Stops a Kusto pool.
    */
-  stop is KustoPoolOps.ActionAsync<KustoPool, void, OkResponse>;
+  stop is KustoPoolOps.ActionAsync<
+    KustoPool,
+    void,
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Starts a Kusto pool.
    */
-  start is KustoPoolOps.ActionAsync<KustoPool, void, OkResponse>;
+  start is KustoPoolOps.ActionAsync<
+    KustoPool,
+    void,
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Returns the SKUs available for the provided resource.
@@ -152,7 +168,9 @@ interface KustoPools {
   addLanguageExtensions is KustoPoolOps.ActionAsync<
     KustoPool,
     LanguageExtensionsList,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -161,7 +179,9 @@ interface KustoPools {
   removeLanguageExtensions is KustoPoolOps.ActionAsync<
     KustoPool,
     LanguageExtensionsList,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -180,7 +200,9 @@ interface KustoPools {
   detachFollowerDatabases is KustoPoolOps.ActionAsync<
     KustoPool,
     FollowerDatabaseDefinition,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
