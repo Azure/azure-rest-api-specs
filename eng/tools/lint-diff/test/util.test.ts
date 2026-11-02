@@ -18,7 +18,7 @@ describe("pathExists", () => {
     const files = {
       "./file-exists": "a",
     };
-    vol.fromJSON(files, ".");
+    vol.fromJSON(files);
 
     const exists = await pathExists("./file-exists");
 
@@ -29,7 +29,7 @@ describe("pathExists", () => {
     const files = {
       "./file-exists": "a",
     };
-    vol.fromJSON(files, ".");
+    vol.fromJSON(files);
 
     const exists = await pathExists("./file-does-not-exist");
 
