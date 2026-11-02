@@ -96,7 +96,7 @@ interface VoiceAgentWebSocket {
        * agent's instructions and session-start greeting for this session only. The decoded value must be a JSON
        * object no larger than 32 KiB with a maximum nesting depth of 16.
        */
-      @query structured_input?: string;
+      @query structured_inputs?: string;
 
       /** Selects a specific version of the voice agent for this session. */
       @query("x-agent-version-override") agent_version_override?: string;
