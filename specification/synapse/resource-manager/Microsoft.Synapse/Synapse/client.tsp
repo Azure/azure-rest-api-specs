@@ -164,3 +164,8 @@ namespace Microsoft.Synapse;
   "SqlPoolNotFoundResult",
   "csharp"
 ); // no shipped name (404 error response)
+@@clientName(
+  SqlPools.SqlPoolAcceptedResponse,
+  "SqlPoolAcceptedResult",
+  "csharp"
+); // no shipped name (pause/resume 202 envelope)
