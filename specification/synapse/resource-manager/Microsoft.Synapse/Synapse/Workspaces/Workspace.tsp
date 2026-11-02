@@ -28,7 +28,25 @@ model Workspace is Azure.ResourceManager.TrackedResource<WorkspaceProperties> {
   identity?: ManagedIdentity;
 }
 
-@armResourceOperations
+alias WorkspaceRoutedOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    /** The name of the workspace. */
+    @path
+    @segment("workspaces")
+    @key
+    workspaceName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface Workspaces {
   /**
    * Gets a workspace
@@ -85,8 +103,8 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Operations_GetLocationHeaderResult")
   @get
-  @action("{operationId}")
-  getLocationHeaderResult is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/operationResults/{operationId}")
+  getLocationHeaderResult is WorkspaceRoutedOps.ActionSync<
     Workspace,
     void,
     OkResponse | CreatedResponse | AcceptedResponse | NoContentResponse,
@@ -105,8 +123,8 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Operations_GetAzureAsyncHeaderResult")
   @get
-  @action("{operationId}")
-  getAzureAsyncHeaderResult is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/operationStatuses/{operationId}")
+  getAzureAsyncHeaderResult is WorkspaceRoutedOps.ActionSync<
     Workspace,
     void,
     ArmResponse<OperationResource>,
