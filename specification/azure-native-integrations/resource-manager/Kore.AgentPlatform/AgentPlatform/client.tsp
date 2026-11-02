@@ -101,6 +101,25 @@ using Kore.AgentPlatform;
   "IsDefault",
   "csharp"
 );
+@@alternateType(
+  Kore.AgentPlatform.ActivateSaaSParameterRequest.saasGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Kore.AgentPlatform.SaaSResourceDetailsResponse.saasId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Kore.AgentPlatform.WorkspaceMarketplaceDetails.resourceId,
+  Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SaaS/resources",
+    }
+  ]>,
+  "csharp"
+);
 @@clientName(
   Kore.AgentPlatform.ListWorkspacesResponse,
   "ListWorkspacesResult",
