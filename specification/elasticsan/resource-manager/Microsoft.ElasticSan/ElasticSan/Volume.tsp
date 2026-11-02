@@ -83,7 +83,7 @@ interface Volumes {
        * Optional, used to delete a source volume together with its dependent clones (see activeCloneCount). Allowed values are only true or false. Default value is false. Without it, deleting a volume that has dependent clones is rejected; the delete is also rejected if any dependent clone is attached.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Header name follows the existing x-ms-delete-snapshots and x-ms-force-delete convention on this operation."
-      @added(Versions.v2026_10_01_preview)
+      @added(Versions.v2027_02_01_preview)
       @header
       @clientName("deleteClones", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
       `x-ms-delete-clones`?: `x-ms-delete-clones`;
@@ -120,7 +120,7 @@ interface Volumes {
        *
        * Results are always live volumes: $filter cannot be combined with x-ms-access-soft-deleted-resources.
        */
-      @added(Versions.v2026_10_01_preview)
+      @added(Versions.v2027_02_01_preview)
       @query("$filter")
       $filter?: string;
     },
