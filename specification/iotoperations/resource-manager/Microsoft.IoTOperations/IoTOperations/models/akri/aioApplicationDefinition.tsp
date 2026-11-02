@@ -12,7 +12,7 @@ namespace Microsoft.IoTOperations;
 
 /** AioApplicationProfile resource. */
 @parentResource(InstanceResource)
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationProfileResource
   is ProxyResource<AioApplicationDefinitionProperties> {
   /** Name of the AioApplicationProfile resource. */
@@ -32,7 +32,7 @@ model AioApplicationProfileResource
 
 /** AioApplicationDefinition resource. */
 @parentResource(InstanceResource)
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationDefinitionResource
   is ProxyResource<AioApplicationDefinitionProperties> {
   /** Name of the AioApplicationDefinition resource. */
@@ -51,8 +51,8 @@ model AioApplicationDefinitionResource
 }
 
 /** Defines an application image and the constraints under which it runs. */
-@added(Versions.`2026-11-01-preview`)
-@renamedFrom(Versions.`2026-11-01-preview`, "AioApplicationProfileProperties")
+@added(Versions.`2026-12-01-preview`)
+@renamedFrom(Versions.`2026-12-01-preview`, "AioApplicationProfileProperties")
 model AioApplicationDefinitionProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
@@ -68,12 +68,12 @@ model AioApplicationDefinitionProperties {
   imageDetails: AioApplicationDefinitionImage;
 
   /** The source of the application deployment. This value cannot be changed after creation. */
-  @added(Versions.`2026-11-01-preview`)
+  @added(Versions.`2026-12-01-preview`)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   applicationSource: AioApplicationSource;
 
   /** The application type. Connector configurations require a parent definition with applicationType set to connector. This value cannot be changed after creation. */
-  @added(Versions.`2026-11-01-preview`)
+  @added(Versions.`2026-12-01-preview`)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   applicationType: AioApplicationType;
 
@@ -82,7 +82,7 @@ model AioApplicationDefinitionProperties {
 }
 
 /** The source of an application deployment. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 union AioApplicationSource {
   string,
 
@@ -94,7 +94,7 @@ union AioApplicationSource {
 }
 
 /** The type of application defined by an application definition. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 union AioApplicationType {
   string,
 
@@ -106,15 +106,15 @@ union AioApplicationType {
 }
 
 /** AIO version metadata for the application image. */
-@added(Versions.`2026-11-01-preview`)
-@renamedFrom(Versions.`2026-11-01-preview`, "AioApplicationProfileMetadata")
+@added(Versions.`2026-12-01-preview`)
+@renamedFrom(Versions.`2026-12-01-preview`, "AioApplicationProfileMetadata")
 model AioApplicationDefinitionMetadata {
   ...AkriAioMetadata;
 }
 
 /** Image settings for the application. */
-@added(Versions.`2026-11-01-preview`)
-@renamedFrom(Versions.`2026-11-01-preview`, "AioApplicationProfileImage")
+@added(Versions.`2026-12-01-preview`)
+@renamedFrom(Versions.`2026-12-01-preview`, "AioApplicationProfileImage")
 model AioApplicationDefinitionImage {
   /** The image name without any registry reference, tag, or digest. */
   imageName: string;
@@ -127,22 +127,22 @@ model AioApplicationDefinitionImage {
 }
 
 /** Compute resources for the application container. */
-@added(Versions.`2026-11-01-preview`)
-@renamedFrom(Versions.`2026-11-01-preview`, "AioApplicationProfileResources")
+@added(Versions.`2026-12-01-preview`)
+@renamedFrom(Versions.`2026-12-01-preview`, "AioApplicationProfileResources")
 model AioApplicationDefinitionResources {
   /** The minimum compute resources reserved for the application container. */
   @typeChangedFrom(
-    Versions.`2026-11-01-preview`,
+    Versions.`2026-12-01-preview`,
     AioApplicationDefinitionResourceRequirements
   )
   requests?: AioApplicationResourceQuantities;
 }
 
 /** CPU and memory requirements for the application container. */
-@added(Versions.`2026-11-01-preview`)
-@removed(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
+@removed(Versions.`2026-12-01-preview`)
 @renamedFrom(
-  Versions.`2026-11-01-preview`,
+  Versions.`2026-12-01-preview`,
   "AioApplicationProfileResourceRequirements"
 )
 model AioApplicationDefinitionResourceRequirements {

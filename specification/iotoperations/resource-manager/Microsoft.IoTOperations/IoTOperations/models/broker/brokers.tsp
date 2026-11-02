@@ -531,52 +531,6 @@ model CertManagerCertOptions {
   privateKey: CertManagerPrivateKey;
 }
 
-@doc("Cert Manager private key properties")
-model CertManagerPrivateKey {
-  @doc("algorithm for private key.")
-  algorithm: PrivateKeyAlgorithm;
-
-  @doc("cert-manager private key rotationPolicy.")
-  rotationPolicy: PrivateKeyRotationPolicy;
-}
-
-@doc("Private key algorithm types.")
-union PrivateKeyAlgorithm {
-  string,
-
-  @doc("Algorithm - ec256.")
-  Ec256: "Ec256",
-
-  @doc("Algorithm - ec384.")
-  Ec384: "Ec384",
-
-  @doc("Algorithm - ec521.")
-  Ec521: "Ec521",
-
-  @doc("Algorithm - ed25519.")
-  Ed25519: "Ed25519",
-
-  @doc("Algorithm - rsa2048.")
-  Rsa2048: "Rsa2048",
-
-  @doc("Algorithm - rsa4096.")
-  Rsa4096: "Rsa4096",
-
-  @doc("Algorithm - rsa8192.")
-  Rsa8192: "Rsa8192",
-}
-
-@doc("Private key rotation policy.")
-union PrivateKeyRotationPolicy {
-  string,
-
-  @doc("Rotation Policy - Always.")
-  Always: "Always",
-
-  @doc("Rotation Policy - Never.")
-  Never: "Never",
-}
-
 @doc("The memory profile settings of the Broker")
 union BrokerMemoryProfile {
   string,

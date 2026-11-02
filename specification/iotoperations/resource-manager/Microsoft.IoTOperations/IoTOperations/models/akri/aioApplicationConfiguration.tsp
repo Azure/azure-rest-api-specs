@@ -13,9 +13,9 @@ namespace Microsoft.IoTOperations;
 
 /** AioApplicationConfiguration resource. */
 @parentResource(AioApplicationProfileResource)
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 @renamedFrom(
-  Versions.`2026-11-01-preview`,
+  Versions.`2026-12-01-preview`,
   "AioApplicationConfigurationResource"
 )
 model AioApplicationConfigurationV1Resource
@@ -37,7 +37,7 @@ model AioApplicationConfigurationV1Resource
 
 /** AioApplicationConfiguration resource. */
 @parentResource(AioApplicationDefinitionResource)
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationConfigurationResource
   is ProxyResource<AioApplicationConfigurationProperties> {
   /** Name of the AioApplicationConfiguration resource. */
@@ -56,7 +56,7 @@ model AioApplicationConfigurationResource
 }
 
 /** Operator-authored configuration for an edge application. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationConfigurationProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
@@ -84,7 +84,7 @@ model AioApplicationConfigurationProperties {
 }
 
 /** Configurable access to customer-defined AIO resources. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationIntegration {
   /**
    * Access to MQTT topics beyond the topics that are implicitly available to
@@ -100,7 +100,7 @@ model AioApplicationIntegration {
 }
 
 /** The level of access granted to an application. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 union AioApplicationAccessMode {
   string,
 
@@ -115,7 +115,7 @@ union AioApplicationAccessMode {
 }
 
 /** Configurable access to customer-defined MQTT topics. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 @discriminator("accessMode")
 model AioApplicationMqttBrokerAccess {
   /** The level of access granted to customer-defined MQTT topics. */
@@ -123,7 +123,7 @@ model AioApplicationMqttBrokerAccess {
 }
 
 /** Configuration that grants no access to additional MQTT topics. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationMqttBrokerNotAllowedAccess
   extends AioApplicationMqttBrokerAccess {
   /** The level of access granted to customer-defined MQTT topics. */
@@ -131,14 +131,14 @@ model AioApplicationMqttBrokerNotAllowedAccess
 }
 
 /** Configuration that grants access to all MQTT topics. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationMqttBrokerAllAccess extends AioApplicationMqttBrokerAccess {
   /** The level of access granted to customer-defined MQTT topics. */
   accessMode: "All";
 }
 
 /** Configuration that grants access to specific MQTT topics. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationMqttBrokerSpecificAccess
   extends AioApplicationMqttBrokerAccess {
   /** The level of access granted to customer-defined MQTT topics. */
@@ -150,7 +150,7 @@ model AioApplicationMqttBrokerSpecificAccess
 }
 
 /** Configurable access to customer-defined State Store keys. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 @discriminator("accessMode")
 model AioApplicationStateStoreAccess {
   /** The level of access granted to customer-defined State Store keys. */
@@ -158,7 +158,7 @@ model AioApplicationStateStoreAccess {
 }
 
 /** Configuration that grants no access to additional State Store keys. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationStateStoreNotAllowedAccess
   extends AioApplicationStateStoreAccess {
   /** The level of access granted to customer-defined State Store keys. */
@@ -166,14 +166,14 @@ model AioApplicationStateStoreNotAllowedAccess
 }
 
 /** Configuration that grants access to all State Store keys. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationStateStoreAllAccess extends AioApplicationStateStoreAccess {
   /** The level of access granted to customer-defined State Store keys. */
   accessMode: "All";
 }
 
 /** Configuration that grants access to specific State Store keys. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationStateStoreSpecificAccess
   extends AioApplicationStateStoreAccess {
   /** The level of access granted to customer-defined State Store keys. */
@@ -185,7 +185,7 @@ model AioApplicationStateStoreSpecificAccess
 }
 
 /** Runtime configuration for the application. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 @discriminator("runtimeConfigurationType")
 model AioApplicationRuntimeConfiguration {
   /** The runtime configuration type. */
@@ -193,7 +193,7 @@ model AioApplicationRuntimeConfiguration {
 }
 
 /** Runtime configuration types. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 union AioApplicationRuntimeConfigurationType {
   string,
 
@@ -202,7 +202,7 @@ union AioApplicationRuntimeConfigurationType {
 }
 
 /** Image runtime configuration for the application. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationImageConfiguration
   extends AioApplicationRuntimeConfiguration {
   /** The runtime configuration type. */
@@ -213,7 +213,7 @@ model AioApplicationImageConfiguration
 }
 
 /** Image configuration settings for the application. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationImageConfigurationSettings {
   /** The pull policy of the image. */
   imagePullPolicy?: AkriConnectorsImagePullPolicy;
@@ -237,7 +237,7 @@ model AioApplicationImageConfigurationSettings {
   replicas?: int32 = 1;
 
   /** The compute resources for the application container. */
-  @added(Versions.`2026-11-01-preview`)
+  @added(Versions.`2026-12-01-preview`)
   resources?: AioApplicationConfigurationResources;
 
   /** Secrets mounted onto all application instances. */
@@ -249,14 +249,14 @@ model AioApplicationImageConfigurationSettings {
 }
 
 /** Compute resources for the application container. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationConfigurationResources {
   /** The maximum compute resources the application container may use. */
   limits?: AioApplicationResourceQuantities;
 }
 
 /** A persistent volume claim mounted by the application. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationPersistentVolumeClaim {
   /** The name of the persistent volume claim. */
   claimName: string;
@@ -266,7 +266,7 @@ model AioApplicationPersistentVolumeClaim {
 }
 
 /** Certificates trusted by the application. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioApplicationTrustList {
   /** The secret reference for certificates to trust. */
   trustListSecretRef: string;
