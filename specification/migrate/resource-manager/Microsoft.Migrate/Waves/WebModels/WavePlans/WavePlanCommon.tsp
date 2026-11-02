@@ -55,17 +55,15 @@ model WavePlanOutdatedStatus {
   @visibility(Lifecycle.Read)
   outdatedReasons: WavePlanOutdatedReason[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service explicitly serializes null when the plan status has not been established."
-  @doc("The UTC time when the plan status was last established. Null when the status has not been established.")
+  @doc("The UTC time when the plan status was last established. Absent when the status has not been established.")
   @added(ApiVersions.v2026_09_01_preview)
   @visibility(Lifecycle.Read)
-  lastCheckedTime?: utcDateTime | null;
+  lastCheckedTime?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service explicitly serializes null while the materialized plan is up to date."
-  @doc("The first UTC time when the current materialized plan was found outdated. Null while the plan is up to date.")
+  @doc("The first UTC time when the current materialized plan was found outdated. Absent while the plan is up to date.")
   @added(ApiVersions.v2026_09_01_preview)
   @visibility(Lifecycle.Read)
-  outdatedTime?: utcDateTime | null;
+  outdatedTime?: utcDateTime;
 }
 
 @doc("Artifact Store identity for a wave plan run. Consumers use the artifact ARM id and version id to reference or share the committed artifact and resolve time-bound download access.")
