@@ -81,6 +81,11 @@ alias BrowserSessionOptionalProperties = {
   @doc("The artifact configuration and finalized artifacts for the browser session.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   sessionArtifacts?: BrowserSessionArtifacts;
+
+  @added(Versions.v2026_12_01_preview)
+  @doc("The ID in GUID format of the secret store used by the browser session.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  secretStoreId?: Azure.Core.uuid;
 };
 
 @doc("Model of a browser session used for tracking purposes.")
