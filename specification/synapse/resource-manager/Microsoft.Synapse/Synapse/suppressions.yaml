@@ -44,3 +44,23 @@
     - BigDataPools
     - IntegrationRuntimes
     - KustoPools
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services. The nested projects only emit OpenAPI;
+    SDK emitter options live in the root tspconfig.yaml, which generates the single
+    SynapseManagementClient SDK from client.tsp.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+    - options.@azure-typespec/http-client-csharp-mgmt.*
+  paths:
+    - Workspaces/tspconfig.yaml
+    - SqlPools/tspconfig.yaml
+    - BigDataPools/tspconfig.yaml
+    - IntegrationRuntimes/tspconfig.yaml
+    - KustoPools/tspconfig.yaml
