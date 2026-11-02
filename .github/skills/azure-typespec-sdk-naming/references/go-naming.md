@@ -21,12 +21,12 @@ Match the same term and meaning, not an unrelated substring. If the TypeSpec evi
 
 Otherwise, uppercase confirmed acronym components in new Go names. Confirm their meaning from TypeSpec documentation; do not guess expansions or change letters inside ordinary words.
 
-| TypeSpec target | Go `clientName` |
-| --- | --- |
-| `ControllerType.CiscoAci` | `CiscoACI` |
+| TypeSpec target           | Go `clientName`           |
+| ------------------------- | ------------------------- |
+| `ControllerType.CiscoAci` | `CiscoACI`                |
 | `AFDDomainMtlsParameters` | `AFDDomainMTLSParameters` |
-| `userId` parameter | `userID` |
-| `recordAcsId` parameter | `recordACSID` |
+| `userId` parameter        | `userID`                  |
+| `recordAcsId` parameter   | `recordACSID`             |
 
 This profile covers acronym casing only. Do not borrow C# transformations such as changing `enabled` to `IsEnabled`.
 

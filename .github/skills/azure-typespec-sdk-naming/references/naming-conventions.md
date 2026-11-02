@@ -8,11 +8,11 @@ Use the user's confirmed targets, `tspconfig.yaml` emitter/options configuration
 
 An unknown SDK target is missing information, not an unsupported profile. Ask which languages are targeted when needed for a naming decision; in read-only review, report missing context without blocking unrelated review work. Do not require SDK-language intake for unrelated REST authoring.
 
-| Language        | Service type     | Profile                                                                            |
-| --------------- | ---------------- | ---------------------------------------------------------------------------------- |
-| `csharp`        | ARM / management | [C# member naming](csharp-naming.md) and [C# model naming](csharp-model-naming.md) |
-| `csharp`        | Data-plane       | Not covered by this initial profile; do not apply ARM naming rules                 |
-| `go`            | ARM / data-plane | [Go acronym naming](go-naming.md)                                                   |
+| Language        | Service type     | Profile                                                                                  |
+| --------------- | ---------------- | ---------------------------------------------------------------------------------------- |
+| `csharp`        | ARM / management | [C# member naming](csharp-naming.md) and [C# model naming](csharp-model-naming.md)       |
+| `csharp`        | Data-plane       | Not covered by this initial profile; do not apply ARM naming rules                       |
+| `go`            | ARM / data-plane | [Go acronym naming](go-naming.md)                                                        |
 | Other languages | Any              | Not yet covered; retain applicable shared API guidance, without borrowing C# or Go rules |
 
 For multiple targets, load only matching profiles and record coverage per target. Missing coverage is not approval of a name. If the requested naming change needs an unsupported profile, obtain authoritative language guidance or ask for clarification; do not invent rules.
