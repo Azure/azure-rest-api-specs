@@ -1,4 +1,4 @@
-name: azsdk-common-typespec-naming-eval
+name: azure-typespec-sdk-naming-eval
 description: Shared naming guidance, read-only review, and scoped customization
 type: capability
 
@@ -7,7 +7,7 @@ environment:
     - ..
 
 tags:
-  area: azsdk-common-typespec-naming
+  area: azure-typespec-sdk-naming
   type: ci-gate
 
 defaults:
@@ -29,7 +29,7 @@ stimuli:
       - &namingLoaded
         type: skill-invocation
         config:
-          required: [azsdk-common-typespec-naming]
+          required: [azure-typespec-sdk-naming]
 
   - name: trigger-review-sdk-naming
     prompt: |
@@ -65,7 +65,7 @@ stimuli:
       - type: skill-invocation
         config:
           required: [azure-typespec-assessment]
-          disallowed: [azsdk-common-typespec-naming]
+          disallowed: [azure-typespec-sdk-naming]
 
   - name: anti-trigger-generate-csharp-sdk
     environment: &generationBoundary
@@ -81,7 +81,7 @@ stimuli:
         type: skill-invocation
         config:
           required: [azsdk-common-generate-sdk-locally]
-          disallowed: [azsdk-common-typespec-naming]
+          disallowed: [azure-typespec-sdk-naming]
 
   - name: anti-trigger-update-sdk-changelog
     environment: *generationBoundary
@@ -121,7 +121,7 @@ stimuli:
         type: skill-invocation
         config:
           required: [azsdk-common-generate-sdk-locally]
-          disallowed: [azsdk-common-typespec-naming]
+          disallowed: [azure-typespec-sdk-naming]
       - type: tool-calls
         config:
           required:
@@ -184,7 +184,7 @@ stimuli:
     tags:
       case: smoke
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan, but do not apply, TypeSpec additions for a new, never-shipped Widget ARM SDK.
       Intake is confirmed: project specification/widget/resource-manager/Microsoft.Widget,
       main.tsp and tspconfig.yaml, preview 2026-01-01-preview, target .NET.
@@ -245,7 +245,7 @@ stimuli:
     tags:
       case: body-role
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan TypeSpec additions only. Intake is confirmed: a new never-shipped C# ARM Widget
       SDK, project specification/widget/resource-manager/Microsoft.Widget, preview
       2026-01-01-preview. Use bundled skill references; no network, MCP, compilation or edits.
@@ -276,7 +276,7 @@ stimuli:
 
   - name: csharp-arm-accepted-exceptions
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan TypeSpec additions only for a new never-shipped C# ARM Widget SDK.
       Intake is confirmed: specification/widget/resource-manager/Microsoft.Widget,
       preview 2026-01-01-preview. Use bundled skill references; no network, MCP or edits.
@@ -325,7 +325,7 @@ stimuli:
     tags:
       case: context-casing
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan TypeSpec additions only. Intake is confirmed for a new never-shipped C# ARM SDK
       at specification/widget/resource-manager/Microsoft.Widget, preview 2026-01-01-preview.
       The service team confirms "Widget" as the resource/domain prefix. Use bundled skill
@@ -361,7 +361,7 @@ stimuli:
     tags:
       case: body-role
     prompt: |
-      Invoke azsdk-common-typespec-naming in guidance mode for a new, never-shipped
+      Invoke azure-typespec-sdk-naming in guidance mode for a new, never-shipped
       C# ARM Widget SDK at specification/widget/resource-manager/Microsoft.Widget.
       WidgetConnection names a reusable domain concept used in both POST input and
       GET output; it is not a transport wrapper or resource data.
@@ -389,7 +389,7 @@ stimuli:
     tags:
       case: member-semantics
     prompt: |
-      Invoke azsdk-common-typespec-naming in guidance mode for a new, never-shipped
+      Invoke azure-typespec-sdk-naming in guidance mode for a new, never-shipped
       C# ARM Widget SDK at specification/widget/resource-manager/Microsoft.Widget.
       WidgetProperties.callbackUrl is a string whose documented value is an absolute
       HTTPS callback URI. The effective C# property is CallbackUrl.
@@ -417,7 +417,7 @@ stimuli:
     tags:
       case: member-semantics
     prompt: |
-      Invoke azsdk-common-typespec-naming in guidance mode for a new, never-shipped
+      Invoke azure-typespec-sdk-naming in guidance mode for a new, never-shipped
       C# ARM Widget SDK at specification/widget/resource-manager/Microsoft.Widget.
       The service team confirms auth means authentication, not authorization.
       The affected public API family consists of WidgetAuthDetails, the sibling
@@ -447,7 +447,7 @@ stimuli:
     tags:
       case: numeric-enum
     prompt: |
-      Invoke azsdk-common-typespec-naming in guidance mode for a new, never-shipped
+      Invoke azure-typespec-sdk-naming in guidance mode for a new, never-shipped
       C# ARM Widget SDK at specification/widget/resource-manager/Microsoft.Widget.
       The service-owned enum WidgetTlsVersion has tls10: "1.0" and tls12: "1.2";
       these represent TLS protocol versions. The expected default C# names are Tls10
@@ -488,7 +488,7 @@ stimuli:
 
   - name: sdk-only-rename-isolation
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan TypeSpec additions only. Intake is confirmed for a new never-shipped ARM Widget
       SDK at specification/widget/resource-manager/Microsoft.Widget, preview 2026-01-01-preview,
       targeting C#, Java and Python. Only improve the C# SDK name of WidgetProperties.enabled,
@@ -518,7 +518,7 @@ stimuli:
 
   - name: preserve-shipped-sdk-name
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan TypeSpec authoring changes only. Intake is confirmed: C# ARM Widget SDK at
       specification/widget/resource-manager/Microsoft.Widget, adding preview 2026-01-01-preview.
       Released API evidence: Azure.ResourceManager.Widget 1.0.0 exposes
@@ -541,7 +541,7 @@ stimuli:
 
   - name: unknown-duration-unit
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan a TypeSpec addition only. Intake is confirmed for a new never-shipped C# ARM
       Widget SDK at specification/widget/resource-manager/Microsoft.Widget, preview
       2026-01-01-preview. Add retryInterval: int32 to WidgetProperties. Neither the contract
@@ -564,7 +564,7 @@ stimuli:
     tags:
       case: unknown-target
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan a TypeSpec addition only for a new ARM service at
       specification/widget/resource-manager/Microsoft.Widget, preview 2026-01-01-preview.
       This is a never-shipped service's first version. The supplied facts are the entire
@@ -596,7 +596,7 @@ stimuli:
     tags:
       case: dataplane-boundary
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan TypeSpec additions only. Intake is confirmed for a new C# data-plane Widget
       SDK at specification/widget/data-plane/WidgetAnalytics, preview 2026-01-01-preview.
       Proposed models are WidgetRequest and WidgetResponse. Use only the bundled skill
@@ -619,7 +619,7 @@ stimuli:
     tags:
       case: java-boundary
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan TypeSpec additions only. Intake is confirmed for a new Java-only ARM Widget SDK
       at specification/widget/resource-manager/Microsoft.Widget, preview 2026-01-01-preview.
       Proposed models are WidgetRequest and WidgetResponse. No C# SDK is targeted.
@@ -641,7 +641,7 @@ stimuli:
 
   - name: collision-and-synthesized-target
     prompt: |
-      Invoke the azsdk-common-typespec-naming skill before planning.
+      Invoke the azure-typespec-sdk-naming skill before planning.
       Plan TypeSpec naming changes only. Intake is confirmed for a never-shipped C# ARM
       Widget SDK at specification/widget/resource-manager/Microsoft.Widget, preview
       2026-01-01-preview. WidgetRequest is a new POST body model, but a different public
@@ -690,7 +690,7 @@ stimuli:
           command: node
           args: ["customization-mcp.mjs"]
     prompt: |
-      Invoke azsdk-common-typespec-naming in apply mode. The calling authoring workflow
+      Invoke azure-typespec-sdk-naming in apply mode. The calling authoring workflow
       has authorized the following new, unshipped C# ARM naming customization and will
       handle TypeSpec validation after your return. The TypeSpec project root is the
       absolute current working directory (resolve it locally). main.tsp is the
@@ -762,7 +762,7 @@ stimuli:
           command: node
           args: ["customization-mcp.mjs"]
     prompt: |
-      Invoke azsdk-common-typespec-naming for this standalone naming-only fix; do
+      Invoke azure-typespec-sdk-naming for this standalone naming-only fix; do
       not delegate to azure-typespec-author. The current directory is the confirmed
       TypeSpec project root and contains main.tsp and tspconfig.yaml.
       WidgetProperties.enabled is a new, unshipped C# ARM boolean whose C# SDK name
@@ -815,7 +815,7 @@ stimuli:
       commands:
         - node -e "require('fs').appendFileSync('client.tsp', '\n@@clientName(WidgetProperties.enabled, \x22Enabled\x22, \x22csharp\x22);\n')"
     prompt: |
-      Invoke azsdk-common-typespec-naming in apply mode for the current TypeSpec
+      Invoke azure-typespec-sdk-naming in apply mode for the current TypeSpec
       project. The caller authorized changing the unshipped C# ARM SDK name of
       Widget.WidgetProperties.enabled from Enabled to IsEnabled. The existing
       csharp override is unshipped, not a compatibility baseline. Preserve the
@@ -849,7 +849,7 @@ stimuli:
       case: review
     environment: *customization
     prompt: |
-      Invoke azsdk-common-typespec-naming in read-only review mode for this supplied
+      Invoke azure-typespec-sdk-naming in read-only review mode for this supplied
       evidence. This is a C# ARM PR for a new unshipped WidgetProperties model.
       The boolean property enabled will emit Enabled, and there is no clientName override.
       Assess only naming; do not edit or apply fixes, even though a customization tool
@@ -879,7 +879,7 @@ stimuli:
         - src: fixtures/standalone-apply/tspconfig.yaml
           dest: tspconfig.yaml
     prompt: |
-      Invoke azsdk-common-typespec-naming in apply mode. Apply the approved C# ARM
+      Invoke azure-typespec-sdk-naming in apply mode. Apply the approved C# ARM
       naming-only override Widget.WidgetProperties.enabled -> IsEnabled.
       All names are new/unshipped; the absolute current workspace is the TypeSpec
       project root. main.tsp is the generation entrypoint; there is no client.tsp
@@ -934,7 +934,7 @@ stimuli:
     tags:
       case: missing-tool
     prompt: |
-      Invoke azsdk-common-typespec-naming. Apply the approved C# ARM naming-only override
+      Invoke azure-typespec-sdk-naming. Apply the approved C# ARM naming-only override
       WidgetProperties.enabled -> IsEnabled in client.tsp. All names are new/unshipped;
       the intended TypeSpec project is not present in this workspace. No customization
       MCP tool is available and installation or project creation is out of scope.
