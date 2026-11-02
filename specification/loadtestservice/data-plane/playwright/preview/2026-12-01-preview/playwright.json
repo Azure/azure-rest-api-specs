@@ -64,6 +64,252 @@
   },
   "tags": [],
   "paths": {
+    "/browser-profiles": {
+      "get": {
+        "operationId": "BrowserProfiles_List",
+        "description": "Lists browser profiles. Follow the nextLink URL in the response to retrieve the next page.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedBrowserProfile"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/browser-profiles/{browserProfileId}": {
+      "get": {
+        "operationId": "BrowserProfiles_Get",
+        "description": "Gets the browser profile with the specified ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "browserProfileId",
+            "in": "path",
+            "description": "The browser profile ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BrowserProfile"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "BrowserProfiles_CreateOrUpdate",
+        "description": "Creates or updates a browser profile with the specified ID. Omitted properties remain unchanged on update.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "browserProfileId",
+            "in": "path",
+            "description": "The browser profile ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BrowserProfileCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BrowserProfile"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/BrowserProfile"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "BrowserProfiles_Delete",
+        "description": "Deletes the browser profile with the specified ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "browserProfileId",
+            "in": "path",
+            "description": "The browser profile ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/playwrightworkspaces/{workspaceId}": {
       "get": {
         "operationId": "Workspaces_Get",
@@ -1415,6 +1661,142 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
+    "BrowserProfile": {
+      "type": "object",
+      "description": "A reusable browser profile containing saved browser state.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The browser profile ID in GUID format.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the browser profile.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the purpose of the browser profile.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "browserType": {
+          "$ref": "#/definitions/BrowserType",
+          "description": "The browser type associated with the browser profile. Defaults to Chromium when omitted on creation. Cannot be changed after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatingSystem": {
+          "$ref": "#/definitions/OS",
+          "description": "The operating system associated with the browser profile. Defaults to Linux when omitted on creation. Cannot be changed after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "lastSavedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time when the browser profile state was last saved. Absent until the profile state is first saved.",
+          "readOnly": true
+        },
+        "lastSavedSessionId": {
+          "type": "string",
+          "description": "The ID of the browser session that last saved the browser profile state. Absent until the profile state is first saved.",
+          "readOnly": true
+        },
+        "archiveUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI for downloading the most recently saved browser profile archive. Absent until the profile state is first saved.",
+          "readOnly": true
+        },
+        "archiveSha256": {
+          "type": "string",
+          "description": "The SHA-256 hash of the browser profile archive. Absent until the profile state is first saved.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "BrowserProfileBrowserSessionConfiguration": {
+      "type": "object",
+      "description": "The browser profile configuration for a browser session.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The ID in GUID format of the browser profile used by the browser session."
+        },
+        "saveChanges": {
+          "type": "boolean",
+          "description": "Whether to save the changes in the browser profile done by the browser session."
+        }
+      }
+    },
+    "BrowserProfileCreateOrUpdate": {
+      "type": "object",
+      "description": "A reusable browser profile containing saved browser state.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the browser profile.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the purpose of the browser profile.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "browserType": {
+          "$ref": "#/definitions/BrowserType",
+          "description": "The browser type associated with the browser profile. Defaults to Chromium when omitted on creation. Cannot be changed after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatingSystem": {
+          "$ref": "#/definitions/OS",
+          "description": "The operating system associated with the browser profile. Defaults to Linux when omitted on creation. Cannot be changed after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
     "BrowserSession": {
       "type": "object",
       "description": "Model of a browser session used for tracking purposes.",
@@ -1534,6 +1916,14 @@
           "x-ms-mutability": [
             "read",
             "update",
+            "create"
+          ]
+        },
+        "browserProfile": {
+          "$ref": "#/definitions/BrowserProfileBrowserSessionConfiguration",
+          "description": "The browser profile configuration for the browser session.",
+          "x-ms-mutability": [
+            "read",
             "create"
           ]
         }
@@ -1934,6 +2324,27 @@
         "value"
       ]
     },
+    "PagedBrowserProfile": {
+      "type": "object",
+      "description": "Paged collection of BrowserProfile items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BrowserProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/BrowserProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedBrowserSession": {
       "type": "object",
       "description": "Paged collection of BrowserSession items",
@@ -2118,6 +2529,14 @@
             "update",
             "create"
           ]
+        },
+        "browserProfile": {
+          "$ref": "#/definitions/BrowserProfileBrowserSessionConfiguration",
+          "description": "The browser profile configuration for the browser session.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2183,6 +2602,14 @@
           "x-ms-mutability": [
             "read",
             "update",
+            "create"
+          ]
+        },
+        "browserProfile": {
+          "$ref": "#/definitions/BrowserProfileBrowserSessionConfiguration",
+          "description": "The browser profile configuration for the browser session.",
+          "x-ms-mutability": [
+            "read",
             "create"
           ]
         }
