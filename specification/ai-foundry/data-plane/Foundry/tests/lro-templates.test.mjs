@@ -228,7 +228,8 @@ test("CallJob keeps durable business-resource acceptance and cancellation semant
     assert.equal(parameter(get(name), "Foundry-Features").param.optional, true);
     assert.equal(getLroMetadata(program, get(name)), undefined);
   }
-  assert.equal(parameter(remove, "Foundry-Features").param.optional, false);
+  // Deleting a SIP call job needs the opt-in; other call jobs are GA, so the header is optional.
+  assert.equal(parameter(remove, "Foundry-Features").param.optional, true);
   const statuses = projects.models
     .get("TelephonyCallJob")
     .properties.get("status");
@@ -249,7 +250,8 @@ test("Campaign actions retain their exact independent polling and final-operatio
   assert.deepEqual(successCodes(get("delete")), [202, 204]);
   for (const name of ["create", "cancel", "delete"]) {
     const action = get(name);
-    assert.equal(parameter(action, "Foundry-Features").param.optional, false);
+    // Campaigns are GA; only SipOutbound campaigns need the opt-in.
+    assert.equal(parameter(action, "Foundry-Features").param.optional, true);
     const polling = getOperationLink(program, action, "polling");
     assert.equal(polling.linkedOperation, get("getOperation"));
     assert.equal(

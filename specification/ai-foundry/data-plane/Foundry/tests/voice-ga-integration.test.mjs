@@ -25,10 +25,9 @@ for (const version of ["v1", "virtual-public-preview"]) {
   );
   const schemas = document.components.schemas;
 
-  test(`${version}: Live, inline handoff, SIP, campaigns and system tools coexist behind the voice preview`, () => {
+  test(`${version}: core voice surfaces are GA while Live, inline handoff and SIP stay behind the voice preview`, () => {
+    const meta = (name) => schemas[name]?.["x-ms-foundry-meta"] ?? {};
     for (const name of [
-      "VoiceAgentBaseDefinition",
-      "VoiceAgentDefinition",
       "VoiceAgentLiveDefinition",
       "VoiceAgentInlineSubagentConfig",
       "InlineVoiceSubagent",
@@ -36,23 +35,44 @@ for (const version of ["v1", "virtual-public-preview"]) {
       "VoiceAgentHandoffId",
       "VoiceAgentHandoffNodeReference",
       "VoiceAgentHandoffMaxOutputTokenCount",
-      "VoiceAgentVoiceSelectionConfig",
-      "VoiceAgentVoiceSynthesisConfig",
-      "VoiceAgentServerEventTypeExtensions",
       "SipTelephonyBinding",
       "SipTelephonyBindingListItem",
+      "SipAddress",
+    ]) {
+      assert.ok(meta(name).required_previews?.includes(preview), name);
+    }
+    for (const name of [
+      "VoiceAgentSubProtocol",
+      "VoiceAgentSubagentType",
+      "VoiceAgentSubagentConfig",
+      "VoiceAgentTransferDestinationType",
+      "TelephonyProvider",
+      "TelephonyAddressType",
+      "VoiceAgentServerEventTypeExtensions",
+    ]) {
+      assert.ok(meta(name).conditional_previews?.includes(preview), name);
+      assert.equal(meta(name).required_previews, undefined, name);
+    }
+    for (const name of [
+      "VoiceAgentBaseDefinition",
+      "VoiceAgentDefinition",
+      "VoiceAgentVoiceSelectionConfig",
+      "VoiceAgentVoiceSynthesisConfig",
+      "VoiceAgentDelegateSubagentConfig",
+      "VoiceAgentPostCallConfig",
+      "TelephonyBinding",
+      "TwilioTelephonyBinding",
+      "TeamsPhoneExtensibilityTelephonyBinding",
+      "TelephonyCallJob",
       "TelephonyCampaign",
       "TelephonyCampaignOperation",
       "VoiceAgentTransferSystemTool",
       "VoiceAgentCollectSmsSystemTool",
       "VoiceAgentCollectDtmfSystemTool",
+      "VoiceConversation",
+      "GenerateVoiceAgentRequest",
     ]) {
-      assert.ok(
-        schemas[name]?.["x-ms-foundry-meta"]?.required_previews?.includes(
-          preview,
-        ),
-        name,
-      );
+      assert.equal(meta(name).required_previews, undefined, `${name} is GA`);
     }
 
     const realtime = properties(schemas, "VoiceAgentDefinition");
@@ -148,18 +168,70 @@ for (const version of ["v1", "virtual-public-preview"]) {
     );
     assert.equal(live.length, 9);
     assert.equal(campaigns.length, 7);
-    for (const { path, verb, operation } of [...live, ...campaigns]) {
+    const header = (operation) =>
+      operation.parameters?.find(
+        (parameter) => parameter.name === "Foundry-Features",
+      );
+    for (const { path, verb, operation } of live) {
       assert.ok(
         operation["x-ms-foundry-meta"]?.required_previews?.includes(preview),
         `${verb} ${path}`,
       );
-      assert.ok(
-        operation.parameters.some(
-          (parameter) =>
-            parameter.name === "Foundry-Features" && parameter.required,
-        ),
+      assert.equal(
+        header(operation)?.required,
+        true,
         `${verb} ${path}: required opt-in`,
       );
+    }
+    for (const { path, verb, operation } of campaigns) {
+      // Campaigns are GA; only SipOutbound campaign writes need the opt-in, so it is never required.
+      assert.equal(
+        operation["x-ms-foundry-meta"]?.required_previews,
+        undefined,
+        `${verb} ${path}`,
+      );
+      assert.notEqual(
+        header(operation)?.required,
+        true,
+        `${verb} ${path}: optional opt-in`,
+      );
+      if (verb !== "get") {
+        assert.ok(
+          operation["x-ms-foundry-meta"]?.conditional_previews?.includes(
+            preview,
+          ),
+          `${verb} ${path}: SIP writes are conditional`,
+        );
+      }
+    }
+    const connect =
+      document.paths["/agents/{agent_name}/endpoint/protocols/voice"].get;
+    assert.equal(
+      header(connect),
+      undefined,
+      "GA voice WebSocket has no opt-in header",
+    );
+    assert.ok(
+      !connect.parameters.some(
+        (parameter) => parameter.name === "foundry_features",
+      ),
+      "GA voice WebSocket drops the foundry_features query alias",
+    );
+    for (const [path, item] of Object.entries(document.paths)) {
+      if (!path.includes("/endpoint/protocols/voice/conversations")) continue;
+      for (const [verb, operation] of Object.entries(item)) {
+        if (!operation?.responses) continue;
+        assert.equal(
+          header(operation),
+          undefined,
+          `${verb} ${path}: GA conversation reads`,
+        );
+        assert.equal(
+          operation["x-ms-foundry-meta"],
+          undefined,
+          `${verb} ${path}`,
+        );
+      }
     }
   });
 }

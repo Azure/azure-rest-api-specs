@@ -599,10 +599,26 @@ after(async () => {
   if (output) await rm(output, { recursive: true, force: true });
 });
 
-test("voice protocol unions carry the VoiceAgents preview annotation", () => {
+test("the voice protocol selector is GA with a conditional Live preview", () => {
+  const expected = { conditional_previews: ["VoiceAgents=V1Preview"] };
+  assert.deepEqual(
+    getExtensions(program, type("Azure.AI.Projects.VoiceAgentSubProtocol")).get(
+      "x-ms-foundry-meta",
+    ),
+    expected,
+  );
+  for (const doc of documents) {
+    assert.deepEqual(
+      doc.components.schemas.VoiceAgentSubProtocol["x-ms-foundry-meta"],
+      expected,
+      `${doc.info.version}/VoiceAgentSubProtocol: OpenAPI preview metadata`,
+    );
+  }
+});
+
+test("Live protocol unions carry the VoiceAgents preview annotation", () => {
   const expected = { required_previews: ["VoiceAgents=V1Preview"] };
   for (const name of [
-    "VoiceAgentSubProtocol",
     "VoiceAgentLiveDelegationTarget",
     "VoiceAgentLiveDelegationStatus",
     "VoiceAgentLiveConversationItemType",

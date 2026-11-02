@@ -18,13 +18,12 @@ alias VoiceAgentClientEventUsage = Usage.input | Usage.json;
 alias VoiceAgentServerEventUsage = Usage.output | Usage.json;
 alias VoiceAgentWebSocketMessageUsage = Usage.input | Usage.output | Usage.json;
 
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentClientEventTypeExtension {
   session_avatar_connect: "session.avatar.connect",
   rtc_call_sdp_create: "rtc.call.sdp.create",
 }
 
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
 union VoiceAgentServerEventTypeExtension {
   warning: "warning",
   session_subagent_started: "session.subagent.started",
@@ -64,7 +63,7 @@ union VoiceAgentServerEventTypeExtension {
 // Retain the extension union itself so its named members remain assignable to
 // the imported discriminator type. Copying only its literals loses that relation.
 @doc("Voice-specific members added to the OpenAI server-event discriminator.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
 union VoiceAgentServerEventTypeExtensions {
   @doc("The Voice Agent server-event kinds.")
   voice_agent: VoiceAgentServerEventTypeExtension,
@@ -77,13 +76,11 @@ union VoiceAgentServerEventTypeExtensions {
 );
 
 @doc("The WebSocket subprotocol supported by a voice-agent connection.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentWebSocketSubprotocol {
   realtime: "realtime",
 }
 
 @doc("The transport used for a voice-agent connection.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentTransport {
   string,
 
@@ -99,7 +96,6 @@ union VoiceAgentTransport {
 @doc("A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are base64-encoded in JSON event fields.")
 @usage(VoiceAgentWebSocketMessageUsage)
 @oneOf
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentWebSocketMessage {
   client: VoiceAgentClientEvent,
   server: VoiceAgentServerEvent,
@@ -111,7 +107,6 @@ union VoiceAgentWebSocketMessage {
 @usage(VoiceAgentClientEventUsage)
 @oneOf
 @extension("x-foundry-event-direction", "client")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentClientEvent {
   conversation_item_create: OpenAI.RealtimeClientEventConversationItemCreate,
   conversation_item_delete: OpenAI.RealtimeClientEventConversationItemDelete,
@@ -136,7 +131,7 @@ union VoiceAgentClientEvent {
 @extension("x-foundry-event-direction", "server")
 // `conversation.created` is replaced by `session.created.conversation_id`, the canonical persisted-conversation id.
 // `input_audio_buffer.dtmf_event_received` is telephony-only and excluded with the rest of the telephony call-control surface.
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
 union VoiceAgentServerEvent {
   conversation_item_added: OpenAI.RealtimeServerEventConversationItemAdded,
   conversation_item_created: OpenAI.RealtimeServerEventConversationItemCreated,
@@ -212,14 +207,12 @@ union VoiceAgentServerEvent {
 }
 
 @doc("An animation output produced by a voice-agent session.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentAnimationOutputType {
   blendshapes: "blendshapes",
   viseme_id: "viseme_id",
 }
 
 @doc("Animation settings for a voice-agent session.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAnimationConfig {
   @doc("The animation model name.")
   model_name?: string = "default";
@@ -231,7 +224,6 @@ model VoiceAgentAnimationConfig {
 }
 
 @doc("An ICE server used for avatar WebRTC negotiation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAvatarIceServer {
   urls: url[];
   username?: string | null;
@@ -242,14 +234,12 @@ model VoiceAgentAvatarIceServer {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The session model is a wire-compatible specialization of the persisted avatar configuration and adds only runtime transport fields."
 @doc("Avatar settings accepted by the stable voice-agent WebSocket contract.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSessionAvatarConfig extends VoiceAgentAvatarConfig {
   ice_servers?: VoiceAgentAvatarIceServer[] | null;
 }
 
 @doc("The stable realtime session settings accepted in a `session.update` client event.")
 @usage(VoiceAgentClientEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSessionUpdateConfig {
   @doc("The session type. Always `realtime`.")
   type: "realtime";
@@ -305,14 +295,12 @@ model VoiceAgentSessionUpdateConfig {
 
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The session configuration accepted by a voice-agent session update event.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSessionUpdate {
   voice_agent: VoiceAgentSessionUpdateConfig,
 }
 
 @doc("The effective stable realtime session settings returned by the voice-agent service.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSessionResponseConfig {
   ...VoiceAgentSessionUpdateConfig;
 
@@ -334,13 +322,11 @@ model VoiceAgentSessionResponseConfig {
 
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The effective session configuration returned in voice-agent session lifecycle events.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSessionResponse {
   voice_agent: VoiceAgentSessionResponseConfig,
 }
 
 @doc("Parameters accepted by a voice-agent `response.create` event.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentResponseCreateParams {
   ...OmitProperties<
     OpenAI.RealtimeResponseCreateParams,
@@ -371,7 +357,6 @@ model VoiceAgentResponseCreateParams {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentRealtimeResponse {
   ...OmitProperties<OpenAI.RealtimeResponse, "audio">;
 
@@ -380,7 +365,6 @@ model VoiceAgentRealtimeResponse {
 }
 
 @doc("Additional item kinds used by the Voice Agent service.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentConversationItemTypeExtension {
   @doc("A service-managed system-tool intent, not a provider result.")
   system_tool: "system_tool",
@@ -394,7 +378,6 @@ union VoiceAgentConversationItemTypeExtension {
 
 @doc("Service-generated system-tool intent, not a provider result. Clients cannot create it or complete it with `function_call_output`.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSystemToolItem extends OpenAI.RealtimeConversationItem {
   @doc("The output-item kind. Always `system_tool`.")
   type: "system_tool";
@@ -421,7 +404,6 @@ model VoiceAgentSystemToolItem extends OpenAI.RealtimeConversationItem {
 }
 
 @doc("The generation status of a system-tool item. It does not indicate provider success.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSystemToolItemStatus {
   string,
 
@@ -437,7 +419,6 @@ union VoiceAgentSystemToolItemStatus {
 
 @doc("An incremental model-argument fragment for a service-managed system tool.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSystemToolArgumentsDelta
   extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `response.system_tool_arguments.delta`.")
@@ -467,7 +448,6 @@ model VoiceAgentServerEventSystemToolArgumentsDelta
 
 @doc("The completed intent arguments for a system tool, not provider success or a request for a customer function result.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSystemToolArgumentsDone
   extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `response.system_tool_arguments.done`.")
@@ -497,7 +477,6 @@ model VoiceAgentServerEventSystemToolArgumentsDone
 
 @doc("Decoded model-generated language-switch arguments, not a new client ingress. Unsupported speech components do not gain language support from this tool.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLanguageDetectionArguments {
   @doc("Target language in lowercase ISO 639-1 format, such as es or fr.")
   @minLength(2)
@@ -513,7 +492,6 @@ model VoiceAgentLanguageDetectionArguments {
 
 @doc("Arguments for starting a collection on a model call.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectionStartArguments {
   @doc("Required; no default. True returns a private reference, false returns the value. Privacy cannot be downgraded after collection starts.")
   secret: boolean;
@@ -529,7 +507,6 @@ model VoiceAgentCollectionStartArguments {
 
 @doc("Model-call SMS collection arguments, validated before receiver setup. The model supplies the sender, not the collected SMS.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectSmsStartArguments {
   ...VoiceAgentCollectionStartArguments;
 
@@ -542,7 +519,6 @@ model VoiceAgentCollectSmsStartArguments {
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the reviewed completion-mode objects and their SDK representation instead of introducing a new base model."
 @doc("One typed keypad completion policy. Unknown types, mixed-mode fields and legacy strings are rejected before receiver setup.")
 @oneOf
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentDtmfCompletionMode {
   @doc("Completes after the configured number of digits.")
   fixed_length: VoiceAgentDtmfFixedLengthCompletionMode,
@@ -555,7 +531,6 @@ union VoiceAgentDtmfCompletionMode {
 }
 
 @doc("The wait after each received digit, scoped to the selected completion policy.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfCompletionTiming {
   @doc("Seconds between digits, reset after each digit; defaults to 5.")
   @minValue(1)
@@ -564,7 +539,6 @@ model VoiceAgentDtmfCompletionTiming {
 }
 
 @doc("Complete immediately after exactly length digits. Other modes' fields are not accepted.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfFixedLengthCompletionMode {
   ...VoiceAgentDtmfCompletionTiming;
 
@@ -578,7 +552,6 @@ model VoiceAgentDtmfFixedLengthCompletionMode {
 }
 
 @doc("Completes when the configured end key follows nonempty digits within service limits. No digit count or length bounds are configured.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfTerminatorCompletionMode {
   ...VoiceAgentDtmfCompletionTiming;
 
@@ -590,7 +563,6 @@ model VoiceAgentDtmfTerminatorCompletionMode {
 }
 
 @doc("Completes after nonempty input and an inter-digit pause, within service limits. No key or count is configured; total deadline expiry takes precedence.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfInterDigitSilenceCompletionMode {
   ...VoiceAgentDtmfCompletionTiming;
 
@@ -599,7 +571,6 @@ model VoiceAgentDtmfInterDigitSilenceCompletionMode {
 }
 
 @doc("The two non-numeric keypad keys permitted as confirmation terminators.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentDtmfTerminator {
   @doc("The number-sign confirmation key.")
   number_sign: "#",
@@ -610,7 +581,6 @@ union VoiceAgentDtmfTerminator {
 
 @doc("Arguments for starting DTMF collection on a model call.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfStartArguments {
   ...VoiceAgentCollectionStartArguments;
 
@@ -625,7 +595,6 @@ model VoiceAgentCollectDtmfStartArguments {
 
 @doc("Reports collection or telephony outcomes for a model call.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventInputCollectionStatus
   extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `input_collection.status`.")
@@ -657,7 +626,6 @@ model VoiceAgentServerEventInputCollectionStatus
 }
 
 @doc("The receiver used by an input collection. Voice collection is not supported.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentInputCollectionChannel {
   @doc("Receives one complete SMS from the selected sender.")
   sms: "sms",
@@ -667,7 +635,6 @@ union VoiceAgentInputCollectionChannel {
 }
 
 @doc("Collection lifecycle and value-free telephony-operation outcomes. Additional outcomes may be introduced over time.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentInputCollectionStatus {
   string,
 
@@ -724,7 +691,6 @@ union VoiceAgentInputCollectionStatus {
 }
 
 @doc("A time-stamped word in an input-audio transcription.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTranscriptionWord {
   @doc("The transcribed word text.")
   text: string;
@@ -737,7 +703,6 @@ model VoiceAgentTranscriptionWord {
 }
 
 @doc("A transcribed phrase with timing information.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTranscriptionPhrase {
   @doc("The phrase offset from the beginning of the audio, in milliseconds.")
   offset_milliseconds: FoundryDurationMilliseconds;
@@ -760,7 +725,6 @@ model VoiceAgentTranscriptionPhrase {
 
 @doc("The `session.update` client event.")
 @usage(VoiceAgentClientEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentClientEventSessionUpdate {
   ...OmitProperties<OpenAI.RealtimeClientEventSessionUpdate, "session">;
 
@@ -826,7 +790,6 @@ model VoiceAgentClientEventSessionUpdate {
 );
 
 @doc("Fields shared by server events that report the lifecycle of a subagent consultation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionSubagentLifecycle {
   @doc("The server-generated event identifier.")
   event_id: string;
@@ -842,7 +805,6 @@ model VoiceAgentServerEventSessionSubagentLifecycle {
 }
 
 @doc("The reason a subagent consultation was aborted.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSubagentAbortReason {
   string,
 
@@ -867,7 +829,6 @@ union VoiceAgentSubagentAbortReason {
 
 @doc("The `session.subagent.started` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionSubagentStarted
   extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `session.subagent.started`.")
@@ -878,7 +839,6 @@ model VoiceAgentServerEventSessionSubagentStarted
 
 @doc("The `session.subagent.completed` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionSubagentCompleted
   extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `session.subagent.completed`.")
@@ -889,7 +849,6 @@ model VoiceAgentServerEventSessionSubagentCompleted
 
 @doc("The `session.subagent.aborted` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionSubagentAborted
   extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `session.subagent.aborted`.")
@@ -903,7 +862,6 @@ model VoiceAgentServerEventSessionSubagentAborted
 
 @doc("The `session.avatar.connect` client event.")
 @usage(VoiceAgentClientEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentClientEventSessionAvatarConnect
   extends OpenAI.RealtimeClientEvent {
   @doc("The event type. Always `session.avatar.connect`.")
@@ -917,7 +875,6 @@ model VoiceAgentClientEventSessionAvatarConnect
 }
 
 @doc("The `rtc.call.sdp.create` client event: begins WebRTC signaling with an SDP offer.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @usage(VoiceAgentClientEventUsage)
 model VoiceAgentClientEventRtcCallSdpCreate extends OpenAI.RealtimeClientEvent {
   @doc("The event type. Always `rtc.call.sdp.create`.")
@@ -934,7 +891,6 @@ model VoiceAgentClientEventRtcCallSdpCreate extends OpenAI.RealtimeClientEvent {
 }
 
 @doc("The `rtc.call.sdp.created` server event: the SDP answer that completes WebRTC negotiation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentServerEventRtcCallSdpCreated
   extends OpenAI.RealtimeServerEvent {
@@ -952,7 +908,6 @@ model VoiceAgentServerEventRtcCallSdpCreated
 }
 
 @doc("Details of a WebRTC signaling error.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentRtcCallErrorDetails {
   @doc("The error category, following the VoiceLive wire contract: `invalid_request_error` for a client-side signaling fault (for example, a malformed SDP offer) or `server_error` for a service-side failure. Additional categories may be added over time.")
@@ -966,7 +921,6 @@ model VoiceAgentRtcCallErrorDetails {
 }
 
 @doc("The `rtc.call.error` server event: a WebRTC signaling failure.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentServerEventRtcCallError extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `rtc.call.error`.")
@@ -987,7 +941,6 @@ model VoiceAgentServerEventRtcCallError extends OpenAI.RealtimeServerEvent {
 
 @doc("Details of a non-fatal warning.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventWarningDetails {
   message: string;
   code?: string;
@@ -996,7 +949,6 @@ model VoiceAgentServerEventWarningDetails {
 
 @doc("The `warning` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventWarning extends OpenAI.RealtimeServerEvent {
   type: "warning";
   event_id: string;
@@ -1005,7 +957,6 @@ model VoiceAgentServerEventWarning extends OpenAI.RealtimeServerEvent {
 
 @doc("The `session.avatar.connecting` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionAvatarConnecting
   extends OpenAI.RealtimeServerEvent {
   type: "session.avatar.connecting";
@@ -1017,7 +968,6 @@ model VoiceAgentServerEventSessionAvatarConnecting
 
 @doc("The `session.avatar.switch_to_speaking` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionAvatarSwitchToSpeaking
   extends OpenAI.RealtimeServerEvent {
   type: "session.avatar.switch_to_speaking";
@@ -1027,7 +977,6 @@ model VoiceAgentServerEventSessionAvatarSwitchToSpeaking
 
 @doc("The `session.avatar.switch_to_idle` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionAvatarSwitchToIdle
   extends OpenAI.RealtimeServerEvent {
   type: "session.avatar.switch_to_idle";
@@ -1037,7 +986,6 @@ model VoiceAgentServerEventSessionAvatarSwitchToIdle
 
 @doc("The `response.audio_timestamp.delta` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAudioTimestampDelta
   extends OpenAI.RealtimeServerEvent {
   type: "response.audio_timestamp.delta";
@@ -1054,7 +1002,6 @@ model VoiceAgentServerEventResponseAudioTimestampDelta
 
 @doc("The `response.audio_timestamp.done` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAudioTimestampDone
   extends OpenAI.RealtimeServerEvent {
   type: "response.audio_timestamp.done";
@@ -1067,7 +1014,6 @@ model VoiceAgentServerEventResponseAudioTimestampDone
 
 @doc("The `response.animation_blendshapes.delta` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAnimationBlendshapesDelta
   extends OpenAI.RealtimeServerEvent {
   type: "response.animation_blendshapes.delta";
@@ -1086,7 +1032,6 @@ model VoiceAgentServerEventResponseAnimationBlendshapesDelta
 
 @doc("The `response.animation_blendshapes.done` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAnimationBlendshapesDone
   extends OpenAI.RealtimeServerEvent {
   type: "response.animation_blendshapes.done";
@@ -1098,7 +1043,6 @@ model VoiceAgentServerEventResponseAnimationBlendshapesDone
 
 @doc("The `response.animation_viseme.delta` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAnimationVisemeDelta
   extends OpenAI.RealtimeServerEvent {
   type: "response.animation_viseme.delta";
@@ -1113,7 +1057,6 @@ model VoiceAgentServerEventResponseAnimationVisemeDelta
 
 @doc("The `response.animation_viseme.done` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAnimationVisemeDone
   extends OpenAI.RealtimeServerEvent {
   type: "response.animation_viseme.done";
@@ -1126,7 +1069,6 @@ model VoiceAgentServerEventResponseAnimationVisemeDone
 
 @doc("The `response.video.delta` server event.")
 @usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseVideoDelta
   extends OpenAI.RealtimeServerEvent {
   type: "response.video.delta";
@@ -1140,7 +1082,6 @@ model VoiceAgentServerEventResponseVideoDelta
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response that switches an HTTP connection to the voice-agent WebSocket protocol.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentWebSocketUpgradeResponse {
   @statusCode
   status_code: 101;

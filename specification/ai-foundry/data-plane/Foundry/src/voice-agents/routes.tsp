@@ -22,7 +22,6 @@ const VoiceAgentConversationRequiredPreviews = #{
   credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
   `/audio/generated/content` route.
   """)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceGeneratedAudioItem {
   ...OmitProperties<VoiceAudioItem, "blob_uri">;
 
@@ -40,9 +39,8 @@ model VoiceGeneratedAudioItem {
 interface VoiceAgentWebSocket {
   /**
    * Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
-   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value. Supply the
-   * `VoiceAgents=V1Preview` opt-in through either the `Foundry-Features` header or the `foundry_features`
-   * query parameter.
+   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value. No preview opt-in is
+   * required; agents that use Handoff (inline subagents) still require `VoiceAgents=V1Preview`.
    *
    * Handshake failures are evaluated in the following order, independent of the requested `transport`:
    *
@@ -62,19 +60,10 @@ interface VoiceAgentWebSocket {
   @get
   @sharedRoute
   @route("/agents/{agent_name}/endpoint/protocols/voice")
-  connectVoiceAgent is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  connectVoiceAgent is FoundryDataPlaneOperation<
     {
       /** The name of the voice agent. */
       @path agent_name: string;
-
-      /**
-       * A query alternative to the `Foundry-Features` header for clients that cannot set headers during a
-       * WebSocket handshake. Set this to `VoiceAgents=V1Preview`. Either this query parameter or the header is
-       * required.
-       */
-      @query("foundry_features")
-      foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
 
       /**
        * Selects the connection transport. Omit or send `websocket` for the default, where signaling and audio are
@@ -190,9 +179,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations")
   @list
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  listAgentConversations is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  listAgentConversations is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -209,9 +196,7 @@ interface AgentEndpointConversations {
   @summary("Get a voice agent conversation")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  getAgentConversation is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -229,9 +214,7 @@ interface AgentEndpointConversations {
   @summary("Delete a voice agent conversation")
   @delete
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  deleteAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  deleteAgentConversation is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -251,9 +234,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses")
   @list
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  listAgentConversationResponses is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  listAgentConversationResponses is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -273,9 +254,7 @@ interface AgentEndpointConversations {
   @summary("Get a voice agent conversation response")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationResponse is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  getAgentConversationResponse is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -299,9 +278,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items")
   @list
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  listAgentConversationResponseItems is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  listAgentConversationResponseItems is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -326,9 +303,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items")
   @list
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  listAgentConversationItems is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  listAgentConversationItems is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -351,9 +326,7 @@ interface AgentEndpointConversations {
   @summary("Get a voice agent conversation item")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationItem is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  getAgentConversationItem is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -378,9 +351,7 @@ interface AgentEndpointConversations {
   @summary("Get a voice agent conversation item's audio metadata")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationAudioItem is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  getAgentConversationAudioItem is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -404,9 +375,7 @@ interface AgentEndpointConversations {
   @summary("Stream a voice agent conversation item's audio")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  getAgentConversationAudioItemContent is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -429,9 +398,7 @@ interface AgentEndpointConversations {
   @summary("Get a voice agent conversation item's generated audio metadata")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationGeneratedAudioItem is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  getAgentConversationGeneratedAudioItem is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -456,9 +423,7 @@ interface AgentEndpointConversations {
   @summary("Stream a voice agent conversation item's generated audio")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationGeneratedAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  getAgentConversationGeneratedAudioItemContent is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -487,9 +452,7 @@ interface AgentEndpointConversations {
   @summary("Get a voice agent conversation's merged recording metadata")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationAudio is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  getAgentConversationAudio is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -514,9 +477,7 @@ interface AgentEndpointConversations {
   @summary("Stream a voice agent conversation's merged recording")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content")
-  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationAudioContent is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  getAgentConversationAudioContent is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -716,7 +677,7 @@ interface AgentTelephony {
   @parameterVisibility(Lifecycle.Create)
   @post
   @route("/agents/{agent_name}/telephony/bindings")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   createTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -736,7 +697,6 @@ interface AgentTelephony {
   @get
   @list
   @route("/agents/{agent_name}/telephony/bindings")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   listTelephonyBindings is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -755,7 +715,6 @@ interface AgentTelephony {
   @summary("Get an agent telephony binding")
   @get
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -772,7 +731,7 @@ interface AgentTelephony {
   @summary("Update an agent telephony binding")
   @patch
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   updateTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -797,7 +756,7 @@ interface AgentTelephony {
   @summary("Delete an agent telephony binding")
   @delete
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   deleteTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -817,7 +776,6 @@ interface AgentTelephony {
   @get
   @list
   @route("/agents/{agent_name}/telephony/calls")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   listTelephonyCalls is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -840,7 +798,6 @@ interface AgentTelephony {
   @summary("Get an agent telephony call")
   @get
   @route("/agents/{agent_name}/telephony/calls/{call_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -857,7 +814,7 @@ interface AgentTelephony {
   @summary("Transfer an active agent telephony call")
   @post
   @route("/agents/{agent_name}/telephony/calls/{call_id}:transfer")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   transferTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -876,7 +833,7 @@ interface AgentTelephony {
   @summary("End an active agent telephony call")
   @post
   @route("/agents/{agent_name}/telephony/calls/{call_id}:end")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   endTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -893,7 +850,6 @@ interface AgentTelephony {
   @summary("Get agent telephony transfer targets")
   @get
   @route("/agents/{agent_name}/telephony/transfer_targets")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -907,7 +863,7 @@ interface AgentTelephony {
   @summary("Replace agent telephony transfer targets")
   @put
   @route("/agents/{agent_name}/telephony/transfer_targets")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   replaceTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -925,7 +881,7 @@ interface AgentTelephony {
   @parameterVisibility(Lifecycle.Create)
   @post
   @route("/agents/{agent_name}/telephony/call_jobs")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   createTelephonyCallJob is postJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     TelephonyCallJob,
@@ -950,9 +906,7 @@ interface AgentTelephony {
   @get
   @list
   @route("/agents/{agent_name}/telephony/call_jobs")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  listTelephonyCallJobs is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  listTelephonyCallJobs is FoundryDataPlaneOperation<
     {
       @doc("The owning voice agent. Authorization is applied before pagination.")
       @path
@@ -975,7 +929,7 @@ interface AgentTelephony {
   @summary("Delete an outbound telephony call job")
   @delete
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   deleteTelephonyCallJob is deleteJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -988,14 +942,13 @@ interface AgentTelephony {
       call_job_id: TelephonyCallJobId;
     },
     NoContentResponse,
-    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
+    WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 
   /** Retrieves a durable direct or campaign-created outbound call job. */
   @summary("Get an outbound telephony call job")
   @get
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyCallJob is queryJobStatusPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     TelephonyCallJob,
@@ -1015,7 +968,7 @@ interface AgentTelephony {
   @summary("Cancel an outbound telephony call job")
   @post
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   cancelTelephonyCallJob is cancelJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     TelephonyCallJob,

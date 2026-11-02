@@ -8,7 +8,6 @@ using Azure.Core;
 namespace Azure.AI.Projects;
 
 @doc("One recipient in an inline campaign input. Each input position is a separate intended call, including repeated destinations.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyRecipient {
   @doc("Recipient destination address. Initial provider support accepts phone_number; non-phone variants can be introduced without replacing this field. Unsupported destination types fail preparation.")
   destination: TelephonyAddress;
@@ -29,7 +28,6 @@ model TelephonyRecipient {
 }
 
 @doc("Mutually exclusive ways to determine each recipient's earliest dispatch time.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignScheduleType {
   string,
 
@@ -45,7 +43,6 @@ union TelephonyCampaignScheduleType {
 
 @doc("Creation authorizes dialing; every scheduling mode waits for successful preparation.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignSchedule {
   @doc("How each recipient's earliest dispatch time is determined.")
   type: TelephonyCampaignScheduleType;
@@ -55,14 +52,12 @@ model TelephonyCampaignSchedule {
 }
 
 @doc("Dispatch automatically as soon as preparation succeeds and capacity permits.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model ImmediateSchedule extends TelephonyCampaignSchedule {
   @doc("Identifies immediate scheduling after successful preparation.")
   type: TelephonyCampaignScheduleType.immediate;
 }
 
 @doc("Apply the same earliest dispatch time to every recipient. A past time is valid and makes work eligible after preparation succeeds.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model AtTimeSchedule extends TelephonyCampaignSchedule {
   @doc("Identifies scheduling with one common earliest dispatch time.")
   type: TelephonyCampaignScheduleType.scheduled;
@@ -72,7 +67,6 @@ model AtTimeSchedule extends TelephonyCampaignSchedule {
 }
 
 @doc("Read every recipient's earliest dispatch time from the fixed scheduled_at field. Dataset CSV/JSON/JSONL values use RFC 3339 with an explicit offset or Z; inline values use FoundryTimestamp.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model PerRecipientSchedule extends TelephonyCampaignSchedule {
   @doc("Identifies scheduling with a separate earliest dispatch time for each recipient.")
   type: TelephonyCampaignScheduleType.recipient;
@@ -117,7 +111,6 @@ alias TelephonyCampaignConfiguration = {
 };
 
 @doc("Batch size and mutually exclusive execution counts per recipient intent. Counts are zero until preparation succeeds and all CallJobs are generated, then sum to total_recipients. Validation is reported through Campaign status and validation_errors.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignProgress {
   @doc("Total input rows, including invalid rows. Omitted until known; never an estimate.")
   @minValue(0)
@@ -149,7 +142,6 @@ model TelephonyCampaignProgress {
 }
 
 @doc("Business lifecycle of a Campaign; validation, cancellation and deletion have independent LROs. An executed Campaign completes when every recipient task is terminal, independently of individual call outcomes.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignStatus {
   string,
 
@@ -176,7 +168,6 @@ union TelephonyCampaignStatus {
 }
 
 @doc("An Agent-owned Campaign. Creation and replacement of failed preparation authorize execution after validation; cancel and delete control its lifecycle.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaign {
   ...TelephonyCampaignConfiguration;
 
@@ -222,7 +213,6 @@ model TelephonyCampaign {
 }
 
 @doc("Validation diagnostic for one invalid input row in the current validation round. Execution details are available through the CallJob list.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignValidationError {
   @doc("One-based source row or inline item position.")
   @minValue(1)
@@ -233,7 +223,6 @@ model TelephonyCampaignValidationError {
 }
 
 @doc("Error-only page. During validation this is a partial live view; an empty page does not establish success.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignValidationErrorPage {
   ...TelephonyCampaignPage<TelephonyCampaignValidationError>;
 
@@ -251,7 +240,6 @@ alias TelephonyCampaignValidationErrorQueryParameters = {
 };
 
 @doc("Kind of asynchronous work associated with a Campaign.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignOperationKind {
   string,
 
@@ -273,7 +261,6 @@ union TelephonyCampaignOperationKind {
  * Monitors omit result and remain queryable independently of the Campaign. PUT/cancel finish with a guarded Campaign GET; delete has none.
  * Later cancel/delete changes to Campaign.operation_id do not change the monitor's instance/round association or pinned Agent version.
  */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignOperation is JobLike {
   @doc("Work tracked by this monitor.")
   @visibility(Lifecycle.Read)
@@ -303,7 +290,6 @@ alias TelephonyCampaignResponse = TelephonyCampaign &
 @doc("An operation identifier of 1-256 characters. Must not be whitespace-only or contain CR/LF; the service enforces these content rules.")
 @minLength(1)
 @maxLength(256)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyCampaignOperationId extends string;
 
 /** Returns the created business resource; the asynchronous operation is polled separately. */
@@ -387,7 +373,6 @@ alias TelephonyCampaignPageQueryParameters = {
 };
 
 @doc("Shared Foundry page shape with opaque boundary tokens bound to the original sort position.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignPage<T> {
   ...OmitProperties<AgentsPagedResult<T>, "first_id" | "last_id">;
 
@@ -447,7 +432,7 @@ interface TelephonyCampaigns {
   @put
   @parameterVisibility(Lifecycle.Create)
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   @pollingOperation(
     TelephonyCampaigns.getOperation,
     {
@@ -486,16 +471,14 @@ interface TelephonyCampaigns {
     },
     | TelephonyCampaignCreatedResponse<201>
     | TelephonyCampaignCreatedResponse<200>,
-    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
+    WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 
   @doc("Gets the current Campaign with source provenance but no inline recipients, after authorization. Optional operation_id checks the saved instance/round, not the latest operation pointer: same-round cancellation is allowed; replacement/name reuse returns 409 campaign_operation_mismatch. Missing/expired/wrong-scope operations or absent Campaigns return 404.")
   @summary("Get a telephony campaign")
   @get
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  get is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  get is FoundryDataPlaneOperation<
     {
       @doc("Owning Agent; never overridden in recipient inputs.")
       @path
@@ -517,9 +500,7 @@ interface TelephonyCampaigns {
   @get
   @list
   @route("/agents/{agent_name}/telephony/campaigns")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  list is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  list is FoundryDataPlaneOperation<
     {
       @doc("Owning Agent; never overridden in recipient inputs.")
       @path
@@ -559,7 +540,7 @@ interface TelephonyCampaigns {
   )
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:cancel")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   @pollingOperation(
     TelephonyCampaigns.getOperation,
     {
@@ -593,7 +574,7 @@ interface TelephonyCampaigns {
       operationId?: TelephonyCampaignOperationId;
     },
     TelephonyCampaignCancelAcceptedResponse,
-    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
+    WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 
   /**
@@ -621,7 +602,7 @@ interface TelephonyCampaigns {
   )
   @delete
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   @pollingOperation(
     TelephonyCampaigns.getOperation,
     {
@@ -648,7 +629,7 @@ interface TelephonyCampaigns {
       operationId?: TelephonyCampaignOperationId;
     },
     TelephonyCampaignDeleteAcceptedResponse | NoContentResponse,
-    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
+    WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 
   /**
@@ -698,9 +679,7 @@ interface TelephonyCampaigns {
   @get
   @list
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}/validation_errors")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  listValidationErrors is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  listValidationErrors is FoundryDataPlaneOperation<
     {
       @doc("Owning Agent; never overridden in recipient inputs.")
       @path
@@ -762,7 +741,6 @@ interface TelephonyCampaigns {
   )
   @get
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}/operations/{operation_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getOperation is queryJobStatusPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     TelephonyCampaignOperation,
@@ -781,6 +759,6 @@ interface TelephonyCampaigns {
     },
     JobStatusResponse<TelephonyCampaignOperation> &
       TelephonyCampaignNoStoreResponse,
-    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
+    WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 }
