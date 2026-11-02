@@ -256,6 +256,9 @@ union JobType {
 
   @doc("Command job.")
   Command: "Command",
+
+  @doc("Pipeline job.")
+  Pipeline: "Pipeline",
 }
 
 @doc("Priority of the job.")
@@ -355,6 +358,55 @@ model CommandJob extends JobProperties {
   status?: string;
 }
 
+@doc("Properties of a Pipeline Job.")
+model PipelineJob extends JobProperties {
+  @doc("Job type.")
+  jobType: "Pipeline";
+
+  @doc("Display name of the job.")
+  displayName?: string;
+
+  @doc("The asset description text.")
+  description?: string;
+
+  @doc("Tag dictionary. Tags can be added, removed, and updated.")
+  tags?: Record<string>;
+
+  @doc("The asset property dictionary.")
+  properties?: Record<string>;
+
+  @doc("Name of the experiment the job belongs to. If omitted, the service uses \"Default\".")
+  experimentName?: string;
+
+  @doc("Services exposed by the job.")
+  services?: Record<JobService>;
+
+  @doc("Compute resource ID.")
+  computeId?: string;
+
+  @doc("Pipeline settings.")
+  settings?: Record<unknown>;
+
+  @doc("Pipeline nodes keyed by name. Node objects preserve their original field names.")
+  jobs?: Record<Record<unknown>>;
+
+  @doc("Graph inputs keyed by name.")
+  inputs?: Record<Record<unknown>>;
+
+  @doc("Graph outputs keyed by name.")
+  outputs?: Record<Record<unknown>>;
+
+  @doc("ARM resource ID of the source job.")
+  sourceJobId?: string;
+
+  @doc("Is the job archived?")
+  isArchived?: boolean;
+
+  @doc("Status of the job.")
+  @visibility(Lifecycle.Read)
+  status?: string;
+}
+
 @doc("Job resource.")
 @Rest.resource("jobs")
 model Job {
@@ -372,6 +424,32 @@ model Job {
   type?: string;
 
   @doc("Properties of the job.")
+  properties: JobProperties;
+
+  @doc("Metadata pertaining to creation and last modification of the resource.")
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+}
+
+// Keep the polymorphic JobProperties envelope so adding this route cannot alter
+// the existing /jobs discriminator map; the PipelineJobs interface enforces the kind.
+@doc("Pipeline Job resource exposed through the dedicated Pipeline Jobs ingress.")
+@Rest.resource("pipeline_jobs")
+model PipelineJobResource {
+  @doc("The name of the Pipeline Job. This is case-sensitive.")
+  @key("name")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("The resource ID.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("The resource type.")
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  @doc("Properties of the Pipeline Job. The dedicated Pipeline Jobs operations require jobType to be Pipeline.")
   properties: JobProperties;
 
   @doc("Metadata pertaining to creation and last modification of the resource.")

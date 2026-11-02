@@ -51,7 +51,10 @@
       "name": "Insights"
     },
     {
-      "name": "CommandJob"
+      "name": "PipelineJobs"
+    },
+    {
+      "name": "Jobs"
     },
     {
       "name": "Models"
@@ -9406,7 +9409,7 @@
             "name": "jobType",
             "in": "query",
             "required": false,
-            "description": "Filter by job type (e.g. 'Command').",
+            "description": "Filter by job type (e.g. 'Command' or 'Pipeline').",
             "schema": {
               "$ref": "#/components/schemas/JobType"
             },
@@ -9487,7 +9490,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -9553,7 +9556,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       },
       "put": {
@@ -9627,7 +9630,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ],
         "requestBody": {
           "required": true,
@@ -9715,7 +9718,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -9794,7 +9797,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -9897,7 +9900,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -9989,7 +9992,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -10052,7 +10055,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -10115,7 +10118,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -10188,7 +10191,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -15465,6 +15468,244 @@
         "tags": [
           "Responses"
         ]
+      }
+    },
+    "/pipeline_jobs": {
+      "get": {
+        "operationId": "PipelineJobs_list",
+        "description": "List Pipeline Jobs. Command Jobs are not returned by this dedicated collection.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "description": "Filter Pipeline Jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "listViewType",
+            "in": "query",
+            "required": false,
+            "description": "Specifies which view type to apply when listing Pipeline Jobs.",
+            "schema": {
+              "$ref": "#/components/schemas/ListViewType"
+            },
+            "explode": false
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated user property names and optionally values. Example: prop1,prop2=value2.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedPipelineJobResource"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "PipelineJobs"
+        ]
+      }
+    },
+    "/pipeline_jobs/{name}": {
+      "get": {
+        "operationId": "PipelineJobs_get",
+        "description": "Get a Pipeline Job by name.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Pipeline Job. This is case-sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineJobResource"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "PipelineJobs"
+        ]
+      },
+      "put": {
+        "operationId": "PipelineJobs_createOrUpdate",
+        "description": "Create and execute a Pipeline Job. For update, the tags in the submitted definition replace the existing tags.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Pipeline Job. This is case-sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineJobResource"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineJobResource"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "PipelineJobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PipelineJobResource"
+              }
+            }
+          },
+          "description": "The Pipeline Job to create or update."
+        }
       }
     },
     "/redTeams/runs": {
@@ -29671,7 +29912,8 @@
         "discriminator": {
           "propertyName": "jobType",
           "mapping": {
-            "Command": "#/components/schemas/CommandJob"
+            "Command": "#/components/schemas/CommandJob",
+            "Pipeline": "#/components/schemas/PipelineJob"
           }
         },
         "description": "Base properties of a Job."
@@ -29778,7 +30020,8 @@
           {
             "type": "string",
             "enum": [
-              "Command"
+              "Command",
+              "Pipeline"
             ]
           }
         ],
@@ -51877,6 +52120,27 @@
         },
         "description": "Paged collection of ModelVersion items"
       },
+      "PagedPipelineJobResource": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PipelineJobResource"
+            },
+            "description": "The PipelineJobResource items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of PipelineJobResource items"
+      },
       "PagedRedTeam": {
         "type": "object",
         "required": [
@@ -52023,6 +52287,148 @@
           }
         },
         "description": "Represents the response for a pending upload request"
+      },
+      "PipelineJob": {
+        "type": "object",
+        "required": [
+          "jobType"
+        ],
+        "properties": {
+          "jobType": {
+            "type": "string",
+            "enum": [
+              "Pipeline"
+            ],
+            "description": "Job type."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of the job."
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The asset property dictionary."
+          },
+          "experimentName": {
+            "type": "string",
+            "description": "Name of the experiment the job belongs to. If omitted, the service uses \"Default\"."
+          },
+          "services": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JobService"
+            },
+            "description": "Services exposed by the job."
+          },
+          "computeId": {
+            "type": "string",
+            "description": "Compute resource ID."
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Pipeline settings."
+          },
+          "jobs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Pipeline nodes keyed by name. Node objects preserve their original field names."
+          },
+          "inputs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Graph inputs keyed by name."
+          },
+          "outputs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Graph outputs keyed by name."
+          },
+          "sourceJobId": {
+            "type": "string",
+            "description": "ARM resource ID of the source job."
+          },
+          "isArchived": {
+            "type": "boolean",
+            "description": "Is the job archived?"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the job.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobProperties"
+          }
+        ],
+        "description": "Properties of a Pipeline Job."
+      },
+      "PipelineJobResource": {
+        "type": "object",
+        "required": [
+          "name",
+          "properties"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the Pipeline Job. This is case-sensitive.",
+            "readOnly": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The resource ID.",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The resource type.",
+            "readOnly": true
+          },
+          "properties": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobProperties"
+              }
+            ],
+            "description": "Properties of the Pipeline Job. The dedicated Pipeline Jobs operations require jobType to be Pipeline."
+          },
+          "systemData": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SystemData"
+              }
+            ],
+            "description": "Metadata pertaining to creation and last modification of the resource.",
+            "readOnly": true
+          }
+        },
+        "description": "Pipeline Job resource exposed through the dedicated Pipeline Jobs ingress."
       },
       "ProceduralMemoryItem": {
         "type": "object",

@@ -551,6 +551,16 @@ model AIProjectClientOptions {
 );
 
 // --------------------------------------------------------------------------------
+// Pipeline Jobs root client
+// --------------------------------------------------------------------------------
+@@clientName(Azure.AI.Projects.PipelineJobs.get, "get", "python");
+@@clientName(Azure.AI.Projects.PipelineJobs.list, "list", "python");
+@@clientName(Azure.AI.Projects.PipelineJobs.createOrUpdate,
+  "create_or_update",
+  "python"
+);
+
+// --------------------------------------------------------------------------------
 // Jobs sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Jobs.get, "get", "python");
