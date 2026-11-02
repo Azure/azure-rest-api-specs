@@ -27,6 +27,13 @@ const SDK_REPOSITORY_URL =
 const MANIFEST_FILE_NAME = "spec-gen-sdk-artifact.json";
 const SHA_PATTERN = /^[0-9a-f]{40}$/i;
 const SAFE_PATH_PATTERN = /^(?![A-Za-z]:)(?!\/)(?!.*\\)(?!.*(?:^|\/)\.{1,2}(?:\/|$)).+$/;
+const SDK_SPARSE_CHECKOUT_PATTERNS = [
+  "/*",
+  "!sdk/**/test-recordings/*",
+  "!sdk/**/recordings/*",
+  "!sdk/**/SessionRecords/*",
+  "!sdk/**/session-records/*",
+];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -152,6 +159,12 @@ function cloneCommit(destination: string, commitSha: string): void {
   fs.mkdirSync(destination, { recursive: true });
   runGit(destination, ["init"]);
   runGit(destination, ["remote", "add", "origin", SDK_REPOSITORY_URL]);
+  runGit(destination, ["sparse-checkout", "init", "--no-cone"]);
+  fs.writeFileSync(
+    path.join(destination, ".git", "info", "sparse-checkout"),
+    `${SDK_SPARSE_CHECKOUT_PATTERNS.join("\n")}\n`,
+    "utf8",
+  );
   runGit(destination, ["fetch", "--depth=1", "origin", commitSha]);
   runGit(destination, ["checkout", "--detach", "FETCH_HEAD"]);
   runGit(destination, ["config", "core.fileMode", "false"]);

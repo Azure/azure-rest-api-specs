@@ -65,10 +65,7 @@ export const APIViewRequestDataSchema = z
     packageName: z.string(),
     filePath: z.string(),
     packageRootPath: SafeRelativePosixPathSchema.optional(),
-    changedFiles: z
-      .array(SafeRelativePosixPathSchema)
-      .max(SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE)
-      .optional(),
+    changedFiles: z.array(SafeRelativePosixPathSchema).optional(),
     sdkBaseCommitSha: GitCommitShaSchema.optional(),
     reviewInputPath: SafeRelativePosixPathSchema.optional(),
     reviewInputFileCount: z

@@ -4,6 +4,7 @@ import { Unzip, unzipSync } from "fflate";
 import * as z from "zod";
 import {
   isSafeRelativePosixPath,
+  SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE,
   SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE,
   SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE,
   SDK_REVIEW_MAX_TOTAL_CHANGED_FILES,
@@ -331,6 +332,11 @@ export function verifyReviewInputAgainstCheckRun(
       throw new Error(`Duplicate APIView package '${request.packageName}'`);
     }
     seenPackages.add(request.packageName);
+    if (request.changedFiles.length > SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE) {
+      throw new Error(
+        `APIView entry '${request.packageName}' has ${request.changedFiles.length} changed files; maximum is ${SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE}`,
+      );
+    }
     totalChangedFiles += request.changedFiles.length;
     totalSnapshotFiles += request.reviewInputFileCount;
     totalSnapshotBytes += request.reviewInputBytes;
@@ -811,6 +817,17 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     throw new Error(`Invalid JSON in '${SPEC_GEN_SDK_ARTIFACT_FILE_NAME}'`, { cause: error });
   }
   const artifact = SpecGenSdkArtifactInfoSchema.parse(parsedArtifact);
+  if (artifact.apiViewRequestData.length === 0) {
+    const reason = `Skipping SDK review because build ${event.adoBuild.buildId} produced no reviewable packages`;
+    core.info(reason);
+    return {
+      status: "skipped",
+      reason,
+      buildId: event.adoBuild.buildId,
+      headSha: event.headSha,
+      entryCount: 0,
+    };
+  }
   const prNumber = verifyReviewInputAgainstCheckRun(artifact, event);
 
   const prStatus = await verifyPullRequestFreshness({

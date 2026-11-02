@@ -36,6 +36,8 @@ jobs:
     outputs:
       artifact_name: ${{ steps.find-input.outputs.artifact_name }}
       has_input: ${{ steps.find-input.outputs.has_input }}
+  agent:
+    needs: pre-activation
 if: >-
   github.repository == 'Azure/azure-rest-api-specs' &&
   github.event.workflow_run.conclusion == 'success' &&
@@ -92,12 +94,14 @@ tools:
     - wc
   cli-proxy: false
 safe-outputs:
+  create-issue: false
   report-failure-as-issue: false
   report-failed-jobs: false
-  missing-data:
-    create-issue: false
-  missing-tool:
-    create-issue: false
+  report-incomplete: false
+  report-missing-data: false
+  report-missing-tool: false
+  noop:
+    report-as-issue: false
 post-steps:
   - name: Validate report-only SDK review result
     if: ${{ !cancelled() }}

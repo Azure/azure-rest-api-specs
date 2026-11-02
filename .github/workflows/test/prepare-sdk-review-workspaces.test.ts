@@ -32,11 +32,16 @@ describe("prepare-sdk-review-workspaces", () => {
     const repository = path.join(testRoot, "azure-sdk-for-net");
     const packageRoot = path.join(repository, "sdk", "widget", "Azure.Widget");
     fs.mkdirSync(path.join(packageRoot, "src"), { recursive: true });
+    fs.mkdirSync(path.join(packageRoot, "tests", "SessionRecords"), { recursive: true });
     runGit(testRoot, ["init", "--initial-branch=main", repository]);
     runGit(repository, ["config", "user.email", "test@example.com"]);
     runGit(repository, ["config", "user.name", "SDK Review Test"]);
     fs.writeFileSync(path.join(packageRoot, "src", "WidgetClient.cs"), "before\n");
     fs.writeFileSync(path.join(packageRoot, "src", "WidgetModel.cs"), "unchanged\n");
+    fs.writeFileSync(
+      path.join(packageRoot, "tests", "SessionRecords", "unchanged.json"),
+      '{"unchanged":true}\n',
+    );
     runGit(repository, ["add", "."]);
     runGit(repository, ["commit", "-m", "SDK baseline"]);
     const baselineCommitSha = runGit(repository, ["rev-parse", "HEAD"]);
@@ -128,5 +133,10 @@ describe("prepare-sdk-review-workspaces", () => {
         "sdk/widget/Azure.Widget",
       ]),
     ).toBe("sdk/widget/Azure.Widget/src/WidgetOptions.cs");
+    expect(
+      fs.existsSync(
+        path.join(workspace, "sdk", "widget", "Azure.Widget", "tests", "SessionRecords"),
+      ),
+    ).toBe(false);
   });
 });

@@ -56,12 +56,15 @@ generated files.
 
 ## Bounds
 
-The shared contract enforces:
+The producer and shared contract enforce:
+
+- at most 20,000 snapshot files per package
+- at most 32 MiB of snapshot content per package
+
+The review handoff additionally enforces:
 
 - at most 2,048 changed files per package and 4,096 across the artifact
-- at most 20,000 snapshot files per package
 - at most 40,000 snapshot files across the artifact
-- at most 32 MiB of snapshot content per package
 - at most 64 MiB of snapshot content across the artifact
 
 The GitHub validator also caps the compressed `packages` archive at 256 MiB and

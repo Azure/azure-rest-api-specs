@@ -3,7 +3,11 @@ import os from "node:os";
 import path from "node:path";
 import { strToU8, Zip, ZipDeflate, zipSync } from "fflate";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { SdkName, type SpecGenSdkArtifactInfo } from "../../shared/src/sdk-types.ts";
+import {
+  SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE,
+  SdkName,
+  type SpecGenSdkArtifactInfo,
+} from "../../shared/src/sdk-types.ts";
 import {
   EXPECTED_ADO_DEFINITION_ID,
   MAX_SNAPSHOT_FILE_BYTES,
@@ -272,6 +276,24 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     ).toThrow("snapshot bytes; maximum");
   });
 
+  it("enforces per-package changed-file budgets only at the handoff boundary", () => {
+    const event = validateCheckRunEventPayload(createSampleCheckRunPayload()).event!;
+    const request = createSampleArtifact().apiViewRequestData[0];
+    const changedFiles = Array.from(
+      { length: SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE + 1 },
+      (_, index) => `sdk/widget/Azure.Widget/src/Generated/Widget${index}.cs`,
+    );
+
+    expect(() =>
+      verifyReviewInputAgainstCheckRun(
+        createSampleArtifact({
+          apiViewRequestData: [{ ...request, changedFiles }],
+        }),
+        event,
+      ),
+    ).toThrow("changed files; maximum");
+  });
+
   it("extracts only declared source snapshots and verifies declared counts", () => {
     const outputDirectory = createTempOutputDir();
     const artifact = createSampleArtifact();
@@ -476,6 +498,54 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     expect(result.status).toBe("skipped");
     expect(result.reason).toContain("Skipping stale or closed PR #47607");
     expect(mockFetch).not.toHaveBeenCalled();
+  });
+
+  it("skips review when SDK generation produced no reviewable packages", async () => {
+    const mockGithub = createMockGithub();
+    const mockContext = createMockContext();
+    const mockCore = createMockCore();
+    const artifact = createSampleArtifact({
+      isSpecGenSdkCheckRequired: false,
+      apiViewRequestData: [],
+    });
+
+    mockContext.payload = createSampleCheckRunPayload({ pull_requests: [] });
+    mockFetch.mockImplementation((url) => {
+      const requestUrl = getRequestUrl(url);
+      if (requestUrl.includes(`artifactName=${SPEC_GEN_SDK_ARTIFACT_NAME}`)) {
+        return Promise.resolve(
+          createArtifactMetadataResponse("https://artifacts.example.com/spec-gen"),
+        );
+      }
+      if (requestUrl.includes("/spec-gen") && requestUrl.includes("format=file")) {
+        return Promise.resolve(
+          new Response(JSON.stringify(artifact), {
+            status: 200,
+            headers: { "content-length": String(JSON.stringify(artifact).length) },
+          }),
+        );
+      }
+      return Promise.resolve(new Response("Not Found", { status: 404 }));
+    });
+
+    const result = await runSdkValidationDotnetReviewHandoffImpl({
+      github: mockGithub,
+      context: mockContext,
+      core: mockCore,
+      outputRootDir: createTempOutputDir(),
+      retryOptions: { initialDelayMs: 1 },
+      fetchImpl: mockFetch,
+    });
+
+    expect(result.status).toBe("skipped");
+    expect(result.reason).toContain("produced no reviewable packages");
+    expect(mockFetch).toHaveBeenCalledTimes(2);
+    expect(
+      mockFetch.mock.calls.some(([url]) =>
+        getRequestUrl(url).includes(`artifactName=${PACKAGES_ARTIFACT_NAME}`),
+      ),
+    ).toBe(false);
+    expect(mockGithub.rest.pulls.get).not.toHaveBeenCalled();
   });
 
   it("enforces the existing artifact byte limit", async () => {

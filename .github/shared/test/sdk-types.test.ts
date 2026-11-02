@@ -109,23 +109,23 @@ describe("sdk-types", () => {
       (_, index) =>
         `sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager/src/Generated/${index}.cs`,
     );
-    expect(() =>
-      SpecGenSdkArtifactInfoSchema.parse({
-        ...baseArtifact,
-        apiViewRequestData: [
-          {
-            ...baseArtifact.apiViewRequestData[0],
-            packageRootPath:
-              "sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager",
-            changedFiles: tooManyChangedFiles,
-            sdkBaseCommitSha: "0123456789abcdef0123456789abcdef01234567",
-            reviewInputPath: "Azure.ResourceManager.PrivateTrafficManager/review-input",
-            reviewInputFileCount: 42,
-            reviewInputBytes: 12_345,
-          },
-        ],
-      }),
-    ).toThrow();
+    const artifactWithTooManyChangedFiles = {
+      ...baseArtifact,
+      apiViewRequestData: [
+        {
+          ...baseArtifact.apiViewRequestData[0],
+          packageRootPath: "sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager",
+          changedFiles: tooManyChangedFiles,
+          sdkBaseCommitSha: "0123456789abcdef0123456789abcdef01234567",
+          reviewInputPath: "Azure.ResourceManager.PrivateTrafficManager/review-input",
+          reviewInputFileCount: 42,
+          reviewInputBytes: 12_345,
+        },
+      ],
+    };
+    expect(SpecGenSdkArtifactInfoSchema.parse(artifactWithTooManyChangedFiles)).toEqual(
+      artifactWithTooManyChangedFiles,
+    );
 
     expect(() =>
       SpecGenSdkArtifactInfoSchema.parse({
