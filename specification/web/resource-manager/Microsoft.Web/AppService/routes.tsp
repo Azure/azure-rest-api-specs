@@ -206,17 +206,17 @@ op listGeoRegions is ArmProviderActionSync<
     linuxDynamicWorkersEnabled?: boolean;
 
     /**
+     * Specify <code>true</code> if you want to filter to only regions that support App Service Plans with <code>IsCustomMode</code> set to <code>true</code>.
+     */
+    @query("customModeWorkersEnabled")
+    customModeWorkersEnabled?: boolean;
+
+    /**
      * Specify <code>true</code> to filter to only regions that support zone redundancy. If <code>false</code> or omitted, regions are not filtered by zone redundancy support.
      */
     @added(Versions.v2026_11_15)
     @query("zoneRedundancyEnabled")
     zoneRedundancyEnabled?: boolean;
-
-    /**
-     * Specify <code>true</code> if you want to filter to only regions that support App Service Plans with <code>IsCustomMode</code> set to <code>true</code>.
-     */
-    @query("customModeWorkersEnabled")
-    customModeWorkersEnabled?: boolean;
   },
   Error = DefaultErrorResponse
 >;
