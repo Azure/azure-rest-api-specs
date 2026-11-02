@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SdkName, type SpecGenSdkArtifactInfo } from "../../shared/src/sdk-types.ts";
 import {
   EXPECTED_ADO_DEFINITION_ID,
+  MAX_SNAPSHOT_FILE_BYTES,
   MAX_SPEC_GEN_SDK_ARTIFACT_BYTES,
   extractAndValidateSdkReviewInputArchive,
   PACKAGES_ARTIFACT_NAME,
@@ -102,6 +103,22 @@ function getRequestUrl(input: string | URL | Request): string {
     return input;
   }
   return input instanceof URL ? input.href : input.url;
+}
+
+function setFirstCentralDirectoryOriginalSize(archive: Uint8Array, size: number): Uint8Array {
+  const modifiedArchive = archive.slice();
+  const view = new DataView(
+    modifiedArchive.buffer,
+    modifiedArchive.byteOffset,
+    modifiedArchive.byteLength,
+  );
+  for (let offset = 0; offset <= modifiedArchive.byteLength - 4; offset += 1) {
+    if (view.getUint32(offset, true) === 0x02014b50) {
+      view.setUint32(offset + 24, size, true);
+      return modifiedArchive;
+    }
+  }
+  throw new Error("ZIP central directory not found");
 }
 
 describe("sdk-validation-dotnet-review-handoff", () => {
@@ -232,6 +249,58 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         createTempOutputDir(),
       ),
     ).toThrow("expected 2 files");
+  });
+
+  it("rejects highly compressible oversized entries before extraction", () => {
+    const outputDirectory = createTempOutputDir();
+    const oversizedContent = new Uint8Array(MAX_SNAPSHOT_FILE_BYTES + 1);
+    const oversizedFiles = {
+      "Azure.Widget/review-input/src/Generated/Oversized.cs": oversizedContent,
+    };
+    const request = createSampleArtifact().apiViewRequestData[0];
+    const artifact = createSampleArtifact({
+      apiViewRequestData: [
+        {
+          ...request,
+          changedFiles: ["sdk/widget/Azure.Widget/src/Generated/Oversized.cs"],
+          reviewInputFileCount: 1,
+          reviewInputBytes: oversizedContent.byteLength,
+        },
+      ],
+    });
+    const archive = zipSync(oversizedFiles, { level: 9 });
+
+    expect(archive.byteLength).toBeLessThan(64 * 1024);
+    expect(() =>
+      extractAndValidateSdkReviewInputArchive(archive, artifact, outputDirectory),
+    ).toThrow(`declares more than ${MAX_SNAPSHOT_FILE_BYTES} bytes`);
+    expect(fs.readdirSync(outputDirectory)).toEqual([]);
+  });
+
+  it("rejects mismatched central-directory and local-header sizes before extraction", () => {
+    const outputDirectory = createTempOutputDir();
+    const oversizedContent = new Uint8Array(MAX_SNAPSHOT_FILE_BYTES + 1);
+    const entryName = "Azure.Widget/review-input/src/Generated/Oversized.cs";
+    const archive = setFirstCentralDirectoryOriginalSize(
+      zipSync({ [entryName]: oversizedContent }, { level: 9 }),
+      1,
+    );
+    const request = createSampleArtifact().apiViewRequestData[0];
+    const artifact = createSampleArtifact({
+      apiViewRequestData: [
+        {
+          ...request,
+          changedFiles: ["sdk/widget/Azure.Widget/src/Generated/Oversized.cs"],
+          reviewInputFileCount: 1,
+          reviewInputBytes: 1,
+        },
+      ],
+    });
+
+    expect(() =>
+      extractAndValidateSdkReviewInputArchive(archive, artifact, outputDirectory),
+    ).toThrow("local header does not match its central-directory metadata");
+    expect(fs.readdirSync(outputDirectory)).toEqual([]);
   });
 
   it("validates the existing artifact, writes a report-only input, and performs no PR mutations", async () => {

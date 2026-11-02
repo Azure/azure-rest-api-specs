@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { Unzip, UnzipInflate } from "fflate";
+import { Unzip, UnzipInflate, unzipSync } from "fflate";
 import * as z from "zod";
 import {
   isSafeRelativePosixPath,
@@ -94,6 +94,18 @@ export type SdkReviewHandoffResult = {
   artifactPath?: string;
   summaryPath?: string;
   entryCount: number;
+};
+
+type SnapshotStats = {
+  fileCount: number;
+  bytes: number;
+};
+
+type ArchiveEntryMetadata = {
+  name: string;
+  compression: number;
+  compressedSize: number;
+  originalSize: number;
 };
 
 /**
@@ -378,7 +390,13 @@ export function extractAndValidateSdkReviewInputArchive(
     throw new Error("Duplicate reviewInputPath values are not allowed");
   }
 
-  const snapshotStats = new Map<string, { fileCount: number; bytes: number }>(
+  const archiveEntryMetadata = preflightSdkReviewInputArchive(
+    archiveBytes,
+    requests,
+    reviewInputPaths,
+  );
+
+  const snapshotStats = new Map<string, SnapshotStats>(
     reviewInputPaths.map((reviewInputPath) => [reviewInputPath, { fileCount: 0, bytes: 0 }]),
   );
   const seenArchiveEntries = new Set<string>();
@@ -401,6 +419,19 @@ export function extractAndValidateSdkReviewInputArchive(
       throw new Error(`Duplicate ZIP entry '${file.name}'`);
     }
     seenArchiveEntries.add(normalizedName);
+
+    const expectedMetadata = archiveEntryMetadata.get(normalizedName);
+    if (
+      !expectedMetadata ||
+      expectedMetadata.name !== file.name ||
+      expectedMetadata.compression !== file.compression ||
+      expectedMetadata.compressedSize !== file.size ||
+      expectedMetadata.originalSize !== file.originalSize
+    ) {
+      throw new Error(
+        `ZIP entry '${file.name}' local header does not match its central-directory metadata`,
+      );
+    }
 
     const chunks: Uint8Array[] = [];
     let fileExpandedBytes = 0;
@@ -474,6 +505,106 @@ export function extractAndValidateSdkReviewInputArchive(
     throw new Error("ZIP archive contains an incomplete review input entry");
   }
 
+  validateSnapshotStats(requests, snapshotStats);
+}
+
+/**
+ * Validates central-directory metadata without decompressing file contents.
+ * Returning `false` from the filter keeps oversized entries from reaching
+ * `file.start()` and allocating their expanded output.
+ */
+function preflightSdkReviewInputArchive(
+  archiveBytes: Uint8Array,
+  requests: SpecGenSdkArtifactInfo["apiViewRequestData"],
+  reviewInputPaths: string[],
+): Map<string, ArchiveEntryMetadata> {
+  const snapshotStats = new Map<string, SnapshotStats>(
+    reviewInputPaths.map((reviewInputPath) => [reviewInputPath, { fileCount: 0, bytes: 0 }]),
+  );
+  const archiveEntryMetadata = new Map<string, ArchiveEntryMetadata>();
+  let totalExpandedBytes = 0;
+  let totalFileCount = 0;
+
+  unzipSync(archiveBytes, {
+    filter(file) {
+      validateArchiveEntryName(file.name);
+      if (file.name.endsWith("/")) {
+        return false;
+      }
+
+      const declaredFile = resolveDeclaredSnapshotFile(file.name, reviewInputPaths);
+      if (!declaredFile) {
+        return false;
+      }
+
+      const normalizedName = file.name.toLowerCase();
+      if (archiveEntryMetadata.has(normalizedName)) {
+        throw new Error(`Duplicate ZIP entry '${file.name}'`);
+      }
+
+      if (
+        !Number.isSafeInteger(file.size) ||
+        file.size < 0 ||
+        !Number.isSafeInteger(file.originalSize) ||
+        file.originalSize < 0
+      ) {
+        throw new Error(`ZIP entry '${file.name}' has an invalid declared size`);
+      }
+      archiveEntryMetadata.set(normalizedName, {
+        name: file.name,
+        compression: file.compression,
+        compressedSize: file.size,
+        originalSize: file.originalSize,
+      });
+      if (file.originalSize > MAX_SNAPSHOT_FILE_BYTES) {
+        throw new Error(
+          `ZIP entry '${file.name}' declares more than ${MAX_SNAPSHOT_FILE_BYTES} bytes`,
+        );
+      }
+
+      totalFileCount += 1;
+      totalExpandedBytes += file.originalSize;
+      if (totalFileCount > SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES) {
+        throw new Error(`ZIP review input exceeds ${SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES} files`);
+      }
+      if (
+        !Number.isSafeInteger(totalExpandedBytes) ||
+        totalExpandedBytes > SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES
+      ) {
+        throw new Error(
+          `ZIP expanded review input exceeds ${SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES} bytes`,
+        );
+      }
+
+      const stats = snapshotStats.get(declaredFile.reviewInputPath)!;
+      stats.fileCount += 1;
+      stats.bytes += file.originalSize;
+      if (stats.fileCount > SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE) {
+        throw new Error(
+          `Snapshot '${declaredFile.reviewInputPath}' exceeds ${SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE} files`,
+        );
+      }
+      if (
+        !Number.isSafeInteger(stats.bytes) ||
+        stats.bytes > SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE
+      ) {
+        throw new Error(
+          `Snapshot '${declaredFile.reviewInputPath}' exceeds ${SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE} bytes`,
+        );
+      }
+
+      return false;
+    },
+  });
+
+  validateSnapshotStats(requests, snapshotStats);
+  return archiveEntryMetadata;
+}
+
+function validateSnapshotStats(
+  requests: SpecGenSdkArtifactInfo["apiViewRequestData"],
+  snapshotStats: Map<string, SnapshotStats>,
+): void {
   for (const request of requests) {
     const stats = snapshotStats.get(request.reviewInputPath!)!;
     if (
