@@ -37,6 +37,7 @@ using TypeSpec.OpenAPI;
 /**
  * Azure Synapse Analytics management API for workspaces, workspace administrators and security settings, firewall rules, keys, private endpoints, private link resources and private link hubs.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The provider operations list is defined explicitly (interface Operations) because the published Operations_List returns a plain array and takes no api-version."
 @armProviderNamespace("Microsoft.Synapse")
 @service(#{ title: "SynapseManagementClient" })
 @versioned(Versions)
@@ -63,6 +64,9 @@ interface Operations {
   /**
    * Get all available operations
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Custom provider operation that reproduces the published plain-array Operations_List; no standard ARM operation template matches it."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The published Operations_List declares no api-version parameter; the released SDKs send none."
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "The published Operations_List declares no api-version parameter; the released SDKs send none."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the published operationId."
   @summary("All operations")
   @tag("Operations")

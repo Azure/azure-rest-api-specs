@@ -81,6 +81,7 @@ interface Workspaces {
   /**
    * Deletes a workspace
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The published Workspaces_Delete returns 200, 202 and 204."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
@@ -112,6 +113,8 @@ interface Workspaces {
   /**
    * Get the result of an operation
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Published operation-result polling endpoint: returns 200/201/202/204 without bodies or a Location header."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Published operation-result polling endpoint: returns 200/201/202/204 without bodies or a Location header."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Operations_GetLocationHeaderResult")
   @get

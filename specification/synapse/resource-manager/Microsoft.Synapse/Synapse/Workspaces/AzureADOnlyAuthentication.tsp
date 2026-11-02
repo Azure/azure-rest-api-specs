@@ -14,6 +14,7 @@ namespace Workspaces;
 /**
  * Azure Active Directory Only Authentication Info
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published definition name; renaming would change the OpenAPI definition and SDK type name."
 @parentResource(Workspace)
 model AzureADOnlyAuthentication
   is Azure.ResourceManager.ProxyResource<AzureADOnlyAuthenticationProperties> {
@@ -26,6 +27,8 @@ model AzureADOnlyAuthentication
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The published API has no DELETE for azureADOnlyAuthentications."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Interface name follows the published AzureADOnlyAuthentications operation group."
 @armResourceOperations
 interface AzureADOnlyAuthentications {
   /**

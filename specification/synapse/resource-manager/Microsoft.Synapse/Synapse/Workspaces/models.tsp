@@ -250,6 +250,7 @@ model WorkspaceProperties {
   /**
    * The workspace unique identifier
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Published JSON property name; renaming would change the wire payload."
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
   @format("uuid")
@@ -258,6 +259,7 @@ model WorkspaceProperties {
   /**
    * Workspace level configs and feature flags
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The published schema declares this value as an untyped object."
   @visibility(Lifecycle.Read)
   extraProperties?: unknown;
 
@@ -302,6 +304,7 @@ model WorkspaceProperties {
   /**
    * Enable or Disable AzureADOnlyAuthentication on All Workspace subresource
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Published JSON property name; renaming would change the wire payload."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   azureADOnlyAuthentication?: boolean;
 
@@ -374,6 +377,9 @@ model PrivateEndpointConnectionProperties {
 /**
  * Private endpoint details
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "PrivateEndpoint is a reference to a Microsoft.Network private endpoint, not an addressable resource of this provider."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield conversion: reproduces the published x-ms-azure-resource: true on PrivateEndpoint."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "customAzureResource reproduces the published x-ms-azure-resource: true on PrivateEndpoint."
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model PrivateEndpoint {
   /**
@@ -468,6 +474,7 @@ model KekIdentityProperties {
   /**
    * Boolean specifying whether to use system assigned identity or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The published schema declares this value as an untyped object."
   useSystemAssignedIdentity?: unknown;
 }
 
@@ -597,6 +604,7 @@ model ManagedIdentity {
 /**
  * The User Assigned Managed Identities.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Published UserAssignedManagedIdentities definition is a map keyed by identity resource ID."
 model UserAssignedManagedIdentities is Record<UserAssignedManagedIdentity>;
 
 /**
@@ -606,6 +614,7 @@ model UserAssignedManagedIdentity {
   /**
    * The client ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The published schema marks this value x-nullable."
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
   @format("uuid")
@@ -614,6 +623,7 @@ model UserAssignedManagedIdentity {
   /**
    * The principal ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The published schema marks this value x-nullable."
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
   @format("uuid")
@@ -809,11 +819,13 @@ model RestorableDroppedSqlPoolListResult {
 /**
  * Properties of a active directory only authentication.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published definition name; renaming would change the OpenAPI definition and SDK type name."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model AzureADOnlyAuthenticationProperties {
   /**
    * Azure Active Directory only Authentication enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Published JSON property name; renaming would change the wire payload."
   azureADOnlyAuthentication: boolean;
 
   /**
@@ -922,6 +934,7 @@ model KeyProperties {
   /**
    * Used to activate the workspace after a customer managed key is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Published JSON property name; renaming would change the wire payload."
   isActiveCMK?: boolean;
 
   /**
@@ -1133,6 +1146,7 @@ model OperationResource {
   /**
    * Operation properties
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The published schema declares this value as an untyped object."
   properties?: unknown;
 
   /**
@@ -1248,6 +1262,7 @@ model PrivateLinkHubPatchInfo {
 /**
  * A page of private endpoint connections of a private link hub
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published definition name; renaming would change the OpenAPI definition and SDK type name."
 model PrivateEndpointConnectionForPrivateLinkHub_ResourceCollectionResponse {
   /**
    * The private endpoint connections in this page.
@@ -1294,6 +1309,7 @@ model WorkspaceInfoListResult {
 /**
  * A list of active directory only authentications.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published definition name; renaming would change the OpenAPI definition and SDK type name."
 model AzureADOnlyAuthenticationListResult {
   /**
    * Array of results.

@@ -55,6 +55,7 @@ interface IpFirewallRuleInfos {
   /**
    * Deletes a firewall rule
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The published IpFirewallRules_Delete returns 200, 202 and 204."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IpFirewallRules_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<

@@ -26,6 +26,7 @@ model ManagedIdentitySqlControlSettingsModel
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The published API has no DELETE for managedIdentitySqlControlSettings."
 @armResourceOperations
 interface ManagedIdentitySqlControlSettingsModels {
   /**
