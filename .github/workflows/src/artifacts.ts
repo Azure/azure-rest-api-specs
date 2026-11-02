@@ -23,16 +23,6 @@ export type AzurePipelineArtifactResult = {
   artifactData: string;
 };
 
-export type StrictAzurePipelineArtifactResult =
-  | {
-      status: "found";
-      artifactData: string;
-    }
-  | {
-      status: "not-found";
-      artifactData: "";
-    };
-
 export type ResolvedAzurePipelineArtifact = {
   downloadUrl: string;
   headers: Record<string, string>;
@@ -56,14 +46,13 @@ type GetAzurePipelineArtifactOptions = {
   retryOptions?: import("./retries.ts").RetryOptions;
   fallbackToFailedArtifact?: boolean;
   token?: string;
-  strict?: boolean;
   maxBytes?: number;
   fetchImpl?: typeof fetch;
 };
 
 type ResolveAzurePipelineArtifactOptions = Omit<
   GetAzurePipelineArtifactOptions,
-  "artifactFileName" | "strict" | "maxBytes"
+  "artifactFileName" | "maxBytes"
 >;
 
 type DownloadAzurePipelineArtifactFileOptions = {
@@ -300,12 +289,6 @@ export async function downloadAzurePipelineArtifactArchive({
   return await readResponseBytesWithLimit(artifactResponse, maxBytes);
 }
 
-export function getAzurePipelineArtifact(
-  options: GetAzurePipelineArtifactOptions & { strict: true },
-): Promise<StrictAzurePipelineArtifactResult>;
-export function getAzurePipelineArtifact(
-  options: GetAzurePipelineArtifactOptions & { strict?: false },
-): Promise<AzurePipelineArtifactResult>;
 export async function getAzurePipelineArtifact({
   ado_build_id,
   ado_project_url,
@@ -315,12 +298,9 @@ export async function getAzurePipelineArtifact({
   retryOptions = {},
   fallbackToFailedArtifact = false,
   token = undefined,
-  strict = false,
   maxBytes,
   fetchImpl = fetch,
-}: GetAzurePipelineArtifactOptions): Promise<
-  AzurePipelineArtifactResult | StrictAzurePipelineArtifactResult
-> {
+}: GetAzurePipelineArtifactOptions): Promise<AzurePipelineArtifactResult> {
   try {
     const resolution = await resolveAzurePipelineArtifact({
       ado_build_id,
@@ -333,7 +313,7 @@ export async function getAzurePipelineArtifact({
       fetchImpl,
     });
     if (resolution.status === "not-found") {
-      return strict ? { status: "not-found", artifactData: "" } : { artifactData: "" };
+      return { artifactData: "" };
     }
 
     const artifactData = await downloadAzurePipelineArtifactFile({
@@ -343,9 +323,9 @@ export async function getAzurePipelineArtifact({
       maxBytes,
       fetchImpl,
     });
-    return strict ? { status: "found", artifactData } : { artifactData };
+    return { artifactData };
   } catch (error) {
-    if (!strict && error instanceof AzurePipelineArtifactHttpError) {
+    if (error instanceof AzurePipelineArtifactHttpError) {
       return { artifactData: "" };
     }
     throw error;
