@@ -108,6 +108,9 @@ export interface EnsureReleasePlanResult {
 
 export interface CommitProjectInfoResult {
   projectInfo: TypeSpecProjectInfo | null;
+  changedFiles: PullRequestChangedFile[];
+  multipleProjectPaths?: string[];
+  projectError?: { tspProjectPath: string; message: string };
   prNumber?: number;
   hasNewApiVersionLabel: boolean;
   skipReleasePlanAutomation?: boolean;
