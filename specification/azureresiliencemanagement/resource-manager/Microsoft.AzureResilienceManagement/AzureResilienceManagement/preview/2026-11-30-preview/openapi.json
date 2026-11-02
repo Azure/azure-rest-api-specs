@@ -3128,7 +3128,7 @@
         "tags": [
           "RecoveryConfigProfiles"
         ],
-        "description": "Replaces the complete writable configuration of a recovery configuration profile. The request must include the same required writable fields as create.",
+        "description": "Updates a recovery configuration profile. Omitted fields remain unchanged.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -3158,7 +3158,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RecoveryConfigProfilePatch"
+              "$ref": "#/definitions/RecoveryConfigProfileUpdate"
             }
           }
         ],
@@ -6135,6 +6135,87 @@
         }
       ]
     },
+    "DatabaseRecoveryConfigUpdate": {
+      "type": "object",
+      "description": "Shared recovery configuration fields for database workloads.",
+      "properties": {
+        "recoveryType": {
+          "type": "string",
+          "description": "The database recovery behavior. Defaults to recovery at an alternate location.",
+          "default": "AlternateLocation",
+          "enum": [
+            "CreateNewVM",
+            "AlternateLocation",
+            "RestoreAsDisks",
+            "RestoreAsFiles"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CreateNewVM",
+                "value": "CreateNewVM",
+                "description": "Recovery creates a new virtual machine."
+              },
+              {
+                "name": "AlternateLocation",
+                "value": "AlternateLocation",
+                "description": "Recovery targets an alternate location."
+              },
+              {
+                "name": "RestoreAsDisks",
+                "value": "RestoreAsDisks",
+                "description": "Recovery restores the workload as disks."
+              },
+              {
+                "name": "RestoreAsFiles",
+                "value": "RestoreAsFiles",
+                "description": "Recovery restores the workload as files."
+              }
+            ]
+          }
+        },
+        "targetNamePrefix": {
+          "type": "string",
+          "description": "The prefix used when naming recovered databases."
+        },
+        "targetDirectoryForFileRestore": {
+          "type": "string",
+          "description": "The target directory location for restoring a database as files."
+        },
+        "targetVirtualMachineId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the target virtual machine.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              }
+            ]
+          }
+        },
+        "targetVaultId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the target vault."
+        },
+        "overwriteOption": {
+          "$ref": "#/definitions/OverwriteOptions",
+          "description": "The behavior when the restore target already exists."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "The target database instance name."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadConfigUpdate"
+        }
+      ]
+    },
     "DiskReprotectInputDetails": {
       "type": "object",
       "description": "Disk Reprotect Input Details",
@@ -7982,6 +8063,38 @@
       ],
       "x-ms-discriminator-value": "AzureFileShare"
     },
+    "FileShareRecoveryConfigUpdate": {
+      "type": "object",
+      "description": "Recovery configuration for an Azure Files workload.",
+      "properties": {
+        "targetNamePrefix": {
+          "type": "string",
+          "description": "The prefix used when naming recovered file shares."
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/TargetResourceSpecUpdate",
+          "description": "The target storage account."
+        },
+        "targetFolderPath": {
+          "type": "string",
+          "description": "The destination folder path in the target file share."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The system-assigned and/or user-assigned managed identities used for restore."
+        },
+        "copyOptions": {
+          "$ref": "#/definitions/CopyOptions",
+          "description": "The behavior when a copied file already exists."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadConfigUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureFileShare"
+    },
     "ForceInclusionAndUpdate": {
       "type": "string",
       "description": "Enum for ForceInclusionAndUpdate",
@@ -9304,6 +9417,28 @@
       ],
       "x-ms-discriminator-value": "OracleInAzureVm"
     },
+    "OracleInAzureVmRecoveryConfigUpdate": {
+      "type": "object",
+      "description": "Recovery configuration for an Oracle workload.",
+      "properties": {
+        "workloadType": {
+          "type": "string",
+          "description": "The workload type represented by this configuration.",
+          "enum": [
+            "OracleInAzureVm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseRecoveryConfigUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "OracleInAzureVm"
+    },
     "OverwriteOptions": {
       "type": "number",
       "description": "The behavior when a database restore target already exists.",
@@ -9762,41 +9897,6 @@
         "value"
       ]
     },
-    "RecoveryConfigProfilePatch": {
-      "type": "object",
-      "description": "The request body for replacing the complete writable configuration of a recovery configuration profile.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RecoveryConfigProfilePatchProperties",
-          "description": "The complete replacement profile configuration, with the same required writable fields as create."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "RecoveryConfigProfilePatchProperties": {
-      "type": "object",
-      "description": "The complete writable configuration that replaces the existing recovery configuration profile.",
-      "properties": {
-        "targetScope": {
-          "$ref": "#/definitions/TargetScope",
-          "description": "The subscription and location targeted by this profile."
-        },
-        "workloadConfig": {
-          "$ref": "#/definitions/WorkloadConfig",
-          "description": "The workload-specific recovery configuration."
-        },
-        "recoveryPointPolicy": {
-          "$ref": "#/definitions/RecoveryPointPolicy",
-          "description": "Default recovery point selection."
-        }
-      },
-      "required": [
-        "targetScope",
-        "workloadConfig"
-      ]
-    },
     "RecoveryConfigProfileProperties": {
       "type": "object",
       "description": "Properties of a plan-scoped recovery configuration profile.",
@@ -9846,6 +9946,39 @@
         "workloadType",
         "targetScope",
         "workloadConfig"
+      ]
+    },
+    "RecoveryConfigProfilePropertiesUpdate": {
+      "type": "object",
+      "description": "Properties of a plan-scoped recovery configuration profile.",
+      "properties": {
+        "targetScope": {
+          "$ref": "#/definitions/TargetScopeUpdate",
+          "description": "The subscription and location targeted by this profile."
+        },
+        "workloadConfig": {
+          "$ref": "#/definitions/WorkloadConfigUpdate",
+          "description": "The workload-specific recovery configuration."
+        },
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicyUpdate",
+          "description": "Default recovery point selection."
+        }
+      }
+    },
+    "RecoveryConfigProfileUpdate": {
+      "type": "object",
+      "description": "A reusable, plan-scoped clean-room recovery configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoveryConfigProfilePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "RecoveryGroup": {
@@ -10846,6 +10979,43 @@
             "description": "Use a random recovery point within the specified time bounds."
           }
         ]
+      }
+    },
+    "RecoveryPointPolicyUpdate": {
+      "type": "object",
+      "description": "Default recovery point selection for a recovery configuration profile.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RecoveryPointPolicyType",
+          "description": "The recovery point selection policy type."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The inclusive lower time bound. Required with endTime for Random selection when lookbackDuration is omitted; optional for Latest selection. Mutually exclusive with lookbackDuration."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The inclusive upper time bound. Required with startTime for Random selection when lookbackDuration is omitted; optional for Latest selection. Mutually exclusive with lookbackDuration."
+        },
+        "lookbackDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "A positive, fixed ISO 8601 duration for relative Random selection, such as P10D or PT12H. Only days, hours, minutes, and seconds are supported; calendar-dependent months and years are not supported. Mutually exclusive with startTime and endTime. The service resolves the duration to absolute bounds at execution time without modifying the saved profile."
+        },
+        "backupType": {
+          "type": "array",
+          "description": "The explicit, non-empty list of unique backup mechanisms to consider. Random selection cannot include Log, even when other mechanisms are also selected.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/BackupType"
+          }
+        },
+        "recoveryPointHealthStatus": {
+          "$ref": "#/definitions/RecoveryPointHealthStatus",
+          "description": "The health filter for discrete recovery points. Omission means All. Log and point-in-time recovery candidates are not health-filtered."
+        }
       }
     },
     "RecoveryResource": {
@@ -12200,6 +12370,28 @@
       ],
       "x-ms-discriminator-value": "SapAseInAzureVm"
     },
+    "SapAseInAzureVmRecoveryConfigUpdate": {
+      "type": "object",
+      "description": "Recovery configuration for an SAP ASE workload.",
+      "properties": {
+        "workloadType": {
+          "type": "string",
+          "description": "The workload type represented by this configuration.",
+          "enum": [
+            "SapAseInAzureVm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseRecoveryConfigUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "SapAseInAzureVm"
+    },
     "SapHanaInAzureVmRecoveryConfig": {
       "type": "object",
       "description": "Recovery configuration for an SAP HANA workload.",
@@ -12221,6 +12413,28 @@
       "allOf": [
         {
           "$ref": "#/definitions/DatabaseRecoveryConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "SapHanaInAzureVm"
+    },
+    "SapHanaInAzureVmRecoveryConfigUpdate": {
+      "type": "object",
+      "description": "Recovery configuration for an SAP HANA workload.",
+      "properties": {
+        "workloadType": {
+          "type": "string",
+          "description": "The workload type represented by this configuration.",
+          "enum": [
+            "SapHanaInAzureVm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseRecoveryConfigUpdate"
         }
       ],
       "x-ms-discriminator-value": "SapHanaInAzureVm"
@@ -12566,6 +12780,32 @@
       ],
       "x-ms-discriminator-value": "SqlDatabaseInAzureVm"
     },
+    "SqlDatabaseInAzureVmRecoveryConfigUpdate": {
+      "type": "object",
+      "description": "Recovery configuration for a SQL database in an Azure virtual machine.",
+      "properties": {
+        "workloadType": {
+          "type": "string",
+          "description": "The workload type represented by this configuration.",
+          "enum": [
+            "SqlDatabaseInAzureVm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "isNonRecoverable": {
+          "type": "boolean",
+          "description": "Indicates whether the database is left in the NORECOVERY state after restore."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseRecoveryConfigUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "SqlDatabaseInAzureVm"
+    },
     "SupportedVerbsForStage": {
       "type": "object",
       "description": "Model for supported verbs for stage.",
@@ -12722,6 +12962,47 @@
         "armResourceType"
       ]
     },
+    "TargetResourceSpecUpdate": {
+      "type": "object",
+      "description": "A target resource required by a recovery workload.",
+      "properties": {
+        "armResourceType": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The full Azure resource type of the target. Supported types include Microsoft.Resources/resourceGroups, Microsoft.Compute/virtualMachines, Microsoft.Network/virtualNetworks, Microsoft.Network/virtualNetworks/subnets, Microsoft.Storage/storageAccounts, Microsoft.Compute/diskEncryptionSets, Microsoft.KeyVault/vaults, and Microsoft.Network/networkSecurityGroups. The service validates supported target resource types."
+        },
+        "provisioningMode": {
+          "type": "string",
+          "description": "How the target resource is provisioned.",
+          "default": "Existing",
+          "enum": [
+            "Existing"
+          ],
+          "x-ms-enum": {
+            "name": "TargetProvisioningMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Existing",
+                "value": "Existing",
+                "description": "An existing target resource is used."
+              }
+            ]
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the existing target. Required when provisioningMode is Existing."
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "The target resources that this target depends on.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "TargetScope": {
       "type": "object",
       "description": "The subscription and location targeted by a recovery configuration profile.",
@@ -12739,6 +13020,20 @@
         "subscriptionId",
         "location"
       ]
+    },
+    "TargetScopeUpdate": {
+      "type": "object",
+      "description": "The subscription and location targeted by a recovery configuration profile.",
+      "properties": {
+        "subscriptionId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The target Azure subscription identifier."
+        },
+        "location": {
+          "type": "string",
+          "description": "The target Azure location."
+        }
+      }
     },
     "TestFailoverCleanupRequest": {
       "type": "object",
@@ -13369,7 +13664,105 @@
       ],
       "x-ms-discriminator-value": "AzureVm"
     },
+    "VmRecoveryConfigUpdate": {
+      "type": "object",
+      "description": "Recovery configuration for an Azure virtual machine.",
+      "properties": {
+        "recoveryType": {
+          "type": "string",
+          "description": "The virtual machine recovery behavior. Defaults to creating a new virtual machine.",
+          "default": "CreateNewVM",
+          "enum": [
+            "CreateNewVM",
+            "AlternateLocation",
+            "RestoreAsDisks",
+            "RestoreAsFiles"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CreateNewVM",
+                "value": "CreateNewVM",
+                "description": "Recovery creates a new virtual machine."
+              },
+              {
+                "name": "AlternateLocation",
+                "value": "AlternateLocation",
+                "description": "Recovery targets an alternate location."
+              },
+              {
+                "name": "RestoreAsDisks",
+                "value": "RestoreAsDisks",
+                "description": "Recovery restores the workload as disks."
+              },
+              {
+                "name": "RestoreAsFiles",
+                "value": "RestoreAsFiles",
+                "description": "Recovery restores the workload as files."
+              }
+            ]
+          }
+        },
+        "targetNamePrefix": {
+          "type": "string",
+          "description": "The prefix used when naming recovered virtual machines."
+        },
+        "resourceGroup": {
+          "$ref": "#/definitions/TargetResourceSpecUpdate",
+          "description": "The target resource group."
+        },
+        "virtualNetwork": {
+          "$ref": "#/definitions/TargetResourceSpecUpdate",
+          "description": "The target virtual network."
+        },
+        "subnet": {
+          "$ref": "#/definitions/TargetResourceSpecUpdate",
+          "description": "The target subnet."
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/TargetResourceSpecUpdate",
+          "description": "The target storage account."
+        },
+        "diskEncryptionSet": {
+          "$ref": "#/definitions/TargetResourceSpecUpdate",
+          "description": "The target disk encryption set."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The system-assigned and/or user-assigned managed identities used for restore."
+        },
+        "zones": {
+          "type": "array",
+          "description": "The target availability zones.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadConfigUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVm"
+    },
     "WorkloadConfig": {
+      "type": "object",
+      "description": "Workload-specific recovery configuration.",
+      "properties": {
+        "workloadType": {
+          "$ref": "#/definitions/WorkloadType",
+          "description": "The workload type represented by this configuration."
+        }
+      },
+      "discriminator": "workloadType",
+      "required": [
+        "workloadType"
+      ]
+    },
+    "WorkloadConfigUpdate": {
       "type": "object",
       "description": "Workload-specific recovery configuration.",
       "properties": {

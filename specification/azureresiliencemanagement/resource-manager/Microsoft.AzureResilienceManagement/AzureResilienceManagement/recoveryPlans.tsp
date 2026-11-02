@@ -146,10 +146,10 @@ interface RecoveryConfigProfiles {
 
   @added(Versions.v2026_11_30_preview)
   @route(ServiceGroupRoute)
-  @doc("Replaces the complete writable configuration of a recovery configuration profile. The request must include the same required writable fields as create.")
-  update is ArmCustomPatchAsync<
+  @doc("Updates a recovery configuration profile. Omitted fields remain unchanged.")
+  update is ArmResourcePatchAsync<
     RecoveryConfigProfile,
-    RecoveryConfigProfilePatch,
+    RecoveryConfigProfileProperties,
     ServiceGroupParameters
   >;
 

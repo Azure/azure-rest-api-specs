@@ -410,27 +410,3 @@ model RecoveryConfigProfile is ProxyResource<RecoveryConfigProfileProperties> {
   @path
   name: string;
 }
-
-@added(Versions.v2026_11_30_preview)
-@doc("The complete writable configuration that replaces the existing recovery configuration profile.")
-model RecoveryConfigProfilePatchProperties {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The subscription and location targeted by this profile.")
-  targetScope: TargetScope;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The workload-specific recovery configuration.")
-  workloadConfig: WorkloadConfig;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Default recovery point selection.")
-  recoveryPointPolicy?: RecoveryPointPolicy;
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("The request body for replacing the complete writable configuration of a recovery configuration profile.")
-model RecoveryConfigProfilePatch {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The complete replacement profile configuration, with the same required writable fields as create.")
-  properties: RecoveryConfigProfilePatchProperties;
-}
