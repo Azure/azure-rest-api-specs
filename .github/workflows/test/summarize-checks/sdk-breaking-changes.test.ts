@@ -189,9 +189,13 @@ describe("SDK breaking-change summary", () => {
       core.summary.addLink = vi.fn().mockReturnValue(core.summary);
       core.summary.addHeading = vi.fn().mockReturnValue(core.summary);
       core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
-      github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: headSha } } });
-      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-        data: detected ? [{ name: "BreakingChange-Go-Sdk" }] : [],
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          head: { sha: headSha },
+          base: { ref: "main" },
+          draft: false,
+          labels: detected ? [{ name: "BreakingChange-Go-Sdk" }] : [],
+        },
       });
       github.rest.issues.listComments.mockResolvedValue({
         data: [
@@ -215,7 +219,8 @@ describe("SDK breaking-change summary", () => {
       );
 
       expect(github.rest.issues.listComments).toHaveBeenCalled();
-      expect(github.rest.pulls.get).toHaveBeenCalledTimes(detected ? 1 : 0);
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(detected ? 2 : 1);
+      expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
       const { body, comment_id } = github.rest.issues.updateComment.mock.calls[0][0] as {
         body: string;
@@ -237,10 +242,16 @@ describe("SDK breaking-change summary", () => {
     core.summary.addLink = vi.fn().mockReturnValue(core.summary);
     core.summary.addHeading = vi.fn().mockReturnValue(core.summary);
     core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
-    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: [{ name: "BreakingChange-Go-Sdk" }],
-    });
-    github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "b".repeat(40) } } });
+    github.rest.pulls.get
+      .mockResolvedValueOnce({
+        data: {
+          head: { sha: headSha },
+          base: { ref: "main" },
+          draft: false,
+          labels: [{ name: "BreakingChange-Go-Sdk" }],
+        },
+      })
+      .mockResolvedValueOnce({ data: { head: { sha: "b".repeat(40) } } });
     github.rest.issues.listComments.mockResolvedValue({
       data: [
         report(1, "analysis", "Go"),
@@ -263,6 +274,7 @@ describe("SDK breaking-change summary", () => {
     );
 
     expect(core.warning).toHaveBeenCalledWith(expect.stringContaining("stale commit"));
+    expect(github.rest.pulls.get).toHaveBeenCalledTimes(2);
     expect(github.rest.issues.listComments).toHaveBeenCalledTimes(1);
     expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     expect(github.rest.issues.updateComment).toHaveBeenCalledTimes(1);

@@ -1,6 +1,6 @@
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import type { AnalysisResult } from "../../src/sdk-breaking-change/types.ts";
 import {
   buildAnalysisReport,
@@ -11,10 +11,12 @@ import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts
 const analyzedSha = "6fb74c85cd16a8e13d4ad1aca058993cd076fa8b";
 const analysisWorkflowUrl = "https://github.com/owner/repo/actions/runs/123";
 let resultsPath: string;
+let resultFilePath: string;
 let analysisResult: AnalysisResult;
 
 beforeEach(async () => {
   resultsPath = join(import.meta.dirname, `results-${crypto.randomUUID()}`);
+  resultFilePath = join(resultsPath, "sdk-breaking-change-analysis.json");
   await mkdir(resultsPath, { recursive: true });
   analysisResult = {
     schemaVersion: 1,
@@ -51,11 +53,9 @@ beforeEach(async () => {
     join(resultsPath, "sdk-breaking-change-analysis.json"),
     JSON.stringify(analysisResult),
   );
-  vi.stubEnv("RESULTS_PATH", resultsPath);
 });
 
 afterEach(async () => {
-  vi.unstubAllEnvs();
   await rm(resultsPath, { recursive: true, force: true });
 });
 
@@ -76,7 +76,7 @@ describe("buildAnalysisReport", () => {
         JSON.stringify(analysisResult),
       );
 
-      const { result, report } = await buildAnalysisReport(resultsPath);
+      const { result, report } = await buildAnalysisReport(resultFilePath);
 
       expect(result.projects).toEqual(analysisResult.projects);
       expect(report).toContain(`Analysis skipped or failed. Analysis status: ${analysisStatus}`);
@@ -92,7 +92,7 @@ describe("buildAnalysisReport", () => {
       JSON.stringify(analysisResult),
     );
 
-    const { report } = await buildAnalysisReport(resultsPath);
+    const { report } = await buildAnalysisReport(resultFilePath);
 
     expect(report).toContain("| ID | Breaking change | Category | Suggested fix |");
     expect(report).toContain("| - | No SDK breaking changes detected. | - | - |");
@@ -106,13 +106,13 @@ describe("buildAnalysisReport", () => {
       JSON.stringify(analysisResult),
     );
 
-    await expect(buildAnalysisReport(resultsPath)).rejects.toThrow(
+    await expect(buildAnalysisReport(resultFilePath)).rejects.toThrow(
       "Successful analysis requires an SDK package name.",
     );
   });
 
   it("builds the command and report from downloaded results", async () => {
-    const result = await buildAnalysisReport(resultsPath);
+    const result = await buildAnalysisReport(resultFilePath);
 
     expect(result.command).toBe("/azsdk sdk-breaking-analysis Go");
     expect(
@@ -133,6 +133,22 @@ describe("buildAnalysisReport", () => {
 });
 
 describe("publishAnalysisResult", () => {
+  it("reports a missing result file before publishing", async () => {
+    await rm(resultFilePath);
+    const github = createMockGithub();
+
+    await expect(
+      publishAnalysisResult({
+        github,
+        context: createMockContext(),
+        core: createMockCore(),
+        resultFilePath,
+      }),
+    ).rejects.toThrow(`SDK analysis result file does not exist: ${resultFilePath}`);
+    expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+  });
+
   it("publishes a current analysis result", async () => {
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: analyzedSha } } });
@@ -142,6 +158,7 @@ describe("publishAnalysisResult", () => {
       github,
       context: createMockContext(),
       core,
+      resultFilePath,
     });
 
     expect(github.rest.issues.createComment).toHaveBeenCalled();
@@ -169,7 +186,7 @@ describe("publishAnalysisResult", () => {
     const github = createMockGithub();
     const core = createMockCore();
 
-    await publishAnalysisResult({ github, context: createMockContext(), core });
+    await publishAnalysisResult({ github, context: createMockContext(), core, resultFilePath });
 
     const errorMessage = [
       "SDK breaking-change analysis failed.",
@@ -200,7 +217,7 @@ describe("publishAnalysisResult", () => {
     github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: currentSha } } });
     const core = createMockCore();
 
-    await publishAnalysisResult({ github, context: createMockContext(), core });
+    await publishAnalysisResult({ github, context: createMockContext(), core, resultFilePath });
 
     expect(core.warning).toHaveBeenCalledWith(expect.stringContaining("is stale"));
     expect(github.rest.issues.createComment).toHaveBeenCalledWith(

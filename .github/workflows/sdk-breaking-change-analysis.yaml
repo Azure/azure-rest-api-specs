@@ -235,6 +235,38 @@ jobs:
               azureSdkCliPath: process.env.AZSDK_CLI_PATH,
             });
 
+      - name: Create SDK analysis Failure artifact
+        if: failure()
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          RESULT_FILE_PATH: ${{ runner.temp }}/sdk-breaking-change-analysis-results/sdk-breaking-change-analysis.json
+          PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
+          HEAD_SHA: ${{ needs.resolve.outputs.head-sha }}
+          SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
+          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          script: |
+            const { existsSync } = await import('node:fs');
+            const { mkdir, writeFile } = await import('node:fs/promises');
+            const { dirname } = await import('node:path');
+            const resultFilePath = process.env.RESULT_FILE_PATH;
+            if (!existsSync(resultFilePath)) {
+              const errorMessage =
+                "The analysis job failed. Check the workflow logs for setup or execution failures.";
+              core.warning(errorMessage);
+              await mkdir(dirname(resultFilePath), { recursive: true });
+              await writeFile(resultFilePath, JSON.stringify({
+                schemaVersion: 1,
+                prNumber: Number(process.env.PR_NUMBER),
+                headSha: process.env.HEAD_SHA,
+                sdkLanguage: process.env.SDK_LANGUAGE,
+                analysisWorkflowUrl: process.env.WORKFLOW_URL,
+                status: "failure",
+                errorMessage,
+                projects: [],
+              }, null, 2));
+            }
+
       - name: Upload SDK analysis results
         id: upload-results
         if: always()
@@ -242,7 +274,7 @@ jobs:
         with:
           name: sdk-breaking-change-analysis-results
           path: ${{ runner.temp }}/sdk-breaking-change-analysis-results/sdk-breaking-change-analysis.json
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 7
   publish-results:
     needs: analyze
@@ -273,14 +305,17 @@ jobs:
       - name: Publish SDK breaking-change analysis result
         id: publish-result
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-analysis-results
         with:
           github-token: ${{ github.token }}
           script: |
             const { publishAnalysisResult } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/publish-analysis-result.ts');
-            await publishAnalysisResult({ github, context, core });
+            await publishAnalysisResult({
+              github,
+              context,
+              core,
+              resultFilePath: '${{ runner.temp }}/sdk-breaking-change-analysis-results/sdk-breaking-change-analysis.json',
+            });
 
       - name: Upload PR number
         uses: ./.github/actions/add-empty-artifact

@@ -1,5 +1,5 @@
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import {
   escapeMarkdown,
   renderMarkdownDoc,
@@ -10,14 +10,12 @@ import { AnalysisResultSchema, MarkdownHeadingId, type AnalysisResult } from "./
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 import type { GitHubScriptArgs } from "../github.ts";
 
-export async function buildAnalysisReport(resultsPath: string): Promise<{
+export async function buildAnalysisReport(resultFilePath: string): Promise<{
   command: string;
   report: string;
   result: AnalysisResult;
 }> {
-  const result = AnalysisResultSchema.parse(
-    JSON.parse(await readFile(join(resultsPath, "sdk-breaking-change-analysis.json"), "utf8")),
-  );
+  const result = AnalysisResultSchema.parse(JSON.parse(await readFile(resultFilePath, "utf8")));
   const projectReports = result.projects.map((project) => {
     const tableRows: string[][] = project.breakingChanges.length
       ? project.breakingChanges.map((change) => [
@@ -68,13 +66,16 @@ export async function publishAnalysisResult({
   github,
   context,
   core,
-}: GitHubScriptArgs): Promise<void> {
-  const resultsPath = process.env.RESULTS_PATH;
-  if (!resultsPath) {
-    throw new Error("RESULTS_PATH is required.");
+  resultFilePath,
+}: GitHubScriptArgs & { resultFilePath: string }): Promise<void> {
+  if (!resultFilePath) {
+    throw new Error("resultFilePath is required.");
+  }
+  if (!existsSync(resultFilePath)) {
+    throw new Error(`SDK analysis result file does not exist: ${resultFilePath}`);
   }
 
-  const { command, report, result } = await buildAnalysisReport(resultsPath);
+  const { command, report, result } = await buildAnalysisReport(resultFilePath);
   core.setOutput("issue_number", result.prNumber);
   core.setOutput("head_sha", result.headSha);
   if (result.status !== "success") {

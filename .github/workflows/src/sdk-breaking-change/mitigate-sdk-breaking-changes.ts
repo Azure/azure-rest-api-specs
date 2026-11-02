@@ -199,6 +199,8 @@ export async function mitigateSdkBreakingChanges({
     await writeResult(mitigationResultPath, mitigationResult);
   } catch (error) {
     console.error("SDK breaking-change mitigation failed.", error);
+    const message = error instanceof Error ? error.message : String(error);
+    core.setFailed(message);
     const failureResult: MitigationResult = {
       schemaVersion: 1,
       status: "failure",
@@ -206,7 +208,7 @@ export async function mitigateSdkBreakingChanges({
       headSha: analysisResult.headSha,
       sdkLanguage: analysisResult.sdkLanguage,
       mitigationWorkflowUrl: mitigationWorkflowUrl,
-      errorMessage: (error as Error).message,
+      errorMessage: message,
       projects: [],
       customizationCode: "",
     };

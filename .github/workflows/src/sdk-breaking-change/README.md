@@ -80,10 +80,10 @@ result schemas, and PR comment behavior.
 - Preserve the exact upstream workflow names in `workflow_run.workflows`. Mitigation starts only
   after `SDK Breaking Change Analysis` concludes successfully, including its publishing job.
 - The analysis `publish-results` job depends on `analyze` and runs after success or failure,
-  but not when `analyze` was canceled or skipped. If no result artifact was uploaded, the download
-  step fails rather than publishing a report.
-- The mitigation `publish-results` job depends on `mitigate` and uses the default success
-  condition. Failed, canceled, or skipped mitigation jobs skip publishing. Neither publisher
+  but not when `analyze` was canceled or skipped. A failure-only step creates a failure result
+  before upload if analysis did not produce a result file.
+- The mitigation `publish-results` job depends on `mitigate` and runs after success or failure.
+  Canceled or skipped mitigation jobs skip publishing. Neither publisher
   separately reads eligibility artifacts.
 
 ### Artifact ownership and compatibility
@@ -121,7 +121,7 @@ schema-version and consumer updates; changing an artifact's display name alone d
    Individual project failures can coexist with an overall successful analysis.
 6. The eligibility artifact is written by the resolver even when analysis will not run. A `true`
    eligibility file does not guarantee that a result file was produced: setup or analysis can fail
-   first. Keep missing-artifact failures distinct from valid failure-result JSON.
+   first. Analysis creates a failure-result JSON before upload when its result file is missing.
 
 ### `SDK Breaking Change Analysis` workflow
 
@@ -222,8 +222,10 @@ Example of a successful result containing a detected breaking change:
 The `publish-results` job uses
 `always() && (needs.analyze.result == 'success' || needs.analyze.result == 'failure')` to download
 results from the same run after analysis succeeds or fails. It skips publication when analysis
-was canceled or skipped. Publishing still requires a valid result artifact; if analysis did not
-produce one, the download step fails.
+was canceled or skipped. Before uploading, a failure-only step preserves any existing result file
+or creates a valid `status: "failure"` result with the resolved PR number, head SHA, SDK language,
+and workflow URL if setup or execution prevented analysis from writing one. The publisher reports
+that failure instead of failing to download a missing artifact.
 
 For a successful result, the publisher compares the PR's current head SHA with `headSha` before
 posting the report. The comment starts with a language-specific command, followed by the analyzed
@@ -366,15 +368,16 @@ For example, execution can succeed even if the CLI cannot resolve a change and p
 
 An error caught by the outer mitigation handler, such as an invalid customization target, produces
 `status: "failure"`, an `errorMessage`, and an empty `projects` array. Input-file or schema errors
-occur before that handler and can prevent the mitigation result from being written. The upload
-step runs with `if: always()` but fails if the mitigation file is missing.
+occur before that handler and can prevent the mitigation result from being written. A failure-only
+step before upload preserves any existing result or creates a valid failure result with the resolved
+PR number, head SHA, SDK language, workflow URL, and empty customization code and projects.
+The upload step runs with `if: always()`.
 
 #### Publish result in PR comment
 
-The `publish-results` job runs after `mitigate` succeeds and downloads the mitigation result artifact
+The `publish-results` job runs after `mitigate` succeeds or fails and downloads the mitigation result artifact
 from the same workflow run. It does not read the mitigation eligibility artifact or run after a
-failed, canceled, or skipped mitigation job. A JSON result with `status: "failure"` can still be
-published if the execution job itself succeeds.
+canceled or skipped mitigation job. A JSON result with `status: "failure"` is published as a failure report.
 For successful results, it compares the current PR head SHA with `headSha` before rendering the report.
 
 The example above produces the following comment:
