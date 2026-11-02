@@ -5,6 +5,13 @@ using Azure.ClientGenerator.Core;
 using Kore.AgentPlatform;
 
 @@clientName(Kore.AgentPlatform, "KoreAIArtemisMgmtClient", "python");
+@@clientName(Kore.AgentPlatform.SaaSOperationGroup, "Saas", "python");
+@@clientName(Kore.AgentPlatform.Workspaces.linkSaaS, "link_saas", "python");
+@@clientName(
+  Kore.AgentPlatform.Workspaces.listLinkedSaaS,
+  "list_linked_saas",
+  "python"
+);
 // java
 @@clientName(Kore.AgentPlatform, "KoreAIArtemisManagementClient", "java");
 
@@ -65,6 +72,36 @@ using Kore.AgentPlatform;
   "csharp"
 );
 @@clientName(
+  Kore.AgentPlatform.ActivateSaaSParameterRequest,
+  "ActivateSaasContent",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.OrganizationPartnerPropertiesUpdate,
+  "KoreAIArtemisOrganizationPartnerPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.OrganizationPropertiesUpdate,
+  "KoreAIArtemisOrganizationPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.Product,
+  "KoreAIArtemisWorkspaceProduct",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.WorkspaceSaaSData,
+  "WorkspaceSaasContent",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.WorkspaceDetailPartnerProperties.default,
+  "IsDefault",
+  "csharp"
+);
+@@clientName(
   Kore.AgentPlatform.ListWorkspacesResponse,
   "ListWorkspacesResult",
   "csharp"
@@ -72,8 +109,28 @@ using Kore.AgentPlatform;
 
 @@clientName(LiftrBase.OfferDetails, "KoreAIArtemisOfferDetails", "csharp");
 @@clientName(
+  LiftrBase.MarketplaceSubscriptionStatus,
+  "KoreAIArtemisMarketplaceSubscriptionStatus",
+  "csharp"
+);
+@@clientName(
   LiftrBase.MarketplaceDetails,
   "KoreAIArtemisMarketplaceDetails",
+  "csharp"
+);
+@@clientName(
+  LiftrBase.SingleSignOnStates,
+  "KoreAIArtemisSingleSignOnState",
+  "csharp"
+);
+@@clientName(
+  LiftrBase.SingleSignOnType,
+  "KoreAIArtemisSingleSignOnType",
+  "csharp"
+);
+@@alternateType(
+  LiftrBase.MarketplaceDetails.subscriptionId,
+  Azure.Core.uuid,
   "csharp"
 );
 

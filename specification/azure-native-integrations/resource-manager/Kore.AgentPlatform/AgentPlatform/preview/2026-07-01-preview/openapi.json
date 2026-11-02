@@ -1069,9 +1069,8 @@
       "description": "SaaS guid & PublisherId for Activate and Validate SaaS Resource.",
       "properties": {
         "saasGuid": {
-          "type": "string",
-          "description": "SaaS subscription identifier (GUID) issued by the Azure Marketplace fulfillment API.",
-          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "SaaS subscription identifier (GUID) issued by the Azure Marketplace fulfillment API."
         },
         "publisherId": {
           "type": "string",
@@ -1082,6 +1081,11 @@
         "saasGuid",
         "publisherId"
       ]
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
@@ -1531,7 +1535,7 @@
     },
     "OrganizationResource": {
       "type": "object",
-      "description": "An Organization resource in the Kore.AgentPlatform provider.\n\nTop-level tracked ARM resource. Each Organization is provisioned with a default\nWorkspace atomically; additional Workspaces are managed via the\n`createWorkspace` and `deleteWorkspace` actions defined below.",
+      "description": "An Organization resource in the Kore.AgentPlatform provider.\n\nTop-level tracked ARM resource. Each Organization is provisioned with a default\nWorkspace atomically; additional Workspaces are managed through the standard\ncreate, update, and delete operations on the Workspace child resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/OrganizationProperties",
@@ -1611,9 +1615,8 @@
       "description": "Marketplace SaaS resource details.",
       "properties": {
         "saasId": {
-          "type": "string",
-          "description": "SaaS subscription identifier (GUID) issued by the Azure Marketplace fulfillment API for the activated SaaS resource.",
-          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "SaaS subscription identifier (GUID) issued by the Azure Marketplace fulfillment API for the activated SaaS resource."
         }
       },
       "allOf": [
@@ -1875,7 +1878,15 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Azure resource ID of the Marketplace SaaS resource."
+          "format": "arm-id",
+          "description": "Azure resource ID of the Marketplace SaaS resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.SaaS/resources"
+              }
+            ]
+          }
         },
         "mpId": {
           "type": "string",

@@ -347,7 +347,11 @@ model WorkspaceDetailPartnerProperties {
 @added(Versions.v2026_07_01_preview)
 model WorkspaceMarketplaceDetails {
   /** Azure resource ID of the Marketplace SaaS resource. */
-  resourceId: string;
+  resourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.SaaS/resources";
+    }
+  ]>;
 
   /** Globally unique Marketplace SaaS identifier used for billing. */
   mpId: string;
@@ -519,8 +523,7 @@ model WorkspaceSaaSData {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "For backward compatibility."
 model ActivateSaaSParameterRequest {
   /** SaaS subscription identifier (GUID) issued by the Azure Marketplace fulfillment API. */
-  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  saasGuid: string;
+  saasGuid: uuid;
 
   /** Publisher Id for the marketplace offer. */
   publisherId: string;
@@ -533,8 +536,7 @@ model ActivateSaaSParameterRequest {
 model SaaSResourceDetailsResponse
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /** SaaS subscription identifier (GUID) issued by the Azure Marketplace fulfillment API for the activated SaaS resource. */
-  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  saasId?: string;
+  saasId?: uuid;
 }
 
 /** Individual SaaS resource linked to the Organization. */

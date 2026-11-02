@@ -16,8 +16,8 @@ namespace Kore.AgentPlatform;
  * An Organization resource in the Kore.AgentPlatform provider.
  *
  * Top-level tracked ARM resource. Each Organization is provisioned with a default
- * Workspace atomically; additional Workspaces are managed via the
- * `createWorkspace` and `deleteWorkspace` actions defined below.
+ * Workspace atomically; additional Workspaces are managed through the standard
+ * create, update, and delete operations on the Workspace child resource.
  */
 model OrganizationResource
   is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
