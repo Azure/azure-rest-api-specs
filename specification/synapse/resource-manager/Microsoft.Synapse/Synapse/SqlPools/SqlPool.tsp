@@ -96,23 +96,27 @@ interface SqlPools {
   /**
    * Pause a SQL pool
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The published 202 response returns the SQL pool."
   pause is SqlPoolOps.ActionAsync<
     SqlPool,
     void,
     ArmResponse<SqlPool>,
     LroHeaders = ArmLroLocationHeader<FinalResult = SqlPool> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResponse<SqlPool> | SqlPoolAcceptedResponse
   >;
 
   /**
    * Resume a SQL pool
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The published 202 response returns the SQL pool."
   resume is SqlPoolOps.ActionAsync<
     SqlPool,
     void,
     ArmResponse<SqlPool>,
     LroHeaders = ArmLroLocationHeader<FinalResult = SqlPool> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResponse<SqlPool> | SqlPoolAcceptedResponse
   >;
 
   /**
@@ -321,4 +325,16 @@ model SqlPoolNotFoundResponse {
   /** The 404 status code. */
   @statusCode
   _: 404;
+}
+
+// The published 202 for pause/resume returns the SQL pool body.
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Response description comes from the template."
+model SqlPoolAcceptedResponse is ArmAcceptedLroResponse<
+  "Resource operation accepted.",
+  ArmLroLocationHeader<FinalResult = SqlPool> &
+    Azure.Core.Foundations.RetryAfterHeader
+> {
+  /** The SQL pool. */
+  @bodyRoot
+  body: SqlPool;
 }
