@@ -27,6 +27,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Synapse Analytics management API for Apache Spark (big data) pools, workspace libraries and Spark configurations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The shared Microsoft.Synapse operations endpoint is defined once, in the Synapse Workspaces project."
 @armProviderNamespace("Microsoft.Synapse")
 @service(#{ title: "SynapseManagementClient" })
 @versioned(Versions)

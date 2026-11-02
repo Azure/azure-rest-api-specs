@@ -23,6 +23,7 @@ model LibraryResource is Azure.ResourceManager.ProxyResource<
     SegmentName = "libraries",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "EntityTagProperty models the read-only etag that the published library resource already returns."
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 

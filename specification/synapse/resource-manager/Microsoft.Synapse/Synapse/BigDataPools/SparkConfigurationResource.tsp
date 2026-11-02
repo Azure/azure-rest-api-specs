@@ -23,6 +23,7 @@ model SparkConfigurationResource is Azure.ResourceManager.ProxyResource<
     SegmentName = "sparkconfigurations",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "EntityTagProperty models the read-only etag that the published Spark configuration resource already returns."
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
