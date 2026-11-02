@@ -19,6 +19,7 @@ model ArtifactUploadUrlResponse {
   path: string;
 
   @doc("URL for uploading artifact content.")
+  @secret
   uploadUrl: url;
 
   @doc("Expiration time for the upload URL.")
@@ -66,6 +67,7 @@ model ArtifactDownloadUrlResponse {
   path: string;
 
   @doc("URL for downloading artifact content.")
+  @secret
   downloadUrl: url;
 
   @doc("Expiration time for the download URL.")
