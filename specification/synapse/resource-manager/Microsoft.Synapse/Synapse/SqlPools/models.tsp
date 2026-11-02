@@ -696,16 +696,16 @@ enum SecurityAlertPolicyState {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum VulnerabilityAssessmentPolicyBaselineName {
+union VulnerabilityAssessmentPolicyBaselineName {
   /**
    * master
    */
-  master,
+  master: "master",
 
   /**
    * default
    */
-  default,
+  default: "default",
 }
 
 /**
