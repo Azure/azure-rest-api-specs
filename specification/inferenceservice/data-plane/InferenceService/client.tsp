@@ -43,3 +43,4 @@ using Azure.Data.AI;
   "csharp"
 );
 @@clientName(MetaResult, "SemanticRerankingMetadata", "csharp");
+@@clientName(SemanticRerankingInferenceResult.meta, "metadata", "csharp");
