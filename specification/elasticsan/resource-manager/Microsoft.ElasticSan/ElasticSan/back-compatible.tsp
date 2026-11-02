@@ -120,6 +120,7 @@ using Microsoft.ElasticSan;
 
 @@clientName(`x-ms-delete-snapshots`, "XMsDeleteSnapshots", "python");
 @@clientName(`x-ms-force-delete`, "XMsForceDelete", "python");
+@@clientName(`x-ms-delete-clones`, "XMsDeleteClones", "python");
 @@clientName(
   `x-ms-access-soft-deleted-resources`,
   "XMsAccessSoftDeletedResources",
