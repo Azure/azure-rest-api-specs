@@ -10,7 +10,7 @@ namespace Azure.AI.Projects;
 
 /**
  * Compute primitives for hosted agent sessions: inspect, restart, run commands in, stream logs from,
- * expose ports of, and read policies of the compute behind a session.
+ * expose ports of, and read the egress policy of the compute behind a session.
  *
  * Every operation requires the `Foundry-Features: SessionCompute=V1Preview` header. Only the
  * `default` compute exists today. Exec and port operations also require the agent version to opt in
@@ -56,8 +56,8 @@ interface AgentSessionComputes {
 
   /**
    * Restarts a session compute: a session stop followed by a resume, addressed at the compute.
-   * Session identity and files survive; in-memory process state does not. Exposed ports and the
-   * lifecycle-policy override are instance-scoped and are dropped.
+   * Session identity and files survive; in-memory process state does not. Exposed ports are
+   * instance-scoped and are dropped.
    */
   @summary("Restart a session compute")
   @post
@@ -198,42 +198,6 @@ interface AgentSessionComputes {
     FoundryFeaturesOptInKeys.session_compute_v1_preview,
     SessionComputePortPathParams,
     NoContentResponse
-  >;
-
-  /**
-   * Retrieves the effective lifecycle (idle and auto-suspend) policy of a session compute.
-   */
-  @summary("Get the lifecycle policy of a session compute")
-  @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/lifecycle-policy")
-  @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-  getSessionComputeLifecyclePolicy is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.session_compute_v1_preview,
-    SessionComputePathParams,
-    SessionComputeLifecyclePolicy
-  >;
-
-  /**
-   * Overrides the idle timeout of a session compute. Requires `capabilities.lifecycle_policy_write = true`.
-   * Only `idle_timeout_seconds` is writable, within `limits`. The override applies to this compute only
-   * and does not change the agent definition.
-   */
-  @summary("Override the idle timeout of a session compute")
-  @patch(#{ implicitOptionality: false })
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/lifecycle-policy")
-  @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-  updateSessionComputeLifecyclePolicy is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.session_compute_v1_preview,
-    {
-      ...SessionComputePathParams;
-
-      /** The content type of the request body. */
-      @header("Content-Type") contentType: "application/json";
-
-      /** The lifecycle policy override. */
-      @body body: SessionComputeLifecyclePolicyUpdate;
-    },
-    SessionComputeLifecyclePolicy
   >;
 
   /**

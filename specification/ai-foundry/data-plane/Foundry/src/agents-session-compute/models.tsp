@@ -92,7 +92,7 @@ union SessionComputeState {
 
 @doc("""
   The operations available on a session compute. Combines provider support with the agent version opt-in
-  (`definition.compute_primitives`) for `exec` and `ports`. Lifecycle-policy writes need no definition opt-in.
+  (`definition.compute_primitives`) for `exec` and `ports`.
   Clients should branch on these values rather than on `provider`.
   """)
 @removed(Versions.v1)
@@ -102,9 +102,6 @@ model SessionComputeCapabilities {
 
   @doc("Whether ports can be exposed and proxied.")
   ports: boolean;
-
-  @doc("Whether the lifecycle policy can be overridden through `PATCH lifecycle-policy`.")
-  lifecycle_policy_write: boolean;
 }
 
 @doc("""
@@ -354,141 +351,6 @@ model SessionComputePortList {
 
   @doc("True when more items follow; pass the last item's `port` as `after`.")
   has_more: boolean;
-}
-
-// ---------------------------------------------------------------------------
-// Lifecycle policy
-// ---------------------------------------------------------------------------
-
-@doc("The source of the requested idle timeout.")
-@removed(Versions.v1)
-union SessionComputeLifecycleSource {
-  string,
-
-  @doc("The platform default.")
-  platform_default: "platform_default",
-
-  @doc("The agent version's `session_configuration`.")
-  agent_definition: "agent_definition",
-}
-
-@doc("Whether the effective lifecycle policy could be read from the provider.")
-@removed(Versions.v1)
-union SessionComputeLifecycleEffectiveStatus {
-  string,
-
-  @doc("The effective policy was read from the provider.")
-  provider: "provider",
-
-  @doc("The effective policy is unavailable.")
-  unavailable: "unavailable",
-}
-
-@doc("How a compute is suspended.")
-@removed(Versions.v1)
-union SessionComputeSuspendMode {
-  string,
-
-  @doc("State is persisted to disk.")
-  disk: "disk",
-
-  @doc("Memory state is preserved.")
-  memory: "memory",
-}
-
-@doc("The requested lifecycle settings of a session compute.")
-@removed(Versions.v1)
-model SessionComputeLifecycleRequested {
-  @doc("The requested idle timeout, in seconds.")
-  idle_timeout_seconds: int32;
-
-  @doc("Where the requested idle timeout comes from.")
-  source: SessionComputeLifecycleSource;
-}
-
-@doc("The lifecycle settings the provider is enforcing for a session compute.")
-@removed(Versions.v1)
-model SessionComputeLifecycleEffective {
-  @doc("Whether the provider auto-suspends the compute when idle.")
-  auto_suspend_enabled: boolean;
-
-  @doc("The idle timeout, in seconds, enforced by the provider.")
-  idle_timeout_seconds?: int32 | null;
-
-  @doc("How the compute is suspended.")
-  suspend_mode?: SessionComputeSuspendMode | null;
-
-  @doc("Whether the provider auto-deletes the compute.")
-  auto_delete_enabled: boolean;
-
-  @doc("The auto-delete interval, in seconds.")
-  auto_delete_interval_seconds?: int64 | null;
-}
-
-@doc("The allowed range for a session compute idle timeout override.")
-@removed(Versions.v1)
-model SessionComputeLifecycleLimits {
-  @doc("The minimum idle timeout, in seconds.")
-  @example(120)
-  min_idle_timeout_seconds: int32;
-
-  @doc("The maximum idle timeout, in seconds.")
-  @example(14400)
-  max_idle_timeout_seconds: int32;
-}
-
-@doc("The lifetime of the session that owns a compute.")
-@removed(Versions.v1)
-model SessionComputeSessionLifetime {
-  @doc("The Unix timestamp (in seconds) when the session expires.")
-  @encode("unixTimestamp", int64)
-  expires_at?: utcDateTime | null;
-
-  @doc("The Unix timestamp (in seconds) when the session was last accessed.")
-  @encode("unixTimestamp", int64)
-  last_accessed_at: utcDateTime;
-
-  @doc("Whether activity extends the session lifetime. Always `true`.")
-  extends_on_activity: boolean;
-}
-
-@doc("The lifecycle (idle and auto-suspend) policy of a session compute.")
-@extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-@removed(Versions.v1)
-model SessionComputeLifecyclePolicy {
-  @doc("The object type, which is always `session.compute.lifecycle_policy`.")
-  object: "session.compute.lifecycle_policy";
-
-  @doc("The compute identifier.")
-  compute_id: string;
-
-  @doc("The requested lifecycle settings.")
-  requested: SessionComputeLifecycleRequested;
-
-  @doc("What the provider is enforcing; `null` when `effective_status` is `unavailable`.")
-  effective?: SessionComputeLifecycleEffective | null;
-
-  @doc("Whether the effective policy could be read from the provider.")
-  effective_status: SessionComputeLifecycleEffectiveStatus;
-
-  @doc("The allowed range for an idle timeout override.")
-  limits: SessionComputeLifecycleLimits;
-
-  @doc("The lifetime of the owning session.")
-  session_lifetime: SessionComputeSessionLifetime;
-
-  @doc("Whether the policy can be overridden. Mirrors `capabilities.lifecycle_policy_write`.")
-  writable: boolean;
-}
-
-@doc("Request to override the idle timeout of a session compute.")
-@removed(Versions.v1)
-model SessionComputeLifecyclePolicyUpdate {
-  @doc("Seconds of inactivity before the provider auto-suspends the compute.")
-  @minValue(120)
-  @maxValue(14400)
-  @example(3600)
-  idle_timeout_seconds: int32;
 }
 
 // ---------------------------------------------------------------------------

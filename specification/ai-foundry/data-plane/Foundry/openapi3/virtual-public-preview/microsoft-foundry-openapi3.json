@@ -6422,211 +6422,6 @@
         }
       }
     },
-    "/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/lifecycle-policy": {
-      "get": {
-        "operationId": "AgentSessionComputes_getSessionComputeLifecyclePolicy",
-        "summary": "Get the lifecycle policy of a session compute",
-        "description": "Retrieves the effective lifecycle (idle and auto-suspend) policy of a session compute.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "SessionCompute=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the hosted agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID, as returned by the session create operation.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "compute_id",
-            "in": "path",
-            "required": true,
-            "description": "The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.\nKept as an open string so that clients keep working when sessions support more than one compute.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SessionComputeLifecyclePolicy"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Computes"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "SessionCompute=V1Preview"
-          ]
-        }
-      },
-      "patch": {
-        "operationId": "AgentSessionComputes_updateSessionComputeLifecyclePolicy",
-        "summary": "Override the idle timeout of a session compute",
-        "description": "Overrides the idle timeout of a session compute. Requires `capabilities.lifecycle_policy_write = true`.\nOnly `idle_timeout_seconds` is writable, within `limits`. The override applies to this compute only\nand does not change the agent definition.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "SessionCompute=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the hosted agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID, as returned by the session create operation.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "compute_id",
-            "in": "path",
-            "required": true,
-            "description": "The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.\nKept as an open string so that clients keep working when sessions support more than one compute.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SessionComputeLifecyclePolicy"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Computes"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SessionComputeLifecyclePolicyUpdate"
-              }
-            }
-          },
-          "description": "The lifecycle policy override."
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "SessionCompute=V1Preview"
-          ]
-        }
-      }
-    },
     "/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports": {
       "get": {
         "operationId": "AgentSessionComputes_listSessionComputePorts",
@@ -7278,7 +7073,7 @@
       "post": {
         "operationId": "AgentSessionComputes_restartSessionCompute",
         "summary": "Restart a session compute",
-        "description": "Restarts a session compute: a session stop followed by a resume, addressed at the compute.\nSession identity and files survive; in-memory process state does not. Exposed ports and the\nlifecycle-policy override are instance-scoped and are dropped.",
+        "description": "Restarts a session compute: a session stop followed by a resume, addressed at the compute.\nSession identity and files survive; in-memory process state does not. Exposed ports are\ninstance-scoped and are dropped.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -101744,8 +101539,7 @@
         "type": "object",
         "required": [
           "exec",
-          "ports",
-          "lifecycle_policy_write"
+          "ports"
         ],
         "properties": {
           "exec": {
@@ -101755,13 +101549,9 @@
           "ports": {
             "type": "boolean",
             "description": "Whether ports can be exposed and proxied."
-          },
-          "lifecycle_policy_write": {
-            "type": "boolean",
-            "description": "Whether the lifecycle policy can be overridden through `PATCH lifecycle-policy`."
           }
         },
-        "description": "The operations available on a session compute. Combines provider support with the agent version opt-in\n(`definition.compute_primitives`) for `exec` and `ports`. Lifecycle-policy writes need no definition opt-in.\nClients should branch on these values rather than on `provider`."
+        "description": "The operations available on a session compute. Combines provider support with the agent version opt-in\n(`definition.compute_primitives`) for `exec` and `ports`.\nClients should branch on these values rather than on `provider`."
       },
       "SessionComputeEgressAction": {
         "anyOf": [
@@ -101981,215 +101771,6 @@
           ]
         }
       },
-      "SessionComputeLifecycleEffective": {
-        "type": "object",
-        "required": [
-          "auto_suspend_enabled",
-          "auto_delete_enabled"
-        ],
-        "properties": {
-          "auto_suspend_enabled": {
-            "type": "boolean",
-            "description": "Whether the provider auto-suspends the compute when idle."
-          },
-          "idle_timeout_seconds": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "format": "int32"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The idle timeout, in seconds, enforced by the provider."
-          },
-          "suspend_mode": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/SessionComputeSuspendMode"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "How the compute is suspended."
-          },
-          "auto_delete_enabled": {
-            "type": "boolean",
-            "description": "Whether the provider auto-deletes the compute."
-          },
-          "auto_delete_interval_seconds": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "format": "int64"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The auto-delete interval, in seconds."
-          }
-        },
-        "description": "The lifecycle settings the provider is enforcing for a session compute."
-      },
-      "SessionComputeLifecycleEffectiveStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "provider",
-              "unavailable"
-            ]
-          }
-        ],
-        "description": "Whether the effective lifecycle policy could be read from the provider."
-      },
-      "SessionComputeLifecycleLimits": {
-        "type": "object",
-        "required": [
-          "min_idle_timeout_seconds",
-          "max_idle_timeout_seconds"
-        ],
-        "properties": {
-          "min_idle_timeout_seconds": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The minimum idle timeout, in seconds.",
-            "examples": [
-              120
-            ]
-          },
-          "max_idle_timeout_seconds": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum idle timeout, in seconds.",
-            "examples": [
-              14400
-            ]
-          }
-        },
-        "description": "The allowed range for a session compute idle timeout override."
-      },
-      "SessionComputeLifecyclePolicy": {
-        "type": "object",
-        "required": [
-          "object",
-          "compute_id",
-          "requested",
-          "effective_status",
-          "limits",
-          "session_lifetime",
-          "writable"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "session.compute.lifecycle_policy"
-            ],
-            "description": "The object type, which is always `session.compute.lifecycle_policy`."
-          },
-          "compute_id": {
-            "type": "string",
-            "description": "The compute identifier."
-          },
-          "requested": {
-            "$ref": "#/components/schemas/SessionComputeLifecycleRequested",
-            "description": "The requested lifecycle settings."
-          },
-          "effective": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/SessionComputeLifecycleEffective"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "What the provider is enforcing; `null` when `effective_status` is `unavailable`."
-          },
-          "effective_status": {
-            "$ref": "#/components/schemas/SessionComputeLifecycleEffectiveStatus",
-            "description": "Whether the effective policy could be read from the provider."
-          },
-          "limits": {
-            "$ref": "#/components/schemas/SessionComputeLifecycleLimits",
-            "description": "The allowed range for an idle timeout override."
-          },
-          "session_lifetime": {
-            "$ref": "#/components/schemas/SessionComputeSessionLifetime",
-            "description": "The lifetime of the owning session."
-          },
-          "writable": {
-            "type": "boolean",
-            "description": "Whether the policy can be overridden. Mirrors `capabilities.lifecycle_policy_write`."
-          }
-        },
-        "description": "The lifecycle (idle and auto-suspend) policy of a session compute.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "SessionCompute=V1Preview"
-          ]
-        }
-      },
-      "SessionComputeLifecyclePolicyUpdate": {
-        "type": "object",
-        "required": [
-          "idle_timeout_seconds"
-        ],
-        "properties": {
-          "idle_timeout_seconds": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 120,
-            "maximum": 14400,
-            "description": "Seconds of inactivity before the provider auto-suspends the compute.",
-            "examples": [
-              3600
-            ]
-          }
-        },
-        "description": "Request to override the idle timeout of a session compute."
-      },
-      "SessionComputeLifecycleRequested": {
-        "type": "object",
-        "required": [
-          "idle_timeout_seconds",
-          "source"
-        ],
-        "properties": {
-          "idle_timeout_seconds": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The requested idle timeout, in seconds."
-          },
-          "source": {
-            "$ref": "#/components/schemas/SessionComputeLifecycleSource",
-            "description": "Where the requested idle timeout comes from."
-          }
-        },
-        "description": "The requested lifecycle settings of a session compute."
-      },
-      "SessionComputeLifecycleSource": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "platform_default",
-              "agent_definition"
-            ]
-          }
-        ],
-        "description": "The source of the requested idle timeout."
-      },
       "SessionComputeList": {
         "type": "object",
         "required": [
@@ -102400,37 +101981,6 @@
         "additionalProperties": {},
         "description": "A flat bag of provider-specific options. At most 16 keys, each 1–64 characters. Keys are validated\nfail-closed against the provider's known-key set before any provider call; an unknown key returns\n`400 compute_invalid_provider_options`. Every known-key set is empty today. Values are never echoed in errors."
       },
-      "SessionComputeSessionLifetime": {
-        "type": "object",
-        "required": [
-          "last_accessed_at",
-          "extends_on_activity"
-        ],
-        "properties": {
-          "expires_at": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "format": "unixtime"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The Unix timestamp (in seconds) when the session expires."
-          },
-          "last_accessed_at": {
-            "type": "integer",
-            "format": "unixtime",
-            "description": "The Unix timestamp (in seconds) when the session was last accessed."
-          },
-          "extends_on_activity": {
-            "type": "boolean",
-            "description": "Whether activity extends the session lifetime. Always `true`."
-          }
-        },
-        "description": "The lifetime of the session that owns a compute."
-      },
       "SessionComputeState": {
         "anyOf": [
           {
@@ -102449,21 +101999,6 @@
           }
         ],
         "description": "The state of a session compute. Extensible; clients must tolerate unknown values."
-      },
-      "SessionComputeSuspendMode": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "disk",
-              "memory"
-            ]
-          }
-        ],
-        "description": "How a compute is suspended."
       },
       "SessionComputeTrafficInspection": {
         "anyOf": [
