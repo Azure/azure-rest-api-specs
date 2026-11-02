@@ -899,12 +899,129 @@ void test("blocked inference makes scoped safety not assessed", () => {
   });
 
   assert.equal(assessment.dimensions.rest.status, "not-assessed");
+  assert.equal(assessment.dimensions.rest.verdict, "unknown");
+  assert.equal(assessment.dimensions.rest.coverage, "partial");
   assert.equal(assessment.dimensions.downstream.status, "not-assessed");
+  assert.equal(assessment.dimensions.downstream.verdict, "unknown");
+  assert.equal(assessment.dimensions.downstream.coverage, "blocked");
   assert.equal(assessment.safety.status, "not-assessed");
+  assert.equal(assessment.safety.verdict, "unknown");
+  assert.equal(assessment.safety.coverage, "partial");
   const blocker = assessment.blockers[0];
   assert.ok(blocker && typeof blocker === "object" && "code" in blocker);
   assert.equal(blocker.code, "inference-blocked");
   assert.deepEqual(validateAssessment(assessment), []);
+});
+
+void test("analyzer evidence blockers preserve confirmed compatibility findings", (context) => {
+  for (const decision of ["approve", "reject"] as const) {
+    const work = fixture();
+    context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
+    const file = path.join(work, "dimensions", "rest-breaking-input.json");
+    const rest = readJson(file) as import("../scripts/runtime-types.ts").BreakingAnalysis;
+    rest.blockers = [
+      {
+        code: "autorest-contract-unresolved",
+        message: "A changed common-schema reference has no effective definition.",
+      },
+    ];
+    writeJson(file, rest);
+    const assessment = assembleTestAssessment({
+      work,
+      judgment: {
+        schemaVersion: 1,
+        semanticIntents: [
+          {
+            reviewUnitId: "semantic-1",
+            title: "Change Widget",
+            summary: "Change the Widget model.",
+          },
+        ],
+        restDecisions: [
+          {
+            candidateId: "rest-1",
+            decision,
+            ...(decision === "approve" ? { severity: "high" as const } : {}),
+            rationale: "Judge the represented candidate independently of the unresolved scope.",
+          },
+        ],
+        downstreamDecisions: [],
+        complianceDecisions: [],
+        overallConfidence: "low",
+        blockers: [],
+      },
+    });
+    assert.equal(
+      assessment.dimensions.rest.status,
+      decision === "approve" ? "failed" : "not-assessed",
+    );
+    assert.equal(assessment.dimensions.rest.verdict, decision === "approve" ? "failed" : "unknown");
+    assert.equal(assessment.dimensions.rest.coverage, "partial");
+    assert.equal(assessment.dimensions.rest.blockers?.length, 1);
+    assert.equal(assessment.dimensions.rest.findings.length, decision === "approve" ? 1 : 0);
+    assert.equal(assessment.safety.status, decision === "approve" ? "failed" : "not-assessed");
+    assert.equal(assessment.safety.verdict, decision === "approve" ? "failed" : "unknown");
+    assert.equal(assessment.safety.coverage, "partial");
+    assert.deepEqual(validateAssessment(assessment), []);
+  }
+});
+
+void test("dimension-scoped blockers do not suppress unrelated compatibility coverage", (context) => {
+  for (const decision of ["approve", "reject"] as const) {
+    const work = fixture();
+    context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
+    const input = inferenceModelInput();
+    input.inferenceRequests[0].allowedDimensions = ["downstream"];
+    writeJson(path.join(work, "model-input.json"), input);
+    writeJson(path.join(work, "inference.json"), {
+      schemaVersion: 1,
+      results: [
+        {
+          requestId: "inference-request-1",
+          reviewUnitId: "semantic-1",
+          hunkId: "hunk-1",
+          decision: "blocked",
+          rationale: "Generated language-specific SDK evidence is unavailable.",
+          candidates: [],
+        },
+      ],
+    });
+    const assessment = assembleTestAssessment({
+      work,
+      judgment: {
+        schemaVersion: 1,
+        semanticIntents: [
+          {
+            reviewUnitId: "semantic-1",
+            title: "Change Widget",
+            summary: "Change the wire contract and SDK configuration.",
+          },
+        ],
+        restDecisions: [
+          {
+            candidateId: "rest-1",
+            decision,
+            ...(decision === "approve" ? { severity: "high" as const } : {}),
+            rationale: "Assess the wire contract independently of missing SDK evidence.",
+          },
+        ],
+        downstreamDecisions: [],
+        complianceDecisions: [],
+        overallConfidence: "low",
+        blockers: [],
+      },
+    });
+    assert.equal(assessment.dimensions.rest.status, decision === "approve" ? "failed" : "passed");
+    assert.equal(assessment.dimensions.rest.coverage, "complete");
+    assert.deepEqual(assessment.dimensions.rest.blockers, []);
+    assert.equal(assessment.dimensions.downstream.status, "not-assessed");
+    assert.equal(assessment.dimensions.downstream.verdict, "unknown");
+    assert.equal(assessment.dimensions.downstream.coverage, "blocked");
+    assert.equal(assessment.safety.status, decision === "approve" ? "failed" : "not-assessed");
+    assert.equal(assessment.safety.verdict, decision === "approve" ? "failed" : "unknown");
+    assert.equal(assessment.safety.coverage, "partial");
+    assert.deepEqual(validateAssessment(assessment), []);
+  }
 });
 
 void test("assembler requires and joins active Azure Guidelines evidence", () => {
