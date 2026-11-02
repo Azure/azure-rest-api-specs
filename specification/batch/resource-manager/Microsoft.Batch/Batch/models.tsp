@@ -3601,6 +3601,7 @@ model StartTask {
    */
   @summary("A list of files that the Batch service will download to the compute node before running the command line.")
   @identifiers(#["httpUrl"])
+  @typeChangedFrom(Versions.v2026_10_01, Historical.ResourceFile[])
   resourceFiles?: ResourceFile[];
 
   /**
@@ -3647,14 +3648,14 @@ model ResourceFile {
   autoStorageContainerName?: string;
 
   /**
-   * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access.
+   * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. Do not embed credentials in the URL. For Azure Blob Storage, use a managed identity with read and list permissions on the container and specify it using identityReference.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @summary("The URL of the blob container within Azure Blob Storage.")
   storageContainerUrl?: string;
 
   /**
-   * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access.
+   * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. Do not embed credentials in the URL. For Azure Blob Storage, use a managed identity with read permission on the blob and specify it using identityReference.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @summary("The URL of the file to download.")
@@ -3683,6 +3684,19 @@ model ResourceFile {
    */
   @summary("The reference to the user assigned identity to use to access Azure Blob Storage specified by storageContainerUrl or httpUrl")
   identityReference?: ComputeNodeIdentityReference;
+}
+
+namespace Historical {
+  model ResourceFile is Microsoft.Batch.ResourceFile;
+
+  @@doc(
+    ResourceFile.storageContainerUrl,
+    "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access."
+  );
+  @@doc(
+    ResourceFile.httpUrl,
+    "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access."
+  );
 }
 
 /**
