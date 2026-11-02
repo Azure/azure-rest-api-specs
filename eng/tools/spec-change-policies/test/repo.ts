@@ -2,10 +2,10 @@ import { execa } from "execa";
 import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "pathe";
-import { afterEach } from "vitest";
+import { afterAll } from "vitest";
 
 const directories: string[] = [];
-afterEach(async () => {
+afterAll(async () => {
   await Promise.all(
     directories.splice(0).map((directory) => rm(directory, { recursive: true, force: true })),
   );

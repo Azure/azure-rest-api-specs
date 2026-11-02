@@ -19,9 +19,19 @@ async function checkAllUnder(
     if ((await stat(resolve(directory, file))).isFile()) paths.push(resolve(directory, file));
   }
   const firstSpec = paths.find((path) => path.split("/").includes("specification"));
-  const root = firstSpec
+  const fixtureRoot = firstSpec
     ? firstSpec.split("/").slice(0, firstSpec.split("/").lastIndexOf("specification")).join("/")
     : directory;
+  const { root } = await createRepo(
+    {},
+    Object.fromEntries(
+      await Promise.all(
+        paths.map(
+          async (path) => [relative(fixtureRoot, path), await readFile(path, "utf8")] as const,
+        ),
+      ),
+    ),
+  );
   const messages: string[] = [];
   const outputDirectory = captureGithubOutput
     ? await mkdtemp(join(tmpdir(), "typespec-requirement-"))
@@ -35,10 +45,10 @@ async function checkAllUnder(
     const result = await checkRequirements(
       {
         root,
-        baseCommitish: "base",
-        headCommitish: "head",
+        baseCommitish: "HEAD^",
+        headCommitish: "HEAD",
         changes: {
-          additions: paths.map((path) => relative(root, path)),
+          additions: paths.map((path) => relative(fixtureRoot, path)),
           modifications: [],
           deletions: [],
           renames: [],
@@ -352,7 +362,7 @@ test.concurrent.each([
   );
 
   expect(stdout).toContain("was not generated from TypeSpec");
-  expect(stdout).toContain("'main' contains path");
+  expect(stdout).toContain("already exists and is not required to use TypeSpec");
   expect(stdout.toLowerCase()).toContain("warning");
   expect(stdout).toContain("are required to convert");
   expect(exitCode).toBe(0);
@@ -377,6 +387,67 @@ test.concurrent("Hand-written, unexpected response checking main", async ({ expe
 const generatedSwagger =
   '{"info":{"x-typespec-generated":[{"emitter":"@azure-tools/typespec-autorest"}]}}';
 const migratedService = "migrated/resource-manager/Microsoft.Migrated/Service";
+
+test.each([false, true])(
+  "Allows edits to an API version on the comparison base but not public main (suppressed=%s)",
+  async (suppressed) => {
+    const service = `specification/${migratedService}`;
+    const file = `${service}/preview/2020-11-01-preview/legacy.json`;
+    const { root } = await createRepo(
+      {
+        [file]: '{"paths":{"/resources":{"get":{}}}}',
+        [`${service}/stable/2026-01-01/generated.json`]: generatedSwagger,
+        ...(suppressed
+          ? {
+              [`${service}/suppressions.yaml`]:
+                "- tool: TypeSpecRequirement\n  path: ./preview/2020-11-01-preview/*.json\n  reason: Legacy exemption\n",
+            }
+          : {}),
+      },
+      { [file]: '{"paths":{"/resources":{"get":{"deprecated":true}}}}' },
+    );
+    const checkUpstream = vi.fn(() => Promise.resolve(404));
+    const result = await validatePr({ cwd: root, base: "HEAD^", checkUpstream });
+
+    expect(result.success).toBe(true);
+    expect(result.brownfield).toBe(!suppressed);
+    expect(checkUpstream).not.toHaveBeenCalled();
+  },
+);
+
+test("Allows new Swagger files in an existing base version without exempting a new version", async () => {
+  const service = `specification/${migratedService}`;
+  const existingVersion = `${service}/preview/2020-11-01-preview`;
+  const newVersion = `${service}/preview/2027-01-01-preview`;
+  const newFile = `${newVersion}/new.json`;
+  const { root } = await createRepo(
+    {
+      [`${existingVersion}/legacy.json`]: "{}",
+      [`${service}/stable/2026-01-01/generated.json`]: generatedSwagger,
+      [`${service}/suppressions.yaml`]:
+        "- tool: TypeSpecRequirement\n  path: ./preview/2027-01-01-preview/*.json\n  reason: Legacy exemption\n",
+    },
+    {
+      [`${existingVersion}/additional.json`]: "{}",
+      [newFile]: "{}",
+    },
+  );
+  const checkUpstream = vi.fn(() => Promise.resolve(404));
+  const result = await validatePr({ cwd: root, base: "HEAD^", checkUpstream });
+
+  expect(result.success).toBe(false);
+  expect(result.brownfield).toBe(true);
+  expect(result.diagnostics.filter(({ severity }) => severity === "error")).toEqual([
+    expect.objectContaining({
+      code: "typespec-requirement",
+      path: newFile,
+      message: "OpenAPI was not generated from TypeSpec, and API version appears to be new",
+    }),
+  ]);
+  expect(checkUpstream.mock.calls).toEqual([
+    [`https://github.com/Azure/azure-rest-api-specs/tree/main/${newVersion}`],
+  ]);
+});
 
 test.concurrent.each([false, true])(
   "Preserves existing API-version behavior after migration (suppressed=%s)",
