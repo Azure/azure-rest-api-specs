@@ -490,13 +490,13 @@ interface AccountCostControls {
     Response = ArmResponse<AccountCostControl> & CostControlEtagHeader
   >;
 
-  /** Deletes an account-owned cost control synchronously. An existing legacy attachment must be removed before its control can be deleted. */
+  /** Deletes an account-owned cost control synchronously. */
   delete is ArmResourceDeleteSync<
     AccountCostControl,
     Parameters = CostControlIfMatchHeader
   >;
 
-  /** Lists account-owned cost controls using the budget representation. An unrepresentable legacy entry causes the complete list request to fail. */
+  /** Lists account-owned cost controls using the budget representation. */
   list is ArmResourceListByParent<
     AccountCostControl,
     Response = ArmResponse<CostControlListResult>
@@ -540,13 +540,13 @@ interface ProjectCostControls {
     Response = ArmResponse<ProjectCostControl> & CostControlEtagHeader
   >;
 
-  /** Deletes a project-owned cost control synchronously. An existing legacy attachment must be removed before its control can be deleted. */
+  /** Deletes a project-owned cost control synchronously. */
   delete is ArmResourceDeleteSync<
     ProjectCostControl,
     Parameters = CostControlIfMatchHeader
   >;
 
-  /** Lists project-owned cost controls using the budget representation. An unrepresentable legacy entry causes the complete list request to fail. */
+  /** Lists project-owned cost controls using the budget representation. */
   list is ArmResourceListByParent<
     ProjectCostControl,
     Response = ArmResponse<ProjectCostControlListResult> & CostControlEtagHeader
