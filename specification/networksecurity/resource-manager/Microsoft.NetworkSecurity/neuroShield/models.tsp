@@ -452,9 +452,15 @@ union NeuroShieldFindingStatus {
 /**
  * Properties of a finding resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Findings are immutable service-generated observations. Their operational lifecycle is represented by status and they do not have a separate ARM provisioning lifecycle."
 @added(Versions.v2026_10_01_preview)
 model NeuroShieldFindingProperties {
+  /**
+   * Provisioning state of the service-generated finding. A successfully materialized
+   * finding reports Succeeded, independently of its runtime operational status.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+
   /**
    * Common Vulnerabilities and Exposures (CVE) identifier associated with this finding.
    */
@@ -572,9 +578,15 @@ union NeuroShieldMitigationStatus {
 /**
  * Properties of a mitigation resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Mitigations are immutable service-generated recommendations. Their execution lifecycle is represented by status and they do not have a separate ARM provisioning lifecycle."
 @added(Versions.v2026_10_01_preview)
 model NeuroShieldMitigationProperties {
+  /**
+   * Provisioning state of the service-generated mitigation. A successfully materialized
+   * mitigation reports Succeeded, independently of its runtime execution or rollback status.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+
   /**
    * Resource identifier of the associated finding.
    */
@@ -717,9 +729,15 @@ model NeuroShieldSummary is Azure.ResourceManager.ProxyResource<
 /**
  * Aggregate fleet overview counts for a NeuroShield resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The summary is a read-only, service-computed singleton projection over the parent NeuroShield resource. It is never created, updated, or deleted and therefore has no ARM provisioning lifecycle."
 @added(Versions.v2026_10_01_preview)
 model NeuroShieldSummaryProperties {
+  /**
+   * Provisioning state of the computed summary resource. A successful read reports
+   * Succeeded; this does not represent the status of the findings or mitigations counted.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+
   /**
    * Number of protected resources.
    */

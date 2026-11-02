@@ -1608,6 +1608,37 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "NeuroShieldAgentHealth": {
       "type": "object",
       "description": "Approximate Neuron agent liveness projected onto a protected resource.",
@@ -1669,6 +1700,11 @@
       "type": "object",
       "description": "Properties of a finding resource.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the service-generated finding. A successfully materialized\nfinding reports Succeeded, independently of its runtime operational status.",
+          "readOnly": true
+        },
         "cveId": {
           "type": "string",
           "description": "Common Vulnerabilities and Exposures (CVE) identifier associated with this finding.",
@@ -1892,6 +1928,11 @@
       "type": "object",
       "description": "Properties of a mitigation resource.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the service-generated mitigation. A successfully materialized\nmitigation reports Succeeded, independently of its runtime execution or rollback status.",
+          "readOnly": true
+        },
         "findingId": {
           "type": "string",
           "format": "arm-id",
@@ -2383,6 +2424,11 @@
       "type": "object",
       "description": "Aggregate fleet overview counts for a NeuroShield resource.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the computed summary resource. A successful read reports\nSucceeded; this does not represent the status of the findings or mitigations counted.",
+          "readOnly": true
+        },
         "protectedCount": {
           "type": "integer",
           "format": "int32",

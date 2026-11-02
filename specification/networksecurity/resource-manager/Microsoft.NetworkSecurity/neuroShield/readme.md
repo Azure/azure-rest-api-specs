@@ -17,6 +17,22 @@ pnpm exec tsp compile . --warn-as-error
 Commit the generated files under `preview/2026-10-01-preview` together with the
 source changes. Do not edit the generated OpenAPI directly.
 
+### Service-generated resource availability
+
+The October contract includes optional, read-only `properties.provisioningState`
+on findings, mitigations, and the computed summary. A successfully materialized
+resource reports `Succeeded`. This state is independent of finding operational
+status and mitigation execution or rollback status: a queued or failed mitigation
+can still have provisioning state `Succeeded`. Each resource returned by a list
+or action carries the field inside its own `properties`, not on the list wrapper.
+Errors remain errors rather than successful resource responses.
+
+This schema change requires the corresponding resource-provider response change
+and matching private specification alignment before deployment. Those changes
+are not completed or deployed by this public specification update. Runtime
+verification through Azure Resource Manager and ARM/RPaaS reviewer confirmation
+remain required. The June API contract is unchanged.
+
 ## Getting Started
 
 ### Shared NetworkSecurity SDK packages
