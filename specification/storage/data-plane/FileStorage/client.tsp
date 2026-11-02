@@ -90,6 +90,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(ContentCrc64ResponseHeader.contentCrc64, bytes, "go");
 @@alternateType(DirectoryItem.name, string, "go");
 @@alternateType(FileItem.name, string, "go");
+@@alternateType(HardLink.fileName, string, "go");
 @@alternateType(FileChangeTimeResponseHeader.fileChangeTime, utcDateTime, "go");
 @@alternateType(
   FileCreationTimeResponseHeader.fileCreationTime,
@@ -222,30 +223,25 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   Directory.listFilesAndDirectoriesSegment,
-  "preserveContentTypeHeader",
+  "emitContentTypeHeader",
   true,
   "go"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Directory.listHandles, "preserveContentTypeHeader", true, "go");
+@@clientOption(Directory.listHandles, "emitContentTypeHeader", true, "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(
-  Storage.File.File.download,
-  "preserveContentTypeHeader",
-  true,
-  "go"
-);
+@@clientOption(Storage.File.File.download, "emitContentTypeHeader", true, "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   Storage.File.File.getProperties,
-  "preserveContentTypeHeader",
+  "emitContentTypeHeader",
   true,
   "go"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   Storage.File.File.listHandles,
-  "preserveContentTypeHeader",
+  "emitContentTypeHeader",
   true,
   "go"
 );
@@ -581,3 +577,15 @@ model DirectoryClientParameters {
   utcDateTime | null,
   "cpp"
 );
+
+// NFS List V2 Files and Directories is not yet exposed in the Go SDK.
+@@scope(FilesAndDirectoriesListSegment.symLinkItems, "!go");
+@@scope(FilesAndDirectoriesListSegment.blockDeviceItems, "!go");
+@@scope(FilesAndDirectoriesListSegment.charDeviceItems, "!go");
+@@scope(FilesAndDirectoriesListSegment.fifoItems, "!go");
+@@scope(FilesAndDirectoriesListSegment.socketItems, "!go");
+@@scope(DirectoryItem.linkCount, "!go");
+@@scope(FileItem.linkCount, "!go");
+@@scope(FileProperty.owner, "!go");
+@@scope(FileProperty.group, "!go");
+@@scope(FileProperty.fileMode, "!go");
