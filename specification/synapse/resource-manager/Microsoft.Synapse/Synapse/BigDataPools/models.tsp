@@ -290,6 +290,7 @@ model LibraryInfo {
   /**
    * Name of the library.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Published LibraryInfo schema (shared with the Synapse data plane) carries its own name and type inside the resource properties bag."
   name?: string;
 
   /**
@@ -312,6 +313,7 @@ model LibraryInfo {
   /**
    * Type of the library.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Published LibraryInfo schema (shared with the Synapse data plane) carries its own name and type inside the resource properties bag."
   type?: string;
 
   /**
