@@ -61,7 +61,11 @@ interface BigDataPoolResourceInfos {
     },
     Response =
       | ArmResourceUpdatedResponse<BigDataPoolResourceInfo>
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmAsyncOperationHeader<FinalResult = BigDataPoolResourceInfo> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
           @bodyRoot
           _: BigDataPoolResourceInfo;
         })
