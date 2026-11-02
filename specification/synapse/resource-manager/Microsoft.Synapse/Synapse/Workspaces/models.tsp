@@ -200,6 +200,7 @@ model WorkspaceProperties {
   /**
    * SQL administrator login password
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Like-for-like conversion: the published schema has no x-ms-secret on this property. Flagged for API review; adding @secret is a separate API change."
   sqlAdministratorLoginPassword?: string;
 
   /**
