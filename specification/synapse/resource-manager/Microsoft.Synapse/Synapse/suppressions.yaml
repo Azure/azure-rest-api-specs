@@ -30,3 +30,17 @@
   rules: [TypeSpecRequirement]
   paths: ["./stable/2021-06-01/*.json"]
   reason: Brownfield service not ready to migrate. Existing API version relocated to the unified folder structure without contract changes.
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services. The Synapse ARM SDK (package-composite-v2)
+    combines resources released under two API versions (2021-06-01 and 2021-06-01-preview),
+    so the TypeSpec conversion uses nested projects recombined by the root client.tsp,
+    following the Resource Graph and Application Insights layout.
+  rules: [FolderStructure]
+  paths:
+    - Workspaces
+    - SqlPools
+    - BigDataPools
+    - IntegrationRuntimes
+    - KustoPools
