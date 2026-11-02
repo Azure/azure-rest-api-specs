@@ -11872,7 +11872,7 @@ model MSDeployStatusProperties {
 }
 
 /** The types of artifacts supported by OneDeploy. */
-@added(Versions.v2026_07_15)
+@added(Versions.v2026_11_15)
 union OneDeployArtifactType {
   /** A Java web application archive. */
   War: "war",
@@ -11899,7 +11899,7 @@ union OneDeployArtifactType {
 }
 
 /** The properties of a OneDeploy deployment request. */
-@added(Versions.v2026_07_15)
+@added(Versions.v2026_11_15)
 model OneDeployRequestProperties {
   /** The URI of the package or file to deploy. */
   packageUri: url;
@@ -11912,8 +11912,8 @@ model OneDeployRequestProperties {
 }
 
 /** The request to deploy a package or file using OneDeploy. */
-@added(Versions.v2026_07_15)
-model OneDeployRequest {
+@added(Versions.v2026_11_15)
+model OneDeployContent {
   /** The deployment properties. */
   properties: OneDeployRequestProperties;
 }

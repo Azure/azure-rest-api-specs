@@ -1972,7 +1972,7 @@ interface WebApps {
   /**
    * Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site
    */
-  @added(Versions.v2026_07_15)
+  @added(Versions.v2026_11_15)
   @summary("Invoke onedeploy status API /api/deployments and gets the deployment status for the site")
   @get
   @action("extensions/onedeploy")
@@ -1987,13 +1987,13 @@ interface WebApps {
    * Description for Invoke the OneDeploy publish web app extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The service defines this as a legacy OneDeploy extension invocation over PUT, not an ARM resource create-or-replace operation; the documented contract is synchronous 200 OK with default error only."
-  @added(Versions.v2026_07_15)
+  @added(Versions.v2026_11_15)
   @summary("Invoke the OneDeploy publish web app extension.")
   @put
   @action("extensions/onedeploy")
   createOneDeployOperationSlot is WebAppOps.ActionSync<
     Site,
-    OneDeployRequest,
+    OneDeployContent,
     ArmResponse<unknown>,
     OverrideErrorType = DefaultErrorResponse
   >;
