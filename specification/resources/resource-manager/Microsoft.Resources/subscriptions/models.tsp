@@ -236,26 +236,6 @@ model CloudError {
 /**
  * Location list operation response.
  */
-// Version the response model to avoid duplicate paging annotations on one model.
-@renamedFrom(Versions.v2026_10_01, "LocationListResult")
-@removed(Versions.v2026_10_01)
-model LocationListResultLegacy {
-  /**
-   * An array of locations.
-   */
-  @pageItems
-  value?: Location[];
-
-  /**
-   * The URL to get the next set of results.
-   */
-  @nextLink
-  nextLink?: string;
-}
-
-/**
- * Location list operation response.
- */
 model LocationListResult {
   /**
    * An array of locations.
@@ -267,8 +247,7 @@ model LocationListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
-  nextLink?: url;
+  nextLink?: string;
 }
 
 /**

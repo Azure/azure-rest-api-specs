@@ -23,10 +23,6 @@ interface Subscriptions {
   @route("/subscriptions/{subscriptionId}/locations")
   @list
   @tag("Subscriptions")
-  @returnTypeChangedFrom(
-    Versions.v2026_10_01,
-    ArmResponse<LocationListResultLegacy> | CloudError
-  )
   listLocations(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
