@@ -169,6 +169,12 @@ retired workflow. They are always removed.
 
 ## Status contract
 
+The automated-review cap is 50 non-example files or 5,000 added+deleted lines under
+`specification/`. Files in an `examples` directory, including TypeSpec source examples and
+compiled Swagger examples, do not consume either limit but remain in review scope.
+A rename counts if either path is a non-example specification. GitHub's 3,000-file listing
+cap still applies to all PR files because a truncated list cannot prove full coverage.
+
 | State     | Description starts with    | Adds `ARMManualSignoffRequired`  |
 | --------- | -------------------------- | -------------------------------- |
 | `pending` | `ARM API semantic review`  | No                               |
