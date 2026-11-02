@@ -20,6 +20,11 @@ checkout; `--head` does not check out another revision.
 
 The checks cover:
 
+- **NoJavaScriptOrTypeScript:** additions and rename destinations under
+  `specification/` must not be JavaScript or TypeScript files (`.js`, `.ts`,
+  `.mjs`, `.cjs`, `.mts`, `.cts`, `.jsx`, or `.tsx`, case-insensitive, including
+  declaration files). Existing files may still be edited, deleted, or moved out.
+  This policy cannot be suppressed.
 - **TypeSpec Requirement:** changed OpenAPI must follow the existing TypeSpec
   usage policy, and generated OpenAPI must have TypeSpec sources in its
   specification service area. Existing OpenAPI API-version directories are

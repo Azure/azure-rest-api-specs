@@ -20,6 +20,84 @@ const logger: ILogger = {
 };
 
 describe("PR policy runner", () => {
+  it("rejects JavaScript and TypeScript additions with a diagnostic for each file", async () => {
+    const files = [
+      "specification/script.js",
+      `${project}/script.ts`,
+      `${project}/script.mjs`,
+      `${project}/script.cjs`,
+      `${project}/script.mts`,
+      `${project}/script.cts`,
+      `${project}/component.jsx`,
+      `${project}/component.tsx`,
+      `${project}/types.d.ts`,
+      `${project}/UPPER.JS`,
+    ];
+    const { root } = await createRepo(
+      {},
+      Object.fromEntries(files.map((path) => [path, "export {};"])),
+    );
+    const result = await validatePr({ cwd: root, base: "HEAD^", logger });
+    expect(result.success).toBe(false);
+    expect(result.diagnostics).toHaveLength(files.length);
+    for (const path of files) {
+      expect(result.diagnostics).toContainEqual(
+        expect.objectContaining({
+          severity: "error",
+          code: "no-javascript-or-typescript",
+          path: join(root, path),
+        }),
+      );
+    }
+    expect(result.brownfield).toBe(false);
+  });
+
+  it("rejects renames into specification or to a script extension", async () => {
+    const moved = `${project}/moved.js`;
+    const renamed = `${project}/renamed.ts`;
+    const { root } = await createRepo(
+      {
+        "eng/script.js": "console.log('moved');",
+        [`${project}/script.txt`]: "console.log('renamed');",
+      },
+      {
+        "eng/script.js": null,
+        [moved]: "console.log('moved');",
+        [`${project}/script.txt`]: null,
+        [renamed]: "console.log('renamed');",
+      },
+    );
+    const result = await validatePr({ cwd: root, base: "HEAD^", logger });
+    expect(result.success).toBe(false);
+    expect(result.diagnostics.map(({ path }) => path).sort()).toEqual(
+      [join(root, moved), join(root, renamed)].sort(),
+    );
+  });
+
+  it("allows existing script edits, removals, moves out, and non-script additions", async () => {
+    const { root } = await createRepo(
+      {
+        [`${project}/existing.js`]: "export const version = 1;",
+        [`${project}/deleted.ts`]: "export {};",
+        [`${project}/moved.cjs`]: "console.log('moved');",
+      },
+      {
+        [`${project}/existing.js`]: "export const version = 2;",
+        [`${project}/deleted.ts`]: null,
+        [`${project}/moved.cjs`]: null,
+        "eng/moved.cjs": "console.log('moved');",
+        "eng/new.ts": "export {};",
+        "specification-other/script.js": "export {};",
+        [`${project}/script.js.md`]: "# Documentation",
+        [`${project}/examples/example.json`]: "{}",
+      },
+    );
+    const result = await validatePr({ cwd: root, base: "HEAD^", logger });
+    expect(result.success).toBe(true);
+    expect(result.diagnostics).toEqual([]);
+    expect(result.summary).toBe("No applicable spec change policies.");
+  });
+
   it("has no all-project fallback and ignores uncommitted selection changes", async () => {
     const { root, git, write } = await createRepo(
       { [config]: "{}", [manifest]: serviceYaml("2025-01-01") },
@@ -170,6 +248,7 @@ describe("PR policy runner", () => {
         [`${other}/service.yaml`]: "versions: invalid",
         "specification/baz/data-plane/Baz/stable/2026-01-01/openapi.json": "{}",
         "specification/qux/data-plane/Qux/stable/2026-01-01/openapi.json": "{}",
+        "specification/qux/script.ts": "export {};",
       },
     );
     const generate = vi
@@ -184,6 +263,7 @@ describe("PR policy runner", () => {
     });
     expect(result.success).toBe(false);
     expect(result.diagnostics.map((diagnostic) => diagnostic.code).sort()).toEqual([
+      "no-javascript-or-typescript",
       "sdk-api-version",
       "stale-api-version-pin",
       "typespec-requirement",

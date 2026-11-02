@@ -10,6 +10,7 @@ import { generateTypeSpecMetadata } from "@azure-tools/specs-shared/typespec-met
 import { join } from "pathe";
 import { createContext, findChangedProjects } from "./context.ts";
 import { evaluateMultipleNewApiVersions } from "./rules/multiple-new-api-versions.ts";
+import { evaluateNoJavaScriptOrTypeScript } from "./rules/no-javascript-or-typescript.ts";
 import { reproduceLocallyHint, resolveNewApiVersions } from "./rules/sdk-api-version.ts";
 import { evaluateStaleApiVersionPin } from "./rules/stale-api-version-pin.ts";
 import { ruleSuppressions } from "./suppressions.ts";
@@ -57,6 +58,8 @@ export async function validatePr(options: ValidationOptions): Promise<Validation
     if (result.skipped) logger.debug(result.skipped);
     if (result.suppressed) logger.debug(`Suppressed: ${result.suppressed}`);
   };
+
+  addResult("NoJavaScriptOrTypeScript", evaluateNoJavaScriptOrTypeScript(context));
 
   const requirement = await checkRequirements(context, options.checkUpstream);
   addResult("TypeSpecRequirement", {
