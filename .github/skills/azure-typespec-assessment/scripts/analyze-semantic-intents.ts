@@ -2,6 +2,7 @@ import path from "node:path";
 import { normalizeAutorestContract, sameAutorestContract } from "./autorest-contract.ts";
 import { isMain, isRecord, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
 import { semanticIntentType } from "./semantic-assessment-scope.ts";
+import { attachSemanticChangeFacts, isVersionGovernanceOnly } from "./semantic-change-facts.ts";
 import { canonicalJson, stableId } from "./stable-id.ts";
 import { indexTcgcOperations, normalizeTcgcContract } from "./tcgc-contract.ts";
 
@@ -651,21 +652,27 @@ function groupingTags(unit: InternalSemanticUnit, sourceIndex: SourceIndex) {
   return unique(tags);
 }
 
+export function isPublicationGroupingUnit(unit: InternalSemanticUnit) {
+  const directlyChangedOperation = unit.operations.some(
+    (operation) =>
+      operation.matchBasis === "operation-identity" &&
+      Boolean(operation.beforeFactId) &&
+      Boolean(operation.afterFactId) &&
+      operation.restChanged,
+  );
+  return (
+    isVersionGovernanceOnly(unit) &&
+    unit.ownedOperationIds.length === 0 &&
+    !directlyChangedOperation
+  );
+}
+
 function mergeUnits(
   project: PreparationProject,
   units: InternalSemanticUnit[],
   sourceIndex: SourceIndex,
 ): InternalSemanticUnit[] {
   if (units.length < 2) return units;
-  const totalHunks = units.reduce((count, unit) => count + unit.hunkIds.length, 0);
-  if (
-    project.artifactComparison?.mode === "new-api-version" &&
-    sourceIndex.sourceChanges.filter((item) => project.sourceChangeIds?.includes(item.id)).length <=
-      2 &&
-    totalHunks <= 5
-  ) {
-    return [mergeUnitGroup(units, sourceIndex, ["small-new-version-change"])];
-  }
   if (project.artifactComparison?.mode === "new-api-version") {
     const sourceById = new Map(sourceIndex.sourceChanges.map((source) => [source.id, source]));
     const featureNames = unique(
@@ -678,14 +685,13 @@ function mergeUnits(
 
     const grouped: Map<string, InternalSemanticUnit[]> = new Map();
     for (const unit of units) {
-      const tags = groupingTags(unit, sourceIndex);
       const source = sourceById.get(unit.sourceChangeIds[0]);
       const baseName = source ? path.basename(source.path, ".tsp") : "unknown";
       const text = hunkText(sourceIndex, unit.hunkIds[0]);
       const referencedFeature = featureNames.find((name) =>
         new RegExp(`\\b${name.replaceAll(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(text),
       );
-      const key = tags.includes("governance:api-version")
+      const key = isPublicationGroupingUnit(unit)
         ? "publication"
         : ["client", "back-compatible"].includes(baseName) ||
             /Azure\.ClientGenerator\.Core\.Legacy|@@(?:alternateType|clientName)\b/.test(text)
@@ -694,7 +700,7 @@ function mergeUnits(
             ? `feature:${baseName}`
             : referencedFeature
               ? `feature:${referencedFeature}`
-              : "publication";
+              : `source:${source?.id ?? unit.sourceChangeIds[0] ?? "unknown"}`;
       const group = grouped.get(key) ?? [];
       group.push(unit);
       grouped.set(key, group);
@@ -771,26 +777,31 @@ function stableOperationIdentity(operation: InternalSemanticOperation) {
   return stableOperation;
 }
 
+function projectHunkKey(unit: InternalSemanticUnit, hunkId: string) {
+  return `${unit.projectId}\0${hunkId}`;
+}
+
 export function dedupePublicationHunks(
   reviewUnits: InternalSemanticUnit[],
   sourceChanges: SourceChange[],
 ): InternalSemanticUnit[] {
+  const isPublication = (unit: InternalSemanticUnit) =>
+    unit.intentType === "api-version-publication" ||
+    (unit.groupingEvidence?.reasons ?? []).includes("cross-project:api-version-publication");
   const specificallyOwnedHunks = new Set(
     reviewUnits
-      .filter(
-        (unit) =>
-          !(unit.groupingEvidence?.reasons ?? []).includes("cross-project:api-version-publication"),
-      )
-      .flatMap((unit) => unit.hunkIds),
+      .filter((unit) => !isPublication(unit))
+      .flatMap((unit) => unit.hunkIds.map((hunkId) => projectHunkKey(unit, hunkId))),
   );
   const sourceById = new Map(sourceChanges.map((source) => [source.id, source]));
 
-  return reviewUnits.map((unit) => {
-    if (!(unit.groupingEvidence?.reasons ?? []).includes("cross-project:api-version-publication")) {
-      return unit;
-    }
-    const hunkIds = unit.hunkIds.filter((id) => !specificallyOwnedHunks.has(id));
-    if (hunkIds.length === unit.hunkIds.length) return unit;
+  return reviewUnits.flatMap((unit) => {
+    if (!isPublication(unit)) return [unit];
+    const hunkIds = unit.hunkIds.filter(
+      (hunkId) => !specificallyOwnedHunks.has(projectHunkKey(unit, hunkId)),
+    );
+    if (hunkIds.length === unit.hunkIds.length) return [unit];
+    if (hunkIds.length === 0) return [];
 
     const retainedHunks = new Set(hunkIds);
     const sourceChangeIds = unit.sourceChangeIds.filter((id) =>
@@ -807,11 +818,27 @@ export function dedupePublicationHunks(
           ),
       ),
     );
+    const changeFacts = (unit.changeFacts ?? []).filter((fact) =>
+      fact.hunkIds.some((hunkId) => retainedHunks.has(hunkId)),
+    );
+    const operations = unit.operations.filter(
+      (operation) =>
+        !operation.hunkIds.length || operation.hunkIds.some((hunkId) => retainedHunks.has(hunkId)),
+    );
     const updated = {
       ...unit,
       sourceChangeIds,
       hunkIds,
       declarationIds,
+      declarationNames: unique(changeFacts.map((fact) => fact.qualifiedName)),
+      changeFacts,
+      changeTypes: unique(
+        changeFacts.map((fact) => fact.changeType),
+      ) as import("./runtime-types.ts").SemanticChangeType[],
+      operations,
+      operationIds: unique(operations.map((operation) => operation.operationId)),
+      beforeFactIds: unique(operations.map((operation) => operation.beforeFactId)),
+      afterFactIds: unique(operations.map((operation) => operation.afterFactId)),
       groupingEvidence: {
         ...unit.groupingEvidence,
         memberHunkIds: (unit.groupingEvidence?.memberHunkIds ?? []).filter((id) =>
@@ -828,6 +855,182 @@ export function dedupePublicationHunks(
         operations: identity.operations.map(stableOperationIdentity),
       }),
     };
+  });
+}
+
+function hunkFactTypes(unit: InternalSemanticUnit, hunkId: string) {
+  return unique(
+    (unit.changeFacts ?? [])
+      .filter((fact) => fact.hunkIds.includes(hunkId))
+      .map((fact) => fact.changeType),
+  ).sort();
+}
+
+function sameStrings(left: string[], right: string[]) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function semanticHunkOwnerScore(unit: InternalSemanticUnit, hunkId: string) {
+  const factTypes = hunkFactTypes(unit, hunkId);
+  const unitTypes = [...(unit.changeTypes ?? [])].sort();
+  const reasons = unit.groupingEvidence?.reasons ?? [];
+  const meaningfulReasons = reasons.filter(
+    (reason) =>
+      !reason.startsWith("source:") &&
+      !reason.startsWith("governance:") &&
+      reason !== "publication",
+  );
+  return [
+    sameStrings(factTypes, unitTypes) ? 1 : 0,
+    meaningfulReasons.length,
+    unit.operations.filter((operation) => operation.hunkIds.includes(hunkId)).length,
+    unit.hunkIds.length,
+  ];
+}
+
+function compareScores(left: number[], right: number[]) {
+  for (let index = 0; index < left.length; index += 1) {
+    if (left[index] !== right[index]) return right[index] - left[index];
+  }
+  return 0;
+}
+
+export function dedupeSemanticHunks(
+  reviewUnits: InternalSemanticUnit[],
+  sourceChanges: SourceChange[],
+): InternalSemanticUnit[] {
+  const sourceById = new Map(sourceChanges.map((source) => [source.id, source]));
+  const unitsByHunk = new Map<string, { hunkId: string; units: InternalSemanticUnit[] }>();
+  for (const unit of reviewUnits) {
+    for (const hunkId of unit.hunkIds) {
+      const key = projectHunkKey(unit, hunkId);
+      const entry = unitsByHunk.get(key) ?? { hunkId, units: [] };
+      entry.units.push(unit);
+      unitsByHunk.set(key, entry);
+    }
+  }
+  const ownerByHunk = new Map<string, string>();
+  for (const [key, { hunkId, units }] of unitsByHunk) {
+    const owner = [...units].sort((left, right) => {
+      const score = compareScores(
+        semanticHunkOwnerScore(left, hunkId),
+        semanticHunkOwnerScore(right, hunkId),
+      );
+      return score || left.id.localeCompare(right.id);
+    })[0];
+    ownerByHunk.set(key, owner.id);
+  }
+  const projectTransfers = new Map<string, string[]>();
+  const operationTransfers = new Map<string, InternalSemanticOperation[]>();
+  for (const [key, { hunkId, units }] of unitsByHunk) {
+    const ownerId = ownerByHunk.get(key);
+    if (!ownerId || units.length === 1) continue;
+    const projects = projectTransfers.get(ownerId) ?? [];
+    const operations = operationTransfers.get(ownerId) ?? [];
+    for (const unit of units) {
+      if (unit.id === ownerId) continue;
+      projects.push(...(unit.projectIds ?? [unit.projectId]));
+      operations.push(...unit.operations.filter((operation) => operation.hunkIds.includes(hunkId)));
+    }
+    projectTransfers.set(ownerId, projects);
+    operationTransfers.set(ownerId, operations);
+  }
+
+  return reviewUnits.flatMap((unit) => {
+    const hunkIds = unit.hunkIds.filter(
+      (hunkId) => ownerByHunk.get(projectHunkKey(unit, hunkId)) === unit.id,
+    );
+    const transferredProjects = projectTransfers.get(unit.id) ?? [];
+    const transferredOperations = operationTransfers.get(unit.id) ?? [];
+    if (
+      hunkIds.length === unit.hunkIds.length &&
+      transferredProjects.length === 0 &&
+      transferredOperations.length === 0
+    ) {
+      return [unit];
+    }
+    if (hunkIds.length === 0) return [];
+
+    const retainedHunks = new Set(hunkIds);
+    const sourceChangeIds = unit.sourceChangeIds.filter((id) =>
+      sourceById.get(id)?.hunks?.some((hunk) => retainedHunks.has(hunk.id)),
+    );
+    const declarationIds = unit.declarationIds.filter((id) =>
+      sourceChangeIds.some((sourceId) =>
+        sourceById
+          .get(sourceId)
+          ?.declarations?.some(
+            (declaration) =>
+              declaration.id === id &&
+              declaration.hunkIds?.some((hunkId) => retainedHunks.has(hunkId)),
+          ),
+      ),
+    );
+    const declarationIdSet = new Set(declarationIds);
+    const declarationNames = unique(
+      sourceChangeIds.flatMap(
+        (sourceId) =>
+          sourceById
+            .get(sourceId)
+            ?.declarations?.filter((declaration) => declarationIdSet.has(declaration.id))
+            .map((declaration) => declaration.qualifiedName)
+            .filter((name): name is string => Boolean(name)) ?? [],
+      ),
+    );
+    const retainedOperations = unit.operations.filter(
+      (operation) =>
+        !operation.hunkIds.length || operation.hunkIds.some((hunkId) => retainedHunks.has(hunkId)),
+    );
+    const operations = [
+      ...new Map(
+        [...retainedOperations, ...transferredOperations].map((operation) => [
+          canonicalJson(operation),
+          operation,
+        ]),
+      ).values(),
+    ];
+    const changeFacts = (unit.changeFacts ?? []).filter((fact) =>
+      fact.hunkIds.some((hunkId) => retainedHunks.has(hunkId)),
+    );
+    const projectIds = unique([...(unit.projectIds ?? [unit.projectId]), ...transferredProjects]);
+    const updated = {
+      ...unit,
+      projectIds,
+      sourceChangeIds,
+      hunkIds,
+      declarationIds,
+      declarationNames:
+        changeFacts.length > 0
+          ? unique(changeFacts.map((fact) => fact.qualifiedName))
+          : declarationNames,
+      changeFacts,
+      changeTypes: unique(
+        changeFacts.map((fact) => fact.changeType),
+      ) as import("./runtime-types.ts").SemanticChangeType[],
+      operations,
+      operationIds: unique(operations.map((operation) => operation.operationId)),
+      ownedOperationIds: unique([
+        ...unit.ownedOperationIds,
+        ...transferredOperations.map((operation) => operation.operationId),
+      ]),
+      groupingEvidence: {
+        ...unit.groupingEvidence,
+        memberHunkIds: (unit.groupingEvidence?.memberHunkIds ?? []).filter((id) =>
+          retainedHunks.has(id),
+        ),
+      },
+    };
+    const identity = { ...updated };
+    Reflect.deleteProperty(identity, "id");
+    return [
+      {
+        ...identity,
+        id: stableId("semantic", {
+          ...identity,
+          operations: identity.operations.map(stableOperationIdentity),
+        }),
+      },
+    ];
   });
 }
 
@@ -854,18 +1057,13 @@ function mergeUnitGroup(
   ]
     .map(stableOperationIdentity)
     .sort((left, right) => left.operationId.localeCompare(right.operationId));
-  const publication = groupingEvidence.some(
-    (reason) => reason === "publication" || reason.includes("api-version-publication"),
-  );
-
   const rank = (operation: InternalSemanticOperation) => {
     const versionMapping = ["direct-version-governance", "version-transition-change"].includes(
       operation.matchBasis,
     );
-    if (publication && versionMapping) return 0;
-    if (operation.matchBasis === "operation-identity") return publication ? 1 : 0;
-    if (operation.matchBasis === "compiled-contract-containment") return publication ? 2 : 1;
-    if (operation.matchBasis === "compiler-reference") return publication ? 3 : 2;
+    if (operation.matchBasis === "operation-identity") return 0;
+    if (operation.matchBasis === "compiled-contract-containment") return 1;
+    if (operation.matchBasis === "compiler-reference") return 2;
     return versionMapping ? 3 : 4;
   };
 
@@ -924,9 +1122,8 @@ function mergeUnitGroup(
     ...directChangedOperations,
     ...directRemovedOperations,
   ].sort((left, right) => left.operationId.localeCompare(right.operationId));
-  const operations = publication
-    ? allOperations
-    : featureAdded && addedOperations.length
+  const operations =
+    featureAdded && addedOperations.length
       ? additionsWithDirectChanges
       : groupingEvidence.includes("behavior:lro") && directChangedOperations.length
         ? directChangedOperations
@@ -952,6 +1149,15 @@ function mergeUnitGroup(
     projectIds: unique(units.flatMap((unit) => unit.projectIds ?? [unit.projectId])),
     action: semanticAction,
     changeKind: semanticAction,
+    classificationVersion: 3,
+    changeFacts: [
+      ...new Map(
+        units.flatMap((unit) => unit.changeFacts ?? []).map((fact) => [fact.id, fact]),
+      ).values(),
+    ].sort((left, right) => left.id.localeCompare(right.id)),
+    changeTypes: unique(
+      units.flatMap((unit) => unit.changeTypes ?? []),
+    ) as import("./runtime-types.ts").SemanticChangeType[],
     sourceChangeIds: unique(units.flatMap((unit) => unit.sourceChangeIds)),
     hunkIds: unique(units.flatMap((unit) => unit.hunkIds)),
     declarationIds: unique(units.flatMap((unit) => unit.declarationIds)),
@@ -1265,7 +1471,19 @@ function buildProjectUnits(
         ...unit,
         operations: unit.operations.map(stableOperationIdentity),
       };
-      units.push({ id: stableId("semantic", identity), ...unit });
+      const enriched = attachSemanticChangeFacts(
+        { id: stableId("semantic", identity), ...unit },
+        sourceIndex,
+      );
+      const enrichedIdentity = { ...enriched };
+      Reflect.deleteProperty(enrichedIdentity, "id");
+      units.push({
+        ...enriched,
+        id: stableId("semantic", {
+          ...enrichedIdentity,
+          operations: enriched.operations.map(stableOperationIdentity),
+        }),
+      });
     }
   }
   return mergeUnits(project, units, sourceIndex);
@@ -1352,79 +1570,18 @@ export function analyzeSemanticIntents(options: {
       });
     }
   }
-  const hasNewVersionProject = (manifest.projects ?? []).some(
-    (project) => project.artifactComparison?.mode === "new-api-version",
-  );
-  const publicationUnits = reviewUnits.filter((unit) => {
-    const reasons = unit.groupingEvidence?.reasons ?? [];
-    return (
-      reasons.includes("publication") ||
-      (hasNewVersionProject &&
-        (!reasons.length ||
-          reasons.includes("governance:api-version") ||
-          (reasons.length === 1 && reasons[0] === "transform:arm-resource-identifier")))
-    );
-  });
-  if (publicationUnits.length > 1) {
-    const publicationIds = new Set(publicationUnits.map((unit) => unit.id));
-    const mergedPublication = mergeUnitGroup(publicationUnits, sourceIndex, [
-      "cross-project:api-version-publication",
-    ]);
-    const newVersionProjectIds = new Set(
-      (manifest.projects ?? [])
-        .filter((project) => project.artifactComparison?.mode === "new-api-version")
-        .map((project) => project.id),
-    );
-    const otherOperationIds = new Set(
-      reviewUnits
-        .filter((unit) => !publicationIds.has(unit.id))
-        .flatMap((unit) => unit.operations)
-        .map((operation) => operation.operationId),
-    );
-    const versionTransitionOperationIds = new Set(
-      mergedPublication.versionTransitionOperationIds ?? [],
-    );
-    const publicationEligibleOperationIds = new Set(
-      mergedPublication.publicationEligibleOperationIds ?? [],
-    );
-    mergedPublication.operations = mergedPublication.operations.filter((operation) => {
-      const factId = operation.afterFactId ?? operation.beforeFactId;
-      const fact = factId ? facts[factId] : undefined;
-      return (
-        versionTransitionOperationIds.has(operation.operationId) &&
-        publicationEligibleOperationIds.has(operation.operationId) &&
-        fact?.projectId !== undefined &&
-        newVersionProjectIds.has(fact.projectId) &&
-        !otherOperationIds.has(operation.operationId)
-      );
-    });
-    mergedPublication.operationIds = unique(
-      mergedPublication.operations.map(
-        (operation) => operation.afterFactId ?? operation.beforeFactId,
-      ),
-    );
-    mergedPublication.beforeFactIds = unique(
-      mergedPublication.operations.map((operation) => operation.beforeFactId),
-    );
-    mergedPublication.afterFactIds = unique(
-      mergedPublication.operations.map((operation) => operation.afterFactId),
-    );
-    reviewUnits.splice(
-      0,
-      reviewUnits.length,
-      ...reviewUnits.filter((unit) => !publicationIds.has(unit.id)),
-      mergedPublication,
-    );
-  }
-  reviewUnits.splice(
-    0,
-    reviewUnits.length,
-    ...dedupePublicationHunks(reviewUnits, sourceIndex.sourceChanges),
-  );
   for (const unit of reviewUnits) {
     unit.intentType = semanticIntentType(unit);
   }
-  reviewUnits.sort((left, right) => left.id.localeCompare(right.id));
+  const partitionedUnits = dedupeSemanticHunks(
+    dedupePublicationHunks(reviewUnits, sourceIndex.sourceChanges),
+    sourceIndex.sourceChanges,
+  );
+  for (const unit of partitionedUnits) {
+    attachSemanticChangeFacts(unit, sourceIndex);
+    unit.intentType = semanticIntentType(unit);
+  }
+  partitionedUnits.sort((left, right) => left.id.localeCompare(right.id));
 
   const result: SemanticAnalysis = {
     schemaVersion: 1,
@@ -1432,7 +1589,7 @@ export function analyzeSemanticIntents(options: {
     facts: Object.fromEntries(
       Object.entries(facts).sort(([left], [right]) => left.localeCompare(right)),
     ),
-    reviewUnits,
+    reviewUnits: partitionedUnits,
     blockers,
   };
   if (options.output) writeJson(path.resolve(options.output), result);

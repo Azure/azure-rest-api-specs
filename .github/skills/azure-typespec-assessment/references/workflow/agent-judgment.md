@@ -30,6 +30,10 @@ template. Its compliance judgments prefill eligible intent-scoped qualified
 `declarationNames`; retain only names supporting each judgment. Never copy its
 intentionally invalid unresolved placeholders into the completed file.
 
+Never reinterpret separate downstream additions and removals as a rename or
+replacement. Use only the candidate's supplied identity evidence; unresolved
+or ambiguous identity remains blocked.
+
 If `inferenceRequests` is empty, omit `inferenceResults`. Otherwise, analyze
 only supplied unknown hunks and write one exact compact result per request to
 `agent-workspace\agent-decisions.json`. Each is `candidates`, `no-impact`, or
@@ -49,6 +53,12 @@ raw AutoRest/TCGC output, compiler logs, unrelated unchanged source, prior
 answers, or use catalog descriptions as guidance. Candidate and review-unit
 evidence omitted from the bounded input is available only through declared
 canonical artifact references; do not scan unrelated artifact entries.
+
+Treat every supplied Semantic review-unit ID and boundary as authoritative.
+Never merge, split, reorder ownership, or move source hunks, declarations,
+change facts, or operations between units. Mixed version-publication and
+feature evidence has already been separated by the coordinator; ambiguous
+facts remain explicit rather than being assigned by similarity.
 
 Documentation Completeness is assembled deterministically from
 `dimensions/document-quality-input.json`. The Agent neither reads that artifact
