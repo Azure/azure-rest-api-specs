@@ -35,10 +35,24 @@ tag: package-2026-10-01
 
 These settings apply only when `--tag=package-2026-10-01` is specified on the command line.
 
-This is the default stable tag. Its wire contract is identical to `package-2025-12-01-preview` apart
-from the api-version string: the same operations, request and response models, response codes, and
-long-running operation metadata. `2026-10-01` introduces no contract change, so an existing
-`2025-12-01-preview` caller reaches GA by changing the api-version alone. The internal
+This is the default stable tag. `deployVersionCode` returns the full `EdgeActionVersion`
+resource, matching version GET, rather than only `EdgeActionVersionProperties`. Its result
+contains resource metadata and a nested `properties` object. Asynchronous PUT operations declare
+`Azure-AsyncOperation` with optional `Retry-After` on both 200 and 201 responses. PUT returns
+201 for creation and 200 for replacement; a 200 response does not by itself mean provisioning
+is complete. Asynchronous PATCH, DELETE, and version action operations declare both
+`Azure-AsyncOperation` and `Location`, with optional `Retry-After`, on their 202 responses.
+The deploy result correction can change generated SDK result types and caller property access;
+it requires compatibility review for consumers of `2026-10-01`.
+
+Use `Azure-AsyncOperation` to poll operation status. PUT operations retain
+`final-state-via: azure-async-operation` and the resource as their logical result.
+For operations with combined headers, `Location` identifies the final result.
+The 202 examples use `edgeActionOperations` URLs for operation status and `operationresults`
+URLs for the final result. Completion endpoints return an empty 202 response while the operation
+is running and the operation's final response only after completion.
+
+Both preview versions retain their existing contracts. The internal
 `addAttachment` and `deleteAttachment` operations used exclusively by the AFD RP remain absent, as
 they have been since `2025-12-01-preview`.
 
@@ -64,8 +78,7 @@ Version PATCH tag persistence requires a corresponding resource-provider impleme
 the current implementation validates the supplied version properties but does not persist tags.
 The description documents the intended contract, not delivery of that implementation fix.
 
-Because the wire contract is unchanged, this tag carries the same suppressions as the preview tag it is
-derived from.
+This tag retains the existing suppressions listed below.
 
 ```yaml $(tag) == 'package-2026-10-01'
 input-file:

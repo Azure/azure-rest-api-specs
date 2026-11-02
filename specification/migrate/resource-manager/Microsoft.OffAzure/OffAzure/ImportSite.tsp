@@ -64,6 +64,7 @@ interface ImportSites {
   /**
    * Deletes the imported machines for site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing deleteImportedMachines retains its request-body shape; preserve wire compatibility."
   @tag("ImportSitesController")
   deleteImportedMachines is ArmResourceActionSync<
     ImportSite,

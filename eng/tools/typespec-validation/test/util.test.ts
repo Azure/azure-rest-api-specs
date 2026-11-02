@@ -4,7 +4,7 @@ import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { strict as assert } from "node:assert";
 import { simpleGit } from "simple-git";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { gitDiffTopSpecFolder, readFileAtCommit } from "../src/utils.ts";
+import { gitDiffTopSpecFolder } from "../src/utils.ts";
 
 describe("util", function () {
   let revparseMock = vi.fn();
@@ -45,35 +45,6 @@ describe("util", function () {
         "--",
         "C:/repo/specification/foo",
       ]);
-    });
-  });
-
-  describe("readFileAtCommit", function () {
-    it("reads a repository-relative path from the requested commit", async function () {
-      const content = await readFileAtCommit(
-        "C:/repo/specification/foo/Foo",
-        "base",
-        "C:/repo/specification/foo/Foo/service.yaml",
-      );
-
-      expect(content).toBe("versions: []\n");
-      expect(revparseMock).toHaveBeenNthCalledWith(1, ["--verify", "base^{commit}"]);
-      expect(showMock).toHaveBeenCalledWith(["base:specification/foo/Foo/service.yaml"]);
-    });
-
-    it("returns undefined when the file does not exist at the commit", async function () {
-      vi.mocked(simpleGit).mockReturnValue({
-        revparse: vi.fn().mockResolvedValueOnce("abc123").mockResolvedValueOnce("C:/repo\n"),
-        show: vi.fn().mockRejectedValue(new Error("path does not exist")),
-      } as never);
-
-      await expect(
-        readFileAtCommit(
-          "C:/repo/specification/foo/Foo",
-          "base",
-          "C:/repo/specification/foo/Foo/service.yaml",
-        ),
-      ).resolves.toBeUndefined();
     });
   });
 });

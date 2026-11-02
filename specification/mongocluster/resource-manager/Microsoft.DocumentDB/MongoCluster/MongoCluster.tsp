@@ -7,9 +7,9 @@ using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.DocumentDB;
-/** Represents a mongo cluster resource. */
+/** Represents a DocumentDB cluster resource. */
 model MongoCluster is TrackedResource<MongoClusterProperties> {
-  /** The name of the mongo cluster. */
+  /** The name of the DocumentDB cluster. */
   @maxLength(40)
   @minLength(3)
   @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
@@ -29,11 +29,11 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
 
 @armResourceOperations
 interface MongoClusters {
-  /** Gets information about a mongo cluster. */
+  /** Gets information about a DocumentDB cluster. */
   get is ArmResourceRead<MongoCluster>;
 
   // Legacy: uses azure-async-operation final-state-via for API versions before 2026-02-01-preview.
-  /** Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
+  /** Create or update a DocumentDB cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Legacy versions use azure-async-operation; fixed to original-uri from v2026_02_01_preview via @sharedRoute split"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @sharedRoute
@@ -45,14 +45,14 @@ interface MongoClusters {
   >;
 
   // New: uses the default original-uri final-state-via from 2026-02-01-preview onwards.
-  /** Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
+  /** Create or update a DocumentDB cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
   @sharedRoute
   @added(Versions.v2026_02_01_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     MongoCluster,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
+  /** Updates an existing DocumentDB cluster. The request body can contain one to many of the properties present in the normal DocumentDB cluster definition. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     MongoCluster,
@@ -61,22 +61,22 @@ interface MongoClusters {
       MongoClusterProperties
     >
   >;
-  /** Deletes a mongo cluster. */
+  /** Deletes a DocumentDB cluster. */
   delete is ArmResourceDeleteWithoutOkAsync<MongoCluster>;
-  /** List all the mongo clusters in a given resource group. */
+  /** List all the DocumentDB clusters in a given resource group. */
   listByResourceGroup is ArmResourceListByParent<MongoCluster>;
-  /** List all the mongo clusters in a given subscription. */
+  /** List all the DocumentDB clusters in a given subscription. */
   list is ArmListBySubscription<MongoCluster>;
-  /** List mongo cluster connection strings. This includes the default connection string using SCRAM-SHA-256, as well as other connection strings supported by the cluster. */
+  /** List DocumentDB cluster connection strings. This includes the default connection string using SCRAM-SHA-256, as well as other connection strings supported by the cluster. */
   listConnectionStrings is ArmResourceActionSync<
     MongoCluster,
     void,
     ListConnectionStringsResult
   >;
-  /** Check if mongo cluster name is available for use. */
+  /** Check if DocumentDB cluster name is available for use. */
   @action("checkMongoClusterNameAvailability")
   checkNameAvailability is checkLocalNameAvailability;
-  /** Promotes a replica mongo cluster to a primary role. */
+  /** Promotes a replica DocumentDB cluster to a primary role. */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   promote is ArmResourceActionNoResponseContentAsync<
     MongoCluster,
@@ -84,7 +84,7 @@ interface MongoClusters {
   >;
 }
 
-/** Identifier for a mongo cluster resource. */
+/** Identifier for a DocumentDB cluster resource. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 scalar MongoClusterResourceId
   extends Azure.Core.armResourceIdentifier<[
@@ -93,43 +93,43 @@ scalar MongoClusterResourceId
     }
   ]>;
 
-/** The properties of a mongo cluster. */
+/** The properties of a DocumentDB cluster. */
 model MongoClusterProperties {
-  /** The mode to create a mongo cluster. */
+  /** The mode to create a DocumentDB cluster. */
   @visibility(Lifecycle.Create)
   @removed(Versions.v2025_04_01_preview)
   @renamedFrom(Versions.v2025_04_01_preview, "createMode")
   oldCreateMode?: CreateMode;
 
-  /** The parameters to create a point-in-time restore mongo cluster. */
+  /** The parameters to create a point-in-time restore DocumentDB cluster. */
   @visibility(Lifecycle.Create)
   @removed(Versions.v2025_04_01_preview)
   @renamedFrom(Versions.v2025_04_01_preview, "restoreParameters")
   oldRestoreParameters?: MongoClusterRestoreParameters;
 
-  /** The parameters to create a replica mongo cluster. */
+  /** The parameters to create a replica DocumentDB cluster. */
   @visibility(Lifecycle.Create)
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   @removed(Versions.v2025_04_01_preview)
   @renamedFrom(Versions.v2025_04_01_preview, "replicaParameters")
   oldReplicaParameters?: MongoClusterReplicaParameters;
 
-  /** The mode to create a mongo cluster. */
+  /** The mode to create a DocumentDB cluster. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2025_04_01_preview)
   createMode?: CreateMode;
 
-  /** The parameters to create a point-in-time restore mongo cluster. */
+  /** The parameters to create a point-in-time restore DocumentDB cluster. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2025_04_01_preview)
   restoreParameters?: MongoClusterRestoreParameters;
 
-  /** The parameters to create a replica mongo cluster. */
+  /** The parameters to create a replica DocumentDB cluster. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2025_04_01_preview)
   replicaParameters?: MongoClusterReplicaParameters;
 
-  /** The administrator's login for the mongo cluster. */
+  /** The administrator's login for the DocumentDB cluster. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @removed(Versions.v2024_07_01)
   administratorLogin?: string;
@@ -140,7 +140,7 @@ model MongoClusterProperties {
   @secret
   administratorLoginPassword?: string;
 
-  /** The local administrator properties for the mongo cluster. */
+  /** The local administrator properties for the DocumentDB cluster. */
   @added(Versions.v2024_07_01)
   administrator?: AdministratorProperties;
 
@@ -156,15 +156,15 @@ model MongoClusterProperties {
   @removed(Versions.v2024_07_01)
   earliestRestoreTime?: string;
 
-  /** The provisioning state of the mongo cluster. */
+  /** The provisioning state of the DocumentDB cluster. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /** The status of the mongo cluster. */
+  /** The status of the DocumentDB cluster. */
   @visibility(Lifecycle.Read)
   clusterStatus?: MongoClusterStatus;
 
-  /** Whether or not public endpoint access is allowed for this mongo cluster. */
+  /** Whether or not public endpoint access is allowed for this DocumentDB cluster. */
   publicNetworkAccess?: PublicNetworkAccess;
 
   /** The list of node group specs in the cluster. */
@@ -172,27 +172,27 @@ model MongoClusterProperties {
   @removed(Versions.v2024_07_01)
   nodeGroupSpecs?: NodeGroupSpec[];
 
-  /** The high availability properties of the mongo cluster. */
+  /** The high availability properties of the DocumentDB cluster. */
   @added(Versions.v2024_07_01)
   highAvailability?: HighAvailabilityProperties;
 
-  /** The storage properties of the mongo cluster. */
+  /** The storage properties of the DocumentDB cluster. */
   @added(Versions.v2024_07_01)
   storage?: StorageProperties;
 
-  /** The sharding properties of the mongo cluster. */
+  /** The sharding properties of the DocumentDB cluster. */
   @added(Versions.v2024_07_01)
   sharding?: ShardingProperties;
 
-  /** The compute properties of the mongo cluster. */
+  /** The compute properties of the DocumentDB cluster. */
   @added(Versions.v2024_07_01)
   compute?: ComputeProperties;
 
-  /** The backup properties of the mongo cluster. */
+  /** The backup properties of the DocumentDB cluster. */
   @added(Versions.v2024_07_01)
   backup?: BackupProperties;
 
-  /** The Data API properties of the mongo cluster. */
+  /** The Data API properties of the DocumentDB cluster. */
   @added(Versions.v2024_10_01_preview)
   dataApi?: DataApiProperties;
 
@@ -204,7 +204,7 @@ model MongoClusterProperties {
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   previewFeatures?: PreviewFeature[];
 
-  /** The replication properties for the mongo cluster */
+  /** The replication properties for the DocumentDB cluster */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   @visibility(Lifecycle.Read)
   replica?: ReplicationProperties;
@@ -229,19 +229,19 @@ model MongoClusterProperties {
   @added(Versions.v2025_08_01_preview)
   encryption?: EncryptionProperties;
 
-  /** The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows Azure Cosmos DB service to bypass network restrictions. */
+  /** The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows the Azure Cosmos DB service to bypass network restrictions. */
   @added(Versions.v2026_02_01_preview)
   networkBypassMode?: NetworkBypassMode;
 }
 
-/** The mode that the Mongo Cluster is created with. */
+/** The mode that the DocumentDB cluster is created with. */
 union CreateMode {
   string,
 
-  /** Create a new mongo cluster. */
+  /** Create a new DocumentDB cluster. */
   "Default",
 
-  /** Create a mongo cluster from a restore point-in-time. */
+  /** Create a DocumentDB cluster from a restore point-in-time. */
   "PointInTimeRestore",
 
   /** Create a replica cluster in distinct geographic region from the source cluster. */
@@ -255,7 +255,7 @@ union CreateMode {
 
 /** Parameters used for restore operations */
 model MongoClusterRestoreParameters {
-  /** UTC point in time to restore a mongo cluster */
+  /** UTC point in time to restore a DocumentDB cluster */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitalized acronym in the property name."
   pointInTimeUTC?: utcDateTime;
 
@@ -292,15 +292,15 @@ model StorageProperties {
   throughput?: int64;
 }
 
-/** The type of storage that a mongo cluster can be provisioned with. */
+/** The type of storage that a DocumentDB cluster can be provisioned with. */
 @added(Versions.v2025_04_01_preview)
 union StorageType {
   string,
 
-  /** Premium SSD for high performance workloads. */
+  /** Premium SSD storage. Premium SSD v2 is recommended for better performance. */
   "PremiumSSD",
 
-  /** Premium SSD v2 for very IO-intensive workloads. This is a preview option and has additional limitations. */
+  /** Premium SSD v2 storage. Recommended for better performance. */
   "PremiumSSDv2",
 }
 
@@ -334,15 +334,15 @@ model BackupProperties {
   earliestRestoreTime?: string;
 }
 
-/** The connection strings for the given mongo cluster. */
+/** The connection strings for the given DocumentDB cluster. */
 model ListConnectionStringsResult {
-  /** An array that contains the connection strings for a mongo cluster. */
+  /** An array that contains the connection strings for a DocumentDB cluster. */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   connectionStrings?: ConnectionString[];
 }
 
-/** Connection string for the mongo cluster */
+/** Connection string for the DocumentDB cluster */
 model ConnectionString {
   /** Value of the connection string */
   @visibility(Lifecycle.Read)
@@ -359,45 +359,45 @@ model ConnectionString {
   name?: string;
 }
 
-/** The status of the Mongo cluster resource. */
+/** The status of the DocumentDB cluster resource. */
 @clientName("MongoClusterStatus", "go")
 union MongoClusterStatus {
   string,
 
-  /** The mongo cluster resource is ready for use. */
+  /** The DocumentDB cluster resource is ready for use. */
   "Ready",
 
-  /** The mongo cluster resource is being provisioned. */
+  /** The DocumentDB cluster resource is being provisioned. */
   "Provisioning",
 
-  /** The mongo cluster resource is being updated. */
+  /** The DocumentDB cluster resource is being updated. */
   "Updating",
 
-  /** The mongo cluster resource is being started. */
+  /** The DocumentDB cluster resource is being started. */
   "Starting",
 
-  /** The mongo cluster resource is being stopped. */
+  /** The DocumentDB cluster resource is being stopped. */
   "Stopping",
 
-  /** The mongo cluster resource is stopped. */
+  /** The DocumentDB cluster resource is stopped. */
   "Stopped",
 
-  /** The mongo cluster resource is being dropped. */
+  /** The DocumentDB cluster resource is being dropped. */
   "Dropping",
 }
 
-/** Whether or not public endpoint access is allowed for this Mongo cluster.  Value is optional and default value is 'Enabled' */
+/** Whether or not public endpoint access is allowed for this DocumentDB cluster.  Value is optional and default value is 'Enabled' */
 union PublicNetworkAccess {
   string,
 
-  /** If set, mongo cluster can be accessed through private and public methods. */
+  /** If set, DocumentDB cluster can be accessed through private and public methods. */
   "Enabled",
 
   /** If set, the private endpoints are the exclusive access method. */
   "Disabled",
 }
 
-/** Preview features that can be enabled on a mongo cluster. */
+/** Preview features that can be enabled on a DocumentDB cluster. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 union PreviewFeature {
   string,
@@ -448,7 +448,7 @@ union PromoteMode {
   "Switchover",
 }
 
-/** Replica properties of the mongo cluster. */
+/** Replica properties of the DocumentDB cluster. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 model ReplicationProperties {
   /** The resource id the source cluster for the replica cluster. */
@@ -464,7 +464,7 @@ model ReplicationProperties {
   replicationState?: ReplicationState;
 }
 
-/** Replication role of the mongo cluster. */
+/** Replication role of the DocumentDB cluster. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 union ReplicationRole {
   string,
@@ -575,14 +575,14 @@ union DataApiMode {
   "Disabled",
 }
 
-/** The authentication configuration for the Mongo cluster. */
+/** The authentication configuration for the DocumentDB cluster. */
 @added(Versions.v2025_04_01_preview)
 model AuthConfigProperties {
   /** Allowed authentication modes for data access on the cluster. */
   allowedModes?: AuthenticationMode[];
 }
 
-/** The authentication modes supporting on the Mongo cluster. */
+/** The authentication modes supporting on the DocumentDB cluster. */
 @added(Versions.v2025_04_01_preview)
 union AuthenticationMode {
   string,
@@ -603,7 +603,7 @@ union KeyEncryptionKeyIdentityType {
   UserAssignedIdentity: "UserAssignedIdentity",
 }
 
-/** The encryption configuration for the mongo cluster. */
+/** The encryption configuration for the DocumentDB cluster. */
 @added(Versions.v2025_07_01_preview)
 model EncryptionProperties {
   /** Customer managed key encryption settings. */
@@ -635,7 +635,7 @@ model KeyEncryptionKeyIdentity {
   userAssignedIdentityResourceId?: string;
 }
 
-/** The network bypass mode for the Mongo cluster. */
+/** The network bypass mode for the DocumentDB cluster. */
 @added(Versions.v2026_02_01_preview)
 union NetworkBypassMode {
   string,
@@ -643,6 +643,6 @@ union NetworkBypassMode {
   /** No network bypass is enabled. */
   "None",
 
-  /** Allows Azure Cosmos DB service to bypass network restrictions. */
+  /** Allows the Azure Cosmos DB service to bypass network restrictions. */
   "AzureCosmosDB",
 }

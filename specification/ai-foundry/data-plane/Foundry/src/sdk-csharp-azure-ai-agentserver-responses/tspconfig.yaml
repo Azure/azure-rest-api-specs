@@ -1,0 +1,49 @@
+parameters:
+  "service-dir":
+    default: "sdk/agentserver"
+emit:
+  - "@typespec/openapi3"
+options:
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: Azure.AI.AgentServer.Responses
+    api-version: "virtual-public-preview"
+  "@typespec/openapi3":
+    emitter-output-dir: "{output-dir}"
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - specification/ai-foundry/data-plane/Foundry/src/agents
+      - specification/ai-foundry/data-plane/Foundry/src/common
+      - specification/ai-foundry/data-plane/Foundry/src/memory-stores
+      - specification/ai-foundry/data-plane/Foundry/src/openai
+      - specification/ai-foundry/data-plane/Foundry/src/openai/conversations
+      - specification/ai-foundry/data-plane/Foundry/src/openai/responses
+      - specification/ai-foundry/data-plane/Foundry/src/skills
+      - specification/ai-foundry/data-plane/Foundry/src/toolboxes
+      - specification/ai-foundry/data-plane/Foundry/src/tools
+imports:
+  - "@azure-tools/typespec-azure-core"
+  - "@azure-tools/typespec-azure-core/experimental"
+  - "@azure-tools/typespec-client-generator-core"
+  # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/views/client-emitters/models/responses"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    # Every rule below fires only on the hand-maintained shared Foundry sources this package
+    # imports (../openai/responses, ../agents, ../tools, ../common, ../toolboxes,
+    # ../memory-stores, ../skills), which this package does not own and which are compiled
+    # with --warn-as-error. The generated ../openai/*/routes.generated.tsp imports already
+    # carry in-source suppressions. Each rule was verified by compiling with it enabled;
+    # rules that raised nothing were removed, and warnings in this package's own client.tsp
+    # were fixed rather than suppressed.
+    "@azure-tools/typespec-azure-core/casing-style": "Shared sources use snake_case wire names (and names of the form XxxxAIXxxx) in ../agents, ../common, ../memory-stores, ../openai/responses, ../skills, ../toolboxes and ../tools; this package's client.tsp declares none."
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Shared sources declare plain string discriminators."
+    "@azure-tools/typespec-azure-core/bad-record-type": "Shared sources use Record<unknown> rather than Record<string>."
+    "@azure-tools/typespec-azure-core/documentation-required": "Shared OpenAI models in ../openai/responses, ../agents and ../tools have no docstrings."
+    "@azure-tools/typespec-azure-core/no-nullable": "Shared OpenAI models use the T | null notation."
+    "@azure-tools/typespec-azure-core/no-closed-literal-union": "Shared ../tools, ../agents, ../openai/responses and ../toolboxes models declare closed literal unions."
+    "@azure-tools/typespec-azure-core/no-openapi": "Shared ../openai/responses/routes.tsp uses OpenAPI decorators."
+    "@azure-tools/typespec-azure-core/no-unknown": "Shared ../openai/responses and ../agents models use unknown."
+    "@azure-tools/typespec-azure-core/no-query-explode": "Shared OpenAI routes use explode query parameters."

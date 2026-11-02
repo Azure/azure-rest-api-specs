@@ -198,7 +198,7 @@ files, and reference files are designed and maintained:
    upstream guidance (RPC contract, Azure REST API Guidelines, ARM
    wiki) changes. When that happens, a maintainer refreshes the
    affected instruction/reference files, updates the `Upstream
-alignment` date, and the change propagates through all
+   alignment` date, and the change propagates through all
    cross-references automatically.
 
 ## Normative strength and documented rationale
