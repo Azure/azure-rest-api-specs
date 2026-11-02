@@ -40777,6 +40777,14 @@
             "maximum": 10,
             "description": "Optional configured weight for legacy or Likert scoring. For Likert, omit every weight for equal contribution or supply a weight for every dimension; partially weighted definitions are rejected. Boolean scoring rejects every configured weight, including explicit unit weights. No schema default is emitted."
           },
+          "generated_weight": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "Read-only model-suggested weight (1-10) returned for unweighted Likert dimensions.",
+            "readOnly": true
+          },
           "always_applicable": {
             "type": "boolean",
             "description": "When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.",

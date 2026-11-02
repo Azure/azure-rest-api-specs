@@ -276,6 +276,13 @@ model Dimension {
   @maxValue(10)
   weight?: int32;
 
+  @doc("Read-only model-suggested weight (1-10) returned for unweighted Likert dimensions.")
+  @added(Versions.v1)
+  @visibility(Lifecycle.Read)
+  @minValue(1)
+  @maxValue(10)
+  generated_weight?: int32;
+
   @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.")
   always_applicable?: boolean = false;
 }
