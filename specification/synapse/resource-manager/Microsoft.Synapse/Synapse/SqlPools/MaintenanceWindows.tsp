@@ -56,6 +56,7 @@ interface SqlPoolMaintenanceWindows {
   /**
    * Creates or updates a Sql pool's maintenance windows settings.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The published 200 response has no body."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is MaintenanceWindowsOps.CreateOrUpdateSync<
     MaintenanceWindows,

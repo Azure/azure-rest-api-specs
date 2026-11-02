@@ -118,6 +118,7 @@ interface SqlPools {
   /**
    * Creates a restore point for a data warehouse.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Published operation: the restore-point action on a SQL pool returns the created RestorePoint."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolRestorePoints_Create")
   @action("restorePoints")
@@ -181,6 +182,7 @@ interface SqlPools {
   /**
    * Update sensitivity labels of a given SQL Pool using an operations batch.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The published 200 response has no body."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolSensitivityLabels_Update")
   @patch
@@ -227,6 +229,7 @@ interface SqlPools {
   /**
    * Update recommended sensitivity labels states of a given SQL Pool using an operations batch.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The published 200 response has no body."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolRecommendedSensitivityLabels_Update")
   @patch
@@ -270,6 +273,8 @@ interface SqlPoolOperationResults {
   /**
    * Get the status of a SQL pool operation
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The published 202 response of this status endpoint has no Location header."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The published 202 response returns the SQL pool."
   #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "For backward compatibility: the original OpenAPI marks this GET as long-running (released SDKs expose begin_get_location_header_result)"
   @extension("x-ms-long-running-operation", true)
   getLocationHeaderResult is SqlPoolOperationResultOps.Read<

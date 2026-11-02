@@ -694,6 +694,7 @@ enum SecurityAlertPolicyState {
   Disabled,
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The published path parameter is a closed enum (modelAsString: false); opening it would change the contract."
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 union VulnerabilityAssessmentPolicyBaselineName {
@@ -1262,6 +1263,7 @@ model SqlPoolBlobAuditingPolicyProperties {
   /**
    * Specifies the identifier key of the auditing storage account. If state is Enabled and storageEndpoint is specified, storageAccountAccessKey is required.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -1700,6 +1702,7 @@ model SqlPoolConnectionPolicyProperties {
   /**
    * The state of security access.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "False positive: an access-state string, not a credential."
   securityEnabledAccess?: string;
 
   /**
@@ -1747,12 +1750,14 @@ model SqlPoolVulnerabilityAssessmentProperties {
   /**
    * A shared access signature (SAS Key) that has write access to the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageContainerSasKey?: string;
 
   /**
    * Specifies the identifier key of the storage account for vulnerability assessment scan results. If 'StorageContainerSasKey' isn't specified, storageAccountAccessKey is required.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -1934,6 +1939,7 @@ model SecurityAlertPolicyProperties {
   /**
    * Specifies the identifier key of the Threat Detection audit storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   storageAccountAccessKey?: string;
 
   /**
@@ -1999,6 +2005,7 @@ model ExtendedSqlPoolBlobAuditingPolicyProperties {
    * 2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.
    * For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -2139,6 +2146,7 @@ model DataMaskingRuleProperties {
   /**
    * The rule Id.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Published property: the rule properties include a read-only id."
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -2304,6 +2312,7 @@ model ServerBlobAuditingPolicyProperties {
    * 2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.
    * For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -2454,6 +2463,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
    * 2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.
    * For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -2612,6 +2622,7 @@ model ServerSecurityAlertPolicyProperties {
   /**
    * Specifies the identifier key of the Threat Detection audit storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   storageAccountAccessKey?: string;
 
   /**
@@ -2642,12 +2653,14 @@ model ServerVulnerabilityAssessmentProperties {
   /**
    * A shared access signature (SAS Key) that has read and write access to the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageContainerSasKey?: string;
 
   /**
    * Specifies the identifier key of the storage account for vulnerability assessment scan results. If 'StorageContainerSasKey' isn't specified, storageAccountAccessKey is required.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not marked x-ms-secret in the published API; adding @secret changes the contract (x-ms-secret, format password). Flagged for review."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountAccessKey?: string;
 
@@ -2792,6 +2805,7 @@ model RecoverableSqlPoolProperties {
 /**
  * Properties of a dedicated sql minimal tls settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published definition name; renaming would change the OpenAPI definition and SDK type name."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DedicatedSQLminimalTlsSettingsProperties {
   /**
@@ -2942,6 +2956,7 @@ model TopQueriesListResult {
 /**
  * Dedicated SQL minimal tls settings patch info
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published definition name; renaming would change the OpenAPI definition and SDK type name."
 model DedicatedSQLminimalTlsSettingsPatchInfo {
   /**
    * minimal tls version
@@ -2988,6 +3003,7 @@ enum WritableSensitivityLabelSource {
 /**
  * The source of a recommended sensitivity label (recommended).
  */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The published path parameter is a closed enum (modelAsString: false); opening it would change the contract."
 union RecommendedSensitivityLabelSource {
   /**
    * recommended
@@ -3261,6 +3277,7 @@ model ServerBlobAuditingPolicyListResult {
 /**
  * A list of the server's dedicated sql minimal tls settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published definition name; renaming would change the OpenAPI definition and SDK type name."
 model DedicatedSQLminimalTlsSettingsListResult {
   /**
    * Array of results.

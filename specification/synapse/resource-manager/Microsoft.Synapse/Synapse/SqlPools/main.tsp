@@ -55,6 +55,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Synapse Analytics management API for dedicated SQL pools, their child resources (schemas, tables, columns, security, auditing, restore points, workload management and more) and workspace-level dedicated SQL settings.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The Microsoft.Synapse Operations endpoint is defined in the Workspaces project (D2)."
 @armProviderNamespace("Microsoft.Synapse")
 @service(#{ title: "SynapseManagementClient" })
 @versioned(Versions)

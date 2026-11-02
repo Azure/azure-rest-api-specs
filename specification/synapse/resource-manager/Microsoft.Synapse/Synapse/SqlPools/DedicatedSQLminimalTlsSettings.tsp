@@ -13,6 +13,7 @@ namespace SqlPools;
 /**
  * Dedicated Sql Minimal Tls Settings Info
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published definition name; renaming would change the OpenAPI definition and SDK type name."
 model DedicatedSQLminimalTlsSettings
   is Azure.ResourceManager.ProxyResource<DedicatedSQLminimalTlsSettingsProperties> {
   ...ResourceNameParameter<
@@ -34,6 +35,7 @@ alias DedicatedSQLminimalTlsSettingsReadOps = Azure.ResourceManager.Legacy.Legac
   WorkspaceParentParameters,
   {
     /** The name of the dedicated sql minimal tls settings. */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Published path parameter name; renaming would change the URL template and SDK parameter name."
     @segment("dedicatedSQLminimalTlsSettings")
     @key
     @path
@@ -45,6 +47,7 @@ alias DedicatedSQLminimalTlsSettingsWriteOps = Azure.ResourceManager.Legacy.Lega
   WorkspaceParentParameters,
   {
     /** The name of the dedicated sql minimal tls settings. */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Published path parameter name; renaming would change the URL template and SDK parameter name."
     @segment("dedicatedSQLminimalTlsSettings")
     @key
     @path
@@ -52,6 +55,7 @@ alias DedicatedSQLminimalTlsSettingsWriteOps = Azure.ResourceManager.Legacy.Lega
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Published operation group name (operationId prefix); renaming would change the SDK operation group."
 @armResourceOperations
 interface WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettings {
   /**
