@@ -1,4 +1,5 @@
 import "@typespec/openapi";
+import "@azure-tools/openai-typespec/models/live";
 import "@azure-tools/openai-typespec/models/realtime";
 import "./agents.tsp";
 
@@ -517,6 +518,684 @@ using Azure.AI.Projects;
 // Shared voice identifier used by realtime audio output.
 @@extension(
   OpenAI.VoiceIdsShared,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// Native Live types used by the preview voice-agent surface.
+@@extension(
+  OpenAI.DelegationType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveAllowedServerEventParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveAudioFormat,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveAudioFormatType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientConfigParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientDelegationParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveCommentaryAppendParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveInputAudioAppendEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveInputAudioMuteParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveInputAudioUnmuteParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveInstructionsAppendParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveResponseCreateParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveResponseItemCreateParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveSessionCloseParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveSessionUpdateParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveThinkingAppendParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveContextWindowUsage,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveCustomVoiceParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDataChannelConfigParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDelegationReasoningInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDelegationTextInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveFunctionToolChoiceParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveFunctionToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialAssistantMessageItemParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialDeveloperMessageItemParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialInputTextContentPartParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialItem,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialItemType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialMessageStatus,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialOutputTextContentPartParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialSessionAudioOutputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialSessionAudioParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialTextContentPartParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInitialUserMessageItemParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInputAudioAppend,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveLiveError,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveMCPToolChoiceParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveOutputAudioDelta,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveReasoningEffort,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveReasoningSummary,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveResponsesDelegationParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveResponsesDelegationSettingsInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveResponsesDelegationSettingsUpdateInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveResponsesDelegationUpdateParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveResponsesServiceTier,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveCommentaryAppended,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveDelegationCreated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveErrorEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveInfoEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveInputAudioMuted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveInputAudioUnmuted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveInputTranscriptDelta,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveInstructionsAppended,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveOutputTranscriptDelta,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveResponseEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveSessionClosed,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveSessionStarted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveSessionUpdated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveSessionUsageUpdated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveThinkingAppended,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSessionAudioFormatPCMAParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSessionAudioFormatPCMParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSessionAudioFormatPCMUParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSessionCreateParams,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSessionStartEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSessionUpdateParams,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSessionUsage,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveTextVerbosity,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveToolChoiceEnum,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveTransportCallError,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveTransportDTMFReceived,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveTransportDTMFSend,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveWebSearchToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.ModelIdsLive,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(OpenAI.delegation, "x-ms-foundry-meta", VoiceAgentRequiredPreview);
+@@extension(
+  OpenAI.`LiveDecisionQuestionsInputParam-2`,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.`LiveDecisionTriggerInputParam-2`,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.`LiveDecisionsDelegationParam-2`,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.`LiveDecisionsSettingsInputParam-2`,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveAllowedToolsChoiceParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveApplyPatchToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveDecisionCreateParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveDecisionItemCreateParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveDecisionItemDeleteParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveClientEventLiveOutputAudioFixturePlayParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveCodeInterpreterToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveComputerToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveContainerMemoryLimit,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveContainerNetworkPolicyDisabledParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveContainerReferenceParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveCustomToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDecisionCompleted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDecisionInputImageParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDecisionInputItemParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDecisionInputTextParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDecisionStoredInputItemParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDecisionsDelegationUpdateParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDecisionsSettingsUpdateParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveDetailEnum,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveFileSearchToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveHostedShellContainerAutoParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveHostedShellNetworkPolicyAllowlistParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveHostedShellToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveImageGenerationToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInlineSkillParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveInlineSkillSourceParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveLocalEnvironmentParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveLocalSkillParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveMCPToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveNamespaceToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveProgrammaticToolInputParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveDecisionEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveDecisionItemCreated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveDecisionItemDeleted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveOutputAudioFixturePlayed,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveOutputAudioFixturePlaying,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveTransportAnswered,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveTransportFailed,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveTransportRinging,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSkillReferenceParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificApplyPatchParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificCodeInterpreterParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificComputerParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificCustomToolParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificFileSearchParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificFunctionShellParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificImageGenParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificProgrammaticToolCallingParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificWebSearchParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveSpecificWebSearchPreviewParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveToolChoiceValueEnum,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveToolSearchToolInputParam,
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );

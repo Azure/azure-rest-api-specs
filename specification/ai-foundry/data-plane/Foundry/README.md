@@ -63,6 +63,23 @@ The `npx tsv .` has a console spew that shows the diff between current and stage
 changes. Once you `git add` all the changed files and run `npx tsv .` again, there should
 no longer be any diffs to show.
 
+## Voice agent contract checks
+
+With the repository's Node/pnpm versions and pinned dependencies installed, run
+from the repository root:
+
+```sh
+pnpm exec tsp compile specification/ai-foundry/data-plane/Foundry --warn-as-error
+node --test --test-concurrency=1 specification/ai-foundry/data-plane/Foundry/tests/*.test.mjs specification/ai-foundry/data-plane/Foundry/emitters/*.test.mjs
+```
+
+Checks both API versions, native Live compatibility, greetings, delegation, persistence,
+inline handoff, campaigns, SIP bindings, system tools, preview gating, and SDK metadata.
+Compilation regenerates OpenAPI and the Realtime event bundle; native Live event
+contracts are included in OpenAPI. These checks do not generate SDKs or run service
+E2E tests. The JavaScript serializer test is skipped unless
+`FOUNDRY_JS_SDK_MODELS` points to compiled SDK output.
+
 ## Emitting Python code
 
 Please do not emit SDKs in the public Python repo. SDK originated from TypeSpec that is private should not be pushed into a branch in a public GitHub repo.
