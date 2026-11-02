@@ -46,6 +46,7 @@ interface BigDataPoolResourceInfos {
   /**
    * Create a new Big Data pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The published operation polls via Azure-AsyncOperation (final-state-via: azure-async-operation); adding Location would change the polling metadata."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
