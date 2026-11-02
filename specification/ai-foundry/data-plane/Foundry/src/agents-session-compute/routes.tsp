@@ -194,7 +194,7 @@ interface AgentSessionComputes {
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}")
   @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-  unexposeSessionComputePort is FoundryDataPlaneRequiredPreviewOperation<
+  deleteSessionComputePort is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.session_compute_v1_preview,
     SessionComputePortPathParams,
     NoContentResponse
