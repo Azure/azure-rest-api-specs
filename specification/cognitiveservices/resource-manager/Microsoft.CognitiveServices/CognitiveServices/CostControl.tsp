@@ -167,8 +167,8 @@ model CostControlGrouping {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: CostControlGroupingName;
 
-  /** The grouping kind. Only `TagKey` is supported. */
-  type: "TagKey";
+  /** The grouping kind. Only `AdditionalInfoKey` is supported. */
+  type: "AdditionalInfoKey";
 }
 
 /** Built-in attributes supported for additional budget partitioning. */
@@ -231,25 +231,25 @@ model CostControlTimePeriod {
 model CostControlTimePeriodPatch is OptionalProperties<CostControlTimePeriod>;
 
 /**
- * Traffic selection using exactly one of tags or and. Tag names must be unique across the complete expression.
+ * Traffic selection using exactly one of `additionalInfo` or `and`. Additional-info names must be unique across the complete expression.
  * Filters narrow the owner's scope and cannot extend a project-owned control to another project.
- * Values within one tag are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.
- * Authoring identityObjectId conditions, including conditions nested under and, requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.
+ * Values within one condition are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.
+ * Authoring identityObjectId conditions, including conditions nested under `and`, requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.
  */
 @added(Versions.v2026_11_15_preview)
 model CostControlFilter {
-  /** A single tag condition. Must not be combined with and on the same filter object. */
-  tags?: CostControlTagFilter;
+  /** A single additional-info condition. Must not be combined with `and` on the same filter object. */
+  additionalInfo?: CostControlAdditionalInfoFilter;
 
-  /** A conjunction of at least two conditions. Must not be combined with tags on the same filter object. */
+  /** A conjunction of at least two conditions. Must not be combined with `additionalInfo` on the same filter object. */
   @minItems(2)
   @identifiers(#[])
   and?: CostControlFilter[];
 }
 
-/** Selects traffic whose named attribute equals at least one of the supplied values. */
+/** Selects traffic whose named additional-info attribute equals at least one of the supplied values. */
 @added(Versions.v2026_11_15_preview)
-model CostControlTagFilter {
+model CostControlAdditionalInfoFilter {
   /**
    * The built-in attribute: agent, identityObjectId, sessionId, project, deployment, or tokenType.
    * Resource selectors use owner-scoped short names, not Azure resource IDs. Agent selections require an explicit project filter selecting exactly one project; multiple agents in that project are supported.
@@ -261,7 +261,7 @@ model CostControlTagFilter {
   /** The comparison operator.`In` is supported. */
   operator: "In";
 
-  /** One or more nonempty, non-whitespace strings to match. There is no per-tag value-count limit; the serialized cost-control definition must not exceed 32 KiB. */
+  /** One or more nonempty, non-whitespace strings to match. There is no per-condition value-count limit; the serialized cost-control definition must not exceed 32 KiB. */
   @minItems(1)
   values: CostControlFilterValue[];
 }

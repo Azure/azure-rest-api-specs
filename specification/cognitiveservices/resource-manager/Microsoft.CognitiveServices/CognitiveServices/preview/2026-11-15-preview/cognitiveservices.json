@@ -17603,6 +17603,39 @@
         }
       }
     },
+    "CostControlAdditionalInfoFilter": {
+      "type": "object",
+      "description": "Selects traffic whose named additional-info attribute equals at least one of the supplied values.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/CostControlFilterName",
+          "description": "The built-in attribute: agent, identityObjectId, sessionId, project, deployment, or tokenType.\nResource selectors use owner-scoped short names, not Azure resource IDs. Agent selections require an explicit project filter selecting exactly one project; multiple agents in that project are supported.\nA project-owned control can select only its owning project. Project, agent, and deployment values must be plain names of 1-64 characters without leading or trailing whitespace, control characters, path/query/fragment separators, percent signs, or . and .. path segments.\ntokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The comparison operator.`In` is supported.",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "One or more nonempty, non-whitespace strings to match. There is no per-condition value-count limit; the serialized cost-control definition must not exceed 32 KiB.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/CostControlFilterValue"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
     "CostControlCategory": {
       "type": "string",
       "description": "The measurement used for the budget amount and absolute thresholds.",
@@ -17648,15 +17681,15 @@
     },
     "CostControlFilter": {
       "type": "object",
-      "description": "Traffic selection using exactly one of tags or and. Tag names must be unique across the complete expression.\nFilters narrow the owner's scope and cannot extend a project-owned control to another project.\nValues within one tag are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.\nAuthoring identityObjectId conditions, including conditions nested under and, requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.",
+      "description": "Traffic selection using exactly one of `additionalInfo` or `and`. Additional-info names must be unique across the complete expression.\nFilters narrow the owner's scope and cannot extend a project-owned control to another project.\nValues within one condition are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.\nAuthoring identityObjectId conditions, including conditions nested under `and`, requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.",
       "properties": {
-        "tags": {
-          "$ref": "#/definitions/CostControlTagFilter",
-          "description": "A single tag condition. Must not be combined with and on the same filter object."
+        "additionalInfo": {
+          "$ref": "#/definitions/CostControlAdditionalInfoFilter",
+          "description": "A single additional-info condition. Must not be combined with `and` on the same filter object."
         },
         "and": {
           "type": "array",
-          "description": "A conjunction of at least two conditions. Must not be combined with tags on the same filter object.",
+          "description": "A conjunction of at least two conditions. Must not be combined with `additionalInfo` on the same filter object.",
           "minItems": 2,
           "items": {
             "$ref": "#/definitions/CostControlFilter"
@@ -17733,9 +17766,9 @@
         },
         "type": {
           "type": "string",
-          "description": "The grouping kind. Only `TagKey` is supported.",
+          "description": "The grouping kind. Only `AdditionalInfoKey` is supported.",
           "enum": [
-            "TagKey"
+            "AdditionalInfoKey"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -18061,39 +18094,6 @@
           }
         }
       }
-    },
-    "CostControlTagFilter": {
-      "type": "object",
-      "description": "Selects traffic whose named attribute equals at least one of the supplied values.",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/CostControlFilterName",
-          "description": "The built-in attribute: agent, identityObjectId, sessionId, project, deployment, or tokenType.\nResource selectors use owner-scoped short names, not Azure resource IDs. Agent selections require an explicit project filter selecting exactly one project; multiple agents in that project are supported.\nA project-owned control can select only its owning project. Project, agent, and deployment values must be plain names of 1-64 characters without leading or trailing whitespace, control characters, path/query/fragment separators, percent signs, or . and .. path segments.\ntokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens."
-        },
-        "operator": {
-          "type": "string",
-          "description": "The comparison operator.`In` is supported.",
-          "enum": [
-            "In"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "values": {
-          "type": "array",
-          "description": "One or more nonempty, non-whitespace strings to match. There is no per-tag value-count limit; the serialized cost-control definition must not exceed 32 KiB.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/CostControlFilterValue"
-          }
-        }
-      },
-      "required": [
-        "name",
-        "operator",
-        "values"
-      ]
     },
     "CostControlThresholdType": {
       "type": "string",
