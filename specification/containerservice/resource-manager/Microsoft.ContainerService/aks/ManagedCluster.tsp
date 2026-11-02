@@ -231,7 +231,7 @@ model PrivateLinkResourcesListResult {
    */
   @added(Versions.v2026_09_01)
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
 }
 
 /**
