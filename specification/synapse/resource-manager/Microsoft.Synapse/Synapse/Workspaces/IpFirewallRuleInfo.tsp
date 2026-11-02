@@ -70,7 +70,10 @@ interface IpFirewallRuleInfos {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IpFirewallRules_ListByWorkspace")
-  listByWorkspace is ArmResourceListByParent<IpFirewallRuleInfo>;
+  listByWorkspace is ArmResourceListByParent<
+    IpFirewallRuleInfo,
+    Response = ArmResponse<IpFirewallRuleInfoListResult>
+  >;
 }
 
 @@doc(IpFirewallRuleInfo.name, "The IP firewall rule name");

@@ -57,7 +57,10 @@ interface PrivateLinkResources {
   /**
    * Get all private link resources for a workspaces
    */
-  list is PrivateLinkResourceOps.List<PrivateLinkResource>;
+  list is PrivateLinkResourceOps.List<
+    PrivateLinkResource,
+    Response = ArmResponse<PrivateLinkResourceListResult>
+  >;
 }
 alias PrivateLinkHubPrivateLinkResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -91,7 +94,10 @@ interface PrivateLinkHubPrivateLinkResources {
   /**
    * Get all private link resources for a private link hub
    */
-  list is PrivateLinkHubPrivateLinkResourceOps.List<PrivateLinkResource>;
+  list is PrivateLinkHubPrivateLinkResourceOps.List<
+    PrivateLinkResource,
+    Response = ArmResponse<PrivateLinkResourceListResult>
+  >;
 }
 
 @@doc(PrivateLinkResource.name, "The name of the private link resource");

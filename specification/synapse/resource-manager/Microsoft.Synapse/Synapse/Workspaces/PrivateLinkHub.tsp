@@ -64,12 +64,18 @@ interface PrivateLinkHubs {
   /**
    * Returns a list of privateLinkHubs in a resource group
    */
-  listByResourceGroup is ArmResourceListByParent<PrivateLinkHub>;
+  listByResourceGroup is ArmResourceListByParent<
+    PrivateLinkHub,
+    Response = ArmResponse<PrivateLinkHubInfoListResult>
+  >;
 
   /**
    * Returns a list of privateLinkHubs in a subscription
    */
-  list is ArmListBySubscription<PrivateLinkHub>;
+  list is ArmListBySubscription<
+    PrivateLinkHub,
+    Response = ArmResponse<PrivateLinkHubInfoListResult>
+  >;
 }
 
 @@doc(PrivateLinkHub.name, "Name of the privateLinkHub");

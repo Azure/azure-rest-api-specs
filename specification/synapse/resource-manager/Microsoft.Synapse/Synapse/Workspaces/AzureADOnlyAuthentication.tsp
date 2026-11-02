@@ -52,7 +52,10 @@ interface AzureADOnlyAuthentications {
   /**
    * Gets a list of Azure Active Directory only authentication property for a workspace
    */
-  list is ArmResourceListByParent<AzureADOnlyAuthentication>;
+  list is ArmResourceListByParent<
+    AzureADOnlyAuthentication,
+    Response = ArmResponse<AzureADOnlyAuthenticationListResult>
+  >;
 }
 
 @@doc(AzureADOnlyAuthentication.name, "name of the property");

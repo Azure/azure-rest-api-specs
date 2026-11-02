@@ -40,7 +40,7 @@ interface PrivateEndpointConnectionForPrivateLinkHubs {
   @operationId("PrivateEndpointConnectionsPrivateLinkHub_List")
   list is ArmResourceListByParent<
     PrivateEndpointConnectionForPrivateLinkHub,
-    Response = ArmResponse<PrivateEndpointConnectionForPrivateLinkHubResourceCollectionResponse>
+    Response = ArmResponse<PrivateEndpointConnectionForPrivateLinkHub_ResourceCollectionResponse>
   >;
 }
 

@@ -51,7 +51,10 @@ interface Keys {
   /**
    * Returns a list of keys in a workspace
    */
-  listByWorkspace is ArmResourceListByParent<Key>;
+  listByWorkspace is ArmResourceListByParent<
+    Key,
+    Response = ArmResponse<KeyInfoListResult>
+  >;
 }
 
 @@doc(Key.name, "The name of the workspace key");

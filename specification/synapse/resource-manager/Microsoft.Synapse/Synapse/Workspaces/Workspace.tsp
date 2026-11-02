@@ -96,12 +96,18 @@ interface Workspaces {
   /**
    * Returns a list of workspaces in a resource group
    */
-  listByResourceGroup is ArmResourceListByParent<Workspace>;
+  listByResourceGroup is ArmResourceListByParent<
+    Workspace,
+    Response = ArmResponse<WorkspaceInfoListResult>
+  >;
 
   /**
    * Returns a list of workspaces in a subscription
    */
-  list is ArmListBySubscription<Workspace>;
+  list is ArmListBySubscription<
+    Workspace,
+    Response = ArmResponse<WorkspaceInfoListResult>
+  >;
 
   /**
    * Get the result of an operation
@@ -152,7 +158,9 @@ interface Workspaces {
   replaceAll is ArmResourceActionAsync<
     Workspace,
     ReplaceAllIpFirewallRulesRequest,
-    ArmResponse<ReplaceAllFirewallRulesOperationResponse>
+    ArmResponse<ReplaceAllFirewallRulesOperationResponse>,
+    LroHeaders = ArmLroLocationHeader<FinalResult = ReplaceAllFirewallRulesOperationResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
