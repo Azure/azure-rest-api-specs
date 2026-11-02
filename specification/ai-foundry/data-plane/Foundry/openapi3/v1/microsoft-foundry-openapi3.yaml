@@ -15,6 +15,7 @@ tags:
   - name: EvaluatorGenerationJobs
   - name: Indexes
   - name: Insights
+  - name: PipelineJobs
   - name: Jobs
   - name: Models
   - name: Memory Stores
@@ -8559,6 +8560,156 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Responses
+  /pipeline_jobs:
+    get:
+      operationId: PipelineJobs_list
+      description: List Pipeline Jobs. Command Jobs are not returned by this dedicated collection.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: tag
+          in: query
+          required: false
+          description: Filter Pipeline Jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').
+          schema:
+            type: string
+          explode: false
+        - name: listViewType
+          in: query
+          required: false
+          description: Specifies which view type to apply when listing Pipeline Jobs.
+          schema:
+            $ref: '#/components/schemas/ListViewType'
+          explode: false
+        - name: properties
+          in: query
+          required: false
+          description: 'Comma-separated user property names and optionally values. Example: prop1,prop2=value2.'
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedPipelineJobResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - PipelineJobs
+  /pipeline_jobs/{name}:
+    get:
+      operationId: PipelineJobs_get
+      description: Get a Pipeline Job by name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Pipeline Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineJobResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - PipelineJobs
+    put:
+      operationId: PipelineJobs_createOrUpdate
+      description: Create and execute a Pipeline Job. For update, the tags in the submitted definition replace the existing tags.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Pipeline Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineJobResource'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineJobResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - PipelineJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PipelineJobResource'
+        description: The Pipeline Job to create or update.
   /redTeams/runs:
     get:
       operationId: RedTeams_list
@@ -33569,6 +33720,21 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of ModelVersion items
+    PagedPipelineJobResource:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineJobResource'
+          description: The PipelineJobResource items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of PipelineJobResource items
     PagedRedTeam:
       type: object
       required:
@@ -33740,6 +33906,34 @@ components:
       allOf:
         - $ref: '#/components/schemas/JobProperties'
       description: Properties of a Pipeline Job.
+    PipelineJobResource:
+      type: object
+      required:
+        - name
+        - properties
+      properties:
+        name:
+          type: string
+          description: The name of the Pipeline Job. This is case-sensitive.
+          readOnly: true
+        id:
+          type: string
+          description: The resource ID.
+          readOnly: true
+        type:
+          type: string
+          description: The resource type.
+          readOnly: true
+        properties:
+          allOf:
+            - $ref: '#/components/schemas/JobProperties'
+          description: Properties of the Pipeline Job. The dedicated Pipeline Jobs operations require jobType to be Pipeline.
+        systemData:
+          allOf:
+            - $ref: '#/components/schemas/SystemData'
+          description: Metadata pertaining to creation and last modification of the resource.
+          readOnly: true
+      description: Pipeline Job resource exposed through the dedicated Pipeline Jobs ingress.
     ProceduralMemoryItem:
       type: object
       required:

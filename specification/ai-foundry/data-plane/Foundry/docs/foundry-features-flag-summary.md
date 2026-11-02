@@ -102,5 +102,8 @@ in order to successfully complete operations using these routes.
 | Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required: `DataGenerationJobs=V1Preview` |
 | Data Generation Jobs | Cancel | POST | `/data_generation_jobs/{jobId}:cancel` | Required: `DataGenerationJobs=V1Preview` |
 | Data Generation Jobs | Delete | DELETE | `/data_generation_jobs/{jobId}` | Required: `DataGenerationJobs=V1Preview` |
+| Pipeline Jobs | List | GET | `/pipeline_jobs` | Required: `Jobs=V1Preview` |
+| Pipeline Jobs | Create or Update | PUT | `/pipeline_jobs/{name}` | Required: `Jobs=V1Preview` |
+| Pipeline Jobs | Get | GET | `/pipeline_jobs/{name}` | Required: `Jobs=V1Preview` |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
