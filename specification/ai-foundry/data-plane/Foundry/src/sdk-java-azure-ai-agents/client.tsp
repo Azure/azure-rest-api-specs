@@ -849,6 +849,11 @@ using Azure.AI.Projects;
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
+@@clientName(
+  HostedAgentDefinition.enable_memory_snapshot,
+  "memorySnapshotEnabled",
+  "java"
+);
 
 @@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
 @@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
@@ -994,6 +999,27 @@ using Azure.AI.Projects;
 );
 
 // Voice Agent Renames
+@@clientName(
+  VoiceAgentSoundscapeConfig,
+  "VoiceAgentSoundscapeConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeTrackConfig,
+  "VoiceAgentSoundscapeTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeWorkingTrackConfig,
+  "VoiceAgentSoundscapeWorkingTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeSourceConfig,
+  "VoiceAgentSoundscapeSourceConfiguration",
+  "java"
+);
+@@clientName(VoiceAgentSoundscapeWorkingTrackConfig.delay_ms, "delay", "java");
 @@clientName(
   Azure.AI.Projects.Agents.generateAgent,
   "createAgentFromPrompt",
