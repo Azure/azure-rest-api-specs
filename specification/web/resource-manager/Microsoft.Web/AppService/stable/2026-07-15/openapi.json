@@ -25549,6 +25549,15 @@
             "description": "Name of the deployment slot. By default, this API returns the production slot.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OneDeployRequest"
+            }
           }
         ],
         "responses": {
@@ -48748,6 +48757,96 @@
           "description": "Network Security Perimeter Subscription Id"
         }
       }
+    },
+    "OneDeployArtifactType": {
+      "type": "string",
+      "description": "The types of artifacts supported by OneDeploy.",
+      "enum": [
+        "war",
+        "jar",
+        "ear",
+        "lib",
+        "startup",
+        "static",
+        "zip"
+      ],
+      "x-ms-enum": {
+        "name": "OneDeployArtifactType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "War",
+            "value": "war",
+            "description": "A Java web application archive."
+          },
+          {
+            "name": "Jar",
+            "value": "jar",
+            "description": "A Java archive."
+          },
+          {
+            "name": "Ear",
+            "value": "ear",
+            "description": "A Java enterprise application archive."
+          },
+          {
+            "name": "Lib",
+            "value": "lib",
+            "description": "A library file."
+          },
+          {
+            "name": "Startup",
+            "value": "startup",
+            "description": "An application startup script."
+          },
+          {
+            "name": "Static",
+            "value": "static",
+            "description": "A static file."
+          },
+          {
+            "name": "Zip",
+            "value": "zip",
+            "description": "A ZIP package."
+          }
+        ]
+      }
+    },
+    "OneDeployRequest": {
+      "type": "object",
+      "description": "The request to deploy a package or file using OneDeploy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OneDeployRequestProperties",
+          "description": "The deployment properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "OneDeployRequestProperties": {
+      "type": "object",
+      "description": "The properties of a OneDeploy deployment request.",
+      "properties": {
+        "packageUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the package or file to deploy."
+        },
+        "type": {
+          "$ref": "#/definitions/OneDeployArtifactType",
+          "description": "The type of artifact to deploy."
+        },
+        "path": {
+          "type": "string",
+          "description": "The absolute target path for the deployed artifact."
+        }
+      },
+      "required": [
+        "packageUri",
+        "type"
+      ]
     },
     "OpenAuthenticationAccessPolicies": {
       "type": "object",
