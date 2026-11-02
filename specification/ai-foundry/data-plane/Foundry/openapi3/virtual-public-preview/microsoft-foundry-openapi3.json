@@ -105979,7 +105979,7 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "Shared voice-agent settings; protocol-specific fields remain flat on each subtype.\nCreates and updates produce immutable versions. An agent's protocol cannot change across versions.",
+        "description": "Shared voice-agent settings; protocol-specific fields remain flat on each subtype.\nCreates and updates produce immutable versions. Each version selects its own protocol, so a new version can switch between Realtime and Live.",
         "discriminator": {
           "propertyName": "sub_protocol",
           "mapping": {

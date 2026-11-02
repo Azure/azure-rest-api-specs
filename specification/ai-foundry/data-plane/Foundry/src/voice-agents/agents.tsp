@@ -106,7 +106,7 @@ model VoiceAgentLlmInterimResponseConfig
 
 @doc("""
   Shared voice-agent settings; protocol-specific fields remain flat on each subtype.
-  Creates and updates produce immutable versions. An agent's protocol cannot change across versions.
+  Creates and updates produce immutable versions. Each version selects its own protocol, so a new version can switch between Realtime and Live.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 // OpenAPI-only fallback; SDKs must customize subtype dispatch and preserve omission.
