@@ -24,8 +24,6 @@ namespace Microsoft.CognitiveServices;
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 @subscriptionResource
 model ManagedComputeCapacity
   is Azure.ResourceManager.ProxyResource<ManagedComputeCapacityProperties> {
@@ -45,8 +43,6 @@ model ManagedComputeCapacity
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ManagedComputeCapacities {
   /**
@@ -86,7 +82,7 @@ interface ManagedComputeCapacities {
        * surrounding whitespace, or the request returns HTTP 400. Capacity is still
        * returned for the deployment's backend region.
        */
-      @added(Versions.v2026_11_15_preview)
+      @added(Versions.v2026_11_01)
       @query("location")
       location?: string;
     },
