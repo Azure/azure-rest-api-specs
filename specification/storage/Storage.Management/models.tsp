@@ -1051,6 +1051,12 @@ enum AccountStatus {
 enum StorageAccountExpand {
   geoReplicationStats,
   blobRestoreStatus,
+
+  /**
+   * Includes the list of features available for the storage account in the response.
+   */
+  @added(Versions.v2026_12_01)
+  availableFeatures,
 }
 
 /**
@@ -4030,6 +4036,13 @@ model StorageAccountProperties {
    */
   @added(Versions.v2026_06_01)
   allowCrossTenantDelegationSas?: boolean;
+
+  /**
+   * The list of features available for the storage account. This property is only returned when $expand=availableFeatures is specified.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  availableFeatures?: string[];
 }
 
 /**
