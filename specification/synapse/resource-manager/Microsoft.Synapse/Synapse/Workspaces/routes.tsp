@@ -28,3 +28,8 @@ interface OperationsOperationGroup {
     Scope = SubscriptionActionScope
   >;
 }
+
+@@doc(
+  OperationsOperationGroup.checkNameAvailability::parameters.body,
+  "The check request"
+);

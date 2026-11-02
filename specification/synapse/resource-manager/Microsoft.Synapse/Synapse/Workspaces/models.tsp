@@ -285,7 +285,7 @@ model WorkspaceProperties {
   /**
    * Enable or Disable public network access to workspace
    */
-  publicNetworkAccess?: WorkspacePublicNetworkAccess;
+  publicNetworkAccess?: WorkspacePublicNetworkAccess = WorkspacePublicNetworkAccess.Enabled;
 
   /**
    * Initial workspace AAD admin properties for a CSP subscription
@@ -308,7 +308,7 @@ model WorkspaceProperties {
   /**
    * Is trustedServiceBypassEnabled for the workspace
    */
-  trustedServiceBypassEnabled?: boolean;
+  trustedServiceBypassEnabled?: boolean = false;
 }
 
 /**

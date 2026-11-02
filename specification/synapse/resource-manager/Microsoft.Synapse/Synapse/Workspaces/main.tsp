@@ -8,6 +8,7 @@
  * Date: 2026-11-02T04:07:02.950Z
  */
 import "@typespec/rest";
+import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -32,6 +33,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 /**
  * Azure Synapse Analytics management API for workspaces, workspace administrators and security settings, firewall rules, keys, private endpoints, private link resources and private link hubs.
  */
@@ -52,4 +54,20 @@ enum Versions {
   v2021_06_01: "2021-06-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+/**
+ * Lists the operations of the Microsoft.Synapse resource provider.
+ * The published contract returns a plain array and declares no api-version parameter (matching the recorded service response and the released SDKs).
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Provider-level operations list, not a resource interface."
+interface Operations {
+  /**
+   * Get all available operations
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the published operationId."
+  @summary("All operations")
+  @tag("Operations")
+  @operationId("Operations_List")
+  @route("/providers/Microsoft.Synapse/operations")
+  @get
+  list(): ArmResponse<AvailableRpOperation[]> | ErrorResponse;
+}

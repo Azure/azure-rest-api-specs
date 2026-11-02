@@ -40,11 +40,11 @@ alias WorkspaceAadAdminInfoOps = Azure.ResourceManager.Legacy.LegacyOperations<
     workspaceName: string;
   },
   {
-    /** undefined */
+    /** Fixed name of the Active Directory administrator singleton. */
     @path
     @segment("administrators")
     @key
-    activeDirectory: string;
+    activeDirectory: "activeDirectory";
   }
 >;
 
@@ -104,11 +104,11 @@ alias WorkspaceSqlAadAdminOps = Azure.ResourceManager.Legacy.LegacyOperations<
     workspaceName: string;
   },
   {
-    /** undefined */
+    /** Fixed name of the Active Directory administrator singleton. */
     @path
     @segment("sqlAdministrators")
     @key
-    activeDirectory: string;
+    activeDirectory: "activeDirectory";
   }
 >;
 

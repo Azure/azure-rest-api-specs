@@ -69,7 +69,13 @@ interface Workspaces {
   update is ArmCustomPatchAsync<
     Workspace,
     PatchModel = WorkspacePatchInfo,
-    Response = ArmResponse<Workspace> | ArmResourceCreatedResponse<Workspace>
+    Response =
+      | ArmResponse<Workspace>
+      | ArmResourceCreatedResponse<
+          Workspace,
+          ArmLroLocationHeader<FinalResult = Workspace> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -127,7 +133,7 @@ interface Workspaces {
   getAzureAsyncHeaderResult is WorkspaceRoutedOps.ActionSync<
     Workspace,
     void,
-    ArmResponse<OperationResource>,
+    ArmResponse<OperationResource> | NotFoundResponse,
     Parameters = {
       /**
        * Operation ID

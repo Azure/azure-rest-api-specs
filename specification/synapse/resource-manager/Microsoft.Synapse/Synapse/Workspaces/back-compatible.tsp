@@ -106,3 +106,7 @@ namespace Workspaces;
 );
 
 @@clientLocation(OperationsOperationGroup.checkNameAvailability, "Operations");
+@@clientName(
+  OperationsOperationGroup.checkNameAvailability::parameters.body,
+  "request"
+);
