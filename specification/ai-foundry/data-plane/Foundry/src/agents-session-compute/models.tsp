@@ -335,6 +335,10 @@ model SessionComputePort {
   @doc("""
     The Foundry proxy base URL, ending in `/ports/{port}/proxy/`, on the same endpoint (host and path prefix)
     the caller used. Append application paths and query strings. Never a provider URL.
+    Call it directly with a Foundry bearer token and the `Foundry-Features` header; it takes no `api-version`.
+    Every HTTP method, WebSocket upgrades and SSE are forwarded to the application unchanged, except that
+    the caller's `Authorization` header is removed. Applications must honor `X-Forwarded-Prefix`,
+    `X-Forwarded-Host` and `X-Forwarded-Proto`.
     """)
   url: url;
 }
@@ -586,4 +590,8 @@ model SessionComputeExecStreamUpgradeResponse {
   @doc("The negotiated WebSocket subprotocol.")
   @header("Sec-WebSocket-Protocol")
   protocol: "exec.v1";
+
+  @doc("The response body (101 Switching Protocols). The `exec.v1` messages flow over the upgraded connection.")
+  @body
+  response: unknown;
 }

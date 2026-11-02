@@ -8,38 +8,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias SessionComputePreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.session_compute_v1_preview>;
-
-// Request parameters shared by the port proxy operations. The proxy forwards the request to the
-// application unchanged, so it takes no `api-version` query parameter.
-alias SessionComputePortProxyParams = {
-  ...SessionComputePortPathParams;
-  ...SessionComputePreviewHeader;
-
-  /** The application path appended to the port base URL. Forwarded exactly as encoded; dot segments and backslashes are rejected. */
-  #suppress "@typespec/openapi3/path-reserved-expansion" "The proxied path is forwarded as-is and may contain '/'; OpenAPI 3 cannot express reserved expansion."
-  @path path: string;
-};
-
-alias SessionComputePortProxyRequestBody = {
-  /** The content type of the request body, forwarded to the application. */
-  @header("Content-Type") contentType?: string;
-
-  /** The request body, forwarded to the application. */
-  @body body?: bytes;
-};
-
-// The proxied application response. Status, headers and body pass through unmodified.
-alias SessionComputePortProxyResponse =
-  | {
-      /** The content type of the application response. */
-      @header("Content-Type") contentType?: string;
-
-      /** The application response body. */
-      @body body: bytes;
-    }
-  | ApiErrorResponse;
-
 /**
  * Compute primitives for hosted agent sessions: inspect, restart, run commands in, stream logs from,
  * expose ports of, and read policies of the compute behind a session.
@@ -48,7 +16,7 @@ alias SessionComputePortProxyResponse =
  * `default` compute exists today. Exec and port operations also require the agent version to opt in
  * through `definition.compute_primitives`; check `capabilities` on the compute before calling them.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session compute operations are custom actions (exec, restart, logstream, port exposure) on a compute owned by the session, not standard resource lifecycle operations."
 @tag("Agent Session Computes")
 @removed(Versions.v1)
 interface AgentSessionComputes {
@@ -141,7 +109,6 @@ interface AgentSessionComputes {
    * - `exit_code`: `{ "type": "exit_code", "exit_code" }`, followed by a normal close.
    * - `error`: `{ "type": "error", "error": { "code", "message" } }`.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "WebSocket upgrade; the exec.v1 messages flow over the upgraded connection."
   @summary("Open an interactive exec stream to a session compute")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/exec/stream")
@@ -232,82 +199,6 @@ interface AgentSessionComputes {
     SessionComputePortPathParams,
     NoContentResponse
   >;
-
-  /**
-   * Proxies a request to an application listening on an exposed port of a session compute.
-   *
-   * The proxy accepts every HTTP method (including HEAD, OPTIONS and TRACE), WebSocket upgrades and
-   * SSE; the root of the application is also reachable at `.../ports/{port}/proxy`. Query strings,
-   * application cookies, conditional headers, status codes and bodies pass through unmodified.
-   * The caller's `Authorization` header and internal headers are removed before forwarding.
-   * Applications must honor `X-Forwarded-Prefix`, `X-Forwarded-Host` and `X-Forwarded-Proto`.
-   * Requires a running compute and the agent version ports opt-in; port 8088 is reserved.
-   * The request body is limited to 256 MiB. The HTTP inactivity timeout is 100 seconds; WebSocket
-   * and SSE requests use 300 seconds. Each connection has a maximum lifetime of 55 minutes.
-   */
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "The proxy forwards requests to the application unchanged and takes no api-version."
-  @summary("Send a GET request to an exposed port of a session compute")
-  @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}/proxy/{+path}")
-  @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-  getSessionComputePortProxy(
-    ...SessionComputePortProxyParams,
-  ): SessionComputePortProxyResponse;
-
-  /**
-   * Proxies a POST request to an application listening on an exposed port of a session compute.
-   * See the GET proxy operation for behavior and limits.
-   */
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "The proxy forwards requests to the application unchanged and takes no api-version."
-  @summary("Send a POST request to an exposed port of a session compute")
-  @post
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}/proxy/{+path}")
-  @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-  postSessionComputePortProxy(
-    ...SessionComputePortProxyParams,
-    ...SessionComputePortProxyRequestBody,
-  ): SessionComputePortProxyResponse;
-
-  /**
-   * Proxies a PUT request to an application listening on an exposed port of a session compute.
-   * See the GET proxy operation for behavior and limits.
-   */
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "The proxy forwards requests to the application unchanged and takes no api-version."
-  @summary("Send a PUT request to an exposed port of a session compute")
-  @put
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}/proxy/{+path}")
-  @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-  putSessionComputePortProxy(
-    ...SessionComputePortProxyParams,
-    ...SessionComputePortProxyRequestBody,
-  ): SessionComputePortProxyResponse;
-
-  /**
-   * Proxies a PATCH request to an application listening on an exposed port of a session compute.
-   * See the GET proxy operation for behavior and limits.
-   */
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "The proxy forwards requests to the application unchanged and takes no api-version."
-  @summary("Send a PATCH request to an exposed port of a session compute")
-  @patch(#{ implicitOptionality: false })
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}/proxy/{+path}")
-  @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-  patchSessionComputePortProxy(
-    ...SessionComputePortProxyParams,
-    ...SessionComputePortProxyRequestBody,
-  ): SessionComputePortProxyResponse;
-
-  /**
-   * Proxies a DELETE request to an application listening on an exposed port of a session compute.
-   * See the GET proxy operation for behavior and limits.
-   */
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "The proxy forwards requests to the application unchanged and takes no api-version."
-  @summary("Send a DELETE request to an exposed port of a session compute")
-  @delete
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}/proxy/{+path}")
-  @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-  deleteSessionComputePortProxy(
-    ...SessionComputePortProxyParams,
-  ): SessionComputePortProxyResponse;
 
   /**
    * Retrieves the effective lifecycle (idle and auto-suspend) policy of a session compute.
