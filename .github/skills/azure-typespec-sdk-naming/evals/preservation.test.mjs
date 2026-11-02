@@ -7,15 +7,11 @@ const original = fs.readFileSync(
   "utf8",
 );
 const lines = original.trimEnd().split(/\r?\n/);
-const override =
-  '@@clientName(WidgetProperties.enabled, "IsEnabled", "csharp");';
+const override = '@@clientName(WidgetProperties.enabled, "IsEnabled", "csharp");';
 
 for (const file of [
   new URL("eval.yaml", import.meta.url),
-  new URL(
-    "../../azure-typespec-author/evaluate/evals/007004.eval.yaml",
-    import.meta.url,
-  ),
+  new URL("../../azure-typespec-author/evaluate/evals/007004.eval.yaml", import.meta.url),
 ]) {
   const source = fs.readFileSync(file, "utf8");
   const pattern = source.match(/pattern: '(\(\?sm\).*)'/)?.[1];
@@ -30,11 +26,7 @@ for (const file of [
     ) {
       const changed = [...lines];
       changed.splice(position, 0, override);
-      assert.match(
-        changed.join("\n"),
-        matches,
-        `Insertion at line ${position}`,
-      );
+      assert.match(changed.join("\n"), matches, `Insertion at line ${position}`);
     }
   });
 
