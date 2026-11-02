@@ -24,8 +24,9 @@ Also read only:
 - [classification guidance](../classification.md), including
   [downstream cases](../downstream-breaking-cases.md) and
   [candidate rules](../downstream-candidate-rules.md);
-- the [agentic search procedure](../agentic-search.md);
-- the [official document catalog](../reference-document-links.md);
+- in full mode with compliance search requests, the
+  [agentic search procedure](../agentic-search.md) and
+  [official document catalog](../reference-document-links.md);
 - the [documentation checks](../document-quality.md).
 
 Do not recursively list the work directory, broadly search report artifacts,
@@ -91,6 +92,10 @@ change facts, or operations between units. Mixed version-publication and
 feature evidence has already been separated by the coordinator; ambiguous
 facts remain explicit rather than being assigned by similarity. Coarse normal
 groups may retain mixed-source notices; do not regroup them in either AI phase.
+
+In fast mode, do not read the guideline search procedure or catalog, score
+documents, fetch guidance, or author guideline judgments. Semantic summaries
+remain required for internal evidence correlation, but are not rendered.
 
 Documentation Completeness is assembled deterministically from
 `dimensions/document-quality-input.json`. The Agent neither reads that artifact

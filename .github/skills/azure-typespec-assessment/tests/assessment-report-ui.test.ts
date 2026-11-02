@@ -1011,6 +1011,53 @@ function presentationWithDocuments(
   return `${report.html}<section id="appendix"><details><summary>Appendix</summary>${report.appendixHtml}</details></section>`;
 }
 
+void test("fast reports preserve SDK and documentation evidence without hidden intent links", () => {
+  const { dimension, raw } = fixture();
+  const input = assessment(dimension);
+  const fullHtml = renderAssessmentHtml(input, { downstreamInput: raw });
+  assert.match(fullHtml, /href="#intent-semantic-1"/);
+  input.assessmentMode = "fast";
+  input.dimensions.compliance = {
+    status: "skipped",
+    summary: "Azure Guidelines were skipped in fast assessment mode.",
+    coverage: {
+      semanticIntentCount: 1,
+      assessedIntentCount: 0,
+      selectedDocumentCount: 0,
+      unassessedIntentIds: [],
+    },
+    intentAssessments: [],
+    findings: [],
+    retrievalFailures: [],
+    blockers: [],
+  };
+  const original = structuredClone(input);
+  const html = renderAssessmentHtml(input, { downstreamInput: raw });
+  assert.notMatch(
+    html,
+    /id="semantic-intents"|id="azure-compliance"|href="#intent-|Affected intents \(/,
+  );
+  assert.sameMembers(
+    [...html.matchAll(/<section id="([^"]+)">/g)].map((match) => match[1]),
+    ["rest-breaking", "downstream-breaking", "document-quality", "appendix"],
+  );
+  const downstream = reportSection(html, "downstream-breaking");
+  assert.match(downstream, /ServiceGateways\.updateAddressLocations/);
+  assert.match(downstream, /body/);
+  assert.match(downstream, /models\.tsp/);
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
+  for (const [, id] of html.matchAll(/href="#([^"]+)"/g)) {
+    assert.include(ids, id, `Missing fast report anchor ${id}`);
+  }
+  assert.deepEqual(input, original);
+  input.dimensions.documentQuality = documentDimension();
+  const documentHtml = renderReportSections(input, reportRenderHelpers).html;
+  const documentation = reportSection(documentHtml, "document-quality");
+  assert.match(documentation, /Widget\.count/);
+  assert.match(documentation, /Describe the count as a positive integer/);
+  assert.notMatch(documentation, /href="#intent-/);
+});
+
 function documentationSections(html: string) {
   return {
     main: reportSection(html, "document-quality"),

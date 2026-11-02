@@ -1,4 +1,4 @@
-import { assert, test } from "vitest";
+import { assert, expect, test } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -7,6 +7,7 @@ import {
   assertFreshOutput,
   blockedAssessment,
   buildModelInput,
+  runAssessmentAnalysis,
 } from "../scripts/run-assessment-analysis.ts";
 
 type ModelInputOptions = Parameters<typeof buildModelInput>[0];
@@ -55,6 +56,7 @@ function blockedAssessmentFromFixture(
   semantic: unknown,
   rest: unknown,
   downstream: unknown,
+  assessmentMode: "full" | "fast" = "full",
 ) {
   assertObjectFixture(manifest);
   assertObjectFixture(semantic);
@@ -65,6 +67,7 @@ function blockedAssessmentFromFixture(
     semantic as BlockedAssessmentParameters[1],
     rest as BlockedAssessmentParameters[2],
     downstream as BlockedAssessmentParameters[3],
+    assessmentMode,
   );
 }
 
@@ -207,8 +210,43 @@ void test("blocked assessments preserve pull request metadata", () => {
   assert.deepEqual(assessment.pullRequest, pullRequest);
 });
 
+void test("fast blocked assessments mark Azure Guidelines as skipped", () => {
+  const assessment = blockedAssessmentFromFixture(
+    {
+      repository: { remoteUrl: "https://github.com/Azure/azure-rest-api-specs" },
+      comparison: {
+        baseRef: "main",
+        mergeBaseCommit: "base",
+        headCommit: "head",
+        workingTree: {},
+      },
+      projects: [],
+      changedFiles: [],
+      blockers: [],
+      timings: {},
+    },
+    { blockers: ["semantic blocked"] },
+    { blockers: ["REST blocked"] },
+    { blockers: ["SDK blocked"] },
+    "fast",
+  );
+
+  assert.equal(assessment.assessmentMode, "fast");
+  assert.equal(assessment.dimensions.compliance.status, "skipped");
+  assert.deepEqual(assessment.dimensions.compliance.blockers, []);
+});
+
+void test("rejects unsupported assessment modes before preparation", async () => {
+  const output = path.join(os.tmpdir(), `typespec-assessment-mode-${Date.now()}`);
+  const options = { output };
+  setInvalid(options, "assessment_mode", "quick");
+  await expect(runAssessmentAnalysis(options)).rejects.toThrow(
+    /--assessment-mode must be full or fast/,
+  );
+});
+
 void test("model input references canonical evidence without embedding sources", () => {
-  const input = buildModelInputFromFixture({
+  const options = {
     manifest: {
       comparison: {
         mergeBaseCommit: "base",
@@ -268,7 +306,10 @@ void test("model input references canonical evidence without embedding sources",
       candidates: [],
       blockers: [],
     },
-  });
+  };
+  const input = buildModelInputFromFixture(options);
+  assert.equal(input.assessmentMode, "full");
+  assert.equal(input.context.assessmentMode, "full");
   assert.equal(input.sourceChanges, undefined);
   assert.deepEqual(input.artifactReferences, {
     sourceIndex: "source/source-index.json",
@@ -306,6 +347,15 @@ void test("model input references canonical evidence without embedding sources",
   assert.equal(input.inputAccounting.budgetTier, "small");
   assert.equal(input.inputAccounting.omittedRedundant.rawEmitterArtifacts, true);
   assert.equal(input.inputAccounting.omittedRedundant.sourceChanges, true);
+
+  const fastInput = buildModelInputFromFixture({ ...options, assessmentMode: "fast" });
+  assert.equal(fastInput.assessmentMode, "fast");
+  assert.equal(fastInput.context.assessmentMode, "fast");
+  assert.deepEqual(fastInput.complianceSearchRequests, []);
+  assert.deepEqual(
+    deterministicCoverage(fastInput.semanticReviewUnits[0]).complianceSearchRequestIds,
+    [],
+  );
 });
 
 void test("model input retains facts referenced by REST candidates", () => {

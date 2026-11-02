@@ -1107,6 +1107,12 @@ export function assembleAssessment({
   const hasComplianceContract = Array.isArray(modelComplianceRequests);
   const scopedComplianceRequests = hasComplianceContract ? modelComplianceRequests : [];
   const hasComplianceInput = hasComplianceContract && scopedComplianceRequests.length > 0;
+  if (
+    modelInput.assessmentMode === "fast" &&
+    (hasComplianceInput || answer.complianceDecisions?.length)
+  ) {
+    throw new Error("Fast assessment must not contain Azure Guidelines requests or decisions.");
+  }
   const complianceRequestArtifact = modelInput.artifactReferences?.complianceSearchRequests;
   const complianceRequests =
     hasComplianceInput && complianceRequestArtifact
@@ -1329,12 +1335,12 @@ export function assembleAssessment({
               : ["semantic-analysis-blocked: Azure Guidelines requires Semantic intents."]
             : [],
       })
-    : hasComplianceContract
+    : modelInput.assessmentMode === "fast"
       ? {
-          status: "passed",
-          summary: "No assessed Semantic intents require Azure Guidelines review.",
+          status: "skipped",
+          summary: "Azure Guidelines were skipped in fast assessment mode.",
           coverage: {
-            semanticIntentCount: 0,
+            semanticIntentCount: scopedSemantic.assessed.length,
             assessedIntentCount: 0,
             selectedDocumentCount: 0,
             unassessedIntentIds: [],
@@ -1344,24 +1350,39 @@ export function assembleAssessment({
           retrievalFailures: [],
           blockers: [],
         }
-      : {
-          status: "not-assessed",
-          summary: "Azure Guidelines search input was not available.",
-          coverage: {
-            semanticIntentCount: 0,
-            assessedIntentCount: 0,
-            selectedDocumentCount: 0,
-            unassessedIntentIds: [],
-          },
-          intentAssessments: [],
-          findings: [],
-          retrievalFailures: [],
-          blockers: [
-            {
-              message: "compliance-search-input-missing: rerun deterministic analysis.",
+      : hasComplianceContract
+        ? {
+            status: "passed",
+            summary: "No assessed Semantic intents require Azure Guidelines review.",
+            coverage: {
+              semanticIntentCount: 0,
+              assessedIntentCount: 0,
+              selectedDocumentCount: 0,
+              unassessedIntentIds: [],
             },
-          ],
-        };
+            intentAssessments: [],
+            findings: [],
+            retrievalFailures: [],
+            blockers: [],
+          }
+        : {
+            status: "not-assessed",
+            summary: "Azure Guidelines search input was not available.",
+            coverage: {
+              semanticIntentCount: 0,
+              assessedIntentCount: 0,
+              selectedDocumentCount: 0,
+              unassessedIntentIds: [],
+            },
+            intentAssessments: [],
+            findings: [],
+            retrievalFailures: [],
+            blockers: [
+              {
+                message: "compliance-search-input-missing: rerun deterministic analysis.",
+              },
+            ],
+          };
   const documentQualityPath = path.join(work, DOCUMENT_QUALITY_ARTIFACT);
   const documentQualityDimension = assembleDocumentQuality({
     input: fs.existsSync(documentQualityPath)
@@ -1375,6 +1396,7 @@ export function assembleAssessment({
   });
   return {
     schemaVersion: 1,
+    assessmentMode: modelInput.assessmentMode ?? "full",
     generatedAt: new Date().toISOString(),
     title: `TypeSpec assessment: ${manifest.projects.map((project) => project.path).join(", ")}`,
     repository: manifest.repository,

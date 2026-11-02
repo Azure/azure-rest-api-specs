@@ -194,6 +194,9 @@ export function buildAgentWorkspace({ work }: { work: string }) {
   const modelInputPath = path.join(root, "model-input.json");
   if (!fs.existsSync(modelInputPath)) throw new Error("Missing model-input.json.");
   const modelInput = readJsonObject(modelInputPath) as AssessmentModelInput;
+  if (modelInput.assessmentMode === "fast" && modelInput.complianceSearchRequests.length) {
+    throw new Error("Fast assessment must not contain Azure Guidelines search requests.");
+  }
   validateBoundedEvidence(modelInput);
 
   fs.mkdirSync(path.join(root, "agent-workspace"), { recursive: true });
@@ -218,6 +221,7 @@ export function buildAgentWorkspace({ work }: { work: string }) {
     preparationId: randomUUID(),
     runtime,
     ...(modelInput.pipelineVersion === 2 ? { pipelineVersion: 2 } : {}),
+    assessmentMode: modelInput.assessmentMode ?? "full",
     comparisonIdentity: comparisonIdentity(modelInput),
     input: {
       path: "model-input.json",
@@ -298,6 +302,11 @@ export function buildAgentWorkspace({ work }: { work: string }) {
     },
     completionChecklist: [
       "Read model-input.json exactly once.",
+      ...(modelInput.assessmentMode === "fast"
+        ? [
+            "Do not score or fetch the Azure Guidelines catalog and leave every guideline search and judgment array empty.",
+          ]
+        : []),
       ...(modelInput.inferenceRequests.length
         ? [
             "Resolve every inference request in the compact Agent decisions and judge any inferred candidates.",
