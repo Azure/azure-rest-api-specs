@@ -4276,7 +4276,7 @@
         "tags": [
           "AccountCostControls"
         ],
-        "description": "Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection.",
+        "description": "Updates an account-owned budget synchronously. Omitting properties preserves all existing budget properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields; an unchanged budget retains its entity tag.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9741,7 +9741,7 @@
         "tags": [
           "ProjectCostControls"
         ],
-        "description": "Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection.",
+        "description": "Updates a Foundry project budget synchronously. Omitting properties preserves all existing budget properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields and merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -17935,17 +17935,17 @@
     },
     "CostControlPatch": {
       "type": "object",
-      "description": "A partial budget update. An empty properties object is a no-op and retains the entity tag for a valid existing selection.\nA historical agent selection spanning multiple projects requires an explicit valid filter replacement or filter: null; unrelated or no-op edits return a compatibility conflict.",
+      "description": "A partial budget update. Omitting properties preserves all existing budget properties.\nSetting properties to null or an empty object ({}) clears all existing budget properties.\nA non-empty properties object updates the supplied fields according to their merge semantics; omitted fields retain their existing values.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CostControlPatchProperties",
-          "description": "The budget properties to merge into the existing control."
+          "description": "The budget properties to update. Omission preserves existing properties.\nNull or an empty object ({}) clears all existing properties."
         }
       }
     },
     "CostControlPatchProperties": {
       "type": "object",
-      "description": "Optional edits to a budget. Omitted properties retain their existing values; no defaults are applied.\nExplicit identityObjectId grouping or filter selections, including unchanged selections and conditions nested under filter.and, require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.\nMissing registration returns 403 FeatureNotRegistered before merging or no-op detection.\nOmitting or removing identity selections does not require this registration; omitted stored selections are preserved, subject to existing validation rules.",
+      "description": "Edits applied when properties is a non-empty object. Omitted fields retain their existing values; no defaults are applied.\nExplicit identityObjectId grouping or filter selections, including unchanged selections and conditions nested under filter.and, require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.\nMissing registration returns 403 FeatureNotRegistered before merging or no-op detection.\nOmitting or removing identity selections does not require this registration; omitted stored selections are preserved, subject to existing validation rules.",
       "properties": {
         "provider": {
           "type": "string",

@@ -105,7 +105,7 @@ model CostControlProperties {
 }
 
 /**
- * Optional edits to a budget. Omitted properties retain their existing values; no defaults are applied.
+ * Edits applied when properties is a non-empty object. Omitted fields retain their existing values; no defaults are applied.
  * Explicit identityObjectId grouping or filter selections, including unchanged selections and conditions nested under filter.and, require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.
  * Missing registration returns 403 FeatureNotRegistered before merging or no-op detection.
  * Omitting or removing identity selections does not require this registration; omitted stored selections are preserved, subject to existing validation rules.
@@ -150,12 +150,16 @@ model CostControlPatchProperties {
 }
 
 /**
- * A partial budget update. An empty properties object is a no-op and retains the entity tag for a valid existing selection.
- * A historical agent selection spanning multiple projects requires an explicit valid filter replacement or filter: null; unrelated or no-op edits return a compatibility conflict.
+ * A partial budget update. Omitting properties preserves all existing budget properties.
+ * Setting properties to null or an empty object ({}) clears all existing budget properties.
+ * A non-empty properties object updates the supplied fields according to their merge semantics; omitted fields retain their existing values.
  */
 @added(Versions.v2026_11_15_preview)
 model CostControlPatch {
-  /** The budget properties to merge into the existing control. */
+  /**
+   * The budget properties to update. Omission preserves existing properties.
+   * Null or an empty object ({}) clears all existing properties.
+   */
   properties?: CostControlPatchProperties;
 }
 
@@ -482,7 +486,7 @@ interface AccountCostControls {
           CostControlEtagHeader)
   >;
 
-  /** Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection. */
+  /** Updates an account-owned budget synchronously. Omitting properties preserves all existing budget properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields; an unchanged budget retains its entity tag. */
   update is ArmCustomPatchSync<
     AccountCostControl,
     CostControlPatch,
@@ -532,7 +536,7 @@ interface ProjectCostControls {
           CostControlEtagHeader)
   >;
 
-  /** Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection. */
+  /** Updates a Foundry project budget synchronously. Omitting properties preserves all existing budget properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields and merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection. */
   update is ArmCustomPatchSync<
     ProjectCostControl,
     CostControlPatch,
