@@ -78,5 +78,5 @@ interface Jobs {
 @@doc(Job.name, "The job name");
 @@doc(Job.properties, "The job object");
 
-@@added(Job, Versions.v2025_10_01_preview);
-@@added(Jobs, Versions.v2025_10_01_preview);
+@@added(Job, Versions.v2026_08_01_preview);
+@@added(Jobs, Versions.v2026_08_01_preview);

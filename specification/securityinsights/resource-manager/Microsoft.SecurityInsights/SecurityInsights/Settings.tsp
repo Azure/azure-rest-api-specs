@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -83,5 +83,5 @@ interface ProductSettings {
 );
 @@doc(ProductSettings.update::parameters.resource, "The setting");
 
-@@added(Settings, Versions.v2025_10_01_preview);
-@@added(ProductSettings, Versions.v2025_10_01_preview);
+@@added(Settings, Versions.v2026_08_01_preview);
+@@added(ProductSettings, Versions.v2026_08_01_preview);

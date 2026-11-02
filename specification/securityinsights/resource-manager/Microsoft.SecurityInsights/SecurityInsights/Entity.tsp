@@ -33,14 +33,14 @@ interface Entities {
    * Gets an entity.
    */
   @tag("Entities")
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   get is Extension.Read<workspaceExternalResource, Entity, Error = CloudError>;
 
   /**
    * Gets all entities.
    */
   @tag("Entities")
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   list is Extension.ListByTarget<
     workspaceExternalResource,
     Entity,
@@ -70,7 +70,7 @@ interface Entities {
    * Expands an entity.
    */
   @tag("Entities")
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   expand is Extension.ActionSync<
     workspaceExternalResource,
     Entity,
@@ -85,7 +85,7 @@ interface Entities {
   @get
   @list
   @tag("Entities")
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   queries is Extension.ActionSync<
     workspaceExternalResource,
     Entity,
@@ -105,7 +105,7 @@ interface Entities {
    * Execute Insights for an entity.
    */
   @tag("Entities")
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   getInsights is Extension.ActionSync<
     workspaceExternalResource,
     Entity,
@@ -121,7 +121,7 @@ interface Entities {
   @operationId("EntitiesGetTimeline_list")
   @action("getTimeline")
   @tag("Entities")
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   entitiesGetTimelineList is Extension.ActionSync<
     workspaceExternalResource,
     Entity,

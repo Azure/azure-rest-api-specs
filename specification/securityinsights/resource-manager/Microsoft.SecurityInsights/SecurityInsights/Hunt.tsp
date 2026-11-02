@@ -94,5 +94,5 @@ interface Hunts {
 @@doc(Hunt.properties, "Hunt properties");
 @@doc(Hunts.createOrUpdate::parameters.resource, "The hunt");
 
-@@added(Hunt, Versions.v2025_10_01_preview);
-@@added(Hunts, Versions.v2025_10_01_preview);
+@@added(Hunt, Versions.v2026_08_01_preview);
+@@added(Hunts, Versions.v2026_08_01_preview);

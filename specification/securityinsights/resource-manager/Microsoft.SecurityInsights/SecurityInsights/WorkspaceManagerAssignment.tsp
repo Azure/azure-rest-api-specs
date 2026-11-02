@@ -112,5 +112,5 @@ interface WorkspaceManagerAssignments {
   "The workspace manager assignment"
 );
 
-@@added(WorkspaceManagerAssignment, Versions.v2025_10_01_preview);
-@@added(WorkspaceManagerAssignments, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerAssignment, Versions.v2026_08_01_preview);
+@@added(WorkspaceManagerAssignments, Versions.v2026_08_01_preview);
