@@ -293,6 +293,9 @@ catalogs:
     '@typespec/http':
       specifier: 1.17.0
       version: 1.17.0
+    '@typespec/http-client':
+      specifier: 0.17.0
+      version: 0.17.0
     '@typespec/library-linter':
       specifier: 0.87.0
       version: 0.87.0
@@ -526,6 +529,9 @@ importers:
       '@typespec/http':
         specifier: 'catalog:'
         version: 1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3)))
+      '@typespec/http-client':
+        specifier: 'catalog:'
+        version: 0.17.0(@alloy-js/core@0.24.1)(@alloy-js/typescript@0.24.0)(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/emitter-framework@0.21.0(@alloy-js/core@0.24.1)(@alloy-js/csharp@0.24.0)(@alloy-js/python@0.5.0)(@alloy-js/typescript@0.24.0)(@typespec/compiler@1.17.0(@types/node@26.6.3)))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))
       '@typespec/openapi':
         specifier: 'catalog:'
         version: 1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))
@@ -1144,6 +1150,21 @@ packages:
   '@actions/io@3.0.2':
     resolution: {integrity: sha512-nRBchcMM+QK1pdjO7/idu86rbJI5YHUKCvKs0KxnSYbVe3F51UfGxuZX4Qy/fWlp6l7gWFwIkrOzN+oUK03kfw==}
 
+  '@alloy-js/core@0.24.1':
+    resolution: {integrity: sha512-cye97/HGo0/G8XIc8UnS0PaSoSOj9DDPEiuKsXsn7xQgR1sbL+Nf0oTMZnL2fFb7mRnmULO84x5wK8R/YtReTg==}
+
+  '@alloy-js/csharp@0.24.0':
+    resolution: {integrity: sha512-TR+VAAnwbFV7YWnGSlyqL2X2/lrS3UBZ8JBKxszn7z+yk4Y5Sgs6dag3xPZMR5CsQXbxkN3gY/c4G3vqgKZf9A==}
+
+  '@alloy-js/msbuild@0.24.0':
+    resolution: {integrity: sha512-Y4bDr7uYEafm40GP92TdBYV4xYZA4O4AoFmES50wovTVSHp904JPU6Ct5GEsV7OG7RhrzT00oeCpJsx4bIYuFQ==}
+
+  '@alloy-js/python@0.5.0':
+    resolution: {integrity: sha512-p1O5eUFtfW5MLg4ngywnjMz43adco3+pdSLxfRFPYc452S7fStToP0jy7i9fyuLlR0o//1K9SDmfuP/VMK/Rtw==}
+
+  '@alloy-js/typescript@0.24.0':
+    resolution: {integrity: sha512-xpnWUa5gaPRg4eeTFp4Xg8GRXzUghIpOzAWuGujvihgksIAH92lLTvEcPL1JTICup8Jv2us0JHndc4a8LWG+Ow==}
+
   '@apidevtools/json-schema-ref-parser@14.0.1':
     resolution: {integrity: sha512-Oc96zvmxx1fqoSEdUmfmvvb59/KDOnUoJ7s2t7bISyAn0XEz57LCCw8k2Y4Pf3mwKaZLMciESALORLgfe2frCw==}
     engines: {node: '>= 16'}
@@ -1395,6 +1416,10 @@ packages:
   '@bcoe/v8-coverage@1.0.2':
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
+
+  '@colors/colors@1.5.0':
+    resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
+    engines: {node: '>=0.1.90'}
 
   '@colors/colors@1.6.0':
     resolution: {integrity: sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==}
@@ -2394,6 +2419,9 @@ packages:
   '@types/urijs@1.19.26':
     resolution: {integrity: sha512-wkXrVzX5yoqLnndOwFsieJA7oKM8cNkOKJtf/3vVGSUFkWDKZvFHpIl9Pvqb/T9UsawBBFMTTD8xu7sK5MWuvg==}
 
+  '@types/ws@8.18.2':
+    resolution: {integrity: sha512-67MQl+fpWKVTT1NYdnmo3U4sc/xPo/zQBncVnI74qmQa0z/b+1g6iYqNmGCPbxO+zz2aklb08a0oHfegiVd0/w==}
+
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
 
@@ -2531,11 +2559,29 @@ packages:
     engines: {node: '>=22.0.0'}
     hasBin: true
 
+  '@typespec/emitter-framework@0.21.0':
+    resolution: {integrity: sha512-ACVZ6cUpO+dmzA0xbBxYuYAWwkPp59kABxIES5BRvhKg873hyI7o3vM3Ni+m5FK4JWlBdw1oR4QINSNUt5rDCw==}
+    peerDependencies:
+      '@alloy-js/core': ^0.24.1
+      '@alloy-js/csharp': ^0.24.0
+      '@alloy-js/python': ^0.5.0
+      '@alloy-js/typescript': ^0.24.0
+      '@typespec/compiler': ^1.16.0
+
   '@typespec/events@0.87.0':
     resolution: {integrity: sha512-LZHZHnrqOZrQT9bokd9InaXpG35XoChHK4lZqAfJtTTx8zq0kzm5WIZ8fnXttUj332mjjgSNVtZyyrrZFzpKQw==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       '@typespec/compiler': ^1.17.0
+
+  '@typespec/http-client@0.17.0':
+    resolution: {integrity: sha512-yhdHO/2zj/jMGJwOirxJYJKA22h255zb0x/KC4tPArnI85DzOMd9Muh3NhN5QZh48Qsudcf/lvJMcs0FTFrJgg==}
+    peerDependencies:
+      '@alloy-js/core': ^0.24.1
+      '@alloy-js/typescript': ^0.24.0
+      '@typespec/compiler': ^1.16.0
+      '@typespec/emitter-framework': ^0.21.0
+      '@typespec/http': ^1.16.0
 
   '@typespec/http@1.17.0':
     resolution: {integrity: sha512-XLwL+NvkQ4hWhnIwZms2CNoxCULFt/jMa+QGaKg4hDwPFLvrXsUm7JWPHi1QOcwzGFG8Z1NglqRPzKl2der2ww==}
@@ -2665,6 +2711,12 @@ packages:
 
   '@vitest/utils@5.0.2':
     resolution: {integrity: sha512-mgpUtxFhKeOKVaArBVHNJGdYHAeRh135o59l13uVmPUCS1OUtis5pBqXEgE25iqRgFqEBwXvJlkhknRsYnMeqg==}
+
+  '@vue/reactivity@3.5.44':
+    resolution: {integrity: sha512-u+QJdKeBBEADkPdevsL+6E12QlYVfBD8Zcw5qjDQKtamI6l14KyqazJMobhCKelhWN5zpyKUiEDoTyHE93cqWw==}
+
+  '@vue/shared@3.5.44':
+    resolution: {integrity: sha512-H82XLH0DjmSOdbEwO15x3QTo1f5PWEtv237eLpYKc0mqLu+B8hnq16lFWmuBmNurkeiG3wr+oM1FhOll/YVFRg==}
 
   agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
@@ -2839,6 +2891,10 @@ packages:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
 
+  cli-table3@0.6.5:
+    resolution: {integrity: sha512-+W/5efTR7y5HRD7gACw9yQjqMVvEMLBHmboM/kPWam+H+Hmyrgjh6YncVKK122YZkXrLudzTuAukUw9FnMf7IQ==}
+    engines: {node: 10.* || >= 12.*}
+
   cli-width@4.1.0:
     resolution: {integrity: sha512-ouuZd4/dm2Sw5Gmqy6bGyNNNe1qt9RpmxveLSO7KcgsTnU7RXfsw+/bukWGo1abgBiMAic068rclZsO4IWmmxQ==}
     engines: {node: '>= 12'}
@@ -2972,6 +3028,9 @@ packages:
   detect-libc@2.1.2:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
+
+  devalue@5.9.4:
+    resolution: {integrity: sha512-sPAT4pztbu6586/hrhOnMKS17IJrvg12mXiSPSS3W5qDeN2RGgvZ0diZCm31dBbnevfVmujNO3IM2wrS4Y2Rhg==}
 
   dezalgo@1.0.4:
     resolution: {integrity: sha512-rXSP0bf+5n0Qonsb+SVVfNfIsimO4HEtmnIpPHY8Q1UCzKlQrDMfdobr8nJOOsRgWCyMRqeSBQzmWUMq7zvVig==}
@@ -4395,6 +4454,18 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
+  ws@8.22.0:
+    resolution: {integrity: sha512-Ydggc987+RO0AnWtZ/7Wq9FtNvcrL1b/RO0ud9mWjUPgDrsAAwQSF51sm2hm1XofbU/4jkpGEsLFsZZxU+1DOg==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
   y18n@4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}
 
@@ -4474,6 +4545,58 @@ snapshots:
       undici: 6.29.0
 
   '@actions/io@3.0.2': {}
+
+  '@alloy-js/core@0.24.1':
+    dependencies:
+      '@types/ws': 8.18.2
+      '@vue/reactivity': 3.5.44
+      cli-table3: 0.6.5
+      devalue: 5.9.4
+      pathe: 2.0.3
+      picocolors: 1.1.1
+      ws: 8.22.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@alloy-js/csharp@0.24.0':
+    dependencies:
+      '@alloy-js/core': 0.24.1
+      '@alloy-js/msbuild': 0.24.0
+      change-case: 5.4.4
+      marked: 18.0.14
+      pathe: 2.0.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@alloy-js/msbuild@0.24.0':
+    dependencies:
+      '@alloy-js/core': 0.24.1
+      change-case: 5.4.4
+      marked: 18.0.14
+      pathe: 2.0.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@alloy-js/python@0.5.0':
+    dependencies:
+      '@alloy-js/core': 0.24.1
+      change-case: 5.4.4
+      pathe: 2.0.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@alloy-js/typescript@0.24.0':
+    dependencies:
+      '@alloy-js/core': 0.24.1
+      change-case: 5.4.4
+      pathe: 2.0.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
   '@apidevtools/json-schema-ref-parser@14.0.1':
     dependencies:
@@ -4827,6 +4950,9 @@ snapshots:
       '@babel/helper-validator-identifier': 7.29.7
 
   '@bcoe/v8-coverage@1.0.2': {}
+
+  '@colors/colors@1.5.0':
+    optional: true
 
   '@colors/colors@1.6.0': {}
 
@@ -5834,6 +5960,10 @@ snapshots:
 
   '@types/urijs@1.19.26': {}
 
+  '@types/ws@8.18.2':
+    dependencies:
+      '@types/node': 26.6.3
+
   '@types/yargs-parser@21.0.3': {}
 
   '@types/yargs@17.0.35':
@@ -5928,9 +6058,25 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
+  '@typespec/emitter-framework@0.21.0(@alloy-js/core@0.24.1)(@alloy-js/csharp@0.24.0)(@alloy-js/python@0.5.0)(@alloy-js/typescript@0.24.0)(@typespec/compiler@1.17.0(@types/node@26.6.3))':
+    dependencies:
+      '@alloy-js/core': 0.24.1
+      '@alloy-js/csharp': 0.24.0
+      '@alloy-js/python': 0.5.0
+      '@alloy-js/typescript': 0.24.0
+      '@typespec/compiler': 1.17.0(@types/node@26.6.3)
+
   '@typespec/events@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))':
     dependencies:
       '@typespec/compiler': 1.17.0(@types/node@26.6.3)
+
+  '@typespec/http-client@0.17.0(@alloy-js/core@0.24.1)(@alloy-js/typescript@0.24.0)(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/emitter-framework@0.21.0(@alloy-js/core@0.24.1)(@alloy-js/csharp@0.24.0)(@alloy-js/python@0.5.0)(@alloy-js/typescript@0.24.0)(@typespec/compiler@1.17.0(@types/node@26.6.3)))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))':
+    dependencies:
+      '@alloy-js/core': 0.24.1
+      '@alloy-js/typescript': 0.24.0
+      '@typespec/compiler': 1.17.0(@types/node@26.6.3)
+      '@typespec/emitter-framework': 0.21.0(@alloy-js/core@0.24.1)(@alloy-js/csharp@0.24.0)(@alloy-js/python@0.5.0)(@alloy-js/typescript@0.24.0)(@typespec/compiler@1.17.0(@types/node@26.6.3))
+      '@typespec/http': 1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3)))
 
   '@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3)))':
     dependencies:
@@ -6039,6 +6185,12 @@ snapshots:
       '@vitest/pretty-format': 5.0.2
       convert-source-map: 2.0.0
       tinyrainbow: 3.1.1
+
+  '@vue/reactivity@3.5.44':
+    dependencies:
+      '@vue/shared': 3.5.44
+
+  '@vue/shared@3.5.44': {}
 
   agent-base@7.1.4: {}
 
@@ -6192,6 +6344,12 @@ snapshots:
 
   chownr@3.0.0: {}
 
+  cli-table3@0.6.5:
+    dependencies:
+      string-width: 4.2.3
+    optionalDependencies:
+      '@colors/colors': 1.5.0
+
   cli-width@4.1.0: {}
 
   cliui@6.0.0:
@@ -6320,6 +6478,8 @@ snapshots:
   dependency-graph@1.0.0: {}
 
   detect-libc@2.1.2: {}
+
+  devalue@5.9.4: {}
 
   dezalgo@1.0.4:
     dependencies:
@@ -7871,6 +8031,8 @@ snapshots:
       strip-ansi: 7.2.0
 
   wrappy@1.0.2: {}
+
+  ws@8.22.0: {}
 
   y18n@4.0.3: {}
 
