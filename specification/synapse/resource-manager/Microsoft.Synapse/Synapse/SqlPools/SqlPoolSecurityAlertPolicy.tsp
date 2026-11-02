@@ -26,22 +26,33 @@ model SqlPoolSecurityAlertPolicy
   >;
 }
 
+alias SqlPoolSecurityAlertPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The name of the security alert policy. */
+    @segment("securityAlertPolicies")
+    @key
+    @path
+    securityAlertPolicyName: SecurityAlertPolicyName;
+  }
+>;
+
 @armResourceOperations
 interface SqlPoolSecurityAlertPolicies {
   /**
    * Get a Sql pool's security alert policy.
    */
-  get is ArmResourceRead<SqlPoolSecurityAlertPolicy>;
+  get is SqlPoolSecurityAlertPolicyOps.Read<SqlPoolSecurityAlertPolicy>;
 
   /**
    * Create or update a Sql pool's security alert policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SqlPoolSecurityAlertPolicy>;
+  createOrUpdate is SqlPoolSecurityAlertPolicyOps.CreateOrUpdateSync<SqlPoolSecurityAlertPolicy>;
 
   /**
    * Get a list of Sql pool's security alert policies.
    */
-  list is ArmResourceListByParent<
+  list is SqlPoolSecurityAlertPolicyOps.List<
     SqlPoolSecurityAlertPolicy,
     Response = ArmResponse<ListSqlPoolSecurityAlertPolicies>
   >;

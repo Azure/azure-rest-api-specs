@@ -26,12 +26,23 @@ model MaintenanceWindows
   >;
 }
 
+alias MaintenanceWindowsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The maintenance window name (always current). */
+    @segment("maintenancewindows")
+    @key
+    @path
+    maintenanceWindow: "current";
+  }
+>;
+
 @armResourceOperations
 interface SqlPoolMaintenanceWindows {
   /**
    * Get a SQL pool's Maintenance Windows.
    */
-  get is ArmResourceRead<
+  get is MaintenanceWindowsOps.Read<
     MaintenanceWindows,
     Parameters = {
       /**
@@ -46,7 +57,7 @@ interface SqlPoolMaintenanceWindows {
    * Creates or updates a Sql pool's maintenance windows settings.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is MaintenanceWindowsOps.CreateOrUpdateSync<
     MaintenanceWindows,
     Parameters = {
       /**

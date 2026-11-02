@@ -38,6 +38,17 @@ model EncryptionProtector
   location?: string;
 }
 
+alias EncryptionProtectorOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  WorkspaceParentParameters,
+  {
+    /** The name of the encryption protector. */
+    @segment("encryptionProtector")
+    @key
+    @path
+    encryptionProtectorName: EncryptionProtectorName;
+  }
+>;
+
 @armResourceOperations
 interface EncryptionProtectors {
   /**
@@ -45,7 +56,7 @@ interface EncryptionProtectors {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceManagedSqlServerEncryptionProtector_Get")
-  get is ArmResourceRead<EncryptionProtector>;
+  get is EncryptionProtectorOps.Read<EncryptionProtector>;
 
   /**
    * Updates workspace managed sql server's encryption protector.
@@ -53,7 +64,7 @@ interface EncryptionProtectors {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WorkspaceManagedSqlServerEncryptionProtector_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is EncryptionProtectorOps.CreateOrUpdateAsync<
     EncryptionProtector,
     Response =
       | ArmResourceUpdatedResponse<EncryptionProtector>
@@ -67,14 +78,18 @@ interface EncryptionProtectors {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceManagedSqlServerEncryptionProtector_List")
-  list is ArmResourceListByParent<EncryptionProtector>;
+  list is EncryptionProtectorOps.List<EncryptionProtector>;
 
   /**
    * Revalidates workspace managed sql server's existing encryption protector.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceManagedSqlServerEncryptionProtector_Revalidate")
-  revalidate is ArmResourceActionAsync<EncryptionProtector, void, OkResponse>;
+  revalidate is EncryptionProtectorOps.ActionAsync<
+    EncryptionProtector,
+    void,
+    OkResponse
+  >;
 }
 
 @@doc(EncryptionProtector.name, "The name of the encryption protector.");

@@ -42,6 +42,17 @@ model GeoBackupPolicy is Azure.ResourceManager.ProxyResource<
   location?: string;
 }
 
+alias GeoBackupPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The name of the geo backup policy. */
+    @segment("geoBackupPolicies")
+    @key
+    @path
+    geoBackupPolicyName: GeoBackupPolicyName;
+  }
+>;
+
 @armResourceOperations
 interface GeoBackupPolicies {
   /**
@@ -49,21 +60,21 @@ interface GeoBackupPolicies {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolGeoBackupPolicies_Get")
-  get is ArmResourceRead<GeoBackupPolicy>;
+  get is GeoBackupPolicyOps.Read<GeoBackupPolicy>;
 
   /**
    * Updates a SQL Pool geo backup policy.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolGeoBackupPolicies_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<GeoBackupPolicy>;
+  createOrUpdate is GeoBackupPolicyOps.CreateOrUpdateSync<GeoBackupPolicy>;
 
   /**
    * Get list of SQL pool geo backup policies
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolGeoBackupPolicies_List")
-  list is ArmResourceListByParent<
+  list is GeoBackupPolicyOps.List<
     GeoBackupPolicy,
     Response = ArmResponse<GeoBackupPolicyListResult>
   >;

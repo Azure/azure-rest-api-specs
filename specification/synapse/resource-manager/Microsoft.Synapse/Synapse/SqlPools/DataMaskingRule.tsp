@@ -39,22 +39,33 @@ model DataMaskingRule
   kind?: string;
 }
 
+alias DataMaskingRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  DataMaskingPolicyParentParameters,
+  {
+    /** The name of the data masking rule. */
+    @segment("rules")
+    @key
+    @path
+    dataMaskingRuleName: string;
+  }
+>;
+
 @armResourceOperations
 interface DataMaskingRules {
   /**
    * Gets the specific Sql pool data masking rule.
    */
-  get is ArmResourceRead<DataMaskingRule>;
+  get is DataMaskingRuleOps.Read<DataMaskingRule>;
 
   /**
    * Creates or updates a Sql pool data masking rule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<DataMaskingRule>;
+  createOrUpdate is DataMaskingRuleOps.CreateOrUpdateSync<DataMaskingRule>;
 
   /**
    * Gets a list of Sql pool data masking rules.
    */
-  listBySqlPool is ArmResourceListByParent<
+  listBySqlPool is DataMaskingRuleOps.List<
     DataMaskingRule,
     Response = ArmResponse<DataMaskingRuleListResult>
   >;

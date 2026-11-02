@@ -40,12 +40,23 @@ model SqlPoolConnectionPolicy
   location?: string;
 }
 
+alias SqlPoolConnectionPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The name of the connection policy. */
+    @segment("connectionPolicies")
+    @key
+    @path
+    connectionPolicyName: ConnectionPolicyName;
+  }
+>;
+
 @armResourceOperations
 interface SqlPoolConnectionPolicies {
   /**
    * Get a Sql pool's connection policy, which is used with table auditing.
    */
-  get is ArmResourceRead<SqlPoolConnectionPolicy>;
+  get is SqlPoolConnectionPolicyOps.Read<SqlPoolConnectionPolicy>;
 }
 
 @@doc(SqlPoolConnectionPolicy.name, "The name of the connection policy.");

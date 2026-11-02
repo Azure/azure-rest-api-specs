@@ -26,12 +26,23 @@ model MaintenanceWindowOptions
   >;
 }
 
+alias MaintenanceWindowOptionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The maintenance window options name (always current). */
+    @segment("maintenanceWindowOptions")
+    @key
+    @path
+    maintenanceWindowOption: "current";
+  }
+>;
+
 @armResourceOperations
 interface SqlPoolMaintenanceWindowOptions {
   /**
    * Get list of SQL pool's available maintenance windows.
    */
-  get is ArmResourceRead<
+  get is MaintenanceWindowOptionsOps.Read<
     MaintenanceWindowOptions,
     Parameters = {
       /**

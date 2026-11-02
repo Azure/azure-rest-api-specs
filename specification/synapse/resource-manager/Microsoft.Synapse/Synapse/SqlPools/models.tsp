@@ -2907,3 +2907,49 @@ model DedicatedSQLminimalTlsSettingsPatchInfo {
    */
   minimalTlsVersion?: string;
 }
+
+/**
+ * The name of the data masking policy (always Default).
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Closed single-value enum preserves the original x-ms-enum name"
+enum DataMaskingPolicyName {
+  /**
+   * Default
+   */
+  Default,
+}
+
+namespace SqlPoolLevel {
+  /**
+   * The name of the SQL pool blob auditing policy (always default).
+   * Declared in a sub-namespace so it keeps the original x-ms-enum name, which the workspace-level open union also uses.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "Closed single-value enum preserves the original x-ms-enum name"
+  enum BlobAuditingPolicyName {
+    /**
+     * default
+     */
+    default,
+  }
+}
+
+/**
+ * The writable source of a sensitivity label (current).
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Closed single-value enum preserves the original x-ms-enum name"
+enum WritableSensitivityLabelSource {
+  /**
+   * current
+   */
+  current,
+}
+
+/**
+ * The source of a recommended sensitivity label (recommended).
+ */
+union RecommendedSensitivityLabelSource {
+  /**
+   * recommended
+   */
+  recommended: "recommended",
+}

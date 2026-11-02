@@ -33,6 +33,39 @@ model SensitivityLabel
   managedBy?: string;
 }
 
+alias SensitivityLabelReadOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolColumnParentParameters,
+  {
+    /** The source of the sensitivity label. */
+    @segment("sensitivityLabels")
+    @key
+    @path
+    sensitivityLabelSource: SensitivityLabelSource;
+  }
+>;
+
+alias SensitivityLabelWriteOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolColumnParentParameters,
+  {
+    /** The source of the sensitivity label. */
+    @segment("sensitivityLabels")
+    @key
+    @path
+    sensitivityLabelSource: WritableSensitivityLabelSource;
+  }
+>;
+
+alias SensitivityLabelRecommendationOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolColumnParentParameters,
+  {
+    /** The source of the sensitivity label. */
+    @segment("sensitivityLabels")
+    @key
+    @path
+    sensitivityLabelSource: RecommendedSensitivityLabelSource;
+  }
+>;
+
 @armResourceOperations
 interface SensitivityLabels {
   /**
@@ -40,21 +73,21 @@ interface SensitivityLabels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolSensitivityLabels_Get")
-  get is ArmResourceRead<SensitivityLabel>;
+  get is SensitivityLabelReadOps.Read<SensitivityLabel>;
 
   /**
    * Creates or updates the sensitivity label of a given column in a Sql pool
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolSensitivityLabels_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SensitivityLabel>;
+  createOrUpdate is SensitivityLabelWriteOps.CreateOrUpdateSync<SensitivityLabel>;
 
   /**
    * Deletes the sensitivity label of a given column in a Sql pool
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolSensitivityLabels_Delete")
-  delete is ArmResourceDeleteSync<SensitivityLabel>;
+  delete is SensitivityLabelWriteOps.DeleteSync<SensitivityLabel>;
 }
 
 @@doc(SensitivityLabel.name, "");

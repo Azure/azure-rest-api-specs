@@ -269,7 +269,7 @@ interface SqlPoolOperationResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPools_ListByWorkspace")
-  listByWorkspace is SqlPoolOperationResultOps.List<SqlPool>;
+  listByWorkspace is SqlPoolOps.List<SqlPool>;
 }
 
 @@doc(SqlPool.name, "SQL pool name");

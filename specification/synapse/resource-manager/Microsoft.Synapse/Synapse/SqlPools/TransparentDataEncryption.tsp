@@ -33,6 +33,17 @@ model TransparentDataEncryption
   location?: string;
 }
 
+alias TransparentDataEncryptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The name of the transparent data encryption configuration. */
+    @segment("transparentDataEncryption")
+    @key
+    @path
+    transparentDataEncryptionName: TransparentDataEncryptionName;
+  }
+>;
+
 @armResourceOperations
 interface TransparentDataEncryptions {
   /**
@@ -40,21 +51,21 @@ interface TransparentDataEncryptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolTransparentDataEncryptions_Get")
-  get is ArmResourceRead<TransparentDataEncryption>;
+  get is TransparentDataEncryptionOps.Read<TransparentDataEncryption>;
 
   /**
    * Creates or updates a Sql pool's transparent data encryption configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolTransparentDataEncryptions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<TransparentDataEncryption>;
+  createOrUpdate is TransparentDataEncryptionOps.CreateOrUpdateSync<TransparentDataEncryption>;
 
   /**
    * Get list of SQL pool's transparent data encryption configurations.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolTransparentDataEncryptions_List")
-  list is ArmResourceListByParent<TransparentDataEncryption>;
+  list is TransparentDataEncryptionOps.List<TransparentDataEncryption>;
 }
 
 @@doc(

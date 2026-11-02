@@ -33,22 +33,33 @@ model SqlPoolBlobAuditingPolicy
   kind?: string;
 }
 
+alias SqlPoolBlobAuditingPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The name of the blob auditing policy. */
+    @segment("auditingSettings")
+    @key
+    @path
+    blobAuditingPolicyName: SqlPoolLevel.BlobAuditingPolicyName;
+  }
+>;
+
 @armResourceOperations
 interface SqlPoolBlobAuditingPolicies {
   /**
    * Get a SQL pool's blob auditing policy.
    */
-  get is ArmResourceRead<SqlPoolBlobAuditingPolicy>;
+  get is SqlPoolBlobAuditingPolicyOps.Read<SqlPoolBlobAuditingPolicy>;
 
   /**
    * Creates or updates a SQL pool's blob auditing policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SqlPoolBlobAuditingPolicy>;
+  createOrUpdate is SqlPoolBlobAuditingPolicyOps.CreateOrUpdateSync<SqlPoolBlobAuditingPolicy>;
 
   /**
    * Lists auditing settings of a Sql pool.
    */
-  listBySqlPool is ArmResourceListByParent<SqlPoolBlobAuditingPolicy>;
+  listBySqlPool is SqlPoolBlobAuditingPolicyOps.List<SqlPoolBlobAuditingPolicy>;
 }
 
 @@doc(SqlPoolBlobAuditingPolicy.name, "");

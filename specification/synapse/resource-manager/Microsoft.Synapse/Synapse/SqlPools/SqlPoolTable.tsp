@@ -25,17 +25,28 @@ model SqlPoolTable is Azure.ResourceManager.ProxyResource<{}> {
   >;
 }
 
+alias SqlPoolTableOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolSchemaParentParameters,
+  {
+    /** The name of the table. */
+    @segment("tables")
+    @key
+    @path
+    tableName: string;
+  }
+>;
+
 @armResourceOperations
 interface SqlPoolTables {
   /**
    * Get Sql pool table
    */
-  get is ArmResourceRead<SqlPoolTable>;
+  get is SqlPoolTableOps.Read<SqlPoolTable>;
 
   /**
    * Gets tables of a given schema in a SQL pool.
    */
-  listBySchema is ArmResourceListByParent<
+  listBySchema is SqlPoolTableOps.List<
     SqlPoolTable,
     Parameters = {
       /**

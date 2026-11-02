@@ -25,17 +25,28 @@ model SqlPoolSchema is Azure.ResourceManager.ProxyResource<{}> {
   >;
 }
 
+alias SqlPoolSchemaOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The name of the schema. */
+    @segment("schemas")
+    @key
+    @path
+    schemaName: string;
+  }
+>;
+
 @armResourceOperations
 interface SqlPoolSchemas {
   /**
    * Get Sql Pool schema
    */
-  get is ArmResourceRead<SqlPoolSchema>;
+  get is SqlPoolSchemaOps.Read<SqlPoolSchema>;
 
   /**
    * Gets schemas of a given SQL pool.
    */
-  list is ArmResourceListByParent<
+  list is SqlPoolSchemaOps.List<
     SqlPoolSchema,
     Parameters = {
       /**

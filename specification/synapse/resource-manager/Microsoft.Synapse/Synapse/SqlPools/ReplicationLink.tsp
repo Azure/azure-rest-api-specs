@@ -32,6 +32,17 @@ model ReplicationLink
   location?: string;
 }
 
+alias ReplicationLinkOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The ID of the replication link. */
+    @segment("replicationLinks")
+    @key
+    @path
+    linkId: string;
+  }
+>;
+
 @armResourceOperations
 interface ReplicationLinks {
   /**
@@ -39,14 +50,14 @@ interface ReplicationLinks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolReplicationLinks_GetByName")
-  getByName is ArmResourceRead<ReplicationLink>;
+  getByName is ReplicationLinkOps.Read<ReplicationLink>;
 
   /**
    * Lists a Sql pool's replication links.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolReplicationLinks_List")
-  list is ArmResourceListByParent<ReplicationLink>;
+  list is ReplicationLinkOps.List<ReplicationLink>;
 }
 
 @@doc(ReplicationLink.name, "The ID of the replication link.");

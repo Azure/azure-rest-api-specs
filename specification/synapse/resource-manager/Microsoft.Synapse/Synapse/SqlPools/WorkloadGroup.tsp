@@ -25,6 +25,17 @@ model WorkloadGroup
   >;
 }
 
+alias WorkloadGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The name of the workload group. */
+    @segment("workloadGroups")
+    @key
+    @path
+    workloadGroupName: string;
+  }
+>;
+
 @armResourceOperations
 interface WorkloadGroups {
   /**
@@ -32,7 +43,7 @@ interface WorkloadGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolWorkloadGroup_Get")
-  get is ArmResourceRead<WorkloadGroup>;
+  get is WorkloadGroupOps.Read<WorkloadGroup>;
 
   /**
    * Create Or Update a Sql pool's workload group.
@@ -40,7 +51,7 @@ interface WorkloadGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("SqlPoolWorkloadGroup_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is WorkloadGroupOps.CreateOrUpdateAsync<
     WorkloadGroup,
     Response =
       | ArmResourceUpdatedResponse<WorkloadGroup>
@@ -58,7 +69,7 @@ interface WorkloadGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("SqlPoolWorkloadGroup_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is WorkloadGroupOps.DeleteWithoutOkAsync<
     WorkloadGroup,
     Response =
       | ArmDeletedResponse
@@ -71,7 +82,7 @@ interface WorkloadGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolWorkloadGroup_List")
-  list is ArmResourceListByParent<WorkloadGroup>;
+  list is WorkloadGroupOps.List<WorkloadGroup>;
 }
 
 @@doc(WorkloadGroup.name, "The name of the workload group.");

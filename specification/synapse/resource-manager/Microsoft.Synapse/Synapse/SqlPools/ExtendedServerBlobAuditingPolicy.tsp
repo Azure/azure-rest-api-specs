@@ -24,6 +24,17 @@ model ExtendedServerBlobAuditingPolicy
   >;
 }
 
+alias ExtendedServerBlobAuditingPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  WorkspaceParentParameters,
+  {
+    /** The name of the blob auditing policy. */
+    @segment("extendedAuditingSettings")
+    @key
+    @path
+    blobAuditingPolicyName: BlobAuditingPolicyName;
+  }
+>;
+
 @armResourceOperations
 interface ExtendedServerBlobAuditingPolicies {
   /**
@@ -31,7 +42,7 @@ interface ExtendedServerBlobAuditingPolicies {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceManagedSqlServerExtendedBlobAuditingPolicies_Get")
-  get is ArmResourceRead<ExtendedServerBlobAuditingPolicy>;
+  get is ExtendedServerBlobAuditingPolicyOps.Read<ExtendedServerBlobAuditingPolicy>;
 
   /**
    * Create or Update a workspace managed sql server's extended blob auditing policy.
@@ -39,7 +50,7 @@ interface ExtendedServerBlobAuditingPolicies {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WorkspaceManagedSqlServerExtendedBlobAuditingPolicies_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ExtendedServerBlobAuditingPolicyOps.CreateOrUpdateAsync<
     ExtendedServerBlobAuditingPolicy,
     Response =
       | ArmResourceUpdatedResponse<ExtendedServerBlobAuditingPolicy>
@@ -53,7 +64,7 @@ interface ExtendedServerBlobAuditingPolicies {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceManagedSqlServerExtendedBlobAuditingPolicies_ListByWorkspace")
-  listByWorkspace is ArmResourceListByParent<ExtendedServerBlobAuditingPolicy>;
+  listByWorkspace is ExtendedServerBlobAuditingPolicyOps.List<ExtendedServerBlobAuditingPolicy>;
 }
 
 @@doc(

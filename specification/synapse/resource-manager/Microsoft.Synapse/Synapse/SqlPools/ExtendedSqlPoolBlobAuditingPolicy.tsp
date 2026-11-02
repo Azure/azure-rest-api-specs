@@ -26,22 +26,33 @@ model ExtendedSqlPoolBlobAuditingPolicy
   >;
 }
 
+alias ExtendedSqlPoolBlobAuditingPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The name of the blob auditing policy. */
+    @segment("extendedAuditingSettings")
+    @key
+    @path
+    blobAuditingPolicyName: SqlPoolLevel.BlobAuditingPolicyName;
+  }
+>;
+
 @armResourceOperations
 interface ExtendedSqlPoolBlobAuditingPolicies {
   /**
    * Gets an extended Sql pool's blob auditing policy.
    */
-  get is ArmResourceRead<ExtendedSqlPoolBlobAuditingPolicy>;
+  get is ExtendedSqlPoolBlobAuditingPolicyOps.Read<ExtendedSqlPoolBlobAuditingPolicy>;
 
   /**
    * Creates or updates an extended Sql pool's blob auditing policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ExtendedSqlPoolBlobAuditingPolicy>;
+  createOrUpdate is ExtendedSqlPoolBlobAuditingPolicyOps.CreateOrUpdateSync<ExtendedSqlPoolBlobAuditingPolicy>;
 
   /**
    * Lists extended auditing settings of a Sql pool.
    */
-  listBySqlPool is ArmResourceListByParent<ExtendedSqlPoolBlobAuditingPolicy>;
+  listBySqlPool is ExtendedSqlPoolBlobAuditingPolicyOps.List<ExtendedSqlPoolBlobAuditingPolicy>;
 }
 
 @@doc(ExtendedSqlPoolBlobAuditingPolicy.name, "");

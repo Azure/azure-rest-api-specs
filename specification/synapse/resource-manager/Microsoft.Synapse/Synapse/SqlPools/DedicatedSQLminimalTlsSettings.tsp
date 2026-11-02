@@ -30,18 +30,40 @@ model DedicatedSQLminimalTlsSettings
   location?: string;
 }
 
+alias DedicatedSQLminimalTlsSettingsReadOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  WorkspaceParentParameters,
+  {
+    /** The name of the dedicated sql minimal tls settings. */
+    @segment("dedicatedSQLminimalTlsSettings")
+    @key
+    @path
+    dedicatedSQLminimalTlsSettingsName: string;
+  }
+>;
+
+alias DedicatedSQLminimalTlsSettingsWriteOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  WorkspaceParentParameters,
+  {
+    /** The name of the dedicated sql minimal tls settings. */
+    @segment("dedicatedSQLminimalTlsSettings")
+    @key
+    @path
+    dedicatedSQLminimalTlsSettingsName: DedicatedSQLMinimalTlsSettingsName;
+  }
+>;
+
 @armResourceOperations
 interface WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettings {
   /**
    * Get workspace managed sql server's minimal tls settings.
    */
-  get is ArmResourceRead<DedicatedSQLminimalTlsSettings>;
+  get is DedicatedSQLminimalTlsSettingsReadOps.Read<DedicatedSQLminimalTlsSettings>;
 
   /**
    * Update workspace managed sql server's minimal tls settings.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  update is ArmResourceCreateOrReplaceAsync<
+  update is DedicatedSQLminimalTlsSettingsWriteOps.CreateOrUpdateAsync<
     DedicatedSQLminimalTlsSettings,
     Response =
       | ArmResourceUpdatedResponse<DedicatedSQLminimalTlsSettings>
@@ -53,7 +75,7 @@ interface WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettings {
   /**
    * List workspace managed sql server's minimal tls settings.
    */
-  list is ArmResourceListByParent<DedicatedSQLminimalTlsSettings>;
+  list is DedicatedSQLminimalTlsSettingsWriteOps.List<DedicatedSQLminimalTlsSettings>;
 }
 
 @@doc(

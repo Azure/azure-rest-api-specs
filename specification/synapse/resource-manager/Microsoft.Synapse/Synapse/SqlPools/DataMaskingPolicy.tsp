@@ -45,18 +45,29 @@ model DataMaskingPolicy
   managedBy?: string;
 }
 
+alias DataMaskingPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The dataMaskingPolicyName. */
+    @segment("dataMaskingPolicies")
+    @key
+    @path
+    dataMaskingPolicyName: DataMaskingPolicyName;
+  }
+>;
+
 @armResourceOperations
 interface DataMaskingPolicies {
   /**
    * Gets a Sql pool data masking policy.
    */
-  get is ArmResourceRead<DataMaskingPolicy>;
+  get is DataMaskingPolicyOps.Read<DataMaskingPolicy>;
 
   /**
    * Creates or updates a Sql pool data masking policy
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is DataMaskingPolicyOps.CreateOrUpdateSync<
     DataMaskingPolicy,
     Response = ArmResourceUpdatedResponse<DataMaskingPolicy>
   >;

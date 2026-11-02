@@ -25,19 +25,30 @@ model SqlPoolColumn
   >;
 }
 
+alias SqlPoolColumnOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolTableParentParameters,
+  {
+    /** The name of the column. */
+    @segment("columns")
+    @key
+    @path
+    columnName: string;
+  }
+>;
+
 @armResourceOperations
 interface SqlPoolColumns {
   /**
    * Get Sql pool column
    */
-  get is ArmResourceRead<SqlPoolColumn>;
+  get is SqlPoolColumnOps.Read<SqlPoolColumn>;
 
   /**
    * Gets columns in a given table in a SQL pool.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolTableColumns_ListByTableName")
-  listByTableName is ArmResourceListByParent<
+  listByTableName is SqlPoolColumnOps.List<
     SqlPoolColumn,
     Parameters = {
       /**
@@ -54,17 +65,10 @@ interface SqlPoolColumns {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolSensitivityLabels_EnableRecommendation")
   @action("enable")
-  enableRecommendation is ArmResourceActionSync<
+  enableRecommendation is SensitivityLabelRecommendationOps.ActionSync<
     SqlPoolColumn,
     void,
-    OkResponse,
-    Parameters = {
-      /**
-       * The source of the sensitivity label.
-       */
-      @path
-      sensitivityLabelSource: "recommended";
-    }
+    OkResponse
   >;
 
   /**
@@ -73,17 +77,10 @@ interface SqlPoolColumns {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolSensitivityLabels_DisableRecommendation")
   @action("disable")
-  disableRecommendation is ArmResourceActionSync<
+  disableRecommendation is SensitivityLabelRecommendationOps.ActionSync<
     SqlPoolColumn,
     void,
-    OkResponse,
-    Parameters = {
-      /**
-       * The source of the sensitivity label.
-       */
-      @path
-      sensitivityLabelSource: "recommended";
-    }
+    OkResponse
   >;
 }
 

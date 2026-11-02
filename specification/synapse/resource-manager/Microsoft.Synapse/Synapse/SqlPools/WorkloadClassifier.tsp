@@ -25,6 +25,17 @@ model WorkloadClassifier
   >;
 }
 
+alias WorkloadClassifierOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  WorkloadGroupParentParameters,
+  {
+    /** The name of the workload classifier. */
+    @segment("workloadClassifiers")
+    @key
+    @path
+    workloadClassifierName: string;
+  }
+>;
+
 @armResourceOperations
 interface WorkloadClassifiers {
   /**
@@ -32,7 +43,7 @@ interface WorkloadClassifiers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolWorkloadClassifier_Get")
-  get is ArmResourceRead<WorkloadClassifier>;
+  get is WorkloadClassifierOps.Read<WorkloadClassifier>;
 
   /**
    * Create Or Update workload classifier for a Sql pool's workload group.
@@ -40,7 +51,7 @@ interface WorkloadClassifiers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("SqlPoolWorkloadClassifier_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is WorkloadClassifierOps.CreateOrUpdateAsync<
     WorkloadClassifier,
     Response =
       | ArmResourceUpdatedResponse<WorkloadClassifier>
@@ -58,7 +69,7 @@ interface WorkloadClassifiers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("SqlPoolWorkloadClassifier_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is WorkloadClassifierOps.DeleteWithoutOkAsync<
     WorkloadClassifier,
     Response =
       | ArmDeletedResponse
@@ -71,7 +82,7 @@ interface WorkloadClassifiers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolWorkloadClassifier_List")
-  list is ArmResourceListByParent<WorkloadClassifier>;
+  list is WorkloadClassifierOps.List<WorkloadClassifier>;
 }
 
 @@doc(WorkloadClassifier.name, "The name of the workload classifier.");

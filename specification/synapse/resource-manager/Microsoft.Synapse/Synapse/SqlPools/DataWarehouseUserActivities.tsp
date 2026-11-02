@@ -26,12 +26,23 @@ model DataWarehouseUserActivities
   >;
 }
 
+alias DataWarehouseUserActivitiesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The activity name of the Sql pool. */
+    @segment("dataWarehouseUserActivities")
+    @key
+    @path
+    dataWarehouseUserActivityName: DataWarehouseUserActivityName;
+  }
+>;
+
 @armResourceOperations
 interface SqlPoolDataWarehouseUserActivities {
   /**
    * Gets the user activities of a SQL pool which includes running and suspended queries
    */
-  get is ArmResourceRead<DataWarehouseUserActivities>;
+  get is DataWarehouseUserActivitiesOps.Read<DataWarehouseUserActivities>;
 }
 
 @@doc(DataWarehouseUserActivities.name, "The activity name of the Sql pool. ");

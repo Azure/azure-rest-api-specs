@@ -32,6 +32,17 @@ model RestorePoint
   location?: string;
 }
 
+alias RestorePointOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  SqlPoolParentParameters,
+  {
+    /** The name of the restore point. */
+    @segment("restorePoints")
+    @key
+    @path
+    restorePointName: string;
+  }
+>;
+
 @armResourceOperations
 interface RestorePoints {
   /**
@@ -39,21 +50,21 @@ interface RestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolRestorePoints_Get")
-  get is ArmResourceRead<RestorePoint>;
+  get is RestorePointOps.Read<RestorePoint>;
 
   /**
    * Deletes a restore point.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolRestorePoints_Delete")
-  delete is ArmResourceDeleteSync<RestorePoint>;
+  delete is RestorePointOps.DeleteSync<RestorePoint>;
 
   /**
    * Get SQL pool backup information
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlPoolRestorePoints_List")
-  list is ArmResourceListByParent<RestorePoint>;
+  list is RestorePointOps.List<RestorePoint>;
 }
 
 @@doc(RestorePoint.name, "The name of the restore point.");
