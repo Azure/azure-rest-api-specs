@@ -367,12 +367,6 @@ model BigDataPoolPatchInfo {
 }
 
 /**
- * Azure Synapse nested resource, which belongs to a workspace.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model SubResource extends AzureEntityResource {}
-
-/**
  * A list of Library resources.
  */
 model LibraryListResponse {
