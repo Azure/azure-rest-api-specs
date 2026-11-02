@@ -375,7 +375,19 @@ model SubResource extends AzureEntityResource {}
 /**
  * A list of Library resources.
  */
-model LibraryListResponse is Azure.Core.Page<LibraryResource>;
+model LibraryListResponse {
+  /**
+   * List of Library.
+   */
+  @pageItems
+  value: LibraryResource[];
+
+  /**
+   * The link to the next page of results, if any remaining results exist.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * SparkConfiguration Artifact information
@@ -424,5 +436,33 @@ model SparkConfigurationInfo {
 /**
  * A list of SparkConfiguration resources.
  */
-model SparkConfigurationListResponse
-  is Azure.Core.Page<SparkConfigurationResource>;
+model SparkConfigurationListResponse {
+  /**
+   * List of SparkConfiguration.
+   */
+  @pageItems
+  value: SparkConfigurationResource[];
+
+  /**
+   * The link to the next page of results, if any remaining results exist.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Collection of Big Data pool information
+ */
+model BigDataPoolResourceInfoListResult {
+  /**
+   * List of Big Data pools
+   */
+  @pageItems
+  value?: BigDataPoolResourceInfo[];
+
+  /**
+   * Link to the next page of results
+   */
+  @nextLink
+  nextLink?: string;
+}

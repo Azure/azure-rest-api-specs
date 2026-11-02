@@ -106,7 +106,10 @@ interface BigDataPoolResourceInfos {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BigDataPools_ListByWorkspace")
-  listByWorkspace is BigDataPoolOps.List<BigDataPoolResourceInfo>;
+  listByWorkspace is BigDataPoolOps.List<
+    BigDataPoolResourceInfo,
+    Response = ArmResponse<BigDataPoolResourceInfoListResult>
+  >;
 }
 
 @@doc(BigDataPoolResourceInfo.name, "Big Data pool name");
