@@ -2047,7 +2047,6 @@
         "deviceRegistryNamespaces": {
           "type": "array",
           "description": "The Device Registry namespaces linked to the provisioning service.",
-          "maxItems": 1,
           "items": {
             "$ref": "#/definitions/DeviceRegistryNamespaceDescription"
           },
@@ -2222,6 +2221,18 @@
         "hostName": {
           "type": "string",
           "description": "Host name of the IoT hub. This is required when connectionString is not provided."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the linked IoT hub. This does not replace the host name or authentication settings.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Devices/IotHubs"
+              }
+            ]
+          }
         },
         "authenticationType": {
           "$ref": "#/definitions/IotHubAuthenticationType",
