@@ -8,12 +8,10 @@ namespace Azure.AI.Projects;
 @pattern("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$")
 scalar SkillName extends string;
 
-const SkillsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
-};
+@doc("A public skill identifier. Existing skills can have opaque IDs such as skill_abc123 or name-valued IDs. When creating a new skill, supply a valid skill name.")
+scalar SkillIdentifier extends string;
 
 @doc("Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification.")
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model SkillInlineContent {
   @doc("A human-readable description of what the skill does and when to use it.")
   @maxLength(1024)
@@ -37,7 +35,6 @@ model SkillInlineContent {
 }
 
 @doc("Multipart request body for creating a skill version from files. Accepts either a single zip file or multiple individual skill files (directory upload). For zip uploads, the server extracts and validates contents. For directory uploads, files are validated as-is.")
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model CreateSkillVersionFromFilesBody {
   @doc("Skill files to upload. Upload a single zip file or multiple individual files with relative paths.")
   files: HttpPart<File>[];
@@ -47,9 +44,9 @@ model CreateSkillVersionFromFilesBody {
 }
 
 alias GetSkillRequest = {
-  @doc("The unique name of the skill.")
+  @doc("The public ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 };
 
 alias ListSkillsRequest = {
@@ -57,13 +54,12 @@ alias ListSkillsRequest = {
 };
 
 alias DeleteSkillRequest = {
-  @doc("The unique name of the skill.")
+  @doc("The public ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 };
 
 @doc("A skill resource.")
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model Skill {
   @doc("The unique identifier of the skill.")
   id: string;
@@ -86,7 +82,6 @@ model Skill {
 }
 
 @doc("A specific version of a skill.")
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model SkillVersion {
   @doc("The unique identifier of the skill version.")
   id: string;
@@ -109,9 +104,9 @@ model SkillVersion {
 }
 
 alias CreateSkillVersionRequest = {
-  @doc("The name of the skill. If the skill does not exist, it will be created.")
+  @doc("The public ID of an existing skill, or the skill name when creating a new skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("Inline skill content for simple skills without file uploads. Foundry-specific extension.")
   inline_content?: SkillInlineContent;
@@ -121,9 +116,9 @@ alias CreateSkillVersionRequest = {
 };
 
 alias GetSkillVersionRequest = {
-  @doc("The name of the skill.")
+  @doc("The public ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("The version identifier to retrieve.")
   @path
@@ -131,23 +126,23 @@ alias GetSkillVersionRequest = {
 };
 
 alias ListSkillVersionsRequest = {
-  @doc("The name of the skill to list versions for.")
+  @doc("The public ID of the skill to list versions for.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   ...CommonPageQueryParameters;
 };
 
 alias GetSkillContentRequest = {
-  @doc("The name of the skill.")
+  @doc("The public ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 };
 
 alias GetSkillVersionContentRequest = {
-  @doc("The name of the skill.")
+  @doc("The public ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("The version to download content for.")
   @path
@@ -155,18 +150,18 @@ alias GetSkillVersionContentRequest = {
 };
 
 alias UpdateSkillRequest = {
-  @doc("The name of the skill to update.")
+  @doc("The public ID of the skill to update.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest.")
   default_version: string;
 };
 
 alias DeleteSkillVersionRequest = {
-  @doc("The name of the skill.")
+  @doc("The public ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("The version identifier to delete.")
   @path
@@ -175,7 +170,6 @@ alias DeleteSkillVersionRequest = {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A deleted skill.")
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model DeleteSkillResponse {
   @doc("The unique identifier of the deleted skill.")
   id: string;
@@ -189,7 +183,6 @@ model DeleteSkillResponse {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A deleted skill version.")
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model DeleteSkillVersionResponse {
   @doc("The unique identifier of the deleted skill version.")
   id: string;
@@ -206,7 +199,6 @@ model DeleteSkillVersionResponse {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response body for downloading a skill package.")
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model DownloadSkillResponse {
   @doc("The media type of the returned package content.")
   @header("Content-Type")

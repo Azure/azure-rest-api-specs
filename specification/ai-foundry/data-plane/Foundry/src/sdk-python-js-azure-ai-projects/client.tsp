@@ -16,6 +16,7 @@ import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
+import "../skills/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "../voice-agents/routes.tsp";
@@ -29,7 +30,6 @@ import "../red-teams/routes.tsp";
 import "../routines/routes.tsp";
 import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
-import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
 
@@ -598,7 +598,7 @@ using Azure.AI.Projects;
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Beta Skills sub-client
+// Skills sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(Skills.createSkillVersion, "create");

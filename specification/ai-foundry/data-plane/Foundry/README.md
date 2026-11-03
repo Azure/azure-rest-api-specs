@@ -4,6 +4,30 @@ This folder contains the TypeSpec for all data-plane REST APIs of the Foundry se
 
 ## Contributing
 
+### Skills GA preparation
+
+Skills operations in [src/skills/routes.tsp](src/skills/routes.tsp) use
+`/openai/v1/skills` and no longer require `Foundry-Features: Skills=V1Preview`.
+The shared `api-version` query parameter is retained; removing it requires
+separate confirmation of the gateway contract. Path parameters keep the SDK
+argument name `name`, but accept public skill IDs, including existing opaque IDs.
+Creating a new skill still requires a valid skill name. Response name validation
+is unchanged.
+
+The Python/JavaScript client configuration now exposes Skills outside `.beta`.
+Before releasing regenerated SDKs, implement and test a deprecated
+`beta.skills` compatibility alias that delegates to the same GA Skills client
+(including Python synchronous and asynchronous clients). This alias is SDK work,
+not implemented by removing TypeSpec operation relocation.
+
+Release is blocked until backend/APIM support is deployed and tested without the
+preview header. Keep the legacy `/skills?api-version=v1` gateway/backend routes
+working for previously released SDKs, and continue accepting their preview header.
+The TypeSpec route change does not remove those server routes. Verify old-SDK and
+new-SDK CRUD/content behavior, existing opaque IDs, upload formats, and pagination
+before GA release. Vienna TypeSpec synchronization and SDK regeneration/release
+are separate follow-ups; this checkout does not perform them.
+
 ### Adding preview features
 
 Make sure that all preview features (routes and TypeSpec models) that are not associated with the `/openai` routes are marked with
