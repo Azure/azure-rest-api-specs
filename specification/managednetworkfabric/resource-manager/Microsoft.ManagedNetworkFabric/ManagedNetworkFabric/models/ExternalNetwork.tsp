@@ -448,7 +448,6 @@ model ExternalNetworkBmpPatchProperties {
   configurationState?: BmpConfigurationState;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("External Network Update Administrative State request")
 @added(Versions.v2025_07_15)
 model ExternalNetworkUpdateBfdAdministrativeStateRequest {
@@ -459,7 +458,6 @@ model ExternalNetworkUpdateBfdAdministrativeStateRequest {
   administrativeState?: BfdAdministrativeState;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("External Network Update Administrative State response")
 @added(Versions.v2025_07_15)
 model ExternalNetworkUpdateBfdAdministrativeStateResponse {
