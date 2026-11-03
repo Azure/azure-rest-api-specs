@@ -112,6 +112,19 @@ Protection applies to label application, not removal.
 - **Unauthorized label reversal** - if an unauthorized user applies a protected label, the bot removes it and posts a warning
 - **Base branch config** - the YAML is always read from the base branch (not the PR branch) to prevent self-authorization via config changes
 
+## Protected files approval
+
+`protected-files-approved` allows a maintainer to authorize protected tooling changes
+from a non-allowlisted PR author. Its label policy uses `azure-rest-api-specs-maintainers`
+and the trusted automation accounts.
+
+The **Protected Files** check independently verifies that the label is still present
+and its latest application was by an account in its `ALLOWED_AUTHORS` allowlist.
+Membership in the label policy's team or `global-approvers` alone does not bypass that
+verification. The checker and allowlist run from the PR's base commit, not PR code.
+Removing the label reruns the check and revokes the bypass. Normal CODEOWNERS review
+and other merge requirements still apply.
+
 ## Adopting
 
 Add the label and its authorized users or teams to `.github/protected-labels.yml`. The

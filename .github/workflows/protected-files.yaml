@@ -9,9 +9,16 @@ on:
       - reopened
       # re-run if base branch is changed, since previous merge commit may generate incorrect diff
       - edited
+      - labeled
+      - unlabeled
 
 permissions:
   contents: read
+  issues: read
+
+concurrency:
+  group: protected-files-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 env:
   # Evaluate before checkout or dependency setup, which trusted PRs may change.
@@ -38,10 +45,16 @@ jobs:
         if: ${{ env.user-allowed != 'true' }}
         with:
           persist-credentials: false
-          # Compare the PR merge commit with its base-branch parent.
+          # Fetch the merge and base commits, then switch to trusted base code below.
           fetch-depth: 2
           sparse-checkout: |
             .github
+
+      - name: Check out trusted base code
+        if: ${{ env.user-allowed != 'true' }}
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git checkout --detach "$PR_BASE_SHA"
 
       - uses: ./.github/actions/install-deps-github-script
         if: ${{ env.user-allowed != 'true' }}
@@ -52,5 +65,5 @@ jobs:
         with:
           script: |
             const { checkProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
-            const result = await checkProtectedFiles({ context, core });
+            const result = await checkProtectedFiles({ github, context, core });
             await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();

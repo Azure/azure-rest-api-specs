@@ -20,6 +20,15 @@ global-approvers:
   - timotheeguerin
   - xirzec
 
+# Protected tooling changes use the same maintainers as the Protected Files author allowlist.
+# The check independently verifies the latest label actor against that allowlist.
+protected-files-approved:
+  team: azure-rest-api-specs-maintainers
+  users:
+    - azure-sdk
+    - azure-sdk-automation[bot]
+    - dependabot[bot]
+
 # Data-plane REST stewardship reviewers. The Automation App resolves the live
 # `azure-data-plane-api-reviewers` roster with its Organization Members read permission.
 data-plane-review-signoff: &data-plane-reviewers
