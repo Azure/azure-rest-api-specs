@@ -1,4 +1,10 @@
-import { link, renderMarkdownDoc, section, table } from "@azure-tools/specs-shared/markdown";
+import {
+  link,
+  paragraph,
+  renderMarkdownDoc,
+  section,
+  table,
+} from "@azure-tools/specs-shared/markdown";
 import { getSdkLanguage, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import type { IssueComment } from "../comment.ts";
 import { sdkLabels } from "./labelling.ts";
@@ -47,13 +53,14 @@ export function buildSdkBreakingChangesSummary(
 
     const analysis = reportLink("analysis");
     const mitigation = reportLink("mitigate");
-    const nextAction =
-      (mitigation
-        ? "Review the mitigation report, apply any proposed customizations, then rerun SDK validation. "
+    const nextAction = paragraph(
+      mitigation
+        ? "Review the mitigation report, apply any proposed customizations, then rerun SDK validation."
         : analysis
-          ? "Review the analysis and mitigation guidance. "
-          : "Check the SDK validation results; analysis is not yet available for this commit. ") +
-      `For accepted breaking changes, follow the [suppression process](https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes) to suppress them.`;
+          ? "Review the analysis and mitigation guidance."
+          : "Check the SDK validation results; analysis is not yet available for this commit.",
+      `For accepted breaking changes, follow the ${link("suppression process", "https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes")} to suppress them.`,
+    );
     rows.push([
       language === "DotNet" ? ".NET" : language,
       "Breaking changes detected",

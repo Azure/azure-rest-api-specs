@@ -31,6 +31,7 @@ import {
   details,
   inlineCode,
   link,
+  paragraph,
   renderMarkdownDoc,
   section,
   unorderedList,
@@ -504,15 +505,11 @@ export async function summarizeChecksImpl(
   core.info(
     `Summarize checks has identified that status of "${AUTOMATED_CHECK_NAME}" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
   );
-  core.summary.addRaw(
-    renderMarkdownDoc(
-      section(
-        "Automated Checks Met",
-        `\`\`\`json\n${JSON.stringify(automatedChecksMet, null, 2)}\n\`\`\``,
-      ),
-      2,
-    ) + "\n\n",
+  const statusSummary = section(
+    "Automated Checks Met",
+    `\`\`\`json\n${JSON.stringify(automatedChecksMet, null, 2)}\n\`\`\``,
   );
+  core.summary.addRaw(`${renderMarkdownDoc(statusSummary, 2)}\n\n`);
   await core.summary.write();
 
   core.setOutput(
@@ -1040,19 +1037,22 @@ function getCommentBody(
           `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`,
         );
         summaryData = renderMarkdownDoc([
-          "⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, " +
+          paragraph(
+            "⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR,",
             "but soon these requirements will be blocking.",
+          ),
           `See ${inlineCode("Next Steps to merge")} comment on this PR for details on how to address them.`,
-          "If you want to proceed with merging this PR without fixing them, refer to " +
-            `${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
+          `If you want to proceed with merging this PR without fixing them, refer to ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
         ]);
         status = "SUCCESS";
       }
     }
   } else if (requirementsMet) {
     body.push(
-      `✅ All automated merging requirements have been met! ` +
+      paragraph(
+        "✅ All automated merging requirements have been met!",
         `To get your PR merged, see ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
+      ),
     );
     summaryData = renderMarkdownDoc([
       "✅ All automated merging requirements have been met.",

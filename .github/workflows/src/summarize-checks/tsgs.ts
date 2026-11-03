@@ -4,10 +4,16 @@
  **/
 
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
-import { inlineCode, link, renderMarkdownDoc } from "../../../shared/src/markdown.ts";
+import {
+  inlineCode,
+  link,
+  paragraph,
+  renderMarkdownDoc,
+  type MarkdownDoc,
+} from "../../../shared/src/markdown.ts";
 
 export function checkAndDiagramTsg(step: number): string {
-  return defaultTsg + `. In addition, ` + diagramTsg(step);
+  return `${defaultTsg}. In addition, ${diagramTsg(step)}`;
 }
 
 export function diagramTsg(step: number, capitalizeFirstLetter: boolean = false): string {
@@ -17,45 +23,50 @@ export function diagramTsg(step: number, capitalizeFirstLetter: boolean = false)
 
 const diagramUrl = "https://aka.ms/azsdk/pr-diagram";
 
-export const defaultTsg: string = `Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the ${link("aka.ms/ci-fix", "https://aka.ms/ci-fix")} guide`;
+export const defaultTsg = paragraph(
+  "Refer to the check in the PR's 'Checks' tab for details on how to fix it",
+  `and consult the ${link("aka.ms/ci-fix", "https://aka.ms/ci-fix")} guide`,
+);
 
 export const reqMetCheckTsg = `This is the final check that must pass. ${checkAndDiagramTsg(4)}`;
 
-export const typeSpecRequirementArmTsg =
-  `TypeSpec usage is required for all new (aka "greenfield") services. ` +
-  `The automation detected this pull request adds at least one new service that is violating this requirement. ` +
-  `For information on converting from OpenAPI specs to TypeSpec specs or on data-plane (DP) policies, ` +
-  `refer to ${link("aka.ms/azsdk/typespec", "https://aka.ms/azsdk/typespec")}. ` +
-  `If you have general questions on resource provider (RP) policies, ` +
-  `refer to ${link("aka.ms/rphelp", "https://aka.ms/rphelp")}`;
+export const typeSpecRequirementArmTsg = paragraph(
+  'TypeSpec usage is required for all new (aka "greenfield") services.',
+  "The automation detected this pull request adds at least one new service that is violating this requirement.",
+  "For information on converting from OpenAPI specs to TypeSpec specs or on data-plane (DP) policies,",
+  `refer to ${link("aka.ms/azsdk/typespec", "https://aka.ms/azsdk/typespec")}.`,
+  "If you have general questions on resource provider (RP) policies,",
+  `refer to ${link("aka.ms/rphelp", "https://aka.ms/rphelp")}`,
+);
 
 export const typeSpecRequirementDataPlaneTsg = typeSpecRequirementArmTsg;
 
-export const specChangePoliciesTsg =
-  `Inspect the check's diagnostics for TypeSpec usage requirements and SDK API-version policies. ` +
-  `Run ${inlineCode("pnpm spec-change-policies --base=<base> --head=<head>")} using the ` +
-  `comparison commits from the failed check. ` +
-  `See the ${link("Spec Change Policies guide", "https://github.com/Azure/azure-rest-api-specs/tree/main/eng/tools/spec-change-policies")}.`;
+export const specChangePoliciesTsg = paragraph(
+  "Inspect the check's diagnostics for TypeSpec usage requirements and SDK API-version policies.",
+  `Run ${inlineCode("pnpm spec-change-policies --base=<base> --head=<head>")} using the`,
+  "comparison commits from the failed check.",
+  `See the ${link("Spec Change Policies guide", "https://github.com/Azure/azure-rest-api-specs/tree/main/eng/tools/spec-change-policies")}.`,
+);
 
-export const typeSpecSuppressionsTsg =
-  `This PR introduced TypeSpec suppressions that require review. Inspect the suppression details in the ` +
-  `**TypeSpec suppressions requiring review** comment on this PR and ask the appropriate reviewer to apply the ` +
-  `${inlineCode(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)} label. ${diagramTsg(1, true)}.`;
+export const typeSpecSuppressionsTsg = paragraph(
+  "This PR introduced TypeSpec suppressions that require review. Inspect the suppression details in the",
+  "**TypeSpec suppressions requiring review** comment on this PR and ask the appropriate reviewer to apply the",
+  `${inlineCode(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)} label. ${diagramTsg(1, true)}.`,
+);
 
 export const brchHref = link("aka.ms/brch", "https://aka.ms/brch");
 
 export const brchTsg = `To unblock this PR, follow the process at ${brchHref}.`;
 
-export function wrapInArmReviewMessage(message: string): string {
-  const armReviewPrefix =
-    "This PR is in purview of the ARM review (label: `ARMReview`). " +
-    "This PR must get `ARMSignedOff` label from an ARM reviewer.";
-
-  const armReviewSuffix =
-    `For details of the ARM review, see ` +
-    `${link("aka.ms/azsdk/pr-arm-review", "https://aka.ms/azsdk/pr-arm-review")}`;
-
-  return renderMarkdownDoc([armReviewPrefix, message, armReviewSuffix]);
+export function wrapInArmReviewMessage(message: MarkdownDoc): string {
+  return renderMarkdownDoc([
+    paragraph(
+      "This PR is in purview of the ARM review (label: `ARMReview`).",
+      "This PR must get `ARMSignedOff` label from an ARM reviewer.",
+    ),
+    message,
+    `For details of the ARM review, see ${link("aka.ms/azsdk/pr-arm-review", "https://aka.ms/azsdk/pr-arm-review")}`,
+  ]);
 }
 
 export function notReadyForArmReviewReason(label: string): string {
