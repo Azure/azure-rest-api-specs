@@ -1,0 +1,45 @@
+{
+  "title": "ChangeRecordNextStagePlans_ListByParentAtSubscriptionLevel",
+  "operationId": "ChangeRecordNextStagePlans_ListByParentAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeRecordName": "subscriptionChangeRecord"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/subscriptionChangeRecord/nextStagePlans/default",
+            "name": "default",
+            "type": "Microsoft.ChangeSafety/changeRecords/nextStagePlans",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "changeRecordResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/subscriptionChangeRecord",
+              "lastStageProgressionSequence": 1,
+              "nextStages": [
+                {
+                  "stageReference": "verification",
+                  "sequence": 2,
+                  "status": "Uninitialized",
+                  "stageVariables": {
+                    "environment": "prod"
+                  }
+                },
+                {
+                  "stageReference": "completion",
+                  "sequence": 3,
+                  "status": "Uninitialized",
+                  "stageVariables": {
+                    "environment": "prod"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
