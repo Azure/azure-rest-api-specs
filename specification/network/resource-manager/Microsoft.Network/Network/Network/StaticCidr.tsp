@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./IpamPool.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -146,6 +148,7 @@ alias StaticCidrsListParameters = {
 
 @@doc(StaticCidr.name, "StaticCidr resource name to retrieve.");
 @@doc(StaticCidr.properties, "Properties of static CIDR resource.");
-@@doc(StaticCidrs.create::parameters.resource,
+@@doc(
+  StaticCidrs.create::parameters.resource,
   "StaticCidr resource object to create/update."
 );

@@ -1,0 +1,67 @@
+{
+  "title": "StacCollectionConfig_Get",
+  "operationId": "StacCollectionConfig_Get",
+  "parameters": {
+    "collectionId": "naip-atl",
+    "api-version": "2026-04-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tileSettings": {
+          "minZoom": 6,
+          "maxItemsPerTile": 35,
+          "defaultLocation": null
+        },
+        "mosaicInfo": {
+          "mosaics": [
+            {
+              "id": "default",
+              "name": "Default",
+              "description": "",
+              "cql": []
+            },
+            {
+              "id": "mos1",
+              "name": "Most recent available",
+              "description": "Most recent available imagery in this collection",
+              "cql": []
+            },
+            {
+              "id": "test-mosaic-1",
+              "name": "Test Most recent available",
+              "description": "Most recent available imagery in this collection - updated",
+              "cql": []
+            }
+          ],
+          "renderOptions": [
+            {
+              "id": "natural-color",
+              "name": "Natural color",
+              "description": "RGB from visual assets",
+              "type": "raster-tile",
+              "options": "assets=image&asset_bidx=image|1,2,3",
+              "vectorOptions": null,
+              "minZoom": 6,
+              "legend": null,
+              "conditions": null
+            },
+            {
+              "id": "test-natural-color",
+              "name": "Test Natural color updated",
+              "description": "RGB from visual assets - updated",
+              "type": "raster-tile",
+              "options": "assets=image&asset_bidx=image|1,2,3",
+              "vectorOptions": null,
+              "minZoom": 6,
+              "legend": null,
+              "conditions": null
+            }
+          ],
+          "defaultLocation": null,
+          "defaultCustomQuery": null
+        }
+      }
+    }
+  }
+}

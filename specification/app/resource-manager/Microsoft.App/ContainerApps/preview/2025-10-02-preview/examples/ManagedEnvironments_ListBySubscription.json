@@ -1,81 +1,76 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "api-version": "2025-10-02-preview"
+    "api-version": "2025-10-02-preview",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1",
             "name": "jlaw-demo1",
             "type": "Microsoft.App/managedEnvironments",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1",
             "location": "North Central US",
-            "tags": {},
             "properties": {
-              "provisioningState": "Succeeded",
-              "deploymentErrors": null,
-              "defaultDomain": "jlaw-demo1.k4apps.io",
-              "staticIp": "20.42.33.145",
               "appLogsConfiguration": null,
-              "zoneRedundant": true,
               "availabilityZones": [
                 "1",
                 "2",
                 "3"
               ],
-              "vnetConfiguration": {
-                "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
-              },
               "customDomainConfiguration": {
                 "customDomainVerificationId": "custom domain verification id",
                 "dnsSuffix": "www.my-name.com",
-                "subjectName": "CN=www.my-name.com",
                 "expirationDate": "2022-11-06T04:00:00Z",
+                "subjectName": "CN=www.my-name.com",
                 "thumbprint": "CERTIFICATE_THUMBPRINT"
               },
+              "defaultDomain": "jlaw-demo1.k4apps.io",
+              "deploymentErrors": null,
               "eventStreamEndpoint": "testEndpoint",
+              "infrastructureResourceGroup": "capp-svc-jlaw-demo1-northcentralus",
+              "ingressConfiguration": null,
+              "provisioningState": "Succeeded",
+              "staticIp": "20.42.33.145",
+              "vnetConfiguration": {
+                "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
+              },
               "workloadProfiles": [
                 {
                   "name": "My-GP-01",
                   "enableFips": true,
-                  "workloadProfileType": "GeneralPurpose",
+                  "maximumCount": 12,
                   "minimumCount": 3,
-                  "maximumCount": 12
+                  "workloadProfileType": "GeneralPurpose"
                 },
                 {
                   "name": "My-MO-01",
-                  "workloadProfileType": "MemoryOptimized",
+                  "maximumCount": 6,
                   "minimumCount": 3,
-                  "maximumCount": 6
+                  "workloadProfileType": "MemoryOptimized"
                 },
                 {
                   "name": "My-CO-01",
-                  "workloadProfileType": "ComputeOptimized",
+                  "maximumCount": 6,
                   "minimumCount": 3,
-                  "maximumCount": 6
+                  "workloadProfileType": "ComputeOptimized"
                 },
                 {
                   "name": "My-consumption-01",
                   "workloadProfileType": "Consumption"
                 }
               ],
-              "ingressConfiguration": null,
-              "infrastructureResourceGroup": "capp-svc-jlaw-demo1-northcentralus"
-            }
+              "zoneRedundant": true
+            },
+            "tags": {}
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.App/managedEnvironments/demo1",
             "name": "demo1",
             "type": "Microsoft.App/managedEnvironments",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.App/managedEnvironments/demo1",
             "location": "North Central US",
-            "tags": {},
             "properties": {
-              "provisioningState": "Succeeded",
-              "deploymentErrors": null,
-              "defaultDomain": "demo1.k4apps.io",
-              "staticIp": "52.142.21.61",
               "appLogsConfiguration": {
                 "destination": "log-analytics",
                 "logAnalyticsConfiguration": {
@@ -83,89 +78,96 @@
                   "dynamicJsonColumns": true
                 }
               },
-              "zoneRedundant": true,
               "availabilityZones": [
                 "1",
                 "2",
                 "3"
               ],
-              "vnetConfiguration": {
-                "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
-              },
               "customDomainConfiguration": {
                 "customDomainVerificationId": "custom domain verification id",
                 "dnsSuffix": "www.my-name2.com",
-                "subjectName": "CN=www.my-name2.com",
                 "expirationDate": "2022-11-06T04:00:00Z",
+                "subjectName": "CN=www.my-name2.com",
                 "thumbprint": "CERTIFICATE_THUMBPRINT"
               },
-              "ingressConfiguration": null,
+              "defaultDomain": "demo1.k4apps.io",
+              "deploymentErrors": null,
               "eventStreamEndpoint": "testEndpoint",
-              "infrastructureResourceGroup": "capp-svc-demo1-northcentralus"
-            }
+              "infrastructureResourceGroup": "capp-svc-demo1-northcentralus",
+              "ingressConfiguration": null,
+              "provisioningState": "Succeeded",
+              "staticIp": "52.142.21.61",
+              "vnetConfiguration": {
+                "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
+              },
+              "zoneRedundant": true
+            },
+            "tags": {}
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.App/managedEnvironments/pl1",
             "name": "pl1",
             "type": "Microsoft.App/managedEnvironments",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.App/managedEnvironments/pl1",
             "location": "North Central US",
-            "tags": {},
             "properties": {
-              "provisioningState": "Succeeded",
-              "deploymentErrors": null,
+              "appLogsConfiguration": {
+                "destination": "log-analytics",
+                "logAnalyticsConfiguration": {
+                  "customerId": "9ccccd4a-268f-4a9a-8d03-9bfe77c3fbd2",
+                  "dynamicJsonColumns": true
+                }
+              },
+              "availabilityZones": [
+                "1",
+                "2",
+                "3"
+              ],
+              "customDomainConfiguration": {
+                "customDomainVerificationId": "custom domain verification id",
+                "dnsSuffix": "www.my-name2.com",
+                "expirationDate": "2022-11-06T04:00:00Z",
+                "subjectName": "CN=www.my-name2.com",
+                "thumbprint": "CERTIFICATE_THUMBPRINT"
+              },
               "defaultDomain": "pl1.k4apps.io",
-              "privateLinkDefaultDomain": "privatelink.pl1.k4apps.io",
+              "deploymentErrors": null,
+              "eventStreamEndpoint": "testEndpoint",
+              "ingressConfiguration": null,
               "privateEndpointConnections": [
                 {
+                  "name": "96101496-ed84-44f9-a28c-d4798f053023-d1908429-ca41-48a0-a026-6a4014e6e615",
+                  "type": "Microsoft.App/managedEnvironments/privateEndpointConnections",
+                  "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.App/managedEnvironments/pl1/privateEndpointConnections/96101496-ed84-44f9-a28c-d4798f053023-d1908429-ca41-48a0-a026-6a4014e6e615",
                   "properties": {
-                    "privateEndpoint": {
-                      "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.Network/privateEndpoints/96101496-ed84-44f9-a28c-d4798f053023"
-                    },
                     "groupIds": [
                       "managedEnvironments"
                     ],
+                    "privateEndpoint": {
+                      "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.Network/privateEndpoints/96101496-ed84-44f9-a28c-d4798f053023"
+                    },
                     "privateLinkServiceConnectionState": {
-                      "status": "Approved",
                       "description": "please approve",
-                      "actionsRequired": "None"
+                      "actionsRequired": "None",
+                      "status": "Approved"
                     },
                     "provisioningState": "Succeeded"
-                  },
-                  "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.App/managedEnvironments/pl1/privateEndpointConnections/96101496-ed84-44f9-a28c-d4798f053023-d1908429-ca41-48a0-a026-6a4014e6e615",
-                  "name": "96101496-ed84-44f9-a28c-d4798f053023-d1908429-ca41-48a0-a026-6a4014e6e615",
-                  "type": "Microsoft.App/managedEnvironments/privateEndpointConnections"
+                  }
                 }
               ],
+              "privateLinkDefaultDomain": "privatelink.pl1.k4apps.io",
+              "provisioningState": "Succeeded",
               "staticIp": "52.142.21.61",
-              "appLogsConfiguration": {
-                "destination": "log-analytics",
-                "logAnalyticsConfiguration": {
-                  "customerId": "9ccccd4a-268f-4a9a-8d03-9bfe77c3fbd2",
-                  "dynamicJsonColumns": true
-                }
-              },
-              "zoneRedundant": true,
-              "availabilityZones": [
-                "1",
-                "2",
-                "3"
-              ],
               "vnetConfiguration": {
                 "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
               },
-              "customDomainConfiguration": {
-                "customDomainVerificationId": "custom domain verification id",
-                "dnsSuffix": "www.my-name2.com",
-                "subjectName": "CN=www.my-name2.com",
-                "expirationDate": "2022-11-06T04:00:00Z",
-                "thumbprint": "CERTIFICATE_THUMBPRINT"
-              },
-              "ingressConfiguration": null,
-              "eventStreamEndpoint": "testEndpoint"
-            }
+              "zoneRedundant": true
+            },
+            "tags": {}
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ManagedEnvironments_ListBySubscription",
+  "title": "List environments by subscription"
 }

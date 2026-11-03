@@ -1,0 +1,64 @@
+{
+  "operationId": "QuotaTransfers_List",
+  "title": "QuotaTransfers_List",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000001",
+    "targetProvider": "Microsoft.Compute",
+    "region": "eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000001/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaTransfers/compute-stdDv5-uplift-101",
+            "name": "compute-stdDv5-uplift-101",
+            "type": "Microsoft.Quota/quotaTransfers",
+            "etag": "abc123",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "transferStatus": "Pending",
+              "transferId": "12345678-1234-1234-1234-1234567890ab",
+              "displayName": "Move 50 Dv5 vCPU to recipient",
+              "destinationSubscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+              "destinationTenantId": "aaaaaaaa-bbbb-cccc-dddd-000000000099",
+              "billingAccountId": "1234567890",
+              "resourceName": "standardDv5Family",
+              "amount": 50,
+              "autoApprove": false,
+              "createdAt": "2026-11-10T17:00:00Z",
+              "expiresAt": "2026-11-17T17:00:00Z",
+              "createdBy": "donor-admin@contoso.com"
+            }
+          },
+          {
+            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000001/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaTransfers/compute-stdDv5-autoapprove-202",
+            "name": "compute-stdDv5-autoapprove-202",
+            "type": "Microsoft.Quota/quotaTransfers",
+            "etag": "def456",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "transferStatus": "Completed",
+              "transferId": "abcdef12-3456-7890-abcd-ef1234567890",
+              "displayName": "Move 25 Dv5 vCPU - auto approved",
+              "destinationSubscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+              "destinationTenantId": "aaaaaaaa-bbbb-cccc-dddd-000000000099",
+              "billingAccountId": "1234567890",
+              "resourceName": "standardDv5Family",
+              "amount": 25,
+              "autoApprove": true,
+              "createdAt": "2026-11-10T18:05:00Z",
+              "createdBy": "donor-admin@contoso.com",
+              "approval": {
+                "actor": "donor-admin@contoso.com",
+                "occurredAt": "2026-11-10T18:05:02Z"
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

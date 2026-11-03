@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkManager.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -70,7 +72,10 @@ interface SecurityAdminConfigurations {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CommonErrorResponse
   >;
 
@@ -98,12 +103,15 @@ interface SecurityAdminConfigurations {
   >;
 }
 
-@@doc(SecurityAdminConfiguration.name,
+@@doc(
+  SecurityAdminConfiguration.name,
   "The name of the network manager Security Configuration."
 );
-@@doc(SecurityAdminConfiguration.properties,
+@@doc(
+  SecurityAdminConfiguration.properties,
   "Indicates the properties for the network manager security admin configuration."
 );
-@@doc(SecurityAdminConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityAdminConfigurations.createOrUpdate::parameters.resource,
   "The security admin configuration to create or update"
 );

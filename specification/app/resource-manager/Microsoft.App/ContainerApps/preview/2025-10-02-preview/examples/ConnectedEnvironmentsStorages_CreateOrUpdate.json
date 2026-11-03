@@ -1,52 +1,54 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
-    "connectedEnvironmentName": "env",
-    "storageName": "jlaw-demo1",
     "api-version": "2025-10-02-preview",
+    "connectedEnvironmentName": "env",
+    "resourceGroupName": "examplerg",
     "storageEnvelope": {
       "properties": {
         "azureFile": {
-          "accountName": "account1",
+          "accessMode": "ReadOnly",
           "accountKey": "key",
-          "shareName": "share1",
-          "accessMode": "ReadOnly"
+          "accountName": "account1",
+          "shareName": "share1"
         }
       }
-    }
+    },
+    "storageName": "jlaw-demo1",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/env/storages/jlaw-demo1",
         "name": "jlaw-demo1",
         "type": "Microsoft.App/connectedEnvironments/storages",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/env/storages/jlaw-demo1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "deploymentErrors": null,
           "azureFile": {
+            "accessMode": "ReadOnly",
             "accountName": "account1",
-            "shareName": "share1",
-            "accessMode": "ReadOnly"
-          }
+            "shareName": "share1"
+          },
+          "deploymentErrors": null,
+          "provisioningState": "Succeeded"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/env/storages/jlaw-demo1",
         "name": "jlaw-demo1",
         "type": "Microsoft.App/connectedEnvironments/storages",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/env/storages/jlaw-demo1",
         "properties": {
-          "provisioningState": "InProgress",
           "azureFile": {
+            "accessMode": "ReadOnly",
             "accountName": "account1",
-            "shareName": "share1",
-            "accessMode": "ReadOnly"
-          }
+            "shareName": "share1"
+          },
+          "provisioningState": "InProgress"
         }
       }
     }
-  }
+  },
+  "operationId": "ConnectedEnvironmentsStorages_CreateOrUpdate",
+  "title": "Create or update environments storage"
 }

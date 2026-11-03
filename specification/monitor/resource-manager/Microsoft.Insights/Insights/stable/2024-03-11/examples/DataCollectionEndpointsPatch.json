@@ -1,30 +1,28 @@
 {
   "parameters": {
-    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2",
-    "resourceGroupName": "myResourceGroup",
-    "dataCollectionEndpointName": "myDataCollectionEndpoint",
     "api-version": "2024-03-11",
     "body": {
       "tags": {
         "tag1": "A"
       }
-    }
+    },
+    "dataCollectionEndpointName": "myDataCollectionEndpoint",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myDataCollectionEndpoint",
         "name": "myDataCollectionEndpoint",
         "type": "Microsoft.Insights/dataCollectionEndpoints",
+        "etag": "0000ae31-0000-0100-0000-65fd441c0000",
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myDataCollectionEndpoint",
         "location": "eastus",
-        "tags": {
-          "tag1": "A"
-        },
         "properties": {
-          "immutableId": "dce-cd85a330eb664aa3bc7883cc394b0000",
           "configurationAccess": {
             "endpoint": "https://mydatacollectionendpoint-71ib.eastus-1.handler.control.monitor.azure.com"
           },
+          "immutableId": "dce-cd85a330eb664aa3bc7883cc394b0000",
           "logsIngestion": {
             "endpoint": "https://mydatacollectionendpoint-71ib.eastus-1.ingest.monitor.azure.com"
           },
@@ -37,15 +35,19 @@
           "provisioningState": "Succeeded"
         },
         "systemData": {
+          "createdAt": "2024-03-22T08:40:59.2431682Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "createdAt": "2024-03-22T08:40:59.2431682Z",
+          "lastModifiedAt": "2024-03-22T11:55:22.5074142Z",
           "lastModifiedBy": "user1",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-03-22T11:55:22.5074142Z"
+          "lastModifiedByType": "User"
         },
-        "etag": "0000ae31-0000-0100-0000-65fd441c0000"
+        "tags": {
+          "tag1": "A"
+        }
       }
     }
-  }
+  },
+  "operationId": "DataCollectionEndpoints_Update",
+  "title": "Update data collection endpoint"
 }

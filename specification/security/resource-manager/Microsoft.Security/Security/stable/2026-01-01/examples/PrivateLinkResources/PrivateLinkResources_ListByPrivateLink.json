@@ -1,18 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "resourceGroupName": "rg",
+    "api-version": "2026-01-01",
     "privateLinkName": "pls",
-    "api-version": "2026-01-01"
+    "resourceGroupName": "rg",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateLinkResources/containers",
             "name": "containers",
             "type": "Microsoft.Security/privateLinks/privateLinkResources",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateLinkResources/containers",
             "properties": {
               "groupId": "containers",
               "requiredMembers": [
@@ -24,9 +25,10 @@
               ]
             }
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "PrivateLinkResources_List",
+  "title": "List private link resources"
 }

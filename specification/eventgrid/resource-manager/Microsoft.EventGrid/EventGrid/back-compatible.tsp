@@ -28,7 +28,8 @@ using Microsoft.EventGrid;
 @@Legacy.flattenProperty(PartnerNamespaceUpdateParameters.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(NetworkSecurityPerimeterConfigurationIssues.properties
+@@Legacy.flattenProperty(
+  NetworkSecurityPerimeterConfigurationIssues.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -71,15 +72,18 @@ using Microsoft.EventGrid;
 @@Legacy.flattenProperty(StorageQueueEventSubscriptionDestination.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HybridConnectionEventSubscriptionDestination.properties
+@@Legacy.flattenProperty(
+  HybridConnectionEventSubscriptionDestination.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ServiceBusQueueEventSubscriptionDestination.properties
+@@Legacy.flattenProperty(
+  ServiceBusQueueEventSubscriptionDestination.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ServiceBusTopicEventSubscriptionDestination.properties
+@@Legacy.flattenProperty(
+  ServiceBusTopicEventSubscriptionDestination.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -94,7 +98,8 @@ using Microsoft.EventGrid;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NamespaceTopicEventSubscriptionDestination.properties);
 
-@@clientName(CaCertificates.createOrUpdate::parameters.resource,
+@@clientName(
+  CaCertificates.createOrUpdate::parameters.resource,
   "caCertificateInfo"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -105,7 +110,8 @@ using Microsoft.EventGrid;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Channel.properties);
 
-@@clientName(ClientGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  ClientGroups.createOrUpdate::parameters.resource,
   "clientGroupInfo"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -121,7 +127,8 @@ using Microsoft.EventGrid;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Domain.properties);
 
-@@clientName(PrivateEndpointConnections.update::parameters.body,
+@@clientName(
+  PrivateEndpointConnections.update::parameters.body,
   "privateEndpointConnection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -131,21 +138,26 @@ using Microsoft.EventGrid;
 @@Legacy.flattenProperty(DomainTopic.properties);
 
 @@clientLocation(Subscriptions.get, "NamespaceTopicEventSubscriptions");
-@@clientLocation(Subscriptions.createOrUpdate,
+@@clientLocation(
+  Subscriptions.createOrUpdate,
   "NamespaceTopicEventSubscriptions"
 );
-@@clientName(Subscriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  Subscriptions.createOrUpdate::parameters.resource,
   "eventSubscriptionInfo"
 );
 @@clientLocation(Subscriptions.update, "NamespaceTopicEventSubscriptions");
-@@clientName(Subscriptions.update::parameters.properties,
+@@clientName(
+  Subscriptions.update::parameters.properties,
   "eventSubscriptionUpdateParameters"
 );
 @@clientLocation(Subscriptions.delete, "NamespaceTopicEventSubscriptions");
-@@clientLocation(Subscriptions.listByNamespaceTopic,
+@@clientLocation(
+  Subscriptions.listByNamespaceTopic,
   "NamespaceTopicEventSubscriptions"
 );
-@@clientLocation(Subscriptions.getDeliveryAttributes,
+@@clientLocation(
+  Subscriptions.getDeliveryAttributes,
   "NamespaceTopicEventSubscriptions"
 );
 @@clientLocation(Subscriptions.getFullUrl, "NamespaceTopicEventSubscriptions");
@@ -153,141 +165,177 @@ using Microsoft.EventGrid;
 @@Legacy.flattenProperty(Subscription.properties);
 
 @@clientLocation(EventSubscriptions.get, "DomainTopicEventSubscriptions");
-@@clientLocation(EventSubscriptions.createOrUpdate,
+@@clientLocation(
+  EventSubscriptions.createOrUpdate,
   "DomainTopicEventSubscriptions"
 );
-@@clientName(EventSubscriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  EventSubscriptions.createOrUpdate::parameters.resource,
   "eventSubscriptionInfo"
 );
 @@clientLocation(EventSubscriptions.update, "DomainTopicEventSubscriptions");
-@@clientName(EventSubscriptions.update::parameters.properties,
+@@clientName(
+  EventSubscriptions.update::parameters.properties,
   "eventSubscriptionUpdateParameters"
 );
 @@clientLocation(EventSubscriptions.delete, "DomainTopicEventSubscriptions");
 @@clientLocation(EventSubscriptions.list, "DomainTopicEventSubscriptions");
-@@clientLocation(EventSubscriptions.getDeliveryAttributes,
+@@clientLocation(
+  EventSubscriptions.getDeliveryAttributes,
   "DomainTopicEventSubscriptions"
 );
-@@clientLocation(EventSubscriptions.getFullUrl,
+@@clientLocation(
+  EventSubscriptions.getFullUrl,
   "DomainTopicEventSubscriptions"
 );
-@@clientName(TopicEventSubscriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  TopicEventSubscriptions.createOrUpdate::parameters.resource,
   "eventSubscriptionInfo"
 );
-@@clientName(TopicEventSubscriptions.update::parameters.properties,
+@@clientName(
+  TopicEventSubscriptions.update::parameters.properties,
   "eventSubscriptionUpdateParameters"
 );
-@@clientName(DomainEventSubscriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  DomainEventSubscriptions.createOrUpdate::parameters.resource,
   "eventSubscriptionInfo"
 );
-@@clientName(DomainEventSubscriptions.update::parameters.properties,
+@@clientName(
+  DomainEventSubscriptions.update::parameters.properties,
   "eventSubscriptionUpdateParameters"
 );
 @@clientLocation(EventSubscriptionOperationGroup.get, EventSubscriptions);
-@@clientLocation(EventSubscriptionOperationGroup.createOrUpdate,
+@@clientLocation(
+  EventSubscriptionOperationGroup.createOrUpdate,
   EventSubscriptions
 );
-@@clientName(EventSubscriptionOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  EventSubscriptionOperationGroup.createOrUpdate::parameters.resource,
   "eventSubscriptionInfo"
 );
 @@clientLocation(EventSubscriptionOperationGroup.update, EventSubscriptions);
-@@clientName(EventSubscriptionOperationGroup.update::parameters.properties,
+@@clientName(
+  EventSubscriptionOperationGroup.update::parameters.properties,
   "eventSubscriptionUpdateParameters"
 );
 @@clientLocation(EventSubscriptionOperationGroup.delete, EventSubscriptions);
-@@clientLocation(EventSubscriptionOperationGroup.listGlobalBySubscription,
+@@clientLocation(
+  EventSubscriptionOperationGroup.listGlobalBySubscription,
   EventSubscriptions
 );
-@@clientLocation(EventSubscriptionOperationGroup.getDeliveryAttributes,
+@@clientLocation(
+  EventSubscriptionOperationGroup.getDeliveryAttributes,
   EventSubscriptions
 );
-@@clientLocation(EventSubscriptionOperationGroup.getFullUrl,
+@@clientLocation(
+  EventSubscriptionOperationGroup.getFullUrl,
   EventSubscriptions
 );
-@@clientName(SystemTopicEventSubscriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  SystemTopicEventSubscriptions.createOrUpdate::parameters.resource,
   "eventSubscriptionInfo"
 );
-@@clientName(SystemTopicEventSubscriptions.update::parameters.properties,
+@@clientName(
+  SystemTopicEventSubscriptions.update::parameters.properties,
   "eventSubscriptionUpdateParameters"
 );
-@@clientName(PartnerTopicEventSubscriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  PartnerTopicEventSubscriptions.createOrUpdate::parameters.resource,
   "eventSubscriptionInfo"
 );
-@@clientName(PartnerTopicEventSubscriptions.update::parameters.properties,
+@@clientName(
+  PartnerTopicEventSubscriptions.update::parameters.properties,
   "eventSubscriptionUpdateParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EventSubscription.properties);
 
 @@clientName(Namespaces.createOrUpdate::parameters.resource, "namespaceInfo");
-@@clientName(Namespaces.update::parameters.properties,
+@@clientName(
+  Namespaces.update::parameters.properties,
   "namespaceUpdateParameters"
 );
 @@clientName(Namespaces.regenerateKey::parameters.body, "regenerateKeyRequest");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Namespace.properties);
 
-@@clientName(NamespaceTopics.createOrUpdate::parameters.resource,
+@@clientName(
+  NamespaceTopics.createOrUpdate::parameters.resource,
   "namespaceTopicInfo"
 );
-@@clientName(NamespaceTopics.update::parameters.properties,
+@@clientName(
+  NamespaceTopics.update::parameters.properties,
   "namespaceTopicUpdateParameters"
 );
-@@clientName(NamespaceTopics.regenerateKey::parameters.body,
+@@clientName(
+  NamespaceTopics.regenerateKey::parameters.body,
   "regenerateKeyRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NamespaceTopic.properties);
 
-@@clientName(PartnerConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  PartnerConfigurations.createOrUpdate::parameters.resource,
   "partnerConfigurationInfo"
 );
-@@clientName(PartnerConfigurations.update::parameters.properties,
+@@clientName(
+  PartnerConfigurations.update::parameters.properties,
   "partnerConfigurationUpdateParameters"
 );
-@@clientName(PartnerConfigurations.authorizePartner::parameters.body,
+@@clientName(
+  PartnerConfigurations.authorizePartner::parameters.body,
   "partnerInfo"
 );
-@@clientName(PartnerConfigurations.unauthorizePartner::parameters.body,
+@@clientName(
+  PartnerConfigurations.unauthorizePartner::parameters.body,
   "partnerInfo"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PartnerConfiguration.properties);
 
-@@clientName(PartnerDestinations.createOrUpdate::parameters.resource,
+@@clientName(
+  PartnerDestinations.createOrUpdate::parameters.resource,
   "partnerDestination"
 );
-@@clientName(PartnerDestinations.update::parameters.properties,
+@@clientName(
+  PartnerDestinations.update::parameters.properties,
   "partnerDestinationUpdateParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PartnerDestination.properties);
 
-@@clientName(PartnerNamespaces.createOrUpdate::parameters.resource,
+@@clientName(
+  PartnerNamespaces.createOrUpdate::parameters.resource,
   "partnerNamespaceInfo"
 );
-@@clientName(PartnerNamespaces.update::parameters.properties,
+@@clientName(
+  PartnerNamespaces.update::parameters.properties,
   "partnerNamespaceUpdateParameters"
 );
-@@clientName(PartnerNamespaces.regenerateKey::parameters.body,
+@@clientName(
+  PartnerNamespaces.regenerateKey::parameters.body,
   "regenerateKeyRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PartnerNamespace.properties);
 
-@@clientName(PartnerRegistrations.createOrUpdate::parameters.resource,
+@@clientName(
+  PartnerRegistrations.createOrUpdate::parameters.resource,
   "partnerRegistrationInfo"
 );
-@@clientName(PartnerRegistrations.update::parameters.properties,
+@@clientName(
+  PartnerRegistrations.update::parameters.properties,
   "partnerRegistrationUpdateParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PartnerRegistration.properties);
 
-@@clientName(PartnerTopics.createOrUpdate::parameters.resource,
+@@clientName(
+  PartnerTopics.createOrUpdate::parameters.resource,
   "partnerTopicInfo"
 );
-@@clientName(PartnerTopics.update::parameters.properties,
+@@clientName(
+  PartnerTopics.update::parameters.properties,
   "partnerTopicUpdateParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -296,7 +344,8 @@ using Microsoft.EventGrid;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkSecurityPerimeterConfiguration.properties);
 
-@@clientName(PermissionBindings.createOrUpdate::parameters.resource,
+@@clientName(
+  PermissionBindings.createOrUpdate::parameters.resource,
   "permissionBindingInfo"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -305,10 +354,12 @@ using Microsoft.EventGrid;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 
-@@clientName(SystemTopics.createOrUpdate::parameters.resource,
+@@clientName(
+  SystemTopics.createOrUpdate::parameters.resource,
   "systemTopicInfo"
 );
-@@clientName(SystemTopics.update::parameters.properties,
+@@clientName(
+  SystemTopics.update::parameters.properties,
   "systemTopicUpdateParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -336,22 +387,28 @@ using Microsoft.EventGrid;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VerifiedPartner.properties);
 
-@@clientLocation(EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
   EventSubscriptions
 );
-@@clientLocation(EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
   EventSubscriptions
 );
-@@clientLocation(EventSubscriptionsOperationGroup.listRegionalBySubscription,
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listRegionalBySubscription,
   EventSubscriptions
 );
-@@clientLocation(EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
   EventSubscriptions
 );
-@@clientLocation(EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
   EventSubscriptions
 );
-@@clientLocation(EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
   EventSubscriptions
 );
 
@@ -361,10 +418,12 @@ using Microsoft.EventGrid;
 
 @@visibility(DomainTopic.properties, Lifecycle.Read);
 
-@@clientLocation(EventSubscriptionOperationGroup.listByResource,
+@@clientLocation(
+  EventSubscriptionOperationGroup.listByResource,
   EventSubscriptions
 );
-@@visibility(PartnerConfiguration.location,
+@@visibility(
+  PartnerConfiguration.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

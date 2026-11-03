@@ -47,7 +47,9 @@ interface CostAllocationRulesOperationGroup {
      */
     @bodyRoot
     body: CostAllocationRuleCheckNameAvailabilityRequest,
-  ): ArmResponse<CostAllocationRuleCheckNameAvailabilityResponse> | ErrorResponse;
+  ):
+    | ArmResponse<CostAllocationRuleCheckNameAvailabilityResponse>
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -56,7 +58,9 @@ interface BenefitRecommendationsOperationGroup {
    * List of recommendations for purchasing savings plan.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitRecommendations_List")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/CostManagement/")
   @get
@@ -100,7 +104,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListByBillingAccountId")
   @autoRoute
   @get
@@ -142,7 +148,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily' and 'Monthly'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListByBillingProfileId")
   @autoRoute
   @get
@@ -191,7 +199,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists the savings plan utilization summaries for daily or monthly grain.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListBySavingsPlanOrder")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/cost-management/")
   @autoRoute
@@ -232,7 +242,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists the savings plan utilization summaries for daily or monthly grain.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListBySavingsPlanId")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/cost-management/")
   @autoRoute
@@ -284,7 +296,6 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
    * Triggers generation of a benefit utilization summaries report for the provided billing account. This API supports only enrollment accounts.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByBillingAccount")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   @autoRoute
@@ -314,12 +325,14 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ): ArmResponse<BenefitUtilizationSummariesOperationStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<BenefitUtilizationSummariesOperationStatus>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
+    | CommonTypes.ErrorResponse;
 
   /**
    * Triggers generation of a benefit utilization summaries report for the provided billing account and billing profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByBillingProfile")
   @autoRoute
@@ -357,12 +370,14 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ): ArmResponse<BenefitUtilizationSummariesOperationStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<BenefitUtilizationSummariesOperationStatus>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
+    | CommonTypes.ErrorResponse;
 
   /**
    * Triggers generation of a benefit utilization summaries report for the provided reservation order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByReservationOrderId")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
@@ -393,12 +408,14 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ): BenefitUtilizationSummariesOperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
+  ):
+    | BenefitUtilizationSummariesOperationStatus
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
+    | CommonTypes.ErrorResponse;
 
   /**
    * Triggers generation of a benefit utilization summaries report for the provided reservation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByReservationId")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
@@ -436,11 +453,13 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ): BenefitUtilizationSummariesOperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
+  ):
+    | BenefitUtilizationSummariesOperationStatus
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
+    | CommonTypes.ErrorResponse;
   /**
    * Triggers generation of a benefit utilization summaries report for the provided savings plan order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateBySavingsPlanOrderId")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
@@ -471,11 +490,13 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ): BenefitUtilizationSummariesOperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
+  ):
+    | BenefitUtilizationSummariesOperationStatus
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
+    | CommonTypes.ErrorResponse;
   /**
    * Triggers generation of a benefit utilization summaries report for the provided savings plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateBySavingsPlanId")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
@@ -513,7 +534,10 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ): BenefitUtilizationSummariesOperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
+  ):
+    | BenefitUtilizationSummariesOperationStatus
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
+    | CommonTypes.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -577,13 +601,16 @@ interface GenerateDetailedCostReportOperationGroup {
      */
     @bodyRoot
     parameters: GenerateDetailedCostReportDefinition,
-  ): ArmResponse<GenerateDetailedCostReportOperationResult> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GenerateDetailedCostReportOperationResult>> & {
-    /**
-     * The URL to check the status of the asynchronous operation.
-     */
-    @header("Azure-Consumption-AsyncOperation")
-    azureConsumptionAsyncOperation: string;
-  }) | GenerateDetailedCostReportErrorResponse;
+  ):
+    | ArmResponse<GenerateDetailedCostReportOperationResult>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GenerateDetailedCostReportOperationResult>> & {
+        /**
+         * The URL to check the status of the asynchronous operation.
+         */
+        @header("Azure-Consumption-AsyncOperation")
+        azureConsumptionAsyncOperation: string;
+      })
+    | GenerateDetailedCostReportErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -633,6 +660,7 @@ interface ForecastOperationGroup {
     /**
      * May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing usage POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
 
@@ -666,6 +694,7 @@ interface ForecastOperationGroup {
       /**
        * May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing externalCloudProviderUsage POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
 
@@ -880,15 +909,20 @@ interface GenerateReservationDetailsReportOperationGroup {
     /**
      * Start Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingAccountId POST contract uses startDate in the query; preserve wire compatibility."
     @query("startDate")
     startDate: string,
 
     /**
      * End Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingAccountId POST contract uses endDate in the query; preserve wire compatibility."
     @query("endDate")
     endDate: string,
-  ): ArmResponse<OperationStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>> | ErrorResponse;
+  ):
+    | ArmResponse<OperationStatus>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>>
+    | ErrorResponse;
   /**
    * Generates the reservations details report for provided date range asynchronously by billing profile. The Reservation usage details can be viewed by only certain enterprise roles by default. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/reservation-utilization#view-utilization-in-the-azure-portal-with-azure-rbac-access
    */
@@ -927,15 +961,20 @@ interface GenerateReservationDetailsReportOperationGroup {
     /**
      * Start Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingProfileId POST contract uses startDate in the query; preserve wire compatibility."
     @query("startDate")
     startDate: string,
 
     /**
      * End Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingProfileId POST contract uses endDate in the query; preserve wire compatibility."
     @query("endDate")
     endDate: string,
-  ): ArmResponse<OperationStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>> | ErrorResponse;
+  ):
+    | ArmResponse<OperationStatus>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>>
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -983,13 +1022,16 @@ interface PriceSheetOperationGroup {
     invoiceName: string,
 
     ...Azure.ResourceManager.Legacy.Provider,
-  ): DownloadURL | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DownloadURL>> & {
-    /**
-     * The operation entity Id GUID.
-     */
-    @header("OData-EntityId")
-    odataEntityId: string;
-  }) | ErrorResponse;
+  ):
+    | DownloadURL
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DownloadURL>> & {
+        /**
+         * The operation entity Id GUID.
+         */
+        @header("OData-EntityId")
+        odataEntityId: string;
+      })
+    | ErrorResponse;
   /**
    * Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    *
@@ -1029,13 +1071,16 @@ interface PriceSheetOperationGroup {
     billingProfileName: string,
 
     ...Azure.ResourceManager.Legacy.Provider,
-  ): PricesheetDownloadProperties | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PricesheetDownloadProperties>> & {
-    /**
-     * The operation entity Id GUID.
-     */
-    @header("OData-EntityId")
-    odataEntityId: string;
-  }) | ErrorResponse;
+  ):
+    | PricesheetDownloadProperties
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PricesheetDownloadProperties>> & {
+        /**
+         * The operation entity Id GUID.
+         */
+        @header("OData-EntityId")
+        odataEntityId: string;
+      })
+    | ErrorResponse;
 
   /**
    * Generates the pricesheet for the provided billing period asynchronously based on the Enrollment ID. This is for Enterprise Agreement customers.
@@ -1085,7 +1130,10 @@ interface PriceSheetOperationGroup {
     billingPeriodName: string,
 
     ...Azure.ResourceManager.Legacy.Provider,
-  ): OperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>> | CommonTypes.ErrorResponse;
+  ):
+    | OperationStatus
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>>
+    | CommonTypes.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1122,7 +1170,9 @@ interface ScheduledActionsOperationGroup {
      */
     @bodyRoot
     checkNameAvailabilityRequest: Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
-  ): ArmResponse<Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse> | ErrorResponseWithNestedDetails;
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse>
+    | ErrorResponseWithNestedDetails;
 }
 
 @armResourceOperations
@@ -1151,5 +1201,8 @@ interface GenerateCostDetailsReport {
     @path
     @segment("costDetailsOperationResults")
     operationId: string,
-  ): ArmResponse<CostDetailsOperationResults> | ArmAcceptedResponse | ErrorResponse;
+  ):
+    | ArmResponse<CostDetailsOperationResults>
+    | ArmAcceptedResponse
+    | ErrorResponse;
 }

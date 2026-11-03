@@ -1,0 +1,139 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "denyAssignmentId": "64b75d79-7a26-4341-944e-4f1a19f0e6ca",
+    "parameters": {
+      "properties": {
+        "description": "Prevent all users from deleting critical resources in the subscription.",
+        "denyAssignmentEffect": "enforced",
+        "denyAssignmentName": "Deny delete on critical resources",
+        "doNotApplyToChildScopes": false,
+        "excludePrincipals": [
+          {
+            "type": "ServicePrincipal",
+            "id": "ce2ce14e-85d7-4629-bdbc-454d0519d987"
+          }
+        ],
+        "permissions": [
+          {
+            "actions": [
+              "*/delete"
+            ],
+            "dataActions": [],
+            "notActions": [],
+            "notDataActions": []
+          }
+        ],
+        "principals": [
+          {
+            "type": "SystemDefined",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
+        ]
+      }
+    },
+    "scope": "subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "64b75d79-7a26-4341-944e-4f1a19f0e6ca",
+        "type": "Microsoft.Authorization/denyAssignments",
+        "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/providers/Microsoft.Authorization/denyAssignments/64b75d79-7a26-4341-944e-4f1a19f0e6ca",
+        "properties": {
+          "description": "Prevent all users from deleting critical resources in the subscription.",
+          "createdBy": "ce2ce14e-85d7-4629-bdbc-454d0519d987",
+          "createdOn": "2024-07-01T00:00:00.0000000Z",
+          "denyAssignmentEffect": "enforced",
+          "denyAssignmentName": "Deny delete on critical resources",
+          "doNotApplyToChildScopes": false,
+          "excludePrincipals": [
+            {
+              "type": "ServicePrincipal",
+              "id": "ce2ce14e-85d7-4629-bdbc-454d0519d987"
+            }
+          ],
+          "isSystemProtected": false,
+          "permissions": [
+            {
+              "actions": [
+                "*/delete"
+              ],
+              "dataActions": [],
+              "notActions": [],
+              "notDataActions": []
+            }
+          ],
+          "principals": [
+            {
+              "type": "SystemDefined",
+              "id": "00000000-0000-0000-0000-000000000000"
+            }
+          ],
+          "scope": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2",
+          "updatedBy": "ce2ce14e-85d7-4629-bdbc-454d0519d987",
+          "updatedOn": "2024-07-01T00:00:00.0000000Z"
+        },
+        "systemData": {
+          "createdAt": "2024-07-01T00:00:00.0000000Z",
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-07-01T00:00:00.0000000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "64b75d79-7a26-4341-944e-4f1a19f0e6ca",
+        "type": "Microsoft.Authorization/denyAssignments",
+        "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/providers/Microsoft.Authorization/denyAssignments/64b75d79-7a26-4341-944e-4f1a19f0e6ca",
+        "properties": {
+          "description": "Prevent all users from deleting critical resources in the subscription.",
+          "createdBy": "ce2ce14e-85d7-4629-bdbc-454d0519d987",
+          "createdOn": "2024-07-01T00:00:00.0000000Z",
+          "denyAssignmentEffect": "enforced",
+          "denyAssignmentName": "Deny delete on critical resources",
+          "doNotApplyToChildScopes": false,
+          "excludePrincipals": [
+            {
+              "type": "ServicePrincipal",
+              "id": "ce2ce14e-85d7-4629-bdbc-454d0519d987"
+            }
+          ],
+          "isSystemProtected": false,
+          "permissions": [
+            {
+              "actions": [
+                "*/delete"
+              ],
+              "dataActions": [],
+              "notActions": [],
+              "notDataActions": []
+            }
+          ],
+          "principals": [
+            {
+              "type": "SystemDefined",
+              "id": "00000000-0000-0000-0000-000000000000"
+            }
+          ],
+          "scope": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2",
+          "updatedBy": "ce2ce14e-85d7-4629-bdbc-454d0519d987",
+          "updatedOn": "2024-07-01T00:00:00.0000000Z"
+        },
+        "systemData": {
+          "createdAt": "2024-07-01T00:00:00.0000000Z",
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-07-01T00:00:00.0000000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "DenyAssignments_CreateOrUpdate",
+  "title": "Create deny assignment for subscription"
+}

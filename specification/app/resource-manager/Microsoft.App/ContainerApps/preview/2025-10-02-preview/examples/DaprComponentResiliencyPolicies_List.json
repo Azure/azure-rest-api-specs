@@ -1,21 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
-    "environmentName": "myenvironment",
+    "api-version": "2025-10-02-preview",
     "componentName": "mydaprcomponent",
-    "api-version": "2025-10-02-preview"
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprComponents/mydaprcomponent/resiliencyPolicies/myresiliencypolicy",
             "name": "something",
             "type": "Microsoft.App/managedEnvironments/daprComponents/resiliencyPolicies",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprComponents/mydaprcomponent/resiliencyPolicies/myresiliencypolicy",
             "properties": {
               "inboundPolicy": {
+                "circuitBreakerPolicy": {
+                  "consecutiveErrors": 5,
+                  "timeoutInSeconds": 10
+                },
                 "httpRetryPolicy": {
                   "maxRetries": 15,
                   "retryBackOff": {
@@ -25,13 +29,14 @@
                 },
                 "timeoutPolicy": {
                   "responseTimeoutInSeconds": 30
-                },
-                "circuitBreakerPolicy": {
-                  "consecutiveErrors": 5,
-                  "timeoutInSeconds": 10
                 }
               },
               "outboundPolicy": {
+                "circuitBreakerPolicy": {
+                  "consecutiveErrors": 3,
+                  "intervalInSeconds": 60,
+                  "timeoutInSeconds": 20
+                },
                 "httpRetryPolicy": {
                   "maxRetries": 5,
                   "retryBackOff": {
@@ -41,11 +46,6 @@
                 },
                 "timeoutPolicy": {
                   "responseTimeoutInSeconds": 12
-                },
-                "circuitBreakerPolicy": {
-                  "consecutiveErrors": 3,
-                  "timeoutInSeconds": 20,
-                  "intervalInSeconds": 60
                 }
               }
             }
@@ -53,5 +53,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "DaprComponentResiliencyPolicies_List",
+  "title": "List Dapr component resiliency policies"
 }

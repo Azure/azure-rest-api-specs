@@ -1,20 +1,22 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2025-09-16-preview",
+    "privateEndpointConnectionName": "private-endpoint-connection-name",
     "resourceGroupName": "myResourceGroup",
     "scopeName": "myPrivateLinkScope",
-    "privateEndpointConnectionName": "private-endpoint-connection-name",
-    "api-version": "2025-09-16-preview"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {},
     "202": {
       "headers": {
+        "Azure-AsyncOperation": "{callbackUri}",
         "Location": "{callbackUrl}",
-        "Retry-After": 200,
-        "Azure-AsyncOperation": "{callbackUri}"
+        "Retry-After": 200
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "PrivateEndpointConnections_Delete",
+  "title": "Deletes a private endpoint connection with a given name."
 }

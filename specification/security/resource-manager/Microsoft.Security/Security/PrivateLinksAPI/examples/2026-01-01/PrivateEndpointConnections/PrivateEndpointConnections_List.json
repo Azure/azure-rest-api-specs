@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "privateLinkName": "pls",
+    "resourceGroupName": "rg",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "pe",
+            "type": "Microsoft.Security/privateLinks/privateEndpointConnections",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateEndpointConnections/pe",
+            "properties": {
+              "groupIds": [
+                "containers"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Auto-approved",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "pe2",
+            "type": "Microsoft.Security/privateLinks/privateEndpointConnections",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateEndpointConnections/pe2",
+            "properties": {
+              "groupIds": [
+                "containers"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe2"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Waiting for approval",
+                "actionsRequired": "Manual approval required",
+                "status": "Pending"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_List",
+  "title": "List private endpoint connections"
+}

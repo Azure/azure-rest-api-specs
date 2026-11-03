@@ -54,7 +54,8 @@ interface StaticSiteLinkedBackendARMResourceOps
         @segment("linkedBackends")
         @key
         linkedBackendName: string,
-      }
+      },
+      ResourceName = "StaticSiteLinkedBackend"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -153,7 +154,8 @@ interface StaticSiteLinkedBackendARMResourceOperationGroupOps
         @segment("linkedBackends")
         @key
         linkedBackendName: string,
-      }
+      },
+      ResourceName = "StaticSiteBuildLinkedBackend"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -225,21 +227,27 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   >;
 }
 
-@@doc(StaticSiteLinkedBackendARMResource.name,
+@@doc(
+  StaticSiteLinkedBackendARMResource.name,
   "Name of the linked backend that should be retrieved"
 );
-@@doc(StaticSiteLinkedBackendARMResource.properties,
+@@doc(
+  StaticSiteLinkedBackendARMResource.properties,
   "StaticSiteLinkedBackendARMResource resource specific properties"
 );
-@@doc(StaticSiteLinkedBackendARMResources.linkBackend::parameters.resource,
+@@doc(
+  StaticSiteLinkedBackendARMResources.linkBackend::parameters.resource,
   "A JSON representation of the linked backend request properties"
 );
-@@doc(StaticSiteLinkedBackendARMResources.validateBackend::parameters.body,
+@@doc(
+  StaticSiteLinkedBackendARMResources.validateBackend::parameters.body,
   "A JSON representation of the linked backend request properties"
 );
-@@doc(StaticSiteLinkedBackendARMResourceOperationGroup.linkBackendToBuild::parameters.resource,
+@@doc(
+  StaticSiteLinkedBackendARMResourceOperationGroup.linkBackendToBuild::parameters.resource,
   "A JSON representation of the linked backend request properties"
 );
-@@doc(StaticSiteLinkedBackendARMResourceOperationGroup.validateBackendForBuild::parameters.body,
+@@doc(
+  StaticSiteLinkedBackendARMResourceOperationGroup.validateBackendForBuild::parameters.body,
   "A JSON representation of the linked backend request properties"
 );

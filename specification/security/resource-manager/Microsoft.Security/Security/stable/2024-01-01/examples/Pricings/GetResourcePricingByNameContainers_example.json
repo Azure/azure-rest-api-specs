@@ -1,21 +1,21 @@
 {
   "parameters": {
     "api-version": "2024-01-01",
-    "scopeId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/demo-containers-rg/providers/Microsoft.ContainerService/managedClusters/demo-aks-cluster",
-    "pricingName": "Containers"
+    "pricingName": "Containers",
+    "scopeId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/demo-containers-rg/providers/Microsoft.ContainerService/managedClusters/demo-aks-cluster"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/demo-containers-rg/providers/Microsoft.ContainerService/managedClusters/demo-aks-cluster/providers/Microsoft.Security/pricings/Containers",
         "name": "Containers",
         "type": "Microsoft.Security/pricings",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/demo-containers-rg/providers/Microsoft.ContainerService/managedClusters/demo-aks-cluster/providers/Microsoft.Security/pricings/Containers",
         "properties": {
-          "pricingTier": "Standard",
-          "freeTrialRemainingTime": "P26DT17H24M",
           "enablementTime": "2025-01-13T10:30:45.1234567Z",
+          "freeTrialRemainingTime": "P26DT17H24M",
           "inherited": "False",
           "inheritedFrom": null,
+          "pricingTier": "Standard",
           "extensions": [
             {
               "name": "ContainerRegistriesVulnerabilityAssessments",
@@ -27,10 +27,10 @@
             },
             {
               "name": "AgentlessVmScanning",
-              "isEnabled": "True",
               "additionalExtensionProperties": {
                 "ExclusionTags": "[]"
-              }
+              },
+              "isEnabled": "True"
             },
             {
               "name": "ContainerSensor",
@@ -44,5 +44,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "Pricings_Get",
+  "title": "Get pricings on resource - Containers plan"
 }

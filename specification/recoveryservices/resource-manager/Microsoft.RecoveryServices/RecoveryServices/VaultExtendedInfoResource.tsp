@@ -63,9 +63,11 @@ interface VaultExtendedInfoResources {
 
 @@doc(VaultExtendedInfoResource.name, "");
 @@doc(VaultExtendedInfoResource.properties, "Vault extended information.");
-@@doc(VaultExtendedInfoResources.createOrUpdate::parameters.resource,
+@@doc(
+  VaultExtendedInfoResources.createOrUpdate::parameters.resource,
   "Details of ResourceExtendedInfo"
 );
-@@doc(VaultExtendedInfoResources.update::parameters.properties,
+@@doc(
+  VaultExtendedInfoResources.update::parameters.properties,
   "Details of ResourceExtendedInfo"
 );

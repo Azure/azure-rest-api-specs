@@ -81,7 +81,10 @@ interface DataBoxEdgeDevices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DataBoxEdgeDevice,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -223,6 +226,7 @@ interface DataBoxEdgeDevices {
       /**
        * The capacity name.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing checkResourceCreationFeasibility POST contract uses capacityName in the query; preserve wire compatibility."
       @query("capacityName")
       capacityName?: string;
     },
@@ -259,27 +263,35 @@ interface DataBoxEdgeDevices {
 }
 
 @@doc(DataBoxEdgeDevice.name, "The device name.");
-@@doc(DataBoxEdgeDevice.properties,
+@@doc(
+  DataBoxEdgeDevice.properties,
   "The properties of the Data Box Edge/Gateway device."
 );
-@@doc(DataBoxEdgeDevices.createOrUpdate::parameters.resource,
+@@doc(
+  DataBoxEdgeDevices.createOrUpdate::parameters.resource,
   "The resource object."
 );
-@@doc(DataBoxEdgeDevices.update::parameters.properties,
+@@doc(
+  DataBoxEdgeDevices.update::parameters.properties,
   "The resource parameters."
 );
-@@doc(DataBoxEdgeDevices.createOrUpdateSecuritySettings::parameters.body,
+@@doc(
+  DataBoxEdgeDevices.createOrUpdateSecuritySettings::parameters.body,
   "The security settings."
 );
-@@doc(DataBoxEdgeDevices.updateExtendedInformation::parameters.body,
+@@doc(
+  DataBoxEdgeDevices.updateExtendedInformation::parameters.body,
   "The patch object."
 );
-@@doc(DataBoxEdgeDevices.uploadCertificate::parameters.body,
+@@doc(
+  DataBoxEdgeDevices.uploadCertificate::parameters.body,
   "The upload certificate request."
 );
-@@doc(DataBoxEdgeDevices.checkResourceCreationFeasibility::parameters.body,
+@@doc(
+  DataBoxEdgeDevices.checkResourceCreationFeasibility::parameters.body,
   "The device capacity request info."
 );
-@@doc(DataBoxEdgeDevices.triggerSupportPackage::parameters.body,
+@@doc(
+  DataBoxEdgeDevices.triggerSupportPackage::parameters.body,
   "The trigger support package request object"
 );

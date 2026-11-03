@@ -177,7 +177,7 @@ union WorkloadRuntime {
   /**
    * Nodes can use (Kata + Cloud Hypervisor + Hyper-V) to enable Nested VM-based pods (Preview). Due to the use Hyper-V, AKS node OS itself is a nested VM (the root OS) of Hyper-V. Thus it can only be used with VM series that support Nested Virtualization such as Dv3 series. This naming convention will be deprecated in future releases in favor of KataVmIsolation.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   KataMshvVmIsolation: "KataMshvVmIsolation",
 
   /**
@@ -244,13 +244,13 @@ union OSSKU {
   /**
    * Deprecated OSSKU. Microsoft recommends that new deployments choose 'AzureLinux' instead.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   Mariner: "Mariner",
 
   /**
    * Use Flatcar Container Linux as the OS for node images. Flatcar is a container-optimized, security-focused Linux OS, with an immutable filesystem and part of the Cloud Native Computing Foundation (CNCF). For more information about Flatcar Container Linux for AKS, see aka.ms/aks/flatcar-container-linux-for-aks
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   Flatcar: "Flatcar",
 
   /**
@@ -276,19 +276,31 @@ union OSSKU {
   /**
    * Use Windows2025 as the OS for node images. Unsupported for system node pools. Windows2025 supports Windows2022 and Windows 2025 containers; it cannot run Windows2019 containers and vice versa.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_02_01)
   Windows2025: "Windows2025",
 
   /**
    * Use Windows Annual Channel version as the OS for node images. Unsupported for system node pools. Details about supported container images and kubernetes versions under different AKS Annual Channel versions could be seen in https://aka.ms/aks/windows-annual-channel-details.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   WindowsAnnual: "WindowsAnnual",
 
   /**
    * Use Ubuntu2404 as the OS for node images, however, Ubuntu 24.04 may not be supported for all nodepools. For limitations and supported kubernetes versions, see see https://aka.ms/aks/supported-ubuntu-versions
    */
   Ubuntu2404: "Ubuntu2404",
+
+  /**
+   * Use Azure Container Linux as the OS for node images. Azure Container Linux is a container-optimized, security-focused Linux OS built on Azure Linux, with an immutable filesystem. ACL is derived from the Flatcar Container Linux project, building on Flatcar's proven container-first, immutable design, while adding Azure Linux packages, servicing, and deep integration with the Azure and AKS lifecycle. For more information, see https://aka.ms/azurecontainerlinux
+   */
+  @added(Versions.v2026_03_01)
+  AzureContainerLinux: "AzureContainerLinux",
+
+  /**
+   * Use Ubuntu2604 as the OS for node images. For limitations and supported Kubernetes versions, see https://aka.ms/aks/supported-ubuntu-versions
+   */
+  @added(Versions.v2026_08_02_preview)
+  Ubuntu2604: "Ubuntu2604",
 }
 
 /**
@@ -328,6 +340,12 @@ union AgentPoolType {
    * Create an Agent Pool backed by a Single Instance VM orchestration mode.
    */
   VirtualMachines: "VirtualMachines",
+
+  /**
+   * Create an Agent Pool for BYO machines running the FlexNode agent.
+   */
+  @added(Versions.v2026_08_02_preview)
+  FlexNodes: "FlexNodes",
 }
 
 /**
@@ -354,20 +372,20 @@ union AgentPoolMode {
   /**
    * ManagedSystem is a system pool managed by AKS. The pool scales dynamically according to cluster usage, and has additional automated monitoring and healing capabilities. There can only be one ManagedSystem pool, and it is recommended to delete all other system pools for the best experience.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   ManagedSystem: "ManagedSystem",
 
   /**
    * Machines agent pools are dedicated to hosting machines. Only limited operations, such as creation and deletion, are allowed at the pool level. Please use the machine APIs to manage the full machine lifecycle.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   Machines: "Machines",
 }
 
 /**
  * Defines the upgrade strategy for the agent pool. The default is Rolling.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 union UpgradeStrategy {
   string,
 
@@ -436,7 +454,7 @@ union ScaleSetEvictionPolicy {
 /**
  * Specifies the default seccomp profile applied to all workloads. If not specified, 'Unconfined' will be used by default.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 union SeccompDefault {
   string,
 
@@ -509,7 +527,7 @@ union AgentPoolSSHAccess {
   /**
    * SSH to node with EntraId integration. More information can be found under https://aka.ms/aks/ssh/aad
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_06_01)
   EntraId: "EntraId",
 }
 
@@ -533,7 +551,7 @@ union GPUDriver {
 /**
  * Specify the type of GPU driver to install when creating Windows agent pools. If not provided, AKS selects the driver based on system compatibility. This cannot be changed once the AgentPool has been created. This cannot be set on Linux AgentPools. For Linux AgentPools, the driver is selected based on system compatibility.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 union DriverType {
   string,
 
@@ -551,7 +569,7 @@ union DriverType {
 /**
  * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_01)
 union ManagementMode {
   string,
 
@@ -569,22 +587,22 @@ union ManagementMode {
 /**
  * Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 union MigStrategy {
   string,
 
   /**
-   * Don't set a MIG strategy. If you previously had one set, this will override it and set remove the set MIG strategy.
+   * No MIG partitioning is applied; the GPU is exposed as a single unified whole-device instance. Specifying this value removes any previously active MIG strategy.
    */
   None: "None",
 
   /**
-   * Set the MIG strategy for managed MIG as single.
+   * All MIG partitions on every GPU in the pool are the same size (`nvidia.com/mig.strategy: single`). The uniform partition size is controlled by `nvidia.migProfiles` (exactly one element required).
    */
   Single: "Single",
 
   /**
-   * Set the MIG strategy for managed MIG as mixed.
+   * Each GPU in the pool can host heterogeneous partitions of different sizes simultaneously (`nvidia.com/mig.strategy: mixed`). The exact partition mix per GPU is declared via `nvidia.migProfiles`.
    */
   Mixed: "Mixed",
 }
@@ -920,12 +938,6 @@ union OutboundType {
   managedNATGateway: "managedNATGateway",
 
   /**
-   * The AKS-managed NAT gateway V2 is used for egress.
-   */
-  @added(Versions.v2026_01_02_preview)
-  managedNATGatewayV2: "managedNATGatewayV2",
-
-  /**
    * The user-assigned NAT gateway associated to the cluster subnet is used for egress. This is an advanced scenario and requires proper network configuration.
    */
   userAssignedNATGateway: "userAssignedNATGateway",
@@ -937,10 +949,34 @@ union OutboundType {
 }
 
 /**
+ * The SKU of the managed Azure Bastion. The default is 'Standard'. See https://aka.ms/aks/BastionSKUs for more information about the differences between Azure Bastion SKUs.
+ */
+@added(Versions.v2026_08_02_preview)
+union BastionSku {
+  string,
+
+  /**
+   * Use the standard SKU of Azure Bastion.
+   */
+  Standard: "Standard",
+
+  /**
+   * Use the premium SKU of Azure Bastion.
+   */
+  Premium: "Premium",
+}
+
+/**
  * The load balancer sku for the managed cluster. The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs.
  */
 union LoadBalancerSku {
   string,
+
+  /**
+   * Use a service Load Balancer, with native pod-level load balancing. This SKU is specifically built to scale for container-based workloads, with a single instance utilized for each application. For more information, see https://aka.ms/aks/container-native-slb
+   */
+  @added(Versions.v2026_08_02_preview)
+  service: "service",
 
   /**
    * Use a a standard Load Balancer. This is the recommended Load Balancer SKU. For more information about on working with the load balancer in the managed cluster, see the [standard Load Balancer](https://docs.microsoft.com/azure/aks/load-balancer-standard) article.
@@ -968,6 +1004,12 @@ union BackendPoolType {
    * The type of the managed inbound Load Balancer BackendPool. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend.
    */
   NodeIP: "NodeIP",
+
+  /**
+   * The type of the managed inbound Load Balancer BackendPool. Used only when loadBalancerSku is specified as 'service'. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend.
+   */
+  @added(Versions.v2026_08_02_preview)
+  PodIP: "PodIP",
 }
 
 /**
@@ -990,7 +1032,7 @@ union IPFamily {
 /**
  * The health probing behavior for External Traffic Policy Cluster services.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 union ClusterServiceLoadBalancerHealthProbeMode {
   string,
 
@@ -1008,7 +1050,7 @@ union ClusterServiceLoadBalancerHealthProbeMode {
 /**
  * Defines access to special link local addresses (Azure Instance Metadata Service, aka IMDS) for pods with hostNetwork=false. If not specified, the default is 'IMDS'.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 union PodLinkLocalAccess {
   string,
 
@@ -1026,7 +1068,7 @@ union PodLinkLocalAccess {
 /**
  * Specify which proxy mode to use ('IPTABLES', 'IPVS' or 'NFTABLES')
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 union Mode {
   string,
 
@@ -1049,7 +1091,7 @@ union Mode {
 /**
  * IPVS scheduler, for more information please see http://www.linuxvirtualserver.org/docs/scheduling.html.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 union IpvsScheduler {
   string,
 
@@ -1079,7 +1121,7 @@ union TransitEncryptionType {
   /**
    * Enables mTLS authentication and encryption for pod-to-pod traffic within the cluster. Refer to https://aka.ms/acnsciliummtls for relevant documentation.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   mTLS: "mTLS",
 
   /**
@@ -1208,7 +1250,7 @@ union KeyVaultNetworkAccessTypes {
 /**
  * Whether to enable encryption at rest of Kubernetes resource objects using service-managed keys. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_07_01)
 union InfrastructureEncryption {
   string,
 
@@ -1216,11 +1258,6 @@ union InfrastructureEncryption {
    * Encryption at rest of Kubernetes resource objects using service-managed keys is enabled. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption.
    */
   Enabled: "Enabled",
-
-  /**
-   * Encryption at rest of Kubernetes resource objects using service-managed keys is disabled. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption.
-   */
-  Disabled: "Disabled",
 }
 
 /**
@@ -1235,7 +1272,7 @@ union ManagedGatewayType {
   Disabled: "Disabled",
 
   /**
-   * The latest Gateway CRD bundle from the standard channel that is compatible with your Kubernetes version will be reconciled onto your cluster. See https://gateway-api.sigs.k8s.io/concepts/versioning/ for more details.
+   * Gateway API CRDs from the standard release channel will be reconciled onto your cluster. See https://aka.ms/gateway-api-versions to see which bundle will be installed for your Kubernetes version.
    */
   Standard: "Standard",
 }
@@ -1243,7 +1280,7 @@ union ManagedGatewayType {
 /**
  * Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_02_01)
 union GatewayAPIIstioEnabled {
   string,
 
@@ -1304,14 +1341,14 @@ union PublicNetworkAccess {
   /**
    * Inbound/Outbound traffic is managed by Microsoft.Network/NetworkSecurityPerimeters.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
  * Whether VPA add-on is enabled and configured to scale AKS-managed add-ons.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 union AddonAutoscaling {
   string,
 
@@ -1432,7 +1469,7 @@ union ArtifactSource {
 /**
  * The config customization mode for this scheduler instance.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_05_01)
 union SchedulerConfigMode {
   string,
 
@@ -1445,6 +1482,23 @@ union SchedulerConfigMode {
    * Enable config customization. Customer can specify scheduler configuration via a CRD. See aka.ms/aks/scheduler-crd for details.
    */
   ManagedByCRD: "ManagedByCRD",
+}
+
+/**
+ * The scaling size of the control plane. Scaling sizes offer guaranteed capacity and predictable Kubernetes performance beyond standard tier defaults. Higher H sizes provide increased performance guarantees. See https://aka.ms/aks/hyperscale for performance metrics details for each size.
+ */
+@added(Versions.v2026_08_02_preview)
+union ControlPlaneScalingSize {
+  string,
+
+  /** H2 is the smallest scaling size with guaranteed capacity and predictable performance beyond standard tier defaults. */
+  H2: "H2",
+
+  /** H4 scaling size provides increased guaranteed performance over H2. */
+  H4: "H4",
+
+  /** H8 scaling size provides increased guaranteed performance over H4. */
+  H8: "H8",
 }
 
 /**
@@ -1495,7 +1549,7 @@ union SnapshotType {
   /**
    * The snapshot is a snapshot of a managed cluster.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   ManagedCluster: "ManagedCluster",
 }
 
@@ -1637,17 +1691,18 @@ model KubernetesPatchVersion {
 /**
  * Holds an array NodeImageVersions
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model NodeImageVersionsListResult is Azure.Core.Page<NodeImageVersion>;
 
 /**
  * node image version profile for given major.minor.patch release.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model NodeImageVersion {
   /**
    * The operating system of the node image. Example: AKSUbuntu
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   os?: string;
 
   /**
@@ -1766,7 +1821,7 @@ model ManagedClusterProperties {
   /**
    * CreationData to be used to specify the source Snapshot ID if the cluster will be created/upgraded using a snapshot.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   creationData?: CreationData;
 
   /**
@@ -1875,9 +1930,22 @@ model ManagedClusterProperties {
   supportPlan?: KubernetesSupportPlan;
 
   /**
+   * Whether to enable FIPS mode at the cluster level. When enabled, this setting enforces FIPS compliance for all AKS-managed components, such as the node operating system, addons, and [managed containerized components](https://aka.ms/aks/components/docs). See [Enable cluster-wide FIPS](https://aka.ms/aks/fips) for more details. When this property is enabled, all node pools in the cluster must also be FIPS-enabled. Although this property is available in a stable API version, cluster-wide FIPS remains a preview feature. Write requests whose resulting cluster state has this property set to true require the `Microsoft.ContainerService/EnableFIPSPreview` subscription feature registration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with existing FIPS properties in AKS."
+  @added(Versions.v2026_07_01)
+  enableFIPS?: boolean;
+
+  /**
+   * Whether to enable node hardening at the cluster level. When enabled, AKS applies hardened defaults for soft eviction thresholds, kube-reserved, and system-reserved on all Linux node pools in the cluster. Per-node-pool kubeletConfig settings take precedence over hardening defaults. On agent pools running Kubernetes 1.37 or later, node hardening is enabled by default and cannot be disabled; setting this field to false has no effect on those pools.
+   */
+  @added(Versions.v2026_08_02_preview)
+  enableNodeHardening?: boolean;
+
+  /**
    * Enable namespace as Azure resource. The default value is false. It can be enabled/disabled on creation and updating of the managed cluster. See [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource) for more details on Namespace as a ARM Resource.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   enableNamespaceResources?: boolean;
 
   /**
@@ -2004,22 +2072,46 @@ model ManagedClusterProperties {
   aiToolchainOperatorProfile?: ManagedClusterAIToolchainOperatorProfile;
 
   /**
-   * Profile of the pod scheduler configuration.
+   * Agent Sandbox settings that apply to the whole cluster.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
+  agentSandboxProfile?: ManagedClusterAgentSandboxProfile;
+
+  /**
+   * The Pod Snapshot Restore profile for the managed cluster.
+   */
+  @added(Versions.v2026_08_02_preview)
+  podSnapshotProfile?: ManagedClusterPodSnapshotProfile;
+
+  /**
+   * Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.
+   */
+  @added(Versions.v2026_05_01)
   schedulerProfile?: SchedulerProfile;
 
   /**
    * Settings for hosted system addons. For more information, see https://aka.ms/aks/automatic/systemcomponents.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_02_01)
   hostedSystemProfile?: ManagedClusterHostedSystemProfile;
 
   /**
    * Health monitor profile for the managed cluster.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   healthMonitorProfile?: ManagedClusterHealthMonitorProfile;
+
+  /**
+   * Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later.
+   */
+  @added(Versions.v2026_08_02_preview)
+  controlPlaneScalingProfile?: ManagedClusterControlPlaneScalingProfile;
+
+  /**
+   * Node disruption profile for a managed cluster.
+   */
+  @added(Versions.v2026_08_02_preview)
+  nodeDisruptionProfile?: NodeDisruptionProfile;
 
   /**
    * Contains read-only information about the Managed Cluster.
@@ -2074,6 +2166,7 @@ model ManagedClusterWindowsProfile {
   adminUsername: string;
 
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("Specifies the password of the administrator account. <br><br> **Minimum-length:** 8 characters <br><br> **Max-length:** 123 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\"")
   adminPassword?: string;
 
@@ -2127,6 +2220,7 @@ model ManagedClusterServicePrincipalProfile {
    * The secret password associated with the service principal in plain text.
    */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secret?: string;
 }
 
@@ -2407,9 +2501,27 @@ model ContainerServiceNetworkProfile {
   loadBalancerProfile?: ManagedClusterLoadBalancerProfile;
 
   /**
+   * Configuration for accessing the managed cluster API through Bastion or Cloud Shell.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "API is the approved public API acronym."
+  @added(Versions.v2026_08_02_preview)
+  clusterAPIConnectivityProfile?: ClusterAPIConnectivityProfile;
+
+  /**
    * Profile of the cluster NAT gateway.
    */
   natGatewayProfile?: ManagedClusterNATGatewayProfile;
+
+  /**
+   * The Azure resource ID of the NAT gateway to use for egress at cluster startup when outboundType is 'userAssignedNATGateway' using StandardV2 Public IP, backend pool type is podIP, and load balancer type is service SKU. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/natGateways/{natGatewayName}'. When using managed NATGateway this field is auto populated. For more information, see https://aka.ms/aks/container-native-slb
+   */
+  @added(Versions.v2026_08_02_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  natGatewayId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/natGateways";
+    }
+  ]>;
 
   /**
    * The profile for Static Egress Gateway addon. For more details about Static Egress Gateway, see https://aka.ms/aks/static-egress-gateway.
@@ -2434,14 +2546,174 @@ model ContainerServiceNetworkProfile {
   /**
    * Defines access to special link local addresses (Azure Instance Metadata Service, aka IMDS) for pods with hostNetwork=false. if not specified, the default is 'IMDS'.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   podLinkLocalAccess?: PodLinkLocalAccess;
 
   /**
    * Holds configuration customizations for kube-proxy. Any values not defined will use the kube-proxy defaulting behavior. See https://v<version>.docs.kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/ where <version> is represented by a <major version>-<minor version> string. Kubernetes version 1.23 would be '1-23'.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   kubeProxyConfig?: ContainerServiceNetworkProfileKubeProxyConfig;
+}
+
+/**
+ * Configuration for accessing the managed cluster API through Bastion or Cloud Shell.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "API is the approved public API acronym."
+@added(Versions.v2026_08_02_preview)
+model ClusterAPIConnectivityProfile {
+  /**
+   * Azure Bastion connectivity settings.
+   * See https://aka.ms/aks/BastionConnect for more details.
+   */
+  bastion?: BastionProfile;
+
+  /**
+   * Cloud Shell connectivity settings.
+   * For more information, see https://aka.ms/aks/CloudShellConnect.
+   */
+  cloudShell?: CloudShellProfile;
+}
+
+/**
+ * Cloud Shell connectivity and storage settings for a private managed cluster.
+ * For more information, see https://aka.ms/aks/CloudShellConnect.
+ */
+@added(Versions.v2026_08_02_preview)
+model CloudShellProfile {
+  /**
+   * Whether Cloud Shell connectivity is disabled, uses AKS-managed network resources, or uses user-provided
+   * network resources. Defaults to Disabled when omitted during create. On update, omission preserves the existing
+   * mode. Setting this property to Disabled removes AKS-created resources and connectivity artifacts. For Custom
+   * mode, AKS unregisters the user-provided resources but does not delete them.
+   */
+  mode?: CloudShellProfileMode;
+
+  /**
+   * Network resources used by Cloud Shell. When configuring Custom networking, users must provide
+   * both subnetId and relayNamespaceId. When updating an existing Custom configuration, either resource ID can be
+   * changed independently; omitted fields preserve their existing values. In Custom mode, AKS returns the user-provided
+   * values. In Managed mode, AKS populates the effective values. Users may omit Managed values or resubmit values
+   * returned by GET unchanged; different values are rejected. This property must be omitted when mode is Disabled.
+   * See https://aka.ms/aks/CloudShellConnect for Custom networking requirements.
+   */
+  network?: CloudShellNetworkProfile;
+
+  /**
+   * Storage resources used for Cloud Shell file persistence. When configuring Custom storage, users
+   * must provide both storageAccountId and fileShareName. When updating an existing Custom configuration, either
+   * property can be changed independently; omitted fields preserve their existing values. In Custom mode, AKS returns
+   * the user-provided values. In Managed mode, AKS populates the effective values. Users may omit Managed values or
+   * resubmit values returned by GET unchanged; different values are rejected. Both properties must be omitted when
+   * mode is Disabled. See https://aka.ms/aks/CloudShellConnect for Custom storage requirements.
+   */
+  storage?: CloudShellStorageProfile;
+}
+
+/**
+ * Cloud Shell connectivity mode.
+ */
+@added(Versions.v2026_08_02_preview)
+union CloudShellProfileMode {
+  string,
+
+  /**
+   * Cloud Shell connectivity is disabled.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Cloud Shell connectivity uses network resources managed by AKS.
+   */
+  Managed: "Managed",
+
+  /**
+   * Cloud Shell connectivity uses network resources provided by the user.
+   */
+  Custom: "Custom",
+}
+
+/**
+ * Network resources used by Cloud Shell. AKS peers the subnet's virtual network with the cluster virtual network.
+ * For Custom resources, their address spaces must not overlap. See https://aka.ms/aks/CloudShellConnect.
+ */
+@added(Versions.v2026_08_02_preview)
+model CloudShellNetworkProfile {
+  /**
+   * Dedicated IPv4 subnet used by Cloud Shell containers. For Custom networking, this subnet must be
+   * delegated to Microsoft.ContainerInstance/containerGroups and be /24 or larger. Grant the cluster identity
+   * Network Contributor on the containing virtual network and grant the Azure Container Instance service principal
+   * Network Contributor on this subnet or its containing virtual network. Required when Cloud Shell mode is Custom.
+   */
+  subnetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  /**
+   * Azure Relay namespace used by Cloud Shell. For Custom networking, this existing namespace is required
+   * with subnetId. Grant the cluster identity Reader and the Azure Container Instance service principal Contributor
+   * on the namespace. Required when Cloud Shell mode is Custom.
+   */
+  relayNamespaceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Relay/namespaces";
+    }
+  ]>;
+}
+
+/**
+ * How Cloud Shell storage resources are managed.
+ */
+@added(Versions.v2026_08_02_preview)
+union CloudShellStorageProfileMode {
+  string,
+
+  /**
+   * Persistent storage is disabled.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * AKS manages the storage resources.
+   */
+  Managed: "Managed",
+
+  /**
+   * The user provides the storage resources.
+   */
+  Custom: "Custom",
+}
+
+/**
+ * Storage used for Cloud Shell file persistence.
+ */
+@added(Versions.v2026_08_02_preview)
+model CloudShellStorageProfile {
+  /**
+   * Whether persistent storage is disabled, managed by AKS, or provided by the user. Defaults to Disabled when
+   * omitted during initial Cloud Shell enablement. On update, omission preserves the existing mode.
+   */
+  mode?: CloudShellStorageProfileMode;
+
+  /**
+   * Storage account used for Cloud Shell files. For Custom storage, grant the cluster identity
+   * Storage File Data SMB Share Contributor on this existing storage account. Required when mode is Custom.
+   */
+  storageAccountId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+
+  /**
+   * File share used for Cloud Shell files. Required when mode is Custom.
+   */
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-z0-9]+(?:-[a-z0-9]+)*$")
+  fileShareName?: string;
 }
 
 /**
@@ -2502,6 +2774,63 @@ model AdvancedNetworkingSecurity {
 }
 
 /**
+ * Profile to enable managed Azure Bastion or reference to an existing Bastion for the managed cluster.
+ * See https://aka.ms/aks/BastionConnect for more details.
+ */
+@added(Versions.v2026_08_02_preview)
+model BastionProfile {
+  /**
+   * Indicates whether managed bastion is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The resource ID of the managed bastion associated with the managed cluster.
+   */
+  @visibility(Lifecycle.Read)
+  bastionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/bastionHosts";
+    }
+  ]>;
+
+  /**
+   * The SKU of the managed bastion.
+   *
+   * Only Standard and Premium SKUs are supported.
+   * SKU downgrading is not allowed. To downgrade SKU, please disable then re-enable the managed bastion with new SKU.
+   *
+   * See https://aka.ms/aks/BastionSKUs for more details.
+   */
+  sku?: BastionSku;
+
+  /**
+   * The scale units of the managed bastion. Default value is 2.
+   */
+  @maxValue(50)
+  @minValue(2)
+  scaleUnits?: int32;
+
+  /**
+   * The resource ID of the public IP address associated with the managed bastion.
+   *
+   * When provided during creation, the managed bastion will reference this existing public IP address instead of creating a new one.
+   * The referenced public IP address must be in the same subscription and region as the managed cluster.
+   *
+   * When not provided during creation, AKS will automatically create a new public IP address.
+   *
+   * This field cannot be updated. To change IP address after creation, please disable and re-enable the managed bastion with the new public IP address.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  publicIpAddressId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/publicIPAddresses";
+    }
+  ]>;
+}
+
+/**
  * Profile of the managed cluster load balancer.
  */
 model ManagedClusterLoadBalancerProfile {
@@ -2557,7 +2886,7 @@ model ManagedClusterLoadBalancerProfile {
   /**
    * The health probing behavior for External Traffic Policy Cluster services.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   clusterServiceLoadBalancerHealthProbeMode?: ClusterServiceLoadBalancerHealthProbeMode = ClusterServiceLoadBalancerHealthProbeMode.ServiceNodePort;
 }
 
@@ -2616,10 +2945,34 @@ model ManagedClusterLoadBalancerProfileOutboundIPs {
 }
 
 /**
+ * The SKU of a managed cluster NAT Gateway.
+ */
+@added(Versions.v2026_06_01)
+union ManagedClusterNATGatewaySku {
+  string,
+
+  /**
+   * Use a Standard SKU NAT Gateway.
+   */
+  Standard: "Standard",
+
+  /**
+   * Use a StandardV2 SKU NAT Gateway. This is the default for new clusters in regions where it is available.
+   */
+  StandardV2: "StandardV2",
+}
+
+/**
  * Profile of the managed cluster NAT gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterNATGatewayProfile {
+  /**
+   * The SKU of the managed cluster NAT Gateway. Defaults to 'StandardV2' where available in the region, otherwise 'Standard'.
+   */
+  @added(Versions.v2026_06_01)
+  sku?: ManagedClusterNATGatewaySku;
+
   /**
    * Profile of the managed outbound IP resources of the cluster NAT gateway.
    */
@@ -2637,7 +2990,8 @@ model ManagedClusterNATGatewayProfile {
    * Desired outbound IP Prefix resources for the managed NAT Gateway. Only compatible with NAT Gateway V2.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_01_02_preview)
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  @added(Versions.v2026_06_01)
   outboundIPPrefixes?: {
     /**
      * A list of public IP prefix resources.
@@ -2654,7 +3008,8 @@ model ManagedClusterNATGatewayProfile {
    * Desired outbound IP resources for the managed NAT Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_01_02_preview)
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  @added(Versions.v2026_06_01)
   outboundIPs?: {
     /**
      * A list of public IP resources.
@@ -2690,7 +3045,7 @@ model ManagedClusterManagedOutboundIPProfile {
    * The desired number of IPv6 outbound IPs created/managed by Azure. Allowed values must be in the range of 1 to 16 (inclusive).
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_06_01)
   @maxValue(16)
   @minValue(1)
   countIPv6?: int32;
@@ -2709,7 +3064,7 @@ model ManagedClusterStaticEgressGatewayProfile {
 /**
  * Holds configuration customizations for kube-proxy. Any values not defined will use the kube-proxy defaulting behavior. See https://v<version>.docs.kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/ where <version> is represented by a <major version>-<minor version> string. Kubernetes version 1.23 would be '1-23'.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model ContainerServiceNetworkProfileKubeProxyConfig {
   /**
    * Whether to enable on kube-proxy on the cluster (if no 'kubeProxyConfig' exists, kube-proxy is enabled in AKS by default without these customizations).
@@ -2730,7 +3085,7 @@ model ContainerServiceNetworkProfileKubeProxyConfig {
 /**
  * Holds configuration customizations for IPVS. May only be specified if 'mode' is set to 'IPVS'.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig {
   /**
    * IPVS scheduler, for more information please see http://www.linuxvirtualserver.org/docs/scheduling.html.
@@ -2813,6 +3168,7 @@ model ManagedClusterAADProfile {
    * (DEPRECATED) The server AAD application secret. Learn more at https://aka.ms/aks/aad-legacy.
    */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   serverAppSecret?: string;
 
   /**
@@ -2846,6 +3202,23 @@ model ClusterUpgradeSettings {
    * Settings for overrides.
    */
   overrideSettings?: UpgradeOverrideSettings;
+
+  /**
+   * Settings for upgrade gating on upgrades in this managed cluster. Health signals are `HealthSignal` custom resources published by monitoring components running in the cluster. Setting `enabled` to `true` here is a cluster-wide opt-in that applies to all agent pool upgrades in this cluster; an agent pool cannot opt out of it.
+   */
+  @added(Versions.v2026_08_02_preview)
+  upgradeGateSettings?: UpgradeGateSettings;
+}
+
+/**
+ * Settings for health-aware upgrade gating.
+ */
+@added(Versions.v2026_08_02_preview)
+model UpgradeGateSettings {
+  /**
+   * Whether upgrade gating is enabled. Defaults to `false` when unset, except on a newly created agent pool in a cluster where upgrade gating is enabled, which defaults to `true`. When `true`, upgrade-gated health checks are enabled for upgrades in the corresponding scope. Setting this to `true` at the cluster scope enables gating for the entire cluster, including all agent pool upgrades. When the cluster scope is unset or `false`, an agent pool can opt in independently by setting this to `true`. When the cluster scope is `true`, an agent pool cannot set this to `false`. Force upgrade (`overrideSettings.forceUpgrade`) overrides the gate: while the override window is active, the upgrade skips health signal validation and proceeds.
+   */
+  enabled?: boolean;
 }
 
 /**
@@ -3115,7 +3488,7 @@ model ManagedClusterHTTPProxyConfig {
   /**
    * A read-only list of all endpoints for which traffic should not be sent to the proxy. This list is a superset of noProxy and values injected by AKS.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   @visibility(Lifecycle.Read)
   effectiveNoProxy?: string[];
 
@@ -3148,7 +3521,7 @@ model ManagedClusterSecurityProfile {
   /**
    * Encryption at rest of Kubernetes resource objects. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_07_01)
   kubernetesResourceObjectEncryptionProfile?: KubernetesResourceObjectEncryptionProfile;
 
   /**
@@ -3164,13 +3537,13 @@ model ManagedClusterSecurityProfile {
   /**
    * Image integrity is a feature that works with Azure Policy to verify image integrity by signature. This will not have any effect unless Azure Policy is applied to enforce image signatures. See https://aka.ms/aks/image-integrity for how to use this feature via policy.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   imageIntegrity?: ManagedClusterSecurityProfileImageIntegrity;
 
   /**
    * [Node Restriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction) settings for the security profile.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   nodeRestriction?: ManagedClusterSecurityProfileNodeRestriction;
 
   /**
@@ -3184,7 +3557,7 @@ model ManagedClusterSecurityProfile {
   /**
    * Defines service account based image pull settings.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   serviceAccountImagePullProfile?: ServiceAccountImagePullProfile;
 }
 
@@ -3207,9 +3580,9 @@ model ManagedClusterSecurityProfileDefender {
   securityMonitoring?: ManagedClusterSecurityProfileDefenderSecurityMonitoring;
 
   /**
-   * Microsoft Defender settings for security gating, validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents the deployment of images that do not meet security standards.
+   * Microsoft Defender settings for security gating. This validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents deployment of images that do not meet security standards. For more information, see https://aka.ms/KubernetesDefenderAuditRule.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_05_01)
   securityGating?: ManagedClusterSecurityProfileDefenderSecurityGating;
 }
 
@@ -3224,30 +3597,30 @@ model ManagedClusterSecurityProfileDefenderSecurityMonitoring {
 }
 
 /**
- * Microsoft Defender settings for security gating, validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents the deployment of images that do not meet security standards.
+ * Microsoft Defender settings for security gating. This validates container image eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents deployment of images that do not meet security standards.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_05_01)
 model ManagedClusterSecurityProfileDefenderSecurityGating {
   /**
-   * Whether to enable Defender security gating. When enabled, the gating feature will scan container images and audit or block the deployment of images that do not meet security standards according to the configured security rules.
+   * Whether to enable Defender security gating. When enabled, the gating feature scans container images and audits or blocks deployment of images that do not meet security standards according to configured security rules. For more information, see https://aka.ms/KubernetesDefenderAuditRule.
    */
   enabled?: boolean;
 
   /**
-   * List of identities that the admission controller will make use of in order to pull security artifacts from the registry. These are the same identities used by the cluster to pull container images. Each identity provided should have federated identity credential attached to it.
+   * List of identities that the admission controller uses to pull security artifacts from registries. These are the same identities used by the cluster to pull container images. For more information on configuring this identity, see https://learn.microsoft.com/en-us/azure/defender-for-cloud/gated-deployment-infrastructure-as-code.
    */
   @identifiers(#[])
-  identities?: ManagedClusterSecurityProfileDefenderSecurityGatingIdentitiesItem[];
+  identities?: ManagedClusterSecurityProfileDefenderSecurityGatingIdentity[];
 
   /**
-   * In use only while registry access granted by secret rather than managed identity. Set whether to grant the Defender gating agent access to the cluster's secrets for pulling images from registries. If secret access is denied and the registry requires pull secrets, the add-on will not perform any image validation. Default value is false.
+   * In use only while registry access is granted by secret rather than managed identity. Sets whether to grant the Defender gating agent access to cluster secrets for pulling images from registries. If secret access is denied and the registry requires pull secrets, the add-on will not perform image validation. Default value is false.
    */
   allowSecretAccess?: boolean;
 }
 
-/** Identity information used by Defender security gating to access container registries. */
-@added(Versions.v2026_01_02_preview)
-model ManagedClusterSecurityProfileDefenderSecurityGatingIdentitiesItem {
+/** Identity mapping used by Defender security gating for registry access. */
+@added(Versions.v2026_05_01)
+model ManagedClusterSecurityProfileDefenderSecurityGatingIdentity {
   /**
    * The container registry for which the identity will be used; the identity specified here should have a federated identity credential attached to it.
    */
@@ -3269,7 +3642,7 @@ model AzureKeyVaultKms {
   enabled?: boolean;
 
   /**
-   * Identifier of Azure Key Vault key. See [key identifier format](https://docs.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates#vault-name-and-object-name) for more details. When Azure Key Vault key management service is enabled, this field is required and must be a valid key identifier. When Azure Key Vault key management service is disabled, leave the field empty.
+   * The identifier of the Azure Key Vault key. For more information, see [Azure Key Vault key identifiers](https://docs.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates#vault-name-and-object-name). This property is required when Azure Key Vault key management service is enabled and must be omitted when the service is disabled. Starting with API versions 2026-07-01 and 2026-07-02-preview, a versioned key identifier uses the legacy KMS experience, while an unversioned key identifier uses the new KMS experience. For more information, see [KMS data encryption concepts](https://learn.microsoft.com/en-us/azure/aks/kms-data-encryption-concepts).
    */
   keyId?: string;
 
@@ -3291,12 +3664,13 @@ model AzureKeyVaultKms {
 /**
  * Encryption at rest of Kubernetes resource objects using service-managed keys. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_07_01)
 model KubernetesResourceObjectEncryptionProfile {
   /**
    * Whether to enable encryption at rest of Kubernetes resource objects using service-managed keys. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption.
    */
-  infrastructureEncryption?: InfrastructureEncryption = InfrastructureEncryption.Disabled;
+  @added(Versions.v2026_07_01)
+  infrastructureEncryption?: InfrastructureEncryption;
 }
 
 /**
@@ -3327,7 +3701,7 @@ model ManagedClusterSecurityProfileImageCleaner {
 /**
  * Image integrity related settings for the security profile.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model ManagedClusterSecurityProfileImageIntegrity {
   /**
    * Whether to enable image integrity. The default value is false.
@@ -3338,7 +3712,7 @@ model ManagedClusterSecurityProfileImageIntegrity {
 /**
  * Node Restriction settings for the security profile.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model ManagedClusterSecurityProfileNodeRestriction {
   /**
    * Whether to enable Node Restriction
@@ -3400,10 +3774,28 @@ model ManagedClusterStorageProfileDiskCSIDriver {
   enabled?: boolean;
 
   /**
-   * The version of AzureDisk CSI Driver. The default value is v1.
+   * Quick Attach Detach settings for the AzureDisk CSI driver. Quick Attach Detach enables faster, higher-scale Azure Disk attach and detach operations for stateful AKS workloads by bypassing ARM/CRP control-plane bottlenecks. For more information, see https://aka.ms/aks/qad.
    */
-  @added(Versions.v2026_01_02_preview)
-  version?: string;
+  @added(Versions.v2026_08_02_preview)
+  quickAttachDetach?: ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach;
+}
+
+/**
+ * Quick Attach Detach settings for the AzureDisk CSI driver.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with the parent CSI driver model"
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach {
+  /**
+   * Whether to enable Quick Attach Detach for the AzureDisk CSI driver. The default value is false.
+   */
+  enabled?: boolean;
+
+  /**
+   * Identity used by Quick Attach Detach. This property is returned by GET and cannot be set by clients. The Quick Attach Detach feature uses a managed identity that is automatically created and managed by the AKS resource provider. In most scenarios, no user action is required. An exception applies when using customer-managed disks that are located outside of the AKS node resource group (Bring Your Own Disk scenario). In this case, users must grant the Quick Attach Detach managed identity the required permissions on the resource group containing the disk.
+   */
+  @visibility(Lifecycle.Read)
+  identity?: UserAssignedIdentity;
 }
 
 /**
@@ -3451,18 +3843,18 @@ model ManagedClusterIngressProfile {
    * Settings for the managed Gateway API installation
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_02_01)
   gatewayAPI?: ManagedClusterIngressProfileGatewayConfiguration;
 
   /**
    * Settings for the managed Application Load Balancer installation
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   applicationLoadBalancer?: ManagedClusterIngressProfileApplicationLoadBalancer;
 }
 
-/** Configuration for the ingress managed gateway. See https://aka.ms/k8s-gateway-api for more details. */
-@added(Versions.v2026_01_02_preview)
+/** Configuration for managed Gateway API CRDs. See https://aka.ms/k8s-gateway-api for more details. */
+@added(Versions.v2026_02_01)
 model ManagedClusterIngressProfileGatewayConfiguration {
   /**
    * Configuration for the managed Gateway API installation. If not specified, the default is 'Disabled'. See https://aka.ms/k8s-gateway-api for more details.
@@ -3483,7 +3875,7 @@ model ManagedClusterIngressProfileWebAppRouting {
    * Configurations for Gateway API providers to be used for managed ingress with App Routing. See https://aka.ms/k8s-gateway-api for more information on the Gateway API.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_02_01)
   gatewayAPIImplementations?: ManagedClusterWebAppRoutingGatewayAPIImplementations;
 
   /**
@@ -3513,13 +3905,13 @@ model ManagedClusterIngressProfileWebAppRouting {
   /**
    * Configuration for the Default Domain. This is a unique, autogenerated domain that comes with a signed TLS Certificate allowing for secure HTTPS. See [the Default Domain documentation](https://aka.ms/aks/defaultdomain) for more instructions.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   defaultDomain?: ManagedClusterIngressDefaultDomainProfile;
 }
 
 /** Configurations for Gateway API providers to be used for managed ingress with App Routing. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterWebAppRoutingGatewayAPIImplementations {
   /**
    * Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API.
@@ -3528,7 +3920,7 @@ model ManagedClusterWebAppRoutingGatewayAPIImplementations {
 }
 
 /** Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API. */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterAppRoutingIstio {
   /**
    * Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing.
@@ -3545,7 +3937,7 @@ model ManagedClusterIngressProfileNginx {
 }
 
 /** Default domain profile for the managed cluster ingress profile. */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model ManagedClusterIngressDefaultDomainProfile {
   /**
    * Whether to enable Default Domain.
@@ -3562,7 +3954,7 @@ model ManagedClusterIngressDefaultDomainProfile {
 /**
  * Application Load Balancer settings for the ingress profile.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model ManagedClusterIngressProfileApplicationLoadBalancer {
   /**
    * Whether to enable Application Load Balancer.
@@ -3613,7 +4005,7 @@ model ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler {
   /**
    * Whether VPA add-on is enabled and configured to scale AKS-managed add-ons.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_08_02_preview)
   addonAutoscaling?: AddonAutoscaling = AddonAutoscaling.Disabled;
 }
 
@@ -3627,15 +4019,15 @@ model ManagedClusterAzureMonitorProfile {
   metrics?: ManagedClusterAzureMonitorProfileMetrics;
 
   /**
-   * Azure Monitor Container Insights Profile for Kubernetes Events, Inventory and Container stdout & stderr logs etc. See aka.ms/AzureMonitorContainerInsights for an overview.
+   * Set this to enable and configure Azure Monitor Container Insights for the cluster, which collects Kubernetes events, inventory, and container stdout & stderr logs. See aka.ms/AzureMonitorContainerInsights for an overview.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_06_01)
   containerInsights?: ManagedClusterAzureMonitorProfileContainerInsights;
 
   /**
    * Application Monitoring Profile for Kubernetes Application Container. Collects application logs, metrics and traces through auto-instrumentation of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_02_01)
   appMonitoring?: ManagedClusterAzureMonitorProfileAppMonitoring;
 }
 
@@ -3652,6 +4044,12 @@ model ManagedClusterAzureMonitorProfileMetrics {
    * Kube State Metrics profile for the Azure Managed Prometheus addon. These optional settings are for the kube-state-metrics pod that is deployed with the addon. See aka.ms/AzureManagedPrometheus-optional-parameters for details.
    */
   kubeStateMetrics?: ManagedClusterAzureMonitorProfileKubeStateMetrics;
+
+  /**
+   * Control plane metrics collection profile for the Azure Managed Prometheus addon. Configures collection of operational runtime metrics from managed control plane components (kube-apiserver, etcd, etc). See aka.ms/aks/controlplane-metrics for an overview.
+   */
+  @added(Versions.v2026_04_01)
+  controlPlane?: ManagedClusterAzureMonitorProfileMetricsControlPlane;
 }
 
 /**
@@ -3670,9 +4068,20 @@ model ManagedClusterAzureMonitorProfileKubeStateMetrics {
 }
 
 /**
- * Azure Monitor Container Insights Profile for Kubernetes Events, Inventory and Container stdout & stderr logs etc. See aka.ms/AzureMonitorContainerInsights for an overview.
+ * Control plane metrics collection profile for the Azure Managed Prometheus addon. Configures collection of operational runtime metrics from managed control plane components (kube-apiserver, etcd, etc). See aka.ms/aks/controlplane-metrics for an overview.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_04_01)
+model ManagedClusterAzureMonitorProfileMetricsControlPlane {
+  /**
+   * Whether to enable or disable collection of control plane metrics by the Azure Managed Prometheus addon. Defaults to disabled. See aka.ms/aks/controlplane-metrics for details.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * Azure Monitor Container Insights profile. Represents the configuration for collecting Kubernetes events, inventory, and container stdout & stderr logs. See aka.ms/AzureMonitorContainerInsights for an overview.
+ */
+@added(Versions.v2026_06_01)
 model ManagedClusterAzureMonitorProfileContainerInsights {
   /**
    * Indicates if Azure Monitor Container Insights Logs Addon is enabled or not.
@@ -3694,26 +4103,21 @@ model ManagedClusterAzureMonitorProfileContainerInsights {
   syslogPort?: int64;
 
   /**
-   * Indicates whether custom metrics collection has to be disabled or not. If not specified the default is false. No custom metrics will be emitted if this field is false but the container insights enabled field is false
-   */
-  disableCustomMetrics?: boolean;
-
-  /**
-   * Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false. No prometheus metrics will be emitted if this field is false but the container insights enabled field is false
+   * Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false i.e. the prometheus scraping is enabled.
    */
   disablePrometheusMetricsScraping?: boolean;
 
   /**
-   * Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.
+   * Configures container network logs ingestion with Azure Monitor. The log types ingested are controlled by the associated CRD; if unspecified, defaults to `Disabled`. See https://aka.ms/ContainerNetworkLogsDoc and https://aka.ms/acns/howtoenablecnl for details.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_06_01)
   containerNetworkLogs?: ContainerNetworkLogs;
 }
 
 /**
- * Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.
+ * Allowed values for container network logs ingestion with Azure Monitor. When `Enabled`, the specific log types ingested are controlled by the associated CRD; defaults to `Disabled`. See https://aka.ms/ContainerNetworkLogsDoc and https://aka.ms/acns/howtoenablecnl for details.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_06_01)
 union ContainerNetworkLogs {
   string,
 
@@ -3729,67 +4133,79 @@ union ContainerNetworkLogs {
 }
 
 /**
- * Application Monitoring Profile for Kubernetes Application Container. Collects application logs, metrics and traces through auto-instrumentation of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring profile for AKS.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterAzureMonitorProfileAppMonitoring {
   /**
-   * Application Monitoring Auto Instrumentation for Kubernetes Application Container. Deploys web hook to auto-instrument Azure Monitor OpenTelemetry based SDKs to collect OpenTelemetry metrics, logs and traces of the application. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+   * Application Monitoring auto-instrumentation for AKS. Deploys a webhook that auto-instruments workloads with Microsoft OpenTelemetry Distros to collect OpenTelemetry metrics, logs, and traces. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
   autoInstrumentation?: ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation;
 
   /**
-   * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Metrics. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+   * Application Monitoring OpenTelemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
+  @added(Versions.v2026_06_01)
   openTelemetryMetrics?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics;
 
   /**
-   * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Logs and Traces. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+   * Application Monitoring OpenTelemetry logs and traces profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
-  openTelemetryLogs?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs;
+  @added(Versions.v2026_06_01)
+  openTelemetryLogsAndTraces?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces;
 }
 
 /**
- * Application Monitoring Auto Instrumentation for Kubernetes Application Container. Deploys web hook to auto-instrument Azure Monitor OpenTelemetry based SDKs to collect OpenTelemetry metrics, logs and traces of the application. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring auto-instrumentation for AKS. Deploys a webhook that auto-instruments workloads with Microsoft OpenTelemetry Distros to collect OpenTelemetry metrics, logs, and traces. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation {
   /**
-   * Indicates if Application Monitoring Auto Instrumentation is enabled or not.
+   * Indicates if Application Monitoring Auto-instrumentation is enabled or not.
    */
   enabled?: boolean;
 }
 
 /**
- * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Metrics. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring OpenTelemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_06_01)
 model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics {
   /**
-   * Indicates if Application Monitoring Open Telemetry Metrics is enabled or not.
+   * Indicates if Application Monitoring OpenTelemetry Metrics is enabled or not.
    */
   enabled?: boolean;
 
   /**
-   * The Open Telemetry host port for Open Telemetry metrics. If not specified, the default port is 28333.
+   * The host port for OpenTelemetry HTTP/PROTOBUF metrics. If not specified, the default port is 28333.
    */
-  port?: int64;
+  httpPort?: int64;
+
+  /**
+   * The host port for OpenTelemetry GRPC metrics. If not specified, the default port is 28334.
+   */
+  grpcPort?: int64;
 }
 
 /**
- * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Logs and Traces. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring OpenTelemetry logs and traces profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2026_01_02_preview)
-model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs {
+@added(Versions.v2026_06_01)
+model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces {
   /**
-   * Indicates if Application Monitoring Open Telemetry Logs and traces is enabled or not.
+   * Indicates if Application Monitoring OpenTelemetry Logs and traces is enabled or not.
    */
   enabled?: boolean;
 
   /**
-   * The Open Telemetry host port for Open Telemetry logs and traces. If not specified, the default port is 28331.
+   * The host port for OpenTelemetry HTTP/PROTOBUF logs and traces. If not specified, the default port is 28331.
    */
-  port?: int64;
+  httpPort?: int64;
+
+  /**
+   * The host port for OpenTelemetry GRPC logs and traces. If not specified, the default port is 28332.
+   */
+  grpcPort?: int64;
 }
 
 /**
@@ -4001,34 +4417,47 @@ model ManagedClusterAIToolchainOperatorProfile {
 }
 
 /**
- * The pod scheduler profile for the cluster.
+ * Settings for the Agent Sandbox core extension managed by Azure Kubernetes Service (AKS).
  */
-@added(Versions.v2026_01_02_preview)
-model SchedulerProfile {
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterAgentSandboxProfile {
   /**
-   * Mapping of each scheduler instance to its profile.
+   * Whether the Agent Sandbox core extension is enabled for the cluster. On cluster creation, the default is false.
    */
-  schedulerInstanceProfiles?: SchedulerProfileSchedulerInstanceProfiles;
+  @added(Versions.v2026_08_02_preview)
+  enabled?: boolean;
 }
 
 /**
- * Mapping of each scheduler instance to its profile.
+ * The Pod Snapshot Restore profile for the managed cluster.
  */
-@added(Versions.v2026_01_02_preview)
-model SchedulerProfileSchedulerInstanceProfiles {
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterPodSnapshotProfile {
   /**
-   * The scheduler profile for the upstream scheduler instance.
+   * Whether the Pod Snapshot Restore core extension is enabled for the managed cluster.
+   */
+  @added(Versions.v2026_08_02_preview)
+  enabled?: boolean;
+}
+
+/**
+ * Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.
+ */
+@added(Versions.v2026_05_01)
+model SchedulerProfile {
+  /**
+   * Profile with settings related to upstream variant of kube-scheduler (https://github.com/kubernetes/kubernetes/tree/master/pkg/scheduler).
    */
   upstream?: SchedulerInstanceProfile;
 }
 
 /**
- * The scheduler profile for a single scheduler instance.
+ * Profile with settings related to a specific instance of an AKS-managed scheduler.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_05_01)
 model SchedulerInstanceProfile {
   /**
-   * The config customization mode for this scheduler instance.
+   * The configuration mode to be used by the AKS-managed scheduler.
    */
   schedulerConfigMode?: SchedulerConfigMode;
 }
@@ -4036,12 +4465,32 @@ model SchedulerInstanceProfile {
 /**
  * Settings for hosted system addons.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterHostedSystemProfile {
   /**
    * Whether to enable hosted system addons for the cluster.
    */
   enabled?: boolean;
+
+  /**
+   * The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverAccessProfile.subnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /26 CIDR.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  systemNodeSubnetID?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  /**
+   * The ID of the subnet that will be joined by worker nodes managed by node auto provisioner for running workload pods in your tenant. This must be provided together with `systemNodeSubnetID` and `apiserverAccessProfile.subnetId`, and all three subnet IDs must be in the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /16 CIDR.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  nodeSubnetID?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 }
 
 /**
@@ -4058,7 +4507,7 @@ model ManagedClusterStatus {
 /**
  * components of given Kubernetes version.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model ComponentsByRelease {
   /**
    * The Kubernetes version (major.minor).
@@ -4073,7 +4522,7 @@ model ComponentsByRelease {
 }
 
 /** Component information for a Kubernetes version. */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model Component {
   /**
    * Component name.
@@ -4178,6 +4627,73 @@ model SubResource {
 }
 
 /**
+ * The current status of an async operation.
+ */
+model OperationStatusResult {
+  /**
+   * Fully qualified ID for the async operation.
+   */
+  id?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Name of the async operation.
+   */
+  name?: string;
+
+  /**
+   * Operation status.
+   */
+  status: string;
+
+  /**
+   * Percent of the operation that is complete.
+   */
+  @minValue(0)
+  @maxValue(100)
+  percentComplete?: float64;
+
+  /**
+   * The start time of the operation.
+   */
+  startTime?: utcDateTime;
+
+  /**
+   * The end time of the operation.
+   */
+  endTime?: utcDateTime;
+
+  /**
+   * The operations list.
+   */
+  operations?: OperationStatusResult[];
+
+  /**
+   * If present, details of the operation error.
+   */
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+
+  /**
+   * Fully qualified ID of the resource against which the original async operation was started.
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The type of the operation.
+   */
+  @added(Versions.v2026_08_02_preview)
+  @visibility(Lifecycle.Read)
+  operationType?: string;
+
+  /**
+   * The type of the suboperation.
+   */
+  @added(Versions.v2026_08_02_preview)
+  @visibility(Lifecycle.Read)
+  subOperationType?: string;
+}
+
+/**
  * The operations list. It contains an URL link to get the next set of results.
  */
 model OperationStatusResultList is Azure.Core.Page<OperationStatusResult>;
@@ -4247,7 +4763,7 @@ model OperationListResult {
 /**
  * Health monitor profile for the managed cluster.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_08_02_preview)
 model ManagedClusterHealthMonitorProfile {
   /**
    * Whether to enable continuous control plane and addon monitor.
@@ -4258,4 +4774,67 @@ model ManagedClusterHealthMonitorProfile {
    * Whether to enable on-demand monitor.
    */
   enableOnDemandMonitor?: boolean;
+}
+
+/**
+ * Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later.
+ */
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterControlPlaneScalingProfile {
+  /**
+   * The scaling size of the control plane. Scaling sizes offer guaranteed capacity and predictable Kubernetes performance beyond standard tier defaults. Higher H sizes provide increased performance guarantees. See https://aka.ms/aks/hyperscale for performance metrics details for each size.
+   */
+  scalingSize: ControlPlaneScalingSize;
+}
+
+/**
+ * The policy configuration for when to allow certain operations which require node re-image and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy".
+ */
+@added(Versions.v2026_08_02_preview)
+union NodeDisruptionPolicy {
+  string,
+
+  /**
+   * Allows operations that will require node re-image and trigger redeployment.
+   */
+  Allow: "Allow",
+
+  /**
+   * Blocks certain operations that will require node re-image and trigger redeployment unless within the aksManagedNodeOSUpgradeSchedule maintenance window. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy . For more information on using the aksManagedNodeOSUpgradeSchedule maintenance window, please see https://learn.microsoft.com/azure/aks/planned-maintenance?tabs=azure-cli
+   */
+  AllowDuringMaintenanceWindow: "AllowDuringMaintenanceWindow",
+
+  /**
+   * Blocks certain operations that will require node re-image and trigger redeployment. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy
+   */
+  Block: "Block",
+}
+
+/**
+ * Node disruption profile for a managed cluster.
+ */
+@added(Versions.v2026_08_02_preview)
+model NodeDisruptionProfile {
+  /**
+   * The policy configuration for when to allow certain operations which require node re-image and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy".
+   */
+  nodeDisruptionPolicy?: NodeDisruptionPolicy;
+}
+
+/**
+ * NVIDIA GPU resource allocation mode.
+ */
+@added(Versions.v2026_08_02_preview)
+union NvidiaDriverMode {
+  string,
+
+  /**
+   * NVIDIA Kubernetes device plugin is installed on the nodes for resource allocation and scheduling.
+   */
+  DevicePlugin: "DevicePlugin",
+
+  /**
+   * NVIDIA Device Resource Allocation (DRA) driver is installed on the nodes for resource allocation and scheduling.
+   */
+  DRA: "DRA",
 }

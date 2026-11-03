@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Network;
+namespace Common;
 /**
  * NetworkSecurityGroup resource.
  */
@@ -34,6 +34,7 @@ model NetworkSecurityGroup extends Resource {
 }
 
 @@doc(NetworkSecurityGroup.name, "The name of the network security group.");
-@@doc(NetworkSecurityGroup.properties,
+@@doc(
+  NetworkSecurityGroup.properties,
   "Properties of the network security group."
 );

@@ -756,7 +756,7 @@
         "tags": [
           "Issue"
         ],
-        "description": "Add or update alerts in the issue",
+        "description": "Add or update alerts associated with an issue",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -820,7 +820,7 @@
         "tags": [
           "Issue"
         ],
-        "description": "Add or update resources in the issue",
+        "description": "Add or update resources associated with an issue",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1390,25 +1390,6 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1451,8 +1432,7 @@
         },
         "metrics": {
           "$ref": "#/definitions/AzureMonitorWorkspaceMetrics",
-          "description": "Properties related to the metrics container in the Azure Monitor Workspace",
-          "readOnly": true
+          "description": "Properties related to the metrics container in the Azure Monitor Workspace"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1534,6 +1514,11 @@
         "properties": {
           "$ref": "#/definitions/AzureMonitorWorkspace",
           "description": "Resource properties"
+        },
+        "etag": {
+          "type": "string",
+          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -1565,18 +1550,20 @@
     },
     "AzureMonitorWorkspaceResourceUpdate": {
       "type": "object",
-      "description": "An Azure Monitor Workspace definition",
+      "description": "The type used for updating an Azure Monitor Workspace",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "$ref": "#/definitions/AzureMonitorWorkspace",
           "description": "Resource properties"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "Background": {
       "type": "object",
@@ -1767,7 +1754,7 @@
     },
     "IssuePropertiesUpdate": {
       "type": "object",
-      "description": "The issue properties",
+      "description": "The issue properties for update",
       "properties": {
         "title": {
           "type": "string",
@@ -1830,18 +1817,13 @@
     },
     "IssueResourceUpdate": {
       "type": "object",
-      "description": "The Issue resource",
+      "description": "The Issue resource update",
       "properties": {
         "properties": {
           "$ref": "#/definitions/IssuePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "ListParameter": {
       "type": "object",
@@ -1868,7 +1850,8 @@
         },
         "version": {
           "type": "string",
-          "description": "The version of Metrics Query Service that this AMW will use for all metric queries."
+          "description": "The version of Metrics Query Service that this AMW will use for all metric queries.",
+          "example": "1.0"
         }
       }
     },

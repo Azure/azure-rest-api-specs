@@ -111,6 +111,7 @@ interface WorkspacePrivateLinkResources {
   >;
 }
 
-@@doc(PrivateLinkResourceDescription.name,
+@@doc(
+  PrivateLinkResourceDescription.name,
   "The name of the private link resource group."
 );

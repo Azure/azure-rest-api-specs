@@ -1,44 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+    "api-version": "2024-03-01-preview",
     "resourceGroupName": "gigtest",
-    "api-version": "2024-03-01-preview"
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
-            "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/highcpu",
             "type": "Microsoft.Insights/metricAlerts",
+            "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.insights/metricalerts/highcpu",
             "location": "global",
-            "tags": {
-              "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
-            },
             "properties": {
               "description": "This is the description of the rule1",
-              "severity": 3,
-              "enabled": true,
-              "scopes": [
-                "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
-              ],
-              "evaluationFrequency": "PT1M",
-              "windowSize": "PT15M",
-              "criteria": {
-                "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-                "allOf": [
-                  {
-                    "criterionType": "StaticThresholdCriterion",
-                    "name": "High_CPU_80",
-                    "metricName": "CustomMetric_\\Processor(_Total)\\% Processor Time",
-                    "dimensions": [],
-                    "operator": "GreaterThan",
-                    "threshold": 80.50,
-                    "timeAggregation": "Average"
-                  }
-                ]
-              },
               "actions": [
                 {
                   "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
@@ -47,39 +22,39 @@
                     "key12": "value12"
                   }
                 }
-              ]
+              ],
+              "criteria": {
+                "allOf": [
+                  {
+                    "name": "High_CPU_80",
+                    "criterionType": "StaticThresholdCriterion",
+                    "dimensions": [],
+                    "metricName": "CustomMetric_\\Processor(_Total)\\% Processor Time",
+                    "operator": "GreaterThan",
+                    "threshold": 80.5,
+                    "timeAggregation": "Average"
+                  }
+                ],
+                "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria"
+              },
+              "enabled": true,
+              "evaluationFrequency": "PT1M",
+              "scopes": [
+                "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
+              ],
+              "severity": 3,
+              "windowSize": "PT15M"
+            },
+            "tags": {
+              "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
             }
           },
           {
-            "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/mediumcpu",
             "type": "Microsoft.Insights/metricAlerts",
+            "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.insights/metricalerts/mediumcpu",
             "location": "global",
-            "tags": {
-              "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
-            },
             "properties": {
               "description": "Med cpu alert",
-              "severity": 4,
-              "enabled": true,
-              "scopes": [
-                "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
-              ],
-              "evaluationFrequency": "PT1M",
-              "windowSize": "PT15M",
-              "criteria": {
-                "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-                "allOf": [
-                  {
-                    "criterionType": "StaticThresholdCriterion",
-                    "name": "Medium_CPU_50",
-                    "metricName": "CustomMetric_\\Processor(_Total)\\% Processor Time",
-                    "dimensions": [],
-                    "operator": "GreaterThan",
-                    "threshold": 50.50,
-                    "timeAggregation": "Average"
-                  }
-                ]
-              },
               "actions": [
                 {
                   "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
@@ -88,11 +63,38 @@
                     "key12": "value12"
                   }
                 }
-              ]
+              ],
+              "criteria": {
+                "allOf": [
+                  {
+                    "name": "Medium_CPU_50",
+                    "criterionType": "StaticThresholdCriterion",
+                    "dimensions": [],
+                    "metricName": "CustomMetric_\\Processor(_Total)\\% Processor Time",
+                    "operator": "GreaterThan",
+                    "threshold": 50.5,
+                    "timeAggregation": "Average"
+                  }
+                ],
+                "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria"
+              },
+              "enabled": true,
+              "evaluationFrequency": "PT1M",
+              "scopes": [
+                "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
+              ],
+              "severity": 4,
+              "windowSize": "PT15M"
+            },
+            "tags": {
+              "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "MetricAlerts_ListBySubscription",
+  "title": "List metric alert rules"
 }

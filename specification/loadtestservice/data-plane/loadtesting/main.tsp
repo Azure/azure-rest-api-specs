@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -48,6 +49,9 @@ enum APIVersions {
 
   @doc("The 2025-11-01-preview version of the Azure Load Testing API.")
   v2025_11_01_preview: "2025-11-01-preview",
+
+  @doc("The 2026-04-01 version of the Azure Load Testing API.")
+  v2026_04_01: "2026-04-01",
 }
 
 @doc("OAuth 2.0 Flow with Microsoft Entra ID.")
@@ -55,6 +59,7 @@ model Oauth2
   is OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit;
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
       scopes: ["https://cnt-prod.loadtesting.azure.com/.default"];
     }

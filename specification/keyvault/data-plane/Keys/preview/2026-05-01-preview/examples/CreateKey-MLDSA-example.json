@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net/",
+    "key-name": "CreateMLDSAKeyTest",
+    "api-version": "2026-05-01-preview",
+    "parameters": {
+      "kty": "AKP",
+      "alg": "ML-DSA-65",
+      "key_ops": [
+        "sign",
+        "verify"
+      ],
+      "attributes": {},
+      "tags": {
+        "purpose": "unit test",
+        "test name": "CreateMLDSAKeyTest"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "key": {
+          "kid": "https://myvault.vault.azure.net/keys/CreateMLDSAKeyTest/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+          "kty": "AKP-HSM",
+          "alg": "ML-DSA-65",
+          "key_ops": [
+            "sign",
+            "verify"
+          ],
+          "pub": "base64url-encoded-public-key-bytes"
+        },
+        "attributes": {
+          "enabled": true,
+          "created": 1706000000,
+          "updated": 1706000000,
+          "recoveryLevel": "Recoverable+Purgeable"
+        },
+        "tags": {
+          "purpose": "unit test",
+          "test name": "CreateMLDSAKeyTest"
+        }
+      }
+    }
+  },
+  "operationId": "CreateKey",
+  "title": "Create ML-DSA key"
+}

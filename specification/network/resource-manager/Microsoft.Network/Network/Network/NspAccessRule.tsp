@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NspProfile.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -92,6 +94,7 @@ interface NspAccessRules {
   /**
    * Reconcile NSP access rules
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing reconcile retains its request-body shape; preserve wire compatibility."
   @tag("NetworkSecurityPerimeterAccessRules")
   reconcile is ArmResourceActionSync<
     NspAccessRule,
@@ -104,9 +107,11 @@ interface NspAccessRules {
 @@maxLength(NspAccessRule.name, 80);
 @@doc(NspAccessRule.name, "The name of the NSP access rule.");
 @@doc(NspAccessRule.properties, "Properties of the NSP access rule.");
-@@doc(NspAccessRules.createOrUpdate::parameters.resource,
+@@doc(
+  NspAccessRules.createOrUpdate::parameters.resource,
   "Parameters that hold the NspAccessRule resource to be created/updated."
 );
-@@doc(NspAccessRules.reconcile::parameters.body,
+@@doc(
+  NspAccessRules.reconcile::parameters.body,
   "Parameters for NSP access rule reconcile"
 );

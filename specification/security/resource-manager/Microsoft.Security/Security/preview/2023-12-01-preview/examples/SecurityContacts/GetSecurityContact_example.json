@@ -1,37 +1,39 @@
 {
   "parameters": {
     "api-version": "2023-12-01-preview",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "securityContactName": "default"
+    "securityContactName": "default",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityContacts/default",
         "name": "default",
         "type": "Microsoft.Security/securityContacts",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityContacts/default",
         "properties": {
+          "emails": "john@contoso.com;jane@contoso.com",
+          "isEnabled": true,
           "notificationsByRole": {
-            "state": "On",
             "roles": [
               "Owner"
-            ]
+            ],
+            "state": "On"
           },
-          "isEnabled": true,
-          "emails": "john@contoso.com;jane@contoso.com",
-          "phone": "(214)275-4038",
           "notificationsSources": [
             {
-              "sourceType": "AttackPath",
-              "minimalRiskLevel": "Critical"
+              "minimalRiskLevel": "Critical",
+              "sourceType": "AttackPath"
             },
             {
-              "sourceType": "Alert",
-              "minimalSeverity": "Medium"
+              "minimalSeverity": "Medium",
+              "sourceType": "Alert"
             }
-          ]
+          ],
+          "phone": "(214)275-4038"
         }
       }
     }
-  }
+  },
+  "operationId": "SecurityContacts_Get",
+  "title": "Get a security contact"
 }

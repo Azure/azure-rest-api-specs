@@ -1,33 +1,35 @@
 {
   "parameters": {
-    "subscriptionId": "fc04246f-04c5-437e-ac5e-206a19e7193f",
+    "api-version": "2025-09-01-preview",
     "groupName": "DmsSdkRg",
     "serviceName": "DmsSdkService",
-    "api-version": "2025-09-01-preview"
+    "subscriptionId": "fc04246f-04c5-437e-ac5e-206a19e7193f"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "name": "DmsSdkTask",
+            "type": "Microsoft.DataMigration/services/serviceTasks",
+            "etag": "0vPYxzfnDaDH9yhOJAnqTyTRpa09Kb7pm+LEukDBbw8=",
+            "id": "/subscriptions/fc04246f-04c5-437e-ac5e-206a19e7193f/resourceGroups/DmsSdkRg/providers/Microsoft.DataMigration/services/DmsSdkService/serviceTasks/DmsSdkTask",
             "properties": {
               "input": {
                 "sourceConnectionInfo": {
-                  "serverName": "localhost",
+                  "type": "MySqlConnectionInfo",
                   "port": 3306,
-                  "type": "MySqlConnectionInfo"
+                  "serverName": "localhost"
                 }
               },
-              "taskType": "ConnectToSource.MySql",
-              "state": "Queued"
-            },
-            "etag": "0vPYxzfnDaDH9yhOJAnqTyTRpa09Kb7pm+LEukDBbw8=",
-            "id": "/subscriptions/fc04246f-04c5-437e-ac5e-206a19e7193f/resourceGroups/DmsSdkRg/providers/Microsoft.DataMigration/services/DmsSdkService/serviceTasks/DmsSdkTask",
-            "name": "DmsSdkTask",
-            "type": "Microsoft.DataMigration/services/serviceTasks"
+              "state": "Queued",
+              "taskType": "ConnectToSource.MySql"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ServiceTasks_List",
+  "title": "ServiceTasks_List"
 }

@@ -32,6 +32,22 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("API Version 2025-10-03-preview")
   v2025_10_03: "2025-10-03-preview",
+
+  /**
+   * The 2025-10-03 GA API version.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("API Version 2025-10-03")
+  v2025_10_03_stable: "2025-10-03",
+
+  /**
+   * The 2026-09-03-preview API version.
+   */
+  @Azure.Core.previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("API Version 2026-09-03-preview")
+  v2026_09_03_preview: "2026-09-03-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

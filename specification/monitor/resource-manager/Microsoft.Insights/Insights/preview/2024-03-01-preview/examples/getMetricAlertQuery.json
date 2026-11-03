@@ -1,20 +1,15 @@
 {
   "parameters": {
-    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+    "api-version": "2024-03-01-preview",
     "resourceGroupName": "gigtest",
     "ruleName": "chiricutin",
-    "api-version": "2024-03-01-preview"
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/chiricutin",
         "type": "Microsoft.Insights/metricAlerts",
-        "location": "eastus",
-        "tags": {
-          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
-        },
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.insights/metricalerts/chiricutin",
         "identity": {
           "type": "UserAssigned",
           "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
@@ -25,28 +20,9 @@
             }
           }
         },
+        "location": "eastus",
         "properties": {
           "description": "This is the description of the rule1",
-          "severity": 3,
-          "enabled": true,
-          "scopes": [
-            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.monitor/accounts/gigwadme"
-          ],
-          "evaluationFrequency": "PT1M",
-          "criteria": {
-            "odata.type": "Microsoft.Azure.Monitor.PromQLCriteria",
-            "allOf": [
-              {
-                "name": "Metric1",
-                "criterionType": "StaticThresholdCriterion",
-                "query": "floor(minute(vector(time())) / 10 ) % 2 == 1"
-              }
-            ]
-          },
-          "resolveConfiguration": {
-            "autoResolved": true,
-            "timeToResolve": "PT10M"
-          },
           "actions": [
             {
               "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
@@ -55,9 +31,35 @@
                 "key12": "value12"
               }
             }
-          ]
+          ],
+          "criteria": {
+            "allOf": [
+              {
+                "name": "Metric1",
+                "criterionType": "StaticThresholdCriterion",
+                "query": "floor(minute(vector(time())) / 10 ) % 2 == 1"
+              }
+            ],
+            "odata.type": "Microsoft.Azure.Monitor.PromQLCriteria"
+          },
+          "enabled": true,
+          "evaluationFrequency": "PT1M",
+          "resolveConfiguration": {
+            "autoResolved": true,
+            "timeToResolve": "PT10M"
+          },
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.monitor/accounts/gigwadme"
+          ],
+          "severity": 3
+        },
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "MetricAlerts_Get",
+  "title": "Get a query based alert rule"
 }

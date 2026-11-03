@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -69,6 +71,7 @@ interface ExpressRouteProviderPorts {
 }
 
 @@doc(ExpressRouteProviderPort.name, "The name of the provider port.");
-@@doc(ExpressRouteProviderPort.properties,
+@@doc(
+  ExpressRouteProviderPort.properties,
   "Properties of the express route Service Provider Port."
 );

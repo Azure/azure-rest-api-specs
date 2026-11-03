@@ -1,0 +1,469 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "containerAppEnvelope": {
+      "extendedLocation": {
+        "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+        "type": "CustomLocation"
+      },
+      "location": "East US",
+      "properties": {
+        "configuration": {
+          "dapr": {
+            "appPort": 3000,
+            "appProtocol": "http",
+            "enableApiLogging": true,
+            "enabled": true,
+            "httpMaxRequestSize": 10,
+            "httpReadBufferSize": 30,
+            "logLevel": "debug"
+          },
+          "ingress": {
+            "additionalPortMappings": [
+              {
+                "external": true,
+                "targetPort": 1234
+              },
+              {
+                "exposedPort": 3456,
+                "external": false,
+                "targetPort": 2345
+              }
+            ],
+            "clientCertificateMode": "accept",
+            "corsPolicy": {
+              "allowCredentials": true,
+              "allowedHeaders": [
+                "HEADER1",
+                "HEADER2"
+              ],
+              "allowedMethods": [
+                "GET",
+                "POST"
+              ],
+              "allowedOrigins": [
+                "https://a.test.com",
+                "https://b.test.com"
+              ],
+              "exposeHeaders": [
+                "HEADER3",
+                "HEADER4"
+              ],
+              "maxAge": 1234
+            },
+            "customDomains": [
+              {
+                "name": "www.my-name.com",
+                "bindingType": "SniEnabled",
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+              },
+              {
+                "name": "www.my-other-name.com",
+                "bindingType": "SniEnabled",
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+              }
+            ],
+            "external": true,
+            "ipSecurityRestrictions": [
+              {
+                "name": "Allow work IP A subnet",
+                "description": "Allowing all IP's within the subnet below to access containerapp",
+                "action": "Allow",
+                "ipAddressRange": "192.168.1.1/32"
+              },
+              {
+                "name": "Allow work IP B subnet",
+                "description": "Allowing all IP's within the subnet below to access containerapp",
+                "action": "Allow",
+                "ipAddressRange": "192.168.1.1/8"
+              }
+            ],
+            "stickySessions": {
+              "affinity": "sticky"
+            },
+            "targetPort": 3000,
+            "traffic": [
+              {
+                "label": "production",
+                "revisionName": "testcontainerApp0-ab1234",
+                "weight": 100
+              }
+            ]
+          },
+          "maxInactiveRevisions": 10,
+          "revisionTransitionThreshold": 100,
+          "runtime": {
+            "dotnet": {
+              "autoConfigureDataProtection": true
+            },
+            "java": {
+              "enableMetrics": true,
+              "javaAgent": {
+                "enabled": true,
+                "logging": {
+                  "loggerSettings": [
+                    {
+                      "level": "debug",
+                      "logger": "org.springframework.boot"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube",
+        "template": {
+          "containers": [
+            {
+              "name": "testcontainerApp0",
+              "image": "repo/testcontainerApp0:v1",
+              "probes": [
+                {
+                  "type": "Liveness",
+                  "httpGet": {
+                    "path": "/health",
+                    "httpHeaders": [
+                      {
+                        "name": "Custom-Header",
+                        "value": "Awesome"
+                      }
+                    ],
+                    "port": 8080
+                  },
+                  "initialDelaySeconds": 3,
+                  "periodSeconds": 3
+                }
+              ]
+            }
+          ],
+          "initContainers": [
+            {
+              "name": "testinitcontainerApp0",
+              "args": [
+                "-c",
+                "while true; do echo hello; sleep 10;done"
+              ],
+              "command": [
+                "/bin/sh"
+              ],
+              "image": "repo/testcontainerApp0:v4",
+              "resources": {
+                "cpu": 0.2,
+                "memory": "100Mi"
+              }
+            }
+          ],
+          "scale": {
+            "cooldownPeriod": 350,
+            "maxReplicas": 5,
+            "minReplicas": 1,
+            "pollingInterval": 35,
+            "rules": [
+              {
+                "name": "httpscalingrule",
+                "custom": {
+                  "type": "http",
+                  "metadata": {
+                    "concurrentRequests": "50"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "containerAppName": "testcontainerApp0",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testcontainerApp0",
+        "type": "Microsoft.App/containerApps",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+        "location": "East US",
+        "properties": {
+          "configuration": {
+            "dapr": {
+              "appPort": 3000,
+              "appProtocol": "http",
+              "enabled": true,
+              "httpReadBufferSize": 30
+            },
+            "ingress": {
+              "customDomains": [
+                {
+                  "name": "www.my-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+                },
+                {
+                  "name": "www.my-other-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+                }
+              ],
+              "external": true,
+              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "ipSecurityRestrictions": [
+                {
+                  "name": "Allow work IP A subnet",
+                  "description": "Allowing all IP's within the subnet below to access containerapp",
+                  "action": "Allow",
+                  "ipAddressRange": "192.168.1.1/32"
+                },
+                {
+                  "name": "Allow work IP B subnet",
+                  "description": "Allowing all IP's within the subnet below to access containerapp",
+                  "action": "Allow",
+                  "ipAddressRange": "192.168.1.1/8"
+                }
+              ],
+              "stickySessions": {
+                "affinity": "sticky"
+              },
+              "targetPort": 3000,
+              "targetPortHttpScheme": "http",
+              "traffic": [
+                {
+                  "revisionName": "testcontainerApp0-ab1234",
+                  "weight": 80
+                },
+                {
+                  "label": "staging",
+                  "revisionName": "testcontainerApp0-ab4321",
+                  "weight": 20
+                }
+              ],
+              "transport": "auto"
+            },
+            "runtime": {
+              "dotnet": {
+                "autoConfigureDataProtection": true
+              },
+              "java": {
+                "enableMetrics": true,
+                "javaAgent": {
+                  "enabled": true,
+                  "logging": {
+                    "loggerSettings": [
+                      {
+                        "level": "debug",
+                        "logger": "org.springframework.boot"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube",
+          "eventStreamEndpoint": "testEndpoint",
+          "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
+          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "provisioningState": "Succeeded",
+          "runningStatus": "Running",
+          "template": {
+            "containers": [
+              {
+                "name": "testcontainerApp0",
+                "image": "repo/testcontainerApp0:v4",
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "httpGet": {
+                      "path": "/health",
+                      "httpHeaders": [
+                        {
+                          "name": "Custom-Header",
+                          "value": "Awesome"
+                        }
+                      ],
+                      "port": 8080
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ],
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "initContainers": [
+              {
+                "name": "testinitcontainerApp0",
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainerApp0:v4",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "scale": {
+              "cooldownPeriod": 350,
+              "maxReplicas": 5,
+              "minReplicas": 1,
+              "pollingInterval": 35,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "testcontainerApp0",
+        "type": "Microsoft.App/containerApps",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+        "location": "East US",
+        "properties": {
+          "configuration": {
+            "dapr": {
+              "appPort": 3000,
+              "appProtocol": "http",
+              "enabled": true,
+              "httpReadBufferSize": 30
+            },
+            "ingress": {
+              "external": true,
+              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "targetPort": 3000,
+              "targetPortHttpScheme": "http",
+              "traffic": [
+                {
+                  "revisionName": "testcontainerApp0-ab1234",
+                  "weight": 80
+                },
+                {
+                  "label": "staging",
+                  "revisionName": "testcontainerApp0-ab4321",
+                  "weight": 20
+                }
+              ],
+              "transport": "auto"
+            },
+            "runtime": {
+              "dotnet": {
+                "autoConfigureDataProtection": true
+              },
+              "java": {
+                "enableMetrics": true,
+                "javaAgent": {
+                  "enabled": true,
+                  "logging": {
+                    "loggerSettings": [
+                      {
+                        "level": "debug",
+                        "logger": "org.springframework.boot"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube",
+          "eventStreamEndpoint": "testEndpoint",
+          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "provisioningState": "InProgress",
+          "runningStatus": "Progressing",
+          "template": {
+            "containers": [
+              {
+                "name": "testcontainerApp0",
+                "image": "repo/testcontainerApp0:v4",
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "httpGet": {
+                      "path": "/health",
+                      "httpHeaders": [
+                        {
+                          "name": "Custom-Header",
+                          "value": "Awesome"
+                        }
+                      ],
+                      "port": 8080
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ],
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "initContainers": [
+              {
+                "name": "testinitcontainerApp0",
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainerApp0:v4",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "scale": {
+              "cooldownPeriod": 350,
+              "maxReplicas": 5,
+              "minReplicas": 1,
+              "pollingInterval": 35,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerApps_CreateOrUpdate",
+  "title": "Create or Update App On A Connected Environment"
+}

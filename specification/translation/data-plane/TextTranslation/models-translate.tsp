@@ -181,17 +181,34 @@ model TranslationTarget {
   @doc("""
     Defines complexity of LLM prompts to provide high accuracy translation.
     """)
+  @removed(APIVersion.v2026_06_06)
   grade?: string = "basic";
 
   @doc("""
     Desired tone of target translation.
     """)
-  tone?: string;
+  @renamedFrom(APIVersion.v2026_06_06, "tone")
+  @removed(APIVersion.v2026_06_06)
+  toneV1?: string;
+
+  @doc("""
+    Desired tone of target translation. Accepted values are formal, informal, or neutral.
+    """)
+  @added(APIVersion.v2026_06_06)
+  tone?: TranslationTone;
 
   @doc("""
     Desired gender of target translation.
     """)
-  gender?: string;
+  @renamedFrom(APIVersion.v2026_06_06, "gender")
+  @removed(APIVersion.v2026_06_06)
+  genderV1?: string;
+
+  @doc("""
+    Desired gender of target translation. Accepted values are female, male, or neutral.
+    """)
+  @added(APIVersion.v2026_06_06)
+  gender?: TranslationGender;
 
   @doc("""
     Reference dataset ID having sentence pair to generate adaptive customized translation.
@@ -344,6 +361,36 @@ enum ProfanityMarker {
 
   @doc("Profanity is marked with the tags.")
   Tag: "Tag",
+}
+
+@doc("Desired tone for the translated text.")
+@added(APIVersion.v2026_06_06)
+union TranslationTone {
+  string,
+
+  @doc("Neutral tone.")
+  Neutral: "neutral",
+
+  @doc("Formal tone.")
+  Formal: "formal",
+
+  @doc("Informal tone.")
+  Informal: "informal",
+}
+
+@doc("Desired gender for the translated text.")
+@added(APIVersion.v2026_06_06)
+union TranslationGender {
+  string,
+
+  @doc("Neutral gender.")
+  Neutral: "neutral",
+
+  @doc("Male gender.")
+  Male: "male",
+
+  @doc("Female gender.")
+  Female: "female",
 }
 
 @doc("Element containing the translated text")

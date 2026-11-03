@@ -1,0 +1,186 @@
+import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
+
+using Azure.ClientGenerator.Core;
+
+@@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "python");
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionResource,
+  "HorizonDBPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionUpdate,
+  "HorizonDBPrivateEndpointConnectionPatch",
+  "csharp"
+);
+@@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.CreateModeCluster,
+  "HorizonDBClusterCreateMode",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.CreateModePool,
+  "HorizonDBPoolCreateMode",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.AuthenticationState,
+  "HorizonDBAuthenticationState",
+  "csharp"
+);
+@@clientName(Microsoft.HorizonDb.Cluster, "HorizonDBCluster", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.PrincipalTypes,
+  "HorizonDBPrincipalType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterForPatchUpdate,
+  "HorizonDBClusterPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterReplaceAcceptedResponse,
+  "HorizonDBClusterReplaceAcceptedResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterCreateAcceptedResponse,
+  "HorizonDBClusterCreateAcceptedResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties,
+  "HorizonDBClusterParameterGroupConnectionProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterProperties,
+  "HorizonDBClusterProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterPropertiesForPatchUpdate,
+  "HorizonDBClusterPatchProperties",
+  "csharp"
+);
+@@clientName(Microsoft.HorizonDb.Clusters, "HorizonDBClusters", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.FirewallRuleProperties,
+  "HorizonDBFirewallRuleProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroup,
+  "HorizonDBParameterGroup",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroupConnectionProperties,
+  "HorizonDBParameterGroupConnectionProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroupForPatchUpdate,
+  "HorizonDBParameterGroupPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroupProperties,
+  "HorizonDBParameterGroupProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroupPropertiesForPatchUpdate,
+  "HorizonDBParameterGroupPatchProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroups,
+  "HorizonDBParameterGroups",
+  "csharp"
+);
+@@clientName(Microsoft.HorizonDb.Pool, "HorizonDBPool", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.PoolCreateAcceptedResponse,
+  "HorizonDBPoolCreateAcceptedResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PoolProperties,
+  "HorizonDBPoolProperties",
+  "csharp"
+);
+@@clientName(Microsoft.HorizonDb.Pools, "HorizonDBPools", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.PrivateEndpointConnections,
+  "HorizonDBPrivateEndpointConnections",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PrivateEndpointConnections.approveOrReject,
+  "approveOrRejectPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PrivateEndpointConnections.delete,
+  "deletePrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PrivateLinkResource,
+  "HorizonDBPrivateLinkResource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PrivateLinkResources,
+  "HorizonDBPrivateLinkResources",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterProperties,
+  "HorizonDBParameterProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ProvisioningState,
+  "HorizonDBProvisioningState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PublicNetworkAccessState,
+  "HorizonDBPublicNetworkAccessState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ZonePlacementEnforcement,
+  "HorizonDBZonePlacementPolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ActivateChangeDataCaptureIdentityRequest,
+  "HorizonDBActivateChangeDataCaptureIdentityContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.MaintenanceEventRescheduleRequest,
+  "HorizonDBMaintenanceEventRescheduleContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.MaintenanceEventActionResponse,
+  "HorizonDBMaintenanceEventActionResult",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionProperties,
+  "HorizonDBPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionUpdate.properties,
+  "HorizonDBPrivateEndpointConnectionPatchProperties",
+  "csharp"
+);

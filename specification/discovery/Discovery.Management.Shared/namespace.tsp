@@ -17,4 +17,7 @@ namespace Microsoft.Discovery;
 enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_02_01_preview: "2026-02-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_06_01: "2026-06-01",
 }

@@ -1,59 +1,61 @@
 {
+  "operationId": "Metrics_List",
   "parameters": {
-    "resourceUri": "subscriptions/ac41e21f-afd6-4a79-8070-f01eba278f97/resourceGroups/todking/providers/Microsoft.DocumentDb/databaseAccounts/tk-cosmos-mongo",
-    "timespan": "2021-06-07T21:51:00Z/2021-06-08T01:51:00Z",
-    "metricnames": "MongoRequestsCount,MongoRequests",
-    "metricnamespace": "microsoft.documentdb/databaseaccounts",
-    "aggregation": "average",
-    "interval": "FULL",
     "AutoAdjustTimegrain": true,
     "ValidateDimensions": false,
-    "api-version": "2024-02-01"
+    "aggregation": "average",
+    "api-version": "2024-02-01",
+    "interval": "FULL",
+    "metricnames": "MongoRequestsCount,MongoRequests",
+    "metricnamespace": "microsoft.documentdb/databaseaccounts",
+    "resourceUri": "subscriptions/ac41e21f-afd6-4a79-8070-f01eba278f97/resourceGroups/todking/providers/Microsoft.DocumentDb/databaseAccounts/tk-cosmos-mongo",
+    "timespan": "2021-06-07T21:51:00Z/2021-06-08T01:51:00Z"
   },
+  "title": "Get Metric with error",
   "responses": {
     "200": {
       "body": {
         "cost": 239,
-        "timespan": "2021-06-07T21:51:00Z/2021-06-08T01:51:00Z",
         "interval": "PT4H",
+        "namespace": "microsoft.documentdb/databaseaccounts",
+        "resourceregion": "westus2",
+        "timespan": "2021-06-07T21:51:00Z/2021-06-08T01:51:00Z",
         "value": [
           {
-            "id": "/subscriptions/ac41e21f-afd6-4a79-8070-f01eba278f97/resourceGroups/todking/providers/Microsoft.DocumentDb/databaseAccounts/tk-cosmos-mongo/providers/Microsoft.Insights/metrics/MongoRequestsCount",
-            "type": "Microsoft.Insights/metrics",
             "name": {
-              "value": "MongoRequestsCount",
-              "localizedValue": "(deprecated) Mongo Request Rate"
+              "localizedValue": "(deprecated) Mongo Request Rate",
+              "value": "MongoRequestsCount"
             },
-            "unit": "CountPerSecond",
-            "timeseries": [],
+            "type": "Microsoft.Insights/metrics",
+            "errorCode": "InvalidSamplingType",
             "errorMessage": "Sampling type is not found. Metric:CosmosDBCustomer,AzureMonitor,MongoRequests, SamplingType:NullableAverage.",
-            "errorCode": "InvalidSamplingType"
+            "id": "/subscriptions/ac41e21f-afd6-4a79-8070-f01eba278f97/resourceGroups/todking/providers/Microsoft.DocumentDb/databaseAccounts/tk-cosmos-mongo/providers/Microsoft.Insights/metrics/MongoRequestsCount",
+            "timeseries": [],
+            "unit": "CountPerSecond"
           },
           {
-            "id": "/subscriptions/ac41e21f-afd6-4a79-8070-f01eba278f97/resourceGroups/todking/providers/Microsoft.DocumentDb/databaseAccounts/tk-cosmos-mongo/providers/Microsoft.Insights/metrics/MongoRequests",
-            "type": "Microsoft.Insights/metrics",
             "name": {
-              "value": "MongoRequests",
-              "localizedValue": "Mongo Requests"
+              "localizedValue": "Mongo Requests",
+              "value": "MongoRequests"
             },
+            "type": "Microsoft.Insights/metrics",
             "displayDescription": "Number of Mongo Requests Made",
-            "unit": "Count",
+            "errorCode": "Success",
+            "id": "/subscriptions/ac41e21f-afd6-4a79-8070-f01eba278f97/resourceGroups/todking/providers/Microsoft.DocumentDb/databaseAccounts/tk-cosmos-mongo/providers/Microsoft.Insights/metrics/MongoRequests",
             "timeseries": [
               {
-                "metadatavalues": [],
                 "data": [
                   {
-                    "timeStamp": "2021-06-07T21:51:00Z",
-                    "average": 0.0
+                    "average": 0,
+                    "timeStamp": "2021-06-07T21:51:00Z"
                   }
-                ]
+                ],
+                "metadatavalues": []
               }
             ],
-            "errorCode": "Success"
+            "unit": "Count"
           }
-        ],
-        "namespace": "microsoft.documentdb/databaseaccounts",
-        "resourceregion": "westus2"
+        ]
       }
     }
   }

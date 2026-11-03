@@ -1,0 +1,285 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
+
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
+using Azure.Core;
+
+namespace WebPubSubChat;
+
+/** Represents a hub (virtual parent resource for URL routing). */
+@resource("api/hubs")
+model Hub {
+  /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
+  @key("hub")
+  @visibility(Lifecycle.Read)
+  @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
+  @minLength(1)
+  @maxLength(128)
+  @clientName("hubName", "csharp")
+  hub: string;
+}
+
+/** Represents a chat conversation. */
+@resource("chat/conversations")
+@parentResource(Hub)
+model ChatConversation {
+  /** Conversation identifier. */
+  @key("conversationId")
+  @visibility(Lifecycle.Read)
+  @pattern("^c\\.[A-Za-z0-9_-]{1,64}\\.[A-Za-z0-9_-]{1,64}$")
+  @minLength(1)
+  @maxLength(131)
+  id: string;
+
+  /** Parent room identifier. */
+  parentRoom: string;
+
+  ...EtagProperty;
+}
+
+/** Represents a chat message. */
+@resource("messages")
+@parentResource(ChatConversation)
+model ChatMessage {
+  /** Message identifier. */
+  @key("messageId")
+  @visibility(Lifecycle.Read)
+  @pattern("^\\d+$")
+  @minLength(1)
+  @maxLength(128)
+  id: string;
+
+  /** User who created the message. */
+  @pattern("^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  createdBy: string;
+
+  /** Message content. */
+  content: MessageContent;
+
+  /** Timestamp when the message was created. */
+  @visibility(Lifecycle.Read)
+  createdAt: utcDateTime;
+
+  ...EtagProperty;
+}
+
+/** A permission that can be assigned to a chat role. */
+union ChatPermission {
+  string,
+
+  /** Allows a user to create chat rooms. */
+  UserCreateRoom: "user.create_room",
+
+  /** Allows a user to list the rooms they belong to. */
+  UserFetchAllRooms: "user.fetch_all_rooms",
+
+  /** Allows a room member to publish messages. */
+  RoomPublishMessage: "room.publish_message",
+
+  /** Allows a room member to read message history. */
+  RoomHistory: "room.history",
+
+  /** Allows a room member to add users to a room. */
+  RoomInvite: "room.invite",
+
+  /** Allows a room operator to remove users from a room. */
+  RoomRemoveUser: "room.remove_user",
+}
+
+/**
+ * Represents a chat role.
+ * A role name must start with 'user.' or 'room.' prefix.
+ * A role must contain either user permissions or room permissions, but not both.
+ */
+@resource("chat/roles")
+@parentResource(Hub)
+model ChatRole {
+  /** Role name. Must start with 'user.' or 'room.' prefix. */
+  @key("roleName")
+  @visibility(Lifecycle.Read)
+  @pattern("^(?:room|user)\\.[a-z0-9_-]{1,59}$")
+  @minLength(1)
+  @maxLength(64)
+  name: string;
+
+  /** Permissions associated with the role. Do not mix user permissions and room permissions in one role. */
+  permissions: ChatPermission[];
+
+  ...EtagProperty;
+}
+
+/** Represents a chat room. */
+@resource("chat/rooms")
+@parentResource(Hub)
+model ChatRoom {
+  /** Room identifier. */
+  @key("roomId")
+  @visibility(Lifecycle.Read)
+  @pattern("^[A-Za-z0-9_-]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  id: string;
+
+  /** Room title. */
+  title: string;
+
+  /** Default conversation ID for this room. */
+  @visibility(Lifecycle.Read)
+  defaultConversation: string;
+
+  ...EtagProperty;
+}
+
+/** The lifecycle state of a chat topic. */
+@added(Versions.v2026_08_01_preview)
+union ChatTopicState {
+  string,
+
+  /** The topic is active. */
+  Normal: "Normal",
+
+  /** The topic is archived. */
+  Archived: "Archived",
+
+  /** The topic has been soft deleted. */
+  SoftDeleted: "SoftDeleted",
+}
+
+/** Represents a chat topic in a room. */
+@added(Versions.v2026_08_01_preview)
+@resource("topics")
+@parentResource(ChatRoom)
+model ChatTopic {
+  /** Topic identifier unique within the room. */
+  @key("topicId")
+  @visibility(Lifecycle.Read)
+  @pattern("^[A-Za-z0-9_-]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  id: string;
+
+  /** Topic title. */
+  @minLength(1)
+  @maxLength(256)
+  title: string;
+
+  /** Timestamp when the topic was created. */
+  @visibility(Lifecycle.Read)
+  createdAt: utcDateTime;
+
+  /** User who created the topic. */
+  @visibility(Lifecycle.Read)
+  @pattern("^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  createdBy: string;
+
+  /** Current lifecycle state of the topic. */
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  state: ChatTopicState;
+
+  /** Conversation associated with this topic. */
+  @visibility(Lifecycle.Read)
+  @pattern("^c\\.[A-Za-z0-9_-]{1,64}\\.[A-Za-z0-9_-]{1,64}$")
+  @minLength(1)
+  @maxLength(131)
+  conversationId: string;
+
+  ...EtagProperty;
+}
+
+/** Represents a room member. */
+@resource("members")
+@parentResource(ChatRoom)
+model ChatRoomMember {
+  /** User ID of the member. */
+  @key("userId")
+  @visibility(Lifecycle.Read)
+  @pattern("^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  userId: string;
+
+  /** Room role assigned to the user within this room. */
+  @pattern("^room\\.[a-z0-9_-]{1,59}$")
+  @minLength(1)
+  @maxLength(64)
+  roleName: string;
+
+  ...EtagProperty;
+}
+
+/** Discriminator for the kind of chat user. */
+union ChatUserKind {
+  string,
+
+  /** A human end-user. */
+  Human: "Human",
+}
+
+/**
+ * Represents a user profile in the chat system. This is a discriminated base type;
+ * concrete payloads are selected by the `kind` field (e.g. `HumanChatUser`).
+ */
+@discriminator("kind")
+@resource("chat/users")
+@parentResource(Hub)
+model ChatUser {
+  /** The kind of user. */
+  kind: ChatUserKind;
+
+  /** User identifier. */
+  @key("userId")
+  @visibility(Lifecycle.Read)
+  @pattern("^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  id: string;
+
+  /** User's display nickname. */
+  @pattern("^[^\\p{Cc}]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  nickname: string;
+
+  ...EtagProperty;
+}
+
+/**
+ * Represents a read-only room projection used to list rooms associated with a user.
+ * This model enables the standard resource operation to derive the
+ * `/api/hubs/{hub}/chat/users/{userId}/rooms` collection path because
+ * `ChatRoom` is a child of `Hub`, not `ChatUser`.
+ * This model does not define an independent room lifecycle.
+ */
+@added(Versions.v2026_08_01_preview)
+@resource("rooms")
+@parentResource(ChatUser)
+model ChatUserRoom is ChatRoom;
+
+/** A human end-user, identified by a user role. */
+model HumanChatUser extends ChatUser {
+  kind: ChatUserKind.Human;
+
+  /** Global user role assigned to the user. Must start with `user.`. */
+  @pattern("^user\\.[a-z0-9_-]{1,59}$")
+  @minLength(1)
+  @maxLength(64)
+  roleName: string;
+}
+
+/** Message content body. */
+model MessageContent {
+  /** Text content. */
+  text?: string;
+
+  /** Binary content (base64 encoded). */
+  binary?: bytes;
+}

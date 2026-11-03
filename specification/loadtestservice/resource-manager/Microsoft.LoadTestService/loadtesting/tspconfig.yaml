@@ -3,6 +3,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 parameters:
   "service-dir":
     default: "sdk/loadtesting"
@@ -35,6 +36,10 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/sdk/loadtestservice/{namespace}"
     namespace: "Azure.ResourceManager.LoadTesting"
+  "@azure-typespec/http-client-csharp-provisioning":
+    emitter-output-dir: "{output-dir}/sdk/loadtestservice/{namespace}"
+    namespace: "Azure.Provisioning.LoadTesting"
+    api-version: "2022-12-01"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-loadtesting"
     namespace: "com.azure.resourcemanager.loadtesting"

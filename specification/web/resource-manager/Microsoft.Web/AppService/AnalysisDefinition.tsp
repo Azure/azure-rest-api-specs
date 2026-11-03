@@ -58,7 +58,8 @@ interface AnalysisDefinitionOps
         @segment("analyses")
         @key
         analysisName: string,
-      }
+      },
+      ResourceName = "SiteDiagnosticAnalysis"
     > {}
 
 @tag("Diagnostics")
@@ -96,18 +97,21 @@ interface AnalysisDefinitions {
       /**
        * Start Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteAnalysis POST contract uses startTime in the query; preserve wire compatibility."
       @query("startTime")
       startTime?: utcDateTime;
 
       /**
        * End Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteAnalysis POST contract uses endTime in the query; preserve wire compatibility."
       @query("endTime")
       endTime?: utcDateTime;
 
       /**
        * Time Grain
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteAnalysis POST contract uses timeGrain in the query; preserve wire compatibility."
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
@@ -148,7 +152,8 @@ interface AnalysisDefinitionOperationGroupOps
         @segment("analyses")
         @key
         analysisName: string,
-      }
+      },
+      ResourceName = "SiteSlotDiagnosticAnalysis"
     > {}
 
 @tag("Diagnostics")
@@ -186,18 +191,21 @@ interface AnalysisDefinitionOperationGroup {
       /**
        * Start Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteAnalysisSlot POST contract uses startTime in the query; preserve wire compatibility."
       @query("startTime")
       startTime?: utcDateTime;
 
       /**
        * End Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteAnalysisSlot POST contract uses endTime in the query; preserve wire compatibility."
       @query("endTime")
       endTime?: utcDateTime;
 
       /**
        * Time Grain
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing executeSiteAnalysisSlot POST contract uses timeGrain in the query; preserve wire compatibility."
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
@@ -207,6 +215,7 @@ interface AnalysisDefinitionOperationGroup {
 }
 
 @@doc(AnalysisDefinition.name, "Analysis Name");
-@@doc(AnalysisDefinition.properties,
+@@doc(
+  AnalysisDefinition.properties,
   "AnalysisDefinition resource specific properties"
 );

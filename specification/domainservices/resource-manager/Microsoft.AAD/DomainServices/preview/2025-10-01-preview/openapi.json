@@ -87,42 +87,6 @@
         }
       }
     },
-    "/providers/Microsoft.Aad/operations": {
-      "get": {
-        "operationId": "OuContainerOperations_List",
-        "tags": [
-          "OuContainer"
-        ],
-        "description": "Lists all the available OuContainer operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationEntityListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Operations": {
-            "$ref": "./examples/OuContainerOperations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AAD/domainServices": {
       "get": {
         "operationId": "DomainServices_List",

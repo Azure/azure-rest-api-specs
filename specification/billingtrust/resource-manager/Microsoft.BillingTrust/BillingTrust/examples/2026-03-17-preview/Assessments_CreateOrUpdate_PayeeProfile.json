@@ -1,0 +1,65 @@
+{
+  "operationId": "Assessments_CreateOrUpdate",
+  "title": "Create or update the PayeeProfile assessment for a billing account",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/abc123:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "api-version": "2026-03-17-preview",
+    "resource": {
+      "properties": {
+        "assessmentType": "PayeeProfile"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.BillingTrust/locations/westus2/operationStatuses/22222222-2222-2222-2222-222222222222?api-version=2026-03-17-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/abc123:00000000-0000-0000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/default?api-version=2026-03-17-preview",
+        "Retry-After": 30
+      },
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/abc123:00000000-0000-0000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/default",
+        "name": "default",
+        "type": "Microsoft.BillingTrust/assessments",
+        "properties": {
+          "assessmentType": "PayeeProfile",
+          "evaluationState": "pending",
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdBy": "billing-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "billing-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T10:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.BillingTrust/locations/westus2/operationStatuses/22222222-2222-2222-2222-222222222222?api-version=2026-03-17-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/abc123:00000000-0000-0000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/default?api-version=2026-03-17-preview",
+        "Retry-After": 30
+      },
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/abc123:00000000-0000-0000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/default",
+        "name": "default",
+        "type": "Microsoft.BillingTrust/assessments",
+        "properties": {
+          "assessmentType": "PayeeProfile",
+          "evaluationState": "pending",
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdBy": "billing-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "billing-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}

@@ -12,8 +12,10 @@ namespace Microsoft.SqlVirtualMachine;
 /**
  * A SQL virtual machine.
  */
-model SqlVirtualMachine
-  is Azure.ResourceManager.TrackedResource<SqlVirtualMachineProperties, true> {
+model SqlVirtualMachine is Azure.ResourceManager.TrackedResource<
+  SqlVirtualMachineProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = SqlVirtualMachine,
     KeyName = "sqlVirtualMachineName",
@@ -67,7 +69,10 @@ interface SqlVirtualMachines {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SqlVirtualMachine,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -127,15 +132,19 @@ interface SqlVirtualMachines {
 @@minLength(SqlVirtualMachine.name, 1);
 @@doc(SqlVirtualMachine.name, "Name of the SQL virtual machine.");
 @@doc(SqlVirtualMachine.properties, "Resource properties.");
-@@doc(SqlVirtualMachines.createOrUpdate::parameters.resource,
+@@doc(
+  SqlVirtualMachines.createOrUpdate::parameters.resource,
   "The SQL virtual machine."
 );
-@@doc(SqlVirtualMachines.update::parameters.properties,
+@@doc(
+  SqlVirtualMachines.update::parameters.properties,
   "The SQL virtual machine."
 );
-@@doc(SqlVirtualMachines.fetchDCAssessment::parameters.body,
+@@doc(
+  SqlVirtualMachines.fetchDCAssessment::parameters.body,
   "Disk Config Assessment property"
 );
-@@doc(SqlVirtualMachines.troubleshoot::parameters.body,
+@@doc(
+  SqlVirtualMachines.troubleshoot::parameters.body,
   "The SQL virtual machine troubleshooting entity."
 );

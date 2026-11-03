@@ -1,30 +1,23 @@
 {
   "parameters": {
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "resourceGroupName": "rg",
+    "api-version": "2026-01-01",
     "privateLinkName": "spl",
-    "api-version": "2026-01-01"
+    "resourceGroupName": "rg",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/spl",
         "name": "spl",
         "type": "Microsoft.Security/privateLinks",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/spl",
         "location": "eastus",
-        "tags": {
-          "environment": "production",
-          "owner": "security-team",
-          "project": "private-links"
-        },
         "properties": {
-          "provisioningState": "Succeeded",
-          "publicNetworkAccess": "Disabled",
           "privateEndpointConnections": [
             {
-              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/spl/privateEndpointConnections/pe",
               "name": "pe",
               "type": "Microsoft.Security/privateLinks/privateEndpointConnections",
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/spl/privateEndpointConnections/pe",
               "properties": {
                 "groupIds": [
                   "containers"
@@ -33,9 +26,9 @@
                   "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe"
                 },
                 "privateLinkServiceConnectionState": {
-                  "status": "Approved",
                   "description": "Auto-approved by service",
-                  "actionsRequired": "None"
+                  "actionsRequired": "None",
+                  "status": "Approved"
                 },
                 "provisioningState": "Succeeded"
               }
@@ -43,9 +36,9 @@
           ],
           "privateLinkResources": [
             {
-              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/spl/privateLinkResources/containers",
               "name": "containers",
               "type": "Microsoft.Security/privateLinks/privateLinkResources",
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/spl/privateLinkResources/containers",
               "properties": {
                 "groupId": "containers",
                 "requiredMembers": [
@@ -57,9 +50,18 @@
                 ]
               }
             }
-          ]
+          ],
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled"
+        },
+        "tags": {
+          "environment": "production",
+          "owner": "security-team",
+          "project": "private-links"
         }
       }
     }
-  }
+  },
+  "operationId": "PrivateLinks_Get",
+  "title": "Get private link"
 }

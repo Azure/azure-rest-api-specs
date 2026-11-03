@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "authorizationProviderId": "apimfederatedidentitycredential",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimfederatedidentitycredential",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders",
+        "location": "West US 2",
+        "properties": {
+          "displayName": "apimfederatedidentitycredential",
+          "identityProvider": "aad",
+          "oauth2": {
+            "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apim-xxxx-library",
+            "grantTypes": {
+              "authorizationCodeWithFederatedIdentityCredentials": {
+                "clientId": "3cb9ece2-xxx-4bf4-xxxx-xxxxxxxxx",
+                "clientAssertionType": "GenericFederatedIdentityCredential",
+                "resourceUri": "https://xxxxx.westus2.kusto.windows.net",
+                "tenantId": "72f988bf-xxxx-41af-91ab-xxxxxx"
+              }
+            },
+            "federatedIdentityCredentialsProperties": {
+              "issuer": "https://login.microsoftonline.com/72f988bf-xxxx-41af-91ab-xxxxxx/v2.0",
+              "subject": "/eid1/c/pub/t/v4jxxxxxx180BHbRw/a/kxxxxxxxfrNA/cf-xxxxxxxxd-apim-xxxx-library_apimfederatedidentitycredential",
+              "audience": "api://AzureADTokenExchange"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AuthorizationProvider_Get",
+  "title": "ApiManagementGetFederateAuthorizationProvider"
+}

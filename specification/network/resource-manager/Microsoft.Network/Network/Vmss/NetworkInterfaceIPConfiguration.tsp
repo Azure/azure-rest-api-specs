@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Network;
+using Common;
 
 namespace Microsoft.Compute;
 
@@ -53,6 +53,7 @@ interface NetworkInterfaceIPConfigurations {
       @key
       networkInterfaceName: string;
 
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
       @key
@@ -108,9 +109,11 @@ interface NetworkInterfaceIPConfigurations {
   >;
 }
 
-@@doc(NetworkInterfaceIPConfiguration.name,
+@@doc(
+  NetworkInterfaceIPConfiguration.name,
   "The name of the ip configuration."
 );
-@@doc(NetworkInterfaceIPConfiguration.properties,
+@@doc(
+  NetworkInterfaceIPConfiguration.properties,
   "Network interface IP configuration properties."
 );

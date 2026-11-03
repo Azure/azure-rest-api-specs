@@ -1,11 +1,14 @@
 // Tiles for STAC Collections Mosaics interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.tiler.mosaics.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -80,12 +83,16 @@ alias getMosaicsWmtsCapabilitiesCustomizedCommonSignatures = {
   tileMatrixSetId: string;
 };
 
+@removed(Versions.v2026_04_15)
 interface MosaicsTiles {
   /**
    * Create map tile.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format}` endpoints instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format} endpoints instead"
+  @summary("Tile (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
   @get
@@ -127,17 +134,22 @@ interface MosaicsTiles {
 
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
     TileResponse
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsTileMatrixSets {
   /**
    * Create map tile.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` endpoints instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile Tilematrixsetid As Path")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/ endpoints instead"
+  @summary("Tile Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
   @get
@@ -149,17 +161,22 @@ interface MosaicsTileMatrixSets {
       ...getMosaicsTileCustomizedCommonSignatures;
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
     TileResponse
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsTileJsonOperations {
   /**
    * Return TileJSON document for a searchId.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tilejson.json` endpoints instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("TileJson")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tilejson.json instead"
+  @summary("TileJson (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tilejson.json")
   @get
@@ -273,12 +290,16 @@ interface MosaicsTileJsonOperations {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsTileMatrixSetsTileJson {
   /**
    * Return TileJSON document for a searchId.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/{tileMatrixSetId}/tilejson.json` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("TileJson Tilematrixsetid As Path")
+  #deprecated "Use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/tilejson.json instead"
+  @summary("TileJson Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{tileMatrixSetId}/tilejson.json")
   @get
@@ -306,17 +327,22 @@ interface MosaicsTileMatrixSetsTileJson {
 
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
     TileJsonMetadata
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsWmtsMosaics {
   /**
    * OGC WMTS endpoint.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/WMTSCapabilities.xml` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Wmts")
+  #deprecated "Use /data/mosaic/searches/{searchId}/WMTSCapabilities.xml instead"
+  @summary("Wmts (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/WMTSCapabilities.xml")
   @get
@@ -361,12 +387,16 @@ interface MosaicsWmtsMosaics {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsWmtsMosaicsTileMatrixSets {
   /**
    * OGC WMTS endpoint.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Wmts Tilematrixsetid As Path")
+  #deprecated "Use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml instead"
+  @summary("Wmts Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml")
   @get
@@ -403,7 +433,7 @@ interface MosaicsRegisterSearch {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Register Search")
-  @tag("Tiles for STAC Collections Mosaics")
+  @tag("Tiles for STAC Searches")
   @route("/data/mosaic/register")
   @post
   register is Azure.Core.Foundations.Operation<
@@ -412,12 +442,16 @@ interface MosaicsRegisterSearch {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsInfoSearch {
   /**
    * Get Search query metadata.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/info` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Info Search")
+  #deprecated "Use /data/mosaic/searches/{searchId}/info instead"
+  @summary("Info Search (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/info")
   @get
@@ -435,12 +469,16 @@ interface MosaicsInfoSearch {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsAssetsForTiles {
   /**
    * Return a list of assets which overlap a given tile
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}/assets` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Assets For Tile")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}/assets instead"
+  @summary("Assets For Tile (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}/assets")
   @get
@@ -468,12 +506,16 @@ interface MosaicsAssetsForTiles {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsAssetsForTileMatrixSets {
   /**
    * Return a list of assets which overlap a given tile
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Assets For Tile Tilematrixsetid As Path")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets instead"
+  @summary("Assets For Tile Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets")
   @get
@@ -511,12 +553,16 @@ interface MosaicsAssetsForTileMatrixSets {
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsAssetsForPoints {
   /**
    * Return a list of assets for a given point.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/{longitude},{latitude}/assets` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Assets For Point")
+  #deprecated "Use /data/mosaic/searches/{searchId}/{longitude},{latitude}/assets instead"
+  @summary("Assets For Point (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{longitude},{latitude}/assets")
   @get

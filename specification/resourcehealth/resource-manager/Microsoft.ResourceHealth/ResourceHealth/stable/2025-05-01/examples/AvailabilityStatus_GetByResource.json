@@ -1,29 +1,24 @@
 {
   "parameters": {
-    "resourceUri": "resourceUri",
+    "$expand": "recommendedactions",
     "api-version": "2025-05-01",
-    "$expand": "recommendedactions"
+    "resourceUri": "resourceUri"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines /rhctestenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/current",
         "name": "current",
         "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+        "id": "/subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines /rhctestenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/current",
         "location": "eastus",
         "properties": {
           "availabilityState": "Unavailable",
-          "title": "Unavailable",
-          "summary": "We're sorry, we couldn't automatically recover your virtual machine",
-          "reasonType": "Unplanned",
-          "context": "Platform Initiated",
           "category": "Unplanned",
-          "reasonChronicity": "Persistent",
+          "context": "Platform Initiated",
           "detailedStatus": "Disk problems are preventing us from automatically recovering your virtual machine",
           "occuredTime": "2016-03-29T09:12:00Z",
-          "reportedTime": "2016-05-04T14:11:29.7598931Z",
-          "rootCauseAttributionTime": "2016-03-29T09:13:00Z",
-          "resolutionETA": "2016-03-29T09:37:00Z",
+          "reasonChronicity": "Persistent",
+          "reasonType": "Unplanned",
           "recommendedActions": [
             {
               "action": "To start this virtual machine, open the resource blade and click Start",
@@ -35,9 +30,16 @@
               "actionUrl": "<#SupportCase>",
               "actionUrlText": "contact support"
             }
-          ]
+          ],
+          "reportedTime": "2016-05-04T14:11:29.7598931Z",
+          "resolutionETA": "2016-03-29T09:37:00Z",
+          "rootCauseAttributionTime": "2016-03-29T09:13:00Z",
+          "summary": "We're sorry, we couldn't automatically recover your virtual machine",
+          "title": "Unavailable"
         }
       }
     }
-  }
+  },
+  "operationId": "AvailabilityStatuses_GetByResource",
+  "title": "GetCurrentHealthByResource"
 }

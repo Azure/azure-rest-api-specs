@@ -37,7 +37,7 @@ interface ResolverContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -51,7 +51,7 @@ interface ResolverContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -68,19 +68,21 @@ interface ResolverContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<ResolverContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmResourceCreatedSyncResponse<ResolverContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<ResolverContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<ResolverContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -103,7 +105,7 @@ interface ResolverContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -154,13 +156,16 @@ interface ResolverContracts {
 
 @@maxLength(ResolverContract.name, 80);
 @@minLength(ResolverContract.name, 1);
-@@doc(ResolverContract.name,
+@@doc(
+  ResolverContract.name,
   "Resolver identifier within a GraphQL API. Must be unique in the current API Management service instance."
 );
 @@doc(ResolverContract.properties, "Properties of the Resolver Contract.");
-@@doc(ResolverContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ResolverContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(ResolverContracts.update::parameters.properties,
+@@doc(
+  ResolverContracts.update::parameters.properties,
   "GraphQL API Resolver Update parameters."
 );

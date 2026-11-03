@@ -25,7 +25,7 @@ alias CodeExecutionTraits = BaseOperationTraits &
 alias CodeExecutionOperations = Azure.Core.ResourceOperations<CodeExecutionTraits>;
 
 interface CodeExecution {
-  /** Execute code in a session. */
+  /** Execute code in a session. This is only supported for code-interpreter session pools. */
   @route("/executions")
   execute is RpcOperation<
     {
@@ -41,7 +41,7 @@ interface CodeExecution {
     CodeExecutionTraits
   >;
 
-  /** Get the code execution result. */
+  /** Get the code execution result. This is only supported for code-interpreter session pools. */
   get is CodeExecutionOperations.ResourceRead<SessionCodeExecutionResource>;
 }
 
@@ -58,25 +58,25 @@ alias SessionResourceFilesListQueryParamsTrait = QueryParametersTrait<{
 alias SessionResourceFilesOperations = Azure.Core.ResourceOperations<BaseOperationTraits>;
 
 interface SessionResourceFiles {
-  /** List the file resources. */
+  /** List the file resources. This is only supported for code-interpreter session pools. */
   list is SessionResourceFilesOperations.ResourceList<
     SessionResourceFile,
     SessionResourceFilesListQueryParamsTrait
   >;
 
-  /** Get the file resource. */
+  /** Get the file resource. This is only supported for code-interpreter session pools. */
   get is SessionResourceFilesOperations.ResourceRead<
     SessionResourceFile,
     SessionResourceFilesQueryParamsTrait
   >;
 
-  /** Delete the file. */
+  /** Delete the file. This is only supported for code-interpreter session pools. */
   delete is SessionResourceFilesOperations.ResourceDelete<
     SessionResourceFile,
     SessionResourceFilesQueryParamsTrait
   >;
 
-  /** Upload a file to a session. */
+  /** Upload a file to a session. This is only supported for code-interpreter session pools. */
   #suppress "@azure-tools/typespec-azure-core/byos" "Storage service is not used"
   @route("/files")
   upload is RpcOperation<
@@ -98,7 +98,7 @@ interface SessionResourceFiles {
   // Azure standard operations require resource identifier (here session id) to be passed in the request path.
   // But for sessions, session identifier needs to be passed as a query parameter for conformity with other operations.
   // So we need to use custom operations instead of standard operations.
-  /** Get the content of the file. */
+  /** Get the content of the file. This is only supported for code-interpreter session pools. */
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "GET allowed on Action"
   @get
   @action("content")
@@ -119,12 +119,12 @@ interface SessionResourceFiles {
 @route("/session")
 @added(Versions.v2025_02_02_preview)
 interface SessionManagement {
-  /** Get the session. */
+  /** Get the session. This is not supported for custom container session pools. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @get
   get is Foundations.Operation<SessionIdentifier, Session>;
 
-  /** Delete the session. */
+  /** Delete the session. This is not supported for custom container session pools. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @delete
   delete is Foundations.Operation<
@@ -139,7 +139,7 @@ interface SessionManagement {
 @route("/listSessions")
 @added(Versions.v2025_02_02_preview)
 interface ListSessions {
-  /** List the sessions. */
+  /** List the sessions. This is not supported for custom container session pools. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @get
   get is Foundations.Operation<
@@ -157,7 +157,7 @@ interface ListSessions {
 // So we need to use custom operations instead of standard operations.
 @added(Versions.v2025_02_02_preview)
 interface SessionPoolMetadata {
-  /** Get the metadata information. */
+  /** Get the metadata information. This is only supported for code-interpreter session pools. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @route("/metadata")
   @get

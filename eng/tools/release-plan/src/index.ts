@@ -1,0 +1,272 @@
+import { mkdirSync, writeFileSync } from "node:fs";
+import path from "node:path";
+import process from "node:process";
+import { parseCliArguments } from "./args.ts";
+import {
+  postMultipleProjectsComment,
+  postReleasePlanComment,
+  postReleasePlanErrorComment,
+} from "./pr-comment.ts";
+import {
+  createAzdskRunner,
+  ensureReleasePlan,
+  getApiReleaseType,
+  getNextMonthTarget,
+  getReleasePlanResultById,
+  getSdkReleaseType,
+} from "./release-plan.ts";
+import type {
+  CliArguments,
+  EnsureReleasePlanResult,
+  OctokitLike,
+  TypeSpecProjectInfo,
+} from "./types.ts";
+import {
+  createOctokit,
+  getTypeSpecProjectInfoFromCommit,
+  NEW_API_VERSION_LABEL,
+} from "./typespec-project.ts";
+
+/**
+ * Main CLI entry point.
+ */
+export async function main(): Promise<void> {
+  let projectInfo: TypeSpecProjectInfo | null = null;
+  let resolvedPrNumber: number | undefined;
+  let hasNewApiVersionLabel = false;
+  let isTspConfigChanged = false;
+  let releasePlanEnsured = false;
+  let args: CliArguments;
+  let octokit: OctokitLike;
+
+  try {
+    args = parseCliArguments();
+    const runner = createAzdskRunner();
+
+    if (args.releasePlanId) {
+      console.log(`Getting release plan by id: ${args.releasePlanId}`);
+      const result = getReleasePlanResultById(args.releasePlanId, runner);
+      releasePlanEnsured = true;
+      writeReleasePlanResult(result, args.outputFile);
+      return;
+    }
+
+    octokit = createOctokit(undefined);
+
+    const commitSha = args.commitSha as string;
+    console.log(`Analyzing commit ${commitSha} in ${args.owner}/${args.repo}`);
+
+    const commitResult = await getTypeSpecProjectInfoFromCommit({
+      commitSha,
+      owner: args.owner,
+      repo: args.repo,
+      workspace: args.workspace,
+      octokit,
+    });
+
+    if (commitResult.skipReleasePlanAutomation) {
+      console.log(
+        `Commit ${commitSha} is associated with a PR that skips release plan automation.`,
+      );
+      process.exit(0);
+    }
+
+    hasNewApiVersionLabel = commitResult.hasNewApiVersionLabel;
+
+    resolvedPrNumber = commitResult.prNumber;
+    if (commitResult.multipleProjectPaths && commitResult.multipleProjectPaths.length > 1) {
+      if (resolvedPrNumber) {
+        await postMultipleProjectsComment({
+          octokit,
+          owner: args.owner,
+          repo: args.repo,
+          prNumber: resolvedPrNumber,
+          tspProjectPaths: commitResult.multipleProjectPaths,
+        });
+      }
+      return;
+    }
+
+    if (commitResult.projectError) {
+      console.error(commitResult.projectError.message);
+      if (resolvedPrNumber) {
+        await postReleasePlanErrorComment({
+          octokit,
+          owner: args.owner,
+          repo: args.repo,
+          prNumber: resolvedPrNumber,
+          error: commitResult.projectError.message,
+          tspProjectPath: commitResult.projectError.tspProjectPath,
+        });
+      }
+      return;
+    }
+
+    const commitFiles = commitResult.changedFiles;
+    const specFiles = commitFiles.filter((f) => f.filename.startsWith("specification/"));
+    const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
+    isTspConfigChanged = specFiles.some(
+      (f) => path.posix.basename(f.filename) === "tspconfig.yaml",
+    );
+
+    // Skip only if both conditions are true: no label AND no TypeSpec files
+    if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {
+      console.log(
+        `Commit ${commitSha} is not associated with a PR that has the '${NEW_API_VERSION_LABEL}' label and does not contain TypeSpec files. Skipping release plan processing.`,
+      );
+      process.exit(0);
+    }
+
+    projectInfo = commitResult.projectInfo;
+
+    const prUrl = resolvedPrNumber
+      ? `https://github.com/${args.owner}/${args.repo}/pull/${resolvedPrNumber}`
+      : undefined;
+
+    if (projectInfo === null) {
+      console.log("There are no TypeSpec changes in the PR or commit.");
+      process.exit(0);
+    }
+
+    console.log(
+      `Found TypeSpec project at ${projectInfo.tspProjectPath} with API version ${projectInfo.apiVersion}`,
+    );
+    const apiReleaseType = getApiReleaseType(projectInfo.isPreview, args.repo);
+    const sdkReleaseType = getSdkReleaseType(projectInfo.isPreview);
+    const targetMonth = getNextMonthTarget();
+
+    const result = ensureReleasePlan(
+      {
+        prUrl,
+        tspProjectPath: projectInfo.tspProjectPath,
+        specCommitSha: commitSha,
+        apiReleaseType,
+        sdkReleaseType,
+        targetMonth,
+        apiVersion: projectInfo.apiVersion,
+        testReleasePlan: args.testReleasePlan,
+      },
+      runner,
+      hasNewApiVersionLabel || isTspConfigChanged,
+    );
+    releasePlanEnsured = true;
+
+    writeReleasePlanResult(result, args.outputFile);
+
+    // Post comment on PR if release plan was created
+    if (result.outcome === "created" && resolvedPrNumber) {
+      try {
+        const planLinkValue = result.releasePlan?.release_plan_link;
+        const planIdValue = result.releasePlan?.ReleasePlanId;
+        const planLink = typeof planLinkValue === "string" ? planLinkValue : "";
+        const planId =
+          typeof planIdValue === "string" || typeof planIdValue === "number" ? planIdValue : "";
+
+        await postReleasePlanComment({
+          octokit,
+          owner: args.owner,
+          repo: args.repo,
+          prNumber: resolvedPrNumber,
+          planId,
+          planLink,
+          apiVersion: projectInfo.apiVersion,
+          tspProjectPath: projectInfo.tspProjectPath,
+        });
+
+        console.log("Posted release plan comment on PR.");
+      } catch (commentError) {
+        const message = commentError instanceof Error ? commentError.message : String(commentError);
+        console.warn(`Warning: Failed to post comment on PR: ${message}`);
+      }
+    } else if (result.outcome === "created") {
+      console.log("Release plan created, but no associated PR was found. Skipping PR comment.");
+    } else if (result.outcome === "not_found") {
+      console.log("new-api-version label not present and no existing release plan was found.");
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`release-plan tool failed: ${message}`);
+
+    // Try to post error comment on PR if available and PR has new-api-version label
+    if (
+      !releasePlanEnsured &&
+      resolvedPrNumber &&
+      projectInfo &&
+      (hasNewApiVersionLabel || isTspConfigChanged)
+    ) {
+      try {
+        await postReleasePlanErrorComment({
+          octokit: octokit!,
+          owner: args!.owner,
+          repo: args!.repo,
+          prNumber: resolvedPrNumber,
+          error: message,
+          tspProjectPath: projectInfo.tspProjectPath,
+        });
+        console.log("Posted error comment on PR.");
+      } catch (commentError) {
+        const commentMsg =
+          commentError instanceof Error ? commentError.message : String(commentError);
+        console.warn(`Warning: Failed to post error comment on PR: ${commentMsg}`);
+      }
+    }
+
+    process.exit(1);
+  }
+}
+
+function writeReleasePlanResult(result: EnsureReleasePlanResult, outputFile?: string): void {
+  console.log(JSON.stringify(result, null, 2));
+
+  if (outputFile) {
+    const outputPath = path.resolve(outputFile);
+    mkdirSync(path.dirname(outputPath), { recursive: true });
+    writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8");
+    console.log(`Wrote release plan details to ${outputPath}`);
+  }
+}
+
+export { parseCliArguments } from "./args.ts";
+export {
+  buildReleaseplanCommentBody,
+  postMultipleProjectsComment,
+  postReleasePlanComment,
+  postReleasePlanErrorComment,
+} from "./pr-comment.ts";
+export type { CommentBodyParams, ErrorCommentParams, PrCommentParams } from "./pr-comment.ts";
+export {
+  createAzdskRunner,
+  ensureReleasePlan,
+  getApiReleaseType,
+  getNextMonthTarget,
+  getReleasePlanById,
+  getReleasePlanResultById,
+  getSdkReleaseType,
+  runAzdskCommand,
+} from "./release-plan.ts";
+export type {
+  ApiReleaseType,
+  AzsdkRunner,
+  CliArguments,
+  CommandResult,
+  EnsureReleasePlanResult,
+  OctokitLike,
+  PullRequestChangedFile,
+  ReleasePlanCommandContext,
+  TypeSpecProjectInfo,
+} from "./types.ts";
+export {
+  collectTypeSpecProjectPaths,
+  createOctokit,
+  findTspConfigDir,
+  FOLDER_MIGRATION_LABEL,
+  getAssociatedPrNumber,
+  getCommitChangedFiles,
+  getPrChangedFiles,
+  getPullRequestLabels,
+  getTypeSpecProjectInfoFromCommit,
+  getTypeSpecProjectVersionFromMetadata,
+  NEW_API_VERSION_LABEL,
+  resolveTypeSpecMetadata,
+  SKIP_RELEASE_PLAN_AUTOMATION_LABEL,
+} from "./typespec-project.ts";

@@ -203,7 +203,9 @@
                 "benefitType": "EarlyAccess",
                 "basePlanId": "productId/planid",
                 "billingPlan": "monthly",
-                "termDuration": "P1M"
+                "termDuration": "P1M",
+                "meterType": "usage",
+                "baseProductCode": "3f2504e0-4f89-11d3-9a0c-0305e82c3301"
               }
             ],
             "constraintsData": {
@@ -342,7 +344,39 @@
                 ],
                 "hasFreeTrials": true,
                 "consumptionUnitType": "scan",
-                "displayRank": 1
+                "displayRank": 1,
+                "prerequisiteConstraints": {
+                  "mustHaveAll": {
+                    "products": [
+                      {
+                        "basePlanId": "base-plan-001",
+                        "minSeats": 1,
+                        "maxSeats": 100
+                      }
+                    ],
+                    "seatConstraint": {
+                      "type": "MinMaxSeats",
+                      "minSeats": 1,
+                      "maxSeats": 100
+                    },
+                    "lookbackWindow": {
+                      "type": "Rolling",
+                      "period": "P30D"
+                    }
+                  }
+                },
+                "subscriptionStatusConstraints": {
+                  "requireAnyOf": [
+                    "NonRenewal",
+                    "InCancellationWindow",
+                    "Active"
+                  ]
+                },
+                "pricingBenefit": {
+                  "rank": 1,
+                  "type": "PercentDiscount",
+                  "value": 0.2
+                }
               }
             ]
           }
@@ -361,6 +395,8 @@
         "service": "SecurityServices",
         "productId": "example-scanner-2025",
         "hasMarketplaceFootprint": true,
+        "offeringType": "Promotion",
+        "productCode": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
         "attributes": [
           {
             "key": "ComplianceFrameworks",

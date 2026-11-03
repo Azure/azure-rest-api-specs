@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "authConfigEnvelope": {
+      "properties": {
+        "encryptionSettings": {
+          "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
+          "containerAppAuthSigningSecretName": "testSigningSecretName"
+        },
+        "globalValidation": {
+          "unauthenticatedClientAction": "AllowAnonymous"
+        },
+        "identityProviders": {
+          "facebook": {
+            "registration": {
+              "appId": "123",
+              "appSecretSettingName": "facebook-secret"
+            }
+          }
+        },
+        "platform": {
+          "enabled": true
+        }
+      }
+    },
+    "authConfigName": "current",
+    "containerAppName": "testcanadacentral",
+    "resourceGroupName": "workerapps-rg-xj",
+    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.App/containerapps/authconfigs",
+        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/authconfigs/current",
+        "properties": {
+          "encryptionSettings": {
+            "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
+            "containerAppAuthSigningSecretName": "testSigningSecretName"
+          },
+          "globalValidation": {
+            "unauthenticatedClientAction": "AllowAnonymous"
+          },
+          "identityProviders": {
+            "facebook": {
+              "registration": {
+                "appId": "123",
+                "appSecretSettingName": "facebook-secret"
+              }
+            }
+          },
+          "platform": {
+            "enabled": true
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerAppsAuthConfigs_CreateOrUpdate",
+  "title": "Create or Update Container App AuthConfig"
+}

@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "vaultBaseUrl": "https://myhsm.managedhsm.azure.net",
+    "api-version": "2026-07-01-preview",
+    "peName": "my-ekm-pe",
+    "parameters": {
+      "privateLinkServiceId": "myekmproxy-pls.4845dda6-8f58-4643-b3af-1161abcdb077.eastus.azure.privatelinkservice",
+      "requestMessage": "Please approve this private endpoint connection for the EKM proxy."
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Retry-After": 5,
+        "Azure-AsyncOperation": "https://myhsm.managedhsm.azure.net/ekm/privateendpoint/operations/45aacd568ab049a2803861e8dd3ae21f"
+      },
+      "body": {
+        "jobId": "45aacd568ab049a2803861e8dd3ae21f",
+        "privateEndpointName": "my-ekm-pe",
+        "operationType": "Create",
+        "status": "Running",
+        "statusDetails": "Private endpoint creation is in progress.",
+        "startTime": 1490790000
+      }
+    }
+  },
+  "operationId": "CreateEkmPrivateEndpoint",
+  "title": "Create an EKM proxy private endpoint"
+}

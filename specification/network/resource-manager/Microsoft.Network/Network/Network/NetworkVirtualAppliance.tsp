@@ -3,11 +3,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +22,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model NetworkVirtualAppliance extends Resource {
+model NetworkVirtualAppliance extends Common.Resource {
   properties?: NetworkVirtualAppliancePropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -32,7 +35,7 @@ model NetworkVirtualAppliance extends Resource {
    * The service principal that has read access to cloud-init and config blob.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: ManagedServiceIdentity;
+  identity?: Common.ManagedServiceIdentity;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -77,11 +80,13 @@ interface NetworkVirtualApplianceConnections {
     NetworkVirtualAppliance,
     NetworkVirtualApplianceConnection,
     void,
-    Response = ArmResponse<NetworkVirtualApplianceConnection> | (ArmResourceCreatedResponse<
-      NetworkVirtualApplianceConnection,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = NetworkVirtualApplianceConnection>
-    > &
-      Azure.Core.Foundations.RetryAfterHeader),
+    Response =
+      | ArmResponse<NetworkVirtualApplianceConnection>
+      | (ArmResourceCreatedResponse<
+          NetworkVirtualApplianceConnection,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = NetworkVirtualApplianceConnection>
+        > &
+          Azure.Core.Foundations.RetryAfterHeader),
     OverrideErrorType = CloudError
   >;
 
@@ -106,9 +111,12 @@ interface NetworkVirtualApplianceConnections {
     NetworkVirtualAppliance,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void>> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void>>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -173,7 +181,10 @@ interface NetworkVirtualAppliances {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkVirtualAppliance,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -221,27 +232,102 @@ interface NetworkVirtualAppliances {
     NetworkVirtualApplianceInstanceId,
     Error = CloudError
   >;
+
+  /**
+   * Prepares the migration of the specified Network Virtual Appliance. This is the first step of a migration workflow, such as migrating to a new OS version or to the new internal load balancer architecture.
+   */
+  @added(Versions.v2025_09_01)
+  prepareMigration is ArmResourceActionAsyncBase<
+    NetworkVirtualAppliance,
+    Request = NetworkVirtualAppliancePrepareMigrationRequest,
+    Response =
+      | ArmAcceptedLroResponse
+      | ArmNoContentResponse<"Action completed successfully.">,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
+    Error = CloudError
+  >;
+
+  /**
+   * Executes the migration of the specified Network Virtual Appliance. This step performs the migration workflow that was previously prepared.
+   */
+  @added(Versions.v2025_09_01)
+  executeMigration is ArmResourceActionAsyncBase<
+    NetworkVirtualAppliance,
+    Request = NetworkVirtualApplianceExecuteMigrationRequest,
+    Response =
+      | ArmAcceptedLroResponse
+      | ArmNoContentResponse<"Action completed successfully.">,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
+    Error = CloudError
+  >;
+
+  /**
+   * Commits the migration of the specified Network Virtual Appliance. This finalizes a previously executed migration workflow.
+   */
+  @added(Versions.v2025_09_01)
+  commitMigration is ArmResourceActionAsyncBase<
+    NetworkVirtualAppliance,
+    Request = NetworkVirtualApplianceCommitMigrationRequest,
+    Response =
+      | ArmAcceptedLroResponse
+      | ArmNoContentResponse<"Action completed successfully.">,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
+    Error = CloudError
+  >;
+
+  /**
+   * Aborts an in-progress migration of the specified Network Virtual Appliance and rolls back to the previous state.
+   */
+  @added(Versions.v2025_09_01)
+  abortMigration is ArmResourceActionAsyncBase<
+    NetworkVirtualAppliance,
+    Request = void,
+    Response =
+      | ArmAcceptedLroResponse
+      | ArmNoContentResponse<"Action completed successfully.">,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkVirtualAppliance.name, "The name of Network Virtual Appliance.");
-@@doc(NetworkVirtualAppliance.properties,
+@@doc(
+  NetworkVirtualAppliance.properties,
   "Properties of the Network Virtual Appliance."
 );
-@@doc(NetworkVirtualAppliances.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkVirtualAppliances.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Network Virtual Appliance."
 );
-@@doc(NetworkVirtualAppliances.updateTags::parameters.properties,
+@@doc(
+  NetworkVirtualAppliances.updateTags::parameters.properties,
   "Parameters supplied to Update Network Virtual Appliance Tags."
 );
-@@doc(NetworkVirtualAppliances.restart::parameters.body,
+@@doc(
+  NetworkVirtualAppliances.restart::parameters.body,
   "Specifies a list of virtual machine instance IDs from the Network Virtual Appliance VM instances."
 );
-@@doc(NetworkVirtualAppliances.reimage::parameters.body,
+@@doc(
+  NetworkVirtualAppliances.reimage::parameters.body,
   "Specifies a list of virtual machine instance IDs from the Network Virtual Appliance VM instances."
 );
-@@doc(NetworkVirtualAppliances.getBootDiagnosticLogs::parameters.body,
+@@doc(
+  NetworkVirtualAppliances.getBootDiagnosticLogs::parameters.body,
   "Parameters supplied to retrieve boot diagnostic logs for a NVA VM instance"
 );
-@@doc(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
+@@doc(
+  NetworkVirtualAppliances.prepareMigration::parameters.body,
+  "Parameters supplied to prepare the migration of the Network Virtual Appliance."
+);
+@@doc(
+  NetworkVirtualAppliances.executeMigration::parameters.body,
+  "Parameters supplied to execute the migration of the Network Virtual Appliance."
+);
+@@doc(
+  NetworkVirtualAppliances.commitMigration::parameters.body,
+  "Parameters supplied to commit the migration of the Network Virtual Appliance."
+);
+@@doc(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
   "Parameters supplied in an NetworkVirtualApplianceConnection PUT operation."
 );

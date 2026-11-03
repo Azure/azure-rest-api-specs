@@ -74,7 +74,10 @@ model VirtualMachineScaleSetVM
 }
 
 alias VirtualMachineScaleSetPath = {
-  ...Azure.ResourceManager.Legacy.BasePath;
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+  ...Azure.ResourceManager.Legacy.Provider;
   ...KeysOf<ResourceNameParameter<
     VirtualMachineScaleSet,
     SegmentName = "virtualMachineScaleSets",
@@ -85,17 +88,19 @@ alias VirtualMachineScaleSetPath = {
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMSOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       VirtualMachineScaleSetPath,
       KeysOf<{
         ...ResourceNameParameter<
           VirtualMachineScaleSetVM,
           SegmentName = "virtualMachines"
         >,
-      }>
+      }>,
+      CloudError
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
+@tag("VirtualMachineScaleSetVMs")
 interface VirtualMachineScaleSetVMS {
   /**
    * Gets a virtual machine from a VM scale set.
@@ -135,10 +140,12 @@ interface VirtualMachineScaleSetVMS {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVM> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: VirtualMachineScaleSetVM;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVM> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: VirtualMachineScaleSetVM;
+        })
   >;
 
   /**
@@ -217,6 +224,7 @@ interface VirtualMachineScaleSetVMS {
    * Gets the status of a virtual machine from a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @get
   @action("instanceView")
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
@@ -300,6 +308,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing powerOff POST contract uses skipShutdown in the query; preserve wire compatibility."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },
@@ -343,6 +352,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing retrieveBootDiagnosticsData POST contract uses sasUriExpirationTimeInMinutes in the query; preserve wire compatibility."
       @query("sasUriExpirationTimeInMinutes")
       sasUriExpirationTimeInMinutes?: int32;
     }
@@ -373,18 +383,23 @@ interface VirtualMachineScaleSetVMS {
 }
 
 @@doc(VirtualMachineScaleSetVM.name, "The instance ID of the virtual machine.");
-@@doc(VirtualMachineScaleSetVM.properties,
+@@doc(
+  VirtualMachineScaleSetVM.properties,
   "Describes the properties of a virtual machine scale set virtual machine."
 );
-@@doc(VirtualMachineScaleSetVMS.update::parameters.resource,
+@@doc(
+  VirtualMachineScaleSetVMS.update::parameters.resource,
   "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
 );
-@@doc(VirtualMachineScaleSetVMS.reimage::parameters.body,
+@@doc(
+  VirtualMachineScaleSetVMS.reimage::parameters.body,
   "Parameters for the Reimaging Virtual machine in ScaleSet."
 );
-@@doc(VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body,
+@@doc(
+  VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body,
   "Parameters supplied to the attach and detach data disks operation on a Virtual Machine Scale Sets VM."
 );
-@@doc(VirtualMachineScaleSetVMS.runCommand::parameters.body,
+@@doc(
+  VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."
 );

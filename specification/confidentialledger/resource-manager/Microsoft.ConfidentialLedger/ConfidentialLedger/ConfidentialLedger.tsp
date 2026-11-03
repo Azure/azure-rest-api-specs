@@ -44,8 +44,10 @@ interface ConfidentialLedgers {
   update is ArmCustomPatchAsync<
     ConfidentialLedger,
     PatchModel = ConfidentialLedger,
-    Response = ArmResponse<ConfidentialLedger> | (CreatedResponse &
-      ArmLroLocationHeader<FinalResult = ConfidentialLedger>)
+    Response =
+      | ArmResponse<ConfidentialLedger>
+      | (CreatedResponse &
+          ArmLroLocationHeader<FinalResult = ConfidentialLedger>)
   >;
 
   /**
@@ -54,7 +56,10 @@ interface ConfidentialLedgers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConfidentialLedger,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -112,18 +117,23 @@ interface ConfidentialLedgerRestoreOps {
 }
 
 @@doc(ConfidentialLedger.name, "Name of the Confidential Ledger");
-@@doc(ConfidentialLedger.properties,
+@@doc(
+  ConfidentialLedger.properties,
   "Properties of Confidential Ledger Resource."
 );
-@@doc(ConfidentialLedgers.create::parameters.resource,
+@@doc(
+  ConfidentialLedgers.create::parameters.resource,
   "Confidential Ledger Create Request Body"
 );
-@@doc(ConfidentialLedgers.update::parameters.properties,
+@@doc(
+  ConfidentialLedgers.update::parameters.properties,
   "Confidential Ledger request body for Updating Ledger"
 );
-@@doc(ConfidentialLedgers.filesExport::parameters.body,
+@@doc(
+  ConfidentialLedgers.filesExport::parameters.body,
   "Confidential Ledger Files Export Request Body"
 );
-@@doc(ConfidentialLedgerRestoreOps.restore::parameters.body,
+@@doc(
+  ConfidentialLedgerRestoreOps.restore::parameters.body,
   "Confidential Ledger Restore Request Body"
 );

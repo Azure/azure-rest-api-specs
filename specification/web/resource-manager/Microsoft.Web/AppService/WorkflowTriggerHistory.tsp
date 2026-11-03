@@ -76,7 +76,8 @@ interface WorkflowTriggerHistoriesOps
         @segment("histories")
         @key
         historyName: string,
-      }
+      },
+      ResourceName = "WorkflowTriggerHistory"
     > {}
 
 @armResourceOperations
@@ -122,9 +123,11 @@ interface WorkflowTriggerHistories {
   >;
 }
 
-@@doc(WorkflowTriggerHistory.name,
+@@doc(
+  WorkflowTriggerHistory.name,
   "The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run."
 );
-@@doc(WorkflowTriggerHistory.properties,
+@@doc(
+  WorkflowTriggerHistory.properties,
   "Gets the workflow trigger history properties."
 );

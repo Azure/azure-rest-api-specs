@@ -1,14 +1,31 @@
 {
   "parameters": {
-    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2",
-    "resourceGroupName": "myResourceGroup",
-    "dataCollectionRuleName": "myCollectionRule",
     "api-version": "2024-03-11",
     "body": {
-      "location": "eastus",
       "kind": " Direct",
+      "location": "eastus",
       "properties": {
         "description": "A Direct Ingestion Rule with builtin ingestion fqdns",
+        "dataFlows": [
+          {
+            "destinations": [
+              "myworkspace"
+            ],
+            "outputStream": "Custom-LOGS1_CL",
+            "streams": [
+              "Custom-LOGS1_CL"
+            ],
+            "transformKql": "source | extend jsonContext = parse_json(AdditionalContext) | project TimeGenerated = Time, Computer, AdditionalContext = jsonContext, CounterName=tostring(jsonContext.CounterName), CounterValue=toreal(jsonContext.CounterValue)"
+          }
+        ],
+        "destinations": {
+          "logAnalytics": [
+            {
+              "name": "centralWorkspace",
+              "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace"
+            }
+          ]
+        },
         "streamDeclarations": {
           "Custom-LOGS1_CL": {
             "columns": [
@@ -34,45 +51,50 @@
               }
             ]
           }
-        },
-        "destinations": {
-          "logAnalytics": [
-            {
-              "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
-              "name": "centralWorkspace"
-            }
-          ]
-        },
-        "dataFlows": [
-          {
-            "streams": [
-              "Custom-LOGS1_CL"
-            ],
-            "destinations": [
-              "myworkspace"
-            ],
-            "transformKql": "source | extend jsonContext = parse_json(AdditionalContext) | project TimeGenerated = Time, Computer, AdditionalContext = jsonContext, CounterName=tostring(jsonContext.CounterName), CounterValue=toreal(jsonContext.CounterValue)",
-            "outputStream": "Custom-LOGS1_CL"
-          }
-        ]
+        }
       }
-    }
+    },
+    "dataCollectionRuleName": "myCollectionRule",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
         "name": "myCollectionRule",
         "type": "Microsoft.Insights/dataCollectionRules",
-        "location": "eastus",
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000",
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
         "kind": "Direct",
+        "location": "eastus",
         "properties": {
           "description": "A Direct Ingestion Rule with builtin ingestion fqdns",
-          "immutableId": "dcr-d2a09c11a66243009af059a655750000",
+          "dataFlows": [
+            {
+              "destinations": [
+                "myworkspace"
+              ],
+              "outputStream": "Custom-LOGS1_CL",
+              "streams": [
+                "Custom-LOGS1_CL"
+              ],
+              "transformKql": "source | extend jsonContext = parse_json(AdditionalContext) | project TimeGenerated = Time, Computer, AdditionalContext = jsonContext, CounterName=tostring(jsonContext.CounterName), CounterValue=toreal(jsonContext.CounterValue)"
+            }
+          ],
+          "destinations": {
+            "logAnalytics": [
+              {
+                "name": "centralWorkspace",
+                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace"
+              }
+            ]
+          },
           "endpoints": {
             "logsIngestion": "https://mycollectionrule-8ykm-eastus2euap.logs.z1.canary.ingest.monitor.azure.com",
             "metricsIngestion": "https://mycollectionrule-jcvc-eastus2euap.metrics.z1.canary.ingest.monitor.azure.com"
           },
+          "immutableId": "dcr-d2a09c11a66243009af059a655750000",
+          "provisioningState": "Succeeded",
           "streamDeclarations": {
             "Custom-LOGS1_CL": {
               "columns": [
@@ -98,54 +120,54 @@
                 }
               ]
             }
-          },
-          "destinations": {
-            "logAnalytics": [
-              {
-                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
-                "name": "centralWorkspace"
-              }
-            ]
-          },
-          "dataFlows": [
-            {
-              "streams": [
-                "Custom-LOGS1_CL"
-              ],
-              "destinations": [
-                "myworkspace"
-              ],
-              "transformKql": "source | extend jsonContext = parse_json(AdditionalContext) | project TimeGenerated = Time, Computer, AdditionalContext = jsonContext, CounterName=tostring(jsonContext.CounterName), CounterValue=toreal(jsonContext.CounterValue)",
-              "outputStream": "Custom-LOGS1_CL"
-            }
-          ],
-          "provisioningState": "Succeeded"
+          }
         },
         "systemData": {
+          "createdAt": "2024-01-30T17:50:40.5383301Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "createdAt": "2024-01-30T17:50:40.5383301Z",
+          "lastModifiedAt": "2024-01-30T17:50:40.5383301Z",
           "lastModifiedBy": "user1",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-01-30T17:50:40.5383301Z"
-        },
-        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+          "lastModifiedByType": "User"
+        }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
         "name": "myCollectionRule",
         "type": "Microsoft.Insights/dataCollectionRules",
-        "location": "eastus",
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000",
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
         "kind": "Direct",
+        "location": "eastus",
         "properties": {
           "description": "A Direct Ingestion Rule with builtin ingestion fqdns",
-          "immutableId": "dcr-d2a09c11a66243009af059a655750000",
+          "dataFlows": [
+            {
+              "destinations": [
+                "myworkspace"
+              ],
+              "outputStream": "Custom-LOGS1_CL",
+              "streams": [
+                "Custom-LOGS1_CL"
+              ],
+              "transformKql": "source | extend jsonContext = parse_json(AdditionalContext) | project TimeGenerated = Time, Computer, AdditionalContext = jsonContext, CounterName=tostring(jsonContext.CounterName), CounterValue=toreal(jsonContext.CounterValue)"
+            }
+          ],
+          "destinations": {
+            "logAnalytics": [
+              {
+                "name": "centralWorkspace",
+                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace"
+              }
+            ]
+          },
           "endpoints": {
             "logsIngestion": "https://mycollectionrule-8ykm-eastus2euap.logs.z1.canary.ingest.monitor.azure.com",
             "metricsIngestion": "https://mycollectionrule-jcvc-eastus2euap.metrics.z1.canary.ingest.monitor.azure.com"
           },
+          "immutableId": "dcr-d2a09c11a66243009af059a655750000",
+          "provisioningState": "Succeeded",
           "streamDeclarations": {
             "Custom-LOGS1_CL": {
               "columns": [
@@ -171,39 +193,19 @@
                 }
               ]
             }
-          },
-          "destinations": {
-            "logAnalytics": [
-              {
-                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
-                "name": "centralWorkspace"
-              }
-            ]
-          },
-          "dataFlows": [
-            {
-              "streams": [
-                "Custom-LOGS1_CL"
-              ],
-              "destinations": [
-                "myworkspace"
-              ],
-              "transformKql": "source | extend jsonContext = parse_json(AdditionalContext) | project TimeGenerated = Time, Computer, AdditionalContext = jsonContext, CounterName=tostring(jsonContext.CounterName), CounterValue=toreal(jsonContext.CounterValue)",
-              "outputStream": "Custom-LOGS1_CL"
-            }
-          ],
-          "provisioningState": "Succeeded"
+          }
         },
         "systemData": {
+          "createdAt": "2024-01-30T17:50:40.5383301Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "createdAt": "2024-01-30T17:50:40.5383301Z",
+          "lastModifiedAt": "2024-01-30T17:50:40.5383301Z",
           "lastModifiedBy": "user1",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-01-30T17:50:40.5383301Z"
-        },
-        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+          "lastModifiedByType": "User"
+        }
       }
     }
-  }
+  },
+  "operationId": "DataCollectionRules_Create",
+  "title": "Create or update data collection rule with embedded ingestion endpoints"
 }

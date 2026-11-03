@@ -16,6 +16,7 @@ import "./PrivateZone.tsp";
 import "./VirtualNetworkLink.tsp";
 import "./RecordSet.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

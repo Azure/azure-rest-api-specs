@@ -115,6 +115,7 @@ interface FavoritesOperationGroup {
   /**
    * Updates a favorite that has already been added to an Application Insights component.
    */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/favorites/{favoriteId}")
   @patch(#{ implicitOptionality: true })
   update(

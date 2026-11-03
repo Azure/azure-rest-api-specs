@@ -76,4 +76,3 @@ If you want to emit Python SDK from latest TypeSpec in this folder do the follow
   - `tsp-client update` to use the TypeSpec commit mentioned in the local tsp-location.yaml file
 - After the code was emitted, run the script `post-emitter-fixes.cmd`
 - To review your changes, send a PR for merging your topic branch into branch `feature/azure-ai-projects/2.0.0b1`
-

@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "amlFilesystemName": "fs1",
+    "api-version": "2026-01-01",
+    "autoExportJob": {
+      "location": "eastus",
+      "properties": {
+        "autoExportPrefixes": [
+          "/"
+        ]
+      },
+      "tags": {
+        "Dept": "ContosoAds"
+      }
+    },
+    "autoExportJobName": "job1",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "job1",
+        "type": "Microsoft.StorageCache/amlFilesystem/autoExportJob",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoExportJob/job1",
+        "location": "eastus",
+        "properties": {
+          "adminStatus": "Enable",
+          "autoExportPrefixes": [
+            "/"
+          ],
+          "provisioningState": "Succeeded",
+          "status": {
+            "currentIterationFilesDiscovered": 10,
+            "currentIterationFilesExported": 5,
+            "currentIterationFilesFailed": 1,
+            "currentIterationMiBDiscovered": 4000,
+            "currentIterationMiBExported": 500,
+            "exportIterationCount": 100,
+            "lastStartedTimeUTC": "2024-04-21T17:25:43.511Z",
+            "lastSuccessfulIterationCompletionTimeUTC": "2024-04-21T19:28:43.511Z",
+            "state": "InProgress",
+            "statusMessage": "Auto Export is in progress",
+            "totalFilesExported": 1000000,
+            "totalFilesFailed": 5,
+            "totalMiBExported": 10000
+          }
+        },
+        "tags": {
+          "Dept": "ContosoAds"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "job1",
+        "type": "Microsoft.StorageCache/amlFilesystem/autoExportJob",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoExportJob/job1",
+        "location": "eastus",
+        "properties": {
+          "adminStatus": "Enable",
+          "autoExportPrefixes": [
+            "/"
+          ],
+          "provisioningState": "Succeeded",
+          "status": {
+            "currentIterationFilesDiscovered": 10,
+            "currentIterationFilesExported": 5,
+            "currentIterationFilesFailed": 1,
+            "currentIterationMiBDiscovered": 4000,
+            "currentIterationMiBExported": 500,
+            "exportIterationCount": 100,
+            "lastStartedTimeUTC": "2024-04-21T17:25:43.511Z",
+            "lastSuccessfulIterationCompletionTimeUTC": "2024-04-21T19:28:43.511Z",
+            "state": "InProgress",
+            "statusMessage": "Auto Export is in progress",
+            "totalFilesExported": 1000000,
+            "totalFilesFailed": 5,
+            "totalMiBExported": 10000
+          }
+        },
+        "tags": {
+          "Dept": "ContosoAds"
+        }
+      }
+    }
+  },
+  "operationId": "autoExportJobs_CreateOrUpdate",
+  "title": "autoExportJobs_CreateOrUpdate"
+}

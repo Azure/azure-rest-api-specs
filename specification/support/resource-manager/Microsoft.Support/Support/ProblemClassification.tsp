@@ -34,7 +34,6 @@ interface ClassifyProblems {
       @pattern("^[0-9a-zA-Z_\\-. ]+$")
       @path
       @segment("services")
-      @OpenAPI.extension("x-ms-parameter-location", "method")
       problemServiceName: string;
     }
   >;
@@ -60,7 +59,6 @@ interface ClassifyProblemsNoSubscription {
       @pattern("^[0-9a-zA-Z_\\-. ]+$")
       @path
       @segment("services")
-      @OpenAPI.extension("x-ms-parameter-location", "method")
       problemServiceName: string;
     }
   >;
@@ -97,7 +95,8 @@ interface ProblemClassifications {
 }
 
 @@doc(ClassifyProblems.classifyProblems::parameters.body, "Input to check.");
-@@doc(ClassifyProblemsNoSubscription.classifyProblems::parameters.body,
+@@doc(
+  ClassifyProblemsNoSubscription.classifyProblems::parameters.body,
   "Input to check."
 );
 @@doc(ProblemClassification.name, "Name of problem classification.");

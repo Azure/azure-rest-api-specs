@@ -19,22 +19,25 @@ Instructions for installing TypeSpec and generating SDK code with `tsp-client` a
 ## Contents
 
 ### `administration.tsp`
+
 This file imports the relevant specifications from each of the Administration subservices. This includes shared
 definitions from [`Security.KeyVault.Common`][common]; model and route definitions from [BackupRestore][backup_restore],
 [RBAC][rbac], and [Settings][settings]; and a `main.tsp` file from any one of these subservices. The `main.tsp` files
 of each subservice are equivalent and importing more than one will cause errors due to duplicated definitions.
 
 ### `client.tsp`
+
 This file makes client SDK customizations, such as model renamings and client definitions.
 
 ### `tspconfig.yaml`
+
 This configuration file is necessary to generate client SDKs. Configuration for OpenAPI spec generation (under
 `"@azure-tools/typespec-autorest":`) is present to satisfy automated validation checks, but this spec shouldn't actually
 be generated or included in PRs since this would duplicate specs for each subservice.
 
 ### `examples`
-Present for validation checks; these are duplicates of the examples for each subservice.
 
+Present for validation checks; these are duplicates of the examples for each subservice.
 
 <!-- LINKS -->
 

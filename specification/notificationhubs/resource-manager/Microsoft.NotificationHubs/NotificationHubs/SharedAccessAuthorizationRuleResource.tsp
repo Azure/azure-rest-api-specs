@@ -198,20 +198,25 @@ interface Namespaces {
 @@maxLength(SharedAccessAuthorizationRuleResource.name, 256);
 @@minLength(SharedAccessAuthorizationRuleResource.name, 1);
 @@doc(SharedAccessAuthorizationRuleResource.name, "Authorization Rule Name");
-@@doc(SharedAccessAuthorizationRuleResource.properties,
+@@doc(
+  SharedAccessAuthorizationRuleResource.properties,
   "SharedAccessAuthorizationRule properties."
 );
-@@doc(SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule::parameters.resource,
   "Request content."
 );
-@@doc(SharedAccessAuthorizationRuleResources.regenerateKeys::parameters.body,
+@@doc(
+  SharedAccessAuthorizationRuleResources.regenerateKeys::parameters.body,
   "Request content."
 );
-@@doc(Namespaces.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  Namespaces.createOrUpdateAuthorizationRule::parameters.resource,
   "Request content."
 );
 @@doc(Namespaces.regenerateKeys::parameters.body, "Request content.");
-@@visibility(SharedAccessAuthorizationRuleResource.location,
+@@visibility(
+  SharedAccessAuthorizationRuleResource.location,
   Lifecycle.Read,
   Lifecycle.Create
 );

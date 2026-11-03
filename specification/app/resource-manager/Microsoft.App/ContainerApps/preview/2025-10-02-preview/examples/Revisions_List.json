@@ -1,28 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "rg",
+    "api-version": "2025-10-02-preview",
     "containerAppName": "testcontainerApp0",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0/revisions/testcontainerApp0-pjxhsye",
             "name": "testcontainerApp0-pjxhsye",
             "type": "Microsoft.App/containerApps/revisions",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0/revisions/testcontainerApp0-pjxhsye",
             "properties": {
+              "active": true,
               "createdTime": "2021-05-24T21:24:22+00:00",
-              "lastActiveTime": "2021-05-24T21:24:22+00:00",
               "fqdn": "testcontainerApp0-pjxhsye.politehill-ab123456.eastus.azurecontainerapps.io",
+              "lastActiveTime": "2021-05-24T21:24:22+00:00",
+              "replicas": 1,
               "template": {
                 "containers": [
                   {
-                    "image": "repo/testcontainerApp0:v2",
                     "name": "testcontainerApp0",
+                    "image": "repo/testcontainerApp0:v2",
                     "resources": {
                       "cpu": 0.2,
                       "memory": "100Mi"
@@ -30,8 +32,8 @@
                   }
                 ],
                 "scale": {
-                  "minReplicas": 1,
                   "maxReplicas": 5,
+                  "minReplicas": 1,
                   "rules": [
                     {
                       "name": "httpscalingrule",
@@ -44,14 +46,14 @@
                   ]
                 }
               },
-              "trafficWeight": 80,
-              "active": true,
-              "replicas": 1
+              "trafficWeight": 80
             }
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ContainerAppsRevisions_ListRevisions",
+  "title": "List Container App's revisions"
 }

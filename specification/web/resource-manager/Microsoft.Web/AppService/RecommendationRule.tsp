@@ -50,7 +50,8 @@ interface RecommendationRuleOps
         @segment("recommendations")
         @key
         name: string,
-      }
+      },
+      ResourceName = "HostingEnvironmentRecommendation"
     > {}
 
 @tag("Recommendations")
@@ -93,6 +94,7 @@ interface RecommendationRules {
       /**
        * Site name
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing disableRecommendationForHostingEnvironment POST contract uses environmentName in the query; preserve wire compatibility."
       @query("environmentName")
       environmentName: string;
     },
@@ -120,7 +122,8 @@ interface RecommendationOps
         @segment("recommendations")
         @key
         name: string,
-      }
+      },
+      ResourceName = "SiteRecommendation"
     > {}
 
 @armResourceOperations
@@ -163,6 +166,7 @@ interface Recommendations {
 }
 
 @@doc(RecommendationRule.name, "Name of the recommendation.");
-@@doc(RecommendationRule.properties,
+@@doc(
+  RecommendationRule.properties,
   "RecommendationRule resource specific properties"
 );

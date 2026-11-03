@@ -4,14 +4,14 @@ import {
   outputAnnotatedErrors,
   outputErrorSummary,
   outputSuccessSummary,
-  ReportableOavError,
-} from "./formatting.js";
-import { checkExamples, checkSpecs } from "./runner.js";
+  type ReportableOavError,
+} from "./formatting.ts";
+import { checkExamples, checkSpecs } from "./runner.ts";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import fs from "node:fs/promises";
-import { parseArgs, ParseArgsConfig } from "node:util";
-import { resolve } from "path";
+import { parseArgs, type ParseArgsConfig } from "node:util";
+import { resolve } from "node:path";
 
 export async function main() {
   const config: ParseArgsConfig = {

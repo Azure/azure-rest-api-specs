@@ -1,0 +1,97 @@
+{
+  "operationId": "Deployments_CreateOrUpdate",
+  "parameters": {
+    "accountName": "accountName",
+    "api-version": "2026-05-15-preview",
+    "deployment": {
+      "properties": {
+        "deploymentState": "Running",
+        "model": {
+          "format": "Fireworks",
+          "name": "FW-Qwen3-14B",
+          "version": "1"
+        },
+        "speculativeDecoding": {
+          "draftModel": {
+            "format": "FireworksCustom",
+            "name": "testDraftModel",
+            "version": "1",
+            "source": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/projectName"
+          },
+          "draftTokenCount": 4
+        },
+        "serviceTier": "Default"
+      },
+      "sku": {
+        "name": "GlobalProvisionedManaged",
+        "capacity": 80
+      }
+    },
+    "deploymentName": "deploymentName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "PutDeploymentWithSpeculativeDecoding",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "deploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/deployments",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
+        "properties": {
+          "deploymentState": "Running",
+          "model": {
+            "format": "Fireworks",
+            "name": "FW-Qwen3-14B",
+            "version": "1"
+          },
+          "speculativeDecoding": {
+            "draftModel": {
+              "format": "FireworksCustom",
+              "name": "testDraftModel",
+              "version": "1",
+              "source": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/projectName"
+            },
+            "draftTokenCount": 4
+          },
+          "provisioningState": "Succeeded",
+          "serviceTier": "Default"
+        },
+        "sku": {
+          "name": "GlobalProvisionedManaged",
+          "capacity": 80
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "deploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/deployments",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
+        "properties": {
+          "deploymentState": "Running",
+          "model": {
+            "format": "Fireworks",
+            "name": "FW-Qwen3-14B",
+            "version": "1"
+          },
+          "speculativeDecoding": {
+            "draftModel": {
+              "format": "FireworksCustom",
+              "name": "testDraftModel",
+              "version": "1",
+              "source": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/projectName"
+            },
+            "draftTokenCount": 4
+          },
+          "provisioningState": "Accepted",
+          "serviceTier": "Default"
+        },
+        "sku": {
+          "name": "GlobalProvisionedManaged",
+          "capacity": 80
+        }
+      }
+    }
+  }
+}

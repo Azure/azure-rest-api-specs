@@ -1,0 +1,44 @@
+{
+  "title": "AzureDataTransfer_ListPipelineMetadata",
+  "operationId": "AzureDataTransfer_ListPipelineMetadata",
+  "parameters": {
+    "api-version": "2026-02-06-preview",
+    "body": {
+      "pipeline": "testPipeline"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "send": {
+          "completeLinking": "Disabled",
+          "connectionApprovals": "Disabled",
+          "flowTypesAvailable": [
+            "Data",
+            "Messaging",
+            "Mission"
+          ],
+          "messagingFlowTypeSchemaValidation": "Disabled",
+          "flowProfileDataClassesAvailable": [
+            "Files",
+            "Messaging"
+          ]
+        },
+        "receive": {
+          "completeLinking": "Enabled",
+          "connectionApprovals": "Enabled",
+          "flowTypesAvailable": [
+            "Data",
+            "Messaging",
+            "Mission"
+          ],
+          "messagingFlowTypeSchemaValidation": "Disabled",
+          "flowProfileDataClassesAvailable": [
+            "Files",
+            "Messaging"
+          ]
+        }
+      }
+    }
+  }
+}

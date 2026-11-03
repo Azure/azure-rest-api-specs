@@ -44,10 +44,12 @@ interface AppServiceCertificateOrders {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServiceCertificateOrder,
-    Response = ArmResponse<AppServiceCertificateOrder> | ArmResourceCreatedResponse<
-      AppServiceCertificateOrder,
-      LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateOrder>
-    >,
+    Response =
+      | ArmResponse<AppServiceCertificateOrder>
+      | ArmResourceCreatedResponse<
+          AppServiceCertificateOrder,
+          LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateOrder>
+        >,
     Error = DefaultErrorResponse
   >;
 
@@ -180,63 +182,82 @@ interface AppServiceCertificateOrders {
 }
 
 @@doc(AppServiceCertificateOrder.name, "Name of the certificate order..");
-@@doc(AppServiceCertificateOrder.properties,
+@@doc(
+  AppServiceCertificateOrder.properties,
   "AppServiceCertificateOrder resource specific properties"
 );
-@@doc(AppServiceCertificateOrders.createOrUpdate::parameters.resource,
+@@doc(
+  AppServiceCertificateOrders.createOrUpdate::parameters.resource,
   "Distinguished name to use for the certificate order."
 );
-@@doc(AppServiceCertificateOrders.update::parameters.properties,
+@@doc(
+  AppServiceCertificateOrders.update::parameters.properties,
   "Distinguished name to use for the certificate order."
 );
-@@doc(AppServiceCertificateOrders.reissue::parameters.body,
+@@doc(
+  AppServiceCertificateOrders.reissue::parameters.body,
   "Parameters for the reissue."
 );
 @@doc(AppServiceCertificateOrders.renew::parameters.body, "Renew parameters");
-@@doc(AppServiceCertificateOrders.resendRequestEmails::parameters.body,
+@@doc(
+  AppServiceCertificateOrders.resendRequestEmails::parameters.body,
   "Email address"
 );
-@@doc(AppServiceCertificateOrders.retrieveSiteSeal::parameters.body,
+@@doc(
+  AppServiceCertificateOrders.retrieveSiteSeal::parameters.body,
   "Site seal request."
 );
-@@doc(AppServiceCertificateOrder.properties,
+@@doc(
+  AppServiceCertificateOrder.properties,
   "AppServiceCertificateOrder resource specific properties"
 );
-@@summary(AppServiceCertificateOrders.list,
+@@summary(
+  AppServiceCertificateOrders.list,
   "List all certificate orders in a subscription."
 );
-@@summary(AppServiceCertificateOrders.listByResourceGroup,
+@@summary(
+  AppServiceCertificateOrders.listByResourceGroup,
   "Get certificate orders in a resource group."
 );
 @@summary(AppServiceCertificateOrders.get, "Get a certificate order.");
-@@summary(AppServiceCertificateOrders.createOrUpdate,
+@@summary(
+  AppServiceCertificateOrders.createOrUpdate,
   "Create or update a certificate purchase order."
 );
-@@summary(AppServiceCertificateOrders.delete,
+@@summary(
+  AppServiceCertificateOrders.delete,
   "Delete an existing certificate order."
 );
-@@summary(AppServiceCertificateOrders.update,
+@@summary(
+  AppServiceCertificateOrders.update,
   "Create or update a certificate purchase order."
 );
-@@summary(AppServiceCertificateOrders.reissue,
+@@summary(
+  AppServiceCertificateOrders.reissue,
   "Reissue an existing certificate order."
 );
-@@summary(AppServiceCertificateOrders.renew,
+@@summary(
+  AppServiceCertificateOrders.renew,
   "Renew an existing certificate order."
 );
 @@summary(AppServiceCertificateOrders.resendEmail, "Resend certificate email.");
-@@summary(AppServiceCertificateOrders.resendRequestEmails,
+@@summary(
+  AppServiceCertificateOrders.resendRequestEmails,
   "Resend domain verification email to customer for this certificate order"
 );
-@@summary(AppServiceCertificateOrders.retrieveCertificateActions,
+@@summary(
+  AppServiceCertificateOrders.retrieveCertificateActions,
   "Retrieve the list of certificate actions."
 );
-@@summary(AppServiceCertificateOrders.retrieveCertificateEmailHistory,
+@@summary(
+  AppServiceCertificateOrders.retrieveCertificateEmailHistory,
   "Retrieve email history."
 );
-@@summary(AppServiceCertificateOrders.retrieveSiteSeal,
+@@summary(
+  AppServiceCertificateOrders.retrieveSiteSeal,
   "This method is used to obtain the site seal information for an issued certificate. "
 );
-@@summary(AppServiceCertificateOrders.verifyDomainOwnership,
+@@summary(
+  AppServiceCertificateOrders.verifyDomainOwnership,
   "Verify domain ownership for this certificate order."
 );

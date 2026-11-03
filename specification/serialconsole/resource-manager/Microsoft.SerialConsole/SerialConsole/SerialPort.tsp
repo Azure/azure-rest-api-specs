@@ -111,6 +111,7 @@ interface SerialPorts {
 
 @@doc(SerialPort.name, "The name of the serial port to connect to.");
 @@doc(SerialPort.properties, "The properties of the serial port.");
-@@doc(SerialPorts.create::parameters.resource,
+@@doc(
+  SerialPorts.create::parameters.resource,
   "Parameters supplied to create the serial port."
 );

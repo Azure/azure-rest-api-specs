@@ -8,6 +8,7 @@ using Azure.Core.Foundations;
 namespace Azure.Batch;
 
 @doc("OSType enums")
+@clientName("OsType", "java")
 union OSType {
   string,
 
@@ -143,6 +144,7 @@ union IPFamily {
 }
 
 @doc("CachingType enums")
+@clientName("BatchCachingType", "java")
 union CachingType {
   string,
 
@@ -290,14 +292,6 @@ union ContainerType {
 
   @doc("A CRI based technology will be used to launch the containers.")
   CriCompatible: "criCompatible",
-}
-
-@doc("BatchAccessScope enums")
-union BatchAccessScope {
-  string,
-
-  @doc("Grants access to perform all operations on the Job containing the Task.")
-  Job: "job",
 }
 
 @doc("LoginMode enums")
@@ -847,6 +841,7 @@ model BatchSupportedImage {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference: BatchVmImageReference;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The type of operating system (e.g. Windows or Linux) of the Image.")
   osType: OSType;
 
@@ -1224,6 +1219,7 @@ model BatchJobSchedule {
   jobSpecification: BatchJobSpecification;
 
   @doc("Information about Jobs that have been and will be run under this schedule.")
+  @clientName("executionDetails", "java")
   @visibility(Lifecycle.Read)
   executionInfo: BatchJobScheduleExecutionInfo;
 
@@ -1236,6 +1232,7 @@ model BatchJobSchedule {
   stats?: BatchJobScheduleStatistics;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for updating an Azure Batch Job Schedule.
   """)
@@ -1250,6 +1247,7 @@ model BatchJobScheduleUpdateOptions {
   metadata?: BatchMetadataItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for creating an Azure Batch Job Schedule
   """)
@@ -1379,6 +1377,7 @@ model BatchJobSpecification {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool on which the Batch service runs the Tasks of Jobs created under this schedule.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
@@ -1478,9 +1477,6 @@ model BatchJobManagerTask {
     or because download failed, the Task fails.
     """)
   applicationPackageReferences?: BatchApplicationPackageReference[];
-
-  @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
-  authenticationTokenSettings?: AuthenticationTokenSettings;
 
   @doc("Whether the Job Manager Task may run on a Spot/Low-priority Compute Node. The default value is true.")
   allowLowPriorityNode?: boolean;
@@ -1676,15 +1672,6 @@ model BatchApplicationPackageReference {
 }
 
 @doc("""
-  The settings for an authentication token that the Task can use to perform Batch
-  service operations.
-  """)
-model AuthenticationTokenSettings {
-  @doc("The Batch resources to which the token grants access. The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task.")
-  access?: BatchAccessScope[];
-}
-
-@doc("""
   A Job Preparation Task to run before any Tasks of the Job on any given Compute Node.
   You can use Job Preparation to prepare a Node to run Tasks for the Job.
   Activities commonly performed in Job Preparation include: Downloading common
@@ -1786,6 +1773,7 @@ model BatchJobReleaseTask {
 }
 
 @doc("Specifies how a Job should be assigned to a Pool.")
+@clientName("BatchPoolDetails", "java")
 model BatchPoolInfo {
   @doc("The ID of an existing Pool. All the Tasks of the Job will run on the specified Pool. You must ensure that the Pool referenced by this property exists. If the Pool does not exist at the time the Batch service tries to schedule a Job, no Tasks for the Job will run until you create a Pool with that id. Note that the Batch service will not reject the Job request; it will simply not run Tasks until the Pool exists. You must specify either the Pool ID or the auto Pool specification, but not both.")
   poolId?: string;
@@ -1916,6 +1904,7 @@ model VirtualMachineConfiguration {
   @doc("The virtual machine extension for the pool. If specified, the extensions mentioned in this configuration will be installed on each node.")
   extensions?: VMExtension[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Settings for the operating system disk of the Virtual Machine.")
   @clientName("OsDisk")
   osDisk?: BatchOsDisk;
@@ -2040,6 +2029,7 @@ model VMExtension {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Settings for the operating system disk of the compute node (VM).")
 model BatchOsDisk {
   @doc("Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM).")
@@ -2089,6 +2079,7 @@ model NetworkConfiguration {
   @doc("The configuration for endpoints on Compute Nodes in the Batch Pool.")
   endpointConfiguration?: BatchPoolEndpointConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The Public IPAddress configuration for Compute Nodes in the Batch Pool.")
   @clientName("publicIpAddressConfiguration", "!go")
   publicIPAddressConfiguration?: BatchPublicIpAddressConfiguration;
@@ -2146,24 +2137,30 @@ model NetworkSecurityGroupRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
 model BatchPublicIpAddressConfiguration {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.")
   @clientName("IpAddressProvisioningType")
   provision?: IpAddressProvisioningType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IP families used to specify IP versions available to the pool. IP families are used to determine single-stack or dual-stack pools. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6.")
   ipFamilies?: IPFamily[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
   ipAddressIds?: Azure.Core.armResourceIdentifier[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("A list of IP tags associated with the public IP addresses of the Pool. IP tags are used to categorize and filter public IP addresses for billing and management purposes.")
   ipTags?: IPTag[];
 }
 
 @doc("Contains the IP tag associated with the public IP address.")
 model IPTag {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IP Tag type. Example: FirstPartyUsage.")
   ipTagType?: string;
 
@@ -2376,6 +2373,7 @@ model AzureFileShareConfiguration {
   Contains information about Jobs that have been and will be run under a Job
   Schedule.
   """)
+@clientName("BatchJobScheduleExecutionDetails", "java")
 model BatchJobScheduleExecutionInfo {
   @doc("The next time at which a Job will be created under this schedule. This property is meaningful only if the schedule is in the active state when the time comes around. For example, if the schedule is disabled, no Job will be created at nextRunTime unless the Job is enabled before then.")
   nextRunTime?: utcDateTime;
@@ -2545,6 +2543,7 @@ model BatchJob {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool settings associated with the Job.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. The default is noaction.")
@@ -2573,6 +2572,7 @@ model BatchJob {
   stats?: BatchJobStatistics;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for creating an Azure Batch Job.")
 model BatchJobCreateOptions {
   @doc("A string that uniquely identifies the Job within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
@@ -2609,6 +2609,7 @@ model BatchJobCreateOptions {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool on which the Batch service runs the Job's Tasks.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. Note that if a Job contains no Tasks, then all Tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic Job termination without a Job Manager, you should initially set onAllTasksComplete to noaction and update the Job properties to set onAllTasksComplete to terminatejob once you have finished adding Tasks. The default is noaction.")
@@ -2626,6 +2627,7 @@ model BatchJobCreateOptions {
   metadata?: BatchMetadataItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for updating an Azure Batch Job.")
 model BatchJobUpdateOptions {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
@@ -2655,6 +2657,7 @@ model BatchJobUpdateOptions {
 }
 
 @doc("Contains information about the execution of a Job in the Azure Batch service.")
+@clientName("BatchJobExecutionDetails", "java")
 model BatchJobExecutionInfo {
   @doc("The start time of the Job. This is the time at which the Job was created.")
   startTime: utcDateTime;
@@ -2688,12 +2691,14 @@ model BatchJobSchedulingError {
   details?: NameValuePair[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for disabling an Azure Batch Job.")
 model BatchJobDisableOptions {
   @doc("What to do with active Tasks associated with the Job.")
   disableTasks: DisableBatchJobOption;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for terminating an Azure Batch Job.")
 model BatchJobTerminateOptions {
   @doc("The text you want to appear as the Job's TerminationReason. The default is 'UserTerminate'.")
@@ -2750,6 +2755,7 @@ model BatchJobPreparationAndReleaseTaskStatus {
   Contains information about the execution of a Job Preparation Task on a Compute
   Node.
   """)
+@clientName("BatchJobPreparationTaskExecutionDetails", "java")
 model BatchJobPreparationTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -2786,6 +2792,7 @@ model BatchJobPreparationTaskExecutionInfo {
 }
 
 @doc("Contains information about the container which a Task is executing.")
+@clientName("BatchTaskContainerExecutionDetails", "java")
 model BatchTaskContainerExecutionInfo {
   @doc("The ID of the container.")
   containerId?: string;
@@ -2798,6 +2805,7 @@ model BatchTaskContainerExecutionInfo {
 }
 
 @doc("Information about a Task failure.")
+@clientName("BatchTaskFailureDetails", "java")
 model BatchTaskFailureInfo {
   @doc("The category of the Task error.")
   category: BatchErrorSourceCategory;
@@ -2816,6 +2824,7 @@ model BatchTaskFailureInfo {
   Contains information about the execution of a Job Release Task on a Compute
   Node.
   """)
+@clientName("BatchJobReleaseTaskExecutionDetails", "java")
 model BatchJobReleaseTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -3028,6 +3037,7 @@ model BatchPool {
   upgradePolicy?: UpgradePolicy;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for creating an Azure Batch Pool.")
 model BatchPoolCreateOptions {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two Pool IDs within an Account that differ only by case).")
@@ -3091,6 +3101,7 @@ model BatchPoolCreateOptions {
   upgradePolicy?: UpgradePolicy;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for replacing properties on an Azure Batch Pool.")
 model BatchPoolReplaceOptions {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
@@ -3103,6 +3114,7 @@ model BatchPoolReplaceOptions {
   metadata: BatchMetadataItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for updating an Azure Batch Pool.")
 model BatchPoolUpdateOptions {
   @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024. This field can be updated only when the pool is empty.")
@@ -3216,6 +3228,7 @@ model BatchPoolListResult {
   `odata.nextLink`?: url;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for enabling automatic scaling on an Azure Batch Pool.")
 model BatchPoolEnableAutoScaleOptions {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued.")
@@ -3225,12 +3238,14 @@ model BatchPoolEnableAutoScaleOptions {
   autoScaleEvaluationInterval?: duration;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.")
 model BatchPoolEvaluateAutoScaleOptions {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-automatic-scaling).")
   autoScaleFormula: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for changing the size of an Azure Batch Pool.")
 model BatchPoolResizeOptions {
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
@@ -3246,6 +3261,7 @@ model BatchPoolResizeOptions {
   nodeDeallocationOption?: BatchNodeDeallocationOption;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for removing nodes from an Azure Batch Pool.")
 model BatchNodeRemoveOptions {
   @doc("A list containing the IDs of the Compute Nodes to be removed from the specified Pool. A maximum of 100 nodes may be removed per request.")
@@ -3259,6 +3275,7 @@ model BatchNodeRemoveOptions {
   nodeDeallocationOption?: BatchNodeDeallocationOption;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Options for deallocating a Compute Node.")
 model BatchNodeDeallocateOptions {
   @doc("When to deallocate the Compute Node and what to do with currently running Tasks. The default value is requeue.")
@@ -3380,12 +3397,9 @@ model BatchTask {
   @doc("A list of Packages that the Batch service will deploy to the Compute Node before running the command line. Application packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced package is already on the Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Node is used. If a referenced Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails.")
   @visibility(Lifecycle.Read)
   applicationPackageReferences?: BatchApplicationPackageReference[];
-
-  @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
-  @visibility(Lifecycle.Read)
-  authenticationTokenSettings?: AuthenticationTokenSettings;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for creating an Azure Batch Task.
   """)
@@ -3434,9 +3448,6 @@ model BatchTaskCreateOptions {
 
   @doc("A list of Packages that the Batch service will deploy to the Compute Node before running the command line. Application packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced package is already on the Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Node is used. If a referenced Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
-
-  @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
-  authenticationTokenSettings?: AuthenticationTokenSettings;
 }
 
 @doc("Specifies how the Batch service should respond when the Task completes.")
@@ -3469,6 +3480,7 @@ model ExitCodeMapping {
   exitOptions: ExitOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Specifies how the Batch service responds to a particular exit condition.")
 model ExitOptions {
   @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
@@ -3504,12 +3516,14 @@ model ExitCodeRangeMapping {
   A locality hint that can be used by the Batch service to select a Compute Node
   on which to start a Task.
   """)
+@clientName("BatchAffinityDetails", "java")
 model BatchAffinityInfo {
   @doc("An opaque string representing the location of a Compute Node or a Task that has run previously. You can pass the affinityId of a Node to indicate that this Task needs to run on that Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId: string;
 }
 
 @doc("Information about the execution of a Task.")
+@clientName("BatchTaskExecutionDetails", "java")
 model BatchTaskExecutionInfo {
   @doc("The time at which the Task started running. 'Running' corresponds to the running state, so if the Task specifies resource files or Packages, then the start time reflects the time at which the Task started downloading or deploying these. If the Task has been restarted or retried, this is the most recent time at which the Task started running. This property is present only for Tasks that are in the running or completed state.")
   startTime?: utcDateTime;
@@ -3543,6 +3557,7 @@ model BatchTaskExecutionInfo {
 }
 
 @doc("Information about the Compute Node on which a Task ran.")
+@clientName("BatchNodeDetails", "java")
 model BatchNodeInfo {
   @doc("An identifier for the Node on which the Task ran, which can be passed when adding a Task to request that the Task be scheduled on this Compute Node.")
   affinityId?: string;
@@ -3756,6 +3771,7 @@ model UpgradePolicy {
   mode: UpgradeMode;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Configuration parameters used for performing automatic OS Upgrade. The configuration parameters used for performing automatic OS upgrade.")
   @clientName("automaticOsUpgradePolicy")
   automaticOSUpgradePolicy?: AutomaticOsUpgradePolicy;
@@ -3764,12 +3780,14 @@ model UpgradePolicy {
   rollingUpgradePolicy?: RollingUpgradePolicy;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The configuration parameters used for performing automatic OS upgrade.")
 model AutomaticOsUpgradePolicy {
   @doc("Whether OS image rollback feature should be disabled.")
   disableAutomaticRollback?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchservice/pools/create-pool#windowsconfiguration) cannot be set to true.")
   @clientName("enableAutomaticOsUpgrade")
   enableAutomaticOSUpgrade?: boolean;
@@ -3777,6 +3795,7 @@ model AutomaticOsUpgradePolicy {
   @doc("Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS.")
   useRollingUpgradePolicy?: boolean;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Defer OS upgrades on the TVMs if they are running tasks.")
   osRollingUpgradeDeferral?: boolean;
 }
@@ -3805,6 +3824,7 @@ model RollingUpgradePolicy {
   rollbackFailedInstancesOnPolicyBreach?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for creating a user account for RDP or SSH access on an Azure Batch Compute Node.")
 model BatchNodeUserCreateOptions {
   @doc("The user name of the Account.")
@@ -3824,6 +3844,7 @@ model BatchNodeUserCreateOptions {
   sshPublicKey?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.")
 model BatchNodeUserUpdateOptions {
   @secret
@@ -3867,6 +3888,7 @@ model BatchNode {
   @visibility(Lifecycle.Read)
   allocationTime: utcDateTime;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IP address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes.")
   @visibility(Lifecycle.Read)
   ipAddress: ipV4Address;
@@ -3928,11 +3950,13 @@ model BatchNode {
   nodeAgentInfo?: BatchNodeAgentInfo;
 
   @doc("Info about the current state of the virtual machine.")
+  @clientName("virtualMachineDetails", "java")
   @visibility(Lifecycle.Read)
   virtualMachineInfo: VirtualMachineInfo;
 }
 
 @doc("Information about a Task running on a Compute Node.")
+@clientName("BatchTaskDetails", "java")
 model BatchTaskInfo {
   @doc("The URL of the Task.")
   taskUrl?: url;
@@ -3954,6 +3978,7 @@ model BatchTaskInfo {
 }
 
 @doc("Information about a StartTask running on a Compute Node.")
+@clientName("BatchStartTaskDetails", "java")
 model BatchStartTaskInfo {
   @doc("The state of the StartTask on the Compute Node.")
   state: BatchStartTaskState;
@@ -4010,6 +4035,7 @@ model InboundEndpoint {
   @doc("The protocol of the endpoint.")
   protocol: InboundEndpointProtocol;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The public IP address of the Compute Node.")
   @clientName("publicIpAddress")
   publicIPAddress: ipV4Address;
@@ -4028,6 +4054,7 @@ model InboundEndpoint {
   The Batch Compute Node agent is a program that runs on each Compute Node in the
   Pool and provides Batch capability on the Compute Node.
   """)
+@clientName("BatchNodeAgentDetails", "java")
 model BatchNodeAgentInfo {
   @doc("The version of the Batch Compute Node agent running on the Compute Node. This version number can be checked against the Compute Node agent release notes located at https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.")
   version: string;
@@ -4037,6 +4064,7 @@ model BatchNodeAgentInfo {
 }
 
 @doc("Info about the current state of the virtual machine.")
+@clientName("VirtualMachineDetails", "java")
 model VirtualMachineInfo {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference?: BatchVmImageReference;
@@ -4045,6 +4073,7 @@ model VirtualMachineInfo {
   scaleSetVmResourceId?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for rebooting an Azure Batch Compute Node.")
 model BatchNodeRebootOptions {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
@@ -4052,12 +4081,14 @@ model BatchNodeRebootOptions {
   nodeRebootOption?: BatchNodeRebootKind;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for reimaging an Azure Batch Compute Node.")
 model BatchNodeReimageOptions {
   @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeReimageOption?: BatchNodeReimageOption;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for disabling scheduling on an Azure Batch Compute Node.")
 model BatchNodeDisableSchedulingOptions {
   @doc("What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue.")
@@ -4067,6 +4098,7 @@ model BatchNodeDisableSchedulingOptions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
 model BatchNodeRemoteLoginSettings {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IPv6 address used for remote login to the Compute Node.")
   @clientName("ipv6RemoteLoginIpAddress")
   ipv6RemoteLoginIPAddress?: ipV6Address;
@@ -4074,6 +4106,7 @@ model BatchNodeRemoteLoginSettings {
   @doc("The port used for remote login to the Compute Node.")
   ipv6RemoteLoginPort?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IP address used for remote login to the Compute Node.")
   @clientName("remoteLoginIpAddress")
   remoteLoginIPAddress: ipV4Address;
@@ -4082,6 +4115,7 @@ model BatchNodeRemoteLoginSettings {
   remoteLoginPort: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The Azure Batch service log files upload parameters for a Compute Node.")
 model UploadBatchServiceLogsOptions {
   @doc("The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s). If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified.")
@@ -4133,6 +4167,7 @@ model BatchNodeVMExtension {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The vm extension instance view.")
+@clientName("VirtualMachineExtensionInstanceView", "java")
 model VMExtensionInstanceView {
   @doc("The name of the vm extension instance view.")
   name?: string;

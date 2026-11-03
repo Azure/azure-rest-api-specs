@@ -1,38 +1,36 @@
 {
   "parameters": {
-    "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc",
-    "api-version": "2025-01-01-preview"
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
-            "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
             "name": "perf",
             "type": "microsoft.insights/scheduledqueryrules",
+            "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
             "location": "eastus",
-            "tags": {},
             "properties": {
               "description": "Performance rule",
-              "severity": 4,
-              "enabled": true,
-              "evaluationFrequency": "PT5M",
-              "scopes": [
-                "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
-              ],
-              "targetResourceTypes": [
-                "Microsoft.Compute/virtualMachines"
-              ],
-              "windowSize": "PT10M",
+              "actions": {
+                "actionGroups": [
+                  "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+                ],
+                "actionProperties": {
+                  "Icm.Title": "Custom title in ICM",
+                  "Icm.TsgId": "https://tsg.url"
+                },
+                "customProperties": {
+                  "key11": "value11",
+                  "key12": "value12"
+                }
+              },
+              "checkWorkspaceAlertsStorageConfigured": true,
               "criteria": {
                 "allOf": [
                   {
-                    "query": "Perf | where ObjectName == \"Processor\"",
-                    "timeAggregation": "Average",
-                    "metricMeasureColumn": "% Processor Time",
-                    "resourceIdColumn": "resourceId",
                     "dimensions": [
                       {
                         "name": "ComputerIp",
@@ -49,96 +47,100 @@
                         ]
                       }
                     ],
-                    "operator": "GreaterThan",
-                    "threshold": 70,
                     "failingPeriods": {
-                      "numberOfEvaluationPeriods": 1,
-                      "minFailingPeriodsToAlert": 1
-                    }
+                      "minFailingPeriodsToAlert": 1,
+                      "numberOfEvaluationPeriods": 1
+                    },
+                    "metricMeasureColumn": "% Processor Time",
+                    "operator": "GreaterThan",
+                    "query": "Perf | where ObjectName == \"Processor\"",
+                    "resourceIdColumn": "resourceId",
+                    "threshold": 70,
+                    "timeAggregation": "Average"
                   }
                 ]
               },
+              "enabled": true,
+              "evaluationFrequency": "PT5M",
+              "isWorkspaceAlertsStorageConfigured": true,
               "muteActionsDuration": "PT30M",
-              "actions": {
-                "actionGroups": [
-                  "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
-                ],
-                "actionProperties": {
-                  "Icm.TsgId": "https://tsg.url",
-                  "Icm.Title": "Custom title in ICM"
-                },
-                "customProperties": {
-                  "key11": "value11",
-                  "key12": "value12"
-                }
-              },
               "resolveConfiguration": {
                 "autoResolved": true,
                 "timeToResolve": "PT10M"
               },
-              "isWorkspaceAlertsStorageConfigured": true,
-              "checkWorkspaceAlertsStorageConfigured": true,
-              "skipQueryValidation": true
-            }
-          },
-          {
-            "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/MyResourceGroupName2/providers/microsoft.insights/scheduledqueryrules/heartbeat",
-            "name": "heartbeat",
-            "type": "microsoft.insights/scheduledqueryrules",
-            "location": "eastus",
-            "tags": {},
-            "properties": {
-              "description": "Health check rule",
-              "severity": 4,
-              "enabled": true,
-              "evaluationFrequency": "PT5M",
               "scopes": [
                 "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
               ],
+              "severity": 4,
+              "skipQueryValidation": true,
               "targetResourceTypes": [
                 "Microsoft.Compute/virtualMachines"
               ],
-              "windowSize": "PT10M",
-              "criteria": {
-                "allOf": [
-                  {
-                    "query": "Heartbeat",
-                    "timeAggregation": "Count",
-                    "dimensions": [],
-                    "operator": "GreaterThan",
-                    "threshold": 360,
-                    "failingPeriods": {
-                      "numberOfEvaluationPeriods": 1,
-                      "minFailingPeriodsToAlert": 1
-                    }
-                  }
-                ]
-              },
-              "muteActionsDuration": "PT30M",
+              "windowSize": "PT10M"
+            },
+            "tags": {}
+          },
+          {
+            "name": "heartbeat",
+            "type": "microsoft.insights/scheduledqueryrules",
+            "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/MyResourceGroupName2/providers/microsoft.insights/scheduledqueryrules/heartbeat",
+            "location": "eastus",
+            "properties": {
+              "description": "Health check rule",
               "actions": {
                 "actionGroups": [
                   "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
                 ],
                 "actionProperties": {
-                  "Icm.TsgId": "https://tsg.url",
-                  "Icm.Title": "Custom title in ICM"
+                  "Icm.Title": "Custom title in ICM",
+                  "Icm.TsgId": "https://tsg.url"
                 },
                 "customProperties": {
                   "key11": "value11",
                   "key12": "value12"
                 }
               },
+              "checkWorkspaceAlertsStorageConfigured": true,
+              "criteria": {
+                "allOf": [
+                  {
+                    "dimensions": [],
+                    "failingPeriods": {
+                      "minFailingPeriodsToAlert": 1,
+                      "numberOfEvaluationPeriods": 1
+                    },
+                    "operator": "GreaterThan",
+                    "query": "Heartbeat",
+                    "threshold": 360,
+                    "timeAggregation": "Count"
+                  }
+                ]
+              },
+              "enabled": true,
+              "evaluationFrequency": "PT5M",
+              "isWorkspaceAlertsStorageConfigured": true,
+              "muteActionsDuration": "PT30M",
               "resolveConfiguration": {
                 "autoResolved": true,
                 "timeToResolve": "PT10M"
               },
-              "isWorkspaceAlertsStorageConfigured": true,
-              "checkWorkspaceAlertsStorageConfigured": true,
-              "skipQueryValidation": true
-            }
+              "scopes": [
+                "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
+              ],
+              "severity": 4,
+              "skipQueryValidation": true,
+              "targetResourceTypes": [
+                "Microsoft.Compute/virtualMachines"
+              ],
+              "windowSize": "PT10M"
+            },
+            "tags": {}
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ScheduledQueryRules_ListBySubscription",
+  "title": "List scheduled query rules by subscription"
 }

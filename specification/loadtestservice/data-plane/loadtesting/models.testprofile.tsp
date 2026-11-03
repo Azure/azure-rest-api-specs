@@ -13,6 +13,7 @@ namespace Microsoft.LoadTestService;
 
 @doc("Test Profile Id path parameter.")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model TestProfileIdPathParameter {
   @doc("Unique identifier for the test profile, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
   @maxLength(50)
@@ -25,6 +26,7 @@ model TestProfileIdPathParameter {
 
 @doc("Test Profile Run Id path parameter.")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model TestProfileRunIdPathParameter {
   @doc("Unique identifier for the test profile run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
   @visibility(Lifecycle.Read)
@@ -37,6 +39,7 @@ model TestProfileRunIdPathParameter {
 
 @doc("Kind of the resource on which test profile is created.")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 union ResourceKind {
   string,
 
@@ -45,6 +48,7 @@ union ResourceKind {
 }
 
 @doc("Test profile run status.")
+@removed(APIVersions.v2026_04_01)
 union TestProfileRunStatus {
   string,
 
@@ -72,6 +76,7 @@ union TestProfileRunStatus {
 
 @doc("Category of Recommendation.")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 union RecommendationCategory {
   string,
 
@@ -84,6 +89,7 @@ union RecommendationCategory {
 
 @doc("Resource configuration instance for a Flex Consumption based Azure Function App.")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model FunctionFlexConsumptionResourceConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Abbreviating MB to Mb changes the meaning of the value."
   @doc("Memory size of the instance. Supported values are 2048, 4096.")
@@ -95,6 +101,7 @@ model FunctionFlexConsumptionResourceConfiguration {
 
 @doc("Details of a particular test run for a test profile run.")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model TestRunDetail {
   @doc("Status of the test run.")
   status: TestRunStatus;
@@ -108,6 +115,7 @@ model TestRunDetail {
 
 @doc("A recommendation object that provides a list of configuration that optimizes its category.")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model TestProfileRunRecommendation {
   @doc("Category of the recommendation.")
   category: RecommendationCategory;
@@ -118,6 +126,7 @@ model TestProfileRunRecommendation {
 
 @doc("Configurations of a target resource. This varies with the kind of resource.")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 @discriminator("kind")
 model TargetResourceConfigurations {
   @doc("Kind of the resource for which the configurations apply.")
@@ -127,6 +136,7 @@ model TargetResourceConfigurations {
 
 @doc("Configurations for a Function App using Flex Consumption Plan.")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model FunctionFlexConsumptionTargetResourceConfigurations
   extends TargetResourceConfigurations {
   @doc("""
@@ -143,6 +153,7 @@ model FunctionFlexConsumptionTargetResourceConfigurations
 @summary("Test Profile Model.")
 @resource("test-profiles")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model TestProfile {
   ...TestProfileIdPathParameter;
 
@@ -173,6 +184,7 @@ model TestProfile {
 @summary("Test Profile Run model.")
 @resource("test-profile-runs")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model TestProfileRun {
   ...TestProfileRunIdPathParameter;
 
@@ -242,6 +254,7 @@ model TestProfileRun {
 
 @doc("Parameters for list test profile operation")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model ListTestProfileQueryParams {
   @doc("Maximum number of results to include in a single response.")
   @query
@@ -270,6 +283,7 @@ model ListTestProfileQueryParams {
 
 @doc("Parameters for list test profile run operation")
 @added(APIVersions.v2024_05_01_preview)
+@removed(APIVersions.v2026_04_01)
 model ListTestProfileRunQueryParams {
   @doc("Maximum number of results to include in a single response.")
   @query

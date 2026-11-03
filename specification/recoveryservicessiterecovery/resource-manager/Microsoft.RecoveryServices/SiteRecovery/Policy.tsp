@@ -46,8 +46,10 @@ interface Policies {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Policy,
     Request = CreatePolicyInput,
-    Response = ArmResourceUpdatedResponse<Policy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Policy> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<Policy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Policy> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 

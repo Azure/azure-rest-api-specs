@@ -1,14 +1,11 @@
 {
   "parameters": {
-    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744",
-    "resourceGroupName": "workerapps-rg-xj",
-    "containerAppName": "testcanadacentral",
-    "authConfigName": "current",
     "api-version": "2025-10-02-preview",
     "authConfigEnvelope": {
       "properties": {
-        "platform": {
-          "enabled": true
+        "encryptionSettings": {
+          "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
+          "containerAppAuthSigningSecretName": "testSigningSecretName"
         },
         "globalValidation": {
           "unauthenticatedClientAction": "AllowAnonymous"
@@ -21,23 +18,26 @@
             }
           }
         },
-        "encryptionSettings": {
-          "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
-          "containerAppAuthSigningSecretName": "testSigningSecretName"
+        "platform": {
+          "enabled": true
         }
       }
-    }
+    },
+    "authConfigName": "current",
+    "containerAppName": "testcanadacentral",
+    "resourceGroupName": "workerapps-rg-xj",
+    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/authconfigs/current",
         "name": "current",
         "type": "Microsoft.App/containerapps/authconfigs",
+        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/authconfigs/current",
         "properties": {
-          "platform": {
-            "enabled": true
+          "encryptionSettings": {
+            "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
+            "containerAppAuthSigningSecretName": "testSigningSecretName"
           },
           "globalValidation": {
             "unauthenticatedClientAction": "AllowAnonymous"
@@ -50,12 +50,14 @@
               }
             }
           },
-          "encryptionSettings": {
-            "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
-            "containerAppAuthSigningSecretName": "testSigningSecretName"
+          "platform": {
+            "enabled": true
           }
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ContainerAppsAuthConfigs_CreateOrUpdate",
+  "title": "Create or Update Container App AuthConfig"
 }

@@ -104,6 +104,7 @@ interface NotebookWorkspaces {
 
 @@doc(NotebookWorkspace.name, "The name of the notebook workspace resource.");
 @@doc(NotebookWorkspace.properties, "Resource properties.");
-@@doc(NotebookWorkspaces.createOrUpdate::parameters.resource,
+@@doc(
+  NotebookWorkspaces.createOrUpdate::parameters.resource,
   "The notebook workspace to create for the current database account."
 );

@@ -1,6 +1,16 @@
-import { HttpMethod, OpenAPI2Document, OpenAPI2Operation, OpenAPI2Parameter, OpenAPI2Response, OpenAPI2Schema, OpenAPI2SchemaProperty, Ref, Refable } from "@azure-tools/typespec-autorest";
-import { getCommonTypeDefinition } from "./commonType.js";
-import { getOriginalParameter } from "./parameter.js";
+import {
+  type HttpMethod,
+  type OpenAPI2Document,
+  type OpenAPI2Operation,
+  type OpenAPI2Parameter,
+  type OpenAPI2Response,
+  type OpenAPI2Schema,
+  type OpenAPI2SchemaProperty,
+  type Ref,
+  type Refable,
+} from "@azure-tools/typespec-autorest";
+import { getCommonTypeDefinition } from "./commonType.ts";
+import { getOriginalParameter } from "./parameter.ts";
 
 interface Diff {
   before: any;
@@ -23,7 +33,20 @@ interface Diff {
  */
 interface PathDiff extends Diff {
   operationId: string;
-  type: "path" | "parameters" | "parameter" | "pageable" | "longrunning" | "finalstate" | "finalresult" | "responses" | "response" | "tags" | "summary" | "operationId" | "externalDocs";
+  type:
+    | "path"
+    | "parameters"
+    | "parameter"
+    | "pageable"
+    | "longrunning"
+    | "finalstate"
+    | "finalresult"
+    | "responses"
+    | "response"
+    | "tags"
+    | "summary"
+    | "operationId"
+    | "externalDocs";
   parameterName?: string;
   changeType?: string;
 }
@@ -92,7 +115,10 @@ function getDefinitionDiffMessage(diff: DefinitionDiff): string {
   }
 }
 
-export function compareDocuments(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document): (PathDiff | DefinitionDiff)[] {
+export function compareDocuments(
+  oldDocument: OpenAPI2Document,
+  newDocument: OpenAPI2Document,
+): (PathDiff | DefinitionDiff)[] {
   const diffs: (PathDiff | DefinitionDiff)[] = [];
   diffs.push(...comparePaths(oldDocument, newDocument));
 
@@ -100,14 +126,28 @@ export function compareDocuments(oldDocument: OpenAPI2Document, newDocument: Ope
   for (const definition in newDocument.definitions ?? {}) {
     // If not exists in old document, it might be an anonymous definition previously
     if (oldDocument.definitions?.[definition]) {
-      diffs.push(...compareNamedDefinition(oldDocument.definitions[definition], oldDocument, newDocument.definitions![definition], newDocument, definition));
+      diffs.push(
+        ...compareNamedDefinition(
+          oldDocument.definitions[definition],
+          oldDocument,
+          newDocument.definitions![definition],
+          newDocument,
+          definition,
+        ),
+      );
     }
   }
   return diffs;
 }
 
 const definitionNameCache: Set<string> = new Set();
-function compareNamedDefinition(oldDefinition: OpenAPI2Schema, oldDocument: OpenAPI2Document, newDefinition: OpenAPI2Schema, newDocument: OpenAPI2Document, name: string): DefinitionDiff[] {
+function compareNamedDefinition(
+  oldDefinition: OpenAPI2Schema,
+  oldDocument: OpenAPI2Document,
+  newDefinition: OpenAPI2Schema,
+  newDocument: OpenAPI2Document,
+  name: string,
+): DefinitionDiff[] {
   if (definitionNameCache.has(name)) {
     console.warn(`Definition "${name}" has been compared before, skipping.`);
     return [];
@@ -119,9 +159,11 @@ function compareNamedDefinition(oldDefinition: OpenAPI2Schema, oldDocument: Open
   const oldRequired = oldDefinition.required || [];
   const newRequired = newDefinition.required || [];
 
-  if (oldRequired.length !== newRequired.length ||
-    !oldRequired.every(item => newRequired.includes(item)) ||
-    !newRequired.every(item => oldRequired.includes(item))) {
+  if (
+    oldRequired.length !== newRequired.length ||
+    !oldRequired.every((item) => newRequired.includes(item)) ||
+    !newRequired.every((item) => oldRequired.includes(item))
+  ) {
     diffs.push({
       before: oldRequired,
       after: newRequired,
@@ -132,32 +174,37 @@ function compareNamedDefinition(oldDefinition: OpenAPI2Schema, oldDocument: Open
   }
 
   const oldProperties = getAllProperties(oldDefinition, oldDocument);
-  const sortedOldProperties = Object.keys(oldProperties).sort().reduce((obj: Record<string, OpenAPI2SchemaProperty>, key) => {
-    obj[key] = oldProperties[key];
-    return obj;
-  }, {});
+  const sortedOldProperties = Object.keys(oldProperties)
+    .sort()
+    .reduce((obj: Record<string, OpenAPI2SchemaProperty>, key) => {
+      obj[key] = oldProperties[key];
+      return obj;
+    }, {});
 
   const newProperties = getAllProperties(newDefinition, newDocument);
-  const sortedNewProperties = Object.keys(newProperties).sort().reduce((obj: Record<string, OpenAPI2SchemaProperty>, key) => {
-    obj[key] = newProperties[key];
-    return obj;
-  }, {});
+  const sortedNewProperties = Object.keys(newProperties)
+    .sort()
+    .reduce((obj: Record<string, OpenAPI2SchemaProperty>, key) => {
+      obj[key] = newProperties[key];
+      return obj;
+    }, {});
 
   // First check if the properties are the same
   const oldKeys = Object.keys(sortedOldProperties);
   const newKeys = Object.keys(sortedNewProperties);
   if (oldKeys.length !== newKeys.length) {
     // Check if newKeys has exactly one more key and it's systemData
-    const isSystemDataOnlyDifference = newKeys.length === oldKeys.length + 1 &&
-      newKeys.filter(key => !oldKeys.includes(key)).length === 1 &&
-      newKeys.filter(key => !oldKeys.includes(key))[0] === 'systemData';
+    const isSystemDataOnlyDifference =
+      newKeys.length === oldKeys.length + 1 &&
+      newKeys.filter((key) => !oldKeys.includes(key)).length === 1 &&
+      newKeys.filter((key) => !oldKeys.includes(key))[0] === "systemData";
 
     diffs.push({
       before: oldKeys,
       after: newKeys,
       name,
       type: "properties",
-      level: isSystemDataOnlyDifference ? "warning" : "error"
+      level: isSystemDataOnlyDifference ? "warning" : "error",
     });
   }
   for (const key of oldKeys) {
@@ -167,22 +214,22 @@ function compareNamedDefinition(oldDefinition: OpenAPI2Schema, oldDocument: Open
         after: newKeys,
         name,
         type: "properties",
-        level: "error"
+        level: "error",
       });
     }
   }
   for (const key of newKeys) {
     if (!oldKeys.includes(key)) {
       // Check if the only additional key is systemData
-      const additionalKeys = newKeys.filter(k => !oldKeys.includes(k));
-      const isOnlySystemData = additionalKeys.length === 1 && additionalKeys[0] === 'systemData';
+      const additionalKeys = newKeys.filter((k) => !oldKeys.includes(k));
+      const isOnlySystemData = additionalKeys.length === 1 && additionalKeys[0] === "systemData";
 
       diffs.push({
         before: oldKeys,
         after: newKeys,
         name,
         type: "properties",
-        level: isOnlySystemData ? "warning" : "error"
+        level: isOnlySystemData ? "warning" : "error",
       });
     }
   }
@@ -192,16 +239,25 @@ function compareNamedDefinition(oldDefinition: OpenAPI2Schema, oldDocument: Open
     const oldProperty = sortedOldProperties[key];
     const newProperty = sortedNewProperties[key];
     if (oldProperty && newProperty) {
-      diffs.push(...compareDefinitionProperty(oldProperty, newProperty, oldDocument, newDocument, key, name));
+      diffs.push(
+        ...compareDefinitionProperty(oldProperty, newProperty, oldDocument, newDocument, key, name),
+      );
     }
   }
 
   return diffs;
 }
 
-function compareDefinitionProperty(oldProperty: OpenAPI2SchemaProperty, newProperty: OpenAPI2SchemaProperty, oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document, propertyName: string, modelName: string): DefinitionDiff[] {
+function compareDefinitionProperty(
+  oldProperty: OpenAPI2SchemaProperty,
+  newProperty: OpenAPI2SchemaProperty,
+  oldDocument: OpenAPI2Document,
+  newDocument: OpenAPI2Document,
+  propertyName: string,
+  modelName: string,
+): DefinitionDiff[] {
   const diffs: DefinitionDiff[] = [];
-  
+
   // Compare x-ms-client-flatten
   const oldFlatten = (oldProperty as any)["x-ms-client-flatten"] ?? false;
   const newFlatten = (newProperty as any)["x-ms-client-flatten"] ?? false;
@@ -213,7 +269,7 @@ function compareDefinitionProperty(oldProperty: OpenAPI2SchemaProperty, newPrope
       propertyName,
       type: "property",
       changeType: "x-ms-client-flatten",
-      level: "error"
+      level: "error",
     });
   }
 
@@ -228,12 +284,19 @@ function compareDefinitionProperty(oldProperty: OpenAPI2SchemaProperty, newPrope
         propertyName,
         type: "property",
         changeType: "reference",
-        level: "warning"
+        level: "warning",
       });
     }
-  }
-  else if (!isRef(oldPropertySchema) && !isRef(newPropertySchema)) {
-    diffs.push(...compareNamedDefinition(oldPropertySchema, oldDocument, newPropertySchema, newDocument, `${modelName}.${propertyName}`));
+  } else if (!isRef(oldPropertySchema) && !isRef(newPropertySchema)) {
+    diffs.push(
+      ...compareNamedDefinition(
+        oldPropertySchema,
+        oldDocument,
+        newPropertySchema,
+        newDocument,
+        `${modelName}.${propertyName}`,
+      ),
+    );
   }
 
   return diffs;
@@ -251,20 +314,27 @@ function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Docume
         after: null,
         operationId,
         type: "operationId",
-        level: "error"
+        level: "error",
       });
-    }
-    else {
+    } else {
       if (oldOperations[operationId][0] !== newOperations[operationId][0]) {
         pathDiffs.push({
           before: oldOperations[operationId][0],
           after: newOperations[operationId][0],
           operationId,
           type: "path",
-          level: "error"
+          level: "error",
         });
       }
-      pathDiffs.push(...compareOperation(oldOperations[operationId][1], newOperations[operationId][1], operationId, oldDocument, newDocument));
+      pathDiffs.push(
+        ...compareOperation(
+          oldOperations[operationId][1],
+          newOperations[operationId][1],
+          operationId,
+          oldDocument,
+          newDocument,
+        ),
+      );
     }
   }
   for (const operationId in newOperations) {
@@ -274,14 +344,20 @@ function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Docume
         after: operationId,
         operationId,
         type: "operationId",
-        level: "error"
+        level: "error",
       });
     }
   }
   return pathDiffs;
 }
 
-function compareOperation(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string, oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document): PathDiff[] {
+function compareOperation(
+  oldOperation: OpenAPI2Operation,
+  newOperation: OpenAPI2Operation,
+  operationId: string,
+  oldDocument: OpenAPI2Document,
+  newDocument: OpenAPI2Document,
+): PathDiff[] {
   const pathDiffs: PathDiff[] = [];
 
   if (oldOperation.parameters?.length !== newOperation.parameters?.length) {
@@ -290,7 +366,7 @@ function compareOperation(oldOperation: OpenAPI2Operation, newOperation: OpenAPI
       after: newOperation.parameters?.length,
       operationId: operationId,
       type: "parameters",
-      level: "error"
+      level: "error",
     });
   }
 
@@ -300,12 +376,20 @@ function compareOperation(oldOperation: OpenAPI2Operation, newOperation: OpenAPI
   pathDiffs.push(...comparePagination(oldOperation, newOperation, operationId));
   pathDiffs.push(...compareLongRunning(oldOperation, newOperation, operationId));
   pathDiffs.push(...compareResponses(oldOperation, newOperation, operationId));
-  pathDiffs.push(...compareBodyParameter(oldOperation, newOperation, operationId, oldDocument, newDocument));
+  pathDiffs.push(
+    ...compareBodyParameter(oldOperation, newOperation, operationId, oldDocument, newDocument),
+  );
 
   return pathDiffs;
 }
 
-function compareBodyParameter(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string, oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document): PathDiff[] {
+function compareBodyParameter(
+  oldOperation: OpenAPI2Operation,
+  newOperation: OpenAPI2Operation,
+  operationId: string,
+  oldDocument: OpenAPI2Document,
+  newDocument: OpenAPI2Document,
+): PathDiff[] {
   const pathDiffs: PathDiff[] = [];
 
   const oldBodyParam = getBodyParameter(oldOperation, oldDocument);
@@ -320,7 +404,7 @@ function compareBodyParameter(oldOperation: OpenAPI2Operation, newOperation: Ope
       type: "parameter",
       parameterName: "body",
       changeType: "presence",
-      level: "error"
+      level: "error",
     });
     return pathDiffs;
   }
@@ -339,7 +423,7 @@ function compareBodyParameter(oldOperation: OpenAPI2Operation, newOperation: Ope
       type: "parameter",
       parameterName: "body",
       changeType: "required",
-      level: "error"
+      level: "error",
     });
   }
 
@@ -363,7 +447,7 @@ function compareBodyParameter(oldOperation: OpenAPI2Operation, newOperation: Ope
           type: "parameter",
           parameterName: "body",
           changeType: "schema",
-          level: "error"
+          level: "error",
         });
       }
     } else if (oldSchemaRef !== newSchemaRef) {
@@ -374,7 +458,7 @@ function compareBodyParameter(oldOperation: OpenAPI2Operation, newOperation: Ope
         type: "parameter",
         parameterName: "body",
         changeType: "schema",
-        level: "warning"
+        level: "warning",
       });
     }
   }
@@ -382,7 +466,10 @@ function compareBodyParameter(oldOperation: OpenAPI2Operation, newOperation: Ope
   return pathDiffs;
 }
 
-function getBodyParameter(operation: OpenAPI2Operation, document: OpenAPI2Document): OpenAPI2Parameter | undefined {
+function getBodyParameter(
+  operation: OpenAPI2Operation,
+  document: OpenAPI2Document,
+): OpenAPI2Parameter | undefined {
   for (const param of operation.parameters ?? []) {
     if (isRef(param)) {
       const resolvedParam = getOriginalParameter(param.$ref, document);
@@ -396,44 +483,62 @@ function getBodyParameter(operation: OpenAPI2Operation, document: OpenAPI2Docume
   return undefined;
 }
 
-function compareTags(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+function compareTags(
+  oldOperation: OpenAPI2Operation,
+  newOperation: OpenAPI2Operation,
+  operationId: string,
+): PathDiff[] {
   const oldTags = oldOperation.tags || [];
   const newTags = newOperation.tags || [];
 
   // Check if tags are different
-  if (oldTags.length !== newTags.length ||
-    !oldTags.every(tag => newTags.includes(tag)) ||
-    !newTags.every(tag => oldTags.includes(tag))) {
-    return [{
-      before: oldTags,
-      after: newTags,
-      operationId: operationId,
-      type: "tags",
-      level: "error"
-    }];
+  if (
+    oldTags.length !== newTags.length ||
+    !oldTags.every((tag) => newTags.includes(tag)) ||
+    !newTags.every((tag) => oldTags.includes(tag))
+  ) {
+    return [
+      {
+        before: oldTags,
+        after: newTags,
+        operationId: operationId,
+        type: "tags",
+        level: "error",
+      },
+    ];
   }
 
   return [];
 }
 
-function compareSummary(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+function compareSummary(
+  oldOperation: OpenAPI2Operation,
+  newOperation: OpenAPI2Operation,
+  operationId: string,
+): PathDiff[] {
   const oldSummary = oldOperation.summary ?? "";
   const newSummary = newOperation.summary ?? "";
 
   if (oldSummary !== newSummary) {
-    return [{
-      before: oldSummary,
-      after: newSummary,
-      operationId: operationId,
-      type: "summary",
-      level: "error"
-    }];
+    return [
+      {
+        before: oldSummary,
+        after: newSummary,
+        operationId: operationId,
+        type: "summary",
+        level: "error",
+      },
+    ];
   }
 
   return [];
 }
 
-function compareExternalDocs(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+function compareExternalDocs(
+  oldOperation: OpenAPI2Operation,
+  newOperation: OpenAPI2Operation,
+  operationId: string,
+): PathDiff[] {
   const oldExternalDocs = oldOperation.externalDocs;
   const newExternalDocs = newOperation.externalDocs;
 
@@ -444,35 +549,49 @@ function compareExternalDocs(oldOperation: OpenAPI2Operation, newOperation: Open
 
   // One is undefined, the other is not
   if ((!oldExternalDocs && newExternalDocs) || (oldExternalDocs && !newExternalDocs)) {
-    return [{
-      before: oldExternalDocs ?? null,
-      after: newExternalDocs ?? null,
-      operationId,
-      type: "externalDocs",
-      level: "error"
-    }];
+    return [
+      {
+        before: oldExternalDocs ?? null,
+        after: newExternalDocs ?? null,
+        operationId,
+        type: "externalDocs",
+        level: "error",
+      },
+    ];
   }
 
   // Compare url and description
-  if (oldExternalDocs!.url !== newExternalDocs!.url || 
-      oldExternalDocs!.description !== newExternalDocs!.description) {
-    return [{
-      before: oldExternalDocs,
-      after: newExternalDocs,
-      operationId,
-      type: "externalDocs",
-      level: "error"
-    }];
+  if (
+    oldExternalDocs!.url !== newExternalDocs!.url ||
+    oldExternalDocs!.description !== newExternalDocs!.description
+  ) {
+    return [
+      {
+        before: oldExternalDocs,
+        after: newExternalDocs,
+        operationId,
+        type: "externalDocs",
+        level: "error",
+      },
+    ];
   }
 
   return [];
 }
 
-function compareResponses(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+function compareResponses(
+  oldOperation: OpenAPI2Operation,
+  newOperation: OpenAPI2Operation,
+  operationId: string,
+): PathDiff[] {
   const pathDiffs: PathDiff[] = [];
 
-  const oldResponseCodes = Object.keys(oldOperation.responses ?? {}).filter(code => !code.startsWith("x-"));
-  const newResponseCodes = Object.keys(newOperation.responses ?? {}).filter(code => !code.startsWith("x-"));
+  const oldResponseCodes = Object.keys(oldOperation.responses ?? {}).filter(
+    (code) => !code.startsWith("x-"),
+  );
+  const newResponseCodes = Object.keys(newOperation.responses ?? {}).filter(
+    (code) => !code.startsWith("x-"),
+  );
 
   let sameResponseCodes = true;
   for (const code of oldResponseCodes) {
@@ -494,48 +613,73 @@ function compareResponses(oldOperation: OpenAPI2Operation, newOperation: OpenAPI
       after: newResponseCodes,
       operationId: operationId,
       type: "responses",
-      level: "error"
+      level: "error",
     });
   }
 
   for (const code of oldResponseCodes) {
-    pathDiffs.push(...compareResponse(oldOperation.responses?.[code], newOperation.responses?.[code], operationId));
+    pathDiffs.push(
+      ...compareResponse(
+        oldOperation.responses?.[code],
+        newOperation.responses?.[code],
+        operationId,
+      ),
+    );
   }
 
   return pathDiffs;
 }
 
-function compareResponse(oldResponse: Refable<OpenAPI2Response> | undefined, newResponse: Refable<OpenAPI2Response> | undefined, operationId: string): PathDiff[] {
+function compareResponse(
+  oldResponse: Refable<OpenAPI2Response> | undefined,
+  newResponse: Refable<OpenAPI2Response> | undefined,
+  operationId: string,
+): PathDiff[] {
   let oldSchema = getResponseSchema(oldResponse);
   let newSchema = getResponseSchema(newResponse);
   if (oldSchema !== newSchema) {
-    return [{
-      before: oldResponse,
-      after: newResponse,
-      operationId: operationId,
-      type: "response",
-      level: "error"
-    }];
+    return [
+      {
+        before: oldResponse,
+        after: newResponse,
+        operationId: operationId,
+        type: "response",
+        level: "error",
+      },
+    ];
   }
 
   return [];
 }
 
-function comparePagination(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
-  if ((oldOperation["x-ms-pageable"] === undefined && newOperation["x-ms-pageable"] !== undefined) || (oldOperation["x-ms-pageable"] !== undefined && newOperation["x-ms-pageable"] === undefined)) {
-    return [{
-      before: oldOperation["x-ms-pageable"],
-      after: newOperation["x-ms-pageable"],
-      operationId: operationId,
-      type: "pageable",
-      level: "error"
-    }];
+function comparePagination(
+  oldOperation: OpenAPI2Operation,
+  newOperation: OpenAPI2Operation,
+  operationId: string,
+): PathDiff[] {
+  if (
+    (oldOperation["x-ms-pageable"] === undefined && newOperation["x-ms-pageable"] !== undefined) ||
+    (oldOperation["x-ms-pageable"] !== undefined && newOperation["x-ms-pageable"] === undefined)
+  ) {
+    return [
+      {
+        before: oldOperation["x-ms-pageable"],
+        after: newOperation["x-ms-pageable"],
+        operationId: operationId,
+        type: "pageable",
+        level: "error",
+      },
+    ];
   }
 
   return [];
 }
 
-function compareLongRunning(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+function compareLongRunning(
+  oldOperation: OpenAPI2Operation,
+  newOperation: OpenAPI2Operation,
+  operationId: string,
+): PathDiff[] {
   const pathDiffs: PathDiff[] = [];
 
   const oldLongRunning = oldOperation["x-ms-long-running-operation"] === true;
@@ -546,24 +690,27 @@ function compareLongRunning(oldOperation: OpenAPI2Operation, newOperation: OpenA
       after: newLongRunning,
       operationId: operationId,
       type: "longrunning",
-      level: "error"
+      level: "error",
     });
   }
 
-  const oldFinalState = oldOperation["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
-  const newFinalState = newOperation["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
+  const oldFinalState =
+    oldOperation["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
+  const newFinalState =
+    newOperation["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
   if (oldFinalState !== newFinalState) {
     pathDiffs.push({
       before: oldFinalState,
       after: newFinalState,
       operationId: operationId,
       type: "finalstate",
-      level: "error"
+      level: "error",
     });
   }
 
   if (oldLongRunning) {
-    const newFinalResult = newOperation["x-ms-long-running-operation-options"]?.["final-state-schema"];
+    const newFinalResult =
+      newOperation["x-ms-long-running-operation-options"]?.["final-state-schema"];
     const newFinalResultSchema = newFinalResult?.split("/").pop();
     if (newFinalResultSchema !== getResponseSchema(oldOperation.responses?.["200"])) {
       pathDiffs.push({
@@ -571,7 +718,7 @@ function compareLongRunning(oldOperation: OpenAPI2Operation, newOperation: OpenA
         after: newFinalResultSchema,
         operationId: operationId,
         type: "finalresult",
-        level: "error"
+        level: "error",
       });
     }
   }
@@ -580,7 +727,11 @@ function compareLongRunning(oldOperation: OpenAPI2Operation, newOperation: OpenA
 }
 
 function getResponseSchema(response: Refable<OpenAPI2Response> | undefined): string | undefined {
-  if (response && (response as OpenAPI2Response).schema && ((response as OpenAPI2Response).schema as any).$ref) {
+  if (
+    response &&
+    (response as OpenAPI2Response).schema &&
+    ((response as OpenAPI2Response).schema as any).$ref
+  ) {
     const refPath = ((response as OpenAPI2Response).schema as any).$ref;
     return refPath.split("/").pop();
   }
@@ -588,8 +739,9 @@ function getResponseSchema(response: Refable<OpenAPI2Response> | undefined): str
   return undefined;
 }
 
-
-function organizeOperationById(document: OpenAPI2Document): Record<string, [string, OpenAPI2Operation]> {
+function organizeOperationById(
+  document: OpenAPI2Document,
+): Record<string, [string, OpenAPI2Operation]> {
   function isHttpMethod(key: string): key is HttpMethod {
     const httpMethods: HttpMethod[] = [
       "get",
@@ -624,22 +776,24 @@ function organizeOperationById(document: OpenAPI2Document): Record<string, [stri
   return operationMap;
 }
 
-function getAllProperties(schema: OpenAPI2Schema, document: OpenAPI2Document, properties: Record<string, OpenAPI2SchemaProperty> = {}): Record<string, OpenAPI2SchemaProperty> {
+function getAllProperties(
+  schema: OpenAPI2Schema,
+  document: OpenAPI2Document,
+  properties: Record<string, OpenAPI2SchemaProperty> = {},
+): Record<string, OpenAPI2SchemaProperty> {
   for (const baseSchema of schema.allOf ?? []) {
     if (isRef(baseSchema)) {
       const refPath = baseSchema.$ref;
       const commonTypeDefinition = getCommonTypeDefinition(refPath);
       if (commonTypeDefinition) {
         getAllProperties(commonTypeDefinition[0], commonTypeDefinition[1], properties);
-      }
-      else {
+      } else {
         const baseDefinition = getLocalDefinition(refPath, document);
         if (baseDefinition) {
           getAllProperties(baseDefinition, document, properties);
         }
       }
-    }
-    else {
+    } else {
       if (baseSchema.properties) {
         for (const key in baseSchema.properties) {
           properties[key] = baseSchema.properties[key];
@@ -668,7 +822,10 @@ function resolveCommonType(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProp
   return property;
 }
 
-function getLocalDefinition(refPath: string, document: OpenAPI2Document): OpenAPI2Schema | undefined {
+function getLocalDefinition(
+  refPath: string,
+  document: OpenAPI2Document,
+): OpenAPI2Schema | undefined {
   const definitionName = refPath.split("/").pop();
   if (!document.definitions || !document.definitions[definitionName!]) {
     console.warn(`Reference to ${definitionName} cannot be found, skipping.`);

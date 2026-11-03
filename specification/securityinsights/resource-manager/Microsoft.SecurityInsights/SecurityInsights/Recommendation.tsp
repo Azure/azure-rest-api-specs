@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -82,6 +83,10 @@ interface Recommendations {
 @@format(Recommendation.name, "uuid");
 @@doc(Recommendation.name, "Recommendation Id.");
 @@doc(Recommendation.properties, "Recommendation properties object.");
-@@doc(Recommendations.recommendation::parameters.properties,
+@@doc(
+  Recommendations.recommendation::parameters.properties,
   "Recommendation Fields to Update."
 );
+
+@@added(Recommendation, Versions.v2025_10_01_preview);
+@@added(Recommendations, Versions.v2025_10_01_preview);

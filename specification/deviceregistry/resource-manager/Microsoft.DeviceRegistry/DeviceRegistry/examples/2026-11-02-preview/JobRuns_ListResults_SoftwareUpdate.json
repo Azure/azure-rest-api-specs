@@ -1,0 +1,62 @@
+{
+  "title": "List Results for a Software Update Job Run",
+  "description": "Browse the results of a software update job run to find individual device statuses.",
+  "operationId": "JobRuns_ListResults",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "body": {},
+    "jobName": "adr-job-update-01",
+    "namespaceName": "namespace-1",
+    "resourceGroupName": "myResourceGroup",
+    "runName": "c560dcd9-cd8e-413b-859c-d0ebcb94236f",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/registryDevices/adr-device-001",
+            "resourceType": "Microsoft.DeviceRegistry/namespaces/registryDevices",
+            "resourceUuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275",
+            "status": "Succeeded"
+          },
+          {
+            "installResult": {
+              "failureOrigin": "ADU_MANAGED_RESOURCE",
+              "outcome": "FAILED",
+              "resultCode": -1,
+              "extendedResultCodes": "c00e5011",
+              "resultDetails": "Failed to download update payload from CDN.",
+              "stepResults": [
+                {
+                  "failureOrigin": "ADU_MANAGED_RESOURCE",
+                  "outcome": "FAILED",
+                  "resultCode": -1,
+                  "extendedResultCodes": "c00e5011",
+                  "resultDetails": "Download step failed.",
+                  "updateId": {
+                    "name": "firmware",
+                    "provider": "contoso",
+                    "version": "2.0.0"
+                  }
+                }
+              ]
+            },
+            "reason": "DOWNLOAD_FAILED",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/registryDevices/adr-device-002",
+            "resourceType": "Microsoft.DeviceRegistry/namespaces/registryDevices",
+            "resourceUuid": "a2b6c33d-8f01-4e22-b774-771b7fa46f88",
+            "status": "Failed"
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/registryDevices/adr-device-003",
+            "resourceType": "Microsoft.DeviceRegistry/namespaces/registryDevices",
+            "resourceUuid": "f3812ab0-91dd-4c51-8a4d-2c5b6d7e8f90",
+            "status": "InProgress"
+          }
+        ]
+      }
+    }
+  }
+}

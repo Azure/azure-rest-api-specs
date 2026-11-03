@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkManager.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -71,7 +73,10 @@ interface NetworkManagerRoutingConfigurations {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -99,12 +104,15 @@ interface NetworkManagerRoutingConfigurations {
   >;
 }
 
-@@doc(NetworkManagerRoutingConfiguration.name,
+@@doc(
+  NetworkManagerRoutingConfiguration.name,
   "The name of the network manager Routing Configuration."
 );
-@@doc(NetworkManagerRoutingConfiguration.properties,
+@@doc(
+  NetworkManagerRoutingConfiguration.properties,
   "Indicates the properties for the network manager routing configuration."
 );
-@@doc(NetworkManagerRoutingConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkManagerRoutingConfigurations.createOrUpdate::parameters.resource,
   "The routing configuration to create or update"
 );

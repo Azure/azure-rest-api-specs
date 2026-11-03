@@ -15,6 +15,12 @@ model CacheRuleProperties {
   credentialSetResourceId?: string;
 
   /**
+   * Authentication configuration used by the cache rule to access the upstream source repository.
+   */
+  @added(Versions.vLatestPreview)
+  additionalAuthenticationProperties?: AdditionalAuthenticationProperties;
+
+  /**
    * Source repository pulled from upstream.
    */
   sourceRepository?: string;
@@ -37,6 +43,64 @@ model CacheRuleProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * The type of authentication configuration used by a cache rule to access an upstream registry.
+ */
+@added(Versions.vLatestPreview)
+union AdditionalAuthenticationType {
+  string,
+
+  /**
+   * Google Artifact Registry (GAR) authentication via workload identity federation.
+   */
+  GoogleArtifactRegistry: "GoogleArtifactRegistry",
+}
+
+/**
+ * Authentication configuration used by a cache rule to access an upstream registry.
+ */
+@discriminator("authenticationType")
+@added(Versions.vLatestPreview)
+model AdditionalAuthenticationProperties {
+  /**
+   * Authentication type discriminator.
+   */
+  authenticationType: AdditionalAuthenticationType;
+}
+
+/**
+ * Google Artifact Registry (GAR) authentication configuration.
+ */
+@added(Versions.vLatestPreview)
+model GarAuthenticationProperties extends AdditionalAuthenticationProperties {
+  authenticationType: "GoogleArtifactRegistry";
+
+  /**
+   * The Google Cloud Platform project that is configured for authentication
+   * Permissions should be granted to principal://iam.googleapis.com/projects/{ProjectNumber}/locations/global/workloadIdentityPools/{WorkloadIdentityPool}/providers/{WorkloadIdentityProvider}/subject/{ManagedIdentityPrincipal}
+   */
+  @minLength(5)
+  @maxLength(30)
+  @pattern("^[1-9][0-9]{4,29}$")
+  projectNumber: string;
+
+  /**
+   * The Google Cloud platform workload identity pool used for authentication.
+   */
+  @minLength(4)
+  @maxLength(32)
+  @pattern("^[a-z][a-z0-9-]{2,30}[a-z0-9]$")
+  workloadIdentityPool: string;
+
+  /**
+   * The Google Cloud Platform workload identity provider used for authentication.
+   */
+  @minLength(4)
+  @maxLength(32)
+  @pattern("^[a-z][a-z0-9-]{2,30}[a-z0-9]$")
+  workloadIdentityProvider: string;
 }
 
 /**
@@ -66,6 +130,12 @@ model CacheRuleUpdateProperties {
    * The ARM resource ID of the credential store which is associated with the Cache rule.
    */
   credentialSetResourceId?: string;
+
+  /**
+   * Authentication configuration used by the cache rule to access the upstream source repository.
+   */
+  @added(Versions.vLatestPreview)
+  additionalAuthenticationProperties?: AdditionalAuthenticationProperties;
 }
 
 /**

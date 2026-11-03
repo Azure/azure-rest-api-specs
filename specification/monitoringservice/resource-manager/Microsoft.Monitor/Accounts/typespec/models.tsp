@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Monitor {
   /**
@@ -28,6 +30,40 @@ namespace Microsoft.Monitor {
     is Page<AzureMonitorWorkspaceResource>;
 
   /**
+   * Query endpoints for an Azure Monitor Workspace.
+   */
+  @added(Versions.v2026_09_03_preview)
+  model AzureMonitorWorkspaceEndpoints {
+    /**
+     * The query endpoint for the Azure Monitor Workspace.
+     */
+    @visibility(Lifecycle.Read)
+    query?: url;
+  }
+
+  /**
+   * A reference to an Azure Monitor action group.
+   */
+  @added(Versions.v2026_09_03_preview)
+  model DefaultActionGroupResource {
+    /**
+     * The resource ID of the action group.
+     */
+    id?: armResourceIdentifier;
+  }
+
+  /**
+   * Action configuration for an Azure Monitor Workspace.
+   */
+  @added(Versions.v2026_09_03_preview)
+  model AzureMonitorWorkspaceActions {
+    /**
+     * The default action groups associated with the Azure Monitor Workspace.
+     */
+    defaultActionGroups?: DefaultActionGroupResource[];
+  }
+
+  /**
    * Properties of an Azure Monitor Workspace
    */
   model AzureMonitorWorkspace {
@@ -40,7 +76,6 @@ namespace Microsoft.Monitor {
     /**
      * Properties related to the metrics container in the Azure Monitor Workspace
      */
-    @visibility(Lifecycle.Read)
     metrics?: AzureMonitorWorkspaceMetrics;
 
     /**
@@ -56,6 +91,13 @@ namespace Microsoft.Monitor {
     defaultIngestionSettings?: AzureMonitorWorkspaceDefaultIngestionSettings;
 
     /**
+     * Query endpoints for the Azure Monitor Workspace.
+     */
+    @added(Versions.v2026_09_03_preview)
+    @visibility(Lifecycle.Read)
+    endpoints?: AzureMonitorWorkspaceEndpoints;
+
+    /**
      * List of private endpoint connections
      */
     @visibility(Lifecycle.Read)
@@ -66,6 +108,12 @@ namespace Microsoft.Monitor {
      * Gets or sets allow or disallow public network access to Azure Monitor Workspace
      */
     publicNetworkAccess?: PublicNetworkAccess;
+
+    /**
+     * Action configuration for the Azure Monitor Workspace.
+     */
+    @added(Versions.v2026_09_03_preview)
+    actions?: AzureMonitorWorkspaceActions;
   }
 
   /**
@@ -141,5 +189,41 @@ namespace Microsoft.Monitor {
       SegmentName = "accounts",
       NamePattern = "^(?!-)[a-zA-Z0-9-]+[^-]$"
     >;
+    ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserving lowercase 'etag' from original swagger to avoid breaking change"
+    ...Azure.ResourceManager.Legacy.EntityTagProperty;
   }
 }
+
+@@TypeSpec.Versioning.added(
+  Microsoft.Monitor.AzureMonitorWorkspaceResource.identity,
+  Microsoft.Monitor.Versions.v2025_10_03_stable
+);
+
+namespace Microsoft.Monitor {
+  /**
+   * The type used for updating an Azure Monitor Workspace
+   */
+  model AzureMonitorWorkspaceResourceUpdate {
+    /**
+     * Resource tags.
+     */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags is a standard ARM update pattern"
+    tags?: Record<string>;
+
+    /**
+     * The managed service identities assigned to this resource.
+     */
+    identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+
+    /**
+     * Resource properties
+     */
+    properties?: AzureMonitorWorkspace;
+  }
+}
+
+@@TypeSpec.Versioning.added(
+  Microsoft.Monitor.AzureMonitorWorkspaceResourceUpdate.identity,
+  Microsoft.Monitor.Versions.v2025_10_03_stable
+);

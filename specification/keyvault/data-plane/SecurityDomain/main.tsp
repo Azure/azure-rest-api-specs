@@ -7,6 +7,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -63,4 +64,24 @@ enum Versions {
    * The 2026-01-01-preview API version.
    */
   v2026_01_01_preview: "2026-01-01-preview",
+
+  /**
+   * The 2026-03-01-preview API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
+
+  /**
+   * The 2026-04-01 API version.
+   */
+  v2026_04_01: "2026-04-01",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  v2026_05_01_preview: "2026-05-01-preview",
+
+  /**
+   * The 2026-07-01-preview API version.
+   */
+  v2026_07_01_preview: "2026-07-01-preview",
 }

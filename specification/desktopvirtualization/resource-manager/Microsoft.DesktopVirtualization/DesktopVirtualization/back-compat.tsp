@@ -7,21 +7,48 @@ import "./Workspace.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.DesktopVirtualization;
 
+@@visibility(ActiveSessionHostConfigurationList.nextLink, Lifecycle.Read);
+@@visibility(AppAttachPackageList.nextLink, Lifecycle.Read);
+@@visibility(ApplicationGroupList.nextLink, Lifecycle.Read);
+@@visibility(ApplicationList.nextLink, Lifecycle.Read);
+@@visibility(DesktopList.nextLink, Lifecycle.Read);
+@@visibility(ExpandMsixImageList.nextLink, Lifecycle.Read);
+@@visibility(HostPoolList.nextLink, Lifecycle.Read);
+@@visibility(MSIXPackageList.nextLink, Lifecycle.Read);
+@@visibility(
+  PrivateEndpointConnectionListResultWithSystemData.nextLink,
+  Lifecycle.Read
+);
+@@visibility(PrivateLinkResourceListResult.nextLink, Lifecycle.Read);
+@@visibility(ResourceProviderOperationListResult.nextLink, Lifecycle.Read);
+@@visibility(ScalingPlanList.nextLink, Lifecycle.Read);
+@@visibility(ScalingPlanPersonalScheduleList.nextLink, Lifecycle.Read);
+@@visibility(ScalingPlanPooledScheduleList.nextLink, Lifecycle.Read);
+@@visibility(SessionHostConfigurationList.nextLink, Lifecycle.Read);
+@@visibility(SessionHostList.nextLink, Lifecycle.Read);
+@@visibility(SessionHostManagementList.nextLink, Lifecycle.Read);
+@@visibility(StartMenuItemList.nextLink, Lifecycle.Read);
+@@visibility(UserSessionList.nextLink, Lifecycle.Read);
+@@visibility(WorkspaceList.nextLink, Lifecycle.Read);
+
 @@clientName(CustomPrivateEndpointConnection, "PrivateEndpointConnections");
 
 @@clientName(AppAttachPackages, "AppAttachPackage");
 
-@@clientName(AppAttachPackages.createOrUpdate::parameters.resource,
+@@clientName(
+  AppAttachPackages.createOrUpdate::parameters.resource,
   "appAttachPackage"
 );
 
 @@clientName(Applications.createOrUpdate::parameters.resource, "application");
 
-@@clientName(CustomPrivateEndpointConnection.updateByWorkspace::parameters.resource,
+@@clientName(
+  CustomPrivateEndpointConnection.updateByWorkspace::parameters.resource,
   "connection"
 );
 
-@@clientName(CustomPrivateEndpointConnection.updateByHostPool::parameters.resource,
+@@clientName(
+  CustomPrivateEndpointConnection.updateByHostPool::parameters.resource,
   "connection"
 );
 
@@ -29,29 +56,35 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(ScalingPlans.create::parameters.resource, "scalingPlan");
 
-@@clientName(ScalingPlanPersonalSchedules.create::parameters.resource,
+@@clientName(
+  ScalingPlanPersonalSchedules.create::parameters.resource,
   "scalingPlanSchedule"
 );
 
-@@clientName(ScalingPlanPooledSchedules.create::parameters.resource,
+@@clientName(
+  ScalingPlanPooledSchedules.create::parameters.resource,
   "scalingPlanSchedule"
 );
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "workspace");
 
-@@clientName(ControlSessionHostUpdate.post::parameters.body,
+@@clientName(
+  ControlSessionHostUpdate.post::parameters.body,
   "hostPoolUpdateControlParameter"
 );
 
-@@clientName(ControlSessionHostProvisioning.post::parameters.body,
+@@clientName(
+  ControlSessionHostProvisioning.post::parameters.body,
   "hostPoolProvisioningControlParameter"
 );
 
-@@clientName(SessionHostManagements.createOrUpdate::parameters.resource,
+@@clientName(
+  SessionHostManagements.createOrUpdate::parameters.resource,
   "sessionHostManagement"
 );
 
-@@clientName(SessionHostConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  SessionHostConfigurations.createOrUpdate::parameters.resource,
   "sessionHostConfiguration"
 );
 
@@ -59,92 +92,120 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(MSIXPackages.update::parameters.properties, "msixPackage");
 
-@@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
+@@pattern(
+  Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );
 
-@@clientName(MSIXImages, "MsixImages", "autorest");
+@@clientName(MSIXImages, "MsixImages", "autorest,java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ActiveSessionHostConfiguration.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ActiveSessionHostConfiguration.properties,
+  "autorest,java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationGroup.properties,
+  "autorest,java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AppAttachPackage.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationGroup.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Application.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AppAttachPackage.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Desktop.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Application.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HostPool.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Desktop.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MSIXPackage.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HostPool.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Workspace.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MSIXPackage.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnectionWithSystemData.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties,
+  "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnectionWithSystemData.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPersonalSchedule.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPersonalSchedule.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlan.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlan.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPooledSchedule.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPooledSchedule.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SessionHost.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHost.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SessionHostConfiguration.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHostConfiguration.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SessionHostManagement.properties,
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHostManagement.properties,
-  "autorest"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserSession.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  UserSession.properties,
+  "autorest,java"
 );
 
-@@Azure.ClientGenerator.Core.clientName(AppAttachPackageInfo.`import`::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(
+  AppAttachPackageInfo.`import`::parameters.body,
   "importPackageInfoRequest"
 );
-@@doc(AppAttachPackageInfo.`import`::parameters.body,
+@@doc(
+  AppAttachPackageInfo.`import`::parameters.body,
   "Information to import app attach package"
 );
-@@Azure.ClientGenerator.Core.clientName(MSIXImages.expand::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(
+  MSIXImages.expand::parameters.body,
   "msixImageURI"
 );
-@@doc(MSIXImages.expand::parameters.body,
+@@doc(
+  MSIXImages.expand::parameters.body,
   "Represents URI referring to MSIX Image"
 );
-@@Azure.ClientGenerator.Core.clientName(InitiateSessionHostUpdate.post::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(
+  InitiateSessionHostUpdate.post::parameters.body,
   "updateSessionHostsRequestBody"
 );
-@@doc(InitiateSessionHostUpdate.post::parameters.body,
+@@doc(
+  InitiateSessionHostUpdate.post::parameters.body,
   "The resource properties to be updated"
 );

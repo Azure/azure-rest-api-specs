@@ -14,8 +14,10 @@ namespace Microsoft.DevTestLab;
 /**
  * A schedule.
  */
-model Schedule
-  is Azure.ResourceManager.ProxyResource<ScheduleProperties, false> {
+model Schedule is Azure.ResourceManager.ProxyResource<
+  ScheduleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Schedule,
     KeyName = "scheduleName",
@@ -522,16 +524,19 @@ interface VirtualMachineSchedules {
 //@@doc(Schedule.tags, "The tags of the resource.");
 @@doc(GlobalSchedules.createOrUpdate::parameters.resource, "A schedule.");
 @@doc(GlobalSchedules.update::parameters.properties, "A schedule.");
-@@doc(GlobalSchedules.retarget::parameters.body,
+@@doc(
+  GlobalSchedules.retarget::parameters.body,
   "Properties for retargeting a virtual machine schedule."
 );
 @@doc(Schedules.createOrUpdate::parameters.resource, "A schedule.");
 @@doc(Schedules.update::parameters.properties, "A schedule.");
-@@doc(ServiceFabricSchedules.createOrUpdate::parameters.resource,
+@@doc(
+  ServiceFabricSchedules.createOrUpdate::parameters.resource,
   "A schedule."
 );
 @@doc(ServiceFabricSchedules.update::parameters.properties, "A schedule.");
-@@doc(VirtualMachineSchedules.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineSchedules.createOrUpdate::parameters.resource,
   "A schedule."
 );
 @@doc(VirtualMachineSchedules.update::parameters.properties, "A schedule.");

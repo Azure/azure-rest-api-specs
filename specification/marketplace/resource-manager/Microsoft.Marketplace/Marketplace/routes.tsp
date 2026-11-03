@@ -9,6 +9,7 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Private;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Marketplace;
@@ -18,6 +19,8 @@ interface PrivateStoreCollectionOperationGroup {
   /**
    * Delete Private store collection. This is a workaround.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.legacyResourceOperation(Collection, "action")
   @route("/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}")
   @post
   post(
@@ -36,6 +39,7 @@ interface PrivateStoreCollectionOperationGroup {
     collectionId: string,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing post.payload retains its request-body shape; preserve wire compatibility."
     @bodyRoot
     payload?: Operation,
   ): OkResponse | ErrorResponse;
@@ -46,6 +50,8 @@ interface PrivateStoreCollectionOfferOperationGroup {
   /**
    * Delete Private store offer. This is a workaround.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.legacyResourceOperation(Offer, "action")
   @route("/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}")
   @post
   post(
@@ -70,6 +76,7 @@ interface PrivateStoreCollectionOfferOperationGroup {
     offerId: string,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing post.payload retains its request-body shape; preserve wire compatibility."
     @bodyRoot
     payload?: Operation,
   ): OkResponse | ErrorResponse;

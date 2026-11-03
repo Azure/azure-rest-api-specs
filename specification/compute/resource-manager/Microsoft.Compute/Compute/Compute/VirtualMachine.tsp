@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
@@ -9,6 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
+using TypeSpec.Versioning;
 
 namespace Compute;
 /**
@@ -248,8 +250,17 @@ interface VirtualMachines {
       /**
        * Optional parameter to hibernate a virtual machine.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing deallocate POST contract uses hibernate in the query; preserve wire compatibility."
       @query("hibernate")
       hibernate?: boolean;
+
+      /**
+       * Optional parameter to force deallocate a virtual machine. Default is false.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing deallocate POST contract uses forceDeallocate in the query; preserve wire compatibility."
+      @added(Versions.v2025_11_01)
+      @query("forceDeallocate")
+      forceDeallocate?: boolean;
     },
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -271,6 +282,7 @@ interface VirtualMachines {
   /**
    * Retrieves information about the run-time state of a virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @get
   instanceView is ComputeResourceActionSync<
     VirtualMachine,
@@ -299,6 +311,7 @@ interface VirtualMachines {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing powerOff POST contract uses skipShutdown in the query; preserve wire compatibility."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },
@@ -358,6 +371,7 @@ interface VirtualMachines {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing retrieveBootDiagnosticsData POST contract uses sasUriExpirationTimeInMinutes in the query; preserve wire compatibility."
       @query("sasUriExpirationTimeInMinutes")
       sasUriExpirationTimeInMinutes?: int32;
     }
@@ -385,6 +399,7 @@ interface VirtualMachines {
   /**
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @get
   @action("vmSizes")
   @list
@@ -420,30 +435,39 @@ interface VirtualMachines {
 }
 
 @@doc(VirtualMachine.name, "The name of the virtual machine.");
-@@doc(VirtualMachine.properties,
+@@doc(
+  VirtualMachine.properties,
   "Describes the properties of a Virtual Machine."
 );
-@@doc(VirtualMachines.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachines.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine operation."
 );
-@@doc(VirtualMachines.update::parameters.properties,
+@@doc(
+  VirtualMachines.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine operation."
 );
-@@doc(VirtualMachines.attachDetachDataDisks::parameters.body,
+@@doc(
+  VirtualMachines.attachDetachDataDisks::parameters.body,
   "Parameters supplied to the attach and detach data disks operation on the virtual machine."
 );
-@@doc(VirtualMachines.capture::parameters.body,
+@@doc(
+  VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
 );
-@@doc(VirtualMachines.installPatches::parameters.body,
+@@doc(
+  VirtualMachines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"
 );
-@@doc(VirtualMachines.reimage::parameters.body,
+@@doc(
+  VirtualMachines.reimage::parameters.body,
   "Parameters supplied to the Reimage Virtual Machine operation."
 );
-@@doc(VirtualMachines.runCommand::parameters.body,
+@@doc(
+  VirtualMachines.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."
 );
-@@doc(VirtualMachines.migrateToVMScaleSet::parameters.body,
+@@doc(
+  VirtualMachines.migrateToVMScaleSet::parameters.body,
   "Parameters supplied to the Migrate Virtual Machine operation."
 );

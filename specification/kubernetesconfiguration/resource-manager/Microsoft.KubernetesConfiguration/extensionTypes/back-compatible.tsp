@@ -9,16 +9,20 @@ using Microsoft.KubernetesConfiguration;
 @@clientLocation(ExtensionTypeOperationGroup.get, ExtensionTypes);
 @@clientLocation(ExtensionTypeOperationGroup.list, ExtensionTypes);
 
-@@clientLocation(ExtensionTypeVersionForReleaseTrains.getVersion,
+@@clientLocation(
+  ExtensionTypeVersionForReleaseTrains.getVersion,
   ExtensionTypes
 );
-@@clientLocation(ExtensionTypeVersionForReleaseTrains.listVersions,
+@@clientLocation(
+  ExtensionTypeVersionForReleaseTrains.listVersions,
   ExtensionTypes
 );
-@@clientLocation(ExtensionTypeVersionForReleaseTrainOperationGroup.clusterGetVersion,
+@@clientLocation(
+  ExtensionTypeVersionForReleaseTrainOperationGroup.clusterGetVersion,
   ExtensionTypes
 );
-@@clientLocation(ExtensionTypeVersionForReleaseTrainOperationGroup.clusterListVersions,
+@@clientLocation(
+  ExtensionTypeVersionForReleaseTrainOperationGroup.clusterListVersions,
   ExtensionTypes
 );
 @@visibility(ExtensionTypeVersionsList.value, Lifecycle.Read);

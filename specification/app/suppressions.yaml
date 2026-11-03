@@ -1,0 +1,10 @@
+- tool: TypeSpecValidation
+  reason: >
+    Don't have namespace approval.
+    Responsibility: Spec owner would update missing configurations.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-typespec/http-client-csharp-mgmt.*
+  paths:
+    - resource-manager/Microsoft.App/SreAgent/tspconfig.yaml

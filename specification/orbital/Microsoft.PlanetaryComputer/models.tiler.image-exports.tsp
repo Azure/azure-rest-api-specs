@@ -57,6 +57,7 @@ model ImageParameters {
 /**
  * Response model for image exports
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImageResponse {
   /**
    * URL of the exported image

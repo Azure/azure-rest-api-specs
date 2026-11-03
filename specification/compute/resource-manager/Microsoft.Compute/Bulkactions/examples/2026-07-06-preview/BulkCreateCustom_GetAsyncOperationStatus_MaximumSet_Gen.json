@@ -1,0 +1,58 @@
+{
+  "title": "BulkCreateCustom_GetAsyncOperationStatus_MaximumSet",
+  "operationId": "BulkCreateCustom_GetAsyncOperationStatus",
+  "parameters": {
+    "api-version": "2026-07-06-preview",
+    "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
+    "location": "eastus",
+    "asyncOperationId": "f1ac145b-9d8b-417d-8101-9962d03c0904"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/providers/Microsoft.Compute/locations/eastus/bulkCreateCustom/f1ac145b-9d8b-417d-8101-9962d03c0904",
+        "name": "f1ac145b-9d8b-417d-8101-9962d03c0904",
+        "status": "Failed",
+        "percentComplete": 100,
+        "startTime": "2026-07-08T18:20:00Z",
+        "endTime": "2026-07-08T18:35:00Z",
+        "operations": [
+          {
+            "id": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/providers/Microsoft.Compute/locations/eastus/bulkCreateCustom/9d8e1f2a-3b4c-4d5e-6f7a-8b9c0d1e2f3a",
+            "name": "9d8e1f2a-3b4c-4d5e-6f7a-8b9c0d1e2f3a",
+            "resourceId": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/resourceGroups/rgBulkactions/providers/Microsoft.Compute/virtualMachines/bulkvm-payments-0",
+            "status": "Failed",
+            "percentComplete": 100,
+            "startTime": "2026-07-08T18:20:00Z",
+            "endTime": "2026-07-08T18:32:00Z",
+            "operations": [],
+            "error": {
+              "code": "OverconstrainedAllocationRequest",
+              "message": "Allocation failed. The requested VM size Standard_D2s_v5 is not available in zone 1 of region eastus.",
+              "target": "bulkvm-payments-0",
+              "details": [],
+              "additionalInfo": [
+                {
+                  "type": "AllocationFailureDetails",
+                  "info": {
+                    "availableZones": [
+                      "2",
+                      "3"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "error": {
+          "code": "PartialAllocationFailure",
+          "message": "One or more virtual machines in the bulk operation failed to allocate.",
+          "target": "bulkCreateCustom",
+          "details": [],
+          "additionalInfo": []
+        }
+      }
+    }
+  }
+}

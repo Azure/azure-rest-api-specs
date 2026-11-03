@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkManager.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -66,12 +68,10 @@ interface NetworkGroups {
       @header("If-Match")
       IfMatch?: string;
     },
-    Response = (ArmResponse<NetworkGroup> &
-      NetworkGroupCreateOrUpdateEtagHeader) | (ArmCreatedResponse<
-      NetworkGroup,
-      {}
-    > &
-      NetworkGroupCreateOrUpdateEtagHeader),
+    Response =
+      | (ArmResponse<NetworkGroup> & NetworkGroupCreateOrUpdateEtagHeader)
+      | (ArmCreatedResponse<NetworkGroup, {}> &
+          NetworkGroupCreateOrUpdateEtagHeader),
     Error = CloudError
   >;
 
@@ -88,7 +88,10 @@ interface NetworkGroups {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -118,6 +121,7 @@ interface NetworkGroups {
 
 @@doc(NetworkGroup.name, "The name of the network group.");
 @@doc(NetworkGroup.properties, "The Network Group properties");
-@@doc(NetworkGroups.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the specify which network group need to create"
 );

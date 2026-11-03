@@ -2,21 +2,25 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./SessionHostManagement.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DesktopVirtualization;
 
 /**
  * Schema for SessionHostManagementUpdateStatus properties.
+ * @Introduced in 2024-04-08-preview
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition over inheritance"
 @parentResource(SessionHostManagement)
 @singleton("default")
+@added(Versions.vLatestPreview)
 model SessionHostManagementUpdateStatus {
   /** Fully qualified ID for the async operation. */
   id?: Azure.Core.armResourceIdentifier;
@@ -41,7 +45,10 @@ model SessionHostManagementUpdateStatus {
   ...StatusProperty;
   ...UpdateStatusProperty;
 }
-
+/**
+ * @Introduced in 2023-11-01-preview
+ */
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface SessionHostManagementUpdateStatuses {
   /**

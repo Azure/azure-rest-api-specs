@@ -105,6 +105,7 @@ interface Appliances {
       /**
        * This sets the type of artifact being returned, when empty no artifact endpoint is returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listKeys POST contract uses artifactType in the query; preserve wire compatibility."
       @query("artifactType")
       artifactType?: string;
     }
@@ -160,12 +161,15 @@ alias ApplianceOps = Azure.ResourceManager.Legacy.RoutedOperations<
 @@minLength(Appliance.name, 1);
 @@doc(Appliance.name, "Appliances name.");
 @@doc(Appliance.properties, "The set of properties specific to an Appliance");
-@@doc(Appliances.createOrUpdate::parameters.resource,
+@@doc(
+  Appliances.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update an Appliance."
 );
-@@doc(Appliances.update::parameters.properties,
+@@doc(
+  Appliances.update::parameters.properties,
   "The updatable fields of an existing Appliance."
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Appliances.update::parameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Appliances.update::parameters.properties
 );

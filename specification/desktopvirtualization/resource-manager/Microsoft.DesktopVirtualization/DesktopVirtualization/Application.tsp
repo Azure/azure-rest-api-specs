@@ -16,8 +16,10 @@ namespace Microsoft.DesktopVirtualization;
  * Schema for Application properties.
  */
 @parentResource(ApplicationGroup)
-model Application
-  is Azure.ResourceManager.ProxyResource<ApplicationProperties, false> {
+model Application is Azure.ResourceManager.ProxyResource<
+  ApplicationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Application,
     KeyName = "applicationName",
@@ -79,11 +81,13 @@ interface Applications {
 
 @@maxLength(Application.name, 24);
 @@minLength(Application.name, 3);
-@@doc(Application.name,
+@@doc(
+  Application.name,
   "The name of the application within the specified application group"
 );
 @@doc(Application.properties, "Detailed properties for Application");
-@@doc(Applications.createOrUpdate::parameters.resource,
+@@doc(
+  Applications.createOrUpdate::parameters.resource,
   "Object containing Application definitions."
 );
 @@clientName(Applications.update::parameters.body, "application");

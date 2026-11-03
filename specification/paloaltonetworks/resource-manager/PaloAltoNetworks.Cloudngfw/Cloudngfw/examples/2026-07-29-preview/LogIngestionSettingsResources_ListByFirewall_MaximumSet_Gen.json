@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2026-07-29-preview",
+    "firewallName": "firewall1",
+    "resourceGroupName": "firewall-rg",
+    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/PaloAltoNetworks.Cloudngfw/firewalls/firewall1/logIngestionSettings/default",
+            "name": "default",
+            "type": "PaloAltoNetworks.Cloudngfw/firewalls/logIngestionSettings",
+            "properties": {
+              "commonDestination": {
+                "monitorConfigurationsV2": {
+                  "dcrId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/Microsoft.Insights/dataCollectionRules/dcr1",
+                  "logIngestionEndpoint": "https://dce1.eastus-1.ingest.monitor.azure.com",
+                  "dcrImmutableId": "dcr-961d3dcf06f8402ebe071efc3eb19005",
+                  "streamName": "Custom-PANLogs_CL"
+                }
+              },
+              "trafficLogDestination": {
+                "monitorConfigurationsV2": {
+                  "dcrId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/Microsoft.Insights/dataCollectionRules/dcr1",
+                  "logIngestionEndpoint": "https://dce1.eastus-1.ingest.monitor.azure.com",
+                  "dcrImmutableId": "dcr-961d3dcf06f8402ebe071efc3eb19005",
+                  "streamName": "Custom-PANTrafficLogs_CL"
+                }
+              },
+              "threatLogDestination": {
+                "monitorConfigurationsV2": {
+                  "dcrId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/Microsoft.Insights/dataCollectionRules/dcr2",
+                  "logIngestionEndpoint": "https://dce1.eastus-1.ingest.monitor.azure.com",
+                  "dcrImmutableId": "dcr-772e4ecf17f9513fce182efc4fc2a116",
+                  "streamName": "Custom-PANThreatLogs_CL"
+                }
+              },
+              "decryptLogDestination": {
+                "monitorConfigurationsV2": {
+                  "dcrId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/Microsoft.Insights/dataCollectionRules/dcr3",
+                  "logIngestionEndpoint": "https://dce1.eastus-1.ingest.monitor.azure.com",
+                  "dcrImmutableId": "dcr-883f5fdf28fa624dfe293efc5fd3b227",
+                  "streamName": "Custom-PANDecryptLogs_CL"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LogIngestionSettingsResources_ListByFirewall",
+  "title": "LogIngestionSettingsResources_ListByFirewall_MaximumSet_Gen"
+}

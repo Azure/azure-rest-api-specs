@@ -8,6 +8,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 
@@ -199,6 +200,7 @@ interface AssessmentTypesOperationGroup {
   @list
   @get
   @action("assessmentTypes")
+  @removed(Versions.v2026_10_01)
   list is ArmProviderActionSync<
     Response = AssessmentTypeListResult,
     Scope = SubscriptionActionScope,
@@ -216,6 +218,7 @@ interface WorkloadsOperationGroup {
   @list
   @get
   @action("workloads")
+  @removed(Versions.v2026_10_01)
   list is ArmProviderActionSync<
     Response = WorkloadListResult,
     Scope = SubscriptionActionScope,

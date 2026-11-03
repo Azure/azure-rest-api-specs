@@ -1,0 +1,41 @@
+{
+  "operationId": "NGroups_Update",
+  "title": "NGroupsUpdate",
+  "parameters": {
+    "ngroupsName": "demo-ngroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-06-01-preview",
+    "resourceGroupName": "demo",
+    "NGroup": {
+      "tags": {
+        "env": "test"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.ContainerInstance/locations/eastus/operationStatuses/update-operation?api-version=2026-06-01-preview"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "updateProfile": {
+            "updateMode": "Manual"
+          },
+          "containerGroupProfiles": [],
+          "provisioningState": "Succeeded",
+          "elasticProfile": {
+            "maintainDesiredCount": true,
+            "desiredCount": 1
+          }
+        },
+        "name": "demo-ngroup",
+        "type": "Microsoft.ContainerInstance/ngroups",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/ngroups/demo-ngroup"
+      }
+    }
+  }
+}

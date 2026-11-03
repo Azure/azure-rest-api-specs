@@ -63,17 +63,21 @@ interface CustomDnsSuffixConfigurations {
   @summary("Delete Custom Dns Suffix configuration of an App Service Environment")
   deleteAseCustomDnsSuffixConfiguration is ArmResourceDeleteSync<
     CustomDnsSuffixConfiguration,
-    Response = ArmResponse<unknown> | (ArmDeletedNoContentResponse & {
-      @body _: unknown;
-    }),
+    Response =
+      | ArmResponse<unknown>
+      | (ArmDeletedNoContentResponse & {
+          @body _: unknown;
+        }),
     Error = DefaultErrorResponse
   >;
 }
 
 @@doc(CustomDnsSuffixConfiguration.name, "");
-@@doc(CustomDnsSuffixConfiguration.properties,
+@@doc(
+  CustomDnsSuffixConfiguration.properties,
   "CustomDnsSuffixConfiguration resource specific properties"
 );
-@@doc(CustomDnsSuffixConfigurations.updateAseCustomDnsSuffixConfiguration::parameters.resource,
+@@doc(
+  CustomDnsSuffixConfigurations.updateAseCustomDnsSuffixConfiguration::parameters.resource,
   ""
 );

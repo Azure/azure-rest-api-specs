@@ -19,7 +19,7 @@ namespace Microsoft.DesktopVirtualization;
  * @template Response Optional. The success response for the patch operation
  * @template Error Optional. The error response, if non-standard.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 @autoRoute
 @doc("Update a {name}", Resource)
 @armResourceUpdate(Resource)
@@ -48,7 +48,7 @@ op ArmCustomPatchSyncWithOptionalBody<
  * @template Response Optional. The success response for the patch operation
  * @template Error Optional. The error response, if non-standard.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 @autoRoute
 @doc("Update a {name}", Resource)
 @armResourceUpdate(Resource)
@@ -64,10 +64,9 @@ op ArmCustomPatchAsyncWithOptionalBody<
   > &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} = ArmResponse<Resource> | ArmAcceptedLroResponse<
-    "Resource update request accepted.",
-    LroHeaders
-  >,
+  Response extends {} =
+    | ArmResponse<Resource>
+    | ArmAcceptedLroResponse<"Resource update request accepted.", LroHeaders>,
   Error extends {} = ErrorResponse
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,

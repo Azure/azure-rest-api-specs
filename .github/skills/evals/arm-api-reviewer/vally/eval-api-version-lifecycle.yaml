@@ -1,0 +1,170 @@
+name: arm-api-reviewer-eval-api-version-lifecycle
+description: |
+  API version lifecycle and branch-placement tests (18xxxx).
+  Validates private preview, public preview, in-development branch, promotion,
+  and unknown-branch behavior.
+
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../../../azure-api-review/references/api-version-lifecycle-and-branches.md"
+      dest: ".github/skills/azure-api-review/references/api-version-lifecycle-and-branches.md"
+
+tags:
+  area: arm-api-reviewer
+
+defaults:
+  runs: 1
+  timeout: "180s"
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  - name: private-preview-in-public-is-blocking
+    prompt: |
+      Read the supplied API-version lifecycle reference. Review this placement:
+      - Target repository: Azure/azure-rest-api-specs
+      - Target branch: main
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - Release stage: private preview with active AFEC gating
+
+      Return the applicable finding with rule ID and severity. Do not review any
+      other API design concern.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-PRIVATE-IN-PUBLIC"
+      - type: output-matches
+        config:
+          pattern: "(?is)APIVER-PRIVATE-IN-PUBLIC.{0,300}\\bBlocking\\b|\\bBlocking\\b.{0,300}APIVER-PRIVATE-IN-PUBLIC"
+      - type: prompt
+    rubric:
+      - Flags private preview in the public repository as Blocking
+      - Cites APIVER-PRIVATE-IN-PUBLIC
+
+  - name: private-preview-folder-mismatch-is-blocking
+    tags:
+      audit: "2026-08-30"
+    prompt: |
+      Read the supplied API-version lifecycle reference. Review this placement:
+      - Target repository: Azure/azure-rest-api-specs-pr
+      - Target branch: RPSaaSMaster
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/stable/2026-01-01
+      - Release stage: private preview with active AFEC gating
+
+      Return the applicable folder finding with rule ID and severity.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-PRIVATE-FOLDER"
+      - type: output-matches
+        config:
+          pattern: "(?is)APIVER-PRIVATE-FOLDER.{0,300}\\bBlocking\\b|\\bBlocking\\b.{0,300}APIVER-PRIVATE-FOLDER"
+      - type: prompt
+    rubric:
+      - Flags the stable folder and missing preview suffix for private preview
+      - Cites APIVER-PRIVATE-FOLDER as Blocking
+
+  - name: in-development-release-branch-is-allowed
+    prompt: |
+      Read the supplied API-version lifecycle reference. Review this placement:
+      - Target repository: Azure/azure-rest-api-specs
+      - Target branch: release-contoso-next
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - Release stage: in development, with no customers
+
+      State whether APIVER-DEV-IN-MAIN applies. Do not invent another finding.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "does not flag development version on release branch"
+        config:
+          pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}APIVER-DEV-IN-MAIN|^.*APIVER-DEV-IN-MAIN.{0,200}(?:🔴|🟠|🔵)"
+      - type: output-matches
+        config:
+          pattern: "(?i)(allowed|valid|does not apply|not a violation|release-)"
+      - type: prompt
+    rubric:
+      - Does not flag APIVER-DEV-IN-MAIN because the target is a release branch
+
+  - name: public-preview-folder-mismatch-is-blocking
+    prompt: |
+      Read the supplied API-version lifecycle reference. Review this placement:
+      - Target repository: Azure/azure-rest-api-specs
+      - Target branch: main
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/stable/2026-01-01-preview
+      - Release stage: public preview
+
+      Return the applicable finding with rule ID and severity.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-PREVIEW-FOLDER"
+      - type: output-matches
+        config:
+          pattern: "(?is)APIVER-PREVIEW-FOLDER.{0,300}\\bBlocking\\b|\\bBlocking\\b.{0,300}APIVER-PREVIEW-FOLDER"
+      - type: prompt
+    rubric:
+      - Flags the preview-suffixed version under stable as Blocking
+
+  - name: private-to-public-promotion-is-not-a-leak
+    prompt: |
+      Read the supplied API-version lifecycle reference. Review this placement:
+      - Target repository: Azure/azure-rest-api-specs
+      - Target branch: main
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - The version previously existed in the private repository
+      - This PR deliberately promotes it to public preview and removes AFEC gating
+
+      State whether APIVER-PRIVATE-IN-PUBLIC applies.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "promotion is not flagged as private preview leakage"
+        config:
+          pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}APIVER-PRIVATE-IN-PUBLIC|^.*APIVER-PRIVATE-IN-PUBLIC.{0,200}(?:🔴|🟠|🔵)"
+      - type: output-matches
+        config:
+          pattern: "(?i)(promotion|public preview|not a violation|does not apply)"
+      - type: prompt
+    rubric:
+      - Recognizes the deliberate promotion and does not report private-preview leakage
+
+  - name: unknown-branch-does-not-assume-main
+    prompt: |
+      Read the supplied API-version lifecycle reference. The repository is
+      Azure/azure-rest-api-specs and the version is in development, but the PR
+      target branch could not be fetched. Determine whether
+      APIVER-DEV-IN-MAIN can be raised.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "unknown branch is not treated as main"
+        config:
+          pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}APIVER-DEV-IN-MAIN|^.*APIVER-DEV-IN-MAIN.{0,200}(?:🔴|🟠|🔵)"
+      - type: output-matches
+        config:
+          pattern: "(?i)(cannot|unknown|must know|skip|base\\.ref|target branch)"
+      - type: prompt
+    rubric:
+      - Does not assume main when the branch is unknown
+      - Explains that APIVER-DEV-IN-MAIN requires a known target branch

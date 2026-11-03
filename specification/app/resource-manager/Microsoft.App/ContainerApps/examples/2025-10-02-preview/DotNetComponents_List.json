@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "blueshark",
+            "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/blueshark",
+            "properties": {
+              "componentType": "AspireDashboard",
+              "configurations": [
+                {
+                  "propertyName": "dashboard-theme",
+                  "value": "dark"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "yellowcat",
+            "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/yellowcat",
+            "properties": {
+              "componentType": "MyOtherDotNetComponentType",
+              "configurations": [
+                {
+                  "propertyName": "timeout-value",
+                  "value": "10000ms"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DotNetComponents_List",
+  "title": "List .NET Components"
+}

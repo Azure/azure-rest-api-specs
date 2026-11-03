@@ -1,11 +1,11 @@
 {
   "parameters": {
-    "policyEventsResource": "default",
-    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
-    "api-version": "2024-10-01",
-    "$from": "2018-02-05T18:00:00Z",
+    "$apply": "aggregate($count as NumDenyEvents)",
     "$filter": "PolicyDefinitionAction eq 'deny'",
-    "$apply": "aggregate($count as NumDenyEvents)"
+    "$from": "2018-02-05T18:00:00Z",
+    "api-version": "2024-10-01",
+    "policyEventsResource": "default",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852"
   },
   "responses": {
     "200": {
@@ -14,12 +14,14 @@
         "@odata.count": 1,
         "value": [
           {
-            "@odata.id": null,
             "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "@odata.id": null,
             "NumDenyEvents": 40
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "PolicyEvents_ListQueryResultsForSubscription",
+  "title": "Filter and aggregate only"
 }

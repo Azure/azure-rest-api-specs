@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "$skiptoken": "WpmWfBSvPhkAK6QD",
+    "api-version": "2024-10-01",
+    "managementGroupName": "myManagementGroup",
+    "managementGroupsNamespace": "Microsoft.Management",
+    "policyStatesResource": "latest"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest",
+        "@odata.count": 2,
+        "@odata.nextLink": null,
+        "value": [
+          {
+            "@odata.context": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "@odata.id": null,
+            "complianceState": "NonCompliant",
+            "effectiveParameters": null,
+            "isCompliant": false,
+            "managementGroupIds": "myManagementGroup,fff988bf-fff1-ffff-fffb-fffcd011db47",
+            "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/1ef5d536aec743a0aa801c1a",
+            "policyAssignmentName": "1ef5d536aec743a0aa801c1a",
+            "policyAssignmentOwner": "tbd",
+            "policyAssignmentParameters": "{}",
+            "policyAssignmentScope": "/providers/Microsoft.Management/managementGroups/myManagementGroup",
+            "policyDefinitionAction": "audit",
+            "policyDefinitionCategory": "tbd",
+            "policyDefinitionGroupNames": [
+              "myGroup"
+            ],
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d",
+            "policyDefinitionName": "022d9357-5a90-46f7-9554-21d30ce4c32d",
+            "policyDefinitionReferenceId": "15521232277412542086",
+            "policySetDefinitionCategory": null,
+            "policySetDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policySetDefinitions/335cefd2-ab16-430f-b364-974a170eb1d5",
+            "policySetDefinitionName": "335cefd2-ab16-430f-b364-974a170eb1d5",
+            "policySetDefinitionOwner": null,
+            "policySetDefinitionParameters": null,
+            "resourceGroup": "myrg1",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/microsoft.insights/autoscalesettings/mytest1",
+            "resourceLocation": "westus",
+            "resourceTags": "tbd",
+            "resourceType": "/microsoft.insights/autoscalesettings",
+            "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+            "timestamp": "2019-10-09T17:41:47Z"
+          },
+          {
+            "@odata.context": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "@odata.id": null,
+            "complianceState": "Compliant",
+            "effectiveParameters": null,
+            "isCompliant": true,
+            "managementGroupIds": "myManagementGroup,fff988bf-fff1-ffff-fffb-fffcd011db47",
+            "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/186044306c044a1d8c0ff76c",
+            "policyAssignmentName": "186044306c044a1d8c0ff76c",
+            "policyAssignmentOwner": "tbd",
+            "policyAssignmentParameters": "{\"allowedLocations\":{\"value\":[\"centralus\"]}}",
+            "policyAssignmentScope": "/providers/Microsoft.Management/managementGroups/myManagementGroup",
+            "policyDefinitionAction": "audit",
+            "policyDefinitionCategory": "tbd",
+            "policyDefinitionGroupNames": [
+              "myGroup"
+            ],
+            "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d",
+            "policyDefinitionName": "022d9357-5a90-46f7-9554-21d30ce4c32d",
+            "policyDefinitionReferenceId": "",
+            "policySetDefinitionCategory": null,
+            "policySetDefinitionId": "",
+            "policySetDefinitionName": "",
+            "policySetDefinitionOwner": null,
+            "policySetDefinitionParameters": null,
+            "resourceGroup": "myrg1",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/microsoft.insights/autoscalesettings/mytest1",
+            "resourceLocation": "westus",
+            "resourceTags": "tbd",
+            "resourceType": "/microsoft.insights/autoscalesettings",
+            "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+            "timestamp": "2019-10-09T17:41:47Z"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PolicyStates_ListQueryResultsForManagementGroup",
+  "title": "Query latest at management group scope with next link"
+}

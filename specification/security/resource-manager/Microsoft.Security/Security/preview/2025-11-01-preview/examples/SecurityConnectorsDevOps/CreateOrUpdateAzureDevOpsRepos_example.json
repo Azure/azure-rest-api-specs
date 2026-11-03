@@ -1,59 +1,61 @@
 {
   "parameters": {
-    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
-    "resourceGroupName": "myRg",
-    "securityConnectorName": "mySecurityConnectorName",
+    "api-version": "2025-11-01-preview",
+    "azureDevOpsRepository": {
+      "properties": {
+        "actionableRemediation": {
+          "state": "Enabled"
+        },
+        "onboardingState": "NotApplicable"
+      }
+    },
     "orgName": "myAzDevOpsOrg",
     "projectName": "myAzDevOpsProject",
     "repoName": "myAzDevOpsRepo",
-    "azureDevOpsRepository": {
-      "properties": {
-        "onboardingState": "NotApplicable",
-        "actionableRemediation": {
-          "state": "Enabled"
-        }
-      }
-    },
-    "api-version": "2025-11-01-preview"
+    "resourceGroupName": "myRg",
+    "securityConnectorName": "mySecurityConnectorName",
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "name": "myAzDevOpsRepo",
+        "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects/repos",
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject/repos/myAzDevOpsRepo",
         "properties": {
-          "parentOrgName": "myAzDevOpsOrg",
-          "parentProjectName": "myAzDevOpsProject",
-          "repoId": "cb64ab91-c9ba-46df-b44c-c769358bccdf",
-          "onboardingState": "Onboarded",
           "actionableRemediation": {
             "state": "Enabled"
           },
-          "provisioningState": "Succeeded"
-        },
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject/repos/myAzDevOpsRepo",
-        "name": "myAzDevOpsRepo",
-        "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects/repos"
-      }
-    },
-    "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/operationResults/4e826cf1-5c36-4808-a7d2-fb4f5170978b?api-version=2025-11-01-preview"
-      },
-      "body": {
-        "properties": {
+          "onboardingState": "Onboarded",
           "parentOrgName": "myAzDevOpsOrg",
           "parentProjectName": "myAzDevOpsProject",
-          "repoId": "cb64ab91-c9ba-46df-b44c-c769358bccdf",
-          "onboardingState": "NotApplicable",
+          "provisioningState": "Succeeded",
+          "repoId": "cb64ab91-c9ba-46df-b44c-c769358bccdf"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "myAzDevOpsRepo",
+        "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects/repos",
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject/repos/myAzDevOpsRepo",
+        "properties": {
           "actionableRemediation": {
             "state": "None"
           },
-          "provisioningState": "Accepted"
-        },
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject/repos/myAzDevOpsRepo",
-        "name": "myAzDevOpsRepo",
-        "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects/repos"
+          "onboardingState": "NotApplicable",
+          "parentOrgName": "myAzDevOpsOrg",
+          "parentProjectName": "myAzDevOpsProject",
+          "provisioningState": "Accepted",
+          "repoId": "cb64ab91-c9ba-46df-b44c-c769358bccdf"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/operationResults/4e826cf1-5c36-4808-a7d2-fb4f5170978b?api-version=2025-11-01-preview"
       }
     }
-  }
+  },
+  "operationId": "AzureDevOpsRepos_CreateOrUpdate",
+  "title": "CreateOrUpdate_AzureDevOpsRepos"
 }

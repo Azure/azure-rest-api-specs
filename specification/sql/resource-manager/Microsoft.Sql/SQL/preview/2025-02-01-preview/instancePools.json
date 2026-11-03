@@ -1,0 +1,512 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "InstancePools"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/instancePools": {
+      "get": {
+        "operationId": "InstancePools_List",
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Gets a list of all instance pools in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InstancePoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List instance pools in the subscription": {
+            "$ref": "./examples/ListInstancePoolsBySubscriptionId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools": {
+      "get": {
+        "operationId": "InstancePools_ListByResourceGroup",
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Gets a list of instance pools in the resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InstancePoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List instance pools by resource group": {
+            "$ref": "./examples/ListInstancePoolsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}": {
+      "get": {
+        "operationId": "InstancePools_Get",
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Gets an instance pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be retrieved.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an instance pool": {
+            "$ref": "./examples/GetInstancePool.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "InstancePools_CreateOrUpdate",
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Creates or updates an instance pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested instance pool resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InstancePool' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            }
+          },
+          "201": {
+            "description": "Resource 'InstancePool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an instance pool with all properties.": {
+            "$ref": "./examples/CreateOrUpdateInstancePoolMax.json"
+          },
+          "Create an instance pool with min properties.": {
+            "$ref": "./examples/CreateOrUpdateInstancePoolMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/InstancePool"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "InstancePools_Update",
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Updates an instance pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested instance pool resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstancePoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InstancePool"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch an instance pool": {
+            "$ref": "./examples/PatchInstancePool.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/InstancePool"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "InstancePools_Delete",
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Deletes an instance pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be retrieved.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an instance pool": {
+            "$ref": "./examples/DeleteInstancePool.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "InstancePool": {
+      "type": "object",
+      "description": "An Azure SQL instance pool.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InstancePoolProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "InstancePoolListResult": {
+      "type": "object",
+      "description": "The response of a InstancePool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InstancePool items on this page",
+          "items": {
+            "$ref": "#/definitions/InstancePool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InstancePoolProperties": {
+      "type": "object",
+      "description": "Properties of an instance pool.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Resource ID of the subnet to place this instance pool in.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of vCores belonging to this instance pool."
+        },
+        "licenseType": {
+          "$ref": "./common.json#/definitions/InstancePoolLicenseType",
+          "description": "The license type. Possible values are 'LicenseIncluded' (price for SQL license is included) and 'BasePrice' (without SQL license price)."
+        },
+        "dnsZone": {
+          "type": "string",
+          "description": "The Dns Zone that the managed instance pool is in.",
+          "readOnly": true
+        },
+        "maintenanceConfigurationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies maintenance configuration id to apply to this managed instance.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Maintenance/publicMaintenanceConfigurations"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "subnetId",
+        "vCores",
+        "licenseType"
+      ]
+    },
+    "InstancePoolUpdate": {
+      "type": "object",
+      "description": "An update to an Instance pool.",
+      "properties": {
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "properties": {
+          "$ref": "#/definitions/InstancePoolProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

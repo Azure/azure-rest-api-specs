@@ -34,9 +34,11 @@ import "./CdnWebApplicationFirewallPolicy.tsp";
 import "./WebAgent.tsp";
 import "./KnowledgeSource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Azure.Core;
 /**
  * Use these APIs to manage Azure Front Door and CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure.
  */
@@ -49,6 +51,11 @@ namespace Microsoft.Cdn;
 /**
  * The available API versions.
  */
+// Versioning rules (see versioning-sop.md):
+// - Do NOT add new preview members. `preview` is the single active preview: to release a new preview, change only
+//   its value. Every `Versions.preview` decorator moves with it.
+// - To release a stable version, add a new member immediately before `preview`.
+// - `v2025_09_01_preview` is kept only as a restore point for preview-only features; it is not an active preview.
 enum Versions {
   /**
    * The 2025-06-01 API version.
@@ -56,9 +63,25 @@ enum Versions {
   v2025_06_01: "2025-06-01",
 
   /**
-   * The 2025-09-01-preview API version.
+   * The 2025-09-01-preview API version. Not an active preview: kept so that preview-only features
+   * introduced in this version can be restored into `preview` with `@added(Versions.preview)`.
    */
   v2025_09_01_preview: "2025-09-01-preview",
+
+  /**
+   * The 2025-12-01 API version.
+   */
+  v2025_12_01: "2025-12-01",
+
+  /**
+   * The 2026-07-01 API version.
+   */
+  v2026_07_01: "2026-07-01",
+
+  /**
+   * The 2026-10-01 API version.
+   */
+  v2026_10_01: "2026-10-01",
 }
 
 interface Operations

@@ -1,0 +1,44 @@
+{
+  "operationId": "EduEnrollments_ListByResourceGroup",
+  "title": "List edu enrollments by resource group",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ProgramEnrollment/eduEnrollments/default",
+            "name": "default",
+            "type": "Microsoft.ProgramEnrollment/eduEnrollments",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "domains": [
+                {
+                  "domainNames": [
+                    "university.edu",
+                    "college.edu"
+                  ],
+                  "tenantId": "00000000-0000-0000-0000-000000000001",
+                  "state": "Succeeded"
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2024-01-01T00:00:00.000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

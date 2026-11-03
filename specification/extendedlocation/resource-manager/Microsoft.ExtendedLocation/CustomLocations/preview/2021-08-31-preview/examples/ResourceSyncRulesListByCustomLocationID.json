@@ -1,35 +1,23 @@
 {
   "parameters": {
     "api-version": "2021-08-31-preview",
-    "subscriptionId": "11111111-2222-3333-4444-555555555555",
     "resourceGroupName": "testresourcegroup",
-    "resourceName": "customLocation01"
+    "resourceName": "customLocation01",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ExtendedLocation/customLocations/customLocation01/resourcesyncrules",
             "name": "resourceSyncRule01",
-            "location": "West US",
             "type": "Microsoft.ExtendedLocation/customLocations/resourceSyncRules",
-            "systemData": {
-              "createdBy": "string",
-              "createdByType": "Application",
-              "createdAt": "2021-07-16T18:53:29.0928001Z",
-              "lastModifiedBy": "string",
-              "lastModifiedByType": "Application",
-              "lastModifiedAt": "2021-07-16T18:53:29.0928001Z"
-            },
+            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ExtendedLocation/customLocations/customLocation01/resourcesyncrules",
+            "location": "West US",
             "properties": {
-              "provisioningState": "Succeeded",
-              "targetResourceGroup": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/",
               "priority": 999,
+              "provisioningState": "Succeeded",
               "selector": {
-                "matchLabels": {
-                  "key1": "value1"
-                },
                 "matchExpressions": [
                   {
                     "key": "key4",
@@ -38,31 +26,31 @@
                       "value4"
                     ]
                   }
-                ]
-              }
+                ],
+                "matchLabels": {
+                  "key1": "value1"
+                }
+              },
+              "targetResourceGroup": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/"
+            },
+            "systemData": {
+              "createdAt": "2021-07-16T18:53:29.0928001Z",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-07-16T18:53:29.0928001Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application"
             }
           },
           {
-            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ExtendedLocation/",
             "name": "resourceSyncRule02",
-            "location": "West US",
             "type": "Microsoft.ExtendedLocation/customLocations/resourceSyncRules",
-            "systemData": {
-              "createdBy": "string",
-              "createdByType": "Application",
-              "createdAt": "2020-04-24T18:53:29.0928001Z",
-              "lastModifiedBy": "string",
-              "lastModifiedByType": "Application",
-              "lastModifiedAt": "2020-04-24T18:53:29.0928001Z"
-            },
+            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ExtendedLocation/",
+            "location": "West US",
             "properties": {
-              "provisioningState": "Succeeded",
-              "targetResourceGroup": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/amalladi-df-test/",
               "priority": 999,
+              "provisioningState": "Succeeded",
               "selector": {
-                "matchLabels": {
-                  "key5": "value5"
-                },
                 "matchExpressions": [
                   {
                     "key": "key8",
@@ -71,12 +59,26 @@
                       "value8"
                     ]
                   }
-                ]
-              }
+                ],
+                "matchLabels": {
+                  "key5": "value5"
+                }
+              },
+              "targetResourceGroup": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/amalladi-df-test/"
+            },
+            "systemData": {
+              "createdAt": "2020-04-24T18:53:29.0928001Z",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2020-04-24T18:53:29.0928001Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ResourceSyncRules_ListByCustomLocationID",
+  "title": "List Resource Sync Rules by subscription"
 }

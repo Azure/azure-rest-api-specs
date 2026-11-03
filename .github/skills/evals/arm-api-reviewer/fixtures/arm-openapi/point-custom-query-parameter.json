@@ -1,0 +1,71 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Point GET Parameter Test",
+    "version": "2025-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "produces": ["application/json"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PagingTest/widgets/{widgetName}": {
+      "get": {
+        "operationId": "Widgets_Get",
+        "description": "Gets one widget with an invalid custom query parameter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          {
+            "name": "expandDetails",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether to include additional details."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested widget.",
+            "schema": { "$ref": "#/definitions/Widget" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "WidgetNameParameter": {
+      "name": "widgetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9-]+$",
+      "description": "The widget name.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "description": "A widget.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The widget name."
+        }
+      }
+    }
+  }
+}

@@ -1,32 +1,24 @@
 {
-  "operationId": "Builds_ListByBuilderResource",
-  "title": "Builds_ListByBuilderResource_0",
+  "operationId": "BuildsByBuilderResource_List",
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "builderName": "testBuilder",
     "resourceGroupName": "rg",
-    "builderName": "testBuilder"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
+  "title": "Builds_ListByBuilderResource_0",
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder/builds/testBuild1",
             "name": "testBuild1",
             "type": "Microsoft.App/builders/builds",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder/builds/testBuild1",
             "properties": {
-              "provisioningState": "Succeeded",
               "buildStatus": "InProgress",
-              "destinationContainerRegistry": {
-                "server": "test.azurecr.io",
-                "image": "test.azurecr.io/repo:tag"
-              },
               "configuration": {
                 "baseOs": "DebianBullseye",
-                "platform": "dotnetcore",
-                "platformVersion": "7.0",
                 "environmentVariables": [
                   {
                     "name": "foo1",
@@ -37,66 +29,66 @@
                     "value": "bar2"
                   }
                 ],
+                "platform": "dotnetcore",
+                "platformVersion": "7.0",
                 "preBuildSteps": [
                   {
                     "description": "First pre build step.",
-                    "scripts": [
-                      "echo 'hello'",
-                      "echo 'world'"
-                    ],
                     "httpGet": {
-                      "url": "https://microsoft.com",
                       "fileName": "output.txt",
                       "headers": [
                         "foo",
                         "bar"
-                      ]
-                    }
+                      ],
+                      "url": "https://microsoft.com"
+                    },
+                    "scripts": [
+                      "echo 'hello'",
+                      "echo 'world'"
+                    ]
                   },
                   {
                     "description": "Second pre build step.",
-                    "scripts": [
-                      "echo 'hello'",
-                      "echo 'again'"
-                    ],
                     "httpGet": {
-                      "url": "https://microsoft.com",
                       "fileName": "output.txt",
                       "headers": [
                         "foo"
-                      ]
-                    }
+                      ],
+                      "url": "https://microsoft.com"
+                    },
+                    "scripts": [
+                      "echo 'hello'",
+                      "echo 'again'"
+                    ]
                   }
                 ]
               },
-              "uploadEndpoint": "https://foo.azurecontainerapps.dev/upload",
+              "destinationContainerRegistry": {
+                "image": "test.azurecr.io/repo:tag",
+                "server": "test.azurecr.io"
+              },
               "logStreamEndpoint": "https://foo.azurecontainerapps.dev/logstream",
-              "tokenEndpoint": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{rg-id}/Microsoft.App/builders/testBuilder/builds/testBuild/listAuthToken"
+              "provisioningState": "Succeeded",
+              "tokenEndpoint": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{rg-id}/Microsoft.App/builders/testBuilder/builds/testBuild/listAuthToken",
+              "uploadEndpoint": "https://foo.azurecontainerapps.dev/upload"
             },
             "systemData": {
+              "createdAt": "2022-10-11T11:05:51.4940669Z",
               "createdBy": "sample@microsoft.com",
               "createdByType": "User",
-              "createdAt": "2022-10-11T11:05:51.4940669Z",
+              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z",
               "lastModifiedBy": "sample@microsoft.com",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+              "lastModifiedByType": "User"
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder/builds/testBuild2",
             "name": "testBuild2",
             "type": "Microsoft.App/builders/builds",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder/builds/testBuild2",
             "properties": {
-              "provisioningState": "Succeeded",
               "buildStatus": "InProgress",
-              "destinationContainerRegistry": {
-                "server": "test.azurecr.io",
-                "image": "test.azurecr.io/repo:tag"
-              },
               "configuration": {
                 "baseOs": "DebianBullseye",
-                "platform": "dotnetcore",
-                "platformVersion": "7.0",
                 "environmentVariables": [
                   {
                     "name": "foo1",
@@ -107,53 +99,61 @@
                     "value": "bar2"
                   }
                 ],
+                "platform": "dotnetcore",
+                "platformVersion": "7.0",
                 "preBuildSteps": [
                   {
                     "description": "First pre build step.",
-                    "scripts": [
-                      "echo 'hello'",
-                      "echo 'world'"
-                    ],
                     "httpGet": {
-                      "url": "https://microsoft.com",
                       "fileName": "output.txt",
                       "headers": [
                         "foo",
                         "bar"
-                      ]
-                    }
+                      ],
+                      "url": "https://microsoft.com"
+                    },
+                    "scripts": [
+                      "echo 'hello'",
+                      "echo 'world'"
+                    ]
                   },
                   {
                     "description": "Second pre build step.",
-                    "scripts": [
-                      "echo 'hello'",
-                      "echo 'again'"
-                    ],
                     "httpGet": {
-                      "url": "https://microsoft.com",
                       "fileName": "output.txt",
                       "headers": [
                         "foo"
-                      ]
-                    }
+                      ],
+                      "url": "https://microsoft.com"
+                    },
+                    "scripts": [
+                      "echo 'hello'",
+                      "echo 'again'"
+                    ]
                   }
                 ]
               },
-              "uploadEndpoint": "https://foo.azurecontainerapps.dev/upload",
+              "destinationContainerRegistry": {
+                "image": "test.azurecr.io/repo:tag",
+                "server": "test.azurecr.io"
+              },
               "logStreamEndpoint": "https://foo.azurecontainerapps.dev/logstream",
-              "tokenEndpoint": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{rg-id}/Microsoft.App/builders/testBuilder/builds/testBuild/listAuthToken"
+              "provisioningState": "Succeeded",
+              "tokenEndpoint": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{rg-id}/Microsoft.App/builders/testBuilder/builds/testBuild/listAuthToken",
+              "uploadEndpoint": "https://foo.azurecontainerapps.dev/upload"
             },
             "systemData": {
+              "createdAt": "2022-10-11T11:05:51.4940669Z",
               "createdBy": "sample@microsoft.com",
               "createdByType": "User",
-              "createdAt": "2022-10-11T11:05:51.4940669Z",
+              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z",
               "lastModifiedBy": "sample@microsoft.com",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+              "lastModifiedByType": "User"
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
   }
 }

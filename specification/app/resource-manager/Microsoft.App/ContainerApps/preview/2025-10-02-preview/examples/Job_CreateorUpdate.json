@@ -1,27 +1,15 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "rg",
-    "jobName": "testcontainerAppsJob0",
-    "api-version": "2025-10-02-preview",
     "JobEnvelope": {
-      "location": "East US",
       "identity": {
         "type": "SystemAssigned,UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {}
         }
       },
+      "location": "East US",
       "properties": {
-        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
         "configuration": {
-          "replicaTimeout": 10,
-          "replicaRetryLimit": 10,
-          "manualTriggerConfig": {
-            "replicaCompletionCount": 1,
-            "parallelism": 4
-          },
-          "triggerType": "Manual",
           "identitySettings": [
             {
               "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
@@ -31,25 +19,33 @@
               "identity": "system",
               "lifecycle": "Init"
             }
-          ]
+          ],
+          "manualTriggerConfig": {
+            "parallelism": 4,
+            "replicaCompletionCount": 1
+          },
+          "replicaRetryLimit": 10,
+          "replicaTimeout": 10,
+          "triggerType": "Manual"
         },
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
         "template": {
           "containers": [
             {
-              "image": "repo/testcontainerAppsJob0:v1",
               "name": "testcontainerAppsJob0",
+              "image": "repo/testcontainerAppsJob0:v1",
               "probes": [
                 {
                   "type": "Liveness",
                   "httpGet": {
                     "path": "/health",
-                    "port": 8080,
                     "httpHeaders": [
                       {
                         "name": "Custom-Header",
                         "value": "Awesome"
                       }
-                    ]
+                    ],
+                    "port": 8080
                   },
                   "initialDelaySeconds": 5,
                   "periodSeconds": 3
@@ -57,70 +53,64 @@
               ],
               "volumeMounts": [
                 {
-                  "volumeName": "azurefile",
                   "mountPath": "/mnt/path1",
-                  "subPath": "subPath1"
+                  "subPath": "subPath1",
+                  "volumeName": "azurefile"
                 },
                 {
-                  "volumeName": "nfsazurefile",
                   "mountPath": "/mnt/path2",
-                  "subPath": "subPath2"
+                  "subPath": "subPath2",
+                  "volumeName": "nfsazurefile"
                 }
               ]
             }
           ],
           "initContainers": [
             {
-              "image": "repo/testcontainerAppsJob0:v4",
               "name": "testinitcontainerAppsJob0",
-              "resources": {
-                "cpu": 0.2,
-                "memory": "100Mi",
-                "gpu": 1.0
-              },
-              "command": [
-                "/bin/sh"
-              ],
               "args": [
                 "-c",
                 "while true; do echo hello; sleep 10;done"
-              ]
+              ],
+              "command": [
+                "/bin/sh"
+              ],
+              "image": "repo/testcontainerAppsJob0:v4",
+              "resources": {
+                "cpu": 0.2,
+                "gpu": 1,
+                "memory": "100Mi"
+              }
             }
           ]
         }
       }
-    }
+    },
+    "api-version": "2025-10-02-preview",
+    "jobName": "testcontainerAppsJob0",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0",
         "name": "testcontainerAppsJob0",
         "type": "Microsoft.App/jobs",
-        "location": "East US",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0",
         "identity": {
           "type": "SystemAssigned,UserAssigned",
           "principalId": "24adfa4f-dedf-8dc0-ca29-b6d1a69ab319",
           "tenantId": "23adfa4f-eedf-1dc0-ba29-a6d1a69ab3d0",
           "userAssignedIdentities": {
             "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
-              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312",
-              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df"
+              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df",
+              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312"
             }
           }
         },
+        "location": "East US",
         "properties": {
-          "provisioningState": "InProgress",
-          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "configuration": {
-            "replicaTimeout": 10,
-            "replicaRetryLimit": 10,
-            "manualTriggerConfig": {
-              "replicaCompletionCount": 1,
-              "parallelism": 4
-            },
-            "triggerType": "Manual",
             "identitySettings": [
               {
                 "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
@@ -130,115 +120,113 @@
                 "identity": "system",
                 "lifecycle": "Init"
               }
-            ]
+            ],
+            "manualTriggerConfig": {
+              "parallelism": 4,
+              "replicaCompletionCount": 1
+            },
+            "replicaRetryLimit": 10,
+            "replicaTimeout": 10,
+            "triggerType": "Manual"
           },
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "eventStreamEndpoint": "testEndpoint",
+          "provisioningState": "InProgress",
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerAppsJob0:v4",
                 "name": "testcontainerAppsJob0",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi",
-                  "gpu": 1.0
-                },
+                "image": "repo/testcontainerAppsJob0:v4",
                 "probes": [
                   {
                     "type": "Liveness",
                     "httpGet": {
                       "path": "/health",
-                      "port": 8080,
                       "httpHeaders": [
                         {
                           "name": "Custom-Header",
                           "value": "Awesome"
                         }
-                      ]
+                      ],
+                      "port": 8080
                     },
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
                   }
                 ],
+                "resources": {
+                  "cpu": 0.2,
+                  "gpu": 1,
+                  "memory": "100Mi"
+                },
                 "volumeMounts": [
                   {
-                    "volumeName": "azurefile",
                     "mountPath": "/mnt/path1",
-                    "subPath": "subPath1"
+                    "subPath": "subPath1",
+                    "volumeName": "azurefile"
                   },
                   {
-                    "volumeName": "nfsazurefile",
                     "mountPath": "/mnt/path2",
-                    "subPath": "subPath2"
+                    "subPath": "subPath2",
+                    "volumeName": "nfsazurefile"
                   }
                 ]
               }
             ],
             "initContainers": [
               {
-                "image": "repo/testcontainerAppsJob0:v4",
                 "name": "testinitcontainerAppsJob0",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi",
-                  "gpu": 1.0
-                },
-                "command": [
-                  "/bin/sh"
-                ],
                 "args": [
                   "-c",
                   "while true; do echo hello; sleep 10;done"
-                ]
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainerAppsJob0:v4",
+                "resources": {
+                  "cpu": 0.2,
+                  "gpu": 1,
+                  "memory": "100Mi"
+                }
               }
             ],
             "volumes": [
               {
                 "name": "azurefile",
-                "storageType": "AzureFile",
-                "storageName": "storage"
+                "storageName": "storage",
+                "storageType": "AzureFile"
               },
               {
                 "name": "nfsazurefile",
-                "storageType": "NfsAzureFile",
-                "storageName": "nfsStorage"
+                "storageName": "nfsStorage",
+                "storageType": "NfsAzureFile"
               }
             ]
-          },
-          "eventStreamEndpoint": "testEndpoint"
+          }
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {
-        "Location": "location"
-      },
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0",
         "name": "testcontainerAppsJob0",
         "type": "Microsoft.App/jobs",
-        "location": "East US",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0",
         "identity": {
           "type": "SystemAssigned,UserAssigned",
           "principalId": "24adfa4f-dedf-8dc0-ca29-b6d1a69ab319",
           "tenantId": "23adfa4f-eedf-1dc0-ba29-a6d1a69ab3d0",
           "userAssignedIdentities": {
             "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
-              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312",
-              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df"
+              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df",
+              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312"
             }
           }
         },
+        "location": "East US",
         "properties": {
-          "provisioningState": "InProgress",
-          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "configuration": {
-            "replicaTimeout": 10,
-            "replicaRetryLimit": 10,
-            "manualTriggerConfig": {
-              "replicaCompletionCount": 1,
-              "parallelism": 4
-            },
-            "triggerType": "Manual",
             "identitySettings": [
               {
                 "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
@@ -248,81 +236,95 @@
                 "identity": "system",
                 "lifecycle": "Init"
               }
-            ]
+            ],
+            "manualTriggerConfig": {
+              "parallelism": 4,
+              "replicaCompletionCount": 1
+            },
+            "replicaRetryLimit": 10,
+            "replicaTimeout": 10,
+            "triggerType": "Manual"
           },
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "eventStreamEndpoint": "testEndpoint",
+          "provisioningState": "InProgress",
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerAppsJob0:v4",
                 "name": "testcontainerAppsJob0",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
-                },
+                "image": "repo/testcontainerAppsJob0:v4",
                 "probes": [
                   {
                     "type": "Liveness",
                     "httpGet": {
                       "path": "/health",
-                      "port": 8080,
                       "httpHeaders": [
                         {
                           "name": "Custom-Header",
                           "value": "Awesome"
                         }
-                      ]
+                      ],
+                      "port": 8080
                     },
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
                   }
                 ],
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
                 "volumeMounts": [
                   {
-                    "volumeName": "azurefile",
                     "mountPath": "/mnt/path1",
-                    "subPath": "subPath1"
+                    "subPath": "subPath1",
+                    "volumeName": "azurefile"
                   },
                   {
-                    "volumeName": "nfsazurefile",
                     "mountPath": "/mnt/path2",
-                    "subPath": "subPath2"
+                    "subPath": "subPath2",
+                    "volumeName": "nfsazurefile"
                   }
                 ]
               }
             ],
             "initContainers": [
               {
-                "image": "repo/testcontainerAppsJob0:v4",
                 "name": "testinitcontainerAppsJob0",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
-                },
-                "command": [
-                  "/bin/sh"
-                ],
                 "args": [
                   "-c",
                   "while true; do echo hello; sleep 10;done"
-                ]
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainerAppsJob0:v4",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
               }
             ],
             "volumes": [
               {
                 "name": "azurefile",
-                "storageType": "AzureFile",
-                "storageName": "storage"
+                "storageName": "storage",
+                "storageType": "AzureFile"
               },
               {
                 "name": "nfsazurefile",
-                "storageType": "NfsAzureFile",
-                "storageName": "nfsStorage"
+                "storageName": "nfsStorage",
+                "storageType": "NfsAzureFile"
               }
             ]
-          },
-          "eventStreamEndpoint": "testEndpoint"
+          }
         }
+      },
+      "headers": {
+        "Location": "location"
       }
     }
-  }
+  },
+  "operationId": "Jobs_CreateOrUpdate",
+  "title": "Create or Update Container Apps Job"
 }

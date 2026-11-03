@@ -1,0 +1,35 @@
+{
+  "operationId": "AdvancedPlatformMetrics_List",
+  "title": "AdvancedPlatformMetricsRules_List - List advanced platform metrics rules",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "res6977",
+    "accountName": "sto2527",
+    "api-version": "2026-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/advancedPlatformMetrics/ContainerLevelCapacityMetrics",
+            "name": "DefaultAdvancedPlatformMetricsRule",
+            "type": "Microsoft.Storage/storageAccounts/advancedPlatformMetrics",
+            "properties": {
+              "ruleType": "ContainerLevelCapacityMetrics",
+              "enabled": true,
+              "lastModifiedTime": "2025-01-01T11:00:00.0000000Z",
+              "metricsEmitted": [
+                "ContainerUsedSize",
+                "ContainerBlobCount"
+              ],
+              "ruleConfig": {
+                "filterType": "AllContainersFilter"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

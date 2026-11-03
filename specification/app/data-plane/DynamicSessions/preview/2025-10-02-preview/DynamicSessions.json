@@ -55,7 +55,7 @@
     "/executions": {
       "post": {
         "operationId": "CodeExecution_Execute",
-        "description": "Execute code in a session.",
+        "description": "Execute code in a session. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -146,7 +146,7 @@
     "/executions/{executionId}": {
       "get": {
         "operationId": "CodeExecution_Get",
-        "description": "Get the code execution result.",
+        "description": "Get the code execution result. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -201,7 +201,7 @@
     "/files": {
       "get": {
         "operationId": "SessionResourceFiles_List",
-        "description": "List the file resources.",
+        "description": "List the file resources. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -250,7 +250,7 @@
       },
       "post": {
         "operationId": "SessionResourceFiles_Upload",
-        "description": "Upload a file to a session.",
+        "description": "Upload a file to a session. This is only supported for code-interpreter session pools.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -302,7 +302,7 @@
     "/files/{name}": {
       "get": {
         "operationId": "SessionResourceFiles_Get",
-        "description": "Get the file resource.",
+        "description": "Get the file resource. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -349,7 +349,7 @@
       },
       "delete": {
         "operationId": "SessionResourceFiles_Delete",
-        "description": "Delete the file.",
+        "description": "Delete the file. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -395,7 +395,7 @@
     "/files/{name}/content": {
       "get": {
         "operationId": "SessionResourceFiles_GetContent",
-        "description": "Get the content of the file.",
+        "description": "Get the content of the file. This is only supported for code-interpreter session pools.",
         "produces": [
           "application/octet-stream",
           "application/json"
@@ -448,7 +448,7 @@
     "/listSessions": {
       "get": {
         "operationId": "ListSessions_Get",
-        "description": "List the sessions.",
+        "description": "List the sessions. This is not supported for custom container session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -492,7 +492,7 @@
     "/metadata": {
       "get": {
         "operationId": "SessionPoolMetadata_Get",
-        "description": "Get the metadata information.",
+        "description": "Get the metadata information. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -528,7 +528,7 @@
     "/session": {
       "get": {
         "operationId": "SessionManagement_Get",
-        "description": "Get the session.",
+        "description": "Get the session. This is not supported for custom container session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -565,7 +565,7 @@
       },
       "delete": {
         "operationId": "SessionManagement_Delete",
-        "description": "Delete the session.",
+        "description": "Delete the session. This is not supported for custom container session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"

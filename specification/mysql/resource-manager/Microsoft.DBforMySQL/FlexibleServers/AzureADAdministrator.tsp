@@ -44,11 +44,14 @@ interface AzureADAdministrators {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AzureADAdministrator,
-    Response = ArmResourceUpdatedResponse<AzureADAdministrator> | ArmResourceCreatedResponse<
-      AzureADAdministrator,
-      ArmLroLocationHeader<FinalResult = AzureADAdministrator> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<AzureADAdministrator>
+      | ArmResourceCreatedResponse<
+          AzureADAdministrator,
+          ArmLroLocationHeader<FinalResult = AzureADAdministrator> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -58,7 +61,10 @@ interface AzureADAdministrators {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureADAdministrator,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -73,6 +79,7 @@ interface AzureADAdministrators {
 
 @@doc(AzureADAdministrator.name, "The name of the Azure AD Administrator.");
 @@doc(AzureADAdministrator.properties, "The properties of an administrator.");
-@@doc(AzureADAdministrators.createOrUpdate::parameters.resource,
+@@doc(
+  AzureADAdministrators.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating an aad administrator."
 );

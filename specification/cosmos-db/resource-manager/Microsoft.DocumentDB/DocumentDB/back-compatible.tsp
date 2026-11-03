@@ -37,7 +37,8 @@ using Microsoft.DocumentDB;
 @@Legacy.flattenProperty(SqlStoredProcedureCreateUpdateParameters.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlUserDefinedFunctionCreateUpdateParameters.properties
+@@Legacy.flattenProperty(
+  SqlUserDefinedFunctionCreateUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -114,7 +115,8 @@ using Microsoft.DocumentDB;
 
 @@clientLocation(ChaosFaultResources.get, "ChaosFault");
 @@clientLocation(ChaosFaultResources.enableDisable, "ChaosFault");
-@@clientName(ChaosFaultResources.enableDisable::parameters.resource,
+@@clientName(
+  ChaosFaultResources.enableDisable::parameters.resource,
   "chaosFaultRequest"
 );
 @@clientLocation(ChaosFaultResources.list, "ChaosFault");
@@ -123,22 +125,28 @@ using Microsoft.DocumentDB;
 
 @@clientName(CopyJobs.create::parameters.resource, "jobCreateParameters");
 
-@@clientName(DatabaseAccounts.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseAccounts.createOrUpdate::parameters.resource,
   "createUpdateParameters"
 );
-@@clientName(DatabaseAccounts.update::parameters.properties,
+@@clientName(
+  DatabaseAccounts.update::parameters.properties,
   "updateParameters"
 );
-@@clientName(DatabaseAccounts.failoverPriorityChange::parameters.body,
+@@clientName(
+  DatabaseAccounts.failoverPriorityChange::parameters.body,
   "failoverParameters"
 );
-@@clientName(DatabaseAccounts.offlineRegion::parameters.body,
+@@clientName(
+  DatabaseAccounts.offlineRegion::parameters.body,
   "regionParameterForOffline"
 );
-@@clientName(DatabaseAccounts.onlineRegion::parameters.body,
+@@clientName(
+  DatabaseAccounts.onlineRegion::parameters.body,
   "regionParameterForOnline"
 );
-@@clientName(DatabaseAccounts.regenerateKey::parameters.body,
+@@clientName(
+  DatabaseAccounts.regenerateKey::parameters.body,
   "keyToRegenerate"
 );
 @@clientLocation(DatabaseAccounts.databaseListMetrics, "Database");
@@ -146,476 +154,612 @@ using Microsoft.DocumentDB;
 @@clientLocation(DatabaseAccounts.databaseListUsages, "Database");
 @@clientName(DatabaseAccounts.databaseListUsages, "ListUsages");
 @@clientLocation(DatabaseAccounts.databaseListMetricDefinitions, "Database");
-@@clientName(DatabaseAccounts.databaseListMetricDefinitions,
+@@clientName(
+  DatabaseAccounts.databaseListMetricDefinitions,
   "ListMetricDefinitions"
 );
 @@clientLocation(DatabaseAccounts.collectionListMetrics, "Collection");
 @@clientName(DatabaseAccounts.collectionListMetrics, "ListMetrics");
 @@clientLocation(DatabaseAccounts.collectionListUsages, "Collection");
 @@clientName(DatabaseAccounts.collectionListUsages, "ListUsages");
-@@clientLocation(DatabaseAccounts.collectionListMetricDefinitions,
+@@clientLocation(
+  DatabaseAccounts.collectionListMetricDefinitions,
   "Collection"
 );
-@@clientName(DatabaseAccounts.collectionListMetricDefinitions,
+@@clientName(
+  DatabaseAccounts.collectionListMetricDefinitions,
   "ListMetricDefinitions"
 );
-@@clientLocation(DatabaseAccounts.collectionRegionListMetrics,
+@@clientLocation(
+  DatabaseAccounts.collectionRegionListMetrics,
   "CollectionRegion"
 );
 @@clientName(DatabaseAccounts.collectionRegionListMetrics, "ListMetrics");
-@@clientLocation(DatabaseAccounts.databaseAccountRegionListMetrics,
+@@clientLocation(
+  DatabaseAccounts.databaseAccountRegionListMetrics,
   "DatabaseAccountRegion"
 );
 @@clientName(DatabaseAccounts.databaseAccountRegionListMetrics, "ListMetrics");
-@@clientLocation(DatabaseAccounts.percentileSourceTargetListMetrics,
+@@clientLocation(
+  DatabaseAccounts.percentileSourceTargetListMetrics,
   "PercentileSourceTarget"
 );
 @@clientName(DatabaseAccounts.percentileSourceTargetListMetrics, "ListMetrics");
-@@clientLocation(DatabaseAccounts.percentileTargetListMetrics,
+@@clientLocation(
+  DatabaseAccounts.percentileTargetListMetrics,
   "PercentileTarget"
 );
 @@clientName(DatabaseAccounts.percentileTargetListMetrics, "ListMetrics");
 @@clientLocation(DatabaseAccounts.percentileListMetrics, "Percentile");
 @@clientName(DatabaseAccounts.percentileListMetrics, "ListMetrics");
-@@clientLocation(DatabaseAccounts.collectionPartitionRegionListMetrics,
+@@clientLocation(
+  DatabaseAccounts.collectionPartitionRegionListMetrics,
   "CollectionPartitionRegion"
 );
-@@clientName(DatabaseAccounts.collectionPartitionRegionListMetrics,
+@@clientName(
+  DatabaseAccounts.collectionPartitionRegionListMetrics,
   "ListMetrics"
 );
-@@clientLocation(DatabaseAccounts.collectionPartitionListMetrics,
+@@clientLocation(
+  DatabaseAccounts.collectionPartitionListMetrics,
   "CollectionPartition"
 );
 @@clientName(DatabaseAccounts.collectionPartitionListMetrics, "ListMetrics");
-@@clientLocation(DatabaseAccounts.collectionPartitionListUsages,
+@@clientLocation(
+  DatabaseAccounts.collectionPartitionListUsages,
   "CollectionPartition"
 );
 @@clientName(DatabaseAccounts.collectionPartitionListUsages, "ListUsages");
-@@clientLocation(DatabaseAccounts.partitionKeyRangeIdListMetrics,
+@@clientLocation(
+  DatabaseAccounts.partitionKeyRangeIdListMetrics,
   "PartitionKeyRangeId"
 );
 @@clientName(DatabaseAccounts.partitionKeyRangeIdListMetrics, "ListMetrics");
-@@clientLocation(DatabaseAccounts.partitionKeyRangeIdRegionListMetrics,
+@@clientLocation(
+  DatabaseAccounts.partitionKeyRangeIdRegionListMetrics,
   "PartitionKeyRangeIdRegion"
 );
-@@clientName(DatabaseAccounts.partitionKeyRangeIdRegionListMetrics,
+@@clientName(
+  DatabaseAccounts.partitionKeyRangeIdRegionListMetrics,
   "ListMetrics"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseAccountGetResults.properties);
 
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-@@clientName(GraphResources.createUpdateGraph::parameters.resource,
+@@clientName(
+  GraphResources.createUpdateGraph::parameters.resource,
   "createUpdateGraphParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GraphResourceGetResults.properties);
 
-@@clientName(SqlResources.createUpdateSqlDatabase::parameters.resource,
+@@clientName(
+  SqlResources.createUpdateSqlDatabase::parameters.resource,
   "createUpdateSqlDatabaseParameters"
 );
-@@clientName(SqlResources.sqlDatabasePartitionMerge::parameters.body,
+@@clientName(
+  SqlResources.sqlDatabasePartitionMerge::parameters.body,
   "mergeParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlDatabaseGetResults.properties);
 
-@@clientLocation(ThroughputSettingsGetResultsOperationGroup.getSqlDatabaseThroughput,
+@@clientLocation(
+  ThroughputSettingsGetResultsOperationGroup.getSqlDatabaseThroughput,
   SqlResources
 );
-@@clientLocation(ThroughputSettingsGetResultsOperationGroup.updateSqlDatabaseThroughput,
+@@clientLocation(
+  ThroughputSettingsGetResultsOperationGroup.updateSqlDatabaseThroughput,
   SqlResources
 );
-@@clientName(ThroughputSettingsGetResultsOperationGroup.updateSqlDatabaseThroughput::parameters.resource,
+@@clientName(
+  ThroughputSettingsGetResultsOperationGroup.updateSqlDatabaseThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateSqlDatabaseToAutoscale,
+@@clientLocation(
+  ThroughputSettingsGetResultsOperationGroup.migrateSqlDatabaseToAutoscale,
   SqlResources
 );
-@@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateSqlDatabaseToManualThroughput,
+@@clientLocation(
+  ThroughputSettingsGetResultsOperationGroup.migrateSqlDatabaseToManualThroughput,
   SqlResources
 );
-@@clientLocation(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution,
+@@clientLocation(
+  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution,
   SqlResources
 );
-@@clientName(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution::parameters.body,
+@@clientName(
+  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution::parameters.body,
   "retrieveThroughputParameters"
 );
-@@clientLocation(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput,
+@@clientLocation(
+  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput,
   SqlResources
 );
-@@clientName(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
+@@clientName(
+  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
   "redistributeThroughputParameters"
 );
-@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.getSqlContainerThroughput,
+@@clientLocation(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.getSqlContainerThroughput,
   SqlResources
 );
-@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput,
+@@clientLocation(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput,
   SqlResources
 );
-@@clientName(SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
+@@clientName(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.migrateSqlContainerToAutoscale,
+@@clientLocation(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.migrateSqlContainerToAutoscale,
   SqlResources
 );
-@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.migrateSqlContainerToManualThroughput,
+@@clientLocation(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.migrateSqlContainerToManualThroughput,
   SqlResources
 );
-@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution,
+@@clientLocation(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution,
   SqlResources
 );
-@@clientName(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
+@@clientName(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
   "retrieveThroughputParameters"
 );
-@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput,
+@@clientLocation(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput,
   SqlResources
 );
-@@clientName(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
+@@clientName(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
   "redistributeThroughputParameters"
 );
-@@clientName(MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
+@@clientName(
+  MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientName(MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
+@@clientName(
+  MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
   "retrieveThroughputParameters"
 );
-@@clientName(MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
+@@clientName(
+  MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
   "redistributeThroughputParameters"
 );
-@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.getMongoDBCollectionThroughput,
+@@clientLocation(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.getMongoDBCollectionThroughput,
   MongoDBResources
 );
-@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput,
+@@clientLocation(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput,
   MongoDBResources
 );
-@@clientName(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
+@@clientName(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution,
+@@clientLocation(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution,
   MongoDBResources
 );
-@@clientName(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
+@@clientName(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
   "retrieveThroughputParameters"
 );
-@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput,
+@@clientLocation(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput,
   MongoDBResources
 );
-@@clientName(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
+@@clientName(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
   "redistributeThroughputParameters"
 );
-@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.migrateMongoDBCollectionToAutoscale,
+@@clientLocation(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.migrateMongoDBCollectionToAutoscale,
   MongoDBResources
 );
-@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.migrateMongoDBCollectionToManualThroughput,
+@@clientLocation(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.migrateMongoDBCollectionToManualThroughput,
   MongoDBResources
 );
-@@clientName(TableResources.updateTableThroughput::parameters.resource,
+@@clientName(
+  TableResources.updateTableThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientName(CassandraResources.updateCassandraKeyspaceThroughput::parameters.resource,
+@@clientName(
+  CassandraResources.updateCassandraKeyspaceThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientLocation(CassandraResourcesThroughputSettingsGetResultsOperationGroup.getCassandraTableThroughput,
+@@clientLocation(
+  CassandraResourcesThroughputSettingsGetResultsOperationGroup.getCassandraTableThroughput,
   CassandraResources
 );
-@@clientLocation(CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput,
+@@clientLocation(
+  CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput,
   CassandraResources
 );
-@@clientName(CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
+@@clientName(
+  CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientLocation(CassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraTableToAutoscale,
+@@clientLocation(
+  CassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraTableToAutoscale,
   CassandraResources
 );
-@@clientLocation(CassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraTableToManualThroughput,
+@@clientLocation(
+  CassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraTableToManualThroughput,
   CassandraResources
 );
-@@clientLocation(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.getCassandraViewThroughput,
+@@clientLocation(
+  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.getCassandraViewThroughput,
   CassandraResources
 );
-@@clientLocation(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput,
+@@clientLocation(
+  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput,
   CassandraResources
 );
-@@clientName(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
+@@clientName(
+  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientLocation(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToAutoscale,
+@@clientLocation(
+  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToAutoscale,
   CassandraResources
 );
-@@clientLocation(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToManualThroughput,
+@@clientLocation(
+  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToManualThroughput,
   CassandraResources
 );
-@@clientName(GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
+@@clientName(
+  GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientLocation(GremlinResourcesThroughputSettingsGetResultsOperationGroup.getGremlinGraphThroughput,
+@@clientLocation(
+  GremlinResourcesThroughputSettingsGetResultsOperationGroup.getGremlinGraphThroughput,
   GremlinResources
 );
-@@clientLocation(GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput,
+@@clientLocation(
+  GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput,
   GremlinResources
 );
-@@clientName(GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
+@@clientName(
+  GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-@@clientLocation(GremlinResourcesThroughputSettingsGetResultsOperationGroup.migrateGremlinGraphToAutoscale,
+@@clientLocation(
+  GremlinResourcesThroughputSettingsGetResultsOperationGroup.migrateGremlinGraphToAutoscale,
   GremlinResources
 );
-@@clientLocation(GremlinResourcesThroughputSettingsGetResultsOperationGroup.migrateGremlinGraphToManualThroughput,
+@@clientLocation(
+  GremlinResourcesThroughputSettingsGetResultsOperationGroup.migrateGremlinGraphToManualThroughput,
   GremlinResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputSettingsGetResults.properties);
 
-@@clientLocation(ClientEncryptionKeyGetResultsOperationGroup.getClientEncryptionKey,
+@@clientLocation(
+  ClientEncryptionKeyGetResultsOperationGroup.getClientEncryptionKey,
   SqlResources
 );
-@@clientLocation(ClientEncryptionKeyGetResultsOperationGroup.createUpdateClientEncryptionKey,
+@@clientLocation(
+  ClientEncryptionKeyGetResultsOperationGroup.createUpdateClientEncryptionKey,
   SqlResources
 );
-@@clientName(ClientEncryptionKeyGetResultsOperationGroup.createUpdateClientEncryptionKey::parameters.resource,
+@@clientName(
+  ClientEncryptionKeyGetResultsOperationGroup.createUpdateClientEncryptionKey::parameters.resource,
   "createUpdateClientEncryptionKeyParameters"
 );
-@@clientLocation(ClientEncryptionKeyGetResultsOperationGroup.listClientEncryptionKeys,
+@@clientLocation(
+  ClientEncryptionKeyGetResultsOperationGroup.listClientEncryptionKeys,
   SqlResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClientEncryptionKeyGetResults.properties);
 
-@@clientLocation(SqlContainerGetResultsOperationGroup.getSqlContainer,
+@@clientLocation(
+  SqlContainerGetResultsOperationGroup.getSqlContainer,
   SqlResources
 );
-@@clientLocation(SqlContainerGetResultsOperationGroup.createUpdateSqlContainer,
+@@clientLocation(
+  SqlContainerGetResultsOperationGroup.createUpdateSqlContainer,
   SqlResources
 );
-@@clientName(SqlContainerGetResultsOperationGroup.createUpdateSqlContainer::parameters.resource,
+@@clientName(
+  SqlContainerGetResultsOperationGroup.createUpdateSqlContainer::parameters.resource,
   "createUpdateSqlContainerParameters"
 );
-@@clientLocation(SqlContainerGetResultsOperationGroup.deleteSqlContainer,
+@@clientLocation(
+  SqlContainerGetResultsOperationGroup.deleteSqlContainer,
   SqlResources
 );
-@@clientLocation(SqlContainerGetResultsOperationGroup.listSqlContainers,
+@@clientLocation(
+  SqlContainerGetResultsOperationGroup.listSqlContainers,
   SqlResources
 );
-@@clientLocation(SqlContainerGetResultsOperationGroup.listSqlContainerPartitionMerge,
+@@clientLocation(
+  SqlContainerGetResultsOperationGroup.listSqlContainerPartitionMerge,
   SqlResources
 );
-@@clientName(SqlContainerGetResultsOperationGroup.listSqlContainerPartitionMerge::parameters.body,
+@@clientName(
+  SqlContainerGetResultsOperationGroup.listSqlContainerPartitionMerge::parameters.body,
   "mergeParameters"
 );
-@@clientLocation(SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation,
+@@clientLocation(
+  SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation,
   SqlResources
 );
-@@clientName(SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+@@clientName(
+  SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "location"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlContainerGetResults.properties);
 
-@@clientLocation(SqlStoredProcedureGetResultsOperationGroup.getSqlStoredProcedure,
+@@clientLocation(
+  SqlStoredProcedureGetResultsOperationGroup.getSqlStoredProcedure,
   SqlResources
 );
-@@clientLocation(SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure,
+@@clientLocation(
+  SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure,
   SqlResources
 );
-@@clientName(SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure::parameters.resource,
+@@clientName(
+  SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure::parameters.resource,
   "createUpdateSqlStoredProcedureParameters"
 );
-@@clientLocation(SqlStoredProcedureGetResultsOperationGroup.deleteSqlStoredProcedure,
+@@clientLocation(
+  SqlStoredProcedureGetResultsOperationGroup.deleteSqlStoredProcedure,
   SqlResources
 );
-@@clientLocation(SqlStoredProcedureGetResultsOperationGroup.listSqlStoredProcedures,
+@@clientLocation(
+  SqlStoredProcedureGetResultsOperationGroup.listSqlStoredProcedures,
   SqlResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlStoredProcedureGetResults.properties);
 
-@@clientLocation(SqlUserDefinedFunctionGetResultsOperationGroup.getSqlUserDefinedFunction,
+@@clientLocation(
+  SqlUserDefinedFunctionGetResultsOperationGroup.getSqlUserDefinedFunction,
   SqlResources
 );
-@@clientLocation(SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction,
+@@clientLocation(
+  SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction,
   SqlResources
 );
-@@clientName(SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction::parameters.resource,
+@@clientName(
+  SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction::parameters.resource,
   "createUpdateSqlUserDefinedFunctionParameters"
 );
-@@clientLocation(SqlUserDefinedFunctionGetResultsOperationGroup.deleteSqlUserDefinedFunction,
+@@clientLocation(
+  SqlUserDefinedFunctionGetResultsOperationGroup.deleteSqlUserDefinedFunction,
   SqlResources
 );
-@@clientLocation(SqlUserDefinedFunctionGetResultsOperationGroup.listSqlUserDefinedFunctions,
+@@clientLocation(
+  SqlUserDefinedFunctionGetResultsOperationGroup.listSqlUserDefinedFunctions,
   SqlResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlUserDefinedFunctionGetResults.properties);
 
-@@clientLocation(SqlTriggerGetResultsOperationGroup.getSqlTrigger,
+@@clientLocation(
+  SqlTriggerGetResultsOperationGroup.getSqlTrigger,
   SqlResources
 );
-@@clientLocation(SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger,
+@@clientLocation(
+  SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger,
   SqlResources
 );
-@@clientName(SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger::parameters.resource,
+@@clientName(
+  SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger::parameters.resource,
   "createUpdateSqlTriggerParameters"
 );
-@@clientLocation(SqlTriggerGetResultsOperationGroup.deleteSqlTrigger,
+@@clientLocation(
+  SqlTriggerGetResultsOperationGroup.deleteSqlTrigger,
   SqlResources
 );
-@@clientLocation(SqlTriggerGetResultsOperationGroup.listSqlTriggers,
+@@clientLocation(
+  SqlTriggerGetResultsOperationGroup.listSqlTriggers,
   SqlResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlTriggerGetResults.properties);
 
-@@clientLocation(MongoDBDatabaseGetResultsOperationGroup.getMongoDBDatabase,
+@@clientLocation(
+  MongoDBDatabaseGetResultsOperationGroup.getMongoDBDatabase,
   MongoDBResources
 );
-@@clientLocation(MongoDBDatabaseGetResultsOperationGroup.createUpdateMongoDBDatabase,
+@@clientLocation(
+  MongoDBDatabaseGetResultsOperationGroup.createUpdateMongoDBDatabase,
   MongoDBResources
 );
-@@clientName(MongoDBDatabaseGetResultsOperationGroup.createUpdateMongoDBDatabase::parameters.resource,
+@@clientName(
+  MongoDBDatabaseGetResultsOperationGroup.createUpdateMongoDBDatabase::parameters.resource,
   "createUpdateMongoDBDatabaseParameters"
 );
-@@clientLocation(MongoDBDatabaseGetResultsOperationGroup.deleteMongoDBDatabase,
+@@clientLocation(
+  MongoDBDatabaseGetResultsOperationGroup.deleteMongoDBDatabase,
   MongoDBResources
 );
-@@clientLocation(MongoDBDatabaseGetResultsOperationGroup.listMongoDBDatabases,
+@@clientLocation(
+  MongoDBDatabaseGetResultsOperationGroup.listMongoDBDatabases,
   MongoDBResources
 );
-@@clientLocation(MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge,
+@@clientLocation(
+  MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge,
   MongoDBResources
 );
-@@clientName(MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge::parameters.body,
+@@clientName(
+  MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge::parameters.body,
   "mergeParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoDBDatabaseGetResults.properties);
 
-@@clientLocation(MongoDBCollectionGetResultsOperationGroup.getMongoDBCollection,
+@@clientLocation(
+  MongoDBCollectionGetResultsOperationGroup.getMongoDBCollection,
   MongoDBResources
 );
-@@clientLocation(MongoDBCollectionGetResultsOperationGroup.createUpdateMongoDBCollection,
+@@clientLocation(
+  MongoDBCollectionGetResultsOperationGroup.createUpdateMongoDBCollection,
   MongoDBResources
 );
-@@clientName(MongoDBCollectionGetResultsOperationGroup.createUpdateMongoDBCollection::parameters.resource,
+@@clientName(
+  MongoDBCollectionGetResultsOperationGroup.createUpdateMongoDBCollection::parameters.resource,
   "createUpdateMongoDBCollectionParameters"
 );
-@@clientLocation(MongoDBCollectionGetResultsOperationGroup.deleteMongoDBCollection,
+@@clientLocation(
+  MongoDBCollectionGetResultsOperationGroup.deleteMongoDBCollection,
   MongoDBResources
 );
-@@clientLocation(MongoDBCollectionGetResultsOperationGroup.listMongoDBCollections,
+@@clientLocation(
+  MongoDBCollectionGetResultsOperationGroup.listMongoDBCollections,
   MongoDBResources
 );
-@@clientLocation(MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge,
+@@clientLocation(
+  MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge,
   MongoDBResources
 );
-@@clientName(MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge::parameters.body,
+@@clientName(
+  MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge::parameters.body,
   "mergeParameters"
 );
-@@clientLocation(MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation,
+@@clientLocation(
+  MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation,
   MongoDBResources
 );
-@@clientName(MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+@@clientName(
+  MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "location"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoDBCollectionGetResults.properties);
 
 @@clientLocation(TableGetResultsOperationGroup.getTable, TableResources);
-@@clientLocation(TableGetResultsOperationGroup.createUpdateTable,
+@@clientLocation(
+  TableGetResultsOperationGroup.createUpdateTable,
   TableResources
 );
-@@clientName(TableGetResultsOperationGroup.createUpdateTable::parameters.resource,
+@@clientName(
+  TableGetResultsOperationGroup.createUpdateTable::parameters.resource,
   "createUpdateTableParameters"
 );
 @@clientLocation(TableGetResultsOperationGroup.deleteTable, TableResources);
 @@clientLocation(TableGetResultsOperationGroup.listTables, TableResources);
-@@clientLocation(TableGetResultsOperationGroup.retrieveContinuousBackupInformation,
+@@clientLocation(
+  TableGetResultsOperationGroup.retrieveContinuousBackupInformation,
   TableResources
 );
-@@clientName(TableGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+@@clientName(
+  TableGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "location"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TableGetResults.properties);
 
-@@clientLocation(CassandraKeyspaceGetResultsOperationGroup.getCassandraKeyspace,
+@@clientLocation(
+  CassandraKeyspaceGetResultsOperationGroup.getCassandraKeyspace,
   CassandraResources
 );
-@@clientLocation(CassandraKeyspaceGetResultsOperationGroup.createUpdateCassandraKeyspace,
+@@clientLocation(
+  CassandraKeyspaceGetResultsOperationGroup.createUpdateCassandraKeyspace,
   CassandraResources
 );
-@@clientName(CassandraKeyspaceGetResultsOperationGroup.createUpdateCassandraKeyspace::parameters.resource,
+@@clientName(
+  CassandraKeyspaceGetResultsOperationGroup.createUpdateCassandraKeyspace::parameters.resource,
   "createUpdateCassandraKeyspaceParameters"
 );
-@@clientLocation(CassandraKeyspaceGetResultsOperationGroup.deleteCassandraKeyspace,
+@@clientLocation(
+  CassandraKeyspaceGetResultsOperationGroup.deleteCassandraKeyspace,
   CassandraResources
 );
-@@clientLocation(CassandraKeyspaceGetResultsOperationGroup.listCassandraKeyspaces,
+@@clientLocation(
+  CassandraKeyspaceGetResultsOperationGroup.listCassandraKeyspaces,
   CassandraResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraKeyspaceGetResults.properties);
 
-@@clientLocation(CassandraTableGetResultsOperationGroup.getCassandraTable,
+@@clientLocation(
+  CassandraTableGetResultsOperationGroup.getCassandraTable,
   CassandraResources
 );
-@@clientLocation(CassandraTableGetResultsOperationGroup.createUpdateCassandraTable,
+@@clientLocation(
+  CassandraTableGetResultsOperationGroup.createUpdateCassandraTable,
   CassandraResources
 );
-@@clientName(CassandraTableGetResultsOperationGroup.createUpdateCassandraTable::parameters.resource,
+@@clientName(
+  CassandraTableGetResultsOperationGroup.createUpdateCassandraTable::parameters.resource,
   "createUpdateCassandraTableParameters"
 );
-@@clientLocation(CassandraTableGetResultsOperationGroup.deleteCassandraTable,
+@@clientLocation(
+  CassandraTableGetResultsOperationGroup.deleteCassandraTable,
   CassandraResources
 );
-@@clientLocation(CassandraTableGetResultsOperationGroup.listCassandraTables,
+@@clientLocation(
+  CassandraTableGetResultsOperationGroup.listCassandraTables,
   CassandraResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraTableGetResults.properties);
 
-@@clientLocation(GremlinDatabaseGetResultsOperationGroup.getGremlinDatabase,
+@@clientLocation(
+  GremlinDatabaseGetResultsOperationGroup.getGremlinDatabase,
   GremlinResources
 );
-@@clientLocation(GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase,
+@@clientLocation(
+  GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase,
   GremlinResources
 );
-@@clientName(GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase::parameters.resource,
+@@clientName(
+  GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase::parameters.resource,
   "createUpdateGremlinDatabaseParameters"
 );
-@@clientLocation(GremlinDatabaseGetResultsOperationGroup.deleteGremlinDatabase,
+@@clientLocation(
+  GremlinDatabaseGetResultsOperationGroup.deleteGremlinDatabase,
   GremlinResources
 );
-@@clientLocation(GremlinDatabaseGetResultsOperationGroup.listGremlinDatabases,
+@@clientLocation(
+  GremlinDatabaseGetResultsOperationGroup.listGremlinDatabases,
   GremlinResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GremlinDatabaseGetResults.properties);
 
-@@clientLocation(GremlinGraphGetResultsOperationGroup.getGremlinGraph,
+@@clientLocation(
+  GremlinGraphGetResultsOperationGroup.getGremlinGraph,
   GremlinResources
 );
-@@clientLocation(GremlinGraphGetResultsOperationGroup.createUpdateGremlinGraph,
+@@clientLocation(
+  GremlinGraphGetResultsOperationGroup.createUpdateGremlinGraph,
   GremlinResources
 );
-@@clientName(GremlinGraphGetResultsOperationGroup.createUpdateGremlinGraph::parameters.resource,
+@@clientName(
+  GremlinGraphGetResultsOperationGroup.createUpdateGremlinGraph::parameters.resource,
   "createUpdateGremlinGraphParameters"
 );
-@@clientLocation(GremlinGraphGetResultsOperationGroup.deleteGremlinGraph,
+@@clientLocation(
+  GremlinGraphGetResultsOperationGroup.deleteGremlinGraph,
   GremlinResources
 );
-@@clientLocation(GremlinGraphGetResultsOperationGroup.listGremlinGraphs,
+@@clientLocation(
+  GremlinGraphGetResultsOperationGroup.listGremlinGraphs,
   GremlinResources
 );
-@@clientLocation(GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation,
+@@clientLocation(
+  GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation,
   GremlinResources
 );
-@@clientName(GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+@@clientName(
+  GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "location"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -624,25 +768,31 @@ using Microsoft.DocumentDB;
 @@clientLocation(LocationGetResults.get, "Locations");
 @@clientLocation(LocationGetResults.list, "Locations");
 
-@@clientLocation(CassandraViewGetResultsOperationGroup.getCassandraView,
+@@clientLocation(
+  CassandraViewGetResultsOperationGroup.getCassandraView,
   CassandraResources
 );
-@@clientLocation(CassandraViewGetResultsOperationGroup.createUpdateCassandraView,
+@@clientLocation(
+  CassandraViewGetResultsOperationGroup.createUpdateCassandraView,
   CassandraResources
 );
-@@clientName(CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
+@@clientName(
+  CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
   "createUpdateCassandraViewParameters"
 );
-@@clientLocation(CassandraViewGetResultsOperationGroup.deleteCassandraView,
+@@clientLocation(
+  CassandraViewGetResultsOperationGroup.deleteCassandraView,
   CassandraResources
 );
-@@clientLocation(CassandraViewGetResultsOperationGroup.listCassandraViews,
+@@clientLocation(
+  CassandraViewGetResultsOperationGroup.listCassandraViews,
   CassandraResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraViewGetResults.properties);
 
-@@clientName(DataTransferJobs.create::parameters.resource,
+@@clientName(
+  DataTransferJobs.create::parameters.resource,
   "jobCreateParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -676,43 +826,54 @@ using Microsoft.DocumentDB;
 @@clientLocation(DataCenterResources.delete, "CassandraDataCenters");
 @@clientLocation(DataCenterResources.list, "CassandraDataCenters");
 
-@@clientLocation(MongoRoleDefinitionGetResultsOperationGroup.getMongoRoleDefinition,
+@@clientLocation(
+  MongoRoleDefinitionGetResultsOperationGroup.getMongoRoleDefinition,
   MongoDBResources
 );
-@@clientLocation(MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition,
+@@clientLocation(
+  MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition,
   MongoDBResources
 );
-@@clientName(MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition::parameters.resource,
+@@clientName(
+  MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition::parameters.resource,
   "createUpdateMongoRoleDefinitionParameters"
 );
-@@clientLocation(MongoRoleDefinitionGetResultsOperationGroup.deleteMongoRoleDefinition,
+@@clientLocation(
+  MongoRoleDefinitionGetResultsOperationGroup.deleteMongoRoleDefinition,
   MongoDBResources
 );
-@@clientLocation(MongoRoleDefinitionGetResultsOperationGroup.listMongoRoleDefinitions,
+@@clientLocation(
+  MongoRoleDefinitionGetResultsOperationGroup.listMongoRoleDefinitions,
   MongoDBResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoRoleDefinitionGetResults.properties);
 
-@@clientLocation(MongoUserDefinitionGetResultsOperationGroup.getMongoUserDefinition,
+@@clientLocation(
+  MongoUserDefinitionGetResultsOperationGroup.getMongoUserDefinition,
   MongoDBResources
 );
-@@clientLocation(MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition,
+@@clientLocation(
+  MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition,
   MongoDBResources
 );
-@@clientName(MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition::parameters.resource,
+@@clientName(
+  MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition::parameters.resource,
   "createUpdateMongoUserDefinitionParameters"
 );
-@@clientLocation(MongoUserDefinitionGetResultsOperationGroup.deleteMongoUserDefinition,
+@@clientLocation(
+  MongoUserDefinitionGetResultsOperationGroup.deleteMongoUserDefinition,
   MongoDBResources
 );
-@@clientLocation(MongoUserDefinitionGetResultsOperationGroup.listMongoUserDefinitions,
+@@clientLocation(
+  MongoUserDefinitionGetResultsOperationGroup.listMongoUserDefinitions,
   MongoDBResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoUserDefinitionGetResults.properties);
 
-@@clientName(NotebookWorkspaces.createOrUpdate::parameters.resource,
+@@clientName(
+  NotebookWorkspaces.createOrUpdate::parameters.resource,
   "notebookCreateUpdateParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -721,107 +882,139 @@ using Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 
-@@clientLocation(SqlRoleDefinitionGetResultsOperationGroup.getSqlRoleDefinition,
+@@clientLocation(
+  SqlRoleDefinitionGetResultsOperationGroup.getSqlRoleDefinition,
   SqlResources
 );
-@@clientLocation(SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition,
+@@clientLocation(
+  SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition,
   SqlResources
 );
-@@clientName(SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition::parameters.resource,
+@@clientName(
+  SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition::parameters.resource,
   "createUpdateSqlRoleDefinitionParameters"
 );
-@@clientLocation(SqlRoleDefinitionGetResultsOperationGroup.deleteSqlRoleDefinition,
+@@clientLocation(
+  SqlRoleDefinitionGetResultsOperationGroup.deleteSqlRoleDefinition,
   SqlResources
 );
-@@clientLocation(SqlRoleDefinitionGetResultsOperationGroup.listSqlRoleDefinitions,
+@@clientLocation(
+  SqlRoleDefinitionGetResultsOperationGroup.listSqlRoleDefinitions,
   SqlResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlRoleDefinitionGetResults.properties);
 
-@@clientLocation(SqlRoleAssignmentGetResultsOperationGroup.getSqlRoleAssignment,
+@@clientLocation(
+  SqlRoleAssignmentGetResultsOperationGroup.getSqlRoleAssignment,
   SqlResources
 );
-@@clientLocation(SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment,
+@@clientLocation(
+  SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment,
   SqlResources
 );
-@@clientName(SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment::parameters.resource,
+@@clientName(
+  SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment::parameters.resource,
   "createUpdateSqlRoleAssignmentParameters"
 );
-@@clientLocation(SqlRoleAssignmentGetResultsOperationGroup.deleteSqlRoleAssignment,
+@@clientLocation(
+  SqlRoleAssignmentGetResultsOperationGroup.deleteSqlRoleAssignment,
   SqlResources
 );
-@@clientLocation(SqlRoleAssignmentGetResultsOperationGroup.listSqlRoleAssignments,
+@@clientLocation(
+  SqlRoleAssignmentGetResultsOperationGroup.listSqlRoleAssignments,
   SqlResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlRoleAssignmentGetResults.properties);
 
-@@clientLocation(RestorableDatabaseAccountGetResults.getByLocation,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.getByLocation,
   "RestorableDatabaseAccounts"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.listByLocation,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.listByLocation,
   "RestorableDatabaseAccounts"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.list,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.list,
   "RestorableSqlDatabases"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableSqlContainersList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableSqlContainersList,
   "RestorableSqlContainers"
 );
-@@clientName(RestorableDatabaseAccountGetResults.restorableSqlContainersList,
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableSqlContainersList,
   "List"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableSqlResourcesList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableSqlResourcesList,
   "RestorableSqlResources"
 );
-@@clientName(RestorableDatabaseAccountGetResults.restorableSqlResourcesList,
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableSqlResourcesList,
   "List"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableMongodbDatabasesList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableMongodbDatabasesList,
   "RestorableMongodbDatabases"
 );
-@@clientName(RestorableDatabaseAccountGetResults.restorableMongodbDatabasesList,
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableMongodbDatabasesList,
   "List"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableMongodbCollectionsList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableMongodbCollectionsList,
   "RestorableMongodbCollections"
 );
-@@clientName(RestorableDatabaseAccountGetResults.restorableMongodbCollectionsList,
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableMongodbCollectionsList,
   "List"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableMongodbResourcesList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableMongodbResourcesList,
   "RestorableMongodbResources"
 );
-@@clientName(RestorableDatabaseAccountGetResults.restorableMongodbResourcesList,
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableMongodbResourcesList,
   "List"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableGremlinDatabasesList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableGremlinDatabasesList,
   "RestorableGremlinDatabases"
 );
-@@clientName(RestorableDatabaseAccountGetResults.restorableGremlinDatabasesList,
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableGremlinDatabasesList,
   "List"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableGremlinGraphsList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableGremlinGraphsList,
   "RestorableGremlinGraphs"
 );
-@@clientName(RestorableDatabaseAccountGetResults.restorableGremlinGraphsList,
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableGremlinGraphsList,
   "List"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableGremlinResourcesList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableGremlinResourcesList,
   "RestorableGremlinResources"
 );
-@@clientName(RestorableDatabaseAccountGetResults.restorableGremlinResourcesList,
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableGremlinResourcesList,
   "List"
 );
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableTablesList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableTablesList,
   "RestorableTables"
 );
 @@clientName(RestorableDatabaseAccountGetResults.restorableTablesList, "List");
-@@clientLocation(RestorableDatabaseAccountGetResults.restorableTableResourcesList,
+@@clientLocation(
+  RestorableDatabaseAccountGetResults.restorableTableResourcesList,
   "RestorableTableResources"
 );
-@@clientName(RestorableDatabaseAccountGetResults.restorableTableResourcesList,
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableTableResourcesList,
   "List"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -829,43 +1022,54 @@ using Microsoft.DocumentDB;
 
 @@clientLocation(ServiceResources.get, "Service");
 @@clientLocation(ServiceResources.create, "Service");
-@@clientName(ServiceResources.create::parameters.resource,
+@@clientName(
+  ServiceResources.create::parameters.resource,
   "createUpdateParameters"
 );
 @@clientLocation(ServiceResources.delete, "Service");
 @@clientLocation(ServiceResources.list, "Service");
 
-@@clientLocation(TableRoleDefinitionResources.getTableRoleDefinition,
+@@clientLocation(
+  TableRoleDefinitionResources.getTableRoleDefinition,
   TableResources
 );
-@@clientLocation(TableRoleDefinitionResources.createUpdateTableRoleDefinition,
+@@clientLocation(
+  TableRoleDefinitionResources.createUpdateTableRoleDefinition,
   TableResources
 );
-@@clientName(TableRoleDefinitionResources.createUpdateTableRoleDefinition::parameters.resource,
+@@clientName(
+  TableRoleDefinitionResources.createUpdateTableRoleDefinition::parameters.resource,
   "createUpdateTableRoleDefinitionParameters"
 );
-@@clientLocation(TableRoleDefinitionResources.deleteTableRoleDefinition,
+@@clientLocation(
+  TableRoleDefinitionResources.deleteTableRoleDefinition,
   TableResources
 );
-@@clientLocation(TableRoleDefinitionResources.listTableRoleDefinitions,
+@@clientLocation(
+  TableRoleDefinitionResources.listTableRoleDefinitions,
   TableResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TableRoleDefinitionResource.properties);
 
-@@clientLocation(TableRoleAssignmentResources.getTableRoleAssignment,
+@@clientLocation(
+  TableRoleAssignmentResources.getTableRoleAssignment,
   TableResources
 );
-@@clientLocation(TableRoleAssignmentResources.createUpdateTableRoleAssignment,
+@@clientLocation(
+  TableRoleAssignmentResources.createUpdateTableRoleAssignment,
   TableResources
 );
-@@clientName(TableRoleAssignmentResources.createUpdateTableRoleAssignment::parameters.resource,
+@@clientName(
+  TableRoleAssignmentResources.createUpdateTableRoleAssignment::parameters.resource,
   "createUpdateTableRoleAssignmentParameters"
 );
-@@clientLocation(TableRoleAssignmentResources.deleteTableRoleAssignment,
+@@clientLocation(
+  TableRoleAssignmentResources.deleteTableRoleAssignment,
   TableResources
 );
-@@clientLocation(TableRoleAssignmentResources.listTableRoleAssignments,
+@@clientLocation(
+  TableRoleAssignmentResources.listTableRoleAssignments,
   TableResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -873,13 +1077,15 @@ using Microsoft.DocumentDB;
 
 @@clientLocation(ThroughputPoolResources.get, "ThroughputPool");
 @@clientLocation(ThroughputPoolResources.createOrUpdate, "ThroughputPool");
-@@clientName(ThroughputPoolResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ThroughputPoolResources.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(ThroughputPoolResources.update, "ThroughputPool");
 @@clientName(ThroughputPoolResources.update::parameters.properties, "body");
 @@clientLocation(ThroughputPoolResources.delete, "ThroughputPool");
-@@clientLocation(ThroughputPoolResources.listByResourceGroup,
+@@clientLocation(
+  ThroughputPoolResources.listByResourceGroup,
   "ThroughputPools"
 );
 @@clientLocation(ThroughputPoolResources.list, "ThroughputPools");
@@ -887,122 +1093,155 @@ using Microsoft.DocumentDB;
 @@Legacy.flattenProperty(ThroughputPoolResource.properties);
 
 @@clientLocation(ThroughputPoolAccountResources.get, "ThroughputPoolAccount");
-@@clientLocation(ThroughputPoolAccountResources.create,
+@@clientLocation(
+  ThroughputPoolAccountResources.create,
   "ThroughputPoolAccount"
 );
-@@clientName(ThroughputPoolAccountResources.create::parameters.resource,
+@@clientName(
+  ThroughputPoolAccountResources.create::parameters.resource,
   "body"
 );
-@@clientLocation(ThroughputPoolAccountResources.delete,
+@@clientLocation(
+  ThroughputPoolAccountResources.delete,
   "ThroughputPoolAccount"
 );
 @@clientLocation(ThroughputPoolAccountResources.list, "ThroughputPoolAccounts");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputPoolAccountResource.properties);
 
-@@clientLocation(CassandraRoleDefinitionResources.getCassandraRoleDefinition,
+@@clientLocation(
+  CassandraRoleDefinitionResources.getCassandraRoleDefinition,
   CassandraResources
 );
-@@clientLocation(CassandraRoleDefinitionResources.createUpdateCassandraRoleDefinition,
+@@clientLocation(
+  CassandraRoleDefinitionResources.createUpdateCassandraRoleDefinition,
   CassandraResources
 );
-@@clientName(CassandraRoleDefinitionResources.createUpdateCassandraRoleDefinition::parameters.resource,
+@@clientName(
+  CassandraRoleDefinitionResources.createUpdateCassandraRoleDefinition::parameters.resource,
   "createUpdateCassandraRoleDefinitionParameters"
 );
-@@clientLocation(CassandraRoleDefinitionResources.deleteCassandraRoleDefinition,
+@@clientLocation(
+  CassandraRoleDefinitionResources.deleteCassandraRoleDefinition,
   CassandraResources
 );
-@@clientLocation(CassandraRoleDefinitionResources.listCassandraRoleDefinitions,
+@@clientLocation(
+  CassandraRoleDefinitionResources.listCassandraRoleDefinitions,
   CassandraResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraRoleDefinitionResource.properties);
 
-@@clientLocation(CassandraRoleAssignmentResources.getCassandraRoleAssignment,
+@@clientLocation(
+  CassandraRoleAssignmentResources.getCassandraRoleAssignment,
   CassandraResources
 );
-@@clientLocation(CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment,
+@@clientLocation(
+  CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment,
   CassandraResources
 );
-@@clientName(CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment::parameters.resource,
+@@clientName(
+  CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment::parameters.resource,
   "createUpdateCassandraRoleAssignmentParameters"
 );
-@@clientLocation(CassandraRoleAssignmentResources.deleteCassandraRoleAssignment,
+@@clientLocation(
+  CassandraRoleAssignmentResources.deleteCassandraRoleAssignment,
   CassandraResources
 );
-@@clientLocation(CassandraRoleAssignmentResources.listCassandraRoleAssignments,
+@@clientLocation(
+  CassandraRoleAssignmentResources.listCassandraRoleAssignments,
   CassandraResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraRoleAssignmentResource.properties);
 
-@@clientLocation(MongoMIRoleDefinitionResources.getMongoMIRoleDefinition,
+@@clientLocation(
+  MongoMIRoleDefinitionResources.getMongoMIRoleDefinition,
   "MongoMIResources"
 );
-@@clientLocation(MongoMIRoleDefinitionResources.createUpdateMongoMIRoleDefinition,
+@@clientLocation(
+  MongoMIRoleDefinitionResources.createUpdateMongoMIRoleDefinition,
   "MongoMIResources"
 );
-@@clientName(MongoMIRoleDefinitionResources.createUpdateMongoMIRoleDefinition::parameters.resource,
+@@clientName(
+  MongoMIRoleDefinitionResources.createUpdateMongoMIRoleDefinition::parameters.resource,
   "createUpdateMongoMIRoleDefinitionParameters"
 );
-@@clientLocation(MongoMIRoleDefinitionResources.deleteMongoMIRoleDefinition,
+@@clientLocation(
+  MongoMIRoleDefinitionResources.deleteMongoMIRoleDefinition,
   "MongoMIResources"
 );
-@@clientLocation(MongoMIRoleDefinitionResources.listMongoMIRoleDefinitions,
+@@clientLocation(
+  MongoMIRoleDefinitionResources.listMongoMIRoleDefinitions,
   "MongoMIResources"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoMIRoleDefinitionResource.properties);
 
-@@clientLocation(MongoMIRoleAssignmentResources.getMongoMIRoleAssignment,
+@@clientLocation(
+  MongoMIRoleAssignmentResources.getMongoMIRoleAssignment,
   "MongoMIResources"
 );
-@@clientLocation(MongoMIRoleAssignmentResources.createUpdateMongoMIRoleAssignment,
+@@clientLocation(
+  MongoMIRoleAssignmentResources.createUpdateMongoMIRoleAssignment,
   "MongoMIResources"
 );
-@@clientName(MongoMIRoleAssignmentResources.createUpdateMongoMIRoleAssignment::parameters.resource,
+@@clientName(
+  MongoMIRoleAssignmentResources.createUpdateMongoMIRoleAssignment::parameters.resource,
   "createUpdateMongoMIRoleAssignmentParameters"
 );
-@@clientLocation(MongoMIRoleAssignmentResources.deleteMongoMIRoleAssignment,
+@@clientLocation(
+  MongoMIRoleAssignmentResources.deleteMongoMIRoleAssignment,
   "MongoMIResources"
 );
-@@clientLocation(MongoMIRoleAssignmentResources.listMongoMIRoleAssignments,
+@@clientLocation(
+  MongoMIRoleAssignmentResources.listMongoMIRoleAssignments,
   "MongoMIResources"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoMIRoleAssignmentResource.properties);
 
-@@clientLocation(GremlinRoleDefinitionResources.getGremlinRoleDefinition,
+@@clientLocation(
+  GremlinRoleDefinitionResources.getGremlinRoleDefinition,
   GremlinResources
 );
-@@clientLocation(GremlinRoleDefinitionResources.createUpdateGremlinRoleDefinition,
+@@clientLocation(
+  GremlinRoleDefinitionResources.createUpdateGremlinRoleDefinition,
   GremlinResources
 );
-@@clientName(GremlinRoleDefinitionResources.createUpdateGremlinRoleDefinition::parameters.resource,
+@@clientName(
+  GremlinRoleDefinitionResources.createUpdateGremlinRoleDefinition::parameters.resource,
   "createUpdateGremlinRoleDefinitionParameters"
 );
-@@clientLocation(GremlinRoleDefinitionResources.deleteGremlinRoleDefinition,
+@@clientLocation(
+  GremlinRoleDefinitionResources.deleteGremlinRoleDefinition,
   GremlinResources
 );
-@@clientLocation(GremlinRoleDefinitionResources.listGremlinRoleDefinitions,
+@@clientLocation(
+  GremlinRoleDefinitionResources.listGremlinRoleDefinitions,
   GremlinResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GremlinRoleDefinitionResource.properties);
 
-@@clientLocation(GremlinRoleAssignmentResources.getGremlinRoleAssignment,
+@@clientLocation(
+  GremlinRoleAssignmentResources.getGremlinRoleAssignment,
   GremlinResources
 );
-@@clientLocation(GremlinRoleAssignmentResources.createUpdateGremlinRoleAssignment,
+@@clientLocation(
+  GremlinRoleAssignmentResources.createUpdateGremlinRoleAssignment,
   GremlinResources
 );
-@@clientName(GremlinRoleAssignmentResources.createUpdateGremlinRoleAssignment::parameters.resource,
+@@clientName(
+  GremlinRoleAssignmentResources.createUpdateGremlinRoleAssignment::parameters.resource,
   "createUpdateGremlinRoleAssignmentParameters"
 );
-@@clientLocation(GremlinRoleAssignmentResources.deleteGremlinRoleAssignment,
+@@clientLocation(
+  GremlinRoleAssignmentResources.deleteGremlinRoleAssignment,
   GremlinResources
 );
-@@clientLocation(GremlinRoleAssignmentResources.listGremlinRoleAssignments,
+@@clientLocation(
+  GremlinRoleAssignmentResources.listGremlinRoleAssignments,
   GremlinResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1045,10 +1284,12 @@ using Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FleetspaceAccountResource.properties);
 
-@@clientLocation(DatabaseAccountsOperationGroup.checkNameExists,
+@@clientLocation(
+  DatabaseAccountsOperationGroup.checkNameExists,
   DatabaseAccounts
 );
 
-@@clientLocation(RestorableDatabaseAccountsOperationGroup.list,
+@@clientLocation(
+  RestorableDatabaseAccountsOperationGroup.list,
   "RestorableDatabaseAccounts"
 );

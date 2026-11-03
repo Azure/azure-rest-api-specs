@@ -11,27 +11,32 @@ namespace Microsoft.RecoveryServices;
 @@clientLocation(getOperationResult, Operations, "go");
 @@clientName(getOperationStatus, "OperationStatusGet", "go");
 //dotnet SDK Validation
-@@clientName(PrivateLinkResource,
+@@clientName(
+  PrivateLinkResource,
   "RecoveryServicesPrivateLinkResource",
   "csharp"
 );
-@@clientName(VaultExtendedInfoResource,
+@@clientName(
+  VaultExtendedInfoResource,
   "RecoveryServicesVaultExtendedInfo",
   "csharp"
 );
 @@clientName(Vault, "RecoveryServicesVault", "csharp");
 @@clientName(UsagesUnit, "VaultUsageUnit", "csharp");
 @@clientName(NameInfo, "VaultUsageNameInfo", "csharp");
-@@clientName(VaultPropertiesMoveDetails.completionTimeUtc,
+@@clientName(
+  VaultPropertiesMoveDetails.completionTimeUtc,
   "CompletedOn",
   "csharp"
 );
 @@clientName(VaultPropertiesMoveDetails.startTimeUtc, "StartOn", "csharp");
-@@alternateType(VaultPropertiesMoveDetails.sourceResourceId,
+@@alternateType(
+  VaultPropertiesMoveDetails.sourceResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(VaultPropertiesMoveDetails.targetResourceId,
+@@alternateType(
+  VaultPropertiesMoveDetails.targetResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -40,13 +45,15 @@ namespace Microsoft.RecoveryServices;
 @@clientName(ResourceCertificateDetails.validFrom, "ValidStartOn", "csharp");
 @@clientName(ResourceCertificateDetails.validTo, "ValidEndOn", "csharp");
 @@alternateType(ResourceCertificateAndAadDetails.aadTenantId, uuid, "csharp");
-@@alternateType(ResourceCertificateAndAadDetails.serviceResourceId,
+@@alternateType(
+  ResourceCertificateAndAadDetails.serviceResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ResourceCertificateDetails.thumbprint, unknown, "csharp");
 @@alternateType(ResourceCapabilitiesBase.type, armResourceType, "csharp");
-@@clientName(ResourceCapabilitiesBase.type,
+@@clientName(
+  ResourceCapabilitiesBase.type,
   "ResourceCapabilitiesBaseType",
   "csharp"
 );
@@ -54,17 +61,20 @@ namespace Microsoft.RecoveryServices;
 @@clientName(MonitoringSummary, "VaultMonitoringSummary ", "csharp");
 @@clientName(VaultProperties, "RecoveryServicesVaultProperties", "csharp");
 @@alternateType(Vault.etag, eTag, "csharp");
-@@clientName(PrivateEndpointConnectionStatus,
+@@clientName(
+  PrivateEndpointConnectionStatus,
   "RecoveryServicesPrivateEndpointConnectionStatus",
   "csharp"
 );
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "RecoveryServicesPrivateEndpointConnectionProvisioningState",
   "csharp"
 );
 @@clientName(DNSZone, "DnsZone", "csharp");
 @@clientName(DNSZoneResponse, "DnsZoneResult", "csharp");
-@@alternateType(CmkKekIdentity.userAssignedIdentity,
+@@alternateType(
+  CmkKekIdentity.userAssignedIdentity,
   armResourceIdentifier,
   "csharp"
 );
@@ -72,7 +82,8 @@ namespace Microsoft.RecoveryServices;
 @@alternateType(VaultExtendedInfoResource.etag, eTag, "csharp");
 @@clientName(MonitoringSettings, "VaultMonitoringSettings", "csharp");
 
-@@alternateType(PrivateEndpointConnectionVaultProperties.location,
+@@alternateType(
+  PrivateEndpointConnectionVaultProperties.location,
   azureLocation,
   "csharp"
 );
@@ -81,18 +92,21 @@ namespace Microsoft.RecoveryServices;
 @@clientName(UpgradeDetails, "VaultUpgradeDetails ", "csharp");
 @@clientName(UpgradeDetails.endTimeUtc, "EndOn", "csharp");
 @@clientName(UpgradeDetails.startTimeUtc, "StartOn", "csharp");
-@@alternateType(UpgradeDetails.previousResourceId,
+@@alternateType(
+  UpgradeDetails.previousResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(UpgradeDetails.upgradedResourceId,
+@@alternateType(
+  UpgradeDetails.upgradedResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@clientName(UpgradeDetails.lastUpdatedTimeUtc, "LastUpdatedOn", "csharp");
 @@clientName(TriggerType, "VaultUpgradeTriggerType", "csharp");
-@@clientName(SoftDeleteSettings,
+@@clientName(
+  SoftDeleteSettings,
   "RecoveryServicesSoftDeleteSettings",
   "csharp"
 );
@@ -100,46 +114,55 @@ namespace Microsoft.RecoveryServices;
 @@clientName(SoftDeleteState, "RecoveryServicesSoftDeleteState", "csharp");
 @@clientName(PatchVault, "RecoveryServicesVaultPatch", "csharp");
 @@alternateType(PatchVault.etag, eTag, "csharp");
-@@clientName(CheckNameAvailabilityResult,
+@@clientName(
+  CheckNameAvailabilityResult,
   "RecoveryServicesNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(CertificateRequest,
+@@clientName(
+  CertificateRequest,
   "RecoveryServicesCertificateContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityParameters,
+@@clientName(
+  CheckNameAvailabilityParameters,
   "RecoveryServicesNameAvailabilityContent",
   "csharp"
 );
 @@clientName(AlertsState, "RecoveryServicesAlertsState", "csharp");
-@@alternateType(CheckNameAvailabilityParameters.type,
+@@alternateType(
+  CheckNameAvailabilityParameters.type,
   armResourceType,
   "csharp"
 );
 @@clientName(CheckNameAvailabilityParameters.type, "ResourceType", "csharp");
-@@clientName(Vaults.registeredIdentitiesDelete,
+@@clientName(
+  Vaults.registeredIdentitiesDelete,
   "DeleteRegisteredIdentity",
   "csharp"
 );
 @@clientName(Vaults.list, "GetReplicationUsages", "csharp");
 @@clientName(Vaults.listByVaults, "GetUsagesByVaults", "csharp");
 @@clientName(Vaults.create, "CreateVaultCertificate", "csharp");
-@@clientName(RecoveryServicesOperationGroup.checkNameAvailability,
+@@clientName(
+  RecoveryServicesOperationGroup.checkNameAvailability,
   "CheckRecoveryServicesNameAvailability",
   "csharp"
 );
-@@clientName(RecoveryServicesOperationGroup.capabilities,
+@@clientName(
+  RecoveryServicesOperationGroup.capabilities,
   "GetRecoveryServiceCapabilities",
   "csharp"
 );
 @@usage(CapabilitiesResponse, Usage.input, "csharp");
 @@usage(DNSZoneResponse, Usage.input, "csharp");
-@@clientName(CapabilitiesResponseProperties,
+@@clientName(
+  CapabilitiesResponseProperties,
   "CapabilitiesResultProperties",
   "csharp"
 );
@@ -150,19 +173,23 @@ namespace Microsoft.RecoveryServices;
 @@scope(getOperationResult, "!csharp");
 @@scope(DeletedVaults.getOperationStatus, "!csharp");
 @@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "csharp");
-@@clientName(AssociatedIdentity,
+@@clientName(
+  AssociatedIdentity,
   "RecoveryServicesAssociatedIdentity",
   "csharp"
 );
-@@clientName(AzureMonitorAlertSettings,
+@@clientName(
+  AzureMonitorAlertSettings,
   "RecoveryServicesAzureMonitorAlertSettings",
   "csharp"
 );
-@@clientName(ClassicAlertSettings,
+@@clientName(
+  ClassicAlertSettings,
   "RecoveryServicesClassicAlertSettings",
   "csharp"
 );
-@@clientName(EnhancedSecurityState,
+@@clientName(
+  EnhancedSecurityState,
   "RecoveryServicesEnhancedSecurityState",
   "csharp"
 );
@@ -170,21 +197,25 @@ namespace Microsoft.RecoveryServices;
 @@clientName(State, "RecoveryServicesSourceScanState", "csharp");
 @@clientName(DeletedVault, "RecoveryServicesDeletedVault", "csharp");
 @@clientName(DeletedVaultUndeleteInput, "DeletedVaultRestoreInput", "csharp");
-@@clientName(DeletedVaultUndeleteInputProperties,
+@@clientName(
+  DeletedVaultUndeleteInputProperties,
   "DeletedVaultRestoreInputProperties",
   "csharp"
 );
 @@clientName(DeletedVaults.undelete, "restoreDeletedVault", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(PatchVault.identity,
+@@alternateType(
+  PatchVault.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(Vault.identity,
+@@alternateType(
+  Vault.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -195,7 +226,8 @@ namespace Microsoft.RecoveryServices;
 @@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "java");
 @@clientName(DNSZone, "DnsZone", "java");
 @@clientName(DNSZoneResponse, "DnsZoneResponse", "java");
-@@clientName(ResourceCertificateAndAcsDetails.globalAcsHostName,
+@@clientName(
+  ResourceCertificateAndAcsDetails.globalAcsHostName,
   "globalAcsHostname",
   "java"
 );
@@ -240,11 +272,13 @@ model PrivateEndpointConnectionVaultPropertiesReplacement
     "id" | "name" | "type"
   >;
 }
-@@alternateType(PrivateEndpointConnectionVaultProperties,
+@@alternateType(
+  PrivateEndpointConnectionVaultProperties,
   PrivateEndpointConnectionVaultPropertiesReplacement,
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionVaultPropertiesReplacement,
+@@clientName(
+  PrivateEndpointConnectionVaultPropertiesReplacement,
   "RecoveryServicesPrivateEndpointConnectionVaultProperties",
   "csharp"
 );
@@ -257,11 +291,13 @@ model VaultCertificateResponseReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<VaultCertificateResponse, "id" | "name" | "type">;
 }
-@@alternateType(VaultCertificateResponse,
+@@alternateType(
+  VaultCertificateResponse,
   VaultCertificateResponseReplacement,
   "csharp"
 );
-@@clientName(VaultCertificateResponseReplacement,
+@@clientName(
+  VaultCertificateResponseReplacement,
   "VaultCertificateResult",
   "csharp"
 );

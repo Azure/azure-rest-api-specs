@@ -1,0 +1,24 @@
+{
+  "title": "Settings_TestStorageConfigConnectivity",
+  "operationId": "Settings_TestStorageConfigConnectivity",
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "body": {
+      "type": "ADLSGen2",
+      "typeProperties": {
+        "endpoint": "https://contosostorage.dfs.core.windows.net/datahealth"
+      },
+      "networkProperties": {
+        "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/contosostorage"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "succeeded": true,
+        "message": ""
+      }
+    }
+  }
+}

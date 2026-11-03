@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "restorePointCollectionName": "rpc",
+    "vmRestorePointName": "vmrp",
+    "diskRestorePointName": "TestDisk45ceb03433006d1baee_5c1528-43e2-4c77-9c55-a78bf5a5fc88",
+    "api-version": "2026-03-02"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpc/restorePoints/vmrp/diskRestorePoints/TestDisk45ceb03433006d1baee_5c1528-43e2-4c77-9c55-a78bf5a5fc88",
+        "name": "TestDisk45ceb03433006d1baee_5c1528-43e2-4c77-9c55-a78bf5a5fc88",
+        "properties": {
+          "timeCreated": "2026-03-02T04:41:35.079872+00:00",
+          "sourceResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/TestDisk45ceb03433006d1baee",
+          "osType": "Windows",
+          "hyperVGeneration": "V2",
+          "familyId": "f22e934b-c768-447f-8c44-ada4b40224ec",
+          "sourceUniqueId": "d633885d-d102-4481-901e-5b2413d1a7be",
+          "networkAccessPolicy": "AllowAll",
+          "publicNetworkAccess": "Disabled",
+          "completionPercent": 100,
+          "logicalSectorSize": 4096,
+          "snapshotAccessState": "InstantAccess"
+        }
+      }
+    }
+  },
+  "operationId": "DiskRestorePoint_Get",
+  "title": "get a disk restorePoint resource with InstantAccess snapshotAccessState."
+}

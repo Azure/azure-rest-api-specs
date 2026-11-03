@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkManager.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -92,6 +94,7 @@ interface ScopeConnections {
 
 @@doc(ScopeConnection.name, "Name for the cross-tenant connection.");
 @@doc(ScopeConnection.properties, "The scope connection properties");
-@@doc(ScopeConnections.createOrUpdate::parameters.resource,
+@@doc(
+  ScopeConnections.createOrUpdate::parameters.resource,
   "Scope connection to be created/updated."
 );

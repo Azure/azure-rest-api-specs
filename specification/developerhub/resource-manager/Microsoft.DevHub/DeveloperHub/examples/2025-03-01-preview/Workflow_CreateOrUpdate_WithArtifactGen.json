@@ -1,0 +1,161 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "parameters": {
+      "location": "location1",
+      "properties": {
+        "artifactGenerationProperties": {
+          "appName": "my-app",
+          "dockerfileGenerationMode": "enabled",
+          "dockerfileOutputDirectory": "./",
+          "generationLanguage": "javascript",
+          "imageName": "myimage",
+          "imageTag": "latest",
+          "languageVersion": "14",
+          "manifestGenerationMode": "enabled",
+          "manifestOutputDirectory": "./",
+          "manifestType": "kube",
+          "namespace": "my-namespace",
+          "port": "80"
+        },
+        "githubWorkflowProfile": {
+          "acr": {
+            "acrRegistryName": "registry1",
+            "acrRepositoryName": "repo1",
+            "acrResourceGroup": "resourceGroup1",
+            "acrSubscriptionId": "00000000-0000-0000-0000-000000000000"
+          },
+          "aksResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+          "branchName": "branch1",
+          "deploymentProperties": {
+            "kubeManifestLocations": [
+              "/src/manifests/"
+            ],
+            "manifestType": "kube",
+            "overrides": {
+              "key1": "value1"
+            }
+          },
+          "dockerBuildContext": "repo1/src/",
+          "dockerfile": "repo1/images/Dockerfile",
+          "oidcCredentials": {
+            "azureClientId": "12345678-3456-7890-5678-012345678901",
+            "azureTenantId": "66666666-3456-7890-5678-012345678901"
+          },
+          "repositoryName": "repo1",
+          "repositoryOwner": "owner1"
+        }
+      },
+      "tags": {
+        "appname": "testApp"
+      }
+    },
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workflowName": "workflow1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "workflow1",
+        "type": "Micfosoft.DevHub/Workflow",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/workflow/workflow1",
+        "location": "location1",
+        "properties": {
+          "githubWorkflowProfile": {
+            "acr": {
+              "acrRegistryName": "registry1",
+              "acrRepositoryName": "repo1",
+              "acrResourceGroup": "resourceGroup1",
+              "acrSubscriptionId": "00000000-0000-0000-0000-000000000000"
+            },
+            "aksResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+            "authStatus": "Authorized",
+            "branchName": "branch2",
+            "deploymentProperties": {
+              "helmChartPath": "/src/charts",
+              "helmValues": "/src/chars/values.yaml",
+              "manifestType": "helm",
+              "overrides": {
+                "key1": "value1"
+              }
+            },
+            "dockerBuildContext": "repo2/src/",
+            "dockerfile": "repo2/images/Dockerfile",
+            "oidcCredentials": {
+              "azureClientId": "12345678-3456-7890-5678-012345678901",
+              "azureTenantId": "66666666-3456-7890-5678-012345678901"
+            },
+            "prStatus": "submitted",
+            "prURL": "https://github.com/User/repo2/pull/6567",
+            "pullNumber": 6567,
+            "repositoryName": "repo2",
+            "repositoryOwner": "owner1"
+          }
+        },
+        "systemData": {
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "appname": "testapp"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "workflow1",
+        "type": "Micfosoft.DevHub/Workflow",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/workflow/workflow1",
+        "location": "location1",
+        "properties": {
+          "githubWorkflowProfile": {
+            "acr": {
+              "acrRegistryName": "registry1",
+              "acrRepositoryName": "repo1",
+              "acrResourceGroup": "resourceGroup1",
+              "acrSubscriptionId": "00000000-0000-0000-0000-000000000000"
+            },
+            "aksResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+            "authStatus": "Authorized",
+            "branchName": "branch1",
+            "deploymentProperties": {
+              "manifestType": "kube",
+              "overrides": {
+                "key1": "value1"
+              }
+            },
+            "dockerBuildContext": "repo1/src/",
+            "dockerfile": "repo1/images/Dockerfile",
+            "oidcCredentials": {
+              "azureClientId": "12345678-3456-7890-5678-012345678901",
+              "azureTenantId": "66666666-3456-7890-5678-012345678901"
+            },
+            "prStatus": "submitted",
+            "prURL": "https://github.com/owner1/repo1/pull/6567",
+            "pullNumber": 6567,
+            "repositoryName": "repo1",
+            "repositoryOwner": "owner1"
+          }
+        },
+        "systemData": {
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "appname": "testapp"
+        }
+      }
+    }
+  },
+  "operationId": "Workflow_CreateOrUpdate",
+  "title": "Create Workflow With Artifact Generation"
+}
