@@ -16,14 +16,14 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 @doc("Reason why a recovery resource cannot be included in a recovery plan.")
 union ResourceInclusionDisabledReason {
-  @added(Versions.v2026_09_30_preview)
+  @added(Versions.v2026_10_31_preview)
   @doc("The resource is highly available and does not require recovery-plan inclusion.")
   ResourceHighlyAvailable: "ResourceHighlyAvailable",
 
-  @added(Versions.v2026_09_30_preview)
+  @added(Versions.v2026_10_31_preview)
   @doc("The resource uses active-active protection.")
   ResourceActiveActiveProtection: "ResourceActiveActiveProtection",
 
@@ -57,7 +57,7 @@ model RecoveryResourceProperties {
   @doc("A state that indicates the resource status with respect to the recovery orchestration plan.")
   inclusionState?: ResourceInclusionState;
 
-  @added(Versions.v2026_09_30_preview)
+  @added(Versions.v2026_10_31_preview)
   @visibility(Lifecycle.Read)
   @doc("Reasons why inclusion of the resource in a recovery plan is disabled.")
   inclusionDisabledReasons?: ResourceInclusionDisabledReason[];

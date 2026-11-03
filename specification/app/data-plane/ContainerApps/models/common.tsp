@@ -176,3 +176,18 @@ model StringSegment {
   /** Whether the segment contains a value. */
   hasValue?: boolean;
 }
+
+/** The provisioning state of a credential or connection. */
+union ConnectionState {
+  /** An unrecognized state returned by the service. */
+  StringValue: string,
+
+  /** The resource is being created. */
+  Creating: "Creating",
+
+  /** The resource is ready for use. */
+  Ready: "Ready",
+
+  /** The resource could not be provisioned. */
+  Error: "Error",
+}

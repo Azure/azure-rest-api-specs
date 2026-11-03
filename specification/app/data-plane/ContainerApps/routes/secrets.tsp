@@ -119,7 +119,7 @@ interface SecretsOperations {
       ...AzureResourceScope;
 
       /** The secret identifier. */
-      @path secretId: string;
+      @path secretId: SecretId;
     },
     GetSecretKeysResult,
     DataPlaneStandardTraits,
@@ -145,7 +145,7 @@ interface SecretsOperations {
       ...AzureResourceScope;
 
       /** The secret identifier. */
-      @path secretId: string;
+      @path secretId: SecretId;
 
       /** The secret key-value pairs to store. */
       @body body: CreateSecretContent;

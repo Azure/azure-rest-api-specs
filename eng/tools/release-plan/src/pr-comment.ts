@@ -147,6 +147,30 @@ export interface ErrorCommentParams {
   tspProjectPath?: string;
 }
 
+export async function postMultipleProjectsComment(
+  params: Omit<ErrorCommentParams, "error" | "tspProjectPath"> & { tspProjectPaths: string[] },
+): Promise<void> {
+  const { octokit, owner, repo, prNumber, tspProjectPaths } = params;
+  const projects = tspProjectPaths.map((project) => `- \`${project}\``).join("\n");
+  const body =
+    "### Release Plan Creation Skipped\n\n" +
+    "Multiple TypeSpec projects were identified in this pull request. " +
+    "No release plan was created and SDK generation was skipped.\n\n" +
+    `**TypeSpec Projects:**\n${projects}\n\n` +
+    "Create release plans manually using " +
+    "[aka.ms/azsdk/releaseplan-dashboard](https://aka.ms/azsdk/releaseplan-dashboard).\n";
+
+  if (!octokit.rest.issues?.createComment) {
+    throw new Error("Octokit issues.createComment is not available.");
+  }
+  await octokit.rest.issues.createComment({
+    owner,
+    repo,
+    issue_number: prNumber,
+    body,
+  });
+}
+
 /**
  * Post an error comment on a GitHub PR indicating release plan creation failed.
  * @param params - Error comment parameters
