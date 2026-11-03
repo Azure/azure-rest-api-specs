@@ -993,6 +993,7 @@ model BatchPoolStatistics {
 
   @doc("Statistics related to resource consumption by Compute Nodes in the Pool.")
   @clientName("resourceStatistics")
+  @typeChangedFrom(Versions.v2026_10_01, Historical.BatchPoolResourceStatistics)
   resourceStats?: BatchPoolResourceStatistics;
 }
 
@@ -1010,6 +1011,7 @@ model BatchPoolUsageStatistics {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Statistics related to resource consumption by Compute Nodes in a Pool.")
+@added(Versions.v2026_10_01)
 model BatchPoolResourceStatistics {
   @doc("The start time of the time range covered by the statistics.")
   startTime: utcDateTime;
@@ -1034,12 +1036,10 @@ model BatchPoolResourceStatistics {
   peakDiskGiB: float32;
 
   @doc("The total number of disk read operations across all Compute Nodes in the Pool.")
-  @encode(string)
   @clientName("diskReadIops")
   diskReadIOps: int64;
 
   @doc("The total number of disk write operations across all Compute Nodes in the Pool.")
-  @encode(string)
   @clientName("diskWriteIops")
   diskWriteIOps: int64;
 
@@ -3972,6 +3972,15 @@ model RollingUpgradePolicy {
 }
 
 namespace Historical {
+  @doc("Statistics related to resource consumption by Compute Nodes in a Pool.")
+  @removed(Versions.v2026_10_01)
+  model BatchPoolResourceStatistics {
+    ...Azure.Batch.BatchPoolResourceStatistics;
+  }
+
+  @@encode(BatchPoolResourceStatistics.diskReadIOps, string);
+  @@encode(BatchPoolResourceStatistics.diskWriteIOps, string);
+
   @doc("The configuration parameters used while performing a rolling upgrade.")
   @removed(Versions.v2026_10_01)
   model RollingUpgradePolicy {

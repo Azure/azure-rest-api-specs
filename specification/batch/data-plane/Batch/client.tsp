@@ -312,6 +312,16 @@ interface BatchClient {
   "Azure.Batch",
   "go,javascript"
 );
+@@clientName(
+  Azure.Batch.Historical.BatchPoolResourceStatistics,
+  "BatchPoolResourceStatistics",
+  "autorest"
+);
+@@clientNamespace(
+  Azure.Batch.Historical.BatchPoolResourceStatistics,
+  "Azure.Batch",
+  "go,javascript"
+);
 @@clientName(Azure.Batch.BatchTaskGroup.value, "tasks", "csharp");
 @@clientName(Azure.Batch.BatchNode.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchTaskInfo.taskUrl, "taskUri", "csharp");
