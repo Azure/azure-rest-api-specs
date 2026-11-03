@@ -3560,25 +3560,14 @@
             "name": "structured_inputs",
             "in": "query",
             "required": false,
-            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.\nMutually exclusive with `structured_input`; sending both returns `400 Bad Request`.",
+            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.",
             "schema": {
               "type": "string"
             },
             "explode": false
           },
           {
-            "name": "structured_input",
-            "in": "query",
-            "required": false,
-            "description": "Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false,
-            "deprecated": true
-          },
-          {
-            "name": "x-agent-version-override",
+            "name": "agent_version_override",
             "in": "query",
             "required": false,
             "description": "Selects a specific version of the voice agent for this session.",
@@ -6196,10 +6185,10 @@
             "explode": false
           },
           {
-            "name": "x-agent-version-override",
+            "name": "agent_version_override",
             "in": "query",
             "required": false,
-            "description": "Agent version to connect to.",
+            "description": "Selects a specific version of the voice agent for this session.",
             "schema": {
               "type": "string"
             },
@@ -6209,22 +6198,11 @@
             "name": "structured_inputs",
             "in": "query",
             "required": false,
-            "description": "URL-encoded JSON values for instruction and greeting templates. Mutually exclusive with structured_input; sending both returns 400 Bad Request.",
+            "description": "URL-encoded JSON values for instruction and greeting templates.",
             "schema": {
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "structured_input",
-            "in": "query",
-            "required": false,
-            "description": "Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false,
-            "deprecated": true
           },
           {
             "name": "store",

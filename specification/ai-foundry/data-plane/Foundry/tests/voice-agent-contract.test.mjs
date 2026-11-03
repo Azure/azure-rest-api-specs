@@ -569,7 +569,7 @@ before(async () => {
   await symlink(
     join(repo, "node_modules"),
     join(output, "node_modules"),
-    "dir",
+    process.platform === "win32" ? "junction" : "dir",
   );
   options.options["@typespec/openapi3"]["emitter-output-dir"] = output;
   program = await compile(NodeHost, entrypoint, options);
@@ -3411,8 +3411,7 @@ test("OpenAPI exposes the Foundry Live handshake without native REST operations"
       "agent_name",
       "store",
       "structured_inputs",
-      "structured_input",
-      "x-agent-version-override",
+      "agent_version_override",
     ])
       assert.ok(names.includes(name));
     const structuredInputs = op.parameters.find(
@@ -3424,7 +3423,6 @@ test("OpenAPI exposes the Foundry Live handshake without native REST operations"
     const realtime =
       doc.paths["/agents/{agent_name}/endpoint/protocols/voice"].get;
     assert.ok(realtime.parameters.some((p) => p.name === "structured_inputs"));
-    assert.ok(realtime.parameters.some((p) => p.name === "structured_input"));
     const realtimeInputs = realtime.parameters.find(
       (p) => p.name === "structured_inputs",
     );
@@ -3442,31 +3440,53 @@ test("OpenAPI exposes the Foundry Live handshake without native REST operations"
   }
 });
 
-test("voice handshakes retain the deprecated query alias without replacing the canonical parameter", () => {
+test("voice handshakes use a snake_case version override query parameter", () => {
   for (const doc of documents) {
     for (const path of [
       "/agents/{agent_name}/endpoint/protocols/voice",
       "/agents/{agent_name}/endpoint/protocols/voice/live/sessions",
     ]) {
       const parameters = doc.paths[path].get.parameters;
-      for (const name of ["structured_inputs", "structured_input"]) {
-        const matches = parameters.filter((p) => p.name === name);
-        assert.equal(matches.length, 1, `${path}: ${name}`);
-        const [parameter] = matches;
-        assert.equal(parameter.in, "query");
-        assert.equal(parameter.required, false);
-        assert.deepEqual(parameter.schema, { type: "string" });
-        assert.match(parameter.description, /sending both.*400/i);
-        if (name === "structured_input") {
-          assert.equal(parameter.deprecated, true);
-          assert.match(
-            parameter.description,
-            /legacy alias for structured_inputs/i,
-          );
-        } else {
-          assert.notEqual(parameter.deprecated, true);
-        }
-      }
+      const matches = parameters.filter(
+        (p) => p.name === "agent_version_override",
+      );
+      assert.equal(matches.length, 1, path);
+      const [parameter] = matches;
+      assert.equal(parameter.in, "query");
+      assert.equal(parameter.required, false);
+      assert.deepEqual(parameter.schema, { type: "string" });
+      assert.equal(
+        parameters.some((p) => p.name === "x-agent-version-override"),
+        false,
+        path,
+      );
+    }
+  }
+});
+
+test("voice handshakes expose only the plural structured_inputs query parameter", () => {
+  for (const doc of documents) {
+    for (const path of [
+      "/agents/{agent_name}/endpoint/protocols/voice",
+      "/agents/{agent_name}/endpoint/protocols/voice/live/sessions",
+    ]) {
+      const parameters = doc.paths[path].get.parameters;
+      const matches = parameters.filter((p) => p.name === "structured_inputs");
+      assert.equal(matches.length, 1, path);
+      const [parameter] = matches;
+      assert.equal(parameter.in, "query");
+      assert.equal(parameter.required, false);
+      assert.deepEqual(parameter.schema, { type: "string" });
+      assert.notEqual(parameter.deprecated, true);
+      assert.doesNotMatch(
+        parameter.description,
+        /\bstructured_input\b|mutually exclusive|sending both/i,
+      );
+      assert.equal(
+        parameters.some((p) => p.name === "structured_input"),
+        false,
+        path,
+      );
       assert.equal(doc.paths[path].get.requestBody, undefined);
       assert.ok(doc.paths[path].get.responses["101"]);
     }
