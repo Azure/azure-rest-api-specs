@@ -1,0 +1,443 @@
+{
+  "operationId": "RaiPolicies_CreateOrUpdate",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-11-15-preview",
+    "If-None-Match": "*",
+    "raiPolicyName": "annotated-egress-guard",
+    "raiPolicy": {
+      "properties": {
+        "format": "ACS",
+        "acs": {
+          "agent_control_specification_version": "0.4.0-alpha.1",
+          "metadata": {
+            "description": "Illustrative annotation authoring; supported annotators and configuration depend on the evaluation host."
+          },
+          "policies": {
+            "agent-guard": {
+              "type": "rego",
+              "query": "data.agent_guard.verdict"
+            }
+          },
+          "annotators": {
+            "risk": {
+              "type": "llm",
+              "provider": "azure_openai",
+              "endpoint": "https://synthetic-judge.openai.azure.com/",
+              "deployment": "judge",
+              "api_version": "2024-10-21",
+              "result_schema": "acs.judge.observation/v2",
+              "system_prompt": "Classify the complete subject for harmful intent. Score from 0 to 10: 0 is benign, 5 is ambiguous or potentially harmful, and 10 is clear harmful intent. Use label clear for scores below 4, review for scores from 4 to below 7, and high_risk for scores of 7 or higher. Report observations only; Rego decides the action.",
+              "timeout_ms": 10000
+            }
+          },
+          "intervention_points": {
+            "agent_startup": {
+              "policy_target": "$snap.agent_init",
+              "policy_target_kind": "agent_init",
+              "policy": {
+                "id": "agent-guard"
+              }
+            },
+            "input": {
+              "policy_target": "$snap.input",
+              "policy_target_kind": "user_input",
+              "policy": {
+                "id": "agent-guard"
+              },
+              "annotations": {
+                "risk": {
+                  "from": "$target.content"
+                }
+              }
+            },
+            "pre_model_call": {
+              "policy_target": "$snap.messages",
+              "policy_target_kind": "messages",
+              "policy": {
+                "id": "agent-guard"
+              }
+            },
+            "post_model_call": {
+              "policy_target": "$snap.response",
+              "policy_target_kind": "model_response",
+              "policy": {
+                "id": "agent-guard"
+              }
+            },
+            "pre_tool_call": {
+              "policy_target": "$snap.tool_call.args",
+              "policy_target_kind": "tool_args",
+              "policy": {
+                "id": "agent-guard"
+              }
+            },
+            "post_tool_call": {
+              "policy_target": "$snap.tool_result.value",
+              "policy_target_kind": "tool_result",
+              "policy": {
+                "id": "agent-guard"
+              }
+            },
+            "output": {
+              "policy_target": "$snap.output",
+              "policy_target_kind": "assistant_output",
+              "policy": {
+                "id": "agent-guard"
+              },
+              "annotations": {
+                "risk": {
+                  "from": "$target.content"
+                }
+              }
+            },
+            "agent_shutdown": {
+              "policy_target": "$snap.summary",
+              "policy_target_kind": "agent_summary",
+              "policy": {
+                "id": "agent-guard"
+              }
+            }
+          }
+        },
+        "acsRegos": [
+          {
+            "regoName": "agent-guard"
+          }
+        ],
+        "egressPolicy": {
+          "mode": "Audit",
+          "defaultAction": "Deny",
+          "rules": [
+            {
+              "name": "allow-docs",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "learn.microsoft.com",
+                "path": "/azure/*"
+              },
+              "action": {
+                "actionType": "Allow"
+              }
+            },
+            {
+              "name": "label-api",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "api.contoso.com",
+                "path": "/v1/*"
+              },
+              "action": {
+                "actionType": "Transform",
+                "headers": [
+                  {
+                    "operation": "Set",
+                    "name": "X-Workload-Class",
+                    "value": "public-demo"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Create an ACS policy with optional annotations and an egress companion",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000006\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/annotated-egress-guard",
+        "name": "annotated-egress-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000006\"",
+        "properties": {
+          "type": "UserManaged",
+          "format": "ACS",
+          "acs": {
+            "agent_control_specification_version": "0.4.0-alpha.1",
+            "metadata": {
+              "description": "Illustrative annotation authoring; supported annotators and configuration depend on the evaluation host."
+            },
+            "policies": {
+              "agent-guard": {
+                "type": "rego",
+                "query": "data.agent_guard.verdict"
+              }
+            },
+            "annotators": {
+              "risk": {
+                "type": "llm",
+                "provider": "azure_openai",
+                "endpoint": "https://synthetic-judge.openai.azure.com/",
+                "deployment": "judge",
+                "api_version": "2024-10-21",
+                "result_schema": "acs.judge.observation/v2",
+                "system_prompt": "Classify the complete subject for harmful intent. Score from 0 to 10: 0 is benign, 5 is ambiguous or potentially harmful, and 10 is clear harmful intent. Use label clear for scores below 4, review for scores from 4 to below 7, and high_risk for scores of 7 or higher. Report observations only; Rego decides the action.",
+                "timeout_ms": 10000
+              }
+            },
+            "intervention_points": {
+              "agent_startup": {
+                "policy_target": "$snap.agent_init",
+                "policy_target_kind": "agent_init",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "input": {
+                "policy_target": "$snap.input",
+                "policy_target_kind": "user_input",
+                "policy": {
+                  "id": "agent-guard"
+                },
+                "annotations": {
+                  "risk": {
+                    "from": "$target.content"
+                  }
+                }
+              },
+              "pre_model_call": {
+                "policy_target": "$snap.messages",
+                "policy_target_kind": "messages",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "post_model_call": {
+                "policy_target": "$snap.response",
+                "policy_target_kind": "model_response",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "pre_tool_call": {
+                "policy_target": "$snap.tool_call.args",
+                "policy_target_kind": "tool_args",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "post_tool_call": {
+                "policy_target": "$snap.tool_result.value",
+                "policy_target_kind": "tool_result",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "output": {
+                "policy_target": "$snap.output",
+                "policy_target_kind": "assistant_output",
+                "policy": {
+                  "id": "agent-guard"
+                },
+                "annotations": {
+                  "risk": {
+                    "from": "$target.content"
+                  }
+                }
+              },
+              "agent_shutdown": {
+                "policy_target": "$snap.summary",
+                "policy_target_kind": "agent_summary",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              }
+            }
+          },
+          "acsRegos": [
+            {
+              "regoName": "agent-guard"
+            }
+          ],
+          "egressPolicy": {
+            "mode": "Audit",
+            "defaultAction": "Deny",
+            "rules": [
+              {
+                "name": "allow-docs",
+                "ruleType": "Fqdn",
+                "match": {
+                  "host": "learn.microsoft.com",
+                  "path": "/azure/*"
+                },
+                "action": {
+                  "actionType": "Allow"
+                }
+              },
+              {
+                "name": "label-api",
+                "ruleType": "Fqdn",
+                "match": {
+                  "host": "api.contoso.com",
+                  "path": "/v1/*"
+                },
+                "action": {
+                  "actionType": "Transform",
+                  "headers": [
+                    {
+                      "operation": "Set",
+                      "name": "X-Workload-Class"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000006\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/annotated-egress-guard",
+        "name": "annotated-egress-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000006\"",
+        "properties": {
+          "type": "UserManaged",
+          "format": "ACS",
+          "acs": {
+            "agent_control_specification_version": "0.4.0-alpha.1",
+            "metadata": {
+              "description": "Illustrative annotation authoring; supported annotators and configuration depend on the evaluation host."
+            },
+            "policies": {
+              "agent-guard": {
+                "type": "rego",
+                "query": "data.agent_guard.verdict"
+              }
+            },
+            "annotators": {
+              "risk": {
+                "type": "llm",
+                "provider": "azure_openai",
+                "endpoint": "https://synthetic-judge.openai.azure.com/",
+                "deployment": "judge",
+                "api_version": "2024-10-21",
+                "result_schema": "acs.judge.observation/v2",
+                "system_prompt": "Classify the complete subject for harmful intent. Score from 0 to 10: 0 is benign, 5 is ambiguous or potentially harmful, and 10 is clear harmful intent. Use label clear for scores below 4, review for scores from 4 to below 7, and high_risk for scores of 7 or higher. Report observations only; Rego decides the action.",
+                "timeout_ms": 10000
+              }
+            },
+            "intervention_points": {
+              "agent_startup": {
+                "policy_target": "$snap.agent_init",
+                "policy_target_kind": "agent_init",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "input": {
+                "policy_target": "$snap.input",
+                "policy_target_kind": "user_input",
+                "policy": {
+                  "id": "agent-guard"
+                },
+                "annotations": {
+                  "risk": {
+                    "from": "$target.content"
+                  }
+                }
+              },
+              "pre_model_call": {
+                "policy_target": "$snap.messages",
+                "policy_target_kind": "messages",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "post_model_call": {
+                "policy_target": "$snap.response",
+                "policy_target_kind": "model_response",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "pre_tool_call": {
+                "policy_target": "$snap.tool_call.args",
+                "policy_target_kind": "tool_args",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "post_tool_call": {
+                "policy_target": "$snap.tool_result.value",
+                "policy_target_kind": "tool_result",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "output": {
+                "policy_target": "$snap.output",
+                "policy_target_kind": "assistant_output",
+                "policy": {
+                  "id": "agent-guard"
+                },
+                "annotations": {
+                  "risk": {
+                    "from": "$target.content"
+                  }
+                }
+              },
+              "agent_shutdown": {
+                "policy_target": "$snap.summary",
+                "policy_target_kind": "agent_summary",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              }
+            }
+          },
+          "acsRegos": [
+            {
+              "regoName": "agent-guard"
+            }
+          ],
+          "egressPolicy": {
+            "mode": "Audit",
+            "defaultAction": "Deny",
+            "rules": [
+              {
+                "name": "allow-docs",
+                "ruleType": "Fqdn",
+                "match": {
+                  "host": "learn.microsoft.com",
+                  "path": "/azure/*"
+                },
+                "action": {
+                  "actionType": "Allow"
+                }
+              },
+              {
+                "name": "label-api",
+                "ruleType": "Fqdn",
+                "match": {
+                  "host": "api.contoso.com",
+                  "path": "/v1/*"
+                },
+                "action": {
+                  "actionType": "Transform",
+                  "headers": [
+                    {
+                      "operation": "Set",
+                      "name": "X-Workload-Class"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
