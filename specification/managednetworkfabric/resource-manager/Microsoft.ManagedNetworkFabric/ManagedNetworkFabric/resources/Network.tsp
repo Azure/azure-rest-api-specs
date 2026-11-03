@@ -9,14 +9,13 @@ using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Resource extends the ARM TrackedResource base type, which requires inheritance."
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the Network resource. A Network is a routed L2 and L3 segment under a Vrf, bound to a sibling Vlan.")
 @parentResource(Vrf)
-@Azure.ResourceManager.Private.armResourceInternal(NetworkProperties)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2026_07_15_preview)
-model Network extends Azure.ResourceManager.Foundations.TrackedResource {
+model Network is Azure.ResourceManager.TrackedResource<
+  NetworkProperties,
+  false
+> {
   @doc("Name of the Network.")
   @pattern("^[A-Za-z][A-Za-z0-9-]*$")
   @minLength(1)
@@ -26,11 +25,9 @@ model Network extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("networks")
   @visibility(Lifecycle.Read)
   name: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The Network properties.")
-  properties: NetworkProperties;
 }
+
+@@doc(Network.properties, "The Network properties.");
 
 @armResourceOperations
 @added(Versions.v2026_07_15_preview)
@@ -38,7 +35,7 @@ interface Networks {
   @doc("Gets the specified Network.")
   get is ArmResourceRead<Network>;
 
-  @doc("Creates a Network.")
+  @doc("Creates or updates a Network.")
   create is ArmResourceCreateOrReplaceAsync<Network>;
 
   @doc("Updates a Network.")

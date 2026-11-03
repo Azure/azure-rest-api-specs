@@ -9,13 +9,13 @@ using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Resource extends the ARM TrackedResource base type, which requires inheritance."
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the ServicePeer resource. A ServicePeer is a whole-Vrf InternetDefault service edge with a fail-closed attachment lifecycle.")
 @parentResource(Vrf)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2026_07_15_preview)
-model ServicePeer extends Azure.ResourceManager.Foundations.TrackedResource {
+model ServicePeer is Azure.ResourceManager.TrackedResource<
+  ServicePeerProperties,
+  false
+> {
   @doc("Name of the ServicePeer.")
   @pattern("^[A-Za-z][A-Za-z0-9-]*$")
   @minLength(1)
@@ -25,10 +25,9 @@ model ServicePeer extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("servicePeers")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The ServicePeer properties.")
-  properties: ServicePeerProperties;
 }
+
+@@doc(ServicePeer.properties, "The ServicePeer properties.");
 
 @armResourceOperations
 @added(Versions.v2026_07_15_preview)
@@ -36,7 +35,7 @@ interface ServicePeers {
   @doc("Gets the specified ServicePeer.")
   get is ArmResourceRead<ServicePeer>;
 
-  @doc("Creates a ServicePeer.")
+  @doc("Creates or updates a ServicePeer.")
   create is ArmResourceCreateOrReplaceAsync<ServicePeer>;
 
   @doc("Updates a ServicePeer.")

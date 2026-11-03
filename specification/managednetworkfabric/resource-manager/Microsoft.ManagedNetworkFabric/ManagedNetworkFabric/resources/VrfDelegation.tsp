@@ -9,13 +9,13 @@ using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Resource extends the ARM TrackedResource base type, which requires inheritance."
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the VrfDelegation resource. A VrfDelegation is a provider-side allocation of one concrete Vrf under a Fabric delegation authorization.")
 @parentResource(Vrf)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2026_07_15_preview)
-model VrfDelegation extends Azure.ResourceManager.Foundations.TrackedResource {
+model VrfDelegation is Azure.ResourceManager.TrackedResource<
+  VrfDelegationProperties,
+  false
+> {
   @doc("Name of the VrfDelegation.")
   @pattern("^[A-Za-z][A-Za-z0-9-]*$")
   @minLength(1)
@@ -25,10 +25,9 @@ model VrfDelegation extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("delegations")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The VrfDelegation properties.")
-  properties: VrfDelegationProperties;
 }
+
+@@doc(VrfDelegation.properties, "The VrfDelegation properties.");
 
 @armResourceOperations
 @added(Versions.v2026_07_15_preview)
@@ -36,7 +35,7 @@ interface VrfDelegations {
   @doc("Gets the specified VrfDelegation.")
   get is ArmResourceRead<VrfDelegation>;
 
-  @doc("Creates a VrfDelegation.")
+  @doc("Creates or updates a VrfDelegation.")
   create is ArmResourceCreateOrReplaceAsync<VrfDelegation>;
 
   @doc("Updates a VrfDelegation.")

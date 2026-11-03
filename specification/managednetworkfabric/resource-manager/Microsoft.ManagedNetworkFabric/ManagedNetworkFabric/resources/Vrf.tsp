@@ -9,14 +9,10 @@ using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Resource extends the ARM TrackedResource base type, which requires inheritance."
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the Vrf resource. A Vrf is an isolated L3 routing domain rooted in a Fabric.")
 @parentResource(Fabric)
-@Azure.ResourceManager.Private.armResourceInternal(VrfProperties)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2026_07_15_preview)
-model Vrf extends Azure.ResourceManager.Foundations.TrackedResource {
+model Vrf is Azure.ResourceManager.TrackedResource<VrfProperties, false> {
   @doc("Name of the Vrf.")
   @pattern("^[A-Za-z][A-Za-z0-9-]*$")
   @minLength(1)
@@ -26,11 +22,9 @@ model Vrf extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("vrfs")
   @visibility(Lifecycle.Read)
   name: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The Vrf properties.")
-  properties: VrfProperties;
 }
+
+@@doc(Vrf.properties, "The Vrf properties.");
 
 @armResourceOperations
 @added(Versions.v2026_07_15_preview)
@@ -38,7 +32,7 @@ interface Vrfs {
   @doc("Gets the specified Vrf.")
   get is ArmResourceRead<Vrf>;
 
-  @doc("Creates a Vrf.")
+  @doc("Creates or updates a Vrf.")
   create is ArmResourceCreateOrReplaceAsync<Vrf>;
 
   @doc("Updates a Vrf.")

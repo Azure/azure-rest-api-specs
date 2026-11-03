@@ -7,35 +7,27 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Represents a physical network deployment hosting infrastructure network configuration.")
-@Azure.ResourceManager.Private.armResourceInternal(FabricProperties)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2026_01_15_preview)
-model Fabric extends Azure.ResourceManager.Foundations.TrackedResource {
+model Fabric is Azure.ResourceManager.TrackedResource<FabricProperties, false> {
   @doc("Name of the Fabric.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("fabricName")
   @segment("fabrics")
   @visibility(Lifecycle.Read)
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Root kind mirrors ARM tracked-resource kind envelope property"
   @doc("Fabric kind: which party drives the switches. Set at create time and immutable.")
   @added(Versions.v2026_07_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: FabricKind;
 
   ...ManagedServiceIdentityProperty;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("Fabric properties.")
-  properties: FabricProperties;
 }
 
 @@added(Fabric.identity, Versions.v2026_07_15_preview);
+@@doc(Fabric.properties, "Fabric properties.");
 
 @armResourceOperations
 @added(Versions.v2026_01_15_preview)
@@ -43,7 +35,7 @@ interface Fabrics {
   @doc("Gets the specified Fabric.")
   get is ArmResourceRead<Fabric>;
 
-  @doc("Creates a Fabric.")
+  @doc("Creates or updates a Fabric.")
   create is ArmResourceCreateOrReplaceAsync<Fabric>;
 
   @doc("Updates a Fabric.")
