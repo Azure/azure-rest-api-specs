@@ -37,7 +37,8 @@ jobs:
       - name: Checkout default branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          persist-credentials: false
+          # Branch deletion uses git push and needs the workflow token.
+          persist-credentials: true
           ref: ${{ github.event.repository.default_branch }}
           sparse-checkout: .github/workflows/src
 

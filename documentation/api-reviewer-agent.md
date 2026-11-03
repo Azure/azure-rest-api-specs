@@ -55,19 +55,18 @@ VS Code agent manually.
 
 | Trigger                          | Condition                                                                                                                                                          |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| PR opened                        | PR carries the `WaitForARMFeedback` label; triggered by a user with write access or above; touches `specification/**` files; does not have `skip-arm-review` label |
-| PR synchronized (new push)       | Same conditions as opened; prior in-progress run is cancelled automatically (debounce). External-author pushes require a maintainer to run `/arm-review` again     |
-| PR marked ready for review       | Same conditions as opened; no additional push is needed                                                                                                            |
-| `WaitForARMFeedback` label added | Applying the label triggers a review directly when added by a write-access user or the trusted `github-actions[bot]` repository automation                         |
+| Initial review handoff           | Summarize Checks establishes readiness and explicitly dispatches the first review for an eligible non-draft ARM PR                                               |
+| `WaitForARMFeedback` label added | Applying the label triggers a review directly when added by a user with write access or above to a non-draft PR                                                  |
+| `ARMChangesRequested` label removed | Removing the label requests a fresh review on a non-draft PR; requires write access or above, but does not require `WaitForARMFeedback`                       |
 | `/arm-review` comment            | On-demand: posted by a user with write access or above; runs on drafts and without `WaitForARMFeedback`, unless `skip-arm-review` is present                       |
 | `workflow_dispatch`              | On-demand: repository maintainer triggers manually with a PR number; skipped when `skip-arm-review` is present                                                     |
 
-> **Automated vs. on-demand:** The automated triggers (`opened` /
-> `synchronize` / `labeled` / `ready_for_review`) only run when the PR is not a
-> draft and carries the `WaitForARMFeedback` label -- this keeps automated
-> reviews scoped to PRs that are actually awaiting ARM feedback. Adding the
-> label is itself a trigger, so a review starts as soon as a maintainer applies
-> it to a non-draft PR. The on-demand triggers (`/arm-review`,
+> **Re-review after fixes:** Remove `ARMChangesRequested` to request a fresh AI
+> review. The reviewer does not wait for Summarize Checks to restore
+> `WaitForARMFeedback`; queue labels are reconciled independently.
+> Label-triggered reviews require a non-draft PR. Label changes made using
+> `GITHUB_TOKEN` do not trigger another workflow.
+> The on-demand triggers (`/arm-review`,
 > `workflow_dispatch`) do not require `WaitForARMFeedback` and can run on drafts,
 > but all GitHub Actions triggers honor `skip-arm-review`.
 
@@ -75,10 +74,10 @@ VS Code agent manually.
 (`forks: ["*"]`), matching the other PR workflows in this repo. gh-aw's
 built-in role check only lets users with **write access or above** trigger it,
 with one explicit exception for `github-actions[bot]`, which lets the trusted
-summarize-checks automation trigger the review when it applies
-`WaitForARMFeedback`. An externally-authored fork PR is reviewed only after a
-maintainer applies the label or runs `/arm-review`; later pushes by the external
-author require another maintainer-triggered review. Fork PRs are handled safely
+Summarize Checks automation explicitly dispatch the initial review.
+An externally-authored fork PR can also be reviewed when a maintainer adds
+`WaitForARMFeedback`, removes `ARMChangesRequested`, or posts `/arm-review`;
+later pushes alone do not request a fresh review. Fork PRs are handled safely
 because the agent never checks out untrusted PR head code (`checkout: false`),
 reads spec files only through the read-only GitHub MCP toolset (which
 additionally runs at `approved` integrity for defense in depth), and writes only
