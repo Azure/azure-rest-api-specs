@@ -3165,7 +3165,7 @@
         "tags": [
           "UpdateRuns"
         ],
-        "description": "Resets selected Failed members to NotStarted only while the update run's evaluated execution state is Running.\nReturns the updated UpdateRun after the changes are durably saved.\nReturns a conflict if the run is not Running or no selected member is Failed.\nDoes not start or resume the run, invoke scheduling, or issue member update commands.\nExisting scheduling events may execute the reset members alongside other work under normal rollout controls.",
+        "description": "Resets members within the target scope of an UpdateRun.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3229,7 +3229,7 @@
           }
         },
         "x-ms-examples": {
-          "Resets failed members in overlapping targets while other rollout work continues.": {
+          "Resets members within the target scope of an UpdateRun.": {
             "$ref": "./examples/UpdateRuns_Reset.json"
           }
         }
@@ -6928,11 +6928,11 @@
     },
     "ResetProperties": {
       "type": "object",
-      "description": "The properties of a reset operation on a Running update run.",
+      "description": "The properties of a reset operation containing multiple reset requests.",
       "properties": {
         "targets": {
           "type": "array",
-          "description": "Targets whose Failed members are reset to NotStarted.\nMixed target types, duplicates, and overlapping targets are allowed.\nThe entire request is validated and selected members are deduplicated\nbefore any changes are saved. Unknown targets reject the entire request.\nOther member states are unchanged.",
+          "description": "The targets to reset.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ResetTarget"
@@ -6957,17 +6957,18 @@
         },
         "name": {
           "type": "string",
-          "description": "Required for Stage, Group, and Member, using names from the run snapshot.\nOptional for Run; if supplied, must match the update run name in the route.",
+          "description": "The reset target's name.",
           "minLength": 1
         }
       },
       "required": [
-        "type"
+        "type",
+        "name"
       ]
     },
     "ResetTargetType": {
       "type": "string",
-      "description": "The target type of a reset operation within an update run.",
+      "description": "The definition of a single reset request.",
       "enum": [
         "Run",
         "Stage",

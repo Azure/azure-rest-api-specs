@@ -442,7 +442,7 @@ model SkipProperties {
   targets: SkipTarget[];
 }
 
-@doc("The target type of a reset operation within an update run.")
+@doc("The definition of a single reset request.")
 @added(Versions.v2026_12_01_preview)
 union ResetTargetType {
   string,
@@ -466,24 +466,15 @@ model ResetTarget {
   @doc("The target type. Only Run, Stage, Group, and Member are supported.")
   type: ResetTargetType;
 
-  @doc("""
-    Required for Stage, Group, and Member, using names from the run snapshot.
-    Optional for Run; if supplied, must match the update run name in the route.
-    """)
+  @doc("The reset target's name.")
   @minLength(1)
-  name?: string;
+  name: string;
 }
 
-@doc("The properties of a reset operation on a Running update run.")
+@doc("The properties of a reset operation containing multiple reset requests.")
 @added(Versions.v2026_12_01_preview)
 model ResetProperties {
-  @doc("""
-    Targets whose Failed members are reset to NotStarted.
-    Mixed target types, duplicates, and overlapping targets are allowed.
-    The entire request is validated and selected members are deduplicated
-    before any changes are saved. Unknown targets reject the entire request.
-    Other member states are unchanged.
-    """)
+  @doc("The targets to reset.")
   @minItems(1)
   @identifiers(#["type", "name"])
   targets: ResetTarget[];
@@ -548,7 +539,7 @@ interface UpdateRuns {
       IfMatchParameters<UpdateRun>
   >;
 
-  @doc("Resets one or a combination of member/group/stage(s) of an update run.")
+  @doc("Resets members within the target scope of an UpdateRun.")
   @added(Versions.v2026_12_01_preview)
   reset is ArmResourceActionSync<
     UpdateRun,
