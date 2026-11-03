@@ -1,22 +1,16 @@
-import { PER_PAGE_MAX } from "../../shared/src/github.ts";
-import { parseExistingComments } from "./comment.ts";
+import { inlineCode, link, renderMarkdownDoc, section } from "../../shared/src/markdown.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
-const MARKER = "<!-- target-branch -->";
-const WRONG_BRANCH_MESSAGE =
-  "## This PR targets a read-only branch\n\n" +
-  "The `main` branch in `Azure/azure-rest-api-specs-pr` is a read-only mirror of " +
-  "the public repository. PRs targeting it cannot be merged.\n\n" +
-  "- For public API or repository tooling changes, open a PR against " +
-  "[Azure/azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs)'s `main` branch. " +
-  "Follow the [move PR guide](https://aka.ms/azsdk/move-pr).\n" +
-  "- For private ARM API changes, edit this PR's base branch to `RPSaaSMaster`, " +
-  "or your team's appropriate private development or release branch. " +
-  "**Do not move private API specifications to the public repository.**\n\n" +
-  "This check will update automatically when you change the base branch.";
-const RESOLVED_MESSAGE =
-  "## Target branch warning resolved\n\n" +
-  "This PR no longer targets the read-only `main` branch in `Azure/azure-rest-api-specs-pr`.";
+const WRONG_BRANCH_MESSAGE = renderMarkdownDoc(
+  section(
+    "This PR targets a read-only branch",
+    `The ${inlineCode("main")} branch in ${inlineCode("Azure/azure-rest-api-specs-pr")} cannot accept PRs. ` +
+      `Retarget private ARM changes to ${inlineCode("RPSaaSMaster")} or your team's private branch. ` +
+      `For public API or tooling changes, follow the ${link("move PR guide", "https://aka.ms/azsdk/move-pr")}. ` +
+      "**Do not move private API specifications to the public repository.**",
+  ),
+  2,
+);
 
 /** Reports private-main PRs on the current head and resolves the warning after retargeting. */
 export async function checkTargetBranch({
@@ -38,20 +32,7 @@ export async function checkTargetBranch({
     throw new Error("Target branch requires a pull request number");
   }
 
-  const comments = await github.paginate(github.rest.issues.listComments, {
-    owner,
-    repo,
-    issue_number: number,
-    per_page: PER_PAGE_MAX,
-  });
-  const [commentId, oldBody] = parseExistingComments(
-    comments.filter(
-      (comment) => comment.user?.type === "Bot" && comment.user.login === "github-actions[bot]",
-    ),
-    MARKER,
-  );
-
-  // Fetch after comment pagination so queued runs report the latest head and base, not stale events.
+  // Queued runs must report the current head and base, not stale event payloads.
   const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
   if (pr.state !== "open") {
     core.info("Skipping target branch warning for a closed PR.");
@@ -60,7 +41,7 @@ export async function checkTargetBranch({
   const wrongBranch = pr.base.ref === "main";
   const summary = wrongBranch
     ? WRONG_BRANCH_MESSAGE
-    : "This PR does not target the read-only `main` branch in `Azure/azure-rest-api-specs-pr`.";
+    : `This PR does not target the read-only ${inlineCode("main")} branch in ${inlineCode("Azure/azure-rest-api-specs-pr")}.`;
   await core.summary.addRaw(summary).write();
   await github.rest.checks.create({
     owner,
@@ -77,11 +58,4 @@ export async function checkTargetBranch({
       summary,
     },
   });
-
-  const body = `${wrongBranch ? WRONG_BRANCH_MESSAGE : RESOLVED_MESSAGE}\n${MARKER}`;
-  if (commentId && oldBody !== body) {
-    await github.rest.issues.updateComment({ owner, repo, comment_id: commentId, body });
-  } else if (!commentId && wrongBranch) {
-    await github.rest.issues.createComment({ owner, repo, issue_number: number, body });
-  }
 }
