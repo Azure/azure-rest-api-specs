@@ -567,12 +567,14 @@ export async function addCompilerEvidence({
   baseWorktree,
   currentWorktree,
   projects,
+  projectsByRevision,
   loadCompiler = compilerModule,
 }: {
   sourceIndex: SourceIndex;
   baseWorktree: string;
   currentWorktree: string;
   projects: string[];
+  projectsByRevision?: Partial<Record<SourceRevision, string[]>>;
   loadCompiler?: (worktree: string) => CompilerApi | Promise<CompilerApi>;
 }): Promise<SourceIndex> {
   const compiledDocumentSources: Map<string, Set<string>> = new Map(
@@ -616,6 +618,8 @@ export async function addCompilerEvidence({
     ["current", currentWorktree],
   ];
   for (const [revision, worktree] of revisions) {
+    const revisionProjects = projectsByRevision?.[revision] ?? projects;
+    if (!revisionProjects.length) continue;
     let compiler: CompilerApi;
     try {
       compiler = await loadCompiler(worktree);
@@ -636,7 +640,7 @@ export async function addCompilerEvidence({
       });
       continue;
     }
-    for (const project of projects) {
+    for (const project of revisionProjects) {
       try {
         const program = await compiler.compile(compiler.NodeHost, path.join(worktree, project), {
           noEmit: true,
