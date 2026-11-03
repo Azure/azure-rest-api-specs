@@ -1011,7 +1011,7 @@ function presentationWithDocuments(
   return `${report.html}<section id="appendix"><details><summary>Appendix</summary>${report.appendixHtml}</details></section>`;
 }
 
-void test("fast reports preserve SDK and documentation evidence without hidden intent links", () => {
+void test("fast reports preserve full layout, intent links, and SDK and documentation evidence", () => {
   const { dimension, raw } = fixture();
   const input = assessment(dimension);
   const fullHtml = renderAssessmentHtml(input, { downstreamInput: raw });
@@ -1033,18 +1033,35 @@ void test("fast reports preserve SDK and documentation evidence without hidden i
   };
   const original = structuredClone(input);
   const html = renderAssessmentHtml(input, { downstreamInput: raw });
-  assert.notMatch(
-    html,
-    /id="semantic-intents"|id="azure-compliance"|href="#intent-|Affected intents \(/,
+  assert.match(html, /href="#intent-semantic-1"/);
+  assert.match(html, /Affected intents \(/);
+  assert.equal(
+    html.match(/<style>[\s\S]*?<\/style>/)?.[0],
+    fullHtml.match(/<style>[\s\S]*?<\/style>/)?.[0],
+  );
+  assert.deepEqual(
+    [...html.matchAll(/class="summary-card" href="#([^"]+)"/g)].map((match) => match[1]),
+    [...fullHtml.matchAll(/class="summary-card" href="#([^"]+)"/g)].map((match) => match[1]),
   );
   assert.sameMembers(
     [...html.matchAll(/<section id="([^"]+)">/g)].map((match) => match[1]),
-    ["rest-breaking", "downstream-breaking", "document-quality", "appendix"],
+    [
+      "semantic-intents",
+      "azure-compliance",
+      "rest-breaking",
+      "downstream-breaking",
+      "document-quality",
+      "appendix",
+    ],
   );
+  const guidelines = reportSection(html, "azure-compliance");
+  assert.match(guidelines, /0 findings/);
+  assert.match(guidelines, />skipped<\/span>/);
+  assert.notMatch(guidelines, /class="report-badge add"|Azure Guidelines not assessed for/);
   const downstream = reportSection(html, "downstream-breaking");
   assert.match(downstream, /ServiceGateways\.updateAddressLocations/);
   assert.match(downstream, /body/);
-  assert.match(downstream, /models\.tsp/);
+  assert.match(downstream, /href="#intent-semantic-1"/);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
   for (const [, id] of html.matchAll(/href="#([^"]+)"/g)) {
     assert.include(ids, id, `Missing fast report anchor ${id}`);
@@ -1055,7 +1072,7 @@ void test("fast reports preserve SDK and documentation evidence without hidden i
   const documentation = reportSection(documentHtml, "document-quality");
   assert.match(documentation, /Widget\.count/);
   assert.match(documentation, /Describe the count as a positive integer/);
-  assert.notMatch(documentation, /href="#intent-/);
+  assert.match(documentation, /href="#intent-semantic-1"/);
 });
 
 function documentationSections(html: string) {

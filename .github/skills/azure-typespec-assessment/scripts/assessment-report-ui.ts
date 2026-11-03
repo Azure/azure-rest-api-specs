@@ -1009,7 +1009,6 @@ export function renderReportSections(
     directLegacyDownstreamFindings,
   } = helpers;
   const { dimensions } = assessment;
-  const fastMode = assessment.assessmentMode === "fast";
   const items = dimensions.semantic.items ?? [];
   const intentById = new Map(items.map((item) => [item.id, item]));
   const downstream = downstreamMethodData(
@@ -1035,7 +1034,7 @@ export function renderReportSections(
   const count = (text: string) => `<span class="report-count">${escape(text)}</span>`;
 
   const intentLinks = (ids: string[]) =>
-    (fastMode ? [] : unique(ids))
+    unique(ids)
       .flatMap((id) => {
         const intent = intentById.get(id);
         return intent
@@ -1046,13 +1045,6 @@ export function renderReportSections(
 
   const affectedIntents = (ids: string[]) => {
     const known = unique(ids).filter((id) => intentById.has(id));
-    if (fastMode) {
-      const sources = known.flatMap((id) => intentById.get(id)?.sources ?? []);
-      const links = sourceLinks([
-        ...new Map(sources.map((source) => [source.path, source])).values(),
-      ]);
-      return links ? `<div class="sources">${links}</div>` : "";
-    }
     return `<div class="report-intent-relations"><span class="report-relation-label">Affected intents (${known.length})</span><div class="report-link-row">${intentLinks(known) || '<span class="report-small">No linked semantic intent.</span>'}</div></div>`;
   };
 
@@ -1593,18 +1585,14 @@ export function renderReportSections(
     .join("");
   // Semantic intents describe changes, not findings. Stable sorting preserves the header order within each group.
   const sections = [
-    ...(fastMode
-      ? []
-      : [
-          {
-            findingCount: 0,
-            html: `<section id="semantic-intents">${sectionHead("Semantic intents", "Impact links are visible at a glance; expand for changed TypeSpec source, followed by affected operations.", count(`${items.length} intents · ${items.filter((item) => item.action === "add").length} added · ${items.filter((item) => item.action === "modify").length} modified · ${items.filter((item) => item.action === "remove").length} removed`))}${semanticBody || '<div class="report-empty">No semantic intents.</div>'}</section>`,
-          },
-          {
-            findingCount: complianceFindings.length,
-            html: `<section id="azure-compliance">${sectionHead("Azure Guidelines", "Findings and affected intents at a glance; expand for expected guidance and actual changes.", status(compliance.status) + count(`${complianceFindings.length} findings`))}${coverage ? `<p class="report-small">${coverage.assessedIntentCount} of ${coverage.semanticIntentCount} semantic intents assessed · ${coverage.selectedDocumentCount} documents selected</p>` : ""}${guidelineBody}${noGuidance.length ? `<p class="report-small">No applicable guideline was found for: ${intentLinks(noGuidance)}.</p>` : ""}${unassessed.length ? `<div class="report-empty">Azure Guidelines not assessed for: ${intentLinks(unassessed)}</div>` : ""}</section>`,
-          },
-        ]),
+    {
+      findingCount: 0,
+      html: `<section id="semantic-intents">${sectionHead("Semantic intents", "Impact links are visible at a glance; expand for changed TypeSpec source, followed by affected operations.", count(`${items.length} intents · ${items.filter((item) => item.action === "add").length} added · ${items.filter((item) => item.action === "modify").length} modified · ${items.filter((item) => item.action === "remove").length} removed`))}${semanticBody || '<div class="report-empty">No semantic intents.</div>'}</section>`,
+    },
+    {
+      findingCount: complianceFindings.length,
+      html: `<section id="azure-compliance">${sectionHead("Azure Guidelines", "Findings and affected intents at a glance; expand for expected guidance and actual changes.", status(compliance.status) + count(`${complianceFindings.length} findings`))}${coverage ? `<p class="report-small">${coverage.assessedIntentCount} of ${coverage.semanticIntentCount} semantic intents assessed · ${coverage.selectedDocumentCount} documents selected</p>` : ""}${guidelineBody}${noGuidance.length ? `<p class="report-small">No applicable guideline was found for: ${intentLinks(noGuidance)}.</p>` : ""}${unassessed.length ? `<div class="report-empty">Azure Guidelines not assessed for: ${intentLinks(unassessed)}</div>` : ""}</section>`,
+    },
     {
       findingCount: restCount,
       html: allBaselinesUnavailable

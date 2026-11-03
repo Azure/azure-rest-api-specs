@@ -194,9 +194,9 @@ Every confirmed REST finding must contain actual and expected behavior, rational
 
 Downstream SDK method and SDK type cards must not repeat `Changed TypeSpec`
 source links. Keep that evidence in `assessment.json`, Semantic intents, and
-the appendix; retain only related Semantic intent links in the cards in full
-mode. Fast mode hides those intents and uses direct changed-source links
-instead; no card may link to a hidden intent.
+the appendix; retain only related Semantic intent links in the cards in both
+full and fast modes. Semantic intents and their link targets remain visible
+in both modes.
 Method cards use direct, mixed, or indirect cause labels. Red impact links
 are reserved for confirmed REST/downstream impacts and failed documentation
 findings; guideline links are separate.
@@ -222,12 +222,14 @@ Dimension statuses are derived, not authored:
   declaration/documented/missing coverage;
 - safety scope: `rest-and-downstream-only`, never Azure Guidelines or document quality.
 
-Fast-mode HTML reports contain only REST breaking changes, downstream SDK
-breaking changes, and Documentation Completeness sections. They identify
-Semantic intents and Azure Guidelines as skipped in the report header without
-rendering those dimensions as report sections. Structured output retains
-internal Semantic correlation data and an explicit skipped Azure Guidelines
-dimension for provenance and validation.
+Fast-mode HTML reports preserve the full layout: Semantic intents, Azure
+Guidelines, REST breaking changes, downstream SDK breaking changes, and
+Documentation Completeness cards and sections remain present with the same
+styles and navigation. Semantic intents are assessed and displayed normally.
+Only Azure Guidelines search and judgment are skipped; its existing card and
+section show `0 findings` with an explicit skipped status, never a pass.
+Structured output retains Semantic correlation data and an explicit skipped
+Azure Guidelines dimension for provenance and validation.
 
 A blocked implemented dimension cannot pass. Documentation Completeness is
 `failed` when one or more eligible newly added declarations lack a nonempty effective

@@ -48,11 +48,12 @@ and the separation of REST compatibility from downstream SDK impact.
 ### Invocation and performance boundaries
 
 The coordinator supports `--assessment-mode full|fast`; `full` is the default.
-Fast mode reports only REST breaking changes, downstream SDK breaking changes,
-and Documentation Completeness. Semantic analysis remains an internal
-correlation mechanism, but Semantic intents are omitted from the report. Azure
-Guidelines search and judgment are skipped. The selected mode is persisted in
-bounded input and final output.
+Fast mode preserves the full report layout, including Semantic intents and
+their finding links. Only Azure Guidelines search and judgment are skipped;
+the existing Guidelines card and section show `0 findings` with a skipped
+status, not a pass. REST breaking changes, downstream SDK breaking changes,
+and Documentation Completeness are assessed normally. The selected mode is
+persisted in bounded input and final output.
 
 Run the documented CLI directly, including when the installed skill is a
 directory junction or symbolic link. The shared entrypoint guard resolves that

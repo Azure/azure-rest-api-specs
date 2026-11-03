@@ -83,9 +83,10 @@ node (Join-Path $Skill "scripts\run-assessment-analysis.ts") `
   --repo $Repo --base $Base --specification $Specification --output $Work
 ```
 
-Append `--assessment-mode fast` to report only REST breaking changes,
-downstream SDK breaking changes, and Documentation Completeness. Full mode is
-the default. The only accepted values are `full` and `fast`.
+Append `--assessment-mode fast` to skip Azure Guidelines search and judgment
+while preserving the full report layout and Semantic intents. Guidelines
+remains visible with `0 findings` and a skipped status. Full mode is the default.
+The only accepted values are `full` and `fast`.
 
 For a PR, run directly without separate metadata or checkout commands:
 

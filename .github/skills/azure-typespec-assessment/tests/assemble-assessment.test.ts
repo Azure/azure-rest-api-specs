@@ -753,7 +753,7 @@ void test("assembler restores API-version-wide intents without candidate decisio
   }
 });
 
-void test("fast assessment renders only breaking and documentation dimensions", () => {
+void test("fast assessment preserves the complete report layout with skipped guidelines", () => {
   const work = fixture();
   try {
     addDocumentInput(work, false);
@@ -781,7 +781,7 @@ void test("fast assessment renders only breaking and documentation dimensions", 
 
     assert.equal(assessment.assessmentMode, "fast");
     assert.equal(assessment.dimensions.compliance.status, "skipped");
-    for (const dimension of ["rest", "downstream", "documentQuality"] as const) {
+    for (const dimension of ["semantic", "rest", "downstream", "documentQuality"] as const) {
       assert.deepEqual(assessment.dimensions[dimension], fullAssessment.dimensions[dimension]);
     }
     assert.equal(assessment.dimensions.rest.findings[0].severity, "high");
@@ -790,14 +790,21 @@ void test("fast assessment renders only breaking and documentation dimensions", 
     assert.deepEqual(validateAssessment(assessment), []);
     const html = renderAssessmentHtml(assessment);
     assert.match(html, /Assessment mode: <strong>fast<\/strong>/);
-    assert.match(html, /Skipped: Semantic intents and Azure Guidelines/);
-    assert.notMatch(html, /id="semantic-intents"/);
-    assert.notMatch(html, /id="azure-compliance"/);
+    assert.match(html, /Skipped: Azure Guidelines search and judgment/);
+    assert.notMatch(html, /Skipped: Semantic intents/);
+    assert.match(html, /id="semantic-intents"/);
+    assert.match(html, /id="azure-compliance"/);
     assert.match(html, /id="rest-breaking"/);
     assert.match(html, /id="downstream-breaking"/);
     assert.match(html, /id="document-quality"/);
-    assert.notMatch(html, /href="#intent-|Affected intents \(/);
-    assert.match(reportSection(html, "rest-breaking"), /specification\/a\/main\.tsp:1/);
+    assert.match(html, /href="#intent-semantic-1"/);
+    assert.match(reportSection(html, "rest-breaking"), /Affected intents \(/);
+    const guidelines = reportSection(html, "azure-compliance");
+    assert.match(guidelines, />skipped<\/span>/);
+    assert.match(guidelines, /0 findings/);
+    assert.match(guidelines, /Azure Guidelines were skipped in fast assessment mode/);
+    assert.notMatch(guidelines, />passed<\/span>/);
+    assert.match(html, /id="compliance-search-evidence"/);
 
     const invalidMode = structuredClone(assessment);
     Reflect.set(invalidMode, "assessmentMode", "quick");
