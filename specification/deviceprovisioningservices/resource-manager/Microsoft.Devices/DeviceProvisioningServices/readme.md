@@ -30,6 +30,15 @@ azure-arm: true
 tag: package-2026-11
 ```
 
+### Tag: package-preview-2026-11
+
+These settings apply only when `--tag=package-preview-2026-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-11'
+input-file:
+  - preview/2026-11-02-preview/iotdps.json
+```
+
 ### Tag: package-2026-11
 
 These settings apply only when `--tag=package-2026-11` is specified on the command line.

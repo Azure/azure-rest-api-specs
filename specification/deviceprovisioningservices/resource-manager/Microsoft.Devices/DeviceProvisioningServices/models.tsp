@@ -211,6 +211,12 @@ union IotDpsSku {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   S1: "S1",
+
+  /**
+   * The S2 SKU.
+   */
+  @added(Versions.v2026_11_02_preview)
+  S2: "S2",
 }
 
 /**
