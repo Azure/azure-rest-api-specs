@@ -52,11 +52,11 @@ alias BrowserSessionReadRequiredProperties = {
 
 @doc("The browser profile configuration for a browser session.")
 model BrowserProfileBrowserSessionConfiguration {
-    @doc("The ID in GUID format of the browser profile used by the browser session.")
-    id?: Azure.Core.uuid;
+  @doc("The ID in GUID format of the browser profile used by the browser session.")
+  id?: Azure.Core.uuid;
 
-    @doc("Whether to save the changes in the browser profile done by the browser session.")
-    saveChanges?: boolean;
+  @doc("Whether to save the changes in the browser profile done by the browser session.")
+  saveChanges?: boolean;
 }
 
 alias BrowserSessionOptionalProperties = {

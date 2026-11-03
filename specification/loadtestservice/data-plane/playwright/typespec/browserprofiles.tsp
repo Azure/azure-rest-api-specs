@@ -51,14 +51,13 @@ model BrowserProfile {
   @doc("The URI for downloading the most recently saved browser profile archive. Absent until the profile state is first saved.")
   @visibility(Lifecycle.Read)
   archiveUri?: url;
-  
+
   @doc("The SHA-256 hash of the browser profile archive. Absent until the profile state is first saved.")
   @visibility(Lifecycle.Read)
   archiveSha256?: string;
 
   // TODO(mitsha): Add systemData after proxies PR merges
 }
-
 
 @doc("Operations for managing browser profiles at the service endpoint.")
 @added(Versions.v2026_12_01_preview)
