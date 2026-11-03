@@ -138,6 +138,33 @@ describe("updateLabels", () => {
 });
 
 describe("updateLabelsImpl", () => {
+  it("removes ARMSignedOff before its markers so a partial revoke never looks human-owned", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: "label-ARMAutoSignedOff=false" }, { name: "label-ARMSignedOff=false" }],
+      },
+    });
+    github.rest.issues.removeLabel.mockRejectedValueOnce(new Error("remove failed"));
+
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        head_sha: fullGitSha,
+        issue_number: 123,
+        run_id: 456,
+        github,
+        core: createMockCore(),
+      }),
+    ).rejects.toThrow("remove failed");
+
+    expect(github.rest.issues.removeLabel).toHaveBeenCalledOnce();
+    expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+      expect.objectContaining({ name: "ARMSignedOff" }),
+    );
+  });
+
   it("throws if no run_id", async () => {
     const github = createMockGithub();
 

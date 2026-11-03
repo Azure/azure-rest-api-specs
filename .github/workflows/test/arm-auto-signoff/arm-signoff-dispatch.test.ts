@@ -175,7 +175,7 @@ describe("Universal dispatch inputs", () => {
             owner: "Azure",
             repo: "azure-rest-api-specs",
             issue_number: 123,
-            labels: ["ARMAutoSignedOff-Test"],
+            labels: ["ARMSignedOff", "ARMAutoSignedOff"],
           });
         }
       },

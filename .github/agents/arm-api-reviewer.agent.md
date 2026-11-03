@@ -485,8 +485,10 @@ and Critic verification remain the same.
    ID, and any files skipped or unreadable, then run the read-only local form of
    Step 10.
 
-Apply the Step 1 size guardrail to local directory reviews using supported-file
-count and total source lines. If the target exceeds 500 files or 50,000 lines,
+Apply the Step 1 size guardrail to local directory reviews using non-example
+supported-file count and total source lines, excluding files in any `examples`
+directory from both counts. Examples remain in review scope. If the target
+exceeds 500 non-example files or 50,000 non-example source lines,
 ask the human to select a subset, split into service/RP batches, or explicitly
 accept reduced recall. Record the selected scope in the report.
 
@@ -687,7 +689,17 @@ binds every previous-version fetch.
 3. Fast-path findings still need `[NEW]` / `[EXISTING]` classification. If the classification requires non-trivial previous-version comparison, **escalate to full review** before reporting.
 4. If the fast-path review surfaces any blocking finding that suggests broader risk (e.g., a description change that reveals the schema is wrong, an example that references a property not in the spec), **escalate to full review** before reporting.
 
-**Size guardrail (full-review track only).** If the PR touches > 500 spec files **or** > 50000 added+deleted lines across spec files, stop before Step 2 and ask the human to choose:
+**Size guardrail (full-review track only).** Count spec files and their
+added+deleted lines, excluding any path with an `examples` directory segment
+from both counts. This excludes both TypeSpec source examples
+(`specification/<service>/<project>/examples/**`) and compiled Swagger examples
+(`specification/<service>/resource-manager/**/examples/**`). For a renamed or
+moved file, count it once with its added+deleted lines if either its old or new
+path is a non-example `specification/` path. Examples remain in review scope;
+their file or line counts alone must not trigger this guardrail.
+
+If the PR touches > 500 non-example spec files **or** > 50000 added+deleted lines
+across non-example spec files, stop before Step 2 and ask the human to choose:
 
 - (a) Review a specified subset of files (human provides the list).
 - (b) Split into per-service or per-RP batches reviewed sequentially as separate sessions.

@@ -81,6 +81,9 @@ export const labelPlanSchema = z.strictObject({
   archive: z.array(
     z.strictObject({ before: existingLabelSchema, name: labelDefinitionSchema.shape.name }),
   ),
+  skippedArchives: z.array(
+    z.strictObject({ label: existingLabelSchema, reason: z.string().min(1) }),
+  ),
   delete: z.array(existingLabelSchema),
   migrate: z.array(z.strictObject({ before: existingLabelSchema, target: z.string() })),
   unconfigured: z.array(existingLabelSchema),
@@ -131,24 +134,6 @@ export function originalLabelName(label: ExistingLabel): string {
   return label.name;
 }
 
-function archivedLabelName(label: ExistingLabel): string {
-  if (label.name.toLowerCase().startsWith(ARCHIVE_PREFIX)) {
-    if (label.description !== ARCHIVE_DESCRIPTION) {
-      throw new Error(
-        `Cannot archive ${JSON.stringify(label.name)}: the ${ARCHIVE_PREFIX} prefix is reserved`,
-      );
-    }
-    return label.name;
-  }
-  const name = ARCHIVE_PREFIX + label.name;
-  if (name.length > 50) {
-    throw new Error(
-      `Cannot archive ${JSON.stringify(label.name)}: its prefixed name exceeds 50 characters. Rename it explicitly first.`,
-    );
-  }
-  return name;
-}
-
 export function planLabels(
   catalog: LabelCatalog,
   existing: ExistingLabel[],
@@ -173,6 +158,7 @@ export function planLabels(
     create: [],
     update: [],
     archive: [],
+    skippedArchives: [],
     delete: [],
     migrate: [],
     unconfigured: [],
@@ -211,12 +197,20 @@ export function planLabels(
           isArchivedLabelExpired(before, now))
       )
         continue;
-      const name = archivedLabelName(before);
+      const prefixed = before.name.toLowerCase().startsWith(ARCHIVE_PREFIX);
+      const name = prefixed ? before.name : ARCHIVE_PREFIX + before.name;
       const occupant = byName.get(name.toLowerCase());
-      if (occupant && occupant.id !== before.id) {
-        throw new Error(
-          `Label name collision: ${JSON.stringify(name)} already exists. Resolve it before syncing.`,
-        );
+      let reason: string | undefined;
+      if (prefixed && before.description !== ARCHIVE_DESCRIPTION) {
+        reason = `The ${ARCHIVE_PREFIX} prefix is reserved. Rename the label explicitly first.`;
+      } else if (name.length > 50) {
+        reason = "Its prefixed name exceeds 50 characters. Rename it explicitly first.";
+      } else if (occupant && occupant.id !== before.id) {
+        reason = `Label name collision: ${JSON.stringify(name)} already exists. Resolve it before archiving.`;
+      }
+      if (reason) {
+        plan.skippedArchives.push({ label: before, reason });
+        continue;
       }
       plan.archive.push({ before, name });
     }
