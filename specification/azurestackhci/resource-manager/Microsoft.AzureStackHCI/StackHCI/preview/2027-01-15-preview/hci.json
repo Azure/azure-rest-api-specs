@@ -8274,14 +8274,8 @@
           "EdgeMachineGpuJobs_Get": {
             "$ref": "./examples/EdgeMachineGpuJobs_Get_MaximumSet_Gen.json"
           },
-          "EdgeMachineGpuJobs_Get_AssignPartition": {
-            "$ref": "./examples/EdgeMachineGpuJobs_Get_AssignPartition.json"
-          },
           "EdgeMachineGpuJobs_Get_CreatePartition": {
             "$ref": "./examples/EdgeMachineGpuJobs_Get_CreatePartition.json"
-          },
-          "EdgeMachineGpuJobs_Get_RemovePartition": {
-            "$ref": "./examples/EdgeMachineGpuJobs_Get_RemovePartition.json"
           },
           "EdgeMachineGpuJobs_Get_SwitchMode": {
             "$ref": "./examples/EdgeMachineGpuJobs_Get_SwitchMode.json"
@@ -8370,14 +8364,8 @@
           }
         },
         "x-ms-examples": {
-          "EdgeMachineGpuJobs_CreateOrUpdate_AssignPartition": {
-            "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_AssignPartition.json"
-          },
           "EdgeMachineGpuJobs_CreateOrUpdate_CreatePartition": {
             "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_CreatePartition.json"
-          },
-          "EdgeMachineGpuJobs_CreateOrUpdate_RemovePartition": {
-            "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_RemovePartition.json"
           },
           "EdgeMachineGpuJobs_CreateOrUpdate_SwitchMode": {
             "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_SwitchMode.json"
@@ -10839,25 +10827,6 @@
           "readOnly": true
         }
       }
-    },
-    "AssignPartitionGpuJobProperties": {
-      "type": "object",
-      "description": "Properties for assigning GPU partition to a specific workload or virtual machine.",
-      "properties": {
-        "vmId": {
-          "type": "string",
-          "description": "Virtual machine ID to which the GPU partition is assigned."
-        }
-      },
-      "required": [
-        "vmId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "AssignPartition"
     },
     "AuthenticationType": {
       "type": "string",
@@ -15859,9 +15828,7 @@
       "description": "GPU Job Type supported for Edge Machine GPU operations.",
       "enum": [
         "CreatePartition",
-        "SwitchMode",
-        "AssignPartition",
-        "RemovePartition"
+        "SwitchMode"
       ],
       "x-ms-enum": {
         "name": "EdgeMachineGpuJobType",
@@ -15876,16 +15843,6 @@
             "name": "SwitchMode",
             "value": "SwitchMode",
             "description": "Switch GPU mode between DDA and GPU-P for different workload requirements."
-          },
-          {
-            "name": "AssignPartition",
-            "value": "AssignPartition",
-            "description": "Assign GPU partition to a specific workload or virtual machine."
-          },
-          {
-            "name": "RemovePartition",
-            "value": "RemovePartition",
-            "description": "Remove GPU partition and free up resources for other workloads."
           }
         ]
       }
@@ -23641,25 +23598,6 @@
           }
         ]
       }
-    },
-    "RemovePartitionGpuJobProperties": {
-      "type": "object",
-      "description": "Properties for removing GPU partition and freeing up resources for other workloads.",
-      "properties": {
-        "vmId": {
-          "type": "string",
-          "description": "Virtual machine ID from which the GPU partition is removed."
-        }
-      },
-      "required": [
-        "vmId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "RemovePartition"
     },
     "RepairServerJobServerDetails": {
       "type": "object",
