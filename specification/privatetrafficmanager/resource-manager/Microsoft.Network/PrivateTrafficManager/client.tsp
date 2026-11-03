@@ -28,28 +28,59 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.Network.AdministrativeStatus,
-  "EndpointAdministrativeStatus",
+  "PrivateTrafficManagerEndpointStatus",
   "csharp"
 );
-@@clientName(Microsoft.Network.AlwaysServe, "EndpointAlwaysServe", "csharp");
+@@clientName(
+  Microsoft.Network.AlwaysServe,
+  "PrivateTrafficManagerEndpointAlwaysServeStatus",
+  "csharp"
+);
 @@clientName(Microsoft.Network.Site, "TopologyMapSite", "csharp");
 @@clientName(
   Microsoft.Network.SiteProperties,
   "TopologyMapSiteProperties",
   "csharp"
 );
-@@clientName(Microsoft.Network.CustomHeader, "ProbeCustomHeader", "csharp");
-@@clientName(Microsoft.Network.Protocol, "ProbeProtocol", "csharp");
+@@clientName(
+  Microsoft.Network.CustomHeader,
+  "PrivateTrafficManagerProbeCustomHeader",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.Protocol,
+  "PrivateTrafficManagerProbeProtocol",
+  "csharp"
+);
 @@clientName(Microsoft.Network.Protocol.HTTP, "Http", "csharp");
 @@clientName(Microsoft.Network.Protocol.HTTPS, "Https", "csharp");
 @@clientName(Microsoft.Network.Protocol.TCP, "Tcp", "csharp");
+@@clientName(
+  Microsoft.Network.ExpectedStatusCodeRange,
+  "PrivateTrafficManagerExpectedStatusCodeRange",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.HealthPolicyProperties,
+  "PrivateTrafficManagerHealthPolicyProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ProbeConfig,
+  "PrivateTrafficManagerProbeConfig",
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.DnsConfig,
   "PrivateTrafficManagerDnsConfig",
   "csharp"
 );
 @@clientName(Microsoft.Network.DnsConfig.ttl, "TimeToLiveInSeconds", "csharp");
-@@clientName(Microsoft.Network.RecordType, "DnsRecordType", "csharp");
+@@clientName(
+  Microsoft.Network.RecordType,
+  "PrivateTrafficManagerDnsRecordType",
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.ProfileProperties,
   "PrivateTrafficManagerProfileProperties",
@@ -58,6 +89,21 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Microsoft.Network.ProfileStatus,
   "PrivateTrafficManagerProfileStatus",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.TrafficRoutingMethod,
+  "PrivateTrafficManagerRoutingMethod",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ProfileEndpoint,
+  "PrivateTrafficManagerProfileEndpoint",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ProvisioningState,
+  "PrivateTrafficManagerProvisioningState",
   "csharp"
 );
 // Internal envelope name drives the flattened property name (CatchAllSiteName).

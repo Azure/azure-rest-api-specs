@@ -1,5 +1,6 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
+import { findTypeSpecProjects } from "@azure-tools/specs-shared/typespec-projects";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
 import { appendFile, stat } from "node:fs/promises";
@@ -8,7 +9,7 @@ import { fileURLToPath } from "node:url";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
-import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
+import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 import { cleanWorktree } from "./git-cleanup.ts";
 
 interface RunOptions {
@@ -55,7 +56,7 @@ export async function runAll(
     throw new Error(`Please run TypeSpec Validation on a directory path: ${root}`);
   }
 
-  let projects = await findProjects(root);
+  let projects = await findTypeSpecProjects(root);
   if (projects.length === 0) {
     console.error(`No TypeSpec projects found in ${root}`);
     return false;
