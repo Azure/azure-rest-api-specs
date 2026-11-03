@@ -235,6 +235,11 @@ op regenerateKeyCustom(
 @@alternateType(CommitmentPlan.etag, eTag, "csharp");
 @@clientName(Deployment, "CognitiveServicesAccountDeployment", "csharp");
 @@alternateType(Deployment.etag, eTag, "csharp");
+@@clientName(
+  RaiAcsAnnotatorDefinition,
+  "RaiAcsAnnotatorConfiguration",
+  "csharp"
+);
 @@clientName(AgentApplication, "CognitiveServicesAgentApplication", "csharp");
 @@clientName(
   AgenticApplicationProperties,
