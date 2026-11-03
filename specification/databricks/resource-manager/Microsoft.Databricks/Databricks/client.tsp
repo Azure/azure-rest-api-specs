@@ -116,13 +116,6 @@ using Microsoft.Databricks;
   "DatabricksAutomaticClusterUpdateValue",
   "csharp"
 );
-@@clientName(EndpointDependency, "DatabricksEndpointDependency", "csharp");
-@@clientName(EndpointDetail, "DatabricksEndpointDetail", "csharp");
-@@clientName(
-  OutboundEnvironmentEndpoint,
-  "DatabricksOutboundEnvironmentEndpoint",
-  "csharp"
-);
 @@clientName(
   PrivateEndpointConnectionProperties,
   "DatabricksPrivateEndpointConnectionProperties",
@@ -201,11 +194,6 @@ using Microsoft.Databricks;
 );
 @@clientName(AccessConnectorProperties.referedBy, "ReferredBy", "csharp");
 @@clientName(GroupIdInformation, "DatabricksPrivateLinkResource", "csharp");
-@@clientName(
-  Workspaces.list,
-  "GetOutboundNetworkDependenciesEndpoints",
-  "csharp"
-);
 @@clientName(
   Microsoft.Databricks.WorkspaceNoPublicIPBooleanParameter,
   "WorkspaceNoPublicIpBooleanParameter",

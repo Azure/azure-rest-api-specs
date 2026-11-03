@@ -1,18 +1,14 @@
-// Sources are executed directly by Node.js using type stripping.
 {
-  "extends": "@tsconfig/node20/tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "es2024",
-    "module": "NodeNext",
-    "allowJs": true,
+    "lib": ["es2024"],
     "checkJs": true,
-    "allowImportingTsExtensions": true,
-    "erasableSyntaxOnly": true,
-    "verbatimModuleSyntax": true,
-    // Avoid generating tsconfig.tsbuildinfo file, which isn't useful for our scenario
     "incremental": false,
-    "noEmit": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false
   },
-  "include": ["**/*.ts", "eslint*.config.js"],
-  "exclude": ["coverage"],
+  "include": ["**/*.ts"],
+  "exclude": ["coverage"]
 }

@@ -1,0 +1,69 @@
+{
+  "title": "Create a managed serverless container runtime binding",
+  "operationId": "RuntimeBindings_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-workload",
+    "spaceName": "managed-agents-prod",
+    "bindingName": "serverless-default",
+    "api-version": "2026-11-01-preview",
+    "resource": {
+      "kind": "ServerlessContainers",
+      "properties": {
+        "provisioningMode": "Managed",
+        "managedProfile": {
+          "provider": "ACI"
+        },
+        "networkProfile": {
+          "egressMode": "ServiceManaged"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
+        "name": "serverless-default",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
+        "kind": "ServerlessContainers",
+        "properties": {
+          "provisioningMode": "Managed",
+          "managedProfile": {
+            "provider": "ACI"
+          },
+          "networkProfile": {
+            "egressMode": "ServiceManaged"
+          },
+          "provisioningState": "Succeeded",
+          "state": "Ready",
+          "ownership": "Created"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/workloadSpaceOperationStatuses/00000000-0000-0000-0000-000000000012?api-version=2026-11-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
+        "name": "serverless-default",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
+        "kind": "ServerlessContainers",
+        "properties": {
+          "provisioningMode": "Managed",
+          "managedProfile": {
+            "provider": "ACI"
+          },
+          "networkProfile": {
+            "egressMode": "ServiceManaged"
+          },
+          "provisioningState": "Accepted",
+          "state": "Pending",
+          "ownership": "Created"
+        }
+      }
+    }
+  }
+}

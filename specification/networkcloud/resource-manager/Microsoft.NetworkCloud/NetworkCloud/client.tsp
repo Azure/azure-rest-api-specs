@@ -30,6 +30,42 @@ using Microsoft.NetworkCloud;
 @@scope(StorageAppliances.createOrUpdate, "!csharp");
 @@scope(StorageAppliances.delete, "!csharp");
 
+@@clientName(
+  ClusterPatchProperties.aggregatorOrSingleRackDefinition,
+  "AggregatorOrSingleRackDefinitionPatch",
+  "csharp"
+);
+@@clientName(
+  ClusterPatchProperties.clusterServicePrincipal,
+  "ClusterServicePrincipalPatch",
+  "csharp"
+);
+@@clientName(
+  ClusterPatchProperties.computeDeploymentThreshold,
+  "ComputeDeploymentThresholdPatch",
+  "csharp"
+);
+@@clientName(
+  ClusterPatchProperties.computeRackDefinitions,
+  "ComputeRackDefinitionsPatch",
+  "csharp"
+);
+@@clientName(
+  ClusterPatchProperties.secretArchive,
+  "SecretArchivePatch",
+  "csharp"
+);
+@@clientName(
+  ClusterPatchProperties.updateStrategy,
+  "UpdateStrategyPatch",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePatchProperties.vmImageRepositoryCredentials,
+  "VmImageRepositoryCredentialsPatch",
+  "csharp"
+);
+
 @@alternateType(AccessBridge.etag, eTag, "csharp");
 @@alternateType(AgentPool.etag, eTag, "csharp");
 @@alternateType(BareMetalMachine.etag, eTag, "csharp");

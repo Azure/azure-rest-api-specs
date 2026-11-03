@@ -7,11 +7,12 @@ tags:
   - warning
   - validation
 inputs:
-  prompt: 'Our package.json currently has "@azure-tools/openai-typespec": "^1.11.0". Update guidance for this package.'
+  prompt: 'Our package.json uses catalog: for @azure-tools/openai-typespec, but pnpm-workspace.yaml sets its catalog entry to "^1.11.0". Update guidance for this package.'
 expected:
   output_contains:
     - "@azure-tools/openai-typespec"
-    - "--save-exact"
+    - "pnpm-workspace.yaml"
+    - "pnpm install"
     - "warn"
     - "^"
   behavior:
