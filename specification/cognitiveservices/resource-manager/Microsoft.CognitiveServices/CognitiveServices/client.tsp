@@ -190,6 +190,13 @@ op regenerateKeyCustom(
 );
 
 @@clientName(Account, "CognitiveServicesAccount", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Keep the nullable provider properties setter public so PATCH can clear all blocking actions."
+@@clientOption(
+  CostControlProviderPropertiesPatch,
+  "disable-safe-flatten",
+  true,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
 @@clientOption(
@@ -1295,5 +1302,13 @@ op regenerateKeyCustom(
   "CognitiveServicesComputeProvisioningState",
   "csharp"
 );
-@@clientName(CostControl, "CognitiveServicesAccountCostControl", "csharp");
-@@alternateType(CostControl.etag, eTag, "csharp");
+@@clientName(
+  AccountCostControl,
+  "CognitiveServicesAccountCostControl",
+  "csharp"
+);
+@@clientName(
+  ProjectCostControl,
+  "CognitiveServicesProjectCostControl",
+  "csharp"
+);
