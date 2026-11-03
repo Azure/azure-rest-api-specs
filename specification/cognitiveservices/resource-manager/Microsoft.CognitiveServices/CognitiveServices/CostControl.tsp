@@ -78,8 +78,8 @@ model CostControlProperties {
   category: CostControlCategory;
 
   /**
-   * The positive budget amount, in United States dollars for Cost or tokens for Tokens.
-   * Token amounts must be whole numbers no greater than 9223372036854775807.
+   * The positive budget amount, measured in United States dollars for the Cost category or in tokens for the Tokens category.
+   * Token amounts must be whole numbers.
    */
   @minValueExclusive(0)
   amount: float64;
@@ -123,7 +123,7 @@ model CostControlPatchProperties {
   /** The existing measurement category. Changing it after creation is not supported. */
   category?: CostControlCategory;
 
-  /** Replaces the positive budget amount in United States dollars or whole tokens, according to category. Token amounts cannot exceed 9223372036854775807. */
+  /** Replaces the positive budget amount, measured in United States dollars for the Cost category or in whole tokens for the Tokens category. */
   @minValueExclusive(0)
   amount?: float64;
 
