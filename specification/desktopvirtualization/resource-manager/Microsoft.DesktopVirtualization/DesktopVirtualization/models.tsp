@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
@@ -1278,6 +1279,16 @@ union DeploymentScope {
 }
 
 /**
+ * Read-only deployment scope for ApplicationGroup.
+ */
+@added(Versions.vLatestPreview)
+@TypeSpec.OpenAPI.extension("readOnly", true)
+union ReadOnlyDeploymentScope {
+  DeploymentScope,
+  string,
+}
+
+/**
  * Day of the week. Modeled as string
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
@@ -2372,7 +2383,7 @@ model ApplicationGroupProperties {
    */
   @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
-  deploymentScope?: DeploymentScope;
+  deploymentScope?: ReadOnlyDeploymentScope;
 }
 
 /**
@@ -2735,7 +2746,7 @@ model RegistrationInfo {
   /**
    * The registration token base64 encoded string.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   token?: string;
 
   /**
@@ -2934,7 +2945,7 @@ model ScalingSchedule {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties | null;
 
@@ -3036,14 +3047,14 @@ model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   rampUpMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   @maxValue(59)
   rampUpMinimumHostPoolSize?: int32 | null;
@@ -3051,14 +3062,14 @@ model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   rampDownMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   @maxValue(59)
   rampDownMinimumHostPoolSize?: int32 | null;
@@ -3701,7 +3712,8 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * The managed service identities assigned to this resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
+  @added(Versions.v2026_04_16)
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity | null;
 }
 
@@ -4034,11 +4046,13 @@ model RegistrationTokenList {
    * List of RegistrationToken definitions.
    */
   @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value?: RegistrationTokenMinimal[];
 
   /**
    * Link to the next page of results.
    */
+  @nextLink
   @visibility(Lifecycle.Read)
   nextLink?: string;
 }
@@ -4055,7 +4069,7 @@ model RegistrationTokenMinimal {
   /**
    * The registration token base64 encoded string.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   token?: string;
 }
 
@@ -4621,7 +4635,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampUpStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  rampUpStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the ramp up period.
@@ -4654,7 +4668,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  peakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  peakStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the peak period.
@@ -4687,7 +4701,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampDownStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  rampDownStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the ramp down period.
@@ -4720,7 +4734,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  offPeakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  offPeakStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the off-peak period.
@@ -4792,7 +4806,7 @@ model ScalingPlanPooledScheduleProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties | null;
 
@@ -4914,7 +4928,7 @@ model ScalingPlanPooledSchedulePatchProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties | null;
 
