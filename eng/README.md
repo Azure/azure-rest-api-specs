@@ -20,10 +20,9 @@ default emitter, and existing pipelines do not need to configure the variable.
 
 This requires `@azure-tools/spec-gen-sdk` **0.9.10 or later**, which adds the
 optional contract in [Azure/azure-sdk-tools#17457](https://github.com/Azure/azure-sdk-tools/pull/17457).
-Once published, update the repository's catalog and frozen lockfile to a release
-with that support before enabling the variable. Language automation must also
-support the selected emitter; this wiring does not install emitters, change SDK
-enablement checks, or create provisioning pipelines.
+The repository's catalog and frozen lockfile include this support. Language
+automation must also support the selected emitter; this wiring does not install
+emitters, change SDK enablement checks, or create provisioning pipelines.
 
 ## Spec Change Policies
 
