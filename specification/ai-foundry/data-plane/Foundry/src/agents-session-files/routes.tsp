@@ -38,6 +38,7 @@ interface AgentSessionFiles {
    * Downloads the file at the specified sandbox path as a binary stream.
    * The path is resolved relative to the session home directory.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing downloadSessionFile SDK method name; renaming it would break client compatibility."
   @summary("Download a session file")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")

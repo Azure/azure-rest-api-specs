@@ -309,6 +309,7 @@ interface CloudEndpoints {
   /**
    * Get the AFS file share metadata signing certificate public keys.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing afsShareMetadataCertificatePublicKeys SDK method name; renaming it would break client compatibility."
   @get
   afsShareMetadataCertificatePublicKeys is ArmResourceActionSync<
     CloudEndpoint,

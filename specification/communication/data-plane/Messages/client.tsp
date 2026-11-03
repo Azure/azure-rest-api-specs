@@ -17,6 +17,7 @@ namespace ClientForAcsMessages;
 interface NotificationMessagesClient
   extends Azure.Communication.MessagesService.NotificationMessagesOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing downloadMedia SDK method name; renaming it would break client compatibility."
   @access(Access.internal, "csharp")
   @clientName("downloadMediaInternal", "csharp")
   downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;

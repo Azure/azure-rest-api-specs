@@ -13,6 +13,7 @@ interface Documents {
   /** Queries the number of documents in the index. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing count SDK method name; renaming it would break client compatibility."
   @route("/indexes('{indexName}')/docs/$count")
   @get
   count is SearchIndexOperation<
@@ -28,6 +29,7 @@ interface Documents {
   /** Searches for documents in the index. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing searchGet SDK method name; renaming it would break client compatibility."
   @route("/indexes('{indexName}')/docs")
   @get
   searchGet is SearchIndexOperation<
@@ -95,6 +97,7 @@ interface Documents {
   /** Suggests documents in the index that match the given partial query text. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing suggestGet SDK method name; renaming it would break client compatibility."
   @route("/indexes('{indexName}')/docs/search.suggest")
   @get
   suggestGet is SearchIndexOperation<
@@ -144,6 +147,7 @@ interface Documents {
   /** Autocompletes incomplete query terms based on input text and matching terms in the index. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing autocompleteGet SDK method name; renaming it would break client compatibility."
   @route("/indexes('{indexName}')/docs/search.autocomplete")
   @get
   autocompleteGet is SearchIndexOperation<

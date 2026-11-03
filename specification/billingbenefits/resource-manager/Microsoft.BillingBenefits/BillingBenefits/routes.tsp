@@ -73,6 +73,7 @@ interface DiscountsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing scopeList SDK method name; renaming it would break client compatibility."
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableDiscounts")
   @get
   @list
@@ -213,6 +214,7 @@ interface ConditionalCreditsOperationGroup {
   /**
    * List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing scopeList SDK method name; renaming it would break client compatibility."
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableConditionalCredits")
   @get
   @list

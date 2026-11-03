@@ -329,6 +329,7 @@ namespace Azure.ResourceManager.Models {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Override to reorder parameters for the Go SDK"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Operation is intentionally declared at namespace scope to preserve the existing Go SDK parameter ordering."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing newRelicMonitorResourceDelete SDK method name; renaming it would break client compatibility."
 op newRelicMonitorResourceDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,

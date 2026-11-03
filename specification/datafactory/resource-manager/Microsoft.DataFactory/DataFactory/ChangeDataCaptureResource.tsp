@@ -113,6 +113,7 @@ interface ChangeDataCaptureResources {
   /**
    * Gets the current status for the change data capture resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing status SDK method name; renaming it would break client compatibility."
   @tag("changeDataCapture")
   @get
   status is ArmResourceActionSync<

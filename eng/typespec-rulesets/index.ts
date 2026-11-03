@@ -20,6 +20,9 @@ export const $linter = defineLinter({
     },
     "client-sdk": {
       extends: ["@azure-tools/typespec-azure-rulesets-original/client-sdk"],
+      enable: {
+        "@azure-tools/typespec-client-generator-core/get-operation-name": true,
+      },
     },
   },
 });

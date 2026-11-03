@@ -283,6 +283,7 @@ interface VirtualMachines {
    * Retrieves information about the run-time state of a virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing instanceView SDK method name; renaming it would break client compatibility."
   @get
   instanceView is ComputeResourceActionSync<
     VirtualMachine,

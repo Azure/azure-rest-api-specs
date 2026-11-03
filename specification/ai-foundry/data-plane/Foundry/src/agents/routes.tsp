@@ -427,6 +427,7 @@ interface Agents {
    * The SHA-256 digest of the returned bytes matches the `content_hash` on the
    * resolved version's `code_configuration`.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing downloadAgentCode SDK method name; renaming it would break client compatibility."
   @summary("Download agent code")
   @get
   @route("/agents/{agent_name}/code:download")

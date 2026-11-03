@@ -143,6 +143,7 @@ interface Workbooks {
   /**
    * Get the revisions for the workbook defined by its resourceName.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing revisionsList SDK method name; renaming it would break client compatibility."
   revisionsList is WorkbookOperationGroupOps.List<
     Workbook,
     Response = ArmResponse<WorkbooksListResult>
@@ -176,6 +177,7 @@ interface WorkbookOperationGroup {
   /**
    * Get a single workbook revision defined by its revisionId.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing revisionGet SDK method name; renaming it would break client compatibility."
   revisionGet is WorkbookOperationGroupOps.Read<Workbook>;
 
   /**

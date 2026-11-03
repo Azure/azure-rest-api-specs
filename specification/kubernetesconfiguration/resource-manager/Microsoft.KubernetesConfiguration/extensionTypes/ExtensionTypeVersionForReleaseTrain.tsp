@@ -152,6 +152,7 @@ interface ExtensionTypeVersionForReleaseTrainOperationGroup {
   /**
    * Get details of a version for an Extension Type installable to the cluster.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing clusterGetVersion SDK method name; renaming it would break client compatibility."
   @tag("ExtensionTypes")
   @tag("ClusterExtensionTypes")
   clusterGetVersion is ExtensionTypeVersionForReleaseTrainOperationGroupOps.Read<ExtensionTypeVersionForReleaseTrain>;
@@ -159,6 +160,7 @@ interface ExtensionTypeVersionForReleaseTrainOperationGroup {
   /**
    * List the version for an Extension Type installable to the cluster.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing clusterListVersions SDK method name; renaming it would break client compatibility."
   @tag("ExtensionTypes")
   @tag("ClusterExtensionTypes")
   clusterListVersions is ExtensionTypeVersionForReleaseTrainOperationGroupOps.List<

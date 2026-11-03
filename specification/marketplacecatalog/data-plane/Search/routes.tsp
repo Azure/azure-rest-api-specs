@@ -74,6 +74,7 @@ alias FacetsRequestParameters = FacetsParameter &
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Routes for listing and single are almost the same, requires custom operation"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing search SDK method name; renaming it would break client compatibility."
 @doc("Serves a user experience with search and filter results on Marketplace public products.")
 @get
 @route("/search")
@@ -83,6 +84,7 @@ op search(...ApiVersionParameter, ...SearchRequestParameters):
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Routes for listing and single are almost the same, requires custom operation"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing suggestions SDK method name; renaming it would break client compatibility."
 @doc("Make suggestions while user is typing a search query for products.")
 @get
 @route("/suggestions")
@@ -92,6 +94,7 @@ op suggestions(...ApiVersionParameter, ...SuggestionsRequestParameters):
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Routes for listing and single are almost the same, requires custom operation"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing facets SDK method name; renaming it would break client compatibility."
 @doc("Get counts of Marketplace public products with requested properties.")
 @get
 @route("/facets")

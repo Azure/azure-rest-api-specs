@@ -80,6 +80,7 @@ interface UsagesOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Pre-existing API contract: provider-level action."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing usageBySubscriptionSku SDK method name; renaming it would break client compatibility."
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}")
 @get
 @externalDocs("https://aka.ms/search-manage")
