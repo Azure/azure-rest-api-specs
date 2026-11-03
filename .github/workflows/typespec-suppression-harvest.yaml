@@ -1,0 +1,171 @@
+name: TypeSpec Auto-Suppression - Harvest
+
+# Deterministic half of the auto-suppression pipeline.
+#
+# Rather than recompiling every spec, this workflow consumes the logs of an existing
+# "TypeSpec Validation - All" (TSV-All) run, extracts the per-folder failures, and hands the result
+# to the agentic half (typespec-auto-suppression.md).
+#
+# TSV-All already runs 4x/day on both `main` and `typespec-next`, so harvesting is far cheaper than
+# a second full compile and guarantees the agent reacts to exactly what CI saw.
+#
+# TSV-All is NOT modified by this pipeline. This workflow only reads its logs.
+
+on:
+  schedule:
+    # Weekly, Monday 03:00 UTC — shortly after the TSV-All 00:00 scheduled run has finished.
+    - cron: "0 3 * * 1"
+
+  workflow_dispatch:
+    inputs:
+      run-id:
+        description: TSV-All run ID to harvest (defaults to the latest completed scheduled run)
+        type: string
+      refs:
+        description: Branches to harvest from that run
+        type: choice
+        default: both
+        options:
+          - both
+          - default
+          - next
+      dispatch-agent:
+        description: Dispatch the agentic suppression workflow after harvesting
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  harvest:
+    name: Harvest ${{ matrix.ref }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # "default" is the placeholder for the repo default branch, matching TSV-All's matrix.
+        ref: ${{ fromJSON(inputs.refs == 'default' && '["default"]' || inputs.refs == 'next' && '["next"]' || '["default", "next"]') }}
+
+    # Ubuntu only. Harvesting parses logs, so it does not need the Windows leg. Windows-only
+    # failures are deliberately excluded from auto-suppression — those should be fixed, not hidden.
+    runs-on: ubuntu-24.04
+
+    outputs:
+      run-id: ${{ steps.resolve.outputs.run-id }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Resolve TSV-All run to harvest
+        id: resolve
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_RUN_ID: ${{ inputs.run-id }}
+        run: |
+          set -euo pipefail
+
+          if [ -n "${INPUT_RUN_ID:-}" ]; then
+            run_id="$INPUT_RUN_ID"
+            echo "Using explicitly provided TSV-All run: $run_id"
+          else
+            # Latest completed scheduled run, which is the only trigger that covers BOTH
+            # `main` and `typespec-next` (see the matrix in typespec-validation-all.yaml).
+            run_id=$(gh run list \
+              --repo "$GITHUB_REPOSITORY" \
+              --workflow typespec-validation-all.yaml \
+              --event schedule \
+              --status completed \
+              --limit 1 \
+              --json databaseId \
+              --jq '.[0].databaseId')
+            echo "Using latest completed scheduled TSV-All run: $run_id"
+          fi
+
+          if [ -z "$run_id" ] || [ "$run_id" = "null" ]; then
+            echo "::error::Could not resolve a TSV-All run to harvest"
+            exit 1
+          fi
+
+          echo "run-id=$run_id" >> "$GITHUB_OUTPUT"
+
+      - name: Download TSV-All job logs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ steps.resolve.outputs.run-id }}
+          REF_KEY: ${{ matrix.ref }}
+        run: |
+          set -euo pipefail
+          mkdir -p logs
+
+          # TSV-All job names encode the matrix as: TSV (<ref>, <os>, <shard>, <total>)
+          # Select only the ubuntu jobs for this ref; all shards for that ref are included so the
+          # agent sees the complete failure set for the branch in a single run.
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs" --paginate \
+            --jq ".jobs[] | select(.name | test(\"^TSV \\\\($REF_KEY, ubuntu, \")) | [.id, .name, .conclusion] | @tsv" \
+            > jobs.tsv
+
+          if [ ! -s jobs.tsv ]; then
+            echo "::error::No ubuntu TSV jobs found for ref '$REF_KEY' in run $RUN_ID."
+            echo "::error::Note that only the *scheduled* TSV-All trigger runs the 'next' ref."
+            exit 1
+          fi
+
+          echo "::group::Matched TSV-All jobs"
+          cat jobs.tsv
+          echo "::endgroup::"
+
+          while IFS=$'\t' read -r id name conclusion; do
+            echo "Downloading log for job $id ($name, $conclusion)"
+            gh api "repos/$GITHUB_REPOSITORY/actions/jobs/$id/logs" > "logs/job-$id.log" || \
+              echo "::warning::Could not download log for job $id ($name)"
+          done < jobs.tsv
+
+      - name: Extract failures
+        env:
+          RUN_ID: ${{ steps.resolve.outputs.run-id }}
+          REF_KEY: ${{ matrix.ref }}
+          TARGET_REF: ${{ matrix.ref == 'next' && 'typespec-next' || github.event.repository.default_branch }}
+        run: node .github/workflows/src/harvest-tsv-failures.js
+
+      - name: Upload harvest results
+        uses: actions/upload-artifact@v7
+        with:
+          name: tsv-harvest-${{ matrix.ref }}
+          path: |
+            harvest/failures.md
+            harvest/failures.json
+          retention-days: 7
+
+  dispatch:
+    name: Dispatch agent (${{ matrix.ref }})
+    needs: harvest
+    if: always() && inputs.dispatch-agent != false
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ref: ${{ fromJSON(inputs.refs == 'default' && '["default"]' || inputs.refs == 'next' && '["next"]' || '["default", "next"]') }}
+
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+      actions: write
+
+    steps:
+      - name: Dispatch agentic suppression workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_REF: ${{ matrix.ref == 'next' && 'typespec-next' || github.event.repository.default_branch }}
+        # NOTE: `--ref` requires typespec-auto-suppression.lock.yml to already exist on the target
+        # branch. Until this lands on `typespec-next`, the "next" dispatch will fail with
+        # "workflow not found" — expected, and it does not affect the "default" dispatch.
+        run: |
+          gh workflow run typespec-auto-suppression.lock.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref "$TARGET_REF" \
+            --field target-ref="$TARGET_REF" \
+            --field harvest-run-id="$GITHUB_RUN_ID" \
+            --field ref-key="${{ matrix.ref }}"
