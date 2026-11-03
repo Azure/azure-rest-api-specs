@@ -44408,20 +44408,20 @@ components:
           description: Fixed-window discriminator.
         start_time:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: Inclusive UTC Unix timestamp in seconds. Must precede end_time and be in the past. The service validates the interval at submission.
+          description: Inclusive UTC Unix timestamp in seconds, at or after the Unix epoch. Must precede the effective end_time after truncation to job submission time. The service rejects empty or inverted effective intervals.
         end_time:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: Exclusive UTC Unix timestamp in seconds. Must be at or before job submission time, forming a completed past interval. The service rejects future windows rather than waiting or clamping timestamps.
+          description: Exclusive UTC Unix timestamp in seconds. A future value is truncated to job submission time, and the effective end is returned in the job configuration. The service does not wait for future traces.
         max_traces:
           type: integer
           format: int32
           minimum: 1
           maximum: 100
-          description: Maximum number of trace conversations to select, from 1 to 100 inclusive. If omitted, the service defaults to 100. Select the latest matching traces, giving preference to those with human annotations, evaluation results, or both. Traces without feedback remain eligible.
+          description: Maximum number of trace conversations to select, from 1 to 100 inclusive. If omitted, the service defaults to 100. Selects the latest matching readable traces before collecting their annotations or evaluation results; feedback availability does not affect selection priority.
           default: 100
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationTraceWindow'
-      description: Selects recent trace conversations in a completed past half-open interval, preferring traces with annotations or evaluation results.
+      description: Selects the latest readable trace conversations in a half-open interval, independently of feedback availability.
     AgentOptimizationFoundryAgentTargetConfiguration:
       type: object
       required:
@@ -44823,7 +44823,7 @@ components:
       properties:
         name:
           type: string
-          description: Service-authored logical step name, unique within the snapshot, for example resolve_inputs, collect_traces, or publish_skills. Consumers must tolerate unfamiliar names.
+          description: Service-authored logical step name, unique within the snapshot, for example resolve_inputs, collect_traces, evaluate_training_traces, or publish_skills. Consumers must tolerate unfamiliar names.
         status:
           $ref: '#/components/schemas/AgentOptimizationSkillExecutionStepStatus'
           description: Recorded step state.
@@ -44864,8 +44864,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgentOptimizationSkillExecutionStep'
-          maxItems: 10
-          description: At most ten distinct steps in pipeline order. Older snapshots may omit collect_feedback.
+          maxItems: 11
+          description: At most eleven distinct steps in pipeline order. Older snapshots may omit collect_feedback or evaluate_training_traces.
       description: Persisted candidate execution snapshot, including partial runs. Not exposed on the job or candidate list response.
     AgentOptimizationSkillResolvedContext:
       type: object
@@ -45205,9 +45205,12 @@ components:
           enum:
             - agent_traces
           description: Generate evaluators from the agent_traces context.
+        trace_window:
+          $ref: '#/components/schemas/AgentOptimizationTraceWindow'
+          description: Optional trace selection used only to generate the evaluator. When omitted, reuses the agent_traces context window. An override does not change dataset generation, learning evidence, or validation partitioning. Uses the same fixed-window truncation and trace-ID lookup rules as the context window.
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationEvaluatorGenerationConfiguration'
-      description: Generates evaluators from the job's selected trace evidence.
+      description: Generates an evaluator from the job's trace evidence or a separate evaluator-only trace selection.
     AgentOptimizationTraceIdsTraceWindow:
       type: object
       required:
@@ -45219,7 +45222,7 @@ components:
           type: string
           enum:
             - trace_ids
-          description: Explicit trace-ID selection discriminator. Service support is TBD.
+          description: Explicit trace-ID selection discriminator.
         trace_ids:
           type: array
           items:
@@ -45230,10 +45233,10 @@ components:
           type: integer
           format: int32
           minimum: 1
-          description: Requested telemetry lookup horizon, at least 1 hour. Service support, the lookback anchor, and maximum supported horizon are TBD.
+          description: Telemetry lookup horizon in hours, at least 1. The half-open lookup interval starts this many hours before job creation and ends at job creation; retries do not move the anchor.
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationTraceWindow'
-      description: Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability.
+      description: Selects explicit trace IDs within the configured telemetry source and a lookback interval ending at job creation.
     AgentOptimizationTraceWindow:
       type: object
       required:
@@ -45485,7 +45488,7 @@ components:
           description: Explicit telemetry selection. Required without a target agent. When omitted with a target, use its project-linked telemetry. Not accepted on steering_prompt context.
         trace_window:
           $ref: '#/components/schemas/AgentOptimizationTraceWindow'
-          description: 'Trace selection: a fixed half-open window, or proposed explicit trace_ids selection whose service support is TBD.'
+          description: Trace selection using a fixed half-open window or explicit trace_ids within a lookback interval ending at job creation.
       allOf:
         - $ref: '#/components/schemas/OptimizationContext'
       description: Trace evidence for skill optimization, selected independently of feedback availability.
@@ -86150,6 +86153,13 @@ components:
             $ref: '#/components/schemas/OptimizationContext'
           minItems: 1
           description: At least one context item containing trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines. For skill optimization only, a steering prompt must be non-empty and at most 100 KiB (102,400 UTF-8 bytes), enforced by the service; oversized prompts are rejected rather than truncated.
+        training_split_ratio:
+          type: number
+          format: double
+          description: Fraction of generated question groups assigned to learning, strictly greater than 0 and less than 1. Defaults to 0.7 when omitted. Normalized questions and shared source traces stay in the same group, and every generated row belongs to learning or validation. The service rejects splits that leave either side empty. Caller-provided validation data is not split.
+          exclusiveMinimum: 0
+          exclusiveMaximum: 1
+          default: 0.7
         evaluation_configuration:
           $ref: '#/components/schemas/SkillOptimizationEvaluationConfiguration'
           description: Optional historical training-trace grading and before/after comparison for supported registered targets. Requires target_configuration, evaluation_model, and one existing evaluator or evaluator_generation_configuration. Training verdicts can inform learning; separate before/after scores report impact and do not drive candidate search, selection, or publication. Omitted to skip new training grading and comparison.
@@ -86163,7 +86173,7 @@ components:
       properties:
         validation_set:
           $ref: '#/components/schemas/AgentOptimizationTargetCompletionEvaluationSet'
-          description: Optional target-completion validation data, limited to 500 inline test cases. When omitted, the service generates data from the selected traces and partitions it for supported before/after comparison. Both comparison runs reuse the same frozen validation dataset. Caller-supplied training_set is not accepted.
+          description: Optional target-completion validation data, limited to 500 inline test cases. When omitted, the service generates data from the selected traces and partitions it using training_split_ratio for supported before/after comparison. Both comparison runs reuse the same frozen validation dataset. Caller-provided validation data is reused without splitting. Caller-supplied training_set is not accepted.
         evaluators:
           type: array
           items:

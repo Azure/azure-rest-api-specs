@@ -451,10 +451,10 @@ model AgentOptimizationAppInsightsTraceConnectionConfiguration
 union AgentOptimizationTraceWindowType {
   string,
 
-  /** A completed, half-open time interval. */
+  /** A half-open time interval whose effective end is no later than job submission. */
   fixed: "fixed",
 
-  /** Proposed explicit trace-ID selection; service support is TBD. */
+  /** Explicit trace-ID selection within a lookback interval ending at job creation. */
   trace_ids: "trace_ids",
 }
 
@@ -465,34 +465,34 @@ model AgentOptimizationTraceWindow {
   type: AgentOptimizationTraceWindowType;
 }
 
-/** Selects recent trace conversations in a completed past half-open interval, preferring traces with annotations or evaluation results. */
+/** Selects the latest readable trace conversations in a half-open interval, independently of feedback availability. */
 model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Fixed-window discriminator.")
   type: AgentOptimizationTraceWindowType.fixed;
 
-  @doc("Inclusive UTC Unix timestamp in seconds. Must precede end_time and be in the past. The service validates the interval at submission.")
+  @doc("Inclusive UTC Unix timestamp in seconds, at or after the Unix epoch. Must precede the effective end_time after truncation to job submission time. The service rejects empty or inverted effective intervals.")
   start_time: FoundryTimestamp;
 
-  @doc("Exclusive UTC Unix timestamp in seconds. Must be at or before job submission time, forming a completed past interval. The service rejects future windows rather than waiting or clamping timestamps.")
+  @doc("Exclusive UTC Unix timestamp in seconds. A future value is truncated to job submission time, and the effective end is returned in the job configuration. The service does not wait for future traces.")
   end_time: FoundryTimestamp;
 
-  @doc("Maximum number of trace conversations to select, from 1 to 100 inclusive. If omitted, the service defaults to 100. Select the latest matching traces, giving preference to those with human annotations, evaluation results, or both. Traces without feedback remain eligible.")
+  @doc("Maximum number of trace conversations to select, from 1 to 100 inclusive. If omitted, the service defaults to 100. Selects the latest matching readable traces before collecting their annotations or evaluation results; feedback availability does not affect selection priority.")
   @minValue(1)
   @maxValue(100)
   max_traces?: int32 = 100;
 }
 
-/** Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability. */
+/** Selects explicit trace IDs within the configured telemetry source and a lookback interval ending at job creation. */
 model AgentOptimizationTraceIdsTraceWindow
   extends AgentOptimizationTraceWindow {
-  @doc("Explicit trace-ID selection discriminator. Service support is TBD.")
+  @doc("Explicit trace-ID selection discriminator.")
   type: AgentOptimizationTraceWindowType.trace_ids;
 
   @doc("At least one explicit trace identifier to look up within the configured telemetry source. Service support, maximum list size, duplicate handling, and missing-ID behavior are TBD.")
   @minItems(1)
   trace_ids: string[];
 
-  @doc("Requested telemetry lookup horizon, at least 1 hour. Service support, the lookback anchor, and maximum supported horizon are TBD.")
+  @doc("Telemetry lookup horizon in hours, at least 1. The half-open lookup interval starts this many hours before job creation and ends at job creation; retries do not move the anchor.")
   @minValue(1)
   lookback_hours: int32;
 }
@@ -505,7 +505,7 @@ model AgentTracesOptimizationContext extends OptimizationContext {
   @doc("Explicit telemetry selection. Required without a target agent. When omitted with a target, use its project-linked telemetry. Not accepted on steering_prompt context.")
   trace_connection_configuration?: AgentOptimizationTraceConnectionConfiguration;
 
-  @doc("Trace selection: a fixed half-open window, or proposed explicit trace_ids selection whose service support is TBD.")
+  @doc("Trace selection using a fixed half-open window or explicit trace_ids within a lookback interval ending at job creation.")
   trace_window: AgentOptimizationTraceWindow;
 }
 
@@ -527,16 +527,19 @@ model AgentOptimizationEvaluatorGenerationConfiguration {
   prompt?: string;
 }
 
-/** Generates evaluators from the job's selected trace evidence. */
+/** Generates an evaluator from the job's trace evidence or a separate evaluator-only trace selection. */
 model AgentOptimizationTraceEvaluatorGenerationConfiguration
   extends AgentOptimizationEvaluatorGenerationConfiguration {
   @doc("Generate evaluators from the agent_traces context.")
   type: AgentOptimizationEvaluatorGenerationSourceType.agent_traces;
+
+  @doc("Optional trace selection used only to generate the evaluator. When omitted, reuses the agent_traces context window. An override does not change dataset generation, learning evidence, or validation partitioning. Uses the same fixed-window truncation and trace-ID lookup rules as the context window.")
+  trace_window?: AgentOptimizationTraceWindow;
 }
 
 /** Skill-only evaluation inputs. Training-trace grading can inform single-shot learning; supported before/after comparison reports impact without gating publication. */
 model SkillOptimizationEvaluationConfiguration {
-  @doc("Optional target-completion validation data, limited to 500 inline test cases. When omitted, the service generates data from the selected traces and partitions it for supported before/after comparison. Both comparison runs reuse the same frozen validation dataset. Caller-supplied training_set is not accepted.")
+  @doc("Optional target-completion validation data, limited to 500 inline test cases. When omitted, the service generates data from the selected traces and partitions it using training_split_ratio for supported before/after comparison. Both comparison runs reuse the same frozen validation dataset. Caller-provided validation data is reused without splitting. Caller-supplied training_set is not accepted.")
   validation_set?: AgentOptimizationTargetCompletionEvaluationSet;
 
   @doc("Existing evaluator reference. At submission, supply exactly one reference or evaluator_generation_configuration, not both; the service validates this combination. After preparation, contains the resolved exact evaluator version used for training grading and supported baseline and learned-candidate evaluation.")
@@ -565,6 +568,11 @@ model SkillOptimizationConfiguration
   @doc("At least one context item containing trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines. For skill optimization only, a steering prompt must be non-empty and at most 100 KiB (102,400 UTF-8 bytes), enforced by the service; oversized prompts are rejected rather than truncated.")
   @minItems(1)
   context: OptimizationContext[];
+
+  @doc("Fraction of generated question groups assigned to learning, strictly greater than 0 and less than 1. Defaults to 0.7 when omitted. Normalized questions and shared source traces stay in the same group, and every generated row belongs to learning or validation. The service rejects splits that leave either side empty. Caller-provided validation data is not split.")
+  @minValueExclusive(0)
+  @maxValueExclusive(1)
+  training_split_ratio?: float64 = 0.7;
 
   @doc("Optional historical training-trace grading and before/after comparison for supported registered targets. Requires target_configuration, evaluation_model, and one existing evaluator or evaluator_generation_configuration. Training verdicts can inform learning; separate before/after scores report impact and do not drive candidate search, selection, or publication. Omitted to skip new training grading and comparison.")
   evaluation_configuration?: SkillOptimizationEvaluationConfiguration;

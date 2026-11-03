@@ -172,7 +172,7 @@ union AgentOptimizationSkillExecutionStepStatus {
 
 /** Latest recorded state of one logical step in the persisted execution snapshot. */
 model AgentOptimizationSkillExecutionStep {
-  @doc("Service-authored logical step name, unique within the snapshot, for example resolve_inputs, collect_traces, or publish_skills. Consumers must tolerate unfamiliar names.")
+  @doc("Service-authored logical step name, unique within the snapshot, for example resolve_inputs, collect_traces, evaluate_training_traces, or publish_skills. Consumers must tolerate unfamiliar names.")
   name: string;
 
   @doc("Recorded step state.")
@@ -194,7 +194,7 @@ model AgentOptimizationSkillExecutionSummary {
   @doc("Time the recorded execution facts last changed, as a UTC Unix timestamp in seconds.")
   updated_at: FoundryTimestamp;
 
-  @doc("At most ten distinct steps in pipeline order. Older snapshots may omit collect_feedback.")
-  @maxItems(10)
+  @doc("At most eleven distinct steps in pipeline order. Older snapshots may omit collect_feedback or evaluate_training_traces.")
+  @maxItems(11)
   steps: AgentOptimizationSkillExecutionStep[];
 }
