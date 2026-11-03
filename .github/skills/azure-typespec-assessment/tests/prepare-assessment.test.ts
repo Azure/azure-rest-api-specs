@@ -150,29 +150,25 @@ void test("new projects resolve and compile only the target", () => {
     resolveApiVersions: () => {
       throw new Error("existing-project resolver must not run");
     },
-    resolveNewApiVersions: () =>
-      ({
-        mode: "new-project",
-        baseline: {
-          sourceRevision: "absent",
-          reason:
-            "No pre-existing contract exists because the project is absent from the baseline.",
-        },
-        target: {
-          sourceRevision: "current",
-          commit: "head-sha",
-          apiVersion: "2026-01-01",
-          reason: "latest-version",
-        },
-        base: undefined,
-        current: "2026-01-01",
-        baseReason: "project-absent-from-baseline",
-        currentReason: "latest-version",
-        addedCurrentVersions: ["2026-01-01"],
-        available: { base: [], current: ["2026-01-01"] },
-      }) as ReturnType<
-        NonNullable<Parameters<typeof prepareProjectRecords>[0]["resolveNewApiVersions"]>
-      >,
+    resolveNewApiVersions: () => ({
+      mode: "new-project",
+      baseline: {
+        sourceRevision: "absent",
+        reason: "No pre-existing contract exists because the project is absent from the baseline.",
+      },
+      target: {
+        sourceRevision: "current",
+        commit: "head-sha",
+        apiVersion: "2026-01-01",
+        reason: "latest-version",
+      },
+      base: undefined,
+      current: "2026-01-01",
+      baseReason: "project-absent-from-baseline",
+      currentReason: "latest-version",
+      addedCurrentVersions: ["2026-01-01"],
+      available: { base: [], current: ["2026-01-01"] },
+    }),
     runCompilers: ({ comparisonRole }) => {
       compilerCalls.push(comparisonRole);
       return {
@@ -212,53 +208,46 @@ void test("mixed changes compare existing projects and classify only target-only
       "specification/existing/Widget": "existing",
       "specification/new/Gadget": "new",
     },
-    resolveApiVersions: () =>
-      ({
-        mode: "existing-api-version",
-        baseline: {
-          sourceRevision: "base",
-          commit: "base-sha",
-          apiVersion: undefined,
-          reason: "affected-existing-version",
-        },
-        target: {
-          sourceRevision: "current",
-          commit: "head-sha",
-          apiVersion: undefined,
-          reason: "affected-existing-version",
-        },
-        base: undefined,
-        current: undefined,
-        baseReason: "affected-existing-version",
-        currentReason: "unversioned",
-        addedCurrentVersions: [],
-        available: { base: [], current: [] },
-      }) as ReturnType<
-        NonNullable<Parameters<typeof prepareProjectRecords>[0]["resolveApiVersions"]>
-      >,
-    resolveNewApiVersions: () =>
-      ({
-        mode: "new-project",
-        baseline: {
-          sourceRevision: "absent",
-          reason:
-            "No pre-existing contract exists because the project is absent from the baseline.",
-        },
-        target: {
-          sourceRevision: "current",
-          commit: "head-sha",
-          apiVersion: undefined,
-          reason: "unversioned",
-        },
-        base: undefined,
-        current: undefined,
-        baseReason: "project-absent-from-baseline",
-        currentReason: "unversioned",
-        addedCurrentVersions: [],
-        available: { base: [], current: [] },
-      }) as ReturnType<
-        NonNullable<Parameters<typeof prepareProjectRecords>[0]["resolveNewApiVersions"]>
-      >,
+    resolveApiVersions: () => ({
+      mode: "existing-api-version",
+      baseline: {
+        sourceRevision: "base",
+        commit: "base-sha",
+        apiVersion: undefined,
+        reason: "affected-existing-version",
+      },
+      target: {
+        sourceRevision: "current",
+        commit: "head-sha",
+        apiVersion: undefined,
+        reason: "affected-existing-version",
+      },
+      base: undefined,
+      current: undefined,
+      baseReason: "affected-existing-version",
+      currentReason: "unversioned",
+      addedCurrentVersions: [],
+      available: { base: [], current: [] },
+    }),
+    resolveNewApiVersions: () => ({
+      mode: "new-project",
+      baseline: {
+        sourceRevision: "absent",
+        reason: "No pre-existing contract exists because the project is absent from the baseline.",
+      },
+      target: {
+        sourceRevision: "current",
+        commit: "head-sha",
+        apiVersion: undefined,
+        reason: "unversioned",
+      },
+      base: undefined,
+      current: undefined,
+      baseReason: "project-absent-from-baseline",
+      currentReason: "unversioned",
+      addedCurrentVersions: [],
+      available: { base: [], current: [] },
+    }),
     runCompilers: ({ project, comparisonRole }) => {
       compilerCalls.push(`${project}:${comparisonRole}`);
       return {
