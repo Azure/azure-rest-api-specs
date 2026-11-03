@@ -48,6 +48,11 @@ enum Versions {
 
   @doc("Version 5 preview with Volume Group Snapshot support.")
   v2026_05_01_preview: "2026-05-01-preview",
+
+  @doc("Version 6 stable.")
+  @useDependency(LiftrBase.Versions.v2026_10_01)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v2026_10_01: "2026-10-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
