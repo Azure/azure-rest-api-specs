@@ -6,7 +6,7 @@ Source: [Go initialism conventions](https://go.dev/wiki/CodeReviewComments#initi
 
 ## Preserve Existing Names
 
-Use the TypeSpec diff to identify newly added declarations and members. Leave existing names and their Go overrides unchanged, including those in preview or unreleased API versions. Modifying a declaration does not make its name new.
+Use the TypeSpec diff to identify newly added declarations and members. Leave existing names and their Go overrides unchanged. Modifying a declaration does not make its name new.
 
 ## Follow Related Names
 
