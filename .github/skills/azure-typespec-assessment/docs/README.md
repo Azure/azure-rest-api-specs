@@ -36,6 +36,20 @@ assessment requires authenticated `gh` and `git` commands. The skill identifies
 the changed TypeSpec scope, compares the relevant API versions, and produces a
 validated report.
 
+## 3. Assess after authoring
+
+When both skills are installed, `azure-typespec-author` offers
+**"Would you like to quickly assess your changes?"** after successful authoring
+and validation. Choose **Run fast assessment (Recommended)** or **Skip**.
+An earlier assessment decision for those changes is respected without another
+prompt. Accepting still requires a confirmed baseline for local assessment.
+
+The handoff uses fast mode: Semantic intents, REST and downstream SDK
+compatibility, and Documentation Completeness remain assessed in the existing
+report layout. Azure Guidelines search and judgment are skipped; its card and
+section show `0 findings` and `Skipped`, not passed. Assessment is read-only
+and does not automatically fix findings.
+
 ## Results
 
 The agent starts a local-only report server after rendering and returns a

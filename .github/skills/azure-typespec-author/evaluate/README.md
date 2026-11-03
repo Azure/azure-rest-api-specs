@@ -118,6 +118,13 @@ Cases `007009` through `007014` check routing boundaries in trigger mode only.
 
 Go naming cases `008001` through `008006` run in forced mode through `azure-typespec-author` and the shared naming skill. They use the same `azsdk-mcp` environment and `naming-forced` suite as the .NET cases. They cover new acronym names, shipped/unshipped/unknown release status, related casing patterns, parameter names, and language isolation. Prompts are short naming-review requests with relevant naming evidence. Semantic rubrics check the recommendations without requiring JSON or a particular response format.
 
+Cases `009001` through `009006` check the post-authoring fast assessment offer,
+explicit opt-out, validation and planning gates, and separate baseline
+confirmation. Each file compares trigger, forced, and no-skill behavior. They are
+decision-only evaluations; they do not run the assessment coordinator or modify
+TypeSpec fixtures. Run them with `--suite assessment-forced`,
+`--suite assessment-trigger`, or `--suite assessment-no-skill`.
+
 ### Local forced smoke test
 
 Use these commands for the usual local check. Use forced mode only for this remediation work:
@@ -159,6 +166,7 @@ local entry point.
 | `warning-forced`              | Warning cases (005xxx) — forced mode           |
 | `dataplane-forced`            | Data-plane cases (006xxx) — forced mode        |
 | `naming-forced`               | Client configuration and naming handoffs       |
+| `assessment-forced`           | Post-authoring fast assessment decisions       |
 | `naming-trigger`              | Naming handoffs and skill routing boundaries   |
 | `naming-no-skill`             | Naming task quality without installed skills   |
 | `forced`                      | All cases — forced mode                        |
