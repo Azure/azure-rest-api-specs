@@ -122,6 +122,181 @@ using Azure.AI.Projects;
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
 
+// Preserve the tool names shipped in @azure/ai-projects 2.10.0 after OpenAI added Tool-prefixed wrappers.
+@@clientName(
+  OpenAI.ToolApplyPatchToolParam,
+  "ApplyPatchToolParam",
+  "javascript"
+);
+@@clientName(
+  OpenAI.ToolCodeInterpreterTool,
+  "CodeInterpreterTool",
+  "javascript"
+);
+@@clientName(OpenAI.ToolComputerTool, "ComputerTool", "javascript");
+@@clientName(
+  OpenAI.ToolComputerUsePreviewTool,
+  "ComputerUsePreviewTool",
+  "javascript"
+);
+@@clientName(OpenAI.ToolCustomToolParam, "CustomToolParam", "javascript");
+@@clientName(OpenAI.ToolFileSearchTool, "FileSearchTool", "javascript");
+@@clientName(
+  OpenAI.ToolFunctionShellToolParam,
+  "FunctionShellToolParam",
+  "javascript"
+);
+@@clientName(OpenAI.ToolFunctionTool, "FunctionTool", "javascript");
+@@clientName(OpenAI.ToolImageGenTool, "ImageGenTool", "javascript");
+@@clientName(
+  OpenAI.ToolLocalShellToolParam,
+  "LocalShellToolParam",
+  "javascript"
+);
+@@clientName(OpenAI.ToolMcpTool, "MCPTool", "javascript");
+@@clientName(
+  OpenAI.ToolProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParam",
+  "javascript"
+);
+@@clientName(
+  OpenAI.ToolToolSearchToolParam,
+  "ToolSearchToolParam",
+  "javascript"
+);
+@@clientName(
+  OpenAI.ToolWebSearchPreviewTool,
+  "WebSearchPreviewTool",
+  "javascript"
+);
+@@clientName(OpenAI.ToolWebSearchTool, "WebSearchTool", "javascript");
+
+// Disambiguate the unwrapped definitions, even when they are not emitted.
+@@clientName(
+  OpenAI.ApplyPatchToolParam,
+  "ApplyPatchToolParamDefinition",
+  "javascript"
+);
+@@clientName(
+  OpenAI.CodeInterpreterTool,
+  "CodeInterpreterToolDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.ComputerTool, "ComputerToolDefinition", "javascript");
+@@clientName(
+  OpenAI.ComputerUsePreviewTool,
+  "ComputerUsePreviewToolDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.CustomToolParam, "CustomToolParamDefinition", "javascript");
+@@clientName(OpenAI.FileSearchTool, "FileSearchToolDefinition", "javascript");
+@@clientName(
+  OpenAI.FunctionShellToolParam,
+  "FunctionShellToolParamDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.FunctionTool, "FunctionToolDefinition", "javascript");
+@@clientName(OpenAI.ImageGenTool, "ImageGenToolDefinition", "javascript");
+@@clientName(
+  OpenAI.LocalShellToolParam,
+  "LocalShellToolParamDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.MCPTool, "MCPToolDefinition", "javascript");
+@@clientName(
+  OpenAI.ProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParamDefinition",
+  "javascript"
+);
+@@clientName(
+  OpenAI.ToolSearchToolParam,
+  "ToolSearchToolParamDefinition",
+  "javascript"
+);
+@@clientName(
+  OpenAI.WebSearchPreviewTool,
+  "WebSearchPreviewToolDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.WebSearchTool, "WebSearchToolDefinition", "javascript");
+
+// Direct references must resolve to the same models as the Tool union variants.
+@@alternateType(OpenAI.MCPTool, OpenAI.ToolMcpTool, "javascript");
+@@alternateType(
+  OpenAI.CustomToolParam,
+  OpenAI.ToolCustomToolParam,
+  "javascript"
+);
+
+// Anonymous helper names are derived from TypeSpec names, not their clientName overrides.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the released JavaScript helper aliases for heterogeneous unions without changing their variants."
+namespace JavaScriptToolCompatibility {
+  // The JS emitter's literal-name escape preserves the public aliases' leading underscores.
+  @clientName("$DO_NOT_NORMALIZE$_CodeInterpreterToolContainer", "javascript")
+  union CodeInterpreterToolContainer {
+    string,
+    OpenAI.AutoCodeInterpreterToolParam,
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_MCPToolAllowedTools", "javascript")
+  union MCPToolAllowedTools {
+    string[],
+    OpenAI.MCPToolFilter,
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_MCPToolRequireApproval", "javascript")
+  union MCPToolRequireApproval {
+    OpenAI.MCPToolRequireApproval,
+    "always",
+    "never",
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_FileSearchToolFiltersValue", "javascript")
+  union FileSearchToolFiltersValueItems {
+    string,
+    numeric,
+  }
+
+  union FileSearchToolFiltersValue {
+    string,
+    numeric,
+    boolean,
+    FileSearchToolFiltersValueItems[],
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_FileSearchToolFiltersFilter", "javascript")
+  union FileSearchToolFiltersFilter {
+    OpenAI.ComparisonFilter,
+    OpenAI.CompoundFilter,
+  }
+}
+
+@@alternateType(
+  OpenAI.ToolCodeInterpreterTool.container,
+  JavaScriptToolCompatibility.CodeInterpreterToolContainer,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.ToolMcpTool.allowed_tools,
+  JavaScriptToolCompatibility.MCPToolAllowedTools | null,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.ToolMcpTool.require_approval,
+  JavaScriptToolCompatibility.MCPToolRequireApproval | null,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.ComparisonFilter.value,
+  JavaScriptToolCompatibility.FileSearchToolFiltersValue,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.CompoundFilter.filters,
+  JavaScriptToolCompatibility.FileSearchToolFiltersFilter[],
+  "javascript"
+);
+
 // Preserve the existing JavaScript operation name.
 @@clientName(EvaluationRules.delete, "delete", "javascript");
 
