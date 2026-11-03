@@ -49,6 +49,7 @@ model FetchSasUriRequest {
 @added(ApiVersions.v2026_06_01_preview)
 model FetchSasUriResponse {
   @doc("The write-targeted SAS URI to which the caller should PUT the CSV payload.")
+  @secret
   @visibility(Lifecycle.Read)
   sasUri: string;
 

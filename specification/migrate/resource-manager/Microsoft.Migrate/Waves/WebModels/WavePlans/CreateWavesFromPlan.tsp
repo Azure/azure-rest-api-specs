@@ -54,6 +54,7 @@ model CreateWavesFromPlanResponse {
   skippedWaves: int32;
 
   @doc("The read-only SAS URI for the exported error CSV.")
+  @secret
   @visibility(Lifecycle.Read)
   sasUri?: string;
 
