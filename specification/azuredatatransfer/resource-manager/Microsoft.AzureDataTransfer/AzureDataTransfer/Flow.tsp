@@ -49,7 +49,8 @@ interface Flows {
     PatchModel = FlowsPatch,
     Response =
       | ArmResponse<Flow>
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Flow> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: Flow;
         })

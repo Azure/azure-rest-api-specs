@@ -52,7 +52,8 @@ interface Pipelines {
     PatchModel = PipelinesPatch,
     Response =
       | ArmResponse<Pipeline>
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Pipeline> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: Pipeline;
         })
