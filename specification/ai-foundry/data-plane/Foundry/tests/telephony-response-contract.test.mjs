@@ -49,6 +49,95 @@ function schema(document, value) {
 }
 
 for (const version of ["v1", "virtual-public-preview"]) {
+  test(`${version}: every CallJob response requires its normalized retry policy`, async () => {
+    const document = JSON.parse(
+      await readFile(
+        resolve(project, `openapi3/${version}/microsoft-foundry-openapi3.json`),
+        "utf8",
+      ),
+    );
+    const jobs = "/agents/{agent_name}/telephony/call_jobs";
+    for (const [path, verb, status] of [
+      [jobs, "post", "202"],
+      [`${jobs}/{call_job_id}`, "get", "200"],
+      [`${jobs}/{call_job_id}:cancel`, "post", "200"],
+      [`${jobs}/{call_job_id}:cancel`, "post", "202"],
+      [jobs, "get", "200"],
+    ]) {
+      let body = schema(
+        document,
+        document.paths[path][verb].responses[status].content["application/json"]
+          .schema,
+      );
+      if (path === jobs && verb === "get")
+        body = schema(document, body.properties.data.items);
+      assert(
+        body.required.includes("retry_policy"),
+        `${verb} ${path} ${status}`,
+      );
+      assert.equal(
+        body.properties.retry_policy.$ref,
+        "#/components/schemas/TelephonyOutboundRetryPolicy",
+      );
+    }
+  });
+
+  test(`${version}: creation accepts an omitted or explicit retry policy without requiring response fields`, async () => {
+    const document = JSON.parse(
+      await readFile(
+        resolve(project, `openapi3/${version}/microsoft-foundry-openapi3.json`),
+        "utf8",
+      ),
+    );
+    const jobs = "/agents/{agent_name}/telephony/call_jobs";
+    for (const [path, verb] of [
+      [jobs, "post"],
+      [item, "put"],
+    ]) {
+      const body = schema(
+        document,
+        document.paths[path][verb].requestBody.content["application/json"]
+          .schema,
+      );
+      assert.equal(body.required.includes("retry_policy"), false);
+      assert.equal(
+        body.properties.retry_policy.$ref,
+        "#/components/schemas/TelephonyOutboundRetryPolicy",
+      );
+      assert.notEqual(body.properties.retry_policy.readOnly, true);
+      if (path !== jobs) continue;
+      assert.deepEqual(body.required, [
+        "destination",
+        "connection_name",
+        "source",
+      ]);
+      for (const field of [
+        "id",
+        "agent_name",
+        "status",
+        "attempt_count",
+        "revision",
+        "created_at",
+        "updated_at",
+        "campaign_name",
+      ])
+        assert.equal(body.properties[field], undefined, field);
+    }
+    assert.equal(
+      document.components.schemas.TelephonyOutboundRetryPolicy.properties
+        .max_attempts.default,
+      1,
+    );
+    assert.deepEqual(
+      document.components.schemas.FixedIntervalRetryPolicy.properties.type.enum,
+      ["fixed_interval"],
+    );
+    assert.match(
+      document.components.schemas.FixedIntervalRetryPolicy.description,
+      /max_attempts=1 and interval=0 seconds/,
+    );
+  });
+
   test(`${version}: Campaign LRO and diagnostic responses retain actual cache and polling headers`, async () => {
     const document = JSON.parse(
       await readFile(

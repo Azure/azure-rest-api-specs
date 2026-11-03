@@ -710,7 +710,7 @@ interface AgentTelephony {
       idempotency_key: string;
 
       /** The direct outbound call to create. */
-      @body job: TelephonyCallJob;
+      @body job: TelephonyCallJobCreate;
     },
     TelephonyCallJobAcceptedResponse
   >;

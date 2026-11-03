@@ -1540,7 +1540,7 @@ model TelephonyCallJob {
   cancellation?: TelephonyCallJobCancellation;
 
   @doc("The frozen provider-attempt retry policy. When omitted on direct CallJob or Campaign creation, this is fixed_interval with max_attempts=1 and interval=0 seconds: only the initial attempt is made, with no retry.")
-  retry_policy?: TelephonyOutboundRetryPolicy;
+  retry_policy: TelephonyOutboundRetryPolicy;
 
   @doc("The number of provider attempts created so far.")
   @minValue(0)
@@ -1574,6 +1574,14 @@ model TelephonyCallJob {
   @doc("Owning Campaign name under this Agent; absent for direct calls. Cascade deletion hides owned CallJobs on acceptance and deletes them during cleanup. Ownership follows the immutable Campaign instance, so name reuse cannot attach old jobs.")
   @visibility(Lifecycle.Read)
   campaign_name?: TelephonyCampaignName;
+}
+
+@doc("The direct outbound call to create.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallJobCreate {
+  ...OmitProperties<TelephonyCallJobConfiguration, "source">;
+  ...OptionalProperties<PickProperties<TelephonyCallJob, "retry_policy">>;
+  ...PickProperties<TelephonyCallJobConfiguration, "source">;
 }
 
 alias TelephonyCallJobResponse = {

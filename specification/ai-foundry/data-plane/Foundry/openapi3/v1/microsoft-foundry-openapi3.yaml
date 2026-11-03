@@ -4841,7 +4841,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TelephonyCallJob'
+              $ref: '#/components/schemas/TelephonyCallJobCreate'
         description: The direct outbound call to create.
       x-ms-foundry-meta:
         required_previews:
@@ -91946,6 +91946,7 @@ components:
         - id
         - agent_name
         - status
+        - retry_policy
         - attempt_count
         - revision
         - created_at
@@ -92118,6 +92119,51 @@ components:
           destination:
             type: phone_number
             value: '+14255550123'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallJobCreate:
+      type: object
+      required:
+        - destination
+        - connection_name
+        - source
+      properties:
+        destination:
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: The phone destination to call.
+        connection_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: |-
+            Same-project connection; its category selects Twilio, ACS/Teams Phone extensibility or SipOutbound.
+            No inbound binding is needed. SIP uses authType=CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type
+            selects digest or ip_acl; absent/null/blank/{} defaults to digest, and other non-string values are invalid.
+            Digest requires nonblank username/password. IP ACL requires non-null comma-separated credentials.keys.source_cidrs:
+            at most 4096 raw characters and 64 entries before deduplication. Empty string allows all source IPs;
+            whitespace-only values and empty entries fail. Native IPv4/IPv6 addresses and CIDRs are accepted;
+            scoped/IPv4-mapped IPv6 and metadata/binding CIDR fallbacks are not.
+            SipOutbound requires a DNS target with optional port 1-65535, not an IP literal, URI, path or SIP parameter.
+            The target is revalidated before origination; saving does not prove connectivity.
+        purpose:
+          type: string
+          minLength: 1
+          description: An optional customer-declared purpose for placing the call.
+        structured_inputs:
+          type: object
+          additionalProperties: {}
+          description: Inputs for the Agent and greeting, including nested JSON objects, arrays and null. Input names and values must satisfy the Agent's input definitions and schemas. Missing required inputs fail validation; omitted optional inputs may use defaults.
+        schedule:
+          $ref: '#/components/schemas/TelephonyCallJobSchedule'
+          description: The optional execution window.
+        retry_policy:
+          $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
+          description: 'The frozen provider-attempt retry policy. When omitted on direct CallJob or Campaign creation, this is fixed_interval with max_attempts=1 and interval=0 seconds: only the initial attempt is made, with no retry.'
+        source:
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: The shared typed caller address. Use phone_number for Twilio or SipOutbound, or teams with a nonempty resource-account GUID for ACS/Teams Phone extensibility. Transfer-only identity formats and sip source addresses are rejected. Outbound origination is independent of inbound bindings.
+      description: The direct outbound call to create.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
