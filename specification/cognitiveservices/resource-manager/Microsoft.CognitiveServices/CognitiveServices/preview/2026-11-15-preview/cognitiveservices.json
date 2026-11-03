@@ -2856,7 +2856,7 @@
         "tags": [
           "AttachedAksClusters"
         ],
-        "description": "Attaches an existing AKS cluster to the account, or updates its attachment.\nA 202 response contains the current attachment; poll GET and inspect\nproperties.status.stage for progress. A 200 response returns the current\ncompleted or terminal attachment state, which may indicate a failure.",
+        "description": "Attaches an existing AKS cluster to the account, or updates its attachment.\nA 202 response contains the current attachment; poll GET and inspect\nproperties.status.stage for progress. A 200 response also contains the\ncurrent attachment state and does not by itself guarantee workload readiness.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"

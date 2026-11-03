@@ -43,8 +43,8 @@ interface AttachedAksClusters {
   /**
    * Attaches an existing AKS cluster to the account, or updates its attachment.
    * A 202 response contains the current attachment; poll GET and inspect
-   * properties.status.stage for progress. A 200 response returns the current
-   * completed or terminal attachment state, which may indicate a failure.
+   * properties.status.stage for progress. A 200 response also contains the
+   * current attachment state and does not by itself guarantee workload readiness.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The existing service returns 200 or 202 with an attachment body, not 201 or standard LRO polling headers."
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The existing service supports resource GET polling and does not return a Location polling header."
