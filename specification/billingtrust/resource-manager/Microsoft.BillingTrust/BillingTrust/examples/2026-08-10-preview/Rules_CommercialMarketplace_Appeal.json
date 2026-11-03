@@ -1,0 +1,36 @@
+{
+  "operationId": "Rules_Appeal",
+  "title": "Appeal a failed businessVerification rule in the CommercialMarketplace assessment",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31",
+    "assessmentName": "CommercialMarketplace",
+    "ruleName": "Verify_Business",
+    "api-version": "2026-08-10-preview",
+    "body": {
+      "documents": [
+        {
+          "documentId": "0f7c9a1e-2b3d-4c5e-8a9b-1c2d3e4f5a6b",
+          "documentTypeCode": "BV_001",
+          "fileType": "pdf",
+          "comment": "Certificate of incorporation reissued in 2026."
+        },
+        {
+          "documentId": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+          "documentTypeCode": "BV_002",
+          "fileType": "docx",
+          "comment": "Recent utility bill confirming the registered business address."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "acceptedDocumentIds": [
+          "0f7c9a1e-2b3d-4c5e-8a9b-1c2d3e4f5a6b",
+          "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+        ]
+      }
+    }
+  }
+}
