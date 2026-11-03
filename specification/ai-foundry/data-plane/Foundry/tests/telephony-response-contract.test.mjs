@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 
 const project = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const prefix = "/telephony_campaigns";
+const prefix = "/agents/{agent_name}/telephony_campaigns";
 const item = `${prefix}/{campaign_name}`;
 
 test("CallJob responses document their existing entity, location and retry headers", async () => {
@@ -16,7 +16,7 @@ test("CallJob responses document their existing entity, location and retry heade
         "utf8",
       ),
     );
-    const job = "/telephony_call_jobs";
+    const job = "/agents/{agent_name}/telephony_call_jobs";
     for (const [path, verb, status, headers] of [
       [job, "post", "202", ["ETag", "Location", "Retry-After"]],
       [`${job}/{call_job_id}`, "get", "200", ["ETag"]],
@@ -87,7 +87,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
         "utf8",
       ),
     );
-    const jobs = "/telephony_call_jobs";
+    const jobs = "/agents/{agent_name}/telephony_call_jobs";
     for (const [path, verb, status] of [
       [jobs, "post", "202"],
       [`${jobs}/{call_job_id}`, "get", "200"],
@@ -120,7 +120,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
         "utf8",
       ),
     );
-    const jobs = "/telephony_call_jobs";
+    const jobs = "/agents/{agent_name}/telephony_call_jobs";
     for (const [path, verb] of [
       [jobs, "post"],
       [item, "put"],
@@ -138,13 +138,13 @@ for (const version of ["v1", "virtual-public-preview"]) {
       assert.notEqual(body.properties.retry_policy.readOnly, true);
       if (path !== jobs) continue;
       assert.deepEqual(body.required, [
-        "agent_name",
         "destination",
         "connection_name",
         "source",
       ]);
       for (const field of [
         "id",
+        "agent_name",
         "status",
         "attempt_count",
         "revision",

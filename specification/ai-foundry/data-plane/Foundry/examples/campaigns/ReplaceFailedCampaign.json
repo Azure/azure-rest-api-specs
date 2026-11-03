@@ -5,11 +5,11 @@
     "endpoint": "https://contoso.services.ai.azure.com/api/projects/reminders",
     "api-version": "v1",
     "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "contoso-reminder-agent",
     "campaign_name": "recipient-reminders",
     "Operation-Id": "af4b47b9-760c-41ac-85ea-16e99b2f0602",
     "If-Match": "\"control-reminders-instance1-failed\"",
     "campaign": {
-      "agent_name": "contoso-reminder-agent",
       "connection_name": "contoso-phone-provider",
       "source": {
         "type": "phone_number",
@@ -27,8 +27,8 @@
   "responses": {
     "200": {
       "headers": {
-        "Location": "https://contoso.services.ai.azure.com/api/projects/reminders/telephony_campaigns/recipient-reminders?api-version=v1",
-        "Operation-Location": "https://contoso.services.ai.azure.com/api/projects/reminders/telephony_campaigns/recipient-reminders/operations/af4b47b9-760c-41ac-85ea-16e99b2f0602?api-version=v1",
+        "Location": "https://contoso.services.ai.azure.com/api/projects/reminders/agents/contoso-reminder-agent/telephony_campaigns/recipient-reminders?api-version=v1",
+        "Operation-Location": "https://contoso.services.ai.azure.com/api/projects/reminders/agents/contoso-reminder-agent/telephony_campaigns/recipient-reminders/operations/af4b47b9-760c-41ac-85ea-16e99b2f0602?api-version=v1",
         "Operation-Id": "af4b47b9-760c-41ac-85ea-16e99b2f0602",
         "Cache-Control": "no-store",
         "Retry-After": 5
@@ -59,8 +59,7 @@
         "recipient_dataset": {
           "name": "reminder-recipients",
           "version": "2"
-        },
-        "agent_name": "contoso-reminder-agent"
+        }
       }
     }
   }
