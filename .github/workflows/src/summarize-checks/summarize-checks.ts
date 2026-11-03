@@ -29,12 +29,13 @@ import { execFile } from "../../../shared/src/exec.ts";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import {
   details,
+  escapeMarkdown,
   inlineCode,
   link,
   paragraph,
   renderMarkdownDoc,
   section,
-  unorderedList,
+  table,
   type MarkdownDoc,
 } from "../../../shared/src/markdown.ts";
 import { intersect } from "../../../shared/src/set.ts";
@@ -57,7 +58,6 @@ import {
   brchTsg,
   checkAndDiagramTsg,
   defaultTsg,
-  diagramTsg,
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
@@ -969,7 +969,7 @@ function buildNextStepsToMergeCommentBody(
     failingReqChecksInfo,
     failingFyiChecksInfo,
     violatedReqLabelsRules,
-    buildPendingEvaluationBody(assessmentCompleted, pendingRequiredCheckNames),
+    buildPendingRequirements(assessmentCompleted, pendingRequiredCheckNames),
     target_url,
     sdkBreakingChangesSummary,
   );
@@ -977,21 +977,30 @@ function buildNextStepsToMergeCommentBody(
   return [renderMarkdownDoc(section("Next Steps to Merge", commentBody), 2), automatedChecksMet];
 }
 
-function buildPendingEvaluationBody(
+type RequirementSummary = {
+  name: string;
+  status: string;
+  nextStep: string;
+  guidance?: string;
+};
+
+function buildPendingRequirements(
   assessmentCompleted: boolean,
   pendingRequiredCheckNames: string[],
-): MarkdownDoc {
-  const pendingItems = pendingRequiredCheckNames.map(
-    (name) => `Waiting for required check ${inlineCode(name)} to complete.`,
-  );
+): RequirementSummary[] {
+  const pendingItems = pendingRequiredCheckNames.map((name): RequirementSummary => ({
+    name: inlineCode(name),
+    status: "⏳ Running",
+    nextStep: "Wait for this required check to finish.",
+  }));
   if (!assessmentCompleted) {
-    pendingItems.unshift(
-      "PR impact assessment is not complete. Additional requirements may be identified.",
-    );
+    pendingItems.unshift({
+      name: "PR impact assessment",
+      status: "⏳ Pending",
+      nextStep: "Wait; additional requirements may be identified.",
+    });
   }
-  return pendingItems.length > 0
-    ? section("Still evaluating", unorderedList(pendingItems))
-    : undefined;
+  return pendingItems;
 }
 
 /**
@@ -1002,7 +1011,7 @@ function buildPendingEvaluationBody(
  * @param failingReqChecksInfo - Failing required checks info
  * @param failingFyiChecksInfo - Failing FYI checks info
  * @param violatedRequiredLabelsRules - Violated required label rules
- * @param pendingEvaluationBody - Incomplete assessment and required checks
+ * @param pendingRequirements - Incomplete assessment and required checks
  * @param target_url - The target URL for the automated checks met run which will be set at the outset of summarize-checks
  * @returns The Markdown body and the automated merging requirements status.
  */
@@ -1013,29 +1022,27 @@ function getCommentBody(
   failingReqChecksInfo: CheckMetadata[],
   failingFyiChecksInfo: CheckMetadata[],
   violatedRequiredLabelsRules: RequiredLabelRule[],
-  pendingEvaluationBody: MarkdownDoc,
+  pendingRequirements: RequirementSummary[],
   target_url: string,
   sdkBreakingChangesSummary: string,
 ): [MarkdownDoc, CheckRunResult] {
   let status: "pending" | keyof typeof CheckConclusion = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
 
-  const body: MarkdownDoc[] = [];
+  let headline = "⏳ **Still evaluating** — merge requirements are not final yet.";
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
-      body.push(getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules));
+      const count = failingReqChecksInfo.length + violatedRequiredLabelsRules.length;
+      headline = `❌ **Blocked** — ${count} ${count === 1 ? "requirement needs" : "requirements need"} attention.`;
       summaryData =
         "❌ This PR cannot be merged because some requirements are not met. See the details.";
       status = "FAILURE";
     }
 
     if (anyFyiPresent) {
-      body.push(getFyiPresentBody(failingFyiChecksInfo));
       if (!anyBlockerPresent && requirementsMet) {
-        body.push(
-          `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`,
-        );
+        headline = "⚠️ **Automated requirements met; non-blocking checks need attention.**";
         summaryData = renderMarkdownDoc([
           paragraph(
             "⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR,",
@@ -1048,28 +1055,71 @@ function getCommentBody(
       }
     }
   } else if (requirementsMet) {
-    body.push(
-      paragraph(
-        "✅ All automated merging requirements have been met!",
-        `To get your PR merged, see ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
-      ),
-    );
+    headline = "✅ **All automated merging requirements have been met.**";
     summaryData = renderMarkdownDoc([
       "✅ All automated merging requirements have been met.",
       `To merge this PR, refer to ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
       "For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).",
     ]);
     status = "SUCCESS";
-  } else {
-    body.push("⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛");
-    // dont need to update the status of the check, as pending is the default state.
   }
 
-  body.push(
-    pendingEvaluationBody,
-    sdkBreakingChangesSummary,
-    `Comment generated by ${link("summarize-checks", target_url)} workflow run.`,
-  );
+  const nextRequirements = [
+    ...buildLabelRequirementSummaries(violatedRequiredLabelsRules),
+    ...buildFailingCheckSummaries(failingReqChecksInfo, "required"),
+    ...pendingRequirements,
+  ];
+  const remainingRequirements = [
+    ...buildLabelRequirementSummaries(violatedRequiredLabelsRules, "remaining"),
+    ...buildFailingCheckSummaries(failingReqChecksInfo, "required", "remaining"),
+  ];
+  const nonBlockingChecks = [
+    ...buildFailingCheckSummaries(failingFyiChecksInfo, "FYI"),
+    ...buildFailingCheckSummaries(failingFyiChecksInfo, "FYI", "remaining"),
+  ];
+  const guidance = [...nextRequirements, ...remainingRequirements, ...nonBlockingChecks]
+    .filter((requirement) => requirement.guidance)
+    .map((requirement) => section(requirement.name, requirement.guidance));
+
+  const body: MarkdownDoc = [
+    headline,
+    buildRequirementsTable(
+      nextRequirements.length > 0
+        ? nextRequirements
+        : [
+            {
+              name: "Automated requirements",
+              status: "✅ Met",
+              nextStep: "Follow the merge process linked below.",
+            },
+          ],
+    ),
+    remainingRequirements.length > 0
+      ? details(
+          `Other outstanding requirements (${remainingRequirements.length})`,
+          buildRequirementsTable(remainingRequirements),
+        )
+      : undefined,
+    nonBlockingChecks.length > 0
+      ? details(
+          `Non-blocking failures (${nonBlockingChecks.length})`,
+          buildRequirementsTable(nonBlockingChecks),
+        )
+      : undefined,
+    guidance.length > 0
+      ? details("Details and troubleshooting", renderMarkdownDoc(guidance, 3))
+      : undefined,
+    sdkBreakingChangesSummary
+      ? details("SDK breaking-change reports", sdkBreakingChangesSummary)
+      : undefined,
+    paragraph(
+      link("Merge guide", "https://aka.ms/azsdk/specreview/merge"),
+      "·",
+      link("Get help", "https://aka.ms/azsdk/pr-getting-help"),
+      "·",
+      link("Workflow run", target_url),
+    ),
+  ];
 
   const automatedChecksMet: CheckRunResult = {
     name: AUTOMATED_CHECK_NAME,
@@ -1080,57 +1130,11 @@ function getCommentBody(
   return [body, automatedChecksMet];
 }
 
-/**
- * Gets the body content when blockers are present
- * @param failingRequiredChecks - Failing required checks
- * @param violatedRequiredLabelsRules - Violated required label rules
- * @returns The blocking requirements as Markdown blocks.
- */
-function getBlockerPresentBody(
-  failingRequiredChecks: CheckMetadata[],
-  violatedRequiredLabelsRules: RequiredLabelRule[],
-): MarkdownDoc {
-  const failingRequiredChecksNextStepsText = buildFailingChecksNextStepsText(
-    failingRequiredChecks,
-    "required",
-  );
-  const violatedReqLabelsRulesNextStepsText = buildViolatedLabelRulesNextStepsText(
-    violatedRequiredLabelsRules,
-  );
-  const remainingRequirements = [
-    ...buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules, "remaining"),
-    ...buildFailingChecksNextStepsText(failingRequiredChecks, "required", "remaining"),
-  ];
-  return [
-    "Next steps that must be taken to merge this PR:",
-    unorderedList([...violatedReqLabelsRulesNextStepsText, ...failingRequiredChecksNextStepsText]),
-    remainingRequirements.length > 0
-      ? details(
-          `Other outstanding requirements (${remainingRequirements.length})`,
-          unorderedList(remainingRequirements),
-        )
-      : undefined,
-  ];
-}
-
-/**
- * Gets the body content when FYI issues are present
- * @param failingFyiChecksInfo - Failing FYI checks info
- * @returns The non-blocking failures as Markdown blocks.
- */
-function getFyiPresentBody(failingFyiChecksInfo: CheckMetadata[]): MarkdownDoc {
-  const remainingChecks = buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI", "remaining");
-  return [
-    "Important checks have failed. As of today they are not blocking this PR, but in near future they may.",
-    "Addressing the following failures is highly recommended:",
-    unorderedList(buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI")),
-    remainingChecks.length > 0
-      ? details(
-          `Other failing non-blocking checks (${remainingChecks.length})`,
-          unorderedList(remainingChecks),
-        )
-      : undefined,
-  ];
+function buildRequirementsTable(requirements: RequirementSummary[]): string {
+  return table([
+    ["Requirement", "Status", "Next step"],
+    ...requirements.map(({ name, status, nextStep }) => [name, status, nextStep]),
+  ]);
 }
 
 function selectByPrecedence<T extends { precedence: number }>(
@@ -1147,32 +1151,36 @@ function selectByPrecedence<T extends { precedence: number }>(
  * Builds next steps text for failing checks
  * @param failingChecks - Array of failing checks
  * @param checkKind - Kind of check (required or FYI)
- * @returns Markdown list items for the selected failures.
+ * @returns Table entries for the selected failures.
  */
-function buildFailingChecksNextStepsText(
+function buildFailingCheckSummaries(
   failingChecks: CheckMetadata[],
   checkKind: "required" | "FYI",
   group: "next" | "remaining" = "next",
-): string[] {
-  return selectByPrecedence(failingChecks, group).map((check) =>
-    checkKind === "required"
-      ? `❌ The required check named ${inlineCode(check.name)} has failed. ${check.troubleshootingGuide.trim()}`
-      : `⚠️ The check named ${inlineCode(check.name)} has failed. ${check.troubleshootingGuide.trim()}`,
-  );
+): RequirementSummary[] {
+  return selectByPrecedence(failingChecks, group).map((check) => ({
+    name: inlineCode(check.name),
+    status: checkKind === "required" ? "❌ Failed" : "⚠️ Non-blocking",
+    nextStep: "Open the failed check, address its diagnostics, then rerun CI.",
+    guidance: check.troubleshootingGuide.trim(),
+  }));
 }
 
 /**
  * Builds next steps text for violated required label rules
  * @param violatedRequiredLabelsRules - Array of violated required label rules
- * @returns Markdown list items for the selected label requirements.
+ * @returns Table entries for the selected label requirements.
  */
-function buildViolatedLabelRulesNextStepsText(
+function buildLabelRequirementSummaries(
   violatedRequiredLabelsRules: RequiredLabelRule[],
   group: "next" | "remaining" = "next",
-): string[] {
-  return selectByPrecedence(violatedRequiredLabelsRules, group).map(
-    (rule) => `❌ ${rule.troubleshootingGuide.trim()}`,
-  );
+): RequirementSummary[] {
+  return selectByPrecedence(violatedRequiredLabelsRules, group).map((rule) => ({
+    name: escapeMarkdown(rule.name),
+    status: "❌ Required",
+    nextStep: rule.nextStep,
+    guidance: rule.troubleshootingGuide.trim(),
+  }));
 }
 // #endregion
 

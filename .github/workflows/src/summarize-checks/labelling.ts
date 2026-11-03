@@ -122,6 +122,8 @@ export type { ImpactAssessment };
  * THEN display the troubleshootingGuide in "Next Steps to Merge" comment.
  */
 export type RequiredLabelRule = {
+  name: string;
+  nextStep: string;
   precedence: number;
   branches?: string[];
   anyPrerequisiteLabels?: string[];
@@ -753,6 +755,9 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
     branches: ["azure-rest-api-specs/main", "azure-rest-api-specs-pr/RPSaaSMaster"],
     anyPrerequisiteLabels: ["data-plane", "resource-manager"],
     anyRequiredLabels: ["PublishToCustomers"],
+    name: "Publication intent",
+    nextStep:
+      "Add `PublishToCustomers` if these APIs are ready to ship; otherwise target a feature branch.",
     troubleshootingGuide: paragraph(
       `This PR targets either the \`main\` branch of the public specs repo or the`,
       `\`RPSaaSMaster\` branch of the private specs repo. These branches are not intended`,
@@ -783,6 +788,8 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["data-plane-review-requested"],
     anyRequiredLabels: ["data-plane-review-signoff"],
+    name: "Data-plane API review",
+    nextStep: "Request API stewardship review and wait for `data-plane-review-signoff`.",
     troubleshootingGuide: paragraph(
       `Your PR requires an API stewardship review as it introduces a new data-plane API`,
       `version (label: \`data-plane-review-requested\`). A data-plane API reviewer is`,
@@ -800,6 +807,9 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
     anyRequiredLabels: [],
+    name: "ARM modeling review",
+    nextStep:
+      "Discuss the new RP or resource type at [office hours](https://aka.ms/apimodelingreview); bring the RP Agent review package.",
     troubleshootingGuide: wrapInArmReviewMessage([
       paragraph(
         `This PR has \`ARMModelingReviewRequired\` label. This means it is introducing a new`,
@@ -851,6 +861,8 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
     anyPrerequisiteLabels: ["NotReadyForARMReview"],
     allPrerequisiteAbsentLabels: [verRevApproval, brChRevApproval, "RPaaSException"],
     anyRequiredLabels: ["ARMSignedOff"],
+    name: "ARM review readiness",
+    nextStep: "Resolve the blocking requirements, then comment `/azp run`.",
     troubleshootingGuide: wrapInArmReviewMessage([
       paragraph(
         `This PR is not ready for ARM review (label: \`NotReadyForARMReview\`). This PR will`,
@@ -868,24 +880,32 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", "CI-NewRPNamespaceWithoutRPaaS"],
     anyRequiredLabels: ["RPaaSException"],
+    name: "RPaaS prerequisite",
+    nextStep: "Onboard the new RP to RPaaS or obtain an approved exception.",
     troubleshootingGuide: notReadyForArmReviewReason("CI-NewRPNamespaceWithoutRPaaS"),
   },
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", "CI-RpaaSRPNotInPrivateRepo"],
     anyRequiredLabels: ["RPaaSException"],
+    name: "Private RP registration prerequisite",
+    nextStep: "Merge the new RP into the private `RPSaaSMaster` branch first.",
     troubleshootingGuide: notReadyForArmReviewReason("CI-RpaaSRPNotInPrivateRepo"),
   },
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", verRev],
     anyRequiredLabels: [verRevApproval],
+    name: "Versioning review prerequisite",
+    nextStep: "Introduce a new API version or obtain versioning approval.",
     troubleshootingGuide: notReadyForArmReviewReason(verRev),
   },
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
     anyRequiredLabels: [brChRevApproval],
+    name: "Breaking-change review prerequisite",
+    nextStep: "Follow the [breaking-change review process](https://aka.ms/brch).",
     troubleshootingGuide: notReadyForArmReviewReason(brChRev),
   },
 ];
@@ -895,6 +915,9 @@ const rulesPri0ArmRpaas: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["CI-NewRPNamespaceWithoutRPaaS"],
     anyRequiredLabels: ["RPaaSException"],
+    name: "RPaaS onboarding",
+    nextStep:
+      "Onboard the new RP to [RPaaS](https://armwiki.azurewebsites.net/rpaas/gettingstarted.html) or obtain an approved exception.",
     troubleshootingGuide: renderMarkdownDoc([
       paragraph(
         `This PR has \`CI-NewRPNamespaceWithoutRPaaS\` label. This means it is introducing a`,
@@ -917,6 +940,8 @@ const rulesPri0ArmRpaas: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["CI-RpaaSRPNotInPrivateRepo"],
     anyRequiredLabels: ["RPaaSException"],
+    name: "Private RP registration",
+    nextStep: "Merge the new RP into the private `RPSaaSMaster` branch first.",
     troubleshootingGuide: paragraph(
       `This PR has \`CI-RpaaSRPNotInPrivateRepo\` label. This means it is introducing a new`,
       `RP (Resource Provider) namespace to the \`main\` branch without first merging the new`,
@@ -932,6 +957,8 @@ const rulesPri0Changes: RequiredLabelRule[] = [
     precedence: 0,
     allPrerequisiteLabels: [verRev],
     anyRequiredLabels: [verRevApproval],
+    name: "API versioning",
+    nextStep: "Introduce a new API version or follow the [review process](https://aka.ms/brch).",
     troubleshootingGuide: renderMarkdownDoc([
       paragraph(
         `This PR has at least one change violating Azure versioning policy (label:`,
@@ -948,6 +975,8 @@ const rulesPri0Changes: RequiredLabelRule[] = [
     precedence: 0,
     allPrerequisiteLabels: [brChRev],
     anyRequiredLabels: [brChRevApproval],
+    name: "API breaking changes",
+    nextStep: "Follow the [breaking-change review process](https://aka.ms/brch).",
     troubleshootingGuide: renderMarkdownDoc([
       `This PR has at least one breaking change (label: \`${brChRev}\`).`,
       brchTsg,
@@ -960,6 +989,8 @@ const rulesPri0ArmRev: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["WaitForARMFeedback"],
     anyRequiredLabels: ["ARMSignedOff"],
+    name: "ARM API review",
+    nextStep: "Wait for ARM reviewer feedback. [Review queue](https://aka.ms/azsdk/pr-arm-review).",
     troubleshootingGuide: wrapInArmReviewMessage([
       `This PR is awaiting ARM reviewer feedback (label: \`WaitForARMFeedback\`).`,
       paragraph(
@@ -972,6 +1003,8 @@ const rulesPri0ArmRev: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["ARMChangesRequested"],
     anyRequiredLabels: ["ARMSignedOff"],
+    name: "ARM review feedback",
+    nextStep: "Address reviewer feedback, then remove `ARMChangesRequested`.",
     troubleshootingGuide: wrapInArmReviewMessage([
       paragraph(
         `This PR has \`ARMChangesRequested\` label. Please address or respond to feedback from`,
@@ -998,6 +1031,8 @@ const rulesPri1ArmRev: RequiredLabelRule[] = [
     precedence: 1,
     anyPrerequisiteLabels: ["ARMReview"],
     anyRequiredLabels: ["ARMSignedOff"],
+    name: "ARM review workflow",
+    nextStep: "Comment `/azp run` to refresh ARM review readiness.",
     troubleshootingGuide: wrapInArmReviewMessage(
       paragraph(
         `❗❗❗ ARM review workflow label is missing! ❗❗❗**TO UNBLOCK THIS PR, add \`/azp run\``,
@@ -1013,6 +1048,8 @@ const rulesPri1Suppressions: RequiredLabelRule[] = [
     precedence: 1,
     anyPrerequisiteLabels: ["SuppressionReviewRequired"],
     anyRequiredLabels: ["Approved-Suppression"],
+    name: "AutoRest suppressions",
+    nextStep: "Request suppression review and `Approved-Suppression` approval.",
     troubleshootingGuide: paragraph(
       `The suppressions added to the AutoRest config files (README.mds) require review.`,
       `${diagramTsg(1, true)}, or to step 3, depending on the kind of suppression you did.`,
@@ -1032,6 +1069,8 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChange],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeApproved],
+    name: "Go SDK breaking changes",
+    nextStep: "Fix or obtain approval for the Go SDK breaking changes.",
     troubleshootingGuide: paragraph(
       `Your PR has breaking changes in the generated SDK for Go (label:`,
       `\`${sdkLabels["azure-sdk-for-go"].breakingChange}\`). ${diagramTsg(3, true)}.`,
@@ -1041,6 +1080,8 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChange],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeApproved],
+    name: "JavaScript SDK breaking changes",
+    nextStep: "Fix or obtain approval for the JavaScript SDK breaking changes.",
     troubleshootingGuide: paragraph(
       `Your PR has breaking changes in the generated SDK for JavaScript (label:`,
       `\`${sdkLabels["azure-sdk-for-js"].breakingChange}\`). ${diagramTsg(3, true)}.`,
@@ -1050,6 +1091,8 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChange],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeApproved],
+    name: "Python SDK breaking changes",
+    nextStep: "Fix or obtain approval for the Python SDK breaking changes.",
     troubleshootingGuide: paragraph(
       `Your PR has breaking changes in the generated SDK for Python (label:`,
       `\`${sdkLabels["azure-sdk-for-python"].breakingChange}\`). ${diagramTsg(3, true)}.`,
@@ -1059,6 +1102,8 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChange],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeApproved],
+    name: "Python track-2 SDK breaking changes",
+    nextStep: "Fix or obtain approval for the Python track-2 SDK breaking changes.",
     troubleshootingGuide: paragraph(
       `Your PR has breaking changes in the generated SDK for Python track-2 (label:`,
       `\`${sdkLabels["azure-sdk-for-python-track2"].breakingChange}\`).`,
@@ -1069,6 +1114,8 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved],
+    name: "Go SDK suppressions",
+    nextStep: "Request approval for the changed Go SDK breaking-change suppressions.",
     troubleshootingGuide: paragraph(
       `Your PR modified the suppressions for Go SDK breaking changes (label:`,
       `${sdkLabels["azure-sdk-for-go"].breakingChangeSuppression}).  ${diagramTsg(3, true)}.`,
@@ -1078,6 +1125,8 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppressionApproved],
+    name: "JavaScript SDK suppressions",
+    nextStep: "Request approval for the changed JavaScript SDK breaking-change suppressions.",
     troubleshootingGuide: paragraph(
       `Your PR modified the suppressions for JavaScript SDK breaking changes (label:`,
       `${sdkLabels["azure-sdk-for-js"].breakingChangeSuppression}).  ${diagramTsg(3, true)}.`,
@@ -1087,6 +1136,8 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppressionApproved],
+    name: "Python SDK suppressions",
+    nextStep: "Request approval for the changed Python SDK breaking-change suppressions.",
     troubleshootingGuide: paragraph(
       `Your PR modified the suppressions for Python SDK breaking changes (label:`,
       `${sdkLabels["azure-sdk-for-python"].breakingChangeSuppression}). `,
@@ -1097,6 +1148,8 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppressionApproved],
+    name: "Python track-2 SDK suppressions",
+    nextStep: "Request approval for the changed Python track-2 SDK breaking-change suppressions.",
     troubleshootingGuide: paragraph(
       `Your PR modified the suppressions for Python track-2 SDK breaking changes (label:`,
       `${sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression}). `,
@@ -1123,12 +1176,16 @@ const rulesPri2LegacySdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: ["CI-BreakingChange-Go"],
     anyRequiredLabels: ["Approved-SdkBreakingChange-Go"],
+    name: "Go SDK breaking changes (legacy)",
+    nextStep: "Fix or obtain approval for the Go SDK breaking changes.",
     troubleshootingGuide: `Your PR has breaking changes in the generated SDK for go (label: \`CI-BreakingChange-Go\`). ${diagramTsg(3, true)}.`,
   },
   {
     precedence: 2,
     anyPrerequisiteLabels: ["CI-BreakingChange-Python-Track2"],
     anyRequiredLabels: ["Approved-SdkBreakingChange-Python"],
+    name: "Python SDK breaking changes (legacy)",
+    nextStep: "Fix or obtain approval for the Python SDK breaking changes.",
     troubleshootingGuide: paragraph(
       `Your PR has breaking changes in the generated SDK for python (label:`,
       `\`CI-BreakingChange-Python-Track2\`). ${diagramTsg(3, true)}.`,
@@ -1138,6 +1195,8 @@ const rulesPri2LegacySdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: ["CI-BreakingChange-JavaScript"],
     anyRequiredLabels: ["Approved-SdkBreakingChange-JavaScript"],
+    name: "JavaScript SDK breaking changes (legacy)",
+    nextStep: "Fix or obtain approval for the JavaScript SDK breaking changes.",
     troubleshootingGuide: paragraph(
       `Your PR has breaking changes in the generated SDK for javascript (label:`,
       `\`CI-BreakingChange-JavaScript\`). ${diagramTsg(3, true)}.`,
@@ -1150,6 +1209,9 @@ const rulesPri3Blockers: RequiredLabelRule[] = [
     precedence: 3,
     anyPrerequisiteLabels: ["Approved-OkToMerge"],
     anyRequiredLabels: [],
+    name: "Private mirror branch",
+    nextStep:
+      "Move this PR to the public repository, or remove an incorrectly applied `Approved-OkToMerge` label.",
     troubleshootingGuide: renderMarkdownDoc([
       `This PR has been approved with \`Approved-OkToMerge\` label.`,
       paragraph(
@@ -1180,6 +1242,9 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
     anyPrerequisiteLabels: ["package-name-review-required"],
     allPrerequisiteAbsentLabels: ["package-name-approved"],
     anyRequiredLabels: ["package-name-approved"],
+    name: "SDK package names",
+    nextStep:
+      "Ask language architects to approve the pending package names. See the package-name review comment.",
     troubleshootingGuide: renderMarkdownDoc([
       paragraph(
         `This PR modifies SDK package name configuration in \`tspconfig.yaml\` and requires`,
@@ -1210,6 +1275,8 @@ const rulesPri1TypeSpecSuppressions = [
     precedence: 1,
     anyPrerequisiteLabels: [TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL],
     anyRequiredLabels: [TYPESPEC_SUPPRESSIONS_APPROVED_LABEL],
+    name: "TypeSpec suppressions",
+    nextStep: "Request approval for the suppressions listed in the TypeSpec review comment.",
     troubleshootingGuide: renderMarkdownDoc([
       `This PR introduced or changed TypeSpec suppressions that require review.`,
       paragraph(
