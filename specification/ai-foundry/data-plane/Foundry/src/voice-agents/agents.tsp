@@ -172,7 +172,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Optional subagent configuration. Omit `subagent_type` or set it to `delegate` for delegated background specialists; inline voice subagents require `subagent_type: inline`.")
+  @doc("Optional subagent configuration. Set `subagent_type` to `delegate` for delegated background specialists or `inline` for inline voice subagents.")
   subagent_config?: VoiceAgentSubagentConfig;
 
   @doc("Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations.")
@@ -347,31 +347,22 @@ union VoiceAgentSubagentType {
   inline: "inline",
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve legacy delegate payloads without a discriminator and the existing API and SDK union representation."
-@doc("Configuration for delegated background specialists or inline voice subagents. Existing delegate configurations may omit `subagent_type`; inline configurations must explicitly select `inline`.")
-@oneOf
+@doc("""
+  Configuration for delegated background specialists or inline voice subagents. For compatibility with existing
+  delegate configurations, the service treats an omitted `subagent_type` as `delegate`.
+  """)
+@discriminator("subagent_type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentSubagentConfig {
-  delegate: VoiceAgentDelegateSubagentConfig,
-  inline: VoiceAgentInlineSubagentConfig,
+model VoiceAgentSubagentConfig {
+  @doc("The subagent mode.")
+  subagent_type: VoiceAgentSubagentType;
 }
 
 @doc("Configuration for referenced Foundry agents invoked as delegated background specialists.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@example(
-  #{
-    subagents: #[
-      #{
-        agent_name: "order-agent",
-        agent_capabilities: "Look up customer orders.",
-      }
-    ],
-  },
-  #{ title: "Legacy delegate without subagent_type" }
-)
-model VoiceAgentDelegateSubagentConfig {
-  @doc("The subagent mode. May be omitted for compatibility with existing delegate configurations.")
-  subagent_type?: VoiceAgentSubagentType.delegate;
+model VoiceAgentDelegateSubagentConfig extends VoiceAgentSubagentConfig {
+  @doc("The subagent mode for delegated background specialists.")
+  subagent_type: VoiceAgentSubagentType.delegate;
 
   @doc("The sibling Foundry text agents, in the same project, that this Voice Agent may consult.")
   @minItems(1)
@@ -380,8 +371,8 @@ model VoiceAgentDelegateSubagentConfig {
 
 @doc("Configuration for inline voice subagents that may become active through Handoff.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentInlineSubagentConfig {
-  @doc("The subagent mode. Inline voice subagents require the explicit value `inline`.")
+model VoiceAgentInlineSubagentConfig extends VoiceAgentSubagentConfig {
+  @doc("The subagent mode for inline voice subagents.")
   subagent_type: VoiceAgentSubagentType.inline;
 
   @doc("""
@@ -685,7 +676,21 @@ union VoiceType {
   azure_realtime_native: "azure-realtime-native",
 }
 
-model VoiceAgentVoiceSelectionConfig {
+@doc("""
+  Voice output configuration. Inline subagents use it directly as their voice override, and the session-level
+  output audio configuration extends it.
+  Provider-specific fields are selected by `voice_type`:
+  - `openai`: `voice` and `speed`.
+  - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
+    `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
+  - `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.
+  - `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.
+  - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;
+    the voice name is derived from the avatar.
+  - `azure-realtime-native`: `voice` and `speed`.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentVoiceConfig {
   @doc("The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar.")
   voice?: string;
 
@@ -694,9 +699,12 @@ model VoiceAgentVoiceSelectionConfig {
 
   @doc("The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
   voice_locale?: string;
-}
 
-model VoiceAgentVoiceSynthesisConfig {
+  @doc("The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.")
+  @minValue(0.25)
+  @maxValue(1.5)
+  speed?: float32 = 1;
+
   @doc("The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
   @minValue(0)
   @maxValue(1)
@@ -727,56 +735,15 @@ model VoiceAgentVoiceSynthesisConfig {
   personal_voice_model?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The session-level output audio configuration is a superset of the voice configuration used by inline subagents; inheritance keeps a single SDK type hierarchy."
 @doc("""
-  Voice-specific output overrides for an inline subagent. Session-level output format and timestamp settings are
-  intentionally excluded.
-  Provider-specific fields are selected by `voice_type`:
-  - `openai`: `voice` and `speed`.
-  - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
-    `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
-  - `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.
-  - `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.
-  - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;
-    the voice name is derived from the avatar.
-  - `azure-realtime-native`: `voice` and `speed`.
+  Output audio configuration for a voice agent. Extends the voice configuration with the session-level `format` and
+  `output_audio_timestamp_types` settings, which apply to every voice type.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentVoiceConfig {
-  ...VoiceAgentVoiceSelectionConfig;
-
-  @doc("The numeric output speed multiplier. Applies to all known `voice_type` values.")
-  @minValue(0.25)
-  @maxValue(1.5)
-  speed?: float32;
-
-  ...VoiceAgentVoiceSynthesisConfig;
-}
-
-@doc("""
-  Output audio configuration for a voice agent.
-  Provider-specific fields are selected by `voice_type`:
-  - `openai`: `voice` and `speed`.
-  - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
-    `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
-  - `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.
-  - `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.
-  - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`; the voice name is derived from the avatar.
-  - `azure-realtime-native`: `voice` and `speed`.
-  `format` and `output_audio_timestamp_types` apply to every voice type.
-  """)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentAudioOutputConfig {
+model VoiceAgentAudioOutputConfig extends VoiceAgentVoiceConfig {
   @doc("The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.")
   format?: OpenAI.RealtimeAudioFormats;
-
-  ...VoiceAgentVoiceSelectionConfig;
-
-  @doc("The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.")
-  @minValue(0.25)
-  @maxValue(1.5)
-  speed?: float32 = 1;
-
-  ...VoiceAgentVoiceSynthesisConfig;
 
   @doc("Timestamp kinds to include with output audio. Applies to every `voice_type`.")
   output_audio_timestamp_types?: VoiceAgentAudioTimestampType[];

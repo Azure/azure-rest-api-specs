@@ -80,10 +80,12 @@ model VoiceAgentHandoffCondition {
   @doc("Whether user interruption before commit cancels the pending handoff. If omitted, the service defaults to false.")
   cancel_on_interruption?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The Handoff wire contract requires an integer-millisecond delay."
   @doc("The minimum delay before target activation, in milliseconds, from 0 through 10000. If omitted, the service defaults to 0.")
-  @minValue(0)
-  @maxValue(10000)
-  delay_ms?: int32 = 0;
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  @maxValue(duration.fromISO("PT10S"))
+  delay_ms?: duration = duration.fromISO("PT0S");
 
   @doc("""
     Optional deterministic source-voice announcement played before target activation. Supported by cascaded
@@ -207,10 +209,12 @@ model VoiceAgentHandoffEdgeState {
   @doc("Whether user interruption before commit cancels the pending handoff.")
   cancel_on_interruption?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The Handoff wire contract requires an integer-millisecond delay."
   @doc("The minimum delay before target activation, in milliseconds.")
-  @minValue(0)
-  @maxValue(10000)
-  delay_ms?: int32 = 0;
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  @maxValue(duration.fromISO("PT10S"))
+  delay_ms?: duration = duration.fromISO("PT0S");
 
   @doc("The deterministic source-voice announcement played before target activation.")
   @maxLength(500)

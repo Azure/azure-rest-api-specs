@@ -106537,70 +106537,6 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
             "description": "The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM."
           },
-          "voice": {
-            "type": "string",
-            "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar."
-          },
-          "voice_type": {
-            "$ref": "#/components/schemas/VoiceType",
-            "description": "The voice implementation."
-          },
-          "voice_locale": {
-            "type": "string",
-            "description": "The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "speed": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0.25,
-            "maximum": 1.5,
-            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.",
-            "default": 1
-          },
-          "voice_temperature": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_lexicon_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_text_normalization_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "prefer_locales": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "style": {
-            "type": "string",
-            "description": "The voice speaking style. Applies only when `voice_type` is `azure-standard`."
-          },
-          "pitch": {
-            "type": "string",
-            "description": "The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "volume": {
-            "type": "string",
-            "description": "The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_voice_endpoint_id": {
-            "type": "string",
-            "description": "The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`."
-          },
-          "personal_voice_model": {
-            "type": "string",
-            "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
-          },
           "output_audio_timestamp_types": {
             "type": "array",
             "items": {
@@ -106609,7 +106545,12 @@
             "description": "Timestamp kinds to include with output audio. Applies to every `voice_type`."
           }
         },
-        "description": "Output audio configuration for a voice agent.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`; the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.\n`format` and `output_audio_timestamp_types` apply to every voice type.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentVoiceConfig"
+          }
+        ],
+        "description": "Output audio configuration for a voice agent. Extends the voice configuration with the session-level `format` and\n`output_audio_timestamp_types` settings, which apply to every voice type.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -107430,7 +107371,7 @@
           },
           "subagent_config": {
             "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
-            "description": "Optional subagent configuration. Omit `subagent_type` or set it to `delegate` for delegated background specialists; inline voice subagents require `subagent_type: inline`."
+            "description": "Optional subagent configuration. Set `subagent_type` to `delegate` for delegated background specialists or `inline` for inline voice subagents."
           },
           "post_call": {
             "$ref": "#/components/schemas/VoiceAgentPostCallConfig",
@@ -107462,6 +107403,7 @@
       "VoiceAgentDelegateSubagentConfig": {
         "type": "object",
         "required": [
+          "subagent_type",
           "subagents"
         ],
         "properties": {
@@ -107470,7 +107412,7 @@
             "enum": [
               "delegate"
             ],
-            "description": "The subagent mode. May be omitted for compatibility with existing delegate configurations."
+            "description": "The subagent mode for delegated background specialists."
           },
           "subagents": {
             "type": "array",
@@ -107481,17 +107423,12 @@
             "description": "The sibling Foundry text agents, in the same project, that this Voice Agent may consult."
           }
         },
-        "description": "Configuration for referenced Foundry agents invoked as delegated background specialists.",
-        "examples": [
+        "allOf": [
           {
-            "subagents": [
-              {
-                "agent_name": "order-agent",
-                "agent_capabilities": "Look up customer orders."
-              }
-            ]
+            "$ref": "#/components/schemas/VoiceAgentSubagentConfig"
           }
         ],
+        "description": "Configuration for referenced Foundry agents invoked as delegated background specialists.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -108115,7 +108052,7 @@
             "enum": [
               "inline"
             ],
-            "description": "The subagent mode. Inline voice subagents require the explicit value `inline`."
+            "description": "The subagent mode for inline voice subagents."
           },
           "subagents": {
             "type": "array",
@@ -108131,6 +108068,11 @@
             "description": "Session-wide Handoff limits. Requires `$entrypoint` with at least one outgoing condition. When omitted, the service permits up to 16 completed and 16 attempted handoffs."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSubagentConfig"
+          }
+        ],
         "description": "Configuration for inline voice subagents that may become active through Handoff.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -110905,15 +110847,24 @@
         }
       },
       "VoiceAgentSubagentConfig": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentDelegateSubagentConfig"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentInlineSubagentConfig"
-          }
+        "type": "object",
+        "required": [
+          "subagent_type"
         ],
-        "description": "Configuration for delegated background specialists or inline voice subagents. Existing delegate configurations may omit `subagent_type`; inline configurations must explicitly select `inline`.",
+        "properties": {
+          "subagent_type": {
+            "$ref": "#/components/schemas/VoiceAgentSubagentType",
+            "description": "The subagent mode."
+          }
+        },
+        "discriminator": {
+          "propertyName": "subagent_type",
+          "mapping": {
+            "delegate": "#/components/schemas/VoiceAgentDelegateSubagentConfig",
+            "inline": "#/components/schemas/VoiceAgentInlineSubagentConfig"
+          }
+        },
+        "description": "Configuration for delegated background specialists or inline voice subagents. For compatibility with existing\ndelegate configurations, the service treats an omitted `subagent_type` as `delegate`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -111380,7 +111331,8 @@
             "format": "float",
             "minimum": 0.25,
             "maximum": 1.5,
-            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values."
+            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.",
+            "default": 1
           },
           "voice_temperature": {
             "type": "number",
@@ -111427,77 +111379,11 @@
             "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
           }
         },
-        "description": "Voice-specific output overrides for an inline subagent. Session-level output format and timestamp settings are\nintentionally excluded.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.",
+        "description": "Voice output configuration. Inline subagents use it directly as their voice override, and the session-level\noutput audio configuration extends it.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
           ]
-        }
-      },
-      "VoiceAgentVoiceSelectionConfig": {
-        "type": "object",
-        "properties": {
-          "voice": {
-            "type": "string",
-            "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar."
-          },
-          "voice_type": {
-            "$ref": "#/components/schemas/VoiceType",
-            "description": "The voice implementation."
-          },
-          "voice_locale": {
-            "type": "string",
-            "description": "The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          }
-        }
-      },
-      "VoiceAgentVoiceSynthesisConfig": {
-        "type": "object",
-        "properties": {
-          "voice_temperature": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_lexicon_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_text_normalization_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "prefer_locales": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "style": {
-            "type": "string",
-            "description": "The voice speaking style. Applies only when `voice_type` is `azure-standard`."
-          },
-          "pitch": {
-            "type": "string",
-            "description": "The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "volume": {
-            "type": "string",
-            "description": "The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_voice_endpoint_id": {
-            "type": "string",
-            "description": "The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`."
-          },
-          "personal_voice_model": {
-            "type": "string",
-            "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
-          }
         }
       },
       "VoiceAgentWebSocketMessage": {
