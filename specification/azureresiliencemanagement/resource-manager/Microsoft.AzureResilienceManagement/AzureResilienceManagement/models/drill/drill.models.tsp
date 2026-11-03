@@ -163,7 +163,7 @@ model LastRunProperties {
   lastRunAttestation?: DrillAttestation;
 
   @doc("Actual recovery time of the last run of this Drill.")
-  @added(Versions.v2026_09_30_preview)
+  @added(Versions.v2026_10_31_preview)
   @visibility(Lifecycle.Read)
   lastRunRecoveryTimeActual?: duration;
 }
@@ -318,9 +318,18 @@ model HealthModelMonitoringProperties {
   identity: AssociatedIdentity;
 
   @doc("Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.")
+  @removed(Versions.v2026_09_30_preview)
   discoveryRuleId: armResourceIdentifier<[
     {
       type: "Microsoft.CloudHealth/healthmodels/discoveryrules";
+    }
+  ]>;
+
+  @doc("Full ARM Id of the Azure Health Model selected for Drill monitoring.")
+  @added(Versions.v2026_09_30_preview)
+  healthModelId: armResourceIdentifier<[
+    {
+      type: "Microsoft.CloudHealth/healthmodels";
     }
   ]>;
 }
@@ -706,6 +715,11 @@ model AttentionReason {
   @doc("Recovery plan not present.")
   @added(Versions.v2026_09_30_preview)
   recoveryPlan?: ExtensionObjectState;
+
+  @doc("Indicates whether any entity in the selected Azure Health Model references the Drill Service Group through properties.signalGroups.azureResource.azureResourceId.")
+  @added(Versions.v2026_09_30_preview)
+  @visibility(Lifecycle.Read)
+  healthModelAssociatedWithServiceGroup?: ExtensionObjectState;
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")

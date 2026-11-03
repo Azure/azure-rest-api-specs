@@ -22,7 +22,8 @@ options:
       UpdateAgentDetailsPatchRequest: UpdateAgentDetailsOptions
       AgentsPagedResultOptimizationCandidate: OptimizationCandidatePagedResult
       RealtimeClientEventSessionUpdateSessionTruncation1: RealtimeClientEventSessionUpdateSessionTruncationRetentionRatio
-      VoiceResponseBaseObject1: VoiceResponseBaseObject
+      VoiceResponseObject: VoiceResponseObjectType
+      VoiceResponseObject1: VoiceResponseObjectType
       PickPropertiesVoiceAgentAudioConfig: VoiceAgentResponseAudioConfig
     customization-class: customizations/src/main/java/AgentsCustomizations.java
     flavor: azure
@@ -50,6 +51,7 @@ options:
       - "specification/ai-foundry/data-plane/Foundry/src/toolboxes/"
       - "specification/ai-foundry/data-plane/Foundry/src/tools/"
       - "specification/ai-foundry/data-plane/Foundry/src/voice-agents/"
+      - "specification/ai-foundry/data-plane/Foundry/src/data_generation_jobs/"
   # Exports the @extension("x-ms-foundry-meta", ...) beta entities for the Java emitter consumption
   # - run `tsp-client sync` from package folder
   # - run `cd TempTypeSpecFiles && npm install --no-save typespec-extension-exporter`
@@ -65,11 +67,13 @@ options:
     emitter-output-dir: "{cwd}/../customizations" # run npx tsp compile from within `TempTypeSpecFiles` folder
     namespace: com.azure.ai.agents
     manual-entries: >-
+      AgentEndpointProtocol::VOICE,
+      AgentEndpointProtocol::VOICE_CONVERSATION_ENGINE,
+      AgentKind::VOICE,
       AudioTranscriptionModel,
       RealtimeSessionCreateRequestGAAudioOutputVoice,
-      VoiceAgentFunctionToolType,
       VoiceAgentResponseAudioConfig,
-      VoiceResponseBaseObject
+      VoiceResponseObjectType
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
@@ -96,3 +100,5 @@ linter:
     "@azure-tools/typespec-azure-core/no-unknown": "unknowns are used in OpenAI package."
     "@azure-tools/typespec-azure-core/no-query-explode": "Explode is used in OpenAI package."
     "@azure-tools/typespec-client-generator-core/property-name-conflict": "OpenAI package has conflict."
+    "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix": "Disable csharp linting for Java tsp."
+    "@azure-tools/typespec-client-generator-core/csharp-model-suffix": "Disable csharp linting for Java tsp."

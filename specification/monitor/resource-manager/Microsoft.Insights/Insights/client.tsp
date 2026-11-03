@@ -1839,11 +1839,7 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   "python"
 );
 
-@@clientLocation(
-  VMInsightsOnboardingStatuses.getOnboardingStatus,
-  "$DO_NOT_NORMALIZE$vMInsights",
-  "javascript"
-);
+@@clientName(VMInsightsOnboardingStatuses, exact("vMInsights"), "javascript");
 
 @@clientName(
   xmsClientTenantIdParameter.`x-ms-client-tenant-id`,

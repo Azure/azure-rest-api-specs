@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TypeSpec Azure Guidelines Search Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "queryProfiles",
+    "catalogRanking",
+    "rankedDocuments",
+    "retrievalAttempts",
+    "blockers",
+    "inputAccounting"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "queryProfiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["reviewUnitId", "queryProfile"],
+        "properties": {
+          "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
+          "queryProfile": { "type": "object" }
+        }
+      }
+    },
+    "catalogRanking": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/rankedCatalogEntry" }
+    },
+    "rankedDocuments": {
+      "type": "array",
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/document" }
+    },
+    "retrievalAttempts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/retrievalAttempt" }
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "inputAccounting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalogEntriesScored",
+        "documentsFetched",
+        "documentBytesFetched",
+        "guidanceExcerptsRetained",
+        "guidanceExcerptBytesRetained"
+      ],
+      "properties": {
+        "catalogEntriesScored": { "type": "integer", "minimum": 0 },
+        "documentsFetched": { "type": "integer", "minimum": 0 },
+        "documentBytesFetched": { "type": "integer", "minimum": 0 },
+        "guidanceExcerptsRetained": { "type": "integer", "minimum": 0 },
+        "guidanceExcerptBytesRetained": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "$defs": {
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exactSymbol", "patternCategory", "servicePlane", "changeContext", "total"],
+      "properties": {
+        "exactSymbol": { "enum": [0, 4] },
+        "patternCategory": { "enum": [0, 3] },
+        "servicePlane": { "enum": [0, 2] },
+        "changeContext": { "enum": [0, 1] },
+        "total": { "type": "integer", "minimum": 0, "maximum": 10 }
+      }
+    },
+    "rankedCatalogEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rank", "catalogOrder", "title", "canonicalUrl", "score", "selectionRationale"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "catalogOrder": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "canonicalUrl": { "type": "string", "format": "uri" },
+        "score": { "$ref": "#/$defs/score" },
+        "selectionRationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["section", "excerpt", "queryTerms", "examples", "applicableDeclarationIds"],
+      "properties": {
+        "section": { "type": "string", "minLength": 1 },
+        "excerpt": { "type": "string", "minLength": 1 },
+        "queryTerms": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "examples": {
+          "type": "array",
+          "maxItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "applicableDeclarationIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^declaration-" }
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rank",
+        "catalogOrder",
+        "title",
+        "canonicalUrl",
+        "score",
+        "selectionRationale",
+        "retrieval",
+        "guidance",
+        "noRelevantGuidance"
+      ],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "catalogOrder": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "canonicalUrl": { "type": "string", "format": "uri" },
+        "score": { "$ref": "#/$defs/score" },
+        "selectionRationale": { "type": "string", "minLength": 1 },
+        "retrieval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "retrievedAt", "contentHash"],
+          "properties": {
+            "status": { "const": "fetched" },
+            "retrievedAt": { "type": "string", "minLength": 1 },
+            "contentHash": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-fA-F]{64}$"
+            }
+          }
+        },
+        "guidance": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/guidance" }
+        },
+        "noRelevantGuidance": { "type": "boolean" }
+      }
+    },
+    "retrievalAttempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rank", "canonicalUrl", "status", "error"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "canonicalUrl": { "type": "string", "format": "uri" },
+        "status": { "const": "failed" },
+        "error": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
