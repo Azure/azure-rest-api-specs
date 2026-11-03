@@ -444,7 +444,7 @@
         "tags": [
           "PlaywrightWorkspaces"
         ],
-        "description": "Updates a Playwright workspace resource synchronously.",
+        "description": "Updates a Playwright workspace resource asynchronously.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -480,6 +480,20 @@
               "$ref": "#/definitions/PlaywrightWorkspace"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -491,7 +505,11 @@
           "PlaywrightWorkspaces_Update": {
             "$ref": "./examples/PlaywrightWorkspaces_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PlaywrightWorkspaces_Delete",
@@ -1128,6 +1146,10 @@
         "linkedKeyVault": {
           "$ref": "#/definitions/LinkedKeyVaultProperties",
           "description": "The Azure Key Vault linked to the workspace and the managed identity used to access it."
+        },
+        "webBotAuth": {
+          "$ref": "#/definitions/WebBotAuthSettings",
+          "description": "The Web Bot Authentication settings for the workspace. This property is available only when the EnableWebBotAuth feature flag is enabled."
         }
       }
     },
@@ -1242,6 +1264,10 @@
         "linkedKeyVault": {
           "$ref": "#/definitions/LinkedKeyVaultProperties",
           "description": "The Azure Key Vault linked to the workspace and the managed identity used to access it."
+        },
+        "webBotAuth": {
+          "$ref": "#/definitions/WebBotAuthSettings",
+          "description": "The Web Bot Authentication settings for the workspace. This property is available only when the EnableWebBotAuth feature flag is enabled."
         }
       }
     },
@@ -1293,6 +1319,50 @@
         ]
       },
       "readOnly": true
+    },
+    "WebBotAuthSettings": {
+      "type": "object",
+      "description": "The Web Bot Authentication settings for a workspace.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "Controls whether Web Bot Authentication is enabled for the workspace."
+        },
+        "signingKey": {
+          "$ref": "#/definitions/WebBotAuthSigningKey",
+          "description": "The signing key used for Web Bot Authentication. If omitted, the service defaults to Microsoft."
+        },
+        "publicKeyDirectoryUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the public key directory used for HTTP message signature verification. This property is returned only when signingKey is Workspace.",
+          "readOnly": true
+        }
+      }
+    },
+    "WebBotAuthSigningKey": {
+      "type": "string",
+      "description": "The signing key used for Web Bot Authentication.",
+      "enum": [
+        "Microsoft",
+        "Workspace"
+      ],
+      "x-ms-enum": {
+        "name": "WebBotAuthSigningKey",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft",
+            "value": "Microsoft",
+            "description": "Use a Microsoft-managed regional signing key common to all workspaces."
+          },
+          {
+            "name": "Workspace",
+            "value": "Workspace",
+            "description": "Use a workspace-specific signing key."
+          }
+        ]
+      }
     }
   },
   "parameters": {}

@@ -73,6 +73,10 @@ model PlaywrightWorkspaceProperties {
   @added(Versions.v2026_11_01_preview)
   @doc("The Azure Key Vault linked to the workspace and the managed identity used to access it.")
   linkedKeyVault?: LinkedKeyVaultProperties;
+
+  @added(Versions.v2026_11_10_preview)
+  @doc("The Web Bot Authentication settings for the workspace. This property is available only when the EnableWebBotAuth feature flag is enabled.")
+  webBotAuth?: WebBotAuthSettings;
 }
 
 @doc("The status of the last resource operation.")
@@ -108,6 +112,32 @@ model LinkedKeyVaultProperties {
 
   @doc("The managed identity used to access the linked Azure Key Vault.")
   vaultIdentity?: ManagedIdentity;
+}
+
+@added(Versions.v2026_11_10_preview)
+@doc("The Web Bot Authentication settings for a workspace.")
+model WebBotAuthSettings {
+  @doc("Controls whether Web Bot Authentication is enabled for the workspace.")
+  status?: EnablementStatus;
+
+  @doc("The signing key used for Web Bot Authentication. If omitted, the service defaults to Microsoft.")
+  signingKey?: WebBotAuthSigningKey;
+
+  @visibility(Lifecycle.Read)
+  @doc("The URI of the public key directory used for HTTP message signature verification. This property is returned only when signingKey is Workspace.")
+  publicKeyDirectoryUri?: url;
+}
+
+@added(Versions.v2026_11_10_preview)
+@doc("The signing key used for Web Bot Authentication.")
+union WebBotAuthSigningKey {
+  string,
+
+  @doc("Use a Microsoft-managed regional signing key common to all workspaces.")
+  Microsoft: "Microsoft",
+
+  @doc("Use a workspace-specific signing key.")
+  Workspace: "Workspace",
 }
 
 @doc("Managed identity properties for accessing Azure resources.")
