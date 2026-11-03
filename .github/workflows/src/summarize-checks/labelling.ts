@@ -361,15 +361,6 @@ export const sdkLabels = {
     deprecatedBreakingChange: "CI-BreakingChange-Python",
     deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
   },
-  "azure-sdk-for-python-track2": {
-    breakingChange: "BreakingChange-Python-Track2-Sdk",
-    breakingChangeApproved: "BreakingChange-Python-Track2-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-Python-Track2",
-    // Note that deprecatedBreakingChangeApproved is the same for python and python-track2
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
-  },
   "azure-sdk-for-trenton": {
     breakingChange: undefined,
     breakingChangeApproved: undefined,
@@ -1057,16 +1048,6 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChange],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeApproved],
-    troubleshootingGuide: paragraph(
-      `Your PR has breaking changes in the generated SDK for Python track-2 (label:`,
-      `\`${sdkLabels["azure-sdk-for-python-track2"].breakingChange}\`).`,
-      `${diagramTsg(3, true)}.`,
-    ),
-  },
-  {
-    precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved],
     troubleshootingGuide: paragraph(
@@ -1090,16 +1071,6 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     troubleshootingGuide: paragraph(
       `Your PR modified the suppressions for Python SDK breaking changes (label:`,
       `${sdkLabels["azure-sdk-for-python"].breakingChangeSuppression}). `,
-      `${diagramTsg(3, true)}.`,
-    ),
-  },
-  {
-    precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppressionApproved],
-    troubleshootingGuide: paragraph(
-      `Your PR modified the suppressions for Python track-2 SDK breaking changes (label:`,
-      `${sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression}). `,
       `${diagramTsg(3, true)}.`,
     ),
   },
@@ -1127,48 +1098,12 @@ const rulesPri2LegacySdk: RequiredLabelRule[] = [
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: ["CI-BreakingChange-Python-Track2"],
-    anyRequiredLabels: ["Approved-SdkBreakingChange-Python"],
-    troubleshootingGuide: paragraph(
-      `Your PR has breaking changes in the generated SDK for python (label:`,
-      `\`CI-BreakingChange-Python-Track2\`). ${diagramTsg(3, true)}.`,
-    ),
-  },
-  {
-    precedence: 2,
     anyPrerequisiteLabels: ["CI-BreakingChange-JavaScript"],
     anyRequiredLabels: ["Approved-SdkBreakingChange-JavaScript"],
     troubleshootingGuide: paragraph(
       `Your PR has breaking changes in the generated SDK for javascript (label:`,
       `\`CI-BreakingChange-JavaScript\`). ${diagramTsg(3, true)}.`,
     ),
-  },
-];
-
-const rulesPri3Blockers: RequiredLabelRule[] = [
-  {
-    precedence: 3,
-    anyPrerequisiteLabels: ["Approved-OkToMerge"],
-    anyRequiredLabels: [],
-    troubleshootingGuide: renderMarkdownDoc([
-      `This PR has been approved with \`Approved-OkToMerge\` label.`,
-      paragraph(
-        `This label should be used only to approve PRs targeting private specs repo \`main\``,
-        `branch.`,
-      ),
-      paragraph(
-        `PRs targeting this branch cannot be merged, as this branch is a mirror of the public`,
-        `specs repo \`main\` branch.`,
-      ),
-      paragraph(
-        `If you want to publish changes in this PR to the public repo, see:`,
-        `${link("aka.ms/azsdk/move-pr", "https://aka.ms/azsdk/move-pr")}.`,
-      ),
-      paragraph(
-        `If this label was applied erroneously to a different branch than private specs repo`,
-        `\`main\` branch, remove the label.`,
-      ),
-    ]),
   },
 ];
 
@@ -1234,8 +1169,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri1Namespace)
   .concat(rulesPri1TypeSpecSuppressions)
   .concat(rulesPri2Sdk)
-  .concat(rulesPri2LegacySdk)
-  .concat(rulesPri3Blockers);
+  .concat(rulesPri2LegacySdk);
 
 export function getPresentBlockingLabelsAndMissingRequiredLabels(
   core: Core,
