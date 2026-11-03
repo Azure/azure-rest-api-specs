@@ -615,11 +615,10 @@ model PasswordAuthenticationProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   state: AuthenticationState;
 
-  @doc("The PostgreSQL administrator login name. This value is not returned in responses. After it is set, renaming is not supported. Setting the login requires password authentication state to be Enabled in the same request.")
-  @secret
+  @doc("The PostgreSQL administrator login name. This value is returned in responses after it is set. After it is set, renaming is not supported. Setting the login requires password authentication state to be Enabled in the same request.")
   @minLength(1)
   @maxLength(63)
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   administratorLogin?: string;
 
   @doc("The PostgreSQL administrator password. Setting the password requires password authentication state to be Enabled in the same request.")
