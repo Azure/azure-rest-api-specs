@@ -548,13 +548,7 @@ interface UpdateRuns {
       IfMatchParameters<UpdateRun>
   >;
 
-  @doc("""
-    Resets selected Failed members to NotStarted only while the update run's evaluated execution state is Running.
-    Returns the updated UpdateRun after the changes are durably saved.
-    Returns a conflict if the run is not Running or no selected member is Failed.
-    Does not start or resume the run, invoke scheduling, or issue member update commands.
-    Existing scheduling events may execute the reset members alongside other work under normal rollout controls.
-    """)
+  @doc("Resets one or a combination of member/group/stage(s) of an update run.")
   @added(Versions.v2026_12_01_preview)
   reset is ArmResourceActionSync<
     UpdateRun,
