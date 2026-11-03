@@ -1,7 +1,9 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 namespace Playwright;
 
 // Models ////////////////////
@@ -123,4 +125,16 @@ union BrowserType {
 
   @doc("WebKit browser type.")
   Webkit: "Webkit",
+}
+
+@doc("The type of managed identity used to access Key Vault. Additional values may be added in the future.")
+@added(Versions.v2026_12_01_preview)
+union IdentityType {
+  string,
+
+  @doc("Uses the system-assigned managed identity of the Playwright workspace.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("Uses the user-assigned managed identity specified by resourceId.")
+  UserAssigned: "UserAssigned",
 }

@@ -35,6 +35,26 @@ model SecretStore {
   @doc("Secret configurations keyed by domain.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   domainSecrets: Record<SecretConfiguration>;
+
+  @doc("The managed identity used to access the Key Vault secrets referenced by this secret store.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  keyVaultReferenceIdentity?: KeyVaultReferenceIdentity;
+}
+
+@doc("The managed identity used to resolve Key Vault secret references.")
+@added(Versions.v2026_12_01_preview)
+model KeyVaultReferenceIdentity {
+  @doc("The type of managed identity used to access Key Vault.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  type: IdentityType;
+
+  @doc("The Azure resource ID of the user-assigned managed identity. Required when type is UserAssigned; omit when type is SystemAssigned.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @doc("Key Vault secret references for a domain.")

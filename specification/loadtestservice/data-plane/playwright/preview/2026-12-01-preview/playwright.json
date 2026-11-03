@@ -2299,6 +2299,97 @@
         }
       }
     },
+    "IdentityType": {
+      "type": "string",
+      "description": "The type of managed identity used to access Key Vault. Additional values may be added in the future.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "Uses the system-assigned managed identity of the Playwright workspace."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "Uses the user-assigned managed identity specified by resourceId."
+          }
+        ]
+      }
+    },
+    "KeyVaultReferenceIdentity": {
+      "type": "object",
+      "description": "The managed identity used to resolve Key Vault secret references.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of managed identity used to access Key Vault.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity. Required when type is UserAssigned; omit when type is SystemAssigned.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "KeyVaultReferenceIdentityCreateOrUpdate": {
+      "type": "object",
+      "description": "The managed identity used to resolve Key Vault secret references.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of managed identity used to access Key Vault.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity. Required when type is UserAssigned; omit when type is SystemAssigned.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
     "OS": {
       "type": "string",
       "description": "The operating system to configure for remote script execution.",
@@ -2903,6 +2994,15 @@
             "update",
             "create"
           ]
+        },
+        "keyVaultReferenceIdentity": {
+          "$ref": "#/definitions/KeyVaultReferenceIdentity",
+          "description": "The managed identity used to access the Key Vault secrets referenced by this secret store.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2943,6 +3043,15 @@
           "additionalProperties": {
             "$ref": "#/definitions/SecretConfigurationCreateOrUpdate"
           },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "keyVaultReferenceIdentity": {
+          "$ref": "#/definitions/KeyVaultReferenceIdentityCreateOrUpdate",
+          "description": "The managed identity used to access the Key Vault secrets referenced by this secret store.",
           "x-ms-mutability": [
             "read",
             "update",
