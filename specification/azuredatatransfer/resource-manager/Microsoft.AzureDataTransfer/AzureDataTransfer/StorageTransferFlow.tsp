@@ -45,19 +45,11 @@ interface StorageTransferFlows {
   /**
    * Updates the StorageTransferFlow resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Prior OpenAPI2 Json spec provides the resource back in the LRO response."
   @patch(#{ implicitOptionality: false })
   @added(Versions.v2026_06_29_preview)
   update is ArmCustomPatchAsync<
     StorageTransferFlow,
-    PatchModel = StorageTransferFlowsPatch,
-    Response =
-      | ArmResponse<StorageTransferFlow>
-      | (ArmAcceptedLroResponse & {
-          @bodyRoot
-          @added(Versions.v2026_06_29_preview)
-          _: StorageTransferFlow;
-        })
+    PatchModel = StorageTransferFlowsPatch
   >;
 
   /**

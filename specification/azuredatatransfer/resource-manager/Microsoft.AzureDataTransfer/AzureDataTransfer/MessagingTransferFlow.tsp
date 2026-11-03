@@ -45,19 +45,11 @@ interface MessagingTransferFlows {
   /**
    * Updates the MessagingTransferFlow resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Prior OpenAPI2 Json spec provides the resource back in the LRO response."
   @patch(#{ implicitOptionality: false })
   @added(Versions.v2026_06_29_preview)
   update is ArmCustomPatchAsync<
     MessagingTransferFlow,
-    PatchModel = MessagingTransferFlowsPatch,
-    Response =
-      | ArmResponse<MessagingTransferFlow>
-      | (ArmAcceptedLroResponse & {
-          @bodyRoot
-          @added(Versions.v2026_06_29_preview)
-          _: MessagingTransferFlow;
-        })
+    PatchModel = MessagingTransferFlowsPatch
   >;
 
   /**
