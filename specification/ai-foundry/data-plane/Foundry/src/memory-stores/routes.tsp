@@ -6,6 +6,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 @tag("Memory Stores")
@@ -103,9 +105,9 @@ interface MemoryStores {
   updateMemories is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.memory_stores_v1_preview,
     MemoryStoreUpdateRequest,
-    Foundations.AcceptedResponse &
+    Azure.Core.Foundations.AcceptedResponse &
       MemoryStoreUpdateResponse &
-      Foundations.LongRunningStatusLocation<MemoryStoreUpdateCompletedResult>
+      Azure.Core.Foundations.LongRunningStatusLocation<MemoryStoreUpdateCompletedResult>
   >;
 
   /** Retrieves the status and result of a memory store update operation. */

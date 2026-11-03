@@ -13,6 +13,7 @@ import "../toolboxes/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using Microsoft.Foundry.Core;
 
 @clientNamespace("Azure.AI.Agents.Contracts.V2.Models")
 namespace OpenAI {
@@ -268,4 +269,9 @@ namespace Azure.AI.Projects {
     OpenAI.ItemCustomToolCallOutput,
     "OutputItemCustomToolCallOutput"
   );
+
+  // Pin generated model names after migrating PageOrder/JobStatus to reuse the
+  // Microsoft.Foundry.Core library union definitions.
+  @@clientName(PageOrder, "PageOrder");
+  @@clientName(JobStatus, "JobStatus");
 }

@@ -8,6 +8,8 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 const VoiceAgentConversationRequiredPreviews = #{

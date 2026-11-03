@@ -20,6 +20,7 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.Foundry.Core;
 namespace Azure.AI.Projects;
 
 // --------------------------------------------------------------------------------
@@ -38,6 +39,10 @@ namespace Azure.AI.Projects;
 @@clientName(MemoryStoreUpdateCompletedResult, "MemoryUpdateResultDetails");
 
 @@clientName(JobStatus, "ProjectsJobStatus");
+
+// Pin the generated model name after migrating PageOrder to reuse the
+// Microsoft.Foundry.Core library union definition.
+@@clientName(PageOrder, "PageOrder");
 
 // Shorter method names for SDK datasets operations
 @@clientName(Datasets.listLatest, "list");

@@ -6,6 +6,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 @@usage(UpdateToolboxRequest, Usage.input);

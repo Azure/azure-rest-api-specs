@@ -9,6 +9,7 @@ import "../agents-optimization/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using Microsoft.Foundry.Core;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @clientNamespace("Azure.AI.Projects.Agents")
@@ -56,6 +57,10 @@ namespace Azure.AI.Projects {
   @@access(AgentSessionResource, Access.public);
 
   @@clientName(JobStatus, "AgentsJobStatus");
+
+  // Pin the generated model name after migrating PageOrder to reuse the
+  // Microsoft.Foundry.Core library union definition.
+  @@clientName(PageOrder, "PageOrder");
 
   @@clientName(
     ContainerAppAgentDefinition,

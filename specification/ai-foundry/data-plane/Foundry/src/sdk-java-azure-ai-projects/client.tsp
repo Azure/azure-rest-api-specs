@@ -23,6 +23,7 @@ import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/ops-relocation-datasets.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.Foundry.Core;
 namespace Azure.AI.Projects;
 
 // --------------------------------------------------------------------------------
@@ -339,6 +340,10 @@ union GrammarSyntaxExpandable {
   },
   "java"
 );
+
+// Pin the generated model name after migrating JobStatus to reuse the
+// Microsoft.Foundry.Core library union definition.
+@@clientName(JobStatus, "JobStatus");
 
 //Suppress the OpenAI.Tool type to prevent from emitting entire tool model tree
 @@alternateType(OpenAI.Tool, unknown, "java");

@@ -3,6 +3,8 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 alias EvaluationTaxonomiesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;

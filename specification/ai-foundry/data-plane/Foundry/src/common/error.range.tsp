@@ -1,22 +1,5 @@
-import "@typespec/http";
+import "@azure-tools/typespec-foundry-core";
 
-using TypeSpec.Http;
-
+// REST entrypoints use ranged errors; SDK entrypoints substitute error.default.tsp.
 /** Error response for Azure range errors. */
-alias AzureRangeErrorResponse<ErrorResponseParameter = Azure.Core.Foundations.ErrorResponse> =
-  | {
-      ...ErrorResponseParameter;
-
-      @maxValue(499)
-      @minValue(400)
-      @statusCode
-      statusCode: int32;
-    }
-  | {
-      ...ErrorResponseParameter;
-
-      @maxValue(599)
-      @minValue(500)
-      @statusCode
-      statusCode: int32;
-    };
+alias AzureRangeErrorResponse<ErrorResponseParameter = Azure.Core.Foundations.ErrorResponse> = Microsoft.Foundry.Core.AzureRangeErrorResponse<ErrorResponseParameter>;

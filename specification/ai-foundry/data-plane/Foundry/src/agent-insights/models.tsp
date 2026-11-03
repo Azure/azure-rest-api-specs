@@ -5,6 +5,8 @@ using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 const AgentInsightMonitorsRequiredPreviews = #{
@@ -437,7 +439,11 @@ model AgentInsightTokenUsage {
 
 /** A long-running run that analyzes one agent's traces and updates that agent's insights. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-model AgentInsightRun is JobLike<AgentInsightRunResult, AgentInsightRunCreate> {
+model AgentInsightRun is JobLike<
+  ApiError,
+  AgentInsightRunResult,
+  AgentInsightRunCreate
+> {
   /** The Agent Insights monitor this run belongs to. */
   @visibility(Lifecycle.Read)
   monitor_id: string;

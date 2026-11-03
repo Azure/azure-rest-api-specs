@@ -8,6 +8,7 @@ import "../skills/models.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using Microsoft.Foundry.Core;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @clientNamespace("Azure.AI.Extensions.OpenAI")
@@ -1004,4 +1005,9 @@ namespace Azure.AI.Projects {
   @@access(ApiError, Access.public);
 
   @@usage(StructuredOutputsOutputItem, Usage.input | Usage.output);
+
+  // Pin generated model names after migrating PageOrder/JobStatus to reuse the
+  // Microsoft.Foundry.Core library union definitions.
+  @@clientName(PageOrder, "PageOrder");
+  @@clientName(JobStatus, "JobStatus");
 }
