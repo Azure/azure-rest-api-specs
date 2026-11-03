@@ -14,9 +14,10 @@ namespace Microsoft.ContainerRegistry;
  * An object that represents a cache rule for a container registry.
  */
 @parentResource(Registry)
-model CacheRule is Azure.ResourceManager.ProxyResource<CacheRuleProperties> {
+@renamedFrom(Versions.vLatestPreview, "CacheRule")
+model CacheRuleNew is Azure.ResourceManager.ProxyResource<CacheRuleProperties> {
   ...ResourceNameParameter<
-    Resource = CacheRule,
+    Resource = CacheRuleNew,
     KeyName = "cacheRuleName",
     SegmentName = "cacheRules",
     NamePattern = "^[a-zA-Z0-9-]*$"
@@ -35,25 +36,25 @@ interface CacheRules {
   /**
    * Gets the properties of the specified cache rule resource.
    */
-  get is ArmResourceRead<CacheRule>;
+  get is ArmResourceRead<CacheRuleNew>;
 
   /**
    * Creates a cache rule for a container registry with the specified parameters.
    */
-  create is ArmResourceCreateOrReplaceAsync<CacheRule>;
+  create is ArmResourceCreateOrReplaceAsync<CacheRuleNew>;
 
   /**
    * Updates a cache rule for a container registry with the specified parameters.
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
-    CacheRule,
+    CacheRuleNew,
     PatchModel = CacheRuleUpdateParameters,
     Response =
-      | ArmResponse<CacheRule>
+      | ArmResponse<CacheRuleNew>
       | ArmResourceCreatedResponse<
-          CacheRule,
-          LroHeaders = ArmAsyncOperationHeader<FinalResult = CacheRule> &
+          CacheRuleNew,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = CacheRuleNew> &
             Azure.Core.Foundations.RetryAfterHeader
         >
   >;
@@ -61,22 +62,22 @@ interface CacheRules {
   /**
    * Deletes a cache rule resource from a container registry.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<CacheRule>;
+  delete is ArmResourceDeleteWithoutOkAsync<CacheRuleNew>;
 
   /**
    * Lists all cache rule resources for the specified container registry.
    */
   @list
   list is ArmResourceListByParent<
-    CacheRule,
+    CacheRuleNew,
     Response = ArmResponse<CacheRulesListResult>
   >;
 }
 
-@@maxLength(CacheRule.name, 50);
-@@minLength(CacheRule.name, 5);
-@@doc(CacheRule.name, "The name of the cache rule.");
-@@doc(CacheRule.properties, "The properties of the cache rule.");
+@@maxLength(CacheRuleNew.name, 50);
+@@minLength(CacheRuleNew.name, 5);
+@@doc(CacheRuleNew.name, "The name of the cache rule.");
+@@doc(CacheRuleNew.properties, "The properties of the cache rule.");
 @@doc(
   CacheRules.create::parameters.resource,
   "The parameters for creating a cache rule."

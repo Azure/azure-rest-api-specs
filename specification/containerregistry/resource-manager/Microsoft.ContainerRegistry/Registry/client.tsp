@@ -71,7 +71,7 @@ namespace Microsoft.ContainerRegistry {
 
 @@alternateType(ArchivePackageSourceProperties.url, url, "csharp");
 @@alternateType(
-  CacheRule.identity,
+  CacheRuleNew.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -202,7 +202,7 @@ namespace Microsoft.ContainerRegistry {
   "AadAuthenticationAsArmPolicyStatus",
   "csharp"
 );
-@@clientName(CacheRule, "ContainerRegistryCacheRule", "csharp");
+@@clientName(CacheRuleNew, "ContainerRegistryCacheRule", "csharp");
 @@clientName(
   CallbackConfig,
   "ContainerRegistryWebhookCallbackConfig",
@@ -626,7 +626,7 @@ namespace Microsoft.ContainerRegistry {
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  CacheRule.properties,
+  CacheRuleNew.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
