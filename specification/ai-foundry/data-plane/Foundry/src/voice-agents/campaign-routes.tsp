@@ -6,15 +6,16 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-scoped Campaign reads, cursor pages and retained monitors use Foundry operation wrappers; asynchronous actions reuse the shared configurable job templates."
-@doc("Name-addressed Campaigns owned by the route Agent.")
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Project-scoped Campaign reads, cursor pages and retained monitors use Foundry operation wrappers; asynchronous actions reuse the shared configurable job templates."
+@doc("Name-addressed Campaigns with project-wide identity and a recorded Agent owner.")
 @tag("TelephonyCampaigns")
 interface TelephonyCampaigns {
   /**
    * Creates a named Campaign (201) or fully replaces a failed Campaign's inputs (200), authorizing calls after validation.
    * No PATCH or partial updates are supported. Only failed preparation can be replaced; all other states reject changes.
    * Replacement may change connection_name, source, recipients/recipient_dataset, schedule and retry_policy.
-   * The route Agent and Campaign name cannot change; server-owned status, progress and resolved versions are not writable.
+   * The Agent owner and Campaign name cannot change; server-owned status, progress and resolved versions are not writable.
+   * Names are unique within the project. An existing name owned by a different Agent returns 409, including replacement attempts.
    * Shape/authorization checks precede acceptance. Replacement requires exact If-Match and fresh Operation-Id:
    * missing replacement ID returns 400, stale If-Match returns 412, and nonfailed state returns 409.
    * If-Match on an absent Campaign returns 412; it never recreates a deleted resource.
@@ -56,7 +57,7 @@ interface TelephonyCampaigns {
   )
   @put
   @parameterVisibility(Lifecycle.Create)
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
+  @route("/telephony_campaigns/{campaign_name}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   @pollingOperation(
     TelephonyCampaigns.getOperation,
@@ -74,10 +75,6 @@ interface TelephonyCampaigns {
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     TelephonyCampaign,
     {
-      @doc("Owning Agent; never overridden in recipient inputs.")
-      @path
-      agent_name: string;
-
       @doc("Name chosen by the caller; only a failed Campaign permits full replacement.")
       @path
       campaign_name: TelephonyCampaignName;
@@ -102,15 +99,11 @@ interface TelephonyCampaigns {
   @doc("Gets the current Campaign with source provenance but no inline recipients, after authorization. Optional operation_id checks the saved instance/round, not the latest operation pointer: same-round cancellation is allowed; replacement/name reuse returns 409 campaign_operation_mismatch. Missing/expired/wrong-scope operations or absent Campaigns return 404.")
   @summary("Get a telephony campaign")
   @get
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
+  @route("/telephony_campaigns/{campaign_name}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   get is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
-      @doc("Owning Agent; never overridden in recipient inputs.")
-      @path
-      agent_name: string;
-
       @doc("Immutable Campaign name.")
       @path
       campaign_name: TelephonyCampaignName;
@@ -122,18 +115,18 @@ interface TelephonyCampaigns {
     TelephonyCampaignResponse
   >;
 
-  @doc("Lists Agent-owned Campaigns without inline arrays. Opaque continuation tokens retain the original created_at/internal-instance boundary across deletion and name reuse. Filters are live views, not a snapshot.")
+  @doc("Lists project Campaigns without inline arrays; agent_name optionally filters by owner. Opaque continuation tokens retain the original created_at/internal-instance boundary across deletion and name reuse. Filters are live views, not a snapshot.")
   @summary("List telephony campaigns")
   @get
   @list
-  @route("/agents/{agent_name}/telephony/campaigns")
+  @route("/telephony_campaigns")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   list is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
-      @doc("Owning Agent; never overridden in recipient inputs.")
-      @path
-      agent_name: string;
+      @doc("Filter Campaigns by their immutable Agent owner. Omit to list all Campaigns in the project.")
+      @query
+      agent_name?: string;
 
       ...TelephonyCampaignPageQueryParameters;
       ...TelephonyCampaignFilters;
@@ -168,7 +161,7 @@ interface TelephonyCampaigns {
     }
   )
   @post
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:cancel")
+  @route("/telephony_campaigns/{campaign_name}:cancel")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   @pollingOperation(
     TelephonyCampaigns.getOperation,
@@ -186,10 +179,6 @@ interface TelephonyCampaigns {
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     TelephonyCampaign,
     {
-      @doc("Owning Agent; never overridden in recipient inputs.")
-      @path
-      agent_name: string;
-
       @doc("Campaign name.")
       @path
       campaign_name: TelephonyCampaignName;
@@ -232,7 +221,7 @@ interface TelephonyCampaigns {
     }
   )
   @delete
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
+  @route("/telephony_campaigns/{campaign_name}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   @pollingOperation(
     TelephonyCampaigns.getOperation,
@@ -243,10 +232,6 @@ interface TelephonyCampaigns {
   delete is deleteJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
-      @doc("Owning Agent; never overridden in recipient inputs.")
-      @path
-      agent_name: string;
-
       @doc("Immutable Campaign name.")
       @path
       campaign_name: TelephonyCampaignName;
@@ -309,15 +294,11 @@ interface TelephonyCampaigns {
   )
   @get
   @list
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}/validation_errors")
+  @route("/telephony_campaigns/{campaign_name}/validation_errors")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   listValidationErrors is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
-      @doc("Owning Agent; never overridden in recipient inputs.")
-      @path
-      agent_name: string;
-
       @doc("Immutable Campaign name.")
       @path
       campaign_name: TelephonyCampaignName;
@@ -373,21 +354,17 @@ interface TelephonyCampaigns {
     #{ title: "Validation failed without dialing" }
   )
   @get
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}/operations/{operation_id}")
+  @route("/telephony_campaigns/{campaign_name}/operations/{operation_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getOperation is queryJobStatusPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     TelephonyCampaignOperation,
     {
-      @doc("Owning Agent.")
-      @path
-      agent_name: string;
-
       @doc("Immutable Campaign name.")
       @path
       campaign_name: TelephonyCampaignName;
 
-      @doc("Stable validation-, cancellation- or deletion-operation ID returned in Operation-Id. Authorization is checked against its saved project and Agent scope even after resource deletion.")
+      @doc("Stable validation-, cancellation- or deletion-operation ID returned in Operation-Id. Authorization is checked against its saved project and Campaign instance even after resource deletion.")
       @path
       operation_id: TelephonyCampaignOperationId;
     },

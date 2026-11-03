@@ -256,13 +256,14 @@ test("Campaign actions retain their exact independent polling and final-operatio
       polling.parameterMap.get("operation_id").source.name,
       "operationId",
     );
-    for (const scope of ["agent_name", "campaign_name"]) {
+    for (const scope of ["campaign_name"]) {
       assert.equal(
         polling.parameterMap.get(scope).sourceKind,
         "RequestParameter",
       );
       assert.equal(polling.parameterMap.get(scope).source.name, scope);
     }
+    assert.equal(polling.parameterMap.has("agent_name"), false);
     const metadata = getLroMetadata(program, action);
     assert.ok(metadata, name);
     assert.equal(

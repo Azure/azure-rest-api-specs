@@ -137,9 +137,14 @@ union TelephonyCampaignStatus {
   deleting: "deleting",
 }
 
-@doc("An Agent-owned Campaign. Creation and replacement of failed preparation authorize execution after validation; cancel and delete control its lifecycle.")
+@doc("A project-scoped Campaign with an immutable Agent owner. Creation and replacement of failed preparation authorize execution after validation; cancel and delete control its lifecycle.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaign {
+  @doc("The voice agent that executes the Campaign. Required on creation and replacement; it cannot change for an existing Campaign.")
+  @minLength(1)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  agent_name: string;
+
   @doc("Human-readable name of the provider connection in the current project.")
   @minLength(1)
   @maxLength(256)
@@ -183,7 +188,7 @@ model TelephonyCampaign {
   @visibility(Lifecycle.Read)
   error?: ApiError;
 
-  @doc("Immutable name supplied as campaign_name in the PUT path, not the request body; echoed in responses. Unique within the project and Agent.")
+  @doc("Immutable name supplied as campaign_name in the PUT path, not the request body; echoed in responses. Unique within the project.")
   @visibility(Lifecycle.Read)
   name: TelephonyCampaignName;
 
@@ -367,11 +372,11 @@ alias TelephonyCampaignFilters = {
   status?: TelephonyCampaignStatus;
 };
 
-/** Campaign-scoped cursor parameters. Preserve shared wire names without treating reusable resource names as cursors. */
+/** Project-scoped telephony cursor parameters. Preserve shared wire names without treating resource identifiers as cursors. */
 alias TelephonyCampaignPageQueryParameters = {
   ...OmitProperties<CommonPageQueryParameters, "after" | "before">;
 
-  @doc("Previous page's opaque last_id, bound to the original sort boundary, project/Agent and filters; error cursors also bind instance, round and snapshot, unchanged by cancellation. Not a name/row number; mutually exclusive with before. Invalid, altered or mismatched cursors return 400 invalid_cursor.")
+  @doc("Previous page's opaque last_id, bound to the original sort boundary, project, Agent filter and other filters; error cursors also bind instance, round and snapshot, unchanged by cancellation. Not a resource ID/name or row number; mutually exclusive with before. Invalid, altered or mismatched cursors return 400 invalid_cursor.")
   @query
   @continuationToken
   after?: string;
@@ -386,7 +391,7 @@ alias TelephonyCampaignPageQueryParameters = {
 model TelephonyCampaignPage<T> {
   ...OmitProperties<AgentsPagedResult<T>, "first_id" | "last_id">;
 
-  @doc("Opaque boundary cursor for the first returned item; absent for an empty page. Not a Campaign name or recipient ID.")
+  @doc("Opaque boundary cursor for the first returned item; absent for an empty page. Not a resource ID/name or recipient ID.")
   first_id?: string;
 
   @doc("Opaque boundary cursor for the last returned item; absent for an empty page. Captures its original immutable sort key, so deleting/reusing the resource name cannot move the boundary.")

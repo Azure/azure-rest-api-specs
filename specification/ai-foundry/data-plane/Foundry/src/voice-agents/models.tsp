@@ -1511,7 +1511,7 @@ model TelephonyCallJobCancellation {
   revision: int64;
 }
 
-@doc("Immutable customer-chosen Campaign name within a project and Agent.")
+@doc("Immutable customer-chosen Campaign name, unique within a project.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @minLength(1)
 @maxLength(64)
@@ -1571,7 +1571,7 @@ model TelephonyCallJob {
   // Preserve the existing SDK response order when appending Campaign fields.
   ...PickProperties<TelephonyCallJobConfiguration, "source">;
 
-  @doc("Owning Campaign name under this Agent; absent for direct calls. Cascade deletion hides owned CallJobs on acceptance and deletes them during cleanup. Ownership follows the immutable Campaign instance, so name reuse cannot attach old jobs.")
+  @doc("Project-unique owning Campaign name; absent for direct calls. Cascade deletion hides owned CallJobs on acceptance and deletes them during cleanup. Ownership follows the immutable Campaign instance, so name reuse cannot attach old jobs.")
   @visibility(Lifecycle.Read)
   campaign_name?: TelephonyCampaignName;
 }
@@ -1579,6 +1579,10 @@ model TelephonyCallJob {
 @doc("The direct outbound call to create.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJobCreate {
+  @doc("The voice agent that executes the call. The service records this owner when accepting the job.")
+  @minLength(1)
+  agent_name: string;
+
   ...OmitProperties<TelephonyCallJobConfiguration, "source">;
   ...OptionalProperties<PickProperties<TelephonyCallJob, "retry_policy">>;
   ...PickProperties<TelephonyCallJobConfiguration, "source">;
