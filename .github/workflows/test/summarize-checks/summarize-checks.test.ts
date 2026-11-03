@@ -380,7 +380,11 @@ describe("Summarize Checks Unit Tests", () => {
         .lexer(comment)
         .find((token): token is Tokens.Table => token.type === "table");
       expect(token).toBeDefined();
-      return token?.rows.map((row) => row.map((cell) => cell.text));
+      return token?.rows.map((row) =>
+        row.map((cell, index) =>
+          index === 1 ? cell.text.replace(/<img\b[^>]*>\s*/, "") : cell.text,
+        ),
+      );
     }
 
     it.each([
@@ -480,9 +484,10 @@ describe("Summarize Checks Unit Tests", () => {
     it("shows a clear success row without implying that review requirements can be skipped", () => {
       const [comment] = summarize();
 
-      expect(comment).toContain("✅ **All automated merging requirements have been met.**");
+      expect(comment).toContain("**All automated merging requirements have been met.**");
+      expect(comment).toMatch(/passed\.svg"[^>]*> \*\*All automated merging requirements/);
       expect(rows(comment)).toEqual([
-        ["Automated requirements", "✅ Met", "Follow the merge process linked below."],
+        ["Automated requirements", "Met", "Follow the merge process linked below."],
       ]);
       expect(comment).toContain("[Merge guide](https://aka.ms/azsdk/specreview/merge)");
       expect(comment).not.toContain("<details>");
@@ -504,9 +509,11 @@ describe("Summarize Checks Unit Tests", () => {
         "Next step",
       ]);
       expect(rows(comment)?.map((row) => row.slice(0, 2))).toEqual([
-        ["Publication intent", "❌ Required"],
-        ["`TypeSpec Validation`", "❌ Failed"],
+        ["Publication intent", "Action required"],
+        ["`TypeSpec Validation`", "Failed"],
       ]);
+      expect(visible).toMatch(/action-required\.svg"[^>]*> Action required/);
+      expect(visible).toMatch(/failed\.svg"[^>]*> Failed/);
       expect(visible).toContain("Add `PublishToCustomers` if these APIs are ready to ship");
       expect(visible).toContain("Open the failed check, address its diagnostics");
       expect(visible).not.toContain("These branches are not intended for iterative development");
@@ -534,10 +541,10 @@ describe("Summarize Checks Unit Tests", () => {
         "`TypeSpec Validation`",
       ]);
       expect(comment).toContain("<summary>Other outstanding requirements (4)</summary>");
-      expect(comment).toContain("| SDK package names | ❌ Required |");
-      expect(comment).toContain("| TypeSpec suppressions | ❌ Required |");
-      expect(comment).toContain("| `Swagger Avocado` | ❌ Failed |");
-      expect(comment).toContain("| `Swagger BreakingChange` | ❌ Failed |");
+      expect(comment).toContain("| SDK package names |");
+      expect(comment).toContain("| TypeSpec suppressions |");
+      expect(comment).toContain("| `Swagger Avocado` |");
+      expect(comment).toContain("| `Swagger BreakingChange` |");
       expect(comment).toContain("typespec-suppressions-approved");
       expect(status.result).toBe("FAILURE");
     });
@@ -599,12 +606,34 @@ describe("Summarize Checks Unit Tests", () => {
       });
 
       expect(rows(comment)?.map((row) => row.slice(0, 2))).toEqual([
-        ["`Swagger BreakingChange`", "❌ Failed"],
-        ["PR impact assessment", "⏳ Pending"],
-        ["`TypeSpec Validation`", "⏳ Running"],
-        ["`Swagger Avocado`", "⏳ Running"],
+        ["`Swagger BreakingChange`", "Failed"],
+        ["PR impact assessment", "Pending"],
+        ["`TypeSpec Validation`", "Running"],
+        ["`Swagger Avocado`", "Pending"],
       ]);
       expect(comment.split("<details>")[0]).toContain("additional requirements may be identified");
+      expect(status.result).toBe("FAILURE");
+    });
+
+    it("distinguishes ARM reviewer waits, author actions, running checks and queued checks", () => {
+      const [comment, status] = summarize({
+        labels: ["resource-manager", "ARMReview", "WaitForARMFeedback"],
+        required: [
+          run("TypeSpec Validation", "IN_PROGRESS", null),
+          run("Swagger Avocado", "QUEUED", null),
+        ],
+      });
+
+      expect(rows(comment)?.map((row) => row.slice(0, 2))).toEqual([
+        ["Publication intent", "Action required"],
+        ["ARM API review", "Awaiting review"],
+        ["`TypeSpec Validation`", "Running"],
+        ["`Swagger Avocado`", "Pending"],
+      ]);
+      expect(comment).toMatch(/awaiting-review\.svg"[^>]*> Awaiting review/);
+      expect(comment).toMatch(/running\.svg"[^>]*> Running/);
+      expect(comment).toMatch(/pending\.svg"[^>]*> Pending/);
+      expect(comment).toContain("Wait for this required check to start.");
       expect(status.result).toBe("FAILURE");
     });
 
@@ -618,7 +647,8 @@ describe("Summarize Checks Unit Tests", () => {
         expect(comment).toContain(
           "<summary>Non-blocking failures (" + (names.length + 1) + ")</summary>",
         );
-        expect(comment).toContain("| `license/cla` | ⚠️ Non-blocking |");
+        expect(comment).toContain("| `license/cla` |");
+        expect(comment).toMatch(/warning\.svg"[^>]*> Non-blocking/);
         expect(comment.split("<details>")[0]).not.toContain("license/cla");
         expect(comment).not.toContain("Other outstanding requirements");
         expect(status.result).toBe("SUCCESS");
@@ -657,7 +687,7 @@ describe("Summarize Checks Unit Tests", () => {
       });
       const visible = comment.split("<details>")[0];
 
-      expect(visible).toContain("| ARM modeling review | ❌ Required |");
+      expect(visible).toContain("| ARM modeling review |");
       expect(visible).toContain("[office hours](https://aka.ms/apimodelingreview)");
       expect(visible).not.toContain("9:30");
       expect(visible).not.toContain("lease file");

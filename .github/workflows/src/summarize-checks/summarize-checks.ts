@@ -42,6 +42,7 @@ import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
 import { commentOrUpdate } from "../comment.ts";
+import { statusBadge, type CommentStatus } from "./comment-status.ts";
 import { buildSdkBreakingChangesSummary, hasSdkBreakingChanges } from "./sdk-breaking-changes.ts";
 import { extractInputs } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
@@ -910,9 +911,9 @@ export function createNextStepsComment(
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
-  const pendingRequiredCheckNames = requiredRuns
-    .filter((run) => run.status.toLowerCase() !== "completed")
-    .map((run) => run.name);
+  const pendingRequiredChecks = requiredRuns.filter(
+    (run) => run.status.toLowerCase() !== "completed",
+  );
 
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
@@ -922,7 +923,7 @@ export function createNextStepsComment(
     core,
     labels,
     `${repo}/${targetBranch}`,
-    pendingRequiredCheckNames,
+    pendingRequiredChecks,
     failingCheckInfos,
     fyiCheckInfos,
     assessmentCompleted,
@@ -940,7 +941,7 @@ function buildNextStepsToMergeCommentBody(
   core: Core,
   labels: string[],
   targetBranch: string,
-  pendingRequiredCheckNames: string[],
+  pendingRequiredChecks: Pick<CheckRunData, "name" | "status">[],
   failingReqChecksInfo: CheckMetadata[],
   failingFyiChecksInfo: CheckMetadata[],
   assessmentCompleted: boolean,
@@ -959,7 +960,7 @@ function buildNextStepsToMergeCommentBody(
   //   the assessment completed is a blocker, as we may end up having violated labelling rules that would be detected only after
   //   it is completed.
   const requirementsMet =
-    !anyBlockerPresent && pendingRequiredCheckNames.length === 0 && assessmentCompleted;
+    !anyBlockerPresent && pendingRequiredChecks.length === 0 && assessmentCompleted;
 
   // Compose the body based on the current state
   const [commentBody, automatedChecksMet] = getCommentBody(
@@ -969,7 +970,7 @@ function buildNextStepsToMergeCommentBody(
     failingReqChecksInfo,
     failingFyiChecksInfo,
     violatedReqLabelsRules,
-    buildPendingRequirements(assessmentCompleted, pendingRequiredCheckNames),
+    buildPendingRequirements(assessmentCompleted, pendingRequiredChecks),
     target_url,
     sdkBreakingChangesSummary,
   );
@@ -979,24 +980,27 @@ function buildNextStepsToMergeCommentBody(
 
 type RequirementSummary = {
   name: string;
-  status: string;
+  status: CommentStatus;
   nextStep: string;
   guidance?: string;
 };
 
 function buildPendingRequirements(
   assessmentCompleted: boolean,
-  pendingRequiredCheckNames: string[],
+  pendingRequiredChecks: Pick<CheckRunData, "name" | "status">[],
 ): RequirementSummary[] {
-  const pendingItems = pendingRequiredCheckNames.map((name): RequirementSummary => ({
+  const pendingItems = pendingRequiredChecks.map(({ name, status }): RequirementSummary => ({
     name: inlineCode(name),
-    status: "⏳ Running",
-    nextStep: "Wait for this required check to finish.",
+    status: status.toLowerCase() === "in_progress" ? "running" : "pending",
+    nextStep:
+      status.toLowerCase() === "in_progress"
+        ? "Wait for this required check to finish."
+        : "Wait for this required check to start.",
   }));
   if (!assessmentCompleted) {
     pendingItems.unshift({
       name: "PR impact assessment",
-      status: "⏳ Pending",
+      status: "pending",
       nextStep: "Wait; additional requirements may be identified.",
     });
   }
@@ -1029,12 +1033,12 @@ function getCommentBody(
   let status: "pending" | keyof typeof CheckConclusion = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
 
-  let headline = "⏳ **Still evaluating** — merge requirements are not final yet.";
+  let headline = `${statusBadge("running", "**Still evaluating**")} — merge requirements are not final yet.`;
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
       const count = failingReqChecksInfo.length + violatedRequiredLabelsRules.length;
-      headline = `❌ **Blocked** — ${count} ${count === 1 ? "requirement needs" : "requirements need"} attention.`;
+      headline = `${statusBadge("failed", "**Blocked**")} — ${count} ${count === 1 ? "requirement needs" : "requirements need"} attention.`;
       summaryData =
         "❌ This PR cannot be merged because some requirements are not met. See the details.";
       status = "FAILURE";
@@ -1042,7 +1046,10 @@ function getCommentBody(
 
     if (anyFyiPresent) {
       if (!anyBlockerPresent && requirementsMet) {
-        headline = "⚠️ **Automated requirements met; non-blocking checks need attention.**";
+        headline = statusBadge(
+          "warning",
+          "**Automated requirements met; non-blocking checks need attention.**",
+        );
         summaryData = renderMarkdownDoc([
           paragraph(
             "⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR,",
@@ -1055,7 +1062,7 @@ function getCommentBody(
       }
     }
   } else if (requirementsMet) {
-    headline = "✅ **All automated merging requirements have been met.**";
+    headline = statusBadge("passed", "**All automated merging requirements have been met.**");
     summaryData = renderMarkdownDoc([
       "✅ All automated merging requirements have been met.",
       `To merge this PR, refer to ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
@@ -1089,7 +1096,7 @@ function getCommentBody(
         : [
             {
               name: "Automated requirements",
-              status: "✅ Met",
+              status: "passed",
               nextStep: "Follow the merge process linked below.",
             },
           ],
@@ -1133,7 +1140,7 @@ function getCommentBody(
 function buildRequirementsTable(requirements: RequirementSummary[]): string {
   return table([
     ["Requirement", "Status", "Next step"],
-    ...requirements.map(({ name, status, nextStep }) => [name, status, nextStep]),
+    ...requirements.map(({ name, status, nextStep }) => [name, statusBadge(status), nextStep]),
   ]);
 }
 
@@ -1160,7 +1167,7 @@ function buildFailingCheckSummaries(
 ): RequirementSummary[] {
   return selectByPrecedence(failingChecks, group).map((check) => ({
     name: inlineCode(check.name),
-    status: checkKind === "required" ? "❌ Failed" : "⚠️ Non-blocking",
+    status: checkKind === "required" ? "failed" : "warning",
     nextStep: "Open the failed check, address its diagnostics, then rerun CI.",
     guidance: check.troubleshootingGuide.trim(),
   }));
@@ -1177,7 +1184,7 @@ function buildLabelRequirementSummaries(
 ): RequirementSummary[] {
   return selectByPrecedence(violatedRequiredLabelsRules, group).map((rule) => ({
     name: escapeMarkdown(rule.name),
-    status: "❌ Required",
+    status: rule.awaitingReview ? "awaiting-review" : "action-required",
     nextStep: rule.nextStep,
     guidance: rule.troubleshootingGuide.trim(),
   }));

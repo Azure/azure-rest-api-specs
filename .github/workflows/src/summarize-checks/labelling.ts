@@ -124,6 +124,7 @@ export type { ImpactAssessment };
 export type RequiredLabelRule = {
   name: string;
   nextStep: string;
+  awaitingReview?: boolean;
   precedence: number;
   branches?: string[];
   anyPrerequisiteLabels?: string[];
@@ -789,6 +790,7 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
     anyPrerequisiteLabels: ["data-plane-review-requested"],
     anyRequiredLabels: ["data-plane-review-signoff"],
     name: "Data-plane API review",
+    awaitingReview: true,
     nextStep: "Request API stewardship review and wait for `data-plane-review-signoff`.",
     troubleshootingGuide: paragraph(
       `Your PR requires an API stewardship review as it introduces a new data-plane API`,
@@ -990,6 +992,7 @@ const rulesPri0ArmRev: RequiredLabelRule[] = [
     anyPrerequisiteLabels: ["WaitForARMFeedback"],
     anyRequiredLabels: ["ARMSignedOff"],
     name: "ARM API review",
+    awaitingReview: true,
     nextStep: "Wait for ARM reviewer feedback. [Review queue](https://aka.ms/azsdk/pr-arm-review).",
     troubleshootingGuide: wrapInArmReviewMessage([
       `This PR is awaiting ARM reviewer feedback (label: \`WaitForARMFeedback\`).`,
@@ -1049,6 +1052,7 @@ const rulesPri1Suppressions: RequiredLabelRule[] = [
     anyPrerequisiteLabels: ["SuppressionReviewRequired"],
     anyRequiredLabels: ["Approved-Suppression"],
     name: "AutoRest suppressions",
+    awaitingReview: true,
     nextStep: "Request suppression review and `Approved-Suppression` approval.",
     troubleshootingGuide: paragraph(
       `The suppressions added to the AutoRest config files (README.mds) require review.`,
@@ -1115,6 +1119,7 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved],
     name: "Go SDK suppressions",
+    awaitingReview: true,
     nextStep: "Request approval for the changed Go SDK breaking-change suppressions.",
     troubleshootingGuide: paragraph(
       `Your PR modified the suppressions for Go SDK breaking changes (label:`,
@@ -1126,6 +1131,7 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppressionApproved],
     name: "JavaScript SDK suppressions",
+    awaitingReview: true,
     nextStep: "Request approval for the changed JavaScript SDK breaking-change suppressions.",
     troubleshootingGuide: paragraph(
       `Your PR modified the suppressions for JavaScript SDK breaking changes (label:`,
@@ -1137,6 +1143,7 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppressionApproved],
     name: "Python SDK suppressions",
+    awaitingReview: true,
     nextStep: "Request approval for the changed Python SDK breaking-change suppressions.",
     troubleshootingGuide: paragraph(
       `Your PR modified the suppressions for Python SDK breaking changes (label:`,
@@ -1149,6 +1156,7 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppressionApproved],
     name: "Python track-2 SDK suppressions",
+    awaitingReview: true,
     nextStep: "Request approval for the changed Python track-2 SDK breaking-change suppressions.",
     troubleshootingGuide: paragraph(
       `Your PR modified the suppressions for Python track-2 SDK breaking changes (label:`,
@@ -1243,6 +1251,7 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
     allPrerequisiteAbsentLabels: ["package-name-approved"],
     anyRequiredLabels: ["package-name-approved"],
     name: "SDK package names",
+    awaitingReview: true,
     nextStep:
       "Ask language architects to approve the pending package names. See the package-name review comment.",
     troubleshootingGuide: renderMarkdownDoc([
@@ -1276,6 +1285,7 @@ const rulesPri1TypeSpecSuppressions = [
     anyPrerequisiteLabels: [TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL],
     anyRequiredLabels: [TYPESPEC_SUPPRESSIONS_APPROVED_LABEL],
     name: "TypeSpec suppressions",
+    awaitingReview: true,
     nextStep: "Request approval for the suppressions listed in the TypeSpec review comment.",
     troubleshootingGuide: renderMarkdownDoc([
       `This PR introduced or changed TypeSpec suppressions that require review.`,
