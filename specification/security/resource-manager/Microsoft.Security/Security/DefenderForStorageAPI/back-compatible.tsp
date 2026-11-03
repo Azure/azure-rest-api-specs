@@ -9,12 +9,19 @@ using Common;
 @@Legacy.flattenProperty(CloudError.error);
 
 @@clientLocation(DefenderForStorageSettings.get, "DefenderForStorage");
+@@clientLocation(DefenderForStorageSettings.createSync, "DefenderForStorage");
+@@clientName(
+  DefenderForStorageSettings.createSync::parameters.resource,
+  "defenderForStorageSetting"
+);
 @@clientLocation(DefenderForStorageSettings.create, "DefenderForStorage");
 @@clientName(
   DefenderForStorageSettings.create::parameters.resource,
   "defenderForStorageSetting"
 );
 @@clientLocation(DefenderForStorageSettings.list, "DefenderForStorage");
+@@clientLocation(DefenderForStorageOperationStatus.get, "DefenderForStorage");
+@@clientName(DefenderForStorageOperationStatus.get, "GetOperationStatus");
 @@clientLocation(
   DefenderForStorageSettings.startMalwareScan,
   "DefenderForStorage"
@@ -25,5 +32,9 @@ using Common;
 );
 @@clientLocation(
   DefenderForStorageSettings.getMalwareScan,
+  "DefenderForStorage"
+);
+@@clientLocation(
+  DefenderForStorageSettings.listMalwareScans,
   "DefenderForStorage"
 );
