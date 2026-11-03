@@ -235,6 +235,11 @@ stages:
           - script: |
               set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
               optional_params=""
+              typespec_emitter_params=()
+              # Azure DevOps leaves undefined macros unexpanded.
+              if [[ -n "${TYPE_SPEC_EMITTER:-}" && "$TYPE_SPEC_EMITTER" != '$('*')' ]]; then
+                typespec_emitter_params=(--typespec-emitter "$TYPE_SPEC_EMITTER")
+              fi
               sdk_gen_info="Configurations: "
 
               if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
@@ -291,12 +296,14 @@ stages:
                 --lang $(SdkRepoName) \
                 --commit $updatedSpecRepoCommit \
                 --spec-repo-url ${{ parameters.SpecRepoUrl }} \
+                "${typespec_emitter_params[@]}" \
                 $optional_params || true # return true always to suppress exit error logging
             displayName: "Generate SDK"
             ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
               continueOnError: true
             env:
               npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+              TYPE_SPEC_EMITTER: $(TypeSpecEmitter)
 
           - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
             parameters:
