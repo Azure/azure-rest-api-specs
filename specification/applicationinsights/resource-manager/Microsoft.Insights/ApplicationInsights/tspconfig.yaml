@@ -40,6 +40,23 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-ts-provisioning":
+    emitter-output-dir: "{output-dir}/{service-dir}/provisioning-applicationinsights"
+    azure-sdk-for-js: true
+    generate-test: true
+    package-details:
+      name: "@azure/provisioning-applicationinsights"
+    api-version:
+      - namespace: "Components"
+        version: "2020-02-02"
+      - namespace: "ComponentLinkedStorageAccountApi"
+        version: "2020-03-01-preview"
+      - namespace: "WebTestsApi"
+        version: "2022-06-15"
+      - namespace: "WorkbooksApi"
+        version: "2023-06-01"
+      - namespace: "WorkbookTemplatesApi"
+        version: "2020-11-20"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
