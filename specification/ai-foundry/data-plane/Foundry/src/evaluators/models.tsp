@@ -149,20 +149,6 @@ model RubricScoring {
   mode?: RubricScoringMode = RubricScoringMode.likert;
 }
 
-@doc("The deterministic overall rubric acceptance decision.")
-@added(Versions.v1)
-@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
-union RubricScoringDecision {
-  @doc("Applicable dimensions meet the selected scoring rule.")
-  pass: "pass",
-
-  @doc("The selected scoring rule fails.")
-  fail: "fail",
-
-  @doc("No rubric dimension applies.")
-  not_applicable: "not_applicable",
-}
-
 @doc("Fields shared by Boolean and Likert results for one rubric dimension.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
@@ -221,9 +207,6 @@ model BooleanRubricResultProperties {
   @doc("The resolved Boolean scoring mode.")
   mode: "boolean";
 
-  @doc("Overall decision from the Boolean scoring rule.")
-  decision: RubricScoringDecision;
-
   @doc("One Boolean judgment for every configured dimension.")
   dimension_results: BooleanRubricDimensionResult[];
 
@@ -236,9 +219,6 @@ model BooleanRubricResultProperties {
 model LikertRubricResultProperties {
   @doc("The resolved Likert scoring mode.")
   mode: "likert";
-
-  @doc("Overall decision from the Likert scoring rule.")
-  decision: RubricScoringDecision;
 
   @doc("One Likert judgment for every configured dimension.")
   dimension_results: LikertRubricDimensionResult[];
