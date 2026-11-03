@@ -2187,6 +2187,15 @@ model SiteProperties {
   outboundVnetRouting?: OutboundVnetRouting;
 
   /**
+   * <code>true</code> to enable outbound public IPv6 connectivity; otherwise, <code>false</code>.
+   * Always enabled and not configurable for Windows apps. For Linux apps, defaults to <code>false</code> and can be configured.
+   * For Linux apps, this property takes precedence over the WEBSITE_NETWORK_LINUX_OUTBOUND_DISABLE_IPV6 app setting.
+   */
+  @added(Versions.v2026_11_15)
+  @encodedName("application/json", "outboundPublicIPv6Enabled")
+  outboundPublicIpv6Enabled?: boolean;
+
+  /**
    * Configuration of an App Service app. This property is not returned in response to normal create and read requests since it may contain sensitive information.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
@@ -9701,6 +9710,15 @@ model SitePatchResourceProperties {
    * Property to configure various DNS related settings for a site.
    */
   dnsConfiguration?: SiteDnsConfig;
+
+  /**
+   * <code>true</code> to enable outbound public IPv6 connectivity; otherwise, <code>false</code>.
+   * Always enabled and not configurable for Windows apps. For Linux apps, defaults to <code>false</code> and can be configured.
+   * For Linux apps, this property takes precedence over the WEBSITE_NETWORK_LINUX_OUTBOUND_DISABLE_IPV6 app setting.
+   */
+  @added(Versions.v2026_11_15)
+  @encodedName("application/json", "outboundPublicIPv6Enabled")
+  outboundPublicIpv6Enabled?: boolean;
 
   /**
    * Configuration of the app.
