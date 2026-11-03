@@ -42,7 +42,6 @@ options:
     inject-spans: true
   "@azure-tools/typespec-ts-provisioning":
     emitter-output-dir: "{output-dir}/{service-dir}/provisioning-applicationinsights"
-    azure-sdk-for-js: true
     generate-test: true
     package-details:
       name: "@azure/provisioning-applicationinsights"
@@ -57,6 +56,20 @@ options:
         version: "2023-06-01"
       - namespace: "WorkbookTemplatesApi"
         version: "2020-11-20"
+      - namespace: "ComponentAPIs"
+        version: "2015-05-01"
+      - namespace: "Favorites"
+        version: "2015-05-01"
+      - namespace: "AnalyticsItems"
+        version: "2015-05-01"
+      - namespace: "DeletedWorkbookApi"
+        version: "2024-02-01-preview"
+      - namespace: "LiveTokenApi"
+        version: "2021-10-14"
+      - namespace: "WebTestLocation"
+        version: "2015-05-01"
+      - namespace: "WorkBookOperations"
+        version: "2021-03-08"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
