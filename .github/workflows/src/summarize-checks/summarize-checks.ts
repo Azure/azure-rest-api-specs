@@ -1071,28 +1071,21 @@ function getCommentBody(
     status = "SUCCESS";
   }
 
-  const nextRequirements = [
+  const blockingRequirements = [
     ...buildLabelRequirementSummaries(violatedRequiredLabelsRules),
     ...buildFailingCheckSummaries(failingReqChecksInfo, "required"),
     ...pendingRequirements,
   ];
-  const remainingRequirements = [
-    ...buildLabelRequirementSummaries(violatedRequiredLabelsRules, "remaining"),
-    ...buildFailingCheckSummaries(failingReqChecksInfo, "required", "remaining"),
-  ];
-  const nonBlockingChecks = [
-    ...buildFailingCheckSummaries(failingFyiChecksInfo, "FYI"),
-    ...buildFailingCheckSummaries(failingFyiChecksInfo, "FYI", "remaining"),
-  ];
-  const guidance = [...nextRequirements, ...remainingRequirements, ...nonBlockingChecks]
+  const nonBlockingChecks = buildFailingCheckSummaries(failingFyiChecksInfo, "FYI");
+  const guidance = [...blockingRequirements, ...nonBlockingChecks]
     .filter((requirement) => requirement.guidance)
     .map((requirement) => section(requirement.name, requirement.guidance));
 
   const body: MarkdownDoc = [
     headline,
     buildRequirementsTable(
-      nextRequirements.length > 0
-        ? nextRequirements
+      blockingRequirements.length > 0
+        ? blockingRequirements
         : [
             {
               name: "Automated requirements",
@@ -1101,12 +1094,6 @@ function getCommentBody(
             },
           ],
     ),
-    remainingRequirements.length > 0
-      ? details(
-          `Other outstanding requirements (${remainingRequirements.length})`,
-          buildRequirementsTable(remainingRequirements),
-        )
-      : undefined,
     nonBlockingChecks.length > 0
       ? details(
           `Non-blocking failures (${nonBlockingChecks.length})`,
@@ -1144,50 +1131,42 @@ function buildRequirementsTable(requirements: RequirementSummary[]): string {
   ]);
 }
 
-function selectByPrecedence<T extends { precedence: number }>(
-  items: T[],
-  group: "next" | "remaining",
-): T[] {
-  const minPrecedence = Math.min(...items.map((item) => item.precedence));
-  return items.filter((item) =>
-    group === "next" ? item.precedence === minPrecedence : item.precedence > minPrecedence,
-  );
-}
-
 /**
  * Builds next steps text for failing checks
  * @param failingChecks - Array of failing checks
  * @param checkKind - Kind of check (required or FYI)
- * @returns Table entries for the selected failures.
+ * @returns Table entries for all failures in priority order.
  */
 function buildFailingCheckSummaries(
   failingChecks: CheckMetadata[],
   checkKind: "required" | "FYI",
-  group: "next" | "remaining" = "next",
 ): RequirementSummary[] {
-  return selectByPrecedence(failingChecks, group).map((check) => ({
-    name: inlineCode(check.name),
-    status: checkKind === "required" ? "failed" : "warning",
-    nextStep: "Open the failed check, address its diagnostics, then rerun CI.",
-    guidance: check.troubleshootingGuide.trim(),
-  }));
+  return failingChecks
+    .toSorted((a, b) => a.precedence - b.precedence)
+    .map((check) => ({
+      name: inlineCode(check.name),
+      status: checkKind === "required" ? "failed" : "warning",
+      nextStep: "Open the failed check, address its diagnostics, then rerun CI.",
+      guidance: check.troubleshootingGuide.trim(),
+    }));
 }
 
 /**
  * Builds next steps text for violated required label rules
  * @param violatedRequiredLabelsRules - Array of violated required label rules
- * @returns Table entries for the selected label requirements.
+ * @returns Table entries for all label requirements in priority order.
  */
 function buildLabelRequirementSummaries(
   violatedRequiredLabelsRules: RequiredLabelRule[],
-  group: "next" | "remaining" = "next",
 ): RequirementSummary[] {
-  return selectByPrecedence(violatedRequiredLabelsRules, group).map((rule) => ({
-    name: escapeMarkdown(rule.name),
-    status: rule.awaitingReview ? "awaiting-review" : "action-required",
-    nextStep: rule.nextStep,
-    guidance: rule.troubleshootingGuide.trim(),
-  }));
+  return violatedRequiredLabelsRules
+    .toSorted((a, b) => a.precedence - b.precedence)
+    .map((rule) => ({
+      name: escapeMarkdown(rule.name),
+      status: rule.awaitingReview ? "awaiting-review" : "action-required",
+      nextStep: rule.nextStep,
+      guidance: rule.troubleshootingGuide.trim(),
+    }));
 }
 // #endregion
 

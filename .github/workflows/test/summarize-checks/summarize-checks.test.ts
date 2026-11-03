@@ -522,7 +522,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(status.result).toBe("FAILURE");
     });
 
-    it("keeps later-priority approvals and failures available without displacing next steps", () => {
+    it("shows all blocking approvals and failures in the main table regardless of priority", () => {
       const [comment, status] = summarize({
         labels: [
           "data-plane",
@@ -538,36 +538,16 @@ describe("Summarize Checks Unit Tests", () => {
 
       expect(rows(comment)?.map((row) => row[0])).toEqual([
         "Data-plane API review",
+        "SDK package names",
+        "TypeSpec suppressions",
         "`TypeSpec Validation`",
+        "`Swagger Avocado`",
+        "`Swagger BreakingChange`",
       ]);
-      expect(comment).toContain("<summary>Other outstanding requirements (4)</summary>");
-      expect(comment).toContain("| SDK package names |");
-      expect(comment).toContain("| TypeSpec suppressions |");
-      expect(comment).toContain("| `Swagger Avocado` |");
-      expect(comment).toContain("| `Swagger BreakingChange` |");
+      expect(comment).not.toContain("Other outstanding requirements");
+      expect(comment.split("<details>")[0]).toContain("6 requirements need attention");
       expect(comment).toContain("typespec-suppressions-approved");
       expect(status.result).toBe("FAILURE");
-    });
-
-    it.each([
-      {
-        labels: [
-          "PublishToCustomers",
-          "data-plane-review-requested",
-          "package-name-review-required",
-        ],
-        required: [],
-      },
-      {
-        labels: [],
-        required: [
-          run("TypeSpec Validation", "completed", "failure"),
-          run("Swagger Avocado", "completed", "failure"),
-        ],
-      },
-    ])("counts later-priority requirements separately from next steps %#", (options) => {
-      const [comment] = summarize(options);
-      expect(comment).toContain("<summary>Other outstanding requirements (1)</summary>");
     });
 
     it("removes resolved requirements and their guidance from the next summary", () => {
@@ -627,6 +607,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(rows(comment)?.map((row) => row.slice(0, 2))).toEqual([
         ["Publication intent", "Action required"],
         ["ARM API review", "Awaiting review"],
+        ["ARM review workflow", "Action required"],
         ["`TypeSpec Validation`", "Running"],
         ["`Swagger Avocado`", "Pending"],
       ]);
