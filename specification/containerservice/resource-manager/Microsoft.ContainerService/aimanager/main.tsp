@@ -25,7 +25,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Azure Kubernetes AI Manager api versions.")
 enum Versions {
-  @doc("Azure Kubernetes AI Manager api version 2026-09-02-preview.")
+  @doc("Azure Kubernetes AI Manager api version 2027-01-02-preview.")
   @previewVersion
-  v2026_09_02_preview: "2026-09-02-preview",
+  v2027_01_02_preview: "2027-01-02-preview",
 }
