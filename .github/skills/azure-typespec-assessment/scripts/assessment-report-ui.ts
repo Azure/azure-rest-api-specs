@@ -54,9 +54,6 @@ type ReportRenderHelpers = {
     areaKind: string;
     member: string;
   };
-  directLegacyDownstreamFindings: (
-    findings: LegacyAssessmentFinding[],
-  ) => LegacyAssessmentFinding[];
 };
 type DocumentRenderHelpers = {
   escapeHtml: (value: unknown) => string;
@@ -1466,7 +1463,6 @@ export function renderReportSections(
     sourceLinks,
     legacyEvidence,
     contractAreaParts,
-    directLegacyDownstreamFindings,
   } = helpers;
   const { dimensions } = assessment;
   const items = dimensions.semantic.items ?? [];
@@ -1475,27 +1471,12 @@ export function renderReportSections(
     downstreamPresentationDimension(assessment, options),
     options.downstreamInput,
   );
-  const legacyDownstream = directLegacyDownstreamFindings(
-    dimensions.downstream.legacyFindings ?? [],
-  );
 
   const status = (value: string | undefined) => {
     const label =
       value === "unknown" ? "verdict unknown" : (value?.replaceAll("-", " ") ?? "Not assessed");
     return `<span class="report-badge ${value === "passed" ? "add" : value === "failed" ? "remove" : "unknown"}">${escape(label)}</span>`;
   };
-  const coverageBadge = (value: string | undefined) => {
-    if (!value) return "";
-    const label =
-      value === "complete"
-        ? "complete coverage"
-        : value === "partial"
-          ? "partial coverage"
-          : "coverage blocked";
-    const style = value === "complete" ? "neutral" : "unknown";
-    return `<span class="report-badge ${style} coverage">${label}</span>`;
-  };
-
   const sectionHead = (title: string, description: string, metadata: string) =>
     `<div class="report-section-head"><div><h2>${escape(title)}</h2><p>${escape(description)}</p></div><div class="report-section-meta">${metadata}</div></div>`;
 
@@ -1793,8 +1774,7 @@ export function renderReportSections(
         (type) =>
           `<details class="report-card sdk-contract-card">${summary(escape(type.type.split(".").at(-1)), "Confirmed SDK type finding retained without a deterministic SDK method mapping.", '<span class="report-badge unknown">Method mapping unavailable</span>', affectedIntents(type.semanticIds))}<div class="report-card-body">${typeContent(type)}</div></details>`,
       )
-      .join("") +
-    legacyDownstream.map((finding) => legacyCard(finding, true)).join("");
+      .join("");
 
   const compliance = dimensions.compliance;
   const complianceFindings = [...(compliance.findings ?? []), ...(compliance.legacyFindings ?? [])];
@@ -1968,15 +1948,6 @@ export function renderReportSections(
         downstreamLinks.push(
           `<a class="report-link impact" href="#${type.anchorId}">Downstream: ${escape(type.type.split(".").at(-1))} (SDK type)</a>`,
         );
-      for (const finding of legacyDownstream) {
-        if (
-          finding.relatedSemanticIntents?.includes(item.id) ||
-          related.downstream?.includes(finding.id)
-        )
-          downstreamLinks.push(
-            `<a class="report-link impact" href="#downstream-${anchor(finding.id)}">Downstream: ${escape(finding.title ?? finding.rule)}</a>`,
-          );
-      }
       const impactLinks = unique([...restLinks, ...downstreamLinks]);
       const guidelineIds = unique(
         complianceFindings
@@ -2046,8 +2017,7 @@ export function renderReportSections(
     restCards.length +
     restFindings.filter((finding) => !mappedRest.has(finding.id)).length +
     (dimensions.rest.legacyFindings?.length ?? 0);
-  const downstreamCount =
-    downstream.methods.length + downstream.unmapped.length + legacyDownstream.length;
+  const downstreamCount = downstream.methods.length + downstream.unmapped.length;
   // Semantic intents describe changes, not findings. Stable sorting preserves the header order within each group.
   const sections = [
     {
@@ -2060,11 +2030,11 @@ export function renderReportSections(
     },
     {
       findingCount: restCount,
-      html: `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.rest.verdict ?? restStatus) + coverageBadge(dimensions.rest.coverage) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
+      html: `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.rest.verdict ?? restStatus) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
     },
     {
       findingCount: downstreamCount,
-      html: `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.downstream.verdict ?? downstreamStatus) + coverageBadge(dimensions.downstream.coverage) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
+      html: `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.downstream.verdict ?? downstreamStatus) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
     },
     { findingCount: documentQuality.findings?.length ?? 0, html: documentBody.html },
   ];
