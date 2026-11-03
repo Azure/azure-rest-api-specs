@@ -63,7 +63,8 @@ facts remain explicit rather than being assigned by similarity.
 
 In fast mode, do not read the guideline search procedure or catalog, score
 documents, fetch guidance, or author guideline judgments. Semantic summaries
-remain required for internal evidence correlation, but are not rendered.
+remain required for evidence correlation and are rendered normally with their
+finding links in the unchanged report layout.
 
 Documentation Completeness is assembled deterministically from
 `dimensions/document-quality-input.json`. The Agent neither reads that artifact

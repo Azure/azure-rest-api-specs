@@ -15,14 +15,14 @@ Assess only the user-selected TypeSpec scope, normally before a PR exists. Never
 
 - **Full** (default): report Semantic intents, REST and downstream SDK
   compatibility, Azure Guidelines, and Documentation Completeness.
-- **Fast**: pass `--assessment-mode fast`. Report only REST breaking changes,
-  downstream SDK breaking changes, and Documentation Completeness. Semantic
-  analysis may still run internally to correlate evidence, but Semantic intents
-  are not reported. Azure Guidelines search and judgment are skipped.
+- **Fast**: pass `--assessment-mode fast`. Preserve the full report layout,
+  including Semantic intents, REST and downstream SDK compatibility, Azure
+  Guidelines, and Documentation Completeness. Skip only Azure Guidelines search
+  and judgment; its existing card and section show `0 findings` and `Skipped`.
 
-Fast reports must identify the selected mode and state that Semantic intents and
-Azure Guidelines were skipped. They must not present either skipped dimension
-as passed.
+Fast reports must identify the selected mode and state that Azure Guidelines
+search and judgment were skipped, never passed. Semantic analysis and summaries
+remain required and are displayed with their related finding links.
 
 ## Before starting a local assessment
 
