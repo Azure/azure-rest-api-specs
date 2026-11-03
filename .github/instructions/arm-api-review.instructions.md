@@ -794,11 +794,27 @@ An API version's lifecycle stage governs where it is allowed to live. Check the
 target repository and branch alongside the version's folder, because a version
 can be schema-correct and still be in the wrong place.
 
+- For **every spec PR**, read the **base** repository and `base.ref` from PR
+  metadata and apply the [ARM target repository and branch validation](../skills/azure-api-review/references/api-version-lifecycle-and-branches.md#arm-target-repository-and-branch-validation)
+  before checking each affected API version's lifecycle, folder/name, and
+  declared version. Never substitute the author's source branch.
+- Private `main` is a **read-only mirror** of public `main`, not a direct PR
+  target (APIVER-PRIVATE-MAIN). Check the distinct purposes of private
+  `RPSaaSMaster`, `RPSaaSDev`, and `InternalARMContracts` (APIVER-ARM-BRANCH).
+  Flag obsolete `dev-*`/`ARMCoreRPDev` targets and post a clarifying comment
+  for any other unrecognized repository/branch combination, consulting the
+  [supported ARM repos/branches](https://eng.ms/docs/products/arm/rpaas/swaggeronboarding#supported-github-reposbranches).
 - A `private preview` version **MUST NOT** appear in the public specs repo, on `main` or any other branch. ARM private previews belong on `RPSaaSMaster` in the private specs repo, gated by Azure Feature Exposure Control flags (APIVER-PRIVATE-IN-PUBLIC). A deliberate promotion to public preview is **not** a violation: that is how a private preview goes public. The fix path is [aka.ms/azsdk/move-pr](https://aka.ms/azsdk/move-pr).
-- An `in development` version **MUST NOT** appear in public `main`. A public `release-*` branch is its correct home (APIVER-DEV-IN-MAIN).
+- An `in development` version **MUST NOT** target publication branches: public `main` (APIVER-DEV-IN-MAIN) or private `RPSaaSMaster` (APIVER-ARM-BRANCH). Use public `release-*` or private `RPSaaSDev` as appropriate.
 - A GA version **MUST** sit under a `stable` folder with no `-preview` suffix, and **MUST NOT** be feature-flag gated (APIVER-GA-FOLDER).
 - A public preview version **MUST** sit under a `preview` folder **and** carry a `-preview` suffix, and **MUST NOT** be feature-flag gated (APIVER-PREVIEW-FOLDER).
 - A version with no customers is `in development`, not `private preview`. Do not infer the stage from the version date alone.
+
+Repository/branch findings are **PR-level comments**; do not invent JSON paths
+or source lines for them. Include observed target and lifecycle evidence, affected
+version path/name, linked rule ID, expected branch/lifecycle, and a concise fix.
+When metadata or lifecycle is unknown, ask for clarification instead of assuming
+`main` or making an unsupported blocking finding.
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/api-version-lifecycle-and-branches.md`](../skills/azure-api-review/references/api-version-lifecycle-and-branches.md) for the stage table, severities, and how to handle a stage-versus-placement mismatch.
 
