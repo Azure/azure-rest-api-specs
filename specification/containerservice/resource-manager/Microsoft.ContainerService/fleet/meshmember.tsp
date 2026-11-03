@@ -5,29 +5,37 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerService;
 
-scalar ClusterMeshProfileResourceId
+scalar CrossClusterNetworkingProfileId
   extends Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.ContainerService/fleets/clusterMeshProfiles",
+      type: "Microsoft.ContainerService/fleets/crossClusterNetworkingProfile",
     }
   ]>;
 
 @added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_02_preview)
-@doc("The Mesh Member data for a Fleet Member resource.")
-model MeshProperties {
+@doc("The network profile data for a Fleet Member resource.")
+model NetworkProfileProperties {
+  @doc("The type of cross-cluster networking.")
+  @visibility(Lifecycle.Read)
+  networkType?: NetworkType;
+
   @doc("The Cilium cluster properties.")
   @visibility(Lifecycle.Read)
-  ciliumProperties: CiliumProperties;
+  ciliumProperties?: CiliumProperties;
+
+  @doc("The AppNet cluster properties.")
+  @visibility(Lifecycle.Read)
+  appNetProperties?: AppNetProperties;
 
   @doc("The status of the mesh member.")
   @visibility(Lifecycle.Read)
   status: MeshMemberStatus;
 
-  @doc("Resource id of the cluster mesh profile associated with this mesh member.")
+  @doc("Resource id of the cross-cluster networking profile associated with this fleet member.")
   @visibility(Lifecycle.Read)
-  clusterMeshProfileResourceId: ClusterMeshProfileResourceId;
+  crossClusterNetworkingProfileResourceId: CrossClusterNetworkingProfileId;
 }
 
 @added(Versions.v2026_03_02_preview)
@@ -43,6 +51,20 @@ model CiliumProperties {
   @visibility(Lifecycle.Read)
   name: string;
 }
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
+@doc("The AppNet specific properties of the member cluster.")
+model AppNetProperties {
+  @doc("AppNet requires each cluster to be assigned a unique numeric cluster id. The id is managed by Fleet and cannot be set by the user.")
+  @visibility(Lifecycle.Read)
+  id?: int32;
+
+  @doc("AppNet requires each cluster to be assigned a unique human-readable name. The name is managed by Fleet, based on the Fleet Member name, and cannot be set by the user.")
+  @visibility(Lifecycle.Read)
+  name?: string;
+}
+
 
 @added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_06_01)

@@ -311,6 +311,11 @@ using TypeSpec.Http;
   "ContainerServiceFleetCiliumProperties",
   "csharp"
 );
+@@clientName(
+  AppNetProperties,
+  "ContainerServiceFleetAppNetProperties",
+  "csharp"
+);
 @@clientName(MeshMemberState, "ContainerServiceFleetMeshMemberState", "csharp");
 @@clientName(
   MeshMemberStatus,
@@ -318,8 +323,8 @@ using TypeSpec.Http;
   "csharp"
 );
 @@clientName(
-  MeshProperties,
-  "ContainerServiceFleetMeshMemberProperties",
+  NetworkProfileProperties,
+  "ContainerServiceFleetNetworkProfileProperties",
   "csharp"
 );
 @@clientName(
