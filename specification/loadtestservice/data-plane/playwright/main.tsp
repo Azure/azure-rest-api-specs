@@ -8,6 +8,7 @@ import "./typespec/accesstokens.tsp";
 import "./typespec/testruns.tsp";
 import "./typespec/browsersessions.tsp";
 import "./typespec/secretstore.tsp";
+import "./typespec/browserprofiles.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
