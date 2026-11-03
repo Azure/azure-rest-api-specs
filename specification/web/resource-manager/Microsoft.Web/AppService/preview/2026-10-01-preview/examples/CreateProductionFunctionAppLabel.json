@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "labelName": "production",
+    "api-version": "2026-10-01-preview",
+    "resource": {
+      "properties": {
+        "targetVersionName": "release-2026-10-01"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppLabels/production",
+        "name": "production",
+        "type": "Microsoft.Web/sites/functionAppLabels",
+        "properties": {
+          "activeVersionName": "release-2026-10-01",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppOperationResults/11111111-1111-1111-1111-111111111111?api-version=2026-10-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppLabels/production?api-version=2026-10-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "FunctionAppLabels_CreateOrUpdate",
+  "title": "Create the production Function App label assignment"
+}

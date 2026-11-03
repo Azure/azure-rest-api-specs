@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "versionName": "release-container",
+    "api-version": "2026-10-01-preview",
+    "resource": {
+      "properties": {
+        "functionAppVersionConfig": {
+          "deployment": {
+            "appArtifact": {
+              "type": "containerImage",
+              "reference": "myregistry.azurecr.io/orders:1.4.2"
+            }
+          },
+          "appSettings": {
+            "SampleSetting": "sample-value"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-container",
+        "name": "release-container",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "versionState": "Ready",
+          "functionAppVersionConfig": {
+            "deployment": {
+              "appArtifact": {
+                "type": "containerImage",
+                "reference": "myregistry.azurecr.io/orders:1.4.2"
+              }
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppOperationResults/11111111-1111-1111-1111-111111111111?api-version=2026-10-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-container?api-version=2026-10-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "FunctionAppVersions_Create",
+  "title": "Create a container-image Function App version without SCM upload"
+}
