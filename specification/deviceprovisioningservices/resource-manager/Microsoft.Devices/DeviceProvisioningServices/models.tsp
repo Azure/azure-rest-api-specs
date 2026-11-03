@@ -555,7 +555,7 @@ model IotHubDefinitionDescription {
   hostName?: string;
 
   /**
-   * The ARM resource ID of the linked IoT hub. This does not replace the host name or authentication settings.
+   * The Azure Resource Manager resource ID of the linked IoT hub. This does not replace the host name or authentication settings.
    */
   @added(Versions.v2026_11_02_preview)
   resourceId?: Azure.Core.armResourceIdentifier<[
