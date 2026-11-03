@@ -730,6 +730,11 @@ model ContainerProperties {
   /** Whether immutable storage with versioning is enabled. */
   @Xml.name("ImmutableStorageWithVersioningEnabled")
   isImmutableStorageWithVersioningEnabled?: boolean;
+
+  /** Whether blob level immutable storage is enabled. Only returned for hierarchical namespace enabled accounts. */
+  @added(Versions.v2026_12_06)
+  @Xml.name("BlobLevelImmutableStorageEnabled")
+  isBlobLevelImmutableStorageEnabled?: boolean;
 }
 
 /** Stats for the storage service. */
