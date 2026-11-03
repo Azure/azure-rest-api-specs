@@ -46195,7 +46195,6 @@ components:
       type: object
       required:
         - mode
-        - decision
         - dimension_results
       properties:
         mode:
@@ -46203,9 +46202,6 @@ components:
           enum:
             - boolean
           description: The resolved Boolean scoring mode.
-        decision:
-          $ref: '#/components/schemas/RubricScoringDecision'
-          description: Overall decision from the Boolean scoring rule.
         dimension_results:
           type: array
           items:
@@ -51216,7 +51212,6 @@ components:
       type: object
       required:
         - mode
-        - decision
         - dimension_results
       properties:
         mode:
@@ -51224,9 +51219,6 @@ components:
           enum:
             - likert
           description: The resolved Likert scoring mode.
-        decision:
-          $ref: '#/components/schemas/RubricScoringDecision'
-          description: Overall decision from the Likert scoring rule.
         dimension_results:
           type: array
           items:
@@ -82309,16 +82301,6 @@ components:
           description: Rubric-level scoring mode. Defaults to Likert when scoring is supplied. Omitting scoring preserves existing legacy behavior.
           default: likert
       description: Simple rubric scoring choices. Omission preserves existing legacy scoring.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricScoringDecision:
-      type: string
-      enum:
-        - pass
-        - fail
-        - not_applicable
-      description: The deterministic overall rubric acceptance decision.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview

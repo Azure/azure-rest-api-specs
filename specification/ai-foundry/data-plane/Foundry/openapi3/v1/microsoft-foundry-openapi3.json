@@ -38202,7 +38202,6 @@
         "type": "object",
         "required": [
           "mode",
-          "decision",
           "dimension_results"
         ],
         "properties": {
@@ -38212,10 +38211,6 @@
               "boolean"
             ],
             "description": "The resolved Boolean scoring mode."
-          },
-          "decision": {
-            "$ref": "#/components/schemas/RubricScoringDecision",
-            "description": "Overall decision from the Boolean scoring rule."
           },
           "dimension_results": {
             "type": "array",
@@ -44941,7 +44936,6 @@
         "type": "object",
         "required": [
           "mode",
-          "decision",
           "dimension_results"
         ],
         "properties": {
@@ -44951,10 +44945,6 @@
               "likert"
             ],
             "description": "The resolved Likert scoring mode."
-          },
-          "decision": {
-            "$ref": "#/components/schemas/RubricScoringDecision",
-            "description": "Overall decision from the Likert scoring rule."
           },
           "dimension_results": {
             "type": "array",
@@ -87980,20 +87970,6 @@
           }
         },
         "description": "Simple rubric scoring choices. Omission preserves existing legacy scoring.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "RubricScoringDecision": {
-        "type": "string",
-        "enum": [
-          "pass",
-          "fail",
-          "not_applicable"
-        ],
-        "description": "The deterministic overall rubric acceptance decision.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
