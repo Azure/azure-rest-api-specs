@@ -6614,7 +6614,7 @@ model VirtualMachineExtensionUpdateProperties {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttachDetachDataDisksRequest {
   /**
-   * The list of managed data disks to be attached.
+   * The list of managed data disks to be attached. Requires write access (Microsoft.Compute/disks/write) on each managed disk being attached.
    */
   @identifiers(#["diskId"])
   @minItems(1)
@@ -6629,7 +6629,7 @@ model AttachDetachDataDisksRequest {
 }
 
 /**
- * Describes the data disk to be attached.
+ * Describes the data disk to be attached. Requires write access (Microsoft.Compute/disks/write) on the managed disk being attached.
  */
 model DataDisksToAttach {
   /**
