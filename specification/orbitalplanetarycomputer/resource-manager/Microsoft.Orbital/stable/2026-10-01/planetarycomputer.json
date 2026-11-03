@@ -721,8 +721,7 @@
       "type": "string",
       "description": "The Microsoft Planetary Computer Pro GeoCatalog tier",
       "enum": [
-        "Basic",
-        "Premium"
+        "Basic"
       ],
       "x-ms-enum": {
         "name": "CatalogTier",
@@ -732,71 +731,6 @@
             "name": "Basic",
             "value": "Basic",
             "description": "The basic tier that utilizes shared resources across catalog instances"
-          },
-          {
-            "name": "Premium",
-            "value": "Premium",
-            "description": "The Premium tier that utilizes higher configuration"
-          }
-        ]
-      }
-    },
-    "ComputeTier": {
-      "type": "string",
-      "description": "The Microsoft Planetary Computer Pro Compute tier",
-      "enum": [
-        "Basic",
-        "Standard",
-        "Premium"
-      ],
-      "x-ms-enum": {
-        "name": "ComputeTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "The basic compute tier for the geocatalog"
-          },
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "The standard compute tier for the geocatalog"
-          },
-          {
-            "name": "Premium",
-            "value": "Premium",
-            "description": "The premium compute tier for the geocatalog"
-          }
-        ]
-      }
-    },
-    "DatabaseTier": {
-      "type": "string",
-      "description": "The Microsoft Planetary Computer Pro Database tier",
-      "enum": [
-        "Basic",
-        "Standard",
-        "Premium"
-      ],
-      "x-ms-enum": {
-        "name": "DatabaseTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "The database tier for the geocatalog"
-          },
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "The standard database tier for the geocatalog"
-          },
-          {
-            "name": "Premium",
-            "value": "Premium",
-            "description": "The premium database tier for the geocatalog"
           }
         ]
       }
@@ -819,82 +753,6 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
-    },
-    "GeoCatalogComputeProperties": {
-      "type": "object",
-      "description": "The compute details of the Microsoft Planetary Computer Pro GeoCatalog.",
-      "properties": {
-        "catalogTier": {
-          "type": "string",
-          "description": "The compute properties of the catalog service",
-          "default": "Basic",
-          "enum": [
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeTier",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Basic",
-                "value": "Basic",
-                "description": "The basic compute tier for the geocatalog"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "The standard compute tier for the geocatalog"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "The premium compute tier for the geocatalog"
-              }
-            ]
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "ingestionTier": {
-          "type": "string",
-          "description": "The compute properties of the ingestion service",
-          "default": "Standard",
-          "enum": [
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeTier",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Basic",
-                "value": "Basic",
-                "description": "The basic compute tier for the geocatalog"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "The standard compute tier for the geocatalog"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "The premium compute tier for the geocatalog"
-              }
-            ]
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
     },
     "GeoCatalogListResult": {
       "type": "object",
@@ -947,8 +805,7 @@
           "description": "Tier of the catalog. This cannot be changed after the catalog is created. If not provided, defaults to Basic.",
           "default": "Basic",
           "enum": [
-            "Basic",
-            "Premium"
+            "Basic"
           ],
           "x-ms-enum": {
             "name": "CatalogTier",
@@ -958,11 +815,6 @@
                 "name": "Basic",
                 "value": "Basic",
                 "description": "The basic tier that utilizes shared resources across catalog instances"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "The Premium tier that utilizes higher configuration"
               }
             ]
           },
@@ -1072,14 +924,6 @@
           },
           "readOnly": true
         },
-        "premiumConfiguration": {
-          "$ref": "#/definitions/PremiumConfiguration",
-          "description": "Premium tier configuration. Only valid when `tier` is `Premium`; must be omitted for Basic catalogs. The server will return a validation error if provided with a Basic tier catalog.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "state": {
           "type": "string",
           "description": "The lifecycle state of the GeoCatalog. An empty GeoCatalog may be stopped to reclaim capacity; customer data is retained while stopped.",
@@ -1184,66 +1028,6 @@
             "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
-        }
-      }
-    },
-    "PremiumConfiguration": {
-      "type": "object",
-      "description": "Premium tier configuration properties for a GeoCatalog. Only valid when `tier` is `Premium`; must be omitted for Basic catalogs. The server will return a validation error if provided with a Basic tier catalog.",
-      "properties": {
-        "computeProperties": {
-          "$ref": "#/definitions/GeoCatalogComputeProperties",
-          "description": "The compute properties of the geocatalog",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedStorageCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The capacity of managed storage in Petabytes (minimum 5)",
-          "default": 5,
-          "minimum": 5,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "databaseTier": {
-          "type": "string",
-          "description": "The database tier for the geocatalog",
-          "default": "Basic",
-          "enum": [
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "DatabaseTier",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Basic",
-                "value": "Basic",
-                "description": "The database tier for the geocatalog"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "The standard database tier for the geocatalog"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "The premium database tier for the geocatalog"
-              }
-            ]
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       }
     },
