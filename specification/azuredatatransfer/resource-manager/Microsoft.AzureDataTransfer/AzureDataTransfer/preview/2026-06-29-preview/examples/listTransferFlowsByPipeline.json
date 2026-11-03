@@ -1,0 +1,29 @@
+{
+  "title": "Lists the transfer flows associated with a pipeline",
+  "operationId": "Pipelines_ListTransferFlows",
+  "parameters": {
+    "api-version": "2026-06-29-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "pipelineName": "testPipeline",
+    "body": {
+      "flows": {
+        "status": "Enabled",
+        "dataClassTypes": [
+          "Files",
+          "Messaging"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "flows": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/storageTransferFlows/testStorageTransferFlow",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/testMessagingTransferFlow"
+        ]
+      }
+    }
+  }
+}
