@@ -4,13 +4,9 @@ using Azure.Core.Experimental;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-namespace Azure.AI.Projects {
-  //
-  // Tool inputs -- definitions used before model evaluation to configure agents, threads, and messages
-  //
+namespace Azure.AI.ProjectsInternal {
+  using Azure.AI.Projects;
 
-  // Preview tools (must end with "_preview"):
   union _PreviewAgentToolType {
     a2a_preview: "a2a_preview",
     bing_custom_search_preview: "bing_custom_search_preview",
@@ -26,7 +22,6 @@ namespace Azure.AI.Projects {
     github_copilot_toolset_preview: "github_copilot_toolset_preview",
   }
 
-  // General availability tools:
   union _AgentToolType {
     a2a: "a2a",
     azure_ai_search: "azure_ai_search",
@@ -44,6 +39,79 @@ namespace Azure.AI.Projects {
     microsoft_copilot_toolset_preview: "microsoft_copilot_toolset_preview",
   }
 
+  union _AgentIncludable {
+    "memory_search_call.results",
+  }
+
+  /**
+   * A Index resource.
+   */
+  model IndexResource {
+    /**
+     * An index connection ID in an IndexResource attached to this agent.
+     */
+    project_connection_id?: string;
+
+    /**
+     * The name of an index in an IndexResource attached to this agent.
+     */
+    index_name?: string;
+  }
+
+  /**
+   * A set of project connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools.
+   */
+  model ToolProjectConnectionList {
+    /**
+     * The project connections attached to this tool. There can be a maximum of 1 connection
+     * resource attached to the tool.
+     */
+    @maxItems(1)
+    project_connections?: ToolProjectConnection[];
+  }
+
+  /** Common configuration for an agent implementing the A2A protocol. */
+  model A2AToolBase {
+    /**
+     * Base URL of the agent.
+     */
+    base_url?: url;
+
+    /**
+     * The path to the agent card relative to the `base_url`.
+     * If not provided, defaults to  `/.well-known/agent-card.json`
+     */
+    agent_card_path?: string;
+
+    /**
+     * The connection ID in the project for the A2A server.
+     * The connection stores authentication and other connection details needed to connect to the A2A server.
+     */
+    project_connection_id?: string;
+
+    /**
+     * When `true`, Foundry sends its credentials when fetching the remote
+     * agent's Agent Card. The service defaults to `false` if a value is not
+     * specified by the caller (anonymous fetch).
+     */
+    send_credentials_for_agent_card?: boolean = false;
+  }
+}
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+namespace Azure.AI.Projects {
+  //
+  // Tool inputs -- definitions used before model evaluation to configure agents, threads, and messages
+  //
+
+  // Preview tools (must end with "_preview"):
+  alias _PreviewAgentToolType = Azure.AI.ProjectsInternal._PreviewAgentToolType;
+
+  // General availability tools:
+  alias _AgentToolType = Azure.AI.ProjectsInternal._AgentToolType;
+
+  alias _MicrosoftCopilotAgentToolType = Azure.AI.ProjectsInternal._MicrosoftCopilotAgentToolType;
+
   const PreviewTool = #{ required_previews: #["preview_tool"] };
 
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
@@ -53,9 +121,7 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects._MicrosoftCopilotAgentToolType
   );
 
-  union _AgentIncludable {
-    "memory_search_call.results",
-  }
+  alias _AgentIncludable = Azure.AI.ProjectsInternal._AgentIncludable;
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
@@ -410,20 +476,7 @@ namespace Azure.AI.Projects {
     indexes: AISearchIndexResource[];
   }
 
-  /**
-   * A Index resource.
-   */
-  model IndexResource {
-    /**
-     * An index connection ID in an IndexResource attached to this agent.
-     */
-    project_connection_id?: string;
-
-    /**
-     * The name of an index in an IndexResource attached to this agent.
-     */
-    index_name?: string;
-  }
+  alias IndexResource = Azure.AI.ProjectsInternal.IndexResource;
 
   /**
    * A AI Search Index resource.
@@ -760,17 +813,7 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
   }
 
-  /**
-   * A set of project connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools.
-   */
-  model ToolProjectConnectionList {
-    /**
-     * The project connections attached to this tool. There can be a maximum of 1 connection
-     * resource attached to the tool.
-     */
-    @maxItems(1)
-    project_connections?: ToolProjectConnection[];
-  }
+  alias ToolProjectConnectionList = Azure.AI.ProjectsInternal.ToolProjectConnectionList;
 
   /**
    * Search configuration for Bing Grounding
@@ -944,32 +987,7 @@ namespace Azure.AI.Projects {
     v1_0: "1.0",
   }
 
-  /** Common configuration for an agent implementing the A2A protocol. */
-  model A2AToolBase {
-    /**
-     * Base URL of the agent.
-     */
-    base_url?: url;
-
-    /**
-     * The path to the agent card relative to the `base_url`.
-     * If not provided, defaults to  `/.well-known/agent-card.json`
-     */
-    agent_card_path?: string;
-
-    /**
-     * The connection ID in the project for the A2A server.
-     * The connection stores authentication and other connection details needed to connect to the A2A server.
-     */
-    project_connection_id?: string;
-
-    /**
-     * When `true`, Foundry sends its credentials when fetching the remote
-     * agent's Agent Card. The service defaults to `false` if a value is not
-     * specified by the caller (anonymous fetch).
-     */
-    send_credentials_for_agent_card?: boolean = false;
-  }
+  alias A2AToolBase = Azure.AI.ProjectsInternal.A2AToolBase;
 
   /**
    * An agent implementing the A2A protocol.
