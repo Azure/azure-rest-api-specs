@@ -2,13 +2,28 @@ suppressions:
   azure-sdk-for-js:
     - package: '@azure/arm-webpubsub'
       breaking-changes:
-        - Interface CustomCertificate no longer has parameter systemData
-        - Interface CustomDomain no longer has parameter systemData
-        - Interface PrivateEndpointConnection no longer has parameter systemData
-        - Interface SharedPrivateLinkResource no longer has parameter systemData
-        - Interface WebPubSubHub no longer has parameter systemData
-        - Interface WebPubSubResource no longer has parameter systemData
-        - Parameter location of interface TrackedResource is now required
+        - Removed Interface CustomCertificateList
+        - Removed Interface CustomDomainList
+        - Removed Interface EventListener_2
+        - Removed Interface OperationList
+        - Removed Interface PrivateEndpointConnectionList
+        - Removed Interface PrivateLinkResourceList
+        - Removed Interface ReplicaList
+        - Removed Interface SharedPrivateLinkResourceList
+        - Removed Interface SignalRServiceUsageList
+        - Removed Interface WebPubSubHubList
+        - Removed Interface WebPubSubResourceList
+        - Type of parameter type of interface EventListenerEndpoint is changed from "EventHub" to EventListenerEndpointDiscriminator
+        - Type of parameter type of interface EventListenerFilter is changed from "EventName" to EventListenerFilterDiscriminator
+        - Type of parameter eventListeners of interface WebPubSubHubProperties is changed from EventListener_2[] to EventListener[]
+        - Operation WebPubSub.beginRestartAndWait has a new signature
+        - Operation WebPubSubHubs.beginCreateOrUpdate has a new signature
+        - Operation WebPubSubHubs.beginCreateOrUpdateAndWait has a new signature
+        - Operation WebPubSubHubs.get has a new signature
+        - Operation WebPubSubReplicas.beginRestartAndWait has a new signature
+        - Type alias "EventListenerEndpointUnion" has been changed
+        - Type alias "EventListenerFilterUnion" has been changed
+        - Removed Type Alias KeyType_2
   azure-sdk-for-python:
     - package: azure-mgmt-webpubsub
       breaking-changes:
