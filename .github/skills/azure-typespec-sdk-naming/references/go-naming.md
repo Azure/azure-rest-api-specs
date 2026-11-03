@@ -1,12 +1,12 @@
 # Go Acronym Naming
 
-Load for confirmed Go targets, ARM or data-plane, through the [naming dispatcher](naming-conventions.md). Use only the TypeSpec diff, declarations, documentation, and existing `client.tsp` customizations as naming evidence.
+Load for confirmed Go targets, ARM or data-plane, through the [naming dispatcher](naming-conventions.md). Use the TypeSpec diff, declarations, documentation, existing `client.tsp` customizations, supplied Go SDK API baselines, and documented emitter conversions as naming evidence.
 
 Source: [Go initialism conventions](https://go.dev/wiki/CodeReviewComments#initialisms). Apply the following checks in order.
 
 ## Preserve Existing Names
 
-Use the TypeSpec diff to identify newly added declarations and members. Leave existing names and their Go overrides unchanged. Modifying a declaration does not make its name new.
+Use the TypeSpec diff to identify candidate additions, but do not assume a newly added declaration represents a new Go API name: it may already exist in the SDK, for example during a Swagger-to-TypeSpec migration. Leave existing names and their Go overrides unchanged, including those in preview or unreleased API versions. Use supplied SDK baseline evidence to resolve compatibility; when compatibility is uncertain, report only the affected naming decision as blocked rather than guessing. Modifying a declaration does not make its name new.
 
 ## Follow Related Names
 
