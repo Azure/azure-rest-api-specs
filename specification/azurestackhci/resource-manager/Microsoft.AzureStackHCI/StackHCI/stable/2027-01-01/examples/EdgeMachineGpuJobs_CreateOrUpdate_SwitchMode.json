@@ -1,18 +1,18 @@
 {
-  "title": "EdgeMachineGpuJobs_CreateOrUpdate_RemovePartition",
+  "title": "EdgeMachineGpuJobs_CreateOrUpdate_SwitchMode",
   "operationId": "EdgeMachineGpuJobs_CreateOrUpdate",
   "parameters": {
-    "api-version": "2027-01-15-preview",
+    "api-version": "2027-01-01",
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "ArcInstance-rg",
     "edgeMachineName": "machine1",
     "gpuName": "default",
-    "jobsName": "RemovePartition",
+    "jobsName": "SwitchMode",
     "resource": {
       "properties": {
-        "jobType": "RemovePartition",
+        "jobType": "SwitchMode",
         "deploymentMode": "Validate",
-        "vmId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.Compute/virtualMachines/workload-vm1"
+        "mode": "GPUP"
       }
     }
   },
@@ -21,9 +21,9 @@
       "body": {
         "properties": {
           "gpuId": "default",
-          "jobType": "RemovePartition",
+          "jobType": "SwitchMode",
           "deploymentMode": "Validate",
-          "vmId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.Compute/virtualMachines/workload-vm1",
+          "mode": "GPUP",
           "provisioningState": "Succeeded",
           "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
           "startTimeUtc": "2024-12-03T11:31:42.387Z",
@@ -36,8 +36,8 @@
               "steps": [
                 {
                   "fullStepIndex": "0",
-                  "name": "Validate removal request",
-                  "description": "Validate GPU partition removal prerequisites.",
+                  "name": "Validate mode switch",
+                  "description": "Check prerequisites for switching GPU mode.",
                   "startTimeUtc": "2024-12-03T11:31:42.387Z",
                   "endTimeUtc": "2024-12-03T11:31:42.387Z",
                   "status": "Success",
@@ -50,8 +50,8 @@
               "steps": [
                 {
                   "fullStepIndex": "0",
-                  "name": "Remove partition",
-                  "description": "Remove the GPU partition from the target virtual machine.",
+                  "name": "Switch GPU mode",
+                  "description": "Switch the GPU to the requested mode.",
                   "startTimeUtc": "2024-12-03T11:31:42.387Z",
                   "endTimeUtc": "2024-12-03T11:31:42.387Z",
                   "status": "Success",
@@ -61,8 +61,8 @@
             }
           }
         },
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/RemovePartition",
-        "name": "RemovePartition",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/SwitchMode",
+        "name": "SwitchMode",
         "type": "Microsoft.AzureStackHCI/edgeMachines/gpus/jobs",
         "systemData": {
           "createdBy": "user1",
@@ -81,9 +81,9 @@
       "body": {
         "properties": {
           "gpuId": "default",
-          "jobType": "RemovePartition",
+          "jobType": "SwitchMode",
           "deploymentMode": "Validate",
-          "vmId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.Compute/virtualMachines/workload-vm1",
+          "mode": "GPUP",
           "provisioningState": "Succeeded",
           "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
           "startTimeUtc": "2024-12-03T11:31:42.387Z",
@@ -96,8 +96,8 @@
               "steps": [
                 {
                   "fullStepIndex": "0",
-                  "name": "Validate removal request",
-                  "description": "Validate GPU partition removal prerequisites.",
+                  "name": "Validate mode switch",
+                  "description": "Check prerequisites for switching GPU mode.",
                   "startTimeUtc": "2024-12-03T11:31:42.387Z",
                   "endTimeUtc": "2024-12-03T11:31:42.387Z",
                   "status": "Success",
@@ -110,8 +110,8 @@
               "steps": [
                 {
                   "fullStepIndex": "0",
-                  "name": "Remove partition",
-                  "description": "Remove the GPU partition from the target virtual machine.",
+                  "name": "Switch GPU mode",
+                  "description": "Switch the GPU to the requested mode.",
                   "startTimeUtc": "2024-12-03T11:31:42.387Z",
                   "endTimeUtc": "2024-12-03T11:31:42.387Z",
                   "status": "Success",
@@ -121,8 +121,8 @@
             }
           }
         },
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/RemovePartition",
-        "name": "RemovePartition",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/SwitchMode",
+        "name": "SwitchMode",
         "type": "Microsoft.AzureStackHCI/edgeMachines/gpus/jobs",
         "systemData": {
           "createdBy": "user1",

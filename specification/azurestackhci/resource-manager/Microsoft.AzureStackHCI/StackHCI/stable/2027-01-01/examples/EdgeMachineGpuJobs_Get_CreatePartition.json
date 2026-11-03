@@ -1,22 +1,22 @@
 {
-  "title": "EdgeMachineGpuJobs_Get_AssignPartition",
+  "title": "EdgeMachineGpuJobs_Get_CreatePartition",
   "operationId": "EdgeMachineGpuJobs_Get",
   "parameters": {
-    "api-version": "2027-01-15-preview",
+    "api-version": "2027-01-01",
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "ArcInstance-rg",
     "edgeMachineName": "machine1",
     "gpuName": "default",
-    "jobsName": "AssignPartition"
+    "jobsName": "CreatePartition"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
           "gpuId": "default",
-          "jobType": "AssignPartition",
+          "jobType": "CreatePartition",
           "deploymentMode": "Validate",
-          "vmId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.Compute/virtualMachines/workload-vm1",
+          "partitionCount": 4,
           "provisioningState": "Succeeded",
           "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
           "startTimeUtc": "2024-12-03T11:31:42.387Z",
@@ -29,10 +29,10 @@
               "steps": [
                 {
                   "fullStepIndex": "0",
-                  "name": "Validate partition assignment",
-                  "description": "Validate GPU partition assignment prerequisites.",
-                  "startTimeUtc": "2024-12-03T11:31:40.000Z",
-                  "endTimeUtc": "2024-12-03T11:31:41.000Z",
+                  "name": "Validate partition creation",
+                  "description": "Validate GPU partition creation prerequisites.",
+                  "startTimeUtc": "2024-12-03T11:31:42.387Z",
+                  "endTimeUtc": "2024-12-03T11:31:42.387Z",
                   "status": "Success",
                   "steps": []
                 }
@@ -43,10 +43,10 @@
               "steps": [
                 {
                   "fullStepIndex": "0",
-                  "name": "Assign GPU partition",
-                  "description": "Assign GPU partition to workload virtual machine.",
-                  "startTimeUtc": "2024-12-03T11:31:41.100Z",
-                  "endTimeUtc": "2024-12-03T11:31:42.000Z",
+                  "name": "Create partitions",
+                  "description": "Create GPU partitions on the edge machine GPU.",
+                  "startTimeUtc": "2024-12-03T11:31:42.387Z",
+                  "endTimeUtc": "2024-12-03T11:31:42.387Z",
                   "status": "Success",
                   "steps": []
                 }
@@ -54,8 +54,8 @@
             }
           }
         },
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/AssignPartition",
-        "name": "AssignPartition",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/CreatePartition",
+        "name": "CreatePartition",
         "type": "Microsoft.AzureStackHCI/edgeMachines/gpus/jobs",
         "systemData": {
           "createdBy": "user1",
