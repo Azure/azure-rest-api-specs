@@ -209,3 +209,39 @@ export function resolveProjectApiVersions({
     headCommit,
   });
 }
+
+export function resolveNewProjectApiVersions({
+  currentWorktree,
+  project,
+  headCommit,
+}: {
+  currentWorktree: string;
+  project: string;
+  headCommit: string;
+}) {
+  const root = path.join(currentWorktree, project);
+  const current = extractApiVersions(tspFiles(root).map((file) => fs.readFileSync(file, "utf8")));
+  if (current.versioned && !current.versions.length) {
+    throw new Error("Unable to resolve API versions from the versioned TypeSpec project.");
+  }
+  const currentVersion = latest(current.versions);
+  return {
+    mode: "new-project",
+    baseline: {
+      sourceRevision: "absent",
+      reason: "No pre-existing contract exists because the project is absent from the baseline.",
+    },
+    target: {
+      sourceRevision: "current",
+      commit: headCommit,
+      apiVersion: currentVersion,
+      reason: current.versioned ? "latest-version" : "unversioned",
+    },
+    base: undefined,
+    current: currentVersion,
+    baseReason: "project-absent-from-baseline",
+    currentReason: current.versioned ? "latest-version" : "unversioned",
+    addedCurrentVersions: current.versions,
+    available: { base: [], current: current.versions },
+  };
+}

@@ -1,5 +1,11 @@
 import { assert, test } from "vitest";
-import { extractApiVersions, selectApiVersionPair } from "../scripts/api-version-selection.ts";
+import fs from "node:fs";
+import path from "node:path";
+import {
+  extractApiVersions,
+  resolveNewProjectApiVersions,
+  selectApiVersionPair,
+} from "../scripts/api-version-selection.ts";
 
 const source = (members: string) => `
 @versioned(Versions)
@@ -190,4 +196,26 @@ void test("compares a versioned base with an unversioned target", () => {
   assert.equal(pair.target.sourceRevision, "current");
   assert.equal(pair.target.apiVersion, undefined);
   assert.equal(pair.currentReason, "unversioned");
+});
+
+void test("selects only the target contract for a newly added project", (context) => {
+  const work = fs.mkdtempSync(path.join(process.cwd(), ".new-project-version-test-"));
+  context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
+  const project = "specification/widgets/Widgets";
+  fs.mkdirSync(path.join(work, project), { recursive: true });
+  fs.writeFileSync(path.join(work, project, "main.tsp"), source('v2026_01_01: "2026-01-01",'));
+
+  const pair = resolveNewProjectApiVersions({
+    currentWorktree: work,
+    project,
+    headCommit: "head-sha",
+  });
+
+  assert.equal(pair.mode, "new-project");
+  assert.equal(pair.baseline.sourceRevision, "absent");
+  assert.match(pair.baseline.reason, /No pre-existing contract exists/);
+  assert.equal(pair.target.sourceRevision, "current");
+  assert.equal(pair.target.commit, "head-sha");
+  assert.equal(pair.target.apiVersion, "2026-01-01");
+  assert.deepEqual(pair.available, { base: [], current: ["2026-01-01"] });
 });
