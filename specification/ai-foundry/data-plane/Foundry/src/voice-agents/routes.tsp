@@ -2,7 +2,7 @@ import "../common/models.tsp";
 import "../agents/models.tsp";
 import "./models.tsp";
 import "./protocol.tsp";
-import "./campaign-jobs.tsp";
+import "./campaign-routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;

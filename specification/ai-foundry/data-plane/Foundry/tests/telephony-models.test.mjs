@@ -123,3 +123,62 @@ for (const version of ["v1", "virtual-public-preview"]) {
     }
   });
 }
+
+test("Campaign and direct CallJob accept the same structured-input value type", () => {
+  const campaign = projects.models
+    .get("TelephonyRecipient")
+    .properties.get("structured_inputs");
+  const direct = projects.models
+    .get("TelephonyCallJobConfiguration")
+    .properties.get("structured_inputs");
+  assert.equal(campaign.optional, true);
+  assert.equal(direct.optional, true);
+  assert.equal(campaign.type.kind, "Model");
+  assert.equal(campaign.type.indexer.key.name, "string");
+  assert.equal(campaign.type.indexer.value.name, "unknown");
+  assert.equal(campaign.type.indexer.value, direct.type.indexer.value);
+  assert.equal(projects.unions.has("TelephonyCampaignInputValue"), false);
+});
+
+for (const version of ["v1", "virtual-public-preview"]) {
+  test(`${version}: emitted Campaign dictionary matches direct CallJob without scalar restrictions`, async () => {
+    const document = JSON.parse(
+      await readFile(
+        resolve(project, `openapi3/${version}/microsoft-foundry-openapi3.json`),
+        "utf8",
+      ),
+    );
+    const schemas = document.components.schemas;
+    const campaign = schemas.TelephonyRecipient.properties.structured_inputs;
+    const direct = schemas.TelephonyCallJob.properties.structured_inputs;
+    const withoutDescription = ({ description, ...schema }) => schema;
+    assert.deepEqual(withoutDescription(campaign), withoutDescription(direct));
+    assert.equal(campaign.type, "object");
+    assert.deepEqual(campaign.additionalProperties, {});
+    assert.equal(schemas.TelephonyCampaignInputValue, undefined);
+    assert.match(campaign.description, /null, objects and arrays/);
+    assert.match(campaign.description, /required\/default\/schema/);
+    assert.match(
+      campaign.description,
+      /Parsing follows the same rules as direct CallJobs/,
+    );
+    assert.doesNotMatch(
+      campaign.description,
+      /128 keys|1-256 characters|16 KiB|finite binary64|128 characters/,
+    );
+    assert.match(
+      campaign.description,
+      /Campaign request\s+and row byte limits still apply/,
+    );
+    const dataset =
+      schemas.TelephonyCampaignCreate.properties.recipient_dataset;
+    assert.match(
+      dataset.description,
+      /same structured-input parsing and Agent processing/,
+    );
+    assert.match(
+      dataset.description,
+      /Duplicate CSV headers or top-level JSON row fields/,
+    );
+  });
+}

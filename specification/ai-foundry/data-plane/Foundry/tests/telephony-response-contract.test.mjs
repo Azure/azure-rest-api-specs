@@ -49,6 +49,37 @@ function schema(document, value) {
 }
 
 for (const version of ["v1", "virtual-public-preview"]) {
+  test(`${version}: Campaign name comes from the route and deletion has no tombstone body`, async () => {
+    const document = JSON.parse(
+      await readFile(
+        resolve(project, `openapi3/${version}/microsoft-foundry-openapi3.json`),
+        "utf8",
+      ),
+    );
+    const operations = document.paths[item];
+    const name = operations.put.parameters.find(
+      (parameter) => parameter.name === "campaign_name",
+    );
+    assert.equal(name.in, "path");
+    assert.equal(name.required, true);
+    const input = schema(
+      document,
+      operations.put.requestBody.content["application/json"].schema,
+    );
+    assert.equal(input.properties.name, undefined);
+    assert.equal(input.properties.status, undefined);
+    assert.equal(input.properties.progress, undefined);
+    const output = schema(
+      document,
+      operations.get.responses["200"].content["application/json"].schema,
+    );
+    assert(output.required.includes("name"));
+    assert.equal(output.properties.name.readOnly, true);
+    assert.equal(operations.patch, undefined);
+    for (const status of ["202", "204"])
+      assert.equal(operations.delete.responses[status].content, undefined);
+  });
+
   test(`${version}: every CallJob response requires its normalized retry policy`, async () => {
     const document = JSON.parse(
       await readFile(
@@ -234,7 +265,7 @@ test("acceptance examples do not claim a resolved Agent version and include poll
     assert.equal(example.responses["202"].headers["Cache-Control"], "no-store");
   }
   const source = await readFile(
-    resolve(project, "src/voice-agents/campaign-jobs.tsp"),
+    resolve(project, "src/voice-agents/campaign-routes.tsp"),
     "utf8",
   );
   assert.doesNotMatch(source, /param:\s*"inputs"/);

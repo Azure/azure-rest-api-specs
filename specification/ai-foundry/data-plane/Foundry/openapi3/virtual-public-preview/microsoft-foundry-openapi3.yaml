@@ -5787,6 +5787,9 @@ paths:
       summary: Create or replace a failed telephony campaign
       description: |-
         Creates a named Campaign (201) or fully replaces a failed Campaign's inputs (200), authorizing calls after validation.
+        No PATCH or partial updates are supported. Only failed preparation can be replaced; all other states reject changes.
+        Replacement may change connection_name, source, recipients/recipient_dataset, schedule and retry_policy.
+        The route Agent and Campaign name cannot change; server-owned status, progress and resolved versions are not writable.
         Shape/authorization checks precede acceptance. Replacement requires exact If-Match and fresh Operation-Id:
         missing replacement ID returns 400, stale If-Match returns 412, and nonfailed state returns 409.
         If-Match on an absent Campaign returns 412; it never recreates a deleted resource.
@@ -6039,6 +6042,8 @@ paths:
         Cleanup targets the accepted Campaign instance, never a later namesake. Failure leaves deleting/error; resume with fresh
         Operation-Id and current If-Match to create a new monitor, update Campaign.operation_id and preserve the validation round.
         Identical retained Operation-Id retries replay the original 202 before stale-token checks, including after deletion/name reuse.
+        After cleanup, Campaign GET returns 404 and lists omit it; no Campaign tombstone is returned.
+        The retained monitor/replay records support recovery, not a final resource result. Clients can discard the monitor after completion.
         Conflicting IDs return 409. Without replay, absent names return 204 and stale tokens return 412. Current-token DELETE during
         cleanup reuses its monitor; a fresh ID aliases the same operation. Success frees the name but retains replay/duplicate-dialing safeguards.
       parameters:
@@ -95666,7 +95671,7 @@ components:
           readOnly: true
         name:
           $ref: '#/components/schemas/TelephonyCampaignName'
-          description: Immutable customer-chosen name, unique within the project and Agent.
+          description: Immutable name supplied as campaign_name in the PUT path, not the request body; echoed in responses. Unique within the project and Agent.
           readOnly: true
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
