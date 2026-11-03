@@ -34,13 +34,13 @@ model SecretStore {
 
   @doc("Secret configurations keyed by domain.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  secretConfigurations: Record<SecretConfiguration>;
+  domainSecrets: Record<SecretConfiguration>;
 }
 
 @doc("Key Vault secret references for a domain.")
 @added(Versions.v2026_12_01_preview)
 model SecretConfiguration {
-  @doc("Secret aliases mapped to Key Vault secret URLs, not secret values.")
+  @doc("Secret aliases mapped to Key Vault secret URLs, not secret values. If version is not specified, the latest version is used.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   secrets: Record<url>;
 }

@@ -1470,9 +1470,6 @@
         "x-ms-examples": {
           "Create or update a secret store": {
             "$ref": "./examples/SecretStores_CreateOrUpdate.json"
-          },
-          "Create or update a secret store with minimum properties": {
-            "$ref": "./examples/SecretStores_CreateOrUpdate_Minimum.json"
           }
         }
       },
@@ -2826,7 +2823,7 @@
       "properties": {
         "secrets": {
           "type": "object",
-          "description": "Secret aliases mapped to Key Vault secret URLs, not secret values.",
+          "description": "Secret aliases mapped to Key Vault secret URLs, not secret values. If version is not specified, the latest version is used.",
           "additionalProperties": {
             "format": "uri",
             "type": "string"
@@ -2848,7 +2845,7 @@
       "properties": {
         "secrets": {
           "type": "object",
-          "description": "Secret aliases mapped to Key Vault secret URLs, not secret values.",
+          "description": "Secret aliases mapped to Key Vault secret URLs, not secret values. If version is not specified, the latest version is used.",
           "additionalProperties": {
             "format": "uri",
             "type": "string"
@@ -2895,7 +2892,7 @@
             "create"
           ]
         },
-        "secretConfigurations": {
+        "domainSecrets": {
           "type": "object",
           "description": "Secret configurations keyed by domain.",
           "additionalProperties": {
@@ -2911,7 +2908,7 @@
       "required": [
         "id",
         "name",
-        "secretConfigurations"
+        "domainSecrets"
       ]
     },
     "SecretStoreCreateOrUpdate": {
@@ -2940,7 +2937,7 @@
             "create"
           ]
         },
-        "secretConfigurations": {
+        "domainSecrets": {
           "type": "object",
           "description": "Secret configurations keyed by domain.",
           "additionalProperties": {
