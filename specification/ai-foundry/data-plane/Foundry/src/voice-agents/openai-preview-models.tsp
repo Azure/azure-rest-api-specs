@@ -899,7 +899,7 @@ using Azure.AI.Projects;
   VoiceAgentRequiredPreview
 );
 @@extension(
-  OpenAI.LiveTransportDTMFSend,
+  OpenAI.LiveTransportDTMFSendParam,
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );
@@ -915,22 +915,22 @@ using Azure.AI.Projects;
 );
 @@extension(OpenAI.delegation, "x-ms-foundry-meta", VoiceAgentRequiredPreview);
 @@extension(
-  OpenAI.`LiveDecisionQuestionsInputParam-2`,
+  OpenAI.LiveDecisionQuestionsInputParam,
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );
 @@extension(
-  OpenAI.`LiveDecisionTriggerInputParam-2`,
+  OpenAI.LiveDecisionTriggerInputParam,
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );
 @@extension(
-  OpenAI.`LiveDecisionsDelegationParam-2`,
+  OpenAI.LiveDecisionsDelegationParam,
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );
 @@extension(
-  OpenAI.`LiveDecisionsSettingsInputParam-2`,
+  OpenAI.LiveDecisionsSettingsInputParam,
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );
