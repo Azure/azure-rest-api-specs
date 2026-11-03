@@ -15,25 +15,26 @@ type CreateCommentParams = {
 
 describe("PR comment creation", () => {
   it.each(["2026-03-01", "multiple-versions", "all"])(
-    "posts manual-action guidance for API version %s without claiming creation",
+    "posts error details and manual recovery guidance for API version %s",
     async (apiVersion) => {
       const createComment = vi.fn<(params: CreateCommentParams) => Promise<unknown>>();
-      await postReleasePlanComment({
+      await postReleasePlanErrorComment({
         octokit: { rest: { issues: { createComment } } },
         owner: "Azure",
         repo: "azure-rest-api-specs",
         prNumber: 47691,
         apiVersion,
         tspProjectPath: "specification/compute/resource-manager/Microsoft.Compute/Compute",
-        manualCreationRequired: true,
+        error: "Access denied",
       });
 
       expect(createComment).toHaveBeenCalledOnce();
       const [comment] = createComment.mock.calls[0];
       expect(comment.issue_number).toBe(47691);
-      expect(comment.body).toContain("Manual Release Plan Required");
-      expect(comment.body).toContain("new-api-version");
-      expect(comment.body).toContain("tspconfig.yaml");
+      expect(comment.body).toContain("Release Plan Processing Failed");
+      expect(comment.body).toContain("Access denied");
+      expect(comment.body).toContain("fix the error before rerunning");
+      expect(comment.body).not.toContain("new-api-version");
       expect(comment.body).toContain("https://aka.ms/azsdk/releaseplan-dashboard");
       expect(comment.body).toContain(
         "specification/compute/resource-manager/Microsoft.Compute/Compute",
@@ -99,6 +100,7 @@ describe("PR comment creation", () => {
     });
 
     expect(body).toContain("### ✅ Release Plan Created");
+    expect(body).toContain("No release plan in `In Progress` or `Finished` status was found");
     expect(body).toContain("[View Release Plan](https://example.com/plan/123)");
     expect(body).toContain("Release Plan ID");
     expect(body).toContain("123");
@@ -234,7 +236,7 @@ describe("PR comment creation", () => {
     expect(call.owner).toBe("Azure");
     expect(call.repo).toBe("azure-rest-api-specs");
     expect(call.issue_number).toBe(42);
-    expect(call.body).toContain("### ❌ Release Plan Creation Failed");
+    expect(call.body).toContain("### ❌ Release Plan Processing Failed");
     expect(call.body).toContain("azsdk failed");
     expect(call.body).toContain("specification/test/Test.Service");
     expect(call.body).toContain("aka.ms/azsdk/releaseplan-dashboard");

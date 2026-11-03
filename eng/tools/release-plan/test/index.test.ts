@@ -35,7 +35,7 @@ let outputFile: string;
 const projectPath = "specification/security/resource-manager/Microsoft.Security/Security";
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
   workspace = mkdtempSync(join(tmpdir(), "release-plan-main-"));
   outputFile = join(workspace, "release-plan.json");
   mocks.parseCliArguments.mockReturnValue({
@@ -55,80 +55,57 @@ afterEach(() => {
 });
 
 describe("release plan CLI", () => {
-  it("does not allow creation for an unrelated filename ending with tspconfig.yaml", async () => {
-    const discovery: CommitProjectInfoResult = {
-      projectInfo: {
-        tspProjectPath: projectPath,
-        apiVersion: "2026-01-01-preview",
-        isPreview: true,
-      },
-      changedFiles: [
-        { filename: `${projectPath}/main.tsp`, status: "modified" },
-        { filename: "specification/other/custom-tspconfig.yaml", status: "modified" },
-      ],
-      prNumber: 42,
-      hasNewApiVersionLabel: false,
-    };
-    mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue(discovery);
-    mocks.ensureReleasePlan.mockReturnValue({
-      outcome: "not_found",
-      releasePlan: null,
-      details: {},
-    });
-
-    await main();
-
-    expect(mocks.ensureReleasePlan).toHaveBeenCalledExactlyOnceWith(
-      expect.objectContaining({ tspProjectPath: projectPath }),
-      mocks.runner,
-      false,
-    );
-    expect(mocks.createComment).toHaveBeenCalledOnce();
-    expect(mocks.createComment.mock.calls[0][0].body).toContain("Manual Release Plan Required");
-  });
-
-  it.each([true, false])(
-    "reports manual action for client customization changes (associated PR: %s)",
-    async (hasPr) => {
-      const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it.each(["client.tsp", "main.tsp", "tspconfig.yaml"])(
+    "creates a release plan for %s changes without checking a new-api-version label",
+    async (file) => {
       const discovery: CommitProjectInfoResult = {
         projectInfo: {
           tspProjectPath: projectPath,
-          apiVersion: "multiple-versions",
+          apiVersion: "2026-01-01",
           isPreview: false,
         },
-        changedFiles: [{ filename: `${projectPath}/client.tsp`, status: "modified" }],
-        prNumber: hasPr ? 47691 : undefined,
-        hasNewApiVersionLabel: false,
-      };
-      const result: EnsureReleasePlanResult = {
-        outcome: "not_found",
-        releasePlan: null,
-        details: { releasePlanId: "" },
+        changedFiles: [{ filename: `${projectPath}/${file}`, status: "modified" }],
+        prNumber: 47691,
       };
       mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue(discovery);
-      mocks.ensureReleasePlan.mockReturnValue(result);
+      const actual =
+        await vi.importActual<typeof import("../src/release-plan.ts")>("../src/release-plan.ts");
+      mocks.ensureReleasePlan.mockImplementation(actual.ensureReleasePlan);
+      const plan = {
+        ReleasePlanId: 123,
+        release_plan_link: "https://example.com/plan/123",
+        release_plan_details: {
+          ReleasePlanId: 123,
+          APISpecProjectPath: projectPath,
+          SpecAPIVersion: "2026-01-01",
+          Status: "In Progress",
+        },
+      };
+      mocks.runner.mockImplementation((args: string[]) => ({
+        exitCode: 0,
+        stdout: JSON.stringify(args[1] === "get" ? null : plan),
+        stderr: "",
+      }));
 
       await main();
 
       expect(mocks.ensureReleasePlan).toHaveBeenCalledExactlyOnceWith(
         expect.objectContaining({ tspProjectPath: projectPath }),
         mocks.runner,
-        false,
       );
-      expect(JSON.parse(readFileSync(outputFile, "utf8"))).toEqual(result);
-      expect(warn).toHaveBeenCalledWith(
-        expect.stringContaining("##vso[task.logissue type=warning]Manual release plan required"),
+      expect(mocks.runner).toHaveBeenCalledTimes(2);
+      expect(mocks.runner).toHaveBeenLastCalledWith(
+        expect.arrayContaining(["release-plan", "create", "--pull-request"]),
       );
-      expect(warn).toHaveBeenCalledWith(
-        expect.stringContaining("https://aka.ms/azsdk/releaseplan-dashboard"),
-      );
-      expect(mocks.createComment).toHaveBeenCalledTimes(hasPr ? 1 : 0);
-      if (hasPr) {
-        const [comment] = mocks.createComment.mock.calls[0];
-        expect(comment.issue_number).toBe(47691);
-        expect(comment.body).toContain("Manual Release Plan Required");
-      }
+      expect(JSON.parse(readFileSync(outputFile, "utf8"))).toMatchObject({
+        outcome: "created",
+        releasePlan: plan,
+      });
+      expect(mocks.createComment).toHaveBeenCalledOnce();
+      const [comment] = mocks.createComment.mock.calls[0];
+      expect(comment.issue_number).toBe(47691);
+      expect(comment.body).toContain("Release Plan Created");
+      expect(comment.body).not.toContain("Manual Release Plan Required");
     },
   );
 
@@ -138,9 +115,11 @@ describe("release plan CLI", () => {
       const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
       mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue({
         projectInfo: null,
-        changedFiles: reason === "no-project" ? [{ filename: `${projectPath}/client.tsp` }] : [],
+        changedFiles:
+          reason === "no-project"
+            ? [{ filename: `${projectPath}/client.tsp` }]
+            : [{ filename: `${projectPath}/custom-tspconfig.yaml` }],
         prNumber: 42,
-        hasNewApiVersionLabel: false,
         skipReleasePlanAutomation: reason === "skip-label",
       } satisfies CommitProjectInfoResult);
 
@@ -153,7 +132,7 @@ describe("release plan CLI", () => {
     },
   );
 
-  it.each(["In Progress", "Completed"])(
+  it.each(["In Progress", "Finished"])(
     "does not request manual action for an existing %s plan",
     async (status) => {
       const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
@@ -165,7 +144,6 @@ describe("release plan CLI", () => {
         },
         changedFiles: [{ filename: `${projectPath}/client.tsp` }],
         prNumber: 42,
-        hasNewApiVersionLabel: false,
       } satisfies CommitProjectInfoResult);
       const result: EnsureReleasePlanResult = {
         outcome: "existing_by_path",
@@ -182,8 +160,9 @@ describe("release plan CLI", () => {
     },
   );
 
-  it("reports lookup errors on PRs that are not eligible for automatic creation", async () => {
+  it("reports lookup errors and manual recovery steps for TypeSpec-only changes", async () => {
     const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const exit = vi.spyOn(process, "exit").mockImplementation(() => {
       throw new Error("process.exit");
     });
@@ -195,7 +174,6 @@ describe("release plan CLI", () => {
       },
       changedFiles: [{ filename: `${projectPath}/client.tsp` }],
       prNumber: 42,
-      hasNewApiVersionLabel: false,
     } satisfies CommitProjectInfoResult);
     mocks.ensureReleasePlan.mockImplementation(() => {
       throw new Error("Release plan get failed. Access denied");
@@ -207,12 +185,16 @@ describe("release plan CLI", () => {
     expect(error).toHaveBeenCalledWith(expect.stringContaining("Access denied"));
     expect(existsSync(outputFile)).toBe(false);
     expect(mocks.createComment).toHaveBeenCalledOnce();
-    expect(mocks.createComment.mock.calls[0][0].body).toContain("Release Plan Creation Failed");
+    expect(mocks.createComment.mock.calls[0][0].body).toContain("Release Plan Processing Failed");
     expect(mocks.createComment.mock.calls[0][0].body).toContain("Access denied");
-    expect(mocks.createComment.mock.calls[0][0].body).not.toContain("Manual Release Plan Required");
+    expect(mocks.createComment.mock.calls[0][0].body).toContain("2026-01-01-preview");
+    expect(mocks.createComment.mock.calls[0][0].body).toContain("fix the error before rerunning");
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining("##vso[task.logissue type=warning]Release plan processing failed"),
+    );
   });
 
-  it("keeps the warning and artifact when the manual-action comment fails", async () => {
+  it("keeps the created plan artifact when its comment fails", async () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue({
       projectInfo: {
@@ -222,19 +204,17 @@ describe("release plan CLI", () => {
       },
       changedFiles: [{ filename: `${projectPath}/client.tsp` }],
       prNumber: 42,
-      hasNewApiVersionLabel: false,
     } satisfies CommitProjectInfoResult);
     mocks.ensureReleasePlan.mockReturnValue({
-      outcome: "not_found",
-      releasePlan: null,
-      details: { releasePlanId: "" },
+      outcome: "created",
+      releasePlan: { ReleasePlanId: 123 },
+      details: { releasePlanId: "123" },
     } satisfies EnsureReleasePlanResult);
     mocks.createComment.mockRejectedValueOnce(new Error("GitHub unavailable"));
 
     await main();
 
     expect(existsSync(outputFile)).toBe(true);
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining("Manual release plan required"));
     expect(warn).toHaveBeenCalledWith(
       expect.stringContaining("Failed to post comment on PR: Failed to post release plan comment"),
     );
@@ -247,7 +227,6 @@ describe("release plan CLI", () => {
       changedFiles: [{ filename: `${projectPath}/tspconfig.yaml`, status: "modified" }],
       multipleProjectPaths: paths,
       prNumber: 42,
-      hasNewApiVersionLabel: true,
     };
     mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue(result);
 
@@ -275,7 +254,6 @@ describe("release plan CLI", () => {
       projectInfo: null,
       changedFiles: [],
       multipleProjectPaths: [projectPath, "specification/other/Other"],
-      hasNewApiVersionLabel: false,
     };
     mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue(result);
 
@@ -296,7 +274,6 @@ describe("release plan CLI", () => {
         changedFiles: [{ filename: `${projectPath}/tspconfig.yaml`, status: "modified" }],
         projectError: { tspProjectPath: projectPath, message },
         prNumber: hasPr ? 42 : undefined,
-        hasNewApiVersionLabel: false,
       };
       mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue(discovery);
 
@@ -309,7 +286,7 @@ describe("release plan CLI", () => {
       if (hasPr) {
         const [comment] = mocks.createComment.mock.calls[0];
         expect(comment.issue_number).toBe(42);
-        expect(comment.body).toContain("Release Plan Creation Failed");
+        expect(comment.body).toContain("Release Plan Processing Failed");
         expect(comment.body).toContain(message);
         expect(comment.body).toContain(projectPath);
       }
@@ -331,7 +308,6 @@ describe("release plan CLI", () => {
         projectInfo: { tspProjectPath: projectPath, apiVersion, isPreview: false },
         changedFiles: [{ filename: `${projectPath}/tspconfig.yaml`, status: "modified" }],
         prNumber: 42,
-        hasNewApiVersionLabel: false,
       };
       const plan: EnsureReleasePlanResult = {
         outcome: "created",
@@ -346,7 +322,6 @@ describe("release plan CLI", () => {
       expect(mocks.ensureReleasePlan).toHaveBeenCalledExactlyOnceWith(
         expect.objectContaining({ apiVersion, apiReleaseType: "Private Preview" }),
         mocks.runner,
-        true,
       );
       expect(existsSync(outputFile)).toBe(true);
       expect(mocks.createComment).toHaveBeenCalledOnce();
@@ -363,11 +338,13 @@ describe("release plan CLI", () => {
       },
       changedFiles: [{ filename: `${projectPath}/tspconfig.yaml`, status: "modified" }],
       prNumber: 42,
-      hasNewApiVersionLabel: false,
     };
     const plan: EnsureReleasePlanResult = {
       outcome: "created",
-      releasePlan: { ReleasePlanId: 123, release_plan_link: "https://example.com/plan/123" },
+      releasePlan: {
+        release_plan_details: { ReleasePlanId: 123 },
+        release_plan_link: "https://example.com/plan/123",
+      },
       details: { releasePlanId: "123" },
     };
     mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue(discovery);
@@ -378,7 +355,6 @@ describe("release plan CLI", () => {
     expect(mocks.ensureReleasePlan).toHaveBeenCalledExactlyOnceWith(
       expect.objectContaining({ tspProjectPath: projectPath }),
       mocks.runner,
-      true,
     );
     expect(mocks.createComment).toHaveBeenCalledOnce();
     const [comment] = mocks.createComment.mock.calls[0];
@@ -388,6 +364,7 @@ describe("release plan CLI", () => {
       issue_number: 42,
     });
     expect(comment.body).toContain(`| **TypeSpec Project** | \`${projectPath}\` |`);
+    expect(comment.body).toContain("| **Release Plan ID** | 123 |");
     expect(existsSync(outputFile)).toBe(true);
   });
 });

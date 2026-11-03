@@ -112,7 +112,6 @@ export interface CommitProjectInfoResult {
   multipleProjectPaths?: string[];
   projectError?: { tspProjectPath: string; message: string };
   prNumber?: number;
-  hasNewApiVersionLabel: boolean;
   skipReleasePlanAutomation?: boolean;
 }
 

@@ -62,8 +62,9 @@ pnpm exec create-release-plan --release-plan-id 12345 `
   --output-file .\out\release-plan.json
 ```
 
-The result contains `outcome`, `releasePlan`, and `details`. Outcomes are
-`created`, `existing_by_pr`, `existing_by_path`, `existing_by_id`, or `not_found`.
+The result contains `outcome`, `releasePlan`, and `details`. Discovery returns
+`created` or `existing_by_path`; direct ID retrieval returns `existing_by_id`.
+Downstream commands also accept older `existing_by_pr` and `not_found` artifacts.
 Downstream commands read the plan's `release_plan_details`, including
 `ReleasePlanId`, `WorkItemId`, and `APISpecProjectPath`.
 
@@ -103,6 +104,8 @@ are merged are also skipped. Open or closed-unmerged SDK PRs permit regeneration
 an indeterminate PR status causes that language to be skipped. Newly created
 plans generate every non-excluded language. Generation attempts continue after
 a language fails, then the command fails with the list of failed languages.
+Finished plans skip SDK generation, based on the current plan status retrieved
+from the service rather than the artifact's older status.
 
 ## Architecture
 
@@ -160,28 +163,30 @@ otherwise `GA`. SDK release type is independently `beta` for that suffix and
 ### Plan creation and comments
 
 PRs labeled `FolderMigrationV2` or `Skip-ReleasePlan-Automation` are skipped before
-changed files are fetched. Otherwise, the tool looks for an existing plan by PR
-and API release type, then by project path, API version, and API release type.
-Creation is allowed only when the PR has `new-api-version` or a `tspconfig.yaml`
-appears in the changed files. Creating a plan also requires an associated PR.
-The target release month is next month.
+changed files are fetched. Other changes to `.tsp` files or `tspconfig.yaml` under
+`specification` are processed without checking the `new-api-version` label.
 
-Successful creation comments include the plan link/ID, API version, and resolved
-TypeSpec project path. Reusing an existing plan does not post a creation comment.
-If TypeSpec changes need processing but no plan is returned and creation is not
-allowed, the tool emits an Azure Pipelines warning and posts a **Manual Release
-Plan Required** comment on the associated PR. The comment links to Release
-Planner and asks the author to create or link a plan. For `all` or
-`multiple-versions`, it asks the author to select the intended API version.
-The result remains `not_found` with a null plan, so downstream steps skip safely.
-Without an associated PR, the warning still explains the required action.
+The tool searches by project path, API version, and API release type. It reuses a
+plan only when its API version matches and its status is `In Progress` or
+`Finished` (case-insensitive). A plan linked to the PR but targeting another
+version does not prevent creation. If no matching plan is found, the tool creates
+one. Creation requires an associated PR; the target release month is next month.
+A lookup response missing its API version or status is an error, not permission
+to create a possible duplicate.
 
-Intentional skips and existing plans, including completed plans, do not produce
-manual-action guidance. API-version resolution errors and failures from the
-subsequent plan operation are reported on the associated PR. Lookup command
-failures and invalid JSON are errors, not normal missing-plan results. The CLI's
-explicit `Failed to get release plan details.` no-match response is treated as
-no plan; other lookup errors stop processing.
+Successful creation comments explain why a new plan was needed and include its
+link/ID, API version, and resolved TypeSpec project path. Reusing an existing plan
+does not post a creation comment. Intentional skips and matching finished plans
+do not request manual creation.
+
+API-version resolution errors and failures from plan lookup or creation are
+reported on the associated PR. Lookup and creation failures also produce an Azure Pipelines warning
+with recovery instructions and a Release Planner link. For `all` or
+`multiple-versions`, error comments ask the author to choose the intended API
+version if creating a plan manually. Lookup command failures and invalid JSON
+stop processing; they do not trigger creation. The CLI's explicit
+`Failed to get release plan details.` no-match response is the exception: it
+allows processing to continue to creation.
 
 ### Pipeline integration
 

@@ -19,7 +19,7 @@ export function createAzdskRunner(): AzsdkRunner {
 }
 
 /**
- * Ensures release plan exists: by PR first, then by path+release type, else create one.
+ * Reuses an in-progress or finished plan for the same project and API version, or creates one.
  * @param context The release plan command context containing PR, project, and release info
  * @param runner Function to execute azsdk release-plan commands
  * @returns Result indicating whether plan was found by PR, by path, or newly created
@@ -27,19 +27,7 @@ export function createAzdskRunner(): AzsdkRunner {
 export function ensureReleasePlan(
   context: ReleasePlanCommandContext,
   runner: AzsdkRunner,
-  allowCreate = true,
 ): EnsureReleasePlanResult {
-  if (context.prUrl) {
-    const existingByPr = runGetReleasePlanByPr(context.prUrl, context.apiReleaseType, runner);
-    if (existingByPr) {
-      return {
-        outcome: "existing_by_pr",
-        releasePlan: existingByPr,
-        details: buildDetails(context),
-      };
-    }
-  }
-
   const existingByPath = runGetReleasePlanByPath(
     context.tspProjectPath,
     context.apiVersion,
@@ -47,19 +35,29 @@ export function ensureReleasePlan(
     runner,
   );
   if (existingByPath) {
-    return {
-      outcome: "existing_by_path",
-      releasePlan: existingByPath,
-      details: buildDetails(context),
-    };
-  }
+    const details = existingByPath.release_plan_details;
+    if (typeof details?.SpecAPIVersion !== "string" || typeof details.Status !== "string") {
+      throw new Error("Release plan lookup returned a plan without an API version or status.");
+    }
+    const status = details.Status.trim().toLowerCase();
+    if (
+      details.SpecAPIVersion.trim().toLowerCase() === context.apiVersion.trim().toLowerCase() &&
+      (status === "in progress" || status === "finished")
+    ) {
+      console.log(
+        `Reusing release plan for API version '${details.SpecAPIVersion}' in '${details.Status}' status.`,
+      );
+      return {
+        outcome: "existing_by_path",
+        releasePlan: existingByPath,
+        details: buildDetails(context),
+      };
+    }
 
-  if (!allowCreate) {
-    return {
-      outcome: "not_found",
-      releasePlan: null,
-      details: buildDetails(context),
-    };
+    console.log(
+      `The returned plan has API version '${details.SpecAPIVersion}' and status '${details.Status}'. ` +
+        `Creating a release plan for API version '${context.apiVersion}'.`,
+    );
   }
 
   const created = runCreateReleasePlan(context, runner);
@@ -85,32 +83,6 @@ function buildDetails(context: ReleasePlanCommandContext): EnsureReleasePlanResu
     sdkReleaseType: context.sdkReleaseType,
     targetReleaseMonth: context.targetMonth,
   };
-}
-
-/**
- * Retrieves release plan by pull request URL and API release type.
- * @param prUrl GitHub PR URL (e.g., https://github.com/owner/repo/pull/123)
- * @param apiReleaseType API release type to match
- * @param runner Function to execute azsdk commands
- * @returns Release plan object if found, null if not found
- * @throws Error if the lookup fails or returns invalid JSON
- */
-function runGetReleasePlanByPr(
-  prUrl: string,
-  apiReleaseType: ApiReleaseType,
-  runner: AzsdkRunner,
-): ReleasePlanData | null {
-  const args = [
-    "release-plan",
-    "get",
-    "--pull-request",
-    prUrl,
-    "--api-release-type",
-    apiReleaseType,
-    "--output",
-    "json",
-  ];
-  return parseReleasePlanResult(runner(args));
 }
 
 /**

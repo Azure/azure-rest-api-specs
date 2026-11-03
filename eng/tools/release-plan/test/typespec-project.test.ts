@@ -1036,7 +1036,6 @@ describe("TypeSpec project detection edge cases", () => {
     });
 
     expect(result.prNumber).toBe(123);
-    expect(result.hasNewApiVersionLabel).toBe(true);
     expect(result.projectInfo?.tspProjectPath).toBe("specification/foo");
     expect(result.projectInfo?.apiVersion).toBe("2026-01-01-preview");
     expect(result.projectInfo?.isPreview).toBe(true);
@@ -1093,7 +1092,6 @@ describe("TypeSpec project detection edge cases", () => {
     });
 
     expect(result.prNumber).toBeUndefined();
-    expect(result.hasNewApiVersionLabel).toBe(false);
     expect(result.projectInfo?.tspProjectPath).toBe("specification/bar");
     expect(result.projectInfo?.apiVersion).toBe("2025-09-01");
   });
@@ -1129,7 +1127,6 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.skipReleasePlanAutomation).toBe(true);
     expect(result.projectInfo).toBeNull();
     expect(result.prNumber).toBe(321);
-    expect(result.hasNewApiVersionLabel).toBe(false);
     // Folder migration is detected before listing files, so no file lookup happens.
     expect(listFiles).not.toHaveBeenCalled();
   });
@@ -1165,7 +1162,6 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.skipReleasePlanAutomation).toBe(true);
     expect(result.projectInfo).toBeNull();
     expect(result.prNumber).toBe(654);
-    expect(result.hasNewApiVersionLabel).toBe(false);
     expect(listFiles).not.toHaveBeenCalled();
   });
 

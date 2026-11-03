@@ -32,9 +32,6 @@ function getCachedTypeSpecMetadata(
   return metadata;
 }
 
-/** Label indicating that a spec PR introduces a new API version. */
-export const NEW_API_VERSION_LABEL = "new-api-version";
-
 /**
  * Label indicating that a spec PR only migrates/renames folders. Release plan
  * processing must be skipped entirely for PRs carrying this label.
@@ -131,12 +128,9 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
         projectInfo: null,
         changedFiles: [],
         prNumber: associatedPrNumber,
-        hasNewApiVersionLabel: false,
         skipReleasePlanAutomation: true,
       };
     }
-
-    const hasNewApiVersionLabel = labels.includes(NEW_API_VERSION_LABEL);
 
     const changedFiles = await getPrChangedFiles({
       prNumber: associatedPrNumber,
@@ -152,7 +146,6 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       )),
       changedFiles,
       prNumber: associatedPrNumber,
-      hasNewApiVersionLabel,
     };
   }
 
@@ -170,7 +163,6 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       repo === "azure-rest-api-specs-pr",
     )),
     changedFiles: allFiles,
-    hasNewApiVersionLabel: false,
   };
 }
 

@@ -74,21 +74,38 @@ describe("ensureReleasePlan", () => {
     };
   }
 
-  it("returns existing release plan when found by PR", () => {
-    const runner = createRunner({
-      [`release-plan get --pull-request ${baseContext.prUrl} --api-release-type Public Preview --output json`]:
-        { code: 0, out: JSON.stringify(buildPlan(100)) },
-    });
+  it.each(["In Progress", "Finished", " in progress ", "FINISHED"])(
+    "reuses a plan for the same API version in %s status",
+    (status) => {
+      const plan = buildPlan(100, { Status: status });
+      const runner = vi.fn<AzsdkRunner>(() => ({
+        exitCode: 0,
+        stdout: JSON.stringify(plan),
+        stderr: "",
+      }));
 
-    const result = ensureReleasePlan(baseContext, runner);
-    expect(result.outcome).toBe("existing_by_pr");
-    expect(result.releasePlan).toEqual(buildPlan(100));
-  });
+      const result = ensureReleasePlan(baseContext, runner);
+
+      expect(result.outcome).toBe("existing_by_path");
+      expect(result.releasePlan).toEqual(plan);
+      expect(runner).toHaveBeenCalledOnce();
+      expect(runner).toHaveBeenCalledWith([
+        "release-plan",
+        "get",
+        "--typespec-path",
+        typespecPath,
+        "--api-version",
+        baseContext.apiVersion,
+        "--api-release-type",
+        baseContext.apiReleaseType,
+        "--output",
+        "json",
+      ]);
+    },
+  );
 
   it("returns existing release plan when found by path with a different linked PR", () => {
     const runner = createRunner({
-      [`release-plan get --pull-request ${baseContext.prUrl} --api-release-type Public Preview --output json`]:
-        { code: 0, out: "null" },
       [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
         {
           code: 0,
@@ -112,8 +129,6 @@ describe("ensureReleasePlan", () => {
 
   it("creates release plan when no existing plan is found", () => {
     const runner = createRunner({
-      [`release-plan get --pull-request ${baseContext.prUrl} --api-release-type Public Preview --output json`]:
-        { code: 0, out: "null" },
       [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
         {
           code: 0,
@@ -134,8 +149,6 @@ describe("ensureReleasePlan", () => {
   it("passes test-release true when enabled", () => {
     const testReleaseContext = { ...baseContext, testReleasePlan: true };
     const runner = createRunner({
-      [`release-plan get --pull-request ${baseContext.prUrl} --api-release-type Public Preview --output json`]:
-        { code: 0, out: "null" },
       [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
         {
           code: 0,
@@ -202,8 +215,6 @@ describe("ensureReleasePlan", () => {
 
   it("handles malformed JSON response from create", () => {
     const runner = createRunner({
-      [`release-plan get --pull-request ${baseContext.prUrl} --api-release-type Public Preview --output json`]:
-        { code: 0, out: "null" },
       [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
         {
           code: 0,
@@ -221,8 +232,6 @@ describe("ensureReleasePlan", () => {
 
   it("handles create command failure", () => {
     const runner = createRunner({
-      [`release-plan get --pull-request ${baseContext.prUrl} --api-release-type Public Preview --output json`]:
-        { code: 0, out: "null" },
       [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
         {
           code: 0,
@@ -242,8 +251,6 @@ describe("ensureReleasePlan", () => {
   it("correctly handles december to january month wrap", () => {
     const decContext = { ...baseContext, targetMonth: "December 2025" };
     const runner = createRunner({
-      [`release-plan get --pull-request ${baseContext.prUrl} --api-release-type Public Preview --output json`]:
-        { code: 0, out: "null" },
       [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
         {
           code: 0,
@@ -277,30 +284,69 @@ describe("ensureReleasePlan", () => {
     expect(capturedArgs[typespecPathArg + 1]).toBe(typespecPath);
   });
 
-  it("returns not_found in get-only mode when no release plan exists", () => {
-    const runner = vi.fn<AzsdkRunner>(() => ({ exitCode: 0, stdout: "null", stderr: "" }));
-    const result = ensureReleasePlan(baseContext, runner, false);
-
-    expect(result.outcome).toBe("not_found");
-    expect(result.releasePlan).toBeNull();
-    expect(runner).toHaveBeenCalledTimes(2);
-  });
-
-  it("accepts the CLI's explicit no-plan response in get-only mode", () => {
-    const runner = vi.fn<AzsdkRunner>(() => ({
-      exitCode: 1,
-      stdout: JSON.stringify({
-        response_error: "Failed to get release plan details.",
-        operation_status: "Failed",
-      }),
+  it.each([
+    { Status: "Closed" },
+    { Status: "Abandoned" },
+    { Status: "Duplicate" },
+    { Status: "Completed" },
+    { Status: "In Progress", SpecAPIVersion: "2025-01-01-preview" },
+    { Status: "Finished", SpecAPIVersion: "2025-01-01-preview" },
+  ])("creates a plan when the existing plan does not match: %j", (details) => {
+    const runner = vi.fn<AzsdkRunner>((args) => ({
+      exitCode: 0,
+      stdout: JSON.stringify(args[1] === "get" ? buildPlan(100, details) : buildPlan(999)),
       stderr: "",
     }));
 
-    expect(ensureReleasePlan(baseContext, runner, false)).toMatchObject({
-      outcome: "not_found",
-      releasePlan: null,
+    expect(ensureReleasePlan(baseContext, runner)).toMatchObject({
+      outcome: "created",
+      releasePlan: buildPlan(999),
     });
     expect(runner).toHaveBeenCalledTimes(2);
+    expect(runner.mock.calls[1][0].slice(0, 2)).toEqual(["release-plan", "create"]);
+  });
+
+  it.each([{ Status: undefined }, { SpecAPIVersion: undefined }])(
+    "fails instead of creating duplicates when plan identity is missing: %j",
+    (details) => {
+      const runner = vi.fn<AzsdkRunner>(() => ({
+        exitCode: 0,
+        stdout: JSON.stringify(buildPlan(100, details)),
+        stderr: "",
+      }));
+
+      expect(() => ensureReleasePlan(baseContext, runner)).toThrow(
+        "without an API version or status",
+      );
+      expect(runner).toHaveBeenCalledOnce();
+    },
+  );
+
+  it("creates a plan after the CLI's explicit no-match response", () => {
+    const runner = vi.fn<AzsdkRunner>((args) =>
+      args[1] === "get"
+        ? {
+            exitCode: 1,
+            stdout: JSON.stringify({
+              response_error: "Failed to get release plan details.",
+              operation_status: "Failed",
+            }),
+            stderr: "",
+          }
+        : { exitCode: 0, stdout: JSON.stringify(buildPlan(999)), stderr: "" },
+    );
+
+    expect(ensureReleasePlan(baseContext, runner).outcome).toBe("created");
+    expect(runner).toHaveBeenCalledTimes(2);
+  });
+
+  it("reports when creation requires a PR instead of silently returning no plan", () => {
+    const runner = vi.fn<AzsdkRunner>(() => ({ exitCode: 0, stdout: "null", stderr: "" }));
+
+    expect(() => ensureReleasePlan({ ...baseContext, prUrl: undefined }, runner)).toThrow(
+      "No pull request URL could be resolved",
+    );
+    expect(runner).toHaveBeenCalledOnce();
   });
 
   it.each([
@@ -316,25 +362,15 @@ describe("ensureReleasePlan", () => {
     { exitCode: 0, stdout: "{ invalid JSON", stderr: "", error: "Failed to parse JSON" },
     { exitCode: 0, stdout: "[]", stderr: "", error: "Expected JSON object or null" },
     { exitCode: 0, stdout: '"unexpected"', stderr: "", error: "Expected JSON object or null" },
-  ])("does not turn a failed lookup into not_found: $error ($stdout)", (response) => {
+  ])("does not hide a failed lookup or create a plan: $error ($stdout)", (response) => {
     const runner = vi.fn<AzsdkRunner>(() => response);
 
-    expect(() => ensureReleasePlan(baseContext, runner, false)).toThrow(response.error);
+    expect(() => ensureReleasePlan(baseContext, runner)).toThrow(response.error);
     expect(runner).toHaveBeenCalledOnce();
   });
 
-  it("reports a path lookup failure after a successful PR lookup with no match", () => {
-    const runner = vi
-      .fn<AzsdkRunner>()
-      .mockReturnValueOnce({ exitCode: 0, stdout: "null", stderr: "" })
-      .mockReturnValueOnce({ exitCode: 1, stdout: "", stderr: "Service unavailable" });
-
-    expect(() => ensureReleasePlan(baseContext, runner, false)).toThrow("Service unavailable");
-    expect(runner).toHaveBeenCalledTimes(2);
-  });
-
   it.each(["Public Preview", "GA", "Private Preview"] as const)(
-    "filters PR lookup by %s and does not update during discovery",
+    "filters project and API-version lookup by %s without updating during discovery",
     (apiReleaseType) => {
       const runner = vi.fn<AzsdkRunner>(() => ({
         exitCode: 0,
@@ -343,14 +379,16 @@ describe("ensureReleasePlan", () => {
       }));
 
       expect(ensureReleasePlan({ ...baseContext, apiReleaseType }, runner).outcome).toBe(
-        "existing_by_pr",
+        "existing_by_path",
       );
       expect(runner).toHaveBeenCalledOnce();
       expect(runner).toHaveBeenCalledWith([
         "release-plan",
         "get",
-        "--pull-request",
-        baseContext.prUrl,
+        "--typespec-path",
+        typespecPath,
+        "--api-version",
+        baseContext.apiVersion,
         "--api-release-type",
         apiReleaseType,
         "--output",
@@ -376,9 +414,9 @@ describe("ensureReleasePlan", () => {
 
   it("returns existing plans with an empty API version", () => {
     const plan = buildPlan(100, { SpecAPIVersion: "" });
-    const runner = vi.fn<AzsdkRunner>((args) => ({
+    const runner = vi.fn<AzsdkRunner>(() => ({
       exitCode: 0,
-      stdout: JSON.stringify(args.includes("--pull-request") ? null : plan),
+      stdout: JSON.stringify(plan),
       stderr: "",
     }));
     expect(ensureReleasePlan({ ...baseContext, apiVersion: "" }, runner).releasePlan).toEqual(plan);

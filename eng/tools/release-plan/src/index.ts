@@ -21,11 +21,7 @@ import type {
   OctokitLike,
   TypeSpecProjectInfo,
 } from "./types.ts";
-import {
-  createOctokit,
-  getTypeSpecProjectInfoFromCommit,
-  NEW_API_VERSION_LABEL,
-} from "./typespec-project.ts";
+import { createOctokit, getTypeSpecProjectInfoFromCommit } from "./typespec-project.ts";
 
 /**
  * Main CLI entry point.
@@ -69,8 +65,6 @@ export async function main(): Promise<void> {
       return;
     }
 
-    const hasNewApiVersionLabel = commitResult.hasNewApiVersionLabel;
-
     resolvedPrNumber = commitResult.prNumber;
     if (commitResult.multipleProjectPaths && commitResult.multipleProjectPaths.length > 1) {
       if (resolvedPrNumber) {
@@ -107,10 +101,9 @@ export async function main(): Promise<void> {
       (f) => path.posix.basename(f.filename) === "tspconfig.yaml",
     );
 
-    // Skip only if both conditions are true: no label AND no TypeSpec files
-    if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {
+    if (!hasTspFiles && !isTspConfigChanged) {
       console.log(
-        `Commit ${commitSha} is not associated with a PR that has the '${NEW_API_VERSION_LABEL}' label and does not contain TypeSpec files. Skipping release plan processing.`,
+        `Commit ${commitSha} does not change TypeSpec files or tspconfig.yaml. Skipping release plan processing.`,
       );
       return;
     }
@@ -145,25 +138,17 @@ export async function main(): Promise<void> {
         testReleasePlan: args.testReleasePlan,
       },
       runner,
-      hasNewApiVersionLabel || isTspConfigChanged,
     );
     releasePlanEnsured = true;
 
     writeReleasePlanResult(result, args.outputFile);
 
-    const manualCreationRequired = result.outcome === "not_found";
-    if (manualCreationRequired) {
-      console.warn(
-        "##vso[task.logissue type=warning]Manual release plan required: TypeSpec changes were found, " +
-          "but no existing release plan was returned and automatic creation is not enabled for these changes. " +
-          "Create or link the plan at https://aka.ms/azsdk/releaseplan-dashboard.",
-      );
-    }
-
-    if ((result.outcome === "created" || manualCreationRequired) && resolvedPrNumber) {
+    if (result.outcome === "created" && resolvedPrNumber) {
       try {
         const planLinkValue = result.releasePlan?.release_plan_link;
-        const planIdValue = result.releasePlan?.ReleasePlanId;
+        const planIdValue =
+          result.releasePlan?.release_plan_details?.ReleasePlanId ??
+          result.releasePlan?.ReleasePlanId;
         const planLink = typeof planLinkValue === "string" ? planLinkValue : "";
         const planId =
           typeof planIdValue === "string" || typeof planIdValue === "number" ? planIdValue : "";
@@ -177,14 +162,9 @@ export async function main(): Promise<void> {
           planLink,
           apiVersion: projectInfo.apiVersion,
           tspProjectPath: projectInfo.tspProjectPath,
-          manualCreationRequired,
         });
 
-        console.log(
-          manualCreationRequired
-            ? "Posted manual release plan instructions on PR."
-            : "Posted release plan comment on PR.",
-        );
+        console.log("Posted release plan comment on PR.");
       } catch (commentError) {
         const message = commentError instanceof Error ? commentError.message : String(commentError);
         console.warn(`Warning: Failed to post comment on PR: ${message}`);
@@ -195,6 +175,10 @@ export async function main(): Promise<void> {
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error(`release-plan tool failed: ${message}`);
+    console.warn(
+      "##vso[task.logissue type=warning]Release plan processing failed. Check existing plans and fix " +
+        "the error before rerunning, or create or link a plan at https://aka.ms/azsdk/releaseplan-dashboard.",
+    );
 
     if (!releasePlanEnsured && resolvedPrNumber && projectInfo) {
       try {
@@ -205,6 +189,7 @@ export async function main(): Promise<void> {
           prNumber: resolvedPrNumber,
           error: message,
           tspProjectPath: projectInfo.tspProjectPath,
+          apiVersion: projectInfo.apiVersion,
         });
         console.log("Posted error comment on PR.");
       } catch (commentError) {
@@ -269,7 +254,6 @@ export {
   getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectVersionFromMetadata,
-  NEW_API_VERSION_LABEL,
   resolveTypeSpecMetadata,
   SKIP_RELEASE_PLAN_AUTOMATION_LABEL,
 } from "./typespec-project.ts";
