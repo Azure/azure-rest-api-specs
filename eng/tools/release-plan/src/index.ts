@@ -143,7 +143,15 @@ export async function main(): Promise<void> {
 
     writeReleasePlanResult(result, args.outputFile);
 
-    if (result.outcome === "created" && resolvedPrNumber) {
+    const manualCreationRequired = result.outcome === "manual_required";
+    if (manualCreationRequired) {
+      console.warn(
+        "##vso[task.logissue type=warning]Manual release plan required: a single concrete API version " +
+          "could not be determined. Select the intended version and create or link a plan at " +
+          "https://aka.ms/azsdk/releaseplan-dashboard, then rerun with the ReleasePlanId parameter.",
+      );
+    }
+    if ((result.outcome === "created" || manualCreationRequired) && resolvedPrNumber) {
       try {
         const planLinkValue = result.releasePlan?.release_plan_link;
         const planIdValue =
@@ -162,9 +170,14 @@ export async function main(): Promise<void> {
           planLink,
           apiVersion: projectInfo.apiVersion,
           tspProjectPath: projectInfo.tspProjectPath,
+          manualCreationRequired,
         });
 
-        console.log("Posted release plan comment on PR.");
+        console.log(
+          manualCreationRequired
+            ? "Posted manual release plan instructions on PR."
+            : "Posted release plan comment on PR.",
+        );
       } catch (commentError) {
         const message = commentError instanceof Error ? commentError.message : String(commentError);
         console.warn(`Warning: Failed to post comment on PR: ${message}`);

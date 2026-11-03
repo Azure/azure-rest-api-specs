@@ -63,7 +63,7 @@ pnpm exec create-release-plan --release-plan-id 12345 `
 ```
 
 The result contains `outcome`, `releasePlan`, and `details`. Discovery returns
-`created` or `existing_by_path`; direct ID retrieval returns `existing_by_id`.
+`created`, `existing_by_path`, or `manual_required`; direct ID retrieval returns `existing_by_id`.
 Downstream commands also accept older `existing_by_pr` and `not_found` artifacts.
 Downstream commands read the plan's `release_plan_details`, including
 `ReleasePlanId`, `WorkItemId`, and `APISpecProjectPath`.
@@ -148,8 +148,10 @@ Resolved paths are deduplicated. Multiple subservices can therefore resolve to
 one SDK project. If multiple project paths remain, automation creates no plan,
 writes no artifact, and posts a PR comment listing the paths when a PR is known.
 
-API-version selection normally uses the first metadata configuration with both
-`apiVersion` and `packageName`; it does not sort versions. For
+API-version selection collects metadata configurations with both
+`apiVersion` and `packageName`, trims versions, and deduplicates them case-insensitively.
+One concrete version permits automatic processing. Differing versions are reported
+as `multiple-versions` and require manual selection rather than selecting the first one. For
 `azure-rest-api-specs-pr`, if that produces no version, any emitter's non-empty
 `apiVersion` can be used without package metadata. Values such as `all` and
 `multiple-versions` are preserved. If private-preview metadata provides no version,
@@ -158,7 +160,7 @@ the tool skips creation and posts an error comment with the project path.
 The private repository always selects the `Private Preview` API release type.
 Other repositories select `Public Preview` for versions ending in `-preview`,
 otherwise `GA`. SDK release type is independently `beta` for that suffix and
-`stable` otherwise, including for `all` and `multiple-versions`.
+`stable` otherwise. Ambiguous versions do not trigger SDK generation.
 
 ### Plan creation and comments
 
@@ -171,8 +173,20 @@ plan only when its API version matches and its status is `In Progress` or
 `Finished` (case-insensitive). A plan linked to the PR but targeting another
 version does not prevent creation. If no matching plan is found, the tool creates
 one. Creation requires an associated PR; the target release month is next month.
-A lookup response missing its API version or status is an error, not permission
+A returned plan missing its API version, status, or project path is an error, not permission
 to create a possible duplicate.
+
+Automatic processing requires a CLI that reports explicit `existing`, `created`,
+and `not_found` outcomes and supports `--expected-api-version`. The tool checks
+that lookup contract before calling create, passes the expected version as a
+metadata assertion, and validates the returned plan's project, version, and status.
+If the CLI creates no plan because it reused a matching one, the artifact remains
+`existing_by_path`; released or merged SDKs are not treated as newly generated.
+
+When metadata is blank, `all`, `multiple-versions`, or differs between packages,
+the result is `manual_required` with a null plan. No release-plan CLI calls are made.
+A pipeline warning and PR comment ask the author to select a concrete version,
+create or link a plan in Release Planner, then rerun with the `ReleasePlanId` parameter.
 
 Successful creation comments explain why a new plan was needed and include its
 link/ID, API version, and resolved TypeSpec project path. Reusing an existing plan
@@ -184,9 +198,8 @@ reported on the associated PR. Lookup and creation failures also produce an Azur
 with recovery instructions and a Release Planner link. For `all` or
 `multiple-versions`, error comments ask the author to choose the intended API
 version if creating a plan manually. Lookup command failures and invalid JSON
-stop processing; they do not trigger creation. The CLI's explicit
-`Failed to get release plan details.` no-match response is the exception: it
-allows processing to continue to creation.
+stop processing; they do not trigger creation. Only the CLI's explicit
+`outcome: "not_found"` response permits creation; an error message alone does not.
 
 ### Pipeline integration
 

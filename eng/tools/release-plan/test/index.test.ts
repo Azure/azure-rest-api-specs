@@ -72,6 +72,7 @@ describe("release plan CLI", () => {
         await vi.importActual<typeof import("../src/release-plan.ts")>("../src/release-plan.ts");
       mocks.ensureReleasePlan.mockImplementation(actual.ensureReleasePlan);
       const plan = {
+        outcome: "created",
         ReleasePlanId: 123,
         release_plan_link: "https://example.com/plan/123",
         release_plan_details: {
@@ -83,7 +84,7 @@ describe("release plan CLI", () => {
       };
       mocks.runner.mockImplementation((args: string[]) => ({
         exitCode: 0,
-        stdout: JSON.stringify(args[1] === "get" ? null : plan),
+        stdout: JSON.stringify(args[1] === "get" ? { outcome: "not_found" } : plan),
         stderr: "",
       }));
 
@@ -129,6 +130,45 @@ describe("release plan CLI", () => {
       expect(mocks.createComment).not.toHaveBeenCalled();
       expect(existsSync(outputFile)).toBe(false);
       expect(warn).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each(["In Progress", "Finished"])(
+    "does not guess a Compute API version from an existing blank-version %s plan",
+    async (status) => {
+      const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+      const computePath = "specification/compute/resource-manager/Microsoft.Compute/Compute";
+      mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue({
+        projectInfo: {
+          tspProjectPath: computePath,
+          apiVersion: "multiple-versions",
+          isPreview: false,
+        },
+        changedFiles: [{ filename: `${computePath}/client.tsp` }],
+        prNumber: 47691,
+      } satisfies CommitProjectInfoResult);
+      const actual =
+        await vi.importActual<typeof import("../src/release-plan.ts")>("../src/release-plan.ts");
+      mocks.ensureReleasePlan.mockImplementation(actual.ensureReleasePlan);
+      mocks.runner.mockReturnValue({
+        exitCode: 0,
+        stdout: JSON.stringify({
+          outcome: "existing",
+          release_plan_details: { SpecAPIVersion: "", Status: status },
+        }),
+        stderr: "",
+      });
+
+      await main();
+
+      expect(mocks.runner).not.toHaveBeenCalled();
+      expect(JSON.parse(readFileSync(outputFile, "utf8"))).toMatchObject({
+        outcome: "manual_required",
+        releasePlan: null,
+      });
+      expect(mocks.createComment.mock.calls[0][0].body).toContain("Manual Release Plan Required");
+      expect(mocks.createComment.mock.calls[0][0].body).toContain("ReleasePlanId");
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining("Manual release plan required"));
     },
   );
 
@@ -294,7 +334,7 @@ describe("release plan CLI", () => {
   );
 
   it.each(["all", "multiple-versions"])(
-    "allows private-preview plan processing for version %s",
+    "requires manual version selection for private-preview metadata %s",
     async (apiVersion) => {
       mocks.parseCliArguments.mockReturnValue({
         commitSha: "abc123",
@@ -309,13 +349,10 @@ describe("release plan CLI", () => {
         changedFiles: [{ filename: `${projectPath}/tspconfig.yaml`, status: "modified" }],
         prNumber: 42,
       };
-      const plan: EnsureReleasePlanResult = {
-        outcome: "created",
-        releasePlan: { ReleasePlanId: 123 },
-        details: { releasePlanId: "123" },
-      };
       mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue(discovery);
-      mocks.ensureReleasePlan.mockReturnValue(plan);
+      const actual =
+        await vi.importActual<typeof import("../src/release-plan.ts")>("../src/release-plan.ts");
+      mocks.ensureReleasePlan.mockImplementation(actual.ensureReleasePlan);
 
       await main();
 
@@ -325,7 +362,8 @@ describe("release plan CLI", () => {
       );
       expect(existsSync(outputFile)).toBe(true);
       expect(mocks.createComment).toHaveBeenCalledOnce();
-      expect(mocks.createComment.mock.calls[0][0].body).toContain(`\`${apiVersion}\``);
+      expect(mocks.runner).not.toHaveBeenCalled();
+      expect(mocks.createComment.mock.calls[0][0].body).toContain("Manual Release Plan Required");
     },
   );
 

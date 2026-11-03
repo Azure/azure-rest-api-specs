@@ -1305,7 +1305,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("keeps the existing first-version selection when metadata contains multiple versions", () => {
+  it("identifies differing metadata versions as requiring manual selection", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -1325,7 +1325,7 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "multiple-versions" });
   });
 
   it("ignores conflicting SDK types when resolving the API version", () => {

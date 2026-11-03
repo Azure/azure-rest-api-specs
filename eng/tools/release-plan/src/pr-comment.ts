@@ -29,6 +29,7 @@ export interface PrCommentParams {
   apiVersion: string;
   /** TypeSpec project path */
   tspProjectPath: string;
+  manualCreationRequired?: boolean;
 }
 
 /**
@@ -48,13 +49,24 @@ export interface PrCommentParams {
  * });
  */
 export async function postReleasePlanComment(params: PrCommentParams): Promise<void> {
-  const { octokit, owner, repo, prNumber, planId, planLink, apiVersion, tspProjectPath } = params;
+  const {
+    octokit,
+    owner,
+    repo,
+    prNumber,
+    planId,
+    planLink,
+    apiVersion,
+    tspProjectPath,
+    manualCreationRequired,
+  } = params;
 
   const body = buildReleaseplanCommentBody({
     planId,
     planLink,
     apiVersion,
     tspProjectPath,
+    manualCreationRequired,
   });
 
   try {
@@ -88,6 +100,7 @@ export interface CommentBodyParams {
   apiVersion: string;
   /** TypeSpec project path */
   tspProjectPath: string;
+  manualCreationRequired?: boolean;
 }
 
 /**
@@ -96,7 +109,19 @@ export interface CommentBodyParams {
  * @returns Formatted markdown comment body
  */
 export function buildReleaseplanCommentBody(params: CommentBodyParams): string {
-  const { planId, planLink, apiVersion, tspProjectPath } = params;
+  const { planId, planLink, apiVersion, tspProjectPath, manualCreationRequired } = params;
+
+  if (manualCreationRequired) {
+    return (
+      "### Manual Release Plan Required\n\n" +
+      "A single concrete API version could not be determined from TypeSpec metadata. " +
+      "No release-plan lookup or creation was attempted, and SDK generation is skipped.\n\n" +
+      "Select the intended API version and create or link a plan in " +
+      "[Release Planner](https://aka.ms/azsdk/releaseplan-dashboard). " +
+      "Then rerun this pipeline with the `ReleasePlanId` parameter.\n\n" +
+      `**TypeSpec project:** \`${tspProjectPath}\`\n`
+    );
+  }
 
   let body = `### ✅ Release Plan Created\n\n`;
   body +=
