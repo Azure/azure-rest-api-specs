@@ -485,6 +485,13 @@ model OfferDetail {
   privateOfferIds?: string[];
 
   /**
+   * ARM SaaS resource id
+   */
+  @added(Microsoft.Confluent.Versions.v2026_06_02_preview)
+  @maxLength(500)
+  saasResourceId?: string;
+
+  /**
    * SaaS Offer Status
    */
   status?: SaaSOfferStatus;
