@@ -2002,21 +2002,6 @@ model IpExtendedCommunityAddOperationProperties {
   "python"
 );
 @@clientName(
-  Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
-  "ManagementNetworkConfigurationPatchableProperties",
-  "python"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
-  "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
-  "python"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
-  "OptionBProperties",
-  "python"
-);
-@@clientName(
   Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicy,
   "StaticRoutePolicy",
   "python"

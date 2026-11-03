@@ -27,10 +27,12 @@ import type {
 // #region imports/constants
 import { execFile } from "../../../shared/src/exec.ts";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
+import { escapeHtml } from "../../../shared/src/markdown.ts";
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
 import { commentOrUpdate } from "../comment.ts";
+import { buildSdkBreakingChangesSummary, hasSdkBreakingChanges } from "./sdk-breaking-changes.ts";
 import { extractInputs } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
@@ -429,6 +431,35 @@ export async function summarizeChecksImpl(
     }
   }
 
+  let sdkBreakingChangesSummary: string | undefined = undefined;
+  const hasSdkBreakingChange = hasSdkBreakingChanges(labelNames);
+  if (hasSdkBreakingChange) {
+    /* check for stale workflow-run handoff SHA */
+    const { data: pull } = await github.rest.pulls.get({
+      owner,
+      repo,
+      pull_number: issue_number,
+    });
+    if (pull.head.sha !== head_sha) {
+      core.warning(
+        `Skipping SDK breaking-change summary for stale commit ${head_sha}; current PR head is ${pull.head.sha}.`,
+      );
+    } else {
+      const comments = await github.paginate(github.rest.issues.listComments, {
+        owner,
+        repo,
+        issue_number,
+        per_page: PER_PAGE_MAX,
+      });
+      sdkBreakingChangesSummary = buildSdkBreakingChangesSummary(
+        labelNames,
+        comments ?? [],
+        head_sha,
+        prUrl,
+      );
+    }
+  }
+
   const [commentBody, automatedChecksMet] = createNextStepsComment(
     core,
     repo,
@@ -438,6 +469,7 @@ export async function summarizeChecksImpl(
     fyiCheckRuns,
     impactAssessment !== undefined,
     target_url,
+    sdkBreakingChangesSummary,
   );
 
   automatedChecksMet.target_url = target_url;
@@ -860,21 +892,16 @@ export function createNextStepsComment(
   fyiRuns: CheckRunData[],
   assessmentCompleted: boolean,
   target_url: string,
+  sdkBreakingChangesSummary: string = "",
 ): [string, CheckRunResult] {
   // select just the metadata that we need about the runs.
   const failingCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
-  // determine if required runs have any in-progress or queued runs
-  // if there are any, we consider the requirements not met.
-  // if there are NO required runs, we also consider this to be a "requirements met" situation.
-  // there is a possibility that this will be a false positive, but it is better than
-  // assuming that the requirements are not met when they actually are.
-  const requiredCheckInfosPresent = requiredRuns.every((run) => {
-    const status = run.status.toLowerCase();
-    return status === "completed";
-  });
+  const pendingRequiredCheckNames = requiredRuns
+    .filter((run) => run.status.toLowerCase() !== "completed")
+    .map((run) => run.name);
 
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
@@ -884,11 +911,12 @@ export function createNextStepsComment(
     core,
     labels,
     `${repo}/${targetBranch}`,
-    requiredCheckInfosPresent,
+    pendingRequiredCheckNames,
     failingCheckInfos,
     fyiCheckInfos,
     assessmentCompleted,
     target_url,
+    sdkBreakingChangesSummary,
   );
 
   return [commentBody, automatedChecksMet];
@@ -901,11 +929,12 @@ function buildNextStepsToMergeCommentBody(
   core: Core,
   labels: string[],
   targetBranch: string,
-  requiredCheckInfosPresent: boolean,
+  pendingRequiredCheckNames: string[],
   failingReqChecksInfo: CheckMetadata[],
   failingFyiChecksInfo: CheckMetadata[],
   assessmentCompleted: boolean,
   target_url: string,
+  sdkBreakingChangesSummary: string,
 ): [string, CheckRunResult] {
   // Build the comment header
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
@@ -917,11 +946,12 @@ function buildNextStepsToMergeCommentBody(
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
   // we consider requirements met if there are:
   // - no blockers (which includes violated labelling rules in its definition) (anyBlockerPresent)
-  // - that none of the required checks are in_progress or queued (requiredCheckInfosPresent)
+  // - that none of the required checks are in_progress or queued
   // - and that the assessment is completed. If it is not, we assume we are still evaluating the requirements. Not having
   //   the assessment completed is a blocker, as we may end up having violated labelling rules that would be detected only after
   //   it is completed.
-  const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent && assessmentCompleted;
+  const requirementsMet =
+    !anyBlockerPresent && pendingRequiredCheckNames.length === 0 && assessmentCompleted;
 
   // Compose the body based on the current state
   const [commentBody, automatedChecksMet] = getCommentBody(
@@ -931,10 +961,29 @@ function buildNextStepsToMergeCommentBody(
     failingReqChecksInfo,
     failingFyiChecksInfo,
     violatedReqLabelsRules,
+    buildPendingEvaluationBody(assessmentCompleted, pendingRequiredCheckNames),
     target_url,
+    sdkBreakingChangesSummary,
   );
 
   return [commentTitle + commentBody, automatedChecksMet];
+}
+
+function buildPendingEvaluationBody(
+  assessmentCompleted: boolean,
+  pendingRequiredCheckNames: string[],
+): string {
+  const pendingItems = pendingRequiredCheckNames.map(
+    (name) => `<li>Waiting for required check <code>${escapeHtml(name)}</code> to complete.</li>`,
+  );
+  if (!assessmentCompleted) {
+    pendingItems.unshift(
+      "<li>PR impact assessment is not complete. Additional requirements may be identified.</li>",
+    );
+  }
+  return pendingItems.length > 0
+    ? `<h3>Still evaluating</h3><ul>${pendingItems.join("")}</ul>`
+    : "";
 }
 
 /**
@@ -945,6 +994,7 @@ function buildNextStepsToMergeCommentBody(
  * @param failingReqChecksInfo - Failing required checks info
  * @param failingFyiChecksInfo - Failing FYI checks info
  * @param violatedRequiredLabelsRules - Violated required label rules
+ * @param pendingEvaluationBody - Incomplete assessment and required checks
  * @param target_url - The target URL for the automated checks met run which will be set at the outset of summarize-checks
  * @returns The body content HTML and the CheckRunResult that automated checks met should be set to.
  */
@@ -955,7 +1005,9 @@ function getCommentBody(
   failingReqChecksInfo: CheckMetadata[],
   failingFyiChecksInfo: CheckMetadata[],
   violatedRequiredLabelsRules: RequiredLabelRule[],
+  pendingEvaluationBody: string,
   target_url: string,
+  sdkBreakingChangesSummary: string,
 ): [string, CheckRunResult] {
   let status: "pending" | keyof typeof CheckConclusion = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
@@ -1004,6 +1056,8 @@ function getCommentBody(
     // dont need to update the status of the check, as pending is the default state.
   }
 
+  bodyProper += pendingEvaluationBody;
+  bodyProper += sdkBreakingChangesSummary;
   bodyProper += `<br /><br />Comment generated by <a href="${target_url}">summarize-checks</a> workflow run.`;
 
   const automatedChecksMet: CheckRunResult = {
@@ -1032,12 +1086,23 @@ function getBlockerPresentBody(
   const violatedReqLabelsRulesNextStepsText = buildViolatedLabelRulesNextStepsText(
     violatedRequiredLabelsRules,
   );
+  const remainingRequirements =
+    buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules, "remaining") +
+    buildFailingChecksNextStepsText(failingRequiredChecks, "required", "remaining");
+  const remainingRequirementCount =
+    selectByPrecedence(violatedRequiredLabelsRules, "remaining").length +
+    selectByPrecedence(failingRequiredChecks, "remaining").length;
   return (
     "Next steps that must be taken to merge this PR: <br/>" +
     "<ul>" +
     violatedReqLabelsRulesNextStepsText +
     failingRequiredChecksNextStepsText +
-    "</ul>"
+    "</ul>" +
+    (remainingRequirements
+      ? `<details><summary>Other outstanding requirements (${remainingRequirementCount})</summary><ul>` +
+        remainingRequirements +
+        "</ul></details>"
+      : "")
   );
 }
 
@@ -1047,12 +1112,29 @@ function getBlockerPresentBody(
  * @returns The FYI present body HTML
  */
 function getFyiPresentBody(failingFyiChecksInfo: CheckMetadata[]): string {
+  const remainingChecks = buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI", "remaining");
+  const remainingCheckCount = selectByPrecedence(failingFyiChecksInfo, "remaining").length;
   return (
     "Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>" +
     "Addressing the following failures is highly recommended:<br/>" +
     "<ul>" +
     buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI") +
-    "</ul>"
+    "</ul>" +
+    (remainingChecks
+      ? `<details><summary>Other failing non-blocking checks (${remainingCheckCount})</summary><ul>` +
+        remainingChecks +
+        "</ul></details>"
+      : "")
+  );
+}
+
+function selectByPrecedence<T extends { precedence: number }>(
+  items: T[],
+  group: "next" | "remaining",
+): T[] {
+  const minPrecedence = Math.min(...items.map((item) => item.precedence));
+  return items.filter((item) =>
+    group === "next" ? item.precedence === minPrecedence : item.precedence > minPrecedence,
   );
 }
 
@@ -1065,13 +1147,12 @@ function getFyiPresentBody(failingFyiChecksInfo: CheckMetadata[]): string {
 function buildFailingChecksNextStepsText(
   failingChecks: CheckMetadata[],
   checkKind: "required" | "FYI",
+  group: "next" | "remaining" = "next",
 ): string {
   let failingChecksNextStepsText = "";
   if (failingChecks.length > 0) {
-    const minPrecedence = Math.min(...failingChecks.map((check) => check.precedence));
-    const checksToDisplay = failingChecks.filter((check) => check.precedence === minPrecedence);
+    const checksToDisplay = selectByPrecedence(failingChecks, group);
 
-    // assert: checksToDisplay.length > 0
     failingChecksNextStepsText = checksToDisplay
       .map((check) =>
         checkKind === "required"
@@ -1090,14 +1171,11 @@ function buildFailingChecksNextStepsText(
  */
 function buildViolatedLabelRulesNextStepsText(
   violatedRequiredLabelsRules: RequiredLabelRule[],
+  group: "next" | "remaining" = "next",
 ): string {
   let violatedReqLabelsNextStepsText = "";
   if (violatedRequiredLabelsRules.length > 0) {
-    const minPrecedence = Math.min(...violatedRequiredLabelsRules.map((rule) => rule.precedence));
-    const rulesToDisplay = violatedRequiredLabelsRules.filter(
-      (rule) => rule.precedence == minPrecedence,
-    );
-    // assert: rulesToDisplay.length > 0
+    const rulesToDisplay = selectByPrecedence(violatedRequiredLabelsRules, group);
     violatedReqLabelsNextStepsText = rulesToDisplay
       .map((rule) => `<li>❌ ${rule.troubleshootingGuide}</li>`)
       .join("");

@@ -123,6 +123,42 @@ using Microsoft.NetApp;
 @@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
 @@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");
 
+@@clientName(ExternalSvm, "ExternalSVM", "go");
+@@clientName(ExternalSvmProperties, "ExternalSVMProperties", "go");
+@@clientName(ExternalSvmList, "ExternalSVMList", "go");
+@@clientName(ExternalSvms, "ExternalSVMs", "go");
+@@clientName(ExternalSvmProperties.ontapSvmName, "ontapSVMName", "go");
+@@clientName(
+  ExternalSvmProperties.svmPeerResourceIds,
+  "SVMPeerResourceIDs",
+  "go"
+);
+
+@@clientName(SvmPeer, "SVMPeer", "go");
+@@clientName(SvmPeerProperties, "SVMPeerProperties", "go");
+@@clientName(SvmPeerList, "SVMPeerList", "go");
+@@clientName(SvmPeers, "SVMPeers", "go");
+@@clientName(SvmPeerStatus, "SVMPeerStatus", "go");
+@@clientName(SvmPeerType, "SVMPeerType", "go");
+@@clientName(SvmPeerProperties.anfSvmName, "anfSVMName", "go");
+@@clientName(
+  SvmPeerProperties.externalSvmResourceId,
+  "externalSVMResourceID",
+  "go"
+);
+
+@@clientName(ExternalCacheProperties.originSvmName, "originSVMName", "go");
+@@clientName(
+  ExternalCacheConnectionProperties.externalSvmResourceId,
+  "externalSVMResourceID",
+  "go"
+);
+@@clientName(
+  ExternalCacheConnectionProperties.svmPeerResourceId,
+  "SVMPeerResourceID",
+  "go"
+);
+
 // =============================================================================
 // C# customizations (csharp scope)
 // =============================================================================

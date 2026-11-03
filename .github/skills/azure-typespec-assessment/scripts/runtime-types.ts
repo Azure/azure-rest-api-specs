@@ -532,6 +532,34 @@ export interface SemanticOperationReference {
   [key: string]: unknown;
 }
 
+export type SemanticChangeType =
+  | "versioning"
+  | "operation"
+  | "type"
+  | "sdk-customization"
+  | "documentation"
+  | "generation-configuration";
+
+export interface SemanticChangeFact {
+  id: string;
+  sourceChangeId: string;
+  hunkIds: string[];
+  declarationIds: string[];
+  beforeDeclarationIds: string[];
+  afterDeclarationIds: string[];
+  changeType: SemanticChangeType;
+  declarationKind?: string;
+  qualifiedName?: string;
+  action: "add" | "modify" | "remove";
+  facets: string[];
+  evidenceRef: {
+    artifact: "source/source-index.json";
+    sourceChangeId: string;
+    hunkIds: string[];
+    declarationIds: string[];
+  };
+}
+
 export interface SemanticReviewUnit {
   id: string;
   projectId?: string;
@@ -548,6 +576,9 @@ export interface SemanticReviewUnit {
   action?: string;
   changeKind?: string;
   intentType?: string;
+  classificationVersion?: number;
+  changeFacts?: SemanticChangeFact[];
+  changeTypes?: SemanticChangeType[];
   groupingEvidence?: {
     reasons?: string[];
     edges?: { summary?: string }[];
@@ -942,6 +973,7 @@ export interface PreparationBlocker {
   projectId?: string;
   comparisonRole?: string;
   sourceRevision?: string;
+  evidenceFactIds?: string[];
 }
 
 export interface ArtifactSelection {
@@ -1098,6 +1130,14 @@ export interface DownstreamCandidate {
   evidenceFactIds: string[];
   reviewRequired: true;
   rootCauseIds?: string[];
+  identityEvidence?: DownstreamIdentityEvidence;
+}
+
+export interface DownstreamIdentityEvidence {
+  basis: "typespec-renamed-from";
+  baselineIdentity: string;
+  targetIdentity: string;
+  declarationIds: string[];
 }
 
 export interface DownstreamRootCause {
@@ -1688,6 +1728,8 @@ export interface AssessmentOutput {
   safety: {
     scope: "rest-and-downstream-only";
     status: "passed" | "failed" | "not-assessed";
+    verdict?: "passed" | "failed" | "unknown";
+    coverage?: "complete" | "partial" | "blocked";
     [key: string]: unknown;
   };
   dimensions: {
@@ -1699,14 +1741,20 @@ export interface AssessmentOutput {
     };
     rest: {
       status: string;
+      verdict?: "passed" | "failed" | "unknown";
+      coverage?: "complete" | "partial" | "blocked";
       findings: AssessmentFinding[];
       blockers?: unknown[];
+      rejectedCandidateCount?: number;
       legacyFindings?: LegacyAssessmentFinding[];
     };
     downstream: {
       status: string;
+      verdict?: "passed" | "failed" | "unknown";
+      coverage?: "complete" | "partial" | "blocked";
       findings: AssessmentFinding[];
       blockers?: unknown[];
+      rejectedCandidateCount?: number;
       methodGroups?: AssessmentMethodGroup[];
       operationGroups?: AssessmentMethodGroup[];
       typeImpacts?: AssessmentTypeImpact[];

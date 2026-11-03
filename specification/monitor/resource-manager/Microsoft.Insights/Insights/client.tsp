@@ -78,6 +78,27 @@ namespace Microsoft.InsightsCombinedClient;
 );
 
 // C# compatibility names from the shipped AutoRest-based Azure.ResourceManager.Monitor package.
+@@clientName(
+  VmInsightsOnboarding.VMInsightsOnboardingStatus,
+  "VmInsightsOnboardingStatus",
+  "csharp"
+);
+@@clientName(
+  VmInsightsOnboarding.WorkspaceInfo,
+  "DataContainerWorkspace",
+  "csharp"
+);
+@@clientName(
+  DiagnosticsSettings.DiagnosticSettingsCategoryResource,
+  "DiagnosticSettingsCategory",
+  "csharp"
+);
+@@clientName(
+  DiagnosticsSettings.DiagnosticSettingsCategory,
+  "DiagnosticSettingsCategoryProperties",
+  "csharp"
+);
+@@clientName(DiagnosticsSettings.CategoryType, "MonitorCategoryType", "csharp");
 @@clientName(ActionGroupsApi.ActionGroup, "ActionGroupProperties", "csharp");
 @@clientName(ActionGroupsApi.ActionGroup.enabled, "IsEnabled", "csharp");
 @@clientName(ActionGroupsApi.ActionGroupResource, "ActionGroup", "csharp");
@@ -1839,11 +1860,7 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   "python"
 );
 
-@@clientLocation(
-  VMInsightsOnboardingStatuses.getOnboardingStatus,
-  exact("vMInsights"),
-  "javascript"
-);
+@@clientName(VMInsightsOnboardingStatuses, exact("vMInsights"), "javascript");
 
 @@clientName(
   xmsClientTenantIdParameter.`x-ms-client-tenant-id`,
