@@ -129,11 +129,15 @@ If the identity matches between base and head but the justification differs, it'
 
 ### Inline Suppression Extraction
 
-The tool parses `.tsp` files using the TypeSpec compiler AST and walks the tree to find `#suppress` directives. It tracks the structural scope (namespace, model, property, operation, etc.) to build the `anchorPath`.
+The tool compiles each project's source snapshot with its configured linter and reads suppressions through the compiler's `getSuppressions(program)` API. Sources are compiled together, including files not imported by `main.tsp`, to retain the full inventory. Install the tool's dependencies before analysis; both revisions use the currently installed libraries. Emitters are not run and no output files are written.
+
+Inline records include `used`, which indicates whether a diagnostic matched during that snapshot's compilation, including rejected attempts to suppress errors. A disabled rule, unavailable source, skipped emitter, or early compilation error can leave it `false`. Compilation diagnostics are reported, and usage reflects only the stages that ran. Parse and configuration errors stop analysis.
+
+Usage does not affect suppression identity or approval: unused directives are still reported and gated. Structural scope from the compiler is mapped to the tool's existing `anchorPath` format.
 
 ### Config Suppression Extraction
 
-Parses `tspconfig.yaml` using the `yaml` library and reads entries under `linter.disable`, recording each disabled rule and its justification.
+Reads local `linter.disable` entries through the compiler's `collectLinterDisables` API, recording each rule, justification, and key location. Config records do not have a `used` flag.
 
 ### Rule Metadata Enrichment
 
