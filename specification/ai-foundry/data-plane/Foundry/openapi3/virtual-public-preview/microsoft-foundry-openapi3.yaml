@@ -98551,6 +98551,7 @@ components:
             $ref: '#/components/schemas/VoiceAgentSpeechStartPhrase'
           maxItems: 100
           description: Transcripts that exactly match one of these phrases never interrupt the agent. Defaults to an empty list.
+          default: []
         interruption_phrases:
           type: array
           items:
@@ -98559,6 +98560,7 @@ components:
           description: |-
             Transcripts that contain one of these phrases as whole words interrupt the agent regardless of the word count.
             Defaults to an empty list.
+          default: []
       description: Rules for speech that starts while the agent is speaking.
       x-ms-foundry-meta:
         required_previews:

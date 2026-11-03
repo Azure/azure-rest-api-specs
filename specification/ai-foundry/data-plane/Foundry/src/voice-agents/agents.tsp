@@ -851,14 +851,14 @@ model VoiceAgentSpeechStartWhileAssistantSpeaking {
     Transcripts that exactly match one of these phrases never interrupt the agent. Defaults to an empty list.
     """)
   @maxItems(100)
-  acknowledgement_phrases?: VoiceAgentSpeechStartPhrase[];
+  acknowledgement_phrases?: VoiceAgentSpeechStartPhrase[] = #[];
 
   @doc("""
     Transcripts that contain one of these phrases as whole words interrupt the agent regardless of the word count.
     Defaults to an empty list.
     """)
   @maxItems(100)
-  interruption_phrases?: VoiceAgentSpeechStartPhrase[];
+  interruption_phrases?: VoiceAgentSpeechStartPhrase[] = #[];
 }
 
 @doc("A turn-taking classifier that judges whether the user's speech takes the turn.")

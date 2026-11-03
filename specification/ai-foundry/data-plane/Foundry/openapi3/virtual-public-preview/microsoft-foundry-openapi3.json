@@ -109990,7 +109990,8 @@
               "$ref": "#/components/schemas/VoiceAgentSpeechStartPhrase"
             },
             "maxItems": 100,
-            "description": "Transcripts that exactly match one of these phrases never interrupt the agent. Defaults to an empty list."
+            "description": "Transcripts that exactly match one of these phrases never interrupt the agent. Defaults to an empty list.",
+            "default": []
           },
           "interruption_phrases": {
             "type": "array",
@@ -109998,7 +109999,8 @@
               "$ref": "#/components/schemas/VoiceAgentSpeechStartPhrase"
             },
             "maxItems": 100,
-            "description": "Transcripts that contain one of these phrases as whole words interrupt the agent regardless of the word count.\nDefaults to an empty list."
+            "description": "Transcripts that contain one of these phrases as whole words interrupt the agent regardless of the word count.\nDefaults to an empty list.",
+            "default": []
           }
         },
         "description": "Rules for speech that starts while the agent is speaking.",
