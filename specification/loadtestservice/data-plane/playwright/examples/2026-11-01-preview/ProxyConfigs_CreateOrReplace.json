@@ -12,8 +12,8 @@
         "default-proxy": {
           "server": "https://proxy.example.com:8443",
           "credentials": {
-            "username": "proxy-user",
-            "secretUri": "https://example-vault.vault.azure.net/secrets/proxy-password"
+            "usernameSecretUri": "https://example-vault.vault.azure.net/secrets/proxy-username",
+            "passwordSecretUri": "https://example-vault.vault.azure.net/secrets/proxy-password"
           }
         },
         "corp-route": {
@@ -37,7 +37,11 @@
         "description": "Routes corporate traffic through approved proxies.",
         "proxyPool": {
           "default-proxy": {
-            "server": "https://proxy.example.com:8443"
+            "server": "https://proxy.example.com:8443",
+            "credentials": {
+              "usernameSecretUri": "https://example-vault.vault.azure.net/secrets/proxy-username",
+              "passwordSecretUri": "https://example-vault.vault.azure.net/secrets/proxy-password"
+            }
           },
           "corp-route": {
             "server": "http://corp-proxy.example.com:8080",
@@ -53,8 +57,10 @@
         "systemData": {
           "createdAt": "2026-10-27T06:00:00Z",
           "createdBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+          "createdByName": "Example Creator",
           "lastModifiedAt": "2026-10-27T06:00:00Z",
-          "lastModifiedBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff"
+          "lastModifiedBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+          "lastModifiedByName": "Example Creator"
         }
       }
     },
@@ -65,7 +71,11 @@
         "description": "Routes corporate traffic through approved proxies.",
         "proxyPool": {
           "default-proxy": {
-            "server": "https://proxy.example.com:8443"
+            "server": "https://proxy.example.com:8443",
+            "credentials": {
+              "usernameSecretUri": "https://example-vault.vault.azure.net/secrets/proxy-username",
+              "passwordSecretUri": "https://example-vault.vault.azure.net/secrets/proxy-password"
+            }
           },
           "corp-route": {
             "server": "http://corp-proxy.example.com:8080",
@@ -81,8 +91,10 @@
         "systemData": {
           "createdAt": "2026-10-27T06:00:00Z",
           "createdBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+          "createdByName": "Example Creator",
           "lastModifiedAt": "2026-10-27T06:00:00Z",
-          "lastModifiedBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff"
+          "lastModifiedBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+          "lastModifiedByName": "Example Creator"
         }
       }
     }

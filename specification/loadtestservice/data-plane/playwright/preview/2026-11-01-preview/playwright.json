@@ -766,7 +766,7 @@
     "/playwrightworkspaces/{workspaceId}/proxy-configs": {
       "get": {
         "operationId": "ProxyConfigs_List",
-        "description": "Lists saved proxy configurations without credentials. Supports query parameters like top, skip, and filter. Default page size is 10. Use nextLink in response to fetch additional results.",
+        "description": "Lists saved proxy configurations. Supports query parameters like top, skip, and filter. Default page size is 10. Use nextLink in response to fetch additional results.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -832,7 +832,7 @@
     "/playwrightworkspaces/{workspaceId}/proxy-configs/{proxyConfigId}": {
       "get": {
         "operationId": "ProxyConfigs_Get",
-        "description": "Gets a saved proxy configuration without credentials.",
+        "description": "Gets a saved proxy configuration.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -903,7 +903,7 @@
       },
       "put": {
         "operationId": "ProxyConfigs_CreateOrReplace",
-        "description": "Creates or replaces a proxy configuration and returns it without credentials.",
+        "description": "Creates or replaces a proxy configuration and returns it.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -996,7 +996,7 @@
       },
       "patch": {
         "operationId": "ProxyConfigs_Update",
-        "description": "Updates an existing proxy configuration and returns it without credentials.",
+        "description": "Updates an existing proxy configuration and returns it.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1997,6 +1997,62 @@
         }
       }
     },
+    "Credentials": {
+      "type": "object",
+      "description": "Azure Key Vault secret references used for authentication.",
+      "properties": {
+        "usernameSecretUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault secret URI for the authentication username.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "passwordSecretUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault secret URI for the authentication password.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "usernameSecretUri",
+        "passwordSecretUri"
+      ]
+    },
+    "CredentialsUpdate": {
+      "type": "object",
+      "description": "Azure Key Vault secret references used for authentication.",
+      "properties": {
+        "usernameSecretUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault secret URI for the authentication username.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "passwordSecretUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault secret URI for the authentication password.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "IdentityType": {
       "type": "string",
       "description": "The type of managed identity used to access a linked Azure resource.",
@@ -2536,56 +2592,6 @@
         }
       }
     },
-    "ProxyCredentials": {
-      "type": "object",
-      "description": "The proxy endpoint credentials.",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "The proxy authentication username.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "secretUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The secret URI of the proxy password in the playwright workspace's linked Azure Key Vault.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "username",
-        "secretUri"
-      ]
-    },
-    "ProxyCredentialsUpdate": {
-      "type": "object",
-      "description": "The proxy endpoint credentials.",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "The proxy authentication username.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "secretUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The secret URI of the proxy password in the playwright workspace's linked Azure Key Vault.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        }
-      }
-    },
     "ProxyEndpoint": {
       "type": "object",
       "description": "A named endpoint in a browser proxy pool. Required 'default-proxy' named proxy endpoint without pattern and priority specified for requests that doesn't match any pattern in the given proxy endpoints.",
@@ -2627,9 +2633,10 @@
           ]
         },
         "credentials": {
-          "$ref": "#/definitions/ProxyCredentials",
-          "description": "The proxy endpoint credentials. Set this to null to delete the existing value.",
+          "$ref": "#/definitions/Credentials",
+          "description": "The credentials used to authenticate with this proxy endpoint. Set this to null to delete the existing value.",
           "x-ms-mutability": [
+            "read",
             "update",
             "create"
           ]
@@ -2680,9 +2687,10 @@
           ]
         },
         "credentials": {
-          "$ref": "#/definitions/ProxyCredentialsUpdate",
-          "description": "The proxy endpoint credentials. Set this to null to delete the existing value.",
+          "$ref": "#/definitions/CredentialsUpdate",
+          "description": "The credentials used to authenticate with this proxy endpoint. Set this to null to delete the existing value.",
           "x-ms-mutability": [
+            "read",
             "update",
             "create"
           ]
@@ -2931,6 +2939,11 @@
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
+        "createdByName": {
+          "type": "string",
+          "description": "The display name of the Microsoft Entra caller who created the resource.",
+          "readOnly": true
+        },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
@@ -2943,6 +2956,11 @@
           "minLength": 3,
           "maxLength": 36,
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        },
+        "lastModifiedByName": {
+          "type": "string",
+          "description": "The display name of the Microsoft Entra caller who last modified the resource.",
           "readOnly": true
         }
       },

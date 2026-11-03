@@ -19,6 +19,10 @@ model SystemData {
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   createdBy: string;
 
+  @doc("The display name of the Microsoft Entra caller who created the resource.")
+  @visibility(Lifecycle.Read)
+  createdByName?: string;
+
   @doc("The resource's last modification timestamp in UTC, including its initial creation.")
   @visibility(Lifecycle.Read)
   lastModifiedAt: utcDateTime;
@@ -29,4 +33,8 @@ model SystemData {
   @maxLength(36)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   lastModifiedBy: string;
+
+  @doc("The display name of the Microsoft Entra caller who last modified the resource.")
+  @visibility(Lifecycle.Read)
+  lastModifiedByName?: string;
 }

@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "./systemdata.tsp";
+import "./credentials.tsp";
 
 using Azure.Core;
 using TypeSpec.Http;
@@ -71,21 +72,9 @@ model ProxyEndpoint {
   @maxValue(100)
   priority?: int32;
 
-  @doc("The proxy endpoint credentials. Set this to null to delete the existing value.")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  credentials?: ProxyCredentials;
-}
-
-@doc("The proxy endpoint credentials.")
-@added(Versions.v2026_11_01_preview)
-model ProxyCredentials {
-  @doc("The proxy authentication username.")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  username: string;
-
-  @doc("The secret URI of the proxy password in the playwright workspace's linked Azure Key Vault.")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  secretUri: url;
+  @doc("The credentials used to authenticate with this proxy endpoint. Set this to null to delete the existing value.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  credentials?: Credentials;
 }
 
 // Operations ////////////////////
@@ -94,18 +83,18 @@ model ProxyCredentials {
 @added(Versions.v2026_11_01_preview)
 interface ProxyConfigs {
   // ProxyConfig Operations
-  @doc("Creates or replaces a proxy configuration and returns it without credentials.")
+  @doc("Creates or replaces a proxy configuration and returns it.")
   createOrReplace is Operations.ResourceCreateOrReplace<ProxyConfig>;
 
-  @doc("Updates an existing proxy configuration and returns it without credentials.")
+  @doc("Updates an existing proxy configuration and returns it.")
   update is Operations.ResourceUpdate<ProxyConfig>;
 
-  @doc("Gets a saved proxy configuration without credentials.")
+  @doc("Gets a saved proxy configuration.")
   get is Operations.ResourceRead<ProxyConfig>;
 
   @doc("Deletes a proxy configuration.")
   delete is Operations.ResourceDelete<ProxyConfig>;
 
-  @doc("Lists saved proxy configurations without credentials. Supports query parameters like top, skip, and filter. Default page size is 10. Use nextLink in response to fetch additional results.")
+  @doc("Lists saved proxy configurations. Supports query parameters like top, skip, and filter. Default page size is 10. Use nextLink in response to fetch additional results.")
   list is Operations.ResourceList<ProxyConfig>;
 }

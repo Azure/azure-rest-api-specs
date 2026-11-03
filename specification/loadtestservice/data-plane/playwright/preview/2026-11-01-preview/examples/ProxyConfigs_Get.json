@@ -14,7 +14,11 @@
         "description": "Updated routing policy.",
         "proxyPool": {
           "default-proxy": {
-            "server": "https://proxy.example.com:8443"
+            "server": "https://proxy.example.com:8443",
+            "credentials": {
+              "usernameSecretUri": "https://example-vault.vault.azure.net/secrets/proxy-username",
+              "passwordSecretUri": "https://example-vault.vault.azure.net/secrets/new-password"
+            }
           },
           "corp-route": {
             "server": "http://corp-proxy.example.com:8080",
@@ -29,8 +33,10 @@
         "systemData": {
           "createdAt": "2026-10-27T06:00:00Z",
           "createdBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+          "createdByName": "Example Creator",
           "lastModifiedAt": "2026-10-27T07:00:00Z",
-          "lastModifiedBy": "cccccccc-dddd-eeee-ffff-000000000000"
+          "lastModifiedBy": "cccccccc-dddd-eeee-ffff-000000000000",
+          "lastModifiedByName": "Example Modifier"
         }
       }
     }
