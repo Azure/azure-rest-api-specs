@@ -464,7 +464,7 @@ alias CostControlHeadResponse = {
 @added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface AccountCostControls {
-  /** Gets an account-owned cost control and its representation entity tag. Successful reads return 200 with the resource body. */
+  /** Gets an account-owned cost control and its representation entity tag. */
   get is ArmResourceRead<
     AccountCostControl,
     Response = ArmResponse<AccountCostControl> & CostControlEtagHeader
@@ -476,7 +476,7 @@ interface AccountCostControls {
     Response = CostControlHeadResponse
   >;
 
-  /** Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered. */
+  /** Creates or replaces an account-owned cost control. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AccountCostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -486,7 +486,7 @@ interface AccountCostControls {
           CostControlEtagHeader)
   >;
 
-  /** Updates an account-owned budget synchronously. Omitting properties preserves all existing budget properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields; an unchanged budget retains its entity tag. */
+  /** Updates an account-owned cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields; an unchanged cost control retains its entity tag. */
   update is ArmCustomPatchSync<
     AccountCostControl,
     CostControlPatch,
@@ -494,13 +494,13 @@ interface AccountCostControls {
     Response = ArmResponse<AccountCostControl> & CostControlEtagHeader
   >;
 
-  /** Deletes an account-owned cost control synchronously. */
+  /** Deletes an account-owned cost control. */
   delete is ArmResourceDeleteSync<
     AccountCostControl,
     Parameters = CostControlIfMatchHeader
   >;
 
-  /** Lists account-owned cost controls using the budget representation. */
+  /** Lists account-owned cost controls. */
   list is ArmResourceListByParent<
     AccountCostControl,
     Response = ArmResponse<CostControlListResult>
@@ -514,7 +514,7 @@ interface AccountCostControls {
 @added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface ProjectCostControls {
-  /** Gets a project-owned cost control and its representation entity tag. Successful reads return 200 with the resource body. */
+  /** Gets a project-owned cost control and its representation entity tag. */
   get is ArmResourceRead<
     ProjectCostControl,
     Response = ArmResponse<ProjectCostControl> & CostControlEtagHeader
@@ -526,7 +526,7 @@ interface ProjectCostControls {
     Response = CostControlHeadResponse
   >;
 
-  /** Creates or replaces a project-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. Omitted grouping selects the Foundry project's default counter; explicit project grouping is rejected. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered. */
+  /** Creates or replaces a project-owned const control. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProjectCostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -536,7 +536,7 @@ interface ProjectCostControls {
           CostControlEtagHeader)
   >;
 
-  /** Updates a Foundry project budget synchronously. Omitting properties preserves all existing budget properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields and merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection. */
+  /** Updates a Foundry project cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields; an unchanged cost control retains its entity tag. */
   update is ArmCustomPatchSync<
     ProjectCostControl,
     CostControlPatch,
@@ -544,13 +544,13 @@ interface ProjectCostControls {
     Response = ArmResponse<ProjectCostControl> & CostControlEtagHeader
   >;
 
-  /** Deletes a project-owned cost control synchronously. */
+  /** Deletes a project-owned cost control. */
   delete is ArmResourceDeleteSync<
     ProjectCostControl,
     Parameters = CostControlIfMatchHeader
   >;
 
-  /** Lists project-owned cost controls using the budget representation. */
+  /** Lists project-owned cost controls. */
   list is ArmResourceListByParent<
     ProjectCostControl,
     Response = ArmResponse<ProjectCostControlListResult> & CostControlEtagHeader
