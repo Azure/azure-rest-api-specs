@@ -3362,6 +3362,9 @@
           }
         },
         "x-ms-examples": {
+          "Get restore validation job and task failures with nested backend errors": {
+            "$ref": "./examples/RecoveryJobs_Get_RestoreReadinessFailures.json"
+          },
           "RecoveryJobs_Get_MaximumSet": {
             "$ref": "./examples/RecoveryJobs_Get_MaximumSet_Gen.json"
           }
@@ -3896,6 +3899,87 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/restore": {
+      "post": {
+        "operationId": "RecoveryPlanActions_Restore",
+        "tags": [
+          "RecoveryPlanActions"
+        ],
+        "description": "Starts a restore job for the selected included recovery resources. Omitted request content selects all included resources using policy defaults. Recovery point selections and policy overrides apply only to this request and do not modify saved profiles.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RequiredRequestHeaders"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "description": "The name of the recovery orchestration plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{5,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlanRestoreContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlanActionBaseResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restore all included recovery resources using policy defaults": {
+            "$ref": "./examples/RecoveryPlanActions_Restore_MinimumSet.json"
+          },
+          "Restore selected recovery resources with recovery group and operation policies": {
+            "$ref": "./examples/RecoveryPlanActions_Restore_MaximumSet.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/testFailover": {
       "post": {
         "operationId": "RecoveryPlanActions_TestFailover",
@@ -4397,6 +4481,90 @@
         "x-ms-examples": {
           "RecoveryPlanActions_ValidateForReprotect_MaximumSet": {
             "$ref": "./examples/RecoveryPlanActions_ValidateForReprotect_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForRestore": {
+      "post": {
+        "operationId": "RecoveryPlanActions_ValidateForRestore",
+        "tags": [
+          "RecoveryPlanActions"
+        ],
+        "description": "Starts a job to validate restore readiness for the selected included recovery resources. Returns a job acknowledgement, not qualification results. Readiness failures are reported through the job, task, and job resource error details. Omitted request content selects all included resources using policy defaults; request overrides do not modify saved profiles.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RequiredRequestHeaders"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "description": "The name of the recovery orchestration plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{5,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlanRestoreContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlanActionBaseResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate restore readiness excluding selected resources and recovery groups": {
+            "$ref": "./examples/RecoveryPlanActions_ValidateForRestore_ExcludeResources.json"
+          },
+          "Validate restore readiness for all included recovery resources": {
+            "$ref": "./examples/RecoveryPlanActions_ValidateForRestore_MinimumSet.json"
+          },
+          "Validate restore readiness with resource selections and recovery group policies": {
+            "$ref": "./examples/RecoveryPlanActions_ValidateForRestore_MaximumSet.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8614,6 +8782,15 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "additionalErrorDetails": {
+          "type": "array",
+          "description": "Structured child errors that provide additional details about this error. Each child can contain further errors.",
+          "items": {
+            "$ref": "#/definitions/JobErrorInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10255,6 +10432,24 @@
         "resiliencyType"
       ]
     },
+    "RecoveryGroupSelection": {
+      "type": "object",
+      "description": "Selects a recovery group for restore or restore-readiness validation, with an optional recovery point policy.",
+      "properties": {
+        "recoveryGroupId": {
+          "type": "string",
+          "description": "The name or full Azure resource ID of a recovery group belonging unambiguously to the selected recovery plan.",
+          "minLength": 1
+        },
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicy",
+          "description": "A request-only recovery point policy for the selected recovery group. An explicit resource recoveryPointId or pointInTime takes precedence; this policy overrides operation and profile defaults. Exclude filters cannot specify a recovery group policy."
+        }
+      },
+      "required": [
+        "recoveryGroupId"
+      ]
+    },
     "RecoveryGroupUpdate": {
       "type": "object",
       "description": "Represents a recovery orchestration group resource in the Azure Resilience Management provider namespace.",
@@ -10806,6 +11001,20 @@
       "required": [
         "resiliencyType"
       ]
+    },
+    "RecoveryPlanRestoreContent": {
+      "type": "object",
+      "description": "Request options shared by Restore and ValidateForRestore. Selections and recovery point policies apply only to this request and do not modify the recovery plan or its saved recovery configuration profiles.",
+      "properties": {
+        "resourceFilter": {
+          "$ref": "#/definitions/RestoreResourceFilter",
+          "description": "An optional filter over the recovery plan's included resource catalog. Omission selects all included resources."
+        },
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicy",
+          "description": "The operation-wide recovery point policy. An explicit resource recoveryPointId or pointInTime takes precedence, followed by a recovery group policy, this operation policy, the associated profile policy, and finally Latest. All overrides are transient and do not modify saved profiles."
+        }
+      }
     },
     "RecoveryPlanState": {
       "type": "string",
@@ -12344,6 +12553,94 @@
           }
         ]
       }
+    },
+    "RestoreDataSourceInput": {
+      "type": "object",
+      "description": "Selects a recovery resource within the plan by GUID. The service resolves its backup protected items from the resource catalog. recoveryPointId and pointInTime are alternatives; the service rejects a request containing both for the same resource. Either selection overrides group, operation, and profile policies. When neither is supplied, policy precedence applies. Exclude selectors must omit both.",
+      "properties": {
+        "recoveryResourceId": {
+          "type": "string",
+          "description": "The GUID identifying the recovery resource within the selected recovery plan. This is not an Azure resource ID or a backup protected item ID.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "recoveryPointId": {
+          "type": "string",
+          "description": "An optional recovery point name or full recovery point Azure resource ID. The service verifies ownership against the selected resource's backup protected items. Mutually exclusive with pointInTime and not allowed in Exclude filters.",
+          "minLength": 1
+        },
+        "pointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "An optional UTC timestamp for point-in-time recovery of the selected resource. Mutually exclusive with recoveryPointId and not allowed in Exclude filters. The service validates that the resource supports point-in-time recovery and that the timestamp is recoverable."
+        }
+      },
+      "required": [
+        "recoveryResourceId"
+      ]
+    },
+    "RestoreFilterType": {
+      "type": "string",
+      "description": "Whether matching resources are included in or excluded from this restore request.",
+      "enum": [
+        "Include",
+        "Exclude"
+      ],
+      "x-ms-enum": {
+        "name": "RestoreFilterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Include",
+            "value": "Include",
+            "description": "Selects the union of resources matching the supplied data source, workload, and recovery group selectors within the plan's included resource catalog."
+          },
+          {
+            "name": "Exclude",
+            "value": "Exclude",
+            "description": "Removes the union of resources matching the supplied selectors from the plan's included resource catalog."
+          }
+        ]
+      }
+    },
+    "RestoreResourceFilter": {
+      "type": "object",
+      "description": "Selects included recovery plan resources by resource GUID, workload, or recovery group. Criteria form a union, not an intersection. Exclude removes that union and cannot specify recovery point IDs, point-in-time selections, or recovery group policy overrides.",
+      "properties": {
+        "filterType": {
+          "$ref": "#/definitions/RestoreFilterType",
+          "description": "Whether matching resources are included in or excluded from the request."
+        },
+        "dataSources": {
+          "type": "array",
+          "description": "Recovery resource GUID selectors with optional per-resource recovery point IDs or point-in-time selections. Duplicate recoveryResourceId values are not allowed.",
+          "items": {
+            "$ref": "#/definitions/RestoreDataSourceInput"
+          },
+          "x-ms-identifiers": [
+            "recoveryResourceId"
+          ]
+        },
+        "workloadTypes": {
+          "type": "array",
+          "description": "Workload selectors combined with the data source and recovery group selectors by union.",
+          "items": {
+            "$ref": "#/definitions/WorkloadType"
+          }
+        },
+        "recoveryGroups": {
+          "type": "array",
+          "description": "Recovery group selectors and optional request-only recovery point policy overrides. Duplicate recoveryGroupId values are not allowed.",
+          "items": {
+            "$ref": "#/definitions/RecoveryGroupSelection"
+          },
+          "x-ms-identifiers": [
+            "recoveryGroupId"
+          ]
+        }
+      },
+      "required": [
+        "filterType"
+      ]
     },
     "SapAseInAzureVmRecoveryConfig": {
       "type": "object",
