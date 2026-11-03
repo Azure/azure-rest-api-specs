@@ -3159,6 +3159,82 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}/reset": {
+      "post": {
+        "operationId": "UpdateRuns_Reset",
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Resets selected Failed members to NotStarted only while the update run's evaluated execution state is Running.\nReturns the updated UpdateRun after the changes are durably saved.\nReturns a conflict if the run is not Running or no selected member is Failed.\nDoes not start or resume the run, invoke scheduling, or issue member update commands.\nExisting scheduling events may execute the reset members alongside other work under normal rollout controls.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateRunName",
+            "in": "path",
+            "description": "The name of the UpdateRun resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resets failed members in overlapping targets while other rollout work continues.": {
+            "$ref": "./examples/UpdateRuns_Reset.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}/skip": {
       "post": {
         "operationId": "UpdateRuns_Skip",
@@ -6850,6 +6926,81 @@
         ]
       }
     },
+    "ResetProperties": {
+      "type": "object",
+      "description": "The properties of a reset operation on a Running update run.",
+      "properties": {
+        "targets": {
+          "type": "array",
+          "description": "Targets whose Failed members are reset to NotStarted.\nMixed target types, duplicates, and overlapping targets are allowed.\nThe entire request is validated and selected members are deduplicated\nbefore any changes are saved. Unknown targets reject the entire request.\nOther member states are unchanged.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ResetTarget"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "targets"
+      ]
+    },
+    "ResetTarget": {
+      "type": "object",
+      "description": "A reset target within the update run identified by the request route.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResetTargetType",
+          "description": "The target type. Only Run, Stage, Group, and Member are supported."
+        },
+        "name": {
+          "type": "string",
+          "description": "Required for Stage, Group, and Member, using names from the run snapshot.\nOptional for Run; if supplied, must match the update run name in the route.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ResetTargetType": {
+      "type": "string",
+      "description": "The target type of a reset operation within an update run.",
+      "enum": [
+        "Run",
+        "Stage",
+        "Group",
+        "Member"
+      ],
+      "x-ms-enum": {
+        "name": "ResetTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Run",
+            "value": "Run",
+            "description": "Target the entire update run identified by the request route."
+          },
+          {
+            "name": "Stage",
+            "value": "Stage",
+            "description": "Target a stage within the update run."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "Target a group within the update run."
+          },
+          {
+            "name": "Member",
+            "value": "Member",
+            "description": "Target a member's execution entry within the update run."
+          }
+        ]
+      }
+    },
     "ResourceQuota": {
       "type": "object",
       "description": "The resource quota for the managed namespace.",
@@ -7557,7 +7708,8 @@
         "Skipped",
         "Failed",
         "Pending",
-        "Completed"
+        "Completed",
+        "PartiallyCompleted"
       ],
       "x-ms-enum": {
         "name": "UpdateState",
@@ -7602,6 +7754,11 @@
             "name": "Completed",
             "value": "Completed",
             "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed."
+          },
+          {
+            "name": "PartiallyCompleted",
+            "value": "PartiallyCompleted",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup that has partially completed."
           }
         ]
       }
