@@ -32,19 +32,6 @@ tag: package-preview-2026-04-01-preview
 ### Tag: package-2026-07-15
 These settings apply only when `--tag=package-2026-07-15` is specified on the command line.
 
-This stable version intentionally adds:
-
-- Throughput bucketing through `ThroughputSettingsResource.throughputBuckets` and
-  `ThroughputBucketResource`, promoted from `2026-04-01-preview`
-  ([promotion PR](https://github.com/pjohari-ms/azure-rest-api-specs/pull/9)).
-- Backup retention locking through `backupRetentionLockExpirationTimestamp`.
-- Per-partition automatic failover through `perPartitionAutomaticFailoverEnabled`.
-
-The `2026-03-15` stable and `2026-04-01-preview` contracts remain available.
-Throughput buckets remain absent from `2026-03-15` and are intentionally included
-in both `2026-04-01-preview` and `2026-07-15`. This is not a version-only release
-equivalent to the prior stable contract.
-
 ```yaml $(tag) == 'package-2026-07-15'
 input-file:
   - stable/2026-07-15/openapi.json
