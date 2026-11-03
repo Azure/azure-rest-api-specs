@@ -1,4 +1,4 @@
-import { table } from "@azure-tools/specs-shared/markdown";
+import { link, renderMarkdownDoc, section, table } from "@azure-tools/specs-shared/markdown";
 import { getSdkLanguage, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import type { IssueComment } from "../comment.ts";
 import { sdkLabels } from "./labelling.ts";
@@ -41,7 +41,7 @@ export function buildSdkBreakingChangesSummary(
           comment.body.includes(`<!-- sdk-breaking-change-head-sha: ${headSha} -->`),
       );
       return report
-        ? `<a href="${prUrl}#issuecomment-${report.id}">View ${stage} Results</a>`
+        ? link(`View ${stage} Results`, `${prUrl}#issuecomment-${report.id}`)
         : undefined;
     };
 
@@ -65,12 +65,12 @@ export function buildSdkBreakingChangesSummary(
   if (rows.length === 0) {
     return "";
   }
-  return [
-    "",
-    "<h3>SDK Breaking Change Detection and Mitigation</h3>",
-    table([["Language", "Status", "Analysis", "Mitigation", "Next action"], ...rows]),
-    "<p>💡 Mitigation reports contain proposed changes; they do not mean those changes have been applied or validated.</p>",
-    "<p>💡 When suppressing breaking changes, ensure to use the original breaking changes.</p>",
-    "",
-  ].join("\n\n");
+  return renderMarkdownDoc(
+    section("SDK Breaking Change Detection and Mitigation", [
+      table([["Language", "Status", "Analysis", "Mitigation", "Next action"], ...rows]),
+      "💡 Mitigation reports contain proposed changes; they do not mean those changes have been applied or validated.",
+      "💡 When suppressing breaking changes, ensure to use the original breaking changes.",
+    ]),
+    3,
+  );
 }
