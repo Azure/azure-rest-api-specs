@@ -186,6 +186,7 @@ model VoiceAgentLiveConversation {
 @doc("The kind of a persisted Live conversation item.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentLiveConversationItemType {
+  string,
   input: "input",
   output: "output",
   delegation: "delegation",
@@ -206,7 +207,7 @@ model VoiceAgentLiveConversationItem {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveInputConversationItem
   extends VoiceAgentLiveConversationItem {
-  type: "input";
+  type: VoiceAgentLiveConversationItemType.input;
 
   @doc("Captured user transcription, when available.")
   transcription?: string;
@@ -219,7 +220,7 @@ model VoiceAgentLiveInputConversationItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveOutputConversationItem
   extends VoiceAgentLiveConversationItem {
-  type: "output";
+  type: VoiceAgentLiveConversationItemType.output;
 
   @doc("Captured assistant transcription, not backend output or commentary guidance.")
   transcription?: string;
@@ -247,7 +248,7 @@ model VoiceAgentLiveDelegationConversationItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveClientDelegationConversationItem
   extends VoiceAgentLiveDelegationConversationItem {
-  target: "client";
+  target: VoiceAgentLiveDelegationTarget.client;
 
   @doc("Guidance for Live to communicate to the user, when accepted.")
   commentary?: string;
@@ -260,7 +261,7 @@ model VoiceAgentLiveClientDelegationConversationItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveResponsesDelegationConversationItem
   extends VoiceAgentLiveDelegationConversationItem {
-  target: "responses";
+  target: VoiceAgentLiveDelegationTarget.responses;
 
   @doc("Final backend text, omitted when unavailable; excludes raw tool output.")
   output?: string;
@@ -270,7 +271,7 @@ model VoiceAgentLiveResponsesDelegationConversationItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveFoundryManagedAgentDelegationItem
   extends VoiceAgentLiveDelegationConversationItem {
-  target: "foundry_managed_agent";
+  target: VoiceAgentLiveDelegationTarget.foundry_managed_agent;
 
   @doc("Target agent name in the same project.")
   agent_name: string;

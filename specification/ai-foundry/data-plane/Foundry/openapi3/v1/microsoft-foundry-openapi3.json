@@ -52600,6 +52600,11 @@
             "minLength": 0,
             "maxLength": 1048576
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.ChoiceValueParam": {
@@ -52611,7 +52616,12 @@
             "type": "boolean"
           }
         ],
-        "description": "Choice values are typed: a string and a boolean with the same text are distinct."
+        "description": "Choice values are typed: a string and a boolean with the same text are distinct.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.ChunkingStrategyRequestParam": {
         "type": "object",
@@ -80133,7 +80143,12 @@
           "predicate",
           "choice",
           "score"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.QuestionParamChoice": {
         "type": "object",
@@ -80176,7 +80191,12 @@
             "$ref": "#/components/schemas/OpenAI.QuestionParam"
           }
         ],
-        "description": "Choose from the supplied options based on the input."
+        "description": "Choose from the supplied options based on the input.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.QuestionParamPredicate": {
         "type": "object",
@@ -80209,7 +80229,12 @@
             "$ref": "#/components/schemas/OpenAI.QuestionParam"
           }
         ],
-        "description": "Estimate how likely it is that a statement about the input is true."
+        "description": "Estimate how likely it is that a statement about the input is true.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.QuestionParamScore": {
         "type": "object",
@@ -80251,7 +80276,12 @@
             "$ref": "#/components/schemas/OpenAI.QuestionParam"
           }
         ],
-        "description": "Rate the input against the supplied ordered levels."
+        "description": "Rate the input against the supplied ordered levels.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.QuestionParamType": {
         "anyOf": [
@@ -80266,7 +80296,12 @@
               "score"
             ]
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RankerVersionType": {
         "type": "string",
@@ -91361,6 +91396,11 @@
             "minLength": 0,
             "maxLength": 1048576
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.ScreenshotParam": {
@@ -107065,11 +107105,18 @@
         }
       },
       "VoiceAgentLiveConversationItemType": {
-        "type": "string",
-        "enum": [
-          "input",
-          "output",
-          "delegation"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "input",
+              "output",
+              "delegation"
+            ]
+          }
         ],
         "description": "The kind of a persisted Live conversation item.",
         "x-ms-foundry-meta": {

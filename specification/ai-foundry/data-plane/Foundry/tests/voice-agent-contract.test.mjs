@@ -56,6 +56,21 @@ const deferredHostedTypes = [
   "VoiceAgentLiveFoundryHostedAgentDelegationItem",
 ];
 const backendEnvelopeModel = "OpenAI.LiveServerEventLiveResponseEvent";
+// Foundry reports the effective delegation owner on these native events (protocol.tsp @@changePropertyType).
+const foundryEventOverrides = {
+  LiveServerEventLiveSessionStarted: {
+    session: "Azure.AI.Projects.VoiceAgentLiveSessionResource",
+  },
+  LiveServerEventLiveSessionUpdated: {
+    session: "Azure.AI.Projects.VoiceAgentLiveSessionResource",
+  },
+  LiveServerEventLiveSessionClosed: {
+    session: "Azure.AI.Projects.VoiceAgentLiveSessionResource",
+  },
+  LiveServerEventLiveDelegationCreated: {
+    delegation: "Azure.AI.Projects.VoiceAgentLiveDelegationItem",
+  },
+};
 const nativeEventModels = {
   "session.delegation.created": "OpenAI.LiveServerEventLiveDelegationCreated",
   "response.event": backendEnvelopeModel,
@@ -104,6 +119,30 @@ function type(name, context = program) {
   );
   assert.ok(value, name);
   return value;
+}
+
+// Native names such as `LiveDecisionQuestionsInputParam-2` need backtick quoting.
+function nativeRef(name) {
+  return /^[A-Za-z_$][\w$]*$/.test(name)
+    ? `OpenAI.${name}`
+    : `OpenAI.\`${name}\``;
+}
+
+function nativeShapeWithOverrides(name, model) {
+  const expected = wireShape(model, native);
+  for (const [property, typeName] of Object.entries(
+    foundryEventOverrides[name] ?? {},
+  )) {
+    const p = expected.properties.find((x) => x.name === property);
+    assert.ok(p, `${name}.${property}`);
+    p.type = typeName;
+  }
+  return expected;
+}
+
+// Read a literal property type, whether declared inline or as a named union member.
+function literalValue(type) {
+  return type.kind === "UnionVariant" ? type.type.value : type.value;
 }
 
 function fields(model) {
@@ -275,7 +314,10 @@ function checkSdkSessionFields(context) {
         !model(name).properties.some((p) => p.serializedName === field),
         `${name}.${field}`,
       );
-  for (const name of ["LiveSessionCreateParams", "LiveSessionResourceParam"]) {
+  for (const name of [
+    "LiveSessionCreateParams",
+    "VoiceAgentLiveSessionResource",
+  ]) {
     const properties = model(name).properties;
     const input = properties.find((p) => p.serializedName === "input");
     assert.equal(input.optional, true);
@@ -670,9 +712,12 @@ test("voice models retain inheritance and optional protocol fields with separate
   assert.equal(live.baseModel, base);
   assert.equal(realtime.baseModel, base);
   assert.equal(base.properties.has("audio"), false);
-  assert.equal(live.properties.get("sub_protocol").type.value, "live");
+  assert.equal(literalValue(live.properties.get("sub_protocol").type), "live");
   assert.equal(live.properties.get("sub_protocol").optional, false);
-  assert.equal(realtime.properties.get("sub_protocol").type.value, "realtime");
+  assert.equal(
+    literalValue(realtime.properties.get("sub_protocol").type),
+    "realtime",
+  );
   for (const model of [base, realtime]) {
     assert.equal(model.properties.get("sub_protocol").optional, true);
     assert.equal(model.properties.get("sub_protocol").defaultValue, undefined);
@@ -949,7 +994,7 @@ test("managed prompt-agent configuration contains only target identity", () => {
   const config = type("Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation");
   const p = config.properties;
   assert.deepEqual([...p.keys()], ["type", "agent_name", "agent_version"]);
-  assert.equal(p.get("type").type.value, "foundry_managed_agent");
+  assert.equal(literalValue(p.get("type").type), "foundry_managed_agent");
   assert.equal(p.get("agent_name").optional, false);
   assert.equal(p.get("agent_version").optional, true);
   assert.equal(p.has("result_format"), false);
@@ -995,12 +1040,12 @@ test("Foundry delegation stays on the definition and inference reuses the native
   );
 });
 
-test("native Live models change only through optional Foundry session correlation", () => {
+test("native Live models change only through Foundry session correlation and effective-owner overrides", () => {
   const ns = type("OpenAI", native);
   let checked = 0;
   for (const [name, model] of ns.models) {
     if (!name.startsWith("Live")) continue;
-    const actual = wireShape(type(`OpenAI.${name}`), program);
+    const actual = wireShape(type(nativeRef(name)), program);
     if (name === "LiveServerEventLiveSessionStarted") {
       const correlation = actual.properties.filter(
         (p) => p.name === "conversation_id",
@@ -1012,12 +1057,12 @@ test("native Live models change only through optional Foundry session correlatio
         (p) => p.name !== "conversation_id",
       );
     }
-    assert.deepEqual(actual, wireShape(model, native), name);
+    assert.deepEqual(actual, nativeShapeWithOverrides(name, model), name);
     if (
       model.baseModel?.name === "LiveClientEvent" ||
       model.baseModel?.name === "LiveServerEvent"
     ) {
-      assert.equal(fields(type(`OpenAI.${name}`)).has("sub_protocol"), false);
+      assert.equal(fields(type(nativeRef(name))).has("sub_protocol"), false);
     }
     checked++;
   }
@@ -1074,7 +1119,7 @@ test("native delegation, append acknowledgment and error fields are not widened"
     assert.equal(fields(model).get("type").type.value, eventType);
     assert.deepEqual(
       wireShape(model, program),
-      wireShape(type(name, native), native),
+      nativeShapeWithOverrides(name.split(".").at(-1), type(name, native)),
     );
   }
   for (const channel of ["thinking", "commentary"]) {
@@ -1105,7 +1150,13 @@ test("session.started exposes optional Foundry correlation without replacing the
   assert.equal(started.properties.get("conversation_id").optional, true);
   assert.equal(
     started.properties.get("session").type,
-    type("OpenAI.LiveSessionResourceParam"),
+    type("Azure.AI.Projects.VoiceAgentLiveSessionResource"),
+  );
+  assert.equal(
+    type("Azure.AI.Projects.VoiceAgentLiveSessionResource").properties.has(
+      "conversation_id",
+    ),
+    false,
   );
   assert.equal(
     type("OpenAI.LiveSessionResourceParam").properties.has("conversation_id"),
@@ -1400,6 +1451,17 @@ function exampleValue({ model, payload }) {
   );
 }
 
+// TypeSpec rejects every value for a property typed as a union member, such as
+// `kind: AgentKind.voice`, reporting `Type '"voice"' is not assignable to type '"voice"'`.
+// Drop only that self-identical diagnostic; every other example diagnostic still applies.
+function isUnionMemberValueNoise(diagnostic) {
+  if (diagnostic.code !== "unassignable") return false;
+  const match = /^Type '("[^"]*")' is not assignable to type '("[^"]*")'$/.exec(
+    diagnostic.message,
+  );
+  return match !== null && match[1] === match[2];
+}
+
 async function validateExamples(name, examples, declarations = []) {
   const path = join(output, `${name}.tsp`);
   await writeFile(
@@ -1412,7 +1474,13 @@ async function validateExamples(name, examples, declarations = []) {
       ),
     ].join("\n"),
   );
-  return compile(NodeHost, path, { ...compilerOptions, noEmit: true });
+  const result = await compile(NodeHost, path, {
+    ...compilerOptions,
+    noEmit: true,
+  });
+  return {
+    diagnostics: result.diagnostics.filter((d) => !isUnionMemberValueNoise(d)),
+  };
 }
 
 test("typed voice definitions remain assignable to unchanged create, update, and read contracts", async () => {
@@ -1553,9 +1621,21 @@ test("Live delegation accepts omission and managed target versions", async () =>
   checkErrors(
     (
       await validateExamples(
-        "live-delegation-targets",
-        payloads.map((payload) => ({ model: "LiveDelegationProbe", payload })),
+        "live-delegation-omitted",
+        [{ model: "LiveDelegationProbe", payload: payloads[0] }],
         liveDelegationProbe,
+      )
+    ).diagnostics,
+  );
+  // The @oneOf union reports union-member noise at the union level; validate the managed arm directly.
+  checkErrors(
+    (
+      await validateExamples(
+        "live-delegation-managed",
+        payloads.slice(1).map(({ delegation }) => ({
+          model: "Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation",
+          payload: delegation,
+        })),
       )
     ).diagnostics,
   );
@@ -2204,8 +2284,14 @@ for (const [language, directory, emitter, rootClient] of [
       ]) {
         const property = selector(name);
         assert.equal(property.optional, optional);
-        assert.equal(property.type.value, value);
-        assert.equal(property.type.kind, "constant");
+        if (language === "java") {
+          assert.equal(property.type.kind, "enum");
+          assert.equal(property.type.name, "VoiceAgentSubProtocol");
+        } else {
+          assert.equal(property.type.kind, "enumvalue");
+          assert.equal(property.type.value, value);
+          assert.equal(property.type.enumType.name, "VoiceAgentSubProtocol");
+        }
       }
 
       const clients = [];
@@ -2497,7 +2583,7 @@ test("SDK metadata exports native events and separate Live persistence discrimin
     model("LiveServerEventLiveSessionStarted").properties.find(
       (p) => p.serializedName === "session",
     ).type.__raw.name,
-    "LiveSessionResourceParam",
+    "VoiceAgentLiveSessionResource",
   );
 });
 
@@ -2728,7 +2814,7 @@ test("Live speech items use id and share only the existing audio metadata struct
     assert.deepEqual([...p.keys()], ["type", "id", "transcription", "audio"]);
     assert.equal(p.get("id").optional, false);
     assert.equal(getTypeName(p.get("id").type), "string");
-    assert.equal(p.get("type").type.value, name.toLowerCase());
+    assert.equal(literalValue(p.get("type").type), name.toLowerCase());
     assert.equal(p.get("transcription").optional, true);
     assert.equal(getTypeName(p.get("transcription").type), "string");
     assert.equal(p.get("audio").optional, true);
@@ -2771,14 +2857,14 @@ test("stored delegation reuses native fields and discriminates target-specific r
     );
     assert.equal(subtype.baseModel, item);
     assert.deepEqual([...subtype.properties.keys()], ownFields);
-    assert.equal(subtype.properties.get("target").type.value, target);
+    assert.equal(literalValue(subtype.properties.get("target").type), target);
     assert.ok(!fields(subtype).has("item_id"));
     assert.ok(!fields(subtype).has("delegation_id"));
   }
   const managed = type(managedItemModel);
   assert.equal(managed.baseModel, item);
   assert.equal(
-    managed.properties.get("target").type.value,
+    literalValue(managed.properties.get("target").type),
     "foundry_managed_agent",
   );
   assert.equal(managed.properties.get("status").optional, false);

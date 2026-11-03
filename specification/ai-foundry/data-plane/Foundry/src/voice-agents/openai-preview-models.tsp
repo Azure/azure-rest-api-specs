@@ -1199,3 +1199,45 @@ using Azure.AI.Projects;
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );
+
+// Decisions question models reached through LiveDecisionQuestionsInputParam-2.
+@@extension(
+  OpenAI.ChoiceOptionParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.ChoiceValueParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.QuestionParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.QuestionParamChoice,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.QuestionParamPredicate,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.QuestionParamScore,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.QuestionParamType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.ScoreLevelParam,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);

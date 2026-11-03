@@ -123,7 +123,7 @@ model VoiceAgentLlmInterimResponseConfig
 )
 model VoiceAgentBaseDefinition extends AgentDefinition {
   @doc("Always voice.")
-  kind: "voice";
+  kind: AgentKind.voice;
 
   @doc("Omission selects Realtime. Null and unknown values are invalid. Reads preserve omission.")
   sub_protocol?: VoiceAgentSubProtocol;
@@ -154,7 +154,7 @@ union VoiceAgentSubProtocol {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDefinition extends VoiceAgentBaseDefinition {
   @doc("Selects Realtime. May be omitted for legacy agents.")
-  sub_protocol?: "realtime";
+  sub_protocol?: VoiceAgentSubProtocol.realtime;
 
   @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
   model_type?: VoiceModelType;
@@ -229,10 +229,10 @@ model VoiceAgentDefinition extends VoiceAgentBaseDefinition {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
   @doc("Selects the Live protocol.")
-  sub_protocol: "live";
+  sub_protocol: VoiceAgentSubProtocol.live;
 
   @doc("Uses a Foundry model deployment.")
-  model_type: "self_deployed";
+  model_type: VoiceModelType.self_deployed;
 
   @doc("The GPT Live deployment name.")
   @minLength(1)
@@ -266,7 +266,7 @@ union VoiceAgentLiveDelegation {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveManagedAgentDelegation {
   @doc("Canonical delegation type; legacy managed_prompt_agent values are returned as foundry_managed_agent.")
-  type: "foundry_managed_agent";
+  type: VoiceAgentLiveDelegationTarget.foundry_managed_agent;
 
   @doc("Name of a prompt agent in the same project.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$")

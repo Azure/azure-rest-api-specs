@@ -59552,11 +59552,17 @@ components:
           type: string
           minLength: 0
           maxLength: 1048576
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.ChoiceValueParam:
       oneOf:
         - type: string
         - type: boolean
       description: 'Choice values are typed: a string and a boolean with the same text are distinct.'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.ChunkingStrategyRequestParam:
       type: object
       required:
@@ -78474,6 +78480,9 @@ components:
         - predicate
         - choice
         - score
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.QuestionParamChoice:
       type: object
       required:
@@ -78505,6 +78514,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.QuestionParam'
       description: Choose from the supplied options based on the input.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.QuestionParamPredicate:
       type: object
       required:
@@ -78528,6 +78540,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.QuestionParam'
       description: Estimate how likely it is that a statement about the input is true.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.QuestionParamScore:
       type: object
       required:
@@ -78558,6 +78573,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.QuestionParam'
       description: Rate the input against the supplied ordered levels.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.QuestionParamType:
       anyOf:
         - type: string
@@ -78566,6 +78584,9 @@ components:
             - predicate
             - choice
             - score
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RankerVersionType:
       type: string
       enum:
@@ -88170,6 +88191,9 @@ components:
           type: string
           minLength: 0
           maxLength: 1048576
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.ScreenshotParam:
       type: object
       required:
@@ -99375,11 +99399,13 @@ components:
         required_previews:
           - VoiceAgents=V1Preview
     VoiceAgentLiveConversationItemType:
-      type: string
-      enum:
-        - input
-        - output
-        - delegation
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - input
+            - output
+            - delegation
       description: The kind of a persisted Live conversation item.
       x-ms-foundry-meta:
         required_previews:

@@ -326,7 +326,9 @@ namespace Azure.AI.Projects {
   @discriminator("type")
   model VoiceAgentLiveDelegationOptions {
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Extends the native OpenAI delegation type with the Foundry-managed value for this JavaScript-only discriminator."
-    type: OpenAI.DelegationType | "foundry_managed_agent";
+    type:
+      | OpenAI.DelegationType
+      | VoiceAgentLiveDelegationTarget.foundry_managed_agent;
   }
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "JavaScript-only alternate type; not emitted for C#."
