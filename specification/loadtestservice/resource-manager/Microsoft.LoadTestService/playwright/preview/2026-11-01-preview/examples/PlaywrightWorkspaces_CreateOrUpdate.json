@@ -1,0 +1,132 @@
+{
+  "title": "PlaywrightWorkspaces_CreateOrUpdate",
+  "operationId": "PlaywrightWorkspaces_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgplaywright",
+    "playwrightWorkspaceName": "myWorkspace",
+    "resource": {
+      "location": "westus3",
+      "tags": {},
+      "properties": {
+        "regionalAffinity": "Enabled",
+        "localAuth": "Enabled",
+        "reporting": "Enabled",
+        "storageUri": "https://examplestorageaccount.blob.core.windows.net",
+        "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+        "browserProxy": "Enabled",
+        "linkedKeyVault": {
+          "vaultUri": "https://my-playwright-vault.vault.azure.net/",
+          "vaultIdentity": {
+            "type": "UserAssigned",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
+          }
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus3",
+        "tags": {},
+        "properties": {
+          "regionalAffinity": "Enabled",
+          "localAuth": "Enabled",
+          "reporting": "Enabled",
+          "storageUri": "https://examplestorageaccount.blob.core.windows.net",
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+          "provisioningState": "Succeeded",
+          "dataplaneUri": "https://api.dataplane.00000000-0000-0000-0000-000000000000.domain.com",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "browserProxy": "Enabled",
+          "linkedKeyVault": {
+            "vaultUri": "https://my-playwright-vault.vault.azure.net/",
+            "vaultIdentity": {
+              "type": "UserAssigned",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
+            }
+          }
+        },
+        "identity": {
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "22222222-2222-2222-2222-222222222222",
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "33333333-3333-3333-3333-333333333333",
+              "clientId": "44444444-4444-4444-4444-444444444444"
+            }
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.LoadTestService/PlaywrightWorkspaces/myWorkspace",
+        "name": "myWorkspace",
+        "type": "Microsoft.LoadTestService/PlaywrightWorkspaces",
+        "systemData": {
+          "createdBy": "userId1001",
+          "createdByType": "User",
+          "createdAt": "2021-09-28T12:32:33Z",
+          "lastModifiedBy": "userId1001",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-09-28T12:32:33Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.LoadTestService/locations/westus3/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-11-01-preview"
+      },
+      "body": {
+        "location": "westus3",
+        "tags": {},
+        "properties": {
+          "regionalAffinity": "Enabled",
+          "localAuth": "Enabled",
+          "reporting": "Enabled",
+          "storageUri": "https://examplestorageaccount.blob.core.windows.net",
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+          "provisioningState": "Succeeded",
+          "dataplaneUri": "https://api.dataplane.00000000-0000-0000-0000-000000000000.domain.com",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "browserProxy": "Enabled",
+          "linkedKeyVault": {
+            "vaultUri": "https://my-playwright-vault.vault.azure.net/",
+            "vaultIdentity": {
+              "type": "UserAssigned",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
+            }
+          }
+        },
+        "identity": {
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "22222222-2222-2222-2222-222222222222",
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "33333333-3333-3333-3333-333333333333",
+              "clientId": "44444444-4444-4444-4444-444444444444"
+            }
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.LoadTestService/PlaywrightWorkspaces/myWorkspace",
+        "name": "myWorkspace",
+        "type": "Microsoft.LoadTestService/PlaywrightWorkspaces",
+        "systemData": {
+          "createdBy": "userId1001",
+          "createdByType": "User",
+          "createdAt": "2021-09-28T12:32:33Z",
+          "lastModifiedBy": "userId1001",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-09-28T12:32:33Z"
+        }
+      }
+    }
+  }
+}

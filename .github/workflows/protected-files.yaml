@@ -18,7 +18,8 @@ env:
   user-allowed: >-
     ${{
       github.event.pull_request.user.login == 'azure-sdk' ||
-      github.event.pull_request.user.login == 'azure-sdk-automation[bot]'
+      github.event.pull_request.user.login == 'azure-sdk-automation[bot]' ||
+      github.event.pull_request.user.login == 'dependabot[bot]'
     }}
 
 jobs:
@@ -51,4 +52,5 @@ jobs:
         with:
           script: |
             const { checkProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
-            await checkProtectedFiles({ context, core });
+            const result = await checkProtectedFiles({ context, core });
+            await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();

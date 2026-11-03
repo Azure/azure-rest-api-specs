@@ -1071,6 +1071,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")
