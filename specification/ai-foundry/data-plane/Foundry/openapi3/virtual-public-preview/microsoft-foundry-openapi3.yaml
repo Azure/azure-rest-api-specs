@@ -31223,6 +31223,19 @@ paths:
                     anyOf:
                       - $ref: '#/components/schemas/OpenAI.ResponseUsage'
                       - type: 'null'
+                  tool_usage:
+                    $ref: '#/components/schemas/OpenAI.ResponseToolUsage'
+                    description: |-
+                      Usage reported by hosted tools, separate from base model `usage`. The field
+                        can be omitted when tool usage is unavailable. When present, tool families
+                        with no recorded usage have zero counts.
+                        `image_gen` sums available token counts across image generation calls.
+                        Calls with missing or incomplete usage records may be skipped. Output
+                        token details and cached input counts can be omitted. An omitted cache
+                        count means cache usage is unknown.
+                        `web_search.num_requests` counts billable searches. Discounted searches
+                        and actions such as opening a page are excluded. Use billing records to
+                        reconcile final charges.
                   prompt_cache_options:
                     $ref: '#/components/schemas/OpenAI.PromptCacheOptions'
                   prompt_cache_diagnostics:
@@ -57799,6 +57812,18 @@ components:
         - gpt-3.5-turbo-0125
         - gpt-3.5-turbo-16k-0613
       x-openai-enum-deprecations:
+        gpt-5:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-mini:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-nano:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-2025-08-07:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-mini-2025-08-07:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-nano-2025-08-07:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
         gpt-4.1:
           message: 'Announced shutdown date: 2027-01-14. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
         gpt-4.1-mini:
@@ -58041,6 +58066,11 @@ components:
             type: string
           minItems: 1
           description: The possible input audio languages configured for transcription, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format.
+        keywords:
+          type: array
+          items:
+            type: string
+          description: Words or phrases configured to guide transcription of the input audio.
         prompt:
           type: string
           description: The prompt configured for input audio transcription, when present.
@@ -58362,6 +58392,16 @@ components:
         - context_compacted
         - input_changed
         - service_tier_changed
+    OpenAI.CachedUsageDetails:
+      type: object
+      required:
+        - cached_text_tokens
+        - cached_image_tokens
+      properties:
+        cached_text_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        cached_image_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
     OpenAI.CallableToolAllowedCaller:
       type: string
       enum:
@@ -59541,28 +59581,6 @@ components:
         `required` means the model must call one or more tools.
         Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
         `none` is the default when no tools are present. `auto` is the default if tools are present.
-    OpenAI.ChoiceOptionParam:
-      type: object
-      required:
-        - value
-      properties:
-        value:
-          $ref: '#/components/schemas/OpenAI.ChoiceValueParam'
-        description:
-          type: string
-          minLength: 0
-          maxLength: 1048576
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.ChoiceValueParam:
-      oneOf:
-        - type: string
-        - type: boolean
-      description: 'Choice values are typed: a string and a boolean with the same text are distinct.'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.ChunkingStrategyRequestParam:
       type: object
       required:
@@ -61483,11 +61501,14 @@ components:
         reasoning:
           $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning'
           description: The reasoning configuration applied by this update.
+        text:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateText'
+          description: The text output configuration for subsequent responses.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: |-
-        A configuration update that applies to subsequent responses until it is
-        replaced by another configuration update.
+        A configuration update for subsequent responses. Each setting stays in effect
+        until a later update replaces that setting.
     OpenAI.ConversationItemToolSearchCall:
       type: object
       required:
@@ -63304,7 +63325,7 @@ components:
                 contentEncoding: base64
           description: |-
             The image(s) to edit. Must be a supported image file or an array of images.
-              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`,
+              For the GPT image models (`gpt-image-1-mini`, `gpt-image-1.5`,
               `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
               `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and
               `gpt-image-2.5-flare-2026-09-08`), each image should be a `png`, `webp`, or `jpg`
@@ -63315,6 +63336,10 @@ components:
           description: A text description of the desired image(s). The maximum length is 32000 characters for the GPT image models.
         mask:
           description: An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where `image` should be edited. If there are multiple images provided, the mask will be applied on the first image. Must be a valid PNG file, less than 4MB, and have the same dimensions as `image`.
+        markup:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.markup'
+          description: A transparent PNG overlaid on the first image to guide the edit. Must match that image's dimensions after orientation and contain transparent pixels. Supports GPT Image 2.5. Cannot be combined with mask.
         background:
           anyOf:
             - type: string
@@ -63349,7 +63374,14 @@ components:
                 - gpt-image-1-mini
                 - chatgpt-image-latest
                 - dall-e-2
-          description: The GPT image model to use for image editing (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`).
+          description: |-
+            The GPT image model to use for image editing
+              (`gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,
+              `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
+              `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,
+              `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`).
+              `gpt-image-1` was shut down on October 23, 2026. Use
+              `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -63462,7 +63494,14 @@ components:
                 - chatgpt-image-latest
                 - dall-e-2
                 - dall-e-3
-          description: The GPT image model to use for image generation. Specify a model explicitly. Supported models include `gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, and `chatgpt-image-latest`.
+          description: |-
+            The GPT image model to use for image generation. Specify a model explicitly.
+              Supported models include `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,
+              `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
+              `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,
+              `gpt-image-2.5-flare-2026-09-08`, and `chatgpt-image-latest`.
+              `gpt-image-1` was shut down on October 23, 2026. Use
+              `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -65552,7 +65591,13 @@ components:
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The GPT image model to use for image editing, including `gpt-image-2`, its dated snapshot `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`. Defaults to `gpt-image-2.5-sunburst`.
+          description: |-
+            The GPT image model to use for image editing, including `gpt-image-2`, its dated
+              snapshot `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
+              `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and
+              `gpt-image-2.5-flare-2026-09-08`. Defaults to `gpt-image-2.5-sunburst`.
+              `gpt-image-1` was shut down on October 23, 2026. Use
+              `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.
           x-oaiTypeLabel: string
           default: gpt-image-2.5-sunburst
         images:
@@ -65566,6 +65611,9 @@ components:
               For GPT image models, you can provide up to 16 images.
         mask:
           $ref: '#/components/schemas/OpenAI.ImageRefParam'
+        markup:
+          $ref: '#/components/schemas/OpenAI.ImageRefParam'
+          description: A transparent PNG overlaid on the first image, referenced by file ID, HTTPS URL, or base64 data URL. Must match that image's dimensions after orientation and contain transparent pixels. Supports GPT Image 2.5. Cannot be combined with mask.
         prompt:
           type: string
           minLength: 1
@@ -65600,7 +65648,7 @@ components:
                 - high
                 - low
             - type: 'null'
-          description: Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
+          description: Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
         size:
           anyOf:
             - type: string
@@ -68139,6 +68187,33 @@ components:
           format: uri
         file_id:
           type: string
+    OpenAI.ImageGenToolUsage:
+      type: object
+      required:
+        - input_tokens
+        - total_tokens
+        - output_tokens
+        - input_tokens_details
+      properties:
+        input_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of tokens (images and text) in the input prompt.
+        total_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The total number of tokens (images and text) used for the image generation.
+        output_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of output tokens generated by the model.
+        output_tokens_details:
+          $ref: '#/components/schemas/OpenAI.ImageGenOutputTokensDetails'
+        input_tokens_details:
+          $ref: '#/components/schemas/OpenAI.ImageGenInputUsageDetails'
+        cached_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        cached_tokens_details:
+          $ref: '#/components/schemas/OpenAI.CachedUsageDetails'
+      description: Token usage for image generation tool calls in a response.
+      title: Image generation tool usage
     OpenAI.ImageGenUsage:
       type: object
       required:
@@ -68490,7 +68565,7 @@ components:
       enum:
         - high
         - low
-      description: Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
+      description: Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
     OpenAI.InputFileContent:
       type: object
       required:
@@ -69632,12 +69707,14 @@ components:
         reasoning:
           $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning'
           description: Updates to reasoning configuration. Only effort is supported.
+        text:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamText'
+          description: The text output configuration for subsequent responses.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: |-
-        An update to the conversation's response configuration. The configuration
-        remains in effect for subsequent responses until it is replaced by another
-        configuration update.
+        An update to the conversation's response configuration. Supply reasoning,
+        text, or both. Each setting stays in effect until a later update replaces it.
     OpenAI.InputItemToolSearchCallItemParam:
       type: object
       required:
@@ -73224,11 +73301,14 @@ components:
         reasoning:
           $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning'
           description: The reasoning configuration applied by this update.
+        text:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateText'
+          description: The text output configuration for subsequent responses.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: |-
-        A configuration update that applies to subsequent responses until it is
-        replaced by another configuration update.
+        A configuration update for subsequent responses. Each setting stays in effect
+        until a later update replaces that setting.
     OpenAI.ItemResourceToolSearchCall:
       type: object
       required:
@@ -73417,12 +73497,14 @@ components:
         reasoning:
           $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning'
           description: Updates to reasoning configuration. Only effort is supported.
+        text:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamText'
+          description: The text output configuration for subsequent responses.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: |-
-        An update to the conversation's response configuration. The configuration
-        remains in effect for subsequent responses until it is replaced by another
-        configuration update.
+        An update to the conversation's response configuration. Supply reasoning,
+        text, or both. Each setting stays in effect until a later update replaces it.
     OpenAI.ItemToolSearchCallItemParam:
       type: object
       required:
@@ -74093,6 +74175,11 @@ components:
       required:
         - type
       properties:
+        acknowledgement_delay_ms:
+          $ref: '#/components/schemas/OpenAI.integer'
+          minimum: 0
+          maximum: 800
+          description: Milliseconds to wait before requesting an automatic spoken acknowledgement for a delegation. The model may still speak before this delay. Any commentary or thinking appended to the session cancels all pending acknowledgements, including those for other delegations. Defaults to 400 for Decisions sessions and 0 (request immediately) for other sessions. Omission in a session update preserves the current value. Updates apply to subsequent delegations.
         type:
           type: string
           enum:
@@ -74230,7 +74317,159 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    OpenAI.LiveDecisionQuestionsInputParam-2:
+    OpenAI.LiveDecisionChoiceParam:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          oneOf:
+            - type: string
+            - type: boolean
+        description:
+          type: string
+    OpenAI.LiveDecisionChoiceQuestionParam:
+      type: object
+      required:
+        - type
+        - instructions
+        - choices
+      properties:
+        type:
+          type: string
+          enum:
+            - choice
+          x-stainless-const: true
+        name:
+          type: string
+        instructions:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.LiveDecisionInputTextParam'
+                  - $ref: '#/components/schemas/OpenAI.LiveDecisionInputImageParam'
+                  - $ref: '#/components/schemas/OpenAI.LiveDecisionInputJsonParam'
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.LiveDecisionChoiceParam'
+          minItems: 2
+          maxItems: 255
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.LiveDecisionQuestion'
+    OpenAI.LiveDecisionInputImageParam:
+      type: object
+      required:
+        - type
+        - image_url
+      properties:
+        type:
+          type: string
+          enum:
+            - input_image
+          x-stainless-const: true
+          default: input_image
+        image_url:
+          type: string
+          format: uri
+          maxLength: 20971520
+          pattern: ^(data:|https?://)
+          description: A base64-encoded image data URL or a publicly accessible HTTP(S) image URL.
+        detail:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.LiveDetailEnum'
+            - type: 'null'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    OpenAI.LiveDecisionInputJsonParam:
+      type: object
+      required:
+        - type
+        - data
+      properties:
+        type:
+          type: string
+          enum:
+            - input_json
+          x-stainless-const: true
+          default: input_json
+        data:
+          oneOf:
+            - $ref: '#/components/schemas/OpenAI.LiveDecisionJsonObject'
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.LiveDecisionJsonObject'
+    OpenAI.LiveDecisionInputTextParam:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - input_text
+          x-stainless-const: true
+          default: input_text
+        text:
+          type: string
+          maxLength: 10485760
+          description: The text input to the model.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    OpenAI.LiveDecisionJsonObject:
+      type: object
+      additionalProperties: {}
+    OpenAI.LiveDecisionPredicateQuestionParam:
+      type: object
+      required:
+        - type
+        - instructions
+      properties:
+        type:
+          type: string
+          enum:
+            - predicate
+          x-stainless-const: true
+        name:
+          type: string
+        instructions:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.LiveDecisionInputTextParam'
+                  - $ref: '#/components/schemas/OpenAI.LiveDecisionInputImageParam'
+                  - $ref: '#/components/schemas/OpenAI.LiveDecisionInputJsonParam'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.LiveDecisionQuestion'
+    OpenAI.LiveDecisionQuestion:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.LiveDecisionQuestionType'
+      discriminator:
+        propertyName: type
+        mapping:
+          choice: '#/components/schemas/OpenAI.LiveDecisionChoiceQuestionParam'
+          predicate: '#/components/schemas/OpenAI.LiveDecisionPredicateQuestionParam'
+          score: '#/components/schemas/OpenAI.LiveDecisionScoreQuestionParam'
+    OpenAI.LiveDecisionQuestionType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - choice
+            - predicate
+            - score
+    OpenAI.LiveDecisionQuestionsInputParam:
       type: object
       required:
         - questions
@@ -74238,7 +74477,7 @@ components:
         questions:
           type: array
           items:
-            $ref: '#/components/schemas/OpenAI.QuestionParam'
+            $ref: '#/components/schemas/OpenAI.LiveDecisionQuestion'
           minItems: 1
           maxItems: 64
           description: Native Decision API questions evaluated together, in order.
@@ -74246,7 +74485,47 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    OpenAI.LiveDecisionTriggerInputParam-2:
+    OpenAI.LiveDecisionScoreLevelParam:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          type: string
+        description:
+          type: string
+    OpenAI.LiveDecisionScoreQuestionParam:
+      type: object
+      required:
+        - type
+        - instructions
+        - levels
+      properties:
+        type:
+          type: string
+          enum:
+            - score
+          x-stainless-const: true
+        name:
+          type: string
+        instructions:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.LiveDecisionInputTextParam'
+                  - $ref: '#/components/schemas/OpenAI.LiveDecisionInputImageParam'
+                  - $ref: '#/components/schemas/OpenAI.LiveDecisionInputJsonParam'
+        levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.LiveDecisionScoreLevelParam'
+          minItems: 2
+          maxItems: 10
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.LiveDecisionQuestion'
+    OpenAI.LiveDecisionTriggerInputParam:
       type: object
       required:
         - type
@@ -74265,7 +74544,7 @@ components:
             - session.input_transcript.delta
             - session.output_transcript.delta
         decisions:
-          $ref: '#/components/schemas/OpenAI.LiveDecisionQuestionsInputParam-2'
+          $ref: '#/components/schemas/OpenAI.LiveDecisionQuestionsInputParam'
           description: Questions evaluated using the current transcript and the session's shared Decision items.
       x-ms-foundry-meta:
         required_previews:
@@ -74293,6 +74572,16 @@ components:
             - $ref: '#/components/schemas/OpenAI.LiveTextVerbosity'
             - type: 'null'
       description: Text generation options for the Live session’s Responses backend.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    OpenAI.LiveDetailEnum:
+      type: string
+      enum:
+        - low
+        - high
+        - auto
+        - original
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -74920,6 +75209,11 @@ components:
         - type
         - responses
       properties:
+        acknowledgement_delay_ms:
+          $ref: '#/components/schemas/OpenAI.integer'
+          minimum: 0
+          maximum: 800
+          description: Milliseconds to wait before requesting an automatic spoken acknowledgement for a delegation. The model may still speak before this delay. Any commentary or thinking appended to the session cancels all pending acknowledgements, including those for other delegations. Defaults to 400 for Decisions sessions and 0 (request immediately) for other sessions. Omission in a session update preserves the current value. Updates apply to subsequent delegations.
         type:
           type: string
           enum:
@@ -78320,7 +78614,13 @@ components:
           description: The breakpoint mode. Always `explicit`.
           x-stainless-const: true
           default: explicit
-      description: Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+        ttl:
+          type: string
+          enum:
+            - 30m
+            - 12h
+          description: The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+      description: Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
       title: Prompt cache breakpoint
     OpenAI.PromptCacheBreakpointParam:
       type: object
@@ -78334,7 +78634,13 @@ components:
           description: The breakpoint mode. Always `explicit`.
           x-stainless-const: true
           default: explicit
-      description: Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+        ttl:
+          type: string
+          enum:
+            - 30m
+            - 12h
+          description: The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+      description: Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
       title: Prompt cache breakpoint
     OpenAI.PromptCacheComparisonResponseNotFoundDiagnosticsBody:
       type: object
@@ -78462,131 +78768,6 @@ components:
           x-stainless-const: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.PromptCacheDiagnostics'
-    OpenAI.QuestionParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OpenAI.QuestionParamType'
-      discriminator:
-        propertyName: type
-        mapping:
-          predicate: '#/components/schemas/OpenAI.QuestionParamPredicate'
-          choice: '#/components/schemas/OpenAI.QuestionParamChoice'
-          score: '#/components/schemas/OpenAI.QuestionParamScore'
-      description: A question about the request's input, with an optional correlation name.
-      x-oai-discriminator-values:
-        - predicate
-        - choice
-        - score
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.QuestionParamChoice:
-      type: object
-      required:
-        - type
-        - instructions
-        - choices
-      properties:
-        type:
-          type: string
-          enum:
-            - choice
-          description: The type of the object. Always `choice`.
-          x-stainless-const: true
-        name:
-          type: string
-          minLength: 0
-          maxLength: 1048576
-        instructions:
-          type: string
-          minLength: 0
-          maxLength: 1048576
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.ChoiceOptionParam'
-          minItems: 2
-          maxItems: 255
-          description: Provide between 2 and 255 choices. Each choice must be unique.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.QuestionParam'
-      description: Choose from the supplied options based on the input.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.QuestionParamPredicate:
-      type: object
-      required:
-        - type
-        - instructions
-      properties:
-        type:
-          type: string
-          enum:
-            - predicate
-          description: The type of the object. Always `predicate`.
-          x-stainless-const: true
-        name:
-          type: string
-          minLength: 0
-          maxLength: 1048576
-        instructions:
-          type: string
-          minLength: 0
-          maxLength: 1048576
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.QuestionParam'
-      description: Estimate how likely it is that a statement about the input is true.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.QuestionParamScore:
-      type: object
-      required:
-        - type
-        - instructions
-        - levels
-      properties:
-        type:
-          type: string
-          enum:
-            - score
-          description: The type of the object. Always `score`.
-          x-stainless-const: true
-        name:
-          type: string
-          minLength: 0
-          maxLength: 1048576
-        instructions:
-          type: string
-          minLength: 0
-          maxLength: 1048576
-        levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.ScoreLevelParam'
-          minItems: 2
-          maxItems: 10
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.QuestionParam'
-      description: Rate the input against the supplied ordered levels.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.QuestionParamType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - predicate
-            - choice
-            - score
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RankerVersionType:
       type: string
       enum:
@@ -79158,7 +79339,7 @@ components:
         example: |
           // Trigger a response with the default Conversation and no special parameters
           {
-            "type": "response.create",
+            "type": "response.create"
           }
 
           // Trigger an out-of-band response that does not write to the default Conversation
@@ -80084,6 +80265,15 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    OpenAI.RealtimeNoiseReductionStrength:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 1
+      description: |-
+        Input noise suppression strength. Higher values apply more suppression.
+        Defaults to 1 when noise reduction is first enabled. Omitting strength
+        from a session update preserves the current strength.
     OpenAI.RealtimeReasoning:
       type: object
       properties:
@@ -80102,6 +80292,383 @@ components:
       description: |-
         Constrains effort on reasoning for reasoning-capable Realtime models such as
         `gpt-realtime-2`.
+    OpenAI.RealtimeResponseInputAudio:
+      type: object
+      required:
+        - type
+        - audio
+      properties:
+        type:
+          type: string
+          enum:
+            - input_audio
+        audio:
+          type: string
+          minLength: 1
+          description: Base64 audio bytes in the session input audio format.
+        transcript:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Optional text to associate with the input audio.
+      title: Realtime response input audio
+    OpenAI.RealtimeResponseInputFunctionCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - arguments
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          minLength: 1
+          maxLength: 32
+          pattern: ^[a-zA-Z0-9_-]+$
+        type:
+          type: string
+          enum:
+            - function_call
+        status:
+          anyOf:
+            - type: string
+              enum:
+                - completed
+                - incomplete
+            - type: 'null'
+            - type: 'null'
+          default: completed
+        call_id:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^[a-zA-Z0-9_-]+$
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[a-zA-Z0-9_-]+$
+        arguments:
+          type: string
+          maxLength: 1048576
+      description: A function call supplied as input to a Realtime response.
+      title: Realtime response input function call
+    OpenAI.RealtimeResponseInputFunctionCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - output
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          minLength: 1
+          maxLength: 32
+          pattern: ^[a-zA-Z0-9_-]+$
+        type:
+          type: string
+          enum:
+            - function_call_output
+        status:
+          anyOf:
+            - type: string
+              enum:
+                - completed
+                - incomplete
+            - type: 'null'
+            - type: 'null'
+          default: completed
+        call_id:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^[a-zA-Z0-9_-]+$
+        output:
+          type: string
+          maxLength: 1048576
+      description: The result of a function call supplied as input to a Realtime response.
+      title: Realtime response input function call output
+    OpenAI.RealtimeResponseInputImage:
+      type: object
+      required:
+        - type
+        - image_url
+      properties:
+        type:
+          type: string
+          enum:
+            - input_image
+        image_url:
+          type: string
+          format: uri
+          pattern: ^data:image/[^;,]+;base64,.+
+          description: A base64 data URL with an image MIME type; use PNG or JPEG.
+        detail:
+          anyOf:
+            - type: string
+              enum:
+                - low
+                - high
+                - auto
+            - type: 'null'
+            - type: 'null'
+          default: auto
+      title: Realtime response input image
+    OpenAI.RealtimeResponseInputItem:
+      anyOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessage'
+        - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputFunctionCall'
+        - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputFunctionCallOutput'
+        - $ref: '#/components/schemas/OpenAI.RealtimeResponseItemReference'
+      description: An existing item reference or a new message or function call item for a Realtime response.
+      title: Realtime response input item
+    OpenAI.RealtimeResponseInputMessage:
+      type: object
+      required:
+        - role
+      properties:
+        role:
+          $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessageType'
+      discriminator:
+        propertyName: role
+        mapping:
+          system: '#/components/schemas/OpenAI.RealtimeResponseInputMessageSystem'
+          developer: '#/components/schemas/OpenAI.RealtimeResponseInputMessageDeveloper'
+          user: '#/components/schemas/OpenAI.RealtimeResponseInputMessageUser'
+          assistant: '#/components/schemas/OpenAI.RealtimeResponseInputMessageAssistant'
+      description: A message supplied as input to a Realtime response. The role determines the allowed content.
+      title: Realtime response input message
+    OpenAI.RealtimeResponseInputMessageAssistant:
+      type: object
+      required:
+        - type
+        - role
+        - content
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          minLength: 1
+          maxLength: 32
+          pattern: ^[a-zA-Z0-9_-]+$
+          description: An optional client ID. The value `root` is reserved.
+        type:
+          type: string
+          enum:
+            - message
+        status:
+          anyOf:
+            - type: string
+              enum:
+                - completed
+                - incomplete
+            - type: 'null'
+            - type: 'null'
+          description: Optional input status. Omission or null defaults to completed.
+          default: completed
+        role:
+          type: string
+          enum:
+            - assistant
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessageAssistantContent'
+          minItems: 1
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessage'
+      title: Realtime response input assistant message
+    OpenAI.RealtimeResponseInputMessageAssistantContent:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - output_text
+        text:
+          type: string
+          maxLength: 256000
+    OpenAI.RealtimeResponseInputMessageDeveloper:
+      type: object
+      required:
+        - type
+        - role
+        - content
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          minLength: 1
+          maxLength: 32
+          pattern: ^[a-zA-Z0-9_-]+$
+          description: An optional client ID. The value `root` is reserved.
+        type:
+          type: string
+          enum:
+            - message
+        status:
+          anyOf:
+            - type: string
+              enum:
+                - completed
+                - incomplete
+            - type: 'null'
+            - type: 'null'
+          description: Optional input status. Omission or null defaults to completed.
+          default: completed
+        role:
+          type: string
+          enum:
+            - developer
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.RealtimeResponseInputText'
+          minItems: 1
+          maxItems: 1
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessage'
+      title: Realtime response input developer message
+    OpenAI.RealtimeResponseInputMessageSystem:
+      type: object
+      required:
+        - type
+        - role
+        - content
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          minLength: 1
+          maxLength: 32
+          pattern: ^[a-zA-Z0-9_-]+$
+          description: An optional client ID. The value `root` is reserved.
+        type:
+          type: string
+          enum:
+            - message
+        status:
+          anyOf:
+            - type: string
+              enum:
+                - completed
+                - incomplete
+            - type: 'null'
+            - type: 'null'
+          description: Optional input status. Omission or null defaults to completed.
+          default: completed
+        role:
+          type: string
+          enum:
+            - system
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.RealtimeResponseInputText'
+          minItems: 1
+          maxItems: 1
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessage'
+      title: Realtime response input system message
+    OpenAI.RealtimeResponseInputMessageType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - system
+            - developer
+            - user
+            - assistant
+    OpenAI.RealtimeResponseInputMessageUser:
+      type: object
+      required:
+        - type
+        - role
+        - content
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          minLength: 1
+          maxLength: 32
+          pattern: ^[a-zA-Z0-9_-]+$
+          description: An optional client ID. The value `root` is reserved.
+        type:
+          type: string
+          enum:
+            - message
+        status:
+          anyOf:
+            - type: string
+              enum:
+                - completed
+                - incomplete
+            - type: 'null'
+            - type: 'null'
+          description: Optional input status. Omission or null defaults to completed.
+          default: completed
+        role:
+          type: string
+          enum:
+            - user
+        content:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputText'
+              - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputAudio'
+              - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputImage'
+          minItems: 1
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessage'
+      title: Realtime response input user message
+    OpenAI.RealtimeResponseInputText:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - input_text
+        text:
+          type: string
+          maxLength: 256000
+      title: Realtime response input text
+    OpenAI.RealtimeResponseItemReference:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+          enum:
+            - item_reference
+          description: The type of this item. Always `item_reference`.
+          x-stainless-const: true
+        id:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^[a-zA-Z0-9_-]+$
+          description: The ID of an existing item in the same Realtime session.
+      description: |-
+        Reference an existing item in this Realtime session as response.create input.
+        Item references are only accepted in the response input array, not as new
+        conversation items.
     OpenAI.RealtimeResponseStatusDetails:
       type: object
       properties:
@@ -80795,10 +81362,9 @@ components:
               "role": "assistant",
               "content": [
                 {
-                  "type": "audio",
+                  "type": "output_audio",
                   "transcript": "Yes, I can hear you loud and clear. How can I help you today?",
-                  "audio": "8//2//v/9//q/+//+P/s...",
-                  "format": "pcm16"
+                  "audio": "AAABAP//AAA="
                 }
               ]
             }
@@ -80880,7 +81446,7 @@ components:
       description: |-
         Returned when an error occurs, which could be a client problem or a server
         problem. Most errors are recoverable and the session will stay open, we
-        recommend to implementors to monitor and log error messages by default.
+        recommend to implementers to monitor and log error messages by default.
       x-oaiMeta:
         name: error
         group: realtime
@@ -81023,9 +81589,9 @@ components:
         group: realtime
         example: |
           {
-              "type":" input_audio_buffer.dtmf_event_received",
-              "event": "9",
-              "received_at": 1763605109,
+            "type": "input_audio_buffer.dtmf_event_received",
+            "event": "9",
+            "received_at": 1763605109
           }
       x-ms-foundry-meta:
         required_previews:
@@ -81490,7 +82056,7 @@ components:
       description: |-
         Returned when an error occurs, which could be a client problem or a server
         problem. Most errors are recoverable and the session will stay open, we
-        recommend to implementors to monitor and log error messages by default.
+        recommend to implementers to monitor and log error messages by default.
       x-oaiMeta:
         name: error
         group: realtime
@@ -81930,7 +82496,7 @@ components:
               },
               "usage": null,
               "metadata": null
-            },
+            }
           }
       x-ms-foundry-meta:
         required_previews:
@@ -82449,23 +83015,23 @@ components:
         group: realtime
         example: |
           {
-              "event_id": "event_3536",
-              "type": "response.output_item.done",
-              "response_id": "resp_001",
-              "output_index": 0,
-              "item": {
-                  "id": "msg_007",
-                  "object": "realtime.item",
-                  "type": "message",
-                  "status": "completed",
-                  "role": "assistant",
-                  "content": [
-                      {
-                          "type": "text",
-                          "text": "Sure, I can help with that."
-                      }
-                  ]
-              }
+            "event_id": "event_3536",
+            "type": "response.output_item.done",
+            "response_id": "resp_001",
+            "output_index": 0,
+            "item": {
+              "id": "msg_007",
+              "object": "realtime.item",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Sure, I can help with that."
+                }
+              ]
+            }
           }
       x-ms-foundry-meta:
         required_previews:
@@ -82658,7 +83224,7 @@ components:
                 }
               },
               "include": null
-            },
+            }
           }
       x-ms-foundry-meta:
         required_previews:
@@ -82767,7 +83333,7 @@ components:
                 }
               },
               "include": null
-            },
+            }
           }
       x-ms-foundry-meta:
         required_previews:
@@ -83153,6 +83719,9 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.NoiseReductionType'
+        strength:
+          $ref: '#/components/schemas/OpenAI.RealtimeNoiseReductionStrength'
+          default: 1
     OpenAI.RealtimeSessionCreateRequestGAAudioOutput:
       type: object
       properties:
@@ -83559,6 +84128,9 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.NoiseReductionType'
+        strength:
+          $ref: '#/components/schemas/OpenAI.RealtimeNoiseReductionStrength'
+          default: 1
     OpenAI.RealtimeTranscriptionSessionCreateRequestInputAudioNoiseReduction:
       type: object
       properties:
@@ -83823,6 +84395,9 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.NoiseReductionType'
+        strength:
+          $ref: '#/components/schemas/OpenAI.RealtimeNoiseReductionStrength'
+          default: 1
     OpenAI.RealtimeTranslationSessionAudioInputTranscription:
       type: object
       required:
@@ -83875,6 +84450,9 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.NoiseReductionType'
+        strength:
+          $ref: '#/components/schemas/OpenAI.RealtimeNoiseReductionStrength'
+          default: 1
     OpenAI.RealtimeTranslationSessionCreateRequestAudioInputTranscription:
       type: object
       required:
@@ -84255,6 +84833,19 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ResponseUsage'
             - type: 'null'
+        tool_usage:
+          $ref: '#/components/schemas/OpenAI.ResponseToolUsage'
+          description: |-
+            Usage reported by hosted tools, separate from base model `usage`. The field
+              can be omitted when tool usage is unavailable. When present, tool families
+              with no recorded usage have zero counts.
+              `image_gen` sums available token counts across image generation calls.
+              Calls with missing or incomplete usage records may be skipped. Output
+              token details and cached input counts can be omitted. An omitted cache
+              count means cache usage is unknown.
+              `web_search.num_requests` counts billable searches. Discounted searches
+              and actions such as opening a page are excluded. Use billing records to
+              reconcile final charges.
         prompt_cache_options:
           $ref: '#/components/schemas/OpenAI.PromptCacheOptions'
         prompt_cache_diagnostics:
@@ -84735,6 +85326,15 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
             - type: 'null'
+    OpenAI.ResponseConfigurationUpdateItemParamText:
+      type: object
+      required:
+        - format
+      properties:
+        format:
+          oneOf:
+            - $ref: '#/components/schemas/OpenAI.ResponseFormatText'
+            - $ref: '#/components/schemas/OpenAI.TextResponseFormatJsonSchema'
     OpenAI.ResponseConfigurationUpdateReasoning:
       type: object
       properties:
@@ -84742,6 +85342,15 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
             - type: 'null'
+    OpenAI.ResponseConfigurationUpdateText:
+      type: object
+      required:
+        - format
+      properties:
+        format:
+          oneOf:
+            - $ref: '#/components/schemas/OpenAI.ResponseFormatText'
+            - $ref: '#/components/schemas/OpenAI.TextResponseFormatJsonSchema'
     OpenAI.ResponseContentPartAddedEvent:
       type: object
       required:
@@ -87165,6 +87774,20 @@ components:
         text or structured JSON data. Learn more:
         - [Text inputs and outputs](https://developers.openai.com/api/docs/guides/text)
         - [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
+    OpenAI.ResponseToolUsage:
+      type: object
+      required:
+        - image_gen
+        - web_search
+      properties:
+        image_gen:
+          $ref: '#/components/schemas/OpenAI.ImageGenToolUsage'
+          description: Aggregated usage statistics for image generation tool calls.
+        web_search:
+          $ref: '#/components/schemas/OpenAI.WebSearchUsage'
+          description: Aggregated billable usage statistics for web search tool calls.
+      description: Aggregated usage details for billable tools that ran while generating the response.
+      title: Response tool usage
     OpenAI.ResponseUsage:
       type: object
       required:
@@ -88178,22 +88801,6 @@ components:
           type: string
         arguments:
           type: string
-    OpenAI.ScoreLevelParam:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          type: string
-          minLength: 0
-          maxLength: 1048576
-        description:
-          type: string
-          minLength: 0
-          maxLength: 1048576
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.ScreenshotParam:
       type: object
       required:
@@ -89367,7 +89974,7 @@ components:
                 - gpt-image-2.5-sunburst-2026-09-08
                 - gpt-image-2.5-flare
                 - gpt-image-2.5-flare-2026-09-08
-          default: gpt-image-1
+          default: gpt-image-2
         quality:
           type: string
           enum:
@@ -90046,7 +90653,7 @@ components:
                 - gpt-image-2.5-sunburst-2026-09-08
                 - gpt-image-2.5-flare
                 - gpt-image-2.5-flare-2026-09-08
-          default: gpt-image-1
+          default: gpt-image-2
         quality:
           type: string
           enum:
@@ -91942,6 +92549,16 @@ components:
               items:
                 type: string
             - type: 'null'
+    OpenAI.WebSearchUsage:
+      type: object
+      required:
+        - num_requests
+      properties:
+        num_requests:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of billable web search requests issued.
+      description: Usage details for web search requests that ran while generating the response.
+      title: Web search usage
     OpenAI._MisalignmentErrorType:
       anyOf:
         - type: string
@@ -91978,6 +92595,10 @@ components:
     OpenAI.integer:
       type: integer
       format: int64
+    OpenAI.markup:
+      type: string
+      contentEncoding: base64
+      description: A transparent PNG overlaid on the first image to guide the edit. Must match that image's dimensions after orientation and contain transparent pixels. Supports GPT Image 2.5 and 2.6. Cannot be combined with mask.
     OpenAI.numeric:
       type: number
       format: double
@@ -99725,7 +100346,7 @@ components:
         triggers:
           type: array
           items:
-            $ref: '#/components/schemas/OpenAI.LiveDecisionTriggerInputParam-2'
+            $ref: '#/components/schemas/OpenAI.LiveDecisionTriggerInputParam'
           maxItems: 2
           description: At most one Decisions trigger per transcript event type. Triggers run independently of delegation. On update, omit triggers to keep the current configuration, send a list to replace it, or send an empty list to disable triggers.
         store:
@@ -100147,7 +100768,7 @@ components:
         input:
           type: array
           items:
-            $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
+            $ref: '#/components/schemas/OpenAI.RealtimeResponseInputItem'
           description: |-
             Input items to include in the prompt for the model. Using this field
               creates a new context for this Response instead of using the default
