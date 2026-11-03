@@ -71,7 +71,7 @@ catalog, grader types, running instructions, and contribution guide.
 ### Quick start
 
 ```bash
-# Prerequisites: Node.js >= 20, npm >= 11.11.1
+# Prerequisites: Node.js >= 22.14.0, npm >= 11.11.1
 # Clone and build vally
 git clone https://github.com/microsoft/vally.git
 cd vally && npm install && npm run build && cd -
@@ -99,6 +99,18 @@ Changes to any of these files should pass the eval suite before merging:
 - `.github/instructions/*review*.instructions.md`
 - `.github/skills/azure-api-review/**`
 - `.github/skills/evals/arm-api-reviewer/**`
+
+### Reporting reviewer issues
+
+The **arm-api-reviewer-issue** skill
+([`skills/arm-api-reviewer-issue/`](arm-api-reviewer-issue/)) helps users
+report concerns about the ARM API Reviewer as public issues in
+`Azure/azure-rest-api-specs`. It checks open ARM API Reviewer issues for
+duplicates, drafts a plain-language issue, shows the complete draft with its
+labels and assignee, and creates the issue only after explicit approval. When
+the user has push access and the draft is implementation-ready, it can propose
+assigning Copilot. Changes to this skill should pass its Waza suites; see
+[`arm-api-reviewer-issue/evals/README.md`](arm-api-reviewer-issue/evals/README.md).
 
 ---
 

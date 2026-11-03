@@ -1,0 +1,26 @@
+id: reviewer-process-improvement
+name: reviewer process improvement
+tags:
+  - routing
+  - offline
+inputs:
+  prompt: |
+    I would like the ARM API Reviewer to explain when a human must retry a
+    review. Help me prepare an improvement issue in plain language.
+    Offline exercise: load the skill only. No external calls or publication.
+    Do not invent a failing PR, incident count, or test result.
+graders:
+  - type: skill_invocation
+    name: skill_invocation_1
+    config:
+      required_skills:
+        - arm-api-reviewer-issue
+      mode: any_order
+      allow_extra: true
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'

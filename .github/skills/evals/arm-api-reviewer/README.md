@@ -84,7 +84,7 @@ The fastest way to run the eval suite is the **`run-evals.ps1`** script.
 It handles everything: cloning the vally framework, installing
 dependencies, building, running all tests, and printing a summary.
 
-Prerequisites: [Node.js](https://nodejs.org/) >= 20, npm, Git, and an
+Prerequisites: [Node.js](https://nodejs.org/) >= 22.14.0, npm, Git, and an
 authenticated [GitHub Copilot CLI](https://docs.github.com/copilot/how-tos/set-up/install-copilot-cli)
 on `PATH`. The runner is headless and does not require Visual Studio Code.
 

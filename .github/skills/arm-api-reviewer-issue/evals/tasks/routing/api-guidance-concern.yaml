@@ -1,0 +1,32 @@
+id: api-guidance-concern
+name: api guidance concern
+tags:
+  - routing
+  - offline
+inputs:
+  prompt: |
+    The ARM API Reviewer flagged an API pattern that I believe is allowed.
+    I want to report a possible false positive, not run a full API review.
+    I have no rule ID or reproduction yet.
+    Offline exercise: load the skill only. No GitHub calls, shell commands,
+    or publication. Treat my diagnosis as unverified.
+graders:
+  - type: skill_invocation
+    name: skill_invocation_1
+    config:
+      required_skills:
+        - arm-api-reviewer-issue
+      mode: any_order
+      allow_extra: true
+  - type: text
+    name: output_not_contains_2
+    config:
+      not_contains:
+        - confirmed root cause
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'
