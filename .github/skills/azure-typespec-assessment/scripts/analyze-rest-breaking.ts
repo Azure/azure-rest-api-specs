@@ -125,23 +125,73 @@ function same(left: unknown, right: unknown) {
     : canonicalJson(left) === canonicalJson(right);
 }
 
+function unresolvedReferenceIdentity(value: unknown): string | undefined {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const record = value as Record<string, unknown>;
+  if (record.unresolved !== true && typeof record.unresolvedReference !== "string") {
+    return undefined;
+  }
+  for (const field of ["ref", "reference", "unresolvedReference"]) {
+    if (typeof record[field] === "string") return record[field];
+  }
+  return "<unresolved>";
+}
+
+function isArmCommonTypeReference(identity: string): boolean {
+  const normalized = identity.replaceAll("\\", "/");
+  return (
+    /(?:^|\/)specification\/common-types\//i.test(normalized) ||
+    /^(?:\.\.\/|\.\/)*common-types\//i.test(normalized)
+  );
+}
+
+function unresolvedArrayKey(value: unknown, index: number): string {
+  if (value !== null && typeof value === "object" && !Array.isArray(value)) {
+    const record = value as Record<string, unknown>;
+    if (typeof record.operationId === "string") return `operation:${record.operationId}`;
+    if (typeof record.status === "string") return `status:${record.status}`;
+    if (typeof record.name === "string" && typeof record.in === "string") {
+      return `parameter:${record.in}:${record.name}`;
+    }
+    if (typeof record.name === "string") return `name:${record.name}`;
+  }
+  return `index:${index}`;
+}
+
+function collectBlockingUnresolvedEvidence(
+  value: unknown,
+  location: string,
+  result: Map<string, string>,
+) {
+  if (value === null || typeof value !== "object") return;
+  const identity = unresolvedReferenceIdentity(value);
+  if (identity !== undefined) {
+    if (!isArmCommonTypeReference(identity)) result.set(location, identity);
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) =>
+      collectBlockingUnresolvedEvidence(
+        item,
+        `${location}[${unresolvedArrayKey(item, index)}]`,
+        result,
+      ),
+    );
+    return;
+  }
+  for (const [key, nested] of Object.entries(value)) {
+    collectBlockingUnresolvedEvidence(nested, `${location}.${key}`, result);
+  }
+}
+
 function changedUnresolvedEvidence(before: unknown, after: unknown): boolean {
   if (same(before, after)) return false;
-  const isObject = (value: unknown): value is Record<string, unknown> =>
-    value !== null && typeof value === "object";
-  if (
-    [before, after].some(
-      (value) =>
-        isObject(value) &&
-        (value.unresolved === true || typeof value.unresolvedReference === "string"),
-    )
-  ) {
-    return true;
-  }
-  const baseline = isObject(before) ? before : {};
-  const target = isObject(after) ? after : {};
-  return [...new Set([...Object.keys(baseline), ...Object.keys(target)])].some((key) =>
-    changedUnresolvedEvidence(baseline[key], target[key]),
+  const baseline = new Map<string, string>();
+  const target = new Map<string, string>();
+  collectBlockingUnresolvedEvidence(before, "$", baseline);
+  collectBlockingUnresolvedEvidence(after, "$", target);
+  return [...new Set([...baseline.keys(), ...target.keys()])].some(
+    (key) => baseline.get(key) !== target.get(key),
   );
 }
 
@@ -202,6 +252,16 @@ function schemaChanges(
 ): BreakingChange[] {
   if (same(before, after)) return [];
   if (!before || !after) return [{ rule: "wire-schema-changed", location }];
+  const beforeUnresolved = unresolvedReferenceIdentity(before);
+  const afterUnresolved = unresolvedReferenceIdentity(after);
+  if (
+    beforeUnresolved !== undefined &&
+    afterUnresolved !== undefined &&
+    isArmCommonTypeReference(beforeUnresolved) &&
+    isArmCommonTypeReference(afterUnresolved)
+  ) {
+    return [];
+  }
 
   const changes: BreakingChange[] = [];
   if (before.kind !== after.kind || before.type !== after.type) {
