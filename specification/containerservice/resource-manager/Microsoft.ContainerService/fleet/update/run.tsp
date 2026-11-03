@@ -193,6 +193,10 @@ union UpdateState {
 
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed.")
   "Completed",
+
+  @added(Versions.v2026_12_01_preview)
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup that has partially completed.")
+  "PartiallyCompleted",
 }
 
 @doc("The status for an operation or group of operations.")
@@ -438,6 +442,44 @@ model SkipProperties {
   targets: SkipTarget[];
 }
 
+@doc("The definition of a single reset request.")
+@added(Versions.v2026_12_01_preview)
+union ResetTargetType {
+  string,
+
+  @doc("Target the entire update run identified by the request route.")
+  Run: "Run",
+
+  @doc("Target a stage within the update run.")
+  Stage: "Stage",
+
+  @doc("Target a group within the update run.")
+  Group: "Group",
+
+  @doc("Target a member's execution entry within the update run.")
+  Member: "Member",
+}
+
+@doc("A reset target within the update run identified by the request route.")
+@added(Versions.v2026_12_01_preview)
+model ResetTarget {
+  @doc("The target type. Only Run, Stage, Group, and Member are supported.")
+  type: ResetTargetType;
+
+  @doc("The reset target's name.")
+  @minLength(1)
+  name: string;
+}
+
+@doc("The properties of a reset operation containing multiple reset requests.")
+@added(Versions.v2026_12_01_preview)
+model ResetProperties {
+  @doc("The targets to reset.")
+  @minItems(1)
+  @identifiers(#["type", "name"])
+  targets: ResetTarget[];
+}
+
 @added(Versions.v2023_03_15_preview)
 @armResourceOperations
 interface UpdateRuns {
@@ -492,6 +534,16 @@ interface UpdateRuns {
   skip is ArmResourceActionAsync<
     UpdateRun,
     SkipProperties,
+    UpdateRun,
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
+      IfMatchParameters<UpdateRun>
+  >;
+
+  @doc("Resets members within the target scope of an UpdateRun.")
+  @added(Versions.v2026_12_01_preview)
+  reset is ArmResourceActionSync<
+    UpdateRun,
+    ResetProperties,
     UpdateRun,
     Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
       IfMatchParameters<UpdateRun>
