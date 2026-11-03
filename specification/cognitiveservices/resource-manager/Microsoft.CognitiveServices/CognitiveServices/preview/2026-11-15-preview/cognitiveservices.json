@@ -11068,6 +11068,9 @@
           }
         },
         "x-ms-examples": {
+          "List ACS policies with optional annotations and egress companions": {
+            "$ref": "./examples/ListRaiPoliciesAcsWithAnnotationsAndEgress.json"
+          },
           "ListRaiPolicies": {
             "$ref": "./examples/ListRaiPolicies.json"
           }
@@ -11136,6 +11139,9 @@
         "x-ms-examples": {
           "Get an ACS policy": {
             "$ref": "./examples/GetRaiPolicyAcs.json"
+          },
+          "Get an ACS policy with optional annotations and an egress companion": {
+            "$ref": "./examples/GetRaiPolicyAcsWithAnnotationsAndEgress.json"
           },
           "GetRaiPolicy": {
             "$ref": "./examples/GetRaiPolicy.json"
@@ -11225,6 +11231,9 @@
           }
         },
         "x-ms-examples": {
+          "Create an ACS policy with optional annotations and an egress companion": {
+            "$ref": "./examples/PutRaiPolicyAcsWithAnnotationsAndEgress.json"
+          },
           "Create an ACS policy with optional policy dependencies": {
             "$ref": "./examples/PutRaiPolicyAcs.json"
           },
@@ -21115,8 +21124,11 @@
           "description": "The logical policy evaluated at this intervention point."
         },
         "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotationBinding"
+          }
         }
       },
       "required": [
@@ -21156,8 +21168,11 @@
           "description": "The logical policy evaluated at this intervention point."
         },
         "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotationBinding"
+          }
         }
       },
       "required": [
@@ -21165,6 +21180,64 @@
         "policy_target_kind",
         "policy"
       ]
+    },
+    "RaiAcsAnnotationBinding": {
+      "type": "object",
+      "description": "Binds an annotator to a subject at one intervention point. The map key selects its declaration.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "The Agent Control Specification path selecting the subject passed to the annotator."
+        }
+      },
+      "required": [
+        "from"
+      ],
+      "additionalProperties": {}
+    },
+    "RaiAcsAnnotatorDefinition": {
+      "type": "object",
+      "description": "A named Agent Control Specification annotator declaration with host-defined configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RaiAcsAnnotatorType",
+          "description": "The dispatcher kind. Supported configuration is determined by the evaluation host."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": {}
+    },
+    "RaiAcsAnnotatorType": {
+      "type": "string",
+      "description": "Extensible kinds of Agent Control Specification annotator dispatchers.",
+      "enum": [
+        "classifier",
+        "llm",
+        "endpoint"
+      ],
+      "x-ms-enum": {
+        "name": "RaiAcsAnnotatorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Classifier",
+            "value": "classifier",
+            "description": "Obtains annotations from a classifier dispatcher."
+          },
+          {
+            "name": "Llm",
+            "value": "llm",
+            "description": "Obtains annotations from a language-model dispatcher."
+          },
+          {
+            "name": "Endpoint",
+            "value": "endpoint",
+            "description": "Obtains annotations from an external endpoint dispatcher."
+          }
+        ]
+      }
     },
     "RaiAcsEmptyObject": {
       "type": "object",
@@ -21262,8 +21335,11 @@
           "description": "The logical policy evaluated at this intervention point."
         },
         "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotationBinding"
+          }
         }
       },
       "required": [
@@ -21350,8 +21426,11 @@
           }
         },
         "annotators": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotator dispatch is disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator declarations keyed by name. Omitted or empty maps request no annotator declarations.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotatorDefinition"
+          }
         }
       },
       "required": [
@@ -21603,8 +21682,11 @@
           "description": "The logical policy evaluated at this intervention point."
         },
         "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotationBinding"
+          }
         }
       },
       "required": [
@@ -21644,8 +21726,11 @@
           "description": "The logical policy evaluated at this intervention point."
         },
         "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotationBinding"
+          }
         }
       },
       "required": [
@@ -21726,8 +21811,11 @@
           "description": "The logical policy evaluated at this intervention point."
         },
         "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotationBinding"
+          }
         },
         "tool_name_from": {
           "$ref": "#/definitions/RaiAcsToolNameSelector",
