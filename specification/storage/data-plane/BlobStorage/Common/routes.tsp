@@ -315,6 +315,11 @@ interface Container {
       /** Indicates whether version level WORM (Write Once, Read Many) is enabled on a container. */
       @header("x-ms-immutable-storage-with-versioning-enabled")
       isImmutableStorageWithVersioningEnabled?: boolean;
+
+      /** Indicates whether blob level immutable storage is enabled on a container. Only returned for hierarchical namespace enabled accounts. */
+      @added(Versions.v2026_12_06)
+      @header("x-ms-blob-level-immutable-storage-enabled")
+      isBlobLevelImmutableStorageEnabled?: boolean;
     }
   >;
 

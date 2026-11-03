@@ -12542,6 +12542,10 @@
                 "format": "date-time-rfc7231",
                 "description": "The date-time that the resource was last modified."
               },
+              "x-ms-blob-level-immutable-storage-enabled": {
+                "type": "boolean",
+                "description": "Indicates whether blob level immutable storage is enabled on a container. Only returned for hierarchical namespace enabled accounts."
+              },
               "x-ms-blob-public-access": {
                 "type": "string",
                 "description": "The public access setting for the container.",
@@ -18054,6 +18058,11 @@
           "type": "boolean",
           "description": "Whether immutable storage with versioning is enabled.",
           "x-ms-client-name": "isImmutableStorageWithVersioningEnabled"
+        },
+        "BlobLevelImmutableStorageEnabled": {
+          "type": "boolean",
+          "description": "Whether blob level immutable storage is enabled. Only returned for hierarchical namespace enabled accounts.",
+          "x-ms-client-name": "isBlobLevelImmutableStorageEnabled"
         }
       },
       "required": [
