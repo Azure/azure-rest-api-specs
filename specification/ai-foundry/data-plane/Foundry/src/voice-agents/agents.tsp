@@ -109,24 +109,13 @@ model VoiceAgentLlmInterimResponseConfig
   Creates and updates produce immutable versions. Each version selects its own protocol, so a new version can switch between Realtime and Live.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-// OpenAPI-only fallback; SDKs must customize subtype dispatch and preserve omission.
-@extension(
-  "discriminator",
-  #{
-    propertyName: "sub_protocol",
-    mapping: #{
-      realtime: "#/components/schemas/VoiceAgentDefinition",
-      live: "#/components/schemas/VoiceAgentLiveDefinition",
-    },
-    defaultMapping: "#/components/schemas/VoiceAgentDefinition",
-  }
-)
+@discriminator("sub_protocol")
 model VoiceAgentBaseDefinition extends AgentDefinition {
   @doc("Always voice.")
   kind: AgentKind.voice;
 
-  @doc("Omission selects Realtime. Null and unknown values are invalid. Reads preserve omission.")
-  sub_protocol?: VoiceAgentSubProtocol;
+  @doc("The voice protocol for this agent version. Null and unknown values are invalid.")
+  sub_protocol: VoiceAgentSubProtocol;
 
   @doc("Frontend instructions, templated with structured_inputs. Backend instructions belong in delegation.responses.")
   instructions?: string;
@@ -145,7 +134,6 @@ union VoiceAgentSubProtocol {
   live: "live",
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Voice-local OpenAPI metadata defines the optional discriminator; SDKs must customize dispatch."
 @doc("""
   The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
   managed speech-to-speech experience. Establish realtime voice sessions through
@@ -153,8 +141,8 @@ union VoiceAgentSubProtocol {
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDefinition extends VoiceAgentBaseDefinition {
-  @doc("Selects Realtime. May be omitted for legacy agents.")
-  sub_protocol?: VoiceAgentSubProtocol.realtime;
+  @doc("Selects the Realtime protocol.")
+  sub_protocol: VoiceAgentSubProtocol.realtime;
 
   @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
   model_type?: VoiceModelType;
@@ -220,7 +208,6 @@ model VoiceAgentDefinition extends VoiceAgentBaseDefinition {
   post_call?: VoiceAgentPostCallConfig;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Voice-local OpenAPI metadata defines the optional discriminator; SDKs must customize dispatch."
 @doc("""
   The Live voice agent definition. Its configuration (model, instructions, audio, and delegation) drives a
   managed speech-to-speech experience using a Foundry GPT Live deployment. Establish Live voice sessions through
@@ -252,28 +239,51 @@ model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
 @@usage(VoiceAgentDefinition, Usage.input | Usage.output | Usage.json);
 @@usage(VoiceAgentLiveDefinition, Usage.input | Usage.output | Usage.json);
 
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Reuse the native OpenAI delegation models without reparenting or changing their wire contract."
 @doc("Who handles delegated work for a Live voice agent.")
-@oneOf
+@discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentLiveDelegation {
-  client: OpenAI.LiveClientDelegationParam,
-  responses: OpenAI.LiveResponsesDelegationParam,
-  foundry_managed_agent: VoiceAgentLiveManagedAgentDelegation,
+model VoiceAgentLiveDelegation {
+  @doc("The delegation owner.")
+  type: VoiceAgentLiveDelegationType;
+}
+
+@doc("Supported owners of work delegated by a Live voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentLiveDelegationType {
+  @doc("The application handles delegated work.")
+  client: "client",
+
+  @doc("A Responses backend handles delegated work.")
+  responses: "responses",
+
+  @doc("A prompt agent in the same project handles delegated work.")
+  foundry_managed_agent: "foundry_managed_agent",
+}
+
+@doc("Delegates work to the application using native client delegation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveClientDelegation extends VoiceAgentLiveDelegation {
+  ...OmitProperties<OpenAI.LiveClientDelegationParam, "type">;
+  type: VoiceAgentLiveDelegationType.client;
+}
+
+@doc("Delegates work to a Responses backend using native Responses settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveResponsesDelegation extends VoiceAgentLiveDelegation {
+  ...OmitProperties<OpenAI.LiveResponsesDelegationParam, "type">;
+  type: VoiceAgentLiveDelegationType.responses;
 }
 
 @doc("Delegates to a same-project prompt agent using native client delegation. Requires [thinking] and/or [commentary] output sections.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveManagedAgentDelegation {
+model VoiceAgentLiveManagedAgentDelegation extends VoiceAgentLiveDelegation {
   @doc("Canonical delegation type; legacy managed_prompt_agent values are returned as foundry_managed_agent.")
-  type: VoiceAgentLiveDelegationTarget.foundry_managed_agent;
+  type: VoiceAgentLiveDelegationType.foundry_managed_agent;
 
   @doc("Name of a prompt agent in the same project.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$")
   agent_name: string;
 
   @doc("Agent version, pinned per connection. Omit to select the active version.")
-  @pattern("^[1-9][0-9]{0,19}$")
   agent_version?: string;
 }
 

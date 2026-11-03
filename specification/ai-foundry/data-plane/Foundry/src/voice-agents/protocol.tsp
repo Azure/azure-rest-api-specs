@@ -773,10 +773,7 @@ model VoiceAgentWebSocketUpgradeResponse {
 // Native Live protocol and Foundry conversation correlation
 // ---------------------------------------------------------------------------
 
-/** Native OpenAI Live client events. */
-alias VoiceAgentLiveClientEvent = OpenAI.LiveClientEvent;
-
-/**
+/*
  * Native Live events with Foundry conversation correlation and delegation ownership; no additional event types.
  * For foundry_managed_agent sessions, session delegation reports the pinned Foundry target and delegation
  * targets report foundry_managed_agent; GPT Live itself runs native client delegation.
@@ -785,8 +782,6 @@ alias VoiceAgentLiveClientEvent = OpenAI.LiveClientEvent;
  * Correlate append acknowledgments via client_event_id to record accepted results, not speech or playback.
  * Use native errors for orchestration failures; never fabricate backend response events.
  */
-alias VoiceAgentLiveServerEvent = OpenAI.LiveServerEvent;
-
 // Keep event models reachable without HTTP frame bodies.
 @@usage(OpenAI.LiveClientEvent, Usage.input | Usage.json);
 @@usage(OpenAI.LiveServerEvent, Usage.output | Usage.json);

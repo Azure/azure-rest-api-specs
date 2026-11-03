@@ -134,24 +134,14 @@ model VoiceResponse {
 // Live delegation results and persisted conversation items
 // ---------------------------------------------------------------------------
 
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Anonymous variants require commentary, thinking, or both; there is no shared base model to extend."
-@doc("Persisted guidance accepted by Live, with commentary, thinking, or both. Agent delegation section markers are removed before storage.")
+@doc("Persisted guidance accepted by Live. The service populates commentary, thinking, or both. Agent delegation section markers are removed before storage.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentLiveDelegationResultItem {
-  {
-    @doc("Guidance for Live to communicate to the user.")
-    commentary: string,
+model VoiceAgentLiveDelegationResultItem {
+  @doc("Guidance for Live to communicate to the user.")
+  commentary?: string;
 
-    @doc("Background context, not private reasoning or a request to speak.")
-    thinking?: string,
-  },
-  {
-    @doc("Guidance for Live to communicate to the user.")
-    commentary?: string,
-
-    @doc("Background context, not private reasoning or a request to speak.")
-    thinking: string,
-  },
+  @doc("Background context, not private reasoning or a request to speak.")
+  thinking?: string;
 }
 
 @doc("Delegation owner. Foundry agent targets use native client delegation upstream.")
@@ -234,8 +224,8 @@ model VoiceAgentLiveOutputConversationItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveDelegationConversationItem
   extends VoiceAgentLiveConversationItem {
-  // id is inherited; extend target only for persistence.
-  ...OmitProperties<OpenAI.LiveDelegationItem, "id" | "target">;
+  ...OmitProperties<OpenAI.LiveDelegationItem, "id" | "type" | "target">;
+  type: VoiceAgentLiveConversationItemType.delegation;
 
   @doc("The configured delegation owner.")
   target: VoiceAgentLiveDelegationTarget;
@@ -280,7 +270,7 @@ model VoiceAgentLiveFoundryManagedAgentDelegationItem
   agent_version: string;
 
   @doc("Native delegation offset from session start, in milliseconds.")
-  offset_ms: int64;
+  offset_ms: FoundryDurationMilliseconds;
 
   @doc("Backend conversation ID, distinct from the voice conversation and Live session IDs.")
   backend_conversation_id?: string;

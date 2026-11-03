@@ -64858,25 +64858,6 @@
           "daybreak_red"
         ]
       },
-      "OpenAI.DelegationType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "client",
-              "responses"
-            ]
-          }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "OpenAI.DeleteAssistantResponse": {
         "type": "object",
         "required": [
@@ -77762,33 +77743,6 @@
           ]
         }
       },
-      "OpenAI.LiveClientDelegationParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "client"
-            ],
-            "description": "The delegation owner. Always `client` for tasks handled by your application.",
-            "x-stainless-const": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.delegation"
-          }
-        ],
-        "description": "Delegate tasks to your application. The Live session emits delegation events that your backend handles.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "OpenAI.LiveCodeInterpreterToolInputParam": {
         "type": "object",
         "required": [
@@ -79047,38 +79001,6 @@
           "detailed",
           "auto"
         ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "OpenAI.LiveResponsesDelegationParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "responses"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "responses"
-            ],
-            "description": "The delegation owner. Always `responses` for tasks handled by the Responses API.",
-            "x-stainless-const": true
-          },
-          "responses": {
-            "$ref": "#/components/schemas/OpenAI.LiveResponsesDelegationSettingsInputParam",
-            "description": "Backend model, prompt, and tools used when the Live session delegates a task to Responses."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.delegation"
-          }
-        ],
-        "description": "Delegate tasks to a Responses model managed by the Live session.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -100855,30 +100777,6 @@
           }
         }
       },
-      "OpenAI.delegation": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.DelegationType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "responses": "#/components/schemas/OpenAI.LiveResponsesDelegationParam",
-            "client": "#/components/schemas/OpenAI.LiveClientDelegationParam"
-          }
-        },
-        "description": "Who handles tasks delegated by the Live model. Omitted or null selects your application; use `responses` to let the API manage a Responses backend.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "OpenAI.integer": {
         "type": "integer",
         "format": "int64"
@@ -110549,7 +110447,8 @@
       "VoiceAgentBaseDefinition": {
         "type": "object",
         "required": [
-          "kind"
+          "kind",
+          "sub_protocol"
         ],
         "properties": {
           "kind": {
@@ -110561,7 +110460,7 @@
           },
           "sub_protocol": {
             "$ref": "#/components/schemas/VoiceAgentSubProtocol",
-            "description": "Omission selects Realtime. Null and unknown values are invalid. Reads preserve omission."
+            "description": "The voice protocol for this agent version. Null and unknown values are invalid."
           },
           "instructions": {
             "type": "string",
@@ -110580,20 +110479,19 @@
             "default": false
           }
         },
+        "discriminator": {
+          "propertyName": "sub_protocol",
+          "mapping": {
+            "realtime": "#/components/schemas/VoiceAgentDefinition",
+            "live": "#/components/schemas/VoiceAgentLiveDefinition"
+          }
+        },
         "allOf": [
           {
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
         "description": "Shared voice-agent settings; protocol-specific fields remain flat on each subtype.\nCreates and updates produce immutable versions. Each version selects its own protocol, so a new version can switch between Realtime and Live.",
-        "discriminator": {
-          "propertyName": "sub_protocol",
-          "mapping": {
-            "realtime": "#/components/schemas/VoiceAgentDefinition",
-            "live": "#/components/schemas/VoiceAgentLiveDefinition"
-          },
-          "defaultMapping": "#/components/schemas/VoiceAgentDefinition"
-        },
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -110770,13 +110668,16 @@
       },
       "VoiceAgentDefinition": {
         "type": "object",
+        "required": [
+          "sub_protocol"
+        ],
         "properties": {
           "sub_protocol": {
             "type": "string",
             "enum": [
               "realtime"
             ],
-            "description": "Selects Realtime. May be omitted for legacy agents."
+            "description": "Selects the Realtime protocol."
           },
           "model_type": {
             "$ref": "#/components/schemas/VoiceModelType",
@@ -111273,6 +111174,31 @@
           ]
         }
       },
+      "VoiceAgentLiveClientDelegation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "client"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegation"
+          }
+        ],
+        "description": "Delegates work to the application using native client delegation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentLiveClientDelegationConversationItem": {
         "type": "object",
         "required": [
@@ -111466,17 +111392,24 @@
         }
       },
       "VoiceAgentLiveDelegation": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.LiveClientDelegationParam"
-          },
-          {
-            "$ref": "#/components/schemas/OpenAI.LiveResponsesDelegationParam"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentLiveManagedAgentDelegation"
-          }
+        "type": "object",
+        "required": [
+          "type"
         ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationType",
+            "description": "The delegation owner."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "client": "#/components/schemas/VoiceAgentLiveClientDelegation",
+            "responses": "#/components/schemas/VoiceAgentLiveResponsesDelegation",
+            "foundry_managed_agent": "#/components/schemas/VoiceAgentLiveManagedAgentDelegation"
+          }
+        },
         "description": "Who handles delegated work for a Live voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -111492,18 +111425,15 @@
           "created_at"
         ],
         "properties": {
+          "response_id": {
+            "type": "string",
+            "description": "The ID of the Responses API response associated with a Responses delegation. Omitted for client delegations."
+          },
           "type": {
             "type": "string",
             "enum": [
               "delegation"
-            ],
-            "description": "The object type, always `delegation`.",
-            "x-stainless-const": true,
-            "default": "delegation"
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The ID of the Responses API response associated with a Responses delegation. Omitted for client delegations."
+            ]
           },
           "target": {
             "$ref": "#/components/schemas/VoiceAgentLiveDelegationTarget",
@@ -111572,41 +111502,18 @@
         }
       },
       "VoiceAgentLiveDelegationResultItem": {
-        "anyOf": [
-          {
-            "type": "object",
-            "properties": {
-              "commentary": {
-                "type": "string",
-                "description": "Guidance for Live to communicate to the user."
-              },
-              "thinking": {
-                "type": "string",
-                "description": "Background context, not private reasoning or a request to speak."
-              }
-            },
-            "required": [
-              "commentary"
-            ]
+        "type": "object",
+        "properties": {
+          "commentary": {
+            "type": "string",
+            "description": "Guidance for Live to communicate to the user."
           },
-          {
-            "type": "object",
-            "properties": {
-              "commentary": {
-                "type": "string",
-                "description": "Guidance for Live to communicate to the user."
-              },
-              "thinking": {
-                "type": "string",
-                "description": "Background context, not private reasoning or a request to speak."
-              }
-            },
-            "required": [
-              "thinking"
-            ]
+          "thinking": {
+            "type": "string",
+            "description": "Background context, not private reasoning or a request to speak."
           }
-        ],
-        "description": "Persisted guidance accepted by Live, with commentary, thinking, or both. Agent delegation section markers are removed before storage.",
+        },
+        "description": "Persisted guidance accepted by Live. The service populates commentary, thinking, or both. Agent delegation section markers are removed before storage.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -111657,6 +111564,20 @@
           ]
         }
       },
+      "VoiceAgentLiveDelegationType": {
+        "type": "string",
+        "enum": [
+          "client",
+          "responses",
+          "foundry_managed_agent"
+        ],
+        "description": "Supported owners of work delegated by a Live voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentLiveFoundryManagedAgentDelegationItem": {
         "type": "object",
         "required": [
@@ -111683,8 +111604,7 @@
             "description": "Target version pinned at connection start."
           },
           "offset_ms": {
-            "type": "integer",
-            "format": "int64",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Native delegation offset from session start, in milliseconds."
           },
           "backend_conversation_id": {
@@ -111768,15 +111688,18 @@
           },
           "agent_name": {
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$",
             "description": "Name of a prompt agent in the same project."
           },
           "agent_version": {
             "type": "string",
-            "pattern": "^[1-9][0-9]{0,19}$",
             "description": "Agent version, pinned per connection. Omit to select the active version."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegation"
+          }
+        ],
         "description": "Delegates to a same-project prompt agent using native client delegation. Requires [thinking] and/or [commentary] output sections.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -111811,6 +111734,36 @@
           }
         ],
         "description": "A stored assistant speech segment.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveResponsesDelegation": {
+        "type": "object",
+        "required": [
+          "responses",
+          "type"
+        ],
+        "properties": {
+          "responses": {
+            "$ref": "#/components/schemas/OpenAI.LiveResponsesDelegationSettingsInputParam",
+            "description": "Backend model, prompt, and tools used when the Live session delegates a task to Responses."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "responses"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegation"
+          }
+        ],
+        "description": "Delegates work to a Responses backend using native Responses settings.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

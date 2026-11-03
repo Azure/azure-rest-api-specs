@@ -65,7 +65,7 @@ using Azure.AI.Projects;
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
 @@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!java");
 
-// Retain both concrete targets for customized Realtime/Live subtype dispatch.
+// Keep both concrete voice definitions public.
 @@access(VoiceAgentDefinition, Access.public, "java");
 @@access(VoiceAgentLiveDefinition, Access.public, "java");
 
@@ -715,17 +715,6 @@ using Azure.AI.Projects;
   "VoiceAgentSessionResponseConfiguration"
 );
 @@clientName(VoiceAgentSessionResponseConfig.object, "objectType");
-
-@@alternateType(
-  VoiceAgentDefinition.sub_protocol,
-  VoiceAgentSubProtocol,
-  "java"
-);
-@@alternateType(
-  VoiceAgentLiveDefinition.sub_protocol,
-  VoiceAgentSubProtocol,
-  "java"
-);
 
 @@clientName(
   VoiceAgentSessionUpdateConfig,
