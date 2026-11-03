@@ -160,7 +160,8 @@ model CostControlPatch {
    * The budget properties to update. Omission preserves existing properties.
    * Null or an empty object ({}) clears all existing properties.
    */
-  properties?: CostControlPatchProperties;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses explicit null to clear all budget properties; omission preserves them."
+  properties?: CostControlPatchProperties | null;
 }
 
 /** An additional built-in request attribute used to partition a budget into independent counters. */
