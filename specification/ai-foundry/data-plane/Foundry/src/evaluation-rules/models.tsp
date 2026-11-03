@@ -74,6 +74,9 @@ model TraceEvaluationRuleAction extends EvaluationRuleAction {
 
   /** Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved. */
   source: TraceEvaluationSource;
+
+  /** Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema. */
+  evaluation_level?: EvaluationLevel;
 }
 
 /** Dataset inputs supported by scheduled rules. Targets are configured within the selected source. */
@@ -103,6 +106,9 @@ model DatasetEvaluationRuleAction extends EvaluationRuleAction {
 
   /** Dataset inputs for each scheduled occurrence. */
   source: DatasetEvaluationSource;
+
+  /** Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema. */
+  evaluation_level?: EvaluationLevel;
 }
 
 @doc("Evaluation rule action for human evaluation.")

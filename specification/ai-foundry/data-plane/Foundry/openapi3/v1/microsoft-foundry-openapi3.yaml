@@ -50610,6 +50610,9 @@ components:
         source:
           $ref: '#/components/schemas/DatasetEvaluationSource'
           description: Dataset inputs for each scheduled occurrence.
+        evaluation_level:
+          $ref: '#/components/schemas/EvaluationLevel'
+          description: Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema.
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Configures a scheduled evaluation of dataset inputs.
@@ -97774,6 +97777,9 @@ components:
         source:
           $ref: '#/components/schemas/TraceEvaluationSource'
           description: Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved.
+        evaluation_level:
+          $ref: '#/components/schemas/EvaluationLevel'
+          description: Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema.
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Configures a scheduled evaluation of observed agent traces.
