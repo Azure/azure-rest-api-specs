@@ -18,7 +18,7 @@ model Runbook is ProxyResource<RunbookProperties> {
   @key("runbookName")
   @segment("runbooks")
   @path
-  @pattern("^[^<>&:\\?/#]{1,260}$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{0,258}[a-zA-Z0-9]$")
   name: string;
 
   ...EntityTagProperty;
@@ -30,9 +30,9 @@ model RunbookProperties is AzureResourceProperties {
   @doc("Runbook scope definition.")
   scope: RunbookScopeProperties;
 
-  @doc("Artifact identifier associated with this runbook.")
+  @doc("Azure resource ID of the artifact associated with this runbook.")
   @visibility(Lifecycle.Read)
-  artifactId?: string;
+  artifactId?: armResourceIdentifier;
 
   @doc("Current runbook state.")
   @visibility(Lifecycle.Read)
