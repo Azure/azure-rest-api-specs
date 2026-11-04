@@ -9592,62 +9592,6 @@
     "AadAuthTypeConnectionPropertiesRead": {
       "type": "object",
       "description": "Microsoft Entra connection properties returned by ordinary resource operations.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2Read"
@@ -9717,60 +9661,6 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/ConnectionAccessKey"
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
         }
       },
       "allOf": [
@@ -9855,60 +9745,6 @@
         "credentials": {
           "$ref": "#/definitions/ConnectionAccountKey",
           "description": "Account key object for connection credential."
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
         }
       },
       "allOf": [
@@ -10826,60 +10662,6 @@
         "credentials": {
           "$ref": "#/definitions/ConnectionApiKey",
           "description": "Api key object for connection credential."
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
         }
       },
       "allOf": [
@@ -14228,60 +14010,6 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/ConnectionManagedIdentity"
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
         }
       },
       "allOf": [
@@ -15139,62 +14867,6 @@
     "NoneAuthTypeConnectionPropertiesRead": {
       "type": "object",
       "description": "Unauthenticated connection properties returned by ordinary resource operations.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2Read"
@@ -15246,60 +14918,6 @@
         "credentials": {
           "$ref": "#/definitions/ConnectionOAuth2",
           "description": "ClientId and ClientSecret are required. Other properties are optional\ndepending on each OAuth2 provider's implementation."
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
         }
       },
       "allOf": [
@@ -15435,60 +15053,6 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/ConnectionPersonalAccessToken"
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
         }
       },
       "allOf": [
@@ -17820,60 +17384,6 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/ConnectionSharedAccessSignature"
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
         }
       },
       "allOf": [
@@ -17925,60 +17435,6 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/ConnectionServicePrincipal"
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
         }
       },
       "allOf": [
@@ -18585,60 +18041,6 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/ConnectionUsernamePassword"
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory",
-          "description": "Category of the connection"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-          "readOnly": true
-        },
-        "error": {
-          "type": "string",
-          "description": "Provides the error message if the connection fails"
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "$ref": "#/definitions/ConnectionGroup",
-          "description": "Group based on connection category",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Store user metadata for this connection",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "$ref": "#/definitions/ManagedPERequirement",
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
-        },
-        "peStatus": {
-          "$ref": "#/definitions/ManagedPEStatus",
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "The connection URL to be used."
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
         }
       },
       "allOf": [

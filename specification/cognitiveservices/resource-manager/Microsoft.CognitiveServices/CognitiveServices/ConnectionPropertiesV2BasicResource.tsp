@@ -67,61 +67,81 @@ model ConnectionPropertiesV2Read {
 /** Personal access token connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model PatAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
-  // Copy properties without retaining the request hierarchy's discriminator.
-  ...OmitProperties<PATAuthTypeConnectionProperties, never>;
+  ...PickProperties<
+    PATAuthTypeConnectionProperties,
+    "credentials" | "authType"
+  >;
 }
 
 /** Managed identity connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model ManagedIdentityAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...OmitProperties<ManagedIdentityAuthTypeConnectionProperties, never>;
+  ...PickProperties<
+    ManagedIdentityAuthTypeConnectionProperties,
+    "credentials" | "authType"
+  >;
 }
 
 /** Username and password connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model UsernamePasswordAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...OmitProperties<UsernamePasswordAuthTypeConnectionProperties, never>;
+  ...PickProperties<
+    UsernamePasswordAuthTypeConnectionProperties,
+    "credentials" | "authType"
+  >;
 }
 
 /** Unauthenticated connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model NoneAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
-  ...OmitProperties<NoneAuthTypeConnectionProperties, never>;
+  ...PickProperties<NoneAuthTypeConnectionProperties, "authType">;
 }
 
 /** Shared access signature connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model SasAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
-  ...OmitProperties<SASAuthTypeConnectionProperties, never>;
+  ...PickProperties<
+    SASAuthTypeConnectionProperties,
+    "credentials" | "authType"
+  >;
 }
 
 /** Account key connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model AccountKeyAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...OmitProperties<AccountKeyAuthTypeConnectionProperties, never>;
+  ...PickProperties<
+    AccountKeyAuthTypeConnectionProperties,
+    "credentials" | "authType"
+  >;
 }
 
 /** Service principal connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model ServicePrincipalAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...OmitProperties<ServicePrincipalAuthTypeConnectionProperties, never>;
+  ...PickProperties<
+    ServicePrincipalAuthTypeConnectionProperties,
+    "credentials" | "authType"
+  >;
 }
 
 /** Access key connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model AccessKeyAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...OmitProperties<AccessKeyAuthTypeConnectionProperties, never>;
+  ...PickProperties<
+    AccessKeyAuthTypeConnectionProperties,
+    "credentials" | "authType"
+  >;
 }
 
 /** API key connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model ApiKeyAuthConnectionPropertiesRead extends ConnectionPropertiesV2Read {
-  ...OmitProperties<ApiKeyAuthConnectionProperties, never>;
+  ...PickProperties<ApiKeyAuthConnectionProperties, "credentials" | "authType">;
 }
 
 /** Custom-key connection properties returned without stored credentials. */
@@ -135,13 +155,16 @@ model CustomKeysConnectionPropertiesRead extends ConnectionPropertiesV2Read {
 @added(Versions.v2026_11_01)
 model Oauth2AuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...OmitProperties<OAuth2AuthTypeConnectionProperties, never>;
+  ...PickProperties<
+    OAuth2AuthTypeConnectionProperties,
+    "credentials" | "authType"
+  >;
 }
 
 /** Microsoft Entra connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model AadAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
-  ...OmitProperties<AADAuthTypeConnectionProperties, never>;
+  ...PickProperties<AADAuthTypeConnectionProperties, "authType">;
 }
 
 /** A connection returned by ordinary resource operations. */

@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 ### Contract regression checks
 
-After compiling the TypeSpec project, run `node --test test\custom-keys-contract.test.mjs` from this directory. Set `CUSTOM_KEYS_BASE_REF` to an earlier commit containing the target API version to also verify historical contracts and unrelated operations. `CUSTOM_KEYS_API_VERSION` selects the version under test and defaults to `2026-11-01`.
+After compiling the TypeSpec project, run `node --test test\cognitiveservices\custom-keys-contract.mjs` from the repository root. Set `CUSTOM_KEYS_BASE_REF` to an earlier commit containing the target API version to also verify historical contracts and unrelated operations. `CUSTOM_KEYS_API_VERSION` selects the version under test and defaults to `2026-11-01`.
 
 ---
 
@@ -89,6 +89,15 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
+  - code: AvoidAdditionalProperties
+    reason: This read projection preserves the existing connection metadata string dictionary, whose keys are caller-defined and must remain extensible.
+    where:
+      - $.definitions.ConnectionPropertiesV2Read.properties.metadata
+  - code: PutRequestResponseSchemeArm
+    reason: CustomKeys credentials are accepted in PUT/PATCH inputs but deliberately omitted from ordinary resource responses. The request is a superset of the response, and both connection scopes provide PATCH for updates.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:

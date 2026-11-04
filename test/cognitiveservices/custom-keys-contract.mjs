@@ -1,8 +1,7 @@
-// Run after tsp compile: node --test specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/CognitiveServices/test/custom-keys-contract.test.mjs
+// Run after tsp compile: node --test test/cognitiveservices/custom-keys-contract.mjs
 // Set CUSTOM_KEYS_BASE_REF to check historical and unrelated contracts against Git.
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
@@ -14,8 +13,15 @@ import {
   NodeHost,
 } from "@typespec/compiler";
 
-const project = fileURLToPath(new URL("../", import.meta.url));
-const root = path.resolve(project, "../../../../..");
+const root = fileURLToPath(new URL("../../", import.meta.url));
+const project = path.join(
+  root,
+  "specification",
+  "cognitiveservices",
+  "resource-manager",
+  "Microsoft.CognitiveServices",
+  "CognitiveServices",
+);
 const version = process.env.CUSTOM_KEYS_API_VERSION ?? "2026-11-01";
 const status = version.endsWith("-preview") ? "preview" : "stable";
 const specFile = path.join(project, status, version, "cognitiveservices.json");
@@ -93,6 +99,14 @@ test("read projections preserve every authentication variant and all unrelated p
     const expected = properties(model);
     if (authType === "CustomKeys") delete expected.credentials;
     assert.deepEqual(properties(read.get(authType)), expected, authType);
+    const ownProperties = Object.keys(model.properties ?? {}).filter(
+      (name) => authType !== "CustomKeys" || name !== "credentials",
+    );
+    assert.deepEqual(
+      Object.keys(read.get(authType).properties ?? {}).sort(),
+      ownProperties.sort(),
+      `${authType}: inherited properties must not be redeclared`,
+    );
   }
 });
 
@@ -240,14 +254,19 @@ if (baselineRef) {
         );
       });
     assert(entries.length > 0);
-    for (const entry of entries) {
+    const files = entries.map((entry) => entry.split("\t")[1]);
+    const hashes = execFileSync("git", ["hash-object", "--stdin-paths"], {
+      cwd: root,
+      input: files.join("\n") + "\n",
+      encoding: "utf8",
+      maxBuffer: 8 * 1024 * 1024,
+    })
+      .trim()
+      .split(/\r?\n/);
+    assert.equal(hashes.length, entries.length);
+    for (const [index, entry] of entries.entries()) {
       const [metadata, file] = entry.split("\t");
-      const content = readFileSync(path.resolve(root, file));
-      const hash = createHash("sha1")
-        .update(Buffer.from(`blob ${content.length}\0`))
-        .update(content)
-        .digest("hex");
-      assert.equal(hash, metadata.split(" ")[2], file);
+      assert.equal(hashes[index], metadata.split(" ")[2], file);
     }
   });
 
