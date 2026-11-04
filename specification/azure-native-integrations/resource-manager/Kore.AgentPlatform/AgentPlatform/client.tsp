@@ -65,6 +65,46 @@ using Kore.AgentPlatform;
   "csharp"
 );
 @@clientName(
+  Kore.AgentPlatform.Product,
+  "KoreAIArtemisWorkspaceProduct",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.OrganizationPropertiesUpdate,
+  "KoreAIArtemisOrganizationPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.OrganizationPartnerPropertiesUpdate,
+  "KoreAIArtemisOrganizationPartnerPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.ActivateSaaSParameterRequest,
+  "ActivateSaasContent",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.WorkspaceSaaSData,
+  "WorkspaceSaasContent",
+  "csharp"
+);
+@@clientName(
+  Kore.AgentPlatform.WorkspaceDetailPartnerProperties.`default`,
+  "isDefault",
+  "csharp"
+);
+@@alternateType(
+  Kore.AgentPlatform.SaaSResourceDetailsResponse.saasId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Kore.AgentPlatform.WorkspaceMarketplaceDetails.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
   Kore.AgentPlatform.ListWorkspacesResponse,
   "ListWorkspacesResult",
   "csharp"
