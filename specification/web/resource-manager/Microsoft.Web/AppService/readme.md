@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2026-07
+tag: package-2026-08
 ```
 
 ### Suppression
@@ -131,10 +131,6 @@ directive:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/builderAppsOperationResults/{operationId}"].get.responses["409"]
     reason: A failed or canceled operation returns an explicit ARM error from the Location polling endpoint rather than a successful resource response.
-  - suppress: PatchResponseCodes
-    from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].patch
-    reason: The existing asynchronous identity-update contract returns the safe current resource in its 202 response together with Azure-AsyncOperation and Location polling headers.
   - suppress: PostResponseCodes
     from: openapi.json
     where:

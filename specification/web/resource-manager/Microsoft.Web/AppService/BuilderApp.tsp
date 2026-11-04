@@ -397,7 +397,7 @@ model BuilderAppPatchVersionConfiguration {
   variables?: BuilderAppVariable[];
 }
 
-/** Pending identity update with the current builder app and operation polling links. */
+/** Pending identity update with operation polling links and no response body. */
 @added(Versions.v2026_09_01_preview)
 model BuilderAppPatchAccepted {
   ...ArmAcceptedLroResponse<
@@ -405,10 +405,6 @@ model BuilderAppPatchAccepted {
     ArmCombinedLroHeaders<BuilderAppOperationStatus, BuilderApp> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
-
-  /** Current resource, including pending identity update state when available. */
-  @bodyRoot
-  body: BuilderApp;
 }
 
 /** Builder app resource operations. */
@@ -417,7 +413,6 @@ model BuilderAppPatchAccepted {
 interface BuilderApps {
   get is ArmResourceRead<BuilderApp>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<BuilderApp>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Pending identity PATCH responses include the current BuilderApp in the existing service contract; the completed result is also a BuilderApp."
   update is ArmCustomPatchAsync<
     BuilderApp,
     BuilderAppPatch,
