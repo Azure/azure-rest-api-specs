@@ -1925,13 +1925,13 @@ union SynapseDatabasePrincipalAssignmentType {
   "csharp"
 );
 
-// --- Merged-client name clashes (python, csharp, java) ---
+// --- Merged-client name clashes (python, csharp, java, javascript) ---
 // Shipped names stay on the released types: KustoPools.ResourceProvisioningState (Python and .NET GA)
 // and the workspace-level SqlPools.BlobAuditingPolicyName. The ARM common type is renamed instead.
 @@clientName(
   Azure.ResourceManager.ResourceProvisioningState,
   "ArmResourceProvisioningState",
-  "python, csharp, java"
+  "python, csharp, java, javascript"
 );
 // The pool-level blob auditing policy name was a fixed "default" in the released Python (Literal),
 // .NET (singleton Get() without a name), Java, Go and JS SDKs (no parameter).
@@ -1973,7 +1973,7 @@ union SynapseDatabasePrincipalAssignmentType {
 // LanguageExtensionsList is both a paged list result and the KustoPool.languageExtensions property type;
 // keep it public so the public API does not expose an implementation type (checkstyle NoImplInPublicAPI).
 @@access(KustoPools.LanguageExtensionsList, Access.public, "java");
-// Property and enum names in azure-resourcemanager-synapse 1.0.0.
+// Property and enum names in azure-resourcemanager-synapse 1.0.0 (the two state enums also in @azure/arm-synapse).
 @@clientName(Workspaces.KeyProperties.isActiveCMK, "isActiveCmk", "java");
 @@clientName(
   Workspaces.WorkspaceProperties.workspaceUID,
@@ -2003,12 +2003,12 @@ union SynapseDatabasePrincipalAssignmentType {
 @@clientName(
   Workspaces.ActualState,
   "ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState",
-  "java"
+  "java, javascript"
 );
 @@clientName(
   Workspaces.DesiredState,
   "ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState",
-  "java"
+  "java, javascript"
 );
 
 // --- Python, Java and JS ---
