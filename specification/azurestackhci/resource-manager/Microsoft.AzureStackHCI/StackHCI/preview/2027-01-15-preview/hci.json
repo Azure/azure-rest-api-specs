@@ -142,6 +142,9 @@
       "name": "EdgeMachineDiskPrivilegedJobs"
     },
     {
+      "name": "EdgeMachineStoragePools"
+    },
+    {
       "name": "EdgeMachineSecuritySettingsOperations"
     },
     {
@@ -9615,6 +9618,114 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/storagePools": {
+      "get": {
+        "operationId": "EdgeMachineStoragePools_List",
+        "tags": [
+          "EdgeMachineStoragePools"
+        ],
+        "description": "List storage pools on an Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineStoragePoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineStoragePools_List": {
+            "$ref": "./examples/EdgeMachineStoragePools_List.json"
+          },
+          "EdgeMachineStoragePools_List_Empty": {
+            "$ref": "./examples/EdgeMachineStoragePools_List_Empty.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/storagePools/{storagePoolName}": {
+      "get": {
+        "operationId": "EdgeMachineStoragePools_Get",
+        "tags": [
+          "EdgeMachineStoragePools"
+        ],
+        "description": "Get a storage pool on an Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "The name of the EdgeMachineStoragePool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineStoragePool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineStoragePools_Get": {
+            "$ref": "./examples/EdgeMachineStoragePools_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/updates": {
       "get": {
         "operationId": "EdgeMachineUpdates_List",
@@ -17317,6 +17428,110 @@
             "physicalNode"
           ]
         }
+      }
+    },
+    "EdgeMachineStoragePool": {
+      "type": "object",
+      "description": "Storage pool reported by an Edge Machine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeMachineStoragePoolProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeMachineStoragePoolListResult": {
+      "type": "object",
+      "description": "The response of a EdgeMachineStoragePool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeMachineStoragePool items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineStoragePool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeMachineStoragePoolProperties": {
+      "type": "object",
+      "description": "Read-only properties of a storage pool on an Edge Machine.",
+      "properties": {
+        "poolType": {
+          "$ref": "#/definitions/EdgeMachineStoragePoolType",
+          "description": "Type of the storage pool reported by the device.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/EdgeMachineStoragePoolReportedProperties",
+          "description": "Actual state of the storage pool reported by the device.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the storage pool resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeMachineStoragePoolReportedProperties": {
+      "type": "object",
+      "description": "Actual state of a storage pool reported by the device.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "OS-level pool name, which is the volume group name on Linux. This may differ from the ARM resource name.",
+          "readOnly": true
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total pool capacity in bytes, equal to the sum of member physical volume sizes on Linux.",
+          "readOnly": true
+        },
+        "availableSizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Capacity not yet allocated to any volume, in bytes. This is the free space in the volume group on Linux and is used by the resource provider to validate volume creation.",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeMachineStoragePoolType": {
+      "type": "string",
+      "description": "Storage pool technologies for Edge Machines.",
+      "enum": [
+        "LVM",
+        "StorageSpaces"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeMachineStoragePoolType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LVM",
+            "value": "LVM",
+            "description": "Logical Volume Manager storage pool."
+          },
+          {
+            "name": "StorageSpaces",
+            "value": "StorageSpaces",
+            "description": "Storage Spaces storage pool."
+          }
+        ]
       }
     },
     "EdgeMachineUpdate": {
