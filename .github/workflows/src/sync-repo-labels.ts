@@ -203,6 +203,9 @@ export async function prepareLabelSync(
       `Label not in ${CATALOG_PATH}: ${JSON.stringify(label.name)} (${catalog.unconfiguredLabels})`,
     );
   }
+  for (const { label, reason } of plan.skippedArchives) {
+    args.core.warning(`Skipping archive of ${JSON.stringify(label.name)}: ${reason}`);
+  }
   for (const label of plan.delete) {
     deletions.push({ label, items: await findLabelAssignments(args.github, label) });
   }
@@ -238,10 +241,11 @@ export async function prepareLabelSync(
     .addRaw(
       `## Repository labels\n\nPolicy: **${catalog.unconfiguredLabels}**; dry-run: **${options.dryRun}**.\n\n` +
         `Create: ${plan.create.length}; update: ${plan.update.length}; ` +
-        `archive: ${plan.archive.length}; delete after grace period: ${plan.delete.length}; ` +
+        `archive: ${plan.archive.length}; skipped archives: ${plan.skippedArchives.length}; ` +
+        `delete after grace period: ${plan.delete.length}; ` +
         `alias migrations: ${plan.migrate.length}; ` +
         `unconfigured: ${plan.unconfigured.length}; unchanged: ${plan.unchanged}.\n\n` +
-        "Full definitions and proposed changes are in the pre-change audit artifact.\n",
+        "Full definitions, proposed changes, and skipped archive reasons are in the pre-change audit artifact.\n",
     )
     .write();
   return audit;
