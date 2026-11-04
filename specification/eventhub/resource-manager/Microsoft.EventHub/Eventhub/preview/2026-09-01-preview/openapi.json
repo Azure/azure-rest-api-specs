@@ -4941,11 +4941,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default/replicationLags/default": {
-      "get": {
-        "operationId": "NamespaceMigrationReplicationLagsOperations_Get",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default/getReplicationLags": {
+      "post": {
+        "operationId": "NamespaceMigrations_GetReplicationLags",
         "tags": [
-          "NamespaceMigrationReplicationLagsOperations"
+          "NamespaceMigrations"
         ],
         "description": "Gets the replication lags for an in-progress namespace migration.",
         "parameters": [
@@ -4984,8 +4984,8 @@
           }
         },
         "x-ms-examples": {
-          "NamespaceMigrationReplicationLagsGet": {
-            "$ref": "./examples/NameSpaces/NamespaceMigrationReplicationLagsGet.json"
+          "NamespaceMigrationsGetReplicationLags": {
+            "$ref": "./examples/NameSpaces/NamespaceMigrationsGetReplicationLags.json"
           }
         }
       }
@@ -8390,12 +8390,7 @@
           "description": "The replication lag properties.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     }
   },
   "parameters": {}
