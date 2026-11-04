@@ -1969,14 +1969,36 @@ model OperationListResult is Azure.Core.Page<Operation>;
 @@visibility(OperationListResult.value, Lifecycle.Read);
 
 /**
- * The migration settings of a namespace.
+ * Configuration used to trigger a migration of a namespace to a new SKU across one or more target locations.
  */
 @added(Versions.v2026_09_01_preview)
-model NamespaceMigrationDetails {
+model NamespaceMigrationConfiguration {
   /**
-   * The target SKU of the migration. Required when triggering a migration.
+   * The migration configuration properties.
    */
-  targetSku?: MigrationTargetSku;
+  properties?: NamespaceMigrationConfigurationProperties;
+}
+
+/**
+ * The properties of a namespace migration configuration.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationConfigurationProperties {
+  /**
+   * The migration settings.
+   */
+  migration?: NamespaceMigrationConfigurationDetails;
+}
+
+/**
+ * The migration settings describing the target SKU, capacity and locations.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationConfigurationDetails {
+  /**
+   * The target SKU of the migration.
+   */
+  targetSku: MigrationTargetSku;
 
   /**
    * The target capacity of the migration. When omitted, Standard to Premium defaults to 1 processing unit, Premium to Dedicated defaults to 1 throughput unit, and Standard to Dedicated preserves the existing throughput units. For Premium targets the value must be one of 1, 2, 4, 6, 8, 10, 12, or 16 processing units.
@@ -1985,6 +2007,34 @@ model NamespaceMigrationDetails {
 
   /**
    * The list of target locations for the migration. Dedicated locations must also specify clusterArmId.
+   */
+  @identifiers(#["locationName"])
+  locations?: NamespaceMigrationLocationInput[];
+}
+
+/**
+ * A target location for a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationLocationInput {
+  /**
+   * The name of the target location.
+   */
+  locationName?: string;
+
+  /**
+   * The ARM ID of the dedicated cluster in the target location. Required when migrating to a Dedicated SKU.
+   */
+  clusterArmId?: string;
+}
+
+/**
+ * The migration status details of a namespace.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationDetails {
+  /**
+   * The list of target locations for the migration.
    */
   @identifiers(#["locationName"])
   locations?: NamespaceMigrationLocation[];
@@ -2020,7 +2070,7 @@ union MigrationTargetSku {
 }
 
 /**
- * A target location of a namespace migration.
+ * Information about a target location participating in a namespace migration.
  */
 @added(Versions.v2026_09_01_preview)
 model NamespaceMigrationLocation {
@@ -2030,7 +2080,7 @@ model NamespaceMigrationLocation {
   locationName?: string;
 
   /**
-   * The ARM ID of the dedicated cluster in the target location. Required when migrating to a Dedicated SKU.
+   * The ARM ID of the dedicated cluster in the target location.
    */
   clusterArmId?: string;
 

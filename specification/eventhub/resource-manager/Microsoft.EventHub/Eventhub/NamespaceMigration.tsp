@@ -52,8 +52,12 @@ interface NamespaceMigrations {
   /**
    * Triggers a migration of the namespace to a new SKU across the specified target locations.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  @action("trigger")
+  trigger is ArmResourceActionNoResponseContentAsync<
     NamespaceMigration,
+    NamespaceMigrationConfiguration,
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = ErrorResponse
   >;
 
@@ -84,6 +88,7 @@ interface NamespaceMigrations {
 @@doc(NamespaceMigration.name, "The migration resource name. Must be 'default'.");
 @@doc(NamespaceMigration.properties, "The properties of the namespace migration.");
 @@doc(
-  NamespaceMigrations.createOrUpdate::parameters.resource,
+  NamespaceMigrations.trigger::parameters.body,
   "Parameters that describe the target SKU and locations for the namespace migration."
 );
+@@clientName(NamespaceMigrations.trigger::parameters.body, "parameters");

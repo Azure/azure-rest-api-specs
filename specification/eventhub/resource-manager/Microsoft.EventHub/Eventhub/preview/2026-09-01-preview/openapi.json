@@ -4783,93 +4783,6 @@
             "$ref": "./examples/NameSpaces/NamespaceMigrationsGet.json"
           }
         }
-      },
-      "put": {
-        "operationId": "NamespaceMigrations_CreateOrUpdate",
-        "tags": [
-          "NamespaceMigrations"
-        ],
-        "description": "Triggers a migration of the namespace to a new SKU across the specified target locations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The Namespace name",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Parameters that describe the target SKU and locations for the namespace migration.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NamespaceMigration"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'NamespaceMigration' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/NamespaceMigration"
-            }
-          },
-          "201": {
-            "description": "Resource 'NamespaceMigration' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/NamespaceMigration"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              }
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NamespaceMigrationsCreateOrUpdate": {
-            "$ref": "./examples/NameSpaces/NamespaceMigrationsCreateOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/NamespaceMigration"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default/terminate": {
@@ -4988,6 +4901,84 @@
             "$ref": "./examples/NameSpaces/NamespaceMigrationsGetReplicationLags.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default/trigger": {
+      "post": {
+        "operationId": "NamespaceMigrations_Trigger",
+        "tags": [
+          "NamespaceMigrations"
+        ],
+        "description": "Triggers a migration of the namespace to a new SKU across the specified target locations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The Namespace name",
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters that describe the target SKU and locations for the namespace migration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceMigrationConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NamespaceMigrationsTrigger": {
+            "$ref": "./examples/NameSpaces/NamespaceMigrationsTrigger.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -8334,20 +8325,11 @@
     },
     "NamespaceMigrationDetails": {
       "type": "object",
-      "description": "The migration settings of a namespace.",
+      "description": "The migration status details of a namespace.",
       "properties": {
-        "targetSku": {
-          "$ref": "#/definitions/MigrationTargetSku",
-          "description": "The target SKU of the migration. Required when triggering a migration."
-        },
-        "targetCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The target capacity of the migration. When omitted, Standard to Premium defaults to 1 processing unit, Premium to Dedicated defaults to 1 throughput unit, and Standard to Dedicated preserves the existing throughput units. For Premium targets the value must be one of 1, 2, 4, 6, 8, 10, 12, or 16 processing units."
-        },
         "locations": {
           "type": "array",
-          "description": "The list of target locations for the migration. Dedicated locations must also specify clusterArmId.",
+          "description": "The list of target locations for the migration.",
           "items": {
             "$ref": "#/definitions/NamespaceMigrationLocation"
           },
@@ -8364,7 +8346,7 @@
     },
     "NamespaceMigrationLocation": {
       "type": "object",
-      "description": "A target location of a namespace migration.",
+      "description": "Information about a target location participating in a namespace migration.",
       "properties": {
         "locationName": {
           "type": "string",
@@ -8372,7 +8354,7 @@
         },
         "clusterArmId": {
           "type": "string",
-          "description": "The ARM ID of the dedicated cluster in the target location. Required when migrating to a Dedicated SKU."
+          "description": "The ARM ID of the dedicated cluster in the target location."
         },
         "replicaState": {
           "$ref": "#/definitions/ReplicaState",
@@ -8389,6 +8371,69 @@
           "$ref": "#/definitions/ReplicationLagProperties",
           "description": "The replication lag properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NamespaceMigrationConfiguration": {
+      "type": "object",
+      "description": "Configuration used to trigger a migration of a namespace to a new SKU across one or more target locations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceMigrationConfigurationProperties",
+          "description": "The migration configuration properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NamespaceMigrationConfigurationProperties": {
+      "type": "object",
+      "description": "The properties of a namespace migration configuration.",
+      "properties": {
+        "migration": {
+          "$ref": "#/definitions/NamespaceMigrationConfigurationDetails",
+          "description": "The migration settings."
+        }
+      }
+    },
+    "NamespaceMigrationConfigurationDetails": {
+      "type": "object",
+      "description": "The migration settings describing the target SKU, capacity and locations.",
+      "properties": {
+        "targetSku": {
+          "$ref": "#/definitions/MigrationTargetSku",
+          "description": "The target SKU of the migration."
+        },
+        "targetCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target capacity of the migration. When omitted, Standard to Premium defaults to 1 processing unit, Premium to Dedicated defaults to 1 throughput unit, and Standard to Dedicated preserves the existing throughput units. For Premium targets the value must be one of 1, 2, 4, 6, 8, 10, 12, or 16 processing units."
+        },
+        "locations": {
+          "type": "array",
+          "description": "The list of target locations for the migration. Dedicated locations must also specify clusterArmId.",
+          "items": {
+            "$ref": "#/definitions/NamespaceMigrationLocationInput"
+          },
+          "x-ms-identifiers": [
+            "locationName"
+          ]
+        }
+      },
+      "required": [
+        "targetSku"
+      ]
+    },
+    "NamespaceMigrationLocationInput": {
+      "type": "object",
+      "description": "A target location for a namespace migration.",
+      "properties": {
+        "locationName": {
+          "type": "string",
+          "description": "The name of the target location."
+        },
+        "clusterArmId": {
+          "type": "string",
+          "description": "The ARM ID of the dedicated cluster in the target location. Required when migrating to a Dedicated SKU."
         }
       }
     }
