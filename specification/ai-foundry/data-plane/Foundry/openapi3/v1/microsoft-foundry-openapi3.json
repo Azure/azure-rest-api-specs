@@ -448,7 +448,38 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AgentInsightMonitorCreate"
+                "type": "object",
+                "properties": {
+                  "agent_name": {
+                    "type": "string",
+                    "description": "The agent this monitor should analyze."
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether scheduled insight generation should be armed. Defaults to false.",
+                    "default": false
+                  },
+                  "run_interval_hours": {
+                    "type": "number",
+                    "format": "double",
+                    "minimum": 3,
+                    "maximum": 2160,
+                    "description": "Interval between scheduled insight runs, in hours. Defaults to 6.",
+                    "default": 6
+                  },
+                  "model_deployment_name": {
+                    "type": "string",
+                    "description": "The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
+                  },
+                  "priorities": {
+                    "$ref": "#/components/schemas/AgentInsightPriorities",
+                    "description": "Analysis priorities for the monitor."
+                  }
+                },
+                "required": [
+                  "agent_name",
+                  "model_deployment_name"
+                ]
               }
             }
           }
@@ -633,7 +664,62 @@
           "content": {
             "application/merge-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/AgentInsightMonitorUpdate"
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether scheduled insight generation is armed for the monitor."
+                  },
+                  "run_interval_hours": {
+                    "type": "number",
+                    "format": "double",
+                    "minimum": 3,
+                    "maximum": 2160,
+                    "description": "Interval between scheduled insight runs, in hours."
+                  },
+                  "model_deployment_name": {
+                    "type": "string",
+                    "description": "The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
+                  },
+                  "priorities": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/AgentInsightPriorities"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Replaces all priorities. Omit to preserve them; null clears them."
+                  }
+                }
+              },
+              "examples": {
+                "Use default categories": {
+                  "summary": "Use default categories",
+                  "value": {
+                    "priorities": {
+                      "categories": []
+                    }
+                  }
+                },
+                "Clear priorities": {
+                  "summary": "Clear priorities",
+                  "value": {
+                    "priorities": null
+                  }
+                },
+                "Replace categories and clear instructions": {
+                  "summary": "Replace categories and clear instructions",
+                  "value": {
+                    "priorities": {
+                      "categories": [
+                        "latency"
+                      ],
+                      "instructions": null
+                    }
+                  }
+                }
               }
             }
           }
@@ -977,7 +1063,13 @@
           "content": {
             "application/merge-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/AgentInsightUpdate"
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "$ref": "#/components/schemas/AgentInsightStatus",
+                    "description": "The lifecycle status to apply to the insight."
+                  }
+                }
               }
             }
           }
@@ -1074,7 +1166,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AgentInsightRunCreate"
+                "type": "object",
+                "properties": {
+                  "lookback_hours": {
+                    "type": "number",
+                    "format": "double",
+                    "maximum": 2160,
+                    "description": "Optional finite positive number of hours of trace history to analyze, up to 2,160. Defaults to 168.",
+                    "exclusiveMinimum": 0,
+                    "default": 168
+                  }
+                }
               }
             }
           }
@@ -34173,41 +34275,6 @@
         },
         "description": "A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights."
       },
-      "AgentInsightMonitorCreate": {
-        "type": "object",
-        "required": [
-          "agent_name",
-          "model_deployment_name"
-        ],
-        "properties": {
-          "agent_name": {
-            "type": "string",
-            "description": "The agent this monitor should analyze."
-          },
-          "enabled": {
-            "type": "boolean",
-            "description": "Whether scheduled insight generation should be armed. Defaults to false.",
-            "default": false
-          },
-          "run_interval_hours": {
-            "type": "number",
-            "format": "double",
-            "minimum": 3,
-            "maximum": 2160,
-            "description": "Interval between scheduled insight runs, in hours. Defaults to 6.",
-            "default": 6
-          },
-          "model_deployment_name": {
-            "type": "string",
-            "description": "The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
-          },
-          "priorities": {
-            "$ref": "#/components/schemas/AgentInsightPriorities",
-            "description": "Analysis priorities for the monitor."
-          }
-        },
-        "description": "Fields accepted when creating an Agent Insights monitor for an agent."
-      },
       "AgentInsightMonitorListItem": {
         "type": "object",
         "required": [
@@ -34282,56 +34349,6 @@
           }
         },
         "description": "Monitor list item without the summary."
-      },
-      "AgentInsightMonitorUpdate": {
-        "type": "object",
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "description": "Whether scheduled insight generation is armed for the monitor."
-          },
-          "run_interval_hours": {
-            "type": "number",
-            "format": "double",
-            "minimum": 3,
-            "maximum": 2160,
-            "description": "Interval between scheduled insight runs, in hours."
-          },
-          "model_deployment_name": {
-            "type": "string",
-            "description": "The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
-          },
-          "priorities": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentInsightPriorities"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Replaces all priorities. Omit to preserve them; null clears them."
-          }
-        },
-        "description": "Fields that can be updated on an Agent Insights monitor.",
-        "examples": [
-          {
-            "priorities": {
-              "categories": []
-            }
-          },
-          {
-            "priorities": null
-          },
-          {
-            "priorities": {
-              "categories": [
-                "latency"
-              ],
-              "instructions": null
-            }
-          }
-        ]
       },
       "AgentInsightPriorities": {
         "type": "object",
@@ -34777,16 +34794,6 @@
           }
         },
         "description": "Token usage for an Agent Insights run."
-      },
-      "AgentInsightUpdate": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "$ref": "#/components/schemas/AgentInsightStatus",
-            "description": "The lifecycle status to apply to the insight."
-          }
-        },
-        "description": "Fields that can be updated on an agent insight."
       },
       "AgentJobSource": {
         "type": "object",

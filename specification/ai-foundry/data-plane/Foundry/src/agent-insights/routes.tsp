@@ -112,6 +112,39 @@ interface AgentInsightMonitors {
   /** Update an Agent Insights monitor. */
   @patch
   @route("/agent_insight_monitors/{monitor_id}")
+  @opExample(
+    #{
+      parameters: #{
+        apiVersion: "v1",
+        monitor_id: "monitor_123",
+        content_type: "application/merge-patch+json",
+        priorities: #{ categories: #["latency"], instructions: null },
+      },
+    },
+    #{ title: "Replace categories and clear instructions" }
+  )
+  @opExample(
+    #{
+      parameters: #{
+        apiVersion: "v1",
+        monitor_id: "monitor_123",
+        content_type: "application/merge-patch+json",
+        priorities: null,
+      },
+    },
+    #{ title: "Clear priorities" }
+  )
+  @opExample(
+    #{
+      parameters: #{
+        apiVersion: "v1",
+        monitor_id: "monitor_123",
+        content_type: "application/merge-patch+json",
+        priorities: #{ categories: #[] },
+      },
+    },
+    #{ title: "Use default categories" }
+  )
   update is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
@@ -148,7 +181,7 @@ interface AgentInsightMonitors {
       /** The identifier of the monitor. */
       @path monitor_id: string;
 
-      ...AgentInsightRunCreate;
+      ...AgentInsightRunCreateParameters;
     },
     JobCreatedResponse<AgentInsightRun>
   >;

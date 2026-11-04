@@ -202,11 +202,10 @@ model AgentInsight {
   details?: AgentInsightDetails;
 }
 
-/** Fields that can be updated on an agent insight. */
-model AgentInsightUpdate {
+alias AgentInsightUpdate = {
   /** The lifecycle status to apply to the insight. */
   status?: AgentInsightStatus;
-}
+};
 
 /** Structured reason why scheduled generation is suspended for a monitor. */
 model AgentInsightSuspension {
@@ -322,8 +321,7 @@ model AgentInsightMonitorListItem is OmitProperties<
   "agent_summary"
 >;
 
-/** Fields accepted when creating an Agent Insights monitor for an agent. */
-model AgentInsightMonitorCreate {
+alias AgentInsightMonitorCreate = {
   /** The agent this monitor should analyze. */
   agent_name: string;
 
@@ -340,13 +338,9 @@ model AgentInsightMonitorCreate {
 
   /** Analysis priorities for the monitor. */
   priorities?: AgentInsightPriorities;
-}
+};
 
-/** Fields that can be updated on an Agent Insights monitor. */
-@example(#{ priorities: #{ categories: #["latency"], instructions: null } })
-@example(#{ priorities: null })
-@example(#{ priorities: #{ categories: #[] } })
-model AgentInsightMonitorUpdate {
+alias AgentInsightMonitorUpdate = {
   /** Whether scheduled insight generation is armed for the monitor. */
   enabled?: boolean;
 
@@ -360,7 +354,7 @@ model AgentInsightMonitorUpdate {
 
   /** Replaces all priorities. Omit to preserve them; null clears them. */
   priorities?: AgentInsightPriorities | null;
-}
+};
 
 /** The trigger that started an agent insight run. */
 union AgentInsightRunTrigger {
@@ -373,12 +367,16 @@ union AgentInsightRunTrigger {
   scheduled: "scheduled",
 }
 
-/** Inputs used when creating an agent insight run. */
-model AgentInsightRunCreate {
+alias AgentInsightRunCreateParameters = {
   /** Optional finite positive number of hours of trace history to analyze, up to 2,160. Defaults to 168. */
   @minValueExclusive(0)
   @maxValue(2160)
   lookback_hours?: float64 = 168;
+};
+
+/** Inputs used when creating an agent insight run. */
+model AgentInsightRunCreate {
+  ...AgentInsightRunCreateParameters;
 }
 
 /** Result statistics produced when an agent insight run succeeds. */
