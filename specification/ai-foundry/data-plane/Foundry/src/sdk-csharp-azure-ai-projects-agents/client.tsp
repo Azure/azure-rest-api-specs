@@ -178,6 +178,8 @@ namespace Azure.AI.Projects {
     "Delay",
     "csharp"
   );
+  @@clientName(VoiceAgentHandoffCondition.delay_ms, "Delay", "csharp");
+  @@clientName(VoiceAgentHandoffEdgeState.delay_ms, "Delay", "csharp");
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
