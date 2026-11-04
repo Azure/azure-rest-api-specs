@@ -145,7 +145,7 @@ model ChatTopicUpdateCustomized {
   createdBy: string;
 
   /** Current lifecycle state of the topic. */
-  state: WebPubSubChat.ChatTopicState;
+  state?: WebPubSubChat.ChatTopicState;
 
   /** Conversation associated with this topic. */
   @visibility(Lifecycle.Read)
