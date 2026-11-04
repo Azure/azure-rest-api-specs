@@ -101988,6 +101988,15 @@
         ],
         "description": "An editable public message without private tokens or reasoning."
       },
+      "SessionFineTuning.FineTuningTextOnlyReasoningEffort": {
+        "type": "string",
+        "enum": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "description": "Supported reasoning effort for model-specific protected text-only sampling."
+      },
       "SessionFineTuning.FineTuningTextOnlySampleChoice": {
         "type": "object",
         "required": [
@@ -102029,6 +102038,17 @@
               "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyTool"
             },
             "description": "Optional public function definitions."
+          },
+          "reasoning_effort": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyReasoningEffort"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Model-specific reasoning effort. Omission or null leaves the model codec's default unchanged."
           }
         },
         "description": "Complete public input for opt-in text-only sampling."

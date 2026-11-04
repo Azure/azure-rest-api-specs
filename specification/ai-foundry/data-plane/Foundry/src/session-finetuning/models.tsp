@@ -877,6 +877,19 @@ model FineTuningTextOnlyTool {
   function: FineTuningTextOnlyFunctionDefinition;
 }
 
+/** Supported reasoning effort for model-specific protected text-only sampling. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The protected text-only service rejects unsupported reasoning-effort labels; unknown labels are not part of this gated input contract."
+union FineTuningTextOnlyReasoningEffort {
+  /** Use low reasoning effort. */
+  low: "low",
+
+  /** Use medium reasoning effort. */
+  medium: "medium",
+
+  /** Use high reasoning effort. */
+  high: "high",
+}
+
 /** Complete public input for opt-in text-only sampling. */
 model FineTuningTextOnlySampleInput {
   /** Ordered public history. Only system, user, assistant, and tool roles are supported. */
@@ -885,6 +898,10 @@ model FineTuningTextOnlySampleInput {
 
   /** Optional public function definitions. */
   tools?: FineTuningTextOnlyTool[];
+
+  /** Model-specific reasoning effort. Omission or null leaves the model codec's default unchanged. */
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This nullable protected input accepts only the service's supported labels; null preserves the model codec default."
+  reasoning_effort?: FineTuningTextOnlyReasoningEffort | null;
 }
 
 /** One opaque sample reference and its finite scalar training advantage. */
