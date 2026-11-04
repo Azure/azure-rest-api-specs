@@ -2595,7 +2595,7 @@
         "tags": [
           "MessagingTransferFlows"
         ],
-        "description": "Links the MessagingTransferFlow to its pending MessagingTransferFlow.",
+        "description": "Links the messaging transfer flow to the remote messaging transfer flow identified by its remoteTransferFlowResourceId property.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2615,15 +2615,6 @@
             "minLength": 3,
             "maxLength": 64,
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "MessagingTransferFlow",
-            "in": "body",
-            "description": "MessagingTransferFlow body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceBody"
-            }
           }
         ],
         "responses": {
@@ -4324,7 +4315,7 @@
         "tags": [
           "StorageTransferFlows"
         ],
-        "description": "Links the storage transfer flow to its pending storage transfer flow.",
+        "description": "Links the storage transfer flow to the remote storage transfer flow identified by its remoteTransferFlowResourceId property.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4344,15 +4335,6 @@
             "minLength": 3,
             "maxLength": 64,
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "storageTransferFlow",
-            "in": "body",
-            "description": "StorageTransferFlow body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceBody"
-            }
           }
         ],
         "responses": {

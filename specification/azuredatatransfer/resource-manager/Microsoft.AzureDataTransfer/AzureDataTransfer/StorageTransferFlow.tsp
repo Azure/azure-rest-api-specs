@@ -86,11 +86,11 @@ interface StorageTransferFlows {
   >;
 
   /**
-   * Links the storage transfer flow to its pending storage transfer flow.
+   * Links the storage transfer flow to the remote storage transfer flow identified by its remoteTransferFlowResourceId property.
    */
   link is ArmResourceActionAsync<
     StorageTransferFlow,
-    ResourceBody,
+    void,
     StorageTransferFlow
   >;
 }
@@ -110,7 +110,6 @@ interface StorageTransferFlows {
   StorageTransferFlows.update::parameters.properties,
   "StorageTransferFlow body"
 );
-@@doc(StorageTransferFlows.link::parameters.body, "StorageTransferFlow body");
 
 @@clientName(
   StorageTransferFlows.createOrUpdate::parameters.resource,
@@ -120,4 +119,3 @@ interface StorageTransferFlows {
   StorageTransferFlows.update::parameters.properties,
   "storageTransferFlow"
 );
-@@clientName(StorageTransferFlows.link::parameters.body, "storageTransferFlow");

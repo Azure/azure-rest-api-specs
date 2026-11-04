@@ -86,11 +86,11 @@ interface MessagingTransferFlows {
   >;
 
   /**
-   * Links the MessagingTransferFlow to its pending MessagingTransferFlow.
+   * Links the messaging transfer flow to the remote messaging transfer flow identified by its remoteTransferFlowResourceId property.
    */
   link is ArmResourceActionAsync<
     MessagingTransferFlow,
-    ResourceBody,
+    void,
     MessagingTransferFlow
   >;
 }
@@ -110,10 +110,6 @@ interface MessagingTransferFlows {
   MessagingTransferFlows.update::parameters.properties,
   "MessagingTransferFlow body"
 );
-@@doc(
-  MessagingTransferFlows.link::parameters.body,
-  "MessagingTransferFlow body"
-);
 
 @@clientName(
   MessagingTransferFlows.createOrUpdate::parameters.resource,
@@ -121,9 +117,5 @@ interface MessagingTransferFlows {
 );
 @@clientName(
   MessagingTransferFlows.update::parameters.properties,
-  "MessagingTransferFlow"
-);
-@@clientName(
-  MessagingTransferFlows.link::parameters.body,
   "MessagingTransferFlow"
 );
