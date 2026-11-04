@@ -24255,6 +24255,10 @@
                         }
                       ]
                     },
+                    "tool_usage": {
+                      "$ref": "#/components/schemas/OpenAI.ResponseToolUsage",
+                      "description": "Usage reported by hosted tools, separate from base model `usage`. The field\n  can be omitted when tool usage is unavailable. When present, tool families\n  with no recorded usage have zero counts.\n  `image_gen` sums available token counts across image generation calls.\n  Calls with missing or incomplete usage records may be skipped. Output\n  token details and cached input counts can be omitted. An omitted cache\n  count means cache usage is unknown.\n  `web_search.num_requests` counts billable searches. Discounted searches\n  and actions such as opening a page are excluded. Use billing records to\n  reconcile final charges."
+                    },
                     "prompt_cache_options": {
                       "$ref": "#/components/schemas/OpenAI.PromptCacheOptions"
                     },
@@ -39567,6 +39571,44 @@
         "description": "The request used to create an evaluation run.\n\nSee [cloud evaluation with the Microsoft Foundry SDK](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation?tabs=python).",
         "title": "CreateEvalRunRequest"
       },
+      "CreateSipTelephonyBindingRequest": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "sip"
+            ]
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "For UI display only."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
+        "description": "The request to create an inbound SIP binding.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "CreateSkillVersionFromFilesBody": {
         "type": "object",
         "properties": {
@@ -39647,7 +39689,8 @@
           "propertyName": "provider",
           "mapping": {
             "teams_phone_extensibility": "#/components/schemas/CreateTeamsPhoneExtensibilityTelephonyBindingRequest",
-            "twilio": "#/components/schemas/CreateTwilioTelephonyBindingRequest"
+            "twilio": "#/components/schemas/CreateTwilioTelephonyBindingRequest",
+            "sip": "#/components/schemas/CreateSipTelephonyBindingRequest"
           }
         },
         "description": "The request to create a telephony binding.",
@@ -39673,7 +39716,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required."
+            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SIP. No inbound telephony binding is required."
           },
           "source": {
             "$ref": "#/components/schemas/TelephonyOutboundSource",
@@ -47423,6 +47466,24 @@
           "gpt-3.5-turbo-16k-0613"
         ],
         "x-openai-enum-deprecations": {
+          "gpt-5": {
+            "message": "Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements."
+          },
+          "gpt-5-mini": {
+            "message": "Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements."
+          },
+          "gpt-5-nano": {
+            "message": "Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements."
+          },
+          "gpt-5-2025-08-07": {
+            "message": "Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements."
+          },
+          "gpt-5-mini-2025-08-07": {
+            "message": "Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements."
+          },
+          "gpt-5-nano-2025-08-07": {
+            "message": "Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements."
+          },
           "gpt-4.1": {
             "message": "Announced shutdown date: 2027-01-14. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements."
           },
@@ -47762,6 +47823,13 @@
             },
             "minItems": 1,
             "description": "The possible input audio languages configured for transcription, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format."
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Words or phrases configured to guide transcription of the input audio."
           },
           "prompt": {
             "type": "string",
@@ -48199,6 +48267,21 @@
           "input_changed",
           "service_tier_changed"
         ]
+      },
+      "OpenAI.CachedUsageDetails": {
+        "type": "object",
+        "required": [
+          "cached_text_tokens",
+          "cached_image_tokens"
+        ],
+        "properties": {
+          "cached_text_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "cached_image_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          }
+        }
       },
       "OpenAI.CallableToolAllowedCaller": {
         "type": "string",
@@ -52667,6 +52750,10 @@
           "reasoning": {
             "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning",
             "description": "The reasoning configuration applied by this update."
+          },
+          "text": {
+            "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateText",
+            "description": "The text output configuration for subsequent responses."
           }
         },
         "allOf": [
@@ -52674,7 +52761,7 @@
             "$ref": "#/components/schemas/OpenAI.ConversationItem"
           }
         ],
-        "description": "A configuration update that applies to subsequent responses until it is\nreplaced by another configuration update."
+        "description": "A configuration update for subsequent responses. Each setting stays in effect\nuntil a later update replaces that setting."
       },
       "OpenAI.ConversationItemToolSearchCall": {
         "type": "object",
@@ -55230,7 +55317,7 @@
                 }
               }
             ],
-            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`,\n  `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,\n  `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and\n  `gpt-image-2.5-flare-2026-09-08`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images. `chatgpt-image-latest`\n  follows the same input constraints as GPT image models."
+            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1-mini`, `gpt-image-1.5`,\n  `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,\n  `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and\n  `gpt-image-2.5-flare-2026-09-08`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images. `chatgpt-image-latest`\n  follows the same input constraints as GPT image models."
           },
           "prompt": {
             "type": "string",
@@ -55238,6 +55325,14 @@
           },
           "mask": {
             "description": "An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where `image` should be edited. If there are multiple images provided, the mask will be applied on the first image. Must be a valid PNG file, less than 4MB, and have the same dimensions as `image`."
+          },
+          "markup": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.markup"
+              }
+            ],
+            "description": "A transparent PNG overlaid on the first image to guide the edit. Must match that image's dimensions after orientation and contain transparent pixels. Supports GPT Image 2.5. Cannot be combined with mask."
           },
           "background": {
             "anyOf": [
@@ -55277,7 +55372,7 @@
                 ]
               }
             ],
-            "description": "The GPT image model to use for image editing (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`).",
+            "description": "The GPT image model to use for image editing\n  (`gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,\n  `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,\n  `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,\n  `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`).\n  `gpt-image-1` was shut down on October 23, 2026. Use\n  `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.",
             "x-oaiTypeLabel": "string"
           },
           "n": {
@@ -55458,7 +55553,7 @@
                 ]
               }
             ],
-            "description": "The GPT image model to use for image generation. Specify a model explicitly. Supported models include `gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, and `chatgpt-image-latest`.",
+            "description": "The GPT image model to use for image generation. Specify a model explicitly.\n  Supported models include `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,\n  `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,\n  `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,\n  `gpt-image-2.5-flare-2026-09-08`, and `chatgpt-image-latest`.\n  `gpt-image-1` was shut down on October 23, 2026. Use\n  `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.",
             "x-oaiTypeLabel": "string"
           },
           "n": {
@@ -58449,7 +58544,7 @@
                 "type": "null"
               }
             ],
-            "description": "The GPT image model to use for image editing, including `gpt-image-2`, its dated snapshot `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`. Defaults to `gpt-image-2.5-sunburst`.",
+            "description": "The GPT image model to use for image editing, including `gpt-image-2`, its dated\n  snapshot `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,\n  `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and\n  `gpt-image-2.5-flare-2026-09-08`. Defaults to `gpt-image-2.5-sunburst`.\n  `gpt-image-1` was shut down on October 23, 2026. Use\n  `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.",
             "x-oaiTypeLabel": "string",
             "default": "gpt-image-2.5-sunburst"
           },
@@ -58464,6 +58559,10 @@
           },
           "mask": {
             "$ref": "#/components/schemas/OpenAI.ImageRefParam"
+          },
+          "markup": {
+            "$ref": "#/components/schemas/OpenAI.ImageRefParam",
+            "description": "A transparent PNG overlaid on the first image, referenced by file ID, HTTPS URL, or base64 data URL. Must match that image's dimensions after orientation and contain transparent pixels. Supports GPT Image 2.5. Cannot be combined with mask."
           },
           "prompt": {
             "type": "string",
@@ -58516,7 +58615,7 @@
                 "type": "null"
               }
             ],
-            "description": "Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models."
+            "description": "Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models."
           },
           "size": {
             "anyOf": [
@@ -62069,6 +62168,43 @@
           }
         }
       },
+      "OpenAI.ImageGenToolUsage": {
+        "type": "object",
+        "required": [
+          "input_tokens",
+          "total_tokens",
+          "output_tokens",
+          "input_tokens_details"
+        ],
+        "properties": {
+          "input_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of tokens (images and text) in the input prompt."
+          },
+          "total_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The total number of tokens (images and text) used for the image generation."
+          },
+          "output_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of output tokens generated by the model."
+          },
+          "output_tokens_details": {
+            "$ref": "#/components/schemas/OpenAI.ImageGenOutputTokensDetails"
+          },
+          "input_tokens_details": {
+            "$ref": "#/components/schemas/OpenAI.ImageGenInputUsageDetails"
+          },
+          "cached_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "cached_tokens_details": {
+            "$ref": "#/components/schemas/OpenAI.CachedUsageDetails"
+          }
+        },
+        "description": "Token usage for image generation tool calls in a response.",
+        "title": "Image generation tool usage"
+      },
       "OpenAI.ImageGenUsage": {
         "type": "object",
         "required": [
@@ -62544,7 +62680,7 @@
           "high",
           "low"
         ],
-        "description": "Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models."
+        "description": "Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models."
       },
       "OpenAI.InputFileContent": {
         "type": "object",
@@ -64351,6 +64487,10 @@
           "reasoning": {
             "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning",
             "description": "Updates to reasoning configuration. Only effort is supported."
+          },
+          "text": {
+            "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamText",
+            "description": "The text output configuration for subsequent responses."
           }
         },
         "allOf": [
@@ -64358,7 +64498,7 @@
             "$ref": "#/components/schemas/OpenAI.InputItem"
           }
         ],
-        "description": "An update to the conversation's response configuration. The configuration\nremains in effect for subsequent responses until it is replaced by another\nconfiguration update."
+        "description": "An update to the conversation's response configuration. Supply reasoning,\ntext, or both. Each setting stays in effect until a later update replaces it."
       },
       "OpenAI.InputItemToolSearchCallItemParam": {
         "type": "object",
@@ -69664,6 +69804,10 @@
           "reasoning": {
             "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning",
             "description": "The reasoning configuration applied by this update."
+          },
+          "text": {
+            "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateText",
+            "description": "The text output configuration for subsequent responses."
           }
         },
         "allOf": [
@@ -69671,7 +69815,7 @@
             "$ref": "#/components/schemas/OpenAI.ItemResource"
           }
         ],
-        "description": "A configuration update that applies to subsequent responses until it is\nreplaced by another configuration update."
+        "description": "A configuration update for subsequent responses. Each setting stays in effect\nuntil a later update replaces that setting."
       },
       "OpenAI.ItemResourceToolSearchCall": {
         "type": "object",
@@ -69930,6 +70074,10 @@
           "reasoning": {
             "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning",
             "description": "Updates to reasoning configuration. Only effort is supported."
+          },
+          "text": {
+            "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamText",
+            "description": "The text output configuration for subsequent responses."
           }
         },
         "allOf": [
@@ -69937,7 +70085,7 @@
             "$ref": "#/components/schemas/OpenAI.Item"
           }
         ],
-        "description": "An update to the conversation's response configuration. The configuration\nremains in effect for subsequent responses until it is replaced by another\nconfiguration update."
+        "description": "An update to the conversation's response configuration. Supply reasoning,\ntext, or both. Each setting stays in effect until a later update replaces it."
       },
       "OpenAI.ItemToolSearchCallItemParam": {
         "type": "object",
@@ -74929,9 +75077,17 @@
             "description": "The breakpoint mode. Always `explicit`.",
             "x-stainless-const": true,
             "default": "explicit"
+          },
+          "ttl": {
+            "type": "string",
+            "enum": [
+              "30m",
+              "12h"
+            ],
+            "description": "The minimum lifetime of this cache breakpoint. Defaults to the request TTL."
           }
         },
-        "description": "Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
+        "description": "Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
         "title": "Prompt cache breakpoint"
       },
       "OpenAI.PromptCacheBreakpointParam": {
@@ -74948,9 +75104,17 @@
             "description": "The breakpoint mode. Always `explicit`.",
             "x-stainless-const": true,
             "default": "explicit"
+          },
+          "ttl": {
+            "type": "string",
+            "enum": [
+              "30m",
+              "12h"
+            ],
+            "description": "The minimum lifetime of this cache breakpoint. Defaults to the request TTL."
           }
         },
-        "description": "Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
+        "description": "Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
         "title": "Prompt cache breakpoint"
       },
       "OpenAI.PromptCacheComparisonResponseNotFoundDiagnosticsBody": {
@@ -76389,6 +76553,13 @@
           ]
         }
       },
+      "OpenAI.RealtimeNoiseReductionStrength": {
+        "type": "number",
+        "format": "double",
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Input noise suppression strength. Higher values apply more suppression.\nDefaults to 1 when noise reduction is first enabled. Omitting strength\nfrom a session update preserves the current strength."
+      },
       "OpenAI.RealtimeReasoning": {
         "type": "object",
         "properties": {
@@ -76868,6 +77039,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.NoiseReductionType"
+          },
+          "strength": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeNoiseReductionStrength",
+            "default": 1
           }
         }
       },
@@ -77392,6 +77567,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.NoiseReductionType"
+          },
+          "strength": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeNoiseReductionStrength",
+            "default": 1
           }
         }
       },
@@ -77665,6 +77844,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.NoiseReductionType"
+          },
+          "strength": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeNoiseReductionStrength",
+            "default": 1
           }
         }
       },
@@ -77749,6 +77932,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.NoiseReductionType"
+          },
+          "strength": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeNoiseReductionStrength",
+            "default": 1
           }
         }
       },
@@ -78367,6 +78554,10 @@
               }
             ]
           },
+          "tool_usage": {
+            "$ref": "#/components/schemas/OpenAI.ResponseToolUsage",
+            "description": "Usage reported by hosted tools, separate from base model `usage`. The field\n  can be omitted when tool usage is unavailable. When present, tool families\n  with no recorded usage have zero counts.\n  `image_gen` sums available token counts across image generation calls.\n  Calls with missing or incomplete usage records may be skipped. Output\n  token details and cached input counts can be omitted. An omitted cache\n  count means cache usage is unknown.\n  `web_search.num_requests` counts billable searches. Discounted searches\n  and actions such as opening a page are excluded. Use billing records to\n  reconcile final charges."
+          },
           "prompt_cache_options": {
             "$ref": "#/components/schemas/OpenAI.PromptCacheOptions"
           },
@@ -78887,6 +79078,24 @@
           }
         }
       },
+      "OpenAI.ResponseConfigurationUpdateItemParamText": {
+        "type": "object",
+        "required": [
+          "format"
+        ],
+        "properties": {
+          "format": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ResponseFormatText"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.TextResponseFormatJsonSchema"
+              }
+            ]
+          }
+        }
+      },
       "OpenAI.ResponseConfigurationUpdateReasoning": {
         "type": "object",
         "properties": {
@@ -78897,6 +79106,24 @@
               },
               {
                 "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "OpenAI.ResponseConfigurationUpdateText": {
+        "type": "object",
+        "required": [
+          "format"
+        ],
+        "properties": {
+          "format": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ResponseFormatText"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.TextResponseFormatJsonSchema"
               }
             ]
           }
@@ -81543,6 +81770,25 @@
           }
         },
         "description": "Configuration options for a text response from the model. Can be plain\ntext or structured JSON data. Learn more:\n- [Text inputs and outputs](https://developers.openai.com/api/docs/guides/text)\n- [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs)"
+      },
+      "OpenAI.ResponseToolUsage": {
+        "type": "object",
+        "required": [
+          "image_gen",
+          "web_search"
+        ],
+        "properties": {
+          "image_gen": {
+            "$ref": "#/components/schemas/OpenAI.ImageGenToolUsage",
+            "description": "Aggregated usage statistics for image generation tool calls."
+          },
+          "web_search": {
+            "$ref": "#/components/schemas/OpenAI.WebSearchUsage",
+            "description": "Aggregated billable usage statistics for web search tool calls."
+          }
+        },
+        "description": "Aggregated usage details for billable tools that ran while generating the response.",
+        "title": "Response tool usage"
       },
       "OpenAI.ResponseUsage": {
         "type": "object",
@@ -84628,7 +84874,7 @@
                 ]
               }
             ],
-            "default": "gpt-image-1"
+            "default": "gpt-image-2"
           },
           "quality": {
             "type": "string",
@@ -85611,7 +85857,7 @@
                 ]
               }
             ],
-            "default": "gpt-image-1"
+            "default": "gpt-image-2"
           },
           "quality": {
             "type": "string",
@@ -88217,6 +88463,20 @@
           }
         }
       },
+      "OpenAI.WebSearchUsage": {
+        "type": "object",
+        "required": [
+          "num_requests"
+        ],
+        "properties": {
+          "num_requests": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of billable web search requests issued."
+          }
+        },
+        "description": "Usage details for web search requests that ran while generating the response.",
+        "title": "Web search usage"
+      },
       "OpenAI._MisalignmentErrorType": {
         "anyOf": [
           {
@@ -88248,6 +88508,11 @@
       "OpenAI.integer": {
         "type": "integer",
         "format": "int64"
+      },
+      "OpenAI.markup": {
+        "type": "string",
+        "contentEncoding": "base64",
+        "description": "A transparent PNG overlaid on the first image to guide the edit. Must match that image's dimensions after orientation and contain transparent pixels. Supports GPT Image 2.5 and 2.6. Cannot be combined with mask."
       },
       "OpenAI.numeric": {
         "type": "number",
@@ -92734,6 +92999,93 @@
         ],
         "description": "The configuration for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`."
       },
+      "SipAllowedCallingNumber": {
+        "type": "string",
+        "maxLength": 256,
+        "pattern": "^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$",
+        "description": "An exact E.164 caller number or a restricted pattern matched against the entire normalized number.\n`+14255550123` allows only that number; `^\\+1425[0-9]{7}$` allows numbers starting with `+1425`\nfollowed by exactly seven digits.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "SipTelephonyBinding": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "sip"
+            ]
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "For UI display only."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBinding"
+          }
+        ],
+        "description": "A SIP binding.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "SipTelephonyBindingListItem": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "sip"
+            ]
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "For UI display only."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingListItem"
+          }
+        ],
+        "description": "A SIP binding returned in a list, including its entity tag.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "SipTelephonyTransferDestination": {
         "type": "object",
         "required": [
@@ -93764,14 +94116,15 @@
           "incoming_call_url": {
             "type": "string",
             "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
+            "description": "The service-generated webhook URL to configure with the telephony provider. For SIP bindings, this is a SIP URI."
           }
         },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
             "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBinding",
-            "twilio": "#/components/schemas/TwilioTelephonyBinding"
+            "twilio": "#/components/schemas/TwilioTelephonyBinding",
+            "sip": "#/components/schemas/SipTelephonyBinding"
           }
         },
         "description": "A telephony binding owned by a voice agent.",
@@ -93829,7 +94182,7 @@
           "incoming_call_url": {
             "type": "string",
             "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
+            "description": "The service-generated webhook URL to configure with the telephony provider. For SIP bindings, this is a SIP URI."
           },
           "etag": {
             "$ref": "#/components/schemas/Azure.Core.eTag",
@@ -93841,7 +94194,8 @@
           "propertyName": "provider",
           "mapping": {
             "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem",
-            "twilio": "#/components/schemas/TwilioTelephonyBindingListItem"
+            "twilio": "#/components/schemas/TwilioTelephonyBindingListItem",
+            "sip": "#/components/schemas/SipTelephonyBindingListItem"
           }
         },
         "description": "A telephony binding returned in a list, including its entity tag.",
@@ -93975,7 +94329,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required."
+            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SIP. No inbound telephony binding is required."
           },
           "source": {
             "$ref": "#/components/schemas/TelephonyOutboundSource",
@@ -94983,7 +95337,8 @@
             "type": "string",
             "enum": [
               "teams_phone_extensibility",
-              "twilio"
+              "twilio",
+              "sip"
             ]
           }
         ],
@@ -96259,7 +96614,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable."
+            "description": "The replacement Foundry connection name. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable."
           },
           "phone_number": {
             "anyOf": [
@@ -96271,7 +96626,15 @@
               }
             ],
             "maxLength": 64,
-            "description": "The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding."
+            "description": "The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for Teams Phone extensibility and SIP bindings."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "SIP only. Omit to preserve the restriction; send [] to allow any caller."
           }
         },
         "description": "The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.",
