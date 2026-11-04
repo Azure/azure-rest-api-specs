@@ -28643,6 +28643,19 @@ paths:
                     anyOf:
                       - $ref: '#/components/schemas/OpenAI.ResponseUsage'
                       - type: 'null'
+                  tool_usage:
+                    $ref: '#/components/schemas/OpenAI.ResponseToolUsage'
+                    description: |-
+                      Usage reported by hosted tools, separate from base model `usage`. The field
+                        can be omitted when tool usage is unavailable. When present, tool families
+                        with no recorded usage have zero counts.
+                        `image_gen` sums available token counts across image generation calls.
+                        Calls with missing or incomplete usage records may be skipped. Output
+                        token details and cached input counts can be omitted. An omitted cache
+                        count means cache usage is unknown.
+                        `web_search.num_requests` counts billable searches. Discounted searches
+                        and actions such as opening a page are excluded. Use billing records to
+                        reconcile final charges.
                   prompt_cache_options:
                     $ref: '#/components/schemas/OpenAI.PromptCacheOptions'
                   prompt_cache_diagnostics:
@@ -53039,6 +53052,18 @@ components:
         - gpt-3.5-turbo-0125
         - gpt-3.5-turbo-16k-0613
       x-openai-enum-deprecations:
+        gpt-5:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-mini:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-nano:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-2025-08-07:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-mini-2025-08-07:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
+        gpt-5-nano-2025-08-07:
+          message: 'Announced shutdown date: 2026-12-11. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
         gpt-4.1:
           message: 'Announced shutdown date: 2027-01-14. See https://developers.openai.com/api/docs/deprecations for details and recommended replacements.'
         gpt-4.1-mini:
@@ -53281,6 +53306,11 @@ components:
             type: string
           minItems: 1
           description: The possible input audio languages configured for transcription, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format.
+        keywords:
+          type: array
+          items:
+            type: string
+          description: Words or phrases configured to guide transcription of the input audio.
         prompt:
           type: string
           description: The prompt configured for input audio transcription, when present.
@@ -53602,6 +53632,16 @@ components:
         - context_compacted
         - input_changed
         - service_tier_changed
+    OpenAI.CachedUsageDetails:
+      type: object
+      required:
+        - cached_text_tokens
+        - cached_image_tokens
+      properties:
+        cached_text_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        cached_image_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
     OpenAI.CallableToolAllowedCaller:
       type: string
       enum:
@@ -56701,11 +56741,14 @@ components:
         reasoning:
           $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning'
           description: The reasoning configuration applied by this update.
+        text:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateText'
+          description: The text output configuration for subsequent responses.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: |-
-        A configuration update that applies to subsequent responses until it is
-        replaced by another configuration update.
+        A configuration update for subsequent responses. Each setting stays in effect
+        until a later update replaces that setting.
     OpenAI.ConversationItemToolSearchCall:
       type: object
       required:
@@ -58522,7 +58565,7 @@ components:
                 contentEncoding: base64
           description: |-
             The image(s) to edit. Must be a supported image file or an array of images.
-              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`,
+              For the GPT image models (`gpt-image-1-mini`, `gpt-image-1.5`,
               `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
               `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and
               `gpt-image-2.5-flare-2026-09-08`), each image should be a `png`, `webp`, or `jpg`
@@ -58533,6 +58576,10 @@ components:
           description: A text description of the desired image(s). The maximum length is 32000 characters for the GPT image models.
         mask:
           description: An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where `image` should be edited. If there are multiple images provided, the mask will be applied on the first image. Must be a valid PNG file, less than 4MB, and have the same dimensions as `image`.
+        markup:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.markup'
+          description: A transparent PNG overlaid on the first image to guide the edit. Must match that image's dimensions after orientation and contain transparent pixels. Supports GPT Image 2.5. Cannot be combined with mask.
         background:
           anyOf:
             - type: string
@@ -58567,7 +58614,14 @@ components:
                 - gpt-image-1-mini
                 - chatgpt-image-latest
                 - dall-e-2
-          description: The GPT image model to use for image editing (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`).
+          description: |-
+            The GPT image model to use for image editing
+              (`gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,
+              `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
+              `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,
+              `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`).
+              `gpt-image-1` was shut down on October 23, 2026. Use
+              `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -58680,7 +58734,14 @@ components:
                 - chatgpt-image-latest
                 - dall-e-2
                 - dall-e-3
-          description: The GPT image model to use for image generation. Specify a model explicitly. Supported models include `gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, and `chatgpt-image-latest`.
+          description: |-
+            The GPT image model to use for image generation. Specify a model explicitly.
+              Supported models include `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,
+              `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
+              `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,
+              `gpt-image-2.5-flare-2026-09-08`, and `chatgpt-image-latest`.
+              `gpt-image-1` was shut down on October 23, 2026. Use
+              `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -60760,7 +60821,13 @@ components:
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The GPT image model to use for image editing, including `gpt-image-2`, its dated snapshot `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`. Defaults to `gpt-image-2.5-sunburst`.
+          description: |-
+            The GPT image model to use for image editing, including `gpt-image-2`, its dated
+              snapshot `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
+              `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and
+              `gpt-image-2.5-flare-2026-09-08`. Defaults to `gpt-image-2.5-sunburst`.
+              `gpt-image-1` was shut down on October 23, 2026. Use
+              `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.
           x-oaiTypeLabel: string
           default: gpt-image-2.5-sunburst
         images:
@@ -60774,6 +60841,9 @@ components:
               For GPT image models, you can provide up to 16 images.
         mask:
           $ref: '#/components/schemas/OpenAI.ImageRefParam'
+        markup:
+          $ref: '#/components/schemas/OpenAI.ImageRefParam'
+          description: A transparent PNG overlaid on the first image, referenced by file ID, HTTPS URL, or base64 data URL. Must match that image's dimensions after orientation and contain transparent pixels. Supports GPT Image 2.5. Cannot be combined with mask.
         prompt:
           type: string
           minLength: 1
@@ -60808,7 +60878,7 @@ components:
                 - high
                 - low
             - type: 'null'
-          description: Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
+          description: Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
         size:
           anyOf:
             - type: string
@@ -63347,6 +63417,33 @@ components:
           format: uri
         file_id:
           type: string
+    OpenAI.ImageGenToolUsage:
+      type: object
+      required:
+        - input_tokens
+        - total_tokens
+        - output_tokens
+        - input_tokens_details
+      properties:
+        input_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of tokens (images and text) in the input prompt.
+        total_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The total number of tokens (images and text) used for the image generation.
+        output_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of output tokens generated by the model.
+        output_tokens_details:
+          $ref: '#/components/schemas/OpenAI.ImageGenOutputTokensDetails'
+        input_tokens_details:
+          $ref: '#/components/schemas/OpenAI.ImageGenInputUsageDetails'
+        cached_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        cached_tokens_details:
+          $ref: '#/components/schemas/OpenAI.CachedUsageDetails'
+      description: Token usage for image generation tool calls in a response.
+      title: Image generation tool usage
     OpenAI.ImageGenUsage:
       type: object
       required:
@@ -63698,7 +63795,7 @@ components:
       enum:
         - high
         - low
-      description: Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
+      description: Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
     OpenAI.InputFileContent:
       type: object
       required:
@@ -64840,12 +64937,14 @@ components:
         reasoning:
           $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning'
           description: Updates to reasoning configuration. Only effort is supported.
+        text:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamText'
+          description: The text output configuration for subsequent responses.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: |-
-        An update to the conversation's response configuration. The configuration
-        remains in effect for subsequent responses until it is replaced by another
-        configuration update.
+        An update to the conversation's response configuration. Supply reasoning,
+        text, or both. Each setting stays in effect until a later update replaces it.
     OpenAI.InputItemToolSearchCallItemParam:
       type: object
       required:
@@ -68432,11 +68531,14 @@ components:
         reasoning:
           $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning'
           description: The reasoning configuration applied by this update.
+        text:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateText'
+          description: The text output configuration for subsequent responses.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: |-
-        A configuration update that applies to subsequent responses until it is
-        replaced by another configuration update.
+        A configuration update for subsequent responses. Each setting stays in effect
+        until a later update replaces that setting.
     OpenAI.ItemResourceToolSearchCall:
       type: object
       required:
@@ -68625,12 +68727,14 @@ components:
         reasoning:
           $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning'
           description: Updates to reasoning configuration. Only effort is supported.
+        text:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamText'
+          description: The text output configuration for subsequent responses.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: |-
-        An update to the conversation's response configuration. The configuration
-        remains in effect for subsequent responses until it is replaced by another
-        configuration update.
+        An update to the conversation's response configuration. Supply reasoning,
+        text, or both. Each setting stays in effect until a later update replaces it.
     OpenAI.ItemToolSearchCallItemParam:
       type: object
       required:
@@ -72127,7 +72231,13 @@ components:
           description: The breakpoint mode. Always `explicit`.
           x-stainless-const: true
           default: explicit
-      description: Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+        ttl:
+          type: string
+          enum:
+            - 30m
+            - 12h
+          description: The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+      description: Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
       title: Prompt cache breakpoint
     OpenAI.PromptCacheBreakpointParam:
       type: object
@@ -72141,7 +72251,13 @@ components:
           description: The breakpoint mode. Always `explicit`.
           x-stainless-const: true
           default: explicit
-      description: Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+        ttl:
+          type: string
+          enum:
+            - 30m
+            - 12h
+          description: The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+      description: Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
       title: Prompt cache breakpoint
     OpenAI.PromptCacheComparisonResponseNotFoundDiagnosticsBody:
       type: object
@@ -73187,6 +73303,15 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    OpenAI.RealtimeNoiseReductionStrength:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 1
+      description: |-
+        Input noise suppression strength. Higher values apply more suppression.
+        Defaults to 1 when noise reduction is first enabled. Omitting strength
+        from a session update preserves the current strength.
     OpenAI.RealtimeReasoning:
       type: object
       properties:
@@ -73586,6 +73711,9 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.NoiseReductionType'
+        strength:
+          $ref: '#/components/schemas/OpenAI.RealtimeNoiseReductionStrength'
+          default: 1
     OpenAI.RealtimeSessionCreateRequestGAAudioOutput:
       type: object
       properties:
@@ -73992,6 +74120,9 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.NoiseReductionType'
+        strength:
+          $ref: '#/components/schemas/OpenAI.RealtimeNoiseReductionStrength'
+          default: 1
     OpenAI.RealtimeTranscriptionSessionCreateRequestInputAudioNoiseReduction:
       type: object
       properties:
@@ -74256,6 +74387,9 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.NoiseReductionType'
+        strength:
+          $ref: '#/components/schemas/OpenAI.RealtimeNoiseReductionStrength'
+          default: 1
     OpenAI.RealtimeTranslationSessionAudioInputTranscription:
       type: object
       required:
@@ -74308,6 +74442,9 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.NoiseReductionType'
+        strength:
+          $ref: '#/components/schemas/OpenAI.RealtimeNoiseReductionStrength'
+          default: 1
     OpenAI.RealtimeTranslationSessionCreateRequestAudioInputTranscription:
       type: object
       required:
@@ -74688,6 +74825,19 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ResponseUsage'
             - type: 'null'
+        tool_usage:
+          $ref: '#/components/schemas/OpenAI.ResponseToolUsage'
+          description: |-
+            Usage reported by hosted tools, separate from base model `usage`. The field
+              can be omitted when tool usage is unavailable. When present, tool families
+              with no recorded usage have zero counts.
+              `image_gen` sums available token counts across image generation calls.
+              Calls with missing or incomplete usage records may be skipped. Output
+              token details and cached input counts can be omitted. An omitted cache
+              count means cache usage is unknown.
+              `web_search.num_requests` counts billable searches. Discounted searches
+              and actions such as opening a page are excluded. Use billing records to
+              reconcile final charges.
         prompt_cache_options:
           $ref: '#/components/schemas/OpenAI.PromptCacheOptions'
         prompt_cache_diagnostics:
@@ -75156,6 +75306,15 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
             - type: 'null'
+    OpenAI.ResponseConfigurationUpdateItemParamText:
+      type: object
+      required:
+        - format
+      properties:
+        format:
+          oneOf:
+            - $ref: '#/components/schemas/OpenAI.ResponseFormatText'
+            - $ref: '#/components/schemas/OpenAI.TextResponseFormatJsonSchema'
     OpenAI.ResponseConfigurationUpdateReasoning:
       type: object
       properties:
@@ -75163,6 +75322,15 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
             - type: 'null'
+    OpenAI.ResponseConfigurationUpdateText:
+      type: object
+      required:
+        - format
+      properties:
+        format:
+          oneOf:
+            - $ref: '#/components/schemas/OpenAI.ResponseFormatText'
+            - $ref: '#/components/schemas/OpenAI.TextResponseFormatJsonSchema'
     OpenAI.ResponseContentPartAddedEvent:
       type: object
       required:
@@ -77586,6 +77754,20 @@ components:
         text or structured JSON data. Learn more:
         - [Text inputs and outputs](https://developers.openai.com/api/docs/guides/text)
         - [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
+    OpenAI.ResponseToolUsage:
+      type: object
+      required:
+        - image_gen
+        - web_search
+      properties:
+        image_gen:
+          $ref: '#/components/schemas/OpenAI.ImageGenToolUsage'
+          description: Aggregated usage statistics for image generation tool calls.
+        web_search:
+          $ref: '#/components/schemas/OpenAI.WebSearchUsage'
+          description: Aggregated billable usage statistics for web search tool calls.
+      description: Aggregated usage details for billable tools that ran while generating the response.
+      title: Response tool usage
     OpenAI.ResponseUsage:
       type: object
       required:
@@ -79771,7 +79953,7 @@ components:
                 - gpt-image-2.5-sunburst-2026-09-08
                 - gpt-image-2.5-flare
                 - gpt-image-2.5-flare-2026-09-08
-          default: gpt-image-1
+          default: gpt-image-2
         quality:
           type: string
           enum:
@@ -80450,7 +80632,7 @@ components:
                 - gpt-image-2.5-sunburst-2026-09-08
                 - gpt-image-2.5-flare
                 - gpt-image-2.5-flare-2026-09-08
-          default: gpt-image-1
+          default: gpt-image-2
         quality:
           type: string
           enum:
@@ -82345,6 +82527,16 @@ components:
               items:
                 type: string
             - type: 'null'
+    OpenAI.WebSearchUsage:
+      type: object
+      required:
+        - num_requests
+      properties:
+        num_requests:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of billable web search requests issued.
+      description: Usage details for web search requests that ran while generating the response.
+      title: Web search usage
     OpenAI._MisalignmentErrorType:
       anyOf:
         - type: string
@@ -82365,6 +82557,10 @@ components:
     OpenAI.integer:
       type: integer
       format: int64
+    OpenAI.markup:
+      type: string
+      contentEncoding: base64
+      description: A transparent PNG overlaid on the first image to guide the edit. Must match that image's dimensions after orientation and contain transparent pixels. Supports GPT Image 2.5 and 2.6. Cannot be combined with mask.
     OpenAI.numeric:
       type: number
       format: double
