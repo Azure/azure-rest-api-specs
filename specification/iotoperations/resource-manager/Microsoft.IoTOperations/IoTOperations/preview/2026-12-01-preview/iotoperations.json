@@ -14317,7 +14317,7 @@
     },
     "McpGatewayResource": {
       "type": "object",
-      "description": "The configuration of the instance's client-facing MCP gateway.\nAn instance supports one gateway, enforced by edge admission validation.\nCreating a gateway with a different name when one already exists is rejected with a\nvalidation error that identifies the existing gateway; PUT to the existing name updates it.\nPUT must include `properties.endpoint`; requests without it are rejected by edge validation.",
+      "description": "The configuration of the instance's client-facing MCP gateway.\nAn instance supports one gateway, enforced by edge admission validation.\nCreating a second gateway is rejected with a validation error; PUT to the existing name updates it.\nPUT must include `properties.endpoint`; requests without it are rejected by edge validation.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/McpGatewayProperties",

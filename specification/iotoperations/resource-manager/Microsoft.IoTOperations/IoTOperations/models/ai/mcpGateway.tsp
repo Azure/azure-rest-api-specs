@@ -14,8 +14,7 @@ namespace Microsoft.IoTOperations;
 /**
  * The configuration of the instance's client-facing MCP gateway.
  * An instance supports one gateway, enforced by edge admission validation.
- * Creating a gateway with a different name when one already exists is rejected with a
- * validation error that identifies the existing gateway; PUT to the existing name updates it.
+ * Creating a second gateway is rejected with a validation error; PUT to the existing name updates it.
  * PUT must include `properties.endpoint`; requests without it are rejected by edge validation.
  */
 @added(Versions.`2026-12-01-preview`)
