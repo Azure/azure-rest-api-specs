@@ -1,11 +1,10 @@
 {
   "parameters": {
-    "$filter": "startswith(name, 'po') or (properties/allocationState eq 'Steady' and properties/provisioningStateTransitionTime lt datetime'2017-02-02')",
+    "$filter": "startswith(name, 'po') or (properties/allocationState eq 'Steady' and properties/provisioningStateTransitionTime lt datetime'2017-09-01')",
     "$select": "properties/allocationState,properties/provisioningStateTransitionTime,properties/currentDedicatedNodes,properties/currentLowPriorityNodes",
     "accountName": "sampleacct",
     "api-version": "2026-10-01",
-    "maxResults": "50",
-    "poolName": "testpool",
+    "maxresults": 50,
     "resourceGroupName": "default-azurebatch-japaneast",
     "subscriptionId": "12345678-1234-1234-1234-123456789012"
   },
