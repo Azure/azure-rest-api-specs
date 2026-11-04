@@ -186,16 +186,32 @@ namespace Microsoft.Synapse;
   "python, csharp, java"
 );
 
-// --- Python only ---
-// Single-value path parameters shipped as fixed constants (Literal) in azure-mgmt-synapse 2.1.0b7.
-@@alternateType(SqlPools.DataMaskingPolicyName, "Default", "python");
-@@alternateType(SqlPools.WritableSensitivityLabelSource, "current", "python");
+// --- Python and Java ---
+// Single-value path parameters shipped as fixed constants in azure-mgmt-synapse 2.1.0b7 (Literal) and
+// azure-resourcemanager-synapse (no parameter on DataMaskingPolicies.get, SqlPoolSensitivityLabels.delete,
+// enableRecommendation and disableRecommendation).
+@@alternateType(SqlPools.DataMaskingPolicyName, "Default", "python, java");
+@@alternateType(
+  SqlPools.WritableSensitivityLabelSource,
+  "current",
+  "python, java"
+);
 @@alternateType(
   SqlPools.RecommendedSensitivityLabelSource,
   "recommended",
-  "python"
+  "python, java"
 );
 
+// --- Java only ---
+// The flattened managed virtual network reference `type` would collide with the IntegrationRuntime
+// discriminator type() in ManagedIntegrationRuntime.
+@@clientName(
+  IntegrationRuntimes.ManagedIntegrationRuntimeManagedVirtualNetworkReference.type,
+  "managedVirtualNetworkType",
+  "java"
+);
+
+// --- Python only ---
 // Operations that were not pageable in azure-mgmt-synapse 2.1.0b7 (they returned the list model).
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released Python non-pageable signature"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
