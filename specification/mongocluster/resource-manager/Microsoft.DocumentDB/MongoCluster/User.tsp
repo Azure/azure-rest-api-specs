@@ -5,11 +5,11 @@ using Azure.ResourceManager;
 
 namespace Microsoft.DocumentDB;
 
-/** Represents a Mongo cluster user. */
+/** Represents a DocumentDB cluster user. */
 @parentResource(MongoCluster)
 @added(Versions.v2025_04_01_preview)
 model User is ProxyResource<UserProperties> {
-  /** The name of the mongo cluster user. */
+  /** The name of the DocumentDB cluster user. */
   @maxLength(63)
   @minLength(1)
   @pattern("^[a-zA-Z0-9\\-]*")
@@ -23,18 +23,18 @@ model User is ProxyResource<UserProperties> {
 @armResourceOperations
 @added(Versions.v2025_04_01_preview)
 interface Users {
-  /** Gets the defintion of a Mongo cluster user. */
+  /** Gets the defintion of a DocumentDB cluster user. */
   get is ArmResourceRead<User>;
-  /** Creates a new user or updates an existing user on a mongo cluster. */
+  /** Creates a new user or updates an existing user on a DocumentDB cluster. */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     User,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  /** Deletes a mongo cluster user. */
+  /** Deletes a DocumentDB cluster user. */
   delete is ArmResourceDeleteWithoutOkAsync<User>;
-  /** List all the users on a mongo cluster. */
+  /** List all the users on a DocumentDB cluster. */
   listByMongoCluster is ArmResourceListByParent<User>;
 }
 
