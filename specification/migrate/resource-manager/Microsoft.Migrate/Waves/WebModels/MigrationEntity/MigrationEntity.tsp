@@ -73,11 +73,23 @@ model MigrationEntityProperties is AzureResourceProperties {
   migrationStrategy?: Strategy;
 
   @doc("Execution Stage of Migration Entity.")
+  @removed(ApiVersions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
+  @renamedFrom(ApiVersions.v2026_08_01_preview, "executionStage")
+  oldExecutionStage?: string;
+
+  @doc("Execution Stage of Migration Entity.")
+  @added(ApiVersions.v2026_08_01_preview)
   executionStage?: string;
 
   @doc("Execution Status of Migration Entity.")
+  @removed(ApiVersions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
+  @renamedFrom(ApiVersions.v2026_08_01_preview, "executionStatus")
+  oldExecutionStatus?: string;
+
+  @doc("Execution Status of Migration Entity.")
+  @added(ApiVersions.v2026_08_01_preview)
   executionStatus?: string;
 
   @doc("Execution Readiness of Migration Entity.")
@@ -98,7 +110,6 @@ model MigrationEntityProperties is AzureResourceProperties {
 
   @doc("Migration status reported by the migration tool.")
   @added(ApiVersions.v2026_08_01_preview)
-  @visibility(Lifecycle.Read)
   toolReportedMigrationStatus?: string;
 }
 
