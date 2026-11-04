@@ -54,6 +54,7 @@ model ConnectionPropertiesV2BasicResource is Azure.ResourceManager.ProxyResource
 }
 
 /** Connection properties returned by ordinary resource operations. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The read projection preserves the existing synchronous connection contract, which does not expose provisioningState."
 @added(Versions.v2026_11_01)
 @discriminator("authType")
 model ConnectionPropertiesV2Read {
@@ -145,8 +146,15 @@ model AadAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
 
 /** A connection returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
-model ConnectionPropertiesV2BasicResourceRead {
-  ...Azure.ResourceManager.ProxyResource<ConnectionPropertiesV2Read, false>;
+@parentResource(Account)
+model ConnectionPropertiesV2BasicResourceRead
+  is Azure.ResourceManager.ProxyResource<ConnectionPropertiesV2Read, false> {
+  /** Friendly name of the connection. */
+  @key("connectionName")
+  @segment("connections")
+  @path
+  @visibility(Lifecycle.Read)
+  name: LegacyConnectionName;
 }
 
 @doc("Azure operation completed successfully.")

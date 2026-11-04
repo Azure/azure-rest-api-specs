@@ -11037,10 +11037,6 @@
         "tenantId"
       ]
     },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
-    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -12780,30 +12776,15 @@
         "properties": {
           "$ref": "#/definitions/ConnectionPropertiesV2Read",
           "description": "The resource-specific properties for this resource."
-        },
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
         }
       },
       "required": [
         "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "ConnectionPropertiesV2Read": {
