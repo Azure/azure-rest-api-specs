@@ -170,22 +170,25 @@ namespace Microsoft.Synapse;
   "csharp"
 ); // no shipped name (pause/resume 202 envelope)
 
-// --- Python names (python scope only) ---
-// Merged-client name clashes. Shipped names stay on the released types: KustoPools.ResourceProvisioningState
-// and the workspace-level SqlPools.BlobAuditingPolicyName are both classes in azure-mgmt-synapse 2.1.0b7.
+// --- Merged-client name clashes (python, csharp, java) ---
+// Shipped names stay on the released types: KustoPools.ResourceProvisioningState (Python and .NET GA)
+// and the workspace-level SqlPools.BlobAuditingPolicyName. The ARM common type is renamed instead.
 @@clientName(
   Azure.ResourceManager.ResourceProvisioningState,
   "ArmResourceProvisioningState",
-  "python"
+  "python, csharp, java"
 );
-
-// Single-value path parameters shipped as fixed constants (Literal) in azure-mgmt-synapse 2.1.0b7.
-@@alternateType(SqlPools.DataMaskingPolicyName, "Default", "python");
+// The pool-level blob auditing policy name was a fixed "default" in the released Python (Literal),
+// .NET (singleton Get() without a name) and Java SDKs.
 @@alternateType(
   SqlPools.SqlPoolLevel.BlobAuditingPolicyName,
   "default",
-  "python"
+  "python, csharp, java"
 );
+
+// --- Python only ---
+// Single-value path parameters shipped as fixed constants (Literal) in azure-mgmt-synapse 2.1.0b7.
+@@alternateType(SqlPools.DataMaskingPolicyName, "Default", "python");
 @@alternateType(SqlPools.WritableSensitivityLabelSource, "current", "python");
 @@alternateType(
   SqlPools.RecommendedSensitivityLabelSource,
