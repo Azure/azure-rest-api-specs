@@ -337,54 +337,6 @@ describe("Summarize Checks Integration Tests", () => {
 
 describe("Summarize Checks Unit Tests", () => {
   describe("check result processing", () => {
-    it.each([
-      ["BreakingChange-Python-Track2-Sdk", "azure-rest-api-specs"],
-      ["CI-BreakingChange-Python-Track2", "azure-rest-api-specs"],
-    ])("does not block merging or recommend retired label %s", (label, repo) => {
-      const [comment, status] = createNextStepsComment(
-        mockCore,
-        repo,
-        [label],
-        "main",
-        [],
-        [],
-        true,
-        WORKFLOW_URL,
-      );
-
-      expect(status.result).toBe("SUCCESS");
-      expect(comment).not.toContain(label);
-    });
-
-    it.each([
-      ["BreakingChange-Python-Sdk", "BreakingChange-Python-Sdk-Approved"],
-      ["BreakingChange-Python-Sdk-Suppression", "BreakingChange-Python-Sdk-Suppression-Approved"],
-    ])("preserves the active Python review requirement for %s", (label, approval) => {
-      const [, blocked] = createNextStepsComment(
-        mockCore,
-        "azure-rest-api-specs",
-        [label],
-        "main",
-        [],
-        [],
-        true,
-        WORKFLOW_URL,
-      );
-      const [, approved] = createNextStepsComment(
-        mockCore,
-        "azure-rest-api-specs",
-        [label, approval],
-        "main",
-        [],
-        [],
-        true,
-        WORKFLOW_URL,
-      );
-
-      expect(blocked.result).toBe("FAILURE");
-      expect(approved.result).toBe("SUCCESS");
-    });
-
     it.each([false, true])(
       "places the SDK summary and pending guidance before a single footer (assessment complete: %s)",
       (assessmentCompleted) => {

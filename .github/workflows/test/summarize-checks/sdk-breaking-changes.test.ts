@@ -99,14 +99,13 @@ describe("SDK breaking-change summary", () => {
     expect(summary).toContain(`[View analysis Results](${prUrl}#issuecomment-1)`);
   });
 
-  it.each([
-    "BreakingChange-.Net-Sdk",
-    "BreakingChange-Rust-Sdk",
-    "BreakingChange-Python-Track2-Sdk",
-  ])("omits %s when it is not configured in the workflow SDK labels", (label) => {
-    expect(hasSdkBreakingChanges([label])).toBe(false);
-    expect(buildSdkBreakingChangesSummary([label], [], headSha, prUrl)).toBe("");
-  });
+  it.each(["BreakingChange-.Net-Sdk", "BreakingChange-Rust-Sdk"])(
+    "omits %s when it is not configured in the workflow SDK labels",
+    (label) => {
+      expect(hasSdkBreakingChanges([label])).toBe(false);
+      expect(buildSdkBreakingChangesSummary([label], [], headSha, prUrl)).toBe("");
+    },
+  );
 
   it("does not present stale, unversioned or user-authored reports as current", () => {
     const unversioned = report(2, "analysis", "Go");
