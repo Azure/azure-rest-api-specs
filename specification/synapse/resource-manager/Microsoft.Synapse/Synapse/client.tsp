@@ -1651,6 +1651,9 @@ namespace Microsoft.Synapse;
   "java"
 );
 
+// LanguageExtensionsList is both a paged list result and the KustoPool.languageExtensions property type;
+// keep it public so the public API does not expose an implementation type (checkstyle NoImplInPublicAPI).
+@@access(KustoPools.LanguageExtensionsList, Access.public, "java");
 // --- Python only ---
 // Operations that were not pageable in azure-mgmt-synapse 2.1.0b7 (they returned the list model).
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released Python non-pageable signature"
