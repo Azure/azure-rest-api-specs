@@ -17704,8 +17704,7 @@ model NetworkVirtualApplianceLoadBalancerConfiguration {
   /**
    * The load distribution policy. Default uses a five-tuple hash of source IP, destination IP, source port, destination port, and protocol. SourceIP uses a two-tuple hash of source IP and destination IP. SourceIPProtocol uses a three-tuple hash of source IP, destination IP, and protocol. When omitted, Default is used.
    */
-  loadDistribution?: NetworkVirtualApplianceLoadDistribution =
-    NetworkVirtualApplianceLoadDistribution.Default;
+  loadDistribution?: NetworkVirtualApplianceLoadDistribution = NetworkVirtualApplianceLoadDistribution.Default;
 
   /**
    * The idle timeout of the load-balancing rule, in minutes. When omitted or null, the managed NVA platform default of 5 minutes is used. Values outside 4 through 100 are rejected with HTTP 400 InvalidParameter.
