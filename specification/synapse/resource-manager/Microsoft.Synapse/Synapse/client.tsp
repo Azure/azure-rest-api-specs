@@ -26,6 +26,38 @@ using Azure.ClientGenerator.Core;
 })
 namespace Microsoft.Synapse;
 
+/** The type of resource, for Kusto pool name checks (C# only; released as an extensible enum). */
+union KustoPoolType {
+  string,
+
+  /** Microsoft.Synapse/workspaces/kustoPools */
+  MicrosoftSynapseWorkspacesKustoPools: "Microsoft.Synapse/workspaces/kustoPools",
+}
+
+/** The type of resource, for Kusto data connection name checks (C# only; released as an extensible enum). */
+union SynapseDataConnectionType {
+  string,
+
+  /** Microsoft.Synapse/workspaces/kustoPools/databases/dataConnections */
+  MicrosoftSynapseWorkspacesKustoPoolsDatabasesDataConnections: "Microsoft.Synapse/workspaces/kustoPools/databases/dataConnections",
+}
+
+/** The type of resource, for Kusto pool principal assignment name checks (C# only; released as an extensible enum). */
+union SynapsePrincipalAssignmentType {
+  string,
+
+  /** Microsoft.Synapse/workspaces/kustoPools/principalAssignments */
+  MicrosoftSynapseWorkspacesKustoPoolsPrincipalAssignments: "Microsoft.Synapse/workspaces/kustoPools/principalAssignments",
+}
+
+/** The type of resource, for Kusto database principal assignment name checks (C# only; released as an extensible enum). */
+union SynapseDatabasePrincipalAssignmentType {
+  string,
+
+  /** Microsoft.Synapse/workspaces/kustoPools/databases/principalAssignments */
+  MicrosoftSynapseWorkspacesKustoPoolsDatabasesPrincipalAssignments: "Microsoft.Synapse/workspaces/kustoPools/databases/principalAssignments",
+}
+
 // --- C# (csharp scope only; wire contract and other languages unchanged) ---
 // Ported from the GA azure-sdk-for-net sdk/synapse/Azure.ResourceManager.Synapse/src/autorest.md
 // (rename-mapping, prepend-rp-prefix, override-operation-name, remove-operation, directives) so the
@@ -706,7 +738,7 @@ namespace Microsoft.Synapse;
 );
 @@clientName(
   SqlPools.DataWarehouseUserActivities,
-  "SynapseDataWarehouseUserActivities",
+  "SynapseDataWarehouseUserActivity",
   "csharp"
 );
 @@clientName(
@@ -747,7 +779,7 @@ namespace Microsoft.Synapse;
 );
 @@clientName(
   Workspaces.IpFirewallRuleInfo,
-  "SynapseIpFirewallRuleInfo",
+  "SynapseIPFirewallRuleInfo",
   "csharp"
 );
 @@clientName(Workspaces.Key, "SynapseKey", "csharp");
@@ -1099,7 +1131,7 @@ namespace Microsoft.Synapse;
 );
 @@clientName(
   IntegrationRuntimes.IntegrationRuntimeNodeIpAddress,
-  "SynapseIntegrationRuntimeNodeIpAddress",
+  "SynapseIntegrationRuntimeNodeIPAddress",
   "csharp"
 );
 @@clientName(
@@ -1160,7 +1192,7 @@ namespace Microsoft.Synapse;
 );
 @@clientName(
   Workspaces.IpFirewallRuleProperties,
-  "SynapseIpFirewallRuleProperties",
+  "SynapseIPFirewallRuleProperties",
   "csharp"
 );
 @@clientName(
@@ -1571,6 +1603,82 @@ namespace Microsoft.Synapse;
 @@clientName(
   IntegrationRuntimes.SsisObjectMetadata.type,
   "MetadataType",
+  "csharp"
+);
+// GA resource names (request-path-to-resource-name and singularized names). Two resources share one
+// model in each pair (workspace vs hub private link resources; AAD admin vs SQL AAD admin), so the
+// resource name is set per Read operation, as in the Application Insights precedent.
+@@clientName(
+  Workspaces.PrivateLinkResource,
+  "SynapsePrivateLinkResource",
+  "csharp"
+);
+@@clientName(
+  Workspaces.PrivateEndpointConnection,
+  "SynapsePrivateEndpointConnection",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Restore the GA C# resource name; the workspace and private link hub private link resources share one model."
+@@clientOption(
+  Workspaces.PrivateLinkResources.get,
+  "resource-name",
+  "SynapseWorkspacePrivateLinkResource",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Restore the GA C# resource name; the workspace and private link hub private link resources share one model."
+@@clientOption(
+  Workspaces.PrivateLinkHubPrivateLinkResources.get,
+  "resource-name",
+  "SynapsePrivateLinkResource",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Restore the GA C# resource name; the AAD admin and SQL AAD admin resources share one model."
+@@clientOption(
+  Workspaces.WorkspaceAadAdminInfos.get,
+  "resource-name",
+  "SynapseWorkspaceAdministrator",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Restore the GA C# resource name; the AAD admin and SQL AAD admin resources share one model."
+@@clientOption(
+  Workspaces.WorkspaceSqlAadAdmins.get,
+  "resource-name",
+  "SynapseWorkspaceSqlAdministrator",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimes.IntegrationRuntimeRegenerateKeyParameters,
+  "IntegrationRuntimeRegenerateKeyContent",
+  "csharp"
+);
+
+// Kusto check-name `type` values: closed enums in the original Swagger, released in .NET as
+// KustoPoolType / SynapseDataConnectionType / Synapse(Database)PrincipalAssignmentType (extensible structs)
+// and KustoPoolDatabaseType (enum, property ResourceType). TypeSpec keeps them as string literals (F4).
+@@clientName(KustoPools.Type, "KustoPoolDatabaseType", "csharp");
+@@clientName(
+  KustoPools.DatabaseCheckNameRequest.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  KustoPools.KustoPoolCheckNameRequest.type,
+  KustoPoolType,
+  "csharp"
+);
+@@alternateType(
+  KustoPools.DataConnectionCheckNameRequest.type,
+  SynapseDataConnectionType,
+  "csharp"
+);
+@@alternateType(
+  KustoPools.ClusterPrincipalAssignmentCheckNameRequest.type,
+  SynapsePrincipalAssignmentType,
+  "csharp"
+);
+@@alternateType(
+  KustoPools.DatabasePrincipalAssignmentCheckNameRequest.type,
+  SynapseDatabasePrincipalAssignmentType,
   "csharp"
 );
 // GA autorest.md directive transforms.
