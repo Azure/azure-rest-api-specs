@@ -1,10 +1,8 @@
-import { escapeMarkdown, link } from "../../../shared/src/markdown.ts";
+import { escapeHtml } from "../../../shared/src/markdown.ts";
 
-/** Renders a linked badge for a label in the public specs repository. */
+/** Uses picture to prevent GitHub from adding an automatic image-preview link. */
 export function labelBadge(name: string): string {
-  const encodedName = encodeURIComponent(name);
-  return link(
-    `![${escapeMarkdown(name)}](https://img.shields.io/github/labels/Azure/azure-rest-api-specs/${encodedName})`,
-    `https://github.com/Azure/azure-rest-api-specs/labels/${encodedName}`,
-  );
+  const url = `https://img.shields.io/github/labels/Azure/azure-rest-api-specs/${encodeURIComponent(name)}`;
+  const alt = escapeHtml(name).replaceAll('"', "&quot;").replaceAll("|", "&#124;");
+  return `<picture><img src="${url}" alt="${alt}"></picture>`;
 }
