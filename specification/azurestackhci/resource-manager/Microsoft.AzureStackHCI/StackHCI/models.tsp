@@ -38,6 +38,10 @@ union HciJobType {
   @added(Versions.v2027_01_01)
   GpuSwitchMode: "GpuSwitchMode",
 
+  /** Job to configure the confidential computing mode for the GPUs in the cluster. */
+  @added(Versions.v2027_01_15_preview)
+  ConfigureGpuConfidentialComputeMode: "ConfigureGpuConfidentialComputeMode",
+
   /**
    * Job to CVM  intent for the cluster.
    */
@@ -9690,6 +9694,21 @@ model GpuSwitchModeJobProperties extends ClusterJobProperties {
 }
 
 /**
+ * Properties for configuring the confidential computing mode for the GPUs in the cluster.
+ */
+@added(Versions.v2027_01_15_preview)
+model ConfigureGpuConfidentialComputeModeClusterJobProperties
+  extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureGpuConfidentialComputeMode;
+
+  /**
+   * Desired confidential computing mode to set for the GPUs in the cluster.
+   */
+  mode: ConfidentialComputingMode;
+}
+
+/**
  * GPU modes supported.
  */
 @added(Versions.v2027_01_01)
@@ -9767,6 +9786,13 @@ model EdgeMachineGpuProperties {
    */
   @visibility(Lifecycle.Read)
   partitionable?: boolean;
+
+  /**
+   * The confidential computing status of the GPU. Reports Unsupported when the GPU does not support confidential computing, otherwise the mode the GPU is currently in.
+   */
+  @added(Versions.v2027_01_15_preview)
+  @visibility(Lifecycle.Read)
+  confidentialComputingModeStatus?: ConfidentialComputingModeStatus;
 
   /**
    * This is the host driver for the host on which GPU is assigned, only for DDA
@@ -10086,6 +10112,63 @@ union EdgeMachineGpuJobType {
    * Switch GPU mode between DDA and GPU-P for different workload requirements.
    */
   SwitchMode: "SwitchMode",
+
+  /**
+   * Configure the confidential computing mode on the GPU.
+   */
+  @added(Versions.v2027_01_15_preview)
+  ConfigureConfidentialComputeMode: "ConfigureConfidentialComputeMode",
+}
+
+/**
+ * Confidential computing modes supported on a GPU.
+ */
+@added(Versions.v2027_01_15_preview)
+union ConfidentialComputingMode {
+  string,
+
+  /**
+   * Confidential computing is disabled on the GPU.
+   */
+  Off: "Off",
+
+  /**
+   * Confidential computing is enabled on the GPU in developer tools mode, which permits debugging and profiling tools that are blocked when confidential computing is fully enabled.
+   */
+  DevTools: "DevTools",
+
+  /**
+   * Confidential computing is enabled on the GPU.
+   */
+  On: "On",
+}
+
+/**
+ * Confidential computing status of a GPU, reporting either that the GPU cannot support confidential computing or the mode it is currently in.
+ */
+@added(Versions.v2027_01_15_preview)
+union ConfidentialComputingModeStatus {
+  string,
+
+  /**
+   * The GPU does not support confidential computing.
+   */
+  Unsupported: "Unsupported",
+
+  /**
+   * Confidential computing is disabled on the GPU.
+   */
+  Off: "Off",
+
+  /**
+   * Confidential computing is enabled on the GPU in developer tools mode, which permits debugging and profiling tools that are blocked when confidential computing is fully enabled.
+   */
+  DevTools: "DevTools",
+
+  /**
+   * Confidential computing is enabled on the GPU.
+   */
+  On: "On",
 }
 
 /**
@@ -10118,6 +10201,23 @@ model SwitchModeGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Desired GPU mode to switch to.
    */
   mode: GpuMode;
+}
+
+/**
+ * Properties for configuring the confidential computing mode on the GPU.
+ */
+@added(Versions.v2027_01_15_preview)
+model ConfigureConfidentialComputeModeGpuJobProperties
+  extends EdgeMachineGpuJobProperties {
+  /**
+   * Type of GPU job to be performed.
+   */
+  jobType: EdgeMachineGpuJobType.ConfigureConfidentialComputeMode;
+
+  /**
+   * Desired confidential computing mode to set on the GPU.
+   */
+  mode: ConfidentialComputingMode;
 }
 
 /**
