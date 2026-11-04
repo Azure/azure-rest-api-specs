@@ -234,41 +234,40 @@ stages:
 
           - script: |
               set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
-              optional_params=""
-              typespec_emitter_params=()
+              optional_params=()
               # Azure DevOps leaves undefined macros unexpanded.
               if [[ -n "${TYPE_SPEC_EMITTER:-}" && "$TYPE_SPEC_EMITTER" != '$('*')' ]]; then
-                typespec_emitter_params=(--typespec-emitter "$TYPE_SPEC_EMITTER")
+                optional_params+=(--typespec-emitter "$TYPE_SPEC_EMITTER")
               fi
               sdk_gen_info="Configurations: "
 
               if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
-                optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
+                optional_params+=(--tsp-config-relative-path "${{ parameters.ConfigPath }}")
                 sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
               elif [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "OpenAPI" ]; then
-                optional_params="$optional_params --readme-relative-path ${{ parameters.ConfigPath }}"
+                optional_params+=(--readme-relative-path "${{ parameters.ConfigPath }}")
                 sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
               fi
 
               updatedSpecRepoCommit="$(SpecRepoCommit)"
               if [ "$(Build.Reason)" = "PullRequest" ]; then
-                optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
+                optional_params+=(--pr-number "$(System.PullRequest.PullRequestNumber)")
                 specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
                 sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
                 updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
               fi
 
               if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
-                optional_params="$optional_params --batch-type ${{ parameters.SpecBatchTypes }}"
+                optional_params+=(--batch-type "${{ parameters.SpecBatchTypes }}")
                 sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
               fi
 
               if [ "${{ parameters.ApiVersion }}" != "" ] && [ "${{ parameters.ApiVersion }}" != "none" ]; then
-                optional_params="$optional_params --api-version ${{ parameters.ApiVersion }}"
+                optional_params+=(--api-version "${{ parameters.ApiVersion }}")
                 sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }},"
               fi
               if [ "${{ parameters.SdkReleaseType }}" != "" ] && [ "${{ parameters.SdkReleaseType }}" != "none" ]; then
-                optional_params="$optional_params --sdk-release-type ${{ parameters.SdkReleaseType }}"
+                optional_params+=(--sdk-release-type "${{ parameters.SdkReleaseType }}")
                 sdk_gen_info="$sdk_gen_info SDK Release Type: ${{ parameters.SdkReleaseType }},"
               fi
               sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
@@ -296,8 +295,7 @@ stages:
                 --lang $(SdkRepoName) \
                 --commit $updatedSpecRepoCommit \
                 --spec-repo-url ${{ parameters.SpecRepoUrl }} \
-                "${typespec_emitter_params[@]}" \
-                $optional_params || true # return true always to suppress exit error logging
+                "${optional_params[@]}" || true # return true always to suppress exit error logging
             displayName: "Generate SDK"
             ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
               continueOnError: true
