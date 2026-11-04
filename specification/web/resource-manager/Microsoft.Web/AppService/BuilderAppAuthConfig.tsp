@@ -329,8 +329,7 @@ interface BuilderAppAuthConfigs {
     Response = BuilderAppAuthResponse
   >;
 
-  /** Reset the singleton authentication policy and return the resulting configuration. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "DELETE resets an always-present singleton and returns 200 with the resulting policy; it does not remove a resource or return 204."
+  /** Reset the singleton authentication policy. The configuration remains available through GET. */
   @autoRoute
   @delete
   @armResourceDelete(BuilderAppAuthConfig)
@@ -339,5 +338,16 @@ interface BuilderAppAuthConfigs {
 
     /** Reset only when the current ETag matches. */
     @header("If-Match") ifMatch?: string,
-  ): BuilderAppAuthResponse | DefaultErrorResponse;
+  ):
+    | (OkResponse & {
+        /** Authentication responses must not be stored. */
+        @header("Cache-Control")
+        cacheControl: "private, no-store";
+      })
+    | (NoContentResponse & {
+        /** Authentication responses must not be stored. */
+        @header("Cache-Control")
+        cacheControl: "private, no-store";
+      })
+    | DefaultErrorResponse;
 }

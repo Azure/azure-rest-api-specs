@@ -7135,6 +7135,21 @@ union ConfigReferenceSource {
   "csharp"
 );
 @@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "BuilderAppManagedServiceIdentity",
+  "python"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  "BuilderAppUserAssignedIdentityInfo",
+  "python"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "BuilderAppManagedServiceIdentityType",
+  "python"
+);
+@@clientName(
   AppServiceEnvironment.ipsslAddressCount,
   "IPSslAddressCount",
   "csharp"

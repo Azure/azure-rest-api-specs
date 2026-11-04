@@ -243,6 +243,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Function App Stacks": {
+            "$ref": "./examples/GetFunctionAppStacks.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -306,6 +311,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Locations Function App Stacks": {
+            "$ref": "./examples/GetFunctionAppStacksForLocation.json"
           }
         },
         "x-ms-pageable": {
@@ -373,6 +383,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Locations Web App Stacks": {
+            "$ref": "./examples/GetWebAppStacksForLocation.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -404,6 +419,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/ListOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -629,6 +649,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Web App Stacks": {
+            "$ref": "./examples/GetWebAppStacks.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -663,6 +688,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListAiGatewaysBySubscription": {
+            "$ref": "./examples/AIGateways_ListBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -693,6 +723,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List aseregions": {
+            "$ref": "./examples/ListAseRegions.json"
           }
         },
         "x-ms-pageable": {
@@ -896,6 +931,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Certificates for subscription": {
+            "$ref": "./examples/ListCertificates.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -974,6 +1014,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get custom hostnames under subscription": {
+            "$ref": "./examples/ListCustomHostNameSites.json"
+          },
+          "Get specific custom hostname under subscription": {
+            "$ref": "./examples/ListCustomSpecificHostNameSites.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1050,6 +1098,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Deleted Web App": {
+            "$ref": "./examples/GetDeletedWebApp.json"
+          }
         }
       }
     },
@@ -1091,6 +1144,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Deleted Web App Snapshots": {
+            "$ref": "./examples/GetDeletedWebAppSnapshots.json"
           }
         }
       }
@@ -1299,6 +1357,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get all App Service Environments for a subscription.": {
+            "$ref": "./examples/AppServiceEnvironments_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1332,6 +1395,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List kube environments by subscription": {
+            "$ref": "./examples/KubeEnvironments_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -1426,10 +1494,11 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "409": {
-            "description": "The request conflicts with the current state of the server.",
+            "description": "ARM error returned when a shared operation has failed or been canceled.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1562,6 +1631,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Deleted Web App by Location": {
+            "$ref": "./examples/ListDeletedWebAppsByLocation.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1606,6 +1680,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Deleted Web App by Location": {
+            "$ref": "./examples/GetDeletedWebAppByLocation.json"
+          }
         }
       }
     },
@@ -1644,6 +1723,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an operation in a subscription and given region": {
+            "$ref": "./examples/GetSubscriptionOperationWithAsyncResponse.json"
           }
         }
       }
@@ -1688,6 +1772,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Generates a preview workflow file for the static site": {
+            "$ref": "./examples/GenerateStaticSiteWorkflowPreview.json"
           }
         }
       }
@@ -1741,6 +1830,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the result of a static site async operation": {
+            "$ref": "./examples/GetStaticSiteOperationResult.json"
+          }
         }
       }
     },
@@ -1779,6 +1873,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the status of a static site async operation": {
+            "$ref": "./examples/GetStaticSiteOperationStatus.json"
+          }
         }
       }
     },
@@ -1810,6 +1909,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get usages in location for subscription": {
+            "$ref": "./examples/GetUsagesInLocation.json"
           }
         },
         "x-ms-pageable": {
@@ -1993,6 +2097,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List ResourceHealthMetadata for a subscription": {
+            "$ref": "./examples/ListResourceHealthMetadataBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2035,6 +2144,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List App Service plans": {
+            "$ref": "./examples/ListAppServicePlans.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2068,6 +2182,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Web apps for subscription": {
+            "$ref": "./examples/ListWebApps.json"
           }
         },
         "x-ms-pageable": {
@@ -2134,6 +2253,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get all static sites in a subscription": {
+            "$ref": "./examples/GetAllStaticSites.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2173,6 +2297,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VerifyHostingEnvironmentVnet": {
+            "$ref": "./examples/VerifyHostingEnvironmentVnet.json"
           }
         }
       }
@@ -2268,6 +2397,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListAiGatewaysByResourceGroup": {
+            "$ref": "./examples/AIGateways_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2311,6 +2445,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetAiGateway": {
+            "$ref": "./examples/AIGateways_Get.json"
           }
         }
       },
@@ -2367,6 +2506,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateAiGateway": {
+            "$ref": "./examples/AIGateways_CreateOrUpdate.json"
+          }
         }
       },
       "patch": {
@@ -2416,6 +2560,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "PatchAiGateway": {
+            "$ref": "./examples/AIGateways_Patch.json"
+          }
         }
       },
       "delete": {
@@ -2455,6 +2604,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAiGateway": {
+            "$ref": "./examples/AIGateways_Delete.json"
           }
         }
       }
@@ -2971,7 +3125,7 @@
         "tags": [
           "BuilderAppAuthConfigs"
         ],
-        "description": "Reset the singleton authentication policy and return the resulting configuration.",
+        "description": "Reset the singleton authentication policy. The configuration remains available through GET.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3001,10 +3155,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Credential-safe authentication configuration response with cache protection and ETag.",
-            "schema": {
-              "$ref": "#/definitions/BuilderAppAuthConfig"
-            },
+            "description": "The request has succeeded.",
             "headers": {
               "Cache-Control": {
                 "type": "string",
@@ -3015,10 +3166,21 @@
                 "x-ms-enum": {
                   "modelAsString": false
                 }
-              },
-              "ETag": {
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Cache-Control": {
                 "type": "string",
-                "description": "Current entity tag."
+                "description": "Authentication responses must not be stored.",
+                "enum": [
+                  "private, no-store"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
               }
             }
           },
@@ -3359,6 +3521,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Certificates by resource group": {
+            "$ref": "./examples/ListCertificatesByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3402,6 +3569,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Certificate": {
+            "$ref": "./examples/GetCertificate.json"
           }
         }
       },
@@ -3452,6 +3624,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create Or Update Certificate": {
+            "$ref": "./examples/CreateOrUpdateCertificate.json"
+          }
         }
       },
       "patch": {
@@ -3501,6 +3678,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch Certificate": {
+            "$ref": "./examples/PatchCertificate.json"
+          }
         }
       },
       "delete": {
@@ -3541,6 +3723,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete Certificate": {
+            "$ref": "./examples/DeleteCertificate.json"
+          }
         }
       }
     },
@@ -3575,6 +3762,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all App Service Environments in a resource group.": {
+            "$ref": "./examples/AppServiceEnvironments_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -3620,6 +3812,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the properties of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Get.json"
           }
         }
       },
@@ -3705,6 +3902,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/AppServiceEnvironmentResource"
@@ -3770,6 +3972,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Update.json"
+          }
         }
       },
       "delete": {
@@ -3829,6 +4036,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3875,6 +4087,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get the used, available, and total worker capacity an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListCapacities.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3918,6 +4135,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get IP addresses assigned to an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetVipInfo.json"
           }
         }
       }
@@ -3983,6 +4205,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Move an App Service Environment to a different VNET.": {
+            "$ref": "./examples/AppServiceEnvironments_ChangeVnet.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/WebAppCollection"
@@ -4031,6 +4258,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ASE custom DNS suffix configuration": {
+            "$ref": "./examples/GetAseCustomDnsSuffixConfiguration.json"
           }
         }
       },
@@ -4081,6 +4313,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update ASE custom DNS suffix configuration": {
+            "$ref": "./examples/UpdateAseCustomDnsSuffixConfiguration.json"
+          }
         }
       },
       "delete": {
@@ -4123,6 +4360,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete ASE custom DNS suffix configuration": {
+            "$ref": "./examples/DeleteAseCustomDnsSuffixConfiguration.json"
+          }
         }
       }
     },
@@ -4164,6 +4406,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get networking configuration of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetAseV3NetworkingConfiguration.json"
           }
         }
       },
@@ -4214,6 +4461,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update networking configuration of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_UpdateAseNetworkingConfiguration.json"
+          }
         }
       }
     },
@@ -4255,6 +4507,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Service Environment Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListHostingEnvironmentDetectorResponses.json"
           }
         },
         "x-ms-pageable": {
@@ -4332,6 +4589,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get App Service Environment Detector Responses": {
+            "$ref": "./examples/Diagnostics_GetHostingEnvironmentDetectorResponse.json"
+          }
         }
       }
     },
@@ -4376,6 +4638,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get diagnostic information for an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListDiagnostics.json"
           }
         }
       }
@@ -4425,6 +4692,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a diagnostics item for an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetDiagnosticsItem.json"
+          }
         }
       }
     },
@@ -4466,6 +4738,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the network endpoints of all inbound dependencies of an App Service Environment.": {
+            "$ref": "./examples/GetInboundNetworkDependenciesEndpoints.json"
           }
         },
         "x-ms-pageable": {
@@ -4513,6 +4790,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get all multi-role pools.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRolePools.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -4556,6 +4838,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get properties of a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_GetMultiRolePool.json"
           }
         }
       },
@@ -4619,6 +4906,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/WorkerPoolResource"
@@ -4678,6 +4970,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool_UpdateMultiRolePool.json"
+          }
         }
       }
     },
@@ -4728,6 +5025,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -4771,6 +5073,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get metric definitions for a multi-role pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRoleMetricDefinitions.json"
           }
         },
         "x-ms-pageable": {
@@ -4818,6 +5125,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get available SKUs for scaling a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRolePoolSkus.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -4861,6 +5173,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get usage metrics for a multi-role pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRoleUsages.json"
           }
         },
         "x-ms-pageable": {
@@ -4910,6 +5227,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all currently running operations on the App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListOperations.json"
+          }
         }
       }
     },
@@ -4951,6 +5273,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the network endpoints of all outbound dependencies of an App Service Environment.": {
+            "$ref": "./examples/GetOutboundNetworkDependenciesEndpoints.json"
           }
         },
         "x-ms-pageable": {
@@ -4996,6 +5323,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of private endpoints associated with a hosting environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetPrivateEndpointConnectionList.json"
           }
         },
         "x-ms-pageable": {
@@ -5048,6 +5380,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a private endpoint connection.": {
+            "$ref": "./examples/AppServiceEnvironments_GetPrivateEndpointConnection.json"
           }
         }
       },
@@ -5116,6 +5453,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection.": {
+            "$ref": "./examples/AppServiceEnvironments_ApproveOrRejectPrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5187,6 +5529,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Deletes a private endpoint connection.": {
+            "$ref": "./examples/AppServiceEnvironments_DeletePrivateEndpointConnection.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/unknown"
@@ -5233,6 +5580,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the private link resources.": {
+            "$ref": "./examples/AppServiceEnvironments_GetPrivateLinkResources.json"
+          }
         }
       }
     },
@@ -5271,6 +5623,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Reboot all machines in an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Reboot.json"
           }
         }
       }
@@ -5653,6 +6010,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Resume an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Resume.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/WebAppCollection"
@@ -5701,6 +6063,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all App Service plans in an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListAppServicePlans.json"
           }
         },
         "x-ms-pageable": {
@@ -5753,6 +6120,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all apps in an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWebApps.json"
           }
         },
         "x-ms-pageable": {
@@ -5812,6 +6184,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Suspend an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Suspend.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/WebAppCollection"
@@ -5857,6 +6234,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Send a test notification that an upgrade is available for this App Service Environment": {
+            "$ref": "./examples/AppServiceEnvironments_TestUpgradeAvailableNotification.json"
           }
         }
       }
@@ -5907,6 +6289,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Initiate an upgrade on an App Service Environment": {
+            "$ref": "./examples/AppServiceEnvironments_Upgrade.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5962,6 +6349,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get global usage metrics of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListUsages.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6005,6 +6397,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all worker pools of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWorkerPools.json"
           }
         },
         "x-ms-pageable": {
@@ -6057,6 +6454,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get properties of a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_GetWorkerPool.json"
           }
         }
       },
@@ -6127,6 +6529,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get properties of a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateWorkerPool_CreateOrUpdateWorkerPool.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/WorkerPoolResource"
@@ -6193,6 +6600,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get properties of a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateWorkerPool.json"
+          }
         }
       }
     },
@@ -6250,6 +6662,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get metric definitions for a specific instance of a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6300,6 +6717,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get metric definitions for a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWebWorkerMetricDefinitions.json"
           }
         },
         "x-ms-pageable": {
@@ -6354,6 +6776,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get available SKUs for scaling a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWorkerPoolSkus.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6406,6 +6833,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get usage metrics for a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWebWorkerUsages.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6442,6 +6874,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List kube environments by resource group": {
+            "$ref": "./examples/KubeEnvironments_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -6487,6 +6924,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get kube environments by name": {
+            "$ref": "./examples/KubeEnvironments_Get.json"
           }
         }
       },
@@ -6555,6 +6997,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create kube environments": {
+            "$ref": "./examples/KubeEnvironments_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/KubeEnvironment"
@@ -6614,6 +7061,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update kube environments": {
+            "$ref": "./examples/KubeEnvironments_Update.json"
+          }
         }
       },
       "delete": {
@@ -6669,6 +7121,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete kube environment by name": {
+            "$ref": "./examples/KubeEnvironments_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -6708,6 +7165,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List ResourceHealthMetadata for a resource group": {
+            "$ref": "./examples/ListResourceHealthMetadataByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6744,6 +7206,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List App Service plans by resource group": {
+            "$ref": "./examples/ListAppServicePlansByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -6793,6 +7260,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Service plan": {
+            "$ref": "./examples/GetAppServicePlan.json"
           }
         }
       },
@@ -6856,6 +7328,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create Or Update App Service plan": {
+            "$ref": "./examples/CreateOrUpdateAppServicePlan.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/AppServicePlan"
@@ -6915,6 +7392,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch Service plan": {
+            "$ref": "./examples/PatchAppServicePlan.json"
+          }
         }
       },
       "delete": {
@@ -6954,6 +7436,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete App Service plan": {
+            "$ref": "./examples/DeleteAppServicePlan.json"
           }
         }
       }
@@ -7587,6 +8074,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Start all sites in an App Service Plan": {
+            "$ref": "./examples/StartWebAppsAppServicePlan.json"
+          }
         }
       }
     },
@@ -7625,6 +8117,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stop all sites in an App Service Plan": {
+            "$ref": "./examples/StopWebAppsAppServicePlan.json"
           }
         }
       }
@@ -8346,6 +8843,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Web Apps by Resource group": {
+            "$ref": "./examples/ListWebAppsByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -8393,6 +8895,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Web App": {
+            "$ref": "./examples/GetWebApp.json"
           }
         }
       },
@@ -8456,6 +8963,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Clone web app": {
+            "$ref": "./examples/CloneWebApp.json"
+          },
+          "Create or Update Flex Consumption function app": {
+            "$ref": "./examples/CreateOrUpdateFunctionAppFlexConsumption.json"
+          },
+          "Create or Update Flex Consumption function app with details": {
+            "$ref": "./examples/CreateOrUpdateFunctionAppFlexConsumptionWithDetails.json"
+          },
+          "Create or Update web app": {
+            "$ref": "./examples/CreateOrUpdateWebApp.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Site"
@@ -8515,6 +9036,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update web app": {
+            "$ref": "./examples/UpdateWebApp.json"
+          }
         }
       },
       "delete": {
@@ -8573,6 +9099,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete Web app": {
+            "$ref": "./examples/DeleteWebApp.json"
+          }
         }
       }
     },
@@ -8622,6 +9153,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Analyze custom hostname for webapp.": {
+            "$ref": "./examples/AnalyzeCustomHostName.json"
+          }
         }
       }
     },
@@ -8669,6 +9205,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Apply web app slot config": {
+            "$ref": "./examples/ApplySlotConfig.json"
           }
         }
       }
@@ -8721,6 +9262,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Backup web app": {
+            "$ref": "./examples/BackupWebApp.json"
+          }
         }
       }
     },
@@ -8762,6 +9308,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List web app backups": {
+            "$ref": "./examples/ListWebAppBackups.json"
           }
         },
         "x-ms-pageable": {
@@ -8815,6 +9366,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get web app backup": {
+            "$ref": "./examples/GetWebAppBackup.json"
+          }
         }
       },
       "delete": {
@@ -8862,6 +9418,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete web app backup": {
+            "$ref": "./examples/DeleteWebAppBackup.json"
           }
         }
       }
@@ -8920,6 +9481,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get web app backup with secrets": {
+            "$ref": "./examples/GetWebAppBackupWithSecrets.json"
           }
         }
       }
@@ -8991,6 +9557,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Restore web app from backup": {
+            "$ref": "./examples/RestoreWebAppBackup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -9037,6 +9608,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Publishing Credentials Policies": {
+            "$ref": "./examples/ListPublishingCredentialsPolicies.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -9080,6 +9656,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get FTP Allowed": {
+            "$ref": "./examples/GetPublishingCredentialsPolicy_GetFtpAllowed.json"
           }
         }
       },
@@ -9130,6 +9711,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update FTP Allowed": {
+            "$ref": "./examples/UpdatePublishingCredentialsPolicy_UpdateFtpAllowed.json"
+          }
         }
       }
     },
@@ -9171,6 +9757,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get SCM Allowed": {
+            "$ref": "./examples/GetPublishingCredentialsPolicy.json"
           }
         }
       },
@@ -9221,6 +9812,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update SCM Allowed": {
+            "$ref": "./examples/UpdatePublishingCredentialsPolicy.json"
+          }
         }
       }
     },
@@ -9263,6 +9859,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Certificates by resource group": {
+            "$ref": "./examples/ListSiteCertificatesByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -9317,6 +9918,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Certificate": {
+            "$ref": "./examples/GetSiteCertificate.json"
           }
         }
       },
@@ -9382,6 +9988,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create Or Update Certificate": {
+            "$ref": "./examples/CreateOrUpdateSiteCertificate.json"
+          }
         }
       },
       "patch": {
@@ -9440,6 +10051,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch Certificate": {
+            "$ref": "./examples/PatchSiteCertificate.json"
+          }
         }
       },
       "delete": {
@@ -9489,6 +10105,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete Certificate": {
+            "$ref": "./examples/DeleteSiteCertificate.json"
+          }
         }
       }
     },
@@ -9530,6 +10151,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List web app configurations": {
+            "$ref": "./examples/ListWebAppConfigurations.json"
           }
         },
         "x-ms-pageable": {
@@ -9585,6 +10211,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update App Settings": {
+            "$ref": "./examples/UpdateAppSettings.json"
+          }
         }
       }
     },
@@ -9626,6 +10257,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List App Settings": {
+            "$ref": "./examples/ListAppSettings.json"
           }
         }
       }
@@ -9678,6 +10314,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update Auth Settings": {
+            "$ref": "./examples/UpdateAuthSettings.json"
+          }
         }
       }
     },
@@ -9720,6 +10361,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List Auth Settings": {
+            "$ref": "./examples/ListAuthSettings.json"
+          }
         }
       }
     },
@@ -9761,6 +10407,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Auth Settings without Secrets": {
+            "$ref": "./examples/GetAuthSettingsV2WithoutSecrets.json"
           }
         }
       },
@@ -9811,6 +10462,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update Auth Settings V2": {
+            "$ref": "./examples/UpdateAuthSettingsV2.json"
+          }
         }
       }
     },
@@ -9852,6 +10508,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Auth Settings V2": {
+            "$ref": "./examples/ListAuthSettingsV2.json"
           }
         }
       }
@@ -9903,6 +10564,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update Azure Storage Accounts": {
+            "$ref": "./examples/UpdateAzureStorageAccounts.json"
           }
         }
       }
@@ -10119,6 +10785,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Azure Key Vault references for app settings": {
+            "$ref": "./examples/GetKeyVaultReferencesForAppSettings.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -10169,6 +10840,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Key Vault app setting reference": {
+            "$ref": "./examples/GetKeyVaultReferencesForAppSetting.json"
           }
         }
       }
@@ -10819,6 +11495,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Site Config": {
+            "$ref": "./examples/GetSiteConfig.json"
+          }
         }
       },
       "put": {
@@ -10867,6 +11548,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update Site Config": {
+            "$ref": "./examples/UpdateSiteConfig.json"
           }
         }
       },
@@ -11448,6 +12134,14 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete workflow artifacts": {
+            "$ref": "./examples/DeleteDeployWorkflowArtifacts.json"
+          },
+          "Deploys workflow artifacts": {
+            "$ref": "./examples/PostDeployWorkflowArtifacts.json"
+          }
         }
       }
     },
@@ -11489,6 +12183,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Deployment Status": {
+            "$ref": "./examples/ListSiteDeploymentStatus.json"
           }
         },
         "x-ms-pageable": {
@@ -11554,6 +12253,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Deployment Status": {
+            "$ref": "./examples/GetSiteDeploymentStatus.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -11845,6 +12549,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get App Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponses.json"
+          },
+          "Get App Slot Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponsesSlot.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -11920,6 +12632,14 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get App Detector Response": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorResponse.json"
+          },
+          "Get App Slot Detector Response": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorResponseSlot.json"
+          }
         }
       }
     },
@@ -11961,6 +12681,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List App Diagnostic Categories": {
+            "$ref": "./examples/Diagnostics_ListSiteDiagnosticCategories.json"
+          },
+          "List App Slot Diagnostic Categories": {
+            "$ref": "./examples/Diagnostics_ListSiteDiagnosticCategoriesSlot.json"
           }
         },
         "x-ms-pageable": {
@@ -12014,6 +12742,14 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get App Diagnostic Category": {
+            "$ref": "./examples/Diagnostics_GetSiteDiagnosticCategory.json"
+          },
+          "Get App Slot Diagnostic Category": {
+            "$ref": "./examples/Diagnostics_GetSiteDiagnosticCategorySlot.json"
+          }
         }
       }
     },
@@ -12062,6 +12798,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List App Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalyses.json"
+          },
+          "List App Slot Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalysesSlot.json"
           }
         },
         "x-ms-pageable": {
@@ -12121,6 +12865,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Analysis": {
+            "$ref": "./examples/Diagnostics_GetSiteAnalysis.json"
+          },
+          "Get App Slot Analysis": {
+            "$ref": "./examples/Diagnostics_GetSiteAnalysisSlot.json"
           }
         }
       }
@@ -12202,6 +12954,14 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Execute site analysis": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteAnalysis.json"
+          },
+          "Execute site slot analysis": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteAnalysisSlot.json"
+          }
         }
       }
     },
@@ -12250,6 +13010,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List App Detectors": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectors.json"
+          },
+          "List App Slot Detectors": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorsSlot.json"
           }
         },
         "x-ms-pageable": {
@@ -12309,6 +13077,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Detector": {
+            "$ref": "./examples/Diagnostics_GetSiteDetector.json"
+          },
+          "Get App Slot Detector": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorSlot.json"
           }
         }
       }
@@ -12389,6 +13165,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Execute site detector": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteDetector.json"
+          },
+          "Execute site slot detector": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteDetectorSlot.json"
           }
         }
       }
@@ -13908,6 +14692,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Regenerate the callback URL access key for request triggers": {
+            "$ref": "./examples/Workflows_RegenerateAccessKey.json"
+          }
         }
       }
     },
@@ -13972,6 +14761,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List workflow runs": {
+            "$ref": "./examples/WorkflowRuns_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -14028,6 +14822,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a run for a workflow": {
+            "$ref": "./examples/WorkflowRuns_Get.json"
           }
         }
       }
@@ -14100,6 +14899,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List a workflow run actions": {
+            "$ref": "./examples/WorkflowRunActions_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -14164,6 +14968,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a workflow run action": {
+            "$ref": "./examples/WorkflowRunActions_Get.json"
+          }
         }
       }
     },
@@ -14225,6 +15034,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List expression traces": {
+            "$ref": "./examples/WorkflowRunActions_ListExpressionTraces.json"
           }
         },
         "x-ms-pageable": {
@@ -14291,6 +15105,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List repetitions": {
+            "$ref": "./examples/WorkflowRunActionRepetitions_List.json"
           }
         },
         "x-ms-pageable": {
@@ -14364,6 +15183,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a repetition": {
+            "$ref": "./examples/WorkflowRunActionRepetitions_Get.json"
+          }
         }
       }
     },
@@ -14432,6 +15256,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List expression traces for a repetition": {
+            "$ref": "./examples/WorkflowRunActionRepetitions_ListExpressionTraces.json"
           }
         },
         "x-ms-pageable": {
@@ -14505,6 +15334,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List repetition request history": {
+            "$ref": "./examples/WorkflowRunActionRepetitionsRequestHistories_List.json"
           }
         },
         "x-ms-pageable": {
@@ -14585,6 +15419,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a repetition request history": {
+            "$ref": "./examples/WorkflowRunActionRepetitionsRequestHistories_Get.json"
+          }
         }
       }
     },
@@ -14646,6 +15485,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List the scoped repetitions": {
+            "$ref": "./examples/WorkflowRunActionScopeRepetitions_List.json"
           }
         },
         "x-ms-pageable": {
@@ -14719,6 +15563,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a scoped repetition": {
+            "$ref": "./examples/WorkflowRunActionScopeRepetitions_Get.json"
+          }
         }
       }
     },
@@ -14770,6 +15619,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a workflow run": {
+            "$ref": "./examples/WorkflowRuns_Cancel.json"
           }
         }
       }
@@ -14835,6 +15689,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List workflow triggers": {
+            "$ref": "./examples/WorkflowTriggers_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -14891,6 +15750,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workflow trigger": {
+            "$ref": "./examples/WorkflowTriggers_Get.json"
           }
         }
       }
@@ -14963,6 +15827,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List a workflow trigger history": {
+            "$ref": "./examples/WorkflowTriggerHistories_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -15026,6 +15895,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workflow trigger history": {
+            "$ref": "./examples/WorkflowTriggerHistories_Get.json"
           }
         }
       }
@@ -15098,6 +15972,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Resubmit a workflow run based on the trigger history": {
+            "$ref": "./examples/WorkflowTriggerHistories_Resubmit.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -15155,6 +16034,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the callback URL for a trigger": {
+            "$ref": "./examples/WorkflowTriggers_ListCallbackUrl.json"
           }
         }
       }
@@ -15223,6 +16107,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Run a workflow trigger": {
+            "$ref": "./examples/WorkflowTriggers_Run.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -15281,6 +16170,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get trigger schema": {
+            "$ref": "./examples/WorkflowTriggers_GetSchemaJson.json"
+          }
         }
       }
     },
@@ -15334,6 +16228,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a workflow": {
+            "$ref": "./examples/Workflows_Validate.json"
           }
         }
       }
@@ -15392,6 +16291,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List a workflows versions": {
+            "$ref": "./examples/WorkflowVersions_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -15448,6 +16352,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workflow version": {
+            "$ref": "./examples/WorkflowVersions_Get.json"
           }
         }
       }
@@ -16071,6 +16980,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get site instance info": {
+            "$ref": "./examples/GetSiteInstanceInfo.json"
           }
         }
       }
@@ -16762,6 +17676,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List the Instance Workflows Configuration Connections": {
+            "$ref": "./examples/ListWorkflowsConfigurationConnections.json"
+          }
         }
       }
     },
@@ -16803,6 +17722,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List backups": {
+            "$ref": "./examples/ListSlotBackups.json"
           }
         },
         "x-ms-pageable": {
@@ -17402,6 +18326,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces.json"
+          }
         }
       }
     },
@@ -17462,6 +18391,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation.json"
           }
         }
       }
@@ -17612,6 +18546,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/NetworkTraceArray"
@@ -17657,6 +18596,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace.json"
           }
         }
       }
@@ -17709,6 +18653,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces_SlotV2.json"
           }
         }
       }
@@ -17770,6 +18719,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation_V2.json"
           }
         }
       }
@@ -18339,6 +19293,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a private endpoint connection for a site.": {
+            "$ref": "./examples/GetSitePrivateEndpointConnection.json"
+          }
         }
       },
       "put": {
@@ -18406,6 +19365,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection for a site.": {
+            "$ref": "./examples/ApproveRejectSitePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -18477,6 +19441,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a private endpoint connection for a site.": {
+            "$ref": "./examples/DeleteSitePrivateEndpointConnection.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/unknown"
@@ -18522,6 +19491,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources of a site": {
+            "$ref": "./examples/GetSitePrivateLinkResources_WebApps.json"
           }
         }
       }
@@ -19541,6 +20515,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List ResourceHealthMetadata for a site": {
+            "$ref": "./examples/ListResourceHealthMetadataBySite.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -19584,6 +20563,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceHealthMetadata": {
+            "$ref": "./examples/GetResourceHealthMetadataBySite.json"
           }
         }
       }
@@ -20308,6 +21292,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Web App Slots": {
+            "$ref": "./examples/ListWebAppSlots.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -20362,6 +21351,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Web App Slot": {
+            "$ref": "./examples/GetWebAppSlot.json"
           }
         }
       },
@@ -20432,6 +21426,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Clone web app slot": {
+            "$ref": "./examples/CloneWebAppSlot.json"
+          },
+          "Create or Update Web App Slot": {
+            "$ref": "./examples/CreateOrUpdateWebAppSlot.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Site"
@@ -20498,6 +21500,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update Web App Slot": {
+            "$ref": "./examples/UpdateWebAppSlot.json"
+          }
         }
       },
       "delete": {
@@ -20563,6 +21570,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete Web App Slot": {
+            "$ref": "./examples/DeleteWebAppSlot.json"
+          }
         }
       }
     },
@@ -20618,6 +21630,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze custom hostname for slot": {
+            "$ref": "./examples/AnalyzeCustomHostNameSlot.json"
           }
         }
       }
@@ -21089,6 +22106,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Publishing Credentials Policies": {
+            "$ref": "./examples/ListPublishingCredentialsPoliciesSlot.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -21138,6 +22160,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get FTP Allowed": {
+            "$ref": "./examples/GetPublishingCredentialsPolicySlot_FtpAllowedSlot.json"
           }
         }
       },
@@ -21194,6 +22221,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update FTP Allowed": {
+            "$ref": "./examples/UpdatePublishingCredentialsPolicySlot_UpdateFtpAllowedSlot.json"
+          }
         }
       }
     },
@@ -21241,6 +22273,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get SCM Allowed": {
+            "$ref": "./examples/GetPublishingCredentialsPolicySlot.json"
           }
         }
       },
@@ -21297,6 +22334,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update SCM Allowed": {
+            "$ref": "./examples/UpdatePublishingCredentialsPolicySlot.json"
+          }
         }
       }
     },
@@ -21346,6 +22388,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Certificates by resource group for a slot": {
+            "$ref": "./examples/ListSiteCertificatesByResourceGroupSlot.json"
           }
         },
         "x-ms-pageable": {
@@ -21407,6 +22454,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Site Certificate for a slot": {
+            "$ref": "./examples/GetSiteCertificateSlot.json"
           }
         }
       },
@@ -21479,6 +22531,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create Or Update Certificate for slot": {
+            "$ref": "./examples/CreateOrUpdateSiteCertificateSlot.json"
+          }
         }
       },
       "patch": {
@@ -21544,6 +22601,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch Certificate for slot": {
+            "$ref": "./examples/PatchSiteCertificateSlot.json"
+          }
         }
       },
       "delete": {
@@ -21599,6 +22661,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Certificate for slot": {
+            "$ref": "./examples/DeleteSiteCertificateSlot.json"
           }
         }
       }
@@ -22327,6 +23394,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Azure Key Vault references for app settings for slot": {
+            "$ref": "./examples/GetKeyVaultReferencesForAppSettingsSlot.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -22383,6 +23455,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Key Vault slot app setting reference": {
+            "$ref": "./examples/GetKeyVaultReferencesForAppSettingSlot.json"
           }
         }
       }
@@ -23744,6 +24821,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Deploys workflow artifacts slot": {
+            "$ref": "./examples/PostDeployWorkflowArtifactsSlot.json"
+          }
         }
       }
     },
@@ -23792,6 +24874,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Deployment Status Slot": {
+            "$ref": "./examples/ListSiteDeploymentStatusSlot.json"
           }
         },
         "x-ms-pageable": {
@@ -23864,6 +24951,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Deployment Status Slot": {
+            "$ref": "./examples/GetSiteDeploymentStatusSlot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -24197,6 +25289,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get App Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponses_Slot.json"
+          },
+          "Get App Slot Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponsesSlot_Slot.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -24279,6 +25379,14 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get App Detector Response": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorResponse_Slot.json"
+          },
+          "Get App Slot Detector Response": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorResponseSlot_Slot.json"
+          }
         }
       }
     },
@@ -24327,6 +25435,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List App Diagnostic Categories": {
+            "$ref": "./examples/Diagnostics_ListSiteDiagnosticCategories_Slot.json"
+          },
+          "List App Slot Diagnostic Categories": {
+            "$ref": "./examples/Diagnostics_ListSiteDiagnosticCategoriesSlot_Slot.json"
           }
         },
         "x-ms-pageable": {
@@ -24387,6 +25503,14 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get App Diagnostic Category": {
+            "$ref": "./examples/Diagnostics_GetSiteDiagnosticCategory_Slot.json"
+          },
+          "Get App Slot Diagnostic Category": {
+            "$ref": "./examples/Diagnostics_GetSiteDiagnosticCategorySlot_Slot.json"
+          }
         }
       }
     },
@@ -24442,6 +25566,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List App Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalyses_Slot.json"
+          },
+          "List App Slot Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalysesSlot_Slot.json"
           }
         },
         "x-ms-pageable": {
@@ -24508,6 +25640,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Analysis": {
+            "$ref": "./examples/Diagnostics_GetSiteAnalysis_Slot.json"
+          },
+          "Get App Slot Analysis": {
+            "$ref": "./examples/Diagnostics_GetSiteAnalysisSlot_Slot.json"
           }
         }
       }
@@ -24596,6 +25736,14 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Execute site analysis": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteAnalysis_Slot.json"
+          },
+          "Execute site slot analysis": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteAnalysisSlot_Slot.json"
+          }
         }
       }
     },
@@ -24651,6 +25799,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List App Detectors": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectors_Slot.json"
+          },
+          "List App Slot Detectors": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorsSlot_Slot.json"
           }
         },
         "x-ms-pageable": {
@@ -24717,6 +25873,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Detector": {
+            "$ref": "./examples/Diagnostics_GetSiteDetector_Slot.json"
+          },
+          "Get App Slot Detector": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorSlot_Slot.json"
           }
         }
       }
@@ -24804,6 +25968,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Execute site detector": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteDetector_Slot.json"
+          },
+          "Execute site slot detector": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteDetectorSlot_Slot.json"
           }
         }
       }
@@ -27082,6 +28254,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get site instance info": {
+            "$ref": "./examples/GetSiteInstanceInfo_Slot.json"
+          }
         }
       }
     },
@@ -27856,6 +29033,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List the Instance Workflows Configuration Connections Slot": {
+            "$ref": "./examples/ListWorkflowsConfigurationConnections_Slot.json"
+          }
         }
       }
     },
@@ -27904,6 +29086,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List backups": {
+            "$ref": "./examples/ListSiteBackupsSlot.json"
           }
         },
         "x-ms-pageable": {
@@ -28334,6 +29521,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces_Slot.json"
+          }
         }
       }
     },
@@ -28401,6 +29593,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation_Slot.json"
           }
         }
       }
@@ -28565,6 +29762,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation_Slot.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/NetworkTraceArray"
@@ -28617,6 +29819,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace_Slot.json"
           }
         }
       }
@@ -28676,6 +29883,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces_GetNetworkTracesSlotV2.json"
           }
         }
       }
@@ -28744,6 +29956,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation_SlotV2.json"
           }
         }
       }
@@ -29397,6 +30614,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a private endpoint connection for a site.": {
+            "$ref": "./examples/GetSitePrivateEndpointConnectionSlot.json"
+          }
         }
       },
       "put": {
@@ -29471,6 +30693,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection for a site.": {
+            "$ref": "./examples/ApproveRejectSitePrivateEndpointConnectionSlot.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -29549,6 +30776,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a private endpoint connection for a site.": {
+            "$ref": "./examples/DeleteSitePrivateEndpointConnectionSlot.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/unknown"
@@ -29601,6 +30833,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources of a site": {
+            "$ref": "./examples/GetSitePrivateLinkResourcesSlot.json"
           }
         }
       }
@@ -30413,6 +31650,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List ResourceHealthMetadata for a site": {
+            "$ref": "./examples/ListResourceHealthMetadataBySite_Slot.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -30463,6 +31705,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceHealthMetadata": {
+            "$ref": "./examples/GetResourceHealthMetadataBySite_Slot.json"
           }
         }
       }
@@ -31889,6 +33136,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation_StartNetworkTraceSlot.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/NetworkTraceArray"
@@ -31987,6 +33239,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace_StopNetworkTraceSlot.json"
           }
         }
       }
@@ -33146,6 +34403,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List the workflows Slot": {
+            "$ref": "./examples/ListWorkflows_Slot.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -33210,6 +34472,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GET a workflow Slot": {
+            "$ref": "./examples/GetWorkflow_Slot.json"
           }
         }
       }
@@ -33802,6 +35069,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation_StartNetworkTrace.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/NetworkTraceArray"
@@ -33886,6 +35158,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace_StopNetworkTrace.json"
           }
         }
       }
@@ -34315,6 +35592,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the machine key for a site": {
+            "$ref": "./examples/UpdateMachineKey.json"
           }
         }
       }
@@ -34945,6 +36227,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List the workflows": {
+            "$ref": "./examples/ListWorkflows.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -35003,6 +36290,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GET a workflow": {
+            "$ref": "./examples/GetWorkflow.json"
+          }
         }
       }
     },
@@ -35037,6 +36329,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get static sites for a resource group": {
+            "$ref": "./examples/GetStaticSites.json"
           }
         },
         "x-ms-pageable": {
@@ -35082,6 +36379,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details for a static site": {
+            "$ref": "./examples/GetStaticSite.json"
           }
         }
       },
@@ -35145,6 +36447,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a static site": {
+            "$ref": "./examples/CreateOrUpdateStaticSite.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StaticSiteARMResource"
@@ -35204,6 +36511,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch a static site": {
+            "$ref": "./examples/PatchStaticSite.json"
+          }
         }
       },
       "delete": {
@@ -35256,6 +36568,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a static site": {
+            "$ref": "./examples/DeleteStaticSite.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -35306,6 +36623,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List users for a static site": {
+            "$ref": "./examples/ListStaticSiteUsers.json"
           }
         },
         "x-ms-pageable": {
@@ -35372,6 +36694,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update a user for a static site": {
+            "$ref": "./examples/UpdateStaticSiteUser.json"
+          }
         }
       },
       "delete": {
@@ -35420,6 +36747,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete a user for a static site": {
+            "$ref": "./examples/DeleteStaticSiteUser.json"
+          }
         }
       }
     },
@@ -35461,6 +36793,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the basic auth properties for a static site.": {
+            "$ref": "./examples/ListStaticSiteBasicAuth.json"
           }
         },
         "x-ms-pageable": {
@@ -35526,6 +36863,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the basic auth properties for a static site.": {
+            "$ref": "./examples/GetStaticSiteBasicAuth.json"
           }
         }
       },
@@ -35596,6 +36938,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates or updates basic auth properties for a static site.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteBasicAuth.json"
+          }
         }
       }
     },
@@ -35637,6 +36984,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all builds for a static site": {
+            "$ref": "./examples/GetStaticSiteBuilds.json"
           }
         },
         "x-ms-pageable": {
@@ -35690,6 +37042,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a static site build": {
+            "$ref": "./examples/GetStaticSiteBuild.json"
           }
         }
       },
@@ -35754,6 +37111,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a static site build": {
+            "$ref": "./examples/DeleteStaticSiteBuild.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -35816,6 +37178,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates or updates the function app settings of a static site build.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteBuildAppSettings.json"
+          }
         }
       }
     },
@@ -35875,6 +37242,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates or updates the function app settings of a static site build.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteBuildFunctionAppSettings.json"
+          }
         }
       }
     },
@@ -35924,6 +37296,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List overviews of database connections for the static site build.": {
+            "$ref": "./examples/GetStaticSiteBuildDatabaseConnections.json"
           }
         },
         "x-ms-pageable": {
@@ -35985,6 +37362,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get overview of database connections for the static site build.": {
+            "$ref": "./examples/GetStaticSiteBuildDatabaseConnection.json"
           }
         }
       },
@@ -36051,6 +37433,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update a database connection for a static site build": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteBuildDatabaseConnection.json"
+          }
         }
       },
       "patch": {
@@ -36116,6 +37503,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch a database connection for a static site build": {
+            "$ref": "./examples/PatchStaticSiteBuildDatabaseConnection.json"
+          }
         }
       },
       "delete": {
@@ -36171,6 +37563,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a database connection from a static site build.": {
+            "$ref": "./examples/DeleteStaticSiteBuildDatabaseConnection.json"
           }
         }
       }
@@ -36230,6 +37627,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get details of database connections for the static site build.": {
+            "$ref": "./examples/GetStaticSiteBuildDatabaseConnectionWithDetails.json"
+          }
         }
       }
     },
@@ -36279,6 +37681,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the functions of a particular static site build": {
+            "$ref": "./examples/ListStaticSiteBuildFunctions.json"
           }
         },
         "x-ms-pageable": {
@@ -36331,6 +37738,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the linked backends registered with a static site build.": {
+            "$ref": "./examples/GetLinkedBackendsForStaticSiteBuild.json"
           }
         },
         "x-ms-pageable": {
@@ -36390,6 +37802,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the linked backend registered with a static site build by name.": {
+            "$ref": "./examples/GetLinkedBackendForStaticSiteBuild.json"
           }
         }
       },
@@ -36461,6 +37878,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Link a backend to a static site build": {
+            "$ref": "./examples/LinkBackendToStaticSiteBuild.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StaticSiteLinkedBackendARMResource"
@@ -36525,6 +37947,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Unlink a backend from a static site build.": {
+            "$ref": "./examples/UnlinkBackendFromStaticSiteBuild.json"
           }
         }
       }
@@ -36603,6 +38030,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validate if backend can be linked to static site build.": {
+            "$ref": "./examples/ValidateLinkedBackendForStaticSiteBuild.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -36656,6 +38088,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get app settings of a static site build": {
+            "$ref": "./examples/ListStaticSiteBuildAppSettings.json"
+          }
         }
       }
     },
@@ -36705,6 +38142,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get function app settings of a static site build": {
+            "$ref": "./examples/ListStaticSiteBuildFunctionAppSettings.json"
           }
         }
       }
@@ -36757,6 +38199,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List full details of database connections for the static site build.": {
+            "$ref": "./examples/GetStaticSiteBuildDatabaseConnectionsWithDetails.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -36807,6 +38254,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the user provided function apps registered with a static site build.": {
+            "$ref": "./examples/GetUserProvidedFunctionAppsForStaticSiteBuild.json"
           }
         },
         "x-ms-pageable": {
@@ -36866,6 +38318,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the user provided function app registered with a static site build.": {
+            "$ref": "./examples/GetUserProvidedFunctionAppForStaticSiteBuild.json"
           }
         }
       },
@@ -36950,6 +38407,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Register a user provided function app with a static site build": {
+            "$ref": "./examples/RegisterUserProvidedFunctionAppWithStaticSiteBuild.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
@@ -37007,6 +38469,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Detach the user provided function app from the static site build.": {
+            "$ref": "./examples/DetachUserProvidedFunctionAppFromStaticSiteBuild.json"
           }
         }
       }
@@ -37079,6 +38546,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Deploy a site from a zipped package to a particular static site build": {
+            "$ref": "./examples/StaticSiteBuildZipDeploy.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -37133,6 +38605,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates or updates the app settings of a static site.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteAppSettings.json"
+          }
         }
       }
     },
@@ -37183,6 +38660,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the function app settings of a static site.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteFunctionAppSettings.json"
           }
         }
       }
@@ -37235,6 +38717,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create an invitation link for a user for a static site": {
+            "$ref": "./examples/CreateUserRolesInvitationLink.json"
+          }
         }
       }
     },
@@ -37276,6 +38763,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List custom domains for a static site": {
+            "$ref": "./examples/GetStaticSiteCustomDomains.json"
           }
         },
         "x-ms-pageable": {
@@ -37328,6 +38820,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get custom domain for a static site": {
+            "$ref": "./examples/GetStaticSiteCustomDomain.json"
           }
         }
       },
@@ -37398,6 +38895,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a custom domain for a static site": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteCustomDomain.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StaticSiteCustomDomainOverviewARMResource"
@@ -37459,6 +38961,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a custom domain for a static site": {
+            "$ref": "./examples/DeleteStaticSiteCustomDomain.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -37534,6 +39041,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validate a custom domain for a static site": {
+            "$ref": "./examples/ValidateStaticSiteCustomDomain.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -37578,6 +39090,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List overviews of database connections for the static site.": {
+            "$ref": "./examples/GetStaticSiteDatabaseConnections.json"
           }
         },
         "x-ms-pageable": {
@@ -37631,6 +39148,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get overview of database connections for the static site.": {
+            "$ref": "./examples/GetStaticSiteDatabaseConnection.json"
           }
         }
       },
@@ -37689,6 +39211,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update a database connection for a static site": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteDatabaseConnection.json"
+          }
         }
       },
       "patch": {
@@ -37746,6 +39273,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch a database connection for a static site": {
+            "$ref": "./examples/PatchStaticSiteDatabaseConnection.json"
+          }
         }
       },
       "delete": {
@@ -37793,6 +39325,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a database connection from a static site.": {
+            "$ref": "./examples/DeleteStaticSiteDatabaseConnection.json"
           }
         }
       }
@@ -37843,6 +39380,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of database connections for the static site.": {
+            "$ref": "./examples/GetStaticSiteDatabaseConnectionWithDetails.json"
           }
         }
       }
@@ -37898,6 +39440,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Detach a static site": {
+            "$ref": "./examples/DetachStaticSite.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -37944,6 +39491,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the functions of a static site": {
+            "$ref": "./examples/ListStaticSiteFunctions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -37987,6 +39539,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the linked backends registered with a static site.": {
+            "$ref": "./examples/GetLinkedBackendsForStaticSite.json"
           }
         },
         "x-ms-pageable": {
@@ -38039,6 +39596,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the linked backend registered with a static site by name.": {
+            "$ref": "./examples/GetLinkedBackendForStaticSite.json"
           }
         }
       },
@@ -38103,6 +39665,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Link a backend to a static site": {
+            "$ref": "./examples/LinkBackendToStaticSite.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StaticSiteLinkedBackendARMResource"
@@ -38160,6 +39727,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Unlink a backend from a static site.": {
+            "$ref": "./examples/UnlinkBackendFromStaticSite.json"
           }
         }
       }
@@ -38231,6 +39803,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validate if backend can be linked to static site.": {
+            "$ref": "./examples/ValidateLinkedBackendForStaticSite.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -38276,6 +39853,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get app settings of a static site": {
+            "$ref": "./examples/ListStaticSiteAppSettings.json"
+          }
         }
       }
     },
@@ -38317,6 +39899,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the configured roles for a static site": {
+            "$ref": "./examples/ListStaticSiteConfiguredRoles.json"
           }
         }
       }
@@ -38360,6 +39947,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get function app settings of a static site": {
+            "$ref": "./examples/ListStaticSiteFunctionAppSettings.json"
+          }
         }
       }
     },
@@ -38402,6 +39994,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List secrets for a static site": {
+            "$ref": "./examples/ListStaticSiteSecrets.json"
+          }
         }
       }
     },
@@ -38443,6 +40040,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of private endpoint connections associated with a site.": {
+            "$ref": "./examples/GetSitePrivateEndpointConnectionList.json"
           }
         },
         "x-ms-pageable": {
@@ -38495,6 +40097,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private endpoint connection for a site.": {
+            "$ref": "./examples/GetSitePrivateEndpointConnection_StaticSites.json"
           }
         }
       },
@@ -38563,6 +40170,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection for a site.": {
+            "$ref": "./examples/ApproveRejectSitePrivateEndpointConnection_StaticSites.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -38634,6 +40246,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a private endpoint connection for a site.": {
+            "$ref": "./examples/DeleteSitePrivateEndpointConnection_StaticSites.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/unknown"
@@ -38679,6 +40296,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources of a site": {
+            "$ref": "./examples/GetSitePrivateLinkResources.json"
           }
         }
       }
@@ -38728,6 +40350,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Reset the api key for a static site": {
+            "$ref": "./examples/ResetStaticSiteApiKey.json"
+          }
         }
       }
     },
@@ -38769,6 +40396,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List full details of database connections for the static site.": {
+            "$ref": "./examples/GetStaticSiteDatabaseConnectionsWithDetails.json"
           }
         },
         "x-ms-pageable": {
@@ -38814,6 +40446,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the user provided function apps registered with a static site.": {
+            "$ref": "./examples/GetUserProvidedFunctionAppsForStaticSite.json"
           }
         },
         "x-ms-pageable": {
@@ -38866,6 +40503,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of the user provided function app registered with a static site.": {
+            "$ref": "./examples/GetUserProvidedFunctionAppForStaticSite.json"
           }
         }
       },
@@ -38943,6 +40585,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Register a user provided function app with a static site": {
+            "$ref": "./examples/RegisterUserProvidedFunctionAppWithStaticSite.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
@@ -38993,6 +40640,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Detach the user provided function app from the static site.": {
+            "$ref": "./examples/DetachUserProvidedFunctionAppFromStaticSite.json"
           }
         }
       }
@@ -39055,6 +40707,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deploy a site from a zipped package": {
+            "$ref": "./examples/StaticSiteZipDeploy.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -41168,8 +42825,7 @@
       "x-ms-enum": {
         "name": "BackupItemStatus",
         "modelAsString": false
-      },
-      "readOnly": true
+      }
     },
     "BackupRequest": {
       "type": "object",
@@ -42221,8 +43877,7 @@
             "description": "Operation was canceled."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "BuilderAppOperationStatus": {
       "type": "object",
@@ -42315,7 +43970,7 @@
       "description": "Mutable builder app properties accepted by PATCH.",
       "properties": {
         "source": {
-          "$ref": "#/definitions/BuilderAppSource",
+          "$ref": "#/definitions/BuilderAppSourcePatch",
           "description": "Attach or update the same repository connection. Changing an attached repository identity is unsupported."
         },
         "versionConfiguration": {
@@ -42442,8 +44097,7 @@
             "description": "The resource is being deleted."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "BuilderAppRedeployRequest": {
       "type": "object",
@@ -42620,6 +44274,56 @@
             "description": "The repository is connected and authorized."
           }
         ]
+      }
+    },
+    "BuilderAppSourcePatch": {
+      "type": "object",
+      "description": "Repository fields to merge; omitted fields preserve the current source. Attaching source requires its complete identity and reference.",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/BuilderAppSourceType",
+          "description": "Source provider; existing connections cannot change provider."
+        },
+        "id": {
+          "type": "string",
+          "description": "Provider-stable repository identifier, represented as a string. Cannot replace an attached repository."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Provider-canonical repository name, such as owner/repository."
+        },
+        "reference": {
+          "type": "string",
+          "description": "Moving reference, such as a branch or tag, resolved when deploying."
+        },
+        "rootDirectory": {
+          "type": "string",
+          "description": "Repository-relative root for the app manifest and component paths."
+        },
+        "autoDeploy": {
+          "type": "boolean",
+          "description": "Whether pushes to the selected reference automatically create deployments."
+        },
+        "authorizationToken": {
+          "type": "string",
+          "format": "password",
+          "description": "Short-lived source authorization assertion. Mutually exclusive with repositoryToken; never returned.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "repositoryToken": {
+          "type": "string",
+          "format": "password",
+          "description": "GitHub user credential used only during this write. Mutually exclusive with authorizationToken; never returned.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
       }
     },
     "BuilderAppSourceType": {
@@ -44273,8 +45977,7 @@
       "x-ms-enum": {
         "name": "CustomDnsSuffixProvisioningState",
         "modelAsString": false
-      },
-      "readOnly": true
+      }
     },
     "CustomDomainStatus": {
       "type": "string",
@@ -48449,8 +50152,7 @@
       "x-ms-enum": {
         "name": "KubeEnvironmentProvisioningState",
         "modelAsString": false
-      },
-      "readOnly": true
+      }
     },
     "LegacyMicrosoftAccount": {
       "type": "object",
@@ -49850,8 +51552,7 @@
       "x-ms-enum": {
         "name": "OperationStatus",
         "modelAsString": false
-      },
-      "readOnly": true
+      }
     },
     "OutboundEnvironmentEndpoint": {
       "type": "object",
@@ -50962,8 +52663,7 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": false
-      },
-      "readOnly": true
+      }
     },
     "ProxyOnlyResource": {
       "type": "object",
@@ -59042,8 +60742,7 @@
             "value": "InProgress"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "WorkflowResource": {
       "type": "object",
@@ -59595,8 +61294,7 @@
             "value": "Ignored"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "WorkflowTrigger": {
       "type": "object",
@@ -59958,8 +61656,7 @@
             "value": "Completed"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "WorkflowTriggerRecurrence": {
       "type": "object",

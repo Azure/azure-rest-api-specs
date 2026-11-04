@@ -92,6 +92,10 @@ model BuilderAppSource {
   repositoryToken?: string;
 }
 
+/** Repository fields to merge; omitted fields preserve the current source. Attaching source requires its complete identity and reference. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppSourcePatch is OptionalProperties<BuilderAppSource>;
+
 /** Supported source providers. */
 @added(Versions.v2026_09_01_preview)
 union BuilderAppSourceType {
@@ -375,7 +379,7 @@ model BuilderAppPatch {
 @added(Versions.v2026_09_01_preview)
 model BuilderAppPatchProperties {
   /** Attach or update the same repository connection. Changing an attached repository identity is unsupported. */
-  source?: BuilderAppSource;
+  source?: BuilderAppSourcePatch;
 
   /** Variables to capture in the next application version. */
   versionConfiguration?: BuilderAppPatchVersionConfiguration;

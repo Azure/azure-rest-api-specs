@@ -35,6 +35,14 @@ union BuilderAppOperationState {
 model BuilderAppOperationStatus
   is ArmOperationStatus<StatusValues = BuilderAppOperationState>;
 
+/** ARM error returned when a shared operation has failed or been canceled. */
+@added(Versions.v2026_09_01_preview)
+@error
+model BuilderAppOperationConflictResult {
+  ...ConflictResponse;
+  ...ErrorResponse;
+}
+
 /** Location-scoped polling that remains available after the app resource is deleted. */
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations
@@ -71,7 +79,7 @@ interface BuilderAppsAsyncOperations {
     | ArmResponse<BuilderApp>
     | ArmAcceptedLroResponse
     | NoContentResponse
-    | (ConflictResponse & ErrorResponse)
+    | BuilderAppOperationConflictResult
     | DefaultErrorResponse;
 }
 
