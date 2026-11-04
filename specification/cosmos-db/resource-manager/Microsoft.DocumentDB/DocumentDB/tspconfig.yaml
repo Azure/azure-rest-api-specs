@@ -64,6 +64,14 @@ options:
     namespace: "Azure.Provisioning.CosmosDB"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     api-version: "2026-07-15"
+  "@azure-tools/typespec-ts-provisioning":
+    emitter-output-dir: "{output-dir}/{service-dir}/provisioning-cosmosdb"
+    azure-sdk-for-js: true
+    generate-test: true
+    package-details:
+      name: "@azure/provisioning-cosmosdb"
+      description: "Azure Provisioning constructs for cosmosdb"
+    api-version: "2026-03-15"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

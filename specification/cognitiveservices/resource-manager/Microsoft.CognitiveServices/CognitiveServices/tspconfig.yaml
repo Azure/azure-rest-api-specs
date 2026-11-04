@@ -53,6 +53,19 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-ts-provisioning":
+    emitter-output-dir: "{output-dir}/{service-dir}/provisioning-cognitiveservices"
+    azure-sdk-for-js: true
+    generate-test: true
+    package-details:
+      name: "@azure/provisioning-cognitiveservices"
+      description: "Azure Provisioning constructs for cognitive-services"
+    api-version: "2026-07-01"
+    resource-overrides:
+      - resourceType: "Microsoft.CognitiveServices/accounts"
+        namingRules:
+          abbreviation: "cog"
+          scope: "resourceGroup"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

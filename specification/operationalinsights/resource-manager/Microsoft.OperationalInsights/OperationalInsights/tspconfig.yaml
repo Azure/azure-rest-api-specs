@@ -50,6 +50,14 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-ts-provisioning":
+    emitter-output-dir: "{output-dir}/{service-dir}/provisioning-operationalinsights"
+    azure-sdk-for-js: true
+    generate-test: true
+    package-details:
+      name: "@azure/provisioning-operationalinsights"
+      description: "Azure Log Analytics constructs for the Azure Provisioning library"
+    api-version: "2026-03-01"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
