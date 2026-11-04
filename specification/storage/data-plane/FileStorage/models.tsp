@@ -2008,6 +2008,11 @@ alias ChangeFeedResponseHeaders = {
   /** The blob container in which change feed records are stored, in the format "$fileschangefeed-<guid>". */
   @header("x-ms-file-blob-container-for-xfiles-change-feed")
   changeFeedBlobContainerName?: string;
+
+  /** The time at which change feed was last enabled on the share. */
+  @encode("rfc7231")
+  @header("x-ms-file-change-feed-last-enabled-time")
+  changeFeedLastEnabledTime?: utcDateTime;
 };
 
 /** Destination lease ID parameter. */
