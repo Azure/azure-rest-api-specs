@@ -147,8 +147,10 @@ model AadAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
 /** A connection returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 @parentResource(Account)
-model ConnectionPropertiesV2BasicResourceRead
-  is Azure.ResourceManager.ProxyResource<ConnectionPropertiesV2Read, false> {
+model ConnectionPropertiesV2BasicResourceRead is Azure.ResourceManager.ProxyResource<
+  ConnectionPropertiesV2Read,
+  false
+> {
   /** Friendly name of the connection. */
   @key("connectionName")
   @segment("connections")
