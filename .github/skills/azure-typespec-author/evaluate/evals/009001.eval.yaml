@@ -13,7 +13,7 @@ defaults:
 scoring:
   threshold: 1
 stimuli:
-  - name: 008001-offer-after-successful-authoring
+  - name: 009001-offer-after-successful-authoring
     tags: { suite: assessment, mode: forced }
     prompt: |
       @azure-typespec-author Decide only the next workflow action. TypeSpec edits in
@@ -49,7 +49,7 @@ stimuli:
       - type: output-matches
         config:
           pattern: '"choices"\s*:\s*\[\s*"Run fast assessment \(Recommended\)"\s*,\s*"Skip"\s*\]'
-  - name: 008001-respect-explicit-assessment-opt-out
+  - name: 009001-respect-explicit-assessment-opt-out
     tags: { suite: assessment, mode: forced }
     prompt: |
       @azure-typespec-author Decide only the next workflow action. TypeSpec edits,
@@ -70,7 +70,7 @@ stimuli:
       - type: output-matches
         config:
           pattern: '"assessmentSkipped"\s*:\s*true'
-  - name: 008001-validation-blocker-prevents-offer
+  - name: 009001-validation-blocker-prevents-offer
     tags: { suite: assessment, mode: forced }
     prompt: |
       @azure-typespec-author Decide only the next workflow action. TypeSpec edits
@@ -91,7 +91,7 @@ stimuli:
       - type: output-matches
         config:
           pattern: '"offerAssessment"\s*:\s*false'
-  - name: 008001-acceptance-does-not-confirm-baseline
+  - name: 009001-acceptance-does-not-confirm-baseline
     tags: { suite: assessment, mode: forced }
     prompt: |
       @azure-typespec-author Decide only the next workflow action. Authoring,
@@ -113,7 +113,7 @@ stimuli:
       - type: output-matches
         config:
           pattern: '"question"\s*:\s*"Compare against origin/main, or a different branch or commit\?"'
-  - name: 008001-reuse-assessment-and-baseline-decisions
+  - name: 009001-reuse-assessment-and-baseline-decisions
     tags: { suite: assessment, mode: forced }
     prompt: |
       @azure-typespec-author Decide only the next workflow action. Authoring,
@@ -146,7 +146,7 @@ stimuli:
       - type: output-matches
         config:
           pattern: '"agentEditsOnly"\s*:\s*false'
-  - name: 008001-planning-only-does-not-offer-assessment
+  - name: 009001-planning-only-does-not-offer-assessment
     tags: { suite: assessment, mode: forced }
     prompt: |
       @azure-typespec-author Decide only the next workflow action. The user asked

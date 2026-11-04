@@ -116,7 +116,7 @@ Naming cases `007001` through `007008` compare trigger, forced, and no-skill beh
 client configuration planning, direct-edit handoffs, opt-outs, and documentation-only changes.
 Cases `007009` through `007014` check routing boundaries in trigger mode only.
 
-Case `008001` checks the post-authoring fast assessment offer, explicit opt-out,
+Case `009001` checks the post-authoring fast assessment offer, explicit opt-out,
 validation and planning gates, and separate baseline confirmation. It is a
 decision-only evaluation; it does not run the assessment coordinator or modify
 TypeSpec fixtures. Run it with `--suite assessment-forced`.
