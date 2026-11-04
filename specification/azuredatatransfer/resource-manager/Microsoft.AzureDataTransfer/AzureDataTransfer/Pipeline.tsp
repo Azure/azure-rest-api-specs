@@ -90,7 +90,7 @@ interface Pipelines {
   approveTransferFlow is ArmResourceActionAsync<
     Pipeline,
     TransferFlowRequestBody,
-    ArmResponse<TransferFlowResponseBody>
+    TransferFlowResponseBody
   >;
 
   /**
@@ -162,7 +162,7 @@ interface Pipelines {
   rejectTransferFlow is ArmResourceActionAsync<
     Pipeline,
     TransferFlowRequestBody,
-    ArmResponse<TransferFlowResponseBody>
+    TransferFlowResponseBody
   >;
 }
 
