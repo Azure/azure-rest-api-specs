@@ -167,6 +167,21 @@ overrides:
       - logit_bias
       - apim-request-id
       - davinci # legacy OpenAI model name
+  # Generated voice-agent event reference terms and opaque IDs in embedded examples
+  - filename: '**/specification/ai-foundry/data-plane/Foundry/event-schemas/voice-agent-events.json'
+    words:
+      - byot # Bring your own thread
+      - dall
+      - inpainting
+      - mcphttp # MCP over HTTP transport
+      - pcma # Audio codec
+      - pcmu # Audio codec
+      - uhhm
+      - viseme # Visual representation of a speech sound
+      - webrtc # Web Real-Time Communication
+      - xhigh # Image generation quality level
+    ignoreRegExpList:
+      - '\\"(?:id|.*_id|.*_checkpoint|.*_model)\\"\s*:\s*\\"[^"\\]*\\"' # Ignore IDs in JSON-encoded examples
   # Agents optimization terms
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/src/agents-optimization'

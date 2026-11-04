@@ -49,6 +49,11 @@ using Azure.AI.Projects;
 
 @@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
 @@clientName(
+  VoiceAgentPostCallConfig,
+  "VoiceAgentPostCallConfiguration",
+  "java"
+);
+@@clientName(
   UserConversationSimulationConfiguration.max_num_turns,
   "maximumNumberOfTurns",
   "java"
@@ -239,7 +244,28 @@ using Azure.AI.Projects;
   "TranscriptTextUsageType"
 );
 
-// Use descriptive Java names for configuration properties
+@@clientName(
+  MicrosoftCopilotToolsetConfig,
+  "MicrosoftCopilotToolsetConfiguration"
+);
+@@clientName(
+  MicrosoftCopilotToolsetDefaultConfig,
+  "MicrosoftCopilotToolsetDefaultConfiguration"
+);
+@@doc(
+  GitHubCopilotToolsetConfig,
+  "The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfiguration` for new integrations."
+);
+@@doc(
+  GitHubCopilotToolsetDefaultConfig,
+  "The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfiguration` for new integrations."
+);
+@@clientName(MicrosoftCopilotToolsetConfig.name, "toolName");
+@@clientName(
+  MicrosoftCopilotToolsetPreview.default_config,
+  "defaultConfiguration"
+);
+@@clientName(MicrosoftCopilotToolsetPreview.configs, "toolConfigurations");
 @@clientName(GitHubCopilotToolsetConfig.name, "toolName");
 @@clientName(
   GitHubCopilotToolsetPreview.default_config,
@@ -740,6 +766,7 @@ union VoiceResponseObjectType {
 );
 
 @@clientName(VoiceConversation.object, "objectType");
+@@clientName(OpenAI.RealtimeResponse.object, "objectType");
 @@clientName(OpenAI.VoiceIdsShared, "VoiceIds");
 
 // Use natural Java ordering for Realtime conversation-message model names.
@@ -761,6 +788,8 @@ union VoiceResponseObjectType {
 );
 
 // Use idiomatic Java word boundaries for file-system enum members.
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 
@@ -835,6 +864,11 @@ union VoiceResponseObjectType {
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
+@@clientName(
+  HostedAgentDefinition.enable_memory_snapshot,
+  "memorySnapshotEnabled",
+  "java"
+);
 
 @@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
 @@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
@@ -980,6 +1014,27 @@ union VoiceResponseObjectType {
 );
 
 // Voice Agent Renames
+@@clientName(
+  VoiceAgentSoundscapeConfig,
+  "VoiceAgentSoundscapeConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeTrackConfig,
+  "VoiceAgentSoundscapeTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeWorkingTrackConfig,
+  "VoiceAgentSoundscapeWorkingTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeSourceConfig,
+  "VoiceAgentSoundscapeSourceConfiguration",
+  "java"
+);
+@@clientName(VoiceAgentSoundscapeWorkingTrackConfig.delay_ms, "delay", "java");
 @@clientName(
   Azure.AI.Projects.Agents.generateAgent,
   "createAgentFromPrompt",
@@ -1277,6 +1332,7 @@ union VoiceResponseObjectType {
 // Structurally replace every emitted tool_choice property with an opaque union so Java exposes the wire value as
 // BinaryData. The Java emitter already emits these tool choice union as BinaryData, this type override makes the
 // tool choice discriminated hierarchy unreachable and prevents its emission in the generated Java code.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union ToolChoiceValue {
   string,
   object: Record<unknown>,
@@ -1478,6 +1534,7 @@ model OpenAIRealtimeSessionOutputModality {}
 )
 model OpenAIRealtimeTruncationRetentionRatio {}
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union OpenAIRealtimeTruncationUnion {
   auto: "auto",
   disabled: "disabled",
