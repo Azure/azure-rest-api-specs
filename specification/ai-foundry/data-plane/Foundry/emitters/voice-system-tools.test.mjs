@@ -92,6 +92,9 @@ function references(schemas, name, visited = new Set()) {
   return visited;
 }
 
+const events = readDocument("../event-schemas/voice-agent-events.json");
+const eventSchemas = events.components.schemas;
+
 for (const version of ["v1", "virtual-public-preview"]) {
   const document = readDocument(
     `../openapi3/${version}/microsoft-foundry-openapi3.json`,
@@ -128,25 +131,16 @@ for (const version of ["v1", "virtual-public-preview"]) {
   });
 
   test(`${version}: REST and events reuse standard items without duplicate projections`, () => {
-    const usages = [
-      "VoiceAgentClientEvent",
-      "VoiceAgentServerEvent",
-      "VoiceResponse",
-    ].map((root) => [root, references(schemas, root)]);
     for (const [projectionName, originalName] of Object.entries(
       standardItems,
     )) {
       assert.equal(schemas[projectionName], undefined, projectionName);
-      for (const [root, reachable] of usages) {
-        assert.ok(
-          reachable.has(originalName),
-          `${root} must reuse ${originalName}`,
-        );
-        assert.ok(
-          !reachable.has(projectionName),
-          `${root} must not use ${projectionName}`,
-        );
-      }
+      assert.equal(eventSchemas[projectionName], undefined, projectionName);
+      assert.deepEqual(
+        flatten(schemas, schemas[originalName]),
+        flatten(eventSchemas, eventSchemas[originalName]),
+        originalName,
+      );
     }
   });
 
@@ -243,21 +237,12 @@ for (const version of ["v1", "virtual-public-preview"]) {
     assert.equal(properties.require_handoff.type, "boolean");
     assert.equal(properties.require_handoff.default, false);
     assert.ok(!required.includes("require_handoff"));
-    assert.match(
-      properties.require_handoff.description,
-      /non-blank handoff summary/,
-    );
+    assert.match(properties.require_handoff.description, /non-blank handoff summary/);
     assert.equal(properties.handoff, undefined);
-    assert.equal(
-      schemas.VoiceAgentTransferTarget.properties.require_handoff,
-      undefined,
-    );
+    assert.equal(schemas.VoiceAgentTransferTarget.properties.require_handoff, undefined);
     for (const [name, schemaName] of Object.entries(toolNames)) {
       if (name !== "transfer") {
-        assert.equal(
-          flatten(schemas, schemas[schemaName]).properties.require_handoff,
-          undefined,
-        );
+        assert.equal(flatten(schemas, schemas[schemaName]).properties.require_handoff, undefined);
       }
     }
   });
@@ -292,66 +277,67 @@ for (const version of ["v1", "virtual-public-preview"]) {
     assert.equal(schemas.VoiceAgentSessionSecret, undefined);
     assert.ok(!JSON.stringify(document).includes("initial_value_from"));
   });
-  test(`${version}: client item schema shares the Realtime hierarchy without a separate projection`, () => {
-    const clientSchemas = references(schemas, "VoiceAgentClientEvent");
-    assert.ok(clientSchemas.has("OpenAI.RealtimeConversationItem"));
-    assert.ok(clientSchemas.has("VoiceAgentSystemToolItem"));
-    assert.ok(!clientSchemas.has("VoiceConversationItem"));
-    const clientItem =
-      schemas["OpenAI.RealtimeClientEventConversationItemCreate"];
-    assert.equal(
-      clientItem.properties.item.$ref,
-      `${prefix}OpenAI.RealtimeConversationItem`,
-    );
-    const mapping =
-      schemas["OpenAI.RealtimeConversationItem"].discriminator.mapping;
-    // As with the existing MCP items, schema membership is not service admission.
-    // Runtime rejection of client-authored system_tool items needs its own tests.
-    assert.deepEqual(Object.keys(mapping).sort(), outputTypes);
-  });
-
-  test(`${version}: live response outputs use the original Realtime item hierarchy`, () => {
-    assert.equal(
-      schemas.VoiceAgentRealtimeResponse.properties.output.items.$ref,
-      `${prefix}OpenAI.RealtimeConversationItem`,
-    );
-    for (const eventName of [
-      "OpenAI.RealtimeServerEventResponseOutputItemAdded",
-      "OpenAI.RealtimeServerEventResponseOutputItemDone",
-    ]) {
-      assert.equal(
-        schemas[eventName].properties.item.$ref,
-        `${prefix}OpenAI.RealtimeConversationItem`,
-      );
-    }
-    assert.equal(
-      schemas["OpenAI.RealtimeConversationItem"].discriminator.mapping
-        .system_tool,
-      `${prefix}VoiceAgentSystemToolItem`,
-    );
-  });
-
-  test(`${version}: collection feedback retains private output references without Agent declarations`, () => {
-    const reference = schemas.VoiceAgentOutputReference;
-    assert.equal(reference.type, "string");
-    assert.equal(reference.pattern, "^[A-Za-z_][A-Za-z0-9_]*$");
-    assert.equal(
-      schemas.VoiceAgentServerEventInputCollectionStatus.properties.output_ref
-        .$ref,
-      `${prefix}VoiceAgentOutputReference`,
-    );
-    assert.equal(schemas.VoiceAgentSessionSecret, undefined);
-  });
-
-  test(`${version}: new server events retain their exact wire discriminators`, () => {
-    for (const [schemaName, type] of Object.entries({
-      VoiceAgentServerEventSystemToolArgumentsDelta:
-        "response.system_tool_arguments.delta",
-      VoiceAgentServerEventSystemToolArgumentsDone:
-        "response.system_tool_arguments.done",
-      VoiceAgentServerEventInputCollectionStatus: "input_collection.status",
-    })) {
-      assert.deepEqual(schemas[schemaName].properties.type.enum, [type]);
-    }
-  });
 }
+
+test("client item schema shares the Realtime hierarchy without a separate projection", () => {
+  const clientSchemas = references(eventSchemas, "VoiceAgentClientEvent");
+  assert.ok(clientSchemas.has("OpenAI.RealtimeConversationItem"));
+  assert.ok(clientSchemas.has("VoiceAgentSystemToolItem"));
+  assert.ok(!clientSchemas.has("VoiceConversationItem"));
+  const clientItem =
+    eventSchemas["OpenAI.RealtimeClientEventConversationItemCreate"];
+  assert.equal(
+    clientItem.properties.item.$ref,
+    `${prefix}OpenAI.RealtimeConversationItem`,
+  );
+  const mapping =
+    eventSchemas["OpenAI.RealtimeConversationItem"].discriminator.mapping;
+  // As with the existing MCP items, schema membership is not service admission.
+  // Runtime rejection of client-authored system_tool items needs its own tests.
+  assert.deepEqual(Object.keys(mapping).sort(), outputTypes);
+});
+
+test("live response outputs use the original Realtime item hierarchy", () => {
+  assert.equal(
+    eventSchemas.VoiceAgentRealtimeResponse.properties.output.items.$ref,
+    `${prefix}OpenAI.RealtimeConversationItem`,
+  );
+  for (const eventName of [
+    "OpenAI.RealtimeServerEventResponseOutputItemAdded",
+    "OpenAI.RealtimeServerEventResponseOutputItemDone",
+  ]) {
+    assert.equal(
+      eventSchemas[eventName].properties.item.$ref,
+      `${prefix}OpenAI.RealtimeConversationItem`,
+    );
+  }
+  assert.equal(
+    eventSchemas["OpenAI.RealtimeConversationItem"].discriminator.mapping
+      .system_tool,
+    `${prefix}VoiceAgentSystemToolItem`,
+  );
+});
+
+test("collection feedback retains private output references without Agent declarations", () => {
+  const reference = eventSchemas.VoiceAgentOutputReference;
+  assert.equal(reference.type, "string");
+  assert.equal(reference.pattern, "^[A-Za-z_][A-Za-z0-9_]*$");
+  assert.equal(
+    eventSchemas.VoiceAgentServerEventInputCollectionStatus.properties
+      .output_ref.$ref,
+    `${prefix}VoiceAgentOutputReference`,
+  );
+  assert.equal(eventSchemas.VoiceAgentSessionSecret, undefined);
+});
+
+test("new server events retain their exact wire discriminators", () => {
+  for (const [schemaName, type] of Object.entries({
+    VoiceAgentServerEventSystemToolArgumentsDelta:
+      "response.system_tool_arguments.delta",
+    VoiceAgentServerEventSystemToolArgumentsDone:
+      "response.system_tool_arguments.done",
+    VoiceAgentServerEventInputCollectionStatus: "input_collection.status",
+  })) {
+    assert.deepEqual(eventSchemas[schemaName].properties.type.enum, [type]);
+  }
+});
