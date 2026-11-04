@@ -3596,6 +3596,9 @@
           "ClusterJobs_Get_ConfigureArcGatewayJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
           },
+          "ClusterJobs_Get_ConfigureGpuConfidentialComputeModeJob": {
+            "$ref": "./examples/ClusterJobs_Get_ConfigureGpuConfidentialComputeModeJob.json"
+          },
           "ClusterJobs_Get_ConfigureLocalAvailabilityZone": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureLocalAvailabilityZoneJob.json"
           },
@@ -3703,6 +3706,9 @@
           },
           "ClusterJobs_CreateOrUpdate_ConfigureCVMJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureCVM.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureGpuConfidentialComputeModeJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureGpuConfidentialComputeMode.json"
           },
           "ClusterJobs_CreateOrUpdate_ConfigureLocalAvailabilityZone": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureLocalAvailabilityZone.json"
@@ -8274,6 +8280,9 @@
           "EdgeMachineGpuJobs_Get": {
             "$ref": "./examples/EdgeMachineGpuJobs_Get_MaximumSet_Gen.json"
           },
+          "EdgeMachineGpuJobs_Get_ConfigureConfidentialComputeMode": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_ConfigureConfidentialComputeMode.json"
+          },
           "EdgeMachineGpuJobs_Get_CreatePartition": {
             "$ref": "./examples/EdgeMachineGpuJobs_Get_CreatePartition.json"
           },
@@ -8364,6 +8373,9 @@
           }
         },
         "x-ms-examples": {
+          "EdgeMachineGpuJobs_CreateOrUpdate_ConfigureConfidentialComputeMode": {
+            "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_ConfigureConfidentialComputeMode.json"
+          },
           "EdgeMachineGpuJobs_CreateOrUpdate_CreatePartition": {
             "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_CreatePartition.json"
           },
@@ -12850,6 +12862,72 @@
         ]
       }
     },
+    "ConfidentialComputingMode": {
+      "type": "string",
+      "description": "Confidential computing modes supported on a GPU.",
+      "enum": [
+        "Off",
+        "DevTools",
+        "On"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialComputingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Confidential computing is disabled on the GPU."
+          },
+          {
+            "name": "DevTools",
+            "value": "DevTools",
+            "description": "Confidential computing is enabled on the GPU in developer tools mode, which permits debugging and profiling tools that are blocked when confidential computing is fully enabled."
+          },
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Confidential computing is enabled on the GPU."
+          }
+        ]
+      }
+    },
+    "ConfidentialComputingModeStatus": {
+      "type": "string",
+      "description": "Confidential computing status of a GPU, reporting either that the GPU cannot support confidential computing or the mode it is currently in.",
+      "enum": [
+        "Unsupported",
+        "Off",
+        "DevTools",
+        "On"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialComputingModeStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unsupported",
+            "value": "Unsupported",
+            "description": "The GPU does not support confidential computing."
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Confidential computing is disabled on the GPU."
+          },
+          {
+            "name": "DevTools",
+            "value": "DevTools",
+            "description": "Confidential computing is enabled on the GPU in developer tools mode, which permits debugging and profiling tools that are blocked when confidential computing is fully enabled."
+          },
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Confidential computing is enabled on the GPU."
+          }
+        ]
+      }
+    },
     "ConfidentialVmIntent": {
       "type": "string",
       "description": "Captures the customer's intent to enable or disable Confidential Virtual Machine (CVM) support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
@@ -12993,6 +13071,44 @@
           }
         ]
       }
+    },
+    "ConfigureConfidentialComputeModeGpuJobProperties": {
+      "type": "object",
+      "description": "Properties for configuring the confidential computing mode on the GPU.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/ConfidentialComputingMode",
+          "description": "Desired confidential computing mode to set on the GPU."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureConfidentialComputeMode"
+    },
+    "ConfigureGpuConfidentialComputeModeClusterJobProperties": {
+      "type": "object",
+      "description": "Properties for configuring the confidential computing mode for the GPUs in the cluster.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/ConfidentialComputingMode",
+          "description": "Desired confidential computing mode to set for the GPUs in the cluster."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureGpuConfidentialComputeMode"
     },
     "ConnectionState": {
       "type": "string",
@@ -15828,7 +15944,8 @@
       "description": "GPU Job Type supported for Edge Machine GPU operations.",
       "enum": [
         "CreatePartition",
-        "SwitchMode"
+        "SwitchMode",
+        "ConfigureConfidentialComputeMode"
       ],
       "x-ms-enum": {
         "name": "EdgeMachineGpuJobType",
@@ -15843,6 +15960,11 @@
             "name": "SwitchMode",
             "value": "SwitchMode",
             "description": "Switch GPU mode between DDA and GPU-P for different workload requirements."
+          },
+          {
+            "name": "ConfigureConfidentialComputeMode",
+            "value": "ConfigureConfidentialComputeMode",
+            "description": "Configure the confidential computing mode on the GPU."
           }
         ]
       }
@@ -15889,6 +16011,11 @@
         "partitionable": {
           "type": "boolean",
           "description": "Indicates whether the GPU is partitionable.",
+          "readOnly": true
+        },
+        "confidentialComputingModeStatus": {
+          "$ref": "#/definitions/ConfidentialComputingModeStatus",
+          "description": "The confidential computing status of the GPU. Reports Unsupported when the GPU does not support confidential computing, otherwise the mode the GPU is currently in.",
           "readOnly": true
         },
         "hostDriverVersion": {
@@ -18713,6 +18840,7 @@
         "ConfigureArcGateway",
         "GpuCreatePartition",
         "GpuSwitchMode",
+        "ConfigureGpuConfidentialComputeMode",
         "ConfigureCVM",
         "ConfigureSdnIntegration",
         "VmConnectProvision",
@@ -18752,6 +18880,11 @@
             "name": "GpuSwitchMode",
             "value": "GpuSwitchMode",
             "description": "Job to switch GPU mode for the cluster."
+          },
+          {
+            "name": "ConfigureGpuConfidentialComputeMode",
+            "value": "ConfigureGpuConfidentialComputeMode",
+            "description": "Job to configure the confidential computing mode for the GPUs in the cluster."
           },
           {
             "name": "ConfigureCVM",
