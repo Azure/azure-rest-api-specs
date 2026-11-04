@@ -94023,10 +94023,7 @@ components:
           description: Whether user interruption before commit cancels the pending handoff. If omitted, the service defaults to false.
           default: false
         delay_ms:
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 10000
+          $ref: '#/components/schemas/FoundryDurationMilliseconds'
           description: The minimum delay before target activation, in milliseconds, from 0 through 10000. If omitted, the service defaults to 0.
           default: 0
         transfer_message:
@@ -94067,10 +94064,7 @@ components:
           description: Whether user interruption before commit cancels the pending handoff.
           default: false
         delay_ms:
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 10000
+          $ref: '#/components/schemas/FoundryDurationMilliseconds'
           description: The minimum delay before target activation, in milliseconds.
           default: 0
         transfer_message:
