@@ -1934,27 +1934,31 @@ union SynapseDatabasePrincipalAssignmentType {
   "python, csharp, java"
 );
 // The pool-level blob auditing policy name was a fixed "default" in the released Python (Literal),
-// .NET (singleton Get() without a name) and Java SDKs.
+// .NET (singleton Get() without a name), Java, Go and JS SDKs (no parameter).
 @@alternateType(
   SqlPools.SqlPoolLevel.BlobAuditingPolicyName,
   "default",
-  "python, csharp, java"
+  "python, csharp, java, go, javascript"
 );
 
-// --- Python and Java ---
-// Single-value path parameters shipped as fixed constants in azure-mgmt-synapse 2.1.0b7 (Literal) and
-// azure-resourcemanager-synapse (no parameter on DataMaskingPolicies.get, SqlPoolSensitivityLabels.delete,
+// --- Python, Java, Go and JS (and .NET for the sensitivity label sources) ---
+// Single-value path parameters shipped as fixed constants in azure-mgmt-synapse 2.1.0b7 (Literal) and in the
+// released Java, Go and JS SDKs (no parameter on DataMaskingPolicies.get, SqlPoolSensitivityLabels.delete,
 // enableRecommendation and disableRecommendation).
-@@alternateType(SqlPools.DataMaskingPolicyName, "Default", "python, java");
+@@alternateType(
+  SqlPools.DataMaskingPolicyName,
+  "Default",
+  "python, java, go, javascript"
+);
 @@alternateType(
   SqlPools.WritableSensitivityLabelSource,
   "current",
-  "python, java, csharp"
+  "python, java, csharp, go, javascript"
 );
 @@alternateType(
   SqlPools.RecommendedSensitivityLabelSource,
   "recommended",
-  "python, java, csharp"
+  "python, java, csharp, go, javascript"
 );
 
 // --- Java only ---
@@ -1969,15 +1973,53 @@ union SynapseDatabasePrincipalAssignmentType {
 // LanguageExtensionsList is both a paged list result and the KustoPool.languageExtensions property type;
 // keep it public so the public API does not expose an implementation type (checkstyle NoImplInPublicAPI).
 @@access(KustoPools.LanguageExtensionsList, Access.public, "java");
-// --- Python only ---
-// Operations that were not pageable in azure-mgmt-synapse 2.1.0b7 (they returned the list model).
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released Python non-pageable signature"
+// Property and enum names in azure-resourcemanager-synapse 1.0.0.
+@@clientName(Workspaces.KeyProperties.isActiveCMK, "isActiveCmk", "java");
+@@clientName(
+  Workspaces.WorkspaceProperties.workspaceUID,
+  "workspaceUid",
+  "java"
+);
+@@clientName(
+  Workspaces.WorkspaceRepositoryConfiguration.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(
+  IntegrationRuntimes.SelfHostedIntegrationRuntimeStatusTypeProperties.autoUpdateETA,
+  "autoUpdateEta",
+  "java"
+);
+@@clientName(
+  IntegrationRuntimes.CmdkeySetupTypeProperties.userName,
+  "username",
+  "java"
+);
+@@clientName(
+  IntegrationRuntimes.IntegrationRuntimeSsisCatalogInfo.catalogAdminUserName,
+  "catalogAdminUsername",
+  "java"
+);
+@@clientName(
+  Workspaces.ActualState,
+  "ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState",
+  "java"
+);
+@@clientName(
+  Workspaces.DesiredState,
+  "ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState",
+  "java"
+);
+
+// --- Python, Java and JS ---
+// Operations that were not pageable in the released SDKs (they returned the list model).
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released non-pageable signature"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   KustoPools.KustoPools.listByWorkspace,
-  "python"
+  "python, java, javascript"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released Python non-pageable signature"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released non-pageable signature"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   IntegrationRuntimes.IntegrationRuntimeResources.listOutboundNetworkDependenciesEndpoints,
-  "python"
+  "python, java, javascript"
 );
