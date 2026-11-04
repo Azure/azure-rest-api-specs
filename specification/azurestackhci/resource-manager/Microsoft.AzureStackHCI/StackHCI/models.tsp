@@ -10826,6 +10826,52 @@ model NetworkAdapterDeploymentStep {
 ////////////////////////////////////////////////////////////////
 
 /**
+ * Read-only properties of a storage pool on an Edge Machine.
+ */
+@added(Versions.v2027_01_15_preview)
+model EdgeMachineStoragePoolProperties {
+  /** Type of the storage pool reported by the device. */
+  @visibility(Lifecycle.Read)
+  poolType?: EdgeMachineStoragePoolType;
+
+  /** Actual state of the storage pool reported by the device. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: EdgeMachineStoragePoolReportedProperties;
+
+  /** Provisioning state of the storage pool resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** Actual state of a storage pool reported by the device. */
+@added(Versions.v2027_01_15_preview)
+model EdgeMachineStoragePoolReportedProperties {
+  /** OS-level pool name, which is the volume group name on Linux. This may differ from the ARM resource name. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Total pool capacity in bytes, equal to the sum of member physical volume sizes on Linux. */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: int64;
+
+  /** Capacity not yet allocated to any volume, in bytes. This is the free space in the volume group on Linux and is used by the resource provider to validate volume creation. */
+  @visibility(Lifecycle.Read)
+  availableSizeInBytes?: int64;
+}
+
+/** Storage pool technologies for Edge Machines. */
+@added(Versions.v2027_01_15_preview)
+union EdgeMachineStoragePoolType {
+  string,
+
+  /** Logical Volume Manager storage pool. */
+  LVM: "LVM",
+
+  /** Storage Spaces storage pool. */
+  StorageSpaces: "StorageSpaces",
+}
+
+/**
  * Properties of a disk.
  */
 @added(Versions.v2026_10_01)

@@ -43,6 +43,7 @@ import "./DevicePool.tsp";
 import "./EdgeMachineGpu.tsp";
 import "./EdgeMachineNetworkAdapters.tsp";
 import "./EdgeMachineStorage.tsp";
+import "./EdgeMachineStoragePools.tsp";
 import "./EdgeMachineSecuritySettings.tsp";
 import "./EdgeMachineDeploymentSetting.tsp";
 import "./ProxyConfiguration.tsp";
