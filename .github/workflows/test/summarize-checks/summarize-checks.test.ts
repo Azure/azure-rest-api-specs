@@ -514,7 +514,9 @@ describe("Summarize Checks Unit Tests", () => {
       ]);
       expect(visible).toMatch(/action-required\.svg"[^>]*> Action required/);
       expect(visible).toMatch(/failed\.svg"[^>]*> Failed/);
-      expect(visible).toContain("Add `PublishToCustomers` if these APIs are ready to ship");
+      expect(marked.parse(visible)).toContain(
+        '<a href="https://github.com/Azure/azure-rest-api-specs/labels/PublishToCustomers"><img src="https://img.shields.io/github/labels/Azure/azure-rest-api-specs/PublishToCustomers" alt="PublishToCustomers"></a>',
+      );
       expect(visible).toContain("Open the failed check, address its diagnostics");
       expect(visible).not.toContain("These branches are not intended for iterative development");
       expect(comment).toContain("<summary>Details and troubleshooting</summary>");
