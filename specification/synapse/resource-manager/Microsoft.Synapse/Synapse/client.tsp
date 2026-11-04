@@ -2010,16 +2010,31 @@ union SynapseDatabasePrincipalAssignmentType {
   "ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState",
   "java, javascript"
 );
+// extraProperties was a Map in azure-resourcemanager-synapse 1.0.0.
+@@alternateType(
+  Workspaces.WorkspaceProperties.extraProperties,
+  Record<unknown>,
+  "java"
+);
 
-// --- Python, Java and JS ---
+// --- Go and JS ---
+// userAssignedIdentities was a plain map in the released armsynapse and @azure/arm-synapse
+// (the named Record model is emitted as a wrapper type).
+@@alternateType(
+  Workspaces.ManagedIdentity.userAssignedIdentities,
+  Record<Workspaces.UserAssignedManagedIdentity>,
+  "go, javascript"
+);
+
+// --- Python, Java, JS and Go ---
 // Operations that were not pageable in the released SDKs (they returned the list model).
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released non-pageable signature"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   KustoPools.KustoPools.listByWorkspace,
-  "python, java, javascript"
+  "python, java, javascript, go"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released non-pageable signature"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   IntegrationRuntimes.IntegrationRuntimeResources.listOutboundNetworkDependenciesEndpoints,
-  "python, java, javascript"
+  "python, java, javascript, go"
 );
