@@ -34,9 +34,16 @@ model CommonTransferFlowProperties {
   transferRole: TransferRole;
 
   /**
-   * The remote transfer flow resource id
+   * ARM resource ID of the paired transfer flow on the remote side of the pipeline.
    */
-  remoteTransferFlowResourceId: string;
+  remoteTransferFlowResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureDataTransfer/storageTransferFlows";
+    },
+    {
+      type: "Microsoft.AzureDataTransfer/messagingTransferFlows";
+    }
+  ]>;
 
   /**
    * Status of the current flow
