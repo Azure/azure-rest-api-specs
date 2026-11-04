@@ -690,7 +690,6 @@ using Microsoft.NetApp;
 @@clientName(ProtocolTypes.NFSv3, "Nfsv3", "csharp");
 @@clientName(ProtocolTypes.NFSv4, "Nfsv4", "csharp");
 @@clientName(ProtocolTypes.SMB, "Smb", "csharp");
-@@clientName(LdapServerType.OpenLDAP, "OpenLdap", "csharp");
 @@clientName(VolumeLanguage.utf8mb4, "Utf8Mb4", "csharp");
 @@clientName(ElasticProtocolType.NFSv3, "Nfsv3", "csharp");
 @@clientName(ElasticProtocolType.NFSv4, "Nfsv4", "csharp");
