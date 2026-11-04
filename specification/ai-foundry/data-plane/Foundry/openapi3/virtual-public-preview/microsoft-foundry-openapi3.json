@@ -45260,7 +45260,7 @@
             "default": false
           }
         },
-        "description": "One measurable criterion within a rubric. Quality criteria may use rating weights; safety criteria classify a behavior as permissible or impermissible."
+        "description": "One measurable criterion within a rubric. Quality criteria may use rating weights; safety criteria classify a behavior as allowed or disallowed."
       },
       "DispatchRoutineRequest": {
         "type": "object",
@@ -45911,7 +45911,7 @@
           },
           "metric": {
             "type": "string",
-            "description": "The metric name. Safety rubrics report impermissible_behavior_violated and permissible_behavior_violated separately, using lower-is-better event scores."
+            "description": "The metric name. Safety rubrics report disallowed_behavior_violated and allowed_behavior_violated separately, using lower-is-better event scores."
           },
           "label": {
             "type": "string",
@@ -45932,7 +45932,7 @@
           }
         },
         "unevaluatedProperties": {},
-        "description": "A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each permissibility group, with no overall safety aggregate.",
+        "description": "A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each allowed/disallowed behavior group, with no overall safety aggregate.",
         "title": "EvalRunOutputItemResult"
       },
       "EvalRunOutputItemResultProperties": {
@@ -93224,7 +93224,7 @@
             "items": {
               "$ref": "#/components/schemas/Dimension"
             },
-            "description": "The rubric criteria. Safety dimensions require permissible and omit weight. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing ordinary and legacy definitions retain their behavior."
+            "description": "The rubric criteria. Safety dimensions require allowed and omit weight. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing ordinary and legacy definitions retain their behavior."
           },
           "pass_threshold": {
             "type": "number",
@@ -93240,7 +93240,7 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Rubric evaluator definition. Ordinary quality rubrics report one aggregate. Safety rubrics require Boolean scoring and an explicit permissible classification on every dimension, and report impermissible_behavior_violated and permissible_behavior_violated as two independent lower-is-better metrics. Safety rubrics have no weights, threshold, or combined safety score."
+        "description": "Rubric evaluator definition. Ordinary quality rubrics report one aggregate. Safety rubrics require Boolean scoring and an explicit allowed classification on every dimension, and report disallowed_behavior_violated and allowed_behavior_violated as two independent lower-is-better metrics. Safety rubrics have no weights, threshold, or combined safety score."
       },
       "RubricGenerationInputQualityWarning": {
         "type": "object",

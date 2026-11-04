@@ -868,7 +868,7 @@ model UserConversationSimulationEvalRunDataSource extends EvalRunDataSource {
 @@copyProperties(
   OpenAI.EvalRunPerTestingCriteriaResults,
   {
-    /** Optional metric identity when one testing criterion reports multiple metrics. Safety rubrics return separate entries for impermissible_behavior_violated and permissible_behavior_violated, each counting evaluable conversations independently. */
+    /** Optional metric identity when one testing criterion reports multiple metrics. Safety rubrics return separate entries for disallowed_behavior_violated and allowed_behavior_violated, each counting evaluable conversations independently. */
     @added(Versions.v1)
     metric?: string,
 
@@ -1111,7 +1111,7 @@ union EvalRunOutputItemResultStatus {
     /** The evaluation status for this result item. Values: "completed", "errored", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored. */
     status?: EvalRunOutputItemResultStatus,
 
-    /** The metric name. A safety rubric reports impermissible_behavior_violated and permissible_behavior_violated as separate entries for the same evaluator, never as a combined safety score. */
+    /** The metric name. A safety rubric reports disallowed_behavior_violated and allowed_behavior_violated as separate entries for the same evaluator, never as a combined safety score. */
     metric?: string,
 
     /** The label associated with the test criteria metric (e.g., "pass", "fail", "good", "bad"). */
@@ -1139,7 +1139,7 @@ union EvalRunOutputItemResultProperties {
   rubric: RubricResultProperties,
 }
 
-/** A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each permissibility group, with no overall safety aggregate. */
+/** A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each allowed/disallowed behavior group, with no overall safety aggregate. */
 @summary("EvalRunOutputItemResult")
 model EvalRunOutputItemResult {
   ...Record<unknown>;
@@ -1164,7 +1164,7 @@ model EvalRunOutputItemResult {
   /** The evaluation status for this result item. Values: "completed", "errored", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored. */
   status?: EvalRunOutputItemResultStatus;
 
-  /** The metric name. Safety rubrics report impermissible_behavior_violated and permissible_behavior_violated separately, using lower-is-better event scores. */
+  /** The metric name. Safety rubrics report disallowed_behavior_violated and allowed_behavior_violated separately, using lower-is-better event scores. */
   metric?: string;
 
   /** The label associated with the test criteria metric (e.g., "pass", "fail", "good", "bad"). */
