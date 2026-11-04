@@ -14259,7 +14259,7 @@
         },
         "serviceAccountTokenSettings": {
           "$ref": "#/definitions/BrokerAuthenticatorMethodSat",
-          "description": "The accepted incoming token audiences, independent of outbound backend tokens."
+          "description": "The accepted incoming token audiences, independent of outbound backend tokens.\nWhen omitted, the gateway accepts the default audience `aio-mcp-frontend`.\nWhen supplied, the audiences replace the default and must be a non-empty list without blank entries."
         }
       },
       "required": [
@@ -14317,7 +14317,7 @@
     },
     "McpGatewayResource": {
       "type": "object",
-      "description": "The configuration of the instance's client-facing MCP gateway.",
+      "description": "The configuration of the instance's client-facing MCP gateway.\nAn instance supports one gateway, enforced by edge admission validation.\nCreating a gateway with a different name when one already exists is rejected with a\nvalidation error that identifies the existing gateway; PUT to the existing name updates it.\nPUT must include `properties.endpoint`; requests without it are rejected by edge validation.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/McpGatewayProperties",

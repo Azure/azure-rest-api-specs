@@ -11,7 +11,13 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-/** The configuration of the instance's client-facing MCP gateway. */
+/**
+ * The configuration of the instance's client-facing MCP gateway.
+ * An instance supports one gateway, enforced by edge admission validation.
+ * Creating a gateway with a different name when one already exists is rejected with a
+ * validation error that identifies the existing gateway; PUT to the existing name updates it.
+ * PUT must include `properties.endpoint`; requests without it are rejected by edge validation.
+ */
 @added(Versions.`2026-12-01-preview`)
 @parentResource(InstanceResource)
 model McpGatewayResource is ProxyResource<McpGatewayProperties> {
@@ -66,7 +72,11 @@ model McpGatewayAuthentication {
   /** The incoming authentication method. Only ServiceAccountToken is supported. */
   method: ServiceAccountTokenMethod;
 
-  /** The accepted incoming token audiences, independent of outbound backend tokens. */
+  /**
+   * The accepted incoming token audiences, independent of outbound backend tokens.
+   * When omitted, the gateway accepts the default audience `aio-mcp-frontend`.
+   * When supplied, the audiences replace the default and must be a non-empty list without blank entries.
+   */
   serviceAccountTokenSettings?: BrokerAuthenticatorMethodSat;
 }
 
