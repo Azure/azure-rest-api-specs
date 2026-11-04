@@ -88,7 +88,7 @@ test.each(
 )(
   "handles $name TypeSpecEmitter for $mode generation",
   ({ value, parameters, reason, expectedArgs }) => {
-    expect(generateStep?.env?.TYPE_SPEC_EMITTER).toBe("$(TypeSpecEmitter)");
+    expect(generateStep?.env?.TYPESPEC_EMITTER).toBe("$(TypeSpecEmitter)");
     expect(generateStep?.script).toBeTypeOf("string");
     if (!generateStep?.script) {
       throw new Error("Generate SDK script is missing");
@@ -120,9 +120,9 @@ test.each(
       .replace(/\$\(([^)]+)\)/g, (macro: string, name: string) => variables[name] ?? macro);
     const env = { ...process.env };
     if (value === undefined) {
-      delete env.TYPE_SPEC_EMITTER;
+      delete env.TYPESPEC_EMITTER;
     } else {
-      env.TYPE_SPEC_EMITTER = value;
+      env.TYPESPEC_EMITTER = value;
     }
     const result = spawnSync(
       "bash",

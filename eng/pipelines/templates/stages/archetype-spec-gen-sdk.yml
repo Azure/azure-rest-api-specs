@@ -242,8 +242,8 @@ stages:
               set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
               optional_params=()
               # Azure DevOps leaves undefined macros unexpanded.
-              if [[ -n "${TYPE_SPEC_EMITTER:-}" && "$TYPE_SPEC_EMITTER" != '$('*')' ]]; then
-                optional_params+=(--typespec-emitter "$TYPE_SPEC_EMITTER")
+              if [[ -n "${TYPESPEC_EMITTER:-}" && "$TYPESPEC_EMITTER" != '$('*')' ]]; then
+                optional_params+=(--typespec-emitter "$TYPESPEC_EMITTER")
               fi
               sdk_gen_info="Configurations: "
 
@@ -306,7 +306,7 @@ stages:
               continueOnError: true
             env:
               npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
-              TYPE_SPEC_EMITTER: $(TypeSpecEmitter)
+              TYPESPEC_EMITTER: $(TypeSpecEmitter)
 
           - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
             parameters:
