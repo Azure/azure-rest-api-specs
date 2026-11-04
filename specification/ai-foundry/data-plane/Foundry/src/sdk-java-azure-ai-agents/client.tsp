@@ -546,7 +546,7 @@ using Azure.AI.Projects;
 @@clientName(VoiceAgentAudioConfig, "VoiceAgentAudioConfiguration");
 @@clientName(VoiceAgentAudioInputConfig, "VoiceAgentAudioInputConfiguration");
 @@clientName(VoiceAgentAudioOutputConfig, "VoiceAgentAudioOutputConfiguration");
-@@clientName(VoiceAgentAudioOutputConfig.prefer_locales, "preferredLocales");
+@@clientName(VoiceAgentVoiceConfig.prefer_locales, "preferredLocales");
 @@clientName(VoiceAgentAvatarConfig, "VoiceAgentAvatarConfiguration");
 @@clientName(VoiceAgentAvatarVideoParams, "VoiceAgentAvatarVideoParameters");
 @@clientName(
@@ -596,6 +596,8 @@ using Azure.AI.Projects;
   "java"
 );
 @@clientName(VoiceAgentEndOfUtteranceDetection.timeout_ms, "timeout", "java");
+@@clientName(VoiceAgentHandoffCondition.delay_ms, "delay", "java");
+@@clientName(VoiceAgentHandoffEdgeState.delay_ms, "delay", "java");
 @@clientName(
   VoiceAgentServerEventResponseAudioTimestampDelta.audio_duration_ms,
   "audioDuration",
@@ -622,7 +624,15 @@ using Azure.AI.Projects;
   VoiceAgentEndOfUtteranceDetectionModel.semantic_detection_v1_en,
   "SEMANTIC_DETECTION_V1_ENGLISH"
 );
+@@clientName(
+  VoiceAgentDelegateSubagentConfig,
+  "VoiceAgentDelegateSubagentConfiguration"
+);
 @@clientName(VoiceAgentGreetingConfig, "VoiceAgentGreetingConfiguration");
+@@clientName(
+  VoiceAgentInlineSubagentConfig,
+  "VoiceAgentInlineSubagentConfiguration"
+);
 @@clientName(
   VoiceAgentInterimResponseConfig,
   "VoiceAgentInterimResponseConfiguration"
@@ -740,6 +750,7 @@ using Azure.AI.Projects;
   VoiceAgentTurnDetectionType.azure_semantic_vad_en,
   "AZURE_SEMANTIC_VAD_ENGLISH"
 );
+@@clientName(VoiceAgentVoiceConfig, "VoiceAgentVoiceConfiguration");
 
 @@clientName(VoiceConversation.object, "objectType");
 @@clientName(OpenAI.RealtimeResponse.object, "objectType");

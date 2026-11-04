@@ -41,6 +41,19 @@ union VoiceAgentServerEventTypeExtension {
   response_animation_viseme_delta: "response.animation_viseme.delta",
   response_animation_viseme_done: "response.animation_viseme.done",
   response_video_delta: "response.video.delta",
+
+  @doc("An incremental fragment of model-generated system-tool arguments.")
+  response_system_tool_arguments_delta: "response.system_tool_arguments.delta",
+
+  @doc("The complete model-generated system-tool arguments, not a provider outcome.")
+  response_system_tool_arguments_done: "response.system_tool_arguments.done",
+
+  @doc("An asynchronous collection or telephony-operation outcome.")
+  input_collection_status: "input_collection.status",
+
+  session_handoff_started: "session.handoff.started",
+  session_handoff_completed: "session.handoff.completed",
+  session_handoff_aborted: "session.handoff.aborted",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Voice-only literals in the imported OpenAI discriminator union preserves a single polymorphic hierarchy."
@@ -174,6 +187,9 @@ union VoiceAgentServerEvent {
   response_animation_viseme_delta: VoiceAgentServerEventResponseAnimationVisemeDelta,
   response_animation_viseme_done: VoiceAgentServerEventResponseAnimationVisemeDone,
   response_video_delta: VoiceAgentServerEventResponseVideoDelta,
+  session_handoff_started: VoiceAgentServerEventSessionHandoffStarted,
+  session_handoff_completed: VoiceAgentServerEventSessionHandoffCompleted,
+  session_handoff_aborted: VoiceAgentServerEventSessionHandoffAborted,
 }
 
 @doc("An animation output produced by a voice-agent session.")
@@ -280,6 +296,9 @@ union VoiceAgentSessionUpdate {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSessionResponseConfig {
   ...VoiceAgentSessionUpdateConfig;
+
+  @doc("The effective handoff topology and runtime state, when handoff is configured.")
+  handoff?: VoiceAgentHandoffState | null;
 
   @doc("The object type. Always `realtime.session`.")
   object: "realtime.session";
