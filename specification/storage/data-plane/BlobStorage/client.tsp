@@ -421,6 +421,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   },
   "rust"
 );
+// Leave the external response body's header accessor to handwritten Rust code.
+@@access(
+  UserDelegationKeyResponseHeaders.effectiveRequestPriority,
+  Access.internal,
+  "rust"
+);
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
 @@alternateType(ContentLengthParameter.contentLength, uint64, "rust");
 @@alternateType(
