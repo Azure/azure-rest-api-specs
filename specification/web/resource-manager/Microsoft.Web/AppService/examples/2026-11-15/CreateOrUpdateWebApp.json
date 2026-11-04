@@ -4,9 +4,21 @@
     "api-version": "2026-11-15",
     "resourceGroupName": "testrg123",
     "siteEnvelope": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
       "kind": "app",
       "location": "East US",
       "properties": {
+        "homeContentShare": {
+          "remoteShareConfiguration": {
+            "fileServiceUri": "https://testsa.file.core.windows.net/",
+            "shareName": "web",
+            "storageAccessIdentity": {
+              "identityType": "SystemAssigned"
+            }
+          }
+        },
         "serverFarmId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/DefaultAsp"
       }
     },
@@ -51,6 +63,15 @@
             "sitef6141.azurewebsites.net"
           ],
           "hostNamesDisabled": false,
+          "homeContentShare": {
+            "remoteShareConfiguration": {
+              "fileServiceUri": "https://testsa.file.core.windows.net/",
+              "shareName": "web",
+              "storageAccessIdentity": {
+                "identityType": "SystemAssigned"
+              }
+            }
+          },
           "httpsOnly": false,
           "hyperV": false,
           "isXenon": false,
@@ -172,6 +193,15 @@
             "sitef6141.azurewebsites.net"
           ],
           "hostNamesDisabled": false,
+          "homeContentShare": {
+            "remoteShareConfiguration": {
+              "fileServiceUri": "https://testsa.file.core.windows.net/",
+              "shareName": "web",
+              "storageAccessIdentity": {
+                "identityType": "SystemAssigned"
+              }
+            }
+          },
           "httpsOnly": false,
           "hyperV": false,
           "isXenon": false,
@@ -255,7 +285,7 @@
         }
       },
       "headers": {
-        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/sites/sitef6141/operationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2026-03-15"
+        "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/operationresults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2026-11-15"
       }
     }
   },
