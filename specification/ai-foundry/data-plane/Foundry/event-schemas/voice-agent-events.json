@@ -596,9 +596,17 @@
             "description": "The breakpoint mode. Always `explicit`.",
             "x-stainless-const": true,
             "default": "explicit"
+          },
+          "ttl": {
+            "type": "string",
+            "enum": [
+              "30m",
+              "12h"
+            ],
+            "description": "The minimum lifetime of this cache breakpoint. Defaults to the request TTL."
           }
         },
-        "description": "Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
+        "description": "Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
         "title": "Prompt cache breakpoint"
       },
       "OpenAI.RealtimeAudioFormats": {
@@ -1164,7 +1172,7 @@
         "x-oaiMeta": {
           "name": "response.create",
           "group": "realtime",
-          "example": "// Trigger a response with the default Conversation and no special parameters\n{\n  \"type\": \"response.create\",\n}\n\n// Trigger an out-of-band response that does not write to the default Conversation\n{\n  \"type\": \"response.create\",\n  \"response\": {\n    \"instructions\": \"Provide a concise answer.\",\n    \"tools\": [], // clear any session tools\n    \"conversation\": \"none\",\n    \"output_modalities\": [\"text\"],\n    \"metadata\": {\n      \"response_purpose\": \"summarization\"\n    },\n    \"input\": [\n      {\n        \"type\": \"item_reference\",\n        \"id\": \"item_12345\"\n      },\n      {\n        \"type\": \"message\",\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"type\": \"input_text\",\n            \"text\": \"Summarize the above message in one sentence.\"\n          }\n        ]\n      }\n    ]\n  }\n}\n"
+          "example": "// Trigger a response with the default Conversation and no special parameters\n{\n  \"type\": \"response.create\"\n}\n\n// Trigger an out-of-band response that does not write to the default Conversation\n{\n  \"type\": \"response.create\",\n  \"response\": {\n    \"instructions\": \"Provide a concise answer.\",\n    \"tools\": [], // clear any session tools\n    \"conversation\": \"none\",\n    \"output_modalities\": [\"text\"],\n    \"metadata\": {\n      \"response_purpose\": \"summarization\"\n    },\n    \"input\": [\n      {\n        \"type\": \"item_reference\",\n        \"id\": \"item_12345\"\n      },\n      {\n        \"type\": \"message\",\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"type\": \"input_text\",\n            \"text\": \"Summarize the above message in one sentence.\"\n          }\n        ]\n      }\n    ]\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -2228,6 +2236,13 @@
           ]
         }
       },
+      "OpenAI.RealtimeNoiseReductionStrength": {
+        "type": "number",
+        "format": "double",
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Input noise suppression strength. Higher values apply more suppression.\nDefaults to 1 when noise reduction is first enabled. Omitting strength\nfrom a session update preserves the current strength."
+      },
       "OpenAI.RealtimeReasoning": {
         "type": "object",
         "properties": {
@@ -2248,6 +2263,608 @@
           "xhigh"
         ],
         "description": "Constrains effort on reasoning for reasoning-capable Realtime models such as\n`gpt-realtime-2`."
+      },
+      "OpenAI.RealtimeResponseInputAudio": {
+        "type": "object",
+        "required": [
+          "type",
+          "audio"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_audio"
+            ]
+          },
+          "audio": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Base64 audio bytes in the session input audio format."
+          },
+          "transcript": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional text to associate with the input audio."
+          }
+        },
+        "title": "Realtime response input audio"
+      },
+      "OpenAI.RealtimeResponseInputFunctionCall": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "completed"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "arguments": {
+            "type": "string",
+            "maxLength": 1048576
+          }
+        },
+        "description": "A function call supplied as input to a Realtime response.",
+        "title": "Realtime response input function call"
+      },
+      "OpenAI.RealtimeResponseInputFunctionCallOutput": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "output"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call_output"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "completed"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "output": {
+            "type": "string",
+            "maxLength": 1048576
+          }
+        },
+        "description": "The result of a function call supplied as input to a Realtime response.",
+        "title": "Realtime response input function call output"
+      },
+      "OpenAI.RealtimeResponseInputImage": {
+        "type": "object",
+        "required": [
+          "type",
+          "image_url"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_image"
+            ]
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^data:image/[^;,]+;base64,.+",
+            "description": "A base64 data URL with an image MIME type; use PNG or JPEG."
+          },
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "high",
+                  "auto"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "auto"
+          }
+        },
+        "title": "Realtime response input image"
+      },
+      "OpenAI.RealtimeResponseInputItem": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputFunctionCall"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputFunctionCallOutput"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseItemReference"
+          }
+        ],
+        "description": "An existing item reference or a new message or function call item for a Realtime response.",
+        "title": "Realtime response input item"
+      },
+      "OpenAI.RealtimeResponseInputMessage": {
+        "type": "object",
+        "required": [
+          "role"
+        ],
+        "properties": {
+          "role": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessageType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "role",
+          "mapping": {
+            "system": "#/components/schemas/OpenAI.RealtimeResponseInputMessageSystem",
+            "developer": "#/components/schemas/OpenAI.RealtimeResponseInputMessageDeveloper",
+            "user": "#/components/schemas/OpenAI.RealtimeResponseInputMessageUser",
+            "assistant": "#/components/schemas/OpenAI.RealtimeResponseInputMessageAssistant"
+          }
+        },
+        "description": "A message supplied as input to a Realtime response. The role determines the allowed content.",
+        "title": "Realtime response input message"
+      },
+      "OpenAI.RealtimeResponseInputMessageAssistant": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional client ID. The value `root` is reserved."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional input status. Omission or null defaults to completed.",
+            "default": "completed"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessageAssistantContent"
+            },
+            "minItems": 1
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          }
+        ],
+        "title": "Realtime response input assistant message"
+      },
+      "OpenAI.RealtimeResponseInputMessageAssistantContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "output_text"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 256000
+          }
+        }
+      },
+      "OpenAI.RealtimeResponseInputMessageDeveloper": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional client ID. The value `root` is reserved."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional input status. Omission or null defaults to completed.",
+            "default": "completed"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "developer"
+            ]
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputText"
+            },
+            "minItems": 1,
+            "maxItems": 1
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          }
+        ],
+        "title": "Realtime response input developer message"
+      },
+      "OpenAI.RealtimeResponseInputMessageSystem": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional client ID. The value `root` is reserved."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional input status. Omission or null defaults to completed.",
+            "default": "completed"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "system"
+            ]
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputText"
+            },
+            "minItems": 1,
+            "maxItems": 1
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          }
+        ],
+        "title": "Realtime response input system message"
+      },
+      "OpenAI.RealtimeResponseInputMessageType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "system",
+              "developer",
+              "user",
+              "assistant"
+            ]
+          }
+        ]
+      },
+      "OpenAI.RealtimeResponseInputMessageUser": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional client ID. The value `root` is reserved."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional input status. Omission or null defaults to completed.",
+            "default": "completed"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user"
+            ]
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputText"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputAudio"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputImage"
+                }
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          }
+        ],
+        "title": "Realtime response input user message"
+      },
+      "OpenAI.RealtimeResponseInputText": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_text"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 256000
+          }
+        },
+        "title": "Realtime response input text"
+      },
+      "OpenAI.RealtimeResponseItemReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "item_reference"
+            ],
+            "description": "The type of this item. Always `item_reference`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "The ID of an existing item in the same Realtime session."
+          }
+        },
+        "description": "Reference an existing item in this Realtime session as response.create input.\nItem references are only accepted in the response input array, not as new\nconversation items."
       },
       "OpenAI.RealtimeResponseStatusDetails": {
         "type": "object",
@@ -3032,7 +3649,7 @@
         "x-oaiMeta": {
           "name": "conversation.item.retrieved",
           "group": "realtime",
-          "example": "{\n  \"type\": \"conversation.item.retrieved\",\n  \"event_id\": \"event_CCXGSizgEppa2d4XbKA7K\",\n  \"item\": {\n    \"id\": \"item_CCXGRxbY0n6WE4EszhF5w\",\n    \"object\": \"realtime.item\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"assistant\",\n    \"content\": [\n      {\n        \"type\": \"audio\",\n        \"transcript\": \"Yes, I can hear you loud and clear. How can I help you today?\",\n        \"audio\": \"8//2//v/9//q/+//+P/s...\",\n        \"format\": \"pcm16\"\n      }\n    ]\n  }\n}\n"
+          "example": "{\n  \"type\": \"conversation.item.retrieved\",\n  \"event_id\": \"event_CCXGSizgEppa2d4XbKA7K\",\n  \"item\": {\n    \"id\": \"item_CCXGRxbY0n6WE4EszhF5w\",\n    \"object\": \"realtime.item\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"assistant\",\n    \"content\": [\n      {\n        \"type\": \"output_audio\",\n        \"transcript\": \"Yes, I can hear you loud and clear. How can I help you today?\",\n        \"audio\": \"AAABAP//AAA=\"\n      }\n    ]\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -3121,7 +3738,7 @@
             "description": "Details of the error."
           }
         },
-        "description": "Returned when an error occurs, which could be a client problem or a server\nproblem. Most errors are recoverable and the session will stay open, we\nrecommend to implementors to monitor and log error messages by default.",
+        "description": "Returned when an error occurs, which could be a client problem or a server\nproblem. Most errors are recoverable and the session will stay open, we\nrecommend to implementers to monitor and log error messages by default.",
         "x-oaiMeta": {
           "name": "error",
           "group": "realtime",
@@ -3296,7 +3913,7 @@
         "x-oaiMeta": {
           "name": "input_audio_buffer.dtmf_event_received",
           "group": "realtime",
-          "example": "{\n    \"type\":\" input_audio_buffer.dtmf_event_received\",\n    \"event\": \"9\",\n    \"received_at\": 1763605109,\n}\n"
+          "example": "{\n  \"type\": \"input_audio_buffer.dtmf_event_received\",\n  \"event\": \"9\",\n  \"received_at\": 1763605109\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -3798,7 +4415,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "Returned when an error occurs, which could be a client problem or a server\nproblem. Most errors are recoverable and the session will stay open, we\nrecommend to implementors to monitor and log error messages by default.",
+        "description": "Returned when an error occurs, which could be a client problem or a server\nproblem. Most errors are recoverable and the session will stay open, we\nrecommend to implementers to monitor and log error messages by default.",
         "x-oaiMeta": {
           "name": "error",
           "group": "realtime",
@@ -4262,7 +4879,7 @@
         "x-oaiMeta": {
           "name": "response.created",
           "group": "realtime",
-          "example": "{\n  \"type\": \"response.created\",\n  \"event_id\": \"event_C9G8pqbTEddBSIxbBN6Os\",\n  \"response\": {\n    \"object\": \"realtime.response\",\n    \"id\": \"resp_C9G8p7IH2WxLbkgPNouYL\",\n    \"status\": \"in_progress\",\n    \"status_details\": null,\n    \"output\": [],\n    \"conversation_id\": \"conv_C9G8mmBkLhQJwCon3hoJN\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"max_output_tokens\": \"inf\",\n    \"audio\": {\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\"\n      }\n    },\n    \"usage\": null,\n    \"metadata\": null\n  },\n}\n"
+          "example": "{\n  \"type\": \"response.created\",\n  \"event_id\": \"event_C9G8pqbTEddBSIxbBN6Os\",\n  \"response\": {\n    \"object\": \"realtime.response\",\n    \"id\": \"resp_C9G8p7IH2WxLbkgPNouYL\",\n    \"status\": \"in_progress\",\n    \"status_details\": null,\n    \"output\": [],\n    \"conversation_id\": \"conv_C9G8mmBkLhQJwCon3hoJN\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"max_output_tokens\": \"inf\",\n    \"audio\": {\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\"\n      }\n    },\n    \"usage\": null,\n    \"metadata\": null\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -4799,7 +5416,7 @@
         "x-oaiMeta": {
           "name": "response.output_item.done",
           "group": "realtime",
-          "example": "{\n    \"event_id\": \"event_3536\",\n    \"type\": \"response.output_item.done\",\n    \"response_id\": \"resp_001\",\n    \"output_index\": 0,\n    \"item\": {\n        \"id\": \"msg_007\",\n        \"object\": \"realtime.item\",\n        \"type\": \"message\",\n        \"status\": \"completed\",\n        \"role\": \"assistant\",\n        \"content\": [\n            {\n                \"type\": \"text\",\n                \"text\": \"Sure, I can help with that.\"\n            }\n        ]\n    }\n}\n"
+          "example": "{\n  \"event_id\": \"event_3536\",\n  \"type\": \"response.output_item.done\",\n  \"response_id\": \"resp_001\",\n  \"output_index\": 0,\n  \"item\": {\n    \"id\": \"msg_007\",\n    \"object\": \"realtime.item\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"assistant\",\n    \"content\": [\n      {\n        \"type\": \"output_text\",\n        \"text\": \"Sure, I can help with that.\"\n      }\n    ]\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -4969,7 +5586,7 @@
         "x-oaiMeta": {
           "name": "session.created",
           "group": "realtime",
-          "example": "{\n  \"type\": \"session.created\",\n  \"event_id\": \"event_C9G5RJeJ2gF77mV7f2B1j\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G5QPteg4UIbotdKLoYQ\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324625,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  },\n}\n"
+          "example": "{\n  \"type\": \"session.created\",\n  \"event_id\": \"event_C9G5RJeJ2gF77mV7f2B1j\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G5QPteg4UIbotdKLoYQ\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324625,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -5011,7 +5628,7 @@
         "x-oaiMeta": {
           "name": "session.updated",
           "group": "realtime",
-          "example": "{\n  \"type\": \"session.updated\",\n  \"event_id\": \"event_C9G8mqI3IucaojlVKE8Cs\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G8l3zp50uFv4qgxfJ8o\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"name\": \"display_color_palette\",\n        \"description\": \"\nCall this function when a user asks for a color palette.\n\",\n        \"parameters\": {\n          \"type\": \"object\",\n          \"strict\": true,\n          \"properties\": {\n            \"theme\": {\n              \"type\": \"string\",\n              \"description\": \"Description of the theme for the color scheme.\"\n            },\n            \"colors\": {\n              \"type\": \"array\",\n              \"description\": \"Array of five hex color codes based on the theme.\",\n              \"items\": {\n                \"type\": \"string\",\n                \"description\": \"Hex color code\"\n              }\n            }\n          },\n          \"required\": [\n            \"theme\",\n            \"colors\"\n          ]\n        }\n      }\n    ],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324832,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  },\n}\n"
+          "example": "{\n  \"type\": \"session.updated\",\n  \"event_id\": \"event_C9G8mqI3IucaojlVKE8Cs\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G8l3zp50uFv4qgxfJ8o\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"name\": \"display_color_palette\",\n        \"description\": \"\nCall this function when a user asks for a color palette.\n\",\n        \"parameters\": {\n          \"type\": \"object\",\n          \"strict\": true,\n          \"properties\": {\n            \"theme\": {\n              \"type\": \"string\",\n              \"description\": \"Description of the theme for the color scheme.\"\n            },\n            \"colors\": {\n              \"type\": \"array\",\n              \"description\": \"Array of five hex color codes based on the theme.\",\n              \"items\": {\n                \"type\": \"string\",\n                \"description\": \"Hex color code\"\n              }\n            }\n          },\n          \"required\": [\n            \"theme\",\n            \"colors\"\n          ]\n        }\n      }\n    ],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324832,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -5295,6 +5912,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.NoiseReductionType"
+          },
+          "strength": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeNoiseReductionStrength",
+            "default": 1
           }
         }
       },
@@ -5465,6 +6086,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.NoiseReductionType"
+          },
+          "strength": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeNoiseReductionStrength",
+            "default": 1
           }
         }
       },
@@ -8334,7 +8959,7 @@
           "input": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+              "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputItem"
             },
             "description": "Input items to include in the prompt for the model. Using this field\n  creates a new context for this Response instead of using the default\n  conversation. An empty array `[]` will clear the context for this Response.\n  Note that this can include references to items that previously appeared in the session\n  using their id."
           },
