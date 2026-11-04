@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the status config properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model StatusConfig {
   @doc("A read-only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (edge) state of the CRD. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.")
   @visibility(Lifecycle.Read)
@@ -26,7 +26,7 @@ model StatusConfig {
 }
 
 @doc("Defines the status config error properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model StatusError is Error;
 
 @doc("Defines the health state of the resource.")

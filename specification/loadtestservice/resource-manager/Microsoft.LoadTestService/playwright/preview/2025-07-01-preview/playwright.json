@@ -899,12 +899,12 @@
         "dataplaneUri": {
           "type": "string",
           "format": "uri",
-          "description": "The workspace data plane service API URI.",
+          "description": "The API endpoint for workspace data plane operations.",
           "readOnly": true
         },
         "regionalAffinity": {
           "type": "string",
-          "description": "Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created.",
+          "description": "Specifies where client workers connect to cloud-hosted browsers. When Enabled, workers connect to browsers in the nearest Azure region to reduce latency. When Disabled, workers connect to browsers in the workspace's Azure region.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -929,7 +929,7 @@
         },
         "localAuth": {
           "type": "string",
-          "description": "Enables the workspace to use local authentication through service access tokens for operations.",
+          "description": "Specifies whether service access tokens can be used to authenticate workspace operations.",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -1039,11 +1039,11 @@
       "properties": {
         "regionalAffinity": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created."
+          "description": "Specifies where client workers connect to cloud-hosted browsers. When Enabled, workers connect to browsers in the nearest Azure region to reduce latency. When Disabled, workers connect to browsers in the workspace's Azure region."
         },
         "localAuth": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "Enables the workspace to use local authentication through service access tokens for operations."
+          "description": "Specifies whether service access tokens can be used to authenticate workspace operations."
         }
       }
     },

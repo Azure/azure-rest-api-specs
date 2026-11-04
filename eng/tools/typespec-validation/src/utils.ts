@@ -6,7 +6,7 @@ import {
   type Suppression,
 } from "@azure-tools/suppressions";
 import { access, readdir, readFile } from "node:fs/promises";
-import { basename, dirname, join, relative, resolve } from "pathe";
+import { basename, dirname, join, resolve } from "pathe";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
 import { supportsColor } from "./diagnostics.ts";
@@ -66,23 +66,6 @@ export async function readTspConfig(folder: string) {
 
 export async function getSuppressions(path: string): Promise<Suppression[]> {
   return getSuppressionsImpl("TypeSpecValidation", path, context);
-}
-
-export async function readFileAtCommit(
-  folder: string,
-  commitish: string,
-  file: string,
-): Promise<string | undefined> {
-  const git = simpleGit(folder);
-  await git.revparse(["--verify", `${commitish}^{commit}`]);
-  const repositoryRoot = (await git.revparse(["--show-toplevel"])).trim();
-  const repositoryPath = relative(repositoryRoot, file);
-
-  try {
-    return await git.show([`${commitish}:${repositoryPath}`]);
-  } catch {
-    return undefined;
-  }
 }
 
 export function getStructureVersion(relativePath: string): 1 | 2 {

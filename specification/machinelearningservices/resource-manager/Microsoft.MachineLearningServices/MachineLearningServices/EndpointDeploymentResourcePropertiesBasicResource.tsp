@@ -26,6 +26,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model EndpointDeploymentResourcePropertiesBasicResource is Azure.ResourceManager.ProxyResource<
   EndpointDeploymentResourceProperties,
@@ -51,6 +52,7 @@ model EndpointDeploymentResourcePropertiesBasicResource is Azure.ResourceManager
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -71,8 +73,8 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
         @path
         @segment("connections")
         @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        connectionName: string,
+        @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
+        connectionName: ConnectionName,
       },
       {
         /** Name of the deployment resource */
@@ -98,6 +100,7 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
@@ -155,6 +158,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface EndpointDeploymentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -202,6 +206,7 @@ interface EndpointDeploymentOps
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface EndpointDeployment {
   /**

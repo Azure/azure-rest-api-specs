@@ -628,12 +628,55 @@ describe("archive label names", () => {
     expect(f.mutations()).toEqual([]);
   });
 
-  it("rejects an overlong archive name before persisting a plan or making writes", async () => {
+  it("reports an overlong archive name without blocking unrelated synchronization or deletion", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
-    f.state.labels[1] = { ...extra, name: "x".repeat(41), archived_at: null };
-    await expect(f.prepare()).rejects.toThrow("exceeds 50 characters");
-    expect(f.mutations()).toEqual([]);
+    f.state.catalog.labels[0].description = "Updated description";
+    f.state.catalog.labels.push({ name: "new", color: "abcdef", description: "New label" });
+    f.state.labels[1].name = "archived: unconfigured";
+    const active = { ...extra, id: 3, node_id: "label-3", name: "retired", archived_at: null };
+    const blocked = {
+      ...extra,
+      id: 4,
+      node_id: "label-4",
+      name: "Network - Azure Service Connection Controller",
+      archived_at: null,
+    };
+    f.state.labels.push(active, structuredClone(blocked));
+    f.state.items = [
+      {
+        number: 1,
+        kind: "issue",
+        state: "CLOSED",
+        labels: new Set(["archived: unconfigured", blocked.name, "keep"]),
+      },
+    ];
+    const run = await f.prepare();
+    expect(run.audit.plan.skippedArchives.map(({ label }) => label)).toEqual([blocked]);
+    expect(run.audit.plan.skippedArchives[0].reason).toContain("exceeds 50 characters");
+    expect(f.args.core.warning).toHaveBeenCalledWith(
+      expect.stringContaining(`Skipping archive of "${blocked.name}":`),
+    );
+    expect(f.args.core.summary.addRaw).toHaveBeenCalledWith(
+      expect.stringContaining("skipped archives: 1"),
+    );
+    await run.apply();
+    expect(f.mutations().map(({ method, path }) => ({ method, path }))).toEqual([
+      { method: "POST", path: `${prefix}/labels` },
+      { method: "PATCH", path: `${prefix}/labels/canonical` },
+      { method: "PATCH", path: `${prefix}/labels/retired` },
+      { method: "DELETE", path: `${prefix}/labels/archived: unconfigured` },
+    ]);
+    expect(f.state.labels.find(({ id }) => id === blocked.id)).toEqual(blocked);
+    expect(f.state.items[0].labels).toEqual(new Set([blocked.name, "keep"]));
+    expect(await run.outcome()).toMatchObject({
+      operations: [
+        { action: "create", status: "completed" },
+        { action: "update", status: "completed" },
+        { action: "archive", status: "completed" },
+        { action: "delete", status: "completed" },
+      ],
+    });
   });
 
   it.each(["archive", "restore"])("verifies GitHub actually renames during %s", async (action) => {
