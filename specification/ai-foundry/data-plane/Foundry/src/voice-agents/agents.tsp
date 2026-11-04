@@ -5,6 +5,7 @@ import "@azure-tools/openai-typespec/models/realtime";
 import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
 import "../openai/responses/models.tsp";
+import "./handoff.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -171,8 +172,12 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
+  @doc("Optional subagent configuration. Set `subagent_type` to `delegate` for delegated background specialists or `inline` for inline voice subagents.")
   subagent_config?: VoiceAgentSubagentConfig;
+
+  @doc("Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  post_call?: VoiceAgentPostCallConfig;
 
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
@@ -264,12 +269,123 @@ union VoiceAgentSoundscapeSound {
   ding2: "ding2",
 }
 
-@doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
+@doc("Post-call delivery configuration.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCallConfig {
+  @doc("The destinations to notify.")
+  @minItems(1)
+  @maxItems(10)
+  destinations: VoiceAgentPostCallDestination[];
+
+  @doc("Additional content to include in each delivery. The transcript is always delivered. `audio` is not supported in this preview; the service rejects it when the agent version is saved.")
+  include?: VoiceAgentPostCallIncludeOption[];
+}
+
+@doc("The type of a post-call destination.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentPostCallDestinationType {
+  string,
+
+  @doc("An Event Grid connection.")
+  event_grid: "event_grid",
+
+  @doc("A routine.")
+  routine: "routine",
+}
+
+@doc("A post-call destination.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCallDestination {
+  @doc("The destination type.")
+  type: VoiceAgentPostCallDestinationType;
+}
+
+@doc("An Event Grid connection that receives post-call events.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentEventGridPostCallDestination
+  extends VoiceAgentPostCallDestination {
+  type: VoiceAgentPostCallDestinationType.event_grid;
+
+  @doc("The name of the Event Grid connection.")
+  @minLength(1)
+  @example("post-call-events")
+  connection_name: string;
+}
+
+@doc("A routine that is dispatched with the post-call event.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentRoutinePostCallDestination
+  extends VoiceAgentPostCallDestination {
+  type: VoiceAgentPostCallDestinationType.routine;
+
+  @doc("The name of the routine.")
+  @minLength(1)
+  @maxLength(128)
+  @example("archive")
+  name: string;
+}
+
+@doc("Content that can be included in a post-call delivery.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentPostCallIncludeOption {
+  string,
+
+  @doc("A URL to the merged call recording. Not supported in this preview: the service rejects `audio` when the agent version is saved.")
+  audio: "audio",
+}
+
+@doc("The subagent configuration mode. Additional modes may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentSubagentType {
+  string,
+
+  @doc("Referenced Foundry agents invoked as delegated background specialists.")
+  delegate: "delegate",
+
+  @doc("Inline voice behaviors that may become active through Handoff.")
+  inline: "inline",
+}
+
+@doc("""
+  Configuration for delegated background specialists or inline voice subagents. For compatibility with existing
+  delegate configurations, the service treats an omitted `subagent_type` as `delegate`.
+  """)
+@discriminator("subagent_type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSubagentConfig {
-  @doc("The sibling Foundry text agents, in the same project, that this voice agent may consult.")
+  @doc("The subagent mode.")
+  subagent_type: VoiceAgentSubagentType;
+}
+
+@doc("Configuration for referenced Foundry agents invoked as delegated background specialists.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDelegateSubagentConfig extends VoiceAgentSubagentConfig {
+  @doc("The subagent mode for delegated background specialists.")
+  subagent_type: VoiceAgentSubagentType.delegate;
+
+  @doc("The sibling Foundry text agents, in the same project, that this Voice Agent may consult.")
   @minItems(1)
   subagents: VoiceAgentSubagent[];
+}
+
+@doc("Configuration for inline voice subagents that may become active through Handoff.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentInlineSubagentConfig extends VoiceAgentSubagentConfig {
+  @doc("The subagent mode for inline voice subagents.")
+  subagent_type: VoiceAgentSubagentType.inline;
+
+  @doc("""
+    Inline voice subagents owned and versioned with the parent Voice Agent. `$entrypoint` must be first, followed
+    by at least one specialist and at most 31 additional subagents. Each subagent declares its outgoing
+    `handoff_conditions`; condition identifiers and the 128-condition limit apply across the entire Agent.
+    """)
+  @minItems(2)
+  @maxItems(32)
+  subagents: InlineVoiceSubagent[];
+
+  @doc("Session-wide Handoff limits. Requires `$entrypoint` with at least one outgoing condition. When omitted, the service permits up to 16 completed and 16 attempted handoffs.")
+  handoff_policy?: VoiceAgentHandoffPolicy;
 }
 
 @doc("A sibling Foundry text agent that a voice agent may consult as a background specialist.")
@@ -471,13 +587,32 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
 
   @doc("An optional description of the system tool.")
   description?: string;
+
+  @doc("Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.")
+  @extension("minimum", 1)
+  @extension("maximum", 300)
+  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("A service-managed control that ends the active conversation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentEndConversationSystemTool extends VoiceAgentSystemTool {
   @doc("The service-managed control action. Always `end_conversation`.")
-  name: "end_conversation";
+  name: VoiceAgentSystemToolName.end_conversation;
+}
+
+@doc("Switches supported conversation language settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLanguageDetectionSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `language_detection`.")
+  name: VoiceAgentSystemToolName.language_detection;
+}
+
+@doc("Retrieves the unchanged transcript of the last user audio turn.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDigitRecognitionSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `digit_recognition`.")
+  name: VoiceAgentSystemToolName.digit_recognition;
 }
 
 @doc("A service-managed voice-session control action. Known values are stable; additional values may be added over time.")
@@ -487,6 +622,144 @@ union VoiceAgentSystemToolName {
 
   @doc("Ends the active conversation.")
   end_conversation: "end_conversation",
+
+  @doc("Switches supported conversation language settings.")
+  language_detection: "language_detection",
+
+  @doc("Retrieves the unchanged transcript of the last user audio turn.")
+  digit_recognition: "digit_recognition",
+
+  @doc("Requests a transfer to an explicitly configured logical target.")
+  transfer: "transfer",
+
+  @doc("Collects one complete SMS from an explicitly selected sender.")
+  collect_sms: "collect_sms",
+
+  @doc("Collects keypad digits on the current call.")
+  collect_dtmf: "collect_dtmf",
+
+  @doc("Sends literal or templated keypad digits.")
+  send_dtmf: "send_dtmf",
+
+  @doc("Sends a text message from the Agent's SMS-capable number.")
+  send_sms: "send_sms",
+}
+
+@doc("Bare session variable name, such as `verification_code`, without a namespace or braces. Tool arguments reference it with `{{name}}`.")
+@pattern("^[A-Za-z_][A-Za-z0-9_]*$")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar VoiceAgentOutputReference extends string;
+
+@doc("Collects one complete SMS from an explicitly selected sender.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `collect_sms`.")
+  name: VoiceAgentSystemToolName.collect_sms;
+}
+
+@doc("Collects keypad digits on the current call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `collect_dtmf`.")
+  name: VoiceAgentSystemToolName.collect_dtmf;
+}
+
+@doc("Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentTransferStrategy {
+  string,
+
+  @doc("Try destinations in configured order while the total budget remains.")
+  sequential: "sequential",
+
+  @doc("Randomize destination order for this invocation, then try each within the total budget.")
+  random: "random",
+
+  @doc("Ring destinations concurrently and select the first answer when the executor supports this strategy.")
+  parallel: "parallel",
+}
+
+@doc("The configured transfer routing policy. The model selects a target name, not destinations or routing settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferRouting {
+  @doc("The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.")
+  strategy: VoiceAgentTransferStrategy;
+
+  @doc("Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.")
+  @minValue(1)
+  @maxValue(300)
+  ring_timeout_seconds?: int32 = 20;
+}
+
+@doc("The supported address formats for a system-tool transfer destination.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentTransferDestinationType {
+  @doc("An E.164 telephone number.")
+  phone_number: "phone_number",
+
+  @doc("A Microsoft Teams user or resource-account identifier.")
+  teams: "teams",
+
+  @doc("A SIP or SIPS URI.")
+  sip: "sip",
+}
+
+@doc("The canonical system-tool transfer destination.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferDestination {
+  @doc("The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip for a SIP URI.")
+  type: VoiceAgentTransferDestinationType;
+
+  @doc("The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities.")
+  @minLength(1)
+  value: string;
+}
+
+@doc("A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferTarget {
+  @doc("The non-blank logical target name. Names must be unique after trimming within the transfer tool.")
+  @minLength(1)
+  @pattern("\\S")
+  name: string;
+
+  @doc("A description that helps the model select this target.")
+  description?: string;
+
+  @doc("The concrete destinations for this transfer target.")
+  @minItems(1)
+  destinations: VoiceAgentTransferDestination[];
+
+  @doc("The trusted routing policy for this target.")
+  routing: VoiceAgentTransferRouting;
+}
+
+@doc("Requests a transfer to an explicitly configured logical target.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `transfer`.")
+  name: VoiceAgentSystemToolName.transfer;
+
+  @doc("Require a non-blank handoff summary in each model-generated transfer call. Defaults to false; does not guarantee delivery to the recipient.")
+  require_handoff?: boolean = false;
+
+  @doc("The non-empty set of logical targets that the model may select.")
+  @minItems(1)
+  targets: VoiceAgentTransferTarget[];
+}
+
+@doc("Sends literal or templated keypad digits.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `send_dtmf`.")
+  name: VoiceAgentSystemToolName.send_dtmf;
+}
+
+@doc("Sends a text message from the Agent's SMS-capable number.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `send_sms`.")
+  name: VoiceAgentSystemToolName.send_sms;
 }
 
 @doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")
@@ -561,22 +834,20 @@ union VoiceType {
 }
 
 @doc("""
-  Output audio configuration for a voice agent.
+  Voice output configuration. Inline subagents use it directly as their voice override, and the session-level
+  output audio configuration extends it.
   Provider-specific fields are selected by `voice_type`:
   - `openai`: `voice` and `speed`.
   - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
     `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
   - `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.
   - `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.
-  - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`; the voice name is derived from the avatar.
+  - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;
+    the voice name is derived from the avatar.
   - `azure-realtime-native`: `voice` and `speed`.
-  `format` and `output_audio_timestamp_types` apply to every voice type.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentAudioOutputConfig {
-  @doc("The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.")
-  format?: OpenAI.RealtimeAudioFormats;
-
+model VoiceAgentVoiceConfig {
   @doc("The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar.")
   voice?: string;
 
@@ -619,6 +890,17 @@ model VoiceAgentAudioOutputConfig {
 
   @doc("The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`.")
   personal_voice_model?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The session-level output audio configuration is a superset of the voice configuration used by inline subagents; inheritance keeps a single SDK type hierarchy."
+@doc("""
+  Output audio configuration for a voice agent. Extends the voice configuration with the session-level `format` and
+  `output_audio_timestamp_types` settings, which apply to every voice type.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentAudioOutputConfig extends VoiceAgentVoiceConfig {
+  @doc("The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.")
+  format?: OpenAI.RealtimeAudioFormats;
 
   @doc("Timestamp kinds to include with output audio. Applies to every `voice_type`.")
   output_audio_timestamp_types?: VoiceAgentAudioTimestampType[];

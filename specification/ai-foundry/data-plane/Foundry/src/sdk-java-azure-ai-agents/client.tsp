@@ -49,6 +49,11 @@ using Azure.AI.Projects;
 
 @@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
 @@clientName(
+  VoiceAgentPostCallConfig,
+  "VoiceAgentPostCallConfiguration",
+  "java"
+);
+@@clientName(
   UserConversationSimulationConfiguration.max_num_turns,
   "maximumNumberOfTurns",
   "java"
@@ -219,6 +224,10 @@ using Azure.AI.Projects;
 );
 @@clientName(CreateTelephonyBindingRequest, "CreateTelephonyBindingInput");
 @@clientName(CreateTelephonyCallJobRequest, "CreateTelephonyCallJobInput");
+@@clientName(
+  CreateSipTelephonyBindingRequest,
+  "CreateSipTelephonyBindingInput"
+);
 @@clientName(
   CreateTwilioTelephonyBindingRequest,
   "CreateTwilioTelephonyBindingInput"
@@ -537,7 +546,7 @@ using Azure.AI.Projects;
 @@clientName(VoiceAgentAudioConfig, "VoiceAgentAudioConfiguration");
 @@clientName(VoiceAgentAudioInputConfig, "VoiceAgentAudioInputConfiguration");
 @@clientName(VoiceAgentAudioOutputConfig, "VoiceAgentAudioOutputConfiguration");
-@@clientName(VoiceAgentAudioOutputConfig.prefer_locales, "preferredLocales");
+@@clientName(VoiceAgentVoiceConfig.prefer_locales, "preferredLocales");
 @@clientName(VoiceAgentAvatarConfig, "VoiceAgentAvatarConfiguration");
 @@clientName(VoiceAgentAvatarVideoParams, "VoiceAgentAvatarVideoParameters");
 @@clientName(
@@ -587,6 +596,8 @@ using Azure.AI.Projects;
   "java"
 );
 @@clientName(VoiceAgentEndOfUtteranceDetection.timeout_ms, "timeout", "java");
+@@clientName(VoiceAgentHandoffCondition.delay_ms, "delay", "java");
+@@clientName(VoiceAgentHandoffEdgeState.delay_ms, "delay", "java");
 @@clientName(
   VoiceAgentServerEventResponseAudioTimestampDelta.audio_duration_ms,
   "audioDuration",
@@ -613,7 +624,15 @@ using Azure.AI.Projects;
   VoiceAgentEndOfUtteranceDetectionModel.semantic_detection_v1_en,
   "SEMANTIC_DETECTION_V1_ENGLISH"
 );
+@@clientName(
+  VoiceAgentDelegateSubagentConfig,
+  "VoiceAgentDelegateSubagentConfiguration"
+);
 @@clientName(VoiceAgentGreetingConfig, "VoiceAgentGreetingConfiguration");
+@@clientName(
+  VoiceAgentInlineSubagentConfig,
+  "VoiceAgentInlineSubagentConfiguration"
+);
 @@clientName(
   VoiceAgentInterimResponseConfig,
   "VoiceAgentInterimResponseConfiguration"
@@ -731,6 +750,7 @@ using Azure.AI.Projects;
   VoiceAgentTurnDetectionType.azure_semantic_vad_en,
   "AZURE_SEMANTIC_VAD_ENGLISH"
 );
+@@clientName(VoiceAgentVoiceConfig, "VoiceAgentVoiceConfiguration");
 
 @@clientName(VoiceConversation.object, "objectType");
 @@clientName(OpenAI.RealtimeResponse.object, "objectType");
@@ -777,6 +797,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
+@@alternateType(OpenAI.MCPTool, OpenAI.ToolMcpTool, "java");
 @@clientName(OpenAI.MCPListToolsToolInputSchema, "McpListToolsToolInputSchema");
 @@clientName(OpenAI.MCPToolCallStatus, "McpToolCallStatus");
 @@clientName(OpenAI.MCPTool.connector_id, "connectorType");
@@ -831,6 +852,11 @@ using Azure.AI.Projects;
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
+@@clientName(
+  HostedAgentDefinition.enable_memory_snapshot,
+  "memorySnapshotEnabled",
+  "java"
+);
 
 @@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
 @@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
@@ -976,6 +1002,27 @@ using Azure.AI.Projects;
 );
 
 // Voice Agent Renames
+@@clientName(
+  VoiceAgentSoundscapeConfig,
+  "VoiceAgentSoundscapeConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeTrackConfig,
+  "VoiceAgentSoundscapeTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeWorkingTrackConfig,
+  "VoiceAgentSoundscapeWorkingTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeSourceConfig,
+  "VoiceAgentSoundscapeSourceConfiguration",
+  "java"
+);
+@@clientName(VoiceAgentSoundscapeWorkingTrackConfig.delay_ms, "delay", "java");
 @@clientName(
   Azure.AI.Projects.Agents.generateAgent,
   "createAgentFromPrompt",
