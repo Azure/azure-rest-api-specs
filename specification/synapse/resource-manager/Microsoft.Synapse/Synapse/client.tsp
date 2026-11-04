@@ -1636,14 +1636,14 @@ union SynapseDatabasePrincipalAssignmentType {
 @@clientOption(
   Workspaces.WorkspaceAadAdminInfos.get,
   "resource-name",
-  "SynapseWorkspaceAdministrator",
+  "SynapseWorkspaceAdministratorResource",
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Restore the GA C# resource name; the AAD admin and SQL AAD admin resources share one model."
 @@clientOption(
   Workspaces.WorkspaceSqlAadAdmins.get,
   "resource-name",
-  "SynapseWorkspaceSqlAdministrator",
+  "SynapseWorkspaceSqlAdministratorResource",
   "csharp"
 );
 @@clientName(
@@ -1679,6 +1679,213 @@ union SynapseDatabasePrincipalAssignmentType {
 @@alternateType(
   KustoPools.DatabasePrincipalAssignmentCheckNameRequest.type,
   SynapseDatabasePrincipalAssignmentType,
+  "csharp"
+);
+@@clientName(
+  KustoPools.KustoPoolCheckNameRequest.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(
+  KustoPools.DataConnectionCheckNameRequest.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(
+  KustoPools.ClusterPrincipalAssignmentCheckNameRequest.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(
+  KustoPools.DatabasePrincipalAssignmentCheckNameRequest.type,
+  "ResourceType",
+  "csharp"
+);
+
+// GA format-by-name-rules ('tenantId': uuid, '*Uri': Uri) and released .NET property types.
+@@alternateType(
+  KustoPools.ClusterPrincipalProperties.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  KustoPools.DatabasePrincipalProperties.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Workspaces.AadAdminProperties.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SqlPools.SqlPoolBlobAuditingPolicyProperties.storageAccountSubscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SqlPools.ExtendedSqlPoolBlobAuditingPolicyProperties.storageAccountSubscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SqlPools.ServerBlobAuditingPolicyProperties.storageAccountSubscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SqlPools.ExtendedServerBlobAuditingPolicyProperties.storageAccountSubscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(KustoPools.KustoPoolProperties.uri, url, "csharp");
+@@alternateType(KustoPools.KustoPoolProperties.dataIngestionUri, url, "csharp");
+@@alternateType(SqlPools.EncryptionProtectorProperties.uri, url, "csharp");
+@@alternateType(Workspaces.KeyProperties.keyVaultUrl, url, "csharp");
+@@alternateType(
+  Workspaces.PrivateEndpoint.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Workspaces.WorkspaceProperties.extraProperties,
+  Record<unknown>,
+  "csharp"
+);
+
+// Released .NET property names (GA acronym-mapping 'ETA': Eta and AutoRest `type` property names).
+@@clientName(
+  Workspaces.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimes.SelfHostedIntegrationRuntimeStatusTypeProperties.autoUpdateETA,
+  "AutoUpdateEta",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimes.ManagedIntegrationRuntimeOperationResult.type,
+  "ManagedIntegrationRuntimeOperationResultType",
+  "csharp"
+);
+@@clientName(
+  Workspaces.WorkspaceRepositoryConfiguration.type,
+  "WorkspaceRepositoryConfigurationType",
+  "csharp"
+);
+
+// Read-only resources (GET/List only) were released with settable properties; mark them as
+// input+output for C# so the generator keeps the setters.
+@@usage(SqlPools.SqlPoolConnectionPolicy, Usage.input | Usage.output, "csharp");
+@@usage(
+  SqlPools.MaintenanceWindowOptions,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(SqlPools.SqlPoolColumn, Usage.input | Usage.output, "csharp");
+@@usage(
+  BigDataPools.SparkConfigurationResource,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(BigDataPools.LibraryResource, Usage.input | Usage.output, "csharp");
+// GA operation names that AutoRest derived as {Verb}{OperationGroup} (not in autorest.md).
+@@clientName(
+  IntegrationRuntimes.IntegrationRuntimeResources.integrationRuntimeConnectionInfosGet,
+  "GetIntegrationRuntimeConnectionInfo",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimes.IntegrationRuntimeResources.regenerate,
+  "RegenerateIntegrationRuntimeAuthKey",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimes.IntegrationRuntimeResources.integrationRuntimeNodesGet,
+  "GetIntegrationRuntimeNode",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimes.IntegrationRuntimeResources.integrationRuntimeNodesUpdate,
+  "UpdateIntegrationRuntimeNode",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimes.IntegrationRuntimeResources.integrationRuntimeNodesDelete,
+  "DeleteIntegrationRuntimeNode",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimes.IntegrationRuntimeResources.sync,
+  "SyncIntegrationRuntimeCredential",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimes.IntegrationRuntimeResources.refresh,
+  "RefreshIntegrationRuntimeObjectMetadata",
+  "csharp"
+);
+@@clientName(
+  SqlPools.SqlPoolColumns.enableRecommendation,
+  "EnableRecommendationSqlPoolSensitivityLabel",
+  "csharp"
+);
+@@clientName(
+  SqlPools.SqlPoolColumns.disableRecommendation,
+  "DisableRecommendationSqlPoolSensitivityLabel",
+  "csharp"
+);
+@@clientName(
+  SqlPools.SqlPools.sqlPoolSensitivityLabelsUpdate,
+  "UpdateSqlPoolSensitivityLabel",
+  "csharp"
+);
+@@clientName(
+  SqlPools.SqlPools.sqlPoolRecommendedSensitivityLabelsUpdate,
+  "UpdateSqlPoolRecommendedSensitivityLabel",
+  "csharp"
+);
+@@clientName(SqlPools.SqlPools.sqlPoolUsagesList, "GetSqlPoolUsages", "csharp");
+@@clientName(
+  SqlPools.SqlPools.listCurrent,
+  "GetCurrentSqlPoolSensitivityLabels",
+  "csharp"
+);
+@@clientName(
+  SqlPools.SqlPools.listRecommended,
+  "GetRecommendedSqlPoolSensitivityLabels",
+  "csharp"
+);
+@@clientName(
+  SqlPools.SqlPools.sqlPoolRestorePointsCreate,
+  "CreateSqlPoolRestorePoint",
+  "csharp"
+);
+@@clientName(
+  SqlPools.WorkspaceManagedSqlServerUsagesOperationGroup.list,
+  "GetWorkspaceManagedSqlServerUsages",
+  "csharp"
+);
+@@clientName(
+  Workspaces.Workspaces.replaceAll,
+  "ReplaceAllIpFirewallRule",
+  "csharp"
+);
+@@clientName(
+  KustoPools.KustoPoolsOperationGroup.listSkus,
+  "GetSkusKustoPools",
+  "csharp"
+);
+@@alternateType(
+  KustoPools.KustoPoolsOperationGroup.checkNameAvailability::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+// AutoRest .NET treated this POST list (value array) as pageable; keep the released Pageable signature.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the released .NET pageable signature"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  IntegrationRuntimes.IntegrationRuntimeResources.list,
   "csharp"
 );
 // GA autorest.md directive transforms.
@@ -1742,12 +1949,12 @@ union SynapseDatabasePrincipalAssignmentType {
 @@alternateType(
   SqlPools.WritableSensitivityLabelSource,
   "current",
-  "python, java"
+  "python, java, csharp"
 );
 @@alternateType(
   SqlPools.RecommendedSensitivityLabelSource,
   "recommended",
-  "python, java"
+  "python, java, csharp"
 );
 
 // --- Java only ---
