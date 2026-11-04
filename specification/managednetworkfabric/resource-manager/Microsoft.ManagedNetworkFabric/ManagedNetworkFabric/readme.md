@@ -38,12 +38,26 @@ These settings apply only when `--tag=package-2026-07-15-preview` is specified o
 input-file:
   - preview/2026-07-15-preview/managednetworkfabric.json
 suppressions:
-  - code: AvoidAnonymousTypes
-    where: $.definitions
-    reason: This error is caused by typespec inbuilt managed identity model.
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    where: $.paths
-    reason: Older API versions (e.g., 2024-02-15-preview, 2023-06-15) contain deprecated APIs that have been removed and are not listed in the default tag.
+  - code: ArmResourcePropertiesBag
+    reason: >-
+      InternetGateway.properties.type is an existing GatewayType field in the
+      published 2025-07-15 stable API. The InternetGateway and
+      InternetGatewayProperties definitions are unchanged in this preview.
+      Although properties.type repeats the ARM envelope property name, removing
+      or renaming it would introduce an additional breaking change for clients
+      adopting this version. Retained to preserve the published contract.
+    from: managednetworkfabric.json
+    where: $.definitions["InternetGateway"]
+  - code: ArmResourcePropertiesBag
+    from: managednetworkfabric.json
+    reason: >-
+      NetworkFabricSku.properties.type is an existing read-only FabricSkuType
+      field in the published 2025-07-15 stable API. The NetworkFabricSku and
+      NetworkFabricSkuProperties definitions are unchanged in this preview.
+      Although properties.type repeats the ARM envelope property name, removing
+      or renaming it would change the published response contract and client
+      models. Retained to preserve the published contract.
+    where: $.definitions["NetworkFabricSku"]
   - code: GuidUsage
     where: $.definitions.Azure.Core.uuid
     reason: GUIDs are required for validationId and correlationId fields as per ARM API review guidance.
