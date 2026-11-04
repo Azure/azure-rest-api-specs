@@ -374,8 +374,8 @@ alias AgentInsightRunCreateParameters = {
   lookback_hours?: float64 = 168;
 };
 
-/** Inputs used when creating an agent insight run. */
-model AgentInsightRunCreate {
+/** Inputs recorded for an Agent Insights run. */
+model AgentInsightRunInputs {
   ...AgentInsightRunCreateParameters;
 }
 
@@ -416,7 +416,7 @@ model AgentInsightTokenUsage {
 }
 
 /** A long-running run that analyzes one agent's traces and updates that agent's insights. */
-model AgentInsightRun is JobLike<AgentInsightRunResult, AgentInsightRunCreate> {
+model AgentInsightRun is JobLike<AgentInsightRunResult, AgentInsightRunInputs> {
   /** The Agent Insights monitor this run belongs to. */
   @visibility(Lifecycle.Read)
   monitor_id: string;

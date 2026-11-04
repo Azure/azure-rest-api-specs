@@ -46076,7 +46076,7 @@ components:
           description: Server-assigned unique identifier.
           readOnly: true
         inputs:
-          $ref: '#/components/schemas/AgentInsightRunCreate'
+          $ref: '#/components/schemas/AgentInsightRunInputs'
           description: Caller-supplied inputs.
         result:
           $ref: '#/components/schemas/AgentInsightRunResult'
@@ -46131,7 +46131,7 @@ components:
           description: The model deployment used to analyze traces for this run.
           readOnly: true
       description: A long-running run that analyzes one agent's traces and updates that agent's insights.
-    AgentInsightRunCreate:
+    AgentInsightRunInputs:
       type: object
       properties:
         lookback_hours:
@@ -46141,7 +46141,7 @@ components:
           description: Optional finite positive number of hours of trace history to analyze, up to 2,160. Defaults to 168.
           exclusiveMinimum: 0
           default: 168
-      description: Inputs used when creating an agent insight run.
+      description: Inputs recorded for an Agent Insights run.
     AgentInsightRunResult:
       type: object
       required:
