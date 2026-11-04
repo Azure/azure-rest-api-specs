@@ -1,0 +1,334 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.EdgeOperator - Azure Local Disconnected Operations system configuration",
+    "version": "2026-06-01-preview",
+    "description": "Microsoft.EdgeOperator Resource Provider management API for Azure Local Disconnected Operations (ALDO) system configuration.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SystemConfiguration"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOperator/systemConfiguration/default": {
+      "get": {
+        "operationId": "SystemConfigurationOperations_Get",
+        "tags": [
+          "SystemConfiguration"
+        ],
+        "description": "Gets the active system configuration for ALDO.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SystemConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SystemConfiguration_Get": {
+            "$ref": "./examples/SystemConfiguration_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SystemConfigurationOperations_CreateOrUpdate",
+        "tags": [
+          "SystemConfiguration"
+        ],
+        "description": "Creates or fully replaces the active system configuration for ALDO.\nThe resource name must be `default`.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SystemConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SystemConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SystemConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'SystemConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SystemConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SystemConfiguration_CreateOrUpdate": {
+            "$ref": "./examples/SystemConfiguration_CreateOrUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutomaticUpdatePreparationStatus": {
+      "type": "string",
+      "description": "Automatic update preparation state for a system configuration.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AutomaticUpdatePreparationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The system is prepared for an automatic update."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The system is not prepared for an automatic update."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ConnectionIntent": {
+      "type": "string",
+      "description": "Connection intent for a system configuration.",
+      "enum": [
+        "Connected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Device is connected to cloud."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Device is disconnected from cloud."
+          }
+        ]
+      }
+    },
+    "SystemConfiguration": {
+      "type": "object",
+      "description": "The active system configuration for ALDO.\nThis is a singleton resource; the only accepted resource name is `default`.\n\nThe subscription in the request path must be the Operator subscription. This subscription is used\nonly for the access check: the resource provider verifies it on every request, and only operators\nhave access to the Operator subscription and can therefore invoke the Microsoft.EdgeOperator APIs.\nRequests scoped to any other subscription are rejected.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SystemConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SystemConfigurationProperties": {
+      "type": "object",
+      "description": "System configuration properties for Azure Local Disconnected Operations (ALDO).\nThe writable fields are supplied by the caller on PUT; the remaining fields are\ncomputed by the resource provider and returned on GET.",
+      "properties": {
+        "dnsForwarderIpAddress": {
+          "type": "string",
+          "description": "The IP address of the DNS forwarder used by the system. Not yet set until configured."
+        },
+        "connectionIntent": {
+          "$ref": "#/definitions/ConnectionIntent",
+          "description": "The connection intent for the system. Not yet set until configured."
+        },
+        "stampId": {
+          "type": "string",
+          "description": "The identifier of the stamp hosting the system. Must be a valid GUID. Not yet set until configured.",
+          "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+        },
+        "deviceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the device associated with this system configuration. Not yet set until configured.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/disconnectedOperations"
+              }
+            ]
+          }
+        },
+        "automaticUpdatePreparationStatus": {
+          "$ref": "#/definitions/AutomaticUpdatePreparationStatus",
+          "description": "Indicates whether the system is prepared for an automatic update.",
+          "readOnly": true
+        },
+        "externalTimeServers": {
+          "type": "array",
+          "description": "The external time servers configured for the system.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "telemetryOptOutStatus": {
+          "$ref": "#/definitions/TelemetryOptOutStatus",
+          "description": "Indicates whether the system has opted out of telemetry.",
+          "readOnly": true
+        },
+        "externalDomainSuffix": {
+          "type": "string",
+          "description": "The external domain suffix configured for the system.",
+          "readOnly": true
+        },
+        "imageVersion": {
+          "type": "string",
+          "description": "The image version currently deployed on the system.",
+          "readOnly": true
+        },
+        "ingressNicPrefixLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The prefix length of the ingress network interface controller (NIC).",
+          "readOnly": true
+        },
+        "ingressNicIpAddress": {
+          "type": "string",
+          "description": "The IP address of the ingress network interface controller (NIC).",
+          "readOnly": true
+        },
+        "ingressNicDefaultGateway": {
+          "type": "string",
+          "description": "The default gateway of the ingress network interface controller (NIC).",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the system configuration resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "TelemetryOptOutStatus": {
+      "type": "string",
+      "description": "Telemetry opt-out state for a system configuration.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetryOptOutStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The system has opted out of telemetry."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The system has not opted out of telemetry."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

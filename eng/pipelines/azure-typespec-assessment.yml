@@ -1,0 +1,53 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+# Evaluates assessment routing and coordinator behavior, including negative routing
+# checks for authoring and SDK generation. No MCP server is required.
+trigger: none
+pr: none
+
+parameters:
+  - name: SkillBranch
+    displayName: Branch containing the azure-typespec-assessment skill source to evaluate. Defaults to the full source branch ref.
+    type: string
+    default: $(Build.SourceBranch)
+
+variables:
+  - template: /eng/pipelines/templates/variables/image.yml
+  - group: AzSDK_Eval_Variable_group
+  - name: SkillBranch
+    value: ${{ parameters.SkillBranch }}
+
+extends:
+  template: /eng/pipelines/templates/stages/1es-redirect.yml
+  parameters:
+    Use1ESOfficial: true
+    stages:
+      - stage: Prepare
+        displayName: Prepare track
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/generate-eval-matrix.yml
+            parameters:
+              vallyRoot: .github/skills/azure-typespec-assessment/evals
+              evalGlobs:
+                - "assessment.eval.yaml"
+
+      - stage: Eval
+        displayName: Run Eval
+        dependsOn: Prepare
+        jobs:
+          - template: /.github/skills/azure-typespec-assessment/evals/pipeline/typespec-assessment-eval.yml
+            parameters:
+              vallyRoot: .github/skills/azure-typespec-assessment/evals
+              evalInvokeTemplate: /.github/skills/azure-typespec-assessment/evals/pipeline/typespec-assessment-eval-invoke.yml
+              preEvalTemplate: /.github/skills/azure-typespec-assessment/evals/pipeline/typespec-assessment-preeval.yml
+              shardTimeoutInMinutes: 75
+
+      - stage: Summary
+        displayName: "Summarize results"
+        dependsOn:
+          - Prepare
+          - Eval
+        condition: always()
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/eval-summarize.yml
+            parameters:
+              failOnFailedTests: false
