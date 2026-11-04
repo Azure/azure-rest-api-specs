@@ -4,13 +4,15 @@ Load for confirmed Go targets, ARM or data-plane, through the [naming dispatcher
 
 Source: [Go initialism conventions](https://go.dev/wiki/CodeReviewComments#initialisms). Apply the following checks in order.
 
-## Preserve Existing Names
+## Preserve Shipped Names
 
-Use the TypeSpec diff to identify candidate additions, but do not assume a newly added declaration represents a new Go API name: it may already exist in the SDK, for example during a Swagger-to-TypeSpec migration. Leave existing names and their Go overrides unchanged, including those in preview or unreleased API versions. Use supplied SDK baseline evidence to resolve compatibility; when compatibility is uncertain, report only the affected naming decision as blocked rather than guessing. Modifying a declaration does not make its name new.
+Use the TypeSpec diff to identify candidate additions, but do not assume a newly added declaration represents a new Go API name: it may already exist in the SDK, for example during a Swagger-to-TypeSpec migration.
+
+Preserve shipped Go names and their overrides, including names shipped in preview releases. Allow casing corrections for names confirmed unshipped, even when their TypeSpec declarations already exist. Preview or stable API status alone does not establish whether a Go name has shipped. Use supplied release evidence; if it is missing or conflicting, block only the affected naming decision rather than guessing.
 
 ## Follow Related Names
 
-For each new name, inspect related models, operations, properties, parameters, and enum/union members in the TypeSpec project. Use existing `clientName` overrides that apply to Go before the declaration's spelling.
+For each new or confirmed-unshipped name, inspect related models, operations, properties, parameters, and enum/union members in the TypeSpec project. Use existing `clientName` overrides that apply to Go before the declaration's spelling.
 
 - Existing `FooAbcOperation`: keep new `BarAbcOperation`, not `BarABCOperation`, when `Abc` has the same meaning.
 - Existing union member `Tpm` has a Go override of `TPM`: use `TPMTransition` for a new related member `TpmTransition`.
@@ -19,7 +21,7 @@ Match the same term and meaning, not an unrelated substring. If the TypeSpec evi
 
 ## Uppercase Acronyms in Other New Names
 
-Otherwise, uppercase confirmed acronym components in new Go names. Confirm their meaning from TypeSpec documentation; do not guess expansions or change letters inside ordinary words.
+Otherwise, uppercase confirmed acronym components in new or confirmed-unshipped Go names. Confirm their meaning from TypeSpec documentation; do not guess expansions or change letters inside ordinary words.
 
 | TypeSpec target           | Go `clientName`           |
 | ------------------------- | ------------------------- |
@@ -32,6 +34,6 @@ This profile covers acronym casing only. Do not borrow C# transformations such a
 
 ## Use Go-Scoped Overrides
 
-When a new declaration needs different Go casing, propose a `clientName` override with scope `go`, for example `@@clientName(ControllerType.CiscoAci, "CiscoACI", "go");`. Target real TypeSpec declarations; do not invent targets for synthesized names.
+When an unshipped name needs different Go casing, propose a `clientName` override with scope `go`, for example `@@clientName(ControllerType.CiscoAci, "CiscoACI", "go");`. Target real TypeSpec declarations; do not invent targets for synthesized names.
 
 Do not rename the TypeSpec declaration just to change its Go spelling. Preserve other-language customizations, and skip overrides that merely repeat an unchanged name. Report the TypeSpec target, proposed Go name, and supporting declaration or override. Keep proposed names separate from verified generated names.
