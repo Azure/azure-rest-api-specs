@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/aliases/chat",
+            "name": "chat",
+            "type": "Microsoft.ApiManagement/aigateways/workspaces/aliases",
+            "eTag": "W/\"1\"",
+            "properties": {
+              "aliasName": "chat",
+              "description": "Stable chat model alias",
+              "backendModels": [
+                {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/foundry-provider/models/gpt-4o",
+                  "priority": 0,
+                  "weight": 1
+                }
+              ],
+              "selectionOrder": [
+                "routing"
+              ],
+              "policies": [
+                {
+                  "type": "costLimit",
+                  "scope": "resource",
+                  "id": "daily-budget",
+                  "amount": 10,
+                  "period": "day",
+                  "counterKey": [
+                    "identity"
+                  ]
+                }
+              ],
+              "supportedEndpoints": [
+                "openai/v1/chat/completions"
+              ],
+              "gatewayEndpoints": [
+                {
+                  "url": "https://example-gateway.azure-api.net/default/models/openai/v1/chat/completions",
+                  "baseUrl": "https://example-gateway.azure-api.net/default/models/openai/v1",
+                  "api": "v1/chat/completions"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AiGatewayAliasResources_ListByWorkspace",
+  "title": "List aliases in the default workspace"
+}

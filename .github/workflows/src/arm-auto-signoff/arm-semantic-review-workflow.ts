@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { getWorkflowRunArtifactInputs } from "../context.ts";
+import { getLatestCommitStatuses } from "../commit-statuses.ts";
 import type { GitHubScriptArgs } from "../github.ts";
 import {
   addSpecificationChanges,
@@ -227,14 +228,15 @@ export default async function publishArmSemanticReviewStatus({
     };
   }
 
-  await publishStatus(
-    { github, core },
-    owner,
-    repo,
-    headSha,
-    getRunStatusUrl(context, owner, repo),
-    status,
+  const targetUrl = getRunStatusUrl(context, owner, repo);
+  const latestStatus = getLatestSemanticReviewStatus(
+    await getLatestCommitStatuses(github, owner, repo, headSha),
   );
+  if (latestStatus?.state !== CommitStatusState.PENDING || latestStatus.target_url !== targetUrl) {
+    core.info("This reviewer attempt no longer owns the Pending status; result is unchanged");
+    return { headSha, issueNumber, statusPublished: false };
+  }
+  await publishStatus({ github, core }, owner, repo, headSha, targetUrl, status);
   return { headSha, issueNumber, statusPublished: true };
 }
 

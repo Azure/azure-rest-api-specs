@@ -27,6 +27,8 @@ const status = version.endsWith("-preview") ? "preview" : "stable";
 const specFile = path.join(project, status, version, "cognitiveservices.json");
 const spec = JSON.parse(readFileSync(specFile, "utf8"));
 const baselineRef = process.env.CUSTOM_KEYS_BASE_REF;
+const historyBaselineRef =
+  process.env.CUSTOM_KEYS_HISTORY_BASE_REF ?? baselineRef;
 const documents = new Map([[specFile, spec]]);
 const git = (...args) =>
   execFileSync("git", args, { cwd: root, maxBuffer: 64 * 1024 * 1024 });
@@ -80,6 +82,34 @@ assert.equal(
   2,
   "Account and project connection scopes",
 );
+
+test("reconciled certificate trust and tool controls remain preview-only", () => {
+  for (const [model, property] of [
+    ["AccountProperties", "trustedCertificateSources"],
+    ["ProjectProperties", "toolControls"],
+  ]) {
+    assert.equal(
+      Object.hasOwn(properties(spec.definitions[model]), property),
+      status === "preview",
+      `${model}.${property}`,
+    );
+  }
+  for (const model of [
+    "TrustedCertificateSource",
+    "TrustedCertificateSourceType",
+    "CertificateBundleReference",
+    "ToolControls",
+    "ToolControlEntry",
+    "ToolControlsDefaultAction",
+    "ToolControlType",
+  ]) {
+    assert.equal(
+      Object.hasOwn(spec.definitions, model),
+      status === "preview",
+      model,
+    );
+  }
+});
 
 test("read projections preserve every authentication variant and all unrelated properties", () => {
   const variants = (base) =>
@@ -238,10 +268,10 @@ test("authorized secret-response projection retains credentials without adding a
   );
 });
 
-if (baselineRef) {
+if (historyBaselineRef) {
   test("every historical generated contract and example retains its Git blob hash", () => {
     const prefix = path.relative(root, project).split(path.sep).join("/");
-    const entries = git("ls-tree", "-r", "-z", baselineRef, "--", prefix)
+    const entries = git("ls-tree", "-r", "-z", historyBaselineRef, "--", prefix)
       .toString()
       .split("\0")
       .filter(Boolean)
@@ -269,7 +299,9 @@ if (baselineRef) {
       assert.equal(hashes[index], metadata.split(" ")[2], file);
     }
   });
+}
 
+if (baselineRef) {
   test("unrelated November operations remain unchanged", () => {
     const file = path.relative(root, specFile).split(path.sep).join("/");
     const baseline = JSON.parse(git("show", `${baselineRef}:${file}`));
