@@ -1950,12 +1950,11 @@
           "description": "Fully qualified Azure Resource Manager resource ID of the virtual machine targeted by this mitigation.",
           "readOnly": true
         },
-        "score": {
+        "rank": {
           "type": "integer",
           "format": "int32",
-          "description": "Execution score from 0 through 100, where a higher value indicates a safer and more complete mitigation.",
-          "minimum": 0,
-          "maximum": 100,
+          "description": "Relative recommendation priority among mitigations for the same finding.\nRank 1 has the highest priority, followed by consecutive ranks 2, 3, and so on.\nRanks are assigned across all sibling mitigations before pagination or filtering,\nwith ties broken by ordinal mitigation resource name. A mitigation has the same\nrank in GET, list, and action responses for an unchanged set of sibling priorities.\nRanks can change when sibling priorities or membership change. Rank is not a\nconfidence measure or a guarantee of mitigation safety or success.",
+          "minimum": 1,
           "readOnly": true
         },
         "commandsSummary": {
@@ -1989,7 +1988,7 @@
         "findingId",
         "cveId",
         "virtualMachineArmId",
-        "score",
+        "rank",
         "commandsSummary",
         "isRollbackable",
         "status"

@@ -606,12 +606,17 @@ model NeuroShieldMitigationProperties {
   virtualMachineArmId: Azure.Core.armResourceIdentifier;
 
   /**
-   * Execution score from 0 through 100, where a higher value indicates a safer and more complete mitigation.
+   * Relative recommendation priority among mitigations for the same finding.
+   * Rank 1 has the highest priority, followed by consecutive ranks 2, 3, and so on.
+   * Ranks are assigned across all sibling mitigations before pagination or filtering,
+   * with ties broken by ordinal mitigation resource name. A mitigation has the same
+   * rank in GET, list, and action responses for an unchanged set of sibling priorities.
+   * Ranks can change when sibling priorities or membership change. Rank is not a
+   * confidence measure or a guarantee of mitigation safety or success.
    */
-  @minValue(0)
-  @maxValue(100)
+  @minValue(1)
   @visibility(Lifecycle.Read)
-  score: int32;
+  rank: int32;
 
   /**
    * User-friendly description of the commands executed by this mitigation.

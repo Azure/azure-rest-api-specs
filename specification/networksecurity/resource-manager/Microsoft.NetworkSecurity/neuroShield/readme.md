@@ -33,6 +33,26 @@ are not completed or deployed by this public specification update. Runtime
 verification through Azure Resource Manager and ARM/RPaaS reviewer confirmation
 remain required. The June API contract is unchanged.
 
+### Mitigation recommendation rank
+
+The public October contract exposes read-only `properties.rank` instead of
+`properties.score`. Rank is an integer starting at 1, without the former score limit of 100:
+1 is the highest relative recommendation priority, followed by 2, 3, and so on
+within the same finding. It is not a confidence measure or a guarantee of safety,
+completeness, or successful execution.
+
+The service computes consecutive ranks over all sibling mitigations before
+pagination, filtering, or action eligibility is applied. Ties are broken by
+ordinal mitigation resource name. GET, nested and aggregate lists, and
+resource-returning actions report the same rank for unchanged sibling priorities
+and membership; they do not renumber the returned subset. Ranks can change when
+those priorities or membership change.
+
+This is an intentional public-contract change from the private source, not a
+claim of exact source equality. Runtime compatibility, paired private-specification
+alignment, and deployment verification are separate rollout requirements. This
+public change does not remove internal scores or alter mitigation execution order.
+
 ## Getting Started
 
 ### Shared NetworkSecurity SDK packages
