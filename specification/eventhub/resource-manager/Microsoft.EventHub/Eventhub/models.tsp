@@ -1969,36 +1969,14 @@ model OperationListResult is Azure.Core.Page<Operation>;
 @@visibility(OperationListResult.value, Lifecycle.Read);
 
 /**
- * Configuration used to trigger a migration of a namespace to a new SKU across one or more target locations.
+ * The migration settings of a namespace.
  */
 @added(Versions.v2026_09_01_preview)
-model NamespaceMigrationConfiguration {
+model NamespaceMigrationDetails {
   /**
-   * The migration configuration properties.
+   * The target SKU of the migration. Required when triggering a migration.
    */
-  properties?: NamespaceMigrationConfigurationProperties;
-}
-
-/**
- * The properties of a namespace migration configuration.
- */
-@added(Versions.v2026_09_01_preview)
-model NamespaceMigrationConfigurationProperties {
-  /**
-   * The migration settings.
-   */
-  migration?: NamespaceMigrationConfigurationDetails;
-}
-
-/**
- * The migration settings describing the target locations.
- */
-@added(Versions.v2026_09_01_preview)
-model NamespaceMigrationConfigurationDetails {
-  /**
-   * The target SKU of the migration.
-   */
-  targetSku: MigrationTargetSku;
+  targetSku?: MigrationTargetSku;
 
   /**
    * The target capacity of the migration. When omitted, Standard to Premium defaults to 1 processing unit, Premium to Dedicated defaults to 1 throughput unit, and Standard to Dedicated preserves the existing throughput units. For Premium targets the value must be one of 1, 2, 4, 6, 8, 10, 12, or 16 processing units.
@@ -2008,7 +1986,14 @@ model NamespaceMigrationConfigurationDetails {
   /**
    * The list of target locations for the migration. Dedicated locations must also specify clusterArmId.
    */
-  locations?: NamespaceMigrationLocationInput[];
+  @identifiers(#["locationName"])
+  locations?: NamespaceMigrationLocation[];
+
+  /**
+   * The overall status of the migration.
+   */
+  @visibility(Lifecycle.Read)
+  status?: MigrationStatus;
 }
 
 /**
@@ -2035,10 +2020,10 @@ union MigrationTargetSku {
 }
 
 /**
- * A target location for a namespace migration.
+ * A target location of a namespace migration.
  */
 @added(Versions.v2026_09_01_preview)
-model NamespaceMigrationLocationInput {
+model NamespaceMigrationLocation {
   /**
    * The name of the target location.
    */
@@ -2046,90 +2031,6 @@ model NamespaceMigrationLocationInput {
 
   /**
    * The ARM ID of the dedicated cluster in the target location. Required when migrating to a Dedicated SKU.
-   */
-  clusterArmId?: string;
-}
-
-/**
- * The status of a namespace migration.
- */
-@added(Versions.v2026_09_01_preview)
-model NamespaceMigration {
-  /**
-   * Fully qualified identifier of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The geo-location where the resource lives.
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
-   * SKU parameters that describe the target of the migration.
-   */
-  sku?: Sku;
-
-  /**
-   * The migration status properties.
-   */
-  properties?: NamespaceMigrationProperties;
-}
-
-/**
- * The properties describing the status of a namespace migration.
- */
-@added(Versions.v2026_09_01_preview)
-model NamespaceMigrationProperties {
-  /**
-   * The migration status details.
-   */
-  migration?: NamespaceMigrationDetails;
-}
-
-/**
- * The migration status details.
- */
-@added(Versions.v2026_09_01_preview)
-model NamespaceMigrationDetails {
-  /**
-   * The list of target locations for the migration.
-   */
-  locations?: NamespaceMigrationLocationInfo[];
-
-  /**
-   * The overall status of the migration.
-   */
-  @visibility(Lifecycle.Read)
-  status?: MigrationStatus;
-}
-
-/**
- * Information about a target location participating in a namespace migration.
- */
-@added(Versions.v2026_09_01_preview)
-model NamespaceMigrationLocationInfo {
-  /**
-   * The name of the target location.
-   */
-  locationName?: string;
-
-  /**
-   * The ARM ID of the dedicated cluster in the target location.
    */
   clusterArmId?: string;
 
@@ -2192,30 +2093,6 @@ union ReplicaState {
 @added(Versions.v2026_09_01_preview)
 model NamespaceMigrationReplicationLags {
   /**
-   * Fully qualified identifier of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The geo-location where the resource lives.
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
    * The replication lag properties.
    */
   properties?: ReplicationLagProperties;
@@ -2230,12 +2107,14 @@ model ReplicationLagProperties {
    * The descriptions of the counters reported in the replication lags.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
   counterDescriptions?: ReplicationLagCounter[];
 
   /**
    * The replication lag information, broken down by target.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
   replicationLags?: ReplicaLagInfo[];
 }
 
@@ -2296,11 +2175,13 @@ model ReplicaLagInfo {
   /**
    * The counter values aggregated at the current level.
    */
+  @identifiers(#["counterName"])
   values?: ReplicaLagValue[];
 
   /**
    * Further breakdowns of the values.
    */
+  @identifiers(#["name"])
   breakdowns?: ReplicaLagInfo[];
 }
 

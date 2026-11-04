@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "namespaceName": "sdk-Namespace-8980",
+    "resourceGroupName": "ResurceGroupSample",
+    "subscriptionId": "SampleSubscription",
+    "resource": {
+      "properties": {
+        "migration": {
+          "targetSku": "Dedicated",
+          "targetCapacity": 1,
+          "locations": [
+            {
+              "locationName": "eastus",
+              "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/sampleCluster"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8980/migrations/default",
+        "name": "default",
+        "type": "Microsoft.EventHub/namespaces/migrations",
+        "properties": {
+          "migration": {
+            "targetSku": "Dedicated",
+            "targetCapacity": 1,
+            "locations": [
+              {
+                "locationName": "eastus",
+                "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/sampleCluster",
+                "replicaState": "InBuild"
+              }
+            ],
+            "status": "InProgress"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/SampleSubscription/providers/Microsoft.EventHub/locations/eastus/namespaceOperationResults/sampleOperation?api-version=2026-09-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8980/migrations/default",
+        "name": "default",
+        "type": "Microsoft.EventHub/namespaces/migrations",
+        "properties": {
+          "migration": {
+            "targetSku": "Dedicated",
+            "targetCapacity": 1,
+            "locations": [
+              {
+                "locationName": "eastus",
+                "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/sampleCluster",
+                "replicaState": "InBuild"
+              }
+            ],
+            "status": "InProgress"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/SampleSubscription/providers/Microsoft.EventHub/locations/eastus/namespaceOperationResults/sampleOperation?api-version=2026-09-01-preview",
+        "Location": "https://management.azure.com/subscriptions/SampleSubscription/providers/Microsoft.EventHub/locations/eastus/namespaceOperationResults/sampleOperation-location?api-version=2026-09-01-preview",
+        "Retry-After": "30"
+      }
+    }
+  },
+  "operationId": "NamespaceMigrations_CreateOrUpdate",
+  "title": "NamespaceMigrationsCreateOrUpdate"
+}

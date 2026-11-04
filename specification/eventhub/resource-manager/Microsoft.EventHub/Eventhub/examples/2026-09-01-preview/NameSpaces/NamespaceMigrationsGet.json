@@ -8,15 +8,13 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8980/migration",
-        "name": "sdk-Namespace-8980",
-        "type": "Microsoft.EventHub/namespaces/migration",
-        "location": "West US",
-        "sku": {
-          "name": "Dedicated"
-        },
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8980/migrations/default",
+        "name": "default",
+        "type": "Microsoft.EventHub/namespaces/migrations",
         "properties": {
           "migration": {
+            "targetSku": "Dedicated",
+            "targetCapacity": 1,
             "locations": [
               {
                 "locationName": "eastus",
@@ -30,6 +28,6 @@
       }
     }
   },
-  "operationId": "Namespaces_GetMigration",
-  "title": "NamespaceGetMigration"
+  "operationId": "NamespaceMigrations_Get",
+  "title": "NamespaceMigrationsGet"
 }

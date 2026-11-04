@@ -26,6 +26,7 @@ import "./SchemaGroup.tsp";
 import "./ApplicationGroup.tsp";
 import "./FabricShortcut.tsp";
 import "./UpgradePreferences.tsp";
+import "./NamespaceMigration.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
