@@ -49,6 +49,11 @@ using Azure.AI.Projects;
 
 @@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
 @@clientName(
+  VoiceAgentPostCallConfig,
+  "VoiceAgentPostCallConfiguration",
+  "java"
+);
+@@clientName(
   UserConversationSimulationConfiguration.max_num_turns,
   "maximumNumberOfTurns",
   "java"
