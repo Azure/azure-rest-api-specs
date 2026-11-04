@@ -74,6 +74,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Pre-existing API contract: retains 200/404 response."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   @externalDocs("https://aka.ms/search-manage")
   delete is ArmResourceDeleteSync<
     PrivateEndpointConnection,

@@ -122,6 +122,7 @@ interface AgentPools {
   /**
    * Upgrading the node image version of an agent pool applies the newest OS and runtime updates to the nodes. AKS provides one new image per week with the latest updates. For more details on node image versions, see: https://docs.microsoft.com/azure/aks/node-image-upgrade
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing POST 202 response body is retained for backward compatibility."
   @summary("Upgrades the node image version of an agent pool to the latest.")
   upgradeNodeImageVersion is ArmResourceActionAsyncBase<
     AgentPool,
