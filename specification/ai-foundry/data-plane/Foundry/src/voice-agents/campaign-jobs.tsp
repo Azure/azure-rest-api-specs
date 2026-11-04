@@ -146,13 +146,7 @@ model TelephonyCampaign {
   @visibility(Lifecycle.Create)
   recipients?: TelephonyRecipient[];
 
-  @doc("""
-    Same-project single uri_file, exclusive with recipients: CSV/JSON/JSONL, 1-1,000,000 rows, 256 MiB decoded/file, 1 MiB/row.
-    Omitted version pins latest; retries reuse its snapshot. assets/read is rechecked before reads.
-    destination_type/destination_value specify an E.164 phone_number; scheduled_at is required only for recipient scheduling.
-    Other fields are Agent inputs (CSV strings). Invalid files or duplicate headers/row keys fail before dialing;
-    repeated destinations remain separate calls.
-    """)
+  @doc("Same-project CSV/JSON/JSONL uri_file, exclusive with recipients. Omitted version pins latest per preparation. Limits: 1-1,000,000 rows, 256 MiB decoded/file, 1 MiB/row.")
   recipient_dataset?: DatasetReference;
 
   @doc("Dispatch schedule; omission equals ImmediateSchedule. Every mode waits for successful preparation, then follows its schedule and available capacity.")
