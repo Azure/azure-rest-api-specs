@@ -102,6 +102,15 @@ directive:
     reason: MSDeploy is the intentional name matching the existing service API.
 ```
 
+### Tag: package-2026-08
+
+These settings apply only when `--tag=package-2026-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08'
+input-file:
+  - stable/2026-08-01/openapi.json
+```
+
 ### Tag: package-2026-09-01-preview
 
 These settings apply only when `--tag=package-2026-09-01-preview` is specified on the command line.
@@ -171,18 +180,6 @@ directive:
       - $.definitions.BuilderAppDeployRequest.properties.idempotencyKey
       - $.definitions.BuilderAppRedeployRequest.properties.idempotencyKey
     reason: These client-generated retry correlation identifiers are not credentials and do not authorize any operation.
-  - suppress: ProvisioningStateMustBeReadOnly
-    from: openapi.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/builderAppsOperationResults/{operationId}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].patch.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].patch.responses["202"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/deploy"].post.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/redeploy"].post.responses["200"].schema
-    reason: BuilderAppProperties.provisioningState is already readOnly true beside its enum reference. The validator loses that sibling annotation while resolving the reference; globally changing emission would break older API versions.
 ```
 
 ### Tag: package-2026-07
