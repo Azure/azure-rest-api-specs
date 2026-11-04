@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Customizations;
