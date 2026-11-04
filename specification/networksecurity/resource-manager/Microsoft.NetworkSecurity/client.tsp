@@ -24,6 +24,32 @@ namespace NetworkSecurityManagementClient {
 );
 
 @@alternateType(
+  NeuroShield.Management.NeuroShieldProperties.resourceGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  NeuroShield.Management.NeuroShieldTargetIdentityId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  NeuroShield.Management.NeuroShieldProtectedResourceIdentity.userAssignedIdentities,
+  Record<NeuroShield.Management.NeuroShieldProtectedResourceUserAssignedIdentity>,
+  "csharp"
+);
+@@alternateType(
+  NeuroShield.Management.NeuroShieldResource.eTag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@clientName(
+  NeuroShield.Management.NeuroShieldResource,
+  "NeuroShield",
+  "csharp"
+);
+
+@@alternateType(
   NeuroShield.Management.NeuroShieldPatch.tags,
   Record<NeuroShield.Management.NeuroShieldTagValue>,
   "go"
