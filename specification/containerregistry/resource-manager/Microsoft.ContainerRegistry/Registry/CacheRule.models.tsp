@@ -76,7 +76,7 @@ union AdditionalAuthenticationType {
 @added(Versions.vLatestPreview)
 model AdditionalAuthenticationProperties {
   /**
-   * Authentication type discriminator.
+   * Authentication type discriminator. The authentication type cannot change once configured.
    */
   authenticationType: AdditionalAuthenticationType;
 }
@@ -126,7 +126,7 @@ model EcrAuthenticationProperties extends AdditionalAuthenticationProperties {
    * The IAM role is assumed via AWS Security Token Service (STS) when exchanging a
    * federated Entra access token for an ECR access token. The full IAM role ARN is
    * derived from `accountNumber`, `rolePath`, and `roleName` as
-   * `arn:aws:iam::{accountNumber}:role{rolePath}{roleName}` (the path defaults to `/`).
+   * `arn:aws:iam::{accountNumber}:role{rolePath}{roleName}` (the initial path defaults to `/`).
    */
   @minLength(12)
   @maxLength(12)
@@ -159,8 +159,9 @@ model EcrAuthenticationProperties extends AdditionalAuthenticationProperties {
    * Optional IAM path of the role (for example `/team/` or `/division/team/`). The value
    * must be supplied in canonical form with a leading and trailing '/'; it is validated
    * as-is and is never normalized. A non-root path must contain at least one character
-   * between the surrounding slashes. When omitted, the role is assumed to live at the path
-   * root (`/`).
+   * between the surrounding slashes. When authentication is first configured, an omitted
+   * path defaults to the root (`/`). When updating an existing authentication configuration,
+   * an omitted path retains its current value.
    */
   @minLength(1)
   @maxLength(512)
@@ -194,6 +195,65 @@ model EntraFederatedIdentityCredentialAuthenticationProperties
 }
 
 /**
+ * Partial authentication configuration for a cache rule. Omitted fields retain their current
+ * values. When authentication is first configured, all required fields of the selected
+ * authentication type must be supplied. Changing an existing authentication type is not supported.
+ */
+@discriminator("authenticationType")
+@added(Versions.vLatestPreview)
+model AdditionalAuthenticationUpdateProperties {
+  /**
+   * The existing authentication type, or the type to configure when no authentication exists.
+   * This discriminator is required, but changing an existing authentication type is not supported.
+   */
+  authenticationType: AdditionalAuthenticationType;
+}
+
+/**
+ * Partial Google Artifact Registry (GAR) authentication configuration.
+ * When authentication is first configured, projectNumber, workloadIdentityPool, and
+ * workloadIdentityProvider must be supplied.
+ */
+@added(Versions.vLatestPreview)
+model GarAuthenticationUpdateProperties
+  extends AdditionalAuthenticationUpdateProperties {
+  authenticationType: "GoogleArtifactRegistry";
+  ...OptionalProperties<OmitProperties<
+    GarAuthenticationProperties,
+    "authenticationType"
+  >>;
+}
+
+/**
+ * Partial Amazon Elastic Container Registry (ECR) authentication configuration.
+ * When authentication is first configured, accountNumber, region, and roleName must be supplied.
+ */
+@added(Versions.vLatestPreview)
+model EcrAuthenticationUpdateProperties
+  extends AdditionalAuthenticationUpdateProperties {
+  authenticationType: "AwsElasticContainerRegistry";
+  ...OptionalProperties<OmitProperties<
+    EcrAuthenticationProperties,
+    "authenticationType"
+  >>;
+}
+
+/**
+ * Partial Microsoft Entra federated identity credential authentication configuration.
+ * When authentication is first configured, sourceTenantId and federatedApplicationClientId
+ * must be supplied.
+ */
+@added(Versions.vLatestPreview)
+model EntraFederatedIdentityCredentialAuthenticationUpdateProperties
+  extends AdditionalAuthenticationUpdateProperties {
+  authenticationType: "EntraFederatedIdentityCredential";
+  ...OptionalProperties<OmitProperties<
+    EntraFederatedIdentityCredentialAuthenticationProperties,
+    "authenticationType"
+  >>;
+}
+
+/**
  * The parameters for updating a cache rule.
  */
 model CacheRuleUpdateParameters {
@@ -223,9 +283,12 @@ model CacheRuleUpdateProperties {
 
   /**
    * Authentication configuration used by the cache rule to access the upstream source repository.
+   * Omitted fields retain their current values. When authentication is first configured, all
+   * required fields of the selected authentication type must be supplied. Changing an existing
+   * authentication type is not supported.
    */
   @added(Versions.vLatestPreview)
-  additionalAuthenticationProperties?: AdditionalAuthenticationProperties;
+  additionalAuthenticationProperties?: AdditionalAuthenticationUpdateProperties;
 }
 
 /**

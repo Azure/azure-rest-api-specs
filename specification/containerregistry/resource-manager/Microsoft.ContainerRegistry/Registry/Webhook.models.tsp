@@ -426,7 +426,7 @@ model CallbackConfig {
   /**
    * Custom headers that will be added to the webhook notifications.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "HTTP header names are customer-defined; a fixed property schema cannot enumerate them. This legacy projection preserves the published customHeaders dictionary."
   @removed(Versions.vLatestPreview)
   @renamedFrom(Versions.vLatestPreview, "customHeaders")
   customHeadersLegacy?: Record<string>;
