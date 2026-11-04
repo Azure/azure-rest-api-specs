@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "./systemdata.tsp";
 import "./credentials.tsp";
+import "./identity.tsp";
 
 using Azure.Core;
 using TypeSpec.Http;
@@ -38,6 +39,10 @@ model ProxyConfig {
   @maxLength(200)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   description?: string;
+
+  @doc("The managed identity used to retrieve Azure Key Vault secrets referenced by this proxy configuration.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  keyVaultReferenceIdentity?: ManagedIdentity;
 
   @doc("The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'. Set a 'proxy-endpoint-name':null to delete the existing record.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)

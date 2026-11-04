@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./identity.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -92,18 +93,6 @@ model LinkedIdentityProperties {
   @doc("The fully qualified Azure resource ID of the user-assigned managed identity. Required for UserAssigned and omitted for SystemAssigned.")
   @visibility(Lifecycle.Read)
   resourceId?: string;
-}
-
-@doc("The type of managed identity used to access a linked Azure resource.")
-@added(Versions.v2026_11_01_preview)
-union IdentityType {
-  string,
-
-  @doc("The workspace's system-assigned managed identity.")
-  SystemAssigned: "SystemAssigned",
-
-  @doc("A user-assigned managed identity assigned to the workspace.")
-  UserAssigned: "UserAssigned",
 }
 
 @doc("The Playwright workspace state.")

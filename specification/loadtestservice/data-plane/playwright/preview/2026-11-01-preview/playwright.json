@@ -2055,7 +2055,7 @@
     },
     "IdentityType": {
       "type": "string",
-      "description": "The type of managed identity used to access a linked Azure resource.",
+      "description": "The type of managed identity used to access Azure resources.",
       "enum": [
         "SystemAssigned",
         "UserAssigned"
@@ -2067,12 +2067,12 @@
           {
             "name": "SystemAssigned",
             "value": "SystemAssigned",
-            "description": "The workspace's system-assigned managed identity."
+            "description": "System-assigned managed identity."
           },
           {
             "name": "UserAssigned",
             "value": "UserAssigned",
-            "description": "A user-assigned managed identity assigned to the workspace."
+            "description": "User-assigned managed identity."
           }
         ]
       }
@@ -2107,6 +2107,49 @@
           "$ref": "#/definitions/LinkedIdentityProperties",
           "description": "The workspace managed identity authorized to read secrets from the linked vault.",
           "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "description": "Managed identity properties for accessing Azure resources.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The managed identity type. Defaults to SystemAssigned.",
+          "default": "SystemAssigned",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SystemAssigned",
+                "value": "SystemAssigned",
+                "description": "System-assigned managed identity."
+              },
+              {
+                "name": "UserAssigned",
+                "value": "UserAssigned",
+                "description": "User-assigned managed identity."
+              }
+            ]
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource Manager resource ID of the user-assigned managed identity. Required when type is UserAssigned. Omit when type is SystemAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       }
     },
@@ -2441,6 +2484,15 @@
             "create"
           ]
         },
+        "keyVaultReferenceIdentity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The managed identity used to retrieve Azure Key Vault secrets referenced by this proxy configuration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "proxyPool": {
           "type": "object",
           "description": "The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'. Set a 'proxy-endpoint-name':null to delete the existing record.",
@@ -2559,6 +2611,15 @@
           "type": "string",
           "description": "The configuration description. Set this to null to delete the existing value.",
           "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "keyVaultReferenceIdentity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The managed identity used to retrieve Azure Key Vault secrets referenced by this proxy configuration.",
           "x-ms-mutability": [
             "read",
             "update",
