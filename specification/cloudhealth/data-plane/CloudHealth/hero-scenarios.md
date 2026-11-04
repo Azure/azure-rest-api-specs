@@ -115,3 +115,66 @@ Content-Type: application/json
 ```
 
 The on-call engineer now has evidence that frontend latency caused the modeled health degradation while the backend remained healthy.
+
+## Distinguish a reported signal state from the entity's aggregated state
+
+A signal's `healthState` is what the producer reported; an entity's `healthState` is the service's aggregation of all its signal and dependency inputs. Reporting a signal as `Healthy` therefore does not guarantee the entity becomes `Healthy`. Suppose the latency signal recovers at 11:20 UTC, but `backend-api` became `Unhealthy` at 11:10 UTC.
+
+```http
+POST /api/entities/frontend-web-app/healthReports?api-version=2026-06-01-preview
+Content-Type: application/json
+Repeatability-Request-ID: 0c1f6a52-3b0e-4f0a-9a58-6e2f4f7d9b11
+Repeatability-First-Sent: Wed, 02 Sep 2026 11:20:00 GMT
+
+{
+  "signalName": "request-latency-p95",
+  "healthState": "Healthy",
+  "value": 120
+}
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Repeatability-Result: accepted
+
+{
+  "accepted": true
+}
+```
+
+```http
+GET /api/entities/frontend-web-app?api-version=2026-06-01-preview
+Accept: application/json
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "entityName": "frontend-web-app",
+  "healthState": "Unhealthy",
+  "lastHealthTransitionAt": "2026-09-02T11:10:00Z",
+  "lastHealthTransitionReason": "ChildEntityTransition",
+  "impact": "Standard",
+  "signalInputs": [
+    {
+      "name": "request-latency-p95",
+      "effectiveHealthState": "Healthy"
+    }
+  ],
+  "dependencyInputs": [
+    {
+      "name": "backend-api",
+      "effectiveHealthState": "Unhealthy"
+    }
+  ],
+  "effectiveDependencyAggregation": {
+    "configuration": {
+      "aggregationType": "WorstOf",
+      "ignoreUnknown": false
+    },
+    "resolution": "Configured"
+  },
+  "signalAggregationGroups": []
+}
+```
+
+The signal input is `Healthy`, yet the entity is `Unhealthy` because the `backend-api` entry in `dependencyInputs` contributes `Unhealthy` under `WorstOf` aggregation. The engineer should investigate `backend-api` rather than the frontend signal.

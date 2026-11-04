@@ -334,26 +334,28 @@ model EntityHealthStatePeriod {
 }
 
 @doc("Health-state transitions recorded for an entity, returned as a pageable result.")
-model EntityTransitionHistoryPage {
-  @doc("The health-state transitions, ordered newest first.")
-  @pageItems
-  value: HealthStateTransition[];
+model EntityTransitionHistoryPage is Page<HealthStateTransition>;
 
-  @doc("The full URI to fetch the next page of results; absent when there is no next page.")
-  @nextLink
-  nextLink?: url;
-}
+@@doc(
+  EntityTransitionHistoryPage.value,
+  "The health-state transitions, ordered newest first."
+);
+@@doc(
+  EntityTransitionHistoryPage.nextLink,
+  "The full URI to fetch the next page of results; absent when there is no next page."
+);
 
 @doc("Health-state periods overlapping the requested window, newest first.")
-model EntityHealthStateHistoryPage {
-  @doc("The health-state periods, ordered newest first.")
-  @pageItems
-  value: EntityHealthStatePeriod[];
+model EntityHealthStateHistoryPage is Page<EntityHealthStatePeriod>;
 
-  @doc("The full URI to fetch the next page of results; absent when there is no next page.")
-  @nextLink
-  nextLink?: url;
-}
+@@doc(
+  EntityHealthStateHistoryPage.value,
+  "The health-state periods, ordered newest first."
+);
+@@doc(
+  EntityHealthStateHistoryPage.nextLink,
+  "The full URI to fetch the next page of results; absent when there is no next page."
+);
 
 @doc("A single recorded signal data point.")
 model SignalHistoryDataPoint {
@@ -371,15 +373,16 @@ model SignalHistoryDataPoint {
 }
 
 @doc("Signal data points recorded for an entity's signal, newest first.")
-model SignalDataPointHistoryPage {
-  @doc("The signal data points, ordered newest first.")
-  @pageItems
-  value: SignalHistoryDataPoint[];
+model SignalDataPointHistoryPage is Page<SignalHistoryDataPoint>;
 
-  @doc("The full URI to fetch the next page of results; absent when there is no next page.")
-  @nextLink
-  nextLink?: url;
-}
+@@doc(
+  SignalDataPointHistoryPage.value,
+  "The signal data points, ordered newest first."
+);
+@@doc(
+  SignalDataPointHistoryPage.nextLink,
+  "The full URI to fetch the next page of results; absent when there is no next page."
+);
 
 @doc("A data annotation recorded for an entity.")
 model DataAnnotation {
@@ -397,15 +400,13 @@ model DataAnnotation {
 }
 
 @doc("Data annotations recorded for an entity, newest first.")
-model DataAnnotationsPage {
-  @doc("The data annotations, ordered newest first.")
-  @pageItems
-  value: DataAnnotation[];
+model DataAnnotationsPage is Page<DataAnnotation>;
 
-  @doc("The full URI to fetch the next page of results; absent when there is no next page.")
-  @nextLink
-  nextLink?: url;
-}
+@@doc(DataAnnotationsPage.value, "The data annotations, ordered newest first.");
+@@doc(
+  DataAnnotationsPage.nextLink,
+  "The full URI to fetch the next page of results; absent when there is no next page."
+);
 
 @doc("Comparison operators accepted by threshold rules.")
 union SignalOperator {
