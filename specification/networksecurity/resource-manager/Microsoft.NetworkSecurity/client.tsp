@@ -22,3 +22,14 @@ namespace NetworkSecurityManagementClient {
   "GetNeuroShieldMitigations",
   "csharp"
 );
+
+@@alternateType(
+  NeuroShield.Management.NeuroShieldPatch.tags,
+  Record<NeuroShield.Management.NeuroShieldTagValue>,
+  "go"
+);
+@@alternateType(
+  NeuroShield.Management.NeuroShieldProtectedResourceIdentity.userAssignedIdentities,
+  Record<NeuroShield.Management.NeuroShieldProtectedResourceUserAssignedIdentity>,
+  "go"
+);
