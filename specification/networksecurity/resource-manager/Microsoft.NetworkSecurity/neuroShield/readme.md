@@ -37,7 +37,8 @@ remain required. The June API contract is unchanged.
 
 ### Shared NetworkSecurity SDK packages
 
-The language options in `tspconfig.yaml` target these shared package identities:
+The language options in the [provider-level SDK configuration](../tspconfig.yaml)
+target these shared package identities:
 
 | Language              | Package                                                                                    | Namespace                                   |
 | --------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------- |
@@ -47,19 +48,31 @@ The language options in `tspconfig.yaml` target these shared package identities:
 | JavaScript/TypeScript | `@azure/arm-networksecurity`                                                               | Not applicable                              |
 | Go                    | `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/networksecurity/armnetworksecurity` | `armnetworksecurity`                        |
 
-For TypeSpec SDK generation, select this directory's `tspconfig.yaml`. The SDK
-generator loads `client.tsp`, which imports `main.tsp` and applies language-scoped
-client naming. The REST entry point `main.tsp` also imports `client.tsp`, as
-required by repository validation, so both entry points load the same SDK
-customizations. Only the public NeuroShield service is included. The SDK naming
-overrides do not change routes, API versions, wire models, operation IDs, or
-paging parameters.
+For SDK generation, select
+`specification/networksecurity/resource-manager/Microsoft.NetworkSecurity/tspconfig.yaml`.
+The [parent SDK entry point](../client.tsp) imports only `./neuroShield/main.tsp`
+as its public service input and explicitly composes the shared
+`NetworkSecurityManagementClient`. It retains all seven NeuroShield operation
+groups and the C# operation-name disambiguation.
+
+This child project's `main.tsp`, `tspconfig.yaml`, and `service.yaml` remain
+responsible for REST/Swagger generation and version discovery. The child has no
+SDK emitter options or `client.tsp` and does not import the parent SDK input.
+The parent has no REST emitter or separate service manifest. This keeps one
+canonical SDK generation input without an import cycle or duplicate package
+writers. The SDK composition does not change routes, API versions, wire models,
+operation IDs, paging parameters, or provisioning-state semantics.
 
 Outputs are rooted at `sdk/networksecurity`, with a package-specific subdirectory
 for each language. Go instead uses
 `sdk/resourcemanager/networksecurity/armnetworksecurity`. Run the selected SDK
 repository's standard generation, build, and validation workflow using this
 configuration; the TypeSpec compile command above regenerates OpenAPI, not SDKs.
+
+For SDK emitters that support `examples-dir`, the parent configuration points to
+`{project-root}/neuroShield/examples`. The source examples remain in this child
+project. Recheck each emitter's version-aware example discovery when another
+public service joins; do not reuse this single-service path without validation.
 
 ### NeuroShield SDK surface
 
@@ -69,16 +82,20 @@ language. NeuroShield is distinguished by these generated surfaces:
 | Language              | Client organization                                                                                                                                  | Models                                                                                                 |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | .NET                  | `NeuroShieldResource`, `NeuroShieldProtectedResource`, and the other NeuroShield resources/collections under `Azure.ResourceManager.NetworkSecurity` | Resource data in the package namespace; other models in `Azure.ResourceManager.NetworkSecurity.Models` |
-| Python                | `azure.mgmt.networksecurity.NeuroShieldManagementClient`, with the asynchronous client in `azure.mgmt.networksecurity.aio`                           | `azure.mgmt.networksecurity.models`; operation groups in `azure.mgmt.networksecurity.operations`       |
+| Python                | `azure.mgmt.networksecurity.NetworkSecurityManagementClient`, with the asynchronous client in `azure.mgmt.networksecurity.aio`                       | `azure.mgmt.networksecurity.models`; operation groups in `azure.mgmt.networksecurity.operations`       |
 | Java                  | `com.azure.resourcemanager.networksecurity.NetworkSecurityManager`, with `NetworkSecurityManagementClient` under `.fluent`                           | NeuroShield models and fluent operation groups under `.models`                                         |
-| JavaScript/TypeScript | `NeuroShieldManagementClient` exported from `@azure/arm-networksecurity`, with NeuroShield operation-group properties                                | NeuroShield models exported from the package root                                                      |
+| JavaScript/TypeScript | `NetworkSecurityManagementClient` exported from `@azure/arm-networksecurity`, with NeuroShield operation-group properties                            | NeuroShield models exported from the package root                                                      |
 | Go                    | `armnetworksecurity.ClientFactory` creates the six NeuroShield operation clients and `OperationsClient`; each client also has its normal constructor | NeuroShield-prefixed types in `armnetworksecurity`                                                     |
 
 The seven operation groups are `Operations`, `NeuroShieldOperationStatuses`,
 `NeuroShields`, `NeuroShieldSummaries`, `NeuroShieldProtectedResources`,
 `NeuroShieldFindings`, and `NeuroShieldMitigations`. SDK naming stays in
-`client.tsp`; Java's human-readable `service-name` option also controls its
+the parent `client.tsp`; Java's human-readable `service-name` option also controls its
 manager name. Do not rename REST declarations to change these SDK names.
+
+The Network Security SDK owners coordinate package versions and releases across
+services. Shared package identity does not imply that different service inputs
+can be generated independently into the same output directory.
 
 ### Adding another public NetworkSecurity service
 
@@ -97,24 +114,24 @@ Onboard Agent Fabric as a coordinated change with the shared SDK owners:
 1. Publish only the authorized Agent Fabric REST input through its own API review.
    Keep NeuroShield's REST entry point and contract unchanged. Do not copy private
    definitions or introduce placeholder service definitions here.
-2. Extend this directory's `client.tsp` to import the approved public Agent Fabric
-   entry point. Retain this `tspconfig.yaml` as the single shared-package generation
-   configuration. If the owners instead relocate the SDK input to a common project,
-   migrate all SDK generation references together and retire the old package writer.
+2. Extend the provider-level `../client.tsp` to import the approved public Agent
+   Fabric entry point and include its service in the explicit client composition.
+   Retain `../tspconfig.yaml` as the single shared-package SDK configuration. Keep
+   each child service's REST generation configuration and version manifest separate.
 3. Define and validate the client composition explicitly with the supported SDK
-   tools. Preserve the existing NeuroShield exports. Python and TypeScript should
-   retain their service-specific client; Java should expose distinct operation
-   groups through the shared manager. Preserve .NET's resource/collection pattern
-   and Go's shared factory with distinct operation clients. Check each emitter's
-   support before choosing multiple clients or an aggregate client; imports alone
-   are insufficient. Do not assume the Network aggregate declaration can be copied
-   unchanged across different service versions and dependencies.
+   tools. Preserve the existing NeuroShield exports within the shared package.
+   Python and TypeScript retain `NetworkSecurityManagementClient` with distinct
+   service operation groups; Java exposes the groups through the shared manager.
+   Preserve .NET's resource/collection pattern and Go's shared factory with distinct
+   operation clients. Verify each emitter's behavior with both services; imports
+   alone are insufficient, and service versions and dependencies must be compatible.
 4. Resolve collisions before emitting into a shared directory: client names,
    operation groups, model/enum names, generated file names, and exported symbols.
    Review duplicate provider `Operations` APIs explicitly; share one SDK group only
    when the REST operation and version semantics match. Use scoped SDK naming or
    composition customizations, not REST renames, to distinguish service-owned types.
-5. Point each SDK repository's `tsp-location.yaml` at the same public generation
+5. Point each SDK repository's `tsp-location.yaml` at the provider-level
+   `specification/networksecurity/resource-manager/Microsoft.NetworkSecurity`
    project and an approved spec commit containing both services. Generate once per
    language/package into the output paths above. Never run independent NeuroShield
    and Agent Fabric generation sequentially into the same output directory: the

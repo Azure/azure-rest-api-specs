@@ -1,15 +1,16 @@
-import "./main.tsp";
+import "./neuroShield/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(NeuroShield.Management, "NeuroShieldManagementClient", "python");
-@@clientName(
-  NeuroShield.Management,
-  "NeuroShieldManagementClient",
-  "javascript"
-);
-@@clientName(NeuroShield.Management, "NetworkSecurityManagementClient", "java");
+@client({
+  name: "NetworkSecurityManagementClient",
+  service: [NeuroShield.Management],
+  autoMergeService: true,
+})
+namespace NetworkSecurityManagementClient {
+
+}
 
 @@clientName(
   NeuroShield.Management.NeuroShieldFindings.listByNeuroShield,
