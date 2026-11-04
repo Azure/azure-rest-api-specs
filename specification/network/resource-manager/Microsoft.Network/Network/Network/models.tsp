@@ -17672,6 +17672,29 @@ model NetworkVirtualAppliancePropertiesFormat {
 }
 
 /**
+ * The load distribution policy for a managed Network Virtual Appliance load-balancing rule.
+ */
+@added(Versions.v2026_05_01)
+union NetworkVirtualApplianceLoadDistribution {
+  string,
+
+  /**
+   * Distributes traffic using a five-tuple hash of source IP, destination IP, source port, destination port, and protocol.
+   */
+  Default: "Default",
+
+  /**
+   * Distributes traffic using a two-tuple hash of source IP and destination IP.
+   */
+  SourceIP: "SourceIP",
+
+  /**
+   * Distributes traffic using a three-tuple hash of source IP, destination IP, and protocol.
+   */
+  SourceIPProtocol: "SourceIPProtocol",
+}
+
+/**
  * Load balancer settings shared by managed Network Virtual Appliances and their Permanent inbound security rules.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep the shared NVA configuration in the existing virtualNetwork Swagger feature."
@@ -17681,7 +17704,8 @@ model NetworkVirtualApplianceLoadBalancerConfiguration {
   /**
    * The load distribution policy. Default uses a five-tuple hash of source IP, destination IP, source port, destination port, and protocol. SourceIP uses a two-tuple hash of source IP and destination IP. SourceIPProtocol uses a three-tuple hash of source IP, destination IP, and protocol. When omitted, Default is used.
    */
-  loadDistribution?: LoadDistribution = LoadDistribution.Default;
+  loadDistribution?: NetworkVirtualApplianceLoadDistribution =
+    NetworkVirtualApplianceLoadDistribution.Default;
 
   /**
    * The idle timeout of the load-balancing rule, in minutes. When omitted or null, the managed NVA platform default of 5 minutes is used. Values outside 4 through 100 are rejected with HTTP 400 InvalidParameter.
