@@ -138,6 +138,12 @@ union Grain {
    * Hourly grain corresponds to value per month.
    */
   Monthly: "Monthly",
+
+  /**
+   * Annual grain corresponds to value per year.
+   */
+  @added(Versions.v2026_08_01)
+  Annual: "Annual",
 }
 
 /**
@@ -200,6 +206,12 @@ union BenefitKind {
    * Benefit is SavingsPlan.
    */
   SavingsPlan: "SavingsPlan",
+
+  /**
+   * Benefit is Flex Spend Plan.
+   */
+  @added(Versions.v2026_08_01)
+  FlexSpendPlan: "FlexSpendPlan",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -220,6 +232,12 @@ union GrainParameter {
    * Hourly grain corresponds to value per month.
    */
   Monthly: "Monthly",
+
+  /**
+   * Hourly grain corresponds to value per year.
+   */
+  @added(Versions.v2026_08_01)
+  Annual: "Annual",
 }
 
 /**
@@ -1590,6 +1608,13 @@ model AllSavingsBenefitDetails {
   overageCost?: decimal;
 
   /**
+   * Remaining on-demand charges for each hour after applying this recommendation's commitmentAmount. Applicable only to Savings Plan recommendations. Values are in properties.currencyCode and align in length and chronological order with properties.usage.charges, with one entry per hour in properties.totalHours. Their sum equals this recommendation's overageCost, subject to monetary rounding. Returned only when properties/usage is expanded and the caller is allowed to view charges. For allRecommendationDetails.value, properties/allRecommendationDetails must also be expanded.
+   */
+  @added(Versions.v2026_08_01)
+  @visibility(Lifecycle.Read)
+  hourlyOverageCharges?: float64[];
+
+  /**
    * The estimated cost with benefit for the 'totalHours' in the look-back period. It's equal to (commitmentAmount * totalHours)
    */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1644,6 +1669,22 @@ model AllSavingsBenefitDetails {
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   wastageCost?: decimal;
+
+  /**
+   * The lower bound of the tier range for which recommendations are provided. Applicable only if recommendation is for 'FlexSpendPlan'.
+   */
+  @added(Versions.v2026_08_01)
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service can explicitly return null when the lower tier bound is unavailable."
+  @visibility(Lifecycle.Read)
+  tierMin?: float64 | null;
+
+  /**
+   * The upper bound of the tier range for which recommendations are provided. Applicable only if recommendation is for 'FlexSpendPlan'.
+   */
+  @added(Versions.v2026_08_01)
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service can explicitly return null when the upper tier bound is unavailable."
+  @visibility(Lifecycle.Read)
+  tierMax?: float64 | null;
 }
 
 /**
@@ -4629,6 +4670,42 @@ model SavingsPlanUtilizationSummaryProperties
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   maxUtilizationPercentage?: decimal;
+}
+
+/**
+ * Flex spend plan utilization summary resource.
+ */
+@added(Versions.v2026_08_01)
+model FlexSpendPlanUtilizationSummary extends BenefitUtilizationSummary {
+  /**
+   * Flex spend plan utilization summary properties.
+   */
+  properties?: FlexSpendPlanUtilizationSummaryProperties;
+
+  /**
+   * Supported values: 'FlexSpendPlan'.
+   */
+  kind: "FlexSpendPlan";
+}
+
+/**
+ * Flex spend plan utilization summary properties.
+ */
+@added(Versions.v2026_08_01)
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The model follows the existing benefit utilization summary hierarchy."
+model FlexSpendPlanUtilizationSummaryProperties
+  extends BenefitUtilizationSummaryProperties {
+  /**
+   * This is the utilized percentage for the benefit ID.
+   */
+  @visibility(Lifecycle.Read)
+  utilizationPercentage?: float64;
+
+  /**
+   * This is the used quantity for the benefit ID.
+   */
+  @visibility(Lifecycle.Read)
+  usedQuantity?: float64;
 }
 
 /**
