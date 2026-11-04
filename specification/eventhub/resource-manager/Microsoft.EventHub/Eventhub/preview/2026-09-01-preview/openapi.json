@@ -8082,10 +8082,6 @@
       "type": "object",
       "description": "Configuration used to trigger a migration of a namespace to a new SKU across one or more target locations.",
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU parameters that describe the target of the migration."
-        },
         "properties": {
           "$ref": "#/definitions/NamespaceMigrationConfigurationProperties",
           "description": "The migration configuration properties.",
@@ -8107,14 +8103,26 @@
       "type": "object",
       "description": "The migration settings describing the target locations.",
       "properties": {
+        "targetSku": {
+          "$ref": "#/definitions/MigrationTargetSku",
+          "description": "The target SKU of the migration."
+        },
+        "targetCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target capacity of the migration. When omitted, Standard to Premium defaults to 1 processing unit, Premium to Dedicated defaults to 1 throughput unit, and Standard to Dedicated preserves the existing throughput units. For Premium targets the value must be one of 1, 2, 4, 6, 8, 10, 12, or 16 processing units."
+        },
         "locations": {
           "type": "array",
-          "description": "The list of target locations for the migration.",
+          "description": "The list of target locations for the migration. Dedicated locations must also specify clusterArmId.",
           "items": {
             "$ref": "#/definitions/NamespaceMigrationLocationInput"
           }
         }
-      }
+      },
+      "required": [
+        "targetSku"
+      ]
     },
     "NamespaceMigrationLocationInput": {
       "type": "object",
@@ -8410,6 +8418,36 @@
           "format": "int64",
           "description": "The value of the counter."
         }
+      }
+    },
+    "MigrationTargetSku": {
+      "type": "string",
+      "description": "The target SKU of a namespace migration.",
+      "enum": [
+        "Standard",
+        "Premium",
+        "Dedicated"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationTargetSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard SKU."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium SKU."
+          },
+          {
+            "name": "Dedicated",
+            "value": "Dedicated",
+            "description": "The Dedicated SKU."
+          }
+        ]
       }
     }
   },

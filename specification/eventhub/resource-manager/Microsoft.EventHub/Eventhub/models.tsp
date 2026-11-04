@@ -1974,11 +1974,6 @@ model OperationListResult is Azure.Core.Page<Operation>;
 @added(Versions.v2026_09_01_preview)
 model NamespaceMigrationConfiguration {
   /**
-   * SKU parameters that describe the target of the migration.
-   */
-  sku?: Sku;
-
-  /**
    * The migration configuration properties.
    */
   properties?: NamespaceMigrationConfigurationProperties;
@@ -2001,9 +1996,42 @@ model NamespaceMigrationConfigurationProperties {
 @added(Versions.v2026_09_01_preview)
 model NamespaceMigrationConfigurationDetails {
   /**
-   * The list of target locations for the migration.
+   * The target SKU of the migration.
+   */
+  targetSku: MigrationTargetSku;
+
+  /**
+   * The target capacity of the migration. When omitted, Standard to Premium defaults to 1 processing unit, Premium to Dedicated defaults to 1 throughput unit, and Standard to Dedicated preserves the existing throughput units. For Premium targets the value must be one of 1, 2, 4, 6, 8, 10, 12, or 16 processing units.
+   */
+  targetCapacity?: int32;
+
+  /**
+   * The list of target locations for the migration. Dedicated locations must also specify clusterArmId.
    */
   locations?: NamespaceMigrationLocationInput[];
+}
+
+/**
+ * The target SKU of a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+union MigrationTargetSku {
+  string,
+
+  /**
+   * The Standard SKU.
+   */
+  Standard: "Standard",
+
+  /**
+   * The Premium SKU.
+   */
+  Premium: "Premium",
+
+  /**
+   * The Dedicated SKU.
+   */
+  Dedicated: "Dedicated",
 }
 
 /**
