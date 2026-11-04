@@ -3,6 +3,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "../agents/models.tsp";
 import "./agents.tsp";
+import "./handoff.tsp";
 import "./openai-preview-models.tsp";
 
 using TypeSpec.Http;
@@ -128,6 +129,161 @@ model VoiceResponse {
 
   @doc("The Unix timestamp (in seconds) for when the response completed.")
   completed_at?: FoundryTimestamp;
+}
+
+// ---------------------------------------------------------------------------
+// Live delegation results and persisted conversation items
+// ---------------------------------------------------------------------------
+
+@doc("Persisted guidance accepted by Live. The service populates commentary, thinking, or both. Agent delegation section markers are removed before storage.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveDelegationResultItem {
+  @doc("Guidance for Live to communicate to the user.")
+  commentary?: string;
+
+  @doc("Background context, not private reasoning or a request to speak.")
+  thinking?: string;
+}
+
+@doc("Delegation owner. Foundry agent targets use native client delegation upstream.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentLiveDelegationTarget {
+  string,
+  responses: "responses",
+  client: "client",
+  foundry_managed_agent: "foundry_managed_agent",
+}
+
+@doc("Persisted delegation outcome, not speech or playback status.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentLiveDelegationStatus {
+  string,
+  in_progress: "in_progress",
+  completed: "completed",
+  failed: "failed",
+  incomplete: "incomplete",
+  cancelled: "cancelled",
+}
+
+@doc("A Live session persisted when effective store is true. Uses voice-conversation lifecycle and retention; items are retrieved separately.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveConversation {
+  ...OmitProperties<VoiceConversation, "usage">;
+
+  @doc("Cumulative Live audio usage, excluding delegated-model tokens. May be absent after abnormal close.")
+  usage?: OpenAI.LiveSessionUsage;
+}
+
+@doc("The kind of a persisted Live conversation item.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentLiveConversationItemType {
+  string,
+  input: "input",
+  output: "output",
+  delegation: "delegation",
+}
+
+@doc("A stored speech segment or delegation. Speech segments are not native turns or proof of playback; delegation results are separate from spoken transcripts.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveConversationItem {
+  @doc("The persisted item kind.")
+  type: VoiceAgentLiveConversationItemType;
+
+  @doc("Item ID used for retrieval. Foundry assigns speech IDs; delegation IDs retain their native value.")
+  id: string;
+}
+
+@doc("A stored user speech segment.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveInputConversationItem
+  extends VoiceAgentLiveConversationItem {
+  type: VoiceAgentLiveConversationItemType.input;
+
+  @doc("Captured user transcription, when available.")
+  transcription?: string;
+
+  @doc("Captured audio metadata; audio.item_id matches this item's id.")
+  audio?: VoiceAudioItem;
+}
+
+@doc("A stored assistant speech segment.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveOutputConversationItem
+  extends VoiceAgentLiveConversationItem {
+  type: VoiceAgentLiveConversationItemType.output;
+
+  @doc("Captured assistant transcription, not backend output or commentary guidance.")
+  transcription?: string;
+
+  @doc("Captured audio metadata; audio.item_id matches this item's id.")
+  audio?: VoiceAudioItem;
+}
+
+@doc("A stored delegation using native fields with Foundry-specific targets. Its id is the native delegation ID.")
+@discriminator("target")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveDelegationConversationItem
+  extends VoiceAgentLiveConversationItem {
+  ...OmitProperties<OpenAI.LiveDelegationItem, "id" | "type" | "target">;
+  type: VoiceAgentLiveConversationItemType.delegation;
+
+  @doc("The configured delegation owner.")
+  target: VoiceAgentLiveDelegationTarget;
+
+  @doc("Observed delegation creation time, in Unix seconds.")
+  created_at: FoundryTimestamp;
+}
+
+@doc("Results supplied by the application for client delegation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveClientDelegationConversationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: VoiceAgentLiveDelegationTarget.client;
+
+  @doc("Guidance for Live to communicate to the user, when accepted.")
+  commentary?: string;
+
+  @doc("Accepted background context, not private reasoning or a request to speak.")
+  thinking?: string;
+}
+
+@doc("Stored Responses delegation output, separate from Live speech.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveResponsesDelegationConversationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: VoiceAgentLiveDelegationTarget.responses;
+
+  @doc("Final backend text, omitted when unavailable; excludes raw tool output.")
+  output?: string;
+}
+
+@doc("Stored prompt-agent delegation state and accepted results.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveFoundryManagedAgentDelegationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: VoiceAgentLiveDelegationTarget.foundry_managed_agent;
+
+  @doc("Target agent name in the same project.")
+  agent_name: string;
+
+  @doc("Target version pinned at connection start.")
+  agent_version: string;
+
+  @doc("Native delegation offset from session start, in milliseconds.")
+  offset_ms: FoundryDurationMilliseconds;
+
+  @doc("Backend conversation ID, distinct from the voice conversation and Live session IDs.")
+  backend_conversation_id?: string;
+
+  @doc("Accepted guidance in order; empty until a result is accepted. Entries have no individual IDs, are noncumulative, and are independent of backend output_index. Partial results survive failure or cancellation.")
+  output: VoiceAgentLiveDelegationResultItem[];
+
+  @doc("Task context sent to the target agent, not the full request body.")
+  delegation_context?: string;
+
+  @doc("The persisted delegation outcome.")
+  status: VoiceAgentLiveDelegationStatus;
 }
 
 // ---------------------------------------------------------------------------
@@ -417,6 +573,16 @@ model VoiceRecording {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
+/**
+ * An exact E.164 caller number or a restricted pattern matched against the entire normalized number.
+ * `+14255550123` allows only that number; `^\+1425[0-9]{7}$` allows numbers starting with `+1425`
+ * followed by exactly seven digits.
+ */
+@maxLength(256)
+@pattern("^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar SipAllowedCallingNumber extends string;
+
 @doc("A service-generated telephony call identifier.")
 @minLength(1)
 @maxLength(128)
@@ -440,6 +606,9 @@ union TelephonyProvider {
 
   @doc("Twilio Programmable Voice.")
   twilio: "twilio",
+
+  @doc("Session Initiation Protocol.")
+  sip: "sip",
 }
 
 @doc("The lifecycle status of a telephony binding.")
@@ -545,11 +714,7 @@ model CreateTelephonyBindingRequest {
   label?: string;
 }
 
-@doc("The request to create a Microsoft Teams Phone extensibility binding.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTeamsPhoneExtensibilityTelephonyBindingContent", "csharp")
-model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
-  extends CreateTelephonyBindingRequest {
+alias TeamsPhoneExtensibilityTelephonyBindingProperties = {
   @doc("The Microsoft Teams Phone extensibility provider.")
   provider: TelephonyProvider.teams_phone_extensibility;
 
@@ -559,6 +724,35 @@ model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
 
   @doc("The Microsoft Teams resource-account object identifier as a GUID.")
   resource_account_object_id: Azure.Core.uuid;
+};
+
+alias TwilioTelephonyBindingProperties = {
+  @doc("The Twilio provider.")
+  provider: TelephonyProvider.twilio;
+
+  @doc("The Twilio E.164 phone number.")
+  @pattern("^\\+[1-9]\\d{6,14}$")
+  phone_number: string;
+};
+
+alias SipTelephonyBindingProperties = {
+  provider: TelephonyProvider.sip;
+
+  @doc("For UI display only.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.")
+  @maxItems(64)
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
+};
+
+@doc("The request to create a Microsoft Teams Phone extensibility binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTeamsPhoneExtensibilityTelephonyBindingContent", "csharp")
+model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
+  extends CreateTelephonyBindingRequest {
+  ...TeamsPhoneExtensibilityTelephonyBindingProperties;
 }
 
 @doc("The request to create a Twilio binding.")
@@ -566,12 +760,14 @@ model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
 @clientName("CreateTwilioTelephonyBindingContent", "csharp")
 model CreateTwilioTelephonyBindingRequest
   extends CreateTelephonyBindingRequest {
-  @doc("The Twilio provider.")
-  provider: TelephonyProvider.twilio;
+  ...TwilioTelephonyBindingProperties;
+}
 
-  @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
-  phone_number: string;
+@doc("The request to create an inbound SIP binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateSipTelephonyBindingContent", "csharp")
+model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
+  ...SipTelephonyBindingProperties;
 }
 
 @doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
@@ -585,20 +781,21 @@ model UpdateTelephonyBindingRequest {
   @maxLength(128)
   label?: string | null;
 
-  @doc("The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable.")
+  @doc("The replacement Foundry connection name. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable.")
   @minLength(1)
   @maxLength(256)
   connection_name?: string;
 
-  @doc("The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding.")
+  @doc("The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for Teams Phone extensibility and SIP bindings.")
   @maxLength(64)
   phone_number?: string | null;
+
+  @doc("SIP only. Omit to preserve the restriction; send [] to allow any caller.")
+  @maxItems(64)
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
 
-@doc("A telephony binding owned by a voice agent.")
-@discriminator("provider")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyBinding {
+alias TelephonyBindingProperties = {
   @doc("The service-generated binding identifier.")
   id: TelephonyBindingId;
 
@@ -617,59 +814,40 @@ model TelephonyBinding {
   @doc("The lifecycle status.")
   status: TelephonyBindingStatus;
 
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  @doc("The service-generated webhook URL to configure with the telephony provider. For SIP bindings, this is a SIP URI.")
   incoming_call_url: url;
+};
+
+@doc("A telephony binding owned by a voice agent.")
+@discriminator("provider")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyBinding {
+  ...TelephonyBindingProperties;
 }
 
 @doc("A Microsoft Teams Phone extensibility binding owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBinding extends TelephonyBinding {
-  @doc("The Microsoft Teams Phone extensibility provider.")
-  provider: TelephonyProvider.teams_phone_extensibility;
-
-  @doc("The optional display phone number for the Teams resource account.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
-  resource_account_object_id: Azure.Core.uuid;
+  ...TeamsPhoneExtensibilityTelephonyBindingProperties;
 }
 
 @doc("A Twilio binding owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBinding extends TelephonyBinding {
-  @doc("The Twilio provider.")
-  provider: TelephonyProvider.twilio;
+  ...TwilioTelephonyBindingProperties;
+}
 
-  @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
-  phone_number: string;
+@doc("A SIP binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBinding extends TelephonyBinding {
+  ...SipTelephonyBindingProperties;
 }
 
 @doc("A telephony binding returned in a list, including its entity tag.")
 @discriminator("provider")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyBindingListItem {
-  @doc("The service-generated binding identifier.")
-  id: TelephonyBindingId;
-
-  @doc("The telephony provider.")
-  provider: TelephonyProvider;
-
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
-  @doc("The optional display label for the binding.")
-  @maxLength(128)
-  label?: string;
-
-  @doc("The lifecycle status.")
-  status: TelephonyBindingStatus;
-
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
-  incoming_call_url: url;
+  ...TelephonyBindingProperties;
 
   @doc("The entity tag to send in the `If-Match` header when updating or deleting this binding.")
   @visibility(Lifecycle.Read)
@@ -680,26 +858,19 @@ model TelephonyBindingListItem {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBindingListItem
   extends TelephonyBindingListItem {
-  @doc("The Microsoft Teams Phone extensibility provider.")
-  provider: TelephonyProvider.teams_phone_extensibility;
-
-  @doc("The optional display phone number for the Teams resource account.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
-  resource_account_object_id: Azure.Core.uuid;
+  ...TeamsPhoneExtensibilityTelephonyBindingProperties;
 }
 
 @doc("A Twilio binding returned in a list, including its entity tag.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
-  @doc("The Twilio provider.")
-  provider: TelephonyProvider.twilio;
+  ...TwilioTelephonyBindingProperties;
+}
 
-  @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
-  phone_number: string;
+@doc("A SIP binding returned in a list, including its entity tag.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBindingListItem extends TelephonyBindingListItem {
+  ...SipTelephonyBindingProperties;
 }
 
 /** A telephony binding response with its entity tag. */
@@ -1414,7 +1585,7 @@ model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyOutboundDestination;
 
-  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.")
+  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SIP. No inbound telephony binding is required.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
