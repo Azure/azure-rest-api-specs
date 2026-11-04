@@ -57,7 +57,7 @@ model ProjectCostControl is ProxyResource<CostControlProperties> {
 
 /**
  * The consumption budget and its traffic selection, notifications, and enforcement actions.
- * A newly created control applies within its owner's scope without attaching resource IDs.
+ * A cost control applies within its owner's scope.
  * Explicitly authoring identityObjectId grouping or filter selections requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources; the service does not expose provisioningState."
@@ -95,7 +95,8 @@ model CostControlProperties {
 
   /**
    * Alert notifications keyed by nonempty, case-insensitively unique names. Each notification supplies its own Event Grid connection.
-   * Notifications and provider actions together are limited to ten entries. Omission creates no notifications.
+   * PUT and the complete merged PATCH result may contain at most one notification, including disabled notifications.
+   * Omission on creation creates no notifications.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Notification names are customer-defined dictionary keys; each value has an explicit notification schema."
   notifications?: Record<CostControlNotification>;
@@ -106,6 +107,8 @@ model CostControlProperties {
 
 /**
  * Edits applied when properties is a non-empty object. Omitted fields retain their existing values; no defaults are applied.
+ * The complete merged result may contain at most one notification, including disabled notifications, and one Block action.
+ * Exceeding either limit returns HTTP 400 without changing the stored definition.
  * Explicit identityObjectId grouping or filter selections, including unchanged selections and conditions nested under filter.and, require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.
  * Missing registration returns 403 FeatureNotRegistered before merging or no-op detection.
  * Omitting or removing identity selections does not require this registration; omitted stored selections are preserved, subject to existing validation rules.
@@ -139,7 +142,8 @@ model CostControlPatchProperties {
 
   /**
    * Merges notifications by case-insensitive name, preserving existing name casing. Null entries delete notifications; null clears the collection.
-   * An empty object leaves existing notifications unchanged. New entries must supply all required notification fields after merging.
+   * Omission or an empty object preserves existing notifications. New entries must supply all required notification fields after merging.
+   * The complete merged result may contain at most one notification, including disabled notifications; otherwise the request returns HTTP 400.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses null dictionary entries to delete named notifications and null on the collection to clear it."
   notifications?: Record<CostControlNotificationPatch | null> | null;
@@ -344,7 +348,11 @@ union CostControlThresholdType {
 /** Provider-specific budget enforcement settings. */
 @added(Versions.v2026_11_15_preview)
 model CostControlProviderProperties {
-  /** Blocking actions keyed by nonempty, case-insensitively unique names. Actions and notifications together are limited to ten entries. */
+  /**
+   * Blocking actions keyed by nonempty, case-insensitively unique names.
+   * PUT and the complete merged PATCH result may contain at most one Block action, independently of the notification limit.
+   * Omission on creation creates no blocking actions.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Action names are customer-defined dictionary keys; each value has an explicit blocking-action schema."
   actions?: Record<CostControlAction>;
 }
@@ -354,7 +362,8 @@ model CostControlProviderProperties {
 model CostControlProviderPropertiesPatch {
   /**
    * Merges actions by case-insensitive name, preserving existing name casing. Null entries delete actions; null clears the collection.
-   * An empty object leaves actions unchanged. New entries must supply all required action fields after merging.
+   * Omission or an empty object preserves existing actions. New entries must supply all required action fields after merging.
+   * The complete merged result may contain at most one Block action; otherwise the request returns HTTP 400.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses null dictionary entries to delete named actions and null on the collection to clear it."
   actions?: Record<CostControlActionPatch | null> | null;
@@ -477,7 +486,11 @@ interface AccountCostControls {
     Response = CostControlHeadResponse
   >;
 
-  /** Creates or replaces an account-owned cost control. */
+  /**
+   * Creates or replaces an account-owned cost control.
+   * The definition may contain at most one notification, including disabled notifications, and one Block action.
+   * Exceeding either limit returns HTTP 400 without persisting the request.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AccountCostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -487,7 +500,12 @@ interface AccountCostControls {
           CostControlEtagHeader)
   >;
 
-  /** Updates an account-owned cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields; an unchanged cost control retains its entity tag. */
+  /**
+   * Updates an account-owned cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all.
+   * A non-empty properties object updates selected fields, preserving omitted fields; a successful update that leaves the cost control unchanged retains its entity tag.
+   * The complete merged result may contain at most one notification, including disabled notifications, and one Block action.
+   * Exceeding either limit returns HTTP 400 without changing the stored definition.
+   */
   update is ArmCustomPatchSync<
     AccountCostControl,
     CostControlPatch,
@@ -510,7 +528,6 @@ interface AccountCostControls {
 
 /**
  * Operations for Foundry project-owned cost controls. Budgets remain confined to their owning Foundry project.
- * This API version accepts and returns only the budget contract, without attachment-ID properties.
  */
 @added(Versions.v2026_11_15_preview)
 @armResourceOperations
@@ -527,7 +544,11 @@ interface ProjectCostControls {
     Response = CostControlHeadResponse
   >;
 
-  /** Creates or replaces a project-owned const control. */
+  /**
+   * Creates or replaces a project-owned cost control.
+   * The definition may contain at most one notification, including disabled notifications, and one Block action.
+   * Exceeding either limit returns HTTP 400 without persisting the request.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProjectCostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -537,7 +558,12 @@ interface ProjectCostControls {
           CostControlEtagHeader)
   >;
 
-  /** Updates a Foundry project cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all. A non-empty properties object updates selected fields, preserving omitted fields; an unchanged cost control retains its entity tag. */
+  /**
+   * Updates a Foundry project cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all.
+   * A non-empty properties object updates selected fields, preserving omitted fields; a successful update that leaves the cost control unchanged retains its entity tag.
+   * The complete merged result may contain at most one notification, including disabled notifications, and one Block action.
+   * Exceeding either limit returns HTTP 400 without changing the stored definition.
+   */
   update is ArmCustomPatchSync<
     ProjectCostControl,
     CostControlPatch,
@@ -562,11 +588,11 @@ interface ProjectCostControls {
 @@maxLength(AccountCostControl.name, 64);
 @@doc(
   AccountCostControl.name,
-  "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated."
+  "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen."
 );
 @@minLength(ProjectCostControl.name, 1);
 @@maxLength(ProjectCostControl.name, 64);
 @@doc(
   ProjectCostControl.name,
-  "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated."
+  "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen."
 );
