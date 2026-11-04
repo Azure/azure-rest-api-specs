@@ -176,3 +176,59 @@ using Commvault.ContentStore;
   "csharp"
 );
 @@alternateType(StorageProperties.location, Azure.Core.azureLocation, "csharp");
+
+@@clientName(ActivateSaaSParameterRequest.saasGuid, "SaaSGUID", "go");
+@@clientName(ActivateSaaSRequestParam.saasResourceId, "SaaSResourceID", "go");
+@@clientName(
+  CloudAccountProperties.roleAssignmentsOnCcaCreate,
+  "RoleAssignmentsOnCCACreate",
+  "go"
+);
+
+// [PR63699-1] "SaaSActivationDetails" is more descriptive than the raw wire-name-derived
+// "ActivateSaaSRequestParam"; the property that carries it is renamed similarly, while
+// the wire name "activateSaaSRequestParam" is preserved for serialization.
+@@clientName(ActivateSaaSRequestParam, "SaaSActivationDetails", "csharp");
+@@clientName(
+  ActivateSaaSParameterRequest.activateSaaSRequestParam,
+  "ActivationDetails",
+  "csharp"
+);
+
+// [PR63699-2] The service parses saasResourceId as a full ARM resource id
+// (subscription/resourceGroup/resourceName), not a GUID or short name; type it accordingly.
+// Remains optional.
+@@alternateType(
+  ActivateSaaSRequestParam.saasResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// [PR63699-3] The service requires saasGuid as a GUID (CommvaultActivateSaaSRequest.SaasGuid
+// is a .NET Guid on the backend); map it to the actual GUID wire value. Required/wire name preserved.
+@@alternateType(
+  ActivateSaaSParameterRequest.saasGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
+
+// [PR63699-4] "roleAssignmentsOnCcaCreate" is an awkward abbreviation; rename for readability
+// while preserving create-only visibility and the wire name.
+@@clientName(
+  CloudAccountProperties.roleAssignmentsOnCcaCreate,
+  "RoleAssignmentsOnCreate",
+  "csharp"
+);
+
+// [PR63699-5] "BackUp" should read as the compound word "Backup"; keep the read-only
+// int64 wire type and wire name unchanged.
+@@clientName(
+  ProtectionGroupProperties.lastBackUpTime,
+  "LastBackupTime",
+  "csharp"
+);
+@@clientName(
+  ProtectedItemProperties.lastBackUpTime,
+  "LastBackupTime",
+  "csharp"
+);

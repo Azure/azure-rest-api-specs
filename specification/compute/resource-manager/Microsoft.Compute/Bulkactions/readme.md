@@ -103,6 +103,17 @@ suppressions:
       https://github.com/Azure/azure-openapi-validator/blob/main/docs/path-for-nested-resource.md#pathfornestedresource).
     from: Bulkactions.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/bulkCreate/asyncOperations/{asyncOperationId}"]
+  - code: BodyTopLevelProperties
+    reason: >
+      placement is an ARM envelope property on the Microsoft.Compute virtualMachines resource and is
+      mirrored here so bulkCreate and bulkCreateCustom accept the same top-level contract as a single
+      VM create. The BodyTopLevelProperties allow-list has not yet been extended with placement
+      (extendedLocation, the sibling envelope property, is already accepted), so this is a rule gap
+      rather than a deviation from the ARM resource shape.
+    from: Bulkactions.json
+    where:
+      - $.definitions.LocationBasedBulkCreate
+      - $.definitions.LocationBasedBulkCreateCustom
 ```
 
 ### Tag: package-2026-09-06-preview

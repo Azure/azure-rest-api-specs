@@ -678,9 +678,11 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 @@clientName(TlsVersion.`1.0`, "One0", "go,javascript");
 @@clientName(TlsVersion.`1.1`, "One1", "go,javascript");
 @@clientName(TlsVersion.`1.2`, "One2", "go,javascript");
+@@clientName(TlsVersion.`1.3`, "One3", "go,javascript");
 @@clientName(TlsVersion.`1.0`, "One0", "csharp");
 @@clientName(TlsVersion.`1.1`, "One1", "csharp");
 @@clientName(TlsVersion.`1.2`, "One2", "csharp");
+@@clientName(TlsVersion.`1.3`, "One3", "csharp");
 
 @@clientName(
   WebHookEventSubscriptionDestinationProperties,
@@ -700,6 +702,7 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 @@clientName(TlsVersion.`1.0`, "ONE0", "python");
 @@clientName(TlsVersion.`1.1`, "ONE1", "python");
 @@clientName(TlsVersion.`1.2`, "ONE2", "python");
+@@clientName(TlsVersion.`1.3`, "ONE3", "python");
 @@clientName(
   Azure.ResourceManager.ResourceProvisioningState,
   "ArmResourceProvisioningState",
