@@ -5,8 +5,25 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
 // csharp
+@@clientName(
+  WorkspaceCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
+  "keyEncryptionKeyUri",
+  "csharp"
+);
+@@clientName(
+  WorkspaceCustomerManagedKeyEncryptionPatch.keyEncryptionKeyUrl,
+  "keyEncryptionKeyUri",
+  "csharp"
+);
+@@clientName(
+  WorkspaceEncryptionStatus.observedKeyEncryptionKeyUrl,
+  "observedKeyEncryptionKeyUri",
+  "csharp"
+);
 @@clientName(Workspace, "ChaosWorkspace", "csharp");
 @@clientName(Scenario, "ChaosScenario", "csharp");
+@@clientName(ScenarioTemplate, "ChaosScenarioTemplate", "csharp");
+@@clientName(ScenarioTemplateVersion, "ChaosScenarioTemplateVersion", "csharp");
 @@clientName(ScenarioRun, "ChaosScenarioRun", "csharp");
 @@clientName(ScenarioConfiguration, "ChaosScenarioConfiguration", "csharp");
 @@clientName(DiscoveredResource, "ChaosDiscovered", "csharp");
@@ -79,7 +96,16 @@ using Microsoft.Chaos;
 @@clientName(PermissionsFixProperties.whatIfMode, "IsWhatIfMode", "csharp");
 @@clientName(Recommendation, "ChaosScenarioRecommendation", "csharp");
 @@clientName(Validation, "ChaosScenarioValidationData", "csharp");
-@@clientName(WorkspaceEvaluation, "ChaosWorkspaceEvaluationData", "csharp");
+@@clientName(
+  WorkspaceEvaluation,
+  "ChaosWorkspaceTemplateEvaluationData",
+  "csharp"
+);
+@@clientName(
+  LegacyWorkspaceEvaluation,
+  "ChaosWorkspaceEvaluationData",
+  "csharp"
+);
 @@clientName(
   ActionSupportedTargetType,
   "ChaosActionSupportedTargetType",
