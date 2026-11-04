@@ -10,8 +10,8 @@ const STATUS_LABELS = {
 
 export type CommentStatus = keyof typeof STATUS_LABELS;
 
-/** Renders a decorative icon beside a trusted, readable status label. */
+/** Keeps the decorative icon unlinked, including GitHub's automatic image-preview link. */
 export function statusBadge(status: CommentStatus, label = STATUS_LABELS[status]): string {
   const url = `https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/.github/assets/merge-status/${status}.svg`;
-  return `<img src="${url}" width="18" height="18" align="absmiddle" alt=""> ${label}`;
+  return `<picture><img src="${url}" width="18" height="18" align="absmiddle" alt=""></picture> ${label}`;
 }

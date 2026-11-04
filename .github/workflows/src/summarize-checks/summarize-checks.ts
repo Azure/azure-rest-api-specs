@@ -82,6 +82,7 @@ export type CheckRunData = {
   status: string;
   conclusion: string | null;
   checkInfo: CheckMetadata;
+  url?: string;
 };
 
 export type WorkflowRunArtifact = {
@@ -692,11 +693,13 @@ export async function getCheckRunTuple(
   > = [];
 
   allCheckRuns.forEach((checkRun) => {
+    const url = checkRun.details_url || checkRun.html_url;
     allChecks.push({
       name: checkRun.name,
       status: checkRun.status,
       conclusion: checkRun.conclusion || null,
       checkInfo: getCheckInfo(checkRun.name),
+      ...(url ? { url } : {}),
       // Store original object for date sorting
       _originalData: checkRun,
       _source: "checkRun",
@@ -719,7 +722,7 @@ export async function getCheckRunTuple(
         conclusion = "failure";
         break;
       case "pending":
-        checkStatus = "in_progress";
+        checkStatus = "pending";
         conclusion = null;
         break;
     }
@@ -729,6 +732,7 @@ export async function getCheckRunTuple(
       status: checkStatus,
       conclusion: conclusion,
       checkInfo: getCheckInfo(status.context),
+      ...(status.target_url ? { url: status.target_url } : {}),
       // Store original object for date sorting and data access
       _originalData: status,
       _source: "commitStatus",
@@ -810,6 +814,7 @@ export async function getCheckRunTuple(
       status: latestCheck.status,
       conclusion: latestCheck.conclusion,
       checkInfo: latestCheck.checkInfo,
+      ...(latestCheck.url ? { url: latestCheck.url } : {}),
     });
   }
 
@@ -906,26 +911,26 @@ export function createNextStepsComment(
   target_url: string,
   sdkBreakingChangesSummary: string = "",
 ): [string, CheckRunResult] {
-  // select just the metadata that we need about the runs.
-  const failingCheckInfos = requiredRuns
-    .filter((run) => checkRunIsSuccessful(run) === false)
-    .map((run) => run.checkInfo);
+  const failingRequiredChecks = requiredRuns.filter((run) => checkRunIsSuccessful(run) === false);
 
   const pendingRequiredChecks = requiredRuns.filter(
     (run) => run.status.toLowerCase() !== "completed",
   );
 
-  const fyiCheckInfos = fyiRuns
-    .filter((run) => checkRunIsSuccessful(run) === false)
-    .map((run) => run.checkInfo);
+  const failingFyiChecks = fyiRuns.filter((run) => checkRunIsSuccessful(run) === false);
+  const completedChecks = [...requiredRuns, ...fyiRuns].filter(
+    (run) =>
+      run.status.toLowerCase() === "completed" && run.conclusion?.toLowerCase() === "success",
+  );
 
   const [commentBody, automatedChecksMet] = buildNextStepsToMergeCommentBody(
     core,
     labels,
     `${repo}/${targetBranch}`,
     pendingRequiredChecks,
-    failingCheckInfos,
-    fyiCheckInfos,
+    failingRequiredChecks,
+    failingFyiChecks,
+    completedChecks,
     assessmentCompleted,
     target_url,
     sdkBreakingChangesSummary,
@@ -941,9 +946,10 @@ function buildNextStepsToMergeCommentBody(
   core: Core,
   labels: string[],
   targetBranch: string,
-  pendingRequiredChecks: Pick<CheckRunData, "name" | "status">[],
-  failingReqChecksInfo: CheckMetadata[],
-  failingFyiChecksInfo: CheckMetadata[],
+  pendingRequiredChecks: CheckRunData[],
+  failingRequiredChecks: CheckRunData[],
+  failingFyiChecks: CheckRunData[],
+  completedChecks: CheckRunData[],
   assessmentCompleted: boolean,
   target_url: string,
   sdkBreakingChangesSummary: string,
@@ -951,8 +957,8 @@ function buildNextStepsToMergeCommentBody(
   const violatedReqLabelsRules = getViolatedRequiredLabelsRules(core, labels, targetBranch);
 
   // we are "blocked" if we have any violated labelling rules OR if we have any failing required checks
-  const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
-  const anyFyiPresent = failingFyiChecksInfo.length > 0;
+  const anyBlockerPresent = failingRequiredChecks.length > 0 || violatedReqLabelsRules.length > 0;
+  const anyFyiPresent = failingFyiChecks.length > 0;
   // we consider requirements met if there are:
   // - no blockers (which includes violated labelling rules in its definition) (anyBlockerPresent)
   // - that none of the required checks are in_progress or queued
@@ -967,10 +973,11 @@ function buildNextStepsToMergeCommentBody(
     requirementsMet,
     anyBlockerPresent,
     anyFyiPresent,
-    failingReqChecksInfo,
-    failingFyiChecksInfo,
+    failingRequiredChecks,
+    failingFyiChecks,
     violatedReqLabelsRules,
     buildPendingRequirements(assessmentCompleted, pendingRequiredChecks),
+    completedChecks,
     target_url,
     sdkBreakingChangesSummary,
   );
@@ -981,22 +988,28 @@ function buildNextStepsToMergeCommentBody(
 type RequirementSummary = {
   name: string;
   status: CommentStatus;
+  statusLabel?: string;
   nextStep: string;
   guidance?: string;
 };
 
 function buildPendingRequirements(
   assessmentCompleted: boolean,
-  pendingRequiredChecks: Pick<CheckRunData, "name" | "status">[],
+  pendingRequiredChecks: CheckRunData[],
 ): RequirementSummary[] {
-  const pendingItems = pendingRequiredChecks.map(({ name, status }): RequirementSummary => ({
-    name: inlineCode(name),
-    status: status.toLowerCase() === "in_progress" ? "running" : "pending",
-    nextStep:
-      status.toLowerCase() === "in_progress"
-        ? "Wait for this required check to finish."
-        : "Wait for this required check to start.",
-  }));
+  const pendingItems = pendingRequiredChecks.map((check): RequirementSummary => {
+    const state = check.status.toLowerCase();
+    return {
+      name: formatCheckName(check),
+      status: state === "in_progress" ? "running" : "pending",
+      nextStep:
+        state === "in_progress"
+          ? "Wait for this required check to finish."
+          : state === "queued"
+            ? "Wait for this required check to start."
+            : "Wait for this required check's result.",
+    };
+  });
   if (!assessmentCompleted) {
     pendingItems.unshift({
       name: "PR impact assessment",
@@ -1012,10 +1025,11 @@ function buildPendingRequirements(
  * @param requirementsMet - Whether all requirements are met
  * @param anyBlockerPresent - Whether any blockers are present
  * @param anyFyiPresent - Whether any FYI issues are present
- * @param failingReqChecksInfo - Failing required checks info
- * @param failingFyiChecksInfo - Failing FYI checks info
+ * @param failingRequiredChecks - Failing required checks
+ * @param failingFyiChecks - Failing FYI checks
  * @param violatedRequiredLabelsRules - Violated required label rules
  * @param pendingRequirements - Incomplete assessment and required checks
+ * @param completedChecks - Successful monitored checks
  * @param target_url - The target URL for the automated checks met run which will be set at the outset of summarize-checks
  * @returns The Markdown body and the automated merging requirements status.
  */
@@ -1023,21 +1037,27 @@ function getCommentBody(
   requirementsMet: boolean,
   anyBlockerPresent: boolean,
   anyFyiPresent: boolean,
-  failingReqChecksInfo: CheckMetadata[],
-  failingFyiChecksInfo: CheckMetadata[],
+  failingRequiredChecks: CheckRunData[],
+  failingFyiChecks: CheckRunData[],
   violatedRequiredLabelsRules: RequiredLabelRule[],
   pendingRequirements: RequirementSummary[],
+  completedChecks: CheckRunData[],
   target_url: string,
   sdkBreakingChangesSummary: string,
 ): [MarkdownDoc, CheckRunResult] {
   let status: "pending" | keyof typeof CheckConclusion = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
 
-  let headline = `${statusBadge("running", "**Still evaluating**")} — merge requirements are not final yet.`;
+  const evaluationStatus = pendingRequirements.some(
+    (requirement) => requirement.status === "running",
+  )
+    ? "running"
+    : "pending";
+  let headline = `${statusBadge(evaluationStatus, "**Still evaluating**")} — merge requirements are not final yet.`;
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
-      const count = failingReqChecksInfo.length + violatedRequiredLabelsRules.length;
+      const count = failingRequiredChecks.length + violatedRequiredLabelsRules.length;
       headline = `${statusBadge("failed", "**Blocked**")} — ${count} ${count === 1 ? "requirement needs" : "requirements need"} attention.`;
       summaryData =
         "❌ This PR cannot be merged because some requirements are not met. See the details.";
@@ -1073,10 +1093,10 @@ function getCommentBody(
 
   const blockingRequirements = [
     ...buildLabelRequirementSummaries(violatedRequiredLabelsRules),
-    ...buildFailingCheckSummaries(failingReqChecksInfo, "required"),
+    ...buildFailingCheckSummaries(failingRequiredChecks, "required"),
     ...pendingRequirements,
   ];
-  const nonBlockingChecks = buildFailingCheckSummaries(failingFyiChecksInfo, "FYI");
+  const nonBlockingChecks = buildFailingCheckSummaries(failingFyiChecks, "FYI");
   const guidance = [...blockingRequirements, ...nonBlockingChecks]
     .filter((requirement) => requirement.guidance)
     .map((requirement) => section(requirement.name, requirement.guidance));
@@ -1098,6 +1118,19 @@ function getCommentBody(
       ? details(
           `Non-blocking failures (${nonBlockingChecks.length})`,
           buildRequirementsTable(nonBlockingChecks),
+        )
+      : undefined,
+    completedChecks.length > 0
+      ? details(
+          `Completed checks (${completedChecks.length})`,
+          buildRequirementsTable(
+            completedChecks.map((check) => ({
+              name: formatCheckName(check),
+              status: "passed",
+              statusLabel: "Passed",
+              nextStep: "No action needed.",
+            })),
+          ),
         )
       : undefined,
     guidance.length > 0
@@ -1127,8 +1160,19 @@ function getCommentBody(
 function buildRequirementsTable(requirements: RequirementSummary[]): string {
   return table([
     ["Requirement", "Status", "Next step"],
-    ...requirements.map(({ name, status, nextStep }) => [name, statusBadge(status), nextStep]),
+    ...requirements.map(({ name, status, statusLabel, nextStep }) => [
+      name,
+      statusBadge(status, statusLabel),
+      nextStep,
+    ]),
   ]);
+}
+
+function formatCheckName({ name, url }: Pick<CheckRunData, "name" | "url">): string {
+  if (!url || !URL.canParse(url)) return inlineCode(name);
+  const target = new URL(url);
+  if (target.protocol !== "https:" && target.protocol !== "http:") return inlineCode(name);
+  return link(escapeMarkdown(name), `<${target.href}>`);
 }
 
 /**
@@ -1138,16 +1182,16 @@ function buildRequirementsTable(requirements: RequirementSummary[]): string {
  * @returns Table entries for all failures in priority order.
  */
 function buildFailingCheckSummaries(
-  failingChecks: CheckMetadata[],
+  failingChecks: CheckRunData[],
   checkKind: "required" | "FYI",
 ): RequirementSummary[] {
   return failingChecks
-    .toSorted((a, b) => a.precedence - b.precedence)
+    .toSorted((a, b) => a.checkInfo.precedence - b.checkInfo.precedence)
     .map((check) => ({
-      name: inlineCode(check.name),
+      name: formatCheckName(check),
       status: checkKind === "required" ? "failed" : "warning",
       nextStep: "Open the failed check, address its diagnostics, then rerun CI.",
-      guidance: check.troubleshootingGuide.trim(),
+      guidance: check.checkInfo.troubleshootingGuide.trim(),
     }));
 }
 

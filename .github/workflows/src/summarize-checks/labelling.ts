@@ -1024,12 +1024,16 @@ const rulesPri0ArmRev: RequiredLabelRule[] = [
 ];
 
 const rulesPri1ArmRev: RequiredLabelRule[] = [
-  // This rule should never kick-in in normal flow, as there should always be one of rules for the ARM review workflow
-  // labels active, and all of them have higher precedence than this rule.
-  // However, we may still end up in this situation if someone manually tampered with the labels.
+  // Repair guidance is only needed when the ARM workflow-state label is missing.
   {
     precedence: 1,
     anyPrerequisiteLabels: ["ARMReview"],
+    allPrerequisiteAbsentLabels: [
+      "NotReadyForARMReview",
+      "WaitForARMFeedback",
+      "ARMChangesRequested",
+      "ARMSignedOff",
+    ],
     anyRequiredLabels: ["ARMSignedOff"],
     name: "ARM review workflow",
     nextStep: "Comment `/azp run` to refresh ARM review readiness.",

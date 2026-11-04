@@ -336,13 +336,95 @@ describe("Summarize Checks Integration Tests", () => {
 });
 
 describe("Summarize Checks Unit Tests", () => {
+  it("preserves the latest provider URLs and keeps legacy pending statuses ambiguous", async () => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    github.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          {
+            name: "Swagger LintDiff",
+            status: "completed",
+            conclusion: "failure",
+            completed_at: "2026-01-01T00:00:00Z",
+            details_url: "https://checks.example/old",
+          },
+          {
+            name: "Swagger LintDiff",
+            status: "in_progress",
+            conclusion: null,
+            started_at: "2026-01-02T00:00:00Z",
+            details_url: "https://checks.example/current",
+            html_url: "https://github.com/owner/repo/runs/2",
+          },
+          {
+            name: "Swagger BreakingChange",
+            status: "completed",
+            conclusion: "success",
+            details_url: "",
+            html_url: "https://github.com/owner/repo/runs/3",
+          },
+        ],
+      },
+    });
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        {
+          context: "SDK Validation Status",
+          state: "pending",
+          target_url: "https://dev.azure.com/owner/project/_build/results?buildId=9",
+          updated_at: "2026-01-02T00:00:00Z",
+        },
+      ],
+    });
+
+    const [, checks] = await getCheckRunTuple(
+      github,
+      core,
+      "owner",
+      "repo",
+      fullGitSha,
+      "main",
+      [],
+    );
+
+    expect(checks.map(({ name, status, url }) => ({ name, status, url }))).toEqual([
+      { name: "Swagger LintDiff", status: "in_progress", url: "https://checks.example/current" },
+      {
+        name: "Swagger BreakingChange",
+        status: "completed",
+        url: "https://github.com/owner/repo/runs/3",
+      },
+      {
+        name: "SDK Validation Status",
+        status: "pending",
+        url: "https://dev.azure.com/owner/project/_build/results?buildId=9",
+      },
+    ]);
+    const legacy = checks.filter((check) => check.name === "SDK Validation Status");
+    const [comment, result] = createNextStepsComment(
+      core,
+      "repo",
+      [],
+      "main",
+      legacy,
+      [],
+      true,
+      WORKFLOW_URL,
+    );
+    expect(comment).toContain("Wait for this required check's result.");
+    expect(comment).not.toContain("/running.svg");
+    expect(result.result).toBe("pending");
+  });
+
   describe("check result processing", () => {
     function run(
       name: string,
       status = "completed",
       conclusion: string | null = "success",
+      url?: string,
     ): CheckRunData {
-      return { name, status, conclusion, checkInfo: getCheckInfo(name) };
+      return { name, status, conclusion, checkInfo: getCheckInfo(name), ...(url ? { url } : {}) };
     }
 
     function summarize({
@@ -382,7 +464,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(token).toBeDefined();
       return token?.rows.map((row) =>
         row.map((cell, index) =>
-          index === 1 ? cell.text.replace(/<img\b[^>]*>\s*/, "") : cell.text,
+          index === 1 ? cell.text.replace(/<\/?picture>|<img\b[^>]*>/g, "").trim() : cell.text,
         ),
       );
     }
@@ -485,7 +567,9 @@ describe("Summarize Checks Unit Tests", () => {
       const [comment] = summarize();
 
       expect(comment).toContain("**All automated merging requirements have been met.**");
-      expect(comment).toMatch(/passed\.svg"[^>]*> \*\*All automated merging requirements/);
+      expect(comment).toMatch(
+        /passed\.svg"[^>]*><\/picture> \*\*All automated merging requirements/,
+      );
       expect(rows(comment)).toEqual([
         ["Automated requirements", "Met", "Follow the merge process linked below."],
       ]);
@@ -512,8 +596,8 @@ describe("Summarize Checks Unit Tests", () => {
         ["Publication intent", "Action required"],
         ["`TypeSpec Validation`", "Failed"],
       ]);
-      expect(visible).toMatch(/action-required\.svg"[^>]*> Action required/);
-      expect(visible).toMatch(/failed\.svg"[^>]*> Failed/);
+      expect(visible).toMatch(/action-required\.svg"[^>]*><\/picture> Action required/);
+      expect(visible).toMatch(/failed\.svg"[^>]*><\/picture> Failed/);
       expect(marked.parse(visible)).toContain(
         '<picture><img src="https://img.shields.io/github/labels/Azure/azure-rest-api-specs/PublishToCustomers" alt="PublishToCustomers"></picture>',
       );
@@ -525,6 +609,34 @@ describe("Summarize Checks Unit Tests", () => {
       expect(comment).toContain("<summary>Details and troubleshooting</summary>");
       expect(comment).toContain("These branches are not intended for iterative development");
       expect(status.result).toBe("FAILURE");
+    });
+
+    it("links failed and running checks and keeps successful check links in collapsed details", () => {
+      const failedUrl = "https://checks.example/failed?filter=(all)";
+      const runningUrl = "https://checks.example/running";
+      const passedUrl = "https://checks.example/passed";
+      const [comment, result] = summarize({
+        required: [
+          run("Failed check", "completed", "failure", failedUrl),
+          run("Running check", "in_progress", null, runningUrl),
+          run("Passed check", "completed", "success", passedUrl),
+          run("Skipped check", "completed", "skipped"),
+          run("Neutral check", "completed", "neutral"),
+        ],
+      });
+      const visible = comment.split("<details>")[0];
+      const completed = comment
+        .split("<summary>Completed checks (1)</summary>")[1]
+        ?.split("</details>")[0];
+
+      expect(marked.parse(visible)).toContain(`href="${failedUrl}"`);
+      expect(marked.parse(visible)).toContain(`href="${runningUrl}"`);
+      expect(visible).not.toContain(passedUrl);
+      expect(completed).toContain(passedUrl);
+      expect(completed).toContain("Passed check");
+      expect(completed).not.toContain("Skipped check");
+      expect(completed).not.toContain("Neutral check");
+      expect(result.result).toBe("FAILURE");
     });
 
     it("shows all blocking approvals and failures in the main table regardless of priority", () => {
@@ -612,14 +724,38 @@ describe("Summarize Checks Unit Tests", () => {
       expect(rows(comment)?.map((row) => row.slice(0, 2))).toEqual([
         ["Publication intent", "Action required"],
         ["ARM API review", "Awaiting review"],
-        ["ARM review workflow", "Action required"],
         ["`TypeSpec Validation`", "Running"],
         ["`Swagger Avocado`", "Pending"],
       ]);
-      expect(comment).toMatch(/awaiting-review\.svg"[^>]*> Awaiting review/);
-      expect(comment).toMatch(/running\.svg"[^>]*> Running/);
-      expect(comment).toMatch(/pending\.svg"[^>]*> Pending/);
+      expect(comment).toMatch(/awaiting-review\.svg"[^>]*><\/picture> Awaiting review/);
+      expect(comment).toMatch(/running\.svg"[^>]*><\/picture> Running/);
+      expect(comment).toMatch(/pending\.svg"[^>]*><\/picture> Pending/);
+      expect(comment).not.toContain("ARM review workflow label is missing");
       expect(comment).toContain("Wait for this required check to start.");
+      expect(status.result).toBe("FAILURE");
+    });
+
+    it.each([
+      { label: "NotReadyForARMReview", result: "FAILURE" },
+      { label: "ARMChangesRequested", result: "FAILURE" },
+      { label: "ARMSignedOff", result: "SUCCESS" },
+    ])(
+      "does not claim the ARM workflow state is missing when $label is present",
+      ({ label, result }) => {
+        const [comment, status] = summarize({ labels: ["ARMReview", label] });
+
+        expect(comment).not.toContain("ARM review workflow label is missing");
+        expect(rows(comment)?.map((row) => row[0])).not.toContain("ARM review workflow");
+        expect(status.result).toBe(result);
+      },
+    );
+
+    it("retains ARM workflow repair guidance when the state label is genuinely missing", () => {
+      const [comment, status] = summarize({ labels: ["ARMReview"] });
+
+      expect(rows(comment)?.map((row) => row[0])).toContain("ARM review workflow");
+      expect(comment).toContain("ARM review workflow label is missing");
+      expect(comment).toContain("`/azp run`");
       expect(status.result).toBe("FAILURE");
     });
 
@@ -634,7 +770,7 @@ describe("Summarize Checks Unit Tests", () => {
           "<summary>Non-blocking failures (" + (names.length + 1) + ")</summary>",
         );
         expect(comment).toContain("| `license/cla` |");
-        expect(comment).toMatch(/warning\.svg"[^>]*> Non-blocking/);
+        expect(comment).toMatch(/warning\.svg"[^>]*><\/picture> Non-blocking/);
         expect(comment.split("<details>")[0]).not.toContain("license/cla");
         expect(comment).not.toContain("Other outstanding requirements");
         expect(status.result).toBe("SUCCESS");
@@ -649,6 +785,7 @@ describe("Summarize Checks Unit Tests", () => {
           name,
           kind === "pending" ? "queued" : "completed",
           kind === "pending" ? null : "failure",
+          kind === "pending" ? "not a URL" : "javascript:alert(1)",
         );
         const [comment, status] = summarize(
           kind === "fyi" ? { fyi: [check] } : { required: [check] },
@@ -659,6 +796,7 @@ describe("Summarize Checks Unit Tests", () => {
           "<code>&lt;check&gt; &amp; `unsafe` | [label](https://bad.example) @reviewers</code>",
         );
         expect(html).not.toContain('<a href="https://bad.example">');
+        expect(html).not.toContain('href="javascript:');
         expect(status.result).toBe(
           kind === "pending" ? "pending" : kind === "required" ? "FAILURE" : "SUCCESS",
         );
