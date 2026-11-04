@@ -139,7 +139,7 @@ union BuilderAppProvisioningState {
 model BuilderAppVersionConfiguration {
   /**
    * Omit to preserve variables; [] clears. An explicit list replaces the set.
-   * Names are unique ignoring case; PORT and the EMBR_ prefix are reserved.
+   * Names are unique ignoring case; PORT and BuilderApps platform-managed names are reserved.
    * Values are limited to 32 KiB UTF-8 each; all names and values together to 64 KiB.
    */
   @maxItems(100)
@@ -162,7 +162,7 @@ model BuilderAppVersionComponent {
 /** A version variable whose value is accepted on write but omitted from ordinary resource responses. */
 @added(Versions.v2026_09_01_preview)
 model BuilderAppVariable {
-  /** Environment variable name, unique ignoring case. PORT and EMBR_ names are reserved. */
+  /** Environment variable name, unique ignoring case. PORT and BuilderApps platform-managed names are reserved. */
   name: string;
 
   /** Omit or send null to preserve an existing value. A new name requires a value; an empty string is valid. */
