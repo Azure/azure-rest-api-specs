@@ -150,10 +150,10 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       `Count: ${newExistingVersionSwaggers.length}`,
   );
 
-  // create dummy swagger for new swaggers whose api version already existed before the PR.
+  // An addition relative to a release target may already exist in the comparison base.
   newExistingVersionSwaggers.forEach((f: string) => {
     const oldSwagger = path.join(context.prInfo!.tempRepoFolder, f);
-    if (isSameVersionBreakingType(context.runType)) {
+    if (isSameVersionBreakingType(context.runType) && !existsSync(oldSwagger)) {
       createDummySwagger(path.resolve(f), oldSwagger);
     }
   });

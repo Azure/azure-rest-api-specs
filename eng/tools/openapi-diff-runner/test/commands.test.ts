@@ -112,6 +112,38 @@ type TestCase = {
 
 const cases: TestCase[] = [
   {
+    name: "add relative to release target but preserve the existing main baseline",
+    changedFiles: {
+      additions: ["Foo/stable/2025-03-01/foo.json"],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/foo.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "add a genuinely new file within an existing version",
+    changedFiles: {
+      additions: ["Foo/stable/2025-03-01/extra.json"],
+    },
+    expectedCreateDummySwaggers: {
+      old: ["Foo/stable/2025-03-01/extra.json"],
+      new: [],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-03-01/extra.json",
+          new: "Foo/stable/2025-03-01/extra.json",
+        },
+      ],
+    },
+  },
+  {
     name: "modify one file, one version",
     changedFiles: {
       modifications: ["Foo/stable/2025-03-01/foo.json"],

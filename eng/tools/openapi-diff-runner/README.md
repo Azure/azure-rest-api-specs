@@ -59,6 +59,10 @@ npx openapi-diff-runner \
 - Changes within the same API version that break backward compatibility
 - Examples: Removing properties, changing required fields, modifying response schemas
 
+Files added relative to a release target are compared against their actual published baseline
+when they already exist in the comparison branch. An empty baseline is created only for a
+genuinely new file within an existing API version.
+
 ### Cross Version Breaking Changes
 
 - Changes between different API versions
