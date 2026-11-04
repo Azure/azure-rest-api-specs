@@ -573,6 +573,16 @@ model BlobPropertiesGo {
   /** The archive status of the blob. */
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
 
+  /** Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes. */
+  @added(Versions.v2027_05_07)
+  @Xml.name("TurboStatus")
+  turboStatus?: TurboStatus;
+
+  /** Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user. */
+  @added(Versions.v2027_05_07)
+  @Xml.name("TierManagedBy")
+  tierManagedBy?: TierManagedBy;
+
   /** The smart access tier of the blob. */
   @added(Versions.v2026_06_06)
   @Xml.name("SmartAccessTier")
@@ -1372,6 +1382,10 @@ union AccessTierRust {
 
   /** The Cold access tier. */
   Cold: "Cold",
+
+  /** The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier. */
+  @added(Versions.v2027_05_07)
+  Turbo: "Turbo",
 
   /** Extensible. */
   string,
