@@ -2088,17 +2088,6 @@ union ReplicaState {
 }
 
 /**
- * The replication lag details for a namespace migration.
- */
-@added(Versions.v2026_09_01_preview)
-model NamespaceMigrationReplicationLags {
-  /**
-   * The replication lag properties.
-   */
-  properties?: ReplicationLagProperties;
-}
-
-/**
  * The properties describing replication lag during a namespace migration.
  */
 @added(Versions.v2026_09_01_preview)

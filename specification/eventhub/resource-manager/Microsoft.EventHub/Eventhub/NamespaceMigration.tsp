@@ -68,17 +68,32 @@ interface NamespaceMigrations {
       Azure.Core.Foundations.RetryAfterHeader,
     Error = ErrorResponse
   >;
+}
 
+/**
+ * The replication lag details for a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+@singleton("default")
+@parentResource(NamespaceMigration)
+model NamespaceMigrationReplicationLags
+  is Azure.ResourceManager.ProxyResource<ReplicationLagProperties> {
+  ...ResourceNameParameter<
+    Resource = NamespaceMigrationReplicationLags,
+    KeyName = "replicationLagName",
+    SegmentName = "replicationLags",
+    NamePattern = "^default$"
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Replication lags are read-only and cannot be deleted."
+@added(Versions.v2026_09_01_preview)
+@armResourceOperations
+interface NamespaceMigrationReplicationLagsOperations {
   /**
    * Gets the replication lags for an in-progress namespace migration.
    */
-  @action("getReplicationLags")
-  getReplicationLags is ArmResourceActionSync<
-    NamespaceMigration,
-    void,
-    ArmResponse<NamespaceMigrationReplicationLags>,
-    Error = ErrorResponse
-  >;
+  get is ArmResourceRead<NamespaceMigrationReplicationLags, Error = ErrorResponse>;
 }
 
 @@doc(NamespaceMigration.name, "The migration resource name. Must be 'default'.");
