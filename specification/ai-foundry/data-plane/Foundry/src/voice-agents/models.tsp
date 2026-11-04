@@ -174,10 +174,7 @@ alias VoiceConversationItemPersistence = {
   {
     ...VoiceConversationItemPersistence,
 
-    @doc("""
-      `true` when `speech_start_detection` rejected this speech as a backchannel, such as "mm-hm": it did not
-      interrupt the agent and got no response. Omitted otherwise.
-      """)
+    @doc("Whether `speech_start_detection` rejected this speech as a backchannel.")
     @visibility(Lifecycle.Read)
     backchannel?: boolean,
   }

@@ -1722,7 +1722,7 @@
           },
           "backchannel": {
             "type": "boolean",
-            "description": "`true` when `speech_start_detection` rejected this speech as a backchannel, such as \"mm-hm\": it did not\ninterrupt the agent and got no response. Omitted otherwise.",
+            "description": "Whether `speech_start_detection` rejected this speech as a backchannel.",
             "readOnly": true
           }
         },
@@ -2769,7 +2769,7 @@
           },
           "backchannel": {
             "type": "boolean",
-            "description": "`true` when `speech_start_detection` rejected this speech as a backchannel, such as \"mm-hm\": it did not\ninterrupt the agent and gets no response, but it is still added to the conversation. Omitted otherwise. No\n`input_audio_buffer.speech_started` or `input_audio_buffer.speech_stopped` event is sent for such speech."
+            "description": "Whether `speech_start_detection` rejected this speech as a backchannel; such speech gets no response."
           }
         },
         "allOf": [
@@ -6873,7 +6873,7 @@
           },
           "speech_start_detection": {
             "$ref": "#/components/schemas/VoiceAgentSpeechStartDetection",
-            "description": "Transcript rules that a detected speech start must pass before it interrupts the agent or takes the turn. Including\nthis object turns the feature on. Requires `audio.input.transcription.model` to be `azure-speech-streaming` or\n`mai-transcribe-2-streaming`."
+            "description": "Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model."
           }
         },
         "allOf": [
@@ -6951,7 +6951,7 @@
           },
           "speech_start_detection": {
             "$ref": "#/components/schemas/VoiceAgentSpeechStartDetection",
-            "description": "Transcript rules that a detected speech start must pass before it interrupts the agent or takes the turn. Including\nthis object turns the feature on. Requires `audio.input.transcription.model` to be `azure-speech-streaming` or\n`mai-transcribe-2-streaming`."
+            "description": "Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model."
           },
           "languages": {
             "type": "array",
@@ -7036,7 +7036,7 @@
           },
           "speech_start_detection": {
             "$ref": "#/components/schemas/VoiceAgentSpeechStartDetection",
-            "description": "Transcript rules that a detected speech start must pass before it interrupts the agent or takes the turn. Including\nthis object turns the feature on. Requires `audio.input.transcription.model` to be `azure-speech-streaming` or\n`mai-transcribe-2-streaming`."
+            "description": "Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model."
           },
           "languages": {
             "type": "array",
@@ -9149,7 +9149,7 @@
           },
           "speech_start_detection": {
             "$ref": "#/components/schemas/VoiceAgentSpeechStartDetection",
-            "description": "Transcript rules that a detected speech start must pass before it interrupts the agent or takes the turn. Including\nthis object turns the feature on. Requires `audio.input.transcription.model` to be `azure-speech-streaming` or\n`mai-transcribe-2-streaming`, and is not supported with realtime models; use an Azure semantic VAD there."
+            "description": "Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model; not supported with realtime models."
           }
         },
         "allOf": [
@@ -9458,7 +9458,7 @@
             "description": "Rules for speech that starts while the agent is not speaking."
           }
         },
-        "description": "Transcript rules that a detected speech start must pass before it interrupts the agent or takes the turn, so that\nbackchannels such as \"mm-hm\" do not interrupt the agent. The service fills in no rules: an omitted scenario checks\nnothing and admits the speech immediately. The scenario is chosen once per turn from how much agent audio is still\nunplayed when speech starts. A rejected turn neither interrupts the agent nor gets a response, but its transcript is\nstill added to the conversation.",
+        "description": "Transcript rules that keep backchannels such as \"mm-hm\" from taking the turn. An omitted scenario applies no rules.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -9469,7 +9469,7 @@
         "type": "string",
         "minLength": 1,
         "maxLength": 100,
-        "description": "A phrase matched against the user's transcript, ignoring case and punctuation. It must contain at least one word.",
+        "description": "A phrase matched against the transcript, ignoring case and punctuation.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -9484,7 +9484,7 @@
             "format": "float",
             "minimum": 0,
             "maximum": 50,
-            "description": "Minimum number of words before the speech counts as a turn. Fractions are rounded up. With 0, a scenario that has\nphrases still needs one word; a scenario with no rule at all admits the speech immediately. When\n`turn_taking_classifier` is set, this is the fallback used when the classifier gives no verdict.",
+            "description": "Minimum number of words before the speech counts as a turn; the fallback when the classifier gives no verdict.",
             "default": 0
           },
           "turn_taking_classifier": {
@@ -9496,7 +9496,7 @@
                 "type": "null"
               }
             ],
-            "description": "Let a turn-taking classifier decide whether the transcript takes the turn, given what the user has heard of the\nagent's latest response, instead of the word count. Phrases, where the scenario has them, still apply first."
+            "description": "A turn-taking classifier that decides instead of the word count. Phrases still apply first."
           }
         },
         "description": "Rules for speech that starts while the agent is not speaking.",
@@ -9514,7 +9514,7 @@
             "format": "float",
             "minimum": 0,
             "maximum": 50,
-            "description": "Minimum number of words before the speech counts as a turn. Fractions are rounded up. With 0, a scenario that has\nphrases still needs one word; a scenario with no rule at all admits the speech immediately. When\n`turn_taking_classifier` is set, this is the fallback used when the classifier gives no verdict.",
+            "description": "Minimum number of words before the speech counts as a turn; the fallback when the classifier gives no verdict.",
             "default": 0
           },
           "turn_taking_classifier": {
@@ -9526,7 +9526,7 @@
                 "type": "null"
               }
             ],
-            "description": "Let a turn-taking classifier decide whether the transcript takes the turn, given what the user has heard of the\nagent's latest response, instead of the word count. Phrases, where the scenario has them, still apply first."
+            "description": "A turn-taking classifier that decides instead of the word count. Phrases still apply first."
           },
           "acknowledgement_phrases": {
             "type": "array",
@@ -9534,7 +9534,7 @@
               "$ref": "#/components/schemas/VoiceAgentSpeechStartPhrase"
             },
             "maxItems": 100,
-            "description": "Transcripts that exactly match one of these phrases never interrupt the agent. Defaults to an empty list.",
+            "description": "Transcripts that exactly match one of these phrases do not take the turn.",
             "default": []
           },
           "interruption_phrases": {
@@ -9543,7 +9543,7 @@
               "$ref": "#/components/schemas/VoiceAgentSpeechStartPhrase"
             },
             "maxItems": 100,
-            "description": "Transcripts that contain one of these phrases as whole words interrupt the agent regardless of the word count.\nDefaults to an empty list.",
+            "description": "Transcripts that contain one of these phrases take the turn regardless of the word count.",
             "default": []
           }
         },
@@ -9970,7 +9970,7 @@
           "threshold": {
             "type": "number",
             "format": "float",
-            "description": "Probability that the user is taking the turn at or above which the speech counts as a turn. Higher values admit\nfewer turns.",
+            "description": "Probability at or above which the speech counts as a turn.",
             "exclusiveMinimum": 0,
             "exclusiveMaximum": 1,
             "default": 0.5
@@ -9984,7 +9984,7 @@
                 "type": "null"
               }
             ],
-            "description": "Task description given to the classifier. Replaces the built-in instructions; omit to keep them."
+            "description": "Replaces the built-in task description given to the classifier."
           },
           "criteria": {
             "anyOf": [
@@ -9995,7 +9995,7 @@
                 "type": "null"
               }
             ],
-            "description": "What counts as a turn and what does not. Each criterion given replaces the built-in one."
+            "description": "Replaces the built-in criteria for what is and is not a turn."
           }
         },
         "description": "A turn-taking classifier that judges whether the user's speech takes the turn.",
@@ -10017,7 +10017,7 @@
                 "type": "null"
               }
             ],
-            "description": "When the user's speech is a turn the agent must respond to or act on. Replaces the built-in criterion; omit to\nkeep it."
+            "description": "When the user's speech is a turn the agent must respond to."
           },
           "not_turn": {
             "anyOf": [
@@ -10028,10 +10028,10 @@
                 "type": "null"
               }
             ],
-            "description": "When the user's speech is not a turn, such as a backchannel. Replaces the built-in criterion; omit to keep it."
+            "description": "When the user's speech is not a turn, such as a backchannel."
           }
         },
-        "description": "Replacements for what the turn-taking classifier counts as a turn, or as not a turn.",
+        "description": "Criteria for what the turn-taking classifier counts as a turn.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10042,7 +10042,7 @@
         "type": "string",
         "minLength": 1,
         "maxLength": 4000,
-        "description": "Customer text that replaces one part of the turn-taking classifier's prompt.",
+        "description": "Text that replaces one part of the turn-taking classifier's prompt.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

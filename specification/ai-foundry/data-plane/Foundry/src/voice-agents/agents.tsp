@@ -785,35 +785,23 @@ model VoiceAgentServerVadTurnDetection extends VoiceAgentTurnDetectionConfig {
   @doc("Semantic end-of-utterance detection configuration. Set to null to disable it.")
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
 
-  @doc("""
-    Transcript rules that a detected speech start must pass before it interrupts the agent or takes the turn. Including
-    this object turns the feature on. Requires `audio.input.transcription.model` to be `azure-speech-streaming` or
-    `mai-transcribe-2-streaming`, and is not supported with realtime models; use an Azure semantic VAD there.
-    """)
+  @doc("Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model; not supported with realtime models.")
   speech_start_detection?: VoiceAgentSpeechStartDetection;
 }
 
-@doc("""
-  A phrase matched against the user's transcript, ignoring case and punctuation. It must contain at least one word.
-  """)
+@doc("A phrase matched against the transcript, ignoring case and punctuation.")
 @minLength(1)
 @maxLength(100)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentSpeechStartPhrase extends string;
 
-@doc("Customer text that replaces one part of the turn-taking classifier's prompt.")
+@doc("Text that replaces one part of the turn-taking classifier's prompt.")
 @minLength(1)
 @maxLength(4000)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentTurnTakingPromptText extends string;
 
-@doc("""
-  Transcript rules that a detected speech start must pass before it interrupts the agent or takes the turn, so that
-  backchannels such as "mm-hm" do not interrupt the agent. The service fills in no rules: an omitted scenario checks
-  nothing and admits the speech immediately. The scenario is chosen once per turn from how much agent audio is still
-  unplayed when speech starts. A rejected turn neither interrupts the agent nor gets a response, but its transcript is
-  still added to the conversation.
-  """)
+@doc("Transcript rules that keep backchannels such as \"mm-hm\" from taking the turn. An omitted scenario applies no rules.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSpeechStartDetection {
   @doc("Rules for speech that starts while the agent is speaking.")
@@ -826,19 +814,12 @@ model VoiceAgentSpeechStartDetection {
 @doc("Rules for speech that starts while the agent is not speaking.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSpeechStartWhileAssistantNotSpeaking {
-  @doc("""
-    Minimum number of words before the speech counts as a turn. Fractions are rounded up. With 0, a scenario that has
-    phrases still needs one word; a scenario with no rule at all admits the speech immediately. When
-    `turn_taking_classifier` is set, this is the fallback used when the classifier gives no verdict.
-    """)
+  @doc("Minimum number of words before the speech counts as a turn; the fallback when the classifier gives no verdict.")
   @minValue(0)
   @maxValue(50)
   num_words?: float32 = 0;
 
-  @doc("""
-    Let a turn-taking classifier decide whether the transcript takes the turn, given what the user has heard of the
-    agent's latest response, instead of the word count. Phrases, where the scenario has them, still apply first.
-    """)
+  @doc("A turn-taking classifier that decides instead of the word count. Phrases still apply first.")
   turn_taking_classifier?: VoiceAgentTurnTakingClassifier | null;
 }
 
@@ -847,16 +828,11 @@ model VoiceAgentSpeechStartWhileAssistantNotSpeaking {
 model VoiceAgentSpeechStartWhileAssistantSpeaking {
   ...VoiceAgentSpeechStartWhileAssistantNotSpeaking;
 
-  @doc("""
-    Transcripts that exactly match one of these phrases never interrupt the agent. Defaults to an empty list.
-    """)
+  @doc("Transcripts that exactly match one of these phrases do not take the turn.")
   @maxItems(100)
   acknowledgement_phrases?: VoiceAgentSpeechStartPhrase[] = #[];
 
-  @doc("""
-    Transcripts that contain one of these phrases as whole words interrupt the agent regardless of the word count.
-    Defaults to an empty list.
-    """)
+  @doc("Transcripts that contain one of these phrases take the turn regardless of the word count.")
   @maxItems(100)
   interruption_phrases?: VoiceAgentSpeechStartPhrase[] = #[];
 }
@@ -864,33 +840,25 @@ model VoiceAgentSpeechStartWhileAssistantSpeaking {
 @doc("A turn-taking classifier that judges whether the user's speech takes the turn.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTurnTakingClassifier {
-  @doc("""
-    Probability that the user is taking the turn at or above which the speech counts as a turn. Higher values admit
-    fewer turns.
-    """)
+  @doc("Probability at or above which the speech counts as a turn.")
   @minValueExclusive(0)
   @maxValueExclusive(1)
   threshold?: float32 = 0.5;
 
-  @doc("Task description given to the classifier. Replaces the built-in instructions; omit to keep them.")
+  @doc("Replaces the built-in task description given to the classifier.")
   instructions?: VoiceAgentTurnTakingPromptText | null;
 
-  @doc("What counts as a turn and what does not. Each criterion given replaces the built-in one.")
+  @doc("Replaces the built-in criteria for what is and is not a turn.")
   criteria?: VoiceAgentTurnTakingCriteria | null;
 }
 
-@doc("Replacements for what the turn-taking classifier counts as a turn, or as not a turn.")
+@doc("Criteria for what the turn-taking classifier counts as a turn.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTurnTakingCriteria {
-  @doc("""
-    When the user's speech is a turn the agent must respond to or act on. Replaces the built-in criterion; omit to
-    keep it.
-    """)
+  @doc("When the user's speech is a turn the agent must respond to.")
   turn?: VoiceAgentTurnTakingPromptText | null;
 
-  @doc("""
-    When the user's speech is not a turn, such as a backchannel. Replaces the built-in criterion; omit to keep it.
-    """)
+  @doc("When the user's speech is not a turn, such as a backchannel.")
   not_turn?: VoiceAgentTurnTakingPromptText | null;
 }
 
@@ -974,11 +942,7 @@ alias VoiceAgentAzureSemanticVadOptions = {
   @doc("Whether user speech may interrupt the agent's response.")
   interrupt_response?: boolean = true;
 
-  @doc("""
-    Transcript rules that a detected speech start must pass before it interrupts the agent or takes the turn. Including
-    this object turns the feature on. Requires `audio.input.transcription.model` to be `azure-speech-streaming` or
-    `mai-transcribe-2-streaming`.
-    """)
+  @doc("Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model.")
   speech_start_detection?: VoiceAgentSpeechStartDetection;
 };
 

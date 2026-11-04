@@ -399,11 +399,7 @@ model VoiceAgentClientEventSessionUpdate {
     @doc("Phrase-level transcription timing and confidence details.")
     phrases?: VoiceAgentTranscriptionPhrase[] | null,
 
-    @doc("""
-      `true` when `speech_start_detection` rejected this speech as a backchannel, such as "mm-hm": it did not
-      interrupt the agent and gets no response, but it is still added to the conversation. Omitted otherwise. No
-      `input_audio_buffer.speech_started` or `input_audio_buffer.speech_stopped` event is sent for such speech.
-      """)
+    @doc("Whether `speech_start_detection` rejected this speech as a backchannel; such speech gets no response.")
     backchannel?: boolean,
   }
 );
