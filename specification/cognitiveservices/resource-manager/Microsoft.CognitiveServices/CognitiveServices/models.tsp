@@ -4949,7 +4949,8 @@ model ConnectionPropertiesV2BasicResourceArmPaginatedResult {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The value for ConnectionPropertiesV2BasicResourceArmPaginatedResult"
   @pageItems
-  value?: ConnectionPropertiesV2BasicResource[];
+  @typeChangedFrom(Versions.v2026_11_01, ConnectionPropertiesV2BasicResource[])
+  value?: ConnectionPropertiesV2BasicResourceRead[];
 }
 /**
  * A paginated list of Capability Host entities.
@@ -5804,6 +5805,16 @@ model CustomKeysConnectionProperties extends ConnectionPropertiesV2 {
   /**
    * Custom Keys credential object
    */
+  @renamedFrom(Versions.v2026_11_01, "credentials")
+  @removed(Versions.v2026_11_01)
+  credentialsLegacy?: CustomKeys;
+
+  /**
+   * Custom Keys credential object
+   */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   credentials?: CustomKeys;
 
   /**
@@ -5820,6 +5831,16 @@ model CustomKeys {
    * Dictionary of <string>
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<keys> type used for 'CustomKeys' to support extensible key-value pairs matching service behavior"
+  @renamedFrom(Versions.v2026_11_01, "keys")
+  @removed(Versions.v2026_11_01)
+  keysLegacy?: Record<string>;
+
+  /**
+   * Dictionary of <string>
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<keys> type used for 'CustomKeys' to support extensible key-value pairs matching service behavior"
+  @added(Versions.v2026_11_01)
+  @secret
   keys?: Record<string>;
 }
 

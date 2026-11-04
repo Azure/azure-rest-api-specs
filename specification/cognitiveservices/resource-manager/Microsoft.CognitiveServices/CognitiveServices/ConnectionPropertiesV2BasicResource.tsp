@@ -53,6 +53,117 @@ model ConnectionPropertiesV2BasicResource is Azure.ResourceManager.ProxyResource
   name: LegacyConnectionName;
 }
 
+/** Connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+@discriminator("authType")
+model ConnectionPropertiesV2Read {
+  ...OmitProperties<ConnectionPropertiesV2, "authType">;
+
+  /** Authentication type of the connection target */
+  authType: ConnectionPropertiesV2.authType::type;
+}
+
+/** Personal access token connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model PatAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
+  // Copy properties without retaining the request hierarchy's discriminator.
+  ...OmitProperties<PATAuthTypeConnectionProperties, never>;
+}
+
+/** Managed identity connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model ManagedIdentityAuthTypeConnectionPropertiesRead
+  extends ConnectionPropertiesV2Read {
+  ...OmitProperties<ManagedIdentityAuthTypeConnectionProperties, never>;
+}
+
+/** Username and password connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model UsernamePasswordAuthTypeConnectionPropertiesRead
+  extends ConnectionPropertiesV2Read {
+  ...OmitProperties<UsernamePasswordAuthTypeConnectionProperties, never>;
+}
+
+/** Unauthenticated connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model NoneAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
+  ...OmitProperties<NoneAuthTypeConnectionProperties, never>;
+}
+
+/** Shared access signature connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model SasAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
+  ...OmitProperties<SASAuthTypeConnectionProperties, never>;
+}
+
+/** Account key connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model AccountKeyAuthTypeConnectionPropertiesRead
+  extends ConnectionPropertiesV2Read {
+  ...OmitProperties<AccountKeyAuthTypeConnectionProperties, never>;
+}
+
+/** Service principal connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model ServicePrincipalAuthTypeConnectionPropertiesRead
+  extends ConnectionPropertiesV2Read {
+  ...OmitProperties<ServicePrincipalAuthTypeConnectionProperties, never>;
+}
+
+/** Access key connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model AccessKeyAuthTypeConnectionPropertiesRead
+  extends ConnectionPropertiesV2Read {
+  ...OmitProperties<AccessKeyAuthTypeConnectionProperties, never>;
+}
+
+/** API key connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model ApiKeyAuthConnectionPropertiesRead extends ConnectionPropertiesV2Read {
+  ...OmitProperties<ApiKeyAuthConnectionProperties, never>;
+}
+
+/** Custom-key connection properties returned without stored credentials. */
+@added(Versions.v2026_11_01)
+model CustomKeysConnectionPropertiesRead extends ConnectionPropertiesV2Read {
+  /** Authentication type of the connection target. */
+  authType: "CustomKeys";
+}
+
+/** OAuth connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model Oauth2AuthTypeConnectionPropertiesRead
+  extends ConnectionPropertiesV2Read {
+  ...OmitProperties<OAuth2AuthTypeConnectionProperties, never>;
+}
+
+/** Microsoft Entra connection properties returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model AadAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
+  ...OmitProperties<AADAuthTypeConnectionProperties, never>;
+}
+
+/** A connection returned by ordinary resource operations. */
+@added(Versions.v2026_11_01)
+model ConnectionPropertiesV2BasicResourceRead {
+  ...Azure.ResourceManager.ProxyResource<ConnectionPropertiesV2Read, false>;
+}
+
+@doc("Azure operation completed successfully.")
+model ConnectionReadResult<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
+  ...OkResponse;
+
+  @doc("The body type of the operation request or response.")
+  @bodyRoot
+  @typeChangedFrom(Versions.v2026_11_01, Resource)
+  body: ConnectionPropertiesV2BasicResourceRead;
+}
+
+@doc("Resource '{name}' update operation succeeded", Resource)
+model ConnectionUpdatedResult<Resource extends Azure.ResourceManager.Foundations.SimpleResource>
+  is ConnectionReadResult<Resource>;
+
+alias ConnectionListResult = ArmResponse<ConnectionPropertiesV2BasicResourceArmPaginatedResult>;
 @armResourceOperations
 interface ConnectionPropertiesV2BasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -89,7 +200,10 @@ interface ConnectionPropertiesV2BasicResources {
    * Lists Cognitive Services account connection by name.
    */
   @tag("AccountConnectionResource")
-  get is ConnectionPropertiesV2BasicResourceOps.Read<ConnectionPropertiesV2BasicResource>;
+  get is ConnectionPropertiesV2BasicResourceOps.Read<
+    ConnectionPropertiesV2BasicResource,
+    Response = ConnectionReadResult<ConnectionPropertiesV2BasicResource>
+  >;
 
   /**
    * Create or update Cognitive Services account connection under the specified account.
@@ -98,7 +212,7 @@ interface ConnectionPropertiesV2BasicResources {
   @tag("AccountConnectionResource")
   create is ConnectionPropertiesV2BasicResourceOps.CreateOrUpdateSync<
     ConnectionPropertiesV2BasicResource,
-    Response = ArmResourceUpdatedResponse<ConnectionPropertiesV2BasicResource>,
+    Response = ConnectionUpdatedResult<ConnectionPropertiesV2BasicResource>,
     OptionalRequestBody = true
   >;
 
@@ -110,6 +224,7 @@ interface ConnectionPropertiesV2BasicResources {
   update is ConnectionPropertiesV2BasicResourceOps.CustomPatchSync<
     ConnectionPropertiesV2BasicResource,
     PatchModel = ConnectionUpdateContent,
+    Response = ConnectionReadResult<ConnectionPropertiesV2BasicResource>,
     OptionalRequestBody = true
   >;
 
@@ -126,7 +241,7 @@ interface ConnectionPropertiesV2BasicResources {
   list is ConnectionPropertiesV2BasicResourceOps.List<
     ConnectionPropertiesV2BasicResource,
     Parameters = ConnectionsListParameters,
-    Response = ArmResponse<ConnectionPropertiesV2BasicResourceArmPaginatedResult>
+    Response = ConnectionListResult
   >;
 }
 @armResourceOperations
@@ -174,7 +289,10 @@ interface ProjectConnections {
    * Lists Cognitive Services project connection by name.
    */
   @tag("ProjectConnectionResource")
-  get is ProjectConnectionOps.Read<ConnectionPropertiesV2BasicResource>;
+  get is ProjectConnectionOps.Read<
+    ConnectionPropertiesV2BasicResource,
+    Response = ConnectionReadResult<ConnectionPropertiesV2BasicResource>
+  >;
 
   /**
    * Create or update Cognitive Services project connection under the specified project.
@@ -183,7 +301,7 @@ interface ProjectConnections {
   @tag("ProjectConnectionResource")
   create is ProjectConnectionOps.CreateOrUpdateSync<
     ConnectionPropertiesV2BasicResource,
-    Response = ArmResourceUpdatedResponse<ConnectionPropertiesV2BasicResource>,
+    Response = ConnectionUpdatedResult<ConnectionPropertiesV2BasicResource>,
     OptionalRequestBody = true
   >;
 
@@ -195,6 +313,7 @@ interface ProjectConnections {
   update is ProjectConnectionOps.CustomPatchSync<
     ConnectionPropertiesV2BasicResource,
     PatchModel = ConnectionUpdateContent,
+    Response = ConnectionReadResult<ConnectionPropertiesV2BasicResource>,
     OptionalRequestBody = true
   >;
 
@@ -211,7 +330,7 @@ interface ProjectConnections {
   list is ProjectConnectionOps.List<
     ConnectionPropertiesV2BasicResource,
     Parameters = ConnectionsListParameters,
-    Response = ArmResponse<ConnectionPropertiesV2BasicResourceArmPaginatedResult>
+    Response = ConnectionListResult
   >;
 }
 

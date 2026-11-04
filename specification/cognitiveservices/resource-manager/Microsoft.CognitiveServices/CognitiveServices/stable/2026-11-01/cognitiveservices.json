@@ -2559,7 +2559,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -2624,7 +2624,7 @@
           "200": {
             "description": "Resource 'ConnectionPropertiesV2BasicResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -2689,7 +2689,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -7115,7 +7115,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -7190,7 +7190,7 @@
           "200": {
             "description": "Resource 'ConnectionPropertiesV2BasicResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -7265,7 +7265,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -9589,6 +9589,72 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "AadAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Microsoft Entra connection properties returned by ordinary resource operations.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "AAD"
+    },
     "AbusePenalty": {
       "type": "object",
       "description": "The abuse penalty.",
@@ -9641,6 +9707,75 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessKey"
+    },
+    "AccessKeyAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Access key connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionAccessKey"
+        },
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "AccessKey"
@@ -9709,6 +9844,76 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "AccountKey"
+    },
+    "AccountKeyAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Account key connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionAccountKey",
+          "description": "Account key object for connection credential."
+        },
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "AccountKey"
@@ -10614,6 +10819,76 @@
       ],
       "x-ms-discriminator-value": "ApiKey"
     },
+    "ApiKeyAuthConnectionPropertiesRead": {
+      "type": "object",
+      "description": "API key connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionApiKey",
+          "description": "Api key object for connection credential."
+        },
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "ApiKey"
+    },
     "ApiKeys": {
       "type": "object",
       "description": "The access keys for the cognitive services account.",
@@ -10761,6 +11036,10 @@
         "principalId",
         "tenantId"
       ]
+    },
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
     },
     "Azure.Core.uuid": {
       "type": "string",
@@ -12489,10 +12768,111 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
           }
         }
       }
+    },
+    "ConnectionPropertiesV2BasicResourceRead": {
+      "type": "object",
+      "description": "A connection returned by ordinary resource operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read",
+          "description": "The resource-specific properties for this resource."
+        },
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ConnectionPropertiesV2Read": {
+      "type": "object",
+      "description": "Connection properties returned by ordinary resource operations.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        },
+        "authType": {
+          "$ref": "#/definitions/ConnectionAuthType",
+          "description": "Authentication type of the connection target"
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
     },
     "ConnectionServicePrincipal": {
       "type": "object",
@@ -12629,10 +13009,12 @@
       "properties": {
         "keys": {
           "type": "object",
+          "format": "password",
           "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         }
       }
     },
@@ -12642,12 +13024,28 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/CustomKeys",
-          "description": "Custom Keys credential object"
+          "format": "password",
+          "description": "Custom Keys credential object",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomKeys"
+    },
+    "CustomKeysConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Custom-key connection properties returned without stored credentials.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "CustomKeys"
@@ -13843,6 +14241,75 @@
       ],
       "x-ms-discriminator-value": "ManagedIdentity"
     },
+    "ManagedIdentityAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Managed identity connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionManagedIdentity"
+        },
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedIdentity"
+    },
     "ManagedNetworkKind": {
       "type": "string",
       "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
@@ -14688,6 +15155,72 @@
       ],
       "x-ms-discriminator-value": "None"
     },
+    "NoneAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Unauthenticated connection properties returned by ordinary resource operations.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "None"
+    },
     "NspAccessRuleDirection": {
       "type": "string",
       "description": "Direction of Access Rule",
@@ -14721,6 +15254,76 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "OAuth2"
+    },
+    "Oauth2AuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "OAuth connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionOAuth2",
+          "description": "ClientId and ClientSecret are required. Other properties are optional\ndepending on each OAuth2 provider's implementation."
+        },
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "OAuth2"
@@ -14841,6 +15444,75 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "PAT"
+    },
+    "PatAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Personal access token connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionPersonalAccessToken"
+        },
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "PAT"
@@ -17161,6 +17833,75 @@
         }
       ]
     },
+    "SasAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Shared access signature connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionSharedAccessSignature"
+        },
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "SAS"
+    },
     "ScenarioType": {
       "type": "string",
       "description": "Specifies what features in AI Foundry network injection applies to. Currently only supports 'agent' for agent scenarios. 'none' means no network injection.",
@@ -17193,6 +17934,75 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "ServicePrincipal"
+    },
+    "ServicePrincipalAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Service principal connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionServicePrincipal"
+        },
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "ServicePrincipal"
@@ -17784,6 +18594,75 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "UsernamePassword"
+    },
+    "UsernamePasswordAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Username and password connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionUsernamePassword"
+        },
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "UsernamePassword"
