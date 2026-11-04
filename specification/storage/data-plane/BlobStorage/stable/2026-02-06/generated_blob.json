@@ -79,6 +79,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "snapshot",
             "in": "query",
             "description": "Specifies the snapshot of the blob.",
@@ -557,6 +566,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -923,6 +939,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -994,6 +1017,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -1388,6 +1420,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -1441,6 +1480,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "snapshot",
@@ -1586,6 +1634,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -1635,6 +1690,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "snapshot",
@@ -2155,6 +2219,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -2224,6 +2295,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -2458,6 +2538,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -2517,6 +2604,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "x-ms-copy-source",
@@ -2813,6 +2909,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -2886,6 +2989,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "Content-Length",
             "in": "header",
             "description": "The length of the request.",
@@ -2917,6 +3029,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -2969,6 +3088,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -3057,6 +3185,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -3111,6 +3246,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "blockid",
@@ -3276,6 +3420,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -3335,6 +3486,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "blockid",
@@ -3553,6 +3713,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -3608,6 +3775,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -4016,6 +4192,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -4075,6 +4258,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "snapshot",
@@ -4179,6 +4371,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -4230,6 +4429,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -4290,6 +4498,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -4341,6 +4556,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -4429,6 +4653,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -4480,6 +4711,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -4612,6 +4852,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -4665,6 +4912,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -4707,6 +4963,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -4759,6 +5022,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -4888,6 +5160,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -4939,6 +5218,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -5054,6 +5342,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -5108,6 +5403,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -5215,6 +5519,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -5266,6 +5577,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -5381,6 +5701,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -5432,6 +5759,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -5535,6 +5871,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -5586,6 +5929,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -5693,6 +6045,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -5744,6 +6103,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "x-ms-lease-duration",
@@ -5836,6 +6204,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -5887,6 +6262,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -5972,6 +6356,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -6023,6 +6414,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "x-ms-lease-id",
@@ -6114,6 +6514,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -6165,6 +6572,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "x-ms-lease-id",
@@ -6244,6 +6660,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -6295,6 +6718,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "x-ms-lease-id",
@@ -6378,6 +6810,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -6429,6 +6868,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -6486,6 +6934,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -6537,6 +6992,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "prefix",
@@ -6630,6 +7094,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -6681,6 +7152,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -6832,6 +7312,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -6894,6 +7381,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "Content-Length",
@@ -7155,6 +7651,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -7214,6 +7717,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "Content-Length",
@@ -7424,6 +7936,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -7475,6 +7994,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "x-ms-copy-source",
@@ -7789,6 +8317,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -7844,6 +8379,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "snapshot",
@@ -7972,6 +8516,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -8023,6 +8574,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "snapshot",
@@ -8166,6 +8726,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -8217,6 +8784,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -8360,6 +8936,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -8411,6 +8994,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -8560,6 +9152,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -8611,6 +9210,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -8749,6 +9357,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -8804,6 +9419,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "snapshot",
@@ -9193,6 +9817,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -9476,6 +10107,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -9531,6 +10169,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -9625,6 +10272,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -9676,6 +10330,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -9819,6 +10482,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -9882,6 +10552,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -9980,6 +10659,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -10031,6 +10717,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -10146,6 +10841,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -10197,6 +10899,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "snapshot",
@@ -10398,6 +11109,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -10421,6 +11139,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -10475,6 +11200,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -10502,6 +11236,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -10554,6 +11295,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -10629,6 +11379,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-sku-name": {
                 "type": "string",
@@ -10725,6 +11482,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -10798,6 +11564,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-sku-name": {
                 "type": "string",
@@ -10894,6 +11667,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -10983,6 +11765,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -11034,6 +11823,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -11090,6 +11888,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -11141,6 +11946,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -11326,6 +12140,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -11377,6 +12198,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -11451,6 +12281,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -11502,6 +12339,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -11604,6 +12450,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -11673,6 +12526,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "Content-Length",
             "in": "header",
             "description": "The length of the request.",
@@ -11699,6 +12561,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -11751,6 +12620,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -11839,6 +12717,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -11890,6 +12775,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "prefix",
@@ -12032,6 +12926,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -12083,6 +12984,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "delimiter",
@@ -12232,6 +13142,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -12283,6 +13200,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -12347,6 +13273,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -12400,6 +13333,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "x-ms-source-container-name",
             "in": "header",
             "description": "Specifies the name of the container to rename.",
@@ -12443,6 +13385,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -12497,6 +13446,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "x-ms-deleted-container-name",
             "in": "header",
             "description": "Specifies the name of the deleted container to restore.",
@@ -12540,6 +13498,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -12594,6 +13559,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -12630,6 +13604,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -12684,6 +13665,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -12714,6 +13704,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -12768,6 +13765,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -12798,6 +13804,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -12852,6 +13865,15 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -12891,6 +13913,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-version": {
                 "type": "string",
@@ -12943,6 +13972,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "timeout",
@@ -13370,6 +14408,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -13425,6 +14470,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "x-ms-meta",
@@ -13714,6 +14768,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -13776,6 +14837,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "x-ms-meta",
@@ -14225,6 +15295,13 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
+              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
@@ -14288,6 +15365,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "x-ms-request-priority",
+            "in": "header",
+            "description": "Specifies the requested priority from 0 through 7. Integers outside this range\ndo not cause the request to fail; the service uses priority 3 instead.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "requestPriority"
           },
           {
             "name": "x-ms-meta",
@@ -14771,6 +15857,13 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-priority": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Reports the effective request priority from 0 through 7.",
+                "minimum": 0,
+                "maximum": 7
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
