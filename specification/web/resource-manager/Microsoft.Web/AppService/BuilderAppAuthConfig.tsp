@@ -296,10 +296,26 @@ model BuilderAppAuthResponse {
   cacheControl: "private, no-store";
 }
 
+/** Credential-safe singleton collection with cache protection. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppAuthListResult {
+  ...ArmResponse<ResourceListResult<BuilderAppAuthConfig>>;
+
+  /** Authentication responses must not be stored. */
+  @header("Cache-Control")
+  cacheControl: "private, no-store";
+}
+
 /** Singleton authentication configuration operations. */
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations
 interface BuilderAppAuthConfigs {
+  /** List the always-present current configuration, including when authentication is disabled. */
+  listByBuilderApp is ArmResourceListByParent<
+    BuilderAppAuthConfig,
+    Response = BuilderAppAuthListResult
+  >;
+
   get is ArmResourceRead<
     BuilderAppAuthConfig,
     Response = BuilderAppAuthResponse

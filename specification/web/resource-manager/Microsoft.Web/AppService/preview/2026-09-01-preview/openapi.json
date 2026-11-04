@@ -2766,6 +2766,68 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/authConfigs": {
+      "get": {
+        "operationId": "BuilderAppAuthConfigs_ListByBuilderApp",
+        "tags": [
+          "BuilderAppAuthConfigs"
+        ],
+        "description": "List the always-present current configuration, including when authentication is disabled.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credential-safe singleton collection with cache protection.",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppAuthConfigListResult"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "Authentication responses must not be stored.",
+                "enum": [
+                  "private, no-store"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBuilderAppAuthConfigs": {
+            "$ref": "./examples/BuilderAppAuthConfigs_ListByBuilderApp.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/authConfigs/current": {
       "get": {
         "operationId": "BuilderAppAuthConfigs_Get",
@@ -41403,6 +41465,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "BuilderAppAuthConfigListResult": {
+      "type": "object",
+      "description": "The response of a BuilderAppAuthConfig list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BuilderAppAuthConfig items on this page",
+          "items": {
+            "$ref": "#/definitions/BuilderAppAuthConfig"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "BuilderAppAuthConfigProperties": {
