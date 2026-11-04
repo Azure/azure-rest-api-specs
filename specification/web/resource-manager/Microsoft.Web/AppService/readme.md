@@ -144,6 +144,64 @@ These settings apply only when `--tag=package-2026-11` is specified on the comma
 ```yaml $(tag) == 'package-2026-11'
 input-file:
     - stable/2026-11-15/openapi.json
+directive:
+  - suppress: PathForTrackedResourceTypes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/builderAppsOperationResults/{operationId}"]
+    reason: This location-scoped operation-result endpoint returns the final BuilderApp representation; the resource's CRUD endpoints remain resource-group scoped.
+  - suppress: GetResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/builderAppsOperationResults/{operationId}"].get
+    reason: The Location polling endpoint returns 202 while pending, 200 after a successful write, 204 after deletion, and an ARM error after failure.
+  - suppress: NoErrorCodeResponses
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/builderAppsOperationResults/{operationId}"].get.responses["409"]
+    reason: A failed or canceled operation returns an explicit ARM error from the Location polling endpoint rather than a successful resource response.
+  - suppress: PostResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/deploy"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/redeploy"].post
+    reason: The existing deployment actions return a safe deployment summary with the 202 response and their polling headers; removing it would change the service contract.
+  - suppress: ConsistentPatchProperties
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].patch.parameters[4].schema
+    reason: azureClientIdIdentityResourceId is a PATCH-only command selecting an assigned identity for the resulting deployment, not persisted resource state or a PUT property.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/authConfigs/current"]
+    reason: authConfigs/current is an intentional fixed-name singleton, with a plural collection and its own collection GET.
+  - suppress: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/authConfigs/current"]
+    reason: The singleton's fixed resource name is current rather than a path parameter; its parent and collection follow the ARM resource hierarchy.
+  - suppress: PutResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/authConfigs/current"].put
+    reason: The always-present auth singleton is synchronously replaced, not created, so PUT returns 200 rather than advertising an unsupported 201 creation.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: openapi.json
+    where: $.definitions.BuilderApp
+    reason: BuilderApp has DELETE at its canonical resource-group path. Reusing the model for the location-scoped operation-result GET confuses resource-path correlation.
+  - suppress: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.BuilderApp
+    reason: BuilderApp has PATCH including tags at its canonical resource-group path. The operation-result GET is a polling endpoint, not another tracked-resource CRUD path.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where: $.definitions.BuilderAppOperationStatus
+    reason: This is an ARM long-running-operation status monitor, not a resource; name and type would misrepresent its response contract.
+  - suppress: BodyTopLevelProperties
+    from: openapi.json
+    where: $.definitions.BuilderAppOperationStatus
+    reason: ARM operation status monitors expose status, timestamps, percentComplete, and error at the top level, rather than wrapping them in resource properties.
+  - suppress: XMSSecretInResponse
+    from: openapi.json
+    where:
+      - $.definitions.BuilderAppBeginSourceUploadRequest.properties.idempotencyKey
+      - $.definitions.BuilderAppDeployRequest.properties.idempotencyKey
+      - $.definitions.BuilderAppRedeployRequest.properties.idempotencyKey
+    reason: These client-generated retry correlation identifiers are not credentials and do not authorize any operation.
 ```
 
 ### Tag: package-2026-08
