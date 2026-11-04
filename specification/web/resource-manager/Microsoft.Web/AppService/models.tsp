@@ -2479,7 +2479,7 @@ model RemoteShareConfiguration {
   /**
    * The HTTPS file service URI of the Azure Storage account, for example, https://mystorageaccount.file.core.windows.net/.
    */
-  fileServiceUri?: string;
+  fileServiceUri?: url;
 
   /**
    * The name of the Azure Files share.
