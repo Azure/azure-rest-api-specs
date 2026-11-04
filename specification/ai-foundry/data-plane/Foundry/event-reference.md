@@ -16,10 +16,10 @@ alongside its TypeSpec changes. Do not edit the artifact by hand. It contains
 OpenAPI component schemas and no HTTP operations; the existing REST OpenAPI
 output and unreachable-type setting remain unchanged.
 
-Run the emitter's focused extraction checks from the repository root:
+Run the focused extraction and voice wire-contract checks from the repository root:
 
 ```sh
-node --test specification/ai-foundry/data-plane/Foundry/emitters/voice-event-reference.test.mjs
+node --test specification/ai-foundry/data-plane/Foundry/emitters/voice-event-reference.test.mjs eng/scripts/test/voice-system-tools.test.mjs
 ```
 
 The Foundry reference site's refresh automation consumes this artifact and the
