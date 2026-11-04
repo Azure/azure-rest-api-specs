@@ -1,0 +1,126 @@
+{
+  "parameters": {
+    "subscriptionId": "58c3f667-7a62-4bfd-a658-846493e9a493",
+    "configurationName": "default",
+    "api-version": "2026-11-01-preview",
+    "configContract": {
+      "properties": {
+        "digests": [
+          {
+            "name": "legacyWeekly",
+            "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/notifications/providers/Microsoft.Insights/actionGroups/digests",
+            "frequency": 7,
+            "categories": [
+              "Cost"
+            ],
+            "language": "en",
+            "state": "Active"
+          },
+          {
+            "name": "minuteCategoryWide",
+            "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/notifications/providers/Microsoft.Insights/actionGroups/digests",
+            "frequencyInMinutes": 60,
+            "categoriesFilter": [
+              {
+                "category": "Cost"
+              }
+            ],
+            "language": "en",
+            "state": "Active"
+          },
+          {
+            "name": "narrowedResiliency",
+            "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/notifications/providers/Microsoft.Insights/actionGroups/digests",
+            "frequency": 14,
+            "categoriesFilter": [
+              {
+                "category": "HighAvailability",
+                "subcategories": [
+                  "ZoneResiliency"
+                ]
+              },
+              {
+                "category": "Security",
+                "subcategories": []
+              }
+            ],
+            "language": "en",
+            "state": "Active"
+          },
+          {
+            "name": "noCategories",
+            "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/notifications/providers/Microsoft.Insights/actionGroups/digests",
+            "frequency": 30,
+            "categoriesFilter": [],
+            "language": "en",
+            "state": "Disabled"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/providers/Microsoft.Advisor/configurations/default",
+        "type": "Microsoft.Advisor/configurations",
+        "name": "default",
+        "properties": {
+          "digests": [
+            {
+              "name": "legacyWeekly",
+              "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/notifications/providers/Microsoft.Insights/actionGroups/digests",
+              "frequency": 7,
+              "categories": [
+                "Cost"
+              ],
+              "language": "en",
+              "state": "Active"
+            },
+            {
+              "name": "minuteCategoryWide",
+              "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/notifications/providers/Microsoft.Insights/actionGroups/digests",
+              "frequencyInMinutes": 60,
+              "categoriesFilter": [
+                {
+                  "category": "Cost"
+                }
+              ],
+              "language": "en",
+              "state": "Active"
+            },
+            {
+              "name": "narrowedResiliency",
+              "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/notifications/providers/Microsoft.Insights/actionGroups/digests",
+              "frequency": 14,
+              "categoriesFilter": [
+                {
+                  "category": "HighAvailability",
+                  "subcategories": [
+                    "ZoneResiliency"
+                  ]
+                },
+                {
+                  "category": "Security",
+                  "subcategories": []
+                }
+              ],
+              "language": "en",
+              "state": "Active"
+            },
+            {
+              "name": "noCategories",
+              "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/notifications/providers/Microsoft.Insights/actionGroups/digests",
+              "frequency": 30,
+              "categoriesFilter": [],
+              "language": "en",
+              "state": "Disabled"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Configurations_CreateInSubscription",
+  "title": "Configure legacy and advanced digests"
+}

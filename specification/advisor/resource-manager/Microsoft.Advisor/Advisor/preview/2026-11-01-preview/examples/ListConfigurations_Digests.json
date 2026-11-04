@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "58c3f667-7a62-4bfd-a658-846493e9a493",
+    "api-version": "2026-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/providers/Microsoft.Advisor/configurations/default",
+            "type": "Microsoft.Advisor/configurations",
+            "name": "default",
+            "properties": {
+              "exclude": false,
+              "lowCpuThreshold": "5",
+              "duration": "7",
+              "digests": [
+                {
+                  "name": "legacyWeekly",
+                  "frequency": 7,
+                  "categories": [
+                    "Cost"
+                  ],
+                  "state": "Active"
+                },
+                {
+                  "name": "minuteCategoryWide",
+                  "frequencyInMinutes": 60,
+                  "categoriesFilter": [
+                    {
+                      "category": "Cost"
+                    }
+                  ],
+                  "state": "Active"
+                },
+                {
+                  "name": "narrowedResiliency",
+                  "frequency": 14,
+                  "categoriesFilter": [
+                    {
+                      "category": "HighAvailability",
+                      "subcategories": [
+                        "ZoneResiliency"
+                      ]
+                    },
+                    {
+                      "category": "Security",
+                      "subcategories": []
+                    }
+                  ],
+                  "state": "Active"
+                },
+                {
+                  "name": "noCategories",
+                  "frequency": 30,
+                  "categoriesFilter": [],
+                  "state": "Disabled"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Configurations_ListBySubscription",
+  "title": "List legacy and advanced digests without synthetic cadence values"
+}
