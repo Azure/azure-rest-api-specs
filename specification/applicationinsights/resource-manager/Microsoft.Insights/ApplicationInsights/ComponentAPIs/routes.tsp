@@ -163,6 +163,7 @@ interface APIKeysOperationGroup {
   /**
    * Delete an API Key of an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/APIKeys/{keyId}")
   @delete
   delete(
@@ -257,6 +258,7 @@ interface ExportConfigurationsOperationGroup {
   /**
    * Delete a Continuous Export configuration of an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}")
   @delete
   delete(

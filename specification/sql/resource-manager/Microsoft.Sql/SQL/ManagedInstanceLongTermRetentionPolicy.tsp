@@ -57,6 +57,7 @@ interface ManagedInstanceLongTermRetentionPolicies {
    * Deletes a managed database's long term retention policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstanceLongTermRetentionPolicy,
     Response =

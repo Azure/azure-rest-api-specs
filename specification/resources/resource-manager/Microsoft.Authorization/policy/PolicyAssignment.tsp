@@ -143,6 +143,7 @@ interface PolicyAssignments {
   /**
    * This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding '/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
     PolicyAssignment,

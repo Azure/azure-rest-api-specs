@@ -166,6 +166,7 @@ interface RoleAssignments {
   /**
    * Delete a role assignment by scope and name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   delete is RoleAssignmentQuerysOps.DeleteSync<
     RoleAssignment,
     Response = ArmResponse<RoleAssignment> | ArmDeletedNoContentResponse
@@ -314,6 +315,7 @@ interface RoleAssignmentsByIdOperations {
   /**
    * Delete a role assignment by ID.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   @tag("RoleAssignments")
   deleteById is RoleAssignmentByIdOps.DeleteSync<
     RoleAssignment,
