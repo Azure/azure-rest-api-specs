@@ -3,7 +3,11 @@ import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { diffSuppression, getAllApiVersionFromRPFolder } from "../src/impact.ts";
+import {
+  diffSuppression,
+  getAllApiVersionFromRPFolder,
+  getRPFolderFromSwaggerFile,
+} from "../src/impact.ts";
 
 describe("native impact utilities", () => {
   let folder: string;
@@ -36,6 +40,14 @@ describe("native impact utilities", () => {
         "2025-01-01-preview",
       ]);
     }
+  });
+
+  it("distinguishes an undotted data-plane provider from an identically named service and file", () => {
+    expect(
+      getRPFolderFromSwaggerFile(
+        "specification/example/data-plane/example/stable/2026-01-01/example.json",
+      ),
+    ).toBe("specification/example/data-plane/example");
   });
 
   it("compares nested suppression values independently of object key order", async () => {
