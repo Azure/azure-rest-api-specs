@@ -785,7 +785,7 @@ model VoiceAgentServerVadTurnDetection extends VoiceAgentTurnDetectionConfig {
   @doc("Semantic end-of-utterance detection configuration. Set to null to disable it.")
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
 
-  @doc("Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model; not supported with realtime models.")
+  @doc("Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; not supported with realtime models.")
   speech_start_detection?: VoiceAgentSpeechStartDetection;
 }
 
@@ -942,7 +942,7 @@ alias VoiceAgentAzureSemanticVadOptions = {
   @doc("Whether user speech may interrupt the agent's response.")
   interrupt_response?: boolean = true;
 
-  @doc("Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model.")
+  @doc("Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.")
   speech_start_detection?: VoiceAgentSpeechStartDetection;
 };
 
@@ -1008,7 +1008,7 @@ model VoiceAgentEchoCancellation {
 @doc("""
   The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
   voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
-  `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
+  `azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`. On realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
   Additional values may be added over time.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -1042,8 +1042,11 @@ union VoiceAgentInputTranscriptionModel {
   @doc("Azure AI Speech to text.")
   azure_speech: "azure-speech",
 
-  @doc("Azure AI Speech streaming transcription for cascaded text-model conversations only. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech`, `phrase_list`, and `profanity_filter`. Not supported with realtime speech-to-speech models.")
+  @doc("Azure AI Speech streaming transcription. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech`, `phrase_list`, and `profanity_filter`. On realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.")
   azure_speech_streaming: "azure-speech-streaming",
+
+  @doc("MAI Transcribe 2 streaming transcription. `language` accepts at most one locale. Cannot be changed during a session on realtime models.")
+  mai_transcribe_2_streaming: "mai-transcribe-2-streaming",
 }
 
 @doc("The supported input-transcript profanity filtering modes.")
@@ -1064,10 +1067,10 @@ union VoiceAgentProfanityFilterMode {
 @doc("""
   Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
   and phrase hints.
-  When `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model
-  conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
-  `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
-  `profanity_filter`.
+  When `model` is `azure-speech-streaming`, transcription requires a nonempty `language` such as
+  `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and
+  `profanity_filter`. On realtime models it requires `azure_semantic_vad` or
+  `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputTranscription {
@@ -1082,7 +1085,7 @@ model VoiceAgentInputTranscription {
 
   ...OmitProperties<OpenAI.AudioTranscription, "model" | "language">;
 
-  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.")
+  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`; on realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.")
   `model`: VoiceAgentInputTranscriptionModel;
 
   @doc("Optional customer custom speech deployment configuration, keyed by locale.")

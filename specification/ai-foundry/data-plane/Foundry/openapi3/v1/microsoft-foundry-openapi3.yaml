@@ -93447,7 +93447,7 @@ components:
           default: true
         speech_start_detection:
           $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
-          description: Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model.
+          description: Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: English-optimized Azure semantic voice activity detection.
@@ -93500,7 +93500,7 @@ components:
           default: true
         speech_start_detection:
           $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
-          description: Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model.
+          description: Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.
         languages:
           type: array
           items:
@@ -93558,7 +93558,7 @@ components:
           default: true
         speech_start_detection:
           $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
-          description: Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model.
+          description: Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.
         languages:
           type: array
           items:
@@ -93985,7 +93985,7 @@ components:
               Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
         model:
           $ref: '#/components/schemas/VoiceAgentInputTranscriptionModel'
-          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
+          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`; on realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
         custom_speech:
           type: object
           additionalProperties:
@@ -94009,10 +94009,10 @@ components:
       description: |-
         Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
         and phrase hints.
-        When `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model
-        conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
-        `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
-        `profanity_filter`.
+        When `model` is `azure-speech-streaming`, transcription requires a nonempty `language` such as
+        `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and
+        `profanity_filter`. On realtime models it requires `azure_semantic_vad` or
+        `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -94031,10 +94031,11 @@ components:
             - mai-transcribe
             - azure-speech
             - azure-speech-streaming
+            - mai-transcribe-2-streaming
       description: |-
         The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
         voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
-        `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
+        `azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`. On realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
         Additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
@@ -95227,7 +95228,7 @@ components:
           description: Semantic end-of-utterance detection configuration. Set to null to disable it.
         speech_start_detection:
           $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
-          description: Transcript rules a detected speech start must pass before it takes the turn. Requires a streaming transcription model; not supported with realtime models.
+          description: Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; not supported with realtime models.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: Server-side voice activity detection.
