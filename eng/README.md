@@ -4,6 +4,24 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## Skill Eval Dashboard
+
+[Skill eval](pipelines/skill-eval.yml) uses the common publisher to send complete
+main-branch results to the existing eval dashboard. TypeSpec authoring benchmarks
+are not included. The shared publishing support must reach this repo through the
+normal `eng/common` sync before uploads are enabled.
+
+Before enabling publication, the pipeline owner must authorize the publisher's
+service connection and set `EvalStorageAccountName` with queue-time override
+disabled. Optional refresh notifications use `EvalDashboardRefreshUrl` and
+`EvalDashboardResource`. See the [common publishing guide](common/scripts/eval/README.md)
+for the approved storage/dashboard configuration and permissions.
+
+Set `publishDashboardResults` to `false` for artifact-only runs without added
+storage egress. PRs and non-main runs cannot upload. Completed failing evals can
+be published; incomplete results remain blocked. Missing permissions and incomplete
+eval shards must be resolved before claiming live dashboard onboarding is complete.
+
 ## Spec Change Policies
 
 [Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage and
