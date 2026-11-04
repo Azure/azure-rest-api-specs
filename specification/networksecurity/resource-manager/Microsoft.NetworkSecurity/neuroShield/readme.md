@@ -63,6 +63,10 @@ canonical SDK generation input without an import cycle or duplicate package
 writers. The SDK composition does not change routes, API versions, wire models,
 operation IDs, paging parameters, or provisioning-state semantics.
 
+The parent [validation exceptions](../suppressions.yaml) cover only the SDK-only
+provider folder's layout and this REST-only child's absent SDK options, following
+the Network convention. They do not suppress API-model lint rules.
+
 Outputs are rooted at `sdk/networksecurity`, with a package-specific subdirectory
 for each language. Go instead uses
 `sdk/resourcemanager/networksecurity/armnetworksecurity`. Run the selected SDK
