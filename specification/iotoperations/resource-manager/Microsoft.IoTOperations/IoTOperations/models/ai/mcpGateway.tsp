@@ -75,7 +75,6 @@ model McpGatewayAuthentication {
   /**
    * The accepted incoming token audiences, independent of outbound backend tokens.
    * When omitted, the gateway accepts the default audience `aio-mcp-frontend`.
-   * When supplied, the audiences replace the default and must be a non-empty list without blank entries.
    */
   serviceAccountTokenSettings?: BrokerAuthenticatorMethodSat;
 }
