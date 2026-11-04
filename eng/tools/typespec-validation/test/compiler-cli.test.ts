@@ -270,7 +270,7 @@ it.each(["--all", "--changed"])(
     await simpleGit(root).add(".").commit("Set stale shared output");
     const index = await readFile(join(root, ".git/index"));
 
-    const result = await run(mode, "--git-clean");
+    const result = await run(mode, "--concurrency=2", "--git-clean");
 
     expect(result.code, result.stderr).toBe(1);
     expect(result.stdout).toContain("2 failed");
@@ -295,7 +295,7 @@ it("checks batch formatting and only updates shared files with --fix", async () 
   await writeFile(shared, "model   Shared{}");
   await simpleGit(root).add(".").commit("Set formatting fixture");
 
-  const result = await run("--all");
+  const result = await run("--all", "--concurrency=2");
 
   expect(result.code, result.stderr).toBe(1);
   expect(result.stderr).toContain("error tsv/format-changed:");
