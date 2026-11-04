@@ -15,6 +15,7 @@ import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../schedules/routes.tsp";
 import "../routines/routes.tsp";
+import "../state-stores/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 
