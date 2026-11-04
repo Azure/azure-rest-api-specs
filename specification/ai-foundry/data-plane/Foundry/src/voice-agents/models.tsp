@@ -418,7 +418,7 @@ model VoiceRecording {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
-@doc("An exact E.164 number or a full-match pattern for normalized caller numbers, starting `^\\+` and ending `$`. After '+', use a nonzero ASCII digit or `[1-9]`, then only ASCII digits, single-digit classes/ranges and `{n}`/`{n,m}` repeats (bounds 1-15). Every match must contain 2-15 digits. Supply trimmed values (max 256 characters). Beyond the schema's lexical check, the service rejects reversed ranges/bounds and other regex syntax; unsupported patterns are not rewritten.")
+@doc("Exact E.164 number or anchored caller pattern (`^\\+...$`). Patterns start with a nonzero ASCII digit or [1-9], followed by ASCII digits, single-digit classes/ranges and {n}/{n,m} repeats (1-15). Matches contain 2-15 digits. Values must be trimmed, at most 256 characters; reversed ranges/bounds and other regex syntax are rejected, not rewritten.")
 @maxLength(256)
 @pattern("^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -477,16 +477,16 @@ model UpdateTelephonyBindingRequest {
   @maxLength(128)
   label?: string | null;
 
-  @doc("The replacement same-project connection name. Valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable. A SIP replacement must reference SipInbound. Explicit null or blank names are invalid.")
+  @doc("Replacement same-project connection for Teams or SIP (SipInbound only); immutable for Twilio. Null/blank names are invalid.")
   @minLength(1)
   @maxLength(256)
   connection_name?: string;
 
-  @doc("The replacement Teams Phone extensibility or SIP display phone number. Omit to preserve it; null, empty or whitespace-only clears it. SIP values are display metadata, not routing keys. Not supported for Twilio.")
+  @doc("Teams/SIP display number, not SIP routing. Omit to preserve; null/empty/blank clears. Unsupported for Twilio.")
   @maxLength(64)
   phone_number?: string | null;
 
-  @doc("SIP-only complete caller restriction replacement. Omit to preserve; an empty array clears the restriction. Null is invalid. Source network restrictions belong to the connection, not the binding.")
+  @doc("SIP caller restrictions: omit to preserve, [] to clear; null is invalid. Network restrictions belong to the connection.")
   @maxItems(64)
   allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
@@ -541,7 +541,7 @@ model TwilioTelephonyBinding extends TelephonyBinding {
   phone_number: string;
 }
 
-@doc("An inbound SIP binding backed by a same-project SipInbound connection. Authentication and source-network restrictions are connection settings. Regional runtime readiness is independent of successful creation.")
+@doc("Inbound binding using a same-project SipInbound connection for authentication/network restrictions. Creation does not prove regional runtime readiness.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model SipTelephonyBinding extends TelephonyBinding {
   @doc("The SIP provider.")
@@ -551,7 +551,7 @@ model SipTelephonyBinding extends TelephonyBinding {
   @maxLength(64)
   phone_number?: string;
 
-  @doc("Exact E.164 caller numbers or restricted fully anchored patterns. Omit or use an empty array for no caller-number restriction; the service enforces pattern semantics in addition to the lexical schema.")
+  @doc("Exact E.164 caller numbers or restricted anchored patterns, validated by the service. Omit or use [] for no restriction.")
   @maxItems(64)
   allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
@@ -1281,7 +1281,7 @@ model TelephonyOutboundRetryPolicy {
   max_attempts?: int32 = 1;
 }
 
-@doc("A fixed-interval retry policy shared by direct calls and Campaigns. Omit the policy for one initial attempt with no retry; returned CallJobs normalize that default to max_attempts=1 and interval=0 seconds.")
+@doc("Shared direct-call/Campaign retry policy. Omission means one attempt; CallJobs return max_attempts=1 and interval=0 seconds.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model FixedIntervalRetryPolicy extends TelephonyOutboundRetryPolicy {
   @doc("The fixed-interval retry strategy.")
@@ -1316,7 +1316,7 @@ union TelephonyAddressType {
   sip: "sip",
 }
 
-@doc("Address shared by sources, recipients and transfer targets. Connections validate supported types for each role; unknown or unsupported types fail before dialing. New provider-supported types may be added.")
+@doc("Shared source, recipient and transfer address. Connections validate each role before dialing; unsupported types fail. New types may be added.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyAddress {
@@ -1340,7 +1340,7 @@ model PhoneNumber extends TelephonyAddress {
   value: string;
 }
 
-@doc("Teams source or transfer address. Sources require a nonempty resource-account GUID; transfers also accept user GUIDs and 28:orgid:{guid}. Provider/role checks still apply; Teams outbound recipients are unsupported.")
+@doc("Teams address: sources require a nonempty resource-account GUID; transfers also accept user GUIDs/28:orgid:{guid}. Outbound recipients are unsupported; provider/role checks apply.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsAddress extends TelephonyAddress {
   @doc("The Microsoft Teams address type.")
@@ -1352,7 +1352,7 @@ model TeamsAddress extends TelephonyAddress {
   value: string;
 }
 
-@doc("A shared SIP address. Transfer destinations support SIP or SIPS URIs subject to provider validation. SIP outbound origination uses a phone_number source, not a SIP URI, and outbound recipients remain phone numbers.")
+@doc("SIP/SIPS transfer address, subject to provider validation. SIP outbound sources and recipients use phone_number, not SIP URIs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model SipAddress extends TelephonyAddress {
   @doc("The SIP address type.")
@@ -1379,29 +1379,19 @@ model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyAddress;
 
-  /**
-   * Same-project connection; its category selects Twilio, ACS/Teams Phone extensibility or SipOutbound.
-   * No inbound binding is needed. SIP uses authType=CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type
-   * selects digest or ip_acl; absent/null/blank/{} defaults to digest, and other non-string values are invalid.
-   * Digest requires nonblank username/password. IP ACL requires non-null comma-separated credentials.keys.source_cidrs:
-   * at most 4096 raw characters and 64 entries before deduplication. Empty string allows all source IPs;
-   * whitespace-only values and empty entries fail. Native IPv4/IPv6 addresses and CIDRs are accepted;
-   * scoped/IPv4-mapped IPv6 and metadata/binding CIDR fallbacks are not.
-   * SipOutbound requires a DNS target with optional port 1-65535, not an IP literal, URI, path or SIP parameter.
-   * The target is revalidated before origination; saving does not prove connectivity.
-   */
+  @doc("Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection. No inbound binding is required. SIP requires CustomKeys authentication and a valid DNS target, revalidated before dialing; saving does not prove connectivity.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
 
-  @doc("The shared typed caller address. Use phone_number for Twilio or SipOutbound, or teams with a nonempty resource-account GUID for ACS/Teams Phone extensibility. Transfer-only identity formats and sip source addresses are rejected. Outbound origination is independent of inbound bindings.")
+  @doc("Caller address: phone_number for Twilio/SipOutbound, or teams with a nonempty resource-account GUID for ACS/Teams Phone extensibility. Transfer-only formats and sip sources are rejected.")
   source: TelephonyAddress;
 
   @doc("An optional customer-declared purpose for placing the call.")
   @minLength(1)
   purpose?: string;
 
-  @doc("Inputs for the Agent and greeting, including nested JSON objects, arrays and null. Input names and values must satisfy the Agent's input definitions and schemas. Missing required inputs fail validation; omitted optional inputs may use defaults.")
+  @doc("Agent/greeting inputs, including nested JSON and null. Agent schemas, required fields and defaults apply.")
   structured_inputs?: Record<unknown>;
 
   @doc("The optional execution window.")
@@ -1540,7 +1530,7 @@ model TelephonyCallJob {
   @visibility(Lifecycle.Read)
   cancellation?: TelephonyCallJobCancellation;
 
-  @doc("The frozen provider-attempt retry policy. When omitted on direct CallJob or Campaign creation, this is fixed_interval with max_attempts=1 and interval=0 seconds: only the initial attempt is made, with no retry.")
+  @doc("Frozen retry policy. Omission at creation returns fixed_interval with max_attempts=1 and interval=0 seconds: one initial attempt, no retry.")
   retry_policy: TelephonyOutboundRetryPolicy;
 
   @doc("The number of provider attempts created so far.")
@@ -1572,7 +1562,7 @@ model TelephonyCallJob {
   // Preserve the existing SDK response order when appending Campaign fields.
   ...PickProperties<TelephonyCallJobConfiguration, "source">;
 
-  @doc("Owning Campaign name under this Agent; absent for direct calls. Cascade deletion hides owned CallJobs on acceptance and deletes them during cleanup. Ownership follows the immutable Campaign instance, so name reuse cannot attach old jobs.")
+  @doc("Owning Campaign under this Agent; absent for direct calls. Campaign deletion hides then removes its jobs. Ownership is instance-bound, so name reuse cannot attach old jobs.")
   @visibility(Lifecycle.Read)
   campaign_name?: TelephonyCampaignName;
 }
