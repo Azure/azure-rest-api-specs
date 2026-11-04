@@ -297,10 +297,11 @@ namespace Microsoft.Compute;
 // =====================================================================
 // .NET Management SDK review (AZC0030) type-name fixes (C# only)
 // =====================================================================
+// Recurring Bulk Action clientName overrides also apply to older API versions.
 // SUFFIX010: "Update" is reserved for PATCH-body models; this is a merge-patch body.
 @@clientName(
-  ScheduledActionsScheduleUpdate,
-  "ScheduledActionsSchedulePatch",
+  RecurringBulkActionScheduleUpdate,
+  "RecurringBulkActionSchedulePatch",
   "csharp"
 );
 // SUFFIX004: "Options" is reserved for ClientOptions subclasses.
@@ -315,12 +316,12 @@ namespace Microsoft.Compute;
   "csharp"
 );
 // ARMCOMMON001: avoid redefining the ARM-framework "ResourceType"; use a domain-scoped name.
-@@clientName(ResourceType, "ScheduledActionsResourceType", "csharp");
+@@clientName(ResourceType, "RecurringBulkActionResourceType", "csharp");
 // ARMCOMMON001: avoid redefining the ARM-framework "SubResource"; use a domain-scoped name.
 // Suffix avoids ending in "Resource", which is reserved for ArmResource-derived types.
 @@clientName(SubResource, "ComputeBulkActionsSubResourceInfo", "csharp");
 // Contextual naming: "Language" is too generic and collides across packages.
-@@clientName(Language, "ScheduledActionLanguage", "csharp");
+@@clientName(Language, "RecurringBulkActionLanguage", "csharp");
 // Contextual naming: scope the generic "ProvisioningState" to its operation.
 @@clientName(
   ProvisioningState,
@@ -478,8 +479,18 @@ namespace Microsoft.Compute;
 );
 @@clientName(DelayRequest, "DelayRequestContent", "csharp");
 @@clientName(
-  ScheduledActionsExecutionParameters,
-  "ScheduledActionsExecutionParametersContent",
+  RecurringBulkActionExecutionParameters,
+  "RecurringBulkActionExecutionParametersContent",
+  "csharp"
+);
+@@clientName(
+  RecurringBulkActionCreateResponse,
+  "RecurringBulkActionCreateResult",
+  "csharp"
+);
+@@clientName(
+  RecurringBulkActionReplaceResponse,
+  "RecurringBulkActionReplaceResult",
   "csharp"
 );
 @@clientName(ResourceAttachRequest, "ResourceAttachRequestContent", "csharp");
@@ -492,10 +503,10 @@ namespace Microsoft.Compute;
 @@clientName(ResourcePatchRequest, "ResourcePatchRequestContent", "csharp");
 
 // Model types must not end in "Resource" (reserved for ArmResource-derived classes);
-// these plain models collide with the ScheduledAction/Occurrence ARM resource classes.
+// these plain models collide with the RecurringBulkAction/Occurrence ARM resource classes.
 @@clientName(
-  ScheduledActionResource,
-  "ScheduledActionResourceMetadata",
+  RecurringBulkActionResource,
+  "RecurringBulkActionResourceMetadata",
   "csharp"
 );
 @@clientName(OccurrenceResource, "OccurrenceResourceMetadata", "csharp");
@@ -503,7 +514,7 @@ namespace Microsoft.Compute;
 
 // APIView naming feedback: give the generic single-word resource/model/enum
 // names an RP/domain prefix so they are self-descriptive in .NET IntelliSense.
-@@clientName(Occurrence, "ScheduledActionOccurrence", "csharp");
+@@clientName(Occurrence, "RecurringBulkActionOccurrence", "csharp");
 @@clientName(DelayRequest.delay, "scheduleAt", "csharp");
 @@clientName(Mode, "ProxyAgentMode", "csharp");
 @@clientName(Modes, "ImdsAccessControlMode", "csharp");
