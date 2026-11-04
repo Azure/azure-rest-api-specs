@@ -287,8 +287,7 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
-  @removed(Versions.v2026_09_01)
-  @added(Versions.v2026_09_15_preview)
+  @added(Versions.v2026_09_01)
   smbOplocks?: SmbOplocks;
 
   /**
@@ -337,8 +336,7 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
-  @removed(Versions.v2026_09_01)
-  @added(Versions.v2026_09_15_preview)
+  @added(Versions.v2026_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -588,6 +586,13 @@ model VolumeProperties {
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
   geoNamespaceProperties?: VolumeNamespaceProperties;
+
+  /**
+   * Specifies the workload application type.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  workloadApplicationType?: WorkloadApplicationType;
 }
 
 /**
@@ -650,7 +655,15 @@ union LdapServerType {
   /**
    * The volume should use OpenLDAP for LDAP connections.
    */
-  OpenLDAP: "OpenLDAP",
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "OpenLDAP")
+  OpenLDAPOld: "OpenLDAP",
+
+  /**
+   * The volume should use OpenLdap for LDAP connections.
+   */
+  @added(Versions.v2026_09_01)
+  OpenLdap: "OpenLdap",
 }
 
 /**
@@ -1597,8 +1610,7 @@ model VolumePatchProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
-  @removed(Versions.v2026_09_01)
-  @added(Versions.v2026_09_15_preview)
+  @added(Versions.v2026_09_01)
   smbOplocks?: SmbOplocks;
 
   /**
@@ -2242,8 +2254,7 @@ union SmbNonBrowsable {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_08_01)
 @added(Versions.v2026_08_15_preview)
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
+@added(Versions.v2026_09_01)
 union SmbOplocks {
   string,
 
@@ -2453,6 +2464,52 @@ union BreakthroughMode {
    * The volume uses configuration that provides basic performance and throughput.
    */
   Disabled: "Disabled",
+}
+
+/**
+ * The type of workload application for the volume.
+ */
+union WorkloadApplicationType {
+  string,
+
+  /** Database - SAP HANA */
+  DatabaseSAPHANA: "DatabaseSAPHANA",
+
+  /** Database - DB2 */
+  DatabaseDB2: "DatabaseDB2",
+
+  /** Database - Oracle */
+  DatabaseOracle: "DatabaseOracle",
+
+  /** Database - Other */
+  DatabaseOther: "DatabaseOther",
+
+  /** AVD - FSLogix */
+  AVDFSLogix: "AVDFSLogix",
+
+  /** AVD - Other */
+  AVDOther: "AVDOther",
+
+  /** Citrix - FSLogix */
+  CitrixFSLogix: "CitrixFSLogix",
+
+  /** Citrix - Other */
+  CitrixOther: "CitrixOther",
+
+  /** Azure VMware Solution - Datastore */
+  AzureVMwareSolutionDatastore: "AzureVMwareSolutionDatastore",
+
+  /** Azure VMware Solution - Guest mount */
+  AzureVMwareSolutionGuestMount: "AzureVMwareSolutionGuestMount",
+
+  /** Azure Red Hat OpenShift */
+  AzureRedHatOpenShift: "AzureRedHatOpenShift",
+
+  /** Azure Kubernetes Service */
+  AzureKubernetesService: "AzureKubernetesService",
+
+  /** Other workload application */
+  Other: "Other",
 }
 
 /**
