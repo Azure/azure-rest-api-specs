@@ -1,0 +1,169 @@
+name: azure-typespec-author-eval
+description: post-authoring fast assessment handoff
+version: "1.0"
+type: capability
+tags:
+  area: assessment
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 009001-offer-after-successful-authoring
+    tags: { suite: assessment, mode: forced }
+    prompt: |
+      @azure-typespec-author Decide only the next workflow action. TypeSpec edits in
+      specification/widget/Widget.Management are complete, all required validation
+      passed, and reference links were delivered. The user opted out of SDK client
+      configuration, but has not decided whether to assess these changes.
+      Return only JSON with "nextAction", "question", and "choices".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Do not execute the action, ask a tool question, edit, compile, fetch documents,
+      invoke MCP, or run assessment.
+    constraints: &constraints
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - &skills
+        type: skill-invocation
+        config:
+          required: [azure-typespec-author]
+          disallowed: [azure-typespec-assessment]
+      - &tools
+        type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search|ask_user|powershell|bash)$
+      - type: output-matches
+        config:
+          pattern: '"nextAction"\s*:\s*"offer-fast-assessment"'
+      - type: output-matches
+        config:
+          pattern: '"question"\s*:\s*"Would you like to quickly assess your changes\?"'
+      - type: output-matches
+        config:
+          pattern: '"choices"\s*:\s*\[\s*"Run fast assessment \(Recommended\)"\s*,\s*"Skip"\s*\]'
+  - name: 009001-respect-explicit-assessment-opt-out
+    tags: { suite: assessment, mode: forced }
+    prompt: |
+      @azure-typespec-author Decide only the next workflow action. TypeSpec edits,
+      required validation, and reference output are complete. Before authoring,
+      the user explicitly said "Skip assessment for these changes."
+      Return only JSON with "nextAction" and "assessmentSkipped".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Do not execute the action, ask a tool question, edit, compile, fetch documents,
+      invoke MCP, or run assessment.
+    constraints: *constraints
+    graders:
+      - *skills
+      - *tools
+      - type: output-matches
+        config:
+          pattern: '"nextAction"\s*:\s*"complete"'
+      - type: output-matches
+        config:
+          pattern: '"assessmentSkipped"\s*:\s*true'
+  - name: 009001-validation-blocker-prevents-offer
+    tags: { suite: assessment, mode: forced }
+    prompt: |
+      @azure-typespec-author Decide only the next workflow action. TypeSpec edits
+      were applied, but mandatory compilation still fails after the validation
+      retry limit. No assessment decision has been made.
+      Return only JSON with "nextAction" and "offerAssessment".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Do not execute the action, ask a tool question, edit, compile, fetch documents,
+      invoke MCP, or run assessment.
+    constraints: *constraints
+    graders:
+      - *skills
+      - *tools
+      - type: output-matches
+        config:
+          pattern: '"nextAction"\s*:\s*"report-validation-blocker"'
+      - type: output-matches
+        config:
+          pattern: '"offerAssessment"\s*:\s*false'
+  - name: 009001-acceptance-does-not-confirm-baseline
+    tags: { suite: assessment, mode: forced }
+    prompt: |
+      @azure-typespec-author Decide only the next workflow action. Authoring,
+      validation, and reference output are complete. The user chose "Run fast
+      assessment (Recommended)". No assessment baseline was supplied or confirmed;
+      the agent previously suggested origin/main without a user answer.
+      Return only JSON with "nextAction" and "question".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Do not execute the action, ask a tool question, edit, compile, fetch documents,
+      invoke MCP, or run assessment.
+    constraints: *constraints
+    graders:
+      - *skills
+      - *tools
+      - type: output-matches
+        config:
+          pattern: '"nextAction"\s*:\s*"confirm-assessment-baseline"'
+      - type: output-matches
+        config:
+          pattern: '"question"\s*:\s*"Compare against origin/main, or a different branch or commit\?"'
+  - name: 009001-reuse-assessment-and-baseline-decisions
+    tags: { suite: assessment, mode: forced }
+    prompt: |
+      @azure-typespec-author Decide only the next workflow action. Authoring,
+      validation, and reference output are complete for
+      specification/widget/Widget.Management. The user already said "After
+      authoring, run fast assessment against origin/main." Other uncommitted
+      changes exist in that same project.
+      Return only JSON with "nextAction", "assessmentMode", "baseline",
+      "specification", and "agentEditsOnly".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Do not execute the action, ask a tool question, edit, compile, fetch documents,
+      invoke MCP, or run assessment.
+    constraints: *constraints
+    graders:
+      - *skills
+      - *tools
+      - type: output-matches
+        config:
+          pattern: '"nextAction"\s*:\s*"invoke-assessment-skill"'
+      - type: output-matches
+        config:
+          pattern: '"assessmentMode"\s*:\s*"fast"'
+      - type: output-matches
+        config:
+          pattern: '"baseline"\s*:\s*"origin/main"'
+      - type: output-matches
+        config:
+          pattern: '"specification"\s*:\s*"specification/widget/Widget.Management"'
+      - type: output-matches
+        config:
+          pattern: '"agentEditsOnly"\s*:\s*false'
+  - name: 009001-planning-only-does-not-offer-assessment
+    tags: { suite: assessment, mode: forced }
+    prompt: |
+      @azure-typespec-author Decide only the next workflow action. The user asked
+      for an authoring plan only. The grounded plan has been delivered. No source
+      was edited, and no validation was run or claimed.
+      Return only JSON with "nextAction" and "offerAssessment".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Do not execute the action, ask a tool question, edit, compile, fetch documents,
+      invoke MCP, or run assessment.
+    constraints: *constraints
+    graders:
+      - *skills
+      - *tools
+      - type: output-matches
+        config:
+          pattern: '"nextAction"\s*:\s*"complete"'
+      - type: output-matches
+        config:
+          pattern: '"offerAssessment"\s*:\s*false'

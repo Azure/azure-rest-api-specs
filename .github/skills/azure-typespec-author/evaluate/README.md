@@ -116,6 +116,11 @@ Naming cases `007001` through `007008` compare trigger, forced, and no-skill beh
 client configuration planning, direct-edit handoffs, opt-outs, and documentation-only changes.
 Cases `007009` through `007014` check routing boundaries in trigger mode only.
 
+Case `009001` checks the post-authoring fast assessment offer, explicit opt-out,
+validation and planning gates, and separate baseline confirmation. It is a
+decision-only evaluation; it does not run the assessment coordinator or modify
+TypeSpec fixtures. Run it with `--suite assessment-forced`.
+
 ### Local forced smoke test
 
 Use these commands for the usual local check. Use forced mode only for this remediation work:
@@ -157,6 +162,7 @@ local entry point.
 | `warning-forced`              | Warning cases (005xxx) — forced mode           |
 | `dataplane-forced`            | Data-plane cases (006xxx) — forced mode        |
 | `naming-forced`               | Client configuration and naming handoffs       |
+| `assessment-forced`           | Post-authoring fast assessment decisions       |
 | `naming-trigger`              | Naming handoffs and skill routing boundaries   |
 | `naming-no-skill`             | Naming task quality without installed skills   |
 | `forced`                      | All cases — forced mode                        |
