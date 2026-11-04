@@ -2053,63 +2053,6 @@
         }
       }
     },
-    "IdentityType": {
-      "type": "string",
-      "description": "The type of managed identity used to access Azure resources.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System-assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User-assigned managed identity."
-          }
-        ]
-      }
-    },
-    "LinkedIdentityProperties": {
-      "type": "object",
-      "description": "A workspace managed identity used to access a linked Azure resource.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of managed identity used to access the linked resource.",
-          "readOnly": true
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "The fully qualified Azure resource ID of the user-assigned managed identity. Required for UserAssigned and omitted for SystemAssigned.",
-          "readOnly": true
-        }
-      }
-    },
-    "LinkedKeyVaultProperties": {
-      "type": "object",
-      "description": "The linked Azure Key Vault and managed identity for the playwright workspace.",
-      "properties": {
-        "vaultUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The vault's base HTTPS URI. The vault must belong to the workspace tenant. Secret paths, query strings, fragments, user information, and non-default ports are not allowed.",
-          "readOnly": true
-        },
-        "vaultIdentity": {
-          "$ref": "#/definitions/LinkedIdentityProperties",
-          "description": "The workspace managed identity authorized to read secrets from the linked vault.",
-          "readOnly": true
-        }
-      }
-    },
     "ManagedIdentity": {
       "type": "object",
       "description": "Managed identity properties for accessing Azure resources.",
@@ -3230,11 +3173,6 @@
           "type": "string",
           "format": "uri",
           "description": "When set on Playwright workspace resource, it provides the URI of the Azure storage account used to store workspace artifacts, test results, and reports.",
-          "readOnly": true
-        },
-        "linkedKeyVault": {
-          "$ref": "#/definitions/LinkedKeyVaultProperties",
-          "description": "The Azure Key Vault linked with the playwright workspace.",
           "readOnly": true
         },
         "browserProxy": {

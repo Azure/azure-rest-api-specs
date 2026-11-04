@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./identity.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -60,39 +59,10 @@ model Workspace {
   @visibility(Lifecycle.Read)
   storageUri?: url;
 
-  @doc("The Azure Key Vault linked with the playwright workspace.")
-  @added(Versions.v2026_11_01_preview)
-  @visibility(Lifecycle.Read)
-  linkedKeyVault?: LinkedKeyVaultProperties;
-
   @doc("The browser proxy enablement status for the workspace.")
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   browserProxy?: EnablementStatus = EnablementStatus.Enabled;
-}
-
-@doc("The linked Azure Key Vault and managed identity for the playwright workspace.")
-@added(Versions.v2026_11_01_preview)
-model LinkedKeyVaultProperties {
-  @doc("The vault's base HTTPS URI. The vault must belong to the workspace tenant. Secret paths, query strings, fragments, user information, and non-default ports are not allowed.")
-  @visibility(Lifecycle.Read)
-  vaultUri?: url;
-
-  @doc("The workspace managed identity authorized to read secrets from the linked vault.")
-  @visibility(Lifecycle.Read)
-  vaultIdentity?: LinkedIdentityProperties;
-}
-
-@doc("A workspace managed identity used to access a linked Azure resource.")
-@added(Versions.v2026_11_01_preview)
-model LinkedIdentityProperties {
-  @doc("The type of managed identity used to access the linked resource.")
-  @visibility(Lifecycle.Read)
-  type?: IdentityType;
-
-  @doc("The fully qualified Azure resource ID of the user-assigned managed identity. Required for UserAssigned and omitted for SystemAssigned.")
-  @visibility(Lifecycle.Read)
-  resourceId?: string;
 }
 
 @doc("The Playwright workspace state.")
