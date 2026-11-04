@@ -2845,7 +2845,7 @@ model LabVirtualMachineProperties {
   /**
    * The password of the virtual machine administrator.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   password?: string;
 
   /**
