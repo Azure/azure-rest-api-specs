@@ -75566,7 +75566,7 @@ components:
           description: Phrase-level transcription timing and confidence details.
         backchannel:
           type: boolean
-          description: Whether `speech_start_detection` rejected this speech as a backchannel; such speech gets no response.
+          description: True when `speech_start_detection` rejected this speech as a backchannel.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: |-
@@ -93571,7 +93571,7 @@ components:
           default: true
         speech_start_detection:
           $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
-          description: Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.
+          description: Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: English-optimized Azure semantic voice activity detection.
@@ -93624,7 +93624,7 @@ components:
           default: true
         speech_start_detection:
           $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
-          description: Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.
+          description: Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`.
         languages:
           type: array
           items:
@@ -93682,7 +93682,7 @@ components:
           default: true
         speech_start_detection:
           $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
-          description: Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.
+          description: Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`.
         languages:
           type: array
           items:
@@ -94694,7 +94694,7 @@ components:
               Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
         model:
           $ref: '#/components/schemas/VoiceAgentInputTranscriptionModel'
-          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`; on realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
+          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.
         custom_speech:
           type: object
           additionalProperties:
@@ -94718,10 +94718,6 @@ components:
       description: |-
         Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
         and phrase hints.
-        When `model` is `azure-speech-streaming`, transcription requires a nonempty `language` such as
-        `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and
-        `profanity_filter`. On realtime models it requires `azure_semantic_vad` or
-        `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -94744,7 +94740,6 @@ components:
       description: |-
         The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
         voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
-        `azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`. On realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
         Additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
@@ -96384,7 +96379,7 @@ components:
           description: Semantic end-of-utterance detection configuration. Set to null to disable it.
         speech_start_detection:
           $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
-          description: Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; not supported with realtime models.
+          description: Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`. Not supported on realtime models.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: Server-side voice activity detection.
@@ -96700,7 +96695,7 @@ components:
         while_assistant_not_speaking:
           $ref: '#/components/schemas/VoiceAgentSpeechStartWhileAssistantNotSpeaking'
           description: Rules for speech that starts while the agent is not speaking.
-      description: Transcript rules that keep backchannels such as "mm-hm" from taking the turn. An omitted scenario applies no rules.
+      description: Keeps backchannels such as "mm-hm" from interrupting the agent. An omitted scenario has no rules.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -96720,13 +96715,13 @@ components:
           format: float
           minimum: 0
           maximum: 50
-          description: Minimum number of words before the speech counts as a turn; the fallback when the classifier gives no verdict.
+          description: Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.
           default: 0
         turn_taking_classifier:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentTurnTakingClassifier'
             - type: 'null'
-          description: A turn-taking classifier that decides instead of the word count. Phrases still apply first.
+          description: Decides instead of `num_words`. Phrases still apply first.
       description: Rules for speech that starts while the agent is not speaking.
       x-ms-foundry-meta:
         required_previews:
@@ -96739,13 +96734,13 @@ components:
           format: float
           minimum: 0
           maximum: 50
-          description: Minimum number of words before the speech counts as a turn; the fallback when the classifier gives no verdict.
+          description: Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.
           default: 0
         turn_taking_classifier:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentTurnTakingClassifier'
             - type: 'null'
-          description: A turn-taking classifier that decides instead of the word count. Phrases still apply first.
+          description: Decides instead of `num_words`. Phrases still apply first.
         acknowledgement_phrases:
           type: array
           items:
@@ -97342,7 +97337,7 @@ components:
             - $ref: '#/components/schemas/VoiceAgentTurnTakingCriteria'
             - type: 'null'
           description: Replaces the built-in criteria for what is and is not a turn.
-      description: A turn-taking classifier that judges whether the user's speech takes the turn.
+      description: A classifier that judges whether the user's speech takes the turn.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

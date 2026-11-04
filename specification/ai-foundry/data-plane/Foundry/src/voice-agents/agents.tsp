@@ -997,7 +997,7 @@ model VoiceAgentServerVadTurnDetection extends VoiceAgentTurnDetectionConfig {
   @doc("Semantic end-of-utterance detection configuration. Set to null to disable it.")
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
 
-  @doc("Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; not supported with realtime models.")
+  @doc("Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`. Not supported on realtime models.")
   speech_start_detection?: VoiceAgentSpeechStartDetection;
 }
 
@@ -1013,7 +1013,7 @@ scalar VoiceAgentSpeechStartPhrase extends string;
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentTurnTakingPromptText extends string;
 
-@doc("Transcript rules that keep backchannels such as \"mm-hm\" from taking the turn. An omitted scenario applies no rules.")
+@doc("Keeps backchannels such as \"mm-hm\" from interrupting the agent. An omitted scenario has no rules.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSpeechStartDetection {
   @doc("Rules for speech that starts while the agent is speaking.")
@@ -1026,12 +1026,12 @@ model VoiceAgentSpeechStartDetection {
 @doc("Rules for speech that starts while the agent is not speaking.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSpeechStartWhileAssistantNotSpeaking {
-  @doc("Minimum number of words before the speech counts as a turn; the fallback when the classifier gives no verdict.")
+  @doc("Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.")
   @minValue(0)
   @maxValue(50)
   num_words?: float32 = 0;
 
-  @doc("A turn-taking classifier that decides instead of the word count. Phrases still apply first.")
+  @doc("Decides instead of `num_words`. Phrases still apply first.")
   turn_taking_classifier?: VoiceAgentTurnTakingClassifier | null;
 }
 
@@ -1049,7 +1049,7 @@ model VoiceAgentSpeechStartWhileAssistantSpeaking {
   interruption_phrases?: VoiceAgentSpeechStartPhrase[] = #[];
 }
 
-@doc("A turn-taking classifier that judges whether the user's speech takes the turn.")
+@doc("A classifier that judges whether the user's speech takes the turn.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTurnTakingClassifier {
   @doc("Probability at or above which the speech counts as a turn.")
@@ -1154,7 +1154,7 @@ alias VoiceAgentAzureSemanticVadOptions = {
   @doc("Whether user speech may interrupt the agent's response.")
   interrupt_response?: boolean = true;
 
-  @doc("Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.")
+  @doc("Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`.")
   speech_start_detection?: VoiceAgentSpeechStartDetection;
 };
 
@@ -1220,7 +1220,6 @@ model VoiceAgentEchoCancellation {
 @doc("""
   The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
   voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
-  `azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`. On realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
   Additional values may be added over time.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -1254,10 +1253,10 @@ union VoiceAgentInputTranscriptionModel {
   @doc("Azure AI Speech to text.")
   azure_speech: "azure-speech",
 
-  @doc("Azure AI Speech streaming transcription. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech`, `phrase_list`, and `profanity_filter`. On realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.")
+  @doc("Azure AI Speech streaming transcription. Requires `language`, such as `en-US`; comma-separated locales are supported. On realtime models, requires Azure semantic VAD and cannot be changed during a session.")
   azure_speech_streaming: "azure-speech-streaming",
 
-  @doc("MAI Transcribe 2 streaming transcription. `language` accepts at most one locale. Cannot be changed during a session on realtime models.")
+  @doc("MAI Transcribe 2 streaming transcription. `language` accepts one locale. On realtime models, cannot be changed during a session.")
   mai_transcribe_2_streaming: "mai-transcribe-2-streaming",
 }
 
@@ -1279,10 +1278,6 @@ union VoiceAgentProfanityFilterMode {
 @doc("""
   Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
   and phrase hints.
-  When `model` is `azure-speech-streaming`, transcription requires a nonempty `language` such as
-  `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and
-  `profanity_filter`. On realtime models it requires `azure_semantic_vad` or
-  `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputTranscription {
@@ -1297,7 +1292,7 @@ model VoiceAgentInputTranscription {
 
   ...OmitProperties<OpenAI.AudioTranscription, "model" | "language">;
 
-  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`; on realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.")
+  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.")
   `model`: VoiceAgentInputTranscriptionModel;
 
   @doc("Optional customer custom speech deployment configuration, keyed by locale.")

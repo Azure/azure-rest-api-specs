@@ -2777,7 +2777,7 @@
           },
           "backchannel": {
             "type": "boolean",
-            "description": "Whether `speech_start_detection` rejected this speech as a backchannel; such speech gets no response."
+            "description": "True when `speech_start_detection` rejected this speech as a backchannel."
           }
         },
         "allOf": [
@@ -6809,7 +6809,7 @@
           },
           "speech_start_detection": {
             "$ref": "#/components/schemas/VoiceAgentSpeechStartDetection",
-            "description": "Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`."
+            "description": "Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`."
           }
         },
         "allOf": [
@@ -6887,7 +6887,7 @@
           },
           "speech_start_detection": {
             "$ref": "#/components/schemas/VoiceAgentSpeechStartDetection",
-            "description": "Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`."
+            "description": "Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`."
           },
           "languages": {
             "type": "array",
@@ -6972,7 +6972,7 @@
           },
           "speech_start_detection": {
             "$ref": "#/components/schemas/VoiceAgentSpeechStartDetection",
-            "description": "Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`."
+            "description": "Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`."
           },
           "languages": {
             "type": "array",
@@ -7737,7 +7737,7 @@
           },
           "model": {
             "$ref": "#/components/schemas/VoiceAgentInputTranscriptionModel",
-            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`; on realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session."
+            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`."
           },
           "custom_speech": {
             "type": "object",
@@ -7758,7 +7758,7 @@
             "description": "Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech\n(`azure-speech` and `azure-speech-streaming`), including Custom Speech.\nSet this property before the session starts. If omitted, the transcription provider's default applies.\nYou cannot change the mode during a session.\nFiltering affects transcript events and the text sent to cascaded models. It does not change input\naudio, voice activity detection, or assistant speech; audio-native models still receive the original\naudio. Mandatory service masking policies apply even when you select `unfiltered`."
           }
         },
-        "description": "Settings for transcribing input audio, including the transcription model, Custom Speech deployments,\nand phrase hints.\nWhen `model` is `azure-speech-streaming`, transcription requires a nonempty `language` such as\n`en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and\n`profanity_filter`. On realtime models it requires `azure_semantic_vad` or\n`azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.",
+        "description": "Settings for transcribing input audio, including the transcription model, Custom Speech deployments,\nand phrase hints.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -7787,7 +7787,7 @@
             ]
           }
         ],
-        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\n`azure-speech-streaming` requires a nonempty `language` such as `en-US` (comma-separated locales are supported) and supports `custom_speech`, `phrase_list`, and `profanity_filter`. On realtime models it requires `azure_semantic_vad` or `azure_semantic_vad_multilingual` turn detection and cannot be changed during a session.\nAdditional values may be added over time.",
+        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\nAdditional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -9990,7 +9990,7 @@
           },
           "speech_start_detection": {
             "$ref": "#/components/schemas/VoiceAgentSpeechStartDetection",
-            "description": "Transcript rules a detected speech start must pass before it takes the turn. Requires transcription model `azure-speech-streaming` or `mai-transcribe-2-streaming`; not supported with realtime models."
+            "description": "Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`. Not supported on realtime models."
           }
         },
         "allOf": [
@@ -10310,7 +10310,7 @@
             "description": "Rules for speech that starts while the agent is not speaking."
           }
         },
-        "description": "Transcript rules that keep backchannels such as \"mm-hm\" from taking the turn. An omitted scenario applies no rules.",
+        "description": "Keeps backchannels such as \"mm-hm\" from interrupting the agent. An omitted scenario has no rules.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10336,7 +10336,7 @@
             "format": "float",
             "minimum": 0,
             "maximum": 50,
-            "description": "Minimum number of words before the speech counts as a turn; the fallback when the classifier gives no verdict.",
+            "description": "Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.",
             "default": 0
           },
           "turn_taking_classifier": {
@@ -10348,7 +10348,7 @@
                 "type": "null"
               }
             ],
-            "description": "A turn-taking classifier that decides instead of the word count. Phrases still apply first."
+            "description": "Decides instead of `num_words`. Phrases still apply first."
           }
         },
         "description": "Rules for speech that starts while the agent is not speaking.",
@@ -10366,7 +10366,7 @@
             "format": "float",
             "minimum": 0,
             "maximum": 50,
-            "description": "Minimum number of words before the speech counts as a turn; the fallback when the classifier gives no verdict.",
+            "description": "Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.",
             "default": 0
           },
           "turn_taking_classifier": {
@@ -10378,7 +10378,7 @@
                 "type": "null"
               }
             ],
-            "description": "A turn-taking classifier that decides instead of the word count. Phrases still apply first."
+            "description": "Decides instead of `num_words`. Phrases still apply first."
           },
           "acknowledgement_phrases": {
             "type": "array",
@@ -11122,7 +11122,7 @@
             "description": "Replaces the built-in criteria for what is and is not a turn."
           }
         },
-        "description": "A turn-taking classifier that judges whether the user's speech takes the turn.",
+        "description": "A classifier that judges whether the user's speech takes the turn.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
