@@ -1282,6 +1282,8 @@ union ToolChoiceValue {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(VoiceAgentDefinition.tool_choice, ToolChoiceValue);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(InlineVoiceSubagent.tool_choice, ToolChoiceValue);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(
   VoiceAgentLlmGeneratedGreetingConfig.tool_choice,
   ToolChoiceValue
