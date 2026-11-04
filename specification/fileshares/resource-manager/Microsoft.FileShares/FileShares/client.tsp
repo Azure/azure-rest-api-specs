@@ -36,6 +36,7 @@ using Microsoft.FileShares;
   "csharp"
 );
 @@clientName(FileShareLimitsResponse, "FileShareLimitsResult", "csharp");
+@@clientName(FileShareLimitsRequest, "FileShareLimitsContent", "csharp");
 @@clientName(
   FileShareProvisioningRecommendationResponse,
   "FileShareProvisioningRecommendationResult",
@@ -93,8 +94,60 @@ using Microsoft.FileShares;
   "csharp"
 );
 @@clientName(PublicNetworkAccess, "FileSharePublicNetworkAccess", "csharp");
+@@clientName(
+  StartRedundancyConversionRequest,
+  "FileShareRedundancyConversionContent",
+  "csharp"
+);
+@@clientName(
+  StartRedundancyConversionInput,
+  "FileShareRedundancyConversionInputProperties",
+  "csharp"
+);
+@@clientName(
+  RedundancyConversionStatusResponse,
+  "FileShareRedundancyConversionStatusResult",
+  "csharp"
+);
+@@clientName(
+  RedundancyConversionStatusOutput,
+  "FileShareRedundancyConversionStatusOutputProperties",
+  "csharp"
+);
+@@clientName(
+  RedundancyConversionStatus,
+  "FileShareRedundancyConversionStatus",
+  "csharp"
+);
+@@clientName(
+  MigrationState.redundancyConversionInProgress,
+  "IsRedundancyConversionInProgress",
+  "csharp"
+);
 @@clientName(MediaTier, "FileShareMediaTier", "csharp");
 @@clientName(MediaTier.SSD, "Ssd", "csharp");
+@@clientName(MediaTier.HDD, "Hdd", "csharp");
+@@clientName(ScaleMode, "FileShareScaleMode", "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.InfrastructureEncryption,
+  "FileShareInfrastructureEncryption",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
+  "FileShareCustomerManagedKeyEncryption",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+  "FileShareKeyEncryptionKeyIdentity",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
+  "FileShareKeyEncryptionKeyIdentityType",
+  "csharp"
+);
 @@clientName(Redundancy, "FileShareRedundancyLevel", "csharp");
 @@clientName(Protocol, "FileShareProtocol", "csharp");
 @@clientName(Protocol.NFS, "Nfs", "csharp");
