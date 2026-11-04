@@ -19,7 +19,7 @@ output and unreachable-type setting remain unchanged.
 Run the focused extraction and voice wire-contract checks from the repository root:
 
 ```sh
-node --test specification/ai-foundry/data-plane/Foundry/emitters/voice-event-reference.test.mjs eng/scripts/test/voice-system-tools.test.mjs
+node --test specification/ai-foundry/data-plane/Foundry/emitters/voice-event-reference.test.mjs
 ```
 
 The Foundry reference site's refresh automation consumes this artifact and the
