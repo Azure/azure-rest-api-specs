@@ -169,34 +169,10 @@ model BuilderAppRedeployRequest {
   idempotencyKey?: string;
 }
 
-/** Deployment admission details, not the final resource returned by operation polling. */
-@added(Versions.v2026_11_15)
-model BuilderAppDeploymentAdmission {
-  /** Opaque deployment identifier. */
-  deploymentId: string;
-
-  /** Deployment status. */
-  status: string;
-}
-
 /** Optional client request identifier used as the deployment idempotency key. */
 @added(Versions.v2026_11_15)
 model BuilderAppDeploymentParameters {
   /** Stable request identifier used when the body omits idempotencyKey. */
   @header("x-ms-client-request-id")
   clientRequestId?: string;
-}
-
-/** Deployment accepted with links to the operation monitor and final result. */
-@added(Versions.v2026_11_15)
-model BuilderAppDeploymentAccepted {
-  ...ArmAcceptedLroResponse<
-    "Deployment accepted.",
-    ArmCombinedLroHeaders<BuilderAppOperationStatus, BuilderApp> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  /** Deployment admission details. */
-  @bodyRoot
-  body: BuilderAppDeploymentAdmission;
 }

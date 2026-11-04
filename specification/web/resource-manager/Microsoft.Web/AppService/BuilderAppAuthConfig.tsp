@@ -25,9 +25,12 @@ model BuilderAppAuthConfig is ProxyResource<BuilderAppAuthConfigProperties> {
 }
 
 /** Application authentication policy and credential-safe readiness information. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This synchronous policy singleton exposes revision and propagationPending rather than a provisioning state; no asynchronous resource creation is performed."
 @added(Versions.v2026_11_15)
 model BuilderAppAuthConfigProperties {
+  /** State of the configuration resource operation, independent of runtime propagation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: BuilderAppProvisioningState;
+
   /** Authentication mode. Omission defaults to disabled. */
   mode?: BuilderAppAuthMode;
 
@@ -142,9 +145,8 @@ model BuilderAppGitHubCustomerApplication {
   /** OAuth application client ID. */
   clientId: string;
 
-  /** Verified app custom domain used for callbacks; omission or null uses the primary hostname. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service accepts null to select the primary callback hostname."
-  callbackHost?: string | null;
+  /** Verified app custom domain used for callbacks; omission uses the primary hostname. */
+  callbackHost?: string;
 
   /** Write-only client secret. Omission retains the secret when clientId is unchanged. */
   @secret
@@ -156,7 +158,7 @@ model BuilderAppGitHubCustomerApplication {
   secretConfigured?: boolean;
 }
 
-/** Microsoft Entra ID provider policy. Nullable allowlists are treated as empty lists. */
+/** Microsoft Entra ID provider policy. Omitted allowlists default to empty lists on replacement. */
 @added(Versions.v2026_11_15)
 model BuilderAppEntraAuth {
   /** Whether this provider is enabled. */
@@ -168,21 +170,17 @@ model BuilderAppEntraAuth {
   /** Customer-owned app registration and workload identity. */
   customerApplication?: BuilderAppEntraCustomerApplication;
 
-  /** Allowed email addresses; null clears the allowlist. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The Entra policy explicitly accepts null as an empty allowlist."
-  emails?: string[] | null;
+  /** Allowed email addresses; [] clears the allowlist. */
+  emails?: string[];
 
-  /** Allowed email suffixes; null clears the allowlist. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The Entra policy explicitly accepts null as an empty allowlist."
-  emailSuffixes?: string[] | null;
+  /** Allowed email suffixes; [] clears the allowlist. */
+  emailSuffixes?: string[];
 
-  /** Allowed Entra object IDs; null clears the allowlist. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The Entra policy explicitly accepts null as an empty allowlist."
-  objectIds?: string[] | null;
+  /** Allowed Entra object IDs; [] clears the allowlist. */
+  objectIds?: string[];
 
-  /** Allowed Entra tenant IDs; null clears the allowlist. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The Entra policy explicitly accepts null as an empty allowlist."
-  tenantIds?: string[] | null;
+  /** Allowed Entra tenant IDs; [] clears the allowlist. */
+  tenantIds?: string[];
 }
 
 /** Customer-owned Entra registration and app-assigned identity selection. */
@@ -296,6 +294,13 @@ model BuilderAppAuthResponse {
   cacheControl: "private, no-store";
 }
 
+/** Newly persisted authentication configuration with cache protection and ETag. */
+@added(Versions.v2026_11_15)
+model BuilderAppAuthCreatedResult {
+  ...ArmResourceCreatedSyncResponse<BuilderAppAuthConfig>;
+  ...PickProperties<BuilderAppAuthResponse, "etag" | "cacheControl">;
+}
+
 /** Credential-safe singleton collection with cache protection. */
 @added(Versions.v2026_11_15)
 model BuilderAppAuthListResult {
@@ -321,12 +326,11 @@ interface BuilderAppAuthConfigs {
     Response = BuilderAppAuthResponse
   >;
 
-  /** Replace the current policy and return its credential-safe representation. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "This always-present singleton is replaced synchronously and the existing service returns 200, not resource creation."
+  /** Create or replace the current policy and return its credential-safe representation. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BuilderAppAuthConfig,
     Parameters = BuilderAppAuthConditions,
-    Response = BuilderAppAuthResponse
+    Response = BuilderAppAuthResponse | BuilderAppAuthCreatedResult
   >;
 
   /** Reset the singleton authentication policy. The configuration remains available through GET. */

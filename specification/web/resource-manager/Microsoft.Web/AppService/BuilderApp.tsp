@@ -58,6 +58,9 @@ model BuilderAppProperties {
   /** Progress of the latest managed identity update. */
   @visibility(Lifecycle.Read)
   identityUpdate?: BuilderAppIdentityUpdate;
+
+  /** Assigned user-managed identity selected for AZURE_CLIENT_ID. Omission selects the system-assigned identity on PUT and preserves the selection on PATCH. */
+  azureClientIdIdentityResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /** Repository connection and authorization supplied for a builder app. */
@@ -169,71 +172,10 @@ model BuilderAppVariable {
   /** Environment variable name, unique ignoring case. PORT and BuilderApps platform-managed names are reserved. */
   name: string;
 
-  /** Omit or send null to preserve an existing value. A new name requires a value; an empty string is valid. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null preserves an existing variable value in the service contract."
+  /** Omit to preserve an existing value. A new name requires a value; an empty string is valid. */
   @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  value?: string | null;
-}
-
-/** Identity assignment modes. */
-@added(Versions.v2026_11_15)
-union BuilderAppIdentityType {
-  /** No identities assigned. */
-  None: "None",
-
-  /** System-assigned identity. */
-  SystemAssigned: "SystemAssigned",
-
-  /** User-assigned identities. */
-  UserAssigned: "UserAssigned",
-
-  /** System-assigned and user-assigned identities. */
-  SystemAndUserAssigned: "SystemAssigned,UserAssigned",
-
-  string,
-}
-
-/** Managed identity desired state and generated metadata. */
-@added(Versions.v2026_11_15)
-model BuilderAppIdentity {
-  /** Assignment mode. */
-  type: BuilderAppIdentityType;
-
-  /** Generated system-assigned principal ID. */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /** Generated system-assigned tenant ID. */
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
-
-  /** User-assigned identities keyed by their fully qualified ARM resource IDs. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Managed identity assignments are keyed by user-selected ARM resource IDs."
-  userAssignedIdentities?: Record<BuilderAppUserAssignedIdentity>;
-}
-
-/** Generated metadata for a user-assigned identity. */
-@added(Versions.v2026_11_15)
-model BuilderAppUserAssignedIdentity {
-  /** Generated identity client ID. */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
-
-  /** Generated identity principal ID. */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-}
-
-/** Presence-aware identity changes; null map entries remove individual user-assigned identities. */
-@added(Versions.v2026_11_15)
-model BuilderAppPatchIdentity {
-  /** Assignment mode to apply. Omission preserves the current mode. */
-  type?: BuilderAppIdentityType;
-
-  /** Assignments to add or remove. A null value removes the assignment at that resource ID. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "PATCH managed identity assignments use resource-ID keys and null entries to remove assignments."
-  userAssignedIdentities?: Record<BuilderAppUserAssignedIdentity | null>;
+  value?: string;
 }
 
 /** Progress of an identity update and its deployment handoff. */
@@ -249,7 +191,7 @@ model BuilderAppIdentityUpdate {
   phase: BuilderAppIdentityUpdatePhase;
 
   /** Requested identity assignment state. */
-  requestedIdentity: BuilderAppIdentity;
+  requestedIdentity: CommonTypes.ManagedServiceIdentity;
 
   /** User-assigned identity selected for AZURE_CLIENT_ID. */
   azureClientIdIdentityResourceId?: Azure.Core.armResourceIdentifier;
@@ -364,12 +306,14 @@ model BuilderAppScalingComponent {
 /** PATCH input. Only supplied members change; read-only and PUT-only configuration is excluded. */
 @added(Versions.v2026_11_15)
 model BuilderAppPatch {
-  /** Omit to preserve; a map replaces all tags; {} or null clears all tags. Values must be strings. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null clears tags; omission preserves them. These are distinct supported PATCH inputs."
-  tags?: Record<string> | null;
+  /** Omit to preserve; a map replaces all tags; {} clears all tags. Values must be strings. */
+  ...PickProperties<
+    Foundations.ResourceUpdateModel<BuilderApp, BuilderAppPatchProperties>,
+    "tags"
+  >;
 
-  /** Identity changes. Identity selection cannot be combined with source or version configuration changes. */
-  identity?: BuilderAppPatchIdentity;
+  /** Identity changes, including the assignment mode. Null dictionary entries remove assignments. */
+  identity?: CommonTypes.ManagedServiceIdentity;
 
   /** Supported desired configuration changes. */
   properties?: BuilderAppPatchProperties;
@@ -384,7 +328,7 @@ model BuilderAppPatchProperties {
   /** Variables to capture in the next application version. */
   versionConfiguration?: BuilderAppPatchVersionConfiguration;
 
-  /** Identity-only update selecting the user-assigned identity used for AZURE_CLIENT_ID. */
+  /** Desired user-assigned identity used for AZURE_CLIENT_ID, also available through PUT and GET. */
   azureClientIdIdentityResourceId?: Azure.Core.armResourceIdentifier;
 }
 
@@ -445,24 +389,22 @@ interface BuilderApps {
   >;
 
   /** Build and deploy repository source, a retained version, or an uploaded artifact. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The existing deployment 202 admission body is retained for client compatibility; Location returns the completed BuilderApp, not this admission payload."
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The 202 deployment admission details intentionally differ from the final 200 BuilderApp; both are successful responses."
-  deploy is ArmResourceActionAsyncBase<
+  deploy is ArmResourceActionAsync<
     BuilderApp,
     BuilderAppDeployRequest,
-    BuilderAppDeploymentAccepted | ArmResponse<BuilderApp>,
-    Foundations.DefaultBaseParameters<BuilderApp>,
+    ArmResponse<BuilderApp>,
+    LroHeaders = ArmCombinedLroHeaders<BuilderAppOperationStatus, BuilderApp> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Parameters = BuilderAppDeploymentParameters
   >;
 
   /** Redeploy retained ready artifacts without resolving or rebuilding repository source. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The existing redeployment 202 admission body is retained for client compatibility; Location returns the completed BuilderApp, not this admission payload."
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The 202 redeployment admission details intentionally differ from the final 200 BuilderApp; both are successful responses."
-  redeploy is ArmResourceActionAsyncBase<
+  redeploy is ArmResourceActionAsync<
     BuilderApp,
     BuilderAppRedeployRequest,
-    BuilderAppDeploymentAccepted | ArmResponse<BuilderApp>,
-    Foundations.DefaultBaseParameters<BuilderApp>,
+    ArmResponse<BuilderApp>,
+    LroHeaders = ArmCombinedLroHeaders<BuilderAppOperationStatus, BuilderApp> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Parameters = BuilderAppDeploymentParameters
   >;
 }

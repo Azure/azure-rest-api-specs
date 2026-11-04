@@ -1532,7 +1532,11 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2838,9 +2842,6 @@
           "UpdateBuilderAppIdentity": {
             "$ref": "./examples/BuilderApps_UpdateIdentity.json"
           },
-          "UpdateBuilderAppNullTags": {
-            "$ref": "./examples/BuilderApps_UpdateNullTags.json"
-          },
           "UpdateBuilderAppReplaceTags": {
             "$ref": "./examples/BuilderApps_UpdateReplaceTags.json"
           }
@@ -3046,7 +3047,7 @@
         "tags": [
           "BuilderAppAuthConfigs"
         ],
-        "description": "Replace the current policy and return its credential-safe representation.",
+        "description": "Create or replace the current policy and return its credential-safe representation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3084,6 +3085,28 @@
         "responses": {
           "200": {
             "description": "Credential-safe authentication configuration response with cache protection and ETag.",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppAuthConfig"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "Authentication responses must not be stored.",
+                "enum": [
+                  "private, no-store"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              },
+              "ETag": {
+                "type": "string",
+                "description": "Current entity tag."
+              }
+            }
+          },
+          "201": {
+            "description": "Newly persisted authentication configuration with cache protection and ETag.",
             "schema": {
               "$ref": "#/definitions/BuilderAppAuthConfig"
             },
@@ -3297,10 +3320,7 @@
             }
           },
           "202": {
-            "description": "Deployment accepted with links to the operation monitor and final result.",
-            "schema": {
-              "$ref": "#/definitions/BuilderAppDeploymentAdmission"
-            },
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -3445,10 +3465,7 @@
             }
           },
           "202": {
-            "description": "Deployment accepted with links to the operation monitor and final result.",
-            "schema": {
-              "$ref": "#/definitions/BuilderAppDeploymentAdmission"
-            },
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -44481,6 +44498,11 @@
       "type": "object",
       "description": "Application authentication policy and credential-safe readiness information.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/BuilderAppProvisioningState",
+          "description": "State of the configuration resource operation, independent of runtime propagation.",
+          "readOnly": true
+        },
         "mode": {
           "$ref": "#/definitions/BuilderAppAuthMode",
           "description": "Authentication mode. Omission defaults to disabled."
@@ -44688,27 +44710,9 @@
         }
       }
     },
-    "BuilderAppDeploymentAdmission": {
-      "type": "object",
-      "description": "Deployment admission details, not the final resource returned by operation polling.",
-      "properties": {
-        "deploymentId": {
-          "type": "string",
-          "description": "Opaque deployment identifier."
-        },
-        "status": {
-          "type": "string",
-          "description": "Deployment status."
-        }
-      },
-      "required": [
-        "deploymentId",
-        "status"
-      ]
-    },
     "BuilderAppEntraAuth": {
       "type": "object",
-      "description": "Microsoft Entra ID provider policy. Nullable allowlists are treated as empty lists.",
+      "description": "Microsoft Entra ID provider policy. Omitted allowlists default to empty lists on replacement.",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -44724,32 +44728,28 @@
         },
         "emails": {
           "type": "array",
-          "description": "Allowed email addresses; null clears the allowlist.",
-          "x-nullable": true,
+          "description": "Allowed email addresses; [] clears the allowlist.",
           "items": {
             "type": "string"
           }
         },
         "emailSuffixes": {
           "type": "array",
-          "description": "Allowed email suffixes; null clears the allowlist.",
-          "x-nullable": true,
+          "description": "Allowed email suffixes; [] clears the allowlist.",
           "items": {
             "type": "string"
           }
         },
         "objectIds": {
           "type": "array",
-          "description": "Allowed Entra object IDs; null clears the allowlist.",
-          "x-nullable": true,
+          "description": "Allowed Entra object IDs; [] clears the allowlist.",
           "items": {
             "type": "string"
           }
         },
         "tenantIds": {
           "type": "array",
-          "description": "Allowed Entra tenant IDs; null clears the allowlist.",
-          "x-nullable": true,
+          "description": "Allowed Entra tenant IDs; [] clears the allowlist.",
           "items": {
             "type": "string"
           }
@@ -44988,8 +44988,7 @@
         },
         "callbackHost": {
           "type": "string",
-          "description": "Verified app custom domain used for callbacks; omission or null uses the primary hostname.",
-          "x-nullable": true
+          "description": "Verified app custom domain used for callbacks; omission uses the primary hostname."
         },
         "clientSecret": {
           "type": "string",
@@ -45011,72 +45010,6 @@
         "clientId"
       ]
     },
-    "BuilderAppIdentity": {
-      "type": "object",
-      "description": "Managed identity desired state and generated metadata.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/BuilderAppIdentityType",
-          "description": "Assignment mode."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "Generated system-assigned principal ID.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Generated system-assigned tenant ID.",
-          "readOnly": true
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "User-assigned identities keyed by their fully qualified ARM resource IDs.",
-          "additionalProperties": {
-            "$ref": "#/definitions/BuilderAppUserAssignedIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "BuilderAppIdentityType": {
-      "type": "string",
-      "description": "Identity assignment modes.",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned,UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "BuilderAppIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No identities assigned."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System-assigned identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User-assigned identities."
-          },
-          {
-            "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned,UserAssigned",
-            "description": "System-assigned and user-assigned identities."
-          }
-        ]
-      }
-    },
     "BuilderAppIdentityUpdate": {
       "type": "object",
       "description": "Progress of an identity update and its deployment handoff.",
@@ -45095,7 +45028,7 @@
           "description": "Current phase of the operation."
         },
         "requestedIdentity": {
-          "$ref": "#/definitions/BuilderAppIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Requested identity assignment state."
         },
         "azureClientIdIdentityResourceId": {
@@ -45265,37 +45198,18 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Omit to preserve; a map replaces all tags; {} or null clears all tags. Values must be strings.",
-          "x-nullable": true,
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "identity": {
-          "$ref": "#/definitions/BuilderAppPatchIdentity",
-          "description": "Identity changes. Identity selection cannot be combined with source or version configuration changes."
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Identity changes, including the assignment mode. Null dictionary entries remove assignments."
         },
         "properties": {
           "$ref": "#/definitions/BuilderAppPatchProperties",
           "description": "Supported desired configuration changes."
-        }
-      }
-    },
-    "BuilderAppPatchIdentity": {
-      "type": "object",
-      "description": "Presence-aware identity changes; null map entries remove individual user-assigned identities.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/BuilderAppIdentityType",
-          "description": "Assignment mode to apply. Omission preserves the current mode."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "Assignments to add or remove. A null value removes the assignment at that resource ID.",
-          "additionalProperties": {
-            "$ref": "#/definitions/BuilderAppUserAssignedIdentity",
-            "x-nullable": true
-          }
         }
       }
     },
@@ -45314,7 +45228,7 @@
         "azureClientIdIdentityResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Identity-only update selecting the user-assigned identity used for AZURE_CLIENT_ID."
+          "description": "Desired user-assigned identity used for AZURE_CLIENT_ID, also available through PUT and GET."
         }
       }
     },
@@ -45382,6 +45296,11 @@
           "$ref": "#/definitions/BuilderAppIdentityUpdate",
           "description": "Progress of the latest managed identity update.",
           "readOnly": true
+        },
+        "azureClientIdIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Assigned user-managed identity selected for AZURE_CLIENT_ID. Omission selects the system-assigned identity on PUT and preserves the selection on PATCH."
         }
       }
     },
@@ -45851,22 +45770,6 @@
         "contentLength"
       ]
     },
-    "BuilderAppUserAssignedIdentity": {
-      "type": "object",
-      "description": "Generated metadata for a user-assigned identity.",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "Generated identity client ID.",
-          "readOnly": true
-        },
-        "principalId": {
-          "type": "string",
-          "description": "Generated identity principal ID.",
-          "readOnly": true
-        }
-      }
-    },
     "BuilderAppVariable": {
       "type": "object",
       "description": "A version variable whose value is accepted on write but omitted from ordinary resource responses.",
@@ -45878,8 +45781,7 @@
         "value": {
           "type": "string",
           "format": "password",
-          "description": "Omit or send null to preserve an existing value. A new name requires a value; an empty string is valid.",
-          "x-nullable": true,
+          "description": "Omit to preserve an existing value. A new name requires a value; an empty string is valid.",
           "x-ms-mutability": [
             "update",
             "create"
