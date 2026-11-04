@@ -125,6 +125,24 @@ using Azure.AI.Projects;
 // Preserve the existing JavaScript operation name.
 @@clientName(EvaluationRules.delete, "delete", "javascript");
 
+// typespec-ts reads multi-word discriminators by their camel-cased name in polymorphic
+// serializers and ignores ignore-property-name-normalize, so keep the JS client name aligned.
+@@clientName(
+  VoiceAgentSubagentConfig.subagent_type,
+  "subagentType",
+  "javascript"
+);
+@@clientName(
+  VoiceAgentDelegateSubagentConfig.subagent_type,
+  "subagentType",
+  "javascript"
+);
+@@clientName(
+  VoiceAgentInlineSubagentConfig.subagent_type,
+  "subagentType",
+  "javascript"
+);
+
 // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, exact("MEMORY_1GB"), "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`4g`, exact("MEMORY_4GB"), "python");
