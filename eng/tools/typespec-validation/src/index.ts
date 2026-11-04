@@ -131,8 +131,8 @@ const help = {
   ],
   notes: [
     "Run from the repository root after installing dependencies with pnpm install.",
-    "Validation may update generated files and formatting. Changes are retained unless --git-clean is used.",
-    "Do not use --git-clean while other work is in progress.",
+    "Batch runs check generated files and formatting without modifying the checkout.",
+    "Single-project validation may update generated files and formatting.",
   ],
   examples: [
     "specification/<service>/<project>",
@@ -142,7 +142,7 @@ const help = {
   documentation: "https://aka.ms/azsdk/specs/typespec-validation",
 };
 
-export async function main() {
+export async function main({ checkOnly = false }: { checkOnly?: boolean } = {}) {
   const args = process.argv.slice(2);
   const options = {
     verbose: {
@@ -199,9 +199,8 @@ export async function main() {
       type: "boolean",
       group: "Options for --all or --changed",
       description:
-        "Restore tracked files and remove untracked files and directories across the entire repository " +
-        "after each project. Requires a clean, disposable checkout; " +
-        "ignored files are retained.",
+        "Require a clean checkout, including untracked files, once before validation. " +
+        "Does not restore or delete files; ignored files are retained.",
     },
   } satisfies Record<string, CliOption>;
   const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });
@@ -330,8 +329,8 @@ export async function main() {
     new FlavorAzureRule(),
     new LinterRulesetRule(),
     new ClientTspImportRule(),
-    new CompileRule(),
-    new FormatRule(),
+    new CompileRule(checkOnly),
+    new FormatRule(checkOnly),
     new SdkTspConfigValidationRule(),
   ];
 

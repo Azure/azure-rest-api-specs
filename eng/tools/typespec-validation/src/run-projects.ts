@@ -10,7 +10,6 @@ import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
 import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
-import { cleanWorktree } from "./git-cleanup.ts";
 
 interface RunOptions {
   gitClean?: boolean;
@@ -100,8 +99,10 @@ async function runProjects(
   context: RunContext,
   options: RunOptions,
 ): Promise<boolean> {
-  const git = simpleGit(root);
-  const logger = new ConsoleLogger(options.verbose);
+  const git = simpleGit({ baseDir: root, allowEnvironment: ["GIT_OPTIONAL_LOCKS"] }).env(
+    "GIT_OPTIONAL_LOCKS",
+    "0",
+  );
   const gitClean = options.gitClean && !options.dryRun;
   const displayRoot = resolve(
     gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd(),
@@ -179,10 +180,6 @@ async function runProjects(
         ]);
       }
       throw error;
-    } finally {
-      if (gitClean) {
-        await cleanWorktree(displayRoot, logger);
-      }
     }
   }
 
@@ -303,7 +300,7 @@ function validateProject(
   verbose = false,
 ): Promise<{ success: boolean; segments: OutputSegment[] }> {
   return new Promise((resolvePromise, reject) => {
-    const env = { ...process.env };
+    const env: NodeJS.ProcessEnv = { ...process.env, GIT_OPTIONAL_LOCKS: "0" };
     if (supportsColor()) {
       delete env.NO_COLOR;
       env.FORCE_COLOR = "1";
@@ -334,7 +331,7 @@ function validateProject(
     const child = spawn(
       process.execPath,
       [
-        fileURLToPath(new URL("../cmd/tsv.js", import.meta.url)),
+        fileURLToPath(new URL("./project-worker.ts", import.meta.url)),
         folder,
         JSON.stringify(context),
         ...(verbose ? ["--verbose"] : []),

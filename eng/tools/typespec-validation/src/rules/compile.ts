@@ -19,6 +19,11 @@ import {
 export class CompileRule implements Rule {
   readonly name = "Compile";
   readonly description = "Compile TypeSpec";
+  readonly checkOnly: boolean;
+
+  constructor(checkOnly = false) {
+    this.checkOnly = checkOnly;
+  }
 
   async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     let success = true;
@@ -26,7 +31,9 @@ export class CompileRule implements Rule {
 
     const mainTspExists = await fileExists(path.join(folder, "main.tsp"));
     if (mainTspExists) {
-      const compiled = await compileTypeSpec(folder);
+      const compiled = this.checkOnly
+        ? await compileTypeSpec(folder, { checkOnly: true })
+        : await compileTypeSpec(folder);
       const { emittedFiles } = compiled;
       diagnostics.push(...(compiled.diagnostics ?? []));
 
@@ -210,18 +217,32 @@ export class CompileRule implements Rule {
           success = false;
         }
       }
+      if (compiled.changedFiles?.length) {
+        success = false;
+        diagnostics.push({
+          severity: "error",
+          code: "generated-files-changed",
+          path: folder,
+          message: "Files would change after TypeSpec compilation:",
+          details: indent(lines(compiled.changedFiles.map(filePath))),
+          help: "Run `pnpm exec tsp compile .` from the project folder and include the generated files in your change.",
+        });
+      }
     }
 
     const clientTsp = path.join(folder, "client.tsp");
     if (!mainTspExists && (await fileExists(clientTsp))) {
-      const compiled = await compileTypeSpec(clientTsp, { noEmit: true });
+      const compiled = await compileTypeSpec(clientTsp, {
+        noEmit: true,
+        ...(this.checkOnly ? { checkOnly: true } : {}),
+      });
       diagnostics.push(...(compiled.diagnostics ?? []));
       if (!compiled.success) {
         success = false;
       }
     }
 
-    if (success) {
+    if (success && !this.checkOnly) {
       const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
       if (!gitDiffResult.success) {
         success = false;

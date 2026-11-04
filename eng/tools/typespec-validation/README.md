@@ -74,7 +74,7 @@ Compiler and formatter failures retain their native diagnostic codes, source
 excerpts, and colors, reported once beneath a TSV command-failure diagnostic.
 Unexpected output from successful commands also remains visible. Successful
 compiler banners, progress messages, and emitted-file lists are debug-only.
-If compilation or formatting changes files, TSV shows an indented cyan file list,
+In single-project mode, if compilation or formatting changes files, TSV shows an indented cyan file list,
 the Git diff, and the command to fix them. The diff includes staged, unstaged, and
 untracked files under the project's service folder and retains Git's colors when
 color output is enabled. `--verbose` also includes Git status.
@@ -131,17 +131,21 @@ an empty all-project selection fails.
 and balances the sorted project list before suppressions. Each shard requires
 its own checkout.
 
-`--dry-run` lists the selected projects and context without validating or cleaning
+`--dry-run` lists the selected projects and context without validating or changing
 files. It works with `--all` and `--changed`.
 
-Validation may update generated files and formatting. By default these changes
-are retained. In a disposable checkout, `--git-clean` restores tracked files and
-removes untracked files and directories across the entire repository after each
-project. It requires an initially clean checkout; ignored files are retained.
-Do not use it while other work is in progress. `--dry-run` disables cleanup.
+Batch validation is check-only. It compares
+emitted contents with the checkout and checks formatting without saving files
+or creating output directories. Findings list affected files and commands to fix
+them. Ignored untracked outputs are not treated as missing generated files;
+tracked outputs are checked even if they match an ignore rule.
 
-Cleanup is skipped when the checkout is already clean. Otherwise, tracked files
-are restored from the index and untracked files are cleaned repository-wide.
-Git errors or changes remaining after cleanup stop validation rather than letting
-the next project run in a dirty checkout. Nested repositories are not forcibly deleted.
-Use `--verbose` to include per-command cleanup timings.
+Single-project validation still updates generated files and formatting and
+retains those changes. Run `pnpm tsv <project>` or the reported compiler/formatter
+command to apply fixes.
+
+`--git-clean` optionally requires the entire checkout to be clean once before
+batch validation, including staged, unstaged, and untracked changes. It never
+restores or deletes files, and ignored files remain untouched. `--dry-run`
+disables this check. Do not edit files concurrently if you need a consistent
+validation baseline.

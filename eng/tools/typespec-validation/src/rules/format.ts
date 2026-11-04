@@ -8,11 +8,18 @@ import { gitDiffTopSpecFolder } from "../utils.ts";
 export class FormatRule implements Rule {
   readonly name = "Format";
   readonly description = "Format TypeSpec";
+  readonly checkOnly: boolean;
+
+  constructor(checkOnly = false) {
+    this.checkOnly = checkOnly;
+  }
 
   async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     // Format parent folder to include shared files
-    const result = await formatTypeSpec(folder);
-    if (!result.success) return result;
+    const result = this.checkOnly
+      ? await formatTypeSpec(folder, true)
+      : await formatTypeSpec(folder);
+    if (!result.success || this.checkOnly) return result;
     const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
     if (gitDiffResult.success) return result;
     return {
