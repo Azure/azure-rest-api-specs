@@ -81,34 +81,3 @@ using Microsoft.ManagedNetworkFabric;
   "peerAsn",
   "java"
 );
-
-@@clientName(
-  Microsoft.ManagedNetworkFabric.ExternalNetworkUpdateBfdAdministrativeStateRequest,
-  "ExternalNetworkUpdateBfdAdministrativeStateContent",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.ExternalNetworkUpdateBfdAdministrativeStateResponse,
-  "ExternalNetworkUpdateBfdAdministrativeStateResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.InternalNetworkUpdateBgpAdministrativeStateRequest,
-  "InternalNetworkUpdateBgpAdministrativeStateContent",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.InternalNetworkUpdateBgpAdministrativeStateResponse,
-  "InternalNetworkUpdateBgpAdministrativeStateResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.InternalNetworkUpdateBfdAdministrativeStateRequest,
-  "InternalNetworkUpdateBfdAdministrativeStateContent",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.InternalNetworkUpdateBfdAdministrativeStateResponse,
-  "InternalNetworkUpdateBfdAdministrativeStateResult",
-  "csharp"
-);
