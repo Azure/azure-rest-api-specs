@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -2094,6 +2095,17 @@ model AccountProperties {
   agentHostingConfigurations?: AgentHostingConfiguration[];
 
   /**
+   * Private CA trust sources for supported features in an AIServices account with allowProjectManagement enabled. Supports one Azure Key Vault source containing version-pinned references to secrets with PEM-encoded CA certificates or certificate bundles. On PUT or PATCH, a non-null array replaces the complete configuration, so include all references to retain. Omit this property or send null to preserve the existing configuration; send an empty array to clear it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service accepts explicit null on account PUT and PATCH to preserve existing trust sources; an empty array clears the configuration."
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @maxItems(1)
+  // @identifiers does not support nullable arrays.
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  trustedCertificateSources?: TrustedCertificateSource[] | null;
+
+  /**
    * The full resource IDs of cost controls directly attached to this account.
    * At the moment the service only supports a single cost control. This will be expanded in future API versions.
    */
@@ -2112,6 +2124,67 @@ model AccountProperties {
   @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Update)
   costControlConnections?: CostControlConnections | null;
+}
+
+/**
+ * An Azure resource containing the CA certificate bundles trusted by supported features in the account.
+ */
+@added(Versions.v2026_09_15_preview)
+model TrustedCertificateSource {
+  /**
+   * Type of resource containing the certificate bundles. Currently only AzureKeyVault is supported.
+   */
+  type: TrustedCertificateSourceType;
+
+  /**
+   * Azure resource ID of the Key Vault containing the referenced secrets. The account identity must have permission to read these secrets.
+   */
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
+
+  /**
+   * References to secrets containing one or more PEM-encoded CA certificates. Each secret name and version pair must be unique within the source, using case-insensitive comparison. The same secret name can be referenced with different versions.
+   */
+  @minItems(1)
+  @maxItems(25)
+  @identifiers(#["secretName", "secretVersion"])
+  certificateBundleReferences: CertificateBundleReference[];
+}
+
+/**
+ * Type of Azure resource containing trusted CA certificate bundles.
+ */
+@added(Versions.v2026_09_15_preview)
+union TrustedCertificateSourceType {
+  string,
+
+  /** Azure Key Vault secrets containing CA certificates or certificate bundles. */
+  AzureKeyVault: "AzureKeyVault",
+}
+
+/**
+ * A reference to a specific version of a Key Vault secret containing a PEM-encoded CA certificate or certificate bundle.
+ */
+@added(Versions.v2026_09_15_preview)
+model CertificateBundleReference {
+  /**
+   * Name of the Key Vault secret containing the CA certificate or certificate bundle.
+   */
+  @minLength(1)
+  @maxLength(127)
+  @pattern("^[0-9a-zA-Z-]{1,127}$")
+  secretName: string;
+
+  /**
+   * Required, pinned version of the Key Vault secret. Newer secret versions are not followed automatically. To rotate a bundle, update this value and resubmit the complete account trust configuration.
+   */
+  @minLength(1)
+  @maxLength(127)
+  @pattern("^[0-9a-zA-Z-]{1,127}$")
+  secretVersion: string;
 }
 
 /**
@@ -4794,6 +4867,158 @@ model ProjectProperties {
   @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   capabilitySettings?: CapabilitySettings;
+
+  /**
+   * The project-level tool access policy. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service accepts explicit null to clear a project tool policy in PUT and PATCH; omission in PATCH preserves the existing policy."
+  @added(Versions.v2026_09_15_preview)
+  toolControls?: ToolControls | null;
+}
+
+/**
+ * Defines the default and per-tool access policy for a Foundry project.
+ */
+@added(Versions.v2026_09_15_preview)
+model ToolControls {
+  /**
+   * The action applied when a tool is not listed explicitly. Only Deny is currently supported.
+   */
+  defaultAction?: ToolControlsDefaultAction;
+
+  /**
+   * The tools explicitly allowed by the policy. Omission or an empty array specifies no explicitly allowed tools.
+   */
+  @identifiers(#[])
+  allowedTools?: ToolControlEntry[];
+}
+
+/**
+ * Identifies a tool by its canonical type and optional MCP server URL or connector.
+ */
+@added(Versions.v2026_09_15_preview)
+model ToolControlEntry {
+  /**
+   * The canonical tool type. For type mcp, exactly one of serverUrl or connectorId must be specified. Other tool types must omit both properties.
+   */
+  type: ToolControlType;
+
+  /**
+   * The absolute HTTPS URL or URL pattern of an MCP server, stored as a string to support wildcards. The entire URL may contain at most one literal '*' across its hostname, path, query, and fragment. Supported patterns include https://*.contoso.com/mcp, https://contoso.com/mcp/*, https://contoso.com/mcp?tenant=*, and https://contoso.com/mcp#*. A hostname wildcard must be the leftmost label. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "The serverUrl name matches the service-side JSON contract."
+  serverUrl?: string;
+
+  /**
+   * The opaque MCP connector catalog identifier, not an Azure resource ID. Applies only to type mcp and cannot be specified together with serverUrl.
+   */
+  connectorId?: string;
+}
+
+/**
+ * Specifies the default action for a tool that is not listed explicitly.
+ */
+@added(Versions.v2026_09_15_preview)
+union ToolControlsDefaultAction {
+  string,
+
+  /** Tools that are not listed explicitly are denied. */
+  Deny: "Deny",
+}
+
+/**
+ * The canonical tool type supported by Foundry agents. Additional tool types may be specified as strings.
+ */
+@added(Versions.v2026_09_15_preview)
+union ToolControlType {
+  string,
+
+  /** Agent-to-agent tool. */
+  a2a: "a2a",
+
+  /** Azure AI Search tool. */
+  azure_ai_search: "azure_ai_search",
+
+  /** Azure Function tool. */
+  azure_function: "azure_function",
+
+  /** Grounding with Bing Search tool. */
+  bing_grounding: "bing_grounding",
+
+  /** Browser automation tool. */
+  browser_automation: "browser_automation",
+
+  /** Capture structured outputs tool. */
+  capture_structured_outputs: "capture_structured_outputs",
+
+  /** OpenAPI tool. */
+  openapi: "openapi",
+
+  /** Function tool. */
+  function: "function",
+
+  /** File search tool. */
+  file_search: "file_search",
+
+  /** Computer use tool. */
+  computer_use_preview: "computer_use_preview",
+
+  /** Web search tool. */
+  web_search: "web_search",
+
+  /** Model Context Protocol (MCP) tool. */
+  mcp: "mcp",
+
+  /** Code interpreter tool. */
+  code_interpreter: "code_interpreter",
+
+  /** Image generation tool. */
+  image_generation: "image_generation",
+
+  /** Local shell tool. */
+  local_shell: "local_shell",
+
+  /** Shell tool. */
+  shell: "shell",
+
+  /** Custom tool. */
+  custom: "custom",
+
+  /** Web search preview tool. */
+  web_search_preview: "web_search_preview",
+
+  /** Apply patch tool. */
+  apply_patch: "apply_patch",
+
+  /** Agent-to-agent preview tool. */
+  a2a_preview: "a2a_preview",
+
+  /** Grounding with Bing Custom Search preview tool. */
+  bing_custom_search_preview: "bing_custom_search_preview",
+
+  /** Browser automation preview tool. */
+  browser_automation_preview: "browser_automation_preview",
+
+  /** Fabric data agent preview tool. */
+  fabric_dataagent_preview: "fabric_dataagent_preview",
+
+  /** SharePoint grounding preview tool. */
+  sharepoint_grounding_preview: "sharepoint_grounding_preview",
+
+  /** Memory search preview tool. */
+  memory_search_preview: "memory_search_preview",
+
+  /** Work IQ preview tool. */
+  work_iq_preview: "work_iq_preview",
+
+  /** Fabric IQ preview tool. */
+  fabric_iq_preview: "fabric_iq_preview",
+
+  /** Toolbox search preview tool. */
+  toolbox_search_preview: "toolbox_search_preview",
+
+  /** Web IQ preview tool. */
+  web_iq_preview: "web_iq_preview",
 }
 
 /**
