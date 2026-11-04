@@ -35,7 +35,7 @@ test("includes generated API versions in the PR body without evaluating metadata
     'sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }},"',
   );
   expect(pipelineTemplate).toContain(
-    'optional_params="$optional_params --api-version ${{ parameters.ApiVersion }}"',
+    'optional_params+=(--api-version "${{ parameters.ApiVersion }}")',
   );
 });
 
