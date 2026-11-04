@@ -43,6 +43,9 @@
       "name": "Operations"
     },
     {
+      "name": "OperationStatuses"
+    },
+    {
       "name": "Agreements"
     },
     {
@@ -328,6 +331,48 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Anyscale.Platform/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatuses_Get",
+        "tags": [
+          "OperationStatuses"
+        ],
+        "description": "Returns the current status of an asynchronous operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationStatuses_Get": {
+            "$ref": "./examples/OperationStatuses_Get.json"
+          }
         }
       }
     },

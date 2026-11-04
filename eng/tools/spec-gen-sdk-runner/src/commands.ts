@@ -32,7 +32,8 @@ import {
   setPipelineVariables,
 } from "./command-helpers.ts";
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
-import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
+import { LogLevel, logMessage, setVsoVariable, vsoAddAttachment, vsoLogIssue } from "./log.ts";
+import { getGeneratedSdkApiVersions } from "./package-info.ts";
 import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
 import { captureSdkReviewMetadata, type SdkReviewPackageChanges } from "./sdk-review-metadata.ts";
 import { resolveSdkRepoBranch } from "./sdk-validation-config.ts";
@@ -221,6 +222,9 @@ async function runAzsdkGeneration(
     buildResponse,
     packageRootPath,
   );
+  if (executionReport.packages[0]) {
+    executionReport.packages[0].packageRootPath = packageRootPath;
+  }
   return { executionReport, statusCode };
 }
 
@@ -319,6 +323,11 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   if (executionReport) {
     setBuildFailedLabelVariable(commandInput, executionReport);
   }
+
+  const apiVersions = executionReport
+    ? await getGeneratedSdkApiVersions(executionReport, commandInput)
+    : "";
+  setVsoVariable("GeneratedSDKApiVersions", apiVersions);
 
   logMessage("ending group logging", LogLevel.EndGroup);
   if (executionReport?.vsoLogPath) {
