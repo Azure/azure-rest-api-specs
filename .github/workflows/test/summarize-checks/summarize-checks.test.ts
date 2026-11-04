@@ -338,7 +338,6 @@ describe("Summarize Checks Integration Tests", () => {
 describe("Summarize Checks Unit Tests", () => {
   describe("check result processing", () => {
     it.each([
-      ["Approved-OkToMerge", "azure-rest-api-specs-pr"],
       ["BreakingChange-Python-Track2-Sdk", "azure-rest-api-specs"],
       ["CI-BreakingChange-Python-Track2", "azure-rest-api-specs"],
     ])("does not block merging or recommend retired label %s", (label, repo) => {

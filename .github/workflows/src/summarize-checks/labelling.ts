@@ -1107,6 +1107,33 @@ const rulesPri2LegacySdk: RequiredLabelRule[] = [
   },
 ];
 
+const rulesPri3Blockers: RequiredLabelRule[] = [
+  {
+    precedence: 3,
+    anyPrerequisiteLabels: ["Approved-OkToMerge"],
+    anyRequiredLabels: [],
+    troubleshootingGuide: renderMarkdownDoc([
+      `This PR has been approved with \`Approved-OkToMerge\` label.`,
+      paragraph(
+        `This label should be used only to approve PRs targeting private specs repo \`main\``,
+        `branch.`,
+      ),
+      paragraph(
+        `PRs targeting this branch cannot be merged, as this branch is a mirror of the public`,
+        `specs repo \`main\` branch.`,
+      ),
+      paragraph(
+        `If you want to publish changes in this PR to the public repo, see:`,
+        `${link("aka.ms/azsdk/move-pr", "https://aka.ms/azsdk/move-pr")}.`,
+      ),
+      paragraph(
+        `If this label was applied erroneously to a different branch than private specs repo`,
+        `\`main\` branch, remove the label.`,
+      ),
+    ]),
+  },
+];
+
 const rulesPri1Namespace: RequiredLabelRule[] = [
   // When package-name-review-required is present, require package-name-approved before merge.
   // See .github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md for details.
@@ -1169,7 +1196,8 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri1Namespace)
   .concat(rulesPri1TypeSpecSuppressions)
   .concat(rulesPri2Sdk)
-  .concat(rulesPri2LegacySdk);
+  .concat(rulesPri2LegacySdk)
+  .concat(rulesPri3Blockers);
 
 export function getPresentBlockingLabelsAndMissingRequiredLabels(
   core: Core,
