@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01",
+    "networkVirtualApplianceName": "nva",
+    "resourceGroupName": "rg1",
+    "ruleCollectionName": "rule1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ruleType": "Permanent",
+          "rules": [
+            {
+              "name": "inboundRule1",
+              "appliesOn": [
+                "slbip1"
+              ],
+              "destinationPortRange": 443,
+              "sourceAddressPrefix": "50.20.121.5/32",
+              "protocol": "TCP",
+              "loadBalancerConfiguration": {
+                "loadDistribution": "SourceIP",
+                "idleTimeoutInMinutes": 15
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "InboundSecurityRule_Get",
+  "title": "Get a Permanent Internet Ingress rule with SourceIP load distribution"
+}

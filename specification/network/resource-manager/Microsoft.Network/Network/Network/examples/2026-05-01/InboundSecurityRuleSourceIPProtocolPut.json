@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01",
+    "networkVirtualApplianceName": "nva",
+    "parameters": {
+      "properties": {
+        "ruleType": "Permanent",
+        "rules": [
+          {
+            "name": "inboundRule1",
+            "appliesOn": [
+              "slbip1"
+            ],
+            "destinationPortRange": 443,
+            "sourceAddressPrefix": "50.20.121.5/32",
+            "protocol": "TCP",
+            "loadBalancerConfiguration": {
+              "loadDistribution": "SourceIPProtocol",
+              "idleTimeoutInMinutes": 15
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "ruleCollectionName": "rule1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ruleType": "Permanent",
+          "rules": [
+            {
+              "name": "inboundRule1",
+              "appliesOn": [
+                "slbip1"
+              ],
+              "destinationPortRange": 443,
+              "sourceAddressPrefix": "50.20.121.5/32",
+              "protocol": "TCP",
+              "loadBalancerConfiguration": {
+                "loadDistribution": "SourceIPProtocol",
+                "idleTimeoutInMinutes": 15
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ruleType": "Permanent",
+          "rules": [
+            {
+              "name": "inboundRule1",
+              "appliesOn": [
+                "slbip1"
+              ],
+              "destinationPortRange": 443,
+              "sourceAddressPrefix": "50.20.121.5/32",
+              "protocol": "TCP",
+              "loadBalancerConfiguration": {
+                "loadDistribution": "SourceIPProtocol",
+                "idleTimeoutInMinutes": 15
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "InboundSecurityRule_CreateOrUpdate",
+  "title": "Create or update a Permanent Internet Ingress rule with SourceIPProtocol load distribution"
+}
