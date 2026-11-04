@@ -45,7 +45,7 @@ union HciJobType {
   /**
    * Job to CVM  intent for the cluster.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   ConfigureCVM: "ConfigureCVM",
 
   /**
@@ -62,7 +62,7 @@ union HciJobType {
   VmConnectRemove: "VmConnectRemove",
 
   /** Job to configure local availability zones for the cluster. */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   ConfigureLocalAvailabilityZone: "ConfigureLocalAvailabilityZone",
 }
 
@@ -689,7 +689,7 @@ union ClusterNodeType {
 /**
  * Failover cluster membership state of a node, as reported by the cluster agent. Mirrors the Windows failover cluster node state.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 union ClusterNodeState {
   string,
 
@@ -778,7 +778,7 @@ union HardwareClass {
 /**
  * Witness type for an Azure Stack HCI cluster.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 union WitnessType {
   string,
 
@@ -2293,7 +2293,7 @@ model ClusterProperties {
   /**
    * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProperties?: ConfidentialVmProperties;
 
@@ -2333,7 +2333,7 @@ model ClusterProperties {
   /**
    * Indicates this cluster uses a managed identity (MSI / passwordless) cloud witness rather than a storage account access key.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   @visibility(Lifecycle.Read)
   useManagedIdentityForWitness?: boolean;
 }
@@ -2719,7 +2719,7 @@ model ClusterReportedProperties {
   /**
    * Number of local availability zones configured in the cluster.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   @visibility(Lifecycle.Read)
   localAvailabilityZoneCount?: int32;
 }
@@ -2822,7 +2822,7 @@ model ClusterNode {
   /**
    * Failover cluster membership state of the node, as most recently reported by the cluster agent. This reflects the last reported state and is not a live health probe. The value is `Unknown` when the cluster agent does not report a state or reports an unrecognized state.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   @visibility(Lifecycle.Read)
   nodeState?: ClusterNodeState;
 }
@@ -3387,13 +3387,13 @@ model DeploymentCluster {
   /**
    * Witness volume LUN ID (e.g. PURE1234567890ABCDEF). Required when witnessType is ClusterWitnessDisk. Minimum LUN size is 1 GB.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   witnessLunId?: string;
 
   /**
    * Indicates the cluster's cloud witness authenticates using each node's managed identity (MSI) instead of a storage account access key. Set by the resource provider from the Validated Solution Recipe; read by the device to configure the witness in identity (passwordless) mode.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   useManagedIdentityForWitness?: boolean;
 }
 
@@ -4149,7 +4149,7 @@ model OptionalServices {
   /**
    * Captures the customer's intent to enable or disable Confidential VM (CVM) support on the AzureStackHCI Cluster.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   confidentialVmIntent?: ConfidentialVmIntent = ConfidentialVmIntent.Disable;
 
   /**
@@ -6761,7 +6761,7 @@ model ReportedProperties {
   /**
    * CVM support details for edge device.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
 }
@@ -6773,7 +6773,7 @@ model ReportedProperties {
 /**
  * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model ConfidentialVmProperties {
   /**
    * Captures the customer's intent to enable or disable CVM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
@@ -6797,7 +6797,7 @@ model ConfidentialVmProperties {
 /**
  * Captures the customer's intent to enable or disable Confidential Virtual Machine (CVM) support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 union ConfidentialVmIntent {
   string,
 
@@ -6815,7 +6815,7 @@ union ConfidentialVmIntent {
 /**
  * Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 union ConfidentialVmStatus {
   string,
 
@@ -6838,7 +6838,7 @@ union ConfidentialVmStatus {
 /**
  * Represents the Confidential Virtual Machine (CVM) configuration status for an edge device. It includes the current IGVM support state and detailed component-level status information.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model ConfidentialVmProfile {
   /**
    * Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports CVMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.
@@ -6856,7 +6856,7 @@ model ConfidentialVmProfile {
 /**
  * Provides component-level status information related to IGVM enablement on the device.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model IgvmStatusDetail {
   /**
    * A machine-readable status code indicating the result or condition of a specific IGVM-related check or operation.
@@ -6874,7 +6874,7 @@ model IgvmStatusDetail {
 /**
  * Represents the IGVM support status for the device.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 union IgvmStatus {
   string,
 
@@ -7001,7 +7001,7 @@ model HciConfigureSdnIntegrationJobProperties extends ClusterJobProperties {
 /**
  * Defines the customer's intent for updating confidential VM properties
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model HciConfigureCvmJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureCVM;
@@ -7735,7 +7735,7 @@ model EdgeMachineReportedProperties {
   /**
    * CVM (Confidential VM) support details for the edge machine.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
 
@@ -8142,7 +8142,7 @@ model StorageProfile {
   /**
    * Local availability zone name assigned to this edge machine after a ConfigureLocalAvailabilityZone job succeeds.
    */
-  @added(Versions.v2027_01_01)
+  @added(Versions.v2027_01_15_preview)
   @visibility(Lifecycle.Read)
   localAvailabilityZoneName?: string;
 }
@@ -11489,14 +11489,14 @@ model EdgeMachineSecurityComplianceStatus {
 ////////////////////////////////////////////////////////////////
 
 /** A single local availability zone entry containing the list of nodes belonging to it. */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model LocalAvailabilityZoneEntry {
   /** List of node names assigned to this local availability zone. All cluster nodes must appear exactly once across all zone entries. */
   nodes: string[];
 }
 
 /** Configuration for local availability zones, including the naming prefix and zone-to-node mappings. */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model LocalAvailabilityZoneConfiguration {
   /** Naming prefix used to generate local availability zone names (Prefix1..PrefixN). */
   @pattern("^[a-zA-Z0-9-]{1,8}$")
@@ -11510,7 +11510,7 @@ model LocalAvailabilityZoneConfiguration {
 }
 
 /** Properties for configuring local availability zones in the cluster. */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model HciConfigureLocalAvailabilityZoneJobProperties
   extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
@@ -12261,7 +12261,7 @@ union NetworkProfileTrafficType {
  * capacity policy plus the latest reported capacity snapshot collated from cluster
  * services and edge machines.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacitySettingProperties {
   /**
    * Placement settings currently applied to capacity calculations. Service-hydrated
@@ -12294,7 +12294,7 @@ model CapacitySettingProperties {
  * hydrated from Deployment Settings; missing values are filled in with service defaults.
  * Day N updates use PATCH on the Capacity Settings singleton.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model AppliedCapacityPolicy {
   /**
    * Cluster-wide CPU overcommit ratio used to calculate effective vCPU capacity. Default: 1.0.
@@ -12319,7 +12319,7 @@ model AppliedCapacityPolicy {
  * Aggregate, placement-oriented capacity snapshot reported by the cluster. All
  * properties are read-only and reflect the latest service-collated view.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model ReportedCapacitySnapshot {
   /**
    * Last time the aggregate snapshot was updated.
@@ -12387,7 +12387,7 @@ model ReportedCapacitySnapshot {
  * Cluster-wide storage capacity aggregate derived from eligible user volumes
  * projected by the Cluster Volume resource.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacityStorageSnapshot {
   /**
    * Sum of reportedProperties.sizeInBytes across user volumes.
@@ -12417,7 +12417,7 @@ model CapacityStorageSnapshot {
 /**
  * Capacity details for a volume reported by the cluster.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacityVolumeSnapshot {
   /**
    * Unique identifier of the volume.
@@ -12455,7 +12455,7 @@ model CapacityVolumeSnapshot {
  * not a single-workload fit signal. Final placement must evaluate machines[] with
  * workload-specific constraints.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacityCpuSnapshot {
   /**
    * Physical CPU core count (P-core count) aggregated across cluster machines.
@@ -12526,7 +12526,7 @@ model CapacityCpuSnapshot {
  * Cluster-wide memory capacity summary. Useful for reporting and coarse filtering;
  * not a single-workload fit guarantee.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacityMemorySnapshot {
   /**
    * Total memory across cluster machines, in bytes.
@@ -12565,7 +12565,7 @@ model CapacityMemorySnapshot {
  * Cluster-wide GPU capacity summary. Per-GPU details remain available through the
  * EdgeMachineGpu resource tree.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacityGpuSnapshot {
   /**
    * Total GPU resources discovered across edge machines.
@@ -12620,7 +12620,7 @@ model CapacityGpuSnapshot {
 /**
  * GPU capacity for devices grouped by type, mode, and partition size.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacityGpuGroup {
   /**
    * GPU type represented by the group.
@@ -12683,7 +12683,7 @@ model CapacityGpuGroup {
  * networks and the static IP address pools VMs can attach to. Infrastructure logical
  * networks are excluded.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacityNetworkingSnapshot {
   /**
    * Count of workload logical networks known to the cluster. Infrastructure logical
@@ -12744,7 +12744,7 @@ model CapacityNetworkingSnapshot {
  * the CPU, memory, and GPU facts upper-layer placement systems need for fit-aware
  * decisions.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacityMachineSnapshot {
   /**
    * Cluster node name as reported by Arc (properties.displayName).
@@ -12807,7 +12807,7 @@ model CapacityMachineSnapshot {
 /**
  * Cluster-perspective state of a machine for capacity and placement.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 union CapacityMachineState {
   string,
 
@@ -12833,7 +12833,7 @@ union CapacityMachineState {
 /**
  * Connectivity status reported by Arc for a cluster machine.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 union CapacityMachineConnectivityStatus {
   string,
 
@@ -12855,7 +12855,7 @@ union CapacityMachineConnectivityStatus {
  * remains a cluster-level policy and is not exposed per machine; effective vCPU
  * values here already reflect that policy.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model MachineCpuCapacity {
   /**
    * Physical CPU core count on the machine.
@@ -12920,7 +12920,7 @@ model MachineCpuCapacity {
 /**
  * Node-local memory capacity values used for fit-aware placement.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model MachineMemoryCapacity {
   /**
    * Total memory on the machine, in bytes.
@@ -12958,7 +12958,7 @@ model MachineMemoryCapacity {
  * Node-local GPU capacity values used for placement. Per-GPU details remain available
  * through the EdgeMachineGpu resource tree under each machine.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model MachineGpuCapacity {
   /**
    * Total GPUs on this machine.
@@ -13006,7 +13006,7 @@ model MachineGpuCapacity {
  * VM-shaped and does not distinguish between standalone Hyper-V VMs, Azure-created VMs,
  * or VMs that back AKS nodes.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacityWorkloadConsumption {
   /**
    * Stable device-reported workload identifier, such as the Hyper-V VM ID when available.
@@ -13063,7 +13063,7 @@ model CapacityWorkloadConsumption {
  * Patch shape for Day N edits to Capacity Settings. Only appliedPolicy fields are
  * updatable; reportedCapacity, provisioningState, and lastUpdated remain service-owned.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacitySettingPatch {
   /**
    * The patchable properties of the Capacity Settings resource.
@@ -13074,7 +13074,7 @@ model CapacitySettingPatch {
 /**
  * Patchable properties of the Capacity Settings resource for Day N edits.
  */
-@added(Versions.v2027_01_01)
+@added(Versions.v2027_01_15_preview)
 model CapacitySettingPatchProperties {
   /**
    * Updated placement policy to apply to capacity calculations.
