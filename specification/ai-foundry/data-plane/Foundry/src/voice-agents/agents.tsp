@@ -1253,7 +1253,7 @@ union VoiceAgentInputTranscriptionModel {
   @doc("Azure AI Speech to text.")
   azure_speech: "azure-speech",
 
-  @doc("Azure AI Speech streaming transcription. Requires `language`, such as `en-US`; comma-separated locales are supported. On realtime models, requires Azure semantic VAD and cannot be changed during a session.")
+  @doc("Azure AI Speech streaming transcription. Requires `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech`, `phrase_list`, and `profanity_filter`. On realtime models, requires Azure semantic VAD and cannot be changed during a session.")
   azure_speech_streaming: "azure-speech-streaming",
 
   @doc("MAI Transcribe 2 streaming transcription. `language` accepts one locale. On realtime models, cannot be changed during a session.")
