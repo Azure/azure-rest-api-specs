@@ -17,6 +17,8 @@ namespace Microsoft.NetApp;
  * External Cluster resource, representing a cluster on an external NetApp ONTAP system
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @resource("externalClusters")
 model ExternalCluster
   is Azure.ResourceManager.TrackedResource<ExternalClusterProperties> {
@@ -33,6 +35,8 @@ model ExternalCluster
  * External Cluster properties
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalClusterProperties {
   /**
    * Azure lifecycle management
@@ -55,6 +59,8 @@ model ExternalClusterProperties {
  * External Cluster properties for PATCH operations
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalClusterPatchProperties {
   /**
    * Intercluster LIFs, external cluster IPs for cluster peer connection
@@ -71,6 +77,8 @@ model ExternalClusterPatchProperties {
  * Key Vault authentication properties for PATCH operations
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model KeyVaultClusterPeerPassphrasePatchProperties {
   /**
    * The Azure Key Vault URI where the passphrase for cluster peering handshake is stored
@@ -99,6 +107,8 @@ model KeyVaultClusterPeerPassphrasePatchProperties {
  * Key Vault authentication properties
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model KeyVaultClusterPeerPassphraseProperties {
   /**
    * The Azure Key Vault URI where the passphrase for cluster peering handshake is stored
@@ -126,9 +136,13 @@ model KeyVaultClusterPeerPassphraseProperties {
  * List of External Cluster resources
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalClusterList is Azure.Core.Page<ExternalCluster>;
 
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface ExternalClusters {
   /**

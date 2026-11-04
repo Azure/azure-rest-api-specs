@@ -92,7 +92,10 @@ model VolumeProperties {
   @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
   @added(Versions.v2026_08_01)
   @removed(Versions.v2026_08_15_preview)
+  @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_09_15_preview)
   @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
+  @renamedFrom(Versions.v2026_09_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -117,6 +120,8 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -282,6 +287,8 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   smbOplocks?: SmbOplocks;
 
   /**
@@ -330,6 +337,8 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -398,6 +407,8 @@ model VolumeProperties {
    * Async Directory Delete configuration for the volume.
    */
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   asyncDirectoryDelete?: AsyncDirectoryDelete;
 
   /**
@@ -496,6 +507,8 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -531,6 +544,8 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   language?: VolumeLanguage;
 
   /**
@@ -570,6 +585,8 @@ model VolumeProperties {
    * Geographic namespace properties for this volume.
    */
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   geoNamespaceProperties?: VolumeNamespaceProperties;
 }
 
@@ -577,6 +594,8 @@ model VolumeProperties {
  * Indicates whether a volume is designated as an origin for cache volumes.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union OriginVolume {
   string,
 
@@ -595,6 +614,8 @@ union OriginVolume {
  * Geographic namespace properties for a volume.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model VolumeNamespaceProperties {
   /**
    * Indicates whether this volume is designated as an origin for cache volumes.
@@ -606,6 +627,8 @@ model VolumeNamespaceProperties {
  * Geographic namespace properties for a volume patch operation.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model VolumePatchNamespaceProperties {
   /**
    * Indicates whether this volume is designated as an origin for cache volumes.
@@ -1443,7 +1466,10 @@ model VolumePatchProperties {
   @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
   @added(Versions.v2026_08_01)
   @removed(Versions.v2026_08_15_preview)
+  @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_09_15_preview)
   @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
+  @renamedFrom(Versions.v2026_09_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1468,6 +1494,8 @@ model VolumePatchProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -1502,6 +1530,8 @@ model VolumePatchProperties {
    * Async Directory Delete configuration for the volume.
    */
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   asyncDirectoryDelete?: AsyncDirectoryDelete;
 
   /**
@@ -1567,12 +1597,16 @@ model VolumePatchProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   smbOplocks?: SmbOplocks;
 
   /**
    * Geographic namespace properties for this volume.
    */
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   geoNamespaceProperties?: VolumePatchNamespaceProperties;
 }
 
@@ -2208,6 +2242,8 @@ union SmbNonBrowsable {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_08_01)
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union SmbOplocks {
   string,
 
@@ -2323,6 +2359,8 @@ union EnableSubvolumes {
  * Whether Async Directory Delete is enabled for the volume.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union AsyncDirectoryDeleteStatus {
   string,
 
@@ -2341,6 +2379,8 @@ union AsyncDirectoryDeleteStatus {
  * Async Directory Delete configuration for the volume.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model AsyncDirectoryDelete {
   /**
    * Specifies whether Async Directory Delete is enabled for the volume.

@@ -8,6 +8,8 @@ namespace Microsoft.NetApp;
  * SVM peer relationship type enum
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union SvmPeerType {
   string,
 
@@ -26,6 +28,8 @@ union SvmPeerType {
  * Cluster Peer status enum
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union ClusterPeerStatus {
   string,
 
@@ -49,6 +53,8 @@ union ClusterPeerStatus {
  * SVM Peer status enum
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union SvmPeerStatus {
   string,
 
@@ -72,6 +78,8 @@ union SvmPeerStatus {
  * Provides a machine-readable value for the status of the external connection setup.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union ExternalConnectionSetupState {
   string,
 
@@ -95,6 +103,8 @@ union ExternalConnectionSetupState {
  * Setup Information for External Connection Setups
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model SetupInformation {
   /**
    * Setup status indicating the current step in the setup process
@@ -119,6 +129,8 @@ model SetupInformation {
  * Represents the status of an external cache connection
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union ExternalCacheConnectionStatus {
   string,
 
@@ -152,6 +164,8 @@ union ExternalCacheConnectionStatus {
  * State of a remote cache volume on an external ONTAP system
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union ExternalCacheState {
   string,
 
