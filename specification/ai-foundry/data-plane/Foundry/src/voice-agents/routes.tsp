@@ -572,7 +572,7 @@ interface AgentEndpointLiveConversations {
     NoContentResponse
   >;
 
-  /** Lists stored speech and delegation items in order; cursors use item IDs. Returns 404 if the conversation is absent or unstored. */
+  /** Lists stored speech and delegation items in order; cursors use item IDs. Returns 404 if the conversation is absent or not stored. */
   @summary("List items in a Live voice agent conversation")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items")
@@ -612,7 +612,7 @@ interface AgentEndpointLiveConversations {
     VoiceAgentLiveConversationItem
   >;
 
-  /** Gets captured speech-audio metadata. BYOS uses unsigned blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items. */
+  /** Gets captured speech-audio metadata. BYOS uses unsigned blob_uri. Returns 404 for missing audio, conversations not stored, or delegation items. */
   @summary("Get a Live conversation item's audio metadata")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio")
@@ -632,7 +632,7 @@ interface AgentEndpointLiveConversations {
     VoiceAudioItem
   >;
 
-  /** Streams captured speech as WAV. BYOS returns 409; use blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items. */
+  /** Streams captured speech as WAV. BYOS returns 409; use blob_uri. Returns 404 for missing audio, conversations not stored, or delegation items. */
   @summary("Stream a Live conversation item's audio")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio/content")

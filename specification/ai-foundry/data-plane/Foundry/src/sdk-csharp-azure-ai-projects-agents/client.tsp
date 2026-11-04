@@ -31,7 +31,7 @@ namespace Azure.AI.Projects {
   @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!csharp");
   @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
-  @@clientName(OpenAI.delegation, "LiveDelegation", "csharp");
+  @@clientName(OpenAI.Delegation, "LiveDelegation", "csharp");
 
   // --------------------------------------------------------------------------------
   // Fix the xref.

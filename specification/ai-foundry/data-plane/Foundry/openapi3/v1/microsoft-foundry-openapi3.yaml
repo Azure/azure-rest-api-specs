@@ -3902,7 +3902,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_listLiveAgentConversationItems
       summary: List items in a Live voice agent conversation
-      description: Lists stored speech and delegation items in order; cursors use item IDs. Returns 404 if the conversation is absent or unstored.
+      description: Lists stored speech and delegation items in order; cursors use item IDs. Returns 404 if the conversation is absent or not stored.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4081,7 +4081,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_getLiveAgentConversationAudioItem
       summary: Get a Live conversation item's audio metadata
-      description: Gets captured speech-audio metadata. BYOS uses unsigned blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items.
+      description: Gets captured speech-audio metadata. BYOS uses unsigned blob_uri. Returns 404 for missing audio, conversations not stored, or delegation items.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4144,7 +4144,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_getLiveAgentConversationAudioItemContent
       summary: Stream a Live conversation item's audio
-      description: Streams captured speech as WAV. BYOS returns 409; use blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items.
+      description: Streams captured speech as WAV. BYOS returns 409; use blob_uri. Returns 404 for missing audio, conversations not stored, or delegation items.
       parameters:
         - name: Foundry-Features
           in: header

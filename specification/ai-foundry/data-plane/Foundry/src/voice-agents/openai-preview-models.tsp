@@ -913,7 +913,7 @@ using Azure.AI.Projects;
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );
-@@extension(OpenAI.delegation, "x-ms-foundry-meta", VoiceAgentRequiredPreview);
+@@extension(OpenAI.Delegation, "x-ms-foundry-meta", VoiceAgentRequiredPreview);
 @@extension(
   OpenAI.LiveDecisionQuestionsInputParam,
   "x-ms-foundry-meta",
