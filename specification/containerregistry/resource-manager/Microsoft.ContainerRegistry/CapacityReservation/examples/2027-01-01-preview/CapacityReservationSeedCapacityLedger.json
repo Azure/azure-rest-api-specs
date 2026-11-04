@@ -1,0 +1,40 @@
+{
+  "title": "CapacityReservationSeedCapacityLedger",
+  "operationId": "CapacityReservationStampOperations_SeedCapacityLedger",
+  "parameters": {
+    "api-version": "2027-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "australiaeast",
+    "request": {
+      "stampId": "dfaue-1",
+      "registryStandingNodeCount": 1,
+      "registryMaxNodeCount": 20,
+      "dataProxyStandingNodeCount": 1,
+      "dataProxyMaxNodeCount": 20
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "stampId": "dfaue-1",
+        "region": "australiaeast",
+        "registryPool": {
+          "standingNodeCount": 1,
+          "maxNodeCount": 20
+        },
+        "dataProxyPool": {
+          "standingNodeCount": 1,
+          "maxNodeCount": 20
+        },
+        "totalReservedRequestRate": 0,
+        "totalReservedEgressGbps": 0,
+        "totalReservedIngressGbps": 0,
+        "maxRequestRate": 20,
+        "maxEgressGbps": 20,
+        "maxIngressGbps": 20,
+        "scaling": false,
+        "pendingClaimCount": 0
+      }
+    }
+  }
+}
