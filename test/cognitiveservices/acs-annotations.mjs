@@ -5,8 +5,15 @@ import path from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 
-const project = fileURLToPath(new URL("../", import.meta.url));
-const root = path.resolve(project, "../../../../..");
+const root = fileURLToPath(new URL("../../", import.meta.url));
+const project = path.join(
+  root,
+  "specification",
+  "cognitiveservices",
+  "resource-manager",
+  "Microsoft.CognitiveServices",
+  "CognitiveServices",
+);
 const relativeProject = path.relative(root, project).replaceAll("\\", "/");
 const version = "2026-11-15-preview";
 const baseline = process.env.ACS_ANNOTATIONS_BASE_REF;
@@ -297,7 +304,11 @@ test(
       ...names.map((name) => `examples/${version}/${name}`),
       ...names.map((name) => `preview/${version}/examples/${name}`),
     ]
-      .map((name) => `${relativeProject}/${name}`)
+      .map((name) =>
+        name === "test/acs-annotations.test.mjs"
+          ? "test/cognitiveservices/acs-annotations.mjs"
+          : `${relativeProject}/${name}`,
+      )
       .sort();
     const changed = git("diff", "--name-only", baseline)
       .trim()

@@ -1930,8 +1930,8 @@ labels and a 0-to-1 score. The selector remains optional host-defined configurat
 not a required public property. Judge observations are inputs to Rego; Rego decides
 the action.
 
-After TypeSpec generation, run `node --test test/acs-annotations.test.mjs` from this
-project. Set `ACS_ANNOTATIONS_BASE_REF` to the November integration branch's baseline
+After TypeSpec generation, run `node --test test\cognitiveservices\acs-annotations.mjs` from the
+repository root. Set `ACS_ANNOTATIONS_BASE_REF` to the November integration branch's baseline
 commit to include the historical-version and exact-scope regression checks.
 
 ## Swagger to SDK
