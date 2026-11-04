@@ -20,6 +20,10 @@ To see additional help and options, run:
 
 > `autorest --help`
 
+### Contract regression checks
+
+After compiling the TypeSpec project, run `node --test test\custom-keys-contract.test.mjs` from this directory. Set `CUSTOM_KEYS_BASE_REF` to an earlier commit containing the target API version to also verify historical contracts and unrelated operations. `CUSTOM_KEYS_API_VERSION` selects the version under test and defaults to `2026-11-01`.
+
 ---
 
 ## Configuration
