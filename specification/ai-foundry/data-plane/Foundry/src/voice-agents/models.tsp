@@ -418,7 +418,7 @@ model VoiceRecording {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
-@doc("Exact E.164 number or anchored caller pattern (`^\\+...$`). Patterns start with a nonzero ASCII digit or [1-9], followed by ASCII digits, single-digit classes/ranges and {n}/{n,m} repeats (1-15). Matches contain 2-15 digits. Values must be trimmed, at most 256 characters; reversed ranges/bounds and other regex syntax are rejected, not rewritten.")
+@doc("Trimmed E.164 caller number or restricted `^\\+...$` pattern. Start with a nonzero digit/[1-9], then ASCII digits, single-digit classes/ranges and repeats (1-15); matches have 2-15 digits. Other syntax and reversed ranges/bounds are rejected.")
 @maxLength(256)
 @pattern("^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -473,7 +473,7 @@ model TelephonyTransferTarget {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
 model UpdateTelephonyBindingRequest {
-  @doc("The replacement display label. Omit to preserve it; null, empty or whitespace-only clears it. Nonblank values are trimmed before applying the length limit.")
+  @doc("Replacement label: omit to preserve, null/blank to clear. Trimmed before length validation.")
   @maxLength(128)
   label?: string | null;
 
@@ -1340,13 +1340,13 @@ model PhoneNumber extends TelephonyAddress {
   value: string;
 }
 
-@doc("Teams address: sources require a nonempty resource-account GUID; transfers also accept user GUIDs/28:orgid:{guid}. Outbound recipients are unsupported; provider/role checks apply.")
+@doc("Teams source/transfer identity, validated by role and provider. Not supported for outbound recipients.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsAddress extends TelephonyAddress {
   @doc("The Microsoft Teams address type.")
   type: TelephonyAddressType.teams;
 
-  @doc("The Microsoft Teams identifier. A source must be a nonempty resource-account GUID; a transfer destination may also use 28:orgid:{guid}. The service validates the format for the selected role.")
+  @doc("Source: nonempty resource-account GUID. Transfer: user/resource-account GUID or 28:orgid:{guid}.")
   @minLength(1)
   @maxLength(256)
   value: string;
@@ -1379,12 +1379,12 @@ model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyAddress;
 
-  @doc("Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection. No inbound binding is required. SIP requires CustomKeys authentication and a valid DNS target, revalidated before dialing; saving does not prove connectivity.")
+  @doc("Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
 
-  @doc("Caller address: phone_number for Twilio/SipOutbound, or teams with a nonempty resource-account GUID for ACS/Teams Phone extensibility. Transfer-only formats and sip sources are rejected.")
+  @doc("Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI.")
   source: TelephonyAddress;
 
   @doc("An optional customer-declared purpose for placing the call.")
@@ -1562,7 +1562,7 @@ model TelephonyCallJob {
   // Preserve the existing SDK response order when appending Campaign fields.
   ...PickProperties<TelephonyCallJobConfiguration, "source">;
 
-  @doc("Owning Campaign under this Agent; absent for direct calls. Campaign deletion hides then removes its jobs. Ownership is instance-bound, so name reuse cannot attach old jobs.")
+  @doc("Owning Campaign, absent for direct calls. Instance-bound despite name reuse; Campaign deletion hides then removes its jobs.")
   @visibility(Lifecycle.Read)
   campaign_name?: TelephonyCampaignName;
 }

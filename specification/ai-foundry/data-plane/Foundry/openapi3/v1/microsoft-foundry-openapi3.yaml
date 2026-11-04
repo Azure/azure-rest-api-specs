@@ -5208,7 +5208,7 @@ paths:
     post:
       operationId: AgentTelephony_createTelephonyCallJob
       summary: Create an outbound telephony call job
-      description: Creates one durable direct outbound call job. Each attempt resolves the owning Agent's endpoint execution version before validation and uses that concrete version for its voice session.
+      description: Creates one durable outbound CallJob. Each attempt pins the Agent endpoint's execution version for validation and its voice session.
       parameters:
         - name: Foundry-Features
           in: header
@@ -5227,7 +5227,7 @@ paths:
         - name: Idempotency-Key
           in: header
           required: true
-          description: A customer-generated idempotency key. Reusing it with an equivalent request returns the same call job.
+          description: Customer retry key. Equivalent requests return the same job; retained keys for deleted jobs return 409 call_job_deleted, never redial.
           schema:
             type: string
             minLength: 1
@@ -5289,7 +5289,7 @@ paths:
     get:
       operationId: AgentTelephony_listTelephonyCallJobs
       summary: List outbound telephony call jobs
-      description: Lists the Agent's current direct/Campaign jobs, excluding deleted and superseded rounds. Pages are live. Campaign cursors survive boundary-job deletion/cancel, not replacement/name reuse (400 invalid_cursor); restart on invalid/expired boundaries. Deleting Campaigns return an empty page.
+      description: Lists current direct/Campaign jobs, excluding deleted or superseded rounds. Pages are live. Campaign cursors survive boundary deletion/cancel, not replacement/name reuse (400 invalid_cursor).
       parameters:
         - name: Foundry-Features
           in: header
@@ -5355,7 +5355,7 @@ paths:
         - name: campaign_name
           in: query
           required: false
-          description: 'Current Campaign instance/round filter: 404 if absent, empty while deleting. Replacement/name reuse invalidates cursors (400 invalid_cursor). Omit to include direct and current-round Campaign jobs.'
+          description: 'Current Campaign round: 404 if absent, empty while deleting. Omit for direct and Campaign jobs. Replacement/name reuse invalidates cursors.'
           schema:
             $ref: '#/components/schemas/TelephonyCampaignName'
           explode: false
@@ -5413,7 +5413,7 @@ paths:
     delete:
       operationId: AgentTelephony_deleteTelephonyCallJob
       summary: Delete an outbound telephony call job
-      description: Deletes a terminal, reconciled CallJob (otherwise 409), without cancelling calls or removing Campaign outcomes, conversations, recordings or replay guards. Later GET returns 404; repeat DELETE returns 204. Retained creation keys return 409 call_job_deleted, never redial.
+      description: Deletes a terminal, reconciled job (otherwise 409), without cancelling calls or removing Campaign outcomes/call history. Later GET returns 404; repeated DELETE returns 204.
       parameters:
         - name: Foundry-Features
           in: header
@@ -5619,7 +5619,7 @@ paths:
     get:
       operationId: TelephonyCampaigns_list
       summary: List telephony campaigns
-      description: Lists Agent-owned Campaigns without inline recipients. Opaque cursors retain their original sort/instance boundary across deletion/name reuse. Filters are live, not snapshots.
+      description: Lists the Agent's Campaigns without inline recipients. Filters are live views, not snapshots.
       parameters:
         - name: Foundry-Features
           in: header
@@ -5658,14 +5658,14 @@ paths:
         - name: after
           in: query
           required: false
-          description: Opaque last_id bound to scope, filters and sort boundary; error cursors also bind instance/round/snapshot and survive cancellation. Exclusive with before; invalid or mismatched tokens return 400 invalid_cursor.
+          description: Opaque last_id bound to scope/filters/order; error cursors also bind instance/round/snapshot and survive cancel, not replacement. Exclusive with before; invalid tokens return 400 invalid_cursor.
           schema:
             type: string
           explode: false
         - name: before
           in: query
           required: false
-          description: Opaque first_id for backward traversal with unchanged scope/filters/order. Cannot be combined with after. Does not resolve the current resource by name.
+          description: Opaque first_id for backward paging with unchanged scope/filters/order; exclusive with after.
           schema:
             type: string
           explode: false
@@ -5712,10 +5712,10 @@ paths:
                     description: A value indicating whether there are additional values available not captured in this list.
                   first_id:
                     type: string
-                    description: Opaque boundary cursor for the first returned item; absent for an empty page. Not a Campaign name or recipient ID.
+                    description: Opaque cursor for the first returned item; absent when empty.
                   last_id:
                     type: string
-                    description: Opaque boundary cursor for the last returned item; absent for an empty page. Captures its original immutable sort key, so deleting/reusing the resource name cannot move the boundary.
+                    description: Opaque cursor for the last returned item; absent when empty. Deletion/name reuse does not move its original sort boundary.
                 description: Shared Foundry page shape with opaque boundary tokens bound to the original sort position.
                 x-ms-foundry-meta:
                   required_previews:
@@ -5741,20 +5741,7 @@ paths:
     put:
       operationId: TelephonyCampaigns_create
       summary: Create or replace a failed telephony campaign
-      description: |-
-        Creates (201) or fully replaces quiescent failed preparation (200), authorizing execution after validation; no PATCH.
-        Replacement can change connection/source, recipients or Dataset, schedule and retries, not Agent/name or server fields.
-        It requires exact If-Match and a fresh Operation-Id: missing ID returns 400, stale token 412, other states 409.
-        If-Match on an absent Campaign returns 412. Omitted optional fields reset to defaults.
-        Acceptance returns validating and a preparation monitor. A new round resets pins, progress and diagnostics,
-        fences old jobs and invalidates their diagnostic cursors; previous monitors remain. Agent/Dataset versions pin before
-        validation. All recipients and CallJobs must be ready before dispatch; failed rounds never dial. Immediate calls may
-        begin before the poller returns.
-        After shape/authorization checks, the same ID, submitted inputs and original If-Match replay the original monitor
-        before current-state checks, without changing pins; conflicting reuse returns 409 operation_id_conflict.
-        Without If-Match, equivalent input returns the current resource/original monitor; changed input conflicts.
-        With If-Match, a fresh ID is required even for unchanged inputs. Replay compares submitted values, not resolved
-        versions/defaults. Retained creation keys return 409 campaign_deleted after deletion; new intent needs a fresh key.
+      description: Creates a Campaign or fully replaces failed preparation; no PATCH. All recipients must validate and have CallJobs before dialing. Immediate calls may begin before the preparation poller returns.
       parameters:
         - name: Foundry-Features
           in: header
@@ -5779,13 +5766,13 @@ paths:
         - name: Operation-Id
           in: header
           required: false
-          description: Retry identifier; required and fresh for intentional failed-state replacement. Preserve with original inputs and If-Match for transport retries.
+          description: 'Retry key: matching submitted inputs and original If-Match replay the saved monitor before current-state checks. Conflicting reuse returns 409 operation_id_conflict; retained creation keys after deletion return 409 campaign_deleted.'
           schema:
             $ref: '#/components/schemas/TelephonyCampaignOperationId'
         - name: If-Match
           in: header
           required: false
-          description: Required for failed-state replacement; omit on initial creation. Exact current control token; wildcards are rejected. Retry with the original token and Operation-Id.
+          description: 'Required with a fresh Operation-Id for failed-state replacement; no wildcards. Changed input without it returns 409. Missing replacement ID: 400; stale token/absent resource: 412; other states: 409.'
           schema:
             $ref: '#/components/schemas/Azure.Core.eTag'
         - name: api-version
@@ -5814,13 +5801,13 @@ paths:
                 format: uri
             Operation-Location:
               required: true
-              description: Absolute URI including api-version of the current validation round monitor, returned while the recipient scan proceeds asynchronously. Campaign state tracks subsequent execution.
+              description: Preparation monitor URI, including api-version. Completion does not mean all calls have finished.
               schema:
                 type: string
                 format: uri
             Operation-Id:
               required: true
-              description: ID of this PUT's validation monitor; preserved on retries. May differ from the latest operation_id in the Campaign body after a later action.
+              description: This request's preparation ID, unchanged on retries; may differ from Campaign.operation_id.
               schema:
                 $ref: '#/components/schemas/TelephonyCampaignOperationId'
             Retry-After:
@@ -5851,13 +5838,13 @@ paths:
                 format: uri
             Operation-Location:
               required: true
-              description: Absolute URI including api-version of the current validation round monitor, returned while the recipient scan proceeds asynchronously. Campaign state tracks subsequent execution.
+              description: Preparation monitor URI, including api-version. Completion does not mean all calls have finished.
               schema:
                 type: string
                 format: uri
             Operation-Id:
               required: true
-              description: ID of this PUT's validation monitor; preserved on retries. May differ from the latest operation_id in the Campaign body after a later action.
+              description: This request's preparation ID, unchanged on retries; may differ from Campaign.operation_id.
               schema:
                 $ref: '#/components/schemas/TelephonyCampaignOperationId'
             Retry-After:
@@ -5890,7 +5877,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/TelephonyCampaignCreate'
-        description: Complete Campaign configuration for creation or failed-state replacement.
+        description: Complete connection, source, recipients/Dataset, schedule and retry configuration. Omitted optional fields reset to defaults; Agent/name and response-only fields cannot change.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -5906,7 +5893,7 @@ paths:
     get:
       operationId: TelephonyCampaigns_get
       summary: Get a telephony campaign
-      description: 'Gets the Campaign without inline recipients. Optional operation_id guards the original instance/round: same-round cancel is allowed; replacement/name reuse returns 409 campaign_operation_mismatch. Missing/expired/wrong-scope operations or absent Campaigns return 404.'
+      description: Gets Campaign configuration and execution state without inline recipients. Absent or deleted Campaigns return 404.
       parameters:
         - name: Foundry-Features
           in: header
@@ -5931,7 +5918,7 @@ paths:
         - name: operation_id
           in: query
           required: false
-          description: Original response's Operation-Id for guarded final GET, not the current Campaign pointer. Survives same-round actions; replacement/name reuse returns 409 campaign_operation_mismatch.
+          description: "Original response's Operation-Id guards its instance/round and survives same-round actions. Replacement/name reuse: 409 campaign_operation_mismatch; missing/expired/wrong-scope operation: 404."
           schema:
             $ref: '#/components/schemas/TelephonyCampaignOperationId'
           explode: false
@@ -5977,15 +5964,7 @@ paths:
     delete:
       operationId: TelephonyCampaigns_delete
       summary: Delete a telephony campaign
-      description: |-
-        Deletes a terminal, quiescent Campaign asynchronously; cancel must finish first, otherwise 409.
-        Acceptance sets deleting, hides owned jobs/results and reserves the name. Cleanup removes all rounds' recipient/task
-        data and pending dispatch work, not the Dataset, connections, Agent or independent CallJobs. Call records, conversations
-        and media retain their own policies. Returns bodyless 202 with a monitor; completion has no resource result (GET 404, list omission).
-        The same Operation-Id/original If-Match replays 202 before stale-token checks, even after deletion/name reuse, never
-        touching a later instance. Conflicting IDs return 409; without replay, absent names return 204 and stale tokens 412.
-        Current-token repeats reuse the monitor; fresh IDs alias it. Failure leaves deleting/error; resume cleanup with current
-        If-Match and a fresh ID. Success frees the name, retaining replay/duplicate-dialing safeguards, not a public tombstone.
+      description: Deletes a terminal Campaign and its recipient/task data asynchronously. Returns bodyless 202 with a monitor, not a tombstone; completion makes GET return 404 and lists omit it. Dataset, connections, Agent, independent jobs and call history are preserved.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6010,13 +5989,13 @@ paths:
         - name: If-Match
           in: header
           required: true
-          description: Exact control token for the instance being deleted. Wildcards are rejected; absent resources still return 204.
+          description: Exact current token; no wildcards. Without replay, absent Campaigns return 204 and stale tokens 412. Active calls/workers or unfinished cancellation return 409.
           schema:
             $ref: '#/components/schemas/Azure.Core.eTag'
         - name: Operation-Id
           in: header
           required: false
-          description: Optional retry identifier, distinct from creation and previous failed deletion operations. Reuse with the identical original If-Match for transport retries; a changed precondition conflicts.
+          description: Optional retry key. Original If-Match/key replays 202 even after deletion/name reuse, never touching a new instance; conflicts return 409. Failed cleanup needs a fresh key/current token.
           schema:
             $ref: '#/components/schemas/TelephonyCampaignOperationId'
         - name: api-version
@@ -6080,7 +6059,7 @@ paths:
     get:
       operationId: TelephonyCampaigns_getOperation
       summary: Get a campaign operation
-      description: Polls a fixed operation despite later actions, replacement or deletion. Retained for the Campaign lifetime and at least 24 hours after both completion and deletion. Pending replies include Retry-After; PUT/cancel end with guarded Campaign GETs, delete without a resource result.
+      description: Gets the initiating operation's status. PUT/cancel pollers finish with a guarded Campaign GET; deletion completes without a resource result.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6105,7 +6084,7 @@ paths:
         - name: operation_id
           in: path
           required: true
-          description: Stable validation-, cancellation- or deletion-operation ID returned in Operation-Id. Authorization is checked against its saved project and Agent scope even after resource deletion.
+          description: Operation-Id from the initiating response. Saved project/Agent authorization still applies after resource deletion.
           schema:
             $ref: '#/components/schemas/TelephonyCampaignOperationId'
         - name: api-version
@@ -6184,11 +6163,7 @@ paths:
     get:
       operationId: TelephonyCampaigns_listValidationErrors
       summary: List campaign validation errors
-      description: |-
-        Pages invalid-row diagnostics for the current round/pinned Agent; partial while validating, so empty does not mean success.
-        Cursors bind instance/round/row and survive retries/cancel; replacement/name reuse invalidates them (400 invalid_cursor).
-        Diagnostics persist until replacement or deletion. Deleting returns 409 campaign_deleting; deleted returns 404.
-        Execution failures are in CallJobs; non-row preparation failures are in Campaign.error. The monitor has only a summary.
+      description: Lists current-round row validation errors. Results may be partial during preparation; an empty page does not establish success. Execution errors are in CallJobs; non-row failures are in Campaign.error.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6207,7 +6182,7 @@ paths:
         - name: campaign_name
           in: path
           required: true
-          description: Immutable Campaign name.
+          description: Campaign name. Deleting returns 409 campaign_deleting; absent/deleted returns 404.
           schema:
             $ref: '#/components/schemas/TelephonyCampaignName'
         - name: limit
@@ -6224,14 +6199,14 @@ paths:
         - name: after
           in: query
           required: false
-          description: Opaque last_id bound to scope, filters and sort boundary; error cursors also bind instance/round/snapshot and survive cancellation. Exclusive with before; invalid or mismatched tokens return 400 invalid_cursor.
+          description: Opaque last_id bound to scope/filters/order; error cursors also bind instance/round/snapshot and survive cancel, not replacement. Exclusive with before; invalid tokens return 400 invalid_cursor.
           schema:
             type: string
           explode: false
         - name: before
           in: query
           required: false
-          description: Opaque first_id for backward traversal with unchanged scope/filters/order. Cannot be combined with after. Does not resolve the current resource by name.
+          description: Opaque first_id for backward paging with unchanged scope/filters/order; exclusive with after.
           schema:
             type: string
           explode: false
@@ -6306,15 +6281,7 @@ paths:
     post:
       operationId: TelephonyCampaigns_cancel
       summary: Cancel a telephony campaign
-      description: |-
-        Cancels validating/running Campaigns with exact If-Match; returns 202 and its monitor, even when complete.
-        Stops new dispatch/retries and drains workers/admitted calls; connected calls finish naturally. The round/Agent pin stays.
-        Cancellation that wins preparation cancels its validation monitor; completed validation is unchanged.
-        After authorization, the same Operation-Id/original If-Match replays 202 even after deletion/name reuse, never changing
-        a replacement. Conflicting IDs return 409; without replay, missing Campaigns return 404 and stale tokens 412.
-        Omitted IDs are generated. Current-token repeats reuse the monitor; fresh IDs alias it. New cancellation of
-        completed/failed/deleting returns 409. Failure leaves cancelling/error and dispatch disabled; resume with current
-        If-Match and a fresh ID, preserving previous failures. Poll the accepted monitor, then perform a guarded Campaign GET.
+      description: Cancels a validating or running Campaign using If-Match. Stops new calls and retries; connected calls finish naturally. Returns 202 with an operation monitor to track completion.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6339,13 +6306,13 @@ paths:
         - name: If-Match
           in: header
           required: true
-          description: Exact control token. Preserve with Operation-Id for transport retries; wildcards are rejected.
+          description: Exact current token; no wildcards. Without replay, missing Campaigns return 404 and stale tokens 412. Starting cancellation outside validating/running returns 409.
           schema:
             $ref: '#/components/schemas/Azure.Core.eTag'
         - name: Operation-Id
           in: header
           required: false
-          description: Optional idempotency identifier; distinct from validation/delete operations. Required and fresh to resume terminal cancellation failure.
+          description: Optional retry key, generated if omitted. Original If-Match/key replays 202 even after deletion/name reuse, never touching a replacement; conflicts return 409. Failed cancellation needs a fresh key/current token.
           schema:
             $ref: '#/components/schemas/TelephonyCampaignOperationId'
         - name: api-version
@@ -46609,7 +46576,7 @@ components:
           description: Common earliest dispatch time; successful preparation is required.
       allOf:
         - $ref: '#/components/schemas/TelephonyCampaignSchedule'
-      description: Apply the same earliest dispatch time to every recipient. A past time is valid and makes work eligible after preparation succeeds.
+      description: Uses one earliest dispatch time for all recipients. Past times are allowed; preparation must still succeed.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88363,7 +88330,7 @@ components:
           description: Identifies scheduling with a separate earliest dispatch time for each recipient.
       allOf:
         - $ref: '#/components/schemas/TelephonyCampaignSchedule'
-      description: Read every recipient's earliest dispatch time from the fixed scheduled_at field. Dataset CSV/JSON/JSONL values use RFC 3339 with an explicit offset or Z; inline values use FoundryTimestamp.
+      description: "Uses each recipient's scheduled_at: RFC 3339 with timezone in Datasets, Unix seconds for inline recipients."
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -91088,7 +91055,7 @@ components:
       type: string
       maxLength: 256
       pattern: ^(?:\+[1-9][0-9]{1,14}|\^\\\+(?:[1-9]|\[1-9\])(?:(?:[0-9]|\[[0-9](?:-[0-9])?\])(?:\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\})?)+\$)$
-      description: Exact E.164 number or anchored caller pattern (`^\+...$`). Patterns start with a nonzero ASCII digit or [1-9], followed by ASCII digits, single-digit classes/ranges and {n}/{n,m} repeats (1-15). Matches contain 2-15 digits. Values must be trimmed, at most 256 characters; reversed ranges/bounds and other regex syntax are rejected, not rewritten.
+      description: Trimmed E.164 caller number or restricted `^\+...$` pattern. Start with a nonzero digit/[1-9], then ASCII digits, single-digit classes/ranges and repeats (1-15); matches have 2-15 digits. Other syntax and reversed ranges/bounds are rejected.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -91688,10 +91655,10 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Microsoft Teams identifier. A source must be a nonempty resource-account GUID; a transfer destination may also use 28:orgid:{guid}. The service validates the format for the selected role.
+          description: 'Source: nonempty resource-account GUID. Transfer: user/resource-account GUID or 28:orgid:{guid}.'
       allOf:
         - $ref: '#/components/schemas/TelephonyAddress'
-      description: 'Teams address: sources require a nonempty resource-account GUID; transfers also accept user GUIDs/28:orgid:{guid}. Outbound recipients are unsupported; provider/role checks apply.'
+      description: Teams source/transfer identity, validated by role and provider. Not supported for outbound recipients.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -92030,7 +91997,7 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection. No inbound binding is required. SIP requires CustomKeys authentication and a valid DNS target, revalidated before dialing; saving does not prove connectivity.
+          description: Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee.
         purpose:
           type: string
           minLength: 1
@@ -92091,10 +92058,10 @@ components:
           readOnly: true
         source:
           $ref: '#/components/schemas/TelephonyAddress'
-          description: 'Caller address: phone_number for Twilio/SipOutbound, or teams with a nonempty resource-account GUID for ACS/Teams Phone extensibility. Transfer-only formats and sip sources are rejected.'
+          description: 'Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI.'
         campaign_name:
           $ref: '#/components/schemas/TelephonyCampaignName'
-          description: Owning Campaign under this Agent; absent for direct calls. Campaign deletion hides then removes its jobs. Ownership is instance-bound, so name reuse cannot attach old jobs.
+          description: Owning Campaign, absent for direct calls. Instance-bound despite name reuse; Campaign deletion hides then removes its jobs.
           readOnly: true
       description: A durable direct or campaign-created outbound call intent.
       x-ms-foundry-meta:
@@ -92140,10 +92107,10 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection. No inbound binding is required. SIP requires CustomKeys authentication and a valid DNS target, revalidated before dialing; saving does not prove connectivity.
+          description: Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee.
         source:
           $ref: '#/components/schemas/TelephonyAddress'
-          description: 'Caller address: phone_number for Twilio/SipOutbound, or teams with a nonempty resource-account GUID for ACS/Teams Phone extensibility. Transfer-only formats and sip sources are rejected.'
+          description: 'Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI.'
         purpose:
           type: string
           minLength: 1
@@ -92188,7 +92155,7 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection. No inbound binding is required. SIP requires CustomKeys authentication and a valid DNS target, revalidated before dialing; saving does not prove connectivity.
+          description: Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee.
         purpose:
           type: string
           minLength: 1
@@ -92205,7 +92172,7 @@ components:
           description: 'Frozen retry policy. Omission at creation returns fixed_interval with max_attempts=1 and interval=0 seconds: one initial attempt, no retry.'
         source:
           $ref: '#/components/schemas/TelephonyAddress'
-          description: 'Caller address: phone_number for Twilio/SipOutbound, or teams with a nonempty resource-account GUID for ACS/Teams Phone extensibility. Transfer-only formats and sip sources are rejected.'
+          description: 'Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI.'
       description: The direct outbound call to create.
       x-ms-foundry-meta:
         required_previews:
@@ -92770,27 +92737,24 @@ components:
         recipient_dataset:
           $ref: '#/components/schemas/DatasetReference'
           description: |-
-            Same-project single uri_file, exclusive with recipients. Empty name/version returns 400. Omitted version pins latest
-            once per round before reads; retries reuse its snapshot. Reads expose the requested version until the pin resolves.
-            The submitter's assets/read on that version is rechecked before content reads. Bounded detection accepts CSV, JSON arrays or JSONL;
-            ambiguous/malformed content fails preparation without fallback or dialing.
-            Reserved destination_type/destination_value form a phone_number/E.164 address. scheduled_at is required only for
-            recipient scheduling. Other fields use the shared structured-input/Agent rules: JSON preserves nested values/null;
-            CSV cells stay strings. Duplicate headers/top-level row keys fail; repeated destinations remain separate calls.
-            Limits: 1-1,000,000 rows, 256 MiB decoded file and 1 MiB per logical row. Folders are unsupported.
+            Same-project single uri_file, exclusive with recipients: CSV/JSON/JSONL, 1-1,000,000 rows, 256 MiB decoded/file, 1 MiB/row.
+            Omitted version pins latest; retries reuse its snapshot. assets/read is rechecked before reads.
+            destination_type/destination_value specify an E.164 phone_number; scheduled_at is required only for recipient scheduling.
+            Other fields are Agent inputs (CSV strings). Invalid files or duplicate headers/row keys fail before dialing;
+            repeated destinations remain separate calls.
         schedule:
           $ref: '#/components/schemas/TelephonyCampaignSchedule'
           description: Dispatch schedule; omission equals ImmediateSchedule. Every mode waits for successful preparation, then follows its schedule and available capacity.
         retry_policy:
           $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
-          description: Per-recipient provider retries. Omit for one initial attempt with no retry. Generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds for an omitted policy.
+          description: Per-recipient retries. Omit for one attempt; generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds.
         status:
           $ref: '#/components/schemas/TelephonyCampaignStatus'
           description: Business execution state. Each asynchronous action has its own retained operation monitor.
           readOnly: true
         error:
           $ref: '#/components/schemas/OpenAI.Error'
-          description: Preparation failure when failed, cancellation failure when cancelling, or cleanup failure when deleting. Cleared when that work is retried. Never contains secrets or raw recipient values.
+          description: Preparation/control failure, cleared on retry. Never includes secrets or raw recipient values.
           readOnly: true
         name:
           $ref: '#/components/schemas/TelephonyCampaignName'
@@ -92806,11 +92770,11 @@ components:
           readOnly: true
         etag:
           $ref: '#/components/schemas/Azure.Core.eTag'
-          description: Control token for conditional actions, not a cache validator. Changes with lifecycle, accepted operations or terminal control failure, never progress alone.
+          description: Conditional-action token, not a cache validator. Changes with control state, not progress.
           readOnly: true
         operation_id:
           type: string
-          description: "Latest accepted action's ID, retained after completion; older completions cannot overwrite it. For discovery only: poll the request's Operation-Id/Operation-Location, not this pointer."
+          description: Latest accepted action, for discovery only. Poll the initiating response's Operation-Id/Operation-Location instead.
           readOnly: true
         finished_at:
           $ref: '#/components/schemas/FoundryTimestamp'
@@ -92818,13 +92782,13 @@ components:
           readOnly: true
         locked_agent_version:
           type: string
-          description: Latest Agent version pinned at validation start and shared by preparation, retries and calls. Omitted until resolved; replacement clears it and resolves latest. Resolution failure fails preparation; unavailable pins fail preparation/the affected task without fallback.
+          description: Latest Agent version pinned once per preparation and shared by retries/calls. Omitted until resolved; replacement clears it. Unavailable pins fail without fallback.
           readOnly: true
         progress:
           $ref: '#/components/schemas/TelephonyCampaignProgress'
           description: Available partial accounting even when the job fails or is cancelled.
           readOnly: true
-      description: An Agent-owned Campaign. Creation and replacement of failed preparation authorize execution after validation; cancel and delete control its lifecycle.
+      description: Agent-owned outbound call Campaign. Creation/replacement authorizes execution after successful preparation.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -92848,25 +92812,22 @@ components:
             $ref: '#/components/schemas/TelephonyRecipient'
           minItems: 1
           maxItems: 100
-          description: 1-100 inline recipients, exclusive with recipient_dataset; missing/empty/conflicting sources return 400. The whole UTF-8 request shares 1 MiB. Reads omit recipients; retain the submission for row correlation.
+          description: 1-100 recipients, exclusive with recipient_dataset. The whole UTF-8 request is limited to 1 MiB. Omitted from reads; retain the submission for row correlation.
         recipient_dataset:
           $ref: '#/components/schemas/DatasetReference'
           description: |-
-            Same-project single uri_file, exclusive with recipients. Empty name/version returns 400. Omitted version pins latest
-            once per round before reads; retries reuse its snapshot. Reads expose the requested version until the pin resolves.
-            The submitter's assets/read on that version is rechecked before content reads. Bounded detection accepts CSV, JSON arrays or JSONL;
-            ambiguous/malformed content fails preparation without fallback or dialing.
-            Reserved destination_type/destination_value form a phone_number/E.164 address. scheduled_at is required only for
-            recipient scheduling. Other fields use the shared structured-input/Agent rules: JSON preserves nested values/null;
-            CSV cells stay strings. Duplicate headers/top-level row keys fail; repeated destinations remain separate calls.
-            Limits: 1-1,000,000 rows, 256 MiB decoded file and 1 MiB per logical row. Folders are unsupported.
+            Same-project single uri_file, exclusive with recipients: CSV/JSON/JSONL, 1-1,000,000 rows, 256 MiB decoded/file, 1 MiB/row.
+            Omitted version pins latest; retries reuse its snapshot. assets/read is rechecked before reads.
+            destination_type/destination_value specify an E.164 phone_number; scheduled_at is required only for recipient scheduling.
+            Other fields are Agent inputs (CSV strings). Invalid files or duplicate headers/row keys fail before dialing;
+            repeated destinations remain separate calls.
         schedule:
           $ref: '#/components/schemas/TelephonyCampaignSchedule'
           description: Dispatch schedule; omission equals ImmediateSchedule. Every mode waits for successful preparation, then follows its schedule and available capacity.
         retry_policy:
           $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
-          description: Per-recipient provider retries. Omit for one initial attempt with no retry. Generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds for an omitted policy.
-      description: An Agent-owned Campaign. Creation and replacement of failed preparation authorize execution after validation; cancel and delete control its lifecycle.
+          description: Per-recipient retries. Omit for one attempt; generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds.
+      description: Agent-owned outbound call Campaign. Creation/replacement authorizes execution after successful preparation.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -92909,13 +92870,9 @@ components:
           readOnly: true
         finished_at:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: Time preparation/task generation, cancellation draining or task cleanup completed. Source Dataset, connections, Agent configuration, call records, conversations and recordings are preserved.
+          description: When preparation, cancellation or deletion finished.
           readOnly: true
-      description: |-
-        Instance/round-bound validation, cancel or delete monitor, independent of Campaign execution and later operation_id changes.
-        Validation succeeds when all CallJobs exist and dispatch opens; cancellation waits for workers/admitted calls without
-        rewriting terminal validation. Retries reuse IDs; failed cancel/delete resumes with a fresh ID. Monitors omit result:
-        PUT/cancel use a guarded final Campaign GET; delete completes without a resource result.
+      description: Preparation/cancel/delete monitor bound to its original Campaign instance/round, independent of later actions. Omits result. Retained for the Campaign lifetime and at least 24 hours after both completion and deletion.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -92984,7 +92941,7 @@ components:
           format: int64
           minimum: 0
           description: Recipients whose dispatch deadline elapsed before a new attempt could start.
-      description: Mutually exclusive execution counts stay zero until preparation and CallJob generation succeed, then sum to total_recipients. Campaign status and validation_errors report preparation failures.
+      description: Recipient execution counts, zero until preparation succeeds; then mutually exclusive and summing to total_recipients.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -93033,7 +92990,7 @@ components:
             - failed
             - cancelled
             - deleting
-      description: Campaign execution state, separate from preparation/cancel/delete LROs. Execution completes when all recipients are terminal, regardless of call outcomes.
+      description: Campaign execution state, separate from preparation/cancel/delete LROs. All recipients terminal means completed, not necessarily successful.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -93050,8 +93007,8 @@ components:
           description: One-based source row or inline item position.
         error:
           $ref: '#/components/schemas/OpenAI.Error'
-          description: Validation error for this row. param identifies the input field; never echoes raw values or secrets. Non-row source/runtime failures are returned through Campaign.error.
-      description: Validation diagnostic for one invalid input row in the current validation round. Execution details are available through the CallJob list.
+          description: Row validation error; param identifies the field. Never includes raw values or secrets.
+      description: Invalid-row diagnostic for current preparation; execution errors are in CallJobs.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -93071,10 +93028,10 @@ components:
           description: A value indicating whether there are additional values available not captured in this list.
         first_id:
           type: string
-          description: Opaque boundary cursor for the first returned item; absent for an empty page. Not a Campaign name or recipient ID.
+          description: Opaque cursor for the first returned item; absent when empty.
         last_id:
           type: string
-          description: Opaque boundary cursor for the last returned item; absent for an empty page. Captures its original immutable sort key, so deleting/reusing the resource name cannot move the boundary.
+          description: Opaque cursor for the last returned item; absent when empty. Deletion/name reuse does not move its original sort boundary.
         agent_version:
           type: string
           description: Pinned Agent version used for preparation, shared by all errors on the page.
@@ -93138,11 +93095,7 @@ components:
         structured_inputs:
           type: object
           additionalProperties: {}
-          description: |-
-            JSON inputs using the shared CallJob parser and Agent schemas/defaults: unique root names, depth at most 16,
-            nested values/null allowed. Request/row byte limits apply, with no extra Campaign-specific value limits.
-            Replay ignores object order but preserves array order, null versus omission and exact numeric values
-            (1=1.0=1e0, -0=0; distinct int64 values and strings remain distinct). SDK serialization may round numbers before transmission.
+          description: Agent inputs with nested JSON/null, unique names and depth at most 16. Agent schemas/defaults apply. Replay preserves types, exact numbers, array order and null/omission, but ignores object order; use lossless numeric serialization.
         scheduled_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: Earliest dispatch time for recipient scheduling. Required only when schedule.type is recipient; forbidden for other modes.
@@ -94132,7 +94085,7 @@ components:
             - type: string
             - type: 'null'
           maxLength: 128
-          description: The replacement display label. Omit to preserve it; null, empty or whitespace-only clears it. Nonblank values are trimmed before applying the length limit.
+          description: 'Replacement label: omit to preserve, null/blank to clear. Trimmed before length validation.'
         connection_name:
           type: string
           minLength: 1
