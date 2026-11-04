@@ -1,0 +1,16 @@
+parameters:
+  - name: vallyRoot
+    type: string
+
+steps:
+  - script: |
+      node "$(Build.SourcesDirectory)/eng/common/scripts/eval/invoke-eval-shard.ts" \
+        --eval-args "$(evalArgs) --skill-dir $(Build.SourcesDirectory)/.github/skills" \
+        --shard-name "$(shardName)" \
+        --output-dir "$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)" \
+        --threshold 1
+    displayName: "vally eval $(shardName)"
+    workingDirectory: $(Build.SourcesDirectory)/${{ parameters.vallyRoot }}
+    env:
+      GITHUB_TOKEN: $(azuresdk-copilot-github-pat)
+      npm_config_userconfig: $(resolvedNpmrcPath)

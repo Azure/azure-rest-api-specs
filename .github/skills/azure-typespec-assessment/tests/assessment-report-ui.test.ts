@@ -350,6 +350,64 @@ function assessment(
   } as unknown as AssessmentOutput;
 }
 
+void test("renders stable semantic grouping identity, diagnostics, and evidence provenance", () => {
+  const input = assessment();
+  const item = required(input.dimensions.semantic.items[0]);
+  item.intentType = "normal";
+  item.classificationVersion = 3;
+  item.groupingEvidence = { reasons: ["source:source-1", "governance:api-version"] };
+  item.changeTypes = ["versioning", "type"];
+  item.hunkIds = ["hunk"];
+  item.changeFacts = [
+    {
+      id: "fact-version",
+      sourceChangeId: "source-1",
+      hunkIds: ["hunk"],
+      declarationIds: ["declaration-version"],
+      beforeDeclarationIds: [],
+      afterDeclarationIds: ["declaration-version"],
+      changeType: "versioning",
+      qualifiedName: "Versions",
+      action: "add",
+      facets: ["version-activation"],
+      evidenceRef: {
+        artifact: "source/source-index.json",
+        sourceChangeId: "source-1",
+        hunkIds: ["hunk"],
+        declarationIds: ["declaration-version"],
+      },
+    },
+    {
+      id: "fact-type",
+      sourceChangeId: "source-1",
+      hunkIds: ["hunk"],
+      declarationIds: ["declaration-widget"],
+      beforeDeclarationIds: [],
+      afterDeclarationIds: ["declaration-widget"],
+      changeType: "type",
+      qualifiedName: "Widget",
+      action: "add",
+      facets: [],
+      evidenceRef: {
+        artifact: "source/source-index.json",
+        sourceChangeId: "source-1",
+        hunkIds: ["hunk"],
+        declarationIds: ["declaration-widget"],
+      },
+    },
+  ];
+
+  const html = renderAssessmentHtml(input);
+
+  assert.include(html, "Stable group:");
+  assert.include(html, "semantic-1");
+  assert.include(html, "Grouping diagnostics:");
+  assert.include(html, "source:source-1");
+  assert.include(html, "Change facts and provenance (2)");
+  assert.include(html, "declaration-widget");
+  assert.include(html, "not a standalone API-version publication");
+});
+
 void test("merges direct methods and indirect types using target names and exact graph paths", () => {
   const { dimension, raw } = fixture();
   const input = structuredClone({ dimension, raw });
@@ -722,8 +780,8 @@ void test("five dimension headers and empty not-assessed states use the shared l
   input.safety.status = "not-assessed";
   const html = renderAssessmentHtml(input);
   assert.equal((html.match(/class="report-section-head"/g) ?? []).length, 5);
-  assert.match(html, /REST breaking changes were not fully assessed/);
-  assert.match(html, /Downstream breaking changes were not fully assessed/);
+  assert.match(html, /No REST compatibility verdict is available for the covered scope/);
+  assert.match(html, /No downstream compatibility verdict is available for the covered scope/);
   assert.match(html, /Azure Guidelines could not be fully assessed/);
   const quality = reportSection(html, "document-quality");
   assert.match(quality, /not assessed/);
@@ -732,6 +790,26 @@ void test("five dimension headers and empty not-assessed states use the shared l
   assert.match(html, /@media\s*\(max-width:\s*760px\)/);
   assert.match(html, /@media\s*\(prefers-color-scheme:\s*dark\)/);
   assert.match(html, /grid-template-columns:\s*minmax\(0,\s*1fr\)\s+max-content/);
+});
+
+void test("compatibility findings remain failed when evidence coverage is partial", () => {
+  const { dimension } = fixture();
+  dimension.status = "failed";
+  dimension.verdict = "failed";
+  dimension.coverage = "partial";
+  dimension.blockers = ["Generated language-specific evidence is unavailable."];
+  const input = assessment(dimension);
+  input.safety = {
+    scope: "rest-and-downstream-only",
+    status: "failed",
+    verdict: "failed",
+    coverage: "partial",
+  };
+  const html = renderAssessmentHtml(input);
+  const downstream = reportSection(html, "downstream-breaking");
+  assert.match(downstream, /report-badge remove">failed/);
+  assert.match(downstream, /report-badge unknown coverage">partial coverage/);
+  assert.match(html, /Partial coverage/);
 });
 
 void test("legacy type findings remain visible when method mappings are unavailable", () => {
