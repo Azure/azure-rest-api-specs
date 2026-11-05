@@ -494,6 +494,7 @@ export interface NormalizedTcgcNamedType {
   access?: string;
   reachable?: boolean;
   usage?: unknown;
+  usageDetails?: TcgcUsageDetails;
   properties?: {
     name?: string;
     type: NormalizedTcgcType;
@@ -513,6 +514,14 @@ export interface NormalizedTcgcNamedType {
   type?: NormalizedTcgcType;
   discriminatedOptions?: unknown;
   [key: string]: unknown;
+}
+
+export interface TcgcUsageDetails {
+  value: number;
+  flags: string[];
+  input: boolean;
+  output: boolean;
+  unknownBits: number;
 }
 
 export interface NormalizedTcgcContract {
@@ -691,7 +700,8 @@ export interface AssessmentFact {
   owner?: string;
   parent?: string;
   access?: string;
-  usage?: string[];
+  usage?: unknown;
+  usageDetails?: TcgcUsageDetails;
   reachable?: boolean;
   parameters?: {
     position?: number;

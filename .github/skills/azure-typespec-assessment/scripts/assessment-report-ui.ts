@@ -52,6 +52,10 @@ type ReportRenderHelpers = {
   }[];
   complianceCode: (snippets: unknown[]) => string;
   renderSourceHunks: (sources: SourceChange[]) => string;
+  focusedSourceChanges: (
+    findings: AssessmentFinding[],
+    declarationNames?: string[],
+  ) => SourceChange[];
   sourceLinks: (sources: SourceChange[]) => string;
   legacyEvidence: (evidence: string[]) => string;
   contractAreaParts: (row: ReportRow) => {
@@ -1237,6 +1241,7 @@ export function renderReportSections(
     complianceFindingGroups,
     complianceCode,
     renderSourceHunks,
+    focusedSourceChanges,
     sourceLinks,
     legacyEvidence,
     contractAreaParts,
@@ -1317,6 +1322,13 @@ export function renderReportSections(
     return `<div class="breaking-rationale"><strong>Why this is breaking:</strong> ${body}</div>`;
   };
 
+  const relevantSource = (findings: AssessmentFinding[], declarationNames: string[] = []) => {
+    const sources = focusedSourceChanges(findings, declarationNames);
+    return sources.length
+      ? `<details class="report-source"><summary>Relevant TypeSpec source</summary>${renderSourceHunks(sources)}<p class="sources">${sourceLinks(sources)}</p></details>`
+      : '<p class="sources">Finding-specific TypeSpec source unavailable.</p>';
+  };
+
   const legacyCard = (finding: LegacyAssessmentFinding, downstream: boolean = false) =>
     `<details class="report-card legacy-finding" id="${downstream ? "downstream" : "finding"}-${anchor(finding.id)}">${summary(
       escape(finding.title),
@@ -1326,6 +1338,10 @@ export function renderReportSections(
     )}<div class="report-card-body"><p class="mapping-unavailable">${downstream ? "Normalized SDK method mapping" : "Normalized operation mapping"} unavailable in this historical finding; recorded evidence follows.</p>${legacyEvidence(finding.evidence ?? [])}</div></details>`;
 
   const restFindings = dimensions.rest.findings ?? [];
+  const operationFinding = (finding: AssessmentFinding) => {
+    const identity = restContractDelta(finding).identity ?? "Unmapped REST contract change";
+    return (finding.operationIds ?? []).includes(identity);
+  };
 
   const operations: Map<string, RestCard> = new Map();
 
@@ -1333,8 +1349,9 @@ export function renderReportSections(
     `${operation.projectId ?? ""}:${operation.operationId}:${operation.apiVersion ?? ""}`;
   for (const item of items) {
     for (const operation of item.operations ?? []) {
-      const findings = restFindings.filter((finding) =>
-        findingMatchesOperation(finding, operation, item.id),
+      const findings = restFindings.filter(
+        (finding) =>
+          operationFinding(finding) && findingMatchesOperation(finding, operation, item.id),
       );
       if (!findings.length) continue;
       const key = operationKey(operation);
@@ -1356,7 +1373,9 @@ export function renderReportSections(
   const mappedRest = new Set(
     [...operations.values()].flatMap((entry) => entry.findings.map((finding) => finding.id)),
   );
-  for (const finding of restFindings.filter((finding) => !mappedRest.has(finding.id))) {
+  for (const finding of restFindings.filter(
+    (finding) => operationFinding(finding) && !mappedRest.has(finding.id),
+  )) {
     const facts = (finding.evidence ?? []).filter((fact) => fact.operationId);
     for (const operationId of finding.operationIds ?? []) {
       const fact =
@@ -1403,8 +1422,41 @@ export function renderReportSections(
         model: row.identity !== entry.operation.operationId ? row.identity : undefined,
       };
     });
-  const restBody =
-    restCards
+
+  const modelGroups = new Map<
+    string,
+    {
+      identity: string;
+      findings: AssessmentFinding[];
+      semanticIds: string[];
+      operations: string[];
+    }
+  >();
+  for (const finding of restFindings.filter((item) => !operationFinding(item))) {
+    const identity = restContractDelta(finding).identity ?? "Unmapped REST contract change";
+    const group: {
+      identity: string;
+      findings: AssessmentFinding[];
+      semanticIds: string[];
+      operations: string[];
+    } = modelGroups.get(identity) ?? {
+      identity,
+      findings: [],
+      semanticIds: [],
+      operations: [],
+    };
+    group.findings.push(finding);
+    group.semanticIds.push(...(finding.relatedSemanticIntents ?? []));
+    group.operations.push(...(finding.operationIds ?? []));
+    modelGroups.set(identity, group);
+  }
+  const restModelCards = [...modelGroups.values()].map((group) => ({
+    ...group,
+    findings: [...new Map(group.findings.map((finding) => [finding.id, finding])).values()],
+    semanticIds: unique(group.semanticIds),
+    operations: unique(group.operations),
+  }));
+  const operationCards = restCards
       .map(
         (entry) =>
           `<details class="report-card rest-contract-card" id="${entry.id}">${summary(
@@ -1412,16 +1464,24 @@ export function renderReportSections(
             `<span class="report-http">${escape((entry.operation.method ?? "").toUpperCase())}</span> <code>${escape(entry.operation.path ?? "Operation path unavailable")}</code> · ${escape(entry.operation.apiVersion ?? "Version unavailable")}`,
             count(`${entry.findings.length} changes`),
             affectedIntents(entry.semanticIds),
-          )}<div class="report-card-body">${findingAnchors(entry.findings)}${table(restRows(entry))}${rationale(entry.findings)}</div></details>`,
+          )}<div class="report-card-body">${findingAnchors(entry.findings)}${table(restRows(entry))}${rationale(entry.findings)}${relevantSource(entry.findings, [entry.operation.operationId])}</div></details>`,
       )
-      .join("") +
-    restFindings
-      .filter((finding) => !mappedRest.has(finding.id))
-      .map(
-        (finding) =>
-          `<details class="report-card">${summary(escape(finding.rule), "Confirmed REST finding; operation mapping unavailable.", status("failed"), affectedIntents(finding.relatedSemanticIntents ?? []))}<div class="report-card-body">${findingAnchors([finding])}${table([{ area: "REST contract", label: finding.rule, before: finding.expected, after: finding.actual }])}${rationale([finding])}</div></details>`,
-      )
-      .join("") +
+      .join("");
+  const modelCards = restModelCards
+    .map((group) => {
+      const rows = group.findings.map((finding) => {
+        const row = restContractDelta(finding);
+        const parts = contractAreaParts(row);
+        return { ...row, area: parts.areaKind, label: parts.member };
+      });
+      const operations = group.operations.length
+        ? `<details class="affected-methods"><summary>Affected REST operations (${group.operations.length})</summary><div class="affected-method-list">${group.operations.map((operationId) => `<div class="affected-method"><code>${escape(operationId)}</code></div>`).join("")}</div></details>`
+        : '<p class="mapping-unavailable"><strong>Operation mapping unavailable.</strong></p>';
+      return `<details class="report-card rest-contract-card" id="rest-contract-${anchor(group.identity)}">${summary(escape(group.identity), "The normalized REST model/type contract changes.", `<span class="report-badge">${group.findings.length} contract changes</span>`, affectedIntents(group.semanticIds))}<div class="report-card-body">${findingAnchors(group.findings)}${table(rows)}${rationale(group.findings)}${relevantSource(group.findings, [group.identity])}${operations}</div></details>`;
+    })
+    .join("");
+  const restBody =
+    `${operationCards ? `<h3>Operation changes</h3>${operationCards}` : ""}${modelCards ? `<h3>Model and type changes</h3>${modelCards}` : ""}` +
     (dimensions.rest.legacyFindings ?? []).map((finding) => legacyCard(finding)).join("");
 
   const locations: Record<string, string> = {
@@ -1438,9 +1498,10 @@ export function renderReportSections(
       paths?.length
         ? `<p class="report-small">Representative method paths from recorded graph edges:</p><div class="report-reference-paths">${paths.map((item) => `<div class="report-reference-path"><span>${escape(locations[item.location ?? ""] ?? "Location unavailable")}</span><code>${escape(item.path)}</code><span>${escape(item.role)} evidence</span></div>`).join("")}</div>`
         : '<p class="mapping-unavailable">Precise method path, location and baseline/target role unavailable. Aggregate root locations are not method-specific evidence.</p>'
-    }${table(type.rows)}${rationale(type.findings)}</div>`;
-  const downstreamBody =
-    downstream.methods
+    }${table(type.rows)}${rationale(type.findings)}${relevantSource(type.findings, [type.type])}</div>`;
+
+  const directMethodCards = downstream.methods
+    .filter((method) => method.group)
       .map((method) => {
         const groupAnchors = method.group
           ? emitAnchor(`downstream-${anchor(method.group.id)}`) +
@@ -1464,18 +1525,40 @@ export function renderReportSections(
                 `${side === "before" ? "Baseline" : "Target"}: ${parameter.serializedName ?? parameter.name} (header): ${JSON.stringify(typeof parameter.type === "string" ? undefined : parameter.type?.value)}`,
             ),
         );
-        const description = method.group
-          ? "The normalized SDK method contract changes directly."
-          : "The method uses changed SDK types; its top-level signature need not change.";
+        const description = "The normalized SDK method contract changes directly.";
+        const directFindings = (dimensions.downstream.findings ?? []).filter((finding) =>
+          method.findingIds.includes(finding.id),
+        );
         return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), `<span class="report-badge ${method.cause}">${method.cause === "mixed" ? "Mixed: direct + type change" : method.cause === "direct" ? "Direct method change" : "Indirect type change"}</span>`, affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}<p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${method.rows.length ? table(method.rows) : ""}${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}${method.group ? rationale(method.group.deltas ?? []) : ""}${method.types.map(({ type, paths }) => typeContent(type, paths)).join("")}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></div></details>`;
+        return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), '<span class="report-badge direct">Direct method change</span>', affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}<p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${method.rows.length ? table(method.rows) : ""}${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}${rationale(method.group?.deltas ?? [])}${relevantSource(directFindings)}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></div></details>`;
       })
-      .join("") +
-    downstream.unmapped
-      .map(
-        (type) =>
-          `<details class="report-card sdk-contract-card">${summary(escape(type.type.split(".").at(-1)), "Confirmed SDK type finding retained without a deterministic SDK method mapping.", '<span class="report-badge unknown">Method mapping unavailable</span>', affectedIntents(type.semanticIds))}<div class="report-card-body">${typeContent(type)}</div></details>`,
-      )
-      .join("") +
+      .join("");
+
+  const typeCards = downstream.types
+    .map((type) => {
+      const methodLinks = type.mapped.length
+        ? `<details class="affected-methods"><summary>Affected SDK methods (${type.mapped.length})</summary><div class="affected-method-list">${type.mapped
+            .map((mapping) => {
+              const symbol = mapping.symbol;
+              const method =
+                typeof symbol === "string"
+                  ? downstream.methods.find(
+                      (candidate) =>
+                        !candidate.group &&
+                        candidate.projectId === (mapping.projectId ?? candidate.projectId) &&
+                        candidate.aliases.includes(symbol),
+                    )
+                  : undefined;
+              return `<div class="affected-method">${method?.id ? emitAnchor(method.id) : ""}<strong>${escape(shortName(symbol ?? "Unknown method"))}</strong><code>${escape(symbol ?? "Unknown method")}</code></div>`;
+            })
+            .join("")}</div></details>`
+        : '<p class="mapping-unavailable"><strong>Method mapping unavailable.</strong></p>';
+      return `<details class="report-card sdk-contract-card" id="downstream-type-card-${anchor(type.id)}">${summary(escape(type.type.split(".").at(-1)), "The normalized SDK model/type contract changes.", `<span class="report-badge">${type.findings.length} type changes</span>`, affectedIntents(type.semanticIds))}<div class="report-card-body">${typeContent(type)}${methodLinks}</div></details>`;
+    })
+    .join("");
+
+  const downstreamBody =
+    `${directMethodCards ? `<h3>Method changes</h3>${directMethodCards}` : ""}${typeCards ? `<h3>Model and type changes</h3>${typeCards}` : ""}` +
     legacyDownstream.map((finding) => legacyCard(finding, true)).join("");
 
   const compliance = dimensions.compliance;
@@ -1621,13 +1704,13 @@ export function renderReportSections(
           (entry) =>
             `<a class="report-link impact" href="#${entry.id}">REST: ${escape(entry.operation.operationId)}</a>`,
         );
-      for (const finding of restFindings.filter(
-        (finding) =>
-          !mappedRest.has(finding.id) &&
-          (finding.relatedSemanticIntents?.includes(item.id) || related.rest?.includes(finding.id)),
+      for (const group of restModelCards.filter(
+        (group) =>
+          group.semanticIds.includes(item.id) ||
+          group.findings.some((finding) => related.rest?.includes(finding.id)),
       )) {
         restLinks.push(
-          `<a class="report-link impact" href="#finding-${anchor(finding.id)}">REST: ${escape(finding.rule)}</a>`,
+          `<a class="report-link impact" href="#rest-contract-${anchor(group.identity)}">REST: ${escape(group.identity)} (model/type)</a>`,
         );
       }
       for (const finding of dimensions.rest.legacyFindings ?? []) {
@@ -1639,14 +1722,15 @@ export function renderReportSections(
       const downstreamLinks = downstream.methods
         .filter(
           (method) =>
-            method.semanticIds.includes(item.id) ||
-            (method.group !== undefined && related.downstream?.includes(method.group.id)),
+            method.group !== undefined &&
+            (method.semanticIds.includes(item.id) ||
+              related.downstream?.includes(method.group.id)),
         )
         .map(
           (method) =>
             `<a class="report-link impact" href="#${method.id}">Downstream: ${escape(method.name)}</a>`,
         );
-      for (const type of downstream.unmapped.filter((type) => type.semanticIds.includes(item.id)))
+      for (const type of downstream.types.filter((type) => type.semanticIds.includes(item.id)))
         downstreamLinks.push(
           `<a class="report-link impact" href="#${type.anchorId}">Downstream: ${escape(type.type.split(".").at(-1))} (SDK type)</a>`,
         );
@@ -1726,7 +1810,7 @@ export function renderReportSections(
       : "not-assessed");
   const restCount =
     restCards.length +
-    restFindings.filter((finding) => !mappedRest.has(finding.id)).length +
+    restModelCards.length +
     (dimensions.rest.legacyFindings?.length ?? 0);
   const downstreamCount =
     downstream.methods.length + downstream.unmapped.length + legacyDownstream.length;
@@ -1758,7 +1842,7 @@ export function renderReportSections(
       findingCount: restCount,
       html: allBaselinesUnavailable
         ? unavailableSection("rest-breaking", "REST breaking changes")
-        : `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.rest.verdict ?? restStatus) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${unavailableProjectNotes}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
+        : `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.rest.verdict ?? restStatus) + count(`${restCards.length} operations · ${restModelCards.length} models/types · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${unavailableProjectNotes}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
     },
     {
       findingCount: downstreamCount,

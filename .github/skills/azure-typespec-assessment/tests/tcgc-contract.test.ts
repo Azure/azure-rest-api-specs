@@ -2,6 +2,7 @@ import { assert, test, vi } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import {
+  decodeTcgcUsage,
   indexTcgcOperations,
   normalizeTcgcContract,
   normalizeTcgcPackage,
@@ -16,6 +17,31 @@ function required<T>(value: T | null | undefined): T {
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
+
+void test("decodes TCGC usage bitmasks into input and output evidence", () => {
+  assert.deepEqual(decodeTcgcUsage(262), {
+    value: 262,
+    flags: ["Input", "Output", "Json"],
+    input: true,
+    output: true,
+    unknownBits: 0,
+  });
+  assert.deepEqual(decodeTcgcUsage(10502), {
+    value: 10502,
+    flags: ["Input", "Output", "Json", "LroInitial", "LroFinalEnvelope"],
+    input: true,
+    output: true,
+    unknownBits: 0,
+  });
+  assert.deepEqual(decodeTcgcUsage(3), {
+    value: 3,
+    flags: ["Input"],
+    input: true,
+    output: false,
+    unknownBits: 1,
+  });
+  assert.equal(decodeTcgcUsage("262"), undefined);
+});
 
 void test("reuses normalized TCGC artifacts while invalidating changed files and parser limits", (context) => {
   const root = fs.mkdtempSync(path.join(process.cwd(), ".tcgc-contract-cache-"));

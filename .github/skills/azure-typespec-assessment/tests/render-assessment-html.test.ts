@@ -13,6 +13,7 @@ import {
   complianceFindingGroups,
   downstreamTypeCards,
   escapeHtml,
+  focusedSourceChanges,
   operationContractRows,
   renderAssessmentHtml as renderCurrentAssessmentHtml,
   representativeSource,
@@ -131,6 +132,114 @@ function fixtureDownstreamTypeCards(dimension: {
 function fixtureRestContractCards(findings: RestFindingFixture[]) {
   return restContractCards(findings as unknown as AssessmentFinding[]);
 }
+
+void test("focuses finding source on changed lines and relevant decorators", () => {
+  const sources = focusedSourceChanges([
+    {
+      id: "finding-1",
+      sources: [
+        {
+          id: "source-1",
+          path: "main.tsp",
+          status: "modified",
+          origins: [],
+          declarations: [],
+          hunks: [
+            {
+              id: "hunk-1",
+              base: { startLine: 10, endLine: 20 },
+              current: { startLine: 10, endLine: 20 },
+              lines: [
+                ' @doc("unrelated documentation")',
+                " model Unrelated {}",
+                " ",
+                " @visibility(Lifecycle.Read)",
+                "-model Widget {",
+                "-  name: string;",
+                "+model Widget {",
+                "+  name?: string;",
+                " }",
+                " ",
+                " model Other {}",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ] as unknown as AssessmentFinding[]);
+
+  assert.equal(sources.length, 1);
+  assert.equal(sources[0].hunks.length, 1);
+  assert.deepEqual(sources[0].hunks[0].lines, [
+    " @visibility(Lifecycle.Read)",
+    "-model Widget {",
+    "-  name: string;",
+    "+model Widget {",
+    "+  name?: string;",
+    " }",
+  ]);
+  assert.equal(sources[0].hunks[0].base.startLine, 13);
+  assert.equal(sources[0].hunks[0].current.startLine, 13);
+});
+
+void test("focuses finding source on hunks owned by the displayed declaration", () => {
+  const sources = focusedSourceChanges(
+    [
+      {
+        id: "finding-1",
+        sources: [
+          {
+            id: "source-1",
+            path: "main.tsp",
+            status: "modified",
+            origins: [],
+            declarations: [
+              {
+                id: "declaration-widget",
+                kind: "model",
+                qualifiedName: "Widget",
+                hunkIds: ["hunk-widget"],
+              },
+              {
+                id: "declaration-gadget",
+                kind: "model",
+                qualifiedName: "Gadget",
+                hunkIds: ["hunk-gadget"],
+              },
+            ],
+            hunks: [
+              {
+                id: "hunk-widget",
+                base: { startLine: 10, endLine: 10 },
+                current: { startLine: 10, endLine: 10 },
+                lines: ["-model Widget {}", "+model Widget { value: string; }"],
+              },
+              {
+                id: "hunk-gadget",
+                base: { startLine: 20, endLine: 20 },
+                current: { startLine: 20, endLine: 20 },
+                lines: ["-model Gadget {}", "+model Gadget { value: string; }"],
+              },
+            ],
+          },
+        ],
+      },
+    ] as unknown as AssessmentFinding[],
+    ["Contoso.Service.Widget"],
+  );
+
+  assert.deepEqual(
+    sources.flatMap((source) => source.hunks.map((hunk) => hunk.id)),
+    ["hunk-widget-focused-1"],
+  );
+  assert.deepEqual(
+    sources.flatMap((source) =>
+      (source.declarations ?? []).map((declaration) => declaration.qualifiedName),
+    ),
+    ["Widget"],
+  );
+});
 
 function readAssessment(url: URL): AssessmentOutput {
   const value = JSON.parse(readFileSync(url, "utf8")) as unknown;
@@ -422,7 +531,10 @@ void test("renders SDK contract changes without REST operation association", () 
   assert.match(downstream, /1 mapped methods/);
   assert.match(downstream, /Microsoft\.HardwareSecurityModules\.CloudHsmClusters\.get/);
   assert.match(html, /Impacts \(1\)/);
-  assert.match(html, /class="report-link impact"[^>]*>Downstream: CloudHsmClusters\.get<\/a>/);
+  assert.match(
+    html,
+    /class="report-link impact"[^>]*>Downstream: CloudHsmClusterSkuName \(SDK type\)<\/a>/,
+  );
   assert.notMatch(downstream, /CloudHsmClusters_CreateOrUpdate/);
   assert.notMatch(downstream, /Changed TypeSpec:/);
   assert.match(downstream, /Affected intents \(1\)/);

@@ -278,7 +278,7 @@ void test("model input references canonical evidence without embedding sources",
     complianceSearchRequests: "dimensions/compliance-search-requests.json",
   });
   assert.equal(Object.keys(input.evidenceSets).length, 1);
-  assert.deepEqual(Object.keys(input.facts), []);
+  assert.deepEqual(Object.keys(input.facts), ["operation-1"]);
   assert.equal(input.semanticReviewUnits[0].affectedOperationCount, 1);
   assert.deepEqual(input.semanticReviewUnits[0].representativeOperationIds, ["operation-1"]);
   assert.equal(input.complianceSearchRequests.length, 1);
@@ -292,10 +292,14 @@ void test("model input references canonical evidence without embedding sources",
   assert.equal(input.complianceSearchRequests[0].querySummary.qualifiedNameCount, 1);
   assert.match(input.complianceSearchRequests[0].requestId, /^compliance-search-/);
   const coverage = deterministicCoverage(input.semanticReviewUnits[0]);
-  assert.deepEqual(coverage.coveredHunkIds, ["hunk-1"]);
-  assert.deepEqual(coverage.uncoveredHunkIds, []);
-  assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
-  assert.deepEqual(input.inferenceRequests, []);
+  assert.deepEqual(coverage.coveredHunkIds, []);
+  assert.deepEqual(coverage.uncoveredHunkIds, ["hunk-1"]);
+  assert.equal(
+    coverage.classifications[0].reason,
+    "mapped-declaration-without-deterministic-candidate",
+  );
+  assert.equal(input.semanticReviewUnits[0].inferenceRequired, true);
+  assert.equal(input.inferenceRequests.length, 1);
   assert.equal(input.deferredDimensions, undefined);
   assert.equal(input.documentQualityReviewUnits, undefined);
   assert.equal(input.documentQualityCriterion, undefined);
@@ -1015,7 +1019,7 @@ void test("multiline decorator bodies remain inference-visible", () => {
   }
 });
 
-void test("context-only scoped decorators do not force inference", () => {
+void test("context-only scoped decorators do not hide unclassified declaration changes", () => {
   const input = buildModelInputFromFixture({
     manifest: {
       comparison: {
@@ -1071,10 +1075,14 @@ void test("context-only scoped decorators do not force inference", () => {
     downstream: { status: "ready", facts: {}, candidates: [], blockers: [] },
   });
 
-  assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
+  assert.equal(input.semanticReviewUnits[0].inferenceRequired, true);
+  assert.equal(
+    deterministicCoverage(input.semanticReviewUnits[0]).classifications[0].reason,
+    "mapped-declaration-without-deterministic-candidate",
+  );
 });
 
-void test("parentheses in context decorator strings do not leak decorator scope", () => {
+void test("parentheses in context decorator strings do not hide declaration changes", () => {
   const input = buildModelInputFromFixture({
     manifest: {
       comparison: {
@@ -1130,7 +1138,11 @@ void test("parentheses in context decorator strings do not leak decorator scope"
     downstream: { status: "ready", facts: {}, candidates: [], blockers: [] },
   });
 
-  assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
+  assert.equal(input.semanticReviewUnits[0].inferenceRequired, true);
+  assert.equal(
+    deterministicCoverage(input.semanticReviewUnits[0]).classifications[0].reason,
+    "mapped-declaration-without-deterministic-candidate",
+  );
 });
 
 void test("direct doc decorator changes remain semantic-only", () => {

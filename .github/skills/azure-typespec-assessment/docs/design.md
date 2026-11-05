@@ -189,6 +189,14 @@ run when a hunk has no compatibility impact. Inference runs only for hunks
 whose deterministic coverage status is `unknown`; the Agent records the compact
 decision and the materializer writes `inference.json`.
 
+A source hunk mapped to a declaration or operation is not automatically
+`no-impact` merely because no known REST or downstream candidate rule matched.
+Unless it is deterministically documentation-only, contract-neutral supporting
+source, or an explicitly represented artifact-only change, it remains
+`unknown` and is sent to inference with its complete referenced evidence. This
+prevents the candidate rule catalog from acting as an accidental compatibility
+whitelist.
+
 ## 1. Preparation manifest
 
 File: `preparation-manifest.json`
@@ -2266,7 +2274,8 @@ HTML renders changed parameters and method deltas from this structured data;
 the presentation contract is defined in [HTML requirements](#11-html-requirements).
 Method cards are collapsed by default and contain SDK method identity, a
 `Contract area | Before | After` table, a highlighted breaking rationale, and
-related Semantic intent links. They do not show HTTP method, route, REST
+finding-specific relevant TypeSpec source followed by related Semantic intent
+links. They do not show HTTP method, route, REST
 operation identity, or REST findings. Render only changed parameter and method
 rows: additions/removals use `not present` on the missing side, modifications
 show projected before/after signatures, reordering uses one-based positions,
@@ -2355,11 +2364,12 @@ The separate REST/downstream safety contract never changes.
 
 ### REST contract cards
 
-REST breaking findings use the same visual hierarchy as downstream SDK type
-cards. The renderer groups confirmed REST findings by stable wire-contract
-identity, such as a model, enum, request parameter type, or response header
-type. One contract produces one default-collapsed card and retains every
-deterministically affected REST operation.
+REST breaking findings use the same visual hierarchy as downstream SDK cards.
+The renderer separates direct operation changes from model/type changes.
+Operation cards are grouped by normalized REST operation. Model/type cards are
+grouped by stable wire-contract identity, such as a model, enum, request
+parameter type, or response header type, so one shared model change is not
+repeated for every unchanged consumer.
 
 Presentation rules:
 
@@ -2388,9 +2398,10 @@ Presentation rules:
    details element that is collapsed by default. Its summary shows the
    distinct operation count; expanded rows show operation ID, selected API
    version, HTTP method, and path.
-10. The footer contains only human-readable links to related Semantic intents.
-    Do not repeat Changed TypeSpec source links in the REST card; complete
-    source evidence remains in the Semantic intent and appendix.
+10. After the rationale, show one collapsed **Relevant TypeSpec source**
+    disclosure derived only from finding-specific source hunks. Trim unrelated
+    context while preserving changed lines and directly associated decorators.
+    Complete canonical source evidence remains in JSON.
 11. A REST finding without a proven contract identity remains visible as a
     default-collapsed `Unmapped REST contract change` card. Do not infer a
     contract from source-file coincidence.
@@ -2434,6 +2445,23 @@ method/path, concise mapping reason, REST before/after delta or explicit
 unchanged statement, and downstream outcome. It is deterministic supporting
 evidence, not a separate Semantic or Azure Guidelines assessment, and it does not
 repeat TypeSpec code.
+
+### Downstream method and type rendering
+
+Downstream presentation has two independent groups:
+
+- **Method changes** contains only direct normalized SDK method contract
+  changes.
+- **Model and type changes** contains each changed SDK model, enum, union,
+  client, or other public type once, with affected methods listed beneath the
+  type rather than repeated as full method cards.
+
+Every card follows the same order: changed-only Before/After rows, concise
+breaking rationale, collapsed finding-specific **Relevant TypeSpec source**,
+then relationship details. Raw numeric TCGC `usage` remains available, and the
+deterministic normalized facts also expose decoded flag names plus explicit
+input/output booleans. Unknown usage bits remain visible and are never silently
+discarded.
 
 ### Shared contract rows
 

@@ -1381,6 +1381,110 @@ function renderSourceHunks(sources: SourceChange[] = []) {
     .join("");
 }
 
+function focusedHunkSegments(hunk: DiffHunk): DiffHunk[] {
+  const changed = hunk.lines
+    .map((line, index) => ({ line, index }))
+    .filter(({ line }) => line.startsWith("+") || line.startsWith("-"))
+    .map(({ index }) => index);
+  if (!changed.length) return [];
+
+  const groups: { start: number; end: number }[] = [];
+  for (const index of changed) {
+    const previous = groups.at(-1);
+    if (previous && index - previous.end <= 4) previous.end = index;
+    else groups.push({ start: index, end: index });
+  }
+
+  const ranges = groups.map(({ start, end }) => {
+    let focusedStart = Math.max(0, start - 1);
+    const focusedEnd = Math.min(hunk.lines.length - 1, end + 1);
+    while (focusedStart > 0) {
+      const line = hunk.lines[focusedStart - 1].replace(/^[ +\-]/, "").trim();
+      if (!line.startsWith("@") || line.startsWith("@doc")) break;
+      focusedStart -= 1;
+    }
+    return { start: focusedStart, end: focusedEnd };
+  });
+  const merged: { start: number; end: number }[] = [];
+  for (const range of ranges) {
+    const previous = merged.at(-1);
+    if (previous && range.start <= previous.end + 1) previous.end = Math.max(previous.end, range.end);
+    else merged.push({ ...range });
+  }
+
+  const locationAt = (lineIndex: number) => {
+    let base = hunk.base?.startLine ?? 1;
+    let current = hunk.current?.startLine ?? 1;
+    for (const line of hunk.lines.slice(0, lineIndex)) {
+      if (!line.startsWith("+")) base += 1;
+      if (!line.startsWith("-")) current += 1;
+    }
+    return { base, current };
+  };
+  return merged.map(({ start, end }, index) => {
+    const location = locationAt(start);
+    const lines = hunk.lines.slice(start, end + 1);
+    const baseLength = lines.filter((line) => !line.startsWith("+")).length;
+    const currentLength = lines.filter((line) => !line.startsWith("-")).length;
+    return {
+      id: `${hunk.id}-focused-${index + 1}`,
+      base: {
+        startLine: location.base,
+        endLine: Math.max(location.base, location.base + baseLength - 1),
+      },
+      current: {
+        startLine: location.current,
+        endLine: Math.max(location.current, location.current + currentLength - 1),
+      },
+      lines,
+    };
+  });
+}
+
+export function focusedSourceChanges(
+  findings: AssessmentFinding[] = [],
+  declarationNames: string[] = [],
+): SourceChange[] {
+  const sources = findings.flatMap((finding) => finding.sources ?? []);
+  const requestedNames = declarationNames
+    .map((name) => name?.trim())
+    .filter((name): name is string => Boolean(name));
+  return [...new Map(sources.map((source) => [source.id ?? source.path, source])).values()]
+    .map((source) => {
+      const relevantHunkIds =
+        requestedNames.length > 0
+          ? new Set(
+              (source.declarations ?? [])
+                .filter((declaration) => {
+                  const qualifiedName = declaration.qualifiedName ?? "";
+                  return requestedNames.some((requestedName) => {
+                    const shortName = requestedName.split(".").at(-1) ?? requestedName;
+                    return (
+                      qualifiedName === requestedName ||
+                      qualifiedName.startsWith(`${requestedName}.`) ||
+                      qualifiedName === shortName ||
+                      qualifiedName.startsWith(`${shortName}.`)
+                    );
+                  });
+                })
+                .flatMap((declaration) => declaration.hunkIds ?? []),
+            )
+          : undefined;
+      return {
+        ...source,
+        declarations: relevantHunkIds
+          ? (source.declarations ?? []).filter((declaration) =>
+              (declaration.hunkIds ?? []).some((hunkId) => relevantHunkIds.has(hunkId)),
+            )
+          : source.declarations,
+        hunks: (source.hunks ?? [])
+          .filter((hunk) => !relevantHunkIds || relevantHunkIds.has(hunk.id))
+          .flatMap(focusedHunkSegments),
+      };
+    })
+    .filter((source) => source.hunks.length > 0);
+}
+
 function substantiveChange(hunk: DiffHunk) {
   return (hunk.lines ?? []).some((line) => {
     if (!line.startsWith("+") && !line.startsWith("-")) return false;
@@ -1894,7 +1998,11 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
               fact.access,
               fact.reachable === true ? "reachable" : undefined,
               fact.reachable === false ? "not reachable" : undefined,
-              fact.usage !== undefined ? `usage ${fact.usage.join(", ")}` : undefined,
+              fact.usageDetails
+                ? `usage ${fact.usageDetails.flags.join(", ") || "None"} (${fact.usageDetails.value})`
+                : fact.usage !== undefined
+                  ? `usage ${String(fact.usage)}`
+                  : undefined,
             ]
               .filter(Boolean)
               .join(" · ")
@@ -2019,6 +2127,7 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
     complianceFindingGroups,
     complianceCode,
     renderSourceHunks,
+    focusedSourceChanges,
     sourceLinks,
     legacyEvidence,
     contractAreaParts,

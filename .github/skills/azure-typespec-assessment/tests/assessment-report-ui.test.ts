@@ -91,6 +91,7 @@ const reportRenderHelpers: Parameters<typeof renderReportSections>[1] = {
   complianceFindingGroups: () => [],
   complianceCode: () => "",
   renderSourceHunks: () => "",
+  focusedSourceChanges: () => [],
   sourceLinks: () => "",
   legacyEvidence: () => "",
   contractAreaParts: () => ({ areaKind: "", member: "" }),

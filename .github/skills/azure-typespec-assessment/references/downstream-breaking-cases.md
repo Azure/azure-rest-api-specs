@@ -69,12 +69,15 @@ No method path means mapping unavailable, not automatically no breaking
 change. Retain independently justified public type/client/customization
 findings without inventing methods from names, files, or REST operations.
 
-## 4. Explain results in the method-first layout
+## 4. Explain results in the method/type layout
 
 Presentation follows judgment; it must not reclassify evidence.
 
-- One card per distinct mapped SDK method, merging direct and indirect causes.
-  Show a concise cause and related Semantic intent links while collapsed.
+- Put direct normalized method changes in **Method changes**, one card per
+  distinct SDK method.
+- Put changed models, enums, unions, clients, and other public types in
+  **Model and type changes**, one card per type. List mapped affected methods
+  under the type instead of expanding one unchanged method card per consumer.
 - Keep "Why this is breaking" brief: one self-contained explanation per distinct
   consequence, shown separately when several apply. Do not concatenate long
   judgment paragraphs or truncate away the caller impact.
@@ -84,8 +87,11 @@ Presentation follows judgment; it must not reclassify evidence.
   paging/LRO behavior, or availability. Label path/query/header/body positions
   only from unambiguous evidence. Constant headers are not numbered caller
   inputs; client-owned parameters are not ordinary method arguments.
-- Nested type causes show per-method input/output location and member path,
-  evidence side, concrete before/after member or shape, and consequence.
-  Use a fallback card when mapping is unavailable.
+- Type cards show input/output location and member path when proven, evidence
+  side, concrete before/after member or shape, consequence, and decoded TCGC
+  usage flags. Use a mapping-unavailable notice when no method is proven.
+- After the rationale, show only the finding-specific relevant TypeSpec source
+  range. Keep complete source evidence in JSON and do not substitute
+  project-wide source.
 - Keep finding, mapped-method, and changed-type counts distinct. Show no
   affected REST operations or fabricated language-specific signatures.
