@@ -346,7 +346,7 @@ model BuilderAppPatchVersionConfiguration {
 model BuilderAppPatchAccepted {
   ...ArmAcceptedLroResponse<
     "Identity update accepted.",
-    ArmCombinedLroHeaders<ArmOperationStatus, CommonTypes.Resource> &
+    ArmCombinedLroHeaders<ArmOperationStatus, BuilderApp> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
@@ -393,10 +393,7 @@ interface BuilderApps {
     BuilderApp,
     BuilderAppDeployRequest,
     ArmResponse<BuilderApp>,
-    LroHeaders = ArmCombinedLroHeaders<
-      ArmOperationStatus,
-      CommonTypes.Resource
-    > &
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, BuilderApp> &
       Azure.Core.Foundations.RetryAfterHeader,
     Parameters = BuilderAppDeploymentParameters
   >;
@@ -406,10 +403,7 @@ interface BuilderApps {
     BuilderApp,
     BuilderAppRedeployRequest,
     ArmResponse<BuilderApp>,
-    LroHeaders = ArmCombinedLroHeaders<
-      ArmOperationStatus,
-      CommonTypes.Resource
-    > &
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, BuilderApp> &
       Azure.Core.Foundations.RetryAfterHeader,
     Parameters = BuilderAppDeploymentParameters
   >;

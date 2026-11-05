@@ -7186,17 +7186,17 @@ union ConfigReferenceSource {
 @@clientName(
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "BuilderAppManagedServiceIdentity",
-  "python, java"
+  "python, java, go"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   "BuilderAppUserAssignedIdentityInfo",
-  "python, java"
+  "python, java, go"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
   "BuilderAppManagedServiceIdentityType",
-  "python, java"
+  "python, java, go"
 );
 @@clientName(
   AppServiceEnvironment.ipsslAddressCount,

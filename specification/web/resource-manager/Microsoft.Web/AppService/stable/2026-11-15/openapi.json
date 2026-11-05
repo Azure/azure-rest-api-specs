@@ -1466,7 +1466,7 @@
         "tags": [
           "BuilderAppsAsyncOperations"
         ],
-        "description": "Get the location-scoped operation result resource. Pending operations return 202; completion returns 200, including after deletion. Read operation failure details from the status monitor.",
+        "description": "Get the completed BuilderApp representation. Pending operations return 202; completion returns 200 with the retained app snapshot, including after deletion. Read operation failure details from the status monitor.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1485,7 +1485,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "$ref": "#/definitions/BuilderApp"
             }
           },
           "202": {
@@ -2861,7 +2861,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "final-state-schema": "#/definitions/BuilderApp"
         },
         "x-ms-long-running-operation": true
       },
@@ -3368,7 +3368,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "final-state-schema": "#/definitions/BuilderApp"
         },
         "x-ms-long-running-operation": true
       }
@@ -3510,7 +3510,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "final-state-schema": "#/definitions/BuilderApp"
         },
         "x-ms-long-running-operation": true
       }
