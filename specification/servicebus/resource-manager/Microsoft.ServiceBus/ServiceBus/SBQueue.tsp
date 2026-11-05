@@ -92,6 +92,7 @@ interface SBQueues {
 @@minLength(SBQueue.name, 1);
 @@doc(SBQueue.name, "The queue name.");
 @@doc(SBQueue.properties, "Queue Properties");
-@@doc(SBQueues.createOrUpdate::parameters.resource,
+@@doc(
+  SBQueues.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a queue resource."
 );

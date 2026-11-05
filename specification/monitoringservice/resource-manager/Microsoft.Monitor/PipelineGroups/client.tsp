@@ -18,7 +18,8 @@ using Microsoft.Monitor;
 @@clientName(BatchProcessor, "PipelineGroupBatchProcessor", "csharp");
 @@clientName(SyslogReceiver, "PipelineGroupSyslogReceiver", "csharp");
 @@clientName(OtlpReceiver, "PipelineGroupOtlpReceiver", "csharp");
-@@clientName(TransformLanguageProcessor,
+@@clientName(
+  TransformLanguageProcessor,
   "PipelineGroupTransformLanguageProcessor",
   "csharp"
 );
@@ -32,13 +33,15 @@ using Microsoft.Monitor;
 @@clientName(RecordMap, "PipelineGroupRecordMap", "csharp");
 @@clientName(ResourceMap, "PipelineGroupResourceMap", "csharp");
 @@clientName(ScopeMap, "PipelineGroupScopeMap", "csharp");
-@@clientName(ExporterPersistenceConfiguration,
+@@clientName(
+  ExporterPersistenceConfiguration,
   "PipelineGroupExporterPersistenceConfiguration",
   "csharp"
 );
 
 // ── Contextual naming: prefix enums/unions with PipelineGroup ──
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "MonitorPipelineGroupProvisioningState",
   "csharp"
 );
@@ -48,11 +51,13 @@ using Microsoft.Monitor;
 @@clientName(ExporterType, "PipelineGroupExporterType", "csharp");
 @@clientName(PipelineType, "PipelineGroupPipelineType", "csharp");
 @@clientName(CapabilityOperator, "PipelineGroupCapabilityOperator", "csharp");
-@@clientName(CertificateSourceType,
+@@clientName(
+  CertificateSourceType,
   "PipelineGroupCertificateSourceType",
   "csharp"
 );
-@@clientName(PrivateKeySourceType,
+@@clientName(
+  PrivateKeySourceType,
   "PipelineGroupPrivateKeySourceType",
   "csharp"
 );
@@ -67,16 +72,19 @@ using Microsoft.Monitor;
 @@clientName(Receiver.tlsConfiguration, "TlsConfigurationName", "csharp");
 // Integer properties must include units in the name
 @@clientName(BatchProcessor.timeout, "TimeoutInMilliseconds", "csharp");
-@@clientName(ExporterPersistenceConfiguration.maxStorageUsage,
+@@clientName(
+  ExporterPersistenceConfiguration.maxStorageUsage,
   "MaxStorageUsageInGigabytes",
   "csharp"
 );
-@@clientName(ExporterPersistenceConfiguration.retentionPeriod,
+@@clientName(
+  ExporterPersistenceConfiguration.retentionPeriod,
   "RetentionPeriodInMinutes",
   "csharp"
 );
 // Rename dataCollectionRule to DataCollectionRuleId for clarity
-@@clientName(AzureMonitorWorkspaceLogsApiConfig.dataCollectionRule,
+@@clientName(
+  AzureMonitorWorkspaceLogsApiConfig.dataCollectionRule,
   "DataCollectionRuleId",
   "csharp"
 );

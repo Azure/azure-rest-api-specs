@@ -4,6 +4,14 @@ parameters:
 emit:
   - "@azure-tools/typespec-autorest"
 options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.AppService"
+    emitter-output-dir: "{output-dir}/sdk/websites/{namespace}"
+    enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.AppService"
+    emitter-output-dir: "{output-dir}/sdk/websites/{namespace}"
+    api-version: "2025-03-01"
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
@@ -12,6 +20,7 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     xml-strategy: "none"
+    use-read-only-status-schema: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-web"
     namespace: "azure.mgmt.web"
@@ -19,7 +28,6 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    api-version: "2025-05-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appservice"
     namespace: "com.azure.resourcemanager.appservice"
     service-name: "AppService"
@@ -38,6 +46,7 @@ options:
       OpenIdConnectClientCredentialMethod: ClientCredentialMethod
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-appservice"
+    treat-unknown-as-record: true
     flavor: "azure"
     compatibility-lro: true
     experimental-extensible-enums: true
@@ -46,7 +55,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/appservice"
     emitter-output-dir: "{output-dir}/{service-dir}/armappservice"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice/v5"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
@@ -56,3 +65,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

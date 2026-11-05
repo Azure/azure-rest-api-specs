@@ -11,43 +11,53 @@ using Microsoft.HealthcareApis;
 
 @@clientLocation(ServicesDescriptions.get, "Services");
 @@clientLocation(ServicesDescriptions.createOrUpdate, "Services");
-@@clientName(ServicesDescriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  ServicesDescriptions.createOrUpdate::parameters.resource,
   "serviceDescription"
 );
 @@clientLocation(ServicesDescriptions.update, "Services");
-@@clientName(ServicesDescriptions.update::parameters.properties,
+@@clientName(
+  ServicesDescriptions.update::parameters.properties,
   "servicePatchDescription"
 );
 @@clientLocation(ServicesDescriptions.delete, "Services");
 @@clientLocation(ServicesDescriptions.listByResourceGroup, "Services");
 @@clientLocation(ServicesDescriptions.list, "Services");
 
-@@clientLocation(PrivateEndpointConnectionDescriptions.get,
+@@clientLocation(
+  PrivateEndpointConnectionDescriptions.get,
   "PrivateEndpointConnections"
 );
-@@clientLocation(PrivateEndpointConnectionDescriptions.createOrUpdate,
+@@clientLocation(
+  PrivateEndpointConnectionDescriptions.createOrUpdate,
   "PrivateEndpointConnections"
 );
-@@clientName(PrivateEndpointConnectionDescriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnectionDescriptions.createOrUpdate::parameters.resource,
   "properties"
 );
-@@clientLocation(PrivateEndpointConnectionDescriptions.delete,
+@@clientLocation(
+  PrivateEndpointConnectionDescriptions.delete,
   "PrivateEndpointConnections"
 );
-@@clientLocation(PrivateEndpointConnectionDescriptions.listByService,
+@@clientLocation(
+  PrivateEndpointConnectionDescriptions.listByService,
   "PrivateEndpointConnections"
 );
-@@clientName(WorkspacePrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspacePrivateEndpointConnections.createOrUpdate::parameters.resource,
   "properties"
 );
 
 @@clientLocation(PrivateLinkResourceDescriptions.get, "PrivateLinkResources");
-@@clientLocation(PrivateLinkResourceDescriptions.listByService,
+@@clientLocation(
+  PrivateLinkResourceDescriptions.listByService,
   "PrivateLinkResources"
 );
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "workspace");
-@@clientName(Workspaces.update::parameters.properties,
+@@clientName(
+  Workspaces.update::parameters.properties,
   "workspacePatchResource"
 );
 
@@ -60,10 +70,12 @@ using Microsoft.HealthcareApis;
 @@Legacy.flattenProperty(IotConnector.properties);
 
 @@clientLocation(IotFhirDestinations.get, "IotConnectorFhirDestination");
-@@clientLocation(IotFhirDestinations.createOrUpdate,
+@@clientLocation(
+  IotFhirDestinations.createOrUpdate,
   "IotConnectorFhirDestination"
 );
-@@clientName(IotFhirDestinations.createOrUpdate::parameters.resource,
+@@clientName(
+  IotFhirDestinations.createOrUpdate::parameters.resource,
   "iotFhirDestination"
 );
 @@clientLocation(IotFhirDestinations.delete, "IotConnectorFhirDestination");
@@ -79,7 +91,8 @@ using Microsoft.HealthcareApis;
 
 @@clientLocation(OperationResultsOperationGroup.get, "OperationResults");
 
-@@clientName(ServicesOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  ServicesOperationGroup.checkNameAvailability::parameters.body,
   "checkNameAvailabilityInputs"
 );
 

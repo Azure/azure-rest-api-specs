@@ -1,0 +1,121 @@
+import "../models/common.tsp";
+import "../models/RoutePolicy.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+
+namespace Microsoft.ManagedNetworkFabric;
+@doc("The RoutePolicy resource definition.")
+model RoutePolicy is Azure.ResourceManager.TrackedResource<
+  RoutePolicyProperties,
+  false
+> {
+  @doc("Name of the Route Policy.")
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
+  @path
+  @key("routePolicyName")
+  @segment("routePolicies")
+  @visibility(Lifecycle.Read)
+  name: string;
+}
+
+@@doc(RoutePolicy.properties, "The RoutePolicy properties");
+@armResourceOperations
+interface RoutePolicies {
+  @doc("Implements Route Policy GET method.")
+  get is ArmResourceRead<RoutePolicy>;
+
+  @doc("Implements Route Policy PUT method.")
+  create is ArmResourceCreateOrReplaceAsync<RoutePolicy>;
+
+  @doc("API to update certain properties of the Route Policy resource.")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<RoutePolicy, RoutePolicyPatch>;
+
+  @doc("Implements Route Policy DELETE method.")
+  delete is ArmResourceDeleteWithoutOkAsync<RoutePolicy>;
+
+  @doc("Implements RoutePolicies list by resource group GET method.")
+  listByResourceGroup is ArmResourceListByParent<
+    RoutePolicy,
+    Response = RoutePoliciesListResult
+  >;
+
+  @doc("Implements RoutePolicies list by subscription GET method.")
+  listBySubscription is ArmListBySubscription<
+    RoutePolicy,
+    Response = RoutePoliciesListResult
+  >;
+
+  @doc("Updated the admin state for this Route Policy.")
+  @action("updateAdministrativeState")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "updateAdministrativeState")
+  @sharedRoute
+  updateAdministrativeStateDeprecated is ArmResourceActionAsync<
+    RoutePolicy,
+    UpdateAdministrativeState,
+    CommonPostActionResponseForDeviceUpdate
+  >;
+
+  @doc("Updated the admin state for this Route Policy.")
+  @action("updateAdministrativeState")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  updateAdministrativeState is ArmResourceActionAsync<
+    RoutePolicy,
+    UpdateAdministrativeState,
+    UpdateAdministrativeStateResponse
+  >;
+
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Validates the configuration of the resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    RoutePolicy,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
+  @doc("Validates the configuration of the resources.")
+  validateConfiguration is ArmResourceActionAsync<
+    RoutePolicy,
+    void,
+    ValidateConfigurationResponseV2
+  >;
+  @doc("Commits the configuration of the given resources.")
+  commitConfiguration is ArmResourceActionAsync<
+    RoutePolicy,
+    void,
+    CommonPostActionResponseForStateUpdate
+  >;
+}
+
+@@doc(RoutePolicies.create::parameters.resource, "Request payload.");
+@@doc(
+  RoutePolicies.update::parameters.properties,
+  "Route Policy properties to update."
+);
+@@doc(
+  RoutePolicies.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(
+  RoutePolicies.updateAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(
+  RoutePolicies.validateConfigurationDeprecated::parameters.body,
+  "Validate configuration properties."
+);
+@@doc(
+  RoutePolicies.validateConfiguration::parameters.body,
+  "Validate configuration properties."
+);

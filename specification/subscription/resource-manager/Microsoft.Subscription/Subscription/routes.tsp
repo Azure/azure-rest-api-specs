@@ -62,8 +62,10 @@ interface SubscriptionOperationGroup {
      * The request body
      */
     @body body: AcceptOwnershipRequest,
-  ): ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-    Azure.Core.Foundations.RetryAfterHeader> | ErrorResponse;
+  ):
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+        Azure.Core.Foundations.RetryAfterHeader>
+    | ErrorResponse;
   /**
    * Accept subscription ownership status.
    */
@@ -92,12 +94,15 @@ interface SubscriptionOperationOperationGroup {
      */
     @path
     operationId: string,
-  ): ArmResponse<SubscriptionCreationResult> | (ArmAcceptedResponse & {
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @header("Location")
-    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-    Location: string;
-  }) | ErrorResponse;
+  ):
+    | ArmResponse<SubscriptionCreationResult>
+    | (ArmAcceptedResponse & {
+        #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        @header("Location")
+        @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+        Location: string;
+      })
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

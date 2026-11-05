@@ -1,0 +1,24 @@
+{
+  "title": "GoalAssignments_RefreshGoalResources_MaximumSet",
+  "operationId": "GoalAssignments_RefreshGoalResources",
+  "parameters": {
+    "serviceGroupName": "sg1",
+    "api-version": "2026-04-01-preview",
+    "goalAssignmentName": "ga1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceCount": 15,
+        "lastRefreshTime": "2025-02-06T15:03:42.797Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/sg1/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/12345678-1234-1234-1234-123456789012",
+        "Location": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/sg1/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1",
+        "Retry-After": 30
+      }
+    }
+  }
+}

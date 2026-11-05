@@ -13,6 +13,7 @@ namespace Microsoft.DevHub;
 /**
  * Singleton response of ADO OAuth.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @singleton("default")
 @subscriptionResource
 model AdooAuthResponse is Azure.ResourceManager.ProxyResource<ADOOAuth> {
@@ -80,6 +81,7 @@ interface AdooAuthResponses {
 
 @@doc(AdooAuthResponse.name, "");
 @@doc(AdooAuthResponse.properties, "Details of ADO OAuth.");
-@@doc(AdooAuthResponses.getADOOAuthInfo::parameters.body,
+@@doc(
+  AdooAuthResponses.getADOOAuthInfo::parameters.body,
   "The fields required in ADO OAuth call request."
 );

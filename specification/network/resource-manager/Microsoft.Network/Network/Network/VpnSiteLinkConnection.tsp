@@ -128,9 +128,11 @@ interface VpnSiteLinkConnections {
   >;
 }
 
-@@doc(VpnSiteLinkConnection.name,
+@@doc(
+  VpnSiteLinkConnection.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(VpnSiteLinkConnection.properties,
+@@doc(
+  VpnSiteLinkConnection.properties,
   "Properties of the VPN site link connection."
 );

@@ -41,7 +41,8 @@ alias EventOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @segment("events")
     @key
     eventTrackingId: string;
-  }
+  },
+  "ResourceHealthEvent"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -104,6 +105,7 @@ interface EventOperationGroup {
       /**
        * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listBySubscriptionIdAndEventId POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
     },
@@ -156,7 +158,8 @@ alias TenantEventOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOpera
     @segment("events")
     @key
     eventTrackingId: string;
-  }
+  },
+  "TenantResourceHealthEvent"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -219,6 +222,7 @@ interface TenantEventOperationGroup {
       /**
        * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listByTenantIdAndEventId POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
     },

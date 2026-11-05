@@ -9,31 +9,38 @@ using Microsoft.DataReplication;
 @@scope(OperationResults.get, "!csharp, !java");
 @@scope(LocationBasedOperationResults.get, "!csharp, !java");
 
-@@clientName(FabricAgentModelProperties.lastHeartbeat,
+@@clientName(
+  FabricAgentModelProperties.lastHeartbeat,
   "LastHeartbeatOn",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityModel,
+@@clientName(
+  CheckNameAvailabilityModel,
   "DataReplicationNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResponseModel,
+@@clientName(
+  CheckNameAvailabilityResponseModel,
   "DataReplicationNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResponseModel.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResponseModel.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(DeploymentPreflightResource,
+@@clientName(
+  DeploymentPreflightResource,
   "DeploymentPreflightResourceInfo",
   "csharp"
 );
-@@clientName(EmailConfigurationModel,
+@@clientName(
+  EmailConfigurationModel,
   "DataReplicationEmailConfiguration",
   "csharp"
 );
-@@clientName(EmailConfigurationModelProperties,
+@@clientName(
+  EmailConfigurationModelProperties,
   "DataReplicationEmailConfigurationProperties",
   "csharp"
 );
@@ -41,95 +48,115 @@ using Microsoft.DataReplication;
 @@clientName(EventModel, "DataReplicationEvent", "csharp");
 @@clientName(EventModelProperties, "DataReplicationEventProperties", "csharp");
 @@clientName(EventModelProperties.timeOfOccurrence, "OccurredOn", "csharp");
-@@clientName(EventModelCustomProperties,
+@@clientName(
+  EventModelCustomProperties,
   "DataReplicationEventCustomProperties",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIEventModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIEventModelCustomProperties,
   "HyperVToAzStackHciEventCustomProperties",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIEventModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIEventModelCustomProperties,
   "VMwareToAzStackHciEventCustomProperties",
   "csharp"
 );
 @@clientName(HealthErrorModel, "DataReplicationHealthErrorInfo", "csharp");
 @@clientName(HealthStatus, "DataReplicationHealthStatus", "csharp");
 @@clientName(IdentityModel, "DataReplicationIdentity", "csharp");
-@@clientName(InnerHealthErrorModel,
+@@clientName(
+  InnerHealthErrorModel,
   "DataReplicationInnerHealthErrorInfo",
   "csharp"
 );
 @@clientName(PolicyModel, "DataReplicationPolicy", "csharp");
-@@clientName(PolicyModelProperties,
+@@clientName(
+  PolicyModelProperties,
   "DataReplicationPolicyProperties",
   "csharp"
 );
-@@clientName(PolicyModelCustomProperties,
+@@clientName(
+  PolicyModelCustomProperties,
   "DataReplicationPolicyCustomProperties",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIPolicyModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIPolicyModelCustomProperties,
   "VMwareToAzStackHciPolicyCustomProperties",
   "csharp"
 );
 @@clientName(ProtectedItemModel, "DataReplicationProtectedItem", "csharp");
-@@clientName(ProtectedItemModelProperties,
+@@clientName(
+  ProtectedItemModelProperties,
   "DataReplicationProtectedItemProperties",
   "csharp"
 );
-@@clientName(ProtectedItemModelProperties.resyncRequired,
+@@clientName(
+  ProtectedItemModelProperties.resyncRequired,
   "IsResyncRequired",
   "csharp"
 );
-@@clientName(ProtectedItemModelPropertiesUpdate,
+@@clientName(
+  ProtectedItemModelPropertiesUpdate,
   "DataReplicationProtectedItemPropertiesUpdate",
   "csharp"
 );
-@@clientName(ProtectedItemModelCustomProperties,
+@@clientName(
+  ProtectedItemModelCustomProperties,
   "DataReplicationProtectedItemCustomProperties",
   "csharp"
 );
-@@clientName(ProtectedItemModelCustomPropertiesUpdate,
+@@clientName(
+  ProtectedItemModelCustomPropertiesUpdate,
   "DataReplicationProtectedItemCustomPropertiesUpdate",
   "csharp"
 );
 @@clientName(ProtectionState, "DataReplicationProtectionState", "csharp");
 @@clientName(ProvisioningState, "DataReplicationProvisioningState", "csharp");
 @@clientName(RecoveryPointModel, "DataReplicationRecoveryPoint", "csharp");
-@@clientName(RecoveryPointModelProperties,
+@@clientName(
+  RecoveryPointModelProperties,
   "DataReplicationRecoveryPointProperties",
   "csharp"
 );
-@@clientName(RecoveryPointModelCustomProperties,
+@@clientName(
+  RecoveryPointModelCustomProperties,
   "DataReplicationRecoveryPointCustomProperties",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIRecoveryPointModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIRecoveryPointModelCustomProperties,
   "VMwareToAzStackHciRecoveryPointCustomProperties",
   "csharp"
 );
 @@clientName(RecoveryPointType, "DataReplicationRecoveryPointType", "csharp");
 @@clientName(ReplicationExtensionModel, "DataReplicationExtension", "csharp");
-@@clientName(ReplicationExtensionModelProperties,
+@@clientName(
+  ReplicationExtensionModelProperties,
   "DataReplicationExtensionProperties",
   "csharp"
 );
-@@clientName(ReplicationExtensionModelCustomProperties,
+@@clientName(
+  ReplicationExtensionModelCustomProperties,
   "DataReplicationExtensionCustomProperties",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIReplicationExtensionModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIReplicationExtensionModelCustomProperties,
   "VMwareToAzStackHciReplicationExtensionCustomProperties",
   "csharp"
 );
 @@clientName(ReplicationVaultType, "DataReplicationVaultType", "csharp");
-@@clientName(ResynchronizationState,
+@@clientName(
+  ResynchronizationState,
   "DataReplicationResynchronizationState",
   "csharp"
 );
 @@clientName(TaskModel, "DataReplicationTask", "csharp");
-@@clientName(TaskModelCustomProperties,
+@@clientName(
+  TaskModelCustomProperties,
   "DataReplicationTaskCustomProperties",
   "csharp"
 );
@@ -138,354 +165,436 @@ using Microsoft.DataReplication;
 @@clientName(VaultModel, "DataReplicationVault", "csharp");
 @@clientName(VaultModelProperties, "DataReplicationVaultProperties", "csharp");
 @@clientName(FabricAgentModel, "DataReplicationFabricAgent", "csharp");
-@@clientName(FabricAgentModelProperties,
+@@clientName(
+  FabricAgentModelProperties,
   "DataReplicationFabricAgentProperties",
   "csharp"
 );
-@@clientName(FabricAgentModelCustomProperties,
+@@clientName(
+  FabricAgentModelCustomProperties,
   "DataReplicationFabricAgentCustomProperties",
   "csharp"
 );
-@@clientName(VMwareFabricAgentModelCustomProperties,
+@@clientName(
+  VMwareFabricAgentModelCustomProperties,
   "VMwareFabricAgentCustomProperties",
   "csharp"
 );
-@@clientName(VMwareMigrateFabricModelCustomProperties,
+@@clientName(
+  VMwareMigrateFabricModelCustomProperties,
   "VMwareMigrateFabricCustomProperties",
   "csharp"
 );
 @@clientName(FabricModel, "DataReplicationFabric", "csharp");
-@@clientName(FabricModelProperties,
+@@clientName(
+  FabricModelProperties,
   "DataReplicationFabricProperties",
   "csharp"
 );
-@@clientName(FabricModelCustomProperties,
+@@clientName(
+  FabricModelCustomProperties,
   "DataReplicationFabricCustomProperties",
   "csharp"
 );
-@@clientName(AzStackHCIFabricModelCustomProperties,
+@@clientName(
+  AzStackHCIFabricModelCustomProperties,
   "AzStackHciFabricCustomProperties",
   "csharp"
 );
-@@clientName(HyperVMigrateFabricModelCustomProperties,
+@@clientName(
+  HyperVMigrateFabricModelCustomProperties,
   "HyperVMigrateFabricCustomProperties",
   "csharp"
 );
 @@clientName(JobModel, "DataReplicationJob", "csharp");
 @@clientName(JobModelProperties, "DataReplicationJobProperties", "csharp");
-@@clientName(JobModelCustomProperties,
+@@clientName(
+  JobModelCustomProperties,
   "DataReplicationJobCustomProperties",
   "csharp"
 );
-@@clientName(FailoverJobModelCustomProperties,
+@@clientName(
+  FailoverJobModelCustomProperties,
   "FailoverJobCustomProperties",
   "csharp"
 );
-@@clientName(TestFailoverCleanupJobModelCustomProperties,
+@@clientName(
+  TestFailoverCleanupJobModelCustomProperties,
   "TestFailoverCleanupJobCustomProperties",
   "csharp"
 );
-@@clientName(TestFailoverJobModelCustomProperties,
+@@clientName(
+  TestFailoverJobModelCustomProperties,
   "TestFailoverJobCustomProperties",
   "csharp"
 );
 @@clientName(JobObjectType, "DataReplicationJobObjectType", "csharp");
 @@clientName(JobState, "DataReplicationJobState", "csharp");
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "DataReplicationPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionResponseProperties,
+@@clientName(
+  PrivateEndpointConnectionResponseProperties,
   "DataReplicationPrivateEndpointConnectionProperties",
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
-@@clientName(PrivateEndpointConnectionStatus,
+@@clientName(
+  PrivateEndpointConnectionStatus,
   "DataReplicationPrivateEndpointConnectionStatus",
   "csharp"
 );
-@@clientName(PrivateLinkResource,
+@@clientName(
+  PrivateLinkResource,
   "DataReplicationPrivateLinkResource",
   "csharp"
 );
-@@clientName(PrivateLinkResourceProperties,
+@@clientName(
+  PrivateLinkResourceProperties,
   "DataReplicationPrivateLinkResourceProperties",
   "csharp"
 );
-@@clientName(PrivateLinkServiceConnection,
+@@clientName(
+  PrivateLinkServiceConnection,
   "DataReplicationPrivateLinkServiceConnection",
   "csharp"
 );
-@@clientName(PrivateLinkServiceProxy,
+@@clientName(
+  PrivateLinkServiceProxy,
   "DataReplicationPrivateLinkServiceProxy",
   "csharp"
 );
-@@alternateType(RemotePrivateEndpointConnection.id,
+@@alternateType(
+  RemotePrivateEndpointConnection.id,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(PrivateLinkServiceConnectionState,
+@@clientName(
+  PrivateLinkServiceConnectionState,
   "DataReplicationPrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(ConnectionDetails,
+@@clientName(
+  ConnectionDetails,
   "RemotePrivateEndpointConnectionDetails",
   "csharp"
 );
 @@clientName(ConnectionDetails.privateIpAddress, "PrivateIPAddress", "csharp");
-@@clientName(DiskControllerInputs,
+@@clientName(
+  DiskControllerInputs,
   "DataReplicationDiskControllerInputs",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties.lastRecoveryPointReceived,
+@@clientName(
+  HyperVToAzStackHCIProtectedItemModelCustomProperties.lastRecoveryPointReceived,
   "LastRecoveryPointReceivedOn",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIProtectedItemModelCustomProperties,
   "VMwareToAzStackHciProtectedItemCustomProperties",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties.osType,
+@@clientName(
+  VMwareToAzStackHCIProtectedItemModelCustomProperties.osType,
   "OSType",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties.osName,
+@@clientName(
+  VMwareToAzStackHCIProtectedItemModelCustomProperties.osName,
   "OSName",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties.lastRecoveryPointReceived,
+@@clientName(
+  VMwareToAzStackHCIProtectedItemModelCustomProperties.lastRecoveryPointReceived,
   "LastRecoveryPointReceivedOn",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
+@@clientName(
+  VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
   "VMwareToAzStackHciProtectedItemCustomPropertiesUpdate",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate.osType,
+@@clientName(
+  VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate.osType,
   "OSType",
   "csharp"
 );
 @@clientName(DeploymentPreflightModel, "DeploymentPreflight", "csharp");
 @@clientName(DeploymentPreflight, "DeploymentPreflightOperations", "csharp");
-@@clientName(HyperVToAzStackHCIPolicyModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIPolicyModelCustomProperties,
   "HyperVToAzStackHciPolicyCustomProperties",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIProtectedItemModelCustomProperties,
   "HyperVToAzStackHciProtectedItemCustomProperties",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties.osType,
+@@clientName(
+  HyperVToAzStackHCIProtectedItemModelCustomProperties.osType,
   "OSType",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties.osName,
+@@clientName(
+  HyperVToAzStackHCIProtectedItemModelCustomProperties.osName,
   "OSName",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
+@@clientName(
+  HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
   "HyperVToAzStackHciProtectedItemCustomPropertiesUpdate",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate.osType,
+@@clientName(
+  HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate.osType,
   "OSType",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIRecoveryPointModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIRecoveryPointModelCustomProperties,
   "HyperVToAzStackHciRecoveryPointCustomProperties",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIReplicationExtensionModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIReplicationExtensionModelCustomProperties,
   "HyperVToAzStackHciReplicationExtensionCustomProperties",
   "csharp"
 );
 @@clientName(PlannedFailoverModel, "PlannedFailover", "csharp");
-@@clientName(PlannedFailoverModelProperties,
+@@clientName(
+  PlannedFailoverModelProperties,
   "PlannedFailoverProperties",
   "csharp"
 );
-@@clientName(PlannedFailoverModelCustomProperties,
+@@clientName(
+  PlannedFailoverModelCustomProperties,
   "PlannedFailoverCustomProperties",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIPlannedFailoverModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIPlannedFailoverModelCustomProperties,
   "HyperVToAzStackHciPlannedFailoverCustomProperties",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIPlannedFailoverModelCustomProperties.shutdownSourceVM,
+@@clientName(
+  HyperVToAzStackHCIPlannedFailoverModelCustomProperties.shutdownSourceVM,
   "ShutdownSourceVm",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIPlannedFailoverModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIPlannedFailoverModelCustomProperties,
   "VMwareToAzStackHciPlannedFailoverCustomProperties",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIPlannedFailoverModelCustomProperties.shutdownSourceVM,
+@@clientName(
+  VMwareToAzStackHCIPlannedFailoverModelCustomProperties.shutdownSourceVM,
   "ShutdownSourceVm",
   "csharp"
 );
-@@alternateType(CheckNameAvailabilityModel.type,
+@@alternateType(
+  CheckNameAvailabilityModel.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(DeploymentPreflightResource.type,
+@@alternateType(
+  DeploymentPreflightResource.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(EventModelProperties.resourceType,
+@@alternateType(
+  EventModelProperties.resourceType,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(HealthErrorModel.affectedResourceType,
+@@alternateType(
+  HealthErrorModel.affectedResourceType,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(DeploymentPreflightResource.location,
+@@alternateType(
+  DeploymentPreflightResource.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 @@alternateType(IdentityModel.tenantId, Azure.Core.uuid, "csharp");
-@@alternateType(AzStackHCIFabricModelCustomProperties.fabricResourceId,
+@@alternateType(
+  AzStackHCIFabricModelCustomProperties.fabricResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AzStackHCIFabricModelCustomProperties.fabricContainerId,
+@@alternateType(
+  AzStackHCIFabricModelCustomProperties.fabricContainerId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(HyperVMigrateFabricModelCustomProperties.fabricContainerId,
+@@alternateType(
+  HyperVMigrateFabricModelCustomProperties.fabricContainerId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // java, avoid model name causing file path too long
-@@clientName(VMwareToAzStackHCIPlannedFailoverModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIPlannedFailoverModelCustomProperties,
   "VMwareToAzStackHciPlannedFailoverCustomProps",
   "java"
 );
-@@clientName(VMwareToAzStackHCIReplicationExtensionModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIReplicationExtensionModelCustomProperties,
   "VMwareToAzStackHciRepExtnCustomProps",
   "java"
 );
-@@clientName(HyperVToAzStackHCIRecoveryPointModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIRecoveryPointModelCustomProperties,
   "HyperVToAzStackHciRecoveryPointCustomProps",
   "java"
 );
-@@clientName(HyperVToAzStackHCIPlannedFailoverModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIPlannedFailoverModelCustomProperties,
   "HyperVToAzStackHciPlannedFailoverCustomProps",
   "java"
 );
-@@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIProtectedItemModelCustomProperties,
   "VMwareToAzStackHciProtectedItemCustomProps",
   "java"
 );
-@@clientName(VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
+@@clientName(
+  VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
   "VMwareToAzStackHciProtectedItemCustomPropsUpdate",
   "java"
 );
-@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIProtectedItemModelCustomProperties,
   "HyperVToAzStackHciProtectedItemCustomProps",
   "java"
 );
-@@clientName(HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
+@@clientName(
+  HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
   "HyperVToAzStackHciProtectedItemCustomPropsUpdate",
   "java"
 );
-@@clientName(HyperVToAzStackHCIReplicationExtensionModelCustomProperties,
+@@clientName(
+  HyperVToAzStackHCIReplicationExtensionModelCustomProperties,
   "HyperVToAzStackHciReplicationExtCustomProps",
   "java"
 );
-@@clientName(VMwareToAzStackHCIRecoveryPointModelCustomProperties,
+@@clientName(
+  VMwareToAzStackHCIRecoveryPointModelCustomProperties,
   "VMwareToAzStackHCIRecoveryPointCustomProps",
   "java"
 );
 @@clientName(ReplicationExtensionModel, "ReplicationExtension", "java");
 @@clientName(JobModelCustomProperties, "JobCustomProperties", "java");
 
-@@clientName(Microsoft.DataReplication,
+@@clientName(
+  Microsoft.DataReplication,
   "RecoveryServicesDataReplicationMgmtClient",
   "python"
 );
 @@clientName(Microsoft.DataReplication, "DataReplicationMgmtClient", "java");
-@@alternateType(VaultModelUpdate.identity,
+@@alternateType(
+  VaultModelUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@clientName(HyperVToAzStackHCINicInput,
+@@clientName(
+  HyperVToAzStackHCINicInput,
   "HyperVToAzStackHciNicInput",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCINicInput.isStaticIpMigrationEnabled,
+@@clientName(
+  HyperVToAzStackHCINicInput.isStaticIpMigrationEnabled,
   "IsStaticIPMigrationEnabled",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIProtectedNicProperties,
+@@clientName(
+  HyperVToAzStackHCIProtectedNicProperties,
   "HyperVToAzStackHciProtectedNicProperties",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIDiskInput,
+@@clientName(
+  HyperVToAzStackHCIDiskInput,
   "HyperVToAzStackHciDiskInput",
   "csharp"
 );
 @@clientName(HyperVToAzStackHCIDiskInput.isOsDisk, "IsOSDisk", "csharp");
-@@clientName(VMwareToAzStackHCIDiskInput,
+@@clientName(
+  VMwareToAzStackHCIDiskInput,
   "VMwareToAzStackHciDiskInput",
   "csharp"
 );
 @@clientName(VMwareToAzStackHCIDiskInput.isOsDisk, "IsOSDisk", "csharp");
-@@clientName(VMwareToAzStackHCINicInput,
+@@clientName(
+  VMwareToAzStackHCINicInput,
   "VMwareToAzStackHciNicInput",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCINicInput.isStaticIpMigrationEnabled,
+@@clientName(
+  VMwareToAzStackHCINicInput.isStaticIpMigrationEnabled,
   "IsStaticIPMigrationEnabled",
   "csharp"
 );
 @@clientName(VMNicSelection, "VmNicSelection", "csharp");
-@@clientName(CheckNameAvailability.post,
+@@clientName(
+  CheckNameAvailability.post,
   "CheckDataReplicationNameAvailability",
   "csharp"
 );
-@@clientName(DeploymentPreflight.post,
+@@clientName(
+  DeploymentPreflight.post,
   "PerformDeploymentPreflightValidation",
   "csharp"
 );
-@@clientName(AzStackHCIClusterProperties,
+@@clientName(
+  AzStackHCIClusterProperties,
   "AzStackHciClusterProperties",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIProtectedNicProperties,
+@@clientName(
+  VMwareToAzStackHCIProtectedNicProperties,
   "VMwareToAzStackHciProtectedNicProperties",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIProtectedDiskProperties,
+@@clientName(
+  VMwareToAzStackHCIProtectedDiskProperties,
   "VMwareToAzStackHciProtectedDiskProperties",
   "csharp"
 );
-@@clientName(VMwareToAzStackHCIProtectedDiskProperties.isOsDisk,
+@@clientName(
+  VMwareToAzStackHCIProtectedDiskProperties.isOsDisk,
   "IsOSDisk",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIProtectedDiskProperties,
+@@clientName(
+  HyperVToAzStackHCIProtectedDiskProperties,
   "HyperVToAzStackHciProtectedDiskProperties",
   "csharp"
 );
-@@clientName(HyperVToAzStackHCIProtectedDiskProperties.isOsDisk,
+@@clientName(
+  HyperVToAzStackHCIProtectedDiskProperties.isOsDisk,
   "IsOSDisk",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(FabricModelUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  FabricModelUpdate,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ProtectedItemModelUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ProtectedItemModelUpdate,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(VaultModelUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  VaultModelUpdate,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );

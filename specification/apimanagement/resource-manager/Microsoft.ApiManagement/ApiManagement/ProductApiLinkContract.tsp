@@ -60,7 +60,8 @@ interface ProductApiLinkContractOps
         @minLength(1)
         @maxLength(80)
         apiLinkId: string,
-      }
+      },
+      ResourceName = "ServiceProductApiLink"
     > {}
 
 @armResourceOperations
@@ -75,7 +76,7 @@ interface ProductApiLinkContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -162,7 +163,8 @@ interface WorkspaceProductApiLinkOps
         @minLength(1)
         @maxLength(80)
         apiLinkId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceProductApiLink"
     > {}
 
 @armResourceOperations
@@ -177,7 +179,7 @@ interface WorkspaceProductApiLink {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -223,15 +225,19 @@ interface WorkspaceProductApiLink {
 
 @@maxLength(ProductApiLinkContract.name, 80);
 @@minLength(ProductApiLinkContract.name, 1);
-@@doc(ProductApiLinkContract.name,
+@@doc(
+  ProductApiLinkContract.name,
   "Product-API link identifier. Must be unique in the current API Management service instance."
 );
-@@doc(ProductApiLinkContract.properties,
+@@doc(
+  ProductApiLinkContract.properties,
   "Product-API link entity contract properties."
 );
-@@doc(ProductApiLinkContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ProductApiLinkContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(WorkspaceProductApiLink.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceProductApiLink.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

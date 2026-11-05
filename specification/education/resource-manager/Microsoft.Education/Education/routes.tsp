@@ -11,6 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Education;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("code redeemed")
 model RedeemCodeResponse {
   ...OkResponse;
@@ -28,6 +29,7 @@ op redeemInvitationCode is ArmProviderActionSync<
   Error = DefaultErrorResponse
 >;
 
-@@Azure.ClientGenerator.Core.clientName(redeemInvitationCode::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(
+  redeemInvitationCode::parameters.body,
   "parameters"
 );

@@ -148,12 +148,15 @@ interface SentinelOnboardingStates {
   >;
 }
 
-@@doc(SentinelOnboardingState.name,
+@@doc(
+  SentinelOnboardingState.name,
   "The Sentinel onboarding state name. Supports - default"
 );
-@@doc(SentinelOnboardingState.properties,
+@@doc(
+  SentinelOnboardingState.properties,
   "The Sentinel onboarding state object"
 );
-@@doc(SentinelOnboardingStates.create::parameters.resource,
+@@doc(
+  SentinelOnboardingStates.create::parameters.resource,
   "The Sentinel onboarding state parameter"
 );

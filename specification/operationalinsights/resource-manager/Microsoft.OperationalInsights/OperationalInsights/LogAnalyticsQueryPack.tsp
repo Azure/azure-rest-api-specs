@@ -13,11 +13,10 @@ namespace Microsoft.OperationalInsights;
 /**
  * An Log Analytics QueryPack definition.
  */
-model LogAnalyticsQueryPack
-  is Azure.ResourceManager.TrackedResource<
-    LogAnalyticsQueryPackProperties,
-    false
-  > {
+model LogAnalyticsQueryPack is Azure.ResourceManager.TrackedResource<
+  LogAnalyticsQueryPackProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LogAnalyticsQueryPack,
     KeyName = "queryPackName",
@@ -79,36 +78,44 @@ interface LogAnalyticsQueryPacks {
       /**
        * Maximum items returned in page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing search POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       $top?: int64;
 
       /**
        * Flag indicating whether or not to return the body of each applicable query. If false, only return the query information.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing search POST contract uses includeBody in the query; preserve wire compatibility."
       @query("includeBody")
       includeBody?: boolean;
 
       /**
        * Base64 encoded token used to fetch the next page of items. Default is null.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing search POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
   >;
 }
 
-@@doc(LogAnalyticsQueryPack.name,
+@@doc(
+  LogAnalyticsQueryPack.name,
   "The name of the Log Analytics QueryPack resource."
 );
-@@doc(LogAnalyticsQueryPack.properties,
+@@doc(
+  LogAnalyticsQueryPack.properties,
   "Properties that define a Log Analytics QueryPack resource."
 );
-@@doc(LogAnalyticsQueryPacks.createOrUpdate::parameters.resource,
+@@doc(
+  LogAnalyticsQueryPacks.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create or update a Log Analytics QueryPack."
 );
-@@doc(LogAnalyticsQueryPacks.updateTags::parameters.properties,
+@@doc(
+  LogAnalyticsQueryPacks.updateTags::parameters.properties,
   "Updated tag information to set into the QueryPack instance."
 );
-@@doc(LogAnalyticsQueryPacks.search::parameters.body,
+@@doc(
+  LogAnalyticsQueryPacks.search::parameters.body,
   "Properties by which to search queries in the given Log Analytics QueryPack."
 );

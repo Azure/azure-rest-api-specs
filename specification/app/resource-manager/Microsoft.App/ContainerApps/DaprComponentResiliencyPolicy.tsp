@@ -9,11 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Dapr Component Resiliency Policy.
  */
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_07_01)
 @parentResource(DaprComponent)
 model DaprComponentResiliencyPolicy
   is Azure.ResourceManager.ProxyResource<DaprComponentResiliencyPolicyProperties> {
@@ -56,10 +59,12 @@ alias DaprComponentResiliencyPolicyOps = Azure.ResourceManager.Legacy.LegacyOper
   ErrorType = DefaultErrorResponse
 >;
 
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_07_01)
 @armResourceOperations
 interface DaprComponentResiliencyPolicies {
   /**
-   * Get a Dapr component resiliency policy.
+   * Gets the details of a resiliency policy for a Dapr component.
    */
   @summary("Get a Dapr component resiliency policy.")
   get is DaprComponentResiliencyPolicyOps.Read<DaprComponentResiliencyPolicy>;
@@ -70,9 +75,11 @@ interface DaprComponentResiliencyPolicies {
   @summary("Creates or updates a Dapr component resiliency policy.")
   createOrUpdate is DaprComponentResiliencyPolicyOps.CreateOrUpdateAsync<
     DaprComponentResiliencyPolicy,
-    Response = ArmResourceUpdatedResponse<DaprComponentResiliencyPolicy> | (CreatedResponse & {
-      @bodyRoot body: DaprComponentResiliencyPolicy;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DaprComponentResiliencyPolicy>
+      | (CreatedResponse & {
+          @bodyRoot body: DaprComponentResiliencyPolicy;
+        })
   >;
 
   /**
@@ -82,7 +89,7 @@ interface DaprComponentResiliencyPolicies {
   delete is DaprComponentResiliencyPolicyOps.DeleteSync<DaprComponentResiliencyPolicy>;
 
   /**
-   * Get the resiliency policies for a Dapr component.
+   * Lists the resiliency policies configured for a Dapr component.
    */
   @summary("Get the resiliency policies for a Dapr component.")
   list is DaprComponentResiliencyPolicyOps.List<
@@ -91,12 +98,15 @@ interface DaprComponentResiliencyPolicies {
   >;
 }
 
-@@doc(DaprComponentResiliencyPolicy.name,
+@@doc(
+  DaprComponentResiliencyPolicy.name,
   "Name of the Dapr Component Resiliency Policy."
 );
-@@doc(DaprComponentResiliencyPolicy.properties,
+@@doc(
+  DaprComponentResiliencyPolicy.properties,
   "Dapr Component Resiliency Policy resource specific properties"
 );
-@@doc(DaprComponentResiliencyPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  DaprComponentResiliencyPolicies.createOrUpdate::parameters.resource,
   "Configuration details of the Dapr Component Resiliency Policy."
 );

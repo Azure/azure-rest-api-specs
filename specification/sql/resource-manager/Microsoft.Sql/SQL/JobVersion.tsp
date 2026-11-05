@@ -15,7 +15,9 @@ namespace Microsoft.Sql;
 /**
  * A job version.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Job)
+@Azure.ResourceManager.Legacy.feature(Features.JobVersions)
 model JobVersion is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = JobVersion,
@@ -55,11 +57,14 @@ alias JobVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("versions")
     @key
+    @Azure.ClientGenerator.Core.alternateType(string, "csharp") // The jobVersion is name of the resource JobVersion which must be a string, but the swagger defines it as int32, so we need to use alternateType to make it backwards compatible with the swagger definition. Make this csharp only because it's the only language that forces the type of the resource name to be string.
     jobVersion: int32;
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobVersions)
 interface JobVersions {
   /**
    * Gets a job version.

@@ -5,19 +5,23 @@ using Microsoft.ContainerRegistry;
 
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AgentPool.properties,
   "autorest,csharp,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Run.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Run.properties,
   "autorest,csharp,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Task.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Task.properties,
   "autorest,csharp,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TaskRun.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TaskRun.properties,
   "autorest,csharp,python"
 );
 

@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
@@ -43,6 +43,8 @@ union QueryCaptionType {
 }
 
 /** This parameter is only valid if the query type is `semantic`. When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 union QueryRewritesType {
   string,
@@ -78,6 +80,8 @@ union QueryDebugMode {
 }
 
 /** The language of the query. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 union QueryLanguage {
   string,
@@ -300,6 +304,8 @@ union QueryLanguage {
 }
 
 /** Improve search recall by spell-correcting individual search query terms. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 union QuerySpellerType {
   string,
@@ -322,9 +328,15 @@ union VectorQueryKind {
   Text: "text",
 
   /** Vector query where an url that represents an image value that needs to be vectorized is provided. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   ImageUrl: "imageUrl",
 
   /** Vector query where a base 64 encoded binary of an image that needs to be vectorized is provided. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   ImageBinary: "imageBinary",
 }
 
@@ -350,6 +362,9 @@ union VectorFilterMode {
   PreFilter: "preFilter",
 
   /** The filter will be applied after the global top-k candidate set of vector results is returned. This will result in fewer results than requested by the parameter 'k'. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   StrictPostFilter: "strictPostFilter",
 }
 
@@ -404,6 +419,8 @@ union SemanticSearchResultsType {
 }
 
 /** Type of query rewrite that was used for this request. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 union SemanticQueryRewritesResultType {
   string,
@@ -476,6 +493,7 @@ union AutocompleteMode {
 }
 
 /** Parameters grouped for search operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchOptions {
   /** A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. */
   @query("$count")
@@ -505,6 +523,11 @@ model SearchOptions {
   /** A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100. */
   @query
   minimumCoverage?: float64;
+
+  /** The key of the document to use as the basis for finding similar documents. This parameter cannot be used together with search text. */
+  @added(Versions.v2026_10_01)
+  @query
+  moreLikeThis?: string;
 
   /** The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. */
   @query("$orderby")
@@ -578,6 +601,8 @@ model SearchOptions {
   semanticQuery?: string;
 
   /** When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @query
   queryRewrites?: QueryRewritesType;
@@ -587,22 +612,29 @@ model SearchOptions {
   debug?: QueryDebugMode;
 
   /** The language of the query. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @query
   queryLanguage?: QueryLanguage;
 
   /** Improve search recall by spell-correcting individual search query terms. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @query
   speller?: QuerySpellerType;
 
   /** The list of field names used for semantic ranking. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @query
   semanticFields?: string[];
 }
 
 /** Parameters grouped for suggest operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SuggestOptions {
   /** An OData expression that filters the documents considered for suggestions. */
   @query("$filter")
@@ -666,6 +698,8 @@ model SearchDocumentsResult {
 
   /** Debug information that applies to the search results as a whole. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.debug")
@@ -698,6 +732,8 @@ model SearchDocumentsResult {
   semanticPartialResponseType?: SemanticSearchResultsType;
 
   /** Type of query rewrite that was used to retrieve documents. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.semanticQueryRewritesResultType")
@@ -712,31 +748,43 @@ model FacetResult is Record<unknown> {
   count?: int64;
 
   /** The resulting total avg for the facet when a avg metric is requested. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   avg?: float64;
 
   /** The resulting total min for the facet when a min metric is requested. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   min?: float64;
 
   /** The resulting total max for the facet when a max metric is requested. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   max?: float64;
 
   /** The resulting total sum for the facet when a sum metric is requested. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   sum?: float64;
 
   /** The resulting total cardinality for the facet when a cardinality metric is requested. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   cardinality?: int64;
 
   /** The nested facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not contain any nested facets. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.facets")
@@ -765,14 +813,18 @@ model QueryAnswerResult is Record<unknown> {
 }
 
 /** Contains debugging information that can be used to further explore your search results. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model DebugInfo {
   /** Contains debugging information specific to query rewrites. */
-  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
 }
 
 /** Contains debugging information specific to query rewrites. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model QueryRewritesDebugInfo {
   /** List of query rewrites generated for the text query. */
@@ -785,6 +837,8 @@ model QueryRewritesDebugInfo {
 }
 
 /** Contains debugging information specific to query rewrites. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model QueryRewritesValuesDebugInfo {
   /** The input text to the generative query rewriting model. There may be cases where the user query and the input to the generative model are not identical. */
@@ -797,6 +851,7 @@ model QueryRewritesValuesDebugInfo {
 }
 
 /** Parameters for filtering, sorting, faceting, paging, and other search query behaviors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchRequest {
   /** A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. */
   count?: boolean;
@@ -821,6 +876,10 @@ model SearchRequest {
 
   /** A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100. */
   minimumCoverage?: float64;
+
+  /** The key of the document to use as the basis for finding similar documents. This parameter cannot be used together with search text. */
+  @added(Versions.v2026_10_01)
+  moreLikeThis?: string;
 
   /** The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
@@ -859,10 +918,14 @@ model SearchRequest {
   searchMode?: SearchMode;
 
   /** A value that specifies the language of the search query. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   queryLanguage?: QueryLanguage;
 
   /** A value that specifies the type of the speller to use to spell-correct individual search query terms. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   speller?: QuerySpellerType;
 
@@ -898,12 +961,16 @@ model SearchRequest {
   captions?: QueryCaptionType;
 
   /** A value that specifies whether query rewrites should be generated to augment the search query. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   queryRewrites?: QueryRewritesType;
 
   /** The comma-separated list of field names used for semantic ranking. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @encode(ArrayEncoding.commaDelimited)
   semanticFields?: string[];
@@ -915,6 +982,8 @@ model SearchRequest {
   vectorFilterMode?: VectorFilterMode;
 
   /** The query parameters to configure hybrid search behaviors. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   hybridSearch?: HybridSearch;
 }
@@ -938,14 +1007,20 @@ model VectorQuery {
   weight?: float32;
 
   /** The threshold used for vector queries. Note this can only be set if all 'fields' use the same similarity metric. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   threshold?: VectorThreshold;
 
   /** The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   filterOverride?: string;
 
   /** Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched. Default is 0. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   perDocumentVectorLimit?: int32;
 
@@ -961,6 +1036,8 @@ model VectorThreshold {
 }
 
 /** The query parameters to configure hybrid search behaviors. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model HybridSearch {
   /** Determines the maximum number of documents to be retrieved by the text query portion of a hybrid search request. Those documents will be combined with the documents matching the vector queries to produce a single final list of results. Choosing a larger maxTextRecallSize value will allow retrieving and paging through more documents (using the top and skip parameters), at the cost of higher resource utilization and higher latency. The value needs to be between 1 and 10,000. Default is 1000. */
@@ -1028,6 +1105,8 @@ model QueryCaptionResult {
 /** Contains debugging information that can be used to further explore your search results. */
 model DocumentDebugInfo {
   /** Contains debugging information specific to semantic ranking requests. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   semantic?: SemanticDebugInfo;
@@ -1037,12 +1116,16 @@ model DocumentDebugInfo {
   vectors?: VectorsDebugInfo;
 
   /** Contains debugging information specific to vectors matched within a collection of complex types. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   innerHits?: Record<QueryResultDocumentInnerHit[]>;
 }
 
 /** Contains debugging information specific to semantic ranking requests. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model SemanticDebugInfo {
   /** The title field that was sent to the semantic enrichment process, as well as how it was used */
@@ -1164,6 +1247,7 @@ model SuggestResult {
 }
 
 /** Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SuggestRequest {
   /** An OData expression that filters the documents considered for suggestions. */
   filter?: string;
@@ -1287,6 +1371,7 @@ model AutocompleteItem {
 }
 
 /** Parameters for fuzzy matching, and other autocomplete query behaviors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AutocompleteRequest {
   /** The search text on which to base autocomplete results. */
   search: string;
@@ -1312,7 +1397,6 @@ model AutocompleteRequest {
   /** The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. */
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @encode(ArrayEncoding.commaDelimited)
   searchFields?: string[];
 
@@ -1338,6 +1422,8 @@ model VectorizableTextQuery extends VectorQuery {
   text: string;
 
   /** Can be configured to let a generative model rewrite the query before sending it to be vectorized. */
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   queryRewrites?: QueryRewritesType;
 
@@ -1346,6 +1432,9 @@ model VectorizableTextQuery extends VectorQuery {
 }
 
 /** The query parameters to use for vector search when an url that represents an image value that needs to be vectorized is provided. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model VectorizableImageUrlQuery extends VectorQuery {
   /** The URL of an image to be vectorized to perform a vector search query. */
   url?: string;
@@ -1355,6 +1444,9 @@ model VectorizableImageUrlQuery extends VectorQuery {
 }
 
 /** The query parameters to use for vector search when a base 64 encoded binary of an image that needs to be vectorized is provided. */
+@removed(Versions.v2026_10_01)
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model VectorizableImageBinaryQuery extends VectorQuery {
   /** The base 64 encoded binary of an image to be vectorized to perform a vector search query. */
   base64Image?: string;

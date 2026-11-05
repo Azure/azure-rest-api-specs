@@ -114,9 +114,11 @@ interface ScopeAccessReviewDefaultSettings {
 
 @@doc(AccessReviewDefaultSettings.name, "");
 @@doc(AccessReviewDefaultSettings.properties, "Access Review properties.");
-@@doc(AccessReviewDefaultSettingsOperationGroup.put::parameters.resource,
+@@doc(
+  AccessReviewDefaultSettingsOperationGroup.put::parameters.resource,
   "Access review schedule settings."
 );
-@@doc(ScopeAccessReviewDefaultSettings.put::parameters.resource,
+@@doc(
+  ScopeAccessReviewDefaultSettings.put::parameters.resource,
   "Access review schedule settings."
 );

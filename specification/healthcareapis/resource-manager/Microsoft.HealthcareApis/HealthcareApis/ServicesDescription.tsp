@@ -103,9 +103,11 @@ interface ServicesDescriptions {
 @@minLength(ServicesDescription.name, 3);
 @@doc(ServicesDescription.name, "The name of the service instance.");
 @@doc(ServicesDescription.properties, "The common properties of a service.");
-@@doc(ServicesDescriptions.createOrUpdate::parameters.resource,
+@@doc(
+  ServicesDescriptions.createOrUpdate::parameters.resource,
   "The service instance metadata."
 );
-@@doc(ServicesDescriptions.update::parameters.properties,
+@@doc(
+  ServicesDescriptions.update::parameters.properties,
   "The service instance metadata and security metadata."
 );

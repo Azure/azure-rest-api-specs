@@ -3,32 +3,40 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DataMigration;
 
-@@clientLocation(DatabaseMigrationCosmosDbMongos.get,
+@@clientLocation(
+  DatabaseMigrationCosmosDbMongos.get,
   "DatabaseMigrationsMongoToCosmosDbRUMongo"
 );
-@@clientLocation(DatabaseMigrationCosmosDbMongos.create,
+@@clientLocation(
+  DatabaseMigrationCosmosDbMongos.create,
   "DatabaseMigrationsMongoToCosmosDbRUMongo"
 );
-@@clientName(DatabaseMigrationCosmosDbMongos.create::parameters.resource,
+@@clientName(
+  DatabaseMigrationCosmosDbMongos.create::parameters.resource,
   "parameters"
 );
-@@clientLocation(DatabaseMigrationCosmosDbMongos.delete,
+@@clientLocation(
+  DatabaseMigrationCosmosDbMongos.delete,
   "DatabaseMigrationsMongoToCosmosDbRUMongo"
 );
-@@clientLocation(DatabaseMigrationCosmosDbMongos.getForScope,
+@@clientLocation(
+  DatabaseMigrationCosmosDbMongos.getForScope,
   "DatabaseMigrationsMongoToCosmosDbRUMongo"
 );
-@@clientName(DatabaseMigrationsMongoToCosmosDbvCoreMongo.create::parameters.resource,
+@@clientName(
+  DatabaseMigrationsMongoToCosmosDbvCoreMongo.create::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseMigrationCosmosDbMongo.properties);
 
 @@clientLocation(DatabaseMigrationSqlDbs.get, "DatabaseMigrationsSqlDb");
-@@clientLocation(DatabaseMigrationSqlDbs.createOrUpdate,
+@@clientLocation(
+  DatabaseMigrationSqlDbs.createOrUpdate,
   "DatabaseMigrationsSqlDb"
 );
-@@clientName(DatabaseMigrationSqlDbs.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseMigrationSqlDbs.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DatabaseMigrationSqlDbs.delete, "DatabaseMigrationsSqlDb");
@@ -37,15 +45,18 @@ using Microsoft.DataMigration;
 @@clientName(DatabaseMigrationSqlDbs.cancel::parameters.body, "parameters");
 @@clientLocation(DatabaseMigrationSqlDbs.retry, "DatabaseMigrationsSqlDb");
 @@clientName(DatabaseMigrationSqlDbs.retry, "retry");
-@@clientName(DatabaseMigrationSqlDbs.retry::parameters.body,
+@@clientName(
+  DatabaseMigrationSqlDbs.retry::parameters.body,
   "migrationOperationInput"
 );
 
 @@clientLocation(DatabaseMigrationSqlMis.get, "DatabaseMigrationsSqlMi");
-@@clientLocation(DatabaseMigrationSqlMis.createOrUpdate,
+@@clientLocation(
+  DatabaseMigrationSqlMis.createOrUpdate,
   "DatabaseMigrationsSqlMi"
 );
-@@clientName(DatabaseMigrationSqlMis.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseMigrationSqlMis.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DatabaseMigrationSqlMis.delete, "DatabaseMigrationsSqlMi");
@@ -57,10 +68,12 @@ using Microsoft.DataMigration;
 @@clientName(DatabaseMigrationSqlMis.cutover::parameters.body, "parameters");
 
 @@clientLocation(DatabaseMigrationSqlVms.get, "DatabaseMigrationsSqlVm");
-@@clientLocation(DatabaseMigrationSqlVms.createOrUpdate,
+@@clientLocation(
+  DatabaseMigrationSqlVms.createOrUpdate,
   "DatabaseMigrationsSqlVm"
 );
-@@clientName(DatabaseMigrationSqlVms.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseMigrationSqlVms.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DatabaseMigrationSqlVms.delete, "DatabaseMigrationsSqlVm");
@@ -71,7 +84,8 @@ using Microsoft.DataMigration;
 @@clientName(DatabaseMigrationSqlVms.cutover, "cutover");
 @@clientName(DatabaseMigrationSqlVms.cutover::parameters.body, "parameters");
 
-@@clientName(MigrationServices.createOrUpdate::parameters.resource,
+@@clientName(
+  MigrationServices.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(MigrationServices.update::parameters.properties, "parameters");
@@ -79,13 +93,15 @@ using Microsoft.DataMigration;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MigrationService.properties);
 
-@@clientName(SqlMigrationServices.createOrUpdate::parameters.resource,
+@@clientName(
+  SqlMigrationServices.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(SqlMigrationServices.update::parameters.properties, "parameters");
 @@clientName(SqlMigrationServices.listAuthKeys, "listAuthKeys");
 @@clientName(SqlMigrationServices.regenerateAuthKeys, "regenerateAuthKeys");
-@@clientName(SqlMigrationServices.regenerateAuthKeys::parameters.body,
+@@clientName(
+  SqlMigrationServices.regenerateAuthKeys::parameters.body,
   "parameters"
 );
 @@clientName(SqlMigrationServices.deleteNode, "deleteNode");
@@ -97,7 +113,8 @@ using Microsoft.DataMigration;
 
 @@clientLocation(DataMigrationServices.get, "Services");
 @@clientLocation(DataMigrationServices.createOrUpdate, "Services");
-@@clientName(DataMigrationServices.createOrUpdate::parameters.resource,
+@@clientName(
+  DataMigrationServices.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DataMigrationServices.update, "Services");
@@ -109,10 +126,12 @@ using Microsoft.DataMigration;
 @@clientLocation(DataMigrationServices.start, "Services");
 @@clientLocation(DataMigrationServices.stop, "Services");
 @@clientLocation(DataMigrationServices.listSkus, "Services");
-@@clientLocation(DataMigrationServices.checkChildrenNameAvailability,
+@@clientLocation(
+  DataMigrationServices.checkChildrenNameAvailability,
   "Services"
 );
-@@clientName(DataMigrationServices.checkChildrenNameAvailability::parameters.body,
+@@clientName(
+  DataMigrationServices.checkChildrenNameAvailability::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -152,6 +171,7 @@ using Microsoft.DataMigration;
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
 
-@@clientName(ServicesOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  ServicesOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );

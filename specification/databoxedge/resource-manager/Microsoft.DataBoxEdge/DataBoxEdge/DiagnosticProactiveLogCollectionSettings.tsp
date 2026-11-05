@@ -16,11 +16,10 @@ namespace Microsoft.DataBoxEdge;
  */
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
-model DiagnosticProactiveLogCollectionSettings
-  is Azure.ResourceManager.ProxyResource<
-    ProactiveLogCollectionSettingsProperties,
-    false
-  > {
+model DiagnosticProactiveLogCollectionSettings is Azure.ResourceManager.ProxyResource<
+  ProactiveLogCollectionSettingsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DiagnosticProactiveLogCollectionSettings,
     KeyName = "diagnosticProactiveLogCollectionSetting",
@@ -46,16 +45,20 @@ interface DiagnosticSettings {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateDiagnosticProactiveLogCollectionSettings is ArmResourceCreateOrReplaceAsync<
     DiagnosticProactiveLogCollectionSettings,
-    Response = ArmResourceUpdatedResponse<DiagnosticProactiveLogCollectionSettings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiagnosticProactiveLogCollectionSettings> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<DiagnosticProactiveLogCollectionSettings>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiagnosticProactiveLogCollectionSettings> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 }
 
 @@doc(DiagnosticProactiveLogCollectionSettings.name, "");
-@@doc(DiagnosticProactiveLogCollectionSettings.properties,
+@@doc(
+  DiagnosticProactiveLogCollectionSettings.properties,
   "Properties of the diagnostic proactive log collection settings."
 );
-@@doc(DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings::parameters.resource,
+@@doc(
+  DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings::parameters.resource,
   "The proactive log collection settings."
 );

@@ -35,13 +35,15 @@ using Microsoft.StorageCache;
 
 @@clientLocation(AmlFilesystems.get, "amlFilesystems", "!python");
 @@clientLocation(AmlFilesystems.createOrUpdate, "amlFilesystems", "!python");
-@@clientName(AmlFilesystems.createOrUpdate::parameters.resource,
+@@clientName(
+  AmlFilesystems.createOrUpdate::parameters.resource,
   "amlFilesystem"
 );
 @@clientLocation(AmlFilesystems.update, "amlFilesystems", "!python");
 @@clientName(AmlFilesystems.update::parameters.properties, "amlFilesystem");
 @@clientLocation(AmlFilesystems.delete, "amlFilesystems", "!python");
-@@clientLocation(AmlFilesystems.listByResourceGroup,
+@@clientLocation(
+  AmlFilesystems.listByResourceGroup,
   "amlFilesystems",
   "!python"
 );
@@ -54,13 +56,15 @@ using Microsoft.StorageCache;
 
 @@clientLocation(AutoExportJobs.get, "autoExportJobs", "!python");
 @@clientLocation(AutoExportJobs.createOrUpdate, "autoExportJobs", "!python");
-@@clientName(AutoExportJobs.createOrUpdate::parameters.resource,
+@@clientName(
+  AutoExportJobs.createOrUpdate::parameters.resource,
   "autoExportJob"
 );
 @@clientLocation(AutoExportJobs.update, "autoExportJobs", "!python");
 @@clientName(AutoExportJobs.update::parameters.properties, "autoExportJob");
 @@clientLocation(AutoExportJobs.delete, "autoExportJobs", "!python");
-@@clientLocation(AutoExportJobs.listByAmlFilesystem,
+@@clientLocation(
+  AutoExportJobs.listByAmlFilesystem,
   "autoExportJobs",
   "!python"
 );
@@ -79,13 +83,15 @@ using Microsoft.StorageCache;
 
 @@clientLocation(AutoImportJobs.get, "autoImportJobs", "!python");
 @@clientLocation(AutoImportJobs.createOrUpdate, "autoImportJobs", "!python");
-@@clientName(AutoImportJobs.createOrUpdate::parameters.resource,
+@@clientName(
+  AutoImportJobs.createOrUpdate::parameters.resource,
   "autoImportJob"
 );
 @@clientLocation(AutoImportJobs.update, "autoImportJobs", "!python");
 @@clientName(AutoImportJobs.update::parameters.properties, "autoImportJob");
 @@clientLocation(AutoImportJobs.delete, "autoImportJobs", "!python");
-@@clientLocation(AutoImportJobs.listByAmlFilesystem,
+@@clientLocation(
+  AutoImportJobs.listByAmlFilesystem,
   "autoImportJobs",
   "!python"
 );
@@ -112,13 +118,30 @@ using Microsoft.StorageCache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Cache.properties);
 
-@@clientName(StorageTargets.createOrUpdate::parameters.resource,
+@@clientName(
+  StorageTargets.createOrUpdate::parameters.resource,
   "storagetarget"
 );
-@@clientLocation(StorageTargets.flush, "StorageTarget");
-@@clientLocation(StorageTargets.suspend, "StorageTarget");
-@@clientLocation(StorageTargets.resume, "StorageTarget");
-@@clientLocation(StorageTargets.invalidate, "StorageTarget");
+@@clientLocation(StorageTargets.flush, "StorageTarget", "!javascript");
+@@clientLocation(StorageTargets.suspend, "StorageTarget", "!javascript");
+@@clientLocation(StorageTargets.resume, "StorageTarget", "!javascript");
+@@clientLocation(StorageTargets.invalidate, "StorageTarget", "!javascript");
+@@clientLocation(StorageTargets.flush, "StorageTargetOperations", "javascript");
+@@clientLocation(
+  StorageTargets.suspend,
+  "StorageTargetOperations",
+  "javascript"
+);
+@@clientLocation(
+  StorageTargets.resume,
+  "StorageTargetOperations",
+  "javascript"
+);
+@@clientLocation(
+  StorageTargets.invalidate,
+  "StorageTargetOperations",
+  "javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(StorageTarget.properties);
 
@@ -135,7 +158,8 @@ using Microsoft.StorageCache;
 
 @@clientLocation(AscUsagesOperationGroup.list, "AscUsages");
 @@clientName(checkAmlFSSubnets::parameters.body, "amlFilesystemSubnetInfo");
-@@clientName(getRequiredAmlFSSubnetsSize::parameters.body,
+@@clientName(
+  getRequiredAmlFSSubnetsSize::parameters.body,
   "requiredAMLFilesystemSubnetsSizeInfo"
 );
 
@@ -143,6 +167,7 @@ using Microsoft.StorageCache;
 
 @@Azure.ResourceManager.identifiers(CacheProperties.spaceAllocation, #["name"]);
 
-@@Azure.ResourceManager.identifiers(CacheProperties.primingJobs,
+@@Azure.ResourceManager.identifiers(
+  CacheProperties.primingJobs,
   #["primingJobId"]
 );

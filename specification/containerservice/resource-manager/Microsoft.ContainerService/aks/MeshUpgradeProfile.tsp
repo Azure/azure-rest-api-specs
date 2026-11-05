@@ -31,7 +31,8 @@ model MeshUpgradeProfile
 @@maxLength(MeshUpgradeProfile.name, 24);
 @@minLength(MeshUpgradeProfile.name, 1);
 @@doc(MeshUpgradeProfile.name, "The mode of the mesh.");
-@@doc(MeshUpgradeProfile.properties,
+@@doc(
+  MeshUpgradeProfile.properties,
   "Mesh upgrade profile properties for a major.minor release."
 );
 

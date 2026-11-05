@@ -158,9 +158,11 @@ interface ViewOperationGroup {
 
 @@doc(View.name, "View name");
 @@doc(View.properties, "The properties of the view.");
-@@doc(Views.createOrUpdate::parameters.resource,
+@@doc(
+  Views.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate View operation."
 );
-@@doc(ViewOperationGroup.createOrUpdateByScope::parameters.resource,
+@@doc(
+  ViewOperationGroup.createOrUpdateByScope::parameters.resource,
   "Parameters supplied to the CreateOrUpdate View operation."
 );

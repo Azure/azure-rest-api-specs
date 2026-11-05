@@ -83,13 +83,16 @@ using Microsoft.AVS;
 
 @@clientName(WorkloadNetworkPortMirroringProfiles.list, "ListPortMirroring");
 @@clientName(WorkloadNetworkPortMirroringProfiles.get, "GetPortMirroring");
-@@clientName(WorkloadNetworkPortMirroringProfiles.create,
+@@clientName(
+  WorkloadNetworkPortMirroringProfiles.create,
   "CreatePortMirroring"
 );
-@@clientName(WorkloadNetworkPortMirroringProfiles.update,
+@@clientName(
+  WorkloadNetworkPortMirroringProfiles.update,
   "UpdatePortMirroring"
 );
-@@clientName(WorkloadNetworkPortMirroringProfiles.delete,
+@@clientName(
+  WorkloadNetworkPortMirroringProfiles.delete,
   "DeletePortMirroring"
 );
 
@@ -116,94 +119,117 @@ using Microsoft.AVS;
 
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudLink.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CloudLink.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Cluster.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Cluster.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Datastore.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Datastore.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExpressRouteAuthorization.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ExpressRouteAuthorization.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalReachConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GlobalReachConnection.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HcxEnterpriseSite.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HcxEnterpriseSite.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IscsiPath.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  IscsiPath.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateCloud.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateCloud.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProvisionedNetwork.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProvisionedNetwork.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PureStoragePolicy.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PureStoragePolicy.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptCmdlet.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScriptCmdlet.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptExecution.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScriptExecution.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptPackage.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScriptPackage.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachine.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  VirtualMachine.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsService.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkDnsService.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsZone.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkDnsZone.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkGateway.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkGateway.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPortMirroring.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkPortMirroring.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetwork.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetwork.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPublicIP.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkPublicIP.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkSegment.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkSegment.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVMGroup.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkVMGroup.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVirtualMachine.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkVirtualMachine.properties,
   "autorest"
 );

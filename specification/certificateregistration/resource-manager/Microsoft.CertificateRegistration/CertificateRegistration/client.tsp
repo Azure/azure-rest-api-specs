@@ -5,94 +5,115 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.CertificateRegistration;
 
-@@clientName(Microsoft.CertificateRegistration,
+@@clientName(
+  Microsoft.CertificateRegistration,
   "CertificateRegistrationManagementClient",
   "javascript"
 );
 
-@@clientName(Microsoft.CertificateRegistration,
+@@clientName(
+  Microsoft.CertificateRegistration,
   "CertificateRegistrationMgmtClient",
   "python"
 );
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(AppServiceCertificate,
+@@clientName(
+  AppServiceCertificate,
   "AppServiceCertificateProperties",
   "csharp"
 );
-@@alternateType(AppServiceCertificate.keyVaultId,
+@@alternateType(
+  AppServiceCertificate.keyVaultId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(AppServiceCertificateResource, "AppServiceCertificate", "csharp");
 @@clientName(DetectorResponse, "AppServiceDetector", "csharp");
-@@clientName(RenewCertificateOrderRequest,
+@@clientName(
+  RenewCertificateOrderRequest,
   "RenewCertificateOrderContent",
   "csharp"
 );
 @@clientName(SiteSealRequest, "SiteSealContent", "csharp");
 @@clientName(SiteSealRequest.lightTheme, "IsLightTheme", "csharp");
 @@clientName(DiagnosticData, "DiagnosticDataset", "csharp");
-@@clientName(ReissueCertificateOrderRequest,
+@@clientName(
+  ReissueCertificateOrderRequest,
   "ReissueCertificateOrderContent",
   "csharp"
 );
-@@clientName(DetectorResponseCollection,
+@@clientName(
+  DetectorResponseCollection,
   "AppServiceDetectorListResult",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderCollection,
+@@clientName(
+  AppServiceCertificateOrderCollection,
   "AppServiceCertificateOrderListResult",
   "csharp"
 );
-@@clientName(AppServiceCertificatePatchResource,
+@@clientName(
+  AppServiceCertificatePatchResource,
   "AppServiceCertificatePatch",
   "csharp"
 );
-@@clientName(AppServiceCertificateCollection,
+@@clientName(
+  AppServiceCertificateCollection,
   "AppServiceCertificateListResult",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderProperties.autoRenew,
+@@clientName(
+  AppServiceCertificateOrderProperties.autoRenew,
   "IsAutoRenew",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderProperties.productType,
+@@clientName(
+  AppServiceCertificateOrderProperties.productType,
   "CertificateProductType",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderPatchResourceProperties.productType,
+@@clientName(
+  AppServiceCertificateOrderPatchResourceProperties.productType,
   "CertificateProductType",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderProperties.expirationTime,
+@@clientName(
+  AppServiceCertificateOrderProperties.expirationTime,
   "ExpireOn",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderProperties.lastCertificateIssuanceTime,
+@@clientName(
+  AppServiceCertificateOrderProperties.lastCertificateIssuanceTime,
   "LastCertificateIssuedOn",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderProperties.nextAutoRenewalTimeStamp,
+@@clientName(
+  AppServiceCertificateOrderProperties.nextAutoRenewalTimeStamp,
   "NextAutoRenewOn",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderPatchResourceProperties.nextAutoRenewalTimeStamp,
+@@clientName(
+  AppServiceCertificateOrderPatchResourceProperties.nextAutoRenewalTimeStamp,
   "NextAutoRenewOn",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderPatchResourceProperties.autoRenew,
+@@clientName(
+  AppServiceCertificateOrderPatchResourceProperties.autoRenew,
   "IsAutoRenew",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderPatchResourceProperties.lastCertificateIssuanceTime,
+@@clientName(
+  AppServiceCertificateOrderPatchResourceProperties.lastCertificateIssuanceTime,
   "LastCertificateIssuedOn",
   "csharp"
 );
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "CertificateRegistrationProvisioningState",
   "csharp"
 );
@@ -109,47 +130,56 @@ using Microsoft.CertificateRegistration;
 @@clientName(NameIdentifier, "AppServiceDomainNameIdentifier", "csharp");
 @@clientName(Rendering, "DiagnosticDataRendering", "csharp");
 @@clientName(RenderingType, "DiagnosticDataRenderingType", "csharp");
-@@clientName(ResourceNotRenewableReason,
+@@clientName(
+  ResourceNotRenewableReason,
   "AppServiceCertificateNotRenewableReason",
   "csharp"
 );
 @@clientName(Status, "DetectorStatusInfo", "csharp");
 @@clientName(SupportTopic, "DetectorSupportTopic", "csharp");
 @@alternateType(SupportTopic.pesId, armResourceIdentifier, "csharp");
-@@clientName(GetAppServiceCertificateOrderDetectorParameters.startTime,
+@@clientName(
+  GetAppServiceCertificateOrderDetectorParameters.startTime,
   "StartOn",
   "csharp"
 );
-@@clientName(GetAppServiceCertificateOrderDetectorParameters.endTime,
+@@clientName(
+  GetAppServiceCertificateOrderDetectorParameters.endTime,
   "EndOn",
   "csharp"
 );
-@@clientName(CertificateOrderStatus.Pendingissuance,
+@@clientName(
+  CertificateOrderStatus.Pendingissuance,
   "PendingIssuance",
   "csharp"
 );
-@@clientName(CertificateOrderStatus.Pendingrevocation,
+@@clientName(
+  CertificateOrderStatus.Pendingrevocation,
   "PendingRevocation",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AppServiceCertificateOrderPatchResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AppServiceCertificateOrderPatchResource,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AppServiceCertificatePatchResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AppServiceCertificatePatchResource,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ReissueCertificateOrderRequest,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ReissueCertificateOrderRequest,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(RenewCertificateOrderRequest,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  RenewCertificateOrderRequest,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );

@@ -52,7 +52,8 @@ interface SiteExtensionInfoOps
         @segment("siteextensions")
         @key
         siteExtensionId: string,
-      }
+      },
+      ResourceName = "WebSiteExtension"
     > {}
 
 @tag("WebApps")
@@ -78,11 +79,14 @@ interface SiteExtensionInfos {
     LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
       Azure.Core.Foundations.RetryAfterHeader,
     Request = void,
-    Response = ArmResponse<SiteExtensionInfo> | ArmResourceCreatedResponse<
-      SiteExtensionInfo,
-      LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmTooManyRequestsResponse,
+    Response =
+      | ArmResponse<SiteExtensionInfo>
+      | ArmResourceCreatedResponse<
+          SiteExtensionInfo,
+          LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmTooManyRequestsResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -135,7 +139,8 @@ interface SiteExtensionInfoOperationGroupOps
         @segment("siteextensions")
         @key
         siteExtensionId: string,
-      }
+      },
+      ResourceName = "WebSiteSlotExtension"
     > {}
 
 @tag("WebApps")
@@ -162,11 +167,14 @@ interface SiteExtensionInfoOperationGroup {
     LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
       Azure.Core.Foundations.RetryAfterHeader,
     Request = void,
-    Response = ArmResponse<SiteExtensionInfo> | ArmResourceCreatedResponse<
-      SiteExtensionInfo,
-      LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmTooManyRequestsResponse,
+    Response =
+      | ArmResponse<SiteExtensionInfo>
+      | ArmResourceCreatedResponse<
+          SiteExtensionInfo,
+          LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmTooManyRequestsResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
   /**
@@ -193,6 +201,7 @@ interface SiteExtensionInfoOperationGroup {
 }
 
 @@doc(SiteExtensionInfo.name, "Site extension name.");
-@@doc(SiteExtensionInfo.properties,
+@@doc(
+  SiteExtensionInfo.properties,
   "SiteExtensionInfo resource specific properties"
 );

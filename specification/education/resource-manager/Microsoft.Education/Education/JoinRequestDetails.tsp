@@ -12,6 +12,7 @@ namespace Microsoft.Education;
 /**
  * join requests.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @parentResource(LabDetails)
 model JoinRequestDetails
   is Azure.ResourceManager.ProxyResource<JoinRequestProperties> {
@@ -120,7 +121,8 @@ interface JoinRequests {
   >;
 }
 
-@@doc(JoinRequestDetails.name,
+@@doc(
+  JoinRequestDetails.name,
   "The ID that uniquely identifies a join request."
 );
 @@doc(JoinRequestDetails.properties, "join request properties.");

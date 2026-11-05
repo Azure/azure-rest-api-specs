@@ -419,12 +419,15 @@ interface AccessReviewInstancesAssignedForMyApproval {
 
 @@doc(AccessReviewInstance.name, "The id of the access review instance.");
 @@doc(AccessReviewInstance.properties, "Access Review properties.");
-@@doc(AccessReviewInstances.create::parameters.resource,
+@@doc(
+  AccessReviewInstances.create::parameters.resource,
   "Access review instance properties."
 );
-@@doc(ScopeAccessReviewInstances.create::parameters.resource,
+@@doc(
+  ScopeAccessReviewInstances.create::parameters.resource,
   "Access review instance properties."
 );
-@@doc(ScopeAccessReviewInstances.recordAllDecisions::parameters.body,
+@@doc(
+  ScopeAccessReviewInstances.recordAllDecisions::parameters.body,
   "Record all decisions payload."
 );

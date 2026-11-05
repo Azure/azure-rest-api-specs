@@ -1,16 +1,18 @@
-export enum LogLevel {
-  Error = "error",
-  Warn = "warn",
-  Info = "info",
-  Debug = "debug",
-  Group = "group",
-  EndGroup = "endgroup",
-}
+export const LogLevel = {
+  Error: "error",
+  Warn: "warn",
+  Info: "info",
+  Debug: "debug",
+  Group: "group",
+  EndGroup: "endgroup",
+} as const;
+export type LogLevel = (typeof LogLevel)[keyof typeof LogLevel];
 
-export enum LogIssueType {
-  Error = "error",
-  Warning = "warning",
-}
+export const LogIssueType = {
+  Error: "error",
+  Warning: "warning",
+} as const;
+export type LogIssueType = (typeof LogIssueType)[keyof typeof LogIssueType];
 
 /**
  * Logs a message to the console with a specified log level. *
@@ -55,7 +57,11 @@ export function vsoLogIssue(message: string, type: LogIssueType = LogIssueType.E
 }
 
 export function setVsoVariable(variable: string, value: string, isOutput = false): void {
+  const escapedValue = value
+    .replaceAll("%", "%AZP25")
+    .replaceAll("\r", "%0D")
+    .replaceAll("\n", "%0A");
   console.log(
-    `##vso[task.setVariable variable=${variable}${isOutput ? ";isoutput=true" : ""}]${value}`,
+    `##vso[task.setVariable variable=${variable}${isOutput ? ";isoutput=true" : ""}]${escapedValue}`,
   );
 }

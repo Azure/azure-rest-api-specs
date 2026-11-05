@@ -60,7 +60,8 @@ interface ApiKVReferenceOps
         @segment("appsettings")
         @key
         appSettingKey: string,
-      }
+      },
+      ResourceName = "SiteConfigAppsetting"
     > {}
 
 @tag("WebApps")
@@ -114,7 +115,8 @@ interface ApiKVReferenceOperationGroupOps
         @segment("connectionstrings")
         @key
         connectionStringKey: string,
-      }
+      },
+      ResourceName = "WebSiteConfigConnectionString"
     > {}
 
 @tag("WebApps")
@@ -173,7 +175,8 @@ interface AppSettingKeyVaultReferenceSlotOps
         @segment("appsettings")
         @key
         appSettingKey: string,
-      }
+      },
+      ResourceName = "WebSiteSlotConfigAppSetting"
     > {}
 
 @tag("WebApps")
@@ -232,7 +235,8 @@ interface SiteConnectionStringKeyVaultReferenceSlotOps
         @segment("connectionstrings")
         @key
         connectionStringKey: string,
-      }
+      },
+      ResourceName = "WebSiteSlotConfigConnectionString"
     > {}
 
 @tag("WebApps")

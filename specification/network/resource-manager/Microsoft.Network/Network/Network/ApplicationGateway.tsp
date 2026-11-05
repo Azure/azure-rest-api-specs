@@ -84,7 +84,10 @@ interface ApplicationGateways {
   @tag("ApplicationGateways")
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -143,6 +146,7 @@ interface ApplicationGateways {
       /**
        * Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing backendHealth POST contract uses $expand in the query; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -162,6 +166,7 @@ interface ApplicationGateways {
       /**
        * Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing backendHealthOnDemand POST contract uses $expand in the query; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -185,12 +190,15 @@ interface ApplicationGateways {
 
 @@doc(ApplicationGateway.name, "The name of the application gateway.");
 @@doc(ApplicationGateway.properties, "Properties of the application gateway.");
-@@doc(ApplicationGateways.createOrUpdate::parameters.resource,
+@@doc(
+  ApplicationGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update application gateway operation."
 );
-@@doc(ApplicationGateways.updateTags::parameters.properties,
+@@doc(
+  ApplicationGateways.updateTags::parameters.properties,
   "Parameters supplied to update application gateway tags."
 );
-@@doc(ApplicationGateways.backendHealthOnDemand::parameters.body,
+@@doc(
+  ApplicationGateways.backendHealthOnDemand::parameters.body,
   "Request body for on-demand test probe operation."
 );

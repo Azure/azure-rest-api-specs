@@ -74,15 +74,19 @@ interface DeploymentVersions {
 
 @@maxLength(DeploymentVersion.name, 260);
 @@minLength(DeploymentVersion.name, 1);
-@@doc(DeploymentVersion.name,
+@@doc(
+  DeploymentVersion.name,
   "Name of the DeploymentVersion under the profile."
 );
-@@doc(DeploymentVersion.properties,
+@@doc(
+  DeploymentVersion.properties,
   "The JSON object that contains the properties of the deployment version."
 );
-@@doc(DeploymentVersions.update::parameters.properties,
+@@doc(
+  DeploymentVersions.update::parameters.properties,
   "Deployment version properties"
 );
-@@doc(DeploymentVersions.compare::parameters.body,
+@@doc(
+  DeploymentVersions.compare::parameters.body,
   "The deployment version to be compared to"
 );

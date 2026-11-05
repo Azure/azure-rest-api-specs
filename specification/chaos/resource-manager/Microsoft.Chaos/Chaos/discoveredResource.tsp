@@ -10,7 +10,6 @@ using TypeSpec.Versioning;
 namespace Microsoft.Chaos;
 
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 @armResourceOperations
 interface DiscoveredResources {
   /**
@@ -29,6 +28,7 @@ interface DiscoveredResources {
 
 @@minLength(DiscoveredResource.name, 1);
 @@doc(DiscoveredResource.name, "Name of the discovered resource.");
-@@doc(DiscoveredResource.properties,
+@@doc(
+  DiscoveredResource.properties,
   "The properties of the discovered resource."
 );

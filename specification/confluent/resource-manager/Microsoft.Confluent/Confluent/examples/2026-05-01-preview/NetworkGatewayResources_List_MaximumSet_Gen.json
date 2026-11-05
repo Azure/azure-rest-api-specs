@@ -1,0 +1,43 @@
+{
+  "title": "NetworkGatewayResources_List_MaximumSet",
+  "operationId": "NetworkGatewayResources_List",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "DC34558A-05D3-4370-AED8-75E60B381F94",
+    "resourceGroupName": "rgconfluent",
+    "organizationName": "myOrganization",
+    "environmentId": "env-abc123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-abc123/networkGateways/gw-def456",
+            "name": "gw-def456",
+            "type": "Microsoft.Confluent/organizations/environments/networkGateways",
+            "properties": {
+              "networkGatewayName": "my-network-gateway",
+              "region": "eastus",
+              "metadata": {
+                "self": "https://api.confluent.cloud/networking/v1/gateways/gw-def456",
+                "resourceName": "gw-def456",
+                "createdTimestamp": "2026-01-15T10:00:00Z",
+                "updatedTimestamp": "2026-01-15T10:05:00Z",
+                "deletedTimestamp": ""
+              },
+              "provisioningState": "Succeeded",
+              "dictionary": [
+                {
+                  "key": "gatewayType",
+                  "value": "PrivateNetworkInterface"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-abc123/networkGateways?api-version=2026-05-01-preview&$skipToken=token123"
+      }
+    }
+  }
+}

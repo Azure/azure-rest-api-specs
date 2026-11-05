@@ -9,11 +9,15 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Information pertaining to an individual build.
  */
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
 @parentResource(ContainerApp)
 model ContainerAppsBuildResource
   is Azure.ResourceManager.ProxyResource<ContainerAppsBuildProperties> {
@@ -51,6 +55,9 @@ alias ContainerAppsBuildResourceOps = Azure.ResourceManager.Legacy.LegacyOperati
   }
 >;
 
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 interface ContainerAppsBuilds {
   /**
@@ -75,6 +82,7 @@ interface ContainerAppsBuilds {
 @@maxLength(ContainerAppsBuildResource.name, 64);
 @@minLength(ContainerAppsBuildResource.name, 2);
 @@doc(ContainerAppsBuildResource.name, "The name of a build.");
-@@doc(ContainerAppsBuildResource.properties,
+@@doc(
+  ContainerAppsBuildResource.properties,
   "The resource-specific properties for this resource."
 );

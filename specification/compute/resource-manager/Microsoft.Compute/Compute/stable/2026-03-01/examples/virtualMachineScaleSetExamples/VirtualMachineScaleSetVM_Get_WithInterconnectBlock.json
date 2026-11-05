@@ -1,0 +1,144 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
+    "instanceId": "0",
+    "api-version": "2026-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{vmss-vm-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
+        "location": "westus",
+        "instanceId": "0",
+        "sku": {
+          "name": "Standard_ND128isr_GB300_v6",
+          "tier": "Standard"
+        },
+        "properties": {
+          "latestModelApplied": true,
+          "modelDefinitionApplied": "VirtualMachineScaleSet",
+          "networkProfileConfiguration": {
+            "interconnectGroupProfile": {
+              "interconnectGroup": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/interconnectGroups/myInterconnectGroup"
+              },
+              "subgroups": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/interconnectGroups/myInterconnectGroup/subgroups/subgroup0"
+                }
+              ]
+            },
+            "networkInterfaceConfigurations": [
+              {
+                "name": "{vmss-name}-nic",
+                "properties": {
+                  "primary": true,
+                  "disableTcpStateTracking": false,
+                  "dnsSettings": {
+                    "dnsServers": []
+                  },
+                  "enableIPForwarding": false,
+                  "ipConfigurations": [
+                    {
+                      "name": "ipconfig1",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        },
+                        "privateIPAddressVersion": "IPv4"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "hardwareProfile": {
+            "vmSize": "Standard_ND128isr_GB300_v6"
+          },
+          "resilientVMDeletionStatus": "Disabled",
+          "vmId": "bd73f1c6-1b3b-43b0-8b96-718bace3ba2e",
+          "interconnectBlockProfile": {
+            "interconnectBlock": {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/interconnectBlocks/myInterconnectBlock"
+            }
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "microsoft-dsvm",
+              "offer": "ubuntu-hpc",
+              "sku": "2404-gb",
+              "version": "latest",
+              "exactVersion": "24.04.2025110401"
+            },
+            "osDisk": {
+              "osType": "Linux",
+              "name": "{vmss-name}_{vmss-vm-name}_OsDisk_1_e195e35c5b854d3ab60960e773dd2997",
+              "createOption": "FromImage",
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Premium_LRS",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/{vmss-name}_{vmss-vm-name}_OsDisk_1_e195e35c5b854d3ab60960e773dd2997"
+              },
+              "diskSizeGB": 64
+            },
+            "dataDisks": [],
+            "diskControllerType": "NVMe"
+          },
+          "osProfile": {
+            "computerName": "{vmss-name}000000",
+            "adminUsername": "{your-username}",
+            "linuxConfiguration": {
+              "disablePasswordAuthentication": false,
+              "ssh": {
+                "publicKeys": [
+                  {
+                    "path": "/home/{your-username}/.ssh/authorized_keys",
+                    "keyData": "{ssh-rsa public key}"
+                  }
+                ]
+              },
+              "provisionVMAgent": true,
+              "enableVMAgentPlatformUpdates": true
+            },
+            "secrets": [],
+            "allowExtensionOperations": true,
+            "requireGuestProvisionSignal": true
+          },
+          "securityProfile": {
+            "securityType": "Standard"
+          },
+          "networkProfile": {
+            "interconnectGroupProfile": {
+              "interconnectGroup": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/interconnectGroups/myInterconnectGroup"
+              },
+              "subgroups": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/interconnectGroups/myInterconnectGroup/subgroups/subgroup0"
+                }
+              ]
+            },
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0/networkInterfaces/{vmss-name}-nic"
+              }
+            ]
+          },
+          "timeCreated": "2026-05-04T19:59:05.5350459+00:00"
+        },
+        "etag": "\"1\"",
+        "zones": [
+          "1"
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_Get",
+  "title": "Get VM scale set VM with Interconnect Block"
+}

@@ -4,23 +4,22 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DataBox;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AddressValidationOutput.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AddressValidationOutput.properties,
   "!csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ValidationResponse.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ValidationResponse.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(JobResourceUpdateParameter.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  JobResourceUpdateParameter.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SkuInformation.properties);
 
 @@clientLocation(JobResources.get, "Jobs", "!csharp");
@@ -31,7 +30,8 @@ using Microsoft.DataBox;
 
 @@clientLocation(JobResources.update, "Jobs", "!csharp");
 
-@@clientName(JobResources.update::parameters.properties,
+@@clientName(
+  JobResources.update::parameters.properties,
   "jobResourceUpdateParameter"
 );
 
@@ -43,7 +43,8 @@ using Microsoft.DataBox;
 
 @@clientLocation(JobResources.bookShipmentPickUp, "Jobs", "!csharp");
 
-@@clientName(JobResources.bookShipmentPickUp::parameters.body,
+@@clientName(
+  JobResources.bookShipmentPickUp::parameters.body,
   "shipmentPickUpRequest"
 );
 
@@ -55,17 +56,18 @@ using Microsoft.DataBox;
 
 @@clientLocation(JobResources.markDevicesShipped, "Jobs", "!csharp");
 
-@@clientName(JobResources.markDevicesShipped::parameters.body,
+@@clientName(
+  JobResources.markDevicesShipped::parameters.body,
   "markDevicesShippedRequest"
 );
 
 @@clientName(mitigate::parameters.body, "mitigateJobRequest");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(JobResource.properties);
 
-@@clientLocation(ServiceOperationGroup.regionConfiguration,
+@@clientLocation(
+  ServiceOperationGroup.regionConfiguration,
   "Service",
   "!csharp"
 );
@@ -74,32 +76,37 @@ using Microsoft.DataBox;
 
 @@clientLocation(ServiceOperationGroup.validateInputs, "Service", "!csharp");
 
-@@clientLocation(ServiceOperationGroup.listAvailableSkusByResourceGroup,
+@@clientLocation(
+  ServiceOperationGroup.listAvailableSkusByResourceGroup,
   "Service",
   "!csharp"
 );
 
-@@clientLocation(ServiceOperationGroup.regionConfigurationByResourceGroup,
+@@clientLocation(
+  ServiceOperationGroup.regionConfigurationByResourceGroup,
   "Service",
   "!csharp"
 );
 
-@@clientLocation(ServiceOperationGroup.validateInputsByResourceGroup,
+@@clientLocation(
+  ServiceOperationGroup.validateInputsByResourceGroup,
   "Service",
   "!csharp"
 );
 
-@@clientName(ServiceOperationGroup.regionConfiguration::parameters.body,
+@@clientName(
+  ServiceOperationGroup.regionConfiguration::parameters.body,
   "regionConfigurationRequest"
 );
-@@clientName(ServiceOperationGroup.validateAddress::parameters.body,
+@@clientName(
+  ServiceOperationGroup.validateAddress::parameters.body,
   "validateAddress"
 );
-@@clientName(ServiceOperationGroup.validateInputs::parameters.body,
+@@clientName(
+  ServiceOperationGroup.validateInputs::parameters.body,
   "validationRequest"
 );
 
 @@clientLocation(mitigate, "Management", "go");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);

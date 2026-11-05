@@ -2,154 +2,203 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.StorageBlobCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageBlobCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageBlobCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageBlobCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageBlobDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageBlobDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageBlobDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageBlobDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageDirectoryCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageDirectoryCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageDirectoryCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageDirectoryCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageDirectoryDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageDirectoryDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageDirectoryDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageDirectoryDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageBlobRenamedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageBlobRenamedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageBlobRenamedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageBlobRenamedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageDirectoryRenamedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageDirectoryRenamedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageDirectoryRenamedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageDirectoryRenamedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyActionSummaryDetail,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyActionSummaryDetail,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyActionSummaryDetail,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyActionSummaryDetail,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageBlobTierChangedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageBlobTierChangedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageBlobTierChangedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageBlobTierChangedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageBlobAccessTier,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageBlobAccessTier,
   Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.StorageBlobAccessTier, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.StorageAsyncOperationInitiatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageAsyncOperationInitiatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageAsyncOperationInitiatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageAsyncOperationInitiatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageBlobInventoryPolicyCompletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageBlobInventoryPolicyCompletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageBlobInventoryPolicyCompletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageBlobInventoryPolicyCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageTaskCompletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageTaskCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageTaskQueuedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageTaskQueuedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageTaskQueuedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageTaskQueuedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData,
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedStatus,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedStatus,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedStatus,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedStatus,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedStatus,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageTaskCompletedStatus,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedStatus,
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageTaskCompletedStatus,
   Access.public
 );
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageAsyncOperationInitiatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageAsyncOperationInitiatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageBlobCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageBlobDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobInventoryPolicyCompletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageBlobInventoryPolicyCompletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobRenamedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageBlobRenamedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobTierChangedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageBlobTierChangedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageDirectoryCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageDirectoryCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageDirectoryDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageDirectoryDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageDirectoryRenamedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageDirectoryRenamedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageTaskCompletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskQueuedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageTaskQueuedEventData,
   "csharp"
 );

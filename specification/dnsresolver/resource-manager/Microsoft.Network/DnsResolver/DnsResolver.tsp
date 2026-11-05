@@ -13,8 +13,10 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS resolver.
  */
-model DnsResolver
-  is Azure.ResourceManager.TrackedResource<DnsResolverProperties, false> {
+model DnsResolver is Azure.ResourceManager.TrackedResource<
+  DnsResolverProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DnsResolver,
     KeyName = "dnsResolverName",
@@ -51,11 +53,14 @@ interface DnsResolvers {
       @header
       ifNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<DnsResolver> | ArmResourceCreatedResponse<
-      DnsResolver,
-      ArmLroLocationHeader<FinalResult = DnsResolver> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<DnsResolver>
+      | ArmResourceCreatedResponse<
+          DnsResolver,
+          ArmLroLocationHeader<FinalResult = DnsResolver> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -89,7 +94,10 @@ interface DnsResolvers {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -126,9 +134,11 @@ interface DnsResolvers {
 
 @@doc(DnsResolver.name, "The name of the DNS resolver.");
 @@doc(DnsResolver.properties, "Properties of the DNS resolver.");
-@@doc(DnsResolvers.createOrUpdate::parameters.resource,
+@@doc(
+  DnsResolvers.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(DnsResolvers.update::parameters.properties,
+@@doc(
+  DnsResolvers.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

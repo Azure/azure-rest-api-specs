@@ -115,11 +115,10 @@ model PrivateEndpointConnectionListResult
 /**
  * A private link resource.
  */
-model PrivateLinkResource
-  is Azure.ResourceManager.TrackedResource<
-    PrivateLinkResourceProperties,
-    false
-  > {
+model PrivateLinkResource is Azure.ResourceManager.TrackedResource<
+  PrivateLinkResourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PrivateLinkResource,
     KeyName = "privateLinkName",

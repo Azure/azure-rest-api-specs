@@ -25,7 +25,10 @@ model DiskRestorePoint
 }
 
 alias VMRestorePointPath = {
-  ...Azure.ResourceManager.Legacy.BasePath;
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+  ...Azure.ResourceManager.Legacy.Provider;
 
   /**
    * The name of the restore point collection that the disk restore point belongs.
@@ -44,7 +47,7 @@ alias VMRestorePointPath = {
 
 @armResourceOperations
 interface DiskRestorePointsOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       VMRestorePointPath,
       KeysOf<{
         ...ResourceNameParameter<
@@ -53,15 +56,17 @@ interface DiskRestorePointsOps
           KeyName = "diskRestorePointName",
           NamePattern = ""
         >,
-      }>
+      }>,
+      CloudError
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DiskRestorePoints {
   /**
    * Get disk restorePoint resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("IncrementalRestorePoints")
   @operationId("DiskRestorePoint_Get")
   get is DiskRestorePointsOps.Read<DiskRestorePoint>;
 
@@ -69,6 +74,7 @@ interface DiskRestorePoints {
    * Lists diskRestorePoints under a vmRestorePoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("IncrementalRestorePoints")
   @operationId("DiskRestorePoint_ListByRestorePoint")
   @list
   listByRestorePoint is DiskRestorePointsOps.List<
@@ -78,6 +84,7 @@ interface DiskRestorePoints {
 
   /** Grants access to a diskRestorePoint. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("IncrementalRestorePoints")
   @operationId("DiskRestorePoint_GrantAccess")
   @action("beginGetAccess")
   grantAccess is DiskRestorePointsOps.ActionAsync<
@@ -90,6 +97,7 @@ interface DiskRestorePoints {
    * Revokes access to a diskRestorePoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("IncrementalRestorePoints")
   @operationId("DiskRestorePoint_RevokeAccess")
   @action("endGetAccess")
   revokeAccess is DiskRestorePointsOps.ActionAsync<
@@ -101,9 +109,11 @@ interface DiskRestorePoints {
 }
 
 @@doc(DiskRestorePoint.name, "The name of the disk restore point created.");
-@@doc(DiskRestorePoint.properties,
+@@doc(
+  DiskRestorePoint.properties,
   "Properties of an incremental disk restore point"
 );
-@@doc(DiskRestorePoints.grantAccess::parameters.body,
+@@doc(
+  DiskRestorePoints.grantAccess::parameters.body,
   "Access data object supplied in the body of the get disk access operation."
 );

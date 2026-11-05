@@ -2,7 +2,7 @@
 applyTo: "specification/**/*.tsp"
 ---
 
-<!-- Upstream alignment: 2026-04-15
+<!-- Upstream alignment: 2026-08-15
      This date is for maintainers of this file only -- it records when
      rules were last verified against upstream docs. No action is needed
      by spec authors or PR reviewers. The upstream documents always take
@@ -10,7 +10,7 @@ applyTo: "specification/**/*.tsp"
 
      Rules derived from:
        - Azure Resource Provider Contract (RPC) v1.0
-         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
+         https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
        - TypeSpec Azure library docs
@@ -34,6 +34,48 @@ concrete suggestion for how to fix it. Vague references like "near end
 of file" or "around line 50" are not acceptable -- always resolve the
 actual line number by reading the file content. Respond in markdown
 format.
+
+### Rule Citation Format (REQUIRED for posted PR comments)
+
+Every rule ID cited in a posted PR comment **MUST** be accompanied by a
+markdown hyperlink to the rule's authoritative location in this
+repository. A bare rule ID without a link is **not acceptable** --
+authors must be able to one-click navigate to the exact section that
+defines the rule.
+
+**Format.** Use a markdown link whose visible text is the rule ID and
+whose target is a permanent GitHub URL (use the `main` branch ref)
+anchored to the section that defines the rule:
+
+```
+[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/<path-to-rule-file>#<section-anchor>)
+```
+
+**Where to link.** Pick the most specific source for the rule:
+
+- TypeSpec-specific rules → link to the corresponding section in
+  `.github/instructions/typespec-review.instructions.md` or
+  `.github/instructions/typespec-project.instructions.md`.
+- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`) → link to
+  `.github/instructions/arm-api-review.instructions.md`.
+- Generic OpenAPI rules (e.g., `OAPI020`, `OAPI034`, `WHATIF-001`) →
+  link to `.github/instructions/openapi-review.instructions.md` or to
+  the dedicated reference file under
+  `.github/skills/azure-api-review/references/*.md`.
+
+**Multiple rule IDs.** When a finding cites more than one rule ID, each
+ID **MUST** be its own hyperlink (e.g., `[OAPI034](...) / [RPC-Put-V1-12](...)`).
+
+**Anchor resolution.** GitHub auto-generates section anchors by
+lowercasing the heading, replacing spaces with `-`, and stripping
+punctuation. When in doubt, open the rendered file on GitHub and copy
+the link from the heading's anchor icon.
+
+### Reviewer-Posted Parity
+
+<a id="reviewer-posted-parity"></a>
+
+See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). It defines the two **review modes** (interactive, where findings are presented to a human who decides what to post; and autonomous, where the agreed finding set is posted and addressed threads are resolved without a human gate), the hard rules, the post-post verification procedure, and worked examples. This section is a pointer so the three instruction files cannot drift.
 
 ---
 
@@ -77,6 +119,7 @@ format.
 
 - String properties with well-known formats **SHOULD** use appropriate
   scalar types: `url`, `utcDateTime`, `duration`, `uuid`.
+  - **ARM caveat for `uuid`:** the TypeSpec `uuid` scalar emits `"format": "uuid"` in the generated Swagger, which on ARM control-plane specs triggers the required `GuidUsage` LintDiff rule (`R3017`). **Default position: do NOT use the `uuid` scalar on ARM control-plane TypeSpec.** Acceptable only for Microsoft Entra / AAD identifiers customers already see as GUIDs (`tenantId`, `clientId`, `principalId`, `objectId`, body-surfaced `subscriptionId`); for everything else (opaque platform-assigned IDs, resource-internal IDs, names), keep `string` and convey the format via the description and an optional `@pattern`. When `uuid` IS justified, the author MUST add a `GuidUsage` suppression in `readme.md` whose `where:` clause targets the `format` leaf of the shared `Azure.Core.uuid` definition in the generated Swagger -- not the per-property path -- and the `reason:` MUST enumerate every relying property by name and record reviewer sign-off. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) for the full decision tree, the exact suppression form (Form A for TypeSpec-generated OpenAPI), and the acceptable/unacceptable property lists.
 - Datetime properties **MUST** use `utcDateTime` (not `string`).
   (Also enforced by: `@azure-tools/typespec-azure-resource-manager/no-string-datetime`)
 - Integer properties **SHOULD** specify bit width: `int32`, `int64`.
@@ -87,10 +130,24 @@ format.
   set, and prevention of leading special characters.
   Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
   (Also enforced by: `@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern`)
+- `@pattern` decorator values and `NamePattern` constraints **MUST**
+  use allowlist (positive character class) syntax. Denylist (negated
+  character class `[^...]`) syntax **MUST NOT** be used as the primary
+  character-matching construct (`OAPI-PATTERN-ALLOWLIST`). A negative
+  lookahead (`(?!...)`) used alongside a positive class is acceptable
+  (e.g., `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`). Severity:
+  **Blocking** for new properties/parameters; **Warning** for existing
+  ones carried forward from a prior API version. See
+  [`.github/skills/azure-api-review/references/pattern-validation.md`](../skills/azure-api-review/references/pattern-validation.md)
+  for detection guidance, severity matrix, fix examples, and
+  regression-risk notes.
 - Properties representing UTC timestamps **SHOULD** include a `Utc`
   suffix in the name (e.g., `lastModifiedTimeUtc`).
 - Properties named `<something>Id` **MUST** be specific about what kind
-  of ID they hold (uuid, armResourceIdentifier, or documented format).
+  of ID they hold (`armResourceIdentifier`, or a documented format). For
+  GUID-valued IDs, see the ARM caveat above and
+  [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md)
+  before choosing `uuid`.
 - Array properties **MUST** have their element type defined.
 - **AVOID** using `unknown` type.
 
@@ -128,6 +185,19 @@ format.
 - Nested resources **MUST** define a list operation under their parent.
 - **DO NOT** embed nested resource data inline in the parent resource
   model.
+
+### 2.5a Check Name Availability (CNA-002, CNA-003, CNA-004)
+
+- Prefer the standard `checkGlobalNameAvailability`,
+  `checkLocalNameAvailability`, or `checkNameAvailability` ARM templates.
+- The request contract includes `name` and fully qualified resource `type`; the
+  response includes `nameAvailable`, with `reason` and `message` when the name
+  is unavailable.
+- Standard template/common-type reuse is a Suggestion, not a requirement, when
+  a custom request and response are shape-compatible (CNA-003).
+- A custom request `name` string must carry validation equivalent to the target
+  resource name rules, including an allowlist pattern and maximum length
+  (CNA-004).
 
 ### 2.6 ARM POST Actions
 
@@ -218,6 +288,7 @@ Flag these issues when found:
 - **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
 - **Spread-only model types as full models** — a model type used only for spreading (`...`) into other types **SHOULD** be declared as an `alias` instead. Using `model` for types that are only spread generates unnecessary types in the output. See [TypeSpec alias documentation](https://typespec.io/docs/language-basics/alias) (TypeSpec-BestPractice-01).
 - **Empty model literal `{}` as POST action body** -- when an `ArmResourceActionAsync` or `ArmResourceActionSync` POST action does not need a request body, use `void` instead of `{}`. An empty model literal triggers the `no-empty-model` lint rule, and suppressing it is the wrong fix. Use `void` and remove the suppression.
+- **Raw client-altering OpenAPI extensions (TSP-NO-RAW-CLIENT-EXTENSIONS)** -- do not add or restore `@OpenAPI.extension(...)` / `@extension(...)` for client-altering `x-ms-*` metadata, and do not suppress `@azure-tools/typespec-azure-core/no-openapi-client-extensions`. Express the behavior in the semantic TypeSpec model so every emitter sees it. This remains true when reviewing an already-published API version: preserving generated Swagger is not a reason to reintroduce a prohibited raw decorator. A genuinely emitter-only, non-client-altering custom extension with no native representation requires a concrete explanation and should be confirmed with the TypeSpec library owners rather than generalized into an exception. See [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md) for native mappings and generated-diff triage.
 
 ---
 
@@ -247,6 +318,52 @@ Flag these issues when found:
 
 - Properties whose names or doc comments clearly indicate numeric values (e.g., `numberOfCores`, `ram`, `vCpu`, `diskSizeGB`) **SHOULD** use `int32`, `int64`, or `float64` — not `string`.
 - If backward compatibility forces a string type for a numeric value, the doc comment **MUST** document the expected format and units.
+
+### 6.5 Array Identifiers — `x-ms-identifiers` (TSP-ARRAY-IDENTIFIERS)
+
+The `missing-x-ms-identifiers` linter rule fires on array-typed properties whose item models do not declare which property uniquely identifies an item. **Do not silence this rule with `@extension("x-ms-identifiers", [])`.** `@extension` is forbidden in TypeSpec source for any reason (see Section 5 anti-patterns).
+
+Use one of the following built-in TypeSpec decorators instead:
+
+- **Preferred — `@key` on the identity property of the item type.** The emitter automatically derives `x-ms-identifiers` from `@key`. Use this when the item model has a single, natural identity property:
+
+  ```tsp
+  model MoveRequest {
+    @key moveId: string;
+    from: string;
+    to: string;
+  }
+
+  model MoveCollection {
+    moves?: MoveRequest[];
+  }
+  ```
+
+- **Alternative — `@identifiers(#["<propertyName>", ...])` on the array property.** Use this when the identity property cannot be marked with `@key` on the item type (e.g., the item type is shared and `@key` would conflict, or identity is composed of multiple properties):
+
+  ```tsp
+  @identifiers(#["moveId"])
+  moves?: MoveRequest[];
+  ```
+
+- **Items genuinely have no identifier — `@identifiers(#[])` on the array property.** For arrays whose items are ordered result records, primitive values, or otherwise have no stable identity field, declare the empty identifier list explicitly. This satisfies the linter without a suppression and documents the design intent:
+
+  ```tsp
+  @identifiers(#[])
+  testResults?: TestResultRecord[];
+  ```
+
+**Forbidden patterns:**
+
+- `@extension("x-ms-identifiers", [])` — never add `@extension` in TypeSpec source for any reason. Replace with `@identifiers(#[])` (or `@key` on the item type).
+- `#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "..."` — suppression is **only** acceptable as a last resort when neither `@key` nor `@identifiers` is technically feasible (extremely rare). The suppression reason must still meet Section 4.1 rules (real technical justification, no `FIXME`/`TODO`/`TBD`, no "matching another resource"). For brand-new operations and models, suppression is never the right fix — use `@identifiers` or `@key`.
+
+When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifiers` or `@key` as the fix. **Never** suggest `@extension("x-ms-identifiers", ...)`.
+
+The same rule applies to every client-altering extension: never suggest a raw
+OpenAPI decorator or a `no-openapi-client-extensions` suppression as a
+compatibility fix. Use the mapping in
+[`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md).
 
 ---
 
@@ -279,7 +396,7 @@ Flag these issues when found:
 ### 8.2 Validation
 
 - The conversion should be validated using `tsp-client compare` (or equivalent diff tool) to confirm the generated OpenAPI matches the original.
-- Common post-conversion issues to watch for: `date-time` format inconsistencies, property name casing drift, and missing `x-ms-*` extensions.
+- Common post-conversion issues to watch for: `date-time` format inconsistencies, property name casing drift, and missing semantics that should be emitted from native TypeSpec constructs. Do not require raw `x-ms-*` metadata parity when the difference is only legacy emitter metadata; apply [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md) before classifying the diff.
 
 ### 8.3 SDK Generation Cutover
 
@@ -294,8 +411,11 @@ Flag these issues when found:
 
 - TypeSpec with the Azure TypeSpec libraries (`@azure-tools/typespec-azure-core`, `@azure-tools/typespec-azure-resource-manager`, and related packages) is **required** for all new API versions, both control plane and data plane. The full rule definition is in [`openapi-review.instructions.md` §2A](./openapi-review.instructions.md) (rule ID `TSP-REQUIRED-V1`).
 - Brownfield services were required to complete migration to TypeSpec by March 30, 2026.
-- Updates to handwritten OpenAPI inside **existing** API version directories remain permitted; only new API versions must use TypeSpec.
-- A deterministic CI check to block non-compliant PRs is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, this rule is enforced by the ARM API Reviewer agent.
+- Existing handwritten OpenAPI directories are out of scope for
+  `TSP-REQUIRED-V1`, but remain subject to published-version immutability and
+  compatibility rules.
+- Current CI does not deterministically enforce this exact new-version
+  condition, so the ARM API Reviewer applies it directly.
 
 ---
 
@@ -324,6 +444,8 @@ When reviewing TypeSpec files, verify:
 - ✅ ARM resource ID properties use `armResourceIdentifier` not `string` (TSP-ARM-RESOURCE-ID)
 - ✅ No `@operationId` overrides — restructure interfaces instead
 - ✅ URI properties use `url` scalar type, not plain `string`
+- ✅ Array-typed properties declare item identity via `@key` (on item type) or `@identifiers` (on array property); use `@identifiers(#[])` when items have no identifier (TSP-ARRAY-IDENTIFIERS)
+- ✅ No `@extension(...)` decorators in TypeSpec source — never `@extension("x-ms-identifiers", ...)`, `@extension("x-ms-mutability", ...)`, etc.
 - ✅ Standard ARM base types used (no custom/private resource decorators)
 - ✅ Client customizations only in `client.tsp`
 - ✅ `tspconfig.yaml` references correct linter ruleset
@@ -335,7 +457,7 @@ When reviewing TypeSpec files, verify:
 - ✅ `@added` version targeting is correct — features don't leak into earlier API version outputs
 - ✅ TypeSpec conversion PRs: no API changes (horizontal only); generated OpenAPI matches original
 - ✅ TypeSpec conversion PRs: `swagger-to-sdk` entries removed; `readme.{language}.md` files deleted
-- ✅ New API versions use TypeSpec source (TSP-REQUIRED-V1) — updates to existing handwritten OpenAPI remain permitted
+- ✅ New API versions use TypeSpec source (TSP-REQUIRED-V1); existing handwritten directories remain subject to normal immutability and compatibility rules
 - ✅ No polymorphic-format properties — use separate typed properties or discriminated unions
 - ✅ Numeric properties use numeric types, not string (TSP-NUMERIC-TYPE)
 - ✅ No `Record<>` usage when typed models can be defined
@@ -354,3 +476,4 @@ When reviewing TypeSpec files, verify:
 - ✅ No bearer/OAuth tokens passed in ARM request bodies -- use managed identity or Key Vault
 - ✅ Generated OpenAPI files match `tsp compile .` output
 - ✅ Example files present for all operations, with realistic descriptive values (EX-DESCRIPTIVE-VALUES)
+- ✅ All `@pattern` and `NamePattern` constraints use allowlist (positive character class) syntax — no denylist (`[^...]`) as the primary construct (`OAPI-PATTERN-ALLOWLIST`): Blocking for new properties/parameters, Warning for existing ones

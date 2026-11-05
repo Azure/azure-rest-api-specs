@@ -18,6 +18,7 @@ model AADToken
   is OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit;
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
       scopes: ["https://cognitiveservices.azure.com/.default"];
     }
@@ -532,6 +533,7 @@ model AzureContainerFolderDocumentLocation extends DocumentLocation {
 }
 
 /** Error response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 

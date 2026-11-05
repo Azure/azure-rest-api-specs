@@ -253,6 +253,7 @@ model MarketingMaterial {
   learnUri?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Search response object")
 model SearchResponse {
   @doc("The search facets")
@@ -288,6 +289,7 @@ model SuggestionsItem {
   @doc("The suggestion display text")
   displayText?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The suggestion icon url")
   iconUrl?: string;
 
@@ -304,6 +306,7 @@ model SuggestionsItem {
   suggestionType: SuggestionType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Suggestions response object")
 model SuggestionsResponse {
   @doc("The search results")
@@ -313,6 +316,7 @@ model SuggestionsResponse {
   totalCount?: int64;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Facets response object")
 model FacetsResponse {
   @doc("The facet items results")

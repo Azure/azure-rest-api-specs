@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - Azure Resource Provider Contract (RPC) v1.0 — PUT Resource
        - ARM Wiki: api_contracts/guidelines/api_best_practices_and_design_choices.md (RPC-BestPractice-03)
@@ -7,14 +7,26 @@
 
 # Proactive Secret Detection (SEC-SECRET-DETECT)
 
+> **Canonical rule ID:** `SEC-SECRET-DETECT`. When citing this rule in
+> any review finding, posted PR comment, or report, use this exact
+> string verbatim -- not paraphrases such as `SecretsInProperties`,
+> `SecretPropertyDetection`, `SECRET-DETECT`, or `secret-prop`. The
+> canonical ID is what downstream tooling, telemetry markers, and
+> reviewer-posted-parity checks key on.
+
 Reviewers **MUST** proactively inspect every string property to
 determine whether it could contain a secret, credential, or sensitive
 token -- even when the property is not explicitly annotated as a secret.
 
 **Authoritative references:**
 
-- [Azure Resource Provider Contract -- Secret Handling](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
-- [Azure REST API Guidelines -- Handling Secrets](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
+- [Azure Resource Provider Contract -- PUT Resource, RPC-Put-V1-13](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/put-resource#rules)
+- [Azure REST API Guidelines -- no secrets in GET responses](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-no-secrets-in-get-response)
+- [Azure REST API Guidelines -- retrieving secrets through POST](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-secrets-allowed-in-post-response)
+
+The property-name, documentation, example, and suppression signals below are
+reviewer heuristics for finding likely secrets before they violate that
+upstream handling contract; they are not additional upstream requirements.
 
 ## Detection Signals
 

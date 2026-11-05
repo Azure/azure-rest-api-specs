@@ -2,139 +2,183 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionStartedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionStartedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionStartedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionStartedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsClusterEventData,
   Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.AvsClusterEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData,
   Access.public
 );
 //Enums
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsClusterEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsClusterEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionStartedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.AvsScriptExecutionStartedEventData,
   "csharp"
 );

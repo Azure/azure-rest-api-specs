@@ -15,8 +15,10 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for App Attach Package properties.
  */
-model AppAttachPackage
-  is Azure.ResourceManager.TrackedResource<AppAttachPackageProperties, false> {
+model AppAttachPackage is Azure.ResourceManager.TrackedResource<
+  AppAttachPackageProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AppAttachPackage,
     KeyName = "appAttachPackageName",
@@ -96,12 +98,15 @@ interface AppAttachPackages {
 @@maxLength(AppAttachPackage.name, 100);
 @@minLength(AppAttachPackage.name, 3);
 @@doc(AppAttachPackage.name, "The name of the App Attach package");
-@@doc(AppAttachPackage.properties,
+@@doc(
+  AppAttachPackage.properties,
   "Detailed properties for App Attach Package"
 );
-@@doc(AppAttachPackages.createOrUpdate::parameters.resource,
+@@doc(
+  AppAttachPackages.createOrUpdate::parameters.resource,
   "Object containing App Attach Package definitions."
 );
-@@clientName(AppAttachPackages.update::parameters.body,
+@@clientName(
+  AppAttachPackages.update::parameters.body,
   "appAttachPackagePatch"
 );

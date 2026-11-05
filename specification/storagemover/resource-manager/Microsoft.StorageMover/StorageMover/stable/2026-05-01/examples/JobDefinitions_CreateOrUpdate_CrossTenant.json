@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01",
+    "jobDefinition": {
+      "properties": {
+        "description": "Cross-tenant Blob-to-Blob copy job. JobDefinition lives in the source (host) tenant alongside the local source endpoint; the target endpoint lives in a partner (guest) tenant.",
+        "agentName": "migration-agent",
+        "copyMode": "Additive",
+        "jobType": "CloudToCloud",
+        "sourceName": "examples-sourceEndpointName",
+        "sourceSubpath": "/",
+        "targetName": "partner-targetEndpoint",
+        "targetSubpath": "/",
+        "isCrossTenantJob": true,
+        "crossTenantEndpointTenantId": "11111111-2222-3333-4444-555555555555",
+        "crossTenantEndpointResourceId": "/subscriptions/0a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809/resourceGroups/partner-rg/providers/Microsoft.StorageMover/storageMovers/partner-storageMover/endpoints/partner-targetEndpoint"
+      }
+    },
+    "jobDefinitionName": "examples-jobDefinitionName",
+    "projectName": "examples-projectName",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examples-jobDefinitionName",
+        "type": "Microsoft.StorageMover/storageMovers/jobDefinitions",
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/projects/examples-projectName/jobDefinitions/examples-jobDefinitionName",
+        "properties": {
+          "description": "Cross-tenant Blob-to-Blob copy job. JobDefinition lives in the source (host) tenant alongside the local source endpoint; the target endpoint lives in a partner (guest) tenant.",
+          "agentName": "migration-agent",
+          "agentResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/agents/migration-agent",
+          "copyMode": "Additive",
+          "jobType": "CloudToCloud",
+          "sourceName": "examples-sourceEndpointName",
+          "sourceResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-sourceEndpointName",
+          "sourceSubpath": "/",
+          "targetName": "partner-targetEndpoint",
+          "targetResourceId": "/subscriptions/0a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809/resourceGroups/partner-rg/providers/Microsoft.StorageMover/storageMovers/partner-storageMover/endpoints/partner-targetEndpoint",
+          "targetSubpath": "/",
+          "isCrossTenantJob": true,
+          "crossTenantEndpointTenantId": "11111111-2222-3333-4444-555555555555",
+          "crossTenantEndpointResourceId": "/subscriptions/0a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809/resourceGroups/partner-rg/providers/Microsoft.StorageMover/storageMovers/partner-storageMover/endpoints/partner-targetEndpoint",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "JobDefinitions_CreateOrUpdate",
+  "title": "JobDefinitions_CreateOrUpdate_CrossTenant"
+}

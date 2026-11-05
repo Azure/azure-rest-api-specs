@@ -2,9 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -24,20 +26,24 @@ model Machine is Azure.ResourceManager.TrackedResource<MachineProperties> {
   /**
    * The list of extensions affiliated to the machine
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   resources?: MachineExtension[];
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: Azure.ResourceManager.CommonTypes.Identity;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
+  @typeChangedFrom(
+    Versions.v2026_06_16_preview,
+    Azure.ResourceManager.CommonTypes.Identity
+  )
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Indicates which kind of Arc machine placement on-premises, such as HCI, SCVMM or VMware etc.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   kind?: ArcKindEnum;
 }
 
@@ -106,7 +112,7 @@ interface Machines {
   /**
    * The operation to create or update a hybrid machine. Please note some properties can be set only during machine creation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @tag("machines")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Machine,
@@ -180,7 +186,7 @@ interface Machines {
   /**
    * The operation to Upgrade Machine Extensions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @tag("MachineExtensions Upgrade")
   upgradeExtensions is ArmResourceActionAsync<
     Machine,
@@ -192,7 +198,7 @@ interface Machines {
   /**
    * The operation to Setup Machine Extensions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @operationId("SetupExtensions")
   @tag("MachineExtensions Setup")
   @action("addExtensions")
@@ -232,18 +238,23 @@ interface Machines {
 @@minLength(Machine.name, 1);
 @@doc(Machine.name, "The name of the hybrid machine.");
 @@doc(Machine.properties, "Hybrid Compute Machine properties");
-@@doc(Machines.createOrUpdate::parameters.resource,
+@@doc(
+  Machines.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create hybrid machine operation."
 );
-@@doc(Machines.update::parameters.properties,
+@@doc(
+  Machines.update::parameters.properties,
   "Parameters supplied to the Update hybrid machine operation."
 );
-@@doc(Machines.installPatches::parameters.body,
+@@doc(
+  Machines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"
 );
-@@doc(Machines.upgradeExtensions::parameters.body,
+@@doc(
+  Machines.upgradeExtensions::parameters.body,
   "Parameters supplied to the Upgrade Extensions operation."
 );
-@@doc(Machines.setupExtensions::parameters.body,
+@@doc(
+  Machines.setupExtensions::parameters.body,
   "Parameters supplied to the Setup Extensions operation."
 );

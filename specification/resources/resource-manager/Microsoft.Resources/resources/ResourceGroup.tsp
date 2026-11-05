@@ -204,22 +204,28 @@ interface ResourceGroups {
 
 @@maxLength(ResourceGroup.name, 90);
 @@minLength(ResourceGroup.name, 1);
-@@doc(ResourceGroup.name,
+@@doc(
+  ResourceGroup.name,
   "The name of the resource group to get. The name is case insensitive."
 );
 @@doc(ResourceGroup.properties, "The resource group properties.");
-@@doc(ResourceGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ResourceGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update a resource group."
 );
-@@doc(ResourceGroups.update::parameters.properties,
+@@doc(
+  ResourceGroups.update::parameters.properties,
   "Parameters supplied to update a resource group."
 );
-@@doc(ResourceGroups.moveResources::parameters.body,
+@@doc(
+  ResourceGroups.moveResources::parameters.body,
   "Parameters for moving resources."
 );
-@@doc(ResourceGroups.validateMoveResources::parameters.body,
+@@doc(
+  ResourceGroups.validateMoveResources::parameters.body,
   "Parameters for moving resources."
 );
-@@doc(ResourceGroups.exportTemplate::parameters.body,
+@@doc(
+  ResourceGroups.exportTemplate::parameters.body,
   "Parameters for exporting the template."
 );

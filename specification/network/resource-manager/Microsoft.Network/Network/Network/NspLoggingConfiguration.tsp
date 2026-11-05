@@ -75,12 +75,15 @@ interface NspLoggingConfigurations {
 }
 
 @@maxLength(NspLoggingConfiguration.name, 80);
-@@doc(NspLoggingConfiguration.name,
+@@doc(
+  NspLoggingConfiguration.name,
   "The name of the NSP logging configuration. Accepts 'instance' as name."
 );
-@@doc(NspLoggingConfiguration.properties,
+@@doc(
+  NspLoggingConfiguration.properties,
   "Properties of the NSP logging configuration."
 );
-@@doc(NspLoggingConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  NspLoggingConfigurations.createOrUpdate::parameters.resource,
   "Parameters that hold the NspLoggingConfiguration to be created/updated."
 );

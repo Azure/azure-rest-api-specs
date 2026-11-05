@@ -148,6 +148,7 @@ alias StaticCidrsListParameters = {
 
 @@doc(StaticCidr.name, "StaticCidr resource name to retrieve.");
 @@doc(StaticCidr.properties, "Properties of static CIDR resource.");
-@@doc(StaticCidrs.create::parameters.resource,
+@@doc(
+  StaticCidrs.create::parameters.resource,
   "StaticCidr resource object to create/update."
 );

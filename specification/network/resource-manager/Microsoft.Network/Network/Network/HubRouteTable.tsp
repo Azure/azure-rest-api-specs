@@ -64,7 +64,10 @@ interface HubRouteTables {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     HubRouteTable,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -79,10 +82,12 @@ interface HubRouteTables {
 }
 
 @@doc(HubRouteTable.name, "The name of the RouteTable.");
-@@doc(HubRouteTable.name,
+@@doc(
+  HubRouteTable.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(HubRouteTable.properties, "Properties of the RouteTable resource.");
-@@doc(HubRouteTables.createOrUpdate::parameters.resource,
+@@doc(
+  HubRouteTables.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update RouteTable."
 );

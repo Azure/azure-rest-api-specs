@@ -27,16 +27,118 @@ These are the global settings for the DesktopVirtualizationClient API.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2026-01-01-preview
+tag: package-preview-2026-08-01-preview
 ```
 
-### Tag: package-preview-2026-01-01-preview
+### Tag: package-preview-2026-08-01-preview
 
-These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-08-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2026-01-01-preview'
+```yaml $(tag) == 'package-preview-2026-08-01-preview'
 input-file:
-  - preview/2026-01-01-preview/desktopvirtualization.json
+  - preview/2026-08-01-preview/desktopvirtualization.json
+suppressions:
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
+      the related properties. The rule seems conflict with the contract.
+      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
+      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
+      There is a fix for this and is waiting for the rollout.
+    where:
+      - $.definitions.ResourceProviderOperationListResult
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: BodyTopLevelProperties
+    from: desktopvirtualization.json
+    reason: |
+      This GET-only endpoint returns provisioning-operation status, not an independently managed ARM
+      resource. Operation progress, start/end timestamps, and error information belong to the top-level
+      operation-status envelope; properties contains the session-host provisioning details. Moving the
+      operation metadata into properties would change the operation-status response contract.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      This GET-only schema represents provisioning-operation status rather than a tracked or proxy
+      resource. Its optional id and name identify the asynchronous operation, and the response has no
+      ARM resource type. Requiring resource-envelope id, name, and type would change this operation-status
+      contract rather than describe an independently managed ARM resource.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: desktopvirtualization.json
+    reason: Property name follows RDP specification and existing naming conventions in the service.
+    where:
+      - $.definitions.HostPoolProperties.properties.allowRDPShortPathWithPrivateLink
+      - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
+```
+
+### Tag: package-preview-2026-04-01-preview
+
+These settings apply only when `--tag=package-preview-2026-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-04-01-preview'
+input-file:
+  - preview/2026-04-01-preview/desktopvirtualization.json
+suppressions:
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
+      the related properties. The rule seems conflict with the contract.
+      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
+      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
+      There is a fix for this and is waiting for the rollout.
+    where:
+      - $.definitions.ResourceProviderOperationListResult
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: BodyTopLevelProperties
+    from: desktopvirtualization.json
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: desktopvirtualization.json
+    reason: Property name follows RDP specification and existing naming conventions in the service.
+    where:
+      - $.definitions.HostPoolProperties.properties.allowRDPShortPathWithPrivateLink
+      - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
+```
+
+### Tag: package-preview-2026-03-01-preview
+
+These settings apply only when `--tag=package-preview-2026-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-01-preview'
+input-file:
+  - preview/2026-03-01-preview/desktopvirtualization.json
 suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
@@ -80,6 +182,56 @@ suppressions:
       - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
 ```
 
+### Tag: package-preview-2026-01-01-preview
+
+These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-01-preview'
+input-file:
+  - preview/2026-01-01-preview/desktopvirtualization.json
+suppressions:
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
+      the related properties. The rule seems conflict with the contract.
+      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
+      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
+      There is a fix for this and is waiting for the rollout.
+    where:
+      - $.definitions.ResourceProviderOperationListResult
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: BodyTopLevelProperties
+    from: desktopvirtualization.json
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: desktopvirtualization.json
+    reason: Property name follows RDP specification and existing naming conventions in the service.
+    where:
+      - $.definitions.HostPoolProperties.properties.allowRDPShortPathWithPrivateLink
+      - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
+```
+
 ### Tag: package-preview-2025-11-01-preview
 
 These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
@@ -97,15 +249,15 @@ suppressions:
       and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
       There is a fix for this and is waiting for the rollout.
     where:
-        - $.definitions.ResourceProviderOperationListResult
+      - $.definitions.ResourceProviderOperationListResult
   - code: PutResponseCodes
     from: desktopvirtualization.json
     reason: |
       Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
       status code not 201, and this is already in the stable version.
     where:
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
     reason: |
@@ -175,15 +327,15 @@ suppressions:
       and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
       There is a fix for this and is waiting for the rollout.
     where:
-        - $.definitions.ResourceProviderOperationListResult
+      - $.definitions.ResourceProviderOperationListResult
   - code: PutResponseCodes
     from: desktopvirtualization.json
     reason: |
       Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
       status code not 201, and this is already in the stable version.
     where:
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
     reason: |
@@ -225,15 +377,15 @@ suppressions:
       and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
       There is a fix for this and is waiting for the rollout.
     where:
-        - $.definitions.ResourceProviderOperationListResult
+      - $.definitions.ResourceProviderOperationListResult
   - code: PutResponseCodes
     from: desktopvirtualization.json
     reason: |
       Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
       status code not 201, and this is already in the stable version.
     where:
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
     reason: |
@@ -269,15 +421,15 @@ suppressions:
       and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
       There is a fix for this and is waiting for the rollout.
     where:
-        - $.definitions.ResourceProviderOperationListResult
+      - $.definitions.ResourceProviderOperationListResult
   - code: PutResponseCodes
     from: desktopvirtualization.json
     reason: |
       Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
       status code not 201, and this is already in the stable version.
     where:
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
     reason: |
@@ -345,8 +497,8 @@ suppressions:
       Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
       status code not 201, and this is already in the stable version.
     where:
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
 ```
 
 ### Tag: package-preview-2024-04
@@ -617,7 +769,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -642,10 +793,6 @@ See configuration in [readme.java.md](./readme.java.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## Node
 

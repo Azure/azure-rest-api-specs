@@ -8,6 +8,7 @@ using Azure.Core;
 @@clientName(SkuName, "ElasticSanSkuName", "csharp");
 @@clientName(SkuName.Premium_LRS, "PremiumLrs", "csharp");
 @@clientName(SkuName.Premium_ZRS, "PremiumZrs", "csharp");
+@@clientName(SkuName.ElasticSAN_LRS, "ElasticSanLrs", "csharp");
 @@clientName(EncryptionType, "ElasticSanEncryptionType", "csharp");
 @@clientName(Volume, "ElasticSanVolume", "csharp");
 @@alternateType(VolumeProperties.volumeId, uuid, "csharp");
@@ -27,13 +28,15 @@ using Azure.Core;
 @@clientName(VirtualNetworkRule, "ElasticSanVirtualNetworkRule", "csharp");
 @@alternateType(VirtualNetworkRule.id, armResourceIdentifier, "csharp");
 @@clientName(EncryptionIdentity, "ElasticSanEncryptionIdentity", "csharp");
-@@alternateType(EncryptionIdentity.userAssignedIdentity,
+@@alternateType(
+  EncryptionIdentity.userAssignedIdentity,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(NetworkRuleSet, "ElasticSanNetworkRuleSet", "csharp");
 @@clientName(ScaleUpProperties, "ElasticSanScaleUpProperties", "csharp");
-@@clientName(DeleteRetentionPolicy,
+@@clientName(
+  DeleteRetentionPolicy,
   "ElasticSanDeleteRetentionPolicy",
   "csharp"
 );
@@ -49,17 +52,29 @@ using Azure.Core;
 @@clientName(PolicyState, "ElasticSanDeleteRetentionPolicyState", "csharp");
 @@clientName(PreValidationResponse, "ElasticSanPreValidationResult", "csharp");
 @@clientName(VolumeNameList, "ElasticSanVolumeNameListContent", "csharp");
-@@clientName(`x-ms-delete-snapshots`,
+@@clientName(
+  `x-ms-delete-snapshots`,
   "ElasticSanDeleteSnapshotsUnderVolume",
   "csharp"
 );
-@@clientName(`x-ms-access-soft-deleted-resources`,
+@@clientName(
+  `x-ms-access-soft-deleted-resources`,
   "ElasticSanAccessSoftDeletedVolume",
   "csharp"
 );
 @@clientName(`x-ms-force-delete`, "ElasticSanForceDeleteVolume", "csharp");
 @@clientName(ElasticSanProperties.totalMBps, "totalMbps", "csharp");
-@@clientName(Microsoft.ElasticSan.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(ElasticSanUpdateProperties.totalMBps, "totalMbps", "csharp");
+@@clientName(
+  VolumeGroupProperties.encryptionInTransit,
+  "isEncryptionInTransitEnabled",
+  "csharp"
+);
+@@clientName(ManagedByResources, "ElasticSanManagedByInfo", "csharp");
+@@clientName(QualityOfService, "ElasticSanQualityOfService", "csharp");
+@@clientName(SkuZoneDetails, "ElasticSanSkuZoneDetails", "csharp");
+@@clientName(
+  Microsoft.ElasticSan.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -70,20 +85,24 @@ using Azure.Core;
 @@clientName(restoreVolume, "RestoreVolume", "csharp");
 @@clientName(VolumeGroups.preBackup, "PreBackupVolume", "csharp");
 @@clientName(VolumeGroups.preRestore, "PreRestoreVolume", "csharp");
-@@alternateType(VolumeGroupUpdate.identity,
+@@alternateType(
+  VolumeGroupUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(VolumeGroup.identity,
+@@alternateType(
+  VolumeGroup.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "ElasticSanPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(ElasticSans.listByElasticSan, "GetPrivateLinkResources", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -94,7 +113,8 @@ using Azure.Core;
 @@clientName(Volumes.update::parameters.properties, "patch", "csharp");
 @@clientName(SkusOperationGroup.list, "GetSkus", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(ElasticSans.listByElasticSan,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ElasticSans.listByElasticSan,
   "csharp"
 );
 

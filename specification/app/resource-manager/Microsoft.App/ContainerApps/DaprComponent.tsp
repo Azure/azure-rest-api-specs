@@ -181,9 +181,11 @@ interface DaprComponents {
 
 @@doc(DaprComponent.name, "Name of the Dapr Component.");
 @@doc(DaprComponent.properties, "Dapr Component resource specific properties");
-@@doc(ConnectedEnvironmentsDaprComponents.createOrUpdate::parameters.resource,
+@@doc(
+  ConnectedEnvironmentsDaprComponents.createOrUpdate::parameters.resource,
   "Configuration details of the Dapr Component."
 );
-@@doc(DaprComponents.createOrUpdate::parameters.resource,
+@@doc(
+  DaprComponents.createOrUpdate::parameters.resource,
   "Configuration details of the Dapr Component."
 );

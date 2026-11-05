@@ -8,6 +8,7 @@ import "./Volume.tsp";
 using Rest;
 using Azure.ResourceManager;
 using Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetApp;
 /**
@@ -38,6 +39,7 @@ model VolumeQuotaRulesProperties {
    * Gets the status of the VolumeQuotaRule at the time the operation was called.
    */
   @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.v2026_07_01, NetAppProvisioningStateOld)
   provisioningState?: NetAppProvisioningState;
 
   /**
@@ -132,7 +134,10 @@ interface VolumeQuotaRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     VolumeQuotaRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -146,9 +151,11 @@ interface VolumeQuotaRules {
 
 @@doc(VolumeQuotaRule.name, "The name of volume quota rule");
 @@doc(VolumeQuotaRule.properties, "Volume Quota Rule Properties");
-@@doc(VolumeQuotaRules.create::parameters.resource,
+@@doc(
+  VolumeQuotaRules.create::parameters.resource,
   "Quota rule object supplied in the body of the operation."
 );
-@@doc(VolumeQuotaRules.update::parameters.properties,
+@@doc(
+  VolumeQuotaRules.update::parameters.properties,
   "Quota rule object supplied in the body of the operation."
 );

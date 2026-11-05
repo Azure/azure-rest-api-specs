@@ -16,8 +16,7 @@ namespace Microsoft.AzureStackHCI;
  * Publisher details.
  */
 @parentResource(Cluster)
-@added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
+@added(Versions.v2026_11_01_preview)
 model Publisher is Azure.ResourceManager.ProxyResource<PublisherProperties> {
   ...ResourceNameParameter<
     Resource = Publisher,
@@ -27,25 +26,8 @@ model Publisher is Azure.ResourceManager.ProxyResource<PublisherProperties> {
   >;
 }
 
-@armResourceOperations
-@added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
-interface Publishers {
-  /**
-   * Get Publisher resource details of HCI Cluster.
-   */
-  get is ArmResourceRead<Publisher>;
-
-  /**
-   * List Publishers available for the HCI Cluster.
-   */
-  listByCluster is ArmResourceListByParent<
-    Publisher,
-    Response = ArmResponse<PublisherList>
-  >;
-}
-
-@@doc(Publisher.name,
+@@doc(
+  Publisher.name,
   "The name of the publisher available within HCI cluster."
 );
 @@doc(Publisher.properties, "Publisher properties.");

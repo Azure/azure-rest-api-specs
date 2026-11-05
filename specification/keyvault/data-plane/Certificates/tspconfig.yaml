@@ -10,6 +10,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -26,7 +27,6 @@ options:
     "namespace": "azure.keyvault.certificates._generated"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-certificates"
   "@azure-tools/typespec-java":
-    api-version: "2025-07-01"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-certificates"
     namespace: "com.azure.security.keyvault.certificates"
@@ -38,8 +38,10 @@ options:
     generate-tests: false
     generate-samples: false
     include-api-view-properties: false
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Security.KeyVault.Certificates
+    model-namespace: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/keyvault-certificates"
     experimental-extensible-enums: true
@@ -60,7 +62,6 @@ options:
     crate-name: "azure_security_keyvault_certificates"
     crate-version: "0.0.1"
     emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
-    api-version: "2025-07-01"
     omit-constructors: true
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:

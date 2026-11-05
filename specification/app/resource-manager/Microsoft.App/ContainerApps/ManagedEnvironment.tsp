@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -19,7 +21,7 @@ model ManagedEnvironment
     Resource = ManagedEnvironment,
     KeyName = "environmentName",
     SegmentName = "managedEnvironments",
-    NamePattern = ""
+    NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
 
   /**
@@ -83,7 +85,10 @@ interface ManagedEnvironments {
   @summary("Delete a Managed Environment.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedEnvironment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -139,6 +144,19 @@ interface ManagedEnvironments {
   >;
 
   /**
+   * Checks whether a Managed Environment can be migrated to a target mode.
+   */
+  @added(Versions.v2026_07_01)
+  @action("checkMigrationEligibility")
+  @summary("Checks whether a Managed Environment can be migrated to a target mode.")
+  checkMigrationEligibility is ArmResourceActionSync<
+    ManagedEnvironment,
+    CheckMigrationEligibilityRequest,
+    ArmResponse<CheckMigrationEligibilityResponse>,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
    * List private link resources for a given managed environment.
    */
   @list
@@ -149,20 +167,28 @@ interface ManagedEnvironments {
   list is ManagedEnvironmentOps.ActionSync<
     ManagedEnvironment,
     void,
-    ArmResponse<ResourceListResult<PrivateLinkResource>>
+    ArmResponse<PrivateLinkResourceListResult>
   >;
 }
 
 @@doc(ManagedEnvironment.name, "Name of the Environment.");
-@@doc(ManagedEnvironment.properties,
+@@doc(
+  ManagedEnvironment.properties,
   "Managed environment resource specific properties"
 );
-@@doc(ManagedEnvironments.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedEnvironments.createOrUpdate::parameters.resource,
   "Configuration details of the Environment."
 );
-@@doc(ManagedEnvironments.update::parameters.properties,
+@@doc(
+  ManagedEnvironments.update::parameters.properties,
   "Configuration details of the Environment."
 );
-@@doc(ManagedEnvironments.checkNameAvailability::parameters.body,
+@@doc(
+  ManagedEnvironments.checkNameAvailability::parameters.body,
   "The check name availability request."
+);
+@@doc(
+  ManagedEnvironments.checkMigrationEligibility::parameters.body,
+  "The migration eligibility check request."
 );

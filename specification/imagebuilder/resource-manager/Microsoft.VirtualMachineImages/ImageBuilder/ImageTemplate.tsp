@@ -103,9 +103,11 @@ interface ImageTemplates {
 
 @@doc(ImageTemplate.name, "The name of the image Template");
 @@doc(ImageTemplate.properties, "The properties of the image template");
-@@doc(ImageTemplates.createOrUpdate::parameters.resource,
+@@doc(
+  ImageTemplates.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateImageTemplate operation"
 );
-@@doc(ImageTemplates.update::parameters.properties,
+@@doc(
+  ImageTemplates.update::parameters.properties,
   "Additional parameters for Image Template update."
 );

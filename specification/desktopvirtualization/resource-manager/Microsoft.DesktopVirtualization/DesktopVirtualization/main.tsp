@@ -28,6 +28,7 @@ import "./SessionHostConfiguration.tsp";
 import "./SessionHostUpdateStatus.tsp";
 import "./SessionHostProvisioningStatus.tsp";
 import "./back-compat.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -50,7 +51,8 @@ namespace Microsoft.DesktopVirtualization;
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is the standard operations interface for our service"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Provider-level operations discovery returns supported RP operations, not ARM resource instances; preserve the existing custom route and response model."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This is the standard operations interface for our service"
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")
@@ -75,5 +77,5 @@ enum Versions {
    * The latest public preview API version.
    */
   @previewVersion
-  vLatestPreview: "2026-01-01-preview",
+  vLatestPreview: "2026-08-01-preview",
 }

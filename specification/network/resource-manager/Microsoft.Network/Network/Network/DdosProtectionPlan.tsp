@@ -71,7 +71,10 @@ interface DdosProtectionPlans {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DdosProtectionPlan,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -91,9 +94,11 @@ interface DdosProtectionPlans {
 
 @@doc(DdosProtectionPlan.name, "The name of the DDoS protection plan.");
 @@doc(DdosProtectionPlan.properties, "Properties of the DDoS protection plan.");
-@@doc(DdosProtectionPlans.createOrUpdate::parameters.resource,
+@@doc(
+  DdosProtectionPlans.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update operation."
 );
-@@doc(DdosProtectionPlans.updateTags::parameters.properties,
+@@doc(
+  DdosProtectionPlans.updateTags::parameters.properties,
   "Parameters supplied to the update DDoS protection plan resource tags."
 );

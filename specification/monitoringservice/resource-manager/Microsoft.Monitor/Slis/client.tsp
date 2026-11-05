@@ -9,7 +9,6 @@ using Microsoft.Monitor;
 // PreviewType, KqlmQueryResult, etc.) will be marked as internal.
 // Shared models (EvaluationType, BaselineProperties, Signal, etc.) remain public
 // because they are also used by the public Slis interface.
-@@access(SloView.sliSignalPreview, Access.internal);
 
 @@clientName(Microsoft.Monitor, "MonitorSlisMgmtClient", "python");
 
@@ -19,7 +18,8 @@ using Microsoft.Monitor;
 @@clientName(Category, "SliCategory", "csharp");
 @@clientName(Condition, "SliCondition", "csharp");
 @@clientName(ConditionOperator, "SliConditionOperator", "csharp");
-@@clientName(EvaluationCalculationType,
+@@clientName(
+  EvaluationCalculationType,
   "SliEvaluationCalculationType",
   "csharp"
 );
@@ -37,7 +37,8 @@ using Microsoft.Monitor;
 @@clientName(TemporalAggregationType, "SliTemporalAggregationType", "csharp");
 @@clientName(Sli, "MonitorSli", "csharp");
 @@clientName(SliResource, "MonitorSliProperties", "csharp");
-@@clientName(SliResource.streamingRuleLastUpdatedTimestamp,
+@@clientName(
+  SliResource.streamingRuleLastUpdatedTimestamp,
   "StreamingRuleLastUpdatedOn",
   "csharp"
 );

@@ -36,7 +36,8 @@ model Experiment extends Azure.ResourceManager.Foundations.TrackedResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with arm-resource-flattening configuration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Experiment.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Experiment.properties,
   "autorest"
 );
 
@@ -121,6 +122,7 @@ model ExperimentProperties {
    * Optional customer-managed Storage account where Experiment schema will be stored.
    */
   @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
   customerDataStorage?: CustomerDataStorageProperties;
 }
 

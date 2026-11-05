@@ -60,12 +60,15 @@ interface ProtectionIntentResources {
   >;
 }
 
-@@doc(ProtectionIntentResource.name,
+@@doc(
+  ProtectionIntentResource.name,
   "Backed up item name whose details are to be fetched."
 );
-@@doc(ProtectionIntentResource.properties,
+@@doc(
+  ProtectionIntentResource.properties,
   "ProtectionIntentResource properties"
 );
-@@doc(ProtectionIntentResources.createOrUpdate::parameters.resource,
+@@doc(
+  ProtectionIntentResources.createOrUpdate::parameters.resource,
   "resource backed up item"
 );

@@ -83,9 +83,11 @@ interface ConsumerGroups {
 @@maxLength(ConsumerGroup.name, 50);
 @@minLength(ConsumerGroup.name, 1);
 @@doc(ConsumerGroup.name, "The consumer group name");
-@@doc(ConsumerGroup.properties,
+@@doc(
+  ConsumerGroup.properties,
   "Single item in List or Get Consumer group operation"
 );
-@@doc(ConsumerGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ConsumerGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a consumer group resource."
 );

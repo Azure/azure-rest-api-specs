@@ -70,8 +70,10 @@ interface AutoExportJobs {
   @tag("autoExportJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     AutoExportJob,
-    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -90,13 +92,16 @@ interface AutoExportJobs {
 
 @@maxLength(AutoExportJob.name, 80);
 @@minLength(AutoExportJob.name, 2);
-@@doc(AutoExportJob.name,
+@@doc(
+  AutoExportJob.name,
   "Name for the auto export job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric."
 );
 @@doc(AutoExportJob.properties, "Properties of the auto export job.");
-@@doc(AutoExportJobs.createOrUpdate::parameters.resource,
+@@doc(
+  AutoExportJobs.createOrUpdate::parameters.resource,
   "Object containing the user-selectable properties of the auto export job. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(AutoExportJobs.update::parameters.properties,
+@@doc(
+  AutoExportJobs.update::parameters.properties,
   "Object containing the user-selectable properties of the auto export job. If read-only properties are included, they must match the existing values of those properties."
 );

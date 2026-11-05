@@ -62,7 +62,8 @@ interface VpnSiteLinks {
   >;
 }
 
-@@doc(VpnSiteLink.name,
+@@doc(
+  VpnSiteLink.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(VpnSiteLink.properties, "Properties of the VPN site link.");

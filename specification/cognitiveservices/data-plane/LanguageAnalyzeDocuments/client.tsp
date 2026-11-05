@@ -25,19 +25,23 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeDocumentsLROTask.taskName, "Name", "csharp");
 
 @@clientName(PiiCategories.ABARoutingNumber, "AbaRoutingNumber", "csharp");
-@@clientName(PiiCategories.ARNationalIdentityNumber,
+@@clientName(
+  PiiCategories.ARNationalIdentityNumber,
   "ArNationalIdentityNumber",
   "csharp"
 );
-@@clientName(PiiCategories.AUBankAccountNumber,
+@@clientName(
+  PiiCategories.AUBankAccountNumber,
   "AuBankAccountNumber",
   "csharp"
 );
-@@clientName(PiiCategories.AUDriversLicenseNumber,
+@@clientName(
+  PiiCategories.AUDriversLicenseNumber,
   "AuDriversLicenseNumber",
   "csharp"
 );
-@@clientName(PiiCategories.AUMedicalAccountNumber,
+@@clientName(
+  PiiCategories.AUMedicalAccountNumber,
   "AuMedicalAccountNumber",
   "csharp"
 );
@@ -46,301 +50,368 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(PiiCategories.AUBusinessNumber, "AuBusinessNumber", "csharp");
 @@clientName(PiiCategories.AUCompanyNumber, "AuCompanyNumber", "csharp");
 @@clientName(PiiCategories.ATIdentityCard, "AtIdentityCard", "csharp");
-@@clientName(PiiCategories.ATTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.ATTaxIdentificationNumber,
   "AtTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.ATValueAddedTaxNumber,
+@@clientName(
+  PiiCategories.ATValueAddedTaxNumber,
   "AtValueAddedTaxNumber",
   "csharp"
 );
-@@clientName(PiiCategories.AzureDocumentDBAuthKey,
+@@clientName(
+  PiiCategories.AzureDocumentDBAuthKey,
   "AzureDocumentDbauthKey",
   "csharp"
 );
-@@clientName(PiiCategories.AzureIAASDatabaseConnectionAndSQLString,
+@@clientName(
+  PiiCategories.AzureIAASDatabaseConnectionAndSQLString,
   "AzureIaasDatabaseConnectionAndSqlString",
   "csharp"
 );
 @@clientName(PiiCategories.AzureSAS, "AzureSas", "csharp");
 @@clientName(PiiCategories.BENationalNumber, "BeNationalNumber", "csharp");
 @@clientName(PiiCategories.BENationalNumberV2, "BeNationalNumberV2", "csharp");
-@@clientName(PiiCategories.BEValueAddedTaxNumber,
+@@clientName(
+  PiiCategories.BEValueAddedTaxNumber,
   "BeValueAddedTaxNumber",
   "csharp"
 );
 @@clientName(PiiCategories.BRCPFNumber, "BrCpfNumber", "csharp");
-@@clientName(PiiCategories.BRLegalEntityNumber,
+@@clientName(
+  PiiCategories.BRLegalEntityNumber,
   "BrLegalEntityNumber",
   "csharp"
 );
 @@clientName(PiiCategories.BRNationalIDRG, "BrNationalIdRg", "csharp");
-@@clientName(PiiCategories.BGUniformCivilNumber,
+@@clientName(
+  PiiCategories.BGUniformCivilNumber,
   "BgUniformCivilNumber",
   "csharp"
 );
-@@clientName(PiiCategories.CABankAccountNumber,
+@@clientName(
+  PiiCategories.CABankAccountNumber,
   "CaBankAccountNumber",
   "csharp"
 );
-@@clientName(PiiCategories.CADriversLicenseNumber,
+@@clientName(
+  PiiCategories.CADriversLicenseNumber,
   "CaDriversLicenseNumber",
   "csharp"
 );
-@@clientName(PiiCategories.CAHealthServiceNumber,
+@@clientName(
+  PiiCategories.CAHealthServiceNumber,
   "CaHealthServiceNumber",
   "csharp"
 );
 @@clientName(PiiCategories.CAPassportNumber, "CaPassportNumber", "csharp");
-@@clientName(PiiCategories.CAPersonalHealthIdentification,
+@@clientName(
+  PiiCategories.CAPersonalHealthIdentification,
   "CaPersonalHealthIdentification",
   "csharp"
 );
-@@clientName(PiiCategories.CASocialInsuranceNumber,
+@@clientName(
+  PiiCategories.CASocialInsuranceNumber,
   "CaSocialInsuranceNumber",
   "csharp"
 );
-@@clientName(PiiCategories.CLIdentityCardNumber,
+@@clientName(
+  PiiCategories.CLIdentityCardNumber,
   "ClIdentityCardNumber",
   "csharp"
 );
-@@clientName(PiiCategories.CNResidentIdentityCardNumber,
+@@clientName(
+  PiiCategories.CNResidentIdentityCardNumber,
   "CnResidentIdentityCardNumber",
   "csharp"
 );
-@@clientName(PiiCategories.HRIdentityCardNumber,
+@@clientName(
+  PiiCategories.HRIdentityCardNumber,
   "HrIdentityCardNumber",
   "csharp"
 );
 @@clientName(PiiCategories.HRNationalIDNumber, "HrNationalIdNumber", "csharp");
-@@clientName(PiiCategories.HRPersonalIdentificationNumber,
+@@clientName(
+  PiiCategories.HRPersonalIdentificationNumber,
   "HrPersonalIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.HRPersonalIdentificationOIBNumberV2,
+@@clientName(
+  PiiCategories.HRPersonalIdentificationOIBNumberV2,
   "HrPersonalIdentificationOIBNumberV2",
   "csharp"
 );
 @@clientName(PiiCategories.CYIdentityCard, "CyIdentityCard", "csharp");
-@@clientName(PiiCategories.CYTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.CYTaxIdentificationNumber,
   "CyTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.CZPersonalIdentityNumber,
+@@clientName(
+  PiiCategories.CZPersonalIdentityNumber,
   "CzPersonalIdentityNumber",
   "csharp"
 );
-@@clientName(PiiCategories.CZPersonalIdentityV2,
+@@clientName(
+  PiiCategories.CZPersonalIdentityV2,
   "CzPersonalIdentityV2",
   "csharp"
 );
-@@clientName(PiiCategories.DKPersonalIdentificationNumber,
+@@clientName(
+  PiiCategories.DKPersonalIdentificationNumber,
   "DkPersonalIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.DKPersonalIdentificationV2,
+@@clientName(
+  PiiCategories.DKPersonalIdentificationV2,
   "DkPersonalIdentificationV2",
   "csharp"
 );
-@@clientName(PiiCategories.EEPersonalIdentificationCode,
+@@clientName(
+  PiiCategories.EEPersonalIdentificationCode,
   "EePersonalIdentificationCode",
   "csharp"
 );
 @@clientName(PiiCategories.EUDebitCardNumber, "EuDebitCardNumber", "csharp");
-@@clientName(PiiCategories.EUDriversLicenseNumber,
+@@clientName(
+  PiiCategories.EUDriversLicenseNumber,
   "EuDriversLicenseNumber",
   "csharp"
 );
 @@clientName(PiiCategories.EUGPSCoordinates, "EuGpsCoordinates", "csharp");
-@@clientName(PiiCategories.EUNationalIdentificationNumber,
+@@clientName(
+  PiiCategories.EUNationalIdentificationNumber,
   "EuNationalIdentificationNumber",
   "csharp"
 );
 @@clientName(PiiCategories.EUPassportNumber, "EuPassportNumber", "csharp");
-@@clientName(PiiCategories.EUSocialSecurityNumber,
+@@clientName(
+  PiiCategories.EUSocialSecurityNumber,
   "EuSocialSecurityNumber",
   "csharp"
 );
-@@clientName(PiiCategories.EUTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.EUTaxIdentificationNumber,
   "EuTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.FIEuropeanHealthNumber,
+@@clientName(
+  PiiCategories.FIEuropeanHealthNumber,
   "FiEuropeanHealthNumber",
   "csharp"
 );
 @@clientName(PiiCategories.FINationalID, "FiNationalId", "csharp");
 @@clientName(PiiCategories.FINationalIDV2, "FiNationalIdV2", "csharp");
 @@clientName(PiiCategories.FIPassportNumber, "FiPassportNumber", "csharp");
-@@clientName(PiiCategories.FRDriversLicenseNumber,
+@@clientName(
+  PiiCategories.FRDriversLicenseNumber,
   "FrDriversLicenseNumber",
   "csharp"
 );
-@@clientName(PiiCategories.FRHealthInsuranceNumber,
+@@clientName(
+  PiiCategories.FRHealthInsuranceNumber,
   "FrHealthInsuranceNumber",
   "csharp"
 );
 @@clientName(PiiCategories.FRNationalID, "FrNationalId", "csharp");
 @@clientName(PiiCategories.FRPassportNumber, "FrPassportNumber", "csharp");
-@@clientName(PiiCategories.FRSocialSecurityNumber,
+@@clientName(
+  PiiCategories.FRSocialSecurityNumber,
   "FrSocialSecurityNumber",
   "csharp"
 );
-@@clientName(PiiCategories.FRTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.FRTaxIdentificationNumber,
   "FrTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.FRValueAddedTaxNumber,
+@@clientName(
+  PiiCategories.FRValueAddedTaxNumber,
   "FrValueAddedTaxNumber",
   "csharp"
 );
-@@clientName(PiiCategories.DEDriversLicenseNumber,
+@@clientName(
+  PiiCategories.DEDriversLicenseNumber,
   "DeDriversLicenseNumber",
   "csharp"
 );
 @@clientName(PiiCategories.DEPassportNumber, "DePassportNumber", "csharp");
-@@clientName(PiiCategories.DEIdentityCardNumber,
+@@clientName(
+  PiiCategories.DEIdentityCardNumber,
   "DeIdentityCardNumber",
   "csharp"
 );
-@@clientName(PiiCategories.DETaxIdentificationNumber,
+@@clientName(
+  PiiCategories.DETaxIdentificationNumber,
   "DeTaxIdentificationNumber",
   "csharp"
 );
 @@clientName(PiiCategories.DEValueAddedNumber, "DeValueAddedNumber", "csharp");
 @@clientName(PiiCategories.GRNationalIDCard, "GrNationalIdCard", "csharp");
 @@clientName(PiiCategories.GRNationalIDV2, "GrNationalIdV2", "csharp");
-@@clientName(PiiCategories.GRTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.GRTaxIdentificationNumber,
   "GrTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.HKIdentityCardNumber,
+@@clientName(
+  PiiCategories.HKIdentityCardNumber,
   "HkIdentityCardNumber",
   "csharp"
 );
 @@clientName(PiiCategories.HUValueAddedNumber, "HuValueAddedNumber", "csharp");
-@@clientName(PiiCategories.HUPersonalIdentificationNumber,
+@@clientName(
+  PiiCategories.HUPersonalIdentificationNumber,
   "HuPersonalIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.HUTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.HUTaxIdentificationNumber,
   "HuTaxIdentificationNumber",
   "csharp"
 );
 @@clientName(PiiCategories.INPermanentAccount, "InPermanentAccount", "csharp");
-@@clientName(PiiCategories.INUniqueIdentificationNumber,
+@@clientName(
+  PiiCategories.INUniqueIdentificationNumber,
   "InUniqueIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.IDIdentityCardNumber,
+@@clientName(
+  PiiCategories.IDIdentityCardNumber,
   "IdIdentityCardNumber",
   "csharp"
 );
-@@clientName(PiiCategories.IEPersonalPublicServiceNumber,
+@@clientName(
+  PiiCategories.IEPersonalPublicServiceNumber,
   "IePersonalPublicServiceNumber",
   "csharp"
 );
-@@clientName(PiiCategories.IEPersonalPublicServiceNumberV2,
+@@clientName(
+  PiiCategories.IEPersonalPublicServiceNumberV2,
   "IePersonalPublicServiceNumberV2",
   "csharp"
 );
-@@clientName(PiiCategories.ILBankAccountNumber,
+@@clientName(
+  PiiCategories.ILBankAccountNumber,
   "IlBankAccountNumber",
   "csharp"
 );
 @@clientName(PiiCategories.ILNationalID, "IlNationalId", "csharp");
-@@clientName(PiiCategories.ITDriversLicenseNumber,
+@@clientName(
+  PiiCategories.ITDriversLicenseNumber,
   "ItDriversLicenseNumber",
   "csharp"
 );
 @@clientName(PiiCategories.ITFiscalCode, "ItFiscalCode", "csharp");
-@@clientName(PiiCategories.ITValueAddedTaxNumber,
+@@clientName(
+  PiiCategories.ITValueAddedTaxNumber,
   "ItValueAddedTaxNumber",
   "csharp"
 );
-@@clientName(PiiCategories.JPBankAccountNumber,
+@@clientName(
+  PiiCategories.JPBankAccountNumber,
   "JpBankAccountNumber",
   "csharp"
 );
-@@clientName(PiiCategories.JPDriversLicenseNumber,
+@@clientName(
+  PiiCategories.JPDriversLicenseNumber,
   "JpDriversLicenseNumber",
   "csharp"
 );
 @@clientName(PiiCategories.JPPassportNumber, "JpPassportNumber", "csharp");
-@@clientName(PiiCategories.JPResidentRegistrationNumber,
+@@clientName(
+  PiiCategories.JPResidentRegistrationNumber,
   "JpResidentRegistrationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.JPSocialInsuranceNumber,
+@@clientName(
+  PiiCategories.JPSocialInsuranceNumber,
   "JpSocialInsuranceNumber",
   "csharp"
 );
-@@clientName(PiiCategories.JPMyNumberCorporate,
+@@clientName(
+  PiiCategories.JPMyNumberCorporate,
   "JpMyNumberCorporate",
   "csharp"
 );
 @@clientName(PiiCategories.JPMyNumberPersonal, "JpMyNumberPersonal", "csharp");
-@@clientName(PiiCategories.JPResidenceCardNumber,
+@@clientName(
+  PiiCategories.JPResidenceCardNumber,
   "JpResidenceCardNumber",
   "csharp"
 );
 @@clientName(PiiCategories.LVPersonalCode, "LvPersonalCode", "csharp");
 @@clientName(PiiCategories.LTPersonalCode, "LtPersonalCode", "csharp");
-@@clientName(PiiCategories.LUNationalIdentificationNumberNatural,
+@@clientName(
+  PiiCategories.LUNationalIdentificationNumberNatural,
   "LuNationalIdentificationNumberNatural",
   "csharp"
 );
-@@clientName(PiiCategories.LUNationalIdentificationNumberNonNatural,
+@@clientName(
+  PiiCategories.LUNationalIdentificationNumberNonNatural,
   "LuNationalIdentificationNumberNonNatural",
   "csharp"
 );
-@@clientName(PiiCategories.MYIdentityCardNumber,
+@@clientName(
+  PiiCategories.MYIdentityCardNumber,
   "MyIdentityCardNumber",
   "csharp"
 );
-@@clientName(PiiCategories.MTIdentityCardNumber,
+@@clientName(
+  PiiCategories.MTIdentityCardNumber,
   "MtIdentityCardNumber",
   "csharp"
 );
 @@clientName(PiiCategories.MTTaxIDNumber, "MtTaxIdNumber", "csharp");
-@@clientName(PiiCategories.NLCitizensServiceNumber,
+@@clientName(
+  PiiCategories.NLCitizensServiceNumber,
   "NlCitizensServiceNumber",
   "csharp"
 );
-@@clientName(PiiCategories.NLCitizensServiceNumberV2,
+@@clientName(
+  PiiCategories.NLCitizensServiceNumberV2,
   "NlCitizensServiceNumberV2",
   "csharp"
 );
-@@clientName(PiiCategories.NLTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.NLTaxIdentificationNumber,
   "NlTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.NLValueAddedTaxNumber,
+@@clientName(
+  PiiCategories.NLValueAddedTaxNumber,
   "NlValueAddedTaxNumber",
   "csharp"
 );
-@@clientName(PiiCategories.NZBankAccountNumber,
+@@clientName(
+  PiiCategories.NZBankAccountNumber,
   "NzBankAccountNumber",
   "csharp"
 );
-@@clientName(PiiCategories.NZDriversLicenseNumber,
+@@clientName(
+  PiiCategories.NZDriversLicenseNumber,
   "NzDriversLicenseNumber",
   "csharp"
 );
-@@clientName(PiiCategories.NZInlandRevenueNumber,
+@@clientName(
+  PiiCategories.NZInlandRevenueNumber,
   "NzInlandRevenueNumber",
   "csharp"
 );
-@@clientName(PiiCategories.NZMinistryOfHealthNumber,
+@@clientName(
+  PiiCategories.NZMinistryOfHealthNumber,
   "NzMinistryOfHealthNumber",
   "csharp"
 );
-@@clientName(PiiCategories.NZSocialWelfareNumber,
+@@clientName(
+  PiiCategories.NZSocialWelfareNumber,
   "NzSocialWelfareNumber",
   "csharp"
 );
 @@clientName(PiiCategories.NOIdentityNumber, "NoIdentityNumber", "csharp");
-@@clientName(PiiCategories.PHUnifiedMultiPurposeIDNumber,
+@@clientName(
+  PiiCategories.PHUnifiedMultiPurposeIDNumber,
   "PhUnifiedMultiPurposeIdNumber",
   "csharp"
 );
@@ -348,236 +419,288 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(PiiCategories.PLNationalID, "PlNationalId", "csharp");
 @@clientName(PiiCategories.PLNationalIDV2, "PlNationalIdV2", "csharp");
 @@clientName(PiiCategories.PLPassportNumber, "PlPassportNumber", "csharp");
-@@clientName(PiiCategories.PLTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.PLTaxIdentificationNumber,
   "PlTaxIdentificationNumber",
   "csharp"
 );
 @@clientName(PiiCategories.PLREGONNumber, "PlRegonNumber", "csharp");
-@@clientName(PiiCategories.PTCitizenCardNumber,
+@@clientName(
+  PiiCategories.PTCitizenCardNumber,
   "PtCitizenCardNumber",
   "csharp"
 );
-@@clientName(PiiCategories.PTCitizenCardNumberV2,
+@@clientName(
+  PiiCategories.PTCitizenCardNumberV2,
   "PtCitizenCardNumberV2",
   "csharp"
 );
-@@clientName(PiiCategories.PTTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.PTTaxIdentificationNumber,
   "PtTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.ROPersonalNumericalCode,
+@@clientName(
+  PiiCategories.ROPersonalNumericalCode,
   "RoPersonalNumericalCode",
   "csharp"
 );
-@@clientName(PiiCategories.RUPassportNumberDomestic,
+@@clientName(
+  PiiCategories.RUPassportNumberDomestic,
   "RuPassportNumberDomestic",
   "csharp"
 );
-@@clientName(PiiCategories.RUPassportNumberInternational,
+@@clientName(
+  PiiCategories.RUPassportNumberInternational,
   "RuPassportNumberInternational",
   "csharp"
 );
 @@clientName(PiiCategories.SANationalID, "SaNationalId", "csharp");
-@@clientName(PiiCategories.SGNationalRegistrationIdentityCardNumber,
+@@clientName(
+  PiiCategories.SGNationalRegistrationIdentityCardNumber,
   "SgNationalRegistrationIdentityCardNumber",
   "csharp"
 );
 @@clientName(PiiCategories.SKPersonalNumber, "SkPersonalNumber", "csharp");
-@@clientName(PiiCategories.SITaxIdentificationNumber,
+@@clientName(
+  PiiCategories.SITaxIdentificationNumber,
   "SiTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.SIUniqueMasterCitizenNumber,
+@@clientName(
+  PiiCategories.SIUniqueMasterCitizenNumber,
   "SiUniqueMasterCitizenNumber",
   "csharp"
 );
-@@clientName(PiiCategories.ZAIdentificationNumber,
+@@clientName(
+  PiiCategories.ZAIdentificationNumber,
   "ZaIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.KRResidentRegistrationNumber,
+@@clientName(
+  PiiCategories.KRResidentRegistrationNumber,
   "KrResidentRegistrationNumber",
   "csharp"
 );
 @@clientName(PiiCategories.ESDNI, "EsDni", "csharp");
-@@clientName(PiiCategories.ESSocialSecurityNumber,
+@@clientName(
+  PiiCategories.ESSocialSecurityNumber,
   "EsSocialSecurityNumber",
   "csharp"
 );
-@@clientName(PiiCategories.ESTaxIdentificationNumber,
+@@clientName(
+  PiiCategories.ESTaxIdentificationNumber,
   "EsTaxIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.SQLServerConnectionString,
+@@clientName(
+  PiiCategories.SQLServerConnectionString,
   "SqlServerConnectionString",
   "csharp"
 );
 @@clientName(PiiCategories.SENationalID, "SeNationalId", "csharp");
 @@clientName(PiiCategories.SENationalIDV2, "SeNationalIdV2", "csharp");
 @@clientName(PiiCategories.SEPassportNumber, "SePassportNumber", "csharp");
-@@clientName(PiiCategories.SETaxIdentificationNumber,
+@@clientName(
+  PiiCategories.SETaxIdentificationNumber,
   "SeTaxIdentificationNumber",
   "csharp"
 );
 @@clientName(PiiCategories.SWIFTCode, "SwiftCode", "csharp");
-@@clientName(PiiCategories.CHSocialSecurityNumber,
+@@clientName(
+  PiiCategories.CHSocialSecurityNumber,
   "ChSocialSecurityNumber",
   "csharp"
 );
 @@clientName(PiiCategories.TWNationalID, "TwNationalId", "csharp");
 @@clientName(PiiCategories.TWPassportNumber, "TwPassportNumber", "csharp");
-@@clientName(PiiCategories.TWResidentCertificate,
+@@clientName(
+  PiiCategories.TWResidentCertificate,
   "TwResidentCertificate",
   "csharp"
 );
-@@clientName(PiiCategories.THPopulationIdentificationCode,
+@@clientName(
+  PiiCategories.THPopulationIdentificationCode,
   "ThPopulationIdentificationCode",
   "csharp"
 );
-@@clientName(PiiCategories.TRNationalIdentificationNumber,
+@@clientName(
+  PiiCategories.TRNationalIdentificationNumber,
   "TrNationalIdentificationNumber",
   "csharp"
 );
-@@clientName(PiiCategories.UKDriversLicenseNumber,
+@@clientName(
+  PiiCategories.UKDriversLicenseNumber,
   "UkDriversLicenseNumber",
   "csharp"
 );
-@@clientName(PiiCategories.UKElectoralRollNumber,
+@@clientName(
+  PiiCategories.UKElectoralRollNumber,
   "UkElectoralRollNumber",
   "csharp"
 );
-@@clientName(PiiCategories.UKNationalHealthNumber,
+@@clientName(
+  PiiCategories.UKNationalHealthNumber,
   "UkNationalHealthNumber",
   "csharp"
 );
-@@clientName(PiiCategories.UKNationalInsuranceNumber,
+@@clientName(
+  PiiCategories.UKNationalInsuranceNumber,
   "UkNationalInsuranceNumber",
   "csharp"
 );
-@@clientName(PiiCategories.UKUniqueTaxpayerNumber,
+@@clientName(
+  PiiCategories.UKUniqueTaxpayerNumber,
   "UkUniqueTaxpayerNumber",
   "csharp"
 );
 @@clientName(PiiCategories.USUKPassportNumber, "UsUkPassportNumber", "csharp");
-@@clientName(PiiCategories.USBankAccountNumber,
+@@clientName(
+  PiiCategories.USBankAccountNumber,
   "UsBankAccountNumber",
   "csharp"
 );
-@@clientName(PiiCategories.USDriversLicenseNumber,
+@@clientName(
+  PiiCategories.USDriversLicenseNumber,
   "UsDriversLicenseNumber",
   "csharp"
 );
-@@clientName(PiiCategories.USIndividualTaxpayerIdentification,
+@@clientName(
+  PiiCategories.USIndividualTaxpayerIdentification,
   "UsIndividualTaxpayerIdentification",
   "csharp"
 );
-@@clientName(PiiCategories.USSocialSecurityNumber,
+@@clientName(
+  PiiCategories.USSocialSecurityNumber,
   "UsSocialSecurityNumber",
   "csharp"
 );
-@@clientName(PiiCategories.UAPassportNumberDomestic,
+@@clientName(
+  PiiCategories.UAPassportNumberDomestic,
   "UaPassportNumberDomestic",
   "csharp"
 );
-@@clientName(PiiCategories.UAPassportNumberInternational,
+@@clientName(
+  PiiCategories.UAPassportNumberInternational,
   "UaPassportNumberInternational",
   "csharp"
 );
 
-@@clientName(MultiLanguageAnalysisInput,
+@@clientName(
+  MultiLanguageAnalysisInput,
   "MultiLanguageDocumentInput",
   "csharp"
 );
 
 @@clientName(PiiTaskParameters, "PiiActionContent", "csharp");
 
-@@clientName(AnalyzeDocumentsLROTask,
+@@clientName(
+  AnalyzeDocumentsLROTask,
   "AnalyzeDocumentsOperationAction",
   "csharp"
 );
 @@clientName(AnalyzeDocumentsLROTask.taskName, "Name", "csharp");
 
-@@clientName(AnalyzeDocumentsLROTaskKind,
+@@clientName(
+  AnalyzeDocumentsLROTaskKind,
   "AnalyzeDocumentsOperationActionKind",
   "csharp"
 );
 
-@@clientName(AbstractiveSummarizationLROTask,
+@@clientName(
+  AbstractiveSummarizationLROTask,
   "AbstractiveSummarizationOperationAction",
   "csharp"
 );
-@@clientName(AbstractiveSummarizationLROTask.parameters,
+@@clientName(
+  AbstractiveSummarizationLROTask.parameters,
   "ActionContent",
   "csharp"
 );
-@@clientName(AbstractiveSummarizationTaskParameters,
+@@clientName(
+  AbstractiveSummarizationTaskParameters,
   "AbstractiveSummarizationActionContent",
   "csharp"
 );
 
-@@clientName(ExtractiveSummarizationLROTask,
+@@clientName(
+  ExtractiveSummarizationLROTask,
   "ExtractiveSummarizationOperationAction",
   "csharp"
 );
-@@clientName(ExtractiveSummarizationLROTask.parameters,
+@@clientName(
+  ExtractiveSummarizationLROTask.parameters,
   "ActionContent",
   "csharp"
 );
-@@clientName(ExtractiveSummarizationTaskParameters,
+@@clientName(
+  ExtractiveSummarizationTaskParameters,
   "ExtractiveSummarizationActionContent",
   "csharp"
 );
 
-@@clientName(AnalyzeDocumentJobsInput,
+@@clientName(
+  AnalyzeDocumentJobsInput,
   "AnalyzeDocumentsOperationInput",
   "csharp"
 );
-@@clientName(AnalyzeDocumentJobsInput.analysisInput,
+@@clientName(
+  AnalyzeDocumentJobsInput.analysisInput,
   "DocumentsInput",
   "csharp"
 );
 @@clientName(AnalyzeDocumentJobsInput.tasks, "Actions", "csharp");
 
-@@clientName(AnalyzeDocumentsLROResultsKind,
+@@clientName(
+  AnalyzeDocumentsLROResultsKind,
   "AnalyzeDocumentsOperationResultsKind",
   "csharp"
 );
-@@clientName(AnalyzeDocumentsLROResultsKind.AbstractiveSummarizationLROResults,
+@@clientName(
+  AnalyzeDocumentsLROResultsKind.AbstractiveSummarizationLROResults,
   "AbstractiveSummarizationOperationResults",
   "csharp"
 );
-@@clientName(AnalyzeDocumentsLROResultsKind.ExtractiveSummarizationLROResults,
+@@clientName(
+  AnalyzeDocumentsLROResultsKind.ExtractiveSummarizationLROResults,
   "ExtractiveSummarizationOperationResults",
   "csharp"
 );
-@@clientName(AnalyzeDocumentsLROResultsKind.PiiEntityRecognitionLROResults,
+@@clientName(
+  AnalyzeDocumentsLROResultsKind.PiiEntityRecognitionLROResults,
   "PiiEntityRecognitionOperationResults",
   "csharp"
 );
 
-@@clientName(PiiEntityRecognitionLROResult,
+@@clientName(
+  PiiEntityRecognitionLROResult,
   "PiiEntityRecognitionOperationResult",
   "csharp"
 );
-@@clientName(AbstractiveSummarizationLROResult,
+@@clientName(
+  AbstractiveSummarizationLROResult,
   "AbstractiveSummarizationOperationResult",
   "csharp"
 );
-@@clientName(ExtractiveSummarizationLROResult,
+@@clientName(
+  ExtractiveSummarizationLROResult,
   "ExtractiveSummarizationOperationResult",
   "csharp"
 );
 
-@@clientName(analyzeDocumentsSubmitJob,
+@@clientName(
+  analyzeDocumentsSubmitJob,
   "AnalyzeDocumentsSubmitOperation",
   "csharp"
 );
 
-@@clientName(analyzeDocumentsJobStatus,
+@@clientName(
+  analyzeDocumentsJobStatus,
   "GetAnalyzeDocumentsJobStatus",
   "csharp"
 );
-@@clientName(analyzeDocumentsCancelJob,
+@@clientName(
+  analyzeDocumentsCancelJob,
   "AnalyzeDocumentsCancelOperation",
   "csharp"
 );

@@ -4,148 +4,183 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "python");
-@@clientName(Azure.ResourceManager.PrivateEndpointConnectionResource,
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionResource,
   "HorizonDBPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.PrivateEndpointConnectionUpdate,
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionUpdate,
   "HorizonDBPrivateEndpointConnectionPatch",
   "csharp"
 );
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "csharp");
-@@clientName(Microsoft.HorizonDb.CreateModeCluster,
-  "HorizonDBCreateModeCluster",
+@@clientName(
+  Microsoft.HorizonDb.CreateModeCluster,
+  "HorizonDBClusterCreateMode",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.CreateModePool,
-  "HorizonDBCreateModePool",
+@@clientName(
+  Microsoft.HorizonDb.CreateModePool,
+  "HorizonDBPoolCreateMode",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbCluster,
-  "HorizonDBCluster",
+@@clientName(
+  Microsoft.HorizonDb.AuthenticationState,
+  "HorizonDBAuthenticationState",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
-  "HorizonDBClusterForPatchUpdate",
+@@clientName(Microsoft.HorizonDb.Cluster, "HorizonDBCluster", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.PrincipalTypes,
+  "HorizonDBPrincipalType",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties,
+@@clientName(
+  Microsoft.HorizonDb.ClusterForPatchUpdate,
+  "HorizonDBClusterPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterReplaceAcceptedResponse,
+  "HorizonDBClusterReplaceAcceptedResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterCreateAcceptedResponse,
+  "HorizonDBClusterCreateAcceptedResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties,
   "HorizonDBClusterParameterGroupConnectionProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbClusterProperties,
+@@clientName(
+  Microsoft.HorizonDb.ClusterProperties,
   "HorizonDBClusterProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbClusterPropertiesForPatchUpdate,
-  "HorizonDBClusterPropertiesForPatchUpdate",
+@@clientName(
+  Microsoft.HorizonDb.ClusterPropertiesForPatchUpdate,
+  "HorizonDBClusterPatchProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbClusters,
-  "HorizonDBClusters",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.HorizonDbFirewallRule,
-  "HorizonDBFirewallRule",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.HorizonDbFirewallRuleProperties,
+@@clientName(Microsoft.HorizonDb.Clusters, "HorizonDBClusters", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.FirewallRuleProperties,
   "HorizonDBFirewallRuleProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbFirewallRules,
-  "HorizonDBFirewallRules",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroup,
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroup,
   "HorizonDBParameterGroup",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupConnectionProperties,
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroupConnectionProperties,
   "HorizonDBParameterGroupConnectionProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupForPatchUpdate,
-  "HorizonDBParameterGroupForPatchUpdate",
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroupForPatchUpdate,
+  "HorizonDBParameterGroupPatch",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupProperties,
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroupProperties,
   "HorizonDBParameterGroupProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupPropertiesForPatchUpdate,
-  "HorizonDBParameterGroupPropertiesForPatchUpdate",
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroupPropertiesForPatchUpdate,
+  "HorizonDBParameterGroupPatchProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroups,
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroups,
   "HorizonDBParameterGroups",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbPool, "HorizonDBPool", "csharp");
-@@clientName(Microsoft.HorizonDb.HorizonDbPoolProperties,
+@@clientName(Microsoft.HorizonDb.Pool, "HorizonDBPool", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.PoolCreateAcceptedResponse,
+  "HorizonDBPoolCreateAcceptedResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PoolProperties,
   "HorizonDBPoolProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbPools, "HorizonDBPools", "csharp");
-@@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections,
+@@clientName(Microsoft.HorizonDb.Pools, "HorizonDBPools", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.PrivateEndpointConnections,
   "HorizonDBPrivateEndpointConnections",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.update,
-  "updatePrivateEndpointConnection",
+@@clientName(
+  Microsoft.HorizonDb.PrivateEndpointConnections.approveOrReject,
+  "approveOrRejectPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.delete,
+@@clientName(
+  Microsoft.HorizonDb.PrivateEndpointConnections.delete,
   "deletePrivateEndpointConnection",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbPrivateLinkResource,
+@@clientName(
+  Microsoft.HorizonDb.PrivateLinkResource,
   "HorizonDBPrivateLinkResource",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbPrivateLinkResources,
+@@clientName(
+  Microsoft.HorizonDb.PrivateLinkResources,
   "HorizonDBPrivateLinkResources",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbReplica,
-  "HorizonDBReplica",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.HorizonDbReplicaForPatchUpdate,
-  "HorizonDBReplicaForPatchUpdate",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.HorizonDbReplicaProperties,
-  "HorizonDBReplicaProperties",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.HorizonDbReplicaPropertiesForPatchUpdate,
-  "HorizonDBReplicaPropertiesForPatchUpdate",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.HorizonDbReplicas,
-  "HorizonDBReplicas",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.ParameterProperties,
+@@clientName(
+  Microsoft.HorizonDb.ParameterProperties,
   "HorizonDBParameterProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.ParameterProperties,
-  "HorizonDBParameterProperties",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.ProvisioningState,
+@@clientName(
+  Microsoft.HorizonDb.ProvisioningState,
   "HorizonDBProvisioningState",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.PublicNetworkAccessState,
+@@clientName(
+  Microsoft.HorizonDb.PublicNetworkAccessState,
   "HorizonDBPublicNetworkAccessState",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.ReplicaRole, "HorizonDBReplicaRole", "csharp");
-@@clientName(Microsoft.HorizonDb.State, "HorizonDBClusterState", "csharp");
-@@clientName(Microsoft.HorizonDb.ZonePlacementPolicy,
+@@clientName(
+  Microsoft.HorizonDb.ZonePlacementEnforcement,
   "HorizonDBZonePlacementPolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ActivateChangeDataCaptureIdentityRequest,
+  "HorizonDBActivateChangeDataCaptureIdentityContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.MaintenanceEventRescheduleRequest,
+  "HorizonDBMaintenanceEventRescheduleContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.MaintenanceEventActionResponse,
+  "HorizonDBMaintenanceEventActionResult",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionProperties,
+  "HorizonDBPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionUpdate.properties,
+  "HorizonDBPrivateEndpointConnectionPatchProperties",
   "csharp"
 );

@@ -368,6 +368,9 @@
         "x-ms-examples": {
           "NameSpaceCreate": {
             "$ref": "./examples/NameSpaces/SBNameSpaceCreate.json"
+          },
+          "NameSpaceCreateWithIpAddressTypeDualStack": {
+            "$ref": "./examples/NameSpaces/SBNamespaceCreateWithIpAddressTypeDualStack.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -418,24 +421,14 @@
               "$ref": "#/definitions/SBNamespace"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/SBNamespace"
             }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -448,12 +441,7 @@
           "NameSpaceUpdate": {
             "$ref": "./examples/NameSpaces/SBNameSpaceUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/SBNamespace"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "Namespaces_Delete",
@@ -5094,6 +5082,30 @@
         }
       }
     },
+    "IpAddressType": {
+      "type": "string",
+      "description": "The IP address type for the namespace. Determines whether the namespace supports IPv4 only or both IPv4 and IPv6 (dual stack).",
+      "enum": [
+        "IPv4",
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "The namespace supports IPv4 addresses only."
+          },
+          {
+            "name": "DualStack",
+            "value": "DualStack",
+            "description": "The namespace supports both IPv4 and IPv6 addresses (dual stack)."
+          }
+        ]
+      }
+    },
     "KeyType": {
       "type": "string",
       "description": "The access key to regenerate.",
@@ -5339,10 +5351,6 @@
         "roleType": {
           "$ref": "#/definitions/GeoDRRoleType",
           "description": "GeoDR Role Types"
-        },
-        "clusterArmId": {
-          "type": "string",
-          "description": "Optional property that denotes the ARM ID of the Cluster. This is required, if a namespace replica should be placed in a Dedicated Event Hub Cluster"
         }
       }
     },
@@ -6444,9 +6452,9 @@
           "$ref": "#/definitions/GeoDataReplicationProperties",
           "description": "Geo Data Replication settings for the namespace"
         },
-        "ipV6Enabled": {
-          "type": "boolean",
-          "description": "Value that indicates whether IPv6 is enabled for public network access."
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "The IP address type for the namespace. Determines whether the namespace supports IPv4 only or both IPv4 and IPv6 (dual stack)."
         }
       }
     },

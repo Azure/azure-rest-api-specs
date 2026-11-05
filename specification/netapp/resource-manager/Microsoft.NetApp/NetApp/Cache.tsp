@@ -196,6 +196,13 @@ model CacheProperties {
    * Flag indicating whether writeback is enabled for the cache.
    */
   writeBack?: EnableWriteBackState;
+
+  /**
+   * Flag indicating whether file access logs are enabled for the Cache, based on active diagnostic settings present on the Cache.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  fileAccessLogs?: CacheFileAccessLogs;
 }
 
 /**
@@ -212,12 +219,28 @@ model SmbSettings {
   /**
    * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "smbAccessBasedEnumeration")
+  smbAccessBasedEnumerationOld?: SmbAccessBasedEnumeration;
+
+  /**
+   * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol cache
+   */
+  @added(Versions.v2026_07_01)
   smbAccessBasedEnumeration?: SmbAccessBasedEnumeration;
 
   /**
-   * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol cache
    */
   smbNonBrowsable?: SmbNonBrowsable;
+
+  /**
+   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol cache
+   */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  smbOplocks?: SmbOplocks;
 }
 
 /**
@@ -262,6 +285,15 @@ model PeeringPassphrases {
   /**
    * The cluster peering passphrase.
    */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "clusterPeeringPassphrase")
+  clusterPeeringPassphraseOld: string;
+
+  /**
+   * The cluster peering passphrase.
+   */
+  @added(Versions.v2026_07_01)
+  @secret
   clusterPeeringPassphrase: string;
 
   /**
@@ -547,6 +579,24 @@ union CacheProvisioningState {
   Canceled: "Canceled",
 }
 
+/**
+ * Flag indicating whether file access logs are enabled for the Cache, based on active diagnostic settings present on the Cache.
+ */
+@added(Versions.v2026_04_01)
+union CacheFileAccessLogs {
+  string,
+
+  /**
+   * fileAccessLogs are enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * fileAccessLogs are not enabled
+   */
+  Disabled: "Disabled",
+}
+
 @armResourceOperations
 @added(Versions.v2025_12_15_preview)
 @added(Versions.v2026_01_01)
@@ -630,7 +680,8 @@ interface Caches {
   >;
 }
 
-@@doc(Caches.poolChange::parameters.body,
+@@doc(
+  Caches.poolChange::parameters.body,
   "Move cache to the pool supplied in the body of the operation."
 );
 

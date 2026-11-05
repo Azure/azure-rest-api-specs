@@ -2,7 +2,12 @@ suppressions:
   azure-sdk-for-js:
     - package: '@azure/arm-netapp'
       breaking-changes:
-        - Removed operation Backups.getVolumeRestoreStatus  
+        - Operation AccountsOperations.update has a new signature
+        - Interface NetAppAccountPatch no longer has parameter id
+        - Interface NetAppAccountPatch no longer has parameter location
+        - Interface NetAppAccountPatch no longer has parameter name
+        - Interface NetAppAccountPatch no longer has parameter type
+        - Type of parameter properties of interface NetAppAccountPatch is changed from AccountProperties to AccountPropertiesPatch
   azure-sdk-for-python:
     - package: azure-mgmt-netapp
       breaking-changes:
@@ -10,4 +15,5 @@ suppressions:
   azure-sdk-for-go:
     - package: sdk/resourcemanager/netapp/armnetapp
       breaking-changes:
-        - Function `*BackupsClient.GetVolumeRestoreStatus` has been removed
+        - Type of `AccountPatch.Properties` has been changed from `*AccountProperties` to `*AccountPropertiesPatch`
+        - Field `ID`, `Location`, `Name`, `Type` of struct `AccountPatch` has been removed

@@ -37,7 +37,7 @@ interface AuthorizationServerContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -51,7 +51,7 @@ interface AuthorizationServerContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -68,19 +68,21 @@ interface AuthorizationServerContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<AuthorizationServerContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<AuthorizationServerContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<AuthorizationServerContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<AuthorizationServerContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -103,7 +105,7 @@ interface AuthorizationServerContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -162,22 +164,26 @@ interface AuthorizationServerContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 }
 
 @@maxLength(AuthorizationServerContract.name, 80);
 @@minLength(AuthorizationServerContract.name, 1);
-@@doc(AuthorizationServerContract.name,
+@@doc(
+  AuthorizationServerContract.name,
   "Identifier of the authorization server."
 );
-@@doc(AuthorizationServerContract.properties,
+@@doc(
+  AuthorizationServerContract.properties,
   "Properties of the External OAuth authorization server Contract."
 );
-@@doc(AuthorizationServerContracts.createOrUpdate::parameters.resource,
+@@doc(
+  AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(AuthorizationServerContracts.update::parameters.properties,
+@@doc(
+  AuthorizationServerContracts.update::parameters.properties,
   "OAuth2 Server settings Update parameters."
 );

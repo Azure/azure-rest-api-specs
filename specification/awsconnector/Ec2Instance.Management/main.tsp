@@ -3720,11 +3720,13 @@ interface Ec2Instances {
   createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2Instance>;
   delete is ArmResourceDeleteWithoutOkAsync<Ec2Instance>;
   list is ArmResourceListByParent<Ec2Instance>;
+  @doc("A long-running resource action.")
   Start is ArmResourceActionAsync<
     Ec2Instance,
     void,
     Azure.ResourceManager.Foundations.OperationStatusResult
   >;
+  @doc("A long-running resource action.")
   Stop is ArmResourceActionAsync<
     Ec2Instance,
     StopEc2InstanceOptions,

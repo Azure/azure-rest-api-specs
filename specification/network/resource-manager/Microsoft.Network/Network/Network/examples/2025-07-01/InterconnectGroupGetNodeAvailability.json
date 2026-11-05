@@ -1,0 +1,37 @@
+{
+  "title": "Get interconnect group node availability",
+  "operationId": "InterconnectGroups_GetNodeAvailability",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "interconnectGroupName": "test-ig"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "subgroupsNodeAvailability": [
+          {
+            "name": "subgroup0",
+            "internalSubgroupId": "00000000-0000-0000-0000-000000000001",
+            "inServiceNodeCount": 16,
+            "inUseNodeCount": 12,
+            "count": 18
+          },
+          {
+            "name": "subgroup1",
+            "internalSubgroupId": "00000000-0000-0000-0000-000000000002",
+            "inServiceNodeCount": 18,
+            "inUseNodeCount": 5,
+            "count": 18
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+      }
+    }
+  }
+}

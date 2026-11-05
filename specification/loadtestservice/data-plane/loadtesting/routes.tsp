@@ -19,7 +19,8 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.LoadTestService;
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Azure.Core.Foundations.ResourceBody.resource,
+@@encodedName(
+  Azure.Core.Foundations.ResourceBody.resource,
   "application/json",
   "body"
 );
@@ -154,6 +155,7 @@ interface LoadTestAdministration {
   listTestFiles is StandardResourceOperations.ResourceList<TestFileInfo>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @summary("Add an app component to a test.")
   @doc("Add an app component to a test by providing the resource Id, name and type.")
   @route("/tests/{testId}/app-components")
@@ -202,6 +204,7 @@ interface LoadTestAdministration {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @summary("Configure server metrics for a test")
   @doc("Configure server metrics for a test")
   @route("/tests/{testId}/server-metrics-config")
@@ -299,6 +302,7 @@ interface LoadTestRun {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @summary("Update the latest insights for the test run.")
   @doc("Update the latest insights for the test run.")
   @added(APIVersions.v2025_11_01_preview)
@@ -410,6 +414,7 @@ interface LoadTestRun {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @summary("Add an app component to a test run.")
   @doc("Add an app component to a test run by providing the resource Id, name and type.")
   @route("/test-runs/{testRunId}/app-components")
@@ -448,6 +453,7 @@ interface LoadTestRun {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @summary("Configure server metrics for a test run")
   @doc("Configure server metrics for a test run")
   @route("/test-runs/{testRunId}/server-metrics-config")

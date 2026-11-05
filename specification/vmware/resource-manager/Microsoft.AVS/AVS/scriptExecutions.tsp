@@ -33,13 +33,15 @@ interface ScriptExecutions {
     ...ResourceInstanceParameters<ScriptExecution>,
 
     #suppress "@azure-tools/typespec-azure-core/request-body-problem"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing getExecutionLogs.scriptOutputStreamType retains its request-body shape; preserve wire compatibility."
     @bodyRoot
     @doc("Name of the desired output stream to return. If not provided, will return all. An empty array will return nothing.")
     scriptOutputStreamType?: ScriptOutputStreamType[],
   ): ArmResponse<ScriptExecution> | ErrorResponse;
 }
 
-@@clientName(ScriptExecutions.createOrUpdate::parameters.resource,
+@@clientName(
+  ScriptExecutions.createOrUpdate::parameters.resource,
   "scriptExecution"
 );
 

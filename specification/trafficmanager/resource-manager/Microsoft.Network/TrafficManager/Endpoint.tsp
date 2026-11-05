@@ -83,9 +83,11 @@ interface Endpoints {
 }
 
 @@doc(Endpoint.properties, "The properties of the Traffic Manager endpoint.");
-@@doc(Endpoints.createOrUpdate::parameters.resource,
+@@doc(
+  Endpoints.createOrUpdate::parameters.resource,
   "The Traffic Manager endpoint parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(Endpoints.update::parameters.properties,
+@@doc(
+  Endpoints.update::parameters.properties,
   "The Traffic Manager endpoint parameters supplied to the Update operation."
 );

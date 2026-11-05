@@ -103,12 +103,15 @@ interface LicenseProfiles {
 }
 
 @@doc(LicenseProfile.name, "");
-@@doc(LicenseProfile.properties,
+@@doc(
+  LicenseProfile.properties,
   "Describe the properties of a license profile."
 );
-@@doc(LicenseProfiles.createOrUpdate::parameters.resource,
+@@doc(
+  LicenseProfiles.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create or Update license profile operation."
 );
-@@doc(LicenseProfiles.update::parameters.properties,
+@@doc(
+  LicenseProfiles.update::parameters.properties,
   "Parameters supplied to the Update license profile operation."
 );

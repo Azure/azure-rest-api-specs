@@ -9,11 +9,15 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Information pertaining to an individual build.
  */
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
 @parentResource(BuilderResource)
 model BuildResource is Azure.ResourceManager.ProxyResource<BuildProperties> {
   ...ResourceNameParameter<
@@ -24,6 +28,9 @@ model BuildResource is Azure.ResourceManager.ProxyResource<BuildProperties> {
   >;
 }
 
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 interface Builds {
   /**
@@ -63,9 +70,11 @@ interface Builds {
 @@maxLength(BuildResource.name, 64);
 @@minLength(BuildResource.name, 2);
 @@doc(BuildResource.name, "The name of a build.");
-@@doc(BuildResource.properties,
+@@doc(
+  BuildResource.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(Builds.createOrUpdate::parameters.resource,
+@@doc(
+  Builds.createOrUpdate::parameters.resource,
   "Resource create or update parameters."
 );

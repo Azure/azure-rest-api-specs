@@ -11,16 +11,13 @@ namespace Azure.AI.Projects;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @removed(Versions.v1)
 interface ManagedAgentIdentityBlueprints {
+  /**
+   * Creates or updates a managed agent identity blueprint.
+   */
+  @summary("Create or update a blueprint")
   @put
   @route("/managedAgentIdentityBlueprints/{blueprint_name}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
-  createOrUpdateManagedAgentIdentityBlueprint is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  createOrUpdateManagedAgentIdentityBlueprint is FoundryDataPlaneOperation<
     {
       /** The name of the managed agent identity blueprint to create. */
       @path blueprint_name: string;
@@ -33,16 +30,10 @@ interface ManagedAgentIdentityBlueprints {
   /**
    * Retrieves a managed agent identity blueprint by name.
    */
+  @summary("Get a blueprint")
   @get
   @route("/managedAgentIdentityBlueprints/{blueprint_name}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
-  getManagedAgentIdentityBlueprint is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  getManagedAgentIdentityBlueprint is FoundryDataPlaneOperation<
     {
       /** The name of the managed agent identity blueprint to retrieve. */
       @path blueprint_name: string;
@@ -53,16 +44,10 @@ interface ManagedAgentIdentityBlueprints {
   /**
    * Deletes a managed agent identity blueprint by name.
    */
+  @summary("Delete a blueprint")
   @delete
   @route("/managedAgentIdentityBlueprints/{blueprint_name}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
-  deleteManagedAgentIdentityBlueprint is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  deleteManagedAgentIdentityBlueprint is FoundryDataPlaneOperation<
     {
       /** The name of the managed agent identity blueprint to delete. */
       @path blueprint_name: string;
@@ -70,16 +55,13 @@ interface ManagedAgentIdentityBlueprints {
     Http.NoContentResponse
   >;
 
+  /**
+   * Lists all managed agent identity blueprints.
+   */
+  @summary("List blueprints")
   @get
   @route("/managedAgentIdentityBlueprints")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
-  listManagedAgentIdentityBlueprints is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  listManagedAgentIdentityBlueprints is FoundryDataPlaneOperation<
     {
       ...PageOrderQueryParameter;
       ...PageLimitQueryParameter;

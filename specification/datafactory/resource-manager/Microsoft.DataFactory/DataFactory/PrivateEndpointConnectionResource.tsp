@@ -88,10 +88,12 @@ interface PrivateEndpointConnectionResources {
   >;
 }
 
-@@doc(PrivateEndpointConnectionResource.name,
+@@doc(
+  PrivateEndpointConnectionResource.name,
   "The private endpoint connection name."
 );
 @@doc(PrivateEndpointConnectionResource.properties, "Core resource properties");
-@@doc(PrivateEndpointConnectionResources.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnectionResources.createOrUpdate::parameters.resource,
   ""
 );

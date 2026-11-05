@@ -119,7 +119,7 @@ interface ApplyUpdateOperationGroupOps
       "MaintenanceGroupApplyUpdate"
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Expected errors to be suppressed"
 @armResourceOperations
 interface ApplyUpdateOperationGroup {
   /**
@@ -151,6 +151,7 @@ interface ApplyUpdateOperationGroup {
 
 @@doc(ApplyUpdate.name, "applyUpdate Id");
 @@doc(ApplyUpdate.properties, "Properties of the apply update");
-@@doc(ApplyUpdateOperationGroup.createOrUpdateOrCancel::parameters.resource,
+@@doc(
+  ApplyUpdateOperationGroup.createOrUpdateOrCancel::parameters.resource,
   "The ApplyUpdate"
 );

@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -16,8 +17,9 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.RestorableDroppedDatabases)
 model RestorableDroppedDatabase
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RestorableDroppedDatabaseProperties> {
+  is Azure.ResourceManager.ProxyResource<RestorableDroppedDatabaseProperties> {
   ...ResourceNameParameter<
     Resource = RestorableDroppedDatabase,
     KeyName = "restorableDroppedDatabaseId",
@@ -30,9 +32,21 @@ model RestorableDroppedDatabase
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
+
+  /** Resource location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.RestorableDroppedDatabases)
 interface RestorableDroppedDatabases {
   /**
    * Gets a restorable dropped database.
@@ -57,7 +71,24 @@ interface RestorableDroppedDatabases {
   /**
    * Gets a list of restorable dropped databases.
    */
-  listByServer is ArmResourceListByParent<RestorableDroppedDatabase>;
+  listByServer is ArmResourceListByParent<
+    RestorableDroppedDatabase,
+    Parameters = {
+      /**
+       * An opaque token that identifies a starting point in the collection.
+       */
+      @query("$skiptoken")
+      @added(Versions.v2026_08_01_preview)
+      $skiptoken?: string;
+
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      @added(Versions.v2026_08_01_preview)
+      $top?: int64;
+    }
+  >;
 }
 
 @@doc(RestorableDroppedDatabase.name, "");

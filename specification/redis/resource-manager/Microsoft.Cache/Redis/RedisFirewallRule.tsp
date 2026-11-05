@@ -13,8 +13,10 @@ namespace Microsoft.Cache;
  * A firewall rule on a redis cache has a name, and describes a contiguous range of IP addresses permitted to connect
  */
 @parentResource(RedisResource)
-model RedisFirewallRule
-  is Azure.ResourceManager.ProxyResource<RedisFirewallRuleProperties, false> {
+model RedisFirewallRule is Azure.ResourceManager.ProxyResource<
+  RedisFirewallRuleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = RedisFirewallRule,
     KeyName = "ruleName",
@@ -48,6 +50,7 @@ interface RedisFirewallRules {
 
 @@doc(RedisFirewallRule.name, "The name of the firewall rule.");
 @@doc(RedisFirewallRule.properties, "redis cache firewall rule properties");
-@@doc(RedisFirewallRules.createOrUpdate::parameters.resource,
+@@doc(
+  RedisFirewallRules.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update redis firewall rule operation."
 );

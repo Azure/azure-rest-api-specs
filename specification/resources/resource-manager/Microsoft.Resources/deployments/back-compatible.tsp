@@ -6,249 +6,313 @@ using Microsoft.Resources;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(WhatIfOperationResult.properties);
 
-@@clientName(DeploymentsOperationGroup.calculateTemplateHash::parameters.body,
+@@clientName(
+  DeploymentsOperationGroup.calculateTemplateHash::parameters.body,
   "template"
 );
 
-@@clientName(Deployments.createOrUpdateAtScope::parameters.resource,
+@@clientName(
+  Deployments.createOrUpdateAtScope::parameters.resource,
   "parameters"
 );
 @@clientName(Deployments.validateAtScope::parameters.body, "parameters");
-@@clientLocation(Deployments.deploymentOperationsGetAtScope,
+@@clientLocation(
+  Deployments.deploymentOperationsGetAtScope,
   "DeploymentOperations",
   "!csharp"
 );
 @@clientName(Deployments.deploymentOperationsGetAtScope, "GetAtScope");
-@@clientLocation(Deployments.deploymentOperationsListAtScope,
+@@clientLocation(
+  Deployments.deploymentOperationsListAtScope,
   "DeploymentOperations",
   "!csharp"
 );
 @@clientName(Deployments.deploymentOperationsListAtScope, "ListAtScope");
-@@clientName(DeploymentsExtendedTenant.createOrUpdateAtTenantScope::parameters.resource,
+@@clientName(
+  DeploymentsExtendedTenant.createOrUpdateAtTenantScope::parameters.resource,
   "parameters"
 );
-@@clientName(DeploymentsExtendedTenant.validateAtTenantScope::parameters.body,
+@@clientName(
+  DeploymentsExtendedTenant.validateAtTenantScope::parameters.body,
   "parameters"
 );
-@@clientName(DeploymentsExtendedTenant.whatIfAtTenantScope::parameters.body,
+@@clientName(
+  DeploymentsExtendedTenant.whatIfAtTenantScope::parameters.body,
   "parameters"
 );
-@@clientLocation(DeploymentsExtendedTenant.deploymentOperationsGetAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.deploymentOperationsGetAtTenantScope,
   "DeploymentOperations",
   "!csharp"
 );
-@@clientName(DeploymentsExtendedTenant.deploymentOperationsGetAtTenantScope,
+@@clientName(
+  DeploymentsExtendedTenant.deploymentOperationsGetAtTenantScope,
   "GetAtTenantScope"
 );
-@@clientLocation(DeploymentsExtendedTenant.listAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.listAtTenantScope,
   "DeploymentOperations",
   "!csharp"
 );
 @@clientLocation(DeploymentsExtendedTenant.list, Deployments, "!csharp");
 @@clientName(DeploymentsExtendedTenant.list, "ListAtTenantScope");
-@@clientLocation(DeploymentsExtendedTenant.getAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.getAtTenantScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentsExtendedTenant.createOrUpdateAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.createOrUpdateAtTenantScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentsExtendedTenant.deleteAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.deleteAtTenantScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentsExtendedTenant.checkExistenceAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.checkExistenceAtTenantScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentsExtendedTenant.cancelAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.cancelAtTenantScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentsExtendedTenant.exportTemplateAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.exportTemplateAtTenantScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentsExtendedTenant.validateAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.validateAtTenantScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentsExtendedTenant.whatIfAtTenantScope,
+@@clientLocation(
+  DeploymentsExtendedTenant.whatIfAtTenantScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.getAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.getAtManagementGroupScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.checkExistenceAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.checkExistenceAtManagementGroupScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.createOrUpdateAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.createOrUpdateAtManagementGroupScope,
   Deployments,
   "!csharp"
 );
-@@clientName(DeploymentExtendedManagementGroup.createOrUpdateAtManagementGroupScope::parameters.resource,
+@@clientName(
+  DeploymentExtendedManagementGroup.createOrUpdateAtManagementGroupScope::parameters.resource,
   "parameters"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.deleteAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.deleteAtManagementGroupScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.listAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.listAtManagementGroupScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.cancelAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.cancelAtManagementGroupScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.validateAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.validateAtManagementGroupScope,
   Deployments,
   "!csharp"
 );
-@@clientName(DeploymentExtendedManagementGroup.validateAtManagementGroupScope::parameters.body,
+@@clientName(
+  DeploymentExtendedManagementGroup.validateAtManagementGroupScope::parameters.body,
   "parameters"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.whatIfAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.whatIfAtManagementGroupScope,
   Deployments,
   "!csharp"
 );
-@@clientName(DeploymentExtendedManagementGroup.whatIfAtManagementGroupScope::parameters.body,
+@@clientName(
+  DeploymentExtendedManagementGroup.whatIfAtManagementGroupScope::parameters.body,
   "parameters"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.exportTemplateAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.exportTemplateAtManagementGroupScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.deploymentOperationsGetAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.deploymentOperationsGetAtManagementGroupScope,
   "DeploymentOperations",
   "!csharp"
 );
-@@clientName(DeploymentExtendedManagementGroup.deploymentOperationsGetAtManagementGroupScope,
+@@clientName(
+  DeploymentExtendedManagementGroup.deploymentOperationsGetAtManagementGroupScope,
   "GetAtManagementGroupScope"
 );
-@@clientLocation(DeploymentExtendedManagementGroup.deploymentOperationsListAtManagementGroupScope,
+@@clientLocation(
+  DeploymentExtendedManagementGroup.deploymentOperationsListAtManagementGroupScope,
   "DeploymentOperations",
   "!csharp"
 );
-@@clientName(DeploymentExtendedManagementGroup.deploymentOperationsListAtManagementGroupScope,
+@@clientName(
+  DeploymentExtendedManagementGroup.deploymentOperationsListAtManagementGroupScope,
   "ListAtManagementGroupScope"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.getAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.getAtSubscriptionScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.checkExistenceAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.checkExistenceAtSubscriptionScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.createOrUpdateAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.createOrUpdateAtSubscriptionScope,
   Deployments,
   "!csharp"
 );
-@@clientName(DeploymentExtendedSubscriptionGroup.createOrUpdateAtSubscriptionScope::parameters.resource,
+@@clientName(
+  DeploymentExtendedSubscriptionGroup.createOrUpdateAtSubscriptionScope::parameters.resource,
   "parameters"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.deleteAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.deleteAtSubscriptionScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.listAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.listAtSubscriptionScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.cancelAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.cancelAtSubscriptionScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.validateAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.validateAtSubscriptionScope,
   Deployments,
   "!csharp"
 );
-@@clientName(DeploymentExtendedSubscriptionGroup.validateAtSubscriptionScope::parameters.body,
+@@clientName(
+  DeploymentExtendedSubscriptionGroup.validateAtSubscriptionScope::parameters.body,
   "parameters"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.whatIfAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.whatIfAtSubscriptionScope,
   Deployments,
   "!csharp"
 );
-@@clientName(DeploymentExtendedSubscriptionGroup.whatIfAtSubscriptionScope::parameters.body,
+@@clientName(
+  DeploymentExtendedSubscriptionGroup.whatIfAtSubscriptionScope::parameters.body,
   "parameters"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.exportTemplateAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.exportTemplateAtSubscriptionScope,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.deploymentOperationsGetAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.deploymentOperationsGetAtSubscriptionScope,
   "DeploymentOperations",
   "!csharp"
 );
-@@clientName(DeploymentExtendedSubscriptionGroup.deploymentOperationsGetAtSubscriptionScope,
+@@clientName(
+  DeploymentExtendedSubscriptionGroup.deploymentOperationsGetAtSubscriptionScope,
   "GetAtSubscriptionScope"
 );
-@@clientLocation(DeploymentExtendedSubscriptionGroup.deploymentOperationsListAtSubscriptionScope,
+@@clientLocation(
+  DeploymentExtendedSubscriptionGroup.deploymentOperationsListAtSubscriptionScope,
   "DeploymentOperations",
   "!csharp"
 );
-@@clientName(DeploymentExtendedSubscriptionGroup.deploymentOperationsListAtSubscriptionScope,
+@@clientName(
+  DeploymentExtendedSubscriptionGroup.deploymentOperationsListAtSubscriptionScope,
   "ListAtSubscriptionScope"
 );
 @@clientLocation(DeploymentExtendedOperationGroup.get, Deployments, "!csharp");
-@@clientLocation(DeploymentExtendedOperationGroup.checkExistence,
+@@clientLocation(
+  DeploymentExtendedOperationGroup.checkExistence,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedOperationGroup.createOrUpdate,
+@@clientLocation(
+  DeploymentExtendedOperationGroup.createOrUpdate,
   Deployments,
   "!csharp"
 );
-@@clientName(DeploymentExtendedOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  DeploymentExtendedOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(DeploymentExtendedOperationGroup.delete,
+@@clientLocation(
+  DeploymentExtendedOperationGroup.delete,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedOperationGroup.listByResourceGroup,
+@@clientLocation(
+  DeploymentExtendedOperationGroup.listByResourceGroup,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedOperationGroup.cancel,
+@@clientLocation(
+  DeploymentExtendedOperationGroup.cancel,
   Deployments,
   "!csharp"
 );
-@@clientLocation(DeploymentExtendedOperationGroup.validate,
+@@clientLocation(
+  DeploymentExtendedOperationGroup.validate,
   Deployments,
   "!csharp"
 );
-@@clientName(DeploymentExtendedOperationGroup.validate::parameters.body,
+@@clientName(
+  DeploymentExtendedOperationGroup.validate::parameters.body,
   "parameters"
 );
-@@clientLocation(DeploymentExtendedOperationGroup.whatIf,
+@@clientLocation(
+  DeploymentExtendedOperationGroup.whatIf,
   Deployments,
   "!csharp"
 );
-@@clientName(DeploymentExtendedOperationGroup.whatIf::parameters.body,
+@@clientName(
+  DeploymentExtendedOperationGroup.whatIf::parameters.body,
   "parameters"
 );
-@@clientLocation(DeploymentExtendedOperationGroup.exportTemplate,
+@@clientLocation(
+  DeploymentExtendedOperationGroup.exportTemplate,
   Deployments,
   "!csharp"
 );
 
-@@clientLocation(DeploymentsOperationGroup.calculateTemplateHash,
+@@clientLocation(
+  DeploymentsOperationGroup.calculateTemplateHash,
   Deployments,
   "!csharp"
 );
 
-@@clientLocation(DeploymentOperationsOperationGroup.get,
+@@clientLocation(
+  DeploymentOperationsOperationGroup.get,
   "DeploymentOperations",
   "!csharp"
 );
-@@clientLocation(DeploymentOperationsOperationGroup.list,
+@@clientLocation(
+  DeploymentOperationsOperationGroup.list,
   "DeploymentOperations",
   "!csharp"
 );

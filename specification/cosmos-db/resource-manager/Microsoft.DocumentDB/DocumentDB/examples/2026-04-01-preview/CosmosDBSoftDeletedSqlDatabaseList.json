@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "location": "West US",
+    "accountName": "softdeleted-cosmosdb-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/locations/westus/softDeletedDatabaseAccounts/softdeleted-cosmosdb-1/softDeletedSqlDatabases/MyDatabase",
+            "name": "MyDatabase",
+            "type": "Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases",
+            "properties": {
+              "softDeletionMetadata": {
+                "isSoftDeleted": true,
+                "softDeletionStartTimestamp": 1729000530,
+                "softDeletionResourceExpirationTimestamp": 1731592530
+              },
+              "resource": {
+                "id": "MyDatabase",
+                "_rid": "PD5DALigDgw="
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/locations/westus/softDeletedDatabaseAccounts/softdeleted-cosmosdb-1/softDeletedSqlDatabases/TestDatabase",
+            "name": "TestDatabase",
+            "type": "Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases",
+            "properties": {
+              "softDeletionMetadata": {
+                "isSoftDeleted": true,
+                "softDeletionStartTimestamp": 1728668415,
+                "softDeletionResourceExpirationTimestamp": 1731260415
+              },
+              "resource": {
+                "id": "TestDatabase",
+                "_rid": "PD5DALigDgy="
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SoftDeletedSqlDatabases_List",
+  "title": "CosmosDBSoftDeletedSqlDatabaseList"
+}

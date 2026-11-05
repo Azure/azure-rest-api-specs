@@ -8,11 +8,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * .NET Component.
  */
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
 @parentResource(ManagedEnvironment)
 model DotNetComponent
   is Azure.ResourceManager.ProxyResource<DotNetComponentProperties> {
@@ -48,10 +51,25 @@ alias DotNetComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+/**
+ * Azure-AsyncOperation header returned by .NET Component operations starting in 2026-07-01.
+ */
+model DotNetComponentAzureAsyncOperationHeader {
+  /** A link to the status monitor. */
+  @added(Versions.v2026_07_01)
+  @header("Azure-AsyncOperation")
+  @Azure.Core.pollingLocation(
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>
+  )
+  azureAsyncOperation?: string;
+}
+
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
 @armResourceOperations
 interface DotNetComponents {
   /**
-   * Get a .NET Component.
+   * Gets the details of a .NET component in a managed environment.
    */
   @summary("Get a .NET Component.")
   get is DotNetComponentOps.Read<DotNetComponent>;
@@ -69,17 +87,29 @@ interface DotNetComponents {
   @summary("Update properties of a .NET Component")
   update is DotNetComponentOps.CustomPatchAsync<
     DotNetComponent,
-    PatchModel = DotNetComponent
+    PatchModel = DotNetComponent,
+    LroHeaders = ArmLroLocationHeader<
+      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+      DotNetComponent,
+      string
+    > &
+      DotNetComponentAzureAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
-   * Delete a .NET Component.
+   * Deletes a .NET component from a managed environment.
    */
   @summary("Delete a .NET Component.")
-  delete is DotNetComponentOps.DeleteWithoutOkAsync<DotNetComponent>;
+  delete is DotNetComponentOps.DeleteWithoutOkAsync<
+    DotNetComponent,
+    LroHeaders = ArmLroLocationHeader &
+      DotNetComponentAzureAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
-   * Get the .NET Components for a managed environment.
+   * Lists the .NET components in a managed environment.
    */
   @summary("Get the .NET Components for a managed environment.")
   list is DotNetComponentOps.List<
@@ -89,12 +119,15 @@ interface DotNetComponents {
 }
 
 @@doc(DotNetComponent.name, "Name of the .NET Component.");
-@@doc(DotNetComponent.properties,
+@@doc(
+  DotNetComponent.properties,
   ".NET Component resource specific properties"
 );
-@@doc(DotNetComponents.createOrUpdate::parameters.resource,
+@@doc(
+  DotNetComponents.createOrUpdate::parameters.resource,
   "Configuration details of the .NET Component."
 );
-@@doc(DotNetComponents.update::parameters.properties,
+@@doc(
+  DotNetComponents.update::parameters.properties,
   "Configuration details of the .NET Component."
 );

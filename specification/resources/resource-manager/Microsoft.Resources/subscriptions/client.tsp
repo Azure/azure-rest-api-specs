@@ -5,13 +5,16 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Resources;
 
-@@clientLocation(Subscriptions.checkZonePeers::parameters.subscriptionId,
+@@clientLocation(
+  Subscriptions.checkZonePeers::parameters.subscriptionId,
   Subscriptions.checkZonePeers
 );
-@@clientLocation(Subscriptions.listLocations::parameters.subscriptionId,
+@@clientLocation(
+  Subscriptions.listLocations::parameters.subscriptionId,
   Subscriptions.listLocations
 );
-@@clientLocation(Subscriptions.get::parameters.subscriptionId,
+@@clientLocation(
+  Subscriptions.get::parameters.subscriptionId,
   Subscriptions.get
 );
 

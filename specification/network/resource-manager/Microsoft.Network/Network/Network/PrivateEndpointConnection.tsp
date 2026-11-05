@@ -52,7 +52,10 @@ interface PrivateEndpointConnections {
   @tag("PrivateLinkServices")
   deletePrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
     Common.PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -66,15 +69,19 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(Common.PrivateEndpointConnection.name,
+@@doc(
+  Common.PrivateEndpointConnection.name,
   "The name of the private end point connection."
 );
-@@doc(Common.PrivateEndpointConnection.name,
+@@doc(
+  Common.PrivateEndpointConnection.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(Common.PrivateEndpointConnection.properties,
+@@doc(
+  Common.PrivateEndpointConnection.properties,
   "Properties of the private end point connection."
 );
-@@doc(PrivateEndpointConnections.updatePrivateEndpointConnection::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.updatePrivateEndpointConnection::parameters.resource,
   "Parameters supplied to approve or reject the private end point connection."
 );

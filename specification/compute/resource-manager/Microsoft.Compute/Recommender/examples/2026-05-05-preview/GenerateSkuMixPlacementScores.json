@@ -19,7 +19,6 @@
         }
       },
       "instanceDescription": {
-        "type": "VMSizes",
         "vmSizes": [
           {
             "name": "Standard_D2s_v3"
@@ -41,31 +40,34 @@
         "placementChoices": [
           {
             "id": "3fc69ef8-209e-4ecb-9cc4-392354af9201",
-            "score": 8.5,
+            "score": 8,
             "skuSplit": [
               {
                 "name": "Standard_D2s_v3",
                 "priority": "Regular",
                 "capacity": 4,
+                "capacityMax": 6,
                 "zone": "1"
               },
               {
                 "name": "Standard_D4s_v3",
                 "priority": "Regular",
                 "capacity": 3,
+                "capacityMax": 5,
                 "zone": "2"
               },
               {
                 "name": "Standard_D2s_v3",
                 "priority": "Regular",
                 "capacity": 3,
+                "capacityMax": 5,
                 "zone": "3"
               }
             ]
           },
           {
             "id": "a7c12b3d-4e5f-6789-abcd-ef0123456789",
-            "score": 4.5,
+            "score": 4,
             "skuSplit": [
               {
                 "name": "Standard_D8s_v3",
@@ -82,7 +84,8 @@
             ]
           }
         ],
-        "partialFulfillmentReason": "None"
+        "partialFulfillmentReason": "None",
+        "validUntil": "2026-05-05T18:00:00Z"
       },
       "headers": {
         "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/skuMixPlacementScores/recommendations/generate?api-version=2026-05-05-preview",

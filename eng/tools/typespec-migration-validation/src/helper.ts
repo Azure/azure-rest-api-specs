@@ -1,7 +1,7 @@
-import { OpenAPI2Document } from "@azure-tools/typespec-autorest";
-import fs from "fs";
-import path from "path";
-import { logWarning } from "./log.js";
+import { type OpenAPI2Document } from "@azure-tools/typespec-autorest";
+import fs from "node:fs";
+import path from "node:path";
+import { logWarning } from "./log.ts";
 
 /**
  * Reads all files in a directory recursively, excluding paths containing a specified string

@@ -14,11 +14,10 @@ namespace Microsoft.OperationalInsights;
 /**
  * Linked storage accounts top level resource container.
  */
-model LinkedStorageAccountsResource
-  is Azure.ResourceManager.ProxyResource<
-    LinkedStorageAccountsProperties,
-    false
-  > {
+model LinkedStorageAccountsResource is Azure.ResourceManager.ProxyResource<
+  LinkedStorageAccountsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LinkedStorageAccountsResource,
     KeyName = "dataSourceType",
@@ -95,9 +94,11 @@ interface LinkedStorageAccountsResources {
 }
 
 @@doc(LinkedStorageAccountsResource.name, "Linked storage accounts type.");
-@@doc(LinkedStorageAccountsResource.properties,
+@@doc(
+  LinkedStorageAccountsResource.properties,
   "Linked storage accounts properties."
 );
-@@doc(LinkedStorageAccountsResources.createOrUpdate::parameters.resource,
+@@doc(
+  LinkedStorageAccountsResources.createOrUpdate::parameters.resource,
   "The parameters required to create or update linked storage accounts."
 );

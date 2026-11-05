@@ -13,8 +13,10 @@ namespace Microsoft.Databricks;
 /**
  * Information about workspace.
  */
-model Workspace
-  is Azure.ResourceManager.TrackedResource<WorkspaceProperties, false> {
+model Workspace is Azure.ResourceManager.TrackedResource<
+  WorkspaceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",
@@ -67,7 +69,10 @@ interface Workspaces {
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = WorkspaceDeleteParameters,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -85,20 +90,6 @@ interface Workspaces {
    */
   @tag("Workspaces")
   listBySubscription is ArmListBySubscription<Workspace, Error = ErrorResponse>;
-
-  /**
-   * Gets the list of endpoints that VNET Injected Workspace calls Azure Databricks Control Plane. You must configure outbound access with these endpoints. For more information, see https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr
-   */
-  @tag("OutboundNetworkDependenciesEndpoints")
-  @summary("Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified Workspace.")
-  @get
-  @action("outboundNetworkDependenciesEndpoints")
-  list is ArmResourceActionSync<
-    Workspace,
-    void,
-    ArmResponse<OutboundEnvironmentEndpointCollection>,
-    Error = ErrorResponse
-  >;
 }
 
 alias WorkspaceDeleteParameters = {
@@ -113,7 +104,8 @@ alias WorkspaceDeleteParameters = {
 @@minLength(Workspace.name, 3);
 @@doc(Workspace.name, "The name of the workspace.");
 @@doc(Workspace.properties, "The workspace properties.");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update a workspace."
 );
 @@doc(Workspaces.update::parameters.properties, "The update to the workspace.");

@@ -41,7 +41,8 @@ interface AzureBackupJobResources {
   >;
 }
 
-@@doc(AzureBackupJobResource.name,
+@@doc(
+  AzureBackupJobResource.name,
   "The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
 );
 @@doc(AzureBackupJobResource.properties, "AzureBackupJobResource properties");

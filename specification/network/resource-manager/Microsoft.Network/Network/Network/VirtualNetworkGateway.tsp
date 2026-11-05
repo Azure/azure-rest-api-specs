@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -90,7 +91,10 @@ interface VirtualNetworkGateways {
   @tag("VirtualNetworkGateways")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -126,6 +130,7 @@ interface VirtualNetworkGateways {
       /**
        * Virtual network gateway vip address supplied to the begin reset of the active-active feature enabled gateway.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing reset POST contract uses gatewayVip in the query; preserve wire compatibility."
       @query("gatewayVip")
       gatewayVip?: string;
     },
@@ -207,6 +212,7 @@ interface VirtualNetworkGateways {
       /**
        * The IP address of the peer to retrieve the status of.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getBgpPeerStatus POST contract uses peer in the query; preserve wire compatibility."
       @query("peer")
       peer?: string;
     },
@@ -262,9 +268,22 @@ interface VirtualNetworkGateways {
       /**
        * The IP address of the peer.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getAdvertisedRoutes POST contract uses peer in the query; preserve wire compatibility."
       @query("peer")
       peer: string;
     },
+    Error = CloudError
+  >;
+
+  /**
+   * This operation retrieves a list of effective routes for the virtual network gateway.
+   */
+  @added(Versions.v2025_09_01)
+  @tag("VirtualNetworkGateways")
+  getEffectiveRoutes is ArmResourceActionAsync<
+    VirtualNetworkGateway,
+    void,
+    GatewayEffectiveRouteListResult,
     Error = CloudError
   >;
 
@@ -280,6 +299,7 @@ interface VirtualNetworkGateways {
       /**
        * Attempt to recalculate the Resiliency Information for the gateway
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getResiliencyInformation POST contract uses attemptRefresh in the query; preserve wire compatibility."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -298,6 +318,7 @@ interface VirtualNetworkGateways {
       /**
        * Attempt to recalculate the Route Sets Information for the gateway
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getRoutesInformation POST contract uses attemptRefresh in the query; preserve wire compatibility."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -379,12 +400,14 @@ interface VirtualNetworkGateways {
       /**
        * The type of failover test
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getFailoverAllTestDetails POST contract uses type in the query; preserve wire compatibility."
       @query("type")
       type: string;
 
       /**
        * Fetch only the latest tests for each peering location
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getFailoverAllTestDetails POST contract uses fetchLatest in the query; preserve wire compatibility."
       @query("fetchLatest")
       fetchLatest: boolean;
     },
@@ -408,12 +431,14 @@ interface VirtualNetworkGateways {
       /**
        * Peering location of the test
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getFailoverSingleTestDetails POST contract uses peeringLocation in the query; preserve wire compatibility."
       @query("peeringLocation")
       peeringLocation: string;
 
       /**
        * The unique Guid value which identifies the test
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getFailoverSingleTestDetails POST contract uses failoverTestId in the query; preserve wire compatibility."
       @query("failoverTestId")
       failoverTestId: string;
     },
@@ -437,6 +462,7 @@ interface VirtualNetworkGateways {
       /**
        * Peering location of the test
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startExpressRouteSiteFailoverSimulation POST contract uses peeringLocation in the query; preserve wire compatibility."
       @query("peeringLocation")
       peeringLocation: string;
     },
@@ -538,36 +564,47 @@ interface VirtualNetworkGateways {
 }
 
 @@doc(VirtualNetworkGateway.name, "The name of the virtual network gateway.");
-@@doc(VirtualNetworkGateway.properties,
+@@doc(
+  VirtualNetworkGateway.properties,
   "Properties of the virtual network gateway."
 );
-@@doc(VirtualNetworkGateways.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update virtual network gateway operation."
 );
-@@doc(VirtualNetworkGateways.updateTags::parameters.properties,
+@@doc(
+  VirtualNetworkGateways.updateTags::parameters.properties,
   "Parameters supplied to update virtual network gateway tags."
 );
-@@doc(VirtualNetworkGateways.generatevpnclientpackage::parameters.body,
+@@doc(
+  VirtualNetworkGateways.generatevpnclientpackage::parameters.body,
   "Parameters supplied to the generate virtual network gateway VPN client package operation."
 );
-@@doc(VirtualNetworkGateways.generateVpnProfile::parameters.body,
+@@doc(
+  VirtualNetworkGateways.generateVpnProfile::parameters.body,
   "Parameters supplied to the generate virtual network gateway VPN client package operation."
 );
-@@doc(VirtualNetworkGateways.setVpnclientIpsecParameters::parameters.body,
+@@doc(
+  VirtualNetworkGateways.setVpnclientIpsecParameters::parameters.body,
   "Parameters supplied to the Begin Set vpnclient ipsec parameters of Virtual Network Gateway P2S client operation through Network resource provider."
 );
-@@doc(VirtualNetworkGateways.startPacketCapture::parameters.body,
+@@doc(
+  VirtualNetworkGateways.startPacketCapture::parameters.body,
   "Virtual network gateway packet capture parameters supplied to start packet capture on gateway."
 );
-@@doc(VirtualNetworkGateways.stopPacketCapture::parameters.body,
+@@doc(
+  VirtualNetworkGateways.stopPacketCapture::parameters.body,
   "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway."
 );
-@@doc(VirtualNetworkGateways.stopExpressRouteSiteFailoverSimulation::parameters.body,
+@@doc(
+  VirtualNetworkGateways.stopExpressRouteSiteFailoverSimulation::parameters.body,
   "Virtual network gateway stop simulation parameters supplied to stop failover simulation on gateway."
 );
-@@doc(VirtualNetworkGateways.disconnectVirtualNetworkGatewayVpnConnections::parameters.body,
+@@doc(
+  VirtualNetworkGateways.disconnectVirtualNetworkGatewayVpnConnections::parameters.body,
   "The parameters are supplied to disconnect vpn connections."
 );
-@@doc(VirtualNetworkGateways.invokePrepareMigration::parameters.body,
+@@doc(
+  VirtualNetworkGateways.invokePrepareMigration::parameters.body,
   "Parameters supplied to the Begin Prepare migration on basic vpn gateway through Network resource provider."
 );

@@ -1,0 +1,33 @@
+{
+  "title": "DrillRuns_MarkAsComplete_MaximumSet",
+  "operationId": "DrillRuns_MarkAsComplete",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2025-02-01-preview",
+    "operation-id": "qmn",
+    "drillName": "drill1",
+    "drillRunName": "ca92602e-53bf-43d2-ae62-d3fc940474b3",
+    "body": {
+      "drillRunStage": "Fault"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "supportedVerbsForStage": [
+          {
+            "drillRunStage": "Fault",
+            "supportedVerbs": [
+              "Start"
+            ]
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

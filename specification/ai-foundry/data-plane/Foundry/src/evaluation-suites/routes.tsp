@@ -1,15 +1,17 @@
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 import "./models.tsp";
 
 namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 alias ListEvaluationSuiteVersionsParameters = {};
 
 alias EvaluationSuiteFilterQueryParams = {
+  /** The agent name query parameter. */
   @query("agent_name")
   @doc("Filter by associated Foundry agent name (from target).")
   agent_name?: string;
@@ -19,12 +21,7 @@ alias EvaluationSuiteFilterQueryParams = {
 // CRUD operations (versioned asset pattern)
 // ---------------------------------------------------------------------------
 
-const EvaluationSuitesRequiredPreviews = #{
-  required_previews: #[
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  ],
-};
-
+@removed(Versions.v1)
 interface EvaluationSuites
   extends VersionedOperations<
       EvaluationSuiteVersion,
@@ -32,10 +29,10 @@ interface EvaluationSuites
       EvaluationSuiteFilterQueryParams,
       ListEvaluationSuiteVersionsParameters
     > {
-
   // POST /evaluation_suites/{name}/versions
+  /** Creates a new evaluation suite version with an auto-incremented version identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Create a new {name} with auto incremented version id", EvaluationSuiteVersion)
+  @summary("Create an evaluation suite version")
   @post
   @route("/evaluation_suites/{name}/versions")
   @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
@@ -54,8 +51,9 @@ interface EvaluationSuites
   >;
 
   // POST /evaluation_suites/{name}:run
+  /** Runs an evaluation using the suite's testing criteria and dataset. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Run an evaluation using the suite's testing criteria and dataset.")
+  @summary("Run an evaluation suite")
   @post
   @route("/evaluation_suites/{name}:run")
   @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
@@ -78,27 +76,23 @@ interface EvaluationSuites
 // Generate API (LRO jobs pattern — follows evaluator_generation_jobs)
 // ---------------------------------------------------------------------------
 
-const EvaluationSuiteGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  ],
-};
-
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
-@removed(Versions.v1)
 @tag("EvaluationSuiteGenerationJobs")
+@removed(Versions.v1)
 interface EvaluationSuiteGenerationJobs {
-  @summary("Creates an evaluation suite generation job.")
+  /** Creates an evaluation suite generation job and returns the queued job. */
+  @summary("Create an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
+  @pollingOperation(EvaluationSuiteGenerationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     EvaluationSuiteGenerationJob
   >;
 
-  @summary("Get info about an evaluation suite generation job.")
+  /** Retrieves an evaluation suite generation job by its identifier. */
+  @summary("Get an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
   get is queryJobStatusPreview<
@@ -106,7 +100,8 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  @summary("Returns a list of evaluation suite generation jobs.")
+  /** Lists evaluation suite generation jobs for the project. */
+  @summary("List evaluation suite generation jobs")
   @route("evaluation_suite_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
   list is listJobsPreview<
@@ -114,7 +109,8 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  @summary("Cancels an evaluation suite generation job.")
+  /** Requests cancellation of a running or queued evaluation suite generation job. */
+  @summary("Cancel an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
   cancel is cancelJobPreview<
@@ -122,10 +118,9 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  @summary("Deletes an evaluation suite generation job.")
+  /** Deletes an evaluation suite generation job by its identifier. */
+  @summary("Delete an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  >;
+  delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 }

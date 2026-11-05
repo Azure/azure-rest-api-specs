@@ -94,12 +94,15 @@ interface NetworkSecurityPerimeterConfigurations {
 
 @@maxLength(NetworkSecurityPerimeterConfiguration.name, 512);
 @@minLength(NetworkSecurityPerimeterConfiguration.name, 1);
-@@doc(NetworkSecurityPerimeterConfiguration.name,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.name,
   "The name for a network security perimeter configuration"
 );
-@@doc(NetworkSecurityPerimeterConfiguration.properties,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.properties,
   "Network security configuration properties."
 );
 @@pageItems(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.value);
-@@nextLink(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.nextLink
+@@nextLink(
+  CommonTypes.NetworkSecurityPerimeterConfigurationListResult.nextLink
 );

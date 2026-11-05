@@ -64,7 +64,6 @@ union ProvisioningState {
   /**
    * Action is running.
    */
-  @removed(Microsoft.Chaos.Versions.v2025_01_01)
   @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
   Running: "Running",
 }
@@ -103,7 +102,7 @@ model OperationStatus extends ErrorResponse {
 }
 
 /**
- * A map used to describe parameters for actions or configurations.
+ * A key-value pair used to describe parameters for actions or configurations.
  */
 model KeyValuePair {
   /**

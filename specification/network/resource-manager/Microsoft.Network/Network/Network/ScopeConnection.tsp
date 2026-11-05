@@ -94,6 +94,7 @@ interface ScopeConnections {
 
 @@doc(ScopeConnection.name, "Name for the cross-tenant connection.");
 @@doc(ScopeConnection.properties, "The scope connection properties");
-@@doc(ScopeConnections.createOrUpdate::parameters.resource,
+@@doc(
+  ScopeConnections.createOrUpdate::parameters.resource,
   "Scope connection to be created/updated."
 );

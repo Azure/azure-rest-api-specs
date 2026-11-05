@@ -180,6 +180,7 @@ interface Labs {
       /**
        * set this flag to true if you want to update student count without generating a new invite code
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing generateInviteCode POST contract uses onlyUpdateStudentCountParameter in the query; preserve wire compatibility."
       @query("onlyUpdateStudentCountParameter")
       onlyUpdateStudentCountParameter?: boolean;
     },
@@ -189,9 +190,11 @@ interface Labs {
 
 @@doc(LabDetails.name, "");
 @@doc(LabDetails.properties, "Get lab response properties.");
-@@doc(Labs.createOrUpdate::parameters.resource,
+@@doc(
+  Labs.createOrUpdate::parameters.resource,
   "Request parameters that are provided to create lab resource."
 );
-@@doc(Labs.generateInviteCode::parameters.body,
+@@doc(
+  Labs.generateInviteCode::parameters.body,
   "Request parameters that are provided to generate invite code."
 );

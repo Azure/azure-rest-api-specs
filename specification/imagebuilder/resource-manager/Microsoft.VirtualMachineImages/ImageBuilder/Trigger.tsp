@@ -52,6 +52,7 @@ interface Triggers {
 
 @@doc(Trigger.name, "The name of the trigger");
 @@doc(Trigger.properties, "The properties of a trigger");
-@@doc(Triggers.createOrUpdate::parameters.resource,
+@@doc(
+  Triggers.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateTrigger operation"
 );

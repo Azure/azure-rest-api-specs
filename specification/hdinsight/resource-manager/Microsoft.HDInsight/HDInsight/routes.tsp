@@ -112,6 +112,7 @@ interface Configurations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "This API is deprecated, please use UpdateGatewaySettings in cluster endpoint instead."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing update retains its request-body shape; preserve wire compatibility."
   @post
   update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Cluster,
@@ -315,7 +316,10 @@ interface Extensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = OkResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | OkResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Parameters = {
       /**
        * The name of the cluster extension.
@@ -480,6 +484,7 @@ interface VirtualMachines {
   /**
    * Restarts the specified HDInsight cluster hosts.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing restartHosts retains its request-body shape; preserve wire compatibility."
   restartHosts is ArmResourceActionAsyncBase<
     Cluster,
     string[],

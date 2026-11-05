@@ -2,17 +2,21 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
  * Representation of a Garnet cache cluster.
  */
+@removed(Versions.v2026_07_15)
+@added(Versions.v2026_04_01_preview)
 model GarnetClusterResource
   is Azure.ResourceManager.TrackedResource<GarnetClusterResourceProperties> {
   ...ResourceNameParameter<
@@ -29,6 +33,8 @@ model GarnetClusterResource
   identity?: ManagedCassandraManagedServiceIdentity;
 }
 
+@removed(Versions.v2026_07_15)
+@added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface GarnetClusters {
   /**
@@ -52,8 +58,10 @@ interface GarnetClusters {
   update is ArmCustomPatchAsync<
     GarnetClusterResource,
     PatchModel = GarnetClusterResourcePatch,
-    Response = ArmResponse<GarnetClusterResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GarnetClusterResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<GarnetClusterResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GarnetClusterResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -61,8 +69,10 @@ interface GarnetClusters {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     GarnetClusterResource,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -90,8 +91,11 @@ interface ExpressRoutePortAuthorizations {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ExpressRoutePortAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRoutePortAuthorization,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -103,10 +107,23 @@ interface ExpressRoutePortAuthorizations {
     Response = ExpressRoutePortAuthorizationListResult,
     OverrideErrorType = CloudError
   >;
+
+  /**
+   * Gets the authorization key associated with the specified express route port authorization.
+   */
+  @added(Versions.v2026_01_01)
+  @action("listKeys")
+  listKeys is ExpressRoutePortAuthorizationOps.ActionSync<
+    ExpressRoutePortAuthorization,
+    void,
+    ArmResponse<ExpressRouteAuthorizationKey>,
+    OverrideErrorType = CloudError
+  >;
 }
 
 @@doc(ExpressRoutePortAuthorization.name, "The name of the authorization.");
 @@doc(ExpressRoutePortAuthorization.properties, "ExpressRoutePort properties.");
-@@doc(ExpressRoutePortAuthorizations.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRoutePortAuthorizations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update express route port authorization operation."
 );

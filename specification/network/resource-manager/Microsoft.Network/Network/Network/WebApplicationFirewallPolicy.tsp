@@ -61,7 +61,10 @@ interface WebApplicationFirewallPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     WebApplicationFirewallPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -86,9 +89,11 @@ interface WebApplicationFirewallPolicies {
 
 @@maxLength(WebApplicationFirewallPolicy.name, 128);
 @@doc(WebApplicationFirewallPolicy.name, "The name of the policy.");
-@@doc(WebApplicationFirewallPolicy.properties,
+@@doc(
+  WebApplicationFirewallPolicy.properties,
   "Properties of the web application firewall policy."
 );
-@@doc(WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
   "Policy to be created."
 );

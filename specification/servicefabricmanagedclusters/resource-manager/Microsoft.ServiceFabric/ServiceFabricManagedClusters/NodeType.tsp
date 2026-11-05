@@ -47,10 +47,12 @@ interface NodeTypes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     NodeType,
-    Response = ArmResourceUpdatedResponse<NodeType> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NodeType>> & {
-      @bodyRoot
-      _: NodeType;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<NodeType>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NodeType>> & {
+          @bodyRoot
+          _: NodeType;
+        })
   >;
 
   /**
@@ -210,24 +212,29 @@ interface NodeTypeSkus {
 @@doc(NodeType.name, "The name of the node type.");
 @@doc(NodeType.properties, "The node type properties");
 @@doc(NodeTypes.createOrUpdate::parameters.resource, "The node type resource.");
-@@doc(NodeTypes.update::parameters.properties,
+@@doc(
+  NodeTypes.update::parameters.properties,
   "The parameters to update the node type configuration."
 );
-@@doc(NodeTypes.deallocate::parameters.body,
+@@doc(
+  NodeTypes.deallocate::parameters.body,
   "parameters for deallocate action."
 );
 @@doc(NodeTypes.deleteNode::parameters.body, "parameters for delete action.");
-@@doc(NodeTypes.getFaultSimulation::parameters.body,
+@@doc(
+  NodeTypes.getFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
 @@doc(NodeTypes.redeploy::parameters.body, "parameters for redeploy action.");
 @@doc(NodeTypes.reimage::parameters.body, "parameters for reimage action.");
 @@doc(NodeTypes.restart::parameters.body, "parameters for restart action.");
 @@doc(NodeTypes.start::parameters.body, "parameters for start action.");
-@@doc(NodeTypes.startFaultSimulation::parameters.body,
+@@doc(
+  NodeTypes.startFaultSimulation::parameters.body,
   "parameters describing the fault simulation."
 );
-@@doc(NodeTypes.stopFaultSimulation::parameters.body,
+@@doc(
+  NodeTypes.stopFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
 
@@ -557,6 +564,7 @@ model NodeTypeProperties {
   /**
    * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_02_01)
   enableResilientEphemeralOsDisk?: boolean;
 
@@ -869,8 +877,10 @@ model VaultSecretGroup {
 /**
  * Azure resource identifier.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backwards compatibility to match existing spec"
-@OpenAPI.extension("x-ms-azure-resource", true)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "SubResource is a legacy payload reference model; customAzureResource is required to preserve generated x-ms-azure-resource metadata without using OpenAPI extensions."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "SubResource is a legacy payload reference model with only an optional id, not an addressable Azure resource."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "SubResource is a brownfield payload reference model; customAzureResource preserves the generated Swagger metadata without using OpenAPI extensions."
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model SubResource {
   /**
    * Azure resource identifier.
@@ -885,6 +895,7 @@ model VaultCertificate {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl: string;
 
   /**

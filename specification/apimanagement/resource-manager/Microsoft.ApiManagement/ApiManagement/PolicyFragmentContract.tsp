@@ -52,7 +52,8 @@ interface PolicyFragmentContractOps
         @minLength(1)
         @maxLength(80)
         id: string,
-      }
+      },
+      ResourceName = "PolicyFragmentContract"
     > {}
 
 @armResourceOperations
@@ -74,7 +75,7 @@ interface PolicyFragmentContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -88,7 +89,7 @@ interface PolicyFragmentContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -105,23 +106,25 @@ interface PolicyFragmentContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<PolicyFragmentContract> &
-      ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        etag: string;
-      }) | (ArmResourceCreatedResponse<
-      PolicyFragmentContract,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
-    > & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<PolicyFragmentContract> &
+          ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            eTag: string;
+          })
+      | (ArmResourceCreatedResponse<
+          PolicyFragmentContract,
+          LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
+        > & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -185,6 +188,7 @@ interface PolicyFragmentContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listReferences POST contract uses $top in the query; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -192,6 +196,7 @@ interface PolicyFragmentContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listReferences POST contract uses $skip in the query; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -234,7 +239,8 @@ interface WorkspacePolicyFragmentOps
         @minLength(1)
         @maxLength(80)
         id: string,
-      }
+      },
+      ResourceName = "ServiceWorkspacePolicyFragment"
     > {}
 
 @armResourceOperations
@@ -256,7 +262,7 @@ interface WorkspacePolicyFragment {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -270,7 +276,7 @@ interface WorkspacePolicyFragment {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -287,23 +293,25 @@ interface WorkspacePolicyFragment {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<PolicyFragmentContract> &
-      ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
-        /**
-         * Current entity state version
-         */
-        @header("ETag")
-        etag: string;
-      }) | (ArmResourceCreatedResponse<
-      PolicyFragmentContract,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
-    > & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<PolicyFragmentContract> &
+          ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
+            /**
+             * Current entity state version
+             */
+            @header("ETag")
+            eTag: string;
+          })
+      | (ArmResourceCreatedResponse<
+          PolicyFragmentContract,
+          LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
+        > & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -367,6 +375,7 @@ interface WorkspacePolicyFragment {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listReferences POST contract uses $top in the query; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -374,6 +383,7 @@ interface WorkspacePolicyFragment {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listReferences POST contract uses $skip in the query; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -385,9 +395,11 @@ interface WorkspacePolicyFragment {
 @@minLength(PolicyFragmentContract.name, 1);
 @@doc(PolicyFragmentContract.name, "A resource identifier.");
 @@doc(PolicyFragmentContract.properties, "Properties of the Policy Fragment.");
-@@doc(PolicyFragmentContracts.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyFragmentContracts.createOrUpdate::parameters.resource,
   "The policy fragment contents to apply."
 );
-@@doc(WorkspacePolicyFragment.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspacePolicyFragment.createOrUpdate::parameters.resource,
   "The policy fragment contents to apply."
 );

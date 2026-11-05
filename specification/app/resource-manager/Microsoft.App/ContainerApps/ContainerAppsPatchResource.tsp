@@ -9,11 +9,15 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Container App Patch
  */
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
 @parentResource(ContainerApp)
 model ContainerAppsPatchResource
   is Azure.ResourceManager.ProxyResource<PatchProperties> {
@@ -51,6 +55,9 @@ alias ContainerAppsPatchesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 interface ContainerAppsPatches {
   /**
@@ -106,9 +113,11 @@ interface ContainerAppsPatches {
 @@maxLength(ContainerAppsPatchResource.name, 64);
 @@minLength(ContainerAppsPatchResource.name, 2);
 @@doc(ContainerAppsPatchResource.name, "The name of the patch");
-@@doc(ContainerAppsPatchResource.properties,
+@@doc(
+  ContainerAppsPatchResource.properties,
   "Properties that describes current states of the patch resource."
 );
-@@doc(ContainerAppsPatches.skipConfigure::parameters.body,
+@@doc(
+  ContainerAppsPatches.skipConfigure::parameters.body,
   "Configure patcher to skip a patch or not."
 );

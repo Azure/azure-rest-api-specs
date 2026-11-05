@@ -6,17 +6,41 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+@doc("Reference to a Foundry Dataset in the current project. Consuming operations define supported Dataset kinds and resolution behavior.")
+model DatasetReference {
+  @doc("Dataset name.")
+  name: string;
+
+  @doc("Optional Dataset version. Omit to select latest when the consuming operation resolves the reference.")
+  version?: string;
+}
+
+@doc("Reference to a Dataset whose concrete version has already been resolved.")
+model VersionedDatasetReference {
+  ...OmitProperties<DatasetReference, "version">;
+
+  @doc("Concrete Dataset version.")
+  version: string;
+}
+
 /** Error response for API failures. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ApiErrorResponse {
   error: ApiError;
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.Error,
+@@copyProperties(
+  OpenAI.Error,
   {
+    /** Additional errors that contributed to this failure. */
     details?: OpenAI.Error[],
+
+    /** Additional structured information about the failure. */
     additionalInfo?: Record<unknown>,
+
+    /** Diagnostic information supplied by the service for troubleshooting. */
     debugInfo?: Record<unknown>,
   }
 );
@@ -27,13 +51,49 @@ alias AcceptJsonHeader = {
   @header accept: "application/json";
 };
 
+/**
+ * Optional request header carrying an opaque per-user identity for delegation.
+ * When present and the caller has the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission,
+ * the service scopes endpoint-scoped data (responses, conversations, sessions) to the
+ * supplied user identity instead of the caller's own identity.
+ * If the caller has delegation RBAC but does not pass this header, the caller's own identity is used.
+ */
+alias UserDelegationHeader = {
+  /** Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission. */
+  @header("x-ms-user-identity") user_identity?: string;
+};
+
+/**
+ * Optional request header carrying an application-owned conversation identifier for Model Router session affinity.
+ * Used when the request body does not supply a valid session ID.
+ */
+alias SessionAffinityRequestHeader = {
+  /** An opaque, application-owned conversation identifier. The value is not returned in the response and must not contain secrets or personally identifiable information. */
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+      ],
+    }
+  )
+  @header("x-ms-session-id")
+  session_id?: string;
+};
+
+// NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)
+// are NOT part of the public API spec. They are injected by the platform and resolved
+// server-side. If needed for contracts, they should be added in the contracts entry point.
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "OpenAI Response schemas can be intentionally combined for documentation clarity"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
 op OpenAIOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params): Response | ErrorResponse;
+>(...Params): Response | AzureRangeErrorResponse<ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
@@ -42,10 +102,9 @@ op OpenAIOperationWithPreview<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(
-  ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>,
-  ...Params,
-): Response | ErrorResponse;
+>(...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>, ...Params):
+  | Response
+  | AzureRangeErrorResponse<ErrorResponse>;
 
 alias AssetBase = {
   @doc("Asset ID, a unique identifier for the asset")
@@ -181,4 +240,21 @@ model DatasetJobSource {
 
   @doc("The version of the dataset. If not specified, the latest version is used.")
   version?: string;
+}
+
+/**
+ * User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+ */
+model AzureUserSecurityContext {
+  /** The name of the application. Sensitive personal information should not be included in this field. */
+  application_name?: string;
+
+  /** This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field. */
+  end_user_id?: string;
+
+  /** The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multitenant. */
+  end_user_tenant_id?: string;
+
+  /** Captures the original client's IP address. */
+  source_ip?: string;
 }

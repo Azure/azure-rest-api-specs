@@ -100,9 +100,11 @@ interface Archives {
 @@minLength(Archive.name, 5);
 @@doc(Archive.name, "The name of the archive resource.");
 @@doc(Archive.properties, "The properties of the archive.");
-@@doc(Archives.create::parameters.resource,
+@@doc(
+  Archives.create::parameters.resource,
   "The parameters for creating a archive."
 );
-@@doc(Archives.update::parameters.properties,
+@@doc(
+  Archives.update::parameters.properties,
   "The parameters for updating a archive."
 );

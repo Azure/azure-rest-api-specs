@@ -15,8 +15,10 @@ namespace Microsoft.DataFactory;
  * Change data capture resource type.
  */
 @parentResource(Factory)
-model ChangeDataCaptureResource
-  is Azure.ResourceManager.ProxyResource<ChangeDataCapture, false> {
+model ChangeDataCaptureResource is Azure.ResourceManager.ProxyResource<
+  ChangeDataCapture,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ChangeDataCaptureResource,
     KeyName = "changeDataCaptureName",
@@ -51,6 +53,7 @@ interface ChangeDataCaptureResources {
    * Creates or updates a change data capture resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing createOrUpdate retains its request-body shape; preserve wire compatibility."
   @tag("changeDataCapture")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ChangeDataCaptureResource,
@@ -123,9 +126,11 @@ interface ChangeDataCaptureResources {
 @@maxLength(ChangeDataCaptureResource.name, 260);
 @@minLength(ChangeDataCaptureResource.name, 1);
 @@doc(ChangeDataCaptureResource.name, "The change data capture name.");
-@@doc(ChangeDataCaptureResource.properties,
+@@doc(
+  ChangeDataCaptureResource.properties,
   "Properties of the change data capture."
 );
-@@doc(ChangeDataCaptureResources.createOrUpdate::parameters.resource,
+@@doc(
+  ChangeDataCaptureResources.createOrUpdate::parameters.resource,
   "Change data capture resource definition."
 );

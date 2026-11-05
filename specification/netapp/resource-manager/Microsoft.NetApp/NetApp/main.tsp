@@ -38,7 +38,15 @@ import "./Elastic/ElasticBackupVault.tsp";
 import "./Elastic/ElasticBackupPolicy.tsp";
 import "./Elastic/ElasticBackup.tsp";
 import "./ActiveDirectory.tsp";
+import "./ExternalResources/ExternalResourceEnums.tsp";
+import "./ExternalResources/ExternalCluster.tsp";
+import "./ExternalResources/ClusterPeer.tsp";
+import "./ExternalResources/ExternalSvm.tsp";
+import "./ExternalResources/SvmPeer.tsp";
+import "./ExternalResources/ExternalCache.tsp";
+import "./ExternalResources/ExternalCacheConnection.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -92,8 +100,68 @@ enum Versions {
   /**
    * The 2026-01-15-preview API version.
    */
-  @previewVersion
   v2026_01_15_preview: "2026-01-15-preview",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  v2026_03_01: "2026-03-01",
+
+  /**
+   * The 2026-03-15-preview API version.
+   */
+  v2026_03_15_preview: "2026-03-15-preview",
+
+  /**
+   * The 2026-04-01 API version.
+   */
+  v2026_04_01: "2026-04-01",
+
+  /**
+   * The 2026-04-15-preview API version.
+   */
+  v2026_04_15_preview: "2026-04-15-preview",
+
+  /**
+   * The 2026-05-01 API version.
+   */
+  v2026_05_01: "2026-05-01",
+
+  /**
+   * The 2026-05-15-preview API version.
+   */
+  v2026_05_15_preview: "2026-05-15-preview",
+
+  /**
+   * The 2026-06-01 API version.
+   */
+  v2026_06_01: "2026-06-01",
+
+  /**
+   * The 2026-06-15-preview API version.
+   */
+  v2026_06_15_preview: "2026-06-15-preview",
+
+  /**
+   * The 2026-07-01 API version.
+   */
+  v2026_07_01: "2026-07-01",
+
+  /**
+   * The 2026-07-15-preview API version.
+   */
+  v2026_07_15_preview: "2026-07-15-preview",
+
+  /**
+   * The 2026-08-01 API version.
+   */
+  v2026_08_01: "2026-08-01",
+
+  /**
+   * The 2026-08-15-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_08_15_preview: "2026-08-15-preview",
 }
 
 interface Operations

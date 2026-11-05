@@ -53,13 +53,16 @@ interface Databases {
   /**
    * Deletes a single database
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -138,8 +141,10 @@ interface Databases {
   flush is ArmResourceActionAsyncBase<
     Database,
     FlushParameters,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>
   >;
@@ -147,7 +152,7 @@ interface Databases {
   /**
    * Upgrades the database Redis version to the latest available.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   upgradeDBRedisVersion is ArmResourceActionAsyncBase<
     Database,
     void,
@@ -159,27 +164,35 @@ interface Databases {
 
 @@doc(Database.name, "The name of the Redis Enterprise database.");
 @@doc(Database.properties, "Other properties of the database.");
-@@doc(Databases.create::parameters.resource,
+@@doc(
+  Databases.create::parameters.resource,
   "Parameters supplied to the create or update database operation."
 );
-@@doc(Databases.update::parameters.properties,
+@@doc(
+  Databases.update::parameters.properties,
   "Parameters supplied to the create or update database operation."
 );
-@@doc(Databases.regenerateKey::parameters.body,
+@@doc(
+  Databases.regenerateKey::parameters.body,
   "Specifies which key to regenerate."
 );
-@@doc(Databases.`import`::parameters.body,
+@@doc(
+  Databases.`import`::parameters.body,
   "Storage information for importing into the cluster"
 );
-@@doc(Databases.export::parameters.body,
+@@doc(
+  Databases.export::parameters.body,
   "Storage information for exporting into the cluster"
 );
-@@doc(Databases.forceUnlink::parameters.body,
+@@doc(
+  Databases.forceUnlink::parameters.body,
   "Information identifying the database to be unlinked."
 );
-@@doc(Databases.forceLinkToReplicationGroup::parameters.body,
+@@doc(
+  Databases.forceLinkToReplicationGroup::parameters.body,
   "Information identifying the database to be unlinked."
 );
-@@doc(Databases.flush::parameters.body,
+@@doc(
+  Databases.flush::parameters.body,
   "Information identifying the databases to be flushed"
 );

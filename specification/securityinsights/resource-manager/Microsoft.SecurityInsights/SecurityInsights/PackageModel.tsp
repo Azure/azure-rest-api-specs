@@ -114,6 +114,7 @@ interface PackageModels {
 
 @@doc(PackageModel.name, "package Id");
 @@doc(PackageModel.properties, "package properties");
-@@doc(PackageModels.install::parameters.resource,
+@@doc(
+  PackageModels.install::parameters.resource,
   "Package installation properties"
 );

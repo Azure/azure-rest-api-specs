@@ -65,7 +65,7 @@ interface EmailTemplateContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -79,7 +79,7 @@ interface EmailTemplateContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -119,7 +119,7 @@ interface EmailTemplateContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -169,12 +169,15 @@ interface EmailTemplateContracts {
 }
 
 @@doc(EmailTemplateContract.name, "Email Template Name Identifier.");
-@@doc(EmailTemplateContract.properties,
+@@doc(
+  EmailTemplateContract.properties,
   "Email Template entity contract properties."
 );
-@@doc(EmailTemplateContracts.createOrUpdate::parameters.resource,
+@@doc(
+  EmailTemplateContracts.createOrUpdate::parameters.resource,
   "Email Template update parameters."
 );
-@@doc(EmailTemplateContracts.update::parameters.properties,
+@@doc(
+  EmailTemplateContracts.update::parameters.properties,
   "Update parameters."
 );

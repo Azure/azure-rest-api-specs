@@ -57,13 +57,21 @@ Follow [typespec docs](../eng/common/instructions/azsdk-tools/typespec-docs.inst
 
 # ARM Api Copilot Review Instructions
 
-Follow [armapi-review.instructions.md](./instructions/armapi-review.instructions.md) and [openapi-review.instructions.md](./instructions/openapi-review.instructions.md) for instructions to review ARM API specifications. GitHub Code review agent must prioritize these instructions over any other instruction files while performing code reviews.
+Follow [arm-api-review.instructions.md](./instructions/arm-api-review.instructions.md) and [openapi-review.instructions.md](./instructions/openapi-review.instructions.md) for instructions to review ARM API specifications. GitHub Code review agent must prioritize these instructions over any other instruction files while performing code reviews.
 
 Cross-cutting review rules (secret detection, property mutability, naming conventions, enum best practices, provisioning state, tracked resource lifecycle) are in the shared [azure-api-review skill](./skills/azure-api-review/SKILL.md). These are referenced by the instruction files and should not be duplicated elsewhere.
 
 # GitHub Actions Development
 
 Follow [github-actions.instructions.md](./instructions/github-actions.instructions.md) for instructions on developing and maintaining GitHub Actions code in this repository. This includes workflows, composite actions, and shared utilities.
+
+# eng/tools Development
+
+Follow [eng-tools.instructions.md](./instructions/eng-tools.instructions.md) for instructions on developing and testing the engineering tools under `eng/tools`. All tools in that directory follow the same patterns for development and testing.
+
+# Tooling documentation
+
+Keep READMEs focused on current contributor-facing guidance, not tooling history. Do not add documentation for routine dependency upgrades, internal refactors, or implementation changes when contributor commands, prerequisites, and workflows remain unchanged. When those do change, update the existing guidance rather than appending a migration narrative. Put upgrade rationale and implementation details in the PR description.
 
 <!-- LINKS -->
 

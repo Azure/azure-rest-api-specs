@@ -15,40 +15,82 @@ using Azure.ClientGenerator.Core;
 
 // AZC0012: Generic names that conflict with BCL types
 @@clientName(Microsoft.Discovery.Workspace.Task, "DiscoveryTask", "csharp");
-@@clientName(Microsoft.Discovery.Workspace.Tasks,
+@@clientName(
+  Microsoft.Discovery.Workspace.Tasks,
   "DiscoveryTasksClient",
   "csharp"
 );
-@@clientName(Microsoft.Discovery.Workspace.Operation,
+@@clientName(
+  Microsoft.Discovery.Workspace.Operation,
   "WorkspaceOperation",
   "csharp"
 );
-@@clientName(Microsoft.Discovery.Workspace.Tools,
+@@clientName(
+  Microsoft.Discovery.Workspace.Tools,
   "DiscoveryToolsClient",
   "csharp"
 );
 
 // Shared types
 @@clientName(Microsoft.Discovery.Common.Tag, "DiscoveryTag", "csharp");
-@@clientName(Microsoft.Discovery.Common.ProvisioningState,
+@@clientName(
+  Microsoft.Discovery.Common.ProvisioningState,
   "DiscoveryProvisioningState",
   "csharp"
 );
 
-@@clientName(Microsoft.Discovery.Workspace.Conversation,
+@@clientName(
+  Microsoft.Discovery.Workspace.Conversation,
   "DiscoveryConversation",
   "csharp"
 );
-@@clientName(Microsoft.Discovery.Workspace.Conversations,
+@@clientName(
+  Microsoft.Discovery.Workspace.Conversations,
   "DiscoveryConversationsClient",
   "csharp"
 );
 
-@@clientName(Microsoft.Discovery.Workspace.Investigation,
+@@clientName(
+  Microsoft.Discovery.Workspace.Investigation,
   "DiscoveryInvestigation",
   "csharp"
 );
-@@clientName(Microsoft.Discovery.Workspace.Investigations,
+@@clientName(
+  Microsoft.Discovery.Workspace.Investigations,
   "DiscoveryInvestigationsClient",
   "csharp"
+);
+
+// Java operation names
+@@clientName(
+  Microsoft.Discovery.Workspace.Conversations.stableUpdate,
+  "update",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tasks.stableUpdate,
+  "update",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tools.cancelRunLro,
+  "cancelRun",
+  "java"
+);
+
+// Retired pre-GA PUT ops are create-or-update; name them accurately so the GA PATCH ops can be `update`.
+@@clientName(
+  Microsoft.Discovery.Workspace.Conversations.update,
+  "createOrUpdate",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tasks.update,
+  "createOrUpdate",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tools.cancelRun,
+  "cancelRunSync",
+  "java"
 );

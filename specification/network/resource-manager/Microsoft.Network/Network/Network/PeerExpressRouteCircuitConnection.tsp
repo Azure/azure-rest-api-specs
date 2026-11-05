@@ -61,9 +61,11 @@ interface PeerExpressRouteCircuitConnections {
   >;
 }
 
-@@doc(PeerExpressRouteCircuitConnection.name,
+@@doc(
+  PeerExpressRouteCircuitConnection.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(PeerExpressRouteCircuitConnection.properties,
+@@doc(
+  PeerExpressRouteCircuitConnection.properties,
   "Properties of the peer express route circuit connection."
 );

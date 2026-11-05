@@ -19,6 +19,9 @@ description: "Azure Kubernetes Prepared Image Specification Manager Client"
 ```yaml $(java) && $(multiapi)
 batch:
   - tag: package-2026-02-02-preview
+  - tag: package-2026-03-02-preview
+  - tag: package-2026-04-02-preview
+  - tag: package-2026-05-02-preview
 ```
 
 ### Tag: package-2026-02-02-preview and java
@@ -30,6 +33,45 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.azure.resourcemanager.containerservice.preparedimgspec.v2026_02_02_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2026_02_02_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2026-03-02-preview and java
+
+These settings apply only when `--tag=package-2026-03-02-preview` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2026-03-02-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.azure.resourcemanager.containerservice.preparedimgspec.v2026_03_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2026_03_02_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2026-04-02-preview and java
+
+These settings apply only when `--tag=package-2026-04-02-preview` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2026-04-02-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.azure.resourcemanager.containerservice.preparedimgspec.v2026_04_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2026_04_02_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2026-05-02-preview and java
+
+These settings apply only when `--tag=package-2026-05-02-preview` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2026-05-02-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.azure.resourcemanager.containerservice.preparedimgspec.v2026_05_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2026_05_02_preview
 regenerate-manager: true
 generate-interface: true
 ```

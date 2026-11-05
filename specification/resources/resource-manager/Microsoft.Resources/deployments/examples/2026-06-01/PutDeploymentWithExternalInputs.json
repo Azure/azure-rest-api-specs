@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "deploymentName": "my-deployment",
+    "parameters": {
+      "properties": {
+        "externalInputDefinitions": {
+          "fooValue": {
+            "config": "FOO_VALUE",
+            "kind": "sys.envVar"
+          }
+        },
+        "externalInputs": {
+          "fooValue": {
+            "value": "baz"
+          }
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "inputObj": {
+            "expression": "[createObject('foo', externalInputs('fooValue'))]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "outputs": {
+            "inputObj": {
+              "type": "object",
+              "value": "[parameters('inputObj')]"
+            }
+          },
+          "parameters": {
+            "inputObj": {
+              "type": "object"
+            }
+          },
+          "resources": []
+        }
+      }
+    },
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "properties": {
+          "correlationId": "ef613b6c-f76e-48fd-9da7-28884243c5e5",
+          "dependencies": [],
+          "mode": "Incremental",
+          "outputResources": [],
+          "outputs": {
+            "inputObj": {
+              "type": "Object",
+              "value": {
+                "foo": "baz"
+              }
+            }
+          },
+          "parameters": {
+            "inputObj": {
+              "type": "Object",
+              "value": {
+                "foo": "baz"
+              }
+            }
+          },
+          "providers": [],
+          "provisioningState": "Succeeded",
+          "templateHash": "17686481789412793580",
+          "timestamp": "2025-04-09T14:36:48.2047169Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "properties": {
+          "correlationId": "ef613b6c-f76e-48fd-9da7-28884243c5e5",
+          "dependencies": [],
+          "duration": "PT0.0009164S",
+          "mode": "Incremental",
+          "parameters": {
+            "inputObj": {
+              "type": "Object",
+              "value": {
+                "foo": "baz"
+              }
+            }
+          },
+          "providers": [],
+          "provisioningState": "Accepted",
+          "templateHash": "17686481789412793580",
+          "timestamp": "2025-04-09T14:36:47.6637583Z"
+        }
+      }
+    }
+  },
+  "operationId": "Deployments_CreateOrUpdate",
+  "title": "Create deployment using external inputs"
+}

@@ -70,7 +70,10 @@ interface SecurityUserRuleCollections {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -98,12 +101,15 @@ interface SecurityUserRuleCollections {
   >;
 }
 
-@@doc(SecurityUserRuleCollection.name,
+@@doc(
+  SecurityUserRuleCollection.name,
   "The name of the network manager security Configuration rule collection."
 );
-@@doc(SecurityUserRuleCollection.properties,
+@@doc(
+  SecurityUserRuleCollection.properties,
   "Indicates the properties for the network manager security user rule collection."
 );
-@@doc(SecurityUserRuleCollections.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityUserRuleCollections.createOrUpdate::parameters.resource,
   "The Security User Rule Collection to create or update"
 );

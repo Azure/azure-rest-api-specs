@@ -34,9 +34,11 @@ interface NetworkInterfaceIPConfigurations {
   >;
 }
 
-@@doc(NetworkInterfaceIPConfiguration.name,
+@@doc(
+  NetworkInterfaceIPConfiguration.name,
   "The name of the ip configuration name."
 );
-@@doc(NetworkInterfaceIPConfiguration.properties,
+@@doc(
+  NetworkInterfaceIPConfiguration.properties,
   "Network interface IP configuration properties."
 );

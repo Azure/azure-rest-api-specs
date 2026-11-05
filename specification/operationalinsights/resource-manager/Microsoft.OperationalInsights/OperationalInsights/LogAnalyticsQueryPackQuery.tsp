@@ -82,15 +82,19 @@ interface LogAnalyticsQueryPackQueries {
   >;
 }
 
-@@doc(LogAnalyticsQueryPackQuery.name,
+@@doc(
+  LogAnalyticsQueryPackQuery.name,
   "The id of a specific query defined in the Log Analytics QueryPack"
 );
-@@doc(LogAnalyticsQueryPackQuery.properties,
+@@doc(
+  LogAnalyticsQueryPackQuery.properties,
   "Properties that define an Log Analytics QueryPack-Query resource."
 );
-@@doc(LogAnalyticsQueryPackQueries.put::parameters.resource,
+@@doc(
+  LogAnalyticsQueryPackQueries.put::parameters.resource,
   "Properties that need to be specified to create a new query and add it to a Log Analytics QueryPack."
 );
-@@doc(LogAnalyticsQueryPackQueries.update::parameters.properties,
+@@doc(
+  LogAnalyticsQueryPackQueries.update::parameters.properties,
   "Properties that need to be specified to create a new query and add it to a Log Analytics QueryPack."
 );

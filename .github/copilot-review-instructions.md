@@ -46,7 +46,7 @@ For each file type, apply the corresponding instruction files. These are the
 single source of truth -- do not invent rules beyond what they specify.
 
 1. **ARM control-plane specs** (`specification/**/resource-manager/**/*.json`):
-   Apply `.github/instructions/armapi-review.instructions.md` (ARM-specific
+   Apply `.github/instructions/arm-api-review.instructions.md` (ARM-specific
    rules take precedence) AND `.github/instructions/openapi-review.instructions.md`.
 2. **All OpenAPI specs** (`specification/**/*.json`):
    Apply `.github/instructions/openapi-review.instructions.md`.
@@ -88,7 +88,7 @@ exhaustively.
 - **OpenAPI JSON** -- apply the "Review Checklist Summary" at the end of
   `openapi-review.instructions.md`
 - **ARM resource-manager JSON** -- apply **both** the OpenAPI checklist AND the
-  "ARM Review Checklist Summary" at the end of `armapi-review.instructions.md`
+  "ARM Review Checklist Summary" at the end of `arm-api-review.instructions.md`
 - **TypeSpec** -- apply the "TypeSpec Review Checklist Summary" at the end of
   `typespec-review.instructions.md`
 - **`readme.md` suppressions** -- perform suppression continuity analysis:
@@ -173,11 +173,21 @@ PUT operation is missing `201` response for resource creation. ARM PUT must retu
 **Fix:** Add a `201` response with the same schema as the `200` response.
 ```
 
-Every comment **MUST** end with the hidden HTML marker:
+Every comment **MUST** end with a hidden HTML telemetry marker as the very last line. The format is:
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent -->
+<!-- posted-by: copilot-code-review | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing -->
 ```
+
+- **`rule`**: The rule ID of the finding (e.g., `RPC-Put-V1-11`, `OAPI027`). Use `summary` for summary comments.
+- **`severity`**: One of `blocking`, `warning`, or `suggestion`.
+- **`classification`**: One of `new` or `existing`.
+
+Example: `<!-- posted-by: copilot-code-review | rule: RPC-Put-V1-11 | severity: blocking | classification: new -->`
+
+To detect Copilot Code Review-posted comments during reconciliation, check for the substring `posted-by: copilot-code-review`.
+
+> **Note on marker prefix.** This `posted-by: copilot-code-review` prefix is distinct from the interactive `ARM API Reviewer` agent's marker, which uses `posted-by: arm-api-reviewer-agent`. The two systems post separately and reconcile independently. Comments posted before the prefix split may still carry the old `posted-by: arm-api-reviewer-agent` prefix and will be matched by the interactive agent's reconciliation; this washes out as old comments are resolved.
 
 ---
 
@@ -218,23 +228,40 @@ Use for design trade-offs and best-practice recommendations:
 - Violations already flagged by CI linter checks
 - Style nits that don't affect SDK generation or customer experience
 - Issues in unchanged files not modified by the PR
+- The presence of `final-state-via` on a standard ARM PUT/PATCH/DELETE
+  operation, without evidence of a contract mismatch or SDK incompatibility.
+  Follow the
+  [shared ARM LRO reference](skills/azure-api-review/references/lro-final-state-via.md);
+  do not request removal merely because default SDK behavior would also work.
 
 ---
 
 ## Comment Volume Control
 
-Do not flood a PR with comments. Prioritize and cap:
+Do not flood a PR with comments. **Limit: 20 inline comments per session.**
 
-1. **Security issues** -- always post (no cap)
-2. **Breaking changes** -- always post (no cap)
-3. **ARM contract violations** -- post up to 15
-4. **Property design / naming** -- post up to 5
-5. **Documentation gaps** -- post up to 3
+At 20 or fewer, post every finding. Do not trim a small review. There are no
+per-category caps: sized by how often a category occurs they would give the
+smallest allowance to the rarest categories, and security is the rarest.
 
-If more findings exist beyond the cap, summarize them in a single comment:
-"_N additional warnings/suggestions were identified but not posted individually.
-Key themes: [list]. The author should review the full checklist in
-`armapi-review.instructions.md`._"
+With more than 20, trim to fit and disclose, dropping in this order:
+
+1. Documentation and examples
+2. Schema and property design, naming, SDK impact
+3. Resource modeling, operations and HTTP semantics, LRO, suppressions, review readiness
+4. Versioning and compatibility
+5. Security and secrets
+
+Security and versioning are trimmed **last**. Frequency is not importance.
+
+The limit is a reviewed per-session guardrail against pathological output. It is
+not a per-category quota or a permanent claim about a mutable telemetry sample.
+
+If findings are withheld, summarize them in a single comment with severity
+counts:
+"_N additional finding candidates were identified but not individually
+verified or posted (Blocking: B, Warning: W, Suggestion: S). Key themes: [list].
+Review the full checklist in `arm-api-review.instructions.md`._"
 
 ---
 
@@ -245,12 +272,12 @@ When reviewing a PR that already has comments from a prior review:
 **Scenario A -- Same finding, same location:**
 The existing comment already covers this violation. **Skip posting.**
 
-**Scenario B -- Same finding, line shifted, agent-posted comment:**
-The existing comment has the marker `<!-- posted-by: arm-api-reviewer-agent -->`.
+**Scenario B -- Same finding, line shifted, Copilot Code Review-posted comment:**
+The existing comment body contains the substring `posted-by: copilot-code-review`.
 Resolve the outdated comment and post a new one at the correct line.
 
-**Scenario C -- Same finding, line shifted, human-posted comment:**
-The existing comment does NOT have the agent marker. Do NOT resolve their
+**Scenario C -- Same finding, line shifted, comment from another author:**
+The existing comment does NOT have the `posted-by: copilot-code-review` marker (it may be from a human reviewer or from the interactive `arm-api-reviewer-agent`). Do NOT resolve their
 comment. Reply to the thread noting the line shift.
 
 **Scenario D -- All findings already covered:**
@@ -267,11 +294,16 @@ addressed in the latest changes._"
 
 After posting comments:
 
-- If any 🔴 Blocking findings were posted:
+- If any 🔴 Blocking findings were posted **and** the ARM API Review Critic
+  verified them:
   **Add** `ARMChangesRequested`, **remove** `WaitForARMFeedback` (if present).
 - If no blocking findings:
   **Remove** `WaitForARMFeedback` (if present). Do not add
   `ARMChangesRequested`.
+- If the Critic could not be reached, do **not** add `ARMChangesRequested` even
+  when Blocking findings were posted. Those findings keep their severity, but
+  nothing independently verified them, so a human decides whether they should
+  move the ARM review queue.
 
 ---
 
@@ -307,8 +339,6 @@ After posting comments:
 - Properties like `id`, `name`, `type` redeclared inside `properties` bag.
 - PUT operations returning `202` (deprecated; must use `201`/`200` +
   `provisioningState`).
-- `x-ms-long-running-operation-options` with `final-state-via` on PUT/PATCH/
-  DELETE (not needed for standard ARM patterns).
 
 ---
 

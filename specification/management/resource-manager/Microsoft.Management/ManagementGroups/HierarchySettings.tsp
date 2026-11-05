@@ -72,12 +72,15 @@ interface HierarchySettingsOperationGroup {
 }
 
 @@doc(HierarchySettings.name, "");
-@@doc(HierarchySettings.properties,
+@@doc(
+  HierarchySettings.properties,
   "The generic properties of hierarchy settings."
 );
-@@doc(HierarchySettingsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  HierarchySettingsOperationGroup.createOrUpdate::parameters.resource,
   "Tenant level settings request parameter."
 );
-@@doc(HierarchySettingsOperationGroup.update::parameters.properties,
+@@doc(
+  HierarchySettingsOperationGroup.update::parameters.properties,
   "Tenant level settings request parameter."
 );

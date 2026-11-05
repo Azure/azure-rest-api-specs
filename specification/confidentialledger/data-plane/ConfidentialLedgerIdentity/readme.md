@@ -14,7 +14,7 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2024-12-09-preview
+tag: package-2026-02-23
 ```
 
 ### Tag: package-2022-05-13-identity
@@ -24,6 +24,18 @@ These settings apply only when `--tag=package-2022-05-13-identity` is specified 
 ```yaml $(tag) == 'package-2022-05-13-identity'
 input-file:
   - stable/2022-05-13/identityservice.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```
+
+### Tag: package-2026-02-23
+
+These settings apply only when `--tag=package-2026-02-23` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-23'
+input-file:
+  - stable/2026-02-23/identityservice.json
 directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.

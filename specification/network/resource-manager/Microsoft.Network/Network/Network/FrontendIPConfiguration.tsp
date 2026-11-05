@@ -35,12 +35,15 @@ interface FrontendIPConfigurations {
   >;
 }
 
-@@doc(FrontendIPConfiguration.name,
+@@doc(
+  FrontendIPConfiguration.name,
   "The name of the frontend IP configuration."
 );
-@@doc(FrontendIPConfiguration.name,
+@@doc(
+  FrontendIPConfiguration.name,
   "The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource."
 );
-@@doc(FrontendIPConfiguration.properties,
+@@doc(
+  FrontendIPConfiguration.properties,
   "Properties of the load balancer probe."
 );

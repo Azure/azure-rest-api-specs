@@ -77,9 +77,11 @@ interface Gateways {
 
 @@doc(Gateway.name, "The name of the Gateway.");
 @@doc(Gateway.properties, "Hybrid Compute Gateway properties");
-@@doc(Gateways.createOrUpdate::parameters.resource,
+@@doc(
+  Gateways.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create gateway operation."
 );
-@@doc(Gateways.update::parameters.properties,
+@@doc(
+  Gateways.update::parameters.properties,
   "Parameters supplied to the Update gateway operation."
 );

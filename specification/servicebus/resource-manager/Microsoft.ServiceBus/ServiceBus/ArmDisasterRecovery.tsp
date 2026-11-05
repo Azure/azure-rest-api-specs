@@ -89,12 +89,15 @@ interface ArmDisasterRecoveries {
 @@maxLength(ArmDisasterRecovery.name, 50);
 @@minLength(ArmDisasterRecovery.name, 1);
 @@doc(ArmDisasterRecovery.name, "The Disaster Recovery configuration name");
-@@doc(ArmDisasterRecovery.properties,
+@@doc(
+  ArmDisasterRecovery.properties,
   "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
 );
-@@doc(ArmDisasterRecoveries.createOrUpdate::parameters.resource,
+@@doc(
+  ArmDisasterRecoveries.createOrUpdate::parameters.resource,
   "Parameters required to create an Alias(Disaster Recovery configuration)"
 );
-@@doc(ArmDisasterRecoveries.failOver::parameters.body,
+@@doc(
+  ArmDisasterRecoveries.failOver::parameters.body,
   "Parameters required to create an Alias(Disaster Recovery configuration)"
 );

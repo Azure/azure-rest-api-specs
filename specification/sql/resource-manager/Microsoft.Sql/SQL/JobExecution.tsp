@@ -56,10 +56,13 @@ alias JobExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("executions")
     @key
     jobExecutionId: Azure.Core.uuid;
-  }
+  },
+  ResourceName = "SqlServerJobExecution"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobExecutions)
 interface JobExecutions {
   /**
    * Gets a job execution.
@@ -73,11 +76,14 @@ interface JobExecutions {
   createOrUpdate is JobExecutionOps.CreateOrUpdateAsync<
     JobExecution,
     Request = void,
-    Response = ArmResourceUpdatedResponse<JobExecution> | ArmResourceCreatedResponse<
-      JobExecution,
-      ArmLroLocationHeader<FinalResult = JobExecution> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<JobExecution>
+      | ArmResourceCreatedResponse<
+          JobExecution,
+          ArmLroLocationHeader<FinalResult = JobExecution> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -177,10 +183,13 @@ alias JobStepExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("steps")
     @key
     stepName: string;
-  }
+  },
+  ResourceName = "SqlServerJobExecutionStep"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobStepExecutions)
 interface JobStepExecutions {
   /**
    * Gets a step execution of a job execution.
@@ -282,10 +291,13 @@ alias JobTargetExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("targets")
     @key
     targetId: Azure.Core.uuid;
-  }
+  },
+  ResourceName = "SqlServerJobExecutionStepTarget"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobTargetExecutions)
 interface JobTargetExecutions {
   /**
    * Gets a target execution.

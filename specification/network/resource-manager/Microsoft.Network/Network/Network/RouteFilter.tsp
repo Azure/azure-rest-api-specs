@@ -113,8 +113,11 @@ interface RouteFilters {
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     RouteFilter,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -148,10 +151,13 @@ interface RouteFilters {
     void,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -180,11 +186,13 @@ interface RouteFilters {
     RouteFilter,
     RouteFilterRule,
     void,
-    Response = ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<
-      RouteFilterRule,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = RouteFilterRule> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<RouteFilterRule>
+      | ArmResourceCreatedResponse<
+          RouteFilterRule,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = RouteFilterRule> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = CloudError
   >;
 
@@ -206,12 +214,15 @@ interface RouteFilters {
 
 @@doc(RouteFilter.name, "The name of the route filter.");
 @@doc(RouteFilter.properties, "Properties of the route filter.");
-@@doc(RouteFilters.createOrUpdate::parameters.resource,
+@@doc(
+  RouteFilters.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update route filter operation."
 );
-@@doc(RouteFilters.updateTags::parameters.properties,
+@@doc(
+  RouteFilters.updateTags::parameters.properties,
   "Parameters supplied to update route filter tags."
 );
-@@doc(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
+@@doc(
+  RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update route filter rule operation."
 );

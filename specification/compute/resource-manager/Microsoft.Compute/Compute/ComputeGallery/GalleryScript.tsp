@@ -50,11 +50,13 @@ interface GalleryScripts {
   @added(Versions.v2025_03_03)
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryScript,
-    Response = ArmResourceUpdatedResponse<GalleryScript> | ArmResourceCreatedResponse<
-      GalleryScript,
-      ArmLroLocationHeader<FinalResult = GalleryScript> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResourceUpdatedResponse<GalleryScript>
+      | ArmResourceCreatedResponse<
+          GalleryScript,
+          ArmLroLocationHeader<FinalResult = GalleryScript> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -65,8 +67,10 @@ interface GalleryScripts {
   update is ComputeCustomPatchAsync<
     GalleryScript,
     PatchModel = GalleryScriptUpdate,
-    Response = ArmResponse<GalleryScript> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GalleryScript> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<GalleryScript>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GalleryScript> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -90,15 +94,19 @@ interface GalleryScripts {
   >;
 }
 
-@@doc(GalleryScript.name,
+@@doc(
+  GalleryScript.name,
   "The name of the gallery Script Definition to be retrieved."
 );
-@@doc(GalleryScript.properties,
+@@doc(
+  GalleryScript.properties,
   "Describes the properties of a gallery Script Definition."
 );
-@@doc(GalleryScripts.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryScripts.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Script operation."
 );
-@@doc(GalleryScripts.update::parameters.properties,
+@@doc(
+  GalleryScripts.update::parameters.properties,
   "Parameters supplied to the update gallery Script operation."
 );

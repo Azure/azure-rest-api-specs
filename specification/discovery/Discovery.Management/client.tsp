@@ -13,9 +13,83 @@ using Microsoft.Discovery.Shared;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
+// C# names use the service prefix to avoid collisions with other management libraries.
+@@clientName(Bookshelf, "DiscoveryBookshelf", "csharp");
+@@clientName(ChatModelDeployment, "DiscoveryChatModelDeployment", "csharp");
+@@clientName(NodePool, "DiscoveryNodePool", "csharp");
+@@clientName(Project, "DiscoveryProject", "csharp");
+@@clientName(StorageAsset, "DiscoveryStorageAsset", "csharp");
+@@clientName(StorageContainer, "DiscoveryStorageContainer", "csharp");
+@@clientName(Supercomputer, "DiscoverySupercomputer", "csharp");
+@@clientName(Tool, "DiscoveryTool", "csharp");
+@@clientName(Workspace, "DiscoveryWorkspace", "csharp");
+
+@@clientName(
+  ChatModelDeploymentProperties,
+  "DiscoveryChatModelDeploymentProperties",
+  "csharp"
+);
+@@clientName(CustomerManagedKeys, "DiscoveryCustomerManagedKeys", "csharp");
+@@clientName(KeyVaultProperties, "DiscoveryKeyVaultProperties", "csharp");
+@@clientName(Identity, "DiscoveryManagedIdentityReference", "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.MoboBrokerResource,
+  "DiscoveryMoboBrokerResource",
+  "csharp"
+);
+@@clientName(NetworkEgressType, "DiscoveryNetworkEgressType", "csharp");
+@@clientName(NodePoolProperties, "DiscoveryNodePoolProperties", "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
+  "DiscoveryPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(ProjectProperties, "DiscoveryProjectProperties", "csharp");
+@@clientName(ProvisioningState, "DiscoveryProvisioningState", "csharp");
+@@clientName(PublicNetworkAccess, "DiscoveryPublicNetworkAccess", "csharp");
+@@clientName(ScaleSetPriority, "DiscoveryScaleSetPriority", "csharp");
+@@clientName(
+  StorageAssetProperties,
+  "DiscoveryStorageAssetProperties",
+  "csharp"
+);
+@@clientName(
+  StorageContainerProperties,
+  "DiscoveryStorageContainerProperties",
+  "csharp"
+);
+@@clientName(StorageStore, "DiscoveryStorageStore", "csharp");
+@@clientName(
+  SupercomputerIdentities,
+  "DiscoverySupercomputerIdentities",
+  "csharp"
+);
+@@clientName(
+  SupercomputerProperties,
+  "DiscoverySupercomputerProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
+  "DiscoverySystemAssignedServiceIdentity",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
+  "DiscoverySystemAssignedServiceIdentityType",
+  "csharp"
+);
+@@clientName(SystemSku, "DiscoverySystemSku", "csharp");
+@@clientName(ToolProperties, "DiscoveryToolProperties", "csharp");
+@@clientName(VmSize, "DiscoveryVmSize", "csharp");
+@@clientName(WorkspaceProperties, "DiscoveryWorkspaceProperties", "csharp");
+@@clientName(BlobStorageMountProtocol.NFS, "Nfs", "csharp");
+@@clientName(NetAppMountProtocol.NFS, "Nfs", "csharp");
+
 // Rename DiscoveryStorage to ManagedStorage for Go SDK to avoid collision with Storage type
 // after the Go emitter removes the "Discovery" prefix
-@@clientName(Microsoft.Discovery.DiscoveryStorage,
+@@clientName(
+  Microsoft.Discovery.DiscoveryStorage,
   "DiscoveryManagedStorage",
   "go"
 );
@@ -46,7 +120,8 @@ model ToolUpdateProperties {
   ...WithDefinitionContent;
 }
 
-@@alternateType(Microsoft.Discovery.Tools.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Tools.update::parameters.properties,
   ToolUpdate,
   "javascript"
 );
@@ -87,7 +162,8 @@ model BookshelfUpdate {
   @doc("The resource-specific properties for this resource.")
   properties?: BookshelfUpdateProperties;
 }
-@@alternateType(Microsoft.Discovery.Bookshelves.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Bookshelves.update::parameters.properties,
   BookshelfUpdate,
   "javascript"
 );
@@ -111,7 +187,8 @@ model StorageAssetUpdateProperties {
   description?: string;
 }
 
-@@alternateType(Microsoft.Discovery.StorageAssets.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.StorageAssets.update::parameters.properties,
   StorageAssetUpdate,
   "javascript"
 );
@@ -122,7 +199,8 @@ model StorageContainerUpdate {
   @doc("Resource tags.")
   tags?: Record<string>;
 }
-@@alternateType(Microsoft.Discovery.StorageContainers.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.StorageContainers.update::parameters.properties,
   StorageContainerUpdate,
   "javascript"
 );
@@ -150,7 +228,8 @@ model NodePoolUpdateProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   minNodeCount?: int32 = 0;
 }
-@@alternateType(Microsoft.Discovery.NodePools.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.NodePools.update::parameters.properties,
   NodePoolUpdate,
   "javascript"
 );
@@ -161,7 +240,9 @@ model SupercomputerIdentitiesUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
   @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
+  workloadIdentities?: Record<
+    | Azure.ResourceManager.CommonTypes.UserAssignedIdentity
+    | null>;
 }
 
 @doc("Updatable properties for Supercomputer (all fields optional for PATCH)")
@@ -183,7 +264,8 @@ model SupercomputerUpdate {
   properties?: SupercomputerUpdateProperties;
 }
 
-@@alternateType(Microsoft.Discovery.Supercomputers.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Supercomputers.update::parameters.properties,
   SupercomputerUpdate,
   "javascript"
 );
@@ -195,7 +277,8 @@ model ChatModelDeploymentUpdate {
   @doc("Resource tags.")
   tags?: Record<string>;
 }
-@@alternateType(Microsoft.Discovery.ChatModelDeployments.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.ChatModelDeployments.update::parameters.properties,
   ChatModelDeploymentUpdate,
   "javascript"
 );
@@ -242,7 +325,8 @@ model ProjectUpdateProperties {
   settings?: ProjectSettings;
 }
 
-@@alternateType(Microsoft.Discovery.Projects.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Projects.update::parameters.properties,
   ProjectUpdate,
   "javascript"
 );
@@ -288,7 +372,8 @@ model WorkspaceUpdate {
   properties?: WorkspaceUpdateProperties;
 }
 
-@@alternateType(Microsoft.Discovery.Workspaces.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Workspaces.update::parameters.properties,
   WorkspaceUpdate,
   "javascript"
 );

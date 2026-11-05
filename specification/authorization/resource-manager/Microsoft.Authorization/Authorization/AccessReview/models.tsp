@@ -1176,7 +1176,9 @@ model AccessReviewDecisionProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  principalResourceMembership?: AccessReviewDecisionPrincipalResourceMembership | null;
+  principalResourceMembership?:
+    | AccessReviewDecisionPrincipalResourceMembership
+    | null;
 }
 
 /**

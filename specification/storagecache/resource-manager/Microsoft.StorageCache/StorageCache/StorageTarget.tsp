@@ -45,11 +45,14 @@ interface StorageTargets {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     StorageTarget,
-    Response = ArmResourceUpdatedResponse<StorageTarget> | ArmResourceCreatedResponse<
-      StorageTarget,
-      ArmLroLocationHeader<FinalResult = StorageTarget> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<StorageTarget>
+      | ArmResourceCreatedResponse<
+          StorageTarget,
+          ArmLroLocationHeader<FinalResult = StorageTarget> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -66,8 +69,11 @@ interface StorageTargets {
       @query("force")
       force?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -172,6 +178,7 @@ interface StorageTargets {
 
 @@doc(StorageTarget.name, "Name of Storage Target.");
 @@doc(StorageTarget.properties, "StorageTarget properties");
-@@doc(StorageTargets.createOrUpdate::parameters.resource,
+@@doc(
+  StorageTargets.createOrUpdate::parameters.resource,
   "Object containing the definition of a Storage Target."
 );

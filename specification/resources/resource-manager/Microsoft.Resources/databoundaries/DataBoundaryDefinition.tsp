@@ -52,10 +52,12 @@ interface DataBoundaries {
   getScope is Extension.Read<Extension.ScopeParameter, DataBoundaryDefinition>;
 }
 
-@@doc(DataBoundaryDefinition.name,
+@@doc(
+  DataBoundaryDefinition.name,
   "Default string modeled as parameter for auto generation to work correctly."
 );
 @@doc(DataBoundaryDefinition.properties, "Data boundary properties");
-@@doc(DataBoundaryDefinitions.put::parameters.resource,
+@@doc(
+  DataBoundaryDefinitions.put::parameters.resource,
   "The data boundary to opt the tenant to."
 );

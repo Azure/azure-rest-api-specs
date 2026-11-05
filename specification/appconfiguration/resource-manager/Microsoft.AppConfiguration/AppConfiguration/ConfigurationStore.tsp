@@ -63,11 +63,13 @@ interface ConfigurationStores {
   update is ArmCustomPatchAsync<
     ConfigurationStore,
     PatchModel = ConfigurationStoreUpdateParameters,
-    Response = ArmResponse<ConfigurationStore> | ArmResourceCreatedResponse<
-      ConfigurationStore,
-      LroHeaders = ArmLroLocationHeader<FinalResult = ConfigurationStore> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<ConfigurationStore>
+      | ArmResourceCreatedResponse<
+          ConfigurationStore,
+          LroHeaders = ArmLroLocationHeader<FinalResult = ConfigurationStore> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -76,7 +78,10 @@ interface ConfigurationStores {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConfigurationStore,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ConfigurationStoresDeleteLroHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ConfigurationStoresDeleteLroHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -119,6 +124,7 @@ interface ConfigurationStores {
       /**
        * A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listKeys POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -137,21 +143,27 @@ interface ConfigurationStores {
 @@maxLength(ConfigurationStore.name, 50);
 @@minLength(ConfigurationStore.name, 5);
 @@doc(ConfigurationStore.name, "The name of the configuration store.");
-@@doc(ConfigurationStore.properties,
+@@doc(
+  ConfigurationStore.properties,
   "The properties of a configuration store."
 );
-@@doc(ConfigurationStores.create::parameters.resource,
+@@doc(
+  ConfigurationStores.create::parameters.resource,
   "The parameters for creating a configuration store."
 );
-@@doc(ConfigurationStores.update::parameters.properties,
+@@doc(
+  ConfigurationStores.update::parameters.properties,
   "The parameters for updating a configuration store."
 );
-@@doc(ConfigurationStores.regenerateKey::parameters.body,
+@@doc(
+  ConfigurationStores.regenerateKey::parameters.body,
   "The parameters for regenerating an access key."
 );
-@@doc(ConfigurationStoresDeleteLroHeader.location,
+@@doc(
+  ConfigurationStoresDeleteLroHeader.location,
   "URL to query for the operation result"
 );
-@@doc(ConfigurationStoresDeleteLroHeader.azureAsyncOperation,
+@@doc(
+  ConfigurationStoresDeleteLroHeader.azureAsyncOperation,
   "URL to query for status of the operation."
 );

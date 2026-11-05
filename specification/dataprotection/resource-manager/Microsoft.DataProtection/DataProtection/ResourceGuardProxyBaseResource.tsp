@@ -81,12 +81,15 @@ interface ResourceGuardProxyBaseResources {
 }
 
 @@doc(ResourceGuardProxyBaseResource.name, "name of the resource guard proxy");
-@@doc(ResourceGuardProxyBaseResource.properties,
+@@doc(
+  ResourceGuardProxyBaseResource.properties,
   "ResourceGuardProxyBaseResource properties"
 );
-@@doc(ResourceGuardProxyBaseResources.createOrUpdate::parameters.resource,
+@@doc(
+  ResourceGuardProxyBaseResources.createOrUpdate::parameters.resource,
   "Request body for operation"
 );
-@@doc(ResourceGuardProxyBaseResources.unlockDelete::parameters.body,
+@@doc(
+  ResourceGuardProxyBaseResources.unlockDelete::parameters.body,
   "Request body for operation"
 );

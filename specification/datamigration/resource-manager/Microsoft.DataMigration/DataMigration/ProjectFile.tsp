@@ -147,7 +147,8 @@ interface ProjectFiles {
 
 @@doc(ProjectFile.name, "Name of the File");
 @@doc(ProjectFile.properties, "Custom file properties");
-@@doc(ProjectFiles.createOrUpdate::parameters.resource,
+@@doc(
+  ProjectFiles.createOrUpdate::parameters.resource,
   "Information about the file"
 );
 @@doc(ProjectFiles.update::parameters.properties, "Information about the file");

@@ -2703,6 +2703,7 @@ model ScriptProperties {
   /**
    * The url to the KQL script blob file. Must not be used together with scriptContent property
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   scriptUrl?: string;
 
   /**
@@ -3640,6 +3641,7 @@ model EventGridConnectionProperties {
 /**
  * Class representing the Kusto CosmosDb data connection properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbDataConnectionProperties {
   /**
    * The case-sensitive name of the existing target table in your cluster. Retrieved data is ingested into this table.

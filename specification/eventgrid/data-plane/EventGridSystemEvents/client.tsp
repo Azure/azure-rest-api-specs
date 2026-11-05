@@ -6,6 +6,7 @@ import "./Microsoft.AppConfiguration/client.tsp";
 import "./Microsoft.AVS/client.tsp";
 import "./Microsoft.Cache/client.tsp";
 import "./Microsoft.Communication/client.tsp";
+import "./Microsoft.Compute/client.tsp";
 import "./Microsoft.ContainerRegistry/client.tsp";
 import "./Microsoft.ContainerService/client.tsp";
 import "./Microsoft.DataBox/client.tsp";

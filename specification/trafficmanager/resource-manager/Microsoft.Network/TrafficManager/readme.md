@@ -26,7 +26,7 @@ These are the global settings for the TrafficManager API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-04
+tag: package-2026-09
 ```
 
 ### Suppression
@@ -65,6 +65,24 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}"].patch.parameters[6]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].patch.parameters[2]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].patch.parameters[4]
+```
+
+### Tag: package-2026-09
+
+These settings apply only when `--tag=package-2026-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09'
+input-file:
+  - stable/2026-09-01/trafficmanager.json
+```
+
+### Tag: package-preview-2025-01
+
+These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-01'
+input-file:
+  - preview/2025-01-01-preview/trafficmanager.json
 ```
 
 ### Tag: package-preview-2024-04

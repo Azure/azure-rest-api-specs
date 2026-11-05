@@ -1,7 +1,7 @@
 import { vol } from "memfs";
 import { afterEach, describe, expect, test, vi } from "vitest";
 
-import { readFileList } from "../src/processChanges.js";
+import { readFileList } from "../src/processChanges.ts";
 
 // These tests are in a separate module because fs mocking is difficult to undo
 
@@ -23,7 +23,7 @@ describe("readFileList", () => {
     const files = {
       "./test1.txt": "line1\nline2",
     };
-    vol.fromJSON(files, ".");
+    vol.fromJSON(files);
 
     const fileList = await readFileList("./test1.txt");
     expect(fileList).toEqual(["line1", "line2"]);
@@ -33,7 +33,7 @@ describe("readFileList", () => {
     const files = {
       "./test.txt": "",
     };
-    vol.fromJSON(files, ".");
+    vol.fromJSON(files);
 
     const fileList = await readFileList("./test.txt");
     expect(fileList).toEqual([]);

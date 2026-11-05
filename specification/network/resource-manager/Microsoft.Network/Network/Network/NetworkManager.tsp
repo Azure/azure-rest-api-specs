@@ -87,7 +87,10 @@ interface NetworkManagers {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -153,6 +156,7 @@ interface NetworkManagers {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listActiveConnectivityConfigurations POST contract uses $top in the query; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")
@@ -175,6 +179,7 @@ interface NetworkManagers {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listActiveSecurityAdminRules POST contract uses $top in the query; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")
@@ -192,11 +197,13 @@ interface NetworkManagers {
   post is ArmResourceActionAsyncBase<
     NetworkManager,
     Request = NetworkManagerCommit,
-    Response = ArmResponse<NetworkManagerCommit> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkManagerCommit> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: NetworkManagerCommit;
-    }),
+    Response =
+      | ArmResponse<NetworkManagerCommit>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkManagerCommit> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: NetworkManagerCommit;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkManager>,
     Error = CloudError
   >;
@@ -214,6 +221,7 @@ interface NetworkManagers {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing networkManagerDeploymentStatusList POST contract uses $top in the query; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")
@@ -225,21 +233,27 @@ interface NetworkManagers {
 
 @@doc(NetworkManager.name, "The name of the network manager.");
 @@doc(NetworkManager.properties, "The network manager properties");
-@@doc(NetworkManagers.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkManagers.createOrUpdate::parameters.resource,
   "Parameters supplied to specify which network manager is."
 );
-@@doc(NetworkManagers.patch::parameters.properties,
+@@doc(
+  NetworkManagers.patch::parameters.properties,
   "Parameters supplied to specify which network manager is."
 );
-@@doc(NetworkManagers.listActiveConnectivityConfigurations::parameters.body,
+@@doc(
+  NetworkManagers.listActiveConnectivityConfigurations::parameters.body,
   "Active Configuration Parameter."
 );
-@@doc(NetworkManagers.listActiveSecurityAdminRules::parameters.body,
+@@doc(
+  NetworkManagers.listActiveSecurityAdminRules::parameters.body,
   "Active Configuration Parameter."
 );
-@@doc(NetworkManagers.post::parameters.body,
+@@doc(
+  NetworkManagers.post::parameters.body,
   "Parameters supplied to specify which Managed Network commit is."
 );
-@@doc(NetworkManagers.networkManagerDeploymentStatusList::parameters.body,
+@@doc(
+  NetworkManagers.networkManagerDeploymentStatusList::parameters.body,
   "Parameters supplied to specify which Managed Network deployment status is."
 );

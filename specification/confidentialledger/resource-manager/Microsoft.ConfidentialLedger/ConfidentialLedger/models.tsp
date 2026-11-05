@@ -321,6 +321,14 @@ model LedgerProperties {
    * The SCITT Configuration that needs to be set for the Confidential Ledger.
    */
   scittConfiguration?: string;
+
+  /**
+   * Current storage usage of the Confidential Ledger, in bytes.
+   */
+  @added(Versions.v2026_05_22_preview)
+  @minValue(0)
+  @visibility(Lifecycle.Read)
+  storageUsageBytes?: int64;
 }
 
 /**
@@ -418,6 +426,7 @@ model ConfidentialLedgerRestore {
 /**
  * Object representing the restore response of a Confidential Ledger Resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @removed(Versions.v2026_02_23)
 model ConfidentialLedgerRestoreResponse {
   /**
@@ -553,6 +562,7 @@ model ManagedCCFBackup {
  * Object representing the backup response of a Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @removed(Versions.v2026_02_23)
 model ManagedCCFBackupResponse {
   /**
@@ -589,6 +599,7 @@ model ManagedCCFRestore {
  * Object representing the restore response of a Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @removed(Versions.v2026_02_23)
 model ManagedCCFRestoreResponse {
   /**

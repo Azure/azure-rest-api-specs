@@ -1,10 +1,16 @@
 import "../common/models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const RedTeamsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.red_teams_v1_preview],
+};
+
 @doc("Strategies for attacks.")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 union AttackStrategy {
   string,
 
@@ -94,6 +100,7 @@ union AttackStrategy {
 }
 
 @doc("Risk category for the attack objective.")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 union RiskCategory {
   string,
 
@@ -129,6 +136,7 @@ union RiskCategory {
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 model AzureOpenAIModelConfiguration extends RedTeamTargetConfig {
   type: "AzureOpenAIModel";
 
@@ -138,6 +146,7 @@ model AzureOpenAIModelConfiguration extends RedTeamTargetConfig {
 
 @doc("Abstract class for target configuration.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 model RedTeamTargetConfig {
   @doc("Type of the model configuration.")
   type: string;
@@ -145,6 +154,7 @@ model RedTeamTargetConfig {
 
 @doc("Red team details.")
 @resource("runs")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 model RedTeam {
   @doc("Identifier of the red team run.")
   @key("name")
@@ -161,7 +171,7 @@ model RedTeam {
   @doc("List of attack strategies or nested lists of attack strategies.")
   attackStrategies?: AttackStrategy[];
 
-  @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
+  @doc("Simulation-only or Simulation + Evaluation. If `true` the scan outputs conversation not evaluation result. The service defaults to `false` if a value is not specified by the caller.")
   simulationOnly?: boolean = false;
 
   @doc("List of risk categories to generate attack objectives for.")

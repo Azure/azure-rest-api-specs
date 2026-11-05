@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./workspace.models.tsp";
 import "./workspaceEvaluation.models.tsp";
+import "./workspaceDiscovery.models.tsp";
 import "./lro-helpers.tsp";
 
 using Azure.ResourceManager;
@@ -15,7 +16,6 @@ using TypeSpec.Rest;
 namespace Microsoft.Chaos;
 
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 @armResourceOperations
 interface Workspaces {
   /**
@@ -29,7 +29,7 @@ interface Workspaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
 
   /**
-   * The operation to update a Workspace.
+   * Update a Workspace.
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Workspace, WorkspaceUpdate>;
@@ -73,7 +73,30 @@ interface Workspaces {
    * Refreshes recommendation status for all scenarios in a given workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   refreshRecommendations is ArmResourceActionNoContentAsyncWithLocationResult<
+    Workspace,
+    void,
+    WorkspaceEvaluation
+  >;
+
+  /**
+   * Triggers resource discovery for the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  discover is ArmResourceActionNoContentAsyncWithLocationResult<
+    Workspace,
+    void,
+    WorkspaceDiscovery
+  >;
+
+  /**
+   * Triggers scenario evaluation for the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  evaluate is ArmResourceActionNoContentAsyncWithLocationResult<
     Workspace,
     void,
     WorkspaceEvaluation
@@ -83,9 +106,11 @@ interface Workspaces {
 @@minLength(Workspace.name, 1);
 @@doc(Workspace.name, "String that represents a Workspace resource name.");
 @@doc(Workspace.properties, "The properties of the Workspace resource.");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "Workspace resource to be created or updated."
 );
-@@doc(Workspaces.update::parameters.properties,
+@@doc(
+  Workspaces.update::parameters.properties,
   "Parameters supplied to the Update Workspace operation."
 );

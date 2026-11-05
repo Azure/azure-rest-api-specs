@@ -7,26 +7,31 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
 // PrivateEndpointConnections interface operations with PrivateAccesses_ prefix
-@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
+@@clientLocation(
+  PrivateEndpointConnections.getAPrivateEndpointConnection,
   PrivateAccesses,
   "!csharp"
 );
-@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
+@@clientLocation(
+  PrivateEndpointConnections.deleteAPrivateEndpointConnection,
   PrivateAccesses,
   "!csharp"
 );
-@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
+@@clientLocation(
+  PrivateEndpointConnections.listPrivateEndpointConnections,
   PrivateAccesses,
   "!csharp"
 );
 
 // ExperimentExecutions interface operations with Experiments_ prefix
 @@clientLocation(ExperimentExecutions.getExecution, Experiments, "!csharp");
-@@clientLocation(ExperimentExecutions.listAllExecutions,
+@@clientLocation(
+  ExperimentExecutions.listAllExecutions,
   Experiments,
   "!csharp"
 );
-@@clientLocation(ExperimentExecutions.getExecutionDetails,
+@@clientLocation(
+  ExperimentExecutions.getExecutionDetails,
   Experiments,
   "!csharp"
 );
@@ -37,44 +42,54 @@ using Microsoft.Chaos;
 
 // Flatten properties for Action resources
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Action.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Action.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ActionVersion.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ActionVersion.properties,
   "autorest"
 );
 
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Capability.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Capability.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapabilityType.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CapabilityType.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecution.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ExperimentExecution.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateAccess.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateAccess.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Target.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Target.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TargetType.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TargetType.properties,
   "autorest"
 );

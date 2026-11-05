@@ -2,13 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
-import "@typespec/openapi";
 
 using Azure.ResourceManager;
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
 
@@ -22,17 +20,14 @@ namespace Microsoft.Chaos;
  * @template BaseParameters Optional. Allows overriding the parameters for the operation
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for LRO extensions in OpenAPI output"
 @autoRoute
 @armResourceAction(Resource)
 @post
-@extension("x-ms-long-running-operation", true)
-@extension(
-  "x-ms-long-running-operation-options",
-  #{ `final-state-via`: "location" }
-)
+@Azure.Core.useFinalStateVia("location")
 op ArmResourceActionAsyncWithLocation<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
@@ -41,11 +36,14 @@ op ArmResourceActionAsyncWithLocation<
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   @bodyRoot body?: Request,
-): ArmResponse<Response> | ArmAcceptedLroResponse<
-  "Resource operation accepted.",
-  ArmLroLocationHeader<FinalResult = Response> &
-    Azure.Core.Foundations.RetryAfterHeader
-> | ErrorResponse;
+):
+  | ArmResponse<Response>
+  | ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader<FinalResult = Response> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  | ErrorResponse;
 
 /**
  * A long-running resource action that returns 202 No Content on the initial POST,
@@ -62,17 +60,14 @@ op ArmResourceActionAsyncWithLocation<
  * @template BaseParameters Optional. Allows overriding the parameters for the operation
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for LRO extensions in OpenAPI output"
 @autoRoute
 @armResourceAction(Resource)
 @post
-@extension("x-ms-long-running-operation", true)
-@extension(
-  "x-ms-long-running-operation-options",
-  #{ `final-state-via`: "location" }
-)
+@Azure.Core.useFinalStateVia("location")
 op ArmResourceActionNoContentAsyncWithLocationResult<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
@@ -81,11 +76,13 @@ op ArmResourceActionNoContentAsyncWithLocationResult<
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   @bodyRoot body?: Request,
-): ArmAcceptedLroResponse<
-  "Resource operation accepted.",
-  ArmLroLocationHeader<FinalResult = FinalResult> &
-    Azure.Core.Foundations.RetryAfterHeader
-> | ErrorResponse;
+):
+  | ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader<FinalResult = FinalResult> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  | ErrorResponse;
 
 /**
  * A long-running resource action that returns no body on completion (204 No Content).
@@ -100,17 +97,14 @@ op ArmResourceActionNoContentAsyncWithLocationResult<
  * @template BaseParameters Optional. Allows overriding the parameters for the operation
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for LRO extensions in OpenAPI output"
 @autoRoute
 @armResourceAction(Resource)
 @post
-@extension("x-ms-long-running-operation", true)
-@extension(
-  "x-ms-long-running-operation-options",
-  #{ `final-state-via`: "location" }
-)
+@Azure.Core.useFinalStateVia("location")
 op ArmResourceActionNoBodyAsyncWithLocation<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
@@ -118,11 +112,14 @@ op ArmResourceActionNoBodyAsyncWithLocation<
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   @bodyRoot body?: Request,
-): ArmAcceptedLroResponse<
-  "Resource operation accepted.",
-  ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-> | {
-  @doc("The operation completed successfully with no content.")
-  @statusCode
-  _: 204;
-} | ErrorResponse;
+):
+  | ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
+  | {
+      @doc("The operation completed successfully with no content.")
+      @statusCode
+      _: 204;
+    }
+  | ErrorResponse;

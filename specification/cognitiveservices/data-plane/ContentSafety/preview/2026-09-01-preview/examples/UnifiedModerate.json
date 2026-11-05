@@ -1,0 +1,75 @@
+{
+  "title": "Moderate content using an ACS policy",
+  "operationId": "UnifiedOperations_UnifiedModerate",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "body": {
+      "policyId": "bank-agent-policy",
+      "source": "input",
+      "content": "I will hurt that person",
+      "context": {
+        "agentId": "bank-agent",
+        "sessionId": "example-session",
+        "sequence": 0,
+        "correlationId": "client-correlation",
+        "userId": "user-123",
+        "tenantId": "tenant-123",
+        "extensions": "{}"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "verdict": "blocked",
+        "reason": "content_policy_violation",
+        "acsVerdict": {
+          "decision": "deny",
+          "reason": "content_policy_violation",
+          "warnings": [],
+          "evidence": [],
+          "harmResults": {
+            "Hate": {
+              "blocked": false,
+              "detected": false,
+              "severity": "safe"
+            },
+            "Sexual": {
+              "blocked": false,
+              "detected": false,
+              "severity": "safe"
+            },
+            "SelfHarm": {
+              "blocked": false,
+              "detected": false,
+              "severity": "safe"
+            },
+            "Violence": {
+              "blocked": true,
+              "detected": true,
+              "severity": "high"
+            },
+            "Blocklist": {
+              "blocked": true,
+              "detected": true,
+              "details": [
+                {
+                  "detected": true,
+                  "id": "restricted-terms"
+                },
+                {
+                  "detected": false,
+                  "id": "sensitive-topics"
+                }
+              ]
+            },
+            "Jailbreak": {
+              "blocked": true,
+              "detected": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

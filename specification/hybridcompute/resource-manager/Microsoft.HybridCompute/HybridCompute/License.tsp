@@ -33,7 +33,7 @@ interface Licenses {
   /**
    * The operation to create or update a license.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @tag("licenses")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     License,
@@ -58,13 +58,15 @@ interface Licenses {
   /**
    * The operation to delete a license.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @tag("licenses")
   delete is ArmResourceDeleteWithoutOkAsync<
     License,
-    Response = (ArmDeletedResponse &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeletedResponse &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -88,9 +90,11 @@ interface Licenses {
 
 @@doc(License.name, "The name of the license.");
 @@doc(License.properties, "Hybrid Compute License properties");
-@@doc(Licenses.createOrUpdate::parameters.resource,
+@@doc(
+  Licenses.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create license operation."
 );
-@@doc(Licenses.update::parameters.properties,
+@@doc(
+  Licenses.update::parameters.properties,
   "Parameters supplied to the Update license operation."
 );

@@ -286,6 +286,7 @@ model SystemData {
 /**
  * Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -819,6 +820,7 @@ model BulkCollectionsResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OfferListResponse is Azure.Core.Page<Offer>;
 
 /**

@@ -19,6 +19,7 @@ import "./JoinRequestDetails.tsp";
 import "./StudentDetails.tsp";
 import "./StudentLabDetails.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -62,6 +63,7 @@ interface Operations {
   ): ArmResponse<OperationListResult> | DefaultErrorResponse;
 }
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Microsoft.Education API operations."
 );

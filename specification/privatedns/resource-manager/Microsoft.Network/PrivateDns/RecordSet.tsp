@@ -173,13 +173,16 @@ interface RecordSets {
   >;
 }
 
-@@doc(RecordSet.name,
+@@doc(
+  RecordSet.name,
   "The name of the record set, relative to the name of the zone."
 );
 @@doc(RecordSet.properties, "The properties of the record set.");
-@@doc(RecordSets.createOrUpdate::parameters.resource,
+@@doc(
+  RecordSets.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(RecordSets.update::parameters.properties,
+@@doc(
+  RecordSets.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

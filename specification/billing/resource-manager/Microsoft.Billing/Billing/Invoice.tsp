@@ -58,7 +58,8 @@ alias InvoiceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$")
     invoiceName: string;
-  }
+  },
+  "BillingInvoice"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -159,6 +160,7 @@ interface Invoices {
       /**
        * The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing downloadByBillingAccount POST contract uses documentName in the query; preserve wire compatibility."
       @query("documentName")
       documentName?: string;
     }
@@ -300,7 +302,8 @@ alias InvoiceByBillingSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOp
     @key
     @pattern("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$")
     invoiceName: string;
-  }
+  },
+  "SubscriptionBillingInvoice"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -388,6 +391,7 @@ interface InvoiceByBillingSubscription {
       /**
        * The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing downloadByBillingSubscription POST contract uses documentName in the query; preserve wire compatibility."
       @query("documentName")
       documentName?: string;
     }
@@ -417,7 +421,8 @@ alias InvoiceByIdOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$")
     invoiceName: string;
-  }
+  },
+  "DefaultBillingInvoice"
 >;
 
 @armResourceOperations(#{ omitTags: true })

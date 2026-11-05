@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database sync agent.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 model SyncAgent is Azure.ResourceManager.ProxyResource<SyncAgentProperties> {
   ...ResourceNameParameter<
     Resource = SyncAgent,
@@ -24,7 +26,9 @@ model SyncAgent is Azure.ResourceManager.ProxyResource<SyncAgentProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 interface SyncAgents {
   /**
    * Gets a sync agent.
@@ -37,11 +41,14 @@ interface SyncAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SyncAgent,
-    Response = ArmResourceUpdatedResponse<SyncAgent> | ArmResourceCreatedResponse<
-      SyncAgent,
-      ArmLroLocationHeader<FinalResult = SyncAgent> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<SyncAgent>
+      | ArmResourceCreatedResponse<
+          SyncAgent,
+          ArmLroLocationHeader<FinalResult = SyncAgent> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -50,7 +57,10 @@ interface SyncAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SyncAgent,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -82,6 +92,7 @@ interface SyncAgents {
 
 @@doc(SyncAgent.name, "The name of the sync agent.");
 @@doc(SyncAgent.properties, "Resource properties.");
-@@doc(SyncAgents.createOrUpdate::parameters.resource,
+@@doc(
+  SyncAgents.createOrUpdate::parameters.resource,
   "The requested sync agent resource state."
 );

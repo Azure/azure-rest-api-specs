@@ -60,6 +60,7 @@ interface FirewallPolicyDrafts {
 
 @@doc(FirewallPolicyDraft.name, "");
 @@doc(FirewallPolicyDraft.properties, "Properties of the firewall policy.");
-@@doc(FirewallPolicyDrafts.createOrUpdate::parameters.resource,
+@@doc(
+  FirewallPolicyDrafts.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Firewall Policy Draft operation."
 );

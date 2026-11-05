@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ThroughputPoolResource.tsp";
 
@@ -9,12 +10,15 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Throughputpool Account
  */
+@removed(Versions.v2026_07_15)
 @parentResource(ThroughputPoolResource)
+@added(Versions.v2026_04_01_preview)
 model ThroughputPoolAccountResource
   is Azure.ResourceManager.ProxyResource<ThroughputPoolAccountProperties> {
   ...ResourceNameParameter<
@@ -25,6 +29,8 @@ model ThroughputPoolAccountResource
   >;
 }
 
+@removed(Versions.v2026_07_15)
+@added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ThroughputPoolAccountResources {
   /**
@@ -42,7 +48,9 @@ interface ThroughputPoolAccountResources {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ThroughputPoolAccountResource,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -56,12 +64,15 @@ interface ThroughputPoolAccountResources {
 
 @@maxLength(ThroughputPoolAccountResource.name, 50);
 @@minLength(ThroughputPoolAccountResource.name, 3);
-@@doc(ThroughputPoolAccountResource.name,
+@@doc(
+  ThroughputPoolAccountResource.name,
   "Cosmos DB global database account in a Throughput Pool"
 );
-@@doc(ThroughputPoolAccountResource.properties,
+@@doc(
+  ThroughputPoolAccountResource.properties,
   "An Azure Cosmos DB Global Database Account which is part of a Throughputpool."
 );
-@@doc(ThroughputPoolAccountResources.create::parameters.resource,
+@@doc(
+  ThroughputPoolAccountResources.create::parameters.resource,
   "The parameters to provide for the current ThroughputPoolAccount."
 );

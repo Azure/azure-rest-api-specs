@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A instance pool operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(InstancePool)
+@Azure.ResourceManager.Legacy.feature(Features.InstancePoolOperations)
 model InstancePoolOperation
   is Azure.ResourceManager.ProxyResource<InstancePoolOperationProperties> {
   ...ResourceNameParameter<
@@ -25,7 +27,9 @@ model InstancePoolOperation
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.InstancePoolOperations)
 interface InstancePoolOperations {
   /**
    * Gets a management operation on a instance pool.

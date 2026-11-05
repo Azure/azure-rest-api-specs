@@ -35009,6 +35009,71 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}": {
+      "patch": {
+        "operationId": "StaticSites_UpdateStaticSiteUser",
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Updates a user entry with the listed roles",
+        "description": "Description for Updates a user entry with the listed roles",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authprovider",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteUserEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the StaticSiteUser properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserARMResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserARMResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a user for a static site": {
+            "$ref": "./examples/UpdateStaticSiteUser.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "StaticSites_DeleteStaticSiteUser",
         "tags": [
@@ -39069,73 +39134,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}": {
-      "patch": {
-        "operationId": "StaticSites_UpdateStaticSiteUser",
-        "tags": [
-          "StaticSites"
-        ],
-        "summary": "Updates a user entry with the listed roles",
-        "description": "Description for Updates a user entry with the listed roles",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authprovider",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "userid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "staticSiteUserEnvelope",
-            "in": "body",
-            "description": "A JSON representation of the StaticSiteUser properties. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserARMResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserARMResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a user for a static site": {
-            "$ref": "./examples/UpdateStaticSiteUser.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
       "post": {
         "operationId": "ValidateMove",
@@ -41122,7 +41120,8 @@
       "x-ms-enum": {
         "name": "BackupItemStatus",
         "modelAsString": false
-      }
+      },
+      "readOnly": true
     },
     "BackupRequest": {
       "type": "object",
@@ -42695,7 +42694,8 @@
       "x-ms-enum": {
         "name": "CustomDnsSuffixProvisioningState",
         "modelAsString": false
-      }
+      },
+      "readOnly": true
     },
     "CustomDomainStatus": {
       "type": "string",
@@ -45380,7 +45380,7 @@
         "maximumInstanceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of instances for the function app."
+          "description": "The maximum number of on demand instances per function group."
         },
         "instanceMemoryMB": {
           "type": "integer",
@@ -46870,7 +46870,8 @@
       "x-ms-enum": {
         "name": "KubeEnvironmentProvisioningState",
         "modelAsString": false
-      }
+      },
+      "readOnly": true
     },
     "LegacyMicrosoftAccount": {
       "type": "object",
@@ -47939,7 +47940,8 @@
       "x-ms-enum": {
         "name": "OperationStatus",
         "modelAsString": false
-      }
+      },
+      "readOnly": true
     },
     "OutboundEnvironmentEndpoint": {
       "type": "object",
@@ -49016,7 +49018,8 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": false
-      }
+      },
+      "readOnly": true
     },
     "ProxyOnlyResource": {
       "type": "object",
@@ -51940,7 +51943,8 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state."
+          "description": "Provisioning state.",
+          "readOnly": true
         },
         "comment": {
           "type": "string",
@@ -53546,7 +53550,8 @@
         },
         "repositoryToken": {
           "type": "string",
-          "description": "A user's github repository token. This is used to setup the Github Actions workflow file and API secrets."
+          "description": "A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.",
+          "x-ms-secret": true
         },
         "buildProperties": {
           "$ref": "#/definitions/StaticSiteBuildProperties",
@@ -56980,7 +56985,8 @@
             "value": "InProgress"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "WorkflowResource": {
       "type": "object",
@@ -57532,7 +57538,8 @@
             "value": "Ignored"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "WorkflowTrigger": {
       "type": "object",
@@ -57894,7 +57901,8 @@
             "value": "Completed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "WorkflowTriggerRecurrence": {
       "type": "object",

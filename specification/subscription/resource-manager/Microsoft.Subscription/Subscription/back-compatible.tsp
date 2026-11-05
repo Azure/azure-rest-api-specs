@@ -9,43 +9,53 @@ using Microsoft.Subscription;
 @@clientLocation(SubscriptionAliasResponses.delete, "Alias", "!csharp");
 @@clientLocation(SubscriptionAliasResponses.list, "Alias", "!csharp");
 
-@@clientLocation(GetTenantPolicyResponses.getPolicyForTenant,
+@@clientLocation(
+  GetTenantPolicyResponses.getPolicyForTenant,
   "SubscriptionPolicy",
   "!csharp"
 );
-@@clientLocation(GetTenantPolicyResponses.addUpdatePolicyForTenant,
+@@clientLocation(
+  GetTenantPolicyResponses.addUpdatePolicyForTenant,
   "SubscriptionPolicy",
   "!csharp"
 );
-@@clientName(GetTenantPolicyResponses.addUpdatePolicyForTenant::parameters.resource,
+@@clientName(
+  GetTenantPolicyResponses.addUpdatePolicyForTenant::parameters.resource,
   "body"
 );
-@@clientLocation(GetTenantPolicyResponses.listPolicyForTenant,
+@@clientLocation(
+  GetTenantPolicyResponses.listPolicyForTenant,
   "SubscriptionPolicy",
   "!csharp"
 );
 
-@@clientLocation(BillingAccountPoliciesResponses.getPolicy,
+@@clientLocation(
+  BillingAccountPoliciesResponses.getPolicy,
   "BillingAccount",
   "!csharp"
 );
 
-@@clientLocation(TargetDirectoryResults.getTargetDirectory,
+@@clientLocation(
+  TargetDirectoryResults.getTargetDirectory,
   "Subscriptions",
   "!csharp"
 );
-@@clientLocation(TargetDirectoryResults.putTargetDirectory,
+@@clientLocation(
+  TargetDirectoryResults.putTargetDirectory,
   "Subscriptions",
   "!csharp"
 );
-@@clientName(TargetDirectoryResults.putTargetDirectory::parameters.resource,
+@@clientName(
+  TargetDirectoryResults.putTargetDirectory::parameters.resource,
   "body"
 );
-@@clientLocation(TargetDirectoryResults.deleteTargetDirectory,
+@@clientLocation(
+  TargetDirectoryResults.deleteTargetDirectory,
   "Subscriptions",
   "!csharp"
 );
-@@clientLocation(TargetDirectoryResults.listTargetDirectory,
+@@clientLocation(
+  TargetDirectoryResults.listTargetDirectory,
   "Subscriptions",
   "!csharp"
 );
@@ -53,25 +63,30 @@ using Microsoft.Subscription;
 @@clientLocation(SubscriptionOperationGroup.cancel, "Subscription", "!csharp");
 @@clientLocation(SubscriptionOperationGroup.rename, "Subscription", "!csharp");
 @@clientLocation(SubscriptionOperationGroup.enable, "Subscription", "!csharp");
-@@clientLocation(SubscriptionOperationGroup.acceptOwnership,
+@@clientLocation(
+  SubscriptionOperationGroup.acceptOwnership,
   "Subscription",
   "!csharp"
 );
-@@clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus,
+@@clientLocation(
+  SubscriptionOperationGroup.acceptOwnershipStatus,
   "Subscription",
   "!csharp"
 );
 
-@@clientLocation(SubscriptionOperationOperationGroup.get,
+@@clientLocation(
+  SubscriptionOperationOperationGroup.get,
   "SubscriptionOperation",
   "!csharp"
 );
 
-@@clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory,
+@@clientLocation(
+  SubscriptionsOperationGroup.acceptTargetDirectory,
   "Subscriptions",
   "!csharp"
 );
-@@clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus,
+@@clientLocation(
+  SubscriptionsOperationGroup.targetDirectoryStatus,
   "Subscriptions",
   "!csharp"
 );

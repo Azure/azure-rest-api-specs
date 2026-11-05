@@ -190,12 +190,13 @@ interface CloudHsmClusters {
   cloudHsmClusterBackupStatusGet is CloudHsmClustersOps.ActionSync<
     CloudHsmCluster,
     void,
-    Response = (BackupResult &
-      Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
-      @header("Location")
-      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-      location?: string;
-    } & Azure.Core.RequestIdResponseHeader>,
+    Response =
+      | (BackupResult & Azure.Core.RequestIdResponseHeader)
+      | ArmAcceptedResponse<ExtraHeaders = {
+          @header("Location")
+          @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+          location?: string;
+        } & Azure.Core.RequestIdResponseHeader>,
     Parameters = {
       /**
        * Identifier for the backup operation
@@ -214,12 +215,13 @@ interface CloudHsmClusters {
   cloudHsmClusterRestoreStatusGet is CloudHsmClustersOps.ActionSync<
     CloudHsmCluster,
     void,
-    Response = (RestoreResult &
-      Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
-      @header("Location")
-      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-      location?: string;
-    } & Azure.Core.RequestIdResponseHeader>,
+    Response =
+      | (RestoreResult & Azure.Core.RequestIdResponseHeader)
+      | ArmAcceptedResponse<ExtraHeaders = {
+          @header("Location")
+          @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+          location?: string;
+        } & Azure.Core.RequestIdResponseHeader>,
     Parameters = {
       /**
        * Identifier for the restore operation
@@ -234,23 +236,29 @@ interface CloudHsmClusters {
 
 @@maxLength(CloudHsmCluster.name, 23);
 @@minLength(CloudHsmCluster.name, 3);
-@@doc(CloudHsmCluster.name,
+@@doc(
+  CloudHsmCluster.name,
   "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 23 characters in length."
 );
 @@doc(CloudHsmCluster.properties, "Properties of the Cloud HSM Cluster");
-@@doc(CloudHsmClusters.createOrUpdate::parameters.resource,
+@@doc(
+  CloudHsmClusters.createOrUpdate::parameters.resource,
   "Parameters to create Cloud HSM Cluster"
 );
-@@doc(CloudHsmClusters.update::parameters.properties,
+@@doc(
+  CloudHsmClusters.update::parameters.properties,
   "Parameters to create Cloud HSM Cluster"
 );
-@@doc(CloudHsmClusters.restore::parameters.body,
+@@doc(
+  CloudHsmClusters.restore::parameters.body,
   "Restore Operation Required properties"
 );
-@@doc(CloudHsmClusters.validateRestoreProperties::parameters.body,
+@@doc(
+  CloudHsmClusters.validateRestoreProperties::parameters.body,
   "Optional Parameters to validate prior performing a restore operation."
 );
 @@doc(CloudHsmClusters.backup::parameters.body, "Azure storage Resource Uri");
-@@doc(CloudHsmClusters.validateBackupProperties::parameters.body,
+@@doc(
+  CloudHsmClusters.validateBackupProperties::parameters.body,
   "Backup Operation Required properties"
 );

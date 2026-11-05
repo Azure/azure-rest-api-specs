@@ -71,6 +71,7 @@ interface ExpressRouteProviderPorts {
 }
 
 @@doc(ExpressRouteProviderPort.name, "The name of the provider port.");
-@@doc(ExpressRouteProviderPort.properties,
+@@doc(
+  ExpressRouteProviderPort.properties,
   "Properties of the express route Service Provider Port."
 );

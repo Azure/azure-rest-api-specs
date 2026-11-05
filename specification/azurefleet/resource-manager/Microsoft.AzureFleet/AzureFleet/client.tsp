@@ -20,15 +20,18 @@ using TypeSpec.Versioning;
 @@clientName(DiffDiskPlacement, "ComputeFleetDiffDiskPlacement", "csharp");
 @@clientName(DiffDiskSettings, "ComputeFleetDiffDiskSettings", "csharp");
 @@clientName(DiskControllerTypes, "ComputeFleetDiskControllerType", "csharp");
-@@clientName(DiskCreateOptionTypes,
+@@clientName(
+  DiskCreateOptionTypes,
   "ComputeFleetDiskCreateOptionType",
   "csharp"
 );
-@@clientName(DiskDeleteOptionTypes,
+@@clientName(
+  DiskDeleteOptionTypes,
   "ComputeFleetDiskDeleteOptionType",
   "csharp"
 );
-@@clientName(DomainNameLabelScopeTypes,
+@@clientName(
+  DomainNameLabelScopeTypes,
   "ComputeFleetDomainNameLabelScopeType",
   "csharp"
 );
@@ -37,39 +40,47 @@ using TypeSpec.Versioning;
 @@clientName(ImageReference, "ComputeFleetImageReference", "csharp");
 @@clientName(InnerError, "ComputeFleetInnerError", "csharp");
 @@clientName(IPVersion, "ComputeFleetIPVersion", "csharp");
-@@clientName(KeyVaultSecretReference,
+@@clientName(
+  KeyVaultSecretReference,
   "ComputeFleetKeyVaultSecretReference",
   "csharp"
 );
 @@clientName(LinuxConfiguration, "ComputeFleetLinuxConfiguration", "csharp");
-@@clientName(LinuxPatchAssessmentMode,
+@@clientName(
+  LinuxPatchAssessmentMode,
   "ComputeFleetLinuxPatchAssessmentMode",
   "csharp"
 );
 @@clientName(LinuxPatchSettings, "ComputeFleetLinuxPatchSettings", "csharp");
-@@clientName(LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
   "ComputeFleetLinuxVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
-@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings,
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings,
   "ComputeFleetLinuxVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
-@@clientName(LinuxVMGuestPatchMode,
+@@clientName(
+  LinuxVMGuestPatchMode,
   "ComputeFleetLinuxVmGuestPatchMode",
   "csharp"
 );
 @@clientName(NetworkApiVersion, "ComputeFleetNetworkApiVersion", "csharp");
-@@clientName(NetworkInterfaceAuxiliaryMode,
+@@clientName(
+  NetworkInterfaceAuxiliaryMode,
   "ComputeFleetNetworkInterfaceAuxiliaryMode",
   "csharp"
 );
-@@clientName(NetworkInterfaceAuxiliarySku,
+@@clientName(
+  NetworkInterfaceAuxiliarySku,
   "ComputeFleetNetworkInterfaceAuxiliarySku",
   "csharp"
 );
 @@clientName(OperatingSystemTypes, "ComputeFleetOperatingSystemType", "csharp");
-@@clientName(OSImageNotificationProfile,
+@@clientName(
+  OSImageNotificationProfile,
   "ComputeFleetOSImageNotificationProfile",
   "csharp"
 );
@@ -77,35 +88,43 @@ using TypeSpec.Versioning;
 @@clientName(ProvisioningState, "ComputeFleetProvisioningState", "csharp");
 @@clientName(ProxyAgentSettings, "ComputeFleetProxyAgentSettings", "csharp");
 @@clientName(PublicIPAddressSku, "ComputeFleetPublicIPAddressSku", "csharp");
-@@clientName(PublicIPAddressSkuName,
+@@clientName(
+  PublicIPAddressSkuName,
   "ComputeFleetPublicIPAddressSkuName",
   "csharp"
 );
-@@clientName(PublicIPAddressSkuTier,
+@@clientName(
+  PublicIPAddressSkuTier,
   "ComputeFleetPublicIPAddressSkuTier",
   "csharp"
 );
-@@clientName(ScheduledEventsProfile,
+@@clientName(
+  ScheduledEventsProfile,
   "ComputeFleetScheduledEventsProfile",
   "csharp"
 );
-@@clientName(ScheduledEventsProfile.osImageNotificationProfile,
+@@clientName(
+  ScheduledEventsProfile.osImageNotificationProfile,
   "OSImageNotificationProfile",
   "csharp"
 );
-@@clientName(SecurityEncryptionTypes,
+@@clientName(
+  SecurityEncryptionTypes,
   "ComputeFleetSecurityEncryptionType",
   "csharp"
 );
-@@clientName(SecurityEncryptionTypes.DiskWithVMGuestState,
+@@clientName(
+  SecurityEncryptionTypes.DiskWithVMGuestState,
   "DiskWithVmGuestState",
   "csharp"
 );
-@@clientName(SecurityEncryptionTypes.VMGuestStateOnly,
+@@clientName(
+  SecurityEncryptionTypes.VMGuestStateOnly,
   "VmGuestStateOnly",
   "csharp"
 );
-@@clientName(SecurityPostureReference,
+@@clientName(
+  SecurityPostureReference,
   "ComputeFleetSecurityPostureReference",
   "csharp"
 );
@@ -115,7 +134,8 @@ using TypeSpec.Versioning;
 @@clientName(SshConfiguration, "ComputeFleetSshConfiguration", "csharp");
 @@clientName(SshPublicKey, "ComputeFleetSshPublicKey", "csharp");
 @@clientName(StorageAccountTypes, "ComputeFleetStorageAccountType", "csharp");
-@@clientName(TerminateNotificationProfile,
+@@clientName(
+  TerminateNotificationProfile,
   "ComputeFleetTerminateNotificationProfile",
   "csharp"
 );
@@ -123,33 +143,40 @@ using TypeSpec.Versioning;
 @@clientName(VaultCertificate, "ComputeFleetVaultCertificate", "csharp");
 @@clientName(VaultSecretGroup, "ComputeFleetVaultSecretGroup", "csharp");
 @@clientName(VirtualHardDisk, "ComputeFleetVirtualHardDisk", "csharp");
-@@clientName(VMDiskSecurityProfile,
+@@clientName(
+  VMDiskSecurityProfile,
   "ComputeFleetVmDiskSecurityProfile",
   "csharp"
 );
-@@clientName(VMGalleryApplication,
+@@clientName(
+  VMGalleryApplication,
   "ComputeFleetVmGalleryApplication",
   "csharp"
 );
 @@clientName(VmSizeProfile, "ComputeFleetVmSizeProfile", "csharp");
 @@clientName(VMSizeProperties, "ComputeFleetVmSizeProperties", "csharp");
-@@clientName(WindowsConfiguration,
+@@clientName(
+  WindowsConfiguration,
   "ComputeFleetWindowsConfiguration",
   "csharp"
 );
-@@clientName(WindowsPatchAssessmentMode,
+@@clientName(
+  WindowsPatchAssessmentMode,
   "ComputeFleetWindowsPatchAssessmentMode",
   "csharp"
 );
-@@clientName(WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
   "ComputeFleetWindowsVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
-@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings,
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings,
   "ComputeFleetWindowsVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
-@@clientName(WindowsVMGuestPatchMode,
+@@clientName(
+  WindowsVMGuestPatchMode,
   "ComputeFleetWindowsVmGuestPatchMode",
   "csharp"
 );
@@ -160,7 +187,8 @@ using TypeSpec.Versioning;
 @@clientName(FleetProperties, "ComputeFleetProperties", "csharp");
 @@clientName(FleetProperties.timeCreated, "CreatedOn", "csharp");
 
-@@clientName(AdditionalUnattendContent,
+@@clientName(
+  AdditionalUnattendContent,
   "WindowsSetupAdditionalInformation",
   "csharp"
 );
@@ -178,20 +206,24 @@ using TypeSpec.Versioning;
 @@clientName(DiskControllerTypes.NVMe, "Nvme", "csharp");
 @@clientName(DiskControllerTypes.SCSI, "Scsi", "csharp");
 
-@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+@@clientName(
+  LinuxConfiguration.disablePasswordAuthentication,
   "IsPasswordAuthenticationDisabled",
   "csharp"
 );
 
-@@clientName(LinuxConfiguration.provisionVMAgent,
+@@clientName(
+  LinuxConfiguration.provisionVMAgent,
   "IsVmAgentProvisioned",
   "csharp"
 );
-@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
+@@clientName(
+  LinuxConfiguration.enableVMAgentPlatformUpdates,
   "IsVmAgentPlatformUpdatesEnabled",
   "csharp"
 );
-@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
   "IsBypassPlatformSafetyChecksOnUserScheduleEnabled",
   "csharp"
 );
@@ -200,11 +232,13 @@ using TypeSpec.Versioning;
 @@clientName(PatchSettings, "ComputeFleetVmGuestPatchSettings", "csharp");
 @@clientName(PatchSettings.enableHotpatching, "IsHotPatchingEnabled", "csharp");
 @@clientName(ProxyAgentSettings.enabled, "IsEnabled", "csharp");
-@@clientName(SecurityEncryptionTypes.NonPersistedTPM,
+@@clientName(
+  SecurityEncryptionTypes.NonPersistedTPM,
   "NonPersistedTpm",
   "csharp"
 );
-@@clientName(SecurityProfile.encryptionAtHost,
+@@clientName(
+  SecurityProfile.encryptionAtHost,
   "IsEncryptionAtHostEnabled",
   "csharp"
 );
@@ -221,192 +255,237 @@ using TypeSpec.Versioning;
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
 @@clientName(UefiSettings.vTpmEnabled, "IsVTpmEnabled", "csharp");
 @@clientName(VirtualMachineScaleSet, "ComputeFleetVmss", "csharp");
-@@clientName(VirtualMachineScaleSetDataDisk,
+@@clientName(
+  VirtualMachineScaleSetDataDisk,
   "ComputeFleetVmssDataDisk",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetDataDisk.diskIOPSReadWrite,
+@@clientName(
+  VirtualMachineScaleSetDataDisk.diskIOPSReadWrite,
   "DiskIopsReadWrite",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetDataDisk.diskMBpsReadWrite,
+@@clientName(
+  VirtualMachineScaleSetDataDisk.diskMBpsReadWrite,
   "DiskMbpsReadWrite",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetDataDisk.writeAcceleratorEnabled,
+@@clientName(
+  VirtualMachineScaleSetDataDisk.writeAcceleratorEnabled,
   "IsWriteAcceleratorEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetExtension,
+@@clientName(
+  VirtualMachineScaleSetExtension,
   "ComputeFleetVmssExtension",
   "csharp"
 );
 @@clientName(VirtualMachineScaleSetExtension.type, "ExtensionType", "csharp");
-@@clientName(VirtualMachineScaleSetExtensionProfile,
+@@clientName(
+  VirtualMachineScaleSetExtensionProfile,
   "ComputeFleetVmssExtensionProfile",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetExtensionProperties,
+@@clientName(
+  VirtualMachineScaleSetExtensionProperties,
   "ComputeFleetVmssExtensionProperties",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetExtensionProperties.type,
+@@clientName(
+  VirtualMachineScaleSetExtensionProperties.type,
   "ExtensionType",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetExtensionProperties.autoUpgradeMinorVersion,
+@@clientName(
+  VirtualMachineScaleSetExtensionProperties.autoUpgradeMinorVersion,
   "ShouldAutoUpgradeMinorVersion",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetExtensionProperties.enableAutomaticUpgrade,
+@@clientName(
+  VirtualMachineScaleSetExtensionProperties.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetExtensionProperties.suppressFailures,
+@@clientName(
+  VirtualMachineScaleSetExtensionProperties.suppressFailures,
   "IsSuppressFailuresEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetHardwareProfile,
+@@clientName(
+  VirtualMachineScaleSetHardwareProfile,
   "ComputeFleetVmssHardwareProfile",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetIPConfiguration,
+@@clientName(
+  VirtualMachineScaleSetIPConfiguration,
   "ComputeFleetVmssIPConfiguration",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetIPConfigurationProperties,
+@@clientName(
+  VirtualMachineScaleSetIPConfigurationProperties,
   "ComputeFleetVmssIPConfigurationProperties",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetIPConfigurationProperties.primary,
+@@clientName(
+  VirtualMachineScaleSetIPConfigurationProperties.primary,
   "IsPrimary",
   "csharp"
 );
 @@clientName(VirtualMachineScaleSetIpTag, "ComputeFleetVmssIPTag", "csharp");
 @@clientName(VirtualMachineScaleSetIpTag.ipTagType, "IPTagType", "csharp");
-@@clientName(VirtualMachineScaleSetManagedDiskParameters,
+@@clientName(
+  VirtualMachineScaleSetManagedDiskParameters,
   "ComputeFleetVmssManagedDisk",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkConfiguration,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfiguration,
   "ComputeFleetVmssNetworkConfiguration",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkConfigurationDnsSettings,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfigurationDnsSettings,
   "ComputeFleetVmssNetworkDnsSettings",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfigurationProperties,
   "ComputeFleetVmssNetworkConfigurationProperties",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.ipConfigurations,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfigurationProperties.ipConfigurations,
   "IPConfigurations",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.primary,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfigurationProperties.primary,
   "IsPrimary",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.enableAcceleratedNetworking,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfigurationProperties.enableAcceleratedNetworking,
   "IsAcceleratedNetworkingEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.disableTcpStateTracking,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfigurationProperties.disableTcpStateTracking,
   "IsTcpStateTrackingDisabled",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.enableFpga,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfigurationProperties.enableFpga,
   "IsFpgaEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.enableIPForwarding,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfigurationProperties.enableIPForwarding,
   "IsIPForwardingEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetNetworkProfile,
+@@clientName(
+  VirtualMachineScaleSetNetworkProfile,
   "ComputeFleetVmssNetworkProfile",
   "csharp"
 );
 @@clientName(VirtualMachineScaleSetOSDisk, "ComputeFleetVmssOSDisk", "csharp");
 @@clientName(VirtualMachineScaleSetOSDisk.osType, "OSType", "csharp");
-@@clientName(VirtualMachineScaleSetOSDisk.writeAcceleratorEnabled,
+@@clientName(
+  VirtualMachineScaleSetOSDisk.writeAcceleratorEnabled,
   "IsWriteAcceleratorEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetOSProfile,
+@@clientName(
+  VirtualMachineScaleSetOSProfile,
   "ComputeFleetVmssOSProfile",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetOSProfile.allowExtensionOperations,
+@@clientName(
+  VirtualMachineScaleSetOSProfile.allowExtensionOperations,
   "AreExtensionOperationsAllowed",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetOSProfile.requireGuestProvisionSignal,
+@@clientName(
+  VirtualMachineScaleSetOSProfile.requireGuestProvisionSignal,
   "IsGuestProvisionSignalRequired",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetPublicIPAddressConfiguration,
+@@clientName(
+  VirtualMachineScaleSetPublicIPAddressConfiguration,
   "ComputeFleetVmssPublicIPAddressConfiguration",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings,
+@@clientName(
+  VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings,
   "ComputeFleetVmssPublicIPAddressDnsSettings",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationProperties,
+@@clientName(
+  VirtualMachineScaleSetPublicIPAddressConfigurationProperties,
   "ComputeFleetVmssPublicIPAddressConfigurationProperties",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationProperties.ipTags,
+@@clientName(
+  VirtualMachineScaleSetPublicIPAddressConfigurationProperties.ipTags,
   "IPTags",
   "csharp"
 );
-@@clientName(VirtualMachineScaleSetStorageProfile,
+@@clientName(
+  VirtualMachineScaleSetStorageProfile,
   "ComputeFleetVmssStorageProfile",
   "csharp"
 );
 @@clientName(VirtualMachineScaleSetStorageProfile.osDisk, "OSDisk", "csharp");
-@@clientName(VMGalleryApplication.treatFailureAsDeploymentFailure,
+@@clientName(
+  VMGalleryApplication.treatFailureAsDeploymentFailure,
   "IsTreatFailureAsDeploymentFailureEnabled",
   "csharp"
 );
-@@clientName(VMGalleryApplication.enableAutomaticUpgrade,
+@@clientName(
+  VMGalleryApplication.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
   "csharp"
 );
-@@clientName(WindowsConfiguration.provisionVMAgent,
+@@clientName(
+  WindowsConfiguration.provisionVMAgent,
   "IsVmAgentProvisioned",
   "csharp"
 );
-@@clientName(WindowsConfiguration.enableAutomaticUpdates,
+@@clientName(
+  WindowsConfiguration.enableAutomaticUpdates,
   "IsAutomaticUpdatesEnabled",
   "csharp"
 );
-@@clientName(WindowsConfiguration.enableVMAgentPlatformUpdates,
+@@clientName(
+  WindowsConfiguration.enableVMAgentPlatformUpdates,
   "IsVmAgentPlatformUpdatesEnabled",
   "csharp"
 );
-@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
   "IsBypassPlatformSafetyChecksOnUserScheduleEnabled",
   "csharp"
 );
-@@clientName(AdditionalCapabilities.hibernationEnabled,
+@@clientName(
+  AdditionalCapabilities.hibernationEnabled,
   "isHibernationEnabled",
   "csharp"
 );
-@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+@@clientName(
+  AdditionalCapabilities.ultraSSDEnabled,
   "isUltraSSDEnabled",
   "csharp"
 );
 @@clientName(VMAttributes, "ComputeFleetVmAttributes", "csharp");
 @@clientName(VMAttributes.excludedVMSizes, "ExcludedVmSizes", "csharp");
 @@clientName(VMAttributeSupport, "ComputeFleetVmAttributeSupport", "csharp");
-@@clientName(VMAttributeMinMaxDouble,
+@@clientName(
+  VMAttributeMinMaxDouble,
   "ComputeFleetVmAttributeMinMaxDouble",
   "csharp"
 );
-@@clientName(VMAttributeMinMaxInteger,
+@@clientName(
+  VMAttributeMinMaxInteger,
   "ComputeFleetVmAttributeMinMaxInteger",
   "csharp"
 );
@@ -416,15 +495,18 @@ using TypeSpec.Versioning;
 @@clientName(FleetMode, "ComputeFleetMode", "csharp");
 @@clientName(VirtualMachine, "ComputeFleetVirtualMachine", "csharp");
 @@clientName(VMOperationStatus, "ComputeFleetVmOperationStatus", "csharp");
-@@clientName(ZoneAllocationPolicy,
+@@clientName(
+  ZoneAllocationPolicy,
   "ComputeFleetZoneAllocationPolicy",
   "csharp"
 );
-@@clientName(ZoneDistributionStrategy,
+@@clientName(
+  ZoneDistributionStrategy,
   "ComputeFleetZoneDistributionStrategy",
   "csharp"
 );
-@@alternateType(FleetUpdate.plan,
+@@alternateType(
+  FleetUpdate.plan,
   Azure.ResourceManager.CommonTypes.Plan,
   "csharp"
 );

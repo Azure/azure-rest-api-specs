@@ -2,80 +2,95 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-const DataGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview
-  ],
-};
+alias DataGenerationJobsOptionalPreviewHeader = WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview>;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @tag("DataGenerationJobs")
-@removed(Versions.v1)
 interface DataGenerationJobs {
   /**
-   * Gets the details of a data generation job by its ID.
+   * Retrieves the specified data generation job and its current status.
    */
-  @summary("Get info about a data generation job.")
+  @summary("Get a data generation job")
   @route("data_generation_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  get is queryJobStatusPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
-    DataGenerationJob
+  @get
+  get is FoundryDataPlaneOperation<
+    {
+      ...DataGenerationJobsOptionalPreviewHeader;
+
+      /** The ID of the job. */
+      @path jobId: string;
+    },
+    JobStatusResponse<DataGenerationJob>
   >;
 
   /**
    * Returns a list of data generation jobs.
    */
-  @summary("Returns a list of data generation jobs")
+  @summary("List data generation jobs")
   @route("data_generation_jobs")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  list is listJobsPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
-    DataGenerationJob,
+  @get
+  @list
+  list is FoundryDataPlaneOperation<
     {
-      @doc("Filter data generation jobs by their scenario.")
-      @query
-      scenario?: DataGenerationJobScenario;
-
-      @doc("Filter data generation jobs by their type.")
-      @query(#{ explode: false })
-      type?: DataGenerationJobType[];
-    }
+      ...DataGenerationJobsOptionalPreviewHeader;
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<DataGenerationJob>
   >;
 
   /**
-   * Creates a data generation job.
+   * Submits a new data generation job for asynchronous execution.
    */
-  @summary("Creates a data generation job.")
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
+  @summary("Create a data generation job")
   @route("data_generation_jobs")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  create is postJobPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
-    DataGenerationJob
+  @pollingOperation(DataGenerationJobs.get)
+  @post
+  create is FoundryDataPlaneOperation<
+    {
+      ...DataGenerationJobsOptionalPreviewHeader;
+      ...WithOperationId;
+
+      /** The data generation job inputs to create. */
+      @body job: DataGenerationJobInputs;
+    },
+    JobCreatedResponse<DataGenerationJob>
   >;
 
   /**
-   * Cancels a data generation job by its ID.
+   * Cancels the specified data generation job if it is still in progress.
    */
-  @summary("Cancels a data generation job.")
+  @summary("Cancel a data generation job")
   @route("data_generation_jobs/{jobId}:cancel")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  cancel is cancelJobPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
-    DataGenerationJob
+  @post
+  cancel is FoundryDataPlaneOperation<
+    {
+      ...DataGenerationJobsOptionalPreviewHeader;
+
+      /** The ID of the job to cancel. */
+      @path jobId: string;
+    },
+    OkResponse & DataGenerationJob
   >;
 
   /**
-   * Deletes a data generation job by its ID.
+   * Removes the specified data generation job and its associated output.
    */
-  @summary("Deletes a data generation job.")
+  @summary("Delete a data generation job")
   @route("data_generation_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview>;
+  @delete
+  delete is FoundryDataPlaneOperation<
+    {
+      ...DataGenerationJobsOptionalPreviewHeader;
+
+      /** The ID of the job to delete. */
+      @path jobId: string;
+    },
+    NoContentResponse
+  >;
 }

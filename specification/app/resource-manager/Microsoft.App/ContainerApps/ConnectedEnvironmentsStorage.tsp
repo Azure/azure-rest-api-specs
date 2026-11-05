@@ -61,6 +61,7 @@ interface ConnectedEnvironmentsStorages {
 
 @@doc(ConnectedEnvironmentStorage.name, "Name of the storage.");
 @@doc(ConnectedEnvironmentStorage.properties, "Storage properties");
-@@doc(ConnectedEnvironmentsStorages.createOrUpdate::parameters.resource,
+@@doc(
+  ConnectedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "Configuration details of storage."
 );

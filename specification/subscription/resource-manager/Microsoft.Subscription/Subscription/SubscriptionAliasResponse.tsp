@@ -63,10 +63,12 @@ interface SubscriptionAliasResponses {
   >;
 }
 
-@@doc(SubscriptionAliasResponse.name,
+@@doc(
+  SubscriptionAliasResponse.name,
   "AliasName is the name for the subscription creation request. Note that this is not the same as subscription name and this doesn’t have any other lifecycle need beyond the request for subscription creation."
 );
-@@doc(SubscriptionAliasResponse.properties,
+@@doc(
+  SubscriptionAliasResponse.properties,
   "Subscription Alias response properties."
 );
 @@doc(SubscriptionAliasResponses.create::parameters.resource, "");

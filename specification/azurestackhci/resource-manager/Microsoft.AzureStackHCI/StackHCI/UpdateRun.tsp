@@ -54,8 +54,11 @@ interface UpdateRuns {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     UpdateRun,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -69,6 +72,7 @@ interface UpdateRuns {
 
 @@doc(UpdateRun.name, "The name of the Update Run");
 @@doc(UpdateRun.properties, "Describes Update Run Properties.");
-@@doc(UpdateRuns.put::parameters.resource,
+@@doc(
+  UpdateRuns.put::parameters.resource,
   "Properties of the updateRuns object"
 );
