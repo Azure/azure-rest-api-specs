@@ -131,7 +131,6 @@ interface AgentPools {
         ...ArmCombinedLroHeaders<FinalResult = void>;
         ...Azure.Core.Foundations.RetryAfterHeader;
 
-        @removed(Versions.v2026_09_01)
         @body
         body: AgentPool;
       }
