@@ -7,10 +7,47 @@
   "paths": {},
   "components": {
     "schemas": {
+      "Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension": {
+        "type": "string",
+        "enum": [
+          "warning",
+          "session.subagent.started",
+          "session.subagent.completed",
+          "session.subagent.aborted",
+          "session.avatar.connecting",
+          "session.avatar.switch_to_speaking",
+          "session.avatar.switch_to_idle",
+          "rtc.call.sdp.created",
+          "rtc.call.error",
+          "response.audio_timestamp.delta",
+          "response.audio_timestamp.done",
+          "response.animation_blendshapes.delta",
+          "response.animation_blendshapes.done",
+          "response.animation_viseme.delta",
+          "response.animation_viseme.done",
+          "response.video.delta",
+          "response.system_tool_arguments.delta",
+          "response.system_tool_arguments.done",
+          "input_collection.status",
+          "session.handoff.started",
+          "session.handoff.completed",
+          "session.handoff.aborted"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "FoundryDurationMilliseconds": {
         "type": "integer",
         "format": "int32",
         "description": "A duration encoded as an integer number of milliseconds."
+      },
+      "FoundryDurationSeconds": {
+        "type": "integer",
+        "format": "int32",
+        "description": "A duration encoded as an integer number of seconds."
       },
       "FoundryTimestamp": {
         "type": "integer",
@@ -591,9 +628,17 @@
             "description": "The breakpoint mode. Always `explicit`.",
             "x-stainless-const": true,
             "default": "explicit"
+          },
+          "ttl": {
+            "type": "string",
+            "enum": [
+              "30m",
+              "12h"
+            ],
+            "description": "The minimum lifetime of this cache breakpoint. Defaults to the request TTL."
           }
         },
-        "description": "Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
+        "description": "Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
         "title": "Prompt cache breakpoint"
       },
       "OpenAI.RealtimeAudioFormats": {
@@ -1159,7 +1204,7 @@
         "x-oaiMeta": {
           "name": "response.create",
           "group": "realtime",
-          "example": "// Trigger a response with the default Conversation and no special parameters\n{\n  \"type\": \"response.create\",\n}\n\n// Trigger an out-of-band response that does not write to the default Conversation\n{\n  \"type\": \"response.create\",\n  \"response\": {\n    \"instructions\": \"Provide a concise answer.\",\n    \"tools\": [], // clear any session tools\n    \"conversation\": \"none\",\n    \"output_modalities\": [\"text\"],\n    \"metadata\": {\n      \"response_purpose\": \"summarization\"\n    },\n    \"input\": [\n      {\n        \"type\": \"item_reference\",\n        \"id\": \"item_12345\"\n      },\n      {\n        \"type\": \"message\",\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"type\": \"input_text\",\n            \"text\": \"Summarize the above message in one sentence.\"\n          }\n        ]\n      }\n    ]\n  }\n}\n"
+          "example": "// Trigger a response with the default Conversation and no special parameters\n{\n  \"type\": \"response.create\"\n}\n\n// Trigger an out-of-band response that does not write to the default Conversation\n{\n  \"type\": \"response.create\",\n  \"response\": {\n    \"instructions\": \"Provide a concise answer.\",\n    \"tools\": [], // clear any session tools\n    \"conversation\": \"none\",\n    \"output_modalities\": [\"text\"],\n    \"metadata\": {\n      \"response_purpose\": \"summarization\"\n    },\n    \"input\": [\n      {\n        \"type\": \"item_reference\",\n        \"id\": \"item_12345\"\n      },\n      {\n        \"type\": \"message\",\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"type\": \"input_text\",\n            \"text\": \"Summarize the above message in one sentence.\"\n          }\n        ]\n      }\n    ]\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -1258,7 +1303,8 @@
             "mcp_approval_response": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse",
             "mcp_list_tools": "#/components/schemas/OpenAI.RealtimeMCPListTools",
             "mcp_call": "#/components/schemas/OpenAI.RealtimeMCPToolCall",
-            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest"
+            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest",
+            "system_tool": "#/components/schemas/VoiceAgentSystemToolItem"
           }
         },
         "description": "A single item within a Realtime conversation.",
@@ -1783,7 +1829,8 @@
               "mcp_list_tools",
               "mcp_call",
               "mcp_approval_request",
-              "message"
+              "message",
+              "system_tool"
             ]
           }
         ],
@@ -2221,6 +2268,13 @@
           ]
         }
       },
+      "OpenAI.RealtimeNoiseReductionStrength": {
+        "type": "number",
+        "format": "double",
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Input noise suppression strength. Higher values apply more suppression.\nDefaults to 1 when noise reduction is first enabled. Omitting strength\nfrom a session update preserves the current strength."
+      },
       "OpenAI.RealtimeReasoning": {
         "type": "object",
         "properties": {
@@ -2241,6 +2295,608 @@
           "xhigh"
         ],
         "description": "Constrains effort on reasoning for reasoning-capable Realtime models such as\n`gpt-realtime-2`."
+      },
+      "OpenAI.RealtimeResponseInputAudio": {
+        "type": "object",
+        "required": [
+          "type",
+          "audio"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_audio"
+            ]
+          },
+          "audio": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Base64 audio bytes in the session input audio format."
+          },
+          "transcript": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional text to associate with the input audio."
+          }
+        },
+        "title": "Realtime response input audio"
+      },
+      "OpenAI.RealtimeResponseInputFunctionCall": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "completed"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "arguments": {
+            "type": "string",
+            "maxLength": 1048576
+          }
+        },
+        "description": "A function call supplied as input to a Realtime response.",
+        "title": "Realtime response input function call"
+      },
+      "OpenAI.RealtimeResponseInputFunctionCallOutput": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "output"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call_output"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "completed"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "output": {
+            "type": "string",
+            "maxLength": 1048576
+          }
+        },
+        "description": "The result of a function call supplied as input to a Realtime response.",
+        "title": "Realtime response input function call output"
+      },
+      "OpenAI.RealtimeResponseInputImage": {
+        "type": "object",
+        "required": [
+          "type",
+          "image_url"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_image"
+            ]
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^data:image/[^;,]+;base64,.+",
+            "description": "A base64 data URL with an image MIME type; use PNG or JPEG."
+          },
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "high",
+                  "auto"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "auto"
+          }
+        },
+        "title": "Realtime response input image"
+      },
+      "OpenAI.RealtimeResponseInputItem": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputFunctionCall"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputFunctionCallOutput"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseItemReference"
+          }
+        ],
+        "description": "An existing item reference or a new message or function call item for a Realtime response.",
+        "title": "Realtime response input item"
+      },
+      "OpenAI.RealtimeResponseInputMessage": {
+        "type": "object",
+        "required": [
+          "role"
+        ],
+        "properties": {
+          "role": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessageType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "role",
+          "mapping": {
+            "system": "#/components/schemas/OpenAI.RealtimeResponseInputMessageSystem",
+            "developer": "#/components/schemas/OpenAI.RealtimeResponseInputMessageDeveloper",
+            "user": "#/components/schemas/OpenAI.RealtimeResponseInputMessageUser",
+            "assistant": "#/components/schemas/OpenAI.RealtimeResponseInputMessageAssistant"
+          }
+        },
+        "description": "A message supplied as input to a Realtime response. The role determines the allowed content.",
+        "title": "Realtime response input message"
+      },
+      "OpenAI.RealtimeResponseInputMessageAssistant": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional client ID. The value `root` is reserved."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional input status. Omission or null defaults to completed.",
+            "default": "completed"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessageAssistantContent"
+            },
+            "minItems": 1
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          }
+        ],
+        "title": "Realtime response input assistant message"
+      },
+      "OpenAI.RealtimeResponseInputMessageAssistantContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "output_text"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 256000
+          }
+        }
+      },
+      "OpenAI.RealtimeResponseInputMessageDeveloper": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional client ID. The value `root` is reserved."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional input status. Omission or null defaults to completed.",
+            "default": "completed"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "developer"
+            ]
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputText"
+            },
+            "minItems": 1,
+            "maxItems": 1
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          }
+        ],
+        "title": "Realtime response input developer message"
+      },
+      "OpenAI.RealtimeResponseInputMessageSystem": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional client ID. The value `root` is reserved."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional input status. Omission or null defaults to completed.",
+            "default": "completed"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "system"
+            ]
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputText"
+            },
+            "minItems": 1,
+            "maxItems": 1
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          }
+        ],
+        "title": "Realtime response input system message"
+      },
+      "OpenAI.RealtimeResponseInputMessageType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "system",
+              "developer",
+              "user",
+              "assistant"
+            ]
+          }
+        ]
+      },
+      "OpenAI.RealtimeResponseInputMessageUser": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional client ID. The value `root` is reserved."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "completed",
+                  "incomplete"
+                ]
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional input status. Omission or null defaults to completed.",
+            "default": "completed"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user"
+            ]
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputText"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputAudio"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputImage"
+                }
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessage"
+          }
+        ],
+        "title": "Realtime response input user message"
+      },
+      "OpenAI.RealtimeResponseInputText": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_text"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 256000
+          }
+        },
+        "title": "Realtime response input text"
+      },
+      "OpenAI.RealtimeResponseItemReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "item_reference"
+            ],
+            "description": "The type of this item. Always `item_reference`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "The ID of an existing item in the same Realtime session."
+          }
+        },
+        "description": "Reference an existing item in this Realtime session as response.create input.\nItem references are only accepted in the response input array, not as new\nconversation items."
       },
       "OpenAI.RealtimeResponseStatusDetails": {
         "type": "object",
@@ -2406,6 +3062,12 @@
             "response.mcp_call.completed": "#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallCompleted",
             "response.mcp_call.failed": "#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallFailed",
             "error": "#/components/schemas/OpenAI.RealtimeServerEventRealtimeServerEventError",
+            "session.handoff.completed": "#/components/schemas/VoiceAgentServerEventSessionHandoffCompleted",
+            "session.handoff.aborted": "#/components/schemas/VoiceAgentServerEventSessionHandoffAborted",
+            "response.system_tool_arguments.delta": "#/components/schemas/VoiceAgentServerEventSystemToolArgumentsDelta",
+            "response.system_tool_arguments.done": "#/components/schemas/VoiceAgentServerEventSystemToolArgumentsDone",
+            "input_collection.status": "#/components/schemas/VoiceAgentServerEventInputCollectionStatus",
+            "session.subagent.started": "#/components/schemas/VoiceAgentServerEventSessionSubagentStarted",
             "session.subagent.completed": "#/components/schemas/VoiceAgentServerEventSessionSubagentCompleted",
             "session.subagent.aborted": "#/components/schemas/VoiceAgentServerEventSessionSubagentAborted",
             "warning": "#/components/schemas/VoiceAgentServerEventWarning",
@@ -2421,7 +3083,7 @@
             "response.animation_viseme.delta": "#/components/schemas/VoiceAgentServerEventResponseAnimationVisemeDelta",
             "response.animation_viseme.done": "#/components/schemas/VoiceAgentServerEventResponseAnimationVisemeDone",
             "response.video.delta": "#/components/schemas/VoiceAgentServerEventResponseVideoDelta",
-            "session.subagent.started": "#/components/schemas/VoiceAgentServerEventSessionSubagentStarted"
+            "session.handoff.started": "#/components/schemas/VoiceAgentServerEventSessionHandoffStarted"
           }
         },
         "description": "A realtime server event.",
@@ -3019,7 +3681,7 @@
         "x-oaiMeta": {
           "name": "conversation.item.retrieved",
           "group": "realtime",
-          "example": "{\n  \"type\": \"conversation.item.retrieved\",\n  \"event_id\": \"event_CCXGSizgEppa2d4XbKA7K\",\n  \"item\": {\n    \"id\": \"item_CCXGRxbY0n6WE4EszhF5w\",\n    \"object\": \"realtime.item\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"assistant\",\n    \"content\": [\n      {\n        \"type\": \"audio\",\n        \"transcript\": \"Yes, I can hear you loud and clear. How can I help you today?\",\n        \"audio\": \"8//2//v/9//q/+//+P/s...\",\n        \"format\": \"pcm16\"\n      }\n    ]\n  }\n}\n"
+          "example": "{\n  \"type\": \"conversation.item.retrieved\",\n  \"event_id\": \"event_CCXGSizgEppa2d4XbKA7K\",\n  \"item\": {\n    \"id\": \"item_CCXGRxbY0n6WE4EszhF5w\",\n    \"object\": \"realtime.item\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"assistant\",\n    \"content\": [\n      {\n        \"type\": \"output_audio\",\n        \"transcript\": \"Yes, I can hear you loud and clear. How can I help you today?\",\n        \"audio\": \"AAABAP//AAA=\"\n      }\n    ]\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -3108,7 +3770,7 @@
             "description": "Details of the error."
           }
         },
-        "description": "Returned when an error occurs, which could be a client problem or a server\nproblem. Most errors are recoverable and the session will stay open, we\nrecommend to implementors to monitor and log error messages by default.",
+        "description": "Returned when an error occurs, which could be a client problem or a server\nproblem. Most errors are recoverable and the session will stay open, we\nrecommend to implementers to monitor and log error messages by default.",
         "x-oaiMeta": {
           "name": "error",
           "group": "realtime",
@@ -3283,7 +3945,7 @@
         "x-oaiMeta": {
           "name": "input_audio_buffer.dtmf_event_received",
           "group": "realtime",
-          "example": "{\n    \"type\":\" input_audio_buffer.dtmf_event_received\",\n    \"event\": \"9\",\n    \"received_at\": 1763605109,\n}\n"
+          "example": "{\n  \"type\": \"input_audio_buffer.dtmf_event_received\",\n  \"event\": \"9\",\n  \"received_at\": 1763605109\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -3785,7 +4447,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "Returned when an error occurs, which could be a client problem or a server\nproblem. Most errors are recoverable and the session will stay open, we\nrecommend to implementors to monitor and log error messages by default.",
+        "description": "Returned when an error occurs, which could be a client problem or a server\nproblem. Most errors are recoverable and the session will stay open, we\nrecommend to implementers to monitor and log error messages by default.",
         "x-oaiMeta": {
           "name": "error",
           "group": "realtime",
@@ -4249,7 +4911,7 @@
         "x-oaiMeta": {
           "name": "response.created",
           "group": "realtime",
-          "example": "{\n  \"type\": \"response.created\",\n  \"event_id\": \"event_C9G8pqbTEddBSIxbBN6Os\",\n  \"response\": {\n    \"object\": \"realtime.response\",\n    \"id\": \"resp_C9G8p7IH2WxLbkgPNouYL\",\n    \"status\": \"in_progress\",\n    \"status_details\": null,\n    \"output\": [],\n    \"conversation_id\": \"conv_C9G8mmBkLhQJwCon3hoJN\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"max_output_tokens\": \"inf\",\n    \"audio\": {\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\"\n      }\n    },\n    \"usage\": null,\n    \"metadata\": null\n  },\n}\n"
+          "example": "{\n  \"type\": \"response.created\",\n  \"event_id\": \"event_C9G8pqbTEddBSIxbBN6Os\",\n  \"response\": {\n    \"object\": \"realtime.response\",\n    \"id\": \"resp_C9G8p7IH2WxLbkgPNouYL\",\n    \"status\": \"in_progress\",\n    \"status_details\": null,\n    \"output\": [],\n    \"conversation_id\": \"conv_C9G8mmBkLhQJwCon3hoJN\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"max_output_tokens\": \"inf\",\n    \"audio\": {\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\"\n      }\n    },\n    \"usage\": null,\n    \"metadata\": null\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -4786,7 +5448,7 @@
         "x-oaiMeta": {
           "name": "response.output_item.done",
           "group": "realtime",
-          "example": "{\n    \"event_id\": \"event_3536\",\n    \"type\": \"response.output_item.done\",\n    \"response_id\": \"resp_001\",\n    \"output_index\": 0,\n    \"item\": {\n        \"id\": \"msg_007\",\n        \"object\": \"realtime.item\",\n        \"type\": \"message\",\n        \"status\": \"completed\",\n        \"role\": \"assistant\",\n        \"content\": [\n            {\n                \"type\": \"text\",\n                \"text\": \"Sure, I can help with that.\"\n            }\n        ]\n    }\n}\n"
+          "example": "{\n  \"event_id\": \"event_3536\",\n  \"type\": \"response.output_item.done\",\n  \"response_id\": \"resp_001\",\n  \"output_index\": 0,\n  \"item\": {\n    \"id\": \"msg_007\",\n    \"object\": \"realtime.item\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"assistant\",\n    \"content\": [\n      {\n        \"type\": \"output_text\",\n        \"text\": \"Sure, I can help with that.\"\n      }\n    ]\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -4956,7 +5618,7 @@
         "x-oaiMeta": {
           "name": "session.created",
           "group": "realtime",
-          "example": "{\n  \"type\": \"session.created\",\n  \"event_id\": \"event_C9G5RJeJ2gF77mV7f2B1j\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G5QPteg4UIbotdKLoYQ\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324625,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  },\n}\n"
+          "example": "{\n  \"type\": \"session.created\",\n  \"event_id\": \"event_C9G5RJeJ2gF77mV7f2B1j\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G5QPteg4UIbotdKLoYQ\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324625,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -4998,7 +5660,7 @@
         "x-oaiMeta": {
           "name": "session.updated",
           "group": "realtime",
-          "example": "{\n  \"type\": \"session.updated\",\n  \"event_id\": \"event_C9G8mqI3IucaojlVKE8Cs\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G8l3zp50uFv4qgxfJ8o\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"name\": \"display_color_palette\",\n        \"description\": \"\nCall this function when a user asks for a color palette.\n\",\n        \"parameters\": {\n          \"type\": \"object\",\n          \"strict\": true,\n          \"properties\": {\n            \"theme\": {\n              \"type\": \"string\",\n              \"description\": \"Description of the theme for the color scheme.\"\n            },\n            \"colors\": {\n              \"type\": \"array\",\n              \"description\": \"Array of five hex color codes based on the theme.\",\n              \"items\": {\n                \"type\": \"string\",\n                \"description\": \"Hex color code\"\n              }\n            }\n          },\n          \"required\": [\n            \"theme\",\n            \"colors\"\n          ]\n        }\n      }\n    ],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324832,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  },\n}\n"
+          "example": "{\n  \"type\": \"session.updated\",\n  \"event_id\": \"event_C9G8mqI3IucaojlVKE8Cs\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G8l3zp50uFv4qgxfJ8o\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"name\": \"display_color_palette\",\n        \"description\": \"\nCall this function when a user asks for a color palette.\n\",\n        \"parameters\": {\n          \"type\": \"object\",\n          \"strict\": true,\n          \"properties\": {\n            \"theme\": {\n              \"type\": \"string\",\n              \"description\": \"Description of the theme for the color scheme.\"\n            },\n            \"colors\": {\n              \"type\": \"array\",\n              \"description\": \"Array of five hex color codes based on the theme.\",\n              \"items\": {\n                \"type\": \"string\",\n                \"description\": \"Hex color code\"\n              }\n            }\n          },\n          \"required\": [\n            \"theme\",\n            \"colors\"\n          ]\n        }\n      }\n    ],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324832,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  }\n}\n"
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -5059,24 +5721,11 @@
               "response.mcp_call_arguments.done",
               "response.mcp_call.in_progress",
               "response.mcp_call.completed",
-              "response.mcp_call.failed",
-              "warning",
-              "session.subagent.started",
-              "session.subagent.completed",
-              "session.subagent.aborted",
-              "session.avatar.connecting",
-              "session.avatar.switch_to_speaking",
-              "session.avatar.switch_to_idle",
-              "rtc.call.sdp.created",
-              "rtc.call.error",
-              "response.audio_timestamp.delta",
-              "response.audio_timestamp.done",
-              "response.animation_blendshapes.delta",
-              "response.animation_blendshapes.done",
-              "response.animation_viseme.delta",
-              "response.animation_viseme.done",
-              "response.video.delta"
+              "response.mcp_call.failed"
             ]
+          },
+          {
+            "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension"
           }
         ],
         "x-ms-foundry-meta": {
@@ -5295,6 +5944,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.NoiseReductionType"
+          },
+          "strength": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeNoiseReductionStrength",
+            "default": 1
           }
         }
       },
@@ -5465,6 +6118,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.NoiseReductionType"
+          },
+          "strength": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeNoiseReductionStrength",
+            "default": 1
           }
         }
       },
@@ -6407,70 +7064,6 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
             "description": "The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM."
           },
-          "voice": {
-            "type": "string",
-            "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar."
-          },
-          "voice_type": {
-            "$ref": "#/components/schemas/VoiceType",
-            "description": "The voice implementation."
-          },
-          "voice_locale": {
-            "type": "string",
-            "description": "The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "speed": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0.25,
-            "maximum": 1.5,
-            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.",
-            "default": 1
-          },
-          "voice_temperature": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_lexicon_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_text_normalization_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "prefer_locales": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "style": {
-            "type": "string",
-            "description": "The voice speaking style. Applies only when `voice_type` is `azure-standard`."
-          },
-          "pitch": {
-            "type": "string",
-            "description": "The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "volume": {
-            "type": "string",
-            "description": "The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_voice_endpoint_id": {
-            "type": "string",
-            "description": "The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`."
-          },
-          "personal_voice_model": {
-            "type": "string",
-            "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
-          },
           "output_audio_timestamp_types": {
             "type": "array",
             "items": {
@@ -6479,7 +7072,12 @@
             "description": "Timestamp kinds to include with output audio. Applies to every `voice_type`."
           }
         },
-        "description": "Output audio configuration for a voice agent.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`; the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.\n`format` and `output_audio_timestamp_types` apply to every voice type.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentVoiceConfig"
+          }
+        ],
+        "description": "Output audio configuration for a voice agent. Extends the voice configuration with the session-level `format` and\n`output_audio_timestamp_types` settings, which apply to every voice type.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -7193,6 +7791,84 @@
           ]
         }
       },
+      "VoiceAgentCollectDtmfSystemTool": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "collect_dtmf"
+            ],
+            "description": "The service-managed control action. Always `collect_dtmf`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSystemTool"
+          }
+        ],
+        "description": "Collects keypad digits on the current call.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentCollectSmsSystemTool": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "collect_sms"
+            ],
+            "description": "The service-managed control action. Always `collect_sms`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSystemTool"
+          }
+        ],
+        "description": "Collects one complete SMS from an explicitly selected sender.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentDigitRecognitionSystemTool": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "digit_recognition"
+            ],
+            "description": "The service-managed control action. Always `digit_recognition`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSystemTool"
+          }
+        ],
+        "description": "Retrieves the unchanged transcript of the last user audio turn.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentEchoCancellation": {
         "type": "object",
         "required": [
@@ -7400,6 +8076,266 @@
           ]
         }
       },
+      "VoiceAgentHandoffAbortReason": {
+        "type": "string",
+        "enum": [
+          "user_interruption",
+          "error"
+        ],
+        "description": "Why a server-managed handoff ended before target commit.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffEdgeState": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "target"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffId",
+            "description": "The edge identifier."
+          },
+          "source": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The source node identifier or `$entrypoint`."
+          },
+          "target": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The target node identifier or `$entrypoint`."
+          },
+          "cancel_on_interruption": {
+            "type": "boolean",
+            "description": "Whether user interruption before commit cancels the pending handoff.",
+            "default": false
+          },
+          "delay_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The minimum delay before target activation, in milliseconds.",
+            "default": 0
+          },
+          "transfer_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "maxLength": 500,
+            "description": "The deterministic source-voice announcement played before target activation."
+          },
+          "target_response": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffTargetResponse",
+            "description": "Whether Voice Live automatically starts a response after target activation.",
+            "default": "auto"
+          }
+        },
+        "description": "Non-sensitive topology metadata for one compiled handoff edge.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffId": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+        "description": "A case-sensitive identifier for an inlined subagent or handoff condition."
+      },
+      "VoiceAgentHandoffNodeReference": {
+        "type": "string",
+        "pattern": "^(?:\\$entrypoint|[a-z][a-z0-9_-]{0,63})$",
+        "description": "A handoff node reference: either `$entrypoint` or a configured node identifier."
+      },
+      "VoiceAgentHandoffNodeState": {
+        "type": "object",
+        "required": [
+          "id",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The node identifier or `$entrypoint`."
+          },
+          "description": {
+            "type": "string",
+            "description": "The display-only node description. This value is not provided to the model."
+          },
+          "implicit": {
+            "type": "boolean",
+            "description": "Whether this is the implicit `$entrypoint` node.",
+            "default": false
+          }
+        },
+        "description": "Non-sensitive topology metadata for one compiled handoff node.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffPipelineFamily": {
+        "type": "string",
+        "enum": [
+          "cascaded",
+          "realtime"
+        ],
+        "description": "The immutable pipeline family selected for a voice-agent handoff graph.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffState": {
+        "type": "object",
+        "required": [
+          "pipeline_family",
+          "active_node_id",
+          "node_generation",
+          "transfer_count",
+          "attempt_count",
+          "available_edge_ids",
+          "transfer_tool",
+          "nodes",
+          "edges"
+        ],
+        "properties": {
+          "pipeline_family": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffPipelineFamily",
+            "description": "The immutable execution pipeline family."
+          },
+          "active_node_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The currently committed node identifier or `$entrypoint`."
+          },
+          "node_generation": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The monotonically increasing generation of the committed active-node configuration."
+          },
+          "transfer_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "The number of successfully completed handoffs."
+          },
+          "attempt_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "The number of unique reserved handoff attempts."
+          },
+          "available_edge_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentHandoffId"
+            },
+            "description": "The edge identifiers currently available from the active node."
+          },
+          "transfer_tool": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentFunctionTool"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The generated handoff function visible to the active model, or null when no route is available."
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentHandoffNodeState"
+            },
+            "description": "The compiled handoff nodes, including the implicit or explicit `$entrypoint`."
+          },
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentHandoffEdgeState"
+            },
+            "description": "The compiled handoff edges."
+          }
+        },
+        "description": "The effective topology and runtime state of a voice-agent handoff graph.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffTargetResponse": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "none"
+        ],
+        "description": "Whether Voice Live automatically starts a response after a handoff target becomes active.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentInputCollectionChannel": {
+        "type": "string",
+        "enum": [
+          "sms",
+          "dtmf"
+        ],
+        "description": "The receiver used by an input collection. Voice collection is not supported.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentInputCollectionStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "accepted",
+              "listening",
+              "completed",
+              "expired",
+              "cancelled",
+              "failed",
+              "busy",
+              "invalid_input",
+              "invalid_arguments",
+              "stale_collection",
+              "unsupported_channel",
+              "dispatch_failed",
+              "provider_accepted",
+              "transfer_not_answered",
+              "provider_failed_or_unsupported",
+              "provider_result_uncertain",
+              "provider_not_executed"
+            ]
+          }
+        ],
+        "description": "Collection lifecycle and value-free telephony-operation outcomes. Additional outcomes may be introduced over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentInputTranscription": {
         "type": "object",
         "required": [
@@ -7553,6 +8489,32 @@
           }
         ],
         "description": "A condition that may trigger an interim response.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLanguageDetectionSystemTool": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "language_detection"
+            ],
+            "description": "The service-managed control action. Always `language_detection`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSystemTool"
+          }
+        ],
+        "description": "Switches supported conversation language settings.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -7820,6 +8782,16 @@
           ]
         }
       },
+      "VoiceAgentOutputReference": {
+        "type": "string",
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+        "description": "Bare session variable name, such as `verification_code`, without a namespace or braces. Tool arguments reference it with `{{name}}`.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentProfanityFilterMode": {
         "anyOf": [
           {
@@ -8019,7 +8991,7 @@
           "input": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+              "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputItem"
             },
             "description": "Input items to include in the prompt for the model. Using this field\n  creates a new context for this Response instead of using the default\n  conversation. An empty array `[]` will clear the context for this Response.\n  Note that this can include references to items that previously appeared in the session\n  using their id."
           },
@@ -8140,6 +9112,58 @@
           ]
         }
       },
+      "VoiceAgentSendDtmfSystemTool": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "send_dtmf"
+            ],
+            "description": "The service-managed control action. Always `send_dtmf`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSystemTool"
+          }
+        ],
+        "description": "Sends literal or templated keypad digits.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentSendSmsSystemTool": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "send_sms"
+            ],
+            "description": "The service-managed control action. Always `send_sms`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSystemTool"
+          }
+        ],
+        "description": "Sends a text message from the Agent's SMS-capable number.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentServerEvent": {
         "oneOf": [
           {
@@ -8233,6 +9257,15 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone"
           },
           {
+            "$ref": "#/components/schemas/VoiceAgentServerEventSystemToolArgumentsDelta"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentServerEventSystemToolArgumentsDone"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentServerEventInputCollectionStatus"
+          },
+          {
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta"
           },
           {
@@ -8315,6 +9348,15 @@
           },
           {
             "$ref": "#/components/schemas/VoiceAgentServerEventResponseVideoDelta"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentServerEventSessionHandoffStarted"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentServerEventSessionHandoffCompleted"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentServerEventSessionHandoffAborted"
           }
         ],
         "description": "A stable v1 message sent by the service over a voice-agent WebSocket.",
@@ -8324,6 +9366,66 @@
           ]
         },
         "x-foundry-event-direction": "server"
+      },
+      "VoiceAgentServerEventInputCollectionStatus": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "status"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_collection.status"
+            ],
+            "description": "The event type. Always `input_collection.status`."
+          },
+          "event_id": {
+            "type": "string",
+            "description": "An optional event identifier."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The originating system-tool invocation."
+          },
+          "collection_id": {
+            "type": "string",
+            "description": "The collection operation identifier, when this outcome concerns a collection."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "The current receiver request identifier, when applicable."
+          },
+          "channel": {
+            "$ref": "#/components/schemas/VoiceAgentInputCollectionChannel",
+            "description": "The collection receiver, omitted for telephony-operation feedback."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceAgentInputCollectionStatus",
+            "description": "The reported outcome. Generation completion of a system-tool item is separate."
+          },
+          "value": {
+            "type": "string",
+            "description": "Completed ASCII digits, including leading zeros, only for `secret: false`; absent for private collection and telephony-operation feedback."
+          },
+          "output_ref": {
+            "$ref": "#/components/schemas/VoiceAgentOutputReference",
+            "description": "Actual bare variable name from successful private collection, not its value. May be suffixed on collision; reference it with `{{name}}`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
+          }
+        ],
+        "description": "Reports collection or telephony outcomes for a model call.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentServerEventResponseAnimationBlendshapesDelta": {
         "type": "object",
@@ -8873,6 +9975,251 @@
           ]
         }
       },
+      "VoiceAgentServerEventSessionHandoffAborted": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "handoff_id",
+          "edge_id",
+          "from_node_id",
+          "to_node_id",
+          "from_model",
+          "to_model",
+          "tool_call_id",
+          "node_generation",
+          "reason",
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The server-generated event identifier."
+          },
+          "handoff_id": {
+            "type": "string",
+            "description": "The server-generated handoff attempt identifier."
+          },
+          "edge_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffId",
+            "description": "The configured edge selected for this handoff."
+          },
+          "from_node_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The source node identifier or `$entrypoint`."
+          },
+          "to_node_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The target node identifier or `$entrypoint`."
+          },
+          "from_model": {
+            "type": "string",
+            "description": "The model active before the handoff."
+          },
+          "to_model": {
+            "type": "string",
+            "description": "The model prepared for the target behavior."
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "The function-call identifier that initiated the handoff."
+          },
+          "node_generation": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The source generation for started or aborted events, and the committed target generation for completed events."
+          },
+          "reason": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffAbortReason",
+            "description": "Why the handoff ended before target commit."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.RealtimeServerEventErrorError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The handoff failure detail when `reason` is `error`."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "session.handoff.aborted"
+            ],
+            "description": "The event type. Always `session.handoff.aborted`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
+          }
+        ],
+        "description": "The `session.handoff.aborted` server event.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentServerEventSessionHandoffCompleted": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "handoff_id",
+          "edge_id",
+          "from_node_id",
+          "to_node_id",
+          "from_model",
+          "to_model",
+          "tool_call_id",
+          "node_generation",
+          "prepare_duration_ms",
+          "duration_ms",
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The server-generated event identifier."
+          },
+          "handoff_id": {
+            "type": "string",
+            "description": "The server-generated handoff attempt identifier."
+          },
+          "edge_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffId",
+            "description": "The configured edge selected for this handoff."
+          },
+          "from_node_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The source node identifier or `$entrypoint`."
+          },
+          "to_node_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The target node identifier or `$entrypoint`."
+          },
+          "from_model": {
+            "type": "string",
+            "description": "The model active before the handoff."
+          },
+          "to_model": {
+            "type": "string",
+            "description": "The model prepared for the target behavior."
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "The function-call identifier that initiated the handoff."
+          },
+          "node_generation": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The source generation for started or aborted events, and the committed target generation for completed events."
+          },
+          "prepare_duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The target-preparation duration."
+          },
+          "duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The total handoff duration."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "session.handoff.completed"
+            ],
+            "description": "The event type. Always `session.handoff.completed`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
+          }
+        ],
+        "description": "The `session.handoff.completed` server event.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentServerEventSessionHandoffStarted": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "handoff_id",
+          "edge_id",
+          "from_node_id",
+          "to_node_id",
+          "from_model",
+          "to_model",
+          "tool_call_id",
+          "node_generation",
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The server-generated event identifier."
+          },
+          "handoff_id": {
+            "type": "string",
+            "description": "The server-generated handoff attempt identifier."
+          },
+          "edge_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffId",
+            "description": "The configured edge selected for this handoff."
+          },
+          "from_node_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The source node identifier or `$entrypoint`."
+          },
+          "to_node_id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The target node identifier or `$entrypoint`."
+          },
+          "from_model": {
+            "type": "string",
+            "description": "The model active before the handoff."
+          },
+          "to_model": {
+            "type": "string",
+            "description": "The model prepared for the target behavior."
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "The function-call identifier that initiated the handoff."
+          },
+          "node_generation": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The source generation for started or aborted events, and the committed target generation for completed events."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "session.handoff.started"
+            ],
+            "description": "The event type. Always `session.handoff.started`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
+          }
+        ],
+        "description": "The `session.handoff.started` server event.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentServerEventSessionSubagentAborted": {
         "type": "object",
         "required": [
@@ -9010,6 +10357,129 @@
           }
         ],
         "description": "The `session.subagent.started` server event.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentServerEventSystemToolArgumentsDelta": {
+        "type": "object",
+        "required": [
+          "type",
+          "event_id",
+          "response_id",
+          "item_id",
+          "output_index",
+          "call_id",
+          "delta"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.system_tool_arguments.delta"
+            ],
+            "description": "The event type. Always `response.system_tool_arguments.delta`."
+          },
+          "event_id": {
+            "type": "string",
+            "description": "The unique identifier of this server event."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The response containing the tool invocation."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The generated tool item's identifier."
+          },
+          "output_index": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The item's zero-based position in the response output."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The invocation identifier."
+          },
+          "delta": {
+            "type": "string",
+            "description": "An incremental JSON fragment of the intent arguments."
+          },
+          "obfuscation": {
+            "type": "string",
+            "description": "Optional padding metadata with no application semantics."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
+          }
+        ],
+        "description": "An incremental model-argument fragment for a service-managed system tool.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentServerEventSystemToolArgumentsDone": {
+        "type": "object",
+        "required": [
+          "type",
+          "event_id",
+          "response_id",
+          "item_id",
+          "output_index",
+          "call_id",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.system_tool_arguments.done"
+            ],
+            "description": "The event type. Always `response.system_tool_arguments.done`."
+          },
+          "event_id": {
+            "type": "string",
+            "description": "The unique identifier of this server event."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The response containing the tool invocation."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The generated tool item's identifier."
+          },
+          "output_index": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The item's zero-based position in the response output."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The invocation identifier."
+          },
+          "name": {
+            "$ref": "#/components/schemas/VoiceAgentSystemToolName",
+            "description": "The invoked built-in capability."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "The complete, unexpanded model arguments as a JSON string."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
+          }
+        ],
+        "description": "The completed intent arguments for a system tool, not provider success or a request for a customer function result.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -9282,6 +10752,17 @@
             "$ref": "#/components/schemas/VoiceAgentGreetingConfig",
             "description": "A proactive assistant greeting started after session configuration."
           },
+          "handoff": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentHandoffState"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The effective handoff topology and runtime state, when handoff is configured."
+          },
           "object": {
             "type": "string",
             "enum": [
@@ -9498,12 +10979,26 @@
           "description": {
             "type": "string",
             "description": "An optional description of the system tool."
+          },
+          "timeout_seconds": {
+            "$ref": "#/components/schemas/FoundryDurationSeconds",
+            "description": "Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.",
+            "maximum": 300,
+            "minimum": 1,
+            "default": 60
           }
         },
         "discriminator": {
           "propertyName": "name",
           "mapping": {
-            "end_conversation": "#/components/schemas/VoiceAgentEndConversationSystemTool"
+            "end_conversation": "#/components/schemas/VoiceAgentEndConversationSystemTool",
+            "language_detection": "#/components/schemas/VoiceAgentLanguageDetectionSystemTool",
+            "digit_recognition": "#/components/schemas/VoiceAgentDigitRecognitionSystemTool",
+            "collect_sms": "#/components/schemas/VoiceAgentCollectSmsSystemTool",
+            "collect_dtmf": "#/components/schemas/VoiceAgentCollectDtmfSystemTool",
+            "transfer": "#/components/schemas/VoiceAgentTransferSystemTool",
+            "send_dtmf": "#/components/schemas/VoiceAgentSendDtmfSystemTool",
+            "send_sms": "#/components/schemas/VoiceAgentSendSmsSystemTool"
           }
         },
         "allOf": [
@@ -9518,6 +11013,94 @@
           ]
         }
       },
+      "VoiceAgentSystemToolItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "status",
+          "name",
+          "call_id",
+          "arguments"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "system_tool"
+            ],
+            "description": "The output-item kind. Always `system_tool`."
+          },
+          "id": {
+            "type": "string",
+            "description": "The identifier of the generated item."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "The realtime item marker."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceAgentSystemToolItemStatus",
+            "description": "The generation status of the item, not the provider execution outcome."
+          },
+          "name": {
+            "$ref": "#/components/schemas/VoiceAgentSystemToolName",
+            "description": "The built-in capability invoked by the model."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The invocation identifier used for correlation and duplicate suppression."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "Original JSON-encoded intent: literals remain visible and references stay unexpanded. Excludes private values, resolved arguments and executor-only settings."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "Service-generated system-tool intent, not a provider result. Clients cannot create it or complete it with `function_call_output`.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentSystemToolItemStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "completed",
+              "incomplete"
+            ]
+          }
+        ],
+        "description": "The generation status of a system-tool item. It does not indicate provider success.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentSystemToolName": {
         "anyOf": [
           {
@@ -9526,7 +11109,14 @@
           {
             "type": "string",
             "enum": [
-              "end_conversation"
+              "end_conversation",
+              "language_detection",
+              "digit_recognition",
+              "transfer",
+              "collect_sms",
+              "collect_dtmf",
+              "send_dtmf",
+              "send_sms"
             ]
           }
         ],
@@ -9775,6 +11365,169 @@
           ]
         }
       },
+      "VoiceAgentTransferDestination": {
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentTransferDestinationType",
+            "description": "The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip for a SIP URI."
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities."
+          }
+        },
+        "description": "The canonical system-tool transfer destination.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTransferDestinationType": {
+        "type": "string",
+        "enum": [
+          "phone_number",
+          "teams",
+          "sip"
+        ],
+        "description": "The supported address formats for a system-tool transfer destination.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTransferRouting": {
+        "type": "object",
+        "required": [
+          "strategy"
+        ],
+        "properties": {
+          "strategy": {
+            "$ref": "#/components/schemas/VoiceAgentTransferStrategy",
+            "description": "The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only."
+          },
+          "ring_timeout_seconds": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 300,
+            "description": "Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.",
+            "default": 20
+          }
+        },
+        "description": "The configured transfer routing policy. The model selects a target name, not destinations or routing settings.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTransferStrategy": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "sequential",
+              "random",
+              "parallel"
+            ]
+          }
+        ],
+        "description": "Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTransferSystemTool": {
+        "type": "object",
+        "required": [
+          "name",
+          "targets"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "transfer"
+            ],
+            "description": "The service-managed control action. Always `transfer`."
+          },
+          "require_handoff": {
+            "type": "boolean",
+            "description": "Require a non-blank handoff summary in each model-generated transfer call. Defaults to false; does not guarantee delivery to the recipient.",
+            "default": false
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentTransferTarget"
+            },
+            "minItems": 1,
+            "description": "The non-empty set of logical targets that the model may select."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSystemTool"
+          }
+        ],
+        "description": "Requests a transfer to an explicitly configured logical target.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTransferTarget": {
+        "type": "object",
+        "required": [
+          "name",
+          "destinations",
+          "routing"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S",
+            "description": "The non-blank logical target name. Names must be unique after trimming within the transfer tool."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description that helps the model select this target."
+          },
+          "destinations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentTransferDestination"
+            },
+            "minItems": 1,
+            "description": "The concrete destinations for this transfer target."
+          },
+          "routing": {
+            "$ref": "#/components/schemas/VoiceAgentTransferRouting",
+            "description": "The trusted routing policy for this target."
+          }
+        },
+        "description": "A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentTurnDetectionConfig": {
         "type": "object",
         "required": [
@@ -9825,6 +11578,81 @@
           }
         ],
         "description": "The turn-detection strategy. Additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentVoiceConfig": {
+        "type": "object",
+        "properties": {
+          "voice": {
+            "type": "string",
+            "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar."
+          },
+          "voice_type": {
+            "$ref": "#/components/schemas/VoiceType",
+            "description": "The voice implementation."
+          },
+          "voice_locale": {
+            "type": "string",
+            "description": "The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "speed": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0.25,
+            "maximum": 1.5,
+            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.",
+            "default": 1
+          },
+          "voice_temperature": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "custom_lexicon_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "custom_text_normalization_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "prefer_locales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "style": {
+            "type": "string",
+            "description": "The voice speaking style. Applies only when `voice_type` is `azure-standard`."
+          },
+          "pitch": {
+            "type": "string",
+            "description": "The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "volume": {
+            "type": "string",
+            "description": "The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "custom_voice_endpoint_id": {
+            "type": "string",
+            "description": "The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`."
+          },
+          "personal_voice_model": {
+            "type": "string",
+            "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
+          }
+        },
+        "description": "Voice output configuration. Inline subagents use it directly as their voice override, and the session-level\noutput audio configuration extends it.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
