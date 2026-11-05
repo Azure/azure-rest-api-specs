@@ -13,6 +13,18 @@ using Versioning;
 namespace Microsoft.AzureDataTransfer;
 
 /**
+ * ARM resource ID of a storage or messaging transfer flow.
+ */
+alias TransferFlowResourceId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.AzureDataTransfer/storageTransferFlows";
+  },
+  {
+    type: "Microsoft.AzureDataTransfer/messagingTransferFlows";
+  }
+]>;
+
+/**
  * Properties of a transfer flow
  */
 @added(Versions.v2026_06_29_preview)
@@ -36,14 +48,7 @@ model CommonTransferFlowProperties {
   /**
    * ARM resource ID of the paired transfer flow on the remote side of the pipeline.
    */
-  remoteTransferFlowResourceId: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureDataTransfer/storageTransferFlows";
-    },
-    {
-      type: "Microsoft.AzureDataTransfer/messagingTransferFlows";
-    }
-  ]>;
+  remoteTransferFlowResourceId: TransferFlowResourceId;
 
   /**
    * Approval and lifecycle status of the transfer flow. Set by the service; use the approve/reject pipeline actions and the enableTransfer/disableTransfer actions to change it.
@@ -133,14 +138,7 @@ model TransferFlowSummary {
   /**
    * ARM resource ID of the transfer flow.
    */
-  id: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureDataTransfer/storageTransferFlows";
-    },
-    {
-      type: "Microsoft.AzureDataTransfer/messagingTransferFlows";
-    }
-  ]>;
+  id: TransferFlowResourceId;
 
   /**
    * Status of the transfer flow.
@@ -160,14 +158,7 @@ model TransferFlowSummary {
   /**
    * ARM resource ID of the paired transfer flow on the remote side of the pipeline.
    */
-  remoteTransferFlowResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureDataTransfer/storageTransferFlows";
-    },
-    {
-      type: "Microsoft.AzureDataTransfer/messagingTransferFlows";
-    }
-  ]>;
+  remoteTransferFlowResourceId?: TransferFlowResourceId;
 
   /**
    * ARM resource ID of the data resource (storage container/table or messaging queue/event hub) used by the transfer flow.
@@ -233,9 +224,9 @@ model ListTransferFlowsByPipelineResult {
 @added(Versions.v2026_06_29_preview)
 model TransferFlowRequestBody {
   /**
-   * ID of the resource(s).
+   * ARM resource IDs of the transfer flows to approve or reject.
    */
-  id?: string[];
+  id?: TransferFlowResourceId[];
 
   /**
    * Reason for resource operation.
@@ -249,8 +240,9 @@ model TransferFlowRequestBody {
 @added(Versions.v2026_06_29_preview)
 model TransferFlowResponseBody {
   /**
-   * ID of the resource(s).
+   * The transfer flows that were approved or rejected, with their resulting status.
    */
+  @identifiers(#["id"])
   id: TransferFlowIdBody[];
 }
 
@@ -260,9 +252,9 @@ model TransferFlowResponseBody {
 @added(Versions.v2026_06_29_preview)
 model TransferFlowIdBody {
   /**
-   * ID of the resource(s).
+   * ARM resource ID of the transfer flow.
    */
-  id: string;
+  id: TransferFlowResourceId;
 
   /**
    * Flow resource's status.

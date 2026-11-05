@@ -7860,7 +7860,18 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "ID of the resource(s)."
+          "format": "arm-id",
+          "description": "ARM resource ID of the transfer flow.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureDataTransfer/storageTransferFlows"
+              },
+              {
+                "type": "Microsoft.AzureDataTransfer/messagingTransferFlows"
+              }
+            ]
+          }
         },
         "status": {
           "$ref": "#/definitions/CommonTransferFlowStatus",
@@ -7877,9 +7888,21 @@
       "properties": {
         "id": {
           "type": "array",
-          "description": "ID of the resource(s).",
+          "description": "ARM resource IDs of the transfer flows to approve or reject.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureDataTransfer/storageTransferFlows"
+                },
+                {
+                  "type": "Microsoft.AzureDataTransfer/messagingTransferFlows"
+                }
+              ]
+            }
           }
         },
         "statusReason": {
@@ -7894,10 +7917,13 @@
       "properties": {
         "id": {
           "type": "array",
-          "description": "ID of the resource(s).",
+          "description": "The transfer flows that were approved or rejected, with their resulting status.",
           "items": {
             "$ref": "#/definitions/TransferFlowIdBody"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       },
       "required": [
