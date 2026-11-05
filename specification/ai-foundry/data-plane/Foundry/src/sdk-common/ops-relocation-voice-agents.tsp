@@ -7,6 +7,15 @@ namespace Azure.AI.Projects.Beta {
 }
 
 namespace Azure.AI.Projects.Beta.VoiceAgents {
+  interface Campaigns {}
+  @@clientLocation(TelephonyCampaigns.getOperation, Campaigns);
+  @@clientLocation(TelephonyCampaigns.create, Campaigns);
+  @@clientLocation(TelephonyCampaigns.get, Campaigns);
+  @@clientLocation(TelephonyCampaigns.list, Campaigns);
+  @@clientLocation(TelephonyCampaigns.cancel, Campaigns);
+  @@clientLocation(TelephonyCampaigns.delete, Campaigns);
+  @@clientLocation(TelephonyCampaigns.listValidationErrors, Campaigns);
+
   interface Conversations {}
   @@clientLocation(
     AgentEndpointConversations.listAgentConversations,
@@ -65,6 +74,44 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
     Conversations
   );
 
+  interface LiveConversations {}
+  @@clientLocation(
+    AgentEndpointLiveConversations.listLiveAgentConversations,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversation,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.deleteLiveAgentConversation,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.listLiveAgentConversationItems,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationItem,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
+    LiveConversations
+  );
+
   interface Telephony {}
   @@clientLocation(AgentTelephony.createTelephonyBinding, Telephony);
   @@clientLocation(AgentTelephony.listTelephonyBindings, Telephony);
@@ -79,5 +126,7 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
   @@clientLocation(AgentTelephony.replaceTelephonyTransferTargets, Telephony);
   @@clientLocation(AgentTelephony.createTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.getTelephonyCallJob, Telephony);
+  @@clientLocation(AgentTelephony.listTelephonyCallJobs, Telephony);
+  @@clientLocation(AgentTelephony.deleteTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.cancelTelephonyCallJob, Telephony);
 }

@@ -32,6 +32,8 @@ namespace Azure.AI.Projects {
   @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!csharp");
   @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
+  @@clientName(OpenAI.Delegation, "LiveDelegation", "csharp");
+
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------
@@ -159,6 +161,7 @@ namespace Azure.AI.Projects {
 
   // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
   @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
+  @@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!csharp");
 
   // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
   @@usage(VoiceAgentTransport, Usage.input | Usage.json);
@@ -179,6 +182,8 @@ namespace Azure.AI.Projects {
     "Delay",
     "csharp"
   );
+  @@clientName(VoiceAgentHandoffCondition.delay_ms, "Delay", "csharp");
+  @@clientName(VoiceAgentHandoffEdgeState.delay_ms, "Delay", "csharp");
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
@@ -1324,6 +1329,8 @@ namespace Azure.AI.Projects {
   @@access(AgentTelephony.replaceTelephonyTransferTargets, Access.internal);
   @@access(AgentTelephony.createTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.getTelephonyCallJob, Access.internal);
+  @@access(AgentTelephony.listTelephonyCallJobs, Access.internal);
+  @@access(AgentTelephony.deleteTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.cancelTelephonyCallJob, Access.internal);
 
   // --------------------------------------------------------------------------------
