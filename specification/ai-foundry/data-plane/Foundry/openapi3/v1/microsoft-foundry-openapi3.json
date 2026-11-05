@@ -38220,9 +38220,11 @@
             "description": "One Boolean judgment for every configured dimension."
           }
         },
-        "unevaluatedProperties": {
-          "type": "string"
-        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RubricResultProperties"
+          }
+        ],
         "description": "Flat result properties for explicit Boolean rubric scoring.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -41461,27 +41463,13 @@
             "description": "The reason for the test criteria metric."
           },
           "properties": {
-            "$ref": "#/components/schemas/EvalRunOutputItemResultProperties",
+            "$ref": "#/components/schemas/RubricResultProperties",
             "description": "Additional details about the test criteria metric."
           }
         },
         "unevaluatedProperties": {},
         "description": "A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each allowed/disallowed behavior group, with no overall safety aggregate.",
         "title": "EvalRunOutputItemResult"
-      },
-      "EvalRunOutputItemResultProperties": {
-        "oneOf": [
-          {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/schemas/RubricResultProperties"
-          }
-        ],
-        "description": "Structured and evaluator-specific details attached to an evaluation result."
       },
       "EvalRunOutputItemResultStatus": {
         "anyOf": [
@@ -45000,9 +44988,11 @@
             "description": "One Likert judgment for every configured dimension."
           }
         },
-        "unevaluatedProperties": {
-          "type": "string"
-        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RubricResultProperties"
+          }
+        ],
         "description": "Flat result properties for explicit Likert rubric scoring.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -87988,14 +87978,15 @@
       },
       "RubricResultProperties": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/BooleanRubricResultProperties"
-          },
-          {
-            "$ref": "#/components/schemas/LikertRubricResultProperties"
-          }
+        "required": [
+          "mode"
         ],
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/RubricScoringMode",
+            "description": "The resolved rubric scoring mode."
+          }
+        },
         "discriminator": {
           "propertyName": "mode",
           "mapping": {
@@ -88027,10 +88018,17 @@
         }
       },
       "RubricScoringMode": {
-        "type": "string",
-        "enum": [
-          "boolean",
-          "likert"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "boolean",
+              "likert"
+            ]
+          }
         ],
         "description": "The judgment mode selected for an entire rubric. Safety rubrics use Boolean judgments with separately reported allowed and disallowed behavior metrics.",
         "x-ms-foundry-meta": {

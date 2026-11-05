@@ -869,7 +869,6 @@ model UserConversationSimulationEvalRunDataSource extends EvalRunDataSource {
   OpenAI.EvalRunPerTestingCriteriaResults,
   {
     /** Optional metric identity when one testing criterion reports multiple metrics. Safety rubrics return separate entries for disallowed_behavior_violated and allowed_behavior_violated, each counting evaluable conversations independently. */
-    @added(Versions.v1)
     metric?: string,
 
     /** Number of tests that errored for this criteria. */
@@ -1124,20 +1123,9 @@ union EvalRunOutputItemResultStatus {
     reason?: string,
 
     /** Additional details about the test criteria metric. */
-    properties?: EvalRunOutputItemResultProperties,
+    properties?: RubricResultProperties,
   }
 );
-
-/** Structured and evaluator-specific details attached to an evaluation result. */
-@TypeSpec.OpenAPI.oneOf
-union EvalRunOutputItemResultProperties {
-  /** Existing string-valued properties for legacy evaluators, including separate safety metric evidence. */
-  legacy: Record<string>,
-
-  /** Mode-specific ordinary rubric judgments without an additional scoring wrapper. */
-  @added(Versions.v1)
-  rubric: RubricResultProperties,
-}
 
 /** A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each allowed/disallowed behavior group, with no overall safety aggregate. */
 @summary("EvalRunOutputItemResult")
@@ -1151,11 +1139,9 @@ model EvalRunOutputItemResult {
   type?: string;
 
   /** The numeric metric score. Safety violation metrics use 1 for a known violation and 0 for no violation on relevant evaluable behavior. An irrelevant or indeterminate group has a null score, not a clear result. */
-  @typeChangedFrom(Versions.v1, OpenAI.numeric)
   score: float64 | null;
 
   /** Whether the grader considered the output a pass. */
-  @madeOptional(Versions.v1)
   passed?: boolean;
 
   /** Optional sample or intermediate data produced by the grader. */
@@ -1177,7 +1163,7 @@ model EvalRunOutputItemResult {
   reason?: string;
 
   /** Additional details about the test criteria metric. */
-  properties?: EvalRunOutputItemResultProperties;
+  properties?: RubricResultProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
