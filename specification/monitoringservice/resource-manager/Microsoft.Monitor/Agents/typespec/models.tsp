@@ -19,14 +19,15 @@ namespace Microsoft.Monitor {
     /** Description of the observability agent. */
     description?: string;
 
-    /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. The workspace must be in the same location as the agent. Required when autonomous operations are enabled. */
-    monitoringAccountId?: Azure.Core.armResourceIdentifier<[
+    /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. Required even when autonomous operations are disabled. The workspace must be in the same location as the agent. */
+    @minLength(1)
+    monitoringAccountId: Azure.Core.armResourceIdentifier<[
       {
         type: "Microsoft.Monitor/accounts";
       }
     ]>;
 
-    /** Whether the agent can run operations autonomously. When true, monitoringAccountId and at least one investigation policy must be configured. */
+    /** Whether the agent can run operations autonomously. When true, at least one investigation policy must be configured. A monitoring account is always required. */
     autonomousOperationsEnabled: boolean;
 
     /** Instructions that guide the agent's behavior. */
@@ -87,10 +88,6 @@ namespace Microsoft.Monitor {
     /** ARM resource IDs of alert rules used by this policy. The wire property is named ruleResourceId even though its value is an array. */
     @maxItems(10)
     ruleResourceId?: Azure.Core.armResourceIdentifier[];
-
-    /** Location filter for the policy. An empty string is allowed, but a nonempty value must not contain only whitespace. */
-    @maxLength(64)
-    locationFilter?: string;
   }
 
   /**
@@ -125,21 +122,20 @@ namespace Microsoft.Monitor {
   }
 
   /**
-   * Updatable properties of an observability agent. Omitted properties are unchanged. Null clears optional configuration; a null autonomousOperationsEnabled leaves its existing value unchanged. The resulting configuration must satisfy the autonomous-operation requirements.
+   * Updatable properties of an observability agent. Omitted properties are unchanged. Null clears optional configuration; a null autonomousOperationsEnabled leaves its existing value unchanged. A valid monitoring account is always required in the resulting configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The deployed PATCH contract uses explicit null to clear optional configuration and treats a null autonomousOperationsEnabled as unchanged."
   model ObservabilityAgentPropertiesUpdate {
     /** Description of the observability agent. Null clears the description. */
     description?: string | null;
 
-    /** Resource ID of the Azure Monitor workspace where this agent stores issues. The workspace must be in the same location as the agent. Required when autonomous operations are enabled. If changed, existing issues remain in the previous workspace; only new issues are written to the new workspace. */
-    monitoringAccountId?:
-      | Azure.Core.armResourceIdentifier<[
-          {
-            type: "Microsoft.Monitor/accounts";
-          }
-        ]>
-      | null;
+    /** Resource ID of the Azure Monitor workspace where this agent stores issues. Omission retains the existing workspace; null or empty values are invalid, even when disabling autonomous operations. The workspace must be in the same location as the agent. If changed, existing issues remain in the previous workspace; only new issues are written to the new workspace. */
+    @minLength(1)
+    monitoringAccountId?: Azure.Core.armResourceIdentifier<[
+      {
+        type: "Microsoft.Monitor/accounts";
+      }
+    ]>;
 
     /** Whether the agent can run operations autonomously. Null leaves the existing value unchanged. Enabling autonomy requires a monitoring account and at least one investigation policy. */
     autonomousOperationsEnabled?: boolean | null;

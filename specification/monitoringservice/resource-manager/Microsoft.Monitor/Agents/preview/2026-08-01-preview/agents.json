@@ -475,11 +475,6 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
-        },
-        "locationFilter": {
-          "type": "string",
-          "description": "Location filter for the policy. An empty string is allowed, but a nonempty value must not contain only whitespace.",
-          "maxLength": 64
         }
       }
     },
@@ -548,7 +543,8 @@
         "monitoringAccountId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. The workspace must be in the same location as the agent. Required when autonomous operations are enabled.",
+          "description": "Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. Required even when autonomous operations are disabled. The workspace must be in the same location as the agent.",
+          "minLength": 1,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -559,7 +555,7 @@
         },
         "autonomousOperationsEnabled": {
           "type": "boolean",
-          "description": "Whether the agent can run operations autonomously. When true, monitoringAccountId and at least one investigation policy must be configured."
+          "description": "Whether the agent can run operations autonomously. When true, at least one investigation policy must be configured. A monitoring account is always required."
         },
         "instructions": {
           "type": "string",
@@ -587,12 +583,13 @@
         }
       },
       "required": [
+        "monitoringAccountId",
         "autonomousOperationsEnabled"
       ]
     },
     "ObservabilityAgentPropertiesUpdate": {
       "type": "object",
-      "description": "Updatable properties of an observability agent. Omitted properties are unchanged. Null clears optional configuration; a null autonomousOperationsEnabled leaves its existing value unchanged. The resulting configuration must satisfy the autonomous-operation requirements.",
+      "description": "Updatable properties of an observability agent. Omitted properties are unchanged. Null clears optional configuration; a null autonomousOperationsEnabled leaves its existing value unchanged. A valid monitoring account is always required in the resulting configuration.",
       "properties": {
         "description": {
           "type": "string",
@@ -602,8 +599,8 @@
         "monitoringAccountId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource ID of the Azure Monitor workspace where this agent stores issues. The workspace must be in the same location as the agent. Required when autonomous operations are enabled. If changed, existing issues remain in the previous workspace; only new issues are written to the new workspace.",
-          "x-nullable": true,
+          "description": "Resource ID of the Azure Monitor workspace where this agent stores issues. Omission retains the existing workspace; null or empty values are invalid, even when disabling autonomous operations. The workspace must be in the same location as the agent. If changed, existing issues remain in the previous workspace; only new issues are written to the new workspace.",
+          "minLength": 1,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
