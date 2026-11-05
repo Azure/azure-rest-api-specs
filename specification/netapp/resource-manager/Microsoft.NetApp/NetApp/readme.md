@@ -31,10 +31,6 @@ openapi-type: arm
 tag: package-2026-09-01
 ```
 
-The 2026-09-01 API version retains the 2026-08-01 stable contract.
-The 2026-09-15-preview API version retains the 2026-08-15-preview contract.
-All preview-only features remain exclusive to preview API versions; none are promoted to stable in this release.
-
 ### Tag: package-preview-2026-09-15-preview
 
 These settings apply only when `--tag=package-preview-2026-09-15-preview` is specified on the command line.
