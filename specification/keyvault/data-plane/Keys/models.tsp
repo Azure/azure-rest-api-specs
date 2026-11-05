@@ -70,6 +70,14 @@ union JsonWebKeyOperation {
 
   /** Indicates that the key can be used to unwrap another key. */
   unwrapKey: "unwrapKey",
+    
+  /** Indicates that the key can be used to securely wrap another key. */
+  @added(KeyVault.Versions.v2026_04_01)
+  secureWrapKey: "secureWrapKey",
+
+  /** Indicates that the key can be used to securely unwrap another key. */
+  @added(KeyVault.Versions.v2026_04_01)
+  secureUnwrapKey: "secureUnwrapKey",
 
   /** Indicates that the key can be imported during creation. */
   `import`: "import",
