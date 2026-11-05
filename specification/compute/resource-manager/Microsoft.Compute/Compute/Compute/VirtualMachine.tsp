@@ -351,7 +351,7 @@ interface VirtualMachines {
   >;
 
   /**
-   * Restores all operating system and data disks of a deallocated virtual machine from a virtual machine restore point. The restore point must contain restore point data for every disk currently attached to the virtual machine.
+   * [Preview Feature] Restores all operating system and data disks of a deallocated virtual machine from a virtual machine restore point. The restore point must contain restore point data for every disk currently attached to the virtual machine.
    */
   @added(Versions.v2026_09_01)
   restore is ComputeResourceActionNoResponseContentAsync<

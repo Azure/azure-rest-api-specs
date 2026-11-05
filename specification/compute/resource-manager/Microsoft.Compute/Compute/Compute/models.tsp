@@ -5823,7 +5823,7 @@ model ResiliencyProfile {
   zoneMovement?: ZoneMovement;
 
   /**
-   * The read-only protection information for the virtual machine.
+   * [Preview Feature] The read-only protection information for the virtual machine.
    */
   @added(Versions.v2026_09_01)
   @visibility(Lifecycle.Read)
