@@ -2455,13 +2455,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/{messagingTransferFlowName}/disable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/{messagingTransferFlowName}/disableTransfer": {
       "post": {
-        "operationId": "MessagingTransferFlows_Disable",
+        "operationId": "MessagingTransferFlows_DisableTransfer",
         "tags": [
           "MessagingTransferFlows"
         ],
-        "description": "Disables the specified MessagingTransferFlow.",
+        "description": "Stops data transfer through the specified messaging transfer flow.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2512,8 +2512,8 @@
           }
         },
         "x-ms-examples": {
-          "Disables the messaging transfer flow": {
-            "$ref": "./examples/disableMessagingTransferFlow.json"
+          "Stops data transfer through the messaging transfer flow": {
+            "$ref": "./examples/disableTransferMessagingTransferFlow.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2522,13 +2522,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/{messagingTransferFlowName}/enable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/{messagingTransferFlowName}/enableTransfer": {
       "post": {
-        "operationId": "MessagingTransferFlows_Enable",
+        "operationId": "MessagingTransferFlows_EnableTransfer",
         "tags": [
           "MessagingTransferFlows"
         ],
-        "description": "Enables the specified MessagingTransferFlow.",
+        "description": "Starts (or resumes) data transfer through the specified messaging transfer flow. The transfer flow must be approved and linked.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2579,8 +2579,8 @@
           }
         },
         "x-ms-examples": {
-          "Enables the messaging transfer flow": {
-            "$ref": "./examples/enableMessagingTransferFlow.json"
+          "Starts data transfer through the messaging transfer flow": {
+            "$ref": "./examples/enableTransferMessagingTransferFlow.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2589,13 +2589,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/{messagingTransferFlowName}/link": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/{messagingTransferFlowName}/linkRemoteFlow": {
       "post": {
-        "operationId": "MessagingTransferFlows_Link",
+        "operationId": "MessagingTransferFlows_LinkRemoteFlow",
         "tags": [
           "MessagingTransferFlows"
         ],
-        "description": "Links the messaging transfer flow to the remote messaging transfer flow identified by its remoteTransferFlowResourceId property.",
+        "description": "Pairs this messaging transfer flow with the messaging transfer flow identified by its remoteTransferFlowResourceId on the other side of the pipeline. Once both sides are linked and approved, data can be transferred between them.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2647,7 +2647,7 @@
         },
         "x-ms-examples": {
           "Links the messaging transfer flow to its remote messaging transfer flow": {
-            "$ref": "./examples/linkMessagingTransferFlow.json"
+            "$ref": "./examples/linkRemoteFlowMessagingTransferFlow.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3667,7 +3667,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Lists all transfer flow resources (connection flows and dedicated flows) associated with the specified Pipeline.",
+        "description": "Lists the storage and messaging transfer flows that use the specified Pipeline, across all subscriptions and tenants that use it. This is the pipeline approver view; it differs from the subscription and resource group list operations, which only return the caller's own transfer flows. Results do not cross clouds; the remote side of each flow is referenced only through remoteTransferFlowResourceId.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3713,9 +3713,12 @@
           }
         },
         "x-ms-examples": {
-          "Lists the transfer flows associated with a pipeline": {
+          "Lists the storage and messaging transfer flows that use a pipeline": {
             "$ref": "./examples/listTransferFlowsByPipeline.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4175,13 +4178,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/storageTransferFlows/{storageTransferFlowName}/disable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/storageTransferFlows/{storageTransferFlowName}/disableTransfer": {
       "post": {
-        "operationId": "StorageTransferFlows_Disable",
+        "operationId": "StorageTransferFlows_DisableTransfer",
         "tags": [
           "StorageTransferFlows"
         ],
-        "description": "Disables the specified storage transfer flow.",
+        "description": "Stops data transfer through the specified storage transfer flow.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4232,8 +4235,8 @@
           }
         },
         "x-ms-examples": {
-          "Disables the storage transfer flow": {
-            "$ref": "./examples/disableStorageTransferFlow.json"
+          "Stops data transfer through the storage transfer flow": {
+            "$ref": "./examples/disableTransferStorageTransferFlow.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4242,13 +4245,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/storageTransferFlows/{storageTransferFlowName}/enable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/storageTransferFlows/{storageTransferFlowName}/enableTransfer": {
       "post": {
-        "operationId": "StorageTransferFlows_Enable",
+        "operationId": "StorageTransferFlows_EnableTransfer",
         "tags": [
           "StorageTransferFlows"
         ],
-        "description": "Enables the specified storage transfer flow.",
+        "description": "Starts (or resumes) data transfer through the specified storage transfer flow. The transfer flow must be approved and linked.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4299,8 +4302,8 @@
           }
         },
         "x-ms-examples": {
-          "Enables the storage transfer flow": {
-            "$ref": "./examples/enableStorageTransferFlow.json"
+          "Starts data transfer through the storage transfer flow": {
+            "$ref": "./examples/enableTransferStorageTransferFlow.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4309,13 +4312,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/storageTransferFlows/{storageTransferFlowName}/link": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/storageTransferFlows/{storageTransferFlowName}/linkRemoteFlow": {
       "post": {
-        "operationId": "StorageTransferFlows_Link",
+        "operationId": "StorageTransferFlows_LinkRemoteFlow",
         "tags": [
           "StorageTransferFlows"
         ],
-        "description": "Links the storage transfer flow to the remote storage transfer flow identified by its remoteTransferFlowResourceId property.",
+        "description": "Pairs this storage transfer flow with the storage transfer flow identified by its remoteTransferFlowResourceId on the other side of the pipeline. Once both sides are linked and approved, data can be transferred between them.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4367,7 +4370,7 @@
         },
         "x-ms-examples": {
           "Links the storage transfer flow to its remote storage transfer flow": {
-            "$ref": "./examples/linkStorageTransferFlow.json"
+            "$ref": "./examples/linkRemoteFlowStorageTransferFlow.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4733,7 +4736,7 @@
       "properties": {
         "pipeline": {
           "type": "string",
-          "description": "The pipeline associated with this flow"
+          "description": "Name of the pipeline the transfer flow uses. Pipelines are service-managed resources that customers cannot access directly; customers are given the name of the pipeline they are approved to use."
         },
         "flowId": {
           "type": "string",
@@ -4761,7 +4764,8 @@
         },
         "status": {
           "$ref": "#/definitions/CommonTransferFlowStatus",
-          "description": "Status of the current flow"
+          "description": "Approval and lifecycle status of the transfer flow. Set by the service; use the approve/reject pipeline actions and the enableTransfer/disableTransfer actions to change it.",
+          "readOnly": true
         },
         "forceDisabledStatus": {
           "type": "array",
@@ -4773,7 +4777,7 @@
         },
         "flowProfileName": {
           "type": "string",
-          "description": "Name of the FlowProfile to use for transfer via the flow."
+          "description": "Name of the FlowProfile to use for transfer via the flow. Resolved relative to the pipeline identified by the pipeline property."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -6224,25 +6228,33 @@
       "properties": {
         "flows": {
           "$ref": "#/definitions/ListTransferFlowsRequestBody",
-          "description": "Flow filter for listing connectionless flows by pipeline."
+          "description": "Filters applied to the storage and messaging transfer flows returned."
         }
       }
     },
     "ListTransferFlowsByPipelineResult": {
       "type": "object",
-      "description": "The transfer flows associated with a pipeline.",
+      "description": "A page of transfer flow summaries associated with a pipeline.",
       "properties": {
-        "flows": {
+        "value": {
           "type": "array",
-          "description": "Summaries of the transfer flows associated with the pipeline.",
+          "description": "Summaries of the storage and messaging transfer flows associated with the pipeline.",
           "items": {
             "$ref": "#/definitions/TransferFlowSummary"
           },
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of results, if any."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ListTransferFlowsRequestBody": {
       "type": "object",
@@ -6387,7 +6399,7 @@
       "properties": {
         "pipeline": {
           "type": "string",
-          "description": "The pipeline associated with this flow"
+          "description": "Name of the pipeline the transfer flow uses. Pipelines are service-managed resources that customers cannot access directly; customers are given the name of the pipeline they are approved to use."
         },
         "flowId": {
           "type": "string",
@@ -6415,7 +6427,8 @@
         },
         "status": {
           "$ref": "#/definitions/CommonTransferFlowStatus",
-          "description": "Status of the current flow"
+          "description": "Approval and lifecycle status of the transfer flow. Set by the service; use the approve/reject pipeline actions and the enableTransfer/disableTransfer actions to change it.",
+          "readOnly": true
         },
         "forceDisabledStatus": {
           "type": "array",
@@ -6427,7 +6440,7 @@
         },
         "flowProfileName": {
           "type": "string",
-          "description": "Name of the FlowProfile to use for transfer via the flow."
+          "description": "Name of the FlowProfile to use for transfer via the flow. Resolved relative to the pipeline identified by the pipeline property."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -7568,7 +7581,7 @@
       "properties": {
         "pipeline": {
           "type": "string",
-          "description": "The pipeline associated with this flow"
+          "description": "Name of the pipeline the transfer flow uses. Pipelines are service-managed resources that customers cannot access directly; customers are given the name of the pipeline they are approved to use."
         },
         "flowId": {
           "type": "string",
@@ -7596,7 +7609,8 @@
         },
         "status": {
           "$ref": "#/definitions/CommonTransferFlowStatus",
-          "description": "Status of the current flow"
+          "description": "Approval and lifecycle status of the transfer flow. Set by the service; use the approve/reject pipeline actions and the enableTransfer/disableTransfer actions to change it.",
+          "readOnly": true
         },
         "forceDisabledStatus": {
           "type": "array",
@@ -7608,7 +7622,7 @@
         },
         "flowProfileName": {
           "type": "string",
-          "description": "Name of the FlowProfile to use for transfer via the flow."
+          "description": "Name of the FlowProfile to use for transfer via the flow. Resolved relative to the pipeline identified by the pipeline property."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",

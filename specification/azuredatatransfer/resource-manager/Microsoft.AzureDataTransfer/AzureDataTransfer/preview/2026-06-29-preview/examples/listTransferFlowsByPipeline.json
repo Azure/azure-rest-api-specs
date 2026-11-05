@@ -1,5 +1,5 @@
 {
-  "title": "Lists the transfer flows associated with a pipeline",
+  "title": "Lists the storage and messaging transfer flows that use a pipeline",
   "operationId": "Pipelines_ListTransferFlows",
   "parameters": {
     "api-version": "2026-06-29-preview",
@@ -19,7 +19,7 @@
   "responses": {
     "200": {
       "body": {
-        "flows": [
+        "value": [
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/storageTransferFlows/testStorageTransferFlow",
             "status": "Enabled",
@@ -44,7 +44,8 @@
             "dataClassType": "Messaging",
             "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
           }
-        ]
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/pipelines/testPipeline/listTransferFlows?api-version=2026-06-29-preview&$skipToken=abc123"
       }
     }
   }

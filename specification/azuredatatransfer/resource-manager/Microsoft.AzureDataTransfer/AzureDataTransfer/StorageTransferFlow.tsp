@@ -68,27 +68,27 @@ interface StorageTransferFlows {
   delete is ArmResourceDeleteWithoutOkAsync<StorageTransferFlow>;
 
   /**
-   * Disables the specified storage transfer flow.
+   * Stops data transfer through the specified storage transfer flow.
    */
-  disable is ArmResourceActionAsync<
+  disableTransfer is ArmResourceActionAsync<
     StorageTransferFlow,
     void,
     StorageTransferFlow
   >;
 
   /**
-   * Enables the specified storage transfer flow.
+   * Starts (or resumes) data transfer through the specified storage transfer flow. The transfer flow must be approved and linked.
    */
-  enable is ArmResourceActionAsync<
+  enableTransfer is ArmResourceActionAsync<
     StorageTransferFlow,
     void,
     StorageTransferFlow
   >;
 
   /**
-   * Links the storage transfer flow to the remote storage transfer flow identified by its remoteTransferFlowResourceId property.
+   * Pairs this storage transfer flow with the storage transfer flow identified by its remoteTransferFlowResourceId on the other side of the pipeline. Once both sides are linked and approved, data can be transferred between them.
    */
-  link is ArmResourceActionAsync<
+  linkRemoteFlow is ArmResourceActionAsync<
     StorageTransferFlow,
     void,
     StorageTransferFlow

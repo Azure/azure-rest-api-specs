@@ -18,7 +18,7 @@ namespace Microsoft.AzureDataTransfer;
 @added(Versions.v2026_06_29_preview)
 model CommonTransferFlowProperties {
   /**
-   * The pipeline associated with this flow
+   * Name of the pipeline the transfer flow uses. Pipelines are service-managed resources that customers cannot access directly; customers are given the name of the pipeline they are approved to use.
    */
   pipeline: string;
 
@@ -46,9 +46,9 @@ model CommonTransferFlowProperties {
   ]>;
 
   /**
-   * Status of the current flow
+   * Approval and lifecycle status of the transfer flow. Set by the service; use the approve/reject pipeline actions and the enableTransfer/disableTransfer actions to change it.
    */
-  status?: CommonTransferFlowStatus;
+  @visibility(Lifecycle.Read) status?: CommonTransferFlowStatus;
 
   /**
    * Force disablement status of the current flow
@@ -57,7 +57,7 @@ model CommonTransferFlowProperties {
   forceDisabledStatus?: ForceDisabledStatus[];
 
   /**
-   * Name of the FlowProfile to use for transfer via the flow.
+   * Name of the FlowProfile to use for transfer via the flow. Resolved relative to the pipeline identified by the pipeline property.
    */
   flowProfileName: string;
 
@@ -107,7 +107,7 @@ union CommonTransferFlowStatus {
 @added(Versions.v2026_06_29_preview)
 model ListTransferFlowsByPipelineRequestBody {
   /**
-   * Flow filter for listing connectionless flows by pipeline.
+   * Filters applied to the storage and messaging transfer flows returned.
    */
   flows?: ListTransferFlowsRequestBody;
 }
@@ -208,15 +208,22 @@ model TransferFlowSummary {
 }
 
 /**
- * The transfer flows associated with a pipeline.
+ * A page of transfer flow summaries associated with a pipeline.
  */
 @added(Versions.v2026_06_29_preview)
 model ListTransferFlowsByPipelineResult {
   /**
-   * Summaries of the transfer flows associated with the pipeline.
+   * Summaries of the storage and messaging transfer flows associated with the pipeline.
    */
+  @pageItems
   @identifiers(#["id"])
-  flows?: TransferFlowSummary[];
+  value: TransferFlowSummary[];
+
+  /**
+   * The link to the next page of results, if any.
+   */
+  @nextLink
+  nextLink?: url;
 }
 
 /**

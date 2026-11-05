@@ -68,27 +68,27 @@ interface MessagingTransferFlows {
   delete is ArmResourceDeleteWithoutOkAsync<MessagingTransferFlow>;
 
   /**
-   * Disables the specified MessagingTransferFlow.
+   * Stops data transfer through the specified messaging transfer flow.
    */
-  disable is ArmResourceActionAsync<
+  disableTransfer is ArmResourceActionAsync<
     MessagingTransferFlow,
     void,
     MessagingTransferFlow
   >;
 
   /**
-   * Enables the specified MessagingTransferFlow.
+   * Starts (or resumes) data transfer through the specified messaging transfer flow. The transfer flow must be approved and linked.
    */
-  enable is ArmResourceActionAsync<
+  enableTransfer is ArmResourceActionAsync<
     MessagingTransferFlow,
     void,
     MessagingTransferFlow
   >;
 
   /**
-   * Links the messaging transfer flow to the remote messaging transfer flow identified by its remoteTransferFlowResourceId property.
+   * Pairs this messaging transfer flow with the messaging transfer flow identified by its remoteTransferFlowResourceId on the other side of the pipeline. Once both sides are linked and approved, data can be transferred between them.
    */
-  link is ArmResourceActionAsync<
+  linkRemoteFlow is ArmResourceActionAsync<
     MessagingTransferFlow,
     void,
     MessagingTransferFlow
