@@ -46835,6 +46835,14 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - RedTeams=V1Preview
+    Azure.AI.ProjectsInternal.VoiceAgentClientEventTypeExtension:
+      type: string
+      enum:
+        - session.avatar.connect
+        - rtc.call.sdp.create
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension:
       type: string
       enum:
@@ -76367,8 +76375,7 @@ components:
             - response.cancel
             - response.create
             - session.update
-            - session.avatar.connect
-            - rtc.call.sdp.create
+        - $ref: '#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentClientEventTypeExtension'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -76760,7 +76767,7 @@ components:
             - mcp_call
             - mcp_approval_request
             - message
-            - system_tool
+        - $ref: '#/components/schemas/VoiceAgentConversationItemTypeExtension'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -96454,6 +96461,9 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAgentClientEventTypeExtensions:
+      $ref: '#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentClientEventTypeExtension'
+      description: Voice-specific members added to the OpenAI client-event discriminator.
     VoiceAgentCollectDtmfStartArguments:
       type: object
       required:
@@ -96573,6 +96583,9 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAgentConversationItemTypeExtensions:
+      $ref: '#/components/schemas/VoiceAgentConversationItemTypeExtension'
+      description: Voice-specific members added to the OpenAI conversation-item discriminator.
     VoiceAgentDefinition:
       type: object
       required:
@@ -96959,7 +96972,7 @@ components:
         - type
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/VoiceAgentGreetingMode'
           description: The greeting mode.
       discriminator:
         propertyName: type
@@ -96967,6 +96980,17 @@ components:
           template: '#/components/schemas/VoiceAgentTemplateGreetingConfig'
           llm_generated: '#/components/schemas/VoiceAgentLlmGeneratedGreetingConfig'
       description: Session-start greeting configuration for a voice agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentGreetingMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - template
+            - llm_generated
+      description: The greeting modes supported by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -97397,7 +97421,7 @@ components:
         - type
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/VoiceAgentInterimResponseType'
           description: The interim-response implementation.
         triggers:
           type: array
@@ -97428,6 +97452,17 @@ components:
             - latency
             - tool
       description: A condition that may trigger an interim response.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentInterimResponseType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - static_interim_response
+            - llm_interim_response
+      description: The interim-response implementations supported by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -98417,7 +98452,7 @@ components:
         - message
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/VoiceAgentRtcCallErrorType'
           description: 'The error category, following the VoiceLive wire contract: `invalid_request_error` for a client-side signaling fault (for example, a malformed SDP offer) or `server_error` for a service-side failure. Additional categories may be added over time.'
         code:
           type: string
@@ -98426,6 +98461,17 @@ components:
           type: string
           description: A human-readable error message.
       description: Details of a WebRTC signaling error.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentRtcCallErrorType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - invalid_request_error
+            - server_error
+      description: The error categories reported for WebRTC signaling failures.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -100046,7 +100092,7 @@ components:
         - type
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/VoiceAgentToolType'
           description: The tool kind.
       discriminator:
         propertyName: type
@@ -100082,6 +100128,19 @@ components:
             - interrupt
             - skip_if_busy
       description: When a tool invocation creates a follow-up response. Additional values may be added over time.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentToolType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - function
+            - mcp
+            - system
+            - toolbox
+      description: The tool kinds supported by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -100539,13 +100598,23 @@ components:
         - type
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/VoiceConversationEngineType'
           description: The conversation engine type.
       discriminator:
         propertyName: type
         mapping:
           hosted_agent: '#/components/schemas/VoiceHostedAgentConversationEngine'
       description: An engine that owns conversation handling for a voice agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceConversationEngineType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - hosted_agent
+      description: The conversation engine types supported by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

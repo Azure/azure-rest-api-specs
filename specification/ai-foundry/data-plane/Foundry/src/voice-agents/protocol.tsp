@@ -94,13 +94,20 @@ namespace Azure.AI.Projects {
 
   alias VoiceAgentServerEventTypeExtension = Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension;
 
+  // Retain the extension union itself so its named members remain assignable to
+  // the imported discriminator type. Copying only its literals loses that relation.
+  @doc("Voice-specific members added to the OpenAI client-event discriminator.")
+  union VoiceAgentClientEventTypeExtensions {
+    @doc("The Voice Agent client-event kinds.")
+    voice_agent: VoiceAgentClientEventTypeExtension,
+  }
+
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Voice-only literals in the imported OpenAI discriminator union preserves a single polymorphic hierarchy."
   @@copyVariants(
     OpenAI.RealtimeClientEventType,
-    VoiceAgentClientEventTypeExtension
+    VoiceAgentClientEventTypeExtensions
   );
-  // Retain the extension union itself so its named members remain assignable to
-  // the imported discriminator type. Copying only its literals loses that relation.
+
   @doc("Voice-specific members added to the OpenAI server-event discriminator.")
   union VoiceAgentServerEventTypeExtensions {
     @doc("The Voice Agent server-event kinds.")
@@ -414,10 +421,16 @@ namespace Azure.AI.Projects {
     system_tool: "system_tool",
   }
 
+  @doc("Voice-specific members added to the OpenAI conversation-item discriminator.")
+  union VoiceAgentConversationItemTypeExtensions {
+    @doc("The Voice Agent conversation-item kinds.")
+    voice_agent: VoiceAgentConversationItemTypeExtension,
+  }
+
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Extend the existing Realtime item discriminator, following the shared MCP item hierarchy."
   @@copyVariants(
     OpenAI.RealtimeConversationItemType,
-    VoiceAgentConversationItemTypeExtension
+    VoiceAgentConversationItemTypeExtensions
   );
 
   @doc("Service-generated system-tool intent, not a provider result. Clients cannot create it or complete it with `function_call_output`.")
@@ -425,7 +438,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentSystemToolItem extends OpenAI.RealtimeConversationItem {
     @doc("The output-item kind. Always `system_tool`.")
-    type: "system_tool";
+    type: VoiceAgentConversationItemTypeExtension.system_tool;
 
     @doc("The identifier of the generated item.")
     id?: string;
@@ -885,7 +898,7 @@ namespace Azure.AI.Projects {
   model VoiceAgentServerEventSessionSubagentStarted
     extends OpenAI.RealtimeServerEvent {
     @doc("The event type. Always `session.subagent.started`.")
-    type: "session.subagent.started";
+    type: VoiceAgentServerEventTypeExtension.session_subagent_started;
 
     ...VoiceAgentServerEventSessionSubagentLifecycle;
   }
@@ -896,7 +909,7 @@ namespace Azure.AI.Projects {
   model VoiceAgentServerEventSessionSubagentCompleted
     extends OpenAI.RealtimeServerEvent {
     @doc("The event type. Always `session.subagent.completed`.")
-    type: "session.subagent.completed";
+    type: VoiceAgentServerEventTypeExtension.session_subagent_completed;
 
     ...VoiceAgentServerEventSessionSubagentLifecycle;
   }
@@ -907,7 +920,7 @@ namespace Azure.AI.Projects {
   model VoiceAgentServerEventSessionSubagentAborted
     extends OpenAI.RealtimeServerEvent {
     @doc("The event type. Always `session.subagent.aborted`.")
-    type: "session.subagent.aborted";
+    type: VoiceAgentServerEventTypeExtension.session_subagent_aborted;
 
     ...VoiceAgentServerEventSessionSubagentLifecycle;
 
@@ -921,7 +934,7 @@ namespace Azure.AI.Projects {
   model VoiceAgentClientEventSessionAvatarConnect
     extends OpenAI.RealtimeClientEvent {
     @doc("The event type. Always `session.avatar.connect`.")
-    type: "session.avatar.connect";
+    type: VoiceAgentClientEventTypeExtension.session_avatar_connect;
 
     @doc("An optional client-generated event identifier.")
     event_id?: string;
@@ -936,7 +949,7 @@ namespace Azure.AI.Projects {
   model VoiceAgentClientEventRtcCallSdpCreate
     extends OpenAI.RealtimeClientEvent {
     @doc("The event type. Always `rtc.call.sdp.create`.")
-    type: "rtc.call.sdp.create";
+    type: VoiceAgentClientEventTypeExtension.rtc_call_sdp_create;
 
     @doc("An optional client-generated event identifier.")
     event_id?: string;
@@ -954,7 +967,7 @@ namespace Azure.AI.Projects {
   model VoiceAgentServerEventRtcCallSdpCreated
     extends OpenAI.RealtimeServerEvent {
     @doc("The event type. Always `rtc.call.sdp.created`.")
-    type: "rtc.call.sdp.created";
+    type: VoiceAgentServerEventTypeExtension.rtc_call_sdp_created;
 
     @doc("The server-generated event identifier.")
     event_id: string;
@@ -966,12 +979,24 @@ namespace Azure.AI.Projects {
     sdp_answer: string;
   }
 
+  @doc("The error categories reported for WebRTC signaling failures.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  union VoiceAgentRtcCallErrorType {
+    string,
+
+    @doc("A client-side signaling fault, such as a malformed SDP offer.")
+    invalid_request_error: "invalid_request_error",
+
+    @doc("A service-side signaling failure.")
+    server_error: "server_error",
+  }
+
   @doc("Details of a WebRTC signaling error.")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   @usage(VoiceAgentServerEventUsage)
   model VoiceAgentRtcCallErrorDetails {
     @doc("The error category, following the VoiceLive wire contract: `invalid_request_error` for a client-side signaling fault (for example, a malformed SDP offer) or `server_error` for a service-side failure. Additional categories may be added over time.")
-    type: string;
+    type: VoiceAgentRtcCallErrorType;
 
     @doc("A machine-readable error code, when available.")
     code?: string;
@@ -985,7 +1010,7 @@ namespace Azure.AI.Projects {
   @usage(VoiceAgentServerEventUsage)
   model VoiceAgentServerEventRtcCallError extends OpenAI.RealtimeServerEvent {
     @doc("The event type. Always `rtc.call.error`.")
-    type: "rtc.call.error";
+    type: VoiceAgentServerEventTypeExtension.rtc_call_error;
 
     @doc("An optional server-generated event identifier.")
     event_id?: string;
@@ -1013,7 +1038,7 @@ namespace Azure.AI.Projects {
   @usage(VoiceAgentServerEventUsage)
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventWarning extends OpenAI.RealtimeServerEvent {
-    type: "warning";
+    type: VoiceAgentServerEventTypeExtension.warning;
     event_id: string;
     warning: VoiceAgentServerEventWarningDetails;
   }
@@ -1023,7 +1048,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventSessionAvatarConnecting
     extends OpenAI.RealtimeServerEvent {
-    type: "session.avatar.connecting";
+    type: VoiceAgentServerEventTypeExtension.session_avatar_connecting;
     event_id: string;
 
     @doc("The server's SDP answer for avatar media negotiation.")
@@ -1035,7 +1060,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventSessionAvatarSwitchToSpeaking
     extends OpenAI.RealtimeServerEvent {
-    type: "session.avatar.switch_to_speaking";
+    type: VoiceAgentServerEventTypeExtension.session_avatar_switch_to_speaking;
     event_id: string;
     turn_id?: string;
   }
@@ -1045,7 +1070,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventSessionAvatarSwitchToIdle
     extends OpenAI.RealtimeServerEvent {
-    type: "session.avatar.switch_to_idle";
+    type: VoiceAgentServerEventTypeExtension.session_avatar_switch_to_idle;
     event_id: string;
     turn_id?: string;
   }
@@ -1055,7 +1080,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventResponseAudioTimestampDelta
     extends OpenAI.RealtimeServerEvent {
-    type: "response.audio_timestamp.delta";
+    type: VoiceAgentServerEventTypeExtension.response_audio_timestamp_delta;
     event_id: string;
     response_id: string;
     item_id: string;
@@ -1064,7 +1089,7 @@ namespace Azure.AI.Projects {
     audio_offset_ms: FoundryDurationMilliseconds;
     audio_duration_ms: FoundryDurationMilliseconds;
     text: string;
-    timestamp_type: "word";
+    timestamp_type: VoiceAgentAudioTimestampType.word;
   }
 
   @doc("The `response.audio_timestamp.done` server event.")
@@ -1072,7 +1097,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventResponseAudioTimestampDone
     extends OpenAI.RealtimeServerEvent {
-    type: "response.audio_timestamp.done";
+    type: VoiceAgentServerEventTypeExtension.response_audio_timestamp_done;
     event_id: string;
     response_id: string;
     item_id: string;
@@ -1085,7 +1110,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventResponseAnimationBlendshapesDelta
     extends OpenAI.RealtimeServerEvent {
-    type: "response.animation_blendshapes.delta";
+    type: VoiceAgentServerEventTypeExtension.response_animation_blendshapes_delta;
     event_id: string;
     response_id: string;
     item_id: string;
@@ -1104,7 +1129,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventResponseAnimationBlendshapesDone
     extends OpenAI.RealtimeServerEvent {
-    type: "response.animation_blendshapes.done";
+    type: VoiceAgentServerEventTypeExtension.response_animation_blendshapes_done;
     event_id: string;
     response_id: string;
     item_id: string;
@@ -1116,7 +1141,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventResponseAnimationVisemeDelta
     extends OpenAI.RealtimeServerEvent {
-    type: "response.animation_viseme.delta";
+    type: VoiceAgentServerEventTypeExtension.response_animation_viseme_delta;
     event_id: string;
     response_id: string;
     item_id: string;
@@ -1131,7 +1156,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventResponseAnimationVisemeDone
     extends OpenAI.RealtimeServerEvent {
-    type: "response.animation_viseme.done";
+    type: VoiceAgentServerEventTypeExtension.response_animation_viseme_done;
     event_id: string;
     response_id: string;
     item_id: string;
@@ -1144,7 +1169,7 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceAgentServerEventResponseVideoDelta
     extends OpenAI.RealtimeServerEvent {
-    type: "response.video.delta";
+    type: VoiceAgentServerEventTypeExtension.response_video_delta;
     event_id: string;
     output_index: int32;
     codec: string;

@@ -561,10 +561,10 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model VoiceRecordingChannelLayout {
     @doc("The role carried on the left channel. Always `user`.")
-    left: "user";
+    left: VoiceAudioRole.user;
 
     @doc("The role carried on the right channel. Always `agent`.")
-    right: "agent";
+    right: VoiceAudioRole.agent;
   }
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
