@@ -170,36 +170,13 @@
     }
   },
   "definitions": {
-    "ArmErrorResponseErrorDetail": {
-      "type": "object",
-      "description": "Contains details about the error that occurred.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code associated with the failure."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message associated with the failure."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
     "DistributedAvailabilityGroupDatabaseOperation": {
       "type": "object",
       "description": "An operation on a database in a distributed availability group.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DistributedAvailabilityGroupDatabaseOperationProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "description": "Resource properties."
         }
       },
       "allOf": [
@@ -222,6 +199,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "Link to retrieve next page of results.",
           "readOnly": true
         }
@@ -264,7 +242,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/ArmErrorResponseErrorDetail",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "The error details. Set only when the operation fails.",
           "readOnly": true
         }

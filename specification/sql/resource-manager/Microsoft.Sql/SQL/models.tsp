@@ -8030,7 +8030,7 @@ model DistributedAvailabilityGroupDatabaseOperationProperties {
    * The error details. Set only when the operation fails.
    */
   @visibility(Lifecycle.Read)
-  error?: ArmErrorResponseErrorDetail;
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
 
 /**
@@ -8044,31 +8044,6 @@ union DatabaseOperationType {
    * Create
    */
   Create: "Create",
-}
-
-/**
- * Contains details about the error that occurred.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits generated specifications by feature."
-@added(Versions.v2026_11_01_preview)
-@Azure.ResourceManager.Legacy.feature(
-  Microsoft.SqlFeatureRegistration.DistributedAvailabilityGroupDatabaseOperationFeatures.DistributedAvailabilityGroupsDatabaseOperations
-)
-model ArmErrorResponseErrorDetail {
-  /**
-   * The error code associated with the failure.
-   */
-  code: string;
-
-  /**
-   * The error message associated with the failure.
-   */
-  message: string;
-
-  /**
-   * The target of the particular error.
-   */
-  target?: string;
 }
 
 /**
@@ -8092,7 +8067,7 @@ model DistributedAvailabilityGroupDatabaseOperationListResult {
    */
   @nextLink
   @visibility(Lifecycle.Read)
-  nextLink?: string;
+  nextLink?: url;
 }
 
 /**
