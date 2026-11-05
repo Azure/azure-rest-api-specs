@@ -4,10 +4,18 @@ import "./inputs.tsp";
 
 namespace Azure.AI.Projects;
 
+/** Base intended output identity, not proof that a skill version was created. */
+@discriminator("type")
+model AgentOptimizationSkillOutputReference {
+  @doc("Skill reference type. Additional types may be added in future API versions.")
+  type: AgentOptimizationSkillReferenceType;
+}
+
 /** Intended output identity, not proof that a skill version was created. */
-model AgentOptimizationFoundrySkillOutputReference {
+model AgentOptimizationFoundrySkillOutputReference
+  extends AgentOptimizationSkillOutputReference {
   @doc("Registered Foundry skill reference discriminator.")
-  type: "foundry_skill";
+  type: AgentOptimizationSkillReferenceType.foundry_skill;
 
   @doc("Non-empty intended skill name, retained for rejected, failed, pending, and unchanged results.")
   @minLength(1)
@@ -135,10 +143,10 @@ model AgentOptimizationSkillResult {
   status: AgentOptimizationSkillResultStatus;
 
   @doc("Exact input baseline when updating or retaining an existing skill, with the same name as output_skill. Omitted when creating a new skill.")
-  input_skill?: AgentOptimizationFoundrySkillReference;
+  input_skill?: AgentOptimizationSkillReference;
 
   @doc("Intended identity for every result. A confirmed version appears only with status created; no_change retains the baseline version only in input_skill.")
-  output_skill: AgentOptimizationFoundrySkillOutputReference;
+  output_skill: AgentOptimizationSkillOutputReference;
 
   @doc("Safe, human-readable explanation of why this skill was proposed or retained, grounded in the selected evidence. Omitted until available. Must not include sensitive trace excerpts or hidden model reasoning.")
   rationale?: string;
@@ -156,7 +164,7 @@ model AgentOptimizationSkillResolvedContext {
   source_trace_ids?: string[];
 
   @doc("Deduplicated exact baselines discovered from the agent and its toolboxes. Excludes skills supplied only through skill_references context items and does not imply invocation. Omitted before discovery; empty when none were discovered or the job is agentless.")
-  agent_skills?: AgentOptimizationFoundrySkillReference[];
+  agent_skills?: AgentOptimizationSkillReference[];
 }
 
 /** Latest recorded state of a logical execution step. */

@@ -393,10 +393,26 @@ model PromptOptimizationConfiguration
   context?: SteeringPromptOptimizationContext[];
 }
 
+/** Types of skill references used by optimization. */
+union AgentOptimizationSkillReferenceType {
+  string,
+
+  /** A registered Foundry skill. */
+  foundry_skill: "foundry_skill",
+}
+
+/** Base reference to a skill used by optimization. */
+@discriminator("type")
+model AgentOptimizationSkillReference {
+  @doc("Skill reference type. Additional types may be added in future API versions.")
+  type: AgentOptimizationSkillReferenceType;
+}
+
 /** Exact reference to an existing skill version in the job's project. */
-model AgentOptimizationFoundrySkillReference {
+model AgentOptimizationFoundrySkillReference
+  extends AgentOptimizationSkillReference {
   @doc("Registered Foundry skill reference discriminator.")
-  type: "foundry_skill";
+  type: AgentOptimizationSkillReferenceType.foundry_skill;
 
   @doc("Registered skill name, from 1 to 64 characters, following the shared skill naming rules.")
   @minLength(1)
@@ -413,7 +429,7 @@ model SkillReferencesOptimizationContext extends OptimizationContext {
   type: OptimizationContextType.skill_references;
 
   @doc("Exact skill versions combined with skills discovered from Prompt or Managed targets, including toolboxes. References across context items and discovered skills are deduplicated. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. An empty list supplies no explicit baselines.")
-  skill_references: AgentOptimizationFoundrySkillReference[];
+  skill_references: AgentOptimizationSkillReference[];
 }
 
 /** Project-authorized trace providers for skill optimization. */

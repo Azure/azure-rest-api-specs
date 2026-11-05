@@ -46362,6 +46362,8 @@ components:
           type: string
           minLength: 1
           description: Non-empty exact service-returned version, present only with status created after confirmed publication. Never copy the input version here or infer a version for an uncertain write.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationSkillOutputReference'
       description: Intended output identity, not proof that a skill version was created.
     AgentOptimizationFoundrySkillReference:
       type: object
@@ -46383,6 +46385,8 @@ components:
           type: string
           minLength: 1
           description: Non-empty opaque pinned version. The aliases latest and default are not accepted.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationSkillReference'
       description: Exact reference to an existing skill version in the job's project.
     AgentOptimizationGoal:
       anyOf:
@@ -46765,6 +46769,39 @@ components:
           maxItems: 11
           description: At most eleven distinct steps in pipeline order. Older snapshots may omit collect_feedback or evaluate_training_traces.
       description: Persisted candidate execution snapshot, including partial runs. Not exposed on the job or candidate list response.
+    AgentOptimizationSkillOutputReference:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationSkillReferenceType'
+          description: Skill reference type. Additional types may be added in future API versions.
+      discriminator:
+        propertyName: type
+        mapping:
+          foundry_skill: '#/components/schemas/AgentOptimizationFoundrySkillOutputReference'
+      description: Base intended output identity, not proof that a skill version was created.
+    AgentOptimizationSkillReference:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationSkillReferenceType'
+          description: Skill reference type. Additional types may be added in future API versions.
+      discriminator:
+        propertyName: type
+        mapping:
+          foundry_skill: '#/components/schemas/AgentOptimizationFoundrySkillReference'
+      description: Base reference to a skill used by optimization.
+    AgentOptimizationSkillReferenceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - foundry_skill
+      description: Types of skill references used by optimization.
     AgentOptimizationSkillResolvedContext:
       type: object
       properties:
@@ -46776,7 +46813,7 @@ components:
         agent_skills:
           type: array
           items:
-            $ref: '#/components/schemas/AgentOptimizationFoundrySkillReference'
+            $ref: '#/components/schemas/AgentOptimizationSkillReference'
           description: Deduplicated exact baselines discovered from the agent and its toolboxes. Excludes skills supplied only through skill_references context items and does not imply invocation. Omitted before discovery; empty when none were discovered or the job is agentless.
       description: Frozen evidence and discovered baselines, without duplicating requested job configuration.
     AgentOptimizationSkillResult:
@@ -46789,10 +46826,10 @@ components:
           $ref: '#/components/schemas/AgentOptimizationSkillResultStatus'
           description: Validation or publication outcome.
         input_skill:
-          $ref: '#/components/schemas/AgentOptimizationFoundrySkillReference'
+          $ref: '#/components/schemas/AgentOptimizationSkillReference'
           description: Exact input baseline when updating or retaining an existing skill, with the same name as output_skill. Omitted when creating a new skill.
         output_skill:
-          $ref: '#/components/schemas/AgentOptimizationFoundrySkillOutputReference'
+          $ref: '#/components/schemas/AgentOptimizationSkillOutputReference'
           description: Intended identity for every result. A confirmed version appears only with status created; no_change retains the baseline version only in input_skill.
         rationale:
           type: string
@@ -94650,7 +94687,7 @@ components:
         skill_references:
           type: array
           items:
-            $ref: '#/components/schemas/AgentOptimizationFoundrySkillReference'
+            $ref: '#/components/schemas/AgentOptimizationSkillReference'
           description: Exact skill versions combined with skills discovered from Prompt or Managed targets, including toolboxes. References across context items and discovered skills are deduplicated. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. An empty list supplies no explicit baselines.
       allOf:
         - $ref: '#/components/schemas/OptimizationContext'
