@@ -524,6 +524,22 @@ using Azure.AI.Projects;
 );
 @@clientName(UpdateTelephonyBindingRequest, "UpdateTelephonyBindingInput");
 
+@@clientName(ImmediateSchedule, "TelephonyCampaignImmediateSchedule", "java");
+@@clientName(AtTimeSchedule, "TelephonyCampaignAtTimeSchedule", "java");
+@@clientName(
+  PerRecipientSchedule,
+  "TelephonyCampaignPerRecipientSchedule",
+  "java"
+);
+@@clientName(
+  FixedIntervalRetryPolicy,
+  "TelephonyFixedIntervalRetryPolicy",
+  "java"
+);
+@@clientName(PhoneNumber, "TelephonyPhoneNumber", "java");
+@@clientName(TeamsAddress, "TelephonyTeamsAddress", "java");
+@@clientName(SipAddress, "TelephonySipAddress", "java");
+
 // Use Configuration rather than Config in voice-agent model names and properties.
 @@clientName(VoiceAgentAnimationConfig, "VoiceAgentAnimationConfiguration");
 @@clientName(VoiceAgentAudioConfig, "VoiceAgentAudioConfiguration");
