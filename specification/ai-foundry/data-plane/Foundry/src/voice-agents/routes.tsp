@@ -673,7 +673,7 @@ alias TelephonyCallListTimeQueryParameters = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This interface combines agent-contained binding and call resources, call actions, and a singleton transfer-target collection, so it does not map to one standard resource operation template."
 @tag("Agent Telephony")
 interface AgentTelephony {
-  /** Creates a telephony binding for the voice agent named in the path. */
+  /** Creates a telephony binding for the voice agent named in the path. Creating a SIP binding requires the `VoiceAgents=V1Preview` opt-in. */
   @summary("Create an agent telephony binding")
   @parameterVisibility(Lifecycle.Create)
   @post
@@ -728,7 +728,7 @@ interface AgentTelephony {
     TelephonyBindingResponse
   >;
 
-  /** Updates a telephony binding owned by the voice agent named in the path. */
+  /** Updates a telephony binding owned by the voice agent named in the path. Updating a SIP binding requires the `VoiceAgents=V1Preview` opt-in. */
   @summary("Update an agent telephony binding")
   @patch
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
@@ -753,7 +753,7 @@ interface AgentTelephony {
     TelephonyBindingResponse
   >;
 
-  /** Deletes a telephony binding owned by the voice agent named in the path. */
+  /** Deletes a telephony binding owned by the voice agent named in the path. Deleting a SIP binding requires the `VoiceAgents=V1Preview` opt-in. */
   @summary("Delete an agent telephony binding")
   @delete
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
@@ -811,7 +811,7 @@ interface AgentTelephony {
     TelephonyCallRecord
   >;
 
-  /** Transfers an active inbound call to a configured target for the voice agent named in the path. */
+  /** Transfers an active inbound call to a configured target for the voice agent named in the path. Transferring a SIP call requires the `VoiceAgents=V1Preview` opt-in. */
   @summary("Transfer an active agent telephony call")
   @post
   @route("/agents/{agent_name}/telephony/calls/{call_id}:transfer")
@@ -830,7 +830,7 @@ interface AgentTelephony {
     TelephonyCallRecord
   >;
 
-  /** Ends an active inbound call owned by the voice agent named in the path. */
+  /** Ends an active inbound call owned by the voice agent named in the path. Ending a SIP call requires the `VoiceAgents=V1Preview` opt-in. */
   @summary("End an active agent telephony call")
   @post
   @route("/agents/{agent_name}/telephony/calls/{call_id}:end")
@@ -860,7 +860,7 @@ interface AgentTelephony {
     TelephonyTransferTargetsResponse
   >;
 
-  /** Replaces all transfer targets configured for the voice agent named in the path. */
+  /** Replaces all transfer targets configured for the voice agent named in the path. Configuring a SIP destination requires the `VoiceAgents=V1Preview` opt-in. */
   @summary("Replace agent telephony transfer targets")
   @put
   @route("/agents/{agent_name}/telephony/transfer_targets")
@@ -877,7 +877,7 @@ interface AgentTelephony {
     TelephonyTransferTargetsResponse
   >;
 
-  @doc("Creates one durable outbound CallJob. Each attempt pins the Agent endpoint's execution version for validation and its voice session.")
+  @doc("Creates one durable outbound CallJob. Each attempt pins the Agent endpoint's execution version for validation and its voice session. A call job over a `SipOutbound` connection requires the `VoiceAgents=V1Preview` opt-in.")
   @summary("Create an outbound telephony call job")
   @parameterVisibility(Lifecycle.Create)
   @post
@@ -926,7 +926,7 @@ interface AgentTelephony {
     AgentsPagedResult<TelephonyCallJob>
   >;
 
-  @doc("Deletes a terminal, reconciled job (otherwise 409), without cancelling calls or removing Campaign outcomes/call history. Later GET returns 404; repeated DELETE returns 204.")
+  @doc("Deletes a terminal, reconciled job (otherwise 409), without cancelling calls or removing Campaign outcomes/call history. Later GET returns 404; repeated DELETE returns 204. Deleting a SIP call job requires the `VoiceAgents=V1Preview` opt-in.")
   @summary("Delete an outbound telephony call job")
   @delete
   @route("/agents/{agent_name}/telephony_call_jobs/{call_job_id}")
@@ -965,7 +965,7 @@ interface AgentTelephony {
     TelephonyCallJobResponse
   >;
 
-  @doc("Cancels future attempts using If-Match; completion may be asynchronous. New cancellation after connection returns 409 and lets the active call finish.")
+  @doc("Cancels future attempts using If-Match; completion may be asynchronous. New cancellation after connection returns 409 and lets the active call finish. Cancelling a SIP call job requires the `VoiceAgents=V1Preview` opt-in.")
   @summary("Cancel an outbound telephony call job")
   @post
   @route("/agents/{agent_name}/telephony_call_jobs/{call_job_id}:cancel")

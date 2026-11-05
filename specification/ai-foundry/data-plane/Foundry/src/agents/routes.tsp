@@ -53,8 +53,7 @@ interface Agents {
   @post
   @route("/agents:generate")
   @tag("Agents")
-  generateAgent is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.draft_agents_v1_preview,
+  generateAgent is FoundryDataPlaneOperation<
     {
       /** The kind-specific inputs for generating and creating an agent. */
       @body body: GenerateAgentRequest;

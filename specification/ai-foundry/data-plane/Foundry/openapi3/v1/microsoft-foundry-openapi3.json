@@ -7179,7 +7179,7 @@
       "post": {
         "operationId": "AgentTelephony_createTelephonyBinding",
         "summary": "Create an agent telephony binding",
-        "description": "Creates a telephony binding for the voice agent named in the path.",
+        "description": "Creates a telephony binding for the voice agent named in the path. Creating a SIP binding requires the `VoiceAgents=V1Preview` opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7527,7 +7527,7 @@
       "patch": {
         "operationId": "AgentTelephony_updateTelephonyBinding",
         "summary": "Update an agent telephony binding",
-        "description": "Updates a telephony binding owned by the voice agent named in the path.",
+        "description": "Updates a telephony binding owned by the voice agent named in the path. Updating a SIP binding requires the `VoiceAgents=V1Preview` opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7643,7 +7643,7 @@
       "delete": {
         "operationId": "AgentTelephony_deleteTelephonyBinding",
         "summary": "Delete an agent telephony binding",
-        "description": "Deletes a telephony binding owned by the voice agent named in the path.",
+        "description": "Deletes a telephony binding owned by the voice agent named in the path. Deleting a SIP binding requires the `VoiceAgents=V1Preview` opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8001,7 +8001,7 @@
       "post": {
         "operationId": "AgentTelephony_endTelephonyCall",
         "summary": "End an active agent telephony call",
-        "description": "Ends an active inbound call owned by the voice agent named in the path.",
+        "description": "Ends an active inbound call owned by the voice agent named in the path. Ending a SIP call requires the `VoiceAgents=V1Preview` opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8090,7 +8090,7 @@
       "post": {
         "operationId": "AgentTelephony_transferTelephonyCall",
         "summary": "Transfer an active agent telephony call",
-        "description": "Transfers an active inbound call to a configured target for the voice agent named in the path.",
+        "description": "Transfers an active inbound call to a configured target for the voice agent named in the path. Transferring a SIP call requires the `VoiceAgents=V1Preview` opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8271,7 +8271,7 @@
       "put": {
         "operationId": "AgentTelephony_replaceTelephonyTransferTargets",
         "summary": "Replace agent telephony transfer targets",
-        "description": "Replaces all transfer targets configured for the voice agent named in the path.",
+        "description": "Replaces all transfer targets configured for the voice agent named in the path. Configuring a SIP destination requires the `VoiceAgents=V1Preview` opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8379,7 +8379,7 @@
       "post": {
         "operationId": "AgentTelephony_createTelephonyCallJob",
         "summary": "Create an outbound telephony call job",
-        "description": "Creates one durable outbound CallJob. Each attempt pins the Agent endpoint's execution version for validation and its voice session.",
+        "description": "Creates one durable outbound CallJob. Each attempt pins the Agent endpoint's execution version for validation and its voice session. A call job over a `SipOutbound` connection requires the `VoiceAgents=V1Preview` opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8653,7 +8653,7 @@
       "delete": {
         "operationId": "AgentTelephony_deleteTelephonyCallJob",
         "summary": "Delete an outbound telephony call job",
-        "description": "Deletes a terminal, reconciled job (otherwise 409), without cancelling calls or removing Campaign outcomes/call history. Later GET returns 404; repeated DELETE returns 204.",
+        "description": "Deletes a terminal, reconciled job (otherwise 409), without cancelling calls or removing Campaign outcomes/call history. Later GET returns 404; repeated DELETE returns 204. Deleting a SIP call job requires the `VoiceAgents=V1Preview` opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8826,7 +8826,7 @@
       "post": {
         "operationId": "AgentTelephony_cancelTelephonyCallJob",
         "summary": "Cancel an outbound telephony call job",
-        "description": "Cancels future attempts using If-Match; completion may be asynchronous. New cancellation after connection returns 409 and lets the active call finish.",
+        "description": "Cancels future attempts using If-Match; completion may be asynchronous. New cancellation after connection returns 409 and lets the active call finish. Cancelling a SIP call job requires the `VoiceAgents=V1Preview` opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -10793,18 +10793,6 @@
         "summary": "Generate an agent",
         "description": "Generates and creates an agent from kind-specific high-level inputs.\nThe generated definition remains fully editable through the standard agent versioning operations.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "DraftAgents=V1Preview"
-              ]
-            }
-          },
           {
             "name": "api-version",
             "in": "query",
@@ -110269,7 +110257,7 @@
             "items": {
               "$ref": "#/components/schemas/VoiceAgentPostCallIncludeOption"
             },
-            "description": "Additional content to include in each delivery. The transcript is always delivered. `audio` is an available option that the service will support in a future release."
+            "description": "Additional content to include in each delivery. The transcript is always delivered; add `audio` to also deliver a URL to the merged call recording."
           }
         },
         "description": "Post-call delivery configuration.",

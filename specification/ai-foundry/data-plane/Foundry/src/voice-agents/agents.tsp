@@ -360,7 +360,7 @@ model VoiceAgentPostCallConfig {
   @maxItems(10)
   destinations: VoiceAgentPostCallDestination[];
 
-  @doc("Additional content to include in each delivery. The transcript is always delivered. `audio` is an available option that the service will support in a future release.")
+  @doc("Additional content to include in each delivery. The transcript is always delivered; add `audio` to also deliver a URL to the merged call recording.")
   include?: VoiceAgentPostCallIncludeOption[];
 }
 
@@ -414,7 +414,7 @@ model VoiceAgentRoutinePostCallDestination
 union VoiceAgentPostCallIncludeOption {
   string,
 
-  @doc("A URL to the merged call recording. The service will support this option in a future release.")
+  @doc("A URL to the merged call recording.")
   audio: "audio",
 }
 
@@ -759,7 +759,7 @@ union VoiceAgentTransferDestinationType {
   @doc("A Microsoft Teams user or resource-account identifier.")
   teams: "teams",
 
-  @doc("A SIP or SIPS URI.")
+  @doc("A SIP or SIPS URI. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
   sip: "sip",
 }
 

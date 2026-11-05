@@ -537,7 +537,7 @@ union TelephonyProvider {
   @doc("Twilio Programmable Voice.")
   twilio: "twilio",
 
-  @doc("Session Initiation Protocol.")
+  @doc("Session Initiation Protocol. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
   sip: "sip",
 }
 
@@ -1370,7 +1370,7 @@ union TelephonyAddressType {
   @doc("A Microsoft Teams identity. Source addresses require a nonempty resource-account object GUID; transfer destinations also support 28:orgid:{guid}.")
   teams: "teams",
 
-  @doc("A SIP or SIPS destination for transfer.")
+  @doc("A SIP or SIPS destination for transfer. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
   sip: "sip",
 }
 
