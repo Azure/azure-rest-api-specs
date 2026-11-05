@@ -1,0 +1,81 @@
+{
+  "operationId": "QuotaManagementPolicies_CreateOrUpdate",
+  "title": "Create a quota management policy",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-12-01",
+    "policyName": "policy1",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "state": "Enabled",
+        "description": "Production storage quota policy",
+        "ingressInGbps": 100,
+        "egressInGbps": 200,
+        "tpsInKtps": 50,
+        "capacityInGb": 10240,
+        "softQuotaPercentage": 80
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/policy1",
+        "name": "policy1",
+        "type": "Microsoft.Storage/quotaManagementPolicies",
+        "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "state": "Enabled",
+          "description": "Production storage quota policy",
+          "ingressInGbps": 100,
+          "egressInGbps": 200,
+          "tpsInKtps": 50,
+          "capacityInGb": 10240,
+          "softQuotaPercentage": 80,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/operationStatuses/44444444-4444-4444-4444-444444444444?api-version=2026-12-01",
+        "Retry-After": "10"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/policy1",
+        "name": "policy1",
+        "type": "Microsoft.Storage/quotaManagementPolicies",
+        "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "state": "Enabled",
+          "description": "Production storage quota policy",
+          "ingressInGbps": 100,
+          "egressInGbps": 200,
+          "tpsInKtps": 50,
+          "capacityInGb": 10240,
+          "softQuotaPercentage": 80,
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidOperation",
+          "message": "Invalid request body or parameters"
+        }
+      }
+    }
+  }
+}

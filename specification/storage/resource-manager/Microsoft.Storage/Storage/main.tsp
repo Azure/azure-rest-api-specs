@@ -38,6 +38,8 @@ import "./StorageConnector.tsp";
 import "./StorageDataShare.tsp";
 import "./StorageContextCache.tsp";
 import "./StorageContextCacheContainer.tsp";
+import "./QuotaManagementGroup.tsp";
+import "./QuotaManagementPolicy.tsp";
 import "./BlobAccessPointConfiguration.tsp";
 import "./AdvancedPlatformMetrics.tsp";
 import "./routes.tsp";
