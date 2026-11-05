@@ -74,6 +74,22 @@ using Azure.AI.Projects;
 @@access(VoiceAgentDefinition, Access.public, "java");
 @@access(VoiceAgentLiveDefinition, Access.public, "java");
 
+@@clientName(
+  VoiceAgentLiveClientDelegation.acknowledgement_delay_ms,
+  "acknowledgementDelay",
+  "java"
+);
+@@clientName(
+  VoiceAgentLiveResponsesDelegation.acknowledgement_delay_ms,
+  "acknowledgementDelay",
+  "java"
+);
+@@clientName(
+  VoiceAgentLiveFoundryManagedAgentDelegationItem.offset_ms,
+  "offset",
+  "java"
+);
+
 @@alternateType(
   OpenAI.LiveResponsesDelegationSettingsInputParam,
   {
