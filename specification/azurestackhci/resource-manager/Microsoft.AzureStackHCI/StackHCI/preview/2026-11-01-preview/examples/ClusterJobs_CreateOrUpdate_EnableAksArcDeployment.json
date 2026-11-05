@@ -1,0 +1,68 @@
+{
+  "title": "ClusterJobs_CreateOrUpdate_EnableAksArcDeployment",
+  "operationId": "ClusterJobs_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "cluster-1",
+    "jobsName": "EnableAksArcDeployment",
+    "api-version": "2026-11-01-preview",
+    "resource": {
+      "properties": {
+        "jobType": "EnableAksArcDeployment",
+        "deploymentMode": "Deploy",
+        "deployAksArc": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/cluster-1/jobs/EnableAksArcDeployment",
+        "name": "EnableAksArcDeployment",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "properties": {
+          "jobType": "EnableAksArcDeployment",
+          "deploymentMode": "Deploy",
+          "deployAksArc": true,
+          "provisioningState": "Succeeded",
+          "jobId": "3f9b2c74-1a58-4e6d-9c2f-0b7d5e8a1c34",
+          "startTimeUtc": "2026-11-01T10:00:00Z",
+          "endTimeUtc": "2026-11-01T10:02:00Z",
+          "status": "DeploymentSuccess",
+          "reportedProperties": {
+            "percentComplete": 100,
+            "deploymentStatus": {
+              "status": "Success"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.AzureStackHCI/locations/eastus/operationStatuses/fakeid?api-version=2026-11-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/cluster-1/jobs/EnableAksArcDeployment",
+        "name": "EnableAksArcDeployment",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "properties": {
+          "jobType": "EnableAksArcDeployment",
+          "deploymentMode": "Deploy",
+          "deployAksArc": true,
+          "provisioningState": "Accepted",
+          "jobId": "3f9b2c74-1a58-4e6d-9c2f-0b7d5e8a1c34",
+          "startTimeUtc": "2026-11-01T10:00:00Z",
+          "status": "DeploymentInProgress",
+          "reportedProperties": {
+            "percentComplete": 0,
+            "deploymentStatus": {
+              "status": "InProgress"
+            }
+          }
+        }
+      }
+    }
+  }
+}

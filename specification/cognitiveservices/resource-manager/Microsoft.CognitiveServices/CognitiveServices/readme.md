@@ -20,10 +20,6 @@ To see additional help and options, run:
 
 > `autorest --help`
 
-### Contract regression checks
-
-After compiling the TypeSpec project, run `node --test test\custom-keys-contract.test.mjs` from this directory. Set `CUSTOM_KEYS_BASE_REF` to an earlier commit containing the target API version to also verify historical contracts and unrelated operations. `CUSTOM_KEYS_API_VERSION` selects the version under test and defaults to `2026-11-01`.
-
 ---
 
 ## Configuration
@@ -186,6 +182,25 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
+  - code: AvoidAdditionalProperties
+    reason: This read projection preserves the existing connection metadata string dictionary, whose keys are caller-defined and must remain extensible.
+    where:
+      - $.definitions.ConnectionPropertiesV2Read.properties.metadata
+  - code: AvoidAdditionalProperties
+    reason: These account read projections preserve the existing extensible endpoint dictionary and API-kind property bag while excluding the named credential fields.
+    where:
+      - $.definitions.AccountPropertiesRead.properties.endpoints
+      - $.definitions.ApiPropertiesRead
+  - code: PutRequestResponseSchemeArm
+    reason: Account and connection credentials are accepted in PUT/PATCH inputs but deliberately omitted from ordinary resource responses. Nonsensitive metadata is preserved, the request is a superset of the response, and each resource provides PATCH for updates.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
+  - code: ConsistentPatchProperties
+    reason: migrationToken and the apiProperties fields qnaAzureSearchEndpointKey, eventHubConnectionString and storageAccountConnectionString are write-only secrets accepted by PATCH but intentionally omitted from the resource read model. Their existing write types, optionality and constraints are preserved.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}"].patch.parameters[4].schema
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -300,6 +315,25 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
+  - code: AvoidAdditionalProperties
+    reason: This read projection preserves the existing connection metadata string dictionary, whose keys are caller-defined and must remain extensible.
+    where:
+      - $.definitions.ConnectionPropertiesV2Read.properties.metadata
+  - code: AvoidAdditionalProperties
+    reason: These account read projections preserve the existing extensible endpoint dictionary and API-kind property bag while excluding the named credential fields.
+    where:
+      - $.definitions.AccountPropertiesRead.properties.endpoints
+      - $.definitions.ApiPropertiesRead
+  - code: PutRequestResponseSchemeArm
+    reason: Account and connection credentials are accepted in PUT/PATCH inputs but deliberately omitted from ordinary resource responses. Nonsensitive metadata is preserved, the request is a superset of the response, and each resource provides PATCH for updates.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
+  - code: ConsistentPatchProperties
+    reason: migrationToken and the apiProperties fields qnaAzureSearchEndpointKey, eventHubConnectionString and storageAccountConnectionString are write-only secrets accepted by PATCH but intentionally omitted from the resource read model. Their existing write types, optionality and constraints are preserved.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}"].patch.parameters[4].schema
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -1920,9 +1954,14 @@ labels and a 0-to-1 score. The selector remains optional host-defined configurat
 not a required public property. Judge observations are inputs to Rego; Rego decides
 the action.
 
-After TypeSpec generation, run `node --test test/acs-annotations.test.mjs` from this
-project. Set `ACS_ANNOTATIONS_BASE_REF` to the November integration branch's baseline
+After TypeSpec generation, run `node --test test\cognitiveservices\acs-annotations.mjs` from the
+repository root. Set `ACS_ANNOTATIONS_BASE_REF` to the November integration branch's baseline
 commit to include the historical-version and exact-scope regression checks.
+
+## Project creation contract tests
+
+After TypeSpec generation, run `node --test test\cognitiveservices\project-create-contract.mjs`
+from the repository root to check versioned PUT responses, LRO metadata, and November examples.
 
 ## Swagger to SDK
 

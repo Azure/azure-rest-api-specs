@@ -230,6 +230,7 @@ interface AppServicePlans {
       /**
        * Specify <code>true</code> to perform a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing restartWebApps POST contract uses softRestart in the query; preserve wire compatibility."
       @query("softRestart")
       softRestart?: boolean;
     },
