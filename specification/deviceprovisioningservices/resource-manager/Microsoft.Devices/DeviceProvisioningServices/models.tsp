@@ -211,6 +211,12 @@ union IotDpsSku {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   S1: "S1",
+
+  /**
+   * The S2 SKU.
+   */
+  @added(Versions.v2026_11_02_preview)
+  S2: "S2",
 }
 
 /**
@@ -389,7 +395,17 @@ model IotDpsPropertiesDescription {
   @added(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_08_31)
   @added(Versions.v2026_11_01)
+  @removed(Versions.v2026_11_02_preview)
+  @renamedFrom(Versions.v2026_11_02_preview, "deviceRegistryNamespaces")
   @maxItems(1)
+  @identifiers(#["namespaceUuid"])
+  oldDeviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
+
+  /**
+   * The Device Registry namespaces linked to the provisioning service.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_11_02_preview)
   @identifiers(#["namespaceUuid"])
   deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
 
@@ -537,6 +553,16 @@ model IotHubDefinitionDescription {
    */
   @added(Versions.v2026_03_01_preview)
   hostName?: string;
+
+  /**
+   * The Azure Resource Manager resource ID of the linked IoT hub. This does not replace the host name or authentication settings.
+   */
+  @added(Versions.v2026_11_02_preview)
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Devices/IotHubs";
+    }
+  ]>;
 
   /**
    * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
