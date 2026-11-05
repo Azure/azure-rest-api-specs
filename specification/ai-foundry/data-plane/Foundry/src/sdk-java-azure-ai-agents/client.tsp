@@ -74,6 +74,42 @@ using Azure.AI.Projects;
 @@access(VoiceAgentDefinition, Access.public, "java");
 @@access(VoiceAgentLiveDefinition, Access.public, "java");
 
+@@alternateType(
+  OpenAI.LiveResponsesDelegationSettingsInputParam,
+  {
+    identity: "com.openai.models.live.ResponsesDelegationConfig",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveInitialSessionAudioParam,
+  {
+    identity: "com.openai.models.live.SessionConfig.Audio",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveInitialSessionAudioOutputParam,
+  {
+    identity: "com.openai.models.live.SessionConfig.Audio.Output",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveCustomVoiceParam,
+  {
+    identity: "com.openai.models.live.CustomVoice",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveSessionUsage,
+  {
+    identity: "com.openai.models.live.SessionUsage",
+  },
+  "java"
+);
+
 // Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
 @@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
 @@access(OpenAI.RealtimeClientEvent, Access.public, "java");
