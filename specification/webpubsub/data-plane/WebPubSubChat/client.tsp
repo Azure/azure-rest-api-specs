@@ -182,3 +182,62 @@ model UpdateMessageCustomization {
     UpdateMessageCustomization.message
   )
 );
+/** Chat topic input for creation, excluding the lifecycle state. */
+model ChatTopicCreateCustomized {
+  /** Topic identifier unique within the room. */
+  @key("topicId")
+  @visibility(Lifecycle.Read)
+  @pattern("^[A-Za-z0-9_-]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  id: string;
+
+  /** Topic title. */
+  @minLength(1)
+  @maxLength(256)
+  title: string;
+
+  /** Timestamp when the topic was created. */
+  @visibility(Lifecycle.Read)
+  createdAt: utcDateTime;
+
+  /** User who created the topic. */
+  @visibility(Lifecycle.Read)
+  @pattern("^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  createdBy: string;
+
+  /** Conversation associated with this topic. */
+  @visibility(Lifecycle.Read)
+  @pattern("^c\\.[A-Za-z0-9_-]{1,64}\\.[A-Za-z0-9_-]{1,64}$")
+  @minLength(1)
+  @maxLength(131)
+  conversationId: string;
+
+  /** Entity tag for conditional requests. */
+  @visibility(Lifecycle.Read)
+  etag: Azure.Core.eTag;
+}
+
+/** Request body parameter used by the client-specific create operation. */
+model ChatTopicCreateInput {
+  /** The topic to create or replace. */
+  resource: WebPubSubChat.ChatTopic;
+}
+
+@@alternateType(
+  ChatTopicCreateInput.resource,
+  ChatTopicCreateCustomized,
+  "javascript"
+);
+
+@@override(
+  WebPubSubChatServiceClient.createOrReplaceTopic,
+  replaceParameter(
+    WebPubSubChatServiceClient.createOrReplaceTopic,
+    "resource",
+    ChatTopicCreateInput.resource
+  ),
+  "javascript"
+);
