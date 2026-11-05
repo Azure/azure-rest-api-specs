@@ -1240,10 +1240,11 @@
               "input_audio_buffer.commit",
               "response.cancel",
               "response.create",
-              "session.update",
-              "session.avatar.connect",
-              "rtc.call.sdp.create"
+              "session.update"
             ]
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentClientEventTypeExtension"
           }
         ],
         "x-ms-foundry-meta": {
@@ -1797,9 +1798,11 @@
               "mcp_list_tools",
               "mcp_call",
               "mcp_approval_request",
-              "message",
-              "system_tool"
+              "message"
             ]
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentConversationItemTypeExtension"
           }
         ],
         "x-ms-foundry-meta": {
@@ -7759,6 +7762,18 @@
           ]
         }
       },
+      "VoiceAgentClientEventTypeExtension": {
+        "type": "string",
+        "enum": [
+          "session.avatar.connect",
+          "rtc.call.sdp.create"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentCollectDtmfSystemTool": {
         "type": "object",
         "required": [
@@ -7805,6 +7820,18 @@
           }
         ],
         "description": "Collects one complete SMS from an explicitly selected sender.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentConversationItemTypeExtension": {
+        "type": "string",
+        "enum": [
+          "system_tool"
+        ],
+        "description": "Additional item kinds used by the Voice Agent service.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

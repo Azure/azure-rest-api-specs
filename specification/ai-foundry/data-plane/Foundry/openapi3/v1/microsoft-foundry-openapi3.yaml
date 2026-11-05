@@ -77530,8 +77530,7 @@ components:
             - response.cancel
             - response.create
             - session.update
-            - session.avatar.connect
-            - rtc.call.sdp.create
+        - $ref: '#/components/schemas/VoiceAgentClientEventTypeExtension'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77923,7 +77922,7 @@ components:
             - mcp_call
             - mcp_approval_request
             - message
-            - system_tool
+        - $ref: '#/components/schemas/VoiceAgentConversationItemTypeExtension'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -97854,6 +97853,9 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAgentClientEventTypeExtensions:
+      $ref: '#/components/schemas/VoiceAgentClientEventTypeExtension'
+      description: Voice-specific members added to the OpenAI client-event discriminator.
     VoiceAgentCollectDtmfStartArguments:
       type: object
       required:
@@ -97973,6 +97975,9 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAgentConversationItemTypeExtensions:
+      $ref: '#/components/schemas/VoiceAgentConversationItemTypeExtension'
+      description: Voice-specific members added to the OpenAI conversation-item discriminator.
     VoiceAgentDefinition:
       type: object
       required:

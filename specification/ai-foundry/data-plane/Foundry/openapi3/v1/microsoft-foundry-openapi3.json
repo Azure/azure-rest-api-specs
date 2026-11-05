@@ -82603,10 +82603,11 @@
               "input_audio_buffer.commit",
               "response.cancel",
               "response.create",
-              "session.update",
-              "session.avatar.connect",
-              "rtc.call.sdp.create"
+              "session.update"
             ]
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentClientEventTypeExtension"
           }
         ],
         "x-ms-foundry-meta": {
@@ -83160,9 +83161,11 @@
               "mcp_list_tools",
               "mcp_call",
               "mcp_approval_request",
-              "message",
-              "system_tool"
+              "message"
             ]
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentConversationItemTypeExtension"
           }
         ],
         "x-ms-foundry-meta": {
@@ -109240,6 +109243,10 @@
           ]
         }
       },
+      "VoiceAgentClientEventTypeExtensions": {
+        "$ref": "#/components/schemas/VoiceAgentClientEventTypeExtension",
+        "description": "Voice-specific members added to the OpenAI client-event discriminator."
+      },
       "VoiceAgentCollectDtmfStartArguments": {
         "type": "object",
         "required": [
@@ -109409,6 +109416,10 @@
             "VoiceAgents=V1Preview"
           ]
         }
+      },
+      "VoiceAgentConversationItemTypeExtensions": {
+        "$ref": "#/components/schemas/VoiceAgentConversationItemTypeExtension",
+        "description": "Voice-specific members added to the OpenAI conversation-item discriminator."
       },
       "VoiceAgentDefinition": {
         "type": "object",
