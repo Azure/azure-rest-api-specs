@@ -7981,6 +7981,96 @@ model DistributedAvailabilityGroupSetRole {
 }
 
 /**
+ * The properties of a database operation in a distributed availability group.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only operation tracking resource; it has no provisioning lifecycle."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits generated specifications by feature."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(
+  Microsoft.SqlFeatureRegistration.DistributedAvailabilityGroupDatabaseOperationFeatures.DistributedAvailabilityGroupsDatabaseOperations
+)
+model DistributedAvailabilityGroupDatabaseOperationProperties {
+  /**
+   * The ID of the link operation that started this database operation.
+   */
+  @visibility(Lifecycle.Read)
+  parentOperationId?: Azure.Core.uuid;
+
+  /**
+   * The name of the database the operation is performed on.
+   */
+  @visibility(Lifecycle.Read)
+  databaseName?: string;
+
+  /**
+   * The type of the operation.
+   */
+  @visibility(Lifecycle.Read)
+  operationType?: DatabaseOperationType;
+
+  /**
+   * The operation status.
+   */
+  @visibility(Lifecycle.Read)
+  status?: ManagementOperationState;
+
+  /**
+   * The operation start time (UTC).
+   */
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  /**
+   * The time of the last operation status change (UTC).
+   */
+  @visibility(Lifecycle.Read)
+  lastModifiedTime?: utcDateTime;
+
+  /**
+   * The error details. Set only when the operation fails.
+   */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+}
+
+/**
+ * The type of the operation.
+ */
+@added(Versions.v2026_11_01_preview)
+union DatabaseOperationType {
+  string,
+
+  /**
+   * Create
+   */
+  Create: "Create",
+}
+
+/**
+ * A list of database operations in a distributed availability group.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits generated specifications by feature."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(
+  Microsoft.SqlFeatureRegistration.DistributedAvailabilityGroupDatabaseOperationFeatures.DistributedAvailabilityGroupsDatabaseOperations
+)
+model DistributedAvailabilityGroupDatabaseOperationListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: DistributedAvailabilityGroupDatabaseOperation[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
+}
+
+/**
  * A elastic pool operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

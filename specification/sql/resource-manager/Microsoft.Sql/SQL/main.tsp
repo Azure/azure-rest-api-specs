@@ -40,6 +40,8 @@ import "./DataMaskingPolicy.tsp";
 import "./DataWarehouseUserActivities.tsp";
 import "./DeletedServer.tsp";
 import "./DistributedAvailabilityGroup.tsp";
+import "./DistributedAvailabilityGroupDatabaseOperation.tsp";
+import "./DistributedAvailabilityGroupDatabaseOperationFeatureRegistration.tsp";
 import "./ElasticPool.tsp";
 import "./EncryptionProtector.tsp";
 import "./EndpointCertificate.tsp";
@@ -145,7 +147,7 @@ using TypeSpec.Versioning;
  * The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.
  */
 @Azure.ResourceManager.Legacy.features(
-  Microsoft.SqlFeatureRegistration.ReaderEndpointFeatures
+  Microsoft.SqlFeatureRegistration.DistributedAvailabilityGroupDatabaseOperationFeatures
 )
 @armProviderNamespace
 @service(#{ title: "SqlManagementClient" })
