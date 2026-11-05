@@ -3690,10 +3690,6 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -5682,10 +5678,8 @@
       "description": "Managed identity profile for the identity binding.",
       "properties": {
         "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the managed identity. Resource group and managed identity\nnames must contain only letters, digits, and hyphens. Names containing\nunderscores or other characters are not supported.",
-          "pattern": "^/subscriptions/[a-zA-Z0-9-]+/resourceGroups/[a-zA-Z0-9-]+/providers/Microsoft.ManagedIdentity/userAssignedIdentities/[a-zA-Z0-9-]+$",
+          "$ref": "#/definitions/UserAssignedIdentityResourceId",
+          "description": "The resource ID of the user-assigned managed identity.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7676,6 +7670,18 @@
             "name": "SecurityPatch",
             "value": "SecurityPatch",
             "description": "  Applies security patches to the nodes of the target clusters.\n  For information on the behavior of update run for security patch upgrade,\n  see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal"
+          }
+        ]
+      }
+    },
+    "UserAssignedIdentityResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
           }
         ]
       }
