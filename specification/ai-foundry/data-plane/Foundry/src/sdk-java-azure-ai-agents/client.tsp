@@ -598,6 +598,21 @@ using Azure.AI.Projects;
 @@clientName(VoiceAgentHandoffCondition.delay_ms, "delay", "java");
 @@clientName(VoiceAgentHandoffEdgeState.delay_ms, "delay", "java");
 @@clientName(
+  VoiceAgentServerEventSessionHandoffCompleted.prepare_duration_ms,
+  "prepareDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventSessionHandoffCompleted.duration_ms,
+  "duration",
+  "java"
+);
+@@clientName(
+  InlineVoiceSubagent.parallel_tool_calls,
+  "parallelToolCallsEnabled",
+  "java"
+);
+@@clientName(
   VoiceAgentServerEventResponseAudioTimestampDelta.audio_duration_ms,
   "audioDuration",
   "java"
@@ -716,6 +731,18 @@ using Azure.AI.Projects;
 @@clientName(
   VoiceAgentServerEventSessionSubagentStarted,
   "VoiceAgentSessionSubagentStartedEvent"
+);
+@@clientName(
+  VoiceAgentServerEventSessionHandoffStarted,
+  "VoiceAgentSessionHandoffStartedEvent"
+);
+@@clientName(
+  VoiceAgentServerEventSessionHandoffAborted,
+  "VoiceAgentSessionHandoffAbortedEvent"
+);
+@@clientName(
+  VoiceAgentServerEventSessionHandoffCompleted,
+  "VoiceAgentSessionHandoffCompletedEvent"
 );
 @@clientName(VoiceAgentServerEventWarning, "VoiceAgentWarningEvent");
 @@clientName(VoiceAgentServerEventWarningDetails, "VoiceAgentWarningDetails");
