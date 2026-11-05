@@ -1025,6 +1025,24 @@ enum AzureStorageState {
 }
 
 /**
+ * The app startup behavior when a storage mount cannot be established.
+ */
+@added(Versions.v2026_11_15)
+union StartupMountErrorPolicy {
+  string,
+
+  /**
+   * Fail app startup when the storage mount cannot be established.
+   */
+  Fail: "Fail",
+
+  /**
+   * Continue app startup when the storage mount cannot be established.
+   */
+  IgnoreAndContinue: "IgnoreAndContinue",
+}
+
+/**
  * This composes with ClientCertEnabled setting.
  * - ClientCertEnabled: false means ClientCert is ignored.
  * - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
@@ -2187,6 +2205,14 @@ model SiteProperties {
   outboundVnetRouting?: OutboundVnetRouting;
 
   /**
+   * <code>true</code> to enable outbound public IPv6 connectivity; otherwise, <code>false</code>.
+   * Always enabled and not configurable for Windows apps. For Linux apps, defaults to <code>false</code> and can be configured.
+   */
+  @added(Versions.v2026_11_15)
+  @encodedName("application/json", "outboundPublicIPv6Enabled")
+  outboundPublicIpv6Enabled?: boolean;
+
+  /**
    * Configuration of an App Service app. This property is not returned in response to normal create and read requests since it may contain sensitive information.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
@@ -2255,6 +2281,12 @@ model SiteProperties {
    * <code>true</code> to override client affinity cookie domain with X-Forwarded-Host request header. <code>false</code> to use default domain. Default is <code>false</code>.
    */
   clientAffinityProxyEnabled?: boolean;
+
+  /**
+   * Configuration for the app's home directory content share.
+   */
+  @added(Versions.v2026_11_15)
+  homeContentShare?: HomeContentShare;
 
   /**
    * <code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.
@@ -2434,6 +2466,40 @@ model SiteProperties {
    */
   @added(Versions.v2026_07_15)
   maintenanceEnabled?: boolean;
+}
+
+/**
+ * Configuration for an app's home directory content share.
+ */
+@added(Versions.v2026_11_15)
+model HomeContentShare {
+  /**
+   * Identity-based configuration of the remote file share backing the app's home directory.
+   */
+  remoteShareConfiguration?: RemoteShareConfiguration;
+}
+
+/**
+ * Identity-based configuration of a remote Azure Files share.
+ */
+@added(Versions.v2026_11_15)
+model RemoteShareConfiguration {
+  /**
+   * The HTTPS file service URI of the Azure Storage account, for example, https://mystorageaccount.file.core.windows.net/.
+   */
+  fileServiceUri?: url;
+
+  /**
+   * The name of the Azure Files share.
+   */
+  @minLength(3)
+  @maxLength(63)
+  shareName?: string;
+
+  /**
+   * The managed identity used to authenticate to the storage account. The identity must be configured on the app.
+   */
+  storageAccessIdentity?: DefaultIdentity;
 }
 
 /**
@@ -3522,6 +3588,18 @@ model AzureStorageInfoValue {
    * Mounting protocol to use for the storage account.
    */
   protocol?: AzureStorageProtocol;
+
+  /**
+   * The managed identity used to authenticate to the storage account instead of an access key. Identity-based access is supported only for Azure Files mounts.
+   */
+  @added(Versions.v2026_11_15)
+  storageAccessIdentity?: DefaultIdentity;
+
+  /**
+   * The app startup behavior when this storage mount cannot be established.
+   */
+  @added(Versions.v2026_11_15)
+  startupMountErrorPolicy?: StartupMountErrorPolicy;
 }
 
 /**
@@ -9703,6 +9781,14 @@ model SitePatchResourceProperties {
   dnsConfiguration?: SiteDnsConfig;
 
   /**
+   * <code>true</code> to enable outbound public IPv6 connectivity; otherwise, <code>false</code>.
+   * Always enabled and not configurable for Windows apps. For Linux apps, defaults to <code>false</code> and can be configured.
+   */
+  @added(Versions.v2026_11_15)
+  @encodedName("application/json", "outboundPublicIPv6Enabled")
+  outboundPublicIpv6Enabled?: boolean;
+
+  /**
    * Configuration of the app.
    */
   siteConfig?: SiteConfig;
@@ -9745,6 +9831,12 @@ model SitePatchResourceProperties {
    * <code>true</code> to override client affinity cookie domain with X-Forwarded-Host request header. <code>false</code> to use default domain. Default is <code>false</code>.
    */
   clientAffinityProxyEnabled?: boolean;
+
+  /**
+   * Configuration for the app's home directory content share.
+   */
+  @added(Versions.v2026_11_15)
+  homeContentShare?: HomeContentShare;
 
   /**
    * <code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.

@@ -10959,6 +10959,9 @@
         "x-ms-examples": {
           "Update Azure Storage Accounts": {
             "$ref": "./examples/UpdateAzureStorageAccounts.json"
+          },
+          "Update Azure Storage Accounts Using a User-Assigned Managed Identity": {
+            "$ref": "./examples/UpdateAzureStorageAccountsWithUserAssignedIdentity.json"
           }
         }
       }
@@ -43933,6 +43936,14 @@
         "protocol": {
           "$ref": "#/definitions/AzureStorageProtocol",
           "description": "Mounting protocol to use for the storage account."
+        },
+        "storageAccessIdentity": {
+          "$ref": "#/definitions/DefaultIdentity",
+          "description": "The managed identity used to authenticate to the storage account instead of an access key. Identity-based access is supported only for Azure Files mounts."
+        },
+        "startupMountErrorPolicy": {
+          "$ref": "#/definitions/StartupMountErrorPolicy",
+          "description": "The app startup behavior when this storage mount cannot be established."
         }
       }
     },
@@ -50235,6 +50246,16 @@
         }
       }
     },
+    "HomeContentShare": {
+      "type": "object",
+      "description": "Configuration for an app's home directory content share.",
+      "properties": {
+        "remoteShareConfiguration": {
+          "$ref": "#/definitions/RemoteShareConfiguration",
+          "description": "Identity-based configuration of the remote file share backing the app's home directory."
+        }
+      }
+    },
     "HostKeys": {
       "type": "object",
       "description": "Functions host level keys.",
@@ -54881,6 +54902,27 @@
         }
       }
     },
+    "RemoteShareConfiguration": {
+      "type": "object",
+      "description": "Identity-based configuration of a remote Azure Files share.",
+      "properties": {
+        "fileServiceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The HTTPS file service URI of the Azure Storage account, for example, https://mystorageaccount.file.core.windows.net/."
+        },
+        "shareName": {
+          "type": "string",
+          "description": "The name of the Azure Files share.",
+          "minLength": 3,
+          "maxLength": 63
+        },
+        "storageAccessIdentity": {
+          "$ref": "#/definitions/DefaultIdentity",
+          "description": "The managed identity used to authenticate to the storage account. The identity must be configured on the app."
+        }
+      }
+    },
     "Rendering": {
       "type": "object",
       "description": "Instructions for rendering the data",
@@ -57572,6 +57614,11 @@
           "$ref": "#/definitions/SiteDnsConfig",
           "description": "Property to configure various DNS related settings for a site."
         },
+        "outboundPublicIPv6Enabled": {
+          "type": "boolean",
+          "description": "<code>true</code> to enable outbound public IPv6 connectivity; otherwise, <code>false</code>.\nAlways enabled and not configurable for Windows apps. For Linux apps, defaults to <code>false</code> and can be configured.",
+          "x-ms-client-name": "outboundPublicIpv6Enabled"
+        },
         "siteConfig": {
           "$ref": "#/definitions/SiteConfig",
           "description": "Configuration of the app."
@@ -57613,6 +57660,10 @@
         "clientAffinityProxyEnabled": {
           "type": "boolean",
           "description": "<code>true</code> to override client affinity cookie domain with X-Forwarded-Host request header. <code>false</code> to use default domain. Default is <code>false</code>."
+        },
+        "homeContentShare": {
+          "$ref": "#/definitions/HomeContentShare",
+          "description": "Configuration for the app's home directory content share."
         },
         "clientCertEnabled": {
           "type": "boolean",
@@ -57867,6 +57918,11 @@
           "$ref": "#/definitions/OutboundVnetRouting",
           "description": "Property to configure various outbound traffic routing options over virtual network for a site"
         },
+        "outboundPublicIPv6Enabled": {
+          "type": "boolean",
+          "description": "<code>true</code> to enable outbound public IPv6 connectivity; otherwise, <code>false</code>.\nAlways enabled and not configurable for Windows apps. For Linux apps, defaults to <code>false</code> and can be configured.",
+          "x-ms-client-name": "outboundPublicIpv6Enabled"
+        },
         "siteConfig": {
           "$ref": "#/definitions/SiteConfig",
           "description": "Configuration of an App Service app. This property is not returned in response to normal create and read requests since it may contain sensitive information.",
@@ -57933,6 +57989,10 @@
         "clientAffinityProxyEnabled": {
           "type": "boolean",
           "description": "<code>true</code> to override client affinity cookie domain with X-Forwarded-Host request header. <code>false</code> to use default domain. Default is <code>false</code>."
+        },
+        "homeContentShare": {
+          "$ref": "#/definitions/HomeContentShare",
+          "description": "Configuration for the app's home directory content share."
         },
         "clientCertEnabled": {
           "type": "boolean",
@@ -59133,6 +59193,30 @@
       "required": [
         "value"
       ]
+    },
+    "StartupMountErrorPolicy": {
+      "type": "string",
+      "description": "The app startup behavior when a storage mount cannot be established.",
+      "enum": [
+        "Fail",
+        "IgnoreAndContinue"
+      ],
+      "x-ms-enum": {
+        "name": "StartupMountErrorPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fail",
+            "value": "Fail",
+            "description": "Fail app startup when the storage mount cannot be established."
+          },
+          {
+            "name": "IgnoreAndContinue",
+            "value": "IgnoreAndContinue",
+            "description": "Continue app startup when the storage mount cannot be established."
+          }
+        ]
+      }
     },
     "StaticSite": {
       "type": "object",
