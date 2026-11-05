@@ -43,6 +43,10 @@ using Microsoft.ProviderHub;
   ResourceTypeRegistrations.createOrUpdate::parameters.resource,
   "properties"
 );
+@@clientName(
+  ResourceTypeRegistrations.createOrUpdateNestedResourceTypeFirst::parameters.resource,
+  "properties"
+);
 
 @@clientName(DefaultRollouts.createOrUpdate::parameters.resource, "properties");
 

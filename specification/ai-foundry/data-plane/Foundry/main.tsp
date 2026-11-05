@@ -6,6 +6,7 @@ import "./src/agents-session-files/routes.tsp";
 import "./src/agents-microsoft365/routes.tsp";
 import "./src/agents-invocations/routes.tsp";
 import "./src/agents-invocations_ws/routes.tsp";
+import "./src/agents-voice-conversation-engine/routes.tsp";
 import "./src/agentserver-persistence/routes.tsp";
 import "./src/common/custom-types.tsp";
 import "./src/common/service.tsp";

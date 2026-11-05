@@ -31,10 +31,12 @@ namespace Azure.AI.Projects {
   @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!csharp");
   @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
+  @@clientName(OpenAI.Delegation, "LiveDelegation", "csharp");
+
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------
-  //@@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
+  @@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
 
   // --------------------------------------------------------------------------------
   // Root client
@@ -158,10 +160,29 @@ namespace Azure.AI.Projects {
 
   // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
   @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
+  @@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!csharp");
 
   // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
   @@usage(VoiceAgentTransport, Usage.input | Usage.json);
   @@access(VoiceAgentTransport, Access.public);
+
+  // Change types to avoid serialization as BinaryData
+  @@alternateType(OpenAI.RealtimeResponse.metadata, Record<unknown>);
+  @@alternateType(OpenAI.MCPTool.allowed_tools, OpenAI.MCPToolFilter | null);
+
+  // Rename Time properties for compliance
+  @@clientName(
+    VoiceAgentAzureSemanticVadOptions.idle_timeout_ms,
+    "IdleTimeout"
+  );
+  @@clientName(VoiceAgentSubagent.invoke_timeout_seconds, "InvokeTimeout");
+  @@clientName(
+    VoiceAgentSoundscapeWorkingTrackConfig.delay_ms,
+    "Delay",
+    "csharp"
+  );
+  @@clientName(VoiceAgentHandoffCondition.delay_ms, "Delay", "csharp");
+  @@clientName(VoiceAgentHandoffEdgeState.delay_ms, "Delay", "csharp");
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
@@ -1283,6 +1304,8 @@ namespace Azure.AI.Projects {
   @@access(AgentTelephony.replaceTelephonyTransferTargets, Access.internal);
   @@access(AgentTelephony.createTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.getTelephonyCallJob, Access.internal);
+  @@access(AgentTelephony.listTelephonyCallJobs, Access.internal);
+  @@access(AgentTelephony.deleteTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.cancelTelephonyCallJob, Access.internal);
 
   // --------------------------------------------------------------------------------

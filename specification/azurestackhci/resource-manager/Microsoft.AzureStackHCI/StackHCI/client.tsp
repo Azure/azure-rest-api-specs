@@ -192,6 +192,7 @@ using Microsoft.AzureStackHCI;
 @@clientName(SwitchExtension, "HciEdgeSwitchExtension", "csharp");
 @@clientName(ValidateRequest, "HciEdgeDeviceValidateContent", "csharp");
 @@clientName(ValidateResponse, "HciEdgeDeviceValidateResult", "csharp");
+@@clientName(EdgeMachineDeploymentData, "EdgeMachineDeployment", "csharp");
 @@clientName(
   EdgeMachineValidateRequest,
   "HciEdgeMachineValidateContent",
@@ -236,8 +237,8 @@ using Microsoft.AzureStackHCI;
 @@clientName(ChangeRingRequest, "ChangeRingContent", "csharp");
 @@clientName(CheckUpdatesRequest, "CheckUpdatesContent", "csharp");
 @@clientName(ClaimDeviceRequest, "ClaimDeviceContent", "csharp");
-@@clientName(DownloadRequest, "DownloadContent", "csharp");
-@@clientName(ProvisioningRequest, "ProvisioningContent", "csharp");
+@@clientName(DownloadRequest, "HciOSDownloadContent", "csharp");
+@@clientName(ProvisioningRequest, "EdgeMachineOSProvisionContent", "csharp");
 @@clientName(
   ReconcileArcSettingsRequest,
   "ReconcileArcSettingsContent",
@@ -376,6 +377,136 @@ using Microsoft.AzureStackHCI;
 );
 @@clientName(ClusterJobProperties.startTimeUtc, "StartOn", "csharp");
 @@clientName(ClusterJobProperties.endTimeUtc, "EndOn", "csharp");
+
+// ==================== New edge-machine/job API naming (APIView/PR review feedback) ====================
+// Scoped type names for new public models and enums
+@@clientName(
+  JobReportedProperties,
+  "HciClusterJobReportedProperties",
+  "csharp"
+);
+@@clientName(LifecycleDetails, "EdgeMachineLifecycleDetails", "csharp");
+@@clientName(LifecycleStatus, "EdgeMachineLifecycleStatusInfo", "csharp");
+@@clientName(LifecycleStage, "EdgeMachineLifecycleStage", "csharp");
+@@clientName(
+  LifecycleOperationStatus,
+  "EdgeMachineLifecycleOperationStatus",
+  "csharp"
+);
+@@clientName(Metadata, "HciClusterDeploymentStepMetadata", "csharp");
+@@clientName(
+  OnboardingConfiguration,
+  "EdgeMachineOnboardingConfiguration",
+  "csharp"
+);
+@@clientName(
+  OnboardingResourceType,
+  "EdgeMachineOnboardingResourceType",
+  "csharp"
+);
+@@clientName(
+  SyncConfigurationJobProperties,
+  "SyncConfigurationDiskJobProperties",
+  "csharp"
+);
+@@clientName(Architecture, "HciCpuArchitecture", "csharp");
+@@clientName(AuthenticationType, "EdgeMachineWifiAuthenticationType", "csharp");
+@@clientName(ConnectionState, "EdgeMachineWifiConnectionState", "csharp");
+@@clientName(InterfaceState, "EdgeMachineNetworkInterfaceState", "csharp");
+@@clientName(OwnerKeyType, "HciOwnershipVoucherOwnerKeyType", "csharp");
+@@clientName(
+  ResolutionStrategy,
+  "HciConfigurationDriftResolutionStrategy",
+  "csharp"
+);
+@@clientName(SolutionType, "HciOSImageSolutionType", "csharp");
+@@clientName(
+  TargetDeviceConfiguration,
+  "HciTargetDeviceConfiguration",
+  "csharp"
+);
+@@clientName(EAPMethod, "EapMethod", "csharp");
+
+// DateTimeOffset property names (On/At convention)
+@@clientName(LifecycleStatus.lastUpdatedUtc, "LastUpdatedOn", "csharp");
+@@clientName(LifecycleStage.startTimeUtc, "StartsOn", "csharp");
+@@clientName(LifecycleStage.endTimeUtc, "EndsOn", "csharp");
+@@clientName(LifecycleStage.lastUpdatedUtc, "LastUpdatedOn", "csharp");
+@@clientName(EdgeMachineDiskJobProperties.startTimeUtc, "StartsOn", "csharp");
+@@clientName(EdgeMachineDiskJobProperties.endTimeUtc, "EndsOn", "csharp");
+@@clientName(
+  EdgeMachineDiskPrivilegedJobProperties.startTimeUtc,
+  "StartsOn",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineDiskPrivilegedJobProperties.endTimeUtc,
+  "EndsOn",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineNetworkAdapterJobProperties.startTimeUtc,
+  "StartsOn",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineNetworkAdapterJobProperties.endTimeUtc,
+  "EndsOn",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineReportedProperties.workloadInventoryLastUpdated,
+  "WorkloadInventoryLastUpdatedOn",
+  "csharp"
+);
+
+// Boolean property names (approved predicate prefixes) on new models only
+@@clientName(
+  DeleteVolumeJobProperties.confirmDeletion,
+  "IsDeletionConfirmed",
+  "csharp"
+);
+@@clientName(
+  NetworkAdapterReportedProperties.managementInterface,
+  "IsManagementInterface",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineHostNetwork.storageConnectivitySwitchless,
+  "IsStorageConnectivitySwitchless",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineHostNetworkIntent.overrideVirtualSwitchConfiguration,
+  "ShouldOverrideVirtualSwitchConfiguration",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineHostNetworkIntent.overrideQosPolicy,
+  "ShouldOverrideQosPolicy",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineHostNetworkIntent.overrideAdapterProperty,
+  "ShouldOverrideAdapterProperty",
+  "csharp"
+);
+
+// Acronym PascalCase for new enum members (wire values unchanged)
+@@clientName(AuthenticationType.`WPA2-Personal`, "Wpa2Personal", "csharp");
+@@clientName(AuthenticationType.`WPA2-Enterprise`, "Wpa2Enterprise", "csharp");
+@@clientName(AuthenticationType.`WPA3-Personal`, "Wpa3Personal", "csharp");
+@@clientName(AuthenticationType.`WPA3-Enterprise`, "Wpa3Enterprise", "csharp");
+@@clientName(EAPMethod.PEAP, "Peap", "csharp");
+@@clientName(EAPMethod.`EAP-TLS`, "EapTls", "csharp");
+@@clientName(EAPMethod.`EAP-TTLS`, "EapTtls", "csharp");
+@@clientName(EAPMethod.`EAP-FAST`, "EapFast", "csharp");
+@@clientName(DiskType.SCM, "Scm", "csharp");
+@@clientName(DiskType.SATA, "Sata", "csharp");
+@@clientName(DiskType.SSD, "Ssd", "csharp");
+@@clientName(DiskType.HDD, "Hdd", "csharp");
+@@clientName(ProvisioningOsType.HCI, "Hci", "csharp");
+@@clientName(SolutionType.HCI, "Hci", "csharp");
 
 @@clientName(
   DeploymentSecuritySettings.hvciProtection,
