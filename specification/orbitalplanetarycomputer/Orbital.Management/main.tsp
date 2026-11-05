@@ -44,7 +44,32 @@ model GeoCatalog is TrackedResource<GeoCatalogProperties> {
   @segment("geoCatalogs")
   name: string;
 
-  ...ManagedServiceIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Custom identity envelope restricts the common ARM model to supported user-assigned identities."
+  @doc("The managed identity configuration. Only user-assigned identities are supported.")
+  identity?: ManagedServiceIdentity;
+}
+
+@doc("The supported managed identity types for a GeoCatalog.")
+union ManagedServiceIdentityType {
+  @doc("No managed identity.")
+  None: "None",
+
+  @doc("User-assigned managed identity.")
+  UserAssigned: "UserAssigned",
+
+  string,
+}
+
+@doc("The managed identity configuration. Only user-assigned identities are supported.")
+model ManagedServiceIdentity {
+  @doc("The type of managed identity assigned to this resource.")
+  type: ManagedServiceIdentityType;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM user-assigned identities are a dictionary keyed by resource ID, with null values used for removal."
+  @doc("The user-assigned identities, keyed by their ARM resource IDs.")
+  userAssignedIdentities?: Record<
+    | Azure.ResourceManager.CommonTypes.UserAssignedIdentity
+    | null>;
 }
 
 @doc("The Microsoft Planetary Computer Pro GeoCatalog tier")
@@ -112,7 +137,7 @@ model GeoCatalogProperties {
 }
 
 model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+  is OptionalProperties<UpdateableProperties<ManagedServiceIdentity>>;
 
 /*
   Patch request workaround for Swagger LintDiff.
