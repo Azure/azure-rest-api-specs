@@ -1,0 +1,1048 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyInsightsClient",
+    "version": "2026-09-01-preview",
+    "description": "Azure Policy hypothetical evaluation operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PolicyMcp"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/simulatePolicy": {
+      "post": {
+        "operationId": "PolicyMcp_SimulatePolicyAtManagementGroupScope",
+        "tags": [
+          "PolicyMcp"
+        ],
+        "description": "Evaluates a hypothetical policy definition against a resource beneath a management group, without creating an assignment or modifying the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The hypothetical evaluation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimulatePolicyContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySimulationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Simulate a hypothetical policy at management group scope": {
+            "$ref": "./examples/SimulatePolicyAtManagementGroupScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/simulatePolicy": {
+      "post": {
+        "operationId": "PolicyMcp_SimulatePolicyAtSubscriptionScope",
+        "tags": [
+          "PolicyMcp"
+        ],
+        "description": "Evaluates a hypothetical policy definition against a resource within a subscription, without creating an assignment or modifying the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimulatePolicyContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySimulationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Simulate a hypothetical policy at subscription scope": {
+            "$ref": "./examples/SimulatePolicyAtSubscriptionScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/simulatePolicy": {
+      "post": {
+        "operationId": "PolicyMcp_SimulatePolicyAtResourceGroupScope",
+        "tags": [
+          "PolicyMcp"
+        ],
+        "description": "Evaluates a hypothetical policy definition against a resource within a resource group, without creating an assignment or modifying the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The hypothetical evaluation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimulatePolicyContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySimulationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Simulate a hypothetical policy at resource group scope": {
+            "$ref": "./examples/SimulatePolicyAtResourceGroupScope.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PolicyInsightsCommon.PolicyAuthoringDefinitionProperties": {
+      "type": "object",
+      "description": "Properties of a policy definition supplied by the caller.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "policyType": {
+          "type": "string",
+          "description": "The policy type."
+        },
+        "mode": {
+          "type": "string",
+          "description": "The policy evaluation mode."
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy description."
+        },
+        "metadata": {
+          "description": "Arbitrary policy metadata."
+        },
+        "version": {
+          "type": "string",
+          "description": "The policy definition version."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameter definitions, indexed by parameter name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/PolicyInsightsCommon.PolicyAuthoringParameter"
+          }
+        },
+        "policyRule": {
+          "description": "The policy rule, including its if condition and then effect."
+        },
+        "versions": {
+          "type": "array",
+          "description": "The available policy definition versions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalEvaluationEnforcementSettings": {
+          "description": "Settings for external evaluation results used during enforcement."
+        }
+      },
+      "required": [
+        "policyRule"
+      ]
+    },
+    "PolicyInsightsCommon.PolicyAuthoringParameter": {
+      "type": "object",
+      "description": "A parameter declared by a policy definition.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The parameter value type."
+        },
+        "metadata": {
+          "description": "Arbitrary parameter metadata."
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "The allowed parameter values.",
+          "items": {}
+        },
+        "defaultValue": {
+          "description": "The default parameter value."
+        },
+        "schema": {
+          "description": "A JSON schema used to validate object parameter values."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "PolicySimulatedAssignment": {
+      "type": "object",
+      "description": "The hypothetical assignment synthesized by the service.",
+      "properties": {
+        "policyDefinition": {
+          "$ref": "#/definitions/PolicySimulationDefinition",
+          "description": "A definition that does not already exist. Every declared parameter must have a defaultValue."
+        }
+      },
+      "required": [
+        "policyDefinition"
+      ]
+    },
+    "PolicySimulationActionDetails": {
+      "type": "object",
+      "description": "Additional details for an action effect.",
+      "properties": {
+        "actionNames": {
+          "type": "array",
+          "description": "The actions associated with the evaluation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PolicySimulationDefinition": {
+      "type": "object",
+      "description": "A hypothetical policy definition identified by a nonexisting policy definition resource ID.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        },
+        "sku": {
+          "description": "Resource SKU information."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The resource kind."
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The identifier of the resource managing this definition."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The resource entity tag."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Resource creation and modification information."
+        },
+        "properties": {
+          "$ref": "#/definitions/PolicyInsightsCommon.PolicyAuthoringDefinitionProperties",
+          "description": "The policy definition properties."
+        },
+        "id": {
+          "type": "string",
+          "description": "A fully qualified policy definition resource identifier that does not already exist.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "properties",
+        "id"
+      ]
+    },
+    "PolicySimulationEffect": {
+      "type": "string",
+      "description": "Policy effects reported by evaluation.",
+      "enum": [
+        "None",
+        "Audit",
+        "Deny",
+        "Append",
+        "Modify",
+        "AuditIfNotExists",
+        "DeployIfNotExists",
+        "Disabled",
+        "Manual",
+        "DenyAction",
+        "SupportsCapability",
+        "EnforceSchema",
+        "AuditSchema",
+        "AuditAction"
+      ],
+      "x-ms-enum": {
+        "name": "PolicySimulationEffect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No effect."
+          },
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Audit a noncompliant resource."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny a noncompliant request."
+          },
+          {
+            "name": "Append",
+            "value": "Append",
+            "description": "Append values to the request."
+          },
+          {
+            "name": "Modify",
+            "value": "Modify",
+            "description": "Modify values in the request."
+          },
+          {
+            "name": "AuditIfNotExists",
+            "value": "AuditIfNotExists",
+            "description": "Audit when a related resource does not exist."
+          },
+          {
+            "name": "DeployIfNotExists",
+            "value": "DeployIfNotExists",
+            "description": "Deploy when a related resource does not exist."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disable evaluation."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Evaluate manual compliance."
+          },
+          {
+            "name": "DenyAction",
+            "value": "DenyAction",
+            "description": "Deny an action."
+          },
+          {
+            "name": "SupportsCapability",
+            "value": "SupportsCapability",
+            "description": "Evaluate supported capabilities."
+          },
+          {
+            "name": "EnforceSchema",
+            "value": "EnforceSchema",
+            "description": "Enforce a schema."
+          },
+          {
+            "name": "AuditSchema",
+            "value": "AuditSchema",
+            "description": "Audit a schema."
+          },
+          {
+            "name": "AuditAction",
+            "value": "AuditAction",
+            "description": "Audit an action."
+          }
+        ]
+      }
+    },
+    "PolicySimulationEffectDetails": {
+      "type": "object",
+      "description": "The policy effect used during evaluation.",
+      "properties": {
+        "policyEffect": {
+          "$ref": "#/definitions/PolicySimulationEffect",
+          "description": "The evaluated policy effect."
+        }
+      },
+      "required": [
+        "policyEffect"
+      ]
+    },
+    "PolicySimulationEvaluation": {
+      "type": "object",
+      "description": "The result of evaluating one policy.",
+      "properties": {
+        "policyInfo": {
+          "$ref": "#/definitions/PolicySimulationPolicyInfo",
+          "description": "The policy and assignment identifiers and metadata."
+        },
+        "evaluationResult": {
+          "$ref": "#/definitions/PolicySimulationOutcome",
+          "description": "The evaluation outcome."
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "The deployment identifier associated with the evaluation, when applicable."
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The error encountered during evaluation."
+        },
+        "evaluationDetails": {
+          "$ref": "#/definitions/PolicySimulationEvaluationDetails",
+          "description": "Details of policy expression and effect evaluation."
+        },
+        "complianceReasonCode": {
+          "type": "string",
+          "description": "The compliance reason code."
+        },
+        "stateDetails": {
+          "$ref": "#/definitions/PolicySimulationStateDetails",
+          "description": "Additional compliance-state details."
+        },
+        "effectDetails": {
+          "$ref": "#/definitions/PolicySimulationEffectDetails",
+          "description": "Details of the evaluated policy effect."
+        }
+      },
+      "required": [
+        "policyInfo",
+        "evaluationResult"
+      ]
+    },
+    "PolicySimulationEvaluationDetails": {
+      "type": "object",
+      "description": "Expression and effect details for an evaluated policy.",
+      "properties": {
+        "evaluatedExpressions": {
+          "type": "array",
+          "description": "Evaluated policy expressions.",
+          "items": {
+            "$ref": "#/definitions/PolicySimulationExpression"
+          },
+          "x-ms-identifiers": []
+        },
+        "ifNotExistsDetails": {
+          "$ref": "#/definitions/PolicySimulationIfNotExistsDetails",
+          "description": "Details of an existence-condition evaluation."
+        },
+        "manualDetails": {
+          "$ref": "#/definitions/PolicySimulationManualDetails",
+          "description": "Details of a manual-effect evaluation."
+        },
+        "reason": {
+          "type": "string",
+          "description": "An additional explanation of the evaluation outcome."
+        },
+        "actionDetails": {
+          "$ref": "#/definitions/PolicySimulationActionDetails",
+          "description": "Action-effect evaluation details."
+        },
+        "schemaDetails": {
+          "$ref": "#/definitions/PolicySimulationSchemaDetails",
+          "description": "Schema-effect evaluation details."
+        },
+        "missingPolicyTokenDetails": {
+          "$ref": "#/definitions/PolicySimulationMissingTokenDetails",
+          "description": "Details of missing external evaluation results."
+        },
+        "selfServeExemptionDetails": {
+          "$ref": "#/definitions/PolicySimulationExemptionDetails",
+          "description": "Self-serve exemption details."
+        }
+      }
+    },
+    "PolicySimulationEvaluationResult": {
+      "type": "object",
+      "description": "The collection of individual policy evaluations.",
+      "properties": {
+        "updatedRequestContent": {
+          "description": "Request content after policy modifications."
+        },
+        "policyEvaluations": {
+          "type": "array",
+          "description": "Individual policy evaluation results.",
+          "items": {
+            "$ref": "#/definitions/PolicySimulationEvaluation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PolicySimulationExemptionDetails": {
+      "type": "object",
+      "description": "Self-serve exemption details.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether self-serve exemptions are enabled."
+        },
+        "isEnabledForEntireAssignment": {
+          "type": "boolean",
+          "description": "Whether exemptions are enabled for the entire assignment."
+        }
+      },
+      "required": [
+        "isEnabled"
+      ]
+    },
+    "PolicySimulationExpression": {
+      "type": "object",
+      "description": "The evaluation of a policy expression.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/PolicySimulationExpressionOutcome",
+          "description": "The expression evaluation outcome."
+        },
+        "expressionKind": {
+          "type": "string",
+          "description": "The expression kind, such as field or value."
+        },
+        "expression": {
+          "type": "string",
+          "description": "The evaluated expression."
+        },
+        "path": {
+          "type": "string",
+          "description": "The evaluation property path."
+        },
+        "expressionValue": {
+          "description": "The expression value."
+        },
+        "targetValue": {
+          "description": "The comparison target value."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The comparison operator."
+        }
+      }
+    },
+    "PolicySimulationExpressionOutcome": {
+      "type": "string",
+      "description": "A policy expression evaluation outcome.",
+      "enum": [
+        "NotSpecified",
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "name": "PolicySimulationExpressionOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "No outcome was set."
+          },
+          {
+            "name": "True",
+            "value": "True",
+            "description": "The expression evaluated to true."
+          },
+          {
+            "name": "False",
+            "value": "False",
+            "description": "The expression evaluated to false."
+          }
+        ]
+      }
+    },
+    "PolicySimulationIfNotExistsDetails": {
+      "type": "object",
+      "description": "Additional details for an existence condition.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource identifier used for the existence condition."
+        },
+        "totalResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of applicable resources."
+        },
+        "requestUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI used to obtain related resources."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "The error code returned when obtaining related resources."
+        }
+      }
+    },
+    "PolicySimulationManualDetails": {
+      "type": "object",
+      "description": "Additional details for a manual effect.",
+      "properties": {
+        "attestationId": {
+          "type": "string",
+          "description": "The attestation identifier responsible for the compliance state."
+        }
+      }
+    },
+    "PolicySimulationMissingTokenDetails": {
+      "type": "object",
+      "description": "Missing external evaluation results needed to evaluate a policy condition.",
+      "properties": {
+        "shouldDeny": {
+          "type": "boolean",
+          "description": "Whether the policy denies requests missing external evaluation results."
+        },
+        "isChangeReferenceRequired": {
+          "type": "boolean",
+          "description": "Whether a change reference is required when acquiring a policy token."
+        },
+        "endpointKind": {
+          "type": "string",
+          "description": "The endpoint kind configured in the policy definition."
+        },
+        "endpointDetails": {
+          "description": "Arbitrary endpoint details configured in the policy definition."
+        },
+        "endpointResultLifespan": {
+          "type": "string",
+          "description": "The lifespan of the endpoint invocation result."
+        }
+      },
+      "required": [
+        "shouldDeny"
+      ]
+    },
+    "PolicySimulationOutcome": {
+      "type": "string",
+      "description": "An individual policy evaluation outcome.",
+      "enum": [
+        "NotSpecified",
+        "NonCompliant",
+        "Conflict",
+        "NotApplicable",
+        "Compliant",
+        "Error",
+        "Protected",
+        "Exempt",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "PolicySimulationOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "No specific outcome was set."
+          },
+          {
+            "name": "NonCompliant",
+            "value": "NonCompliant",
+            "description": "The resource is noncompliant."
+          },
+          {
+            "name": "Conflict",
+            "value": "Conflict",
+            "description": "Policy definitions conflict."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The policy does not apply."
+          },
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "The resource is compliant."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Evaluation encountered an error."
+          },
+          {
+            "name": "Protected",
+            "value": "Protected",
+            "description": "The resource is protected."
+          },
+          {
+            "name": "Exempt",
+            "value": "Exempt",
+            "description": "The resource is exempt."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Compliance is unknown."
+          }
+        ]
+      }
+    },
+    "PolicySimulationPolicyInfo": {
+      "type": "object",
+      "description": "Metadata identifying an evaluated policy and its assignment.",
+      "properties": {
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The policy definition identifier."
+        },
+        "policySetDefinitionId": {
+          "type": "string",
+          "description": "The policy set definition identifier."
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "The definition reference identifier within a policy set."
+        },
+        "policySetDefinitionName": {
+          "type": "string",
+          "description": "The policy set definition name."
+        },
+        "policySetDefinitionDisplayName": {
+          "type": "string",
+          "description": "The policy set definition display name."
+        },
+        "policySetDefinitionVersion": {
+          "type": "string",
+          "description": "The policy set definition version."
+        },
+        "policySetDefinitionCategory": {
+          "type": "string",
+          "description": "The policy set definition category."
+        },
+        "policyDefinitionName": {
+          "type": "string",
+          "description": "The policy definition name."
+        },
+        "policyDefinitionDisplayName": {
+          "type": "string",
+          "description": "The policy definition display name."
+        },
+        "policyDefinitionVersion": {
+          "type": "string",
+          "description": "The policy definition version."
+        },
+        "policyDefinitionEffect": {
+          "type": "string",
+          "description": "The policy definition effect."
+        },
+        "policyDefinitionGroupNames": {
+          "type": "array",
+          "description": "The policy definition group names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "policyAssignmentId": {
+          "type": "string",
+          "description": "The assignment identifier. The synthesized assignment is named simulatePolicy."
+        },
+        "policyAssignmentName": {
+          "type": "string",
+          "description": "The policy assignment name."
+        },
+        "policyAssignmentDisplayName": {
+          "type": "string",
+          "description": "The policy assignment display name."
+        },
+        "policyAssignmentVersion": {
+          "type": "string",
+          "description": "The policy assignment version."
+        },
+        "policyAssignmentScope": {
+          "type": "string",
+          "description": "The policy assignment scope."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "The evaluated resource location."
+        },
+        "ancestors": {
+          "type": "string",
+          "description": "The management group ancestors."
+        },
+        "complianceReasonCode": {
+          "type": "string",
+          "description": "The compliance reason code."
+        },
+        "policyExemptionIds": {
+          "type": "array",
+          "description": "The policy exemption identifiers.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "policyAssignmentId"
+      ]
+    },
+    "PolicySimulationResource": {
+      "type": "object",
+      "description": "The main resource to evaluate.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource identifier. If omitted, the service uses resourceContent.id."
+        },
+        "resourceContent": {
+          "type": "object",
+          "description": "An inline resource object. If omitted for the main resource, the service reads the resource from ARM.",
+          "additionalProperties": {}
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The resource provider API version used to read or interpret the resource.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "apiVersion"
+      ]
+    },
+    "PolicySimulationResourceSource": {
+      "type": "object",
+      "description": "A resource supplied inline or read from ARM.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource identifier. If omitted, the service uses resourceContent.id."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The resource provider API version compatible with the supplied content."
+        },
+        "resourceContent": {
+          "type": "object",
+          "description": "An inline resource object. If omitted for the main resource, the service reads the resource from ARM.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "PolicySimulationResult": {
+      "type": "object",
+      "description": "The hypothetical policy evaluation result.",
+      "properties": {
+        "policyEvaluationResult": {
+          "$ref": "#/definitions/PolicySimulationEvaluationResult",
+          "description": "The evaluation results and any content updated by Modify effects."
+        },
+        "updatedRequestContent": {
+          "description": "Request content after Modify effects are applied. No resource changes are persisted."
+        }
+      },
+      "required": [
+        "policyEvaluationResult"
+      ]
+    },
+    "PolicySimulationSchemaDetails": {
+      "type": "object",
+      "description": "Additional details for a schema effect.",
+      "properties": {
+        "schemaValidationErrors": {
+          "type": "array",
+          "description": "JSON schema validation errors.",
+          "items": {
+            "$ref": "#/definitions/PolicySimulationSchemaError"
+          },
+          "x-ms-identifiers": []
+        },
+        "unauthorizedPrefixes": {
+          "type": "array",
+          "description": "Tag prefixes that the caller cannot modify.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PolicySimulationSchemaError": {
+      "type": "object",
+      "description": "A JSON schema validation error.",
+      "properties": {
+        "errorType": {
+          "type": "string",
+          "description": "The error type."
+        },
+        "path": {
+          "type": "string",
+          "description": "The JSON property path."
+        },
+        "value": {
+          "description": "The JSON value that failed validation."
+        },
+        "schema": {
+          "type": "string",
+          "description": "The JSON schema that generated the error."
+        },
+        "schemaId": {
+          "type": "string",
+          "description": "The schema identifier."
+        }
+      }
+    },
+    "PolicySimulationStateDetails": {
+      "type": "object",
+      "description": "Additional compliance-state details.",
+      "properties": {
+        "actionNames": {
+          "type": "array",
+          "description": "Action names associated with the evaluation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "complianceReasonCode": {
+          "type": "string",
+          "description": "The compliance reason code."
+        },
+        "complianceSubState": {
+          "type": "string",
+          "description": "The compliance substate."
+        }
+      }
+    },
+    "PolicySimulationTarget": {
+      "type": "object",
+      "description": "An existing policy assignment and optional definition filters.",
+      "properties": {
+        "policyAssignmentId": {
+          "type": "string",
+          "description": "The policy assignment identifier."
+        },
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The policy definition identifier."
+        },
+        "policySetDefinitionId": {
+          "type": "string",
+          "description": "The policy set definition identifier."
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "The definition reference identifier within a policy set."
+        }
+      },
+      "required": [
+        "policyAssignmentId"
+      ]
+    },
+    "SimulatePolicyContent": {
+      "type": "object",
+      "description": "A hypothetical policy evaluation request.",
+      "properties": {
+        "simulatedAssignment": {
+          "$ref": "#/definitions/PolicySimulatedAssignment",
+          "description": "The hypothetical policy definition. Caller-supplied policy assignments are not supported."
+        },
+        "resource": {
+          "$ref": "#/definitions/PolicySimulationResource",
+          "description": "The main resource. Its API version is required. Supply resourceId or an id in resourceContent."
+        },
+        "relatedResources": {
+          "type": "array",
+          "description": "Related resources used to evaluate existence conditions. Supply resourceId or resourceContent.id; when both are supplied, they must match. Related resources must have the same resource type and subscription.",
+          "items": {
+            "$ref": "#/definitions/PolicySimulationResourceSource"
+          },
+          "x-ms-identifiers": []
+        },
+        "policyTargets": {
+          "type": "array",
+          "description": "Existing policy assignments to combine with the hypothetical definition. Omit or set to null to include all existing policies; use an empty array to evaluate only the hypothetical definition.",
+          "items": {
+            "$ref": "#/definitions/PolicySimulationTarget"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "simulatedAssignment",
+        "resource"
+      ]
+    }
+  },
+  "parameters": {}
+}
