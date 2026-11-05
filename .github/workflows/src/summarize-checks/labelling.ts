@@ -361,15 +361,6 @@ export const sdkLabels = {
     deprecatedBreakingChange: "CI-BreakingChange-Python",
     deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
   },
-  "azure-sdk-for-python-track2": {
-    breakingChange: "BreakingChange-Python-Track2-Sdk",
-    breakingChangeApproved: "BreakingChange-Python-Track2-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-Python-Track2",
-    // Note that deprecatedBreakingChangeApproved is the same for python and python-track2
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
-  },
   "azure-sdk-for-trenton": {
     breakingChange: undefined,
     breakingChangeApproved: undefined,
@@ -1057,16 +1048,6 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChange],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeApproved],
-    troubleshootingGuide: paragraph(
-      `Your PR has breaking changes in the generated SDK for Python track-2 (label:`,
-      `\`${sdkLabels["azure-sdk-for-python-track2"].breakingChange}\`).`,
-      `${diagramTsg(3, true)}.`,
-    ),
-  },
-  {
-    precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved],
     troubleshootingGuide: paragraph(
@@ -1093,16 +1074,6 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
       `${diagramTsg(3, true)}.`,
     ),
   },
-  {
-    precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppressionApproved],
-    troubleshootingGuide: paragraph(
-      `Your PR modified the suppressions for Python track-2 SDK breaking changes (label:`,
-      `${sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression}). `,
-      `${diagramTsg(3, true)}.`,
-    ),
-  },
 ];
 
 /**
@@ -1124,15 +1095,6 @@ const rulesPri2LegacySdk: RequiredLabelRule[] = [
     anyPrerequisiteLabels: ["CI-BreakingChange-Go"],
     anyRequiredLabels: ["Approved-SdkBreakingChange-Go"],
     troubleshootingGuide: `Your PR has breaking changes in the generated SDK for go (label: \`CI-BreakingChange-Go\`). ${diagramTsg(3, true)}.`,
-  },
-  {
-    precedence: 2,
-    anyPrerequisiteLabels: ["CI-BreakingChange-Python-Track2"],
-    anyRequiredLabels: ["Approved-SdkBreakingChange-Python"],
-    troubleshootingGuide: paragraph(
-      `Your PR has breaking changes in the generated SDK for python (label:`,
-      `\`CI-BreakingChange-Python-Track2\`). ${diagramTsg(3, true)}.`,
-    ),
   },
   {
     precedence: 2,
