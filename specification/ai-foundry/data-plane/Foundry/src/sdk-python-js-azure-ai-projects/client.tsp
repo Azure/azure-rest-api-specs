@@ -471,6 +471,11 @@ namespace JavaScriptToolCompatibility {
 @@clientName(Azure.AI.Projects.Agents.generateAgent, "createFromPrompt");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
+@@clientName(
+  AgentOptimizationJobs.downloadFile,
+  "downloadOptimizationJobFile",
+  "python, javascript"
+);
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
