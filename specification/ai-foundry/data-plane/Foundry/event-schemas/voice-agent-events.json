@@ -7,6 +7,38 @@
   "paths": {},
   "components": {
     "schemas": {
+      "Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension": {
+        "type": "string",
+        "enum": [
+          "warning",
+          "session.subagent.started",
+          "session.subagent.completed",
+          "session.subagent.aborted",
+          "session.avatar.connecting",
+          "session.avatar.switch_to_speaking",
+          "session.avatar.switch_to_idle",
+          "rtc.call.sdp.created",
+          "rtc.call.error",
+          "response.audio_timestamp.delta",
+          "response.audio_timestamp.done",
+          "response.animation_blendshapes.delta",
+          "response.animation_blendshapes.done",
+          "response.animation_viseme.delta",
+          "response.animation_viseme.done",
+          "response.video.delta",
+          "response.system_tool_arguments.delta",
+          "response.system_tool_arguments.done",
+          "input_collection.status",
+          "session.handoff.started",
+          "session.handoff.completed",
+          "session.handoff.aborted"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "FoundryDurationMilliseconds": {
         "type": "integer",
         "format": "int32",
@@ -5696,7 +5728,7 @@
             ]
           },
           {
-            "$ref": "#/components/schemas/VoiceAgentServerEventTypeExtension"
+            "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension"
           }
         ],
         "x-ms-foundry-meta": {
@@ -10535,38 +10567,6 @@
           }
         ],
         "description": "The completed intent arguments for a system tool, not provider success or a request for a customer function result.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAgentServerEventTypeExtension": {
-        "type": "string",
-        "enum": [
-          "warning",
-          "session.subagent.started",
-          "session.subagent.completed",
-          "session.subagent.aborted",
-          "session.avatar.connecting",
-          "session.avatar.switch_to_speaking",
-          "session.avatar.switch_to_idle",
-          "rtc.call.sdp.created",
-          "rtc.call.error",
-          "response.audio_timestamp.delta",
-          "response.audio_timestamp.done",
-          "response.animation_blendshapes.delta",
-          "response.animation_blendshapes.done",
-          "response.animation_viseme.delta",
-          "response.animation_viseme.done",
-          "response.video.delta",
-          "response.system_tool_arguments.delta",
-          "response.system_tool_arguments.done",
-          "input_collection.status",
-          "session.handoff.started",
-          "session.handoff.completed",
-          "session.handoff.aborted"
-        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

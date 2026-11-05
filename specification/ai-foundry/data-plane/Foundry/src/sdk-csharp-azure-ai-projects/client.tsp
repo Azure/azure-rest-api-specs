@@ -26,6 +26,7 @@ namespace Azure.AI.Projects;
 // Fix the xref.
 // --------------------------------------------------------------------------------
 @@clientNamespace(OpenAI, "Azure.AI.Projects", "csharp");
+@@clientNamespace(Azure.AI.ProjectsInternal, "Azure.AI.Projects", "csharp");
 @@clientNamespace(Azure.Core.Foundations, "Azure.AI.Projects", "csharp");
 
 // --------------------------------------------------------------------------------
