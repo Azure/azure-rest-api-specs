@@ -4,55 +4,66 @@
   "parameters": {
     "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     "api-version": "2026-11-15-preview",
-    "offer": "MaaP"
+    "offer": "MaaP",
+    "acceleratorType": "H100_80GB"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/Azure.A100",
-            "name": "Azure.A100",
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/H100_80GB.Global",
+            "name": "H100_80GB.Global",
             "type": "Microsoft.CognitiveServices/managedComputeCapacities",
             "properties": {
-              "acceleratorType": "Azure.A100",
+              "acceleratorType": "H100_80GB",
+              "offerScope": "Global",
+              "scopeId": "",
               "availableAccelerators": 16,
+              "totalAvailableAccelerators": 32,
               "deploymentSizeCapacities": [
                 {
                   "modelInstanceAcceleratorCount": 1,
                   "totalAvailableCapacity": 16,
                   "largestDeploymentCapacity": 8
-                },
-                {
-                  "modelInstanceAcceleratorCount": 2,
-                  "totalAvailableCapacity": 8,
-                  "largestDeploymentCapacity": 4
-                },
-                {
-                  "modelInstanceAcceleratorCount": 4,
-                  "totalAvailableCapacity": 4,
-                  "largestDeploymentCapacity": 2
                 }
               ]
             }
           },
           {
-            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/Azure.H100",
-            "name": "Azure.H100",
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/H100_80GB.DataZone.US",
+            "name": "H100_80GB.DataZone.US",
             "type": "Microsoft.CognitiveServices/managedComputeCapacities",
             "properties": {
-              "acceleratorType": "Azure.H100",
-              "availableAccelerators": 32,
+              "acceleratorType": "H100_80GB",
+              "offerScope": "DataZone",
+              "scopeId": "US",
+              "availableAccelerators": 16,
+              "totalAvailableAccelerators": 24,
               "deploymentSizeCapacities": [
                 {
                   "modelInstanceAcceleratorCount": 1,
-                  "totalAvailableCapacity": 32,
-                  "largestDeploymentCapacity": 16
-                },
+                  "totalAvailableCapacity": 16,
+                  "largestDeploymentCapacity": 8
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/H100_80GB.DataZone.EU",
+            "name": "H100_80GB.DataZone.EU",
+            "type": "Microsoft.CognitiveServices/managedComputeCapacities",
+            "properties": {
+              "acceleratorType": "H100_80GB",
+              "offerScope": "DataZone",
+              "scopeId": "EU",
+              "availableAccelerators": 8,
+              "totalAvailableAccelerators": 8,
+              "deploymentSizeCapacities": [
                 {
-                  "modelInstanceAcceleratorCount": 8,
-                  "totalAvailableCapacity": 4,
-                  "largestDeploymentCapacity": 2
+                  "modelInstanceAcceleratorCount": 1,
+                  "totalAvailableCapacity": 8,
+                  "largestDeploymentCapacity": 4
                 }
               ]
             }
