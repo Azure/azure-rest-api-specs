@@ -64,6 +64,12 @@ using Microsoft.IoTOperations;
 @@clientName(InstanceProperties, "IotOperationsInstanceProperties", "csharp");
 @@clientName(InstanceFeature, "IotOperationsInstanceFeature", "csharp");
 @@clientName(InstanceFeatureMode, "IotOperationsInstanceFeatureMode", "csharp");
+@@clientName(EdgeRegistryResource, "IotOperationsEdgeRegistry", "csharp");
+@@clientName(
+  EdgeRegistryProperties,
+  "IotOperationsEdgeRegistryProperties",
+  "csharp"
+);
 @@clientName(AdvancedSettings, "BrokerAdvancedSettings", "csharp");
 @@clientName(AuthorizationConfig, "BrokerAuthorizationConfig", "csharp");
 @@clientName(AuthorizationRule, "BrokerAuthorizationRule", "csharp");

@@ -1,0 +1,102 @@
+{
+  "title": "McpGateway_CreateOrUpdate_Manual",
+  "operationId": "McpGateway_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "my-aio-instance",
+    "mcpGatewayName": "customer-gateway",
+    "resource": {
+      "properties": {
+        "endpoint": {
+          "servicePort": 443,
+          "authentication": {
+            "method": "ServiceAccountToken",
+            "serviceAccountTokenSettings": {
+              "audiences": [
+                "aio-mcp-frontend",
+                "customer-mcp-client"
+              ]
+            }
+          },
+          "tls": {
+            "mode": "Manual",
+            "manual": {
+              "secretRef": "customer-gateway-tls"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/my-aio-instance/mcpGateways/customer-gateway",
+        "name": "customer-gateway",
+        "type": "Microsoft.IoTOperations/instances/mcpGateways",
+        "properties": {
+          "endpoint": {
+            "servicePort": 443,
+            "authentication": {
+              "method": "ServiceAccountToken",
+              "serviceAccountTokenSettings": {
+                "audiences": [
+                  "aio-mcp-frontend",
+                  "customer-mcp-client"
+                ]
+              }
+            },
+            "tls": {
+              "mode": "Manual",
+              "manual": {
+                "secretRef": "customer-gateway-tls"
+              }
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": {
+            "healthState": {
+              "status": "Available",
+              "reasonCode": "EndpointAvailable",
+              "message": "The gateway is serving with the customer-managed certificate."
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.IoTOperations/locations/eastus/operationStatuses/12345678-1234-1234-1234-123456789012?api-version=2026-12-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/my-aio-instance/mcpGateways/customer-gateway",
+        "name": "customer-gateway",
+        "type": "Microsoft.IoTOperations/instances/mcpGateways",
+        "properties": {
+          "endpoint": {
+            "servicePort": 443,
+            "authentication": {
+              "method": "ServiceAccountToken",
+              "serviceAccountTokenSettings": {
+                "audiences": [
+                  "aio-mcp-frontend",
+                  "customer-mcp-client"
+                ]
+              }
+            },
+            "tls": {
+              "mode": "Manual",
+              "manual": {
+                "secretRef": "customer-gateway-tls"
+              }
+            }
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}
