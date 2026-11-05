@@ -24,6 +24,16 @@ The repository's catalog and frozen lockfile include this support. Language
 automation must also support the selected emitter; this wiring does not install
 emitters, change SDK enablement checks, or create provisioning pipelines.
 
+For spec PR validation, selecting `@azure-tools/typespec-ts-provisioning` for
+JavaScript or `@azure-typespec/http-client-csharp-provisioning` for .NET makes
+the runner artifact's `isSpecGenSdkCheckRequired` flag `false`. Provisioning
+validation still runs and reports its actual result, including failures, but
+those failures do not fail the aggregate **SDK Validation Status** check.
+Ordinary SDK validation and other custom emitters retain their existing
+requiredness, as do pipelines with a missing or empty `TypeSpecEmitter`.
+Dedicated provisioning validation pipelines must configure the matching emitter;
+this does not create pipelines or change live pipeline settings.
+
 ## Spec Change Policies
 
 [Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage and
