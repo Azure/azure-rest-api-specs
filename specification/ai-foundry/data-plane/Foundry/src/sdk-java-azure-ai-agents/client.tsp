@@ -74,13 +74,23 @@ using Azure.AI.Projects;
 @@access(VoiceAgentDefinition, Access.public, "java");
 @@access(VoiceAgentLiveDefinition, Access.public, "java");
 
+@@alternateType(
+  OpenAI.LiveClientDelegationParam.acknowledgement_delay_ms,
+  FoundryDurationMilliseconds,
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveResponsesDelegationParam.acknowledgement_delay_ms,
+  FoundryDurationMilliseconds,
+  "java"
+);
 @@clientName(
-  VoiceAgentLiveClientDelegation.acknowledgement_delay_ms,
+  OpenAI.LiveClientDelegationParam.acknowledgement_delay_ms,
   "acknowledgementDelay",
   "java"
 );
 @@clientName(
-  VoiceAgentLiveResponsesDelegation.acknowledgement_delay_ms,
+  OpenAI.LiveResponsesDelegationParam.acknowledgement_delay_ms,
   "acknowledgementDelay",
   "java"
 );
