@@ -2037,6 +2037,124 @@ union McpToolConnectorIdExpandable {
   "java"
 );
 
+@alternateType(
+  {
+    identity: "com.azure.ai.agents.models.RealtimeResponseInputItem",
+  },
+  "java"
+)
+model RealtimeResponseInputItemProjection {}
+
+@alternateType(
+  {
+    identity: "com.azure.ai.agents.models.RealtimeResponseInputContent",
+  },
+  "java"
+)
+model RealtimeResponseInputContentProjection {}
+
+@@alternateType(
+  VoiceAgentResponseCreateParams.input,
+  RealtimeResponseInputItemProjection[],
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseCreateParams.input,
+  RealtimeResponseInputItemProjection[],
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputMessageUser.content,
+  RealtimeResponseInputContentProjection[],
+  "java"
+);
+
+// Keep the factory variants public when their collections use handwritten union wrappers.
+@@usage(OpenAI.RealtimeResponseInputMessage, Usage.input | Usage.json);
+@@usage(OpenAI.RealtimeResponseInputMessageSystem, Usage.input | Usage.json);
+@@usage(OpenAI.RealtimeResponseInputMessageDeveloper, Usage.input | Usage.json);
+@@usage(OpenAI.RealtimeResponseInputMessageUser, Usage.input | Usage.json);
+@@usage(OpenAI.RealtimeResponseInputMessageAssistant, Usage.input | Usage.json);
+@@usage(
+  OpenAI.RealtimeResponseInputMessageAssistantContent,
+  Usage.input | Usage.json
+);
+@@usage(OpenAI.RealtimeResponseInputText, Usage.input | Usage.json);
+@@usage(OpenAI.RealtimeResponseInputAudio, Usage.input | Usage.json);
+@@usage(OpenAI.RealtimeResponseInputImage, Usage.input | Usage.json);
+@@usage(OpenAI.RealtimeResponseInputFunctionCall, Usage.input | Usage.json);
+@@usage(
+  OpenAI.RealtimeResponseInputFunctionCallOutput,
+  Usage.input | Usage.json
+);
+@@usage(OpenAI.RealtimeResponseItemReference, Usage.input | Usage.json);
+@@access(OpenAI.RealtimeResponseInputMessage, Access.public, "java");
+@@access(OpenAI.RealtimeResponseInputMessageSystem, Access.public, "java");
+@@access(OpenAI.RealtimeResponseInputMessageDeveloper, Access.public, "java");
+@@access(OpenAI.RealtimeResponseInputMessageUser, Access.public, "java");
+@@access(OpenAI.RealtimeResponseInputMessageAssistant, Access.public, "java");
+@@access(
+  OpenAI.RealtimeResponseInputMessageAssistantContent,
+  Access.public,
+  "java"
+);
+@@access(OpenAI.RealtimeResponseInputText, Access.public, "java");
+@@access(OpenAI.RealtimeResponseInputAudio, Access.public, "java");
+@@access(OpenAI.RealtimeResponseInputImage, Access.public, "java");
+@@access(OpenAI.RealtimeResponseInputFunctionCall, Access.public, "java");
+@@access(OpenAI.RealtimeResponseInputFunctionCallOutput, Access.public, "java");
+@@access(OpenAI.RealtimeResponseItemReference, Access.public, "java");
+
+@TypeSpec.OpenAPI.extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union RealtimeResponseInputItemStatus {
+  completed: "completed",
+  incomplete: "incomplete",
+}
+
+@@alternateType(
+  OpenAI.RealtimeResponseInputMessageSystem.status,
+  RealtimeResponseInputItemStatus,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputMessageDeveloper.status,
+  RealtimeResponseInputItemStatus,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputMessageUser.status,
+  RealtimeResponseInputItemStatus,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputMessageAssistant.status,
+  RealtimeResponseInputItemStatus,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputFunctionCall.status,
+  RealtimeResponseInputItemStatus,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputFunctionCallOutput.status,
+  RealtimeResponseInputItemStatus,
+  "java"
+);
+
+@TypeSpec.OpenAPI.extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union RealtimeResponseInputImageDetail {
+  low: "low",
+  high: "high",
+  auto: "auto",
+}
+
+@@alternateType(
+  OpenAI.RealtimeResponseInputImage.detail,
+  RealtimeResponseInputImageDetail,
+  "java"
+);
+
 // Reuse one expandable type for the repeated `object: "realtime.item"` literal.
 @TypeSpec.OpenAPI.extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union RealtimeConversationItemObject {

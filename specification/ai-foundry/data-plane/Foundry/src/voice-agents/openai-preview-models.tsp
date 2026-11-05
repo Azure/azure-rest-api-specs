@@ -169,6 +169,73 @@ using Azure.AI.Projects;
   VoiceAgentRequiredPreview
 );
 
+// Response input models exposed by the preview voice-agent surface.
+@@extension(
+  OpenAI.RealtimeResponseInputMessage,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputMessageType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputMessageSystem,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputMessageDeveloper,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputMessageUser,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputMessageAssistant,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputMessageAssistantContent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputText,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputAudio,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputImage,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputFunctionCall,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseInputFunctionCallOutput,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeResponseItemReference,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
 // Realtime MCP errors.
 @@extension(
   OpenAI.RealtimeMCPError,
