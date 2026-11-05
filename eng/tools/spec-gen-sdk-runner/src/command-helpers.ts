@@ -110,6 +110,7 @@ export function parseArguments(): SpecGenSdkCmdInput {
     prNumber: getArgumentValue(args, "--pr-number", ""),
     apiVersion: getArgumentValue(args, "--api-version", ""),
     sdkReleaseType: getArgumentValue(args, "--sdk-release-type", ""),
+    typespecEmitter: getArgumentValue(args, "--typespec-emitter", "") || undefined,
     specCommitSha: getArgumentValue(args, "--commit", "HEAD"),
     specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
     headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),
@@ -162,6 +163,9 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
   }
   if (commandInput.sdkReleaseType) {
     specGenSdkCommand.push("--sdk-release-type", commandInput.sdkReleaseType);
+  }
+  if (commandInput.typespecEmitter) {
+    specGenSdkCommand.push("--typespec-emitter", commandInput.typespecEmitter);
   }
   return specGenSdkCommand;
 }

@@ -50,7 +50,7 @@ model ProbeConfig {
   toleratedNumberOfFailures?: int64;
 
   @doc("List of custom headers.")
-  @identifiers(#[""])
+  @identifiers(#[])
   customHeaders?: CustomHeader[];
 
   @doc("List of expected status code ranges.")
