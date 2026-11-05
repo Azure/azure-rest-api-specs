@@ -1,0 +1,49 @@
+{
+  "operationId": "QuotaManagementPolicies_Get",
+  "title": "Get a quota management policy",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-12-01",
+    "policyName": "policy1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/policy1",
+        "name": "policy1",
+        "type": "Microsoft.Storage/quotaManagementPolicies",
+        "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "state": "Enabled",
+          "description": "Production storage quota policy",
+          "ingressInGbps": 100,
+          "egressInGbps": 200,
+          "tpsInKtps": 50,
+          "capacityInGb": 10240,
+          "softQuotaPercentage": 80,
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-07-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-07-01T00:00:00Z"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "Quota management policy policy1 was not found"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "operationId": "QuotaManagementPolicies_Delete",
+  "title": "Delete a quota management policy",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-12-01",
+    "policyName": "policy1"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/operationStatuses/66666666-6666-6666-6666-666666666666?api-version=2026-12-01",
+        "Retry-After": "10"
+      }
+    },
+    "204": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceInUse",
+          "message": "Quota management policy policy1 is referenced by a quota management group"
+        }
+      }
+    }
+  }
+}
