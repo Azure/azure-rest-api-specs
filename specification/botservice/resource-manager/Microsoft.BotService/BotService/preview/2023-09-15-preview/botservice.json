@@ -2821,7 +2821,7 @@
       "properties": {
         "cognitiveServiceResourceId": {
           "type": "string",
-          "description": "The cognitive service id with this channel registration."
+          "description": "The Azure resource ID of the Speech resource associated with this channel registration.\nWhen configuring isDefaultBotForCogSvcAccount as true with cognitiveServiceSubscriptionKey and cognitiveServiceRegion,\nprovide this ID for the Speech resource that owns the supplied key. The caller must have appropriate access to that resource."
         },
         "cognitiveServiceRegion": {
           "type": "string",
@@ -2849,7 +2849,7 @@
         },
         "isDefaultBotForCogSvcAccount": {
           "type": "boolean",
-          "description": "Make this a default bot for chosen cognitive service account."
+          "description": "Whether this bot is the default bot for the chosen Speech resource.\nWhen true and configuring with a Speech key and region, cognitiveServiceResourceId must identify the Speech resource\nthat owns the supplied key, and the caller must have appropriate access to that resource."
         }
       }
     },

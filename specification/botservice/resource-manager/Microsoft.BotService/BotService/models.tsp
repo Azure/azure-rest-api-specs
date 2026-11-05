@@ -2335,7 +2335,9 @@ model DirectLineSpeechChannel extends Channel {
  */
 model DirectLineSpeechChannelProperties {
   /**
-   * The cognitive service id with this channel registration.
+   * The Azure resource ID of the Speech resource associated with this channel registration.
+   * When configuring isDefaultBotForCogSvcAccount as true with cognitiveServiceSubscriptionKey and cognitiveServiceRegion,
+   * provide this ID for the Speech resource that owns the supplied key. The caller must have appropriate access to that resource.
    */
   cognitiveServiceResourceId?: string;
 
@@ -2368,7 +2370,9 @@ model DirectLineSpeechChannelProperties {
   customSpeechModelId?: string;
 
   /**
-   * Make this a default bot for chosen cognitive service account.
+   * Whether this bot is the default bot for the chosen Speech resource.
+   * When true and configuring with a Speech key and region, cognitiveServiceResourceId must identify the Speech resource
+   * that owns the supplied key, and the caller must have appropriate access to that resource.
    */
   isDefaultBotForCogSvcAccount?: boolean;
 }
