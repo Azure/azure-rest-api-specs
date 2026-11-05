@@ -864,7 +864,7 @@ model ReadAccessPolicy {
     which implicitly includes the instance manager. An empty array denies user messages.
     Trusted lifecycle events are not governed by this policy.
     """)
-  allowed_prompters: "allowlisted"[];
+  responds_to: "allowlisted"[];
 }
 
 union AgentEndpointAuthorizationSchemeType {
