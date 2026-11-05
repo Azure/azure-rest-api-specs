@@ -30,10 +30,10 @@ model MeshMembership
   >;
 
   /**
-   * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
+   * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. This value is immutable after creation. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   managedBy?: string;
 
   ...Azure.ResourceManager.EntityTagProperty;

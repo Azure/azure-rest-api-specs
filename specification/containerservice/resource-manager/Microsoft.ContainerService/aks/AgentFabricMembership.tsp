@@ -30,10 +30,16 @@ model AgentFabricMembership
   >;
 
   /**
-   * Resource ID of the AgentFabric that this cluster is a member of. The AgentFabric must be in the same tenant and subscription as the managed cluster. As the ARM envelope property, it also stops a complete mode deployment from deleting the membership and silently detaching the cluster.
+   * The SKU of the AgentFabric membership. Determines which AgentFabric components are deployed to the cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The resource SKU is required and uses a service-specific name enum. ResourceSkuProperty is optional and includes unsupported SKU fields."
+  sku: AgentFabricMembershipSku;
+
+  /**
+   * Resource ID of the AgentFabric that this cluster is a member of. The AgentFabric must be in the same tenant and subscription as the managed cluster. This value is immutable after creation. As the ARM envelope property, it also stops a complete mode deployment from deleting the membership and silently detaching the cluster.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   managedBy: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.NetworkSecurity/agentFabrics";
@@ -130,6 +136,17 @@ union AgentFabricMembershipSkuName {
 }
 
 /**
+ * The SKU of the AgentFabric membership.
+ */
+@added(Versions.v2026_09_02_preview)
+model AgentFabricMembershipSku {
+  /**
+   * The SKU name that determines which AgentFabric components are deployed to the cluster.
+   */
+  name: AgentFabricMembershipSkuName;
+}
+
+/**
  * Properties of the AgentFabric membership of a managed cluster.
  */
 @added(Versions.v2026_09_02_preview)
@@ -139,11 +156,6 @@ model AgentFabricMembershipProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: AgentFabricMembershipProvisioningState;
-
-  /**
-   * The SKU of the AgentFabric membership. Determines which AgentFabric components are deployed to the cluster.
-   */
-  sku: AgentFabricMembershipSkuName;
 }
 
 /**
