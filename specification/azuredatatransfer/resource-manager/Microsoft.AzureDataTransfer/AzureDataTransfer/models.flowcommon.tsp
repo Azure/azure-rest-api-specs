@@ -125,14 +125,83 @@ model ListTransferFlowsRequestBody {
 }
 
 /**
- * The flow resources (connection flows and dedicated flows) associated with a pipeline.
+ * Compact summary of a transfer flow associated with a pipeline.
+ */
+@added(Versions.v2026_06_29_preview)
+model TransferFlowSummary {
+  /**
+   * ARM resource ID of the transfer flow.
+   */
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureDataTransfer/storageTransferFlows";
+    },
+    {
+      type: "Microsoft.AzureDataTransfer/messagingTransferFlows";
+    }
+  ]>;
+
+  /**
+   * Status of the transfer flow.
+   */
+  status?: CommonTransferFlowStatus;
+
+  /**
+   * Transfer role of the transfer flow.
+   */
+  transferRole?: TransferRole;
+
+  /**
+   * Name of the FlowProfile used by the transfer flow.
+   */
+  flowProfileName?: string;
+
+  /**
+   * ARM resource ID of the paired transfer flow on the remote side of the pipeline.
+   */
+  remoteTransferFlowResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureDataTransfer/storageTransferFlows";
+    },
+    {
+      type: "Microsoft.AzureDataTransfer/messagingTransferFlows";
+    }
+  ]>;
+
+  /**
+   * ARM resource ID of the data resource (storage container/table or messaging queue/event hub) used by the transfer flow.
+   */
+  dataResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts/blobServices/containers";
+    },
+    {
+      type: "Microsoft.Storage/storageAccounts/tableServices/tables";
+    },
+    {
+      type: "Microsoft.ServiceBus/namespaces/queues";
+    },
+    {
+      type: "Microsoft.EventHub/namespaces/eventhubs";
+    }
+  ]>;
+
+  /**
+   * The identity that requested the transfer flow.
+   */
+  requestor?: string;
+}
+
+/**
+ * The transfer flows associated with a pipeline.
  */
 @added(Versions.v2026_06_29_preview)
 model ListTransferFlowsByPipelineResult {
   /**
-   * List of dedicated flows associated with the pipeline.
+   * Summaries of the transfer flows associated with the pipeline.
    */
-  flows?: string[];
+  @identifiers(#["id"])
+  flows?: TransferFlowSummary[];
 }
 
 /**

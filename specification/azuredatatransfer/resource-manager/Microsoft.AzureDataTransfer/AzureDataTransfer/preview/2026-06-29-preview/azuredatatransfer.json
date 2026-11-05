@@ -6225,14 +6225,17 @@
     },
     "ListTransferFlowsByPipelineResult": {
       "type": "object",
-      "description": "The flow resources (connection flows and dedicated flows) associated with a pipeline.",
+      "description": "The transfer flows associated with a pipeline.",
       "properties": {
         "flows": {
           "type": "array",
-          "description": "List of dedicated flows associated with the pipeline.",
+          "description": "Summaries of the transfer flows associated with the pipeline.",
           "items": {
-            "type": "string"
-          }
+            "$ref": "#/definitions/TransferFlowSummary"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -7881,6 +7884,82 @@
           "items": {
             "$ref": "#/definitions/TransferFlowIdBody"
           }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "TransferFlowSummary": {
+      "type": "object",
+      "description": "Compact summary of a transfer flow associated with a pipeline.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the transfer flow.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureDataTransfer/storageTransferFlows"
+              },
+              {
+                "type": "Microsoft.AzureDataTransfer/messagingTransferFlows"
+              }
+            ]
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/CommonTransferFlowStatus",
+          "description": "Status of the transfer flow."
+        },
+        "transferRole": {
+          "$ref": "#/definitions/TransferRole",
+          "description": "Transfer role of the transfer flow."
+        },
+        "flowProfileName": {
+          "type": "string",
+          "description": "Name of the FlowProfile used by the transfer flow."
+        },
+        "remoteTransferFlowResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the paired transfer flow on the remote side of the pipeline.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureDataTransfer/storageTransferFlows"
+              },
+              {
+                "type": "Microsoft.AzureDataTransfer/messagingTransferFlows"
+              }
+            ]
+          }
+        },
+        "dataResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the data resource (storage container/table or messaging queue/event hub) used by the transfer flow.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts/blobServices/containers"
+              },
+              {
+                "type": "Microsoft.Storage/storageAccounts/tableServices/tables"
+              },
+              {
+                "type": "Microsoft.ServiceBus/namespaces/queues"
+              },
+              {
+                "type": "Microsoft.EventHub/namespaces/eventhubs"
+              }
+            ]
+          }
+        },
+        "requestor": {
+          "type": "string",
+          "description": "The identity that requested the transfer flow."
         }
       },
       "required": [
