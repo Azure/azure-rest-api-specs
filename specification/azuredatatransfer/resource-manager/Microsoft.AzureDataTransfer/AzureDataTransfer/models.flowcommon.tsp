@@ -48,7 +48,8 @@ model CommonTransferFlowProperties {
   /**
    * Approval and lifecycle status of the transfer flow. Set by the service; use the approve/reject pipeline actions and the enableTransfer/disableTransfer actions to change it.
    */
-  @visibility(Lifecycle.Read) status?: CommonTransferFlowStatus;
+  @visibility(Lifecycle.Read)
+  status?: CommonTransferFlowStatus;
 
   /**
    * Force disablement status of the current flow
@@ -204,7 +205,7 @@ model TransferFlowSummary {
   /**
    * Tenant ID of the transfer flow.
    */
-  tenantId?: Azure.Core.uuid;
+  tenantId?: string;
 }
 
 /**
