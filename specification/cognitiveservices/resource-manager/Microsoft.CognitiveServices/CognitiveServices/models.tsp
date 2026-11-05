@@ -6992,6 +6992,17 @@ model AdapterDeploymentProperties {
   activeTargetDeploymentName?: string;
 
   /**
+   * The capabilities of the managed compute deployment the adapter runs on,
+   * as key-value pairs. During re-targeting this remains the prior
+   * deployment's value until atomic cutover.
+   * Example: { agentsV2: "true" }.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<capabilities> type used for 'AdapterDeploymentProperties' to support extensible key-value pairs matching service behavior"
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  capabilities?: Record<string>;
+
+  /**
    * The provisioning state of the adapter deployment.
    */
   @visibility(Lifecycle.Read)

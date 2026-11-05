@@ -14526,6 +14526,14 @@
           "description": "The managed compute deployment currently serving the adapter.\nDuring re-targeting this remains the prior deployment until atomic cutover.",
           "readOnly": true
         },
+        "capabilities": {
+          "type": "object",
+          "description": "The capabilities of the managed compute deployment the adapter runs on,\nas key-value pairs. During re-targeting this remains the prior\ndeployment's value until atomic cutover.\nExample: { agentsV2: \"true\" }.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the adapter deployment.",

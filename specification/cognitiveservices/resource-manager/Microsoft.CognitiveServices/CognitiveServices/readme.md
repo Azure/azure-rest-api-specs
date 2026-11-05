@@ -204,6 +204,10 @@ suppressions:
     where:
       - $.definitions.ManagedComputeDeploymentProperties.properties.capabilities
   - code: AvoidAdditionalProperties
+    reason: capabilities is a read-only string map copied from the managed compute deployment that serves the adapter. Keys are dynamic capability names not predefined by the service, backed by a Dictionary of string. Same pattern as ManagedComputeDeploymentProperties.capabilities.
+    where:
+      - $.definitions.AdapterDeploymentProperties.properties.capabilities
+  - code: AvoidAdditionalProperties
     reason: Provide customers ability to assign customize labels to rules.
     where:
       - $.definitions.RaiToolLabelProperties.properties.accountScope.properties.labelValues
