@@ -101,7 +101,11 @@ model IdentityBindingProfileStatus {
 @doc("Managed identity profile for the identity binding.")
 @added(Versions.v2026_11_02_preview)
 model IdentityBindingManagedIdentityProfile {
-  @doc("The resource ID of the managed identity.")
+  @doc("""
+    The resource ID of the managed identity. Resource group and managed identity
+    names must contain only letters, digits, and hyphens. Names containing
+    underscores or other characters are not supported.
+    """)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^/subscriptions/[a-zA-Z0-9-]+/resourceGroups/[a-zA-Z0-9-]+/providers/Microsoft.ManagedIdentity/userAssignedIdentities/[a-zA-Z0-9-]+$")
   resourceId: Azure.Core.armResourceIdentifier;
