@@ -3,7 +3,12 @@ using Azure.ResourceManager;
 
 namespace Microsoft.CostManagement;
 
-/** Supported decoded kinds. Clients must not submit unrecognized kinds. */
+/**
+ * Supported decoded kinds. The extensible representation supports client
+ * compatibility with additional kinds in future API versions. Requests must
+ * still use one of the five typed variants supported by this API version;
+ * an unrecognized discriminator is rejected.
+ */
 @added(Versions.v2026_10_01_preview)
 union EstimateValueKind {
   string,
@@ -147,7 +152,12 @@ model EstimateResult {
   @visibility(Lifecycle.Read)
   pricingAsOf: utcDateTime;
 
-  /** Completeness applies only to submitted inputs; callers separately report template preparation and coverage gaps. */
+  /**
+   * Fixed scope marker, not a completeness enum: this operation prices only
+   * submitted inputs, never an entire template or deployment. Completeness is
+   * reported by each charge period's status. Callers separately track template
+   * preparation and coverage gaps.
+   */
   @visibility(Lifecycle.Read)
   coverage: "SubmittedPricingInputs";
 
@@ -283,6 +293,13 @@ model EstimateTotals {
  * precision. Component amounts are rounded once to six fractional decimal places,
  * midpoint away from zero; entry and request summaries sum reported components.
  * A rounded-zero amount is not a declaration that the underlying meter is free.
+ * The inclusive range 0 to 1000000000000 applies independently to each component,
+ * entry and request amount or knownAmount. Individually valid components or
+ * entries can therefore exceed the limit when aggregated. The service checks
+ * these bounds during pricing; any out-of-range amount or aggregate fails the
+ * entire estimate, and polling returns HTTP 400 with error code
+ * EstimateAmountOutOfRange. Known costs are never clamped or changed to
+ * Unavailable to satisfy the limit.
  */
 @added(Versions.v2026_10_01_preview)
 model EstimateCostSummary {

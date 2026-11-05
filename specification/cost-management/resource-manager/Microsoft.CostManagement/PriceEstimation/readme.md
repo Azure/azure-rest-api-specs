@@ -89,7 +89,16 @@ did not state.
 Calculations use decimal arithmetic. Component amounts are rounded once to six fractional places, midpoint away from
 zero; entry and request totals sum those amounts. Examples use deterministic illustrative prices, not live quotes.
 
+The inclusive range 0 to 1,000,000,000,000 applies independently to every component, entry and request `amount` or
+`knownAmount`. Individually valid amounts do not guarantee a valid aggregate: two components costing 600,000,000,000
+each would exceed the entry limit. The service checks these bounds during pricing and fails the entire estimate if
+any amount or aggregate is out of range; it never clamps a known cost or converts it to `Unavailable`.
+
 ## Errors
+
+An accepted request can still fail during pricing. If a calculated quantity, amount or aggregate exceeds the
+supported range, polling returns HTTP 400 with code `EstimateAmountOutOfRange`, even though the POST returned 202.
+Callers must reduce the requested quantities and submit a new estimate.
 
 Errors use the standard ARM error response. Every invalid entry is reported in one response; with more than one, the
 top-level code is `MultipleInputErrors` and each error is listed in `details`, in request order. Targets are request

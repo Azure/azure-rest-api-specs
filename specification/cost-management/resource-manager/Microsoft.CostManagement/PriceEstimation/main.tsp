@@ -19,7 +19,7 @@ namespace Microsoft.CostManagement;
 
 /** Versions of the price estimation contract. */
 enum Versions {
-  /** In-development contract for review; not a customer release. */
+  /** Public-preview contract for asynchronous price estimation. */
   @previewVersion
   v2026_10_01_preview: "2026-10-01-preview",
 }

@@ -23,6 +23,10 @@ interface PriceEstimation {
    * Location returns 202 while pricing runs, then the estimate (HTTP 200) or an
    * ARM error. Only the caller that started the operation can read its result,
    * which is retained for 30 minutes.
+   * An accepted request can still fail during pricing if a calculated amount or
+   * aggregate exceeds the supported range. This fails the entire estimate;
+   * polling returns HTTP 400 with error code EstimateAmountOutOfRange, not a
+   * clamped or incomplete success result.
    *
    * Supported resource types and typed input metadata are discovered separately
    * through anonymous pricing-metadata GETs outside ARM. Discovery metadata is
@@ -61,6 +65,11 @@ interface PriceEstimation {
     Request = EstimateContent,
     Response = EstimateResult,
     Scope = SubscriptionActionScope,
+    LroHeaders = ArmLroLocationHeader<
+      FinalResult = EstimateResult,
+      UrlValue = url
+    > &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = Azure.ResourceManager.ErrorResponse
   >;
 }
