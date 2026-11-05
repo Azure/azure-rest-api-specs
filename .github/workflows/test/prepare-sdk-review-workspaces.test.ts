@@ -139,4 +139,46 @@ describe("prepare-sdk-review-workspaces", () => {
       ),
     ).toBe(false);
   });
+
+  it.each([".git", "sdk/widget/.git/Azure.Widget", "eng/tools/Azure.Widget"])(
+    "rejects unsafe SDK package root '%s' before reconstruction",
+    (packageRootPath) => {
+      const testRoot = fs.mkdtempSync(path.join(os.tmpdir(), "prepare-sdk-review-test-"));
+      temporaryDirectories.push(testRoot);
+      const inputRoot = path.join(testRoot, "input");
+      fs.mkdirSync(inputRoot, { recursive: true });
+      fs.writeFileSync(
+        path.join(inputRoot, "spec-gen-sdk-artifact.json"),
+        JSON.stringify({
+          language: "azure-sdk-for-net",
+          headSha: "38865cd3b650b3510e2a5b8bf9f990d0668a8810",
+          prNumber: "47607",
+          apiViewRequestData: [
+            {
+              packageName: "Azure.Widget",
+              packageRootPath,
+              changedFiles: ["sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs"],
+              sdkBaseCommitSha: "0123456789abcdef0123456789abcdef01234567",
+              reviewInputPath: "Azure.Widget/review-input",
+            },
+          ],
+        }),
+      );
+
+      const scriptPath = fileURLToPath(
+        new URL("../scripts/prepare-sdk-review-workspaces.ts", import.meta.url),
+      );
+      expect(() =>
+        execFileSync(process.execPath, [scriptPath], {
+          cwd: testRoot,
+          env: {
+            ...process.env,
+            SDK_REVIEW_INPUT_ROOT: inputRoot,
+            SDK_REVIEW_WORKSPACE_ROOT: path.join(testRoot, "output"),
+          },
+          stdio: "pipe",
+        }),
+      ).toThrow();
+    },
+  );
 });

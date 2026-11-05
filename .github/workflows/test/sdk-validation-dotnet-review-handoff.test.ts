@@ -95,8 +95,8 @@ function createSampleArtifact(
   };
 }
 
-function createArtifactMetadataResponse(downloadUrl: string): Response {
-  return new Response(JSON.stringify({ resource: { downloadUrl } }), {
+function createArtifactMetadataResponse(downloadUrl: string, artifactName: string): Response {
+  return new Response(JSON.stringify({ name: artifactName, resource: { downloadUrl } }), {
     status: 200,
     headers: { "content-type": "application/json" },
   });
@@ -325,6 +325,31 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     ).toThrow("expected 2 files");
   });
 
+  it("extracts snapshots using the selected failed-attempt artifact prefix", () => {
+    const outputDirectory = createTempOutputDir();
+    const failedArtifactName = `${PACKAGES_ARTIFACT_NAME}-FailedAttempt2`;
+    const prefixedFiles = Object.fromEntries(
+      Object.entries(SAMPLE_SNAPSHOT_FILES).map(([name, content]) => [
+        `${failedArtifactName}/${name}`,
+        content,
+      ]),
+    );
+
+    extractAndValidateSdkReviewInputArchive(
+      zipSync(prefixedFiles),
+      createSampleArtifact(),
+      outputDirectory,
+      failedArtifactName,
+    );
+
+    expect(
+      fs.readFileSync(
+        path.join(outputDirectory, "Azure.Widget", "review-input", "Azure.Widget.csproj"),
+        "utf8",
+      ),
+    ).toBe("<Project />");
+  });
+
   it("extracts streamed ZIP entries that use data descriptors", async () => {
     const outputDirectory = createTempOutputDir();
     const archive = await createStreamingZip(SAMPLE_SNAPSHOT_FILES);
@@ -418,12 +443,18 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       const requestUrl = getRequestUrl(url);
       if (requestUrl.includes(`artifactName=${SPEC_GEN_SDK_ARTIFACT_NAME}`)) {
         return Promise.resolve(
-          createArtifactMetadataResponse("https://artifacts.example.com/spec-gen"),
+          createArtifactMetadataResponse(
+            "https://artifacts.example.com/spec-gen",
+            SPEC_GEN_SDK_ARTIFACT_NAME,
+          ),
         );
       }
       if (requestUrl.includes(`artifactName=${PACKAGES_ARTIFACT_NAME}`)) {
         return Promise.resolve(
-          createArtifactMetadataResponse("https://artifacts.example.com/packages"),
+          createArtifactMetadataResponse(
+            "https://artifacts.example.com/packages",
+            PACKAGES_ARTIFACT_NAME,
+          ),
         );
       }
       if (requestUrl.includes("/spec-gen") && requestUrl.includes("format=file")) {
@@ -514,7 +545,10 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       const requestUrl = getRequestUrl(url);
       if (requestUrl.includes(`artifactName=${SPEC_GEN_SDK_ARTIFACT_NAME}`)) {
         return Promise.resolve(
-          createArtifactMetadataResponse("https://artifacts.example.com/spec-gen"),
+          createArtifactMetadataResponse(
+            "https://artifacts.example.com/spec-gen",
+            SPEC_GEN_SDK_ARTIFACT_NAME,
+          ),
         );
       }
       if (requestUrl.includes("/spec-gen") && requestUrl.includes("format=file")) {
@@ -564,7 +598,10 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     mockFetch.mockImplementation((url) => {
       if (getRequestUrl(url).includes(`artifactName=${SPEC_GEN_SDK_ARTIFACT_NAME}`)) {
         return Promise.resolve(
-          createArtifactMetadataResponse("https://artifacts.example.com/spec-gen"),
+          createArtifactMetadataResponse(
+            "https://artifacts.example.com/spec-gen",
+            SPEC_GEN_SDK_ARTIFACT_NAME,
+          ),
         );
       }
       return Promise.resolve(

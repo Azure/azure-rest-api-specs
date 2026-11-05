@@ -77,6 +77,18 @@ function requireSafeRelativePath(value: unknown, fieldName: string): string {
   return value;
 }
 
+function requireSdkPackageRootPath(value: unknown): string {
+  const packageRootPath = requireSafeRelativePath(value, "packageRootPath");
+  const segments = packageRootPath.split("/");
+  if (
+    segments[0]?.toLowerCase() !== "sdk" ||
+    segments.some((segment) => segment.toLowerCase() === ".git")
+  ) {
+    throw new Error(`Invalid packageRootPath '${packageRootPath}'`);
+  }
+  return packageRootPath;
+}
+
 /**
  * Resolves a validated relative path and verifies the result remains under the
  * trusted root.
@@ -119,7 +131,7 @@ function parseReviewInputEntry(value: unknown, index: number): ReviewInputEntry 
   return {
     packageName,
     sdkBaseCommitSha,
-    packageRootPath: requireSafeRelativePath(value.packageRootPath, "packageRootPath"),
+    packageRootPath: requireSdkPackageRootPath(value.packageRootPath),
     reviewInputPath: requireSafeRelativePath(value.reviewInputPath, "reviewInputPath"),
     changedFiles: value.changedFiles.map((filePath) =>
       requireSafeRelativePath(filePath, "changedFiles"),

@@ -381,9 +381,10 @@ function validateArchiveEntryName(name: string): void {
 function resolveDeclaredSnapshotFile(
   archiveEntryName: string,
   reviewInputPaths: readonly string[],
+  archiveArtifactName: string,
 ): { reviewInputPath: string; relativeFilePath: string } | undefined {
   for (const reviewInputPath of reviewInputPaths) {
-    for (const artifactPrefix of ["", `${PACKAGES_ARTIFACT_NAME}/`]) {
+    for (const artifactPrefix of ["", `${archiveArtifactName}/`]) {
       const snapshotPrefix = `${artifactPrefix}${reviewInputPath}/`;
       if (!archiveEntryName.startsWith(snapshotPrefix)) {
         continue;
@@ -412,6 +413,7 @@ export function extractAndValidateSdkReviewInputArchive(
   archiveBytes: Uint8Array,
   artifact: SpecGenSdkArtifactInfo,
   outputDirectory: string,
+  archiveArtifactName: string = PACKAGES_ARTIFACT_NAME,
 ): void {
   const requests = artifact.apiViewRequestData;
   const reviewInputPaths = requests.map((request) => request.reviewInputPath!);
@@ -425,8 +427,14 @@ export function extractAndValidateSdkReviewInputArchive(
     archiveBytes,
     requests,
     reviewInputPaths,
+    archiveArtifactName,
   );
-  validateLocalZipHeaders(archiveBytes, archiveEntryMetadata, reviewInputPaths);
+  validateLocalZipHeaders(
+    archiveBytes,
+    archiveEntryMetadata,
+    reviewInputPaths,
+    archiveArtifactName,
+  );
 
   let extractedEntries: Record<string, Uint8Array>;
   try {
@@ -530,6 +538,7 @@ function preflightSdkReviewInputArchive(
   archiveBytes: Uint8Array,
   requests: SpecGenSdkArtifactInfo["apiViewRequestData"],
   reviewInputPaths: string[],
+  archiveArtifactName: string,
 ): Map<string, ArchiveEntryMetadata> {
   const snapshotStats = new Map<string, SnapshotStats>(
     reviewInputPaths.map((reviewInputPath) => [reviewInputPath, { fileCount: 0, bytes: 0 }]),
@@ -545,7 +554,11 @@ function preflightSdkReviewInputArchive(
         return false;
       }
 
-      const declaredFile = resolveDeclaredSnapshotFile(file.name, reviewInputPaths);
+      const declaredFile = resolveDeclaredSnapshotFile(
+        file.name,
+        reviewInputPaths,
+        archiveArtifactName,
+      );
       if (!declaredFile) {
         return false;
       }
@@ -625,11 +638,15 @@ function validateLocalZipHeaders(
   archiveBytes: Uint8Array,
   archiveEntryMetadata: Map<string, ArchiveEntryMetadata>,
   reviewInputPaths: string[],
+  archiveArtifactName: string,
 ): void {
   const seenArchiveEntries = new Set<string>();
   const unzip = new Unzip((file) => {
     validateArchiveEntryName(file.name);
-    if (file.name.endsWith("/") || !resolveDeclaredSnapshotFile(file.name, reviewInputPaths)) {
+    if (
+      file.name.endsWith("/") ||
+      !resolveDeclaredSnapshotFile(file.name, reviewInputPaths, archiveArtifactName)
+    ) {
       return;
     }
 
@@ -873,7 +890,12 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
 
   const inputDirectory = path.resolve(outputRootDir, `build-${event.adoBuild.buildId}`);
   fs.mkdirSync(inputDirectory, { recursive: true });
-  extractAndValidateSdkReviewInputArchive(packagesArchiveBytes, artifact, inputDirectory);
+  extractAndValidateSdkReviewInputArchive(
+    packagesArchiveBytes,
+    artifact,
+    inputDirectory,
+    packagesArtifactResolution.artifact.artifactName,
+  );
   const artifactPath = path.join(inputDirectory, SPEC_GEN_SDK_ARTIFACT_FILE_NAME);
   fs.writeFileSync(artifactPath, JSON.stringify(artifact, undefined, 2), "utf8");
 

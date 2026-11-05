@@ -24,6 +24,7 @@ export type AzurePipelineArtifactResult = {
 };
 
 export type ResolvedAzurePipelineArtifact = {
+  artifactName: string;
   downloadUrl: string;
   headers: Record<string, string>;
 };
@@ -167,6 +168,29 @@ function parseArtifactDownloadUrl(metadata: unknown, artifactName: string): stri
   return parsedUrl.toString();
 }
 
+function parseResolvedArtifactName(
+  metadata: unknown,
+  requestedArtifactName: string,
+  allowFailedArtifact: boolean,
+): string {
+  const resolvedArtifactName =
+    metadata && typeof metadata === "object" && "name" in metadata
+      ? (metadata as ArtifactValue).name
+      : requestedArtifactName;
+  const escapedArtifactName = requestedArtifactName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const failedArtifactPattern = new RegExp(`^${escapedArtifactName}-FailedAttempt\\d+$`);
+  if (
+    typeof resolvedArtifactName !== "string" ||
+    (resolvedArtifactName !== requestedArtifactName &&
+      (!allowFailedArtifact || !failedArtifactPattern.test(resolvedArtifactName)))
+  ) {
+    throw new Error(
+      `Unexpected resolved artifact name '${String(resolvedArtifactName)}' for '${requestedArtifactName}'`,
+    );
+  }
+  return resolvedArtifactName;
+}
+
 /**
  * Resolves Azure Pipelines artifact metadata once into a reusable download target.
  * Only a verified 404 is returned as not found. Authentication, throttling, server,
@@ -224,6 +248,7 @@ export async function resolveAzurePipelineArtifact({
   return {
     status: "found",
     artifact: {
+      artifactName: parseResolvedArtifactName(metadata, artifactName, fallbackToFailedArtifact),
       downloadUrl: parseArtifactDownloadUrl(metadata, artifactName),
       headers,
     },

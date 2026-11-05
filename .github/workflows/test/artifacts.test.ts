@@ -544,6 +544,46 @@ describe("getAzurePipelineArtifact function", () => {
     ).toHaveLength(1);
   });
 
+  it("preserves the selected failed-attempt artifact name", async () => {
+    const failedArtifactName = "spec-gen-sdk-artifact-FailedAttempt2";
+    mockFetch.mockImplementation((url) => {
+      if (url.includes(`artifactName=${inputs.artifactName}&`)) {
+        return Promise.resolve({
+          ok: false,
+          status: 404,
+          statusText: "Not Found",
+        });
+      }
+      if (url.includes("artifacts?api-version=7.0")) {
+        return Promise.resolve({
+          ok: true,
+          json: vi.fn().mockResolvedValue({
+            value: [{ name: failedArtifactName }],
+          }),
+        });
+      }
+      return Promise.resolve({
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          name: failedArtifactName,
+          resource: {
+            downloadUrl: "https://dev.azure.com/failed-download?format=zip",
+          },
+        }),
+      });
+    });
+
+    const resolution = await resolveAzurePipelineArtifact({
+      ...inputs,
+      fallbackToFailedArtifact: true,
+    });
+
+    expect(resolution).toMatchObject({
+      status: "found",
+      artifact: { artifactName: failedArtifactName },
+    });
+  });
+
   it("rejects malformed metadata in the resolution primitive", async () => {
     mockFetch.mockResolvedValue({
       ok: true,
@@ -563,6 +603,7 @@ describe("getAzurePipelineArtifact function", () => {
     await expect(
       downloadAzurePipelineArtifactFile({
         artifact: {
+          artifactName: "spec-gen-sdk-artifact",
           downloadUrl: "https://dev.azure.com/download",
           headers: { "Content-Type": "application/json" },
         },
@@ -584,6 +625,7 @@ describe("getAzurePipelineArtifact function", () => {
     await expect(
       downloadAzurePipelineArtifactArchive({
         artifact: {
+          artifactName: "spec-gen-sdk-artifact",
           downloadUrl: "https://dev.azure.com/download?format=file&subPath=/old",
           headers: { "Content-Type": "application/json" },
         },
@@ -602,7 +644,11 @@ describe("getAzurePipelineArtifact function", () => {
     );
     await expect(
       downloadAzurePipelineArtifactArchive({
-        artifact: { downloadUrl: "https://dev.azure.com/download", headers: {} },
+        artifact: {
+          artifactName: "spec-gen-sdk-artifact",
+          downloadUrl: "https://dev.azure.com/download",
+          headers: {},
+        },
         maxBytes: 4,
       }),
     ).rejects.toThrow("exceeds 4 bytes");
@@ -610,7 +656,11 @@ describe("getAzurePipelineArtifact function", () => {
     mockFetch.mockResolvedValueOnce(new Response(new Uint8Array(5), { status: 200 }));
     await expect(
       downloadAzurePipelineArtifactArchive({
-        artifact: { downloadUrl: "https://dev.azure.com/download", headers: {} },
+        artifact: {
+          artifactName: "spec-gen-sdk-artifact",
+          downloadUrl: "https://dev.azure.com/download",
+          headers: {},
+        },
         maxBytes: 4,
       }),
     ).rejects.toThrow("exceeds 4 bytes");

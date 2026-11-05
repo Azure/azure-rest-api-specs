@@ -7,10 +7,6 @@ on:
 permissions:
   contents: read # for actions/checkout
 
-concurrency:
-  group: sdk-validation-dotnet-review-input-${{ github.event.check_run.head_sha }}
-  cancel-in-progress: false
-
 jobs:
   validate-review-input:
     permissions:
@@ -21,6 +17,9 @@ jobs:
       github.event.check_run.app.slug == 'azure-pipelines' &&
       github.event.check_run.name == 'SDK Validation - .NET' &&
       !endsWith(github.repository, '-pr')
+    concurrency:
+      group: sdk-validation-dotnet-review-input-${{ github.event.check_run.head_sha }}
+      cancel-in-progress: false
     name: "Validate Naming Review Input (Read-Only)"
     runs-on: ubuntu-slim
 

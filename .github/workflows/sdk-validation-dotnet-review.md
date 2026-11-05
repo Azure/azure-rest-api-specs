@@ -52,6 +52,7 @@ permissions:
 checkout:
   sparse-checkout: |
     .github/workflows/scripts/prepare-sdk-review-workspaces.ts
+    .github/workflows/src/sdk-validation-dotnet-review-result.ts
 engine:
   id: copilot
   args: ["--excluded-tools=task"]
@@ -109,49 +110,21 @@ post-steps:
     with:
       script: |
         const { readFile } = await import("node:fs/promises");
-        const context = JSON.parse(
-          await readFile("/tmp/gh-aw/sdk-review-workspaces/sdk-review-context.json", "utf8"),
+        const { validateSdkReviewResult } = await import(
+          "${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-result.ts"
         );
-        const result = JSON.parse(
-          await readFile("/tmp/gh-aw/sdk-review-result.json", "utf8"),
+        const [contextText, resultText, reportMarkdown] = await Promise.all([
+          readFile("/tmp/gh-aw/sdk-review-workspaces/sdk-review-context.json", "utf8"),
+          readFile("/tmp/gh-aw/sdk-review-result.json", "utf8"),
+          readFile("/tmp/gh-aw/sdk-review-result.md", "utf8"),
+        ]);
+        validateSdkReviewResult(
+          JSON.parse(contextText),
+          JSON.parse(resultText),
+          reportMarkdown,
         );
-        if (result.schemaVersion !== 1 || result.status !== "completed") {
-          throw new Error("SDK review result must use schemaVersion 1 and completed status");
-        }
-        if (result.skillRevision !== context.canonicalSkill.skillRevision) {
-          throw new Error("SDK review result does not identify the executed canonical skill revision");
-        }
-        if (!Array.isArray(result.reviews) ||
-            result.reviews.length !== context.workspaces.length) {
-          throw new Error("SDK review result must contain one review per reconstructed baseline");
-        }
-        const expectedBaselines = context.workspaces
-          .map((workspace) => workspace.baselineCommitSha)
-          .sort();
-        const actualBaselines = result.reviews
-          .map((review) => review.baselineCommitSha)
-          .sort();
-        if (new Set(actualBaselines).size !== actualBaselines.length ||
-            JSON.stringify(actualBaselines) !== JSON.stringify(expectedBaselines)) {
-          throw new Error("SDK review result baseline set does not match reconstructed workspaces");
-        }
-        for (const workspace of context.workspaces) {
-          const review = result.reviews.find(
-            (candidate) => candidate.baselineCommitSha === workspace.baselineCommitSha,
-          );
-          const expectedPackages = workspace.packages
-            .map((sdkPackage) => sdkPackage.packageName)
-            .sort();
-          const actualPackages = [...(review?.packages ?? [])].sort();
-          if (new Set(actualPackages).size !== actualPackages.length ||
-              JSON.stringify(actualPackages) !== JSON.stringify(expectedPackages)) {
-            throw new Error(
-              `SDK review result package set does not match baseline ${workspace.baselineCommitSha}`,
-            );
-          }
-        }
   - name: Upload report-only SDK review result
-    if: ${{ !cancelled() }}
+    if: ${{ success() }}
     uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
     with:
       name: sdk-review-result-workflow-${{ github.event.workflow_run.id }}
