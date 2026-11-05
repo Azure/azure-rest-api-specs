@@ -128,8 +128,8 @@ model DailyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Daily recurrence type.")
   type: RecurrenceType.Daily;
 
-  @doc("Hours for the recurrence schedule.")
-  hours: int32[];
+  @doc("Hours for the recurrence schedule. If omitted, the service uses the current UTC hour when the schedule is created.")
+  hours?: int32[];
 }
 
 @doc("Weekly recurrence schedule.")

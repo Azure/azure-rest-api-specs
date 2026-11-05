@@ -56,6 +56,31 @@ model ContinuousEvaluationRuleAction extends EvaluationRuleAction {
   samplingRate?: float64 = 100;
 }
 
+/** Preview form of `azure_ai_traces`. Returned only for rules backed by existing preview schedules; rejected on create and update. */
+model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_traces_preview`. */
+  type: "azure_ai_traces_preview";
+
+  ...OmitProperties<TracesEvalRunDataSource, "type">;
+}
+
+/** Preview form of `azure_ai_trace_data_source`. Returned only for rules backed by existing preview schedules; rejected on create and update. */
+model AzureAITraceDataSourcePreviewEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_trace_data_source_preview`. */
+  type: "azure_ai_trace_data_source_preview";
+
+  ...OmitProperties<AzureAITraceDataSourceEvalRunDataSource, "type">;
+}
+
+/** Preview form of `azure_ai_user_conversation_simulation`. Returned only for rules backed by existing preview schedules; rejected on create and update. */
+model UserConversationSimulationPreviewEvalRunDataSource
+  extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_user_conversation_simulation_preview`. */
+  type: "azure_ai_user_conversation_simulation_preview";
+
+  ...OmitProperties<UserConversationSimulationEvalRunDataSource, "type">;
+}
+
 /** Existing trace-evaluation inputs supported by scheduled rules. */
 union TraceEvaluationSource {
   /** Trace-query inputs with lookback and ingestion-delay settings. */
@@ -63,6 +88,12 @@ union TraceEvaluationSource {
 
   /** Trace inputs selected through an existing TraceSource variant. */
   traceDataSource: AzureAITraceDataSourceEvalRunDataSource,
+
+  /** Response-only preview form of `traces`. */
+  tracesPreview: TracesPreviewEvalRunDataSource,
+
+  /** Response-only preview form of `traceDataSource`. */
+  traceDataSourcePreview: AzureAITraceDataSourcePreviewEvalRunDataSource,
 }
 
 /** Configures a scheduled evaluation of observed agent traces. */
@@ -72,7 +103,13 @@ model TraceEvaluationRuleAction extends EvaluationRuleAction {
   /** Identifier of the evaluation used to score the selected traces. */
   evalId: string;
 
-  /** Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved. */
+  /**
+   * Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved.
+   *
+   * For `azure_ai_traces`, set exactly one of `agent_id` or `agent_name`; `trace_ids` is not supported.
+   * For `azure_ai_trace_data_source`, set `trace_source`.
+   * Preview source types may appear in responses for existing schedules but are rejected on create and update.
+   */
   source: TraceEvaluationSource;
 
   /** Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema. */
@@ -95,6 +132,9 @@ union DatasetEvaluationSource {
 
   /** Simulated user conversations with an evaluation target. */
   userConversationSimulation: UserConversationSimulationEvalRunDataSource,
+
+  /** Response-only preview form of `userConversationSimulation`. */
+  userConversationSimulationPreview: UserConversationSimulationPreviewEvalRunDataSource,
 }
 
 /** Configures a scheduled evaluation of dataset inputs. */
@@ -104,7 +144,7 @@ model DatasetEvaluationRuleAction extends EvaluationRuleAction {
   /** Identifier of the evaluation used to score the dataset. */
   evalId: string;
 
-  /** Dataset inputs for each scheduled occurrence. */
+  /** Dataset inputs for each scheduled occurrence. Preview source types may appear in responses for existing schedules but are rejected on create and update. */
   source: DatasetEvaluationSource;
 
   /** Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema. */

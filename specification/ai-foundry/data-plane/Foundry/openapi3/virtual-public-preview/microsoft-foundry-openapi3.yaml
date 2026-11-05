@@ -50769,6 +50769,22 @@ components:
         A data source that selects traces for evaluation.
 
         See [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python).
+    AzureAITraceDataSourcePreviewEvalRunDataSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_trace_data_source_preview
+          description: The type of data source, always `azure_ai_trace_data_source_preview`.
+        trace_source:
+          $ref: '#/components/schemas/TraceSource'
+          description: The trace source that defines how traces are selected for evaluation.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: Preview form of `azure_ai_trace_data_source`. Returned only for rules backed by existing preview schedules; rejected on create and update.
     AzureContentFilterBlocklistIdResult:
       type: object
       required:
@@ -52776,7 +52792,6 @@ components:
       type: object
       required:
         - type
-        - hours
       properties:
         type:
           type: string
@@ -52788,7 +52803,7 @@ components:
           items:
             type: integer
             format: int32
-          description: Hours for the recurrence schedule.
+          description: Hours for the recurrence schedule. If omitted, the service uses the current UTC hour when the schedule is created.
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Daily recurrence schedule.
@@ -53102,7 +53117,7 @@ components:
           description: Identifier of the evaluation used to score the dataset.
         source:
           $ref: '#/components/schemas/DatasetEvaluationSource'
-          description: Dataset inputs for each scheduled occurrence.
+          description: Dataset inputs for each scheduled occurrence. Preview source types may appear in responses for existing schedules but are rejected on create and update.
         evaluation_level:
           $ref: '#/components/schemas/EvaluationLevel'
           description: Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema.
@@ -53116,6 +53131,7 @@ components:
         - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSource'
         - $ref: '#/components/schemas/TargetCompletionEvalRunDataSource'
         - $ref: '#/components/schemas/UserConversationSimulationEvalRunDataSource'
+        - $ref: '#/components/schemas/UserConversationSimulationPreviewEvalRunDataSource'
       description: Dataset inputs supported by scheduled rules. Targets are configured within the selected source.
     DatasetEvaluationSuiteJobSource:
       type: object
@@ -54340,6 +54356,9 @@ components:
           azure_ai_trace_data_source: '#/components/schemas/AzureAITraceDataSourceEvalRunDataSource'
           azure_ai_benchmark_preview: '#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource'
           azure_ai_user_conversation_simulation: '#/components/schemas/UserConversationSimulationEvalRunDataSource'
+          azure_ai_traces_preview: '#/components/schemas/TracesPreviewEvalRunDataSource'
+          azure_ai_trace_data_source_preview: '#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource'
+          azure_ai_user_conversation_simulation_preview: '#/components/schemas/UserConversationSimulationPreviewEvalRunDataSource'
           azure_ai_traces: '#/components/schemas/TracesEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
     EvalRunLatency:
@@ -100688,7 +100707,12 @@ components:
           description: Identifier of the evaluation used to score the selected traces.
         source:
           $ref: '#/components/schemas/TraceEvaluationSource'
-          description: Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved.
+          description: |-
+            Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved.
+
+            For `azure_ai_traces`, set exactly one of `agent_id` or `agent_name`; `trace_ids` is not supported.
+            For `azure_ai_trace_data_source`, set `trace_source`.
+            Preview source types may appear in responses for existing schedules but are rejected on create and update.
         evaluation_level:
           $ref: '#/components/schemas/EvaluationLevel'
           description: Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema.
@@ -100699,6 +100723,8 @@ components:
       anyOf:
         - $ref: '#/components/schemas/TracesEvalRunDataSource'
         - $ref: '#/components/schemas/AzureAITraceDataSourceEvalRunDataSource'
+        - $ref: '#/components/schemas/TracesPreviewEvalRunDataSource'
+        - $ref: '#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource'
       description: Existing trace-evaluation inputs supported by scheduled rules.
     TraceIdTraceSource:
       type: object
@@ -100955,6 +100981,55 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: End of the time window (Unix timestamp in seconds). Defaults to current time.
       description: Traces source — conversation traces from Application Insights. Reusable shape spread into per-context discriminated subtypes.
+    TracesPreviewEvalRunDataSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_traces_preview
+          description: The type of data source, always `azure_ai_traces_preview`.
+        trace_ids:
+          type: array
+          items:
+            type: string
+          description: Collection of Agent trace identifiers that should be evaluated.
+        conversation_ids:
+          type: array
+          items:
+            type: string
+          description: Collection of conversation identifiers to filter traces by conversation.
+        agent_id:
+          type: string
+          description: The agent ID used to filter traces for evaluation.
+        agent_name:
+          type: string
+          description: The agent name used to filter traces for evaluation.
+        lookback_hours:
+          type: integer
+          format: int32
+          description: |-
+            Lookback window (in hours) applied when retrieving traces from Application Insights.
+                For scheduled evaluations this is inferred from the recurrence interval.
+          default: 168
+        end_time:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Unix timestamp (in seconds) marking the end of the trace query window. Defaults to the current time.
+        max_traces:
+          type: integer
+          format: int32
+          description: Sampling limit applied to traces retrieved for evaluation.
+          default: 1000
+        ingestion_delay_seconds:
+          type: integer
+          format: int32
+          description: The delay to apply for ingestion when querying traces.
+          default: 300
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: Preview form of `azure_ai_traces`. Returned only for rules backed by existing preview schedules; rejected on create and update.
     TreatmentEffectType:
       anyOf:
         - type: string
@@ -101349,6 +101424,39 @@ components:
         mapping:
           default: '#/components/schemas/UserConversationSimulationDefaultInterruptionConfiguration'
       description: Configuration for simulated user interruption behavior.
+    UserConversationSimulationPreviewEvalRunDataSource:
+      type: object
+      required:
+        - type
+        - source
+        - target
+        - model_configuration
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_user_conversation_simulation_preview
+          description: The type of data source, always `azure_ai_user_conversation_simulation_preview`.
+        source:
+          $ref: '#/components/schemas/UserConversationSimulationSource'
+          description: Test scenarios supplied as JSONL rows or strongly typed inline test cases.
+        target:
+          $ref: '#/components/schemas/FoundryEvaluationTarget'
+          description: Model or agent being evaluated. It receives turns from the simulated user.
+        model_configuration:
+          $ref: '#/components/schemas/EvaluationModelConfiguration'
+          description: Model used to simulate the user side of each conversation by generating turns sent to the evaluated `target`.
+        default_simulation_configuration:
+          $ref: '#/components/schemas/UserConversationSimulationDefaultConfiguration'
+          description: Default configuration for generating simulated user conversations and persisting their output. Conversation properties in a test case's `simulation_configuration` override the corresponding defaults.
+        data_mapping:
+          type: object
+          additionalProperties:
+            type: string
+          description: Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: Preview form of `azure_ai_user_conversation_simulation`. Returned only for rules backed by existing preview schedules; rejected on create and update.
     UserConversationSimulationSource:
       anyOf:
         - $ref: '#/components/schemas/OpenAI.EvalJsonlFileContentSource'
