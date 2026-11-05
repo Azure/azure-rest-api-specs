@@ -176,6 +176,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.MaintenanceEventRescheduleRequest.postponeToDateTimeUtc,
+  "ScheduledStartAt",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.MaintenanceEventActionResponse,
   "HorizonDBMaintenanceEventActionResult",
   "csharp"
@@ -238,8 +243,23 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.ChangeDataCaptureCapabilityPropertiesForPatchUpdate,
+  "ChangeDataCaptureCapabilityPropertiesPatch",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.ChangeDataCaptureCapabilityPropertiesForPatchUpdate.autoUpgradeExtension,
   "IsAutoUpgradeExtensionEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ChangeDataCaptureReplicationStatus.lastConnectedAtUtc,
+  "LastConnectedAt",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.IdentityValidationStatus,
+  "ChangeDataCaptureIdentityValidationStatus",
   "csharp"
 );
 @@clientName(
