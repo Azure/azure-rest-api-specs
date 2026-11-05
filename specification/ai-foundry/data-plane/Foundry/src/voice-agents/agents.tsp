@@ -539,18 +539,30 @@ model VoiceAgentSubagentResponsePolicy {
   progress_update_interval?: duration;
 }
 
+@doc("The greeting modes supported by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentGreetingMode {
+  string,
+
+  @doc("Speak a deterministic greeting rendered from a text template.")
+  template: "template",
+
+  @doc("Generate the greeting with the session model from an opening-turn prompt.")
+  llm_generated: "llm_generated",
+}
+
 @doc("Session-start greeting configuration for a voice agent.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentGreetingConfig {
   @doc("The greeting mode.")
-  type: string;
+  type: VoiceAgentGreetingMode;
 }
 
 @doc("A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTemplateGreetingConfig extends VoiceAgentGreetingConfig {
-  type: "template";
+  type: VoiceAgentGreetingMode.template;
 
   @doc("The Handlebars text template spoken at session start.")
   @minLength(1)
@@ -560,7 +572,7 @@ model VoiceAgentTemplateGreetingConfig extends VoiceAgentGreetingConfig {
 @doc("A greeting authored by the session model from a scoped opening-turn prompt.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLlmGeneratedGreetingConfig extends VoiceAgentGreetingConfig {
-  type: "llm_generated";
+  type: VoiceAgentGreetingMode.llm_generated;
 
   @doc("The Handlebars prompt that guides the opening turn.")
   @minLength(1)

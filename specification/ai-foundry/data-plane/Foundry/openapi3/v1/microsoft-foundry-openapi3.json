@@ -109953,7 +109953,7 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
+            "$ref": "#/components/schemas/VoiceAgentGreetingMode",
             "description": "The greeting mode."
           }
         },
@@ -109965,6 +109965,26 @@
           }
         },
         "description": "Session-start greeting configuration for a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentGreetingMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "template",
+              "llm_generated"
+            ]
+          }
+        ],
+        "description": "The greeting modes supported by a voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
