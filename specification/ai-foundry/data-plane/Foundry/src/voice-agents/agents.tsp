@@ -403,6 +403,7 @@ model VoiceAgentPostCallDestination {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentEventGridPostCallDestination
   extends VoiceAgentPostCallDestination {
+  @doc("The destination type. Always `event_grid`.")
   type: VoiceAgentPostCallDestinationType.event_grid;
 
   @doc("The name of the Event Grid connection.")
@@ -415,6 +416,7 @@ model VoiceAgentEventGridPostCallDestination
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentRoutinePostCallDestination
   extends VoiceAgentPostCallDestination {
+  @doc("The destination type. Always `routine`.")
   type: VoiceAgentPostCallDestinationType.routine;
 
   @doc("The name of the routine.")
