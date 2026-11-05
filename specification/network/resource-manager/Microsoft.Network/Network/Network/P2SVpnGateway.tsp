@@ -130,6 +130,28 @@ interface P2SVpnGateways {
   >;
 
   /**
+   * Attaches the Virtual Hub, p2s vpn gateway in the specified resource group.
+   */
+  @tag("P2SVpnGateways")
+  attach is ArmResourceActionAsync<
+    P2SVpnGateway,
+    void,
+    P2SVpnGateway,
+    Error = CloudError
+  >;
+
+  /**
+   * Detaches the Virtual Hub, p2s vpn gateway in the specified resource group.
+   */
+  @tag("P2SVpnGateways")
+  detach is ArmResourceActionAsync<
+    P2SVpnGateway,
+    void,
+    P2SVpnGateway,
+    Error = CloudError
+  >;
+
+  /**
    * Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
    */
   @tag("P2SVpnGateways")
