@@ -48,14 +48,14 @@ model TelephonyCampaignSchedule {
 
 @doc("Dispatch automatically as soon as preparation succeeds and capacity permits.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignImmediateSchedule extends TelephonyCampaignSchedule {
+model ImmediateSchedule extends TelephonyCampaignSchedule {
   @doc("Identifies immediate scheduling after successful preparation.")
   type: TelephonyCampaignScheduleType.immediate;
 }
 
 @doc("Uses one earliest dispatch time for all recipients. Past times are allowed; preparation must still succeed.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignAtTimeSchedule extends TelephonyCampaignSchedule {
+model AtTimeSchedule extends TelephonyCampaignSchedule {
   @doc("Identifies scheduling with one common earliest dispatch time.")
   type: TelephonyCampaignScheduleType.scheduled;
 
@@ -65,7 +65,7 @@ model TelephonyCampaignAtTimeSchedule extends TelephonyCampaignSchedule {
 
 @doc("Uses each recipient's scheduled_at: RFC 3339 with timezone in Datasets, Unix seconds for inline recipients.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignPerRecipientSchedule extends TelephonyCampaignSchedule {
+model PerRecipientSchedule extends TelephonyCampaignSchedule {
   @doc("Identifies scheduling with a separate earliest dispatch time for each recipient.")
   type: TelephonyCampaignScheduleType.recipient;
 }
@@ -149,7 +149,7 @@ model TelephonyCampaign {
   @doc("Same-project CSV/JSON/JSONL uri_file, exclusive with recipients. Omitted version pins latest per preparation. Limits: 1-1,000,000 rows, 256 MiB decoded/file, 1 MiB/row.")
   recipient_dataset?: DatasetReference;
 
-  @doc("Dispatch schedule; omission equals TelephonyCampaignImmediateSchedule. Every mode waits for successful preparation, then follows its schedule and available capacity.")
+  @doc("Dispatch schedule; omission equals ImmediateSchedule. Every mode waits for successful preparation, then follows its schedule and available capacity.")
   schedule?: TelephonyCampaignSchedule;
 
   @doc("Per-recipient retries. Omit for one attempt; generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds.")
