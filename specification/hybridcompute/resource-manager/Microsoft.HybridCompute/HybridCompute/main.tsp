@@ -51,7 +51,7 @@ enum Versions {
   /**
    * The 2025-09-16-preview API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v3)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_09_16_preview: "2025-09-16-preview",
@@ -59,7 +59,7 @@ enum Versions {
   /**
    * The 2026-02-12-preview API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v3)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2026_02_12_preview: "2026-02-12-preview",
@@ -67,7 +67,7 @@ enum Versions {
   /**
    * The 2026-06-04-preview API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v3)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2026_06_04_preview: "2026-06-04-preview",
