@@ -131,7 +131,7 @@ model ChatTopicUpdateCustomized {
   /** Topic title. */
   @minLength(1)
   @maxLength(256)
-  title: string;
+  title?: string;
 
   /** Timestamp when the topic was created. */
   @visibility(Lifecycle.Read)
