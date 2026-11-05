@@ -38,6 +38,66 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects, "AIProjectClient");
 
+// The original schemas below are not emitted as Python classes, but their client
+// names are still checked for collisions. The ...Base suffix only frees the
+// existing public names for the Tool wrappers; it does not imply inheritance.
+@@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParamBase", "python");
+@@clientName(OpenAI.CodeInterpreterTool, "CodeInterpreterToolBase", "python");
+@@clientName(OpenAI.ComputerTool, "ComputerToolBase", "python");
+@@clientName(OpenAI.ComputerUsePreviewTool,
+  "ComputerUsePreviewToolBase",
+  "python"
+);
+@@clientName(OpenAI.CustomToolParam, "CustomToolParamBase", "python");
+@@clientName(OpenAI.FileSearchTool, "FileSearchToolBase", "python");
+@@clientName(OpenAI.FunctionShellToolParam,
+  "FunctionShellToolParamBase",
+  "python"
+);
+@@clientName(OpenAI.FunctionTool, "FunctionToolBase", "python");
+@@clientName(OpenAI.ImageGenTool, "ImageGenToolBase", "python");
+@@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParamBase", "python");
+@@clientName(OpenAI.MCPTool, "MCPToolBase", "python");
+@@clientName(OpenAI.ProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParamBase",
+  "python"
+);
+@@clientName(OpenAI.ToolSearchToolParam, "ToolSearchToolParamBase", "python");
+@@clientName(OpenAI.WebSearchPreviewTool, "WebSearchPreviewToolBase", "python");
+@@clientName(OpenAI.WebSearchTool, "WebSearchToolBase", "python");
+
+// Emit the Tool subclasses under the Python names used before OpenAI 1.34.1.
+// For example, OpenAI.ToolToolSearchToolParam emits ToolSearchToolParam, while
+// OpenAI.ToolSearchToolParam (renamed ToolSearchToolParamBase) is not emitted.
+@@clientName(OpenAI.ToolApplyPatchToolParam, "ApplyPatchToolParam", "python");
+@@clientName(OpenAI.ToolCodeInterpreterTool, "CodeInterpreterTool", "python");
+@@clientName(OpenAI.ToolComputerTool, "ComputerTool", "python");
+@@clientName(OpenAI.ToolComputerUsePreviewTool,
+  "ComputerUsePreviewTool",
+  "python"
+);
+@@clientName(OpenAI.ToolCustomToolParam, "CustomToolParam", "python");
+@@clientName(OpenAI.ToolFileSearchTool, "FileSearchTool", "python");
+@@clientName(OpenAI.ToolFunctionShellToolParam,
+  "FunctionShellToolParam",
+  "python"
+);
+@@clientName(OpenAI.ToolFunctionTool, "FunctionTool", "python");
+@@clientName(OpenAI.ToolImageGenTool, "ImageGenTool", "python");
+@@clientName(OpenAI.ToolLocalShellToolParam, "LocalShellToolParam", "python");
+@@clientName(OpenAI.ToolMcpTool, "MCPTool", "python");
+@@clientName(OpenAI.ToolProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParam",
+  "python"
+);
+@@clientName(OpenAI.ToolToolSearchToolParam, "ToolSearchToolParam", "python");
+@@clientName(OpenAI.ToolWebSearchPreviewTool, "WebSearchPreviewTool", "python");
+@@clientName(OpenAI.ToolWebSearchTool, "WebSearchTool", "python");
+
+// Reuse the Tool subclasses in live APIs instead of emitting colliding standalone models.
+@@alternateType(OpenAI.CustomToolParam, OpenAI.ToolCustomToolParam, "python");
+@@alternateType(OpenAI.MCPTool, OpenAI.ToolMcpTool, "python");
+
 // --------------------------------------------------------------------------------
 // Namespace remapping
 // --------------------------------------------------------------------------------
@@ -180,30 +240,65 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job");
 
 // Evaluator generation jobs — renamed for JavaScript SDK discoverability
-@@clientName(EvaluatorGenerationJobs.create, "createGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.create,
+  "createGenerationJob",
+  "javascript"
+);
 @@clientName(EvaluatorGenerationJobs.get, "getGenerationJob", "javascript");
 @@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs", "javascript");
-@@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob", "javascript");
-@@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.cancel,
+  "cancelGenerationJob",
+  "javascript"
+);
+@@clientName(EvaluatorGenerationJobs.delete,
+  "deleteGenerationJob",
+  "javascript"
+);
 
 // Evaluation Suite Generation Jobs — unscoped names (fixes AllScopes conflict)
-@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job");
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "create_generation_suite_job"
+);
 @@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job");
 @@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job");
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancel_generation_suite_job"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "delete_generation_suite_job"
+);
 
 // Evaluation Suite Generation Jobs — renamed for JavaScript SDK discoverability
-@@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "createGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.get,
+  "getGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.list,
+  "listGenerationSuiteJobs",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancelGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "deleteGenerationSuiteJob",
+  "javascript"
+);
 
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite_version");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion,
+  "create_evaluation_suite_version"
+);
 @@clientName(EvaluationSuites.run, "run_evaluation_suite");
 
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuiteVersion", "javascript");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion,
+  "createEvaluationSuiteVersion",
+  "javascript"
+);
 @@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
@@ -310,7 +405,7 @@ using Azure.AI.Projects;
 
 @@clientName(SkillObject, "SkillDetails", "python");
 @@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
-@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python"); 
+@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
@@ -341,16 +436,19 @@ using Azure.AI.Projects;
 @@scope(Agents.createAgentFromCode, "!(python)");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
-@@clientName(SessionDirectoryListResponse, "SessionDirectoryListResult", "python");
+@@clientName(SessionDirectoryListResponse,
+  "SessionDirectoryListResult",
+  "python"
+);
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
 // --------------------------------------------------------------------------------
 // Evaluation Taxonomies sub-client
 // --------------------------------------------------------------------------------
 
-// Note that we can't rename it in src\openai-evaluations\models.tsp, since in 
+// Note that we can't rename it in src\openai-evaluations\models.tsp, since in
 // src\evaluations\models.tsp we already define EvaluationTarget (not for v1).
-// If/when src\evaluations will be removed, consider doing the rename in 
+// If/when src\evaluations will be removed, consider doing the rename in
 // src\openai-evaluations\models.tsp instead.
 @@clientName(Target, "EvaluationTarget");
 
