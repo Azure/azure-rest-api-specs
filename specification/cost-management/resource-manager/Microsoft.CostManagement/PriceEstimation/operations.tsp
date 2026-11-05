@@ -1,5 +1,6 @@
 import "./models.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -91,4 +92,34 @@ interface PriceEstimation {
       Azure.Core.Foundations.RetryAfterHeader,
     Error = Azure.ResourceManager.ErrorResponse
   >;
+
+  /**
+   * Gets the status or result of an estimatePrices operation. This URL is returned
+   * in the Location header of the estimatePrices response. Returns HTTP 202 with
+   * Location and Retry-After headers while pricing runs, then the estimate (HTTP
+   * 200) or the operation's ARM error. Unknown or expired operations, and
+   * operations started by another caller or subscription, return HTTP 404
+   * OperationNotFound.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Provider-level polling endpoint for the estimatePrices long-running action; operation results are not an ARM resource, and the final body is the action's EstimateResult."
+  @get
+  @autoRoute
+  getEstimatePricesOperationResult(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ProviderNamespace<EstimateContent>,
+
+    /** The operation identifier from the estimatePrices Location header. */
+    @path
+    @segment("estimatePricesOperationResults")
+    @pattern("^[0-9a-f]{32}$")
+    operationId: string,
+  ):
+    | ArmResponse<EstimateResult>
+    | ArmAcceptedResponse<
+        "The estimate is still being priced.",
+        ArmLroLocationHeader<FinalResult = EstimateResult, UrlValue = url> &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | Azure.ResourceManager.ErrorResponse;
 }

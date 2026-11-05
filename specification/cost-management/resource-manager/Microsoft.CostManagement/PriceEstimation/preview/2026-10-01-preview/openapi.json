@@ -149,6 +149,65 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/estimatePricesOperationResults/{operationId}": {
+      "get": {
+        "operationId": "PriceEstimation_GetEstimatePricesOperationResult",
+        "tags": [
+          "PriceEstimation"
+        ],
+        "description": "Gets the status or result of an estimatePrices operation. This URL is returned\nin the Location header of the estimatePrices response. Returns HTTP 202 with\nLocation and Retry-After headers while pricing runs, then the estimate (HTTP\n200) or the operation's ARM error. Unknown or expired operations, and\noperations started by another caller or subscription, return HTTP 404\nOperationNotFound.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation identifier from the estimatePrices Location header.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-f]{32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EstimateResult"
+            }
+          },
+          "202": {
+            "description": "The estimate is still being priced.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a price estimation operation": {
+            "$ref": "./examples/EstimatePricesOperationResultGet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
