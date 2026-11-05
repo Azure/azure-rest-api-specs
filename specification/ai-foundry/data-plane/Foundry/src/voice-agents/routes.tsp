@@ -638,6 +638,7 @@ interface AgentEndpointLiveConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio/content")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  @returnsDoc("The captured speech audio for a single item in a stored Live conversation, returned as a WAV byte stream.")
   getLiveAgentConversationAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -675,6 +676,7 @@ interface AgentEndpointLiveConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio/content")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  @returnsDoc("The merged stereo audio for a stored Live conversation, returned as a WAV byte stream.")
   getLiveAgentConversationAudioContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {

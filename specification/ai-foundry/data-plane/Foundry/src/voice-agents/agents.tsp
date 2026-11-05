@@ -265,6 +265,8 @@ union VoiceAgentLiveDelegationType {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveClientDelegation extends VoiceAgentLiveDelegation {
   ...OmitProperties<OpenAI.LiveClientDelegationParam, "type">;
+
+  @doc("The delegation type. Always `client`.")
   type: VoiceAgentLiveDelegationType.client;
 }
 
@@ -272,6 +274,8 @@ model VoiceAgentLiveClientDelegation extends VoiceAgentLiveDelegation {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveResponsesDelegation extends VoiceAgentLiveDelegation {
   ...OmitProperties<OpenAI.LiveResponsesDelegationParam, "type">;
+
+  @doc("The delegation type. Always `responses`.")
   type: VoiceAgentLiveDelegationType.responses;
 }
 
