@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the discovered device properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceDiscoveredDeviceProperties {
   @doc("A device ID that represents the device in a system external to Azure. Unique within scope of an Azure tenant.")
   externalDeviceId?: string;
@@ -50,7 +50,7 @@ model NamespaceDiscoveredDeviceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Connection endpoint URL a device can use to connect to a service.")
 model DiscoveredMessagingEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
@@ -62,7 +62,7 @@ model DiscoveredMessagingEndpoints {
 }
 
 @doc("Property bag contains the device's outbound endpoints")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model DiscoveredOutboundEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("Endpoints the device can connect to.")
@@ -70,7 +70,7 @@ model DiscoveredOutboundEndpoints {
 }
 
 @doc("An endpoint to connect to the device.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model DiscoveredInboundEndpoints {
   @doc("Type of connection endpoint.")
   endpointType: string;

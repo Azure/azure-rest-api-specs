@@ -8,6 +8,7 @@ on:
     paths:
       - .github/**
       - eng/tools/**
+      - eng/typespec-rulesets/**
       - libs/**
       - .oxlintrc.json
       - .gitignore
@@ -21,6 +22,7 @@ on:
     paths:
       - .github/**
       - eng/tools/**
+      - eng/typespec-rulesets/**
       - libs/**
       - .oxlintrc.json
       - .gitignore
@@ -51,6 +53,7 @@ jobs:
           sparse-checkout: |
             .github
             eng/tools
+            eng/typespec-rulesets
             libs
 
       - uses: ./.github/actions/setup-node-install-deps
