@@ -152,6 +152,12 @@ interface ValidationTestRuns {
   @doc("Get a validation test run details")
   get is ArmResourceRead<ValidationTestRun>;
 
+  @doc("Create or update a validation test run. This operation is reserved for internal service use. End users cannot manually create or update validation test runs; such requests return HTTP 400 with error code DisallowedEndUserOperation.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ValidationTestRun>;
+
+  @doc("Delete a validation test run. This operation is reserved for internal service use. End users cannot manually delete validation test runs; such requests return HTTP 400 with error code DisallowedEndUserOperation.")
+  delete is ArmResourceDeleteWithoutOkAsync<ValidationTestRun>;
+
   @doc("List validation test runs for an execution plan run")
   listByExecutionPlanRun is ArmResourceListByParent<ValidationTestRun>;
 }
