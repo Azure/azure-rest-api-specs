@@ -126,6 +126,14 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: >-
+      From 2026-11-15-preview, customer-initiated Project creates use the service's existing 202 Accepted LRO response instead of 201.
+      The 200 update and 202 create responses include the Project resource with provisioningState.
+      The missing 201 response schema is intentional and reflects the RP response contract, not a missing provisioningState property.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put
   - code: PutResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
     where:
