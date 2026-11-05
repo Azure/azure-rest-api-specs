@@ -14,6 +14,19 @@ tag: package-2026-10-preview
 ```yaml $(tag) == 'package-2026-10-preview'
 input-file:
   - preview/2026-10-01-preview/openapi.json
+suppressions:
+  - code: BodyTopLevelProperties
+    from:
+      - openapi.json
+    where:
+      - $.definitions["EstimateResult"]
+    reason: False alarm. EstimateResult is the final result of the estimatePrices POST action, not a resource. It appears in a GET only as the terminal 200 of that action's Location polling URL (estimatePricesOperationResults), which ARM requires to return the same body as the action's synchronous result.
+  - code: RequiredPropertiesMissingInResourceModel
+    from:
+      - openapi.json
+    where:
+      - $.definitions["EstimateResult"]
+    reason: False alarm. EstimateResult is an action result with no resource identity (no PUT, PATCH, DELETE or list); id, name and type do not apply. It appears in a GET only as the terminal 200 of the estimatePrices Location polling URL.
 ```
 
 ## Review scope
