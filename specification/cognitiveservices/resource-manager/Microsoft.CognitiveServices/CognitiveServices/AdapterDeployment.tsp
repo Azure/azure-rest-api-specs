@@ -20,6 +20,7 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Account)
 model AdapterDeployment
   is Azure.ResourceManager.ProxyResource<AdapterDeploymentProperties> {
@@ -43,6 +44,7 @@ model AdapterDeployment
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model AdapterDeploymentListResult {
   /**
    * Adapter deployments in this page.
@@ -86,6 +88,7 @@ alias AdapterDeploymentLroHeaders = {
 
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface AdapterDeployments {
   /**
