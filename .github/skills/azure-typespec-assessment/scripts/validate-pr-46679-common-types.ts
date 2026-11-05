@@ -174,26 +174,34 @@ function candidateReferenceId(value: unknown): string | undefined {
   return typeof record.id === "string" ? record.id : undefined;
 }
 
-export function removeModelInputCandidateReferences(
+export function reconcileModelInputCandidateReferences(
   value: unknown,
-  candidateIds: Set<string>,
+  candidateIdMap: Map<string, string>,
+  removedCandidateIds: Set<string>,
 ): unknown {
   if (Array.isArray(value)) {
     return value
       .filter(
         (item) =>
-          !(typeof item === "string" && candidateIds.has(item)) &&
-          !candidateIds.has(candidateReferenceId(item) ?? ""),
+          !(typeof item === "string" && removedCandidateIds.has(item)) &&
+          !removedCandidateIds.has(candidateReferenceId(item) ?? ""),
       )
-      .map((item) => removeModelInputCandidateReferences(item, candidateIds));
+      .map((item) =>
+        reconcileModelInputCandidateReferences(item, candidateIdMap, removedCandidateIds),
+      );
   }
+  if (typeof value === "string") return candidateIdMap.get(value) ?? value;
   if (value === null || typeof value !== "object") return value;
   const result: Record<string, unknown> = {};
   for (const [key, nested] of Object.entries(value)) {
-    if (key === "evidenceRef" && candidateIds.has(candidateReferenceId(nested) ?? "")) {
+    if (key === "evidenceRef" && removedCandidateIds.has(candidateReferenceId(nested) ?? "")) {
       continue;
     }
-    result[key] = removeModelInputCandidateReferences(nested, candidateIds);
+    result[key] = reconcileModelInputCandidateReferences(
+      nested,
+      candidateIdMap,
+      removedCandidateIds,
+    );
   }
   return result;
 }
@@ -382,10 +390,21 @@ export function validatePr46679CommonTypes({
   const removedCandidateIds = new Set(
     removedWireRepresentationCandidates.map((candidate) => candidate.id),
   );
+  const candidateIdMap = new Map<string, string>();
+  for (const [key, historicalCandidate] of comparison.historicalByKey) {
+    const currentCandidate = comparison.currentByKey.get(key);
+    if (currentCandidate && historicalCandidate.id !== currentCandidate.id) {
+      candidateIdMap.set(historicalCandidate.id, currentCandidate.id);
+    }
+  }
   const modelInputPath = path.join(outputRoot, "model-input.json");
   atomicWriteJson(
     modelInputPath,
-    removeModelInputCandidateReferences(readJsonObject(modelInputPath), removedCandidateIds),
+    reconcileModelInputCandidateReferences(
+      readJsonObject(modelInputPath),
+      candidateIdMap,
+      removedCandidateIds,
+    ),
   );
   const originalJudgment = readJsonObject(
     path.join(fixtureRoot, "assessment-judgment.json"),

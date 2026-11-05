@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   compareRestCandidates,
+  reconcileModelInputCandidateReferences,
   reconcileRestDecisions,
-  removeModelInputCandidateReferences,
   removeObsoleteCommonTypeJudgmentBlocker,
   semanticRestCandidateKey,
   validateReferenceEvidence,
@@ -113,17 +113,23 @@ describe("PR #46679 common-type acceptance validation", () => {
 
   it("removes a deleted candidate from bounded model input references", () => {
     expect(
-      removeModelInputCandidateReferences(
+      reconcileModelInputCandidateReferences(
         {
           restCandidates: [
-            { id: "rest-keep", rule: "property-required" },
+            { id: "rest-old", rule: "property-required" },
             { id: "rest-remove", rule: "wire-type-changed" },
           ],
           semanticReviewUnits: [
             {
               deterministicCoverage: {
-                restCandidateIds: ["rest-keep", "rest-remove"],
+                restCandidateIds: ["rest-old", "rest-remove"],
               },
+              evidenceRef: {
+                artifact: "dimensions/rest-breaking-input.json",
+                id: "rest-old",
+              },
+            },
+            {
               evidenceRef: {
                 artifact: "dimensions/rest-breaking-input.json",
                 id: "rest-remove",
@@ -131,16 +137,22 @@ describe("PR #46679 common-type acceptance validation", () => {
             },
           ],
         },
+        new Map([["rest-old", "rest-current"]]),
         new Set(["rest-remove"]),
       ),
     ).toEqual({
-      restCandidates: [{ id: "rest-keep", rule: "property-required" }],
+      restCandidates: [{ id: "rest-current", rule: "property-required" }],
       semanticReviewUnits: [
         {
           deterministicCoverage: {
-            restCandidateIds: ["rest-keep"],
+            restCandidateIds: ["rest-current"],
+          },
+          evidenceRef: {
+            artifact: "dimensions/rest-breaking-input.json",
+            id: "rest-current",
           },
         },
+        {},
       ],
     });
   });

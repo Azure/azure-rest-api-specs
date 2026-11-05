@@ -230,7 +230,7 @@ function visibleIn(schema: NormalizedSchema, direction: SchemaDirection): boolea
 type ObjectContract = {
   properties: NonNullable<NormalizedSchema["properties"]>;
   constraints: Record<string, unknown[]>;
-  additionalProperties: unknown[];
+  additionalProperties: unknown;
 };
 
 function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | undefined {
@@ -242,7 +242,10 @@ function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | und
   const visit = (current: NormalizedSchema): boolean => {
     const unresolved = unresolvedReferenceIdentity(current);
     if (unresolved !== undefined) return isArmCommonTypeReference(unresolved);
-    if (current.kind !== "object" && current.kind !== "intersection") return false;
+    if (current.kind !== "object" && current.kind !== "intersection" && current.kind !== "any") {
+      return false;
+    }
+    if (current.allOf?.length) return current.allOf.every(visit);
 
     for (const field of WIRE_CONSTRAINT_FIELDS) {
       if (current[field] === undefined) continue;
@@ -270,7 +273,7 @@ function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | und
         });
       }
     }
-    return (current.allOf ?? []).every(visit);
+    return true;
   };
 
   if (!visit(schema)) return undefined;
@@ -279,12 +282,24 @@ function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | und
     constraints: Object.fromEntries(
       [...constraints.entries()].map(([field, values]) => [
         field,
-        values.sort((left, right) => canonicalJson(left).localeCompare(canonicalJson(right))),
+        [...new Map(values.map((value) => [canonicalJson(value), value])).values()].sort(
+          (left, right) => canonicalJson(left).localeCompare(canonicalJson(right)),
+        ),
       ]),
     ),
-    additionalProperties: additionalProperties.sort((left, right) =>
-      canonicalJson(left).localeCompare(canonicalJson(right)),
-    ),
+    additionalProperties: additionalProperties.includes(false)
+      ? false
+      : (() => {
+          const schemas = [
+            ...new Map(
+              additionalProperties
+                .filter((value) => value !== true)
+                .map((value) => [canonicalJson(value), value]),
+            ).values(),
+          ].sort((left, right) => canonicalJson(left).localeCompare(canonicalJson(right)));
+          if (!schemas.length) return true;
+          return schemas.length === 1 ? schemas[0] : schemas;
+        })(),
   };
 }
 

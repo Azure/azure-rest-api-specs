@@ -508,6 +508,139 @@ void test("detects breaking changes inside inherited allOf JSON properties", (co
   );
 });
 
+void test("detects constraints inherited only through resolved allOf branches", (context) => {
+  const work = fs.mkdtempSync(path.join(process.cwd(), ".rest-inherited-constraint-test-"));
+  context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
+  const document = (current: boolean) => ({
+    swagger: "2.0",
+    info: { title: "Widgets", version: "v1" },
+    definitions: {
+      Widget: current
+        ? {
+            allOf: [{ $ref: "#/definitions/ConstrainedWidget" }],
+            properties: { name: { type: "string" } },
+          }
+        : {
+            type: "object",
+            properties: { name: { type: "string" } },
+          },
+      ConstrainedWidget: {
+        type: "object",
+        minProperties: 1,
+      },
+    },
+    paths: {
+      "/widgets": {
+        post: {
+          operationId: "Widgets_Create",
+          parameters: [
+            {
+              name: "body",
+              in: "body",
+              required: true,
+              schema: { $ref: "#/definitions/Widget" },
+            },
+          ],
+          responses: { 200: { description: "OK" } },
+        },
+      },
+    },
+  });
+  const artifact = (file: string) => ({
+    status: "succeeded",
+    format: "swagger-2.0",
+    files: [{ path: file, documentRole: "primary" }],
+  });
+  writeJson(path.join(work, "base.json"), document(false));
+  writeJson(path.join(work, "current.json"), document(true));
+  const result = analyzeRestBreaking({
+    workRoot: work,
+    manifest: {
+      projects: [
+        {
+          id: "project-1",
+          artifacts: {
+            base: { autorest: artifact("base.json") },
+            current: { autorest: artifact("current.json") },
+          },
+        },
+      ],
+    },
+    sourceIndex: { sourceChanges: [] },
+  } as unknown as Parameters<typeof analyzeRestBreaking>[0]);
+
+  assert.deepEqual(
+    result.candidates.map((candidate) => [candidate.rule, candidate.contractChange?.location]),
+    [["wire-schema-changed", "request body"]],
+  );
+});
+
+void test("intersects additionalProperties evidence across resolved allOf branches", (context) => {
+  const work = fs.mkdtempSync(
+    path.join(process.cwd(), ".rest-inherited-additional-properties-test-"),
+  );
+  context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
+  const document = (current: boolean) => ({
+    swagger: "2.0",
+    info: { title: "Widgets", version: "v1" },
+    definitions: {
+      Widget: current
+        ? {
+            allOf: [
+              { type: "object", additionalProperties: false },
+              { type: "object", additionalProperties: true },
+            ],
+          }
+        : {
+            type: "object",
+          },
+    },
+    paths: {
+      "/widgets": {
+        post: {
+          operationId: "Widgets_Create",
+          parameters: [
+            {
+              name: "body",
+              in: "body",
+              required: true,
+              schema: { $ref: "#/definitions/Widget" },
+            },
+          ],
+          responses: { 200: { description: "OK" } },
+        },
+      },
+    },
+  });
+  const artifact = (file: string) => ({
+    status: "succeeded",
+    format: "swagger-2.0",
+    files: [{ path: file, documentRole: "primary" }],
+  });
+  writeJson(path.join(work, "base.json"), document(false));
+  writeJson(path.join(work, "current.json"), document(true));
+  const result = analyzeRestBreaking({
+    workRoot: work,
+    manifest: {
+      projects: [
+        {
+          id: "project-1",
+          artifacts: {
+            base: { autorest: artifact("base.json") },
+            current: { autorest: artifact("current.json") },
+          },
+        },
+      ],
+    },
+    sourceIndex: { sourceChanges: [] },
+  } as unknown as Parameters<typeof analyzeRestBreaking>[0]);
+
+  assert.deepEqual(
+    result.candidates.map((candidate) => [candidate.rule, candidate.contractChange?.location]),
+    [["additional-properties-changed", "request body"]],
+  );
+});
+
 void test("blocks changed or missing non-common unresolved references", (context) => {
   const work = fs.mkdtempSync(path.join(process.cwd(), ".rest-non-common-unresolved-test-"));
   context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
