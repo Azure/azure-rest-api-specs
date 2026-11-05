@@ -31,7 +31,7 @@ model AgentPoolCustomize
     Resource = AgentPool,
     KeyName = "agentPoolName",
     SegmentName = "agentPools",
-    NamePattern = "^[a-z][a-z0-9]{0,11}$"
+    NamePattern = "^[a-z][a-z0-9]{0,38}$"
   >;
 }
 

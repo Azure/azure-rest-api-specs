@@ -21,7 +21,7 @@ model AgentPool
     Resource = AgentPool,
     KeyName = "agentPoolName",
     SegmentName = "agentPools",
-    NamePattern = "^[a-z][a-z0-9]{0,11}$"
+    NamePattern = "^[a-z][a-z0-9]{0,38}$"
   >;
 }
 
@@ -224,9 +224,9 @@ interface AgentPoolsOps
          * The name of the agent pool.
          */
         @path
-        @pattern("^[a-z][a-z0-9]{0,11}$")
+        @pattern("^[a-z][a-z0-9]{0,38}$")
         @segment("agentPools")
-        @maxLength(12)
+        @maxLength(39)
         @minLength(1)
         agentPoolName: string,
       },
@@ -234,7 +234,7 @@ interface AgentPoolsOps
       #{ useStaticRoute: true }
     > {}
 
-@@maxLength(AgentPool.name, 12);
+@@maxLength(AgentPool.name, 39);
 @@minLength(AgentPool.name, 1);
 @@doc(AgentPool.name, "The name of the agent pool.");
 @@doc(AgentPool.properties, "Properties of an agent pool.");
