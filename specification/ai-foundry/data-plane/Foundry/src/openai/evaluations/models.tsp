@@ -1,6 +1,7 @@
 import "../../common/models.tsp";
 import "../../common/servicepatterns.tsp";
 import "../../data_generation_jobs/models.tsp";
+import "../../evaluators/models.tsp";
 import "../../red-teams/models.tsp";
 import "./common.tsp";
 import "./user_conversation_simulation.tsp";
@@ -1118,7 +1119,7 @@ union EvalRunOutputItemResultStatus {
     reason?: string,
 
     /** Additional details about the test criteria metric. */
-    properties?: Record<string>,
+    properties?: RubricResultProperties,
   }
 );
 
