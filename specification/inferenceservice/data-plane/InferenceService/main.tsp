@@ -37,7 +37,6 @@ alias AzureDataAIApiKeyAuth = ApiKeyAuth<
 
 /** The Azure Data AI API versions. */
 enum Versions {
-  /** 2026-09-01-preview version */
-  @Azure.Core.previewVersion
-  v2026_09_01_preview: "2026-09-01-preview",
+  /** 2026-10-30 generally available version. */
+  v2026_10_30: "2026-10-30",
 }
