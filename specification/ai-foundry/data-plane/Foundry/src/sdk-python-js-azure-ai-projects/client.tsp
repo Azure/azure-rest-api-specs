@@ -723,6 +723,8 @@ namespace JavaScriptToolCompatibility {
 // Need to explicitly mention both languages to avoid compile error
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
 
+@@access(Evaluators.listDiagnostics, Access.public);
+
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
 
