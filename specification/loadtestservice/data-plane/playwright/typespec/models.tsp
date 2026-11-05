@@ -58,6 +58,26 @@ model Workspace {
   @doc("When set on Playwright workspace resource, it provides the URI of the Azure storage account used to store workspace artifacts, test results, and reports.")
   @visibility(Lifecycle.Read)
   storageUri?: url;
+
+  /** The review status of the Microsoft signing key for the workspace. */
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Read)
+  microsoftSigningKeyStatus?: MicrosoftSigningKeyStatus;
+}
+
+/** The review status of a Microsoft signing key. */
+@added(Versions.v2026_12_01_preview)
+union MicrosoftSigningKeyStatus {
+  string,
+
+  /** The Microsoft signing key has been accepted. */
+  Accepted: "Accepted",
+
+  /** The Microsoft signing key has been rejected. */
+  Rejected: "Rejected",
+
+  /** The Microsoft signing key is under review. */
+  InReview: "InReview",
 }
 
 @doc("The Playwright workspace state.")
