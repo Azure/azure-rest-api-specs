@@ -100,6 +100,34 @@ using Azure.AI.Projects;
   "java"
 );
 
+@@clientName(VoiceAgentSystemTool.timeout_seconds, "timeout", "java");
+@@clientName(
+  VoiceAgentServerEventSystemToolArgumentsDelta,
+  "VoiceAgentSystemToolArgumentsDeltaEvent",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventSystemToolArgumentsDone,
+  "VoiceAgentSystemToolArgumentsDoneEvent",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventInputCollectionStatus,
+  "VoiceAgentInputCollectionStatusEvent",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventInputCollectionStatus.output_ref,
+  "outputReference",
+  "java"
+);
+@@clientName(VoiceAgentSystemToolItem.object, "objectType", "java");
+@@clientName(
+  VoiceAgentTransferRouting.ring_timeout_seconds,
+  "ringTimeout",
+  "java"
+);
+
 @@alternateType(
   OpenAI.LiveResponsesDelegationSettingsInputParam,
   {
