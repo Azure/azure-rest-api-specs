@@ -77,6 +77,10 @@ function requireSafeRelativePath(value: unknown, fieldName: string): string {
   return value;
 }
 
+/**
+ * Restricts replacement targets to SDK package trees so artifact input cannot
+ * overwrite repository control paths before Git inspects the workspace.
+ */
 function requireSdkPackageRootPath(value: unknown): string {
   const packageRootPath = requireSafeRelativePath(value, "packageRootPath");
   const segments = packageRootPath.split("/");

@@ -168,6 +168,10 @@ function parseArtifactDownloadUrl(metadata: unknown, artifactName: string): stri
   return parsedUrl.toString();
 }
 
+/**
+ * Preserves the exact trusted artifact name used as the ZIP prefix. Failed
+ * artifacts may differ only by Azure Pipelines' numbered FailedAttempt suffix.
+ */
 function parseResolvedArtifactName(
   metadata: unknown,
   requestedArtifactName: string,

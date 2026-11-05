@@ -405,6 +405,8 @@ function resolveDeclaredSnapshotFile(
  * Every ZIP path and declared expanded size is checked before extraction.
  * The validated aggregate budget bounds the synchronous extraction, and the
  * extracted file counts and byte totals must exactly match the trusted manifest.
+ * Only the selected Azure Pipelines artifact name is accepted as a directory
+ * prefix, including a validated FailedAttempt suffix.
  *
  * @throws When the archive contains unsafe, duplicate, missing, incomplete, or
  * oversized review input.

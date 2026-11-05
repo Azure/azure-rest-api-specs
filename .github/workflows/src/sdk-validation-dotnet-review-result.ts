@@ -1,3 +1,7 @@
+/**
+ * Validates agent-generated review output against the trusted reconstruction
+ * context before the workflow publishes the result artifact.
+ */
 type ReviewContext = {
   source: {
     specPrNumber: number;
@@ -54,6 +58,13 @@ function validateFinding(value: unknown, reviewIndex: number, findingIndex: numb
   requireNonEmptyString(value.description, "finding description");
 }
 
+/**
+ * Requires a complete result for every reconstructed SDK baseline, verifies
+ * source and skill identity, and validates every structured finding.
+ *
+ * @throws When the result or Markdown report is missing, malformed, incomplete,
+ * or inconsistent with the reconstruction context.
+ */
 export function validateSdkReviewResult(
   contextValue: unknown,
   resultValue: unknown,
