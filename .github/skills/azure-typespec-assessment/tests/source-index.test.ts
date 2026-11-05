@@ -159,6 +159,55 @@ void test("failed compiler programs never report @doc evidence ready", async () 
   assert.equal(required(required(sourceIndex.sourceChanges[0]).documentEvidence).status, "blocked");
 });
 
+void test("new projects compile and index only the target revision", async () => {
+  const sourceText = '@doc("A widget") model Widget {}';
+  const sourceIndex = buildSourceIndex({
+    repo: "repo",
+    mergeBase: "base",
+    headCommit: "head",
+    changedFiles: [{ path: "main.tsp", status: "added", origins: [] }],
+    readFile: (_repo, revision) => (revision === "base" ? null : sourceText),
+    diffFile: () => '@@ -0,0 +1 @@\n+@doc("A widget") model Widget {}',
+  });
+  const loadedWorktrees: string[] = [];
+  await addCompilerEvidence({
+    sourceIndex,
+    baseWorktree: "base",
+    currentWorktree: "current",
+    projects: ["main.tsp"],
+    projectsByRevision: { base: [], current: ["main.tsp"] },
+    loadCompiler: (worktree): CompilerApi => {
+      loadedWorktrees.push(worktree);
+      const file = {
+        path: path.resolve(worktree, "main.tsp"),
+        text: sourceText,
+        getLineAndCharacterOfPosition: () => ({ line: 0, character: 0 }),
+      };
+      return {
+        compilerVersion: "test",
+        NodeHost: {},
+        compile: () => ({
+          diagnostics: [],
+          sourceFiles: new Map([["main.tsp", { file }]]),
+        }),
+        navigateProgram: (_program, listeners) =>
+          listeners.model({ kind: "Model", name: "Widget" }),
+        getSourceLocation: () => ({ file, pos: 0, end: sourceText.length }),
+        getDoc: () => "A widget",
+      };
+    },
+  });
+
+  assert.deepEqual(loadedWorktrees, ["current"]);
+  assert.equal(sourceIndex.analysis.status, "ready");
+  assert.equal(required(required(sourceIndex.sourceChanges[0]).documentEvidence).status, "ready");
+  assert.ok(
+    required(sourceIndex.sourceChanges[0]).declarations.every(
+      (declaration) => declaration.source.revision === "current",
+    ),
+  );
+});
+
 void test("compiler evidence records only documentation presence on changed declarations", async () => {
   const sourceText = "model Widget { value: string; }";
   const sourceIndex = buildSourceIndex({
@@ -405,4 +454,72 @@ void test("compiler evidence preserves parsed decorators and source links", asyn
     "https://github.com/contoso/widgets/blob/head/main.tsp#L2-L2",
   );
   assert.equal(required(declaration.compilerEvidence).kind, "semantic-type");
+});
+
+void test("source indexing retains versioning decorators on interface operations", () => {
+  const baseText = `interface Widgets {
+  read is Foundations.ResourceRead<Widget>;
+}
+`;
+  const currentText = `interface Widgets {
+  @renamedFrom(Versions.v2, "read")
+  get is Foundations.ResourceRead<Widget>;
+}
+`;
+  const sourceIndex = buildSourceIndex({
+    repo: "repo",
+    mergeBase: "base",
+    headCommit: "head",
+    changedFiles: [{ path: "main.tsp", status: "modified", origins: [] }],
+    remoteUrl: "https://github.com/contoso/widgets.git",
+    readFile: (revision) => (revision === "base" ? baseText : currentText),
+    diffFile: () => `@@ -1,3 +1,4 @@
+ interface Widgets {
+-  read is Foundations.ResourceRead<Widget>;
++  @renamedFrom(Versions.v2, "read")
++  get is Foundations.ResourceRead<Widget>;
+ }
+`,
+  });
+  const declaration = required(
+    required(sourceIndex.sourceChanges[0]).declarations.find(
+      (item) => item.qualifiedName === "Widgets.get",
+    ),
+  );
+
+  assert.deepEqual(declaration.decorators, ['@renamedFrom(Versions.v2, "read")']);
+  assert.deepEqual(declaration.versionedMembers, ['@renamedFrom(Versions.v2, "read")']);
+});
+
+void test("source indexing does not carry decorators across interface operations", () => {
+  const text = `interface Widgets {
+  @renamedFrom(Versions.v2, "read")
+  get is Foundations.ResourceRead<Widget>;
+  list is Foundations.ResourceList<Widget>;
+}
+`;
+  const sourceIndex = buildSourceIndex({
+    repo: "repo",
+    mergeBase: "base",
+    headCommit: "head",
+    changedFiles: [{ path: "main.tsp", status: "modified", origins: [] }],
+    remoteUrl: "https://github.com/contoso/widgets.git",
+    readFile: () => text,
+    diffFile: () => `@@ -1,5 +1,5 @@
+ interface Widgets {
+   @renamedFrom(Versions.v2, "read")
+   get is Foundations.ResourceRead<Widget>;
+-  list is Foundations.ResourceList<Widget>;
++  list is Foundations.ResourceListAll<Widget>;
+ }
+`,
+  });
+  const declaration = required(
+    required(sourceIndex.sourceChanges[0]).declarations.find(
+      (item) => item.qualifiedName === "Widgets.list",
+    ),
+  );
+
+  assert.deepEqual(declaration.decorators, []);
+  assert.deepEqual(declaration.versionedMembers, []);
 });
