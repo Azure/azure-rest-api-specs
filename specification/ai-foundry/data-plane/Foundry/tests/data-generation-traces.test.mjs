@@ -4,6 +4,10 @@ import { test } from "node:test";
 
 const project = new URL("../", import.meta.url);
 const readme = readFileSync(new URL("README.md", project), "utf8");
+const featureSummary = readFileSync(
+  new URL("docs/foundry-features-flag-summary.md", project),
+  "utf8",
+);
 const examples = Object.fromEntries(
   [
     ...readme.matchAll(
@@ -11,6 +15,30 @@ const examples = Object.fromEntries(
     ),
   ].map(([, name, json]) => [name, JSON.parse(json)]),
 );
+
+test("preview header guidance includes fine-tuning scenarios", () => {
+  const createRow = featureSummary
+    .split("\n")
+    .find((line) => line.startsWith("| Data Generation Jobs | Create |"));
+  assert(createRow, "Data Generation Jobs create guidance is present");
+  for (const scenario of [
+    "supervised_finetuning_preview",
+    "reinforcement_finetuning_preview",
+  ]) {
+    assert(createRow.includes(scenario), scenario);
+  }
+});
+
+test("conversation merge guidance warns that previous turns can be omitted", () => {
+  assert.match(
+    readme,
+    /may omit earlier turns outside the selected time window/,
+  );
+  assert.match(
+    readme,
+    /does not (?:union individual turns\s+or )?retain every previous turn/,
+  );
+});
 
 for (const version of ["v1", "virtual-public-preview"]) {
   const spec = JSON.parse(
@@ -22,6 +50,21 @@ for (const version of ["v1", "virtual-public-preview"]) {
   const schemas = spec.components.schemas;
   const conversations = schemas.ConversationsDataGenerationJobConfiguration;
   const traces = schemas.TracesDataGenerationJobConfiguration;
+
+  test(`${version}: conversation merge documentation does not promise to retain previous turns`, () => {
+    const description =
+      schemas.EvaluationDataGenerationJobOutputConfiguration.properties
+        .write_mode.description;
+    assert.match(description, /may omit earlier turns.*selected time window/);
+    assert.match(description, /does not retain every previous turn/);
+  });
+
+  test(`${version}: description documentation distinguishes the service default from omission`, () => {
+    assert.match(
+      conversations.properties.generate_test_case_description.description,
+      /If omitted, the service defaults to `false`/,
+    );
+  });
 
   test(`${version}: conversation job type is appended after existing job types`, () => {
     assert.deepEqual(
@@ -56,15 +99,12 @@ for (const version of ["v1", "virtual-public-preview"]) {
       }
     }
     assert(!Object.hasOwn(schemas, "TraceSampleLevel"));
-    assert.deepEqual(
-      Object.keys(traces.properties).sort(),
-      [
-        "generate_test_case_rubric",
-        "max_samples",
-        "redact_private_content",
-        "type",
-      ],
-    );
+    assert.deepEqual(Object.keys(traces.properties).sort(), [
+      "generate_test_case_rubric",
+      "max_samples",
+      "redact_private_content",
+      "type",
+    ]);
   });
 
   test(`${version}: trace rubric generation is optional and uses existing model options`, () => {
@@ -247,13 +287,13 @@ for (const version of ["v1", "virtual-public-preview"]) {
     const variants = schemas.DataGenerationWarningCode.anyOf;
     assert(
       variants.some(
-        (variant) => variant.type === "string" && !Object.hasOwn(variant, "enum"),
+        (variant) =>
+          variant.type === "string" && !Object.hasOwn(variant, "enum"),
       ),
     );
-    assert.deepEqual(
-      variants.find((variant) => variant.enum).enum,
-      ["TestCaseDescriptionGenerationIncomplete"],
-    );
+    assert.deepEqual(variants.find((variant) => variant.enum).enum, [
+      "TestCaseDescriptionGenerationIncomplete",
+    ]);
     assert.deepEqual(warning.required, ["message"]);
     assert.equal(
       schemas.DataGenerationJobResult.properties.warnings.items.$ref,

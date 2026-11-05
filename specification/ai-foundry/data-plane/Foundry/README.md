@@ -74,7 +74,7 @@ options. Conversation reconstruction uses the separate
 conversation-only; rubric generation is available on both types. Neither
 configuration exposes `sample_level`.
 
-The optional `generate_test_case_description` flag defaults to `false`.
+If `generate_test_case_description` is omitted, the service defaults to `false`.
 When enabled, it generates one AI-authored description for each reconstructed
 conversation, using the existing `model_options.model`. The optional
 `generate_test_case_rubric` flag controls test-case rubric generation for
@@ -93,10 +93,11 @@ Description failure retains the row and records safe row-level status/error
 metadata, without raw provider or model error bodies.
 `max_samples` counts whole conversation candidates, not turns.
 When merging conversation datasets, a newly generated conversation snapshot
-replaces the existing snapshot of the same conversation, preserving any
-additional captured turns. Existing conversations without a newly generated
-replacement remain unchanged. Merge replaces whole conversation snapshots; it
-does not union individual turns.
+replaces the existing snapshot of the same conversation wholesale. The
+replacement snapshot may omit earlier turns outside the selected time window.
+Existing conversations without a newly generated replacement remain unchanged.
+Merge replaces whole conversation snapshots; it does not union individual turns
+or retain every previous turn from the replaced snapshot.
 
 These complete wire examples are maintained here because OpenAPI3 operation
 example emission through the existing polymorphic base types omits subtype
