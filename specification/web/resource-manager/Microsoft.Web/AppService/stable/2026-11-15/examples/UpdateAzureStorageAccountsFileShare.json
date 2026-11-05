@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "name": "sitef6141",
+    "api-version": "2026-11-15",
+    "azureStorageAccounts": {
+      "properties": {
+        "fileshare1": {
+          "type": "FileShare",
+          "accountName": "fileuser",
+          "accessKey": "REPLACE_WITH_PASSWORD",
+          "mountPath": "/mounts/fileshare",
+          "shareName": "web",
+          "endpoint": "fileserver.contoso.com",
+          "protocol": "Smb"
+        }
+      }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azurestorageaccounts",
+        "type": "Microsoft.Web/sites/config",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/config/azurestorageaccounts",
+        "kind": "app",
+        "properties": {
+          "fileshare1": {
+            "type": "FileShare",
+            "accountName": "fileuser",
+            "mountPath": "/mounts/fileshare",
+            "shareName": "web",
+            "endpoint": "fileserver.contoso.com",
+            "protocol": "Smb",
+            "state": "Ok"
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "WebApps_UpdateAzureStorageAccounts",
+  "title": "Update FileShare Storage Mount"
+}
