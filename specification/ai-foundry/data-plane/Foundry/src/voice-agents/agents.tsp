@@ -60,12 +60,24 @@ union VoiceAgentInterimResponseTrigger {
   tool: "tool",
 }
 
+@doc("The interim-response implementations supported by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentInterimResponseType {
+  string,
+
+  @doc("Select a static interim response from configured text.")
+  static_interim_response: "static_interim_response",
+
+  @doc("Generate an interim response with a language model.")
+  llm_interim_response: "llm_interim_response",
+}
+
 @doc("Fields shared by interim-response configurations.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInterimResponseConfig {
   @doc("The interim-response implementation.")
-  type: string;
+  type: VoiceAgentInterimResponseType;
 
   @doc("Conditions that may trigger one interim response.")
   triggers?: VoiceAgentInterimResponseTrigger[] = #[
@@ -82,7 +94,7 @@ model VoiceAgentInterimResponseConfig {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentStaticInterimResponseConfig
   extends VoiceAgentInterimResponseConfig {
-  type: "static_interim_response";
+  type: VoiceAgentInterimResponseType.static_interim_response;
 
   @doc("Candidate text values for the interim response.")
   texts?: string[];
@@ -92,7 +104,7 @@ model VoiceAgentStaticInterimResponseConfig
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLlmInterimResponseConfig
   extends VoiceAgentInterimResponseConfig {
-  type: "llm_interim_response";
+  type: VoiceAgentInterimResponseType.llm_interim_response;
 
   @doc("The model used to generate interim responses.")
   `model`?: string;
@@ -634,19 +646,37 @@ model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   version?: string;
 }
 
+@doc("The tool kinds supported by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentToolType {
+  string,
+
+  @doc("A native function tool executed by the client.")
+  function: "function",
+
+  @doc("A tool exposed by an MCP server.")
+  mcp: "mcp",
+
+  @doc("A service-managed control that acts on the active voice session.")
+  system: "system",
+
+  @doc("A reference to a Foundry toolbox.")
+  toolbox: "toolbox",
+}
+
 @doc("A tool usable by a voice agent.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTool {
   @doc("The tool kind.")
-  type: string;
+  type: VoiceAgentToolType;
 }
 
 @doc("A native function tool executed by the client.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentFunctionTool extends VoiceAgentTool {
   ...OmitProperties<OpenAI.RealtimeFunctionTool, "type" | "name">;
-  type: "function";
+  type: VoiceAgentToolType.function;
 
   @doc("The function name.")
   @minLength(1)
@@ -688,7 +718,7 @@ union VoiceAgentToolResponseScheduling {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentMcpTool extends VoiceAgentTool {
   ...OmitProperties<OpenAI.MCPTool, "type" | "connector_id" | "tunnel_id">;
-  type: "mcp";
+  type: VoiceAgentToolType.mcp;
 
   @doc("When the MCP invocation creates a follow-up response. Defaults to `when_idle`.")
   response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
@@ -699,7 +729,7 @@ model VoiceAgentMcpTool extends VoiceAgentTool {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSystemTool extends VoiceAgentTool {
   @doc("The type of the tool. Always `system`.")
-  type: "system";
+  type: VoiceAgentToolType.system;
 
   @doc("The service-managed control action. Known values are stable; additional values may be added over time.")
   name: VoiceAgentSystemToolName;
@@ -885,7 +915,7 @@ model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentToolboxTool extends VoiceAgentTool {
   @doc("The type of the tool. Always `toolbox`.")
-  type: "toolbox";
+  type: VoiceAgentToolType.toolbox;
 
   @doc("The name of the toolbox to attach.")
   toolbox_name: string;

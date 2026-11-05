@@ -964,12 +964,24 @@ model VoiceAgentServerEventRtcCallSdpCreated
   sdp_answer: string;
 }
 
+@doc("The error categories reported for WebRTC signaling failures.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentRtcCallErrorType {
+  string,
+
+  @doc("A client-side signaling fault, such as a malformed SDP offer.")
+  invalid_request_error: "invalid_request_error",
+
+  @doc("A service-side signaling failure.")
+  server_error: "server_error",
+}
+
 @doc("Details of a WebRTC signaling error.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentRtcCallErrorDetails {
   @doc("The error category, following the VoiceLive wire contract: `invalid_request_error` for a client-side signaling fault (for example, a malformed SDP offer) or `server_error` for a service-side failure. Additional categories may be added over time.")
-  type: string;
+  type: VoiceAgentRtcCallErrorType;
 
   @doc("A machine-readable error code, when available.")
   code?: string;

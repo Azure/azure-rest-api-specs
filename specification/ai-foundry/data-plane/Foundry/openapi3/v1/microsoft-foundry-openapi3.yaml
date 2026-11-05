@@ -98812,7 +98812,7 @@ components:
         - type
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/VoiceAgentInterimResponseType'
           description: The interim-response implementation.
         triggers:
           type: array
@@ -98843,6 +98843,17 @@ components:
             - latency
             - tool
       description: A condition that may trigger an interim response.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentInterimResponseType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - static_interim_response
+            - llm_interim_response
+      description: The interim-response implementations supported by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -99831,7 +99842,7 @@ components:
         - message
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/VoiceAgentRtcCallErrorType'
           description: 'The error category, following the VoiceLive wire contract: `invalid_request_error` for a client-side signaling fault (for example, a malformed SDP offer) or `server_error` for a service-side failure. Additional categories may be added over time.'
         code:
           type: string
@@ -99840,6 +99851,17 @@ components:
           type: string
           description: A human-readable error message.
       description: Details of a WebRTC signaling error.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentRtcCallErrorType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - invalid_request_error
+            - server_error
+      description: The error categories reported for WebRTC signaling failures.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -101512,7 +101534,7 @@ components:
         - type
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/VoiceAgentToolType'
           description: The tool kind.
       discriminator:
         propertyName: type
@@ -101548,6 +101570,19 @@ components:
             - interrupt
             - skip_if_busy
       description: When a tool invocation creates a follow-up response. Additional values may be added over time.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentToolType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - function
+            - mcp
+            - system
+            - toolbox
+      description: The tool kinds supported by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
