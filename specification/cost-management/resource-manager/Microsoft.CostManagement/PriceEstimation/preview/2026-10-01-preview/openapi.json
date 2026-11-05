@@ -175,7 +175,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation completed. The body is the final result of the estimatePrices\naction: an EstimateResult on success, as defined by that operation."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EstimateResult"
+            }
           },
           "202": {
             "description": "The estimate is still being priced.",
@@ -200,7 +203,7 @@
           }
         },
         "x-ms-examples": {
-          "Get the status of a price estimation operation": {
+          "Get the result of a price estimation operation": {
             "$ref": "./examples/EstimatePricesOperationResultGet.json"
           }
         }
@@ -551,10 +554,6 @@
         }
       ],
       "x-ms-discriminator-value": "object"
-    },
-    "EstimatePricesOperationCompleted": {
-      "type": "object",
-      "description": "The operation completed. The body is the final result of the estimatePrices\naction: an EstimateResult on success, as defined by that operation."
     },
     "EstimateResourceInput": {
       "type": "object",

@@ -102,7 +102,6 @@ interface PriceEstimation {
    * OperationNotFound.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Provider-level polling endpoint for the estimatePrices long-running action; operation results are not an ARM resource, and the final body is the action's EstimateResult."
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Standard ARM operation-results pattern: the completed body is the estimatePrices action's final result (EstimateResult on that POST); describing it here would make the linter treat the operation result as an ARM resource."
   @get
   @autoRoute
   getEstimatePricesOperationResult(
@@ -116,22 +115,11 @@ interface PriceEstimation {
     @pattern("^[0-9a-f]{32}$")
     operationId: string,
   ):
-    | EstimatePricesOperationCompleted
+    | ArmResponse<EstimateResult>
     | ArmAcceptedResponse<
         "The estimate is still being priced.",
         ArmLroLocationHeader<FinalResult = EstimateResult, UrlValue = url> &
           Azure.Core.Foundations.RetryAfterHeader
       >
     | Azure.ResourceManager.ErrorResponse;
-}
-
-/**
- * The operation completed. The body is the final result of the estimatePrices
- * action: an EstimateResult on success, as defined by that operation.
- */
-@added(Versions.v2026_10_01_preview)
-model EstimatePricesOperationCompleted {
-  /** The operation completed. */
-  @statusCode
-  statusCode: 200;
 }
