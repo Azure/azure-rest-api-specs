@@ -44934,7 +44934,7 @@ components:
         type:
           type: string
           enum:
-            - appinsights
+            - app_insights
           description: Application Insights provider discriminator.
         resource_id:
           type: string
@@ -46144,14 +46144,14 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          appinsights: '#/components/schemas/AgentOptimizationAppInsightsTraceConnectionConfiguration'
+          app_insights: '#/components/schemas/AgentOptimizationAppInsightsTraceConnectionConfiguration'
       description: Explicit project-authorized telemetry selection, not an arbitrary endpoint.
     AgentOptimizationTraceConnectionType:
       anyOf:
         - type: string
         - type: string
           enum:
-            - appinsights
+            - app_insights
       description: Project-authorized trace providers for skill optimization.
     AgentOptimizationTraceEvaluatorGenerationConfiguration:
       type: object

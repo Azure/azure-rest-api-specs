@@ -421,7 +421,7 @@ union AgentOptimizationTraceConnectionType {
   string,
 
   /** A project-linked Application Insights component. */
-  appinsights: "appinsights",
+  app_insights: "app_insights",
 }
 
 /** Explicit project-authorized telemetry selection, not an arbitrary endpoint. */
@@ -435,7 +435,7 @@ model AgentOptimizationTraceConnectionConfiguration {
 model AgentOptimizationAppInsightsTraceConnectionConfiguration
   extends AgentOptimizationTraceConnectionConfiguration {
   @doc("Application Insights provider discriminator.")
-  type: AgentOptimizationTraceConnectionType.appinsights;
+  type: AgentOptimizationTraceConnectionType.app_insights;
 
   @doc("Non-empty ARM component resource ID of an Application Insights connection linked to this project. Invalid or unavailable explicit configuration must fail rather than fall back.")
   @minLength(1)
