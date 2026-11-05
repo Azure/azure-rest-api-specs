@@ -45,6 +45,11 @@ message-format: json
 
 ``` yaml
 directive:
+  - suppress: PreviewVersionOverOneYear
+    from: policyAuthoring.json
+    where: $.info.version
+    reason: These newly published authoring operations use the existing backend's 2025-05-01-preview contract. Publication does not change the implemented wire version; retirement or a new version requires a separate service change.
+
   - suppress: EnumInsteadOfBoolean
     reason: The data type in store is boolean. If we change the type in RP, it will break existing clients, and we will incur runtime conversion cost.
     where:
@@ -159,8 +164,12 @@ Model sources and author-maintained examples are located under `PolicyInsightsAp
 with examples in `PolicyInsightsApi/examples/<api-version>`. The emitter copies
 those examples to `preview/<api-version>/examples`, matching the existing preview
 layout. Edit the source examples and recompile rather than editing both copies.
-Policy definition inputs reuse the Microsoft.Authorization definition and parameter
-models, with the additional required fields validated by these operations.
+Verification and simulation share one service-local `PolicyDefinitionContent`
+model based on the Microsoft.Authorization definition and parameter contract,
+with the additional required fields validated by these operations. Keeping this
+input within the parent project makes it portable to SDK generation, which
+copies TypeSpec projects outside the specification repository. Existing
+PolicyInsights evaluation and reference models remain shared.
 
 ### Tag: package-2026-09-preview
 

@@ -163,157 +163,6 @@
         "userQuestion"
       ]
     },
-    "Microsoft.Authorization.ExternalEvaluationEndpointSettings": {
-      "type": "object",
-      "description": "The settings of an external endpoint providing evaluation results.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of the endpoint."
-        },
-        "details": {
-          "description": "The details of the endpoint."
-        }
-      }
-    },
-    "Microsoft.Authorization.ExternalEvaluationEnforcementSettings": {
-      "type": "object",
-      "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation.",
-      "properties": {
-        "missingTokenAction": {
-          "type": "string",
-          "description": "What to do when evaluating an enforcement policy that requires an external evaluation and the token is missing. Possible values are Audit and Deny and language expressions are supported."
-        },
-        "resultLifespan": {
-          "type": "string",
-          "description": "The lifespan of the endpoint invocation result after which it's no longer valid. Value is expected to follow the ISO 8601 duration format and language expressions are supported."
-        },
-        "endpointSettings": {
-          "$ref": "#/definitions/Microsoft.Authorization.ExternalEvaluationEndpointSettings",
-          "description": "The settings of an external endpoint providing evaluation results."
-        },
-        "roleDefinitionIds": {
-          "type": "array",
-          "description": "An array of the role definition Ids the assignment's MSI will need in order to invoke the endpoint.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "Microsoft.Authorization.ParameterDefinitionsValueMetadata": {
-      "type": "object",
-      "description": "General metadata for the parameter.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The display name for the parameter."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the parameter."
-        },
-        "strongType": {
-          "type": "string",
-          "description": "Used when assigning the policy definition through the portal. Provides a context aware list of values for the user to choose from."
-        },
-        "assignPermissions": {
-          "type": "boolean",
-          "description": "Set to true to have Azure portal create role assignments on the resource ID or resource scope value of this parameter during policy assignment. This property is useful in case you wish to assign permissions outside the assignment scope."
-        }
-      },
-      "additionalProperties": {}
-    },
-    "Microsoft.Authorization.ParameterType": {
-      "type": "string",
-      "description": "The data type of the parameter.",
-      "enum": [
-        "String",
-        "Array",
-        "Object",
-        "Boolean",
-        "Integer",
-        "Float",
-        "DateTime"
-      ],
-      "x-ms-enum": {
-        "name": "ParameterType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "String",
-            "value": "String",
-            "description": "The string parameter type."
-          },
-          {
-            "name": "Array",
-            "value": "Array",
-            "description": "The array parameter type."
-          },
-          {
-            "name": "Object",
-            "value": "Object",
-            "description": "The object parameter type."
-          },
-          {
-            "name": "Boolean",
-            "value": "Boolean",
-            "description": "The boolean parameter type."
-          },
-          {
-            "name": "Integer",
-            "value": "Integer",
-            "description": "The integer parameter type."
-          },
-          {
-            "name": "Float",
-            "value": "Float",
-            "description": "The float parameter type."
-          },
-          {
-            "name": "DateTime",
-            "value": "DateTime",
-            "description": "The date-time parameter type."
-          }
-        ]
-      }
-    },
-    "Microsoft.Authorization.PolicyType": {
-      "type": "string",
-      "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static.",
-      "enum": [
-        "NotSpecified",
-        "BuiltIn",
-        "Custom",
-        "Static"
-      ],
-      "x-ms-enum": {
-        "name": "PolicyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The not specified policy definition type."
-          },
-          {
-            "name": "BuiltIn",
-            "value": "BuiltIn",
-            "description": "The built in policy definition type."
-          },
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "The custom policy definition type."
-          },
-          {
-            "name": "Static",
-            "value": "Static",
-            "description": "The static policy definition type."
-          }
-        ]
-      }
-    },
     "PolicyAuthoringAlias": {
       "type": "object",
       "description": "An Azure Policy alias and its available retrieval metadata.",
@@ -356,7 +205,8 @@
         "paths": {
           "type": "array",
           "description": "Resource-type, property-path, and API-version mappings.",
-          "items": {}
+          "items": {},
+          "x-ms-identifiers": []
         },
         "valueType": {
           "type": "string",
@@ -376,7 +226,8 @@
         "policyExamples": {
           "type": "array",
           "description": "Built-in policy usage examples.",
-          "items": {}
+          "items": {},
+          "x-ms-identifiers": []
         },
         "exampleSource": {
           "type": "string",
@@ -526,6 +377,121 @@
         }
       }
     },
+    "PolicyInsightsCommon.ExternalEvaluationEndpointSettings": {
+      "type": "object",
+      "description": "Settings for an external evaluation endpoint.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The endpoint kind."
+        },
+        "details": {
+          "description": "Endpoint-specific details."
+        }
+      }
+    },
+    "PolicyInsightsCommon.ExternalEvaluationEnforcementSettings": {
+      "type": "object",
+      "description": "The source of external evaluation results required during enforcement.",
+      "properties": {
+        "missingTokenAction": {
+          "type": "string",
+          "description": "The action when an external evaluation token is missing. Supports Audit, Deny, and policy expressions."
+        },
+        "resultLifespan": {
+          "type": "string",
+          "description": "The endpoint result lifespan, as an ISO 8601 duration or policy expression."
+        },
+        "endpointSettings": {
+          "$ref": "#/definitions/PolicyInsightsCommon.ExternalEvaluationEndpointSettings",
+          "description": "Settings for the external evaluation endpoint."
+        },
+        "roleDefinitionIds": {
+          "type": "array",
+          "description": "Role definition IDs required by the assignment's managed identity to invoke the endpoint.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PolicyInsightsCommon.ParameterDefinitionsValueMetadata": {
+      "type": "object",
+      "description": "General metadata for a policy parameter.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the parameter."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the parameter."
+        },
+        "strongType": {
+          "type": "string",
+          "description": "A context-aware list of values used when assigning the definition through the portal."
+        },
+        "assignPermissions": {
+          "type": "boolean",
+          "description": "Whether the portal should create role assignments on the parameter's resource ID or scope."
+        }
+      },
+      "additionalProperties": {}
+    },
+    "PolicyInsightsCommon.ParameterType": {
+      "type": "string",
+      "description": "The data type of a policy parameter.",
+      "enum": [
+        "String",
+        "Array",
+        "Object",
+        "Boolean",
+        "Integer",
+        "Float",
+        "DateTime"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "String",
+            "description": "A string parameter."
+          },
+          {
+            "name": "Array",
+            "value": "Array",
+            "description": "An array parameter."
+          },
+          {
+            "name": "Object",
+            "value": "Object",
+            "description": "An object parameter."
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "A boolean parameter."
+          },
+          {
+            "name": "Integer",
+            "value": "Integer",
+            "description": "An integer parameter."
+          },
+          {
+            "name": "Float",
+            "value": "Float",
+            "description": "A floating-point parameter."
+          },
+          {
+            "name": "DateTime",
+            "value": "DateTime",
+            "description": "A date-time parameter."
+          }
+        ]
+      }
+    },
     "PolicyInsightsCommon.PolicyDefinitionContent": {
       "type": "object",
       "description": "A policy definition supplied for verification or hypothetical evaluation.",
@@ -557,11 +523,15 @@
     },
     "PolicyInsightsCommon.PolicyDefinitionContentProperties": {
       "type": "object",
-      "description": "Existing policy definition properties with the required verification inputs.",
+      "description": "Policy definition properties with the required verification inputs.",
       "properties": {
         "policyType": {
-          "$ref": "#/definitions/Microsoft.Authorization.PolicyType",
-          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static."
+          "$ref": "#/definitions/PolicyInsightsCommon.PolicyType",
+          "description": "The definition type, such as BuiltIn, Custom, or Static."
+        },
+        "mode": {
+          "type": "string",
+          "description": "The policy evaluation mode."
         },
         "displayName": {
           "type": "string",
@@ -571,30 +541,11 @@
           "type": "string",
           "description": "The policy definition description."
         },
-        "metadata": {
-          "description": "The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
-        },
-        "version": {
-          "type": "string",
-          "description": "The policy definition version in #.#.# format."
-        },
-        "versions": {
-          "type": "array",
-          "description": "A list of available versions for this policy definition.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "externalEvaluationEnforcementSettings": {
-          "$ref": "#/definitions/Microsoft.Authorization.ExternalEvaluationEnforcementSettings",
-          "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation."
-        },
-        "mode": {
-          "type": "string",
-          "description": "The policy evaluation mode."
-        },
         "policyRule": {
           "description": "The policy rule, including its if condition and then effect."
+        },
+        "metadata": {
+          "description": "Open-ended policy definition metadata."
         },
         "parameters": {
           "type": "object",
@@ -602,6 +553,21 @@
           "additionalProperties": {
             "$ref": "#/definitions/PolicyInsightsCommon.PolicyDefinitionParameter"
           }
+        },
+        "version": {
+          "type": "string",
+          "description": "The policy definition version in #.#.# format."
+        },
+        "versions": {
+          "type": "array",
+          "description": "Available versions of the policy definition.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalEvaluationEnforcementSettings": {
+          "$ref": "#/definitions/PolicyInsightsCommon.ExternalEvaluationEnforcementSettings",
+          "description": "The source of external evaluation results required during enforcement."
         }
       },
       "required": [
@@ -610,31 +576,68 @@
     },
     "PolicyInsightsCommon.PolicyDefinitionParameter": {
       "type": "object",
-      "description": "An existing policy parameter definition with its required value type.",
+      "description": "A policy parameter definition with its required value type.",
       "properties": {
+        "type": {
+          "$ref": "#/definitions/PolicyInsightsCommon.ParameterType",
+          "description": "The parameter value type."
+        },
         "allowedValues": {
           "type": "array",
-          "description": "The allowed values for the parameter.",
-          "items": {}
+          "description": "The allowed parameter values, which may be any JSON type.",
+          "items": {},
+          "x-ms-identifiers": []
         },
         "defaultValue": {
-          "description": "The default value for the parameter if no value is provided."
+          "description": "The default parameter value. Every simulation parameter must supply a default."
         },
         "schema": {
-          "description": "Provides validation of parameter inputs during assignment using a self-defined JSON schema. This property is only supported for object-type parameters and follows the Json.NET Schema 2019-09 implementation. You can learn more about using schemas at https://json-schema.org/ and test draft schemas at https://www.jsonschemavalidator.net/."
+          "description": "A JSON schema validating object-type parameter inputs."
         },
         "metadata": {
-          "$ref": "#/definitions/Microsoft.Authorization.ParameterDefinitionsValueMetadata",
-          "description": "General metadata for the parameter."
-        },
-        "type": {
-          "$ref": "#/definitions/Microsoft.Authorization.ParameterType",
-          "description": "The parameter value type."
+          "$ref": "#/definitions/PolicyInsightsCommon.ParameterDefinitionsValueMetadata",
+          "description": "General parameter metadata."
         }
       },
       "required": [
         "type"
       ]
+    },
+    "PolicyInsightsCommon.PolicyType": {
+      "type": "string",
+      "description": "The type of policy definition.",
+      "enum": [
+        "NotSpecified",
+        "BuiltIn",
+        "Custom",
+        "Static"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "A definition without a specified type."
+          },
+          {
+            "name": "BuiltIn",
+            "value": "BuiltIn",
+            "description": "A built-in policy definition."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "A custom policy definition."
+          },
+          {
+            "name": "Static",
+            "value": "Static",
+            "description": "A static policy definition."
+          }
+        ]
+      }
     },
     "PolicyLintCategory": {
       "type": "string",
@@ -767,12 +770,12 @@
           {
             "name": "Warning",
             "value": "Warning",
-            "description": "Warning."
+            "description": "A warning-level issue."
           },
           {
             "name": "Error",
             "value": "Error",
-            "description": "Error."
+            "description": "An error-level issue."
           },
           {
             "name": "Critical",

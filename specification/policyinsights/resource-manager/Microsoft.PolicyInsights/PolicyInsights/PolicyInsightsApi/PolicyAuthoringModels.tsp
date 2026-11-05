@@ -1,4 +1,5 @@
 import "./PolicyDefinitionContent.tsp";
+import "@typespec/openapi";
 
 using Azure.ResourceManager;
 using PolicyInsightsCommon;
@@ -87,6 +88,7 @@ model PolicyAuthoringAlias {
   propertyPath?: string;
 
   /** Resource-type, property-path, and API-version mappings. */
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
   paths?: unknown[];
 
   /** The alias value type. */
@@ -99,6 +101,7 @@ model PolicyAuthoringAlias {
   derivedPathType?: string;
 
   /** Built-in policy usage examples. */
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
   policyExamples?: unknown[];
 
   /** The source of policy examples. */
@@ -250,10 +253,10 @@ union PolicyLintSeverity {
   /** Informational issue. */
   Informational: "Informational",
 
-  /** Warning. */
+  /** A warning-level issue. */
   Warning: "Warning",
 
-  /** Error. */
+  /** An error-level issue. */
   Error: "Error",
 
   /** Critical issue. */
