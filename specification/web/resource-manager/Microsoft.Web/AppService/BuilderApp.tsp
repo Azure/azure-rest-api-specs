@@ -346,7 +346,7 @@ model BuilderAppPatchVersionConfiguration {
 model BuilderAppPatchAccepted {
   ...ArmAcceptedLroResponse<
     "Identity update accepted.",
-    ArmCombinedLroHeaders<BuilderAppOperationStatus, BuilderApp> &
+    ArmCombinedLroHeaders<ArmOperationStatus, CommonTypes.Resource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
@@ -364,7 +364,7 @@ interface BuilderApps {
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
     BuilderApp,
-    LroHeaders = ArmCombinedLroHeaders<BuilderAppOperationStatus, void> &
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
   listByResourceGroup is ArmResourceListByParent<BuilderApp>;
@@ -393,7 +393,10 @@ interface BuilderApps {
     BuilderApp,
     BuilderAppDeployRequest,
     ArmResponse<BuilderApp>,
-    LroHeaders = ArmCombinedLroHeaders<BuilderAppOperationStatus, BuilderApp> &
+    LroHeaders = ArmCombinedLroHeaders<
+      ArmOperationStatus,
+      CommonTypes.Resource
+    > &
       Azure.Core.Foundations.RetryAfterHeader,
     Parameters = BuilderAppDeploymentParameters
   >;
@@ -403,7 +406,10 @@ interface BuilderApps {
     BuilderApp,
     BuilderAppRedeployRequest,
     ArmResponse<BuilderApp>,
-    LroHeaders = ArmCombinedLroHeaders<BuilderAppOperationStatus, BuilderApp> &
+    LroHeaders = ArmCombinedLroHeaders<
+      ArmOperationStatus,
+      CommonTypes.Resource
+    > &
       Azure.Core.Foundations.RetryAfterHeader,
     Parameters = BuilderAppDeploymentParameters
   >;

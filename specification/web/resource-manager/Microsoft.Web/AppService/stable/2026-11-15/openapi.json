@@ -1454,7 +1454,7 @@
         "tags": [
           "BuilderAppsAsyncOperations"
         ],
-        "description": "Get the completed builder app, or 204 after deletion. Pending operations return 202; failed or canceled operations return 409 with an ARM error.",
+        "description": "Get the location-scoped operation result resource. Pending operations return 202; completion returns 200, including after deletion. Read operation failure details from the status monitor.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1473,12 +1473,17 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BuilderApp"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
             }
           },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1490,16 +1495,6 @@
               }
             }
           },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "409": {
-            "description": "ARM error returned when a shared operation has failed or been canceled.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1510,6 +1505,9 @@
         "x-ms-examples": {
           "GetBuilderAppOperationResult": {
             "$ref": "./examples/BuilderAppsAsyncOperations_GetOperationResult.json"
+          },
+          "GetBuilderAppOperationResultAfterDelete": {
+            "$ref": "./examples/BuilderAppsAsyncOperations_GetOperationResultAfterDelete.json"
           }
         }
       }
@@ -1543,7 +1541,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BuilderAppOperationStatus"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -1556,6 +1554,9 @@
         "x-ms-examples": {
           "GetBuilderAppOperationStatus": {
             "$ref": "./examples/BuilderAppsAsyncOperations_GetOperationStatus.json"
+          },
+          "GetFailedBuilderAppOperationStatus": {
+            "$ref": "./examples/BuilderAppsAsyncOperations_GetOperationStatusFailed.json"
           }
         }
       }
@@ -2848,7 +2849,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/BuilderApp"
+          "final-state-schema": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         },
         "x-ms-long-running-operation": true
       },
@@ -3355,7 +3356,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/BuilderApp"
+          "final-state-schema": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         },
         "x-ms-long-running-operation": true
       }
@@ -3497,7 +3498,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/BuilderApp"
+          "final-state-schema": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         },
         "x-ms-long-running-operation": true
       }
@@ -45118,89 +45119,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "BuilderAppOperationState": {
-      "type": "string",
-      "description": "Status of a shared builder app asynchronous operation.",
-      "enum": [
-        "InProgress",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "BuilderAppOperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "Operation is pending or running."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Operation completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Operation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Operation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "BuilderAppOperationStatus": {
-      "type": "object",
-      "description": "Shared status monitor for deployment, identity, and deletion operations.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/BuilderAppOperationState",
-          "description": "The operation status"
-        },
-        "id": {
-          "type": "string",
-          "description": "The unique identifier for the operationStatus resource"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the operationStatus resource",
-          "readOnly": true
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Operation start time",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Operation complete time",
-          "readOnly": true
-        },
-        "percentComplete": {
-          "type": "number",
-          "format": "double",
-          "description": "The progress made toward completing the operation",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "Errors that occurred if the operation ended with Canceled or Failed status",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "status",
-        "id"
       ]
     },
     "BuilderAppPatch": {
