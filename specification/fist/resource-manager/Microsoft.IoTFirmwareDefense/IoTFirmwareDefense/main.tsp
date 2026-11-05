@@ -34,18 +34,23 @@ namespace Microsoft.IoTFirmwareDefense;
  * The available API versions.
  */
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2025-04-01-preview API version.")
   v2025_04_01_preview: "2025-04-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2025-08-02 API version.")
   v2025_08_02: "2025-08-02",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2025-12-01-preview API version.")
   v2025_12_01_preview: "2025-12-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2026-06-01-preview API version.")
   v2026_06_01_preview: "2026-06-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2026-10-01-preview API version.")
   @Azure.Core.previewVersion
   v2026_10_01_preview: "2026-10-01-preview",

@@ -10,26 +10,32 @@ namespace Microsoft.Mission;
 
 @doc("Supported API versions for the Microsoft.Mission resource provider.")
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2024-06-01-preview version.")
   @armCommonTypesVersion("v5")
   v2024_06_01_preview: "2024-06-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2024-12-01-preview version.")
   @armCommonTypesVersion("v5")
   v2024_12_01_preview: "2024-12-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2025-05-01-preview version.")
   @armCommonTypesVersion("v5")
   v2025_05_01_preview: "2025-05-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2025-11-01-preview version.")
   @armCommonTypesVersion("v5")
   v2025_11_01_preview: "2025-11-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2026-03-01-preview version.")
   @armCommonTypesVersion("v5")
   v2026_03_01_preview: "2026-03-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2026-04-01 version.")
   @armCommonTypesVersion("v5")
   v2026_04_01: "2026-04-01",

@@ -22,10 +22,12 @@ namespace LambdaTest.HyperExecute;
 /** The available API versions. */
 enum Versions {
   /** 2024-02-01-preview version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_02_01_preview: "2024-02-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)

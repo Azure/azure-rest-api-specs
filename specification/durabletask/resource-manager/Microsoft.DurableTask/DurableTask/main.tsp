@@ -24,10 +24,12 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("API Versions")
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-10-01-preview")
   v2024_10_01_Preview: "2024-10-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2025-04-01-preview")
   v2025_04_01_Preview: "2025-04-01-preview",

@@ -24,10 +24,14 @@ namespace Microsoft.CodeSigning;
 
 @doc("The available API versions.")
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("The 2024-02-05-preview API version.")
   v2024_02_05_preview: "2024-02-05-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   v2024_09_30_preview: "2024-09-30-preview",
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   v2025_10_13: "2025-10-13",
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   v2026_05_15_preview: "2026-05-15-preview",
 }

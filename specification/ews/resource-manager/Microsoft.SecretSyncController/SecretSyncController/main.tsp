@@ -25,10 +25,12 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("Supported API versions for the Microsoft.SecretSyncController resource provider.")
 enum Versions {
   // Private preview - 2024-08-21
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2024-08-21-preview API.")
   v2024_08_21_preview: "2024-08-21-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2026-09-25-preview API.")

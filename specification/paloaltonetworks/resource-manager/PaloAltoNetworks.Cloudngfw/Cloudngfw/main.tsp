@@ -52,36 +52,43 @@ enum Versions {
   /**
    * The 2025-10-08 API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   v2025_10_08: "2025-10-08",
 
   /**
    * The 2026-01-26-preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   v2026_01_26_preview: "2026-01-26-preview",
 
   /**
    * The 2026-05-11-preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   v2026_05_11_preview: "2026-05-11-preview",
 
   /**
    * The 2026-06-01 API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   v2026_06_01: "2026-06-01",
 
   /**
    * The 2026-07-29-preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   v2026_07_29_preview: "2026-07-29-preview",
 
   /**
    * The 2026-08-27-preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   v2026_08_27_preview: "2026-08-27-preview",
 
   /**
    * The 2026-09-25-preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @Azure.Core.previewVersion
   v2026_09_25_preview: "2026-09-25-preview",
 }

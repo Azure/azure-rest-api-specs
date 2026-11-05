@@ -23,6 +23,7 @@ namespace Microsoft.PortalServices;
 
 @doc("Azure Portal Services Copilot Settings Management API versions.")
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("Azure Portal Services Copilot Settings Management API version 2024-04-01-preview.")
   v2024_04_01_preview: "2024-04-01-preview",
 }

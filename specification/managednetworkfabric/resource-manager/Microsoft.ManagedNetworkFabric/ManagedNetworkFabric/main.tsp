@@ -78,16 +78,20 @@ namespace Microsoft.ManagedNetworkFabric;
 
 @doc("API Versions")
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-02-15-preview")
   v2024_02_15_preview: "2024-02-15-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("2024-06-15-preview")
   v2024_06_15_preview: "2024-06-15-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("2025-07-15")
   v2025_07_15: "2025-07-15",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract; tracked by Azure/typespec-azure#5977."
   @doc("2026-01-15-preview")
   v2026_01_15_preview: "2026-01-15-preview",
 }
