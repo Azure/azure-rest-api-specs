@@ -1,0 +1,77 @@
+{
+  "operationId": "AdvancedPlatformMetrics_CreateOrUpdate",
+  "title": "Create or update a priority transaction metrics rule with selected metrics and the ApiName dimension",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "res6977",
+    "accountName": "sto2527",
+    "advancedPlatformMetricsRuleType": "PriorityTransactionMetrics",
+    "api-version": "2026-12-01",
+    "resource": {
+      "properties": {
+        "enabled": true,
+        "metricsToEmit": [
+          "PriorityTransactions",
+          "PriorityIngress"
+        ],
+        "ruleConfig": {
+          "additionalDimensions": [
+            "ApiName"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/advancedPlatformMetrics/PriorityTransactionMetrics",
+        "name": "DefaultAdvancedPlatformMetricsRule",
+        "type": "Microsoft.Storage/storageAccounts/advancedPlatformMetrics",
+        "properties": {
+          "ruleType": "PriorityTransactionMetrics",
+          "enabled": true,
+          "lastModifiedTime": "2026-12-01T11:00:00.0000000Z",
+          "metricsToEmit": [
+            "PriorityTransactions",
+            "PriorityIngress"
+          ],
+          "metricsEmitted": [
+            "PriorityIngress",
+            "PriorityTransactions"
+          ],
+          "ruleConfig": {
+            "additionalDimensions": [
+              "ApiName"
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/advancedPlatformMetrics/PriorityTransactionMetrics",
+        "name": "DefaultAdvancedPlatformMetricsRule",
+        "type": "Microsoft.Storage/storageAccounts/advancedPlatformMetrics",
+        "properties": {
+          "ruleType": "PriorityTransactionMetrics",
+          "enabled": true,
+          "lastModifiedTime": "2026-12-01T11:00:00.0000000Z",
+          "metricsToEmit": [
+            "PriorityTransactions",
+            "PriorityIngress"
+          ],
+          "metricsEmitted": [
+            "PriorityIngress",
+            "PriorityTransactions"
+          ],
+          "ruleConfig": {
+            "additionalDimensions": [
+              "ApiName"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

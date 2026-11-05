@@ -23,6 +23,10 @@ union AdvancedPlatformMetricsRuleType {
 
   /** Container level capacity metrics rule type */
   ContainerLevelCapacityMetrics: "ContainerLevelCapacityMetrics",
+
+  /** Transaction metrics with implicit Priority and ResponseStatus dimensions. Container filters are not supported. */
+  @added(Versions.v2026_12_01)
+  PriorityTransactionMetrics: "PriorityTransactionMetrics",
 }
 
 /**
@@ -54,6 +58,41 @@ union MetricsEmitted {
 
   /** Container used size metric */
   ContainerUsedSize: "ContainerUsedSize",
+
+  /** Transaction count by priority. */
+  @added(Versions.v2026_12_01)
+  PriorityTransactions: "PriorityTransactions",
+
+  /** Ingress by priority. */
+  @added(Versions.v2026_12_01)
+  PriorityIngress: "PriorityIngress",
+
+  /** Egress by priority. */
+  @added(Versions.v2026_12_01)
+  PriorityEgress: "PriorityEgress",
+
+  /** Server latency by priority. */
+  @added(Versions.v2026_12_01)
+  PriorityServerLatency: "PriorityServerLatency",
+
+  /** Client latency by priority. */
+  @added(Versions.v2026_12_01)
+  PriorityClientLatency: "PriorityClientLatency",
+
+  /** Availability by priority. */
+  @added(Versions.v2026_12_01)
+  PriorityAvailability: "PriorityAvailability",
+}
+
+/**
+ * An optional dimension for the advanced platform metrics rule.
+ */
+@added(Versions.v2026_12_01)
+union AdvancedPlatformMetricsAdditionalDimension {
+  string,
+
+  /** The name of the storage API operation. */
+  ApiName: "ApiName",
 }
 
 /**
@@ -70,6 +109,12 @@ model AdvancedPlatformMetricsRuleConfig {
    * The values for the filter applied to the rule. If filter type is AllContainersFilter, filter values should be empty. If filter type is ContainerPrefixFilter, filter values should contain a list of container prefixes. If filter type is ContainerListFilter, filter values should contain a list of container names.
    */
   filterValues?: string[];
+
+  /**
+   * Optional dimensions for PriorityTransactionMetrics. Priority and ResponseStatus are always included and must not be specified here. Only ApiName can be selected, without duplicates. Omit this property or use an empty list for no additional dimensions. Container filters (filterType and filterValues) must be omitted for PriorityTransactionMetrics. This property is not supported for ContainerLevelCapacityMetrics.
+   */
+  @added(Versions.v2026_12_01)
+  additionalDimensions?: AdvancedPlatformMetricsAdditionalDimension[];
 }
 
 /**
@@ -79,7 +124,7 @@ model AdvancedPlatformMetricsRuleConfig {
 @added(Versions.v2026_04_01)
 model AdvancedPlatformMetricsRuleProperties {
   /**
-   * Indicates the type of the advanced platform metrics rule. Possible values include: ContainerLevelCapacityMetrics.
+   * Indicates the type of the advanced platform metrics rule specified in the request path.
    */
   @visibility(Lifecycle.Read)
   ruleType?: AdvancedPlatformMetricsRuleType;
@@ -96,13 +141,13 @@ model AdvancedPlatformMetricsRuleProperties {
   lastModifiedTime?: utcDateTime;
 
   /**
-   * The metrics requested by the caller. If omitted in a create or update request, the service enables all metrics supported by the selected rule type.
+   * The metrics requested by the caller. If omitted in a create or update request, the service enables all metrics supported by the selected rule type. When specified, the list must be nonempty, contain no duplicates, and contain only metrics supported by that rule type. ContainerLevelCapacityMetrics supports ContainerUsedSize and ContainerBlobCount. PriorityTransactionMetrics supports PriorityTransactions, PriorityIngress, PriorityEgress, PriorityServerLatency, PriorityClientLatency, and PriorityAvailability.
    */
   @added(Versions.v2026_12_01)
   metricsToEmit?: MetricsEmitted[];
 
   /**
-   * The metrics emitted by the rule. Metrics are mapped according to the rule type from RuleTypeProperty. Rule type to metrics mapping: ContainerLevelCapacityMetrics => {ContainerUsedSize, ContainerBlobCount}.
+   * The effective metrics emitted by the rule, based on the rule type and the requested metric selection.
    */
   @visibility(Lifecycle.Read)
   metricsEmitted?: MetricsEmitted[];
