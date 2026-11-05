@@ -104937,13 +104937,23 @@ components:
         - type
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/VoiceConversationEngineType'
           description: The conversation engine type.
       discriminator:
         propertyName: type
         mapping:
           hosted_agent: '#/components/schemas/VoiceHostedAgentConversationEngine'
       description: An engine that owns conversation handling for a voice agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceConversationEngineType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - hosted_agent
+      description: The conversation engine types supported by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

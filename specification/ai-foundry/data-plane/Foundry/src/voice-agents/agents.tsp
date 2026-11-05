@@ -597,12 +597,21 @@ union VoiceModelType {
   self_deployed: "self_deployed",
 }
 
+@doc("The conversation engine types supported by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceConversationEngineType {
+  string,
+
+  @doc("Use a hosted Foundry agent to handle the conversation.")
+  hosted_agent: "hosted_agent",
+}
+
 @doc("An engine that owns conversation handling for a voice agent.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceConversationEngine {
   @doc("The conversation engine type.")
-  type: string;
+  type: VoiceConversationEngineType;
 }
 
 @doc("A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `voice_conversation_engine` version `1.0.0`. Voice Live connects through the dedicated voice-conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `voice_conversation_engine`.")
@@ -611,7 +620,7 @@ model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   ...Record<never>;
 
   @doc("Selects a hosted Foundry agent as the conversation engine.")
-  type: "hosted_agent";
+  type: VoiceConversationEngineType.hosted_agent;
 
   @doc("The non-empty DNS-like name of the target hosted text agent in the same project.")
   @minLength(1)
