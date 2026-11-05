@@ -1,8 +1,8 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { readFile, stat } from "fs/promises";
-import YAML from "js-yaml";
-import { resolve } from "path";
-import { inspect } from "util";
+import { readFile, stat } from "node:fs/promises";
+import { parse } from "yaml";
+import { resolve } from "node:path";
+import { inspect } from "node:util";
 import * as z from "zod";
 import { getChangedFilesStatuses } from "../../../shared/src/changed-files.ts";
 import { CoreLogger } from "../core-logger.ts";
@@ -140,10 +140,10 @@ export async function validateLeaseContent(
     return { file: leaseFile, errors: [`Error reading file: ${inspect(error)}`] };
   }
 
-  // Use FAILSAFE_SCHEMA to keep all values as strings (prevents YAML Date auto-parsing)
+  // Keep scalar values as strings for schema validation.
   let raw: unknown;
   try {
-    raw = YAML.load(content, { schema: YAML.FAILSAFE_SCHEMA });
+    raw = parse(content, { schema: "failsafe" });
   } catch (error) {
     return { file: leaseFile, errors: [`Invalid YAML: ${inspect(error)}`] };
   }

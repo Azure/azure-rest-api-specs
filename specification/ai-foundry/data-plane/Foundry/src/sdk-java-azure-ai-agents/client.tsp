@@ -49,6 +49,11 @@ using Azure.AI.Projects;
 
 @@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
 @@clientName(
+  VoiceAgentPostCallConfig,
+  "VoiceAgentPostCallConfiguration",
+  "java"
+);
+@@clientName(
   UserConversationSimulationConfiguration.max_num_turns,
   "maximumNumberOfTurns",
   "java"
@@ -63,6 +68,11 @@ using Azure.AI.Projects;
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
+@@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!java");
+
+// Keep both concrete voice definitions public.
+@@access(VoiceAgentDefinition, Access.public, "java");
+@@access(VoiceAgentLiveDefinition, Access.public, "java");
 
 // Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
 @@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
@@ -87,11 +97,6 @@ using Azure.AI.Projects;
 @@clientName(
   OpenAI.RealtimeServerEventErrorError,
   "RealtimeServerErrorDetails",
-  "java"
-);
-@@clientName(
-  PSTNTelephonyTransferDestination,
-  "PstnTelephonyTransferDestination",
   "java"
 );
 
@@ -212,18 +217,6 @@ using Azure.AI.Projects;
 );
 @@clientName(UpdateToolboxRequest, "UpdateToolboxInput");
 
-// Java names operation request-body models as inputs.
-@@clientName(
-  CreateTeamsPhoneExtensibilityTelephonyBindingRequest,
-  "CreateTeamsPhoneExtensibilityTelephonyBindingInput"
-);
-@@clientName(CreateTelephonyBindingRequest, "CreateTelephonyBindingInput");
-@@clientName(CreateTelephonyCallJobRequest, "CreateTelephonyCallJobInput");
-@@clientName(
-  CreateTwilioTelephonyBindingRequest,
-  "CreateTwilioTelephonyBindingInput"
-);
-
 // Replace OpenAPI schema-derived names with domain-oriented names.
 @@clientName(
   OpenAI.CreateTranscriptionResponseJsonUsage,
@@ -234,7 +227,28 @@ using Azure.AI.Projects;
   "TranscriptTextUsageType"
 );
 
-// Use descriptive Java names for configuration properties
+@@clientName(
+  MicrosoftCopilotToolsetConfig,
+  "MicrosoftCopilotToolsetConfiguration"
+);
+@@clientName(
+  MicrosoftCopilotToolsetDefaultConfig,
+  "MicrosoftCopilotToolsetDefaultConfiguration"
+);
+@@doc(
+  GitHubCopilotToolsetConfig,
+  "The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfiguration` for new integrations."
+);
+@@doc(
+  GitHubCopilotToolsetDefaultConfig,
+  "The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfiguration` for new integrations."
+);
+@@clientName(MicrosoftCopilotToolsetConfig.name, "toolName");
+@@clientName(
+  MicrosoftCopilotToolsetPreview.default_config,
+  "defaultConfiguration"
+);
+@@clientName(MicrosoftCopilotToolsetPreview.configs, "toolConfigurations");
 @@clientName(GitHubCopilotToolsetConfig.name, "toolName");
 @@clientName(
   GitHubCopilotToolsetPreview.default_config,
@@ -504,7 +518,6 @@ using Azure.AI.Projects;
 );
 
 @@clientName(TelephonyBindingListItem.etag, "eTag");
-@@clientName(TelephonyCallJob.object, "objectType");
 @@clientName(
   OpenAI.TranscriptTextUsageTokensInputTokenDetails,
   "TranscriptTextInputTokenDetails"
@@ -516,7 +529,7 @@ using Azure.AI.Projects;
 @@clientName(VoiceAgentAudioConfig, "VoiceAgentAudioConfiguration");
 @@clientName(VoiceAgentAudioInputConfig, "VoiceAgentAudioInputConfiguration");
 @@clientName(VoiceAgentAudioOutputConfig, "VoiceAgentAudioOutputConfiguration");
-@@clientName(VoiceAgentAudioOutputConfig.prefer_locales, "preferredLocales");
+@@clientName(VoiceAgentVoiceConfig.prefer_locales, "preferredLocales");
 @@clientName(VoiceAgentAvatarConfig, "VoiceAgentAvatarConfiguration");
 @@clientName(VoiceAgentAvatarVideoParams, "VoiceAgentAvatarVideoParameters");
 @@clientName(
@@ -566,6 +579,8 @@ using Azure.AI.Projects;
   "java"
 );
 @@clientName(VoiceAgentEndOfUtteranceDetection.timeout_ms, "timeout", "java");
+@@clientName(VoiceAgentHandoffCondition.delay_ms, "delay", "java");
+@@clientName(VoiceAgentHandoffEdgeState.delay_ms, "delay", "java");
 @@clientName(
   VoiceAgentServerEventResponseAudioTimestampDelta.audio_duration_ms,
   "audioDuration",
@@ -592,7 +607,15 @@ using Azure.AI.Projects;
   VoiceAgentEndOfUtteranceDetectionModel.semantic_detection_v1_en,
   "SEMANTIC_DETECTION_V1_ENGLISH"
 );
+@@clientName(
+  VoiceAgentDelegateSubagentConfig,
+  "VoiceAgentDelegateSubagentConfiguration"
+);
 @@clientName(VoiceAgentGreetingConfig, "VoiceAgentGreetingConfiguration");
+@@clientName(
+  VoiceAgentInlineSubagentConfig,
+  "VoiceAgentInlineSubagentConfiguration"
+);
 @@clientName(
   VoiceAgentInterimResponseConfig,
   "VoiceAgentInterimResponseConfiguration"
@@ -689,6 +712,7 @@ using Azure.AI.Projects;
   "VoiceAgentSessionResponseConfiguration"
 );
 @@clientName(VoiceAgentSessionResponseConfig.object, "objectType");
+
 @@clientName(
   VoiceAgentSessionUpdateConfig,
   "VoiceAgentSessionUpdateConfiguration"
@@ -710,10 +734,11 @@ using Azure.AI.Projects;
   VoiceAgentTurnDetectionType.azure_semantic_vad_en,
   "AZURE_SEMANTIC_VAD_ENGLISH"
 );
+@@clientName(VoiceAgentVoiceConfig, "VoiceAgentVoiceConfiguration");
 
 @@clientName(VoiceConversation.object, "objectType");
+@@clientName(OpenAI.RealtimeResponse.object, "objectType");
 @@clientName(OpenAI.VoiceIdsShared, "VoiceIds");
-@@clientName(VoiceResponseBase.object, "objectType");
 
 // Use natural Java ordering for Realtime conversation-message model names.
 @@clientName(
@@ -734,6 +759,8 @@ using Azure.AI.Projects;
 );
 
 // Use idiomatic Java word boundaries for file-system enum members.
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 
@@ -754,6 +781,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
+@@alternateType(OpenAI.MCPTool, OpenAI.ToolMcpTool, "java");
 @@clientName(OpenAI.MCPListToolsToolInputSchema, "McpListToolsToolInputSchema");
 @@clientName(OpenAI.MCPToolCallStatus, "McpToolCallStatus");
 @@clientName(OpenAI.MCPTool.connector_id, "connectorType");
@@ -808,6 +836,11 @@ using Azure.AI.Projects;
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
+@@clientName(
+  HostedAgentDefinition.enable_memory_snapshot,
+  "memorySnapshotEnabled",
+  "java"
+);
 
 @@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
 @@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
@@ -954,6 +987,27 @@ using Azure.AI.Projects;
 
 // Voice Agent Renames
 @@clientName(
+  VoiceAgentSoundscapeConfig,
+  "VoiceAgentSoundscapeConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeTrackConfig,
+  "VoiceAgentSoundscapeTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeWorkingTrackConfig,
+  "VoiceAgentSoundscapeWorkingTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeSourceConfig,
+  "VoiceAgentSoundscapeSourceConfiguration",
+  "java"
+);
+@@clientName(VoiceAgentSoundscapeWorkingTrackConfig.delay_ms, "delay", "java");
+@@clientName(
   Azure.AI.Projects.Agents.generateAgent,
   "createAgentFromPrompt",
   "java"
@@ -970,6 +1024,53 @@ using Azure.AI.Projects;
 );
 @@clientName(
   AgentEndpointConversations.getAgentConversationAudioContent,
+  "downloadAgentConversationAudio",
+  "java"
+);
+
+// Match the Realtime method names on the separate Live conversations client.
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversations,
+  "listAgentConversations",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversation,
+  "getAgentConversation",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.deleteLiveAgentConversation,
+  "deleteAgentConversation",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversationItems,
+  "listAgentConversationItems",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationItem,
+  "getAgentConversationItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+  "getAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+  "downloadAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+  "getAgentConversationAudio",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
   "downloadAgentConversationAudio",
   "java"
 );
@@ -1143,6 +1244,22 @@ using Azure.AI.Projects;
 @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
 @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
 
+// Preserve the existing Java paging overloads that accept an initial continuation token.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  PageAfterQueryParameter.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  AgentOptimizationCandidatePageQueryParameters.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
@@ -1187,6 +1304,7 @@ using Azure.AI.Projects;
 // Structurally replace every emitted tool_choice property with an opaque union so Java exposes the wire value as
 // BinaryData. The Java emitter already emits these tool choice union as BinaryData, this type override makes the
 // tool choice discriminated hierarchy unreachable and prevents its emission in the generated Java code.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union ToolChoiceValue {
   string,
   object: Record<unknown>,
@@ -1388,6 +1506,7 @@ model OpenAIRealtimeSessionOutputModality {}
 )
 model OpenAIRealtimeTruncationRetentionRatio {}
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union OpenAIRealtimeTruncationUnion {
   auto: "auto",
   disabled: "disabled",

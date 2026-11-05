@@ -1,10 +1,6 @@
-import debug from "debug";
 import { simpleGit } from "simple-git";
 import { KeyedCache } from "./cache.ts";
 import { includesSegment } from "./path.ts";
-
-// Enable simple-git debug logging to improve console output
-debug.enable("simple-git");
 
 // Cache results of the `example` filter, using the un-resolved path for maximum perf
 // The `example` filter is a hot path in spec-model for large specs like "network".
@@ -52,11 +48,11 @@ export async function getChangedFiles(
     .split("\0")
     // Ignore the trailing separator (and empty output), without trimming filenames.
     .filter((s) => s.length > 0);
-  logger?.info("Changed Files:");
+  logger?.debug("Changed Files:");
   for (const file of files) {
-    logger?.info(`  ${file}`);
+    logger?.debug(`  ${file}`);
   }
-  logger?.info("");
+  logger?.debug("");
 
   return files;
 }
@@ -154,38 +150,38 @@ export async function getChangedFilesStatuses(
 
   // Log all changed files by categories
   if (logger) {
-    logger.info("Categorized Changed Files:");
+    logger.debug("Categorized Changed Files:");
 
     if (categorizedFiles.additions.length > 0) {
-      logger.info(`  Additions (${categorizedFiles.additions.length}):`);
+      logger.debug(`  Additions (${categorizedFiles.additions.length}):`);
       for (const file of categorizedFiles.additions) {
-        logger.info(`    + ${file}`);
+        logger.debug(`    + ${file}`);
       }
     }
 
     if (categorizedFiles.modifications.length > 0) {
-      logger.info(`  Modifications (${categorizedFiles.modifications.length}):`);
+      logger.debug(`  Modifications (${categorizedFiles.modifications.length}):`);
       for (const file of categorizedFiles.modifications) {
-        logger.info(`    M ${file}`);
+        logger.debug(`    M ${file}`);
       }
     }
 
     if (categorizedFiles.deletions.length > 0) {
-      logger.info(`  Deletions (${categorizedFiles.deletions.length}):`);
+      logger.debug(`  Deletions (${categorizedFiles.deletions.length}):`);
       for (const file of categorizedFiles.deletions) {
-        logger.info(`    - ${file}`);
+        logger.debug(`    - ${file}`);
       }
     }
 
     if (categorizedFiles.renames.length > 0) {
-      logger.info(`  Renames (${categorizedFiles.renames.length}):`);
+      logger.debug(`  Renames (${categorizedFiles.renames.length}):`);
       for (const rename of categorizedFiles.renames) {
-        logger.info(`    R ${rename.from} -> ${rename.to}`);
+        logger.debug(`    R ${rename.from} -> ${rename.to}`);
       }
     }
 
-    logger.info(`  Total: ${categorizedFiles.total} files`);
-    logger.info("");
+    logger.debug(`  Total: ${categorizedFiles.total} files`);
+    logger.debug("");
   }
 
   return categorizedFiles;
@@ -206,7 +202,7 @@ export function markdown(file?: string): boolean {
 
 export function readme(file?: string): boolean {
   // Filename "readme.md" with any case is a valid README file
-  return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
+  return hasFilename(file, "readme.md");
 }
 
 export function tsp(file: string): boolean {
@@ -214,7 +210,16 @@ export function tsp(file: string): boolean {
 }
 
 export function tspconfig(file: string): boolean {
-  return typeof file === "string" && file.toLowerCase().endsWith("tspconfig.yaml");
+  return hasFilename(file, "tspconfig.yaml");
+}
+
+function hasFilename(file: string | undefined, filename: string): boolean {
+  if (typeof file !== "string" || !file.toLowerCase().endsWith(filename)) {
+    return false;
+  }
+
+  const separator = file[file.length - filename.length - 1];
+  return separator === undefined || separator === "/" || separator === "\\";
 }
 
 export function typespec(file: string): boolean {

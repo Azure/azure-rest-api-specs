@@ -8,7 +8,7 @@ vi.mock("simple-git", () => ({
   }),
 }));
 
-import { resolve } from "path";
+import { resolve } from "node:path";
 import * as simpleGit from "simple-git";
 import {
   dataPlane,
@@ -28,7 +28,7 @@ import {
   tspconfig,
   typespec,
 } from "../src/changed-files.ts";
-import { debugLogger } from "../src/logger.ts";
+import { ConsoleLogger, debugLogger } from "../src/logger.ts";
 
 describe("changedFiles", () => {
   afterEach(() => {
@@ -96,6 +96,24 @@ describe("changedFiles", () => {
     { name: "getChangedFilesStatuses", read: getChangedFilesStatuses },
   ];
 
+  it.each(readers)("$name uses debug level for file inventories", async ({ name, read }) => {
+    mockDiff.mockResolvedValue(name === "getChangedFiles" ? "file.json\0" : "A\0file.json\0");
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    const debug = vi.spyOn(console, "debug").mockImplementation(() => {});
+    try {
+      const quietResult = await read({ logger: new ConsoleLogger(false) });
+      expect(log).not.toHaveBeenCalled();
+      expect(debug).not.toHaveBeenCalled();
+      const verboseResult = await read({ logger: new ConsoleLogger(true) });
+      expect(verboseResult).toEqual(quietResult);
+      expect(log).not.toHaveBeenCalled();
+      expect(debug).toHaveBeenCalledWith(expect.stringContaining("file.json"));
+    } finally {
+      log.mockRestore();
+      debug.mockRestore();
+    }
+  });
+
   it.each(readers)("$name does not mutate reusable path filters", async ({ read }) => {
     mockDiff.mockResolvedValue("");
     const paths = ["specification"];
@@ -135,6 +153,7 @@ describe("changedFiles", () => {
     "MixedCase.jSoN",
     "MixedCase.mD",
     "README.MD",
+    "TSPCONFIG.YAML",
     "not-spec/contosowidgetmanager/data-plane/readme.md",
     "not-spec/contosowidgetmanager/resource-manager/readme.md",
     "not-spec/contosowidgetmanager/Contoso.Management/main.tsp",
@@ -161,6 +180,22 @@ describe("changedFiles", () => {
   ];
 
   const filesResolved = files.map((f) => resolve(f));
+
+  it.each([
+    { filename: "readme.md", filter: readme },
+    { filename: "tspconfig.yaml", filter: tspconfig },
+  ])("filter:$filename matches the full filename, not a suffix", ({ filename, filter }) => {
+    const candidates = [
+      filename,
+      resolve(filename.toUpperCase()),
+      `specification\\service\\${filename}`,
+      `foo${filename}`,
+      resolve(`foo${filename}`),
+      `${filename}\n`,
+    ];
+
+    expect(candidates.filter(filter)).toEqual(candidates.slice(0, 3));
+  });
 
   it("filter:json", () => {
     const expected = [
@@ -225,6 +260,7 @@ describe("changedFiles", () => {
 
   it("filter:tspconfig", () => {
     const expected = [
+      "TSPCONFIG.YAML",
       "not-spec/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
       "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
     ];
@@ -233,6 +269,7 @@ describe("changedFiles", () => {
 
   it("filter:typespec", () => {
     const expected = [
+      "TSPCONFIG.YAML",
       "not-spec/contosowidgetmanager/Contoso.Management/main.tsp",
       "not-spec/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
       "specification/contosowidgetmanager/Contoso.Management/main.tsp",

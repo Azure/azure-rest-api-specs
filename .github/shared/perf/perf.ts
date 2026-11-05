@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { Bench } from "tinybench";
 import { resolveCached } from "../src/path.ts";
 

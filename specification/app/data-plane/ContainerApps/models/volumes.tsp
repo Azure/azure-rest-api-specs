@@ -8,6 +8,7 @@ namespace ContainerAppsSandbox {
   scalar ArmUserAssignedIdentityId extends string;
 
   /** Authentication used to access a customer-owned Blob Storage container. */
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
   union AzureBlobByoVolumeAuth {
     /** Uses a managed identity assigned to the sandbox group. */
     AzureBlobByoVolumeAuthAzureBlobByoIdentityAuth: AzureBlobByoVolumeAuthAzureBlobByoIdentityAuth,

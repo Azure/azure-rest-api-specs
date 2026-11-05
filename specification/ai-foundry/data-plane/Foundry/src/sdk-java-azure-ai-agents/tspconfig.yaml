@@ -14,6 +14,22 @@ options:
     custom-types-subpackage: "implementation.models"
     custom-types: "ItemReferenceParam,EasyInputMessage,EasyInputMessageRole,EasyInputMessageStatus"
     rename-model:
+      ToolApplyPatchToolParam: ApplyPatchToolParameter
+      ToolCodeInterpreterTool: CodeInterpreterTool
+      ToolComputerTool: ComputerTool
+      ToolComputerUsePreviewTool: ComputerUsePreviewTool
+      ToolCustomToolParam: CustomToolParameter
+      ToolFileSearchTool: FileSearchTool
+      ToolFunctionShellToolParam: FunctionShellToolParameter
+      ToolFunctionTool: FunctionTool
+      ToolImageGenTool: ImageGenTool
+      ToolImageGenToolModel: ImageGenToolModel
+      ToolLocalShellToolParam: LocalShellToolParameter
+      ToolMcpTool: McpTool
+      ToolProgrammaticToolCallingParam: ProgrammaticToolCallingParameter
+      ToolToolSearchToolParam: ToolSearchTool
+      ToolWebSearchPreviewTool: WebSearchPreviewTool
+      ToolWebSearchTool: WebSearchTool
       GrammarSyntax1: GrammarSyntax
       ReasoningEffort1: ReasoningEffort
       AgentObjectVersions: AgentDetailsVersions
@@ -22,7 +38,8 @@ options:
       UpdateAgentDetailsPatchRequest: UpdateAgentDetailsOptions
       AgentsPagedResultOptimizationCandidate: OptimizationCandidatePagedResult
       RealtimeClientEventSessionUpdateSessionTruncation1: RealtimeClientEventSessionUpdateSessionTruncationRetentionRatio
-      VoiceResponseBaseObject1: VoiceResponseBaseObject
+      VoiceResponseObject: VoiceResponseObjectType
+      VoiceResponseObject1: VoiceResponseObjectType
       PickPropertiesVoiceAgentAudioConfig: VoiceAgentResponseAudioConfig
     customization-class: customizations/src/main/java/AgentsCustomizations.java
     flavor: azure
@@ -67,11 +84,12 @@ options:
     namespace: com.azure.ai.agents
     manual-entries: >-
       AgentEndpointProtocol::VOICE,
+      AgentEndpointProtocol::VOICE_CONVERSATION_ENGINE,
       AgentKind::VOICE,
       AudioTranscriptionModel,
       RealtimeSessionCreateRequestGAAudioOutputVoice,
       VoiceAgentResponseAudioConfig,
-      VoiceResponseBaseObject
+      VoiceResponseObjectType
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"

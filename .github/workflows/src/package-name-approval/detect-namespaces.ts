@@ -1,9 +1,9 @@
-import { existsSync } from "fs";
-import { writeFile } from "fs/promises";
-import { dirname, join } from "path";
+import { existsSync } from "node:fs";
+import { writeFile } from "node:fs/promises";
+import { dirname, join, posix } from "node:path";
 import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.ts";
 import { generateTypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
-import type { Core, WebhookEvent } from "../github.ts";
+import type { Core, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { loadFormatRules, validateAllNamespaces } from "./validate-format.ts";
 
 // ---------------------------------------------------------------------------
@@ -168,10 +168,7 @@ function filterUnchanged(
  * Compiles both PR head and base branch using tsp compile with the typespec-metadata
  * emitter to reliably extract package names, then reports only changed entries.
  */
-export default async function detectNamespaces({
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function detectNamespaces({ context, core }: GitHubScriptArgs) {
   const payload = context.payload as WebhookEvent<"pull-request">;
 
   const cwd = process.env.GITHUB_WORKSPACE ?? process.cwd();
@@ -205,6 +202,7 @@ export default async function detectNamespaces({
   const allConfiguredPackageNames: Record<string, string> = {};
 
   const allConfiguredNamespaces: Record<string, string> = {};
+  const changedProjectPaths = new Set<string>();
   let isMgmt = false;
   let isDataPlane = false;
 
@@ -241,6 +239,10 @@ export default async function detectNamespaces({
       core,
     );
 
+    if (Object.keys(packageNames).length > 0) {
+      changedProjectPaths.add(posix.dirname(file));
+    }
+
     Object.assign(packageNamesFound, packageNames);
     Object.assign(namespacesFound, namespaces);
   }
@@ -265,7 +267,10 @@ export default async function detectNamespaces({
     }
   }
 
+  const typespecPaths = [...changedProjectPaths];
   const results = {
+    typespecPath: typespecPaths.length === 1 ? typespecPaths[0] : null,
+    typespecPaths,
     namespacesFound: packageNamesFound,
     namespaces: namespacesFound,
     allConfiguredPackageNames,

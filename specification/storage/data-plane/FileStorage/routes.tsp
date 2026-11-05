@@ -183,6 +183,7 @@ interface Share {
       ...ShareProvisionedIopsOptionalHeader;
       ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
+      ...ChangeFeedRequestHeaders;
     },
     {
       @statusCode statusCode: 201;
@@ -285,6 +286,14 @@ interface Share {
       @header("x-ms-enable-smb-directory-lease")
       @clientName("EnableSMBDirectoryLease", "go")
       enableSmbDirectoryLease?: boolean;
+
+      /** The creation time. */
+      @added(Versions.v2027_03_07)
+      @encode("rfc7231")
+      @header("x-ms-share-creation-time")
+      creationTime?: utcDateTime;
+
+      ...ChangeFeedResponseHeaders;
     }
   >;
 
@@ -481,6 +490,7 @@ interface Share {
       ...ShareProvisionedIopsOptionalHeader;
       ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
+      ...ChangeFeedRequestHeaders;
     },
     {
       ...EtagResponseHeader;
@@ -629,6 +639,7 @@ interface Directory {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
+      ...FileNameResponseHeader;
       ...ServerEncryptedResponseHeader;
       ...NfsResponseHeaders;
     }
@@ -901,6 +912,7 @@ interface File {
       ...CopyStatusResponseHeaders;
       ...ServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
+      ...FileNameResponseHeader;
       ...LeaseResponseHeaders;
       ...NfsResponseHeaders;
       ...LinkCountResponseHeader;
@@ -1386,6 +1398,38 @@ interface File {
       ...NfsTimestampResponseHeaders;
       ...LinkCountResponseHeader;
       ...NfsResponseHeaders;
+    }
+  >;
+
+  /** Returns the hard links of a file, along with all user-defined metadata, content properties, and system properties for the file. NFS only. */
+  @added(Versions.v2027_03_07)
+  @route("?comp=hardlinks")
+  @get
+  getHardLinks is StorageOperationResponseBody<
+    {
+      ...ShareSnapshotParameter;
+      ...TimeoutParameter;
+      ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      ...LastModifiedResponseHeader;
+      ...MetadataHeaders;
+
+      /** Dummy type header, must be "file". */
+      @header("x-ms-type") fileType: "File";
+
+      ...EtagResponseHeader;
+      ...FileMsContentResponseHeaders;
+      ...CopyStatusResponseHeaders;
+      ...ServerEncryptedResponseHeader;
+      ...FileSmtPropertyResponseHeaders;
+      ...FileNameResponseHeader;
+      ...LeaseResponseHeaders;
+      ...NfsResponseHeaders;
+      ...LinkCountResponseHeader;
+      @body hardLinks: HardLinkList;
     }
   >;
 }

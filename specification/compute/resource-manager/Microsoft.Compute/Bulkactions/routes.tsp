@@ -280,6 +280,7 @@ interface VirtualMachineBulkOperations {
   /** Acknowledge errors for specified operations in a resource group. */
   @added(Versions.`2026-07-06-preview`)
   @removed(Versions.`2026-09-06-preview`)
+  @added(Versions.`2026-10-06-preview`)
   @post
   @autoRoute
   @armResourceCollectionAction
