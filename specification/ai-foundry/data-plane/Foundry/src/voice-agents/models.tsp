@@ -1438,7 +1438,7 @@ model TelephonyOutboundRetryPolicy {
 
 @doc("Shared direct-call/Campaign retry policy. Omission means one attempt; CallJobs return max_attempts=1 and interval=0 seconds.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyFixedIntervalRetryPolicy extends TelephonyOutboundRetryPolicy {
+model FixedIntervalRetryPolicy extends TelephonyOutboundRetryPolicy {
   @doc("The fixed-interval retry strategy.")
   type: TelephonyOutboundRetryPolicyType.fixed_interval;
 
@@ -1485,7 +1485,7 @@ model TelephonyAddress {
 
 @doc("Phone-number address used by supported source and destination roles.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyPhoneNumberAddress extends TelephonyAddress {
+model PhoneNumber extends TelephonyAddress {
   @doc("The phone-number address type.")
   type: TelephonyAddressType.phone_number;
 
@@ -1497,7 +1497,7 @@ model TelephonyPhoneNumberAddress extends TelephonyAddress {
 
 @doc("Teams source/transfer identity, validated by role and provider. Not supported for outbound recipients.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyTeamsAddress extends TelephonyAddress {
+model TeamsAddress extends TelephonyAddress {
   @doc("The Microsoft Teams address type.")
   type: TelephonyAddressType.teams;
 
@@ -1509,7 +1509,7 @@ model TelephonyTeamsAddress extends TelephonyAddress {
 
 @doc("SIP/SIPS transfer address, subject to provider validation. SIP outbound sources and recipients use phone_number, not SIP URIs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonySipAddress extends TelephonyAddress {
+model SipAddress extends TelephonyAddress {
   @doc("The SIP address type.")
   type: TelephonyAddressType.sip;
 
