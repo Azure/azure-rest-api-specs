@@ -9995,6 +9995,48 @@
         ]
       }
     },
+    "P2SVpnGatewayDetachState": {
+      "type": "string",
+      "description": "P2sVpngateway detach status.",
+      "enum": [
+        "Detached",
+        "PartiallyDetached",
+        "Attached",
+        "PartiallyAttached",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "P2SVpnGatewayDetachState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Detached",
+            "value": "Detached",
+            "description": "Status represents gateway is successfully detached."
+          },
+          {
+            "name": "PartiallyDetached",
+            "value": "PartiallyDetached",
+            "description": "Status represents gateway detach operation failed and it is partially detached."
+          },
+          {
+            "name": "Attached",
+            "value": "Attached",
+            "description": "Status represents gateway is successfully attached."
+          },
+          {
+            "name": "PartiallyAttached",
+            "value": "PartiallyAttached",
+            "description": "Status represents gateway attached operation failed and it is partially attached."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Status represents gateway detach status is unknown."
+          }
+        ]
+      }
+    },
     "WebApplicationFirewallAction": {
       "type": "string",
       "description": "Type of Actions.",
@@ -10504,47 +10546,5 @@
       "type": "string"
     }
   },
-  "P2SVpnGatewayDetachState": {
-      "type": "string",
-      "description": "P2sVpngateway detach status.",
-      "enum": [
-        "Detached",
-        "PartiallyDetached",
-        "Attached",
-        "PartiallyAttached",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "P2SVpnGatewayDetachState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Detached",
-            "value": "Detached",
-            "description": "Status represents gateway is successfully detached."
-          },
-          {
-            "name": "PartiallyDetached",
-            "value": "PartiallyDetached",
-            "description": "Status represents gateway detach operation failed and it is partially detached."
-          },
-          {
-            "name": "Attached",
-            "value": "Attached",
-            "description": "Status represents gateway is successfully attached."
-          },
-          {
-            "name": "PartiallyAttached",
-            "value": "PartiallyAttached",
-            "description": "Status represents gateway attached operation failed and it is partially attached."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Status represents gateway detach status is unknown."
-          }
-        ]
-      }
-    },
   "parameters": {}
 }
