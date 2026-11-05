@@ -24563,6 +24563,7 @@ model AadAuthenticationParameters {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@added(Versions.v2026_05_01)
 union P2SVpnGatewayDetachState {
   string,
 
@@ -24624,6 +24625,7 @@ model P2SVpnGatewayProperties {
   /**
    * P2sVpngateway detach status.
    */
+  @added(Versions.v2026_05_01)
   vpnGatewayDetachStatus?: P2SVpnGatewayDetachState;
 
   /**

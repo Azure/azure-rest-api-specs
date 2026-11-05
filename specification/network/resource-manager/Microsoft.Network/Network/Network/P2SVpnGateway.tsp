@@ -132,6 +132,7 @@ interface P2SVpnGateways {
   /**
    * Attaches the Virtual Hub, p2s vpn gateway in the specified resource group.
    */
+  @added(Versions.v2026_05_01)
   @tag("P2SVpnGateways")
   attach is ArmResourceActionAsync<
     P2SVpnGateway,
@@ -143,6 +144,7 @@ interface P2SVpnGateways {
   /**
    * Detaches the Virtual Hub, p2s vpn gateway in the specified resource group.
    */
+  @added(Versions.v2026_05_01)
   @tag("P2SVpnGateways")
   detach is ArmResourceActionAsync<
     P2SVpnGateway,
