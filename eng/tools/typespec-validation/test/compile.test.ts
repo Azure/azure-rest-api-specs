@@ -61,7 +61,9 @@ describe("compile", function () {
         const result = await new CompileRule().execute(mockFolder, logger);
         expect(result.success).toBe(true); // Older preview is allowed.
         expect(result.diagnostics).toEqual([]);
-        expect(compiler.compileTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder);
+        expect(compiler.compileTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder, {
+          fix: false,
+        });
         expect(nativeGlob.globFiles).toHaveBeenCalled();
         if (verbose)
           expect(debug).toHaveBeenCalledWith(expect.stringContaining("Generated Swaggers:"));
@@ -89,7 +91,7 @@ describe("compile", function () {
       "main.tsp:1:1 - error first: message\nclient.tsp:1:1 - error second: message",
     ]);
     expect(gitDiffTopSpecFolderSpy).not.toHaveBeenCalled();
-    expect(compiler.compileTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder);
+    expect(compiler.compileTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder, { fix: false });
   });
 
   it("compiles only main when both main and client exist", async function () {
@@ -111,10 +113,12 @@ describe("compile", function () {
     );
 
     const logger = new ConsoleLogger(true);
-    await expect(new CompileRule().execute(mockFolder, logger)).resolves.toMatchObject({
+    await expect(
+      new CompileRule().execute(mockFolder, logger, { fix: true }),
+    ).resolves.toMatchObject({
       success: true,
     });
-    expect(compiler.compileTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder);
+    expect(compiler.compileTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder, { fix: true });
     expect(gitDiffTopSpecFolderSpy).toHaveBeenCalledExactlyOnceWith(mockFolder, logger);
   });
 
@@ -135,10 +139,13 @@ describe("compile", function () {
         );
       }
 
-      const result = await new CompileRule().execute(mockFolder, defaultLogger);
+      const result = await new CompileRule().execute(mockFolder, defaultLogger, { fix: true });
 
       expect(result.success).toBe(!failure);
-      expect(compiler.compileTypeSpec).toHaveBeenCalledExactlyOnceWith(clientTsp, { noEmit: true });
+      expect(compiler.compileTypeSpec).toHaveBeenCalledExactlyOnceWith(clientTsp, {
+        noEmit: true,
+        fix: true,
+      });
       expect(nativeGlob.globFiles).not.toHaveBeenCalled();
       if (failure) {
         expect(result.diagnostics?.map(diagnosticDetails)).toEqual([nativeDiagnostic]);
@@ -457,7 +464,7 @@ describe("compile", function () {
       ),
     );
 
-    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger, { fix: true });
     expect(result.success).toBe(false);
     expect(
       diagnosticDetails(result.diagnostics?.find((diagnostic) => diagnostic.code === "compile")),
@@ -478,7 +485,7 @@ describe("compile", function () {
       diff,
     });
 
-    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger, { fix: true });
     expect(result.success).toBe(false);
     const diagnostic = result.diagnostics?.find(
       (diagnostic) => diagnostic.code === "generated-files-changed",
@@ -503,7 +510,9 @@ describe("compile", function () {
 
     gitDiffTopSpecFolderSpy.mockResolvedValue({ success: true, files: [] });
 
-    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+    await expect(
+      new CompileRule().execute(mockFolder, defaultLogger, { fix: true }),
+    ).resolves.toMatchObject({
       success: true,
     });
   });
