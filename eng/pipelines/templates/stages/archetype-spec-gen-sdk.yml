@@ -22,6 +22,12 @@ parameters:
     type: string
     default: ""
     displayName: "SDK release type"
+  - name: TypeSpecEmitter
+    type: string
+    values:
+      - "@azure-tools/typespec-ts"
+      - "@azure-tools/typespec-ts-provisioning"
+    default: "@azure-tools/typespec-ts"
   - name: CreatePullRequest
     type: boolean
     default: false
@@ -265,6 +271,9 @@ stages:
               if [ "${{ parameters.SdkReleaseType }}" != "" ] && [ "${{ parameters.SdkReleaseType }}" != "none" ]; then
                 optional_params="$optional_params --sdk-release-type ${{ parameters.SdkReleaseType }}"
                 sdk_gen_info="$sdk_gen_info SDK Release Type: ${{ parameters.SdkReleaseType }},"
+              fi
+              if [ "${{ parameters.TypeSpecEmitter }}" != "" ]; then
+                optional_params="$optional_params --typespec-emitter ${{ parameters.TypeSpecEmitter }}"
               fi
               sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
 

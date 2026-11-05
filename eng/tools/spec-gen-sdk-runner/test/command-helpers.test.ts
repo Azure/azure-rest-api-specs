@@ -82,6 +82,8 @@ describe("commands.ts", () => {
         ),
         "--lang",
         "azure-sdk-for-go",
+        "--typespec-emitter",
+        "@azure-tools/typespec-ts-provisioning",
       ];
       vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", ...mockArgs]);
       const result = parseArguments();
@@ -91,6 +93,7 @@ describe("commands.ts", () => {
         ),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-go");
+      expect(result.typespecEmitter).toBe("@azure-tools/typespec-ts-provisioning");
       expect(result.prNumber).toBe("");
       expect(result.runMode).toBe("release");
     });
@@ -159,6 +162,7 @@ describe("commands.ts", () => {
         headBranch: "main",
         apiVersion: "2021-01-01",
         sdkReleaseType: "beta",
+        typespecEmitter: "@azure-tools/typespec-ts-provisioning",
         sdkLanguage: SdkName.Js,
       };
 
@@ -169,6 +173,8 @@ describe("commands.ts", () => {
       expect(result).toContain("/spec/path");
       expect(result).toContain("--pr-number");
       expect(result).toContain("123");
+      expect(result).toContain("--typespec-emitter");
+      expect(result).toContain("@azure-tools/typespec-ts-provisioning");
     });
   });
 
