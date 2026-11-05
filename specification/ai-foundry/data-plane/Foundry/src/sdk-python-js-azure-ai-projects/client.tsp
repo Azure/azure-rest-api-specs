@@ -54,6 +54,72 @@ using Azure.AI.Projects;
 // To fix circular dependency in Python, remaining OpenAI types are emitted as Azure.AI.Projects
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
+// The original schemas below are not emitted as Python classes, but their client
+// names are still checked for collisions. The ...Base suffix only frees the
+// existing public names for the Tool wrappers; it does not imply inheritance.
+@@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParamBase", "python");
+@@clientName(OpenAI.CodeInterpreterTool, "CodeInterpreterToolBase", "python");
+@@clientName(OpenAI.ComputerTool, "ComputerToolBase", "python");
+@@clientName(
+  OpenAI.ComputerUsePreviewTool,
+  "ComputerUsePreviewToolBase",
+  "python"
+);
+@@clientName(OpenAI.CustomToolParam, "CustomToolParamBase", "python");
+@@clientName(OpenAI.FileSearchTool, "FileSearchToolBase", "python");
+@@clientName(
+  OpenAI.FunctionShellToolParam,
+  "FunctionShellToolParamBase",
+  "python"
+);
+@@clientName(OpenAI.FunctionTool, "FunctionToolBase", "python");
+@@clientName(OpenAI.ImageGenTool, "ImageGenToolBase", "python");
+@@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParamBase", "python");
+@@clientName(OpenAI.MCPTool, "MCPToolBase", "python");
+@@clientName(
+  OpenAI.ProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParamBase",
+  "python"
+);
+@@clientName(OpenAI.ToolSearchToolParam, "ToolSearchToolParamBase", "python");
+@@clientName(OpenAI.WebSearchPreviewTool, "WebSearchPreviewToolBase", "python");
+@@clientName(OpenAI.WebSearchTool, "WebSearchToolBase", "python");
+
+// Emit the Tool subclasses under the Python names used before OpenAI 1.34.1.
+// For example, OpenAI.ToolToolSearchToolParam emits ToolSearchToolParam, while
+// OpenAI.ToolSearchToolParam (renamed ToolSearchToolParamBase) is not emitted.
+@@clientName(OpenAI.ToolApplyPatchToolParam, "ApplyPatchToolParam", "python");
+@@clientName(OpenAI.ToolCodeInterpreterTool, "CodeInterpreterTool", "python");
+@@clientName(OpenAI.ToolComputerTool, "ComputerTool", "python");
+@@clientName(
+  OpenAI.ToolComputerUsePreviewTool,
+  "ComputerUsePreviewTool",
+  "python"
+);
+@@clientName(OpenAI.ToolCustomToolParam, "CustomToolParam", "python");
+@@clientName(OpenAI.ToolFileSearchTool, "FileSearchTool", "python");
+@@clientName(
+  OpenAI.ToolFunctionShellToolParam,
+  "FunctionShellToolParam",
+  "python"
+);
+@@clientName(OpenAI.ToolFunctionTool, "FunctionTool", "python");
+@@clientName(OpenAI.ToolImageGenTool, "ImageGenTool", "python");
+@@clientName(OpenAI.ToolLocalShellToolParam, "LocalShellToolParam", "python");
+@@clientName(OpenAI.ToolMcpTool, "MCPTool", "python");
+@@clientName(
+  OpenAI.ToolProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParam",
+  "python"
+);
+@@clientName(OpenAI.ToolToolSearchToolParam, "ToolSearchToolParam", "python");
+@@clientName(OpenAI.ToolWebSearchPreviewTool, "WebSearchPreviewTool", "python");
+@@clientName(OpenAI.ToolWebSearchTool, "WebSearchTool", "python");
+
+// Reuse the Tool subclasses in live APIs instead of emitting colliding standalone models.
+@@alternateType(OpenAI.CustomToolParam, OpenAI.ToolCustomToolParam, "python");
+@@alternateType(OpenAI.MCPTool, OpenAI.ToolMcpTool, "python");
+
 // ********************************************************************************
 // ********************************************************************************
 // ********************************************************************************
