@@ -62,15 +62,9 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update a certificate.")
-  createOrUpdate is CertificateOps.CreateOrUpdateAsync<
+  createOrUpdate is CertificateOps.CreateOrUpdateSync<
     Certificate,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Certificate> &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Response =
-      | ArmResourceUpdatedResponse<Certificate>
-      | (AcceptedResponse &
-          ArmLroLocationHeader<FinalResult = Certificate> &
-          Azure.Core.Foundations.RetryAfterHeader),
+    Response = ArmResourceUpdatedResponse<Certificate>,
     OverrideErrorType = DefaultErrorResponse
   >;
 
