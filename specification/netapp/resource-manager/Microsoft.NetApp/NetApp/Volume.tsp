@@ -92,9 +92,9 @@ model VolumeProperties {
   @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
   @added(Versions.v2026_08_01)
   @removed(Versions.v2026_08_15_preview)
+  @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
   @added(Versions.v2026_09_01)
   @removed(Versions.v2026_09_15_preview)
-  @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
   @renamedFrom(Versions.v2026_09_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
@@ -470,6 +470,7 @@ model VolumeProperties {
    */
   #suppress "deprecated" "Suppress this warning until the property is removed."
   #deprecated "Deprecated. This property will be removed in a future API version."
+  @removed(Versions.v2026_09_01)
   enableSubvolumes?: EnableSubvolumes = EnableSubvolumes.Disabled;
 
   /**
@@ -1479,9 +1480,9 @@ model VolumePatchProperties {
   @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
   @added(Versions.v2026_08_01)
   @removed(Versions.v2026_08_15_preview)
+  @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
   @added(Versions.v2026_09_01)
   @removed(Versions.v2026_09_15_preview)
-  @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
   @renamedFrom(Versions.v2026_09_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
@@ -2352,6 +2353,7 @@ union AvsDataStore {
  * Deprecated. This type will be removed in a future API version.
  */
 #deprecated "Deprecated. This type will be removed in a future API version."
+@removed(Versions.v2026_09_01)
 union EnableSubvolumes {
   string,
 
