@@ -103,7 +103,7 @@ suppressions:
   - code: ConsistentPatchProperties
     reason: migrationToken and the apiProperties fields qnaAzureSearchEndpointKey, eventHubConnectionString and storageAccountConnectionString are write-only secrets accepted by PATCH but intentionally omitted from the resource read model. Their existing write types, optionality and constraints are preserved.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}"].patch.parameters[4].schema
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
