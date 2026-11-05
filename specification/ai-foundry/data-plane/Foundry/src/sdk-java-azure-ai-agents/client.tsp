@@ -2075,16 +2075,17 @@ union RealtimeResponseInputItemStatus {
   "java"
 );
 
-@TypeSpec.OpenAPI.extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union RealtimeResponseInputImageDetail {
-  low: "low",
-  high: "high",
-  auto: "auto",
-}
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemUserMessage.Content.Detail",
+  },
+  "java"
+)
+model OpenAIRealtimeInputImageDetail {}
 
 @@alternateType(
   OpenAI.RealtimeResponseInputImage.detail,
-  RealtimeResponseInputImageDetail,
+  OpenAIRealtimeInputImageDetail,
   "java"
 );
 
