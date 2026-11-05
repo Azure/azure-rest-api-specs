@@ -153,7 +153,14 @@ assignments, resource changes, or remediation deployments.
 
 The TypeSpec entrypoints are `PolicyAuthoringApi/main.tsp` and
 `PolicySimulationApi/main.tsp`. Each project emits only its implemented API version;
-the existing API projects and published versions are unchanged.
+the existing published API versions are unchanged.
+
+Model sources and author-maintained examples are located under `PolicyInsightsApi`,
+with examples in `PolicyInsightsApi/examples/<api-version>`. The emitter copies
+those examples to `preview/<api-version>/examples`, matching the existing preview
+layout. Edit the source examples and recompile rather than editing both copies.
+Policy definition inputs reuse the Microsoft.Authorization definition and parameter
+models, with the additional required fields validated by these operations.
 
 ### Tag: package-2026-09-preview
 

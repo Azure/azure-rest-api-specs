@@ -188,79 +188,236 @@
     }
   },
   "definitions": {
-    "PolicyInsightsCommon.PolicyAuthoringDefinitionProperties": {
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
+    },
+    "Microsoft.Authorization.ExternalEvaluationEndpointSettings": {
       "type": "object",
-      "description": "Properties of a policy definition supplied by the caller.",
+      "description": "The settings of an external endpoint providing evaluation results.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the endpoint."
+        },
+        "details": {
+          "description": "The details of the endpoint."
+        }
+      }
+    },
+    "Microsoft.Authorization.ExternalEvaluationEnforcementSettings": {
+      "type": "object",
+      "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation.",
+      "properties": {
+        "missingTokenAction": {
+          "type": "string",
+          "description": "What to do when evaluating an enforcement policy that requires an external evaluation and the token is missing. Possible values are Audit and Deny and language expressions are supported."
+        },
+        "resultLifespan": {
+          "type": "string",
+          "description": "The lifespan of the endpoint invocation result after which it's no longer valid. Value is expected to follow the ISO 8601 duration format and language expressions are supported."
+        },
+        "endpointSettings": {
+          "$ref": "#/definitions/Microsoft.Authorization.ExternalEvaluationEndpointSettings",
+          "description": "The settings of an external endpoint providing evaluation results."
+        },
+        "roleDefinitionIds": {
+          "type": "array",
+          "description": "An array of the role definition Ids the assignment's MSI will need in order to invoke the endpoint.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Microsoft.Authorization.ParameterDefinitionsValueMetadata": {
+      "type": "object",
+      "description": "General metadata for the parameter.",
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "The display name."
-        },
-        "policyType": {
-          "type": "string",
-          "description": "The policy type."
-        },
-        "mode": {
-          "type": "string",
-          "description": "The policy evaluation mode."
+          "description": "The display name for the parameter."
         },
         "description": {
           "type": "string",
-          "description": "The policy description."
+          "description": "The description of the parameter."
+        },
+        "strongType": {
+          "type": "string",
+          "description": "Used when assigning the policy definition through the portal. Provides a context aware list of values for the user to choose from."
+        },
+        "assignPermissions": {
+          "type": "boolean",
+          "description": "Set to true to have Azure portal create role assignments on the resource ID or resource scope value of this parameter during policy assignment. This property is useful in case you wish to assign permissions outside the assignment scope."
+        }
+      },
+      "additionalProperties": {}
+    },
+    "Microsoft.Authorization.ParameterType": {
+      "type": "string",
+      "description": "The data type of the parameter.",
+      "enum": [
+        "String",
+        "Array",
+        "Object",
+        "Boolean",
+        "Integer",
+        "Float",
+        "DateTime"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "String",
+            "description": "The string parameter type."
+          },
+          {
+            "name": "Array",
+            "value": "Array",
+            "description": "The array parameter type."
+          },
+          {
+            "name": "Object",
+            "value": "Object",
+            "description": "The object parameter type."
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "The boolean parameter type."
+          },
+          {
+            "name": "Integer",
+            "value": "Integer",
+            "description": "The integer parameter type."
+          },
+          {
+            "name": "Float",
+            "value": "Float",
+            "description": "The float parameter type."
+          },
+          {
+            "name": "DateTime",
+            "value": "DateTime",
+            "description": "The date-time parameter type."
+          }
+        ]
+      }
+    },
+    "Microsoft.Authorization.PolicyType": {
+      "type": "string",
+      "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static.",
+      "enum": [
+        "NotSpecified",
+        "BuiltIn",
+        "Custom",
+        "Static"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The not specified policy definition type."
+          },
+          {
+            "name": "BuiltIn",
+            "value": "BuiltIn",
+            "description": "The built in policy definition type."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "The custom policy definition type."
+          },
+          {
+            "name": "Static",
+            "value": "Static",
+            "description": "The static policy definition type."
+          }
+        ]
+      }
+    },
+    "PolicyInsightsCommon.PolicyDefinitionContentProperties": {
+      "type": "object",
+      "description": "Existing policy definition properties with the required verification inputs.",
+      "properties": {
+        "policyType": {
+          "$ref": "#/definitions/Microsoft.Authorization.PolicyType",
+          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy definition description."
         },
         "metadata": {
-          "description": "Arbitrary policy metadata."
+          "description": "The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
         },
         "version": {
           "type": "string",
-          "description": "The policy definition version."
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Parameter definitions, indexed by parameter name.",
-          "additionalProperties": {
-            "$ref": "#/definitions/PolicyInsightsCommon.PolicyAuthoringParameter"
-          }
-        },
-        "policyRule": {
-          "description": "The policy rule, including its if condition and then effect."
+          "description": "The policy definition version in #.#.# format."
         },
         "versions": {
           "type": "array",
-          "description": "The available policy definition versions.",
+          "description": "A list of available versions for this policy definition.",
           "items": {
             "type": "string"
           }
         },
         "externalEvaluationEnforcementSettings": {
-          "description": "Settings for external evaluation results used during enforcement."
+          "$ref": "#/definitions/Microsoft.Authorization.ExternalEvaluationEnforcementSettings",
+          "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation."
+        },
+        "mode": {
+          "type": "string",
+          "description": "The policy evaluation mode."
+        },
+        "policyRule": {
+          "description": "The policy rule, including its if condition and then effect."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameter definitions, indexed by caller-defined parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/PolicyInsightsCommon.PolicyDefinitionParameter"
+          }
         }
       },
       "required": [
         "policyRule"
       ]
     },
-    "PolicyInsightsCommon.PolicyAuthoringParameter": {
+    "PolicyInsightsCommon.PolicyDefinitionParameter": {
       "type": "object",
-      "description": "A parameter declared by a policy definition.",
+      "description": "An existing policy parameter definition with its required value type.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The parameter value type."
-        },
-        "metadata": {
-          "description": "Arbitrary parameter metadata."
-        },
         "allowedValues": {
           "type": "array",
-          "description": "The allowed parameter values.",
+          "description": "The allowed values for the parameter.",
           "items": {}
         },
         "defaultValue": {
-          "description": "The default parameter value."
+          "description": "The default value for the parameter if no value is provided."
         },
         "schema": {
-          "description": "A JSON schema used to validate object parameter values."
+          "description": "Provides validation of parameter inputs during assignment using a self-defined JSON schema. This property is only supported for object-type parameters and follows the Json.NET Schema 2019-09 implementation. You can learn more about using schemas at https://json-schema.org/ and test draft schemas at https://www.jsonschemavalidator.net/."
+        },
+        "metadata": {
+          "$ref": "#/definitions/Microsoft.Authorization.ParameterDefinitionsValueMetadata",
+          "description": "General metadata for the parameter."
+        },
+        "type": {
+          "$ref": "#/definitions/Microsoft.Authorization.ParameterType",
+          "description": "The parameter value type."
         }
       },
       "required": [
@@ -299,38 +456,22 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The resource name."
+          "description": "The name of the resource",
+          "readOnly": true
         },
         "type": {
-          "type": "string",
-          "description": "The resource type."
-        },
-        "sku": {
-          "description": "Resource SKU information."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The resource kind."
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The identifier of the resource managing this definition."
-        },
-        "etag": {
-          "type": "string",
-          "description": "The resource entity tag."
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location."
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Resource creation and modification information."
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/PolicyInsightsCommon.PolicyAuthoringDefinitionProperties",
-          "description": "The policy definition properties."
+          "$ref": "#/definitions/PolicyInsightsCommon.PolicyDefinitionContentProperties",
+          "description": "The definition properties."
         },
         "id": {
           "type": "string",
@@ -498,6 +639,11 @@
       "type": "object",
       "description": "Expression and effect details for an evaluated policy.",
       "properties": {
+        "reason": {
+          "type": "string",
+          "description": "The reason for the evaluation result.",
+          "readOnly": true
+        },
         "evaluatedExpressions": {
           "type": "array",
           "description": "Evaluated policy expressions.",
@@ -513,10 +659,6 @@
         "manualDetails": {
           "$ref": "#/definitions/PolicySimulationManualDetails",
           "description": "Details of a manual-effect evaluation."
-        },
-        "reason": {
-          "type": "string",
-          "description": "An additional explanation of the evaluation outcome."
         },
         "actionDetails": {
           "$ref": "#/definitions/PolicySimulationActionDetails",
@@ -574,31 +716,32 @@
       "type": "object",
       "description": "The evaluation of a policy expression.",
       "properties": {
-        "result": {
-          "$ref": "#/definitions/PolicySimulationExpressionOutcome",
-          "description": "The expression evaluation outcome."
+        "expression": {
+          "type": "string",
+          "description": "Expression evaluated."
         },
         "expressionKind": {
           "type": "string",
-          "description": "The expression kind, such as field or value."
-        },
-        "expression": {
-          "type": "string",
-          "description": "The evaluated expression."
+          "description": "The kind of expression that was evaluated.",
+          "readOnly": true
         },
         "path": {
           "type": "string",
-          "description": "The evaluation property path."
+          "description": "Property path if the expression is a field or an alias."
         },
         "expressionValue": {
-          "description": "The expression value."
+          "description": "Value of the expression."
         },
         "targetValue": {
-          "description": "The comparison target value."
+          "description": "Target value to be compared with the expression value."
         },
         "operator": {
           "type": "string",
-          "description": "The comparison operator."
+          "description": "Operator to compare the expression value and the target value."
+        },
+        "result": {
+          "$ref": "#/definitions/PolicySimulationExpressionOutcome",
+          "description": "The expression evaluation outcome."
         }
       }
     },
@@ -638,12 +781,12 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "The resource identifier used for the existence condition."
+          "description": "ID of the last evaluated resource for IfNotExists effect."
         },
         "totalResources": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of applicable resources."
+          "description": "Total number of resources to which the existence condition is applicable."
         },
         "requestUri": {
           "type": "string",
@@ -766,15 +909,18 @@
       "properties": {
         "policyDefinitionId": {
           "type": "string",
-          "description": "The policy definition identifier."
+          "description": "The resource identifier of the policy definition.",
+          "readOnly": true
         },
         "policySetDefinitionId": {
           "type": "string",
-          "description": "The policy set definition identifier."
+          "description": "The resource identifier of the policy set definition.",
+          "readOnly": true
         },
         "policyDefinitionReferenceId": {
           "type": "string",
-          "description": "The definition reference identifier within a policy set."
+          "description": "The reference identifier of a specific policy definition within a policy set definition.",
+          "readOnly": true
         },
         "policySetDefinitionName": {
           "type": "string",
@@ -988,21 +1134,21 @@
       "type": "object",
       "description": "An existing policy assignment and optional definition filters.",
       "properties": {
-        "policyAssignmentId": {
-          "type": "string",
-          "description": "The policy assignment identifier."
-        },
         "policyDefinitionId": {
           "type": "string",
-          "description": "The policy definition identifier."
+          "description": "The resource identifier of the policy definition."
         },
         "policySetDefinitionId": {
           "type": "string",
-          "description": "The policy set definition identifier."
+          "description": "The resource identifier of the policy set definition."
         },
         "policyDefinitionReferenceId": {
           "type": "string",
-          "description": "The definition reference identifier within a policy set."
+          "description": "The reference identifier of a specific policy definition within a policy set definition."
+        },
+        "policyAssignmentId": {
+          "type": "string",
+          "description": "The policy assignment identifier."
         }
       },
       "required": [

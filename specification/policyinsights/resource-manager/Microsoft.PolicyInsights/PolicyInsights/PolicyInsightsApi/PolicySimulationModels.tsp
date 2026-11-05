@@ -1,3 +1,6 @@
+import "./PolicyDefinitionContent.tsp";
+import "./PolicyEvaluationModels.tsp";
+
 using Azure.ResourceManager;
 using PolicyInsightsCommon;
 
@@ -28,7 +31,7 @@ model PolicySimulatedAssignment {
 
 /** A hypothetical policy definition identified by a nonexisting policy definition resource ID. */
 model PolicySimulationDefinition {
-  ...OmitProperties<PolicyAuthoringDefinition, "id">;
+  ...OmitProperties<PolicyDefinitionContent, "id">;
 
   /** A fully qualified policy definition resource identifier that does not already exist. */
   @minLength(1)
@@ -58,18 +61,12 @@ model PolicySimulationResource {
 }
 
 /** An existing policy assignment and optional definition filters. */
+@withVisibility(Lifecycle.Read)
 model PolicySimulationTarget {
+  ...OmitProperties<PolicyInsightsApi.PolicyReference, "policyAssignmentId">;
+
   /** The policy assignment identifier. */
   policyAssignmentId: string;
-
-  /** The policy definition identifier. */
-  policyDefinitionId?: string;
-
-  /** The policy set definition identifier. */
-  policySetDefinitionId?: string;
-
-  /** The definition reference identifier within a policy set. */
-  policyDefinitionReferenceId?: string;
 }
 
 /** The hypothetical policy evaluation result. */
@@ -122,14 +119,7 @@ model PolicySimulationEvaluation {
 
 /** Metadata identifying an evaluated policy and its assignment. */
 model PolicySimulationPolicyInfo {
-  /** The policy definition identifier. */
-  policyDefinitionId?: string;
-
-  /** The policy set definition identifier. */
-  policySetDefinitionId?: string;
-
-  /** The definition reference identifier within a policy set. */
-  policyDefinitionReferenceId?: string;
+  ...OmitProperties<PolicyInsightsApi.PolicyReference, "policyAssignmentId">;
 
   /** The policy set definition name. */
   policySetDefinitionName?: string;
@@ -220,6 +210,11 @@ union PolicySimulationOutcome {
 
 /** Expression and effect details for an evaluated policy. */
 model PolicySimulationEvaluationDetails {
+  ...OmitProperties<
+    PolicyInsightsApi.CheckRestrictionEvaluationDetails,
+    "evaluatedExpressions" | "ifNotExistsDetails"
+  >;
+
   /** Evaluated policy expressions. */
   @identifiers(#[])
   evaluatedExpressions?: PolicySimulationExpression[];
@@ -229,9 +224,6 @@ model PolicySimulationEvaluationDetails {
 
   /** Details of a manual-effect evaluation. */
   manualDetails?: PolicySimulationManualDetails;
-
-  /** An additional explanation of the evaluation outcome. */
-  reason?: string;
 
   /** Action-effect evaluation details. */
   actionDetails?: PolicySimulationActionDetails;
@@ -248,28 +240,10 @@ model PolicySimulationEvaluationDetails {
 
 /** The evaluation of a policy expression. */
 model PolicySimulationExpression {
+  ...OmitProperties<PolicyInsightsApi.ExpressionEvaluationDetails, "result">;
+
   /** The expression evaluation outcome. */
   result?: PolicySimulationExpressionOutcome;
-
-  /** The expression kind, such as field or value. */
-  expressionKind?: string;
-
-  /** The evaluated expression. */
-  expression?: string;
-
-  /** The evaluation property path. */
-  path?: string;
-
-  /** The expression value. */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Policy expression results can be any JSON value."
-  expressionValue?: unknown;
-
-  /** The comparison target value. */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Policy comparison targets can be any JSON value."
-  targetValue?: unknown;
-
-  /** The comparison operator. */
-  operator?: string;
 }
 
 /** A policy expression evaluation outcome. */
@@ -288,11 +262,7 @@ union PolicySimulationExpressionOutcome {
 
 /** Additional details for an existence condition. */
 model PolicySimulationIfNotExistsDetails {
-  /** The resource identifier used for the existence condition. */
-  resourceId?: string;
-
-  /** The number of applicable resources. */
-  totalResources?: int32;
+  ...PolicyInsightsApi.IfNotExistsEvaluationDetails;
 
   /** The URI used to obtain related resources. */
   requestUri?: url;

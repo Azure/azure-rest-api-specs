@@ -1,3 +1,5 @@
+import "./PolicyDefinitionContent.tsp";
+
 using Azure.ResourceManager;
 using PolicyInsightsCommon;
 
@@ -145,7 +147,7 @@ model PolicyAuthoringEffectExample {
 /** Input for verifying a policy definition. */
 model VerifyPolicyContent {
   /** The policy definition to validate and lint. */
-  policyDefinition: PolicyAuthoringDefinition;
+  policyDefinition: PolicyDefinitionContent;
 
   /** Linter rule-set names. Omit to use the service defaults. Unsupported names cause a bad-request response. */
   ruleSets?: string[];
