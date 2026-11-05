@@ -42,95 +42,97 @@ input-file:
   - stable/2026-11-01/cognitiveservices.json
 suppressions:
   - code: ArmResourcePropertiesBag
-    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    reason: OutboundRule.properties.type is the existing outbound-rule kind discriminator, distinct from the top-level ARM resource type. Renaming this field would change the released rule payload and requires coordinated backend and versioned-contract changes; a narrowly scoped legacy exception is requested.
+    from: cognitiveservices.json
     where:
       - $.definitions.OutboundRuleBasicResource
   - code: AvoidAdditionalProperties
-    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    reason: ManagedNetworkSettings.outboundRules is the existing dictionary of caller-named outbound rules with explicitly modeled rule values. Replacing this map with fixed properties or an array would change the released managed-network payload; review is requested for this specific legacy map representation.
+    from: cognitiveservices.json
     where:
       - $.definitions.ManagedNetworkSettings.properties.outboundRules
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    reason: These released managed-network and outbound-rule PUT contracts return 200 or 202, not 201. The managed-network 200 model exposes provisioningState; outbound rules expose their existing status field instead. Inventing a 201 response or a new provisioningState in Swagger would not fix the underlying service behavior; review is requested for the scoped legacy contract.
+    from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}"].put
   - code: PutResponseCodes
-    reason: This API is copied from Machine Learning Services RP where it is already established and in use.
+    reason: Managed-network and outbound-rule PUT operations use the released 200 synchronous-completion and 202 asynchronous-acceptance contracts with polling headers. They do not advertise 201; changing response codes requires backend alignment rather than a Swagger-only change. A scoped legacy exception is requested.
+    from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}"].put
   - code: PutResponseCodes
-    reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+    reason: The released Project PUT contract allows 200 for updates, 201 for synchronous creation and 202 for asynchronous creation; synchronous connection PUT operations return 200. These exact response-code deviations are retained pending ARM review rather than adding or removing responses unsupported by the current contract.
+    from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
   - code: PatchResponseCodes
-    reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+    reason: The released Project PATCH contract includes a Project body on 202 Accepted as well as on 200 completion. Removing that body only from Swagger would change the documented contract without changing the service; review is requested for this specific legacy asynchronous-response shape.
+    from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch
   - code: PatchBodyParametersSchema
-    reason: this is a required field for in a optional property this experience exist in other stable schemas as well.
+    reason: Both connection PATCH routes currently bind a polymorphic properties model whose authType discriminator is required even for metadata-only updates. Removing the requirement only in Swagger would advertise unsupported requests. The reviewer treats this inherited requirement as non-blocking for November stable in https://github.com/Azure/azure-rest-api-specs/pull/47307#discussion_r4485773604; coordinated backend and partial-update contract work remains outstanding.
+    from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.properties
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
   - code: DeleteResponseCodes
-    reason: Behavior is align with other existing API for this RP
+    reason: The released Project DELETE contract allows immediate completion with 200 or 204 and asynchronous acceptance with 202 and polling headers. This exception preserves those exact response codes pending ARM review; it does not waive DELETE rules for other resource types.
+    from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete
   - code: AvoidAdditionalProperties
-    reason: Approved to be suppressed in AML swagger
+    reason: Connection metadata uses caller-defined string keys, and CustomKeys.keys accepts caller-defined credential/header names with string secret values. Fixed property names would not represent these inputs. Custom keys remain write-side credentials and are excluded from ordinary November responses; explicit exception review is requested.
+    from: cognitiveservices.json
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
   - code: AvoidAdditionalProperties
     reason: This read projection preserves the existing connection metadata string dictionary, whose keys are caller-defined and must remain extensible.
+    from: cognitiveservices.json
     where:
       - $.definitions.ConnectionPropertiesV2Read.properties.metadata
   - code: AvoidAdditionalProperties
-    reason: These account read projections preserve the existing extensible endpoint dictionary and API-kind property bag while excluding the named credential fields.
+    reason: Account read endpoints are dynamically named service URLs determined by account kind, and API-specific properties retain the existing extensible kind-specific bag. The read projections exclude the named credentials while preserving these released metadata shapes; review is requested for these specific provider-owned extensible bags.
+    from: cognitiveservices.json
     where:
       - $.definitions.AccountPropertiesRead.properties.endpoints
       - $.definitions.ApiPropertiesRead
   - code: PutRequestResponseSchemeArm
     reason: Account and connection credentials are accepted in PUT/PATCH inputs but deliberately omitted from ordinary resource responses. Nonsensitive metadata is preserved, the request is a superset of the response, and each resource provides PATCH for updates.
+    from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
   - code: ConsistentPatchProperties
     reason: migrationToken and the apiProperties fields qnaAzureSearchEndpointKey, eventHubConnectionString and storageAccountConnectionString are write-only secrets accepted by PATCH but intentionally omitted from the resource read model. Their existing write types, optionality and constraints are preserved.
+    from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}"].patch.parameters[4].schema
-  - code: LroLocationHeader
-    reason: Align with existing API behavior in other APIs
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put.responses.202
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.responses.202
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete.responses.202
   - code: AvoidAdditionalProperties
-    reason: Same as existing account resource, trying to have the same behavior
+    reason: Project endpoints are a read-only dictionary of service endpoint names to URLs, determined dynamically by project/account kind and service configuration. This preserves the released metadata map rather than constraining it to a fixed set of endpoint names; a specific exception is requested.
+    from: cognitiveservices.json
     where:
       - $.definitions.ProjectProperties.properties.endpoints
   - code: AvoidAdditionalProperties
-    reason: Provide customers ability to assign customize labels to rules.
+    reason: Account and project tool-label values are dictionaries of customer-defined label names and string values. The referenced schema definitions hold those actual dictionaries; fixed properties would prevent customers from assigning their own labels.
+    from: cognitiveservices.json
     where:
-      - $.definitions.RaiToolLabelProperties.properties.accountScope.properties.labelValues
-      - $.definitions.RaiToolLabelProperties.properties.projectScopes.items.properties.labelValues
-      - $.definitions.RaiIfcRuleProperties.properties.conditions
-  - code: AvoidAdditionalProperties
-    reason: Provide customers ability to define custom conditions for when a rule is activated.
-    where:
-      - $.definitions.RaiIfcRuleProperties.properties.conditions
+      - $.definitions.RaiToolLabelPropertiesAccountScope.properties.labelValues
+      - $.definitions.RaiToolLabelPropertiesProjectScopesItem.properties.labelValues
   - code: TopLevelResourcesListByResourceGroup
-    reason: These are subscription level resources and are modeled after the RaiPolicy List operation
+    reason: RaiExternalSafetyProviderSchema is subscription-scoped. Its resource ID has no resource-group segment, and the API provides subscription collection GET and point GET. Listing this resource by resource group is not applicable to its declared scope.
+    from: cognitiveservices.json
     where:
-      - $.definitions.RaiExternalSafetyProvider
       - $.definitions.RaiExternalSafetyProviderSchema
   - code: ResourceNameRestriction
-    reason: Parameter exists in previous API versions without pattern, cannot add now without breaking change.
+    reason: These eight exact routes already exist in released stable contracts without the requested name pattern. A new restrictive pattern can reject previously accepted names; backend validation and compatibility must be assessed before changing it. A scoped legacy exception is requested, not inferred from preview usage.
     from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans/{commitmentPlanName}"]
@@ -142,7 +144,8 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}/start"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}/stop"]
   - code: ParametersSchemaAsTypeObject
-    reason: Backend requires array type for bulk operations since 2024-04-01 API. Changing to object would be a breaking change.
+    reason: These two bulk blocklist POST operations accept an array of items as their existing request body, including released stable versions. Wrapping that array in an object would change the established wire payload; the generic object-body rule does not describe this bulk-input contract.
+    from: cognitiveservices.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems"].post.parameters[5].schema.type
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post.parameters[5].schema.type
