@@ -79,11 +79,6 @@
             ],
             "description": "Controls how long the model waits before emitting transcription text.\n  Higher values can improve transcription accuracy at the cost of latency.\n  Only supported with `gpt-realtime-whisper` in GA Realtime sessions."
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.CallableToolAllowedCaller": {
@@ -110,12 +105,7 @@
             "duration": "#/components/schemas/OpenAI.TranscriptTextUsageDuration"
           }
         },
-        "description": "Token usage statistics for the request.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Token usage statistics for the request."
       },
       "OpenAI.CreateTranscriptionResponseJsonUsageType": {
         "anyOf": [
@@ -129,12 +119,7 @@
               "duration"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.FileInputDetail": {
         "type": "string",
@@ -344,28 +329,13 @@
           }
         },
         "description": "A tool available on an MCP server.",
-        "title": "MCP list tools tool",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "MCP list tools tool"
       },
       "OpenAI.MCPListToolsToolAnnotations": {
-        "type": "object",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "type": "object"
       },
       "OpenAI.MCPListToolsToolInputSchema": {
-        "type": "object",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "type": "object"
       },
       "OpenAI.MCPTool": {
         "type": "object",
@@ -626,11 +596,6 @@
             "audio/pcmu": "#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcmu",
             "audio/pcma": "#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcma"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeAudioFormatsAudioPcm": {
@@ -656,12 +621,7 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeAudioFormatsAudioPcma": {
         "type": "object",
@@ -680,12 +640,7 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeAudioFormatsAudioPcmu": {
         "type": "object",
@@ -704,12 +659,7 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeAudioFormatsType": {
         "anyOf": [
@@ -724,12 +674,7 @@
               "audio/pcma"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeClientEvent": {
         "type": "object",
@@ -759,12 +704,7 @@
             "session.avatar.connect": "#/components/schemas/VoiceAgentClientEventSessionAvatarConnect"
           }
         },
-        "description": "A realtime client event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A realtime client event."
       },
       "OpenAI.RealtimeClientEventConversationItemCreate": {
         "type": "object",
@@ -804,11 +744,6 @@
           "name": "conversation.item.create",
           "group": "realtime",
           "example": "{\n  \"type\": \"conversation.item.create\",\n  \"item\": {\n    \"type\": \"message\",\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"hi\"\n      }\n    ]\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventConversationItemDelete": {
@@ -846,11 +781,6 @@
           "name": "conversation.item.delete",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_901\",\n    \"type\": \"conversation.item.delete\",\n    \"item_id\": \"item_003\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventConversationItemRetrieve": {
@@ -888,11 +818,6 @@
           "name": "conversation.item.retrieve",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_901\",\n    \"type\": \"conversation.item.retrieve\",\n    \"item_id\": \"item_003\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventConversationItemTruncate": {
@@ -940,11 +865,6 @@
           "name": "conversation.item.truncate",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_678\",\n    \"type\": \"conversation.item.truncate\",\n    \"item_id\": \"item_002\",\n    \"content_index\": 0,\n    \"audio_end_ms\": 1500\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventInputAudioBufferAppend": {
@@ -982,11 +902,6 @@
           "name": "input_audio_buffer.append",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_456\",\n    \"type\": \"input_audio_buffer.append\",\n    \"audio\": \"Base64EncodedAudioData\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventInputAudioBufferClear": {
@@ -1019,11 +934,6 @@
           "name": "input_audio_buffer.clear",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_012\",\n    \"type\": \"input_audio_buffer.clear\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventInputAudioBufferCommit": {
@@ -1056,11 +966,6 @@
           "name": "input_audio_buffer.commit",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_789\",\n    \"type\": \"input_audio_buffer.commit\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventOutputAudioBufferClear": {
@@ -1092,11 +997,6 @@
           "name": "output_audio_buffer.clear",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"optional_client_event_id\",\n    \"type\": \"output_audio_buffer.clear\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventResponseCancel": {
@@ -1133,11 +1033,6 @@
           "name": "response.cancel",
           "group": "realtime",
           "example": "{\n    \"type\": \"response.cancel\",\n    \"response_id\": \"resp_12345\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventResponseCreate": {
@@ -1173,11 +1068,6 @@
           "name": "response.create",
           "group": "realtime",
           "example": "// Trigger a response with the default Conversation and no special parameters\n{\n  \"type\": \"response.create\"\n}\n\n// Trigger an out-of-band response that does not write to the default Conversation\n{\n  \"type\": \"response.create\",\n  \"response\": {\n    \"instructions\": \"Provide a concise answer.\",\n    \"tools\": [], // clear any session tools\n    \"conversation\": \"none\",\n    \"output_modalities\": [\"text\"],\n    \"metadata\": {\n      \"response_purpose\": \"summarization\"\n    },\n    \"input\": [\n      {\n        \"type\": \"item_reference\",\n        \"id\": \"item_12345\"\n      },\n      {\n        \"type\": \"message\",\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"type\": \"input_text\",\n            \"text\": \"Summarize the above message in one sentence.\"\n          }\n        ]\n      }\n    ]\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventSessionUpdate": {
@@ -1215,11 +1105,6 @@
           "name": "session.update",
           "group": "realtime",
           "example": "{\n  \"type\": \"session.update\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"instructions\": \"You are a creative assistant that helps with design tasks.\",\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"name\": \"display_color_palette\",\n        \"description\": \"Call this function when a user asks for a color palette.\",\n        \"parameters\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"theme\": {\n              \"type\": \"string\",\n              \"description\": \"Description of the theme for the color scheme.\"\n            },\n            \"colors\": {\n              \"type\": \"array\",\n              \"description\": \"Array of five hex color codes based on the theme.\",\n              \"items\": {\n                \"type\": \"string\",\n                \"description\": \"Hex color code\"\n              }\n            }\n          },\n          \"required\": [\n            \"theme\",\n            \"colors\"\n          ]\n        }\n      }\n    ],\n    \"tool_choice\": \"auto\"\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeClientEventType": {
@@ -1245,12 +1130,7 @@
               "rtc.call.sdp.create"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeConversationItem": {
         "type": "object",
@@ -1275,12 +1155,7 @@
             "system_tool": "#/components/schemas/VoiceAgentSystemToolItem"
           }
         },
-        "description": "A single item within a Realtime conversation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A single item within a Realtime conversation."
       },
       "OpenAI.RealtimeConversationItemFunctionCall": {
         "type": "object",
@@ -1348,12 +1223,7 @@
           }
         ],
         "description": "A function call item in a Realtime conversation.",
-        "title": "Realtime function call item",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime function call item"
       },
       "OpenAI.RealtimeConversationItemFunctionCallOutput": {
         "type": "object",
@@ -1421,12 +1291,7 @@
           }
         ],
         "description": "A function call output item in a Realtime conversation.",
-        "title": "Realtime function call output item",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime function call output item"
       },
       "OpenAI.RealtimeConversationItemMessage": {
         "type": "object",
@@ -1457,12 +1322,7 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeConversationItemMessageAssistant": {
         "type": "object",
@@ -1533,12 +1393,7 @@
           }
         ],
         "description": "An assistant message item in a Realtime conversation.",
-        "title": "Realtime assistant message item",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime assistant message item"
       },
       "OpenAI.RealtimeConversationItemMessageAssistantContent": {
         "type": "object",
@@ -1630,12 +1485,7 @@
           }
         ],
         "description": "A system message in a Realtime conversation can be used to provide additional context or instructions to the model. This is similar but distinct from the instruction prompt provided at the start of a conversation, as system messages can be added at any point in the conversation. For major changes to the conversation's behavior, use instructions, but for smaller updates (e.g. \"the user is now asking about a different topic\"), use system messages.",
-        "title": "Realtime system message item",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime system message item"
       },
       "OpenAI.RealtimeConversationItemMessageSystemContent": {
         "type": "object",
@@ -1665,12 +1515,7 @@
               "assistant"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeConversationItemMessageUser": {
         "type": "object",
@@ -1741,12 +1586,7 @@
           }
         ],
         "description": "A user message item in a Realtime conversation.",
-        "title": "Realtime user message item",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime user message item"
       },
       "OpenAI.RealtimeConversationItemMessageUserContent": {
         "type": "object",
@@ -1801,12 +1641,7 @@
               "system_tool"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeFunctionTool": {
         "type": "object",
@@ -1888,12 +1723,7 @@
           }
         ],
         "description": "A Realtime item requesting human approval of a tool invocation.",
-        "title": "Realtime MCP approval request",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime MCP approval request"
       },
       "OpenAI.RealtimeMCPApprovalResponse": {
         "type": "object",
@@ -1951,12 +1781,7 @@
           }
         ],
         "description": "A Realtime item responding to an MCP approval request.",
-        "title": "Realtime MCP approval response",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime MCP approval response"
       },
       "OpenAI.RealtimeMCPError": {
         "type": "object",
@@ -1975,11 +1800,6 @@
             "tool_execution_error": "#/components/schemas/OpenAI.RealtimeMCPToolExecutionError",
             "http_error": "#/components/schemas/OpenAI.RealtimeMCPHTTPError"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeMcpErrorType": {
@@ -1995,12 +1815,7 @@
               "http_error"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeMCPHTTPError": {
         "type": "object",
@@ -2029,12 +1844,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
           }
         ],
-        "title": "Realtime MCP HTTP error",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime MCP HTTP error"
       },
       "OpenAI.RealtimeMCPListTools": {
         "type": "object",
@@ -2084,12 +1894,7 @@
           }
         ],
         "description": "A Realtime item listing tools available on an MCP server.",
-        "title": "Realtime MCP list tools",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime MCP list tools"
       },
       "OpenAI.RealtimeMCPProtocolError": {
         "type": "object",
@@ -2118,12 +1923,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
           }
         ],
-        "title": "Realtime MCP protocol error",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime MCP protocol error"
       },
       "OpenAI.RealtimeMCPToolCall": {
         "type": "object",
@@ -2199,12 +1999,7 @@
           }
         ],
         "description": "A Realtime item representing an invocation of a tool on an MCP server.",
-        "title": "Realtime MCP tool call",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime MCP tool call"
       },
       "OpenAI.RealtimeMCPToolExecutionError": {
         "type": "object",
@@ -2229,12 +2024,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
           }
         ],
-        "title": "Realtime MCP tool execution error",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime MCP tool execution error"
       },
       "OpenAI.RealtimeNoiseReductionStrength": {
         "type": "number",
@@ -3054,12 +2844,7 @@
             "session.handoff.started": "#/components/schemas/VoiceAgentServerEventSessionHandoffStarted"
           }
         },
-        "description": "A realtime server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A realtime server event."
       },
       "OpenAI.RealtimeServerEventConversationCreated": {
         "type": "object",
@@ -3096,11 +2881,6 @@
           "name": "conversation.created",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_9101\",\n    \"type\": \"conversation.created\",\n    \"conversation\": {\n        \"id\": \"conv_001\",\n        \"object\": \"realtime.conversation\"\n    }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationCreatedConversation": {
@@ -3161,11 +2941,6 @@
           "name": "conversation.item.added",
           "group": "realtime",
           "example": "{\n  \"type\": \"conversation.item.added\",\n  \"event_id\": \"event_C9G8pjSJCfRNEhMEnYAVy\",\n  \"previous_item_id\": null,\n  \"item\": {\n    \"id\": \"item_C9G8pGVKYnaZu8PH5YQ9O\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"hi\"\n      }\n    ]\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationItemCreated": {
@@ -3212,11 +2987,6 @@
           "name": "conversation.item.created",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_1920\",\n    \"type\": \"conversation.item.created\",\n    \"previous_item_id\": \"msg_002\",\n    \"item\": {\n        \"id\": \"msg_003\",\n        \"object\": \"realtime.item\",\n        \"type\": \"message\",\n        \"status\": \"completed\",\n        \"role\": \"user\",\n        \"content\": []\n    }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationItemDeleted": {
@@ -3254,11 +3024,6 @@
           "name": "conversation.item.deleted",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_2728\",\n    \"type\": \"conversation.item.deleted\",\n    \"item_id\": \"msg_005\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationItemDone": {
@@ -3305,11 +3070,6 @@
           "name": "conversation.item.done",
           "group": "realtime",
           "example": "{\n  \"type\": \"conversation.item.done\",\n  \"event_id\": \"event_CCXLgMZPo3qioWCeQa4WH\",\n  \"previous_item_id\": \"item_CCXLecNJVIVR2HUy3ABLj\",\n  \"item\": {\n    \"id\": \"item_CCXLfxmM5sXVJVz4mCa2S\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"assistant\",\n    \"content\": [\n      {\n        \"type\": \"output_audio\",\n        \"transcript\": \"Oh, I can hear you loud and clear! Sounds like we're connected just fine. What can I help you with today?\"\n      }\n    ]\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted": {
@@ -3403,11 +3163,6 @@
           "name": "conversation.item.input_audio_transcription.completed",
           "group": "realtime",
           "example": "{\n  \"type\": \"conversation.item.input_audio_transcription.completed\",\n  \"event_id\": \"event_CCXGRvtUVrax5SJAnNOWZ\",\n  \"item_id\": \"item_CCXGQ4e1ht4cOraEYcuR2\",\n  \"content_index\": 0,\n  \"transcript\": \"Hey, can you hear me?\",\n  \"usage\": {\n    \"type\": \"tokens\",\n    \"total_tokens\": 22,\n    \"input_tokens\": 13,\n    \"input_token_details\": {\n      \"text_tokens\": 0,\n      \"audio_tokens\": 13\n    },\n    \"output_tokens\": 9\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta": {
@@ -3466,11 +3221,6 @@
           "name": "conversation.item.input_audio_transcription.delta",
           "group": "realtime",
           "example": "{\n  \"type\": \"conversation.item.input_audio_transcription.delta\",\n  \"event_id\": \"event_CCXGRxsAimPAs8kS2Wc7Z\",\n  \"item_id\": \"item_CCXGQ4e1ht4cOraEYcuR2\",\n  \"content_index\": 0,\n  \"delta\": \"Hey\",\n  \"obfuscation\": \"aLxx0jTEciOGe\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailed": {
@@ -3518,11 +3268,6 @@
           "name": "conversation.item.input_audio_transcription.failed",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_2324\",\n    \"type\": \"conversation.item.input_audio_transcription.failed\",\n    \"item_id\": \"msg_003\",\n    \"content_index\": 0,\n    \"error\": {\n        \"type\": \"transcription_error\",\n        \"code\": \"audio_unintelligible\",\n        \"message\": \"The audio could not be transcribed.\",\n        \"param\": null\n    }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailedError": {
@@ -3609,11 +3354,6 @@
           "name": "conversation.item.input_audio_transcription.segment",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_6501\",\n    \"type\": \"conversation.item.input_audio_transcription.segment\",\n    \"item_id\": \"msg_011\",\n    \"content_index\": 0,\n    \"text\": \"hello\",\n    \"id\": \"seg_0001\",\n    \"speaker\": \"spk_1\",\n    \"start\": 0.0,\n    \"end\": 0.4\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationItemRetrieved": {
@@ -3650,11 +3390,6 @@
           "name": "conversation.item.retrieved",
           "group": "realtime",
           "example": "{\n  \"type\": \"conversation.item.retrieved\",\n  \"event_id\": \"event_CCXGSizgEppa2d4XbKA7K\",\n  \"item\": {\n    \"id\": \"item_CCXGRxbY0n6WE4EszhF5w\",\n    \"object\": \"realtime.item\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"assistant\",\n    \"content\": [\n      {\n        \"type\": \"output_audio\",\n        \"transcript\": \"Yes, I can hear you loud and clear. How can I help you today?\",\n        \"audio\": \"AAABAP//AAA=\"\n      }\n    ]\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventConversationItemTruncated": {
@@ -3706,11 +3441,6 @@
           "name": "conversation.item.truncated",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_2526\",\n    \"type\": \"conversation.item.truncated\",\n    \"item_id\": \"msg_004\",\n    \"content_index\": 0,\n    \"audio_end_ms\": 1500\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventError": {
@@ -3820,11 +3550,6 @@
           "name": "input_audio_buffer.cleared",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_1314\",\n    \"type\": \"input_audio_buffer.cleared\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventInputAudioBufferCommitted": {
@@ -3872,11 +3597,6 @@
           "name": "input_audio_buffer.committed",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_1121\",\n    \"type\": \"input_audio_buffer.committed\",\n    \"previous_item_id\": \"msg_001\",\n    \"item_id\": \"msg_002\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived": {
@@ -3914,11 +3634,6 @@
           "name": "input_audio_buffer.dtmf_event_received",
           "group": "realtime",
           "example": "{\n  \"type\": \"input_audio_buffer.dtmf_event_received\",\n  \"event\": \"9\",\n  \"received_at\": 1763605109\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted": {
@@ -3961,11 +3676,6 @@
           "name": "input_audio_buffer.speech_started",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_1516\",\n    \"type\": \"input_audio_buffer.speech_started\",\n    \"audio_start_ms\": 1000,\n    \"item_id\": \"msg_003\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped": {
@@ -4008,11 +3718,6 @@
           "name": "input_audio_buffer.speech_stopped",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_1718\",\n    \"type\": \"input_audio_buffer.speech_stopped\",\n    \"audio_end_ms\": 2000,\n    \"item_id\": \"msg_003\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventInputAudioBufferTimeoutTriggered": {
@@ -4060,11 +3765,6 @@
           "name": "input_audio_buffer.timeout_triggered",
           "group": "realtime",
           "example": "{\n    \"type\":\"input_audio_buffer.timeout_triggered\",\n    \"event_id\":\"event_CEKKrf1KTGvemCPyiJTJ2\",\n    \"audio_start_ms\":13216,\n    \"audio_end_ms\":19232,\n    \"item_id\":\"item_CEKKrWH0GiwN0ET97NUZc\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventMCPListToolsCompleted": {
@@ -4102,11 +3802,6 @@
           "name": "mcp_list_tools.completed",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_6102\",\n    \"type\": \"mcp_list_tools.completed\",\n    \"item_id\": \"mcp_list_tools_001\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventMCPListToolsFailed": {
@@ -4144,11 +3839,6 @@
           "name": "mcp_list_tools.failed",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_6103\",\n    \"type\": \"mcp_list_tools.failed\",\n    \"item_id\": \"mcp_list_tools_001\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventMCPListToolsInProgress": {
@@ -4186,11 +3876,6 @@
           "name": "mcp_list_tools.in_progress",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_6101\",\n    \"type\": \"mcp_list_tools.in_progress\",\n    \"item_id\": \"mcp_list_tools_001\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventOutputAudioBufferCleared": {
@@ -4228,11 +3913,6 @@
           "name": "output_audio_buffer.cleared",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_abc123\",\n    \"type\": \"output_audio_buffer.cleared\",\n    \"response_id\": \"resp_abc123\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventOutputAudioBufferStarted": {
@@ -4270,11 +3950,6 @@
           "name": "output_audio_buffer.started",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_abc123\",\n    \"type\": \"output_audio_buffer.started\",\n    \"response_id\": \"resp_abc123\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventOutputAudioBufferStopped": {
@@ -4312,11 +3987,6 @@
           "name": "output_audio_buffer.stopped",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_abc123\",\n    \"type\": \"output_audio_buffer.stopped\",\n    \"response_id\": \"resp_abc123\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventRateLimitsUpdated": {
@@ -4357,11 +4027,6 @@
           "name": "rate_limits.updated",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_5758\",\n    \"type\": \"rate_limits.updated\",\n    \"rate_limits\": [\n        {\n            \"name\": \"requests\",\n            \"limit\": 1000,\n            \"remaining\": 999,\n            \"reset_seconds\": 60\n        },\n        {\n            \"name\": \"tokens\",\n            \"limit\": 50000,\n            \"remaining\": 49950,\n            \"reset_seconds\": 60\n        }\n    ]\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventRateLimitsUpdatedRateLimits": {
@@ -4420,11 +4085,6 @@
           "name": "error",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_890\",\n    \"type\": \"error\",\n    \"error\": {\n        \"type\": \"invalid_request_error\",\n        \"code\": \"invalid_event\",\n        \"message\": \"The 'type' field is missing.\",\n        \"param\": null,\n        \"event_id\": \"event_567\"\n    }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseAudioDelta": {
@@ -4483,11 +4143,6 @@
           "name": "response.output_audio.delta",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_4950\",\n    \"type\": \"response.output_audio.delta\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"msg_008\",\n    \"output_index\": 0,\n    \"content_index\": 0,\n    \"delta\": \"Base64EncodedAudioDelta\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseAudioDone": {
@@ -4540,11 +4195,6 @@
           "name": "response.output_audio.done",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_5152\",\n    \"type\": \"response.output_audio.done\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"msg_008\",\n    \"output_index\": 0,\n    \"content_index\": 0\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseAudioTranscriptDelta": {
@@ -4602,11 +4252,6 @@
           "name": "response.output_audio_transcript.delta",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_4546\",\n    \"type\": \"response.output_audio_transcript.delta\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"msg_008\",\n    \"output_index\": 0,\n    \"content_index\": 0,\n    \"delta\": \"Hello, how can I a\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseAudioTranscriptDone": {
@@ -4664,11 +4309,6 @@
           "name": "response.output_audio_transcript.done",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_4748\",\n    \"type\": \"response.output_audio_transcript.done\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"msg_008\",\n    \"output_index\": 0,\n    \"content_index\": 0,\n    \"transcript\": \"Hello, how can I assist you today?\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseContentPartAdded": {
@@ -4726,11 +4366,6 @@
           "name": "response.content_part.added",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_3738\",\n    \"type\": \"response.content_part.added\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"msg_007\",\n    \"output_index\": 0,\n    \"content_index\": 0,\n    \"part\": {\n        \"type\": \"text\",\n        \"text\": \"\"\n    }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseContentPartAddedPart": {
@@ -4809,11 +4444,6 @@
           "name": "response.content_part.done",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_3940\",\n    \"type\": \"response.content_part.done\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"msg_007\",\n    \"output_index\": 0,\n    \"content_index\": 0,\n    \"part\": {\n        \"type\": \"text\",\n        \"text\": \"Sure, I can help with that.\"\n    }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseContentPartDonePart": {
@@ -4839,11 +4469,6 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
             "description": "The audio format, when this is an audio content part."
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseCreated": {
@@ -4880,11 +4505,6 @@
           "name": "response.created",
           "group": "realtime",
           "example": "{\n  \"type\": \"response.created\",\n  \"event_id\": \"event_C9G8pqbTEddBSIxbBN6Os\",\n  \"response\": {\n    \"object\": \"realtime.response\",\n    \"id\": \"resp_C9G8p7IH2WxLbkgPNouYL\",\n    \"status\": \"in_progress\",\n    \"status_details\": null,\n    \"output\": [],\n    \"conversation_id\": \"conv_C9G8mmBkLhQJwCon3hoJN\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"max_output_tokens\": \"inf\",\n    \"audio\": {\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\"\n      }\n    },\n    \"usage\": null,\n    \"metadata\": null\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseDone": {
@@ -4921,11 +4541,6 @@
           "name": "response.done",
           "group": "realtime",
           "example": "{\n  \"type\": \"response.done\",\n  \"event_id\": \"event_CCXHxcMy86rrKhBLDdqCh\",\n  \"response\": {\n    \"object\": \"realtime.response\",\n    \"id\": \"resp_CCXHw0UJld10EzIUXQCNh\",\n    \"status\": \"completed\",\n    \"status_details\": null,\n    \"output\": [\n      {\n        \"id\": \"item_CCXHwGjjDUfOXbiySlK7i\",\n        \"type\": \"message\",\n        \"status\": \"completed\",\n        \"role\": \"assistant\",\n        \"content\": [\n          {\n            \"type\": \"output_audio\",\n            \"transcript\": \"Loud and clear! I can hear you perfectly. How can I help you today?\"\n          }\n        ]\n      }\n    ],\n    \"conversation_id\": \"conv_CCXHsurMKcaVxIZvaCI5m\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"max_output_tokens\": \"inf\",\n    \"audio\": {\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"alloy\"\n      }\n    },\n    \"usage\": {\n      \"total_tokens\": 253,\n      \"input_tokens\": 132,\n      \"output_tokens\": 121,\n      \"input_token_details\": {\n        \"text_tokens\": 119,\n        \"audio_tokens\": 13,\n        \"image_tokens\": 0,\n        \"cached_tokens\": 64,\n        \"cached_tokens_details\": {\n          \"text_tokens\": 64,\n          \"audio_tokens\": 0,\n          \"image_tokens\": 0\n        }\n      },\n      \"output_token_details\": {\n        \"text_tokens\": 30,\n        \"audio_tokens\": 91\n      }\n    },\n    \"metadata\": null\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta": {
@@ -4983,11 +4598,6 @@
           "name": "response.function_call_arguments.delta",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_5354\",\n    \"type\": \"response.function_call_arguments.delta\",\n    \"response_id\": \"resp_002\",\n    \"item_id\": \"fc_001\",\n    \"output_index\": 0,\n    \"call_id\": \"call_001\",\n    \"delta\": \"{\"location\": \"San\"\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone": {
@@ -5050,11 +4660,6 @@
           "name": "response.function_call_arguments.done",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_5556\",\n    \"type\": \"response.function_call_arguments.done\",\n    \"response_id\": \"resp_002\",\n    \"item_id\": \"fc_001\",\n    \"output_index\": 0,\n    \"call_id\": \"call_001\",\n    \"name\": \"get_weather\",\n    \"arguments\": \"{\"location\": \"San Francisco\"}\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta": {
@@ -5117,11 +4722,6 @@
           "name": "response.mcp_call_arguments.delta",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_6201\",\n    \"type\": \"response.mcp_call_arguments.delta\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"mcp_call_001\",\n    \"output_index\": 0,\n    \"delta\": \"{\"partial\":true}\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone": {
@@ -5174,11 +4774,6 @@
           "name": "response.mcp_call_arguments.done",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_6202\",\n    \"type\": \"response.mcp_call_arguments.done\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"mcp_call_001\",\n    \"output_index\": 0,\n    \"arguments\": \"{\"q\":\"docs\"}\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseMCPCallCompleted": {
@@ -5221,11 +4816,6 @@
           "name": "response.mcp_call.completed",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_6302\",\n    \"type\": \"response.mcp_call.completed\",\n    \"output_index\": 0,\n    \"item_id\": \"mcp_call_001\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseMCPCallFailed": {
@@ -5268,11 +4858,6 @@
           "name": "response.mcp_call.failed",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_6303\",\n    \"type\": \"response.mcp_call.failed\",\n    \"output_index\": 0,\n    \"item_id\": \"mcp_call_001\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseMCPCallInProgress": {
@@ -5315,11 +4900,6 @@
           "name": "response.mcp_call.in_progress",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_6301\",\n    \"type\": \"response.mcp_call.in_progress\",\n    \"output_index\": 0,\n    \"item_id\": \"mcp_call_001\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseOutputItemAdded": {
@@ -5366,11 +4946,6 @@
           "name": "response.output_item.added",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_3334\",\n    \"type\": \"response.output_item.added\",\n    \"response_id\": \"resp_001\",\n    \"output_index\": 0,\n    \"item\": {\n        \"id\": \"msg_007\",\n        \"object\": \"realtime.item\",\n        \"type\": \"message\",\n        \"status\": \"in_progress\",\n        \"role\": \"assistant\",\n        \"content\": []\n    }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseOutputItemDone": {
@@ -5417,11 +4992,6 @@
           "name": "response.output_item.done",
           "group": "realtime",
           "example": "{\n  \"event_id\": \"event_3536\",\n  \"type\": \"response.output_item.done\",\n  \"response_id\": \"resp_001\",\n  \"output_index\": 0,\n  \"item\": {\n    \"id\": \"msg_007\",\n    \"object\": \"realtime.item\",\n    \"type\": \"message\",\n    \"status\": \"completed\",\n    \"role\": \"assistant\",\n    \"content\": [\n      {\n        \"type\": \"output_text\",\n        \"text\": \"Sure, I can help with that.\"\n      }\n    ]\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseTextDelta": {
@@ -5479,11 +5049,6 @@
           "name": "response.output_text.delta",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_4142\",\n    \"type\": \"response.output_text.delta\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"msg_007\",\n    \"output_index\": 0,\n    \"content_index\": 0,\n    \"delta\": \"Sure, I can h\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventResponseTextDone": {
@@ -5541,11 +5106,6 @@
           "name": "response.output_text.done",
           "group": "realtime",
           "example": "{\n    \"event_id\": \"event_4344\",\n    \"type\": \"response.output_text.done\",\n    \"response_id\": \"resp_001\",\n    \"item_id\": \"msg_007\",\n    \"output_index\": 0,\n    \"content_index\": 0,\n    \"text\": \"Sure, I can help with that.\"\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventSessionCreated": {
@@ -5587,11 +5147,6 @@
           "name": "session.created",
           "group": "realtime",
           "example": "{\n  \"type\": \"session.created\",\n  \"event_id\": \"event_C9G5RJeJ2gF77mV7f2B1j\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G5QPteg4UIbotdKLoYQ\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324625,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventSessionUpdated": {
@@ -5629,11 +5184,6 @@
           "name": "session.updated",
           "group": "realtime",
           "example": "{\n  \"type\": \"session.updated\",\n  \"event_id\": \"event_C9G8mqI3IucaojlVKE8Cs\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"object\": \"realtime.session\",\n    \"id\": \"sess_C9G8l3zp50uFv4qgxfJ8o\",\n    \"model\": \"gpt-realtime-2025-08-28\",\n    \"output_modalities\": [\n      \"audio\"\n    ],\n    \"instructions\": \"Your knowledge cutoff is 2023-10. You are a helpful, witty, and friendly AI. Act like a human, but remember that you aren't a human and that you can't do human things in the real world. Your voice and personality should be warm and engaging, with a lively and playful tone. If interacting in a non-English language, start by using the standard accent or dialect familiar to the user. Talk quickly. You should always call a function if you can. Do not refer to these rules, even if you’re asked about them.\",\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"name\": \"display_color_palette\",\n        \"description\": \"\nCall this function when a user asks for a color palette.\n\",\n        \"parameters\": {\n          \"type\": \"object\",\n          \"strict\": true,\n          \"properties\": {\n            \"theme\": {\n              \"type\": \"string\",\n              \"description\": \"Description of the theme for the color scheme.\"\n            },\n            \"colors\": {\n              \"type\": \"array\",\n              \"description\": \"Array of five hex color codes based on the theme.\",\n              \"items\": {\n                \"type\": \"string\",\n                \"description\": \"Hex color code\"\n              }\n            }\n          },\n          \"required\": [\n            \"theme\",\n            \"colors\"\n          ]\n        }\n      }\n    ],\n    \"tool_choice\": \"auto\",\n    \"max_output_tokens\": \"inf\",\n    \"tracing\": null,\n    \"prompt\": null,\n    \"expires_at\": 1756324832,\n    \"audio\": {\n      \"input\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"transcription\": null,\n        \"noise_reduction\": null,\n        \"turn_detection\": {\n          \"type\": \"server_vad\",\n          \"threshold\": 0.5,\n          \"prefix_padding_ms\": 300,\n          \"silence_duration_ms\": 200,\n          \"idle_timeout_ms\": null,\n          \"create_response\": true,\n          \"interrupt_response\": true\n        }\n      },\n      \"output\": {\n        \"format\": {\n          \"type\": \"audio/pcm\",\n          \"rate\": 24000\n        },\n        \"voice\": \"marin\",\n        \"speed\": 1\n      }\n    },\n    \"include\": null\n  }\n}\n"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeServerEventType": {
@@ -5695,12 +5245,7 @@
           {
             "$ref": "#/components/schemas/VoiceAgentServerEventTypeExtension"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeSessionCreateRequestGA": {
         "type": "object",
@@ -5862,12 +5407,7 @@
           }
         ],
         "description": "Realtime session object configuration.",
-        "title": "Realtime session configuration",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime session configuration"
       },
       "OpenAI.RealtimeSessionCreateRequestGAAudio": {
         "type": "object",
@@ -5878,11 +5418,6 @@
           "output": {
             "$ref": "#/components/schemas/OpenAI.RealtimeSessionCreateRequestGAAudioOutput"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestGAAudioInput": {
@@ -5900,11 +5435,6 @@
           "turn_detection": {
             "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestGAAudioInputNoiseReduction": {
@@ -5935,11 +5465,6 @@
             "maximum": 1.5,
             "default": 1
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestGATracing": {
@@ -5955,11 +5480,6 @@
             "type": "object",
             "additionalProperties": {}
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestUnion": {
@@ -5978,11 +5498,6 @@
             "transcription": "#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGA",
             "realtime": "#/components/schemas/OpenAI.RealtimeSessionCreateRequestGA"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestUnionType": {
@@ -5997,12 +5512,7 @@
               "transcription"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeTranscriptionSessionCreateRequestGA": {
         "type": "object",
@@ -6039,12 +5549,7 @@
           }
         ],
         "description": "Realtime transcription session object configuration.",
-        "title": "Realtime transcription session configuration",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime transcription session configuration"
       },
       "OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudio": {
         "type": "object",
@@ -6052,11 +5557,6 @@
           "input": {
             "$ref": "#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInput"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInput": {
@@ -6074,11 +5574,6 @@
           "turn_detection": {
             "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction": {
@@ -6148,12 +5643,7 @@
           }
         },
         "description": "Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response.\nServer VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech.\nSemantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a timeout based on this probability. For example, if user audio trails off with \"uhhm\", the model will score a low probability of turn end and wait longer for the user to continue speaking. This can be useful for more natural conversations, but may have a higher latency.\nFor `gpt-realtime-whisper` transcription sessions, turn detection must be\nset to `null`; VAD is not supported.",
-        "title": "Realtime Turn Detection",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Realtime Turn Detection"
       },
       "OpenAI.RealtimeTurnDetectionSemanticVad": {
         "type": "object",
@@ -6190,12 +5680,7 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeTurnDetectionServerVad": {
         "type": "object",
@@ -6241,12 +5726,7 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.RealtimeTurnDetectionType": {
         "anyOf": [
@@ -6260,12 +5740,7 @@
               "semantic_vad"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "OpenAI.ResponsePromptVariables": {
         "type": "object",
@@ -6741,12 +6216,7 @@
             "description": "The code of a language detected in the audio."
           }
         },
-        "description": "A language detected in transcribed audio.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A language detected in transcribed audio."
       },
       "OpenAI.TranscriptTextUsageDuration": {
         "type": "object",
@@ -6776,12 +6246,7 @@
           }
         ],
         "description": "Usage statistics for models billed by audio input duration.",
-        "title": "Duration Usage",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Duration Usage"
       },
       "OpenAI.TranscriptTextUsageTokens": {
         "type": "object",
@@ -6823,12 +6288,7 @@
           }
         ],
         "description": "Usage statistics for models billed by token usage.",
-        "title": "Token Usage",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "title": "Token Usage"
       },
       "OpenAI.TranscriptTextUsageTokensInputTokenDetails": {
         "type": "object",
@@ -6839,11 +6299,6 @@
           "audio_tokens": {
             "$ref": "#/components/schemas/OpenAI.integer"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
         }
       },
       "OpenAI.VoiceIdsOrCustomVoice": {
@@ -6886,12 +6341,7 @@
               "cedar"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "ToolConfig": {
         "type": "object",
@@ -6927,12 +6377,7 @@
             ]
           }
         },
-        "description": "Animation settings for a voice-agent session.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Animation settings for a voice-agent session."
       },
       "VoiceAgentAnimationOutputType": {
         "type": "string",
@@ -6940,12 +6385,7 @@
           "blendshapes",
           "viseme_id"
         ],
-        "description": "An animation output produced by a voice-agent session.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "An animation output produced by a voice-agent session."
       },
       "VoiceAgentAudioConfig": {
         "type": "object",
@@ -6959,12 +6399,7 @@
             "description": "Output (agent speech) audio configuration."
           }
         },
-        "description": "The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting."
       },
       "VoiceAgentAudioInputConfig": {
         "type": "object",
@@ -7018,12 +6453,7 @@
             "description": "Asynchronous input-audio transcription. Set to null to disable transcription."
           }
         },
-        "description": "Input audio configuration for a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Input audio configuration for a voice agent."
       },
       "VoiceAgentAudioOutputConfig": {
         "type": "object",
@@ -7045,24 +6475,14 @@
             "$ref": "#/components/schemas/VoiceAgentVoiceConfig"
           }
         ],
-        "description": "Output audio configuration for a voice agent. Extends the voice configuration with the session-level `format` and\n`output_audio_timestamp_types` settings, which apply to every voice type.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Output audio configuration for a voice agent. Extends the voice configuration with the session-level `format` and\n`output_audio_timestamp_types` settings, which apply to every voice type."
       },
       "VoiceAgentAudioTimestampType": {
         "type": "string",
         "enum": [
           "word"
         ],
-        "description": "An output-audio timestamp kind supported by a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "An output-audio timestamp kind supported by a voice agent."
       },
       "VoiceAgentAvatarConfig": {
         "type": "object",
@@ -7110,12 +6530,7 @@
             "default": false
           }
         },
-        "description": "Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting."
       },
       "VoiceAgentAvatarIceServer": {
         "type": "object",
@@ -7152,12 +6567,7 @@
             "format": "password"
           }
         },
-        "description": "An ICE server used for avatar WebRTC negotiation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "An ICE server used for avatar WebRTC negotiation."
       },
       "VoiceAgentAvatarOutputProtocol": {
         "anyOf": [
@@ -7172,12 +6582,7 @@
             ]
           }
         ],
-        "description": "The transport used to deliver the avatar video stream.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The transport used to deliver the avatar video stream."
       },
       "VoiceAgentAvatarScene": {
         "type": "object",
@@ -7231,12 +6636,7 @@
             "default": 1
           }
         },
-        "description": "Avatar placement and motion settings.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Avatar placement and motion settings."
       },
       "VoiceAgentAvatarType": {
         "anyOf": [
@@ -7251,12 +6651,7 @@
             ]
           }
         ],
-        "description": "The avatar type.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The avatar type."
       },
       "VoiceAgentAvatarVideoBackground": {
         "type": "object",
@@ -7269,12 +6664,7 @@
             "type": "string"
           }
         },
-        "description": "The avatar video background.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The avatar video background."
       },
       "VoiceAgentAvatarVideoCrop": {
         "type": "object",
@@ -7302,12 +6692,7 @@
             "maxItems": 2
           }
         },
-        "description": "The rectangular crop applied to avatar video.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The rectangular crop applied to avatar video."
       },
       "VoiceAgentAvatarVideoParams": {
         "type": "object",
@@ -7335,12 +6720,7 @@
             "default": 10
           }
         },
-        "description": "Avatar video encoder and presentation settings.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Avatar video encoder and presentation settings."
       },
       "VoiceAgentAvatarVideoResolution": {
         "type": "object",
@@ -7360,12 +6740,7 @@
             "minimum": 1
           }
         },
-        "description": "The avatar video resolution.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The avatar video resolution."
       },
       "VoiceAgentAzureSemanticVadEnTurnDetection": {
         "type": "object",
@@ -7434,12 +6809,7 @@
             "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
           }
         ],
-        "description": "English-optimized Azure semantic voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "English-optimized Azure semantic voice activity detection."
       },
       "VoiceAgentAzureSemanticVadMultilingualTurnDetection": {
         "type": "object",
@@ -7515,12 +6885,7 @@
             "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
           }
         ],
-        "description": "Multilingual Azure semantic voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Multilingual Azure semantic voice activity detection."
       },
       "VoiceAgentAzureSemanticVadTurnDetection": {
         "type": "object",
@@ -7596,12 +6961,7 @@
             "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
           }
         ],
-        "description": "Azure semantic voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Azure semantic voice activity detection."
       },
       "VoiceAgentClientEvent": {
         "oneOf": [
@@ -7646,11 +7006,6 @@
           }
         ],
         "description": "A stable v1 message sent by a client over a voice-agent WebSocket.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        },
         "x-foundry-event-direction": "client"
       },
       "VoiceAgentClientEventRtcCallSdpCreate": {
@@ -7685,12 +7040,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
-        "description": "The `rtc.call.sdp.create` client event: begins WebRTC signaling with an SDP offer.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `rtc.call.sdp.create` client event: begins WebRTC signaling with an SDP offer."
       },
       "VoiceAgentClientEventSessionAvatarConnect": {
         "type": "object",
@@ -7720,12 +7070,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
-        "description": "The `session.avatar.connect` client event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `session.avatar.connect` client event."
       },
       "VoiceAgentClientEventSessionUpdate": {
         "type": "object",
@@ -7752,12 +7097,7 @@
             "description": "The voice-agent session settings to update."
           }
         },
-        "description": "The `session.update` client event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `session.update` client event."
       },
       "VoiceAgentCollectDtmfSystemTool": {
         "type": "object",
@@ -7778,12 +7118,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Collects keypad digits on the current call.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Collects keypad digits on the current call."
       },
       "VoiceAgentCollectSmsSystemTool": {
         "type": "object",
@@ -7804,12 +7139,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Collects one complete SMS from an explicitly selected sender.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Collects one complete SMS from an explicitly selected sender."
       },
       "VoiceAgentDigitRecognitionSystemTool": {
         "type": "object",
@@ -7830,12 +7160,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Retrieves the unchanged transcript of the last user audio turn.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Retrieves the unchanged transcript of the last user audio turn."
       },
       "VoiceAgentEchoCancellation": {
         "type": "object",
@@ -7864,12 +7189,7 @@
             "default": 1
           }
         },
-        "description": "Server-side echo cancellation settings for input audio.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Server-side echo cancellation settings for input audio."
       },
       "VoiceAgentEchoCancellationReferenceSource": {
         "type": "string",
@@ -7877,12 +7197,7 @@
           "server",
           "client"
         ],
-        "description": "The source of reference audio used for echo cancellation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The source of reference audio used for echo cancellation."
       },
       "VoiceAgentEndConversationSystemTool": {
         "type": "object",
@@ -7903,12 +7218,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "A service-managed control that ends the active conversation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A service-managed control that ends the active conversation."
       },
       "VoiceAgentEndOfUtteranceDetection": {
         "type": "object",
@@ -7929,12 +7239,7 @@
             "description": "The detection timeout in milliseconds."
           }
         },
-        "description": "Semantic end-of-utterance detection configuration.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Semantic end-of-utterance detection configuration."
       },
       "VoiceAgentEndOfUtteranceDetectionModel": {
         "anyOf": [
@@ -7951,12 +7256,7 @@
             ]
           }
         ],
-        "description": "The semantic end-of-utterance detection model.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The semantic end-of-utterance detection model."
       },
       "VoiceAgentEndOfUtteranceThresholdLevel": {
         "anyOf": [
@@ -7973,12 +7273,7 @@
             ]
           }
         ],
-        "description": "The sensitivity threshold for semantic end-of-utterance detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The sensitivity threshold for semantic end-of-utterance detection."
       },
       "VoiceAgentFunctionTool": {
         "type": "object",
@@ -8012,12 +7307,7 @@
             "$ref": "#/components/schemas/VoiceAgentTool"
           }
         ],
-        "description": "A native function tool executed by the client.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A native function tool executed by the client."
       },
       "VoiceAgentGreetingConfig": {
         "type": "object",
@@ -8037,12 +7327,7 @@
             "llm_generated": "#/components/schemas/VoiceAgentLlmGeneratedGreetingConfig"
           }
         },
-        "description": "Session-start greeting configuration for a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Session-start greeting configuration for a voice agent."
       },
       "VoiceAgentHandoffAbortReason": {
         "type": "string",
@@ -8262,12 +7547,7 @@
           "sms",
           "dtmf"
         ],
-        "description": "The receiver used by an input collection. Voice collection is not supported.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The receiver used by an input collection. Voice collection is not supported."
       },
       "VoiceAgentInputCollectionStatus": {
         "anyOf": [
@@ -8297,12 +7577,7 @@
             ]
           }
         ],
-        "description": "Collection lifecycle and value-free telephony-operation outcomes. Additional outcomes may be introduced over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Collection lifecycle and value-free telephony-operation outcomes. Additional outcomes may be introduced over time."
       },
       "VoiceAgentInputTranscription": {
         "type": "object",
@@ -8367,12 +7642,7 @@
             "description": "Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech\n(`azure-speech` and `azure-speech-streaming`), including Custom Speech.\nSet this property before the session starts. If omitted, the transcription provider's default applies.\nYou cannot change the mode during a session.\nFiltering affects transcript events and the text sent to cascaded models. It does not change input\naudio, voice activity detection, or assistant speech; audio-native models still receive the original\naudio. Mandatory service masking policies apply even when you select `unfiltered`."
           }
         },
-        "description": "Settings for transcribing input audio, including the transcription model, Custom Speech deployments,\nand phrase hints.\nWhen `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model\nconversations only (not realtime speech-to-speech models), requires a nonempty `language` such as\n`en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and\n`profanity_filter`.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Settings for transcribing input audio, including the transcription model, Custom Speech deployments,\nand phrase hints.\nWhen `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model\nconversations only (not realtime speech-to-speech models), requires a nonempty `language` such as\n`en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and\n`profanity_filter`."
       },
       "VoiceAgentInputTranscriptionModel": {
         "anyOf": [
@@ -8395,12 +7665,7 @@
             ]
           }
         ],
-        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\n`azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.\nAdditional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\n`azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.\nAdditional values may be added over time."
       },
       "VoiceAgentInterimResponseConfig": {
         "type": "object",
@@ -8436,12 +7701,7 @@
             "llm_interim_response": "#/components/schemas/VoiceAgentLlmInterimResponseConfig"
           }
         },
-        "description": "Fields shared by interim-response configurations.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Fields shared by interim-response configurations."
       },
       "VoiceAgentInterimResponseTrigger": {
         "anyOf": [
@@ -8456,12 +7716,7 @@
             ]
           }
         ],
-        "description": "A condition that may trigger an interim response.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A condition that may trigger an interim response."
       },
       "VoiceAgentLanguageDetectionSystemTool": {
         "type": "object",
@@ -8482,12 +7737,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Switches supported conversation language settings.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Switches supported conversation language settings."
       },
       "VoiceAgentLlmGeneratedGreetingConfig": {
         "type": "object",
@@ -8518,12 +7768,7 @@
             "$ref": "#/components/schemas/VoiceAgentGreetingConfig"
           }
         ],
-        "description": "A greeting authored by the session model from a scoped opening-turn prompt.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A greeting authored by the session model from a scoped opening-turn prompt."
       },
       "VoiceAgentLlmInterimResponseConfig": {
         "type": "object",
@@ -8558,12 +7803,7 @@
             "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
           }
         ],
-        "description": "An interim response generated by a language model.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "An interim response generated by a language model."
       },
       "VoiceAgentMaxOutputTokens": {
         "anyOf": [
@@ -8578,12 +7818,7 @@
             ]
           }
         ],
-        "description": "The maximum output-token count or the literal `inf`.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The maximum output-token count or the literal `inf`."
       },
       "VoiceAgentMcpTool": {
         "type": "object",
@@ -8702,12 +7937,7 @@
             "$ref": "#/components/schemas/VoiceAgentTool"
           }
         ],
-        "description": "An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported."
       },
       "VoiceAgentNoiseReduction": {
         "type": "object",
@@ -8720,12 +7950,7 @@
             "description": "The noise reduction mode. `azure_deep_noise_suppression_headset` provides\nheadset-optimized noise suppression for local voice activity detection, optimized for\nlow-sample-rate audio including 8 kHz telephony audio without changing recognition audio (not\nrestricted to headset devices). `azure_personal_noise_suppression` starts with headset\nsuppression for local voice activity detection and personalizes detection after automatic speaker\nenrollment while keeping recognition audio unchanged and keeping headset suppression active when\npersonalization is unavailable."
           }
         },
-        "description": "Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and\n`azure_personal_noise_suppression` are modes for local voice activity detection that\nenhance detection audio without changing the audio used for recognition.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and\n`azure_personal_noise_suppression` are modes for local voice activity detection that\nenhance detection audio without changing the audio used for recognition."
       },
       "VoiceAgentNoiseReductionType": {
         "anyOf": [
@@ -8743,22 +7968,12 @@
             ]
           }
         ],
-        "description": "The input audio noise reduction mode.\n- `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.\n- `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The input audio noise reduction mode.\n- `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.\n- `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable."
       },
       "VoiceAgentOutputReference": {
         "type": "string",
         "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
-        "description": "Bare session variable name, such as `verification_code`, without a namespace or braces. Tool arguments reference it with `{{name}}`.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Bare session variable name, such as `verification_code`, without a namespace or braces. Tool arguments reference it with `{{name}}`."
       },
       "VoiceAgentProfanityFilterMode": {
         "anyOf": [
@@ -8774,12 +7989,7 @@
             ]
           }
         ],
-        "description": "The supported input-transcript profanity filtering modes.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The supported input-transcript profanity filtering modes."
       },
       "VoiceAgentRealtimeResponse": {
         "type": "object",
@@ -8866,12 +8076,7 @@
             "description": "The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`."
           }
         },
-        "description": "A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events."
       },
       "VoiceAgentResponseCreateParams": {
         "type": "object",
@@ -9003,12 +8208,7 @@
             "description": "Interim-response settings for this response."
           }
         },
-        "description": "Parameters accepted by a voice-agent `response.create` event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Parameters accepted by a voice-agent `response.create` event."
       },
       "VoiceAgentRtcCallErrorDetails": {
         "type": "object",
@@ -9030,12 +8230,7 @@
             "description": "A human-readable error message."
           }
         },
-        "description": "Details of a WebRTC signaling error.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Details of a WebRTC signaling error."
       },
       "VoiceAgentSemanticVadTurnDetection": {
         "type": "object",
@@ -9073,12 +8268,7 @@
             "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
           }
         ],
-        "description": "OpenAI semantic VAD turn-detection settings.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "OpenAI semantic VAD turn-detection settings."
       },
       "VoiceAgentSendDtmfSystemTool": {
         "type": "object",
@@ -9099,12 +8289,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Sends literal or templated keypad digits.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Sends literal or templated keypad digits."
       },
       "VoiceAgentSendSmsSystemTool": {
         "type": "object",
@@ -9125,12 +8310,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Sends a text message from the Agent's SMS-capable number.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Sends a text message from the Agent's SMS-capable number."
       },
       "VoiceAgentServerEvent": {
         "oneOf": [
@@ -9329,7 +8509,7 @@
         ],
         "description": "A stable v1 message sent by the service over a voice-agent WebSocket.",
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "VoiceAgents=V1Preview"
           ]
         },
@@ -9388,12 +8568,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "Reports collection or telephony outcomes for a model call.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Reports collection or telephony outcomes for a model call."
       },
       "VoiceAgentServerEventResponseAnimationBlendshapesDelta": {
         "type": "object",
@@ -9453,12 +8628,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `response.animation_blendshapes.delta` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `response.animation_blendshapes.delta` server event."
       },
       "VoiceAgentServerEventResponseAnimationBlendshapesDone": {
         "type": "object",
@@ -9495,12 +8665,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `response.animation_blendshapes.done` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `response.animation_blendshapes.done` server event."
       },
       "VoiceAgentServerEventResponseAnimationVisemeDelta": {
         "type": "object",
@@ -9551,12 +8716,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `response.animation_viseme.delta` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `response.animation_viseme.delta` server event."
       },
       "VoiceAgentServerEventResponseAnimationVisemeDone": {
         "type": "object",
@@ -9598,12 +8758,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `response.animation_viseme.done` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `response.animation_viseme.done` server event."
       },
       "VoiceAgentServerEventResponseAudioTimestampDelta": {
         "type": "object",
@@ -9664,12 +8819,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `response.audio_timestamp.delta` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `response.audio_timestamp.delta` server event."
       },
       "VoiceAgentServerEventResponseAudioTimestampDone": {
         "type": "object",
@@ -9711,12 +8861,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `response.audio_timestamp.done` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `response.audio_timestamp.done` server event."
       },
       "VoiceAgentServerEventResponseVideoDelta": {
         "type": "object",
@@ -9754,12 +8899,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `response.video.delta` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `response.video.delta` server event."
       },
       "VoiceAgentServerEventRtcCallError": {
         "type": "object",
@@ -9797,12 +8937,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `rtc.call.error` server event: a WebRTC signaling failure.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `rtc.call.error` server event: a WebRTC signaling failure."
       },
       "VoiceAgentServerEventRtcCallSdpCreated": {
         "type": "object",
@@ -9838,12 +8973,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `rtc.call.sdp.created` server event: the SDP answer that completes WebRTC negotiation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `rtc.call.sdp.created` server event: the SDP answer that completes WebRTC negotiation."
       },
       "VoiceAgentServerEventSessionAvatarConnecting": {
         "type": "object",
@@ -9872,12 +9002,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `session.avatar.connecting` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `session.avatar.connecting` server event."
       },
       "VoiceAgentServerEventSessionAvatarSwitchToIdle": {
         "type": "object",
@@ -9904,12 +9029,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `session.avatar.switch_to_idle` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `session.avatar.switch_to_idle` server event."
       },
       "VoiceAgentServerEventSessionAvatarSwitchToSpeaking": {
         "type": "object",
@@ -9936,12 +9056,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `session.avatar.switch_to_speaking` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `session.avatar.switch_to_speaking` server event."
       },
       "VoiceAgentServerEventSessionHandoffAborted": {
         "type": "object",
@@ -10232,12 +9347,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `session.subagent.aborted` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `session.subagent.aborted` server event."
       },
       "VoiceAgentServerEventSessionSubagentCompleted": {
         "type": "object",
@@ -10278,12 +9388,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `session.subagent.completed` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `session.subagent.completed` server event."
       },
       "VoiceAgentServerEventSessionSubagentStarted": {
         "type": "object",
@@ -10324,12 +9429,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `session.subagent.started` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `session.subagent.started` server event."
       },
       "VoiceAgentServerEventSystemToolArgumentsDelta": {
         "type": "object",
@@ -10385,12 +9485,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "An incremental model-argument fragment for a service-managed system tool.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "An incremental model-argument fragment for a service-managed system tool."
       },
       "VoiceAgentServerEventSystemToolArgumentsDone": {
         "type": "object",
@@ -10447,12 +9542,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The completed intent arguments for a system tool, not provider success or a request for a customer function result.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The completed intent arguments for a system tool, not provider success or a request for a customer function result."
       },
       "VoiceAgentServerEventTypeExtension": {
         "type": "string",
@@ -10481,7 +9571,7 @@
           "session.handoff.aborted"
         ],
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "VoiceAgents=V1Preview"
           ]
         }
@@ -10512,12 +9602,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "The `warning` server event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The `warning` server event."
       },
       "VoiceAgentServerEventWarningDetails": {
         "type": "object",
@@ -10535,12 +9620,7 @@
             "type": "string"
           }
         },
-        "description": "Details of a non-fatal warning.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Details of a non-fatal warning."
       },
       "VoiceAgentServerVadTurnDetection": {
         "type": "object",
@@ -10602,12 +9682,7 @@
             "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
           }
         ],
-        "description": "Server-side voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Server-side voice activity detection."
       },
       "VoiceAgentSessionAvatarConfig": {
         "type": "object",
@@ -10631,12 +9706,7 @@
             "$ref": "#/components/schemas/VoiceAgentAvatarConfig"
           }
         ],
-        "description": "Avatar settings accepted by the stable voice-agent WebSocket contract.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Avatar settings accepted by the stable voice-agent WebSocket contract."
       },
       "VoiceAgentSessionIncludeOption": {
         "type": "string",
@@ -10645,21 +9715,11 @@
           "item.input_audio_transcription.phrases",
           "file_search_call.results"
         ],
-        "description": "Additional fields that a voice-agent session may include in service outputs.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Additional fields that a voice-agent session may include in service outputs."
       },
       "VoiceAgentSessionResponse": {
         "$ref": "#/components/schemas/VoiceAgentSessionResponseConfig",
-        "description": "The effective session configuration returned in voice-agent session lifecycle events.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The effective session configuration returned in voice-agent session lifecycle events."
       },
       "VoiceAgentSessionResponseConfig": {
         "type": "object",
@@ -10790,21 +9850,11 @@
             "description": "The session expiration time as a Unix timestamp in seconds."
           }
         },
-        "description": "The effective stable realtime session settings returned by the voice-agent service.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The effective stable realtime session settings returned by the voice-agent service."
       },
       "VoiceAgentSessionUpdate": {
         "$ref": "#/components/schemas/VoiceAgentSessionUpdateConfig",
-        "description": "The session configuration accepted by a voice-agent session update event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The session configuration accepted by a voice-agent session update event."
       },
       "VoiceAgentSessionUpdateConfig": {
         "type": "object",
@@ -10895,12 +9945,7 @@
             "description": "A proactive assistant greeting started after session configuration."
           }
         },
-        "description": "The stable realtime session settings accepted in a `session.update` client event.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The stable realtime session settings accepted in a `session.update` client event."
       },
       "VoiceAgentStaticInterimResponseConfig": {
         "type": "object",
@@ -10927,12 +9972,7 @@
             "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
           }
         ],
-        "description": "A static interim response selected from configured text.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A static interim response selected from configured text."
       },
       "VoiceAgentSubagentAbortReason": {
         "anyOf": [
@@ -10951,12 +9991,7 @@
             ]
           }
         ],
-        "description": "The reason a subagent consultation was aborted.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The reason a subagent consultation was aborted."
       },
       "VoiceAgentSystemTool": {
         "type": "object",
@@ -11006,12 +10041,7 @@
             "$ref": "#/components/schemas/VoiceAgentTool"
           }
         ],
-        "description": "A service-managed control that acts on the active voice session without customer code or external authentication.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A service-managed control that acts on the active voice session without customer code or external authentication."
       },
       "VoiceAgentSystemToolItem": {
         "type": "object",
@@ -11073,12 +10103,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
           }
         ],
-        "description": "Service-generated system-tool intent, not a provider result. Clients cannot create it or complete it with `function_call_output`.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Service-generated system-tool intent, not a provider result. Clients cannot create it or complete it with `function_call_output`."
       },
       "VoiceAgentSystemToolItemStatus": {
         "anyOf": [
@@ -11094,12 +10119,7 @@
             ]
           }
         ],
-        "description": "The generation status of a system-tool item. It does not indicate provider success.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The generation status of a system-tool item. It does not indicate provider success."
       },
       "VoiceAgentSystemToolName": {
         "anyOf": [
@@ -11120,12 +10140,7 @@
             ]
           }
         ],
-        "description": "A service-managed voice-session control action. Known values are stable; additional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A service-managed voice-session control action. Known values are stable; additional values may be added over time."
       },
       "VoiceAgentTemplateGreetingConfig": {
         "type": "object",
@@ -11151,12 +10166,7 @@
             "$ref": "#/components/schemas/VoiceAgentGreetingConfig"
           }
         ],
-        "description": "A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation."
       },
       "VoiceAgentTool": {
         "type": "object",
@@ -11178,12 +10188,7 @@
             "toolbox": "#/components/schemas/VoiceAgentToolboxTool"
           }
         },
-        "description": "A tool usable by a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A tool usable by a voice agent."
       },
       "VoiceAgentToolboxTool": {
         "type": "object",
@@ -11219,12 +10224,7 @@
             "$ref": "#/components/schemas/VoiceAgentTool"
           }
         ],
-        "description": "A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint."
       },
       "VoiceAgentToolChoice": {
         "oneOf": [
@@ -11243,12 +10243,7 @@
             "$ref": "#/components/schemas/OpenAI.ToolChoiceMCP"
           }
         ],
-        "description": "Tool-selection behavior for a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Tool-selection behavior for a voice agent."
       },
       "VoiceAgentToolResponseScheduling": {
         "anyOf": [
@@ -11265,12 +10260,7 @@
             ]
           }
         ],
-        "description": "When a tool invocation creates a follow-up response. Additional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "When a tool invocation creates a follow-up response. Additional values may be added over time."
       },
       "VoiceAgentTranscriptionPhrase": {
         "type": "object",
@@ -11330,12 +10320,7 @@
             "description": "The transcription confidence score."
           }
         },
-        "description": "A transcribed phrase with timing information.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A transcribed phrase with timing information."
       },
       "VoiceAgentTranscriptionWord": {
         "type": "object",
@@ -11358,12 +10343,7 @@
             "description": "The word duration in milliseconds."
           }
         },
-        "description": "A time-stamped word in an input-audio transcription.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A time-stamped word in an input-audio transcription."
       },
       "VoiceAgentTransferDestination": {
         "type": "object",
@@ -11382,12 +10362,7 @@
             "description": "The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities."
           }
         },
-        "description": "The canonical system-tool transfer destination.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The canonical system-tool transfer destination."
       },
       "VoiceAgentTransferDestinationType": {
         "type": "string",
@@ -11398,7 +10373,7 @@
         ],
         "description": "The supported address formats for a system-tool transfer destination.",
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "VoiceAgents=V1Preview"
           ]
         }
@@ -11422,12 +10397,7 @@
             "default": 20
           }
         },
-        "description": "The configured transfer routing policy. The model selects a target name, not destinations or routing settings.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The configured transfer routing policy. The model selects a target name, not destinations or routing settings."
       },
       "VoiceAgentTransferStrategy": {
         "anyOf": [
@@ -11443,12 +10413,7 @@
             ]
           }
         ],
-        "description": "Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider."
       },
       "VoiceAgentTransferSystemTool": {
         "type": "object",
@@ -11483,12 +10448,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Requests a transfer to an explicitly configured logical target.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Requests a transfer to an explicitly configured logical target."
       },
       "VoiceAgentTransferTarget": {
         "type": "object",
@@ -11521,12 +10481,7 @@
             "description": "The trusted routing policy for this target."
           }
         },
-        "description": "A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings."
       },
       "VoiceAgentTurnDetectionConfig": {
         "type": "object",
@@ -11554,12 +10509,7 @@
             "semantic_vad": "#/components/schemas/VoiceAgentSemanticVadTurnDetection"
           }
         },
-        "description": "Turn-detection configuration for a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Turn-detection configuration for a voice agent."
       },
       "VoiceAgentTurnDetectionType": {
         "anyOf": [
@@ -11577,12 +10527,7 @@
             ]
           }
         ],
-        "description": "The turn-detection strategy. Additional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The turn-detection strategy. Additional values may be added over time."
       },
       "VoiceAgentVoiceConfig": {
         "type": "object",
@@ -11652,12 +10597,7 @@
             "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
           }
         },
-        "description": "Voice output configuration. Inline subagents use it directly as their voice override, and the session-level\noutput audio configuration extends it.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Voice output configuration. Inline subagents use it directly as their voice override, and the session-level\noutput audio configuration extends it.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`."
       },
       "VoiceOutputModality": {
         "anyOf": [
@@ -11674,12 +10614,7 @@
             ]
           }
         ],
-        "description": "An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured."
       },
       "VoiceResponseAudio": {
         "type": "object",
@@ -11689,12 +10624,7 @@
             "description": "The audio output configuration used for the response."
           }
         },
-        "description": "Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape."
       },
       "VoiceResponseAudioOutput": {
         "type": "object",
@@ -11716,12 +10646,7 @@
             "description": "The audio format used for the response's audio output."
           }
         },
-        "description": "The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields."
       },
       "VoiceType": {
         "anyOf": [
@@ -11740,12 +10665,7 @@
             ]
           }
         ],
-        "description": "The voice implementation. Additional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        "description": "The voice implementation. Additional values may be added over time."
       }
     }
   }

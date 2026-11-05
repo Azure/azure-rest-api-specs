@@ -52,10 +52,9 @@ interface Agents {
   @summary("Generate an agent")
   @post
   @route("/agents:generate")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   @tag("Agents")
-  generateAgent is FoundryDataPlaneRequiredPreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+  generateAgent is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.draft_agents_v1_preview,
     {
       /** The kind-specific inputs for generating and creating an agent. */
       @body body: GenerateAgentRequest;
