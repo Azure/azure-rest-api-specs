@@ -68,12 +68,12 @@ interface Bots {
   get is ArmResourceRead<Bot, Error = Error>;
 
   /**
-   * Creates a Bot Service. Bot Service is a resource group wide resource type.
+   * Creates or replaces a Bot Service. Bot Service is a resource group wide resource type. This PUT operation replaces the bot configuration, so the request must include the intended identity binding, with msaAppTenantId set according to msaAppType.
    */
   create is ArmResourceCreateOrReplaceSync<Bot, Error = Error>;
 
   /**
-   * Updates a Bot Service
+   * Updates a Bot Service. Identity fields omitted from this PATCH request retain their stored values.
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
