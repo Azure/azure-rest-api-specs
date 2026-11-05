@@ -17707,12 +17707,11 @@ model NetworkVirtualApplianceLoadBalancerConfiguration {
   loadDistribution?: NetworkVirtualApplianceLoadDistribution = NetworkVirtualApplianceLoadDistribution.Default;
 
   /**
-   * The idle timeout of the load-balancing rule, in minutes. When omitted or null, the managed NVA platform default of 5 minutes is used. Values outside 4 through 100 are rejected with HTTP 400 InvalidParameter.
+   * The idle timeout of the load-balancing rule, in minutes. When omitted, the managed NVA platform default of 5 minutes is used. Values outside 4 through 100 are rejected with HTTP 400 InvalidParameter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The managed NVA API explicitly accepts null to use the platform default idle timeout."
   @minValue(4)
   @maxValue(100)
-  idleTimeoutInMinutes?: int32 | null = 5;
+  idleTimeoutInMinutes?: int32 = 5;
 }
 
 /**
