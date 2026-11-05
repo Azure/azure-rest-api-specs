@@ -210,6 +210,13 @@ op listGeoRegions is ArmProviderActionSync<
      */
     @query("customModeWorkersEnabled")
     customModeWorkersEnabled?: boolean;
+
+    /**
+     * Specify <code>true</code> to filter to only regions that support zone redundancy. If <code>false</code> or omitted, regions are not filtered by zone redundancy support.
+     */
+    @added(Versions.v2026_11_15)
+    @query("zoneRedundancyEnabled")
+    zoneRedundancyEnabled?: boolean;
   },
   Error = DefaultErrorResponse
 >;
