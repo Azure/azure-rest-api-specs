@@ -13,6 +13,12 @@ namespace NetworkSecurityManagementClient {
 }
 
 @@clientName(
+  NetworkSecurityManagementClient,
+  "NetworkSecurityMgmtClient",
+  "python"
+);
+
+@@clientName(
   NeuroShield.Management.NeuroShieldFindings.listByNeuroShield,
   "GetNeuroShieldFindings",
   "csharp"
@@ -22,7 +28,22 @@ namespace NetworkSecurityManagementClient {
   "GetNeuroShieldMitigations",
   "csharp"
 );
+@@clientName(
+  NeuroShield.Management.NeuroShieldOperationStatuses.get,
+  "GetNeuroShieldOperationStatus",
+  "csharp"
+);
 
+@@alternateType(
+  NeuroShield.Management.NeuroShieldInventoryUploadRequestMetadata.requestId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  NeuroShield.Management.NeuroShieldInventoryUploadRequestResult.requestId,
+  Azure.Core.uuid,
+  "csharp"
+);
 @@alternateType(
   NeuroShield.Management.NeuroShieldProperties.resourceGuid,
   Azure.Core.uuid,
