@@ -4220,6 +4220,34 @@ model KeyCreationTime {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key2?: utcDateTime;
+
+  /**
+   * The creation time of the first Kerberos key, in UTC.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  kerb1?: utcDateTime;
+
+  /**
+   * The creation time of the second Kerberos key, in UTC.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  kerb2?: utcDateTime;
+
+  /**
+   * The creation time of the first AES-256 Kerberos keytab, in UTC.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  keytab1?: utcDateTime;
+
+  /**
+   * The creation time of the second AES-256 Kerberos keytab, in UTC.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  keytab2?: utcDateTime;
 }
 
 /**
