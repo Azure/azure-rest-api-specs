@@ -1937,7 +1937,17 @@ model AccountProperties {
   /**
    * Resource migration token.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "'migrationToken' is correctly marked as secret matching service-side security handling"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Preserve the historical migrationToken schema before November 2026; the replacement is a secret write-only property."
+  @renamedFrom(Versions.v2026_11_01, "migrationToken")
+  @removed(Versions.v2026_11_01)
+  migrationTokenLegacy?: string;
+
+  /**
+   * Resource migration token.
+   */
+  @added(Versions.v2026_11_01)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   migrationToken?: string;
 
   /**
@@ -2614,7 +2624,17 @@ model ApiProperties {
   /**
    * (QnAMaker Only) The Azure Search endpoint key of QnAMaker.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "'qnaAzureSearchEndpointKey' is correctly marked as secret matching service-side security handling"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Preserve the historical qnaAzureSearchEndpointKey schema before November 2026; the replacement is a secret write-only property."
+  @renamedFrom(Versions.v2026_11_01, "qnaAzureSearchEndpointKey")
+  @removed(Versions.v2026_11_01)
+  qnaAzureSearchEndpointKeyLegacy?: string;
+
+  /**
+   * (QnAMaker Only) The Azure Search endpoint key of QnAMaker.
+   */
+  @added(Versions.v2026_11_01)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   qnaAzureSearchEndpointKey?: string;
 
   /**
@@ -2632,6 +2652,18 @@ model ApiProperties {
    */
   @maxLength(1000)
   @pattern("^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$")
+  @renamedFrom(Versions.v2026_11_01, "eventHubConnectionString")
+  @removed(Versions.v2026_11_01)
+  eventHubConnectionStringLegacy?: string;
+
+  /**
+   * (Personalization Only) The flag to enable statistics of Bing Search.
+   */
+  @maxLength(1000)
+  @pattern("^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$")
+  @added(Versions.v2026_11_01)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   eventHubConnectionString?: string;
 
   /**
@@ -2639,6 +2671,18 @@ model ApiProperties {
    */
   @maxLength(1000)
   @pattern("^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$")
+  @renamedFrom(Versions.v2026_11_01, "storageAccountConnectionString")
+  @removed(Versions.v2026_11_01)
+  storageAccountConnectionStringLegacy?: string;
+
+  /**
+   * (Personalization Only) The storage account connection string.
+   */
+  @maxLength(1000)
+  @pattern("^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$")
+  @added(Versions.v2026_11_01)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountConnectionString?: string;
 
   /**

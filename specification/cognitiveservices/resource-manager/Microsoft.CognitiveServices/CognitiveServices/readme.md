@@ -89,9 +89,15 @@ suppressions:
     reason: This read projection preserves the existing connection metadata string dictionary, whose keys are caller-defined and must remain extensible.
     where:
       - $.definitions.ConnectionPropertiesV2Read.properties.metadata
-  - code: PutRequestResponseSchemeArm
-    reason: CustomKeys credentials are accepted in PUT/PATCH inputs but deliberately omitted from ordinary resource responses. The request is a superset of the response, and both connection scopes provide PATCH for updates.
+  - code: AvoidAdditionalProperties
+    reason: These account read projections preserve the existing extensible endpoint dictionary and API-kind property bag while excluding the named credential fields.
     where:
+      - $.definitions.AccountPropertiesRead.properties.endpoints
+      - $.definitions.ApiPropertiesRead
+  - code: PutRequestResponseSchemeArm
+    reason: Account and connection credentials are accepted in PUT/PATCH inputs but deliberately omitted from ordinary resource responses. Nonsensitive metadata is preserved, the request is a superset of the response, and each resource provides PATCH for updates.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
   - code: LroLocationHeader

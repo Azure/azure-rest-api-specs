@@ -67,10 +67,7 @@ model ConnectionPropertiesV2Read {
 /** Personal access token connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model PatAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
-  ...PickProperties<
-    PATAuthTypeConnectionProperties,
-    "credentials" | "authType"
-  >;
+  ...PickProperties<PATAuthTypeConnectionProperties, "authType">;
 }
 
 /** Managed identity connection properties returned by ordinary resource operations. */
@@ -87,11 +84,18 @@ model ManagedIdentityAuthTypeConnectionPropertiesRead
 @added(Versions.v2026_11_01)
 model UsernamePasswordAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...PickProperties<
-    UsernamePasswordAuthTypeConnectionProperties,
-    "credentials" | "authType"
-  >;
+  ...PickProperties<UsernamePasswordAuthTypeConnectionProperties, "authType">;
+
+  /** Nonsensitive authentication metadata. */
+  credentials?: ConnectionUsernamePasswordRead;
 }
+
+/** Username metadata returned without the password or security token. */
+@added(Versions.v2026_11_01)
+model ConnectionUsernamePasswordRead is PickProperties<
+  ConnectionUsernamePassword,
+  "username"
+>;
 
 /** Unauthenticated connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
@@ -102,46 +106,54 @@ model NoneAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
 /** Shared access signature connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model SasAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
-  ...PickProperties<
-    SASAuthTypeConnectionProperties,
-    "credentials" | "authType"
-  >;
+  ...PickProperties<SASAuthTypeConnectionProperties, "authType">;
 }
 
 /** Account key connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model AccountKeyAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...PickProperties<
-    AccountKeyAuthTypeConnectionProperties,
-    "credentials" | "authType"
-  >;
+  ...PickProperties<AccountKeyAuthTypeConnectionProperties, "authType">;
 }
 
 /** Service principal connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model ServicePrincipalAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...PickProperties<
-    ServicePrincipalAuthTypeConnectionProperties,
-    "credentials" | "authType"
-  >;
+  ...PickProperties<ServicePrincipalAuthTypeConnectionProperties, "authType">;
+
+  /** Nonsensitive authentication metadata. */
+  credentials?: ConnectionServicePrincipalRead;
 }
+
+/** Service principal identifiers returned without the client secret. */
+@added(Versions.v2026_11_01)
+model ConnectionServicePrincipalRead is PickProperties<
+  ConnectionServicePrincipal,
+  "clientId" | "tenantId"
+>;
 
 /** Access key connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model AccessKeyAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...PickProperties<
-    AccessKeyAuthTypeConnectionProperties,
-    "credentials" | "authType"
-  >;
+  ...PickProperties<AccessKeyAuthTypeConnectionProperties, "authType">;
+
+  /** Nonsensitive authentication metadata. */
+  credentials?: ConnectionAccessKeyRead;
 }
+
+/** Access key identifier returned without the secret access key. */
+@added(Versions.v2026_11_01)
+model ConnectionAccessKeyRead is PickProperties<
+  ConnectionAccessKey,
+  "accessKeyId"
+>;
 
 /** API key connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
 model ApiKeyAuthConnectionPropertiesRead extends ConnectionPropertiesV2Read {
-  ...PickProperties<ApiKeyAuthConnectionProperties, "credentials" | "authType">;
+  ...PickProperties<ApiKeyAuthConnectionProperties, "authType">;
 }
 
 /** Custom-key connection properties returned without stored credentials. */
@@ -155,11 +167,18 @@ model CustomKeysConnectionPropertiesRead extends ConnectionPropertiesV2Read {
 @added(Versions.v2026_11_01)
 model Oauth2AuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
-  ...PickProperties<
-    OAuth2AuthTypeConnectionProperties,
-    "credentials" | "authType"
-  >;
+  ...PickProperties<OAuth2AuthTypeConnectionProperties, "authType">;
+
+  /** Nonsensitive authentication metadata. */
+  credentials?: ConnectionOauth2Read;
 }
+
+/** OAuth identifiers and endpoint metadata returned without credential values. */
+@added(Versions.v2026_11_01)
+model ConnectionOauth2Read is PickProperties<
+  ConnectionOAuth2,
+  "authUrl" | "clientId" | "tenantId" | "username"
+>;
 
 /** Microsoft Entra connection properties returned by ordinary resource operations. */
 @added(Versions.v2026_11_01)
