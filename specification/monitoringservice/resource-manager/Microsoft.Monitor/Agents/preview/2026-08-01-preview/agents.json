@@ -170,7 +170,7 @@
         "tags": [
           "ObservabilityAgents"
         ],
-        "description": "Returns the specified observability agent.",
+        "description": "Returns the specified observability agent. For a May resource, projects enabled as autonomousOperationsEnabled and enabled child monitored resources as embedded entries without changing stored data. Legacy operations are not converted into investigation policies.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -215,7 +215,7 @@
         "tags": [
           "ObservabilityAgents"
         ],
-        "description": "Creates or updates an observability agent.",
+        "description": "Creates or replaces an observability agent. A PUT can migrate a May resource to the August model using the supplied complete configuration; omitted legacy operations are not carried forward. The migration is one-way, and later May PUT or PATCH requests return 409 ObservabilityAgentResourceModelConflict.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -278,7 +278,7 @@
         "tags": [
           "ObservabilityAgents"
         ],
-        "description": "Updates part of an observability agent.",
+        "description": "Updates part of an August observability agent. PATCH does not migrate a May resource and returns 409 ObservabilityAgentResourceModelConflict for that resource; use an August PUT to migrate it.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -327,6 +327,9 @@
           },
           "ObservabilityAgents_Update_ClearConfiguration": {
             "$ref": "./examples/ObservabilityAgents_Update_ClearConfiguration.json"
+          },
+          "ObservabilityAgents_Update_ClearNestedConfiguration": {
+            "$ref": "./examples/ObservabilityAgents_Update_ClearNestedConfiguration.json"
           },
           "ObservabilityAgents_Update_ClearUsageCap": {
             "$ref": "./examples/ObservabilityAgents_Update_ClearUsageCap.json"
@@ -417,18 +420,33 @@
     },
     "ObservabilityAgentInvestigationConfiguration": {
       "type": "object",
-      "description": "Configuration of agent investigations. On PATCH, omitted members are unchanged and null clears the specified member.",
+      "description": "Configuration of agent investigations. Unset members are omitted from responses.",
       "properties": {
         "instructions": {
           "type": "string",
           "description": "Instructions that guide investigations.",
+          "maxLength": 8192
+        },
+        "policies": {
+          "$ref": "#/definitions/ObservabilityAgentInvestigationPolicies",
+          "description": "Policies that select alerts for investigation. At least one policy is required for writes when autonomous operations are enabled.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ObservabilityAgentInvestigationConfigurationUpdate": {
+      "type": "object",
+      "description": "Investigation configuration changes. Omitted members are unchanged and null clears the specified member.",
+      "properties": {
+        "instructions": {
+          "type": "string",
+          "description": "Instructions that guide investigations. Null clears the instructions.",
           "maxLength": 8192,
           "x-nullable": true
         },
         "policies": {
           "$ref": "#/definitions/ObservabilityAgentInvestigationPolicies",
-          "description": "Policies that select alerts for investigation. At least one policy is required when autonomous operations are enabled. On PATCH, a supplied array replaces the existing array.",
-          "maxItems": 10,
+          "description": "Policies that select alerts for investigation. A supplied array replaces the existing array; null clears it. At least one policy must remain when autonomous operations are enabled.",
           "x-nullable": true
         }
       }
@@ -436,6 +454,7 @@
     "ObservabilityAgentInvestigationPolicies": {
       "type": "array",
       "description": "Investigation policies without stable item identifiers.",
+      "maxItems": 10,
       "items": {
         "$ref": "#/definitions/ObservabilityAgentInvestigationPolicy"
       }
@@ -502,6 +521,7 @@
     "ObservabilityAgentMonitoredResources": {
       "type": "array",
       "description": "Embedded monitored resources identified by their logical names.",
+      "maxItems": 10,
       "items": {
         "$ref": "#/definitions/ObservabilityAgentMonitoredResource"
       }
@@ -555,7 +575,7 @@
         },
         "autonomousOperationsEnabled": {
           "type": "boolean",
-          "description": "Whether the agent can run operations autonomously. When true, at least one investigation policy must be configured. A monitoring account is always required."
+          "description": "Whether the agent can run operations autonomously. When true, at least one investigation policy must be configured for writes. A monitoring account is always required for writes. When reading a May resource, this is its enabled value, or true if enabled was not stored; the read does not migrate the resource or create investigation policies."
         },
         "instructions": {
           "type": "string",
@@ -571,12 +591,8 @@
           "description": "Usage cap in Azure Agent Credits."
         },
         "monitoredResources": {
-          "type": "array",
+          "$ref": "#/definitions/ObservabilityAgentMonitoredResources",
           "description": "Resources monitored by this agent. These entries are embedded configuration, not child ARM resources.",
-          "maxItems": 10,
-          "items": {
-            "$ref": "#/definitions/ObservabilityAgentMonitoredResource"
-          },
           "x-ms-identifiers": [
             "name"
           ]
@@ -621,19 +637,18 @@
           "x-nullable": true
         },
         "investigation": {
-          "$ref": "#/definitions/ObservabilityAgentInvestigationConfiguration",
+          "$ref": "#/definitions/ObservabilityAgentInvestigationConfigurationUpdate",
           "description": "Configuration of agent investigations. Null clears the configuration; supplied members are merged with the existing configuration.",
           "x-nullable": true
         },
         "usageCap": {
-          "$ref": "#/definitions/ObservabilityAgentUsageCapConfiguration",
+          "$ref": "#/definitions/ObservabilityAgentUsageCapConfigurationUpdate",
           "description": "Usage cap configuration. Null clears the configuration; supplied members are merged with the existing configuration.",
           "x-nullable": true
         },
         "monitoredResources": {
           "$ref": "#/definitions/ObservabilityAgentMonitoredResources",
           "description": "Resources monitored by this agent. A supplied array replaces the existing array; null or an empty array clears the list.",
-          "maxItems": 10,
           "x-nullable": true
         }
       }
@@ -691,7 +706,20 @@
         "amountAAC": {
           "type": "number",
           "format": "double",
-          "description": "Nonnegative cap in Azure Agent Credits (AAC). On PATCH, null clears the cap and omission leaves it unchanged.",
+          "description": "Nonnegative cap in Azure Agent Credits (AAC). Omitted when no cap is configured.",
+          "minimum": 0,
+          "x-ms-client-name": "amountAac"
+        }
+      }
+    },
+    "ObservabilityAgentUsageCapConfigurationUpdate": {
+      "type": "object",
+      "description": "Usage cap configuration changes for an observability agent.",
+      "properties": {
+        "amountAAC": {
+          "type": "number",
+          "format": "double",
+          "description": "Nonnegative cap in Azure Agent Credits (AAC). Null clears the cap and omission leaves it unchanged.",
           "minimum": 0,
           "x-nullable": true,
           "x-ms-client-name": "amountAac"

@@ -27,7 +27,7 @@ namespace Microsoft.Monitor {
       }
     ]>;
 
-    /** Whether the agent can run operations autonomously. When true, at least one investigation policy must be configured. A monitoring account is always required. */
+    /** Whether the agent can run operations autonomously. When true, at least one investigation policy must be configured for writes. A monitoring account is always required for writes. When reading a May resource, this is its enabled value, or true if enabled was not stored; the read does not migrate the resource or create investigation policies. */
     autonomousOperationsEnabled: boolean;
 
     /** Instructions that guide the agent's behavior. */
@@ -41,27 +41,39 @@ namespace Microsoft.Monitor {
     usageCap?: ObservabilityAgentUsageCapConfiguration;
 
     /** Resources monitored by this agent. These entries are embedded configuration, not child ARM resources. */
-    @maxItems(10)
     @Azure.ResourceManager.identifiers(#["name"])
-    monitoredResources?: ObservabilityAgentMonitoredResource[];
+    monitoredResources?: ObservabilityAgentMonitoredResources;
   }
 
   /**
-   * Configuration of agent investigations. On PATCH, omitted members are unchanged and null clears the specified member.
+   * Configuration of agent investigations. Unset members are omitted from responses.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The deployed PATCH contract distinguishes an omitted member from null, which clears that member."
   model ObservabilityAgentInvestigationConfiguration {
     /** Instructions that guide investigations. */
     @maxLength(8192)
+    instructions?: string;
+
+    /** Policies that select alerts for investigation. At least one policy is required for writes when autonomous operations are enabled. */
+    @Azure.ResourceManager.identifiers(#[])
+    policies?: ObservabilityAgentInvestigationPolicies;
+  }
+
+  /**
+   * Investigation configuration changes. Omitted members are unchanged and null clears the specified member.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH distinguishes an omitted member from null, which clears that member; response models are non-nullable."
+  model ObservabilityAgentInvestigationConfigurationUpdate {
+    /** Instructions that guide investigations. Null clears the instructions. */
+    @maxLength(8192)
     instructions?: string | null;
 
-    /** Policies that select alerts for investigation. At least one policy is required when autonomous operations are enabled. On PATCH, a supplied array replaces the existing array. */
-    @maxItems(10)
+    /** Policies that select alerts for investigation. A supplied array replaces the existing array; null clears it. At least one policy must remain when autonomous operations are enabled. */
     policies?: ObservabilityAgentInvestigationPolicies | null;
   }
 
   /** Investigation policies without stable item identifiers. */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This is a typed array, not an empty object. The array model carries native identifiers because the decorator does not accept a nullable array property."
+  @maxItems(10)
   @Azure.ResourceManager.identifiers(#[])
   model ObservabilityAgentInvestigationPolicies
     is ObservabilityAgentInvestigationPolicy[];
@@ -100,9 +112,19 @@ namespace Microsoft.Monitor {
   /**
    * Usage cap configuration for an observability agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The deployed PATCH contract accepts null to clear the existing Azure Agent Credits cap."
   model ObservabilityAgentUsageCapConfiguration {
-    /** Nonnegative cap in Azure Agent Credits (AAC). On PATCH, null clears the cap and omission leaves it unchanged. */
+    /** Nonnegative cap in Azure Agent Credits (AAC). Omitted when no cap is configured. */
+    @minValue(0)
+    @encodedName("application/json", "amountAAC")
+    amountAac?: float64;
+  }
+
+  /**
+   * Usage cap configuration changes for an observability agent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH accepts null to clear the cap; the response omits the cleared amount."
+  model ObservabilityAgentUsageCapConfigurationUpdate {
+    /** Nonnegative cap in Azure Agent Credits (AAC). Null clears the cap and omission leaves it unchanged. */
     @minValue(0)
     @encodedName("application/json", "amountAAC")
     amountAac?: float64 | null;
@@ -145,18 +167,18 @@ namespace Microsoft.Monitor {
     instructions?: string | null;
 
     /** Configuration of agent investigations. Null clears the configuration; supplied members are merged with the existing configuration. */
-    investigation?: ObservabilityAgentInvestigationConfiguration | null;
+    investigation?: ObservabilityAgentInvestigationConfigurationUpdate | null;
 
     /** Usage cap configuration. Null clears the configuration; supplied members are merged with the existing configuration. */
-    usageCap?: ObservabilityAgentUsageCapConfiguration | null;
+    usageCap?: ObservabilityAgentUsageCapConfigurationUpdate | null;
 
     /** Resources monitored by this agent. A supplied array replaces the existing array; null or an empty array clears the list. */
-    @maxItems(10)
     monitoredResources?: ObservabilityAgentMonitoredResources | null;
   }
 
   /** Embedded monitored resources identified by their logical names. */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This is a typed array, not an empty object. The array model carries native identifiers because the decorator does not accept a nullable array property."
+  @maxItems(10)
   @Azure.ResourceManager.identifiers(#["name"])
   model ObservabilityAgentMonitoredResources
     is ObservabilityAgentMonitoredResource[];
