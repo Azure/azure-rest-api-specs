@@ -39,9 +39,10 @@ model VoiceGeneratedAudioItem {
 interface VoiceAgentWebSocket {
   /**
    * Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
-   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value. No preview opt-in is
-   * required; connecting to an agent that uses a preview feature (Handoff or SIP transfer destinations) still
-   * requires `VoiceAgents=V1Preview`.
+   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value. The `VoiceAgents=V1Preview`
+   * opt-in is required only when the agent's definition uses a preview feature, such as Handoff (inline subagents),
+   * SIP transfer destinations, or post-call delivery. Supply it through either the `Foundry-Features` header or the
+   * `foundry_features` query parameter.
    *
    * Handshake failures are evaluated in the following order, independent of the requested `transport`:
    *
@@ -61,10 +62,20 @@ interface VoiceAgentWebSocket {
   @get
   @sharedRoute
   @route("/agents/{agent_name}/endpoint/protocols/voice")
-  connectVoiceAgent is FoundryDataPlaneOperation<
+  @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
+  connectVoiceAgent is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent. */
       @path agent_name: string;
+
+      /**
+       * A query alternative to the `Foundry-Features` header for clients that cannot set headers during a
+       * WebSocket handshake. Set this to `VoiceAgents=V1Preview`. Either this query parameter or the header is
+       * required when the agent uses a preview feature.
+       */
+      @query("foundry_features")
+      foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
 
       /**
        * Selects the connection transport. Omit or send `websocket` for the default, where signaling and audio are

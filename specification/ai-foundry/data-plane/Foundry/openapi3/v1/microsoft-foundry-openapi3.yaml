@@ -2319,9 +2319,10 @@ paths:
       summary: Connect to a voice agent
       description: |-
         Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
-        headers. The optional `realtime` subprotocol is the only accepted subprotocol value. No preview opt-in is
-        required; connecting to an agent that uses a preview feature (Handoff or SIP transfer destinations) still
-        requires `VoiceAgents=V1Preview`.
+        headers. The optional `realtime` subprotocol is the only accepted subprotocol value. The `VoiceAgents=V1Preview`
+        opt-in is required only when the agent's definition uses a preview feature, such as Handoff (inline subagents),
+        SIP transfer destinations, or post-call delivery. Supply it through either the `Foundry-Features` header or the
+        `foundry_features` query parameter.
 
         Handshake failures are evaluated in the following order, independent of the requested `transport`:
 
@@ -2336,12 +2337,32 @@ paths:
         3. WebRTC compatibility (only when `transport=webrtc`): WebRTC does not support bring-your-own-model (BYOM)
         or hosted-agent voice agents; those requests fail with `400 Bad Request`.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
           description: The name of the voice agent.
           schema:
             type: string
+        - name: foundry_features
+          in: query
+          required: false
+          description: |-
+            A query alternative to the `Foundry-Features` header for clients that cannot set headers during a
+            WebSocket handshake. Set this to `VoiceAgents=V1Preview`. Either this query parameter or the header is
+            required when the agent uses a preview feature.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+          explode: false
         - name: transport
           in: query
           required: false
@@ -2417,6 +2438,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Voice Agent WebSocket
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations:
     get:
       operationId: AgentEndpointConversations_listAgentConversations

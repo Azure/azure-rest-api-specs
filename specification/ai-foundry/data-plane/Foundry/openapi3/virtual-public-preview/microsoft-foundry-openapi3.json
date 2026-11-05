@@ -3509,8 +3509,20 @@
       "get": {
         "operationId": "VoiceAgentWebSocket_connectVoiceAgent",
         "summary": "Connect to a voice agent",
-        "description": "Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`\nheaders. The optional `realtime` subprotocol is the only accepted subprotocol value. No preview opt-in is\nrequired; connecting to an agent that uses a preview feature (Handoff or SIP transfer destinations) still\nrequires `VoiceAgents=V1Preview`.\n\nHandshake failures are evaluated in the following order, independent of the requested `transport`:\n\n1. Agent enablement (any transport): if the target agent is disabled, the handshake fails before the\n`101 Switching Protocols` upgrade with `409 Conflict`, using the shared Foundry `ApiErrorResponse` shape\nwith `error.code = agent_disabled`. This failure is terminal until the caller enables the agent, and it\ntakes precedence over the WebRTC-specific checks below.\n2. WebRTC availability (only when `transport=webrtc`, and only once the agent itself is enabled): the agent\nmust have the WebRTC transport capability configured. If the agent is enabled but WebRTC is not available\nfor it, the handshake fails with `404 Not Found`. This is distinct from the `409 agent_disabled` case\nabove, which concerns the agent itself rather than its WebRTC capability.\n3. WebRTC compatibility (only when `transport=webrtc`): WebRTC does not support bring-your-own-model (BYOM)\nor hosted-agent voice agents; those requests fail with `400 Bad Request`.",
+        "description": "Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`\nheaders. The optional `realtime` subprotocol is the only accepted subprotocol value. The `VoiceAgents=V1Preview`\nopt-in is required only when the agent's definition uses a preview feature, such as Handoff (inline subagents),\nSIP transfer destinations, or post-call delivery. Supply it through either the `Foundry-Features` header or the\n`foundry_features` query parameter.\n\nHandshake failures are evaluated in the following order, independent of the requested `transport`:\n\n1. Agent enablement (any transport): if the target agent is disabled, the handshake fails before the\n`101 Switching Protocols` upgrade with `409 Conflict`, using the shared Foundry `ApiErrorResponse` shape\nwith `error.code = agent_disabled`. This failure is terminal until the caller enables the agent, and it\ntakes precedence over the WebRTC-specific checks below.\n2. WebRTC availability (only when `transport=webrtc`, and only once the agent itself is enabled): the agent\nmust have the WebRTC transport capability configured. If the agent is enabled but WebRTC is not available\nfor it, the handshake fails with `404 Not Found`. This is distinct from the `409 agent_disabled` case\nabove, which concerns the agent itself rather than its WebRTC capability.\n3. WebRTC compatibility (only when `transport=webrtc`): WebRTC does not support bring-your-own-model (BYOM)\nor hosted-agent voice agents; those requests fail with `400 Bad Request`.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
           {
             "name": "agent_name",
             "in": "path",
@@ -3519,6 +3531,19 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "foundry_features",
+            "in": "query",
+            "required": false,
+            "description": "A query alternative to the `Foundry-Features` header for clients that cannot set headers during a\nWebSocket handshake. Set this to `VoiceAgents=V1Preview`. Either this query parameter or the header is\nrequired when the agent uses a preview feature.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            },
+            "explode": false
           },
           {
             "name": "transport",
@@ -3616,7 +3641,12 @@
         },
         "tags": [
           "Voice Agent WebSocket"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/endpoint/protocols/voice/conversations": {
