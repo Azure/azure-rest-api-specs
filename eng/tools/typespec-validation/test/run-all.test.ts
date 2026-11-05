@@ -408,6 +408,71 @@ it("waits for each child to exit before starting the next project", async () => 
   expect(peak).toBe(1);
 });
 
+it("rejects parallel fixing without launching a child", async () => {
+  await addProject("project");
+
+  await expect(runAll(root, { fix: true, concurrency: 2 })).rejects.toThrow(
+    "--fix requires --concurrency=1",
+  );
+  expect(spawn).not.toHaveBeenCalled();
+});
+
+it("bounds concurrent sibling projects and reports failures in discovery order", async () => {
+  const first = await addProject("specification/service/a");
+  const second = await addProject("specification/service/b");
+  const third = await addProject("specification/service/c");
+  await simpleGit(root).init();
+  const children = new Map<string, ChildProcess>();
+  vi.mocked(spawn).mockImplementation((_command, args) => {
+    const child = new ChildProcess();
+    children.set(String(args?.[1]), child);
+    return child;
+  });
+  const result = runAll(root, { concurrency: 2 });
+  await vi.waitFor(() => expect(children.size).toBe(2));
+  expect(children.has(third)).toBe(false);
+  children.get(second)?.emit("close", 1, null);
+  await vi.waitFor(() => expect(children.has(third)).toBe(true));
+  children.get(third)?.emit("close", 0, null);
+  children.get(first)?.emit("close", 1, null);
+
+  await expect(result).resolves.toBe(false);
+
+  expect(console.error).toHaveBeenLastCalledWith(
+    expect.stringContaining(
+      " > pnpm tsv specification/service/a\n > pnpm tsv specification/service/b",
+    ),
+  );
+});
+
+it("stops scheduling and waits for active children after a fatal termination", async () => {
+  const first = await addProject("a");
+  await addProject("b");
+  await addProject("c");
+  const children = new Map<string, ChildProcess>();
+  let peerClosed = false;
+  vi.mocked(spawn).mockImplementation((_command, args) => {
+    const child = new ChildProcess();
+    children.set(String(args?.[1]), child);
+    vi.spyOn(child, "kill").mockImplementation(() => {
+      setTimeout(() => {
+        peerClosed = true;
+        child.emit("close", null, "SIGTERM");
+      }, 10);
+      return true;
+    });
+    return child;
+  });
+  const result = runAll(root, { concurrency: 2 });
+  const failure = expect(result).rejects.toThrow(`${first} terminated by SIGKILL`);
+  await vi.waitFor(() => expect(children.size).toBe(2));
+  children.get(first)?.emit("close", null, "SIGKILL");
+
+  await failure;
+  expect(spawn).toHaveBeenCalledTimes(2);
+  expect(peerClosed).toBe(true);
+});
+
 it("honors conditional whole-tool suppressions without skipping rule-scoped ones", async () => {
   await addProject("skip");
   const rule = await addProject("rule");
