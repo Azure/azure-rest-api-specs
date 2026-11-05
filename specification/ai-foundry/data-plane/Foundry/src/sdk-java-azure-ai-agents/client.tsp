@@ -536,7 +536,7 @@ using Azure.AI.Projects;
   "TelephonyFixedIntervalRetryPolicy",
   "java"
 );
-@@clientName(PhoneNumber, "TelephonyPhoneNumberAddress", "java");
+@@clientName(PhoneNumber, "TelephonyPhoneNumber", "java");
 @@clientName(TeamsAddress, "TelephonyTeamsAddress", "java");
 @@clientName(SipAddress, "TelephonySipAddress", "java");
 
