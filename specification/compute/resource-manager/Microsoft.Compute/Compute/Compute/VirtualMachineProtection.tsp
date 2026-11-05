@@ -40,14 +40,13 @@ model VirtualMachineProtection
 @tag("VirtualMachineProtections")
 interface VirtualMachineProtections {
   /**
-   * Gets the protection configuration of a virtual machine.
+   * [Preview Feature] Gets the protection configuration of a virtual machine.
    */
   @added(Versions.v2026_09_01)
   get is ComputeResourceRead<VirtualMachineProtection>;
 
   /**
-   * Creates or updates the protection configuration of a virtual machine.
-    Transitioning from None to AzureBackup is handled only internally by the Azure Backup service.
+   * [Preview Feature] Creates or updates the protection configuration of a virtual machine. Transitioning from None to AzureBackup is handled only internally by the Azure Backup service.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "CRP returns 200 for synchronous updates and 202 for asynchronous updates to the always-addressable protection singleton."
   @added(Versions.v2026_09_01)
