@@ -687,6 +687,7 @@ interface Path {
     {
       ...PathExpiryOptionsRequiredParameter;
       ...PathExpiryTimeParameter;
+      ...LeaseIdOptionalParameter;
       ...TimeoutParameter;
     },
     {
