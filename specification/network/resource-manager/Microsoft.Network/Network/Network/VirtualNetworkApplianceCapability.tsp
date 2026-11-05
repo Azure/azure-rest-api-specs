@@ -21,13 +21,14 @@ namespace Microsoft.Network;
  * capability family; every kind shares the same `properties` schema (see
  * VirtualNetworkApplianceCapabilityProperties). One capability of a given kind may exist per appliance.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserve the released C# capability base type and its properties inherited from ProxyResource."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This legacy child resource preserves the released top-level capability discriminator and custom resource hierarchy nested under VirtualNetworkAppliance."
 @added(Versions.v2026_03_01)
 @featureFile(Features.virtualNetworkAppliance)
 @parentResource(VirtualNetworkAppliance)
 @discriminator("kind")
 model VirtualNetworkApplianceCapability
-  is Azure.ResourceManager.ProxyResource<VirtualNetworkApplianceCapabilityProperties> {
+  extends Azure.ResourceManager.ProxyResource<VirtualNetworkApplianceCapabilityProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("capabilityName")
