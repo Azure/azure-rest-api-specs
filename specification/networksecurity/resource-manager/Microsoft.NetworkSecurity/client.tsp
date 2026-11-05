@@ -13,6 +13,12 @@ namespace NetworkSecurityManagementClient {
 }
 
 @@clientName(
+  NetworkSecurityManagementClient,
+  "NetworkSecurityMgmtClient",
+  "python"
+);
+
+@@clientName(
   NeuroShield.Management.NeuroShieldFindings.listByNeuroShield,
   "GetNeuroShieldFindings",
   "csharp"
