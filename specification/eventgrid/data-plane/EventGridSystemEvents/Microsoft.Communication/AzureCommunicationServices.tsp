@@ -32,6 +32,9 @@ model AcsIncomingCallEventData {
   /** The communication identifier on behalf of whom the call is made. */
   onBehalfOf?: CommunicationIdentifierModel;
 
+  /** Display metadata associated with the incoming call arrival. */
+  callArrivalDisplayInfo?: AcsIncomingCallCallArrivalDisplayInfo;
+
   /** CorrelationId (CallId). */
   correlationId?: string;
 }
@@ -1313,6 +1316,87 @@ model AcsIncomingCallCustomContext {
   /** Voip Headers for incoming call */
   @visibility(Lifecycle.Read)
   voipHeaders: Record<string>;
+
+  /** Teams phone call details associated with the incoming call. */
+  teamsPhoneCallDetails?: AcsIncomingCallTeamsPhoneCallDetails;
+}
+
+/** Display metadata associated with an incoming call arrival. */
+model AcsIncomingCallCallArrivalDisplayInfo {
+  /** The destination resource account's Microsoft Teams tenant ID. */
+  teamsTenantId?: string;
+
+  /** The E.164 number dialed for the incoming call. */
+  destinationPhoneNumber?: string;
+}
+
+/** Teams phone call details associated with an incoming call. */
+model AcsIncomingCallTeamsPhoneCallDetails {
+  /** Details about the original caller. */
+  teamsPhoneCallerDetails?: AcsIncomingCallTeamsPhoneCallerDetails;
+
+  /** Details about the entity that created the call details. */
+  teamsPhoneSourceDetails?: AcsIncomingCallTeamsPhoneSourceDetails;
+
+  /** The identifier for the call session. */
+  sessionId?: string;
+
+  /** The intent of the call. */
+  intent?: string;
+
+  /** A short description of the reason for the call. */
+  callTopic?: string;
+
+  /** A summary of the call. */
+  callContext?: string;
+
+  /** The URL for fetching the call transcript. */
+  transcriptUrl?: string;
+
+  /** The sentiment of the call. */
+  callSentiment?: string;
+
+  /** Recommended actions for resolving the caller's issue. */
+  suggestedActions?: string;
+}
+
+/** Details about the original Teams phone caller. */
+model AcsIncomingCallTeamsPhoneCallerDetails {
+  /** The caller's communication identifier. */
+  caller?: CommunicationIdentifierModel;
+
+  /** The caller's name. */
+  name?: string;
+
+  /** The caller's phone number. */
+  phoneNumber?: string;
+
+  /** The caller's record identifier. */
+  recordId?: string;
+
+  /** The URL to display information about the caller. */
+  screenPopUrl?: string;
+
+  /** Whether the caller was authenticated. */
+  isAuthenticated?: boolean;
+
+  /** Additional caller information keyed by field name. */
+  additionalCallerInformation?: Record<string>;
+}
+
+/** Details about the entity that supplied the Teams phone call details. */
+model AcsIncomingCallTeamsPhoneSourceDetails {
+  /** The communication identifier of the source entity. */
+  source?: CommunicationIdentifierModel;
+
+  /** The ISO 639 language of the source entity. */
+  language?: string;
+
+  /** The status of the source entity. */
+  status?: string;
+
+  /** The intended targets keyed by target name. */
+  intendedTargets?: Record<CommunicationIdentifierModel>;
 }
 
 /** The type of engagement user have with email. */

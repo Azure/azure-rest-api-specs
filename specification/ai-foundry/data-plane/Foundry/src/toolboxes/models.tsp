@@ -79,7 +79,6 @@ alias ToolboxOpenApiToolType = "openapi";
 alias ToolboxA2AToolType = "a2a";
 alias ToolboxA2APreviewToolType = "a2a_preview";
 alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
-alias ToolboxCloudComputerUsePreviewToolType = "cloud_computer_use_preview";
 alias ToolboxBrowserAutomationToolType = "browser_automation";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
@@ -99,6 +98,7 @@ union ToolboxToolType {
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
+  #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
@@ -109,9 +109,6 @@ union ToolboxToolType {
   shell: ToolboxShellToolType,
   web_iq_preview: ToolboxWebIQPreviewToolType,
   browser_automation: ToolboxBrowserAutomationToolType,
-
-  @added(Versions.PuPr)
-  cloud_computer_use_preview: ToolboxCloudComputerUsePreviewToolType,
 }
 
 /**
@@ -277,20 +274,16 @@ model A2APreviewToolboxTool extends ToolboxTool {
 
 /**
  * A browser automation tool stored in a toolbox.
+ * BrowserAutomationPreviewToolboxTool is deprecated.
+ * Please use BrowserAutomationToolboxTool instead.
+ * See https://aka.ms/bat/docs for more information on Browser automation tool.
  */
+#deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
 @extension("x-ms-foundry-meta", PreviewTool)
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
+  #suppress "deprecated" "Intentional reuse of the legacy model for backward compatibility."
   ...ToolFields<BrowserAutomationPreviewTool>;
-}
-
-/**
- * A cloud computer use tool stored in a toolbox.
- */
-@added(Versions.PuPr)
-@extension("x-ms-foundry-meta", PreviewTool)
-model CloudComputerUsePreviewToolboxTool extends ToolboxTool {
-  type: ToolboxCloudComputerUsePreviewToolType;
 }
 
 /**
