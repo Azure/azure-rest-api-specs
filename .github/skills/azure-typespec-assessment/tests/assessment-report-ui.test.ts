@@ -93,7 +93,6 @@ const reportRenderHelpers: Parameters<typeof renderReportSections>[1] = {
   sourceLinks: () => "",
   legacyEvidence: () => "",
   contractAreaParts: () => ({ areaKind: "", member: "" }),
-  directLegacyDownstreamFindings: () => [],
 };
 
 function readAssessment(url: URL): AssessmentOutput {
@@ -429,10 +428,257 @@ void test("merges direct methods and indirect types using target names and exact
   );
   const list = required(data.methods.find((item) => item.name === "ServiceGateways.list"));
   assert.equal(list.cause, "indirect");
-  assert.deepEqual(list.types[0].paths, [
-    { path: "(returned type)", role: "target", location: "response-body" },
-  ]);
+  assert.deepEqual(
+    list.types[0].paths.map(({ steps: _steps, ...path }) => path),
+    [{ path: "(returned type)", role: "target", location: "response-body" }],
+  );
+  assert.deepEqual(
+    list.types[0].paths[0].steps.map((step) => step.name),
+    ["ServiceGateways.list", "Widget"],
+  );
   assert.deepEqual({ dimension, raw }, input);
+});
+
+function modelChangeFixture() {
+  const { dimension, raw } = fixture();
+  const before = required(raw.facts["type-baseline"]);
+  const after = required(raw.facts["type-target"]);
+  before.properties = [
+    { name: "roleName", optional: true, type: { kind: "string" } },
+    { name: "entities", optional: true, type: { kind: "array", valueType: { kind: "string" } } },
+  ];
+  after.properties = before.properties.map((property) => ({ ...property, optional: false }));
+  const previousFinding = required(dimension.findings[0]);
+  dimension.findings = ["roleName", "entities"].map((name) => ({
+    ...previousFinding,
+    id: `required-${name}`,
+    rule: "model-property-changed",
+    actual: `Contoso.Widget.${name} changed type, optionality, flattening, or access.`,
+    evidence: [before, after],
+  }));
+  dimension.methodGroups = [];
+  const impact = required(dimension.typeImpacts?.[0]);
+  impact.findingIds = dimension.findings.map((finding) => finding.id);
+  impact.affectedMethods = [{ symbol: "Contoso.CloudAccounts.get" }];
+  impact.affectedMethodCount = 1;
+  const method = (role: string): AssessmentFact => ({
+    id: `get-${role}`,
+    projectId: "project",
+    factKind: "method",
+    comparisonRole: role,
+    sourceCommit: role,
+    apiVersion: "v1",
+    kind: "basic",
+    name: "get",
+    clientName: "CloudAccounts",
+    crossLanguageDefinitionId: "Contoso.CloudAccounts.get",
+    parameters: [
+      { name: "resourceGroupName", type: { kind: "string" } },
+      { name: "cloudAccountName", type: { kind: "string" } },
+      { name: "accept", type: { kind: "constant", value: "application/json" } },
+    ],
+    responseType: { kind: "model", name: "CloudAccount" },
+  });
+  for (const role of ["baseline", "target"]) {
+    raw.facts[`get-${role}`] = method(role);
+    raw.facts[`cloud-${role}`] = {
+      id: `cloud-${role}`,
+      projectId: "project",
+      factKind: "model",
+      comparisonRole: role,
+      sourceCommit: role,
+      apiVersion: "v1",
+      identity: "Contoso.CloudAccount",
+      properties: [{ name: "properties", type: { kind: "model", name: "CloudAccountProperties" } }],
+    };
+    const property = {
+      name: "roleAssignmentsOnCcaCreate",
+      optional: true,
+      visibility: [2],
+      type: { kind: "array", valueType: { kind: "model", name: "Widget" } },
+    };
+    raw.facts[`props-${role}`] = {
+      id: `props-${role}`,
+      projectId: "project",
+      factKind: "model",
+      comparisonRole: role,
+      sourceCommit: role,
+      apiVersion: "v1",
+      identity: "Contoso.CloudAccountProperties",
+      properties: role === "target" ? [property] : [],
+    };
+  }
+  const root = required(raw.rootCauses[0]);
+  root.directCandidateIds = impact.findingIds;
+  root.methodFactIds = ["get-baseline", "get-target"];
+  root.referenceEvidence = [
+    {
+      fromFactId: "get-target",
+      toFactId: "cloud-target",
+      kind: "response",
+      location: "response-body",
+    },
+    {
+      fromFactId: "cloud-target",
+      toFactId: "props-target",
+      kind: "property",
+      memberName: "properties",
+      location: "response-body",
+    },
+    {
+      fromFactId: "props-target",
+      toFactId: "type-target",
+      kind: "property",
+      memberName: "roleAssignmentsOnCcaCreate",
+      location: "response-body",
+    },
+  ];
+  raw.candidates = dimension.findings.map((finding) => ({
+    ...required(raw.candidates[0]),
+    id: finding.id,
+    rule: "model-property-changed",
+  }));
+  return { dimension, raw };
+}
+
+void test("shows equal GET signatures, a proven new property path, and exact required model members", () => {
+  const { dimension, raw } = modelChangeFixture();
+  const original = structuredClone({ dimension, raw });
+  const html = renderAssessmentHtml(assessment(dimension), { downstreamInput: raw });
+  const section = reportSection(html, "downstream-breaking");
+  const signature = "get(resourceGroupName: string, cloudAccountName: string): CloudAccount";
+  assert.equal(section.split(signature).length - 1, 2);
+  assert.match(section, />Unchanged<\/span>/);
+  assert.match(section, />Target-only path<\/span>/);
+  assert.match(section, />Create-only<\/span>/);
+  assert.match(section, /New property; absent in baseline/);
+  assert.match(section, /roleAssignmentsOnCcaCreate\[\]/);
+  assert.match(section, /roleName\?: string/);
+  assert.match(section, /roleName: string/);
+  assert.match(section, /entities\?: string\[\]/);
+  assert.match(section, /entities: string\[\]/);
+  assert.match(section, /Optional; may be omitted/);
+  assert.match(section, /Required; must be supplied/);
+  assert.match(section, /does not establish a separate breaking change/);
+  assert.notMatch(section, /get\([^<]*accept/);
+  assert.notMatch(section, /preserves its existing language-neutral/);
+  assert.deepEqual({ dimension, raw }, original);
+
+  delete raw.facts["props-baseline"];
+  const incomplete = renderAssessmentHtml(assessment(dimension), { downstreamInput: raw });
+  assert.notMatch(
+    reportSection(incomplete, "downstream-breaking"),
+    /Target-only path|absent in baseline/,
+  );
+  assert.match(incomplete, /Baseline reachability is not established by target evidence alone/);
+});
+
+void test("puts output model field changes first and collapses target-only associations and evidence", () => {
+  const { dimension, raw } = modelChangeFixture();
+  const before = required(raw.facts["props-baseline"]);
+  const after = required(raw.facts["props-target"]);
+  before.properties = [{ name: "oldAdmin", optional: true, type: { kind: "string" } }];
+  required(after.properties).push({
+    name: "unrelatedAddition",
+    optional: true,
+    type: { kind: "string" },
+  });
+  const finding = {
+    ...required(dimension.findings[0]),
+    id: "properties-change",
+    rule: "model-property-removed",
+    crossLanguageDefinitionId: "Contoso.CloudAccountProperties",
+    expected: "CloudAccountProperties preserves property oldAdmin.",
+    actual: "CloudAccountProperties no longer exposes property oldAdmin.",
+    rootCauseIds: ["properties-root"],
+    evidenceFactIds: ["props-baseline", "props-target"],
+    evidence: [before, after],
+  };
+  dimension.findings.push(finding);
+  const originalImpact = required(dimension.typeImpacts?.[0]);
+  required(dimension.typeImpacts).push({
+    ...originalImpact,
+    id: "properties-impact",
+    type: "Contoso.CloudAccountProperties",
+    findingIds: [finding.id],
+    rootCauseIds: ["properties-root"],
+  });
+  const root = required(raw.rootCauses[0]);
+  raw.rootCauses.push({
+    ...root,
+    id: "properties-root",
+    directCandidateIds: [finding.id],
+    referenceEvidence: [
+      {
+        fromFactId: "get-baseline",
+        toFactId: "cloud-baseline",
+        kind: "response",
+        location: "response-body",
+      },
+      {
+        fromFactId: "cloud-baseline",
+        toFactId: "props-baseline",
+        kind: "property",
+        memberName: "properties",
+        location: "response-body",
+      },
+      ...required(root.referenceEvidence).filter((edge) => edge.toFactId !== "type-target"),
+    ],
+  });
+  raw.candidates.push({
+    ...required(raw.candidates[0]),
+    id: finding.id,
+    rule: finding.rule,
+    crossLanguageDefinitionId: finding.crossLanguageDefinitionId,
+    evidenceFactIds: finding.evidenceFactIds,
+  });
+  const original = structuredClone({ dimension, raw });
+  const section = reportSection(
+    renderAssessmentHtml(assessment(dimension), { downstreamInput: raw }),
+    "downstream-breaking",
+  );
+  const primary = section.split('<details class="report-model-evidence report-related-models">')[0];
+  assert.include(primary, "Output model: CloudAccount");
+  assert.include(primary, "CloudAccount.properties → CloudAccountProperties");
+  assert.include(primary, "Model name unchanged");
+  assert.include(primary, "CloudAccountProperties.oldAdmin");
+  assert.include(primary, "roleAssignmentsOnCcaCreate?: Widget[]");
+  assert.include(primary, "context, not another finding");
+  assert.notInclude(primary, "unrelatedAddition");
+  assert.notInclude(primary, "roleName?: string");
+  assert.include(section, "Show target-only related type changes (1)");
+  assert.include(section, "Show reference paths and assessment evidence");
+  assert.notMatch(section, /class="report-model-evidence[^"]*"[^>]*\bopen/);
+  assert.include(section, "roleName?: string");
+  assert.include(section, "Existing SDK callers use old.");
+  assert.deepEqual({ dimension, raw }, original);
+});
+
+void test("labels a shared input/output model with compact verified locations", () => {
+  const { dimension, raw } = fixture();
+  const root = required(raw.rootCauses[0]);
+  required(root.referenceEvidence).push(
+    {
+      fromFactId: "updateAddressLocations-baseline",
+      toFactId: "type-baseline",
+      kind: "response",
+      location: "response-body",
+    },
+    {
+      fromFactId: "updateAddressLocations-target",
+      toFactId: "type-target",
+      kind: "response",
+      location: "response-body",
+    },
+  );
+  const section = reportSection(
+    renderAssessmentHtml(assessment(dimension), { downstreamInput: raw }),
+    "downstream-breaking",
+  );
+  assert.include(section, "Input / output model: Widget");
+  assert.include(section, ">Input / model</span>");
+  assert.include(section, ">Output / model</span>");
+  assert.include(section, "Show recorded SDK method evidence");
 });
 
 void test("does not promote root-wide locations to per-method evidence without raw graph", () => {
@@ -568,7 +814,7 @@ void test("comparison tables omit identical fields while retaining actual change
   );
   assert.match(html, /<strong>Normalized method name<\/strong>/);
   assert.match(html, /<strong>Method kind<\/strong>/);
-  assert.match(html, /Why this is breaking/);
+  assert.match(html, /Why the type change is breaking/);
   for (const [, before, after] of html.matchAll(
     /<tr><td>[\s\S]*?<\/td><td><pre>([\s\S]*?)<\/pre><\/td><td><pre>([\s\S]*?)<\/pre><\/td><\/tr>/g,
   )) {
@@ -792,7 +1038,7 @@ void test("five dimension headers and empty not-assessed states use the shared l
   assert.match(html, /grid-template-columns:\s*minmax\(0,\s*1fr\)\s+max-content/);
 });
 
-void test("compatibility findings remain failed when evidence coverage is partial", () => {
+void test("compatibility findings remain failed without displaying evidence coverage labels", () => {
   const { dimension } = fixture();
   dimension.status = "failed";
   dimension.verdict = "failed";
@@ -808,8 +1054,8 @@ void test("compatibility findings remain failed when evidence coverage is partia
   const html = renderAssessmentHtml(input);
   const downstream = reportSection(html, "downstream-breaking");
   assert.match(downstream, /report-badge remove">failed/);
-  assert.match(downstream, /report-badge unknown coverage">partial coverage/);
-  assert.match(html, /Partial coverage/);
+  assert.notMatch(html, /partial coverage|complete coverage|coverage blocked/i);
+  assert.notMatch(html, /evidence coverage/i);
 });
 
 void test("legacy type findings remain visible when method mappings are unavailable", () => {
@@ -855,7 +1101,7 @@ void test("explicit provenance sidecar bridges only root IDs and never changes a
   assert.equal(data.unmapped.length, 0);
   assert.deepEqual(presentation.findings[0].rootCauseIds, ["root"]);
   const html = renderAssessmentHtml(input, { downstreamInput: raw, downstreamAssessment: replay });
-  assert.match(html, /Representative method paths from recorded graph edges/);
+  assert.match(html, /How this method connects to the changed type/);
   assert.deepEqual({ input, replay, raw }, snapshots);
   const wrongJudgment = structuredClone(replay);
   wrongJudgment.dimensions.downstream.findings[0].rationale = "Different judgment";

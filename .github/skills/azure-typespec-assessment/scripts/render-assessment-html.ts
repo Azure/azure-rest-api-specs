@@ -1,7 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { extractApiVersions, selectApiVersionPair } from "./api-version-selection.ts";
-import { documentQualitySummary, renderReportSections } from "./assessment-report-ui.ts";
+import {
+  documentQualitySummary,
+  downstreamMethodData,
+  downstreamPresentationDimension,
+  renderReportSections,
+} from "./assessment-report-ui.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { validateAssessment } from "./validate-assessment.ts";
 
@@ -73,6 +78,8 @@ type RenderOptions = {
   downstreamAssessment?: AssessmentOutput;
   downstreamInput?: DownstreamAnalysis;
 };
+
+export const REPORT_PRESENTATION_VERSION = "downstream-method-signatures-v1";
 type RestContractDelta = ContractChangeRow & {
   identity: string;
 };
@@ -164,6 +171,24 @@ function isAssessmentInput(value: unknown): value is AssessmentOutput | LegacyAs
     isRecord(value.dimensions.restCompatibleDownstreamBreakingChanges) &&
     isRecord(value.dimensions.azureCompliance)
   );
+}
+
+function normalizeHistoricalMatchBasis(assessment: AssessmentOutput): AssessmentOutput {
+  const normalized = structuredClone(assessment);
+  for (const finding of normalized.dimensions.rest.findings ?? []) {
+    if (finding.semanticMatchBasis === "candidate-ownership") {
+      finding.semanticMatchBasis = "operation-identity";
+    }
+  }
+  for (const finding of normalized.dimensions.downstream.findings ?? []) {
+    if (finding.semanticMatchBasis === "candidate-ownership") {
+      finding.semanticMatchBasis =
+        Array.isArray(finding.declarationIds) && finding.declarationIds.length
+          ? "declaration-identity"
+          : "unique-source";
+    }
+  }
+  return normalized;
 }
 
 function isDownstreamAnalysis(value: unknown): value is DownstreamAnalysis {
@@ -2014,7 +2039,6 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
     sourceLinks,
     legacyEvidence,
     contractAreaParts,
-    directLegacyDownstreamFindings,
     intentTitleLinks,
     semanticCard,
     downstreamOperationGroups,
@@ -2028,16 +2052,6 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
   const downstreamStatus = complianceStatus(
     dimensions.downstream.status ?? (summary.downstreamCount ? "failed" : "not-assessed"),
   );
-  const coverageDetail = (value: string | undefined) =>
-    value === "complete"
-      ? "Complete coverage"
-      : value === "partial"
-        ? "Partial coverage"
-        : value === "blocked"
-          ? "Coverage blocked"
-          : undefined;
-  const restCoverage = coverageDetail(dimensions.rest.coverage);
-  const downstreamCoverage = coverageDetail(dimensions.downstream.coverage);
   const documentQuality = documentQualitySummary(dimensions.documentQuality);
   const documentStatus = complianceStatus(documentQuality.findingStatus);
 
@@ -2055,7 +2069,7 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
     })
     .join("");
   return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="typespec-assessment-report-presentation" content="${REPORT_PRESENTATION_VERSION}">
 <title>TypeSpec Assessment</title>
 <style>
 :root{color-scheme:light dark;--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--line:#dbe3ef;--accent:#2563eb;--good:#047857;--warn:#b45309;--danger:#b91c1c;--add-bg:#dcfce7;--add-text:#166534;--remove-bg:#fee2e2;--remove-text:#991b1b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,sans-serif}.container{width:min(1100px,calc(100% - 32px));margin:auto}.hero{padding:38px 0 42px;background:linear-gradient(120deg,#172554,#2554d8);color:white}.hero .eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:800;color:#dbeafe}.hero h1{margin:.35em 0 .55em;font-size:clamp(34px,4.2vw,58px);line-height:1.08;letter-spacing:-.025em}.hero-meta{font-size:16px;color:#e0e7ff}.hero-meta strong{color:#86efac;text-transform:capitalize}.hero a{color:#dbeafe}.summary-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:28px}.summary-card{display:block;min-height:150px;padding:18px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(255,255,255,.09);color:white!important;text-decoration:none;transition:background .15s,border-color .15s,transform .15s}.summary-card:hover,.summary-card:focus-visible{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.5);transform:translateY(-2px);outline:none}.summary-card:focus-visible{box-shadow:0 0 0 3px #93c5fd}.summary-value{display:flex;gap:10px;align-items:center;font-size:25px;font-weight:800}.summary-value .pass{color:#86efac}.summary-value .fail{color:#fecaca}.summary-label{margin-top:8px;font-size:16px;font-weight:750}.summary-detail{margin-top:7px;color:#dbeafe;font-size:13px}.notice{padding:16px 0;background:#fffbeb;color:#713f12;border-bottom:1px solid #fde68a}main{padding:28px 0}section{margin:0 0 30px}.dimension-details>summary{cursor:pointer;list-style-position:outside}.dimension-details>summary h2{display:inline-block;margin:0 0 12px}.panel,.finding,.intent,.operation,.compliance-intent,.compliance-comparison{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:10px 0}.finding{border-left:4px solid var(--warn)}.finding.high,.compliance-comparison.applicable-fail{border-left:4px solid var(--danger)}.finding.low{border-left-color:var(--muted)}.intent>summary{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.intent>summary .action{margin-left:0}.intent-finding-badges{display:inline-flex;gap:7px;flex-wrap:wrap;margin-left:auto}.intent-finding-badge{border:1px solid #991b1b;border-radius:999px;padding:3px 10px;background:#b91c1c;color:#fff!important;font-size:13px;font-weight:800;text-decoration:none}.intent-finding-badge:hover,.intent-finding-badge:focus-visible{background:#7f1d1d;outline:2px solid #fca5a5;outline-offset:2px}.intent>summary,.representative-example>summary,.operation summary,.compliance-intent>summary,.compliance-comparison>summary,.finding>summary,.comparison-details>summary,.affected-operations>summary,.root-cause-provenance>summary{cursor:pointer}.intent>summary,.compliance-intent>summary{font-size:18px}.intent-body,.compliance-intent-body,.compliance-comparison-body{padding-top:12px}.finding>summary{display:flex;align-items:center;gap:12px;font-size:18px}.sdk-contract-card>summary,.sdk-method-card>summary{flex-wrap:wrap}.finding-summary{margin-left:auto;color:var(--muted);font-size:15px}.severity,.origin-tag,.contract-tag{border-radius:999px;padding:3px 10px;font-size:13px;font-weight:800}.contract-tag{background:#dbeafe;color:#1e40af}.severity{text-transform:lowercase}.severity.high{background:#fee2e2;color:#991b1b}.severity.medium{background:#fef3c7;color:#92400e}.severity.low{background:#dbeafe;color:#1e40af}.origin-tag.rest-breaking-tag{background:#fee2e2;color:#991b1b}.downstream-rest-link{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}.downstream-rest-link:hover strong,.downstream-rest-link:focus-visible strong{text-decoration:underline}.finding-body{padding-top:12px}.comparison-details{margin:14px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--panel) 94%,var(--accent))}.comparison-details>summary{font-size:16px}.comparison-body{padding-top:12px}.contract-metadata{grid-template-columns:max-content minmax(0,1fr);margin:4px 0 22px}.http-contract{display:inline-flex;align-items:baseline;gap:8px;flex-wrap:wrap}.contract-change-table{border:1px solid var(--line);border-radius:10px;border-collapse:separate;border-spacing:0;overflow:hidden}.contract-change-table th{background:#eaf0f9}.contract-change-table th,.contract-change-table td{padding:13px 15px;border-right:1px solid var(--line)}.contract-change-table th:last-child,.contract-change-table td:last-child{border-right:0}.contract-member{width:31%;background:color-mix(in srgb,#eaf0f9 70%,var(--panel))}.contract-area-kind{display:block;margin-bottom:3px;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.contract-before{width:34.5%;background:#fff1f1}.contract-after{width:34.5%;background:#eefaf3}.contract-value{display:inline-block;padding:3px 7px;border-radius:5px;font-weight:700}.contract-value.before{background:var(--remove-bg);color:var(--remove-text)}.contract-value.after{background:var(--add-bg);color:var(--add-text)}.contract-detail{display:block;margin-top:4px;color:var(--muted);font-size:13px}.breaking-rationale{margin:17px 0 22px;padding:12px 14px;border-left:3px solid #e7a400;background:#fff9e8}.affected-operations{margin:20px 0}.affected-operations>summary{font-size:18px}.affected-operation-list{display:grid;gap:7px;margin-top:10px}.affected-operation{display:grid;grid-template-columns:minmax(230px,.8fr) 65px minmax(300px,1.8fr);align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:8px}.http-method{color:#075cab;font-family:ui-monospace,monospace;font-weight:800}.contract-footer{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:18px;color:var(--muted);font-size:13px}.root-cause-provenance{margin-top:14px}.mapping-unavailable{color:var(--muted)}.representative-example{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:9px}.operation summary{display:flex;gap:12px;align-items:center}.operation summary span,.action{margin-left:auto;border-radius:999px;padding:2px 8px;background:#dbeafe;color:#1e40af}.operation-body{padding-top:12px}.diff{background:#111827;color:#e5e7eb;border-radius:10px;overflow:auto;margin:12px 0}.diff-path{padding:7px 12px;background:#1f2937}.diff-path a{color:#93c5fd}.diff pre{padding:12px;margin:0}.diff pre span{display:block}.diff pre .line-number{display:inline-block;width:42px;color:#94a3b8;user-select:none}.diff .add{background:#123d2a;color:#bbf7d0}.diff .remove{background:#51212a;color:#fecaca}.parameter-diff{margin:12px 0}.parameter-line{display:flex;gap:8px;align-items:baseline;padding:5px 9px;margin:3px 0;border-radius:6px}.parameter-line.add,.delta-after,ins{background:var(--add-bg);color:var(--add-text)}.parameter-line.remove,.delta-before,del{background:var(--remove-bg);color:var(--remove-text)}.parameter-line.modify,.parameter-line.reorder{background:#fef3c7;color:#92400e}.parameter-line>span:first-child{font-weight:800}.parameter-attribute{white-space:nowrap}.delta-before,.delta-after,del,ins{padding:2px 5px;border-radius:4px;text-decoration:none}dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 14px}dt{font-weight:700}dd{margin:0}.not-assessed{color:var(--muted);font-weight:700}.good,.compliance-summary.passed{color:var(--good)}.compliance-summary.failed{color:var(--danger)}.sources{color:var(--muted);font-size:13px}blockquote{margin:8px 0;padding:8px 12px;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--panel) 90%,var(--accent))}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line)}code{overflow-wrap:anywhere}@media(max-width:1050px){.summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.affected-operation{grid-template-columns:1fr 65px}.affected-operation code{grid-column:1/-1}}@media(max-width:700px){.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.finding-summary{width:100%;margin-left:0}.contract-change-table{display:block;overflow-x:auto}.contract-change-table th,.contract-change-table td{min-width:210px}}@media(max-width:540px){.summary-grid{grid-template-columns:1fr}.hero h1{font-size:32px}}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--panel:#172033;--text:#e5e7eb;--muted:#9ca3af;--line:#334155;--add-bg:#123d2a;--add-text:#bbf7d0;--remove-bg:#51212a;--remove-text:#fecaca}.notice{background:#422006;color:#fde68a}.parameter-line.modify,.parameter-line.reorder{background:#422006;color:#fde68a}.contract-change-table th{background:#202d45}.contract-member{background:#1d293d}.contract-before{background:#431f29}.contract-after{background:#15382b}.breaking-rationale{background:#3b2f13}.http-method{color:#76b9ff}}
@@ -2067,14 +2081,14 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
 .intent-finding-badge{font:inherit;font-size:13px;cursor:pointer}.intent-impact-trigger{position:relative}.intent-impact-popover{position:absolute;z-index:20;top:calc(100% + 8px);right:0;display:none;width:min(480px,88vw);overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--panel);box-shadow:0 14px 34px rgb(31 42 68 / 18%)}.intent-impact-trigger.open .intent-impact-popover{display:grid}.intent-impact-popover a{display:grid;grid-template-columns:minmax(240px,1fr) auto;gap:12px;align-items:center;padding:12px 14px;border-top:1px solid var(--line);color:var(--text)!important;text-decoration:none}.intent-impact-popover a:first-child{border-top:0}.intent-impact-popover a:hover,.intent-impact-popover a:focus-visible{background:color-mix(in srgb,var(--panel) 92%,var(--accent))}.intent-impact-popover a span{color:var(--muted);font-size:13px}.intent h3,.representative-example>summary{font-size:17px;font-weight:750;line-height:1.35}.impact-highlight{outline:3px solid #ef4444;outline-offset:3px}
 .affected-methods{margin:20px 0}.affected-methods>summary{font-size:18px}.affected-method-list{display:grid;gap:7px;margin-top:10px}.affected-method{display:grid;grid-template-columns:minmax(180px,.6fr) minmax(280px,1.4fr);align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:8px}@media(max-width:700px){.affected-method{grid-template-columns:1fr}}
 ${reportStyles}
-</style></head><body>
+</style></head><body data-report-presentation="${REPORT_PRESENTATION_VERSION}">
 <header class="hero"><div class="container"><div class="eyebrow">TypeSpec Assessment</div><h1>${escapeHtml(headerTitle(assessment))}</h1>
 <p class="hero-meta">TypeSpec source diff: ${comparisonHeader}</p>
 <div class="summary-grid">
 <a class="summary-card" href="#semantic-intents">${summaryHeading("Semantic intents", { icon: "ⓘ", className: "info", label: "Information only" })}<div class="summary-detail">${summary.semanticItems.length} ${summary.semanticItems.length === 1 ? "intent" : "intents"}<br>${summary.operationCount} operations<br>${summary.actionCounts.add} Added, ${summary.actionCounts.modify} Modified, ${summary.actionCounts.remove} Removed</div></a>
 <a class="summary-card" href="#azure-compliance">${summaryHeading("Azure Guidelines", complianceStatus(summary.complianceStatus))}<div class="summary-detail">${complianceStatus(summary.complianceStatus).label === "N/A" ? "Not assessed<br>" : ""}${summary.complianceFindingCount} ${summary.complianceFindingCount === 1 ? "finding" : "findings"}<br>${escapeHtml(summary.complianceCoverageDetail)}</div></a>
-<a class="summary-card" href="#rest-breaking">${summaryHeading("REST breaking changes", restStatus)}<div class="summary-detail">${restStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${restCoverage ? `${restCoverage}<br>` : ""}${summary.restFindingCount} ${summary.restFindingCount === 1 ? "finding" : "findings"}</div></a>
-<a class="summary-card" href="#downstream-breaking">${summaryHeading("Downstream breaking changes", downstreamStatus)}<div class="summary-detail">${downstreamStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${downstreamCoverage ? `${downstreamCoverage}<br>` : ""}${summary.downstreamFindingCount} ${summary.downstreamFindingCount === 1 ? "finding" : "findings"}</div></a>
+<a class="summary-card" href="#rest-breaking">${summaryHeading("REST breaking changes", restStatus)}<div class="summary-detail">${restStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${summary.restFindingCount} ${summary.restFindingCount === 1 ? "finding" : "findings"}</div></a>
+<a class="summary-card" href="#downstream-breaking">${summaryHeading("Downstream breaking changes", downstreamStatus)}<div class="summary-detail">${downstreamStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${summary.downstreamFindingCount} ${summary.downstreamFindingCount === 1 ? "finding" : "findings"}</div></a>
 <a class="summary-card" href="#document-quality">${summaryHeading("Documentation Completeness", documentStatus)}<div class="summary-detail">${documentQuality.compactDetail.map(escapeHtml).join("<br>")}</div></a>
 </div></div></header>
 <details class="notice"><summary class="container"><span class="notice-title">Preview Notice</span><span class="notice-summary">The TypeSpec Assessment Assistant is in preview; official validation and review remain the source of truth.</span></summary>
@@ -2283,6 +2297,29 @@ function adaptLegacy(assessment: LegacyAssessmentInput): AssessmentOutput {
       relatedSemanticIntents: relatedSemanticIntents(finding.id),
       sources: toSources(finding.sourceReferences, [], `legacy-finding-${finding.id}`),
     }));
+  const adaptedDownstreamFindings = (
+    findings: LegacyAssessmentFindingInput[],
+  ): AssessmentFinding[] =>
+    directLegacyDownstreamFindings(legacyFindings(findings)).map((finding) => {
+      const summary =
+        finding.summary ?? finding.title ?? "Historical downstream SDK compatibility finding.";
+      return {
+        id: finding.id,
+        actual: summary,
+        expected: "Preserve the historical downstream SDK contract.",
+        severity:
+          finding.severity === "high" || finding.severity === "medium" || finding.severity === "low"
+            ? finding.severity
+            : "medium",
+        rationale: summary,
+        sources: finding.sources ?? [],
+        evidence: [],
+        relatedSemanticIntents: finding.relatedSemanticIntents ?? [],
+        symbol: finding.title ?? finding.id,
+        title: finding.title,
+        summary: finding.summary,
+      };
+    });
 
   const legacyComplianceFindings: (ComplianceFinding & {
     id: string;
@@ -2397,8 +2434,9 @@ function adaptLegacy(assessment: LegacyAssessmentInput): AssessmentOutput {
           dimensions.restCompatibleDownstreamBreakingChanges.findings.length > 0
             ? "failed"
             : "passed",
-        findings: [],
-        legacyFindings: legacyFindings(dimensions.restCompatibleDownstreamBreakingChanges.findings),
+        findings: adaptedDownstreamFindings(
+          dimensions.restCompatibleDownstreamBreakingChanges.findings,
+        ),
         operationGroups: [],
         sharedTypeImpacts: [],
         ...{ impliedByRest: [] },
@@ -2451,8 +2489,9 @@ export function renderAssessmentHtml(
   options: RenderOptions = {},
 ) {
   const current = isCurrentAssessment(assessment);
+  const normalized = current ? normalizeHistoricalMatchBasis(assessment) : adaptLegacy(assessment);
   const validationInput = current
-    ? assessment
+    ? normalized
     : {
         baseline: assessment.baseline,
         head: assessment.head,
@@ -2460,7 +2499,34 @@ export function renderAssessmentHtml(
       };
   const errors = validateAssessment(validationInput);
   if (errors.length) throw new Error(errors.join("\n"));
-  return renderCurrent(current ? assessment : adaptLegacy(assessment), options);
+  const html = renderCurrent(normalized, options);
+  assertRenderedDownstreamPresentation(normalized, html, options);
+  return html;
+}
+
+export function assertRenderedDownstreamPresentation(
+  assessment: AssessmentOutput,
+  html: string,
+  options: RenderOptions = {},
+) {
+  const expectedMethods = downstreamMethodData(
+    downstreamPresentationDimension(assessment, options),
+    options.downstreamInput,
+  ).methods.length;
+  const methodCards = html.match(/class="report-card sdk-method-card"/g)?.length ?? 0;
+  const signatureBlocks = html.match(/class="report-method-signature"/g)?.length ?? 0;
+  if (methodCards !== expectedMethods || signatureBlocks !== expectedMethods) {
+    throw new Error(
+      `Downstream report presentation is incomplete: expected ${expectedMethods} method card(s) with signatures, rendered ${methodCards} method card(s) and ${signatureBlocks} signature block(s).`,
+    );
+  }
+  if (
+    !html.includes(
+      `<meta name="typespec-assessment-report-presentation" content="${REPORT_PRESENTATION_VERSION}">`,
+    )
+  ) {
+    throw new Error("Downstream report presentation version marker is missing.");
+  }
 }
 
 if (isMain(import.meta.url)) {

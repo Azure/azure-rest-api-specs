@@ -54,9 +54,6 @@ type ReportRenderHelpers = {
     areaKind: string;
     member: string;
   };
-  directLegacyDownstreamFindings: (
-    findings: LegacyAssessmentFinding[],
-  ) => LegacyAssessmentFinding[];
 };
 type DocumentRenderHelpers = {
   escapeHtml: (value: unknown) => string;
@@ -109,6 +106,8 @@ type MethodPresentation = {
   semanticIds: string[];
   cause?: "mixed" | "direct" | "indirect";
   id?: string;
+  before?: AssessmentFact;
+  after?: AssessmentFact;
 };
 type TypePresentation = {
   id: string;
@@ -134,6 +133,14 @@ type ReferencePath = {
   location?: string;
   role: string;
   path: string;
+  steps: ReferenceStep[];
+};
+type ReferenceStep = {
+  name: string;
+  detail?: string;
+  added?: boolean;
+  visibility?: string;
+  changed?: boolean;
 };
 type ReportRow = {
   area: string;
@@ -145,6 +152,8 @@ type ReportRow = {
   detail?: string;
   model?: string;
   identity?: string;
+  beforeDetail?: string;
+  afterDetail?: string;
 };
 type DownstreamDimension = AssessmentOutput["dimensions"]["downstream"];
 
@@ -228,6 +237,21 @@ function methodInputs(method: AssessmentFact | undefined) {
       )
       .join("\n") || "No caller inputs"
   );
+}
+
+function methodSignature(method: AssessmentFact | undefined) {
+  if (!method || !Array.isArray(method.parameters)) return "Not recorded";
+  const parameters = method.parameters
+    .filter(
+      (parameter) =>
+        !parameter.onClient &&
+        (typeof parameter.type === "string" || parameter.type?.kind !== "constant"),
+    )
+    .map(
+      (parameter) =>
+        `${parameter.name}${parameter.optional ? "?" : ""}: ${sdkTypeName(parameter.type)}`,
+    );
+  return `${method.name ?? shortName(symbolOf(method)).split(".").at(-1)}(${parameters.join(", ")}): ${sdkTypeName(method.responseType)}`;
 }
 
 function displayValue(value: unknown) {
@@ -547,6 +571,7 @@ function mappedPaths(
                   .map((edge) => edge.memberName)
                   .filter(Boolean)
                   .join(".") || "(returned type)",
+              steps: referenceSteps(method, current.path, raw, type),
             });
             result.set(key, mapping);
             break;
@@ -570,6 +595,73 @@ function mappedPaths(
   }));
 }
 
+function counterpartFact(fact: AssessmentFact, raw: DownstreamAnalysis, role: string) {
+  const matches = Object.values(raw.facts).filter(
+    (candidate) =>
+      candidate.projectId === fact.projectId &&
+      candidate.comparisonRole === role &&
+      candidate.factKind === fact.factKind &&
+      symbolOf(candidate) === symbolOf(fact),
+  );
+  return matches.length === 1 ? matches[0] : undefined;
+}
+
+function referenceSteps(
+  method: AssessmentFact,
+  edges: DownstreamRootCauseReference[],
+  raw: DownstreamAnalysis,
+  changedType: string,
+): ReferenceStep[] {
+  const steps: ReferenceStep[] = [
+    { name: shortName(symbolOf(method)), detail: "Public SDK method" },
+  ];
+  for (const edge of edges) {
+    const from = edge.fromFactId ? raw.facts[edge.fromFactId] : undefined;
+    const to = edge.toFactId ? raw.facts[edge.toFactId] : undefined;
+    if (!to) continue;
+    const property = from?.properties?.find((item) => item.name === edge.memberName);
+    const baseline = from && counterpartFact(from, raw, "baseline");
+    const added =
+      edge.kind === "property" &&
+      from?.comparisonRole === "target" &&
+      Boolean(baseline?.properties) &&
+      !baseline?.properties?.some((item) => item.name === edge.memberName);
+    const visibility =
+      property && "visibility" in property && Array.isArray(property.visibility)
+        ? property.visibility
+        : [];
+    const visibilityLabel =
+      visibility.length === 1 && visibility[0] === 2 ? "Create-only" : undefined;
+    const member =
+      (edge.memberName ?? "") +
+      (typeof property?.type !== "string" && property?.type?.kind === "array" ? "[]" : "");
+    if (added) {
+      steps.push({
+        name: member,
+        detail: "New property; absent in baseline",
+        added: true,
+        visibility: visibilityLabel,
+      });
+    }
+    steps.push({
+      name:
+        String(symbolOf(to) ?? to.name ?? "Unknown type")
+          .split(".")
+          .at(-1) ?? "Unknown type",
+      detail: added
+        ? "Property value type"
+        : edge.memberName
+          ? `Via .${member}`
+          : edge.kind === "response"
+            ? "Return type"
+            : (edge.kind?.replaceAll("-", " ") ?? "Type reference"),
+      visibility: added ? undefined : visibilityLabel,
+      changed: symbolOf(to) === changedType,
+    });
+  }
+  return steps;
+}
+
 function factPair(finding: AssessmentFinding, kind?: string) {
   const facts = (finding.evidence ?? []).filter((fact) => !kind || fact.factKind === kind);
   return {
@@ -584,18 +676,35 @@ function typeRows(type: string, findings: AssessmentFinding[]): ReportRow[] {
     const { before, after } = factPair(finding);
     const name =
       finding.actual?.match(/\bproperty\s+([A-Za-z_$][\w$]*)\b/)?.[1] ??
+      (finding.actual?.startsWith(`${type}.`)
+        ? finding.actual.slice(type.length + 1).match(/^([A-Za-z_$][\w$]*)\b/)?.[1]
+        : undefined) ??
       finding.expected?.match(/\bproperty\s+([A-Za-z_$][\w$]*)\b/)?.[1];
-    if (finding.rule === "model-property-removed" && name && before) {
-      const previous = before.properties?.find((property) => property.name === name);
+    if (finding.rule?.startsWith("model-property-") && name && (before || after)) {
+      const previous = before?.properties?.find((property) => property.name === name);
       const current = after?.properties?.find((property) => property.name === name);
+      const signature = (property: NonNullable<AssessmentFact["properties"]>[number]) =>
+        `${property.name}${property.optional ? "?" : ""}: ${sdkTypeName(property.type)}`;
+      const requiredness = (property: NonNullable<AssessmentFact["properties"]>[number]) =>
+        property.optional ? "Optional; may be omitted" : "Required; must be supplied";
       rows.push({
         area: "SDK type member",
-        label: name,
-        before: previous
-          ? `${sdkTypeName(previous.type)}${previous.optional ? "?" : ""}`
-          : finding.expected,
-        after: current ? sdkTypeName(current.type) : "removed",
+        label: `${type.split(".").at(-1)}.${name}`,
+        before: previous ? signature(previous) : before ? "not present" : "Not recorded",
+        after: current ? signature(current) : after ? "removed" : "Not recorded",
+        beforeDetail: previous ? requiredness(previous) : undefined,
+        afterDetail: current ? requiredness(current) : undefined,
       });
+      for (const field of ["access", "flatten", "serializedName"] as const) {
+        if (previous?.[field] !== current?.[field] && previous && current) {
+          rows.push({
+            area: "SDK type member",
+            label: `${type.split(".").at(-1)}.${name} (${field})`,
+            before: displayValue(previous[field]),
+            after: displayValue(current[field]),
+          });
+        }
+      }
     } else if (finding.rule === "public-surface-changed") {
       const surface = (fact: AssessmentFact | undefined) =>
         fact
@@ -654,6 +763,106 @@ function typeRows(type: string, findings: AssessmentFinding[]): ReportRow[] {
   return [...new Map(rows.map((row) => [JSON.stringify(row), row])).values()];
 }
 
+function modelReferenceType(method: AssessmentFact | undefined, reference: ReferencePath) {
+  if (!method) return;
+  if (reference.location === "response-body") return method.responseType;
+  if (!reference.location?.startsWith("request-")) return;
+  const member = reference.path.split(".")[0];
+  return method.parameters?.find(
+    (parameter) =>
+      !parameter.onClient &&
+      (parameter.name === member ||
+        (reference.location === "request-body" &&
+          parameter.name === method.operation?.bodyParam?.name)),
+  )?.type;
+}
+
+function referencedTypeKind(type: SdkType | string | null | undefined): string | undefined {
+  if (!type || typeof type === "string") return;
+  if (type.kind === "array" || type.kind === "dictionary")
+    return referencedTypeKind(type.valueType ?? type.items);
+  if (type.kind === "nullable") return referencedTypeKind(type.type);
+  return type.kind;
+}
+
+function modelReferences(method: MethodPresentation, paths: ReferencePath[]) {
+  const references = new Map<
+    string,
+    {
+      direction: string;
+      name: string;
+      expression: string;
+      roles: string[];
+      unchangedName: boolean;
+      isModel: boolean;
+    }
+  >();
+  for (const reference of paths) {
+    const side = reference.role === "baseline" ? method.before : method.after;
+    const recordedType = modelReferenceType(side, reference);
+    const name = recordedType === undefined ? reference.steps[1]?.name : sdkTypeName(recordedType);
+    if (!name) continue;
+    const direction = reference.location?.startsWith("request-")
+      ? "Input"
+      : reference.location?.startsWith("response-")
+        ? "Output"
+        : "SDK";
+    const expression =
+      reference.path === "(returned type)"
+        ? name
+        : direction === "Output"
+          ? `${name}.${reference.path}`
+          : reference.path;
+    const before = modelReferenceType(method.before, reference);
+    const after = modelReferenceType(method.after, reference);
+    const key = JSON.stringify([reference.location, name, expression]);
+    const item = references.get(key) ?? {
+      direction,
+      name,
+      expression,
+      roles: [],
+      isModel: referencedTypeKind(recordedType) === "model",
+      unchangedName:
+        before !== undefined && after !== undefined && sdkTypeName(before) === sdkTypeName(after),
+    };
+    item.roles = unique([...item.roles, reference.role]);
+    references.set(key, item);
+  }
+  return [...references.values()];
+}
+
+function modelContextRows(type: TypePresentation, method: MethodPresentation) {
+  const pair = type.findings
+    .map((finding) => factPair(finding, "model"))
+    .find(
+      ({ before, after }) => Array.isArray(before?.properties) && Array.isArray(after?.properties),
+    );
+  if (!pair?.before || !pair.after) return type.rows;
+  const addedNames = new Set(
+    method.types.flatMap(({ paths }) =>
+      paths.flatMap((reference) =>
+        reference.steps.filter((step) => step.added).map((step) => step.name.replace(/\[\]$/, "")),
+      ),
+    ),
+  );
+  const added: ReportRow[] = (pair.after.properties ?? [])
+    .filter(
+      (property) =>
+        typeof property.name === "string" &&
+        addedNames.has(property.name) &&
+        !pair.before?.properties?.some((previous) => previous.name === property.name) &&
+        !type.rows.some((row) => row.label === `${type.type.split(".").at(-1)}.${property.name}`),
+    )
+    .map((property) => ({
+      area: "SDK model field",
+      label: `${type.type.split(".").at(-1)}.${property.name}`,
+      before: "not present",
+      after: `${property.name}${property.optional ? "?" : ""}: ${sdkTypeName(property.type)}`,
+      afterDetail: "Added field connecting a related changed type; context, not another finding.",
+    }));
+  return [...added, ...type.rows];
+}
+
 export function downstreamMethodData(
   dimension: Partial<DownstreamDimension> = {},
   raw?: DownstreamAnalysis,
@@ -685,6 +894,8 @@ export function downstreamMethodData(
         : shortName(symbol),
       aliases: unique([symbol, group.symbol, symbolOf(group.before), symbolOf(group.after)]),
       group,
+      before: group.before,
+      after: group.after,
       findingIds,
       rows: methodRows(group),
       types: [],
@@ -787,6 +998,22 @@ export function downstreamMethodData(
       mapped: [],
       semanticIds: finding.relatedSemanticIntents ?? [],
     });
+  }
+  if (raw) {
+    for (const method of methods) {
+      for (const role of ["baseline", "target"] as const) {
+        const side = role === "baseline" ? "before" : "after";
+        if (method[side]) continue;
+        const matches = Object.values(raw.facts).filter(
+          (fact) =>
+            fact.factKind === "method" &&
+            fact.comparisonRole === role &&
+            (!method.projectId || fact.projectId === method.projectId) &&
+            method.aliases.includes(symbolOf(fact) ?? ""),
+        );
+        if (matches.length === 1) method[side] = matches[0];
+      }
+    }
   }
   for (const method of methods) {
     method.cause = method.group ? (method.types.length ? "mixed" : "direct") : "indirect";
@@ -1236,7 +1463,6 @@ export function renderReportSections(
     sourceLinks,
     legacyEvidence,
     contractAreaParts,
-    directLegacyDownstreamFindings,
   } = helpers;
   const { dimensions } = assessment;
   const items = dimensions.semantic.items ?? [];
@@ -1245,27 +1471,12 @@ export function renderReportSections(
     downstreamPresentationDimension(assessment, options),
     options.downstreamInput,
   );
-  const legacyDownstream = directLegacyDownstreamFindings(
-    dimensions.downstream.legacyFindings ?? [],
-  );
 
   const status = (value: string | undefined) => {
     const label =
       value === "unknown" ? "verdict unknown" : (value?.replaceAll("-", " ") ?? "Not assessed");
     return `<span class="report-badge ${value === "passed" ? "add" : value === "failed" ? "remove" : "unknown"}">${escape(label)}</span>`;
   };
-  const coverageBadge = (value: string | undefined) => {
-    if (!value) return "";
-    const label =
-      value === "complete"
-        ? "complete coverage"
-        : value === "partial"
-          ? "partial coverage"
-          : "coverage blocked";
-    const style = value === "complete" ? "neutral" : "unknown";
-    return `<span class="report-badge ${style} coverage">${label}</span>`;
-  };
-
   const sectionHead = (title: string, description: string, metadata: string) =>
     `<div class="report-section-head"><div><h2>${escape(title)}</h2><p>${escape(description)}</p></div><div class="report-section-meta">${metadata}</div></div>`;
 
@@ -1292,7 +1503,7 @@ export function renderReportSections(
   const table = (rows: ReportRow[]) => {
     const changed = rows.filter((row) => escape(row.before) !== escape(row.after));
     if (!changed.length) return "";
-    return `<div class="report-table-wrap"><table class="report-table"><thead><tr><th>Contract area</th><th>Before</th><th>After</th></tr></thead><tbody>${changed.map((row) => `<tr><td><span class="contract-area-kind">${escape(row.area ?? row.areaKind ?? "Contract")}</span><strong>${escape(row.label ?? row.member)}</strong>${row.model ? `<span class="report-small">Affected model: <code>${escape(row.model)}</code></span>` : ""}${row.detail ? `<span class="report-detail">${escape(row.detail)}</span>` : ""}</td><td><pre>${escape(row.before)}</pre></td><td><pre>${escape(row.after)}</pre></td></tr>`).join("")}</tbody></table></div>`;
+    return `<div class="report-table-wrap"><table class="report-table"><thead><tr><th>Contract area</th><th>Before</th><th>After</th></tr></thead><tbody>${changed.map((row) => `<tr><td><span class="contract-area-kind">${escape(row.area ?? row.areaKind ?? "Contract")}</span><strong>${escape(row.label ?? row.member)}</strong>${row.model ? `<span class="report-small">Affected model: <code>${escape(row.model)}</code></span>` : ""}${row.detail ? `<span class="report-detail">${escape(row.detail)}</span>` : ""}</td><td><pre>${escape(row.before)}</pre>${row.beforeDetail ? `<span class="report-detail">${escape(row.beforeDetail)}</span>` : ""}</td><td><pre>${escape(row.after)}</pre>${row.afterDetail ? `<span class="report-detail">${escape(row.afterDetail)}</span>` : ""}</td></tr>`).join("")}</tbody></table></div>`;
   };
 
   const emitted: Set<string> = new Set();
@@ -1314,6 +1525,7 @@ export function renderReportSections(
     findings: {
       rationale?: string;
     }[],
+    label: string = "Why this is breaking:",
   ) => {
     const reasons = unique(findings.map((finding) => finding.rationale));
     if (!reasons.length) return "";
@@ -1321,7 +1533,7 @@ export function renderReportSections(
       reasons.length === 1
         ? escape(reasons[0])
         : `<ul>${reasons.map((reason) => `<li>${escape(reason)}</li>`).join("")}</ul>`;
-    return `<div class="breaking-rationale"><strong>Why this is breaking:</strong> ${body}</div>`;
+    return `<div class="breaking-rationale"><strong>${escape(label)}</strong> ${body}</div>`;
   };
 
   const legacyCard = (finding: LegacyAssessmentFinding, downstream: boolean = false) =>
@@ -1431,21 +1643,87 @@ export function renderReportSections(
       .join("") +
     (dimensions.rest.legacyFindings ?? []).map((finding) => legacyCard(finding)).join("");
 
-  const locations: Record<string, string> = {
-    "request-query": "Input / query",
-    "request-header": "Input / header",
-    "request-body": "Input / body",
-    "request-path": "Input / path",
-    "response-header": "Output / header",
-    "response-body": "Output / body",
+  const referenceChains = (paths: ReferencePath[]) => {
+    const groups = new Map<string, { path: ReferencePath; roles: string[] }>();
+    for (const item of paths) {
+      const key = JSON.stringify([item.location, item.path, item.steps]);
+      const group = groups.get(key) ?? { path: item, roles: [] };
+      group.roles = unique([...group.roles, item.role]);
+      groups.set(key, group);
+    }
+    return `<div class="report-reference-chains"><p class="report-small"><strong>How this method connects to the changed type</strong></p>${[
+      ...groups.values(),
+    ]
+      .map(({ path: item, roles }) => {
+        const role =
+          roles.includes("baseline") && roles.includes("target")
+            ? "Baseline + target"
+            : roles.includes("baseline")
+              ? "Baseline"
+              : roles.includes("target")
+                ? "Target"
+                : "Role unavailable";
+        const added = item.steps.some((step) => step.added);
+        return `<div class="report-reference-chain"><div class="report-chain-label">${escape(role)} SDK reference graph${added ? ' <span class="report-badge unknown">Target-only path</span>' : ""}</div><ol>${item.steps.map((step, index) => `<li style="--reference-depth:${index}"><code>${escape(step.name)}</code>${step.added ? '<span class="report-badge unknown">Target only</span>' : ""}${step.visibility ? `<span class="report-badge neutral">${escape(step.visibility)}</span>` : ""}${step.changed ? '<span class="report-badge remove">Type-level breaking change</span>' : ""}${step.detail ? `<span class="report-chain-detail">${escape(step.detail)}</span>` : ""}</li>`).join("")}</ol></div>`;
+      })
+      .join("")}<p class="report-path-scope"><strong>Why this method is listed:</strong> ${
+      paths.some((item) => item.role === "baseline")
+        ? "a recorded baseline parameter or return-type path reaches this changed SDK type. The type-level consequence is described below; the method signature can remain unchanged."
+        : paths.some((item) => item.steps.some((step) => step.added))
+          ? "the target SDK graph reaches this type through a newly added property. This type association does not establish a separate breaking change for an existing caller of this method."
+          : "the recorded SDK graph reaches this changed type. Baseline reachability is not established by target evidence alone."
+    }</p></div>`;
   };
 
-  const typeContent = (type: TypePresentation, paths?: ReferencePath[]) =>
-    `<div class="report-type-impact">${emitAnchor(type.anchorId)}${emitAnchor(`downstream-${anchor(type.id)}`)}${findingAnchors(type.findings, "downstream")}${findingAnchors(type.findings)}<h4>${escape(type.type.split(".").at(-1))}</h4><p class="report-small"><code>${escape(type.type)}</code></p>${
-      paths?.length
-        ? `<p class="report-small">Representative method paths from recorded graph edges:</p><div class="report-reference-paths">${paths.map((item) => `<div class="report-reference-path"><span>${escape(locations[item.location ?? ""] ?? "Location unavailable")}</span><code>${escape(item.path)}</code><span>${escape(item.role)} evidence</span></div>`).join("")}</div>`
-        : '<p class="mapping-unavailable">Precise method path, location and baseline/target role unavailable. Aggregate root locations are not method-specific evidence.</p>'
-    }${table(type.rows)}${rationale(type.findings)}</div>`;
+  const typeContent = (
+    type: TypePresentation,
+    paths?: ReferencePath[],
+    method?: MethodPresentation,
+  ) => {
+    const anchors = `${emitAnchor(type.anchorId)}${emitAnchor(`downstream-${anchor(type.id)}`)}${findingAnchors(type.findings, "downstream")}${findingAnchors(type.findings)}`;
+    if (!method || !paths?.length) {
+      return `<div class="report-type-impact">${anchors}<h4>${escape(type.type.split(".").at(-1))}</h4><p class="report-small"><code>${escape(type.type)}</code></p><p class="mapping-unavailable">Precise method path, location and baseline/target role unavailable. Aggregate root locations are not method-specific evidence.</p>${table(type.rows)}${rationale(type.findings, "Why the type change is breaking:")}</div>`;
+    }
+    const references = modelReferences(method, paths);
+    const directions = unique(references.map((reference) => reference.direction));
+    const direction =
+      directions.includes("Input") && directions.includes("Output")
+        ? "Input / output"
+        : (directions[0] ?? "SDK");
+    const names = unique(references.map((reference) => reference.name));
+    const noun =
+      references.length && references.every((reference) => reference.isModel) ? "model" : "type";
+    const unchangedSignature =
+      method.before &&
+      method.after &&
+      methodSignature(method.before) !== "Not recorded" &&
+      methodSignature(method.before) === methodSignature(method.after);
+    const scope = paths.some((reference) => reference.role === "baseline")
+      ? "The table directly compares the affected fields inside the referenced SDK model or type."
+      : paths.some((reference) => reference.steps.some((step) => step.added))
+        ? "Target-only association through a newly added field; this does not establish a separate breaking change for an existing caller."
+        : "Target evidence only. Baseline reachability is not established by target evidence alone.";
+    const referenceRows = references
+      .map((reference) => {
+        const role =
+          reference.roles.includes("baseline") && reference.roles.includes("target")
+            ? "Baseline + target"
+            : reference.roles.includes("baseline")
+              ? "Baseline"
+              : reference.roles.includes("target")
+                ? "Target"
+                : "Role unavailable";
+        const destination = type.type.split(".").at(-1);
+        const expression =
+          reference.expression === destination
+            ? reference.expression
+            : `${reference.expression} → ${destination}`;
+        return `<div class="report-reference-path"><span>${escape(reference.direction)} / ${reference.isModel ? "model" : "type"}</span><code>${escape(expression)}</code><span>${reference.unchangedName ? `${reference.isModel ? "Model" : "Type"} name unchanged` : `${escape(role)} evidence`}</span></div>`;
+      })
+      .join("");
+    const title = `${direction} ${noun}: ${names.join(" / ") || type.type.split(".").at(-1)}`;
+    return `<div class="report-type-impact report-model-change">${anchors}<h4>${escape(title)} <span class="report-badge indirect">Structure changed</span></h4><p class="report-small">${escape(scope)}</p><div class="report-reference-paths">${referenceRows}</div>${table(modelContextRows(type, method))}<div class="breaking-rationale"><strong>${escape(unchangedSignature ? `The ${direction.toLowerCase()} ${noun} changed, not the method signature.` : `The ${direction.toLowerCase()} ${noun} contract changed.`)}</strong> ${escape(names.length === 1 ? `The method uses ${names[0]}; fields or public contracts inside the referenced ${noun} differ.` : "Compare the model fields separately from the method's parameter list and return type.")}</div><p class="report-small report-model-scope">This compares language-neutral SDK model structure, not HTTP response fields. Language-specific compatibility conclusions require the corresponding public API evidence.</p><details class="report-model-evidence"><summary>Show reference paths and assessment evidence</summary><p class="report-small">Changed type: <code>${escape(type.type)}</code></p>${referenceChains(paths)}${rationale(type.findings, "Why the type change is breaking:")}<p class="report-small">A lifecycle badge does not prove that a property is absent from the REST response schema.</p></details></div>`;
+  };
   const downstreamBody =
     downstream.methods
       .map((method) => {
@@ -1459,7 +1737,7 @@ export function renderReportSections(
               .join("")
           : "";
         const constants = (["before", "after"] as const).flatMap((side) =>
-          (method.group?.[side]?.operation?.parameters ?? [])
+          (method[side]?.operation?.parameters ?? [])
             .filter(
               (parameter) =>
                 parameter.kind === "header" &&
@@ -1473,8 +1751,22 @@ export function renderReportSections(
         );
         const description = method.group
           ? "The normalized SDK method contract changes directly."
-          : "The method uses changed SDK types; its top-level signature need not change.";
-        return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), `<span class="report-badge ${method.cause}">${method.cause === "mixed" ? "Mixed: direct + type change" : method.cause === "direct" ? "Direct method change" : "Indirect type change"}</span>`, affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}<p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${method.rows.length ? table(method.rows) : ""}${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}${method.group ? rationale(method.group.deltas ?? []) : ""}${method.types.map(({ type, paths }) => typeContent(type, paths)).join("")}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></div></details>`;
+          : method.before &&
+              method.after &&
+              methodSignature(method.before) === methodSignature(method.after)
+            ? "Method signature unchanged. The input/output model changes are compared below."
+            : "The method is associated with changed SDK types; recorded signature evidence is shown below.";
+        const beforeSignature = methodSignature(method.before);
+        const afterSignature = methodSignature(method.after);
+        const complete = beforeSignature !== "Not recorded" && afterSignature !== "Not recorded";
+        const signature = `<div class="report-method-signature"><p class="report-small"><strong>Method signature</strong> <span class="report-badge ${complete ? "neutral" : "unknown"}">${complete ? (beforeSignature === afterSignature ? "Unchanged" : "Changed") : "Evidence incomplete"}</span></p><div class="report-signature-lines"><div><span>Before</span><code>${escape(beforeSignature)}</code></div><div><span>After</span><code>${escape(afterSignature)}</code></div></div></div>`;
+        const targetOnly = ({ paths }: MethodPresentation["types"][number]) =>
+          paths.length > 0 &&
+          !paths.some((reference) => reference.role === "baseline") &&
+          paths.some((reference) => reference.steps.some((step) => step.added));
+        const primaryTypes = method.types.filter((reference) => !targetOnly(reference));
+        const relatedTypes = method.types.filter(targetOnly);
+        return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), `<span class="report-badge ${method.cause}">${method.cause === "mixed" ? "Mixed: direct + type change" : method.cause === "direct" ? "Direct method change" : "Indirect type change"}</span>`, affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}${signature}${method.rows.length ? table(method.rows) : ""}${method.group ? rationale(method.group.deltas ?? []) : ""}${primaryTypes.map(({ type, paths }) => typeContent(type, paths, method)).join("")}${relatedTypes.length ? `<details class="report-model-evidence report-related-models"><summary>Show target-only related type changes (${relatedTypes.length})</summary>${relatedTypes.map(({ type, paths }) => typeContent(type, paths, method)).join("")}</details>` : ""}<details class="report-model-evidence"><summary>Show recorded SDK method evidence</summary><p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></details></div></details>`;
       })
       .join("") +
     downstream.unmapped
@@ -1482,8 +1774,7 @@ export function renderReportSections(
         (type) =>
           `<details class="report-card sdk-contract-card">${summary(escape(type.type.split(".").at(-1)), "Confirmed SDK type finding retained without a deterministic SDK method mapping.", '<span class="report-badge unknown">Method mapping unavailable</span>', affectedIntents(type.semanticIds))}<div class="report-card-body">${typeContent(type)}</div></details>`,
       )
-      .join("") +
-    legacyDownstream.map((finding) => legacyCard(finding, true)).join("");
+      .join("");
 
   const compliance = dimensions.compliance;
   const complianceFindings = [...(compliance.findings ?? []), ...(compliance.legacyFindings ?? [])];
@@ -1657,15 +1948,6 @@ export function renderReportSections(
         downstreamLinks.push(
           `<a class="report-link impact" href="#${type.anchorId}">Downstream: ${escape(type.type.split(".").at(-1))} (SDK type)</a>`,
         );
-      for (const finding of legacyDownstream) {
-        if (
-          finding.relatedSemanticIntents?.includes(item.id) ||
-          related.downstream?.includes(finding.id)
-        )
-          downstreamLinks.push(
-            `<a class="report-link impact" href="#downstream-${anchor(finding.id)}">Downstream: ${escape(finding.title ?? finding.rule)}</a>`,
-          );
-      }
       const impactLinks = unique([...restLinks, ...downstreamLinks]);
       const guidelineIds = unique(
         complianceFindings
@@ -1735,8 +2017,7 @@ export function renderReportSections(
     restCards.length +
     restFindings.filter((finding) => !mappedRest.has(finding.id)).length +
     (dimensions.rest.legacyFindings?.length ?? 0);
-  const downstreamCount =
-    downstream.methods.length + downstream.unmapped.length + legacyDownstream.length;
+  const downstreamCount = downstream.methods.length + downstream.unmapped.length;
   // Semantic intents describe changes, not findings. Stable sorting preserves the header order within each group.
   const sections = [
     {
@@ -1749,11 +2030,11 @@ export function renderReportSections(
     },
     {
       findingCount: restCount,
-      html: `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.rest.verdict ?? restStatus) + coverageBadge(dimensions.rest.coverage) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
+      html: `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.rest.verdict ?? restStatus) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
     },
     {
       findingCount: downstreamCount,
-      html: `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.downstream.verdict ?? downstreamStatus) + coverageBadge(dimensions.downstream.coverage) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
+      html: `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.downstream.verdict ?? downstreamStatus) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
     },
     { findingCount: documentQuality.findings?.length ?? 0, html: documentBody.html },
   ];
