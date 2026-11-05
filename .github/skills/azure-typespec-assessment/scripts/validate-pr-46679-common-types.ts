@@ -126,26 +126,32 @@ export function reconcileRestDecisions(
   judgment: Judgment,
   historicalCandidates: BreakingCandidate[],
   currentCandidates: BreakingCandidate[],
+  allowedRemovedCandidateKeys: Set<string> = new Set(),
 ): Judgment {
   const historicalById = new Map(
     historicalCandidates.map((candidate) => [candidate.id, candidate]),
   );
   const currentByKey = uniqueCandidates(currentCandidates, "current analysis");
-  const restDecisions = judgment.restDecisions.map((decision) => {
-    const historicalCandidate = historicalById.get(decision.candidateId);
-    if (!historicalCandidate) {
-      throw new Error(
-        `Historical judgment references unknown REST candidate ${decision.candidateId}.`,
-      );
-    }
-    const currentCandidate = currentByKey.get(semanticRestCandidateKey(historicalCandidate));
-    if (!currentCandidate) {
-      throw new Error(
-        `No current REST candidate matches historical decision ${decision.candidateId}.`,
-      );
-    }
-    return { ...decision, candidateId: currentCandidate.id };
-  });
+  const restDecisions = judgment.restDecisions
+    .map((decision) => {
+      const historicalCandidate = historicalById.get(decision.candidateId);
+      if (!historicalCandidate) {
+        throw new Error(
+          `Historical judgment references unknown REST candidate ${decision.candidateId}.`,
+        );
+      }
+      const currentCandidate = currentByKey.get(semanticRestCandidateKey(historicalCandidate));
+      if (!currentCandidate) {
+        if (allowedRemovedCandidateKeys.has(semanticRestCandidateKey(historicalCandidate))) {
+          return undefined;
+        }
+        throw new Error(
+          `No current REST candidate matches historical decision ${decision.candidateId}.`,
+        );
+      }
+      return { ...decision, candidateId: currentCandidate.id };
+    })
+    .filter((decision) => decision !== undefined);
   return { ...judgment, restDecisions };
 }
 
@@ -160,6 +166,36 @@ export function removeObsoleteCommonTypeJudgmentBlocker(judgment: Judgment) {
     return !obsolete;
   });
   return { judgment: { ...judgment, blockers }, removed };
+}
+
+function candidateReferenceId(value: unknown): string | undefined {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const record = value as Record<string, unknown>;
+  return typeof record.id === "string" ? record.id : undefined;
+}
+
+export function removeModelInputCandidateReferences(
+  value: unknown,
+  candidateIds: Set<string>,
+): unknown {
+  if (Array.isArray(value)) {
+    return value
+      .filter(
+        (item) =>
+          !(typeof item === "string" && candidateIds.has(item)) &&
+          !candidateIds.has(candidateReferenceId(item) ?? ""),
+      )
+      .map((item) => removeModelInputCandidateReferences(item, candidateIds));
+  }
+  if (value === null || typeof value !== "object") return value;
+  const result: Record<string, unknown> = {};
+  for (const [key, nested] of Object.entries(value)) {
+    if (key === "evidenceRef" && candidateIds.has(candidateReferenceId(nested) ?? "")) {
+      continue;
+    }
+    result[key] = removeModelInputCandidateReferences(nested, candidateIds);
+  }
+  return result;
 }
 
 export function validateReferenceEvidence(evidence: ReferenceEvidence) {
@@ -241,7 +277,7 @@ function reportMarkdown(result: Record<string, unknown>) {
 
 **Result:** ${result.status === "passed" ? "Passed" : "Failed"}
 
-The pinned PR #46679 fixture preserves all ${String(result.currentRestCandidateCount)} semantic REST candidates while removing only the obsolete common-type-derived unresolved-contract blocker. Normal assessment execution did not load or resolve common-type files; exact lookup evidence was verified separately against the pinned artifacts.
+The pinned PR #46679 fixture preserves ${String(result.currentRestCandidateCount)} supported semantic REST candidates, removes the obsolete common-type-derived unresolved-contract blocker, and removes the representation-only CloudAccounts_Update candidate after comparing its effective JSON wire properties across object and allOf forms. Normal assessment execution did not load or resolve common-type files; exact lookup evidence was verified separately against the pinned artifacts.
 
 ## Acceptance
 
@@ -249,7 +285,7 @@ The pinned PR #46679 fixture preserves all ${String(result.currentRestCandidateC
 | --- | --- |
 | Pinned provenance and artifact hashes | ${acceptance.provenance ? "Pass" : "Fail"} |
 | 303 / 303 common-type references found by exact lookup | ${acceptance.referenceLookup ? "Pass" : "Fail"} |
-| Semantic REST candidate set preserved | ${acceptance.restCandidatesPreserved ? "Pass" : "Fail"} |
+| REST candidate changes are limited to the representation-only finding | ${acceptance.restCandidateChangesExplained ? "Pass" : "Fail"} |
 | Common-type unresolved REST blocker removed | ${acceptance.commonTypeBlockerRemoved ? "Pass" : "Fail"} |
 | Independent inference and downstream blockers preserved | ${acceptance.independentBlockersPreserved ? "Pass" : "Fail"} |
 | Final assessment and HTML generated | ${acceptance.finalization ? "Pass" : "Fail"} |
@@ -300,8 +336,17 @@ export function validatePr46679CommonTypes({
   });
   const restAnalysis = elapsed(restStarted);
   const comparison = compareRestCandidates(historical.candidates, current.candidates);
+  const removedCandidates = comparison.removed.map((key) => comparison.historicalByKey.get(key)!);
+  const removedWireRepresentationCandidates = removedCandidates.filter(
+    (candidate) =>
+      candidate.rule === "wire-type-changed" &&
+      candidate.operationIds?.includes("CloudAccounts_Update") &&
+      candidate.contractChange?.location === "request body",
+  );
   assert(
-    comparison.removed.length === 0 && comparison.added.length === 0,
+    comparison.removed.length === 1 &&
+      removedWireRepresentationCandidates.length === 1 &&
+      comparison.added.length === 0,
     `REST semantic candidates changed unexpectedly: removed ${comparison.removed.length}, added ${comparison.added.length}.`,
   );
   assert(
@@ -313,12 +358,12 @@ export function validatePr46679CommonTypes({
     "Current analysis still contains an unresolved-contract blocker.",
   );
   assert(
-    current.candidates.some(
+    !current.candidates.some(
       (candidate) =>
         candidate.rule === "wire-type-changed" &&
         candidate.operationIds?.includes("CloudAccounts_Update"),
     ),
-    "CloudAccounts_Update request-body change was not preserved.",
+    "CloudAccounts_Update still has a representation-only request-body finding.",
   );
   for (const operationId of [
     "RoleMappings_CreateOrUpdate",
@@ -334,6 +379,14 @@ export function validatePr46679CommonTypes({
   const workspaceStarted = performance.now();
   const canonicalPaths = prepareOutputWorkspace(fixtureRoot, outputRoot, state);
   atomicWriteJson(path.join(outputRoot, "dimensions", "rest-breaking-input.json"), current);
+  const removedCandidateIds = new Set(
+    removedWireRepresentationCandidates.map((candidate) => candidate.id),
+  );
+  const modelInputPath = path.join(outputRoot, "model-input.json");
+  atomicWriteJson(
+    modelInputPath,
+    removeModelInputCandidateReferences(readJsonObject(modelInputPath), removedCandidateIds),
+  );
   const originalJudgment = readJsonObject(
     path.join(fixtureRoot, "assessment-judgment.json"),
   ) as Judgment;
@@ -341,6 +394,7 @@ export function validatePr46679CommonTypes({
     originalJudgment,
     historical.candidates,
     current.candidates,
+    new Set(comparison.removed),
   );
   const blockerResult = removeObsoleteCommonTypeJudgmentBlocker(reconciled);
   assert(
@@ -405,6 +459,14 @@ export function validatePr46679CommonTypes({
     },
     historicalRestCandidateCount: historical.candidates.length,
     currentRestCandidateCount: current.candidates.length,
+    removedRestCandidates: removedWireRepresentationCandidates.map((candidate) => ({
+      id: candidate.id,
+      rule: candidate.rule,
+      operationIds: candidate.operationIds,
+      location: candidate.contractChange?.location,
+      reason:
+        "The effective JSON properties are compatible after flattening resolved allOf objects and treating unresolved ARM common types as opaque.",
+    })),
     removedRestBlockers: historical.blockers.filter(
       (blocker) => !current.blockers.some((currentBlocker) => currentBlocker.code === blocker.code),
     ),
@@ -413,7 +475,7 @@ export function validatePr46679CommonTypes({
     acceptance: {
       provenance: true,
       referenceLookup: true,
-      restCandidatesPreserved: true,
+      restCandidateChangesExplained: true,
       commonTypeBlockerRemoved: true,
       independentBlockersPreserved: true,
       finalization: true,

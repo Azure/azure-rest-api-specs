@@ -227,6 +227,67 @@ function visibleIn(schema: NormalizedSchema, direction: SchemaDirection): boolea
   return !mutability?.length || mutability.includes("read");
 }
 
+type ObjectContract = {
+  properties: NonNullable<NormalizedSchema["properties"]>;
+  constraints: Record<string, unknown[]>;
+  additionalProperties: unknown[];
+};
+
+function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | undefined {
+  if (schema.kind !== "object" && schema.kind !== "intersection") return undefined;
+  const properties = new Map<string, NonNullable<NormalizedSchema["properties"]>[number]>();
+  const constraints = new Map<string, unknown[]>();
+  const additionalProperties: unknown[] = [];
+
+  const visit = (current: NormalizedSchema): boolean => {
+    const unresolved = unresolvedReferenceIdentity(current);
+    if (unresolved !== undefined) return isArmCommonTypeReference(unresolved);
+    if (current.kind !== "object" && current.kind !== "intersection") return false;
+
+    for (const field of WIRE_CONSTRAINT_FIELDS) {
+      if (current[field] === undefined) continue;
+      const values = constraints.get(field) ?? [];
+      values.push(current[field]);
+      constraints.set(field, values);
+    }
+    if (current.additionalProperties !== undefined) {
+      additionalProperties.push(current.additionalProperties);
+    }
+    for (const property of current.properties ?? []) {
+      const existing = properties.get(property.name);
+      if (!existing) {
+        properties.set(property.name, property);
+      } else {
+        properties.set(property.name, {
+          name: property.name,
+          required: existing.required || property.required,
+          schema: same(existing.schema, property.schema)
+            ? existing.schema
+            : {
+                kind: "intersection",
+                allOf: [existing.schema, property.schema],
+              },
+        });
+      }
+    }
+    return (current.allOf ?? []).every(visit);
+  };
+
+  if (!visit(schema)) return undefined;
+  return {
+    properties: [...properties.values()].sort((left, right) => left.name.localeCompare(right.name)),
+    constraints: Object.fromEntries(
+      [...constraints.entries()].map(([field, values]) => [
+        field,
+        values.sort((left, right) => canonicalJson(left).localeCompare(canonicalJson(right))),
+      ]),
+    ),
+    additionalProperties: additionalProperties.sort((left, right) =>
+      canonicalJson(left).localeCompare(canonicalJson(right)),
+    ),
+  };
+}
+
 function pairs(base: NormalizedAutorestOperation[], current: NormalizedAutorestOperation[]) {
   const currentByKey = new Map(current.map((item) => [logicalKey(item), item]));
   const used = new Set();
@@ -263,8 +324,11 @@ function schemaChanges(
     return [];
   }
 
+  const beforeObject = effectiveObjectContract(before);
+  const afterObject = effectiveObjectContract(after);
+  const objectContracts = beforeObject && afterObject;
   const changes: BreakingChange[] = [];
-  if (before.kind !== after.kind || before.type !== after.type) {
+  if (!objectContracts && (before.kind !== after.kind || before.type !== after.type)) {
     return [{ rule: "wire-type-changed", location }];
   }
   if (before.nullable && !after.nullable) changes.push({ rule: "nullable-restricted", location });
@@ -276,14 +340,19 @@ function schemaChanges(
         schema[field],
       ]),
     );
-  if (!same(constraints(before), constraints(after))) {
+  if (
+    !same(
+      objectContracts ? beforeObject.constraints : constraints(before),
+      objectContracts ? afterObject.constraints : constraints(after),
+    )
+  ) {
     changes.push({ rule: "wire-schema-changed", location });
   }
-  if (before.kind === "object" || before.kind === "intersection") {
-    const beforeVisibleProperties = (before.properties ?? []).filter((item) =>
+  if (objectContracts) {
+    const beforeVisibleProperties = beforeObject.properties.filter((item) =>
       visibleIn(item.schema, direction),
     );
-    const afterVisibleProperties = (after.properties ?? []).filter((item) =>
+    const afterVisibleProperties = afterObject.properties.filter((item) =>
       visibleIn(item.schema, direction),
     );
     const beforeProperties = new Map(beforeVisibleProperties.map((item) => [item.name, item]));
@@ -314,9 +383,10 @@ function schemaChanges(
         changes.push({ rule: "required-property-added", location: `${location}.${property.name}` });
       }
     }
-    if (!same(before.additionalProperties, after.additionalProperties)) {
+    if (!same(beforeObject.additionalProperties, afterObject.additionalProperties)) {
       changes.push({ rule: "additional-properties-changed", location });
     }
+  } else if (before.kind === "object" || before.kind === "intersection") {
     if (before.kind === "intersection") {
       const beforeParts = before.allOf ?? [];
       const afterParts = after.allOf ?? [];

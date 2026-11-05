@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   compareRestCandidates,
   reconcileRestDecisions,
+  removeModelInputCandidateReferences,
   removeObsoleteCommonTypeJudgmentBlocker,
   semanticRestCandidateKey,
   validateReferenceEvidence,
@@ -66,6 +67,30 @@ describe("PR #46679 common-type acceptance validation", () => {
     ]);
   });
 
+  it("drops an explicitly allowed representation-only historical decision", () => {
+    const historical = candidate("rest-before");
+    const judgment = {
+      restDecisions: [
+        {
+          candidateId: historical.id,
+          decision: "approve",
+          severity: "high",
+          rationale: "The request body changed.",
+        },
+      ],
+      blockers: [],
+    };
+
+    expect(
+      reconcileRestDecisions(
+        judgment,
+        [historical],
+        [],
+        new Set([semanticRestCandidateKey(historical)]),
+      ).restDecisions,
+    ).toEqual([]);
+  });
+
   it("removes only the obsolete common-type judgment blocker", () => {
     const obsolete =
       "CloudAccounts_Update contains unresolved AutoRest references or visibility evidence, so the complete effective REST request contract cannot be established.";
@@ -83,6 +108,40 @@ describe("PR #46679 common-type acceptance validation", () => {
         blockers: [independent],
       },
       removed: [obsolete],
+    });
+  });
+
+  it("removes a deleted candidate from bounded model input references", () => {
+    expect(
+      removeModelInputCandidateReferences(
+        {
+          restCandidates: [
+            { id: "rest-keep", rule: "property-required" },
+            { id: "rest-remove", rule: "wire-type-changed" },
+          ],
+          semanticReviewUnits: [
+            {
+              deterministicCoverage: {
+                restCandidateIds: ["rest-keep", "rest-remove"],
+              },
+              evidenceRef: {
+                artifact: "dimensions/rest-breaking-input.json",
+                id: "rest-remove",
+              },
+            },
+          ],
+        },
+        new Set(["rest-remove"]),
+      ),
+    ).toEqual({
+      restCandidates: [{ id: "rest-keep", rule: "property-required" }],
+      semanticReviewUnits: [
+        {
+          deterministicCoverage: {
+            restCandidateIds: ["rest-keep"],
+          },
+        },
+      ],
     });
   });
 
