@@ -608,6 +608,25 @@ using Azure.AI.Projects;
 );
 
 @@clientName(TelephonyBindingListItem.etag, "eTag");
+@@clientName(TelephonyCampaign.etag, "eTag", "java");
+
+@@clientName(TelephonyCampaigns.create, "createCampaign", "java");
+@@clientName(TelephonyCampaigns.get, "getCampaign", "java");
+@@clientName(TelephonyCampaigns.list, "listCampaigns", "java");
+@@clientName(TelephonyCampaigns.cancel, "cancelCampaign", "java");
+@@clientName(TelephonyCampaigns.delete, "deleteCampaign", "java");
+@@clientName(TelephonyCampaigns.getOperation, "getCampaignOperation", "java");
+@@clientName(
+  TelephonyCampaigns.listValidationErrors,
+  "listCampaignValidationErrors",
+  "java"
+);
+
+@@TypeSpec.OpenAPI.extension(
+  DatasetReference,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
 @@clientName(
   OpenAI.TranscriptTextUsageTokensInputTokenDetails,
   "TranscriptTextInputTokenDetails"
