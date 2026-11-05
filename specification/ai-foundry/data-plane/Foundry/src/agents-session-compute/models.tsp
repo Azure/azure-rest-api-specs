@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-client-generator-core";
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
@@ -9,7 +8,6 @@ import "../agents/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -40,23 +38,11 @@ alias SessionComputePathParams = {
 alias SessionComputePortPathParams = {
   ...SessionComputePathParams;
 
-  /** The port number inside the compute. */
+  /** The port number inside the compute, between 1024 and 65535. Port 8088 is reserved. */
   @path
   @minValue(1024)
   @maxValue(65535)
   port: int32;
-};
-
-// Cursor-based paging parameters for session compute list operations.
-alias SessionComputePageQueryParameters = {
-  /** Page size, between 1 and 100. Values outside this range are clamped. Defaults to 20. */
-  @query
-  @minValue(1)
-  @maxValue(100)
-  limit?: int32 = 20;
-
-  /** Cursor for pagination: the identifier of the last item on the previous page. Unknown values return `400`. */
-  @query after?: string;
 };
 
 // ---------------------------------------------------------------------------
@@ -145,7 +131,7 @@ model SessionComputeVolume {
   @doc("""
     Whether the backing store is re-attached to the next instance with the data it held when the previous
     instance stopped. For `blob`, this applies to the container, not the local cache: writes still in the cache
-    at a forced restart or platform eviction may be lost. `:restart` stops the instance gracefully first.
+    at a forced stop or platform eviction may be lost. Stopping the session stops the instance gracefully first.
     """)
   persists_across_restart: boolean;
 }
@@ -194,37 +180,24 @@ model SessionCompute {
   stopped_at?: utcDateTime | null;
 }
 
-@doc("A page of session computes.")
-@removed(Versions.v1)
-model SessionComputeList {
-  @doc("The object type, which is always `list`.")
-  object: "list";
-
-  @doc("The computes on this page.")
-  data: SessionCompute[];
-
-  @doc("True when more items follow; pass the last item's `id` as `after`.")
-  has_more: boolean;
-}
-
 // ---------------------------------------------------------------------------
 // Exec
 // ---------------------------------------------------------------------------
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "C# name is set in sdk-csharp-azure-ai-projects-agents/client.tsp"
 @doc("""
   A flat bag of provider-specific options. At most 16 keys, each 1–64 characters. Keys are validated
   fail-closed against the provider's known-key set before any provider call; an unknown key returns
   `400 compute_invalid_provider_options`. Every known-key set is empty today. Values are never echoed in errors.
   """)
 @removed(Versions.v1)
-@clientName("SessionComputeProviderConfig", "csharp")
 model SessionComputeProviderOptions {
   ...Record<unknown>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "C# name is set in sdk-csharp-azure-ai-projects-agents/client.tsp"
 @doc("Request to run a one-shot shell command inside a session compute.")
 @removed(Versions.v1)
-@clientName("SessionComputeExecContent", "csharp")
 model SessionComputeExecRequest {
   @doc("The shell command line executed inside the compute. Maximum 32 KiB.")
   @maxLength(32768)
@@ -291,16 +264,10 @@ union SessionComputePortProtocol {
   http2: "http2",
 }
 
-@doc("Request to expose a port of a session compute through the Foundry proxy.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "C# name is set in sdk-csharp-azure-ai-projects-agents/client.tsp"
+@doc("Request to expose a port of a session compute through the Foundry proxy. The port number is taken from the path.")
 @removed(Versions.v1)
-@clientName("SessionComputePortContent", "csharp")
 model SessionComputePortRequest {
-  @doc("The port number inside the compute. Port 8088 is reserved.")
-  @minValue(1024)
-  @maxValue(65535)
-  @example(3000)
-  port: int32;
-
   @doc("The port name. Defaults to `port-<n>` when omitted. Must be unique per compute.")
   @maxLength(32)
   @pattern("^[a-z0-9]([a-z0-9-]{0,30}[a-z0-9])?$")
@@ -338,19 +305,6 @@ model SessionComputePort {
     `X-Forwarded-Host` and `X-Forwarded-Proto`.
     """)
   url: url;
-}
-
-@doc("A page of exposed session compute ports.")
-@removed(Versions.v1)
-model SessionComputePortList {
-  @doc("The object type, which is always `list`.")
-  object: "list";
-
-  @doc("The ports on this page.")
-  data: SessionComputePort[];
-
-  @doc("True when more items follow; pass the last item's `port` as `after`.")
-  has_more: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -441,9 +395,9 @@ model SessionComputeLogEvent {
   data: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "C# name is set in sdk-csharp-azure-ai-projects-agents/client.tsp"
 @doc("The response that switches the HTTP connection to the `exec.v1` WebSocket protocol.")
 @removed(Versions.v1)
-@clientName("SessionComputeExecStreamUpgradeResult", "csharp")
 model SessionComputeExecStreamUpgradeResponse {
   @doc("Switches the HTTP connection to the WebSocket protocol.")
   @statusCode

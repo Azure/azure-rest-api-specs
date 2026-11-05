@@ -6033,13 +6033,21 @@
             "name": "limit",
             "in": "query",
             "required": false,
-            "description": "Page size, between 1 and 100. Values outside this range are clamped. Defaults to 20.",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
             "schema": {
               "type": "integer",
               "format": "int32",
-              "minimum": 1,
-              "maximum": 100,
               "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
             },
             "explode": false
           },
@@ -6047,7 +6055,17 @@
             "name": "after",
             "in": "query",
             "required": false,
-            "description": "Cursor for pagination: the identifier of the last item on the previous page. Unknown values return `400`.",
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "schema": {
               "type": "string"
             },
@@ -6070,7 +6088,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SessionComputeList"
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SessionCompute"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
                 }
               }
             }
@@ -6471,13 +6515,21 @@
             "name": "limit",
             "in": "query",
             "required": false,
-            "description": "Page size, between 1 and 100. Values outside this range are clamped. Defaults to 20.",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
             "schema": {
               "type": "integer",
               "format": "int32",
-              "minimum": 1,
-              "maximum": 100,
               "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
             },
             "explode": false
           },
@@ -6485,7 +6537,17 @@
             "name": "after",
             "in": "query",
             "required": false,
-            "description": "Cursor for pagination: the identifier of the last item on the previous page. Unknown values return `400`.",
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "schema": {
               "type": "string"
             },
@@ -6508,7 +6570,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SessionComputePortList"
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SessionComputePort"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
                 }
               }
             }
@@ -6542,11 +6630,13 @@
             "SessionCompute=V1Preview"
           ]
         }
-      },
-      "post": {
+      }
+    },
+    "/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}": {
+      "put": {
         "operationId": "AgentSessionComputes_exposeSessionComputePort",
         "summary": "Expose a port of a session compute",
-        "description": "Exposes a port of a session compute through the Foundry proxy. Requires `capabilities.ports = true`.\nExposure is instance-scoped and must be repeated after a restart or replacement.",
+        "description": "Exposes a port of a session compute through the Foundry proxy. Requires `capabilities.ports = true`.\nIdempotent: returns `201` when the port is newly exposed, `200` when it is already exposed with the\nsame configuration, and `409 compute_port_conflict` when it is already exposed with a different\nconfiguration (delete it first to change it). Exposure is instance-scoped and must be repeated after\nthe session is stopped and resumed, or the instance is replaced.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6588,6 +6678,18 @@
             }
           },
           {
+            "name": "port",
+            "in": "path",
+            "required": true,
+            "description": "The port number inside the compute, between 1024 and 65535. Port 8088 is reserved.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1024,
+              "maximum": 65535
+            }
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -6599,6 +6701,16 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionComputePort"
+                }
+              }
+            }
+          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "content": {
@@ -6642,16 +6754,14 @@
               }
             }
           },
-          "description": "The port to expose."
+          "description": "The port configuration."
         },
         "x-ms-foundry-meta": {
           "required_previews": [
             "SessionCompute=V1Preview"
           ]
         }
-      }
-    },
-    "/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}": {
+      },
       "get": {
         "operationId": "AgentSessionComputes_getSessionComputePort",
         "summary": "Get an exposed port of a session compute",
@@ -6700,7 +6810,7 @@
             "name": "port",
             "in": "path",
             "required": true,
-            "description": "The port number inside the compute.",
+            "description": "The port number inside the compute, between 1024 and 65535. Port 8088 is reserved.",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -6808,7 +6918,7 @@
             "name": "port",
             "in": "path",
             "required": true,
-            "description": "The port number inside the compute.",
+            "description": "The port number inside the compute, between 1024 and 65535. Port 8088 is reserved.",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -7034,104 +7144,6 @@
               "text/event-stream": {
                 "schema": {
                   "$ref": "#/components/schemas/SessionComputeLogEvent"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Computes"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "SessionCompute=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}:restart": {
-      "post": {
-        "operationId": "AgentSessionComputes_restartSessionCompute",
-        "summary": "Restart a session compute",
-        "description": "Restarts a session compute: a session stop followed by a resume, addressed at the compute.\nSession identity and files survive; in-memory process state does not. Exposed ports are\ninstance-scoped and are dropped.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "SessionCompute=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the hosted agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID, as returned by the session create operation.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "compute_id",
-            "in": "path",
-            "required": true,
-            "description": "The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.\nKept as an open string so that clients keep working when sessions support more than one compute.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SessionCompute"
                 }
               }
             }
@@ -101771,35 +101783,6 @@
           ]
         }
       },
-      "SessionComputeList": {
-        "type": "object",
-        "required": [
-          "object",
-          "data",
-          "has_more"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "list"
-            ],
-            "description": "The object type, which is always `list`."
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SessionCompute"
-            },
-            "description": "The computes on this page."
-          },
-          "has_more": {
-            "type": "boolean",
-            "description": "True when more items follow; pass the last item's `id` as `after`."
-          }
-        },
-        "description": "A page of session computes."
-      },
       "SessionComputeLogEvent": {
         "type": "object",
         "required": [
@@ -101867,35 +101850,6 @@
           ]
         }
       },
-      "SessionComputePortList": {
-        "type": "object",
-        "required": [
-          "object",
-          "data",
-          "has_more"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "list"
-            ],
-            "description": "The object type, which is always `list`."
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SessionComputePort"
-            },
-            "description": "The ports on this page."
-          },
-          "has_more": {
-            "type": "boolean",
-            "description": "True when more items follow; pass the last item's `port` as `after`."
-          }
-        },
-        "description": "A page of exposed session compute ports."
-      },
       "SessionComputePortProtocol": {
         "anyOf": [
           {
@@ -101913,20 +101867,7 @@
       },
       "SessionComputePortRequest": {
         "type": "object",
-        "required": [
-          "port"
-        ],
         "properties": {
-          "port": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1024,
-            "maximum": 65535,
-            "description": "The port number inside the compute. Port 8088 is reserved.",
-            "examples": [
-              3000
-            ]
-          },
           "name": {
             "type": "string",
             "maxLength": 32,
@@ -101943,7 +101884,7 @@
             "description": "Optional provider-specific options."
           }
         },
-        "description": "Request to expose a port of a session compute through the Foundry proxy."
+        "description": "Request to expose a port of a session compute through the Foundry proxy. The port number is taken from the path."
       },
       "SessionComputePrimitives": {
         "type": "object",
@@ -102064,7 +102005,7 @@
           },
           "persists_across_restart": {
             "type": "boolean",
-            "description": "Whether the backing store is re-attached to the next instance with the data it held when the previous\ninstance stopped. For `blob`, this applies to the container, not the local cache: writes still in the cache\nat a forced restart or platform eviction may be lost. `:restart` stops the instance gracefully first."
+            "description": "Whether the backing store is re-attached to the next instance with the data it held when the previous\ninstance stopped. For `blob`, this applies to the container, not the local cache: writes still in the cache\nat a forced stop or platform eviction may be lost. Stopping the session stops the instance gracefully first."
           }
         },
         "description": "A volume mounted into a session compute."

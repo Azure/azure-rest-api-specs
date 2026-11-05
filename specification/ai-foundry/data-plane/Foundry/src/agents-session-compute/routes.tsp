@@ -9,14 +9,14 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 /**
- * Compute primitives for hosted agent sessions: inspect, restart, run commands in, stream logs from,
+ * Compute primitives for hosted agent sessions: inspect, run commands in, stream logs from,
  * expose ports of, and read the egress policy of the compute behind a session.
  *
  * Every operation requires the `Foundry-Features: SessionCompute=V1Preview` header. Only the
  * `default` compute exists today. Exec and port operations also require the agent version to opt in
  * through `definition.compute_primitives`; check `capabilities` on the compute before calling them.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session compute operations are custom actions (exec, restart, logstream, port exposure) on a compute owned by the session, not standard resource lifecycle operations."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session compute operations are custom actions (exec, logstream, port exposure) on a compute owned by the session, not standard resource lifecycle operations."
 @tag("Agent Session Computes")
 @removed(Versions.v1)
 interface AgentSessionComputes {
@@ -26,6 +26,7 @@ interface AgentSessionComputes {
   @summary("List computes attached to a session")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes")
+  @list
   @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
   listSessionComputes is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.session_compute_v1_preview,
@@ -36,9 +37,9 @@ interface AgentSessionComputes {
       /** The session ID, as returned by the session create operation. */
       @path session_id: string;
 
-      ...SessionComputePageQueryParameters;
+      ...CommonPageQueryParameters;
     },
-    SessionComputeList
+    AgentsPagedResult<SessionCompute>
   >;
 
   /**
@@ -49,21 +50,6 @@ interface AgentSessionComputes {
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}")
   @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
   getSessionCompute is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.session_compute_v1_preview,
-    SessionComputePathParams,
-    SessionCompute
-  >;
-
-  /**
-   * Restarts a session compute: a session stop followed by a resume, addressed at the compute.
-   * Session identity and files survive; in-memory process state does not. Exposed ports are
-   * instance-scoped and are dropped.
-   */
-  @summary("Restart a session compute")
-  @post
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}:restart")
-  @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
-  restartSessionCompute is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.session_compute_v1_preview,
     SessionComputePathParams,
     SessionCompute
@@ -145,33 +131,37 @@ interface AgentSessionComputes {
   @summary("List exposed ports of a session compute")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports")
+  @list
   @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
   listSessionComputePorts is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.session_compute_v1_preview,
     {
       ...SessionComputePathParams;
-      ...SessionComputePageQueryParameters;
+      ...CommonPageQueryParameters;
     },
-    SessionComputePortList
+    AgentsPagedResult<SessionComputePort>
   >;
 
   /**
    * Exposes a port of a session compute through the Foundry proxy. Requires `capabilities.ports = true`.
-   * Exposure is instance-scoped and must be repeated after a restart or replacement.
+   * Idempotent: returns `201` when the port is newly exposed, `200` when it is already exposed with the
+   * same configuration, and `409 compute_port_conflict` when it is already exposed with a different
+   * configuration (delete it first to change it). Exposure is instance-scoped and must be repeated after
+   * the session is stopped and resumed, or the instance is replaced.
    */
   @summary("Expose a port of a session compute")
-  @post
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports")
+  @put
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}")
   @extension("x-ms-foundry-meta", SessionComputeRequiredPreviews)
   exposeSessionComputePort is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.session_compute_v1_preview,
     {
-      ...SessionComputePathParams;
+      ...SessionComputePortPathParams;
 
-      /** The port to expose. */
+      /** The port configuration. */
       @body body: SessionComputePortRequest;
     },
-    ResourceCreatedResponse<SessionComputePort>
+    SessionComputePort | ResourceCreatedResponse<SessionComputePort>
   >;
 
   /**
