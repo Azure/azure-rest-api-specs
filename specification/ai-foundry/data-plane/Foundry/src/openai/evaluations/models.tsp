@@ -1119,20 +1119,9 @@ union EvalRunOutputItemResultStatus {
     reason?: string,
 
     /** Additional details about the test criteria metric. */
-    properties?: EvalRunOutputItemResultProperties,
+    properties?: RubricResultProperties,
   }
 );
-
-/** Structured and evaluator-specific details attached to an evaluation result. */
-@TypeSpec.OpenAPI.oneOf
-union EvalRunOutputItemResultProperties {
-  /** Existing string-valued properties for legacy evaluators. */
-  legacy: Record<string>,
-
-  /** Mode-specific rubric judgments without an additional scoring wrapper. */
-  @added(Versions.v1)
-  rubric: RubricResultProperties,
-}
 
 model EvalRunOutputItemResult is OpenAI.EvalRunOutputItemResult;
 

@@ -46207,8 +46207,8 @@ components:
           items:
             $ref: '#/components/schemas/BooleanRubricDimensionResult'
           description: One Boolean judgment for every configured dimension.
-      unevaluatedProperties:
-        type: string
+      allOf:
+        - $ref: '#/components/schemas/RubricResultProperties'
       description: Flat result properties for explicit Boolean rubric scoring.
       x-ms-foundry-meta:
         required_previews:
@@ -48811,18 +48811,11 @@ components:
           type: string
           description: The reason for the test criteria metric.
         properties:
-          $ref: '#/components/schemas/EvalRunOutputItemResultProperties'
+          $ref: '#/components/schemas/RubricResultProperties'
           description: Additional details about the test criteria metric.
       unevaluatedProperties: {}
       description: A single grader result for an evaluation run output item.
       title: EvalRunOutputItemResult
-    EvalRunOutputItemResultProperties:
-      oneOf:
-        - type: object
-          unevaluatedProperties:
-            type: string
-        - $ref: '#/components/schemas/RubricResultProperties'
-      description: Structured and evaluator-specific details attached to an evaluation result.
     EvalRunOutputItemResultStatus:
       anyOf:
         - type: string
@@ -51224,8 +51217,8 @@ components:
           items:
             $ref: '#/components/schemas/LikertRubricDimensionResult'
           description: One Likert judgment for every configured dimension.
-      unevaluatedProperties:
-        type: string
+      allOf:
+        - $ref: '#/components/schemas/RubricResultProperties'
       description: Flat result properties for explicit Likert rubric scoring.
       x-ms-foundry-meta:
         required_previews:
@@ -82281,9 +82274,12 @@ components:
       description: Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream.
     RubricResultProperties:
       type: object
-      oneOf:
-        - $ref: '#/components/schemas/BooleanRubricResultProperties'
-        - $ref: '#/components/schemas/LikertRubricResultProperties'
+      required:
+        - mode
+      properties:
+        mode:
+          $ref: '#/components/schemas/RubricScoringMode'
+          description: The resolved rubric scoring mode.
       discriminator:
         propertyName: mode
         mapping:
@@ -82305,10 +82301,12 @@ components:
         required_previews:
           - Evaluations=V1Preview
     RubricScoringMode:
-      type: string
-      enum:
-        - boolean
-        - likert
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - boolean
+            - likert
       description: The scoring mode selected for an entire rubric.
       x-ms-foundry-meta:
         required_previews:
