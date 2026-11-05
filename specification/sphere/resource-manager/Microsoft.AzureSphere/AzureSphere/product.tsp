@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 /**
- * A product resource belonging to a catalog resource.
+ * An product resource belonging to a catalog resource.
  */
 @parentResource(Catalog)
 model Product is ProxyResource<ProductProperties> {

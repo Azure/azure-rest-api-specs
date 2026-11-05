@@ -318,11 +318,7 @@ interface Container {
     }
   >;
 
-  /**
-   * Deletes the specified container.
-   *
-   * When a container is deleted, a container with the same name can't be created for at least 30 seconds. The container might not be available for more than 30 seconds if the service is still processing the request. While the container is being deleted, attempts to create a container of the same name fail with status code 409 (Conflict). The service indicates that the container is being deleted. Operations on blobs within the container, including reads and writes, may continue to succeed for up to 30 seconds after the delete request is accepted. After this period, all operations on the container and its blobs fail with status code 404 (Not Found).
-   */
+  /** Deletes the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
@@ -448,28 +444,6 @@ interface Container {
       ...TimeoutParameter;
     },
     {}
-  >;
-
-  /** The Create Session operation enables users to create a session scoped to a container. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  @added(Versions.v2026_10_06)
-  @post
-  @route("?restype=container&comp=session")
-  createSession is StorageOperation<
-    {
-      ...TimeoutParameter;
-
-      /** The configuration used to create the session. */
-      @body
-      createSessionConfiguration: CreateSessionConfiguration;
-    },
-    {
-      @statusCode statusCode: 201;
-
-      /** The created session. */
-      @body
-      createSessionResponse: CreateSessionResponse;
-    }
   >;
 
   /** Allows multiple API calls to be embedded into a single HTTP request. */
@@ -942,7 +916,6 @@ interface Blob {
         @header("x-ms-smart-access-tier")
         smartAccessTier?: string;
 
-        ...DownloadHintResponseHeader;
         ...ApiVersionHeader;
       })
     | (BodyParameter & {
@@ -1015,7 +988,6 @@ interface Blob {
         @header("x-ms-smart-access-tier")
         smartAccessTier?: string;
 
-        ...DownloadHintResponseHeader;
         ...ApiVersionHeader;
       })
     | Error;
@@ -1671,65 +1643,6 @@ interface Blob {
       @statusCode statusCode: 204;
     }
   >;
-
-  /** The Get Blob Layout operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob.  In addition, it may optionally return the layout of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-  @added(Versions.v2026_10_06)
-  @list
-  @get
-  @route("?comp=layout")
-  getLayout(
-    ...ApiVersionHeader,
-    ...ClientRequestIdHeader,
-    ...SnapshotParameter,
-    ...VersionIdParameter,
-    ...MarkerParameter,
-    ...MaxResultsParameter,
-    ...TimeoutParameter,
-    ...RangeParameter,
-    ...LeaseIdOptionalParameter,
-    ...IfTagsParameter,
-    ...IfModifiedSinceParameter,
-    ...IfUnmodifiedSinceParameter,
-    ...IfMatchParameter,
-    ...IfNoneMatchParameter,
-    ...EncryptionKeyParameter,
-    ...EncryptionKeySha256Parameter,
-    ...EncryptionAlgorithmParameter,
-  ):
-    | {
-        /** The content type of the body of the response. */
-        @header("Content-Type")
-        contentType: "application/xml";
-
-        ...BlobLayoutResponseHeaders;
-        ...ClientRequestIdHeader;
-        ...RequestIdResponseHeader;
-        ...ApiVersionHeader;
-        ...DateResponseHeaderPrivate;
-
-        /** The layout of the blob. */
-        @body
-        blobLayout: BlobLayout;
-      }
-    | {
-        #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
-        @statusCode statusCode: 204;
-
-        /** Content-type. */
-        #suppress "@typespec/http/content-type-ignored" "There is no response body, so the content-type header can be returned."
-        @header("Content-Type")
-        contentType?: string;
-
-        ...BlobLayoutResponseHeaders;
-        ...ClientRequestIdHeader;
-        ...RequestIdResponseHeader;
-        ...ApiVersionHeader;
-        ...DateResponseHeaderPrivate;
-      }
-    | Error;
 }
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."

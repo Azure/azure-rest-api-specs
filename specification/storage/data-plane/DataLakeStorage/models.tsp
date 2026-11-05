@@ -408,11 +408,13 @@ model BlobItem {
 @Xml.name("Properties")
 model BlobPropertiesInternal {
   /** The creation time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Creation-Time")
   creationTime?: utcDateTime;
 
   /** The last modified time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
@@ -466,6 +468,7 @@ model BlobPropertiesInternal {
   copyProgress?: string;
 
   /** The copy completion time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("CopyCompletionTime")
   copyCompletionTime?: utcDateTime;
@@ -487,6 +490,7 @@ model BlobPropertiesInternal {
   destinationSnapshot?: string;
 
   /** The deleted time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeletedTime")
   deletedTime?: utcDateTime;
@@ -508,6 +512,7 @@ model BlobPropertiesInternal {
   encryptionScope?: string;
 
   /** The access tier change time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("AccessTierChangeTime")
   accessTierChangeTime?: utcDateTime;
@@ -517,6 +522,7 @@ model BlobPropertiesInternal {
   tagCount?: int32;
 
   /** The expiry time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Expiry-Time")
   expiresOn?: utcDateTime;
@@ -526,11 +532,13 @@ model BlobPropertiesInternal {
   isSealed?: boolean;
 
   /** The last accessed time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastAccessTime")
   lastAccessedOn?: utcDateTime;
 
   /** The delete time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeleteTime")
   deleteTime?: utcDateTime;
@@ -601,6 +609,7 @@ alias IfNoneMatchParameter = {
 /** The If-Modified-Since header parameter. */
 alias IfModifiedSinceParameter = {
   /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("If-Modified-Since")
   ifModifiedSince?: utcDateTime;
@@ -609,6 +618,7 @@ alias IfModifiedSinceParameter = {
 /** The If-Unmodified-Since header parameter. */
 alias IfUnmodifiedSinceParameter = {
   /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("If-Unmodified-Since")
   ifUnmodifiedSince?: utcDateTime;
@@ -631,6 +641,7 @@ alias SourceIfNoneMatchParameter = {
 /** The source If-Modified-Since header parameter. */
 alias SourceIfModifiedSinceParameter = {
   /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-source-if-modified-since")
   sourceIfModifiedSince?: utcDateTime;
@@ -639,6 +650,7 @@ alias SourceIfModifiedSinceParameter = {
 /** The source If-Unmodified-Since header parameter. */
 alias SourceIfUnmodifiedSinceParameter = {
   /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-source-if-unmodified-since")
   sourceIfUnmodifiedSince?: utcDateTime;
@@ -1022,6 +1034,7 @@ alias EtagResponseHeader = {
 /** The Last-Modified response header. */
 alias LastModifiedResponseHeader = {
   /** The data and time the resource was last modified. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("Last-Modified")
   lastModified: utcDateTime;
@@ -1146,6 +1159,7 @@ alias DeletionIdResponseHeader = {
 /** The creation time response header. */
 alias CreationTimeResponseHeader = {
   /** Returns the date and time the blob was created. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-creation-time")
   creationTime: utcDateTime;
@@ -1154,6 +1168,7 @@ alias CreationTimeResponseHeader = {
 /** The expiry time response header. */
 alias ExpiryTimeResponseHeader = {
   /** The time this blob will expire. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-expiry-time")
   expiresOn: utcDateTime;

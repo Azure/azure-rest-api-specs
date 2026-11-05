@@ -2,11 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parseCliArguments } from "./args.ts";
-import {
-  postMultipleProjectsComment,
-  postReleasePlanComment,
-  postReleasePlanErrorComment,
-} from "./pr-comment.ts";
+import { postReleasePlanComment, postReleasePlanErrorComment } from "./pr-comment.ts";
 import {
   createAzdskRunner,
   ensureReleasePlan,
@@ -23,6 +19,8 @@ import type {
 } from "./types.ts";
 import {
   createOctokit,
+  getCommitChangedFiles,
+  getPrChangedFiles,
   getTypeSpecProjectInfoFromCommit,
   NEW_API_VERSION_LABEL,
 } from "./typespec-project.ts";
@@ -73,41 +71,24 @@ export async function main(): Promise<void> {
 
     hasNewApiVersionLabel = commitResult.hasNewApiVersionLabel;
 
-    resolvedPrNumber = commitResult.prNumber;
-    if (commitResult.multipleProjectPaths && commitResult.multipleProjectPaths.length > 1) {
-      if (resolvedPrNumber) {
-        await postMultipleProjectsComment({
+    // Check if commit contains TypeSpec files (.tsp or tspconfig.yaml)
+    const commitFiles = commitResult.prNumber
+      ? await getPrChangedFiles({
           octokit,
           owner: args.owner,
           repo: args.repo,
-          prNumber: resolvedPrNumber,
-          tspProjectPaths: commitResult.multipleProjectPaths,
-        });
-      }
-      return;
-    }
-
-    if (commitResult.projectError) {
-      console.error(commitResult.projectError.message);
-      if (resolvedPrNumber) {
-        await postReleasePlanErrorComment({
+          prNumber: commitResult.prNumber,
+        })
+      : await getCommitChangedFiles({
           octokit,
           owner: args.owner,
           repo: args.repo,
-          prNumber: resolvedPrNumber,
-          error: commitResult.projectError.message,
-          tspProjectPath: commitResult.projectError.tspProjectPath,
+          commitSha,
         });
-      }
-      return;
-    }
 
-    const commitFiles = commitResult.changedFiles;
     const specFiles = commitFiles.filter((f) => f.filename.startsWith("specification/"));
     const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
-    isTspConfigChanged = specFiles.some(
-      (f) => path.posix.basename(f.filename) === "tspconfig.yaml",
-    );
+    isTspConfigChanged = specFiles.some((f) => f.filename.endsWith("tspconfig.yaml"));
 
     // Skip only if both conditions are true: no label AND no TypeSpec files
     if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {
@@ -118,6 +99,7 @@ export async function main(): Promise<void> {
     }
 
     projectInfo = commitResult.projectInfo;
+    resolvedPrNumber = commitResult.prNumber;
 
     const prUrl = resolvedPrNumber
       ? `https://github.com/${args.owner}/${args.repo}/pull/${resolvedPrNumber}`
@@ -229,7 +211,6 @@ function writeReleasePlanResult(result: EnsureReleasePlanResult, outputFile?: st
 export { parseCliArguments } from "./args.ts";
 export {
   buildReleaseplanCommentBody,
-  postMultipleProjectsComment,
   postReleasePlanComment,
   postReleasePlanErrorComment,
 } from "./pr-comment.ts";
@@ -257,7 +238,9 @@ export type {
 } from "./types.ts";
 export {
   collectTypeSpecProjectPaths,
+  compareApiVersionsDesc,
   createOctokit,
+  detectApiVersions,
   findTspConfigDir,
   FOLDER_MIGRATION_LABEL,
   getAssociatedPrNumber,
@@ -265,8 +248,10 @@ export {
   getPrChangedFiles,
   getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
+  getTypeSpecProjectInfoFromPr,
   getTypeSpecProjectVersionFromMetadata,
   NEW_API_VERSION_LABEL,
+  parseApiVersion,
   resolveTypeSpecMetadata,
   SKIP_RELEASE_PLAN_AUTOMATION_LABEL,
 } from "./typespec-project.ts";

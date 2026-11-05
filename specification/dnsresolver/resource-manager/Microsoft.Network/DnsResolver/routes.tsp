@@ -43,7 +43,6 @@ interface DnsResolversOperationGroup {
       /**
        * The maximum number of results to return. If not specified, returns up to 100 results.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listByVirtualNetwork POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -67,7 +66,6 @@ interface DnsForwardingRulesetsOperationGroup {
       /**
        * The maximum number of results to return. If not specified, returns up to 100 results.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listByVirtualNetwork POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },

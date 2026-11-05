@@ -126,5 +126,3 @@ namespace Microsoft.ApiCenter;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(EnvironmentServer.managementPortalUri, url, "csharp");
-@@alternateType(Onboarding.developerPortalUri, url, "csharp");

@@ -24,16 +24,6 @@ using Microsoft.EventGrid.SystemEvents;
   "fromCommunicationIdentifier",
   "csharp"
 );
-@@clientName(
-  AcsIncomingCallTeamsPhoneCallDetails.transcriptUrl,
-  "transcriptUri",
-  "csharp"
-);
-@@clientName(
-  AcsIncomingCallTeamsPhoneCallerDetails.screenPopUrl,
-  "screenPopUri",
-  "csharp"
-);
 
 @@clientName(
   AcsEmailEngagementTrackingReportReceivedEventData.engagementType,

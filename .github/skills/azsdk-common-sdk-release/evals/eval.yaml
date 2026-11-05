@@ -8,10 +8,10 @@ tags:
   area: azsdk-common-sdk-release
   type: ci-gate
 
-defaults:
+config:
   runs: 1
   timeout: "90s"
-  model: gpt-6.1-sol
+  model: gpt-5.4
   executor: copilot-sdk
 
 scoring:
@@ -60,16 +60,12 @@ stimuli:
 
   - name: basic-trigger
     prompt: "I need to release a new version of my Azure SDK package. Walk me through the process."
-    environment:
-      skills:
-        - ..
     graders:
       - type: output-contains
         config:
           substring: "release"
-      - type: skill-invocation
-        config:
-          required: ["azsdk-common-sdk-release"]
+    constraints:
+      expect_skills: ["azsdk-common-sdk-release"]
 
   - name: anti-trigger
     prompt: "How do I write unit tests for my Azure SDK client?"

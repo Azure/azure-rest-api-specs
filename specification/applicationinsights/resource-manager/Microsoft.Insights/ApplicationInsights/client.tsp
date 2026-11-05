@@ -112,7 +112,7 @@ namespace ApplicationInsightsManagementClient;
 );
 @@clientName(
   AnalyticsItems.AnalyticsItemsOperationGroup.list::parameters.type,
-  exact("type"),
+  "$DO_NOT_NORMALIZE$type",
   "javascript"
 );
 @@clientName(Workbooks.revisionsList, "listRevisionsList", "javascript");
@@ -770,20 +770,4 @@ namespace ApplicationInsightsManagementClient;
   DeletedWorkbookApi.DeletedWorkbookProperties.storageUri,
   url,
   "csharp"
-);
-
-@@clientName(
-  ApplicationInsightsComponentProperties.otlpLogsEndpoint,
-  "OTLPLogsEndpoint",
-  "go"
-);
-@@clientName(
-  ApplicationInsightsComponentProperties.otlpTracesEndpoint,
-  "OTLPTracesEndpoint",
-  "go"
-);
-@@clientName(
-  ApplicationInsightsComponentProperties.otlpMetricsEndpoint,
-  "OTLPMetricsEndpoint",
-  "go"
 );

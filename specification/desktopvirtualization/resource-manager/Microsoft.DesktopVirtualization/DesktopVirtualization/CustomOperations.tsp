@@ -19,6 +19,8 @@ namespace Microsoft.DesktopVirtualization;
  * @template Response Optional. The success response for the patch operation
  * @template Error Optional. The error response, if non-standard.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 @autoRoute
 @doc("Update a {name}", Resource)
@@ -48,6 +50,8 @@ op ArmCustomPatchSyncWithOptionalBody<
  * @template Response Optional. The success response for the patch operation
  * @template Error Optional. The error response, if non-standard.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 @autoRoute
 @doc("Update a {name}", Resource)

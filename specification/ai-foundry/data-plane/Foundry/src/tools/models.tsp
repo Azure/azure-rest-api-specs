@@ -14,7 +14,6 @@ namespace Azure.AI.Projects {
   union _PreviewAgentToolType {
     a2a_preview: "a2a_preview",
     bing_custom_search_preview: "bing_custom_search_preview",
-    #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
     browser_automation_preview: "browser_automation_preview",
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
@@ -40,18 +39,10 @@ namespace Azure.AI.Projects {
     memory_search: "memory_search",
   }
 
-  union _MicrosoftCopilotAgentToolType {
-    microsoft_copilot_toolset_preview: "microsoft_copilot_toolset_preview",
-  }
-
   const PreviewTool = #{ required_previews: #["preview_tool"] };
 
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
-  @@copyVariants(
-    OpenAI.ToolType,
-    Azure.AI.Projects._MicrosoftCopilotAgentToolType
-  );
 
   union _AgentIncludable {
     "memory_search_call.results",
@@ -88,84 +79,7 @@ namespace Azure.AI.Projects {
     tool_configs?: Record<ToolConfig>;
   };
 
-  @doc("A customer-configurable Microsoft Copilot built-in tool.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[
-        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
-      ],
-    }
-  )
-  union MicrosoftCopilotBuiltInTool {
-    @doc("Read and search files in the harness workspace.")
-    filesystem_read: "filesystem_read",
-
-    @doc("Create and modify files in the harness workspace.")
-    filesystem_write: "filesystem_write",
-
-    @doc("Execute operating-system commands.")
-    shell: "shell",
-
-    @doc("Fetch content and search external network resources.")
-    web: "web",
-
-    @doc("Delegate work to additional agents.")
-    subagents: "subagents",
-  }
-
-  @doc("The default enablement setting for Microsoft Copilot built-in tools.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[
-        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
-      ],
-    }
-  )
-  model MicrosoftCopilotToolsetDefaultConfig {
-    @doc("Whether built-in tools are enabled by default. Defaults to true.")
-    enabled?: boolean = true;
-  }
-
-  @doc("An enablement override for a Microsoft Copilot built-in tool.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[
-        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
-      ],
-    }
-  )
-  model MicrosoftCopilotToolsetConfig {
-    @doc("The built-in tool to configure.")
-    name: MicrosoftCopilotBuiltInTool;
-
-    @doc("Whether the built-in tool is enabled. If omitted, the toolset default applies.")
-    enabled?: boolean;
-  }
-
-  @doc("Configuration overrides for Microsoft Copilot built-in tools.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[
-        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
-      ],
-    }
-  )
-  model MicrosoftCopilotToolsetPreview extends OpenAI.Tool {
-    @doc("The type of the toolset. Always `microsoft_copilot_toolset_preview`.")
-    type: "microsoft_copilot_toolset_preview";
-
-    @doc("The default configuration for built-in tools. If omitted, built-in tools are enabled by default.")
-    default_config?: MicrosoftCopilotToolsetDefaultConfig;
-
-    @doc("Per-tool configuration overrides. Duplicate built-in tool names are not allowed.")
-    configs?: MicrosoftCopilotToolsetConfig[];
-  }
-
-  @doc("The legacy GitHub Copilot built-in tool names retained for compatibility. Use `MicrosoftCopilotBuiltInTool` for new integrations.")
+  @doc("A customer-configurable GitHub Copilot built-in tool.")
   union GitHubCopilotBuiltInTool {
     @doc("Read and search files in the harness workspace.")
     filesystem_read: "filesystem_read",
@@ -183,13 +97,13 @@ namespace Azure.AI.Projects {
     subagents: "subagents",
   }
 
-  @doc("The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfig` for new integrations.")
+  @doc("The default enablement setting for GitHub Copilot built-in tools.")
   model GitHubCopilotToolsetDefaultConfig {
     @doc("Whether built-in tools are enabled by default. Defaults to true.")
     enabled?: boolean = true;
   }
 
-  @doc("The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfig` for new integrations.")
+  @doc("An enablement override for a GitHub Copilot built-in tool.")
   model GitHubCopilotToolsetConfig {
     @doc("The built-in tool to configure.")
     name: GitHubCopilotBuiltInTool;
@@ -198,7 +112,7 @@ namespace Azure.AI.Projects {
     enabled?: boolean;
   }
 
-  @doc("The legacy GitHub Copilot toolset retained for compatibility. Use `MicrosoftCopilotToolsetPreview` for new integrations.")
+  @doc("Configuration overrides for GitHub Copilot built-in tools.")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -206,7 +120,7 @@ namespace Azure.AI.Projects {
     }
   )
   model GitHubCopilotToolsetPreview extends OpenAI.Tool {
-    @doc("The legacy type of the toolset. Always `github_copilot_toolset_preview`; use `microsoft_copilot_toolset_preview` for new integrations.")
+    @doc("The type of the toolset. Always `github_copilot_toolset_preview`.")
     type: "github_copilot_toolset_preview";
 
     @doc("The default configuration for built-in tools. If omitted, built-in tools are enabled by default.")
@@ -507,11 +421,7 @@ namespace Azure.AI.Projects {
 
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
-   * BrowserAutomationPreviewTool is deprecated.
-   * Please use BrowserAutomationTool instead.
-   * See https://aka.ms/bat/docs for more information on Browser automation tool.
    */
-  #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
   @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationPreviewTool extends OpenAI.Tool {
     /**
@@ -1161,7 +1071,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
-  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")

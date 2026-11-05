@@ -33,16 +33,8 @@ namespace Microsoft.RedHatOpenShift {
     "csharp"
   );
 
-  // Use "PascalCase" for acronyms
-  @@clientName(KmsKeyVaultType.ManagedHSM, "ManagedHsm", "csharp");
-
   // Add top-level resource name prefix to cluster model and type names
   @@clientName(ApiProfile, "HcpOpenShiftClusterApiProfile", "csharp");
-  @@clientName(
-    ClusterActiveVersion,
-    "HcpOpenShiftClusterActiveVersion",
-    "csharp"
-  );
   @@clientName(
     ClusterAutoscalingProfile,
     "HcpOpenShiftClusterAutoscalingProfile",
@@ -56,11 +48,6 @@ namespace Microsoft.RedHatOpenShift {
   @@clientName(
     ClusterImageRegistryState,
     "HcpOpenShiftClusterImageRegistryState",
-    "csharp"
-  );
-  @@clientName(
-    ClusterResourceStatus,
-    "HcpOpenShiftClusterResourceStatus",
     "csharp"
   );
   @@clientName(Condition, "HcpOpenShiftClusterCondition", "csharp");
@@ -107,7 +94,6 @@ namespace Microsoft.RedHatOpenShift {
     "csharp"
   );
   @@clientName(KmsKey, "HcpOpenShiftClusterKmsKey", "csharp");
-  @@clientName(KmsKeyVaultType, "HcpOpenShiftClusterKmsKeyVaultType", "csharp");
   @@clientName(NetworkProfile, "HcpOpenShiftClusterNetworkProfile", "csharp");
   @@clientName(NetworkType, "HcpOpenShiftClusterNetworkType", "csharp");
   @@clientName(
@@ -117,11 +103,7 @@ namespace Microsoft.RedHatOpenShift {
   );
   @@clientName(OutboundType, "HcpOpenShiftClusterOutboundType", "csharp");
   @@clientName(PlatformProfile, "HcpOpenShiftClusterPlatformProfile", "csharp");
-  @@clientName(
-    ResourceStatus,
-    "HcpOpenShiftClusterBaseResourceStatus",
-    "csharp"
-  );
+  @@clientName(ResourceStatus, "HcpOpenShiftClusterResourceStatus", "csharp");
   @@clientName(StatusType, "HcpOpenShiftClusterConditionStatusType", "csharp");
   @@clientName(
     UserAssignedIdentitiesProfile,
@@ -146,11 +128,6 @@ namespace Microsoft.RedHatOpenShift {
     "csharp"
   );
   @@clientName(
-    NodePoolActiveVersion,
-    "HcpOpenShiftClusterNodePoolActiveVersion",
-    "csharp"
-  );
-  @@clientName(
     NodePoolPlatformProfile,
     "HcpOpenShiftClusterNodePoolPlatformProfile",
     "csharp"
@@ -158,11 +135,6 @@ namespace Microsoft.RedHatOpenShift {
   @@clientName(
     NodePoolProperties,
     "HcpOpenShiftClusterNodePoolProperties",
-    "csharp"
-  );
-  @@clientName(
-    NodePoolResourceStatus,
-    "HcpOpenShiftClusterNodePoolResourceStatus",
     "csharp"
   );
   @@clientName(
@@ -297,10 +269,6 @@ namespace Microsoft.RedHatOpenShift {
 
     /** The configuration for operator authentication to Azure. */
     operatorsAuthentication: OperatorsAuthenticationProfile;
-
-    /** Azure Container Registry configuration for authenticating image pulls on the cluster's worker nodes. */
-    @added(Versions.v2026_10_01)
-    containerRegistry?: ContainerRegistryProfile;
   }
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Omitting provisioningState in this create/update model because it is a server-side read-only field"
@@ -395,14 +363,7 @@ namespace Microsoft.RedHatOpenShift {
     @minValue(0)
     replicas?: int32;
 
-    /** autoRepair specifies whether health checks should be enabled for machines
-     * in the NodePool. Enabling this feature will cause the controller to
-     * automatically delete unhealthy machines. The unhealthy criteria are
-     * determined by checking the Node Ready condition and a timeout that might
-     * vary depending on the platform provider. autoRepair will not take action
-     * when more than 2 Nodes are unhealthy at the same time, giving time for
-     * the cluster to stabilize or for the user to manually intervene.
-     */
+    /** Auto-repair */
     @visibility(Lifecycle.Read, Lifecycle.Create)
     autoRepair?: boolean = true;
 
@@ -412,7 +373,7 @@ namespace Microsoft.RedHatOpenShift {
 
     /** Kubernetes labels to propagate to the NodePool Nodes
      * Note that when the labels are updated this is only applied to newly
-     * created nodes in the Nodepool, existing node labels remain unchanged.
+     * create nodes in the Nodepool, existing node labels remain unchanged.
      */
     @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
     @identifiers(#["key", "value"])

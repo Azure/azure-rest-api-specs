@@ -17,7 +17,7 @@ import {
 
 export const readmeMdRegex = /^readme.md$/;
 export const typespecProjectRegex = /^tspconfig.yaml$/;
-export const typespecProjectSharedLibraryRegex = /[^/\\]\.Shared(?:[/\\]|$)/;
+export const typespecProjectSharedLibraryRegex = /[^/]+\.Shared/;
 
 /**
  * Processes typespec projects that follow the resource-manager or data-plane folder structure
@@ -154,44 +154,31 @@ export async function detectChangedSpecConfigFiles(
     return [];
   }
   logMessage(`Related readme.md and typespec project list:`);
-  return detectChangedSpecConfigFromChangedFiles(commandInput.localSpecRepoPath, fileList);
-}
-
-/**
- * Finds spec configurations affected by repository-relative changed files, including TypeSpec
- * projects that depend on changed shared libraries.
- * @param localSpecRepoPath - Path to the local specification repository checkout.
- * @param fileList - Repository-relative paths of changed specification files.
- * @returns The affected readme and TypeSpec project configurations.
- */
-export function detectChangedSpecConfigFromChangedFiles(
-  localSpecRepoPath: string,
-  fileList: string[],
-): ChangedSpecs[] {
   const changedSpecs: ChangedSpecs[] = [];
+
   const readmeMDResult = searchRelatedParentFolders(fileList, {
     searchFileRegex: readmeMdRegex,
-    specRepoFolder: localSpecRepoPath,
+    specRepoFolder: commandInput.localSpecRepoPath,
     stopAtFolder: "specification",
   });
 
   const typespecProjectResult = searchRelatedParentFolders(fileList, {
     searchFileRegex: typespecProjectRegex,
-    specRepoFolder: localSpecRepoPath,
+    specRepoFolder: commandInput.localSpecRepoPath,
     stopAtFolder: "specification",
     findAll: true,
   });
 
   const typespecProjectSharedLibraries = searchSharedLibrary(fileList, {
     searchFileRegex: typespecProjectSharedLibraryRegex,
-    specRepoFolder: localSpecRepoPath,
+    specRepoFolder: commandInput.localSpecRepoPath,
   });
 
   const typespecProjectResultSearchedBySharedLibrary = searchRelatedTypeSpecProjectBySharedLibrary(
     typespecProjectSharedLibraries,
     {
       searchFileRegex: typespecProjectRegex,
-      specRepoFolder: localSpecRepoPath,
+      specRepoFolder: commandInput.localSpecRepoPath,
     },
   );
 

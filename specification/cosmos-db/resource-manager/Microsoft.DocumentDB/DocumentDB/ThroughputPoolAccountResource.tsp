@@ -16,7 +16,6 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Throughputpool Account
  */
-@removed(Versions.v2026_07_15)
 @parentResource(ThroughputPoolResource)
 @added(Versions.v2026_04_01_preview)
 model ThroughputPoolAccountResource
@@ -29,7 +28,6 @@ model ThroughputPoolAccountResource
   >;
 }
 
-@removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ThroughputPoolAccountResources {

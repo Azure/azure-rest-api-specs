@@ -216,24 +216,11 @@ interface NetworkFabrics {
   @doc("Refreshes the configuration of the underlying resources in the given Network Fabric instance.")
   @action("refreshConfiguration")
   @added(Versions.v2025_07_15)
-  @removed(Versions.v2026_01_15_preview)
-  @renamedFrom(Versions.v2026_01_15_preview, "refreshConfiguration")
-  @sharedRoute
-  refreshConfigurationDeprecatedV2 is ArmResourceActionAsync<
-    NetworkFabric,
-    void,
-    Foundations.OperationStatusResult
-  >;
-
-  @doc("Refreshes the configuration of the underlying resources in the given Network Fabric instance.")
-  @action("refreshConfiguration")
-  @added(Versions.v2026_01_15_preview)
   @sharedRoute
   refreshConfiguration is ArmResourceActionAsync<
     NetworkFabric,
-    RefreshConfigurationRequestProperties,
-    Foundations.OperationStatusResult,
-    OptionalRequestBody = true
+    void,
+    Foundations.OperationStatusResult
   >;
 
   @doc("Updates the Workload Management BFD Configuration of the underlying resources in the given Network Fabric instance.")
@@ -277,26 +264,13 @@ interface NetworkFabrics {
     UpdateAdministrativeState,
     UpdateAdministrativeStateResponse
   >;
-
-  @action("validateConfiguration")
+  @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
   @added(Versions.v2025_07_15)
-  @removed(Versions.v2026_01_15_preview)
-  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
-  @sharedRoute
-  @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
-  validateConfigurationDeprecatedV2 is ArmResourceActionAsync<
-    NetworkFabric,
-    ValidateConfigurationProperties,
-    ValidateConfigurationResponse
-  >;
-
-  @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
-  @added(Versions.v2026_01_15_preview)
   @sharedRoute
   validateConfiguration is ArmResourceActionAsync<
     NetworkFabric,
     ValidateConfigurationProperties,
-    ValidateConfigurationResponseV2
+    ValidateConfigurationResponse
   >;
 
   @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
@@ -546,15 +520,11 @@ interface NetworkFabrics {
 );
 
 @@doc(
-  NetworkFabrics.validateConfigurationDeprecated::parameters.body,
-  "Validate configuration properties."
-);
-@@doc(
   NetworkFabrics.validateConfiguration::parameters.body,
   "Validate configuration properties."
 );
 @@doc(
-  NetworkFabrics.validateConfigurationDeprecatedV2::parameters.body,
+  NetworkFabrics.validateConfigurationDeprecated::parameters.body,
   "Validate configuration properties."
 );
 @@doc(
@@ -572,9 +542,5 @@ interface NetworkFabrics {
 @@doc(NetworkFabrics.refreshConfiguration::parameters.body, "Request payload.");
 @@doc(
   NetworkFabrics.refreshConfigurationDeprecated::parameters.body,
-  "Request payload."
-);
-@@doc(
-  NetworkFabrics.refreshConfigurationDeprecatedV2::parameters.body,
   "Request payload."
 );

@@ -188,7 +188,6 @@ interface PolicyFragmentContracts {
       /**
        * Number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listReferences POST contract uses $top in the query; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -196,7 +195,6 @@ interface PolicyFragmentContracts {
       /**
        * Number of records to skip.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listReferences POST contract uses $skip in the query; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -375,7 +373,6 @@ interface WorkspacePolicyFragment {
       /**
        * Number of records to return.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listReferences POST contract uses $top in the query; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -383,7 +380,6 @@ interface WorkspacePolicyFragment {
       /**
        * Number of records to skip.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listReferences POST contract uses $skip in the query; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;

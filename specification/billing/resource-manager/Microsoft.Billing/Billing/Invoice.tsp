@@ -160,7 +160,6 @@ interface Invoices {
       /**
        * The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing downloadByBillingAccount POST contract uses documentName in the query; preserve wire compatibility."
       @query("documentName")
       documentName?: string;
     }
@@ -391,7 +390,6 @@ interface InvoiceByBillingSubscription {
       /**
        * The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing downloadByBillingSubscription POST contract uses documentName in the query; preserve wire compatibility."
       @query("documentName")
       documentName?: string;
     }

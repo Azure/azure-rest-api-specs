@@ -1542,7 +1542,6 @@ model VMSizePropertiesWithAdditionalProperties {
   "TargetVmSize",
   "csharp"
 );
-@@clientName(FlexProfile.preferredVMSize, "PreferredVmSize", "csharp");
 @@clientName(
   VirtualMachineExtensionImageProperties.vmScaleSetEnabled,
   "VirtualMachineScaleSetEnabled",

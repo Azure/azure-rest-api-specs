@@ -4736,176 +4736,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default": {
-      "get": {
-        "operationId": "NamespaceMigrations_Get",
-        "tags": [
-          "NamespaceMigrations"
-        ],
-        "description": "Gets the current status of a namespace migration.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The Namespace name",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NamespaceMigration"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NamespaceMigrationsGet": {
-            "$ref": "./examples/NameSpaces/NamespaceMigrationsGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default/terminate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/triggerMigration": {
       "post": {
-        "operationId": "NamespaceMigrations_Terminate",
-        "tags": [
-          "NamespaceMigrations"
-        ],
-        "description": "Terminates an in-progress namespace migration.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The Namespace name",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NamespaceMigrationsTerminate": {
-            "$ref": "./examples/NameSpaces/NamespaceMigrationsTerminate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default/getReplicationLags": {
-      "post": {
-        "operationId": "NamespaceMigrations_GetReplicationLags",
-        "tags": [
-          "NamespaceMigrations"
-        ],
-        "description": "Gets the replication lags for an in-progress namespace migration.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The Namespace name",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NamespaceMigrationReplicationLags"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NamespaceMigrationsGetReplicationLags": {
-            "$ref": "./examples/NameSpaces/NamespaceMigrationsGetReplicationLags.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default/trigger": {
-      "post": {
-        "operationId": "NamespaceMigrations_Trigger",
+        "operationId": "NamespaceMigrations_TriggerMigration",
         "tags": [
           "NamespaceMigrations"
         ],
@@ -4971,14 +4804,181 @@
           }
         },
         "x-ms-examples": {
-          "NamespaceMigrationsTrigger": {
-            "$ref": "./examples/NameSpaces/NamespaceMigrationsTrigger.json"
+          "NamespaceMigrationsTriggerMigration": {
+            "$ref": "./examples/NameSpaces/NamespaceMigrationsTriggerMigration.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/terminateMigration": {
+      "post": {
+        "operationId": "NamespaceMigrations_TerminateMigration",
+        "tags": [
+          "NamespaceMigrations"
+        ],
+        "description": "Terminates an in-progress namespace migration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The Namespace name",
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NamespaceMigrationsTerminateMigration": {
+            "$ref": "./examples/NameSpaces/NamespaceMigrationsTerminateMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrationStatus": {
+      "get": {
+        "operationId": "NamespaceMigrations_GetMigrationStatus",
+        "tags": [
+          "NamespaceMigrations"
+        ],
+        "description": "Gets the current status of a namespace migration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The Namespace name",
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceMigrationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NamespaceMigrationsGetMigrationStatus": {
+            "$ref": "./examples/NameSpaces/NamespaceMigrationsGetMigrationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrationReplicationLags": {
+      "get": {
+        "operationId": "NamespaceMigrations_GetMigrationReplicationLags",
+        "tags": [
+          "NamespaceMigrations"
+        ],
+        "description": "Gets the replication lags for an in-progress namespace migration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The Namespace name",
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceMigrationReplicationLags"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NamespaceMigrationsGetMigrationReplicationLags": {
+            "$ref": "./examples/NameSpaces/NamespaceMigrationsGetMigrationReplicationLags.json"
+          }
+        }
       }
     }
   },
@@ -8297,21 +8297,16 @@
         ]
       }
     },
-    "NamespaceMigration": {
+    "NamespaceMigrationStatus": {
       "type": "object",
-      "description": "The migration of an Event Hubs namespace to a new SKU.",
+      "description": "The status of a namespace migration.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NamespaceMigrationProperties",
           "description": "The properties of the namespace migration.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "NamespaceMigrationProperties": {
       "type": "object",

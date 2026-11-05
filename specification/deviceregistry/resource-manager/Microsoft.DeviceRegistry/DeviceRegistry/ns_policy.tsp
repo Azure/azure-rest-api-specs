@@ -12,6 +12,25 @@ using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.TrackedResourceWithOptionalLocation to make location property optional for backward compatibility"
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_03_01_preview)
+@renamedFrom(Versions.v2026_03_01_preview, "Policy")
+@removed(Versions.v2026_04_01)
+@doc("A Credential Policy")
+@parentResource(Credential)
+model PolicyV1
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PolicyProperties> {
+  @doc("The name of the Policy tracked resource.")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
+  @key("policyName")
+  @segment("policies")
+  @path
+  name: string;
+}
+
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("A Credential Policy")
@@ -27,7 +46,7 @@ model Policy is ProxyResource<PolicyProperties> {
   name: string;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("Details of the Credential Policy.")
 model PolicyProperties {
@@ -39,7 +58,7 @@ model PolicyProperties {
   certificate?: CertificateConfiguration;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("The certificate configuration.")
 model CertificateConfiguration {
@@ -50,7 +69,7 @@ model CertificateConfiguration {
   leafCertificateConfiguration: LeafCertificateConfiguration;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("The configuration to set up an ICA.")
 model CertificateAuthorityConfiguration {
@@ -96,7 +115,7 @@ model BringYourOwnRoot {
   status?: BringYourOwnRootStatus;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("Supported key types.")
 union SupportedKeyType {
@@ -106,7 +125,7 @@ union SupportedKeyType {
   ECC: "ECC",
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("The leaf certificate configuration.")
 model LeafCertificateConfiguration {
@@ -172,4 +191,33 @@ interface Policies {
     Policy,
     ActivateBringYourOwnRootRequest
   >;
+}
+
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_03_01_preview)
+@renamedFrom(Versions.v2026_03_01_preview, "Policies")
+@removed(Versions.v2026_04_01)
+@armResourceOperations(PoliciesV1)
+interface PoliciesV1 {
+  @sharedRoute
+  get is ArmResourceRead<PolicyV1>;
+  @sharedRoute
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<PolicyV1>;
+  @sharedRoute
+  delete is ArmResourceDeleteWithoutOkAsync<PolicyV1>;
+  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
+  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
+  // since otherwise it extends the ARM TrackedResource type.
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  @sharedRoute
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    PolicyV1,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      PolicyV1,
+      PolicyProperties
+    >
+  >;
+  @sharedRoute
+  listByResourceGroup is ArmResourceListByParent<PolicyV1>;
 }

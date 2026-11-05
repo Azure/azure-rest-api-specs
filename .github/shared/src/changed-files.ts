@@ -202,7 +202,7 @@ export function markdown(file?: string): boolean {
 
 export function readme(file?: string): boolean {
   // Filename "readme.md" with any case is a valid README file
-  return hasFilename(file, "readme.md");
+  return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
 }
 
 export function tsp(file: string): boolean {
@@ -210,16 +210,7 @@ export function tsp(file: string): boolean {
 }
 
 export function tspconfig(file: string): boolean {
-  return hasFilename(file, "tspconfig.yaml");
-}
-
-function hasFilename(file: string | undefined, filename: string): boolean {
-  if (typeof file !== "string" || !file.toLowerCase().endsWith(filename)) {
-    return false;
-  }
-
-  const separator = file[file.length - filename.length - 1];
-  return separator === undefined || separator === "/" || separator === "\\";
+  return typeof file === "string" && file.toLowerCase().endsWith("tspconfig.yaml");
 }
 
 export function typespec(file: string): boolean {

@@ -61,7 +61,7 @@ union SecretType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2026_07_01)
+  @added(Versions.v2026_04_01_preview)
   MtlsCertificateChain: "MtlsCertificateChain",
 }
 
@@ -380,7 +380,7 @@ union AfdCustomizedCipherSuiteForTls13 {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 union MtlsScenarioType {
   string,
   ClientCertificateRequiredAndValidated: "ClientCertificateRequiredAndValidated",
@@ -436,7 +436,7 @@ union EnabledState {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 union EnforceMtlsEnabledState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -459,7 +459,7 @@ union OriginAuthenticationType {
 /**
  * The HTTP request header where the origin authentication token is placed when forwarding the request to the origin.
  */
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 union OriginAuthenticationTokenDestinationHeader {
   string,
 
@@ -557,6 +557,7 @@ union HttpsRedirect {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_08_01_preview)
 union AFDRouteGrpcState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -637,14 +638,13 @@ union DeliveryRuleActionName {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2026_07_01)
+  @added(Versions.v2026_04_01_preview)
   EdgeAction: "EdgeAction",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2026_07_01)
-  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_04_01_preview)
   AfdUrlSigning: "AfdUrlSigning",
 }
 
@@ -1196,7 +1196,6 @@ union PolicyMode {
 /**
  * If the action type is block, this field defines the default customer overridable http response status code.
  */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union PolicySettingsDefaultCustomBlockResponseStatusCode {
   int32,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1568,7 +1567,7 @@ union ManagedRuleExclusionSelectorMatchOperator {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 union CertificateRevocationCheckEnabledState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1580,8 +1579,7 @@ union CertificateRevocationCheckEnabledState {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
-@removed(Versions.v2026_10_01)
+@added(Versions.v2026_04_01_preview)
 union TypeName {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1676,7 +1674,7 @@ union DeliveryRuleActionParametersType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2026_07_01)
+  @added(Versions.v2026_04_01_preview)
   DeliveryRuleEdgeActionParameters: "DeliveryRuleEdgeActionParameters",
 }
 
@@ -2186,19 +2184,13 @@ union DestinationProtocol {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 union InvocationPoint {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ClientRequest: "ClientRequest",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OriginRequest: "OriginRequest",
-
-  /**
-   * Invoked at the client response stage, before the response is returned to the client. Currently only supported for edge actions.
-   */
-  @added(Versions.v2026_10_01)
-  ClientResponse: "ClientResponse",
 }
 
 /**
@@ -2350,6 +2342,7 @@ enum ProbeProtocol {
 
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_08_01_preview)
   Grpc,
 }
 
@@ -2754,7 +2747,7 @@ model DomainValidationProperties {
   /**
    * Challenge used for DNS TXT record or file based validation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret: this is the domain ownership challenge value that customers must publish as a public DNS TXT record (_dnsauth.<hostname>), so it is returned in resource responses."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   validationToken?: string;
 
@@ -2786,7 +2779,7 @@ model AFDDomainUpdatePropertiesParameters {
    */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2026_07_01)
+  @added(Versions.v2026_04_01_preview)
   mtlsSettings?: AFDDomainMtlsParameters;
 
   /**
@@ -2865,7 +2858,7 @@ model AFDDomainHttpsCustomizedCipherSuiteSet {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 @discriminator("scenario")
 model AFDDomainMtlsParameters {
   /**
@@ -2945,7 +2938,7 @@ model AFDEndpointPropertiesUpdateParameters {
    */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2026_07_01)
+  @added(Versions.v2026_04_01_preview)
   enforceMtls?: EnforceMtlsEnabledState;
 }
 
@@ -3083,6 +3076,48 @@ model LoadBalancingSettingsParameters {
    * The additional latency in milliseconds for probes to fall into the lowest latency bucket
    */
   additionalLatencyInMilliseconds?: int32;
+
+  /**
+   * Capacity based round-robin load balancing settings
+   */
+  @added(Versions.v2026_08_01_preview)
+  capacityDistributionSettings?: CapacityDistributionSettingsParameters;
+}
+
+/**
+ * Capacity based round-robin load balancing settings for a backend pool
+ */
+@added(Versions.v2026_08_01_preview)
+model CapacityDistributionSettingsParameters {
+  /**
+   * Threshold at which additional backends are added for capacity based load balancing. Default is 80 percent.
+   */
+  @maxValue(100)
+  @minValue(20)
+  capacityConsciousThreshold?: int32;
+
+  /**
+   * Type of distribution used in capacity based load balancing.
+   */
+  distributionType?: DistributionType;
+}
+
+/**
+ * Type of distribution used in capacity based load balancing.
+ */
+@added(Versions.v2026_08_01_preview)
+union DistributionType {
+  string,
+
+  /**
+   * Uses static backend weights for load balancing.
+   */
+  StaticWeights: "StaticWeights",
+
+  /**
+   * Dynamically adjusts weights based on backend capacity.
+   */
+  DynamicWeights: "DynamicWeights",
 }
 
 /**
@@ -3134,7 +3169,7 @@ model OriginAuthenticationProperties {
   /**
    * The HTTP request header where the origin authentication token will be placed when forwarding the request to the origin. If not specified, the service will use the `Authorization` header for backward compatibility.
    */
-  @added(Versions.v2026_07_01)
+  @added(Versions.v2026_04_01_preview)
   tokenDestinationHeader?: OriginAuthenticationTokenDestinationHeader;
 }
 
@@ -3406,6 +3441,7 @@ model RouteUpdatePropertiesParameters {
    */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_08_01_preview)
   grpcState?: AFDRouteGrpcState;
 }
 
@@ -6596,7 +6632,7 @@ model AzureFirstPartyManagedCertificate extends Certificate {}
 
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 @pattern("^((?!xn--)[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,61}$")
 scalar Fqdn extends string;
 
@@ -6605,7 +6641,7 @@ scalar Fqdn extends string;
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 model ClientCertificateRequiredAndValidatedAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6634,7 +6670,7 @@ model ClientCertificateRequiredAndValidatedAdvancedSettings
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 model ClientCertificateRequiredAndOriginValidatesAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6648,7 +6684,7 @@ model ClientCertificateRequiredAndOriginValidatesAdvancedSettings
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 model ClientCertificateValidatedIfPresentedAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6677,7 +6713,7 @@ model ClientCertificateValidatedIfPresentedAdvancedSettings
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 model CompleteMtlsPassthroughToOriginAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6746,7 +6782,7 @@ model SecurityPolicyWebApplicationFirewallAssociation {
   /**
    * List of routes.
    */
-  @added(Versions.v2026_07_01)
+  @added(Versions.v2026_04_01_preview)
   routes?: ResourceReference[];
 }
 
@@ -6769,7 +6805,7 @@ model SecurityPolicyWebApplicationFirewallParameters
   /**
    * Indicates if this is a profile-level WAF policy.
    */
-  @added(Versions.v2026_07_01)
+  @added(Versions.v2026_04_01_preview)
   isProfileLevel?: boolean;
 
   /**
@@ -6930,7 +6966,7 @@ model AzureFirstPartyManagedCertificateParameters extends SecretParameters {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 model AfdSecretMtlsCertificateChain extends SecretParameters {
   /**
    * Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}
@@ -6960,8 +6996,7 @@ model AfdSecretMtlsCertificateChain extends SecretParameters {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
-@removed(Versions.v2026_10_01)
+@added(Versions.v2026_04_01_preview)
 model AfdUrlSigningAction extends DeliveryRuleAction {
   /**
    * Defines the parameters for the action.
@@ -6979,8 +7014,7 @@ model AfdUrlSigningAction extends DeliveryRuleAction {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
-@removed(Versions.v2026_10_01)
+@added(Versions.v2026_04_01_preview)
 model AfdUrlSigningActionParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   typeName: TypeName;
@@ -8131,7 +8165,7 @@ model OriginGroupOverrideActionParameters extends DeliveryRuleActionParameters {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 model EdgeAction extends DeliveryRuleAction {
   /**
    * Defines the parameters for the action.
@@ -8149,7 +8183,7 @@ model EdgeAction extends DeliveryRuleAction {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_04_01_preview)
 model DeliveryRuleEdgeActionParameters extends DeliveryRuleActionParameters {
   /**
    * defines the edge action that will be invoked.

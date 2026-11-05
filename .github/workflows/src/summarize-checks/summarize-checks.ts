@@ -27,21 +27,9 @@ import type {
 // #region imports/constants
 import { execFile } from "../../../shared/src/exec.ts";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import {
-  details,
-  inlineCode,
-  link,
-  paragraph,
-  renderMarkdownDoc,
-  section,
-  unorderedList,
-  type MarkdownDoc,
-} from "../../../shared/src/markdown.ts";
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
-import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
 import { commentOrUpdate } from "../comment.ts";
-import { buildSdkBreakingChangesSummary, hasSdkBreakingChanges } from "./sdk-breaking-changes.ts";
 import { extractInputs } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
@@ -51,7 +39,6 @@ import {
   processImpactAssessment,
   verRevApproval,
 } from "./labelling.ts";
-import type { ReviewContext } from "./review-requirements.ts";
 
 import {
   brchTsg,
@@ -62,7 +49,6 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
   typeSpecSuppressionsTsg,
-  specChangePoliciesTsg,
 } from "./tsgs.ts";
 
 import fs from "node:fs/promises";
@@ -128,12 +114,6 @@ const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 const MAX_IMPACT_ASSESSMENT_BYTES = 16 * 1024 * 1024;
 
 const CHECK_METADATA: CheckMetadata[] = [
-  {
-    precedence: 0,
-    name: "Spec Change Policies",
-    suppressionLabels: [],
-    troubleshootingGuide: specChangePoliciesTsg,
-  },
   {
     precedence: 0,
     name: "TypeSpec Requirement (resource-manager)",
@@ -289,16 +269,7 @@ export default async function summarizeChecks({
   context,
   core,
 }: GitHubScriptArgs): Promise<void> {
-  const extracted = await extractInputs(github, context, core);
-  const { owner, repo } = extracted;
-  let { issue_number, head_sha } = extracted;
-
-  // Dispatched by Update Labels, which has no PR payload.
-  if (context.eventName === "workflow_dispatch") {
-    ({ issue_number, head_sha } = parseSignoffDispatchInputs(
-      (context.payload as WebhookEvent<"workflow-dispatch">).inputs,
-    ));
-  }
+  const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   if (!issue_number) {
     core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
@@ -314,6 +285,13 @@ export default async function summarizeChecks({
     core.setOutput("head_sha", head_sha);
   }
 
+  const targetBranch =
+    context.eventName === "pull_request_target"
+      ? (context.payload as WebhookEvent<"pull-request">).pull_request.base.ref
+      : undefined;
+
+  core.info(`PR target branch: ${targetBranch}`);
+
   // Default target is this run itself
   const target_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
 
@@ -325,6 +303,7 @@ export default async function summarizeChecks({
     issue_number,
     head_sha,
     context.eventName,
+    targetBranch,
     target_url,
   );
 }
@@ -358,26 +337,18 @@ export async function summarizeChecksImpl(
   issue_number: number,
   head_sha: string,
   event_name: string,
+  targetBranch: string | undefined,
   target_url: string,
 ): Promise<void> {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
   const prUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
-  core.summary.addRaw(`PR: ${link(prUrl, prUrl)}\n\n`);
+  core.summary.addRaw("PR: ");
+  core.summary.addLink(prUrl, prUrl);
   await core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
-  const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: issue_number });
-  if (pr.head.sha !== head_sha) {
-    core.info(`Skipping summary for ${head_sha}; PR head is now ${pr.head.sha}.`);
-    return;
-  }
-  const reviewContext: ReviewContext = {
-    isDraft: pr.draft ?? false,
-    targetBranch: pr.base.ref,
-  };
-  const targetBranch = reviewContext.targetBranch;
-  let labelNames = pr.labels.map((label) => (typeof label === "string" ? label : label.name));
+  let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
     github,
@@ -385,7 +356,7 @@ export async function summarizeChecksImpl(
     owner,
     repo,
     head_sha,
-    targetBranch,
+    issue_number,
     EXCLUDED_CHECK_NAMES,
   );
 
@@ -393,6 +364,7 @@ export async function summarizeChecksImpl(
 
   if (impactAssessment) {
     core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
+    targetBranch = impactAssessment.targetBranch;
   } else {
     core.info(
       `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
@@ -400,7 +372,7 @@ export async function summarizeChecksImpl(
     );
   }
 
-  const labelContext = updateLabels(labelNames, impactAssessment, reviewContext);
+  const labelContext = updateLabels(labelNames, impactAssessment);
 
   core.info(
     `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
@@ -439,35 +411,6 @@ export async function summarizeChecksImpl(
     }
   }
 
-  let sdkBreakingChangesSummary: string | undefined = undefined;
-  const hasSdkBreakingChange = hasSdkBreakingChanges(labelNames);
-  if (hasSdkBreakingChange) {
-    /* check for stale workflow-run handoff SHA */
-    const { data: pull } = await github.rest.pulls.get({
-      owner,
-      repo,
-      pull_number: issue_number,
-    });
-    if (pull.head.sha !== head_sha) {
-      core.warning(
-        `Skipping SDK breaking-change summary for stale commit ${head_sha}; current PR head is ${pull.head.sha}.`,
-      );
-    } else {
-      const comments = await github.paginate(github.rest.issues.listComments, {
-        owner,
-        repo,
-        issue_number,
-        per_page: PER_PAGE_MAX,
-      });
-      sdkBreakingChangesSummary = buildSdkBreakingChangesSummary(
-        labelNames,
-        comments ?? [],
-        head_sha,
-        prUrl,
-      );
-    }
-  }
-
   const [commentBody, automatedChecksMet] = createNextStepsComment(
     core,
     repo,
@@ -477,7 +420,6 @@ export async function summarizeChecksImpl(
     fyiCheckRuns,
     impactAssessment !== undefined,
     target_url,
-    sdkBreakingChangesSummary,
   );
 
   automatedChecksMet.target_url = target_url;
@@ -505,20 +447,9 @@ export async function summarizeChecksImpl(
   core.info(
     `Summarize checks has identified that status of "${AUTOMATED_CHECK_NAME}" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
   );
-  const statusSummary = section(
-    "Automated Checks Met",
-    `\`\`\`json\n${JSON.stringify(automatedChecksMet, null, 2)}\n\`\`\``,
-  );
-  core.summary.addRaw(`${renderMarkdownDoc(statusSummary, 2)}\n\n`);
+  core.summary.addHeading("Automated Checks Met", 2);
+  core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
   await core.summary.write();
-
-  core.setOutput(
-    "arm_review_ready",
-    impactAssessment !== undefined &&
-      !reviewContext.isDraft &&
-      labelNames.includes("ARMReview") &&
-      labelNames.includes("WaitForARMFeedback"),
-  );
 }
 
 /**
@@ -595,7 +526,6 @@ function warnIfLabelSetsIntersect(labelsToAdd: Set<string>, labelsToRemove: Set<
 export function updateLabels(
   existingLabels: string[],
   impactAssessment: import("./labelling.ts").ImpactAssessment | undefined,
-  context: ReviewContext,
 ): import("./labelling.ts").LabelContext {
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
@@ -610,7 +540,7 @@ export function updateLabels(
 
   if (impactAssessment) {
     // will further update the label context if necessary
-    processImpactAssessment(labelContext, impactAssessment, context);
+    processImpactAssessment(labelContext, impactAssessment);
   }
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
@@ -645,7 +575,7 @@ export function getRequiredChecksFromBranchRuleOutput(
  * @param owner - The repository owner.
  * @param repo - The repository name.
  * @param head_sha - The commit SHA to check.
- * @param targetBranch - The current target branch of the pull request.
+ * @param prNumber - The pull request number.
  */
 export async function getCheckRunTuple(
   github: GitHub,
@@ -653,7 +583,7 @@ export async function getCheckRunTuple(
   owner: string,
   repo: string,
   head_sha: string,
-  targetBranch: string,
+  prNumber: number,
   excludedCheckNames: string[],
 ): Promise<
   [CheckRunData[], CheckRunData[], import("./labelling.ts").ImpactAssessment | undefined]
@@ -831,7 +761,7 @@ export async function getCheckRunTuple(
     const branchRules = await github.rest.repos.getBranchRules({
       owner: owner,
       repo: repo,
-      branch: targetBranch,
+      branch: impactAssessment.targetBranch,
     });
 
     if (branchRules) {
@@ -903,16 +833,21 @@ export function createNextStepsComment(
   fyiRuns: CheckRunData[],
   assessmentCompleted: boolean,
   target_url: string,
-  sdkBreakingChangesSummary: string = "",
 ): [string, CheckRunResult] {
   // select just the metadata that we need about the runs.
   const failingCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
-  const pendingRequiredCheckNames = requiredRuns
-    .filter((run) => run.status.toLowerCase() !== "completed")
-    .map((run) => run.name);
+  // determine if required runs have any in-progress or queued runs
+  // if there are any, we consider the requirements not met.
+  // if there are NO required runs, we also consider this to be a "requirements met" situation.
+  // there is a possibility that this will be a false positive, but it is better than
+  // assuming that the requirements are not met when they actually are.
+  const requiredCheckInfosPresent = requiredRuns.every((run) => {
+    const status = run.status.toLowerCase();
+    return status === "completed";
+  });
 
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
@@ -922,12 +857,11 @@ export function createNextStepsComment(
     core,
     labels,
     `${repo}/${targetBranch}`,
-    pendingRequiredCheckNames,
+    requiredCheckInfosPresent,
     failingCheckInfos,
     fyiCheckInfos,
     assessmentCompleted,
     target_url,
-    sdkBreakingChangesSummary,
   );
 
   return [commentBody, automatedChecksMet];
@@ -940,13 +874,15 @@ function buildNextStepsToMergeCommentBody(
   core: Core,
   labels: string[],
   targetBranch: string,
-  pendingRequiredCheckNames: string[],
+  requiredCheckInfosPresent: boolean,
   failingReqChecksInfo: CheckMetadata[],
   failingFyiChecksInfo: CheckMetadata[],
   assessmentCompleted: boolean,
   target_url: string,
-  sdkBreakingChangesSummary: string,
 ): [string, CheckRunResult] {
+  // Build the comment header
+  const commentTitle = `<h2>Next Steps to Merge</h2>`;
+
   const violatedReqLabelsRules = getViolatedRequiredLabelsRules(core, labels, targetBranch);
 
   // we are "blocked" if we have any violated labelling rules OR if we have any failing required checks
@@ -954,12 +890,11 @@ function buildNextStepsToMergeCommentBody(
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
   // we consider requirements met if there are:
   // - no blockers (which includes violated labelling rules in its definition) (anyBlockerPresent)
-  // - that none of the required checks are in_progress or queued
+  // - that none of the required checks are in_progress or queued (requiredCheckInfosPresent)
   // - and that the assessment is completed. If it is not, we assume we are still evaluating the requirements. Not having
   //   the assessment completed is a blocker, as we may end up having violated labelling rules that would be detected only after
   //   it is completed.
-  const requirementsMet =
-    !anyBlockerPresent && pendingRequiredCheckNames.length === 0 && assessmentCompleted;
+  const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent && assessmentCompleted;
 
   // Compose the body based on the current state
   const [commentBody, automatedChecksMet] = getCommentBody(
@@ -969,29 +904,10 @@ function buildNextStepsToMergeCommentBody(
     failingReqChecksInfo,
     failingFyiChecksInfo,
     violatedReqLabelsRules,
-    buildPendingEvaluationBody(assessmentCompleted, pendingRequiredCheckNames),
     target_url,
-    sdkBreakingChangesSummary,
   );
 
-  return [renderMarkdownDoc(section("Next Steps to Merge", commentBody), 2), automatedChecksMet];
-}
-
-function buildPendingEvaluationBody(
-  assessmentCompleted: boolean,
-  pendingRequiredCheckNames: string[],
-): MarkdownDoc {
-  const pendingItems = pendingRequiredCheckNames.map(
-    (name) => `Waiting for required check ${inlineCode(name)} to complete.`,
-  );
-  if (!assessmentCompleted) {
-    pendingItems.unshift(
-      "PR impact assessment is not complete. Additional requirements may be identified.",
-    );
-  }
-  return pendingItems.length > 0
-    ? section("Still evaluating", unorderedList(pendingItems))
-    : undefined;
+  return [commentTitle + commentBody, automatedChecksMet];
 }
 
 /**
@@ -1002,9 +918,8 @@ function buildPendingEvaluationBody(
  * @param failingReqChecksInfo - Failing required checks info
  * @param failingFyiChecksInfo - Failing FYI checks info
  * @param violatedRequiredLabelsRules - Violated required label rules
- * @param pendingEvaluationBody - Incomplete assessment and required checks
  * @param target_url - The target URL for the automated checks met run which will be set at the outset of summarize-checks
- * @returns The Markdown body and the automated merging requirements status.
+ * @returns The body content HTML and the CheckRunResult that automated checks met should be set to.
  */
 function getCommentBody(
   requirementsMet: boolean,
@@ -1013,63 +928,56 @@ function getCommentBody(
   failingReqChecksInfo: CheckMetadata[],
   failingFyiChecksInfo: CheckMetadata[],
   violatedRequiredLabelsRules: RequiredLabelRule[],
-  pendingEvaluationBody: MarkdownDoc,
   target_url: string,
-  sdkBreakingChangesSummary: string,
-): [MarkdownDoc, CheckRunResult] {
+): [string, CheckRunResult] {
   let status: "pending" | keyof typeof CheckConclusion = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
 
-  const body: MarkdownDoc[] = [];
+  // Generate the comment body using the original logic for backwards compatibility
+  let bodyProper = "";
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
-      body.push(getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules));
+      bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
       summaryData =
         "❌ This PR cannot be merged because some requirements are not met. See the details.";
       status = "FAILURE";
     }
 
+    if (anyBlockerPresent && anyFyiPresent) {
+      bodyProper += "<br/>";
+    }
+
     if (anyFyiPresent) {
-      body.push(getFyiPresentBody(failingFyiChecksInfo));
+      bodyProper += getFyiPresentBody(failingFyiChecksInfo);
       if (!anyBlockerPresent && requirementsMet) {
-        body.push(
-          `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`,
-        );
-        summaryData = renderMarkdownDoc([
-          paragraph(
-            "⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR,",
-            "but soon these requirements will be blocking.",
-          ),
-          `See ${inlineCode("Next Steps to merge")} comment on this PR for details on how to address them.`,
-          `If you want to proceed with merging this PR without fixing them, refer to ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
-        ]);
+        bodyProper += `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`;
+        summaryData =
+          `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, ` +
+          `but soon these requirements will be blocking.` +
+          `<br/>See <code>Next Steps to merge</code> comment on this PR for details on how to address them.` +
+          `<br/>If you want to proceed with merging this PR without fixing them, refer to ` +
+          `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
         status = "SUCCESS";
       }
     }
   } else if (requirementsMet) {
-    body.push(
-      paragraph(
-        "✅ All automated merging requirements have been met!",
-        `To get your PR merged, see ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
-      ),
-    );
-    summaryData = renderMarkdownDoc([
-      "✅ All automated merging requirements have been met.",
-      `To merge this PR, refer to ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
-      "For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).",
-    ]);
+    bodyProper =
+      `✅ All automated merging requirements have been met! ` +
+      `To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
+    summaryData =
+      `✅ All automated merging requirements have been met.` +
+      `<br/>To merge this PR, refer to ` +
+      `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.` +
+      "<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).";
     status = "SUCCESS";
   } else {
-    body.push("⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛");
+    bodyProper =
+      "⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
     // dont need to update the status of the check, as pending is the default state.
   }
 
-  body.push(
-    pendingEvaluationBody,
-    sdkBreakingChangesSummary,
-    `Comment generated by ${link("summarize-checks", target_url)} workflow run.`,
-  );
+  bodyProper += `<br /><br />Comment generated by <a href="${target_url}">summarize-checks</a> workflow run.`;
 
   const automatedChecksMet: CheckRunResult = {
     name: AUTOMATED_CHECK_NAME,
@@ -1077,19 +985,19 @@ function getCommentBody(
     result: status,
   };
 
-  return [body, automatedChecksMet];
+  return [bodyProper, automatedChecksMet];
 }
 
 /**
  * Gets the body content when blockers are present
  * @param failingRequiredChecks - Failing required checks
  * @param violatedRequiredLabelsRules - Violated required label rules
- * @returns The blocking requirements as Markdown blocks.
+ * @returns The blocker present body HTML
  */
 function getBlockerPresentBody(
   failingRequiredChecks: CheckMetadata[],
   violatedRequiredLabelsRules: RequiredLabelRule[],
-): MarkdownDoc {
+): string {
   const failingRequiredChecksNextStepsText = buildFailingChecksNextStepsText(
     failingRequiredChecks,
     "required",
@@ -1097,49 +1005,27 @@ function getBlockerPresentBody(
   const violatedReqLabelsRulesNextStepsText = buildViolatedLabelRulesNextStepsText(
     violatedRequiredLabelsRules,
   );
-  const remainingRequirements = [
-    ...buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules, "remaining"),
-    ...buildFailingChecksNextStepsText(failingRequiredChecks, "required", "remaining"),
-  ];
-  return [
-    "Next steps that must be taken to merge this PR:",
-    unorderedList([...violatedReqLabelsRulesNextStepsText, ...failingRequiredChecksNextStepsText]),
-    remainingRequirements.length > 0
-      ? details(
-          `Other outstanding requirements (${remainingRequirements.length})`,
-          unorderedList(remainingRequirements),
-        )
-      : undefined,
-  ];
+  return (
+    "Next steps that must be taken to merge this PR: <br/>" +
+    "<ul>" +
+    violatedReqLabelsRulesNextStepsText +
+    failingRequiredChecksNextStepsText +
+    "</ul>"
+  );
 }
 
 /**
  * Gets the body content when FYI issues are present
  * @param failingFyiChecksInfo - Failing FYI checks info
- * @returns The non-blocking failures as Markdown blocks.
+ * @returns The FYI present body HTML
  */
-function getFyiPresentBody(failingFyiChecksInfo: CheckMetadata[]): MarkdownDoc {
-  const remainingChecks = buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI", "remaining");
-  return [
-    "Important checks have failed. As of today they are not blocking this PR, but in near future they may.",
-    "Addressing the following failures is highly recommended:",
-    unorderedList(buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI")),
-    remainingChecks.length > 0
-      ? details(
-          `Other failing non-blocking checks (${remainingChecks.length})`,
-          unorderedList(remainingChecks),
-        )
-      : undefined,
-  ];
-}
-
-function selectByPrecedence<T extends { precedence: number }>(
-  items: T[],
-  group: "next" | "remaining",
-): T[] {
-  const minPrecedence = Math.min(...items.map((item) => item.precedence));
-  return items.filter((item) =>
-    group === "next" ? item.precedence === minPrecedence : item.precedence > minPrecedence,
+function getFyiPresentBody(failingFyiChecksInfo: CheckMetadata[]): string {
+  return (
+    "Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>" +
+    "Addressing the following failures is highly recommended:<br/>" +
+    "<ul>" +
+    buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI") +
+    "</ul>"
   );
 }
 
@@ -1147,32 +1033,49 @@ function selectByPrecedence<T extends { precedence: number }>(
  * Builds next steps text for failing checks
  * @param failingChecks - Array of failing checks
  * @param checkKind - Kind of check (required or FYI)
- * @returns Markdown list items for the selected failures.
+ * @returns The failing checks next steps HTML
  */
 function buildFailingChecksNextStepsText(
   failingChecks: CheckMetadata[],
   checkKind: "required" | "FYI",
-  group: "next" | "remaining" = "next",
-): string[] {
-  return selectByPrecedence(failingChecks, group).map((check) =>
-    checkKind === "required"
-      ? `❌ The required check named ${inlineCode(check.name)} has failed. ${check.troubleshootingGuide.trim()}`
-      : `⚠️ The check named ${inlineCode(check.name)} has failed. ${check.troubleshootingGuide.trim()}`,
-  );
+): string {
+  let failingChecksNextStepsText = "";
+  if (failingChecks.length > 0) {
+    const minPrecedence = Math.min(...failingChecks.map((check) => check.precedence));
+    const checksToDisplay = failingChecks.filter((check) => check.precedence === minPrecedence);
+
+    // assert: checksToDisplay.length > 0
+    failingChecksNextStepsText = checksToDisplay
+      .map((check) =>
+        checkKind === "required"
+          ? `<li>❌ The required check named <code>${check.name}</code> has failed. ${check.troubleshootingGuide}</li>`
+          : `<li>⚠️ The check named <code>${check.name}</code> has failed. ${check.troubleshootingGuide}</li>`,
+      )
+      .join("");
+  }
+  return failingChecksNextStepsText;
 }
 
 /**
  * Builds next steps text for violated required label rules
  * @param violatedRequiredLabelsRules - Array of violated required label rules
- * @returns Markdown list items for the selected label requirements.
+ * @returns The violated label rules next steps HTML
  */
 function buildViolatedLabelRulesNextStepsText(
   violatedRequiredLabelsRules: RequiredLabelRule[],
-  group: "next" | "remaining" = "next",
-): string[] {
-  return selectByPrecedence(violatedRequiredLabelsRules, group).map(
-    (rule) => `❌ ${rule.troubleshootingGuide.trim()}`,
-  );
+): string {
+  let violatedReqLabelsNextStepsText = "";
+  if (violatedRequiredLabelsRules.length > 0) {
+    const minPrecedence = Math.min(...violatedRequiredLabelsRules.map((rule) => rule.precedence));
+    const rulesToDisplay = violatedRequiredLabelsRules.filter(
+      (rule) => rule.precedence == minPrecedence,
+    );
+    // assert: rulesToDisplay.length > 0
+    violatedReqLabelsNextStepsText = rulesToDisplay
+      .map((rule) => `<li>❌ ${rule.troubleshootingGuide}</li>`)
+      .join("");
+  }
+  return violatedReqLabelsNextStepsText;
 }
 // #endregion
 

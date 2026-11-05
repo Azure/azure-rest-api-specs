@@ -14,10 +14,6 @@ parameters:
 - name: ExportAsOutputVariable
   type: boolean 
   default: false
-- name: TokenRequest
-  # Optional GitHub access-token request body restricting repositories and permissions.
-  type: object
-  default: {}
 - name: ScriptDirectory
   default: eng/common/scripts
 - name: Condition
@@ -38,5 +34,3 @@ steps:
       -VariableNamePrefix '${{ parameters.VariableNamePrefix }}'
       -AlwaysUseOwnerSuffix:$${{ parameters.AlwaysUseOwnerSuffix }}
       -ExportAsOutputVariable:$${{ parameters.ExportAsOutputVariable }}
-  env:
-    GITHUB_TOKEN_REQUEST: ${{ convertToJson(parameters.TokenRequest) }}

@@ -339,11 +339,6 @@ model SimulationSeedDataGenerationJobConfiguration
   extends DataGenerationJobConfiguration {
   @doc("The data generation job type, which is SimulationSeed for this model.")
   type: DataGenerationJobType.simulation_seed;
-
-  @doc("Maximum number of samples to generate, up to service-defined limits.")
-  @minValue(1)
-  @maxValue(1000)
-  max_samples: int32;
 }
 
 @doc("The configuration for a data generation job with ToolUse type. This is a preview feature used only for fine-tuning scenarios.")

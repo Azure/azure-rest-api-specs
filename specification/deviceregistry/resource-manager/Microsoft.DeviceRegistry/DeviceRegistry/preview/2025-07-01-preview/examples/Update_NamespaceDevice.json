@@ -1,0 +1,78 @@
+{
+  "title": "Update_NamespaceDevices",
+  "operationId": "NamespaceDevices_Update",
+  "description": "Update a namespace device.",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "adr-namespace-gbk0925-n01",
+    "deviceName": "dev-namespace-gbk0925-n01",
+    "properties": {
+      "properties": {
+        "endpoints": {
+          "outbound": {
+            "assigned": {
+              "eventGridEndpoint": {
+                "endpointType": "Microsoft.EventGrid",
+                "address": "https://myeventgridtopic.westeurope-1.eventgrid.azure.net/api/events"
+              }
+            }
+          }
+        },
+        "enabled": true,
+        "attributes": {
+          "deviceType": "sensor",
+          "deviceOwner": "IT",
+          "deviceCategory": 16
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1366-430f-0000-cc873bcf2d27/resourceGroups/gbktestRG/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/devices/adr-smart-device3-7a848b15-af47-40a7-8c06-a3f43314d44f",
+        "name": "adr-smart-device3-7a848b15-af47-40a7-8c06-a3f43314d44f",
+        "type": "Microsoft.DeviceRegistry/namespaces/devices",
+        "location": "North Europe",
+        "tags": {
+          "sensor": "temperature,humidity"
+        },
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-10-02T20:15:21.8874648Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-10-02T20:15:21.8874648Z"
+        },
+        "properties": {
+          "endpoints": {
+            "outbound": {
+              "assigned": {
+                "eventGridEndpoint": {
+                  "endpointType": "Microsoft.EventGrid",
+                  "address": "https://myeventgridtopic.westeurope-1.eventgrid.azure.net/api/events"
+                }
+              }
+            }
+          },
+          "externalDeviceId": "adr-smart-device3-7a848b15-af47-40a7-8c06-a3f43314d44f",
+          "enabled": true,
+          "attributes": {
+            "deviceType": "sensor",
+            "deviceOwner": "IT",
+            "deviceCategory": 16
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

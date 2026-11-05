@@ -25,8 +25,6 @@ namespace Microsoft.MachineLearningServices;
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiBlocklistPropertiesBasicResource is Azure.ResourceManager.ProxyResource<
   RaiBlocklistProperties,
@@ -51,8 +49,6 @@ model RaiBlocklistPropertiesBasicResource is Azure.ResourceManager.ProxyResource
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface RaiBlocklistPropertiesBasicResources {
   /**
@@ -100,7 +96,6 @@ interface RaiBlocklistPropertiesBasicResources {
   /**
    * Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing addBulk retains its request-body shape; preserve wire compatibility."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -109,8 +104,6 @@ interface RaiBlocklistPropertiesBasicResources {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
-  @removed(Versions.v2026_09_01)
-  @added(Versions.v2026_09_15_preview)
   @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")
   @action("addRaiBlocklistItems")
   addBulk is ArmResourceActionAsync<
@@ -127,8 +120,6 @@ interface RaiBlocklistPropertiesBasicResources {
       @added(Versions.v2026_05_15_preview)
       @removed(Versions.v2026_07_01)
       @added(Versions.v2026_07_15_preview)
-      @removed(Versions.v2026_09_01)
-      @added(Versions.v2026_09_15_preview)
       _?: RaiBlocklistItemPropertiesBasicResource[];
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
@@ -139,7 +130,6 @@ interface RaiBlocklistPropertiesBasicResources {
    * Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API returns additional response codes"
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing deleteBulk retains its request-body shape; preserve wire compatibility."
   @summary("Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.")
   @action("deleteRaiBlocklistItems")
   deleteBulk is ArmResourceActionAsync<

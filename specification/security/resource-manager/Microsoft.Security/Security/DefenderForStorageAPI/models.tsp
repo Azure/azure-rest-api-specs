@@ -49,29 +49,6 @@ union AutomatedResponseType {
 }
 
 /**
- * Indicates whether this resource's Defender for Storage settings are managed by a higher MDC enforcement scope and which component is managing them.
- */
-@added(Versions.v2026_03_01_preview)
-union ManagedByType {
-  string,
-
-  /**
-   * The resource's Defender for Storage settings are not managed by a higher enforcement scope.
-   */
-  None: "None",
-
-  /**
-   * The resource's Defender for Storage settings are managed by Microsoft Defender XDR.
-   */
-  MicrosoftDefenderXDR: "MicrosoftDefenderXDR",
-
-  /**
-   * The resource's Defender for Storage settings are managed by the subscription-level settings enforcer.
-   */
-  SubscriptionSettingsEnforcer: "SubscriptionSettingsEnforcer",
-}
-
-/**
  * List of Defender for Storage settings.
  */
 model DefenderForStorageSettingList {
@@ -86,13 +63,13 @@ model DefenderForStorageSettingList {
    * The URI to fetch the next page.
    */
   @nextLink
-  nextLink?: url;
+  nextLink?: string;
 }
 
 /**
  * Defender for Storage resource properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "These API versions use a synchronous settings PUT and do not expose provisioningState. Feature enablement results are reported by malwareScanning.operationStatus and sensitiveDataDiscovery.operationStatus."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderForStorageSettingProperties {
   /**
    * Indicates whether Defender for Storage is enabled on this storage account.
@@ -113,13 +90,6 @@ model DefenderForStorageSettingProperties {
    * Indicates whether the settings defined for this storage account should override the settings defined for the subscription.
    */
   overrideSubscriptionLevelSettings?: boolean;
-
-  /**
-   * Indicates whether this resource's Defender for Storage settings are managed by a higher MDC enforcement scope and which component is managing them. When set to a value other than 'None', the resource-level settings become read-only and can only be modified by the managing component. Possible values: 'None' (not managed), 'MicrosoftDefenderXDR' (managed by Microsoft Defender XDR), 'SubscriptionSettingsEnforcer' (managed by subscription-level settings enforcer).
-   */
-  @added(Versions.v2026_03_01_preview)
-  @visibility(Lifecycle.Read)
-  managedBy?: ManagedByType;
 }
 
 /**
@@ -151,22 +121,6 @@ model MalwareScanningProperties {
   automatedResponse?: AutomatedResponseType = AutomatedResponseType.None;
 
   /**
-   * Optional. Resource id of the scanner resource (e.g., securityOperator or dataScanner) whose identity will be used for malware scanning.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The scanner resource id is nullable in the API contract to allow explicitly clearing a previously configured scanner."
-  @added(Versions.v2026_03_01_preview)
-  scannerResourceId?:
-    | Azure.Core.armResourceIdentifier<[
-        {
-          type: "Microsoft.Security/securityOperators";
-        },
-        {
-          type: "Microsoft.Security/dataScanners";
-        }
-      ]>
-    | null;
-
-  /**
    * Upon failure or partial success. Additional data describing Malware Scanning enable/disable operation.
    */
   @visibility(Lifecycle.Read)
@@ -185,13 +139,13 @@ model OnUploadProperties {
   /**
    * Defines the max GB to be scanned per Month. Set to -1 if no capping is needed. If not specified, the default value is -1.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named capGBPerMonth; changing the capitalization of GB would break clients."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   capGBPerMonth?: int32;
 
   /**
    * Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no filters are configured, rather than only omitting the field."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   filters?: OnUploadFilters | null;
 }
 
@@ -205,20 +159,20 @@ model OnUploadFilters {
    * Exclude entire containers: Use prefix of container names you want to exclude without a trailing `/`.
    * Exclude a single container: Add a trailing slash `/` after the container name to avoid excluding other containers with similar prefixes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no prefixes are configured, rather than only omitting the field."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   excludeBlobsWithPrefix?: string[] | null;
 
   /**
    * Optional. A list of suffixes to exclude from on-upload malware scanning. Suffixes match only the end of blob names, and should be used for file extensions or blob name endings only.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no suffixes are configured, rather than only omitting the field."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   excludeBlobsWithSuffix?: string[] | null;
 
   /**
    * Optional. Specifies the maximum size in bytes for blobs to be scanned. This parameter accepts a single positive integer value. Blobs larger than this value will be excluded from scanning.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no size limit is configured, rather than only omitting the field."
-  excludeBlobsLargerThan?: int64 | null;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  excludeBlobsLargerThan?: unknown | null;
 }
 
 /**
@@ -231,22 +185,6 @@ model SensitiveDataDiscoveryProperties {
   isEnabled?: boolean;
 
   /**
-   * Optional. Resource id of the scanner resource (e.g., securityOperator or dataScanner) whose identity will be used for sensitive data discovery.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The scanner resource id is nullable in the API contract to allow explicitly clearing a previously configured scanner."
-  @added(Versions.v2026_03_01_preview)
-  scannerResourceId?:
-    | Azure.Core.armResourceIdentifier<[
-        {
-          type: "Microsoft.Security/securityOperators";
-        },
-        {
-          type: "Microsoft.Security/dataScanners";
-        }
-      ]>
-    | null;
-
-  /**
    * Upon failure or partial success. Additional data describing Sensitive Data Discovery enable/disable operation.
    */
   @visibility(Lifecycle.Read)
@@ -254,37 +192,14 @@ model SensitiveDataDiscoveryProperties {
 }
 
 /**
- * A status code of the malware scan operation.
+ * Describes the state of a malware scan operation.
  */
-union MalwareScanStatus {
-  string,
-
-  /** The scan request has been queued and is waiting to be processed. */
-  Queued: "Queued",
-
-  /** The scan is currently in progress. */
-  InProgress: "InProgress",
-
-  /** The scan has finished processing and is waiting for final results. */
-  WaitingForCompletion: "WaitingForCompletion",
-
-  /** The scan is being cancelled upon user request. */
-  Canceling: "Canceling",
-
-  /** The scan has been canceled. */
-  Canceled: "Canceled",
-
-  /** The scan failed. */
-  Failed: "Failed",
-
-  /** The scan has completed successfully. */
-  Completed: "Completed",
+model MalwareScan {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  properties?: MalwareScanProperties;
 }
 
-/**
- * Properties of a malware scan operation.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "MalwareScan is created by the startMalwareScan action and has no PUT or PATCH operation. Its lifecycle is reported by scanStatus rather than provisioningState."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MalwareScanProperties {
   /**
    * The identifier of the scan.
@@ -294,7 +209,7 @@ model MalwareScanProperties {
   /**
    * A status code of the scan operation.
    */
-  scanStatus?: MalwareScanStatus;
+  scanStatus?: string;
 
   /**
    * A description of the status of the scan.
@@ -304,12 +219,12 @@ model MalwareScanProperties {
   /**
    * The time at which the scan had been initiated.
    */
-  scanStartTime?: utcDateTime;
+  scanStartTime?: string;
 
   /**
    * The time at which the scan has ended. Only available for a scan which has terminated.
    */
-  scanEndTime?: utcDateTime;
+  scanEndTime?: string;
 
   /**
    * A summary of the scan results.
@@ -334,7 +249,7 @@ model ScanSummary {
   /**
    * The estimated cost of the scan. Only available for a scan which has terminated.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named estimatedScanCostUSD; changing the capitalization of USD would break clients."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   estimatedScanCostUSD?: float64;
 }
 
@@ -365,7 +280,7 @@ model BlobsScanSummary {
   /**
    * The number of gigabytes of data that were scanned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named scannedBlobsInGB; changing the capitalization of GB would break clients."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scannedBlobsInGB?: float64;
 }
 
@@ -396,7 +311,7 @@ model FilesScanSummary {
   /**
    * The number of gigabytes of data that were scanned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named scannedFilesInGB; changing the capitalization of GB would break clients."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scannedFilesInGB?: float64;
 }
 

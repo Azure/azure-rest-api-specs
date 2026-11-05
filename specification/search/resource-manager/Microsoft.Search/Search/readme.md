@@ -26,16 +26,7 @@ These are the global settings for the SearchManagementClient API.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-11-01
-```
-
-### Tag: package-2026-11-01
-
-These settings apply only when `--tag=package-2026-11-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-11-01'
-input-file:
-  - stable/2026-11-01/search.json
+tag: package-preview-2026-09-01
 ```
 
 ### Tag: package-preview-2026-09-01

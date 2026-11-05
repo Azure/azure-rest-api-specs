@@ -263,7 +263,6 @@ interface UserContracts {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing send POST contract uses appType in the query; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     }

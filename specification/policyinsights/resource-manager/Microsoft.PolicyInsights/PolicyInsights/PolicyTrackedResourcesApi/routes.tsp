@@ -43,7 +43,6 @@ interface PolicyTrackedResourcesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listQueryResultsForManagementGroup POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -52,7 +51,6 @@ interface PolicyTrackedResourcesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listQueryResultsForManagementGroup POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
   ): PolicyTrackedResourcesQueryResults | QueryFailure;
@@ -78,7 +76,6 @@ interface PolicyTrackedResourcesOperationGroup {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listQueryResultsForSubscription POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -87,7 +84,6 @@ interface PolicyTrackedResourcesOperationGroup {
        * OData filter expression.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listQueryResultsForSubscription POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       Filter?: string;
     }
@@ -114,7 +110,6 @@ interface PolicyTrackedResourcesOperationGroup {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listQueryResultsForResourceGroup POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -123,7 +118,6 @@ interface PolicyTrackedResourcesOperationGroup {
        * OData filter expression.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listQueryResultsForResourceGroup POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       Filter?: string;
     }
@@ -153,7 +147,6 @@ interface PolicyTrackedResourcesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listQueryResultsForResource POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -162,7 +155,6 @@ interface PolicyTrackedResourcesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listQueryResultsForResource POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
   ): PolicyTrackedResourcesQueryResults | QueryFailure;

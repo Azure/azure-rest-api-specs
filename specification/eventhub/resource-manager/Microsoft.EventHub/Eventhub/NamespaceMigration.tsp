@@ -13,25 +13,8 @@ using TypeSpec.Versioning;
 namespace Microsoft.EventHub;
 
 /**
- * The migration of an Event Hubs namespace to a new SKU.
- */
-@added(Versions.v2026_09_01_preview)
-@singleton("default")
-@parentResource(EHNamespace)
-model NamespaceMigration
-  is Azure.ResourceManager.ProxyResource<NamespaceMigrationProperties> {
-  ...ResourceNameParameter<
-    Resource = NamespaceMigration,
-    KeyName = "migrationName",
-    SegmentName = "migrations",
-    NamePattern = "^default$"
-  >;
-}
-
-/**
  * The properties of a namespace migration.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The service does not expose a provisioning state for this proxy resource."
 @added(Versions.v2026_09_01_preview)
 model NamespaceMigrationProperties {
   /**
@@ -40,21 +23,26 @@ model NamespaceMigrationProperties {
   migration?: NamespaceMigrationDetails;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "A migration is stopped with the terminate action; the singleton resource itself cannot be deleted."
+/**
+ * The status of a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationStatus {
+  /**
+   * The properties of the namespace migration.
+   */
+  properties?: NamespaceMigrationProperties;
+}
+
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations
 interface NamespaceMigrations {
   /**
-   * Gets the current status of a namespace migration.
-   */
-  get is ArmResourceRead<NamespaceMigration, Error = ErrorResponse>;
-
-  /**
    * Triggers a migration of the namespace to a new SKU across the specified target locations.
    */
-  @action("trigger")
-  trigger is ArmResourceActionNoResponseContentAsync<
-    NamespaceMigration,
+  @action("triggerMigration")
+  triggerMigration is ArmResourceActionNoResponseContentAsync<
+    EHNamespace,
     NamespaceMigrationConfiguration,
     LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
@@ -64,9 +52,9 @@ interface NamespaceMigrations {
   /**
    * Terminates an in-progress namespace migration.
    */
-  @action("terminate")
-  terminate is ArmResourceActionNoResponseContentAsync<
-    NamespaceMigration,
+  @action("terminateMigration")
+  terminateMigration is ArmResourceActionNoResponseContentAsync<
+    EHNamespace,
     void,
     LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
@@ -74,21 +62,34 @@ interface NamespaceMigrations {
   >;
 
   /**
+   * Gets the current status of a namespace migration.
+   */
+  @get
+  @action("migrationStatus")
+  getMigrationStatus is ArmResourceActionSync<
+    EHNamespace,
+    void,
+    ArmResponse<NamespaceMigrationStatus>,
+    Error = ErrorResponse
+  >;
+
+  /**
    * Gets the replication lags for an in-progress namespace migration.
    */
-  @action("getReplicationLags")
-  getReplicationLags is ArmResourceActionSync<
-    NamespaceMigration,
+  @get
+  @action("migrationReplicationLags")
+  getMigrationReplicationLags is ArmResourceActionSync<
+    EHNamespace,
     void,
     ArmResponse<NamespaceMigrationReplicationLags>,
     Error = ErrorResponse
   >;
 }
 
-@@doc(NamespaceMigration.name, "The migration resource name. Must be 'default'.");
-@@doc(NamespaceMigration.properties, "The properties of the namespace migration.");
 @@doc(
-  NamespaceMigrations.trigger::parameters.body,
+  NamespaceMigrations.triggerMigration::parameters.body,
   "Parameters that describe the target SKU and locations for the namespace migration."
 );
-@@clientName(NamespaceMigrations.trigger::parameters.body, "parameters");
+@@clientName(NamespaceMigrations.triggerMigration::parameters.body,
+  "parameters"
+);

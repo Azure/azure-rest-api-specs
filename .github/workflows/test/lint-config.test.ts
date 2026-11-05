@@ -8,9 +8,9 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 const repoRoot = fileURLToPath(new URL("../../../", import.meta.url));
 const oxlint = fileURLToPath(new URL("./bin/oxlint", import.meta.resolve("oxlint/package.json")));
 const skillPath = ".github/skills/azure-typespec-assessment";
-const scriptPath = `${skillPath}/scripts/example.ts`;
+const scriptPath = `${skillPath}/scripts/example.mjs`;
 
-describe("assessment script lint configuration", { timeout: 60_000 }, () => {
+describe("assessment script lint configuration", () => {
   let fixture: string;
 
   beforeEach(async () => {
@@ -49,7 +49,7 @@ describe("assessment script lint configuration", { timeout: 60_000 }, () => {
     return spawnSync(process.execPath, [oxlint, "--format=unix", path], {
       cwd: join(fixture, cwd),
       encoding: "utf8",
-      timeout: 60_000,
+      timeout: 10000,
     });
   }
 

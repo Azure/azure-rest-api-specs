@@ -98,11 +98,8 @@ interface SessionHosts {
       @query("vmPath")
       @maxLength(1092)
       @minLength(3)
-      vmPath?: Azure.Core.armResourceIdentifier<[
-        {
-          type: "Microsoft.Compute/virtualMachines";
-        }
-      ]>;
+      @pattern("^[A-Z][a-z][0-9][@./-_ ]*$")
+      vmPath?: string;
     },
     Response = SessionHostList
   >;
@@ -128,7 +125,6 @@ interface SessionHosts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SessionHosts_ListSingleRegistrationTokens")
   @added(Versions.vLatestPreview)
-  @list
   listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
     SessionHost,
     ScopedRegistrationTokenProperties,

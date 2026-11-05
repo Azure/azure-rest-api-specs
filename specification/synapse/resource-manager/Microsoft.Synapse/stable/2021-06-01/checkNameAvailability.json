@@ -1,0 +1,121 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/checkNameAvailability": {
+      "post": {
+        "operationId": "Operations_CheckNameAvailability",
+        "summary": "Check name availability",
+        "description": "Check whether a workspace name is available",
+        "tags": [
+          "Operations"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            },
+            "in": "body",
+            "name": "request",
+            "required": true,
+            "description": "The check request"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Check for a workspace name that is available": {
+            "$ref": "./examples/CheckNameAvailabilityWorkspaceAvailable.json"
+          },
+          "Check for a workspace name that already exists": {
+            "$ref": "./examples/CheckNameAvailabilityWorkspaceAlreadyExists.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "title": "Check name availability request",
+      "description": "A request about whether a workspace name is available",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Workspace name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type: workspace"
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "title": "Check name availability response",
+      "description": "A response saying whether the workspace name is available",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Validation message"
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Whether the workspace name is available"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason the workspace name is or is not available"
+        },
+        "name": {
+          "type": "string",
+          "description": "Workspace name"
+        }
+      }
+    }
+  }
+}

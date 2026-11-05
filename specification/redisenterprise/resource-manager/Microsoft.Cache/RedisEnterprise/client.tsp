@@ -106,28 +106,13 @@ using Microsoft.Cache;
   "csharp"
 );
 @@clientName(
-  MigrationProperties.rollbackEligibleUntil,
-  "RollbackEligibilityExpiresOn",
-  "csharp"
-);
-@@clientName(
   MigrationProvisioningState,
   "RedisEnterpriseMigrationProvisioningState",
   "csharp"
 );
 @@clientName(
-  MigrationRollbackReason,
-  "RedisEnterpriseMigrationRollbackReason",
-  "csharp"
-);
-@@clientName(
   MigrationValidationRequest,
   "RedisEnterpriseMigrationValidationRequestContent",
-  "csharp"
-);
-@@clientName(
-  MigrationUndoRequest,
-  "RedisEnterpriseMigrationUndoContent",
   "csharp"
 );
 @@clientName(
@@ -297,7 +282,7 @@ using Microsoft.Cache;
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "csharp,javascript"

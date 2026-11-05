@@ -47,10 +47,6 @@ using Microsoft.Support;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SupportTicketDetails.properties
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  ProblemClassificationsClassificationResult.relatedService
-);
 
 @@clientName(
   Communications.create::parameters.resource,

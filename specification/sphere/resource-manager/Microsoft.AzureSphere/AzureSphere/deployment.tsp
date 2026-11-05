@@ -4,7 +4,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.AzureSphere;
 /**
- * A deployment resource belonging to a device group resource.
+ * An deployment resource belonging to a device group resource.
  */
 @parentResource(DeviceGroup)
 model Deployment is ProxyResource<DeploymentProperties> {

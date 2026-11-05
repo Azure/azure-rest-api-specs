@@ -52,7 +52,6 @@ interface VersionedTemplates {
   /**
    * Generates a VersionedTemplate.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing generate retains its request-body shape; preserve wire compatibility."
   @summary("Generates a VersionedTemplate.")
   @tag("VersionedTemplate")
   generate is ArmResourceActionSync<

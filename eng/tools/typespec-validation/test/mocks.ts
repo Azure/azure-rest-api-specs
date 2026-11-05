@@ -6,7 +6,7 @@ vi.mock("node:fs/promises", () => ({
   readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
 }));
 
-vi.mock("@azure-tools/specs-shared/glob", () => ({
+vi.mock("../src/glob.ts", () => ({
   globFiles: vi.fn().mockResolvedValue([]),
 }));
 

@@ -11,12 +11,6 @@ namespace Microsoft.Monitor {
    */
   model MetricsLimits {
     /**
-     * Indicates whether automatic scaling of ingestion limits is enabled.
-     */
-    @added(Versions.v2026_09_03_preview)
-    enableAutoScale?: boolean;
-
-    /**
      * Maximum number of active time series allowed on the metrics containers.
      */
     maxActiveTimeSeries?: int64;
@@ -41,7 +35,6 @@ namespace Microsoft.Monitor {
      * Metrics limits.
      */
     @removed(Versions.v2025_10_03_stable)
-    @added(Versions.v2026_09_03_preview)
     limits?: MetricsLimits;
 
     /**

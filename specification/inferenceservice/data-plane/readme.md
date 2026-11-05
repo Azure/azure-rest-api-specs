@@ -6,12 +6,7 @@ This is the AutoRest configuration for the Azure Inference Service data-plane AP
 
 ```yaml
 openapi-type: data-plane
-tag: package-2026-10-30
-```
-
-```yaml $(tag) == 'package-2026-10-30'
-input-file:
-  - InferenceService\stable\2026-10-30\inferenceservice.json
+tag: package-2026-09-01-preview
 ```
 
 ```yaml $(tag) == 'package-2026-09-01-preview'

@@ -14,9 +14,3 @@ using Azure.ClientGenerator.Core;
   "PlatformValidationMoboBrokerResourceInfo",
   "csharp"
 );
-
-@@clientName(
-  Microsoft.PlatformValidation.ValidationTestInputDefinition.required,
-  "isRequired",
-  "csharp"
-);

@@ -209,7 +209,6 @@ model InferenceErrorResult
 
 /** Errors returned by an inference operation. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "The union defines distinct HTTP error responses and is not emitted as a response body schema."
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union InferenceOperationError {
   /** The request was rate limited. */
   tooManyRequests: TooManyRequestsResult,

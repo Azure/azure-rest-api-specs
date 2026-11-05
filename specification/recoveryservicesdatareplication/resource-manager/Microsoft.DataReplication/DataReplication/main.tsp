@@ -23,7 +23,6 @@ import "./ReplicationExtensionModel.tsp";
 import "./VaultModel.tsp";
 import "./routes.tsp";
 import "./client.tsp";
-import "./back-compatible.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
