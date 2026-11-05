@@ -26,7 +26,6 @@ import "./SchemaGroup.tsp";
 import "./ApplicationGroup.tsp";
 import "./FabricShortcut.tsp";
 import "./UpgradePreferences.tsp";
-import "./NamespaceMigration.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -64,12 +63,6 @@ enum Versions {
    * The 2026-07-01-preview API version.
    */
   v2026_07_01_preview: "2026-07-01-preview",
-
-  /**
-   * The 2026-09-01-preview API version.
-   */
-  @Azure.Core.previewVersion
-  v2026_09_01_preview: "2026-09-01-preview",
 }
 
 interface Operations
