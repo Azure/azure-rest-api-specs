@@ -784,9 +784,9 @@ model VoiceAgentTransferRouting {
   strategy: VoiceAgentTransferStrategy;
 
   @doc("Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.")
-  @minValue(1)
-  @maxValue(300)
-  ring_timeout_seconds?: int32 = 20;
+  @extension("minimum", 1)
+  @extension("maximum", 300)
+  ring_timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT20S");
 }
 
 @doc("The supported address formats for a system-tool transfer destination.")
