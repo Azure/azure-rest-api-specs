@@ -238,6 +238,7 @@ model VoiceAgentLiveDelegation {
 }
 
 @doc("Supported owners of work delegated by a Live voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentLiveDelegationType {
   @doc("The application handles delegated work.")
   client: "client",
@@ -250,12 +251,14 @@ union VoiceAgentLiveDelegationType {
 }
 
 @doc("Delegates work to the application using native client delegation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveClientDelegation extends VoiceAgentLiveDelegation {
   ...OmitProperties<OpenAI.LiveClientDelegationParam, "type">;
   type: VoiceAgentLiveDelegationType.client;
 }
 
 @doc("Delegates work to a Responses backend using native Responses settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveResponsesDelegation extends VoiceAgentLiveDelegation {
   ...OmitProperties<OpenAI.LiveResponsesDelegationParam, "type">;
   type: VoiceAgentLiveDelegationType.responses;
