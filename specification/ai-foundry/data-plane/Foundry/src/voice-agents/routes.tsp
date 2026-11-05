@@ -2,6 +2,7 @@ import "../common/models.tsp";
 import "../agents/models.tsp";
 import "./models.tsp";
 import "./protocol.tsp";
+import "./campaign-routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -701,6 +702,7 @@ alias TelephonyCallListTimeQueryParameters = {
 interface AgentTelephony {
   /** Creates a telephony binding for the voice agent named in the path. */
   @summary("Create an agent telephony binding")
+  @parameterVisibility(Lifecycle.Create)
   @post
   @route("/agents/{agent_name}/telephony/bindings")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -713,7 +715,7 @@ interface AgentTelephony {
       ...Azure.Core.RepeatabilityRequestHeaders;
 
       /** The provider-specific binding to create. */
-      @body telephony_binding: CreateTelephonyBindingRequest;
+      @body binding: TelephonyBinding;
     },
     TelephonyBindingCreatedResponse
   >;
@@ -732,9 +734,6 @@ interface AgentTelephony {
 
       /** Filters bindings by provider. */
       @query provider?: TelephonyProvider;
-
-      /** Filters bindings by lifecycle status. */
-      @query status?: TelephonyBindingStatus;
 
       ...CommonPageQueryParameters;
     },
@@ -910,53 +909,114 @@ interface AgentTelephony {
     TelephonyTransferTargetsResponse
   >;
 
-  /** Creates one durable direct outbound call job. The latest agent definition is resolved when each attempt executes. */
+  @doc("Creates one durable outbound CallJob. Each attempt pins the Agent endpoint's execution version for validation and its voice session.")
   @summary("Create an outbound telephony call job")
+  @parameterVisibility(Lifecycle.Create)
   @post
-  @route("/agents/{agent_name}/telephony/call_jobs")
+  @route("/agents/{agent_name}/telephony_call_jobs")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  createTelephonyCallJob is FoundryDataPlanePreviewOperation<
+  createTelephonyCallJob is postJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    TelephonyCallJob,
     {
       /** The name of the voice agent that executes the call. */
       @path agent_name: string;
 
-      /** A customer-generated idempotency key. Reusing it with an equivalent request returns the same call job. */
+      @doc("Customer retry key. Equivalent requests return the same job; retained keys for deleted jobs return 409 call_job_deleted, never redial.")
       @header("Idempotency-Key")
       @minLength(1)
       @maxLength(256)
       idempotency_key: string;
 
       /** The direct outbound call to create. */
-      @body body: CreateTelephonyCallJobRequest;
+      @body job: TelephonyCallJobCreate;
     },
     TelephonyCallJobAcceptedResponse
+  >;
+
+  @doc("Lists current direct/Campaign jobs, excluding deleted or superseded rounds. Pages are live. Campaign cursors survive boundary deletion/cancel, not replacement/name reuse (400 invalid_cursor).")
+  @summary("List outbound telephony call jobs")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony_call_jobs")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  listTelephonyCallJobs is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @doc("The owning voice agent. Authorization is applied before pagination.")
+      @path
+      agent_name: string;
+
+      ...CommonPageQueryParameters;
+
+      @doc("Optional lifecycle filter.")
+      @query
+      status?: TelephonyCallJobStatus;
+
+      @doc("Current Campaign round: 404 if absent, empty while deleting. Omit for direct and Campaign jobs. Replacement/name reuse invalidates cursors.")
+      @query
+      campaign_name?: TelephonyCampaignName;
+    },
+    AgentsPagedResult<TelephonyCallJob>
+  >;
+
+  @doc("Deletes a terminal, reconciled job (otherwise 409), without cancelling calls or removing Campaign outcomes/call history. Later GET returns 404; repeated DELETE returns 204.")
+  @summary("Delete an outbound telephony call job")
+  @delete
+  @route("/agents/{agent_name}/telephony_call_jobs/{call_job_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  deleteTelephonyCallJob is deleteJobPreview<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @doc("The owning voice agent.")
+      @path
+      agent_name: string;
+
+      @doc("The call-job identifier.")
+      @path
+      call_job_id: TelephonyCallJobId;
+    },
+    NoContentResponse,
+    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 
   /** Retrieves a durable direct or campaign-created outbound call job. */
   @summary("Get an outbound telephony call job")
   @get
-  @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
+  @route("/agents/{agent_name}/telephony_call_jobs/{call_job_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  getTelephonyCallJob is FoundryDataPlanePreviewOperation<
+  getTelephonyCallJob is queryJobStatusPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    TelephonyCallJob,
     {
-      @path agent_name: string;
-      @path call_job_id: TelephonyCallJobId;
+      @doc("The name of the voice agent that owns the call job.")
+      @path
+      agent_name: string;
+
+      @doc("The service-generated identifier of the call job to retrieve.")
+      @path
+      call_job_id: TelephonyCallJobId;
     },
     TelephonyCallJobResponse
   >;
 
-  /** Requests cancellation of a durable outbound call job. A connected call is allowed to finish. */
+  @doc("Cancels future attempts using If-Match; completion may be asynchronous. New cancellation after connection returns 409 and lets the active call finish.")
   @summary("Cancel an outbound telephony call job")
   @post
-  @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel")
+  @route("/agents/{agent_name}/telephony_call_jobs/{call_job_id}:cancel")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  cancelTelephonyCallJob is FoundryDataPlanePreviewOperation<
+  cancelTelephonyCallJob is cancelJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    TelephonyCallJob,
     {
-      @path agent_name: string;
-      @path call_job_id: TelephonyCallJobId;
+      @doc("The name of the voice agent that owns the call job.")
+      @path
+      agent_name: string;
+
+      @doc("The service-generated identifier of the call job to cancel.")
+      @path
+      call_job_id: TelephonyCallJobId;
+
       ...TelephonyIfMatchHeader;
     },
     TelephonyCallJobResponse | TelephonyCallJobAcceptedResponse

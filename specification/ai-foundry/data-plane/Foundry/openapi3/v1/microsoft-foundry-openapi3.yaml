@@ -14,6 +14,7 @@ tags:
   - name: Agent Conversations
   - name: Agent Live Conversations
   - name: Agent Telephony
+  - name: TelephonyCampaigns
   - name: Responses Root
     description: Responses
   - name: Responses
@@ -5167,7 +5168,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTelephonyBindingRequest'
+              $ref: '#/components/schemas/TelephonyBinding'
         description: The provider-specific binding to create.
       x-ms-foundry-meta:
         required_previews:
@@ -5197,13 +5198,6 @@ paths:
           description: Filters bindings by provider.
           schema:
             $ref: '#/components/schemas/TelephonyProvider'
-          explode: false
-        - name: status
-          in: query
-          required: false
-          description: Filters bindings by lifecycle status.
-          schema:
-            $ref: '#/components/schemas/TelephonyBindingStatus'
           explode: false
         - name: limit
           in: query
@@ -5474,230 +5468,6 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Telephony
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/telephony/call_jobs:
-    post:
-      operationId: AgentTelephony_createTelephonyCallJob
-      summary: Create an outbound telephony call job
-      description: Creates one durable direct outbound call job. The latest agent definition is resolved when each attempt executes.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent that executes the call.
-          schema:
-            type: string
-        - name: Idempotency-Key
-          in: header
-          required: true
-          description: A customer-generated idempotency key. Reusing it with an equivalent request returns the same call job.
-          schema:
-            type: string
-            minLength: 1
-            maxLength: 256
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            ETag:
-              required: true
-              schema:
-                $ref: '#/components/schemas/Azure.Core.eTag'
-            Location:
-              required: true
-              schema:
-                type: string
-            Retry-After:
-              required: true
-              schema:
-                $ref: '#/components/schemas/FoundryDurationSeconds'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TelephonyCallJob'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Telephony
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateTelephonyCallJobRequest'
-        description: The direct outbound call to create.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/telephony/call_jobs/{call_job_id}:
-    get:
-      operationId: AgentTelephony_getTelephonyCallJob
-      summary: Get an outbound telephony call job
-      description: Retrieves a durable direct or campaign-created outbound call job.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: call_job_id
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/TelephonyCallJobId'
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            ETag:
-              required: true
-              schema:
-                $ref: '#/components/schemas/Azure.Core.eTag'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TelephonyCallJob'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Telephony
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel:
-    post:
-      operationId: AgentTelephony_cancelTelephonyCallJob
-      summary: Cancel an outbound telephony call job
-      description: Requests cancellation of a durable outbound call job. A connected call is allowed to finish.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: call_job_id
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/TelephonyCallJobId'
-        - name: If-Match
-          in: header
-          required: true
-          description: The entity tag returned by the latest read. The request fails if the resource changed since that read.
-          schema:
-            $ref: '#/components/schemas/Azure.Core.eTag'
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            ETag:
-              required: true
-              schema:
-                $ref: '#/components/schemas/Azure.Core.eTag'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TelephonyCallJob'
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            ETag:
-              required: true
-              schema:
-                $ref: '#/components/schemas/Azure.Core.eTag'
-            Location:
-              required: true
-              schema:
-                type: string
-            Retry-After:
-              required: true
-              schema:
-                $ref: '#/components/schemas/FoundryDurationSeconds'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TelephonyCallJob'
         4XX:
           description: Client error
           content:
@@ -6155,6 +5925,1176 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+  /agents/{agent_name}/telephony_call_jobs:
+    post:
+      operationId: AgentTelephony_createTelephonyCallJob
+      summary: Create an outbound telephony call job
+      description: Creates one durable outbound CallJob. Each attempt pins the Agent endpoint's execution version for validation and its voice session.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent that executes the call.
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Customer retry key. Equivalent requests return the same job; retained keys for deleted jobs return 409 call_job_deleted, never redial.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+          headers:
+            ETag:
+              required: true
+              description: The current call-job entity tag. Send it in If-Match when requesting cancellation.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.eTag'
+            Location:
+              required: true
+              description: The URI for reading the accepted call-job resource and its execution status.
+              schema:
+                type: string
+            Retry-After:
+              required: true
+              description: Suggested delay in seconds before reading the call-job resource again.
+              schema:
+                $ref: '#/components/schemas/FoundryDurationSeconds'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCallJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TelephonyCallJobCreate'
+        description: The direct outbound call to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    get:
+      operationId: AgentTelephony_listTelephonyCallJobs
+      summary: List outbound telephony call jobs
+      description: Lists current direct/Campaign jobs, excluding deleted or superseded rounds. Pages are live. Campaign cursors survive boundary deletion/cancel, not replacement/name reuse (400 invalid_cursor).
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The owning voice agent. Authorization is applied before pagination.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Optional lifecycle filter.
+          schema:
+            $ref: '#/components/schemas/TelephonyCallJobStatus'
+          explode: false
+        - name: campaign_name
+          in: query
+          required: false
+          description: 'Current Campaign round: 404 if absent, empty while deleting. Omit for direct and Campaign jobs. Replacement/name reuse invalidates cursors.'
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignName'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TelephonyCallJob'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+  /agents/{agent_name}/telephony_call_jobs/{call_job_id}:
+    delete:
+      operationId: AgentTelephony_deleteTelephonyCallJob
+      summary: Delete an outbound telephony call job
+      description: Deletes a terminal, reconciled job (otherwise 409), without cancelling calls or removing Campaign outcomes/call history. Later GET returns 404; repeated DELETE returns 204.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The owning voice agent.
+          schema:
+            type: string
+        - name: call_job_id
+          in: path
+          required: true
+          description: The call-job identifier.
+          schema:
+            $ref: '#/components/schemas/TelephonyCallJobId'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    get:
+      operationId: AgentTelephony_getTelephonyCallJob
+      summary: Get an outbound telephony call job
+      description: Retrieves a durable direct or campaign-created outbound call job.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent that owns the call job.
+          schema:
+            type: string
+        - name: call_job_id
+          in: path
+          required: true
+          description: The service-generated identifier of the call job to retrieve.
+          schema:
+            $ref: '#/components/schemas/TelephonyCallJobId'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            ETag:
+              required: true
+              description: The current call-job entity tag. Send it in If-Match when requesting cancellation.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.eTag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCallJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+  /agents/{agent_name}/telephony_call_jobs/{call_job_id}:cancel:
+    post:
+      operationId: AgentTelephony_cancelTelephonyCallJob
+      summary: Cancel an outbound telephony call job
+      description: Cancels future attempts using If-Match; completion may be asynchronous. New cancellation after connection returns 409 and lets the active call finish.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent that owns the call job.
+          schema:
+            type: string
+        - name: call_job_id
+          in: path
+          required: true
+          description: The service-generated identifier of the call job to cancel.
+          schema:
+            $ref: '#/components/schemas/TelephonyCallJobId'
+        - name: If-Match
+          in: header
+          required: true
+          description: The entity tag returned by the latest read. The request fails if the resource changed since that read.
+          schema:
+            $ref: '#/components/schemas/Azure.Core.eTag'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            ETag:
+              required: true
+              description: The current call-job entity tag. Send it in If-Match when requesting cancellation.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.eTag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCallJob'
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+          headers:
+            ETag:
+              required: true
+              description: The current call-job entity tag. Send it in If-Match when requesting cancellation.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.eTag'
+            Location:
+              required: true
+              description: The URI for reading the accepted call-job resource and its execution status.
+              schema:
+                type: string
+            Retry-After:
+              required: true
+              description: Suggested delay in seconds before reading the call-job resource again.
+              schema:
+                $ref: '#/components/schemas/FoundryDurationSeconds'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCallJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+  /agents/{agent_name}/telephony_campaigns:
+    get:
+      operationId: TelephonyCampaigns_list
+      summary: List telephony campaigns
+      description: Lists the Agent's Campaigns without inline recipients. Filters are live views, not snapshots.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: Owning Agent; never overridden in recipient inputs.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: Opaque last_id bound to scope/filters/order; error cursors also bind instance/round/snapshot and survive cancel, not replacement. Exclusive with before; invalid tokens return 400 invalid_cursor.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: Opaque first_id for backward paging with unchanged scope/filters/order; exclusive with after.
+          schema:
+            type: string
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter by Campaign business state.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignStatus'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Cache-Control:
+              required: true
+              description: Progress-bearing list responses are not cacheable.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TelephonyCampaign'
+                    description: The requested list of items.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                  first_id:
+                    type: string
+                    description: Opaque cursor for the first returned item; absent when empty.
+                  last_id:
+                    type: string
+                    description: Opaque cursor for the last returned item; absent when empty. Deletion/name reuse does not move its original sort boundary.
+                description: Shared Foundry page shape with opaque boundary tokens bound to the original sort position.
+                x-ms-foundry-meta:
+                  required_previews:
+                    - VoiceAgents=V1Preview
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - TelephonyCampaigns
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+  /agents/{agent_name}/telephony_campaigns/{campaign_name}:
+    put:
+      operationId: TelephonyCampaigns_create
+      summary: Create or replace a failed telephony campaign
+      description: Creates a Campaign or fully replaces failed preparation; no PATCH. All recipients must validate and have CallJobs before dialing. Immediate calls may begin before the preparation poller returns.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: Owning Agent; never overridden in recipient inputs.
+          schema:
+            type: string
+        - name: campaign_name
+          in: path
+          required: true
+          description: Name chosen by the caller; only a failed Campaign permits full replacement.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignName'
+        - name: Operation-Id
+          in: header
+          required: false
+          description: 'Retry key: matching submitted inputs and original If-Match replay the saved monitor before current-state checks. Conflicting reuse returns 409 operation_id_conflict; retained creation keys after deletion return 409 campaign_deleted.'
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignOperationId'
+        - name: If-Match
+          in: header
+          required: false
+          description: 'Required with a fresh Operation-Id for failed-state replacement; no wildcards. Changed input without it returns 409. Missing replacement ID: 400; stale token/absent resource: 412; other states: 409.'
+          schema:
+            $ref: '#/components/schemas/Azure.Core.eTag'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Cache-Control:
+              required: true
+              description: Prevents caches from treating the control token as a validator for changing progress.
+              schema:
+                type: string
+                enum:
+                  - no-store
+            Location:
+              required: true
+              description: URI of the Campaign business resource.
+              schema:
+                type: string
+                format: uri
+            Operation-Location:
+              required: true
+              description: Preparation monitor URI, including api-version. Completion does not mean all calls have finished.
+              schema:
+                type: string
+                format: uri
+            Operation-Id:
+              required: true
+              description: This request's preparation ID, unchanged on retries; may differ from Campaign.operation_id.
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaignOperationId'
+            Retry-After:
+              required: true
+              description: Suggested polling delay in seconds.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaign'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Cache-Control:
+              required: true
+              description: Prevents caches from treating the control token as a validator for changing progress.
+              schema:
+                type: string
+                enum:
+                  - no-store
+            Location:
+              required: true
+              description: URI of the Campaign business resource.
+              schema:
+                type: string
+                format: uri
+            Operation-Location:
+              required: true
+              description: Preparation monitor URI, including api-version. Completion does not mean all calls have finished.
+              schema:
+                type: string
+                format: uri
+            Operation-Id:
+              required: true
+              description: This request's preparation ID, unchanged on retries; may differ from Campaign.operation_id.
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaignOperationId'
+            Retry-After:
+              required: true
+              description: Suggested polling delay in seconds.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaign'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - TelephonyCampaigns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TelephonyCampaignCreate'
+        description: Complete connection, source, recipients/Dataset, schedule and retry configuration. Omitted optional fields reset to defaults; Agent/name and response-only fields cannot change.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+      x-ms-examples:
+        CreateImmediate:
+          $ref: ../../examples/campaigns/CreateImmediate.json
+        CreateScheduled:
+          $ref: ../../examples/campaigns/CreateScheduled.json
+        CreateRecipientScheduled:
+          $ref: ../../examples/campaigns/CreateRecipientScheduled.json
+        ReplaceFailedCampaign:
+          $ref: ../../examples/campaigns/ReplaceFailedCampaign.json
+    get:
+      operationId: TelephonyCampaigns_get
+      summary: Get a telephony campaign
+      description: Gets Campaign configuration and execution state without inline recipients. Absent or deleted Campaigns return 404.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: Owning Agent; never overridden in recipient inputs.
+          schema:
+            type: string
+        - name: campaign_name
+          in: path
+          required: true
+          description: Immutable Campaign name.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignName'
+        - name: operation_id
+          in: query
+          required: false
+          description: "Original response's Operation-Id guards its instance/round and survives same-round actions. Replacement/name reuse: 409 campaign_operation_mismatch; missing/expired/wrong-scope operation: 404."
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignOperationId'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Cache-Control:
+              required: true
+              description: Prevents caches from treating the control token as a validator for changing progress.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaign'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - TelephonyCampaigns
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    delete:
+      operationId: TelephonyCampaigns_delete
+      summary: Delete a telephony campaign
+      description: Deletes a terminal Campaign and its recipient/task data asynchronously. Returns bodyless 202 with a monitor, not a tombstone; completion makes GET return 404 and lists omit it. Dataset, connections, Agent, independent jobs and call history are preserved.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: Owning Agent; never overridden in recipient inputs.
+          schema:
+            type: string
+        - name: campaign_name
+          in: path
+          required: true
+          description: Immutable Campaign name.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignName'
+        - name: If-Match
+          in: header
+          required: true
+          description: Exact current token; no wildcards. Without replay, absent Campaigns return 204 and stale tokens 412. Active calls/workers or unfinished cancellation return 409.
+          schema:
+            $ref: '#/components/schemas/Azure.Core.eTag'
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Optional retry key. Original If-Match/key replays 202 even after deletion/name reuse, never touching a new instance; conflicts return 409. Failed cleanup needs a fresh key/current token.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignOperationId'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+          headers:
+            Cache-Control:
+              required: true
+              description: Prevents caches from treating the control token as a validator for changing progress.
+              schema:
+                type: string
+                enum:
+                  - no-store
+            Operation-Location:
+              required: true
+              description: Absolute deletion-monitor URI including api-version, retained after the Campaign is removed.
+              schema:
+                type: string
+                format: uri
+            Operation-Id:
+              required: true
+              description: Immutable deletion-operation ID; retries of the same accepted request return the same ID.
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaignOperationId'
+            Retry-After:
+              required: true
+              description: Suggested delay in seconds before polling.
+              schema:
+                type: integer
+                format: int32
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - TelephonyCampaigns
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+      x-ms-examples:
+        DeleteTerminalCampaign:
+          $ref: ../../examples/campaigns/DeleteTerminalCampaign.json
+  /agents/{agent_name}/telephony_campaigns/{campaign_name}/operations/{operation_id}:
+    get:
+      operationId: TelephonyCampaigns_getOperation
+      summary: Get a campaign operation
+      description: Gets the initiating operation's status. PUT/cancel pollers finish with a guarded Campaign GET; deletion completes without a resource result.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: Owning Agent.
+          schema:
+            type: string
+        - name: campaign_name
+          in: path
+          required: true
+          description: Immutable Campaign name.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignName'
+        - name: operation_id
+          in: path
+          required: true
+          description: Operation-Id from the initiating response. Saved project/Agent authorization still applies after resource deletion.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignOperationId'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+            Cache-Control:
+              required: true
+              description: Prevents caches from treating the control token as a validator for changing progress.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaignOperation'
+              examples:
+                Validation failed without dialing:
+                  summary: Validation failed without dialing
+                  value:
+                    id: prepare-appointment-reminders
+                    kind: validation
+                    status: failed
+                    created_at: 1789632000
+                    finished_at: 1789632060
+                    error:
+                      code: campaign_validation_failed
+                      message: Recipient validation failed. Inspect validation_errors, correct the inputs, and PUT the complete replacement with current If-Match and a fresh Operation-Id.
+                Preparation finished and automatic dispatch is enabled:
+                  summary: Preparation finished and automatic dispatch is enabled
+                  value:
+                    id: prepare-appointment-reminders
+                    kind: validation
+                    status: succeeded
+                    created_at: 1789632000
+                    finished_at: 1789632060
+                Preparation is still validating recipients:
+                  summary: Preparation is still validating recipients
+                  value:
+                    id: prepare-appointment-reminders
+                    kind: validation
+                    status: in_progress
+                    created_at: 1789632000
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - TelephonyCampaigns
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+  /agents/{agent_name}/telephony_campaigns/{campaign_name}/validation_errors:
+    get:
+      operationId: TelephonyCampaigns_listValidationErrors
+      summary: List campaign validation errors
+      description: Lists current-round row validation errors. Results may be partial during preparation; an empty page does not establish success. Execution errors are in CallJobs; non-row failures are in Campaign.error.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: Owning Agent; never overridden in recipient inputs.
+          schema:
+            type: string
+        - name: campaign_name
+          in: path
+          required: true
+          description: Campaign name. Deleting returns 409 campaign_deleting; absent/deleted returns 404.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignName'
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: Opaque last_id bound to scope/filters/order; error cursors also bind instance/round/snapshot and survive cancel, not replacement. Exclusive with before; invalid tokens return 400 invalid_cursor.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: Opaque first_id for backward paging with unchanged scope/filters/order; exclusive with after.
+          schema:
+            type: string
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort invalid rows by their original row_number.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+            default: desc
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Cache-Control:
+              required: true
+              description: Prevents caches from treating the control token as a validator for changing progress.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaignValidationErrorPage'
+              examples:
+                No errors found; inspect Campaign status for validation completion:
+                  summary: No errors found; inspect Campaign status for validation completion
+                  value:
+                    data: []
+                    agent_version: '12'
+                    has_more: false
+                Only invalid input rows are returned:
+                  summary: Only invalid input rows are returned
+                  value:
+                    data:
+                      - row_number: 7
+                        error:
+                          code: invalid_recipient_schedule
+                          message: Provide a timestamp with an explicit timezone.
+                          param: scheduled_at
+                    agent_version: '12'
+                    first_id: opaque-first-error-cursor
+                    last_id: opaque-last-error-cursor
+                    has_more: false
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - TelephonyCampaigns
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+  /agents/{agent_name}/telephony_campaigns/{campaign_name}:cancel:
+    post:
+      operationId: TelephonyCampaigns_cancel
+      summary: Cancel a telephony campaign
+      description: Cancels a validating or running Campaign using If-Match. Stops new calls and retries; connected calls finish naturally. Returns 202 with an operation monitor to track completion.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: Owning Agent; never overridden in recipient inputs.
+          schema:
+            type: string
+        - name: campaign_name
+          in: path
+          required: true
+          description: Campaign name.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignName'
+        - name: If-Match
+          in: header
+          required: true
+          description: Exact current token; no wildcards. Without replay, missing Campaigns return 404 and stale tokens 412. Starting cancellation outside validating/running returns 409.
+          schema:
+            $ref: '#/components/schemas/Azure.Core.eTag'
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Optional retry key, generated if omitted. Original If-Match/key replays 202 even after deletion/name reuse, never touching a replacement; conflicts return 409. Failed cancellation needs a fresh key/current token.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignOperationId'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+          headers:
+            Cache-Control:
+              required: true
+              description: Prevents caches from treating the control token as a validator for changing progress.
+              schema:
+                type: string
+                enum:
+                  - no-store
+            Operation-Location:
+              required: true
+              description: Absolute polling URI including api-version.
+              schema:
+                type: string
+                format: uri
+            Operation-Id:
+              required: true
+              description: Stable cancellation operation ID for this accepted request.
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaignOperationId'
+            Retry-After:
+              required: true
+              description: Suggested polling delay in seconds.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaignOperation'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - TelephonyCampaigns
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+      x-ms-examples:
+        CancelCampaign:
+          $ref: ../../examples/campaigns/CancelCampaign.json
   /agents/{agent_name}/versions:
     post:
       operationId: Agents_createAgentVersion_Agents_createAgentVersionFromCode
@@ -46354,6 +47294,26 @@ components:
     AssetId:
       type: string
       description: Identifier of a saved asset.
+    AtTimeSchedule:
+      type: object
+      required:
+        - type
+        - scheduled_at
+      properties:
+        type:
+          type: string
+          enum:
+            - scheduled
+          description: Identifies scheduling with one common earliest dispatch time.
+        scheduled_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Common earliest dispatch time; successful preparation is required.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyCampaignSchedule'
+      description: Uses one earliest dispatch time for all recipients. Past times are allowed; preparation must still succeed.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     AttackStrategy:
       anyOf:
         - type: string
@@ -48615,31 +49575,6 @@ components:
             - Must start and end with alphanumeric characters,
             - Can contain hyphens in the middle
             - Must not exceed 63 characters.
-    CreateSipTelephonyBindingRequest:
-      type: object
-      required:
-        - provider
-      properties:
-        provider:
-          type: string
-          enum:
-            - sip
-        phone_number:
-          type: string
-          maxLength: 64
-          description: For UI display only.
-        allowed_calling_numbers:
-          type: array
-          items:
-            $ref: '#/components/schemas/SipAllowedCallingNumber'
-          maxItems: 64
-          description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
-      allOf:
-        - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-      description: The request to create an inbound SIP binding.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     CreateSkillVersionFromFilesBody:
       type: object
       properties:
@@ -48652,127 +49587,6 @@ components:
           description: Whether to set this version as the default. Defaults to false.
       required:
         - files
-    CreateTeamsPhoneExtensibilityTelephonyBindingRequest:
-      type: object
-      required:
-        - provider
-        - resource_account_object_id
-      properties:
-        provider:
-          type: string
-          enum:
-            - teams_phone_extensibility
-          description: The Microsoft Teams Phone extensibility provider.
-        phone_number:
-          type: string
-          maxLength: 64
-          description: The optional display phone number for the Teams resource account.
-        resource_account_object_id:
-          $ref: '#/components/schemas/Azure.Core.uuid'
-          description: The Microsoft Teams resource-account object identifier as a GUID.
-      allOf:
-        - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-      description: The request to create a Microsoft Teams Phone extensibility binding.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    CreateTelephonyBindingRequest:
-      type: object
-      required:
-        - provider
-        - connection_name
-      properties:
-        provider:
-          $ref: '#/components/schemas/TelephonyProvider'
-          description: The telephony provider.
-        connection_name:
-          type: string
-          minLength: 1
-          maxLength: 256
-          description: The Foundry connection name for the telephony provider.
-        label:
-          type: string
-          maxLength: 128
-          description: An optional display label for the binding.
-      discriminator:
-        propertyName: provider
-        mapping:
-          teams_phone_extensibility: '#/components/schemas/CreateTeamsPhoneExtensibilityTelephonyBindingRequest'
-          twilio: '#/components/schemas/CreateTwilioTelephonyBindingRequest'
-          sip: '#/components/schemas/CreateSipTelephonyBindingRequest'
-      description: The request to create a telephony binding.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    CreateTelephonyCallJobRequest:
-      type: object
-      required:
-        - destination
-        - connection_name
-        - source
-      properties:
-        destination:
-          $ref: '#/components/schemas/TelephonyOutboundDestination'
-          description: The phone destination to call.
-        connection_name:
-          type: string
-          minLength: 1
-          maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SIP. No inbound telephony binding is required.
-        source:
-          $ref: '#/components/schemas/TelephonyOutboundSource'
-          minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
-        purpose:
-          type: string
-          minLength: 1
-          description: An optional customer-declared purpose for placing the call.
-        structured_inputs:
-          type: object
-          additionalProperties: {}
-          description: Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
-        schedule:
-          $ref: '#/components/schemas/TelephonyCallJobSchedule'
-          description: The optional execution window.
-        retry_policy:
-          $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
-          description: The provider-attempt retry policy. Omit it for one attempt with no retry delay.
-      description: A request to create one durable direct outbound call job.
-      examples:
-        - connection_name: telephony-acs
-          source: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
-          destination:
-            type: phone_number
-            value: '+14255550123'
-        - connection_name: telephony-twilio
-          source: '+14255550100'
-          destination:
-            type: phone_number
-            value: '+14255550123'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    CreateTwilioTelephonyBindingRequest:
-      type: object
-      required:
-        - provider
-        - phone_number
-      properties:
-        provider:
-          type: string
-          enum:
-            - twilio
-          description: The Twilio provider.
-        phone_number:
-          type: string
-          pattern: ^\+[1-9]\d{6,14}$
-          description: The Twilio E.164 phone number.
-      allOf:
-        - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-      description: The request to create a Twilio binding.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     CredentialType:
       anyOf:
         - type: string
@@ -49251,15 +50065,14 @@ components:
       type: object
       required:
         - name
-        - version
       properties:
         name:
           type: string
           description: Dataset name.
         version:
           type: string
-          description: Dataset version.
-      description: Reference to a versioned Foundry Dataset.
+          description: Optional Dataset version. Omit to select latest when the consuming operation resolves the reference.
+      description: Reference to a Foundry Dataset in the current project. Consuming operations define supported Dataset kinds and resolution behavior.
     DatasetType:
       anyOf:
         - type: string
@@ -51506,7 +52319,7 @@ components:
         - kinds
       properties:
         dataset:
-          $ref: '#/components/schemas/DatasetReference'
+          $ref: '#/components/schemas/VersionedDatasetReference'
           description: Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).
         kinds:
           type: array
@@ -52120,6 +52933,26 @@ components:
             - random_sampling
             - smart_filtering
       description: Specifies the type of filter strategy used to select traces for evaluation.
+    FixedIntervalRetryPolicy:
+      type: object
+      required:
+        - type
+        - interval
+      properties:
+        type:
+          type: string
+          enum:
+            - fixed_interval
+          description: The fixed-interval retry strategy.
+        interval:
+          $ref: '#/components/schemas/FoundryDurationSeconds'
+          description: The nonnegative delay between attempts, from 0 to 2147483647 seconds. Zero permits an immediate retry, subject to scheduling and capacity.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
+      description: Shared direct-call/Campaign retry policy. Omission means one attempt; CallJobs return max_attempts=1 and interval=0 seconds.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     FixedRatioVersionSelectionRule:
       type: object
       required:
@@ -52671,6 +53504,22 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    ImmediateSchedule:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - immediate
+          description: Identifies immediate scheduling after successful preparation.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyCampaignSchedule'
+      description: Dispatch automatically as soon as preparation succeeds and capacity permits.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     Index:
       type: object
       required:
@@ -90054,27 +90903,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelemetryEndpoint'
       description: An OTLP (OpenTelemetry Protocol) telemetry export endpoint.
-    PSTNTelephonyTransferDestination:
-      type: object
-      required:
-        - kind
-        - value
-      properties:
-        kind:
-          type: string
-          enum:
-            - pstn
-          description: The PSTN destination type.
-        value:
-          type: string
-          pattern: ^\+[1-9]\d{6,14}$
-          description: The E.164 phone number to call.
-      allOf:
-        - $ref: '#/components/schemas/TelephonyTransferDestination'
-      description: A PSTN destination for a telephony transfer target.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     PageOrder:
       type: string
       enum:
@@ -90324,6 +91152,43 @@ components:
             - BlobReference
             - TemporaryBlobReference
       description: The type of pending upload.
+    PerRecipientSchedule:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - recipient
+          description: Identifies scheduling with a separate earliest dispatch time for each recipient.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyCampaignSchedule'
+      description: "Uses each recipient's scheduled_at: RFC 3339 with timezone in Datasets, Unix seconds for inline recipients."
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    PhoneNumber:
+      type: object
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          enum:
+            - phone_number
+          description: The phone-number address type.
+        value:
+          type: string
+          pattern: ^\+[1-9][0-9]{1,14}(?![\s\S])
+          description: E.164 phone number.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyAddress'
+      description: Phone-number address used by supported source and destination roles.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     ProceduralMemoryItem:
       type: object
       required:
@@ -92998,14 +93863,33 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobConfiguration'
       description: The configuration for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
+    SipAddress:
+      type: object
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          enum:
+            - sip
+          description: The SIP address type.
+        value:
+          type: string
+          format: uri
+          maxLength: 2048
+          description: The SIP or SIPS URI to call.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyAddress'
+      description: SIP/SIPS transfer address, subject to provider validation. SIP outbound sources and recipients use phone_number, not SIP URIs.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     SipAllowedCallingNumber:
       type: string
       maxLength: 256
       pattern: ^(?:\+[1-9][0-9]{1,14}|\^\\\+(?:[1-9]|\[1-9\])(?:(?:[0-9]|\[[0-9](?:-[0-9])?\])(?:\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\})?)+\$)$
-      description: |-
-        An exact E.164 caller number or a restricted pattern matched against the entire normalized number.
-        `+14255550123` allows only that number; `^\+1425[0-9]{7}$` allows numbers starting with `+1425`
-        followed by exactly seven digits.
+      description: Trimmed E.164 caller number or restricted `^\+...$` pattern. Start with a nonzero digit/[1-9], then ASCII digits, single-digit classes/ranges and repeats (1-15); matches have 2-15 digits. Other syntax and reversed ranges/bounds are rejected.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -93018,19 +93902,20 @@ components:
           type: string
           enum:
             - sip
+          description: The SIP provider.
         phone_number:
           type: string
           maxLength: 64
-          description: For UI display only.
+          description: Optional display metadata, not a routing key or E.164-constrained destination.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
+          description: Exact E.164 caller numbers or restricted anchored patterns, validated by the service. Omit or use [] for no restriction.
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
-      description: A SIP binding.
+      description: Inbound binding using a same-project SipInbound connection for authentication/network restrictions. Creation does not prove regional runtime readiness.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -93043,40 +93928,20 @@ components:
           type: string
           enum:
             - sip
+          description: The SIP provider.
         phone_number:
           type: string
           maxLength: 64
-          description: For UI display only.
+          description: Optional display phone metadata, not a routing key.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
+          description: Current exact E.164 caller numbers or restricted fully anchored patterns.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
-      description: A SIP binding returned in a list, including its entity tag.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    SipTelephonyTransferDestination:
-      type: object
-      required:
-        - kind
-        - value
-      properties:
-        kind:
-          type: string
-          enum:
-            - sip
-          description: The SIP destination type.
-        value:
-          type: string
-          format: uri
-          description: The SIP or SIPS URI to call.
-      allOf:
-        - $ref: '#/components/schemas/TelephonyTransferDestination'
-      description: A SIP destination for a telephony transfer target.
+      description: An inbound SIP binding returned in a list, including its current entity tag.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -93609,6 +94474,28 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    TeamsAddress:
+      type: object
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          enum:
+            - teams
+          description: The Microsoft Teams address type.
+        value:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: 'Source: nonempty resource-account GUID. Transfer: user/resource-account GUID or 28:orgid:{guid}.'
+      allOf:
+        - $ref: '#/components/schemas/TelephonyAddress'
+      description: Teams source/transfer identity, validated by role and provider. Not supported for outbound recipients.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TeamsPhoneExtensibilityTelephonyBinding:
       type: object
       required:
@@ -93654,28 +94541,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
       description: A Microsoft Teams Phone extensibility binding returned in a list, including its entity tag.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TeamsTelephonyTransferDestination:
-      type: object
-      required:
-        - kind
-        - value
-      properties:
-        kind:
-          type: string
-          enum:
-            - teams
-          description: The Microsoft Teams destination type.
-        value:
-          type: string
-          minLength: 1
-          maxLength: 256
-          description: The Microsoft Teams user or resource-account identifier.
-      allOf:
-        - $ref: '#/components/schemas/TelephonyTransferDestination'
-      description: A Microsoft Teams destination for a telephony transfer target.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -93762,18 +94627,53 @@ components:
             - Http
             - Grpc
       description: The transport protocol for telemetry export.
+    TelephonyAddress:
+      type: object
+      required:
+        - type
+        - value
+      properties:
+        type:
+          $ref: '#/components/schemas/TelephonyAddressType'
+          description: Endpoint address type.
+        value:
+          type: string
+          minLength: 1
+          description: Concrete address value. Known variants apply their format constraints; unknown variants are rejected before dialing.
+      discriminator:
+        propertyName: type
+        mapping:
+          phone_number: '#/components/schemas/PhoneNumber'
+          teams: '#/components/schemas/TeamsAddress'
+          sip: '#/components/schemas/SipAddress'
+      description: Shared source, recipient and transfer address. Connections validate each role before dialing; unsupported types fail. New types may be added.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyAddressType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - phone_number
+            - teams
+            - sip
+      description: Extensible endpoint address kinds. Address type describes the endpoint independently of the provider.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TelephonyBinding:
       type: object
       required:
         - id
         - provider
         - connection_name
-        - status
         - incoming_call_url
       properties:
         id:
           $ref: '#/components/schemas/TelephonyBindingId'
           description: The service-generated binding identifier.
+          readOnly: true
         provider:
           $ref: '#/components/schemas/TelephonyProvider'
           description: The telephony provider.
@@ -93786,13 +94686,11 @@ components:
           type: string
           maxLength: 128
           description: The optional display label for the binding.
-        status:
-          $ref: '#/components/schemas/TelephonyBindingStatus'
-          description: The lifecycle status.
         incoming_call_url:
           type: string
           format: uri
-          description: The service-generated webhook URL to configure with the telephony provider. For SIP bindings, this is a SIP URI.
+          description: 'The service-generated incoming address: an HTTPS webhook for webhook-based providers or a SIP/SIPS ingress URI for SIP.'
+          readOnly: true
       discriminator:
         propertyName: provider
         mapping:
@@ -93817,7 +94715,6 @@ components:
         - id
         - provider
         - connection_name
-        - status
         - incoming_call_url
         - etag
       properties:
@@ -93836,13 +94733,10 @@ components:
           type: string
           maxLength: 128
           description: The optional display label for the binding.
-        status:
-          $ref: '#/components/schemas/TelephonyBindingStatus'
-          description: The lifecycle status.
         incoming_call_url:
           type: string
           format: uri
-          description: The service-generated webhook URL to configure with the telephony provider. For SIP bindings, this is a SIP URI.
+          description: The service-generated HTTPS webhook or SIP/SIPS ingress URI to configure with the telephony provider.
         etag:
           $ref: '#/components/schemas/Azure.Core.eTag'
           description: The entity tag to send in the `If-Match` header when updating or deleting this binding.
@@ -93854,17 +94748,6 @@ components:
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
           sip: '#/components/schemas/SipTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyBindingStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - active
-            - suspended
-      description: The lifecycle status of a telephony binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -93931,9 +94814,7 @@ components:
       required:
         - destination
         - connection_name
-        - source
         - id
-        - object
         - agent_name
         - status
         - retry_policy
@@ -93941,19 +94822,16 @@ components:
         - revision
         - created_at
         - updated_at
+        - source
       properties:
         destination:
-          $ref: '#/components/schemas/TelephonyOutboundDestination'
+          $ref: '#/components/schemas/TelephonyAddress'
           description: The phone destination to call.
         connection_name:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SIP. No inbound telephony binding is required.
-        source:
-          $ref: '#/components/schemas/TelephonyOutboundSource'
-          minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
+          description: Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee.
         purpose:
           type: string
           minLength: 1
@@ -93961,52 +94839,64 @@ components:
         structured_inputs:
           type: object
           additionalProperties: {}
-          description: Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
+          description: Agent/greeting inputs, including nested JSON and null. Agent schemas, required fields and defaults apply.
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobSchedule'
           description: The optional execution window.
         id:
           $ref: '#/components/schemas/TelephonyCallJobId'
           description: The service-generated call-job identifier.
-        object:
-          type: string
-          enum:
-            - telephony.call_job
-          description: The object type. Always `telephony.call_job`.
+          readOnly: true
         agent_name:
           type: string
           description: The name of the voice agent used at execution time.
+          readOnly: true
         status:
           $ref: '#/components/schemas/TelephonyCallJobStatus'
           description: The current call-job lifecycle status.
+          readOnly: true
         cancellation:
           $ref: '#/components/schemas/TelephonyCallJobCancellation'
           description: The recorded cancellation request, when cancellation was requested.
+          readOnly: true
         retry_policy:
           $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
-          description: The frozen provider-attempt retry policy.
+          description: 'Frozen retry policy. Omission at creation returns fixed_interval with max_attempts=1 and interval=0 seconds: one initial attempt, no retry.'
         attempt_count:
           type: integer
           format: int32
           minimum: 0
           description: The number of provider attempts created so far.
+          readOnly: true
         next_attempt_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp in seconds at which the next retry becomes eligible.
+          readOnly: true
         terminal_reason:
           $ref: '#/components/schemas/TelephonyCallJobTerminalReason'
           description: 'The stable service-generated reason for the overall outbound call job, which can span multiple provider attempts, when available. Interpret this with `status`: a queued job can retain a temporary dispatch-deferral reason. Additional string codes may be returned.'
+          readOnly: true
         revision:
           type: integer
           format: int64
           minimum: 0
           description: The monotonically increasing optimistic-concurrency revision.
+          readOnly: true
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp in seconds when the call job was created.
+          readOnly: true
         updated_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp in seconds when the call job was last updated.
+          readOnly: true
+        source:
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: 'Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI.'
+        campaign_name:
+          $ref: '#/components/schemas/TelephonyCampaignName'
+          description: Owning Campaign, absent for direct calls. Instance-bound despite name reuse; Campaign deletion hides then removes its jobs.
+          readOnly: true
       description: A durable direct or campaign-created outbound call intent.
       x-ms-foundry-meta:
         required_previews:
@@ -94045,17 +94935,16 @@ components:
         - source
       properties:
         destination:
-          $ref: '#/components/schemas/TelephonyOutboundDestination'
+          $ref: '#/components/schemas/TelephonyAddress'
           description: The phone destination to call.
         connection_name:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SIP. No inbound telephony binding is required.
+          description: Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee.
         source:
-          $ref: '#/components/schemas/TelephonyOutboundSource'
-          minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: 'Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI.'
         purpose:
           type: string
           minLength: 1
@@ -94063,11 +94952,62 @@ components:
         structured_inputs:
           type: object
           additionalProperties: {}
-          description: Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
+          description: Agent/greeting inputs, including nested JSON and null. Agent schemas, required fields and defaults apply.
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobSchedule'
           description: The optional execution window.
       description: Customer-controlled configuration shared by direct and campaign-created call jobs.
+      examples:
+        - connection_name: telephony-acs
+          source:
+            type: teams
+            value: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+          destination:
+            type: phone_number
+            value: '+14255550123'
+        - connection_name: telephony-twilio
+          source:
+            type: phone_number
+            value: '+14255550100'
+          destination:
+            type: phone_number
+            value: '+14255550123'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallJobCreate:
+      type: object
+      required:
+        - destination
+        - connection_name
+        - source
+      properties:
+        destination:
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: The phone destination to call.
+        connection_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee.
+        purpose:
+          type: string
+          minLength: 1
+          description: An optional customer-declared purpose for placing the call.
+        structured_inputs:
+          type: object
+          additionalProperties: {}
+          description: Agent/greeting inputs, including nested JSON and null. Agent schemas, required fields and defaults apply.
+        schedule:
+          $ref: '#/components/schemas/TelephonyCallJobSchedule'
+          description: The optional execution window.
+        retry_policy:
+          $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
+          description: 'Frozen retry policy. Omission at creation returns fixed_interval with max_attempts=1 and interval=0 seconds: one initial attempt, no retry.'
+        source:
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: 'Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI.'
+      description: The direct outbound call to create.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -94607,50 +95547,319 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TelephonyOutboundDestination:
+    TelephonyCampaign:
       type: object
       required:
-        - type
-        - value
+        - connection_name
+        - source
+        - status
+        - name
+        - created_at
+        - updated_at
+        - etag
+        - operation_id
+        - progress
       properties:
-        type:
-          $ref: '#/components/schemas/TelephonyOutboundDestinationType'
-          description: The destination type. Only E.164 phone numbers are currently supported.
-        value:
+        connection_name:
           type: string
-          pattern: ^\+[1-9]\d{1,14}$
-          description: The destination E.164 phone number.
-      description: The destination of an outbound call.
+          minLength: 1
+          maxLength: 256
+          description: Human-readable name of the provider connection in the current project.
+        source:
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: Typed caller address shared with generated CallJobs. The connection validates source support separately from recipient support.
+        recipient_dataset:
+          $ref: '#/components/schemas/DatasetReference'
+          description: 'Same-project CSV/JSON/JSONL uri_file, exclusive with recipients. Omitted version pins latest per preparation. Limits: 1-1,000,000 rows, 256 MiB decoded/file, 1 MiB/row.'
+        schedule:
+          $ref: '#/components/schemas/TelephonyCampaignSchedule'
+          description: Dispatch schedule; omission equals ImmediateSchedule. Every mode waits for successful preparation, then follows its schedule and available capacity.
+        retry_policy:
+          $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
+          description: Per-recipient retries. Omit for one attempt; generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds.
+        status:
+          $ref: '#/components/schemas/TelephonyCampaignStatus'
+          description: Business execution state. Each asynchronous action has its own retained operation monitor.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Preparation/control failure, cleared on retry. Never includes secrets or raw recipient values.
+          readOnly: true
+        name:
+          $ref: '#/components/schemas/TelephonyCampaignName'
+          description: Immutable name supplied as campaign_name in the PUT path, not the request body; echoed in responses. Unique within the project and Agent.
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Creation time.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Last observable progress update.
+          readOnly: true
+        etag:
+          $ref: '#/components/schemas/Azure.Core.eTag'
+          description: Conditional-action token, not a cache validator. Changes with control state, not progress.
+          readOnly: true
+        operation_id:
+          type: string
+          description: Latest accepted action, for discovery only. Poll the initiating response's Operation-Id/Operation-Location instead.
+          readOnly: true
+        finished_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Time of terminal completion for the current round; cleared when failed preparation is replaced.
+          readOnly: true
+        locked_agent_version:
+          type: string
+          description: Latest Agent version pinned once per preparation and shared by retries/calls. Omitted until resolved; replacement clears it. Unavailable pins fail without fallback.
+          readOnly: true
+        progress:
+          $ref: '#/components/schemas/TelephonyCampaignProgress'
+          description: Available partial accounting even when the job fails or is cancelled.
+          readOnly: true
+      description: Agent-owned outbound call Campaign. Creation/replacement authorizes execution after successful preparation.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TelephonyOutboundDestinationType:
+    TelephonyCampaignCreate:
+      type: object
+      required:
+        - connection_name
+        - source
+      properties:
+        connection_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: Human-readable name of the provider connection in the current project.
+        source:
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: Typed caller address shared with generated CallJobs. The connection validates source support separately from recipient support.
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelephonyRecipient'
+          minItems: 1
+          maxItems: 100
+          description: 1-100 recipients, exclusive with recipient_dataset. The whole UTF-8 request is limited to 1 MiB. Omitted from reads; retain the submission for row correlation.
+        recipient_dataset:
+          $ref: '#/components/schemas/DatasetReference'
+          description: 'Same-project CSV/JSON/JSONL uri_file, exclusive with recipients. Omitted version pins latest per preparation. Limits: 1-1,000,000 rows, 256 MiB decoded/file, 1 MiB/row.'
+        schedule:
+          $ref: '#/components/schemas/TelephonyCampaignSchedule'
+          description: Dispatch schedule; omission equals ImmediateSchedule. Every mode waits for successful preparation, then follows its schedule and available capacity.
+        retry_policy:
+          $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
+          description: Per-recipient retries. Omit for one attempt; generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds.
+      description: Agent-owned outbound call Campaign. Creation/replacement authorizes execution after successful preparation.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignName:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}(?![\s\S])
+      description: Immutable customer-chosen Campaign name within a project and Agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignOperation:
+      type: object
+      required:
+        - id
+        - status
+        - kind
+        - created_at
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        kind:
+          $ref: '#/components/schemas/TelephonyCampaignOperationKind'
+          description: Work tracked by this monitor.
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Creation time of this operation.
+          readOnly: true
+        finished_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: When preparation, cancellation or deletion finished.
+          readOnly: true
+      description: Preparation/cancel/delete monitor bound to its original Campaign instance/round, independent of later actions. Omits result. Retained for the Campaign lifetime and at least 24 hours after both completion and deletion.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignOperationId:
+      type: string
+      minLength: 1
+      maxLength: 256
+      description: An operation identifier of 1-256 characters. Must not be whitespace-only or contain CR/LF; the service enforces these content rules.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignOperationKind:
       anyOf:
         - type: string
         - type: string
           enum:
-            - phone_number
-      description: The type of destination for an outbound call.
+            - validation
+            - cancel
+            - delete
+      description: Kind of asynchronous work associated with a Campaign.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TelephonyOutboundFixedIntervalRetryPolicy:
+    TelephonyCampaignProgress:
+      type: object
+      required:
+        - pending
+        - active
+        - completed
+        - failed
+        - cancelled
+        - expired
+      properties:
+        total_recipients:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Total input rows, including invalid rows. Omitted until known; never an estimate.
+        pending:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Recipients waiting for their schedule, capacity or retry after preparation has completed.
+        active:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Recipients with a durable origination reservation or unresolved provider attempt, including dispatching before a call ID is received.
+        completed:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Recipients whose CallJob completed; not proof of business success.
+        failed:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Recipients whose CallJob exhausted retries or failed.
+        cancelled:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Recipients cancelled before completion. Does not include dispatch-window expiry.
+        expired:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Recipients whose dispatch deadline elapsed before a new attempt could start.
+      description: Recipient execution counts, zero until preparation succeeds; then mutually exclusive and summing to total_recipients.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignSchedule:
       type: object
       required:
         - type
-        - interval
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/TelephonyCampaignScheduleType'
+          description: How each recipient's earliest dispatch time is determined.
+        expires_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Exclusive deadline for new attempts, including retries; active calls may finish. Must be later than every scheduled_at.
+      discriminator:
+        propertyName: type
+        mapping:
+          immediate: '#/components/schemas/ImmediateSchedule'
+          scheduled: '#/components/schemas/AtTimeSchedule'
+          recipient: '#/components/schemas/PerRecipientSchedule'
+      description: Creation authorizes dialing; every scheduling mode waits for successful preparation.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignScheduleType:
+      anyOf:
+        - type: string
+        - type: string
           enum:
-            - fixed_interval
-          description: The fixed-interval retry strategy.
-        interval:
-          $ref: '#/components/schemas/FoundryDurationSeconds'
-          description: The fixed delay in seconds between attempts.
-      allOf:
-        - $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
-      description: The frozen fixed-interval retry policy returned for an outbound call or campaign.
+            - immediate
+            - scheduled
+            - recipient
+      description: Mutually exclusive ways to determine each recipient's earliest dispatch time.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - validating
+            - running
+            - cancelling
+            - completed
+            - failed
+            - cancelled
+            - deleting
+      description: Campaign execution state, separate from preparation/cancel/delete LROs. All recipients terminal means completed, not necessarily successful.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignValidationError:
+      type: object
+      required:
+        - row_number
+        - error
+      properties:
+        row_number:
+          type: integer
+          format: int64
+          minimum: 1
+          description: One-based source row or inline item position.
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Row validation error; param identifies the field. Never includes raw values or secrets.
+      description: Invalid-row diagnostic for current preparation; execution errors are in CallJobs.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignValidationErrorPage:
+      type: object
+      required:
+        - data
+        - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelephonyCampaignValidationError'
+          description: The requested list of items.
+        has_more:
+          type: boolean
+          description: A value indicating whether there are additional values available not captured in this list.
+        first_id:
+          type: string
+          description: Opaque cursor for the first returned item; absent when empty.
+        last_id:
+          type: string
+          description: Opaque cursor for the last returned item; absent when empty. Deletion/name reuse does not move its original sort boundary.
+        agent_version:
+          type: string
+          description: Pinned Agent version used for preparation, shared by all errors on the page.
+      description: Error-only page. During validation this is a partial live view; an empty page does not establish success.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -94672,7 +95881,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          fixed_interval: '#/components/schemas/TelephonyOutboundFixedIntervalRetryPolicy'
+          fixed_interval: '#/components/schemas/FixedIntervalRetryPolicy'
       description: The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt. Strategy-specific settings are defined by the derived policy.
       x-ms-foundry-meta:
         required_previews:
@@ -94684,15 +95893,6 @@ components:
           enum:
             - fixed_interval
       description: The retry strategy for an outbound call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyOutboundSource:
-      type: string
-      minLength: 1
-      maxLength: 36
-      pattern: ^(?:\+[1-9][0-9]{1,14}|(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
-      description: 'An outbound caller identity: an E.164 phone number or a non-empty Teams Resource Account UUID. The connection category determines which form is accepted.'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -94708,33 +95908,22 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TelephonyTransferDestination:
+    TelephonyRecipient:
       type: object
       required:
-        - kind
+        - destination
       properties:
-        kind:
-          $ref: '#/components/schemas/TelephonyTransferDestinationKind'
-          description: The telephony transfer destination type.
-      discriminator:
-        propertyName: kind
-        mapping:
-          pstn: '#/components/schemas/PSTNTelephonyTransferDestination'
-          teams: '#/components/schemas/TeamsTelephonyTransferDestination'
-          sip: '#/components/schemas/SipTelephonyTransferDestination'
-      description: A destination for a telephony transfer target.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyTransferDestinationKind:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - pstn
-            - teams
-            - sip
-      description: The kind of telephony transfer destination. Known values are stable; additional values may be added over time.
+        destination:
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: Recipient address; currently phone_number only. Unsupported types fail preparation; future variants can reuse this field.
+        structured_inputs:
+          type: object
+          additionalProperties: {}
+          description: Agent inputs with nested JSON/null, unique names and depth at most 16. Agent schemas/defaults apply. Replay preserves types, exact numbers, array order and null/omission, but ignores object order; use lossless numeric serialization.
+        scheduled_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Earliest dispatch time for recipient scheduling. Required only when schedule.type is recipient; forbidden for other modes.
+      description: One recipient in an inline campaign input. Each input position is a separate intended call, including repeated destinations.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -94754,8 +95943,8 @@ components:
           maxLength: 1024
           description: A description that helps the voice agent decide when to use this target.
         destination:
-          $ref: '#/components/schemas/TelephonyTransferDestination'
-          description: The provider-specific transfer destination.
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: The shared typed address to transfer to. The selected provider validates supported destination types.
       description: A named destination to which the voice agent may transfer a call.
       x-ms-foundry-meta:
         required_previews:
@@ -94764,7 +95953,7 @@ components:
       type: string
       minLength: 1
       maxLength: 64
-      pattern: ^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$
+      pattern: ^[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\s\S])
       description: The unique name of a telephony transfer target.
       x-ms-foundry-meta:
         required_previews:
@@ -95576,7 +96765,7 @@ components:
           description: The Twilio provider.
         phone_number:
           type: string
-          pattern: ^\+[1-9]\d{6,14}$
+          pattern: ^\+[1-9][0-9]{6,14}(?![\s\S])
           description: The Twilio E.164 phone number.
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
@@ -95597,7 +96786,7 @@ components:
           description: The Twilio provider.
         phone_number:
           type: string
-          pattern: ^\+[1-9]\d{6,14}$
+          pattern: ^\+[1-9][0-9]{6,14}(?![\s\S])
           description: The Twilio E.164 phone number.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
@@ -95715,32 +96904,29 @@ components:
     UpdateTelephonyBindingRequest:
       type: object
       properties:
-        status:
-          $ref: '#/components/schemas/TelephonyBindingStatus'
-          description: The new lifecycle status.
         label:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 128
-          description: The replacement display label. Omit it to preserve the current value; use null to clear it.
+          description: 'Replacement label: omit to preserve, null/blank to clear. Trimmed before length validation.'
         connection_name:
           type: string
           minLength: 1
           maxLength: 256
-          description: The replacement Foundry connection name. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable.
+          description: Replacement same-project connection for Teams or SIP (SipInbound only); immutable for Twilio. Null/blank names are invalid.
         phone_number:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 64
-          description: The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for Teams Phone extensibility and SIP bindings.
+          description: Teams/SIP display number, not SIP routing. Omit to preserve; null/empty/blank clears. Unsupported for Twilio.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: SIP only. Omit to preserve the restriction; send [] to allow any caller.
+          description: 'SIP caller restrictions: omit to preserve, [] to clear; null is invalid. Network restrictions belong to the connection.'
       description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
       x-ms-foundry-meta:
         required_previews:
@@ -96043,6 +97229,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VersionSelectionRule'
+    VersionedDatasetReference:
+      type: object
+      required:
+        - name
+        - version
+      properties:
+        name:
+          type: string
+          description: Dataset name.
+        version:
+          type: string
+          description: Concrete Dataset version.
+      description: Reference to a Dataset whose concrete version has already been resolved.
     Versions:
       type: string
       enum:
