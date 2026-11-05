@@ -64,7 +64,37 @@ model GeoCatalog is TrackedResource<GeoCatalogProperties> {
   @segment("geoCatalogs")
   name: string;
 
-  ...ManagedServiceIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Custom user-assigned-only identity envelope; preserves the ARM identity property."
+  @typeChangedFrom(
+    Versions.`2026-10-01`,
+    Azure.ResourceManager.Foundations.ManagedServiceIdentity
+  )
+  @doc("The managed service identities assigned to this resource.")
+  identity?: GeoCatalogManagedServiceIdentity;
+}
+
+@added(Versions.`2026-10-01`)
+@doc("The user-assigned managed identities associated with the GeoCatalog.")
+model GeoCatalogManagedServiceIdentity {
+  ...OmitProperties<
+    Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+    "principalId" | "tenantId" | "type"
+  >;
+
+  @doc("The type of managed identity assigned to this resource.")
+  type: GeoCatalogManagedServiceIdentityType;
+}
+
+@added(Versions.`2026-10-01`)
+@doc("The supported managed identity types for a GeoCatalog.")
+union GeoCatalogManagedServiceIdentityType {
+  @doc("No managed identity.")
+  None: "None",
+
+  @doc("User-assigned managed identity.")
+  UserAssigned: "UserAssigned",
+
+  string,
 }
 
 @doc("The Microsoft Planetary Computer Pro GeoCatalog tier")
@@ -183,8 +213,14 @@ union PublicNetworkAccess {
   Disabled: "Disabled",
 }
 
+@removed(Versions.`2026-10-01`)
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+
+@added(Versions.`2026-10-01`)
+@doc("The user-assigned managed identity properties to update.")
+model GeoCatalogManagedServiceIdentityUpdate
+  is OptionalProperties<UpdateableProperties<GeoCatalogManagedServiceIdentity>>;
 
 /*
   Patch request workaround for Swagger LintDiff.
@@ -194,8 +230,9 @@ model ManagedServiceIdentityUpdate
 model GeoCatalogUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
+  @typeChangedFrom(Versions.`2026-10-01`, ManagedServiceIdentityUpdate)
   @doc("The managed service identity properties to update.")
-  identity?: ManagedServiceIdentityUpdate;
+  identity?: GeoCatalogManagedServiceIdentityUpdate;
 
   @added(Versions.`2026-10-01`)
   @doc("The updatable properties of the GeoCatalog.")
