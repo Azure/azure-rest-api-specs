@@ -168,58 +168,17 @@ op updateTopicCustomized is WebPubSubChat.ConditionalOperations.ResourceUpdate<C
   "javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Client-only operation override."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only override preserves the original operation's wire signature."
-op updateMessageCustomized(
-  @minLength(1)
-  @query("api-version")
-  apiVersion: string,
-
-  /** Target hub name. */
-  @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-  @minLength(1)
-  @maxLength(128)
-  @clientName("hubName", "csharp")
-  @path
-  hub: string,
-
-  /** Conversation identifier. */
-  @pattern("^c\\.[A-Za-z0-9_-]{1,64}\\.[A-Za-z0-9_-]{1,64}$")
-  @minLength(1)
-  @maxLength(131)
-  @path
-  conversationId: string,
-
-  /** Message identifier. */
-  @pattern("^\\d+$")
-  @minLength(1)
-  @maxLength(128)
-  @path
-  messageId: string,
-
-  /** This request has a JSON Merge Patch body. */
-  @header("Content-Type")
-  contentType: "application/merge-patch+json",
-
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+model UpdateMessageCustomization {
   /** The message to update. */
-  @body
-  @clientName("message")
-  resource: WebPubSubChat.ChatMessage,
-
-  /** The request should only proceed if an entity matches this string. */
-  @header("If-Match")
-  ifMatch?: string,
-
-  /** The request should only proceed if no entity matches this string. */
-  @header("If-None-Match")
-  ifNoneMatch?: string,
-):
-  | TypeSpec.Http.Response<200> &
-      WebPubSubChat.ChatMessage &
-      Azure.Core.EtagResponseEnvelope
-  | Azure.Core.Foundations.ErrorResponse;
+  message: WebPubSubChat.ChatMessage;
+}
 
 @@override(
-  WebPubSubChat.WebPubSubChatServiceClient.updateMessage,
-  updateMessageCustomized
+  WebPubSubChatServiceClient.updateMessage,
+  replaceParameter(
+    WebPubSubChatServiceClient.updateMessage,
+    "resource",
+    UpdateMessageCustomization.message
+  )
 );
