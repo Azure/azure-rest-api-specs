@@ -5794,7 +5794,7 @@ model VirtualMachineProtectionProperties {
  * Specifies the protection information projected in the virtual machine response.
  */
 @added(Versions.v2026_09_01)
-model VirtualMachineProtectionProfile {
+model VirtualMachineProtectionPropertiesMinimalSet {
   /**
    * The protection type configured for the virtual machine.
    */
@@ -5827,7 +5827,7 @@ model ResiliencyProfile {
    */
   @added(Versions.v2026_09_01)
   @visibility(Lifecycle.Read)
-  vmProtection?: VirtualMachineProtectionProfile;
+  vmProtection?: VirtualMachineProtectionPropertiesMinimalSet;
 }
 
 /**
