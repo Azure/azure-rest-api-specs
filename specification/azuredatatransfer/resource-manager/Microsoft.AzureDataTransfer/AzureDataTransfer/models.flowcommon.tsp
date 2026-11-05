@@ -190,6 +190,21 @@ model TransferFlowSummary {
    * The identity that requested the transfer flow.
    */
   requestor?: string;
+
+  /**
+   * The pipeline associated with the transfer flow.
+   */
+  pipeline?: string;
+
+  /**
+   * Data class type of the transfer flow.
+   */
+  dataClassType?: DataClassType;
+
+  /**
+   * Tenant ID of the transfer flow.
+   */
+  tenantId?: Azure.Core.uuid;
 }
 
 /**

@@ -4659,6 +4659,11 @@
       "type": "string",
       "description": "Represents an Azure Resource Type."
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureResourceManagerArmResponseConnection": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -7960,6 +7965,18 @@
         "requestor": {
           "type": "string",
           "description": "The identity that requested the transfer flow."
+        },
+        "pipeline": {
+          "type": "string",
+          "description": "The pipeline associated with the transfer flow."
+        },
+        "dataClassType": {
+          "$ref": "#/definitions/DataClassType",
+          "description": "Data class type of the transfer flow."
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Tenant ID of the transfer flow."
         }
       },
       "required": [
