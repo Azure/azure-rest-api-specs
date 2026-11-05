@@ -64,6 +64,8 @@ it("shows the same help for --help and -h without a project or Git repository", 
     "--dry-run",
     "--git-clean",
     "--github-summary",
+    "--check",
+    "--fix",
     "default: HEAD^",
     "default: HEAD)",
     "--all and --changed cannot be combined",
@@ -87,6 +89,13 @@ it("shows the same help for --help and -h without a project or Git repository", 
     /^\s+--shard <index>\/<count>\s+Select a shard using one-based indices\./m,
   );
   expect(help.stdout).not.toMatch(/(?:^|\s)(?:--folder|--context|-f|-c)(?=[\s,=]|$)/);
+});
+
+it("rejects conflicting check and fix modes before validating", async () => {
+  await expect(run("--check", "--fix", "project")).rejects.toMatchObject({
+    code: 1,
+    stderr: "--check and --fix cannot be combined\n",
+  });
 });
 
 it("requires an explicit project folder instead of resolving a missing argument to cwd", async () => {

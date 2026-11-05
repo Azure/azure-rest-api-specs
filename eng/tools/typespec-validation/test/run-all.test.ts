@@ -130,6 +130,19 @@ it("forwards --verbose to child projects without changing their suppression cont
   ]);
 });
 
+it("forwards batch fix mode separately from suppression context", async () => {
+  const project = await addProject("a");
+
+  await expect(runAll(root, { fix: true })).resolves.toBe(true);
+
+  expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
+    expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
+    project,
+    '{"checkingAllSpecs":true}',
+    "--fix",
+  ]);
+});
+
 it("logs repository-relative paths but passes absolute paths to validation", async () => {
   const project = await addProject("specification/service/Project");
   await simpleGit(root).init();

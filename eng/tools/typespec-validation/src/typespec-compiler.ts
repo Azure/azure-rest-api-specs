@@ -24,9 +24,9 @@ export interface CompileResult extends RuleResult {
 
 export async function compileTypeSpec(
   entrypoint: string,
-  options: { noEmit?: boolean; checkOnly?: boolean } = {},
+  options: { noEmit?: boolean; fix?: boolean } = {},
 ): Promise<CompileResult> {
-  const { checkOnly = false, ...overrides } = options;
+  const { fix = false, ...overrides } = options;
   const cwd = process.cwd();
   const emittedFiles: string[] = [];
   const changedFiles = new Set<string>();
@@ -36,7 +36,7 @@ export async function compileTypeSpec(
     logSink: { log: (log) => logs.push(`${log.level}: ${log.message}`) },
     writeFile: async (path, content) => {
       emittedFiles.push(relative(cwd, path));
-      if (!checkOnly) return NodeHost.writeFile(path, content);
+      if (fix) return NodeHost.writeFile(path, content);
       let existing: string | undefined;
       try {
         existing = await readFile(path, "utf8");
@@ -50,7 +50,7 @@ export async function compileTypeSpec(
         changedFiles.add(path);
       }
     },
-    ...(checkOnly
+    ...(!fix
       ? {
           mkdirp: () => Promise.resolve(undefined),
           rm: () =>
@@ -73,7 +73,7 @@ export async function compileTypeSpec(
   return {
     ...compilerResult("compile", !program.hasError(), program.diagnostics, logs),
     emittedFiles,
-    ...(checkOnly
+    ...(!fix
       ? {
           changedFiles: (await excludeIgnoredFiles(program.projectRoot, [...changedFiles])).map(
             (path) => relative(cwd, path),
@@ -110,7 +110,7 @@ async function excludeIgnoredFiles(folder: string, files: string[]): Promise<str
   }
 }
 
-export async function formatTypeSpec(folder: string, checkOnly = false): Promise<RuleResult> {
+export async function formatTypeSpec(folder: string, fix = false): Promise<RuleResult> {
   // TODO: Replace the private import once the compiler exports its filesystem formatter APIs.
   const { formatFiles, checkFilesFormat } = (await import(
     new URL(
@@ -129,9 +129,9 @@ export async function formatTypeSpec(folder: string, checkOnly = false): Promise
   };
   const patterns = [resolve(folder, "../**/*.tsp"), resolve(folder, "tspconfig.yaml")];
   const options = { exclude: [resolve(folder, "../**/node_modules")] };
-  const { errored, needsFormat = [] } = checkOnly
-    ? await checkFilesFormat(patterns, options)
-    : { ...(await formatFiles(patterns, options)), needsFormat: [] };
+  const { errored, needsFormat = [] } = fix
+    ? { ...(await formatFiles(patterns, options)), needsFormat: [] }
+    : await checkFilesFormat(patterns, options);
   if (errored.length === 0 && needsFormat.length > 0) {
     return failure("format-changed", "Files need TypeSpec formatting:", {
       path: folder,

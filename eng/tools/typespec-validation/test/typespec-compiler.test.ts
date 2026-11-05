@@ -53,7 +53,7 @@ export async function $onEmit({ program }) {
 `,
   );
 
-  const result = await compileTypeSpec(root);
+  const result = await compileTypeSpec(root, { fix: true });
   expect(result.success, JSON.stringify(result.diagnostics)).toBe(true);
   expect(result.emittedFiles).toEqual([relative(process.cwd(), outputFile)]);
   expect(await readFile(outputFile, "utf8")).toBe("{}");
@@ -73,7 +73,7 @@ it("formats shared TypeSpec files and project config, excluding node_modules", a
   await writeFile(join(root, "node_modules/ignored.tsp"), "invalid ignored file");
   await writeFile(join(folder, "tspconfig.yaml"), "emit: []");
 
-  const result = await formatTypeSpec(folder);
+  const result = await formatTypeSpec(folder, true);
 
   expect(result.success, JSON.stringify(result.diagnostics)).toBe(true);
   expect(await readFile(join(root, "shared.tsp"), "utf8")).toBe(
@@ -110,7 +110,7 @@ it("checks final emitted contents without modifying files or creating output dir
 `,
   );
 
-  const result = await compileTypeSpec(root, { checkOnly: true });
+  const result = await compileTypeSpec(root);
 
   expect(result.success, JSON.stringify(result.diagnostics)).toBe(true);
   expect(result.changedFiles).toEqual([existing, missing].map((p) => relative(process.cwd(), p)));
@@ -144,7 +144,7 @@ it("ignores untracked generated output but still checks tracked files matching i
     .commit("Fixture");
   const index = await readFile(join(root, ".git/index"));
 
-  const result = await compileTypeSpec(root, { checkOnly: true });
+  const result = await compileTypeSpec(root);
 
   expect(result.success, JSON.stringify(result.diagnostics)).toBe(true);
   expect(result.changedFiles).toEqual([relative(process.cwd(), tracked)]);
@@ -162,7 +162,7 @@ it("reports shared formatting issues without changing TypeSpec or config files",
   await writeFile(shared, "model   Shared{value:string;}");
   await writeFile(config, "emit: []");
 
-  const result = await formatTypeSpec(folder, true);
+  const result = await formatTypeSpec(folder);
 
   expect(result.success).toBe(false);
   expect(result.diagnostics?.[0].code).toBe("format-changed");
@@ -185,8 +185,6 @@ it("refuses emitter removals without deleting files during check-only validation
 `,
   );
 
-  await expect(compileTypeSpec(root, { checkOnly: true })).rejects.toThrow(
-    "Removing files is not supported",
-  );
+  await expect(compileTypeSpec(root)).rejects.toThrow("Removing files is not supported");
   expect(await readFile(file, "utf8")).toBe("keep");
 });

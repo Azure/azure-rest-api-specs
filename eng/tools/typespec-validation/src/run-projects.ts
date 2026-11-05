@@ -16,6 +16,7 @@ interface RunOptions {
   dryRun?: boolean;
   verbose?: boolean;
   summaryFile?: string;
+  fix?: boolean;
 }
 
 interface RunContext {
@@ -144,7 +145,7 @@ async function runProjects(
     }
 
     try {
-      const { success, segments } = await validateProject(project, context, options.verbose);
+      const { success, segments } = await validateProject(project, context, options);
       if (success) {
         counts.PASS++;
         printProjectGroup(githubActions, "pass", name, segments);
@@ -297,7 +298,7 @@ function selectShard(projects: string[], shard: string): string[] {
 function validateProject(
   folder: string,
   context: RunContext,
-  verbose = false,
+  { verbose = false, fix = false }: Pick<RunOptions, "verbose" | "fix"> = {},
 ): Promise<{ success: boolean; segments: OutputSegment[] }> {
   return new Promise((resolvePromise, reject) => {
     const env: NodeJS.ProcessEnv = { ...process.env, GIT_OPTIONAL_LOCKS: "0" };
@@ -335,6 +336,7 @@ function validateProject(
         folder,
         JSON.stringify(context),
         ...(verbose ? ["--verbose"] : []),
+        ...(fix ? ["--fix"] : []),
       ],
       { stdio: ["ignore", "pipe", "pipe"], env },
     );

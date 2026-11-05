@@ -1,25 +1,21 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { type RuleResult } from "../rule-result.ts";
-import { type Rule } from "../rule.ts";
+import { type Rule, type RuleExecutionOptions } from "../rule.ts";
 import { formatTypeSpec } from "../typespec-compiler.ts";
 import { gitDiffTopSpecFolder } from "../utils.ts";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
   readonly description = "Format TypeSpec";
-  readonly checkOnly: boolean;
-
-  constructor(checkOnly = false) {
-    this.checkOnly = checkOnly;
-  }
-
-  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
+  async execute(
+    folder: string,
+    logger: ILogger,
+    { fix = false }: RuleExecutionOptions = {},
+  ): Promise<RuleResult> {
     // Format parent folder to include shared files
-    const result = this.checkOnly
-      ? await formatTypeSpec(folder, true)
-      : await formatTypeSpec(folder);
-    if (!result.success || this.checkOnly) return result;
+    const result = await formatTypeSpec(folder, fix);
+    if (!result.success || !fix) return result;
     const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
     if (gitDiffResult.success) return result;
     return {

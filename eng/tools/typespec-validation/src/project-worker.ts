@@ -1,3 +1,3 @@
 import { main } from "./index.ts";
 
-await main({ checkOnly: true });
+await main({ fix: false });

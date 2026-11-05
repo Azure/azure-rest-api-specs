@@ -49,9 +49,9 @@ beforeEach(async () => {
       "junction",
     );
   }
-  const compiled = await compileTypeSpec(join(root, project));
+  const compiled = await compileTypeSpec(join(root, project), { fix: true });
   expect(compiled.success, JSON.stringify(compiled.diagnostics)).toBe(true);
-  expect((await formatTypeSpec(join(root, project))).success).toBe(true);
+  expect((await formatTypeSpec(join(root, project), true)).success).toBe(true);
   await simpleGit(root)
     .init()
     .addConfig("user.name", "Test")
@@ -278,12 +278,20 @@ it.each(["--all", "--changed"])(
     expect(await readFile(output, "utf8")).toBe("old\n");
     await expect(readFile(missingDir)).rejects.toMatchObject({ code: "ENOENT" });
     expect(await readFile(join(root, ".git/index"))).toEqual(index);
+
+    const fixed = await run(mode, "--fix", "--git-clean");
+    expect(fixed.code, fixed.stderr).toBe(1);
+    expect(fixed.stderr).toContain("error tsv/generated-files-changed:");
+    expect(await readFile(output, "utf8")).toBe("new\n");
+    expect(await readFile(join(missingDir, "output.txt"), "utf8")).toBe("new\n");
+    expect(await readFile(join(root, ".git/index"))).toEqual(index);
   },
 );
 
-it("reports batch formatting issues without updating shared files", async () => {
+it("checks batch formatting and only updates shared files with --fix", async () => {
   const shared = join(root, "specification/service/data-plane/shared.tsp");
   await writeFile(shared, "model   Shared{}");
+  await simpleGit(root).add(".").commit("Set formatting fixture");
 
   const result = await run("--all");
 
@@ -291,4 +299,25 @@ it("reports batch formatting issues without updating shared files", async () => 
   expect(result.stderr).toContain("error tsv/format-changed:");
   expect(result.stderr).toContain("shared.tsp");
   expect(await readFile(shared, "utf8")).toBe("model   Shared{}");
+
+  const fixed = await run("--all", "--fix");
+  expect(fixed.code, fixed.stderr).toBe(1);
+  expect(fixed.stderr).toContain("error tsv/format-changed:");
+  expect(await readFile(shared, "utf8")).toBe("model Shared {}\n");
+});
+
+it("supports explicit single-project check mode without changing the existing fix default", async () => {
+  const source = join(root, project, "main.tsp");
+  await writeFile(source, "// Comment.   ");
+  await simpleGit(root).add(".").commit("Set single-project formatting fixture");
+
+  const checked = await run(project, "--check");
+  expect(checked.code, checked.stderr).toBe(1);
+  expect(checked.stderr).toContain("error tsv/format-changed:");
+  expect(await readFile(source, "utf8")).toBe("// Comment.   ");
+
+  const fixed = await run(project);
+  expect(fixed.code, fixed.stderr).toBe(1);
+  expect(fixed.stderr).toContain("error tsv/format-changed:");
+  expect(await readFile(source, "utf8")).toBe("// Comment.\n");
 });
