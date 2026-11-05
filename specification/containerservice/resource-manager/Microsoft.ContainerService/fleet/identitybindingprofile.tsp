@@ -190,7 +190,7 @@ model IdentityBindingLabelSelectorRequirement {
   @doc("operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.")
   operator?: IdentityBindingLabelSelectorOperator;
 
-  @doc("values is an array of string values, the values array must be non-empty.")
+  @doc("values is an array of string values. For In or NotIn, the array must be non-empty. For Exists or DoesNotExist, the array must be empty or omitted.")
   values?: string[];
 }
 
