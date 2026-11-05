@@ -194,7 +194,8 @@ model VoiceAgentDefinition extends VoiceAgentBaseDefinition {
   @doc("Optional subagent configuration. Set `subagent_type` to `delegate` for delegated background specialists or `inline` for inline voice subagents.")
   subagent_config?: VoiceAgentSubagentConfig;
 
-  @doc("Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations.")
+  @doc("Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations. Post-call delivery is in preview and requires `VoiceAgents=V1Preview`.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   post_call?: VoiceAgentPostCallConfig;
 }
 
@@ -352,6 +353,7 @@ union VoiceAgentSoundscapeSound {
 }
 
 @doc("Post-call delivery configuration.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentPostCallConfig {
   @doc("The destinations to notify.")
   @minItems(1)
@@ -363,6 +365,7 @@ model VoiceAgentPostCallConfig {
 }
 
 @doc("The type of a post-call destination.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentPostCallDestinationType {
   string,
 
@@ -375,12 +378,14 @@ union VoiceAgentPostCallDestinationType {
 
 @doc("A post-call destination.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentPostCallDestination {
   @doc("The destination type.")
   type: VoiceAgentPostCallDestinationType;
 }
 
 @doc("An Event Grid connection that receives post-call events.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentEventGridPostCallDestination
   extends VoiceAgentPostCallDestination {
   type: VoiceAgentPostCallDestinationType.event_grid;
@@ -392,6 +397,7 @@ model VoiceAgentEventGridPostCallDestination
 }
 
 @doc("A routine that is dispatched with the post-call event.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentRoutinePostCallDestination
   extends VoiceAgentPostCallDestination {
   type: VoiceAgentPostCallDestinationType.routine;
@@ -404,6 +410,7 @@ model VoiceAgentRoutinePostCallDestination
 }
 
 @doc("Content that can be included in a post-call delivery.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentPostCallIncludeOption {
   string,
 

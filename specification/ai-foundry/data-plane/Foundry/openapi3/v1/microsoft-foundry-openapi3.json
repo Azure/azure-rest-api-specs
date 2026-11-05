@@ -108253,7 +108253,12 @@
           },
           "post_call": {
             "$ref": "#/components/schemas/VoiceAgentPostCallConfig",
-            "description": "Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations."
+            "description": "Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations. Post-call delivery is in preview and requires `VoiceAgents=V1Preview`.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
           }
         },
         "allOf": [
@@ -108575,7 +108580,12 @@
             "$ref": "#/components/schemas/VoiceAgentPostCallDestination"
           }
         ],
-        "description": "An Event Grid connection that receives post-call events."
+        "description": "An Event Grid connection that receives post-call events.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentFunctionTool": {
         "type": "object",
@@ -110232,7 +110242,12 @@
             "description": "Additional content to include in each delivery. The transcript is always delivered. `audio` is an available option that the service will support in a future release."
           }
         },
-        "description": "Post-call delivery configuration."
+        "description": "Post-call delivery configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentPostCallDestination": {
         "type": "object",
@@ -110252,7 +110267,12 @@
             "routine": "#/components/schemas/VoiceAgentRoutinePostCallDestination"
           }
         },
-        "description": "A post-call destination."
+        "description": "A post-call destination.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentPostCallDestinationType": {
         "anyOf": [
@@ -110267,7 +110287,12 @@
             ]
           }
         ],
-        "description": "The type of a post-call destination."
+        "description": "The type of a post-call destination.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentPostCallIncludeOption": {
         "anyOf": [
@@ -110281,7 +110306,12 @@
             ]
           }
         ],
-        "description": "Content that can be included in a post-call delivery."
+        "description": "Content that can be included in a post-call delivery.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentProfanityFilterMode": {
         "anyOf": [
@@ -110546,7 +110576,12 @@
             "$ref": "#/components/schemas/VoiceAgentPostCallDestination"
           }
         ],
-        "description": "A routine that is dispatched with the post-call event."
+        "description": "A routine that is dispatched with the post-call event.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentRtcCallErrorDetails": {
         "type": "object",
