@@ -101710,11 +101710,10 @@ components:
           $ref: '#/components/schemas/VoiceAgentTransferStrategy'
           description: The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.
         ring_timeout_seconds:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 300
+          $ref: '#/components/schemas/FoundryDurationSeconds'
           description: Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.
+          maximum: 300
+          minimum: 1
           default: 20
       description: The configured transfer routing policy. The model selects a target name, not destinations or routing settings.
       x-ms-foundry-meta:
