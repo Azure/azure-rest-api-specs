@@ -74,6 +74,23 @@ describe("commands.ts", () => {
   });
 
   describe("parseArguments", () => {
+    test.each([undefined, "", "@azure-tools/typespec-ts-provisioning"])(
+      "forwards optional TypeSpec emitter %s to spec-gen-sdk",
+      (emitter) => {
+        const args = emitter === undefined ? [] : ["--typespec-emitter", emitter];
+        vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", ...args]);
+
+        const input = parseArguments();
+        expect(input.typespecEmitter).toBe(emitter || undefined);
+        const command = prepareSpecGenSdkCommand(input);
+        if (emitter) {
+          expect(command.slice(-2)).toEqual(["--typespec-emitter", emitter]);
+        } else {
+          expect(command).not.toContain("--typespec-emitter");
+        }
+      },
+    );
+
     test("runMode is release when it has no batch-type and no pr-number", () => {
       const mockArgs = [
         "--scp",
