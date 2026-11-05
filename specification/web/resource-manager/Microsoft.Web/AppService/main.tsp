@@ -107,26 +107,31 @@ enum Versions {
   /**
    * The 2025-03-01 API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2025_03_01: "2025-03-01",
 
   /**
    * The 2025-05-01 API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2025_05_01: "2025-05-01",
 
   /**
    * The 2026-03-15 API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_03_01_preview: "2026-03-01-preview",
 
   /**
    * The 2026-03-15 API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_03_15: "2026-03-15",
 
   /**
    * The 2026-07-15 API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_07_15: "2026-07-15",
 }
 

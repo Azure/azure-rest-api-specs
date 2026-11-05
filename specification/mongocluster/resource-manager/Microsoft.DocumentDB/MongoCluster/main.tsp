@@ -26,35 +26,46 @@ namespace Microsoft.DocumentDB;
 /** The available API versions. */
 enum Versions {
   /** Azure DocumentDB clusters api version 2024-03-01-preview. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2024_03_01_preview: "2024-03-01-preview",
 
   /** Azure DocumentDB clusters api version 2024-06-01-preview. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2024_06_01_preview: "2024-06-01-preview",
 
   /** Azure DocumentDB clusters api version 2024-07-01. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2024_07_01: "2024-07-01",
 
   /** Azure DocumentDB clusters api version 2024-10-01-preview. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2024_10_01_preview: "2024-10-01-preview",
 
   /** Azure DocumentDB clusters api version 2025-04-01-preview. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2025_04_01_preview: "2025-04-01-preview",
 
   /** Azure DocumentDB clusters api version 2025-07-01-preview. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2025_07_01_preview: "2025-07-01-preview",
 
   /** Azure DocumentDB clusters api version 2025-08-01-preview. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2025_08_01_preview: "2025-08-01-preview",
 
   /** Azure DocumentDB clusters api version 2025-09-01. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2025_09_01: "2025-09-01",
 
   /** Azure DocumentDB clusters api version 2026-02-01-preview. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_02_01_preview: "2026-02-01-preview",
 
   /** Azure DocumentDB clusters api version 2026-06-01. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_06_01: "2026-06-01",
 
   /** Azure DocumentDB clusters api version 2026-06-15-preview. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_06_15_preview: "2026-06-15-preview",
 }

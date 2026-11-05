@@ -20,32 +20,38 @@ using TypeSpec.Versioning;
 
 @doc("Supported versions for PureStorage.Block.")
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Version 1 preview.")
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v1_preview: "2024-10-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Version 2 preview.")
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2_preview: "2024-11-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "LEGACY"
   @doc("Version 1 stable")
   @useDependency(LiftrBase.Versions.v1_stable)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v1_stable: "2024-11-01",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Version 3 preview with Azure native VM support.")
   @useDependency(LiftrBase.Versions.v2026_01_01_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2026_01_01_preview: "2026-01-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Version 4 preview with ActivateSaas support.")
   @useDependency(LiftrBase.Versions.v2026_03_01_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2026_03_01_preview: "2026-03-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Version 5 preview with Volume Group Snapshot support.")
   v2026_05_01_preview: "2026-05-01-preview",
 }

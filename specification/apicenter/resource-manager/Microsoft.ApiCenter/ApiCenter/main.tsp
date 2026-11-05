@@ -35,11 +35,14 @@ namespace Microsoft.ApiCenter;
 @doc("The available API versions.")
 enum Versions {
   /** The initial service version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2024_03_01: "2024-03-01",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Azure API Center 2024-03-15-preview")
   v2024_03_15_preview: "2024-03-15-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Azure API Center 2024-06-01-preview")
   v2024_06_01_preview: "2024-06-01-preview",
 }
