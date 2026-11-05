@@ -59230,7 +59230,7 @@
         },
         "identityScope": {
           "type": "string",
-          "description": "Managed Identity scope for token acquisition. Only relevant when auth=ManagedIdentity.\nOptional — the platform infers a default scope from protocol + host.\nSpecify explicitly for custom hosts or non-standard resource URIs."
+          "description": "Scope used for managed identity token acquisition. Required when auth=ManagedIdentity;\nmust contain at least one non-whitespace character and not exceed 2,048 characters.\nThe caller must supply the scope; the platform does not infer it from the protocol\nor host. Create/update rejects a missing, blank, or overlength scope.\nOmit this property when auth=Credential; supplying it causes create/update to fail."
         },
         "identityResourceId": {
           "type": "string",

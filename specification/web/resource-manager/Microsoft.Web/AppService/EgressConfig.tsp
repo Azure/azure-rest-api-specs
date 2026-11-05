@@ -103,9 +103,11 @@ model VirtualConnection {
   auth: VirtualConnectionAuthType;
 
   /**
-   * Managed Identity scope for token acquisition. Only relevant when auth=ManagedIdentity.
-   * Optional — the platform infers a default scope from protocol + host.
-   * Specify explicitly for custom hosts or non-standard resource URIs.
+   * Scope used for managed identity token acquisition. Required when auth=ManagedIdentity;
+   * must contain at least one non-whitespace character and not exceed 2,048 characters.
+   * The caller must supply the scope; the platform does not infer it from the protocol
+   * or host. Create/update rejects a missing, blank, or overlength scope.
+   * Omit this property when auth=Credential; supplying it causes create/update to fail.
    */
   identityScope?: string;
 
