@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using TypeSpec.Http;
 using Azure.ResourceManager;
@@ -29,9 +28,6 @@ interface OperationResults {
     /**
      * operation identifier.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
-    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     operationId: string,
   ):
@@ -60,9 +56,6 @@ interface OperationStatus {
     /**
      * operation identifier.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
-    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     operationId: string,
   ): ArmResponse<LongRunningOperationResult> | ErrorResponse;

@@ -143,11 +143,11 @@ using Microsoft.DevOpsInfrastructure;
 
 @@clientName(
   StorageAccountType.StandardSSDLRS,
-  "$DO_NOT_NORMALIZE$StandardSSDLRS",
+  exact("StandardSSDLRS"),
   "javascript"
 );
 @@clientName(
   StorageAccountType.StandardSSDZRS,
-  "$DO_NOT_NORMALIZE$StandardSSDZRS",
+  exact("StandardSSDZRS"),
   "javascript"
 );
