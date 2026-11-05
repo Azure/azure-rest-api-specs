@@ -120,6 +120,26 @@ using Microsoft.Sql;
 );
 
 // C# resource and type mappings migrated from autorest.md.bak prepend-rp-prefix
+@@clientName(
+  BackupShortTermRetentionPolicyProperties.lockImmutability,
+  "ShouldLockImmutability",
+  "csharp"
+);
+@@clientName(
+  ManagedBackupShortTermRetentionPolicyProperties.lockImmutability,
+  "ShouldLockImmutability",
+  "csharp"
+);
+@@clientName(
+  DistributedAvailabilityGroupProperties.mostRecentError,
+  "MostRecentErrorCode",
+  "csharp"
+);
+@@doc(
+  ManagedInstanceLongTermRetentionPolicyProperties.timeBasedImmutabilityMode,
+  "The setting for time-based immutability mode for future backup (Value can be either Locked or Unlocked. Only effective if TimeBasedImmutability is enabled). Caution: Immutability of LTR backup cannot be removed if TimeBasedImmutabilityMode is Locked."
+);
+
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the released SQL built-in roles and role assignment helpers."
 @@clientOption(
   Microsoft.Sql.Server,
