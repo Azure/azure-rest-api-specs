@@ -70,7 +70,9 @@ This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 ## `Protected Files`
 
 Only allowlisted repository maintainers and trusted automation accounts may change
-protected tooling and configuration files. If you are not allowlisted, remove
+files outside `specification/`, except for the CODEOWNERS and skill exemptions below.
+This includes root files, documentation, tooling, and files in newly added directories.
+If you are not allowlisted, remove
 the changes listed in the check's errors from your PR, including any deletions or
 renames. If a tooling change is needed, open an issue for the repository maintainers.
 

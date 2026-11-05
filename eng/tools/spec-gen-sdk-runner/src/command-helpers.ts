@@ -110,7 +110,7 @@ export function parseArguments(): SpecGenSdkCmdInput {
     prNumber: getArgumentValue(args, "--pr-number", ""),
     apiVersion: getArgumentValue(args, "--api-version", ""),
     sdkReleaseType: getArgumentValue(args, "--sdk-release-type", ""),
-    typespecEmitter: getArgumentValue(args, "--typespec-emitter", ""),
+    typespecEmitter: getArgumentValue(args, "--typespec-emitter", "") || undefined,
     specCommitSha: getArgumentValue(args, "--commit", "HEAD"),
     specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
     headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),

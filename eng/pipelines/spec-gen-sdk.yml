@@ -26,10 +26,6 @@ parameters:
       - "stable"
     default: "none"
     displayName: "SDK release type"
-  - name: TypeSpecEmitter
-    type: string
-    default: ""
-    displayName: "TypeSpec emitter"
   - name: CreatePullRequest
     type: boolean
     default: false
@@ -59,7 +55,6 @@ extends:
     ConfigPath: ${{ parameters.ConfigPath }}
     ApiVersion: ${{ parameters.ApiVersion }}
     SdkReleaseType: ${{ parameters.SdkReleaseType }}
-    TypeSpecEmitter: ${{ parameters.TypeSpecEmitter }}
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
     ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
     ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}

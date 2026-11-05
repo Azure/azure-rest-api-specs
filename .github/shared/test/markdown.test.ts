@@ -5,6 +5,7 @@ import {
   escapeMarkdown,
   inlineCode,
   link,
+  paragraph,
   renderMarkdownDoc,
   section,
   table,
@@ -145,6 +146,20 @@ describe("Markdown composition", () => {
 });
 
 describe("inline Markdown", () => {
+  it("keeps wrapped guidance in one paragraph while preserving inline Markdown", () => {
+    const markdown = renderMarkdownDoc([
+      paragraph(
+        "Run",
+        inlineCode("pnpm check"),
+        `and consult the ${link("guide", "https://example.com/docs")}.`,
+      ),
+      "Then request review.",
+    ]);
+    expect(marked.parse(markdown)).toBe(
+      '<p>Run <code>pnpm check</code> and consult the <a href="https://example.com/docs">guide</a>.</p>\n<p>Then request review.</p>\n',
+    );
+  });
+
   it("creates an ordinary code span and trusted link", () => {
     expect(inlineCode("command")).toBe("`command`");
     expect(link("Documentation", "https://example.com/docs")).toBe(

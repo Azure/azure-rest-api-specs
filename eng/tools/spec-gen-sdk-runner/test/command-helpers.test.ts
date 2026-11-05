@@ -74,6 +74,23 @@ describe("commands.ts", () => {
   });
 
   describe("parseArguments", () => {
+    test.each([undefined, "", "@azure-tools/typespec-ts-provisioning"])(
+      "forwards optional TypeSpec emitter %s to spec-gen-sdk",
+      (emitter) => {
+        const args = emitter === undefined ? [] : ["--typespec-emitter", emitter];
+        vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", ...args]);
+
+        const input = parseArguments();
+        expect(input.typespecEmitter).toBe(emitter || undefined);
+        const command = prepareSpecGenSdkCommand(input);
+        if (emitter) {
+          expect(command.slice(-2)).toEqual(["--typespec-emitter", emitter]);
+        } else {
+          expect(command).not.toContain("--typespec-emitter");
+        }
+      },
+    );
+
     test("runMode is release when it has no batch-type and no pr-number", () => {
       const mockArgs = [
         "--scp",
@@ -82,8 +99,6 @@ describe("commands.ts", () => {
         ),
         "--lang",
         "azure-sdk-for-go",
-        "--typespec-emitter",
-        "@azure-tools/typespec-ts-provisioning",
       ];
       vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", ...mockArgs]);
       const result = parseArguments();
@@ -93,7 +108,6 @@ describe("commands.ts", () => {
         ),
       );
       expect(result.sdkRepoName).toBe("azure-sdk-for-go");
-      expect(result.typespecEmitter).toBe("@azure-tools/typespec-ts-provisioning");
       expect(result.prNumber).toBe("");
       expect(result.runMode).toBe("release");
     });
@@ -162,7 +176,6 @@ describe("commands.ts", () => {
         headBranch: "main",
         apiVersion: "2021-01-01",
         sdkReleaseType: "beta",
-        typespecEmitter: "@azure-tools/typespec-ts-provisioning",
         sdkLanguage: SdkName.Js,
       };
 
@@ -173,8 +186,6 @@ describe("commands.ts", () => {
       expect(result).toContain("/spec/path");
       expect(result).toContain("--pr-number");
       expect(result).toContain("123");
-      expect(result).toContain("--typespec-emitter");
-      expect(result).toContain("@azure-tools/typespec-ts-provisioning");
     });
   });
 
