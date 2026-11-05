@@ -46,12 +46,6 @@ export async function resolveAnalysisTrigger({
         ...context.repo,
         pull_number: pullNumber,
       });
-      validateAnalysisSource({
-        expectedRepository: `${context.repo.owner}/${context.repo.repo}`,
-        actualRepository: pull.head.repo.full_name,
-        actualSha: pull.head.sha,
-      });
-
       core.setOutput("pr-number", pullNumber);
       core.setOutput("head-repository", pull.head.repo.full_name);
       core.setOutput("head-sha", pull.head.sha);
@@ -118,8 +112,6 @@ export async function resolveAnalysisTrigger({
       pull_number: pullNumber,
     });
     validateAnalysisSource({
-      expectedRepository: `${context.repo.owner}/${context.repo.repo}`,
-      actualRepository: pull.head.repo.full_name,
       expectedSha: headSha,
       actualSha: pull.head.sha,
     });
@@ -160,19 +152,12 @@ const normalizedSdkLanguage: Record<string, string> = {
   go: "Go",
 };
 export function validateAnalysisSource({
-  expectedRepository,
-  actualRepository,
   expectedSha,
   actualSha,
 }: {
-  expectedRepository: string;
-  actualRepository: string;
   expectedSha?: string;
   actualSha: string;
 }): void {
-  if (actualRepository !== expectedRepository) {
-    throw new Error(`SDK breaking-change analysis does not run for fork ${actualRepository}.`);
-  }
   if (expectedSha && actualSha !== expectedSha) {
     throw new Error(`Pull request head changed from ${expectedSha} to ${actualSha}.`);
   }
