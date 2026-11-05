@@ -24626,6 +24626,7 @@ model P2SVpnGatewayProperties {
    * P2sVpngateway detach status.
    */
   @added(Versions.v2026_05_01)
+  @visibility(Lifecycle.Read)
   vpnGatewayDetachStatus?: P2SVpnGatewayDetachState;
 
   /**
