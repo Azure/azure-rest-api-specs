@@ -17,9 +17,7 @@ model Peering is Azure.ResourceManager.TrackedResource<
   false
 > {
   @doc("Name of the Peering.")
-  @pattern("^[A-Za-z][A-Za-z0-9-]*$")
-  @minLength(1)
-  @maxLength(64)
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("peeringName")
   @segment("peerings")

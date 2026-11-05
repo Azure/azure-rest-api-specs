@@ -46,7 +46,6 @@ model NetworkPacketBrokerProperties {
   ]>[];
 
   @doc("ARM resource ID of the source Network Tap Rule.")
-  @visibility(Lifecycle.Read)
   @added(Versions.v2026_01_15_preview)
   sourceNetworkTapRuleId?: Azure.Core.armResourceIdentifier<[
     {

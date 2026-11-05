@@ -402,7 +402,15 @@ model NetworkFabricPatchProperties {
 @doc("Network Fabric updatable properties.")
 model NetworkFabricPatchableProperties {
   @doc("Number of compute racks associated to Network Fabric.")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "rackCount")
   @maxValue(8)
+  @minValue(1)
+  rackCountDeprecated?: int32;
+
+  @doc("Number of compute racks associated to Network Fabric.")
+  @added(Versions.v2026_01_15_preview)
+  @maxValue(16)
   @minValue(1)
   rackCount?: int32;
 
@@ -690,7 +698,6 @@ model ArmConfigurationDiffResponse extends CommonErrorResponse {
   configurationDiffUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Arm Configuration Diff Response V2.")
 @added(Versions.v2025_07_15)
 model ArmConfigurationDiffOperationResponse {
@@ -717,7 +724,6 @@ model ViewDeviceConfigurationResponse extends CommonErrorResponse {
   deviceConfigurationUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("View Device Configuration Response V2.")
 @added(Versions.v2025_07_15)
 model ViewDeviceConfigurationOperationResponse {
@@ -763,7 +769,6 @@ model UniqueRouteDistinguisherPatchProperties {
   nniDerivedUniqueRdConfigurationState?: NNIDerivedUniqueRouteDistinguisherConfigurationState;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Batch Status Request.")
 @added(Versions.v2024_06_15_preview)
 model CommitBatchStatusRequest {
@@ -786,7 +791,6 @@ model CommitBatchStatusResponse extends CommonErrorResponse {
   commitBatchDetails?: CommitBatchDetails;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Batch Status Response.")
 @added(Versions.v2025_07_15)
 model CommitBatchStatusOperationResponse {
@@ -809,7 +813,6 @@ model CommitBatchStatusResponseProperties {
   commitBatchDetails?: CommitBatchDetails;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Discard Commit Batch Request.")
 @added(Versions.v2024_06_15_preview)
 model DiscardCommitBatchRequest {
@@ -826,7 +829,6 @@ model DiscardCommitBatchResponse extends CommonErrorResponse {
   commitBatchId?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Discard Commit Batch Response.")
 @added(Versions.v2025_07_15)
 model DiscardCommitBatchOperationResponse {
@@ -943,28 +945,24 @@ model UpgradeProfilePropertiesPatchProperties {
   postUpgradeProfile?: PostUpgradeProfilePatchProperties;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a RotatePasswords request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricRotatePasswordsResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncPasswords request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricResyncPasswordsResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a RotateCertificates request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricRotateCertificatesResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncCertificates request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricResyncCertificatesResponse {
