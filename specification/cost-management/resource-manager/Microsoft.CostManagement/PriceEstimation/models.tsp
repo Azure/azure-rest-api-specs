@@ -3,6 +3,16 @@ using Azure.ResourceManager;
 
 namespace Microsoft.CostManagement;
 
+/** An RFC 6901 field pointer, without submitted values or customer identifiers. */
+@added(Versions.v2026_10_01_preview)
+@maxLength(4096)
+scalar EstimateFieldPointer extends string;
+
+/** An internal pricing meter identifier, distinct from a customer resource ID. */
+@added(Versions.v2026_10_01_preview)
+@maxLength(36)
+scalar EstimateMeterIdentifier extends string;
+
 /**
  * Supported decoded kinds. The extensible representation supports client
  * compatibility with additional kinds in future API versions. Requests must
@@ -93,15 +103,21 @@ model EstimateStringValue extends EstimateValue {
   value: string;
 }
 
-/** A finite JSON number with at most six fractional decimal places; never string-encoded. */
+/**
+ * A finite JSON number, never string-encoded. Integer-valued inputs are limited
+ * to the exact IEEE 754 safe-integer range. Non-integer inputs have magnitude at
+ * most 1000000000 and at most six fractional decimal places. Supported decimal
+ * values roundtrip through double-based SDK serialization; binary floating-point
+ * arithmetic is not exact decimal arithmetic.
+ */
 @added(Versions.v2026_10_01_preview)
 model EstimateNumberValue extends EstimateValue {
   /** Number variant discriminator. */
   kind: "number";
 
-  /** Parsed using decimal arithmetic. Excess precision and out-of-range values are rejected, not rounded or coerced. */
-  @minValue(-1000000000000)
-  @maxValue(1000000000000)
+  /** Parsed using decimal arithmetic. Integer magnitude must not exceed 9007199254740991; non-integer magnitude must not exceed 1000000000. Excess precision and out-of-range values are rejected, not rounded or coerced. */
+  @minValue(-9007199254740991)
+  @maxValue(9007199254740991)
   value: float64;
 }
 
@@ -139,7 +155,21 @@ model EstimateArrayValue extends EstimateValue {
   items: EstimateValue[];
 }
 
-/** Computed costs for submitted pricing inputs, not an ARM resource or invoice. */
+/**
+ * Computed costs for submitted pricing inputs, not an ARM resource or invoice.
+ * The serialized UTF-8 HTTP 200 response body must not exceed 4194304 bytes
+ * (4 MiB), including JSON property names, escaping and all server-added values.
+ * Across the response there are at most 20000 applied typed values, eight
+ * object/array levels, 10000 components, 1000 diagnostics, and 20000 combined
+ * defaultedFields and assumedUsageFields pointers. Array bounds below are also
+ * subject to these request-wide totals. All limits apply together: a result
+ * within the count limits can still exceed the byte budget.
+ * The service checks completed configurations before pricing and checks result
+ * counts and bounded UTF-8 serialization before storing success. Exceeding any
+ * result limit fails the whole estimate with HTTP 400 EstimateResultTooLarge,
+ * synchronously when known during preparation or as a terminal polling error
+ * otherwise. Results, defaults, assumptions and pricing issues are never truncated.
+ */
 @added(Versions.v2026_10_01_preview)
 model EstimateResult {
   /** Subscription billing currency for every amount; never a caller-selected currency or silent fallback. */
@@ -174,6 +204,7 @@ model EstimateResult {
 
   /** Request-wide assumptions; never raw input values or customer identifiers. */
   @visibility(Lifecycle.Read)
+  @maxItems(1000)
   @identifiers(#[])
   assumptions: EstimateDiagnostic[];
 }
@@ -201,16 +232,19 @@ model EstimateResourceResult {
 
   /** Component breakdown, including components whose cost could not be determined. */
   @visibility(Lifecycle.Read)
+  @maxItems(10000)
   @identifiers(#["component"])
   components: EstimateComponentResult[];
 
   /** Reasons for incomplete coverage or costs. Nonempty whenever either summary is incomplete. */
   @visibility(Lifecycle.Read)
+  @maxItems(1000)
   @identifiers(#[])
   issues: EstimateDiagnostic[];
 
   /** Defaults and other assumptions actually applied to this entry. */
   @visibility(Lifecycle.Read)
+  @maxItems(1000)
   @identifiers(#[])
   assumptions: EstimateDiagnostic[];
 }
@@ -220,22 +254,27 @@ model EstimateResourceResult {
 model EstimateEffectiveConfiguration {
   /** The supported resource type, in its canonical spelling. */
   @visibility(Lifecycle.Read)
+  @maxLength(256)
   resourceType: string;
 
   /** The supported source resource API version. */
   @visibility(Lifecycle.Read)
+  @maxLength(32)
   resourceApiVersion: string;
 
   /** JSON Pointers of configuration defaults the server applied to omitted inputs. */
   @visibility(Lifecycle.Read)
-  defaultedFields: string[];
+  @maxItems(20000)
+  defaultedFields: EstimateFieldPointer[];
 
   /** JSON Pointers of usage quantities the caller omitted and the server assumed, such as /usage/storedGB. A non-empty list means the price rests on quantities the caller did not state. */
   @visibility(Lifecycle.Read)
-  assumedUsageFields: string[];
+  @maxItems(20000)
+  assumedUsageFields: EstimateFieldPointer[];
 
   /** Every field the server set or changed: defaulted fields, assumed usage quantities and canonicalized spellings. Every other priced value is exactly what the caller submitted. */
   @visibility(Lifecycle.Read)
+  @maxItems(20000)
   @identifiers(#["field"])
   appliedValues: EstimateAppliedValue[];
 }
@@ -245,7 +284,7 @@ model EstimateEffectiveConfiguration {
 model EstimateAppliedValue {
   /** JSON Pointer of the field within the decoded resource and usage inputs, such as /usage/accessTier. */
   @visibility(Lifecycle.Read)
-  field: string;
+  field: EstimateFieldPointer;
 
   /** The value the server priced for this field. */
   @visibility(Lifecycle.Read)
@@ -257,11 +296,13 @@ model EstimateAppliedValue {
 model EstimateComponentResult {
   /** Stable business component name, unique within the entry. */
   @visibility(Lifecycle.Read)
+  @maxLength(128)
   component: string;
 
   /** Resolved internal pricing meter identifiers, distinct from customer resource IDs. Absent when unresolved or not needed. */
   @visibility(Lifecycle.Read)
-  meterIds?: string[];
+  @maxItems(128)
+  meterIds?: EstimateMeterIdentifier[];
 
   /** Component's recurring monthly cost. */
   @visibility(Lifecycle.Read)
@@ -292,14 +333,15 @@ model EstimateTotals {
  * Amounts are JSON numbers, not strings. Decimal calculations retain intermediate
  * precision. Component amounts are rounded once to six fractional decimal places,
  * midpoint away from zero; entry and request summaries sum reported components.
+ * Every component, entry and request amount or known subtotal is limited to
+ * 1000000000 in the billing currency. The service uses checked decimal arithmetic
+ * and enforces the ceiling after component rounding and at each aggregation.
+ * Individually valid components or entries can exceed the ceiling when aggregated.
+ * Arithmetic overflow or a ceiling violation fails the entire operation with
+ * HTTP 400 EstimateAmountOutOfRange, including as a terminal polling error when
+ * discovered during pricing. Known costs are never clamped, independently
+ * re-rounded at aggregate levels, or changed to Unavailable to fit the limit.
  * A rounded-zero amount is not a declaration that the underlying meter is free.
- * The inclusive range 0 to 1000000000000 applies independently to each component,
- * entry and request amount or knownAmount. Individually valid components or
- * entries can therefore exceed the limit when aggregated. The service checks
- * these bounds during pricing; any out-of-range amount or aggregate fails the
- * entire estimate, and polling returns HTTP 400 with error code
- * EstimateAmountOutOfRange. Known costs are never clamped or changed to
- * Unavailable to satisfy the limit.
  */
 @added(Versions.v2026_10_01_preview)
 model EstimateCostSummary {
@@ -310,13 +352,13 @@ model EstimateCostSummary {
   /** Complete amount only. */
   @visibility(Lifecycle.Read)
   @minValue(0)
-  @maxValue(1000000000000)
+  @maxValue(1000000000)
   amount?: float64;
 
   /** Sum of known costs only, not a total or an upper bound. Present only for Partial. */
   @visibility(Lifecycle.Read)
   @minValue(0)
-  @maxValue(1000000000000)
+  @maxValue(1000000000)
   knownAmount?: float64;
 }
 
@@ -340,17 +382,20 @@ union EstimateCostStatus {
 model EstimateDiagnostic {
   /** Machine-readable code, such as RateUnavailable, AllowanceContextRequired or InputCanonicalized. */
   @visibility(Lifecycle.Read)
+  @maxLength(128)
   code: string;
 
   /** Explanation without input values, customer information or tokens. */
   @visibility(Lifecycle.Read)
+  @maxLength(1024)
   message: string;
 
   /** Optional RFC 6901 request location, using entry positions and business field names only. */
   @visibility(Lifecycle.Read)
-  target?: string;
+  target?: EstimateFieldPointer;
 
   /** Affected business component name when the issue is component-specific. */
   @visibility(Lifecycle.Read)
+  @maxLength(128)
   component?: string;
 }

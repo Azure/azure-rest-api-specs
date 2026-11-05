@@ -89,10 +89,47 @@ did not state.
 Calculations use decimal arithmetic. Component amounts are rounded once to six fractional places, midpoint away from
 zero; entry and request totals sum those amounts. Examples use deterministic illustrative prices, not live quotes.
 
-The inclusive range 0 to 1,000,000,000,000 applies independently to every component, entry and request `amount` or
-`knownAmount`. Individually valid amounts do not guarantee a valid aggregate: two components costing 600,000,000,000
-each would exceed the entry limit. The service checks these bounds during pricing and fails the entire estimate if
-any amount or aggregate is out of range; it never clamps a known cost or converts it to `Unavailable`.
+### Numeric and result limits
+
+Integer-valued inputs may have magnitude up to `9007199254740991` (the IEEE 754 safe-integer limit).
+Non-integer inputs may have magnitude up to `1000000000` and at most six fractional decimal places.
+The same rules apply to defaults and returned applied values. These limits preserve supported decimal values
+through double-based SDK serialization; they do not make client floating-point arithmetic exact.
+Every monetary amount and known subtotal is between zero and `1000000000`, with at most six fractional places.
+Individually valid amounts do not guarantee a valid aggregate: two components costing `600000000` each exceed
+the entry limit when summed.
+
+All of the following limits apply together, across the entire estimate:
+
+| Limit                                                                 | Maximum                  |
+| --------------------------------------------------------------------- | ------------------------ |
+| Request body                                                          | 512 KiB serialized UTF-8 |
+| Resource entries                                                      | 100                      |
+| Submitted typed values                                                | 10000                    |
+| Typed values after default completion / returned applied typed values | 20000 each               |
+| Nested object/array levels                                            | 8                        |
+| Components / planned billing charges                                  | 10000 each               |
+| Diagnostics, including issues and assumptions at every level          | 1000                     |
+| Combined `defaultedFields` and `assumedUsageFields` pointers          | 20000                    |
+| Serialized UTF-8 final HTTP 200 response body                         | 4194304 bytes (4 MiB)    |
+
+Object members and array items retain their per-value limits of 128 and 1024. Input names are limited to 128
+characters and string values to 1024. Returned JSON Pointers are limited to 4096 characters, component/diagnostic
+codes and names to 128, diagnostic messages to 1024, and each component's meter-ID list to 128 IDs of at most
+36 characters. The byte limit includes JSON escaping, property names and every server-added value; meeting count
+limits does not guarantee that the serialized body fits.
+
+Completed configurations are checked after defaults and canonicalization and before pricing. The final result is
+count-checked and serialized through a bounded UTF-8 writer before it is marked successful or stored. Exceeding a
+result limit returns `400 EstimateResultTooLarge`, before acceptance when known during preparation or as a terminal
+polling error otherwise. No results, applied values, assumptions or pricing issues are silently truncated.
+Stored results are revalidated when polled, without rewriting their JSON, so earlier workers cannot bypass the
+current response or numeric limits.
+
+Checked decimal calculations and each component, entry and request aggregation independently enforce the monetary
+ceiling for monthly and upfront charges, including partial known subtotals. Arithmetic overflow or a ceiling violation
+fails the whole estimate with `400 EstimateAmountOutOfRange`; failures discovered during pricing are terminal polling
+errors. Known costs are never clamped, reclassified as unavailable, or independently rounded at aggregate levels.
 
 ## Errors
 

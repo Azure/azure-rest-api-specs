@@ -53,6 +53,25 @@ interface PriceEstimation {
    * names the affected input and, where applicable, its allowed values or a choice
    * lookup path. Each request is limited to 512 KiB, 100 resource entries, 10000
    * typed values and eight nested object/array levels.
+   * After defaults and canonicalization, completed inputs are limited to 20000
+   * typed values across all entries, eight object/array levels and 10000 planned
+   * billing charges. Fractional inputs have magnitude at most 1000000000 and at
+   * most six decimal places; integer inputs use the exact safe-integer range.
+   *
+   * The final HTTP 200 response body is limited to 4194304 serialized UTF-8 bytes
+   * (4 MiB), 20000 applied typed values, eight object/array levels, 10000
+   * components, 1000 diagnostics and 20000 combined defaulted/assumed field
+   * pointers. Counts include server-added defaults and assumptions and span the
+   * whole estimate. Limits known during preparation fail before acceptance;
+   * limits discovered during pricing or final serialization fail polling with
+   * HTTP 400 EstimateResultTooLarge. No results or pricing issues are truncated.
+   *
+   * Component amounts and entry/request totals are each limited to 1000000000
+   * in the billing currency. Checked decimal arithmetic overflow or exceeding
+   * the amount ceiling fails the entire estimate with HTTP 400
+   * EstimateAmountOutOfRange; pricing-time failures are terminal polling errors,
+   * not successful Partial/Unavailable estimates. Monthly and upfront amounts
+   * and known subtotals are checked independently.
    *
    * A completed estimate can contain incomplete prices when individual components
    * cannot be priced; every missing or ambiguous price is reported as an issue,
