@@ -29,6 +29,7 @@ union EvaluatorDiagnosticActorType {
 }
 
 @doc("The actor responsible for an evaluator lineage diagnostic.")
+@discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorDiagnosticActor {
   @doc("The type of actor.")
@@ -36,6 +37,20 @@ model EvaluatorDiagnosticActor {
 
   @doc("A stable opaque principal or service identifier, when available.")
   id?: string;
+}
+
+@doc("An authenticated user responsible for an evaluator lineage diagnostic.")
+@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
+model UserEvaluatorDiagnosticActor extends EvaluatorDiagnosticActor {
+  @doc("An authenticated user initiated the change.")
+  type: EvaluatorDiagnosticActorType.user;
+}
+
+@doc("A Foundry service component responsible for an evaluator lineage diagnostic.")
+@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
+model ServiceEvaluatorDiagnosticActor extends EvaluatorDiagnosticActor {
+  @doc("A Foundry service component initiated the change.")
+  type: EvaluatorDiagnosticActorType.service;
 }
 
 @doc("Known machine-readable classifications for evaluator diagnostic changes.")
@@ -116,12 +131,10 @@ model EvaluatorDiagnostic {
   type: EvaluatorDiagnosticType;
 }
 
-@doc("Actor properties shared by recorded evaluator diagnostics without introducing another discriminator level.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model EvaluatorDiagnosticActorProperties {
+alias EvaluatorDiagnosticActorProperties = {
   @doc("The authenticated user or service responsible for the lineage event.")
   actor: EvaluatorDiagnosticActor;
-}
+};
 
 @doc("A flat page of recorded evaluator changes and computed health snapshots.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
@@ -156,6 +169,21 @@ scalar EvaluatorHealthScore extends float64;
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorHealthRedundantPair is Array<int32>;
 
+@doc("Provisional structural confidence level for computed rubric health.")
+@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
+union EvaluatorHealthConfidence {
+  string,
+
+  @doc("Low structural confidence.")
+  low: "low",
+
+  @doc("Medium structural confidence.")
+  med: "med",
+
+  @doc("High structural confidence.")
+  high: "high",
+}
+
 @doc("A snapshot of existing rubric-health computations. Missing components remain null and are not replaced with zeros.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorHealthMetrics {
@@ -179,7 +207,7 @@ model EvaluatorHealthMetrics {
   overall: EvaluatorHealthScore | null;
 
   @doc("Provisional structural confidence: 'low', 'med', or 'high'. This is not a calibrated statistical confidence.")
-  confidence: string;
+  confidence: EvaluatorHealthConfidence;
 
   @doc("Pairs of dimension indices flagged as redundant by the existing computation.")
   redundant_pairs: EvaluatorHealthRedundantPair[];

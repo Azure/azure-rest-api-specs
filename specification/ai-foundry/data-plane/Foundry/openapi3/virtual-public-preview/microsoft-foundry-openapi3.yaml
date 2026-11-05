@@ -53485,6 +53485,11 @@ components:
         id:
           type: string
           description: A stable opaque principal or service identifier, when available.
+      discriminator:
+        propertyName: type
+        mapping:
+          user: '#/components/schemas/UserEvaluatorDiagnosticActor'
+          service: '#/components/schemas/ServiceEvaluatorDiagnosticActor'
       description: The actor responsible for an evaluator lineage diagnostic.
       x-ms-foundry-meta:
         required_previews:
@@ -53709,6 +53714,18 @@ components:
           format: int64
           description: Total tokens consumed (input + output).
       description: Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.
+    EvaluatorHealthConfidence:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - low
+            - med
+            - high
+      description: Provisional structural confidence level for computed rubric health.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorHealthMetrics:
       type: object
       required:
@@ -53750,7 +53767,7 @@ components:
             - type: 'null'
           description: The existing weighted overall score. Null if any component is unavailable; weights are not renormalized around missing components.
         confidence:
-          type: string
+          $ref: '#/components/schemas/EvaluatorHealthConfidence'
           description: "Provisional structural confidence: 'low', 'med', or 'high'. This is not a calibrated statistical confidence."
         redundant_pairs:
           type: array
@@ -86715,6 +86732,22 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Schedules=V1Preview
+    ServiceEvaluatorDiagnosticActor:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - service
+          description: A Foundry service component initiated the change.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorDiagnosticActor'
+      description: A Foundry service component responsible for an evaluator lineage diagnostic.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     SessionAffinityConfiguration:
       type: object
       properties:
@@ -90821,6 +90854,22 @@ components:
           $ref: '#/components/schemas/UserConversationSimulationInterruptionConfiguration'
           description: Configures how the simulated user interrupts the target while it is speaking. Omit to disable interruption.
       description: Configures conversation behavior for the simulated user.
+    UserEvaluatorDiagnosticActor:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - user
+          description: An authenticated user initiated the change.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorDiagnosticActor'
+      description: An authenticated user responsible for an evaluator lineage diagnostic.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     UserMessage:
       type: object
       required:
