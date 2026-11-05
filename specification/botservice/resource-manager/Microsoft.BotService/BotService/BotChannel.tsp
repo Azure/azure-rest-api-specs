@@ -126,17 +126,23 @@ interface BotChannelRegenerateKeysOps
 interface BotChannels {
   /**
    * Returns a BotService Channel registration specified by the parameters.
+   * The GET response does not include secret values, such as passwords or keys.
+   * To retrieve secrets, use the POST channels/{channelName}/listChannelWithKeys action with the required authorization.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<BotChannel, Error = Error>;
 
   /**
-   * Creates a Channel registration for a Bot Service
+   * Creates or updates a Channel registration for a Bot Service.
+   * The PUT response does not include secret values, such as passwords or keys.
+   * To retrieve secrets, use the POST channels/{channelName}/listChannelWithKeys action with the required authorization.
    */
   create is BotChannelOps.CreateOrUpdateSync<BotChannel>;
 
   /**
-   * Updates a Channel registration for a Bot Service
+   * Updates a Channel registration for a Bot Service.
+   * The PATCH response does not include secret values, such as passwords or keys.
+   * To retrieve secrets, use the POST channels/{channelName}/listChannelWithKeys action with the required authorization.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
