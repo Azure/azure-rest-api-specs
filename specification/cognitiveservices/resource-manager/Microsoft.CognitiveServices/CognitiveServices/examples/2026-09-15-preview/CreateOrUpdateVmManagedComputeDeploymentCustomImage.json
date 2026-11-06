@@ -1,0 +1,171 @@
+{
+  "operationId": "ManagedComputeDeployments_CreateOrUpdate",
+  "title": "CreateOrUpdateVmManagedComputeDeploymentCustomImage",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "custom-server-byoc",
+    "api-version": "2026-09-15-preview",
+    "azureai-project": "my-project",
+    "resource": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/deployment-identity": {}
+        }
+      },
+      "properties": {
+        "model": "azureai://accounts/accountName/projects/my-project/models/my-custom-model/versions/1",
+        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
+        "deploymentParameters": {
+          "image": "contoso.azurecr.io/custom-server:1.0",
+          "instanceCount": 1,
+          "scoringPath": "/v1/chat/completions",
+          "scoringPort": 8000,
+          "modelMountPath": "/models/custom",
+          "engineType": "Custom",
+          "launchMode": "Override",
+          "containerCommand": [
+            "python3",
+            "-m",
+            "custom_server"
+          ],
+          "containerArguments": [
+            "--model-path",
+            "/models/custom",
+            "--port",
+            "8000"
+          ],
+          "livenessProbe": {
+            "path": "/health",
+            "periodSeconds": 10,
+            "failureThreshold": 3,
+            "successThreshold": 1
+          },
+          "requestTimeoutInMilliseconds": 90000,
+          "projectStorageConnectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/my-project/connections/my-storage-connection"
+        }
+      },
+      "sku": {
+        "name": "VmManagedCompute",
+        "capacity": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/custom-server-byoc",
+        "name": "custom-server-byoc",
+        "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+        "etag": "\"0x8D...\"",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/deployment-identity": {}
+          }
+        },
+        "properties": {
+          "model": "azureai://accounts/accountName/projects/my-project/models/my-custom-model/versions/1",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
+          "deploymentParameters": {
+            "image": "contoso.azurecr.io/custom-server:1.0",
+            "instanceCount": 1,
+            "scoringPath": "/v1/chat/completions",
+            "scoringPort": 8000,
+            "modelMountPath": "/models/custom",
+            "engineType": "Custom",
+            "launchMode": "Override",
+            "containerCommand": [
+              "python3",
+              "-m",
+              "custom_server"
+            ],
+            "containerArguments": [
+              "--model-path",
+              "/models/custom",
+              "--port",
+              "8000"
+            ],
+            "livenessProbe": {
+              "path": "/health",
+              "periodSeconds": 10,
+              "failureThreshold": 3,
+              "successThreshold": 1
+            },
+            "requestTimeoutInMilliseconds": 90000,
+            "projectStorageConnectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/my-project/connections/my-storage-connection"
+          },
+          "provisioningState": "Succeeded",
+          "provisioningDetails": {
+            "message": "Deployment is healthy and serving traffic.",
+            "lastOperationTimestamp": "2026-04-12T10:25:00Z"
+          },
+          "routes": {
+            "chatCompletionsScoringPath": "/managed-deployments/custom-server-byoc/v1/chat/completions"
+          }
+        },
+        "sku": {
+          "name": "VmManagedCompute",
+          "capacity": 1
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000002?api-version=2026-09-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000002?operationResultResponseType=Location&api-version=2026-09-15-preview",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/custom-server-byoc",
+        "name": "custom-server-byoc",
+        "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/deployment-identity": {}
+          }
+        },
+        "properties": {
+          "model": "azureai://accounts/accountName/projects/my-project/models/my-custom-model/versions/1",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
+          "deploymentParameters": {
+            "image": "contoso.azurecr.io/custom-server:1.0",
+            "instanceCount": 1,
+            "scoringPath": "/v1/chat/completions",
+            "scoringPort": 8000,
+            "modelMountPath": "/models/custom",
+            "engineType": "Custom",
+            "launchMode": "Override",
+            "containerCommand": [
+              "python3",
+              "-m",
+              "custom_server"
+            ],
+            "containerArguments": [
+              "--model-path",
+              "/models/custom",
+              "--port",
+              "8000"
+            ],
+            "livenessProbe": {
+              "path": "/health",
+              "periodSeconds": 10,
+              "failureThreshold": 3,
+              "successThreshold": 1
+            },
+            "requestTimeoutInMilliseconds": 90000,
+            "projectStorageConnectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/my-project/connections/my-storage-connection"
+          },
+          "provisioningState": "Accepted"
+        },
+        "sku": {
+          "name": "VmManagedCompute",
+          "capacity": 1
+        }
+      }
+    }
+  }
+}

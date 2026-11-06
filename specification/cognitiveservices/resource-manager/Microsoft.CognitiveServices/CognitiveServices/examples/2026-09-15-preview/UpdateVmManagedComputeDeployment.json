@@ -8,6 +8,12 @@
     "deploymentName": "gpt-oss-120b-byoc",
     "api-version": "2026-09-15-preview",
     "properties": {
+      "properties": {
+        "deploymentParameters": {
+          "scoringPort": 8080,
+          "maxConcurrentRequestsPerInstance": 16
+        }
+      },
       "sku": {
         "name": "VmManagedCompute",
         "capacity": 2
@@ -21,11 +27,34 @@
         "name": "gpt-oss-120b-byoc",
         "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
         "etag": "\"0x8D...\"",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/deployment-identity": {}
+          }
+        },
         "properties": {
+          "deploymentParameters": {
+            "maxModelLength": 32768,
+            "engineType": "Vllm",
+            "environmentVariables": [
+              {
+                "name": "VLLM_LOGGING_LEVEL",
+                "value": "INFO"
+              }
+            ],
+            "readinessProbe": {
+              "path": "/health",
+              "initialDelaySeconds": 30,
+              "periodSeconds": 10
+            },
+            "projectStorageConnectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/my-project/connections/my-storage-connection",
+            "scoringPort": 8080,
+            "maxConcurrentRequestsPerInstance": 16
+          },
           "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
-          "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
+          "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/gpt-oss-120b-vllm-tuned/versions/2",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
-          "priority": "High",
           "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
           "gatedModelAccess": {
             "connectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/my-project/connections/my-hf-connection"
