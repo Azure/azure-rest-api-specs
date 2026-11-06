@@ -80,3 +80,24 @@ namespace NetworkSecurityManagementClient {
   Record<NeuroShield.Management.NeuroShieldProtectedResourceUserAssignedIdentity>,
   "go"
 );
+
+@@clientName(
+  NeuroShield.Management.NeuroShieldFindingProperties.cveId,
+  "CVEID",
+  "go"
+);
+@@clientName(
+  NeuroShield.Management.NeuroShieldFindingProperties.virtualMachineArmId,
+  "VirtualMachineARMID",
+  "go"
+);
+@@clientName(
+  NeuroShield.Management.NeuroShieldMitigationProperties.cveId,
+  "CVEID",
+  "go"
+);
+@@clientName(
+  NeuroShield.Management.NeuroShieldMitigationProperties.virtualMachineArmId,
+  "VirtualMachineARMID",
+  "go"
+);
