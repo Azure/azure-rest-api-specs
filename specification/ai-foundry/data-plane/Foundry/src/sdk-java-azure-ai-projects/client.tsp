@@ -159,6 +159,10 @@ namespace Azure.AI.Projects;
 // // More accurate naming
 @@clientName(AssetCredentialResponse, "DatasetCredential");
 
+// Retain the existing public DatasetReference name.
+@@clientName(DatasetReference, "OptionalVersionDatasetReference", "java");
+@@clientName(VersionedDatasetReference, "DatasetReference", "java");
+
 @@clientName(EntraIDCredentials, "EntraIdCredentials");
 
 @@clientName(EvalResult, "EvaluationResult");
