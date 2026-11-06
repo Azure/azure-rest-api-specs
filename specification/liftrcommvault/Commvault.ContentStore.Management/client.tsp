@@ -232,3 +232,15 @@ using Commvault.ContentStore;
   "LastBackupTime",
   "csharp"
 );
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+@doc("User-assigned identity details supplied in a cloud account PATCH.")
+model CloudAccountUserAssignedIdentity {
+  ...UpdateableProperties<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>;
+}
+
+@@alternateType(
+  CloudAccountIdentityUpdate.userAssignedIdentities,
+  Record<CloudAccountUserAssignedIdentity | null>,
+  "javascript"
+);
