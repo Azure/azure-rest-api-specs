@@ -11966,6 +11966,53 @@ model MSDeployStatusProperties {
   complete?: boolean;
 }
 
+/** The types of artifacts supported by OneDeploy. */
+@added(Versions.v2026_11_15)
+union OneDeployArtifactType {
+  /** A Java web application archive. */
+  War: "war",
+
+  /** A Java archive. */
+  Jar: "jar",
+
+  /** A Java enterprise application archive. */
+  Ear: "ear",
+
+  /** A library file. */
+  Lib: "lib",
+
+  /** An application startup script. */
+  Startup: "startup",
+
+  /** A static file. */
+  Static: "static",
+
+  /** A ZIP package. */
+  Zip: "zip",
+
+  string,
+}
+
+/** The properties of a OneDeploy deployment request. */
+@added(Versions.v2026_11_15)
+model OneDeployRequestProperties {
+  /** The URI of the package or file to deploy. */
+  packageUri: url;
+
+  /** The type of artifact to deploy. */
+  type: OneDeployArtifactType;
+
+  /** The absolute target path for the deployed artifact. */
+  path?: string;
+}
+
+/** The request to deploy a package or file using OneDeploy. */
+@added(Versions.v2026_11_15)
+model OneDeployContent {
+  /** The deployment properties. */
+  properties: OneDeployRequestProperties;
+}
+
 /**
  * MSDeploy ARM PUT information properties
  */

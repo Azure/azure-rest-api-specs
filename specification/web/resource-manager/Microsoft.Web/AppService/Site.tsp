@@ -1981,6 +1981,35 @@ interface WebApps {
   >;
 
   /**
+   * Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site
+   */
+  @added(Versions.v2026_11_15)
+  @summary("Invoke onedeploy status API /api/deployments and gets the deployment status for the site")
+  @get
+  @action("extensions/onedeploy")
+  getOneDeployStatusSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<unknown>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Invoke the OneDeploy publish web app extension.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The service defines this as a legacy OneDeploy extension invocation over PUT, not an ARM resource create-or-replace operation; the documented contract is synchronous 200 OK with default error only."
+  @added(Versions.v2026_11_15)
+  @summary("Invoke the OneDeploy publish web app extension.")
+  @put
+  @action("extensions/onedeploy")
+  createOneDeployOperationSlot is WebAppOps.ActionSync<
+    Site,
+    OneDeployContent,
+    ArmResponse<unknown>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
   @summary("Fetch a short lived token that can be exchanged for a master key.")
