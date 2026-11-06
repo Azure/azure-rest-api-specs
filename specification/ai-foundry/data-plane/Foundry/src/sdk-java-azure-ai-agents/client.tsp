@@ -2216,6 +2216,32 @@ model OpenAIRealtimeInputImageDetail {}
 );
 
 // Reuse one expandable type for the repeated `object: "realtime.item"` literal.
+@@clientName(
+  OpenAI.RealtimeConversationItemMessageSystem.object,
+  "objectType",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeConversationItemMessageUser.object,
+  "objectType",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeConversationItemMessageAssistant.object,
+  "objectType",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeConversationItemFunctionCall.object,
+  "objectType",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeConversationItemFunctionCallOutput.object,
+  "objectType",
+  "java"
+);
+
 @TypeSpec.OpenAPI.extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union RealtimeConversationItemObject {
   string,
@@ -2245,6 +2271,32 @@ union RealtimeConversationItemObject {
 @@alternateType(
   OpenAI.RealtimeConversationItemFunctionCallOutput.object,
   RealtimeConversationItemObject,
+  "java"
+);
+
+// Flatten the Foundry session response's single-member union for Java.
+@@alternateType(
+  OpenAI.RealtimeServerEventSessionCreated.session,
+  VoiceAgentSessionResponseConfig,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeServerEventSessionUpdated.session,
+  VoiceAgentSessionResponseConfig,
+  "java"
+);
+
+@@alternateType(
+  OpenAI.CreateTranscriptionResponseJsonUsage,
+  {
+    identity: "com.openai.models.realtime.ConversationItemInputAudioTranscriptionCompletedEvent.Usage",
+  },
+  "java"
+);
+
+@@alternateType(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted.usage,
+  OpenAI.CreateTranscriptionResponseJsonUsage,
   "java"
 );
 
