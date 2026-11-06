@@ -1397,6 +1397,56 @@ function renderSourceHunks(sources: SourceChange[] = []) {
     .join("");
 }
 
+export function renderCompleteModelDeclarations(
+  sources: SourceChange[] = [],
+  declarationNames: string[] = [],
+) {
+  const requestedNames = declarationNames
+    .map((name) => name?.trim())
+    .filter((name): name is string => Boolean(name));
+  const models = sources
+    .flatMap((source) =>
+      (source.declarations ?? []).map((declaration) => ({ source, declaration })),
+    )
+    .filter(({ declaration }) => declaration.kind === "model" && declaration.sourceSnippet)
+    .filter(({ declaration }) => {
+      if (!requestedNames.length) return true;
+      const qualifiedName = declaration.qualifiedName ?? "";
+      return requestedNames.some((requestedName) => {
+        const shortName = requestedName.split(".").at(-1) ?? requestedName;
+        return (
+          qualifiedName === requestedName ||
+          qualifiedName.endsWith(`.${requestedName}`) ||
+          qualifiedName === shortName ||
+          qualifiedName.endsWith(`.${shortName}`)
+        );
+      });
+    });
+  const selected = models.length
+    ? models
+    : sources
+        .flatMap((source) =>
+          (source.declarations ?? []).map((declaration) => ({ source, declaration })),
+        )
+        .filter(({ declaration }) => declaration.kind === "model" && declaration.sourceSnippet);
+  return [...new Map(selected.map((item) => [item.declaration.id, item])).values()]
+    .sort((left, right) => {
+      const name = left.declaration.qualifiedName.localeCompare(right.declaration.qualifiedName);
+      if (name) return name;
+      return left.declaration.source.revision === "base" ? -1 : 1;
+    })
+    .map(({ source, declaration }) => {
+      const revision = declaration.source.revision === "base" ? "Baseline" : "Target";
+      const snippet = declaration.sourceSnippet!;
+      return `<div class="diff declaration"><div class="diff-path">${escapeHtml(source.path)} · ${revision} · ${escapeHtml(declaration.qualifiedName)}</div><pre>${snippet.lines
+        .map((line) => `<span class="context">${escapeHtml(line)}</span>`)
+        .join(
+          "",
+        )}</pre>${snippet.truncated ? '<p class="report-small">Declaration excerpt truncated.</p>' : ""}</div>`;
+    })
+    .join("");
+}
+
 type DeclarationLineRanges = {
   base: { startLine: number; endLine: number }[];
   current: { startLine: number; endLine: number }[];
@@ -2196,6 +2246,7 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
     complianceFindingGroups,
     complianceCode,
     renderSourceHunks,
+    renderCompleteModelDeclarations,
     focusedSourceChanges,
     sourceLinks,
     legacyEvidence,

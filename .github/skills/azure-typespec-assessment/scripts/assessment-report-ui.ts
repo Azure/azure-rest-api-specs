@@ -52,6 +52,7 @@ type ReportRenderHelpers = {
   }[];
   complianceCode: (snippets: unknown[]) => string;
   renderSourceHunks: (sources: SourceChange[]) => string;
+  renderCompleteModelDeclarations: (sources: SourceChange[], declarationNames?: string[]) => string;
   focusedSourceChanges: (
     findings: AssessmentFinding[],
     declarationNames?: string[],
@@ -1241,6 +1242,7 @@ export function renderReportSections(
     complianceFindingGroups,
     complianceCode,
     renderSourceHunks,
+    renderCompleteModelDeclarations,
     focusedSourceChanges,
     sourceLinks,
     legacyEvidence,
@@ -1322,13 +1324,20 @@ export function renderReportSections(
     return `<div class="breaking-rationale"><strong>Why this is breaking:</strong> ${body}</div>`;
   };
 
-  const relevantSource = (findings: AssessmentFinding[], declarationNames: string[] = []) => {
+  const relevantSource = (
+    findings: AssessmentFinding[],
+    declarationNames: string[] = [],
+    completeModel = false,
+  ) => {
     const sources = focusedSourceChanges(findings, declarationNames);
     const unresolved = findings
       .map((finding) => finding.sourceReview)
       .filter((review) => review?.outcome === "unresolved");
+    const completeDeclarations = completeModel
+      ? renderCompleteModelDeclarations(sources, declarationNames)
+      : "";
     return sources.length
-      ? `<details class="report-source"><summary>Relevant TypeSpec source</summary>${renderSourceHunks(sources)}<p class="sources">${sourceLinks(sources)}</p></details>`
+      ? `<details class="report-source"><summary>${completeDeclarations ? "Relevant TypeSpec model" : "Relevant TypeSpec source"}</summary>${completeDeclarations}${completeDeclarations ? `<details class="report-subdetails"><summary>Exact changed lines</summary>${renderSourceHunks(sources)}</details>` : renderSourceHunks(sources)}<p class="sources">${sourceLinks(sources)}</p></details>`
       : unresolved.length
         ? `<p class="sources">Relevant TypeSpec source could not be established. ${escape(unique(unresolved.map((review) => review?.rationale)).join(" "))}</p>`
         : '<p class="sources">Finding-specific TypeSpec source unavailable.</p>';
@@ -1491,7 +1500,7 @@ export function renderReportSections(
       const operations = group.operations.length
         ? `<details class="affected-methods"><summary>Affected REST operations (${group.operations.length})</summary><div class="affected-method-list">${group.operations.map((operationId) => `<div class="affected-method"><code>${escape(operationId)}</code></div>`).join("")}</div></details>`
         : '<p class="mapping-unavailable"><strong>Operation mapping unavailable.</strong></p>';
-      return `<details class="report-card rest-contract-card" id="rest-contract-${anchor(group.identity)}">${summary(escape(group.identity), "The normalized REST model/type contract changes.", `<span class="report-badge">${group.findings.length} contract changes</span>`, affectedIntents(group.semanticIds))}<div class="report-card-body">${findingAnchors(group.findings)}${table(rows)}${rationale(group.findings)}${relevantSource(group.findings, restSourceDeclarationNames(group.findings, group.identity))}${operations}</div></details>`;
+      return `<details class="report-card rest-contract-card" id="rest-contract-${anchor(group.identity)}">${summary(escape(group.identity), "The normalized REST model/type contract changes.", `<span class="report-badge">${group.findings.length} contract changes</span>`, affectedIntents(group.semanticIds))}<div class="report-card-body">${findingAnchors(group.findings)}${table(rows)}${rationale(group.findings)}${relevantSource(group.findings, restSourceDeclarationNames(group.findings, group.identity), true)}${operations}</div></details>`;
     })
     .join("");
   const restBody =
@@ -1512,7 +1521,7 @@ export function renderReportSections(
       paths?.length
         ? `<p class="report-small">Representative method paths from recorded graph edges:</p><div class="report-reference-paths">${paths.map((item) => `<div class="report-reference-path"><span>${escape(locations[item.location ?? ""] ?? "Location unavailable")}</span><code>${escape(item.path)}</code><span>${escape(item.role)} evidence</span></div>`).join("")}</div>`
         : '<p class="mapping-unavailable">Precise method path, location and baseline/target role unavailable. Aggregate root locations are not method-specific evidence.</p>'
-    }${table(type.rows)}${rationale(type.findings)}${relevantSource(type.findings, [type.type])}</div>`;
+    }${table(type.rows)}${rationale(type.findings)}${relevantSource(type.findings, [type.type], true)}</div>`;
 
   const directMethodCards = downstream.methods
     .filter((method) => method.group)

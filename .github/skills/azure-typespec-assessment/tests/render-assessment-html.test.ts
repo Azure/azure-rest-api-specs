@@ -15,6 +15,7 @@ import {
   escapeHtml,
   focusedSourceChanges,
   operationContractRows,
+  renderCompleteModelDeclarations,
   renderAssessmentHtml as renderCurrentAssessmentHtml,
   representativeSource,
   restContractCards,
@@ -27,6 +28,8 @@ type AssessmentFact = import("../scripts/runtime-types.ts").AssessmentFact;
 type AssessmentFinding = import("../scripts/runtime-types.ts").AssessmentFinding;
 
 type AssessmentOutput = import("../scripts/runtime-types.ts").AssessmentOutput;
+
+type SourceChange = import("../scripts/runtime-types.ts").SourceChange;
 
 type AssessmentTypeImpact = import("../scripts/runtime-types.ts").AssessmentTypeImpact;
 
@@ -352,6 +355,78 @@ void test("prefers AI-reviewed display sources over broader canonical evidence",
     sources.flatMap((source) => source.declarations.map((item) => item.qualifiedName)),
     ["Request"],
   );
+});
+
+void test("renders complete baseline and target model declarations for model changes", () => {
+  const html = renderCompleteModelDeclarations(
+    [
+      {
+        id: "source-1",
+        path: "main.tsp",
+        status: "modified",
+        origins: [],
+        hunks: [],
+        declarations: [
+          {
+            id: "declaration-base",
+            kind: "model",
+            qualifiedName: "Service.Widget",
+            decorators: [],
+            versionedMembers: [],
+            hunkIds: ["hunk-1"],
+            source: { revision: "base", startLine: 10, endLine: 14 },
+            sourceSnippet: {
+              startLine: 10,
+              endLine: 14,
+              lines: ['@doc("Widget")', "model Widget {", "  name?: string;", "}"],
+              truncated: false,
+            },
+          },
+          {
+            id: "declaration-current",
+            kind: "model",
+            qualifiedName: "Service.Widget",
+            decorators: [],
+            versionedMembers: [],
+            hunkIds: ["hunk-1"],
+            source: { revision: "current", startLine: 20, endLine: 25 },
+            sourceSnippet: {
+              startLine: 20,
+              endLine: 25,
+              lines: [
+                '@doc("Widget")',
+                "model Widget {",
+                "  @madeRequired(Versions.v2)",
+                "  name: string;",
+                "}",
+              ],
+              truncated: false,
+            },
+          },
+          {
+            id: "declaration-other",
+            kind: "model",
+            qualifiedName: "Service.Unrelated",
+            decorators: [],
+            versionedMembers: [],
+            hunkIds: ["hunk-1"],
+            source: { revision: "current", startLine: 30, endLine: 32 },
+            sourceSnippet: {
+              startLine: 30,
+              endLine: 32,
+              lines: ["model Unrelated {}", ""],
+              truncated: false,
+            },
+          },
+        ],
+      },
+    ] as SourceChange[],
+    ["Widget"],
+  );
+  assert.include(html, "Baseline · Service.Widget");
+  assert.include(html, "Target · Service.Widget");
+  assert.include(html, "@madeRequired(Versions.v2)");
+  assert.notInclude(html, "Service.Unrelated");
 });
 
 function readAssessment(url: URL): AssessmentOutput {

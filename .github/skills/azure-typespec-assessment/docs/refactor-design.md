@@ -352,12 +352,19 @@ proven. A REST operation ID is not a TypeSpec declaration name; display-name
 equality, a shared file, or a shared Semantic intent alone does not prove a
 source association.
 
-For model/type cards, select the affected members together with their enclosing
-model/type header and necessary context. For operation/method cards, select the
-complete affected operation signature, relevant decorators, and supporting
-model/helper declarations needed to understand the delta. A card containing
-multiple findings uses the union of their supported ranges, deduplicated
-without expanding to unrelated declarations.
+For model/type cards, show the complete owning model declaration for both
+baseline and target whenever canonical declaration snippets are available.
+This includes model-level decorators, all members, and member decorators, not
+only the changed property. The complete model is the most directly associated
+and sufficiently coherent context for a model contract change. Keep the exact
+changed-line diff available as a secondary collapsed view. Do not expand to
+other models merely because they share the same Git hunk or source file.
+
+For operation/method cards, select the complete affected operation signature,
+relevant decorators, and supporting model/helper declarations needed to
+understand the delta. A card containing multiple findings uses the union of
+their supported ranges, deduplicated without expanding to unrelated
+declarations.
 
 Hunk selection is not sufficient when one Git hunk includes several unrelated
 declarations. Use baseline/current declaration and member spans, not just
@@ -377,7 +384,7 @@ changed-line windows:
 - show explicit omission markers or separate snippets for discontinuous ranges
   rather than presenting them as one continuous original diff.
 
-#### AI source review and fallback association (proposed, not implemented)
+#### AI source review and fallback association
 
 Within the existing bounded Agent phase, review the deterministic source
 selection for every breaking finding, including inferred findings once they
