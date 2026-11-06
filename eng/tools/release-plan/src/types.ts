@@ -31,6 +31,7 @@ export interface ReleasePlanCommandContext {
 }
 
 export interface ReleasePlanData extends Record<string, unknown> {
+  outcome?: "created" | "existing" | "not_found";
   release_plan_link?: string;
   ReleasePlanId?: string | number;
   release_plan_details?: ReleasePlanDetails;
@@ -91,7 +92,13 @@ export interface ReleasePlanDetails extends Record<string, unknown> {
 }
 
 export interface EnsureReleasePlanResult {
-  outcome: "existing_by_id" | "existing_by_pr" | "existing_by_path" | "created" | "not_found";
+  outcome:
+    | "existing_by_id"
+    | "existing_by_pr"
+    | "existing_by_path"
+    | "created"
+    | "not_found"
+    | "manual_required";
   releasePlan: ReleasePlanData | null;
   details:
     | { releasePlanId: string }
@@ -112,7 +119,6 @@ export interface CommitProjectInfoResult {
   multipleProjectPaths?: string[];
   projectError?: { tspProjectPath: string; message: string };
   prNumber?: number;
-  hasNewApiVersionLabel: boolean;
   skipReleasePlanAutomation?: boolean;
 }
 

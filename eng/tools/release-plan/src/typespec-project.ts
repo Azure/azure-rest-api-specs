@@ -32,9 +32,6 @@ function getCachedTypeSpecMetadata(
   return metadata;
 }
 
-/** Label indicating that a spec PR introduces a new API version. */
-export const NEW_API_VERSION_LABEL = "new-api-version";
-
 /**
  * Label indicating that a spec PR only migrates/renames folders. Release plan
  * processing must be skipped entirely for PRs carrying this label.
@@ -131,12 +128,9 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
         projectInfo: null,
         changedFiles: [],
         prNumber: associatedPrNumber,
-        hasNewApiVersionLabel: false,
         skipReleasePlanAutomation: true,
       };
     }
-
-    const hasNewApiVersionLabel = labels.includes(NEW_API_VERSION_LABEL);
 
     const changedFiles = await getPrChangedFiles({
       prNumber: associatedPrNumber,
@@ -152,7 +146,6 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       )),
       changedFiles,
       prNumber: associatedPrNumber,
-      hasNewApiVersionLabel,
     };
   }
 
@@ -170,7 +163,6 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       repo === "azure-rest-api-specs-pr",
     )),
     changedFiles: allFiles,
-    hasNewApiVersionLabel: false,
   };
 }
 
@@ -414,7 +406,7 @@ export function resolveTypeSpecMetadata(
 ): {
   apiVersion: string;
 } {
-  const apiVersions = new Set<string>();
+  const apiVersions = new Map<string, string>();
   let hasPackage = false;
 
   for (const [, langConfigs] of Object.entries(metadata.languages)) {
@@ -423,7 +415,7 @@ export function resolveTypeSpecMetadata(
     }
 
     for (const config of langConfigs) {
-      const apiVersion = config.apiVersion;
+      const apiVersion = config.apiVersion?.trim();
       const packageName = config.packageName;
       hasPackage ||= Boolean(packageName);
 
@@ -435,7 +427,10 @@ export function resolveTypeSpecMetadata(
       }
 
       console.log(`language config: ${JSON.stringify(config)}`);
-      apiVersions.add(apiVersion);
+      const key = apiVersion.toLowerCase();
+      if (!apiVersions.has(key)) {
+        apiVersions.set(key, apiVersion);
+      }
     }
   }
 
@@ -456,7 +451,10 @@ export function resolveTypeSpecMetadata(
     throw new Error("No valid language configurations found in TypeSpec metadata");
   }
 
-  return { apiVersion: Array.from(apiVersions)[0] ?? "" };
+  return {
+    apiVersion:
+      apiVersions.size > 1 ? "multiple-versions" : (apiVersions.values().next().value ?? ""),
+  };
 }
 
 /**

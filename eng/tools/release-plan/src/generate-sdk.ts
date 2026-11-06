@@ -258,6 +258,10 @@ export async function runGenerateSdk(
 
   const plan: ReleasePlanData = getReleasePlanById(releasePlanId, runner);
   const planDetails: ReleasePlanDetails | undefined = plan.release_plan_details;
+  if (planDetails?.Status?.trim().toLowerCase() === "finished") {
+    console.log("Release plan is Finished. Skipping SDK generation.");
+    return;
+  }
   const isManagementPlane = Boolean(planDetails?.IsManagementPlane);
 
   const sdkReleaseType = planDetails?.SDKReleaseType ?? "";
