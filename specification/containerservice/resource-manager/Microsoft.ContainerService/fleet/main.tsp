@@ -78,4 +78,9 @@ enum Versions {
   @doc("Azure Kubernetes Fleet Manager api version 2026-06-02-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_06_02_preview: "2026-06-02-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2026-12-02-preview.")
+  @Azure.Core.previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_12_02_preview: "2026-12-02-preview",
 }

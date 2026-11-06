@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "./selector.tsp";
+import "./ambient.tsp";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -35,6 +36,20 @@ model ClusterMeshProfile
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_02_preview)
 model ClusterMeshProfileProperties {
+  /**
+   * The networking implementation. Omission defaults to Cilium on PUT.
+   * The implementation cannot change after creation.
+   * PUT on an existing ambient profile must specify ambient.
+   */
+  @added(Versions.v2026_12_02_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  kind?: ClusterMeshKind;
+
+  /** Service-owned backing resource information. Present only for ambient profiles. */
+  @added(Versions.v2026_12_02_preview)
+  @visibility(Lifecycle.Read)
+  ambientProperties?: AmbientClusterMeshProfileProperties;
+
   @doc("The provisioning state of the cluster mesh profile.")
   @visibility(Lifecycle.Read)
   provisioningState?: ClusterMeshProfileProvisioningState;
