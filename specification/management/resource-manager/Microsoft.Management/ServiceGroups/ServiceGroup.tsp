@@ -12,6 +12,7 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Management;
+
 /**
  * The serviceGroup details.
  */
@@ -22,7 +23,7 @@ model ServiceGroup
     Resource = ServiceGroup,
     KeyName = "serviceGroupName",
     SegmentName = "serviceGroups",
-    NamePattern = "^[a-zA-Z0-9\\-_().]{1,90}$"
+    NamePattern = ""
   >;
 
   /**

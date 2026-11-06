@@ -99,8 +99,7 @@
             "in": "path",
             "description": "ServiceGroup Name.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -118,6 +117,9 @@
           }
         },
         "x-ms-examples": {
+          "GetNamespaceServiceGroup": {
+            "$ref": "./examples/ServiceGroup_Get_Namespace.json"
+          },
           "GetServiceGroup": {
             "$ref": "./examples/ServiceGroup_Get.json"
           }
@@ -138,8 +140,7 @@
             "in": "path",
             "description": "ServiceGroup Name.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+            "type": "string"
           },
           {
             "name": "createServiceGroupRequest",
@@ -183,6 +184,12 @@
           }
         },
         "x-ms-examples": {
+          "PutNamespaceServiceGroup": {
+            "$ref": "./examples/ServiceGroup_Put_Namespace.json"
+          },
+          "PutNamespacedServiceGroup": {
+            "$ref": "./examples/ServiceGroup_Put_Namespaced.json"
+          },
           "PutServiceGroup": {
             "$ref": "./examples/ServiceGroup_Put.json"
           },
@@ -211,8 +218,7 @@
             "in": "path",
             "description": "ServiceGroup Name.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+            "type": "string"
           },
           {
             "name": "updateServiceGroupRequest",
@@ -283,8 +289,7 @@
             "in": "path",
             "description": "ServiceGroup Name.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -344,8 +349,7 @@
             "in": "path",
             "description": "ServiceGroup Name.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -394,8 +398,7 @@
             "in": "path",
             "description": "ServiceGroup Name.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -444,8 +447,7 @@
             "in": "path",
             "description": "ServiceGroup Name.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -755,6 +757,24 @@
         }
       }
     },
+    "ServiceGroupClassification": {
+      "type": "string",
+      "description": "The classification of a service group.",
+      "enum": [
+        "Namespace"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceGroupClassification",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Namespace",
+            "value": "Namespace",
+            "description": "A service group that owns names prefixed with its name and `::`."
+          }
+        ]
+      }
+    },
     "ServiceGroupMember": {
       "type": "object",
       "description": "A resource member returned by the listMembers action.",
@@ -786,6 +806,14 @@
         "attributes": {
           "$ref": "#/definitions/ServiceGroupAttributes",
           "description": "The attributes of the serviceGroup."
+        },
+        "classification": {
+          "$ref": "#/definitions/ServiceGroupClassification",
+          "description": "The classification of the service group. Set this to `Namespace` to own service group names prefixed with this service group's name and `::`. A namespace's own name cannot contain `::`. Set at creation and cannot be changed. PUT requests for an existing namespace must include its current classification; PATCH requests may omit it.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "parent": {
           "$ref": "#/definitions/ParentServiceGroupProperties",

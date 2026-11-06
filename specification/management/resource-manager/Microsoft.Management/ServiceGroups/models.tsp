@@ -72,6 +72,19 @@ union CreatedByType {
 }
 
 /**
+ * The classification of a service group.
+ */
+@added(Versions.v2026_09_01_preview)
+union ServiceGroupClassification {
+  string,
+
+  /**
+   * A service group that owns names prefixed with its name and `::`.
+   */
+  Namespace: "Namespace",
+}
+
+/**
  * ServiceGroup creation request body parameters.
  */
 model ServiceGroupProperties {
@@ -91,6 +104,13 @@ model ServiceGroupProperties {
    */
   @added(Versions.v2026_08_01)
   attributes?: ServiceGroupAttributes;
+
+  /**
+   * The classification of the service group. Set this to `Namespace` to own service group names prefixed with this service group's name and `::`. A namespace's own name cannot contain `::`. Set at creation and cannot be changed. PUT requests for an existing namespace must include its current classification; PATCH requests may omit it.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  classification?: ServiceGroupClassification;
 
   /**
    * The details of the parent serviceGroup.
