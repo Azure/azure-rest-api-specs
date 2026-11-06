@@ -12487,7 +12487,7 @@ model ManagedInstanceLongTermRetentionPolicyProperties {
   timeBasedImmutability?: TimeBasedImmutability;
 
   /**
-   * The setting for time-based immutability mode for future backup (Value can be either Locked or UnLocked. Only effective if TimeBasedImmutability is enabled). Caution: Immutability of LTR backup cannot be removed if TimeBasedImmutabilityMode is Locked.
+   * The setting for time-based immutability mode for future backup (Value can be either Locked or Unlocked. Only effective if TimeBasedImmutability is enabled). Caution: Immutability of LTR backup cannot be removed if TimeBasedImmutabilityMode is Locked.
    */
   @added(Versions.v2026_08_01_preview)
   timeBasedImmutabilityMode?: TimeBasedImmutabilityMode;
