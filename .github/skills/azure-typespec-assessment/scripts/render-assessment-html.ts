@@ -578,6 +578,19 @@ function responseSchemaValue(
   };
 }
 
+function requestSchemaValue(
+  operation: AssessmentFact | undefined,
+  location: string,
+): ContractValue {
+  const match = location?.match(/^request body(?:\.(.*))?$/);
+  if (!match) return { display: "unavailable" };
+  const result = schemaPath(operation?.request?.schema, match[1]?.split(".") ?? []);
+  return {
+    ...result,
+    display: schemaDisplay(result.schema),
+  };
+}
+
 function restContractDelta(finding: AssessmentFinding): RestContractDelta {
   const change = finding.contractChange ?? {};
   const { before, after } = operationFacts(finding);
@@ -587,15 +600,18 @@ function restContractDelta(finding: AssessmentFinding): RestContractDelta {
   let beforeValue: ContractValue;
 
   let afterValue: ContractValue;
-  if (rule.startsWith("parameter-") || rule === "required-parameter-added") {
+  if (location.startsWith("request body")) {
+    beforeValue = requestSchemaValue(before, location);
+    afterValue = requestSchemaValue(after, location);
+  } else if (location.startsWith("response ")) {
+    beforeValue = responseSchemaValue(before, location);
+    afterValue = responseSchemaValue(after, location);
+  } else if (rule.startsWith("parameter-") || rule === "required-parameter-added") {
     beforeValue = parameterValue(before, location);
     afterValue = parameterValue(after, location);
   } else if (rule.startsWith("response-header-")) {
     beforeValue = responseHeaderValue(before, location);
     afterValue = responseHeaderValue(after, location);
-  } else if (location.startsWith("response ")) {
-    beforeValue = responseSchemaValue(before, location);
-    afterValue = responseSchemaValue(after, location);
   } else if (rule === "method-changed") {
     beforeValue = { display: before?.method?.toUpperCase() };
     afterValue = { display: after?.method?.toUpperCase() };
@@ -1381,10 +1397,41 @@ function renderSourceHunks(sources: SourceChange[] = []) {
     .join("");
 }
 
-function focusedHunkSegments(hunk: DiffHunk): DiffHunk[] {
+type DeclarationLineRanges = {
+  base: { startLine: number; endLine: number }[];
+  current: { startLine: number; endLine: number }[];
+};
+
+function focusedHunkSegments(
+  hunk: DiffHunk,
+  declarationRanges?: DeclarationLineRanges,
+): DiffHunk[] {
+  let baseLine = hunk.base?.startLine ?? 1;
+  let currentLine = hunk.current?.startLine ?? 1;
+  const lineLocations = hunk.lines.map((line) => {
+    const location = { baseLine, currentLine };
+    if (!line.startsWith("+")) baseLine += 1;
+    if (!line.startsWith("-")) currentLine += 1;
+    return location;
+  });
+  const inRange = (line: number, ranges: { startLine: number; endLine: number }[]) =>
+    ranges.some((range) => line >= range.startLine && line <= range.endLine);
+  const belongsToDeclaration = (line: string, index: number) => {
+    if (!declarationRanges) return true;
+    const location = lineLocations[index];
+    if (line.startsWith("+")) return inRange(location.currentLine, declarationRanges.current);
+    if (line.startsWith("-")) return inRange(location.baseLine, declarationRanges.base);
+    return (
+      inRange(location.baseLine, declarationRanges.base) ||
+      inRange(location.currentLine, declarationRanges.current)
+    );
+  };
   const changed = hunk.lines
     .map((line, index) => ({ line, index }))
-    .filter(({ line }) => line.startsWith("+") || line.startsWith("-"))
+    .filter(
+      ({ line, index }) =>
+        (line.startsWith("+") || line.startsWith("-")) && belongsToDeclaration(line, index),
+    )
     .map(({ index }) => index);
   if (!changed.length) return [];
 
@@ -1451,35 +1498,54 @@ export function focusedSourceChanges(
     .filter((name): name is string => Boolean(name));
   return [...new Map(sources.map((source) => [source.id ?? source.path, source])).values()]
     .map((source) => {
-      const relevantHunkIds =
+      const relevantDeclarations =
         requestedNames.length > 0
-          ? new Set(
-              (source.declarations ?? [])
-                .filter((declaration) => {
-                  const qualifiedName = declaration.qualifiedName ?? "";
-                  return requestedNames.some((requestedName) => {
-                    const shortName = requestedName.split(".").at(-1) ?? requestedName;
-                    return (
-                      qualifiedName === requestedName ||
-                      qualifiedName.startsWith(`${requestedName}.`) ||
-                      qualifiedName === shortName ||
-                      qualifiedName.startsWith(`${shortName}.`)
-                    );
-                  });
-                })
-                .flatMap((declaration) => declaration.hunkIds ?? []),
-            )
+          ? (source.declarations ?? []).filter((declaration) => {
+              const qualifiedName = declaration.qualifiedName ?? "";
+              return requestedNames.some((requestedName) => {
+                const shortName = requestedName.split(".").at(-1) ?? requestedName;
+                return (
+                  qualifiedName === requestedName ||
+                  qualifiedName.startsWith(`${requestedName}.`) ||
+                  qualifiedName === shortName ||
+                  qualifiedName.startsWith(`${shortName}.`)
+                );
+              });
+            })
+          : undefined;
+      const relevantHunkIds = relevantDeclarations
+        ? new Set(relevantDeclarations.flatMap((declaration) => declaration.hunkIds ?? []))
+        : undefined;
+      const declarationRanges = relevantDeclarations
+        ? relevantDeclarations.reduce<DeclarationLineRanges>(
+            (ranges, declaration) => {
+              const source = declaration.source;
+              if (
+                source &&
+                Number.isFinite(source.startLine) &&
+                Number.isFinite(source.endLine)
+              ) {
+                ranges[source.revision === "base" ? "base" : "current"].push({
+                  startLine: source.startLine,
+                  endLine: source.endLine,
+                });
+              }
+              return ranges;
+            },
+            { base: [], current: [] },
+          )
+        : undefined;
+      const boundedRanges =
+        declarationRanges &&
+        (declarationRanges.base.length > 0 || declarationRanges.current.length > 0)
+          ? declarationRanges
           : undefined;
       return {
         ...source,
-        declarations: relevantHunkIds
-          ? (source.declarations ?? []).filter((declaration) =>
-              (declaration.hunkIds ?? []).some((hunkId) => relevantHunkIds.has(hunkId)),
-            )
-          : source.declarations,
+        declarations: relevantDeclarations ?? source.declarations,
         hunks: (source.hunks ?? [])
           .filter((hunk) => !relevantHunkIds || relevantHunkIds.has(hunk.id))
-          .flatMap(focusedHunkSegments),
+          .flatMap((hunk) => focusedHunkSegments(hunk, boundedRanges)),
       };
     })
     .filter((source) => source.hunks.length > 0);

@@ -1328,6 +1328,18 @@ export function renderReportSections(
       ? `<details class="report-source"><summary>Relevant TypeSpec source</summary>${renderSourceHunks(sources)}<p class="sources">${sourceLinks(sources)}</p></details>`
       : '<p class="sources">Finding-specific TypeSpec source unavailable.</p>';
   };
+  const restSourceDeclarationNames = (
+    findings: AssessmentFinding[],
+    fallbackIdentity: string,
+  ) => {
+    const names = findings.flatMap((finding) => {
+      const delta = restContractDelta(finding);
+      if (delta.identity === finding.operationIds?.[0]) return [];
+      const member = delta.area?.split(".").at(-1)?.replace(/\[\]$/, "");
+      return member && member !== delta.area ? [`${delta.identity}.${member}`] : [delta.identity];
+    });
+    return unique(names).length ? unique(names) : [fallbackIdentity];
+  };
 
   const legacyCard = (finding: LegacyAssessmentFinding, downstream: boolean = false) =>
     `<details class="report-card legacy-finding" id="${downstream ? "downstream" : "finding"}-${anchor(finding.id)}">${summary(
@@ -1464,7 +1476,7 @@ export function renderReportSections(
             `<span class="report-http">${escape((entry.operation.method ?? "").toUpperCase())}</span> <code>${escape(entry.operation.path ?? "Operation path unavailable")}</code> · ${escape(entry.operation.apiVersion ?? "Version unavailable")}`,
             count(`${entry.findings.length} changes`),
             affectedIntents(entry.semanticIds),
-          )}<div class="report-card-body">${findingAnchors(entry.findings)}${table(restRows(entry))}${rationale(entry.findings)}${relevantSource(entry.findings, [entry.operation.operationId])}</div></details>`,
+          )}<div class="report-card-body">${findingAnchors(entry.findings)}${table(restRows(entry))}${rationale(entry.findings)}${relevantSource(entry.findings, restSourceDeclarationNames(entry.findings, entry.operation.operationId))}</div></details>`,
       )
       .join("");
   const modelCards = restModelCards
@@ -1477,7 +1489,7 @@ export function renderReportSections(
       const operations = group.operations.length
         ? `<details class="affected-methods"><summary>Affected REST operations (${group.operations.length})</summary><div class="affected-method-list">${group.operations.map((operationId) => `<div class="affected-method"><code>${escape(operationId)}</code></div>`).join("")}</div></details>`
         : '<p class="mapping-unavailable"><strong>Operation mapping unavailable.</strong></p>';
-      return `<details class="report-card rest-contract-card" id="rest-contract-${anchor(group.identity)}">${summary(escape(group.identity), "The normalized REST model/type contract changes.", `<span class="report-badge">${group.findings.length} contract changes</span>`, affectedIntents(group.semanticIds))}<div class="report-card-body">${findingAnchors(group.findings)}${table(rows)}${rationale(group.findings)}${relevantSource(group.findings, [group.identity])}${operations}</div></details>`;
+      return `<details class="report-card rest-contract-card" id="rest-contract-${anchor(group.identity)}">${summary(escape(group.identity), "The normalized REST model/type contract changes.", `<span class="report-badge">${group.findings.length} contract changes</span>`, affectedIntents(group.semanticIds))}<div class="report-card-body">${findingAnchors(group.findings)}${table(rows)}${rationale(group.findings)}${relevantSource(group.findings, restSourceDeclarationNames(group.findings, group.identity))}${operations}</div></details>`;
     })
     .join("");
   const restBody =

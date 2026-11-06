@@ -241,6 +241,65 @@ void test("focuses finding source on hunks owned by the displayed declaration", 
   );
 });
 
+void test("clips a shared source hunk to the displayed declaration line range", () => {
+  const sources = focusedSourceChanges(
+    [
+      {
+        id: "finding-1",
+        sources: [
+          {
+            id: "source-1",
+            path: "main.tsp",
+            status: "modified",
+            origins: [],
+            declarations: [
+              {
+                id: "declaration-widget",
+                kind: "model",
+                qualifiedName: "Widget",
+                hunkIds: ["hunk-shared"],
+                source: { revision: "current", startLine: 10, endLine: 12 },
+              },
+              {
+                id: "declaration-gadget",
+                kind: "model",
+                qualifiedName: "Gadget",
+                hunkIds: ["hunk-shared"],
+                source: { revision: "current", startLine: 14, endLine: 16 },
+              },
+            ],
+            hunks: [
+              {
+                id: "hunk-shared",
+                base: { startLine: 10, endLine: 10 },
+                current: { startLine: 10, endLine: 16 },
+                lines: [
+                  "+model Widget {",
+                  "+  value: string;",
+                  "+}",
+                  "+",
+                  "+model Gadget {",
+                  "+  value: string;",
+                  "+}",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ] as unknown as AssessmentFinding[],
+    ["Widget"],
+  );
+
+  assert.deepEqual(sources[0].hunks[0].lines, [
+    "+model Widget {",
+    "+  value: string;",
+    "+}",
+    "+",
+  ]);
+  assert.notMatch(sources[0].hunks[0].lines.join("\n"), /Gadget/);
+});
+
 function readAssessment(url: URL): AssessmentOutput {
   const value = JSON.parse(readFileSync(url, "utf8")) as unknown;
   return value as AssessmentOutput;
@@ -596,6 +655,79 @@ void test("groups REST contract deltas by schema identity and retains affected o
   assert.equal(cards[0].operations.length, 2);
   assert.equal(cards[0].findings[0].contractDelta.before, "WidgetState { Ready | Deleted }");
   assert.equal(cards[0].findings[0].contractDelta.after, "removed");
+});
+
+void test("groups request-body property changes by their owning schema", () => {
+  const operation = (comparisonRole: string): AssessmentFact =>
+    ({
+      comparisonRole,
+      operationId: "Widgets_Create",
+      apiVersion: "v1",
+      method: "post",
+      path: "/widgets",
+      request: {
+        kind: "body",
+        name: "body",
+        required: true,
+        schema: {
+          kind: "object",
+          reference: `stable/v1.json#/definitions/WidgetRequest`,
+          properties:
+            comparisonRole === "baseline"
+              ? [{ name: "oldName", required: true, schema: { kind: "scalar", type: "string" } }]
+              : [{ name: "newName", required: true, schema: { kind: "scalar", type: "string" } }],
+        },
+      },
+    }) as unknown as AssessmentFact;
+
+  const findings: RestFindingFixture[] = [
+    {
+      id: "rest-request-removed",
+      rule: "serialized-property-removed",
+      severity: "high",
+      contractChange: {
+        rule: "serialized-property-removed",
+        location: "request body.oldName",
+      },
+      operationIds: ["Widgets_Create"],
+      relatedSemanticIntents: ["semantic-1"],
+      sources: [],
+      evidence: [operation("baseline"), operation("target")],
+    },
+    {
+      id: "rest-request-added",
+      rule: "required-property-added",
+      severity: "high",
+      contractChange: {
+        rule: "required-property-added",
+        location: "request body.newName",
+      },
+      operationIds: ["Widgets_Create"],
+      relatedSemanticIntents: ["semantic-1"],
+      sources: [],
+      evidence: [operation("baseline"), operation("target")],
+    },
+  ];
+
+  const cards = fixtureRestContractCards(findings);
+
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].identity, "WidgetRequest");
+  assert.deepEqual(
+    cards[0].findings.map((finding) => [
+      finding.contractDelta.area,
+      finding.contractDelta.before,
+      finding.contractDelta.after,
+    ]),
+    [
+      ["request body.oldName", "string", "removed"],
+      ["request body.newName", "removed", "string"],
+    ],
+  );
+  assert.deepEqual(
+    cards[0].operations.map((operation) => operation.operationId),
+    ["Widgets_Create"],
+  );
 });
 
 void test("renderer shows fetched Azure Guidelines guidance and expands failures", () => {
