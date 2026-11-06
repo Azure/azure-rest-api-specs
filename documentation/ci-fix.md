@@ -77,12 +77,28 @@ the changes listed in the check's errors from your PR, including any deletions o
 renames. If a tooling change is needed, open an issue for the repository maintainers.
 
 This restriction also applies to maintenance-only PRs that do not change
-`specification/`. Approvals, labels or reruns by maintainers do not authorize a
+`specification/`. CODEOWNERS approvals and reruns by maintainers do not authorize a
 non-allowlisted PR author. The allowlist is maintained in
 [`ALLOWED_AUTHORS`](../.github/workflows/src/protected-files.ts).
 Dependabot (`dependabot[bot]`) is a trusted automation author and may update protected files.
 Normal CODEOWNERS reviews and other merge requirements still apply, including
 to changes to the allowlist.
+
+For PRs targeting `main` in the public `Azure/azure-rest-api-specs` repository,
+an authorized reviewer may apply `protectedfiles-approved` to approve changes to
+**`eng/typespec-rulesets/index.ts` only**. All other protected files remain blocked
+for non-allowlisted authors, including other files in the rulesets directory.
+The reviewer must be in `global-approvers` or the explicit `protectedfiles-approved`
+list in [the protected-label policy](../.github/protected-labels.yml).
+The check verifies who last applied the label, rather than trusting its presence
+or waiting for the Automation App to remove unauthorized labels.
+
+This approval is PR-scoped: it remains valid after new commits, but only for the
+same exact ruleset path. Remove the label to revoke approval; an authorized reviewer
+must remove and reapply it if the last application was unauthorized.
+Application, removal, new commits, and base-branch edits re-evaluate the check.
+Normal code-owner review and every other merge requirement still apply.
+This exception does not apply to private repositories or other target branches.
 
 Files under `eng/common/` and `.github/skills/azsdk-common-*` are synchronized from
 [Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools). Make changes in

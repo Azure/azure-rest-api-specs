@@ -106,6 +106,19 @@ policy on data-plane PRs; the other ARM policies explicitly opt data-plane PRs o
 
 Protection applies to label application, not removal.
 
+## Protected Files approval
+
+On public `Azure/azure-rest-api-specs` PRs targeting `main`, `protectedfiles-approved`
+allows non-allowlisted authors to change only `eng/typespec-rulesets/index.ts`.
+Global approvers and the label's explicit login list may apply it.
+The Protected Files workflow independently verifies the latest label application
+against policy from its trusted base checkout. Authorization does not depend on
+the Automation App removing unauthorized labels, and needs no App code change.
+This label supports login lists only, not teams or plane-specific policy.
+
+Approval survives new commits on the PR, but never covers additional protected
+paths. Removing the label revokes approval. See the [CI guide](../documentation/ci-fix.md#protected-files).
+
 ## Security Model
 
 - **Approver allowlist** - only users listed in the YAML can apply protected labels

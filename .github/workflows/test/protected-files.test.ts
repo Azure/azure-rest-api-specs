@@ -1,27 +1,57 @@
-import { mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
-import { simpleGit } from "simple-git";
+import { readFile } from "node:fs/promises";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { getChangedFiles } from "../../shared/src/changed-files.ts";
-import { checkProtectedFiles } from "../src/protected-files.ts";
-import { createMockContext, createMockCore } from "./mocks.ts";
+import { checkProtectedFiles, runProtectedFiles } from "../src/protected-files.ts";
+import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
-vi.mock("../../shared/src/changed-files.ts", () => ({ getChangedFiles: vi.fn() }));
+vi.mock("node:fs/promises", () => ({ readFile: vi.fn() }));
 
-function setup(author = "spec-author") {
+const LABEL = "protectedfiles-approved";
+const RULESET = "eng/typespec-rulesets/index.ts";
+
+function setup(author = "spec-author", paths = [RULESET]) {
   const context = createMockContext();
-  context.eventName = "pull_request";
-  context.actor = "azure-sdk";
-  context.payload = { pull_request: { number: 1, user: { login: author } } };
+  context.eventName = "pull_request_target";
+  context.repo = { owner: "Azure", repo: "azure-rest-api-specs" };
+  context.payload = {
+    action: "synchronize",
+    pull_request: { number: 1, head: { sha: "head" } },
+  };
+  const pr = {
+    state: "open",
+    user: { login: author },
+    head: { sha: "head" },
+    base: { ref: "main", sha: "base" },
+    changed_files: paths.length,
+    labels: [] as { name: string }[],
+  };
+  const github = createMockGithub();
+  github.rest.pulls.get.mockImplementation(async () => ({ data: structuredClone(pr) }));
+  github.rest.pulls.listFiles.mockResolvedValue({
+    data: paths.map((filename) => ({ filename })),
+  });
   const core = createMockCore();
-  return { core, context, run: () => checkProtectedFiles({ context, core }) };
+  const approve = (actor = "timotheeguerin") => {
+    pr.labels = [{ name: LABEL }];
+    github.rest.issues.listEvents.mockResolvedValue({
+      data: [{ id: 1, event: "labeled", label: { name: LABEL }, actor: { login: actor } }],
+    });
+  };
+  return {
+    context,
+    github,
+    core,
+    pr,
+    approve,
+    run: () => runProtectedFiles({ github, context, core }),
+  };
 }
 
 describe("Protected Files", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(getChangedFiles).mockResolvedValue([]);
+    vi.mocked(readFile).mockResolvedValue(
+      "global-approvers:\n  - GlobalReviewer\nprotectedfiles-approved:\n  - timotheeguerin\n",
+    );
   });
 
   it.each([
@@ -31,46 +61,15 @@ describe("Protected Files", () => {
     "Azure-SDK",
     "timotheeguerin",
     "marygao",
-  ])("passes for trusted PR author %s without reading changed files", async (author) => {
-    const { core, context, run } = setup(author);
-    context.actor = "spec-author";
-    expect((await run()).conclusion).toBe("success");
-    expect(core.info).toHaveBeenCalledWith(
-      `Account '${author}' is allowed to update protected files`,
+  ])("preserves the author exemption for %s without reading files or policy", async (author) => {
+    const { run, github, core } = setup(author);
+    await run();
+    expect(github.rest.pulls.listFiles).not.toHaveBeenCalled();
+    expect(readFile).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+      expect.objectContaining({ sha: "head", context: "Protected Files", state: "success" }),
     );
-    expect(getChangedFiles).not.toHaveBeenCalled();
     expect(core.setFailed).not.toHaveBeenCalled();
-  });
-
-  it.each(["spec-author", "dependabot-other[bot]", "azure-sdk-other"])(
-    "does not exempt author %s when a trusted account triggers the run",
-    async (author) => {
-      const { core, context, run } = setup(author);
-      context.actor = "timotheeguerin";
-      vi.mocked(getChangedFiles).mockResolvedValue([
-        "package.json",
-        "specification/widgets/main.tsp",
-      ]);
-      await run();
-      expect(core.error).toHaveBeenCalledWith(
-        expect.stringContaining("Remove this change from your PR."),
-        { file: "package.json" },
-      );
-      expect(core.setFailed).toHaveBeenCalledOnce();
-    },
-  );
-
-  it("blocks maintenance-only changes from a non-allowlisted author", async () => {
-    const { core, run } = setup("external-contributor");
-    vi.mocked(getChangedFiles).mockResolvedValue([
-      "package.json",
-      ".github/workflows/protected-files.yaml",
-    ]);
-    const result = await run();
-    expect(result.conclusion).toBe("failure");
-    expect(core.setFailed).toHaveBeenCalledOnce();
-    expect(result.summary).toContain("package.json");
-    expect(result.summary).toContain(".github/workflows/protected-files.yaml");
   });
 
   it.each([
@@ -80,15 +79,13 @@ describe("Protected Files", () => {
     "package.json",
     "pnpm-lock.yaml",
     "pnpm-workspace.yaml",
+    "README.md",
+    "documentation/ci-fix.md",
     ".github/workflows/protected-files.yaml",
     ".github/azsdk-common-config.yml",
     ".vscode/settings.json",
     "eng/tools/example/package.json",
     "eng/scripts/ChangedFiles-Functions.ps1",
-    "test/cognitiveservices/custom-keys-contract.mjs",
-    "specification-other/main.tsp",
-    "Specification/widgets/script.mjs",
-    "README.md",
     ".github/CODEOWNERS.backup",
     ".github/CODEOWNERS\n",
     ".github/workflows/nested/.github/CODEOWNERS",
@@ -103,12 +100,16 @@ describe("Protected Files", () => {
     ".vscode/.hidden",
     "eng/.hidden/nested/config.json",
     ".github/skills",
-  ])("fails for protected path %s without specification changes", async (file) => {
-    const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue([file]);
+    RULESET,
+  ])("blocks protected path %s for a non-allowlisted author", async (file) => {
+    const { run, github, core, context } = setup("external-contributor", [file]);
+    context.actor = "timotheeguerin";
     await run();
     expect(core.error).toHaveBeenCalledWith(expect.any(String), { file });
     expect(core.setFailed).toHaveBeenCalledOnce();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+      expect.objectContaining({ state: "failure" }),
+    );
   });
 
   it.each(
@@ -124,138 +125,243 @@ describe("Protected Files", () => {
       [".github/skills/custom/azsdk-common-example/SKILL.md"],
       [".github/skills/azsdk-custom/SKILL.md"],
       [".GITHUB/codeowners", ".GITHUB/SKILLS/CUSTOM/skill.md"],
-      ["specification/widgets/README.md", "specification/widgets/package.json"],
+      ["specification/widgets/package.json"],
     ].map((files) => ({ files })),
-  )("passes for unprotected changes $files", async ({ files }) => {
-    const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue(files);
+  )("passes unprotected changes $files", async ({ files }) => {
+    const { run, core } = setup("spec-author", files);
     await run();
-    expect(core.error).not.toHaveBeenCalled();
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.info).toHaveBeenCalledWith("No changes to protected files.");
   });
 
-  it("reports only protected files in a mixed PR", async () => {
-    const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue([
-      ".github/CODEOWNERS",
-      "specification/widgets/main.tsp",
-      ".github/skills/custom/SKILL.md",
-      ".github/workflows/test.yaml",
-      "pnpm-lock.yaml",
-    ]);
-    await run();
-    expect(core.error).toHaveBeenCalledTimes(2);
-    expect(core.error).toHaveBeenNthCalledWith(1, expect.any(String), {
-      file: ".github/workflows/test.yaml",
-    });
-    expect(core.error).toHaveBeenNthCalledWith(2, expect.any(String), {
-      file: "pnpm-lock.yaml",
-    });
-    expect(core.setFailed).toHaveBeenCalledWith(
-      "Only allowed repository maintainers may change protected files. See https://aka.ms/ci-fix#protected-files.",
-    );
-  });
-
-  it.each([
-    "eng/common/script.ps1",
-    "eng/common",
-    ".github/skills/azsdk-common-example/SKILL.md",
-    ".github/skills/azsdk-common-example",
-    ".github/skills/azsdk-common-example/.hidden/config.json",
-    ".GITHUB/SKILLS/AZSDK-COMMON-EXAMPLE/SKILL.md",
-    "eng/common/.hidden",
-  ])("directs synced changes in %s to their source repository", async (file) => {
-    const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue([file]);
-    expect((await run()).conclusion).toBe("failure");
-    expect(core.error).toHaveBeenCalledWith(
-      `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`,
-      { file },
-    );
-  });
-
-  it("does not classify similarly named directories as synced", async () => {
-    const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue(["eng/common-other/script.ps1"]);
-    await run();
-    expect(core.error).toHaveBeenCalledWith(
-      expect.stringContaining("can only be changed by allowed repository maintainers"),
-      { file: "eng/common-other/script.ps1" },
-    );
-  });
-
-  it.each([
-    { from: ".github/workflows/test.yaml", to: undefined },
-    {
-      from: ".github/workflows/test.yaml",
-      to: "specification/widgets/test.yaml",
-    },
-    {
-      from: "specification/widgets/test.yaml",
-      to: ".github/workflows/test.yaml",
-    },
-    {
-      from: ".github/workflows/old.yaml",
-      to: ".github/workflows/new.yaml",
-    },
-  ])("blocks protected deletions and renames: $from -> $to", async ({ from, to }) => {
-    const directory = await mkdtemp(join(tmpdir(), "protected-files-"));
-    try {
-      const git = simpleGit(directory);
-      await git.init();
-      await git.addConfig("user.name", "Test");
-      await git.addConfig("user.email", "test@example.com");
-      await git.addConfig("commit.gpgsign", "false");
-      await mkdir(dirname(join(directory, from)), { recursive: true });
-      await writeFile(join(directory, from), "test content\n");
-      await git.add(["--all"]);
-      await git.commit("Initial file");
-      if (to) {
-        await mkdir(dirname(join(directory, to)), { recursive: true });
-        await rename(join(directory, from), join(directory, to));
-      } else {
-        await rm(join(directory, from));
-      }
-      await git.add(["--all"]);
-      await git.commit("Change file");
-
-      const actual = await vi.importActual<typeof import("../../shared/src/changed-files.ts")>(
-        "../../shared/src/changed-files.ts",
+  it.each(["timotheeguerin", "TimotheeGuerin", "globalreviewer"])(
+    "accepts the latest label application by authorized reviewer %s",
+    async (actor) => {
+      const { run, approve, github, core } = setup("spec-author", [
+        RULESET,
+        "specification/widgets/main.tsp",
+      ]);
+      approve(actor);
+      await run();
+      expect(core.setFailed).not.toHaveBeenCalled();
+      expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          state: "success",
+          description: "TypeSpec ruleset change approved",
+        }),
       );
-      vi.mocked(getChangedFiles).mockImplementationOnce((options) =>
-        actual.getChangedFiles({ ...options, cwd: directory }),
-      );
-      const { core, run } = setup();
-      expect((await run()).conclusion).toBe("failure");
-      for (const file of [from, to].filter((file) => file?.startsWith(".github/"))) {
-        expect(core.error).toHaveBeenCalledWith(expect.any(String), { file });
-      }
+      expect(github.rest.issues.listEvents).toHaveBeenCalledOnce();
+      expect(github.rest.pulls.listFiles).toHaveBeenCalledOnce();
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(2);
+    },
+  );
+
+  it.each(["spec-author", "github-actions[bot]", "azure-sdk"])(
+    "does not trust a transient label applied by %s",
+    async (actor) => {
+      const { run, approve, core } = setup();
+      approve(actor);
+      await run();
       expect(core.setFailed).toHaveBeenCalledOnce();
-    } finally {
-      await rm(directory, { recursive: true, force: true });
-    }
+    },
+  );
+
+  it("does not reuse an older authorized application after removal and unauthorized reapplication", async () => {
+    const { run, approve, github, core } = setup();
+    approve();
+    github.rest.issues.listEvents.mockResolvedValue({
+      data: [
+        { id: 1, event: "labeled", label: { name: LABEL }, actor: { login: "timotheeguerin" } },
+        { id: 2, event: "unlabeled", label: { name: LABEL } },
+        { id: 3, event: "labeled", label: { name: LABEL }, actor: { login: "spec-author" } },
+      ],
+    });
+    await run();
+    expect(core.setFailed).toHaveBeenCalledOnce();
   });
 
-  it("propagates diff errors instead of passing", async () => {
-    const { core, run } = setup();
-    const error = new Error("Unable to read the merge parent");
-    vi.mocked(getChangedFiles).mockRejectedValueOnce(error);
-    await expect(run()).rejects.toThrow(error);
-    expect(core.info).not.toHaveBeenCalledWith("No changes to protected files.");
+  it.each(
+    [
+      [],
+      [{ id: 2, event: "unlabeled", label: { name: LABEL } }],
+      [{ id: 3, event: "labeled", label: { name: LABEL }, actor: null }],
+      [
+        {
+          id: 4,
+          event: "labeled",
+          label: { name: "unrelated" },
+          actor: { login: "timotheeguerin" },
+        },
+      ],
+    ].map((events) => ({ events })),
+  )("fails closed without an authorized current application: $events", async ({ events }) => {
+    const { run, approve, github, core } = setup();
+    approve();
+    github.rest.issues.listEvents.mockResolvedValue({ data: events });
+    await run();
+    expect(core.setFailed).toHaveBeenCalledOnce();
   });
 
-  it("rejects non-PR events", async () => {
-    const { context, run } = setup();
-    context.eventName = "workflow_dispatch";
-    await expect(run()).rejects.toThrow("Unsupported event for Protected Files");
-    expect(getChangedFiles).not.toHaveBeenCalled();
+  it.each([
+    ".github/workflows/protected-files.yaml",
+    "eng/typespec-rulesets/package.json",
+    "eng/common/script.ps1",
+    ".github/skills/azsdk-common-example/SKILL.md",
+    "eng/typespec-rulesets/INDEX.ts",
+  ])("does not approve an additional protected path %s", async (file) => {
+    const { run, approve, core } = setup("spec-author", [RULESET, file]);
+    approve();
+    await run();
+    expect(core.error).toHaveBeenCalledWith(expect.any(String), { file });
+    expect(core.error).not.toHaveBeenCalledWith(expect.any(String), { file: RULESET });
+    expect(core.setFailed).toHaveBeenCalledOnce();
   });
 
-  it("rejects a missing PR author", async () => {
-    const { context, run } = setup();
+  it.each([
+    { filename: "specification/widgets/test.ts", previous_filename: RULESET },
+    { filename: RULESET, previous_filename: ".github/workflows/test.yaml" },
+    { filename: RULESET, previous_filename: "eng/typespec-rulesets/old.ts" },
+  ])("checks both sides of a protected rename: %j", async (file) => {
+    const { run, approve, github, core } = setup();
+    approve();
+    github.rest.pulls.listFiles.mockResolvedValue({ data: [file] });
+    await run();
+    // Moving the ruleset into specification is allowed by this exact-path approval;
+    // moving a different protected path into the ruleset does not approve the source.
+    expect(core.setFailed).toHaveBeenCalledTimes(file.previous_filename === RULESET ? 0 : 1);
+  });
+
+  it("treats a deleted protected file as a change", async () => {
+    const { run, github, core } = setup();
+    github.rest.pulls.listFiles.mockResolvedValue({
+      data: [{ filename: "package.json", status: "removed" }],
+    });
+    await run();
+    expect(core.error).toHaveBeenCalledWith(expect.any(String), { file: "package.json" });
+  });
+
+  it.each(["release", "RPSaaSMaster"])("does not accept approval on base %s", async (base) => {
+    const { run, approve, pr, github, core } = setup();
+    approve();
+    pr.base.ref = base;
+    await run();
+    expect(core.setFailed).toHaveBeenCalledOnce();
+    expect(github.rest.issues.listEvents).not.toHaveBeenCalled();
+  });
+
+  it("does not enable approval in another repository", async () => {
+    const { run, approve, context, core } = setup();
+    approve();
+    context.repo.repo = "azure-rest-api-specs-pr";
+    await run();
+    expect(core.setFailed).toHaveBeenCalledOnce();
+  });
+
+  it.each(["labeled", "unlabeled"])(
+    "re-evaluates relevant %s events from current state",
+    async (action) => {
+      const { run, approve, context, pr, core } = setup();
+      approve();
+      context.payload.action = action;
+      context.payload.label = { name: LABEL };
+      if (action === "unlabeled") pr.labels = [];
+      await run();
+      expect(core.setFailed).toHaveBeenCalledTimes(action === "unlabeled" ? 1 : 0);
+    },
+  );
+
+  it("ignores unrelated label events before making API calls", async () => {
+    const { run, context, github } = setup();
+    context.payload.action = "labeled";
+    context.payload.label = { name: "unrelated" };
+    await run();
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+
+  it("keeps approval after new commits and evaluates the live head rather than a stale event SHA", async () => {
+    const { run, approve, pr, github } = setup();
+    approve();
+    pr.head.sha = "new-head";
+    await run();
+    expect(
+      github.rest.repos.createCommitStatus.mock.calls.map(([args]) => [args.sha, args.state]),
+    ).toEqual([
+      ["head", "pending"],
+      ["new-head", "pending"],
+      ["new-head", "success"],
+    ]);
+  });
+
+  it.each(["head", "base", "target", "label", "closed"])(
+    "fails closed when %s changes during evaluation",
+    async (change) => {
+      const { run, approve, pr, github } = setup();
+      approve();
+      const current = structuredClone(pr);
+      if (change === "head") current.head.sha = "new-head";
+      if (change === "base") current.base.sha = "new-base";
+      if (change === "target") current.base.ref = "release";
+      if (change === "label") current.labels = [];
+      if (change === "closed") current.state = "closed";
+      github.rest.pulls.get
+        .mockResolvedValueOnce({ data: structuredClone(pr) })
+        .mockResolvedValueOnce({ data: current });
+      await expect(run()).rejects.toThrow("PR changed during evaluation");
+      expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+        expect.objectContaining({ sha: "head", state: "failure" }),
+      );
+    },
+  );
+
+  it("rejects a truncated file list instead of passing", async () => {
+    const { run, pr, github } = setup("spec-author", []);
+    pr.changed_files = 3001;
+    await expect(run()).rejects.toThrow("Incomplete PR file list");
+    expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+      expect.objectContaining({ state: "failure" }),
+    );
+  });
+
+  it.each([
+    "global-approvers: []",
+    "global-approvers: []\nprotectedfiles-approved:\n  team: maintainers",
+  ])("rejects absent or unsupported approval policy: %s", async (policy) => {
+    const { run, approve } = setup();
+    approve();
+    vi.mocked(readFile).mockResolvedValue(policy);
+    await expect(run()).rejects.toThrow("requires explicit global and label approver lists");
+  });
+
+  it("propagates API errors and marks the head status failed", async () => {
+    const { run, approve, github } = setup();
+    approve();
+    github.rest.issues.listEvents.mockRejectedValueOnce(new Error("API unavailable"));
+    await expect(run()).rejects.toThrow("API unavailable");
+    expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+      expect.objectContaining({ state: "failure" }),
+    );
+  });
+
+  it("rejects untrusted workflow event types before making API calls", async () => {
+    const { run, context, github } = setup();
+    context.eventName = "pull_request";
+    await expect(run()).rejects.toThrow("Unsupported event");
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+  });
+
+  it("rejects a missing PR identity", async () => {
+    const { run, context } = setup();
     context.payload = {};
-    await expect(run()).rejects.toThrow("Protected Files requires a pull request author");
-    expect(getChangedFiles).not.toHaveBeenCalled();
+    await expect(run()).rejects.toThrow("requires a pull request number and head SHA");
+  });
+
+  it("retains synced-file guidance", () => {
+    const core = createMockCore();
+    checkProtectedFiles({ author: "spec-author", changedFiles: ["eng/common/script.ps1"], core });
+    expect(core.error).toHaveBeenCalledWith(
+      expect.stringContaining("make the change in Azure/azure-sdk-tools instead"),
+      { file: "eng/common/script.ps1" },
+    );
   });
 });
