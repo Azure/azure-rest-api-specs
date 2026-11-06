@@ -95,11 +95,30 @@ function createSampleArtifact(
   };
 }
 
-function createArtifactMetadataResponse(downloadUrl: string, artifactName: string): Response {
-  return new Response(JSON.stringify({ name: artifactName, resource: { downloadUrl } }), {
-    status: 200,
-    headers: { "content-type": "application/json" },
-  });
+function createArtifactListResponse(
+  artifacts: Array<{ name: string; downloadUrl: string }> = [
+    {
+      name: SPEC_GEN_SDK_ARTIFACT_NAME,
+      downloadUrl: "https://artifacts.example.com/spec-gen",
+    },
+    {
+      name: PACKAGES_ARTIFACT_NAME,
+      downloadUrl: "https://artifacts.example.com/packages",
+    },
+  ],
+): Response {
+  return new Response(
+    JSON.stringify({
+      value: artifacts.map(({ name, downloadUrl }) => ({
+        name,
+        resource: { downloadUrl },
+      })),
+    }),
+    {
+      status: 200,
+      headers: { "content-type": "application/json" },
+    },
+  );
 }
 
 function getRequestUrl(input: string | URL | Request): string {
@@ -267,7 +286,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         packageRootPath: `sdk/widget/${packageName}`,
         changedFiles: [`sdk/widget/${packageName}/src/Generated/WidgetClient.cs`],
         reviewInputPath: `${packageName}/review-input`,
-        reviewInputBytes: 24 * 1024 * 1024,
+        reviewInputBytes: 48 * 1024 * 1024,
       };
     });
 
@@ -350,6 +369,20 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     ).toBe("<Project />");
   });
 
+  it("rejects archive entries that resolve to the same snapshot destination", () => {
+    const duplicatePath = "Azure.Widget/review-input/Azure.Widget.csproj";
+    expect(() =>
+      extractAndValidateSdkReviewInputArchive(
+        zipSync({
+          ...SAMPLE_SNAPSHOT_FILES,
+          [`${PACKAGES_ARTIFACT_NAME}/${duplicatePath}`]: strToU8("<DifferentProject />"),
+        }),
+        createSampleArtifact(),
+        createTempOutputDir(),
+      ),
+    ).toThrow("Multiple ZIP entries resolve to");
+  });
+
   it("extracts streamed ZIP entries that use data descriptors", async () => {
     const outputDirectory = createTempOutputDir();
     const archive = await createStreamingZip(SAMPLE_SNAPSHOT_FILES);
@@ -430,7 +463,12 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     const outputRootDir = createTempOutputDir();
     const artifact = createSampleArtifact();
 
-    mockContext.payload = createSampleCheckRunPayload({ pull_requests: [] });
+    mockContext.payload = createSampleCheckRunPayload({
+      pull_requests: [
+        { number: 47500, head: { sha: "9".repeat(40) } },
+        { number: 47607, head: { sha: SAMPLE_HEAD_SHA } },
+      ],
+    });
     mockGithub.rest.pulls.get.mockResolvedValue({
       data: {
         number: 47607,
@@ -441,21 +479,8 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     });
     mockFetch.mockImplementation((url) => {
       const requestUrl = getRequestUrl(url);
-      if (requestUrl.includes(`artifactName=${SPEC_GEN_SDK_ARTIFACT_NAME}`)) {
-        return Promise.resolve(
-          createArtifactMetadataResponse(
-            "https://artifacts.example.com/spec-gen",
-            SPEC_GEN_SDK_ARTIFACT_NAME,
-          ),
-        );
-      }
-      if (requestUrl.includes(`artifactName=${PACKAGES_ARTIFACT_NAME}`)) {
-        return Promise.resolve(
-          createArtifactMetadataResponse(
-            "https://artifacts.example.com/packages",
-            PACKAGES_ARTIFACT_NAME,
-          ),
-        );
+      if (requestUrl.includes("artifacts?api-version=7.0")) {
+        return Promise.resolve(createArtifactListResponse());
       }
       if (requestUrl.includes("/spec-gen") && requestUrl.includes("format=file")) {
         return Promise.resolve(
@@ -497,7 +522,10 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     expect(mockCore.summary.addRaw).toHaveBeenCalledWith(
       expect.stringContaining("SDK Validation - .NET Naming Review Input (Report-Only)"),
     );
-    expect(mockFetch).toHaveBeenCalledTimes(4);
+    expect(mockFetch).toHaveBeenCalledTimes(3);
+    expect(mockGithub.rest.pulls.get).toHaveBeenCalledWith(
+      expect.objectContaining({ pull_number: 47607 }),
+    );
     expect(mockGithub.rest.issues.createComment).not.toHaveBeenCalled();
     expect(mockGithub.rest.issues.updateComment).not.toHaveBeenCalled();
     expect(mockGithub.rest.issues.addLabels).not.toHaveBeenCalled();
@@ -543,12 +571,14 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     mockContext.payload = createSampleCheckRunPayload({ pull_requests: [] });
     mockFetch.mockImplementation((url) => {
       const requestUrl = getRequestUrl(url);
-      if (requestUrl.includes(`artifactName=${SPEC_GEN_SDK_ARTIFACT_NAME}`)) {
+      if (requestUrl.includes("artifacts?api-version=7.0")) {
         return Promise.resolve(
-          createArtifactMetadataResponse(
-            "https://artifacts.example.com/spec-gen",
-            SPEC_GEN_SDK_ARTIFACT_NAME,
-          ),
+          createArtifactListResponse([
+            {
+              name: SPEC_GEN_SDK_ARTIFACT_NAME,
+              downloadUrl: "https://artifacts.example.com/spec-gen",
+            },
+          ]),
         );
       }
       if (requestUrl.includes("/spec-gen") && requestUrl.includes("format=file")) {
@@ -574,11 +604,9 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     expect(result.status).toBe("skipped");
     expect(result.reason).toContain("produced no reviewable packages");
     expect(mockFetch).toHaveBeenCalledTimes(2);
-    expect(
-      mockFetch.mock.calls.some(([url]) =>
-        getRequestUrl(url).includes(`artifactName=${PACKAGES_ARTIFACT_NAME}`),
-      ),
-    ).toBe(false);
+    expect(mockFetch.mock.calls.some(([url]) => getRequestUrl(url).includes("format=zip"))).toBe(
+      false,
+    );
     expect(mockGithub.rest.pulls.get).not.toHaveBeenCalled();
   });
 
@@ -596,13 +624,8 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       },
     });
     mockFetch.mockImplementation((url) => {
-      if (getRequestUrl(url).includes(`artifactName=${SPEC_GEN_SDK_ARTIFACT_NAME}`)) {
-        return Promise.resolve(
-          createArtifactMetadataResponse(
-            "https://artifacts.example.com/spec-gen",
-            SPEC_GEN_SDK_ARTIFACT_NAME,
-          ),
-        );
+      if (getRequestUrl(url).includes("artifacts?api-version=7.0")) {
+        return Promise.resolve(createArtifactListResponse());
       }
       return Promise.resolve(
         new Response("x", {

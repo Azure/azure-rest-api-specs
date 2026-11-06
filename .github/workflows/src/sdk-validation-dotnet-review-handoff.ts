@@ -17,7 +17,7 @@ import {
 import {
   downloadAzurePipelineArtifactArchive,
   downloadAzurePipelineArtifactFile,
-  resolveAzurePipelineArtifact,
+  resolveAzurePipelineArtifactPair,
 } from "./artifacts.ts";
 import type { Context, Core, GitHub, GitHubScriptArgs } from "./github.ts";
 import type { RetryOptions } from "./retries.ts";
@@ -546,6 +546,7 @@ function preflightSdkReviewInputArchive(
     reviewInputPaths.map((reviewInputPath) => [reviewInputPath, { fileCount: 0, bytes: 0 }]),
   );
   const archiveEntryMetadata = new Map<string, ArchiveEntryMetadata>();
+  const normalizedDestinations = new Set<string>();
   let totalExpandedBytes = 0;
   let totalFileCount = 0;
 
@@ -569,6 +570,12 @@ function preflightSdkReviewInputArchive(
       if (archiveEntryMetadata.has(normalizedName)) {
         throw new Error(`Duplicate ZIP entry '${file.name}'`);
       }
+      const normalizedDestination =
+        `${declaredFile.reviewInputPath}/${declaredFile.relativeFilePath}`.toLowerCase();
+      if (normalizedDestinations.has(normalizedDestination)) {
+        throw new Error(`Multiple ZIP entries resolve to '${normalizedDestination}'`);
+      }
+      normalizedDestinations.add(normalizedDestination);
 
       if (
         !Number.isSafeInteger(file.size) ||
@@ -777,7 +784,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
   }
 
   const event = eventValidation.event;
-  if (event.eventPrNumbers.length > 0) {
+  if (event.eventPrNumbers.length === 1) {
     const primaryPrNumber = event.eventPrNumbers[0];
     const prStatus = await verifyPullRequestFreshness({
       github,
@@ -799,17 +806,16 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     }
   }
 
-  const artifactResolution = await resolveAzurePipelineArtifact({
+  const artifactPairResolution = await resolveAzurePipelineArtifactPair({
     ado_project_url: event.adoBuild.projectUrl,
     ado_build_id: event.adoBuild.buildId,
-    artifactName: SPEC_GEN_SDK_ARTIFACT_NAME,
+    artifactNames: [SPEC_GEN_SDK_ARTIFACT_NAME, PACKAGES_ARTIFACT_NAME],
     token,
     core,
-    fallbackToFailedArtifact: true,
     retryOptions,
     fetchImpl,
   });
-  if (artifactResolution.status === "not-found") {
+  if (artifactPairResolution.status === "not-found") {
     const reason = `No '${SPEC_GEN_SDK_ARTIFACT_NAME}' artifact found on build ${event.adoBuild.buildId}`;
     core.info(reason);
     return {
@@ -820,9 +826,15 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       entryCount: 0,
     };
   }
+  const artifactResolution =
+    artifactPairResolution.status === "found"
+      ? artifactPairResolution.artifacts[0]
+      : artifactPairResolution.artifact;
+  const packagesArtifactResolution =
+    artifactPairResolution.status === "found" ? artifactPairResolution.artifacts[1] : undefined;
 
   const artifactData = await downloadAzurePipelineArtifactFile({
-    artifact: artifactResolution.artifact,
+    artifact: artifactResolution,
     artifactFileName: SPEC_GEN_SDK_ARTIFACT_FILE_NAME,
     retryOptions,
     maxBytes: MAX_SPEC_GEN_SDK_ARTIFACT_BYTES,
@@ -847,6 +859,11 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       entryCount: 0,
     };
   }
+  if (!packagesArtifactResolution) {
+    throw new Error(
+      `No matching '${PACKAGES_ARTIFACT_NAME}' artifact found for '${artifactResolution.artifactName}' on build ${event.adoBuild.buildId}`,
+    );
+  }
   const prNumber = verifyReviewInputAgainstCheckRun(artifact, event);
 
   const prStatus = await verifyPullRequestFreshness({
@@ -868,23 +885,8 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     };
   }
 
-  const packagesArtifactResolution = await resolveAzurePipelineArtifact({
-    ado_project_url: event.adoBuild.projectUrl,
-    ado_build_id: event.adoBuild.buildId,
-    artifactName: PACKAGES_ARTIFACT_NAME,
-    token,
-    core,
-    fallbackToFailedArtifact: true,
-    retryOptions,
-    fetchImpl,
-  });
-  if (packagesArtifactResolution.status === "not-found") {
-    throw new Error(
-      `No '${PACKAGES_ARTIFACT_NAME}' artifact found on build ${event.adoBuild.buildId}`,
-    );
-  }
   const packagesArchiveBytes = await downloadAzurePipelineArtifactArchive({
-    artifact: packagesArtifactResolution.artifact,
+    artifact: packagesArtifactResolution,
     retryOptions,
     maxBytes: MAX_PACKAGES_ARCHIVE_BYTES,
     fetchImpl,
@@ -896,7 +898,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     packagesArchiveBytes,
     artifact,
     inputDirectory,
-    packagesArtifactResolution.artifact.artifactName,
+    packagesArtifactResolution.artifactName,
   );
   const artifactPath = path.join(inputDirectory, SPEC_GEN_SDK_ARTIFACT_FILE_NAME);
   fs.writeFileSync(artifactPath, JSON.stringify(artifact, undefined, 2), "utf8");

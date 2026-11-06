@@ -236,6 +236,28 @@ function collectWorkspaceChanges(workspace: string, packageRoots: string[]): str
   return [...new Set([...tracked, ...untracked])].sort();
 }
 
+function markUntrackedFilesForDiff(workspace: string, packageRoots: string[]): void {
+  const untracked = parseNullSeparatedPaths(
+    execFileSync(
+      "git",
+      ["ls-files", "--others", "--exclude-standard", "-z", "--", ...packageRoots],
+      {
+        cwd: workspace,
+        encoding: "utf8",
+      },
+    ),
+  );
+  if (untracked.length === 0) {
+    return;
+  }
+  execFileSync("git", ["add", "--intent-to-add", "--pathspec-from-file=-", "--pathspec-file-nul"], {
+    cwd: workspace,
+    encoding: "utf8",
+    input: `${untracked.join("\0")}\0`,
+    stdio: ["pipe", "pipe", "pipe"],
+  });
+}
+
 const inputRoot = path.resolve(process.env.SDK_REVIEW_INPUT_ROOT ?? "");
 const outputRoot = path.resolve(process.env.SDK_REVIEW_WORKSPACE_ROOT ?? "");
 if (!process.env.SDK_REVIEW_INPUT_ROOT || !process.env.SDK_REVIEW_WORKSPACE_ROOT) {
@@ -284,6 +306,10 @@ for (const [baselineCommitSha, entries] of entriesByBaseline) {
       `Reconstructed diff for ${baselineCommitSha} does not match declared changedFiles.\nExpected: ${JSON.stringify(expectedChangedFiles)}\nActual: ${JSON.stringify(actualChangedFiles)}`,
     );
   }
+  markUntrackedFilesForDiff(
+    workspace,
+    entries.map((entry) => entry.packageRootPath),
+  );
 
   workspaces.push({
     baselineCommitSha,

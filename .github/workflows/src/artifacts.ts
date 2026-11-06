@@ -38,6 +38,19 @@ export type AzurePipelineArtifactResolution =
       status: "not-found";
     };
 
+export type AzurePipelineArtifactPairResolution =
+  | {
+      status: "found";
+      artifacts: readonly [ResolvedAzurePipelineArtifact, ResolvedAzurePipelineArtifact];
+    }
+  | {
+      status: "first-only";
+      artifact: ResolvedAzurePipelineArtifact;
+    }
+  | {
+      status: "not-found";
+    };
+
 type GetAzurePipelineArtifactOptions = {
   ado_build_id: string;
   ado_project_url: string;
@@ -55,6 +68,13 @@ type ResolveAzurePipelineArtifactOptions = Omit<
   GetAzurePipelineArtifactOptions,
   "artifactFileName" | "maxBytes"
 >;
+
+type ResolveAzurePipelineArtifactPairOptions = Omit<
+  ResolveAzurePipelineArtifactOptions,
+  "artifactName" | "fallbackToFailedArtifact"
+> & {
+  artifactNames: readonly [string, string];
+};
 
 type DownloadAzurePipelineArtifactFileOptions = {
   artifact: ResolvedAzurePipelineArtifact;
@@ -195,6 +215,46 @@ function parseResolvedArtifactName(
   return resolvedArtifactName;
 }
 
+function getArtifactAttempt(
+  artifactName: string,
+  requestedArtifactName: string,
+): number | undefined {
+  if (artifactName === requestedArtifactName) {
+    return 0;
+  }
+  const escapedArtifactName = requestedArtifactName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = artifactName.match(new RegExp(`^${escapedArtifactName}-FailedAttempt([1-9]\\d*)$`));
+  if (!match) {
+    return undefined;
+  }
+  const attempt = Number.parseInt(match[1], 10);
+  return Number.isSafeInteger(attempt) ? attempt : undefined;
+}
+
+function indexArtifactsByAttempt(
+  artifacts: ArtifactValue[],
+  requestedArtifactName: string,
+): Map<number, ArtifactValue> {
+  const artifactsByAttempt = new Map<number, ArtifactValue>();
+  for (const artifact of artifacts) {
+    const attempt = getArtifactAttempt(artifact.name, requestedArtifactName);
+    if (attempt === undefined) {
+      continue;
+    }
+    if (artifactsByAttempt.has(attempt)) {
+      throw new Error(
+        `Multiple artifacts resolve to '${requestedArtifactName}' attempt ${attempt}`,
+      );
+    }
+    artifactsByAttempt.set(attempt, artifact);
+  }
+  return artifactsByAttempt;
+}
+
+function selectPreferredAttempt(attempts: number[]): number | undefined {
+  return attempts.includes(0) ? 0 : attempts.sort((left, right) => right - left)[0];
+}
+
 /**
  * Resolves Azure Pipelines artifact metadata once into a reusable download target.
  * Only a verified 404 is returned as not found. Authentication, throttling, server,
@@ -256,6 +316,89 @@ export async function resolveAzurePipelineArtifact({
       downloadUrl: parseArtifactDownloadUrl(metadata, artifactName),
       headers,
     },
+  };
+}
+
+/**
+ * Resolves the newest attempt that contains both requested artifacts.
+ */
+export async function resolveAzurePipelineArtifactPair({
+  ado_build_id,
+  ado_project_url,
+  artifactNames,
+  core,
+  retryOptions = {},
+  token = undefined,
+  fetchImpl = fetch,
+}: ResolveAzurePipelineArtifactPairOptions): Promise<AzurePipelineArtifactPairResolution> {
+  const headers = getArtifactHeaders(token);
+  const response = await fetchWithRetry(
+    `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?api-version=7.0`,
+    {
+      method: "GET",
+      headers,
+    },
+    retryOptions,
+    fetchImpl,
+  );
+  if (!response.ok) {
+    throw new Error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
+  }
+
+  const metadata: unknown = await response.json();
+  if (
+    !metadata ||
+    typeof metadata !== "object" ||
+    !("value" in metadata) ||
+    !Array.isArray((metadata as ListArtifactsResponse).value)
+  ) {
+    throw new Error("Malformed Azure Pipelines artifact list");
+  }
+  const artifacts = (metadata as ListArtifactsResponse).value;
+  core.info(`Artifacts found: ${JSON.stringify(metadata)}`);
+
+  const [firstArtifactName, secondArtifactName] = artifactNames;
+  const firstArtifactsByAttempt = indexArtifactsByAttempt(artifacts, firstArtifactName);
+  const secondArtifactsByAttempt = indexArtifactsByAttempt(artifacts, secondArtifactName);
+  const selectedAttempt = selectPreferredAttempt([...firstArtifactsByAttempt.keys()]);
+
+  const resolveArtifact = (
+    artifact: ArtifactValue | undefined,
+    requestedArtifactName: string,
+  ): ResolvedAzurePipelineArtifact => {
+    if (!artifact) {
+      throw new Error(`Artifact '${requestedArtifactName}' disappeared during pair resolution`);
+    }
+    return {
+      artifactName: artifact.name,
+      downloadUrl: parseArtifactDownloadUrl(artifact, requestedArtifactName),
+      headers,
+    };
+  };
+
+  if (selectedAttempt === undefined) {
+    core.info(`No '${firstArtifactName}' artifact found`);
+    return { status: "not-found" };
+  }
+
+  const firstArtifact = resolveArtifact(
+    firstArtifactsByAttempt.get(selectedAttempt),
+    firstArtifactName,
+  );
+  const secondArtifact = secondArtifactsByAttempt.get(selectedAttempt);
+  if (!secondArtifact) {
+    core.info(
+      `No matching artifact attempt contains both '${firstArtifactName}' and '${secondArtifactName}'`,
+    );
+    return {
+      status: "first-only",
+      artifact: firstArtifact,
+    };
+  }
+
+  return {
+    status: "found",
+    artifacts: [firstArtifact, resolveArtifact(secondArtifact, secondArtifactName)],
   };
 }
 

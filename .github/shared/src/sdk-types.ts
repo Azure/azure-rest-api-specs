@@ -20,8 +20,8 @@ export const SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE = 2_048;
 export const SDK_REVIEW_MAX_TOTAL_CHANGED_FILES = 4_096;
 export const SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE = 20_000;
 export const SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES = 40_000;
-export const SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE = 32 * 1024 * 1024;
-export const SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES = 64 * 1024 * 1024;
+export const SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE = 64 * 1024 * 1024;
+export const SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES = 128 * 1024 * 1024;
 
 function containsControlCharacter(value: string): boolean {
   return [...value].some((character) => {

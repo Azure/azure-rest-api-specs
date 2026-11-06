@@ -57,7 +57,6 @@ describe("prepare-sdk-review-workspaces", () => {
     const snapshotRoot = path.join(inputRoot, "Azure.Widget", "review-input");
     fs.mkdirSync(path.join(snapshotRoot, "src"), { recursive: true });
     fs.writeFileSync(path.join(snapshotRoot, "src", "WidgetClient.cs"), "after\n");
-    fs.writeFileSync(path.join(snapshotRoot, "src", "WidgetModel.cs"), "unchanged\n");
     fs.writeFileSync(path.join(snapshotRoot, "src", "WidgetOptions.cs"), "new\n");
     fs.writeFileSync(
       path.join(inputRoot, "spec-gen-sdk-artifact.json"),
@@ -71,6 +70,7 @@ describe("prepare-sdk-review-workspaces", () => {
             packageRootPath: "sdk/widget/Azure.Widget",
             changedFiles: [
               "sdk/widget/Azure.Widget/src/WidgetClient.cs",
+              "sdk/widget/Azure.Widget/src/WidgetModel.cs",
               "sdk/widget/Azure.Widget/src/WidgetOptions.cs",
             ],
             sdkBaseCommitSha: baselineCommitSha,
@@ -116,14 +116,20 @@ describe("prepare-sdk-review-workspaces", () => {
     expect(context.workspaces[0].baselineCommitSha).toBe(baselineCommitSha);
     const workspace = context.workspaces[0].workspace;
     expect(
-      runGit(workspace, [
-        "diff",
-        "--name-only",
-        "HEAD",
-        "--",
-        "sdk/widget/Azure.Widget",
-      ]).replaceAll("\r\n", "\n"),
-    ).toBe("sdk/widget/Azure.Widget/src/WidgetClient.cs");
+      runGit(workspace, ["diff", "--name-only", "--", "sdk/widget/Azure.Widget"]).replaceAll(
+        "\r\n",
+        "\n",
+      ),
+    ).toBe(
+      [
+        "sdk/widget/Azure.Widget/src/WidgetClient.cs",
+        "sdk/widget/Azure.Widget/src/WidgetModel.cs",
+        "sdk/widget/Azure.Widget/src/WidgetOptions.cs",
+      ].join("\n"),
+    );
+    expect(
+      runGit(workspace, ["diff", "--cached", "--name-only", "--", "sdk/widget/Azure.Widget"]),
+    ).toBe("");
     expect(
       runGit(workspace, [
         "ls-files",
@@ -132,7 +138,7 @@ describe("prepare-sdk-review-workspaces", () => {
         "--",
         "sdk/widget/Azure.Widget",
       ]),
-    ).toBe("sdk/widget/Azure.Widget/src/WidgetOptions.cs");
+    ).toBe("");
     expect(
       fs.existsSync(
         path.join(workspace, "sdk", "widget", "Azure.Widget", "tests", "SessionRecords"),

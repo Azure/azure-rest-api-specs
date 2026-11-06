@@ -6,6 +6,7 @@ import {
   getAdoBuildInfoFromUrl,
   getAzurePipelineArtifact,
   resolveAzurePipelineArtifact,
+  resolveAzurePipelineArtifactPair,
 } from "../src/artifacts.ts";
 import { createMockCore } from "./mocks.ts";
 
@@ -581,6 +582,150 @@ describe("getAzurePipelineArtifact function", () => {
     expect(resolution).toMatchObject({
       status: "found",
       artifact: { artifactName: failedArtifactName },
+    });
+  });
+
+  it("resolves both artifacts from the newest common attempt", async () => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        value: [
+          {
+            name: "packages-FailedAttempt2",
+            resource: { downloadUrl: "https://dev.azure.com/packages-2" },
+          },
+          {
+            name: "spec-gen-sdk-artifact-FailedAttempt2",
+            resource: { downloadUrl: "https://dev.azure.com/spec-gen-2" },
+          },
+          {
+            name: "spec-gen-sdk-artifact-FailedAttempt10",
+            resource: { downloadUrl: "https://dev.azure.com/spec-gen-10" },
+          },
+          {
+            name: "packages-FailedAttempt10",
+            resource: { downloadUrl: "https://dev.azure.com/packages-10" },
+          },
+        ],
+      }),
+    });
+
+    const resolution = await resolveAzurePipelineArtifactPair({
+      ado_build_id: inputs.ado_build_id,
+      ado_project_url: inputs.ado_project_url,
+      artifactNames: ["spec-gen-sdk-artifact", "packages"],
+      core: mockCore,
+    });
+
+    expect(resolution).toMatchObject({
+      status: "found",
+      artifacts: [
+        { artifactName: "spec-gen-sdk-artifact-FailedAttempt10" },
+        { artifactName: "packages-FailedAttempt10" },
+      ],
+    });
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not use an older pair when the preferred manifest is unpaired", async () => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        value: [
+          {
+            name: "spec-gen-sdk-artifact",
+            resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
+          },
+          {
+            name: "spec-gen-sdk-artifact-FailedAttempt2",
+            resource: { downloadUrl: "https://dev.azure.com/spec-gen-2" },
+          },
+          {
+            name: "packages-FailedAttempt2",
+            resource: { downloadUrl: "https://dev.azure.com/packages-2" },
+          },
+        ],
+      }),
+    });
+
+    const resolution = await resolveAzurePipelineArtifactPair({
+      ado_build_id: inputs.ado_build_id,
+      ado_project_url: inputs.ado_project_url,
+      artifactNames: ["spec-gen-sdk-artifact", "packages"],
+      core: mockCore,
+    });
+
+    expect(resolution).toMatchObject({
+      status: "first-only",
+      artifact: { artifactName: "spec-gen-sdk-artifact" },
+    });
+  });
+
+  it("prefers the successful artifact pair over failed attempts", async () => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        value: [
+          {
+            name: "spec-gen-sdk-artifact",
+            resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
+          },
+          {
+            name: "packages",
+            resource: { downloadUrl: "https://dev.azure.com/packages" },
+          },
+          {
+            name: "spec-gen-sdk-artifact-FailedAttempt3",
+            resource: { downloadUrl: "https://dev.azure.com/spec-gen-3" },
+          },
+          {
+            name: "packages-FailedAttempt3",
+            resource: { downloadUrl: "https://dev.azure.com/packages-3" },
+          },
+        ],
+      }),
+    });
+
+    const resolution = await resolveAzurePipelineArtifactPair({
+      ado_build_id: inputs.ado_build_id,
+      ado_project_url: inputs.ado_project_url,
+      artifactNames: ["spec-gen-sdk-artifact", "packages"],
+      core: mockCore,
+    });
+
+    expect(resolution).toMatchObject({
+      status: "found",
+      artifacts: [{ artifactName: "spec-gen-sdk-artifact" }, { artifactName: "packages" }],
+    });
+  });
+
+  it("returns the newest manifest when no packages artifact shares its attempt", async () => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        value: [
+          {
+            name: "spec-gen-sdk-artifact-FailedAttempt3",
+            resource: { downloadUrl: "https://dev.azure.com/spec-gen-3" },
+          },
+          {
+            name: "packages-FailedAttempt2",
+            resource: { downloadUrl: "https://dev.azure.com/packages-2" },
+          },
+        ],
+      }),
+    });
+
+    const resolution = await resolveAzurePipelineArtifactPair({
+      ado_build_id: inputs.ado_build_id,
+      ado_project_url: inputs.ado_project_url,
+      artifactNames: ["spec-gen-sdk-artifact", "packages"],
+      core: mockCore,
+    });
+
+    expect(resolution).toMatchObject({
+      status: "first-only",
+      artifact: { artifactName: "spec-gen-sdk-artifact-FailedAttempt3" },
     });
   });
 
