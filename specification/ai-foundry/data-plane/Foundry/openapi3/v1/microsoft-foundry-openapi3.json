@@ -28231,9 +28231,9 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The unique name of the skill.",
+            "description": "The project-scoped name or persisted ID of the skill.",
             "schema": {
-              "$ref": "#/components/schemas/SkillName"
+              "$ref": "#/components/schemas/SkillIdentifier"
             }
           },
           {
@@ -28309,9 +28309,9 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the skill to update.",
+            "description": "The project-scoped name or persisted ID of the skill to update.",
             "schema": {
-              "$ref": "#/components/schemas/SkillName"
+              "$ref": "#/components/schemas/SkillIdentifier"
             }
           },
           {
@@ -28406,9 +28406,9 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The unique name of the skill.",
+            "description": "The project-scoped name or persisted ID of the skill.",
             "schema": {
-              "$ref": "#/components/schemas/SkillName"
+              "$ref": "#/components/schemas/SkillIdentifier"
             }
           },
           {
@@ -28486,9 +28486,9 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the skill.",
+            "description": "The project-scoped name or persisted ID of the skill.",
             "schema": {
-              "$ref": "#/components/schemas/SkillName"
+              "$ref": "#/components/schemas/SkillIdentifier"
             }
           },
           {
@@ -28564,9 +28564,9 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the skill. If the skill does not exist, it will be created.",
+            "description": "A valid name when creating a new skill, or the persisted skill ID when appending a version to an existing skill. Creating by an existing name with a different ID returns a conflict.",
             "schema": {
-              "$ref": "#/components/schemas/SkillName"
+              "$ref": "#/components/schemas/SkillIdentifier"
             }
           },
           {
@@ -28680,9 +28680,9 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the skill to list versions for.",
+            "description": "The project-scoped name or persisted ID of the skill to list versions for.",
             "schema": {
-              "$ref": "#/components/schemas/SkillName"
+              "$ref": "#/components/schemas/SkillIdentifier"
             }
           },
           {
@@ -28822,15 +28822,15 @@
       "get": {
         "operationId": "getSkillVersion",
         "summary": "Retrieve a specific version of a skill",
-        "description": "Retrieves the specified version of a skill by name and version identifier.",
+        "description": "Retrieves the specified version of a skill by name or persisted ID and version identifier.",
         "parameters": [
           {
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the skill.",
+            "description": "The project-scoped name or persisted ID of the skill.",
             "schema": {
-              "$ref": "#/components/schemas/SkillName"
+              "$ref": "#/components/schemas/SkillIdentifier"
             }
           },
           {
@@ -28915,9 +28915,9 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the skill.",
+            "description": "The project-scoped name or persisted ID of the skill.",
             "schema": {
-              "$ref": "#/components/schemas/SkillName"
+              "$ref": "#/components/schemas/SkillIdentifier"
             }
           },
           {
@@ -29004,9 +29004,9 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the skill.",
+            "description": "The project-scoped name or persisted ID of the skill.",
             "schema": {
-              "$ref": "#/components/schemas/SkillName"
+              "$ref": "#/components/schemas/SkillIdentifier"
             }
           },
           {
@@ -105581,6 +105581,10 @@
             "Skills=V1Preview"
           ]
         }
+      },
+      "SkillIdentifier": {
+        "type": "string",
+        "description": "A project-scoped skill name or a persisted skill ID, including generated IDs prefixed with skill_. New skills are created by name; use the persisted ID to append versions to an existing skill."
       },
       "SkillInlineContent": {
         "type": "object",

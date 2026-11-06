@@ -98,9 +98,9 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkillVersionFromFiles is FoundryDataPlaneOperation<
     {
-      @doc("The name of the skill.")
+      @doc("A valid name when creating a new skill, or the persisted skill ID when appending a version to an existing skill. Creating by an existing name with a different ID returns a conflict.")
       @path
-      name: SkillName;
+      name: SkillIdentifier;
 
       /** The content type of the request body. */
       @header contentType: "multipart/form-data";
@@ -127,7 +127,7 @@ interface Skills {
   >;
 
   /**
-   * Retrieves the specified version of a skill by name and version identifier.
+   * Retrieves the specified version of a skill by name or persisted ID and version identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @summary("Retrieve a specific version of a skill")

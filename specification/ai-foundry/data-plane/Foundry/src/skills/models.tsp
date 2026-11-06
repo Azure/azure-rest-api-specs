@@ -8,6 +8,9 @@ namespace Azure.AI.Projects;
 @pattern("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$")
 scalar SkillName extends string;
 
+@doc("A project-scoped skill name or a persisted skill ID, including generated IDs prefixed with skill_. New skills are created by name; use the persisted ID to append versions to an existing skill.")
+scalar SkillIdentifier extends string;
+
 const SkillsRequiredPreviews = #{
   required_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
 };
@@ -47,9 +50,9 @@ model CreateSkillVersionFromFilesBody {
 }
 
 alias GetSkillRequest = {
-  @doc("The unique name of the skill.")
+  @doc("The project-scoped name or persisted ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 };
 
 alias ListSkillsRequest = {
@@ -57,9 +60,9 @@ alias ListSkillsRequest = {
 };
 
 alias DeleteSkillRequest = {
-  @doc("The unique name of the skill.")
+  @doc("The project-scoped name or persisted ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 };
 
 @doc("A skill resource.")
@@ -109,9 +112,9 @@ model SkillVersion {
 }
 
 alias CreateSkillVersionRequest = {
-  @doc("The name of the skill. If the skill does not exist, it will be created.")
+  @doc("A valid name when creating a new skill, or the persisted skill ID when appending a version to an existing skill. Creating by an existing name with a different ID returns a conflict.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("Inline skill content for simple skills without file uploads. Foundry-specific extension.")
   inline_content?: SkillInlineContent;
@@ -121,9 +124,9 @@ alias CreateSkillVersionRequest = {
 };
 
 alias GetSkillVersionRequest = {
-  @doc("The name of the skill.")
+  @doc("The project-scoped name or persisted ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("The version identifier to retrieve.")
   @path
@@ -131,23 +134,23 @@ alias GetSkillVersionRequest = {
 };
 
 alias ListSkillVersionsRequest = {
-  @doc("The name of the skill to list versions for.")
+  @doc("The project-scoped name or persisted ID of the skill to list versions for.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   ...CommonPageQueryParameters;
 };
 
 alias GetSkillContentRequest = {
-  @doc("The name of the skill.")
+  @doc("The project-scoped name or persisted ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 };
 
 alias GetSkillVersionContentRequest = {
-  @doc("The name of the skill.")
+  @doc("The project-scoped name or persisted ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("The version to download content for.")
   @path
@@ -155,18 +158,18 @@ alias GetSkillVersionContentRequest = {
 };
 
 alias UpdateSkillRequest = {
-  @doc("The name of the skill to update.")
+  @doc("The project-scoped name or persisted ID of the skill to update.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest.")
   default_version: string;
 };
 
 alias DeleteSkillVersionRequest = {
-  @doc("The name of the skill.")
+  @doc("The project-scoped name or persisted ID of the skill.")
   @path
-  name: SkillName;
+  name: SkillIdentifier;
 
   @doc("The version identifier to delete.")
   @path
