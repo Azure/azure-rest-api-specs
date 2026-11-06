@@ -7,6 +7,11 @@ using Microsoft.Resources;
 
 @@clientName(Microsoft.Resources, "DeploymentsMgmtClient", "python");
 @@clientName(Microsoft.Resources, "DeploymentsClient", "javascript");
+// Avoid a name collision with the service-defined Microsoft.Resources.ErrorResponse
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ArmErrorResponse"
+);
 @@alternateType(
   Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
