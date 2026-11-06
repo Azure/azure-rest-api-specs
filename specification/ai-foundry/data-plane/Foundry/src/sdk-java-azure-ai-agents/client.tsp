@@ -2300,6 +2300,47 @@ union RealtimeConversationItemObject {
   "java"
 );
 
+// Reuse standalone OpenAI models.
+@@alternateType(
+  OpenAI.TranscriptionLanguage,
+  {
+    identity: "com.openai.models.audio.transcriptions.TranscriptionLanguage",
+  },
+  "java"
+);
+// Preserve the OpenAI Tool list in Java; its simple name collides with the SDK Tool root.
+@@alternateType(OpenAI.MCPListToolsTool, unknown, "java");
+
+// Reuse complete OpenAI hierarchies at their model-property boundaries.
+@@alternateType(
+  OpenAI.RealtimeSessionCreateRequestUnion,
+  {
+    identity: "com.openai.models.realtime.SessionUpdateEvent.Session",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeAudioFormats,
+  {
+    identity: "com.openai.models.realtime.RealtimeAudioFormats",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeTurnDetection,
+  {
+    identity: "com.openai.models.realtime.RealtimeAudioInputTurnDetection",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeMCPError,
+  {
+    identity: "com.openai.models.realtime.RealtimeMcpToolCall.Error",
+  },
+  "java"
+);
+
 // RankerVersionType
 union RankerVersionTypeExpandable {
   string,
