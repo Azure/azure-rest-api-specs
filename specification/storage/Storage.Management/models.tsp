@@ -24,10 +24,9 @@ union IntervalUnit {
 /**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Preserve the published shared response envelope payload and resource extension without registering a resource base."
+@TypeSpec.OpenAPI.extension("x-ms-azure-resource", true)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}

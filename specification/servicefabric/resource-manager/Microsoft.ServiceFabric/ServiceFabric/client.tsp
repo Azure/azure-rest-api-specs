@@ -35,9 +35,6 @@ using Microsoft.ServiceFabric;
 );
 
 // C# renames to preserve backward compatibility with autorest-generated SDK
-// NOTE: Resource classes for custom @customAzureResource ProxyResource models are
-// generated as empty stubs. We use CodeGenSuppress + custom code on the SDK side
-// to provide full implementations.
 @@clientName(Microsoft.ServiceFabric.Cluster, "ServiceFabricCluster", "csharp");
 @@clientName(
   Microsoft.ServiceFabric.ApplicationResource,

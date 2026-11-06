@@ -1407,10 +1407,8 @@ model PrivateLinkServiceConnectionState {
 /**
  * A definition of an Azure resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy desgin"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Legacy desgin"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Legacy desgin"
-@Azure.ResourceManager.Legacy.customAzureResource
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Preserve the published shared envelope payload without registering a resource base or request model."
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model AzureProxyResource {
   /**
    * The ID of the resource.

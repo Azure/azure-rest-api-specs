@@ -16,13 +16,12 @@ namespace Microsoft.Kusto;
  * Class representing an data connection.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Preserve the existing discriminated data connection envelope and payload contract while replacing legacy resource registration."
 @parentResource(Database)
 @discriminator("kind")
-@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@TypeSpec.OpenAPI.extension("x-ms-azure-resource", true)
+@Azure.ResourceManager.Private.armResourceInternal({})
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model DataConnection extends Azure.ResourceManager.Foundations.ProxyResource {
   @visibility(Lifecycle.Read)
   @path

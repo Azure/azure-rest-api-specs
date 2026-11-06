@@ -13,12 +13,12 @@ namespace Microsoft.ContainerInstance;
 /**
  * A container group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Preserve the existing container group envelope and payload contract while replacing legacy resource registration."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  ContainerGroupPropertiesProperties
+)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model ContainerGroup extends Foundations.ProxyResource {
   ...ResourceNameParameter<Resource = ContainerGroup, NamePattern = "">;
 
