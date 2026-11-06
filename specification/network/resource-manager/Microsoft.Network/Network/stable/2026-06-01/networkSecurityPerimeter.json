@@ -2372,7 +2372,103 @@
           "items": {
             "type": "string"
           }
+        },
+        "identities": {
+          "type": "array",
+          "description": "Identity conditions of the access rule. Supported only for inbound access rules. A caller matches when it matches any one of the specified identities. When identities are specified together with other conditions of the rule (for example, addressPrefixes or subscriptions), the caller must satisfy all of them. An inbound access rule can be identity only, without any other condition. When omitted in a create or update request for an inbound access rule, the service applies the default of a single identity of type 'Any', which matches every caller. PUT is a full replacement, so existing identities are not retained when omitted. An inbound access rule last written with an earlier API version is returned with an empty list, which also matches every caller.",
+          "items": {
+            "$ref": "#/definitions/NspIdentity"
+          },
+          "x-ms-identifiers": []
         }
+      }
+    },
+    "NspIdentity": {
+      "type": "object",
+      "description": "Identity condition of an NSP access rule.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/NspIdentityType",
+          "description": "The type of the identity."
+        },
+        "ids": {
+          "type": "array",
+          "description": "Microsoft Entra object IDs (GUIDs) of the identities. At least one ID is required when the identity type is not 'Any'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filters": {
+          "$ref": "#/definitions/NspIdentityFilters",
+          "description": "Request filters for the identity. When specified, the caller must also match every populated filter."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "NspIdentityFilters": {
+      "type": "object",
+      "description": "Request filters for an NSP access rule identity. Each populated filter matches when the request matches any of its values.",
+      "properties": {
+        "subscriptionIds": {
+          "type": "array",
+          "description": "Subscription resource IDs in the format /subscriptions/{subscriptionId}.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "Resource types in the format {resourceProviderNamespace}/{resourceType}, for example Microsoft.Storage/storageAccounts.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "Fully qualified Azure resource IDs.",
+          "items": {
+            "type": "string",
+            "format": "arm-id"
+          }
+        }
+      }
+    },
+    "NspIdentityType": {
+      "type": "string",
+      "description": "The type of the identity in an NSP access rule.",
+      "enum": [
+        "Any",
+        "ServicePrincipal",
+        "ManagedIdentity",
+        "Group"
+      ],
+      "x-ms-enum": {
+        "name": "NspIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Any",
+            "value": "Any",
+            "description": "Matches any caller identity. Identity IDs are not required."
+          },
+          {
+            "name": "ServicePrincipal",
+            "value": "ServicePrincipal",
+            "description": "Microsoft Entra service principal identities."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "Managed identities."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "Microsoft Entra group identities."
+          }
+        ]
       }
     },
     "NspAssociation": {
