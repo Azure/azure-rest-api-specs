@@ -59,24 +59,29 @@ model Workspace {
   @visibility(Lifecycle.Read)
   storageUri?: url;
 
-  /** The review status of the Microsoft signing key for the workspace. */
+  @doc("The browser proxy enablement status for the workspace.")
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  browserProxy?: EnablementStatus = EnablementStatus.Enabled;
+
+  @doc("The review status of the Microsoft signing key for the workspace.")
   @added(Versions.v2026_12_01_preview)
   @visibility(Lifecycle.Read)
   microsoftSigningKeyStatus?: MicrosoftSigningKeyStatus;
 }
 
-/** The review status of a Microsoft signing key. */
+@doc("The review status of a Microsoft signing key.")
 @added(Versions.v2026_12_01_preview)
 union MicrosoftSigningKeyStatus {
   string,
 
-  /** The Microsoft signing key has been accepted. */
+  @doc("The Microsoft signing key has been accepted.")
   Accepted: "Accepted",
 
-  /** The Microsoft signing key has been rejected. */
+  @doc("The Microsoft signing key has been rejected.")
   Rejected: "Rejected",
 
-  /** The Microsoft signing key is under review. */
+  @doc("The Microsoft signing key is under review.")
   InReview: "InReview",
 }
 

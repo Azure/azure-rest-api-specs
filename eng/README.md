@@ -4,6 +4,36 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## SDK generation pipeline variables
+
+The [spec-gen-sdk pipeline](pipelines/spec-gen-sdk.yml) selects its SDK repository
+using the Azure DevOps pipeline UI variable `SdkRepoUrl`. Provisioning library
+pipelines can also set the optional UI variable `TypeSpecEmitter`, for example
+`@azure-tools/typespec-ts-provisioning`. The shared stage template also supports
+this variable for batch generation.
+
+When configured, the emitter is passed unchanged through `spec-gen-sdk-runner`
+to `spec-gen-sdk --typespec-emitter` and then to language automation as
+`generateInput.json`'s `typespecEmitter`. When the variable is missing or empty,
+the option is omitted and existing emitter selection is unchanged. There is no
+default emitter, and existing pipelines do not need to configure the variable.
+
+This requires `@azure-tools/spec-gen-sdk` **0.9.10 or later**, which adds the
+optional contract in [Azure/azure-sdk-tools#17457](https://github.com/Azure/azure-sdk-tools/pull/17457).
+The repository's catalog and frozen lockfile include this support. Language
+automation must also support the selected emitter; this wiring does not install
+emitters, change SDK enablement checks, or create provisioning pipelines.
+
+For spec PR validation, selecting `@azure-tools/typespec-ts-provisioning` for
+JavaScript or `@azure-typespec/http-client-csharp-provisioning` for .NET makes
+the runner artifact's `isSpecGenSdkCheckRequired` flag `false`. Provisioning
+validation still runs and reports its actual result, including failures, but
+those failures do not fail the aggregate **SDK Validation Status** check.
+Ordinary SDK validation and other custom emitters retain their existing
+requiredness, as do pipelines with a missing or empty `TypeSpecEmitter`.
+Dedicated provisioning validation pipelines must configure the matching emitter;
+this does not create pipelines or change live pipeline settings.
+
 ## Spec Change Policies
 
 [Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage and
