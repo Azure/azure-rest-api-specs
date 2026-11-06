@@ -6364,16 +6364,24 @@ namespace KnowledgeBaseRetrievalClient {
 
 // Preserve the body-first protocol signatures released in the JavaScript 13.0.0 SDK.
 namespace JavaScriptCompatibility {
+  /** Shows how an analyzer breaks text into tokens. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
   op analyze(
+    /** The text and analyzer or analysis components to test. */
     @TypeSpec.Http.body request: Search.AnalyzeRequest,
+
     ...Search.indexNamePath,
     ...Azure.Core.Foundations.ApiVersionParameter,
     ...Azure.Core.ClientRequestIdHeader,
     ...Search.acceptHeaderMinimal,
   ): void;
 
+  /** Creates a new search index or updates an index if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
   op createOrUpdateIndex(
+    /** The definition of the index to create or update. */
     @TypeSpec.Http.body index: Search.SearchIndex,
+
     ...Search.indexNamePath,
     ...Azure.Core.Foundations.ApiVersionParameter,
     ...Azure.Core.ClientRequestIdHeader,
@@ -6386,8 +6394,12 @@ namespace JavaScriptCompatibility {
     ...Search.preferHeader,
   ): void;
 
+  /** Creates a new synonym map or updates a synonym map if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
   op createOrUpdateSynonymMap(
+    /** The synonym map definition to create or update. */
     @TypeSpec.Http.body synonymMap: Search.SynonymMap,
+
     ...Search.synonymMapNamePath,
     ...Azure.Core.Foundations.ApiVersionParameter,
     ...Azure.Core.ClientRequestIdHeader,
@@ -6396,8 +6408,12 @@ namespace JavaScriptCompatibility {
     ...Search.preferHeader,
   ): void;
 
+  /** Creates a new search alias or updates an alias if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
   op createOrUpdateAlias(
+    /** The alias definition to create or update. */
     @TypeSpec.Http.body `alias`: Search.SearchAlias,
+
     ...Search.aliasNamePath,
     ...Azure.Core.Foundations.ApiVersionParameter,
     ...Azure.Core.ClientRequestIdHeader,
@@ -6406,8 +6422,12 @@ namespace JavaScriptCompatibility {
     ...Search.preferHeader,
   ): void;
 
+  /** Creates a new knowledge base or updates a knowledge base if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
   op createOrUpdateKnowledgeBase(
+    /** The knowledge base definition to create or update. */
     @TypeSpec.Http.body knowledgeBase: Search.KnowledgeBase,
+
     ...Search.knowledgeBaseNamePath,
     ...Azure.Core.Foundations.ApiVersionParameter,
     ...Azure.Core.ClientRequestIdHeader,
@@ -6416,8 +6436,12 @@ namespace JavaScriptCompatibility {
     ...Search.preferHeader,
   ): void;
 
+  /** Creates a new knowledge source or updates a knowledge source if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
   op createOrUpdateKnowledgeSource(
+    /** The knowledge source definition to create or update. */
     @TypeSpec.Http.body knowledgeSource: Search.KnowledgeSource,
+
     ...Search.sourceNamePath,
     ...Azure.Core.Foundations.ApiVersionParameter,
     ...Azure.Core.ClientRequestIdHeader,
@@ -6426,8 +6450,12 @@ namespace JavaScriptCompatibility {
     ...Search.preferHeader,
   ): void;
 
+  /** Creates a new indexer or updates an indexer if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
   op createOrUpdateIndexer(
+    /** The indexer definition to create or update. */
     @TypeSpec.Http.body indexer: Search.SearchIndexer,
+
     ...Search.indexerNamePath,
     ...Azure.Core.Foundations.ApiVersionParameter,
     ...Azure.Core.ClientRequestIdHeader,
@@ -6436,8 +6464,12 @@ namespace JavaScriptCompatibility {
     ...Search.preferHeader,
   ): void;
 
+  /** Creates a new skillset or updates a skillset if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
   op createOrUpdateSkillset(
+    /** The skillset definition to create or update. */
     @TypeSpec.Http.body skillset: Search.SearchIndexerSkillset,
+
     ...Search.skillsetNamePath,
     ...Azure.Core.Foundations.ApiVersionParameter,
     ...Azure.Core.ClientRequestIdHeader,
@@ -6446,8 +6478,12 @@ namespace JavaScriptCompatibility {
     ...Search.preferHeader,
   ): void;
 
+  /** Creates a new datasource or updates a datasource if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
   op createOrUpdateDataSource(
+    /** The datasource definition to create or update. */
     @TypeSpec.Http.body dataSource: Search.SearchIndexerDataSource,
+
     ...Search.dataSourceNamePath,
     ...Azure.Core.Foundations.ApiVersionParameter,
     ...Azure.Core.ClientRequestIdHeader,
@@ -6505,33 +6541,45 @@ namespace JavaScriptCompatibility {
 
 // Keep the released result-wrapper APIs alongside the new paged operations.
 namespace SearchIndexClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing JavaScript SDK contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserve the released JavaScript getter name"
   @scope("javascript")
   op getSynonymMaps is Search.SynonymMaps.list;
 }
 
 namespace SearchIndexerClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing JavaScript SDK contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserve the released JavaScript getter name"
   @scope("javascript")
   op getIndexers is Search.Indexers.list;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing JavaScript SDK contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserve the released JavaScript getter name"
   @scope("javascript")
   op getSkillsets is Search.Skillsets.list;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing JavaScript SDK contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserve the released JavaScript getter name"
   @scope("javascript")
   op getDataSourceConnections is Search.DataSources.list;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released non-pageable JavaScript getter contract"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   SearchIndexClient.getSynonymMaps,
   "javascript"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released non-pageable JavaScript getter contract"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   SearchIndexerClient.getIndexers,
   "javascript"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released non-pageable JavaScript getter contract"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   SearchIndexerClient.getSkillsets,
   "javascript"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released non-pageable JavaScript getter contract"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   SearchIndexerClient.getDataSourceConnections,
   "javascript"
