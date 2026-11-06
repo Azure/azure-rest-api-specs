@@ -14,9 +14,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @added(Versions.v2026_07_15_preview)
 model Vrf is Azure.ResourceManager.TrackedResource<VrfProperties, false> {
   @doc("Name of the Vrf.")
-  @pattern("^[A-Za-z][A-Za-z0-9-]*$")
-  @minLength(1)
-  @maxLength(64)
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("vrfName")
   @segment("vrfs")

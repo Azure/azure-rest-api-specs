@@ -14,9 +14,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @added(Versions.v2026_07_15_preview)
 model Vlan is Azure.ResourceManager.TrackedResource<VlanProperties, false> {
   @doc("Name of the Vlan.")
-  @pattern("^[A-Za-z][A-Za-z0-9-]*$")
-  @minLength(1)
-  @maxLength(64)
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("vlanName")
   @segment("vlans")
