@@ -1125,10 +1125,11 @@
               "input_audio_buffer.commit",
               "response.cancel",
               "response.create",
-              "session.update",
-              "session.avatar.connect",
-              "rtc.call.sdp.create"
+              "session.update"
             ]
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentClientEventTypeExtension"
           }
         ]
       },
@@ -1637,9 +1638,11 @@
               "mcp_list_tools",
               "mcp_call",
               "mcp_approval_request",
-              "message",
-              "system_tool"
+              "message"
             ]
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentConversationItemTypeExtension"
           }
         ]
       },
@@ -7099,6 +7102,18 @@
         },
         "description": "The `session.update` client event."
       },
+      "VoiceAgentClientEventTypeExtension": {
+        "type": "string",
+        "enum": [
+          "session.avatar.connect",
+          "rtc.call.sdp.create"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentCollectDtmfSystemTool": {
         "type": "object",
         "required": [
@@ -7140,6 +7155,18 @@
           }
         ],
         "description": "Collects one complete SMS from an explicitly selected sender."
+      },
+      "VoiceAgentConversationItemTypeExtension": {
+        "type": "string",
+        "enum": [
+          "system_tool"
+        ],
+        "description": "Additional item kinds used by the Voice Agent service.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentDigitRecognitionSystemTool": {
         "type": "object",
@@ -7316,7 +7343,7 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
+            "$ref": "#/components/schemas/VoiceAgentGreetingMode",
             "description": "The greeting mode."
           }
         },
@@ -7328,6 +7355,26 @@
           }
         },
         "description": "Session-start greeting configuration for a voice agent."
+      },
+      "VoiceAgentGreetingMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "template",
+              "llm_generated"
+            ]
+          }
+        ],
+        "description": "The greeting modes supported by a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentHandoffAbortReason": {
         "type": "string",
@@ -7674,7 +7721,7 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
+            "$ref": "#/components/schemas/VoiceAgentInterimResponseType",
             "description": "The interim-response implementation."
           },
           "triggers": {
@@ -7717,6 +7764,26 @@
           }
         ],
         "description": "A condition that may trigger an interim response."
+      },
+      "VoiceAgentInterimResponseType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "static_interim_response",
+              "llm_interim_response"
+            ]
+          }
+        ],
+        "description": "The interim-response implementations supported by a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentLanguageDetectionSystemTool": {
         "type": "object",
@@ -8218,7 +8285,7 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
+            "$ref": "#/components/schemas/VoiceAgentRtcCallErrorType",
             "description": "The error category, following the VoiceLive wire contract: `invalid_request_error` for a client-side signaling fault (for example, a malformed SDP offer) or `server_error` for a service-side failure. Additional categories may be added over time."
           },
           "code": {
@@ -8231,6 +8298,26 @@
           }
         },
         "description": "Details of a WebRTC signaling error."
+      },
+      "VoiceAgentRtcCallErrorType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invalid_request_error",
+              "server_error"
+            ]
+          }
+        ],
+        "description": "The error categories reported for WebRTC signaling failures.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentSemanticVadTurnDetection": {
         "type": "object",
@@ -10175,7 +10262,7 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
+            "$ref": "#/components/schemas/VoiceAgentToolType",
             "description": "The tool kind."
           }
         },
@@ -10261,6 +10348,28 @@
           }
         ],
         "description": "When a tool invocation creates a follow-up response. Additional values may be added over time."
+      },
+      "VoiceAgentToolType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "function",
+              "mcp",
+              "system",
+              "toolbox"
+            ]
+          }
+        ],
+        "description": "The tool kinds supported by a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentTranscriptionPhrase": {
         "type": "object",
