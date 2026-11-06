@@ -11,7 +11,7 @@
       "properties": {
         "networkProfile": {
           "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/workload-vnet/subnets/execution",
-          "egressMode": "CustomerManaged"
+          "egressMode": "ServiceManaged"
         }
       }
     }
@@ -22,7 +22,6 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
         "name": "serverless-default",
         "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
-        "location": "eastus2",
         "kind": "ServerlessContainers",
         "properties": {
           "provisioningMode": "Managed",
@@ -31,16 +30,18 @@
           },
           "networkProfile": {
             "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/workload-vnet/subnets/execution",
-            "egressMode": "CustomerManaged"
+            "egressMode": "ServiceManaged"
           },
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "state": "Ready",
+          "ownership": "Created"
         }
       }
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000005?api-version=2026-11-01-preview",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000005?api-version=2026-11-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/workloadSpaceOperationStatuses/00000000-0000-0000-0000-000000000005?api-version=2026-11-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/workloadSpaceOperationResults/00000000-0000-0000-0000-000000000005?api-version=2026-11-01-preview",
         "Retry-After": 10
       }
     }
