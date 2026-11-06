@@ -754,6 +754,12 @@
             "read",
             "create"
           ]
+        },
+        "storageGroupDepthIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The server-managed depth of the service group within its chain of StorageGroup ancestors. The top-most StorageGroup has a value of 1, and each StorageGroup child increases the value by 1. Only present on service groups of kind 'StorageGroup'.",
+          "readOnly": true
         }
       }
     },
