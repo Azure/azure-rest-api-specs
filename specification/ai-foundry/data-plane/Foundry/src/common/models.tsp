@@ -6,12 +6,12 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@doc("Reference to a Dataset whose concrete version has already been resolved.")
+@doc("Reference to a versioned Foundry Dataset.")
 model DatasetReference {
   @doc("Dataset name.")
   name: string;
 
-  @doc("Concrete Dataset version.")
+  @doc("Dataset version.")
   version: string;
 }
 
