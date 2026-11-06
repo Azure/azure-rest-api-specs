@@ -44,6 +44,18 @@ void test("classifies every version publication intent as informational", () => 
   assert.match(informationalIntentText(publication).summary, /20 existing operations/);
 });
 
+void test.for([0, 20])(
+  "does not infer historical carry-forward from target-only publication evidence (%i operations)",
+  (operationCount) => {
+    const result = informationalIntentText(publicationUnit(operationCount), false);
+    assert.include(
+      result.summary,
+      "Publishes the selected API version using target-only evidence.",
+    );
+    assert.notMatch(result.summary, /Carries|existing operations/);
+  },
+);
+
 void test("keeps mixed publication and feature facts in normal Agent coverage", () => {
   const mixed = {
     ...publicationUnit(),

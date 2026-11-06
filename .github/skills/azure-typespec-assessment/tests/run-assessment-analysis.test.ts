@@ -1207,6 +1207,104 @@ void test("mapped hunks remain blocked when deterministic analysis is blocked", 
   assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
 });
 
+void test("preview policy prevents inference without erasing other projects", () => {
+  const reason = "compatibility-skipped-no-stable-api-version";
+  const input = buildModelInputFromFixture({
+    manifest: {
+      comparison: {
+        mergeBaseCommit: "base",
+        headCommit: "head",
+        baseRef: "origin/main",
+        workingTree: {},
+      },
+      projects: [
+        {
+          id: "blocked",
+          path: "specification/blocked",
+          artifactComparison: {
+            compatibilityPolicy: { action: "skip", reason: "no-stable-api-version" },
+          },
+        },
+        { id: "available", path: "specification/available" },
+      ],
+      blockers: [],
+    },
+    sourceIndex: {
+      sourceChanges: [
+        {
+          id: "source-blocked",
+          path: "blocked.tsp",
+          hunks: [{ id: "hunk-blocked", lines: ["+@@visibility(Widget, Lifecycle.Read);"] }],
+          declarations: [],
+        },
+        {
+          id: "source-available",
+          path: "available.tsp",
+          hunks: [{ id: "hunk-available", lines: ["+op getAvailable(): Widget;"] }],
+          declarations: [],
+        },
+      ],
+    },
+    semantic: {
+      status: "ready",
+      facts: {},
+      reviewUnits: [
+        {
+          id: "semantic-blocked",
+          projectId: "blocked",
+          sourceChangeIds: ["source-blocked"],
+          hunkIds: ["hunk-blocked"],
+          declarationIds: [],
+          operations: [{ operationId: "Blocked_Get", hunkIds: ["hunk-blocked"] }],
+        },
+        {
+          id: "semantic-available",
+          projectId: "available",
+          sourceChangeIds: ["source-available"],
+          hunkIds: ["hunk-available"],
+          declarationIds: [],
+          operations: [{ operationId: "Available_Get", hunkIds: ["hunk-available"] }],
+        },
+      ],
+      blockers: [],
+    },
+    rest: {
+      status: "ready",
+      facts: {},
+      candidates: [],
+      blockers: [
+        {
+          code: reason,
+          projectId: "blocked",
+          message: "Skipped by policy: no stable API version exists for this preview-only service.",
+        },
+      ],
+    },
+    downstream: {
+      status: "ready",
+      facts: {},
+      candidates: [],
+      blockers: [
+        {
+          code: reason,
+          projectId: "blocked",
+          message: "Skipped by policy: no stable API version exists for this preview-only service.",
+        },
+      ],
+    },
+  });
+
+  const blocked = deterministicCoverage(input.semanticReviewUnits[0]);
+  const available = deterministicCoverage(input.semanticReviewUnits[1]);
+  assert.equal(blocked.classifications[0].status, "blocked");
+  assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
+  assert.notEqual(available.classifications[0].status, "blocked");
+  assert.equal(input.complianceSearchRequests.length, 2);
+  assert.ok(
+    input.inferenceRequests.every((request) => request.reviewUnitId !== "semantic-blocked"),
+  );
+});
+
 void test("model input retains facts relevant to inference hunks", () => {
   const widgetFact: AssessmentFact = {
     id: "sdk-fact-widget",

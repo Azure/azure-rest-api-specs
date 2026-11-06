@@ -1,10 +1,20 @@
 import fs from "node:fs";
 import path from "node:path";
+import { isPreviewApiVersion, previewCompatibilityPolicy } from "./compatibility-policy.ts";
+import type { ArtifactComparison } from "./runtime-types.ts";
 
 type ApiVersionSet = {
   versioned: boolean;
   versions: string[];
 };
+
+interface ApiVersionSelection extends ArtifactComparison {
+  versioningChange?: string;
+  base?: string;
+  current?: string;
+  baseReason: string;
+  currentReason: string;
+}
 
 const identifier = String.raw`[A-Za-z_]\w*`;
 const qualifiedIdentifier = String.raw`${identifier}(?:\s*\.\s*${identifier})*`;
@@ -38,6 +48,7 @@ function tspFiles(root: string): string[] {
 export function extractApiVersions(contents: string[]): ApiVersionSet {
   const versions: Set<string> = new Set();
   const versionEnums = new Set<string>();
+  const resolvedEnums = new Set<string>();
 
   for (const content of contents) {
     const source = stripComments(content);
@@ -60,12 +71,16 @@ export function extractApiVersions(contents: string[]): ApiVersionSet {
         reference.includes(".") ? reference === qualifiedName : reference === enumName,
       );
       if (!referenced) continue;
+      resolvedEnums.add(qualifiedName);
 
       const members = match[2];
       for (const member of members.matchAll(
         /\b[A-Za-z_]\w*\s*:\s*"([^"]+)"|`([^`]+)`(?:\s*:\s*"([^"]+)")?(?=\s*(?:,|$))/g,
       )) {
         versions.add(member[1] ?? member[3] ?? member[2]);
+      }
+      if (versionEnums.size && (versionEnums.size > 1 || resolvedEnums.size > 1)) {
+        throw new Error("Unable to resolve an unambiguous service API-version enum.");
       }
     }
   }
@@ -83,10 +98,6 @@ function latest(versions: string[]): string | undefined {
   return [...versions].sort(compareApiVersions).at(-1);
 }
 
-function isPreview(version: string): boolean {
-  return /preview/i.test(version);
-}
-
 export function selectApiVersionPair({
   base,
   current,
@@ -97,10 +108,11 @@ export function selectApiVersionPair({
   current: ApiVersionSet;
   baseCommit?: string;
   headCommit?: string;
-}) {
+}): ApiVersionSelection {
   if (!base.versioned && !current.versioned) {
     return {
       mode: "unversioned",
+      compatibilityPolicy: { action: "compare" },
       baseline: {
         sourceRevision: "base",
         commit: baseCommit,
@@ -128,6 +140,7 @@ export function selectApiVersionPair({
     const currentVersion = latest(current.versions);
     return {
       mode: "existing-api-version",
+      compatibilityPolicy: { action: "compare" },
       versioningChange: "unversioned-to-versioned",
       baseline: {
         sourceRevision: "base",
@@ -156,6 +169,7 @@ export function selectApiVersionPair({
     const baseVersion = latest(base.versions);
     return {
       mode: "existing-api-version",
+      compatibilityPolicy: { action: "compare" },
       versioningChange: "versioned-to-unversioned",
       baseline: {
         sourceRevision: "base",
@@ -187,7 +201,32 @@ export function selectApiVersionPair({
     addedCurrentVersions.length ? addedCurrentVersions : current.versions,
   );
   if (!currentVersion) throw new Error("Unable to select the current API version.");
-  const stableBaseVersions = base.versions.filter((version) => !isPreview(version));
+  const compatibilityPolicy = previewCompatibilityPolicy(
+    base.versions,
+    current.versions,
+    currentVersion,
+  );
+  const mode = addedCurrentVersions.length ? "new-api-version" : "existing-api-version";
+  if (compatibilityPolicy.action === "skip") {
+    return {
+      mode,
+      compatibilityPolicy,
+      baseline: { sourceRevision: "not-selected", reason: compatibilityPolicy.reason },
+      target: {
+        sourceRevision: "current",
+        commit: headCommit,
+        apiVersion: currentVersion,
+        reason: mode === "new-api-version" ? "newest-added-version" : "affected-existing-version",
+      },
+      base: undefined,
+      current: currentVersion,
+      baseReason: compatibilityPolicy.reason,
+      currentReason: addedCurrentVersions.length ? "new-version-added" : "latest-version",
+      addedCurrentVersions,
+      available: { base: base.versions, current: current.versions },
+    };
+  }
+  const stableBaseVersions = base.versions.filter((version) => !isPreviewApiVersion(version));
   const useSameVersion = !addedCurrentVersions.length && baseSet.has(currentVersion);
   const baselineVersion = useSameVersion
     ? currentVersion
@@ -198,11 +237,11 @@ export function selectApiVersionPair({
     : stableBaseVersions.length
       ? "previous-latest-stable"
       : "previous-latest-preview";
-  const mode = addedCurrentVersions.length ? "new-api-version" : "existing-api-version";
   const baselineSourceRevision =
     mode === "new-api-version" && current.versions.includes(baselineVersion) ? "current" : "base";
   return {
     mode,
+    compatibilityPolicy,
     baseline: {
       sourceRevision: baselineSourceRevision,
       commit: baselineSourceRevision === "current" ? headCommit : baseCommit,
@@ -237,7 +276,7 @@ export function resolveProjectApiVersions({
   project: string;
   baseCommit: string;
   headCommit: string;
-}) {
+}): ApiVersionSelection {
   const discover = (worktree: string) => {
     const root = path.join(worktree, project);
     return extractApiVersions(tspFiles(root).map((file) => fs.readFileSync(file, "utf8")));
@@ -258,19 +297,25 @@ export function resolveNewProjectApiVersions({
   currentWorktree: string;
   project: string;
   headCommit: string;
-}) {
+}): ApiVersionSelection {
   const root = path.join(currentWorktree, project);
   const current = extractApiVersions(tspFiles(root).map((file) => fs.readFileSync(file, "utf8")));
   if (current.versioned && !current.versions.length) {
     throw new Error("Unable to resolve API versions from the versioned TypeSpec project.");
   }
   const currentVersion = latest(current.versions);
+  const compatibilityPolicy = previewCompatibilityPolicy([], current.versions, currentVersion);
   return {
     mode: "new-project",
-    baseline: {
-      sourceRevision: "absent",
-      reason: "No pre-existing contract exists because the project is absent from the baseline.",
-    },
+    compatibilityPolicy,
+    baseline:
+      compatibilityPolicy.action === "skip"
+        ? { sourceRevision: "not-selected", reason: compatibilityPolicy.reason }
+        : {
+            sourceRevision: "absent",
+            reason:
+              "No pre-existing contract exists because the project is absent from the baseline.",
+          },
     target: {
       sourceRevision: "current",
       commit: headCommit,
@@ -279,7 +324,10 @@ export function resolveNewProjectApiVersions({
     },
     base: undefined,
     current: currentVersion,
-    baseReason: "project-absent-from-baseline",
+    baseReason:
+      compatibilityPolicy.action === "skip"
+        ? compatibilityPolicy.reason
+        : "project-absent-from-baseline",
     currentReason: current.versioned ? "latest-version" : "unversioned",
     addedCurrentVersions: current.versions,
     available: { base: [], current: current.versions },
