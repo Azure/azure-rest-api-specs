@@ -6,10 +6,12 @@ For context on this directory, see [Design guidelines for spec repos validation 
 
 ## Skill Eval Dashboard
 
-[Skill eval](pipelines/skill-eval.yml) uses the common publisher to send complete
-main-branch results to the existing eval dashboard. TypeSpec authoring benchmarks
-are not included. The shared publishing support must reach this repo through the
-normal `eng/common` sync before uploads are enabled.
+[Skill eval](pipelines/skill-eval.yml) reuses the common build, shard and summary
+jobs to send complete main-branch results to the existing eval dashboard. Its
+Azure Storage network policy is declared only in that entrypoint; the shared
+1ES redirect does not configure storage access for other pipelines. TypeSpec
+authoring benchmarks are not included. Shared publishing changes reach this repo
+through the normal `eng/common` sync.
 
 Before enabling publication, the pipeline owner must authorize the publisher's
 service connection and set `EvalStorageAccountName` with queue-time override
