@@ -28,6 +28,12 @@ type PreparationProject = import("./runtime-types.ts").PreparationProject;
 
 type SourceIndex = import("./runtime-types.ts").SourceIndex;
 
+export const WORKSPACE_SUPPORT_ROOTS = ["eng/typespec-rulesets"] as const;
+
+export function workspaceSparseRoots(analysisRoots: string[]): string[] {
+  return [...new Set([...analysisRoots, ...WORKSPACE_SUPPORT_ROOTS])].sort();
+}
+
 function stableProjectId(project: string) {
   return `project-${crypto.createHash("sha256").update(project).digest("hex").slice(0, 12)}`;
 }
@@ -299,6 +305,7 @@ export async function prepareAssessment({
     typeof rawSparseRoots === "string" ? [rawSparseRoots] : rawSparseRoots,
     scope,
   );
+  const checkoutRoots = workspaceSparseRoots(sparseRoots);
   const changeDiscoveryStarted = performance.now();
   const changedFiles = collectChanges(repository, comparison.mergeBaseCommit, sparseRoots, {
     headRef: comparison.headCommit,
@@ -324,7 +331,13 @@ export async function prepareAssessment({
         untracked: changedFiles.some((file) => file.origins.includes("untracked")),
       },
     },
-    sparseCheckout: { mode: "cone", roots: sparseRoots, verified: false },
+    sparseCheckout: {
+      mode: "cone",
+      roots: sparseRoots,
+      supportRoots: [...WORKSPACE_SUPPORT_ROOTS],
+      workspaceRoots: checkoutRoots,
+      verified: false,
+    },
     changedFiles,
     projects: [],
     blockers,
@@ -363,8 +376,8 @@ export async function prepareAssessment({
   const currentWorktree = path.join(work, "worktrees", "current");
   const workspaceStarted = performance.now();
   try {
-    createSparseWorktree(repository, comparison.mergeBaseCommit, sparseRoots, baseWorktree);
-    createSparseWorktree(repository, comparison.headCommit, sparseRoots, currentWorktree);
+    createSparseWorktree(repository, comparison.mergeBaseCommit, checkoutRoots, baseWorktree);
+    createSparseWorktree(repository, comparison.headCommit, checkoutRoots, currentWorktree);
     manifest.sparseCheckout.verified = true;
     if (includeWorkingTree) {
       copyOverlay(repository, currentWorktree, analysisFiles);

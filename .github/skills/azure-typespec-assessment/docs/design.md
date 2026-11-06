@@ -328,7 +328,9 @@ Preparation rules:
 2. Capture committed, staged, unstaged, and relevant untracked TypeSpec files.
 3. Discover affected `tspconfig.yaml` project roots.
 4. Create detached service-scoped sparse base/current worktrees for source
-   analysis. Artifact roles may both use the current worktree.
+   analysis, including the revision-local `eng/typespec-rulesets` workspace
+   package as a checkout-only support root. Artifact roles may both use the
+   current worktree.
 5. Apply dirty overlays only to the temporary current worktree.
 6. Detect and prepare the locked npm or pnpm toolchain for each worktree.
 7. Select one source revision and API version for each artifact-comparison
