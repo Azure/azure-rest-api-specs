@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "ObservabilityAgentIdentityAccess"
+      "name": "Locations"
     }
   ],
   "paths": {
@@ -85,9 +85,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/locations/{location}/validateObservabilityAgentIdentityAccess": {
       "post": {
-        "operationId": "ObservabilityAgentIdentityAccess_ValidateAtSubscription",
+        "operationId": "Locations_ValidateObservabilityAgentIdentityAccessAtSubscription",
         "tags": [
-          "ObservabilityAgentIdentityAccess"
+          "Locations"
         ],
         "description": "Inspects whether a user-assigned managed identity has the Monitoring Contributor role\nat each target subscription or an applicable inherited scope, using the caller's delegated\nauthorization. Use this route before the agent's resource group exists; the caller needs\nMicrosoft.Monitor/observabilityAgents/read at the subscription or an ancestor.\nThe location selects regional routing and is not a role-assignment target.\nReturns HTTP 200 for present, missing, and unverifiable role outcomes. This advisory action\nneither creates an agent nor enforces creation, and does not evaluate effective permissions.",
         "parameters": [
@@ -117,17 +117,10 @@
               "$ref": "#/definitions/ObservabilityAgentIdentityAccessResult"
             }
           },
-          "400": {
-            "description": "The request body or one of its resource IDs is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ObservabilityAgentIdentityAccessError"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObservabilityAgentIdentityAccessError"
             }
           }
         },
@@ -143,9 +136,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/locations/{location}/validateObservabilityAgentIdentityAccess": {
       "post": {
-        "operationId": "ObservabilityAgentIdentityAccess_ValidateAtResourceGroup",
+        "operationId": "Locations_ValidateObservabilityAgentIdentityAccessAtResourceGroup",
         "tags": [
-          "ObservabilityAgentIdentityAccess"
+          "Locations"
         ],
         "description": "Inspects whether a user-assigned managed identity has the Monitoring Contributor role\nat each target subscription or an applicable inherited scope, using the caller's delegated\nauthorization. Use this route when the agent's resource group already exists; the caller\nneeds Microsoft.Monitor/observabilityAgents/read at that resource group or an ancestor.\nThe location selects regional routing and is not a role-assignment target.\nReturns HTTP 200 for present, missing, and unverifiable role outcomes. This advisory action\nneither creates an agent nor enforces creation, and does not evaluate effective permissions.",
         "parameters": [
@@ -178,17 +171,10 @@
               "$ref": "#/definitions/ObservabilityAgentIdentityAccessResult"
             }
           },
-          "400": {
-            "description": "The request body or one of its resource IDs is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ObservabilityAgentIdentityAccessError"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObservabilityAgentIdentityAccessError"
             }
           }
         },
@@ -253,23 +239,23 @@
     },
     "ObservabilityAgentIdentityAccessError": {
       "type": "object",
-      "description": "The resource provider's flat invalid-request error body. It does not contain an error envelope.",
+      "description": "An error from the resource provider or ARM gateway. Invalid input returns HTTP 400\nwith top-level code and message and no error envelope. ARM gateway failures use\nthe common ARM error object and omit the top-level code and message.\nThe properties are optional in this shared schema because neither shape contains\nthe other's fields; this does not change either component's error format.",
       "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The error object."
+        },
         "code": {
           "type": "string",
-          "description": "The service error code. Invalid preflight input returns InvalidIdentityPreflightRequest.",
+          "description": "Present with message for invalid preflight input; the code is InvalidIdentityPreflightRequest.",
           "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "A description of the invalid input.",
+          "description": "Present with code for invalid preflight input; describes the invalid input.",
           "readOnly": true
         }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
+      }
     },
     "ObservabilityAgentIdentityAccessReason": {
       "type": "string",

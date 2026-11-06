@@ -1,6 +1,6 @@
 {
   "title": "Check the identity before creating a resource group",
-  "operationId": "ObservabilityAgentIdentityAccess_ValidateAtSubscription",
+  "operationId": "Locations_ValidateObservabilityAgentIdentityAccessAtSubscription",
   "parameters": {
     "api-version": "2026-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000001",
@@ -10,10 +10,12 @@
     }
   },
   "responses": {
-    "400": {
+    "default": {
       "body": {
-        "code": "InvalidIdentityPreflightRequest",
-        "message": "The request body must be a valid identity preflight object."
+        "error": {
+          "code": "AuthorizationFailed",
+          "message": "The caller is not authorized to invoke this action at the subscription scope."
+        }
       }
     },
     "200": {

@@ -7,12 +7,14 @@ import "./models.tsp";
 import "./operations.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 /** Advisory identity role inspection for Azure Monitor observability agents. */
 @armProviderNamespace("Microsoft.Monitor")
 @service(#{ title: "Azure Monitor Observability Agent Identity Access" })
 @versioned(Versions)
+@useAuth(azure_auth)
 namespace Microsoft.Monitor;
 
 /** Supported identity preflight API versions. */
@@ -24,3 +26,15 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+/** Azure Active Directory OAuth2 Flow. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This authentication scheme name must remain azure_auth to satisfy ARM SecurityDefinitionsStructure; it is not an SDK payload model."
+model azure_auth
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "authorizationUrl is a TypeSpec HTTP OAuth2 configuration field, not an SDK property; renaming it would invalidate authentication metadata."
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      scopes: ["https://management.azure.com/.default"];
+    }
+  ]>;

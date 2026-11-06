@@ -8,7 +8,7 @@ namespace Microsoft.Monitor;
 /** Advisory identity role inspection before creating an observability agent. */
 @autoRoute
 @armResourceOperations
-interface ObservabilityAgentIdentityAccess {
+interface Locations {
   /**
    * Inspects whether a user-assigned managed identity has the Monitoring Contributor role
    * at each target subscription or an applicable inherited scope, using the caller's delegated
@@ -19,12 +19,12 @@ interface ObservabilityAgentIdentityAccess {
    * neither creates an agent nor enforces creation, and does not evaluate effective permissions.
    */
   @action("validateObservabilityAgentIdentityAccess")
-  validateAtResourceGroup is ArmProviderActionSync<
+  validateObservabilityAgentIdentityAccessAtResourceGroup is ArmProviderActionSync<
     ObservabilityAgentIdentityAccessContent,
     ArmResponse<ObservabilityAgentIdentityAccessResult>,
     {},
     LocationResourceParameter,
-    ErrorResponse | ObservabilityAgentIdentityAccessInvalidInput
+    ObservabilityAgentIdentityAccessError
   >;
 
   /**
@@ -37,11 +37,11 @@ interface ObservabilityAgentIdentityAccess {
    * neither creates an agent nor enforces creation, and does not evaluate effective permissions.
    */
   @action("validateObservabilityAgentIdentityAccess")
-  validateAtSubscription is ArmProviderActionSync<
+  validateObservabilityAgentIdentityAccessAtSubscription is ArmProviderActionSync<
     ObservabilityAgentIdentityAccessContent,
     ArmResponse<ObservabilityAgentIdentityAccessResult>,
     SubscriptionActionScope,
     LocationResourceParameter,
-    ErrorResponse | ObservabilityAgentIdentityAccessInvalidInput
+    ObservabilityAgentIdentityAccessError
   >;
 }

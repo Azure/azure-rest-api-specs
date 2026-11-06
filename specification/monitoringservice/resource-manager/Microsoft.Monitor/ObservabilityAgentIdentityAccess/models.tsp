@@ -164,25 +164,21 @@ model ObservabilityAgentIdentityAccessResult {
 }
 
 /**
- * The resource provider's flat invalid-request error body. It does not contain an error envelope.
+ * An error from the resource provider or ARM gateway. Invalid input returns HTTP 400
+ * with top-level code and message and no error envelope. ARM gateway failures use
+ * the common ARM error object and omit the top-level code and message.
+ * The properties are optional in this shared schema because neither shape contains
+ * the other's fields; this does not change either component's error format.
  */
 @error
 model ObservabilityAgentIdentityAccessError {
-  /** The service error code. Invalid preflight input returns InvalidIdentityPreflightRequest. */
+  ...ErrorResponse;
+
+  /** Present with message for invalid preflight input; the code is InvalidIdentityPreflightRequest. */
   @visibility(Lifecycle.Read)
-  code: string;
+  code?: string;
 
-  /** A description of the invalid input. */
+  /** Present with code for invalid preflight input; describes the invalid input. */
   @visibility(Lifecycle.Read)
-  message: string;
-}
-
-/** The request body or one of its resource IDs is invalid. */
-@error
-model ObservabilityAgentIdentityAccessInvalidInput {
-  /** HTTP status for invalid input. */
-  @statusCode statusCode: 400;
-
-  /** The existing resource provider error body. */
-  @body body: ObservabilityAgentIdentityAccessError;
+  message?: string;
 }

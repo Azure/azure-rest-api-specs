@@ -37,6 +37,12 @@ when it has not yet been created. Neither route requires an agent name.
 The manifest maps the action to `Microsoft.Monitor/observabilityAgents/read`;
 the caller needs that permission at the selected scope or an ancestor.
 
+The service declares OAuth2 authentication explicitly. Its authentication-only
+`azure_auth` model retains the scheme name required by ARM's
+`SecurityDefinitionsStructure` rule. Two narrowly scoped style suppressions
+preserve that required name and the TypeSpec HTTP `authorizationUrl`
+configuration field; neither represents a serialized SDK payload property.
+
 The request always includes `userAssignedIdentityResourceId`. The optional
 `monitoringAccountId` and `monitoredResourceIds` add target subscriptions;
 the latter accepts at most 10 entries. The route subscription is always checked.
@@ -71,10 +77,14 @@ agent, grant roles, or enforce agent creation.
 
 ## Errors and compatibility
 
-Each action example includes success and invalid-body response shapes for
-validation coverage. The 400 response illustrates a malformed request body, not
-the expected result for the valid request shown in that example. Examples use
-canonical resource IDs; the service also accepts and trims a trailing slash.
+Each action example includes success and default-error response shapes for
+validation coverage. Flat default errors illustrate HTTP 400 for malformed
+input, not the expected result for the valid request shown in that example.
+The subscription-scope present example instead illustrates a wrapped ARM
+authorization error for a caller without invocation permission. These errors
+use the `default` example key to match the OpenAPI response declaration; this
+key is not a literal HTTP status code. Examples use canonical resource IDs;
+the service also accepts and trims a trailing slash.
 
 Both `2026-05-01-preview` and `2026-08-01-preview` expose the same preflight
 contract, matching the service routes and resource-type registration. The August
@@ -86,8 +96,13 @@ not a request to silently revise an approved public contract.
 
 Invalid input returns HTTP 400 with the resource provider's existing flat
 `code` and `message` body; `code` is `InvalidIdentityPreflightRequest`.
-The explicit 400 schema represents that behavior rather than claiming an ARM
-`error` envelope. ARM gateway failures use the standard default error response.
+Both actions declare only `200` and `default`, as required by ARM OpenAPI rules.
+The default error model composes the common ARM `ErrorResponse` with optional
+top-level `code` and `message`. Invalid-input responses include both top-level
+fields and omit `error`; ARM gateway failures use the common `error` envelope
+and omit the top-level fields. The shared schema leaves these fields optional
+because they belong to different error shapes, not because a new empty or
+combined error response is being introduced.
 Approval of the flat service error format is required from ARM reviewers; this
 specification does not assert that an exception has been approved.
 
