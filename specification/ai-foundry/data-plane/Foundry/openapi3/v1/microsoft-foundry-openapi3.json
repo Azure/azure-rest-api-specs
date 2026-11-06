@@ -2478,7 +2478,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
@@ -10139,7 +10138,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
@@ -11158,7 +11156,7 @@
       "get": {
         "operationId": "DataGenerationJobs_list",
         "summary": "List data generation jobs",
-        "description": "Returns a list of data generation jobs.",
+        "description": "Returns a list of data generation jobs.\nEach trace job includes its effective settings. Conversation jobs preserve\n`type: conversations`. Listing existing jobs does not require preview opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -11290,7 +11288,7 @@
       "post": {
         "operationId": "DataGenerationJobs_create",
         "summary": "Create a data generation job",
-        "description": "Submits a new data generation job for asynchronous execution.",
+        "description": "Submits a new data generation job for asynchronous execution.\nRequests with `type` set to `conversations`, or `traces` with\n`generate_test_case_rubric` set to true, require\n`Foundry-Features: DataGenerationJobs=V1Preview`; the service rejects\nthese requests without this opt-in. Ordinary turn-level trace requests\nwithout rubric generation do not require the header.\nConversation samples require `scenario` to be `evaluation`.\nJobs with `type: conversations` reconstruct existing traced conversations,\nuse sources of type `traces`, and do not support `sample_level`.\nThe `generate_test_case_rubric` flag is supported for both trace and\nconversation jobs and requires a nonempty `model_options.model` when true.\nThe conversation-only `generate_test_case_description` flag also requires\na nonempty `model_options.model` when true. For conversation jobs, model\noptions must be omitted when neither flag is enabled.\nCreate, get, and list responses preserve `type: conversations`.\nThe response includes the effective generation settings.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -11392,7 +11390,7 @@
       "get": {
         "operationId": "DataGenerationJobs_get",
         "summary": "Get a data generation job",
-        "description": "Retrieves the specified data generation job and its current status.",
+        "description": "Retrieves the specified data generation job and its current status.\nReturns effective generation settings and preserves `type: conversations` for\nconversation jobs. Reading an existing job does not require preview opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12386,7 +12384,7 @@
       "get": {
         "operationId": "EvaluationRules_list",
         "summary": "List evaluation rules",
-        "description": "Returns the evaluation rules configured for the project, optionally filtered by action type, agent name, or enabled state.",
+        "description": "Returns the evaluation rules configured for the project, including scheduled trace and dataset evaluations, optionally filtered by action type, agent name, or enabled state.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -12395,7 +12393,7 @@
             "name": "actionType",
             "in": "query",
             "required": false,
-            "description": "Filter by the type of evaluation rule.",
+            "description": "Filter by action type. When omitted, rules of all action types are returned.",
             "schema": {
               "$ref": "#/components/schemas/EvaluationRuleActionType"
             },
@@ -40964,6 +40962,31 @@
         ],
         "description": "A data source that selects traces for evaluation.\n\nSee [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python)."
       },
+      "AzureAITraceDataSourcePreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_trace_data_source_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_trace_data_source_preview`."
+          },
+          "trace_source": {
+            "$ref": "#/components/schemas/TraceSource",
+            "description": "The trace source that defines how traces are selected for evaluation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Preview form of `azure_ai_trace_data_source`. Returned only for rules backed by existing preview schedules; rejected on create and update."
+      },
       "AzureContentFilterBlocklistIdResult": {
         "type": "object",
         "required": [
@@ -42999,6 +43022,50 @@
         ],
         "description": "A trace source that selects traces by conversation IDs."
       },
+      "ConversationsDataGenerationJobConfiguration": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversations"
+            ],
+            "description": "The data generation job type, which is Conversations for this model."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of whole conversations to generate, up to service-defined limits. If omitted, sampling is turned off."
+          },
+          "redact_private_content": {
+            "type": "boolean",
+            "description": "Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.",
+            "default": true
+          },
+          "generate_test_case_description": {
+            "type": "boolean",
+            "description": "Whether to generate an AI-authored test-case description for each reconstructed conversation. This is a preview feature. If omitted, the service defaults to `false`. When true, requires a nonempty `model_options.model`. Model options must be omitted when neither description nor rubric generation is enabled.",
+            "default": false
+          },
+          "generate_test_case_rubric": {
+            "type": "boolean",
+            "description": "Whether to generate test-case rubric dimensions for each reconstructed conversation. This is a preview feature. When true, requires a nonempty `model_options.model`. Model options must be omitted when neither description nor rubric generation is enabled."
+          },
+          "model_options": {
+            "$ref": "#/components/schemas/DataGenerationModelOptions",
+            "description": "The model used to generate test-case descriptions or rubric dimensions. Required with a nonempty `model` when `generate_test_case_description` or `generate_test_case_rubric` is true; must be omitted otherwise."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobConfiguration"
+          }
+        ],
+        "description": "The configuration for reconstructing existing traced conversations for evaluation, not synthetic conversation simulation. This preview requires `scenario` to be `evaluation`, sources of type `traces`, and the `Foundry-Features: DataGenerationJobs=V1Preview` request header. Conversation-level sampling is implicit; `sample_level` is not supported. Existing trace selection, annotations, and output dataset row schemas are unchanged. Create, get, and list responses preserve `type: conversations`. The service enforces the scenario, source, and conditional model-options requirements. Conversation-level output rows contain `test_case_id`, `messages`, `tool_definitions`, and `metadata`. A successful optional description adds `test_case_description`. If description generation fails, the row is retained with safe row-level status and error metadata, without raw provider or model error bodies."
+      },
       "CosmosDBIndex": {
         "type": "object",
         "required": [
@@ -43134,7 +43201,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "WorkflowAgents=V1Preview",
-                "ExternalAgents=V1Preview",
                 "VoiceAgents=V1Preview",
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
@@ -43179,7 +43245,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
@@ -43308,7 +43373,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "WorkflowAgents=V1Preview",
-                "ExternalAgents=V1Preview",
                 "VoiceAgents=V1Preview",
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
@@ -43541,7 +43605,7 @@
           },
           "expression": {
             "type": "string",
-            "description": "Cron expression that defines the schedule frequency."
+            "description": "Five-field cron expression that defines the schedule frequency: minute hour day-of-month month day-of-week."
           },
           "timeZone": {
             "type": "string",
@@ -43562,12 +43626,7 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "Cron based trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Cron based trigger."
       },
       "CustomCredential": {
         "type": "object",
@@ -43640,8 +43699,7 @@
       "DailyRecurrenceSchedule": {
         "type": "object",
         "required": [
-          "type",
-          "hours"
+          "type"
         ],
         "properties": {
           "type": {
@@ -43657,7 +43715,7 @@
               "type": "integer",
               "format": "int32"
             },
-            "description": "Hours for the recurrence schedule."
+            "description": "Hours for the recurrence schedule. If omitted, the service uses the current UTC hour when the schedule is created."
           }
         },
         "allOf": [
@@ -43665,12 +43723,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Daily recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Daily recurrence schedule."
       },
       "DataGenerationJob": {
         "type": "object",
@@ -43717,7 +43770,7 @@
           },
           "generation_configuration": {
             "$ref": "#/components/schemas/DataGenerationJobConfiguration",
-            "description": "The generation configuration for the data generation job."
+            "description": "The effective generation configuration for the data generation job."
           },
           "scenario": {
             "$ref": "#/components/schemas/DataGenerationJobScenario",
@@ -43771,6 +43824,7 @@
           "mapping": {
             "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobConfiguration",
             "traces": "#/components/schemas/TracesDataGenerationJobConfiguration",
+            "conversations": "#/components/schemas/ConversationsDataGenerationJobConfiguration",
             "simulation_seed": "#/components/schemas/SimulationSeedDataGenerationJobConfiguration",
             "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobConfiguration"
           }
@@ -43887,6 +43941,13 @@
           "token_usage": {
             "$ref": "#/components/schemas/DataGenerationTokenUsage",
             "description": "The token usage information for the data generation job."
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationWarning"
+            },
+            "description": "Nonfatal warnings associated with otherwise usable output. `test_case_description_generation_incomplete` indicates that conversation rows were produced but one or more optional descriptions failed. Warning messages do not expose raw provider or model error bodies."
           }
         },
         "description": "Result produced by a successful data generation job."
@@ -43961,7 +44022,8 @@
               "simple_qna",
               "traces",
               "tool_use",
-              "simulation_seed"
+              "simulation_seed",
+              "conversations"
             ]
           }
         ],
@@ -43975,7 +44037,7 @@
         "properties": {
           "model": {
             "type": "string",
-            "description": "Base model name used to generate data."
+            "description": "Base model name used to generate data. For trace and conversation jobs, a nonempty value is required when `generate_test_case_rubric` is true. Conversation jobs also require a nonempty value when `generate_test_case_description` is true. Model options must be omitted for conversation reconstruction when neither description nor rubric generation is enabled."
           }
         },
         "description": "LLM model options for data generation jobs."
@@ -44008,6 +44070,37 @@
           }
         },
         "description": "Token usage information for a data generation job."
+      },
+      "DataGenerationWarning": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/DataGenerationWarningCode",
+            "description": "The warning code."
+          },
+          "message": {
+            "type": "string",
+            "description": "A safe, human-readable warning message that does not include raw provider or model error bodies."
+          }
+        },
+        "description": "A nonfatal warning associated with data generation output."
+      },
+      "DataGenerationWarningCode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "test_case_description_generation_incomplete"
+            ]
+          }
+        ],
+        "description": "Known warning codes for data generation jobs. Additional codes may be returned."
       },
       "DataSourceConfig": {
         "type": "object",
@@ -44082,6 +44175,63 @@
           }
         ],
         "description": "Dataset output for a data generation job."
+      },
+      "DatasetEvaluationRuleAction": {
+        "type": "object",
+        "required": [
+          "type",
+          "evalId",
+          "source"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "datasetEvaluation"
+            ]
+          },
+          "evalId": {
+            "type": "string",
+            "description": "Identifier of the evaluation used to score the dataset."
+          },
+          "source": {
+            "$ref": "#/components/schemas/DatasetEvaluationSource",
+            "description": "Dataset inputs for each scheduled occurrence. Preview source types may appear in responses for existing schedules but are rejected on create and update."
+          },
+          "evaluation_level": {
+            "$ref": "#/components/schemas/EvaluationLevel",
+            "description": "Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationRuleAction"
+          }
+        ],
+        "description": "Configures a scheduled evaluation of dataset inputs."
+      },
+      "DatasetEvaluationSource": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalJsonlRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/EvalCsvRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/TargetCompletionEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/UserConversationSimulationEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/UserConversationSimulationPreviewEvalRunDataSource"
+          }
+        ],
+        "description": "Dataset inputs supported by scheduled rules. Targets are configured within the selected source."
       },
       "DatasetEvaluationSuiteJobSource": {
         "type": "object",
@@ -44319,12 +44469,7 @@
             ]
           }
         ],
-        "description": "Days of the week for recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Days of the week for recurrence schedule."
       },
       "DefinitionUpdatedDiagnosticChange": {
         "type": "object",
@@ -45448,7 +45593,6 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "azure_ai_traces": "#/components/schemas/TracesEvalRunDataSource",
             "azure_ai_synthetic_data_gen": "#/components/schemas/SyntheticDataGenerationEvalRunDataSource",
             "azure_ai_synthetic_data_generation_with_simulation": "#/components/schemas/SyntheticDataGenerationWithSimulationEvalRunDataSource",
             "azure_ai_responses": "#/components/schemas/AzureAIResponsesEvalRunDataSource",
@@ -45457,7 +45601,11 @@
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource",
             "azure_ai_trace_data_source": "#/components/schemas/AzureAITraceDataSourceEvalRunDataSource",
             "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource",
-            "azure_ai_user_conversation_simulation": "#/components/schemas/UserConversationSimulationEvalRunDataSource"
+            "azure_ai_user_conversation_simulation": "#/components/schemas/UserConversationSimulationEvalRunDataSource",
+            "azure_ai_traces_preview": "#/components/schemas/TracesPreviewEvalRunDataSource",
+            "azure_ai_trace_data_source_preview": "#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource",
+            "azure_ai_user_conversation_simulation_preview": "#/components/schemas/UserConversationSimulationPreviewEvalRunDataSource",
+            "azure_ai_traces": "#/components/schemas/TracesEvalRunDataSource"
           }
         },
         "description": "Base class for run data sources with discriminator support."
@@ -46045,7 +46193,7 @@
           },
           "write_mode": {
             "$ref": "#/components/schemas/DataGenerationJobOutputWriteMode",
-            "description": "Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.",
+            "description": "Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows. `merge` combines newly generated rows with the latest existing dataset version and de-duplicates trace rows. For conversation jobs, a newly generated conversation snapshot replaces the existing snapshot of the same conversation wholesale. The replacement snapshot may omit earlier turns outside the selected time window. Existing conversations without a newly generated replacement remain unchanged. Merging replaces whole conversation snapshots rather than unioning individual turns, so it does not retain every previous turn from the replaced snapshot.",
             "default": "overwrite"
           }
         },
@@ -46261,6 +46409,20 @@
             "$ref": "#/components/schemas/EvaluationRuleEventType",
             "description": "Event type that the evaluation rule applies to."
           },
+          "schedule": {
+            "$ref": "#/components/schemas/Trigger",
+            "description": "Timing for timerTrigger rules. Required for timerTrigger and not allowed for other event types."
+          },
+          "provisioningStatus": {
+            "$ref": "#/components/schemas/ScheduleProvisioningStatus",
+            "description": "Provisioning state of the rule's schedule. Returned for timerTrigger rules only.",
+            "readOnly": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/Azure.Core.Foundations.Error",
+            "description": "Error that caused the rule to be disabled, if any.",
+            "readOnly": true
+          },
           "enabled": {
             "type": "boolean",
             "description": "Indicates whether the evaluation rule is enabled. Default is true."
@@ -46291,6 +46453,8 @@
           "propertyName": "type",
           "mapping": {
             "continuousEvaluation": "#/components/schemas/ContinuousEvaluationRuleAction",
+            "traceEvaluation": "#/components/schemas/TraceEvaluationRuleAction",
+            "datasetEvaluation": "#/components/schemas/DatasetEvaluationRuleAction",
             "humanEvaluationPreview": "#/components/schemas/HumanEvaluationPreviewRuleAction"
           }
         },
@@ -46305,7 +46469,9 @@
             "type": "string",
             "enum": [
               "continuousEvaluation",
-              "humanEvaluationPreview"
+              "humanEvaluationPreview",
+              "traceEvaluation",
+              "datasetEvaluation"
             ]
           }
         ],
@@ -46320,7 +46486,8 @@
             "type": "string",
             "enum": [
               "responseCompleted",
-              "manual"
+              "manual",
+              "timerTrigger"
             ]
           }
         ],
@@ -48112,12 +48279,7 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).\nRegistration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)\nover customer-emitted OpenTelemetry data.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ExternalAgents=V1Preview"
-          ]
-        }
+        "description": "The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).\nRegistration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)\nover customer-emitted OpenTelemetry data."
       },
       "FabricDataAgentToolCall": {
         "type": "object",
@@ -49292,12 +49454,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Hourly recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Hourly recurrence schedule."
       },
       "HumanEvaluationPreviewRuleAction": {
         "type": "object",
@@ -52176,12 +52333,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Monthly recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Monthly recurrence schedule."
       },
       "NoAuthenticationCredentials": {
         "type": "object",
@@ -52267,12 +52419,7 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "One-time trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "One-time trigger."
       },
       "OpenAI.AccessProgramsBody": {
         "type": "object",
@@ -63906,7 +64053,7 @@
                 "type": "string"
               },
               {
-                "$ref": "#/components/schemas/OpenAI.InputMessageContentList"
+                "$ref": "#/components/schemas/OpenAI.InputMessageContentListItem"
               }
             ],
             "description": "Text, image, or audio input to the model, used to generate a response.\n  Can also contain previous assistant responses."
@@ -68364,7 +68511,6 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "message": "#/components/schemas/OpenAI.EasyInputMessage",
             "item_reference": "#/components/schemas/OpenAI.ItemReferenceParam",
             "output_message": "#/components/schemas/OpenAI.InputItemOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.InputItemFileSearchToolCall",
@@ -68392,7 +68538,8 @@
             "mcp_approval_response": "#/components/schemas/OpenAI.InputItemMcpApprovalResponse",
             "mcp_call": "#/components/schemas/OpenAI.InputItemMcpToolCall",
             "custom_tool_call_output": "#/components/schemas/OpenAI.InputItemCustomToolCallOutput",
-            "custom_tool_call": "#/components/schemas/OpenAI.InputItemCustomToolCall"
+            "custom_tool_call": "#/components/schemas/OpenAI.InputItemCustomToolCall",
+            "message": "#/components/schemas/OpenAI.EasyInputMessage"
           }
         },
         "description": "An item representing part of the context for the response to be\ngenerated by the model. Can contain text, images, and audio inputs,\nas well as previous assistant responses and tool call outputs."
@@ -70152,6 +70299,14 @@
         "title": "Web search tool call"
       },
       "OpenAI.InputMessageContentList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OpenAI.InputContent"
+        },
+        "description": "A list of one or many input items to the model, containing different content\ntypes.",
+        "title": "Input item content list"
+      },
+      "OpenAI.InputMessageContentListItem": {
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/OpenAI.InputContent"
@@ -101143,12 +101298,7 @@
             "Monthly": "#/components/schemas/MonthlyRecurrenceSchedule"
           }
         },
-        "description": "Recurrence schedule model.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Recurrence schedule model."
       },
       "RecurrenceTrigger": {
         "type": "object",
@@ -101193,12 +101343,7 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "Recurrence based trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Recurrence based trigger."
       },
       "RecurrenceType": {
         "anyOf": [
@@ -101215,12 +101360,7 @@
             ]
           }
         ],
-        "description": "Recurrence type.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Recurrence type."
       },
       "RedTeam": {
         "type": "object",
@@ -102497,12 +102637,7 @@
             ]
           }
         ],
-        "description": "Schedule provisioning status.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Schedule provisioning status."
       },
       "ScheduleRoutineTrigger": {
         "type": "object",
@@ -108048,6 +108183,57 @@
         },
         "description": "The versions associated with a toolbox."
       },
+      "TraceEvaluationRuleAction": {
+        "type": "object",
+        "required": [
+          "type",
+          "evalId",
+          "source"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "traceEvaluation"
+            ]
+          },
+          "evalId": {
+            "type": "string",
+            "description": "Identifier of the evaluation used to score the selected traces."
+          },
+          "source": {
+            "$ref": "#/components/schemas/TraceEvaluationSource",
+            "description": "Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved.\n\nFor `azure_ai_traces`, set exactly one of `agent_id` or `agent_name`; `trace_ids` is not supported.\nFor `azure_ai_trace_data_source`, set `trace_source`.\nPreview source types may appear in responses for existing schedules but are rejected on create and update."
+          },
+          "evaluation_level": {
+            "$ref": "#/components/schemas/EvaluationLevel",
+            "description": "Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationRuleAction"
+          }
+        ],
+        "description": "Configures a scheduled evaluation of observed agent traces."
+      },
+      "TraceEvaluationSource": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/TracesEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/AzureAITraceDataSourceEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/TracesPreviewEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource"
+          }
+        ],
+        "description": "Existing trace-evaluation inputs supported by scheduled rules."
+      },
       "TraceIdTraceSource": {
         "type": "object",
         "required": [
@@ -108136,6 +108322,10 @@
             "type": "boolean",
             "description": "Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.",
             "default": true
+          },
+          "generate_test_case_rubric": {
+            "type": "boolean",
+            "description": "Whether to generate test-case rubric dimensions for each captured turn sample. This is a preview feature requiring the `Foundry-Features: DataGenerationJobs=V1Preview` request header. When true, requires a nonempty `model_options.model`."
           }
         },
         "allOf": [
@@ -108408,6 +108598,71 @@
         },
         "description": "Traces source — conversation traces from Application Insights. Reusable shape spread into per-context discriminated subtypes."
       },
+      "TracesPreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_traces_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_traces_preview`."
+          },
+          "trace_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of Agent trace identifiers that should be evaluated."
+          },
+          "conversation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of conversation identifiers to filter traces by conversation."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The agent ID used to filter traces for evaluation."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name used to filter traces for evaluation."
+          },
+          "lookback_hours": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Lookback window (in hours) applied when retrieving traces from Application Insights.\n    For scheduled evaluations this is inferred from the recurrence interval.",
+            "default": 168
+          },
+          "end_time": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Unix timestamp (in seconds) marking the end of the trace query window. Defaults to the current time."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Sampling limit applied to traces retrieved for evaluation.",
+            "default": 1000
+          },
+          "ingestion_delay_seconds": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The delay to apply for ingestion when querying traces.",
+            "default": 300
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Preview form of `azure_ai_traces`. Returned only for rules backed by existing preview schedules; rejected on create and update."
+      },
       "TreatmentEffectType": {
         "anyOf": [
           {
@@ -108450,12 +108705,7 @@
             "OneTime": "#/components/schemas/OneTimeTrigger"
           }
         },
-        "description": "Base model for Trigger of the schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Base model for Trigger of the schedule."
       },
       "TriggerType": {
         "anyOf": [
@@ -108471,12 +108721,7 @@
             ]
           }
         ],
-        "description": "Type of the trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Type of the trigger."
       },
       "TwilioTelephonyBinding": {
         "type": "object",
@@ -108588,7 +108833,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "WorkflowAgents=V1Preview",
-                "ExternalAgents=V1Preview",
                 "VoiceAgents=V1Preview",
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
@@ -108606,7 +108850,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
@@ -108947,6 +109190,53 @@
           }
         },
         "description": "Configuration for simulated user interruption behavior."
+      },
+      "UserConversationSimulationPreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "source",
+          "target",
+          "model_configuration"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_user_conversation_simulation_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_user_conversation_simulation_preview`."
+          },
+          "source": {
+            "$ref": "#/components/schemas/UserConversationSimulationSource",
+            "description": "Test scenarios supplied as JSONL rows or strongly typed inline test cases."
+          },
+          "target": {
+            "$ref": "#/components/schemas/FoundryEvaluationTarget",
+            "description": "Model or agent being evaluated. It receives turns from the simulated user."
+          },
+          "model_configuration": {
+            "$ref": "#/components/schemas/EvaluationModelConfiguration",
+            "description": "Model used to simulate the user side of each conversation by generating turns sent to the evaluated `target`."
+          },
+          "default_simulation_configuration": {
+            "$ref": "#/components/schemas/UserConversationSimulationDefaultConfiguration",
+            "description": "Default configuration for generating simulated user conversations and persisting their output. Conversation properties in a test case's `simulation_configuration` override the corresponding defaults."
+          },
+          "data_mapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Preview form of `azure_ai_user_conversation_simulation`. Returned only for rules backed by existing preview schedules; rejected on create and update."
       },
       "UserConversationSimulationSource": {
         "anyOf": [
@@ -116158,12 +116448,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Weekly recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Weekly recurrence schedule."
       },
       "WorkIQPreviewTool": {
         "type": "object",
