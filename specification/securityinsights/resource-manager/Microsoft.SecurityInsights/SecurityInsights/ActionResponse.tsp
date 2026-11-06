@@ -47,6 +47,7 @@ interface ActionResponses {
    */
   // Customized resource creation, since request body isn't the resource itself
   @autoRoute
+  @armResourceCreateOrUpdate(ActionResponse)
   @put
   @tag("Actions")
   createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
