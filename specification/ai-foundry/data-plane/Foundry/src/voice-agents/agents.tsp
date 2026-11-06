@@ -164,7 +164,7 @@ model VoiceAgentDefinition extends VoiceAgentBaseDefinition {
   `model`?: string;
 
   @doc("The engine that owns conversation handling for this voice agent. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the engine owns the conversation logic. The initial implementation supports a hosted-agent engine.")
-  conversation_engine?: VoiceConversationEngine;
+  conversation_engine?: VoiceConversationEngineVNext;
 
   @doc("Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools.")
   greeting?: VoiceAgentGreetingConfig;
@@ -623,14 +623,14 @@ union VoiceConversationEngineType {
 @doc("An engine that owns conversation handling for a voice agent.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationEngine {
+model VoiceConversationEngineVNext {
   @doc("The conversation engine type.")
   type: VoiceConversationEngineType;
 }
 
 @doc("A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `voice_conversation_engine` version `1.0.0`. Voice Live connects through the dedicated voice-conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `voice_conversation_engine`.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
+model VoiceHostedAgentConversationEngine extends VoiceConversationEngineVNext {
   ...Record<never>;
 
   @doc("Selects a hosted Foundry agent as the conversation engine.")
