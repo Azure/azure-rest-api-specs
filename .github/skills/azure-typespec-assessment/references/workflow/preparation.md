@@ -38,10 +38,24 @@ disable lifecycle scripts and verify the installed TypeSpec toolchain against
 the selected revision's lockfile.
 
 For head, select the newest newly added API version, otherwise its latest
-version. When no version was added and that head version exists in base, compile
-both sides with it. When head adds a version, select base's latest stable
-version, or latest preview if no stable exists. Record the pair and reasons in
-the manifest and report.
+version. Before selecting a compatibility baseline, check the successfully
+discovered service version sets from both base and head. For a preview target
+with no stable version in either set, record
+`compatibilityPolicy: { action: "skip", reason: "no-stable-api-version" }`
+and leave the baseline `not-selected`. Compile only the head target for
+Semantic intents, Azure Guidelines, and Documentation Completeness. Do not
+compare previews, generate compatibility candidates, or recreate the omitted
+comparison through inference. Preserve the project's classification and mode.
+New preview-only projects use the same policy with `new-project` classification.
+
+Otherwise record `compatibilityPolicy: { action: "compare" }` and retain normal
+selection: when no version was added, compile the affected version from both
+revisions; when head adds a version, project base's latest stable version from
+head, or the latest previous preview for a stable target with no prior stable.
+Stable versions removed by the PR still prevent the preview-only exemption.
+Unversioned projects and versioning migrations retain their existing behavior.
+Failed or ambiguous discovery is a resolution blocker, never proof that no
+stable version exists.
 
 ## Commands
 
@@ -99,3 +113,7 @@ The existing revision-local TCGC compiler pass runs through the assessment
 adapter. It emits the normal `tcgc-output.yaml` and a small provenance sidecar
 from the same SDK context, before TCGC removes raw compiler template arguments.
 Do not add a second compile or copy provenance from the active checkout.
+
+Other existing projects retain their normal baseline selection and require
+baseline plus target artifacts. Failed baseline compilation does not enable
+target-only Semantic or Guidelines analysis.

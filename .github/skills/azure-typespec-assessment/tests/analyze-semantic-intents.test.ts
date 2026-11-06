@@ -265,6 +265,110 @@ void test("new projects derive semantic intent from target artifacts only", (con
   );
 });
 
+void test.for(["preview-policy", "baseline-failed"])(
+  "target-only Semantic analysis is policy-specific: %s",
+  (reason, context) => {
+    const previewPolicy = reason === "preview-policy";
+    const workRoot = fs.mkdtempSync(path.join(process.cwd(), ".semantic-preview-policy-"));
+    context.onTestFinished(() => fs.rmSync(workRoot, { recursive: true, force: true }));
+    writeJson(path.join(workRoot, "target.json"), {
+      swagger: "2.0",
+      info: { title: "Widgets", version: "2026-10-01-preview" },
+      paths: {
+        "/widgets": {
+          get: {
+            operationId: "Widgets_List",
+            responses: { 200: { description: "ok" } },
+          },
+        },
+      },
+    });
+
+    const result = analyzeFixture({
+      workRoot,
+      manifest: {
+        projects: [
+          {
+            id: "project-existing",
+            classification: "existing",
+            sourceChangeIds: ["source-existing"],
+            artifactComparison: {
+              mode: "new-api-version",
+              compatibilityPolicy: previewPolicy
+                ? { action: "skip", reason: "no-stable-api-version" }
+                : { action: "compare" },
+              baseline: previewPolicy
+                ? { sourceRevision: "not-selected", reason: "no-stable-api-version" }
+                : {
+                    sourceRevision: "base",
+                    apiVersion: "2026-01-01",
+                    reason: "previous-latest-stable",
+                  },
+              target: {
+                sourceRevision: "current",
+                apiVersion: "2026-10-01-preview",
+                reason: "newest-added-version",
+              },
+            },
+            artifacts: {
+              target: {
+                autorest: artifact("target.json"),
+              },
+              ...(!previewPolicy
+                ? { baseline: { autorest: { status: "failed", exitCode: 1 } } }
+                : {}),
+            },
+          },
+        ],
+      },
+      sourceIndex: {
+        sourceChanges: [
+          {
+            id: "source-existing",
+            path: "specification/widgets/main.tsp",
+            status: "modified",
+            hunks: [{ id: "hunk-existing", lines: ["+op list(): Widget[];"] }],
+            declarations: [
+              {
+                id: "declaration-existing-base",
+                kind: "operation",
+                qualifiedName: "Widgets.list",
+                hunkIds: ["hunk-existing"],
+                source: { revision: "base" },
+              },
+              {
+                id: "declaration-existing",
+                kind: "operation",
+                qualifiedName: "Widgets.list",
+                hunkIds: ["hunk-existing"],
+                source: { revision: "current" },
+              },
+            ],
+          },
+        ],
+      },
+    });
+
+    if (!previewPolicy) {
+      assert.equal(result.status, "blocked");
+      assert.deepEqual(result.blockers, [
+        {
+          code: "autorest-artifacts-unavailable",
+          projectId: "project-existing",
+          message: "Baseline and target AutoRest artifacts are required for project-existing.",
+        },
+      ]);
+      assert.deepEqual(result.reviewUnits, []);
+      return;
+    }
+    assert.equal(result.status, "ready");
+    assert.deepEqual(result.blockers, []);
+    assert.equal(result.reviewUnits[0].action, "modify");
+    assert.deepEqual(result.reviewUnits[0].beforeFactIds, []);
+    assert.equal(result.reviewUnits[0].afterFactIds.length, 1);
+  },
+);
+
 function assertInternalSemanticUnits(value: unknown): asserts value is InternalSemanticUnit[] {
   assert.ok(Array.isArray(value));
 }

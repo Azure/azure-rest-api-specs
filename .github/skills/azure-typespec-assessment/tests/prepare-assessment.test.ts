@@ -1,4 +1,5 @@
 import { assert, test } from "vitest";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
 import {
   prepareProjectRecords,
   typeSpecChangesForAnalysis,
@@ -7,6 +8,50 @@ import {
 type PreparationBlocker = import("../scripts/runtime-types.ts").PreparationBlocker;
 
 type SourceIndex = import("../scripts/runtime-types.ts").SourceIndex;
+
+void test("preview-only projects compile target only without changing other project schedules", () => {
+  const calls: string[] = [];
+  const blockers: PreparationBlocker[] = [];
+  const records = prepareProjectRecords({
+    projects: ["preview", "stable", "unresolved"],
+    sourceIndex: { sourceChanges: [] } as unknown as SourceIndex,
+    blockers,
+    baseWorktree: "base",
+    currentWorktree: "current",
+    baseCommit: "base",
+    headCommit: "head",
+    workRoot: "work",
+    resolveApiVersions: ({ project }) => {
+      if (project === "unresolved") throw new Error("Cannot resolve versions.");
+      const versions = project === "preview" ? ["2026-01-01-preview"] : ["2026-01-01"];
+      return selectApiVersionPair({
+        base: { versioned: true, versions },
+        current: { versioned: true, versions },
+        baseCommit: "base",
+        headCommit: "head",
+      });
+    },
+    runCompilers: ({ project, comparisonRole, worktree }) => {
+      calls.push(`${project}:${comparisonRole}:${worktree}`);
+      return {
+        autorest: { status: "succeeded" },
+        tcgc: { status: "succeeded" },
+      } as unknown as ReturnType<
+        NonNullable<Parameters<typeof prepareProjectRecords>[0]["runCompilers"]>
+      >;
+    },
+  });
+  assert.deepEqual(calls, [
+    "preview:target:current",
+    "stable:baseline:base",
+    "stable:target:current",
+  ]);
+  assert.equal(records[0].classification, "existing");
+  assert.equal(records[0].artifactComparison?.mode, "existing-api-version");
+  assert.deepEqual(records[0].blockers, []);
+  assert.equal(records[2].artifactComparison, undefined);
+  assert.equal(blockers[0].code, "api-version-resolution-failed");
+});
 
 void test("expands renamed TypeSpec evidence into analyzable paths", () => {
   assert.deepEqual(

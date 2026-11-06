@@ -3,6 +3,7 @@ import path from "node:path";
 import { extractApiVersions, selectApiVersionPair } from "./api-version-selection.ts";
 import { documentQualitySummary, renderReportSections } from "./assessment-report-ui.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
+import { NO_STABLE_API_VERSION_REPORT, skipsAllCompatibility } from "./compatibility-policy.ts";
 import { validateAssessment } from "./validate-assessment.ts";
 
 type ArtifactSelection = import("./runtime-types.ts").ArtifactSelection;
@@ -1017,6 +1018,7 @@ export function operationContractRows(
   restFindings: AssessmentFinding[] = [],
   semanticIntentId?: string,
 ): ContractChangeRow[] {
+  if (operation.comparisonAvailable === false) return [];
   const detailedRows = restFindings
     .filter((finding) => findingMatchesOperation(finding, operation, semanticIntentId))
     .map(restContractDelta);
@@ -2038,6 +2040,9 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
           : undefined;
   const restCoverage = coverageDetail(dimensions.rest.coverage);
   const downstreamCoverage = coverageDetail(dimensions.downstream.coverage);
+  const skippedCompatibilityDetail = skipsAllCompatibility(assessment.artifactComparisons)
+    ? `${escapeHtml(NO_STABLE_API_VERSION_REPORT)}<br>`
+    : undefined;
   const documentQuality = documentQualitySummary(dimensions.documentQuality);
   const documentStatus = complianceStatus(documentQuality.findingStatus);
 
@@ -2073,8 +2078,8 @@ ${reportStyles}
 <div class="summary-grid">
 <a class="summary-card" href="#semantic-intents">${summaryHeading("Semantic intents", { icon: "ⓘ", className: "info", label: "Information only" })}<div class="summary-detail">${summary.semanticItems.length} ${summary.semanticItems.length === 1 ? "intent" : "intents"}<br>${summary.operationCount} operations<br>${summary.actionCounts.add} Added, ${summary.actionCounts.modify} Modified, ${summary.actionCounts.remove} Removed</div></a>
 <a class="summary-card" href="#azure-compliance">${summaryHeading("Azure Guidelines", complianceStatus(summary.complianceStatus))}<div class="summary-detail">${complianceStatus(summary.complianceStatus).label === "N/A" ? "Not assessed<br>" : ""}${summary.complianceFindingCount} ${summary.complianceFindingCount === 1 ? "finding" : "findings"}<br>${escapeHtml(summary.complianceCoverageDetail)}</div></a>
-<a class="summary-card" href="#rest-breaking">${summaryHeading("REST breaking changes", restStatus)}<div class="summary-detail">${restStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${restCoverage ? `${restCoverage}<br>` : ""}${summary.restFindingCount} ${summary.restFindingCount === 1 ? "finding" : "findings"}</div></a>
-<a class="summary-card" href="#downstream-breaking">${summaryHeading("Downstream breaking changes", downstreamStatus)}<div class="summary-detail">${downstreamStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${downstreamCoverage ? `${downstreamCoverage}<br>` : ""}${summary.downstreamFindingCount} ${summary.downstreamFindingCount === 1 ? "finding" : "findings"}</div></a>
+<a class="summary-card" href="#rest-breaking">${summaryHeading("REST breaking changes", restStatus)}<div class="summary-detail">${skippedCompatibilityDetail ?? `${restStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${restCoverage ? `${restCoverage}<br>` : ""}`}${summary.restFindingCount} ${summary.restFindingCount === 1 ? "finding" : "findings"}</div></a>
+<a class="summary-card" href="#downstream-breaking">${summaryHeading("Downstream breaking changes", downstreamStatus)}<div class="summary-detail">${skippedCompatibilityDetail ?? `${downstreamStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${downstreamCoverage ? `${downstreamCoverage}<br>` : ""}`}${summary.downstreamFindingCount} ${summary.downstreamFindingCount === 1 ? "finding" : "findings"}</div></a>
 <a class="summary-card" href="#document-quality">${summaryHeading("Documentation Completeness", documentStatus)}<div class="summary-detail">${documentQuality.compactDetail.map(escapeHtml).join("<br>")}</div></a>
 </div></div></header>
 <details class="notice"><summary class="container"><span class="notice-title">Preview Notice</span><span class="notice-summary">The TypeSpec Assessment Assistant is in preview; official validation and review remain the source of truth.</span></summary>

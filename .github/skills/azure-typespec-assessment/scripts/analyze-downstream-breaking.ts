@@ -1,4 +1,5 @@
 import path from "node:path";
+import { compatibilitySkipReason, skipsCompatibility } from "./compatibility-policy.ts";
 import { isMain, isRecord, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
 import { typeIdentity } from "./sdk-method-delta.ts";
 import { canonicalJson, stableId } from "./stable-id.ts";
@@ -1547,12 +1548,16 @@ export function analyzeDownstreamBreaking(options: {
   const graphs: ReferenceGraph[] = [];
 
   const blockers: PreparationBlocker[] = [];
-  let analyzedProjects = 0;
+  const analyzedProjectIds: string[] = [];
   for (const project of [...(manifest.projects ?? [])].sort((left, right) =>
     left.id.localeCompare(right.id),
   )) {
+    if (skipsCompatibility(project.artifactComparison)) {
+      blockers.push(compatibilitySkipReason(project.id));
+      continue;
+    }
     if (project.classification === "new" || project.artifactComparison?.mode === "new-project") {
-      analyzedProjects += 1;
+      analyzedProjectIds.push(project.id);
       continue;
     }
     const baseArtifact = project.artifacts?.baseline?.tcgc ?? project.artifacts?.base?.tcgc;
@@ -1592,7 +1597,7 @@ export function analyzeDownstreamBreaking(options: {
           buildReferenceGraph(project.id, "target", current, source, facts),
         );
       }
-      analyzedProjects += 1;
+      analyzedProjectIds.push(project.id);
     } catch (error) {
       blockers.push({
         code: "tcgc-contract-unsupported",
@@ -1609,7 +1614,8 @@ export function analyzeDownstreamBreaking(options: {
 
   const result: DownstreamAnalysis = {
     schemaVersion: 1,
-    status: analyzedProjects ? "ready" : "blocked",
+    status: analyzedProjectIds.length ? "ready" : "blocked",
+    analyzedProjectIds,
     facts: Object.fromEntries(
       Object.entries(facts).sort(([left], [right]) => left.localeCompare(right)),
     ),

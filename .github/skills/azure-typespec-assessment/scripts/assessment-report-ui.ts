@@ -1,4 +1,9 @@
 import { isDeepStrictEqual } from "node:util";
+import {
+  NO_STABLE_API_VERSION_REPORT,
+  skipsAllCompatibility,
+  skipsCompatibility,
+} from "./compatibility-policy.ts";
 import { DOCUMENT_QUALITY_CRITERION } from "./document-quality-input.ts";
 import { semanticGroupingPresentation } from "./semantic-assessment-scope.ts";
 
@@ -1737,6 +1742,16 @@ export function renderReportSections(
     (dimensions.rest.legacyFindings?.length ?? 0);
   const downstreamCount =
     downstream.methods.length + downstream.unmapped.length + legacyDownstream.length;
+  const skippedComparisons = (assessment.artifactComparisons ?? []).filter(skipsCompatibility);
+  const allCompatibilitySkipped = skipsAllCompatibility(assessment.artifactComparisons);
+  const skippedProjectNotes = skippedComparisons
+    .map((comparison) => {
+      const project = assessment.projects?.find((item) => item.id === comparison.projectId);
+      return `<p class="report-small"><code>${escape(project?.path ?? comparison.projectId)}</code>: ${NO_STABLE_API_VERSION_REPORT}</p>`;
+    })
+    .join("");
+  const skippedSection = (id: string, title: string) =>
+    `<section id="${id}">${sectionHead(title, NO_STABLE_API_VERSION_REPORT, "")}</section>`;
   // Semantic intents describe changes, not findings. Stable sorting preserves the header order within each group.
   const sections = [
     {
@@ -1749,11 +1764,15 @@ export function renderReportSections(
     },
     {
       findingCount: restCount,
-      html: `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.rest.verdict ?? restStatus) + coverageBadge(dimensions.rest.coverage) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
+      html: allCompatibilitySkipped
+        ? skippedSection("rest-breaking", "REST breaking changes")
+        : `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.rest.verdict ?? restStatus) + coverageBadge(dimensions.rest.coverage) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${skippedProjectNotes}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
     },
     {
       findingCount: downstreamCount,
-      html: `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.downstream.verdict ?? downstreamStatus) + coverageBadge(dimensions.downstream.coverage) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
+      html: allCompatibilitySkipped
+        ? skippedSection("downstream-breaking", "Downstream breaking changes")
+        : `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.downstream.verdict ?? downstreamStatus) + coverageBadge(dimensions.downstream.coverage) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${skippedProjectNotes}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
     },
     { findingCount: documentQuality.findings?.length ?? 0, html: documentBody.html },
   ];

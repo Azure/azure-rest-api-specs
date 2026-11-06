@@ -25,6 +25,46 @@
       }
     },
     "confidence": { "enum": ["high", "medium", "low"] },
+    "artifactComparisons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["projectId", "mode", "baseline", "target"],
+        "properties": {
+          "projectId": { "type": "string" },
+          "mode": {
+            "enum": [
+              "new-project",
+              "new-api-version",
+              "existing-api-version",
+              "unversioned",
+              "legacy"
+            ]
+          },
+          "compatibilityPolicy": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["action"],
+                "properties": { "action": { "const": "compare" } }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["action", "reason"],
+                "properties": {
+                  "action": { "const": "skip" },
+                  "reason": { "const": "no-stable-api-version" }
+                }
+              }
+            ]
+          },
+          "baseline": { "$ref": "#/$defs/artifactSelection" },
+          "target": { "$ref": "#/$defs/artifactSelection" }
+        }
+      }
+    },
     "safety": {
       "type": "object",
       "required": ["scope", "status"],
@@ -93,6 +133,16 @@
   },
   "$defs": {
     "nonemptyString": { "type": "string", "pattern": "\\S" },
+    "artifactSelection": {
+      "type": "object",
+      "required": ["sourceRevision", "reason"],
+      "properties": {
+        "sourceRevision": { "enum": ["base", "current", "absent", "not-selected"] },
+        "commit": { "type": "string" },
+        "apiVersion": { "type": "string" },
+        "reason": { "type": "string" }
+      }
+    },
     "compatibilityDimension": {
       "type": "object",
       "required": ["status", "findings"],
@@ -102,7 +152,8 @@
         "coverage": { "enum": ["complete", "partial", "blocked"] },
         "findings": { "type": "array" },
         "blockers": { "type": "array" },
-        "rejectedCandidateCount": { "type": "integer", "minimum": 0 }
+        "rejectedCandidateCount": { "type": "integer", "minimum": 0 },
+        "analyzedProjectIds": { "$ref": "#/$defs/ids" }
       }
     },
     "ids": {
