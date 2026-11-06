@@ -6885,6 +6885,34 @@
             "minimum": 1,
             "maximum": 365,
             "x-ms-client-name": "changeFeedRetentionInDays"
+          },
+          {
+            "name": "x-ms-scale-mode",
+            "in": "header",
+            "description": "Optional. Specifies the scale mode of the share. Scale mode is currently only supported for NFS shares.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Scale",
+              "Compatibility"
+            ],
+            "x-ms-enum": {
+              "name": "ShareScaleMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Scale",
+                  "value": "Scale",
+                  "description": "Scale"
+                },
+                {
+                  "name": "Compatibility",
+                  "value": "Compatibility",
+                  "description": "Compatibility"
+                }
+              ]
+            },
+            "x-ms-client-name": "scaleMode"
           }
         ],
         "responses": {
@@ -7280,6 +7308,30 @@
               "x-ms-root-squash": {
                 "type": "string",
                 "description": "The root squash mode for the share."
+              },
+              "x-ms-scale-mode": {
+                "type": "string",
+                "description": "The scale mode of the share.",
+                "enum": [
+                  "Scale",
+                  "Compatibility"
+                ],
+                "x-ms-enum": {
+                  "name": "ShareScaleMode",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "Scale",
+                      "value": "Scale",
+                      "description": "Scale"
+                    },
+                    {
+                      "name": "Compatibility",
+                      "value": "Compatibility",
+                      "description": "Compatibility"
+                    }
+                  ]
+                }
               },
               "x-ms-share-creation-time": {
                 "type": "string",
@@ -12695,6 +12747,13 @@
           "xml": {
             "name": "Creation-Time"
           }
+        },
+        "scaleMode": {
+          "$ref": "#/definitions/ShareScaleMode",
+          "description": "The scale mode of the share.",
+          "xml": {
+            "name": "ScaleMode"
+          }
         }
       },
       "required": [
@@ -12752,6 +12811,30 @@
             "name": "AllSquash",
             "value": "AllSquash",
             "description": "AllSquash"
+          }
+        ]
+      }
+    },
+    "ShareScaleMode": {
+      "type": "string",
+      "description": "The scale mode of the share. Scale mode is currently only supported for NFS shares.",
+      "enum": [
+        "Scale",
+        "Compatibility"
+      ],
+      "x-ms-enum": {
+        "name": "ShareScaleMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Scale",
+            "value": "Scale",
+            "description": "Scale"
+          },
+          {
+            "name": "Compatibility",
+            "value": "Compatibility",
+            "description": "Compatibility"
           }
         ]
       }
