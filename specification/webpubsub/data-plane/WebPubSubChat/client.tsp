@@ -1,32 +1,11 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
-import "./client-customizations.mjs";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
 @TypeSpec.Versioning.versioned(WebPubSubChat.Versions)
 namespace ClientCustomizations {
-  /** Give a template-expanded request body a resource-specific SDK parameter name. */
-  extern dec requestParameterName(
-    target: TypeSpec.Reflection.Operation,
-    name: valueof string,
-    scope: valueof string
-  );
-
-  /** Substitute the resource request model for selected SDKs without changing the REST operation. */
-  extern dec requestModel(
-    target: TypeSpec.Reflection.Operation,
-    input: TypeSpec.Reflection.Model,
-    scope: valueof string
-  );
-
-  /** Omit the initial continuation token from Python paging method parameters. */
-  extern dec omitContinuationToken(
-    target: TypeSpec.Reflection.Operation,
-    scope: valueof string
-  );
-
   /** Properties supplied when creating or replacing a role. */
   model ChatRoleCreateOrReplace {
     ...CreateOrUpdate<{
@@ -151,6 +130,124 @@ namespace Customizations {
     hub: string;
   }
 
+  alias ConditionalTraits = WebPubSubChat.SupportsEtagConditionalRequests &
+    Azure.Core.Traits.NoRepeatableRequests &
+    Azure.Core.Traits.NoClientRequestId;
+
+  alias CreateOrReplaceOperation<
+    Resource extends TypeSpec.Reflection.Model,
+    BodyParameter extends TypeSpec.Reflection.Model
+  > = Azure.Core.Foundations.ResourceOperation<
+    Resource,
+    BodyParameter &
+      Azure.Core.Traits.Private.TraitProperties<
+        ConditionalTraits,
+        Azure.Core.Traits.TraitLocation.Parameters,
+        | Azure.Core.Traits.TraitContext.Create
+        | Azure.Core.Traits.TraitContext.Update
+      >,
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<Resource &
+      Azure.Core.Traits.Private.TraitProperties<
+        ConditionalTraits,
+        Azure.Core.Traits.TraitLocation.Response,
+        | Azure.Core.Traits.TraitContext.Create
+        | Azure.Core.Traits.TraitContext.Update
+      >>,
+    ConditionalTraits
+  >;
+
+  alias UpdateOperation<
+    Resource extends TypeSpec.Reflection.Model,
+    BodyParameter extends TypeSpec.Reflection.Model
+  > = Azure.Core.Foundations.ResourceOperation<
+    Resource,
+    {
+      /** This request has a JSON Merge Patch body. */
+      @header("Content-Type")
+      contentType: "application/merge-patch+json";
+
+      ...BodyParameter;
+      ...Azure.Core.Traits.Private.TraitProperties<
+        ConditionalTraits,
+        Azure.Core.Traits.TraitLocation.Parameters,
+        Azure.Core.Traits.TraitContext.Update
+      >;
+    },
+    Azure.Core.Foundations.ResourceOkResponse<Resource &
+      Azure.Core.Traits.Private.TraitProperties<
+        ConditionalTraits,
+        Azure.Core.Traits.TraitLocation.Response,
+        Azure.Core.Traits.TraitContext.Update
+      >>,
+    ConditionalTraits
+  >;
+
+  /** Continuation token query parameter for pagination. */
+  model ContinuationTokenQueryParameter {
+    /** Continuation token for pagination. */
+    @query
+    @continuationToken
+    @minLength(1)
+    continuationToken?: string;
+  }
+
+  alias ListWithContinuationToken<Resource extends TypeSpec.Reflection.Model> = WebPubSubChat.Operations.ResourceList<
+    Resource,
+    Azure.Core.Traits.ListQueryParametersTrait<{
+      ...Azure.Core.MaxPageSizeQueryParameter;
+      ...ContinuationTokenQueryParameter;
+    }>
+  >;
+
+  /** Request body parameter for role operations. */
+  model RoleBodyParameter {
+    /** The resource instance. */
+    @body
+    resource: WebPubSubChat.ChatRole;
+  }
+
+  /** Request body parameter for room operations. */
+  model RoomBodyParameter {
+    /** The resource instance. */
+    @body
+    resource: WebPubSubChat.ChatRoom;
+  }
+
+  /** Request body parameter for room member operations. */
+  model RoomMemberBodyParameter {
+    /** The resource instance. */
+    @body
+    resource: WebPubSubChat.ChatRoomMember;
+  }
+
+  /** Request body parameter for user operations. */
+  model UserBodyParameter {
+    /** The resource instance. */
+    @body
+    resource: WebPubSubChat.ChatUser;
+  }
+
+  /** Request body parameter for topic create or replace operations. */
+  model TopicCreateOrReplaceBodyParameter {
+    /** The resource instance. */
+    @body
+    resource: WebPubSubChat.ChatTopic;
+  }
+
+  /** Request body parameter for topic update operations. */
+  model TopicUpdateBodyParameter {
+    /** The resource instance. */
+    @body
+    resource: WebPubSubChat.ChatTopic;
+  }
+
+  /** Request body parameter for message update operations. */
+  model MessageUpdateBodyParameter {
+    /** The resource instance. */
+    @body
+    resource: WebPubSubChat.ChatMessage;
+  }
+
   @client({
     name: "WebPubSubChatServiceClient",
     service: WebPubSubChat,
@@ -159,6 +256,104 @@ namespace Customizations {
     extends WebPubSubChat.WebPubSubChatServiceClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The existing Web PubSub token operation has a non-standard wire contract."
     generateClientToken is Customizations.generateClientToken;
+
+    /** Update a message. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defined with an explicit body parameter model so SDK parameter names and request models can be customized in pure TypeSpec."
+    #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy"
+    @summary("Update a message.")
+    @TypeSpec.Rest.updatesResource(WebPubSubChat.ChatMessage)
+    @patch(#{ implicitOptionality: true })
+    updateMessage is UpdateOperation<
+      WebPubSubChat.ChatMessage,
+      MessageUpdateBodyParameter
+    >;
+
+    /** Create or replace a role. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defined with an explicit body parameter model so SDK parameter names and request models can be customized in pure TypeSpec."
+    @summary("Create or replace a role.")
+    @TypeSpec.Rest.createsOrReplacesResource(WebPubSubChat.ChatRole)
+    createOrReplaceRole is CreateOrReplaceOperation<
+      WebPubSubChat.ChatRole,
+      RoleBodyParameter
+    >;
+
+    /** Create or replace a room with a client-specified ID. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defined with an explicit body parameter model so SDK parameter names and request models can be customized in pure TypeSpec."
+    @summary("Create or replace a room.")
+    @TypeSpec.Rest.createsOrReplacesResource(WebPubSubChat.ChatRoom)
+    createOrReplaceRoom is CreateOrReplaceOperation<
+      WebPubSubChat.ChatRoom,
+      RoomBodyParameter
+    >;
+
+    /** Create or replace a topic with a client-specified ID. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defined with an explicit body parameter model so SDK parameter names and request models can be customized in pure TypeSpec."
+    @TypeSpec.Versioning.added(WebPubSubChat.Versions.v2026_08_01_preview)
+    @summary("Create or replace a topic.")
+    @TypeSpec.Rest.createsOrReplacesResource(WebPubSubChat.ChatTopic)
+    createOrReplaceTopic is CreateOrReplaceOperation<
+      WebPubSubChat.ChatTopic,
+      TopicCreateOrReplaceBodyParameter
+    >;
+
+    /** Update a topic. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defined with an explicit body parameter model so SDK parameter names and request models can be customized in pure TypeSpec."
+    #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy"
+    @TypeSpec.Versioning.added(WebPubSubChat.Versions.v2026_08_01_preview)
+    @summary("Update a topic.")
+    @TypeSpec.Rest.updatesResource(WebPubSubChat.ChatTopic)
+    @patch(#{ implicitOptionality: true })
+    updateTopic is UpdateOperation<
+      WebPubSubChat.ChatTopic,
+      TopicUpdateBodyParameter
+    >;
+
+    /** Create or replace a room member. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defined with an explicit body parameter model so SDK parameter names and request models can be customized in pure TypeSpec."
+    @summary("Create or replace a room member.")
+    @TypeSpec.Rest.createsOrReplacesResource(WebPubSubChat.ChatRoomMember)
+    createOrReplaceRoomMember is CreateOrReplaceOperation<
+      WebPubSubChat.ChatRoomMember,
+      RoomMemberBodyParameter
+    >;
+
+    /** Create or replace a user. The request body is a polymorphic `ChatUser` (e.g. `HumanChatUser`) selected by the `kind` discriminator. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defined with an explicit body parameter model so SDK parameter names and request models can be customized in pure TypeSpec."
+    @summary("Create or replace a user.")
+    @TypeSpec.Rest.createsOrReplacesResource(WebPubSubChat.ChatUser)
+    createOrReplaceUser is CreateOrReplaceOperation<
+      WebPubSubChat.ChatUser,
+      UserBodyParameter
+    >;
+
+    /** Query roles in a hub. */
+    @summary("Query roles in a hub.")
+    listRoles is ListWithContinuationToken<WebPubSubChat.ChatRole>;
+
+    /** List rooms with pagination. */
+    @TypeSpec.Versioning.added(WebPubSubChat.Versions.v2026_08_01_preview)
+    @summary("List rooms with pagination.")
+    listRooms is ListWithContinuationToken<WebPubSubChat.ChatRoom>;
+
+    /** List topics in a room with pagination. */
+    @TypeSpec.Versioning.added(WebPubSubChat.Versions.v2026_08_01_preview)
+    @summary("List topics in a room with pagination.")
+    listTopics is ListWithContinuationToken<WebPubSubChat.ChatTopic>;
+
+    /** Get room members. */
+    @summary("Get room members.")
+    listRoomMembers is ListWithContinuationToken<WebPubSubChat.ChatRoomMember>;
+
+    /** List all users with pagination. */
+    @TypeSpec.Versioning.added(WebPubSubChat.Versions.v2026_08_01_preview)
+    @summary("List all users with pagination.")
+    listUsers is ListWithContinuationToken<WebPubSubChat.ChatUser>;
+
+    /** List rooms for a user with pagination. */
+    @TypeSpec.Versioning.added(WebPubSubChat.Versions.v2026_08_01_preview)
+    @summary("List rooms for a user with pagination.")
+    @TypeSpec.Rest.listsResource(WebPubSubChat.ChatUserRoom)
+    listRoomsForUser is ListWithContinuationToken<WebPubSubChat.ChatUserRoom>;
   }
 
   @@clientLocation(
@@ -211,38 +406,38 @@ namespace Customizations {
     "csharp,java,python,javascript,go,rust"
   );
 
-  @@ClientCustomizations.requestParameterName(
-    WebPubSubChatServiceClient.createOrReplaceRole,
+  @@clientName(
+    RoleBodyParameter.resource,
     "role",
     "csharp,java,python,javascript,go,rust"
   );
-  @@ClientCustomizations.requestParameterName(
-    WebPubSubChatServiceClient.createOrReplaceRoom,
+  @@clientName(
+    RoomBodyParameter.resource,
     "room",
     "csharp,java,python,javascript,go,rust"
   );
-  @@ClientCustomizations.requestParameterName(
-    WebPubSubChatServiceClient.createOrReplaceRoomMember,
+  @@clientName(
+    RoomMemberBodyParameter.resource,
     "member",
     "csharp,java,python,javascript,go,rust"
   );
-  @@ClientCustomizations.requestParameterName(
-    WebPubSubChatServiceClient.createOrReplaceUser,
+  @@clientName(
+    UserBodyParameter.resource,
     "user",
     "csharp,java,python,javascript,go,rust"
   );
-  @@ClientCustomizations.requestParameterName(
-    WebPubSubChatServiceClient.createOrReplaceTopic,
+  @@clientName(
+    TopicCreateOrReplaceBodyParameter.resource,
     "topic",
     "csharp,java,python,javascript,go,rust"
   );
-  @@ClientCustomizations.requestParameterName(
-    WebPubSubChatServiceClient.updateTopic,
+  @@clientName(
+    TopicUpdateBodyParameter.resource,
     "topic",
     "csharp,java,python,javascript,go,rust"
   );
-  @@ClientCustomizations.requestParameterName(
-    WebPubSubChatServiceClient.updateMessage,
+  @@clientName(
+    MessageUpdateBodyParameter.resource,
     "message",
     "csharp,java,python,javascript,go,rust"
   );
@@ -255,69 +450,46 @@ namespace Customizations {
   );
 
   // Python callers resume pagination through ItemPaged.by_page(continuation_token=...).
-  @@ClientCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listRoles,
-    "!python"
-  );
-  @@ClientCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listRooms,
-    "!python"
-  );
-  @@ClientCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listTopics,
-    "!python"
-  );
-  @@ClientCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listRoomMembers,
-    "!python"
-  );
-  @@ClientCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listUsers,
-    "!python"
-  );
-  @@ClientCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listRoomsForUser,
-    "!python"
-  );
+  @@scope(ContinuationTokenQueryParameter.continuationToken, "!python");
 
-  @@ClientCustomizations.requestModel(
-    WebPubSubChatServiceClient.createOrReplaceTopic,
+  @@alternateType(
+    TopicCreateOrReplaceBodyParameter.resource,
     ClientCustomizations.ChatTopicCreateOrReplace,
     "python,javascript"
   );
-  @@ClientCustomizations.requestModel(
-    WebPubSubChatServiceClient.updateTopic,
+  @@alternateType(
+    TopicUpdateBodyParameter.resource,
     ClientCustomizations.ChatTopicUpdate,
     "python,javascript"
   );
 
-  @@ClientCustomizations.requestModel(
-    WebPubSubChatServiceClient.updateMessage,
+  @@alternateType(
+    MessageUpdateBodyParameter.resource,
     ClientCustomizations.ChatMessageUpdate,
     "python,javascript"
   );
-  @@ClientCustomizations.requestModel(
-    WebPubSubChatServiceClient.createOrReplaceRole,
+  @@alternateType(
+    RoleBodyParameter.resource,
     ClientCustomizations.ChatRoleCreateOrReplace,
     "python,javascript"
   );
-  @@ClientCustomizations.requestModel(
-    WebPubSubChatServiceClient.createOrReplaceRoom,
+  @@alternateType(
+    RoomBodyParameter.resource,
     ClientCustomizations.ChatRoomCreateOrReplace,
     "python,javascript"
   );
-  @@ClientCustomizations.requestModel(
-    WebPubSubChatServiceClient.createOrReplaceRoomMember,
+  @@alternateType(
+    RoomMemberBodyParameter.resource,
     ClientCustomizations.ChatRoomMemberCreateOrReplace,
     "python,javascript"
   );
-  @@ClientCustomizations.requestModel(
-    WebPubSubChatServiceClient.createOrReplaceUser,
+  @@alternateType(
+    UserBodyParameter.resource,
     ClientCustomizations.ChatUserCreateOrReplace,
     "python"
   );
-  @@ClientCustomizations.requestModel(
-    WebPubSubChatServiceClient.createOrReplaceUser,
+  @@alternateType(
+    UserBodyParameter.resource,
     ClientCustomizations.HumanChatUserCreateOrReplace,
     "javascript"
   );
