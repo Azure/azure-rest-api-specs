@@ -1,0 +1,44 @@
+{
+  "operationId": "KnowledgeBases_Create",
+  "title": "SearchServiceCreateKnowledgeBaseMicrosoftRetriever1",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "api-version": "2026-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "Accept": "application/json;odata.metadata=minimal",
+    "knowledgeBase": {
+      "name": "travel-knowledgebase",
+      "knowledgeSources": [
+        {
+          "name": "hotels"
+        }
+      ],
+      "models": [
+        {
+          "kind": "microsoftRetriever1"
+        }
+      ],
+      "outputMode": "extractiveData",
+      "description": "Find hotels using Microsoft Retriever 1."
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "travel-knowledgebase",
+        "knowledgeSources": [
+          {
+            "name": "hotels"
+          }
+        ],
+        "models": [
+          {
+            "kind": "microsoftRetriever1"
+          }
+        ],
+        "outputMode": "extractiveData",
+        "description": "Find hotels using Microsoft Retriever 1."
+      }
+    }
+  }
+}
