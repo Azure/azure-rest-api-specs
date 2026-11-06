@@ -214,6 +214,18 @@ using Azure.AI.Projects;
 @@clientName(AssetCredentialResponse, "DatasetCredential");
 @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
+// Preserve the released evaluator model name and distinguish campaign inputs.
+@@clientName(
+  DatasetReference,
+  "TelephonyCampaignDatasetReference",
+  "python, javascript"
+);
+@@clientName(
+  VersionedDatasetReference,
+  "DatasetReference",
+  "python, javascript"
+);
+
 // --------------------------------------------------------------------------------
 // Indexes sub‐client
 // --------------------------------------------------------------------------------
