@@ -233,6 +233,12 @@ union VolumeCreateOption {
   Disk: "Disk",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DiskRestorePoint: "DiskRestorePoint",
+
+  /**
+   * Create a clone of an existing Elastic SAN volume. The source must be in the same volume group, which must be a Performance Critical volume group with the DirectAttach protocol. cloneDetails.replicaType selects a Thin or Full clone, and sizeGiB must equal the source volume's size. Clones and instant-access snapshots of a source volume count against one shared per-volume limit. A volume that is itself a clone can be used as a source only once its dataCopyStatus is Completed.
+   */
+  @added(Versions.v2027_02_01_preview)
+  Volume: "Volume",
 }
 
 /**
@@ -273,6 +279,24 @@ union `x-ms-force-delete` {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `true`: "true",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `false`: "false",
+}
+
+/**
+ * Whether deleting a source volume also deletes its dependent clones.
+ */
+@added(Versions.v2027_02_01_preview)
+union `x-ms-delete-clones` {
+  string,
+
+  /**
+   * Delete the dependent clones together with the source volume.
+   */
+  `true`: "true",
+
+  /**
+   * Do not delete dependent clones. The delete is rejected while the volume has dependent clones.
+   */
   `false`: "false",
 }
 
@@ -1062,6 +1086,83 @@ model VolumeGroupUpdateProperties {
 }
 
 /**
+ * The replica type of a volume clone. Thin shares blocks with the source; Full is an independent copy.
+ */
+@added(Versions.v2027_02_01_preview)
+union ReplicaType {
+  string,
+
+  /**
+   * The clone shares data blocks with its source volume and remains dependent on it. A Thin clone is promoted to Full automatically after a service-defined period; replicaType then changes to Full without a request from the caller.
+   */
+  Thin: "Thin",
+
+  /**
+   * The clone copies all data from its source volume and becomes independent of it once dataCopyStatus is Completed.
+   */
+  Full: "Full",
+}
+
+/**
+ * The data copy status of a volume clone.
+ */
+@added(Versions.v2027_02_01_preview)
+union DataCopyStatus {
+  string,
+
+  /**
+   * The data copy has not been started.
+   */
+  NotStarted: "NotStarted",
+
+  /**
+   * The data copy from the source volume is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The data copy has finished and the clone is fully independent of its source volume.
+   */
+  Completed: "Completed",
+}
+
+/**
+ * Clone details for a volume. Present only for clone volumes (createSource == Volume). Clone volumes and the volumes they are cloned from are never soft-deleted: deleting them is permanent and they cannot be restored.
+ */
+@added(Versions.v2027_02_01_preview)
+model CloneDetails {
+  /**
+   * Required when createSource is Volume: specify Thin or Full. On an existing clone, through either PUT or PATCH: omit this property for ordinary changes; repeating the clone's current value is accepted and changes nothing; Full promotes a Thin clone; Thin on a Full clone is rejected because promotion is one-way. A Thin clone may also become Full automatically (see ReplicaType). A promotion must be the only change in the request: sizeGiB and managedBy cannot change at the same time.
+   */
+  replicaType?: ReplicaType;
+
+  /**
+   * The data copy status of the clone. The clone is independent of its source when this is Completed.
+   */
+  @visibility(Lifecycle.Read)
+  dataCopyStatus?: DataCopyStatus;
+
+  /**
+   * The time the data copy started. Null before promote, and may remain
+   * null briefly after a promote is accepted until the underlying data copy begins.
+   */
+  @visibility(Lifecycle.Read)
+  dataCopyStartTime?: utcDateTime;
+
+  /**
+   * The time the data copy completed. Null until dataCopyStatus is Completed.
+   */
+  @visibility(Lifecycle.Read)
+  dataCopyEndTime?: utcDateTime;
+
+  /**
+   * The percentage of the data copy completed so far (0-100). Null until the data copy reports progress.
+   */
+  @visibility(Lifecycle.Read)
+  dataCopyPercentComplete?: float64;
+}
+
+/**
  * Volume response properties.
  */
 model VolumeProperties {
@@ -1101,6 +1202,19 @@ model VolumeProperties {
   @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
   @identifiers(#[])
   managedBy?: ManagedByResources[];
+
+  /**
+   * Clone details for the volume. Present only for clone volumes (createSource == Volume).
+   */
+  @added(Versions.v2027_02_01_preview)
+  cloneDetails?: CloneDetails;
+
+  /**
+   * The number of clones of this volume that still depend on it: Thin clones, and Full clones whose data copy has not completed. Together with the volume's instant-access snapshots this counts against the per-volume clone limit. While this is non-zero, deleting the volume requires the x-ms-delete-clones header. Reported on GET and List; omitted when cloning is not enabled for the subscription.
+   */
+  @added(Versions.v2027_02_01_preview)
+  @visibility(Lifecycle.Read)
+  activeCloneCount?: int32;
 
   /**
    * State of the operation on the resource.
@@ -1225,6 +1339,12 @@ model VolumeUpdateProperties {
   @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
   @identifiers(#[])
   managedBy?: ManagedByResources[];
+
+  /**
+   * Clone details for the volume. Set replicaType to Full to promote a Thin clone; repeating the clone's current replicaType is accepted and changes nothing, and Thin on a Full clone is rejected. A promotion must be the only change in the request: sizeGiB and managedBy cannot change at the same time.
+   */
+  @added(Versions.v2027_02_01_preview)
+  cloneDetails?: CloneDetails;
 }
 
 /**
