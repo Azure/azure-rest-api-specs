@@ -220,6 +220,12 @@ export function materializeSourceReviews(
   const requestsById = new Map(
     (modelInput.sourceReviewRequests ?? []).map((request) => [request.candidateId, request]),
   );
+  const availableDeclarations = new Map(
+    (modelInput.sourceReviewDeclarations ?? []).map((declaration) => [
+      declaration.declarationId,
+      declaration,
+    ]),
+  );
   const inferredById = new Map(inferenceCandidates.map((candidate) => [candidate.id, candidate]));
   const canonicalDeclarations = canonicalDeclarationMap(sourceChanges);
 
@@ -248,7 +254,7 @@ export function materializeSourceReviews(
     const request = requestsById.get(review.candidateId);
     const inferred = inferredById.get(review.candidateId);
     const allowedIds = request
-      ? request.availableDeclarations.map((item) => item.declarationId)
+      ? request.availableDeclarationIds
       : inferred
         ? sourceChanges
             .filter((source) => inferred.sourceChangeIds.includes(source.id))
@@ -260,6 +266,15 @@ export function materializeSourceReviews(
                 .map((declaration) => declaration.id),
             )
         : [];
+    if (request) {
+      for (const id of request.availableDeclarationIds) {
+        if (!availableDeclarations.has(id)) {
+          throw new Error(
+            `Source review request ${review.candidateId} cites missing declaration ${id}.`,
+          );
+        }
+      }
+    }
     subset(
       review.selectedDeclarationIds,
       allowedIds,

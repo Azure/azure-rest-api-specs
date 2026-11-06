@@ -228,6 +228,7 @@ function fixture() {
       },
     ],
     downstreamRootCauses: [],
+    sourceReviewDeclarations: [],
     sourceReviewRequests: [
       {
         candidateId: "downstream-1",
@@ -235,7 +236,7 @@ function fixture() {
         evidenceSetId: "evidence-downstream",
         deterministicStatus: "unresolved",
         deterministicDeclarationIds: [],
-        availableDeclarations: [],
+        availableDeclarationIds: [],
         sourceChangeIds: [],
         hunkIds: [],
       },

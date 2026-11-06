@@ -97,6 +97,7 @@ type InputAccounting = {
     restCandidates: number;
     downstreamCandidates: number;
     downstreamRootCauses: number;
+    sourceReviewDeclarations: number;
     sourceReviewRequests: number;
     complianceSearchRequests: number;
     inferenceRequests: number;
@@ -114,6 +115,7 @@ type AnalysisModelInput = {
   restCandidates: AssessmentModelInput["restCandidates"];
   downstreamCandidates: AssessmentModelInput["downstreamCandidates"];
   downstreamRootCauses: import("./runtime-types.ts").DownstreamRootCause[];
+  sourceReviewDeclarations: AssessmentModelInput["sourceReviewDeclarations"];
   sourceReviewRequests: AssessmentModelInput["sourceReviewRequests"];
   complianceSearchRequests: AssessmentModelInput["complianceSearchRequests"];
   inferenceRequests: AssessmentModelInput["inferenceRequests"];
@@ -1295,6 +1297,7 @@ function accountInput(
         restCandidates: input.restCandidates.length,
         downstreamCandidates: input.downstreamCandidates.length,
         downstreamRootCauses: input.downstreamRootCauses.length,
+        sourceReviewDeclarations: input.sourceReviewDeclarations.length,
         sourceReviewRequests: input.sourceReviewRequests.length,
         complianceSearchRequests: input.complianceSearchRequests.length,
         inferenceRequests: input.inferenceRequests.length,
@@ -1470,6 +1473,10 @@ export function buildModelInput({
     };
   };
 
+  const sourceReviewDeclarationRegistry = new Map<
+    string,
+    AssessmentModelInput["sourceReviewDeclarations"][number]
+  >();
   const sourceReviewRequest = (
     candidate: AssessmentCandidate,
     dimension: "rest" | "downstream",
@@ -1511,6 +1518,9 @@ export function buildModelInput({
           ),
       );
     const availableIds = new Set(availableDeclarations.map((item) => item.declarationId));
+    availableDeclarations.forEach((declaration) =>
+      sourceReviewDeclarationRegistry.set(declaration.declarationId, declaration),
+    );
     const deterministicDeclarationIds = [...new Set(candidate.declarationIds ?? [])]
       .filter((id) => availableIds.has(id))
       .sort();
@@ -1520,7 +1530,7 @@ export function buildModelInput({
       evidenceSetId: compact.evidenceSetId,
       deterministicStatus: deterministicDeclarationIds.length ? "associated" : "unresolved",
       deterministicDeclarationIds,
-      availableDeclarations,
+      availableDeclarationIds: availableDeclarations.map((item) => item.declarationId),
       sourceChangeIds,
       hunkIds,
     };
@@ -1603,6 +1613,7 @@ export function buildModelInput({
     restCandidates: compactRestCandidates,
     downstreamCandidates: compactDownstreamCandidates,
     downstreamRootCauses: downstream.status === "ready" ? retainedDownstreamRootCauses : [],
+    sourceReviewDeclarations: [],
     sourceReviewRequests: [
       ...retainedRestCandidates.map((candidate, index) =>
         sourceReviewRequest(candidate, "rest", compactRestCandidates[index]),
@@ -1621,6 +1632,9 @@ export function buildModelInput({
     ],
     inputAccounting: {},
   };
+  input.sourceReviewDeclarations = [...sourceReviewDeclarationRegistry.values()].sort(
+    (left, right) => left.declarationId.localeCompare(right.declarationId),
+  );
   return accountInput(input, maximumBytes);
 }
 

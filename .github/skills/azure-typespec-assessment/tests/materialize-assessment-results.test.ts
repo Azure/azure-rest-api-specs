@@ -94,6 +94,7 @@ function fixture({ inference = false } = {}) {
     restCandidates: [],
     downstreamCandidates: [],
     downstreamRootCauses: [],
+    sourceReviewDeclarations: [],
     sourceReviewRequests: [],
     complianceSearchRequests: [],
     inferenceRequests: inference
@@ -284,6 +285,28 @@ void test("source review materialization enforces deterministic selection outcom
     },
   ] as import("../scripts/runtime-types.ts").SourceChange[];
   const modelInput = {
+    sourceReviewDeclarations: [
+      {
+        declarationId: "declaration-1",
+        sourceChangeId: "source-1",
+        qualifiedName: "Service.Request",
+        kind: "model",
+        revision: "current",
+        startLine: 10,
+        endLine: 14,
+        hunkIds: ["hunk-1"],
+      },
+      {
+        declarationId: "declaration-2",
+        sourceChangeId: "source-1",
+        qualifiedName: "Service.create",
+        kind: "operation",
+        revision: "current",
+        startLine: 16,
+        endLine: 18,
+        hunkIds: ["hunk-1"],
+      },
+    ],
     sourceReviewRequests: [
       {
         candidateId: "rest-1",
@@ -291,28 +314,7 @@ void test("source review materialization enforces deterministic selection outcom
         evidenceSetId: "evidence-1",
         deterministicStatus: "associated",
         deterministicDeclarationIds: ["declaration-1"],
-        availableDeclarations: [
-          {
-            declarationId: "declaration-1",
-            sourceChangeId: "source-1",
-            qualifiedName: "Service.Request",
-            kind: "model",
-            revision: "current",
-            startLine: 10,
-            endLine: 14,
-            hunkIds: ["hunk-1"],
-          },
-          {
-            declarationId: "declaration-2",
-            sourceChangeId: "source-1",
-            qualifiedName: "Service.create",
-            kind: "operation",
-            revision: "current",
-            startLine: 16,
-            endLine: 18,
-            hunkIds: ["hunk-1"],
-          },
-        ],
+        availableDeclarationIds: ["declaration-1", "declaration-2"],
         sourceChangeIds: ["source-1"],
         hunkIds: ["hunk-1"],
       },
