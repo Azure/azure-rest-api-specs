@@ -63,6 +63,26 @@ model Workspace {
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   browserProxy?: EnablementStatus = EnablementStatus.Enabled;
+
+  @doc("The review status of the Microsoft signing key for the workspace.")
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Read)
+  microsoftSigningKeyStatus?: MicrosoftSigningKeyStatus;
+}
+
+@doc("The review status of a Microsoft signing key.")
+@added(Versions.v2026_12_01_preview)
+union MicrosoftSigningKeyStatus {
+  string,
+
+  @doc("The Microsoft signing key has been accepted.")
+  Accepted: "Accepted",
+
+  @doc("The Microsoft signing key has been rejected.")
+  Rejected: "Rejected",
+
+  @doc("The Microsoft signing key is under review.")
+  InReview: "InReview",
 }
 
 @doc("The Playwright workspace state.")
