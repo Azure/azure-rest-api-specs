@@ -10,6 +10,7 @@ import "../data_generation_jobs/routes.tsp";
 import "../sdk-common/ops-relocation-datasets.tsp";
 
 // Stable operation (GA routes) without preview features
+import "../agent-insights/routes.tsp";
 import "../agents-optimization/routes.tsp";
 import "../agents-microsoft365/routes.tsp";
 import "../connections/routes.tsp";
@@ -19,7 +20,6 @@ import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "../voice-agents/routes.tsp";
-import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
@@ -35,7 +35,6 @@ import "../agents-session-files/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
-import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
@@ -55,70 +54,53 @@ using Azure.AI.Projects;
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
 // The original schemas below are not emitted as Python classes, but their client
-// names are still checked for collisions. The ...Base suffix only frees the
-// existing public names for the Tool wrappers; it does not imply inheritance.
-@@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParamBase", "python");
-@@clientName(OpenAI.CodeInterpreterTool, "CodeInterpreterToolBase", "python");
-@@clientName(OpenAI.ComputerTool, "ComputerToolBase", "python");
-@@clientName(
-  OpenAI.ComputerUsePreviewTool,
-  "ComputerUsePreviewToolBase",
-  "python"
-);
-@@clientName(OpenAI.CustomToolParam, "CustomToolParamBase", "python");
-@@clientName(OpenAI.FileSearchTool, "FileSearchToolBase", "python");
-@@clientName(
-  OpenAI.FunctionShellToolParam,
-  "FunctionShellToolParamBase",
-  "python"
-);
-@@clientName(OpenAI.FunctionTool, "FunctionToolBase", "python");
-@@clientName(OpenAI.ImageGenTool, "ImageGenToolBase", "python");
-@@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParamBase", "python");
-@@clientName(OpenAI.MCPTool, "MCPToolBase", "python");
+// names are still checked for collisions, including the default language scope.
+// The ...Base suffix only frees the existing public names for the Tool wrappers;
+// it does not imply inheritance.
+@@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParamBase");
+@@clientName(OpenAI.CodeInterpreterTool, "CodeInterpreterToolBase");
+@@clientName(OpenAI.ComputerTool, "ComputerToolBase");
+@@clientName(OpenAI.ComputerUsePreviewTool, "ComputerUsePreviewToolBase");
+@@clientName(OpenAI.CustomToolParam, "CustomToolParamBase");
+@@clientName(OpenAI.FileSearchTool, "FileSearchToolBase");
+@@clientName(OpenAI.FunctionShellToolParam, "FunctionShellToolParamBase");
+@@clientName(OpenAI.FunctionTool, "FunctionToolBase");
+@@clientName(OpenAI.ImageGenTool, "ImageGenToolBase");
+@@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParamBase");
+@@clientName(OpenAI.MCPTool, "MCPToolBase");
 @@clientName(
   OpenAI.ProgrammaticToolCallingParam,
-  "ProgrammaticToolCallingParamBase",
-  "python"
+  "ProgrammaticToolCallingParamBase"
 );
-@@clientName(OpenAI.ToolSearchToolParam, "ToolSearchToolParamBase", "python");
-@@clientName(OpenAI.WebSearchPreviewTool, "WebSearchPreviewToolBase", "python");
-@@clientName(OpenAI.WebSearchTool, "WebSearchToolBase", "python");
+@@clientName(OpenAI.ToolSearchToolParam, "ToolSearchToolParamBase");
+@@clientName(OpenAI.WebSearchPreviewTool, "WebSearchPreviewToolBase");
+@@clientName(OpenAI.WebSearchTool, "WebSearchToolBase");
 
-// Emit the Tool subclasses under the Python names used before OpenAI 1.34.1.
+// Preserve the Python names used before OpenAI 1.34.1 and the names shipped in @azure/ai-projects 2.10.0.
 // For example, OpenAI.ToolToolSearchToolParam emits ToolSearchToolParam, while
 // OpenAI.ToolSearchToolParam (renamed ToolSearchToolParamBase) is not emitted.
-@@clientName(OpenAI.ToolApplyPatchToolParam, "ApplyPatchToolParam", "python");
-@@clientName(OpenAI.ToolCodeInterpreterTool, "CodeInterpreterTool", "python");
-@@clientName(OpenAI.ToolComputerTool, "ComputerTool", "python");
-@@clientName(
-  OpenAI.ToolComputerUsePreviewTool,
-  "ComputerUsePreviewTool",
-  "python"
-);
-@@clientName(OpenAI.ToolCustomToolParam, "CustomToolParam", "python");
-@@clientName(OpenAI.ToolFileSearchTool, "FileSearchTool", "python");
-@@clientName(
-  OpenAI.ToolFunctionShellToolParam,
-  "FunctionShellToolParam",
-  "python"
-);
-@@clientName(OpenAI.ToolFunctionTool, "FunctionTool", "python");
-@@clientName(OpenAI.ToolImageGenTool, "ImageGenTool", "python");
-@@clientName(OpenAI.ToolLocalShellToolParam, "LocalShellToolParam", "python");
-@@clientName(OpenAI.ToolMcpTool, "MCPTool", "python");
+@@clientName(OpenAI.ToolApplyPatchToolParam, "ApplyPatchToolParam");
+@@clientName(OpenAI.ToolCodeInterpreterTool, "CodeInterpreterTool");
+@@clientName(OpenAI.ToolComputerTool, "ComputerTool");
+@@clientName(OpenAI.ToolComputerUsePreviewTool, "ComputerUsePreviewTool");
+@@clientName(OpenAI.ToolCustomToolParam, "CustomToolParam");
+@@clientName(OpenAI.ToolFileSearchTool, "FileSearchTool");
+@@clientName(OpenAI.ToolFunctionShellToolParam, "FunctionShellToolParam");
+@@clientName(OpenAI.ToolFunctionTool, "FunctionTool");
+@@clientName(OpenAI.ToolImageGenTool, "ImageGenTool");
+@@clientName(OpenAI.ToolLocalShellToolParam, "LocalShellToolParam");
+@@clientName(OpenAI.ToolMcpTool, "MCPTool");
 @@clientName(
   OpenAI.ToolProgrammaticToolCallingParam,
-  "ProgrammaticToolCallingParam",
-  "python"
+  "ProgrammaticToolCallingParam"
 );
-@@clientName(OpenAI.ToolToolSearchToolParam, "ToolSearchToolParam", "python");
-@@clientName(OpenAI.ToolWebSearchPreviewTool, "WebSearchPreviewTool", "python");
-@@clientName(OpenAI.ToolWebSearchTool, "WebSearchTool", "python");
+@@clientName(OpenAI.ToolToolSearchToolParam, "ToolSearchToolParam");
+@@clientName(OpenAI.ToolWebSearchPreviewTool, "WebSearchPreviewTool");
+@@clientName(OpenAI.ToolWebSearchTool, "WebSearchTool");
 
 // Reuse the Tool subclasses in live APIs instead of emitting colliding standalone models.
-@@alternateType(OpenAI.CustomToolParam, OpenAI.ToolCustomToolParam, "python");
-@@alternateType(OpenAI.MCPTool, OpenAI.ToolMcpTool, "python");
+@@alternateType(OpenAI.CustomToolParam, OpenAI.ToolCustomToolParam);
+@@alternateType(OpenAI.MCPTool, OpenAI.ToolMcpTool);
 
 // ********************************************************************************
 // ********************************************************************************
@@ -187,6 +169,124 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
+
+// Disambiguate the unwrapped definitions, even when they are not emitted.
+@@clientName(
+  OpenAI.ApplyPatchToolParam,
+  "ApplyPatchToolParamDefinition",
+  "javascript"
+);
+@@clientName(
+  OpenAI.CodeInterpreterTool,
+  "CodeInterpreterToolDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.ComputerTool, "ComputerToolDefinition", "javascript");
+@@clientName(
+  OpenAI.ComputerUsePreviewTool,
+  "ComputerUsePreviewToolDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.CustomToolParam, "CustomToolParamDefinition", "javascript");
+@@clientName(OpenAI.FileSearchTool, "FileSearchToolDefinition", "javascript");
+@@clientName(
+  OpenAI.FunctionShellToolParam,
+  "FunctionShellToolParamDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.FunctionTool, "FunctionToolDefinition", "javascript");
+@@clientName(OpenAI.ImageGenTool, "ImageGenToolDefinition", "javascript");
+@@clientName(
+  OpenAI.LocalShellToolParam,
+  "LocalShellToolParamDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.MCPTool, "MCPToolDefinition", "javascript");
+@@clientName(
+  OpenAI.ProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParamDefinition",
+  "javascript"
+);
+@@clientName(
+  OpenAI.ToolSearchToolParam,
+  "ToolSearchToolParamDefinition",
+  "javascript"
+);
+@@clientName(
+  OpenAI.WebSearchPreviewTool,
+  "WebSearchPreviewToolDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.WebSearchTool, "WebSearchToolDefinition", "javascript");
+
+// Anonymous helper names are derived from TypeSpec names, not their clientName overrides.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the released JavaScript helper aliases for heterogeneous unions without changing their variants."
+namespace JavaScriptToolCompatibility {
+  // The JS emitter's literal-name escape preserves the public aliases' leading underscores.
+  @clientName("$DO_NOT_NORMALIZE$_CodeInterpreterToolContainer", "javascript")
+  union CodeInterpreterToolContainer {
+    string,
+    OpenAI.AutoCodeInterpreterToolParam,
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_MCPToolAllowedTools", "javascript")
+  union MCPToolAllowedTools {
+    string[],
+    OpenAI.MCPToolFilter,
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_MCPToolRequireApproval", "javascript")
+  union MCPToolRequireApproval {
+    OpenAI.MCPToolRequireApproval,
+    "always",
+    "never",
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_FileSearchToolFiltersValue", "javascript")
+  union FileSearchToolFiltersValueItems {
+    string,
+    numeric,
+  }
+
+  union FileSearchToolFiltersValue {
+    string,
+    numeric,
+    boolean,
+    FileSearchToolFiltersValueItems[],
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_FileSearchToolFiltersFilter", "javascript")
+  union FileSearchToolFiltersFilter {
+    OpenAI.ComparisonFilter,
+    OpenAI.CompoundFilter,
+  }
+}
+
+@@alternateType(
+  OpenAI.ToolCodeInterpreterTool.container,
+  JavaScriptToolCompatibility.CodeInterpreterToolContainer,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.ToolMcpTool.allowed_tools,
+  JavaScriptToolCompatibility.MCPToolAllowedTools | null,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.ToolMcpTool.require_approval,
+  JavaScriptToolCompatibility.MCPToolRequireApproval | null,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.ComparisonFilter.value,
+  JavaScriptToolCompatibility.FileSearchToolFiltersValue,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.CompoundFilter.filters,
+  JavaScriptToolCompatibility.FileSearchToolFiltersFilter[],
+  "javascript"
+);
 
 // Preserve the existing JavaScript operation name.
 @@clientName(EvaluationRules.delete, "delete", "javascript");
@@ -371,6 +471,11 @@ using Azure.AI.Projects;
 @@clientName(Azure.AI.Projects.Agents.generateAgent, "createFromPrompt");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
+@@clientName(
+  AgentOptimizationJobs.downloadFile,
+  "downloadOptimizationJobFile",
+  "python, javascript"
+);
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
@@ -617,6 +722,8 @@ using Azure.AI.Projects;
 
 // Need to explicitly mention both languages to avoid compile error
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
+
+@@access(Evaluators.listDiagnostics, Access.public);
 
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");

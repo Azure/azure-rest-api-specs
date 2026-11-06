@@ -60,12 +60,24 @@ union VoiceAgentInterimResponseTrigger {
   tool: "tool",
 }
 
+@doc("The interim-response implementations supported by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentInterimResponseType {
+  string,
+
+  @doc("Select a static interim response from configured text.")
+  static_interim_response: "static_interim_response",
+
+  @doc("Generate an interim response with a language model.")
+  llm_interim_response: "llm_interim_response",
+}
+
 @doc("Fields shared by interim-response configurations.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInterimResponseConfig {
   @doc("The interim-response implementation.")
-  type: string;
+  type: VoiceAgentInterimResponseType;
 
   @doc("Conditions that may trigger one interim response.")
   triggers?: VoiceAgentInterimResponseTrigger[] = #[
@@ -82,7 +94,7 @@ model VoiceAgentInterimResponseConfig {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentStaticInterimResponseConfig
   extends VoiceAgentInterimResponseConfig {
-  type: "static_interim_response";
+  type: VoiceAgentInterimResponseType.static_interim_response;
 
   @doc("Candidate text values for the interim response.")
   texts?: string[];
@@ -92,7 +104,7 @@ model VoiceAgentStaticInterimResponseConfig
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLlmInterimResponseConfig
   extends VoiceAgentInterimResponseConfig {
-  type: "llm_interim_response";
+  type: VoiceAgentInterimResponseType.llm_interim_response;
 
   @doc("The model used to generate interim responses.")
   `model`?: string;
@@ -403,6 +415,7 @@ model VoiceAgentPostCallDestination {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentEventGridPostCallDestination
   extends VoiceAgentPostCallDestination {
+  @doc("The destination type. Always `event_grid`.")
   type: VoiceAgentPostCallDestinationType.event_grid;
 
   @doc("The name of the Event Grid connection.")
@@ -415,6 +428,7 @@ model VoiceAgentEventGridPostCallDestination
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentRoutinePostCallDestination
   extends VoiceAgentPostCallDestination {
+  @doc("The destination type. Always `routine`.")
   type: VoiceAgentPostCallDestinationType.routine;
 
   @doc("The name of the routine.")
@@ -539,18 +553,30 @@ model VoiceAgentSubagentResponsePolicy {
   progress_update_interval?: duration;
 }
 
+@doc("The greeting modes supported by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentGreetingMode {
+  string,
+
+  @doc("Speak a deterministic greeting rendered from a text template.")
+  template: "template",
+
+  @doc("Generate the greeting with the session model from an opening-turn prompt.")
+  llm_generated: "llm_generated",
+}
+
 @doc("Session-start greeting configuration for a voice agent.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentGreetingConfig {
   @doc("The greeting mode.")
-  type: string;
+  type: VoiceAgentGreetingMode;
 }
 
 @doc("A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTemplateGreetingConfig extends VoiceAgentGreetingConfig {
-  type: "template";
+  type: VoiceAgentGreetingMode.template;
 
   @doc("The Handlebars text template spoken at session start.")
   @minLength(1)
@@ -560,7 +586,7 @@ model VoiceAgentTemplateGreetingConfig extends VoiceAgentGreetingConfig {
 @doc("A greeting authored by the session model from a scoped opening-turn prompt.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLlmGeneratedGreetingConfig extends VoiceAgentGreetingConfig {
-  type: "llm_generated";
+  type: VoiceAgentGreetingMode.llm_generated;
 
   @doc("The Handlebars prompt that guides the opening turn.")
   @minLength(1)
@@ -585,12 +611,21 @@ union VoiceModelType {
   self_deployed: "self_deployed",
 }
 
+@doc("The conversation engine types supported by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceConversationEngineType {
+  string,
+
+  @doc("Use a hosted Foundry agent to handle the conversation.")
+  hosted_agent: "hosted_agent",
+}
+
 @doc("An engine that owns conversation handling for a voice agent.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceConversationEngine {
   @doc("The conversation engine type.")
-  type: string;
+  type: VoiceConversationEngineType;
 }
 
 @doc("A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `voice_conversation_engine` version `1.0.0`. Voice Live connects through the dedicated voice-conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `voice_conversation_engine`.")
@@ -599,7 +634,7 @@ model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   ...Record<never>;
 
   @doc("Selects a hosted Foundry agent as the conversation engine.")
-  type: "hosted_agent";
+  type: VoiceConversationEngineType.hosted_agent;
 
   @doc("The non-empty DNS-like name of the target hosted text agent in the same project.")
   @minLength(1)
@@ -613,19 +648,37 @@ model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   version?: string;
 }
 
+@doc("The tool kinds supported by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentToolType {
+  string,
+
+  @doc("A native function tool executed by the client.")
+  function: "function",
+
+  @doc("A tool exposed by an MCP server.")
+  mcp: "mcp",
+
+  @doc("A service-managed control that acts on the active voice session.")
+  system: "system",
+
+  @doc("A reference to a Foundry toolbox.")
+  toolbox: "toolbox",
+}
+
 @doc("A tool usable by a voice agent.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTool {
   @doc("The tool kind.")
-  type: string;
+  type: VoiceAgentToolType;
 }
 
 @doc("A native function tool executed by the client.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentFunctionTool extends VoiceAgentTool {
   ...OmitProperties<OpenAI.RealtimeFunctionTool, "type" | "name">;
-  type: "function";
+  type: VoiceAgentToolType.function;
 
   @doc("The function name.")
   @minLength(1)
@@ -667,7 +720,7 @@ union VoiceAgentToolResponseScheduling {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentMcpTool extends VoiceAgentTool {
   ...OmitProperties<OpenAI.MCPTool, "type" | "connector_id" | "tunnel_id">;
-  type: "mcp";
+  type: VoiceAgentToolType.mcp;
 
   @doc("When the MCP invocation creates a follow-up response. Defaults to `when_idle`.")
   response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
@@ -678,7 +731,7 @@ model VoiceAgentMcpTool extends VoiceAgentTool {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSystemTool extends VoiceAgentTool {
   @doc("The type of the tool. Always `system`.")
-  type: "system";
+  type: VoiceAgentToolType.system;
 
   @doc("The service-managed control action. Known values are stable; additional values may be added over time.")
   name: VoiceAgentSystemToolName;
@@ -784,9 +837,9 @@ model VoiceAgentTransferRouting {
   strategy: VoiceAgentTransferStrategy;
 
   @doc("Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.")
-  @minValue(1)
-  @maxValue(300)
-  ring_timeout_seconds?: int32 = 20;
+  @extension("minimum", 1)
+  @extension("maximum", 300)
+  ring_timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT20S");
 }
 
 @doc("The supported address formats for a system-tool transfer destination.")
@@ -864,7 +917,7 @@ model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentToolboxTool extends VoiceAgentTool {
   @doc("The type of the tool. Always `toolbox`.")
-  type: "toolbox";
+  type: VoiceAgentToolType.toolbox;
 
   @doc("The name of the toolbox to attach.")
   toolbox_name: string;
