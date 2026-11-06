@@ -90,6 +90,24 @@ interface NetworkBootstrapDevices {
     void,
     NetworkBootstrapDeviceResyncPasswordsResponse
   >;
+
+  @doc("Run the RO Command on the Network Bootstrap Device.")
+  @added(Versions.v2026_07_15_preview)
+  @action("runRoCommand")
+  runRoCommand is ArmResourceActionAsync<
+    NetworkBootstrapDevice,
+    DeviceRoCommand,
+    NetworkBootstrapDeviceRunRoCommandResponse
+  >;
+
+  @doc("Run the RW Command on the Network Bootstrap Device.")
+  @added(Versions.v2026_07_15_preview)
+  @action("runRwCommand")
+  runRwCommand is ArmResourceActionAsync<
+    NetworkBootstrapDevice,
+    DeviceRwCommand,
+    NetworkBootstrapDeviceRunRwCommandResponse
+  >;
 }
 
 @@doc(NetworkBootstrapDevices.create::parameters.resource, "Request payload.");
@@ -106,4 +124,12 @@ interface NetworkBootstrapDevices {
 @@doc(
   NetworkBootstrapDevices.resyncPasswords::parameters.body,
   "Request payload."
+);
+@@doc(
+  NetworkBootstrapDevices.runRoCommand::parameters.body,
+  "Request the command."
+);
+@@doc(
+  NetworkBootstrapDevices.runRwCommand::parameters.body,
+  "Request the command."
 );

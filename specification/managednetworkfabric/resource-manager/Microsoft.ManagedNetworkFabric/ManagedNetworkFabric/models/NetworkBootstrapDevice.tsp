@@ -106,27 +106,79 @@ model NetworkBootstrapDevicePatchProperties {
   ...NetworkBootstrapDevicePatchableProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncPasswords request on a Network Bootstrap Device.")
 model NetworkBootstrapDeviceResyncPasswordsResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The current status of an refresh configuration async operation.")
 model NetworkBootstrapDeviceRefreshConfigurationResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Network Bootstrap Device Administrative State Update Response.")
 model NetworkBootstrapDeviceUpdateAdministrativeStateResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Network Bootstrap Device reboot Response.")
 model NetworkBootstrapDeviceRebootResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Network Bootstrap Device upgrade Response.")
 model NetworkBootstrapDeviceUpgradeResponse {
   ...OperationStatusResult;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Response body for a RunRoCommand request on a Network Bootstrap Device.")
+@added(Versions.v2026_07_15_preview)
+model NetworkBootstrapDeviceRunRoCommandResponse {
+  ...OperationStatusResult;
+
+  @doc("Network Bootstrap Device Run Ro Command Response properties.")
+  properties?: NetworkBootstrapDeviceRoCommandResponseProperties;
+}
+
+@doc("Network Bootstrap Device Ro Command Response properties.")
+@added(Versions.v2026_07_15_preview)
+model NetworkBootstrapDeviceRoCommandResponseProperties {
+  @doc("Gets the configuration state.")
+  @visibility(Lifecycle.Read)
+  configurationState?: ConfigurationState;
+
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @doc("Predefined link containing Device RO Command output.")
+  outputUrl?: url;
+
+  @doc("Device RO command Response limited to 4000 characters.")
+  deviceConfigurationPreview?: string;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Response body for a RunRwCommand request on a Network Bootstrap Device.")
+@added(Versions.v2026_07_15_preview)
+model NetworkBootstrapDeviceRunRwCommandResponse {
+  ...OperationStatusResult;
+
+  @doc("Network Bootstrap Device Run Rw Command Response properties.")
+  properties?: NetworkBootstrapDeviceRwCommandResponseProperties;
+}
+
+@doc("Network Bootstrap Device Rw Command Response properties.")
+@added(Versions.v2026_07_15_preview)
+model NetworkBootstrapDeviceRwCommandResponseProperties {
+  @doc("Gets the configuration state.")
+  @visibility(Lifecycle.Read)
+  configurationState?: ConfigurationState;
+
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @doc("Predefined link containing Device Rw Command output.")
+  outputUrl?: url;
 }

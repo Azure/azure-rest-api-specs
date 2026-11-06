@@ -4,3 +4,10 @@
 - tool: TypeSpecRequirement
   path: ./stable/2023-06-15/*.json
   reason: Brownfield service not ready to migrate
+- tool: LintDiff
+  reason: >
+    API board approved. UUIDs are used for correlation/validation identifiers
+    to ensure uniqueness across distributed validation and upgrade operations.
+  rules: [GuidUsage, R3017]
+  paths:
+    - preview/2026-07-15-preview/managednetworkfabric.json
