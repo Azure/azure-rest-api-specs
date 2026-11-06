@@ -93,6 +93,13 @@ namespace Azure.AI.Projects {
     @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
     session_affinity?: SessionAffinityConfiguration;
 
+    /** Overrides the routing objective for this request. If omitted, the configured routing mode is used. */
+    mode?: ModelRouterMode;
+
+    /** Model names used to narrow the configured model pool for this request. If omitted, the configured model pool is used. */
+    @minItems(1)
+    models?: string[];
+
     /**
      * When true, restricts routing to qualified model and serving API combinations that support
      * all applicable request parameters. Returns 400 (Bad Request) when none qualify.

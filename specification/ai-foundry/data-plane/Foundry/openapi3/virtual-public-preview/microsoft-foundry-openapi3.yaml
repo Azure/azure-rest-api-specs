@@ -96282,6 +96282,15 @@ components:
           x-ms-foundry-meta:
             conditional_previews:
               - ModelRouterControls=V1Preview
+        mode:
+          $ref: '#/components/schemas/ModelRouterMode'
+          description: Overrides the routing objective for this request. If omitted, the configured routing mode is used.
+        models:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: Model names used to narrow the configured model pool for this request. If omitted, the configured model pool is used.
         require_parameters:
           type: boolean
           description: |-
