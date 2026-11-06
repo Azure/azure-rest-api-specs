@@ -1,0 +1,57 @@
+{
+  "operationId": "DataAnnotations_List",
+  "title": "List entity data annotations",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-06-01-preview",
+    "entityName": "frontend-web-app",
+    "startAt": "2026-06-01T00:00:00Z",
+    "endAt": "2026-06-07T00:00:00Z",
+    "maxpagesize": 100
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "annotationId": "a3f1c2d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+            "createdAt": "2026-06-05T12:00:00Z",
+            "description": "Planned maintenance window applied to the frontend web app.",
+            "annotationDetails": {
+              "changeType": "maintenance",
+              "operator": "ops-team"
+            }
+          },
+          {
+            "annotationId": "b4e2d3c5-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+            "createdAt": "2026-06-03T08:30:00Z",
+            "description": "Deployment of release 2026.06.03 completed."
+          }
+        ],
+        "nextLink": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com/api/entities/frontend-web-app/dataAnnotations?api-version=2026-06-01-preview&nextMarker=eyJwYWdlIjoyfQ"
+      }
+    },
+    "400": {
+      "headers": {
+        "x-ms-error-code": "InvalidQuery"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidQuery",
+          "message": "The requested time range is invalid."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "x-ms-error-code": "HealthModelNotFound"
+      },
+      "body": {
+        "error": {
+          "code": "HealthModelNotFound",
+          "message": "The requested health model was not found."
+        }
+      }
+    }
+  }
+}
