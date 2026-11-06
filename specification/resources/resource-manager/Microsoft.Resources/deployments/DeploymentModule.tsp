@@ -155,6 +155,8 @@ model DeploymentModuleResourceScope {
   /**
    * The fully qualified ID of the target scope. For example, `/` for the tenant root, `/providers/Microsoft.Management/managementGroups/{groupId}` for a management group, `/subscriptions/{subscriptionId}` for a subscription, `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}` for a resource group, or the fully qualified ID of a resource for an extension resource scope.
    */
+  // Typed as `string` rather than `armResourceIdentifier` because `@azure-tools/typespec-autorest` emits `"format": "arm-id"`,
+  // which fails `oav` (`Swagger ModelValidation`) on tenant-scope examples where the valid scope ID is `"/"`.
   id: string;
 }
 
