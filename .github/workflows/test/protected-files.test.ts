@@ -25,7 +25,7 @@ function setup(author = "spec-author", paths = [RULESET]) {
     labels: [] as { name: string }[],
   };
   const github = createMockGithub();
-  github.rest.pulls.get.mockImplementation(async () => ({ data: structuredClone(pr) }));
+  github.rest.pulls.get.mockImplementation(() => Promise.resolve({ data: structuredClone(pr) }));
   github.rest.pulls.listFiles.mockResolvedValue({
     data: paths.map((filename) => ({ filename })),
   });
@@ -284,13 +284,19 @@ describe("Protected Files", () => {
     approve();
     pr.head.sha = "new-head";
     await run();
-    expect(
-      github.rest.repos.createCommitStatus.mock.calls.map(([args]) => [args.sha, args.state]),
-    ).toEqual([
-      ["head", "pending"],
-      ["new-head", "pending"],
-      ["new-head", "success"],
-    ]);
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledTimes(3);
+    expect(github.rest.repos.createCommitStatus).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({ sha: "head", state: "pending" }),
+    );
+    expect(github.rest.repos.createCommitStatus).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({ sha: "new-head", state: "pending" }),
+    );
+    expect(github.rest.repos.createCommitStatus).toHaveBeenNthCalledWith(
+      3,
+      expect.objectContaining({ sha: "new-head", state: "success" }),
+    );
   });
 
   it.each(["head", "base", "target", "label", "closed"])(

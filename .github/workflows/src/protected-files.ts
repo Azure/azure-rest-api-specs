@@ -6,7 +6,7 @@ import { inlineCode } from "../../shared/src/markdown.ts";
 import type { Core, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
 const APPROVAL_LABEL = "protectedfiles-approved";
-const APPROVABLE_PATH = "eng/typespec-rulesets/index.ts";
+const APPROVAL_PATH = "eng/typespec-rulesets/index.ts";
 
 // Maintainer entries are based on Azure/azure-rest-api-specs-maintainers; keep access up to date.
 const ALLOWED_AUTHORS = new Set(
@@ -94,13 +94,13 @@ export function checkProtectedFiles({
     };
   }
 
-  const blockedFiles = protectedFiles.filter((file) => !approvedBy || file !== APPROVABLE_PATH);
+  const blockedFiles = protectedFiles.filter((file) => !approvedBy || file !== APPROVAL_PATH);
   if (approvedBy && blockedFiles.length === 0) {
-    core.info(`${APPROVAL_LABEL} applied by '${approvedBy}' approves ${APPROVABLE_PATH}`);
+    core.info(`${APPROVAL_LABEL} applied by '${approvedBy}' approves ${APPROVAL_PATH}`);
     return {
       conclusion: "success",
       title: "TypeSpec ruleset change approved",
-      summary: `${inlineCode(APPROVAL_LABEL)} applied by ${inlineCode(approvedBy)} approves changes to ${inlineCode(APPROVABLE_PATH)}. Other merge requirements still apply.`,
+      summary: `${inlineCode(APPROVAL_LABEL)} applied by ${inlineCode(approvedBy)} approves changes to ${inlineCode(APPROVAL_PATH)}. Other merge requirements still apply.`,
     };
   }
 
@@ -108,7 +108,7 @@ export function checkProtectedFiles({
   for (const file of blockedFiles) {
     const message = matchesAny(file, SYNCED_PATHS)
       ? `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`
-      : file === APPROVABLE_PATH
+      : file === APPROVAL_PATH
         ? `File '${file}' requires an allowed author or authorized '${APPROVAL_LABEL}' approval on public main. See https://aka.ms/ci-fix#protected-files.`
         : `File '${file}' is repository-managed and can only be changed by allowed repository maintainers. Remove this change from your PR. If a tooling change is needed, open an issue for the repository maintainers.`;
     core.error(message, { file });
@@ -128,7 +128,7 @@ export function checkProtectedFiles({
     summary:
       `${messages.join("\n")}\n\n` +
       "See the [Protected Files guide](https://aka.ms/ci-fix#protected-files). " +
-      `Only allowlisted PR authors may change protected files, except for authorized ${inlineCode(APPROVAL_LABEL)} approval of ${inlineCode(APPROVABLE_PATH)} on public main.`,
+      `Only allowlisted PR authors may change protected files, except for authorized ${inlineCode(APPROVAL_LABEL)} approval of ${inlineCode(APPROVAL_PATH)} on public main.`,
   };
 }
 
@@ -191,7 +191,7 @@ export async function runProtectedFiles({ github, context, core }: GitHubScriptA
         owner === "Azure" &&
         repo === "azure-rest-api-specs" &&
         pr.base.ref === "main" &&
-        changedFiles.includes(APPROVABLE_PATH) &&
+        changedFiles.includes(APPROVAL_PATH) &&
         pr.labels.some((label) => label.name === APPROVAL_LABEL)
       ) {
         const policy: unknown = parse(
@@ -221,6 +221,7 @@ export async function runProtectedFiles({ github, context, core }: GitHubScriptA
           .filter(
             (event) =>
               (event.event === "labeled" || event.event === "unlabeled") &&
+              "label" in event &&
               event.label?.name === APPROVAL_LABEL,
           )
           .sort((a, b) => b.id - a.id)[0];
