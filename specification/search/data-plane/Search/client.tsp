@@ -6361,3 +6361,178 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(Search.KnowledgeBaseReferencesCompletedStreamEvent, Access.public);
 @@access(Search.KnowledgeBaseErrorStreamEvent, Access.public);
 @@access(Search.KnowledgeBaseResponseCompletedStreamEvent, Access.public);
+
+// Preserve the body-first protocol signatures released in the JavaScript 13.0.0 SDK.
+namespace JavaScriptCompatibility {
+  op analyze(
+    @TypeSpec.Http.body request: Search.AnalyzeRequest,
+    ...Search.indexNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+  ): void;
+
+  op createOrUpdateIndex(
+    @TypeSpec.Http.body index: Search.SearchIndex,
+    ...Search.indexNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+
+    /** Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. */
+    @TypeSpec.Http.query allowIndexDowntime?: boolean,
+
+    ...Search.preferHeader,
+  ): void;
+
+  op createOrUpdateSynonymMap(
+    @TypeSpec.Http.body synonymMap: Search.SynonymMap,
+    ...Search.synonymMapNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  op createOrUpdateAlias(
+    @TypeSpec.Http.body `alias`: Search.SearchAlias,
+    ...Search.aliasNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  op createOrUpdateKnowledgeBase(
+    @TypeSpec.Http.body knowledgeBase: Search.KnowledgeBase,
+    ...Search.knowledgeBaseNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  op createOrUpdateKnowledgeSource(
+    @TypeSpec.Http.body knowledgeSource: Search.KnowledgeSource,
+    ...Search.sourceNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  op createOrUpdateIndexer(
+    @TypeSpec.Http.body indexer: Search.SearchIndexer,
+    ...Search.indexerNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  op createOrUpdateSkillset(
+    @TypeSpec.Http.body skillset: Search.SearchIndexerSkillset,
+    ...Search.skillsetNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  op createOrUpdateDataSource(
+    @TypeSpec.Http.body dataSource: Search.SearchIndexerDataSource,
+    ...Search.dataSourceNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+}
+
+@@override(
+  SearchIndexClient.analyze,
+  JavaScriptCompatibility.analyze,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateIndex,
+  JavaScriptCompatibility.createOrUpdateIndex,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateSynonymMap,
+  JavaScriptCompatibility.createOrUpdateSynonymMap,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateAlias,
+  JavaScriptCompatibility.createOrUpdateAlias,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateKnowledgeBase,
+  JavaScriptCompatibility.createOrUpdateKnowledgeBase,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateKnowledgeSource,
+  JavaScriptCompatibility.createOrUpdateKnowledgeSource,
+  "javascript"
+);
+@@override(
+  SearchIndexerClient.createOrUpdateIndexer,
+  JavaScriptCompatibility.createOrUpdateIndexer,
+  "javascript"
+);
+@@override(
+  SearchIndexerClient.createOrUpdateSkillset,
+  JavaScriptCompatibility.createOrUpdateSkillset,
+  "javascript"
+);
+@@override(
+  SearchIndexerClient.createOrUpdateDataSource,
+  JavaScriptCompatibility.createOrUpdateDataSource,
+  "javascript"
+);
+
+// Keep the released result-wrapper APIs alongside the new paged operations.
+namespace SearchIndexClient {
+  @scope("javascript")
+  op getSynonymMaps is Search.SynonymMaps.list;
+}
+
+namespace SearchIndexerClient {
+  @scope("javascript")
+  op getIndexers is Search.Indexers.list;
+
+  @scope("javascript")
+  op getSkillsets is Search.Skillsets.list;
+
+  @scope("javascript")
+  op getDataSourceConnections is Search.DataSources.list;
+}
+
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  SearchIndexClient.getSynonymMaps,
+  "javascript"
+);
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  SearchIndexerClient.getIndexers,
+  "javascript"
+);
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  SearchIndexerClient.getSkillsets,
+  "javascript"
+);
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  SearchIndexerClient.getDataSourceConnections,
+  "javascript"
+);
