@@ -18,11 +18,6 @@ alias ApiVersionHeader = {
   version: string;
 };
 
-/** Response headers for retrieving a user delegation key. */
-alias UserDelegationKeyResponseHeaders = {
-  ...RequestPriorityResponseHeader;
-};
-
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperation<
@@ -30,8 +25,7 @@ op StorageOperation<
   TResponse extends TypeSpec.Reflection.Model | void,
   RequestMediaType extends string = "application/xml",
   ResponseMediaType extends string = "application/xml",
-  TError = Error,
-  TResponseHeaders extends TypeSpec.Reflection.Model = RequestPriorityResponseHeader
+  TError = Error
 >(
   /** Content-Type header */
   #suppress "@typespec/http/content-type-ignored" "Template for existing API"
@@ -53,7 +47,7 @@ op StorageOperation<
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdHeader;
-      ...TResponseHeaders;
+      ...RequestPriorityResponseHeader;
     })
   | TError;
 
@@ -190,11 +184,7 @@ interface Service {
       /** The user delegation key. */
       @body
       userDelegationKey: UserDelegationKey;
-    },
-    "application/xml",
-    "application/xml",
-    Error,
-    UserDelegationKeyResponseHeaders
+    }
   >;
 
   /** Returns information about the storage account. */

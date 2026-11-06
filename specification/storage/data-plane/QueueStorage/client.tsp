@@ -62,13 +62,6 @@ interface QueueClient extends Queue {}
   "rust"
 );
 
-// Leave the external response body's header accessor to handwritten Rust code.
-@@access(
-  UserDelegationKeyResponseHeaders.effectiveRequestPriority,
-  Access.internal,
-  "rust"
-);
-
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   KeyInfo.start,
