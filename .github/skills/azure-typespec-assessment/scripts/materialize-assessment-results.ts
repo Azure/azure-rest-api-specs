@@ -1,9 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
+import {
+  AssessmentRuntimeError,
+  createRuntimePhaseProvenance,
+  verifyAssessmentRuntime,
+  verifyRuntimePhaseProvenance,
+} from "./assessment-runtime.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { assembleCompliance, readComplianceCatalog } from "./compliance-assessment.ts";
 import { canonicalJson } from "./stable-id.ts";
 import {
+  hashArtifacts,
   readWorkflowState,
   resolveWorkPath,
   transitionWorkflowState,
@@ -1135,6 +1142,8 @@ export function materializeAssessmentResults({
   const root = path.resolve(work);
   const started = performance.now();
   try {
+    const runtime = verifyAssessmentRuntime(root, import.meta.url);
+    const preparation = verifyRuntimePhaseProvenance(root, "preparation", runtime);
     const index = readJsonObject(resolveWorkPath(root, INDEX_FILE)) as AgentIndex;
     const workflowState = readWorkflowState(root);
     if (
@@ -1151,6 +1160,8 @@ export function materializeAssessmentResults({
     }
     transitionWorkflowState(root, "materializing-agent-results", {
       failure: undefined,
+      runtimePhases: { preparation },
+      resultHashes: undefined,
     });
     if (!index.input?.path) {
       throw new Error("Agent index must declare its model input path.");
@@ -1167,6 +1178,7 @@ export function materializeAssessmentResults({
         readJsonObject(resolveWorkPath(root, relativePath)),
       );
     }
+    const materializationInputs = hashArtifacts(root, [INDEX_FILE, decisionsPath]);
     const agentDecisions = readJsonObject(resolveWorkPath(root, decisionsPath));
     validateCompactDecisions(agentDecisions);
     const requests = canonicalRequests(modelInput, artifacts);
@@ -1211,6 +1223,16 @@ export function materializeAssessmentResults({
       ["compliance-search-evidence.json", evidence],
       ["assessment-judgment.json", judgment],
     ];
+    verifyAssessmentRuntime(root, import.meta.url);
+    const inputErrors = verifyArtifactHashes(root, {
+      ...index.canonicalArtifactHashes,
+      ...materializationInputs,
+    });
+    if (inputErrors.length) {
+      throw new AssessmentRuntimeError(
+        `Assessment inputs changed during materialization.\n${inputErrors.join("\n")}`,
+      );
+    }
     writeArtifactsAtomically(root, outputArtifacts);
     const outputBytes = outputArtifacts.reduce((total, [relativePath, value]) => {
       return value === undefined
@@ -1219,6 +1241,15 @@ export function materializeAssessmentResults({
     }, 0);
     const materializationMs = Math.round(performance.now() - started);
     transitionWorkflowState(root, "awaiting-finalization", {
+      runtimePhases: {
+        preparation,
+        materialization: createRuntimePhaseProvenance(
+          root,
+          runtime,
+          [INDEX_FILE, decisionsPath],
+          outputArtifacts.filter(([, value]) => value !== undefined).map(([file]) => file),
+        ),
+      },
       artifacts: {
         ...(workflowState?.artifacts ?? {}),
         inference: inference ? "inference.json" : null,
@@ -1245,7 +1276,10 @@ export function materializeAssessmentResults({
     const message = compactError(error);
     transitionWorkflowState(root, "awaiting-agent-judgment", {
       failure: {
-        code: "materialization-failed",
+        code:
+          error instanceof AssessmentRuntimeError
+            ? "runtime-tooling-error"
+            : "materialization-failed",
         message,
         recordedAt: new Date().toISOString(),
       },

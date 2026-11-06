@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { isRecord, readJsonObject } from "./cli.ts";
+import type { AssessmentRuntime, RuntimePhaseProvenance } from "./assessment-runtime.ts";
 
 export const WORKFLOW_STATE_FILE = "workflow-state.json";
 
@@ -27,6 +28,10 @@ type WorkflowState = {
   phases: Record<string, WorkflowPhase>;
   telemetry: Record<string, unknown>;
   artifactHashes?: Record<string, string>;
+  runtime?: AssessmentRuntime;
+  runtimePhases?: Partial<
+    Record<"preparation" | "materialization" | "finalization", RuntimePhaseProvenance>
+  >;
   [key: string]: unknown;
 };
 type WorkflowPhase = {

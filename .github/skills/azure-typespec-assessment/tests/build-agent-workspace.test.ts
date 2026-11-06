@@ -1,9 +1,15 @@
 import { assert, test } from "vitest";
 import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+import {
+  captureAssessmentRuntime,
+  verifyRuntimePhaseProvenance,
+} from "../scripts/assessment-runtime.ts";
+import type { AssessmentRuntime, RuntimeCommand } from "../scripts/assessment-runtime.ts";
 import { buildAgentWorkspace } from "../scripts/build-agent-workspace.ts";
 import { readJson, writeJson } from "../scripts/cli.ts";
+import { readWorkflowState, transitionWorkflowState } from "../scripts/workflow-state.ts";
 
 type AssessmentModelInput = import("../scripts/runtime-types.ts").AssessmentModelInput;
 
@@ -27,6 +33,12 @@ type AgentDecisionsDraft = {
   catalogScores: unknown[];
 };
 type AgentWorkspaceIndex = {
+  preparationId: string;
+  runtime: AssessmentRuntime;
+  requiredOutputs: {
+    schemas: Record<string, string>;
+    resolvedSchemas: Record<string, string>;
+  };
   coverage: {
     semanticIntentIds: string[];
     downstreamCandidateIds: string[];
@@ -44,11 +56,15 @@ type AgentWorkspaceIndex = {
   };
   materialization: {
     script: string;
-    command: string;
+    command: RuntimeCommand;
+  };
+  finalization: {
+    script: string;
+    command: RuntimeCommand;
   };
   serving: {
     script: string;
-    command: string;
+    command: RuntimeCommand;
     requiredOutput: string;
     longLived: boolean;
     readStartupOutputImmediately: boolean;
@@ -58,7 +74,7 @@ type AgentWorkspaceIndex = {
 };
 
 function fixture() {
-  const work = fs.mkdtempSync(path.join(os.tmpdir(), "agent-workspace-"));
+  const work = fs.mkdtempSync(path.join(process.cwd(), ".agent workspace & ' test-"));
   const source = {
     sourceChanges: [
       {
@@ -244,15 +260,51 @@ void test("builds a compact complete Agent workspace", () => {
     assert.equal(index.counts.assessedSemanticIntents, 1);
     assert.equal(index.counts.informationalSemanticIntents, 0);
     assert.equal(index.materialization.script, "scripts/materialize-assessment-results.ts");
-    assert.equal(
-      index.materialization.command,
-      "node <skill-directory>/scripts/materialize-assessment-results.ts --work <work-directory>",
+    const runtimeRoot = fs.realpathSync(
+      path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."),
     );
+    assert.deepEqual(
+      index.runtime,
+      captureAssessmentRuntime(
+        new URL("../scripts/build-agent-workspace.ts", import.meta.url).href,
+      ),
+    );
+    assert.equal(index.runtime.root, runtimeRoot);
+    assert.match(index.preparationId, /^[a-f0-9-]{36}$/);
+    assert.deepEqual(index.materialization.command, {
+      executable: process.execPath,
+      args: [
+        path.join(runtimeRoot, "scripts", "materialize-assessment-results.ts"),
+        "--work",
+        work,
+      ],
+    });
+    assert.equal(index.finalization.script, "scripts/finalize-assessment.ts");
+    assert.deepEqual(index.finalization.command, {
+      executable: process.execPath,
+      args: [path.join(runtimeRoot, "scripts", "finalize-assessment.ts"), "--work", work],
+    });
     assert.equal(index.serving.script, "scripts/serve-assessment.ts");
-    assert.equal(
-      index.serving.command,
-      "node <skill-directory>/scripts/serve-assessment.ts --file <work-directory>/assessment.html",
-    );
+    assert.deepEqual(index.serving.command, {
+      executable: process.execPath,
+      args: [
+        path.join(runtimeRoot, "scripts", "serve-assessment.ts"),
+        "--file",
+        path.join(work, "assessment.html"),
+      ],
+    });
+    for (const [name, relativePath] of Object.entries(index.requiredOutputs.schemas)) {
+      assert.equal(
+        index.requiredOutputs.resolvedSchemas[name],
+        path.resolve(runtimeRoot, relativePath),
+      );
+    }
+    for (const file of Object.values(index.requiredOutputs.resolvedSchemas)) {
+      assert.equal(path.isAbsolute(file), true);
+      assert.equal(fs.existsSync(file), true);
+    }
+    assert.notInclude(JSON.stringify(index), "<skill-directory>");
+    assert.notInclude(JSON.stringify(index), "<work-directory>");
     assert.equal(index.serving.requiredOutput, "http://127.0.0.1:<port>/assessment.html");
     assert.equal(index.serving.longLived, true);
     assert.equal(index.serving.readStartupOutputImmediately, true);
@@ -275,6 +327,35 @@ void test("builds a compact complete Agent workspace", () => {
     const state = readJson(path.join(work, "workflow-state.json")) as TestWorkflowState;
     assert.equal(state.state, "awaiting-agent-judgment");
     assert.equal(state.telemetry.agentIndexBytes, fs.statSync(result.indexPath).size);
+    assert.deepEqual(readWorkflowState(work)?.runtime, index.runtime);
+    assert.deepEqual(
+      verifyRuntimePhaseProvenance(work, "preparation", index.runtime).runtime,
+      index.runtime,
+    );
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
+void test("repreparation clears earlier phase provenance even with identical canonical inputs", () => {
+  const { work } = fixture();
+  try {
+    const first = buildAgentWorkspace({ work }).index;
+    const preparation = verifyRuntimePhaseProvenance(work, "preparation", first.runtime);
+    transitionWorkflowState(work, "complete", {
+      runtimePhases: {
+        preparation,
+        materialization: preparation,
+        finalization: preparation,
+      },
+      resultHashes: { "assessment.json": "obsolete" },
+    });
+    const second = buildAgentWorkspace({ work }).index;
+    assert.notEqual(first.preparationId, second.preparationId);
+    assert.deepEqual(first.runtime, second.runtime);
+    const state = readWorkflowState(work);
+    assert.deepEqual(Object.keys(state?.runtimePhases ?? {}), ["preparation"]);
+    assert.isUndefined(state?.resultHashes);
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
