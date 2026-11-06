@@ -1,0 +1,23 @@
+{
+  "title": "Runbooks_GenerateUploadUrl_MaximumSet",
+  "operationId": "Runbooks_GenerateUploadUrl",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "runbookName": "runbook1",
+    "body": {
+      "path": "runbooks/runbook1/input.json"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "path": "runbooks/runbook1/input.json",
+        "uploadUrl": "https://contosostorage.blob.core.windows.net/runbooks/runbook1/input.json?sv=2026-01-01&sig=redacted",
+        "expiresAt": "2026-08-01T13:00:00Z"
+      }
+    }
+  }
+}
