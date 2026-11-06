@@ -327,6 +327,13 @@ op regenerateKeyCustom(
   "CognitiveServicesConnection",
   "csharp"
 );
+// Keep public SDK types while credential visibility excludes ordinary reads.
+@@alternateType(AccountWrite, Account);
+@@alternateType(AccountPropertiesRead, AccountProperties);
+@@alternateType(
+  ConnectionPropertiesV2BasicResourceRead,
+  ConnectionPropertiesV2BasicResource
+);
 @@clientName(
   ProjectCapabilityHost,
   "CognitiveServicesProjectScopedCapabilityHost",
