@@ -87,3 +87,10 @@ dimension analyzers against different inputs. Stop on the coordinator's
 no-change result. If every active dimension is blocked, preserve the blocked
 `not-assessed` result without Agent judgment. If only some are blocked, judge
 ready items and retain every blocker reason.
+
+Sparse compilation worktrees include the selected service analysis roots plus
+`eng/typespec-rulesets`, so pnpm resolves the repository workspace package from
+the base or head revision being compiled. The support root is checkout-only:
+change discovery, project discovery, local-import boundaries, Semantic intent
+scope, and reported `changedFiles` remain restricted to the selected service
+roots.
