@@ -15,10 +15,112 @@ export type SdkName = (typeof SdkName)[keyof typeof SdkName];
 
 export const SdkNameSchema: import("zod").ZodType<SdkName> = z.enum(Object.values(SdkName));
 
+/** Shared limits for producer and consumer validation of generated SDK review input. */
+export const SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE = 2_048;
+export const SDK_REVIEW_MAX_TOTAL_CHANGED_FILES = 4_096;
+export const SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE = 20_000;
+export const SDK_REVIEW_MAX_TOTAL_SNAPSHOT_FILES = 40_000;
+export const SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE = 64 * 1024 * 1024;
+export const SDK_REVIEW_MAX_TOTAL_SNAPSHOT_BYTES = 128 * 1024 * 1024;
+
+function containsControlCharacter(value: string): boolean {
+  return [...value].some((character) => {
+    const characterCode = character.charCodeAt(0);
+    return characterCode <= 0x1f || characterCode === 0x7f;
+  });
+}
+
+/**
+ * Validates that a relative POSIX path has no root prefix, parent traversal (`..`),
+ * current-dir segments (`.`), empty segments, backslashes, or control characters.
+ */
+export function isSafeRelativePosixPath(value: string): boolean {
+  if (
+    typeof value !== "string" ||
+    value.length === 0 ||
+    value.length > 512 ||
+    value.startsWith("/") ||
+    value.endsWith("/") ||
+    value.includes("\\") ||
+    containsControlCharacter(value) ||
+    /^[A-Za-z]:/.test(value)
+  ) {
+    return false;
+  }
+  const segments = value.split("/");
+  return segments.every((segment) => segment.length > 0 && segment !== "." && segment !== "..");
+}
+
+export const SafeRelativePosixPathSchema = z
+  .string()
+  .refine(isSafeRelativePosixPath, "Expected a safe normalized relative POSIX path");
+
+const GitCommitShaSchema = z.string().regex(/^[0-9a-f]{40}$/i, "Expected a 40-char git SHA");
+
 /*
  * Data for the API view request.
  */
-export const APIViewRequestDataSchema = z.object({ packageName: z.string(), filePath: z.string() });
+export const APIViewRequestDataSchema = z
+  .object({
+    packageName: z.string(),
+    filePath: z.string(),
+    packageRootPath: SafeRelativePosixPathSchema.optional(),
+    changedFiles: z.array(SafeRelativePosixPathSchema).optional(),
+    sdkBaseCommitSha: GitCommitShaSchema.optional(),
+    reviewInputPath: SafeRelativePosixPathSchema.optional(),
+    reviewInputFileCount: z
+      .number()
+      .int()
+      .positive()
+      .max(SDK_REVIEW_MAX_SNAPSHOT_FILES_PER_PACKAGE)
+      .optional(),
+    reviewInputBytes: z
+      .number()
+      .int()
+      .positive()
+      .max(SDK_REVIEW_MAX_SNAPSHOT_BYTES_PER_PACKAGE)
+      .optional(),
+  })
+  .superRefine((request, context) => {
+    const reviewFields = [
+      request.packageRootPath,
+      request.changedFiles,
+      request.sdkBaseCommitSha,
+      request.reviewInputPath,
+      request.reviewInputFileCount,
+      request.reviewInputBytes,
+    ];
+    const definedReviewFields = reviewFields.filter((value) => value !== undefined).length;
+    if (definedReviewFields !== 0 && definedReviewFields !== reviewFields.length) {
+      context.addIssue({
+        code: "custom",
+        message: "SDK review input fields must be provided together",
+      });
+      return;
+    }
+    if (!request.packageRootPath || !request.changedFiles) {
+      return;
+    }
+
+    const packagePrefix = `${request.packageRootPath}/`;
+    const uniqueChangedFiles = new Set(request.changedFiles);
+    if (uniqueChangedFiles.size !== request.changedFiles.length) {
+      context.addIssue({
+        code: "custom",
+        path: ["changedFiles"],
+        message: "changedFiles must not contain duplicates",
+      });
+    }
+    for (const [index, changedFile] of request.changedFiles.entries()) {
+      if (!changedFile.startsWith(packagePrefix)) {
+        context.addIssue({
+          code: "custom",
+          path: ["changedFiles", index],
+          message: `Changed file must be inside packageRootPath '${request.packageRootPath}'`,
+        });
+      }
+    }
+  });
 export type APIViewRequestData = z.infer<typeof APIViewRequestDataSchema>;
 
 /**
