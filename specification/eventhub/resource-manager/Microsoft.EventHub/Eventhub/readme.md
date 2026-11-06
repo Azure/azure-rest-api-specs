@@ -275,6 +275,15 @@ input-file:
 - preview/2026-07-01-preview/openapi.json
 ```
 
+### Tag: package-2026-09-preview
+
+These settings apply only when `--tag=package-2026-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-09-preview'
+input-file:
+- preview/2026-09-01-preview/openapi.json
+```
+
 ## Suppression
 
 ``` yaml
