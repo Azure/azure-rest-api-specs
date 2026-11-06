@@ -33,6 +33,18 @@ interface Microsoft365Publishing {
     Microsoft365PublishResponse
   >;
 
+  /** Unpublishes a Foundry agent from Microsoft 365 / Microsoft Teams. */
+  @summary("Unpublish an agent from Microsoft 365")
+  @post
+  @route("/agents/{agent_name}/microsoft365/unpublish")
+  unpublishAgentFromMicrosoft365 is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent to unpublish. */
+      @path agent_name: string;
+    },
+    NoContentResponse
+  >;
+
   /**
    * Generates the Microsoft Teams app package (zip) for a Foundry agent from the supplied publish
    * request, without publishing it. Returns the app package as `application/zip`.
