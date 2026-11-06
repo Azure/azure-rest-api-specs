@@ -82,6 +82,7 @@ model UserConversationSimulationPreviewEvalRunDataSource
 }
 
 /** Existing trace-evaluation inputs supported by scheduled rules. */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Subset of existing EvalRunDataSource variants accepted by scheduled rules; expressing it with union extends requires the experimental union-extends feature."
 union TraceEvaluationSource {
   /** Trace-query inputs with lookback and ingestion-delay settings. */
   traces: TracesEvalRunDataSource,
@@ -117,6 +118,7 @@ model TraceEvaluationRuleAction extends EvaluationRuleAction {
 }
 
 /** Dataset inputs supported by scheduled rules. Targets are configured within the selected source. */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Subset of existing EvalRunDataSource variants accepted by scheduled rules; expressing it with union extends requires the experimental union-extends feature."
 union DatasetEvaluationSource {
   /** JSONL inputs from file content or a file ID. */
   jsonl: OpenAI.CreateEvalJsonlRunDataSource,
