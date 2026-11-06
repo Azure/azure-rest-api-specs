@@ -51,8 +51,7 @@ namespace Microsoft.DesktopVirtualization;
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Provider-level operations discovery returns supported RP operations, not ARM resource instances; preserve the existing custom route and response model."
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This is the standard operations interface for our service"
   @tag("Operations")
   @autoRoute
@@ -74,6 +73,11 @@ interface Operations {
  * The available API versions.
  */
 enum Versions {
+  /**
+   * The 2026-04-16 API Version.
+   */
+  v2026_04_16: "2026-04-16",
+
   /**
    * The latest public preview API version.
    */

@@ -2122,6 +2122,9 @@
           "HostPools_ListRegistrationTokens": {
             "$ref": "./examples/HostPools_ListRegistrationTokens.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3724,9 +3727,16 @@
             "description": "The path to the VM.",
             "required": false,
             "type": "string",
+            "format": "arm-id",
             "minLength": 3,
             "maxLength": 1092,
-            "pattern": "^[A-Z][a-z][0-9][@./-_ ]*$"
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Compute/virtualMachines"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -4086,6 +4096,9 @@
           "SessionHosts_ListSingleSessionHostRegistrationTokens_Post": {
             "$ref": "./examples/SessionHost_ListSingleSessionHostRegistrationTokens_Post.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6178,7 +6191,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -6519,7 +6533,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -6713,7 +6728,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -6804,7 +6820,7 @@
           "description": "Tenant that the resource is being requested on behalf of."
         },
         "deploymentScope": {
-          "$ref": "#/definitions/DeploymentScope",
+          "$ref": "#/definitions/ReadOnlyDeploymentScope",
           "description": "DeploymentScope type for ApplicationGroup.",
           "readOnly": true
         }
@@ -6852,7 +6868,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -7269,7 +7286,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -7520,7 +7538,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -7814,7 +7833,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -8519,7 +8539,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -8957,7 +8978,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -9106,7 +9128,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -9285,6 +9308,31 @@
         ]
       }
     },
+    "ReadOnlyDeploymentScope": {
+      "type": "string",
+      "description": "Read-only deployment scope for ApplicationGroup.",
+      "enum": [
+        "Geographical",
+        "Regional"
+      ],
+      "x-ms-enum": {
+        "name": "ReadOnlyDeploymentScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Geographical",
+            "value": "Geographical",
+            "description": "For geographical Broker and ArmProvider talking to Geographical SQL DB"
+          },
+          {
+            "name": "Regional",
+            "value": "Regional",
+            "description": "For regional Broker and ArmProvider talking to regional SQL DB"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "RegistrationInfo": {
       "type": "object",
       "description": "Represents a RegistrationInfo definition.",
@@ -9296,7 +9344,9 @@
         },
         "token": {
           "type": "string",
-          "description": "The registration token base64 encoded string."
+          "format": "password",
+          "description": "The registration token base64 encoded string.",
+          "x-ms-secret": true
         },
         "registrationTokenOperation": {
           "$ref": "#/definitions/RegistrationTokenOperation",
@@ -9349,7 +9399,9 @@
         },
         "token": {
           "type": "string",
-          "description": "The registration token base64 encoded string."
+          "format": "password",
+          "description": "The registration token base64 encoded string.",
+          "x-ms-secret": true
         }
       }
     },
@@ -9496,7 +9548,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -9640,7 +9693,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -9739,7 +9793,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -9776,29 +9831,8 @@
           "description": "The desired startup behavior during the ramp up period for personal vms in the hostpool."
         },
         "rampUpStartVMOnConnect": {
-          "type": "string",
-          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.",
-          "default": "Enable",
-          "enum": [
-            "Enable",
-            "Disable"
-          ],
-          "x-ms-enum": {
-            "name": "SetStartVMOnConnect",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enable",
-                "value": "Enable",
-                "description": "Start VM on Connect is enabled"
-              },
-              {
-                "name": "Disable",
-                "value": "Disable",
-                "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
-              }
-            ]
-          }
+          "$ref": "#/definitions/SetStartVMOnConnect",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually."
         },
         "rampUpActionOnDisconnect": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -9825,29 +9859,8 @@
           "description": "Starting time for peak period."
         },
         "peakStartVMOnConnect": {
-          "type": "string",
-          "description": "The desired configuration of Start VM On Connect for the hostpool during the peak phase.",
-          "default": "Enable",
-          "enum": [
-            "Enable",
-            "Disable"
-          ],
-          "x-ms-enum": {
-            "name": "SetStartVMOnConnect",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enable",
-                "value": "Enable",
-                "description": "Start VM on Connect is enabled"
-              },
-              {
-                "name": "Disable",
-                "value": "Disable",
-                "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
-              }
-            ]
-          }
+          "$ref": "#/definitions/SetStartVMOnConnect",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the peak phase."
         },
         "peakActionOnDisconnect": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -9874,29 +9887,8 @@
           "description": "Starting time for ramp down period."
         },
         "rampDownStartVMOnConnect": {
-          "type": "string",
-          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.",
-          "default": "Enable",
-          "enum": [
-            "Enable",
-            "Disable"
-          ],
-          "x-ms-enum": {
-            "name": "SetStartVMOnConnect",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enable",
-                "value": "Enable",
-                "description": "Start VM on Connect is enabled"
-              },
-              {
-                "name": "Disable",
-                "value": "Disable",
-                "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
-              }
-            ]
-          }
+          "$ref": "#/definitions/SetStartVMOnConnect",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp down phase."
         },
         "rampDownActionOnDisconnect": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -9923,29 +9915,8 @@
           "description": "Starting time for off-peak period."
         },
         "offPeakStartVMOnConnect": {
-          "type": "string",
-          "description": "The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.",
-          "default": "Enable",
-          "enum": [
-            "Enable",
-            "Disable"
-          ],
-          "x-ms-enum": {
-            "name": "SetStartVMOnConnect",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enable",
-                "value": "Enable",
-                "description": "Start VM on Connect is enabled"
-              },
-              {
-                "name": "Disable",
-                "value": "Disable",
-                "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
-              }
-            ]
-          }
+          "$ref": "#/definitions/SetStartVMOnConnect",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the off-peak phase."
         },
         "offPeakActionOnDisconnect": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -10215,7 +10186,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -10875,7 +10847,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -11122,7 +11095,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -11186,7 +11160,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -11756,6 +11731,30 @@
         ]
       }
     },
+    "SetStartVMOnConnect": {
+      "type": "string",
+      "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SetStartVMOnConnect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Start VM on Connect is enabled"
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
+          }
+        ]
+      }
+    },
     "ShortcutsExtension": {
       "type": "object",
       "description": "Additional shortcut settings for a remote application.",
@@ -11795,7 +11794,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -12083,7 +12083,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -12242,7 +12243,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [

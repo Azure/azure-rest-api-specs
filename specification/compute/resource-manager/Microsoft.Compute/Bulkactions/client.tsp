@@ -507,6 +507,9 @@ namespace Microsoft.Compute;
 @@clientName(DelayRequest.delay, "scheduleAt", "csharp");
 @@clientName(Mode, "ProxyAgentMode", "csharp");
 @@clientName(Modes, "ImdsAccessControlMode", "csharp");
+// "Placement" is ambiguous in .NET IntelliSense next to DiffDiskPlacement in this
+// package and VirtualMachinePlacement in Azure.ResourceManager.Compute.
+@@clientName(Placement, "BulkActionsVirtualMachinePlacement", "csharp");
 
 // .NET flattens unbound subscription-scoped operations into SubscriptionResource
 // extension methods named from the operationId suffix, so BulkCreate and
