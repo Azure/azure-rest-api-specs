@@ -1147,6 +1147,82 @@ model VoiceAgentServerVadTurnDetection extends VoiceAgentTurnDetectionConfig {
 
   @doc("Semantic end-of-utterance detection configuration. Set to null to disable it.")
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
+
+  @doc("Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`. Not supported on realtime models.")
+  speech_start_detection?: VoiceAgentSpeechStartDetection;
+}
+
+@doc("A phrase matched against the transcript, ignoring case and punctuation.")
+@minLength(1)
+@maxLength(100)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar VoiceAgentSpeechStartPhrase extends string;
+
+@doc("Text that replaces one part of the turn-taking classifier's prompt.")
+@minLength(1)
+@maxLength(4000)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar VoiceAgentTurnTakingPromptText extends string;
+
+@doc("Keeps backchannels such as \"mm-hm\" from interrupting the agent. An omitted scenario has no rules.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSpeechStartDetection {
+  @doc("Rules for speech that starts while the agent is speaking.")
+  while_assistant_speaking?: VoiceAgentSpeechStartWhileAssistantSpeaking;
+
+  @doc("Rules for speech that starts while the agent is not speaking.")
+  while_assistant_not_speaking?: VoiceAgentSpeechStartWhileAssistantNotSpeaking;
+}
+
+@doc("Rules for speech that starts while the agent is not speaking.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSpeechStartWhileAssistantNotSpeaking {
+  @doc("Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.")
+  @minValue(0)
+  @maxValue(50)
+  num_words?: float32 = 0;
+
+  @doc("Decides instead of `num_words`. Phrases still apply first.")
+  turn_taking_classifier?: VoiceAgentTurnTakingClassifier | null;
+}
+
+@doc("Rules for speech that starts while the agent is speaking.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSpeechStartWhileAssistantSpeaking {
+  ...VoiceAgentSpeechStartWhileAssistantNotSpeaking;
+
+  @doc("Transcripts that exactly match one of these phrases do not take the turn.")
+  @maxItems(100)
+  acknowledgement_phrases?: VoiceAgentSpeechStartPhrase[] = #[];
+
+  @doc("Transcripts that contain one of these phrases take the turn regardless of the word count.")
+  @maxItems(100)
+  interruption_phrases?: VoiceAgentSpeechStartPhrase[] = #[];
+}
+
+@doc("A classifier that judges whether the user's speech takes the turn.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTurnTakingClassifier {
+  @doc("Probability at or above which the speech counts as a turn.")
+  @minValueExclusive(0)
+  @maxValueExclusive(1)
+  threshold?: float32 = 0.5;
+
+  @doc("Replaces the built-in task description given to the classifier.")
+  instructions?: VoiceAgentTurnTakingPromptText | null;
+
+  @doc("Replaces the built-in criteria for what is and is not a turn.")
+  criteria?: VoiceAgentTurnTakingCriteria | null;
+}
+
+@doc("Criteria for what the turn-taking classifier counts as a turn.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTurnTakingCriteria {
+  @doc("When the user's speech is a turn the agent must respond to.")
+  turn?: VoiceAgentTurnTakingPromptText | null;
+
+  @doc("When the user's speech is not a turn, such as a backchannel.")
+  not_turn?: VoiceAgentTurnTakingPromptText | null;
 }
 
 @doc("The semantic end-of-utterance detection model.")
@@ -1228,6 +1304,9 @@ alias VoiceAgentAzureSemanticVadOptions = {
 
   @doc("Whether user speech may interrupt the agent's response.")
   interrupt_response?: boolean = true;
+
+  @doc("Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`.")
+  speech_start_detection?: VoiceAgentSpeechStartDetection;
 };
 
 @doc("Azure semantic voice activity detection.")
@@ -1292,7 +1371,6 @@ model VoiceAgentEchoCancellation {
 @doc("""
   The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
   voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
-  `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
   Additional values may be added over time.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -1326,8 +1404,11 @@ union VoiceAgentInputTranscriptionModel {
   @doc("Azure AI Speech to text.")
   azure_speech: "azure-speech",
 
-  @doc("Azure AI Speech streaming transcription for cascaded text-model conversations only. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech`, `phrase_list`, and `profanity_filter`. Not supported with realtime speech-to-speech models.")
+  @doc("Azure AI Speech streaming transcription. Requires `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech`, `phrase_list`, and `profanity_filter`. On realtime models, requires Azure semantic VAD and cannot be changed during a session.")
   azure_speech_streaming: "azure-speech-streaming",
+
+  @doc("MAI Transcribe 2 streaming transcription. `language` accepts one locale. On realtime models, cannot be changed during a session.")
+  mai_transcribe_2_streaming: "mai-transcribe-2-streaming",
 }
 
 @doc("The supported input-transcript profanity filtering modes.")
@@ -1348,10 +1429,6 @@ union VoiceAgentProfanityFilterMode {
 @doc("""
   Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
   and phrase hints.
-  When `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model
-  conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
-  `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
-  `profanity_filter`.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputTranscription {
@@ -1366,7 +1443,7 @@ model VoiceAgentInputTranscription {
 
   ...OmitProperties<OpenAI.AudioTranscription, "model" | "language">;
 
-  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.")
+  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.")
   `model`: VoiceAgentInputTranscriptionModel;
 
   @doc("Optional customer custom speech deployment configuration, keyed by locale.")

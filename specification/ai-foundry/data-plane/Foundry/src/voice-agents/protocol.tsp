@@ -793,6 +793,9 @@ model VoiceAgentClientEventSessionUpdate {
   {
     @doc("Phrase-level transcription timing and confidence details.")
     phrases?: VoiceAgentTranscriptionPhrase[] | null,
+
+    @doc("True when `speech_start_detection` rejected this speech as a backchannel.")
+    backchannel?: boolean,
   }
 );
 

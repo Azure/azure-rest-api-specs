@@ -30,7 +30,27 @@
             "languages": [
               "en-US"
             ],
-            "auto_truncate": true
+            "auto_truncate": true,
+            "speech_start_detection": {
+              "while_assistant_speaking": {
+                "num_words": 2,
+                "acknowledgement_phrases": [
+                  "okay",
+                  "yeah"
+                ],
+                "interruption_phrases": [
+                  "stop",
+                  "wait"
+                ]
+              },
+              "while_assistant_not_speaking": {
+                "num_words": 1
+              }
+            }
+          },
+          "transcription": {
+            "model": "azure-speech-streaming",
+            "language": "en-US"
           }
         }
       }
@@ -75,7 +95,27 @@
                     "languages": [
                       "en-US"
                     ],
-                    "auto_truncate": true
+                    "auto_truncate": true,
+                    "speech_start_detection": {
+                      "while_assistant_speaking": {
+                        "num_words": 2,
+                        "acknowledgement_phrases": [
+                          "okay",
+                          "yeah"
+                        ],
+                        "interruption_phrases": [
+                          "stop",
+                          "wait"
+                        ]
+                      },
+                      "while_assistant_not_speaking": {
+                        "num_words": 1
+                      }
+                    }
+                  },
+                  "transcription": {
+                    "model": "azure-speech-streaming",
+                    "language": "en-US"
                   }
                 }
               }
