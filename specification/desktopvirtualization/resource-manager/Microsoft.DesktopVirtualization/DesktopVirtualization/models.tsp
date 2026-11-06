@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
@@ -609,9 +610,8 @@ union ScalingHostPoolType {
 
   /**
    * Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost.
-   * @Introduced in 2024-04-08-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   Personal: "Personal",
 }
 
@@ -1150,6 +1150,7 @@ union SessionHandlingOperation {
   /**
    * Session Host will hibernate after disconnect
    */
+  @added(Versions.v2026_04_16)
   Hibernate: "Hibernate",
 }
 
@@ -1275,6 +1276,16 @@ union DeploymentScope {
    * For regional Broker and ArmProvider talking to regional SQL DB
    */
   Regional: "Regional",
+}
+
+/**
+ * Read-only deployment scope for ApplicationGroup.
+ */
+@added(Versions.vLatestPreview)
+@TypeSpec.OpenAPI.extension("readOnly", true)
+union ReadOnlyDeploymentScope {
+  DeploymentScope,
+  string,
 }
 
 /**
@@ -1488,24 +1499,21 @@ model AppAttachPackageProperties {
 
   /**
    * Specific name of package owner, is "AppAttach" for native app attach packages
-   * @Introduced in 2024-03-06-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   packageOwnerName?: string;
 
   /**
    * Lookback url to third party control plane, is null for native app attach packages
-   * @Introduced in 2024-03-06-preview
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   packageLookbackUrl?: url;
 
   /**
    * Field that can be populated with custom data and filtered on in list GET calls
-   * @Introduced in 2024-03-06-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   customData?: string;
 
   /**
@@ -2375,7 +2383,7 @@ model ApplicationGroupProperties {
    */
   @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
-  deploymentScope?: DeploymentScope;
+  deploymentScope?: ReadOnlyDeploymentScope;
 }
 
 /**
@@ -2663,7 +2671,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
@@ -2671,7 +2679,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   directUDP?: DirectUDP;
 
   /**
@@ -2679,7 +2687,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   publicUDP?: PublicUDP;
 
   /**
@@ -2687,7 +2695,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   relayUDP?: RelayUDP;
 
   /**
@@ -2716,7 +2724,7 @@ model HostPoolProperties {
    * @Introduced in 2025-09-01-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 
   /**
@@ -2738,7 +2746,7 @@ model RegistrationInfo {
   /**
    * The registration token base64 encoded string.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   token?: string;
 
   /**
@@ -2937,7 +2945,7 @@ model ScalingSchedule {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties | null;
 
@@ -3039,14 +3047,14 @@ model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   rampUpMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   @maxValue(59)
   rampUpMinimumHostPoolSize?: int32 | null;
@@ -3054,14 +3062,14 @@ model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   rampDownMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   @maxValue(59)
   rampDownMinimumHostPoolSize?: int32 | null;
@@ -3221,17 +3229,15 @@ model AppAttachPackagePatchProperties {
 
   /**
    * Lookback url to third party control plane, is null for native app attach packages
-   * @Introduced in 2024-03-06-preview
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   packageLookbackUrl?: url;
 
   /**
    * Field that can be populated with custom data and filtered on in list GET calls
-   * @Introduced in 2024-03-06-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   customData?: string;
 }
 
@@ -3659,6 +3665,33 @@ model HostPoolProvisioningControlParameter {
   cancelMessage?: string;
 }
 
+@@typeChangedFrom(
+  HostPool.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+@@typeChangedFrom(
+  HostPoolPatch.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity | null
+);
+
+@@typeChangedFrom(
+  Workspace.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+@@typeChangedFrom(
+  ApplicationGroup.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+@@typeChangedFrom(
+  ScalingPlan.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+
 /**
  * HostPool properties that can be patched.
  */
@@ -3679,8 +3712,8 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * The managed service identities assigned to this resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
-  @added(Versions.vLatestPreview)
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
+  @added(Versions.v2026_04_16)
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity | null;
 }
 
@@ -3781,42 +3814,37 @@ model HostPoolPatchProperties {
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   directUDP?: DirectUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   publicUDP?: PublicUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   relayUDP?: RelayUDP;
 
   /**
    * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
-   * @Introduced in 2025-09-01-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 
   /**
@@ -4018,11 +4046,13 @@ model RegistrationTokenList {
    * List of RegistrationToken definitions.
    */
   @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value?: RegistrationTokenMinimal[];
 
   /**
    * Link to the next page of results.
    */
+  @nextLink
   @visibility(Lifecycle.Read)
   nextLink?: string;
 }
@@ -4039,7 +4069,7 @@ model RegistrationTokenMinimal {
   /**
    * The registration token base64 encoded string.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   token?: string;
 }
 
@@ -4605,7 +4635,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampUpStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  rampUpStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the ramp up period.
@@ -4638,7 +4668,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  peakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  peakStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the peak period.
@@ -4671,7 +4701,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampDownStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  rampDownStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the ramp down period.
@@ -4704,7 +4734,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  offPeakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  offPeakStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the off-peak period.
@@ -4776,7 +4806,7 @@ model ScalingPlanPooledScheduleProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties | null;
 
@@ -4898,7 +4928,7 @@ model ScalingPlanPooledSchedulePatchProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties | null;
 
@@ -5503,6 +5533,7 @@ model UpdateStatusProperty {
   /**
    * Properties bag for sessionHostManagement Update Statuses.
    */
+  @added(Versions.vLatestPreview)
   properties?: SessionHostManagementUpdateStatusProperties;
 }
 
@@ -5513,6 +5544,7 @@ model ProvisioningStatusProperty {
   /**
    * The custom properties of the SessionHost Provisioning Status.
    */
+  @added(Versions.vLatestPreview)
   properties?: SessionHostManagementProvisioningStatusProperties;
 }
 

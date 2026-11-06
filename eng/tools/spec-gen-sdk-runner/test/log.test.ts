@@ -95,4 +95,25 @@ describe("vso helpers", () => {
     setVsoVariable("result", "OK", true);
     expect(logSpy).toHaveBeenCalledWith("##vso[task.setVariable variable=result;isoutput=true]OK");
   });
+
+  test.each([
+    ["", ""],
+    ["100%", "100%AZP25"],
+    ["line1\rline2", "line1%0Dline2"],
+    ["line1\nline2", "line1%0Aline2"],
+    ["line1\r\nline2", "line1%0D%0Aline2"],
+    ["literal %0A and %AZP25", "literal %AZP250A and %AZP25AZP25"],
+  ])("setVsoVariable escapes raw value %j", (value, escapedValue) => {
+    setVsoVariable("result", value);
+    expect(logSpy).toHaveBeenCalledExactlyOnceWith(
+      `##vso[task.setVariable variable=result]${escapedValue}`,
+    );
+  });
+
+  test("setVsoVariable escapes output variables using the same rules", () => {
+    setVsoVariable("result", "100%\r\nline2", true);
+    expect(logSpy).toHaveBeenCalledExactlyOnceWith(
+      "##vso[task.setVariable variable=result;isoutput=true]100%AZP25%0D%0Aline2",
+    );
+  });
 });

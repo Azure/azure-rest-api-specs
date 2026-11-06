@@ -94,6 +94,16 @@ enabled. To diagnose a run without changing the normal default, choose
 gh run rerun <run-id> --debug --repo Azure/azure-rest-api-specs
 ```
 
+The `DisallowedFileTypes` rule rejects JavaScript and TypeScript files anywhere
+under the project's service folder (`specification/<service>/`), including shared
+files and sibling projects. It checks the current filesystem, not Git history,
+in single-project, `--all`, and `--changed` validation. Existing and uncommitted
+files are checked too. Installed `node_modules` and `.git` directories are excluded.
+The disallowed extensions are `.js`, `.ts`, `.mjs`, `.cjs`, `.mts`, `.cts`, `.jsx`,
+and `.tsx` (case-insensitive, including declaration files).
+File-specific `TypeSpecValidation` suppressions with `rules: [DisallowedFileTypes]`
+can grandfather existing scripts without allowing new scripts in the same service.
+
 `--changed` compares committed changes between `--base` (default `HEAD^`) and
 `--head` (default `HEAD`). It validates the current checkout, not a separate
 checkout of `--head`. Uncommitted changes do not affect project selection.
@@ -104,9 +114,12 @@ their service when it exists; deleted service folders are skipped. Projects are
 deduplicated, sorted, and validated sequentially.
 
 Changes to core tooling, root configuration, shared common types, or the root
-suppression file trigger all-project validation. ARM lease metadata and
-`eng/common` do not trigger this fallback. Use `--ignore-core-files` to disable
-the fallback. The PR workflow enables the fallback only for PRs targeting `main`
+suppression file trigger all-project validation. Skill files under `.github/skills/`,
+ARM lease metadata, and `eng/common` do not trigger this fallback. Skill-only changes
+select no service projects and succeed without running service validation. Mixed changes
+still select affected services or trigger all-project validation when core files change.
+Use `--ignore-core-files` to disable the fallback. The PR workflow enables the
+fallback only for PRs targeting `main`
 or `RPSaaSMaster`; other target branches pass `--ignore-core-files`.
 
 Changed-project validation retains the base/head commits in the suppression context.
