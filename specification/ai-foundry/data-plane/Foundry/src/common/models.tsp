@@ -6,18 +6,10 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@doc("Reference to a Foundry Dataset in the current project. Consuming operations define supported Dataset kinds and resolution behavior.")
+@doc("Reference to a Dataset whose concrete version has already been resolved.")
 model DatasetReference {
   @doc("Dataset name.")
   name: string;
-
-  @doc("Optional Dataset version. Omit to select latest when the consuming operation resolves the reference.")
-  version?: string;
-}
-
-@doc("Reference to a Dataset whose concrete version has already been resolved.")
-model VersionedDatasetReference {
-  ...OmitProperties<DatasetReference, "version">;
 
   @doc("Concrete Dataset version.")
   version: string;

@@ -129,6 +129,15 @@ union TelephonyCampaignStatus {
   deleting: "deleting",
 }
 
+@doc("Reference to a recipients Dataset for a telephony Campaign.")
+model TelephonyCampaignDatasetReference {
+  @doc("Dataset name in the current project.")
+  name: string;
+
+  @doc("Dataset version. Omit to pin the latest version during Campaign preparation.")
+  version?: string;
+}
+
 @doc("Agent-owned outbound call Campaign. Creation/replacement authorizes execution after successful preparation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaign {
@@ -147,7 +156,7 @@ model TelephonyCampaign {
   recipients?: TelephonyRecipient[];
 
   @doc("Same-project CSV/JSON/JSONL uri_file, exclusive with recipients. Omitted version pins latest per preparation. Limits: 1-1,000,000 rows, 256 MiB decoded/file, 1 MiB/row.")
-  recipient_dataset?: DatasetReference;
+  recipient_dataset?: TelephonyCampaignDatasetReference;
 
   @doc("Dispatch schedule; omission equals ImmediateSchedule. Every mode waits for successful preparation, then follows its schedule and available capacity.")
   schedule?: TelephonyCampaignSchedule;
