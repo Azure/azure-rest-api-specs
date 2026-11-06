@@ -330,14 +330,25 @@ describe("Protected Files", () => {
     },
   );
 
-  it("rejects a truncated file list instead of passing", async () => {
-    const { run, pr, github } = setup("spec-author", []);
-    pr.changed_files = 3001;
-    await expect(run()).rejects.toThrow("Incomplete PR file list");
-    expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
-      expect.objectContaining({ state: "failure" }),
-    );
-  });
+  it.each([3000, 3001])(
+    "requires a complete diff at the REST limit for %s files",
+    async (count) => {
+      const files = Array.from(
+        { length: 3000 },
+        (_, index) => `specification/widgets/${index}.json`,
+      );
+      const { run, pr, github } = setup("spec-author", files);
+      pr.changed_files = count;
+      if (count === 3000) {
+        await run();
+      } else {
+        await expect(run()).rejects.toThrow("Incomplete PR file list");
+      }
+      expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+        expect.objectContaining({ state: count === 3000 ? "success" : "failure" }),
+      );
+    },
+  );
 
   it.each([
     "global-approvers: []",

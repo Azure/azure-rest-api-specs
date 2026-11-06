@@ -100,6 +100,10 @@ Application, removal, new commits, and base-branch edits re-evaluate the check.
 Normal code-owner review and every other merge requirement still apply.
 This exception does not apply to private repositories or other target branches.
 
+For non-allowlisted authors, an incomplete GitHub changed-file response fails the
+check rather than evaluating a partial diff. The API returns at most 3,000 files;
+split larger contributor PRs or ask repository maintainers for help.
+
 Files under `eng/common/` and `.github/skills/azsdk-common-*` are synchronized from
 [Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools). Make changes in
 that repository rather than editing the synchronized copies here.
