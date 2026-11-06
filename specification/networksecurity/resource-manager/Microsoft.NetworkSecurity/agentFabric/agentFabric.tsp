@@ -1761,7 +1761,7 @@ model ClusterAssociationProperties {
    * The IPv4 or IPv6 address of the workload cluster gateway used for
    * internal Agent Fabric routing. The resource provider validates the value.
    */
-  @visibility(Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   workloadClusterGatewayIp?: string;
 
   /**

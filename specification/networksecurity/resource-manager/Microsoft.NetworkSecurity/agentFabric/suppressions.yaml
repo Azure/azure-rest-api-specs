@@ -1,10 +1,14 @@
 - tool: LintDiff
   reason: >
-    ARM API reviewer requested format: uuid for resourceGuid and memberGuid
-    to tighten their typing. These are
-    plain correlation identifiers, not ARM resource references, so they
-    cannot use an armResourceIdentifier/common-types GUID reference instead.
+    resourceGuid and memberGuid are dataplane identifiers used in customer-authored
+    policies, not ARM resource IDs. Retain the existing UUID typing for compatibility.
+    The GuidUsage suppression was approved in
+    https://github.com/Azure/azure-rest-api-specs-pr/pull/30665.
+    Extend it to the unchanged Azure.Core.uuid definition in each listed version;
+    this does not assert approval of the extension in this public PR.
   rules: [GuidUsage]
   paths:
     - preview/2026-10-07-preview/agentFabric.json
     - preview/2026-11-01-preview/agentFabric.json
+    - preview/2026-11-02-preview/agentFabric.json
+    - preview/2026-11-03-preview/agentFabric.json
