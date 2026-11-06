@@ -232,3 +232,14 @@ using Commvault.ContentStore;
   "LastBackupTime",
   "csharp"
 );
+
+@doc("User-assigned identity details supplied in a cloud account PATCH.")
+model CloudAccountUserAssignedIdentity {
+  ...UpdateableProperties<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>;
+}
+
+@@alternateType(
+  CloudAccountIdentityUpdate.userAssignedIdentities,
+  Record<CloudAccountUserAssignedIdentity>,
+  "javascript"
+);
