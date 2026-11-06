@@ -1243,7 +1243,7 @@
           "description": "Specifies whether the browser proxy is enabled for the workspace."
         },
         "webBotAuth": {
-          "$ref": "#/definitions/WebBotAuthSettings",
+          "$ref": "#/definitions/WebBotAuthSettingsUpdate",
           "description": "The Web Bot Authentication settings for the workspace. This property is available only when the EnableWebBotAuth feature flag is enabled."
         }
       }
@@ -1314,6 +1314,20 @@
           "format": "uri",
           "description": "The URI of the public key directory used for HTTP message signature verification. This property is returned only when signingKey is Workspace.",
           "readOnly": true
+        }
+      }
+    },
+    "WebBotAuthSettingsUpdate": {
+      "type": "object",
+      "description": "The Web Bot Authentication settings that can be updated for a workspace.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "Controls whether Web Bot Authentication is enabled for the workspace."
+        },
+        "signingKey": {
+          "$ref": "#/definitions/WebBotAuthSigningKey",
+          "description": "The signing key used for Web Bot Authentication. If omitted, the service defaults to Microsoft."
         }
       }
     },

@@ -116,6 +116,22 @@ model WebBotAuthSettings {
 }
 
 @added(Versions.v2026_11_10_preview)
+@doc("The Web Bot Authentication settings that can be updated for a workspace.")
+model WebBotAuthSettingsUpdate is PickProperties<
+  WebBotAuthSettings,
+  "status" | "signingKey"
+>;
+
+@added(Versions.v2026_11_10_preview)
+@doc("The workspace properties that can be updated.")
+model PlaywrightWorkspacePatchProperties {
+  ...OmitProperties<PlaywrightWorkspaceProperties, "webBotAuth">;
+
+  @doc("The Web Bot Authentication settings for the workspace. This property is available only when the EnableWebBotAuth feature flag is enabled.")
+  webBotAuth?: WebBotAuthSettingsUpdate;
+}
+
+@added(Versions.v2026_11_10_preview)
 @doc("The signing key used for Web Bot Authentication.")
 union WebBotAuthSigningKey {
   string,
