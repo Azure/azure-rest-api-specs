@@ -1,0 +1,126 @@
+{
+  "title": "Create a Windows VM scale set with recovery enabled and versioned gallery-script remediations",
+  "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVMSS",
+    "api-version": "2026-09-01",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "name": "Standard_D4s_v3",
+        "tier": "Standard",
+        "capacity": 3
+      },
+      "properties": {
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2025-datacenter-azure-edition",
+              "version": "latest"
+            },
+            "osDisk": {
+              "createOption": "FromImage",
+              "managedDisk": {
+                "storageAccountType": "Premium_LRS"
+              }
+            }
+          },
+          "osProfile": {
+            "computerNamePrefix": "myVMSS",
+            "adminUsername": "{your-username}",
+            "adminPassword": "{your-password}",
+            "windowsConfiguration": {
+              "provisionVMAgent": true
+            }
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "myNic",
+                "properties": {
+                  "primary": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "myIpConfig",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "recoveryProfile": {
+            "enableWindowsRecovery": true,
+            "wellKnownGalleryScriptRemediations": [
+              "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairBoot/versions/1.0.0",
+              "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairNetwork/versions/1.0.0"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS",
+        "name": "myVMSS",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "Standard",
+          "capacity": 3
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualMachineProfile": {
+            "recoveryProfile": {
+              "enableWindowsRecovery": true,
+              "wellKnownGalleryScriptRemediations": [
+                "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairBoot/versions/1.0.0",
+                "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairNetwork/versions/1.0.0"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS",
+        "name": "myVMSS",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "Standard",
+          "capacity": 3
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "virtualMachineProfile": {
+            "recoveryProfile": {
+              "enableWindowsRecovery": true,
+              "wellKnownGalleryScriptRemediations": [
+                "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairBoot/versions/1.0.0",
+                "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairNetwork/versions/1.0.0"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

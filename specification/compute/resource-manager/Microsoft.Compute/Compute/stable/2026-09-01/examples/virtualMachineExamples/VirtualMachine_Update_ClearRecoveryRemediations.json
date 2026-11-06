@@ -1,0 +1,34 @@
+{
+  "title": "Clear a Windows VM's recovery remediation set while keeping Windows recovery enabled",
+  "operationId": "VirtualMachines_Update",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "api-version": "2026-09-01",
+    "parameters": {
+      "properties": {
+        "recoveryProfile": {
+          "enableWindowsRecovery": true,
+          "wellKnownGalleryScriptRemediations": []
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "recoveryProfile": {
+            "enableWindowsRecovery": true
+          }
+        }
+      }
+    }
+  }
+}

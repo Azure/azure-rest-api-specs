@@ -1,0 +1,38 @@
+{
+  "title": "Clear a Windows VM scale set's recovery remediation set while keeping Windows recovery enabled",
+  "operationId": "VirtualMachineScaleSets_Update",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVMSS",
+    "api-version": "2026-09-01",
+    "parameters": {
+      "properties": {
+        "virtualMachineProfile": {
+          "recoveryProfile": {
+            "enableWindowsRecovery": true,
+            "wellKnownGalleryScriptRemediations": []
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS",
+        "name": "myVMSS",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualMachineProfile": {
+            "recoveryProfile": {
+              "enableWindowsRecovery": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
