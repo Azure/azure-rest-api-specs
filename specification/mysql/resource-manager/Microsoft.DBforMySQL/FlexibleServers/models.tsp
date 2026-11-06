@@ -2060,6 +2060,10 @@ model MaintenancePropertiesForUpdate {
   maintenanceStartTime?: utcDateTime;
 }
 
+/** A backup destination URL containing a SAS credential. */
+@secret
+scalar BackupDestinationSasUri extends string;
+
 /**
  * FullBackupStoreDetails is used for scenarios where backup data is streamed/copied over to a storage destination.
  */
@@ -2067,7 +2071,8 @@ model FullBackupStoreDetails extends BackupStoreDetails {
   /**
    * SASUriList of storage containers where backup data is to be streamed/copied.
    */
-  sasUriList: string[];
+  @typeChangedFrom(Versions.v2026_03_01, string[])
+  sasUriList: BackupDestinationSasUri[];
 
   /**
    * Type of the specific object - used for deserializing

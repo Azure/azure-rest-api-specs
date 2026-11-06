@@ -4876,6 +4876,12 @@
       ],
       "x-ms-discriminator-value": "BackupAndExportResponse"
     },
+    "BackupDestinationSasUri": {
+      "type": "string",
+      "format": "password",
+      "description": "A backup destination URL containing a SAS credential.",
+      "x-ms-secret": true
+    },
     "BackupFormat": {
       "type": "string",
       "description": "Backup Format for the current backup. (CollatedFormat is INTERNAL – DO NOT USE)",
@@ -5638,7 +5644,7 @@
           "type": "array",
           "description": "SASUriList of storage containers where backup data is to be streamed/copied.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BackupDestinationSasUri"
           }
         }
       },
