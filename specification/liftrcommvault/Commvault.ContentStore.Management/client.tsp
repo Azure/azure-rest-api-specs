@@ -233,6 +233,7 @@ using Commvault.ContentStore;
   "csharp"
 );
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
 @doc("User-assigned identity details supplied in a cloud account PATCH.")
 model CloudAccountUserAssignedIdentity {
   ...UpdateableProperties<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>;
