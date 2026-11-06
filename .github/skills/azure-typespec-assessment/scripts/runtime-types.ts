@@ -1031,7 +1031,13 @@ export interface PreparationManifest {
     };
     [key: string]: unknown;
   };
-  sparseCheckout: { mode: string; roots: string[]; verified: boolean };
+  sparseCheckout: {
+    mode: string;
+    roots: string[];
+    supportRoots?: string[];
+    workspaceRoots?: string[];
+    verified: boolean;
+  };
   changedFiles: ChangedFile[];
   projects: PreparationProject[];
   blockers: PreparationBlocker[];
