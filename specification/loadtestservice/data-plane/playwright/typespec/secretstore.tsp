@@ -2,6 +2,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./identity.tsp";
+import "./systemdata.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -38,23 +40,11 @@ model SecretStore {
 
   @doc("The managed identity used to access the Key Vault secrets referenced by this secret store.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  keyVaultReferenceIdentity?: KeyVaultReferenceIdentity;
-}
+  keyVaultReferenceIdentity?: ManagedIdentity;
 
-@doc("The managed identity used to resolve Key Vault secret references.")
-@added(Versions.v2026_12_01_preview)
-model KeyVaultReferenceIdentity {
-  @doc("The type of managed identity used to access Key Vault.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  type: IdentityType;
-
-  @doc("The Azure resource ID of the user-assigned managed identity. Required when type is UserAssigned; omit when type is SystemAssigned.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  resourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
+  @doc("The read-only creation and modification metadata.")
+  @visibility(Lifecycle.Read)
+  systemData: SystemData;
 }
 
 @doc("Key Vault secret references for a domain.")

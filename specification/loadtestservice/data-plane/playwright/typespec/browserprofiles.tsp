@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./systemdata.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -56,7 +57,9 @@ model BrowserProfile {
   @visibility(Lifecycle.Read)
   archiveSha256?: string;
 
-  // TODO(mitsha): Add systemData after proxies PR merges
+  @doc("The read-only creation and modification metadata.")
+  @visibility(Lifecycle.Read)
+  systemData: SystemData;
 }
 
 @doc("Operations for managing browser profiles at the service endpoint.")

@@ -151,15 +151,3 @@ union BrowserType {
   @doc("WebKit browser type.")
   Webkit: "Webkit",
 }
-
-@doc("The type of managed identity used to access Key Vault. Additional values may be added in the future.")
-@added(Versions.v2026_12_01_preview)
-union IdentityType {
-  string,
-
-  @doc("Uses the system-assigned managed identity of the Playwright workspace.")
-  SystemAssigned: "SystemAssigned",
-
-  @doc("Uses the user-assigned managed identity specified by resourceId.")
-  UserAssigned: "UserAssigned",
-}
