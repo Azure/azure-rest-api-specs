@@ -1009,6 +1009,9 @@ enum AzureStorageType {
   AzureFiles,
   AzureBlob,
 
+  /**
+   * An SMB file share supported only on Windows plans using the IsolatedV2 or WorkflowStandard SKU. Configure the file server's IP address or DNS name in endpoint and the share name in shareName, and provide the username in accountName and password in accessKey; all four fields are required. The protocol defaults to Smb, the only supported protocol, and authentication requires a username and password rather than a managed identity.
+   */
   @added(Versions.v2026_11_15)
   FileShare,
 }
@@ -3543,7 +3546,7 @@ model IpSecurityRestriction {
 }
 
 /**
- * Azure Files or Blob Storage access information value for dictionary storage.
+ * Storage mount access information value for dictionary storage.
  */
 model AzureStorageInfoValue {
   /**
@@ -3579,7 +3582,7 @@ model AzureStorageInfoValue {
   state?: AzureStorageState;
 
   /**
-   * Endpoint (IP or DNS name) of on-premises file server. Only valid for mounts of type FileShare.
+   * Endpoint (IP or DNS name) of on-premises file server. Required for mounts of type FileShare and only valid for that type.
    */
   @added(Versions.v2026_11_15)
   endpoint?: string;
