@@ -103,12 +103,6 @@ These complete wire examples are maintained here because OpenAPI3 operation
 example emission through the existing polymorphic base types omits subtype
 fields.
 
-After regenerating OpenAPI, run the focused contract checks from this folder:
-
-```cmd
-node --test tests\data-generation-traces.test.mjs
-```
-
 ### Dedicated conversations configuration
 
 The additive `generation_configuration.type: "conversations"` variant
@@ -525,7 +519,7 @@ HTTP/1.1 200 OK
     ],
     "warnings": [
       {
-        "code": "TestCaseDescriptionGenerationIncomplete",
+        "code": "test_case_description_generation_incomplete",
         "message": "Conversation rows were retained, but one or more optional test-case descriptions could not be generated."
       }
     ]

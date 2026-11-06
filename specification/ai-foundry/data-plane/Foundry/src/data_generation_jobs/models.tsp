@@ -151,7 +151,7 @@ model DataGenerationJobResult {
   @doc("The token usage information for the data generation job.")
   token_usage?: DataGenerationTokenUsage;
 
-  @doc("Nonfatal warnings associated with otherwise usable output. `TestCaseDescriptionGenerationIncomplete` indicates that conversation rows were produced but one or more optional descriptions failed. Warning messages do not expose raw provider or model error bodies.")
+  @doc("Nonfatal warnings associated with otherwise usable output. `test_case_description_generation_incomplete` indicates that conversation rows were produced but one or more optional descriptions failed. Warning messages do not expose raw provider or model error bodies.")
   warnings?: DataGenerationWarning[];
 }
 
@@ -169,7 +169,7 @@ union DataGenerationWarningCode {
   string,
 
   @doc("Conversation rows were produced, but one or more optional test-case descriptions could not be generated.")
-  TestCaseDescriptionGenerationIncomplete: "TestCaseDescriptionGenerationIncomplete",
+  test_case_description_generation_incomplete: "test_case_description_generation_incomplete",
 }
 
 @doc("Data Generation Job resource.")
@@ -344,6 +344,12 @@ model SimpleQnADataGenerationJobConfiguration
   question_types?: SimpleQnAFineTuningQuestionType[];
 }
 
+/** Trace redaction options shared by trace-based data generation configurations. */
+alias DataGenerationRedactionOptions = {
+  @doc("Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.")
+  redact_private_content?: boolean = true;
+};
+
 @doc("The configuration for a data generation job with Traces type.")
 model TracesDataGenerationJobConfiguration
   extends DataGenerationJobConfiguration {
@@ -353,8 +359,7 @@ model TracesDataGenerationJobConfiguration
   @doc("Maximum number of samples to generate, up to service-defined limits. If omitted, sampling is turned off.")
   max_samples?: int32;
 
-  @doc("Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.")
-  redact_private_content?: boolean = true;
+  ...DataGenerationRedactionOptions;
 
   @doc("Whether to generate test-case rubric dimensions for each captured turn sample. This is a preview feature requiring the `Foundry-Features: DataGenerationJobs=V1Preview` request header. When true, requires a nonempty `model_options.model`.")
   generate_test_case_rubric?: boolean;
@@ -369,10 +374,7 @@ model ConversationsDataGenerationJobConfiguration
   @doc("Maximum number of whole conversations to generate, up to service-defined limits. If omitted, sampling is turned off.")
   max_samples?: int32;
 
-  ...PickProperties<
-    TracesDataGenerationJobConfiguration,
-    "redact_private_content"
-  >;
+  ...DataGenerationRedactionOptions;
 
   @doc("Whether to generate an AI-authored test-case description for each reconstructed conversation. This is a preview feature. If omitted, the service defaults to `false`. When true, requires a nonempty `model_options.model`. Model options must be omitted when neither description nor rubric generation is enabled.")
   generate_test_case_description?: boolean = false;
