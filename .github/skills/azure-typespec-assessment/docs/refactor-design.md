@@ -1,12 +1,17 @@
 # Assessment Skill Refactor Design
 
-**Status: Approved; implementation in progress.**
+**Status: Baseline refactor implemented; AI-assisted source selection extension
+is design-only, pending implementation approval.**
 
 This document defines the approved simpler implementation and report layout for
 `azure-typespec-assessment`.
 
 The [existing design](design.md) describes the current system. This proposal
 does not replace that document or change the current skill instructions.
+
+The AI-assisted source selection described below is a user-directed follow-up
+design. Do not implement it, rerun assessments, or refresh reports as part of
+this design update.
 
 ## 1. Goal
 
@@ -35,13 +40,13 @@ published report collection and recording actual performance and limitations.
 
 Preserve all five dimensions:
 
-| Dimension | Evidence and responsibility |
-| --- | --- |
-| Semantic intents | Compiler-backed changed TypeSpec source and deterministic grouping |
-| REST compatibility | AutoRest wire-contract comparison |
-| Downstream SDK compatibility | Language-neutral TCGC public-contract comparison |
-| Azure Guidelines | Fetched official guidance assessed against Semantic intents |
-| Documentation Completeness | Compiler-resolved effective-document presence |
+| Dimension                    | Evidence and responsibility                                        |
+| ---------------------------- | ------------------------------------------------------------------ |
+| Semantic intents             | Compiler-backed changed TypeSpec source and deterministic grouping |
+| REST compatibility           | AutoRest wire-contract comparison                                  |
+| Downstream SDK compatibility | Language-neutral TCGC public-contract comparison                   |
+| Azure Guidelines             | Fetched official guidance assessed against Semantic intents        |
+| Documentation Completeness   | Compiler-resolved effective-document presence                      |
 
 This is not a proposal to:
 
@@ -62,13 +67,13 @@ Guidelines and documentation retain independent results.
 The main pipeline already has suitable stages, but their responsibilities are
 not consistently separated.
 
-| Area | Current concern | Proposed boundary |
-| --- | --- | --- |
-| `run-assessment-analysis.ts` | Coordinates execution and also compacts facts, classifies hunk coverage, selects inference, and accounts for input budgets | Coordinator owns stage order; bounded-input construction owns those related calculations |
-| Assembly and rendering | Both derive presentation-oriented contracts and groups | Derive the report projection once, then render it without re-analysis |
-| Downstream presentation | Direct method changes and propagated model changes are combined into method-first cards | Present direct method changes and model/type changes separately |
-| Runtime compatibility | Current and historical shapes are handled in multiple places | Normalize historical report inputs at an explicit boundary |
-| `docs/design.md` | Architecture, schemas, historical rules, examples, and layout instructions overlap | Keep current architecture concise and delegate detailed contracts to their authoritative references |
+| Area                         | Current concern                                                                                                            | Proposed boundary                                                                                   |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `run-assessment-analysis.ts` | Coordinates execution and also compacts facts, classifies hunk coverage, selects inference, and accounts for input budgets | Coordinator owns stage order; bounded-input construction owns those related calculations            |
+| Assembly and rendering       | Both derive presentation-oriented contracts and groups                                                                     | Derive the report projection once, then render it without re-analysis                               |
+| Downstream presentation      | Direct method changes and propagated model changes are combined into method-first cards                                    | Present direct method changes and model/type changes separately                                     |
+| Runtime compatibility        | Current and historical shapes are handled in multiple places                                                               | Normalize historical report inputs at an explicit boundary                                          |
+| `docs/design.md`             | Architecture, schemas, historical rules, examples, and layout instructions overlap                                         | Keep current architecture concise and delegate detailed contracts to their authoritative references |
 
 Existing helpers should be reused where they already own these responsibilities.
 Extract code only where it establishes a real boundary; splitting large files
@@ -185,19 +190,32 @@ If evidence or execution is insufficient, retain a blocker and `not-assessed`;
 inability to classify is never automatically a compatibility pass.
 
 This review requirement changes analysis coverage, not HTML verbosity.
-Final report cards still show only deterministically associated relevant code;
-complete evidence remains available for analysis and audit.
+Final report cards show only evidence-backed relevant code selected through the
+deterministic-first, AI-assisted process in section 6; complete evidence remains
+available for analysis and audit.
 
 ### Agent judgment and materialization
 
-The Agent owns summaries and compatibility/guidance decisions, not identities,
-group membership, operation mappings, or evidence relationships. This includes
-review of declared unclassified changes using the complete evidence above,
-not unrestricted discovery outside the assessment scope.
+The Agent owns summaries and compatibility/guidance decisions, not canonical
+identities, group membership, operation mappings, or compatibility-evidence
+relationships. This includes review of declared unclassified changes using the
+complete evidence above, not unrestricted discovery outside the assessment
+scope.
 
-Keep one compact decision artifact. Materialization validates exact decision
-coverage, resolves canonical identities, and writes the existing materialized
-artifacts. It does not fetch guidance or make compatibility judgments.
+The proposed source-selection extension adds a separate presentation duty:
+review deterministic snippets for relevance and contextual completeness, and
+select supporting source when deterministic association is missing or
+insufficient. These are provenance-bound display selections, not new causal
+claims or changes to compatibility judgments. They use the existing bounded
+Agent phase rather than a second assessment or a per-card Agent workflow.
+
+Keep one compact decision artifact. Before implementing the extension, specify
+its source-review decisions and evidence-index additions explicitly; the current
+decision schema must not be assumed to support them already. Materialization
+validates exact decision coverage, resolves canonical identities, validates
+source selections against canonical text and locations, and writes the
+materialized artifacts. It does not fetch guidance or make compatibility or
+semantic-relevance judgments.
 
 ### Finalization
 
@@ -214,15 +232,18 @@ Keep the current serialized assessment and evidence contracts unless an
 explicit schema change is approved. The simpler report projection is internal;
 do not add another persisted artifact or public output format solely for HTML.
 
-| Data | Single owner |
-| --- | --- |
-| Hunk/declaration ownership and Semantic group boundaries | Semantic analysis |
-| Wire and SDK contract facts and candidates | Their respective analyzers |
-| Candidate approval and rationale | Agent judgment |
-| Canonical finding/evidence joins | Materialization and final assembly |
-| Semantic/finding relationships | Deterministic final assembly |
-| Changed-only display rows and card grouping | Report projection |
-| HTML structure, escaping, and disclosure behavior | Renderer |
+| Data                                                                  | Single owner                       |
+| --------------------------------------------------------------------- | ---------------------------------- |
+| Hunk/declaration ownership and Semantic group boundaries              | Semantic analysis                  |
+| Wire and SDK contract facts and candidates                            | Their respective analyzers         |
+| Candidate approval and rationale                                      | Agent judgment                     |
+| Canonical finding/evidence joins                                      | Materialization and final assembly |
+| Initial relevant-source mapping and contextual snippets               | Deterministic source projection    |
+| Source relevance/completeness review and missing display associations | Bounded Agent source review        |
+| Source-span validation and extraction of original text                | Materialization                    |
+| Semantic/finding relationships                                        | Deterministic final assembly       |
+| Changed-only display rows and card grouping                           | Report projection                  |
+| HTML structure, escaping, and disclosure behavior                     | Renderer                           |
 
 A report card needs only:
 
@@ -262,12 +283,12 @@ logic. The mockup is authoritative only for the proposed visual direction.
 Retain the five dimensions and their existing navigation destinations.
 REST and downstream remain separate sections, each with two categories:
 
-| Section | Category | Content |
-| --- | --- | --- |
-| REST | Operation changes | Direct changes to operation identity, method/path, parameters, request contract, responses, paging, or LRO behavior |
-| REST | Model/schema changes | Changed named wire types, members, enum values, requiredness, or constraints |
-| Downstream SDK | Method changes | Direct public method identity, owner, parameters, response type, kind, access, paging, or LRO changes |
-| Downstream SDK | Model/type changes | Public model, enum, union, or other type-contract changes |
+| Section        | Category             | Content                                                                                                             |
+| -------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| REST           | Operation changes    | Direct changes to operation identity, method/path, parameters, request contract, responses, paging, or LRO behavior |
+| REST           | Model/schema changes | Changed named wire types, members, enum values, requiredness, or constraints                                        |
+| Downstream SDK | Method changes       | Direct public method identity, owner, parameters, response type, kind, access, paging, or LRO changes               |
+| Downstream SDK | Model/type changes   | Public model, enum, union, or other type-contract changes                                                           |
 
 An operation using a changed model does not automatically belong in the
 operation-change category. Property-only changes stay on the model card.
@@ -315,25 +336,40 @@ User-directed requirement: match the mockup's focused source presentation.
 Each change card shows only the TypeSpec changes relevant to that card, not
 all source hunks owned by its enclosing Semantic intent.
 
-Select snippets in the deterministic report projection using finding-specific
-declaration, member, hunk, and compiler evidence. Project-wide source metadata
-or a shared Semantic intent alone does not establish finding-specific relevance.
-The Agent and renderer must not invent or choose causal source mappings.
+The governing principle is **deterministic association first, AI association
+when rules cannot establish it, and an AI quality check of the selected code**.
+The result must be a **minimal complete relevant code set**: enough original
+TypeSpec to explain the breaking change coherently, not isolated one- or
+two-line fragments, and not a long unrelated declaration or intent-wide diff.
+Minimality is semantic, not a smallest-line-count contest.
 
-For model/type cards, select the changed members and their relevant declaration
-prefixes. For operation/method cards, select the changed operation signature,
-decorators, or proven supporting helper change. A card containing multiple
-findings uses the union of their supported source ranges, deduplicated without
-expanding to unrelated declarations.
+#### Deterministic association and context
+
+Start from finding-specific declaration, member, hunk, compiler, and normalized
+contract evidence. Follow the actual changed contract path to its owning source
+declaration, including request/response models and supporting helpers where
+proven. A REST operation ID is not a TypeSpec declaration name; display-name
+equality, a shared file, or a shared Semantic intent alone does not prove a
+source association.
+
+For model/type cards, select the affected members together with their enclosing
+model/type header and necessary context. For operation/method cards, select the
+complete affected operation signature, relevant decorators, and supporting
+model/helper declarations needed to understand the delta. A card containing
+multiple findings uses the union of their supported ranges, deduplicated
+without expanding to unrelated declarations.
 
 Hunk selection is not sufficient when one Git hunk includes several unrelated
-declarations. Narrow within the hunk using baseline/current declaration spans
-and actual changed lines:
+declarations. Use baseline/current declaration and member spans, not just
+changed-line windows:
 
 - retain relevant changed code and its attached decorators, including version,
   visibility, constraint, rename, and removal metadata;
-- retain one surrounding context line by default, extending only to preserve
-  an understandable enclosing declaration or multiline construct;
+- retain a complete affected member or operation construct, its enclosing
+  declaration identity, and enough unchanged context to explain the change;
+  unchanged supporting code is allowed when necessary for comprehension;
+- keep multiline decorators, generic arguments, spreads, and signatures
+  intact; an isolated decorator without its member is not a complete snippet;
 - omit unrelated documentation and comments from the display, but preserve
   them when their changes are relevant evidence; do not blindly delete all
   `@doc` or comment lines;
@@ -341,16 +377,94 @@ and actual changed lines:
 - show explicit omission markers or separate snippets for discontinuous ranges
   rather than presenting them as one continuous original diff.
 
-Do not impose a fixed line cap that silently hides relevant changes. If exact
-source association is unavailable or ambiguous, keep the finding and state
-`Relevant TypeSpec source could not be established`; do not substitute all
-project changes or an unrelated representative example.
+#### AI source review and fallback association (proposed, not implemented)
 
-For PR 46679, the RoleAssignment card should show the changes to `roleName`
-and `entities`, including relevant versioning decorators, rather than the
-enclosing intent's 11 hunks and 239 diff lines. The inspected mockup already
-selects a single 23-line source hunk and trims unrelated context; production
-selection must derive relevance from evidence, not hard-coded example data.
+Within the existing bounded Agent phase, review the deterministic source
+selection for every breaking finding, including inferred findings once they
+have evidence-backed identities. Provide the finding's concrete contract delta,
+baseline/target roles and versions, deterministic snippets and association
+reasons, and indexed access to original TypeSpec declarations and context in the
+selected assessment evidence. The report's shortened snippet must not be the
+Agent's only source of context.
+
+For each finding, the Agent records one source-review outcome:
+
+| Outcome    | Meaning                                                                                                                                                           |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Keep       | Existing selection is relevant, coherent, and the minimal complete set                                                                                            |
+| Refine     | Association exists, but context must be expanded, unrelated code removed, or excerpts separated to explain the change clearly                                     |
+| Associate  | Deterministic rules could not associate sufficient code; the Agent selects evidence-backed declarations/ranges and explains their relevance to the specific delta |
+| Unresolved | Available evidence does not establish a reliable source selection; retain the reason explicitly                                                                   |
+
+This checks both absence and quality: code already being present is not
+sufficient if it is misplaced, incomplete, confusing, or unrelated to the
+breaking change. Keep correctly mapped relevant code covered; refine the
+display selection without discarding evidence required to explain any finding.
+Do not treat AI review as permission to replace a deterministic association
+with a contradictory mapping.
+
+When association is missing, let the Agent follow indexed source/contract
+relationships and read bounded enclosing declarations or supporting helpers
+from the assessed baseline and target. Do not guess from a symbol name alone,
+scan unrelated projects, read the current checkout as a substitute for the
+assessed revision, or generate plausible replacement TypeSpec.
+
+The decision records finding ID, selected evidence/declaration IDs, revision,
+original line ranges, outcome, and a concise relevance/context rationale.
+Preserve the deterministic proposal and distinguish deterministic versus
+AI-assisted selection provenance in structured results. AI association is a
+display-evidence relationship, not a deterministic causal guarantee.
+
+Materialization must check that every selected range exists in the indexed
+canonical source, belongs to the correct project/revision and comparison role,
+and references the intended finding and supplied evidence. Extract snippet text
+from that source; never render Agent-authored code as original evidence.
+Validate decision coverage and preserve required constructs and omission
+boundaries. Mechanical validation proves provenance and range integrity, not
+the Agent's semantic relevance judgment; retain that distinction for audit.
+Invalid or contradictory selections remain explicit unresolved source evidence
+rather than silently falling back to unrelated code.
+
+The renderer only displays the validated selection. It performs no AI calls,
+fresh source discovery, compatibility judgment, or causal inference.
+
+#### Minimal complete set and unresolved cases
+
+The set is complete when a reader can identify the owning declaration, see the
+affected member/signature and relevant metadata, and understand the breaking
+delta without reconstructing missing surrounding syntax. Include a small
+supporting declaration when the primary excerpt alone cannot explain a helper,
+spread, or type transition. Exclude consumers and neighboring additions that do
+not explain the finding.
+
+Do not impose a fixed line cap that silently hides relevant changes. Prefer a
+few cohesive snippets over either isolated diff lines or a large source dump.
+Use collapsible supporting context for legitimately longer dependencies; keep
+the principal code focused and preserve explicit omissions. Full declarations
+are appropriate only when their full content is needed.
+
+After deterministic selection and AI fallback, if source relevance still cannot
+be established, keep the finding and state
+`Relevant TypeSpec source could not be established` with the unresolved reason
+in structured evidence. A display-source limitation does not erase the finding,
+change its compatibility verdict, or establish that no TypeSpec code exists.
+Do not substitute all project changes or an unrelated representative example.
+
+Examples for PR 46679:
+
+- The RoleAssignment card shows the model identity and complete affected
+  `roleName` and `entities` members with relevant versioning/constraint
+  decorators, not the enclosing intent's 11 hunks and 239 diff lines.
+- The `saaSGuid` to `saasGuid` delta follows the request schema to
+  `ActivateSaaSParameterRequest`. Show its declaration identity and complete
+  old/new member context with `@removed`/`@added`; do not filter by
+  `SaaSOperationGroup_ActivateResource` as if it were the owning declaration.
+- Nearby `CompanyProfile` additions are excluded unless specific evidence
+  explains why they are necessary to understand the particular finding.
+
+Production selection derives relevance from evidence, not hard-coded example
+data. Neither AI nor deterministic projection may fabricate code, locations,
+causality, or replacement claims.
 
 Keep complete canonical source evidence in JSON. The focused HTML is a
 presentation projection and must not narrow analysis scope or hunk coverage.
@@ -395,6 +509,8 @@ The refactor must preserve:
 - independent REST and SDK evidence and compatibility decisions;
 - provenance for source revisions, API versions, declarations, and facts;
 - bounded inference only for declared unknown-hunk requests;
+- bounded AI source review only for finding-linked presentation evidence,
+  separate from compatibility inference and canonical source ownership;
 - complete canonical findings even when display evidence is bounded;
 - explicit unavailable, ambiguous, or blocked evidence;
 - compiler-derived documentation presence for eligible new declarations;
@@ -411,14 +527,14 @@ output.
 These are unresolved policy/documentation inconsistencies, not permission to
 change analyzer behavior:
 
-| Question | Proposed treatment |
-| --- | --- |
-| New-version REST rules retain substantive differences, but the Network example demands no REST findings for the transition | Establish the authoritative policy and expected examples before changing either |
-| Documentation v5 checks compiler presence, while later examples describe legacy prose decisions | Distinguish current presence checks from historical replay contracts |
-| Some report sections count grouped cards and others count underlying findings | Use finding counts for summaries and separately labeled card counts |
-| Historical rendering branches contribute substantial complexity | Preserve support through boundary adaptation; assess supported shapes before extraction |
-| The mockup includes coverage badges and asserted REST/SDK causal links | Do not adopt them as required card behavior or evidence rules |
-| Existing unknown-hunk inference may not represent every unclassified contract change | Specify evidence access, accounting, and any required inference/decision contract extension before implementing complete-evidence review |
+| Question                                                                                                                   | Proposed treatment                                                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| New-version REST rules retain substantive differences, but the Network example demands no REST findings for the transition | Establish the authoritative policy and expected examples before changing either                                                          |
+| Documentation v5 checks compiler presence, while later examples describe legacy prose decisions                            | Distinguish current presence checks from historical replay contracts                                                                     |
+| Some report sections count grouped cards and others count underlying findings                                              | Use finding counts for summaries and separately labeled card counts                                                                      |
+| Historical rendering branches contribute substantial complexity                                                            | Preserve support through boundary adaptation; assess supported shapes before extraction                                                  |
+| The mockup includes coverage badges and asserted REST/SDK causal links                                                     | Do not adopt them as required card behavior or evidence rules                                                                            |
+| Existing unknown-hunk inference may not represent every unclassified contract change                                       | Specify evidence access, accounting, and any required inference/decision contract extension before implementing complete-evidence review |
 
 Where an approved presentation change differs from the existing output/layout
 instructions, update those instructions in the same implementation phase.
@@ -435,9 +551,16 @@ Until then, current instructions remain in force.
 5. Consolidate historical input adaptation while preserving replay behavior.
 6. Update the current design and report references to describe the resulting
    implementation, removing obsolete duplication.
-7. Validate PRs 46679 and 44988 against the user-defined performance limits,
-   show their reports, and refresh the remaining report collection only after
-   both pass the validation gate below.
+7. Complete the four named end-to-end validations, show their reports, and
+   record actual performance without a timing threshold. Any later refresh of
+   the remaining report collection requires the content/completeness checks
+   below, not a performance pass.
+
+For the newly proposed AI-assisted source-selection extension, first approve
+the design, then specify its decision-schema/evidence-index changes, implement
+deterministic contextual selection and bounded Agent review, and validate
+materialization and report behavior together. This is a follow-up to the
+implemented baseline, not authorization to execute those steps now.
 
 Keep changes bounded and reviewable. Do not rewrite analyzers or introduce new
 schema versions merely to reorganize orchestration and presentation.
@@ -487,6 +610,21 @@ perform fresh compatibility analysis or infer relationships.
 - Discontinuous snippets preserve original locations and visibly mark omissions.
 - Missing precise source mappings remain explicit without displaying unrelated
   source; complete evidence and coverage remain unchanged in JSON.
+- Deterministically covered findings receive a source-quality review; coherent,
+  minimal complete selections are kept without unnecessary expansion.
+- Missing deterministic associations trigger bounded AI association against
+  original assessed source, not an immediate unavailable placeholder.
+- AI can add necessary context or supporting code and remove irrelevant display
+  context without changing canonical source ownership or compatibility results.
+- Shared-hunk, request-model, multiline-signature/decorator, helper/spread,
+  unchanged-supporting-context, and ambiguous-source cases have explicit
+  coverage in source-selection validation.
+- Invalid spans, wrong revisions, invented text, contradictory associations,
+  and unresolved relevance remain explicit; no fabricated snippet is rendered.
+- Code excerpts preserve complete affected constructs and an identifiable
+  enclosing declaration rather than lonely decorator/member lines.
+- Structured evidence distinguishes deterministic selection from AI refinement
+  or association and retains the review rationale.
 
 ### Validation after implementation approval
 
@@ -508,6 +646,14 @@ mockup or a stale published page.
 This requirement applies even if the implementation changes presentation only.
 Replaying published assessment JSON, reopening existing reports, or showing
 mockups does not satisfy it.
+
+User-directed follow-up acceptance: after the AI-assisted source-selection
+extension is approved and implemented, generate fresh reports for both PR 46679
+and PR 44988 using that implementation, show both in the right-hand panel, and
+tell the user the measured time for each. Existing baseline-refactor reports do
+not satisfy this follow-up. Report end-to-end wall time, source-review time
+where measurable, retry/cumulative time, and each execution/content-check outcome
+separately. Do not start these runs during design-only work.
 
 For each of the two reference PRs:
 
@@ -531,78 +677,133 @@ disclosures, and preserved finding/intent links against the approved design.
 Do not force findings or compatibility verdicts to match the mockup; judgment
 must follow the run's evidence and the approved compatibility policy.
 
-### Historical performance baselines and reference-PR gate
+### Two additional end-to-end cases after the source-layer implementation
+
+User-confirmed scope: add two PRs from the published report collection to the
+design, then run them after the AI-assisted source layer is implemented; do not
+run the current implementation now. Together with PRs 46679 and 44988, this
+defines four named end-to-end validation cases.
+
+The additional cases were selected from the site's
+[report index](https://haolingdong-msft.github.io/typespec-assessment-reports/reports.json)
+and inspected published reports on 2026-11-06:
+
+| Additional PR                                                                                                                                                                                    | Observed published case and selection rationale                                                                                                                                                             | Source-layer checks                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [44288: HorizonDb](https://github.com/Azure/azure-rest-api-specs/pull/44288) ([published report](https://haolingdong-msft.github.io/typespec-assessment-reports/reports/pr-44288/))              | Private endpoint update/delete templates gain a `HorizonDbCluster` generic argument; the published report records changed routes, SDK input order, and return type, with partial evidence coverage          | Follow operation/template relationships rather than operation-ID string equality. Include the owning interface, complete multiline operation/template arguments, and necessary supporting context without unrelated operations. Check each finding's relevance separately; retain existing unresolved-contract limitations rather than treating successful source association as complete compatibility coverage. |
+| [43918: ContainerService Fleet](https://github.com/Azure/azure-rest-api-specs/pull/43918) ([published report](https://haolingdong-msft.github.io/typespec-assessment-reports/reports/pr-43918/)) | The index records no REST or downstream findings and complete compatibility coverage; the report includes API-version publication, optional additions, and version-scoped `meshProperties` removal metadata | Negative/control case: do not infer a breaking change from an isolated `@removed` decorator or invent breaking cards/source associations when the fresh evidence supports none. Preserve full analysis and independent Guidelines/documentation behavior; with no breaking findings, source-review coverage is not applicable and no per-finding source-review work is fabricated.                                |
+
+These observations explain case selection, not expected verdicts or golden
+finding counts. Fresh assessed revisions, versions, and complete evidence
+determine the new results. Do not copy published findings or decisions.
+
+Run each through fresh preparation/compilation, deterministic analysis, bounded
+Agent judgment including applicable source review, materialization, guarded
+finalization, and served-report browser inspection. Old JSON replay or HTML-only
+regeneration is not end-to-end validation. Keep separate output directories and
+record resolved PR head/target baseline and the implementation revision.
+
+Run all four named validation cases without a performance threshold. A slow
+46679/44988 run does not disqualify or cancel either additional case. These
+validation runs do not authorize the bulk refresh/publication.
+For each completed additional case, show its newly generated report in a
+separately titled right-hand browser panel and provide its report URL,
+structured-result path, actual end-to-end time, source-review time where
+measurable, and retry/cumulative time. Record failures, stalls, unavailable
+timings, and blockers in the same validation document under `C:\documents`.
+Do not impose a time limit on any of the four PRs.
+
+Validate the source-review paths actually exercised, including Keep, Refine,
+Associate, or Unresolved where the fresh evidence requires them; do not weaken
+deterministic association or force a finding to manufacture an AI fallback
+case. Use focused fixtures for branches not naturally reached by these PRs.
+
+These two named runs are validation cases, not an instruction to refresh or
+publish the rest of the site. If a later approved bulk cohort includes either
+PR, reuse its validated fresh output only when implementation revision and
+comparison provenance still match; do not double-run merely to meet a count.
+
+### Historical performance references and measurement-only policy
 
 Retain the following user-selected historical measurements as reference
 baselines, with their methodology limitations intact:
 
-| PR | Historical baseline | Methodology and limitation |
-| --- | --- | --- |
+| PR    | Historical baseline                                                                                    | Methodology and limitation                                                                                                                                          |
+| ----- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 46679 | 222,525 ms (222.53 seconds, approximately 3 minutes 43 seconds); coordinator 99,402 ms (99.40 seconds) | Fresh preparation and compilation, but compact Agent decisions were reused after canonical model-input hash verification; not a fully fresh Agent-judgment baseline |
-| 44988 | Replay wall time 738,260 ms (738.26 seconds, approximately 12 minutes 18 seconds) | Frozen-preparation replay without fresh preparation or compilation; not a fresh end-to-end assessment baseline |
+| 44988 | Replay wall time 738,260 ms (738.26 seconds, approximately 12 minutes 18 seconds)                      | Frozen-preparation replay without fresh preparation or compilation; not a fresh end-to-end assessment baseline                                                      |
+| 44288 | Replay wall time 247,799 ms (247.80 seconds, approximately 4 minutes 8 seconds)                        | Frozen-preparation replay without fresh preparation or compilation; fresh end-to-end execution time is not recorded                                                 |
+| 43918 | Replay wall time 160,762 ms (160.76 seconds, approximately 2 minutes 41 seconds)                       | Frozen-preparation replay without fresh preparation or compilation; fresh end-to-end execution time is not recorded                                                 |
 
 Sources: the PR 46679 performance entry in
 [reports.json](https://haolingdong-msft.github.io/typespec-assessment-reports/reports.json)
-and the PR 44988 replay record in
+and replay records in
 [core-performance.json](https://haolingdong-msft.github.io/typespec-assessment-reports/core-performance.json).
+The published `reports.json` also records the replay times and absent fresh
+end-to-end measurements for PRs 44288 and 43918.
 Preserve the distinction between fresh execution, reused decisions, and replay.
-Do not treat these two records as methodologically identical or claim speedup
+Do not treat these records as methodologically identical or claim speedup
 from a direct fresh-versus-replay comparison.
 
-The user defined explicit acceptance limits instead of an unspecified
-"no obvious downgrade" criterion:
+**Current user-directed policy: no performance threshold for any of the four
+PRs (46679, 44988, 44288, and 43918).** Record and disclose actual time; do not
+grade these runs as performance passes/failures or stop them merely for elapsed
+time. This supersedes the earlier 300-second/900-second acceptance limits for
+46679/44988. Earlier observed timings and stopped attempts remain historical
+records, not active gates for the new implementation.
 
-| Reference PR | Maximum actual end-to-end assessment wall time |
-| --- | --- |
-| 46679 | 300,000 ms (5 minutes), inclusive |
-| 44988 | 900,000 ms (15 minutes), inclusive |
+No relative "no obvious downgrade" threshold is implied either. Compare
+methodologically compatible measurements descriptively, not as an undeclared
+acceptance condition.
 
 Measure from the assessment coordinator's invocation to successful guarded
 finalization producing validated JSON and HTML. Include dependency bootstrap,
 fetch/preparation, fresh compilation, deterministic analysis, fresh Agent
 judgment and tool waits, guidance retrieval, and materialization. Do not use
 only `preparation-manifest.timings.totalMs`, exclude waits, reuse previous
-decisions, or replay old compiler evidence to satisfy these limits. Report
+decisions, or replay old compiler evidence to make the timing appear faster. Report
 serving/readiness and publication time separately.
 
 Record all failed attempts and retries. If validation requires retries, disclose
 both successful-attempt time and cumulative wall time for that PR's validation;
-do not silently reset the clock and claim the overall validation met its limit.
-Use cumulative elapsed time for the gate when retries are part of the run.
+do not silently reset the clock or hide retry gaps.
 
-Run these two reference validations before starting assessments or publication
-for the remaining cohort. Both must complete, pass the report/content checks,
-and meet their respective time limits on the implementation revision used for
-the batch. Confirmed breaking findings are not execution failures, but unresolved
-blockers preventing complete validation cannot qualify as a pass.
+Complete all four named validations and their report/content checks before any
+later bulk refresh, using the implementation revision intended for the batch.
+Confirmed breaking findings are not execution failures, but unresolved blockers
+preventing complete validation cannot qualify as a content/completeness pass.
+Report each PR's outcome independently; one slow or blocked run must not be
+silently treated as evidence about the other three.
 
-If either PR exceeds its limit or cannot be validated, stop before the bulk
-refresh, document the observed bottleneck/blocker, and investigate within the
-approved scope. Revalidate the two reference PRs after performance-relevant
-implementation changes; do not bypass the gate by suppressing evidence or
-reducing assessment coverage.
+A long-running stage alone is not a failure. Record stalls, progress, and
+available process state; investigate concrete errors or lack of progress rather
+than imposing an elapsed-time cutoff. If evidence or execution prevents a
+complete report, record the actual outcome and blocker. Stop before bulk refresh
+for unresolved content/completeness failures, not timing alone. Do not suppress
+evidence or reduce assessment coverage to improve timings.
 
-### Performance-gated refresh of the remaining reports
+### Content-gated refresh of the remaining reports
 
-User-directed sequence: first validate PRs 46679 and 44988; only after both pass
-the gate, refresh the remaining reports in
+User-directed sequence, updated to include the two additional cases: first
+validate PRs 46679, 44988, 44288, and 43918; only after their content/completeness
+checks pass, refresh the remaining reports in
 [TypeSpec Assessment Reports](https://haolingdong-msft.github.io/typespec-assessment-reports/)
 using fresh assessments from the same implemented skill revision. The user
 describes this follow-up cohort as "the other 34 PRs."
 
 Before starting the batch, identify and record the site's actual report/PR
-inventory and freeze the selected remaining set, excluding the two reference
+inventory and freeze the selected remaining set, excluding the four named
 PRs already validated. The requested count of 34 remaining PRs is not a verified
 current site inventory. If the site instead has 34 reports in total including
-the two references, or discovery otherwise yields a different count, report
+the validation cases, or discovery otherwise yields a different count, report
 the discrepancy and confirm the intended collection rather than silently
 omitting, adding, or double-running PRs.
 
-Use the same complete workflow as the two reference assessments: deterministic
+Use the same complete workflow as the four named assessments: deterministic
 preparation and analysis, bounded Agent judgment with full evidence for
 unclassified changes, materialization, and guarded finalization. Use separate
 fresh output directories and retain comparison provenance for every PR.
-Reuse the newly validated reference report outputs for their site refresh when
+Reuse the newly validated report outputs for their site refresh when
 applicable; do not run those PRs again merely to fill the remaining-cohort count.
 
 Refreshing means publishing the newly generated validated JSON and HTML through
@@ -628,29 +829,35 @@ Measure every selected PR's real execution, including failures, unknowns, and
 retries. Do not substitute historical report timings or estimated durations.
 Record:
 
-| Area | Required actual record |
-| --- | --- |
-| Identity | PR URL, skill implementation revision, resolved head/base commits, selected API versions, and toolchain versions |
-| Invocation | Attempt number, exact command, output directory, start/end timestamps with timezone, and execution outcome |
-| End-to-end performance | Actual elapsed wall time from invocation through finalization, report-readiness time, and publication/deployment time separately |
-| Phase performance | Dependency setup/cache reuse, fetch/preparation, compilation, deterministic analysis, Agent judgment/tool waits, guidance retrieval, materialization, and finalization where measurable |
-| Agent workload | Available input/output sizes, token/usage measurements, and evidence reads; unavailable metrics are explicitly `not recorded`, not zero |
-| Result | Compatibility verdicts separately from execution status, report/JSON locations, deployment status, and blocker/unknown counts |
-| Attempts | Failed, interrupted, retried, or stalled attempts and cumulative elapsed time as well as the successful attempt's time |
+| Area                   | Required actual record                                                                                                                                                                  |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Identity               | PR URL, skill implementation revision, resolved head/base commits, selected API versions, and toolchain versions                                                                        |
+| Invocation             | Attempt number, exact command, output directory, start/end timestamps with timezone, and execution outcome                                                                              |
+| End-to-end performance | Actual elapsed wall time from invocation through finalization, report-readiness time, and publication/deployment time separately                                                        |
+| Phase performance      | Dependency setup/cache reuse, fetch/preparation, compilation, deterministic analysis, Agent judgment/tool waits, guidance retrieval, materialization, and finalization where measurable |
+| Agent workload         | Available input/output sizes, token/usage measurements, and evidence reads; unavailable metrics are explicitly `not recorded`, not zero                                                 |
+| Result                 | Compatibility verdicts separately from execution status, report/JSON locations, deployment status, and blocker/unknown counts                                                           |
+| Attempts               | Failed, interrupted, retried, or stalled attempts and cumulative elapsed time as well as the successful attempt's time                                                                  |
 
 Use process observations and run telemetry to separate active work from waits
 where possible. Do not attribute unexplained wall time to compiler or AI work.
 Phase intervals may overlap; do not add overlapping intervals as if they were
 exclusive durations.
 
+For the proposed source-selection extension, record source-review time,
+additional evidence reads, decision counts by outcome, and incremental
+input/output usage where measurable. Its Agent/tool time remains inside the
+measured end-to-end time; do not hide the added cost in report rendering or
+exclude it from the measurement. No performance threshold applies to any of
+the four named PRs.
+
 Summarize completion counts, failures, unresolved unknowns, total batch wall
 time, and per-PR elapsed-time distribution (mean, median, p95, and range) for
 completed runs. State the population and cache/concurrency conditions. List
 incomplete attempts separately so fast failures do not make successful-run
 performance appear better. Sum of per-PR times is not batch wall time when
-runs overlap. Apply the explicit 5-minute/15-minute gate to the reference PRs;
-do not invent thresholds for other PRs or claim a speedup without a comparable
-measured baseline.
+runs overlap. Do not invent timing thresholds or claim a speedup without a
+comparable measured baseline.
 
 ### New validation document under C:\documents
 
@@ -658,15 +865,17 @@ During post-implementation validation, create a new consolidated Markdown
 document under `C:\documents`, for example
 `C:\documents\typespec-assessment-validation-<run-timestamp>.md`.
 Use a new file rather than overwriting an unrelated existing document. Create
-it when the two reference validations begin, before the bulk-refresh gate,
+it when the four-case validation begins, before any bulk refresh,
 and update it as results arrive so interrupted or stopped work still leaves a
 persistent record. This design edit does not create that file.
 
-The document contains both historical baselines and their limitations, measured
-reference-run times and gate results, the frozen remaining-report inventory,
+The document contains historical baselines and their limitations, measured
+times and execution/content-check outcomes for all four named PRs, the explicit
+no-performance-threshold policy, the frozen remaining-report inventory,
 per-PR actual execution and performance table, aggregate statistics, publication
-results, and the locations of the two reference reports shown in the right-hand
-panel. If the gate fails, explicitly record that the bulk refresh was not started.
+results, and the locations of the four reports shown in the right-hand panel.
+If content/completeness validation blocks the batch, explicitly record that the
+bulk refresh was not started. Timing alone does not block it.
 
 Record every encountered stall, blocker, or unknown/unclassified case, even if
 resolved later. Each entry includes:
@@ -689,12 +898,19 @@ rather than silently saving the final document somewhere else.
 Do not run these assessments solely to create or revise the design document.
 The user explicitly selected execution after approval and implementation.
 That approval gate also applies to reference validation, the subsequent
-performance-gated report refresh, publishing, and creation of the validation
+content-gated report refresh, publishing, and creation of the validation
 document under `C:\documents`.
 
 ## 11. Approval gate
 
-The user explicitly approved implementation. The implementation must preserve
-the evidence and validation requirements above, distinguish policy changes
-from behavior-preserving refactoring, and complete the staged reference-PR
-performance gate before any bulk report refresh.
+The user explicitly approved the baseline refactor implementation. The
+implementation must preserve the evidence and validation requirements above,
+distinguish policy changes from behavior-preserving refactoring, and complete
+the four named content/completeness validations before any bulk report refresh.
+No performance threshold applies to those four PRs.
+
+The AI-assisted source-selection extension is recorded at the user's request
+for design review only. Its implementation, schema/instruction updates,
+assessment runs, report regeneration, performance validation, and publication
+are not authorized by this design update. Current execution instructions remain
+unchanged until implementation is separately approved.

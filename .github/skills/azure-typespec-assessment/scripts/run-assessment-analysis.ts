@@ -97,6 +97,7 @@ type InputAccounting = {
     restCandidates: number;
     downstreamCandidates: number;
     downstreamRootCauses: number;
+    sourceReviewRequests: number;
     complianceSearchRequests: number;
     inferenceRequests: number;
   };
@@ -113,6 +114,7 @@ type AnalysisModelInput = {
   restCandidates: AssessmentModelInput["restCandidates"];
   downstreamCandidates: AssessmentModelInput["downstreamCandidates"];
   downstreamRootCauses: import("./runtime-types.ts").DownstreamRootCause[];
+  sourceReviewRequests: AssessmentModelInput["sourceReviewRequests"];
   complianceSearchRequests: AssessmentModelInput["complianceSearchRequests"];
   inferenceRequests: AssessmentModelInput["inferenceRequests"];
   blockers: unknown[];
@@ -525,6 +527,7 @@ function evidenceSet(
   registry[id] ??= {
     sourceChangeIds: normalized.sourceChangeIds,
     hunkIds: normalized.hunkIds,
+    declarationIds: normalized.declarationIds,
     declarationCount: normalized.declarationIds.length,
     evidenceFactIds: normalized.evidenceFactIds,
     evidenceRef: { artifact, id: entityId },
@@ -1292,6 +1295,7 @@ function accountInput(
         restCandidates: input.restCandidates.length,
         downstreamCandidates: input.downstreamCandidates.length,
         downstreamRootCauses: input.downstreamRootCauses.length,
+        sourceReviewRequests: input.sourceReviewRequests.length,
         complianceSearchRequests: input.complianceSearchRequests.length,
         inferenceRequests: input.inferenceRequests.length,
       },
@@ -1466,6 +1470,62 @@ export function buildModelInput({
     };
   };
 
+  const sourceReviewRequest = (
+    candidate: AssessmentCandidate,
+    dimension: "rest" | "downstream",
+    compact: ReturnType<typeof compactCandidate>,
+  ): AssessmentModelInput["sourceReviewRequests"][number] => {
+    const sourceChangeIds = [...new Set(candidate.sourceChangeIds ?? [])].sort();
+    const hunkIds = [...new Set(candidate.hunkIds ?? [])].sort();
+    const allowedHunks = new Set(hunkIds);
+    const availableDeclarations = sourceChangeIds
+      .flatMap((sourceChangeId) => {
+        const source = sourceChanges[sourceChangeId];
+        return (source?.declarations ?? [])
+          .filter(
+            (declaration) =>
+              !allowedHunks.size || declaration.hunkIds?.some((hunkId) => allowedHunks.has(hunkId)),
+          )
+          .map((declaration) => ({
+            declarationId: declaration.id,
+            sourceChangeId,
+            qualifiedName: declaration.qualifiedName,
+            kind: declaration.kind,
+            revision: declaration.source?.revision ?? "current",
+            startLine: declaration.source?.startLine ?? 1,
+            endLine: declaration.source?.endLine ?? declaration.source?.startLine ?? 1,
+            hunkIds: [...new Set(declaration.hunkIds ?? [])].sort(),
+          }));
+      })
+      .sort((left, right) =>
+        [left.sourceChangeId, left.qualifiedName, left.revision, left.startLine, left.declarationId]
+          .join("\0")
+          .localeCompare(
+            [
+              right.sourceChangeId,
+              right.qualifiedName,
+              right.revision,
+              right.startLine,
+              right.declarationId,
+            ].join("\0"),
+          ),
+      );
+    const availableIds = new Set(availableDeclarations.map((item) => item.declarationId));
+    const deterministicDeclarationIds = [...new Set(candidate.declarationIds ?? [])]
+      .filter((id) => availableIds.has(id))
+      .sort();
+    return {
+      candidateId: candidate.id,
+      dimension,
+      evidenceSetId: compact.evidenceSetId,
+      deterministicStatus: deterministicDeclarationIds.length ? "associated" : "unresolved",
+      deterministicDeclarationIds,
+      availableDeclarations,
+      sourceChangeIds,
+      hunkIds,
+    };
+  };
+
   const compactQuerySummary = (profile: ComplianceSearchRequest["queryProfile"]) => ({
     servicePlane: profile.servicePlane,
     action: profile.action,
@@ -1490,6 +1550,19 @@ export function buildModelInput({
     ),
     querySummary: compactQuerySummary(request.queryProfile),
   }));
+
+  const compactRestCandidates =
+    rest.status === "ready"
+      ? retainedRestCandidates.map((candidate) =>
+          compactCandidate(candidate, ARTIFACT_REFERENCES.restCandidates),
+        )
+      : [];
+  const compactDownstreamCandidates =
+    downstream.status === "ready"
+      ? retainedDownstreamCandidates.map((candidate) =>
+          compactCandidate(candidate, ARTIFACT_REFERENCES.downstreamCandidates),
+        )
+      : [];
 
   const input: AnalysisModelInput = {
     schemaVersion: 1,
@@ -1527,19 +1600,17 @@ export function buildModelInput({
     facts: referencedFacts(semantic, rest, downstream, retainedFactIds),
     semanticReviewUnits,
     informationalSemanticIntentIds: informationalSemanticUnits.map((unit) => unit.id),
-    restCandidates:
-      rest.status === "ready"
-        ? retainedRestCandidates.map((candidate) =>
-            compactCandidate(candidate, ARTIFACT_REFERENCES.restCandidates),
-          )
-        : [],
-    downstreamCandidates:
-      downstream.status === "ready"
-        ? retainedDownstreamCandidates.map((candidate) =>
-            compactCandidate(candidate, ARTIFACT_REFERENCES.downstreamCandidates),
-          )
-        : [],
+    restCandidates: compactRestCandidates,
+    downstreamCandidates: compactDownstreamCandidates,
     downstreamRootCauses: downstream.status === "ready" ? retainedDownstreamRootCauses : [],
+    sourceReviewRequests: [
+      ...retainedRestCandidates.map((candidate, index) =>
+        sourceReviewRequest(candidate, "rest", compactRestCandidates[index]),
+      ),
+      ...retainedDownstreamCandidates.map((candidate, index) =>
+        sourceReviewRequest(candidate, "downstream", compactDownstreamCandidates[index]),
+      ),
+    ],
     complianceSearchRequests,
     inferenceRequests,
     blockers: [

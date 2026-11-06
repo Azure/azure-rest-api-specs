@@ -21,6 +21,8 @@ type CompactCandidateDecision = import("./agent-decisions.schema.js").CandidateD
 
 type CompactGuidance = import("./agent-decisions.schema.js").Guidance;
 
+type CompactSourceReview = import("./agent-decisions.schema.js").SourceReview;
+
 type CompactDecisions =
   import("./agent-decisions.schema.js").TypeSpecAssessmentCompactAgentDecisions;
 
@@ -40,6 +42,8 @@ type ComplianceSearchRequest = import("./runtime-types.ts").ComplianceSearchRequ
 type InferenceCandidate = import("./runtime-types.ts").InferenceCandidate;
 
 type SourceChange = import("./runtime-types.ts").SourceChange;
+
+type SourceReviewDecision = import("./runtime-types.ts").SourceReviewDecision;
 
 type CatalogEntry = ReturnType<typeof readComplianceCatalog>[number];
 
@@ -71,6 +75,7 @@ type AgentIndex = {
     semanticIntentIds?: string[];
     restCandidateIds?: string[];
     downstreamCandidateIds?: string[];
+    sourceReviewCandidateIds?: string[];
     inferenceRequestIds?: string[];
     guidelineRequestIds?: string[];
   };
@@ -176,6 +181,149 @@ function validateCandidateDecision(decision: CompactCandidateDecision, label: st
   }
 }
 
+function canonicalDeclarationMap(sourceChanges: SourceChange[]) {
+  const declarations = new Map<string, import("./runtime-types.ts").SourceReviewDeclaration>();
+  for (const source of sourceChanges) {
+    for (const declaration of source.declarations ?? []) {
+      if (declarations.has(declaration.id)) {
+        throw new Error(`Canonical source contains duplicate declaration ${declaration.id}.`);
+      }
+      declarations.set(declaration.id, {
+        declarationId: declaration.id,
+        sourceChangeId: source.id,
+        qualifiedName: declaration.qualifiedName,
+        kind: declaration.kind,
+        revision: declaration.source.revision,
+        startLine: declaration.source.startLine,
+        endLine: declaration.source.endLine,
+        hunkIds: [...new Set(declaration.hunkIds ?? [])].sort(),
+      });
+    }
+  }
+  return declarations;
+}
+
+export function materializeSourceReviews(
+  reviews: CompactSourceReview[],
+  decisions: CompactCandidateDecision[],
+  modelInput: AssessmentModelInput,
+  inferenceCandidates: InferenceCandidate[],
+  sourceChanges: SourceChange[],
+): Map<string, SourceReviewDecision> {
+  const candidateIds = decisions.map((decision) => decision.candidateId);
+  exactCoverage(
+    candidateIds,
+    reviews.map((review) => review.candidateId),
+    "Source review",
+  );
+  const decisionsById = new Map(decisions.map((decision) => [decision.candidateId, decision]));
+  const requestsById = new Map(
+    (modelInput.sourceReviewRequests ?? []).map((request) => [request.candidateId, request]),
+  );
+  const inferredById = new Map(inferenceCandidates.map((candidate) => [candidate.id, candidate]));
+  const canonicalDeclarations = canonicalDeclarationMap(sourceChanges);
+
+  const result = new Map<string, SourceReviewDecision>();
+  for (const review of reviews) {
+    assertKeys(
+      review,
+      ["candidateId", "outcome", "selectedDeclarationIds", "rationale"],
+      `Source review ${review.candidateId ?? "<unknown>"}`,
+    );
+    requireText(review.candidateId, "Source review candidateId");
+    requireText(review.rationale, `Source review ${review.candidateId}.rationale`);
+    requireArray(
+      review.selectedDeclarationIds,
+      `Source review ${review.candidateId}.selectedDeclarationIds`,
+    );
+    if (!["keep", "refine", "associate", "unresolved", "not-applicable"].includes(review.outcome)) {
+      throw new Error(`Source review ${review.candidateId} has an invalid outcome.`);
+    }
+    if (duplicates(review.selectedDeclarationIds).length) {
+      throw new Error(`Source review ${review.candidateId} has duplicate declarations.`);
+    }
+    const decision = decisionsById.get(review.candidateId);
+    if (!decision)
+      throw new Error(`Source review ${review.candidateId} has no candidate decision.`);
+    const request = requestsById.get(review.candidateId);
+    const inferred = inferredById.get(review.candidateId);
+    const allowedIds = request
+      ? request.availableDeclarations.map((item) => item.declarationId)
+      : inferred
+        ? sourceChanges
+            .filter((source) => inferred.sourceChangeIds.includes(source.id))
+            .flatMap((source) =>
+              (source.declarations ?? [])
+                .filter((declaration) =>
+                  declaration.hunkIds?.some((hunkId) => inferred.hunkIds.includes(hunkId)),
+                )
+                .map((declaration) => declaration.id),
+            )
+        : [];
+    subset(
+      review.selectedDeclarationIds,
+      allowedIds,
+      `Source review ${review.candidateId}.selectedDeclarationIds`,
+    );
+    if (decision.decision === "reject") {
+      if (review.outcome !== "not-applicable" || review.selectedDeclarationIds.length) {
+        throw new Error(
+          `Rejected candidate ${review.candidateId} requires a not-applicable source review.`,
+        );
+      }
+    } else {
+      if (review.outcome === "not-applicable") {
+        throw new Error(
+          `Approved candidate ${review.candidateId} cannot have a not-applicable source review.`,
+        );
+      }
+      if (
+        ["keep", "refine", "associate"].includes(review.outcome) &&
+        !review.selectedDeclarationIds.length
+      ) {
+        throw new Error(
+          `Source review ${review.candidateId} ${review.outcome} requires declarations.`,
+        );
+      }
+      if (review.outcome === "unresolved" && review.selectedDeclarationIds.length) {
+        throw new Error(
+          `Unresolved source review ${review.candidateId} must not select declarations.`,
+        );
+      }
+      if (review.outcome === "keep") {
+        if (!request || request.deterministicStatus !== "associated") {
+          throw new Error(`Source review ${review.candidateId} cannot keep a missing proposal.`);
+        }
+        exactCoverage(
+          request.deterministicDeclarationIds,
+          review.selectedDeclarationIds,
+          `Source review ${review.candidateId} deterministic proposal`,
+        );
+      }
+      if (review.outcome === "refine" && request?.deterministicStatus !== "associated") {
+        throw new Error(`Source review ${review.candidateId} cannot refine a missing proposal.`);
+      }
+      if (review.outcome === "associate" && request?.deterministicStatus === "associated") {
+        throw new Error(
+          `Source review ${review.candidateId} must use refine instead of replacing an associated proposal.`,
+        );
+      }
+    }
+    const selectedDeclarations = review.selectedDeclarationIds.map((id) => {
+      const declaration = canonicalDeclarations.get(id);
+      if (!declaration) {
+        throw new Error(`Source review ${review.candidateId} cites unknown declaration ${id}.`);
+      }
+      return declaration;
+    });
+    result.set(review.candidateId, {
+      outcome: review.outcome,
+      selectedDeclarations,
+      rationale: review.rationale,
+    });
+  }
+  return result;
+}
 function materializeInference(
   decisions: CompactDecisions,
   modelInput: AssessmentModelInput,
@@ -794,6 +942,7 @@ function materializeJudgment(
   catalogById: Map<string, CatalogEntry>,
   fetchedById: Map<string, MaterializedComplianceDocument>,
   resolvedDeclarations: Map<string, string[]>,
+  sourceReviews: Map<string, SourceReviewDecision>,
 ): AssessmentJudgment {
   exactCoverage(
     modelInput.semanticReviewUnits.map((item) => item.reviewUnitId),
@@ -831,6 +980,13 @@ function materializeJudgment(
   decisions.downstreamDecisions.forEach((item) =>
     validateCandidateDecision(item, `Downstream decision ${item.candidateId}`),
   );
+  const withSourceReview = (decision: CompactCandidateDecision) => {
+    const sourceReview = sourceReviews.get(decision.candidateId);
+    if (!sourceReview) {
+      throw new Error(`Missing source review for ${decision.candidateId}.`);
+    }
+    return { ...decision, sourceReview };
+  };
 
   exactCoverage(
     requests.map((item) => item.reviewUnitId),
@@ -950,8 +1106,8 @@ function materializeJudgment(
   return {
     schemaVersion: 1,
     semanticIntents: decisions.semanticSummaries,
-    restDecisions: decisions.restDecisions,
-    downstreamDecisions: decisions.downstreamDecisions,
+    restDecisions: decisions.restDecisions.map(withSourceReview),
+    downstreamDecisions: decisions.downstreamDecisions.map(withSourceReview),
     complianceDecisions,
     overallConfidence: decisions.overallConfidence,
     blockers: decisions.blockers,
@@ -968,6 +1124,7 @@ export function validateCompactDecisions(
       "semanticSummaries",
       "restDecisions",
       "downstreamDecisions",
+      "sourceReviews",
       "inferenceResults",
       "catalogScores",
       "fetchedDocuments",
@@ -986,6 +1143,7 @@ export function validateCompactDecisions(
     "semanticSummaries",
     "restDecisions",
     "downstreamDecisions",
+    "sourceReviews",
     "catalogScores",
     "fetchedDocuments",
     "failedRetrievals",
@@ -999,6 +1157,7 @@ export function validateCompactDecisions(
   if (decisions.inferenceResults !== undefined) {
     requireArray(decisions.inferenceResults, "Agent decisions.inferenceResults");
   }
+  requireArray(decisions.sourceReviews, "Agent decisions.sourceReviews");
   if (!isSeverity(decisions.overallConfidence)) {
     throw new Error("Agent decisions.overallConfidence is invalid.");
   }
@@ -1046,6 +1205,11 @@ function validateIndexCoverage(index: AgentIndex, modelInput: AssessmentModelInp
     modelInput.downstreamCandidates.map((item) => item.id),
     coverage.downstreamCandidateIds ?? [],
     "Agent index downstream candidate",
+  );
+  exactCoverage(
+    modelInput.sourceReviewRequests.map((item) => item.candidateId),
+    coverage.sourceReviewCandidateIds ?? [],
+    "Agent index source review request",
   );
   exactCoverage(
     modelInput.inferenceRequests.map((item) => item.requestId),
@@ -1193,6 +1357,13 @@ export function materializeAssessmentResults({
       sourceChanges,
     );
     const { inference, candidates } = materializeInference(agentDecisions, modelInput);
+    const sourceReviews = materializeSourceReviews(
+      agentDecisions.sourceReviews,
+      [...agentDecisions.restDecisions, ...agentDecisions.downstreamDecisions],
+      modelInput,
+      candidates,
+      sourceChanges,
+    );
     const { evidence, catalogById, fetchedById } = materializeSearch(
       agentDecisions,
       requests,
@@ -1207,6 +1378,7 @@ export function materializeAssessmentResults({
       catalogById,
       fetchedById,
       resolvedDeclarations,
+      sourceReviews,
     );
     if (requests.length) {
       assertSearchEvidence(evidence);

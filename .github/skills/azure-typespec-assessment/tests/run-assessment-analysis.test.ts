@@ -636,6 +636,29 @@ void test("model input requests inference only for unknown hunks", () => {
     hunkId: "hunk-1",
   });
   assert.deepEqual(input.inferenceRequests[0].allowedDimensions, ["rest", "downstream"]);
+  assert.deepEqual(input.sourceReviewRequests, [
+    {
+      candidateId: "rest-1",
+      dimension: "rest",
+      evidenceSetId: input.restCandidates[0].evidenceSetId!,
+      deterministicStatus: "unresolved",
+      deterministicDeclarationIds: [],
+      availableDeclarations: [
+        {
+          declarationId: "declaration-1",
+          sourceChangeId: "source-1",
+          qualifiedName: "Widget",
+          kind: "model",
+          revision: "current",
+          startLine: 1,
+          endLine: 1,
+          hunkIds: ["hunk-1"],
+        },
+      ],
+      sourceChangeIds: ["source-1"],
+      hunkIds: [],
+    },
+  ]);
 });
 
 void test("model input bounds repeated review evidence and retains downstream facts", () => {

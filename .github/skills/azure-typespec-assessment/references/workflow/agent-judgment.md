@@ -54,6 +54,26 @@ answers, or use catalog descriptions as guidance. Candidate and review-unit
 evidence omitted from the bounded input is available only through declared
 canonical artifact references; do not scan unrelated artifact entries.
 
+Write exactly one `sourceReviews` entry for every deterministic or inferred
+REST/downstream candidate decision. The goal is the complete minimal relevant
+TypeSpec code set: enough canonical declarations to understand the breaking
+change, without isolated contextless lines or unrelated surrounding changes.
+
+- `keep`: preserve the supplied deterministic declaration set exactly;
+- `refine`: replace an existing deterministic set with a clearer bounded set;
+- `associate`: select bounded canonical declarations when deterministic
+  association is missing;
+- `unresolved`: approve the finding but explicitly record that relevant source
+  could not be established;
+- `not-applicable`: required for every rejected candidate.
+
+Select declaration IDs only from the candidate's supplied
+`availableDeclarations`. For inferred candidates, use only declarations owned
+by the inference request's source and hunk. Never copy, rewrite, or fabricate
+TypeSpec text. The deterministic materializer resolves selected IDs back to
+canonical source locations and rejects incomplete, duplicate, or out-of-bound
+coverage.
+
 Treat every supplied Semantic review-unit ID and boundary as authoritative.
 Never merge, split, reorder ownership, or move source hunks, declarations,
 change facts, or operations between units. Mixed version-publication and

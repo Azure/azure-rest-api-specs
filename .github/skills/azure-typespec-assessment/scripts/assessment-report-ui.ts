@@ -1324,14 +1324,16 @@ export function renderReportSections(
 
   const relevantSource = (findings: AssessmentFinding[], declarationNames: string[] = []) => {
     const sources = focusedSourceChanges(findings, declarationNames);
+    const unresolved = findings
+      .map((finding) => finding.sourceReview)
+      .filter((review) => review?.outcome === "unresolved");
     return sources.length
       ? `<details class="report-source"><summary>Relevant TypeSpec source</summary>${renderSourceHunks(sources)}<p class="sources">${sourceLinks(sources)}</p></details>`
-      : '<p class="sources">Finding-specific TypeSpec source unavailable.</p>';
+      : unresolved.length
+        ? `<p class="sources">Relevant TypeSpec source could not be established. ${escape(unique(unresolved.map((review) => review?.rationale)).join(" "))}</p>`
+        : '<p class="sources">Finding-specific TypeSpec source unavailable.</p>';
   };
-  const restSourceDeclarationNames = (
-    findings: AssessmentFinding[],
-    fallbackIdentity: string,
-  ) => {
+  const restSourceDeclarationNames = (findings: AssessmentFinding[], fallbackIdentity: string) => {
     const names = findings.flatMap((finding) => {
       const delta = restContractDelta(finding);
       if (delta.identity === finding.operationIds?.[0]) return [];
@@ -1469,16 +1471,16 @@ export function renderReportSections(
     operations: unique(group.operations),
   }));
   const operationCards = restCards
-      .map(
-        (entry) =>
-          `<details class="report-card rest-contract-card" id="${entry.id}">${summary(
-            escape(entry.operation.operationId),
-            `<span class="report-http">${escape((entry.operation.method ?? "").toUpperCase())}</span> <code>${escape(entry.operation.path ?? "Operation path unavailable")}</code> · ${escape(entry.operation.apiVersion ?? "Version unavailable")}`,
-            count(`${entry.findings.length} changes`),
-            affectedIntents(entry.semanticIds),
-          )}<div class="report-card-body">${findingAnchors(entry.findings)}${table(restRows(entry))}${rationale(entry.findings)}${relevantSource(entry.findings, restSourceDeclarationNames(entry.findings, entry.operation.operationId))}</div></details>`,
-      )
-      .join("");
+    .map(
+      (entry) =>
+        `<details class="report-card rest-contract-card" id="${entry.id}">${summary(
+          escape(entry.operation.operationId),
+          `<span class="report-http">${escape((entry.operation.method ?? "").toUpperCase())}</span> <code>${escape(entry.operation.path ?? "Operation path unavailable")}</code> · ${escape(entry.operation.apiVersion ?? "Version unavailable")}`,
+          count(`${entry.findings.length} changes`),
+          affectedIntents(entry.semanticIds),
+        )}<div class="report-card-body">${findingAnchors(entry.findings)}${table(restRows(entry))}${rationale(entry.findings)}${relevantSource(entry.findings, restSourceDeclarationNames(entry.findings, entry.operation.operationId))}</div></details>`,
+    )
+    .join("");
   const modelCards = restModelCards
     .map((group) => {
       const rows = group.findings.map((finding) => {
@@ -1514,37 +1516,36 @@ export function renderReportSections(
 
   const directMethodCards = downstream.methods
     .filter((method) => method.group)
-      .map((method) => {
-        const groupAnchors = method.group
-          ? emitAnchor(`downstream-${anchor(method.group.id)}`) +
-            method.findingIds
-              .map(
-                (id) =>
-                  emitAnchor(`downstream-${anchor(id)}`) + emitAnchor(`finding-${anchor(id)}`),
-              )
-              .join("")
-          : "";
-        const constants = (["before", "after"] as const).flatMap((side) =>
-          (method.group?.[side]?.operation?.parameters ?? [])
-            .filter(
-              (parameter) =>
-                parameter.kind === "header" &&
-                typeof parameter.type !== "string" &&
-                parameter.type?.kind === "constant",
-            )
+    .map((method) => {
+      const groupAnchors = method.group
+        ? emitAnchor(`downstream-${anchor(method.group.id)}`) +
+          method.findingIds
             .map(
-              (parameter) =>
-                `${side === "before" ? "Baseline" : "Target"}: ${parameter.serializedName ?? parameter.name} (header): ${JSON.stringify(typeof parameter.type === "string" ? undefined : parameter.type?.value)}`,
-            ),
-        );
-        const description = "The normalized SDK method contract changes directly.";
-        const directFindings = (dimensions.downstream.findings ?? []).filter((finding) =>
-          method.findingIds.includes(finding.id),
-        );
-        return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), `<span class="report-badge ${method.cause}">${method.cause === "mixed" ? "Mixed: direct + type change" : method.cause === "direct" ? "Direct method change" : "Indirect type change"}</span>`, affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}<p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${method.rows.length ? table(method.rows) : ""}${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}${method.group ? rationale(method.group.deltas ?? []) : ""}${method.types.map(({ type, paths }) => typeContent(type, paths)).join("")}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></div></details>`;
-        return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), '<span class="report-badge direct">Direct method change</span>', affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}<p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${method.rows.length ? table(method.rows) : ""}${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}${rationale(method.group?.deltas ?? [])}${relevantSource(directFindings)}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></div></details>`;
-      })
-      .join("");
+              (id) => emitAnchor(`downstream-${anchor(id)}`) + emitAnchor(`finding-${anchor(id)}`),
+            )
+            .join("")
+        : "";
+      const constants = (["before", "after"] as const).flatMap((side) =>
+        (method.group?.[side]?.operation?.parameters ?? [])
+          .filter(
+            (parameter) =>
+              parameter.kind === "header" &&
+              typeof parameter.type !== "string" &&
+              parameter.type?.kind === "constant",
+          )
+          .map(
+            (parameter) =>
+              `${side === "before" ? "Baseline" : "Target"}: ${parameter.serializedName ?? parameter.name} (header): ${JSON.stringify(typeof parameter.type === "string" ? undefined : parameter.type?.value)}`,
+          ),
+      );
+      const description = "The normalized SDK method contract changes directly.";
+      const directFindings = (dimensions.downstream.findings ?? []).filter((finding) =>
+        method.findingIds.includes(finding.id),
+      );
+      return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), `<span class="report-badge ${method.cause}">${method.cause === "mixed" ? "Mixed: direct + type change" : method.cause === "direct" ? "Direct method change" : "Indirect type change"}</span>`, affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}<p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${method.rows.length ? table(method.rows) : ""}${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}${method.group ? rationale(method.group.deltas ?? []) : ""}${method.types.map(({ type, paths }) => typeContent(type, paths)).join("")}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></div></details>`;
+      return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), '<span class="report-badge direct">Direct method change</span>', affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}<p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${method.rows.length ? table(method.rows) : ""}${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}${rationale(method.group?.deltas ?? [])}${relevantSource(directFindings)}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></div></details>`;
+    })
+    .join("");
 
   const typeCards = downstream.types
     .map((type) => {
@@ -1735,8 +1736,7 @@ export function renderReportSections(
         .filter(
           (method) =>
             method.group !== undefined &&
-            (method.semanticIds.includes(item.id) ||
-              related.downstream?.includes(method.group.id)),
+            (method.semanticIds.includes(item.id) || related.downstream?.includes(method.group.id)),
         )
         .map(
           (method) =>
@@ -1821,9 +1821,7 @@ export function renderReportSections(
       ? "failed"
       : "not-assessed");
   const restCount =
-    restCards.length +
-    restModelCards.length +
-    (dimensions.rest.legacyFindings?.length ?? 0);
+    restCards.length + restModelCards.length + (dimensions.rest.legacyFindings?.length ?? 0);
   const downstreamCount =
     downstream.methods.length + downstream.unmapped.length + legacyDownstream.length;
   const unavailableComparisons = (assessment.artifactComparisons ?? []).filter(

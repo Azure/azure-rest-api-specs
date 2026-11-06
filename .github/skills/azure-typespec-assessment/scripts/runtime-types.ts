@@ -828,6 +828,28 @@ export interface ModelInputItem {
   [key: string]: unknown;
 }
 
+export interface SourceReviewDeclaration {
+  declarationId: string;
+  sourceChangeId: string;
+  qualifiedName: string;
+  kind: string;
+  revision: SourceRevision;
+  startLine: number;
+  endLine: number;
+  hunkIds: string[];
+}
+
+export interface SourceReviewRequest extends ModelInputItem {
+  candidateId: string;
+  dimension: "rest" | "downstream";
+  evidenceSetId: string;
+  deterministicStatus: "associated" | "unresolved";
+  deterministicDeclarationIds: string[];
+  availableDeclarations: SourceReviewDeclaration[];
+  sourceChangeIds: string[];
+  hunkIds: string[];
+}
+
 export interface ModelSemanticReviewUnit extends ModelInputItem {
   reviewUnitId: string;
   deterministicCoverage?: {
@@ -893,6 +915,13 @@ export interface CandidateDecision {
   candidateId: string;
   decision: "approve" | "reject";
   severity?: "high" | "medium" | "low";
+  rationale: string;
+  sourceReview?: SourceReviewDecision;
+}
+
+export interface SourceReviewDecision {
+  outcome: "keep" | "refine" | "associate" | "unresolved" | "not-applicable";
+  selectedDeclarations: SourceReviewDeclaration[];
   rationale: string;
 }
 
@@ -961,6 +990,7 @@ export interface AssessmentModelInput {
   informationalSemanticIntentIds?: string[];
   restCandidates: (ModelInputItem & { id: string })[];
   downstreamCandidates: (ModelInputItem & { id: string })[];
+  sourceReviewRequests: SourceReviewRequest[];
   inferenceRequests: InferenceRequest[];
   complianceSearchRequests: ComplianceModelInputRequest[];
   evidenceSets?: Record<string, EvidenceSet>;
@@ -1366,6 +1396,8 @@ export interface AssessmentFinding {
   severity: "high" | "medium" | "low";
   rationale: string;
   sources: SourceChange[];
+  displaySources?: SourceChange[];
+  sourceReview?: SourceReviewDecision;
   evidence: AssessmentFact[];
   operationIds?: string[];
   crossLanguageDefinitionId?: string;

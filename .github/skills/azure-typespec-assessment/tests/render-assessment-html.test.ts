@@ -291,13 +291,67 @@ void test("clips a shared source hunk to the displayed declaration line range", 
     ["Widget"],
   );
 
-  assert.deepEqual(sources[0].hunks[0].lines, [
-    "+model Widget {",
-    "+  value: string;",
-    "+}",
-    "+",
-  ]);
+  assert.deepEqual(sources[0].hunks[0].lines, ["+model Widget {", "+  value: string;", "+}", "+"]);
   assert.notMatch(sources[0].hunks[0].lines.join("\n"), /Gadget/);
+});
+
+void test("prefers AI-reviewed display sources over broader canonical evidence", () => {
+  const broadSource = {
+    id: "source-1",
+    path: "main.tsp",
+    status: "modified",
+    origins: [],
+    declarations: [
+      {
+        id: "declaration-request",
+        kind: "model",
+        qualifiedName: "Request",
+        hunkIds: ["hunk-request"],
+        source: { revision: "current", startLine: 10, endLine: 12 },
+      },
+      {
+        id: "declaration-unrelated",
+        kind: "model",
+        qualifiedName: "Unrelated",
+        hunkIds: ["hunk-unrelated"],
+        source: { revision: "current", startLine: 20, endLine: 22 },
+      },
+    ],
+    hunks: [
+      {
+        id: "hunk-request",
+        base: { startLine: 10, endLine: 10 },
+        current: { startLine: 10, endLine: 12 },
+        lines: ["+model Request {", "+  value: string;", "+}"],
+      },
+      {
+        id: "hunk-unrelated",
+        base: { startLine: 20, endLine: 20 },
+        current: { startLine: 20, endLine: 22 },
+        lines: ["+model Unrelated {", "+  value: string;", "+}"],
+      },
+    ],
+  };
+  const reviewedSource = {
+    ...broadSource,
+    declarations: [broadSource.declarations[0]],
+    hunks: [broadSource.hunks[0]],
+  };
+  const sources = focusedSourceChanges([
+    {
+      id: "finding-1",
+      sources: [broadSource],
+      displaySources: [reviewedSource],
+    } as unknown as AssessmentFinding,
+  ]);
+  assert.deepEqual(
+    sources.map((source) => source.hunks[0].id),
+    ["hunk-request-focused-1"],
+  );
+  assert.deepEqual(
+    sources.flatMap((source) => source.declarations.map((item) => item.qualifiedName)),
+    ["Request"],
+  );
 });
 
 function readAssessment(url: URL): AssessmentOutput {

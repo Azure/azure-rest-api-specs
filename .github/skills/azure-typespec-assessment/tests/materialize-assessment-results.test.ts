@@ -9,6 +9,7 @@ import {
 import { buildAgentWorkspace } from "../scripts/build-agent-workspace.ts";
 import { readJson, writeJson } from "../scripts/cli.ts";
 import {
+  materializeSourceReviews,
   materializeAssessmentResults,
   validateCompactDecisions,
 } from "../scripts/materialize-assessment-results.ts";
@@ -93,6 +94,7 @@ function fixture({ inference = false } = {}) {
     restCandidates: [],
     downstreamCandidates: [],
     downstreamRootCauses: [],
+    sourceReviewRequests: [],
     complianceSearchRequests: [],
     inferenceRequests: inference
       ? [
@@ -249,4 +251,151 @@ void test("rejects changed canonical input before materialization", () => {
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
+});
+
+void test("source review materialization enforces deterministic selection outcomes", () => {
+  const sourceChanges = [
+    {
+      id: "source-1",
+      path: "main.tsp",
+      status: "modified",
+      origins: [],
+      hunks: [],
+      declarations: [
+        {
+          id: "declaration-1",
+          kind: "model",
+          qualifiedName: "Service.Request",
+          decorators: [],
+          versionedMembers: [],
+          hunkIds: ["hunk-1"],
+          source: { revision: "current", startLine: 10, endLine: 14 },
+        },
+        {
+          id: "declaration-2",
+          kind: "operation",
+          qualifiedName: "Service.create",
+          decorators: [],
+          versionedMembers: [],
+          hunkIds: ["hunk-1"],
+          source: { revision: "current", startLine: 16, endLine: 18 },
+        },
+      ],
+    },
+  ] as import("../scripts/runtime-types.ts").SourceChange[];
+  const modelInput = {
+    sourceReviewRequests: [
+      {
+        candidateId: "rest-1",
+        dimension: "rest",
+        evidenceSetId: "evidence-1",
+        deterministicStatus: "associated",
+        deterministicDeclarationIds: ["declaration-1"],
+        availableDeclarations: [
+          {
+            declarationId: "declaration-1",
+            sourceChangeId: "source-1",
+            qualifiedName: "Service.Request",
+            kind: "model",
+            revision: "current",
+            startLine: 10,
+            endLine: 14,
+            hunkIds: ["hunk-1"],
+          },
+          {
+            declarationId: "declaration-2",
+            sourceChangeId: "source-1",
+            qualifiedName: "Service.create",
+            kind: "operation",
+            revision: "current",
+            startLine: 16,
+            endLine: 18,
+            hunkIds: ["hunk-1"],
+          },
+        ],
+        sourceChangeIds: ["source-1"],
+        hunkIds: ["hunk-1"],
+      },
+    ],
+  } as AssessmentModelInput;
+  const decisions = [
+    {
+      candidateId: "rest-1",
+      decision: "approve" as const,
+      severity: "high" as const,
+      rationale: "Breaking.",
+    },
+  ];
+
+  const kept = materializeSourceReviews(
+    [
+      {
+        candidateId: "rest-1",
+        outcome: "keep",
+        selectedDeclarationIds: ["declaration-1"],
+        rationale: "The deterministic request model is complete.",
+      },
+    ],
+    decisions,
+    modelInput,
+    [],
+    sourceChanges,
+  );
+  assert.deepEqual(
+    kept.get("rest-1")?.selectedDeclarations.map((item) => item.qualifiedName),
+    ["Service.Request"],
+  );
+
+  const refined = materializeSourceReviews(
+    [
+      {
+        candidateId: "rest-1",
+        outcome: "refine",
+        selectedDeclarationIds: ["declaration-1", "declaration-2"],
+        rationale: "The operation makes the request model use clear.",
+      },
+    ],
+    decisions,
+    modelInput,
+    [],
+    sourceChanges,
+  );
+  assert.equal(refined.get("rest-1")?.selectedDeclarations.length, 2);
+
+  assert.throws(
+    () =>
+      materializeSourceReviews(
+        [
+          {
+            candidateId: "rest-1",
+            outcome: "associate",
+            selectedDeclarationIds: ["declaration-2"],
+            rationale: "Invalid replacement.",
+          },
+        ],
+        decisions,
+        modelInput,
+        [],
+        sourceChanges,
+      ),
+    /must use refine/,
+  );
+  assert.throws(
+    () =>
+      materializeSourceReviews(
+        [
+          {
+            candidateId: "rest-1",
+            outcome: "keep",
+            selectedDeclarationIds: ["declaration-2"],
+            rationale: "Wrong deterministic set.",
+          },
+        ],
+        decisions,
+        modelInput,
+        [],
+        sourceChanges,
+      ),
+    /deterministic proposal coverage mismatch/,
+  );
 });

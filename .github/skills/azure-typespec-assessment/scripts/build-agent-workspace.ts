@@ -132,6 +132,12 @@ function decisionsDraft(modelInput: AssessmentModelInput, declarationNames: Map<
     })),
     restDecisions: modelInput.restCandidates.map(decision),
     downstreamDecisions: modelInput.downstreamCandidates.map(decision),
+    sourceReviews: (modelInput.sourceReviewRequests ?? []).map((request) => ({
+      candidateId: request.candidateId,
+      outcome: "__UNRESOLVED__",
+      selectedDeclarationIds: request.deterministicDeclarationIds,
+      rationale: "",
+    })),
     ...(modelInput.inferenceRequests.length
       ? {
           inferenceResults: modelInput.inferenceRequests.map((request) => ({
@@ -218,6 +224,7 @@ export function buildAgentWorkspace({ work }: { work: string }) {
       informationalSemanticIntents: modelInput.informationalSemanticIntentIds?.length ?? 0,
       restCandidates: modelInput.restCandidates.length,
       downstreamCandidates: modelInput.downstreamCandidates.length,
+      sourceReviewRequests: modelInput.sourceReviewRequests?.length ?? 0,
       inferenceRequests: modelInput.inferenceRequests.length,
       guidelineRequests: modelInput.complianceSearchRequests.length,
     },
@@ -278,14 +285,20 @@ export function buildAgentWorkspace({ work }: { work: string }) {
       informationalSemanticIntentIds: modelInput.informationalSemanticIntentIds ?? [],
       restCandidateIds: modelInput.restCandidates.map((candidate) => candidate.id),
       downstreamCandidateIds: modelInput.downstreamCandidates.map((candidate) => candidate.id),
+      sourceReviewCandidateIds: (modelInput.sourceReviewRequests ?? []).map(
+        (request) => request.candidateId,
+      ),
       inferenceRequestIds: modelInput.inferenceRequests.map((request) => request.requestId),
       guidelineRequestIds: modelInput.complianceSearchRequests.map((request) => request.requestId),
     },
     completionChecklist: [
       "Read model-input.json exactly once.",
       ...(modelInput.inferenceRequests.length
-        ? ["Resolve every inference request in the compact Agent decisions."]
+        ? [
+            "Resolve every inference request in the compact Agent decisions. Add one sourceReviews entry for every inferred candidate.",
+          ]
         : []),
+      "Review deterministic TypeSpec source proposals for every candidate. Use keep/refine/associate/unresolved for approved findings and not-applicable for rejected candidates; select only declaration IDs supplied by the bounded source-review request or inference source evidence.",
       ...(modelInput.complianceSearchRequests.length
         ? [
             "Score the full catalog, fetch the first four retrievable documents with fallback, and complete the compact Agent decisions; use only prefilled intent-scoped declarationNames in complianceJudgments.",

@@ -1455,7 +1455,8 @@ function focusedHunkSegments(
   const merged: { start: number; end: number }[] = [];
   for (const range of ranges) {
     const previous = merged.at(-1);
-    if (previous && range.start <= previous.end + 1) previous.end = Math.max(previous.end, range.end);
+    if (previous && range.start <= previous.end + 1)
+      previous.end = Math.max(previous.end, range.end);
     else merged.push({ ...range });
   }
 
@@ -1492,8 +1493,14 @@ export function focusedSourceChanges(
   findings: AssessmentFinding[] = [],
   declarationNames: string[] = [],
 ): SourceChange[] {
-  const sources = findings.flatMap((finding) => finding.sources ?? []);
-  const requestedNames = declarationNames
+  const reviewedSources = findings.flatMap((finding) => finding.displaySources ?? []);
+  const sources = reviewedSources.length
+    ? reviewedSources
+    : findings.flatMap((finding) => finding.sources ?? []);
+  const reviewedNames = reviewedSources.flatMap((source) =>
+    (source.declarations ?? []).map((declaration) => declaration.qualifiedName),
+  );
+  const requestedNames = (reviewedNames.length ? reviewedNames : declarationNames)
     .map((name) => name?.trim())
     .filter((name): name is string => Boolean(name));
   return [...new Map(sources.map((source) => [source.id ?? source.path, source])).values()]
@@ -1520,11 +1527,7 @@ export function focusedSourceChanges(
         ? relevantDeclarations.reduce<DeclarationLineRanges>(
             (ranges, declaration) => {
               const source = declaration.source;
-              if (
-                source &&
-                Number.isFinite(source.startLine) &&
-                Number.isFinite(source.endLine)
-              ) {
+              if (source && Number.isFinite(source.startLine) && Number.isFinite(source.endLine)) {
                 ranges[source.revision === "base" ? "base" : "current"].push({
                   startLine: source.startLine,
                   endLine: source.endLine,

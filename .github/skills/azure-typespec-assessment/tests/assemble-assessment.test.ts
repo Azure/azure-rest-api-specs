@@ -24,7 +24,26 @@ type ComplianceDecision = import("../scripts/runtime-types.ts").ComplianceDecisi
 function assembleTestAssessment(
   options: Parameters<typeof assembleAssessment>[0],
 ): AssessmentOutput {
-  return assembleAssessment(options) as unknown as AssessmentOutput;
+  const withReviews = (decision: AssessmentJudgment["restDecisions"][number]) => ({
+    ...decision,
+    sourceReview: decision.sourceReview ?? {
+      outcome:
+        decision.decision === "reject" ? ("not-applicable" as const) : ("unresolved" as const),
+      selectedDeclarations: [],
+      rationale: "No focused source is needed for this assembly fixture.",
+    },
+  });
+  if (typeof options.judgment === "string") {
+    return assembleAssessment(options) as unknown as AssessmentOutput;
+  }
+  return assembleAssessment({
+    ...options,
+    judgment: {
+      ...options.judgment,
+      restDecisions: options.judgment.restDecisions.map(withReviews),
+      downstreamDecisions: options.judgment.downstreamDecisions.map(withReviews),
+    },
+  }) as unknown as AssessmentOutput;
 }
 
 void test("validator rejects passed dimensions with blockers", () => {

@@ -86,6 +86,40 @@ function validateFinding(
     if (!source.hunks?.length)
       errors.push(`${prefix} links source ${source.id} without changed hunks.`);
   }
+  if (finding.sourceReview) {
+    const selectedIds = new Set(
+      finding.sourceReview.selectedDeclarations.map((item) => item.declarationId),
+    );
+    const canonicalIds = new Set(
+      (finding.sources ?? []).flatMap((source) =>
+        (source.declarations ?? []).map((declaration) => declaration.id),
+      ),
+    );
+    const displayIds = new Set(
+      (finding.displaySources ?? []).flatMap((source) =>
+        (source.declarations ?? []).map((declaration) => declaration.id),
+      ),
+    );
+    if (finding.sourceReview.outcome === "not-applicable") {
+      errors.push(`${prefix} cannot use a not-applicable source review.`);
+    }
+    if (finding.sourceReview.outcome === "unresolved") {
+      if (selectedIds.size || finding.displaySources?.length) {
+        errors.push(`${prefix} unresolved source review must not select display source.`);
+      }
+    } else if (!selectedIds.size) {
+      errors.push(`${prefix} source review selects no declarations.`);
+    }
+    for (const id of selectedIds) {
+      if (!canonicalIds.has(id)) errors.push(`${prefix} source review cites unknown ${id}.`);
+      if (!displayIds.has(id)) errors.push(`${prefix} display source omits selected ${id}.`);
+    }
+    for (const id of displayIds) {
+      if (!selectedIds.has(id)) errors.push(`${prefix} display source includes unselected ${id}.`);
+    }
+  } else if (finding.displaySources?.length) {
+    errors.push(`${prefix} has display source without source review provenance.`);
+  }
   if (dimension === "REST" && !finding.operationIds?.length) {
     errors.push(`${prefix} has no affected operation.`);
   }

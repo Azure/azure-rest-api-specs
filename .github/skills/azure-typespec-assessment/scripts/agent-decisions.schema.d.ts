@@ -21,6 +21,12 @@ export type CandidateDecision = {
  * via the `definition` "candidateDecisions".
  */
 export type CandidateDecisions = CandidateDecision[];
+export type SourceReview = {
+  candidateId: string;
+  outcome: "keep" | "refine" | "associate" | "unresolved" | "not-applicable";
+  selectedDeclarationIds: string[];
+  rationale: string;
+};
 /**
  * This interface was referenced by `TypeSpecAssessmentCompactAgentDecisions`'s JSON-Schema
  * via the `definition` "inferenceResult".
@@ -97,6 +103,7 @@ export interface TypeSpecAssessmentCompactAgentDecisions {
   semanticSummaries: SemanticSummary[];
   restDecisions: CandidateDecisions;
   downstreamDecisions: CandidateDecisions;
+  sourceReviews: SourceReview[];
   inferenceResults?: InferenceResult[];
   catalogScores: CatalogScore[];
   /**

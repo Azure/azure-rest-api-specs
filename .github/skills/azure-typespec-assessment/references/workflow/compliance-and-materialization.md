@@ -24,9 +24,9 @@ intent-owned compliance judgment that cites the catalog ID and section.
 `compliance-assessment.ts` later consumes and validates evidence.
 
 The same compact file contains the Semantic review, REST/downstream coverage,
-inference results when requested, and one Azure Guidelines decision per
-compliance search request. Documentation decisions are deterministic and
-excluded from Agent authorship.
+inference results when requested, exactly one source review per candidate
+decision, and one Azure Guidelines decision per compliance search request.
+Documentation decisions are deterministic and excluded from Agent authorship.
 
 Run the indexed deterministic materializer:
 
@@ -38,8 +38,10 @@ node (Join-Path $Skill "scripts\materialize-assessment-results.ts") `
 It verifies canonical hashes and exact ID ownership; calculates score totals,
 ranks, and accounting; resolves each qualified declaration name uniquely in
 its canonical request; derives retained guidance applicability from citing
-judgments; drops uncited excerpts; and atomically writes `inference.json` when
-required, `compliance-search-evidence.json`, and
+judgments; resolves reviewed declaration IDs to canonical locations; validates
+keep/refine/associate/unresolved/not-applicable semantics; drops uncited
+excerpts; and atomically writes `inference.json` when required,
+`compliance-search-evidence.json`, and
 `assessment-judgment.json`. It preserves supplied `web_fetch` provenance and
 never retrieves network content or authors judgment.
 

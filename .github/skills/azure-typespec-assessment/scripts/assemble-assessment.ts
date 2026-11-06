@@ -106,10 +106,39 @@ type JoinedFindingFields = {
   rationale: string;
   evidence: AssessmentFact[];
   sources: SourceChange[];
+  displaySources?: SourceChange[];
+  sourceReview: import("./runtime-types.ts").SourceReviewDecision;
   relatedSemanticIntents?: string[];
   semanticMatchBasis?: string;
   symbol?: string;
 };
+
+function displaySourcesForReview(
+  review: import("./runtime-types.ts").SourceReviewDecision,
+  sources: Record<string, SourceChange>,
+): SourceChange[] {
+  const selectedIds = new Set(
+    review.selectedDeclarations.map((declaration) => declaration.declarationId),
+  );
+  const bySource = new Map<string, Set<string>>();
+  for (const declaration of review.selectedDeclarations) {
+    const hunkIds = bySource.get(declaration.sourceChangeId) ?? new Set<string>();
+    declaration.hunkIds.forEach((hunkId) => hunkIds.add(hunkId));
+    bySource.set(declaration.sourceChangeId, hunkIds);
+  }
+  return [...bySource.entries()].flatMap(([sourceChangeId, hunkIds]) => {
+    const source = sources[sourceChangeId];
+    if (!source) return [];
+    return [
+      {
+        ...sourceForUnit(source, [...hunkIds]),
+        declarations: (source.declarations ?? []).filter((declaration) =>
+          selectedIds.has(declaration.id),
+        ),
+      },
+    ];
+  });
+}
 
 function duplicates<T>(values: T[]): T[] {
   const seen: Set<T> = new Set();
@@ -206,9 +235,12 @@ function validateJudgment(answer: AssessmentJudgment) {
   for (const decision of [...answer.restDecisions, ...answer.downstreamDecisions]) {
     assertKeys(
       decision,
-      ["candidateId", "decision", "severity", "rationale"],
+      ["candidateId", "decision", "severity", "rationale", "sourceReview"],
       `Decision ${decision.candidateId ?? "<unknown>"}`,
     );
+    if (!decision.sourceReview) {
+      throw new Error(`Decision ${decision.candidateId ?? "<unknown>"} requires sourceReview.`);
+    }
   }
   for (const decision of answer.complianceDecisions) {
     assertKeys(
@@ -396,6 +428,9 @@ function joinFindings<T extends BreakingCandidate | DownstreamCandidate | Infere
     if (decision.severity === undefined) {
       throw new Error(`Missing severity for ${candidate.id}.`);
     }
+    if (!decision.sourceReview) {
+      throw new Error(`Missing source review for ${candidate.id}.`);
+    }
     return [
       {
         ...candidate,
@@ -410,6 +445,12 @@ function joinFindings<T extends BreakingCandidate | DownstreamCandidate | Infere
               : source;
           })
           .filter(Boolean),
+        sourceReview: decision.sourceReview,
+        ...(decision.sourceReview.selectedDeclarations.length
+          ? {
+              displaySources: displaySourcesForReview(decision.sourceReview, sources),
+            }
+          : {}),
       },
     ];
   });

@@ -561,7 +561,11 @@ File: `source/source-index.json`
             "startLine": 10,
             "endLine": 15
           },
-          "lines": [" model Widget {", "-  name: string;", "+  name: WidgetName;"],
+          "lines": [
+            " model Widget {",
+            "-  name: string;",
+            "+  name: WidgetName;"
+          ],
           "declarationOccurrenceIds": ["declaration-occurrence-<hash>"],
           "normalizedChanges": [
             {
@@ -1235,6 +1239,33 @@ changed-type, and mapped-method counts remain distinct.
 The bounded judgment procedure and candidate-specific compatibility rules are
 defined in [Downstream SDK Breaking Cases](../references/downstream-breaking-cases.md)
 and [Downstream Candidate Rules](../references/downstream-candidate-rules.md).
+
+### Finding-specific TypeSpec source review
+
+Each REST or downstream candidate carries a deterministic source proposal into
+the bounded Agent phase. The proposal contains canonical declaration IDs,
+candidate-owned source changes and hunks, and the bounded declarations
+available for review. The Agent returns exactly one source-review outcome for
+every candidate decision:
+
+- keep the deterministic proposal unchanged;
+- refine an existing proposal to a clearer complete minimal declaration set;
+- associate declarations when deterministic mapping did not find one;
+- leave an approved finding explicitly unresolved; or
+- mark a rejected candidate not applicable.
+
+The complete minimal set contains the declarations needed to understand the
+breaking change and its immediate TypeSpec context. It must not be a lone
+contextless changed line, but it must also exclude unrelated declarations from
+the same file or shared diff hunk.
+
+The Agent selects only declaration IDs; it never authors source text. The
+materializer validates candidate coverage and allowed declaration ownership,
+then resolves IDs against the canonical source index. Assembly preserves the
+full canonical finding `sources` for audit and stores the reviewed projection
+separately as `displaySources`. Rendering prefers `displaySources` and clips
+shared hunks to the selected declaration ranges. An unresolved outcome remains
+visible in the report instead of silently falling back to broad source.
 
 ### Semantic and finding relationships
 
@@ -2516,7 +2547,7 @@ row presentation as SDK method and SDK type cards:
   change;
 - when normalized structural comparison produces no changed contract row, the
   operation card omits the Before/After table and states `HTTP signature and
-  represented payload contract unchanged.` even if upstream version-specific
+represented payload contract unchanged.` even if upstream version-specific
   reference metadata populated `changedAspects`; and
 - REST breaking cards continue grouping rows by stable REST contract identity,
   while Semantic operation cards group the applicable rows under each
