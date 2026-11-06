@@ -25,6 +25,7 @@ op StorageOperation<
 
   ...ApiVersionHeader,
   ...ClientRequestIdParameter,
+  ...RequestPriorityParameter,
   ...TParams,
 ):
   | (TResponse & {
@@ -37,6 +38,7 @@ op StorageOperation<
       ...RequestIdResponseHeader;
       ...ClientRequestIdResponseHeader;
       ...DateResponseHeader;
+      ...RequestPriorityResponseHeader;
     })
   | TError;
 
@@ -46,12 +48,18 @@ op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = Error
->(...ApiVersionHeader, ...ClientRequestIdParameter, ...TParams):
+>(
+  ...ApiVersionHeader,
+  ...ClientRequestIdParameter,
+  ...RequestPriorityParameter,
+  ...TParams,
+):
   | (TResponse & {
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdResponseHeader;
       ...DateResponseHeader;
+      ...RequestPriorityResponseHeader;
     })
   | TError;
 
