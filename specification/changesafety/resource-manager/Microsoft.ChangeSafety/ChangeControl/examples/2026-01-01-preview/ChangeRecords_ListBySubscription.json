@@ -1,0 +1,98 @@
+{
+  "title": "ChangeRecords_ListBySubscription",
+  "operationId": "ChangeRecords_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "changeType": "AppDeployment",
+              "rolloutType": "Normal",
+              "description": "Web application deployment to production environment.",
+              "stageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/webApplicationStageMap"
+              },
+              "status": "InProgress",
+              "comments": "Deployment in progress",
+              "changeDefinition": {
+                "name": "webApplicationDeployment",
+                "kind": "ApiOperations",
+                "details": {
+                  "operations": [
+                    {
+                      "httpMethod": "PUT",
+                      "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2023-01-01"
+                    }
+                  ]
+                }
+              },
+              "releaseLabel": "Release-2.4.0",
+              "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+              "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+              "orchestrationTool": "Azure DevOps",
+              "stageMapSnapshot": []
+            },
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord",
+            "name": "webApplicationChangeRecord",
+            "type": "Microsoft.ChangeSafety/changeRecords",
+            "systemData": {
+              "createdBy": "devops@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-09T07:30:16.534Z",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+            }
+          },
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "changeType": "AppDeployment",
+              "rolloutType": "Normal",
+              "description": "Subscription level deployment",
+              "stageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/stageMaps/subscriptionStageMap"
+              },
+              "status": "Succeeded",
+              "comments": "Subscription level deployment completed",
+              "changeDefinition": {
+                "name": "subscriptionDeployment",
+                "kind": "ApiOperations",
+                "details": {
+                  "operations": [
+                    {
+                      "httpMethod": "PUT",
+                      "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/providers/Microsoft.Authorization/policyAssignments/myPolicy?api-version=2023-01-01"
+                    }
+                  ]
+                }
+              },
+              "releaseLabel": "Policy-1.0.0",
+              "anticipatedStartTime": "2025-07-08T10:00:00.000Z",
+              "anticipatedEndTime": "2025-07-08T11:00:00.000Z",
+              "orchestrationTool": "Azure Policy",
+              "stageMapSnapshot": []
+            },
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/subscriptionChangeRecord",
+            "name": "subscriptionChangeRecord",
+            "type": "Microsoft.ChangeSafety/changeRecords",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-08T10:00:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-08T11:00:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

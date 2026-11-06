@@ -1,0 +1,58 @@
+{
+  "title": "ChangeRecordStageProgressions_ListByParent",
+  "operationId": "ChangeRecordStageProgressions_ListByParent",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "stageReference": "development",
+              "status": "Succeeded",
+              "sequence": 1,
+              "comments": "Development stage completed"
+            },
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/stageProgressions/developmentStage",
+            "name": "developmentStage",
+            "type": "Microsoft.ChangeSafety/changeRecords/stageProgressions",
+            "systemData": {
+              "createdBy": "devops@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-09T07:35:00.000Z",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-09T08:00:00.000Z"
+            }
+          },
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "stageReference": "staging",
+              "status": "InProgress",
+              "sequence": 2,
+              "comments": "Staging stage in progress"
+            },
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/stageProgressions/stagingStage",
+            "name": "stagingStage",
+            "type": "Microsoft.ChangeSafety/changeRecords/stageProgressions",
+            "systemData": {
+              "createdBy": "devops@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-09T08:05:00.000Z",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-09T08:05:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

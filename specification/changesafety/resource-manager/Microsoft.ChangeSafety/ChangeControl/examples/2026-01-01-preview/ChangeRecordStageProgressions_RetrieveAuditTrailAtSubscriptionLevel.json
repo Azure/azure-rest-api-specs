@@ -1,0 +1,43 @@
+{
+  "title": "ChangeRecordStageProgressions_RetrieveAuditTrailAtSubscriptionLevel",
+  "operationId": "ChangeRecordStageProgressions_RetrieveAuditTrailAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeRecordName": "subscriptionChangeRecord",
+    "stageProgressionName": "initialStage"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 3,
+        "auditRecords": [
+          {
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/subscriptionChangeRecord/stageProgressions/initialStage/events/1",
+            "type": "Microsoft.ChangeSafety/changeRecords/stageProgressions/events",
+            "timestamp": "2025-07-08T10:05:00.000Z",
+            "initiatedBy": "admin@contoso.com",
+            "initiatedByType": "User",
+            "properties": {}
+          },
+          {
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/subscriptionChangeRecord/stageProgressions/initialStage/events/2",
+            "type": "Microsoft.ChangeSafety/changeRecords/stageProgressions/events",
+            "timestamp": "2025-07-08T10:10:00.000Z",
+            "initiatedBy": "system",
+            "initiatedByType": "System",
+            "properties": {}
+          },
+          {
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/subscriptionChangeRecord/stageProgressions/initialStage/events/3",
+            "type": "Microsoft.ChangeSafety/changeRecords/stageProgressions/events",
+            "timestamp": "2025-07-08T11:00:00.000Z",
+            "initiatedBy": "system",
+            "initiatedByType": "System",
+            "properties": {}
+          }
+        ]
+      }
+    }
+  }
+}

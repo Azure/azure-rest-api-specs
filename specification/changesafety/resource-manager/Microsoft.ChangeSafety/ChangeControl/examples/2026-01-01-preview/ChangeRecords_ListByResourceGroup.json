@@ -1,0 +1,99 @@
+{
+  "title": "ChangeRecords_ListByResourceGroup",
+  "operationId": "ChangeRecords_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "changeType": "AppDeployment",
+              "rolloutType": "Normal",
+              "description": "Web application deployment to production environment.",
+              "stageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/webApplicationStageMap"
+              },
+              "status": "InProgress",
+              "comments": "Deployment in progress",
+              "changeDefinition": {
+                "name": "webApplicationDeployment",
+                "kind": "ApiOperations",
+                "details": {
+                  "operations": [
+                    {
+                      "httpMethod": "PUT",
+                      "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2023-01-01"
+                    }
+                  ]
+                }
+              },
+              "releaseLabel": "Release-2.4.0",
+              "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+              "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+              "orchestrationTool": "Azure DevOps",
+              "stageMapSnapshot": []
+            },
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord",
+            "name": "webApplicationChangeRecord",
+            "type": "Microsoft.ChangeSafety/changeRecords",
+            "systemData": {
+              "createdBy": "devops@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-09T07:30:16.534Z",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+            }
+          },
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "changeType": "ConfigurationChange",
+              "rolloutType": "Normal",
+              "description": "Configuration update for database settings",
+              "stageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/configStageMap"
+              },
+              "status": "Succeeded",
+              "comments": "Configuration successfully applied",
+              "changeDefinition": {
+                "name": "dbConfigUpdate",
+                "kind": "ApiOperations",
+                "details": {
+                  "operations": [
+                    {
+                      "httpMethod": "PATCH",
+                      "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.DBforPostgreSQL/servers/myServer?api-version=2023-01-01"
+                    }
+                  ]
+                }
+              },
+              "releaseLabel": "Config-1.0.0",
+              "anticipatedStartTime": "2025-07-08T10:00:00.000Z",
+              "anticipatedEndTime": "2025-07-08T11:00:00.000Z",
+              "orchestrationTool": "Terraform",
+              "stageMapSnapshot": []
+            },
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/dbConfigChangeRecord",
+            "name": "dbConfigChangeRecord",
+            "type": "Microsoft.ChangeSafety/changeRecords",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-08T10:00:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-08T11:00:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
