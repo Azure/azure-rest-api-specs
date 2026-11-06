@@ -1101,7 +1101,14 @@ connect related candidates and facts but are not candidate rules.
 
 Method and model comparison requires deterministic identity evidence. An exact,
 unique `crossLanguageDefinitionId` pairs the same symbol across baseline and
-target. A changed identity may be paired only through unique source-owned
+target. TCGC generic instantiations may share a declaration ID, so the existing
+TCGC emit pass also records minimal compiler template-argument provenance before
+the upstream YAML serializer removes raw compiler types. Normalization assigns
+distinct concrete node identities for references, reachability, and graph
+construction, while cross-revision pairing uses the declaration plus canonical
+template arguments. It never uses the complete model shape, collection position,
+or generated friendly name as correspondence evidence. A changed identity may
+be paired only through unique source-owned
 `@renamedFrom` metadata whose old and new qualified declarations resolve to
 unique cross-language definitions. Generated display names, HTTP routes,
 request/response shapes, property overlap, and coincident additions/removals
@@ -1109,6 +1116,12 @@ never establish identity. Missing or ambiguous evidence emits an
 evidence-backed downstream blocker and preserves the baseline/target facts
 instead of fabricating a replacement. Additions and removals remain independent
 when no canonical relationship exists.
+
+Blockers limit only the evidence they actually make unavailable. Deterministic
+candidates with independently resolved facts remain available for Agent
+judgment, and confirmed findings coexist with blockers as failed verdicts with
+partial coverage. An unrelated identity blocker is not a reason to reject a
+candidate.
 
 For `model-property-added-required` candidates, Agent judgment must use the
 model's effective direction:
