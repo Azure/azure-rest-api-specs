@@ -18,7 +18,7 @@ model RunbookExecution is ProxyResource<RunbookExecutionProperties> {
   @key("runbookExecutionName")
   @segment("executions")
   @path
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{0,258}[a-zA-Z0-9]$")
+  @pattern("^[a-zA-Z0-9](?:[a-zA-Z0-9._-]{0,258}[a-zA-Z0-9])?$")
   name: string;
 
   ...EntityTagProperty;
