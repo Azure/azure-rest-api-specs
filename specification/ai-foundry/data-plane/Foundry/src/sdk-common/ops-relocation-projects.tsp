@@ -59,19 +59,6 @@ interface EvaluationTaxonomies {}
   EvaluationTaxonomies
 );
 
-interface Skills {}
-@@clientLocation(Azure.AI.Projects.Skills.createSkillVersion, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.createSkillVersionFromFiles, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.getSkill, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.getSkillContent, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.listSkills, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.updateSkill, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.deleteSkill, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.listSkillVersions, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.getSkillVersion, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.getSkillVersionContent, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.deleteSkillVersion, Skills);
-
 interface Routines {}
 @@clientLocation(Azure.AI.Projects.Routines.createOrUpdateRoutine, Routines);
 @@clientLocation(Azure.AI.Projects.Routines.getRoutine, Routines);
