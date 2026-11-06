@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01-preview",
+    "kustoPoolName": "kustoclusterrptest4",
+    "resourceGroupName": "kustorptest",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "workspaceName": "synapseWorkspaceName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "capacity": {
+              "default": 2,
+              "maximum": 100,
+              "minimum": 2,
+              "scaleType": "automatic"
+            },
+            "resourceType": "workspaces/kustoPools",
+            "sku": {
+              "name": "Compute optimized",
+              "size": "Medium"
+            }
+          },
+          {
+            "capacity": {
+              "default": 2,
+              "maximum": 100,
+              "minimum": 2,
+              "scaleType": "automatic"
+            },
+            "resourceType": "workspaces/kustoPools",
+            "sku": {
+              "name": "Compute optimized",
+              "size": "Large"
+            }
+          },
+          {
+            "capacity": {
+              "default": 2,
+              "maximum": 100,
+              "minimum": 2,
+              "scaleType": "automatic"
+            },
+            "resourceType": "workspaces/kustoPools",
+            "sku": {
+              "name": "Storage optimized",
+              "size": "Medium"
+            }
+          },
+          {
+            "capacity": {
+              "default": 2,
+              "maximum": 100,
+              "minimum": 2,
+              "scaleType": "automatic"
+            },
+            "resourceType": "workspaces/kustoPools",
+            "sku": {
+              "name": "Storage optimized",
+              "size": "Large"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "KustoPools_ListSkusByResource",
+  "title": "KustoPoolsListResourceSkus"
+}

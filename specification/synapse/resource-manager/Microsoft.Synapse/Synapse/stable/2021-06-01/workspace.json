@@ -1,394 +1,1060 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-06-01",
     "title": "SynapseManagementClient",
-    "description": "Azure Synapse Analytics APIs"
+    "version": "2021-06-01",
+    "description": "Azure Synapse Analytics management API for workspaces, workspace administrators and security settings, firewall rules, keys, private endpoints, private link resources and private link hubs.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "securityDefinitions": {
     "azure_auth": {
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
-      },
-      "description": "Azure Active Directory OAuth2 Flow"
+      }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Workspaces"
+    },
+    {
+      "name": "WorkspaceAadAdminInfos"
+    },
+    {
+      "name": "WorkspaceSqlAadAdmins"
+    },
+    {
+      "name": "ManagedIdentitySqlControlSettingsModels"
+    },
+    {
+      "name": "RestorableDroppedSqlPools"
+    },
+    {
+      "name": "AzureADOnlyAuthentications"
+    },
+    {
+      "name": "IpFirewallRuleInfos"
+    },
+    {
+      "name": "Keys"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinkResources"
+    },
+    {
+      "name": "PrivateLinkHubPrivateLinkResources"
+    },
+    {
+      "name": "PrivateLinkHubs"
+    },
+    {
+      "name": "PrivateEndpointConnectionForPrivateLinkHubs"
+    }
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces": {
+    "/providers/Microsoft.Synapse/operations": {
       "get": {
-        "operationId": "Workspaces_ListByResourceGroup",
-        "description": "Returns a list of workspaces in a resource group",
+        "operationId": "Operations_List",
         "tags": [
-          "Workspaces"
+          "Operations"
         ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
+        "summary": "All operations",
+        "description": "Get all available operations",
+        "parameters": [],
         "responses": {
           "200": {
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WorkspaceInfoListResult"
-            },
-            "description": ""
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AvailableRpOperation"
+              }
+            }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "List workspaces in resource group": {
-            "$ref": "./examples/ListWorkspacesInResourceGroup.json"
+          "Get available operations": {
+            "$ref": "./examples/GetAvailableOperations.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}": {
-      "get": {
-        "operationId": "Workspaces_Get",
-        "description": "Gets a workspace",
-        "tags": [
-          "Workspaces"
-        ],
-        "deprecated": false,
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/checkNameAvailability": {
+      "post": {
+        "operationId": "Operations_CheckNameAvailability",
+        "summary": "Check name availability",
+        "description": "Check whether a workspace name is available",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            },
-            "description": ""
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Get a workspace": {
-            "$ref": "./examples/GetWorkspace.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Workspaces_Update",
-        "description": "Updates a workspace",
-        "tags": [
-          "Workspaces"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "schema": {
-              "$ref": "#/definitions/WorkspacePatchInfo"
-            },
+            "name": "request",
             "in": "body",
-            "name": "workspacePatchInfo",
+            "description": "The check request",
             "required": true,
-            "description": "Workspace patch request properties"
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
           }
         ],
         "responses": {
           "200": {
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Workspace"
-            },
-            "description": ""
-          },
-          "201": {
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            },
-            "description": ""
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
-          "Update a workspace": {
-            "$ref": "./examples/UpdateWorkspace.json"
+          "Check for a workspace name that already exists": {
+            "$ref": "./examples/CheckNameAvailabilityWorkspaceAlreadyExists.json"
+          },
+          "Check for a workspace name that is available": {
+            "$ref": "./examples/CheckNameAvailabilityWorkspaceAvailable.json"
           }
         }
-      },
-      "put": {
-        "operationId": "Workspaces_CreateOrUpdate",
-        "description": "Creates or updates a workspace",
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/privateLinkHubs": {
+      "get": {
+        "operationId": "PrivateLinkHubs_List",
         "tags": [
-          "Workspaces"
+          "PrivateLinkHubs"
         ],
-        "deprecated": false,
+        "description": "Returns a list of privateLinkHubs in a subscription",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "description": "Workspace create or update request properties",
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            },
-            "in": "body",
-            "name": "workspaceInfo",
-            "required": true
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Workspace"
-            },
-            "description": ""
-          },
-          "201": {
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            },
-            "description": ""
+              "$ref": "#/definitions/PrivateLinkHubInfoListResult"
+            }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Create or update a workspace": {
-            "$ref": "./examples/CreateOrUpdateWorkspace.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Workspaces_Delete",
-        "description": "Deletes a workspace",
-        "tags": [
-          "Workspaces"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            },
-            "description": "OK"
-          },
-          "202": {
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            },
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+          "List privateLinkHubs in subscription": {
+            "$ref": "./examples/ListPrivateLinkHubsInSubscription.json"
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Delete a workspace": {
-            "$ref": "./examples/DeleteWorkspace.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/workspaces": {
       "get": {
         "operationId": "Workspaces_List",
-        "description": "Returns a list of workspaces in a subscription",
         "tags": [
           "Workspaces"
         ],
-        "deprecated": false,
+        "description": "Returns a list of workspaces in a subscription",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WorkspaceInfoListResult"
-            },
-            "description": ""
+            }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List workspaces in subscription": {
             "$ref": "./examples/ListWorkspacesInSubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs": {
+      "get": {
+        "operationId": "PrivateLinkHubs_ListByResourceGroup",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "description": "Returns a list of privateLinkHubs in a resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHubInfoListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List privateLinkHubs in resource group": {
+            "$ref": "./examples/ListPrivateLinkHubsInResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}": {
+      "get": {
+        "operationId": "PrivateLinkHubs_Get",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "description": "Gets a privateLinkHub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkHubName",
+            "in": "path",
+            "description": "Name of the privateLinkHub",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a privateLinkHub": {
+            "$ref": "./examples/GetPrivateLinkHub.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateLinkHubs_CreateOrUpdate",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "description": "Creates or updates a privateLinkHub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkHubName",
+            "in": "path",
+            "description": "Name of the privateLinkHub",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkHubInfo",
+            "in": "body",
+            "description": "PrivateLinkHub create or update request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateLinkHub' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateLinkHub' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a privateLinkHub": {
+            "$ref": "./examples/CreateOrUpdatePrivateLinkHub.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PrivateLinkHubs_Update",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "description": "Updates a privateLinkHub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkHubName",
+            "in": "path",
+            "description": "Name of the privateLinkHub",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkHubPatchInfo",
+            "in": "body",
+            "description": "PrivateLinkHub patch request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHubPatchInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateLinkHub' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a privateLinkHub": {
+            "$ref": "./examples/UpdatePrivateLinkHub.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateLinkHubs_Delete",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "description": "Deletes a privateLinkHub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkHubName",
+            "in": "path",
+            "description": "Name of the privateLinkHub",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a privateLinkHub": {
+            "$ref": "./examples/DeletePrivateLinkHub.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnectionsPrivateLinkHub_List",
+        "tags": [
+          "PrivateEndpointConnectionForPrivateLinkHubs"
+        ],
+        "description": "Get all PrivateEndpointConnections in the PrivateLinkHub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkHubName",
+            "in": "path",
+            "description": "Name of the privateLinkHub",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHub_ResourceCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a privateLinkHub": {
+            "$ref": "./examples/PrivateEndpointConnectionsPrivateLinkHub_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnectionsPrivateLinkHub_Get",
+        "tags": [
+          "PrivateEndpointConnectionForPrivateLinkHubs"
+        ],
+        "description": "Get all PrivateEndpointConnection in the PrivateLinkHub by name",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkHubName",
+            "in": "path",
+            "description": "Name of the privateLinkHub",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the privateEndpointConnection (resource key; carried in the path only).",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHub"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a privateLinkHub": {
+            "$ref": "./examples/PrivateEndpointConnectionsPrivateLinkHub_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkHubPrivateLinkResources_List",
+        "tags": [
+          "PrivateLinkHubPrivateLinkResources"
+        ],
+        "description": "Get all private link resources for a private link hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkHubName",
+            "in": "path",
+            "description": "The name of the private link hub",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources for private link hub": {
+            "$ref": "./examples/ListPrivateLinkHubPrivateLinkResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkHubPrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkHubPrivateLinkResources"
+        ],
+        "description": "Get private link resource in private link hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateLinkHubName",
+            "in": "path",
+            "description": "The name of the private link hub",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of the private link resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources for private link hub": {
+            "$ref": "./examples/GetPrivateLinkHubPrivateLinkResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces": {
+      "get": {
+        "operationId": "Workspaces_ListByResourceGroup",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Returns a list of workspaces in a resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceInfoListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List workspaces in resource group": {
+            "$ref": "./examples/ListWorkspacesInResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}": {
+      "get": {
+        "operationId": "Workspaces_Get",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workspace": {
+            "$ref": "./examples/GetWorkspace.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Workspaces_CreateOrUpdate",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Creates or updates a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceInfo",
+            "in": "body",
+            "description": "Workspace create or update request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Workspace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'Workspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a workspace": {
+            "$ref": "./examples/CreateOrUpdateWorkspace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Workspaces_Update",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Updates a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspacePatchInfo",
+            "in": "body",
+            "description": "Workspace patch request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspacePatchInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'Workspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a workspace": {
+            "$ref": "./examples/UpdateWorkspace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Workspaces_Delete",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Deletes a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/DeleteWorkspace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/administrators/activeDirectory": {
       "get": {
         "operationId": "WorkspaceAadAdmins_Get",
-        "description": "Gets a workspace active directory admin",
         "tags": [
-          "Workspaces"
+          "WorkspaceAadAdminInfos"
         ],
-        "deprecated": false,
+        "description": "Gets a workspace active directory admin",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WorkspaceAadAdminInfo"
-            },
-            "description": "OK"
+            }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
         "x-ms-examples": {
           "Get workspace active directory admin": {
             "$ref": "./examples/GetWorkspaceAadAdmin.json"
@@ -397,284 +1063,847 @@
       },
       "put": {
         "operationId": "WorkspaceAadAdmins_CreateOrUpdate",
-        "description": "Creates or updates a workspace active directory admin",
         "tags": [
-          "Workspaces"
+          "WorkspaceAadAdminInfos"
         ],
-        "deprecated": false,
+        "description": "Creates or updates a workspace active directory admin",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
           },
           {
+            "name": "aadAdminInfo",
+            "in": "body",
             "description": "Workspace active directory administrator properties",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/WorkspaceAadAdminInfo"
-            },
-            "in": "body",
-            "name": "aadAdminInfo",
-            "required": true
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Resource 'WorkspaceAadAdminInfo' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/WorkspaceAadAdminInfo"
             }
           },
           "202": {
-            "description": "",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Create or update workspace active directory admin": {
             "$ref": "./examples/CreateOrUpdateWorkspaceAadAdmin.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "WorkspaceAadAdmins_Delete",
-        "description": "Deletes a workspace active directory admin",
         "tags": [
-          "Workspaces"
+          "WorkspaceAadAdminInfos"
         ],
-        "deprecated": false,
+        "description": "Deletes a workspace active directory admin",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": ""
-          },
-          "204": {
-            "description": "Accepted"
+            "description": "Resource deleted successfully."
           },
           "202": {
-            "description": ""
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete workspace active directory admin": {
             "$ref": "./examples/DeleteWorkspaceAadAdmin.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlAdministrators/activeDirectory": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications": {
       "get": {
-        "operationId": "WorkspaceSqlAadAdmins_Get",
-        "description": "Gets a workspace SQL active directory admin",
+        "operationId": "AzureADOnlyAuthentications_List",
         "tags": [
-          "Workspaces"
+          "AzureADOnlyAuthentications"
         ],
-        "deprecated": false,
+        "description": "Gets a list of Azure Active Directory only authentication property for a workspace",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WorkspaceAadAdminInfo"
-            },
-            "description": "OK"
+              "$ref": "#/definitions/AzureADOnlyAuthenticationListResult"
+            }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
         "x-ms-examples": {
-          "Get workspace active directory admin": {
-            "$ref": "./examples/GetWorkspaceAadAdmin.json"
+          "Get a list of Azure Active Directory Only Authentication property": {
+            "$ref": "./examples/ListAzureADOnlyAuthentication.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications/{azureADOnlyAuthenticationName}": {
+      "get": {
+        "operationId": "AzureADOnlyAuthentications_Get",
+        "tags": [
+          "AzureADOnlyAuthentications"
+        ],
+        "description": "Gets a Azure Active Directory only authentication property",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "azureADOnlyAuthenticationName",
+            "in": "path",
+            "description": "name of the property",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "AzureADOnlyAuthenticationName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureADOnlyAuthentication"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Active Directory Only Authentication property": {
+            "$ref": "./examples/GetAzureADOnlyAuthentication.json"
           }
         }
       },
       "put": {
-        "operationId": "WorkspaceSqlAadAdmins_CreateOrUpdate",
-        "description": "Creates or updates a workspace SQL active directory admin",
+        "operationId": "AzureADOnlyAuthentications_Create",
         "tags": [
-          "Workspaces"
+          "AzureADOnlyAuthentications"
         ],
-        "deprecated": false,
+        "description": "Create or Update a Azure Active Directory only authentication property for the workspaces",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
           },
           {
-            "description": "Workspace active directory administrator properties",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceAadAdminInfo"
-            },
+            "name": "azureADOnlyAuthenticationName",
+            "in": "path",
+            "description": "name of the property",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "AzureADOnlyAuthenticationName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "AzureADOnlyAuthenticationInfo",
             "in": "body",
-            "name": "aadAdminInfo",
-            "required": true
+            "description": "Azure Active Directory Property",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureADOnlyAuthentication"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Resource 'AzureADOnlyAuthentication' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+              "$ref": "#/definitions/AzureADOnlyAuthentication"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureADOnlyAuthentication' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureADOnlyAuthentication"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "202": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update Azure Active Directory Only Authentication property": {
+            "$ref": "./examples/CreateOrUpdateAzureADOnlyAuthentication.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/firewallRules": {
+      "get": {
+        "operationId": "IpFirewallRules_ListByWorkspace",
+        "tags": [
+          "IpFirewallRuleInfos"
+        ],
+        "description": "Returns a list of firewall rules",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfoListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
         "x-ms-examples": {
-          "Create or update workspace active directory admin": {
-            "$ref": "./examples/CreateOrUpdateWorkspaceAadAdmin.json"
+          "List IP firewall rules in a workspace": {
+            "$ref": "./examples/ListIpFirewallRules.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/firewallRules/{ruleName}": {
+      "get": {
+        "operationId": "IpFirewallRules_Get",
+        "tags": [
+          "IpFirewallRuleInfos"
+        ],
+        "description": "Get a firewall rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The IP firewall rule name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get IP firewall rule": {
+            "$ref": "./examples/GetIpFirewallRule.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IpFirewallRules_CreateOrUpdate",
+        "tags": [
+          "IpFirewallRuleInfos"
+        ],
+        "description": "Creates or updates a firewall rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The IP firewall rule name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ipFirewallRuleInfo",
+            "in": "body",
+            "description": "IP firewall rule properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IpFirewallRuleInfo' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfo"
+            }
+          },
+          "201": {
+            "description": "Resource 'IpFirewallRuleInfo' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfo"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an IP firewall rule": {
+            "$ref": "./examples/CreateIpFirewallRule.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "IpFirewallRules_Delete",
+        "tags": [
+          "IpFirewallRuleInfos"
+        ],
+        "description": "Deletes a firewall rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The IP firewall rule name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfo"
+            }
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an IP firewall rule from a workspace": {
+            "$ref": "./examples/DeleteIpFirewallRule.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/keys": {
+      "get": {
+        "operationId": "Keys_ListByWorkspace",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Returns a list of keys in a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfoListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List keys in workspace": {
+            "$ref": "./examples/ListKeysInWorkspace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/keys/{keyName}": {
+      "get": {
+        "operationId": "Keys_Get",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Gets a workspace key",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the workspace key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workspace key": {
+            "$ref": "./examples/GetKey.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Keys_CreateOrUpdate",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Creates or updates a workspace key",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the workspace key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyProperties",
+            "in": "body",
+            "description": "Key put request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Key' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a workspace key": {
+            "$ref": "./examples/CreateOrUpdateKey.json"
           }
         }
       },
       "delete": {
-        "operationId": "WorkspaceSqlAadAdmins_Delete",
-        "description": "Deletes a workspace SQL active directory admin",
+        "operationId": "Keys_Delete",
         "tags": [
-          "Workspaces"
+          "Keys"
         ],
-        "deprecated": false,
+        "description": "Deletes a workspace key",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the workspace key",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
           },
           "204": {
-            "description": "Accepted"
-          },
-          "202": {
-            "description": ""
+            "description": "Resource does not exist."
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
-          "Delete workspace active directory admin": {
-            "$ref": "./examples/DeleteWorkspaceAadAdmin.json"
+          "Delete a workspace key": {
+            "$ref": "./examples/DeleteKey.json"
           }
         }
       }
@@ -682,38 +1911,42 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedIdentitySqlControlSettings/default": {
       "get": {
         "operationId": "WorkspaceManagedIdentitySqlControlSettings_Get",
-        "summary": "Get Managed Identity Sql Control Settings",
+        "tags": [
+          "ManagedIdentitySqlControlSettingsModels"
+        ],
+        "description": "Get Managed Identity Sql Control Settings",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
-            },
-            "description": "OK"
+            }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": "Error"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "produces": [
-          "application/json"
-        ],
         "x-ms-examples": {
           "Get managed identity sql control settings": {
             "$ref": "./examples/GetManagedIdentitySqlControlSettings.json"
@@ -722,346 +1955,2141 @@
       },
       "put": {
         "operationId": "WorkspaceManagedIdentitySqlControlSettings_CreateOrUpdate",
-        "summary": "Create or update Managed Identity Sql Control Settings",
+        "tags": [
+          "ManagedIdentitySqlControlSettingsModels"
+        ],
+        "description": "Create or update Managed Identity Sql Control Settings",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
           },
           {
+            "name": "managedIdentitySqlControlSettings",
+            "in": "body",
             "description": "Managed Identity Sql Control Settings",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
-            },
-            "in": "body",
-            "name": "managedIdentitySqlControlSettings",
-            "required": true
+            }
           }
         ],
         "responses": {
           "200": {
+            "description": "Resource 'ManagedIdentitySqlControlSettingsModel' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
-            },
-            "description": "OK"
+            }
           },
           "201": {
+            "description": "Resource 'ManagedIdentitySqlControlSettingsModel' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
             },
-            "description": "Created"
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": "Error"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create or update managed identity sql control settings": {
             "$ref": "./examples/CreateOrUpdateManagedIdentitySqlControlSettings.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "Operations_GetLocationHeaderResult",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Get the result of an operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get location header result": {
+            "$ref": "./examples/GetLocationHeader.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "Operations_GetAzureAsyncHeaderResult",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Get the status of an operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationResource"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get azure async operation header result": {
+            "$ref": "./examples/GetAzureAsyncOperationHeader.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_List",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Lists private endpoint connection in workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List private endpoint connections in workspace": {
+            "$ref": "./examples/ListPrivateEndpointConnections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get private endpoint connection": {
+            "$ref": "./examples/GetPrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_Create",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request body of private endpoint connection to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve private endpoint connection": {
+            "$ref": "./examples/ApprovePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete a private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete private endpoint connection": {
+            "$ref": "./examples/DeletePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_List",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get all private link resources for a workspaces",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources for workspace": {
+            "$ref": "./examples/ListPrivateLinkResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get private link resource in workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of the private link resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources for workspace": {
+            "$ref": "./examples/GetPrivateLinkResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/replaceAllIpFirewallRules": {
+      "post": {
+        "operationId": "IpFirewallRules_ReplaceAll",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Replaces firewall rules",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Replace all IP firewall rules request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplaceAllIpFirewallRulesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReplaceAllFirewallRulesOperationResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Replace all IP firewall rules in a workspace": {
+            "$ref": "./examples/ReplaceAllIpFirewallRules.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/restorableDroppedSqlPools": {
+      "get": {
+        "operationId": "RestorableDroppedSqlPools_ListByWorkspace",
+        "tags": [
+          "RestorableDroppedSqlPools"
+        ],
+        "description": "Gets a list of deleted Sql pools that can be restored",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDroppedSqlPoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of restorable dropped Sql pools": {
+            "$ref": "./examples/RestorableDroppedSqlpoolList.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/restorableDroppedSqlPools/{restorableDroppedSqlPoolId}": {
       "get": {
+        "operationId": "RestorableDroppedSqlPools_Get",
         "tags": [
           "RestorableDroppedSqlPools"
         ],
-        "operationId": "RestorableDroppedSqlPools_Get",
         "description": "Gets a deleted sql pool that can be restored",
-        "x-ms-examples": {
-          "Get a restorable dropped Sql pool": {
-            "$ref": "./examples/RestorableDroppedSqlPoolGet.json"
-          }
-        },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "restorableDroppedSqlPoolId",
             "in": "path",
+            "description": "The id of the deleted Sql Pool in the form of sqlPoolName,deletionTimeInFileTimeFormat",
             "required": true,
-            "type": "string",
-            "description": "The id of the deleted Sql Pool in the form of sqlPoolName,deletionTimeInFileTimeFormat"
+            "type": "string"
           }
-        ],
-        "consumes": [],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RestorableDroppedSqlPool"
             }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": "Error"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a restorable dropped Sql pool": {
+            "$ref": "./examples/RestorableDroppedSqlPoolGet.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/restorableDroppedSqlPools": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlAdministrators/activeDirectory": {
       "get": {
+        "operationId": "WorkspaceSqlAadAdmins_Get",
         "tags": [
-          "RestorableDroppedSqlPools"
+          "WorkspaceSqlAadAdmins"
         ],
-        "operationId": "RestorableDroppedSqlPools_ListByWorkspace",
-        "description": "Gets a list of deleted Sql pools that can be restored",
-        "x-ms-examples": {
-          "Get list of restorable dropped Sql pools": {
-            "$ref": "./examples/RestorableDroppedSqlpoolList.json"
-          }
-        },
+        "description": "Gets a workspace SQL active directory admin",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
           }
-        ],
-        "consumes": [],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RestorableDroppedSqlPoolListResult"
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
             }
           },
           "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": "Error"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
+        "x-ms-examples": {
+          "Get workspace active directory admin": {
+            "$ref": "./examples/GetWorkspaceSqlAadAdmin.json"
+          }
         }
+      },
+      "put": {
+        "operationId": "WorkspaceSqlAadAdmins_CreateOrUpdate",
+        "tags": [
+          "WorkspaceSqlAadAdmins"
+        ],
+        "description": "Creates or updates a workspace SQL active directory admin",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aadAdminInfo",
+            "in": "body",
+            "description": "Workspace active directory administrator properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WorkspaceAadAdminInfo' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update workspace active directory admin": {
+            "$ref": "./examples/CreateOrUpdateWorkspaceSqlAadAdmin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WorkspaceSqlAadAdmins_Delete",
+        "tags": [
+          "WorkspaceSqlAadAdmins"
+        ],
+        "description": "Deletes a workspace SQL active directory admin",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete workspace active directory admin": {
+            "$ref": "./examples/DeleteWorkspaceSqlAadAdmin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
     "AadAdminProperties": {
-      "description": "Workspace active directory administrator properties",
       "type": "object",
+      "description": "Workspace active directory administrator properties",
       "properties": {
         "tenantId": {
-          "description": "Tenant ID of the workspace active directory administrator",
           "type": "string",
+          "description": "Tenant ID of the workspace active directory administrator",
           "x-ms-mutability": [
-            "create",
-            "read"
+            "read",
+            "create"
           ]
         },
         "login": {
-          "description": "Login of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "description": "Login of the workspace active directory administrator"
         },
         "administratorType": {
-          "description": "Workspace active directory administrator type",
           "type": "string",
+          "description": "Workspace active directory administrator type",
           "x-ms-mutability": [
-            "create",
-            "read"
+            "read",
+            "create"
           ]
         },
         "sid": {
+          "type": "string",
           "description": "Object ID of the workspace active directory administrator",
-          "type": "string",
           "x-ms-mutability": [
-            "create",
-            "read"
+            "read",
+            "create"
           ]
         }
       }
     },
-    "WorkspaceInfoListResult": {
-      "description": "List of workspaces",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "Link to the next page of results",
-          "type": "string"
-        },
-        "value": {
-          "description": "List of workspaces",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Workspace"
+    "ActualState": {
+      "type": "string",
+      "description": "Actual state",
+      "enum": [
+        "Enabling",
+        "Enabled",
+        "Disabling",
+        "Disabled",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ActualState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Enabling",
+            "value": "Enabling",
+            "description": "Enabling"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabling",
+            "value": "Disabling",
+            "description": "Disabling"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown"
           }
+        ]
+      }
+    },
+    "AvailableRpOperation": {
+      "type": "object",
+      "description": "An operation that is available in this resource provider",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/AvailableRpOperationDisplayInfo",
+          "description": "Display properties of the operation"
+        },
+        "isDataAction": {
+          "type": "string",
+          "description": "Whether this operation is a data action"
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationMetaPropertyInfo",
+          "description": "Operation properties",
+          "x-ms-client-flatten": true
+        },
+        "origin": {
+          "type": "string",
+          "description": "Operation origin"
         }
       }
     },
-    "DataLakeStorageAccountDetails": {
-      "description": "Details of the data lake storage account associated with the workspace",
+    "AvailableRpOperationDisplayInfo": {
       "type": "object",
+      "description": "Description of an available operation",
       "properties": {
-        "accountUrl": {
-          "description": "Account URL",
+        "description": {
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Operation description"
         },
-        "filesystem": {
-          "description": "Filesystem name",
+        "resource": {
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Resource type"
         },
-        "resourceId": {
-          "description": "ARM resource Id of this storage account",
-          "type": "string"
+        "provider": {
+          "type": "string",
+          "description": "Resource provider name"
         },
-        "createManagedPrivateEndpoint": {
-          "description": "Create managed private endpoint to this storage account or not",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+        "operation": {
+          "type": "string",
+          "description": "Operation name"
         }
       }
     },
-    "EncryptionDetails": {
-      "description": "Details of the encryption associated with the workspace",
+    "AzureADOnlyAuthentication": {
       "type": "object",
+      "description": "Azure Active Directory Only Authentication Info",
       "properties": {
-        "doubleEncryptionEnabled": {
-          "description": "Double Encryption enabled",
-          "type": "boolean",
+        "properties": {
+          "$ref": "#/definitions/AzureADOnlyAuthenticationProperties",
+          "description": "azureADOnlyAuthentication resource properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AzureADOnlyAuthenticationListResult": {
+      "type": "object",
+      "description": "A list of active directory only authentications.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of results.",
+          "items": {
+            "$ref": "#/definitions/AzureADOnlyAuthentication"
+          },
           "readOnly": true
         },
-        "cmk": {
-          "description": "Customer Managed Key Details",
-          "$ref": "#/definitions/CustomerManagedKeyDetails"
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureADOnlyAuthenticationProperties": {
+      "type": "object",
+      "description": "Properties of a active directory only authentication.",
+      "properties": {
+        "azureADOnlyAuthentication": {
+          "type": "boolean",
+          "description": "Azure Active Directory only Authentication enabled."
+        },
+        "state": {
+          "$ref": "#/definitions/StateValue",
+          "description": "property configuration state",
+          "readOnly": true
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "property configuration date",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "azureADOnlyAuthentication"
+      ]
+    },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "A request about whether a workspace name is available",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Workspace name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type: workspace"
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "A response saying whether the workspace name is available",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Validation message"
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Whether the workspace name is available"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason the workspace name is or is not available"
+        },
+        "name": {
+          "type": "string",
+          "description": "Workspace name"
+        }
+      }
+    },
+    "CspWorkspaceAdminProperties": {
+      "type": "object",
+      "description": "Initial workspace AAD admin properties for a CSP subscription",
+      "properties": {
+        "initialWorkspaceAdminObjectId": {
+          "type": "string",
+          "description": "AAD object ID of initial workspace admin",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
     "CustomerManagedKeyDetails": {
-      "description": "Details of the customer managed key associated with the workspace",
       "type": "object",
+      "description": "Details of the customer managed key associated with the workspace",
       "properties": {
         "status": {
-          "description": "The customer managed key status on the workspace",
           "type": "string",
+          "description": "The customer managed key status on the workspace",
           "readOnly": true
         },
         "key": {
-          "description": "The key object of the workspace",
-          "$ref": "#/definitions/WorkspaceKeyDetails"
+          "$ref": "#/definitions/WorkspaceKeyDetails",
+          "description": "The key object of the workspace"
         },
         "kekIdentity": {
-          "description": "Key encryption key",
-          "$ref": "#/definitions/KekIdentityProperties"
+          "$ref": "#/definitions/KekIdentityProperties",
+          "description": "Key encryption key"
+        }
+      }
+    },
+    "DataLakeStorageAccountDetails": {
+      "type": "object",
+      "description": "Details of the data lake storage account associated with the workspace",
+      "properties": {
+        "accountUrl": {
+          "type": "string",
+          "description": "Account URL",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "filesystem": {
+          "type": "string",
+          "description": "Filesystem name",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "ARM resource Id of this storage account"
+        },
+        "createManagedPrivateEndpoint": {
+          "type": "boolean",
+          "description": "Create managed private endpoint to this storage account or not",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "DesiredState": {
+      "type": "string",
+      "description": "Desired state",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DesiredState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "EncryptionDetails": {
+      "type": "object",
+      "description": "Details of the encryption associated with the workspace",
+      "properties": {
+        "doubleEncryptionEnabled": {
+          "type": "boolean",
+          "description": "Double Encryption enabled",
+          "readOnly": true
+        },
+        "cmk": {
+          "$ref": "#/definitions/CustomerManagedKeyDetails",
+          "description": "Customer Managed Key Details"
+        }
+      }
+    },
+    "IpFirewallRuleInfo": {
+      "type": "object",
+      "description": "IP firewall rule",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IpFirewallRuleProperties",
+          "description": "IP firewall rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IpFirewallRuleInfoListResult": {
+      "type": "object",
+      "description": "List of IP firewall rules",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of IP firewall rules",
+          "items": {
+            "$ref": "#/definitions/IpFirewallRuleInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to next page of results"
+        }
+      }
+    },
+    "IpFirewallRuleProperties": {
+      "type": "object",
+      "description": "IP firewall rule properties",
+      "properties": {
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state",
+          "readOnly": true
+        },
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the firewall rule. Must be IPv4 format",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
     "KekIdentityProperties": {
-      "description": "Key encryption key properties",
       "type": "object",
+      "description": "Key encryption key properties",
       "properties": {
         "userAssignedIdentity": {
-          "description": "User assigned identity resource Id",
-          "type": "string"
+          "type": "string",
+          "description": "User assigned identity resource Id"
         },
         "useSystemAssignedIdentity": {
           "description": "Boolean specifying whether to use system assigned identity or not"
         }
       }
     },
-    "WorkspaceKeyDetails": {
-      "description": "Details of the customer managed key associated with the workspace",
+    "Key": {
       "type": "object",
+      "description": "A workspace key",
       "properties": {
-        "name": {
-          "description": "Workspace Key sub-resource name",
-          "type": "string"
+        "properties": {
+          "$ref": "#/definitions/KeyProperties",
+          "description": "Keys resource properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "KeyInfoListResult": {
+      "type": "object",
+      "description": "List of keys",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of keys",
+          "items": {
+            "$ref": "#/definitions/Key"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results"
+        }
+      }
+    },
+    "KeyProperties": {
+      "type": "object",
+      "description": "Key properties",
+      "properties": {
+        "isActiveCMK": {
+          "type": "boolean",
+          "description": "Used to activate the workspace after a customer managed key is provided."
         },
         "keyVaultUrl": {
-          "description": "Workspace Key sub-resource key vault url",
-          "type": "string"
+          "type": "string",
+          "description": "The Key Vault Url of the workspace key.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
     "ManagedIdentity": {
-      "description": "The workspace managed identity",
       "type": "object",
+      "description": "The workspace managed identity",
       "properties": {
         "principalId": {
-          "description": "The principal ID of the workspace managed identity",
           "type": "string",
+          "description": "The principal ID of the workspace managed identity",
           "readOnly": true
         },
         "tenantId": {
-          "description": "The tenant ID of the workspace managed identity",
           "type": "string",
           "format": "uuid",
+          "description": "The tenant ID of the workspace managed identity",
           "readOnly": true
         },
         "type": {
-          "description": "The type of managed identity for the workspace",
-          "enum": [
-            "None",
-            "SystemAssigned",
-            "SystemAssigned,UserAssigned"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The type of managed identity for the workspace"
         },
         "userAssignedIdentities": {
-          "description": "The user assigned managed identities.",
-          "$ref": "#/definitions/UserAssignedManagedIdentities"
+          "$ref": "#/definitions/UserAssignedManagedIdentities",
+          "description": "The user assigned managed identities."
         }
+      }
+    },
+    "ManagedIdentitySqlControlSettingsModel": {
+      "type": "object",
+      "description": "Sql Control Settings for workspace managed identity",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModelProperties",
+          "description": "Sql Control Settings for workspace managed identity",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedIdentitySqlControlSettingsModelProperties": {
+      "type": "object",
+      "description": "Sql Control Settings for workspace managed identity",
+      "properties": {
+        "grantSqlControlToManagedIdentity": {
+          "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentity",
+          "description": "Grant sql control to managed identity"
+        }
+      }
+    },
+    "ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentity": {
+      "type": "object",
+      "description": "Grant sql control to managed identity",
+      "properties": {
+        "desiredState": {
+          "$ref": "#/definitions/DesiredState",
+          "description": "Desired state"
+        },
+        "actualState": {
+          "$ref": "#/definitions/ActualState",
+          "description": "Actual state",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedVirtualNetworkSettings": {
+      "type": "object",
+      "description": "Managed Virtual Network Settings",
+      "properties": {
+        "preventDataExfiltration": {
+          "type": "boolean",
+          "description": "Prevent Data Exfiltration"
+        },
+        "linkedAccessCheckOnTargetResource": {
+          "type": "boolean",
+          "description": "Linked Access Check On Target Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowedAadTenantIdsForLinking": {
+          "type": "array",
+          "description": "Allowed Aad Tenant Ids For Linking",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperationMetaLogSpecification": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Log display name"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Time range the log covers"
+        },
+        "name": {
+          "type": "string",
+          "description": "Log unique name"
+        }
+      }
+    },
+    "OperationMetaMetricDimensionSpecification": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Dimension display name"
+        },
+        "name": {
+          "type": "string",
+          "description": "Dimension unique name"
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Whether this metric should be exported for Shoebox"
+        }
+      }
+    },
+    "OperationMetaMetricSpecification": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Metric display name"
+        },
+        "name": {
+          "type": "string",
+          "description": "Metric unique name"
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Metric aggregation type"
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Metric description"
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account"
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Whether the regional MDM account is enabled"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Metric units"
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Metric dimensions",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricDimensionSpecification"
+          }
+        },
+        "supportsInstanceLevelAggregation": {
+          "type": "boolean",
+          "description": "Whether the metric supports instance-level aggregation"
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Metric filter"
+        }
+      }
+    },
+    "OperationMetaPropertyInfo": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationMetaServiceSpecification",
+          "description": "Operation service specification"
+        }
+      }
+    },
+    "OperationMetaServiceSpecification": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Service metric specifications",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricSpecification"
+          }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Service log specifications",
+          "items": {
+            "$ref": "#/definitions/OperationMetaLogSpecification"
+          }
+        }
+      }
+    },
+    "OperationResource": {
+      "type": "object",
+      "description": "An operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Operation ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status"
+        },
+        "properties": {
+          "description": "Operation properties",
+          "x-ms-client-flatten": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "Errors from the operation"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time"
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "float",
+          "description": "Completion percentage of the operation"
+        }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Operation status",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          }
+        ]
+      }
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "Private endpoint details",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private endpoint.",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "A private endpoint connection",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionForPrivateLinkHub": {
+      "type": "object",
+      "description": "Private endpoint connection of a private link hub.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the private endpoint connection."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the private endpoint connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubBasicAutoGenerated"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubBasic": {
+      "type": "object",
+      "description": "Private Endpoint Connection For Private Link Hub - Basic",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "identifier",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Properties of private endpoint connection for private link hub",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubBasicAutoGenerated": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Properties of a private endpoint connection."
+        }
+      }
+    },
+    "PrivateEndpointConnectionForPrivateLinkHub_ResourceCollectionResponse": {
+      "type": "object",
+      "description": "A page of private endpoint connections of a private link hub",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The private endpoint connections in this page.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHub"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "PrivateEndpointConnectionList": {
+      "type": "object",
+      "description": "A list of private endpoint connections",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of results.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of a private endpoint connection.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the private endpoint connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkHub": {
+      "type": "object",
+      "description": "A privateLinkHub",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkHubProperties",
+          "description": "PrivateLinkHub resource properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PrivateLinkHubInfoListResult": {
+      "type": "object",
+      "description": "List of privateLinkHubs",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of privateLinkHubs",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkHub"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results"
+        }
+      }
+    },
+    "PrivateLinkHubPatchInfo": {
+      "type": "object",
+      "description": "PrivateLinkHub patch details",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkHubProperties": {
+      "type": "object",
+      "description": "PrivateLinkHub properties",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "PrivateLinkHub provisioning state"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubBasic"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The private link resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "A list of private link resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of results.",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The private link resource group id.",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "The private link resource required member names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "Required DNS zone names of the the private link resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "Connection state details of the private endpoint",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The private link service connection status."
+        },
+        "description": {
+          "type": "string",
+          "description": "The private link service connection description."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "The actions required for private link service connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Resource provisioning state",
+      "enum": [
+        "Provisioning",
+        "Succeeded",
+        "Deleting",
+        "Failed",
+        "DeleteError"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "DeleteError",
+            "value": "DeleteError",
+            "description": "DeleteError"
+          }
+        ]
+      }
+    },
+    "PurviewConfiguration": {
+      "type": "object",
+      "description": "Purview Configuration",
+      "properties": {
+        "purviewResourceId": {
+          "type": "string",
+          "description": "Purview Resource ID"
+        }
+      }
+    },
+    "ReplaceAllFirewallRulesOperationResponse": {
+      "type": "object",
+      "description": "An existing operation for replacing the firewall rules",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The operation ID"
+        }
+      }
+    },
+    "ReplaceAllIpFirewallRulesRequest": {
+      "type": "object",
+      "description": "Replace all IP firewall rules request",
+      "properties": {
+        "ipFirewallRules": {
+          "type": "object",
+          "description": "IP firewall rule properties",
+          "additionalProperties": {
+            "$ref": "#/definitions/IpFirewallRuleProperties"
+          }
+        }
+      }
+    },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity for the workspace",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "SystemAssigned,UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "SystemAssigned"
+          },
+          {
+            "name": "SystemAssigned,UserAssigned",
+            "value": "SystemAssigned,UserAssigned",
+            "description": "SystemAssigned,UserAssigned"
+          }
+        ]
+      }
+    },
+    "RestorableDroppedSqlPool": {
+      "type": "object",
+      "description": "A restorable dropped Sql pool",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RestorableDroppedSqlPoolProperties",
+          "description": "The properties of a restorable dropped Sql pool",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RestorableDroppedSqlPoolListResult": {
+      "type": "object",
+      "description": "The response to a list restorable dropped Sql pools request",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of restorable dropped Sql pools",
+          "items": {
+            "$ref": "#/definitions/RestorableDroppedSqlPool"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RestorableDroppedSqlPoolProperties": {
+      "type": "object",
+      "description": "The properties of a restorable dropped Sql pool",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database",
+          "readOnly": true
+        },
+        "edition": {
+          "type": "string",
+          "description": "The edition of the database",
+          "readOnly": true
+        },
+        "maxSizeBytes": {
+          "type": "string",
+          "description": "The max size in bytes of the database",
+          "readOnly": true
+        },
+        "serviceLevelObjective": {
+          "type": "string",
+          "description": "The service level objective name of the database",
+          "readOnly": true
+        },
+        "elasticPoolName": {
+          "type": "string",
+          "description": "The elastic pool name of the database",
+          "readOnly": true
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date of the database (ISO8601 format)",
+          "readOnly": true
+        },
+        "deletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deletion date of the database (ISO8601 format)",
+          "readOnly": true
+        },
+        "earliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest restore date of the database (ISO8601 format)",
+          "readOnly": true
+        }
+      }
+    },
+    "StateValue": {
+      "type": "string",
+      "description": "property configuration state",
+      "enum": [
+        "Consistent",
+        "InConsistent",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "StateValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Consistent",
+            "value": "Consistent",
+            "description": "Consistent"
+          },
+          {
+            "name": "InConsistent",
+            "value": "InConsistent",
+            "description": "InConsistent"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          }
+        ]
       }
     },
     "UserAssignedManagedIdentities": {
@@ -1072,493 +4100,359 @@
       }
     },
     "UserAssignedManagedIdentity": {
+      "type": "object",
       "description": "User Assigned Managed Identity",
       "properties": {
         "clientId": {
           "type": "string",
           "format": "uuid",
           "description": "The client ID.",
-          "readOnly": true,
-          "x-nullable": true
+          "x-nullable": true,
+          "readOnly": true
         },
         "principalId": {
           "type": "string",
           "format": "uuid",
           "description": "The principal ID.",
-          "readOnly": true,
-          "x-nullable": true
+          "x-nullable": true,
+          "readOnly": true
         }
-      },
-      "type": "object"
+      }
     },
     "VirtualNetworkProfile": {
-      "description": "Virtual Network Profile",
       "type": "object",
+      "description": "Virtual Network Profile",
       "properties": {
         "computeSubnetId": {
-          "description": "Subnet ID used for computes in workspace",
-          "type": "string"
-        }
-      }
-    },
-    "ManagedVirtualNetworkSettings": {
-      "description": "Managed Virtual Network Settings",
-      "type": "object",
-      "properties": {
-        "preventDataExfiltration": {
-          "description": "Prevent Data Exfiltration",
-          "type": "boolean"
-        },
-        "linkedAccessCheckOnTargetResource": {
-          "description": "Linked Access Check On Target Resource",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        },
-        "allowedAadTenantIdsForLinking": {
-          "description": "Allowed Aad Tenant Ids For Linking",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Tenant Id"
-          }
-        }
-      }
-    },
-    "WorkspaceRepositoryConfiguration": {
-      "description": "Git integration settings",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of workspace repositoryID configuration. Example WorkspaceVSTSConfiguration, WorkspaceGitHubConfiguration",
-          "type": "string"
-        },
-        "hostName": {
-          "description": "GitHub Enterprise host name. For example: `https://github.mydomain.com`",
-          "type": "string"
-        },
-        "accountName": {
-          "description": "Account name",
-          "type": "string"
-        },
-        "projectName": {
-          "description": "VSTS project name",
-          "type": "string"
-        },
-        "repositoryName": {
-          "description": "Repository name",
-          "type": "string"
-        },
-        "collaborationBranch": {
-          "description": "Collaboration branch",
-          "type": "string"
-        },
-        "rootFolder": {
-          "description": "Root folder to use in the repository",
-          "type": "string"
-        },
-        "lastCommitId": {
-          "description": "The last commit ID",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The VSTS tenant ID",
           "type": "string",
-          "format": "uuid"
-        }
-      }
-    },
-    "PurviewConfiguration": {
-      "description": "Purview Configuration",
-      "type": "object",
-      "properties": {
-        "purviewResourceId": {
-          "description": "Purview Resource ID",
-          "type": "string"
-        }
-      }
-    },
-    "WorkspaceAadAdminInfo": {
-      "description": "Workspace active directory administrator",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Workspace active directory administrator properties",
-          "$ref": "#/definitions/AadAdminProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "CspWorkspaceAdminProperties": {
-      "type": "object",
-      "description": "Initial workspace AAD admin properties for a CSP subscription",
-      "properties": {
-        "initialWorkspaceAdminObjectId": {
-          "description": "AAD object ID of initial workspace admin",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Subnet ID used for computes in workspace"
         }
       }
     },
     "Workspace": {
-      "description": "A workspace",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        }
-      ],
+      "description": "A workspace",
       "properties": {
         "properties": {
-          "description": "Workspace resource properties",
           "$ref": "#/definitions/WorkspaceProperties",
+          "description": "Workspace resource properties",
           "x-ms-client-flatten": true
         },
         "identity": {
-          "description": "Identity of the workspace",
-          "$ref": "#/definitions/ManagedIdentity"
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "Identity of the workspace"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WorkspaceAadAdminInfo": {
+      "type": "object",
+      "description": "Workspace active directory administrator",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AadAdminProperties",
+          "description": "Workspace active directory administrator properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkspaceInfoListResult": {
+      "type": "object",
+      "description": "List of workspaces",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of workspaces",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results"
         }
       }
     },
-    "WorkspaceProperties": {
-      "description": "Workspace properties",
+    "WorkspaceKeyDetails": {
       "type": "object",
+      "description": "Details of the customer managed key associated with the workspace",
       "properties": {
-        "defaultDataLakeStorage": {
-          "description": "Workspace default data lake storage account details",
-          "$ref": "#/definitions/DataLakeStorageAccountDetails"
-        },
-        "sqlAdministratorLoginPassword": {
-          "description": "SQL administrator login password",
-          "type": "string"
-        },
-        "managedResourceGroupName": {
-          "description": "Workspace managed resource group. The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 90 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and '-', '_', '(', ')' and'.'. Note that the name cannot end with '.'",
+        "name": {
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Workspace Key sub-resource name"
         },
-        "provisioningState": {
-          "description": "Resource provisioning state",
+        "keyVaultUrl": {
           "type": "string",
-          "readOnly": true
-        },
-        "sqlAdministratorLogin": {
-          "description": "Login for workspace SQL active directory administrator",
-          "type": "string"
-        },
-        "virtualNetworkProfile": {
-          "description": "Virtual Network profile",
-          "$ref": "#/definitions/VirtualNetworkProfile"
-        },
-        "connectivityEndpoints": {
-          "description": "Connectivity endpoints",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "type": "object",
-          "readOnly": true
-        },
-        "managedVirtualNetwork": {
-          "description": "Setting this to 'default' will ensure that all compute for this workspace is in a virtual network managed on behalf of the user.",
-          "type": "string"
-        },
-        "privateEndpointConnections": {
-          "description": "Private endpoint connections to the workspace",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
-          }
-        },
-        "encryption": {
-          "description": "The encryption details of the workspace",
-          "$ref": "#/definitions/EncryptionDetails"
-        },
-        "workspaceUID": {
-          "description": "The workspace unique identifier",
-          "type": "string",
-          "readOnly": true,
-          "format": "uuid"
-        },
-        "extraProperties": {
-          "description": "Workspace level configs and feature flags",
-          "type": "object",
-          "readOnly": true
-        },
-        "managedVirtualNetworkSettings": {
-          "description": "Managed Virtual Network Settings",
-          "$ref": "#/definitions/ManagedVirtualNetworkSettings"
-        },
-        "workspaceRepositoryConfiguration": {
-          "description": "Git integration settings",
-          "$ref": "#/definitions/WorkspaceRepositoryConfiguration"
-        },
-        "purviewConfiguration": {
-          "description": "Purview Configuration",
-          "$ref": "#/definitions/PurviewConfiguration"
-        },
-        "adlaResourceId": {
-          "description": "The ADLA resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "publicNetworkAccess": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "description": "Enable or Disable public network access to workspace",
-          "default": "Enabled",
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkspacePublicNetworkAccess",
-            "modelAsString": true
-          }
-        },
-        "cspWorkspaceAdminProperties": {
-          "description": "Initial workspace AAD admin properties for a CSP subscription",
-          "$ref": "#/definitions/CspWorkspaceAdminProperties"
-        },
-        "settings": {
-          "description": "Workspace settings",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "type": "object",
-          "readOnly": true
-        },
-        "azureADOnlyAuthentication": {
-          "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
-        },
-        "trustedServiceBypassEnabled": {
-          "description": "Is trustedServiceBypassEnabled for the workspace",
-          "type": "boolean",
-          "default": false
+          "description": "Workspace Key sub-resource key vault url"
         }
       }
     },
     "WorkspacePatchInfo": {
-      "description": "Workspace patch details",
       "type": "object",
+      "description": "Workspace patch details",
       "properties": {
         "tags": {
+          "type": "object",
           "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
-          },
-          "type": "object"
+          }
         },
         "identity": {
-          "description": "The identity of the workspace",
-          "$ref": "#/definitions/ManagedIdentity"
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The identity of the workspace"
         },
         "properties": {
-          "description": "Workspace patch properties",
           "$ref": "#/definitions/WorkspacePatchProperties",
+          "description": "Workspace patch properties",
           "x-ms-client-flatten": true
         }
       }
     },
     "WorkspacePatchProperties": {
-      "description": "Workspace patch properties",
       "type": "object",
+      "description": "Workspace patch properties",
       "properties": {
         "sqlAdministratorLoginPassword": {
-          "description": "SQL administrator login password",
-          "type": "string"
+          "type": "string",
+          "description": "SQL administrator login password"
         },
         "managedVirtualNetworkSettings": {
-          "description": "Managed Virtual Network Settings",
-          "$ref": "#/definitions/ManagedVirtualNetworkSettings"
+          "$ref": "#/definitions/ManagedVirtualNetworkSettings",
+          "description": "Managed Virtual Network Settings"
         },
         "workspaceRepositoryConfiguration": {
-          "description": "Git integration settings",
-          "$ref": "#/definitions/WorkspaceRepositoryConfiguration"
+          "$ref": "#/definitions/WorkspaceRepositoryConfiguration",
+          "description": "Git integration settings"
         },
         "purviewConfiguration": {
-          "description": "Purview Configuration",
-          "$ref": "#/definitions/PurviewConfiguration"
+          "$ref": "#/definitions/PurviewConfiguration",
+          "description": "Purview Configuration"
         },
         "provisioningState": {
-          "description": "Resource provisioning state",
           "type": "string",
+          "description": "Resource provisioning state",
           "readOnly": true
         },
         "encryption": {
-          "description": "The encryption details of the workspace",
-          "$ref": "#/definitions/EncryptionDetails"
+          "$ref": "#/definitions/EncryptionDetails",
+          "description": "The encryption details of the workspace"
         },
         "publicNetworkAccess": {
+          "$ref": "#/definitions/WorkspacePublicNetworkAccess",
+          "description": "Enable or Disable public network access to workspace"
+        }
+      }
+    },
+    "WorkspaceProperties": {
+      "type": "object",
+      "description": "Workspace properties",
+      "properties": {
+        "defaultDataLakeStorage": {
+          "$ref": "#/definitions/DataLakeStorageAccountDetails",
+          "description": "Workspace default data lake storage account details"
+        },
+        "sqlAdministratorLoginPassword": {
+          "type": "string",
+          "description": "SQL administrator login password"
+        },
+        "managedResourceGroupName": {
+          "type": "string",
+          "description": "Workspace managed resource group. The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 90 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and '-', '_', '(', ')' and'.'. Note that the name cannot end with '.'",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Resource provisioning state",
+          "readOnly": true
+        },
+        "sqlAdministratorLogin": {
+          "type": "string",
+          "description": "Login for workspace SQL active directory administrator"
+        },
+        "virtualNetworkProfile": {
+          "$ref": "#/definitions/VirtualNetworkProfile",
+          "description": "Virtual Network profile"
+        },
+        "connectivityEndpoints": {
+          "type": "object",
+          "description": "Connectivity endpoints",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "managedVirtualNetwork": {
+          "type": "string",
+          "description": "Setting this to 'default' will ensure that all compute for this workspace is in a virtual network managed on behalf of the user."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Private endpoint connections to the workspace",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionDetails",
+          "description": "The encryption details of the workspace"
+        },
+        "workspaceUID": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The workspace unique identifier",
+          "readOnly": true
+        },
+        "extraProperties": {
+          "description": "Workspace level configs and feature flags",
+          "readOnly": true
+        },
+        "managedVirtualNetworkSettings": {
+          "$ref": "#/definitions/ManagedVirtualNetworkSettings",
+          "description": "Managed Virtual Network Settings"
+        },
+        "workspaceRepositoryConfiguration": {
+          "$ref": "#/definitions/WorkspaceRepositoryConfiguration",
+          "description": "Git integration settings"
+        },
+        "purviewConfiguration": {
+          "$ref": "#/definitions/PurviewConfiguration",
+          "description": "Purview Configuration"
+        },
+        "adlaResourceId": {
+          "type": "string",
+          "description": "The ADLA resource ID.",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Enable or Disable public network access to workspace",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
           ],
-          "description": "Enable or Disable public network access to workspace",
-          "type": "string",
           "x-ms-enum": {
             "name": "WorkspacePublicNetworkAccess",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ManagedIdentitySqlControlSettingsModel": {
-      "type": "object",
-      "title": "Managed Identity Sql Control Settings",
-      "description": "Sql Control Settings for workspace managed identity",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "type": "object",
-          "title": "Managed Identity Sql Control Settings",
-          "description": "Sql Control Settings for workspace managed identity",
-          "properties": {
-            "grantSqlControlToManagedIdentity": {
-              "type": "object",
-              "description": "Grant sql control to managed identity",
-              "properties": {
-                "desiredState": {
-                  "description": "Desired state",
-                  "type": "string",
-                  "enum": [
-                    "Enabled",
-                    "Disabled"
-                  ],
-                  "x-ms-enum": {
-                    "name": "DesiredState",
-                    "modelAsString": false
-                  }
-                },
-                "actualState": {
-                  "description": "Actual state",
-                  "type": "string",
-                  "enum": [
-                    "Enabling",
-                    "Enabled",
-                    "Disabling",
-                    "Disabled",
-                    "Unknown"
-                  ],
-                  "x-ms-enum": {
-                    "name": "ActualState",
-                    "modelAsString": false
-                  },
-                  "readOnly": true
-                }
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
               }
-            }
-          },
-          "x-ms-client-flatten": true
+            ]
+          }
+        },
+        "cspWorkspaceAdminProperties": {
+          "$ref": "#/definitions/CspWorkspaceAdminProperties",
+          "description": "Initial workspace AAD admin properties for a CSP subscription"
+        },
+        "settings": {
+          "type": "object",
+          "description": "Workspace settings",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "azureADOnlyAuthentication": {
+          "type": "boolean",
+          "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "trustedServiceBypassEnabled": {
+          "type": "boolean",
+          "description": "Is trustedServiceBypassEnabled for the workspace",
+          "default": false
         }
       }
     },
-    "RestorableDroppedSqlPoolProperties": {
-      "type": "object",
-      "properties": {
-        "databaseName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the database"
-        },
-        "edition": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The edition of the database"
-        },
-        "maxSizeBytes": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The max size in bytes of the database"
-        },
-        "serviceLevelObjective": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The service level objective name of the database"
-        },
-        "elasticPoolName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The elastic pool name of the database"
-        },
-        "creationDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date of the database (ISO8601 format)"
-        },
-        "deletionDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The deletion date of the database (ISO8601 format)"
-        },
-        "earliestRestoreDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The earliest restore date of the database (ISO8601 format)"
-        }
-      },
-      "description": "The properties of a restorable dropped Sql pool"
-    },
-    "RestorableDroppedSqlPool": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The geo-location where the resource lives"
-        },
-        "properties": {
-          "$ref": "#/definitions/RestorableDroppedSqlPoolProperties",
-          "description": "The properties of a restorable dropped Sql pool",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
+    "WorkspacePublicNetworkAccess": {
+      "type": "string",
+      "description": "Enable or Disable public network access to workspace",
+      "enum": [
+        "Enabled",
+        "Disabled"
       ],
-      "description": "A restorable dropped Sql pool"
-    },
-    "RestorableDroppedSqlPoolListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RestorableDroppedSqlPool"
+      "x-ms-enum": {
+        "name": "WorkspacePublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
           },
-          "description": "A list of restorable dropped Sql pools"
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "WorkspaceRepositoryConfiguration": {
+      "type": "object",
+      "description": "Git integration settings",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of workspace repositoryID configuration. Example WorkspaceVSTSConfiguration, WorkspaceGitHubConfiguration"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "GitHub Enterprise host name. For example: `https://github.mydomain.com`"
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Account name"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "VSTS project name"
+        },
+        "repositoryName": {
+          "type": "string",
+          "description": "Repository name"
+        },
+        "collaborationBranch": {
+          "type": "string",
+          "description": "Collaboration branch"
+        },
+        "rootFolder": {
+          "type": "string",
+          "description": "Root folder to use in the repository"
+        },
+        "lastCommitId": {
+          "type": "string",
+          "description": "The last commit ID"
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The VSTS tenant ID"
         }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The response to a list restorable dropped Sql pools request"
+      }
     }
-  }
+  },
+  "parameters": {}
 }
