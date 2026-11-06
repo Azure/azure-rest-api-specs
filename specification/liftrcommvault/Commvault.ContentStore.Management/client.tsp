@@ -240,6 +240,6 @@ model CloudAccountUserAssignedIdentity {
 
 @@alternateType(
   CloudAccountIdentityUpdate.userAssignedIdentities,
-  Record<CloudAccountUserAssignedIdentity>,
+  Record<CloudAccountUserAssignedIdentity | null>,
   "javascript"
 );
