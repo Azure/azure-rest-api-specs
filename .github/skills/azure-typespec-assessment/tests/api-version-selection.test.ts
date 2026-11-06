@@ -183,6 +183,35 @@ void test("selects a newly added head version and the latest stable base version
   );
 });
 
+void test("uses the base revision when the previous version is absent from the head enum", () => {
+  const base = extractApiVersions([
+    source(`
+  v2026_01_20_preview: "2026-01-20-preview",
+  v2026_05_01_preview: "2026-05-01-preview",
+  `),
+  ]);
+  const current = extractApiVersions([
+    source(`
+  v2026_10_01_preview: "2026-10-01-preview",
+  `),
+  ]);
+
+  const pair = selectApiVersionPair({
+    base,
+    current,
+    baseCommit: "base-sha",
+    headCommit: "head-sha",
+  });
+
+  assert.equal(pair.mode, "new-api-version");
+  assert.equal(pair.baseline.sourceRevision, "base");
+  assert.equal(pair.baseline.commit, "base-sha");
+  assert.equal(pair.baseline.apiVersion, "2026-05-01-preview");
+  assert.equal(pair.target.sourceRevision, "current");
+  assert.equal(pair.target.commit, "head-sha");
+  assert.equal(pair.target.apiVersion, "2026-10-01-preview");
+});
+
 void test("uses the latest head version and latest preview base when no stable exists", () => {
   const base = extractApiVersions([
     source(`
