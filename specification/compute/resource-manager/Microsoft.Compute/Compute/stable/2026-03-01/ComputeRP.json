@@ -19130,11 +19130,11 @@
       "properties": {
         "secureBootEnabled": {
           "type": "boolean",
-          "description": "Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01."
+          "description": "Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless vTpmEnabled is explicitly set to false."
         },
         "vTpmEnabled": {
           "type": "boolean",
-          "description": "Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01."
+          "description": "Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless secureBootEnabled is explicitly set to false."
         }
       }
     },
