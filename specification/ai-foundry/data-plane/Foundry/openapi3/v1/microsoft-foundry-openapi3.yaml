@@ -3867,13 +3867,13 @@ paths:
               schema:
                 contentMediaType: audio/wav
         4XX:
-          description: Client error
+          description: The merged stereo audio for a stored Live conversation, returned as a WAV byte stream.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
-          description: Server error
+          description: The merged stereo audio for a stored Live conversation, returned as a WAV byte stream.
           content:
             application/json:
               schema:
@@ -4172,13 +4172,13 @@ paths:
               schema:
                 contentMediaType: audio/wav
         4XX:
-          description: Client error
+          description: The captured speech audio for a single item in a stored Live conversation, returned as a WAV byte stream.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
-          description: Server error
+          description: The captured speech audio for a single item in a stored Live conversation, returned as a WAV byte stream.
           content:
             application/json:
               schema:
@@ -73395,6 +73395,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveToolChoiceValueEnum'
             - type: 'null'
+          description: Whether the model may choose a tool automatically, must call a tool, or must not call a tool from the allowed set.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -73407,6 +73408,7 @@ components:
           type: string
           enum:
             - apply_patch
+          description: The tool type. Always `apply_patch`.
           x-stainless-const: true
           default: apply_patch
       x-ms-foundry-meta:
@@ -73419,6 +73421,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.LiveAudioFormatType'
+          description: The encoding used for Live session audio.
       discriminator:
         propertyName: type
         mapping:
@@ -73461,6 +73464,7 @@ components:
           type: string
           enum:
             - code_interpreter
+          description: The tool type. Always `code_interpreter`.
           x-stainless-const: true
           default: code_interpreter
       x-ms-foundry-meta:
@@ -73475,6 +73479,7 @@ components:
           type: string
           enum:
             - computer
+          description: The tool type. Always `computer`.
           x-stainless-const: true
           default: computer
       x-ms-foundry-meta:
@@ -73533,6 +73538,7 @@ components:
           type: string
           enum:
             - custom
+          description: The tool type. Always `custom`.
           x-stainless-const: true
           default: custom
       x-ms-foundry-meta:
@@ -73547,6 +73553,7 @@ components:
           type: string
           minLength: 1
           maxLength: 128
+          description: The identifier of the custom voice to use for generated audio.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -73586,8 +73593,10 @@ components:
           oneOf:
             - type: string
             - type: boolean
+          description: The string or boolean value returned when this choice is selected.
         description:
           type: string
+          description: A description that helps the model distinguish this choice from the other choices.
     OpenAI.LiveDecisionChoiceQuestionParam:
       type: object
       required:
@@ -73599,9 +73608,11 @@ components:
           type: string
           enum:
             - choice
+          description: The question type. Always `choice`.
           x-stainless-const: true
         name:
           type: string
+          description: An optional question name used to identify its answer in the Decision response.
         instructions:
           oneOf:
             - type: string
@@ -73611,12 +73622,14 @@ components:
                   - $ref: '#/components/schemas/OpenAI.LiveDecisionInputTextParam'
                   - $ref: '#/components/schemas/OpenAI.LiveDecisionInputImageParam'
                   - $ref: '#/components/schemas/OpenAI.LiveDecisionInputJsonParam'
+          description: Instructions for evaluating the question, supplied as text or as text, image, and JSON content parts.
         choices:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.LiveDecisionChoiceParam'
           minItems: 2
           maxItems: 255
+          description: The possible answers from which the model selects a choice.
       allOf:
         - $ref: '#/components/schemas/OpenAI.LiveDecisionQuestion'
     OpenAI.LiveDecisionInputImageParam:
@@ -73629,6 +73642,7 @@ components:
           type: string
           enum:
             - input_image
+          description: The item type. Always `input_image`.
           x-stainless-const: true
           default: input_image
         image_url:
@@ -73641,6 +73655,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveDetailEnum'
             - type: 'null'
+          description: The level of image detail used when processing the image.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -73654,6 +73669,7 @@ components:
           type: string
           enum:
             - input_json
+          description: The item type. Always `input_json`.
           x-stainless-const: true
           default: input_json
         data:
@@ -73662,6 +73678,7 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/OpenAI.LiveDecisionJsonObject'
+          description: The JSON object or array of JSON objects supplied as Decision input.
     OpenAI.LiveDecisionInputTextParam:
       type: object
       required:
@@ -73672,6 +73689,7 @@ components:
           type: string
           enum:
             - input_text
+          description: The item type. Always `input_text`.
           x-stainless-const: true
           default: input_text
         text:
@@ -73694,9 +73712,11 @@ components:
           type: string
           enum:
             - predicate
+          description: The question type. Always `predicate`.
           x-stainless-const: true
         name:
           type: string
+          description: An optional question name used to identify its answer in the Decision response.
         instructions:
           oneOf:
             - type: string
@@ -73706,6 +73726,7 @@ components:
                   - $ref: '#/components/schemas/OpenAI.LiveDecisionInputTextParam'
                   - $ref: '#/components/schemas/OpenAI.LiveDecisionInputImageParam'
                   - $ref: '#/components/schemas/OpenAI.LiveDecisionInputJsonParam'
+          description: Instructions for evaluating the question, supplied as text or as text, image, and JSON content parts.
       allOf:
         - $ref: '#/components/schemas/OpenAI.LiveDecisionQuestion'
     OpenAI.LiveDecisionQuestion:
@@ -73715,6 +73736,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.LiveDecisionQuestionType'
+          description: The kind of question evaluated by the Decision model.
       discriminator:
         propertyName: type
         mapping:
@@ -73752,8 +73774,10 @@ components:
       properties:
         label:
           type: string
+          description: The label identifying this scoring level.
         description:
           type: string
+          description: A description of the criteria for assigning this scoring level.
     OpenAI.LiveDecisionScoreQuestionParam:
       type: object
       required:
@@ -73765,9 +73789,11 @@ components:
           type: string
           enum:
             - score
+          description: The question type. Always `score`.
           x-stainless-const: true
         name:
           type: string
+          description: An optional question name used to identify its answer in the Decision response.
         instructions:
           oneOf:
             - type: string
@@ -73777,12 +73803,14 @@ components:
                   - $ref: '#/components/schemas/OpenAI.LiveDecisionInputTextParam'
                   - $ref: '#/components/schemas/OpenAI.LiveDecisionInputImageParam'
                   - $ref: '#/components/schemas/OpenAI.LiveDecisionInputJsonParam'
+          description: Instructions for evaluating the question, supplied as text or as text, image, and JSON content parts.
         levels:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.LiveDecisionScoreLevelParam'
           minItems: 2
           maxItems: 10
+          description: The scoring levels against which the model evaluates the question.
       allOf:
         - $ref: '#/components/schemas/OpenAI.LiveDecisionQuestion'
     OpenAI.LiveDecisionTriggerInputParam:
@@ -73796,6 +73824,7 @@ components:
           type: string
           enum:
             - decisions
+          description: The item type. Always `decisions`.
           x-stainless-const: true
           default: decisions
         event_type:
@@ -73803,6 +73832,7 @@ components:
           enum:
             - session.input_transcript.delta
             - session.output_transcript.delta
+          description: The transcript event type that initiates a Decision evaluation.
         decisions:
           $ref: '#/components/schemas/OpenAI.LiveDecisionQuestionsInputParam'
           description: Questions evaluated using the current transcript and the session's shared Decision items.
@@ -73816,10 +73846,12 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveReasoningEffort'
             - type: 'null'
+          description: The reasoning effort used by the delegated Responses model.
         summary:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveReasoningSummary'
             - type: 'null'
+          description: The level of reasoning summary returned by the delegated Responses model.
       description: Reasoning options for Responses requests made on behalf of the Live session.
       x-ms-foundry-meta:
         required_previews:
@@ -73831,6 +73863,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveTextVerbosity'
             - type: 'null'
+          description: The verbosity of text generated by the delegated Responses model.
       description: Text generation options for the Live session’s Responses backend.
       x-ms-foundry-meta:
         required_previews:
@@ -73854,6 +73887,7 @@ components:
           type: string
           enum:
             - file_search
+          description: The tool type. Always `file_search`.
           x-stainless-const: true
           default: file_search
       x-ms-foundry-meta:
@@ -73898,15 +73932,18 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: A description of the function that helps the model decide when to call it.
         parameters:
           anyOf:
             - type: object
               additionalProperties: {}
             - type: 'null'
+          description: A JSON Schema object describing the parameters accepted by the function.
         strict:
           anyOf:
             - type: boolean
             - type: 'null'
+          description: Whether to require function arguments to conform strictly to the parameter schema.
       description: A function tool available to the Responses backend when the Live model delegates a task.
       x-ms-foundry-meta:
         required_previews:
@@ -73929,15 +73966,18 @@ components:
               items:
                 type: string
             - type: 'null'
+          description: The identifiers of files to make available in the automatically created shell container.
         memory_limit:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveContainerMemoryLimit'
             - type: 'null'
+          description: The memory limit for the automatically created shell container.
         network_policy:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveContainerNetworkPolicyDisabledParam'
             - $ref: '#/components/schemas/OpenAI.LiveHostedShellNetworkPolicyAllowlistParam'
             - type: 'null'
+          description: The network access policy for the automatically created shell container.
         skills:
           anyOf:
             - type: array
@@ -73946,6 +73986,7 @@ components:
                   - $ref: '#/components/schemas/OpenAI.LiveSkillReferenceParam'
                   - $ref: '#/components/schemas/OpenAI.LiveInlineSkillParam'
             - type: 'null'
+          description: The skills to make available in the automatically created shell container.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -73980,6 +74021,7 @@ components:
           type: string
           enum:
             - shell
+          description: The tool type. Always `shell`.
           x-stainless-const: true
           default: shell
         environment:
@@ -73988,6 +74030,7 @@ components:
             - $ref: '#/components/schemas/OpenAI.LiveContainerReferenceParam'
             - $ref: '#/components/schemas/OpenAI.LiveLocalEnvironmentParam'
             - type: 'null'
+          description: The automatically created container, existing container, or local environment in which shell commands run.
       description: A Responses shell tool. Use a hosted container or return local shell results with response.item.create. Domain secrets are not supported.
       x-ms-foundry-meta:
         required_previews:
@@ -74001,6 +74044,7 @@ components:
           type: string
           enum:
             - image_generation
+          description: The tool type. Always `image_generation`.
           x-stainless-const: true
           default: image_generation
       x-ms-foundry-meta:
@@ -74016,6 +74060,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: An optional identifier for this message in the initial conversation history.
         type:
           type: string
           enum:
@@ -74027,6 +74072,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveInitialMessageStatus'
             - type: 'null'
+          description: The completion status of this initial conversation message.
         role:
           type: string
           enum:
@@ -74058,6 +74104,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: An optional identifier for this message in the initial conversation history.
         type:
           type: string
           enum:
@@ -74069,6 +74116,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveInitialMessageStatus'
             - type: 'null'
+          description: The completion status of this initial conversation message.
         role:
           type: string
           enum:
@@ -74114,6 +74162,7 @@ components:
       properties:
         role:
           $ref: '#/components/schemas/OpenAI.LiveInitialItemType'
+          description: The author role of a message in the initial Live conversation history.
       discriminator:
         propertyName: role
         mapping:
@@ -74250,6 +74299,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: An optional identifier for this message in the initial conversation history.
         type:
           type: string
           enum:
@@ -74261,6 +74311,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveInitialMessageStatus'
             - type: 'null'
+          description: The completion status of this initial conversation message.
         role:
           type: string
           enum:
@@ -74355,6 +74406,7 @@ components:
               items:
                 $ref: '#/components/schemas/OpenAI.LiveLocalSkillParam'
             - type: 'null'
+          description: The skills available in the local shell environment.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -74397,6 +74449,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: The name of the tool to call on the specified MCP server.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -74409,6 +74462,7 @@ components:
           type: string
           enum:
             - mcp
+          description: The tool type. Always `mcp`.
           x-stainless-const: true
           default: mcp
       x-ms-foundry-meta:
@@ -74423,6 +74477,7 @@ components:
           type: string
           enum:
             - namespace
+          description: The tool type. Always `namespace`.
           x-stainless-const: true
           default: namespace
       x-ms-foundry-meta:
@@ -74437,6 +74492,7 @@ components:
           type: string
           enum:
             - programmatic_tool_calling
+          description: The tool type. Always `programmatic_tool_calling`.
           x-stainless-const: true
           default: programmatic_tool_calling
       x-ms-foundry-meta:
@@ -74475,22 +74531,27 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: Instructions for the Responses backend when it handles tasks delegated by the Live model.
         max_output_tokens:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
+          description: The maximum number of output tokens generated by a delegated Responses request, including reasoning tokens.
         service_tier:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveResponsesServiceTier'
             - type: 'null'
+          description: The service tier used to process delegated Responses requests.
         reasoning:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveDelegationReasoningInputParam'
             - type: 'null'
+          description: Reasoning settings for the delegated Responses model.
         text:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveDelegationTextInputParam'
             - type: 'null'
+          description: Text output settings for the delegated Responses model.
         tools:
           type: array
           items:
@@ -74530,6 +74591,7 @@ components:
           anyOf:
             - type: boolean
             - type: 'null'
+          description: Whether the delegated Responses model may issue multiple tool calls in parallel.
       description: Model, prompt, and tool settings for tasks delegated by the Live session to a Responses backend.
       x-ms-foundry-meta:
         required_previews:
@@ -74650,6 +74712,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: The version of the referenced skill to make available.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -74847,6 +74910,7 @@ components:
           type: string
           enum:
             - tool_search
+          description: The tool type. Always `tool_search`.
           x-stainless-const: true
           default: tool_search
       x-ms-foundry-meta:
@@ -79532,6 +79596,7 @@ components:
           type: string
           enum:
             - input_audio
+          description: The item type. Always `input_audio`.
         audio:
           type: string
           minLength: 1
@@ -79557,10 +79622,12 @@ components:
           minLength: 1
           maxLength: 32
           pattern: ^[a-zA-Z0-9_-]+$
+          description: An optional identifier for this function-call input item.
         type:
           type: string
           enum:
             - function_call
+          description: The item type. Always `function_call`.
         status:
           anyOf:
             - type: string
@@ -79569,20 +79636,24 @@ components:
                 - incomplete
             - type: 'null'
             - type: 'null'
+          description: The completion status of the function-call input item.
           default: completed
         call_id:
           type: string
           minLength: 1
           maxLength: 32
           pattern: ^[a-zA-Z0-9_-]+$
+          description: The function call ID used to associate the call with its output.
         name:
           type: string
           minLength: 1
           maxLength: 64
           pattern: ^[a-zA-Z0-9_-]+$
+          description: The name of the function being called.
         arguments:
           type: string
           maxLength: 1048576
+          description: The arguments for the function call, encoded as a JSON string.
       description: A function call supplied as input to a Realtime response.
       title: Realtime response input function call
     OpenAI.RealtimeResponseInputFunctionCallOutput:
@@ -79599,10 +79670,12 @@ components:
           minLength: 1
           maxLength: 32
           pattern: ^[a-zA-Z0-9_-]+$
+          description: An optional identifier for this function-call output item.
         type:
           type: string
           enum:
             - function_call_output
+          description: The item type. Always `function_call_output`.
         status:
           anyOf:
             - type: string
@@ -79611,15 +79684,18 @@ components:
                 - incomplete
             - type: 'null'
             - type: 'null'
+          description: The completion status of the function-call output item.
           default: completed
         call_id:
           type: string
           minLength: 1
           maxLength: 32
           pattern: ^[a-zA-Z0-9_-]+$
+          description: The ID of the function call for which this item supplies output.
         output:
           type: string
           maxLength: 1048576
+          description: The result returned by the function, encoded as a string.
       description: The result of a function call supplied as input to a Realtime response.
       title: Realtime response input function call output
     OpenAI.RealtimeResponseInputImage:
@@ -79632,6 +79708,7 @@ components:
           type: string
           enum:
             - input_image
+          description: The item type. Always `input_image`.
         image_url:
           type: string
           format: uri
@@ -79646,6 +79723,7 @@ components:
                 - auto
             - type: 'null'
             - type: 'null'
+          description: The level of image detail used when processing the image.
           default: auto
       title: Realtime response input image
     OpenAI.RealtimeResponseInputItem:
@@ -79663,6 +79741,7 @@ components:
       properties:
         role:
           $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessageType'
+          description: The author role of the message supplied as Realtime response input.
       discriminator:
         propertyName: role
         mapping:
@@ -79691,6 +79770,7 @@ components:
           type: string
           enum:
             - message
+          description: The item type. Always `message`.
         status:
           anyOf:
             - type: string
@@ -79705,11 +79785,13 @@ components:
           type: string
           enum:
             - assistant
+          description: The message author role. Always `assistant`.
         content:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessageAssistantContent'
           minItems: 1
+          description: The assistant's text output included in the response input context.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessage'
       title: Realtime response input assistant message
@@ -79723,9 +79805,11 @@ components:
           type: string
           enum:
             - output_text
+          description: The item type. Always `output_text`.
         text:
           type: string
           maxLength: 256000
+          description: The assistant text included in the response input context.
     OpenAI.RealtimeResponseInputMessageDeveloper:
       type: object
       required:
@@ -79745,6 +79829,7 @@ components:
           type: string
           enum:
             - message
+          description: The item type. Always `message`.
         status:
           anyOf:
             - type: string
@@ -79759,12 +79844,14 @@ components:
           type: string
           enum:
             - developer
+          description: The message author role. Always `developer`.
         content:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeResponseInputText'
           minItems: 1
           maxItems: 1
+          description: Developer instructions included in the response input context.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessage'
       title: Realtime response input developer message
@@ -79787,6 +79874,7 @@ components:
           type: string
           enum:
             - message
+          description: The item type. Always `message`.
         status:
           anyOf:
             - type: string
@@ -79801,12 +79889,14 @@ components:
           type: string
           enum:
             - system
+          description: The message author role. Always `system`.
         content:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeResponseInputText'
           minItems: 1
           maxItems: 1
+          description: System instructions included in the response input context.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessage'
       title: Realtime response input system message
@@ -79838,6 +79928,7 @@ components:
           type: string
           enum:
             - message
+          description: The item type. Always `message`.
         status:
           anyOf:
             - type: string
@@ -79852,6 +79943,7 @@ components:
           type: string
           enum:
             - user
+          description: The message author role. Always `user`.
         content:
           type: array
           items:
@@ -79860,6 +79952,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputAudio'
               - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputImage'
           minItems: 1
+          description: The user's text, audio, or image content included in the response input context.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeResponseInputMessage'
       title: Realtime response input user message
@@ -79873,9 +79966,11 @@ components:
           type: string
           enum:
             - input_text
+          description: The item type. Always `input_text`.
         text:
           type: string
           maxLength: 256000
+          description: The text supplied as Realtime response input.
       title: Realtime response input text
     OpenAI.RealtimeResponseItemReference:
       type: object
@@ -100292,6 +100387,7 @@ components:
           type: string
           enum:
             - client
+          description: The delegation type. Always `client`.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegation'
       description: Delegates work to the application using native client delegation.
@@ -100307,6 +100403,7 @@ components:
           type: string
           enum:
             - client
+          description: The delegation owner. Always `client`.
         commentary:
           type: string
           description: Guidance for Live to communicate to the user, when accepted.
@@ -100464,6 +100561,7 @@ components:
           type: string
           enum:
             - delegation
+          description: The delegation type. Always `delegation`.
         target:
           $ref: '#/components/schemas/VoiceAgentLiveDelegationTarget'
           description: The configured delegation owner.
@@ -100572,6 +100670,7 @@ components:
           type: string
           enum:
             - foundry_managed_agent
+          description: The delegation owner. Always `foundry_managed_agent`.
         agent_name:
           type: string
           description: Target agent name in the same project.
@@ -100610,6 +100709,7 @@ components:
           type: string
           enum:
             - input
+          description: The item type. Always `input`.
         transcription:
           type: string
           description: Captured user transcription, when available.
@@ -100654,6 +100754,7 @@ components:
           type: string
           enum:
             - output
+          description: The item type. Always `output`.
         transcription:
           type: string
           description: Captured assistant transcription, not backend output or commentary guidance.
@@ -100684,6 +100785,7 @@ components:
           type: string
           enum:
             - responses
+          description: The delegation type. Always `responses`.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegation'
       description: Delegates work to a Responses backend using native Responses settings.
@@ -100699,6 +100801,7 @@ components:
           type: string
           enum:
             - responses
+          description: The delegation owner. Always `responses`.
         output:
           type: string
           description: Final backend text, omitted when unavailable; excludes raw tool output.
@@ -100718,10 +100821,12 @@ components:
       properties:
         model:
           $ref: '#/components/schemas/OpenAI.ModelIdsLive'
+          description: The Live model used to process audio and generate spoken responses.
         instructions:
           anyOf:
             - type: string
             - type: 'null'
+          description: Instructions that guide the Live model's behavior during the session.
         input:
           type: array
           items:

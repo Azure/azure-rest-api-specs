@@ -1242,3 +1242,12 @@ model VoiceAgentLiveDelegationItem {
   OpenAI.LiveServerEventLiveDelegationCreated.delegation,
   VoiceAgentLiveDelegationItem
 );
+
+@@doc(
+  VoiceAgentLiveSessionResource.instructions,
+  "Instructions that guide the Live model's behavior during the session."
+);
+@@doc(
+  VoiceAgentLiveSessionResource.`model`,
+  "The Live model used to process audio and generate spoken responses."
+);
