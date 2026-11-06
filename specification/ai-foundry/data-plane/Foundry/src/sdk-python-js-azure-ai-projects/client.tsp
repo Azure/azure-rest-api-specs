@@ -31,6 +31,7 @@ import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
+import "../jobs/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
@@ -658,5 +659,36 @@ model AIProjectClientOptions {
   {
     parameters: AIProjectClientOptions,
   },
+  "python"
+);
+
+// --------------------------------------------------------------------------------
+// Beta Jobs (Foundry training jobs) sub-client
+// --------------------------------------------------------------------------------
+namespace Azure.AI.Projects.Beta {
+  interface Jobs {}
+}
+
+@@clientLocation(Jobs.list, Azure.AI.Projects.Beta.Jobs);
+@@clientLocation(Jobs.get, Azure.AI.Projects.Beta.Jobs);
+@@clientLocation(Jobs.createOrUpdate, Azure.AI.Projects.Beta.Jobs);
+@@clientLocation(Jobs.delete, Azure.AI.Projects.Beta.Jobs);
+@@clientLocation(Jobs.cancel, Azure.AI.Projects.Beta.Jobs);
+@@clientLocation(Jobs.listArtifacts, Azure.AI.Projects.Beta.Jobs);
+@@clientLocation(
+  Jobs.getArtifactContentInformation,
+  Azure.AI.Projects.Beta.Jobs
+);
+
+@@clientName(Jobs.get, "get", "python");
+@@clientName(Jobs.list, "list", "python");
+@@clientName(Jobs.createOrUpdate, "create_or_update", "python");
+@@clientName(Jobs.delete, "delete", "python");
+@@clientName(Jobs.cancel, "cancel", "python");
+
+@@clientName(Jobs.listArtifacts, "list_artifacts", "python");
+@@clientName(
+  Jobs.getArtifactContentInformation,
+  "get_artifact_content_information",
   "python"
 );

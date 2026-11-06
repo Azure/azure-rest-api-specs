@@ -121,6 +121,9 @@ union FoundryFeaturesOptInKeys {
   models_v1_preview: "Models=V1Preview",
   model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
   finetuning_sessions_v1_preview: "FineTuningSessions=V1Preview",
+
+  /** The Foundry command training jobs V1 preview feature opt-in. */
+  jobs_v1_preview: "Jobs=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<
