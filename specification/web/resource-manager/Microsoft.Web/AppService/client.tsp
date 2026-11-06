@@ -10,6 +10,26 @@ using Azure.Core;
 
 namespace Customizations;
 
+@@clientName(
+  BuilderAppBeginSourceUploadRequest,
+  "BuilderAppBeginSourceUploadContent",
+  "csharp"
+);
+@@clientName(BuilderAppDeployRequest, "BuilderAppDeployContent", "csharp");
+@@clientName(BuilderAppRedeployRequest, "BuilderAppRedeployContent", "csharp");
+@@clientName(BuilderAppAuthResponse, "BuilderAppAuthResult", "csharp");
+@@clientName(BuilderAppSourceUpload.uploadUrl, "uploadUri", "csharp");
+@@clientName(
+  BuilderAppAuthConfigProperties.githubCallbackUrl,
+  "githubCallbackUri",
+  "csharp"
+);
+@@clientName(
+  BuilderAppAuthConfigProperties.entraCallbackUrl,
+  "entraCallbackUri",
+  "csharp"
+);
+
 // python
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python, javascript");
 @@clientName(WebApps.swapSlotSlot, "swapSlot", "python,go,javascript");
@@ -7162,6 +7182,21 @@ union ConfigReferenceSource {
   Microsoft.Web.ManagedServiceIdentity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "BuilderAppManagedServiceIdentity",
+  "python, java, go"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  "BuilderAppUserAssignedIdentityInfo",
+  "python, java, go"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "BuilderAppManagedServiceIdentityType",
+  "python, java, go"
 );
 @@clientName(
   AppServiceEnvironment.ipsslAddressCount,

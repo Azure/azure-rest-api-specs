@@ -144,6 +144,22 @@ These settings apply only when `--tag=package-2026-11` is specified on the comma
 ```yaml $(tag) == 'package-2026-11'
 input-file:
     - stable/2026-11-15/openapi.json
+directive:
+  - suppress: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/authConfigs/current"]
+    reason: authConfigs/current is a fixed-name singleton with a plural collection and collection GET. The path rule recognizes default but not the established singleton name current; changing this name would change the intended resource address.
+  - suppress: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/authConfigs/current"]
+    reason: The child resource name is the fixed literal current. Its parent, plural collection, and collection GET follow the ARM hierarchy; this exception is limited to that singleton path.
+  - suppress: XMSSecretInResponse
+    from: openapi.json
+    where:
+      - $.definitions.BuilderAppBeginSourceUploadRequest.properties.idempotencyKey
+      - $.definitions.BuilderAppDeployRequest.properties.idempotencyKey
+      - $.definitions.BuilderAppRedeployRequest.properties.idempotencyKey
+    reason: These request-only, client-generated retry correlation identifiers are not credentials and grant no authorization. The secret-name suffix heuristic flags idempotencyKey; marking these values as secrets would misrepresent the contract.
 ```
 
 ### Tag: package-2026-08
