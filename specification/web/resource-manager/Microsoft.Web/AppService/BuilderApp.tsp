@@ -346,7 +346,7 @@ model BuilderAppPatchVersionConfiguration {
 model BuilderAppPatchAccepted {
   ...ArmAcceptedLroResponse<
     "Identity update accepted.",
-    ArmCombinedLroHeaders<ArmOperationStatus, BuilderApp> &
+    ArmCombinedLroHeaders<ArmOperationStatus, void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
@@ -388,22 +388,22 @@ interface BuilderApps {
     ArmResponse<BuilderAppSourceUpload>
   >;
 
-  /** Build and deploy repository source, a retained version, or an uploaded artifact. */
+  /** Build and deploy repository source, a retained version, or an uploaded artifact. After asynchronous completion, read the app through its resource GET. */
   deploy is ArmResourceActionAsync<
     BuilderApp,
     BuilderAppDeployRequest,
     ArmResponse<BuilderApp>,
-    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, BuilderApp> &
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
       Azure.Core.Foundations.RetryAfterHeader,
     Parameters = BuilderAppDeploymentParameters
   >;
 
-  /** Redeploy retained ready artifacts without resolving or rebuilding repository source. */
+  /** Redeploy retained ready artifacts without resolving or rebuilding repository source. After asynchronous completion, read the app through its resource GET. */
   redeploy is ArmResourceActionAsync<
     BuilderApp,
     BuilderAppRedeployRequest,
     ArmResponse<BuilderApp>,
-    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, BuilderApp> &
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
       Azure.Core.Foundations.RetryAfterHeader,
     Parameters = BuilderAppDeploymentParameters
   >;

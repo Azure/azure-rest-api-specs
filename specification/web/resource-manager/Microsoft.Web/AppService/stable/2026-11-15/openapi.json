@@ -1466,7 +1466,7 @@
         "tags": [
           "BuilderAppsAsyncOperations"
         ],
-        "description": "Get the completed BuilderApp representation. Pending operations return 202; completion returns 200 with the retained app snapshot, including after deletion. Read operation failure details from the status monitor.",
+        "description": "Get the location-scoped operation result resource. Pending operations return 202; completion returns 200 with the operation identity, including after app deletion. Read operation failure details from the status monitor and the app representation through its resource GET.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1485,7 +1485,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BuilderApp"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
             }
           },
           "202": {
@@ -2860,8 +2860,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/BuilderApp"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -3293,7 +3292,7 @@
         "tags": [
           "BuilderApps"
         ],
-        "description": "Build and deploy repository source, a retained version, or an uploaded artifact.",
+        "description": "Build and deploy repository source, a retained version, or an uploaded artifact. After asynchronous completion, read the app through its resource GET.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3367,8 +3366,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/BuilderApp"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3438,7 +3436,7 @@
         "tags": [
           "BuilderApps"
         ],
-        "description": "Redeploy retained ready artifacts without resolving or rebuilding repository source.",
+        "description": "Redeploy retained ready artifacts without resolving or rebuilding repository source. After asynchronous completion, read the app through its resource GET.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3509,8 +3507,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/BuilderApp"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
