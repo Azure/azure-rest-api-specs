@@ -158,6 +158,7 @@ void test("selects a newly added head version and the latest stable base version
     }),
     {
       mode: "new-api-version",
+      compatibilityPolicy: { action: "compare" },
       baseline: {
         sourceRevision: "current",
         commit: "head-sha",
@@ -186,7 +187,7 @@ void test("selects a newly added head version and the latest stable base version
 void test("uses the base revision when the previous version is absent from the head enum", () => {
   const base = extractApiVersions([
     source(`
-  v2026_01_20_preview: "2026-01-20-preview",
+  v2026_01_20: "2026-01-20",
   v2026_05_01_preview: "2026-05-01-preview",
   `),
   ]);
@@ -206,13 +207,13 @@ void test("uses the base revision when the previous version is absent from the h
   assert.equal(pair.mode, "new-api-version");
   assert.equal(pair.baseline.sourceRevision, "base");
   assert.equal(pair.baseline.commit, "base-sha");
-  assert.equal(pair.baseline.apiVersion, "2026-05-01-preview");
+  assert.equal(pair.baseline.apiVersion, "2026-01-20");
   assert.equal(pair.target.sourceRevision, "current");
   assert.equal(pair.target.commit, "head-sha");
   assert.equal(pair.target.apiVersion, "2026-10-01-preview");
 });
 
-void test("uses the latest head version and latest preview base when no stable exists", () => {
+void test("skips an existing preview comparison when neither revision has a stable version", () => {
   const base = extractApiVersions([
     source(`
   v2024_01_01_preview: "2024-01-01-preview",
@@ -227,12 +228,88 @@ void test("uses the latest head version and latest preview base when no stable e
   ]);
   const pair = selectApiVersionPair({ base, current });
 
-  assert.equal(pair.base, "2025-01-01-preview");
+  assert.equal(pair.base, undefined);
   assert.equal(pair.current, "2025-01-01-preview");
   assert.equal(pair.mode, "existing-api-version");
-  assert.equal(pair.baseline.sourceRevision, "base");
-  assert.equal(pair.baseReason, "affected-existing-version");
+  assert.equal(pair.baseline.sourceRevision, "not-selected");
+  assert.equal(pair.baseReason, "no-stable-api-version");
+  assert.deepEqual(pair.compatibilityPolicy, { action: "skip", reason: "no-stable-api-version" });
   assert.equal(pair.currentReason, "latest-version");
+});
+
+void test.each([true, false])(
+  "does not select a previous preview baseline (retained: %s)",
+  (retained) => {
+    const pair = selectApiVersionPair({
+      base: { versioned: true, versions: ["2026-01-01-preview"] },
+      current: {
+        versioned: true,
+        versions: [...(retained ? ["2026-01-01-preview"] : []), "2026-06-01-preview"],
+      },
+      headCommit: "head",
+    });
+    assert.equal(pair.mode, "new-api-version");
+    assert.deepEqual(pair.baseline, {
+      sourceRevision: "not-selected",
+      reason: "no-stable-api-version",
+    });
+    assert.equal(pair.target.commit, "head");
+    assert.equal(pair.target.apiVersion, "2026-06-01-preview");
+    assert.deepEqual(pair.compatibilityPolicy, { action: "skip", reason: "no-stable-api-version" });
+  },
+);
+
+void test.each(["base", "current"])(
+  "a stable version in %s prevents the preview exemption",
+  (revision) => {
+    const pair = selectApiVersionPair({
+      base: {
+        versioned: true,
+        versions: [...(revision === "base" ? ["2025-01-01"] : []), "2026-01-01-preview"],
+      },
+      current: {
+        versioned: true,
+        versions: [...(revision === "current" ? ["2025-01-01"] : []), "2026-06-01-preview"],
+      },
+    });
+    assert.deepEqual(pair.compatibilityPolicy, { action: "compare" });
+    assert.notEqual(pair.baseline.sourceRevision, "not-selected");
+  },
+);
+
+void test("first stable targets and preview-only versioning migrations retain comparison behavior", () => {
+  for (const pair of [
+    selectApiVersionPair({
+      base: { versioned: true, versions: ["2026-01-01-preview"] },
+      current: { versioned: true, versions: ["2026-06-01"] },
+    }),
+    selectApiVersionPair({
+      base: { versioned: false, versions: [] },
+      current: { versioned: true, versions: ["2026-01-01-preview"] },
+    }),
+  ]) {
+    assert.deepEqual(pair.compatibilityPolicy, { action: "compare" });
+    assert.notEqual(pair.baseline.sourceRevision, "not-selected");
+  }
+});
+
+void test("unresolved and ambiguous version discovery cannot activate a preview exemption", () => {
+  assert.throws(
+    () =>
+      selectApiVersionPair({
+        base: { versioned: true, versions: [] },
+        current: { versioned: true, versions: ["2026-01-01-preview"] },
+      }),
+    /Unable to resolve/,
+  );
+  assert.throws(
+    () =>
+      extractApiVersions([
+        source('v1: "2026-01-01-preview",'),
+        '@versioned(OtherVersions) namespace Other; enum OtherVersions { v1: "2026-02-01-preview", }',
+      ]),
+    /unambiguous service API-version enum/,
+  );
 });
 
 void test("uses the same latest preview on both sides when the PR adds no version", () => {
@@ -326,4 +403,16 @@ void test("selects only the target contract for a newly added project", (context
   assert.equal(pair.target.commit, "head-sha");
   assert.equal(pair.target.apiVersion, "2026-01-01");
   assert.deepEqual(pair.available, { base: [], current: ["2026-01-01"] });
+  fs.writeFileSync(path.join(work, project, "main.tsp"), source('v1: "2026-01-01-preview",'));
+  const preview = resolveNewProjectApiVersions({
+    currentWorktree: work,
+    project,
+    headCommit: "head",
+  });
+  assert.equal(preview.mode, "new-project");
+  assert.deepEqual(preview.compatibilityPolicy, {
+    action: "skip",
+    reason: "no-stable-api-version",
+  });
+  assert.equal(preview.baseline.sourceRevision, "not-selected");
 });
