@@ -16,6 +16,8 @@ namespace Microsoft.NetApp;
  * External Cache Connection resource, representing a cache connection relationship between External and Azure NetApp Files volumes
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @resource("externalCacheConnections")
 model ExternalCacheConnection
   is Azure.ResourceManager.TrackedResource<ExternalCacheConnectionProperties> {
@@ -31,6 +33,8 @@ model ExternalCacheConnection
  * External Cache Connection properties
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalCacheConnectionProperties {
   /**
    * Current status of the operation
@@ -106,9 +110,13 @@ model ExternalCacheConnectionProperties {
  * List of External Cache Connection resources
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalCacheConnectionList is Azure.Core.Page<ExternalCacheConnection>;
 
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface ExternalCacheConnections {
   /**

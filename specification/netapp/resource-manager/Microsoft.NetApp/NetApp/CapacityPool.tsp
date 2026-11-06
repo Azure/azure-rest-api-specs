@@ -76,6 +76,9 @@ model PoolProperties {
   @added(Versions.v2026_08_01)
   @removed(Versions.v2026_08_15_preview)
   @renamedFrom(Versions.v2026_08_15_preview, "size")
+  @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_09_15_preview)
+  @renamedFrom(Versions.v2026_09_15_preview, "size")
   sizeOld: int64 = 4398046511104;
 
   /**
@@ -96,6 +99,8 @@ model PoolProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   size: int64 = 4398046511104;
 
   /**
@@ -215,6 +220,9 @@ model PoolPatchProperties {
   @added(Versions.v2026_08_01)
   @removed(Versions.v2026_08_15_preview)
   @renamedFrom(Versions.v2026_08_15_preview, "size")
+  @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_09_15_preview)
+  @renamedFrom(Versions.v2026_09_15_preview, "size")
   sizeOld?: int64;
 
   /**
@@ -235,6 +243,8 @@ model PoolPatchProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   size?: int64;
 
   /**

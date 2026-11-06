@@ -15,6 +15,8 @@ namespace Microsoft.NetApp;
  * Cluster Peer resource, represents a peer relationship between an external cluster and an Azure NetApp Files cluster
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @parentResource(ExternalCluster)
 model ClusterPeer
   is Azure.ResourceManager.ProxyResource<ClusterPeerProperties> {
@@ -30,6 +32,8 @@ model ClusterPeer
  * External Resource Network Interfaces
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalResourceNetworkInterfaces {
   /**
    * Network Interface Resource ID
@@ -51,6 +55,8 @@ model ExternalResourceNetworkInterfaces {
  * Cluster Peer properties
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ClusterPeerProperties {
   /**
    * Azure lifecycle management
@@ -132,9 +138,13 @@ model ClusterPeerProperties {
  * List of Cluster Peer resources
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ClusterPeerList is Azure.Core.Page<ClusterPeer>;
 
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface ClusterPeers {
   /**

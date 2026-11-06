@@ -93,6 +93,9 @@ model VolumeProperties {
   @added(Versions.v2026_08_01)
   @removed(Versions.v2026_08_15_preview)
   @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
+  @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_09_15_preview)
+  @renamedFrom(Versions.v2026_09_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -117,6 +120,8 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -282,6 +287,7 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @added(Versions.v2026_09_01)
   smbOplocks?: SmbOplocks;
 
   /**
@@ -330,6 +336,7 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @added(Versions.v2026_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -398,6 +405,8 @@ model VolumeProperties {
    * Async Directory Delete configuration for the volume.
    */
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   asyncDirectoryDelete?: AsyncDirectoryDelete;
 
   /**
@@ -461,6 +470,7 @@ model VolumeProperties {
    */
   #suppress "deprecated" "Suppress this warning until the property is removed."
   #deprecated "Deprecated. This property will be removed in a future API version."
+  @removed(Versions.v2026_09_01)
   enableSubvolumes?: EnableSubvolumes = EnableSubvolumes.Disabled;
 
   /**
@@ -496,6 +506,8 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -531,6 +543,8 @@ model VolumeProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   language?: VolumeLanguage;
 
   /**
@@ -570,13 +584,24 @@ model VolumeProperties {
    * Geographic namespace properties for this volume.
    */
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   geoNamespaceProperties?: VolumeNamespaceProperties;
+
+  /**
+   * Specifies the workload application type.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  workloadApplicationType?: WorkloadApplicationType;
 }
 
 /**
  * Indicates whether a volume is designated as an origin for cache volumes.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union OriginVolume {
   string,
 
@@ -595,6 +620,8 @@ union OriginVolume {
  * Geographic namespace properties for a volume.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model VolumeNamespaceProperties {
   /**
    * Indicates whether this volume is designated as an origin for cache volumes.
@@ -606,6 +633,8 @@ model VolumeNamespaceProperties {
  * Geographic namespace properties for a volume patch operation.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model VolumePatchNamespaceProperties {
   /**
    * Indicates whether this volume is designated as an origin for cache volumes.
@@ -627,7 +656,15 @@ union LdapServerType {
   /**
    * The volume should use OpenLDAP for LDAP connections.
    */
-  OpenLDAP: "OpenLDAP",
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "OpenLDAP")
+  OpenLDAPOld: "OpenLDAP",
+
+  /**
+   * The volume should use OpenLdap for LDAP connections.
+   */
+  @added(Versions.v2026_09_01)
+  OpenLdap: "OpenLdap",
 }
 
 /**
@@ -1444,6 +1481,9 @@ model VolumePatchProperties {
   @added(Versions.v2026_08_01)
   @removed(Versions.v2026_08_15_preview)
   @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
+  @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_09_15_preview)
+  @renamedFrom(Versions.v2026_09_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1468,6 +1508,8 @@ model VolumePatchProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -1502,6 +1544,8 @@ model VolumePatchProperties {
    * Async Directory Delete configuration for the volume.
    */
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   asyncDirectoryDelete?: AsyncDirectoryDelete;
 
   /**
@@ -1567,12 +1611,15 @@ model VolumePatchProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_08_01)
   @added(Versions.v2026_08_15_preview)
+  @added(Versions.v2026_09_01)
   smbOplocks?: SmbOplocks;
 
   /**
    * Geographic namespace properties for this volume.
    */
   @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   geoNamespaceProperties?: VolumePatchNamespaceProperties;
 }
 
@@ -2208,6 +2255,7 @@ union SmbNonBrowsable {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_08_01)
 @added(Versions.v2026_08_15_preview)
+@added(Versions.v2026_09_01)
 union SmbOplocks {
   string,
 
@@ -2305,6 +2353,7 @@ union AvsDataStore {
  * Deprecated. This type will be removed in a future API version.
  */
 #deprecated "Deprecated. This type will be removed in a future API version."
+@removed(Versions.v2026_09_01)
 union EnableSubvolumes {
   string,
 
@@ -2323,6 +2372,8 @@ union EnableSubvolumes {
  * Whether Async Directory Delete is enabled for the volume.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union AsyncDirectoryDeleteStatus {
   string,
 
@@ -2341,6 +2392,8 @@ union AsyncDirectoryDeleteStatus {
  * Async Directory Delete configuration for the volume.
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model AsyncDirectoryDelete {
   /**
    * Specifies whether Async Directory Delete is enabled for the volume.
@@ -2413,6 +2466,52 @@ union BreakthroughMode {
    * The volume uses configuration that provides basic performance and throughput.
    */
   Disabled: "Disabled",
+}
+
+/**
+ * The type of workload application for the volume.
+ */
+union WorkloadApplicationType {
+  string,
+
+  /** Database - SAP HANA */
+  DatabaseSAPHANA: "DatabaseSAPHANA",
+
+  /** Database - DB2 */
+  DatabaseDB2: "DatabaseDB2",
+
+  /** Database - Oracle */
+  DatabaseOracle: "DatabaseOracle",
+
+  /** Database - Other */
+  DatabaseOther: "DatabaseOther",
+
+  /** AVD - FSLogix */
+  AVDFSLogix: "AVDFSLogix",
+
+  /** AVD - Other */
+  AVDOther: "AVDOther",
+
+  /** Citrix - FSLogix */
+  CitrixFSLogix: "CitrixFSLogix",
+
+  /** Citrix - Other */
+  CitrixOther: "CitrixOther",
+
+  /** Azure VMware Solution - Datastore */
+  AzureVMwareSolutionDatastore: "AzureVMwareSolutionDatastore",
+
+  /** Azure VMware Solution - Guest mount */
+  AzureVMwareSolutionGuestMount: "AzureVMwareSolutionGuestMount",
+
+  /** Azure Red Hat OpenShift */
+  AzureRedHatOpenShift: "AzureRedHatOpenShift",
+
+  /** Azure Kubernetes Service */
+  AzureKubernetesService: "AzureKubernetesService",
+
+  /** Other workload application */
+  Other: "Other",
 }
 
 /**
