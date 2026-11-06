@@ -509,7 +509,7 @@ model DigestConfig {
   @added(Versions.v2026_11_01_preview)
   @minValue(1)
   @maxValue(1440)
-  frequencyInMinutes?: int32 | null;
+  frequencyInMinutes?: int32;
 
   /**
    * Categories to send digest for. If categories are not provided, then digest will be sent for all categories.
@@ -529,7 +529,8 @@ model DigestConfig {
    * such settings. Alpha and rc service aliases, where approved, share this contract.
    */
   @added(Versions.v2026_11_01_preview)
-  categoriesFilter?: DigestCategoryFilter[] | null;
+  @identifiers(#["category"])
+  categoriesFilter?: DigestCategoryFilter[];
 
   /**
    * Language for digest content body. Value must be ISO 639-1 code for one of Azure portal supported languages. Otherwise, it will be converted into one. Default value is English (en).
@@ -558,7 +559,7 @@ model DigestCategoryFilter {
    * within that category. Invalid or null entries are rejected; repeated
    * subcategory values are treated as a set.
    */
-  subcategories?: string[] | null;
+  subcategories?: string[];
 }
 
 /**
