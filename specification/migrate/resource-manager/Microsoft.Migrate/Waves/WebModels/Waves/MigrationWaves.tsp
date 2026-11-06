@@ -60,3 +60,13 @@ model Arg {
   @doc("The query to create workloads within the wave.")
   query: string;
 }
+
+@doc("Inventory whose membership in a wave is changed. Specify at least one application or workload resource ID across the two lists. Omitted lists are treated as empty.")
+@added(ApiVersions.v2026_09_01_preview)
+model WaveInventory {
+  @doc("The fully qualified Azure resource IDs of the applications whose wave membership is changed.")
+  applicationIds?: armResourceIdentifier[];
+
+  @doc("The fully qualified Azure resource IDs of the discovered workloads whose wave membership is changed.")
+  workloadIds?: armResourceIdentifier[];
+}
