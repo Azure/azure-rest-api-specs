@@ -2038,7 +2038,6 @@ union McpToolConnectorIdExpandable {
 );
 
 // Reuse one expandable type for the repeated `object: "realtime.item"` literal.
-@TypeSpec.OpenAPI.extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union RealtimeConversationItemObject {
   string,
   realtime_item: "realtime.item",
