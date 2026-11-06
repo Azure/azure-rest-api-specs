@@ -6462,6 +6462,22 @@ namespace JavaScriptCompatibility {
     ...Search.acceptHeaderMinimal,
     ...Search.matchingHeader,
     ...Search.preferHeader,
+
+    /** Ignores cache reset requirements. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("ignoreResetRequirements")
+    skipIndexerResetRequirementForCache?: boolean,
+
+    /** Disables cache reprocessing change detection. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("disableCacheReprocessingChangeDetection")
+    disableCacheReprocessingChangeDetection?: boolean,
   ): void;
 
   /** Creates a new skillset or updates a skillset if it already exists. */
@@ -6476,6 +6492,22 @@ namespace JavaScriptCompatibility {
     ...Search.acceptHeaderMinimal,
     ...Search.matchingHeader,
     ...Search.preferHeader,
+
+    /** Ignores cache reset requirements. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("ignoreResetRequirements")
+    skipIndexerResetRequirementForCache?: boolean,
+
+    /** Disables cache reprocessing change detection. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("disableCacheReprocessingChangeDetection")
+    disableCacheReprocessingChangeDetection?: boolean,
   ): void;
 
   /** Creates a new datasource or updates a datasource if it already exists. */
@@ -6490,6 +6522,14 @@ namespace JavaScriptCompatibility {
     ...Search.acceptHeaderMinimal,
     ...Search.matchingHeader,
     ...Search.preferHeader,
+
+    /** Ignores cache reset requirements. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("ignoreResetRequirements")
+    skipIndexerResetRequirementForCache?: boolean,
   ): void;
 }
 
