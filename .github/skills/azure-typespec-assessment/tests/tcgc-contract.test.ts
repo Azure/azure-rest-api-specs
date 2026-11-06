@@ -272,6 +272,115 @@ namespaces:
   );
 });
 
+void test("keeps generic model instances distinct through references and reachability", () => {
+  const firstItem = {
+    kind: "model",
+    name: "First",
+    crossLanguageDefinitionId: "Contoso.First",
+    properties: [],
+  };
+  const secondItem = {
+    kind: "model",
+    name: "Second",
+    crossLanguageDefinitionId: "Contoso.Second",
+    properties: [],
+  };
+  const firstPage = {
+    kind: "model",
+    name: "FirstListResult",
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    properties: [
+      {
+        kind: "property",
+        name: "value",
+        optional: false,
+        discriminator: false,
+        type: { kind: "array", valueType: firstItem },
+      },
+    ],
+  };
+  const secondPage = {
+    kind: "model",
+    name: "SecondListResult",
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    properties: [
+      {
+        kind: "property",
+        name: "value",
+        optional: false,
+        discriminator: false,
+        type: { kind: "array", valueType: secondItem },
+      },
+    ],
+  };
+  const method = (name: string, responseType: unknown) => ({
+    kind: "basic",
+    name,
+    access: "public",
+    crossLanguageDefinitionId: `Contoso.Items.${name}`,
+    parameters: [],
+    response: { kind: "method", type: responseType },
+    operation: {
+      kind: "http",
+      path: `/${name}`,
+      uriTemplate: `/${name}`,
+      verb: "get",
+      parameters: [],
+      responses: [{ statusCodes: 200 }],
+      exceptions: [],
+    },
+  });
+  const contract = normalizeTcgcPackage(
+    {
+      crossLanguagePackageId: "Contoso",
+      crossLanguageVersion: "1",
+      metadata: {},
+      clients: [
+        {
+          kind: "client",
+          name: "Items",
+          children: [],
+          methods: [method("first", firstPage), method("second", secondPage)],
+        },
+      ],
+      models: [firstPage, secondPage, firstItem, secondItem],
+      enums: [],
+      unions: [],
+      namespaces: [],
+    },
+    {
+      schemaVersion: 1,
+      models: [
+        {
+          crossLanguageDefinitionId: "Contoso.ListResult",
+          name: "FirstListResult",
+          templateArguments: [{ kind: "Model", namespace: "Contoso", name: "First" }],
+        },
+        {
+          crossLanguageDefinitionId: "Contoso.ListResult",
+          name: "SecondListResult",
+          templateArguments: [{ kind: "Model", namespace: "Contoso", name: "Second" }],
+        },
+      ],
+    },
+  );
+
+  const first = required(contract.models.find((item) => item.name === "FirstListResult"));
+  const second = required(contract.models.find((item) => item.name === "SecondListResult"));
+  assert.notEqual(first.identity, second.identity);
+  assert.notEqual(first.genericInstanceIdentity, second.genericInstanceIdentity);
+  assert.equal(first.reachable, true);
+  assert.equal(second.reachable, true);
+  assert.equal(
+    required(contract.methods.find((item) => item.name === "first")).responseType?.id,
+    first.identity,
+  );
+  assert.equal(
+    required(contract.methods.find((item) => item.name === "second")).responseType?.id,
+    second.identity,
+  );
+});
+
 void test("rejects invalid normal response status arrays", () => {
   assert.throws(
     () =>

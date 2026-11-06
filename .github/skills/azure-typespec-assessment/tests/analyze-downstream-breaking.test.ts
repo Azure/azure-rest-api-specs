@@ -202,16 +202,28 @@ function analyzeShapes(
     id: string;
     declarations: Record<string, unknown>[];
   }[],
+  provenance?: {
+    base: Record<string, unknown>;
+    current: Record<string, unknown>;
+  },
 ) {
   const work = fs.mkdtempSync(path.join(process.cwd(), ".downstream-analyzer-test-"));
   context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
   fs.writeFileSync(path.join(work, "base.yaml"), stringify(base));
   fs.writeFileSync(path.join(work, "current.yaml"), stringify(current));
+  if (provenance) {
+    fs.writeFileSync(path.join(work, "base-provenance.json"), JSON.stringify(provenance.base));
+    fs.writeFileSync(
+      path.join(work, "current-provenance.json"),
+      JSON.stringify(provenance.current),
+    );
+  }
 
-  const artifact = (file: string) => ({
+  const artifact = (file: string, provenanceFile?: string) => ({
     status: "succeeded",
     format: "tcgc-yaml",
     files: [{ path: file }],
+    ...(provenanceFile ? { provenanceFile: { path: provenanceFile } } : {}),
   });
   const sourceChanges = suppliedSources ?? [
     {
@@ -227,8 +239,12 @@ function analyzeShapes(
           id: "project-1",
           sourceChangeIds: sourceChanges.map((item) => item.id),
           artifacts: {
-            base: { tcgc: artifact("base.yaml") },
-            current: { tcgc: artifact("current.yaml") },
+            base: {
+              tcgc: artifact("base.yaml", provenance ? "base-provenance.json" : undefined),
+            },
+            current: {
+              tcgc: artifact("current.yaml", provenance ? "current-provenance.json" : undefined),
+            },
           },
         },
       ],
@@ -238,6 +254,91 @@ function analyzeShapes(
   return analyzeDownstreamBreaking(
     options as unknown as Parameters<typeof analyzeDownstreamBreaking>[0],
   );
+}
+
+function genericListPackage(removeFirstProperty: boolean) {
+  const item = (name: string) => ({
+    kind: "model",
+    name,
+    crossLanguageDefinitionId: `Contoso.${name}`,
+    access: "public",
+    usage: 3,
+    properties: [],
+  });
+  const firstItem = item("First");
+  const secondItem = item("Second");
+  const page = (name: string, valueType: unknown, removeProperty: boolean) => ({
+    kind: "model",
+    name,
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    access: "public",
+    usage: 3,
+    properties: removeProperty
+      ? []
+      : [
+          {
+            kind: "property",
+            name: "value",
+            optional: false,
+            discriminator: false,
+            type: { kind: "array", valueType },
+          },
+        ],
+  });
+  const firstPage = page("FirstListResult", firstItem, removeFirstProperty);
+  const secondPage = page("SecondListResult", secondItem, false);
+  const method = (name: string, responseType: unknown) => ({
+    kind: "basic",
+    name,
+    access: "public",
+    crossLanguageDefinitionId: `Contoso.Items.${name}`,
+    parameters: [],
+    response: { kind: "method", type: responseType },
+    operation: {
+      kind: "http",
+      path: `/${name}`,
+      uriTemplate: `/${name}`,
+      verb: "get",
+      parameters: [],
+      responses: [{ statusCodes: 200 }],
+      exceptions: [],
+    },
+  });
+  return {
+    crossLanguagePackageId: "Contoso",
+    crossLanguageVersion: "1",
+    metadata: {},
+    clients: [
+      {
+        kind: "client",
+        name: "Items",
+        children: [],
+        methods: [method("first", firstPage), method("second", secondPage)],
+      },
+    ],
+    models: [firstPage, secondPage, firstItem, secondItem],
+    enums: [],
+    unions: [],
+    namespaces: [],
+  };
+}
+
+function genericListProvenance() {
+  return {
+    schemaVersion: 1,
+    models: [
+      {
+        crossLanguageDefinitionId: "Contoso.ListResult",
+        name: "FirstListResult",
+        templateArguments: [{ kind: "Model", namespace: "Contoso", name: "First" }],
+      },
+      {
+        crossLanguageDefinitionId: "Contoso.ListResult",
+        name: "SecondListResult",
+        templateArguments: [{ kind: "Model", namespace: "Contoso", name: "Second" }],
+      },
+    ],
+  };
 }
 
 void test("new projects are complete and non-breaking without baseline artifacts", () => {
@@ -507,6 +608,28 @@ void test("blocks ambiguous target cross-language identities", (context) => {
     "target",
     "target",
   ]);
+});
+
+void test("compares the matching generic instance without blocking sibling instances", (context) => {
+  const provenance = genericListProvenance();
+  const result = analyzeShapes(
+    context,
+    genericListPackage(false),
+    genericListPackage(true),
+    [],
+    undefined,
+    { base: provenance, current: provenance },
+  );
+
+  assert.deepEqual(result.blockers, []);
+  const removals = result.candidates.filter((item) => item.rule === "model-property-removed");
+  assert.equal(removals.length, 1);
+  assert.match(removals[0].actual, /FirstListResult|Contoso\.ListResult/);
+  assert.ok(
+    !result.candidates.some(
+      (item) => item.rule === "public-surface-changed" && item.actual.includes("Second"),
+    ),
+  );
 });
 
 void test("detects model base and discriminator hierarchy changes", (context) => {
