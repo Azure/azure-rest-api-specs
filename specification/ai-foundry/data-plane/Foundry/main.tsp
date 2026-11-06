@@ -46,6 +46,7 @@ import "./src/openai/vectorstores/main.tsp";
 import "./src/openai/video/main.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/routines/routes.tsp";
+import "./src/rle/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/toolboxes/routes.tsp";
