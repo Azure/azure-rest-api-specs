@@ -12683,7 +12683,7 @@
       "get": {
         "operationId": "EvaluationRules_list",
         "summary": "List evaluation rules",
-        "description": "Returns the evaluation rules configured for the project, optionally filtered by action type, agent name, or enabled state.",
+        "description": "Returns the evaluation rules configured for the project, including scheduled trace and dataset evaluations, optionally filtered by action type, agent name, or enabled state.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -12692,7 +12692,7 @@
             "name": "actionType",
             "in": "query",
             "required": false,
-            "description": "Filter by the type of evaluation rule.",
+            "description": "Filter by action type. When omitted, rules of all action types are returned.",
             "schema": {
               "$ref": "#/components/schemas/EvaluationRuleActionType"
             },
@@ -41261,6 +41261,31 @@
         ],
         "description": "A data source that selects traces for evaluation.\n\nSee [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python)."
       },
+      "AzureAITraceDataSourcePreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_trace_data_source_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_trace_data_source_preview`."
+          },
+          "trace_source": {
+            "$ref": "#/components/schemas/TraceSource",
+            "description": "The trace source that defines how traces are selected for evaluation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Preview form of `azure_ai_trace_data_source`. Returned only for rules backed by existing preview schedules; rejected on create and update."
+      },
       "AzureContentFilterBlocklistIdResult": {
         "type": "object",
         "required": [
@@ -43838,7 +43863,7 @@
           },
           "expression": {
             "type": "string",
-            "description": "Cron expression that defines the schedule frequency."
+            "description": "Five-field cron expression that defines the schedule frequency: minute hour day-of-month month day-of-week."
           },
           "timeZone": {
             "type": "string",
@@ -43859,12 +43884,7 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "Cron based trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Cron based trigger."
       },
       "CustomCredential": {
         "type": "object",
@@ -43937,8 +43957,7 @@
       "DailyRecurrenceSchedule": {
         "type": "object",
         "required": [
-          "type",
-          "hours"
+          "type"
         ],
         "properties": {
           "type": {
@@ -43954,7 +43973,7 @@
               "type": "integer",
               "format": "int32"
             },
-            "description": "Hours for the recurrence schedule."
+            "description": "Hours for the recurrence schedule. If omitted, the service uses the current UTC hour when the schedule is created."
           }
         },
         "allOf": [
@@ -43962,12 +43981,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Daily recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Daily recurrence schedule."
       },
       "DataGenerationJob": {
         "type": "object",
@@ -44380,6 +44394,63 @@
         ],
         "description": "Dataset output for a data generation job."
       },
+      "DatasetEvaluationRuleAction": {
+        "type": "object",
+        "required": [
+          "type",
+          "evalId",
+          "source"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "datasetEvaluation"
+            ]
+          },
+          "evalId": {
+            "type": "string",
+            "description": "Identifier of the evaluation used to score the dataset."
+          },
+          "source": {
+            "$ref": "#/components/schemas/DatasetEvaluationSource",
+            "description": "Dataset inputs for each scheduled occurrence. Preview source types may appear in responses for existing schedules but are rejected on create and update."
+          },
+          "evaluation_level": {
+            "$ref": "#/components/schemas/EvaluationLevel",
+            "description": "Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationRuleAction"
+          }
+        ],
+        "description": "Configures a scheduled evaluation of dataset inputs."
+      },
+      "DatasetEvaluationSource": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalJsonlRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/EvalCsvRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/TargetCompletionEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/UserConversationSimulationEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/UserConversationSimulationPreviewEvalRunDataSource"
+          }
+        ],
+        "description": "Dataset inputs supported by scheduled rules. Targets are configured within the selected source."
+      },
       "DatasetEvaluationSuiteJobSource": {
         "type": "object",
         "required": [
@@ -44616,12 +44687,7 @@
             ]
           }
         ],
-        "description": "Days of the week for recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Days of the week for recurrence schedule."
       },
       "DefinitionUpdatedDiagnosticChange": {
         "type": "object",
@@ -45745,7 +45811,6 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "azure_ai_traces": "#/components/schemas/TracesEvalRunDataSource",
             "azure_ai_synthetic_data_gen": "#/components/schemas/SyntheticDataGenerationEvalRunDataSource",
             "azure_ai_synthetic_data_generation_with_simulation": "#/components/schemas/SyntheticDataGenerationWithSimulationEvalRunDataSource",
             "azure_ai_responses": "#/components/schemas/AzureAIResponsesEvalRunDataSource",
@@ -45754,7 +45819,11 @@
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource",
             "azure_ai_trace_data_source": "#/components/schemas/AzureAITraceDataSourceEvalRunDataSource",
             "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource",
-            "azure_ai_user_conversation_simulation": "#/components/schemas/UserConversationSimulationEvalRunDataSource"
+            "azure_ai_user_conversation_simulation": "#/components/schemas/UserConversationSimulationEvalRunDataSource",
+            "azure_ai_traces_preview": "#/components/schemas/TracesPreviewEvalRunDataSource",
+            "azure_ai_trace_data_source_preview": "#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource",
+            "azure_ai_user_conversation_simulation_preview": "#/components/schemas/UserConversationSimulationPreviewEvalRunDataSource",
+            "azure_ai_traces": "#/components/schemas/TracesEvalRunDataSource"
           }
         },
         "description": "Base class for run data sources with discriminator support."
@@ -46558,6 +46627,20 @@
             "$ref": "#/components/schemas/EvaluationRuleEventType",
             "description": "Event type that the evaluation rule applies to."
           },
+          "schedule": {
+            "$ref": "#/components/schemas/Trigger",
+            "description": "Timing for timerTrigger rules. Required for timerTrigger and not allowed for other event types."
+          },
+          "provisioningStatus": {
+            "$ref": "#/components/schemas/ScheduleProvisioningStatus",
+            "description": "Provisioning state of the rule's schedule. Returned for timerTrigger rules only.",
+            "readOnly": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/Azure.Core.Foundations.Error",
+            "description": "Error that caused the rule to be disabled, if any.",
+            "readOnly": true
+          },
           "enabled": {
             "type": "boolean",
             "description": "Indicates whether the evaluation rule is enabled. Default is true."
@@ -46588,6 +46671,8 @@
           "propertyName": "type",
           "mapping": {
             "continuousEvaluation": "#/components/schemas/ContinuousEvaluationRuleAction",
+            "traceEvaluation": "#/components/schemas/TraceEvaluationRuleAction",
+            "datasetEvaluation": "#/components/schemas/DatasetEvaluationRuleAction",
             "humanEvaluationPreview": "#/components/schemas/HumanEvaluationPreviewRuleAction"
           }
         },
@@ -46602,7 +46687,9 @@
             "type": "string",
             "enum": [
               "continuousEvaluation",
-              "humanEvaluationPreview"
+              "humanEvaluationPreview",
+              "traceEvaluation",
+              "datasetEvaluation"
             ]
           }
         ],
@@ -46617,7 +46704,8 @@
             "type": "string",
             "enum": [
               "responseCompleted",
-              "manual"
+              "manual",
+              "timerTrigger"
             ]
           }
         ],
@@ -49604,12 +49692,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Hourly recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Hourly recurrence schedule."
       },
       "HumanEvaluationPreviewRuleAction": {
         "type": "object",
@@ -52488,12 +52571,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Monthly recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Monthly recurrence schedule."
       },
       "NoAuthenticationCredentials": {
         "type": "object",
@@ -52579,12 +52657,7 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "One-time trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "One-time trigger."
       },
       "OpenAI.AccessProgramsBody": {
         "type": "object",
@@ -64233,7 +64306,7 @@
                 "type": "string"
               },
               {
-                "$ref": "#/components/schemas/OpenAI.InputMessageContentList"
+                "$ref": "#/components/schemas/OpenAI.InputMessageContentListItem"
               }
             ],
             "description": "Text, image, or audio input to the model, used to generate a response.\n  Can also contain previous assistant responses."
@@ -68691,7 +68764,6 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "message": "#/components/schemas/OpenAI.EasyInputMessage",
             "item_reference": "#/components/schemas/OpenAI.ItemReferenceParam",
             "output_message": "#/components/schemas/OpenAI.InputItemOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.InputItemFileSearchToolCall",
@@ -68719,7 +68791,8 @@
             "mcp_approval_response": "#/components/schemas/OpenAI.InputItemMcpApprovalResponse",
             "mcp_call": "#/components/schemas/OpenAI.InputItemMcpToolCall",
             "custom_tool_call_output": "#/components/schemas/OpenAI.InputItemCustomToolCallOutput",
-            "custom_tool_call": "#/components/schemas/OpenAI.InputItemCustomToolCall"
+            "custom_tool_call": "#/components/schemas/OpenAI.InputItemCustomToolCall",
+            "message": "#/components/schemas/OpenAI.EasyInputMessage"
           }
         },
         "description": "An item representing part of the context for the response to be\ngenerated by the model. Can contain text, images, and audio inputs,\nas well as previous assistant responses and tool call outputs."
@@ -70479,6 +70552,14 @@
         "title": "Web search tool call"
       },
       "OpenAI.InputMessageContentList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OpenAI.InputContent"
+        },
+        "description": "A list of one or many input items to the model, containing different content\ntypes.",
+        "title": "Input item content list"
+      },
+      "OpenAI.InputMessageContentListItem": {
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/OpenAI.InputContent"
@@ -102010,12 +102091,7 @@
             "Monthly": "#/components/schemas/MonthlyRecurrenceSchedule"
           }
         },
-        "description": "Recurrence schedule model.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Recurrence schedule model."
       },
       "RecurrenceTrigger": {
         "type": "object",
@@ -102060,12 +102136,7 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "Recurrence based trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Recurrence based trigger."
       },
       "RecurrenceType": {
         "anyOf": [
@@ -102082,12 +102153,7 @@
             ]
           }
         ],
-        "description": "Recurrence type.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Recurrence type."
       },
       "RedTeam": {
         "type": "object",
@@ -103364,12 +103430,7 @@
             ]
           }
         ],
-        "description": "Schedule provisioning status.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Schedule provisioning status."
       },
       "ScheduleRoutineTrigger": {
         "type": "object",
@@ -109110,6 +109171,57 @@
         },
         "description": "The versions associated with a toolbox."
       },
+      "TraceEvaluationRuleAction": {
+        "type": "object",
+        "required": [
+          "type",
+          "evalId",
+          "source"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "traceEvaluation"
+            ]
+          },
+          "evalId": {
+            "type": "string",
+            "description": "Identifier of the evaluation used to score the selected traces."
+          },
+          "source": {
+            "$ref": "#/components/schemas/TraceEvaluationSource",
+            "description": "Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved.\n\nFor `azure_ai_traces`, set exactly one of `agent_id` or `agent_name`; `trace_ids` is not supported.\nFor `azure_ai_trace_data_source`, set `trace_source`.\nPreview source types may appear in responses for existing schedules but are rejected on create and update."
+          },
+          "evaluation_level": {
+            "$ref": "#/components/schemas/EvaluationLevel",
+            "description": "Level at which each scheduled run evaluates. Required when the evaluation uses the messages item schema."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationRuleAction"
+          }
+        ],
+        "description": "Configures a scheduled evaluation of observed agent traces."
+      },
+      "TraceEvaluationSource": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/TracesEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/AzureAITraceDataSourceEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/TracesPreviewEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource"
+          }
+        ],
+        "description": "Existing trace-evaluation inputs supported by scheduled rules."
+      },
       "TraceIdTraceSource": {
         "type": "object",
         "required": [
@@ -109470,6 +109582,71 @@
         },
         "description": "Traces source — conversation traces from Application Insights. Reusable shape spread into per-context discriminated subtypes."
       },
+      "TracesPreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_traces_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_traces_preview`."
+          },
+          "trace_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of Agent trace identifiers that should be evaluated."
+          },
+          "conversation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of conversation identifiers to filter traces by conversation."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The agent ID used to filter traces for evaluation."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name used to filter traces for evaluation."
+          },
+          "lookback_hours": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Lookback window (in hours) applied when retrieving traces from Application Insights.\n    For scheduled evaluations this is inferred from the recurrence interval.",
+            "default": 168
+          },
+          "end_time": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Unix timestamp (in seconds) marking the end of the trace query window. Defaults to the current time."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Sampling limit applied to traces retrieved for evaluation.",
+            "default": 1000
+          },
+          "ingestion_delay_seconds": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The delay to apply for ingestion when querying traces.",
+            "default": 300
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Preview form of `azure_ai_traces`. Returned only for rules backed by existing preview schedules; rejected on create and update."
+      },
       "TreatmentEffectType": {
         "anyOf": [
           {
@@ -109512,12 +109689,7 @@
             "OneTime": "#/components/schemas/OneTimeTrigger"
           }
         },
-        "description": "Base model for Trigger of the schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Base model for Trigger of the schedule."
       },
       "TriggerType": {
         "anyOf": [
@@ -109533,12 +109705,7 @@
             ]
           }
         ],
-        "description": "Type of the trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Type of the trigger."
       },
       "TwilioTelephonyBinding": {
         "type": "object",
@@ -110024,6 +110191,53 @@
           }
         },
         "description": "Configuration for simulated user interruption behavior."
+      },
+      "UserConversationSimulationPreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "source",
+          "target",
+          "model_configuration"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_user_conversation_simulation_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_user_conversation_simulation_preview`."
+          },
+          "source": {
+            "$ref": "#/components/schemas/UserConversationSimulationSource",
+            "description": "Test scenarios supplied as JSONL rows or strongly typed inline test cases."
+          },
+          "target": {
+            "$ref": "#/components/schemas/FoundryEvaluationTarget",
+            "description": "Model or agent being evaluated. It receives turns from the simulated user."
+          },
+          "model_configuration": {
+            "$ref": "#/components/schemas/EvaluationModelConfiguration",
+            "description": "Model used to simulate the user side of each conversation by generating turns sent to the evaluated `target`."
+          },
+          "default_simulation_configuration": {
+            "$ref": "#/components/schemas/UserConversationSimulationDefaultConfiguration",
+            "description": "Default configuration for generating simulated user conversations and persisting their output. Conversation properties in a test case's `simulation_configuration` override the corresponding defaults."
+          },
+          "data_mapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Preview form of `azure_ai_user_conversation_simulation`. Returned only for rules backed by existing preview schedules; rejected on create and update."
       },
       "UserConversationSimulationSource": {
         "anyOf": [
@@ -117985,12 +118199,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Weekly recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Weekly recurrence schedule."
       },
       "WorkIQPreviewTool": {
         "type": "object",
