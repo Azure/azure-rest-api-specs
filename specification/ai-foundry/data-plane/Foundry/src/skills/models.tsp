@@ -8,6 +8,10 @@ namespace Azure.AI.Projects;
 @pattern("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$")
 scalar SkillName extends string;
 
+const SkillsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
+};
+
 @doc("A public skill identifier. Existing skills can have opaque IDs such as skill_abc123 or name-valued IDs. When creating a new skill, supply a valid skill name.")
 scalar SkillIdentifier extends string;
 

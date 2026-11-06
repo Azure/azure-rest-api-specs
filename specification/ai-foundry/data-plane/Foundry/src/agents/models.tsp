@@ -517,10 +517,7 @@ model GitHubCopilotHarness extends AgentHarness {
 }
 
 @doc("A reference to a versioned Foundry skill.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.skills_v1_preview] }
-)
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model SkillReference {
   @doc("The name of the skill.")
   name: SkillName;
