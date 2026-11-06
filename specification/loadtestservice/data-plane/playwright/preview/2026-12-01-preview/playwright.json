@@ -134,10 +134,7 @@
             "description": "The browser profile ID in GUID format.",
             "required": true,
             "type": "string",
-            "format": "uuid",
-            "minLength": 3,
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -199,10 +196,7 @@
             "description": "The browser profile ID in GUID format.",
             "required": true,
             "type": "string",
-            "format": "uuid",
-            "minLength": 3,
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -286,10 +280,7 @@
             "description": "The browser profile ID in GUID format.",
             "required": true,
             "type": "string",
-            "format": "uuid",
-            "minLength": 3,
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1695,10 +1686,7 @@
             "description": "The secret store ID in GUID format.",
             "required": true,
             "type": "string",
-            "format": "uuid",
-            "minLength": 3,
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1760,10 +1748,7 @@
             "description": "The secret store ID in GUID format.",
             "required": true,
             "type": "string",
-            "format": "uuid",
-            "minLength": 3,
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1844,10 +1829,7 @@
             "description": "The secret store ID in GUID format.",
             "required": true,
             "type": "string",
-            "format": "uuid",
-            "minLength": 3,
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2046,9 +2028,6 @@
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The browser profile ID in GUID format.",
-          "minLength": 3,
-          "maxLength": 36,
-          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
         "name": {
@@ -2056,7 +2035,7 @@
           "description": "The name of the browser profile.",
           "minLength": 3,
           "maxLength": 24,
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2146,7 +2125,7 @@
           "description": "The name of the browser profile.",
           "minLength": 3,
           "maxLength": 24,
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3711,9 +3690,6 @@
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The secret store ID in GUID format.",
-          "minLength": 3,
-          "maxLength": 36,
-          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
         "name": {
@@ -3721,7 +3697,7 @@
           "description": "The secret store name.",
           "minLength": 3,
           "maxLength": 24,
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3781,7 +3757,7 @@
           "description": "The secret store name.",
           "minLength": 3,
           "maxLength": 24,
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$",
           "x-ms-mutability": [
             "read",
             "update",

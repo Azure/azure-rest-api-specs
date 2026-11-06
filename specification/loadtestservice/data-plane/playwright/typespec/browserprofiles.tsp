@@ -15,15 +15,12 @@ namespace Playwright;
 model BrowserProfile {
   @doc("The browser profile ID in GUID format.")
   @key("browserProfileId")
-  @minLength(3)
-  @maxLength(36)
-  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
   id: Azure.Core.uuid;
 
   @minLength(3)
   @maxLength(24)
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$")
   @doc("The name of the browser profile.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: string;
