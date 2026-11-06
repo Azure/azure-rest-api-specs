@@ -31,7 +31,7 @@ title: ComputeBulkActionsResourceProviderClient
 ```yaml
 description: The Compute Bulk Actions Resource Provider Client
 openapi-type: arm
-tag: package-2026-10-06-preview
+tag: package-2026-10-16
 
 suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
@@ -58,6 +58,41 @@ suppressions:
     where: $.definitions.ExecutionParameters.properties.additionalCreateParameters
 ```
 
+### Tag: package-2026-10-16
+
+These settings apply only when `--tag=package-2026-10-16` is specified on the command line.
+
+This GA version excludes bulk reimage, scheduled actions, occurrences, and their extension resources.
+
+BulkCreate and BulkCreateCustom expose create, get, list, and status operations.
+Delete and cancel are not part of their public GA API.
+
+The create examples use an existing subnet. Replace the sample subscription ID, subnet ID,
+and SSH public key before sending a request. BulkCreateCustom examples show both explicit
+virtual machine names and names generated from a prefix.
+The Linux examples explicitly enable the VM agent, platform-managed guest patching, 
+and periodic patch assessment.
+
+```yaml $(tag) == 'package-2026-10-16'
+input-file:
+  - stable/2026-10-16/Bulkactions.json
+suppressions:
+  - code: PathForNestedResource
+    reason: >
+      This GET is the Location status-monitor endpoint for BulkCreateCustom, not a nested
+      ARM resource. The asyncOperationId identifies an asynchronous operation, so the
+      bulkCreateCustom collection segment does not require a resource-name segment.
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/asyncOperations/{asyncOperationId}"]
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: >
+      ListBulkOperationErrorsResponse is the pageable result of the listBulkOperationErrors
+      action, not an ARM resource. Its value contains per-VM operation results; resource
+      envelope fields id, name, and type do not apply to the paging envelope.
+    from: Bulkactions.json
+    where: $.definitions.ListBulkOperationErrorsResponse
+```
+
 ### Tag: package-2026-10-06-preview
 
 These settings apply only when `--tag=package-2026-10-06-preview` is specified on the command line.
@@ -65,6 +100,13 @@ These settings apply only when `--tag=package-2026-10-06-preview` is specified o
 ```yaml $(tag) == 'package-2026-10-06-preview'
 input-file:
   - preview/2026-10-06-preview/Bulkactions.json
+```
+
+### October 2026 validation settings
+
+These settings apply to both October 2026 package tags.
+
+```yaml $(tag) == 'package-2026-10-16' || $(tag) == 'package-2026-10-06-preview'
 suppressions:
   - code: PostResponseCodes
     reason: >
