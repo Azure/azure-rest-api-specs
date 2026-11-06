@@ -6759,6 +6759,13 @@ model VirtualMachineProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
+   * Specifies the instance profile related details of a virtual machine.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  instanceProfile?: SubResource;
+
+  /**
    * [Preview Feature] Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and returns the deployed size in hardwareProfile.vmSize. A request that adds flexProfile must omit hardwareProfile.vmSize. For a virtual machine that uses FlexProfile, a hardwareProfile.vmSize equal to the deployed size is ignored, so a GET response can be sent back unchanged. A PATCH request that omits flexProfile keeps it. A PUT request that omits flexProfile and sets hardwareProfile.vmSize clears it. This property cannot exist along with a non-null properties.availabilitySet, properties.capacityReservation, properties.host, properties.hostGroup, properties.proximityPlacementGroup or properties.virtualMachineScaleSet.
    */
   @added(Versions.v2026_04_01)

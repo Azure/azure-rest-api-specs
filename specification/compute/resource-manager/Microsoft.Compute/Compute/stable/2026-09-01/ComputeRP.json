@@ -11079,6 +11079,9 @@
           },
           "Get a virtual machine with a FlexProfile": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithFlexProfile.json"
+          },
+          "Get a virtual machine with an Instance Profile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithInstanceProfile.json"
           }
         }
       },
@@ -11210,6 +11213,9 @@
           },
           "Create a VM with a FlexProfile": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
+          },
+          "Create a VM with an Instance Profile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithInstanceProfile.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -22439,6 +22445,14 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "instanceProfile": {
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
+          "description": "Specifies the instance profile related details of a virtual machine.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "flexProfile": {
           "$ref": "#/definitions/FlexProfile",
