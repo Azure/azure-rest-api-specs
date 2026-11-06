@@ -279,23 +279,33 @@ describe("Protected Files", () => {
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });
 
-  it("keeps approval after new commits and evaluates the live head rather than a stale event SHA", async () => {
-    const { run, approve, pr, github } = setup();
+  it("keeps the scoped approval for a new commit's own event", async () => {
+    const { run, approve, pr, github, context } = setup();
     approve();
     pr.head.sha = "new-head";
+    context.payload.pull_request = { number: 1, head: { sha: "new-head" } };
     await run();
-    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledTimes(3);
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledTimes(2);
     expect(github.rest.repos.createCommitStatus).toHaveBeenNthCalledWith(
       1,
-      expect.objectContaining({ sha: "head", state: "pending" }),
-    );
-    expect(github.rest.repos.createCommitStatus).toHaveBeenNthCalledWith(
-      2,
       expect.objectContaining({ sha: "new-head", state: "pending" }),
     );
     expect(github.rest.repos.createCommitStatus).toHaveBeenNthCalledWith(
-      3,
+      2,
       expect.objectContaining({ sha: "new-head", state: "success" }),
+    );
+  });
+
+  it("never applies an old event or rerun to a newer PR head", async () => {
+    const { run, approve, pr, github } = setup();
+    approve();
+    pr.head.sha = "new-head";
+    await expect(run()).rejects.toThrow("PR head changed since this event");
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalledWith(
+      expect.objectContaining({ sha: "new-head" }),
+    );
+    expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+      expect.objectContaining({ sha: "head", state: "failure" }),
     );
   });
 

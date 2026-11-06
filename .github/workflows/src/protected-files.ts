@@ -149,7 +149,7 @@ export async function runProtectedFiles({ github, context, core }: GitHubScriptA
 
   const { owner, repo } = context.repo;
   const pull_number = payload.pull_request.number;
-  let sha = payload.pull_request.head.sha;
+  const sha = payload.pull_request.head.sha;
   const setStatus = (state: "pending" | "success" | "failure", description: string) =>
     github.rest.repos.createCommitStatus({
       owner,
@@ -165,8 +165,7 @@ export async function runProtectedFiles({ github, context, core }: GitHubScriptA
   try {
     const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number });
     if (pr.head.sha !== sha) {
-      sha = pr.head.sha;
-      await setStatus("pending", "Evaluating current PR head");
+      throw new Error("PR head changed since this event; wait for its next Protected Files run");
     }
 
     let result: ProtectedFilesResult;
