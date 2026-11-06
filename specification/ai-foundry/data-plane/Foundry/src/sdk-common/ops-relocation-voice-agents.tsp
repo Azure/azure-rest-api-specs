@@ -65,6 +65,44 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
     Conversations
   );
 
+  interface LiveConversations {}
+  @@clientLocation(
+    AgentEndpointLiveConversations.listLiveAgentConversations,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversation,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.deleteLiveAgentConversation,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.listLiveAgentConversationItems,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationItem,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
+    LiveConversations
+  );
+
   interface Telephony {}
   @@clientLocation(AgentTelephony.createTelephonyBinding, Telephony);
   @@clientLocation(AgentTelephony.listTelephonyBindings, Telephony);
@@ -79,5 +117,14 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
   @@clientLocation(AgentTelephony.replaceTelephonyTransferTargets, Telephony);
   @@clientLocation(AgentTelephony.createTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.getTelephonyCallJob, Telephony);
+  @@clientLocation(AgentTelephony.listTelephonyCallJobs, Telephony);
+  @@clientLocation(AgentTelephony.deleteTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.cancelTelephonyCallJob, Telephony);
+  @@clientLocation(TelephonyCampaigns.getOperation, Telephony);
+  @@clientLocation(TelephonyCampaigns.create, Telephony);
+  @@clientLocation(TelephonyCampaigns.get, Telephony);
+  @@clientLocation(TelephonyCampaigns.list, Telephony);
+  @@clientLocation(TelephonyCampaigns.cancel, Telephony);
+  @@clientLocation(TelephonyCampaigns.delete, Telephony);
+  @@clientLocation(TelephonyCampaigns.listValidationErrors, Telephony);
 }

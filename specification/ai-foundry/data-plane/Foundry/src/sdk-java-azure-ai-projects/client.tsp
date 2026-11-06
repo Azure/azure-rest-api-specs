@@ -18,7 +18,6 @@ import "../routines/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 
-import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/ops-relocation-datasets.tsp";
 
@@ -79,6 +78,7 @@ namespace Azure.AI.Projects;
 @@clientName(EvaluationTaxonomies.update, "updateEvaluationTaxonomy");
 
 // Evaluators
+@@clientName(Evaluators.listDiagnostics, "listEvaluatorDiagnostics");
 @@clientName(Evaluators.listVersions, "listEvaluatorVersions");
 @@clientName(Evaluators.getVersion, "getEvaluatorVersion");
 @@clientName(Evaluators.createVersion, "createEvaluatorVersion");
@@ -158,6 +158,10 @@ namespace Azure.AI.Projects;
 
 // // More accurate naming
 @@clientName(AssetCredentialResponse, "DatasetCredential");
+
+// Retain the existing public DatasetReference name.
+@@clientName(DatasetReference, "OptionalVersionDatasetReference", "java");
+@@clientName(VersionedDatasetReference, "DatasetReference", "java");
 
 @@clientName(EntraIDCredentials, "EntraIdCredentials");
 

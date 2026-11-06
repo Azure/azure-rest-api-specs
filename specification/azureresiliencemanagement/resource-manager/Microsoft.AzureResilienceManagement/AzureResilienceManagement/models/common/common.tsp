@@ -16,6 +16,50 @@ namespace Microsoft.AzureResilienceManagement;
 
 alias ServiceGroupRoute = "/providers/Microsoft.Management/serviceGroups";
 
+@added(Versions.v2026_11_30_preview)
+@doc("The workload protected by a recovery configuration profile.")
+union WorkloadType {
+  @added(Versions.v2026_11_30_preview)
+  @doc("An Azure virtual machine workload.")
+  AzureVm: "AzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("A SQL database workload hosted in an Azure virtual machine.")
+  SqlDatabaseInAzureVm: "SqlDatabaseInAzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("An SAP HANA workload hosted in an Azure virtual machine.")
+  SapHanaInAzureVm: "SapHanaInAzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("An SAP ASE workload hosted in an Azure virtual machine.")
+  SapAseInAzureVm: "SapAseInAzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("An Oracle workload hosted in an Azure virtual machine.")
+  OracleInAzureVm: "OracleInAzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("An Azure Files workload.")
+  AzureFileShare: "AzureFileShare",
+
+  string,
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Specifies the resiliency type for recovery plan properties.")
+union ResiliencyType {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Infrastructure resiliency properties.")
+  InfrastructureResiliency: "InfrastructureResiliency",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Cyber resiliency properties.")
+  CyberResiliency: "CyberResiliency",
+
+  string,
+}
+
 @doc("Definition of associated identity linked with the various resources.")
 model AssociatedIdentity {
   @doc("Identity type linked with the resource")

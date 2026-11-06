@@ -90,10 +90,6 @@ namespace Azure.AI.FineTuning.Sessions;
   "Opts in to the V1 preview of insight generation."
 );
 @@doc(
-  Azure.AI.Projects.FoundryFeaturesOptInKeys.agent_insights_v1_preview,
-  "Opts in to the V1 preview of agent insights."
-);
-@@doc(
   Azure.AI.Projects.FoundryFeaturesOptInKeys.memory_stores_v1_preview,
   "Opts in to the V1 preview of persistent memory stores."
 );
