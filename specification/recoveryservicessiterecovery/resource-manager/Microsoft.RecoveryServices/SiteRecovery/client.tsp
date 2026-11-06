@@ -4710,8 +4710,4 @@ using Microsoft.RecoveryServices;
   "SiteRecoveryDiskPublicNetworkAccess",
   "csharp"
 );
-@@clientName(
-  IPVersion,
-  "SiteRecoveryIPVersion",
-  "csharp"
-);
+@@clientName(IPVersion, "SiteRecoveryIPVersion", "csharp");
