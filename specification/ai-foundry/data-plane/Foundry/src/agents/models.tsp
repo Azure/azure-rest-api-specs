@@ -848,6 +848,10 @@ model BotServiceTenantAuthorizationScheme
   It must be the sole authorization scheme, without legacy activity access_boundaries.
   Channel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients.
   """)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.digital_worker_v1_preview] }
+)
 model AccessBoundaryAuthorizationScheme
   extends AgentEndpointAuthorizationScheme {
   @doc("The authorization scheme type. Always `AccessBoundary`.")
@@ -858,6 +862,10 @@ model AccessBoundaryAuthorizationScheme
 }
 
 @doc("A conversation-independent policy for delivering inbound messages to an Autopilot.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.digital_worker_v1_preview] }
+)
 model ReadAccessPolicy {
   @doc("""
     The senders allowed to prompt the Autopilot. Only `allowlisted` is supported: it uses the instance's existing interaction allowlist,
@@ -995,6 +1003,14 @@ model AgentEndpointConfig {
   protocol_configuration?: ProtocolConfiguration;
 
   @doc("The authorization schemes supported by the agent endpoint")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
+  )
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
 
   @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")

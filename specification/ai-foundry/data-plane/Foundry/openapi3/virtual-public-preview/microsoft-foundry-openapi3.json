@@ -2913,6 +2913,18 @@
         "description": "Applies a merge-patch update to the specified agent endpoint configuration.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -2977,6 +2989,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DigitalWorker=V1Preview"
+          ]
         }
       }
     },
@@ -36735,7 +36752,12 @@
             "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
         ],
-        "description": "Authorizes inbound Activity Protocol messages using the Autopilot's instance read policy.\nSupported only for M365 digital workers or agents published as Autopilots, with a native Activity Protocol endpoint.\nConfigure this scheme at creation with digital_worker_type set to m365, or after Autopilot publication.\nIt must be the sole authorization scheme, without legacy activity access_boundaries.\nChannel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients."
+        "description": "Authorizes inbound Activity Protocol messages using the Autopilot's instance read policy.\nSupported only for M365 digital workers or agents published as Autopilots, with a native Activity Protocol endpoint.\nConfigure this scheme at creation with digital_worker_type set to m365, or after Autopilot publication.\nIt must be the sole authorization scheme, without legacy activity access_boundaries.\nChannel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "DigitalWorker=V1Preview"
+          ]
+        }
       },
       "ActivityProtocolAccessBoundary": {
         "anyOf": [
@@ -37306,7 +37328,12 @@
             "items": {
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
-            "description": "The authorization schemes supported by the agent endpoint"
+            "description": "The authorization schemes supported by the agent endpoint",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "publish_approval_status": {
             "$ref": "#/components/schemas/PublishApprovalStatus",
@@ -37338,7 +37365,12 @@
             "items": {
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
-            "description": "The authorization schemes supported by the agent endpoint"
+            "description": "The authorization schemes supported by the agent endpoint",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           }
         }
       },
@@ -95118,7 +95150,12 @@
             "description": "The senders allowed to prompt the Autopilot. Only `allowlisted` is supported: it uses the instance's existing interaction allowlist,\nwhich implicitly includes the instance manager. An empty array denies user messages.\nTrusted lifecycle events are not governed by this policy."
           }
         },
-        "description": "A conversation-independent policy for delivering inbound messages to an Autopilot."
+        "description": "A conversation-independent policy for delivering inbound messages to an Autopilot.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "DigitalWorker=V1Preview"
+          ]
+        }
       },
       "RecurrenceSchedule": {
         "type": "object",

@@ -1907,6 +1907,14 @@ paths:
       summary: Update an agent endpoint
       description: Applies a merge-patch update to the specified agent endpoint configuration.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - DigitalWorker=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1948,6 +1956,9 @@ paths:
           application/merge-patch+json:
             schema:
               $ref: '#/components/schemas/PatchAgentRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DigitalWorker=V1Preview
   /agents/{agent_name}/code:download:
     get:
       operationId: Agents_downloadAgentCode
@@ -42755,6 +42766,9 @@ components:
         Configure this scheme at creation with digital_worker_type set to m365, or after Autopilot publication.
         It must be the sole authorization scheme, without legacy activity access_boundaries.
         Channel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients.
+      x-ms-foundry-meta:
+        required_previews:
+          - DigitalWorker=V1Preview
     ActivityProtocolAccessBoundary:
       anyOf:
         - type: string
@@ -43023,6 +43037,9 @@ components:
           items:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
           description: The authorization schemes supported by the agent endpoint
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         publish_approval_status:
           $ref: '#/components/schemas/PublishApprovalStatus'
           description: 'The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.'
@@ -43041,6 +43058,9 @@ components:
           items:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
           description: The authorization schemes supported by the agent endpoint
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
     AgentEndpointProtocol:
       anyOf:
         - type: string
@@ -83252,6 +83272,9 @@ components:
             which implicitly includes the instance manager. An empty array denies user messages.
             Trusted lifecycle events are not governed by this policy.
       description: A conversation-independent policy for delivering inbound messages to an Autopilot.
+      x-ms-foundry-meta:
+        required_previews:
+          - DigitalWorker=V1Preview
     RecurrenceSchedule:
       type: object
       required:
