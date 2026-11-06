@@ -27,33 +27,6 @@ model EmailTemplateContract
 }
 
 @armResourceOperations
-interface EmailTemplateContractsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        @minLength(1)
-        @maxLength(50)
-        serviceName: string,
-      },
-      {
-        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
-        @path
-        @segment("templates")
-        @key
-        templateName: TemplateName,
-      }
-    > {}
-
-@armResourceOperations
 interface EmailTemplateContracts {
   /**
    * Gets the details of the email template specified by its identifier.
@@ -86,7 +59,7 @@ interface EmailTemplateContracts {
   /**
    * Updates an Email Template.
    */
-  createOrUpdate is EmailTemplateContractsOps.CreateOrUpdateSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     EmailTemplateContract,
     Request = EmailTemplateUpdateParameters,
     Parameters = {
