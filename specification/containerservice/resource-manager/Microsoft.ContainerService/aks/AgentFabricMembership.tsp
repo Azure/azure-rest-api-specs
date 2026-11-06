@@ -19,7 +19,7 @@ namespace Microsoft.ContainerService;
  * The AgentFabric membership of a managed cluster. A cluster may belong to at most one AgentFabric, so this resource always has the name 'default'. See https://aka.ms/aks/agentfabric-membership.
  */
 @parentResource(ManagedCluster)
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model AgentFabricMembership
   is Azure.ResourceManager.ProxyResource<AgentFabricMembershipProperties> {
   ...ResourceNameParameter<
@@ -30,10 +30,16 @@ model AgentFabricMembership
   >;
 
   /**
+   * The SKU of the AgentFabric membership. Determines which AgentFabric components are deployed to the cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The resource SKU is required and uses a service-specific name enum. ResourceSkuProperty is optional and includes unsupported SKU fields."
+  sku: AgentFabricMembershipSku;
+
+  /**
    * Resource ID of the AgentFabric that this cluster is a member of. The AgentFabric must be in the same tenant and subscription as the managed cluster. As the ARM envelope property, it also stops a complete mode deployment from deleting the membership and silently detaching the cluster.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   managedBy: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.NetworkSecurity/agentFabrics";
@@ -42,7 +48,7 @@ model AgentFabricMembership
 }
 
 @armResourceOperations
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 interface AgentFabricMemberships {
   /**
    * Gets the AgentFabric membership of a managed cluster.
@@ -76,7 +82,7 @@ interface AgentFabricMemberships {
  * The current provisioning state of the AgentFabric membership.
  */
 @Azure.Core.lroStatus
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union AgentFabricMembershipProvisioningState {
   string,
 
@@ -114,7 +120,7 @@ union AgentFabricMembershipProvisioningState {
 /**
  * The SKU of the AgentFabric membership. The SKU determines which AgentFabric components are deployed to the cluster.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union AgentFabricMembershipSkuName {
   string,
 
@@ -130,26 +136,32 @@ union AgentFabricMembershipSkuName {
 }
 
 /**
+ * The SKU of the AgentFabric membership.
+ */
+@added(Versions.v2026_09_02_preview)
+model AgentFabricMembershipSku {
+  /**
+   * The SKU name that determines which AgentFabric components are deployed to the cluster.
+   */
+  name: AgentFabricMembershipSkuName;
+}
+
+/**
  * Properties of the AgentFabric membership of a managed cluster.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model AgentFabricMembershipProperties {
   /**
    * The current provisioning state of the AgentFabric membership.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: AgentFabricMembershipProvisioningState;
-
-  /**
-   * The SKU of the AgentFabric membership. Determines which AgentFabric components are deployed to the cluster.
-   */
-  sku: AgentFabricMembershipSkuName;
 }
 
 /**
  * The result of a request to list the AgentFabric memberships of a managed cluster.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model AgentFabricMembershipsListResult {
   /**
    * The list of AgentFabric memberships.
