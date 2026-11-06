@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2026-08
+tag: package-2026-11
 ```
 
 ### Suppression
@@ -135,6 +135,15 @@ directive:
     from: openapi.json
     where: $.definitions.ServerFarmSiloVnetIntegrationsResult.properties.location
     reason: This location is read-only metadata in a GET-only inspection result, not the location of a resource that clients create or update. The result has no create operation, so adding create mutability would misrepresent the implemented contract. This exception is limited to the inspection result's location property.
+```
+
+### Tag: package-2026-11
+
+These settings apply only when `--tag=package-2026-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11'
+input-file:
+    - stable/2026-11-15/openapi.json
 ```
 
 ### Tag: package-2026-08
