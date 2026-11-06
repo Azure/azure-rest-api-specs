@@ -264,6 +264,18 @@ union ShareAccessTier {
   Premium: "Premium",
 }
 
+/** The scale mode of the share. Scale mode is currently only supported for NFS shares. */
+@added(Versions.v2027_05_07)
+union ShareScaleMode {
+  string,
+
+  /** Scale */
+  Scale: "Scale",
+
+  /** Compatibility */
+  Compatibility: "Compatibility",
+}
+
 /** The share token intent. */
 union ShareTokenIntent {
   string,
@@ -1048,6 +1060,11 @@ model SharePropertiesInternal {
   @encode("rfc7231")
   @Xml.name("Creation-Time")
   creationTime?: utcDateTime;
+
+  /** The scale mode of the share. */
+  @added(Versions.v2027_05_07)
+  @Xml.name("ScaleMode")
+  scaleMode?: ShareScaleMode;
 }
 
 /** Storage Analytics metrics for file service. */
@@ -1952,6 +1969,14 @@ alias ShareAccessTierRequestHeader = {
 alias ShareRootSquashRequestHeader = {
   /** Root squash to set on the share. Only valid for NFS shares. */
   @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
+};
+
+/** Share scale mode request header. */
+alias ShareScaleModeRequestHeader = {
+  /** Optional. Specifies the scale mode of the share. Scale mode is currently only supported for NFS shares. */
+  @added(Versions.v2027_05_07)
+  @header("x-ms-scale-mode")
+  scaleMode?: ShareScaleMode;
 };
 
 /** Share provisioned IOPS request header. */

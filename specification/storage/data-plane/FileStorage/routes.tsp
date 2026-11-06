@@ -184,6 +184,7 @@ interface Share {
       ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
       ...ChangeFeedRequestHeaders;
+      ...ShareScaleModeRequestHeader;
     },
     {
       @statusCode statusCode: 201;
@@ -292,6 +293,11 @@ interface Share {
       @encode("rfc7231")
       @header("x-ms-share-creation-time")
       creationTime?: utcDateTime;
+
+      /** The scale mode of the share. */
+      @added(Versions.v2027_05_07)
+      @header("x-ms-scale-mode")
+      scaleMode?: ShareScaleMode;
 
       ...ChangeFeedResponseHeaders;
     }
