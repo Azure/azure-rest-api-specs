@@ -72,13 +72,27 @@ interface ConnectionSettings {
   get is ArmResourceRead<ConnectionSetting, Error = Error>;
 
   /**
-   * Register a new Auth Connection for a Bot Service
+   * Creates or updates an OAuth connection for a Bot Service.
+   *
+   * When updating an existing connection that uses a client secret, changing or removing protected OAuth parameters requires a usable `properties.clientSecret` in the same request.
+   * Protected parameters include authority and endpoint settings, token and refresh-token request body templates, and custom parameters referenced by protected templates.
+   * The existing usable secret can be resubmitted; secret rotation is not required.
+   * Empty, whitespace-only, and all-asterisk masked values are not usable.
+   * An update that changes or removes protected parameters without a usable secret returns HTTP 400 (Bad Request).
+   * Preserve protected parameters when making unrelated updates.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceSync<ConnectionSetting, Error = Error>;
 
   /**
-   * Updates a Connection Setting registration for a Bot Service
+   * Updates an OAuth connection for a Bot Service.
+   *
+   * When updating an existing connection that uses a client secret, changing or removing protected OAuth parameters requires a usable `properties.clientSecret` in the same request.
+   * Protected parameters include authority and endpoint settings, token and refresh-token request body templates, and custom parameters referenced by protected templates.
+   * The existing usable secret can be resubmitted; secret rotation is not required.
+   * Empty, whitespace-only, and all-asterisk masked values are not usable.
+   * An update that changes or removes protected parameters without a usable secret returns HTTP 400 (Bad Request).
+   * Preserve protected parameters when making unrelated updates.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })

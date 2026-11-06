@@ -1258,7 +1258,7 @@
         "tags": [
           "ConnectionSettings"
         ],
-        "description": "Register a new Auth Connection for a Bot Service",
+        "description": "Creates or updates an OAuth connection for a Bot Service.\n\nWhen updating an existing connection that uses a client secret, changing or removing protected OAuth parameters requires a usable `properties.clientSecret` in the same request.\nProtected parameters include authority and endpoint settings, token and refresh-token request body templates, and custom parameters referenced by protected templates.\nThe existing usable secret can be resubmitted; secret rotation is not required.\nEmpty, whitespace-only, and all-asterisk masked values are not usable.\nAn update that changes or removes protected parameters without a usable secret returns HTTP 400 (Bad Request).\nPreserve protected parameters when making unrelated updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1330,7 +1330,7 @@
         "tags": [
           "ConnectionSettings"
         ],
-        "description": "Updates a Connection Setting registration for a Bot Service",
+        "description": "Updates an OAuth connection for a Bot Service.\n\nWhen updating an existing connection that uses a client secret, changing or removing protected OAuth parameters requires a usable `properties.clientSecret` in the same request.\nProtected parameters include authority and endpoint settings, token and refresh-token request body templates, and custom parameters referenced by protected templates.\nThe existing usable secret can be resubmitted; secret rotation is not required.\nEmpty, whitespace-only, and all-asterisk masked values are not usable.\nAn update that changes or removes protected parameters without a usable secret returns HTTP 400 (Bad Request).\nPreserve protected parameters when making unrelated updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
