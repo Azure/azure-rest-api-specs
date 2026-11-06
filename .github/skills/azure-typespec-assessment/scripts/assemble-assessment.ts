@@ -3,6 +3,7 @@ import path from "node:path";
 import { deriveSafety, dimensionCompatibility } from "./assessment-display.ts";
 import { sameAutorestContract } from "./autorest-contract.ts";
 import { isMain, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
+import { skipsCompatibility } from "./compatibility-policy.ts";
 import { assembleCompliance } from "./compliance-assessment.ts";
 import {
   assembleDocumentQuality,
@@ -425,24 +426,28 @@ function changedFields(
 function operationPresentation(
   operation: InternalSemanticOperation,
   facts: Record<string, AssessmentFact>,
+  comparisonAvailable: boolean,
 ) {
   const before = operation.beforeFactId ? facts[operation.beforeFactId] : undefined;
   const after = operation.afterFactId ? facts[operation.afterFactId] : undefined;
   const current = after ?? before;
-  const changed = changedFields(before, after, [
-    "method",
-    "path",
-    "parameters",
-    "request",
-    "responses",
-    "paging",
-    "lro",
-    "consumes",
-    "produces",
-  ]);
+  const changed = comparisonAvailable
+    ? changedFields(before, after, [
+        "method",
+        "path",
+        "parameters",
+        "request",
+        "responses",
+        "paging",
+        "lro",
+        "consumes",
+        "produces",
+      ])
+    : [];
   const wireChanges = changed.filter((field) => field !== "paging");
   return {
     ...operation,
+    comparisonAvailable,
     apiVersion: current?.apiVersion,
     method: current?.method,
     path: current?.path,
@@ -450,15 +455,20 @@ function operationPresentation(
     changedAspects: changed,
     before,
     after,
-    outcome: wireChanges.length
-      ? `REST contract changed: ${wireChanges.join(", ")}.`
-      : changed.includes("paging")
-        ? "HTTP signature and represented payload contract unchanged; SDK paging metadata changed."
-        : "HTTP signature and represented payload contract unchanged.",
+    outcome: !comparisonAvailable
+      ? "Target REST representation only; compatibility was not assessed."
+      : wireChanges.length
+        ? `REST contract changed: ${wireChanges.join(", ")}.`
+        : changed.includes("paging")
+          ? "HTTP signature and represented payload contract unchanged; SDK paging metadata changed."
+          : "HTTP signature and represented payload contract unchanged.",
   };
 }
 
 function semanticAction(unit: InternalSemanticUnit, operations: PresentedOperation[]) {
+  if (operations.some((operation) => operation.comparisonAvailable === false)) {
+    return unit.action ?? unit.changeKind;
+  }
   if (
     operations.length &&
     operations.every((operation) => !operation.beforeFactId && operation.afterFactId)
@@ -1112,6 +1122,9 @@ export function assembleAssessment({
   );
   const sources = sourceMap(sourceIndex);
   const projectsById = new Map((manifest.projects ?? []).map((project) => [project.id, project]));
+  const hasCompatibilitySkip = (manifest.projects ?? []).some((project) =>
+    skipsCompatibility(project.artifactComparison),
+  );
   const semanticUnits = new Map(semantic.reviewUnits.map((unit) => [unit.id, unit]));
   const modelSemanticUnits = new Map(
     scopedModelSemanticUnits.map((unit) => [unit.reviewUnitId, unit]),
@@ -1128,8 +1141,12 @@ export function assembleAssessment({
     answer.semanticIntents.map((intent) => [intent.reviewUnitId, intent]),
   );
   const semanticIntentAnswers = semantic.reviewUnits.map((unit) => {
+    const policySkipped = (unit.projectIds ?? [unit.projectId]).some((id) => {
+      const project = projectsById.get(id);
+      return skipsCompatibility(project?.artifactComparison);
+    });
     const intent = informationalSemanticIntentIds.has(unit.id)
-      ? informationalIntentText(unit)
+      ? informationalIntentText(unit, !policySkipped)
       : authoredSemanticIntents.get(unit.id);
     if (!intent) {
       throw new Error(`Missing authored Semantic intent ${unit.id}.`);
@@ -1159,10 +1176,20 @@ export function assembleAssessment({
             ? undefined
             : id),
       }))
-    ).map((operation) => ({
-      ...operationPresentation(operation, semantic.facts),
-      sources: sourcesForOperation(operation, unit, sources, semantic.facts, projectsById),
-    }));
+    ).map((operation) => {
+      const factProjectIds = [operation.beforeFactId, operation.afterFactId].flatMap((id) =>
+        id && semantic.facts[id]?.projectId ? [semantic.facts[id].projectId] : [],
+      );
+      const owners = factProjectIds.length ? factProjectIds : (unit.projectIds ?? [unit.projectId]);
+      const policySkipped = owners.some((id) => {
+        const project = projectsById.get(id);
+        return skipsCompatibility(project?.artifactComparison);
+      });
+      return {
+        ...operationPresentation(operation, semantic.facts, !policySkipped),
+        sources: sourcesForOperation(operation, unit, sources, semantic.facts, projectsById),
+      };
+    });
     const action = semanticAction(unit, operations);
     return {
       ...unit,
@@ -1232,9 +1259,12 @@ export function assembleAssessment({
         rest.blockers.length > 0 ||
         inferenceBlockers.some((blocker) => blocker.allowedDimensions.includes("rest")),
       restFindings,
-      restFindings.length + rejectedRestCandidateCount,
+      restFindings.length +
+        rejectedRestCandidateCount +
+        (hasCompatibilitySkip ? (rest.analyzedProjectIds?.length ?? 0) : 0),
     ),
     findings: restFindings,
+    analyzedProjectIds: rest.analyzedProjectIds,
     rejectedCandidateCount: rejectedRestCandidateCount,
     blockers: [
       ...rest.blockers,
@@ -1250,9 +1280,12 @@ export function assembleAssessment({
         downstream.blockers.length > 0 ||
         inferenceBlockers.some((blocker) => blocker.allowedDimensions.includes("downstream")),
       downstreamFindings,
-      downstreamFindings.length + rejectedDownstreamCandidateCount,
+      downstreamFindings.length +
+        rejectedDownstreamCandidateCount +
+        (hasCompatibilitySkip ? (downstream.analyzedProjectIds?.length ?? 0) : 0),
     ),
     findings: downstreamFindings,
+    analyzedProjectIds: downstream.analyzedProjectIds,
     methodGroups: downstreamAggregation.methodGroups,
     typeImpacts: downstreamAggregation.typeImpacts,
     rootCauses: downstream.rootCauses ?? [],

@@ -3,6 +3,7 @@ import path from "node:path";
 import { extractApiVersions, selectApiVersionPair } from "./api-version-selection.ts";
 import { documentQualitySummary, renderReportSections } from "./assessment-report-ui.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
+import { NO_STABLE_API_VERSION_REPORT, skipsAllCompatibility } from "./compatibility-policy.ts";
 import { validateAssessment } from "./validate-assessment.ts";
 
 type ArtifactSelection = import("./runtime-types.ts").ArtifactSelection;
@@ -1017,6 +1018,7 @@ export function operationContractRows(
   restFindings: AssessmentFinding[] = [],
   semanticIntentId?: string,
 ): ContractChangeRow[] {
+  if (operation.comparisonAvailable === false) return [];
   const detailedRows = restFindings
     .filter((finding) => findingMatchesOperation(finding, operation, semanticIntentId))
     .map(restContractDelta);

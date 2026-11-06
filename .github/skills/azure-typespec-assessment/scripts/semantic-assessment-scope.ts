@@ -120,7 +120,10 @@ export function partitionSemanticIntents<T extends SemanticUnit>(
   return { assessed, informational };
 }
 
-export function informationalIntentText(unit: SemanticUnit): {
+export function informationalIntentText(
+  unit: SemanticUnit,
+  comparisonAvailable = true,
+): {
   reviewUnitId: string;
   title: string;
   summary: string;
@@ -139,7 +142,9 @@ export function informationalIntentText(unit: SemanticUnit): {
     reviewUnitId: unit.id,
     title: "Publish a new API version",
     summary:
-      `Carries ${operationCount} existing operations into the new API version. ` +
+      (comparisonAvailable
+        ? `Carries ${operationCount} existing operations into the new API version. `
+        : "Publishes the selected API version using target-only evidence. ") +
       "This publication intent is reported deterministically and is not used for inference, guideline findings, or breaking-change relationships.",
   };
 }

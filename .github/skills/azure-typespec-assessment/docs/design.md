@@ -367,18 +367,31 @@ API-version policy:
 
 1. Source analysis always compares the merge-base source with current source,
    including dirty overlays.
-2. When current source adds an API version:
+2. Select the target, then derive a per-project `compatibilityPolicy` from
+   successfully discovered service version sets. A preview target with no stable
+   version in either base or head skips REST and downstream breaking-change
+   assessment, including modifications to an existing preview. Record
+   `{ action: "skip", reason: "no-stable-api-version" }`, leave the baseline
+   `not-selected` without a commit/version, and compile only the head target.
+   New projects preserve their classification; unversioned/versioned migrations
+   do not qualify. No other missing-baseline case activates this policy.
+   A stable member removed by the PR still prevents the exemption. Failed or
+   ambiguous discovery remains a blocker, not a policy skip. Other new plans
+   explicitly record `{ action: "compare" }`; old artifacts remain readable.
+3. When current source adds an API version and policy allows comparison:
    - baseline artifact: current source projected to the previous latest stable
      version;
-   - if no previous stable exists, use the previous latest preview;
+   - for a stable target with no previous stable, use the previous latest preview;
    - target artifact: current source projected to the newest added version.
-3. When an existing API version is modified:
+     Preserve the existing source-revision selection for that baseline. A failed
+     baseline remains a genuine artifact blocker, not a target-only exception.
+4. When an existing API version is modified and policy allows comparison:
    - baseline artifact: merge-base source projected to the affected version;
    - target artifact: current source projected to the same affected version.
-4. For an unversioned service:
+5. For an unversioned service:
    - baseline artifact: merge-base unversioned source;
    - target artifact: current unversioned source.
-5. AutoRest and TCGC always use the same source revision and API version within
+6. AutoRest and TCGC always use the same source revision and API version within
    each comparison role.
 
 For PR 44988, both artifact roles use the head source:
@@ -388,7 +401,7 @@ baseline = head source @ previous latest stable Network API version
 target   = head source @ 2025-09-01
 ```
 
-For PR 43308, which modifies an existing version:
+For an existing preview whose service declares a stable version:
 
 ```text
 baseline = base source @ 2026-05-01-preview
@@ -397,6 +410,29 @@ target   = head source @ 2026-05-01-preview
 
 Version-aware REST classification:
 
+- Preview-only policy skips use the established target-only semantic pipeline
+  and real base-to-head source diff. Skip the compatibility analyzers before
+  artifact normalization, SDK comparison graphs, and candidate generation.
+  Do not invoke compatibility inference or infer no-impact from absent before
+  facts. Preserve source-derived modifications and removals, and do not render
+  Before/After contract tables for target-only operation facts.
+  Informational publication summaries for policy-skipped projects must not count
+  historical carry-forward. Non-policy publication semantics remain unchanged.
+  Azure Guidelines and compiler-driven Documentation Completeness continue.
+- For an entirely skipped scope, REST/downstream and safety remain
+  `not-assessed / unknown / blocked`, never compatible or safe. Mixed scopes
+  retain other projects' findings and use partial coverage, including when a
+  passing comparison generated no candidates. Validation rejects compatibility
+  findings owned by skipped projects and inconsistent policy/baseline metadata.
+  The existing REST and downstream top summary cards and detailed sections use
+  the same small muted
+  `Not assessed: breaking changes are evaluated against a stable API version, but none is available.`
+  line instead of generic unknown/blocked lines for this policy only. Summary
+  cards retain their normal findings count; detailed sections contain only the
+  heading and sentence. Other blockers and mixed-project summary cards retain
+  normal verdict/coverage presentation. Do not add a policy card, panel, badge,
+  or separate safety explanation.
+  Project details remain in the existing appendix.
 - In `new-api-version` mode, baseline-to-target wire differences describe
   cross-version migration compatibility between the selected previous and new
   API-version projections.
