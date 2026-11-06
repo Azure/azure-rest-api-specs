@@ -1,0 +1,232 @@
+{
+  "title": "PolicyGroups_CreateOrUpdate_UrlFiltering",
+  "operationId": "PolicyGroups_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-03-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity",
+    "policyGroupName": "urlFilteringPolicyGroup",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "env": "test"
+      },
+      "properties": {
+        "displayName": "URL Filtering Policy Group",
+        "description": "A policy group demonstrating URL filtering rules",
+        "priority": 100,
+        "networkSecurityPolicies": [
+          {
+            "type": "UrlFiltering",
+            "defaultAction": "Allow",
+            "source": {
+              "type": "WorkloadIdPatterns",
+              "patterns": [
+                "spiffe://contoso.com/ns/default/sa/*"
+              ]
+            },
+            "rules": [
+              {
+                "name": "allowAdminHealth",
+                "priority": 10,
+                "hostname": "api.contoso.com",
+                "paths": [
+                  "/admin/health"
+                ]
+              },
+              {
+                "name": "denyAdmin",
+                "priority": 20,
+                "hostname": "api.contoso.com",
+                "paths": [
+                  "/admin",
+                  "/admin/*"
+                ],
+                "action": "Deny"
+              },
+              {
+                "name": "denyUploads",
+                "priority": 30,
+                "hostname": "uploads.contoso.com",
+                "method": "POST",
+                "action": "Deny"
+              }
+            ]
+          },
+          {
+            "type": "TlsInspection",
+            "source": {
+              "type": "WorkloadIdPatterns",
+              "patterns": [
+                "spiffe://contoso.com/ns/default/sa/*"
+              ]
+            },
+            "certificate": {
+              "mode": "AzureManagedCA"
+            },
+            "defaultAction": "Inspect"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "URL Filtering Policy Group",
+          "description": "A policy group demonstrating URL filtering rules",
+          "priority": 100,
+          "networkSecurityPolicies": [
+            {
+              "type": "UrlFiltering",
+              "defaultAction": "Allow",
+              "source": {
+                "type": "WorkloadIdPatterns",
+                "patterns": [
+                  "spiffe://contoso.com/ns/default/sa/*"
+                ]
+              },
+              "rules": [
+                {
+                  "name": "allowAdminHealth",
+                  "priority": 10,
+                  "hostname": "api.contoso.com",
+                  "paths": [
+                    "/admin/health"
+                  ]
+                },
+                {
+                  "name": "denyAdmin",
+                  "priority": 20,
+                  "hostname": "api.contoso.com",
+                  "paths": [
+                    "/admin",
+                    "/admin/*"
+                  ],
+                  "action": "Deny"
+                },
+                {
+                  "name": "denyUploads",
+                  "priority": 30,
+                  "hostname": "uploads.contoso.com",
+                  "method": "POST",
+                  "action": "Deny"
+                }
+              ]
+            },
+            {
+              "type": "TlsInspection",
+              "source": {
+                "type": "WorkloadIdPatterns",
+                "patterns": [
+                  "spiffe://contoso.com/ns/default/sa/*"
+                ]
+              },
+              "certificate": {
+                "mode": "AzureManagedCA"
+              },
+              "defaultAction": "Inspect"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/urlFilteringPolicyGroup",
+        "name": "urlFilteringPolicyGroup",
+        "type": "Microsoft.NetworkSecurity/policyGroups",
+        "location": "eastus",
+        "tags": {
+          "env": "test"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.NetworkSecurity/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-11-03-preview"
+      },
+      "body": {
+        "properties": {
+          "displayName": "URL Filtering Policy Group",
+          "description": "A policy group demonstrating URL filtering rules",
+          "priority": 100,
+          "networkSecurityPolicies": [
+            {
+              "type": "UrlFiltering",
+              "defaultAction": "Allow",
+              "source": {
+                "type": "WorkloadIdPatterns",
+                "patterns": [
+                  "spiffe://contoso.com/ns/default/sa/*"
+                ]
+              },
+              "rules": [
+                {
+                  "name": "allowAdminHealth",
+                  "priority": 10,
+                  "hostname": "api.contoso.com",
+                  "paths": [
+                    "/admin/health"
+                  ]
+                },
+                {
+                  "name": "denyAdmin",
+                  "priority": 20,
+                  "hostname": "api.contoso.com",
+                  "paths": [
+                    "/admin",
+                    "/admin/*"
+                  ],
+                  "action": "Deny"
+                },
+                {
+                  "name": "denyUploads",
+                  "priority": 30,
+                  "hostname": "uploads.contoso.com",
+                  "method": "POST",
+                  "action": "Deny"
+                }
+              ]
+            },
+            {
+              "type": "TlsInspection",
+              "source": {
+                "type": "WorkloadIdPatterns",
+                "patterns": [
+                  "spiffe://contoso.com/ns/default/sa/*"
+                ]
+              },
+              "certificate": {
+                "mode": "AzureManagedCA"
+              },
+              "defaultAction": "Inspect"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/urlFilteringPolicyGroup",
+        "name": "urlFilteringPolicyGroup",
+        "type": "Microsoft.NetworkSecurity/policyGroups",
+        "location": "eastus",
+        "tags": {
+          "env": "test"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}
