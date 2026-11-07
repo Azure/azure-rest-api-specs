@@ -1,0 +1,38 @@
+{
+  "title": "ObservabilityAgents_Update_ClearNestedConfiguration",
+  "operationId": "ObservabilityAgents_Update",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "observabilityAgentName": "myObservabilityAgent",
+    "properties": {
+      "properties": {
+        "autonomousOperationsEnabled": false,
+        "investigation": {
+          "instructions": null,
+          "policies": null
+        },
+        "usageCap": {
+          "amountAAC": null
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/observabilityAgents/myObservabilityAgent",
+        "name": "myObservabilityAgent",
+        "type": "Microsoft.Monitor/observabilityAgents",
+        "location": "eastus",
+        "properties": {
+          "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
+          "autonomousOperationsEnabled": false,
+          "investigation": {},
+          "usageCap": {}
+        }
+      }
+    }
+  }
+}
