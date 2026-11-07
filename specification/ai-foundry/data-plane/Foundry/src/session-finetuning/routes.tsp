@@ -12,8 +12,9 @@ namespace Azure.AI.Projects.SessionFineTuning;
 
 /**
  * A fine-tuning session operation with the required Foundry preview header
- * and API version parameter. Successful responses use HTTP 200. Requests
- * processed asynchronously expose a request identifier for explicit polling.
+ * and API version parameter. Ordinary requests use HTTP 200 and expose a
+ * request identifier for explicit polling. Checkpoint preparation separately
+ * declares its HTTP 202 Pending and HTTP 200 terminal responses.
  */
 op FineTuningSessionOperation<
   Params extends Reflection.Model,
@@ -31,7 +32,7 @@ op FineTuningSessionOperation<
 // ─── Fine-tuning sessions ─────────────────────────────────────────────────────
 
 /** Creates and manages fine-tuning sessions in the project. */
-@route("/fine_tuning/sessions")
+@route("/fine_tuning_sessions")
 @tag("FineTuningSessions")
 interface FineTuningSessions {
   /**
@@ -71,7 +72,7 @@ interface FineTuningSessions {
   >;
 
   /** Get information about a specific fine-tuning session. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session retrieval preserves the fixed /fine_tuning/sessions/{sessionId} GET route and existing session representation rather than a standard resource template."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session retrieval preserves the canonical session GET route and existing session representation rather than a standard resource template."
   @get
   @route("{sessionId}")
   @summary("Get a fine-tuning session")
@@ -126,7 +127,7 @@ interface FineTuningSessions {
    * Refresh an active session to prevent idle expiry.
    * Returns 404 if the session is not found.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session heartbeat preserves the fixed /fine_tuning/sessions/{sessionId}/heartbeat POST action with an HTTP 200 response."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session heartbeat preserves the canonical session heartbeat POST action with an HTTP 200 response."
   @post
   @route("{sessionId}/heartbeat")
   @summary("Session heartbeat")
@@ -144,7 +145,7 @@ interface FineTuningSessions {
 // ─── Training ─────────────────────────────────────────────────────────────────
 
 /** Submits training requests for a fine-tuning session. */
-@route("/fine_tuning/sessions/{sessionId}")
+@route("/fine_tuning_sessions/{sessionId}")
 @tag("Training")
 interface Training {
   /**
@@ -215,7 +216,7 @@ interface Training {
 // ─── Checkpoints ──────────────────────────────────────────────────────────────
 
 /** Saves and retrieves checkpoints associated with a fine-tuning session. */
-@route("/fine_tuning/sessions/{sessionId}")
+@route("/fine_tuning_sessions/{sessionId}")
 @tag("Checkpoints")
 interface Checkpoints {
   /**
@@ -277,7 +278,7 @@ interface Checkpoints {
   >;
 
   /** Get metadata for a specific checkpoint. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Checkpoint retrieval preserves the fixed /fine_tuning/sessions/{sessionId}/checkpoints/{checkpointId} GET route and existing checkpoint metadata representation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Checkpoint retrieval preserves the canonical checkpoint GET route and existing checkpoint metadata representation."
   @get
   @route("checkpoints/{checkpointId}")
   @summary("Get checkpoint info")
@@ -297,10 +298,101 @@ interface Checkpoints {
   >;
 }
 
+/**
+ * Prepares and reads checkpoint exports for explicitly eligible owners and models.
+ * These operations do not enable download admission or bypass ownership checks.
+ */
+@route("/fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}/download")
+@tag("Checkpoints")
+interface CheckpointDownloads {
+  /**
+   * Prepare a checkpoint export without a request body. Repeat this operation
+   * while HTTP 202 reports Pending. HTTP 200 reports Succeeded with the file
+   * inventory or Failed. This is not the Azure LRO protocol and does not
+   * deliver files to the caller's filesystem.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Checkpoint preparation uses repeated bodyless POST with explicit preparation states, not Azure LRO polling."
+  @post
+  @summary("Prepare a checkpoint download")
+  prepare is FineTuningSessionOperation<
+    {
+      /** Identifier of the session that owns the checkpoint. */
+      @minLength(1)
+      @path
+      sessionId: string;
+
+      /** Identifier of the registered sampler checkpoint to prepare. */
+      @minLength(1)
+      @path
+      checkpointId: string;
+    },
+    {
+      /** HTTP 202 while Pending; HTTP 200 for Succeeded or Failed. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "These are the two exact HTTP response codes of the existing preparation protocol."
+      @statusCode statusCode: 200 | 202;
+
+      /** Preparation state and the complete file inventory on success. */
+      @body body: FineTuningCheckpointDownloadResponse;
+    }
+  >;
+
+  /**
+   * Stream one advertised file from a completed, owned checkpoint export.
+   * Rechecks download admission and ownership. If-Match must contain the
+   * advertised strong ETag; arbitrary storage URLs and unversioned reads are
+   * not accepted. This read does not create or renew a checkpoint copy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Checkpoint file reads use an opaque advertised file identifier and required strong If-Match rather than a standard resource representation."
+  @get
+  @route("files/{fileId}")
+  @summary("Read an authorized checkpoint file")
+  getFile is FineTuningSessionOperation<
+    {
+      /** Identifier of the session that owns the checkpoint. */
+      @minLength(1)
+      @path
+      sessionId: string;
+
+      /** Identifier of the registered sampler checkpoint. */
+      @minLength(1)
+      @path
+      checkpointId: string;
+
+      /** Opaque file identifier from the successful preparation response. */
+      @pattern("^[0-9a-f]{64}$")
+      @path
+      fileId: string;
+
+      /** The advertised strong ETag for the exact file generation to read. */
+      @header("If-Match")
+      ifMatch: string;
+    },
+    {
+      /** The authorized file is returned as a byte stream. */
+      @statusCode statusCode: 200;
+
+      /** Binary file media type. */
+      @header("Content-Type") contentType: "application/octet-stream";
+
+      /** Strong ETag of the returned file generation. */
+      @header("ETag") etag: string;
+
+      /** Exact number of bytes in the file. */
+      @header("Content-Length") contentLength: int64;
+
+      /** Private file bytes must not be cached or transformed. */
+      @header("Cache-Control") cacheControl: "no-store, no-transform";
+
+      /** Contents of the authorized, version-pinned checkpoint file. */
+      @body body: bytes;
+    }
+  >;
+}
+
 // ─── Sampling ─────────────────────────────────────────────────────────────────
 
 /** Generates completions using sampler checkpoints from a fine-tuning session. */
-@route("/fine_tuning/sessions/{sessionId}")
+@route("/fine_tuning_sessions/{sessionId}")
 @tag("Sampling")
 interface Sampling {
   /**
@@ -334,7 +426,7 @@ interface Sampling {
 // ─── Request-status polling ───────────────────────────────────────────────────
 
 /** Retrieves the raw processing status of a fine-tuning request. */
-@route("/fine_tuning/sessions/{sessionId}/request/{requestId}")
+@route("/fine_tuning_sessions/{sessionId}/request/{requestId}")
 @tag("Operations")
 interface Operations {
   /**

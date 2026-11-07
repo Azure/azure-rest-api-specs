@@ -29,6 +29,14 @@
   paths:
     - src/sdk-python-azure-ai-finetuningsessions/tspconfig.yaml
 
+- tool: TypeSpecValidation
+  reason: >
+    Existing voice-agent system-tool regression test from the target branch,
+    pending relocation with the other Foundry emitter tooling.
+  rules: [DisallowedFileTypes]
+  paths:
+    - emitters/voice-system-tools.test.mjs
+
 - tool: SwaggerAll
   reason: >
     Foundry does not emit OpenAPI 2.
