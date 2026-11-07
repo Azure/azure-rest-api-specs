@@ -120,6 +120,10 @@ union FoundryFeaturesOptInKeys {
   models_v1_preview: "Models=V1Preview",
   model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
   finetuning_sessions_v1_preview: "FineTuningSessions=V1Preview",
+
+  /** Session compute primitives preview (compute, exec, logs, ports and egress policy on hosted agent sessions). */
+  @removed(Versions.v1)
+  session_compute_v1_preview: "SessionCompute=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<

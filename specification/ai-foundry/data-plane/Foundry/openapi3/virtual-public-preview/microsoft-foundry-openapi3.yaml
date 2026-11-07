@@ -15,6 +15,7 @@ tags:
   - name: Agent Live Conversations
   - name: Agent Telephony
   - name: TelephonyCampaigns
+  - name: Agent Session Computes
   - name: AgentServer Task Storage
   - name: EvaluationSuiteGenerationJobs
   - name: Responses Root
@@ -4856,6 +4857,851 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Sessions
+  /agents/{agent_name}/endpoint/sessions/{session_id}/computes:
+    get:
+      operationId: AgentSessionComputes_listSessionComputes
+      summary: List computes attached to a session
+      description: Lists the computes attached to a hosted agent session.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SessionCompute'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}:
+    get:
+      operationId: AgentSessionComputes_getSessionCompute
+      summary: Get a session compute
+      description: Retrieves a compute attached to a hosted agent session.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: compute_id
+          in: path
+          required: true
+          description: |-
+            The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.
+            Kept as an open string so that clients keep working when sessions support more than one compute.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionCompute'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/egress-policy:
+    get:
+      operationId: AgentSessionComputes_getSessionComputeEgressPolicy
+      summary: Get the egress policy of a session compute
+      description: Retrieves a summary of the egress policy in force for a session compute. Rule patterns are never returned.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: compute_id
+          in: path
+          required: true
+          description: |-
+            The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.
+            Kept as an open string so that clients keep working when sessions support more than one compute.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionComputeEgressPolicy'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/exec/stream:
+    get:
+      operationId: AgentSessionComputes_connectSessionComputeExecStream
+      summary: Open an interactive exec stream to a session compute
+      description: |-
+        Opens an interactive terminal inside a session compute over a WebSocket.
+        Requires `capabilities.exec = true`.
+
+        The client must send an HTTP GET with `Upgrade: websocket` headers and
+        `Sec-WebSocket-Protocol: exec.v1`. A compute that is not `running` and ready is rejected
+        before upgrade with `409 compute_not_ready`. The stream is bound to the current instance;
+        stop, delete or replacement ends it, with no reconnect or replay.
+
+        Client messages are JSON text frames with a `type` discriminator:
+        - `start` (first message, at most 64 KiB): `{ "type": "start", "start": { "command", "args", "tty", "stdin", "terminal_size"?, "environment"?, "working_directory"? } }`.
+        - `stdin`: `{ "type": "stdin", "data": "<base64>" }` (at most 1 MiB per message).
+        - `resize`: `{ "type": "resize", "height", "width" }` (TTY only).
+        - `close_stdin`: `{ "type": "close_stdin" }`.
+
+        Server messages:
+        - `session_id`: `{ "type": "session_id", "session_id" }`.
+        - `stdout` / `stderr`: `{ "type": "stdout", "data": "<base64>" }`.
+        - `exit_code`: `{ "type": "exit_code", "exit_code" }`, followed by a normal close.
+        - `error`: `{ "type": "error", "error": { "code", "message" } }`.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: compute_id
+          in: path
+          required: true
+          description: |-
+            The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.
+            Kept as an open string so that clients keep working when sessions support more than one compute.
+          schema:
+            type: string
+        - name: Sec-WebSocket-Protocol
+          in: header
+          required: true
+          description: The WebSocket subprotocol. Must be `exec.v1`.
+          schema:
+            type: string
+            enum:
+              - exec.v1
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '101':
+          description: The response that switches the HTTP connection to the `exec.v1` WebSocket protocol.
+          headers:
+            Sec-WebSocket-Protocol:
+              required: true
+              description: The negotiated WebSocket subprotocol.
+              schema:
+                type: string
+                enum:
+                  - exec.v1
+          content:
+            application/json:
+              schema: {}
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports:
+    get:
+      operationId: AgentSessionComputes_listSessionComputePorts
+      summary: List exposed ports of a session compute
+      description: Lists the ports exposed on a session compute. The platform control port is never included.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: compute_id
+          in: path
+          required: true
+          description: |-
+            The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.
+            Kept as an open string so that clients keep working when sessions support more than one compute.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SessionComputePort'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}/ports/{port}:
+    put:
+      operationId: AgentSessionComputes_exposeSessionComputePort
+      summary: Expose a port of a session compute
+      description: |-
+        Exposes a port of a session compute through the Foundry proxy. Requires `capabilities.ports = true`.
+        Idempotent: returns `201` when the port is newly exposed, `200` when it is already exposed with the
+        same configuration, and `409 compute_port_conflict` when it is already exposed with a different
+        configuration (delete it first to change it). Exposure is instance-scoped and must be repeated after
+        the session is stopped and resumed, or the instance is replaced.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: compute_id
+          in: path
+          required: true
+          description: |-
+            The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.
+            Kept as an open string so that clients keep working when sessions support more than one compute.
+          schema:
+            type: string
+        - name: port
+          in: path
+          required: true
+          description: The port number inside the compute, between 1024 and 65535. Port 8088 is reserved.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1024
+            maximum: 65535
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionComputePort'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionComputePort'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionComputePortRequest'
+        description: The port configuration.
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+    get:
+      operationId: AgentSessionComputes_getSessionComputePort
+      summary: Get an exposed port of a session compute
+      description: Retrieves an exposed port of a session compute.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: compute_id
+          in: path
+          required: true
+          description: |-
+            The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.
+            Kept as an open string so that clients keep working when sessions support more than one compute.
+          schema:
+            type: string
+        - name: port
+          in: path
+          required: true
+          description: The port number inside the compute, between 1024 and 65535. Port 8088 is reserved.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1024
+            maximum: 65535
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionComputePort'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+    delete:
+      operationId: AgentSessionComputes_deleteSessionComputePort
+      summary: Stop exposing a port of a session compute
+      description: Stops exposing a port of a session compute.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: compute_id
+          in: path
+          required: true
+          description: |-
+            The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.
+            Kept as an open string so that clients keep working when sessions support more than one compute.
+          schema:
+            type: string
+        - name: port
+          in: path
+          required: true
+          description: The port number inside the compute, between 1024 and 65535. Port 8088 is reserved.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1024
+            maximum: 65535
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}:exec:
+    post:
+      operationId: AgentSessionComputes_execSessionCompute
+      summary: Run a command in a session compute
+      description: |-
+        Runs a one-shot shell command inside a session compute and returns its output.
+        Requires `capabilities.exec = true`.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: compute_id
+          in: path
+          required: true
+          description: |-
+            The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.
+            Kept as an open string so that clients keep working when sessions support more than one compute.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionComputeExecResult'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionComputeExecRequest'
+        description: The command to run.
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{session_id}/computes/{compute_id}:logstream:
+    get:
+      operationId: AgentSessionComputes_getSessionComputeLogStream
+      summary: Stream logs from a session compute
+      description: |-
+        Streams the logs of a session compute as Server-Sent Events. Each line is emitted as
+        `event: log` / `data: <line>`. Errors are returned as a JSON error before the first byte of the
+        stream is written.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - SessionCompute=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID, as returned by the session create operation.
+          schema:
+            type: string
+        - name: compute_id
+          in: path
+          required: true
+          description: |-
+            The compute ID. Only `default` exists today; any other value returns `404 compute_not_found`.
+            Kept as an open string so that clients keep working when sessions support more than one compute.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/SessionComputeLogEvent'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Computes
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
   /agents/{agent_name}/endpoint/sessions/{session_id}:stop:
     post:
       operationId: Agents_stopSession
@@ -56834,6 +57680,7 @@ components:
         - Models=V1Preview
         - ModelRouterControls=V1Preview
         - FineTuningSessions=V1Preview
+        - SessionCompute=V1Preview
     FoundryModelArtifactProfileCategory:
       anyOf:
         - type: string
@@ -57281,6 +58128,9 @@ components:
           type: boolean
           description: Whether this agent version uses memory snapshots. Sessions for a snapshot-enabled version start from a snapshot of the agent's initialized process rather than starting the process from its image. Defaults to false.
           default: false
+        compute_primitives:
+          $ref: '#/components/schemas/SessionComputePrimitives'
+          description: Opt-in to session compute primitives (exec, ports) for sessions created for this agent version. Requires the `SessionCompute=V1Preview` feature. Each primitive defaults to off.
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
@@ -96758,6 +97608,411 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - ModelRouterControls=V1Preview
+    SessionCompute:
+      type: object
+      required:
+        - object
+        - id
+        - agent_session_id
+        - provider
+        - state
+        - capabilities
+        - volumes
+        - created_at
+        - last_accessed_at
+      properties:
+        object:
+          type: string
+          enum:
+            - session.compute
+          description: The object type, which is always `session.compute`.
+        id:
+          type: string
+          description: The compute identifier.
+          examples:
+            - default
+        agent_session_id:
+          type: string
+          description: The identifier of the owning session.
+        provider:
+          $ref: '#/components/schemas/SessionComputeProvider'
+          description: The provider that backs the compute.
+        state:
+          $ref: '#/components/schemas/SessionComputeState'
+          description: The current state of the compute.
+        capabilities:
+          $ref: '#/components/schemas/SessionComputeCapabilities'
+          description: The operations available on the compute.
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionComputeVolume'
+          maxItems: 4
+          description: |-
+            The resolved volume layout of this compute, including the implicit `home` data disk. Bound to the agent
+            version at session create; not writable through this API.
+          readOnly: true
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) when the compute was created.
+        last_accessed_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) when the compute was last accessed.
+        stopped_at:
+          anyOf:
+            - type: integer
+              format: unixtime
+            - type: 'null'
+          description: The Unix timestamp (in seconds) when the compute stopped. Present only when the compute is stopped.
+      description: A compute attached to a hosted agent session.
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+    SessionComputeCapabilities:
+      type: object
+      required:
+        - exec
+        - ports
+      properties:
+        exec:
+          type: boolean
+          description: Whether command execution (`:exec` and `exec/stream`) is available.
+        ports:
+          type: boolean
+          description: Whether ports can be exposed and proxied.
+      description: |-
+        The operations available on a session compute. Combines provider support with the agent version opt-in
+        (`definition.compute_primitives`) for `exec` and `ports`.
+        Clients should branch on these values rather than on `provider`.
+    SessionComputeEgressAction:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - allow
+            - deny
+      description: The default action for egress traffic that matches no rule.
+    SessionComputeEgressManagedBy:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - platform
+            - agent_definition
+      description: Who manages the egress policy.
+    SessionComputeEgressMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - open
+            - inspected
+            - audit
+            - enforced
+            - unknown
+      description: |-
+        The egress policy mode of a session compute.
+        * `open`: no egress restriction is configured.
+        * `inspected`: traffic is inspected (TLS termination) but not blocked.
+        * `audit`: rules are evaluated and violations are logged; nothing is blocked.
+        * `enforced`: rules are evaluated and violations are blocked.
+        * `unknown`: the provider returned an unrecognized or pre-policy configuration. Treat as no information, not as open.
+    SessionComputeEgressPolicy:
+      type: object
+      required:
+        - object
+        - compute_id
+        - mode
+        - rule_count
+        - managed_by
+      properties:
+        object:
+          type: string
+          enum:
+            - session.compute.egress_policy
+          description: The object type, which is always `session.compute.egress_policy`.
+        compute_id:
+          type: string
+          description: The compute identifier.
+        mode:
+          $ref: '#/components/schemas/SessionComputeEgressMode'
+          description: The egress policy mode.
+        default_action:
+          anyOf:
+            - $ref: '#/components/schemas/SessionComputeEgressAction'
+            - type: 'null'
+          description: The default action for egress traffic that matches no rule.
+        traffic_inspection:
+          anyOf:
+            - $ref: '#/components/schemas/SessionComputeTrafficInspection'
+            - type: 'null'
+          description: How much egress traffic is inspected. Omitted when the provider value is unrecognized.
+        rule_count:
+          type: integer
+          format: int32
+          description: The number of egress rules.
+        managed_by:
+          $ref: '#/components/schemas/SessionComputeEgressManagedBy'
+          description: Who manages the egress policy.
+      description: A summary of the egress policy in force for a session compute. Rule patterns are never returned.
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+    SessionComputeExecRequest:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          maxLength: 32768
+          description: The shell command line executed inside the compute. Maximum 32 KiB.
+          examples:
+            - ls -la /home
+        timeout_seconds:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 120
+          description: |-
+            The wall-clock budget in seconds. On expiry the call returns `200` with `timed_out: true`; the command may
+            still be running inside the compute and side effects are not rolled back.
+          default: 60
+        provider_options:
+          $ref: '#/components/schemas/SessionComputeProviderOptions'
+          description: Optional provider-specific options.
+      description: Request to run a one-shot shell command inside a session compute.
+    SessionComputeExecResult:
+      type: object
+      required:
+        - object
+        - exit_code
+        - timed_out
+        - duration_ms
+        - stdout_truncated
+        - stderr_truncated
+      properties:
+        object:
+          type: string
+          enum:
+            - session.compute.exec_result
+          description: The object type, which is always `session.compute.exec_result`.
+        exit_code:
+          anyOf:
+            - type: integer
+              format: int32
+            - type: 'null'
+          description: The process exit code; `null` only when `timed_out` is `true`.
+        timed_out:
+          type: boolean
+          description: |-
+            Whether the command did not finish within `timeout_seconds`. The command may still be running inside the
+            compute, and `stdout` and `stderr` are omitted. Callers must not blindly retry.
+        stdout:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: The standard output of the command, capped at 262144 UTF-16 characters.
+        stderr:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: The standard error of the command, capped at 262144 UTF-16 characters.
+        duration_ms:
+          type: integer
+          format: int64
+          description: The command duration in milliseconds.
+        stdout_truncated:
+          type: boolean
+          description: Whether `stdout` was truncated.
+        stderr_truncated:
+          type: boolean
+          description: Whether `stderr` was truncated.
+      description: The result of a one-shot command run inside a session compute.
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+    SessionComputeLogEvent:
+      type: object
+      required:
+        - event
+        - data
+      properties:
+        event:
+          $ref: '#/components/schemas/SessionLogEventType'
+          description: The SSE event type. Currently `log`; clients should ignore unrecognized event types.
+          examples:
+            - log
+        data:
+          type: string
+          description: A single log line.
+          examples:
+            - '[10:12:04] harness: starting agent'
+      description: A single Server-Sent Event frame emitted by the session compute log stream.
+    SessionComputePort:
+      type: object
+      required:
+        - object
+        - port
+        - name
+        - protocol
+        - url
+      properties:
+        object:
+          type: string
+          enum:
+            - session.compute.port
+          description: The object type, which is always `session.compute.port`.
+        port:
+          type: integer
+          format: int32
+          description: The port number inside the compute.
+        name:
+          type: string
+          description: The port name.
+        protocol:
+          $ref: '#/components/schemas/SessionComputePortProtocol'
+          description: The application protocol.
+        url:
+          type: string
+          format: uri
+          description: |-
+            The Foundry proxy base URL, ending in `/ports/{port}/proxy/`, on the same endpoint (host and path prefix)
+            the caller used. Append application paths and query strings. Never a provider URL.
+            Call it directly with a Foundry bearer token and the `Foundry-Features` header; it takes no `api-version`.
+            Every HTTP method, WebSocket upgrades and SSE are forwarded to the application unchanged, except that
+            the caller's `Authorization` header is removed. Applications must honor `X-Forwarded-Prefix`,
+            `X-Forwarded-Host` and `X-Forwarded-Proto`.
+      description: A port exposed from a session compute through the Foundry proxy.
+      x-ms-foundry-meta:
+        required_previews:
+          - SessionCompute=V1Preview
+    SessionComputePortProtocol:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - http
+            - http2
+      description: The application protocol of an exposed port.
+    SessionComputePortRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 32
+          pattern: ^[a-z0-9]([a-z0-9-]{0,30}[a-z0-9])?$
+          description: The port name. Defaults to `port-<n>` when omitted. Must be unique per compute.
+        protocol:
+          $ref: '#/components/schemas/SessionComputePortProtocol'
+          description: The application protocol.
+          default: http
+        provider_options:
+          $ref: '#/components/schemas/SessionComputeProviderOptions'
+          description: Optional provider-specific options.
+      description: Request to expose a port of a session compute through the Foundry proxy. The port number is taken from the path.
+    SessionComputePrimitives:
+      type: object
+      properties:
+        exec:
+          type: boolean
+          description: Whether exec (one-shot and interactive) is enabled on session computes for this agent version. Defaults to false.
+          default: false
+        ports:
+          type: boolean
+          description: Whether ports can be exposed and proxied on session computes for this agent version. Defaults to false.
+          default: false
+      description: Opt-in flags for session compute primitives on a hosted agent version.
+    SessionComputeProvider:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - aca_sandboxes
+            - byo_aks
+      description: |-
+        The provider that backs a session compute. Open string: new providers can be added without a version bump.
+        Clients must treat unknown values as an unknown provider and rely on `capabilities` instead of `provider`.
+    SessionComputeProviderOptions:
+      type: object
+      additionalProperties: {}
+      description: |-
+        A flat bag of provider-specific options. At most 16 keys, each 1–64 characters. Keys are validated
+        fail-closed against the provider's known-key set before any provider call; an unknown key returns
+        `400 compute_invalid_provider_options`. Every known-key set is empty today. Values are never echoed in errors.
+    SessionComputeState:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - provisioning
+            - running
+            - stopped
+            - suspended
+            - failed
+            - deleted
+      description: The state of a session compute. Extensible; clients must tolerate unknown values.
+    SessionComputeTrafficInspection:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - partial
+            - full
+      description: How much egress traffic is inspected.
+    SessionComputeVolume:
+      type: object
+      required:
+        - name
+        - type
+        - mount_path
+        - read_only
+        - persists_across_restart
+      properties:
+        name:
+          type: string
+          pattern: ^[a-z0-9]([-a-z0-9]{0,30}[a-z0-9])?$
+          description: The volume name.
+          examples:
+            - work
+        type:
+          $ref: '#/components/schemas/SessionComputeVolumeType'
+          description: The volume type.
+        mount_path:
+          type: string
+          description: The absolute mount path inside the compute.
+          examples:
+            - /work
+        read_only:
+          type: boolean
+          description: Whether the volume is mounted read-only.
+        size:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: 'For `data_disk` only: the disk capacity as a Kubernetes quantity (for example, `20Gi`).'
+          examples:
+            - 20Gi
+        persists_across_restart:
+          type: boolean
+          description: |-
+            Whether the backing store is re-attached to the next instance with the data it held when the previous
+            instance stopped. For `blob`, this applies to the container, not the local cache: writes still in the cache
+            at a forced stop or platform eviction may be lost. Stopping the session stops the instance gracefully first.
+      description: A volume mounted into a session compute.
+    SessionComputeVolumeType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - data_disk
+            - blob
+      description: |-
+        The type of a session compute volume. `data_disk` is a provider block volume (ext4) that is POSIX and
+        exclusively attached. `blob` is a platform-created blob container mounted with blobfuse2; it is not a POSIX
+        filesystem and writes are committed on close or flush through a local cache. New types may be added.
     SessionConfiguration:
       type: object
       properties:
