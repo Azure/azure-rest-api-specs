@@ -678,6 +678,9 @@
           },
           "RedisEnterpriseDatabasesCreate With Active Geo Replication": {
             "$ref": "./examples/RedisEnterpriseDatabasesCreateWithGeoReplication.json"
+          },
+          "RedisEnterpriseDatabasesCreateWithRedisVersion": {
+            "$ref": "./examples/RedisEnterpriseDatabasesCreateWithRedisVersion.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3547,8 +3550,11 @@
         },
         "redisVersion": {
           "type": "string",
-          "description": "Version of Redis the database is running on, e.g. '6.0'",
-          "readOnly": true
+          "description": "Version of Redis the database is running on, e.g. '8.2'",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "deferUpgrade": {
           "$ref": "#/definitions/DeferUpgradeSetting",
