@@ -1277,7 +1277,16 @@ model DatabaseProperties {
   /**
    * Version of Redis the database is running on, e.g. '6.0'
    */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "redisVersion")
   @visibility(Lifecycle.Read)
+  redisVersionBeforeCreateSupport?: string;
+
+  /**
+   * Version of Redis the database is running on, e.g. '8.2'
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   redisVersion?: string;
 
   /**
