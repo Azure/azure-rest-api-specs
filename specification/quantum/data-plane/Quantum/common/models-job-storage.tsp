@@ -50,7 +50,7 @@ model JobFileResult {
 
   /** The raw file payload with its actual media type. */
   @bodyRoot
-  file: TypeSpec.Http.File;
+  file: TypeSpec.Http.File<JobFileContentType>;
 
   /** The length of the returned file contents in bytes. */
   @header("Content-Length")
@@ -71,4 +71,21 @@ model JobFileResult {
   /** Prevents caching of job data. */
   @header("Cache-Control")
   cacheControl: "no-store";
+}
+
+/** Common file media types; other stored media types remain supported. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This HTTP media-range union includes */* to accept any stored media type, rather than restricting files to an enum of media types."
+@added(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
+union JobFileContentType {
+  /** Any other stored media type. */
+  Any: "*/*",
+
+  /** Arbitrary binary file contents. */
+  Binary: "application/octet-stream",
+
+  /** JSON file contents, still transferred as raw bytes. */
+  Json: "application/json",
+
+  /** Plain text file contents. */
+  Text: "text/plain",
 }
