@@ -1,12 +1,18 @@
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;
 
-namespace Azure.AI.Projects.Beta {
-  interface Agents {}
-  @@clientLocation(Azure.AI.Projects.Agents.generateAgent, Agents);
+namespace Azure.AI.Projects.Beta.VoiceAgents {
+  interface Campaigns {}
+  @@clientLocation(TelephonyCampaigns.getOperation, Campaigns);
+  @@clientLocation(TelephonyCampaigns.create, Campaigns);
+  @@clientLocation(TelephonyCampaigns.get, Campaigns);
+  @@clientLocation(TelephonyCampaigns.list, Campaigns);
+  @@clientLocation(TelephonyCampaigns.cancel, Campaigns);
+  @@clientLocation(TelephonyCampaigns.delete, Campaigns);
+  @@clientLocation(TelephonyCampaigns.listValidationErrors, Campaigns);
 }
 
-namespace Azure.AI.Projects.Beta.VoiceAgents {
+namespace Azure.AI.Projects.VoiceAgents {
   interface Conversations {}
   @@clientLocation(
     AgentEndpointConversations.listAgentConversations,
@@ -64,7 +70,9 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
     AgentEndpointConversations.getAgentConversationAudioContent,
     Conversations
   );
+}
 
+namespace Azure.AI.Projects.Beta.VoiceAgents {
   interface LiveConversations {}
   @@clientLocation(
     AgentEndpointLiveConversations.listLiveAgentConversations,
@@ -102,7 +110,9 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
     AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
     LiveConversations
   );
+}
 
+namespace Azure.AI.Projects.VoiceAgents {
   interface Telephony {}
   @@clientLocation(AgentTelephony.createTelephonyBinding, Telephony);
   @@clientLocation(AgentTelephony.listTelephonyBindings, Telephony);
@@ -120,11 +130,4 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
   @@clientLocation(AgentTelephony.listTelephonyCallJobs, Telephony);
   @@clientLocation(AgentTelephony.deleteTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.cancelTelephonyCallJob, Telephony);
-  @@clientLocation(TelephonyCampaigns.getOperation, Telephony);
-  @@clientLocation(TelephonyCampaigns.create, Telephony);
-  @@clientLocation(TelephonyCampaigns.get, Telephony);
-  @@clientLocation(TelephonyCampaigns.list, Telephony);
-  @@clientLocation(TelephonyCampaigns.cancel, Telephony);
-  @@clientLocation(TelephonyCampaigns.delete, Telephony);
-  @@clientLocation(TelephonyCampaigns.listValidationErrors, Telephony);
 }
