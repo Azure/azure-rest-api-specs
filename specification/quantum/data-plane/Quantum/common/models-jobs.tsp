@@ -92,10 +92,12 @@ model JobDetails extends ItemDetails {
   sessionId?: string;
 
   /** The blob container SAS uri, the container is used to host job data. */
+  @removed(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   containerUri: string;
 
   /** The input blob URI, if specified, it will override the default input blob in the container. */
+  @removed(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputDataUri?: string;
 
@@ -124,12 +126,18 @@ model JobDetails extends ItemDetails {
   inputParams?: {};
 
   /** The output blob uri. When a job finishes successfully, results will be uploaded to this blob. */
+  @removed(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputDataUri?: string;
 
   /** The format of the output data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputDataFormat?: string;
+
+  /** The service-assigned version of this job's public artifact contract, distinct from the REST API version and input/output data formats. */
+  @added(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  artifactsSchemaVersion?: string;
 }
 
 /** Options for updating a job. */
