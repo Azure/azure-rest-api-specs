@@ -21,18 +21,24 @@
               "namespace": "weather",
               "kind": "mcp",
               "mcp": {
-                "url": "https://example.invalid/mcp",
+                "endpoint": {
+                  "url": "https://example.invalid/mcp"
+                },
                 "transport": "streamableHttp"
               },
-              "credentials": {
-                "type": "header"
+              "authentication": {
+                "headers": [
+                  {
+                    "name": "x-api-key"
+                  }
+                ]
               },
-              "required": true
+              "mode": "failClosed"
             }
           ],
           "provisioningState": "Succeeded",
-          "name": "Weather tools",
-          "type": "mcp",
+          "displayName": "Weather tools",
+          "toolServerType": "mcp",
           "versions": [
             "v1"
           ],
@@ -56,22 +62,25 @@
               "scope": "resource",
               "hooks": {
                 "preToolCall": {
-                  "endpoint": "https://hooks.example.com/pre-tool",
-                  "authorization": {
-                    "type": "anonymous"
+                  "endpoint": {
+                    "url": "https://hooks.example.com/pre-tool"
                   },
-                  "headers": {
-                    "X-Audit-Source": "gateway"
-                  }
+                  "authentication": {},
+                  "headers": [
+                    {
+                      "name": "X-Audit-Source",
+                      "value": "gateway"
+                    }
+                  ]
                 },
                 "postToolCall": {
-                  "endpoint": "https://hooks.example.com/post-tool",
-                  "authorization": {
-                    "type": "managedIdentity",
-                    "identity": {
-                      "type": "systemAssigned"
-                    },
-                    "audience": "https://hooks.example.com/"
+                  "endpoint": {
+                    "url": "https://hooks.example.com/post-tool"
+                  },
+                  "authentication": {
+                    "managedIdentity": {
+                      "resource": "https://hooks.example.com/"
+                    }
                   }
                 }
               }

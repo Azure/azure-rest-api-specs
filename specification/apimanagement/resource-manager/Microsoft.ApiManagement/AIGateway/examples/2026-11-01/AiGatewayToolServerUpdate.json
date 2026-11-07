@@ -14,32 +14,32 @@
             "namespace": "weather",
             "kind": "mcp",
             "mcp": {
-              "url": "https://example.invalid/mcp",
+              "endpoint": {
+                "url": "https://example.invalid/mcp"
+              },
               "transport": "streamableHttp"
             },
-            "credentials": {
-              "type": "header",
+            "authentication": {
               "headers": [
                 {
                   "name": "x-api-key",
-                  "values": [
-                    "fake-updated-example-key"
-                  ]
+                  "value": "fake-updated-example-key"
                 }
               ]
             },
-            "required": true
+            "mode": "failClosed"
           },
           {
             "id": "endpoint-2",
             "namespace": "forecast",
             "kind": "mcp",
             "mcp": {
-              "url": "https://example.invalid/forecast/mcp",
+              "endpoint": {
+                "url": "https://example.invalid/forecast/mcp"
+              },
               "transport": "streamableHttp"
             },
-            "credentials": {
-              "type": "oauth2",
+            "authentication": {
               "oauth2": {
                 "authorizationParameters": [
                   {
@@ -55,11 +55,11 @@
                 ]
               }
             },
-            "required": true
+            "mode": "failClosed"
           }
         ],
-        "name": "Updated weather tools",
-        "type": "mcp"
+        "displayName": "Updated weather tools",
+        "toolServerType": "mcp"
       }
     },
     "workspaceName": "default"
@@ -78,18 +78,24 @@
               "namespace": "weather",
               "kind": "mcp",
               "mcp": {
-                "url": "https://example.invalid/mcp",
+                "endpoint": {
+                  "url": "https://example.invalid/mcp"
+                },
                 "transport": "streamableHttp"
               },
-              "credentials": {
-                "type": "header"
+              "authentication": {
+                "headers": [
+                  {
+                    "name": "x-api-key"
+                  }
+                ]
               },
-              "required": true
+              "mode": "failClosed"
             }
           ],
           "provisioningState": "Succeeded",
-          "name": "Weather tools",
-          "type": "mcp",
+          "displayName": "Weather tools",
+          "toolServerType": "mcp",
           "versions": [
             "v1"
           ]

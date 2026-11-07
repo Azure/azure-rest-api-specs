@@ -14,35 +14,39 @@
             "namespace": "weather",
             "kind": "mcp",
             "mcp": {
-              "url": "https://example.invalid/mcp",
+              "endpoint": {
+                "url": "https://example.invalid/mcp"
+              },
               "transport": "streamableHttp"
             },
-            "credentials": {
-              "type": "header",
+            "authentication": {
               "headers": [
                 {
                   "name": "x-api-key",
-                  "values": [
-                    "fake-example-key"
-                  ]
+                  "value": "fake-example-key"
                 }
               ]
             },
-            "required": true
+            "mode": "failClosed"
           },
           {
             "id": "endpoint-2",
             "namespace": "forecast",
             "kind": "mcp",
             "mcp": {
-              "url": "https://example.invalid/forecast/mcp",
+              "endpoint": {
+                "url": "https://example.invalid/forecast/mcp"
+              },
               "transport": "streamableHttp"
             },
-            "credentials": {
-              "type": "oauth2",
+            "authentication": {
               "oauth2": {
-                "authorizationUrl": "https://example.invalid/oauth/authorize",
-                "tokenUrl": "https://example.invalid/oauth/token",
+                "authorizationEndpoint": {
+                  "url": "https://example.invalid/oauth/authorize"
+                },
+                "tokenEndpoint": {
+                  "url": "https://example.invalid/oauth/token"
+                },
                 "clientId": "example-client",
                 "grantType": "authorizationCode",
                 "scopes": [
@@ -62,11 +66,11 @@
                 ]
               }
             },
-            "required": true
+            "mode": "failClosed"
           }
         ],
-        "name": "Weather tools",
-        "type": "mcp"
+        "displayName": "Weather tools",
+        "toolServerType": "mcp"
       }
     }
   },
@@ -84,18 +88,24 @@
               "namespace": "weather",
               "kind": "mcp",
               "mcp": {
-                "url": "https://example.invalid/mcp",
+                "endpoint": {
+                  "url": "https://example.invalid/mcp"
+                },
                 "transport": "streamableHttp"
               },
-              "credentials": {
-                "type": "header"
+              "authentication": {
+                "headers": [
+                  {
+                    "name": "x-api-key"
+                  }
+                ]
               },
-              "required": true
+              "mode": "failClosed"
             }
           ],
           "provisioningState": "Succeeded",
-          "name": "Weather tools",
-          "type": "mcp",
+          "displayName": "Weather tools",
+          "toolServerType": "mcp",
           "versions": [
             "v1"
           ]
@@ -115,18 +125,24 @@
               "namespace": "weather",
               "kind": "mcp",
               "mcp": {
-                "url": "https://example.invalid/mcp",
+                "endpoint": {
+                  "url": "https://example.invalid/mcp"
+                },
                 "transport": "streamableHttp"
               },
-              "credentials": {
-                "type": "header"
+              "authentication": {
+                "headers": [
+                  {
+                    "name": "x-api-key"
+                  }
+                ]
               },
-              "required": true
+              "mode": "failClosed"
             }
           ],
           "provisioningState": "Succeeded",
-          "name": "Weather tools",
-          "type": "mcp",
+          "displayName": "Weather tools",
+          "toolServerType": "mcp",
           "versions": [
             "v1"
           ]

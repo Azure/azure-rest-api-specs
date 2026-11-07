@@ -8,15 +8,20 @@
     "telemetryExporterName": "otlp-exporter",
     "resource": {
       "properties": {
-        "kind": "OpenTelemetry",
+        "telemetryExporterType": "OpenTelemetry",
         "payloadCapture": false,
         "openTelemetry": {
-          "tracesEndpoint": "https://collector.example.com/v1/traces",
-          "credentials": {
-            "headers": {
-              "Authorization": "Bearer example-token"
-            }
+          "tracesEndpoint": {
+            "url": "https://collector.example.com/v1/traces"
           }
+        },
+        "authentication": {
+          "headers": [
+            {
+              "name": "Authorization",
+              "value": "******"
+            }
+          ]
         }
       }
     }
@@ -29,10 +34,19 @@
         "type": "Microsoft.ApiManagement/aigateways/workspaces/telemetryExporters",
         "eTag": "W/\"1\"",
         "properties": {
-          "kind": "OpenTelemetry",
+          "telemetryExporterType": "OpenTelemetry",
           "payloadCapture": false,
           "openTelemetry": {
-            "tracesEndpoint": "https://collector.example.com/v1/traces"
+            "tracesEndpoint": {
+              "url": "https://collector.example.com/v1/traces"
+            }
+          },
+          "authentication": {
+            "headers": [
+              {
+                "name": "Authorization"
+              }
+            ]
           }
         }
       }
@@ -44,10 +58,19 @@
         "type": "Microsoft.ApiManagement/aigateways/workspaces/telemetryExporters",
         "eTag": "W/\"1\"",
         "properties": {
-          "kind": "OpenTelemetry",
+          "telemetryExporterType": "OpenTelemetry",
           "payloadCapture": false,
           "openTelemetry": {
-            "tracesEndpoint": "https://collector.example.com/v1/traces"
+            "tracesEndpoint": {
+              "url": "https://collector.example.com/v1/traces"
+            }
+          },
+          "authentication": {
+            "headers": [
+              {
+                "name": "Authorization"
+              }
+            ]
           }
         }
       }

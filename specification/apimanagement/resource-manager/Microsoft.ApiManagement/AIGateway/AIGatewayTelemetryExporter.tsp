@@ -31,42 +31,52 @@ model AiGatewayTelemetryManagedIdentity {
   clientId?: string;
 }
 
-/** Authentication settings for an OpenTelemetry exporter. */
+/** Outbound authentication settings for an OpenTelemetry exporter. */
 @added(Versions.v2026_11_01)
-model AiGatewayTelemetryCredentials {
-  /** Secret HTTP headers sent with export requests. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for secret telemetry headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
-  @secret
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  headers?: Record<string>;
-
+model AiGatewayTelemetryAuthentication {
   /** Managed identity authentication for export requests. */
   managedIdentity?: AiGatewayTelemetryManagedIdentity;
+
+  /** Secret HTTP headers sent with export requests. */
+  @identifiers(#[])
+  headers?: AiGatewaySecretHeader[];
 }
 
-/** OpenTelemetry export destinations and authentication. */
+/** Outbound authentication settings to update on an OpenTelemetry exporter. */
+@added(Versions.v2026_11_01)
+model AiGatewayTelemetryAuthenticationUpdate {
+  /** Managed identity authentication for export requests. */
+  managedIdentity?: AiGatewayTelemetryManagedIdentity;
+
+  /** Secret HTTP headers sent with export requests. */
+  @identifiers(#[])
+  headers?: AiGatewaySecretHeaderUpdate[];
+}
+
+/** OpenTelemetry export signal destinations. */
 @added(Versions.v2026_11_01)
 model AiGatewayOpenTelemetryConfiguration {
   /** Full OTLP metrics endpoint URL, used without appending a signal path. */
-  metricsEndpoint?: url;
+  metricsEndpoint?: AiGatewayDestinationEndpoint;
 
   /** Full OTLP logs endpoint URL, used without appending a signal path. */
-  logsEndpoint?: url;
+  logsEndpoint?: AiGatewayDestinationEndpoint;
 
   /** Full OTLP traces endpoint URL, used without appending a signal path. */
-  tracesEndpoint?: url;
+  tracesEndpoint?: AiGatewayDestinationEndpoint;
+}
 
-  /** Legacy secret HTTP headers, mutually exclusive with credentials. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for secret telemetry headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
-  @secret
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  headers?: Record<string>;
+/** OpenTelemetry export signal destinations to update. */
+@added(Versions.v2026_11_01)
+model AiGatewayOpenTelemetryConfigurationUpdate {
+  /** Full OTLP metrics endpoint URL, used without appending a signal path. */
+  metricsEndpoint?: AiGatewayDestinationEndpointUpdate;
 
-  /** Legacy managed identity settings, mutually exclusive with credentials. */
-  managedIdentity?: AiGatewayTelemetryManagedIdentity;
+  /** Full OTLP logs endpoint URL, used without appending a signal path. */
+  logsEndpoint?: AiGatewayDestinationEndpointUpdate;
 
-  /** Authentication settings, mutually exclusive with top-level headers and managedIdentity. */
-  credentials?: AiGatewayTelemetryCredentials;
+  /** Full OTLP traces endpoint URL, used without appending a signal path. */
+  tracesEndpoint?: AiGatewayDestinationEndpointUpdate;
 }
 
 /** Application Insights export destination. */
@@ -157,18 +167,21 @@ model AiGatewayTelemetryConfigurationUpdate {
 /** Properties of an AI Gateway telemetry exporter. */
 @added(Versions.v2026_11_01)
 model AiGatewayTelemetryExporterProperties {
-  /** Exporter kind, which cannot change after creation. */
+  /** Exporter type, which cannot change after creation. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  kind: AiGatewayTelemetryExporterKind;
+  telemetryExporterType: AiGatewayTelemetryExporterKind;
 
   /** Capture prompts, completions, and tool input/output; no built-in PII redaction is applied. */
   payloadCapture?: boolean = false;
 
-  /** Configuration required for the ApplicationInsights exporter kind. */
+  /** Configuration required for the ApplicationInsights exporter type. */
   applicationInsights?: AiGatewayApplicationInsightsConfiguration;
 
-  /** Configuration required for the OpenTelemetry exporter kind. At least one signal endpoint is required. */
+  /** Configuration required for the OpenTelemetry exporter type. At least one signal endpoint is required. */
   openTelemetry?: AiGatewayOpenTelemetryConfiguration;
+
+  /** Outbound authentication for OpenTelemetry export requests. */
+  authentication?: AiGatewayTelemetryAuthentication;
 
   /** Optional observed-claim mappings, supported on native AI Gateway OpenTelemetry exporters. */
   telemetry?: AiGatewayTelemetryConfiguration;
@@ -188,7 +201,10 @@ model AiGatewayTelemetryExporterUpdateProperties {
   applicationInsights?: AiGatewayApplicationInsightsConfiguration;
 
   /** OpenTelemetry configuration. */
-  openTelemetry?: AiGatewayOpenTelemetryConfiguration;
+  openTelemetry?: AiGatewayOpenTelemetryConfigurationUpdate;
+
+  /** Outbound authentication for OpenTelemetry export requests. */
+  authentication?: AiGatewayTelemetryAuthenticationUpdate;
 
   /** Observed-claim mappings to update. */
   telemetry?: AiGatewayTelemetryConfigurationUpdate;

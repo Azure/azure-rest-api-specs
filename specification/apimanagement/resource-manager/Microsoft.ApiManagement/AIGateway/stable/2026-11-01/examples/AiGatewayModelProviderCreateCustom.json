@@ -8,18 +8,21 @@
     "modelProviderName": "custom-provider",
     "resource": {
       "properties": {
-        "kind": "Custom",
+        "modelProviderType": "Custom",
+        "displayName": "Custom provider",
         "custom": {
-          "endpoint": "https://api.contoso.com/v1",
-          "authentication": {
-            "kind": "ApiKey",
-            "apiKey": {
-              "headerName": "api-key",
-              "value": "{api-key}"
-            }
+          "endpoint": {
+            "url": "https://api.contoso.com/v1"
           }
         },
-        "name": "Custom provider"
+        "authentication": {
+          "headers": [
+            {
+              "name": "api-key",
+              "value": "{api-key}"
+            }
+          ]
+        }
       }
     }
   },
@@ -31,18 +34,21 @@
         "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders",
         "eTag": "W/\"1\"",
         "properties": {
-          "kind": "Custom",
+          "modelProviderType": "Custom",
+          "displayName": "Custom provider",
           "custom": {
-            "endpoint": "https://api.contoso.com/v1",
-            "authentication": {
-              "kind": "ApiKey",
-              "apiKey": {
-                "headerName": "api-key"
-              }
+            "endpoint": {
+              "url": "https://api.contoso.com/v1"
             }
           },
-          "provisioningState": "Succeeded",
-          "name": "Custom provider"
+          "authentication": {
+            "headers": [
+              {
+                "name": "api-key"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
         }
       }
     },
@@ -53,18 +59,21 @@
         "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders",
         "eTag": "W/\"1\"",
         "properties": {
-          "kind": "Custom",
+          "modelProviderType": "Custom",
+          "displayName": "Custom provider",
           "custom": {
-            "endpoint": "https://api.contoso.com/v1",
-            "authentication": {
-              "kind": "ApiKey",
-              "apiKey": {
-                "headerName": "api-key"
-              }
+            "endpoint": {
+              "url": "https://api.contoso.com/v1"
             }
           },
-          "provisioningState": "Succeeded",
-          "name": "Custom provider"
+          "authentication": {
+            "headers": [
+              {
+                "name": "api-key"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
         }
       }
     }

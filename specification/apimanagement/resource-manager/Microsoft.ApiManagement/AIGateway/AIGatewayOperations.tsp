@@ -122,6 +122,16 @@ interface AiGatewayResources {
   >;
   listByResourceGroup is ArmResourceListByParent<AiGatewayResource>;
   listBySubscription is ArmListBySubscription<AiGatewayResource>;
+
+  /** Lists primary and secondary key values for the AI Gateway. */
+  @added(Versions.v2026_11_01)
+  @post
+  @action("listSecrets")
+  listSecrets is ArmResourceActionSync<
+    AiGatewayResource,
+    void,
+    ArmResponse<AiGatewayApiKeyValues>
+  >;
 }
 
 @added(Versions.v2026_11_01)
@@ -164,13 +174,13 @@ interface AiGatewayModelProviderResources {
   >;
   listByWorkspace is ArmResourceListByParent<AiGatewayModelProviderResource>;
 
-  /** Returns the stored model-provider credential value, including the secret. */
+  /** Returns the stored model-provider authentication configuration, including secret values. */
   @post
-  @action("listCredentials")
-  listCredentials is ArmResourceActionSync<
+  @action("listSecrets")
+  listSecrets is ArmResourceActionSync<
     AiGatewayModelProviderResource,
     void,
-    ArmResponse<AiGatewayCredentialValue>
+    ArmResponse<AiGatewayModelProviderSecrets>
   >;
 }
 
