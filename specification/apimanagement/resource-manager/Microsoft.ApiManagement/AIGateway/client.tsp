@@ -25,13 +25,3 @@ using Azure.ClientGenerator.Core;
   "baseUri",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.AiGatewayToolServerOauth2Authentication.authorizationUrl,
-  "authorizationUri",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.AiGatewayToolServerOauth2Authentication.tokenUrl,
-  "tokenUri",
-  "csharp"
-);

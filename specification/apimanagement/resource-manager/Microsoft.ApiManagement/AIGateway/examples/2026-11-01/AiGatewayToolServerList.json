@@ -22,18 +22,24 @@
                   "namespace": "weather",
                   "kind": "mcp",
                   "mcp": {
-                    "url": "https://example.invalid/mcp",
+                    "endpoint": {
+                      "url": "https://example.invalid/mcp"
+                    },
                     "transport": "streamableHttp"
                   },
-                  "credentials": {
-                    "type": "header"
+                  "authentication": {
+                    "headers": [
+                      {
+                        "name": "x-api-key"
+                      }
+                    ]
                   },
-                  "required": true
+                  "mode": "failClosed"
                 }
               ],
               "provisioningState": "Succeeded",
-              "name": "Weather tools",
-              "type": "mcp",
+              "displayName": "Weather tools",
+              "toolServerType": "mcp",
               "versions": [
                 "v1"
               ],

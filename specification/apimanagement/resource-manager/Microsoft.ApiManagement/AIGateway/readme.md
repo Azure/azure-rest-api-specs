@@ -45,45 +45,9 @@ input-file:
 
 ```yaml $(tag) == 'package-2026-11-01'
 suppressions:
-  - code: ARM Section 2.6
-    from: openapi.json
-    where:
-      - $.definitions.AiGatewayModelProviderProperties.properties.kind
-      - $.definitions.AiGatewayTelemetryExporterProperties.properties.kind
-    reason: Existing model
-  - code: ArmResourcePropertiesBag
-    from: openapi.json
-    where:
-      - $.definitions.AiGatewayModelProviderResource
-      - $.definitions.AiGatewayModelResource
-      - $.definitions.AiGatewayToolServerResource
-      - $.definitions.AiGatewayWorkspaceResource
-    reason: The current AI Gateway service contract uses name as the display-name wire property and type as the tool-server-kind wire property inside the resource properties bag. Renaming these fields would diverge from the implemented contract.
-  - code: AvoidAdditionalProperties
-    from: openapi.json
-    where:
-      - $.definitions.AiGatewayCostLimitOverride.properties.claims
-      - $.definitions.AiGatewayCostLimitOverrideUpdate.properties.claims
-    reason: Existing functionality with heavy usage relies on the current Dictionary<string, string> contract for arbitrary authenticated token claim names and expected values. Changing claims from a JSON object to an array would break existing customer integrations. Preserve the current contract; exception approval is required.
-  - code: AvoidAdditionalProperties
-    from: openapi.json
-    where:
-      - $.definitions.AiGatewayAgentHook.properties.headers
-      - $.definitions.AiGatewayAgentHookUpdate.properties.headers
-      - $.definitions.AiGatewayPolicy.properties.headers
-      - $.definitions.AiGatewayPolicyUpdate.properties.headers
-    reason: Existing functionality with heavy usage relies on the current Dictionary<string, string> contract for literal non-secret HTTP headers at policy and per-hook scope. Changing headers from a JSON object to an array would break existing customer integrations. Preserve the current contract and header inheritance behavior; exception approval is required.
-  - code: AvoidAdditionalProperties
-    from: openapi.json
-    where:
-      - $.definitions.AiGatewayTelemetryCredentials.properties.headers
-      - $.definitions.AiGatewayOpenTelemetryConfiguration.properties.headers
-    reason: Existing functionality with heavy usage relies on the current IDictionary<string, string> contract for secret HTTP headers in nested and legacy OpenTelemetry authentication settings. Changing headers from a JSON object to an array would break existing customer integrations. Preserve the current contract and secret annotations; exception approval is required.
   - code: EnumInsteadOfBoolean
     from: openapi.json
     where:
-      - $.definitions.AiGatewayToolServerEndpoint.properties.required
-      - $.definitions.AiGatewayToolServerEndpointUpdate.properties.required
       - $.definitions.AiGatewayToolServerProperties.properties.subscriptionRequired
       - $.definitions.AiGatewayToolServerUpdateProperties.properties.subscriptionRequired
       - $.definitions.AiGatewayTelemetryExporterProperties.properties.payloadCapture

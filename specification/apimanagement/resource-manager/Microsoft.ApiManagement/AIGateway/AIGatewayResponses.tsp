@@ -91,12 +91,35 @@ model AiGatewayEndpoint {
   api?: string;
 }
 
-/** Credential returned for a model provider. */
+/** GitHub App credentials returned by the model-provider secret retrieval action. */
 @added(Versions.v2026_11_01)
-model AiGatewayCredentialValue {
-  /** Stored credential value. */
+model AiGatewayModelProviderSecretGitHubAppAuthentication {
+  ...OmitProperties<AiGatewayGitHubAppAuthentication, "privateKey">;
+
+  /** GitHub App private key. */
   @secret
-  value?: string;
+  privateKey?: string;
+}
+
+/** Authentication settings returned by the model-provider secret retrieval action. */
+@added(Versions.v2026_11_01)
+model AiGatewayModelProviderSecretAuthentication {
+  /** GitHub App credentials when modelProviderType is GitHub. */
+  githubApp?: AiGatewayModelProviderSecretGitHubAppAuthentication;
+
+  /** Managed identity configuration when modelProviderType is Foundry. */
+  managedIdentity?: AiGatewayManagedIdentityAuthentication;
+
+  /** Secret HTTP headers injected when calling the model provider. */
+  @identifiers(#[])
+  headers?: AiGatewaySecretHeaderValue[];
+}
+
+/** Secret values configured on a model provider. */
+@added(Versions.v2026_11_01)
+model AiGatewayModelProviderSecrets {
+  /** Outbound authentication configuration including secret values. */
+  authentication?: AiGatewayModelProviderSecretAuthentication;
 }
 
 /** Secret values configured on tool server endpoints. */
@@ -105,16 +128,6 @@ model AiGatewayToolServerSecrets {
   /** Endpoint secret values. */
   @identifiers(#["id"])
   endpoints: AiGatewayToolServerSecret[];
-}
-
-/** An endpoint header returned by the secret retrieval action. */
-@added(Versions.v2026_11_01)
-model AiGatewayToolServerSecretHeader {
-  ...OmitProperties<AiGatewayToolServerHeader, "values">;
-
-  /** Secret values for the HTTP header. */
-  @secret
-  values: string[];
 }
 
 /** OAuth settings returned by the secret retrieval action. */
@@ -127,14 +140,14 @@ model AiGatewayToolServerSecretOauth2Authentication {
   clientSecret?: string;
 }
 
-/** Endpoint credentials returned by the secret retrieval action. */
+/** Endpoint authentication returned by the secret retrieval action. */
 @added(Versions.v2026_11_01)
-model AiGatewayToolServerSecretCredentials {
-  ...OmitProperties<AiGatewayToolServerCredentials, "headers" | "oauth2">;
+model AiGatewayToolServerSecretAuthentication {
+  ...OmitProperties<AiGatewayToolServerAuthentication, "headers" | "oauth2">;
 
   /** Static headers injected when calling the endpoint. */
-  @identifiers(#["name"])
-  headers?: AiGatewayToolServerSecretHeader[];
+  @identifiers(#[])
+  headers?: AiGatewaySecretHeaderValue[];
 
   /** OAuth 2.0 configuration. */
   oauth2?: AiGatewayToolServerSecretOauth2Authentication;
@@ -145,7 +158,7 @@ model AiGatewayToolServerSecretCredentials {
 model AiGatewayToolServerSecretOpenApiSpecSource {
   ...OmitProperties<AiGatewayOpenApiSpecSource, "contentBase64">;
 
-  /** Base64-encoded OpenAPI document. Required when kind is Inline. */
+  /** Base64-encoded OpenAPI document. Required when type is inline. */
   @secret
   contentBase64?: bytes;
 }
@@ -164,7 +177,7 @@ model AiGatewayToolServerSecret {
   id: string;
 
   /** Endpoint authentication including secret values. */
-  credentials?: AiGatewayToolServerSecretCredentials;
+  authentication?: AiGatewayToolServerSecretAuthentication;
 
   /** OpenAPI configuration including inline content. */
   openApi?: AiGatewayToolServerSecretOpenApiConfiguration;

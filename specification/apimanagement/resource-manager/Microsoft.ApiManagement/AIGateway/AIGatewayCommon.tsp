@@ -36,75 +36,95 @@ union AiGatewayModelProviderKind {
 
   /** Custom model provider. */
   Custom: "Custom",
+
+  /** GitHub model provider. */
+  GitHub: "GitHub",
 }
 
-/** Authentication type used by an AI model provider. */
+/** An outbound service destination URL. */
 @added(Versions.v2026_11_01)
-union AiGatewayModelProviderAuthenticationKind {
-  string,
-
-  /** Authenticate using a managed identity. */
-  ManagedIdentity: "ManagedIdentity",
-
-  /** Authenticate using an API key. */
-  ApiKey: "ApiKey",
+model AiGatewayDestinationEndpoint {
+  /** Destination HTTPS or HTTP URL. */
+  url: url;
 }
 
-/** Authentication type used by a tool server endpoint. */
+/** An outbound service destination URL to update. */
 @added(Versions.v2026_11_01)
-union AiGatewayToolServerCredentialKind {
-  string,
-
-  /** No credentials. */
-  None: "None",
-
-  /** Authenticate using an API key. */
-  ApiKey: "ApiKey",
+model AiGatewayDestinationEndpointUpdate {
+  /** Destination HTTPS or HTTP URL. */
+  url?: url;
 }
 
-/** The type of a tool server endpoint. */
+/** A name/value pair entry. */
 @added(Versions.v2026_11_01)
-union AiGatewayToolServerEndpointKind {
-  string,
+model AiGatewayNameValuePair {
+  /** Entry name. */
+  name: string;
 
-  /** Connect to an MCP server URL. */
-  McpUrl: "McpUrl",
-
-  /** Create an MCP endpoint from an OpenAPI document. */
-  McpFromOpenApi: "McpFromOpenApi",
+  /** Entry value. */
+  value: string;
 }
 
-/** Transport used to connect to an MCP server. */
+/** A name/value pair entry to update. */
 @added(Versions.v2026_11_01)
-union AiGatewayMcpTransport {
-  string,
+model AiGatewayNameValuePairUpdate
+  is OptionalProperties<AiGatewayNameValuePair>;
 
-  /** Streamable HTTP transport. */
-  StreamableHttp: "StreamableHttp",
+/** A secret HTTP header injected into an outbound request. */
+@added(Versions.v2026_11_01)
+model AiGatewaySecretHeader {
+  /** HTTP header name. */
+  name: string;
+
+  /** Secret HTTP header value. Omitted from ordinary read responses. */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  value?: string;
 }
 
-/** Source type for an OpenAPI document. */
+/** A secret HTTP header to update. */
 @added(Versions.v2026_11_01)
-union AiGatewayOpenApiSpecSourceKind {
-  string,
+model AiGatewaySecretHeaderUpdate {
+  /** HTTP header name. */
+  name?: string;
 
-  /** The OpenAPI document is supplied inline. */
-  Inline: "Inline",
-
-  /** The OpenAPI document is loaded from a URL. */
-  Url: "Url",
+  /** Secret HTTP header value. */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  value?: string;
 }
 
-/** API key slot to regenerate. */
+/** A secret HTTP header returned by a secret-retrieval action. */
 @added(Versions.v2026_11_01)
-union AiGatewayApiKeyTarget {
+model AiGatewaySecretHeaderValue {
+  /** HTTP header name. */
+  name: string;
+
+  /** Secret HTTP header value. */
+  @secret
+  value?: string;
+}
+
+/** Managed identity settings for an outbound connection. */
+@added(Versions.v2026_11_01)
+model AiGatewayManagedIdentityAuthentication {
+  /** Target Entra resource or audience URI requested for managed identity authentication. */
+  resource?: string;
+
+  /** Client ID of a user-assigned managed identity; omit for system-assigned identity. */
+  clientId?: string;
+}
+
+/** Resilience failure mode for an outbound endpoint or hook. */
+@added(Versions.v2026_11_01)
+union AiGatewayFailureMode {
   string,
 
-  /** The primary key. */
-  Primary: "Primary",
+  /** Continue processing when the endpoint or hook fails. */
+  FailOpen: "failOpen",
 
-  /** The secondary key. */
-  Secondary: "Secondary",
+  /** Fail the request when the endpoint or hook fails. */
+  FailClosed: "failClosed",
 }
 
 alias AiGatewayIfMatchOptional = {

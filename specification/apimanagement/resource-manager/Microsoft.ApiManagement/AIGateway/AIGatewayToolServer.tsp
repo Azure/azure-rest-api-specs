@@ -38,24 +38,6 @@ union AiGatewayToolServerEndpointSourceKind {
   OpenApi: "openApi",
 }
 
-/** Endpoint authentication type. */
-@added(Versions.v2026_11_01)
-union AiGatewayToolServerAuthenticationType {
-  string,
-
-  /** No authentication. */
-  None: "none",
-
-  /** Static HTTP header authentication. */
-  Header: "header",
-
-  /** OAuth 2.0 authentication. */
-  OAuth2: "oauth2",
-
-  /** Managed identity authentication. */
-  ManagedIdentity: "managedIdentity",
-}
-
 /** OAuth 2.0 grant type. */
 @added(Versions.v2026_11_01)
 union AiGatewayToolServerOauth2GrantType {
@@ -105,7 +87,7 @@ union AiGatewayToolServerAccessState {
 @added(Versions.v2026_11_01)
 model AiGatewayToolServerManagedIdentityAuthentication {
   /** Token audience for managed identity authentication. */
-  resource: string;
+  resource?: string;
 
   /** Client ID of a user-assigned managed identity. */
   clientId?: string;
@@ -128,10 +110,10 @@ model AiGatewayToolServerOauth2Authentication {
   issuer?: url;
 
   /** OAuth authorization endpoint. */
-  authorizationUrl?: url;
+  authorizationEndpoint?: AiGatewayDestinationEndpoint;
 
   /** OAuth token endpoint. */
-  tokenUrl?: url;
+  tokenEndpoint?: AiGatewayDestinationEndpoint;
 
   /** OAuth client identifier. */
   clientId?: string;
@@ -168,27 +150,12 @@ model AiGatewayToolServerOauth2Authentication {
   statusUpdatedUtc?: utcDateTime;
 }
 
-/** An HTTP header injected when calling a tool server endpoint. */
+/** Outbound authentication for a tool server endpoint. */
 @added(Versions.v2026_11_01)
-model AiGatewayToolServerHeader {
-  /** HTTP header name. */
-  name: string;
-
-  /** Secret values for the HTTP header. */
-  @secret
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  values: string[];
-}
-
-/** Credentials for a tool server endpoint. */
-@added(Versions.v2026_11_01)
-model AiGatewayToolServerCredentials {
-  /** Authentication type. */
-  type: AiGatewayToolServerAuthenticationType;
-
+model AiGatewayToolServerAuthentication {
   /** Static headers injected when calling the endpoint. */
-  @identifiers(#["name"])
-  headers?: AiGatewayToolServerHeader[];
+  @identifiers(#[])
+  headers?: AiGatewaySecretHeader[];
 
   /** OAuth 2.0 configuration. */
   oauth2?: AiGatewayToolServerOauth2Authentication;
@@ -197,11 +164,11 @@ model AiGatewayToolServerCredentials {
   managedIdentity?: AiGatewayToolServerManagedIdentityAuthentication;
 }
 
-/** MCP URL endpoint configuration. */
+/** MCP endpoint configuration. */
 @added(Versions.v2026_11_01)
 model AiGatewayMcpUrlConfiguration {
   /** Backend MCP server endpoint. */
-  url: url;
+  endpoint: AiGatewayDestinationEndpoint;
 
   /** MCP transport. */
   transport?: AiGatewayToolServerMcpTransport;
@@ -213,12 +180,12 @@ model AiGatewayOpenApiSpecSource {
   /** Source type. */
   type: AiGatewayToolServerOpenApiSourceType;
 
-  /** Base64-encoded OpenAPI document. Required when kind is Inline. */
+  /** Base64-encoded OpenAPI document. Required when type is inline. */
   @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   contentBase64?: bytes;
 
-  /** URL of the OpenAPI document. Required when kind is Url. */
+  /** URL of the OpenAPI document. Required when type is url. */
   url?: url;
 }
 
@@ -244,28 +211,25 @@ model AiGatewayToolServerEndpoint {
   /** Backend MCP configuration. Required when kind is mcp. */
   mcp?: AiGatewayMcpUrlConfiguration;
 
-  /** OpenAPI configuration. Required when kind is McpFromOpenApi. */
+  /** OpenAPI configuration. Required when kind is openApi. */
   openApi?: AiGatewayOpenApiConfiguration;
 
-  /** Backend credentials. */
-  credentials?: AiGatewayToolServerCredentials;
+  /** Backend authentication configuration. */
+  authentication?: AiGatewayToolServerAuthentication;
 
   /** Upstream tool names or glob patterns to expose. */
   tools?: string[];
 
-  /** Whether endpoint failure fails the whole federation. Defaults to false. */
-  required?: boolean = false;
+  /** Failure mode when the endpoint fails. Defaults to failOpen. */
+  mode?: AiGatewayFailureMode = AiGatewayFailureMode.FailOpen;
 }
 
-/** Tool server credentials to update. */
+/** Tool server authentication settings to update. */
 @added(Versions.v2026_11_01)
-model AiGatewayToolServerCredentialsUpdate {
-  /** Authentication type. */
-  type?: AiGatewayToolServerAuthenticationType;
-
+model AiGatewayToolServerAuthenticationUpdate {
   /** Static headers injected when calling the endpoint. */
-  @identifiers(#["name"])
-  headers?: AiGatewayToolServerHeader[];
+  @identifiers(#[])
+  headers?: AiGatewaySecretHeaderUpdate[];
 
   /** OAuth 2.0 configuration. */
   oauth2?: AiGatewayToolServerOauth2Authentication;
@@ -274,11 +238,11 @@ model AiGatewayToolServerCredentialsUpdate {
   managedIdentity?: AiGatewayToolServerManagedIdentityAuthentication;
 }
 
-/** MCP URL endpoint settings to update. */
+/** MCP endpoint settings to update. */
 @added(Versions.v2026_11_01)
 model AiGatewayMcpUrlConfigurationUpdate {
   /** Backend MCP server endpoint. */
-  url?: url;
+  endpoint?: AiGatewayDestinationEndpointUpdate;
 
   /** MCP transport. */
   transport?: AiGatewayToolServerMcpTransport;
@@ -324,21 +288,20 @@ model AiGatewayToolServerEndpointUpdate {
   /** OpenAPI configuration. */
   openApi?: AiGatewayOpenApiConfigurationUpdate;
 
-  /** Backend credentials. */
-  credentials?: AiGatewayToolServerCredentialsUpdate;
+  /** Backend authentication configuration. */
+  authentication?: AiGatewayToolServerAuthenticationUpdate;
 
   /** Upstream tool names or glob patterns to expose. */
   tools?: string[];
 
-  /** Whether endpoint failure fails the whole federation. */
-  required?: boolean;
+  /** Failure mode when the endpoint fails. */
+  mode?: AiGatewayFailureMode;
 }
 
 /** Properties for updating an AI Gateway tool server. */
 @added(Versions.v2026_11_01)
 model AiGatewayToolServerUpdateProperties {
   /** Display name of the tool server. */
-  @encodedName("application/json", "name")
   displayName?: string;
 
   /** Description of the tool server. */
@@ -348,7 +311,6 @@ model AiGatewayToolServerUpdateProperties {
   accessState?: AiGatewayToolServerAccessState;
 
   /** Tool server type. */
-  @encodedName("application/json", "type")
   toolServerType?: AiGatewayToolServerType;
 
   /** Runtime API versions exposed by this tool server. */
@@ -358,7 +320,7 @@ model AiGatewayToolServerUpdateProperties {
   allowList?: string[];
 
   /** Tool names or patterns explicitly blocked. */
-  blocked?: string[];
+  blockList?: string[];
 
   /** Endpoint configurations exposed by this tool server. */
   @identifiers(#[])
@@ -386,7 +348,6 @@ model AiGatewayToolServerUpdateParameters {
 @added(Versions.v2026_11_01)
 model AiGatewayToolServerProperties {
   /** Display name of the tool server. */
-  @encodedName("application/json", "name")
   displayName?: string;
 
   /** Description of the tool server. */
@@ -396,7 +357,6 @@ model AiGatewayToolServerProperties {
   accessState?: AiGatewayToolServerAccessState;
 
   /** Tool server type. */
-  @encodedName("application/json", "type")
   toolServerType: AiGatewayToolServerType;
 
   /** Runtime API versions exposed by this tool server. */
@@ -406,7 +366,7 @@ model AiGatewayToolServerProperties {
   allowList?: string[];
 
   /** Tool names or patterns explicitly blocked. */
-  blocked?: string[];
+  blockList?: string[];
 
   /** Endpoint configurations exposed by this tool server. */
   @identifiers(#["id"])

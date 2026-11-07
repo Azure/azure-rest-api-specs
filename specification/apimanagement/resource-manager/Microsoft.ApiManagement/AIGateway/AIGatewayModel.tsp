@@ -106,7 +106,7 @@ union AiGatewayPolicyType {
   AgentHooks: "agentHooks",
 }
 
-/** Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year. */
+/** Counter period. Token limits support minute/hour/day; request rate limits support minute/hour/day or whole-second ISO 8601 durations (e.g., PT37S); cost limits support hour/day/week/month/year. */
 @added(Versions.v2026_11_01)
 union AiGatewayPolicyPeriod {
   string,
@@ -157,9 +157,9 @@ union AiGatewayCounterDimension {
 /** An ordered cost-budget override; exactly one selector must be specified. */
 @added(Versions.v2026_11_01)
 model AiGatewayCostLimitOverride {
-  /** Authenticated token claims that must all match; dictionary keys are case-sensitive claim names. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for token claims. Changing its JSON object shape would break existing customer integrations; exception approval is required."
-  claims?: Record<string>;
+  /** Authenticated token claims that must all match; claim names are case-sensitive. */
+  @identifiers(#["name"])
+  claims?: AiGatewayNameValuePair[];
 
   /** Azure resource identifier of the API key selecting this override. */
   apiKeyResourceId?: Azure.Core.armResourceIdentifier<[
@@ -178,103 +178,83 @@ model AiGatewayCostLimitOverride {
 
 /** An ordered cost-budget override to update. */
 @added(Versions.v2026_11_01)
-model AiGatewayCostLimitOverrideUpdate
-  is OptionalProperties<AiGatewayCostLimitOverride>;
+model AiGatewayCostLimitOverrideUpdate {
+  /** Authenticated token claims that must all match; claim names are case-sensitive. */
+  @identifiers(#[])
+  claims?: AiGatewayNameValuePairUpdate[];
 
-/** Authorization kind for an agent hook. */
-@added(Versions.v2026_11_01)
-union AiGatewayAgentHookAuthorizationType {
-  string,
+  /** Azure resource identifier of the API key selecting this override. */
+  apiKeyResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ApiManagement/aigateways/apiKeys";
+    },
+    {
+      type: "Microsoft.ApiManagement/service/apiKeys";
+    }
+  ]>;
 
-  /** Call without authentication. */
-  Anonymous: "anonymous",
-
-  /** Authenticate using a managed identity. */
-  ManagedIdentity: "managedIdentity",
+  /** Override budget in US dollars. */
+  @minValueExclusive(0)
+  amount?: decimal128;
 }
 
-/** Managed identity kind selected for an agent hook. */
+/** Outbound authentication settings for an external agent hook. */
 @added(Versions.v2026_11_01)
-union AiGatewayAgentHookIdentityType {
-  string,
+model AiGatewayAgentHookAuthentication {
+  /** Managed identity configuration for the hook endpoint. */
+  managedIdentity?: AiGatewayManagedIdentityAuthentication;
 
-  /** Use the gateway's system-assigned identity. */
-  SystemAssigned: "systemAssigned",
-
-  /** Use a user-assigned identity. */
-  UserAssigned: "userAssigned",
+  /** Secret HTTP headers injected when calling the hook endpoint. */
+  @identifiers(#[])
+  headers?: AiGatewaySecretHeader[];
 }
 
-/** Managed identity selected to authorize an agent hook. */
+/** Outbound authentication settings to update on an external agent hook. */
 @added(Versions.v2026_11_01)
-model AiGatewayAgentHookIdentity {
-  /** Managed identity kind. */
-  type: AiGatewayAgentHookIdentityType;
+model AiGatewayAgentHookAuthenticationUpdate {
+  /** Managed identity configuration for the hook endpoint. */
+  managedIdentity?: AiGatewayManagedIdentityAuthentication;
 
-  /** User-assigned identity client ID; omit for a system-assigned identity. */
-  clientId?: string;
-}
-
-/** Agent-hook managed identity settings to update. */
-@added(Versions.v2026_11_01)
-model AiGatewayAgentHookIdentityUpdate
-  is OptionalProperties<AiGatewayAgentHookIdentity>;
-
-/** Authorization settings for an external agent hook. */
-@added(Versions.v2026_11_01)
-model AiGatewayAgentHookAuthorization {
-  /** Authorization kind. */
-  type: AiGatewayAgentHookAuthorizationType;
-
-  /** Managed identity selection, required for managedIdentity authorization. */
-  identity?: AiGatewayAgentHookIdentity;
-
-  /** Absolute token audience URI, required for managedIdentity authorization. */
-  audience?: url;
-}
-
-/** Agent-hook authorization settings to update. */
-@added(Versions.v2026_11_01)
-model AiGatewayAgentHookAuthorizationUpdate {
-  /** Authorization kind. */
-  type?: AiGatewayAgentHookAuthorizationType;
-
-  /** Managed identity selection. */
-  identity?: AiGatewayAgentHookIdentityUpdate;
-
-  /** Token audience URI. */
-  audience?: url;
+  /** Secret HTTP headers injected when calling the hook endpoint. */
+  @identifiers(#[])
+  headers?: AiGatewaySecretHeaderUpdate[];
 }
 
 /** External hook settings; omitted fields inherit policy-level settings. */
 @added(Versions.v2026_11_01)
 model AiGatewayAgentHook {
-  /** Hook destination HTTPS URL. */
-  endpoint?: url;
+  /** Failure mode when the hook call fails. */
+  mode?: AiGatewayFailureMode;
 
-  /** Hook authorization settings. */
-  authorization?: AiGatewayAgentHookAuthorization;
+  /** Hook destination URL. */
+  endpoint?: AiGatewayDestinationEndpoint;
+
+  /** Hook authentication settings. */
+  authentication?: AiGatewayAgentHookAuthentication;
 
   /** Literal, non-secret HTTP headers, returned by read operations. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for literal non-secret HTTP headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
-  headers?: Record<string>;
+  @identifiers(#["name"])
+  headers?: AiGatewayNameValuePair[];
 }
 
 /** External hook settings to update. */
 @added(Versions.v2026_11_01)
 model AiGatewayAgentHookUpdate {
-  /** Hook destination HTTPS URL. */
-  endpoint?: url;
+  /** Failure mode when the hook call fails. */
+  mode?: AiGatewayFailureMode;
 
-  /** Hook authorization settings. */
-  authorization?: AiGatewayAgentHookAuthorizationUpdate;
+  /** Hook destination URL. */
+  endpoint?: AiGatewayDestinationEndpointUpdate;
+
+  /** Hook authentication settings. */
+  authentication?: AiGatewayAgentHookAuthenticationUpdate;
 
   /** Literal, non-secret HTTP headers. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for literal non-secret HTTP headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
-  headers?: Record<string>;
+  @identifiers(#[])
+  headers?: AiGatewayNameValuePairUpdate[];
 }
 
-/** Lifecycle hooks supported on tool servers. */
+/** Lifecycle hooks supported on models and tool servers. */
 @added(Versions.v2026_11_01)
 model AiGatewayAgentHooks {
   /** Hook invoked before calling a tool. */
@@ -282,6 +262,12 @@ model AiGatewayAgentHooks {
 
   /** Hook invoked after calling a tool. */
   postToolCall?: AiGatewayAgentHook;
+
+  /** Hook invoked before calling a model. */
+  preModelCall?: AiGatewayAgentHook;
+
+  /** Hook invoked after calling a model. */
+  postModelCall?: AiGatewayAgentHook;
 }
 
 /** Lifecycle hook settings to update. */
@@ -292,6 +278,12 @@ model AiGatewayAgentHooksUpdate {
 
   /** Hook invoked after calling a tool. */
   postToolCall?: AiGatewayAgentHookUpdate;
+
+  /** Hook invoked before calling a model. */
+  preModelCall?: AiGatewayAgentHookUpdate;
+
+  /** Hook invoked after calling a model. */
+  postModelCall?: AiGatewayAgentHookUpdate;
 }
 
 /** Severity threshold used by a content safety policy. */
@@ -336,11 +328,11 @@ model AiGatewayPolicy {
   /** Stable identifier, required for costLimit and agentHooks policies. */
   id?: string;
 
-  /** Token count allowed during a token limit period. */
+  /** Token or request count allowed during a tokenLimit or requestRateLimit period. */
   @minValue(1)
   count?: int32;
 
-  /** Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year. */
+  /** Counter period. Token limits support minute/hour/day; request rate limits support minute/hour/day or whole-second ISO 8601 durations (e.g., PT37S); cost limits support hour/day/week/month/year. */
   period?: AiGatewayPolicyPeriod;
 
   /** Unique public dimensions used to partition a token, cost, or request counter. */
@@ -361,15 +353,18 @@ model AiGatewayPolicy {
   /** Whether to check tool responses for threats. */
   postInvocation?: boolean;
 
-  /** Default HTTPS destination for agent hooks. */
-  endpoint?: url;
+  /** Default failure mode for agent hooks. */
+  mode?: AiGatewayFailureMode;
 
-  /** Default authorization for agent hooks. */
-  authorization?: AiGatewayAgentHookAuthorization;
+  /** Default destination URL for agent hooks. */
+  endpoint?: AiGatewayDestinationEndpoint;
+
+  /** Default outbound authentication for agent hooks. */
+  authentication?: AiGatewayAgentHookAuthentication;
 
   /** Literal non-secret default HTTP headers for agent hooks. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for literal non-secret HTTP headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
-  headers?: Record<string>;
+  @identifiers(#["name"])
+  headers?: AiGatewayNameValuePair[];
 
   /** Lifecycle hooks; requires agent-hook authoring to be enabled on the gateway. */
   hooks?: AiGatewayAgentHooks;
@@ -401,13 +396,6 @@ model AiGatewayPolicy {
 
   /** CIDR ranges to allow or deny. */
   cidrRanges?: string[];
-
-  /** Request count allowed during the configured period. */
-  @minValue(1)
-  callsPerPeriod?: int32;
-
-  /** Request rate limit period in seconds. */
-  periodSeconds?: int32;
 
   /** Origins allowed by a CORS policy. */
   allowedOrigins?: string[];
@@ -443,11 +431,11 @@ model AiGatewayPolicyUpdate {
   /** Stable identifier for costLimit or agentHooks. */
   id?: string;
 
-  /** Token count allowed during a token limit period. */
+  /** Token or request count allowed during a tokenLimit or requestRateLimit period. */
   @minValue(1)
   count?: int32;
 
-  /** Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year. */
+  /** Counter period. Token limits support minute/hour/day; request rate limits support minute/hour/day or whole-second ISO 8601 durations (e.g., PT37S); cost limits support hour/day/week/month/year. */
   period?: AiGatewayPolicyPeriod;
 
   /** Public dimensions used to partition a token, cost, or request counter. */
@@ -468,15 +456,18 @@ model AiGatewayPolicyUpdate {
   /** Whether to check tool responses for threats. */
   postInvocation?: boolean;
 
-  /** Default HTTPS destination for agent hooks. */
-  endpoint?: url;
+  /** Default failure mode for agent hooks. */
+  mode?: AiGatewayFailureMode;
 
-  /** Default authorization for agent hooks. */
-  authorization?: AiGatewayAgentHookAuthorizationUpdate;
+  /** Default destination URL for agent hooks. */
+  endpoint?: AiGatewayDestinationEndpointUpdate;
+
+  /** Default outbound authentication for agent hooks. */
+  authentication?: AiGatewayAgentHookAuthenticationUpdate;
 
   /** Literal non-secret default HTTP headers for agent hooks. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for literal non-secret HTTP headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
-  headers?: Record<string>;
+  @identifiers(#[])
+  headers?: AiGatewayNameValuePairUpdate[];
 
   /** Lifecycle hooks to update. */
   hooks?: AiGatewayAgentHooksUpdate;
@@ -509,13 +500,6 @@ model AiGatewayPolicyUpdate {
   /** CIDR ranges to allow or deny. */
   cidrRanges?: string[];
 
-  /** Request count allowed during the configured period. */
-  @minValue(1)
-  callsPerPeriod?: int32;
-
-  /** Request rate limit period in seconds. */
-  periodSeconds?: int32;
-
   /** Origins allowed by a CORS policy. */
   allowedOrigins?: string[];
 
@@ -542,7 +526,6 @@ model AiGatewayPolicyUpdate {
 @added(Versions.v2026_11_01)
 model AiGatewayModelUpdateProperties {
   /** Display name of the model. */
-  @encodedName("application/json", "name")
   displayName?: string;
 
   /** Description of the model. */
@@ -570,7 +553,6 @@ model AiGatewayModelUpdateParameters {
 @added(Versions.v2026_11_01)
 model AiGatewayModelProperties {
   /** Display name of the model. */
-  @encodedName("application/json", "name")
   displayName: string;
 
   /** Description of the model. */
@@ -604,7 +586,7 @@ model AiGatewayModelResource
     Resource = AiGatewayModelResource,
     KeyName = "modelName",
     SegmentName = "models",
-    NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+    NamePattern = "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
   >;
   ...Azure.ResourceManager.EntityTagProperty;
 }

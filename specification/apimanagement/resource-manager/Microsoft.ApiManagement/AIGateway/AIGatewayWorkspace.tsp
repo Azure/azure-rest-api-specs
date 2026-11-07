@@ -16,7 +16,6 @@ namespace Microsoft.ApiManagement;
 model AiGatewayWorkspaceProperties {
   /** Display name of the workspace. */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "name")
   displayName: string;
 
   /** Description of the workspace. */
