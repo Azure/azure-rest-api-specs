@@ -1,8 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using Azure.ClientGenerator.Core;
-using Common;
 using Microsoft.Network;
 using TypeSpec.Versioning;
 

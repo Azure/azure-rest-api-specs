@@ -3,14 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
@@ -18,19 +17,10 @@ namespace Microsoft.Network;
 /**
  * First party service tag resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Follows the shared Network Common.Resource pattern used by every resource in this converted project"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Network resources extend the shared Common.Resource custom resource for backward compatibility with the existing swagger hierarchy"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compatibility with the previous Network AutoRest C# hierarchy"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy.feature decorator is required for swagger file splitting in this converted project"
 @added(Versions.v2025_09_01)
-@Azure.ResourceManager.Legacy.feature(Features.firstPartyServiceTag)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model FirstPartyServiceTag extends Common.Resource {
-  /**
-   * Properties of the first party service tag.
-   */
-  properties?: FirstPartyServiceTagPropertiesFormat;
-
+@featureFile(Features.firstPartyServiceTag)
+model FirstPartyServiceTag
+  is ResourceInstance<FirstPartyServiceTagPropertiesFormat> {
   /**
    * The unique identifier of the resource.
    */
@@ -63,9 +53,8 @@ model FirstPartyServiceTag extends Common.Resource {
 /**
  * Properties of the first party service tag.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy.feature decorator is required for swagger file splitting in this converted project"
 @added(Versions.v2025_09_01)
-@Azure.ResourceManager.Legacy.feature(Features.firstPartyServiceTag)
+@featureFile(Features.firstPartyServiceTag)
 model FirstPartyServiceTagPropertiesFormat {
   /**
    * The value of the first party service tag.
@@ -91,9 +80,8 @@ model FirstPartyServiceTagPropertiesFormat {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirstPartyServiceTags interface uses Azure.ResourceManager.Legacy features for backward compatibility with existing swagger API"
 @added(Versions.v2025_09_01)
-@Azure.ResourceManager.Legacy.feature(Features.firstPartyServiceTag)
+@featureFile(Features.firstPartyServiceTag)
 @armResourceOperations
 interface FirstPartyServiceTags {
   /**

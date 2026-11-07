@@ -4,13 +4,12 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./LoadBalancer.tsp";
-import "../Common/BackendAddressPool.tsp";
+import "./BackendAddressPool.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 
@@ -41,8 +40,7 @@ alias ListInboundNatRulePortMappingsOps = Azure.ResourceManager.Legacy.LegacyOpe
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
+@featureFile(Features.loadBalancer)
 @armResourceOperations(#{ omitTags: true })
 interface BackendAddressPools {
   /**
