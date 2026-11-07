@@ -2068,7 +2068,8 @@
             "type": "string",
             "enum": [
               "input_audio"
-            ]
+            ],
+            "description": "The item type. Always `input_audio`."
           },
           "audio": {
             "type": "string",
@@ -2109,13 +2110,15 @@
             ],
             "minLength": 1,
             "maxLength": 32,
-            "pattern": "^[a-zA-Z0-9_-]+$"
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional identifier for this function-call input item."
           },
           "type": {
             "type": "string",
             "enum": [
               "function_call"
-            ]
+            ],
+            "description": "The item type. Always `function_call`."
           },
           "status": {
             "anyOf": [
@@ -2133,23 +2136,27 @@
                 "type": "null"
               }
             ],
+            "description": "The completion status of the function-call input item.",
             "default": "completed"
           },
           "call_id": {
             "type": "string",
             "minLength": 1,
             "maxLength": 32,
-            "pattern": "^[a-zA-Z0-9_-]+$"
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "The function call ID used to associate the call with its output."
           },
           "name": {
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9_-]+$"
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "The name of the function being called."
           },
           "arguments": {
             "type": "string",
-            "maxLength": 1048576
+            "maxLength": 1048576,
+            "description": "The arguments for the function call, encoded as a JSON string."
           }
         },
         "description": "A function call supplied as input to a Realtime response.",
@@ -2174,13 +2181,15 @@
             ],
             "minLength": 1,
             "maxLength": 32,
-            "pattern": "^[a-zA-Z0-9_-]+$"
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "An optional identifier for this function-call output item."
           },
           "type": {
             "type": "string",
             "enum": [
               "function_call_output"
-            ]
+            ],
+            "description": "The item type. Always `function_call_output`."
           },
           "status": {
             "anyOf": [
@@ -2198,17 +2207,20 @@
                 "type": "null"
               }
             ],
+            "description": "The completion status of the function-call output item.",
             "default": "completed"
           },
           "call_id": {
             "type": "string",
             "minLength": 1,
             "maxLength": 32,
-            "pattern": "^[a-zA-Z0-9_-]+$"
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "The ID of the function call for which this item supplies output."
           },
           "output": {
             "type": "string",
-            "maxLength": 1048576
+            "maxLength": 1048576,
+            "description": "The result returned by the function, encoded as a string."
           }
         },
         "description": "The result of a function call supplied as input to a Realtime response.",
@@ -2225,7 +2237,8 @@
             "type": "string",
             "enum": [
               "input_image"
-            ]
+            ],
+            "description": "The item type. Always `input_image`."
           },
           "image_url": {
             "type": "string",
@@ -2250,6 +2263,7 @@
                 "type": "null"
               }
             ],
+            "description": "The level of image detail used when processing the image.",
             "default": "auto"
           }
         },
@@ -2280,7 +2294,8 @@
         ],
         "properties": {
           "role": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessageType"
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessageType",
+            "description": "The author role of the message supplied as Realtime response input."
           }
         },
         "discriminator": {
@@ -2321,7 +2336,8 @@
             "type": "string",
             "enum": [
               "message"
-            ]
+            ],
+            "description": "The item type. Always `message`."
           },
           "status": {
             "anyOf": [
@@ -2346,14 +2362,16 @@
             "type": "string",
             "enum": [
               "assistant"
-            ]
+            ],
+            "description": "The message author role. Always `assistant`."
           },
           "content": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputMessageAssistantContent"
             },
-            "minItems": 1
+            "minItems": 1,
+            "description": "The assistant's text output included in the response input context."
           }
         },
         "allOf": [
@@ -2374,11 +2392,13 @@
             "type": "string",
             "enum": [
               "output_text"
-            ]
+            ],
+            "description": "The item type. Always `output_text`."
           },
           "text": {
             "type": "string",
-            "maxLength": 256000
+            "maxLength": 256000,
+            "description": "The assistant text included in the response input context."
           }
         }
       },
@@ -2408,7 +2428,8 @@
             "type": "string",
             "enum": [
               "message"
-            ]
+            ],
+            "description": "The item type. Always `message`."
           },
           "status": {
             "anyOf": [
@@ -2433,7 +2454,8 @@
             "type": "string",
             "enum": [
               "developer"
-            ]
+            ],
+            "description": "The message author role. Always `developer`."
           },
           "content": {
             "type": "array",
@@ -2441,7 +2463,8 @@
               "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputText"
             },
             "minItems": 1,
-            "maxItems": 1
+            "maxItems": 1,
+            "description": "Developer instructions included in the response input context."
           }
         },
         "allOf": [
@@ -2477,7 +2500,8 @@
             "type": "string",
             "enum": [
               "message"
-            ]
+            ],
+            "description": "The item type. Always `message`."
           },
           "status": {
             "anyOf": [
@@ -2502,7 +2526,8 @@
             "type": "string",
             "enum": [
               "system"
-            ]
+            ],
+            "description": "The message author role. Always `system`."
           },
           "content": {
             "type": "array",
@@ -2510,7 +2535,8 @@
               "$ref": "#/components/schemas/OpenAI.RealtimeResponseInputText"
             },
             "minItems": 1,
-            "maxItems": 1
+            "maxItems": 1,
+            "description": "System instructions included in the response input context."
           }
         },
         "allOf": [
@@ -2562,7 +2588,8 @@
             "type": "string",
             "enum": [
               "message"
-            ]
+            ],
+            "description": "The item type. Always `message`."
           },
           "status": {
             "anyOf": [
@@ -2587,7 +2614,8 @@
             "type": "string",
             "enum": [
               "user"
-            ]
+            ],
+            "description": "The message author role. Always `user`."
           },
           "content": {
             "type": "array",
@@ -2604,7 +2632,8 @@
                 }
               ]
             },
-            "minItems": 1
+            "minItems": 1,
+            "description": "The user's text, audio, or image content included in the response input context."
           }
         },
         "allOf": [
@@ -2625,11 +2654,13 @@
             "type": "string",
             "enum": [
               "input_text"
-            ]
+            ],
+            "description": "The item type. Always `input_text`."
           },
           "text": {
             "type": "string",
-            "maxLength": 256000
+            "maxLength": 256000,
+            "description": "The text supplied as Realtime response input."
           }
         },
         "title": "Realtime response input text"

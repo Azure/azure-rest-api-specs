@@ -193,6 +193,7 @@ model VoiceAgentLiveConversationItem {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveInputConversationItem
   extends VoiceAgentLiveConversationItem {
+  @doc("The item type. Always `input`.")
   type: VoiceAgentLiveConversationItemType.input;
 
   @doc("Captured user transcription, when available.")
@@ -206,6 +207,7 @@ model VoiceAgentLiveInputConversationItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveOutputConversationItem
   extends VoiceAgentLiveConversationItem {
+  @doc("The item type. Always `output`.")
   type: VoiceAgentLiveConversationItemType.output;
 
   @doc("Captured assistant transcription, not backend output or commentary guidance.")
@@ -221,6 +223,8 @@ model VoiceAgentLiveOutputConversationItem
 model VoiceAgentLiveDelegationConversationItem
   extends VoiceAgentLiveConversationItem {
   ...OmitProperties<OpenAI.LiveDelegationItem, "id" | "type" | "target">;
+
+  @doc("The delegation type. Always `delegation`.")
   type: VoiceAgentLiveConversationItemType.delegation;
 
   @doc("The configured delegation owner.")
@@ -234,6 +238,7 @@ model VoiceAgentLiveDelegationConversationItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveClientDelegationConversationItem
   extends VoiceAgentLiveDelegationConversationItem {
+  @doc("The delegation owner. Always `client`.")
   target: VoiceAgentLiveDelegationTarget.client;
 
   @doc("Guidance for Live to communicate to the user, when accepted.")
@@ -247,6 +252,7 @@ model VoiceAgentLiveClientDelegationConversationItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveResponsesDelegationConversationItem
   extends VoiceAgentLiveDelegationConversationItem {
+  @doc("The delegation owner. Always `responses`.")
   target: VoiceAgentLiveDelegationTarget.responses;
 
   @doc("Final backend text, omitted when unavailable; excludes raw tool output.")
@@ -257,6 +263,7 @@ model VoiceAgentLiveResponsesDelegationConversationItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveFoundryManagedAgentDelegationItem
   extends VoiceAgentLiveDelegationConversationItem {
+  @doc("The delegation owner. Always `foundry_managed_agent`.")
   target: VoiceAgentLiveDelegationTarget.foundry_managed_agent;
 
   @doc("Target agent name in the same project.")
