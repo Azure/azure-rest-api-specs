@@ -27,7 +27,7 @@ These are the global settings for the PolicyInsights API.
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-tag: package-2024-10
+tag: package-2026-09-preview
 ```
 
 ### Validations
@@ -45,6 +45,11 @@ message-format: json
 
 ``` yaml
 directive:
+  - suppress: PreviewVersionOverOneYear
+    from: policyAuthoring.json
+    where: $.info.version
+    reason: These newly published authoring operations use the existing backend's 2025-05-01-preview contract. Publication does not change the implemented wire version; retirement or a new version requires a separate service change.
+
   - suppress: EnumInsteadOfBoolean
     reason: The data type in store is boolean. If we change the type in RP, it will break existing clients, and we will incur runtime conversion cost.
     where:
@@ -136,6 +141,46 @@ directive:
       - $.path["/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
       - $.path["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
     transform: delete $['post']['x-ms-pageable']['operationName']
+```
+
+### Policy authoring and simulation preview
+
+The preview package includes policy definition verification and authoring guides at
+`2025-05-01-preview`, and policy simulation at `2026-09-01-preview`. Use the API
+version documented for each operation.
+
+Verification accepts a policy definition object and optional linter rule-set names.
+Simulation accepts a hypothetical definition, a resource source, optional related
+resources, and optional policy targets. The hypothetical definition must have a
+nonexisting policy definition resource ID, and every parameter must have a default.
+Caller-supplied policy assignments are not supported. Simulation does not persist
+assignments, resource changes, or remediation deployments.
+
+The TypeSpec entrypoints are `PolicyAuthoringApi/main.tsp` and
+`PolicySimulationApi/main.tsp`. Each project emits only its implemented API version;
+the existing published API versions are unchanged.
+
+Model sources and author-maintained examples are located under `PolicyInsightsApi`,
+with examples in `PolicyInsightsApi/examples/<api-version>`. The emitter copies
+those examples to `preview/<api-version>/examples`, matching the existing preview
+layout. Edit the source examples and recompile rather than editing both copies.
+Verification and simulation share one service-local `PolicyDefinitionContent`
+model based on the Microsoft.Authorization definition and parameter contract,
+with the additional required fields validated by these operations. Keeping this
+input within the parent project makes it portable to SDK generation, which
+copies TypeSpec projects outside the specification repository. Existing
+PolicyInsights evaluation and reference models remain shared.
+
+### Tag: package-2026-09-preview
+
+These settings apply only when `--tag=package-2026-09-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-preview'
+input-file:
+  - preview/2025-05-01-preview/policyAuthoring.json
+  - preview/2026-09-01-preview/policySimulation.json
+  - preview/2018-07-01-preview/policyTrackedResources.json
+  - stable/2024-10-01/openapi.json
 ```
 
 ### Tag: package-2024-10
