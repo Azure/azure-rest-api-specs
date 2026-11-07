@@ -11,6 +11,7 @@ using TypeSpec.Versioning;
 namespace Quantum.Workspace;
 
 /** The existing job creation properties, without client-supplied storage locations. */
+#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Swagger 2 cannot represent a structured JSON multipart part; it emits properties as a string. Keep the typed JSON model for direct TypeSpec SDK generation."
 @added(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
 model JobCreateProperties {
   ...Create<{
