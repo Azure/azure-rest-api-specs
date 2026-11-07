@@ -1,8 +1,8 @@
-# orbital
+# Microsoft Planetary Computer Pro (MPC Pro)
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for orbital.
+This is the AutoRest configuration file for MPC Pro.
 
 ## Getting Started
 
@@ -22,11 +22,52 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the orbital.
+These are the global settings for MPC Pro.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-11-01
+openapi-subtype: rpaas
+tag: package-2025-02-11-preview
+suppressions:
+    - code: AvoidAnonymousTypes
+      where:
+        - $.definitions["ManagedServiceIdentityUpdate"].properties["userAssignedIdentities"].additionalProperties
+      reason:
+        Issue with common-types
+    - code: OperationsAPIImplementation
+      where:
+        - $
+      reason:
+        Services that share a root manifest do not need to reimplement the Operations API.
+        Operations API for MPC Pro is shared with Microsoft.Orbital and is defined
+        at specification/orbital/resource-manager/Microsoft.Orbital/stable.
+```
+
+### Tag: package-2024-01-31-preview
+
+These settings apply only when `--tag=package-2024-01-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-31-preview'
+input-file:
+  - preview/2024-01-31-preview/planetarycomputer.json
+```
+
+### Tag: package-2025-02-11-preview
+
+These settings apply only when `--tag=package-2025-02-11-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-11-preview'
+input-file:
+  - preview/2025-02-11-preview/planetarycomputer.json
+```
+
+### Tag: package-2026-04-15
+
+These settings apply only when `--tag=package-2026-04-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-15'
+input-file:
+  - stable/2026-04-15/planetarycomputer.json
 ```
 
 ### Tag: package-2022-11-01
