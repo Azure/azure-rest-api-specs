@@ -2305,9 +2305,10 @@ paths:
       summary: Connect to a voice agent
       description: |-
         Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
-        headers. The optional `realtime` subprotocol is the only accepted subprotocol value. Supply the
-        `VoiceAgents=V1Preview` opt-in through either the `Foundry-Features` header or the `foundry_features`
-        query parameter.
+        headers. The optional `realtime` subprotocol is the only accepted subprotocol value. The `VoiceAgents=V1Preview`
+        opt-in is required only when the agent's definition uses a preview feature, such as Handoff (inline subagents),
+        SIP transfer destinations, or post-call delivery. Supply it through either the `Foundry-Features` header or the
+        `foundry_features` query parameter.
 
         Handshake failures are evaluated in the following order, independent of the requested `transport`:
 
@@ -2342,7 +2343,7 @@ paths:
           description: |-
             A query alternative to the `Foundry-Features` header for clients that cannot set headers during a
             WebSocket handshake. Set this to `VoiceAgents=V1Preview`. Either this query parameter or the header is
-            required.
+            required when the agent uses a preview feature.
           schema:
             type: string
             enum:
@@ -2423,6 +2424,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Voice Agent WebSocket
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations:
     get:
       operationId: AgentEndpointConversations_listAgentConversations
@@ -2432,14 +2436,6 @@ paths:
         Conversations are present when the session's effective `store` setting is `true`, whether inherited from the
         agent definition or enabled by the WebSocket session override.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -2533,9 +2529,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}:
     get:
       operationId: AgentEndpointConversations_getAgentConversation
@@ -2544,14 +2537,6 @@ paths:
         Retrieves a single conversation recorded for the specified voice agent endpoint by its id.
         Returns `404` when the conversation was not persisted (`store = false`) or does not exist.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -2592,9 +2577,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     delete:
       operationId: AgentEndpointConversations_deleteAgentConversation
       summary: Delete a voice agent conversation
@@ -2602,14 +2584,6 @@ paths:
         Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is
         the customer's explicit data-deletion control for voice conversations.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -2646,9 +2620,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio:
     get:
       operationId: AgentEndpointConversations_getAgentConversationAudio
@@ -2665,14 +2636,6 @@ paths:
         For a `completed` conversation, metadata is available subject to the existing BYOS behavior. Requires the
         conversation to have persisted audio (`store = true`); otherwise returns `404`.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -2713,9 +2676,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content:
     get:
       operationId: AgentEndpointConversations_getAgentConversationAudioContent
@@ -2731,14 +2691,6 @@ paths:
         For a `completed` conversation, content is available subject to the existing BYOS behavior. A conversation
         without persisted audio (`store = false`) returns `404`.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -2779,9 +2731,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items:
     get:
       operationId: AgentEndpointConversations_listAgentConversationItems
@@ -2791,14 +2740,6 @@ paths:
         assistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the
         conversation was not persisted (`store = false`).
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -2898,9 +2839,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}:
     get:
       operationId: AgentEndpointConversations_getAgentConversationItem
@@ -2912,14 +2850,6 @@ paths:
         `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
         (`store = false`).
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -2966,9 +2896,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio:
     get:
       operationId: AgentEndpointConversations_getAgentConversationAudioItem
@@ -2981,14 +2908,6 @@ paths:
         Requires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,
         item, or its audio was not persisted.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -3035,9 +2954,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content:
     get:
       operationId: AgentEndpointConversations_getAgentConversationAudioItemContent
@@ -3049,14 +2965,6 @@ paths:
         returned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.
         Returns `404` when the conversation, item, or its audio was not persisted (`store = false`).
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -3103,9 +3011,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated:
     get:
       operationId: AgentEndpointConversations_getAgentConversationGeneratedAudioItem
@@ -3116,14 +3021,6 @@ paths:
         than the listener heard, including when the response ends as cancelled. Returns `404` when the conversation or
         item was not persisted, or when no generated audio exists beyond the heard segment.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -3170,9 +3067,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content:
     get:
       operationId: AgentEndpointConversations_getAgentConversationGeneratedAudioItemContent
@@ -3185,14 +3079,6 @@ paths:
         Returns `404` when the conversation or item was not persisted, or when no generated audio exists beyond the
         heard segment.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -3239,9 +3125,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses:
     get:
       operationId: AgentEndpointConversations_listAgentConversationResponses
@@ -3251,14 +3134,6 @@ paths:
         conversation. The per-response `output` projection may be omitted here; use the response-items route
         for the canonical paged output. Returns `404` when the conversation was not persisted (`store = false`).
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -3358,9 +3233,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}:
     get:
       operationId: AgentEndpointConversations_getAgentConversationResponse
@@ -3369,14 +3241,6 @@ paths:
         Retrieves a single response from the specified conversation by its id, including its `output` items,
         `usage`, and status. Returns `404` when the conversation or response was not persisted (`store = false`).
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -3423,9 +3287,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items:
     get:
       operationId: AgentEndpointConversations_listAgentConversationResponseItems
@@ -3436,14 +3297,6 @@ paths:
         tool outputs — use the conversation items route instead. Returns `404` when the conversation or
         response was not persisted (`store = false`).
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -3549,9 +3402,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/live/conversations:
     get:
       operationId: AgentEndpointLiveConversations_listLiveAgentConversations
@@ -6109,7 +5959,7 @@ paths:
     post:
       operationId: AgentTelephony_createTelephonyBinding
       summary: Create an agent telephony binding
-      description: Creates a telephony binding for the voice agent named in the path.
+      description: Creates a telephony binding for the voice agent named in the path. Creating a SIP binding requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6169,7 +6019,7 @@ paths:
               $ref: '#/components/schemas/TelephonyBinding'
         description: The provider-specific binding to create.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     get:
       operationId: AgentTelephony_listTelephonyBindings
@@ -6284,9 +6134,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Telephony
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony/bindings/{binding_id}:
     get:
       operationId: AgentTelephony_getTelephonyBinding
@@ -6347,13 +6194,10 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Telephony
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     patch:
       operationId: AgentTelephony_updateTelephonyBinding
       summary: Update an agent telephony binding
-      description: Updates a telephony binding owned by the voice agent named in the path.
+      description: Updates a telephony binding owned by the voice agent named in the path. Updating a SIP binding requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6423,12 +6267,12 @@ paths:
               $ref: '#/components/schemas/UpdateTelephonyBindingRequest'
         description: The binding properties to update.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     delete:
       operationId: AgentTelephony_deleteTelephonyBinding
       summary: Delete an agent telephony binding
-      description: Deletes a telephony binding owned by the voice agent named in the path.
+      description: Deletes a telephony binding owned by the voice agent named in the path. Deleting a SIP binding requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6481,7 +6325,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony/calls:
     get:
@@ -6618,9 +6462,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Telephony
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony/calls/{call_id}:
     get:
       operationId: AgentTelephony_getTelephonyCall
@@ -6675,14 +6516,11 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Telephony
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony/calls/{call_id}:end:
     post:
       operationId: AgentTelephony_endTelephonyCall
       summary: End an active agent telephony call
-      description: Ends an active inbound call owned by the voice agent named in the path.
+      description: Ends an active inbound call owned by the voice agent named in the path. Ending a SIP call requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6733,13 +6571,13 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony/calls/{call_id}:transfer:
     post:
       operationId: AgentTelephony_transferTelephonyCall
       summary: Transfer an active agent telephony call
-      description: Transfers an active inbound call to a configured target for the voice agent named in the path.
+      description: Transfers an active inbound call to a configured target for the voice agent named in the path. Transferring a SIP call requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6796,7 +6634,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TelephonyCallTransferRequest'
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony/transfer_targets:
     get:
@@ -6852,13 +6690,10 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Telephony
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     put:
       operationId: AgentTelephony_replaceTelephonyTransferTargets
       summary: Replace agent telephony transfer targets
-      description: Replaces all transfer targets configured for the voice agent named in the path.
+      description: Replaces all transfer targets configured for the voice agent named in the path. Configuring a SIP destination requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6921,13 +6756,13 @@ paths:
             schema:
               $ref: '#/components/schemas/TelephonyTransferTargets'
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_call_jobs:
     post:
       operationId: AgentTelephony_createTelephonyCallJob
       summary: Create an outbound telephony call job
-      description: Creates one durable outbound CallJob. Each attempt pins the Agent endpoint's execution version for validation and its voice session.
+      description: Creates one durable outbound CallJob. Each attempt pins the Agent endpoint's execution version for validation and its voice session. A call job over a `SipOutbound` connection requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7003,21 +6838,13 @@ paths:
               $ref: '#/components/schemas/TelephonyCallJobCreate'
         description: The direct outbound call to create.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     get:
       operationId: AgentTelephony_listTelephonyCallJobs
       summary: List outbound telephony call jobs
       description: Lists current direct/Campaign jobs, excluding deleted or superseded rounds. Pages are live. Campaign cursors survive boundary deletion/cancel, not replacement/name reuse (400 invalid_cursor).
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -7125,18 +6952,15 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Telephony
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_call_jobs/{call_job_id}:
     delete:
       operationId: AgentTelephony_deleteTelephonyCallJob
       summary: Delete an outbound telephony call job
-      description: Deletes a terminal, reconciled job (otherwise 409), without cancelling calls or removing Campaign outcomes/call history. Later GET returns 404; repeated DELETE returns 204.
+      description: Deletes a terminal, reconciled job (otherwise 409), without cancelling calls or removing Campaign outcomes/call history. Later GET returns 404; repeated DELETE returns 204. Deleting a SIP call job requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
-          required: true
+          required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -7179,7 +7003,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     get:
       operationId: AgentTelephony_getTelephonyCallJob
@@ -7240,14 +7064,11 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Telephony
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_call_jobs/{call_job_id}:cancel:
     post:
       operationId: AgentTelephony_cancelTelephonyCallJob
       summary: Cancel an outbound telephony call job
-      description: Cancels future attempts using If-Match; completion may be asynchronous. New cancellation after connection returns 409 and lets the active call finish.
+      description: Cancels future attempts using If-Match; completion may be asynchronous. New cancellation after connection returns 409 and lets the active call finish. Cancelling a SIP call job requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7332,7 +7153,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_campaigns:
     get:
@@ -9159,14 +8980,6 @@ paths:
         Generates and creates an agent from kind-specific high-level inputs.
         The generated definition remains fully editable through the standard agent versioning operations.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9202,9 +9015,6 @@ paths:
             schema:
               $ref: '#/components/schemas/GenerateAgentRequest'
         description: The kind-specific inputs for generating and creating an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents:import:
     post:
       operationId: Agents_createAgentFromManifest
@@ -57583,9 +57393,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
       description: Shared direct-call/Campaign retry policy. Omission means one attempt; CallJobs return max_attempts=1 and interval=0 seconds.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     FixedRatioVersionSelectionRule:
       type: object
       required:
@@ -57773,9 +57580,6 @@ components:
     GenerateAgentRequest:
       $ref: '#/components/schemas/GenerateVoiceAgentRequest'
       description: The kind-specific inputs for generating and creating an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     GenerateVoiceAgentRequest:
       type: object
       required:
@@ -57828,9 +57632,6 @@ components:
         The authoring service expands these inputs into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.
         The generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent
         definition, so the caller can edit or override any of them afterward via standard agent versioning.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     GenerationWarningType:
       anyOf:
         - type: string
@@ -61008,9 +60809,6 @@ components:
             Controls how long the model waits before emitting transcription text.
               Higher values can improve transcription accuracy at the cost of latency.
               Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.AudioTranscriptionResponse:
       type: object
       properties:
@@ -67701,9 +67499,6 @@ components:
           tokens: '#/components/schemas/OpenAI.TranscriptTextUsageTokens'
           duration: '#/components/schemas/OpenAI.TranscriptTextUsageDuration'
       description: Token usage statistics for the request.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.CreateTranscriptionResponseJsonUsageType:
       anyOf:
         - type: string
@@ -67711,9 +67506,6 @@ components:
           enum:
             - tokens
             - duration
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.CreateTranscriptionResponseVerboseJson:
       type: object
       required:
@@ -78693,19 +78485,10 @@ components:
             - type: 'null'
       description: A tool available on an MCP server.
       title: MCP list tools tool
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.MCPListToolsToolAnnotations:
       type: object
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.MCPListToolsToolInputSchema:
       type: object
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.MCPTool:
       type: object
       required:
@@ -81724,9 +81507,6 @@ components:
           audio/pcm: '#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcm'
           audio/pcmu: '#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcmu'
           audio/pcma: '#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcma'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeAudioFormatsAudioPcm:
       type: object
       required:
@@ -81742,9 +81522,6 @@ components:
             - 24000
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeAudioFormatsAudioPcma:
       type: object
       required:
@@ -81756,9 +81533,6 @@ components:
             - audio/pcma
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeAudioFormatsAudioPcmu:
       type: object
       required:
@@ -81770,9 +81544,6 @@ components:
             - audio/pcmu
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeAudioFormatsType:
       anyOf:
         - type: string
@@ -81781,9 +81552,6 @@ components:
             - audio/pcm
             - audio/pcmu
             - audio/pcma
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeCallCreateRequest:
       type: object
       properties:
@@ -81847,9 +81615,6 @@ components:
           rtc.call.sdp.create: '#/components/schemas/VoiceAgentClientEventRtcCallSdpCreate'
           session.avatar.connect: '#/components/schemas/VoiceAgentClientEventSessionAvatarConnect'
       description: A realtime client event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventConversationItemCreate:
       type: object
       required:
@@ -81901,9 +81666,6 @@ components:
               ]
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventConversationItemDelete:
       type: object
       required:
@@ -81939,9 +81701,6 @@ components:
               "type": "conversation.item.delete",
               "item_id": "item_003"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventConversationItemRetrieve:
       type: object
       required:
@@ -81977,9 +81736,6 @@ components:
               "type": "conversation.item.retrieve",
               "item_id": "item_003"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventConversationItemTruncate:
       type: object
       required:
@@ -82035,9 +81791,6 @@ components:
               "content_index": 0,
               "audio_end_ms": 1500
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventInputAudioBufferAppend:
       type: object
       required:
@@ -82082,9 +81835,6 @@ components:
               "type": "input_audio_buffer.append",
               "audio": "Base64EncodedAudioData"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventInputAudioBufferClear:
       type: object
       required:
@@ -82113,9 +81863,6 @@ components:
               "event_id": "event_012",
               "type": "input_audio_buffer.clear"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventInputAudioBufferCommit:
       type: object
       required:
@@ -82144,9 +81891,6 @@ components:
               "event_id": "event_789",
               "type": "input_audio_buffer.commit"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventOutputAudioBufferClear:
       type: object
       required:
@@ -82177,9 +81921,6 @@ components:
               "event_id": "optional_client_event_id",
               "type": "output_audio_buffer.clear"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventResponseCancel:
       type: object
       required:
@@ -82216,9 +81957,6 @@ components:
               "type": "response.cancel",
               "response_id": "resp_12345"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventResponseCreate:
       type: object
       required:
@@ -82297,9 +82035,6 @@ components:
               ]
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventSessionUpdate:
       type: object
       required:
@@ -82378,9 +82113,6 @@ components:
               "tool_choice": "auto"
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeClientEventType:
       anyOf:
         - type: string
@@ -82398,9 +82130,6 @@ components:
             - response.create
             - session.update
         - $ref: '#/components/schemas/VoiceAgentClientEventTypeExtension'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItem:
       type: object
       required:
@@ -82420,9 +82149,6 @@ components:
           mcp_approval_request: '#/components/schemas/OpenAI.RealtimeMCPApprovalRequest'
           system_tool: '#/components/schemas/VoiceAgentSystemToolItem'
       description: A single item within a Realtime conversation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemFunctionCall:
       type: object
       required:
@@ -82473,9 +82199,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A function call item in a Realtime conversation.
       title: Realtime function call item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemFunctionCallOutput:
       type: object
       required:
@@ -82526,9 +82249,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A function call output item in a Realtime conversation.
       title: Realtime function call output item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessage:
       type: object
       required:
@@ -82549,9 +82269,6 @@ components:
           assistant: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageAssistant:
       type: object
       required:
@@ -82604,9 +82321,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: An assistant message item in a Realtime conversation.
       title: Realtime assistant message item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageAssistantContent:
       type: object
       properties:
@@ -82673,9 +82387,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: A system message in a Realtime conversation can be used to provide additional context or instructions to the model. This is similar but distinct from the instruction prompt provided at the start of a conversation, as system messages can be added at any point in the conversation. For major changes to the conversation's behavior, use instructions, but for smaller updates (e.g. "the user is now asking about a different topic"), use system messages.
       title: Realtime system message item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageSystemContent:
       type: object
       properties:
@@ -82694,9 +82405,6 @@ components:
             - system
             - user
             - assistant
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageUser:
       type: object
       required:
@@ -82749,9 +82457,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: A user message item in a Realtime conversation.
       title: Realtime user message item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageUserContent:
       type: object
       properties:
@@ -82790,9 +82495,6 @@ components:
             - mcp_approval_request
             - message
         - $ref: '#/components/schemas/VoiceAgentConversationItemTypeExtension'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeCreateClientSecretRequest:
       type: object
       properties:
@@ -82966,9 +82668,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item requesting human approval of a tool invocation.
       title: Realtime MCP approval request
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPApprovalResponse:
       type: object
       required:
@@ -83008,9 +82707,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item responding to an MCP approval request.
       title: Realtime MCP approval response
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPError:
       type: object
       required:
@@ -83024,9 +82720,6 @@ components:
           protocol_error: '#/components/schemas/OpenAI.RealtimeMCPProtocolError'
           tool_execution_error: '#/components/schemas/OpenAI.RealtimeMCPToolExecutionError'
           http_error: '#/components/schemas/OpenAI.RealtimeMCPHTTPError'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPHTTPError:
       type: object
       required:
@@ -83046,9 +82739,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP HTTP error
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPListTools:
       type: object
       required:
@@ -83085,9 +82775,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item listing tools available on an MCP server.
       title: Realtime MCP list tools
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPProtocolError:
       type: object
       required:
@@ -83107,9 +82794,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP protocol error
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPToolCall:
       type: object
       required:
@@ -83159,9 +82843,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item representing an invocation of a tool on an MCP server.
       title: Realtime MCP tool call
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPToolExecutionError:
       type: object
       required:
@@ -83178,9 +82859,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP tool execution error
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMcpErrorType:
       anyOf:
         - type: string
@@ -83189,9 +82867,6 @@ components:
             - protocol_error
             - tool_execution_error
             - http_error
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeNoiseReductionStrength:
       type: number
       format: double
@@ -83745,9 +83420,6 @@ components:
           response.video.delta: '#/components/schemas/VoiceAgentServerEventResponseVideoDelta'
           session.handoff.started: '#/components/schemas/VoiceAgentServerEventSessionHandoffStarted'
       description: A realtime server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationCreated:
       type: object
       required:
@@ -83782,9 +83454,6 @@ components:
                   "object": "realtime.conversation"
               }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationCreatedConversation:
       type: object
       properties:
@@ -83845,9 +83514,6 @@ components:
               ]
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationItemCreated:
       type: object
       required:
@@ -83899,9 +83565,6 @@ components:
                   "content": []
               }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationItemDeleted:
       type: object
       required:
@@ -83936,9 +83599,6 @@ components:
               "type": "conversation.item.deleted",
               "item_id": "msg_005"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationItemDone:
       type: object
       required:
@@ -83987,9 +83647,6 @@ components:
               ]
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted:
       type: object
       required:
@@ -84076,9 +83733,6 @@ components:
               "output_tokens": 9
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta:
       type: object
       required:
@@ -84125,9 +83779,6 @@ components:
             "delta": "Hey",
             "obfuscation": "aLxx0jTEciOGe"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailed:
       type: object
       required:
@@ -84179,9 +83830,6 @@ components:
                   "param": null
               }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailedError:
       type: object
       properties:
@@ -84256,9 +83904,6 @@ components:
               "start": 0.0,
               "end": 0.4
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationItemRetrieved:
       type: object
       required:
@@ -84302,9 +83947,6 @@ components:
               ]
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventConversationItemTruncated:
       type: object
       required:
@@ -84354,9 +83996,6 @@ components:
               "content_index": 0,
               "audio_end_ms": 1500
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventError:
       type: object
       required:
@@ -84445,9 +84084,6 @@ components:
               "event_id": "event_1314",
               "type": "input_audio_buffer.cleared"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventInputAudioBufferCommitted:
       type: object
       required:
@@ -84488,9 +84124,6 @@ components:
               "previous_item_id": "msg_001",
               "item_id": "msg_002"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived:
       type: object
       required:
@@ -84526,9 +84159,6 @@ components:
             "event": "9",
             "received_at": 1763605109
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted:
       type: object
       required:
@@ -84578,9 +84208,6 @@ components:
               "audio_start_ms": 1000,
               "item_id": "msg_003"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped:
       type: object
       required:
@@ -84623,9 +84250,6 @@ components:
               "audio_end_ms": 2000,
               "item_id": "msg_003"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventInputAudioBufferTimeoutTriggered:
       type: object
       required:
@@ -84678,9 +84302,6 @@ components:
               "audio_end_ms":19232,
               "item_id":"item_CEKKrWH0GiwN0ET97NUZc"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventMCPListToolsCompleted:
       type: object
       required:
@@ -84712,9 +84333,6 @@ components:
               "type": "mcp_list_tools.completed",
               "item_id": "mcp_list_tools_001"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventMCPListToolsFailed:
       type: object
       required:
@@ -84746,9 +84364,6 @@ components:
               "type": "mcp_list_tools.failed",
               "item_id": "mcp_list_tools_001"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventMCPListToolsInProgress:
       type: object
       required:
@@ -84780,9 +84395,6 @@ components:
               "type": "mcp_list_tools.in_progress",
               "item_id": "mcp_list_tools_001"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventOutputAudioBufferCleared:
       type: object
       required:
@@ -84819,9 +84431,6 @@ components:
               "type": "output_audio_buffer.cleared",
               "response_id": "resp_abc123"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventOutputAudioBufferStarted:
       type: object
       required:
@@ -84857,9 +84466,6 @@ components:
               "type": "output_audio_buffer.started",
               "response_id": "resp_abc123"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventOutputAudioBufferStopped:
       type: object
       required:
@@ -84895,9 +84501,6 @@ components:
               "type": "output_audio_buffer.stopped",
               "response_id": "resp_abc123"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventRateLimitsUpdated:
       type: object
       required:
@@ -84948,9 +84551,6 @@ components:
                   }
               ]
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventRateLimitsUpdatedRateLimits:
       type: object
       properties:
@@ -85005,9 +84605,6 @@ components:
                   "event_id": "event_567"
               }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseAudioDelta:
       type: object
       required:
@@ -85060,9 +84657,6 @@ components:
               "content_index": 0,
               "delta": "Base64EncodedAudioDelta"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseAudioDone:
       type: object
       required:
@@ -85111,9 +84705,6 @@ components:
               "output_index": 0,
               "content_index": 0
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseAudioTranscriptDelta:
       type: object
       required:
@@ -85165,9 +84756,6 @@ components:
               "content_index": 0,
               "delta": "Hello, how can I a"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseAudioTranscriptDone:
       type: object
       required:
@@ -85222,9 +84810,6 @@ components:
               "content_index": 0,
               "transcript": "Hello, how can I assist you today?"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseContentPartAdded:
       type: object
       required:
@@ -85281,9 +84866,6 @@ components:
                   "text": ""
               }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseContentPartAddedPart:
       type: object
       properties:
@@ -85354,9 +84936,6 @@ components:
                   "text": "Sure, I can help with that."
               }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseContentPartDonePart:
       type: object
       properties:
@@ -85374,9 +84953,6 @@ components:
         format:
           $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
           description: The audio format, when this is an audio content part.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseCreated:
       type: object
       required:
@@ -85431,9 +85007,6 @@ components:
               "metadata": null
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseDone:
       type: object
       required:
@@ -85525,9 +85098,6 @@ components:
               "metadata": null
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta:
       type: object
       required:
@@ -85579,9 +85149,6 @@ components:
               "call_id": "call_001",
               "delta": "{"location": "San""
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone:
       type: object
       required:
@@ -85640,9 +85207,6 @@ components:
               "name": "get_weather",
               "arguments": "{"location": "San Francisco"}"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta:
       type: object
       required:
@@ -85693,9 +85257,6 @@ components:
               "output_index": 0,
               "delta": "{"partial":true}"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone:
       type: object
       required:
@@ -85742,9 +85303,6 @@ components:
               "output_index": 0,
               "arguments": "{"q":"docs"}"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseMCPCallCompleted:
       type: object
       required:
@@ -85781,9 +85339,6 @@ components:
               "output_index": 0,
               "item_id": "mcp_call_001"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseMCPCallFailed:
       type: object
       required:
@@ -85820,9 +85375,6 @@ components:
               "output_index": 0,
               "item_id": "mcp_call_001"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseMCPCallInProgress:
       type: object
       required:
@@ -85859,9 +85411,6 @@ components:
               "output_index": 0,
               "item_id": "mcp_call_001"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseOutputItemAdded:
       type: object
       required:
@@ -85909,9 +85458,6 @@ components:
                   "content": []
               }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseOutputItemDone:
       type: object
       required:
@@ -85966,9 +85512,6 @@ components:
               ]
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseTextDelta:
       type: object
       required:
@@ -86020,9 +85563,6 @@ components:
               "content_index": 0,
               "delta": "Sure, I can h"
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventResponseTextDone:
       type: object
       required:
@@ -86076,9 +85616,6 @@ components:
               "content_index": 0,
               "text": "Sure, I can help with that."
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventSessionCreated:
       type: object
       required:
@@ -86159,9 +85696,6 @@ components:
               "include": null
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventSessionUpdated:
       type: object
       required:
@@ -86268,9 +85802,6 @@ components:
               "include": null
             }
           }
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeServerEventType:
       anyOf:
         - type: string
@@ -86323,9 +85854,6 @@ components:
             - response.mcp_call.completed
             - response.mcp_call.failed
         - $ref: '#/components/schemas/VoiceAgentServerEventTypeExtension'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequest:
       type: object
       required:
@@ -86605,9 +86133,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestUnion'
       description: Realtime session object configuration.
       title: Realtime session configuration
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestGAAudio:
       type: object
       properties:
@@ -86615,9 +86140,6 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestGAAudioInput'
         output:
           $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestGAAudioOutput'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestGAAudioInput:
       type: object
       properties:
@@ -86629,9 +86151,6 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestGAAudioInputNoiseReduction'
         turn_detection:
           $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestGAAudioInputNoiseReduction:
       type: object
       properties:
@@ -86653,9 +86172,6 @@ components:
           minimum: 0.25
           maximum: 1.5
           default: 1
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestGATracing:
       type: object
       properties:
@@ -86666,9 +86182,6 @@ components:
         metadata:
           type: object
           additionalProperties: {}
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestInputAudioTranscription:
       type: object
       properties:
@@ -86713,9 +86226,6 @@ components:
         mapping:
           transcription: '#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGA'
           realtime: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestGA'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestUnionType:
       anyOf:
         - type: string
@@ -86723,9 +86233,6 @@ components:
           enum:
             - realtime
             - transcription
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateResponse:
       type: object
       required:
@@ -87016,17 +86523,11 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestUnion'
       description: Realtime transcription session object configuration.
       title: Realtime transcription session configuration
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudio:
       type: object
       properties:
         input:
           $ref: '#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInput'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInput:
       type: object
       properties:
@@ -87038,9 +86539,6 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction'
         turn_detection:
           $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction:
       type: object
       properties:
@@ -87430,9 +86928,6 @@ components:
         For `gpt-realtime-whisper` transcription sessions, turn detection must be
         set to `null`; VAD is not supported.
       title: Realtime Turn Detection
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeTurnDetectionSemanticVad:
       type: object
       required:
@@ -87458,9 +86953,6 @@ components:
           default: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeTurnDetectionServerVad:
       type: object
       required:
@@ -87488,9 +86980,6 @@ components:
             - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeTurnDetectionType:
       anyOf:
         - type: string
@@ -87498,9 +86987,6 @@ components:
           enum:
             - server_vad
             - semantic_vad
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.Reasoning:
       type: object
       properties:
@@ -94173,9 +93659,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.CreateTranscriptionResponseJsonUsage'
       description: Usage statistics for models billed by audio input duration.
       title: Duration Usage
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.TranscriptTextUsageTokens:
       type: object
       required:
@@ -94206,9 +93689,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.CreateTranscriptionResponseJsonUsage'
       description: Usage statistics for models billed by token usage.
       title: Token Usage
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.TranscriptTextUsageTokensInputTokenDetails:
       type: object
       properties:
@@ -94216,9 +93696,6 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
         audio_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.TranscriptionDiarizedSegment:
       type: object
       required:
@@ -94268,9 +93745,6 @@ components:
           type: string
           description: The code of a language detected in the audio.
       description: A language detected in transcribed audio.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.TranscriptionSegment:
       type: object
       required:
@@ -95286,9 +94760,6 @@ components:
             - verse
             - marin
             - cedar
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.WaitParam:
       type: object
       required:
@@ -96115,9 +95586,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyAddress'
       description: Phone-number address used by supported source and destination roles.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     ProceduralMemoryItem:
       type: object
       required:
@@ -99988,9 +99456,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyAddress'
       description: Teams source/transfer identity, validated by role and provider. Not supported for outbound recipients.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TeamsPhoneExtensibilityTelephonyBinding:
       type: object
       required:
@@ -100012,9 +99477,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
       description: A Microsoft Teams Phone extensibility binding owned by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TeamsPhoneExtensibilityTelephonyBindingListItem:
       type: object
       required:
@@ -100036,9 +99498,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
       description: A Microsoft Teams Phone extensibility binding returned in a list, including its entity tag.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelemetryConfig:
       type: object
       required:
@@ -100142,9 +99601,6 @@ components:
           teams: '#/components/schemas/TeamsAddress'
           sip: '#/components/schemas/SipAddress'
       description: Shared source, recipient and transfer address. Connections validate each role before dialing; unsupported types fail. New types may be added.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyAddressType:
       anyOf:
         - type: string
@@ -100155,7 +99611,7 @@ components:
             - sip
       description: Extensible endpoint address kinds. Address type describes the endpoint independently of the provider.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     TelephonyBinding:
       type: object
@@ -100193,17 +99649,11 @@ components:
           twilio: '#/components/schemas/TwilioTelephonyBinding'
           sip: '#/components/schemas/SipTelephonyBinding'
       description: A telephony binding owned by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyBindingId:
       type: string
       minLength: 1
       maxLength: 128
       description: A service-generated telephony binding identifier.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyBindingListItem:
       type: object
       required:
@@ -100243,9 +99693,6 @@ components:
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
           sip: '#/components/schemas/SipTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallDurationBasis:
       anyOf:
         - type: string
@@ -100254,9 +99701,6 @@ components:
             - answered
             - received
       description: The timestamp used as the basis for call duration.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallEndReason:
       anyOf:
         - type: string
@@ -100293,17 +99737,11 @@ components:
             - manage_hangup_failed
             - manage_transfer_failed
       description: Known service-generated reasons that one telephony call ended, rather than reasons for an overall outbound call job. Additional string codes may be returned.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallId:
       type: string
       minLength: 1
       maxLength: 128
       description: A service-generated telephony call identifier.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallJob:
       type: object
       required:
@@ -100393,9 +99831,6 @@ components:
           description: Owning Campaign, absent for direct calls. Instance-bound despite name reuse; Campaign deletion hides then removes its jobs.
           readOnly: true
       description: A durable direct or campaign-created outbound call intent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallJobCancellation:
       type: object
       required:
@@ -100419,9 +99854,6 @@ components:
           minimum: 0
           description: The call-job revision at which cancellation was recorded.
       description: A cancellation request recorded for an outbound call job.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallJobConfiguration:
       type: object
       required:
@@ -100467,9 +99899,6 @@ components:
           destination:
             type: phone_number
             value: '+14255550123'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallJobCreate:
       type: object
       required:
@@ -100503,15 +99932,9 @@ components:
           $ref: '#/components/schemas/TelephonyAddress'
           description: 'Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI.'
       description: The direct outbound call to create.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallJobId:
       type: string
       description: A service-generated durable outbound call-job identifier.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallJobSchedule:
       type: object
       properties:
@@ -100522,9 +99945,6 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The instant after which the call job expires without dispatch.
       description: The optional execution window for a direct outbound call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallJobStatus:
       anyOf:
         - type: string
@@ -100543,9 +99963,6 @@ components:
             - failed
             - cancelled
       description: The lifecycle status of a durable outbound call job.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallJobTerminalReason:
       anyOf:
         - type: string
@@ -100573,9 +99990,6 @@ components:
             - cancellation_reconciliation_timeout
             - provider_callback_timeout_cancellation_reconciliation_timeout
       description: Known terminal reasons for an overall outbound call job, which can span multiple provider attempts. These are distinct from individual call lifecycle reasons. Additional string codes may be returned.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallLifecycleEvent:
       type: object
       required:
@@ -100634,9 +100048,6 @@ components:
           minimum: 0
           description: The provider subcode associated with the event.
       description: A bounded durable observation in the lifecycle of one telephony call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallLifecycleEventName:
       anyOf:
         - type: string
@@ -100654,9 +100065,6 @@ components:
             - telephony.call.hangup
             - telephony.call.disconnect
       description: A provider-neutral lifecycle event name. Known values are stable; additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallLifecycleEventOutcome:
       anyOf:
         - type: string
@@ -100669,9 +100077,6 @@ components:
             - rejected
             - cancelled
       description: The outcome of one telephony lifecycle observation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallLifecycleEventReason:
       anyOf:
         - type: string
@@ -100708,9 +100113,6 @@ components:
             - manage_hangup_failed
             - manage_transfer_failed
       description: Known service-generated reasons for a telephony lifecycle event. An event reason does not necessarily describe the final outcome of the call. Additional string codes may be returned.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallLifecycleEventSource:
       anyOf:
         - type: string
@@ -100721,9 +100123,6 @@ components:
             - twilio
             - voice_agent
       description: The component that supplied a telephony lifecycle observation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallPhase:
       anyOf:
         - type: string
@@ -100742,9 +100141,6 @@ components:
             - rejected
             - failed
       description: The provider-neutral phase reached by an inbound telephony call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallRecord:
       type: object
       required:
@@ -100832,9 +100228,6 @@ components:
           type: boolean
           description: Whether older lifecycle events were omitted from the timeline.
       description: Detailed diagnostics for a durable inbound call to a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallStatus:
       anyOf:
         - type: string
@@ -100844,9 +100237,6 @@ components:
             - success
             - failed
       description: The lifecycle status of an inbound telephony call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallSummary:
       type: object
       required:
@@ -100917,9 +100307,6 @@ components:
           maxLength: 2048
           description: The provider message associated with the terminal result.
       description: A summary of a durable inbound call to a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallTimestampSource:
       anyOf:
         - type: string
@@ -100929,9 +100316,6 @@ components:
             - gateway
             - derived
       description: The source of a telephony lifecycle timestamp.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallTiming:
       type: object
       required:
@@ -100974,9 +100358,6 @@ components:
           $ref: '#/components/schemas/TelephonyCallTimestampSource'
           description: The primary source of the timing milestones. Individual lifecycle events identify their own timestamp source separately.
       description: Detailed provider-neutral timing for an inbound telephony call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallTrace:
       type: object
       required:
@@ -101001,9 +100382,6 @@ components:
           $ref: '#/components/schemas/TelephonyCallTraceMode'
           description: Whether the trace was emitted live or after the call ended.
       description: Correlation from a durable telephony call record to its customer-facing Foundry trace.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallTraceMode:
       anyOf:
         - type: string
@@ -101012,9 +100390,6 @@ components:
             - live
             - post_call
       description: The mode used to expose a telephony call as a customer-facing Foundry trace.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallTraceStatus:
       anyOf:
         - type: string
@@ -101027,9 +100402,6 @@ components:
             - not_applicable
             - failed
       description: The availability status of a customer-facing telephony call trace.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCallTransferRequest:
       type: object
       required:
@@ -101039,9 +100411,6 @@ components:
           $ref: '#/components/schemas/TelephonyTransferTargetName'
           description: The name of a transfer target configured for the voice agent.
       description: A request to transfer an active telephony call to a configured target.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCampaign:
       type: object
       required:
@@ -101156,9 +100525,6 @@ components:
       maxLength: 64
       pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}(?![\s\S])
       description: Immutable customer-chosen Campaign name within a project and Agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCampaignOperation:
       type: object
       required:
@@ -101378,9 +100744,6 @@ components:
         mapping:
           fixed_interval: '#/components/schemas/FixedIntervalRetryPolicy'
       description: The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt. Strategy-specific settings are defined by the derived policy.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyOutboundRetryPolicyType:
       anyOf:
         - type: string
@@ -101388,9 +100751,6 @@ components:
           enum:
             - fixed_interval
       description: The retry strategy for an outbound call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyProvider:
       anyOf:
         - type: string
@@ -101401,7 +100761,7 @@ components:
             - sip
       description: A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     TelephonyRecipient:
       type: object
@@ -101441,18 +100801,12 @@ components:
           $ref: '#/components/schemas/TelephonyAddress'
           description: The shared typed address to transfer to. The selected provider validates supported destination types.
       description: A named destination to which the voice agent may transfer a call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyTransferTargetName:
       type: string
       minLength: 1
       maxLength: 64
       pattern: ^[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\s\S])
       description: The unique name of a telephony transfer target.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyTransferTargets:
       type: object
       required:
@@ -101464,9 +100818,6 @@ components:
             $ref: '#/components/schemas/TelephonyTransferTarget'
           description: The complete set of destinations to which the voice agent may transfer calls. An empty array clears all targets when replacing the configuration.
       description: The telephony transfer targets configured for one voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TestingCriterionAzureAIEvaluator:
       type: object
       required:
@@ -102351,9 +101702,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
       description: A Twilio binding owned by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TwilioTelephonyBindingListItem:
       type: object
       required:
@@ -102372,9 +101720,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
       description: A Twilio binding returned in a list, including its entity tag.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     UpdateAgentFromManifestRequest:
       type: object
       required:
@@ -102507,9 +101852,6 @@ components:
           maxItems: 64
           description: 'SIP caller restrictions: omit to preserve, [] to clear; null is invalid. Network restrictions belong to the connection.'
       description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     UpdateToolboxRequest:
       type: object
       required:
@@ -102934,18 +102276,12 @@ components:
           default:
             - blendshapes
       description: Animation settings for a voice-agent session.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAnimationOutputType:
       type: string
       enum:
         - blendshapes
         - viseme_id
       description: An animation output produced by a voice-agent session.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAudioConfig:
       type: object
       properties:
@@ -102956,9 +102292,6 @@ components:
           $ref: '#/components/schemas/VoiceAgentAudioOutputConfig'
           description: Output (agent speech) audio configuration.
       description: The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAudioInputConfig:
       type: object
       properties:
@@ -102986,9 +102319,6 @@ components:
             - type: 'null'
           description: Asynchronous input-audio transcription. Set to null to disable transcription.
       description: Input audio configuration for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAudioOutputConfig:
       type: object
       properties:
@@ -103005,17 +102335,11 @@ components:
       description: |-
         Output audio configuration for a voice agent. Extends the voice configuration with the session-level `format` and
         `output_audio_timestamp_types` settings, which apply to every voice type.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAudioTimestampType:
       type: string
       enum:
         - word
       description: An output-audio timestamp kind supported by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAvatarConfig:
       type: object
       required:
@@ -103052,9 +102376,6 @@ components:
           description: Whether audit audio is emitted with avatar output. Defaults to false.
           default: false
       description: Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAvatarIceServer:
       type: object
       required:
@@ -103075,9 +102396,6 @@ components:
             - type: 'null'
           format: password
       description: An ICE server used for avatar WebRTC negotiation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAvatarOutputProtocol:
       anyOf:
         - type: string
@@ -103086,9 +102404,6 @@ components:
             - webrtc
             - websocket
       description: The transport used to deliver the avatar video stream.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAvatarScene:
       type: object
       properties:
@@ -103134,9 +102449,6 @@ components:
           exclusiveMinimum: 0
           default: 1
       description: Avatar placement and motion settings.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAvatarType:
       anyOf:
         - type: string
@@ -103145,9 +102457,6 @@ components:
             - video_avatar
             - photo_avatar
       description: The avatar type.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAvatarVideoBackground:
       type: object
       properties:
@@ -103157,9 +102466,6 @@ components:
         color:
           type: string
       description: The avatar video background.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAvatarVideoCrop:
       type: object
       required:
@@ -103181,9 +102487,6 @@ components:
           minItems: 2
           maxItems: 2
       description: The rectangular crop applied to avatar video.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAvatarVideoParams:
       type: object
       properties:
@@ -103205,9 +102508,6 @@ components:
           maximum: 2000
           default: 10
       description: Avatar video encoder and presentation settings.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAvatarVideoResolution:
       type: object
       required:
@@ -103223,9 +102523,6 @@ components:
           format: int32
           minimum: 1
       description: The avatar video resolution.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAzureSemanticVadEnTurnDetection:
       type: object
       required:
@@ -103273,9 +102570,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: English-optimized Azure semantic voice activity detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAzureSemanticVadMultilingualTurnDetection:
       type: object
       required:
@@ -103328,9 +102622,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: Multilingual Azure semantic voice activity detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentAzureSemanticVadTurnDetection:
       type: object
       required:
@@ -103383,9 +102674,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: Azure semantic voice activity detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentBaseDefinition:
       type: object
       required:
@@ -103422,9 +102710,6 @@ components:
       description: |-
         Shared voice-agent settings; protocol-specific fields remain flat on each subtype.
         Creates and updates produce immutable versions. Each version selects its own protocol, so a new version can switch between Realtime and Live.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentClientEvent:
       oneOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeClientEventConversationItemCreate'
@@ -103441,9 +102726,6 @@ components:
         - $ref: '#/components/schemas/VoiceAgentClientEventSessionAvatarConnect'
         - $ref: '#/components/schemas/VoiceAgentClientEventRtcCallSdpCreate'
       description: A stable v1 message sent by a client over a voice-agent WebSocket.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
       x-foundry-event-direction: client
     VoiceAgentClientEventRtcCallSdpCreate:
       type: object
@@ -103468,9 +102750,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
       description: 'The `rtc.call.sdp.create` client event: begins WebRTC signaling with an SDP offer.'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentClientEventSessionAvatarConnect:
       type: object
       required:
@@ -103491,9 +102770,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
       description: The `session.avatar.connect` client event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentClientEventSessionUpdate:
       type: object
       required:
@@ -103514,17 +102790,11 @@ components:
           $ref: '#/components/schemas/VoiceAgentSessionUpdate'
           description: The voice-agent session settings to update.
       description: The `session.update` client event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentClientEventTypeExtension:
       type: string
       enum:
         - session.avatar.connect
         - rtc.call.sdp.create
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentClientEventTypeExtensions:
       $ref: '#/components/schemas/VoiceAgentClientEventTypeExtension'
       description: Voice-specific members added to the OpenAI client-event discriminator.
@@ -103557,9 +102827,6 @@ components:
           description: The maximum wait for the first digit in integer seconds, starting at receiver readiness and bounded by the remaining total deadline. Omit for fifteen seconds.
           default: 15
       description: Arguments for starting DTMF collection on a model call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentCollectDtmfSystemTool:
       type: object
       required:
@@ -103573,9 +102840,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: Collects keypad digits on the current call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentCollectSmsStartArguments:
       type: object
       required:
@@ -103599,9 +102863,6 @@ components:
           pattern: ^\+[1-9][0-9]{1,14}$
           description: The expected SMS sender in canonical E.164 form, explicitly selected at start without Caller ID fallback. This is routing, not authenticated identity.
       description: Model-call SMS collection arguments, validated before receiver setup. The model supplies the sender, not the collected SMS.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentCollectSmsSystemTool:
       type: object
       required:
@@ -103615,9 +102876,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: Collects one complete SMS from an explicitly selected sender.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentCollectionStartArguments:
       type: object
       required:
@@ -103636,17 +102894,11 @@ components:
           maximum: 300
           description: Total deadline in seconds (1-300), including receiver setup. Overrides the Agent timeout; if both are omitted, defaults to 60. Duplicate calls do not reset it.
       description: Arguments for starting a collection on a model call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentConversationItemTypeExtension:
       type: string
       enum:
         - system_tool
       description: Additional item kinds used by the Voice Agent service.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentConversationItemTypeExtensions:
       $ref: '#/components/schemas/VoiceAgentConversationItemTypeExtension'
       description: Voice-specific members added to the OpenAI conversation-item discriminator.
@@ -103726,7 +102978,7 @@ components:
           description: Optional subagent configuration. Set `subagent_type` to `delegate` for delegated background specialists or `inline` for inline voice subagents.
         post_call:
           $ref: '#/components/schemas/VoiceAgentPostCallConfig'
-          description: Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations.
+          description: Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations. Post-call delivery is in preview and requires `VoiceAgents=V1Preview`.
           x-ms-foundry-meta:
             required_previews:
               - VoiceAgents=V1Preview
@@ -103736,9 +102988,6 @@ components:
         The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
         managed speech-to-speech experience. Establish realtime voice sessions through
         `GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentDelegateSubagentConfig:
       type: object
       required:
@@ -103759,9 +103008,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSubagentConfig'
       description: Configuration for referenced Foundry agents invoked as delegated background specialists.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentDigitRecognitionSystemTool:
       type: object
       required:
@@ -103775,18 +103021,12 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: Retrieves the unchanged transcript of the last user audio turn.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentDtmfCompletionMode:
       oneOf:
         - $ref: '#/components/schemas/VoiceAgentDtmfFixedLengthCompletionMode'
         - $ref: '#/components/schemas/VoiceAgentDtmfTerminatorCompletionMode'
         - $ref: '#/components/schemas/VoiceAgentDtmfInterDigitSilenceCompletionMode'
       description: One typed keypad completion policy. Unknown types, mixed-mode fields and legacy strings are rejected before receiver setup.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentDtmfCompletionTiming:
       type: object
       properties:
@@ -103798,9 +103038,6 @@ components:
           description: Seconds between digits, reset after each digit; defaults to 5.
           default: 5
       description: The wait after each received digit, scoped to the selected completion policy.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentDtmfFixedLengthCompletionMode:
       type: object
       required:
@@ -103826,9 +103063,6 @@ components:
           description: The number of digits to collect; defaults to six. There is no terminator or separate minimum/maximum pair.
           default: 6
       description: Complete immediately after exactly length digits. Other modes' fields are not accepted.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentDtmfInterDigitSilenceCompletionMode:
       type: object
       required:
@@ -103847,18 +103081,12 @@ components:
             - inter_digit_silence
           description: Select silence completion.
       description: Completes after nonempty input and an inter-digit pause, within service limits. No key or count is configured; total deadline expiry takes precedence.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentDtmfTerminator:
       type: string
       enum:
         - '#'
         - '*'
       description: The two non-numeric keypad keys permitted as confirmation terminators.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentDtmfTerminatorCompletionMode:
       type: object
       required:
@@ -103881,9 +103109,6 @@ components:
           $ref: '#/components/schemas/VoiceAgentDtmfTerminator'
           description: Required confirmation key; excluded from the collected value.
       description: Completes when the configured end key follows nonempty digits within service limits. No digit count or length bounds are configured.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentEchoCancellation:
       type: object
       required:
@@ -103906,18 +103131,12 @@ components:
           description: The number of input channels. Use two interleaved channels when `reference_source` is `client`.
           default: 1
       description: Server-side echo cancellation settings for input audio.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentEchoCancellationReferenceSource:
       type: string
       enum:
         - server
         - client
       description: The source of reference audio used for echo cancellation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentEndConversationSystemTool:
       type: object
       required:
@@ -103931,9 +103150,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: A service-managed control that ends the active conversation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentEndOfUtteranceDetection:
       type: object
       required:
@@ -103949,9 +103165,6 @@ components:
           $ref: '#/components/schemas/FoundryDurationMilliseconds'
           description: The detection timeout in milliseconds.
       description: Semantic end-of-utterance detection configuration.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentEndOfUtteranceDetectionModel:
       anyOf:
         - type: string
@@ -103962,9 +103175,6 @@ components:
             - semantic_detection_v1_multilingual
             - smart_end_of_turn_detection
       description: The semantic end-of-utterance detection model.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentEndOfUtteranceThresholdLevel:
       anyOf:
         - type: string
@@ -103975,9 +103185,6 @@ components:
             - high
             - default
       description: The sensitivity threshold for semantic end-of-utterance detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentEventGridPostCallDestination:
       type: object
       required:
@@ -104027,9 +103234,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A native function tool executed by the client.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentGreetingConfig:
       type: object
       required:
@@ -104044,9 +103248,6 @@ components:
           template: '#/components/schemas/VoiceAgentTemplateGreetingConfig'
           llm_generated: '#/components/schemas/VoiceAgentLlmGeneratedGreetingConfig'
       description: Session-start greeting configuration for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentGreetingMode:
       anyOf:
         - type: string
@@ -104055,9 +103256,6 @@ components:
             - template
             - llm_generated
       description: The greeting modes supported by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentHandoffAbortReason:
       type: string
       enum:
@@ -104350,9 +103548,6 @@ components:
         - sms
         - dtmf
       description: The receiver used by an input collection. Voice collection is not supported.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentInputCollectionStatus:
       anyOf:
         - type: string
@@ -104376,9 +103571,6 @@ components:
             - provider_result_uncertain
             - provider_not_executed
       description: Collection lifecycle and value-free telephony-operation outcomes. Additional outcomes may be introduced over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentInputTranscription:
       type: object
       required:
@@ -104453,9 +103645,6 @@ components:
         conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
         `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
         `profanity_filter`.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentInputTranscriptionModel:
       anyOf:
         - type: string
@@ -104476,9 +103665,6 @@ components:
         voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
         `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
         Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentInterimResponseConfig:
       type: object
       required:
@@ -104505,9 +103691,6 @@ components:
           static_interim_response: '#/components/schemas/VoiceAgentStaticInterimResponseConfig'
           llm_interim_response: '#/components/schemas/VoiceAgentLlmInterimResponseConfig'
       description: Fields shared by interim-response configurations.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentInterimResponseTrigger:
       anyOf:
         - type: string
@@ -104516,9 +103699,6 @@ components:
             - latency
             - tool
       description: A condition that may trigger an interim response.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentInterimResponseType:
       anyOf:
         - type: string
@@ -104527,9 +103707,6 @@ components:
             - static_interim_response
             - llm_interim_response
       description: The interim-response implementations supported by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentLanguageDetectionArguments:
       type: object
       required:
@@ -104548,9 +103725,6 @@ components:
           pattern: \S
           description: Non-blank reason for switching the conversation language.
       description: Decoded model-generated language-switch arguments, not a new client ingress. Unsupported speech components do not gain language support from this tool.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentLanguageDetectionSystemTool:
       type: object
       required:
@@ -104564,9 +103738,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: Switches supported conversation language settings.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentLiveClientDelegation:
       type: object
       required:
@@ -105075,9 +104246,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentGreetingConfig'
       description: A greeting authored by the session model from a scoped opening-turn prompt.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentLlmInterimResponseConfig:
       type: object
       required:
@@ -105102,9 +104270,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
       description: An interim response generated by a language model.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentMaxOutputTokens:
       anyOf:
         - type: integer
@@ -105113,9 +104278,6 @@ components:
           enum:
             - inf
       description: The maximum output-token count or the literal `inf`.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentMcpTool:
       type: object
       required:
@@ -105191,9 +104353,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentNoiseReduction:
       type: object
       required:
@@ -105213,9 +104372,6 @@ components:
         Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and
         `azure_personal_noise_suppression` are modes for local voice activity detection that
         enhance detection audio without changing the audio used for recognition.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentNoiseReductionType:
       anyOf:
         - type: string
@@ -105230,16 +104386,10 @@ components:
         The input audio noise reduction mode.
         - `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.
         - `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentOutputReference:
       type: string
       pattern: ^[A-Za-z_][A-Za-z0-9_]*$
       description: Bare session variable name, such as `verification_code`, without a namespace or braces. Tool arguments reference it with `{{name}}`.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentPostCallConfig:
       type: object
       required:
@@ -105256,7 +104406,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentPostCallIncludeOption'
-          description: Additional content to include in each delivery. The transcript is always delivered. `audio` is not supported in this preview; the service rejects it when the agent version is saved.
+          description: Additional content to include in each delivery. The transcript is always delivered; add `audio` to also deliver a URL to the merged call recording.
       description: Post-call delivery configuration.
       x-ms-foundry-meta:
         required_previews:
@@ -105308,9 +104458,6 @@ components:
             - unfiltered
             - removed
       description: The supported input-transcript profanity filtering modes.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentRealtimeResponse:
       type: object
       properties:
@@ -105386,9 +104533,6 @@ components:
           $ref: '#/components/schemas/VoiceResponseAudio'
           description: The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`.
       description: A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentResponseCreateParams:
       type: object
       properties:
@@ -105482,9 +104626,6 @@ components:
             - type: 'null'
           description: Interim-response settings for this response.
       description: Parameters accepted by a voice-agent `response.create` event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentRoutinePostCallDestination:
       type: object
       required:
@@ -105525,9 +104666,6 @@ components:
           type: string
           description: A human-readable error message.
       description: Details of a WebRTC signaling error.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentRtcCallErrorType:
       anyOf:
         - type: string
@@ -105536,9 +104674,6 @@ components:
             - invalid_request_error
             - server_error
       description: The error categories reported for WebRTC signaling failures.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSemanticVadTurnDetection:
       type: object
       required:
@@ -105565,9 +104700,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: OpenAI semantic VAD turn-detection settings.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSendDtmfSystemTool:
       type: object
       required:
@@ -105581,9 +104713,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: Sends literal or templated keypad digits.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSendSmsSystemTool:
       type: object
       required:
@@ -105597,9 +104726,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: Sends a text message from the Agent's SMS-capable number.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEvent:
       oneOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEventConversationItemAdded'
@@ -105668,7 +104794,7 @@ components:
         - $ref: '#/components/schemas/VoiceAgentServerEventSessionHandoffAborted'
       description: A stable v1 message sent by the service over a voice-agent WebSocket.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
       x-foundry-event-direction: server
     VoiceAgentServerEventInputCollectionStatus:
@@ -105710,9 +104836,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Reports collection or telephony outcomes for a model call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventResponseAnimationBlendshapesDelta:
       type: object
       required:
@@ -105756,9 +104879,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `response.animation_blendshapes.delta` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventResponseAnimationBlendshapesDone:
       type: object
       required:
@@ -105784,9 +104904,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `response.animation_blendshapes.done` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventResponseAnimationVisemeDelta:
       type: object
       required:
@@ -105823,9 +104940,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `response.animation_viseme.delta` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventResponseAnimationVisemeDone:
       type: object
       required:
@@ -105855,9 +104969,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `response.animation_viseme.done` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventResponseAudioTimestampDelta:
       type: object
       required:
@@ -105901,9 +105012,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `response.audio_timestamp.delta` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventResponseAudioTimestampDone:
       type: object
       required:
@@ -105933,9 +105041,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `response.audio_timestamp.done` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventResponseVideoDelta:
       type: object
       required:
@@ -105962,9 +105067,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `response.video.delta` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventRtcCallError:
       type: object
       required:
@@ -105991,9 +105093,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: 'The `rtc.call.error` server event: a WebRTC signaling failure.'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventRtcCallSdpCreated:
       type: object
       required:
@@ -106019,9 +105118,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: 'The `rtc.call.sdp.created` server event: the SDP answer that completes WebRTC negotiation.'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventSessionAvatarConnecting:
       type: object
       required:
@@ -106041,9 +105137,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `session.avatar.connecting` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventSessionAvatarSwitchToIdle:
       type: object
       required:
@@ -106061,9 +105154,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `session.avatar.switch_to_idle` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventSessionAvatarSwitchToSpeaking:
       type: object
       required:
@@ -106081,9 +105171,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `session.avatar.switch_to_speaking` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventSessionHandoffAborted:
       type: object
       required:
@@ -106342,9 +105429,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `session.subagent.aborted` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventSessionSubagentCompleted:
       type: object
       required:
@@ -106374,9 +105458,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `session.subagent.completed` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventSessionSubagentLifecycle:
       type: object
       required:
@@ -106398,9 +105479,6 @@ components:
           type: string
           description: The name of the consulted subagent.
       description: Fields shared by server events that report the lifecycle of a subagent consultation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventSessionSubagentStarted:
       type: object
       required:
@@ -106430,9 +105508,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `session.subagent.started` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventSystemToolArgumentsDelta:
       type: object
       required:
@@ -106474,9 +105549,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: An incremental model-argument fragment for a service-managed system tool.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventSystemToolArgumentsDone:
       type: object
       required:
@@ -106519,9 +105591,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The completed intent arguments for a system tool, not provider success or a request for a customer function result.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventTypeExtension:
       type: string
       enum:
@@ -106548,7 +105617,7 @@ components:
         - session.handoff.completed
         - session.handoff.aborted
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     VoiceAgentServerEventTypeExtensions:
       $ref: '#/components/schemas/VoiceAgentServerEventTypeExtension'
@@ -106571,9 +105640,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: The `warning` server event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerEventWarningDetails:
       type: object
       required:
@@ -106586,9 +105652,6 @@ components:
         param:
           type: string
       description: Details of a non-fatal warning.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentServerVadTurnDetection:
       type: object
       required:
@@ -106625,9 +105688,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: Server-side voice activity detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSessionAvatarConfig:
       type: object
       properties:
@@ -106640,9 +105700,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentAvatarConfig'
       description: Avatar settings accepted by the stable voice-agent WebSocket contract.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSessionIncludeOption:
       type: string
       enum:
@@ -106650,15 +105707,9 @@ components:
         - item.input_audio_transcription.phrases
         - file_search_call.results
       description: Additional fields that a voice-agent session may include in service outputs.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSessionResponse:
       $ref: '#/components/schemas/VoiceAgentSessionResponseConfig'
       description: The effective session configuration returned in voice-agent session lifecycle events.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSessionResponseConfig:
       type: object
       required:
@@ -106750,15 +105801,9 @@ components:
             - type: 'null'
           description: The session expiration time as a Unix timestamp in seconds.
       description: The effective stable realtime session settings returned by the voice-agent service.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSessionUpdate:
       $ref: '#/components/schemas/VoiceAgentSessionUpdateConfig'
       description: The session configuration accepted by a voice-agent session update event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSessionUpdateConfig:
       type: object
       required:
@@ -106826,9 +105871,6 @@ components:
           $ref: '#/components/schemas/VoiceAgentGreetingConfig'
           description: A proactive assistant greeting started after session configuration.
       description: The stable realtime session settings accepted in a `session.update` client event.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSoundscapeConfig:
       type: object
       properties:
@@ -106848,9 +105890,6 @@ components:
           $ref: '#/components/schemas/VoiceAgentSoundscapeTrackConfig'
           description: A one-shot cue played after queued agent speech drains and before a committed session end.
       description: Agent-owned background ambience and event cues. Each omitted track is disabled. The service rejects unknown fields; custom uploads, URLs, and inline audio are not supported.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSoundscapeSound:
       type: string
       enum:
@@ -106862,9 +105901,6 @@ components:
         - ding1
         - ding2
       description: The packaged sounds accepted by a built-in soundscape source.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSoundscapeSourceConfig:
       type: object
       required:
@@ -106880,9 +105916,6 @@ components:
           $ref: '#/components/schemas/VoiceAgentSoundscapeSound'
           description: The name of the packaged sound. Only the listed built-in sounds are accepted.
       description: A packaged sound selected from the service-managed catalogue. The service rejects unknown source fields and discriminator values.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSoundscapeTrackConfig:
       type: object
       required:
@@ -106899,9 +105932,6 @@ components:
           description: Linear playback gain from 0 to 1, independent of agent speech volume. If omitted, the service defaults to 1. A value of 0 mutes this track.
           default: 1
       description: A soundscape track with its own audio source and playback volume.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSoundscapeWorkingTrackConfig:
       type: object
       required:
@@ -106925,9 +105955,6 @@ components:
           description: The delay in milliseconds before working audio starts, from 0 to 10000. If omitted, the service defaults to 1000 milliseconds. This delays only working audio, not tool execution, and is valid only on the working track.
           default: 1000
       description: A working-loop track with a delay measured from the first pending non-call-control tool.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentStaticInterimResponseConfig:
       type: object
       required:
@@ -106945,9 +105972,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
       description: A static interim response selected from configured text.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSubProtocol:
       type: string
       enum:
@@ -106955,7 +105979,7 @@ components:
         - live
       description: Voice protocol; realtime includes cascaded models.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     VoiceAgentSubagent:
       type: object
@@ -106982,9 +106006,6 @@ components:
           maximum: 1200
           description: The wall-clock timeout, in seconds, for each invocation of this subagent. When omitted, the service timeout is used.
       description: A sibling Foundry text agent that a voice agent may consult as a background specialist.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSubagentAbortReason:
       anyOf:
         - type: string
@@ -106997,9 +106018,6 @@ components:
             - superseded
             - failed
       description: The reason a subagent consultation was aborted.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSubagentConfig:
       type: object
       required:
@@ -107017,7 +106035,7 @@ components:
         Configuration for delegated background specialists or inline voice subagents. For compatibility with existing
         delegate configurations, the service treats an omitted `subagent_type` as `delegate`.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     VoiceAgentSubagentResponsePolicy:
       type: object
@@ -107051,9 +106069,6 @@ components:
           maximum: 300
           description: The minimum number of seconds between spoken progress updates.
       description: Policy for delivering responses while a voice agent waits for a subagent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSubagentType:
       anyOf:
         - type: string
@@ -107063,7 +106078,7 @@ components:
             - inline
       description: The subagent configuration mode. Additional modes may be added over time.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     VoiceAgentSystemTool:
       type: object
@@ -107102,9 +106117,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A service-managed control that acts on the active voice session without customer code or external authentication.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSystemToolItem:
       type: object
       required:
@@ -107150,9 +106162,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: Service-generated system-tool intent, not a provider result. Clients cannot create it or complete it with `function_call_output`.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSystemToolItemStatus:
       anyOf:
         - type: string
@@ -107162,9 +106171,6 @@ components:
             - completed
             - incomplete
       description: The generation status of a system-tool item. It does not indicate provider success.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentSystemToolName:
       anyOf:
         - type: string
@@ -107179,9 +106185,6 @@ components:
             - send_dtmf
             - send_sms
       description: A service-managed voice-session control action. Known values are stable; additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTemplateGreetingConfig:
       type: object
       required:
@@ -107199,9 +106202,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentGreetingConfig'
       description: A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTool:
       type: object
       required:
@@ -107218,9 +106218,6 @@ components:
           system: '#/components/schemas/VoiceAgentSystemTool'
           toolbox: '#/components/schemas/VoiceAgentToolboxTool'
       description: A tool usable by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentToolChoice:
       oneOf:
         - type: string
@@ -107231,9 +106228,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceFunction'
         - $ref: '#/components/schemas/OpenAI.ToolChoiceMCP'
       description: Tool-selection behavior for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentToolResponseScheduling:
       anyOf:
         - type: string
@@ -107244,9 +106238,6 @@ components:
             - interrupt
             - skip_if_busy
       description: When a tool invocation creates a follow-up response. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentToolType:
       anyOf:
         - type: string
@@ -107257,9 +106248,6 @@ components:
             - system
             - toolbox
       description: The tool kinds supported by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentToolboxTool:
       type: object
       required:
@@ -107285,9 +106273,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTranscriptionPhrase:
       type: object
       required:
@@ -107323,9 +106308,6 @@ components:
             - type: 'null'
           description: The transcription confidence score.
       description: A transcribed phrase with timing information.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTranscriptionWord:
       type: object
       required:
@@ -107343,9 +106325,6 @@ components:
           $ref: '#/components/schemas/FoundryDurationMilliseconds'
           description: The word duration in milliseconds.
       description: A time-stamped word in an input-audio transcription.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTransferDestination:
       type: object
       required:
@@ -107360,9 +106339,6 @@ components:
           minLength: 1
           description: The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities.
       description: The canonical system-tool transfer destination.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTransferDestinationType:
       type: string
       enum:
@@ -107371,7 +106347,7 @@ components:
         - sip
       description: The supported address formats for a system-tool transfer destination.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - VoiceAgents=V1Preview
     VoiceAgentTransferRouting:
       type: object
@@ -107388,9 +106364,6 @@ components:
           minimum: 1
           default: 20
       description: The configured transfer routing policy. The model selects a target name, not destinations or routing settings.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTransferStrategy:
       anyOf:
         - type: string
@@ -107400,9 +106373,6 @@ components:
             - random
             - parallel
       description: Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTransferSystemTool:
       type: object
       required:
@@ -107427,9 +106397,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: Requests a transfer to an explicitly configured logical target.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTransferTarget:
       type: object
       required:
@@ -107455,9 +106422,6 @@ components:
           $ref: '#/components/schemas/VoiceAgentTransferRouting'
           description: The trusted routing policy for this target.
       description: A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTransport:
       anyOf:
         - type: string
@@ -107466,9 +106430,6 @@ components:
             - websocket
             - webrtc
       description: The transport used for a voice-agent connection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTurnDetectionConfig:
       type: object
       required:
@@ -107490,9 +106451,6 @@ components:
           azure_semantic_vad_multilingual: '#/components/schemas/VoiceAgentAzureSemanticVadMultilingualTurnDetection'
           semantic_vad: '#/components/schemas/VoiceAgentSemanticVadTurnDetection'
       description: Turn-detection configuration for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentTurnDetectionType:
       anyOf:
         - type: string
@@ -107504,9 +106462,6 @@ components:
             - azure_semantic_vad_en
             - azure_semantic_vad_multilingual
       description: The turn-detection strategy. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentVoiceConfig:
       type: object
       properties:
@@ -107572,25 +106527,16 @@ components:
         - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;
           the voice name is derived from the avatar.
         - `azure-realtime-native`: `voice` and `speed`.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentWebSocketMessage:
       oneOf:
         - $ref: '#/components/schemas/VoiceAgentClientEvent'
         - $ref: '#/components/schemas/VoiceAgentServerEvent'
       description: A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are base64-encoded in JSON event fields.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentWebSocketSubprotocol:
       type: string
       enum:
         - realtime
       description: The WebSocket subprotocol supported by a voice-agent connection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAudioCodec:
       anyOf:
         - type: string
@@ -107600,9 +106546,6 @@ components:
             - pcmu
             - pcma
       description: An audio codec. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAudioContainerFormat:
       anyOf:
         - type: string
@@ -107610,9 +106553,6 @@ components:
           enum:
             - wav
       description: An audio container format. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAudioItem:
       type: object
       required:
@@ -107657,9 +106597,6 @@ components:
         `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
         credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
         `/audio/content` route.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAudioRole:
       anyOf:
         - type: string
@@ -107668,9 +106605,6 @@ components:
             - user
             - agent
       description: A voice-audio participant role. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceConversation:
       type: object
       required:
@@ -107712,9 +106646,6 @@ components:
         transcript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:
         deleting it cascades to its responses, items, metrics, and audio. When finalization fails, any partial persisted
         responses, items, and item audio remain readable.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceConversationEngine:
       type: object
       required:
@@ -107728,9 +106659,6 @@ components:
         mapping:
           hosted_agent: '#/components/schemas/VoiceHostedAgentConversationEngine'
       description: An engine that owns conversation handling for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceConversationEngineType:
       anyOf:
         - type: string
@@ -107738,9 +106666,6 @@ components:
           enum:
             - hosted_agent
       description: The conversation engine types supported by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceConversationStatus:
       anyOf:
         - type: string
@@ -107755,9 +106680,6 @@ components:
         - `completed`: finalization succeeded after normal or client close, `end_conversation`, a max-duration `1001`
           close, or a client or network disconnect that the service can still finalize.
         - `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceGeneratedAudioItem:
       type: object
       required:
@@ -107802,9 +106724,6 @@ components:
         `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
         credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
         `/audio/generated/content` route.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceHostedAgentConversationEngine:
       type: object
       required:
@@ -107832,9 +106751,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceConversationEngine'
       description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `voice_conversation_engine` version `1.0.0`. Voice Live connects through the dedicated voice-conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `voice_conversation_engine`.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceModelType:
       anyOf:
         - type: string
@@ -107845,9 +106761,6 @@ components:
       description: |-
         How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),
         which the service derives from the selected model.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceOutputModality:
       anyOf:
         - type: string
@@ -107858,9 +106771,6 @@ components:
             - animation
             - avatar
       description: An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceRecording:
       type: object
       required:
@@ -107903,9 +106813,6 @@ components:
         the URI of the recording in the customer's own storage (no SAS token), which the customer downloads using their
         own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
         `/audio/content` route instead.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceRecordingChannelLayout:
       type: object
       required:
@@ -107923,9 +106830,6 @@ components:
             - agent
           description: The role carried on the right channel. Always `agent`.
       description: The role assigned to each channel of a merged stereo voice recording.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceResponse:
       type: object
       properties:
@@ -108016,9 +106920,6 @@ components:
         full response (`GET .../responses/{response_id}`) or the paged response-items route
         (`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry
         durable ordering extensions.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceResponseAudio:
       type: object
       properties:
@@ -108026,9 +106927,6 @@ components:
           $ref: '#/components/schemas/VoiceResponseAudioOutput'
           description: The audio output configuration used for the response.
       description: Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceResponseAudioOutput:
       type: object
       properties:
@@ -108045,9 +106943,6 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
           description: The audio format used for the response's audio output.
       description: The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceType:
       anyOf:
         - type: string
@@ -108060,9 +106955,6 @@ components:
             - avatar-voice-sync
             - azure-realtime-native
       description: The voice implementation. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     WebIQPreviewTool:
       type: object
       required:

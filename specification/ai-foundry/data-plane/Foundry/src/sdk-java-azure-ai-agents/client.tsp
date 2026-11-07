@@ -2242,7 +2242,6 @@ model OpenAIRealtimeInputImageDetail {}
   "java"
 );
 
-@TypeSpec.OpenAPI.extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union RealtimeConversationItemObject {
   string,
   realtime_item: "realtime.item",
