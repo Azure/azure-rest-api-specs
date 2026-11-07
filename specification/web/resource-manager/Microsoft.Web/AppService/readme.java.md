@@ -67,7 +67,7 @@ directive:
 
 ### Tag: package-2025-03 and java
 
-``` yaml $(java) && $(tag) == 'package-2025-03'
+```yaml $(java) && $(tag) == 'package-2025-03'
 input-file:
   - ../../../../certificateregistration/resource-manager/Microsoft.CertificateRegistration/CertificateRegistration/stable/2024-11-01/AppServiceCertificateOrders.json
   - ../../../../certificateregistration/resource-manager/Microsoft.CertificateRegistration/CertificateRegistration/stable/2024-11-01/CertificateOrdersDiagnostics.json
@@ -84,17 +84,17 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ```yaml $(tag) == 'profile-hybrid-2020-09-01' && $(java)
 input-file:
-- stable/2018-02-01/Certificates.json
-- stable/2018-02-01/CommonDefinitions.json
-- stable/2018-02-01/DeletedWebApps.json
-- stable/2018-02-01/Diagnostics.json
-- stable/2018-02-01/Provider.json
-- stable/2018-02-01/Recommendations.json
-- stable/2018-02-01/ResourceProvider.json
-- stable/2018-02-01/WebApps.json
-- stable/2018-02-01/AppServiceEnvironments.json
-- stable/2018-02-01/AppServicePlans.json
-- stable/2018-02-01/ResourceHealthMetadata.json
+  - stable/2018-02-01/Certificates.json
+  - stable/2018-02-01/CommonDefinitions.json
+  - stable/2018-02-01/DeletedWebApps.json
+  - stable/2018-02-01/Diagnostics.json
+  - stable/2018-02-01/Provider.json
+  - stable/2018-02-01/Recommendations.json
+  - stable/2018-02-01/ResourceProvider.json
+  - stable/2018-02-01/WebApps.json
+  - stable/2018-02-01/AppServiceEnvironments.json
+  - stable/2018-02-01/AppServicePlans.json
+  - stable/2018-02-01/ResourceHealthMetadata.json
 directive:
   - from: CommonDefinitions.json
     where: $.definitions.Identifier.properties.properties.properties.id
