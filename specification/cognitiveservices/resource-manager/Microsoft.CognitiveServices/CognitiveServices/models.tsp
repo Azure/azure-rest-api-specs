@@ -4428,7 +4428,14 @@ model RaiPolicyProperties {
   type?: RaiPolicyType;
 
   /**
-   * Rai policy mode. The enum value mapping is as below: Default = 0, Deferred=1, Blocking=2, Asynchronous_filter =3. Please use 'Asynchronous_filter' after 2025-06-01. It is the same as 'Deferred' in previous version.
+   * RAI policy delivery mode. Use Asynchronous_filter rather than its Deferred alias after
+   * 2025-06-01. For ACS policies in 2026-11-15-preview, this policy-level setting is outside
+   * the ACS manifest. Omission, Default and Blocking retain buffered delivery on supported
+   * native runtime profiles. Asynchronous_filter permits Completion text delivery before
+   * final moderation only on qualified runtime profiles. It does not select request
+   * streaming or disable policy evaluation. Successful terminal events are withheld until
+   * the final moderation verdict. Unsupported asynchronous judge and required-policy
+   * compositions are rejected.
    */
   mode?: RaiPolicyMode;
 
