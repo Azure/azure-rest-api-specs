@@ -5218,6 +5218,11 @@ namespace KnowledgeBaseRetrievalClient {
   "javascript"
 );
 @@clientName(
+  Search.KnowledgeBaseActivityRecord.elapsedMs,
+  "elapsedInMs",
+  "javascript"
+);
+@@clientName(
   Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsVitBasePatch32,
   "OpenAIClipImageTextEmbeddingsVitBasePatch32",
   "javascript"
