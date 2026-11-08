@@ -27,6 +27,15 @@ input-file:
   - preview/2026-05-01-preview/identityAccess.json
 ```
 
+### Emitter selection
+
+The default `emit` list generates only OpenAPI, following the repository's
+[ARM widget template](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/widget/resource-manager/Microsoft.Widget/Widget/tspconfig.yaml).
+SDK pipelines select a language emitter explicitly with `--emit`; its settings
+are supplied by the corresponding `options` block. Those options are retained
+for pipeline use and do not request local SDK generation during spec compilation.
+Package names still require SDK owner and architect approval.
+
 ## Behavior
 
 Both operations are synchronous POST actions named
@@ -74,6 +83,32 @@ This is not an effective-permissions evaluator. Other roles may provide sufficie
 permissions even when the recommended role is missing, and finding that role is
 not a guarantee of success for later operations. The API does not create an
 agent, grant roles, or enforce agent creation.
+
+### Why the contract uses POST
+
+This provider-level action evaluates a proposed set of inputs before an agent
+exists; it does not read a stored validation result or an agent property.
+The request includes an identity ID, an optional account ID, and up to ten
+monitored resource IDs, each up to 2048 characters. Keeping this structured
+input in the body avoids a potentially very long query string and reliance
+on a GET request body.
+
+The result is calculated using current identity and role-assignment information
+and the caller's delegated authorization. The same inputs can therefore produce
+different outcomes as permissions or the caller change. There is no agent
+creation-time result to reuse, particularly when the agent or resource group
+has not yet been created. This describes the result's semantics, not an
+assertion about HTTP cache-control headers.
+
+The implemented operation completes in the original response; it does not
+provide a 202 response, polling URL, or persisted validation resource.
+Changing only the specification to GET or an asynchronous POST would describe
+a contract the service does not implement.
+
+POST is proposed here as a request-scoped validation action, not as a secret
+retrieval operation or a latency-based exception. No measured equivalent-GET
+P99 latency or ARM exception approval is claimed. ARM reviewers must confirm
+this classification or require a coordinated contract change.
 
 ## Errors and compatibility
 

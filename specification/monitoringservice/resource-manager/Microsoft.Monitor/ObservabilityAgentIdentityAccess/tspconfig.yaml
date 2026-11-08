@@ -2,6 +2,7 @@ parameters:
   service-dir:
     default: "sdk/monitor"
 emit:
+  # Spec compilation emits OpenAPI; SDK pipelines select their emitter with --emit.
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
