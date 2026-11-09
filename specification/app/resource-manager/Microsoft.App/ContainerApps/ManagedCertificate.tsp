@@ -25,28 +25,6 @@ model ManagedCertificate
   >;
 }
 
-alias ManagedCertificateOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** Name of the Managed Environment. */
-    @path
-    @segment("managedEnvironments")
-    @key
-    environmentName: string;
-  },
-  {
-    /** Name of the Managed Certificate. */
-    @path
-    @segment("managedCertificates")
-    @key
-    managedCertificateName: string;
-  }
->;
-
 @armResourceOperations
 @tag("ManagedEnvironments")
 @tag("ManagedCertificates")
@@ -62,7 +40,7 @@ interface ManagedCertificates {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or Update a Managed Certificate.")
-  createOrUpdate is ManagedCertificateOps.CreateOrUpdateAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     ManagedCertificate,
     Response =
       | ArmResourceUpdatedResponse<ManagedCertificate>
