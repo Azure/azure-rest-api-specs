@@ -6,6 +6,10 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.ResourceManager.Foundations;
 using Microsoft.ManagedNetworkFabric;
 
+// Go
+@@clientName(ControllerType.ciscoAci, "CiscoACI", "go");
+@@clientName(NetworkFabricRefreshDeviceTypes.ToR, "TOR", "go");
+
 @@clientName(AccessControlList, "NetworkFabricAccessControlList", "csharp");
 @@clientName(ExternalNetwork, "NetworkFabricExternalNetwork", "csharp");
 @@clientName(InternalNetwork, "NetworkFabricInternalNetwork", "csharp");
