@@ -127,7 +127,7 @@ model RecoveryPlanRestoreContent {
 @doc("Whether matching resources are included in or excluded from this restore request.")
 union RestoreFilterType {
   @added(Versions.v2026_12_30_preview)
-  @doc("Selects the union of resources matching the supplied data source, workload, and recovery group selectors within the plan's included resource catalog.")
+  @doc("Selects the union of resources matching the supplied recovery resource, workload, and recovery group selectors within the plan's included resource catalog.")
   Include: "Include",
 
   @added(Versions.v2026_12_30_preview)
@@ -147,10 +147,10 @@ model RestoreResourceFilter {
   @added(Versions.v2026_12_30_preview)
   @doc("Recovery resource GUID selectors with optional per-resource recovery point IDs or point-in-time selections. Duplicate recoveryResourceId values are not allowed.")
   @identifiers(#["recoveryResourceId"])
-  dataSources?: RestoreDataSourceInput[];
+  recoveryResources?: RestoreDataSourceInput[];
 
   @added(Versions.v2026_12_30_preview)
-  @doc("Workload selectors combined with the data source and recovery group selectors by union.")
+  @doc("Workload selectors combined with the recovery resource and recovery group selectors by union.")
   workloadTypes?: WorkloadType[];
 
   @added(Versions.v2026_12_30_preview)

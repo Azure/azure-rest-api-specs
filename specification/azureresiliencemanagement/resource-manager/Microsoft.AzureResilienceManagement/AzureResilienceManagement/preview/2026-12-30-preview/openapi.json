@@ -12795,7 +12795,7 @@
           {
             "name": "Include",
             "value": "Include",
-            "description": "Selects the union of resources matching the supplied data source, workload, and recovery group selectors within the plan's included resource catalog."
+            "description": "Selects the union of resources matching the supplied recovery resource, workload, and recovery group selectors within the plan's included resource catalog."
           },
           {
             "name": "Exclude",
@@ -12813,7 +12813,7 @@
           "$ref": "#/definitions/RestoreFilterType",
           "description": "Whether matching resources are included in or excluded from the request."
         },
-        "dataSources": {
+        "recoveryResources": {
           "type": "array",
           "description": "Recovery resource GUID selectors with optional per-resource recovery point IDs or point-in-time selections. Duplicate recoveryResourceId values are not allowed.",
           "items": {
@@ -12825,7 +12825,7 @@
         },
         "workloadTypes": {
           "type": "array",
-          "description": "Workload selectors combined with the data source and recovery group selectors by union.",
+          "description": "Workload selectors combined with the recovery resource and recovery group selectors by union.",
           "items": {
             "$ref": "#/definitions/WorkloadType"
           }
