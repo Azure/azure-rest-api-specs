@@ -540,7 +540,7 @@ interface UpdateRuns {
   >;
 
   @doc("Resets members within the target scope of an UpdateRun.")
-  @added(Versions.v2026_12_01_preview)
+  @added(Versions.v2027_02_01_preview)
   reset is ArmResourceActionSync<
     UpdateRun,
     ResetProperties,
