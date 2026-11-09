@@ -693,6 +693,7 @@ model AvsConnection {
   serviceInitializationCompleted: boolean;
 
   @doc("Encoded service account credentials alongside connection information")
+  @secret
   serviceInitializationHandleEnc?: string;
 
   @doc("Explicit service account credentials")
