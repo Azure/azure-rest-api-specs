@@ -25,6 +25,8 @@ type PreparationProject = import("./runtime-types.ts").PreparationProject;
 
 type SourceIndex = import("./runtime-types.ts").SourceIndex;
 
+type SchemaDirection = "request" | "response";
+
 const WIRE_CONSTRAINT_FIELDS = [
   "maximum",
   "exclusiveMaximum",
@@ -123,6 +125,184 @@ function same(left: unknown, right: unknown) {
     : canonicalJson(left) === canonicalJson(right);
 }
 
+function unresolvedReferenceIdentity(value: unknown): string | undefined {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const record = value as Record<string, unknown>;
+  if (record.unresolved !== true && typeof record.unresolvedReference !== "string") {
+    return undefined;
+  }
+  for (const field of ["ref", "reference", "unresolvedReference"]) {
+    if (typeof record[field] === "string") return record[field];
+  }
+  return "<unresolved>";
+}
+
+function isArmCommonTypeReference(identity: string): boolean {
+  const normalized = identity.replaceAll("\\", "/");
+  return (
+    /(?:^|\/)specification\/common-types\//i.test(normalized) ||
+    /^(?:\.\.\/|\.\/)*common-types\//i.test(normalized)
+  );
+}
+
+function unresolvedArrayKey(value: unknown, index: number): string {
+  if (value !== null && typeof value === "object" && !Array.isArray(value)) {
+    const record = value as Record<string, unknown>;
+    if (typeof record.operationId === "string") return `operation:${record.operationId}`;
+    if (typeof record.status === "string") return `status:${record.status}`;
+    if (typeof record.name === "string" && typeof record.in === "string") {
+      return `parameter:${record.in}:${record.name}`;
+    }
+    if (typeof record.name === "string") return `name:${record.name}`;
+  }
+  return `index:${index}`;
+}
+
+function collectBlockingUnresolvedEvidence(
+  value: unknown,
+  location: string,
+  result: Map<string, string>,
+) {
+  if (value === null || typeof value !== "object") return;
+  const identity = unresolvedReferenceIdentity(value);
+  if (identity !== undefined) {
+    if (!isArmCommonTypeReference(identity)) result.set(location, identity);
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) =>
+      collectBlockingUnresolvedEvidence(
+        item,
+        `${location}[${unresolvedArrayKey(item, index)}]`,
+        result,
+      ),
+    );
+    return;
+  }
+  for (const [key, nested] of Object.entries(value)) {
+    collectBlockingUnresolvedEvidence(nested, `${location}.${key}`, result);
+  }
+}
+
+function changedUnresolvedEvidence(before: unknown, after: unknown): boolean {
+  if (same(before, after)) return false;
+  const baseline = new Map<string, string>();
+  const target = new Map<string, string>();
+  collectBlockingUnresolvedEvidence(before, "$", baseline);
+  collectBlockingUnresolvedEvidence(after, "$", target);
+  return [...new Set([...baseline.keys(), ...target.keys()])].some(
+    (key) => baseline.get(key) !== target.get(key),
+  );
+}
+
+function ambiguousVisibilityEvidence(value: unknown): boolean {
+  if (value === null || typeof value !== "object") return false;
+  if (Array.isArray(value)) return value.some(ambiguousVisibilityEvidence);
+  const record = value as Record<string, unknown>;
+  if ("readOnly" in record && typeof record.readOnly !== "boolean") return true;
+  if (
+    "mutability" in record &&
+    (!Array.isArray(record.mutability) ||
+      !record.mutability.length ||
+      record.mutability.some(
+        (item) =>
+          typeof item !== "string" || !["create", "read", "update"].includes(item.toLowerCase()),
+      ))
+  ) {
+    return true;
+  }
+  return Object.values(record).some(ambiguousVisibilityEvidence);
+}
+
+function visibleIn(schema: NormalizedSchema, direction: SchemaDirection): boolean {
+  const mutability = Array.isArray(schema.mutability)
+    ? schema.mutability
+        .filter((item): item is string => typeof item === "string")
+        .map((item) => item.toLowerCase())
+    : undefined;
+  if (direction === "request") {
+    if (schema.readOnly === true) return false;
+    return !mutability?.length || mutability.includes("create") || mutability.includes("update");
+  }
+  return !mutability?.length || mutability.includes("read");
+}
+
+type ObjectContract = {
+  properties: NonNullable<NormalizedSchema["properties"]>;
+  constraints: Record<string, unknown[]>;
+  additionalProperties: unknown;
+};
+
+function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | undefined {
+  if (schema.kind !== "object" && schema.kind !== "intersection") return undefined;
+  const properties = new Map<string, NonNullable<NormalizedSchema["properties"]>[number]>();
+  const constraints = new Map<string, unknown[]>();
+  const additionalProperties: unknown[] = [];
+
+  const visit = (current: NormalizedSchema): boolean => {
+    const unresolved = unresolvedReferenceIdentity(current);
+    if (unresolved !== undefined) return isArmCommonTypeReference(unresolved);
+    if (current.kind !== "object" && current.kind !== "intersection" && current.kind !== "any") {
+      return false;
+    }
+    if (current.allOf?.length) return current.allOf.every(visit);
+
+    for (const field of WIRE_CONSTRAINT_FIELDS) {
+      if (current[field] === undefined) continue;
+      const values = constraints.get(field) ?? [];
+      values.push(current[field]);
+      constraints.set(field, values);
+    }
+    if (current.additionalProperties !== undefined) {
+      additionalProperties.push(current.additionalProperties);
+    }
+    for (const property of current.properties ?? []) {
+      const existing = properties.get(property.name);
+      if (!existing) {
+        properties.set(property.name, property);
+      } else {
+        properties.set(property.name, {
+          name: property.name,
+          required: existing.required || property.required,
+          schema: same(existing.schema, property.schema)
+            ? existing.schema
+            : {
+                kind: "intersection",
+                allOf: [existing.schema, property.schema],
+              },
+        });
+      }
+    }
+    return true;
+  };
+
+  if (!visit(schema)) return undefined;
+  return {
+    properties: [...properties.values()].sort((left, right) => left.name.localeCompare(right.name)),
+    constraints: Object.fromEntries(
+      [...constraints.entries()].map(([field, values]) => [
+        field,
+        [...new Map(values.map((value) => [canonicalJson(value), value])).values()].sort(
+          (left, right) => canonicalJson(left).localeCompare(canonicalJson(right)),
+        ),
+      ]),
+    ),
+    additionalProperties: additionalProperties.includes(false)
+      ? false
+      : (() => {
+          const schemas = [
+            ...new Map(
+              additionalProperties
+                .filter((value) => value !== true)
+                .map((value) => [canonicalJson(value), value]),
+            ).values(),
+          ].sort((left, right) => canonicalJson(left).localeCompare(canonicalJson(right)));
+          if (!schemas.length) return true;
+          return schemas.length === 1 ? schemas[0] : schemas;
+        })(),
+  };
+}
+
 function pairs(base: NormalizedAutorestOperation[], current: NormalizedAutorestOperation[]) {
   const currentByKey = new Map(current.map((item) => [logicalKey(item), item]));
   const used = new Set();
@@ -144,12 +324,26 @@ function schemaChanges(
   before: NormalizedSchema | undefined,
   after: NormalizedSchema | undefined,
   location: string = "body",
+  direction: SchemaDirection = "request",
 ): BreakingChange[] {
   if (same(before, after)) return [];
   if (!before || !after) return [{ rule: "wire-schema-changed", location }];
+  const beforeUnresolved = unresolvedReferenceIdentity(before);
+  const afterUnresolved = unresolvedReferenceIdentity(after);
+  if (
+    beforeUnresolved !== undefined &&
+    afterUnresolved !== undefined &&
+    isArmCommonTypeReference(beforeUnresolved) &&
+    isArmCommonTypeReference(afterUnresolved)
+  ) {
+    return [];
+  }
 
+  const beforeObject = effectiveObjectContract(before);
+  const afterObject = effectiveObjectContract(after);
+  const objectContracts = beforeObject && afterObject;
   const changes: BreakingChange[] = [];
-  if (before.kind !== after.kind || before.type !== after.type) {
+  if (!objectContracts && (before.kind !== after.kind || before.type !== after.type)) {
     return [{ rule: "wire-type-changed", location }];
   }
   if (before.nullable && !after.nullable) changes.push({ rule: "nullable-restricted", location });
@@ -161,13 +355,24 @@ function schemaChanges(
         schema[field],
       ]),
     );
-  if (!same(constraints(before), constraints(after))) {
+  if (
+    !same(
+      objectContracts ? beforeObject.constraints : constraints(before),
+      objectContracts ? afterObject.constraints : constraints(after),
+    )
+  ) {
     changes.push({ rule: "wire-schema-changed", location });
   }
-  if (before.kind === "object" || before.kind === "intersection") {
-    const beforeProperties = new Map((before.properties ?? []).map((item) => [item.name, item]));
-    const afterProperties = new Map((after.properties ?? []).map((item) => [item.name, item]));
-    for (const property of before.properties ?? []) {
+  if (objectContracts) {
+    const beforeVisibleProperties = beforeObject.properties.filter((item) =>
+      visibleIn(item.schema, direction),
+    );
+    const afterVisibleProperties = afterObject.properties.filter((item) =>
+      visibleIn(item.schema, direction),
+    );
+    const beforeProperties = new Map(beforeVisibleProperties.map((item) => [item.name, item]));
+    const afterProperties = new Map(afterVisibleProperties.map((item) => [item.name, item]));
+    for (const property of beforeVisibleProperties) {
       const current = afterProperties.get(property.name);
       if (!current) {
         changes.push({
@@ -180,17 +385,23 @@ function schemaChanges(
         changes.push({ rule: "property-required", location: `${location}.${property.name}` });
       }
       changes.push(
-        ...schemaChanges(property.schema, current.schema, `${location}.${property.name}`),
+        ...schemaChanges(
+          property.schema,
+          current.schema,
+          `${location}.${property.name}`,
+          direction,
+        ),
       );
     }
-    for (const property of after.properties ?? []) {
+    for (const property of afterVisibleProperties) {
       if (!beforeProperties.has(property.name) && property.required) {
         changes.push({ rule: "required-property-added", location: `${location}.${property.name}` });
       }
     }
-    if (!same(before.additionalProperties, after.additionalProperties)) {
+    if (!same(beforeObject.additionalProperties, afterObject.additionalProperties)) {
       changes.push({ rule: "additional-properties-changed", location });
     }
+  } else if (before.kind === "object" || before.kind === "intersection") {
     if (before.kind === "intersection") {
       const beforeParts = before.allOf ?? [];
       const afterParts = after.allOf ?? [];
@@ -198,12 +409,14 @@ function schemaChanges(
         changes.push({ rule: "wire-schema-changed", location });
       } else {
         for (let index = 0; index < beforeParts.length; index += 1) {
-          changes.push(...schemaChanges(beforeParts[index], afterParts[index], location));
+          changes.push(
+            ...schemaChanges(beforeParts[index], afterParts[index], location, direction),
+          );
         }
       }
     }
   } else if (before.kind === "array") {
-    changes.push(...schemaChanges(before.items, after.items, `${location}[]`));
+    changes.push(...schemaChanges(before.items, after.items, `${location}[]`, direction));
   } else if (before.kind === "enum") {
     const currentValues = new Set(after.values ?? []);
     const removed = (before.values ?? []).filter((item) => !currentValues.has(item));
@@ -296,6 +509,7 @@ function description(change: BreakingChange, operationId: string) {
 function compareOperation(
   before: NormalizedAutorestOperation,
   after: NormalizedAutorestOperation | undefined,
+  newApiVersion: boolean = false,
 ): BreakingChange[] {
   if (!after) return [{ rule: "operation-removed" }];
 
@@ -320,11 +534,24 @@ function compareOperation(
       });
       continue;
     }
+    if (
+      newApiVersion &&
+      parameter.in === "query" &&
+      parameter.name === "api-version" &&
+      before.apiVersion &&
+      after.apiVersion &&
+      before.apiVersion !== after.apiVersion &&
+      parameter.required === current.required &&
+      parameter.collectionFormat === current.collectionFormat &&
+      selectorSchemaOnly(parameter.schema, current.schema, before.apiVersion, after.apiVersion)
+    ) {
+      continue;
+    }
     if (!parameter.required && current.required) {
       changes.push({ rule: "parameter-required", location: parameter.name });
     }
     if (
-      schemaChanges(parameter.schema, current.schema, parameter.name).length ||
+      schemaChanges(parameter.schema, current.schema, parameter.name, "request").length ||
       parameter.collectionFormat !== current.collectionFormat
     ) {
       changes.push({ rule: "parameter-wire-type-changed", location: parameter.name });
@@ -347,7 +574,9 @@ function compareOperation(
     if (before.request.kind !== after.request.kind)
       changes.push({ rule: "wire-schema-changed", location: "request body" });
     else if (before.request.kind === "body") {
-      changes.push(...schemaChanges(before.request.schema, after.request.schema, "request body"));
+      changes.push(
+        ...schemaChanges(before.request.schema, after.request.schema, "request body", "request"),
+      );
     } else {
       const beforeRequestMembers = before.request.members;
       const afterRequestMembers = after.request.members;
@@ -370,7 +599,7 @@ function compareOperation(
           schema: item.schema,
         })),
       } as unknown as NormalizedSchema;
-      changes.push(...schemaChanges(beforeMembers, afterMembers, "multipart request"));
+      changes.push(...schemaChanges(beforeMembers, afterMembers, "multipart request", "request"));
     }
   }
 
@@ -391,12 +620,14 @@ function compareOperation(
     if (response.statusKind !== current.statusKind) {
       changes.push({ rule: "response-classification-changed", location: response.status });
     }
-    changes.push(...schemaChanges(response.schema, current.schema, `response ${response.status}`));
+    changes.push(
+      ...schemaChanges(response.schema, current.schema, `response ${response.status}`, "response"),
+    );
     const currentHeaders = new Map(current.headers.map((item) => [item.name.toLowerCase(), item]));
     for (const header of response.headers) {
       const currentHeader = currentHeaders.get(header.name.toLowerCase());
       if (!currentHeader) changes.push({ rule: "response-header-removed", location: header.name });
-      else if (schemaChanges(header.schema, currentHeader.schema, header.name).length) {
+      else if (schemaChanges(header.schema, currentHeader.schema, header.name, "response").length) {
         changes.push({ rule: "response-header-changed", location: header.name });
       }
     }
@@ -412,6 +643,32 @@ function compareOperation(
     const key = canonicalJson(item);
     return seen.has(key) ? false : (seen.add(key), true);
   });
+}
+
+function selectorSchemaOnly(
+  before: NormalizedSchema | undefined,
+  after: NormalizedSchema | undefined,
+  baselineVersion: string,
+  targetVersion: string,
+): boolean {
+  const normalize = (schema: NormalizedSchema | undefined, version: string) => {
+    if (
+      schema?.kind !== "enum" ||
+      schema.values?.length !== 1 ||
+      schema.values[0] !== version ||
+      (schema.default !== undefined && schema.default !== version)
+    ) {
+      return undefined;
+    }
+    return {
+      ...schema,
+      values: ["<api-version>"],
+      ...(schema.default !== undefined ? { default: "<api-version>" } : {}),
+    };
+  };
+  const baseline = normalize(before, baselineVersion);
+  const target = normalize(after, targetVersion);
+  return baseline !== undefined && target !== undefined && same(baseline, target);
 }
 
 export function analyzeRestBreaking(options: {
@@ -432,6 +689,10 @@ export function analyzeRestBreaking(options: {
   for (const project of [...(manifest.projects ?? [])].sort((left, right) =>
     left.id.localeCompare(right.id),
   )) {
+    if (project.classification === "new" || project.artifactComparison?.mode === "new-project") {
+      analyzedProjects += 1;
+      continue;
+    }
     const baseArtifact = project.artifacts?.baseline?.autorest ?? project.artifacts?.base?.autorest;
     const currentArtifact =
       project.artifacts?.target?.autorest ?? project.artifacts?.current?.autorest;
@@ -447,11 +708,23 @@ export function analyzeRestBreaking(options: {
       const base = normalizeAutorestContract({ workRoot, artifact: baseArtifact });
       const current = normalizeAutorestContract({ workRoot, artifact: currentArtifact });
       const source = evidence(project, sourceIndex);
+      const unresolvedOperations: string[] = [];
       for (const { before, after } of pairs(base.operations, current.operations)) {
         if (!before) continue;
-        const changes = compareOperation(before, after);
+        const changes = compareOperation(
+          before,
+          after,
+          project.artifactComparison?.mode === "new-api-version",
+        );
+        if (
+          after &&
+          (changedUnresolvedEvidence(before, after) ||
+            (!same(before, after) &&
+              (ambiguousVisibilityEvidence(before) || ambiguousVisibilityEvidence(after))))
+        ) {
+          unresolvedOperations.push(before.operationId);
+        }
         if (!changes.length) continue;
-        if (project.artifactComparison?.mode === "new-api-version") continue;
         const beforeFactId = operationFact(facts, project, "baseline", before);
         const afterFactId = after ? operationFact(facts, project, "target", after) : undefined;
         for (const change of changes) {
@@ -471,6 +744,16 @@ export function analyzeRestBreaking(options: {
           const id = stableId("rest", candidate);
           candidates.push({ id, ...candidate, contractChange: change });
         }
+      }
+      if (unresolvedOperations.length) {
+        blockers.push({
+          code: "autorest-contract-unresolved",
+          projectId: project.id,
+          message:
+            `Changed AutoRest contracts for ${unresolvedOperations.length} operations in ${project.id} ` +
+            `contain unresolved references or ambiguous visibility metadata (${unresolvedOperations.slice(0, 3).join(", ")}). ` +
+            "Their effective compatibility cannot be established from incomplete contract evidence.",
+        });
       }
       analyzedProjects += 1;
     } catch (error) {
