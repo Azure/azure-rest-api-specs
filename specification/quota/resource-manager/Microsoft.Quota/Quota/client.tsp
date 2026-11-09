@@ -88,6 +88,13 @@ using Microsoft.Quota;
   "csharp"
 );
 
+@@clientName(QuotaTransferProperties.autoApprove, "IsAutoApproveEnabled", "csharp");
+@@clientName(ApprovalRecord, "QuotaTransferApprovalRecord", "csharp");
+@@clientName(CancellationRecord, "QuotaTransferCancellationRecord", "csharp");
+@@clientName(RejectionRecord, "QuotaTransferRejectionRecord", "csharp");
+@@alternateType(QuotaTransfer.etag, Azure.Core.eTag, "csharp");
+@@alternateType(IncomingQuotaTransfer.etag, Azure.Core.eTag, "csharp");
+
 @@usage(QuotaAllocationRequestStatus, Usage.input, "csharp");
 @@usage(QuotaAllocationRequestBase, Usage.input, "csharp");
 @@usage(GroupQuotaSubscriptionRequestStatusProperties, Usage.input, "csharp");
