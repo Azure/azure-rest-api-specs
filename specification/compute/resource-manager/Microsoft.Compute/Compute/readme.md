@@ -854,10 +854,6 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart"].post
   - code: PostResponseCodes
-    reason: Restore is a long-running POST with no response body. The service returns 202 with a Location header and the operation completes with an empty 200, so neither the 200-with-schema nor the 204 final response applies. This is the same response shape as migrateToVirtualMachineScaleSet.
-    from: ComputeRP.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restore"].post
-  - code: PostResponseCodes
     reason: Existing POST response codes maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/start"].post

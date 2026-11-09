@@ -353,11 +353,13 @@ interface VirtualMachines {
   /**
    * [Preview Feature] Restores all operating system and data disks of a deallocated virtual machine from a virtual machine restore point. The restore point must contain restore point data for every disk currently attached to the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "restore is a no-body LRO POST; 202+204 is the accurate contract per LintDiff PostResponseCodes requirements"
   @added(Versions.v2026_09_01)
-  restore is ComputeResourceActionNoResponseContentAsync<
+  restore is ComputeResourceActionAsync<
     VirtualMachine,
     VirtualMachineRestoreParameters,
-    Error = CloudError
+    Response = ArmNoContentResponse<"Action completed successfully.">,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
