@@ -792,7 +792,7 @@ void test("five dimension headers and empty not-assessed states use the shared l
   assert.match(html, /grid-template-columns:\s*minmax\(0,\s*1fr\)\s+max-content/);
 });
 
-void test("compatibility findings remain failed when evidence coverage is partial", () => {
+void test("compatibility findings remain failed without displaying evidence coverage labels", () => {
   const { dimension } = fixture();
   dimension.status = "failed";
   dimension.verdict = "failed";
@@ -808,8 +808,8 @@ void test("compatibility findings remain failed when evidence coverage is partia
   const html = renderAssessmentHtml(input);
   const downstream = reportSection(html, "downstream-breaking");
   assert.match(downstream, /report-badge remove">failed/);
-  assert.match(downstream, /report-badge unknown coverage">partial coverage/);
-  assert.match(html, /Partial coverage/);
+  assert.notMatch(html, /partial coverage|complete coverage|coverage blocked/i);
+  assert.notMatch(html, /evidence coverage/i);
 });
 
 void test("legacy type findings remain visible when method mappings are unavailable", () => {
