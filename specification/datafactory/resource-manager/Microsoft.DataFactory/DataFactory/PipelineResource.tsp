@@ -51,6 +51,7 @@ interface PipelineResources {
    * Creates or updates a pipeline.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing createOrUpdate retains its request-body shape; preserve wire compatibility."
   @tag("pipelines")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PipelineResource,
@@ -85,6 +86,7 @@ interface PipelineResources {
   /**
    * Creates a run of a pipeline.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing createRun retains its request-body shape; preserve wire compatibility."
   @tag("pipelines")
   createRun is ArmResourceActionSync<
     PipelineResource,
@@ -94,24 +96,28 @@ interface PipelineResources {
       /**
        * The pipeline run identifier. If run ID is specified the parameters of the specified run will be used to create a new run.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing createRun POST contract uses referencePipelineRunId in the query; preserve wire compatibility."
       @query("referencePipelineRunId")
       referencePipelineRunId?: string;
 
       /**
        * Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing createRun POST contract uses isRecovery in the query; preserve wire compatibility."
       @query("isRecovery")
       isRecovery?: boolean;
 
       /**
        * In recovery mode, the rerun will start from this activity. If not specified, all activities will run.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing createRun POST contract uses startActivityName in the query; preserve wire compatibility."
       @query("startActivityName")
       startActivityName?: string;
 
       /**
        * In recovery mode, if set to true, the rerun will start from failed activities. The property will be used only if startActivityName is not specified.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing createRun POST contract uses startFromFailure in the query; preserve wire compatibility."
       @query("startFromFailure")
       startFromFailure?: boolean;
     },

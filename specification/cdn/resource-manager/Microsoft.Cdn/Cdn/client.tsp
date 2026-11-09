@@ -6,6 +6,7 @@ using Microsoft.Cdn;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
+@@clientName(AFDDomainMtlsParameters, "AFDDomainMTLSParameters", "go");
 @@clientName(
   CertificateSourceParameters,
   "CertificateSourceParametersBase",
@@ -1508,6 +1509,7 @@ using Azure.ResourceManager;
 );
 @@clientName(Endpoints.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(RuleSets.listResourceUsage, "GetResourceUsages", "csharp");
+@@clientName(RuleSetProperties.batchMode, "IsBatchMode", "csharp");
 
 // Python SDK customizations: preserve client name and enum member names from the
 // pre-migration Swagger SDK to avoid breaking changes for existing consumers.
@@ -1561,6 +1563,40 @@ using Azure.ResourceManager;
   "python"
 );
 @@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
+
+// Preserve the last pre-migration Front Door name constraints for C# provisioning compatibility.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  AFDEndpoint,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 46, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  AFDOriginGroup,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 90, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  AFDOrigin,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 90, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  Route,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 90, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
 
 // Mark CustomDomains.create as ARM CreateOrUpdate operation
 // so that the SDK generator produces CreateOrUpdate methods

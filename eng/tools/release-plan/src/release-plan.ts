@@ -30,7 +30,7 @@ export function ensureReleasePlan(
   allowCreate = true,
 ): EnsureReleasePlanResult {
   if (context.prUrl) {
-    const existingByPr = runGetReleasePlanByPr(context.prUrl, runner);
+    const existingByPr = runGetReleasePlanByPr(context.prUrl, context.apiReleaseType, runner);
     if (existingByPr) {
       return {
         outcome: "existing_by_pr",
@@ -80,6 +80,7 @@ function buildDetails(context: ReleasePlanCommandContext): EnsureReleasePlanResu
     prUrl: context.prUrl ?? "",
     tspProjectPath: context.tspProjectPath,
     apiVersion: context.apiVersion,
+    specCommitSha: context.specCommitSha,
     apiReleaseType: context.apiReleaseType,
     sdkReleaseType: context.sdkReleaseType,
     targetReleaseMonth: context.targetMonth,
@@ -87,13 +88,27 @@ function buildDetails(context: ReleasePlanCommandContext): EnsureReleasePlanResu
 }
 
 /**
- * Retrieves release plan by pull request URL.
+ * Retrieves release plan by pull request URL and API release type.
  * @param prUrl GitHub PR URL (e.g., https://github.com/owner/repo/pull/123)
+ * @param apiReleaseType API release type to match
  * @param runner Function to execute azsdk commands
  * @returns Release plan object if found, null if not found or error occurred
  */
-function runGetReleasePlanByPr(prUrl: string, runner: AzsdkRunner): ReleasePlanData | null {
-  const args = ["release-plan", "get", "--pull-request", prUrl, "--output", "json"];
+function runGetReleasePlanByPr(
+  prUrl: string,
+  apiReleaseType: ApiReleaseType,
+  runner: AzsdkRunner,
+): ReleasePlanData | null {
+  const args = [
+    "release-plan",
+    "get",
+    "--pull-request",
+    prUrl,
+    "--api-release-type",
+    apiReleaseType,
+    "--output",
+    "json",
+  ];
   return parseReleasePlanResult(runner(args));
 }
 
@@ -180,6 +195,9 @@ function runCreateReleasePlan(
     context.prUrl,
     "--test-release",
     String(context.testReleasePlan),
+    ...(context.apiReleaseType === "Private Preview"
+      ? []
+      : ["--spec-commit-sha", context.specCommitSha]),
     "--output",
     "json",
   ];
