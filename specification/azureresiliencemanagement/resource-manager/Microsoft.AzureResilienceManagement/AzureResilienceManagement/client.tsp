@@ -29,6 +29,11 @@ using TypeSpec.Versioning;
   "csharp"
 );
 @@clientName(DrillStartRequest, "DrillStartContent", "csharp");
+@@clientName(
+  FetchRecoveryPointsRequest,
+  "FetchRecoveryPointsContent",
+  "csharp"
+);
 @@clientName(DrillRunAddNotesRequest, "DrillRunAddNotesContent", "csharp");
 @@clientName(RecommendCapacityRequest, "RecommendCapacityContent", "csharp");
 @@clientName(RecoveryActionRequest, "RecoveryActionContent", "csharp");

@@ -2880,6 +2880,87 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/fetchRecoveryPoints": {
+      "post": {
+        "operationId": "RecoveryPlanActions_FetchRecoveryPoints",
+        "tags": [
+          "RecoveryPlanActions"
+        ],
+        "description": "Fetches the recovery point selected for each selected recovery resource using the effective recovery point policy. Request policy overrides apply only to this request and do not modify saved profiles. The final result of the long-running operation contains the selected recovery points.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RequiredRequestHeaders"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "description": "The name of the recovery orchestration plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{5,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FetchRecoveryPointsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FetchRecoveryPointsResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fetch recovery points for all included recovery resources using policy defaults": {
+            "$ref": "./examples/RecoveryPlanActions_FetchRecoveryPoints_MinimumSet.json"
+          },
+          "Fetch recovery points with plan, recovery group, and recovery resource policy overrides": {
+            "$ref": "./examples/RecoveryPlanActions_FetchRecoveryPoints_MaximumSet.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/finalize": {
       "post": {
         "operationId": "RecoveryPlanActions_Finalize",
@@ -8196,6 +8277,50 @@
         }
       }
     },
+    "FetchRecoveryPointsRequest": {
+      "type": "object",
+      "description": "Optional scope and request-only recovery point policy overrides for fetching recovery points. Overrides apply only to this request and do not modify the recovery plan or its saved recovery configuration profiles.",
+      "properties": {
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicy",
+          "description": "The request-wide recovery point policy override."
+        },
+        "recoveryGroups": {
+          "type": "array",
+          "description": "Selected recovery groups and their optional recovery point policy overrides.",
+          "items": {
+            "$ref": "#/definitions/RecoveryGroupPolicyInput"
+          },
+          "x-ms-identifiers": [
+            "recoveryGroupId"
+          ]
+        },
+        "recoveryResourceSets": {
+          "type": "array",
+          "description": "Selected sets of recovery resources, each with an optional shared recovery point policy override.",
+          "items": {
+            "$ref": "#/definitions/RecoveryResourcePolicySet"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FetchRecoveryPointsResult": {
+      "type": "object",
+      "description": "The result of fetching recovery points for a recovery plan.",
+      "properties": {
+        "recoveryPoints": {
+          "type": "array",
+          "description": "Selections that correlate recovery resources with their selected recovery points.",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointSelection"
+          },
+          "x-ms-identifiers": [
+            "recoveryResourceUniqueId"
+          ]
+        }
+      }
+    },
     "FileShareRecoveryConfig": {
       "type": "object",
       "description": "Recovery configuration for an Azure Files workload.",
@@ -10307,6 +10432,23 @@
       ],
       "x-ms-discriminator-value": "ManualAction"
     },
+    "RecoveryGroupPolicyInput": {
+      "type": "object",
+      "description": "A recovery group selector with an optional request-only recovery point policy override.",
+      "properties": {
+        "recoveryGroupId": {
+          "type": "string",
+          "description": "The GUID identifying the recovery group within the recovery plan."
+        },
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicy",
+          "description": "The recovery group-level recovery point policy override."
+        }
+      },
+      "required": [
+        "recoveryGroupId"
+      ]
+    },
     "RecoveryGroupProperties": {
       "type": "object",
       "description": "Properties of the recovery orchestration group.",
@@ -11227,6 +11369,79 @@
         }
       }
     },
+    "RecoveryPointProperties": {
+      "type": "object",
+      "description": "Workload-specific properties of a selected recovery point.",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "The backup service recovery point type discriminator, such as IaasVMRecoveryPoint."
+        },
+        "recoveryPointTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The recovery point time for virtual machine and Azure Files workloads."
+        },
+        "recoveryPointType": {
+          "type": "string",
+          "description": "The recovery point category for virtual machine and Azure Files workloads, such as AppConsistent."
+        },
+        "recoveryPointTimeInUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The recovery point time in UTC for database workloads."
+        },
+        "backupType": {
+          "type": "string",
+          "description": "The recovery point backup type for database workloads, such as Full or Differential."
+        },
+        "threatStatus": {
+          "type": "string",
+          "description": "The optional threat status reported by the backup service."
+        }
+      }
+    },
+    "RecoveryPointResource": {
+      "type": "object",
+      "description": "A recovery point returned by the backup service.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The recovery point Azure resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The recovery point resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The recovery point Azure resource type."
+        },
+        "properties": {
+          "$ref": "#/definitions/RecoveryPointProperties",
+          "description": "Workload-specific recovery point properties."
+        }
+      }
+    },
+    "RecoveryPointSelection": {
+      "type": "object",
+      "description": "Correlates a recovery resource with the recovery point selected for it.",
+      "properties": {
+        "recoveryResourceUniqueId": {
+          "type": "string",
+          "description": "The plan-scoped unique ID (GUID) of the recovery resource."
+        },
+        "recoveryGroupId": {
+          "type": "string",
+          "description": "The GUID of the recovery group that contains the recovery resource."
+        },
+        "recoveryPoint": {
+          "$ref": "#/definitions/RecoveryPointResource",
+          "description": "The recovery point selected for the recovery resource."
+        }
+      }
+    },
     "RecoveryResource": {
       "type": "object",
       "description": "RecoveryPlan Resource a AzureResilienceProviderHub resource",
@@ -11285,6 +11500,26 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "RecoveryResourcePolicySet": {
+      "type": "object",
+      "description": "Recovery resource selectors that share one optional request-only recovery point policy override.",
+      "properties": {
+        "recoveryResourceUniqueIds": {
+          "type": "array",
+          "description": "GUIDs identifying recovery resources within the recovery plan.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicy",
+          "description": "The recovery point policy override shared by the recovery resources in this set."
+        }
+      },
+      "required": [
+        "recoveryResourceUniqueIds"
       ]
     },
     "RecoveryResourceProperties": {

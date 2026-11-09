@@ -1,0 +1,54 @@
+{
+  "title": "Fetch recovery points for all included recovery resources using policy defaults",
+  "operationId": "RecoveryPlanActions_FetchRecoveryPoints",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-12-30-preview",
+    "operation-id": "d02c569b-7362-4815-a215-f92a17865f33",
+    "recoveryPlanName": "samplePlanName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "recoveryPoints": [
+          {
+            "recoveryResourceUniqueId": "12345678-9012-3456-7890-123456789012",
+            "recoveryGroupId": "82647166-048a-4914-9b48-90514eb8de4e",
+            "recoveryPoint": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/sampleRg/providers/Microsoft.RecoveryServices/vaults/sampleVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;sampleRg;sampleVm/protectedItems/vm;iaasvmcontainerv2;sampleRg;sampleVm/recoveryPoints/123456789012345",
+              "name": "123456789012345",
+              "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+              "properties": {
+                "objectType": "IaasVMRecoveryPoint",
+                "recoveryPointTime": "2026-12-29T10:30:00Z",
+                "recoveryPointType": "AppConsistent",
+                "threatStatus": "Healthy"
+              }
+            }
+          },
+          {
+            "recoveryResourceUniqueId": "23456789-0123-4567-8901-234567890123",
+            "recoveryGroupId": "82647166-048a-4914-9b48-90514eb8de4e",
+            "recoveryPoint": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/sampleRg/providers/Microsoft.RecoveryServices/vaults/sampleVault/backupFabrics/Azure/protectionContainers/vmappcontainer;compute;sampleRg;sqlVm/protectedItems/sqldatabase;mssqlserver;sampledb/recoveryPoints/987654321098765",
+              "name": "987654321098765",
+              "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+              "properties": {
+                "objectType": "AzureWorkloadSQLRecoveryPoint",
+                "recoveryPointTimeInUTC": "2026-12-29T08:00:00Z",
+                "backupType": "Full"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/d02c569b-7362-4815-a215-f92a17865f33?api-version=2026-12-30-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/d02c569b-7362-4815-a215-f92a17865f33?api-version=2026-12-30-preview",
+        "Retry-After": 10
+      }
+    }
+  }
+}

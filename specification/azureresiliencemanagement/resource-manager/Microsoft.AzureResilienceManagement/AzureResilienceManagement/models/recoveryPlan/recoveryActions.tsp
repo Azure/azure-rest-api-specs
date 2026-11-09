@@ -190,6 +190,122 @@ model RecoveryGroupSelection {
   recoveryPointPolicy?: RecoveryPointPolicy;
 }
 
+@added(Versions.v2026_12_30_preview)
+@doc("Optional scope and request-only recovery point policy overrides for fetching recovery points. Overrides apply only to this request and do not modify the recovery plan or its saved recovery configuration profiles.")
+model FetchRecoveryPointsRequest {
+  @added(Versions.v2026_12_30_preview)
+  @doc("The request-wide recovery point policy override.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Selected recovery groups and their optional recovery point policy overrides.")
+  @identifiers(#["recoveryGroupId"])
+  recoveryGroups?: RecoveryGroupPolicyInput[];
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Selected sets of recovery resources, each with an optional shared recovery point policy override.")
+  @identifiers(#[])
+  recoveryResourceSets?: RecoveryResourcePolicySet[];
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("A recovery group selector with an optional request-only recovery point policy override.")
+model RecoveryGroupPolicyInput {
+  @added(Versions.v2026_12_30_preview)
+  @doc("The GUID identifying the recovery group within the recovery plan.")
+  recoveryGroupId: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery group-level recovery point policy override.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("Recovery resource selectors that share one optional request-only recovery point policy override.")
+model RecoveryResourcePolicySet {
+  @added(Versions.v2026_12_30_preview)
+  @doc("GUIDs identifying recovery resources within the recovery plan.")
+  recoveryResourceUniqueIds: string[];
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point policy override shared by the recovery resources in this set.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("The result of fetching recovery points for a recovery plan.")
+model FetchRecoveryPointsResult {
+  @added(Versions.v2026_12_30_preview)
+  @doc("Selections that correlate recovery resources with their selected recovery points.")
+  @identifiers(#["recoveryResourceUniqueId"])
+  recoveryPoints?: RecoveryPointSelection[];
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("Correlates a recovery resource with the recovery point selected for it.")
+model RecoveryPointSelection {
+  @added(Versions.v2026_12_30_preview)
+  @doc("The plan-scoped unique ID (GUID) of the recovery resource.")
+  recoveryResourceUniqueId?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The GUID of the recovery group that contains the recovery resource.")
+  recoveryGroupId?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point selected for the recovery resource.")
+  recoveryPoint?: RecoveryPointResource;
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("A recovery point returned by the backup service.")
+model RecoveryPointResource {
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point Azure resource ID.")
+  id?: Azure.Core.armResourceIdentifier;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point resource name.")
+  name?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point Azure resource type.")
+  type?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Workload-specific recovery point properties.")
+  properties?: RecoveryPointProperties;
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("Workload-specific properties of a selected recovery point.")
+model RecoveryPointProperties {
+  @added(Versions.v2026_12_30_preview)
+  @doc("The backup service recovery point type discriminator, such as IaasVMRecoveryPoint.")
+  objectType?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point time for virtual machine and Azure Files workloads.")
+  recoveryPointTime?: utcDateTime;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point category for virtual machine and Azure Files workloads, such as AppConsistent.")
+  recoveryPointType?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the backup service recovery point wire name recoveryPointTimeInUTC returned for database workloads."
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point time in UTC for database workloads.")
+  recoveryPointTimeInUTC?: utcDateTime;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point backup type for database workloads, such as Full or Differential.")
+  backupType?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The optional threat status reported by the backup service.")
+  threatStatus?: string;
+}
+
 @doc("TestFailoverCleanup post action request.")
 model TestFailoverCleanupRequest {
   @doc("Comments for test failover cleanup.")
