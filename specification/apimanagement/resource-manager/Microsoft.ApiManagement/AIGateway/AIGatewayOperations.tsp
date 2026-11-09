@@ -135,7 +135,14 @@ interface AiGatewayResources {
 }
 
 alias AiGatewayPrivateEndpointOps = Azure.ResourceManager.PrivateEndpoints<AiGatewayPrivateEndpointConnection>;
-alias AiGatewayPrivateLinkOps = Azure.ResourceManager.PrivateLinks<AiGatewayPrivateLinkResource>;
+alias AiGatewayPrivateLinkOps = Azure.ResourceManager.PrivateLinks<
+  AiGatewayPrivateLinkResource,
+  "",
+  Azure.ResourceManager.CommonTypes.PrivateLinkResourceNameParameter<
+    "privateLinkResources",
+    "^[a-zA-Z][a-zA-Z0-9]*$"
+  >
+>;
 
 @added(Versions.v2026_11_01)
 @armResourceOperations
