@@ -1,0 +1,111 @@
+{
+  "operationId": "UpdateRuns_Reset",
+  "title": "Resets members within the target scope of an UpdateRun.",
+  "parameters": {
+    "api-version": "2027-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-fleet",
+    "fleetName": "production-fleet",
+    "updateRunName": "run-1",
+    "If-Match": "\"EtagValue\"",
+    "body": {
+      "targets": [
+        {
+          "type": "Group",
+          "name": "canary"
+        },
+        {
+          "type": "Member",
+          "name": "member-one"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-fleet/providers/Microsoft.ContainerService/fleets/production-fleet/updateRuns/run-1",
+        "name": "run-1",
+        "type": "Microsoft.ContainerService/fleets/updateRuns",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedClusterUpdate": {
+            "upgrade": {
+              "type": "Full",
+              "kubernetesVersion": "1.35.0"
+            },
+            "nodeImageSelection": {
+              "type": "Latest"
+            }
+          },
+          "status": {
+            "status": {
+              "startTime": "2027-02-01T01:00:00Z",
+              "state": "Running"
+            },
+            "failureCount": 1,
+            "stages": [
+              {
+                "name": "production",
+                "status": {
+                  "startTime": "2027-02-01T01:00:00Z",
+                  "state": "Running"
+                },
+                "failureCount": 1,
+                "maxAllowedFailures": 2,
+                "groups": [
+                  {
+                    "name": "canary",
+                    "status": {
+                      "startTime": "2027-02-01T01:00:00Z",
+                      "state": "Running"
+                    },
+                    "failureCount": 0,
+                    "maxAllowedFailures": 1,
+                    "members": [
+                      {
+                        "name": "member-one",
+                        "status": {
+                          "state": "NotStarted"
+                        }
+                      },
+                      {
+                        "name": "member-two",
+                        "status": {
+                          "state": "Running"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "completed-group",
+                    "status": {
+                      "startTime": "2027-02-01T01:00:00Z",
+                      "completedTime": "2027-02-01T01:05:00Z",
+                      "state": "PartiallyCompleted"
+                    },
+                    "failureCount": 1,
+                    "maxAllowedFailures": 1,
+                    "members": [
+                      {
+                        "name": "member-three",
+                        "status": {
+                          "state": "Failed",
+                          "error": {
+                            "code": "UpgradeFailed",
+                            "message": "The member cluster upgrade failed."
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "eTag": "\"UpdatedEtagValue\""
+      }
+    }
+  }
+}
