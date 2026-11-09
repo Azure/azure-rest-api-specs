@@ -32,7 +32,7 @@ openapi-subtype: rpaas
 tag: package-2025-09-01
 ```
 ### Tag: package-2026-11-10-preview
-These settings apply only when `--tag=2026-11-10-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-11-10-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2026-11-10-preview'
 input-file:
