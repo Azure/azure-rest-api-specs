@@ -71,7 +71,7 @@ model PlaywrightWorkspaceProperties {
   browserProxy?: EnablementStatus = EnablementStatus.Enabled;
 
   @added(Versions.v2026_11_10_preview)
-  @doc("The Web Bot Authentication settings for the workspace. This property is available only when the EnableWebBotAuth feature flag is enabled.")
+  @doc("The Web Bot Authentication settings for the workspace.")
   webBotAuth?: WebBotAuthSettings;
 }
 
@@ -127,7 +127,7 @@ model WebBotAuthSettingsUpdate is PickProperties<
 model PlaywrightWorkspacePatchProperties {
   ...OmitProperties<PlaywrightWorkspaceProperties, "webBotAuth">;
 
-  @doc("The Web Bot Authentication settings for the workspace. This property is available only when the EnableWebBotAuth feature flag is enabled.")
+  @doc("The Web Bot Authentication settings for the workspace.")
   webBotAuth?: WebBotAuthSettingsUpdate;
 }
 
