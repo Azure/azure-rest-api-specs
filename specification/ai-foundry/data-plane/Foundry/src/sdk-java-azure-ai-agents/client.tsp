@@ -552,6 +552,16 @@ using Azure.AI.Projects;
   OpenAI.RealtimeServerEventSessionUpdated,
   "RealtimeSessionUpdatedEvent"
 );
+@@clientName(
+  OpenAI.RealtimeServerEventSessionCreated.session,
+  "sessionResponseConfiguration",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventSessionUpdated.session,
+  "sessionResponseConfiguration",
+  "java"
+);
 
 @@clientName(
   OpenAI.RealtimeSessionCreateRequestUnion,
