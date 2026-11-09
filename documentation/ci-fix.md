@@ -70,7 +70,9 @@ This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 ## `Protected Files`
 
 Only allowlisted repository maintainers and trusted automation accounts may change
-protected tooling and configuration files. If you are not allowlisted, remove
+files outside `specification/`, except for the CODEOWNERS and skill exemptions below.
+This includes root files, documentation, tooling, and files in newly added directories.
+If you are not allowlisted, remove
 the changes listed in the check's errors from your PR, including any deletions or
 renames. If a tooling change is needed, open an issue for the repository maintainers.
 
@@ -177,7 +179,7 @@ Refer to [troubleshooting REST API documentation](https://eng.ms/docs/products/a
 
 ## `Swagger Avocado`
 
-Moved to https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-Avocado
+See the [Swagger Avocado guide](./validation/swagger-avocado.md).
 
 ## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
 
@@ -207,7 +209,7 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
-https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff-for-TypeSpec
+See [Swagger LintDiff for TypeSpec](./validation/swagger-lintdiff.md#typespec).
 
 ## `Swagger ModelValidation`
 
@@ -303,7 +305,7 @@ For failed batch validation, run the `pnpm install` and per-project `pnpm tsv`
 commands from the final failure summary at the repository root. In GitHub Actions,
 each failed project's error annotation also includes these reproduction instructions.
 
-https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
+See the [TypeSpec validation guide](./validation/typespec-validation.md).
 
 ## `TypeSpec Suppressions`
 
