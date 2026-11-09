@@ -9968,6 +9968,9 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.CreateFineTuningSessionRequest'
         description: Configuration of the fine-tuning session to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
     get:
       operationId: FineTuningSessions_list
       summary: List fine-tuning sessions
@@ -10039,6 +10042,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}:
     get:
       operationId: FineTuningSessions_get
@@ -10100,6 +10106,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
     delete:
       operationId: FineTuningSessions_delete
       summary: Delete a fine-tuning session
@@ -10162,6 +10171,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/checkpoint:
     post:
       operationId: Checkpoints_save
@@ -10232,6 +10244,9 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.SaveCheckpointRequest'
         description: Identifier and optional training metadata for the checkpoint.
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/checkpoint_sample:
     post:
       operationId: Checkpoints_saveSamplerWeights
@@ -10302,6 +10317,9 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.SaveSamplerWeightsRequest'
         description: Explicit checkpoint identifier or sequence identifiers for the sampler weights.
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/checkpoints:
     get:
       operationId: Checkpoints_list
@@ -10363,6 +10381,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}:
     get:
       operationId: Checkpoints_get
@@ -10431,6 +10452,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}/download:
     post:
       operationId: CheckpointDownloads_prepare
@@ -10509,6 +10533,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}/download/files/{fileId}:
     get:
       operationId: CheckpointDownloads_getFile
@@ -10613,6 +10640,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/complete:
     post:
       operationId: FineTuningSessions_unload
@@ -10677,6 +10707,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/forward:
     post:
       operationId: Training_forward
@@ -10747,6 +10780,9 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.ForwardRequest'
         description: Training batch and loss configuration for the forward-only pass.
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/forward_backward:
     post:
       operationId: Training_forwardBackward
@@ -10818,6 +10854,9 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.ForwardBackwardRequest'
         description: Training batch and loss configuration for the forward-backward pass.
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/heartbeat:
     post:
       operationId: FineTuningSessions_heartbeat
@@ -10881,6 +10920,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/optim_step:
     post:
       operationId: Training_optimizerStep
@@ -10951,6 +10993,9 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.OptimStepRequest'
         description: Adam optimizer configuration for applying accumulated gradients.
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/request/{requestId}:
     get:
       operationId: Operations_get
@@ -11022,6 +11067,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Operations
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /fine_tuning_sessions/{sessionId}/sample:
     post:
       operationId: Sampling_sample
@@ -11101,6 +11149,9 @@ paths:
             schema:
               $ref: '#/components/schemas/SessionFineTuning.FineTuningSampleRequest'
         description: Prompt and generation parameters for the requested completions.
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
   /indexes:
     get:
       operationId: Indexes_listLatest

@@ -6,9 +6,14 @@ import "../common/error.range.tsp";
 import "../common/servicepatterns.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.AI.Projects;
 
 namespace Azure.AI.Projects.SessionFineTuning;
+
+const FineTuningSessionsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.finetuning_sessions_v1_preview],
+};
 
 /**
  * A fine-tuning session operation with the required Foundry preview header
@@ -16,6 +21,7 @@ namespace Azure.AI.Projects.SessionFineTuning;
  * request identifier for explicit polling. Checkpoint preparation separately
  * declares its HTTP 202 Pending and HTTP 200 terminal responses.
  */
+@extension("x-ms-foundry-meta", FineTuningSessionsRequiredPreviews)
 op FineTuningSessionOperation<
   Params extends Reflection.Model,
   Response
