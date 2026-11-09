@@ -21,6 +21,10 @@ import {
 } from "./artifacts.ts";
 import type { Context, Core, GitHub, GitHubScriptArgs } from "./github.ts";
 import type { RetryOptions } from "./retries.ts";
+import {
+  collectTypeSpecReviewContext,
+  TYPESPEC_REVIEW_CONTEXT_FILE_NAME,
+} from "./sdk-validation-typespec-context.ts";
 
 export const EXPECTED_DOTNET_CHECK_NAME = "SDK Validation - .NET" as const;
 export const EXPECTED_AZURE_PIPELINES_APP_NAME = "Azure Pipelines" as const;
@@ -95,6 +99,7 @@ export type SdkReviewHandoffResult = {
   headSha?: string;
   inputDirectory?: string;
   artifactPath?: string;
+  typeSpecContextPath?: string;
   summaryPath?: string;
   entryCount: number;
 };
@@ -714,7 +719,7 @@ export async function verifyPullRequestFreshness(params: {
   context: Context;
   prNumber: number;
   expectedHeadSha: string;
-}): Promise<{ currentHeadSha: string; isFresh: boolean; state: string }> {
+}): Promise<{ baseSha: string; currentHeadSha: string; isFresh: boolean; state: string }> {
   const { github, context, prNumber, expectedHeadSha } = params;
   const { data: pullRequest } = await github.rest.pulls.get({
     owner: context.repo.owner,
@@ -724,7 +729,12 @@ export async function verifyPullRequestFreshness(params: {
 
   validatePullRequestRepository(context, prNumber, pullRequest);
   const currentHeadSha = pullRequest.head.sha;
+  const baseSha = pullRequest.base.sha;
+  if (!/^[0-9a-f]{40}$/i.test(baseSha)) {
+    throw new Error(`PR #${prNumber} has an invalid base SHA '${baseSha}'`);
+  }
   return {
+    baseSha,
     currentHeadSha,
     isFresh:
       pullRequest.state === "open" &&
@@ -910,6 +920,15 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
   );
   const artifactPath = path.join(inputDirectory, SPEC_GEN_SDK_ARTIFACT_FILE_NAME);
   fs.writeFileSync(artifactPath, JSON.stringify(artifact, undefined, 2), "utf8");
+  const typeSpecContext = await collectTypeSpecReviewContext({
+    github,
+    context,
+    prNumber,
+    headSha: event.headSha,
+    baseSha: prStatus.baseSha,
+  });
+  const typeSpecContextPath = path.join(inputDirectory, TYPESPEC_REVIEW_CONTEXT_FILE_NAME);
+  fs.writeFileSync(typeSpecContextPath, JSON.stringify(typeSpecContext, undefined, 2), "utf8");
 
   const summaryMarkdown = formatReviewHandoffSummary({ event, artifact, prNumber });
   const summaryPath = path.resolve(
@@ -933,6 +952,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     headSha: event.headSha,
     inputDirectory,
     artifactPath,
+    typeSpecContextPath,
     summaryPath,
     entryCount: artifact.apiViewRequestData.length,
   };

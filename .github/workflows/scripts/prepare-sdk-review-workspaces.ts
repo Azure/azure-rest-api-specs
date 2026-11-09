@@ -22,6 +22,11 @@ type CanonicalSkill = {
   skillPath: string;
 };
 
+type CanonicalSkills = {
+  review: CanonicalSkill;
+  remediation: CanonicalSkill;
+};
+
 const SDK_REPOSITORY_URL =
   process.env.SDK_REVIEW_REPOSITORY_URL ?? "https://github.com/Azure/azure-sdk-for-net.git";
 const MANIFEST_FILE_NAME = "spec-gen-sdk-artifact.json";
@@ -187,10 +192,10 @@ function cloneCommit(destination: string, commitSha: string): void {
 }
 
 /**
- * Resolves the current canonical skill revision, sparsely checks out only the
- * skill directory, and returns the exact revision and SKILL.md path.
+ * Resolves the current canonical skill revision and checks out the review and
+ * management-plane remediation skills from that exact revision.
  */
-function cloneCanonicalSkill(destination: string): CanonicalSkill {
+function cloneCanonicalSkills(destination: string): CanonicalSkills {
   const mainReference = runGit(process.cwd(), ["ls-remote", SDK_REPOSITORY_URL, "refs/heads/main"]);
   const skillRevision = mainReference.split(/\s+/)[0];
   if (!SHA_PATTERN.test(skillRevision)) {
@@ -203,17 +208,34 @@ function cloneCanonicalSkill(destination: string): CanonicalSkill {
   runGit(destination, ["config", "core.sparseCheckout", "true"]);
   fs.writeFileSync(
     path.join(destination, ".git", "info", "sparse-checkout"),
-    ".github/skills/code-review/\n",
+    [".github/skills/code-review/", ".github/skills/mgmt-review-comment-resolution/", ""].join(
+      "\n",
+    ),
     "utf8",
   );
   runGit(destination, ["fetch", "--depth=1", "origin", skillRevision]);
   runGit(destination, ["checkout", "--detach", "FETCH_HEAD"]);
 
-  const skillPath = path.join(destination, ".github", "skills", "code-review", "SKILL.md");
-  if (!fs.existsSync(skillPath)) {
+  const reviewSkillPath = path.join(destination, ".github", "skills", "code-review", "SKILL.md");
+  const remediationSkillPath = path.join(
+    destination,
+    ".github",
+    "skills",
+    "mgmt-review-comment-resolution",
+    "SKILL.md",
+  );
+  if (!fs.existsSync(reviewSkillPath)) {
     throw new Error(`Canonical .NET code-review skill is missing at ${skillRevision}`);
   }
-  return { skillRevision, skillPath };
+  if (!fs.existsSync(remediationSkillPath)) {
+    throw new Error(
+      `Canonical .NET management review remediation skill is missing at ${skillRevision}`,
+    );
+  }
+  return {
+    review: { skillRevision, skillPath: reviewSkillPath },
+    remediation: { skillRevision, skillPath: remediationSkillPath },
+  };
 }
 
 /**
@@ -322,16 +344,16 @@ for (const [baselineCommitSha, entries] of entriesByBaseline) {
   });
 }
 
-const canonicalSkill = cloneCanonicalSkill(path.join(outputRoot, "canonical-skill"));
+const canonicalSkills = cloneCanonicalSkills(path.join(outputRoot, "canonical-skills"));
 if (process.env.SDK_REVIEW_SKILL_INSTALL_ROOT) {
   const installedSkillRoot = path.resolve(process.env.SDK_REVIEW_SKILL_INSTALL_ROOT);
   fs.rmSync(installedSkillRoot, { recursive: true, force: true });
   fs.mkdirSync(path.dirname(installedSkillRoot), { recursive: true });
-  fs.cpSync(path.dirname(canonicalSkill.skillPath), installedSkillRoot, {
+  fs.cpSync(path.dirname(canonicalSkills.review.skillPath), installedSkillRoot, {
     recursive: true,
     force: true,
   });
-  canonicalSkill.skillPath = path.join(installedSkillRoot, "SKILL.md");
+  canonicalSkills.review.skillPath = path.join(installedSkillRoot, "SKILL.md");
 }
 
 const context = {
@@ -341,10 +363,11 @@ const context = {
     specHeadSha: manifest.headSha,
     language: manifest.language,
   },
-  canonicalSkill,
+  canonicalSkill: canonicalSkills.review,
+  remediationSkill: canonicalSkills.remediation,
   workspaces,
 };
 const contextPath = path.join(outputRoot, "sdk-review-context.json");
 fs.writeFileSync(contextPath, `${JSON.stringify(context, undefined, 2)}\n`, "utf8");
 console.log(`Prepared ${workspaces.length} SDK review workspace(s) at '${outputRoot}'`);
-console.log(`Canonical skill revision: ${canonicalSkill.skillRevision}`);
+console.log(`Canonical skill revision: ${canonicalSkills.review.skillRevision}`);

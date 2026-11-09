@@ -514,7 +514,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         number: 47607,
         state: "open",
         head: { sha: SAMPLE_HEAD_SHA },
-        base: { repo: { full_name: "owner/repo" } },
+        base: { sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
       },
     });
     mockFetch.mockImplementation((url) => {
@@ -554,6 +554,16 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     expect(result.status).toBe("validated");
     expect(result.entryCount).toBe(1);
     expect(JSON.parse(fs.readFileSync(result.artifactPath!, "utf8"))).toEqual(artifact);
+    expect(JSON.parse(fs.readFileSync(result.typeSpecContextPath!, "utf8"))).toEqual({
+      schemaVersion: 1,
+      source: {
+        specPrNumber: 47607,
+        specHeadSha: SAMPLE_HEAD_SHA,
+        specBaseSha: "1".repeat(40),
+      },
+      projects: [],
+      files: [],
+    });
     expect(
       fs.existsSync(
         path.join(result.inputDirectory!, "Azure.Widget", "review-input", "Azure.Widget.csproj"),
@@ -582,7 +592,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         number: 47607,
         state: "open",
         head: { sha: "9".repeat(40) },
-        base: { repo: { full_name: "owner/repo" } },
+        base: { sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
       },
     });
 
@@ -660,7 +670,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         number: 47607,
         state: "open",
         head: { sha: SAMPLE_HEAD_SHA },
-        base: { repo: { full_name: "owner/repo" } },
+        base: { sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
       },
     });
     mockFetch.mockImplementation((url) => {
