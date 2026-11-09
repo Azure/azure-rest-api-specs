@@ -73,7 +73,8 @@ export async function mitigateSdkBreakingChanges({
   specificationRepositoryPath: unresolvedSpecificationRepositoryPath,
   resultDirPath,
   azureSdkCliPath,
-}: { core: Core } & MitigateSdkBreakingChangesOptions): Promise<void> {
+  streamOutput,
+}: { core: Core } & MitigateSdkBreakingChangesOptions & {streamOutput?: boolean}): Promise<void> {
   const analysisResult = AnalysisResultSchema.parse(
     JSON.parse(await readFile(analysisResultPath, "utf8")),
   );
@@ -86,6 +87,12 @@ export async function mitigateSdkBreakingChanges({
       ? `**Analyzed commit:** ${inlineCode(analysisResult.headSha)}`
       : undefined,
   ];
+  let azsdkOptions = undefined;
+  if (streamOutput) {
+    azsdkOptions = {
+      streamOutput: true,
+    };
+  }
   try {
     const specificationRepositoryPath = await realpath(unresolvedSpecificationRepositoryPath);
     const specificationRoot = await realpath(join(specificationRepositoryPath, "specification"));
@@ -134,7 +141,7 @@ export async function mitigateSdkBreakingChanges({
           isResolved: false,
         };
         try {
-          const { stdout, stderr } = await execFile(
+          const { stdout } = await execFile(
             join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk"),
             [
               "typespec",
@@ -153,14 +160,9 @@ export async function mitigateSdkBreakingChanges({
               "--output",
               "json",
             ],
-            {
-              streamlog: true
-            }
+            azsdkOptions
           );
           await writeFile(commandResultPath, stdout);
-          // if (stderr) {
-          //   console.error(`Error output from azsdk SDK mitigation: ${stderr}`);
-          // }
 
           try {
             mitigatedChange = BuildMigratedBreakingChange(

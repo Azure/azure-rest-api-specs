@@ -59,7 +59,8 @@ export async function analyzeSdkProjects({
   workflowUrl,
   resultFilePath,
   azureSdkCliPath,
-}: { core: Core } & AnalyzeSdkProjectsOptions): Promise<void> {
+  streamOutput,
+}: { core: Core } & AnalyzeSdkProjectsOptions & {streamOutput?: boolean}): Promise<void> {
   const localSdkRepositoryPath = await realpath(unresolvedLocalSdkRepositoryPath);
   await mkdir(dirname(resultFilePath), { recursive: true });
 
@@ -73,6 +74,12 @@ export async function analyzeSdkProjects({
     projects: [],
   };
   const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
+  let azsdkOptions = undefined;
+  if (streamOutput) {
+    azsdkOptions = {
+      streamOutput: true,
+    };
+  }
 
   const blocks = [
     "## SDK breaking-change analysis",
@@ -199,9 +206,7 @@ export async function analyzeSdkProjects({
         "--output",
         "json",
       ],
-      {
-        streamlog: true,
-      }
+      azsdkOptions
     );
       console.log("breakingChangesStdout: " + breakingChangesStdout);
       const breakingChangesResponse: AzsdkDetectBreakingChangeResponse =
