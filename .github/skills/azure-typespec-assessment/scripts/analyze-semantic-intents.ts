@@ -1222,7 +1222,7 @@ function mergeUnitGroup(
 
 function operationResolver(
   project: PreparationProject,
-  base: NormalizedAutorestContract,
+  base: NormalizedAutorestContract | undefined,
   current: NormalizedAutorestContract,
   sourceIndex: SourceIndex,
   workRoot: string,
@@ -1235,9 +1235,9 @@ function operationResolver(
       .filter((declaration) => declaration.kind === "operation"),
   );
   const roleSpecs = [
-    { role: "baseline", legacyRole: "base", contract: base },
-    { role: "target", legacyRole: "current", contract: current },
-  ] as const;
+    ...(base ? [{ role: "baseline", legacyRole: "base", contract: base } as const] : []),
+    { role: "target", legacyRole: "current", contract: current } as const,
+  ];
 
   const roles: OperationBridgeEntry[] = roleSpecs.map(({ role, legacyRole, contract }) => {
     const artifact = project.artifacts?.[role]?.tcgc ?? project.artifacts?.[legacyRole]?.tcgc;
@@ -1356,7 +1356,7 @@ function operationResolver(
 
 function buildProjectUnits(
   project: PreparationProject,
-  base: NormalizedAutorestContract,
+  base: NormalizedAutorestContract | undefined,
   current: NormalizedAutorestContract,
   sourceIndex: SourceIndex,
   facts: Record<string, AssessmentFact>,
@@ -1367,7 +1367,13 @@ function buildProjectUnits(
   const projectSources = sourceIndex.sourceChanges.filter((source) =>
     project.sourceChangeIds?.includes(source.id),
   );
-  const pairs = operationPairs(base, current);
+  const pairs = base
+    ? operationPairs(base, current)
+    : current.operations.map((after) => ({
+        operationId: after.operationId,
+        before: undefined,
+        after,
+      }));
   const smallNewVersion =
     project.artifactComparison?.mode === "new-api-version" &&
     projectSources.length <= 2 &&
@@ -1524,14 +1530,16 @@ export function analyzeSemanticIntents(options: {
   for (const project of [...(manifest.projects ?? [])].sort((left, right) =>
     left.id.localeCompare(right.id),
   )) {
+    const newProject =
+      project.classification === "new" || project.artifactComparison?.mode === "new-project";
     const baseArtifact = project.artifacts?.baseline?.autorest ?? project.artifacts?.base?.autorest;
     const currentArtifact =
       project.artifacts?.target?.autorest ?? project.artifacts?.current?.autorest;
-    if (!artifactReady(baseArtifact) || !artifactReady(currentArtifact)) {
+    if ((!newProject && !artifactReady(baseArtifact)) || !artifactReady(currentArtifact)) {
       blockers.push({
         code: "autorest-artifacts-unavailable",
         projectId: project.id,
-        message: `Baseline and target AutoRest artifacts are required for ${project.id}.`,
+        message: `${newProject ? "Target" : "Baseline and target"} AutoRest artifacts are required for ${project.id}.`,
       });
       continue;
     }
@@ -1548,7 +1556,7 @@ export function analyzeSemanticIntents(options: {
             }
           : contract;
       };
-      const base = selectedContract(baseArtifact, "baseline");
+      const base = newProject ? undefined : selectedContract(baseArtifact, "baseline");
       const current = selectedContract(currentArtifact, "target");
       const resolveOperation = operationResolver(
         project,
