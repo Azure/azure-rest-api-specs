@@ -87119,17 +87119,22 @@ components:
         responds_to:
           type: array
           items:
-            type: string
-            enum:
-              - allowlisted
+            $ref: '#/components/schemas/ReadAccessResponder'
           description: |-
-            The senders allowed to prompt the Autopilot. Only `allowlisted` is supported: it uses the instance's existing interaction allowlist,
+            The senders allowed to prompt the Autopilot. Currently, only `allowlisted` is supported in requests: it uses the instance's existing interaction allowlist,
             which implicitly includes the instance manager. An empty array denies user messages.
-            Trusted lifecycle events are not governed by this policy.
+            Trusted lifecycle events are not governed by this policy. Clients must handle unrecognized values in responses.
       description: A conversation-independent policy for delivering inbound messages to an Autopilot.
       x-ms-foundry-meta:
         required_previews:
           - DigitalWorker=V1Preview
+    ReadAccessResponder:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - allowlisted
+      description: A category of senders allowed to prompt an Autopilot. Additional values may be returned in future responses.
     RecurrenceSchedule:
       type: object
       required:

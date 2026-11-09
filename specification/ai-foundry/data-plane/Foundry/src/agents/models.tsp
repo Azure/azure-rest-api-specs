@@ -868,11 +868,19 @@ model AccessBoundaryAuthorizationScheme
 )
 model ReadAccessPolicy {
   @doc("""
-    The senders allowed to prompt the Autopilot. Only `allowlisted` is supported: it uses the instance's existing interaction allowlist,
+    The senders allowed to prompt the Autopilot. Currently, only `allowlisted` is supported in requests: it uses the instance's existing interaction allowlist,
     which implicitly includes the instance manager. An empty array denies user messages.
-    Trusted lifecycle events are not governed by this policy.
+    Trusted lifecycle events are not governed by this policy. Clients must handle unrecognized values in responses.
     """)
-  responds_to: "allowlisted"[];
+  responds_to: ReadAccessResponder[];
+}
+
+@doc("A category of senders allowed to prompt an Autopilot. Additional values may be returned in future responses.")
+union ReadAccessResponder {
+  string,
+
+  @doc("Uses the instance's existing interaction allowlist, including implicit manager access.")
+  allowlisted: "allowlisted",
 }
 
 union AgentEndpointAuthorizationSchemeType {
