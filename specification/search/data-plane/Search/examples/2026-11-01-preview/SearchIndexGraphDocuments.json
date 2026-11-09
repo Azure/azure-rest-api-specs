@@ -1,0 +1,48 @@
+{
+  "operationId": "Documents_Graph",
+  "title": "SearchIndexGraphDocuments",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "indexName": "people-graph",
+    "api-version": "2026-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "Accept": "application/json;odata.metadata=none",
+    "x-ms-query-source-authorization": null,
+    "x-ms-enable-elevated-read": null,
+    "body": {
+      "gql": "MATCH (p:Person)-[r:worksFor]->(o:Organization) WHERE p.id = 'person:ada' RETURN o.name AS organization",
+      "filter": "graph_name eq 'contoso-people'",
+      "includeStatistics": false,
+      "provenance": {
+        "kind": "ids",
+        "maxEvidencePerRow": 5
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.count": 1,
+        "value": [
+          {
+            "@search.graphProvenance": {
+              "kind": "ids",
+              "evidenceCount": {
+                "value": 1,
+                "relation": "exact"
+              },
+              "evidence": [
+                {
+                  "edgeId": "assertion-1",
+                  "chunkId": "people-chunk-1",
+                  "parentId": "people-document-1"
+                }
+              ]
+            },
+            "organization": "Contoso"
+          }
+        ]
+      }
+    }
+  }
+}
