@@ -1068,6 +1068,7 @@ describe("tspconfig", function () {
     parameters?: Record<string, unknown>;
     folder?: string;
     success: boolean;
+    error?: string;
   }>([
     { description: "matches the shared service directory", success: true },
     {
@@ -1137,6 +1138,45 @@ describe("tspconfig", function () {
       serviceDir: "sdk/{service-name}",
       parameters: { "service-name": { default: "compute" } },
       success: true,
+    },
+    {
+      description: "preserves the output root in a parameter-backed Java service directory alias",
+      options: { "service-dir": "{java-service-dir}" },
+      parameters: { "java-service-dir": { default: "{output-dir}/sdk/compute" } },
+      success: true,
+    },
+    {
+      description: "preserves the output root in nested shared service directory aliases",
+      serviceDir: "{java-service-dir}",
+      parameters: {
+        "java-service-dir": { default: "{output-dir}/sdk/{service-name}" },
+        "service-name": { default: "compute" },
+      },
+      success: true,
+    },
+    {
+      description: "preserves the output root in emitter-backed service directory aliases",
+      options: {
+        "service-dir": "{java-service-dir}",
+        "java-service-dir": "{output-dir}/sdk/compute",
+      },
+      success: true,
+    },
+    {
+      description: "still rejects unresolved variables beside a preserved output root",
+      options: { "service-dir": "{java-service-dir}" },
+      parameters: { "java-service-dir": { default: "{output-dir}/sdk/{missing}" } },
+      success: false,
+      error: "Could not resolve variable {missing}",
+    },
+    {
+      description: "still rejects circular aliases beside a preserved output root",
+      options: {
+        "service-dir": "{output-dir}/sdk/{service-name}",
+        "service-name": "{service-name}",
+      },
+      success: false,
+      error: "Maximum resolution depth reached",
     },
     {
       description: "rejects an unresolved namespace variable",
@@ -1218,6 +1258,11 @@ describe("tspconfig", function () {
     const result = await rule.execute(c.folder ?? managementTspconfigFolder, defaultLogger);
     strictEqual(result.success, c.success);
     strictEqual((result.diagnostics?.length ?? 0) > 0, !c.success);
+    if (c.error)
+      strictEqual(
+        result.diagnostics?.some((d) => d.message.includes(c.error!)),
+        true,
+      );
   });
 
   it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {

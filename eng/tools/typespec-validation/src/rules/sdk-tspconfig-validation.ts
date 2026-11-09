@@ -133,14 +133,17 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
   protected resolveVariables(
     value: string,
     config: Record<string, any>,
+    preservedVariables: readonly string[] = [],
   ): { resolved: string; error?: string } {
     let resolvedValue = value;
     const variablePattern = /\{([^}]+)\}/g;
+    const variablesToResolve = (text: string) =>
+      [...text.matchAll(/\{([^}]+)\}/g)].filter((match) => !preservedVariables.includes(match[1]));
     const maxIterations = 10; // Prevent infinite loops
     let iterations = 0;
 
     // Keep resolving until no more variables are found or max iterations reached
-    while (resolvedValue.includes("{") && iterations < maxIterations) {
+    while (variablesToResolve(resolvedValue).length > 0 && iterations < maxIterations) {
       iterations++;
       let hasUnresolvedVariables = false;
       const currentValue = resolvedValue;
@@ -151,6 +154,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 
       while ((match = variablePattern.exec(currentValue)) !== null) {
         const variableName = match[1];
+        if (preservedVariables.includes(variableName)) continue;
 
         // Try to resolve variable from multiple sources:
         // 1. From the emitter's options (e.g., namespace, package-name)
@@ -180,7 +184,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 
       // If no progress was made in this iteration and there are still unresolved variables, return error
       if (hasUnresolvedVariables && resolvedValue === currentValue) {
-        const unresolvedMatch = resolvedValue.match(/\{([^}]+)\}/);
+        const unresolvedMatch = variablesToResolve(resolvedValue)[0];
         const unresolvedVar = unresolvedMatch ? unresolvedMatch[1] : "unknown";
         return {
           resolved: resolvedValue,
@@ -189,12 +193,12 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       }
 
       // If no more variables to resolve, break
-      if (!resolvedValue.includes("{")) {
+      if (variablesToResolve(resolvedValue).length === 0) {
         break;
       }
     }
 
-    if (iterations >= maxIterations && resolvedValue.includes("{")) {
+    if (iterations >= maxIterations && variablesToResolve(resolvedValue).length > 0) {
       return {
         resolved: resolvedValue,
         error: `Maximum resolution depth reached. Possible circular reference in variable resolution.`,
@@ -482,10 +486,7 @@ export class TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule extends Tspconfi
         `Please define "options.${this.emitterName}.service-dir" or "parameters.service-dir.default".`,
       );
 
-    const resolvedServiceDir = this.resolveVariables(
-      serviceDir.replace(/^\{output-dir\}\//, ""),
-      config,
-    );
+    const resolvedServiceDir = this.resolveVariables(serviceDir, config, ["output-dir"]);
     const actual = resolvedServiceDir.resolved.replace(/^\{output-dir\}\//, "");
     const expected = `sdk/${resolvedNamespace.resolved.split(".")[3]}`;
     if (resolvedServiceDir.error || actual !== expected)
