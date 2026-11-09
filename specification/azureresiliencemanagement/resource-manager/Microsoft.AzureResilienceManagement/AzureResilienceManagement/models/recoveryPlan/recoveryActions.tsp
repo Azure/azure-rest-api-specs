@@ -147,7 +147,7 @@ model RestoreResourceFilter {
   @added(Versions.v2026_12_30_preview)
   @doc("Recovery resource GUID selectors with optional per-resource recovery point IDs or point-in-time selections. Duplicate recoveryResourceId values are not allowed.")
   @identifiers(#["recoveryResourceId"])
-  recoveryResources?: RestoreDataSourceInput[];
+  recoveryResources?: RecoveryResourcesInput[];
 
   @added(Versions.v2026_12_30_preview)
   @doc("Workload selectors combined with the recovery resource and recovery group selectors by union.")
@@ -156,12 +156,12 @@ model RestoreResourceFilter {
   @added(Versions.v2026_12_30_preview)
   @doc("Recovery group selectors and optional request-only recovery point policy overrides. Duplicate recoveryGroupId values are not allowed.")
   @identifiers(#["recoveryGroupId"])
-  recoveryGroups?: RecoveryGroupSelection[];
+  recoveryGroups?: RecoveryGroupsInput[];
 }
 
 @added(Versions.v2026_12_30_preview)
 @doc("Selects a recovery resource within the plan by GUID. The service resolves its backup protected items from the resource catalog. recoveryPointId and pointInTime are alternatives; the service rejects a request containing both for the same resource. Either selection overrides group, operation, and profile policies. When neither is supplied, policy precedence applies. Exclude selectors must omit both.")
-model RestoreDataSourceInput {
+model RecoveryResourcesInput {
   @added(Versions.v2026_12_30_preview)
   @doc("The GUID identifying the recovery resource within the selected recovery plan. This is not an Azure resource ID or a backup protected item ID.")
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
@@ -178,15 +178,15 @@ model RestoreDataSourceInput {
 }
 
 @added(Versions.v2026_12_30_preview)
-@doc("Selects a recovery group for restore or restore-readiness validation, with an optional recovery point policy.")
-model RecoveryGroupSelection {
+@doc("Selects a recovery group in the recovery plan, with an optional request-only recovery point policy override. Used by Restore, ValidateForRestore, and FetchRecoveryPoints.")
+model RecoveryGroupsInput {
   @added(Versions.v2026_12_30_preview)
-  @doc("The name or full Azure resource ID of a recovery group belonging unambiguously to the selected recovery plan.")
+  @doc("The GUID, name, or full Azure resource ID of a recovery group belonging unambiguously to the selected recovery plan.")
   @minLength(1)
   recoveryGroupId: string;
 
   @added(Versions.v2026_12_30_preview)
-  @doc("A request-only recovery point policy for the selected recovery group. An explicit resource recoveryPointId or pointInTime takes precedence; this policy overrides operation and profile defaults. Exclude filters cannot specify a recovery group policy.")
+  @doc("A request-only recovery point policy for the selected recovery group. An explicit resource recovery point selection takes precedence; this policy overrides operation and profile defaults. Restore and ValidateForRestore Exclude filters cannot specify a recovery group policy.")
   recoveryPointPolicy?: RecoveryPointPolicy;
 }
 
@@ -200,24 +200,12 @@ model FetchRecoveryPointsRequest {
   @added(Versions.v2026_12_30_preview)
   @doc("Selected recovery groups and their optional recovery point policy overrides.")
   @identifiers(#["recoveryGroupId"])
-  recoveryGroups?: RecoveryGroupPolicyInput[];
+  recoveryGroups?: RecoveryGroupsInput[];
 
   @added(Versions.v2026_12_30_preview)
   @doc("Selected sets of recovery resources, each with an optional shared recovery point policy override.")
   @identifiers(#[])
   recoveryResources?: RecoveryResourcePolicySet[];
-}
-
-@added(Versions.v2026_12_30_preview)
-@doc("A recovery group selector with an optional request-only recovery point policy override.")
-model RecoveryGroupPolicyInput {
-  @added(Versions.v2026_12_30_preview)
-  @doc("The GUID identifying the recovery group within the recovery plan.")
-  recoveryGroupId: string;
-
-  @added(Versions.v2026_12_30_preview)
-  @doc("The recovery group-level recovery point policy override.")
-  recoveryPointPolicy?: RecoveryPointPolicy;
 }
 
 @added(Versions.v2026_12_30_preview)

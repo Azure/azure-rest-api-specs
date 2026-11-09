@@ -8289,7 +8289,7 @@
           "type": "array",
           "description": "Selected recovery groups and their optional recovery point policy overrides.",
           "items": {
-            "$ref": "#/definitions/RecoveryGroupPolicyInput"
+            "$ref": "#/definitions/RecoveryGroupsInput"
           },
           "x-ms-identifiers": [
             "recoveryGroupId"
@@ -10432,23 +10432,6 @@
       ],
       "x-ms-discriminator-value": "ManualAction"
     },
-    "RecoveryGroupPolicyInput": {
-      "type": "object",
-      "description": "A recovery group selector with an optional request-only recovery point policy override.",
-      "properties": {
-        "recoveryGroupId": {
-          "type": "string",
-          "description": "The GUID identifying the recovery group within the recovery plan."
-        },
-        "recoveryPointPolicy": {
-          "$ref": "#/definitions/RecoveryPointPolicy",
-          "description": "The recovery group-level recovery point policy override."
-        }
-      },
-      "required": [
-        "recoveryGroupId"
-      ]
-    },
     "RecoveryGroupProperties": {
       "type": "object",
       "description": "Properties of the recovery orchestration group.",
@@ -10574,24 +10557,6 @@
         "resiliencyType"
       ]
     },
-    "RecoveryGroupSelection": {
-      "type": "object",
-      "description": "Selects a recovery group for restore or restore-readiness validation, with an optional recovery point policy.",
-      "properties": {
-        "recoveryGroupId": {
-          "type": "string",
-          "description": "The name or full Azure resource ID of a recovery group belonging unambiguously to the selected recovery plan.",
-          "minLength": 1
-        },
-        "recoveryPointPolicy": {
-          "$ref": "#/definitions/RecoveryPointPolicy",
-          "description": "A request-only recovery point policy for the selected recovery group. An explicit resource recoveryPointId or pointInTime takes precedence; this policy overrides operation and profile defaults. Exclude filters cannot specify a recovery group policy."
-        }
-      },
-      "required": [
-        "recoveryGroupId"
-      ]
-    },
     "RecoveryGroupUpdate": {
       "type": "object",
       "description": "Represents a recovery orchestration group resource in the Azure Resilience Management provider namespace.",
@@ -10605,6 +10570,24 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "RecoveryGroupsInput": {
+      "type": "object",
+      "description": "Selects a recovery group in the recovery plan, with an optional request-only recovery point policy override. Used by Restore, ValidateForRestore, and FetchRecoveryPoints.",
+      "properties": {
+        "recoveryGroupId": {
+          "type": "string",
+          "description": "The GUID, name, or full Azure resource ID of a recovery group belonging unambiguously to the selected recovery plan.",
+          "minLength": 1
+        },
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicy",
+          "description": "A request-only recovery point policy for the selected recovery group. An explicit resource recovery point selection takes precedence; this policy overrides operation and profile defaults. Restore and ValidateForRestore Exclude filters cannot specify a recovery group policy."
+        }
+      },
+      "required": [
+        "recoveryGroupId"
       ]
     },
     "RecoveryGroupsSetting": {
@@ -11624,6 +11607,30 @@
       "discriminator": "resiliencyType",
       "required": [
         "resiliencyType"
+      ]
+    },
+    "RecoveryResourcesInput": {
+      "type": "object",
+      "description": "Selects a recovery resource within the plan by GUID. The service resolves its backup protected items from the resource catalog. recoveryPointId and pointInTime are alternatives; the service rejects a request containing both for the same resource. Either selection overrides group, operation, and profile policies. When neither is supplied, policy precedence applies. Exclude selectors must omit both.",
+      "properties": {
+        "recoveryResourceId": {
+          "type": "string",
+          "description": "The GUID identifying the recovery resource within the selected recovery plan. This is not an Azure resource ID or a backup protected item ID.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "recoveryPointId": {
+          "type": "string",
+          "description": "An optional recovery point name or full recovery point Azure resource ID. The service verifies ownership against the selected resource's backup protected items. Mutually exclusive with pointInTime and not allowed in Exclude filters.",
+          "minLength": 1
+        },
+        "pointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "An optional UTC timestamp for point-in-time recovery of the selected resource. Mutually exclusive with recoveryPointId and not allowed in Exclude filters. The service validates that the resource supports point-in-time recovery and that the timestamp is recoverable."
+        }
+      },
+      "required": [
+        "recoveryResourceId"
       ]
     },
     "RecoveryType": {
@@ -12757,30 +12764,6 @@
         ]
       }
     },
-    "RestoreDataSourceInput": {
-      "type": "object",
-      "description": "Selects a recovery resource within the plan by GUID. The service resolves its backup protected items from the resource catalog. recoveryPointId and pointInTime are alternatives; the service rejects a request containing both for the same resource. Either selection overrides group, operation, and profile policies. When neither is supplied, policy precedence applies. Exclude selectors must omit both.",
-      "properties": {
-        "recoveryResourceId": {
-          "type": "string",
-          "description": "The GUID identifying the recovery resource within the selected recovery plan. This is not an Azure resource ID or a backup protected item ID.",
-          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-        },
-        "recoveryPointId": {
-          "type": "string",
-          "description": "An optional recovery point name or full recovery point Azure resource ID. The service verifies ownership against the selected resource's backup protected items. Mutually exclusive with pointInTime and not allowed in Exclude filters.",
-          "minLength": 1
-        },
-        "pointInTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "An optional UTC timestamp for point-in-time recovery of the selected resource. Mutually exclusive with recoveryPointId and not allowed in Exclude filters. The service validates that the resource supports point-in-time recovery and that the timestamp is recoverable."
-        }
-      },
-      "required": [
-        "recoveryResourceId"
-      ]
-    },
     "RestoreFilterType": {
       "type": "string",
       "description": "Whether matching resources are included in or excluded from this restore request.",
@@ -12817,7 +12800,7 @@
           "type": "array",
           "description": "Recovery resource GUID selectors with optional per-resource recovery point IDs or point-in-time selections. Duplicate recoveryResourceId values are not allowed.",
           "items": {
-            "$ref": "#/definitions/RestoreDataSourceInput"
+            "$ref": "#/definitions/RecoveryResourcesInput"
           },
           "x-ms-identifiers": [
             "recoveryResourceId"
@@ -12834,7 +12817,7 @@
           "type": "array",
           "description": "Recovery group selectors and optional request-only recovery point policy overrides. Duplicate recoveryGroupId values are not allowed.",
           "items": {
-            "$ref": "#/definitions/RecoveryGroupSelection"
+            "$ref": "#/definitions/RecoveryGroupsInput"
           },
           "x-ms-identifiers": [
             "recoveryGroupId"
