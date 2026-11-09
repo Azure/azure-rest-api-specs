@@ -116,7 +116,9 @@ export type CommitStatus = CommitStatuses[0];
 export type CheckRun = CheckRuns[0];
 
 // Placing these configuration items here until we decide another way to pull them in.
+const CONTRIBUTOR_READINESS_CHECK_NAME = "Contributor readiness";
 const FYI_CHECK_NAMES = [
+  CONTRIBUTOR_READINESS_CHECK_NAME,
   "Swagger LintDiff",
   "SDK Validation Status",
   "Swagger BreakingChange",
@@ -163,6 +165,13 @@ const CHECK_METADATA: CheckMetadata[] = [
     name: "license/cla",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 0,
+    name: CONTRIBUTOR_READINESS_CHECK_NAME,
+    suppressionLabels: [],
+    troubleshootingGuide:
+      "Review the Contributor readiness check on this PR for details. Access issues can prevent Azure DevOps pipelines, PR labeling, or approvals from counting.",
   },
   {
     precedence: 1,
@@ -839,7 +848,9 @@ export async function getCheckRunTuple(
         // "Automated merging requirements met" may be required in repo settings, to ensure PRs cannot be merged unless
         // it's passing.  However, it must be excluded from our list of requiredCheckNames, since it's status is set
         // by our own workflow.  If this check isn't excluded, it creates a deadlock where it can never be set.
-        (checkName) => checkName !== AUTOMATED_CHECK_NAME,
+        // Contributor readiness is informational and must not block merges.
+        (checkName) =>
+          checkName !== AUTOMATED_CHECK_NAME && checkName !== CONTRIBUTOR_READINESS_CHECK_NAME,
       );
     }
   } else {
@@ -873,8 +884,11 @@ export function checkRunIsSuccessful(checkRun: CheckRunData): boolean | undefine
     return undefined;
   }
 
-  // Return true for success or neutral, false for any other conclusion
-  return conclusion === "success" || conclusion === "neutral";
+  // Neutral usually passes, except contributor readiness uses it to report warnings.
+  return (
+    conclusion === "success" ||
+    (conclusion === "neutral" && checkRun.name !== CONTRIBUTOR_READINESS_CHECK_NAME)
+  );
 }
 
 /**

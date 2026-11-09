@@ -337,6 +337,53 @@ describe("Summarize Checks Integration Tests", () => {
 
 describe("Summarize Checks Unit Tests", () => {
   describe("check result processing", () => {
+    it("includes contributor readiness findings as a non-blocking warning", async () => {
+      const github = createMockGithub();
+      const core = createMockCore();
+      github.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              name: "Contributor readiness",
+              status: "completed",
+              conclusion: "neutral",
+              completed_at: "2026-10-14T16:24:22.000Z",
+            },
+          ],
+        },
+      });
+
+      const [requiredRuns, fyiRuns] = await getCheckRunTuple(
+        github,
+        core,
+        "Azure",
+        "azure-rest-api-specs",
+        fullGitSha,
+        "main",
+        [],
+      );
+      const [comment, automatedChecksMet] = createNextStepsComment(
+        core,
+        "azure-rest-api-specs",
+        [],
+        "main",
+        requiredRuns,
+        fyiRuns,
+        true,
+        WORKFLOW_URL,
+      );
+
+      expect(requiredRuns).toEqual([]);
+      expect(fyiRuns.map((run) => run.name)).toEqual(["Contributor readiness"]);
+      expect(comment).toContain(
+        "Important checks have failed. As of today they are not blocking this PR",
+      );
+      expect(comment).toContain(
+        "⚠️ The check named `Contributor readiness` has failed. Review the Contributor readiness check on this PR for details.",
+      );
+      expect(automatedChecksMet.result).toBe("SUCCESS");
+    });
+
     it.each([false, true])(
       "places the SDK summary and pending guidance before a single footer (assessment complete: %s)",
       (assessmentCompleted) => {
