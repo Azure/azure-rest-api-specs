@@ -55,6 +55,7 @@ model SemanticRerankingInferenceContent {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "The service contract takes the paths as one comma-separated string; commaDelimited encoding lets SDKs expose a string collection while sending that string."
   #suppress "@azure-tools/typespec-autorest/unknown-format" "AutoRest cannot express array delimiter encoding, so the OpenAPI keeps the existing string definition, which matches the wire contract."
   @encode(ArrayEncoding.commaDelimited)
+  @maxItems(100)
   targetPaths?: string[];
 
   /** The name of the model used for the semantic reranking operation. */
