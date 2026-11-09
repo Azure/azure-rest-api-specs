@@ -12469,7 +12469,9 @@
         "AzureStorageAccount",
         "AzureServiceBus",
         "AzureNetAppFiles",
-        "AzureCosmosDB"
+        "AzureCosmosDB",
+        "AzureBackupRecoveryServices",
+        "AzureBackupDataProtection"
       ],
       "x-ms-enum": {
         "name": "ResourceProtectionSolutionType",
@@ -12524,6 +12526,16 @@
             "name": "AzureCosmosDB",
             "value": "AzureCosmosDB",
             "description": "Resource is protected with Azure Cosmos DB multiregion replication using customer-managed failover, where recovery promotes a secondary region to the write region."
+          },
+          {
+            "name": "AzureBackupRecoveryServices",
+            "value": "AzureBackupRecoveryServices",
+            "description": "Resource is protected with Azure Backup using a Recovery Services vault."
+          },
+          {
+            "name": "AzureBackupDataProtection",
+            "value": "AzureBackupDataProtection",
+            "description": "Resource is protected with Azure Backup using a Data Protection backup vault."
           }
         ]
       }
