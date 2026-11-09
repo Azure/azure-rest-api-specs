@@ -5,6 +5,11 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
 // csharp
+@@alternateType(
+  WorkspaceCustomerManagedKeyOnboarding.applicationId,
+  Azure.Core.uuid,
+  "csharp"
+);
 @@clientName(
   WorkspaceCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
   "keyEncryptionKeyUri",
@@ -98,7 +103,7 @@ using Microsoft.Chaos;
 @@clientName(Validation, "ChaosScenarioValidationData", "csharp");
 @@clientName(
   WorkspaceEvaluation,
-  "ChaosWorkspaceTemplateEvaluationData",
+  "ChaosWorkspaceTemplateEvaluation",
   "csharp"
 );
 @@clientName(
@@ -129,6 +134,13 @@ using Microsoft.Chaos;
 
 // python
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "python");
+
+// go
+@@clientName(
+  WorkspaceDiscoveryWarningReason.RbacValidationFailed,
+  exact("RBACValidationFailed"),
+  "go"
+);
 
 // java
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "java");
