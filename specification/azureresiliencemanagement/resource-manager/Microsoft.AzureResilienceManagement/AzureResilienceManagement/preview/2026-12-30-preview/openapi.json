@@ -8313,7 +8313,7 @@
           "type": "array",
           "description": "Selections that correlate recovery resources with their selected recovery points.",
           "items": {
-            "$ref": "#/definitions/RecoveryPointSelection"
+            "$ref": "#/definitions/RecoveryPointDetails"
           },
           "x-ms-identifiers": [
             "recoveryResourceId"
@@ -11220,6 +11220,46 @@
         }
       ]
     },
+    "RecoveryPointDetails": {
+      "type": "object",
+      "description": "The recovery point selected for a recovery resource.",
+      "properties": {
+        "recoveryResourceId": {
+          "type": "string",
+          "description": "The GUID identifying the recovery resource within the recovery plan."
+        },
+        "recoveryGroupId": {
+          "type": "string",
+          "description": "The GUID of the recovery group that contains the recovery resource."
+        },
+        "recoveryPointId": {
+          "type": "string",
+          "description": "The identifier of the selected backup service recovery point. This is a numeric (long) value represented as a string."
+        },
+        "recoveryPointTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The recovery point time for virtual machine and Azure Files workloads."
+        },
+        "recoveryPointType": {
+          "type": "string",
+          "description": "The recovery point category for virtual machine and Azure Files workloads, such as AppConsistent."
+        },
+        "recoveryPointTimeInUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The recovery point time in UTC for database workloads."
+        },
+        "backupType": {
+          "type": "string",
+          "description": "The recovery point backup type for database workloads, such as Full or Differential."
+        },
+        "threatStatus": {
+          "type": "string",
+          "description": "The optional threat status reported by the backup service."
+        }
+      }
+    },
     "RecoveryPointHealthStatus": {
       "type": "string",
       "description": "The health eligibility filter for discrete recovery points. This filter does not apply to log or point-in-time recovery candidates.",
@@ -11349,47 +11389,6 @@
         "recoveryPointHealthStatus": {
           "$ref": "#/definitions/RecoveryPointHealthStatus",
           "description": "The health filter for discrete recovery points. Omission means All. Log and point-in-time recovery candidates are not health-filtered."
-        }
-      }
-    },
-    "RecoveryPointSelection": {
-      "type": "object",
-      "description": "The recovery point selected for a recovery resource.",
-      "properties": {
-        "recoveryResourceId": {
-          "type": "string",
-          "description": "The GUID identifying the recovery resource within the recovery plan."
-        },
-        "recoveryGroupId": {
-          "type": "string",
-          "description": "The GUID of the recovery group that contains the recovery resource."
-        },
-        "recoveryPointId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the selected backup service recovery point."
-        },
-        "recoveryPointTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The recovery point time for virtual machine and Azure Files workloads."
-        },
-        "recoveryPointType": {
-          "type": "string",
-          "description": "The recovery point category for virtual machine and Azure Files workloads, such as AppConsistent."
-        },
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The recovery point time in UTC for database workloads."
-        },
-        "backupType": {
-          "type": "string",
-          "description": "The recovery point backup type for database workloads, such as Full or Differential."
-        },
-        "threatStatus": {
-          "type": "string",
-          "description": "The optional threat status reported by the backup service."
         }
       }
     },

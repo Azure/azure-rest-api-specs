@@ -226,12 +226,12 @@ model FetchRecoveryPointsResult {
   @added(Versions.v2026_12_30_preview)
   @doc("Selections that correlate recovery resources with their selected recovery points.")
   @identifiers(#["recoveryResourceId"])
-  recoveryPoints?: RecoveryPointSelection[];
+  recoveryPoints?: RecoveryPointDetails[];
 }
 
 @added(Versions.v2026_12_30_preview)
 @doc("The recovery point selected for a recovery resource.")
-model RecoveryPointSelection {
+model RecoveryPointDetails {
   @added(Versions.v2026_12_30_preview)
   @doc("The GUID identifying the recovery resource within the recovery plan.")
   recoveryResourceId?: string;
@@ -241,8 +241,8 @@ model RecoveryPointSelection {
   recoveryGroupId?: string;
 
   @added(Versions.v2026_12_30_preview)
-  @doc("The Azure resource ID of the selected backup service recovery point.")
-  recoveryPointId?: Azure.Core.armResourceIdentifier;
+  @doc("The identifier of the selected backup service recovery point. This is a numeric (long) value represented as a string.")
+  recoveryPointId?: string;
 
   @added(Versions.v2026_12_30_preview)
   @doc("The recovery point time for virtual machine and Azure Files workloads.")
