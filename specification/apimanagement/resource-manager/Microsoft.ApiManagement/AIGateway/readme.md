@@ -84,5 +84,24 @@ suppressions:
     where:
       - $.definitions.AiGatewayPolicy.properties.counterKey
       - $.definitions.AiGatewayPolicyUpdate.properties.counterKey
-    reason: False positive - counterKey contains public dimension selectors such as identity and ipAddress, not credentials or secret values. These selectors partition token, cost, or request counters. The property name does not imply secret content, so it must remain readable in responses.
+      - $.definitions.AiGatewaySessionBackendPreference.properties.key
+      - $.definitions.AiGatewaySessionBackendPreferenceUpdate.properties.key
+    reason: False positive - counterKey contains public dimension selectors such as identity and ipAddress, and sessionBackendPreference.key is a CEL expression that extracts a non-secret caller session identifier for routing affinity. Neither contains credentials or secret values.
+  - code: MissingXmsIdentifiers
+    from: openapi.json
+    where:
+      - $.definitions.AiGatewayAliasProperties.properties.failures
+      - $.definitions.AiGatewayAliasUpdateProperties.properties.failures
+    reason: Alias failure rules are evaluated in order and do not have a unique identifier property; x-ms-identifiers is intentionally empty.
+  - code: ProvisioningStateSpecifiedForPullStatusOp
+    from: openapi.json
+    where:
+      - $.definitions.AiGatewayWorkspaceProperties
+      - $.definitions.AiGatewayModelProviderProperties
+      - $.definitions.AiGatewayModelProperties
+      - $.definitions.AiGatewayAliasProperties
+      - $.definitions.AiGatewayToolServerProperties
+      - $.definitions.AiGatewayTelemetryExporterProperties
+      - $.definitions.AiGatewayApiKeyProperties
+    reason: Synchronous SMAPI child resources complete immediately and do not return properties.provisioningState.
 ```

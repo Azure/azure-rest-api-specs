@@ -12,6 +12,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** Properties of an AI Gateway API key. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous SMAPI child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayApiKeyProperties {
   /** Display name of the key. */
@@ -36,10 +37,6 @@ model AiGatewayApiKeyProperties {
   @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   secondaryKey?: string;
-
-  /** Provisioning state of the resource. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: AiGatewayProvisioningState;
 }
 
 /** Properties for updating an AI Gateway API key. */
@@ -83,5 +80,4 @@ model AiGatewayApiKeyResource
     SegmentName = "apiKeys",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
 }

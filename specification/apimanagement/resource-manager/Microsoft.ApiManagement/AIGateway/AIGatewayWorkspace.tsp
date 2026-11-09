@@ -12,6 +12,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** Properties of an AI Gateway workspace. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous SMAPI child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayWorkspaceProperties {
   /** Display name of the workspace. */
@@ -25,10 +26,6 @@ model AiGatewayWorkspaceProperties {
   /** Inline governance policies for the default workspace. */
   @identifiers(#[])
   policies?: AiGatewayPolicy[];
-
-  /** Provisioning state of the resource. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: AiGatewayProvisioningState;
 }
 
 /** Properties for updating an AI Gateway workspace. */
@@ -57,5 +54,4 @@ model AiGatewayWorkspaceResource
     SegmentName = "workspaces",
     NamePattern = "^default$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
 }

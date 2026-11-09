@@ -165,6 +165,7 @@ model AiGatewayTelemetryConfigurationUpdate {
 }
 
 /** Properties of an AI Gateway telemetry exporter. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous SMAPI child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayTelemetryExporterProperties {
   /** Exporter type, which cannot change after creation. */
@@ -185,10 +186,6 @@ model AiGatewayTelemetryExporterProperties {
 
   /** Optional observed-claim mappings, supported on native AI Gateway OpenTelemetry exporters. */
   telemetry?: AiGatewayTelemetryConfiguration;
-
-  /** Provisioning state of the resource. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: AiGatewayProvisioningState;
 }
 
 /** Properties to update on an AI Gateway telemetry exporter. */
@@ -228,5 +225,4 @@ model AiGatewayTelemetryExporterResource
     SegmentName = "telemetryExporters",
     NamePattern = "^[a-zA-Z0-9_-]+$"
   >;
-  ...EntityTagProperty;
 }

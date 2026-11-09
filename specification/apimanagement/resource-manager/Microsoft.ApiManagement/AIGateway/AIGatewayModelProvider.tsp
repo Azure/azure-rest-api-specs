@@ -123,6 +123,7 @@ model AiGatewayModelProviderUpdateParameters {
 }
 
 /** Properties of an AI Gateway model provider. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous SMAPI child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayModelProviderProperties {
   /** Model provider type. This value cannot be changed after creation. */
@@ -143,10 +144,6 @@ model AiGatewayModelProviderProperties {
 
   /** Outbound authentication configuration. */
   authentication?: AiGatewayModelProviderAuthentication;
-
-  /** Provisioning state of the resource. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: AiGatewayProvisioningState;
 }
 
 /** An AI Gateway model provider resource. */
@@ -160,5 +157,4 @@ model AiGatewayModelProviderResource
     SegmentName = "modelProviders",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
 }

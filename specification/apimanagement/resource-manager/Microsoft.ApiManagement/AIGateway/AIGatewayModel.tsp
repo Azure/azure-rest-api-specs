@@ -522,6 +522,21 @@ model AiGatewayPolicyUpdate {
   preflightResultMaxAge?: int32;
 }
 
+/** Maps a canonical AI Gateway API identifier to a relative backend path served by the model provider. */
+@added(Versions.v2026_11_01)
+model AiGatewayModelEndpoint {
+  /** Canonical AI Gateway API identifier (for example, v1/chat/completions, v1/responses, v1/messages, or v1/embeddings). */
+  api: string;
+
+  /** Backend path relative to the model provider's base endpoint, starting with '/'. */
+  path: string;
+}
+
+/** A model endpoint mapping to update. */
+@added(Versions.v2026_11_01)
+model AiGatewayModelEndpointUpdate
+  is OptionalProperties<AiGatewayModelEndpoint>;
+
 /** Properties for updating an AI Gateway model. */
 @added(Versions.v2026_11_01)
 model AiGatewayModelUpdateProperties {
@@ -533,6 +548,10 @@ model AiGatewayModelUpdateProperties {
 
   /** Provider deployment details. */
   deployment?: AiGatewayModelDeploymentUpdate;
+
+  /** API-to-backend-path mappings served by this model. */
+  @identifiers(#[])
+  endpoints?: AiGatewayModelEndpointUpdate[];
 
   /** Inline policies applied to this model. */
   @identifiers(#[])
@@ -550,6 +569,7 @@ model AiGatewayModelUpdateParameters {
 }
 
 /** Properties of an AI Gateway model. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous SMAPI child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayModelProperties {
   /** Display name of the model. */
@@ -565,16 +585,16 @@ model AiGatewayModelProperties {
   /** Provider deployment details. */
   deployment: AiGatewayModelDeployment;
 
+  /** API-to-backend-path mappings served by this model. */
+  @identifiers(#["api"])
+  endpoints?: AiGatewayModelEndpoint[];
+
   /** Runtime endpoints supported by this model. */
-  supportedEndpoints: string[];
+  supportedEndpoints?: string[];
 
   /** Inline policies applied to this model. */
   @identifiers(#[])
   policies?: AiGatewayPolicy[];
-
-  /** Provisioning state of the resource. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: AiGatewayProvisioningState;
 }
 
 /** An AI Gateway model resource. */
@@ -588,5 +608,4 @@ model AiGatewayModelResource
     SegmentName = "models",
     NamePattern = "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
 }

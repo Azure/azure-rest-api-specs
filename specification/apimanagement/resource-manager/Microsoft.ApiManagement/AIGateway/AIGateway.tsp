@@ -42,6 +42,18 @@ model AiGatewayFrontend {
   defaultHostname?: string;
 }
 
+/** Public network access state for an AI Gateway. */
+@added(Versions.v2026_11_01)
+union AiGatewayPublicNetworkAccess {
+  string,
+
+  /** Public network access is enabled. */
+  Enabled: "Enabled",
+
+  /** Public network access is disabled. */
+  Disabled: "Disabled",
+}
+
 /** Properties of an AI Gateway. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayProperties {
@@ -56,6 +68,10 @@ model AiGatewayProperties {
   /** Backend networking configuration. Can only be set when the AI Gateway is created. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   backend?: AiGatewayBackend;
+
+  /** Whether public network access is allowed for the AI Gateway. */
+  @added(Versions.v2026_11_01)
+  publicNetworkAccess?: AiGatewayPublicNetworkAccess;
 }
 
 /** An AI Gateway resource. */
@@ -80,6 +96,13 @@ model AiGatewayResource is Azure.ResourceManager.TrackedResource<
 model AiGatewaySkuUpdate
   is OptionalProperties<Azure.ResourceManager.CommonTypes.Sku>;
 
+/** Properties for updating an AI Gateway. */
+@added(Versions.v2026_11_01)
+model AiGatewayUpdateProperties {
+  /** Whether public network access is allowed for the AI Gateway. */
+  publicNetworkAccess?: AiGatewayPublicNetworkAccess;
+}
+
 /** Parameters for updating an AI Gateway. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayUpdateParameters {
@@ -88,4 +111,8 @@ model AiGatewayUpdateParameters {
 
   /** The SKU (Stock Keeping Unit) assigned to this resource. */
   sku?: AiGatewaySkuUpdate;
+
+  /** AI Gateway properties to update. */
+  @added(Versions.v2026_11_01)
+  properties?: AiGatewayUpdateProperties;
 }

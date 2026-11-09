@@ -3721,6 +3721,49 @@
         }
       }
     },
+    "AiGatewayAliasFailureRule": {
+      "type": "object",
+      "description": "An ordered failure rule for an AI Gateway alias.",
+      "properties": {
+        "when": {
+          "type": "string",
+          "description": "Boolean"
+        },
+        "retryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum additional attempts on the same backend; defaults to zero.",
+          "minimum": 0
+        },
+        "excludeFor": {
+          "type": "string",
+          "description": "Optional ISO 8601 duration or duration-valued"
+        }
+      },
+      "required": [
+        "when"
+      ]
+    },
+    "AiGatewayAliasFailureRuleUpdate": {
+      "type": "object",
+      "description": "An ordered failure rule to update on an AI Gateway alias.",
+      "properties": {
+        "when": {
+          "type": "string",
+          "description": "Boolean"
+        },
+        "retryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum additional attempts on the same backend; defaults to zero.",
+          "minimum": 0
+        },
+        "excludeFor": {
+          "type": "string",
+          "description": "Optional ISO 8601 duration or duration-valued"
+        }
+      }
+    },
     "AiGatewayAliasProperties": {
       "type": "object",
       "description": "Properties of a stable client-facing model alias.",
@@ -3748,16 +3791,32 @@
         },
         "selectionOrder": {
           "type": "array",
-          "description": "Ordered routing stages. Only the routing stage is currently supported.",
+          "description": "Ordered routing stages.",
           "items": {
-            "type": "string",
-            "enum": [
-              "routing"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "$ref": "#/definitions/AiGatewayAliasSelectionStage"
           }
+        },
+        "sessionBackendPreference": {
+          "$ref": "#/definitions/AiGatewaySessionBackendPreference",
+          "description": "Stateless backend preference using an existing caller session key."
+        },
+        "autoModelSelection": {
+          "$ref": "#/definitions/AiGatewayModelSelection",
+          "description": "Automatic model selection settings used with the autoModelSelection stage."
+        },
+        "failures": {
+          "type": "array",
+          "description": "Ordered failure rules; only the first matching rule is applied.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayAliasFailureRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "maxRetryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum additional backend attempts after the first request.",
+          "minimum": 0
         },
         "supportedEndpoints": {
           "type": "array",
@@ -3785,11 +3844,6 @@
             "$ref": "#/definitions/AiGatewayPolicy"
           },
           "x-ms-identifiers": []
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/AiGatewayProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
         }
       },
       "required": [
@@ -3803,11 +3857,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayAliasProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -3837,6 +3886,42 @@
         "value"
       ]
     },
+    "AiGatewayAliasSelectionStage": {
+      "type": "string",
+      "description": "Routing stage in an AI Gateway alias selection order.",
+      "enum": [
+        "routing",
+        "priority",
+        "autoModelSelection",
+        "sessionBackendPreference"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayAliasSelectionStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Routing",
+            "value": "routing",
+            "description": "Deterministic priority and weight routing stage."
+          },
+          {
+            "name": "Priority",
+            "value": "priority",
+            "description": "Deterministic priority and weight routing stage."
+          },
+          {
+            "name": "AutoModelSelection",
+            "value": "autoModelSelection",
+            "description": "Automatic model selection stage."
+          },
+          {
+            "name": "SessionBackendPreference",
+            "value": "sessionBackendPreference",
+            "description": "Stateless session backend preference stage."
+          }
+        ]
+      }
+    },
     "AiGatewayAliasTarget": {
       "type": "object",
       "description": "A model targeted by an AI Gateway alias.",
@@ -3855,6 +3940,15 @@
               }
             ]
           }
+        },
+        "selectorModelName": {
+          "type": "string",
+          "description": "Unversioned canonical model name grouping equivalent serving deployments.",
+          "minLength": 1
+        },
+        "when": {
+          "type": "string",
+          "description": "Optional Boolean CEL expression wrapped in"
         },
         "priority": {
           "type": "integer",
@@ -3893,6 +3987,15 @@
               }
             ]
           }
+        },
+        "selectorModelName": {
+          "type": "string",
+          "description": "Unversioned canonical model name grouping equivalent serving deployments.",
+          "minLength": 1
+        },
+        "when": {
+          "type": "string",
+          "description": "Optional Boolean CEL expression wrapped in"
         },
         "priority": {
           "type": "integer",
@@ -3945,16 +4048,32 @@
         },
         "selectionOrder": {
           "type": "array",
-          "description": "Ordered routing stages. Only the routing stage is currently supported.",
+          "description": "Ordered routing stages.",
           "items": {
-            "type": "string",
-            "enum": [
-              "routing"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "$ref": "#/definitions/AiGatewayAliasSelectionStage"
           }
+        },
+        "sessionBackendPreference": {
+          "$ref": "#/definitions/AiGatewaySessionBackendPreferenceUpdate",
+          "description": "Stateless backend preference using an existing caller session key."
+        },
+        "autoModelSelection": {
+          "$ref": "#/definitions/AiGatewayModelSelectionUpdate",
+          "description": "Automatic model selection settings used with the autoModelSelection stage."
+        },
+        "failures": {
+          "type": "array",
+          "description": "Ordered failure rules; only the first matching rule is applied.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayAliasFailureRuleUpdate"
+          },
+          "x-ms-identifiers": []
+        },
+        "maxRetryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum additional backend attempts after the first request.",
+          "minimum": 0
         },
         "policies": {
           "type": "array",
@@ -3964,6 +4083,30 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "AiGatewayAllowedRequestOverride": {
+      "type": "string",
+      "description": "Request field permitted to override automatic model selection.",
+      "enum": [
+        "model",
+        "objective"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayAllowedRequestOverride",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Model",
+            "value": "model",
+            "description": "Allow narrowing the configured selector model pool."
+          },
+          {
+            "name": "Objective",
+            "value": "objective",
+            "description": "Allow overriding the selection objective."
+          }
+        ]
       }
     },
     "AiGatewayApiKeyProperties": {
@@ -4008,11 +4151,6 @@
             "create"
           ],
           "x-ms-secret": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/AiGatewayProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
         }
       }
     },
@@ -4023,11 +4161,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayApiKeyProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -4704,6 +4837,38 @@
         }
       }
     },
+    "AiGatewayModelEndpoint": {
+      "type": "object",
+      "description": "Maps a canonical AI Gateway API identifier to a relative backend path served by the model provider.",
+      "properties": {
+        "api": {
+          "type": "string",
+          "description": "Canonical AI Gateway API identifier (for example, v1/chat/completions, v1/responses, v1/messages, or v1/embeddings)."
+        },
+        "path": {
+          "type": "string",
+          "description": "Backend path relative to the model provider's base endpoint, starting with '/'."
+        }
+      },
+      "required": [
+        "api",
+        "path"
+      ]
+    },
+    "AiGatewayModelEndpointUpdate": {
+      "type": "object",
+      "description": "A model endpoint mapping to update.",
+      "properties": {
+        "api": {
+          "type": "string",
+          "description": "Canonical AI Gateway API identifier (for example, v1/chat/completions, v1/responses, v1/messages, or v1/embeddings)."
+        },
+        "path": {
+          "type": "string",
+          "description": "Backend path relative to the model provider's base endpoint, starting with '/'."
+        }
+      }
+    },
     "AiGatewayModelProperties": {
       "type": "object",
       "description": "Properties of an AI Gateway model.",
@@ -4725,6 +4890,16 @@
           "$ref": "#/definitions/AiGatewayModelDeployment",
           "description": "Provider deployment details."
         },
+        "endpoints": {
+          "type": "array",
+          "description": "API-to-backend-path mappings served by this model.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayModelEndpoint"
+          },
+          "x-ms-identifiers": [
+            "api"
+          ]
+        },
         "supportedEndpoints": {
           "type": "array",
           "description": "Runtime endpoints supported by this model.",
@@ -4739,17 +4914,11 @@
             "$ref": "#/definitions/AiGatewayPolicy"
           },
           "x-ms-identifiers": []
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/AiGatewayProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
         }
       },
       "required": [
         "displayName",
-        "deployment",
-        "supportedEndpoints"
+        "deployment"
       ]
     },
     "AiGatewayModelProviderAuthentication": {
@@ -4857,11 +5026,6 @@
         "authentication": {
           "$ref": "#/definitions/AiGatewayModelProviderAuthentication",
           "description": "Outbound authentication configuration."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/AiGatewayProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
         }
       },
       "required": [
@@ -4876,11 +5040,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayModelProviderProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -5005,11 +5164,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayModelProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -5039,6 +5193,73 @@
         "value"
       ]
     },
+    "AiGatewayModelSelection": {
+      "type": "object",
+      "description": "Automatic model selection configuration for an AI Gateway alias.",
+      "properties": {
+        "objective": {
+          "$ref": "#/definitions/AiGatewayModelSelectionObjective",
+          "description": "Configured quality/cost objective."
+        },
+        "allowedRequestOverrides": {
+          "type": "array",
+          "description": "Permitted per-request overrides.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayAllowedRequestOverride"
+          }
+        }
+      },
+      "required": [
+        "objective"
+      ]
+    },
+    "AiGatewayModelSelectionObjective": {
+      "type": "string",
+      "description": "Quality and cost objective for automatic model selection.",
+      "enum": [
+        "Balanced",
+        "Cost",
+        "Quality"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayModelSelectionObjective",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Balanced",
+            "value": "Balanced",
+            "description": "Balance quality and cost."
+          },
+          {
+            "name": "Cost",
+            "value": "Cost",
+            "description": "Prefer lower cost."
+          },
+          {
+            "name": "Quality",
+            "value": "Quality",
+            "description": "Prefer higher quality."
+          }
+        ]
+      }
+    },
+    "AiGatewayModelSelectionUpdate": {
+      "type": "object",
+      "description": "Automatic model selection configuration to update.",
+      "properties": {
+        "objective": {
+          "$ref": "#/definitions/AiGatewayModelSelectionObjective",
+          "description": "Configured quality/cost objective."
+        },
+        "allowedRequestOverrides": {
+          "type": "array",
+          "description": "Permitted per-request overrides.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayAllowedRequestOverride"
+          }
+        }
+      }
+    },
     "AiGatewayModelUpdateParameters": {
       "type": "object",
       "description": "Parameters for updating an AI Gateway model.",
@@ -5064,6 +5285,14 @@
         "deployment": {
           "$ref": "#/definitions/AiGatewayModelDeploymentUpdate",
           "description": "Provider deployment details."
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "API-to-backend-path mappings served by this model.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayModelEndpointUpdate"
+          },
+          "x-ms-identifiers": []
         },
         "policies": {
           "type": "array",
@@ -5748,6 +5977,10 @@
             "read",
             "create"
           ]
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/AiGatewayPublicNetworkAccess",
+          "description": "Whether public network access is allowed for the AI Gateway."
         }
       }
     },
@@ -5781,6 +6014,30 @@
         ]
       },
       "readOnly": true
+    },
+    "AiGatewayPublicNetworkAccess": {
+      "type": "string",
+      "description": "Public network access state for an AI Gateway.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayPublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Public network access is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Public network access is disabled."
+          }
+        ]
+      }
     },
     "AiGatewayResource": {
       "type": "object",
@@ -5899,6 +6156,29 @@
       "required": [
         "name"
       ]
+    },
+    "AiGatewaySessionBackendPreference": {
+      "type": "object",
+      "description": "Stateless backend preference using an existing caller session key.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "CEL expression returning the caller session key."
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "AiGatewaySessionBackendPreferenceUpdate": {
+      "type": "object",
+      "description": "Stateless backend preference settings to update.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "CEL expression returning the caller session key."
+        }
+      }
     },
     "AiGatewaySkuUpdate": {
       "type": "object",
@@ -6159,11 +6439,6 @@
         "telemetry": {
           "$ref": "#/definitions/AiGatewayTelemetryConfiguration",
           "description": "Optional observed-claim mappings, supported on native AI Gateway OpenTelemetry exporters."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/AiGatewayProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
         }
       },
       "required": [
@@ -6177,11 +6452,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayTelemetryExporterProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -6489,6 +6759,55 @@
         }
       }
     },
+    "AiGatewayToolServerFederation": {
+      "type": "object",
+      "description": "Customer-owned federation application identity for a tool server endpoint.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application (client) ID of the customer-owned federation application."
+        },
+        "appCredential": {
+          "$ref": "#/definitions/AiGatewayToolServerFederationAppCredential",
+          "description": "Credential used to authenticate the federation application."
+        }
+      }
+    },
+    "AiGatewayToolServerFederationAppCredential": {
+      "type": "object",
+      "description": "Credential used to authenticate a tool server endpoint federation application.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerFederationAppCredentialType",
+          "description": "Federation application credential type."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of a user-assigned managed identity available to this AI Gateway."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AiGatewayToolServerFederationAppCredentialType": {
+      "type": "string",
+      "description": "Supported federation application credential types for a tool server endpoint.",
+      "enum": [
+        "userAssignedManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerFederationAppCredentialType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserAssignedManagedIdentity",
+            "value": "userAssignedManagedIdentity",
+            "description": "A user-assigned managed identity assigned to the AI Gateway."
+          }
+        ]
+      }
+    },
     "AiGatewayToolServerManagedIdentityAuthentication": {
       "type": "object",
       "description": "Managed identity authentication for a tool server endpoint.",
@@ -6562,6 +6881,10 @@
         "grantType": {
           "$ref": "#/definitions/AiGatewayToolServerOauth2GrantType",
           "description": "OAuth grant type."
+        },
+        "tokenExchange": {
+          "$ref": "#/definitions/AiGatewayToolServerTokenExchange",
+          "description": "Chained token-exchange configuration."
         },
         "authorizationParameters": {
           "type": "array",
@@ -6770,11 +7093,6 @@
           "x-ms-identifiers": [
             "url"
           ]
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/AiGatewayProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
         }
       },
       "required": [
@@ -6788,11 +7106,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayToolServerProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -6897,6 +7210,10 @@
           "$ref": "#/definitions/AiGatewayToolServerOauth2GrantType",
           "description": "OAuth grant type."
         },
+        "tokenExchange": {
+          "$ref": "#/definitions/AiGatewayToolServerTokenExchange",
+          "description": "Chained token-exchange configuration."
+        },
         "authorizationParameters": {
           "type": "array",
           "description": "Additional authorization endpoint parameters.",
@@ -6997,6 +7314,48 @@
       "required": [
         "endpoints"
       ]
+    },
+    "AiGatewayToolServerTokenExchange": {
+      "type": "object",
+      "description": "Chained token-exchange configuration for a tool server endpoint.",
+      "properties": {
+        "profile": {
+          "$ref": "#/definitions/AiGatewayToolServerTokenExchangeProfile",
+          "description": "Token-exchange profile."
+        },
+        "federatedClientApplication": {
+          "$ref": "#/definitions/AiGatewayToolServerFederation",
+          "description": "Customer-owned federated client application identity."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Delegated scopes requested from the target tool server resource.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "profile"
+      ]
+    },
+    "AiGatewayToolServerTokenExchangeProfile": {
+      "type": "string",
+      "description": "Supported token-exchange profiles for a tool server endpoint.",
+      "enum": [
+        "entraOnBehalfOf"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerTokenExchangeProfile",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EntraOnBehalfOf",
+            "value": "entraOnBehalfOf",
+            "description": "Microsoft Entra chained on-behalf-of token exchange."
+          }
+        ]
+      }
     },
     "AiGatewayToolServerType": {
       "type": "string",
@@ -7123,6 +7482,20 @@
         "sku": {
           "$ref": "#/definitions/AiGatewaySkuUpdate",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/AiGatewayUpdateProperties",
+          "description": "AI Gateway properties to update."
+        }
+      }
+    },
+    "AiGatewayUpdateProperties": {
+      "type": "object",
+      "description": "Properties for updating an AI Gateway.",
+      "properties": {
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/AiGatewayPublicNetworkAccess",
+          "description": "Whether public network access is allowed for the AI Gateway."
         }
       }
     },
@@ -7147,11 +7520,6 @@
             "$ref": "#/definitions/AiGatewayPolicy"
           },
           "x-ms-identifiers": []
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/AiGatewayProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
         }
       },
       "required": [
@@ -7166,11 +7534,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayWorkspaceProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [

@@ -103,6 +103,57 @@ model AiGatewayToolServerOauth2Parameter {
   value: string;
 }
 
+/** Supported token-exchange profiles for a tool server endpoint. */
+@added(Versions.v2026_11_01)
+union AiGatewayToolServerTokenExchangeProfile {
+  string,
+
+  /** Microsoft Entra chained on-behalf-of token exchange. */
+  EntraOnBehalfOf: "entraOnBehalfOf",
+}
+
+/** Supported federation application credential types for a tool server endpoint. */
+@added(Versions.v2026_11_01)
+union AiGatewayToolServerFederationAppCredentialType {
+  string,
+
+  /** A user-assigned managed identity assigned to the AI Gateway. */
+  UserAssignedManagedIdentity: "userAssignedManagedIdentity",
+}
+
+/** Credential used to authenticate a tool server endpoint federation application. */
+@added(Versions.v2026_11_01)
+model AiGatewayToolServerFederationAppCredential {
+  /** Federation application credential type. */
+  type: AiGatewayToolServerFederationAppCredentialType;
+
+  /** Client ID of a user-assigned managed identity available to this AI Gateway. */
+  clientId?: string;
+}
+
+/** Customer-owned federation application identity for a tool server endpoint. */
+@added(Versions.v2026_11_01)
+model AiGatewayToolServerFederation {
+  /** Application (client) ID of the customer-owned federation application. */
+  applicationId?: string;
+
+  /** Credential used to authenticate the federation application. */
+  appCredential?: AiGatewayToolServerFederationAppCredential;
+}
+
+/** Chained token-exchange configuration for a tool server endpoint. */
+@added(Versions.v2026_11_01)
+model AiGatewayToolServerTokenExchange {
+  /** Token-exchange profile. */
+  profile: AiGatewayToolServerTokenExchangeProfile;
+
+  /** Customer-owned federated client application identity. */
+  federatedClientApplication?: AiGatewayToolServerFederation;
+
+  /** Delegated scopes requested from the target tool server resource. */
+  scopes?: string[];
+}
+
 /** OAuth 2.0 authentication for a tool server endpoint. */
 @added(Versions.v2026_11_01)
 model AiGatewayToolServerOauth2Authentication {
@@ -128,6 +179,9 @@ model AiGatewayToolServerOauth2Authentication {
 
   /** OAuth grant type. */
   grantType?: AiGatewayToolServerOauth2GrantType;
+
+  /** Chained token-exchange configuration. */
+  tokenExchange?: AiGatewayToolServerTokenExchange;
 
   /** Additional authorization endpoint parameters. */
   @identifiers(#["name"])
@@ -345,6 +399,7 @@ model AiGatewayToolServerUpdateParameters {
 }
 
 /** Properties of an AI Gateway tool server. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous SMAPI child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayToolServerProperties {
   /** Display name of the tool server. */
@@ -386,10 +441,6 @@ model AiGatewayToolServerProperties {
   @visibility(Lifecycle.Read)
   @identifiers(#["url"])
   gatewayEndpoints?: AiGatewayEndpoint[];
-
-  /** Provisioning state of the resource. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: AiGatewayProvisioningState;
 }
 
 /** An AI Gateway tool server resource. */
@@ -403,5 +454,4 @@ model AiGatewayToolServerResource
     SegmentName = "toolServers",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
 }
