@@ -89390,11 +89390,13 @@ components:
         Checkpoint preparation response. HTTP 202 is used only for Pending.
         HTTP 200 reports Succeeded with files, or Failed without an inventory.
     SessionFineTuning.FineTuningCheckpointDownloadStatus:
-      type: string
-      enum:
-        - Pending
-        - Succeeded
-        - Failed
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Pending
+            - Succeeded
+            - Failed
       description: Supported checkpoint preparation states.
     SessionFineTuning.FineTuningCheckpointInfo:
       type: object
@@ -89957,10 +89959,12 @@ components:
         - user
       description: Supported text-only context-message roles.
     SessionFineTuning.FineTuningTextOnlyFinishReason:
-      type: string
-      enum:
-        - stop
-        - tool_calls
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - stop
+            - tool_calls
       description: Supported termination of a valid public assistant completion.
     SessionFineTuning.FineTuningTextOnlyFunctionCall:
       type: object
@@ -89995,19 +89999,23 @@ components:
           description: JSON schema with type equal to object.
       description: A public function definition whose parameters describe a JSON object.
     SessionFineTuning.FineTuningTextOnlyInvalidFinishReason:
-      type: string
-      enum:
-        - stop
-        - length
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - stop
+            - length
       description: Recorded termination of an invalid, still-trainable completion.
     SessionFineTuning.FineTuningTextOnlyInvalidReason:
-      type: string
-      enum:
-        - output_token_limit
-        - missing_private_boundary
-        - malformed_tool_call
-        - invalid_tool_arguments
-        - invalid_public_output
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - output_token_limit
+            - missing_private_boundary
+            - malformed_tool_call
+            - invalid_tool_arguments
+            - invalid_public_output
       description: Safe classifications for an intact but non-public generated completion.
     SessionFineTuning.FineTuningTextOnlyInvalidSampleChoice:
       type: object

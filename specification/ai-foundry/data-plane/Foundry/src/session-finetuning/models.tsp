@@ -965,8 +965,9 @@ model FineTuningTextOnlySampleChoice {
 }
 
 /** Supported termination of a valid public assistant completion. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The public text-only parser validates these exact completion outcomes."
 union FineTuningTextOnlyFinishReason {
+  string,
+
   /** The assistant completed its response. */
   stop: "stop",
 
@@ -975,8 +976,9 @@ union FineTuningTextOnlyFinishReason {
 }
 
 /** Safe classifications for an intact but non-public generated completion. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Unknown classifications cannot be exposed as validated public completion metadata."
 union FineTuningTextOnlyInvalidReason {
+  string,
+
   /** The output token limit was reached. */
   output_token_limit: "output_token_limit",
 
@@ -994,8 +996,9 @@ union FineTuningTextOnlyInvalidReason {
 }
 
 /** Recorded termination of an invalid, still-trainable completion. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service exposes only these recorded terminations for invalid completions."
 union FineTuningTextOnlyInvalidFinishReason {
+  string,
+
   /** Generation ended without reaching its output limit. */
   stop: "stop",
 
@@ -1076,8 +1079,9 @@ model FineTuningCheckpointDownloadFile {
 }
 
 /** Supported checkpoint preparation states. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Preparation uses the existing closed state machine, independently of request-status polling."
 union FineTuningCheckpointDownloadStatus {
+  string,
+
   /** The checkpoint copy is still being prepared. */
   pending: "Pending",
 
