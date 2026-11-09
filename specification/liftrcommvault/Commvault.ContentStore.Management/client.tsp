@@ -233,14 +233,32 @@ using Commvault.ContentStore;
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The PATCH map intentionally uses an empty object to assign a user-assigned identity and null to remove one; UserAssignedIdentity's fields are read-only response metadata, so UpdateableProperties correctly produces an empty value model for this PATCH contract."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "User-assigned identity PATCH values are intentionally empty objects; dictionary keys identify the identities."
 @doc("User-assigned identity details supplied in a cloud account PATCH.")
 model CloudAccountUserAssignedIdentity {
-  ...UpdateableProperties<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>;
+  ...UpdateableProperties<
+    Azure.ResourceManager.CommonTypes.UserAssignedIdentity
+  >;
 }
 
+@doc("Managed service identity details supplied in a cloud account PATCH.")
+model JavaScriptCloudAccountIdentityUpdate {
+  @doc("The type of managed identity assigned to this resource.")
+  type?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
+
+  @doc("The identities assigned to this resource by the user.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Managed identity PATCH uses a dictionary keyed by user-assigned identity resource IDs."
+  userAssignedIdentities?: Record<CloudAccountUserAssignedIdentity>;
+}
+
+@@clientName(
+  JavaScriptCloudAccountIdentityUpdate,
+  "CloudAccountIdentityUpdate",
+  "javascript"
+);
+
 @@alternateType(
-  CloudAccountIdentityUpdate.userAssignedIdentities,
-  Record<CloudAccountUserAssignedIdentity | null>,
+  Commvault.ContentStore.CloudAccountIdentityUpdate,
+  JavaScriptCloudAccountIdentityUpdate,
   "javascript"
 );
