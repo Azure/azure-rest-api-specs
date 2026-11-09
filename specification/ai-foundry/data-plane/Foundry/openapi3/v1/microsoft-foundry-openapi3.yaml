@@ -45532,6 +45532,7 @@ components:
           type: string
           enum:
             - agent_optimization
+          description: Identifies candidate output produced by agent optimization.
         mutations:
           type: array
           items:
@@ -46079,6 +46080,7 @@ components:
           type: string
           enum:
             - instructions
+          description: Identifies a mutation to the agent's instructions.
         value:
           type: string
           description: Optimized agent instructions. Omitted on LIST unless `expand=mutations` is specified.
@@ -46247,6 +46249,7 @@ components:
           type: string
           enum:
             - model
+          description: Identifies a mutation to the agent's model selection.
         value:
           $ref: '#/components/schemas/AgentOptimizationModelName'
           description: Selected model name or deployment name. Omitted on LIST unless `expand=mutations` is specified.
@@ -46282,6 +46285,7 @@ components:
           type: string
           enum:
             - prompt_optimization
+          description: Identifies candidate output produced by prompt optimization.
         mutations:
           type: array
           items:
@@ -46603,6 +46607,7 @@ components:
           type: string
           enum:
             - skills
+          description: Identifies a mutation to the agent's skills.
         value:
           type: array
           items:
@@ -46777,6 +46782,7 @@ components:
           type: string
           enum:
             - tools
+          description: Identifies a mutation to the agent's function tools.
         value:
           type: array
           items:
@@ -46957,6 +46963,7 @@ components:
           type: string
           enum:
             - agent_reference
+          description: Identifies this object as an agent reference.
         name:
           type: string
           maxLength: 256
@@ -46964,6 +46971,7 @@ components:
         version:
           type: string
           description: The version identifier of the agent.
+      description: Identifies an agent by name and, optionally, a specific version.
     AgentServerTaskCreateRequest:
       type: object
       required:
@@ -49011,6 +49019,7 @@ components:
           type: string
           enum:
             - browser_automation
+          description: Identifies a browser automation tool in the toolbox.
         browser_automation:
           $ref: '#/components/schemas/BrowserAutomationToolParameters'
           description: The Browser Automation Tool parameters.
@@ -58652,6 +58661,7 @@ components:
           x-stainless-const: true
         function:
           $ref: '#/components/schemas/OpenAI.FunctionObject'
+          description: The function definition exposed to the model as a tool.
       description: A function tool that can be used to generate a response.
       title: Function tool
     OpenAI.ChatCompletionToolChoiceOption:
@@ -66380,10 +66390,13 @@ components:
           description: The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
         parameters:
           $ref: '#/components/schemas/OpenAI.FunctionParameters'
+          description: The function's parameters, described as a JSON Schema object.
         strict:
           anyOf:
             - type: boolean
             - type: 'null'
+          description: Whether generated arguments must strictly follow the parameter schema.
+      description: Defines a function that a model can call, including its name and argument schema.
       x-openai-structured-output: function
     OpenAI.FunctionParameters:
       type: object
