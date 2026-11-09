@@ -59,6 +59,12 @@ interface VirtualMachineProtections {
           @bodyRoot _: VirtualMachineProtection;
         })
   >;
+
+  /**
+   * [Preview Feature] Lists the protection configuration of a virtual machine. The list contains the singleton 'default' protection resource.
+   */
+  @added(Versions.v2026_09_01)
+  list is ComputeResourceListByParent<VirtualMachineProtection>;
 }
 
 @@doc(VirtualMachineProtection.name, "The singleton resource name.");

@@ -13834,6 +13834,55 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection": {
+      "get": {
+        "operationId": "VirtualMachineProtections_List",
+        "tags": [
+          "VirtualMachineProtections"
+        ],
+        "description": "[Preview Feature] Lists the protection configuration of a virtual machine. The list contains the singleton 'default' protection resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineProtectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VM Protection": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineProtection_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection/default": {
       "get": {
         "operationId": "VirtualMachineProtections_Get",
@@ -22782,6 +22831,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "VirtualMachineProtectionListResult": {
+      "type": "object",
+      "description": "The response of a VirtualMachineProtection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualMachineProtection items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineProtection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "VirtualMachineProtectionProperties": {

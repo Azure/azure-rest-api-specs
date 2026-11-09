@@ -213,11 +213,6 @@ directive:
       - NestedResourcesMustHaveListOperation
     reason: CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
   - where:
-      - $.definitions.VirtualMachineProtection
-    suppress:
-      - NestedResourcesMustHaveListOperation
-    reason: VirtualMachineProtection is a singleton child resource of a virtual machine, addressable only as vmProtection/default, so a list operation is not applicable.
-  - where:
       - $.definitions.SubResourceWithColocationStatus.properties
     suppress:
       - BodyTopLevelProperties
