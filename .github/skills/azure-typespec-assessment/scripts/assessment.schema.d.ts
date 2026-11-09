@@ -11,11 +11,6 @@
 export type NonemptyString = string;
 /**
  * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
- * via the `definition` "ids".
- */
-export type Ids = NonemptyString[];
-/**
- * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
  * via the `definition` "documentQuality".
  */
 export type DocumentQuality = {
@@ -42,6 +37,11 @@ export type DocumentQuality = {
   blockers: unknown[];
 };
 /**
+ * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
+ * via the `definition` "ids".
+ */
+export type Ids = NonemptyString[];
+/**
  * @minItems 1
  * @maxItems 1
  */
@@ -51,6 +51,19 @@ export type Ids1 = [NonemptyString];
  * @maxItems 1
  */
 export type Ids2 = [NonemptyString];
+/**
+ * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
+ * via the `definition` "compatibilityDimension".
+ */
+export interface CompatibilityDimension {
+  status: "passed" | "failed" | "not-assessed";
+  verdict?: "passed" | "failed" | "unknown";
+  coverage?: "complete" | "partial" | "blocked";
+  findings: unknown[];
+  blockers?: unknown[];
+  rejectedCandidateCount?: number;
+  [k: string]: unknown;
+}
 /**
  * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
  * via the `definition` "documentCheck".
@@ -84,21 +97,6 @@ export interface TypeSpecAssessment {
     [k: string]: unknown;
   };
   confidence: "high" | "medium" | "low";
-  artifactComparisons?: {
-    projectId: string;
-    mode: "new-project" | "new-api-version" | "existing-api-version" | "unversioned" | "legacy";
-    compatibilityPolicy?:
-      | {
-          action: "compare";
-        }
-      | {
-          action: "skip";
-          reason: "no-stable-api-version";
-        };
-    baseline: ArtifactSelection;
-    target: ArtifactSelection;
-    [k: string]: unknown;
-  }[];
   safety: {
     scope: "rest-and-downstream-only";
     status: "passed" | "failed" | "not-assessed";
@@ -133,31 +131,6 @@ export interface TypeSpecAssessment {
     [k: string]: unknown;
   };
   blockers: unknown[];
-  [k: string]: unknown;
-}
-/**
- * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
- * via the `definition` "artifactSelection".
- */
-export interface ArtifactSelection {
-  sourceRevision: "base" | "current" | "absent" | "not-selected";
-  commit?: string;
-  apiVersion?: string;
-  reason: string;
-  [k: string]: unknown;
-}
-/**
- * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
- * via the `definition` "compatibilityDimension".
- */
-export interface CompatibilityDimension {
-  status: "passed" | "failed" | "not-assessed";
-  verdict?: "passed" | "failed" | "unknown";
-  coverage?: "complete" | "partial" | "blocked";
-  findings: unknown[];
-  blockers?: unknown[];
-  rejectedCandidateCount?: number;
-  analyzedProjectIds?: Ids;
   [k: string]: unknown;
 }
 /**
