@@ -29,6 +29,65 @@ describe("execFile", () => {
   const args = ["-e", `console.log("test")`];
   const expected = "test\n";
 
+  it.each([undefined, false, true])(
+    "captures output and streams only when enabled (streamOutput: %s)",
+    async (streamOutput) => {
+      const chunks: string[] = [];
+      const outputBeforeCompletion: boolean[] = [];
+      let completed = false;
+      const write = vi.spyOn(process.stdout, "write").mockImplementation((chunk) => {
+        chunks.push(String(chunk));
+        outputBeforeCompletion.push(!completed);
+        return true;
+      });
+      try {
+        const result = await execFile(
+          process.execPath,
+          ["-e", "process.stdout.write('child-output'); process.stderr.write('child-diagnostic')"],
+          { streamOutput },
+        ).finally(() => {
+          completed = true;
+        });
+
+        expect(result).toEqual({ stdout: "child-output", stderr: "child-diagnostic" });
+        if (streamOutput) {
+          expect(chunks.join("")).toContain("child-output");
+          expect(chunks.join("")).toContain("child-diagnostic");
+          expect(outputBeforeCompletion.length).toBeGreaterThan(0);
+          expect(outputBeforeCompletion.every(Boolean)).toBe(true);
+        } else {
+          expect(write).not.toHaveBeenCalled();
+        }
+      } finally {
+        write.mockRestore();
+      }
+    },
+  );
+
+  it.each([
+    { stdout: "child-output", stderr: "" },
+    { stdout: "", stderr: "child-diagnostic" },
+    { stdout: "child-output", stderr: "child-diagnostic" },
+  ])("prints captured failure output without a logger (%j)", async ({ stdout, stderr }) => {
+    const chunks: string[] = [];
+    const write = vi.spyOn(process.stdout, "write").mockImplementation((chunk) => {
+      chunks.push(String(chunk));
+      return true;
+    });
+    try {
+      await expect(
+        execFile(process.execPath, [
+          "-e",
+          `process.stdout.write(${JSON.stringify(stdout)}); process.stderr.write(${JSON.stringify(stderr)}); process.exitCode = 7;`,
+        ]),
+      ).rejects.toMatchObject({ code: 7, stdout, stderr });
+
+      expect(chunks.join("")).toBe(stdout + stderr);
+    } finally {
+      write.mockRestore();
+    }
+  });
+
   it("forwards command-specific environment without mutating the parent", async () => {
     const original = process.env.TSV_EXEC_TEST;
     const result = await execFile(
