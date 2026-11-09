@@ -20,10 +20,12 @@ namespace Microsoft.Contoso;
 /** The available API versions. */
 enum Versions {
   /** 2021-10-01-preview version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2021_10_01_preview: "2021-10-01-preview",
 
   /** 2021-11-01 version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2021_11_01: "2021-11-01",
 }

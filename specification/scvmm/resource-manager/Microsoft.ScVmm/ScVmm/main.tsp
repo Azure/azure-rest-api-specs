@@ -31,14 +31,17 @@ namespace Microsoft.ScVmm;
 /** The available API versions. */
 enum Versions {
   /** Service version 2023-10-07. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2023_10_07: "2023-10-07",
 
   /** Service version 2024-06-01. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01: "2024-06-01",
 
   /** Service version 2025-03-13. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_03_13: "2025-03-13",
 }

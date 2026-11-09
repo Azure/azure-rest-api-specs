@@ -22,15 +22,18 @@ namespace GitHub.Network;
 
 @doc("The available API versions.")
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("The 2024-04-01-preview API version for staging environment.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-04-01-preview`,
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @doc("The 2024-04-01 API version for staff US environment.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-04-01`,
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("The 2024-04-02 API version for production US/EU environments.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-04-02`,

@@ -40,6 +40,7 @@ namespace Kore.AgentPlatform;
 @doc("Supported versions for the Kore.AgentPlatform resource model")
 enum Versions {
   /** 2026-07-01 preview version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v3_preview)
   v2026_07_01_preview: "2026-07-01-preview",

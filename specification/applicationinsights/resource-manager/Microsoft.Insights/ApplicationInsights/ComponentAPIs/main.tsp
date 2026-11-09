@@ -40,5 +40,6 @@ enum Versions {
   /**
    * The 2015-05-01 API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2015_05_01: "2015-05-01",
 }

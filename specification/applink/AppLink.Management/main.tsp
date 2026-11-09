@@ -21,10 +21,12 @@ namespace Microsoft.AppLink;
 /** The available API versions. */
 enum Versions {
   /** 2025-08-01-preview version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_08_01_preview: "2025-08-01-preview",
 
   /** 2026-08-01-preview version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_08_01_preview: "2026-08-01-preview",
 }

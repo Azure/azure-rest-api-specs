@@ -24,9 +24,11 @@ namespace Microsoft.Edge;
 
 @doc("Supported API Versions")
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("API Version - 2024-02-01-preview")
   v2024_02_01_preview: "2024-02-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("API Version - 2025-03-01-preview")
   v2025_03_01_preview: "2025-03-01-preview",
 

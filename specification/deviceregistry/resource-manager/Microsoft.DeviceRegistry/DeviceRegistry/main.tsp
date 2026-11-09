@@ -42,30 +42,37 @@ namespace Microsoft.DeviceRegistry;
 /** API versions */
 @doc("Microsoft.DeviceRegistry Resource Provider supported API versions.")
 enum Versions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-09-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_09_01_preview: "2024-09-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-11-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_11_01: "2024-11-01",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-10-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_10_01: "2025-10-01",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-03-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_03_01_preview: "2026-03-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-04-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_04_01: "2026-04-01",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_11_01: "2026-11-01",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-02-preview.")
   @Azure.Core.previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
