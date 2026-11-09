@@ -44,6 +44,21 @@ void test("collects revision-local generic provenance in the existing TCGC compi
     apiVersion: "2022-12-01",
   });
 
+  for (const emitter of ["autorest", "tcgc"] as const) {
+    assert.equal(result[emitter].sourceRevision, "current");
+    assert.equal(result[emitter].sourceCommit, "head");
+    assert.equal(result[emitter].selectedApiVersion, "2022-12-01");
+  }
+  assert.ok(
+    result.autorest.command.args.includes(
+      "--option=@azure-tools/typespec-autorest.version=2022-12-01",
+    ),
+  );
+  assert.ok(
+    result.tcgc.command.args.includes(
+      "--option=@azure-tools/assessment-tcgc-provenance.api-version=2022-12-01",
+    ),
+  );
   assert.equal(result.tcgc.status, "succeeded");
   assert.equal(result.tcgc.files.length, 1);
   assert.ok(result.tcgc.provenanceFile);

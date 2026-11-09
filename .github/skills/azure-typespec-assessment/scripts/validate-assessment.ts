@@ -1,5 +1,4 @@
 import path from "node:path";
-import { isPreviewApiVersion, skipsCompatibility } from "./compatibility-policy.ts";
 import {
   deriveLegacySafety,
   deriveSafety,
@@ -473,68 +472,7 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
     ) {
       errors.push(`Artifact comparison ${comparison.projectId} has invalid mode.`);
     }
-    const skipped = skipsCompatibility(comparison);
-    const project = assessment.projects?.find((item) => item.id === comparison.projectId);
-    if (comparison.compatibilityPolicy) {
-      const policy = comparison.compatibilityPolicy;
-      if (
-        !["compare", "skip"].includes(policy.action) ||
-        (policy.action === "skip" && policy.reason !== "no-stable-api-version")
-      ) {
-        errors.push(
-          `Artifact comparison ${comparison.projectId} has invalid compatibility policy.`,
-        );
-      }
-      if (
-        project?.artifactComparison &&
-        JSON.stringify(project.artifactComparison.compatibilityPolicy) !== JSON.stringify(policy)
-      ) {
-        errors.push(
-          `Artifact comparison ${comparison.projectId} has inconsistent compatibility policy.`,
-        );
-      }
-    }
-    if (skipped) {
-      const available = comparison.available;
-      if (
-        !["new-project", "new-api-version", "existing-api-version"].includes(
-          comparison.mode ?? "",
-        ) ||
-        !comparison.target?.apiVersion ||
-        !isPreviewApiVersion(comparison.target.apiVersion) ||
-        !available?.current?.includes(comparison.target.apiVersion) ||
-        (comparison.mode !== "new-project" && !available?.base?.length) ||
-        [...(available?.base ?? []), ...(available?.current ?? [])].some(
-          (version) => !isPreviewApiVersion(version),
-        )
-      ) {
-        errors.push(
-          `Artifact comparison ${comparison.projectId} lacks resolved preview-only policy evidence.`,
-        );
-      }
-      if (
-        comparison.baseline?.sourceRevision !== "not-selected" ||
-        comparison.baseline.commit !== undefined ||
-        comparison.baseline.apiVersion !== undefined ||
-        comparison.baseline.reason !== "no-stable-api-version" ||
-        project?.artifacts?.baseline !== undefined ||
-        project?.artifacts?.base !== undefined
-      ) {
-        errors.push(
-          `Artifact comparison ${comparison.projectId} must leave the baseline unselected by policy.`,
-        );
-      }
-      if (
-        comparison.target?.sourceRevision !== "current" ||
-        comparison.target.commit !== assessment.comparison.headCommit
-      ) {
-        errors.push(
-          `Artifact comparison ${comparison.projectId} must compile the policy target from head.`,
-        );
-      }
-    }
     for (const role of ["baseline", "target"] as const) {
-      if (skipped && role === "baseline") continue;
       const selection = comparison[role];
       const newProjectBaseline = comparison.mode === "new-project" && role === "baseline";
       const allowedRevisions = newProjectBaseline ? ["absent"] : ["base", "current"];
@@ -554,7 +492,6 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
     }
     if (
       comparison.mode === "new-api-version" &&
-      !skipped &&
       !(
         (comparison.baseline?.sourceRevision === "current" &&
           comparison.baseline?.commit === assessment.comparison.headCommit) ||
@@ -577,7 +514,6 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
     }
     if (
       comparison.mode === "new-project" &&
-      !skipped &&
       (comparison.baseline?.sourceRevision !== "absent" ||
         comparison.baseline.commit !== undefined ||
         comparison.target?.sourceRevision !== "current" ||
@@ -592,10 +528,6 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
     errors.push("confidence is invalid.");
   }
   const dimensions = assessment.dimensions ?? {};
-  const skippedProjectIds = new Set(
-    (assessment.artifactComparisons ?? []).filter(skipsCompatibility).map((item) => item.projectId),
-  );
-  const allCompatibilitySkipped = projectIds.size > 0 && skippedProjectIds.size === projectIds.size;
   for (const name of ["semantic", "rest", "downstream", "compliance", "documentQuality"]) {
     if (!dimensions[name]) errors.push(`dimensions.${name} is required.`);
   }
@@ -805,34 +737,7 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
   }
   const validateCompatibilityDimension = (label: string, dimension: typeof dimensions.rest) => {
     const findings = dimension?.findings ?? [];
-    const blocked = skippedProjectIds.size > 0 || (dimension?.blockers ?? []).length > 0;
-    const analyzedProjectIds = dimension?.analyzedProjectIds ?? [];
-    if (
-      new Set(analyzedProjectIds).size !== analyzedProjectIds.length ||
-      analyzedProjectIds.some((id) => !projectIds.has(id) || skippedProjectIds.has(id))
-    ) {
-      errors.push(`${label} analyzed projects must be distinct, known and not policy-skipped.`);
-    }
-    if (allCompatibilitySkipped && (findings.length || dimension.rejectedCandidateCount)) {
-      errors.push(
-        `${label} must not contain compatibility findings or decisions for policy-skipped projects.`,
-      );
-    }
-    for (const finding of findings) {
-      const evidenceProjects = (finding.evidence ?? [])
-        .map((fact) => fact.projectId)
-        .filter((id) => id !== undefined);
-      const sourceOwners = (assessment.projects ?? []).filter((project) =>
-        finding.sourceChangeIds?.some((id) => project.sourceChangeIds?.includes(id)),
-      );
-      if (
-        (finding.projectId !== undefined && skippedProjectIds.has(finding.projectId)) ||
-        evidenceProjects.some((id) => skippedProjectIds.has(id)) ||
-        (sourceOwners.length && sourceOwners.every((project) => skippedProjectIds.has(project.id)))
-      ) {
-        errors.push(`${label} finding ${finding.id} belongs to a policy-skipped project.`);
-      }
-    }
+    const blocked = (dimension?.blockers ?? []).length > 0;
     const usesSeparatedStatus =
       dimension?.verdict !== undefined || dimension?.coverage !== undefined;
     if (!usesSeparatedStatus) {
@@ -845,9 +750,7 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
     const expected = dimensionCompatibility(
       blocked,
       findings,
-      findings.length +
-        (dimension?.rejectedCandidateCount ?? 0) +
-        (skippedProjectIds.size ? analyzedProjectIds.length : 0),
+      findings.length + (dimension?.rejectedCandidateCount ?? 0),
     );
     if (dimension?.status !== expected.status) {
       errors.push(`${label} status must be ${expected.status}.`);

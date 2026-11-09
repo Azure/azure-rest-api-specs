@@ -1,6 +1,7 @@
 import { assert, test } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { documentQualitySummary } from "../scripts/assessment-report-ui.ts";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
 import { readComplianceCatalog } from "../scripts/compliance-assessment.ts";
 import {
   assembleDocumentQuality,
@@ -769,6 +770,50 @@ void test("renderer shows fetched Azure Guidelines guidance and expands failures
 void test("escapeHtml escapes Agent and source text", () => {
   assert.equal(escapeHtml('<script x="1">&'), "&lt;script x=&quot;1&quot;&gt;&amp;");
 });
+
+void test.each([true, false])(
+  "report metadata distinguishes head projections from removed-preview base fallback (retained: %s)",
+  (retained) => {
+    const baseCommit = "a".repeat(40);
+    const headCommit = "b".repeat(40);
+    const pair = selectApiVersionPair({
+      base: { versioned: true, versions: ["2026-05-01-preview"] },
+      current: {
+        versioned: true,
+        versions: [...(retained ? ["2026-05-01-preview"] : []), "2026-08-01-preview"],
+      },
+      baseCommit,
+      headCommit,
+    });
+    const html = renderAssessmentHtml({
+      schemaVersion: 1,
+      confidence: "high",
+      safety: { scope: "rest-and-downstream-only", status: "passed" },
+      comparison: { baseCommit, headCommit, workingTree: {} },
+      artifactComparisons: [{ projectId: "preview", ...pair }],
+      projects: [{ id: "preview", path: "specification/preview/Service", artifacts: {} }],
+      dimensions: {
+        semantic: { status: "assessed", items: [], blockers: [] },
+        rest: { status: "passed", findings: [], blockers: [] },
+        downstream: { status: "passed", findings: [], blockers: [] },
+        compliance: notAssessedCompliance(),
+        documentQuality: {
+          status: "not-assessed",
+          summary: "No compiler evidence in this fixture.",
+        },
+      },
+      blockers: [],
+    });
+    assert.ok(
+      html.includes(`<code>${retained ? headCommit : baseCommit}@2026-05-01-preview</code>`),
+    );
+    assert.ok(html.includes(`<code>${headCommit}@2026-08-01-preview</code>`));
+    assert.match(html, /new-api-version/);
+    assert.match(html, /previous-latest-preview/);
+    assert.equal(summaryCardValue(html, "REST breaking changes"), 0);
+    assert.equal(summaryCardValue(html, "Downstream breaking changes"), 0);
+  },
+);
 
 void test("renderer labels active Azure Guidelines and scoped safety", () => {
   const html = renderAssessmentHtml({

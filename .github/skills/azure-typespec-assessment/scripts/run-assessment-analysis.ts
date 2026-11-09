@@ -1,8 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
 import { ensureSkillDependencies } from "./skill-dependencies.ts";
-import { skipsCompatibility } from "./compatibility-policy.ts";
-import { dimensionCompatibility } from "./assessment-display.ts";
 
 await ensureSkillDependencies();
 
@@ -1021,7 +1019,6 @@ function deterministicCoverage({
   rest,
   downstream,
   complianceRequest,
-  projects,
 }: {
   unit: InternalSemanticUnit;
   sourceChanges: Record<string, SourceChange>;
@@ -1029,7 +1026,6 @@ function deterministicCoverage({
   rest: BreakingAnalysis;
   downstream: DownstreamAnalysis;
   complianceRequest?: ComplianceSearchRequest;
-  projects: PreparationManifest["projects"];
 }): DeterministicCoverage {
   const declarationsByHunk = declarationHunkIds(unit, sourceChanges);
   const operationsByHunk = operationHunkIds(unit);
@@ -1075,33 +1071,7 @@ function deterministicCoverage({
     const restCandidateIds = [...new Set(restByHunk.get(hunkId) ?? [])].sort();
     const downstreamCandidateIds = [...new Set(downstreamByHunk.get(hunkId) ?? [])].sort();
     const source = sourceForHunk(unit, sourceChanges, hunkId);
-    const owners = unit.projectIds ?? (unit.projectId ? [unit.projectId] : []);
-    const sourceOwners = projects.filter(
-      (project) =>
-        owners.includes(project.id) && project.sourceChangeIds?.includes(source?.id ?? ""),
-    );
-    const relevantOwners = sourceOwners.length ? sourceOwners.map((project) => project.id) : owners;
-    const skippedOwners = new Set(
-      projects
-        .filter((project) => skipsCompatibility(project.artifactComparison))
-        .map((project) => project.id),
-    );
-    if (relevantOwners.length && relevantOwners.every((id) => skippedOwners.has(id))) {
-      return {
-        hunkId,
-        status: "blocked",
-        reason: "compatibility-skipped-no-stable-api-version",
-        restCandidateIds: [],
-        downstreamCandidateIds: [],
-      };
-    }
-    const projectIds = new Set(relevantOwners.filter((id) => !skippedOwners.has(id)));
-    const projectBlocked = (blockers: BreakingAnalysis["blockers"]) =>
-      blockers.some((blocker) => !blocker.projectId || projectIds.has(blocker.projectId));
-    if (
-      (rest.status === "blocked" || downstream.status === "blocked") &&
-      (!skippedOwners.size || projectBlocked([...rest.blockers, ...downstream.blockers]))
-    ) {
+    if (rest.status === "blocked" || downstream.status === "blocked") {
       return {
         hunkId,
         status: "blocked",
@@ -1375,7 +1345,6 @@ export function buildModelInput({
         rest,
         downstream,
         complianceRequest: complianceRequestsByUnit.get(unit.id),
-        projects: manifest.projects,
       }),
     ]),
   );
@@ -1388,7 +1357,6 @@ export function buildModelInput({
         semantic,
         rest,
         downstream,
-        projects: manifest.projects,
       }),
     ]),
   );
@@ -1571,11 +1539,6 @@ export function blockedAssessment(
   rest: BreakingAnalysis,
   downstream: DownstreamAnalysis,
 ): AssessmentOutput {
-  const compatibilityState = manifest.projects.some((project) =>
-    skipsCompatibility(project.artifactComparison),
-  )
-    ? dimensionCompatibility(true, [])
-    : { status: "not-assessed" as const };
   return requireAssessmentOutput({
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
@@ -1607,23 +1570,16 @@ export function blockedAssessment(
       }),
     })),
     confidence: "low",
-    safety: {
-      scope: "rest-and-downstream-only",
-      ...compatibilityState,
-    },
+    safety: { scope: "rest-and-downstream-only", status: "not-assessed" },
     dimensions: {
       semantic: {
         status: "not-assessed",
         items: [],
         blockers: semantic.blockers,
       },
-      rest: {
-        ...compatibilityState,
-        findings: [],
-        blockers: rest.blockers,
-      },
+      rest: { status: "not-assessed", findings: [], blockers: rest.blockers },
       downstream: {
-        ...compatibilityState,
+        status: "not-assessed",
         findings: [],
         blockers: downstream.blockers,
       },

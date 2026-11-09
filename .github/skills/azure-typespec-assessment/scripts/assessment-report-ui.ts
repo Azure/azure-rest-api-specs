@@ -1,9 +1,4 @@
 import { isDeepStrictEqual } from "node:util";
-import {
-  NO_STABLE_API_VERSION_REPORT,
-  skipsAllCompatibility,
-  skipsCompatibility,
-} from "./compatibility-policy.ts";
 import { DOCUMENT_QUALITY_CRITERION } from "./document-quality-input.ts";
 import { semanticGroupingPresentation } from "./semantic-assessment-scope.ts";
 
@@ -1731,16 +1726,6 @@ export function renderReportSections(
     (dimensions.rest.legacyFindings?.length ?? 0);
   const downstreamCount =
     downstream.methods.length + downstream.unmapped.length + legacyDownstream.length;
-  const skippedComparisons = (assessment.artifactComparisons ?? []).filter(skipsCompatibility);
-  const allCompatibilitySkipped = skipsAllCompatibility(assessment.artifactComparisons);
-  const skippedProjectNotes = skippedComparisons
-    .map((comparison) => {
-      const project = assessment.projects?.find((item) => item.id === comparison.projectId);
-      return `<p class="report-small"><code>${escape(project?.path ?? comparison.projectId)}</code>: ${NO_STABLE_API_VERSION_REPORT}</p>`;
-    })
-    .join("");
-  const skippedSection = (id: string, title: string) =>
-    `<section id="${id}">${sectionHead(title, NO_STABLE_API_VERSION_REPORT, "")}</section>`;
   // Semantic intents describe changes, not findings. Stable sorting preserves the header order within each group.
   const sections = [
     {

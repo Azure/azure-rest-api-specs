@@ -2,35 +2,6 @@ import { assert, test } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import { analyzeRestBreaking } from "../scripts/analyze-rest-breaking.ts";
-import { compatibilitySkipReason } from "../scripts/compatibility-policy.ts";
-
-void test.each(["new", "existing"])(
-  "policy skips %s projects before accessing REST artifacts",
-  (classification) => {
-    const result = analyzeRestBreaking({
-      manifest: {
-        projects: [
-          {
-            id: "preview",
-            classification,
-            artifactComparison: {
-              compatibilityPolicy: { action: "skip", reason: "no-stable-api-version" },
-            },
-            get artifacts() {
-              throw new Error("Policy-skipped artifacts must not be accessed.");
-            },
-          },
-        ],
-      },
-      sourceIndex: { sourceChanges: [] },
-    } as unknown as Parameters<typeof analyzeRestBreaking>[0]);
-    assert.equal(result.status, "blocked");
-    assert.deepEqual(result.analyzedProjectIds, []);
-    assert.deepEqual(result.candidates, []);
-    assert.deepEqual(result.facts, {});
-    assert.deepEqual(result.blockers, [compatibilitySkipReason("preview")]);
-  },
-);
 
 function writeJson(file: string, value: unknown) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
