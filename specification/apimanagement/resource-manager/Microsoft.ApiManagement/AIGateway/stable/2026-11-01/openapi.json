@@ -57,6 +57,12 @@
       "name": "AiGatewayResources"
     },
     {
+      "name": "AiGatewayPrivateEndpointConnections"
+    },
+    {
+      "name": "AiGatewayPrivateLinkResources"
+    },
+    {
       "name": "AiGatewayWorkspaceResources"
     },
     {
@@ -646,6 +652,14 @@
             "x-ms-client-name": "ifMatch"
           },
           {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -1065,6 +1079,352 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "AiGatewayPrivateEndpointConnections_ListByAiGateway",
+        "tags": [
+          "AiGatewayPrivateEndpointConnections"
+        ],
+        "description": "List AiGatewayResource PrivateEndpointConnections",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayPrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List private endpoint connections for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateEndpointConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "AiGatewayPrivateEndpointConnections_Get",
+        "tags": [
+          "AiGatewayPrivateEndpointConnections"
+        ],
+        "description": "Get a AiGatewayResource PrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private endpoint connection for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayPrivateEndpointConnections_CreateOrUpdate",
+        "tags": [
+          "AiGatewayPrivateEndpointConnections"
+        ],
+        "description": "Create a AiGatewayResource PrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayPrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayPrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateEndpointConnectionCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AiGatewayPrivateEndpointConnections_Delete",
+        "tags": [
+          "AiGatewayPrivateEndpointConnections"
+        ],
+        "description": "Delete a AiGatewayResource PrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private endpoint connection for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateEndpointConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/privateLinkResources": {
+      "get": {
+        "operationId": "AiGatewayPrivateLinkResources_ListByAiGateway",
+        "tags": [
+          "AiGatewayPrivateLinkResources"
+        ],
+        "description": "List AiGatewayResource PrivateLinks",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List private link resources for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateLinkResourceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "AiGatewayPrivateLinkResources_Get",
+        "tags": [
+          "AiGatewayPrivateLinkResources"
+        ],
+        "description": "Get a AiGatewayResource PrivateLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of the private link associated with the Azure resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private link resource for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateLinkResourceGet.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}": {
       "get": {
         "operationId": "AiGatewayWorkspaceResources_Get",
@@ -1408,6 +1768,14 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "resource",
@@ -1814,6 +2182,14 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "resource",
@@ -2312,6 +2688,14 @@
             "x-ms-client-name": "ifMatch"
           },
           {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -2797,6 +3181,14 @@
             "x-ms-client-name": "ifMatch"
           },
           {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -3210,6 +3602,14 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "resource",
@@ -5956,6 +6356,48 @@
         }
       }
     },
+    "AiGatewayPrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayPrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayPrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewayPrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayPrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayPrivateLinkResource items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AiGatewayProperties": {
       "type": "object",
       "description": "Properties of an AI Gateway.",
@@ -5981,6 +6423,17 @@
         "publicNetworkAccess": {
           "$ref": "#/definitions/AiGatewayPublicNetworkAccess",
           "description": "Whether public network access is allowed for the AI Gateway."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Private endpoint connections associated with the AI Gateway.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },

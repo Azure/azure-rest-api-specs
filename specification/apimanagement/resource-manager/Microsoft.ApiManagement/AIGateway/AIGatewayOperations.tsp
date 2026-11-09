@@ -134,6 +134,25 @@ interface AiGatewayResources {
   >;
 }
 
+alias AiGatewayPrivateEndpointOps = Azure.ResourceManager.PrivateEndpoints<AiGatewayPrivateEndpointConnection>;
+alias AiGatewayPrivateLinkOps = Azure.ResourceManager.PrivateLinks<AiGatewayPrivateLinkResource>;
+
+@added(Versions.v2026_11_01)
+@armResourceOperations
+interface AiGatewayPrivateEndpointConnections {
+  get is AiGatewayPrivateEndpointOps.Read<AiGatewayResource>;
+  createOrUpdate is AiGatewayPrivateEndpointOps.CreateOrUpdateAsync<AiGatewayResource>;
+  delete is AiGatewayPrivateEndpointOps.DeleteAsync<AiGatewayResource>;
+  listByAiGateway is AiGatewayPrivateEndpointOps.ListByParent<AiGatewayResource>;
+}
+
+@added(Versions.v2026_11_01)
+@armResourceOperations
+interface AiGatewayPrivateLinkResources {
+  get is AiGatewayPrivateLinkOps.Read<AiGatewayResource>;
+  listByAiGateway is AiGatewayPrivateLinkOps.ListByParent<AiGatewayResource>;
+}
+
 @added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayWorkspaceResources {
