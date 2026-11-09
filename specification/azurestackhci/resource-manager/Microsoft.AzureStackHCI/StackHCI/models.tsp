@@ -3475,6 +3475,12 @@ model StorageSanConfig {
    * Infrastructure performance LUN ID.
    */
   infraPerfLunId?: string;
+
+  /**
+   * SAN LUN ID used by ALDO to create its local infrastructure Cluster Shared Volume (CSV), for example PURE1122334455667788.
+   */
+  @added(Versions.v2027_01_15_preview)
+  aldoInfraLocalLunId?: string;
 }
 
 /**
