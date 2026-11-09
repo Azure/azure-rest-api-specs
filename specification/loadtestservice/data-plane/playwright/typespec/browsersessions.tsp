@@ -52,10 +52,12 @@ alias BrowserSessionReadRequiredProperties = {
 
 @doc("The browser profile configuration for a browser session.")
 model BrowserProfileBrowserSessionConfiguration {
-  @doc("The ID in GUID format of the browser profile used by the browser session.")
+  @doc("The ID in GUID format of the browser profile used by the browser session. Cannot be changed after creation.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   id?: Azure.Core.uuid;
 
-  @doc("Whether to save the changes in the browser profile done by the browser session.")
+  @doc("Whether to save the changes in the browser profile done by the browser session. Can be changed after session creation.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   saveChanges?: boolean;
 }
 
@@ -104,7 +106,7 @@ alias BrowserSessionOptionalProperties = {
 
   @added(Versions.v2026_12_01_preview)
   @doc("The browser profile configuration for the browser session.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   browserProfile?: BrowserProfileBrowserSessionConfiguration;
 };
 
