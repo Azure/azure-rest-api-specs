@@ -57,8 +57,12 @@ function createMockGithubImpl() {
         updateComment: vi.fn(),
       },
       pulls: {
+        createReviewComment: vi.fn().mockResolvedValue({ data: { id: 1 } }),
+        deleteReviewComment: vi.fn(),
         get: vi.fn(),
         listFiles: vi.fn().mockResolvedValue({ data: [] }),
+        listReviewComments: vi.fn().mockResolvedValue({ data: [] }),
+        updateReviewComment: vi.fn(),
       },
       repos: {
         compareCommitsWithBasehead: vi.fn().mockResolvedValue({ data: { files: [] } }),

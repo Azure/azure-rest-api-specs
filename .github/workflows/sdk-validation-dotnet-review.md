@@ -68,6 +68,13 @@ steps:
       path: /tmp/gh-aw/sdk-review-input
       github-token: ${{ secrets.GITHUB_TOKEN }}
       run-id: ${{ github.event.workflow_run.id }}
+  - name: Upload trusted publication context
+    uses: actions/upload-artifact@v7
+    with:
+      name: sdk-review-publication-context-${{ github.event.workflow_run.id }}
+      path: /tmp/gh-aw/sdk-review-input/typespec-review-context.json
+      if-no-files-found: error
+      retention-days: 7
   - name: Reconstruct generated SDK workspaces
     env:
       SDK_REVIEW_INPUT_ROOT: /tmp/gh-aw/sdk-review-input
