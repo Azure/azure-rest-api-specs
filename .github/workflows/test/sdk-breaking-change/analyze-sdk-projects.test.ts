@@ -91,71 +91,85 @@ afterEach(async () => {
 });
 
 describe("analyzeSdkProjects", () => {
-  it("runs generation, build, and detection and writes the analysis artifact and summary", async () => {
-    await analyzeSdkProjects({
-      core,
-      localSdkRepositoryPath: sdkRepositoryPath,
-      specificationRepositoryPath,
-      typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
-      pullNumber: 42,
-      sdkLanguage: "Go",
-      sdkRepoName: "azure-sdk-for-go",
-      analyzedSha: "a".repeat(40),
-      workflowUrl: "https://github.com/owner/repo/actions/runs/123",
-      resultFilePath,
-      azureSdkCliPath,
-    });
+  it.each([undefined, false, true])(
+    "runs generation, build, and detection and writes the analysis artifact and summary (streamOutput: %s)",
+    async (streamOutput) => {
+      await analyzeSdkProjects({
+        core,
+        localSdkRepositoryPath: sdkRepositoryPath,
+        specificationRepositoryPath,
+        typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
+        pullNumber: 42,
+        sdkLanguage: "Go",
+        sdkRepoName: "azure-sdk-for-go",
+        analyzedSha: "a".repeat(40),
+        workflowUrl: "https://github.com/owner/repo/actions/runs/123",
+        resultFilePath,
+        azureSdkCliPath,
+        streamOutput,
+      });
 
-    const artifact = AnalysisResultSchema.parse(JSON.parse(await readFile(resultFilePath, "utf8")));
-    expect(artifact).toEqual({
-      schemaVersion: 1,
-      prNumber: 42,
-      headSha: "a".repeat(40),
-      sdkLanguage: "Go",
-      analysisWorkflowUrl: "https://github.com/owner/repo/actions/runs/123",
-      status: "success",
-      projects: [
-        {
-          typespecProject: "specification/service/Widget.Service",
-          sdkPackage: "armwidget",
-          analysisStatus: "success",
-          breakingChanges: [],
-        },
-      ],
-    });
-    expect(core.summary.addRaw).toHaveBeenCalledWith(
-      expect.stringContaining(`**Analyzed commit:** \`${"a".repeat(40)}\``),
-    );
-    for (const section of [
-      "generate.json",
-      "build.json",
-      "Analysis succeeded",
-      "Breaking Changes",
-    ]) {
-      expect(core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining(section));
-    }
-    expect(core.summary.write).toHaveBeenCalledOnce();
-    expect(core.summary.addRaw).toHaveBeenCalledWith(
-      expect.stringContaining('<a name="armwidget-breaking-change"></a>\n\n## Breaking Changes'),
-    );
-    expect(core.setFailed).not.toHaveBeenCalled();
-    expect(execFileMock).toHaveBeenCalledTimes(3);
-    const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
-    expect(execFileMock).toHaveBeenNthCalledWith(
-      1,
-      azureSdkCli,
-      expect.arrayContaining(["generate"]),
-    );
-    expect(execFileMock).toHaveBeenNthCalledWith(2, azureSdkCli, expect.arrayContaining(["build"]));
-    expect(execFileMock).toHaveBeenNthCalledWith(
-      3,
-      azureSdkCli,
-      expect.arrayContaining(["detect-breaking-change"]),
-    );
-    expect(generateTypeSpecMetadataMock).toHaveBeenCalledWith(
-      join(specificationRepositoryPath, "specification", "service", "Widget.Service"),
-    );
-  });
+      const artifact = AnalysisResultSchema.parse(
+        JSON.parse(await readFile(resultFilePath, "utf8")),
+      );
+      expect(artifact).toEqual({
+        schemaVersion: 1,
+        prNumber: 42,
+        headSha: "a".repeat(40),
+        sdkLanguage: "Go",
+        analysisWorkflowUrl: "https://github.com/owner/repo/actions/runs/123",
+        status: "success",
+        projects: [
+          {
+            typespecProject: "specification/service/Widget.Service",
+            sdkPackage: "armwidget",
+            analysisStatus: "success",
+            breakingChanges: [],
+          },
+        ],
+      });
+      expect(core.summary.addRaw).toHaveBeenCalledWith(
+        expect.stringContaining(`**Analyzed commit:** \`${"a".repeat(40)}\``),
+      );
+      for (const section of [
+        "generate.json",
+        "build.json",
+        "Analysis succeeded",
+        "Breaking Changes",
+      ]) {
+        expect(core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining(section));
+      }
+      expect(core.summary.write).toHaveBeenCalledOnce();
+      expect(core.summary.addRaw).toHaveBeenCalledWith(
+        expect.stringContaining('<a name="armwidget-breaking-change"></a>\n\n## Breaking Changes'),
+      );
+      expect(core.setFailed).not.toHaveBeenCalled();
+      expect(execFileMock).toHaveBeenCalledTimes(3);
+      const azureSdkCli = join(
+        azureSdkCliPath,
+        process.platform === "win32" ? "azsdk.exe" : "azsdk",
+      );
+      expect(execFileMock).toHaveBeenNthCalledWith(
+        1,
+        azureSdkCli,
+        expect.arrayContaining(["generate"]),
+      );
+      expect(execFileMock).toHaveBeenNthCalledWith(
+        2,
+        azureSdkCli,
+        expect.arrayContaining(["build"]),
+      );
+      expect(execFileMock).toHaveBeenNthCalledWith(
+        3,
+        azureSdkCli,
+        expect.arrayContaining(["detect-breaking-change"]),
+        streamOutput ? { streamOutput: true } : undefined,
+      );
+      expect(generateTypeSpecMetadataMock).toHaveBeenCalledWith(
+        join(specificationRepositoryPath, "specification", "service", "Widget.Service"),
+      );
+    },
+  );
 
   it("includes deterministic change IDs and the normalized detection JSON in the anchored summary", async () => {
     execFileMock

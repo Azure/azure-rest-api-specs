@@ -74,7 +74,7 @@ export async function mitigateSdkBreakingChanges({
   resultDirPath,
   azureSdkCliPath,
   streamOutput,
-}: { core: Core } & MitigateSdkBreakingChangesOptions & {streamOutput?: boolean}): Promise<void> {
+}: { core: Core } & MitigateSdkBreakingChangesOptions & { streamOutput?: boolean }): Promise<void> {
   const analysisResult = AnalysisResultSchema.parse(
     JSON.parse(await readFile(analysisResultPath, "utf8")),
   );
@@ -160,7 +160,7 @@ export async function mitigateSdkBreakingChanges({
               "--output",
               "json",
             ],
-            azsdkOptions
+            azsdkOptions,
           );
           await writeFile(commandResultPath, stdout);
 
