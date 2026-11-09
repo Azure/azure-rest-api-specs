@@ -24,15 +24,12 @@ namespace Microsoft.AzureLargeInstance;
 
 @doc("Azure Large Instance api versions.")
 enum Versions {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Azure Large Instance api version 2023-07-20-preview.")
   v2023_07_20_preview: "2023-07-20-preview",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Azure Large Instance api version 2024-04-10.")
   v2024_04_10: "2024-04-10",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Azure Large Instance api version 2024-08-01-preview.")
   v2024_08_01_preview: "2024-08-01-preview",
 }

@@ -24,13 +24,11 @@ namespace Napster.CompanionAPI {
   /** The available API versions. */
   enum Versions {
     /** 2025-12-24-preview version */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
     @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
     @useDependency(LiftrBase.Versions.v3_preview)
     v2025_12_24_preview: "2025-12-24-preview",
 
     /** 2026-08-11 version */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
     @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
     @useDependency(LiftrBase.Versions.v3_preview)
     v2026_08_11: "2026-08-11",

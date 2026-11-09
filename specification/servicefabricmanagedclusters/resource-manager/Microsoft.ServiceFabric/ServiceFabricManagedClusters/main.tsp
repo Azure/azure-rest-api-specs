@@ -55,27 +55,21 @@ interface Operations {
  * The available API versions.
  */
 enum Versions {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2024_11_01_preview: "2024-11-01-preview",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_03_01_preview: "2025-03-01-preview",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_06_01_preview: "2025-06-01-preview",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_10_01_preview: "2025-10-01-preview",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2026_02_01: "2026-02-01",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2026_05_01_preview: "2026-05-01-preview",
 }
