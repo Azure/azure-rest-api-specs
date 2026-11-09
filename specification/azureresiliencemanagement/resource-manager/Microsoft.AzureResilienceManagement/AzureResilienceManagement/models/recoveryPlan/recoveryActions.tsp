@@ -237,52 +237,24 @@ model RecoveryResourcePolicySet {
 model FetchRecoveryPointsResult {
   @added(Versions.v2026_12_30_preview)
   @doc("Selections that correlate recovery resources with their selected recovery points.")
-  @identifiers(#["recoveryResourceUniqueId"])
+  @identifiers(#["recoveryResourceId"])
   recoveryPoints?: RecoveryPointSelection[];
 }
 
 @added(Versions.v2026_12_30_preview)
-@doc("Correlates a recovery resource with the recovery point selected for it.")
+@doc("The recovery point selected for a recovery resource.")
 model RecoveryPointSelection {
   @added(Versions.v2026_12_30_preview)
-  @doc("The plan-scoped unique ID (GUID) of the recovery resource.")
-  recoveryResourceUniqueId?: string;
+  @doc("The GUID identifying the recovery resource within the recovery plan.")
+  recoveryResourceId?: string;
 
   @added(Versions.v2026_12_30_preview)
   @doc("The GUID of the recovery group that contains the recovery resource.")
   recoveryGroupId?: string;
 
   @added(Versions.v2026_12_30_preview)
-  @doc("The recovery point selected for the recovery resource.")
-  recoveryPoint?: RecoveryPointResource;
-}
-
-@added(Versions.v2026_12_30_preview)
-@doc("A recovery point returned by the backup service.")
-model RecoveryPointResource {
-  @added(Versions.v2026_12_30_preview)
-  @doc("The recovery point Azure resource ID.")
-  id?: Azure.Core.armResourceIdentifier;
-
-  @added(Versions.v2026_12_30_preview)
-  @doc("The recovery point resource name.")
-  name?: string;
-
-  @added(Versions.v2026_12_30_preview)
-  @doc("The recovery point Azure resource type.")
-  type?: string;
-
-  @added(Versions.v2026_12_30_preview)
-  @doc("Workload-specific recovery point properties.")
-  properties?: RecoveryPointProperties;
-}
-
-@added(Versions.v2026_12_30_preview)
-@doc("Workload-specific properties of a selected recovery point.")
-model RecoveryPointProperties {
-  @added(Versions.v2026_12_30_preview)
-  @doc("The backup service recovery point type discriminator, such as IaasVMRecoveryPoint.")
-  objectType?: string;
+  @doc("The Azure resource ID of the selected backup service recovery point.")
+  recoveryPointId?: Azure.Core.armResourceIdentifier;
 
   @added(Versions.v2026_12_30_preview)
   @doc("The recovery point time for virtual machine and Azure Files workloads.")

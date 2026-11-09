@@ -8316,7 +8316,7 @@
             "$ref": "#/definitions/RecoveryPointSelection"
           },
           "x-ms-identifiers": [
-            "recoveryResourceUniqueId"
+            "recoveryResourceId"
           ]
         }
       }
@@ -11369,13 +11369,22 @@
         }
       }
     },
-    "RecoveryPointProperties": {
+    "RecoveryPointSelection": {
       "type": "object",
-      "description": "Workload-specific properties of a selected recovery point.",
+      "description": "The recovery point selected for a recovery resource.",
       "properties": {
-        "objectType": {
+        "recoveryResourceId": {
           "type": "string",
-          "description": "The backup service recovery point type discriminator, such as IaasVMRecoveryPoint."
+          "description": "The GUID identifying the recovery resource within the recovery plan."
+        },
+        "recoveryGroupId": {
+          "type": "string",
+          "description": "The GUID of the recovery group that contains the recovery resource."
+        },
+        "recoveryPointId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the selected backup service recovery point."
         },
         "recoveryPointTime": {
           "type": "string",
@@ -11398,47 +11407,6 @@
         "threatStatus": {
           "type": "string",
           "description": "The optional threat status reported by the backup service."
-        }
-      }
-    },
-    "RecoveryPointResource": {
-      "type": "object",
-      "description": "A recovery point returned by the backup service.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The recovery point Azure resource ID."
-        },
-        "name": {
-          "type": "string",
-          "description": "The recovery point resource name."
-        },
-        "type": {
-          "type": "string",
-          "description": "The recovery point Azure resource type."
-        },
-        "properties": {
-          "$ref": "#/definitions/RecoveryPointProperties",
-          "description": "Workload-specific recovery point properties."
-        }
-      }
-    },
-    "RecoveryPointSelection": {
-      "type": "object",
-      "description": "Correlates a recovery resource with the recovery point selected for it.",
-      "properties": {
-        "recoveryResourceUniqueId": {
-          "type": "string",
-          "description": "The plan-scoped unique ID (GUID) of the recovery resource."
-        },
-        "recoveryGroupId": {
-          "type": "string",
-          "description": "The GUID of the recovery group that contains the recovery resource."
-        },
-        "recoveryPoint": {
-          "$ref": "#/definitions/RecoveryPointResource",
-          "description": "The recovery point selected for the recovery resource."
         }
       }
     },
