@@ -28,6 +28,10 @@ union ResourceInclusionDisabledReason {
   @doc("The resource uses active-active protection.")
   ResourceActiveActiveProtection: "ResourceActiveActiveProtection",
 
+  @added(Versions.v2026_12_30_preview)
+  @doc("The resource location is not one of the recovery plan's target locations.")
+  ResourceLocationNotInTargetLocations: "ResourceLocationNotInTargetLocations",
+
   string,
 }
 

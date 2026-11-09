@@ -12264,7 +12264,8 @@
       "description": "Reason why a recovery resource cannot be included in a recovery plan.",
       "enum": [
         "ResourceHighlyAvailable",
-        "ResourceActiveActiveProtection"
+        "ResourceActiveActiveProtection",
+        "ResourceLocationNotInTargetLocations"
       ],
       "x-ms-enum": {
         "name": "ResourceInclusionDisabledReason",
@@ -12279,6 +12280,11 @@
             "name": "ResourceActiveActiveProtection",
             "value": "ResourceActiveActiveProtection",
             "description": "The resource uses active-active protection."
+          },
+          {
+            "name": "ResourceLocationNotInTargetLocations",
+            "value": "ResourceLocationNotInTargetLocations",
+            "description": "The resource location is not one of the recovery plan's target locations."
           }
         ]
       }
