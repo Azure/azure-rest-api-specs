@@ -88,7 +88,11 @@ using Microsoft.Quota;
   "csharp"
 );
 
-@@clientName(QuotaTransferProperties.autoApprove, "IsAutoApproveEnabled", "csharp");
+@@clientName(
+  QuotaTransferProperties.autoApprove,
+  "IsAutoApproveEnabled",
+  "csharp"
+);
 @@clientName(ApprovalRecord, "QuotaTransferApprovalRecord", "csharp");
 @@clientName(CancellationRecord, "QuotaTransferCancellationRecord", "csharp");
 @@clientName(RejectionRecord, "QuotaTransferRejectionRecord", "csharp");
