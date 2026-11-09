@@ -101,11 +101,7 @@ using Microsoft.Chaos;
 @@clientName(PermissionsFixProperties.whatIfMode, "IsWhatIfMode", "csharp");
 @@clientName(Recommendation, "ChaosScenarioRecommendation", "csharp");
 @@clientName(Validation, "ChaosScenarioValidationData", "csharp");
-@@clientName(
-  WorkspaceEvaluation,
-  "ChaosWorkspaceTemplateEvaluation",
-  "csharp"
-);
+@@clientName(WorkspaceEvaluation, "ChaosWorkspaceTemplateEvaluation", "csharp");
 @@clientName(
   LegacyWorkspaceEvaluation,
   "ChaosWorkspaceEvaluationData",
