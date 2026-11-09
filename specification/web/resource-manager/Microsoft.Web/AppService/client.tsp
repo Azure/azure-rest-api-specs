@@ -7322,3 +7322,9 @@ model WebAppProcessThreadProperties {
   WebAppProcessThreadProperties[],
   "csharp"
 );
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ArmErrorResponse",
+  "javascript"
+);
