@@ -29,8 +29,8 @@ union ResourceInclusionDisabledReason {
   ResourceActiveActiveProtection: "ResourceActiveActiveProtection",
 
   @added(Versions.v2026_12_30_preview)
-  @doc("The resource location is not one of the recovery plan's target locations.")
-  ResourceLocationNotInTargetLocations: "ResourceLocationNotInTargetLocations",
+  @doc("The resource is not recoverable in any of the recovery plan's target locations.")
+  NotRecoverableInTargetLocations: "NotRecoverableInTargetLocations",
 
   string,
 }
