@@ -416,6 +416,89 @@ export class TspConfigJavaMgmtNamespaceFormatSubRule extends TspconfigEmitterOpt
   }
 }
 
+export class TspConfigJavaMgmtEmitterOutputDirMatchesNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-java", "emitter-output-dir", "derived from namespace");
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const namespace = this.tryFindOption(config, "namespace");
+    if (typeof namespace !== "string")
+      return this.createFailedResult(
+        `Failed to find a string value for "options.${this.emitterName}.namespace"`,
+        `Please define "options.${this.emitterName}.namespace".`,
+      );
+
+    const resolvedNamespace = this.resolveVariables(namespace, config);
+    const packageDir = this.getPackageDirFromEmitterOutputDir(config);
+    const error = resolvedNamespace.error ?? packageDir.error;
+    if (error) return this.createFailedResult(error, "Please fix the Java emitter configuration.");
+
+    const expected = resolvedNamespace.resolved.replace(/^com\./, "").replace(/\./g, "-");
+    if (packageDir.resolved !== expected)
+      return this.createFailedResult(
+        `The package directory "${packageDir.resolved}" in options.${this.emitterName}.emitter-output-dir does not match the namespace-derived value "${expected}"`,
+        `Please update "options.${this.emitterName}.emitter-output-dir" to use package directory "${expected}".`,
+      );
+
+    return { success: true };
+  }
+}
+
+export class TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-java", "service-dir", "derived from namespace");
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const namespace = this.tryFindOption(config, "namespace");
+    if (typeof namespace !== "string")
+      return this.createFailedResult(
+        `Failed to find a string value for "options.${this.emitterName}.namespace"`,
+        `Please define "options.${this.emitterName}.namespace".`,
+      );
+
+    const resolvedNamespace = this.resolveVariables(namespace, config);
+    if (resolvedNamespace.error)
+      return this.createFailedResult(
+        resolvedNamespace.error,
+        "Please fix the Java emitter namespace.",
+      );
+
+    const override = this.tryFindOption(config);
+    const serviceDir =
+      override !== undefined ? override : config?.parameters?.["service-dir"]?.default;
+    if (typeof serviceDir !== "string")
+      return this.createFailedResult(
+        `Failed to find a string value for the effective Java service-dir`,
+        `Please define "options.${this.emitterName}.service-dir" or "parameters.service-dir.default".`,
+      );
+
+    const resolvedServiceDir = this.resolveVariables(
+      serviceDir.replace(/^\{output-dir\}\//, ""),
+      config,
+    );
+    const actual = resolvedServiceDir.resolved.replace(/^\{output-dir\}\//, "");
+    const expected = `sdk/${resolvedNamespace.resolved.split(".")[3]}`;
+    if (resolvedServiceDir.error || actual !== expected)
+      return this.createFailedResult(
+        resolvedServiceDir.error ??
+          `The effective Java service-dir "${serviceDir}" does not match the namespace-derived value "${expected}"`,
+        `Please update "options.${this.emitterName}.service-dir" or "parameters.service-dir.default" to "${expected}".`,
+      );
+
+    return { success: true };
+  }
+}
+
 // ----- TS management modular sub rules -----
 export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -814,6 +897,8 @@ export const requiredRules = [
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),
+  new TspConfigJavaMgmtEmitterOutputDirMatchesNamespaceSubRule(),
+  new TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularEmitterOutputDirSubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),

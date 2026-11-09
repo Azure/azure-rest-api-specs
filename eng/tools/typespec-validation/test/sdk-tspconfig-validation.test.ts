@@ -29,7 +29,9 @@ import {
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
+  TspConfigJavaMgmtEmitterOutputDirMatchesNamespaceSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
+  TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule,
   TspConfigLegacyCsharpEmitterForbiddenSubRule,
   TspConfigPythonDpEmitterOutputDirSubRule,
   TspConfigPythonMgmtEmitterOutputDirSubRule,
@@ -1058,6 +1060,165 @@ describe("tspconfig", function () {
     ...goDpModuleTestCases,
     ...goDpContainingModuleTestCases,
   ];
+
+  it.each<{
+    description: string;
+    options?: Record<string, unknown>;
+    serviceDir?: string | boolean;
+    parameters?: Record<string, unknown>;
+    folder?: string;
+    success: boolean;
+  }>([
+    { description: "matches the shared service directory", success: true },
+    {
+      description: "matches a nested namespace",
+      options: {
+        namespace: "com.azure.resourcemanager.compute.bulkactions",
+        "emitter-output-dir":
+          "{output-dir}/{service-dir}/azure-resourcemanager-compute-bulkactions",
+      },
+      success: true,
+    },
+    {
+      description: "rejects a package directory inconsistent with the namespace",
+      options: { "emitter-output-dir": "{output-dir}/{service-dir}/azure-resourcemanager-network" },
+      success: false,
+    },
+    {
+      description: "rejects a package directory missing the nested namespace",
+      options: { namespace: "com.azure.resourcemanager.compute.bulkactions" },
+      success: false,
+    },
+    {
+      description: "rejects an inconsistent shared service directory",
+      serviceDir: "sdk/network",
+      success: false,
+    },
+    {
+      description: "prefers the Java service directory override",
+      serviceDir: "sdk/network",
+      options: { "service-dir": "sdk/compute" },
+      success: true,
+    },
+    {
+      description: "rejects an inconsistent Java service directory override",
+      options: { "service-dir": "sdk/network" },
+      success: false,
+    },
+    {
+      description: "rejects a non-string Java service directory override",
+      options: { "service-dir": false },
+      success: false,
+    },
+    {
+      description: "rejects a null Java service directory override",
+      options: { "service-dir": null },
+      success: false,
+    },
+    {
+      description: "accepts an output-root-prefixed service directory",
+      serviceDir: "{output-dir}/sdk/compute",
+      success: true,
+    },
+    {
+      description: "resolves Java namespace and output directory variables",
+      options: {
+        namespace: "{java-namespace}",
+        "java-namespace": "com.azure.resourcemanager.compute",
+        "emitter-output-dir": "{output-dir}/{service-dir}/{package-name}",
+        "package-name": "azure-resourcemanager-compute",
+        "service-dir": "sdk/{service-name}",
+        "service-name": "compute",
+      },
+      success: true,
+    },
+    {
+      description: "resolves shared service directory parameters",
+      serviceDir: "sdk/{service-name}",
+      parameters: { "service-name": { default: "compute" } },
+      success: true,
+    },
+    {
+      description: "rejects an unresolved namespace variable",
+      options: { namespace: "{missing}" },
+      success: false,
+    },
+    {
+      description: "rejects an unresolved output directory variable",
+      options: { "emitter-output-dir": "{output-dir}/{service-dir}/{missing}" },
+      success: false,
+    },
+    {
+      description: "rejects an unresolved service directory variable",
+      serviceDir: "sdk/{missing}",
+      success: false,
+    },
+    {
+      description: "rejects a missing namespace",
+      options: { namespace: undefined },
+      success: false,
+    },
+    {
+      description: "rejects a non-string namespace",
+      options: { namespace: false },
+      success: false,
+    },
+    {
+      description: "rejects a missing output directory",
+      options: { "emitter-output-dir": undefined },
+      success: false,
+    },
+    {
+      description: "rejects a non-string output directory",
+      options: { "emitter-output-dir": false },
+      success: false,
+    },
+    {
+      description: "rejects a missing effective service directory",
+      parameters: { "service-dir": undefined },
+      success: false,
+    },
+    {
+      description: "applies to resource-manager paths",
+      folder: "specification/compute/resource-manager/Microsoft.Compute/Compute",
+      serviceDir: "sdk/network",
+      success: false,
+    },
+    {
+      description: "skips data-plane projects",
+      folder: "specification/compute/data-plane/Compute",
+      options: { namespace: "com.azure.compute", "emitter-output-dir": "azure-compute" },
+      serviceDir: "sdk/network",
+      success: true,
+    },
+  ])("Java management namespace consistency: $description", async (c) => {
+    readTspConfigSpy.mockResolvedValue(
+      stringify({
+        parameters: {
+          "service-dir": { default: c.serviceDir ?? "sdk/compute" },
+          ...c.parameters,
+        },
+        options: {
+          "@azure-tools/typespec-java": {
+            namespace: "com.azure.resourcemanager.compute",
+            "emitter-output-dir": "{output-dir}/{service-dir}/azure-resourcemanager-compute",
+            ...c.options,
+          },
+        },
+      }),
+    );
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+    const rule = new SdkTspConfigValidationRule(
+      [
+        new TspConfigJavaMgmtEmitterOutputDirMatchesNamespaceSubRule(),
+        new TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule(),
+      ],
+      [],
+    );
+    const result = await rule.execute(c.folder ?? managementTspconfigFolder, defaultLogger);
+    strictEqual(result.success, c.success);
+    strictEqual((result.diagnostics?.length ?? 0) > 0, !c.success);
+  });
 
   it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
