@@ -31,8 +31,19 @@ model ScenarioRunInProgressResponse {
   /**
    * The number of seconds the client should wait before polling again.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "retryAfter")
   @minValue(0)
   @maxValue(2147483647)
+  @header("Retry-After")
+  retryAfterLegacy?: int32;
+
+  /**
+   * The number of seconds the client should wait before polling again.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @minValue(10)
+  @maxValue(600)
   @header("Retry-After")
   retryAfter?: int32;
 
@@ -125,6 +136,14 @@ model ScenarioRunProperties {
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   errors?: OperationError[];
+
+  /**
+   * Customer-actionable warnings encountered during the scenario run.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  warnings?: ScenarioRunWarning[];
 
   /**
    * Business errors from fault injection — permission and resource state issues.
@@ -259,9 +278,20 @@ model ScenarioRunSummaryAction {
   /**
    * The resources associated with the specified action.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "resources")
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
-  resources: ScenarioRunResource[];
+  resourcesLegacy: ScenarioRunResource[];
+
+  /**
+   * The resources associated with the specified action, including the concrete targets
+   * evaluated during execution.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  resources: ScenarioRunSummaryResource[];
 
   /**
    * The urn for the given chaos action.
@@ -287,6 +317,120 @@ model ScenarioRunSummaryAction {
    */
   @visibility(Lifecycle.Read)
   completedAt?: utcDateTime;
+
+  /**
+   * Structured information about the action failure.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  error?: ActionError;
+
+  /**
+   * Whether this action's failure was suppressed by the effective `failureBehavior`
+   * and therefore did not fail the scenario run. Present only for actions in the
+   * `Failed` state; absent otherwise.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  failureSuppressed?: boolean;
+}
+
+/**
+ * Structured information about a scenario action failure.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ActionError {
+  /**
+   * The stable code that identifies the action failure.
+   */
+  @visibility(Lifecycle.Read)
+  code: string;
+
+  /**
+   * The customer-safe description of the action failure.
+   */
+  @visibility(Lifecycle.Read)
+  message: string;
+
+  /**
+   * Additional customer-safe details about the action failure.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  details?: ActionErrorDetail[];
+}
+
+/**
+ * Additional information about a scenario action failure.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ActionErrorDetail {
+  /**
+   * The stable code that identifies the failure detail.
+   */
+  @visibility(Lifecycle.Read)
+  code: string;
+
+  /**
+   * The customer-safe description of the failure detail.
+   */
+  @visibility(Lifecycle.Read)
+  message: string;
+
+  /**
+   * The target associated with the failure detail.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+}
+
+/**
+ * Customer-actionable warning associated with a scenario run.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioRunWarning {
+  /**
+   * The stable code that identifies the warning.
+   */
+  @visibility(Lifecycle.Read)
+  code: string;
+
+  /**
+   * The customer-safe description of the warning.
+   */
+  @visibility(Lifecycle.Read)
+  message: string;
+
+  /**
+   * Additional customer-safe details about the warning.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  details?: ScenarioRunWarningDetail[];
+}
+
+/**
+ * Additional information about a scenario run warning.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioRunWarningDetail {
+  /**
+   * The stable code that identifies the warning detail.
+   */
+  @visibility(Lifecycle.Read)
+  code: string;
+
+  /**
+   * The customer-safe description of the warning detail.
+   */
+  @visibility(Lifecycle.Read)
+  message: string;
+
+  /**
+   * The target associated with the warning detail.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
 }
 
 /**
@@ -299,6 +443,89 @@ model ScenarioRunResource {
   @visibility(Lifecycle.Read)
   @key
   id: string;
+}
+
+/**
+ * Model that represents a resource associated with a scenario run action.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioRunSummaryResource {
+  /**
+   * The resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  @key
+  id: string;
+
+  /**
+   * The resources affected during action execution.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  affectedResources?: ScenarioRunEffectiveTarget[];
+}
+
+/**
+ * Model that represents the outcome for a concrete action target.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioRunEffectiveTarget {
+  /**
+   * The target resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  @key
+  id: string;
+
+  /**
+   * The target execution state.
+   */
+  @visibility(Lifecycle.Read)
+  state: ScenarioRunTargetState;
+
+  /**
+   * When target processing started.
+   */
+  @visibility(Lifecycle.Read)
+  startedAt?: utcDateTime;
+
+  /**
+   * When target processing completed.
+   */
+  @visibility(Lifecycle.Read)
+  completedAt?: utcDateTime;
+}
+
+/**
+ * Enum of the execution states for a concrete action target.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+union ScenarioRunTargetState {
+  string,
+
+  /**
+   * The action completed successfully for the target.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Evaluation determined that the action cannot apply because the target lacks required
+   * properties or capabilities, or does not satisfy the action criteria. For example,
+   * a SQL server without failover configured.
+   */
+  NotApplicable: "NotApplicable",
+
+  /**
+   * The action applies, but execution intentionally made no change because the target is
+   * already in the desired state or the change would not be safely recoverable. For example,
+   * a virtual machine that is already shut down.
+   */
+  Skipped: "Skipped",
+
+  /**
+   * Evaluation, authorization, lookup, mutation, or cleanup failed for the target.
+   */
+  Failed: "Failed",
 }
 
 /**
@@ -425,6 +652,14 @@ union ScenarioRunState {
    */
   @lroSucceeded
   Succeeded: "Succeeded",
+
+  /**
+   * The scenario run completed, but one or more actions failed and every one of those
+   * failures was suppressed by the effective `failureBehavior`.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @lroSucceeded
+  PartiallySucceeded: "PartiallySucceeded",
 
   /**
    * The scenario run has failed.
