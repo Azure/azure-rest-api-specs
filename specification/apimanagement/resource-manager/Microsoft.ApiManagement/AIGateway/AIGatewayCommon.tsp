@@ -131,4 +131,8 @@ alias AiGatewayIfMatchOptional = {
   /** ETag of the resource. Required for an update. */
   @header("If-Match")
   ifMatch?: string;
+
+  /** Set to '*' to allow creating a new resource, but prevent updating an existing resource. */
+  @header("If-None-Match")
+  ifNoneMatch?: string;
 };

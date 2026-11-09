@@ -72,6 +72,12 @@ model AiGatewayProperties {
   /** Whether public network access is allowed for the AI Gateway. */
   @added(Versions.v2026_11_01)
   publicNetworkAccess?: AiGatewayPublicNetworkAccess;
+
+  /** Private endpoint connections associated with the AI Gateway. */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  privateEndpointConnections?: Azure.ResourceManager.CommonTypes.PrivateEndpointConnection[];
 }
 
 /** An AI Gateway resource. */
@@ -90,6 +96,17 @@ model AiGatewayResource is Azure.ResourceManager.TrackedResource<
   ...Azure.ResourceManager.ResourceSkuProperty;
   ...Azure.ResourceManager.EntityTagProperty;
 }
+
+/** A private endpoint connection of an AI Gateway. */
+@added(Versions.v2026_11_01)
+@parentResource(AiGatewayResource)
+model AiGatewayPrivateEndpointConnection
+  is Azure.ResourceManager.PrivateEndpointConnectionResource;
+
+/** A private link resource of an AI Gateway. */
+@added(Versions.v2026_11_01)
+@parentResource(AiGatewayResource)
+model AiGatewayPrivateLinkResource is Azure.ResourceManager.PrivateLink;
 
 /** SKU fields to update on an AI Gateway. */
 @added(Versions.v2026_09_01_preview)
