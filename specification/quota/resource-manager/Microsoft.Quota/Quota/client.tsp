@@ -70,6 +70,11 @@ using Microsoft.Quota;
 @@clientName(GroupQuotasEntityBase, "GroupQuotaEntityBase", "csharp");
 @@clientName(GroupQuotaLimitLists.list, "get", "csharp");
 @@clientName(SubscriptionQuotaAllocationsLists.list, "get", "csharp");
+@@clientName(
+  IncomingQuotaTransfers.listBySubscription,
+  "getIncomingQuotaTransfers",
+  "csharp"
+);
 
 // Avoids .NET analyzer AZC0030, which rejects model names ending in "Request".
 @@clientName(
@@ -98,6 +103,11 @@ using Microsoft.Quota;
 @@clientName(RejectionRecord, "QuotaTransferRejectionRecord", "csharp");
 @@alternateType(QuotaTransfer.etag, Azure.Core.eTag, "csharp");
 @@alternateType(IncomingQuotaTransfer.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  IncomingQuotaTransferProperties.sourceEtag,
+  Azure.Core.eTag,
+  "csharp"
+);
 
 @@usage(QuotaAllocationRequestStatus, Usage.input, "csharp");
 @@usage(QuotaAllocationRequestBase, Usage.input, "csharp");
