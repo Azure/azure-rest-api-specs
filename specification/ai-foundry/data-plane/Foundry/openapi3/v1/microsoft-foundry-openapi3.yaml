@@ -89154,7 +89154,10 @@ components:
         result:
           type: object
           additionalProperties: {}
-          description: Raw result payload, whose properties depend on the submitted request.
+          description: |-
+            Raw result payload, whose properties depend on the submitted request.
+            Completed text-only reference training reports loss_fn_output_type as
+            "scalar", an empty loss_fn_outputs array, and aggregate numeric metrics.
       allOf:
         - $ref: '#/components/schemas/SessionFineTuning.FineTuningRequestStatus'
       description: A request that completed successfully.
@@ -90216,30 +90219,6 @@ components:
             - type: 'null'
           description: Optional configuration for the selected reference loss function.
       description: Reference-based training input. Token batches must not accompany this input.
-    SessionFineTuning.FineTuningTextOnlyTrainingResult:
-      type: object
-      required:
-        - loss_fn_output_type
-        - loss_fn_outputs
-        - metrics
-      properties:
-        loss_fn_output_type:
-          type: string
-          enum:
-            - scalar
-          description: Reference training exposes only scalar metrics.
-        loss_fn_outputs:
-          type: array
-          items: {}
-          maxItems: 0
-          description: Always empty; private per-token outputs are not returned.
-        metrics:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-          description: Finite numeric metrics for the completed training request.
-      description: Scalar-only result payload for completed reference-based training.
     SessionFineTuning.FineTuningTextOnlyTrainingSample:
       type: object
       required:

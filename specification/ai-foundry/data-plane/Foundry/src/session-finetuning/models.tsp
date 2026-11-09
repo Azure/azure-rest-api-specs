@@ -355,7 +355,11 @@ model CompletedFineTuningRequest extends FineTuningRequestStatus {
   /** Indicates that the request completed successfully. */
   status: "completed";
 
-  /** Raw result payload, whose properties depend on the submitted request. */
+  /**
+   * Raw result payload, whose properties depend on the submitted request.
+   * Completed text-only reference training reports loss_fn_output_type as
+   * "scalar", an empty loss_fn_outputs array, and aggregate numeric metrics.
+   */
   result: Record<unknown>;
 }
 
@@ -1043,19 +1047,6 @@ model FineTuningTextOnlySampleResult {
   /** Valid public completions or safely classified, still-trainable invalid choices. */
   @minItems(1)
   choices: FineTuningTextOnlyChoice[];
-}
-
-/** Scalar-only result payload for completed reference-based training. */
-model FineTuningTextOnlyTrainingResult {
-  /** Reference training exposes only scalar metrics. */
-  loss_fn_output_type: "scalar";
-
-  /** Always empty; private per-token outputs are not returned. */
-  @maxItems(0)
-  loss_fn_outputs: unknown[];
-
-  /** Finite numeric metrics for the completed training request. */
-  metrics: Record<float64>;
 }
 
 /** Metadata for one version-bound file in an authorized staged checkpoint copy. */
