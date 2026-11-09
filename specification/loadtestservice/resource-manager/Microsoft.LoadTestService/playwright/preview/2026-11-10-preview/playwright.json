@@ -1306,8 +1306,29 @@
           "description": "Controls whether Web Bot Authentication is enabled for the workspace."
         },
         "signingKey": {
-          "$ref": "#/definitions/WebBotAuthSigningKey",
-          "description": "The signing key used for Web Bot Authentication. If omitted, the service defaults to Microsoft."
+          "type": "string",
+          "description": "The signing key used for Web Bot Authentication. If omitted, the service defaults to Microsoft.",
+          "default": "Microsoft",
+          "enum": [
+            "Microsoft",
+            "Workspace"
+          ],
+          "x-ms-enum": {
+            "name": "WebBotAuthSigningKey",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Microsoft",
+                "value": "Microsoft",
+                "description": "Use a Microsoft-managed regional signing key common to all workspaces."
+              },
+              {
+                "name": "Workspace",
+                "value": "Workspace",
+                "description": "Use a workspace-specific signing key."
+              }
+            ]
+          }
         },
         "publicKeyDirectoryUri": {
           "type": "string",
@@ -1327,7 +1348,7 @@
         },
         "signingKey": {
           "$ref": "#/definitions/WebBotAuthSigningKey",
-          "description": "The signing key used for Web Bot Authentication. If omitted, the service defaults to Microsoft."
+          "description": "The signing key used for Web Bot Authentication. If omitted, the existing signing key selection is preserved."
         }
       }
     },

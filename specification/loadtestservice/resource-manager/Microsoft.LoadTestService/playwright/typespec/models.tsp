@@ -108,7 +108,7 @@ model WebBotAuthSettings {
   status?: EnablementStatus;
 
   @doc("The signing key used for Web Bot Authentication. If omitted, the service defaults to Microsoft.")
-  signingKey?: WebBotAuthSigningKey;
+  signingKey?: WebBotAuthSigningKey = WebBotAuthSigningKey.Microsoft;
 
   @visibility(Lifecycle.Read)
   @doc("The URI of the public key directory used for HTTP message signature verification. This property is returned only when signingKey is Workspace.")
@@ -117,10 +117,15 @@ model WebBotAuthSettings {
 
 @added(Versions.v2026_11_10_preview)
 @doc("The Web Bot Authentication settings that can be updated for a workspace.")
-model WebBotAuthSettingsUpdate is PickProperties<
-  WebBotAuthSettings,
-  "status" | "signingKey"
->;
+model WebBotAuthSettingsUpdate {
+  ...OmitProperties<
+    OmitDefaults<PickProperties<WebBotAuthSettings, "status" | "signingKey">>,
+    "signingKey"
+  >;
+
+  @doc("The signing key used for Web Bot Authentication. If omitted, the existing signing key selection is preserved.")
+  signingKey?: WebBotAuthSigningKey;
+}
 
 @added(Versions.v2026_11_10_preview)
 @doc("The workspace properties that can be updated.")
