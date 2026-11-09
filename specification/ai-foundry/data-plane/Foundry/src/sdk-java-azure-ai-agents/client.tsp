@@ -24,6 +24,27 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
+@@alternateType(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionSegment.start,
+  FoundryDurationSecondsFloat,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionSegment.end,
+  FoundryDurationSecondsFloat,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeTurnDetectionServerVad.prefix_padding_ms,
+  FoundryDurationMilliseconds,
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeTurnDetectionServerVad.prefix_padding_ms,
+  "prefixPadding",
+  "java"
+);
+
 // Reuse equivalent openai-java models instead of generating duplicate public types.
 @@alternateType(
   OpenAI.ChatCompletionTool,
@@ -673,6 +694,82 @@ using Azure.AI.Projects;
 );
 
 // Duration-typed Java properties do not need wire-unit suffixes in their client names.
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
+  "logProbs",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta.logprobs,
+  "logProbs",
+  "java"
+);
+@@clientName(TelephonyCallRecord.duration_ms, "duration", "java");
+@@clientName(TelephonyCallSummary.duration_ms, "duration", "java");
+@@clientName(
+  VoiceAgentAzureSemanticVadEnTurnDetection.idle_timeout_ms,
+  "idleTimeout",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadEnTurnDetection.prefix_padding_ms,
+  "prefixPadding",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadEnTurnDetection.silence_duration_ms,
+  "silenceDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadEnTurnDetection.speech_duration_ms,
+  "speechDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentInterimResponseConfig.latency_threshold_ms,
+  "latencyThreshold",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventResponseAnimationVisemeDelta.audio_offset_ms,
+  "audioOffset",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerVadTurnDetection.speech_duration_ms,
+  "speechDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSubagent.invoke_timeout_seconds,
+  "invokeTimeout",
+  "java"
+);
+@@clientName(
+  VoiceAgentTranscriptionPhrase.duration_milliseconds,
+  "duration",
+  "java"
+);
+@@clientName(
+  VoiceAgentTranscriptionPhrase.offset_milliseconds,
+  "offset",
+  "java"
+);
+@@clientName(
+  VoiceAgentTranscriptionWord.duration_milliseconds,
+  "duration",
+  "java"
+);
+@@clientName(VoiceAgentTranscriptionWord.offset_milliseconds, "offset", "java");
+@@clientName(VoiceAudioItem.duration_ms, "duration", "java");
+@@clientName(VoiceAudioItem.start_offset_ms, "offset", "java");
+@@clientName(VoiceAudioItem.blob_uri, "blobUrl", "java");
+@@clientName(VoiceGeneratedAudioItem.duration_ms, "duration", "java");
+@@clientName(VoiceGeneratedAudioItem.start_offset_ms, "offset", "java");
+@@clientName(VoiceGeneratedAudioItem.blob_uri, "blobUrl", "java");
+@@clientName(VoiceRecording.duration_ms, "duration", "java");
+@@clientName(VoiceRecording.blob_uri, "blobUrl", "java");
 @@clientName(
   VoiceAgentAzureSemanticVadMultilingualTurnDetection.prefix_padding_ms,
   "prefixPadding",
