@@ -4,34 +4,12 @@
 
 ## 2.1 General Intake (All Cases)
 
-Select and execute one knowledge route before deciding what additional information
-to collect:
-
-1. Read the installed
-   [reference-document-links.md](reference-document-links.md). If that read fails,
-   retry the installed skill path. If local access remains unavailable, recover the
-   canonical repository copy through an available repository-file reader.
-2. Classify the complete request:
-   - **Covered** — the catalog covers every material authoring topic.
-   - **Uncovered** — one or more material authoring topics are absent from the
-     catalog. A partially covered request is classified as uncovered for its complete
-     knowledge route.
-3. Execute exactly one route for the complete request:
-   - **Covered** — run [agentic search](agentic-search.md).
-   - **Uncovered** — call `azsdk_typespec_retrieve_knowledge` when it is exposed. If
-     it is not exposed, run Agentic Search against authoritative TypeSpec or Azure
-     documentation instead.
-   - **Catalog unavailable** — run Agentic Search against authoritative TypeSpec or
-     Azure documentation. Catalog access failure is not a blocker and does not by
-     itself select retrieval.
-4. Do not call both Agentic Search and retrieval for the same request. Retain the
-   selected route's fetched content for Step 3; the authoring-plan step must reuse it
-   without another knowledge call.
-5. Use the fetched guidance to determine the material intake decisions and retain it
+1. call `azsdk_typespec_retrieve_knowledge` to fetch guidance
+2. Use the fetched guidance to determine the material intake decisions and retain it
    for the authoring plan.
-6. Using the selected guidance, the Step 1 result, and the user's request, identify
+3. Using the selected guidance, the Step 1 result, and the user's request, identify
    every matching case from the table below.
-7. Gather only material information that is not already supplied or directly
+4. Gather only material information that is not already supplied or directly
    available from the project. If no case matches, skip Step 2.2.
 
 Do not call an authoring-plan or validation MCP tool during intake. If the selected
