@@ -1,5 +1,4 @@
 import path from "node:path";
-import { compatibilitySkipReason, skipsCompatibility } from "./compatibility-policy.ts";
 import { normalizeAutorestContract } from "./autorest-contract.ts";
 import { isMain, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
 import { canonicalJson, stableId } from "./stable-id.ts";
@@ -684,16 +683,12 @@ export function analyzeRestBreaking(options: {
   const candidates: BreakingCandidate[] = [];
 
   const blockers: PreparationBlocker[] = [];
-  const analyzedProjectIds: string[] = [];
+  let analyzedProjects = 0;
   for (const project of [...(manifest.projects ?? [])].sort((left, right) =>
     left.id.localeCompare(right.id),
   )) {
-    if (skipsCompatibility(project.artifactComparison)) {
-      blockers.push(compatibilitySkipReason(project.id));
-      continue;
-    }
     if (project.classification === "new" || project.artifactComparison?.mode === "new-project") {
-      analyzedProjectIds.push(project.id);
+      analyzedProjects += 1;
       continue;
     }
     const baseArtifact = project.artifacts?.baseline?.autorest ?? project.artifacts?.base?.autorest;
@@ -758,7 +753,7 @@ export function analyzeRestBreaking(options: {
             "Their effective compatibility cannot be established from incomplete contract evidence.",
         });
       }
-      analyzedProjectIds.push(project.id);
+      analyzedProjects += 1;
     } catch (error) {
       blockers.push({
         code: "autorest-contract-unsupported",
@@ -771,8 +766,7 @@ export function analyzeRestBreaking(options: {
 
   const result: BreakingAnalysis = {
     schemaVersion: 1,
-    status: analyzedProjectIds.length ? "ready" : "blocked",
-    analyzedProjectIds,
+    status: analyzedProjects ? "ready" : "blocked",
     facts: Object.fromEntries(
       Object.entries(facts).sort(([left], [right]) => left.localeCompare(right)),
     ),

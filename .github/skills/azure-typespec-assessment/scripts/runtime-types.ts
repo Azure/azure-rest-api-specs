@@ -544,7 +544,6 @@ export interface NormalizedTcgcContract {
 
 export interface SemanticOperationReference {
   operationId: string;
-  comparisonAvailable?: boolean;
   beforeFactId?: string;
   afterFactId?: string;
   restChanged?: boolean;
@@ -1007,13 +1006,8 @@ export interface ArtifactSelection {
   reason: string;
 }
 
-export type CompatibilityPolicy =
-  | { action: "compare" }
-  | { action: "skip"; reason: "no-stable-api-version" };
-
 export interface ArtifactComparison {
   mode?: string;
-  compatibilityPolicy?: CompatibilityPolicy;
   baseline: ArtifactSelection;
   target: ArtifactSelection;
   addedCurrentVersions: string[];
@@ -1147,7 +1141,6 @@ export interface BreakingCandidate {
 export interface BreakingAnalysis {
   schemaVersion: number;
   status: "ready" | "blocked";
-  analyzedProjectIds?: string[];
   facts: Record<string, AssessmentFact>;
   candidates: BreakingCandidate[];
   blockers: PreparationBlocker[];
@@ -1197,7 +1190,6 @@ export interface DownstreamRootCause {
 export interface DownstreamAnalysis {
   schemaVersion: number;
   status: "ready" | "blocked";
-  analyzedProjectIds?: string[];
   facts: Record<string, AssessmentFact>;
   rootCauses: DownstreamRootCause[];
   candidates: DownstreamCandidate[];
@@ -1362,7 +1354,6 @@ export interface DocumentQualityDimension {
 
 export interface AssessmentFinding {
   id: string;
-  sourceChangeIds?: string[];
   actual: string;
   expected: string;
   severity: "high" | "medium" | "low";
@@ -1757,9 +1748,12 @@ export interface AssessmentOutput {
     [key: string]: unknown;
   };
   projects?: PreparationProject[];
-  artifactComparisons?: (Partial<ArtifactComparison> & {
+  artifactComparisons?: {
     projectId: string;
-  })[];
+    mode?: string;
+    baseline?: ArtifactSelection;
+    target?: ArtifactSelection;
+  }[];
   confidence: "high" | "medium" | "low";
   safety: {
     scope: "rest-and-downstream-only";
@@ -1782,7 +1776,6 @@ export interface AssessmentOutput {
       findings: AssessmentFinding[];
       blockers?: unknown[];
       rejectedCandidateCount?: number;
-      analyzedProjectIds?: string[];
       legacyFindings?: LegacyAssessmentFinding[];
     };
     downstream: {
@@ -1792,7 +1785,6 @@ export interface AssessmentOutput {
       findings: AssessmentFinding[];
       blockers?: unknown[];
       rejectedCandidateCount?: number;
-      analyzedProjectIds?: string[];
       methodGroups?: AssessmentMethodGroup[];
       operationGroups?: AssessmentMethodGroup[];
       typeImpacts?: AssessmentTypeImpact[];
