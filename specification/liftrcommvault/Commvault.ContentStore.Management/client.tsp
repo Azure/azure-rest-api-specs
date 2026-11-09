@@ -233,7 +233,7 @@ using Commvault.ContentStore;
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "UserAssignedIdentity contains only read-only properties, which are already excluded from the PATCH request model."
 @doc("User-assigned identity details supplied in a cloud account PATCH.")
 model CloudAccountUserAssignedIdentity {
   ...UpdateableProperties<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>;
