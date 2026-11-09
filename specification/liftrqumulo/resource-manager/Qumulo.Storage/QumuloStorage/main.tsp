@@ -28,7 +28,6 @@ enum Versions {
   /**
    * The 2024-02-01 Stable API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
@@ -37,7 +36,6 @@ enum Versions {
   /**
    * The 2025-10-01-preview Preview API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2025_10_01_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
@@ -46,7 +44,6 @@ enum Versions {
   /**
    * The 2026-02-17-preview Preview API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2026_02_17_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
@@ -55,7 +52,6 @@ enum Versions {
   /**
    * The 2026-04-16 Stable API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2026_04_16)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)

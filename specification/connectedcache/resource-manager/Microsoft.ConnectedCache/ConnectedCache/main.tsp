@@ -25,15 +25,12 @@ namespace Microsoft.ConnectedCache;
 
 @doc("The available API versions.")
 enum Versions {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft Connected Cache Rest Api version 2023-05-01-preview")
   v2023_05_01_preview: "2023-05-01-preview",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft Connected Cache Rest Api version 2024-11-30-preview")
   v2024_11_30_preview: "2024-11-30-preview",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @doc("Microsoft Connected Cache Rest Api version 2026-06-01")
   v2026_06_01: "2026-06-01",
 }

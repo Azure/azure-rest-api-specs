@@ -48,43 +48,36 @@ enum Versions {
   /**
    * The 2025-07-01 API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2025_07_01: "2025-07-01",
 
   /**
    * The 2025-09-01 API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2025_09_01: "2025-09-01",
 
   /**
    * The 2026-03-01 API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_03_01: "2026-03-01",
 
   /**
    * The 2026-04-01-preview API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_04_01_preview: "2026-04-01-preview",
 
   /**
    * The 2026-06-01 API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_06_01: "2026-06-01",
 
   /**
    * The 2026-07-01 API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   v2026_07_01: "2026-07-01",
 
   /**
    * The 2026-08-31-preview API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
   @Azure.Core.previewVersion
   v2026_08_31_preview: "2026-08-31-preview",
 }

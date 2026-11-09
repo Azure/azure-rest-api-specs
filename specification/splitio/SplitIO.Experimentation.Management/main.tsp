@@ -24,7 +24,6 @@ namespace SplitIO {
 namespace SplitIO.Experimentation {
   @doc("Supported API versions for the SplitIO.Experimentation resource provider.")
   enum Versions {
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v5 for this existing API version to preserve its emitted contract."
     @doc("2024-07-01-preview api version")
     v24_07_preview: "2024-07-01-preview",
   }

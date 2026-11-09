@@ -23,15 +23,12 @@ namespace Microsoft.DependencyMap;
 /** The available API versions. */
 enum Versions {
   /** 2025-01-31-preview version */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   v2025_01_31_preview: "2025-01-31-preview",
 
   /** 2025-05-01-preview version */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   v2025_05_01_preview: "2025-05-01-preview",
 
   /** 2025-07-01-preview version */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Retain common-types v3 for this existing API version to preserve its emitted contract."
   v2025_07_01_preview: "2025-07-01-preview",
 }
 
