@@ -997,7 +997,7 @@ void test("renderer shows expandable REST operations and aggregated downstream m
             sources: [source],
             evidence: [{ id: "fact-1" }],
             relatedSemanticIntents: ["semantic-1"],
-            semanticMatchBasis: "http-method-path",
+            semanticMatchBasis: "candidate-ownership",
           },
           {
             id: "downstream-parameters",
@@ -1010,7 +1010,7 @@ void test("renderer shows expandable REST operations and aggregated downstream m
             sources: [source],
             evidence: [{ id: "fact-1" }],
             relatedSemanticIntents: ["semantic-1"],
-            semanticMatchBasis: "http-method-path",
+            semanticMatchBasis: "candidate-ownership",
           },
         ],
         methodGroups: [
@@ -1072,6 +1072,14 @@ void test("renderer shows expandable REST operations and aggregated downstream m
   });
 
   assert.match(html, /Affected operations \(1\)/);
+  assert.match(
+    html,
+    /<meta name="typespec-assessment-report-presentation" content="downstream-method-signatures-v1">/,
+  );
+  assert.equal((html.match(/class="report-card sdk-method-card"/g) ?? []).length, 1);
+  assert.equal((html.match(/class="report-method-signature"/g) ?? []).length, 1);
+  assert.match(html, /Method signature/);
+  assert.match(html, /Evidence incomplete/);
   assert.match(html, /HTTP signature and represented payload contract unchanged/);
   assert.match(html, /Contoso\.Widgets\.get/);
   assert.match(html, /<strong>Widgets\.get<\/strong>/);
