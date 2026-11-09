@@ -17,6 +17,7 @@ import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
+import "../skills/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "../voice-agents/routes.tsp";
@@ -29,7 +30,6 @@ import "../red-teams/routes.tsp";
 import "../routines/routes.tsp";
 import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
-import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
 
@@ -407,6 +407,18 @@ namespace JavaScriptToolCompatibility {
 @@clientName(AssetCredentialResponse, "DatasetCredential");
 @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
+// Preserve the released evaluator model name and distinguish campaign inputs.
+@@clientName(
+  DatasetReference,
+  "TelephonyCampaignDatasetReference",
+  "python, javascript"
+);
+@@clientName(
+  VersionedDatasetReference,
+  "DatasetReference",
+  "python, javascript"
+);
+
 // --------------------------------------------------------------------------------
 // Indexes sub‐client
 // --------------------------------------------------------------------------------
@@ -472,6 +484,11 @@ namespace JavaScriptToolCompatibility {
 @@clientName(Azure.AI.Projects.Agents.generateAgent, "createFromPrompt");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
+@@clientName(
+  AgentOptimizationJobs.downloadFile,
+  "downloadOptimizationJobFile",
+  "python, javascript"
+);
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
@@ -719,6 +736,8 @@ namespace JavaScriptToolCompatibility {
 // Need to explicitly mention both languages to avoid compile error
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
 
+@@access(Evaluators.listDiagnostics, Access.public);
+
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
 
@@ -821,7 +840,7 @@ namespace JavaScriptToolCompatibility {
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Beta Skills sub-client
+// Skills sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(Skills.createSkillVersion, "create");

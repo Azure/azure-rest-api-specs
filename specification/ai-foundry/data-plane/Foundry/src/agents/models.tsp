@@ -49,7 +49,6 @@ namespace Azure.AI.Projects {
   const AllConditionalAgentDefinitionPreviews = #{
     conditional_previews: #[
       AgentDefinitionOptInKeys.workflow_agents_v1_preview,
-      AgentDefinitionOptInKeys.external_agents_v1_preview,
       AgentDefinitionOptInKeys.voice_agents_v1_preview,
       AgentDefinitionOptInKeys.draft_agents_v1_preview,
       AgentDefinitionOptInKeys.digital_worker_v1_preview,
@@ -664,12 +663,6 @@ namespace Azure.AI.Projects {
     Registration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)
     over customer-emitted OpenTelemetry data.
     """)
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.external_agents_v1_preview],
-    }
-  )
   model ExternalAgentDefinition extends AgentDefinition {
     kind: AgentKind.external;
 
@@ -725,6 +718,20 @@ namespace Azure.AI.Projects {
 
     @doc("Whether this agent version uses memory snapshots. Sessions for a snapshot-enabled version start from a snapshot of the agent's initialized process rather than starting the process from its image. Defaults to false.")
     enable_memory_snapshot?: boolean = false;
+
+    @doc("Opt-in to session compute primitives (exec, ports) for sessions created for this agent version. Requires the `SessionCompute=V1Preview` feature. Each primitive defaults to off.")
+    @removed(Versions.v1)
+    compute_primitives?: SessionComputePrimitives;
+  }
+
+  @doc("Opt-in flags for session compute primitives on a hosted agent version.")
+  @removed(Versions.v1)
+  model SessionComputePrimitives {
+    @doc("Whether exec (one-shot and interactive) is enabled on session computes for this agent version. Defaults to false.")
+    exec?: boolean = false;
+
+    @doc("Whether ports can be exposed and proxied on session computes for this agent version. Defaults to false.")
+    ports?: boolean = false;
   }
 
   @doc("The container app agent definition.")

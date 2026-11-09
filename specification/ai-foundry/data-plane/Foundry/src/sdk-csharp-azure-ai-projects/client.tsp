@@ -153,6 +153,7 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
+@@access(Evaluators.listDiagnostics, Access.public);
 @@clientName(Evaluators.getCredentials, "GetCredential");
 @@access(Evaluators.getCredentials, Access.internal);
 @@access(Evaluators.startPendingUpload, Access.internal);
