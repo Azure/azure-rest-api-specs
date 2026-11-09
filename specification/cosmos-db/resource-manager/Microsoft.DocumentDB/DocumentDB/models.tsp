@@ -1738,7 +1738,7 @@ model DatabaseAccountGetProperties {
    * Flag to indicate whether Integrated Embeddings is enabled on the Cosmos DB account. This property is supported only for API for NoSQL accounts.
    */
   @added(Versions.v2026_09_01_preview)
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   enableEmbeddingGenerator?: boolean;
 
   /**
