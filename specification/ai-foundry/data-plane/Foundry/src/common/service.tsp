@@ -23,6 +23,7 @@ using TypeSpec.Versioning;
       in your Hub, use the form
       "https://{ai-services-account-name}.services.ai.azure.com/api/projects/_project"
       """)
+    @Azure.ClientGenerator.Core.clientName("endpoint")
     project_endpoint: url,
   }
 )
