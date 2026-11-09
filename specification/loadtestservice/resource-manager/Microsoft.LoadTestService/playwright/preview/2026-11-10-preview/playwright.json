@@ -1056,7 +1056,7 @@
         "storageUri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI of the Azure Storage account used to store workspace artifacts, test results, and reports."
+          "description": "The URI of the Azure Storage account used to store workspace artifacts, test results, reports and browser profiles."
         },
         "subnetId": {
           "type": "string",
@@ -1106,6 +1106,31 @@
         "browserProxy": {
           "type": "string",
           "description": "Specifies whether the browser proxy is enabled for the workspace.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is disabled."
+              }
+            ]
+          }
+        },
+        "browserProfile": {
+          "type": "string",
+          "description": "Specifies whether the browser profile is enabled for the workspace.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -1228,7 +1253,7 @@
         "storageUri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI of the Azure Storage account used to store workspace artifacts, test results, and reports."
+          "description": "The URI of the Azure Storage account used to store workspace artifacts, test results, reports and browser profiles."
         },
         "sessionArtifacts": {
           "$ref": "#/definitions/EnablementStatus",
@@ -1241,6 +1266,10 @@
         "browserProxy": {
           "$ref": "#/definitions/EnablementStatus",
           "description": "Specifies whether the browser proxy is enabled for the workspace."
+        },
+        "browserProfile": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "Specifies whether the browser profile is enabled for the workspace."
         },
         "webBotAuth": {
           "$ref": "#/definitions/WebBotAuthSettingsUpdate",

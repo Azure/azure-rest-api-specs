@@ -46,7 +46,7 @@ model PlaywrightWorkspaceProperties {
   reporting?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_01_01_preview)
-  @doc("The URI of the Azure Storage account used to store workspace artifacts, test results, and reports.")
+  @doc("The URI of the Azure Storage account used to store workspace artifacts, test results, reports and browser profiles.")
   storageUri?: url;
 
   @added(Versions.v2026_08_01_preview)
@@ -69,6 +69,10 @@ model PlaywrightWorkspaceProperties {
   @added(Versions.v2026_11_01_preview)
   @doc("Specifies whether the browser proxy is enabled for the workspace.")
   browserProxy?: EnablementStatus = EnablementStatus.Enabled;
+
+  @added(Versions.v2026_11_10_preview)
+  @doc("Specifies whether the browser profile is enabled for the workspace.")
+  browserProfile?: EnablementStatus = EnablementStatus.Enabled;
 
   @added(Versions.v2026_11_10_preview)
   @doc("The Web Bot Authentication settings for the workspace.")
