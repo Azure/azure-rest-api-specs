@@ -97921,17 +97921,10 @@
       "SessionFineTuning.FineTuningTextOnlyToolCall": {
         "type": "object",
         "required": [
-          "id",
           "type",
           "function"
         ],
         "properties": {
-          "id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "Nonempty identifier without whitespace, unique across the supplied history."
-          },
           "type": {
             "type": "string",
             "enum": [
@@ -97944,7 +97937,38 @@
             "description": "Public function name and arguments."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyToolCallBase"
+          }
+        ],
         "description": "A public assistant function call with a unique conversation-local identifier."
+      },
+      "SessionFineTuning.FineTuningTextOnlyToolCallBase": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "Nonempty identifier without whitespace, unique across the supplied history."
+          },
+          "type": {
+            "type": "string",
+            "description": "Identifies the tool-call variant."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "function": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyToolCall"
+          }
+        },
+        "description": "Shared identity of a public tool call. Only the function variant is currently supported."
       },
       "SessionFineTuning.FineTuningTextOnlyToolMessage": {
         "type": "object",

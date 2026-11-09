@@ -787,13 +787,20 @@ model FineTuningTextOnlyFunctionCall {
   arguments: string;
 }
 
-/** A public assistant function call with a unique conversation-local identifier. */
-model FineTuningTextOnlyToolCall {
+/** Shared identity of a public tool call. Only the function variant is currently supported. */
+@discriminator("type")
+model FineTuningTextOnlyToolCallBase {
   /** Nonempty identifier without whitespace, unique across the supplied history. */
   @minLength(1)
   @maxLength(256)
   id: string;
 
+  /** Identifies the tool-call variant. */
+  type: string;
+}
+
+/** A public assistant function call with a unique conversation-local identifier. */
+model FineTuningTextOnlyToolCall extends FineTuningTextOnlyToolCallBase {
   /** The supported tool-call kind. */
   type: "function";
 
