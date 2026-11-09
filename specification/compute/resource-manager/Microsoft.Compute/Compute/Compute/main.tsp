@@ -103,8 +103,7 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Common.CloudError;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<Azure.ResourceManager.Foundations.OperationListResult>
+    | Common.CloudError;
 }

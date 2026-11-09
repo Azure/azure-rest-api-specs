@@ -96,7 +96,10 @@ interface VirtualMachineRunCommands {
    */
   delete is VirtualMachineRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineRunCommand,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -201,7 +204,10 @@ interface VirtualMachineScaleSetVMRunCommands {
   @operationId("VirtualMachineScaleSetVMRunCommands_Delete")
   delete is VirtualMachineScaleSetVMRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineRunCommand,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -223,18 +229,23 @@ interface VirtualMachineScaleSetVMRunCommands {
   >;
 }
 
-@@doc(VirtualMachineRunCommand.name,
+@@doc(
+  VirtualMachineRunCommand.name,
   "The name of the virtual machine run command."
 );
-@@doc(VirtualMachineRunCommand.properties,
+@@doc(
+  VirtualMachineRunCommand.properties,
   "Describes the properties of a Virtual Machine run command."
 );
-@@doc(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine RunCommand operation."
 );
-@@doc(VirtualMachineRunCommands.update::parameters.properties,
+@@doc(
+  VirtualMachineRunCommands.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine RunCommand operation."
 );
-@@doc(VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine RunCommand operation."
 );
