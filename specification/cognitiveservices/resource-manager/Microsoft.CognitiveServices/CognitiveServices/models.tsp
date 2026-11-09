@@ -7666,7 +7666,7 @@ model ManagedComputeUsage {
   currentValue?: float64;
 
   /**
-   Offer scope. Supported values are 'Global' and 'DataZone'.
+   * Offer scope. Supported values are 'Global' and 'DataZone'.
    */
   offerScope?: string;
 
