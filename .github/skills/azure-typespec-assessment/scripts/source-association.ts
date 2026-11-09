@@ -4,6 +4,7 @@ import { isDeepStrictEqual } from "node:util";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { stableId } from "./stable-id.ts";
 import { restContractIdentity } from "./assessment-display.ts";
+import { verifyAssessmentRuntime, verifyRuntimePhaseProvenance } from "./assessment-runtime.ts";
 import {
   atomicWriteJson,
   comparisonIdentity,
@@ -137,6 +138,8 @@ function canonical(work: string) {
     errors.push(...verifyArtifactHashes(work, queries as Record<string, string>));
   }
   if (errors.length) throw new Error(`Frozen assessment inputs changed.\n${errors.join("\n")}`);
+  const runtime = verifyAssessmentRuntime(work, import.meta.url);
+  verifyRuntimePhaseProvenance(work, "materialization", runtime);
   const judgment = readJsonObject(
     resolveWorkPath(work, "assessment-judgment.json"),
   ) as unknown as AssessmentJudgment;

@@ -1446,7 +1446,9 @@ export function materializeAssessmentResults({
         runtimePhases: {
           preparation,
           materialization: createRuntimePhaseProvenance(
-            root, runtime, [INDEX_FILE, decisionsPath],
+            root,
+            runtime,
+            [INDEX_FILE, decisionsPath],
             outputArtifacts.filter(([, value]) => value !== undefined).map(([file]) => file),
           ),
         },

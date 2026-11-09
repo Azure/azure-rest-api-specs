@@ -404,6 +404,11 @@ raise the global input budget, or generate SDKs as part of this change.
 
 ## 11. Mandatory four-PR measurements
 
+The results below were captured before stacking on the preview-only baseline
+policy PR. They remain historical measurements of this refactor, not golden
+compatibility verdicts for the combined stack. Parent-layer target-only
+eligibility and runtime-integrity rules take precedence in new runs.
+
 Run #46679, #44988, #44288, and #43918 sequentially after implementation,
 using fresh output directories and fresh, separate judgment/source AI contexts.
 Do not reuse prior Agent decisions as new benchmark results. Record the actual

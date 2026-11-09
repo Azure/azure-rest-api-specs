@@ -144,6 +144,7 @@ function fixture() {
     ],
     restDecisions: [],
     downstreamDecisions: [],
+    sourceReviews: [],
     catalogScores: catalog.map(({ catalogId }) => ({
       catalogId,
       exactSymbol: 0,

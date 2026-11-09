@@ -129,19 +129,41 @@ void test("materializes and freezes judgment without requiring source decisions 
   try {
     const model = readJson(path.join(work, "model-input.json")) as AssessmentModelInput;
     model.restCandidates = [{ id: "rest-rejected", evidenceSetId: "evidence-rejected" }];
-    model.evidenceSets = { "evidence-rejected": { sourceChangeIds: [], hunkIds: [], declarationIds: [], evidenceFactIds: [] } };
+    model.evidenceSets = {
+      "evidence-rejected": {
+        sourceChangeIds: [],
+        hunkIds: [],
+        declarationIds: [],
+        evidenceFactIds: [],
+      },
+    };
     writeJson(path.join(work, "model-input.json"), model);
     writeJson(path.join(work, "dimensions", "rest-breaking-input.json"), {
-      status: "ready", facts: {}, blockers: [], candidates: [{
-        id: "rest-rejected", rule: "operation-removed", defaultSeverity: "high",
-        actual: "Removed.", expected: "Preserved.", sourceChangeIds: [], hunkIds: [], declarationIds: [],
-        evidenceFactIds: [], operationIds: ["Example_Get"], reviewRequired: true,
-        contractChange: { rule: "operation-removed" },
-      }],
+      status: "ready",
+      facts: {},
+      blockers: [],
+      candidates: [
+        {
+          id: "rest-rejected",
+          rule: "operation-removed",
+          defaultSeverity: "high",
+          actual: "Removed.",
+          expected: "Preserved.",
+          sourceChangeIds: [],
+          hunkIds: [],
+          declarationIds: [],
+          evidenceFactIds: [],
+          operationIds: ["Example_Get"],
+          reviewRequired: true,
+          contractChange: { rule: "operation-removed" },
+        },
+      ],
     });
     buildAgentWorkspace({ work });
     const decisions = completedDecisions(work);
-    decisions.restDecisions = [{ candidateId: "rest-rejected", decision: "reject", rationale: "No confirmed breaking." }];
+    decisions.restDecisions = [
+      { candidateId: "rest-rejected", decision: "reject", rationale: "No confirmed breaking." },
+    ];
     assert.equal(decisions.schemaVersion, 2);
     assert.equal("sourceReviews" in decisions, false);
     writeJson(path.join(work, "agent-workspace", "agent-decisions.json"), decisions);

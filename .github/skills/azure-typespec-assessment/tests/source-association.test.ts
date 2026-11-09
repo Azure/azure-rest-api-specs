@@ -16,6 +16,37 @@ import {
   transitionWorkflowState,
 } from "../scripts/workflow-state.ts";
 import { validateCompactDecisions } from "../scripts/materialize-assessment-results.ts";
+import {
+  captureAssessmentRuntime,
+  createRuntimePhaseProvenance,
+} from "../scripts/assessment-runtime.ts";
+
+function freeze(root: string) {
+  const runtime = captureAssessmentRuntime(
+    new URL("../scripts/source-association.ts", import.meta.url).href,
+  );
+  atomicWriteJson(path.join(root, "agent-workspace/agent-index.json"), { runtime });
+  atomicWriteJson(path.join(root, "compliance-search-evidence.json"), {});
+  transitionWorkflowState(root, "judgment-materialized", {
+    runtime,
+    artifactHashes: hashArtifacts(root, [
+      "model-input.json",
+      "source/source-index.json",
+      "dimensions/rest-breaking-input.json",
+      "dimensions/downstream-breaking-input.json",
+      "dimensions/semantic-intents-input.json",
+    ]),
+    judgmentArtifactHashes: hashArtifacts(root, ["assessment-judgment.json"]),
+    runtimePhases: {
+      materialization: createRuntimePhaseProvenance(
+        root,
+        runtime,
+        ["agent-workspace/agent-index.json"],
+        ["assessment-judgment.json", "compliance-search-evidence.json"],
+      ),
+    },
+  });
+}
 
 function fixture(context: { onTestFinished: (fn: () => void) => void }, approvals = true) {
   const root = fs.mkdtempSync(path.join(process.cwd(), ".source-association-test-"));
@@ -128,16 +159,7 @@ function fixture(context: { onTestFinished: (fn: () => void) => void }, approval
     overallConfidence: "high",
     blockers: [],
   });
-  transitionWorkflowState(root, "judgment-materialized", {
-    artifactHashes: hashArtifacts(root, [
-      "model-input.json",
-      "source/source-index.json",
-      "dimensions/rest-breaking-input.json",
-      "dimensions/downstream-breaking-input.json",
-      "dimensions/semantic-intents-input.json",
-    ]),
-    judgmentArtifactHashes: hashArtifacts(root, ["assessment-judgment.json"]),
-  });
+  freeze(root);
   return { root, write };
 }
 function input(work: string) {
@@ -176,16 +198,7 @@ test("REST source ownership uses canonical schemas, not lossy compact summaries"
   const model = JSON.parse(fs.readFileSync(path.join(root, "model-input.json"), "utf8"));
   model.facts["operation-fact"].request = { kind: "body", schema: { kind: "object" } };
   write("model-input.json", model);
-  transitionWorkflowState(root, "judgment-materialized", {
-    artifactHashes: hashArtifacts(root, [
-      "model-input.json",
-      "source/source-index.json",
-      "dimensions/rest-breaking-input.json",
-      "dimensions/downstream-breaking-input.json",
-      "dimensions/semantic-intents-input.json",
-    ]),
-    judgmentArtifactHashes: hashArtifacts(root, ["assessment-judgment.json"]),
-  });
+  freeze(root);
   buildSourceAssociation({ work: root });
   const source = input(root);
   assert.equal(source.items[0].contractIdentity, "Service.Helper");
@@ -230,6 +243,15 @@ test("judgment-only decisions omit source reviews and reject joint-phase input",
     () => validateCompactDecisions({ ...value, sourceReviews: [] }),
     /must not contain/,
   );
+});
+
+test("source stage rejects a mismatched pinned assessment runtime", (context) => {
+  const { root } = fixture(context);
+  const file = path.join(root, "agent-workspace/agent-index.json");
+  const index = JSON.parse(fs.readFileSync(file, "utf8"));
+  index.runtime.fingerprint = `sha256:${"0".repeat(64)}`;
+  atomicWriteJson(file, index);
+  assert.throws(() => buildSourceAssociation({ work: root }), /runtime tooling error/);
 });
 
 test("only approved findings receive shared, narrow operation source contexts", (context) => {
