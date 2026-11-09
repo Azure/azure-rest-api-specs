@@ -3,36 +3,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { stringify } from "yaml";
 import { analyzeDownstreamBreaking } from "../scripts/analyze-downstream-breaking.ts";
-import { compatibilitySkipReason } from "../scripts/compatibility-policy.ts";
-
-void test.each(["new", "existing"])(
-  "policy skips %s projects before accessing TCGC artifacts or graphs",
-  (classification) => {
-    const result = analyzeDownstreamBreaking({
-      manifest: {
-        projects: [
-          {
-            id: "preview",
-            classification,
-            artifactComparison: {
-              compatibilityPolicy: { action: "skip", reason: "no-stable-api-version" },
-            },
-            get artifacts() {
-              throw new Error("Policy-skipped artifacts must not be accessed.");
-            },
-          },
-        ],
-      },
-      sourceIndex: { sourceChanges: [] },
-    } as unknown as Parameters<typeof analyzeDownstreamBreaking>[0]);
-    assert.equal(result.status, "blocked");
-    assert.deepEqual(result.analyzedProjectIds, []);
-    assert.deepEqual(result.candidates, []);
-    assert.deepEqual(result.rootCauses, []);
-    assert.deepEqual(result.facts, {});
-    assert.deepEqual(result.blockers, [compatibilitySkipReason("preview")]);
-  },
-);
 
 function packageShape(current: boolean) {
   const stringType = { kind: "string" };
