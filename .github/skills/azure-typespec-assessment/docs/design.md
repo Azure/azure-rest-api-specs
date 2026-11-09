@@ -561,11 +561,7 @@ File: `source/source-index.json`
             "startLine": 10,
             "endLine": 15
           },
-          "lines": [
-            " model Widget {",
-            "-  name: string;",
-            "+  name: WidgetName;"
-          ],
+          "lines": [" model Widget {", "-  name: string;", "+  name: WidgetName;"],
           "declarationOccurrenceIds": ["declaration-occurrence-<hash>"],
           "normalizedChanges": [
             {
@@ -1052,25 +1048,6 @@ Dimension output:
       "kind": "basic|paging|lro|lropaging"
     }
   },
-  "rootCauses": [
-    {
-      "id": "downstream-root-cause-<hash>",
-      "kind": "method-return-propagation|type-contract-propagation|enum-union-propagation|unresolved",
-      "directCandidateIds": ["downstream-<hash>"],
-      "propagatedCandidateIds": ["downstream-<hash>"],
-      "methodFactIds": ["sdk-fact-<hash>"],
-      "typeFactIds": ["sdk-fact-<hash>"],
-      "referenceEvidence": [
-        {
-          "fromFactId": "sdk-fact-<hash>",
-          "toFactId": "sdk-fact-<hash>",
-          "kind": "parameter|response|property|lro-result|paging-item",
-          "memberName": "segment",
-          "location": "request-path|request-query|request-header|request-body|response-header|response-body"
-        }
-      ]
-    }
-  ],
   "candidates": [
     {
       "id": "downstream-<hash>",
@@ -1242,17 +1219,25 @@ and [Downstream Candidate Rules](../references/downstream-candidate-rules.md).
 
 ### Finding-specific TypeSpec source review
 
-Each REST or downstream candidate carries a deterministic source proposal into
-the bounded Agent phase. The proposal contains canonical declaration IDs,
-candidate-owned source changes and hunks, and the bounded declarations
-available for review. The Agent returns exactly one source-review outcome for
-every candidate decision:
+New runs use `pipelineVersion: 2`: compatibility judgment and display-source
+completion are separate bounded AI stages. Judgment decisions use schemaVersion
+2 and omit source reviews. After materialization freezes judgment, the source
+builder creates a shared, scoped source input for accepted findings only.
+Rejected candidates do not receive source tasks. The second AI context returns
+one selection per confirmed contract item; the materializer covers its accepted
+finding IDs without rewriting judgment. See the
+[two-stage design](post-judgment-source-association-design.md) and
+[source workflow](../references/workflow/source-association.md).
+
+The source stage can:
 
 - keep the deterministic proposal unchanged;
 - refine an existing proposal to a clearer complete minimal declaration set;
 - associate declarations when deterministic mapping did not find one;
-- leave an approved finding explicitly unresolved; or
-- mark a rejected candidate not applicable.
+- leave an approved finding explicitly unresolved.
+
+Historical single-phase inputs retain their original per-candidate
+`sourceReviews` contract, including `not-applicable` for rejected candidates.
 
 The complete minimal set contains the declarations needed to understand the
 breaking change and its immediate TypeSpec context. It must not be a lone
@@ -1744,7 +1729,6 @@ File: `model-input.json`
     }
   ],
   "restCandidates": [],
-  "downstreamRootCauses": [],
   "downstreamCandidates": [],
   "complianceSearchRequests": [
     {
@@ -1778,7 +1762,6 @@ File: `model-input.json`
       "facts": 0,
       "semanticReviewUnits": 0,
       "restCandidates": 0,
-      "downstreamRootCauses": 0,
       "downstreamCandidates": 0,
       "complianceSearchRequests": 0
     },
@@ -2111,22 +2094,8 @@ File: `assessment.json`
         {
           "id": "sdk-type-impact-<hash>",
           "type": "Microsoft.Chaos.ScenarioRun",
-          "locations": ["response-body"],
-          "rootCauseIds": ["downstream-root-cause-<hash>"],
           "findingIds": ["downstream-<hash>"],
-          "affectedMethodCount": 2,
-          "affectedMethods": [
-            {
-              "symbol": "Microsoft.Chaos.ScenarioConfigurations.execute",
-              "referenceFactIds": ["sdk-fact-<hash>"]
-            },
-            {
-              "symbol": "Microsoft.Chaos.ScenarioRuns.cancel",
-              "referenceFactIds": ["sdk-fact-<hash>"]
-            }
-          ],
-          "relatedSemanticIntents": ["semantic-<hash>"],
-          "unresolvedRelationshipReason": null
+          "relatedSemanticIntents": ["semantic-<hash>"]
         }
       ],
       "rejectedCandidateCount": 0,
@@ -2547,7 +2516,7 @@ row presentation as SDK method and SDK type cards:
   change;
 - when normalized structural comparison produces no changed contract row, the
   operation card omits the Before/After table and states `HTTP signature and
-represented payload contract unchanged.` even if upstream version-specific
+  represented payload contract unchanged.` even if upstream version-specific
   reference metadata populated `changedAspects`; and
 - REST breaking cards continue grouping rows by stable REST contract identity,
   while Semantic operation cards group the applicable rows under each

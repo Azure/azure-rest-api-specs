@@ -8,6 +8,7 @@ import {
   UNAVAILABLE_HEAD_BASELINE_MESSAGE,
 } from "./comparison-execution.ts";
 import { validateAssessment } from "./validate-assessment.ts";
+import { restContractIdentity, schemaIdentity, schemaPath } from "./assessment-display.ts";
 
 type ArtifactSelection = import("./runtime-types.ts").ArtifactSelection;
 
@@ -66,6 +67,8 @@ type SemanticFindingReference = import("./runtime-types.ts").SemanticFindingRefe
 type SdkType = import("./runtime-types.ts").SdkType;
 
 type SourceChange = import("./runtime-types.ts").SourceChange;
+
+type SourceDeclaration = import("./runtime-types.ts").SourceDeclaration;
 
 type AssessmentMethodDelta = AssessmentMethodGroup["deltas"][number];
 
@@ -176,7 +179,7 @@ function isDownstreamAnalysis(value: unknown): value is DownstreamAnalysis {
     typeof value.schemaVersion === "number" &&
     (value.status === "ready" || value.status === "blocked") &&
     isRecord(value.facts) &&
-    Array.isArray(value.rootCauses) &&
+    (value.rootCauses === undefined || Array.isArray(value.rootCauses)) &&
     Array.isArray(value.candidates) &&
     Array.isArray(value.blockers)
   );
@@ -493,11 +496,6 @@ function semanticLinks(ids: string[] = []) {
     : "None";
 }
 
-function schemaIdentity(schema: NormalizedSchema | undefined): string | undefined {
-  const reference = schema?.reference?.split("/").at(-1);
-  return schema?.enumMetadata?.name ?? reference;
-}
-
 function schemaDisplay(schema: NormalizedSchema | undefined): string {
   if (!schema) return "removed";
   const identity = schemaIdentity(schema);
@@ -508,24 +506,6 @@ function schemaDisplay(schema: NormalizedSchema | undefined): string {
   }
   if (identity) return identity;
   return [schema.type ?? schema.kind, schema.format].filter(Boolean).join(" ");
-}
-
-function schemaPath(schema: NormalizedSchema | undefined, pathSegments: string[]): ContractValue {
-  let current = schema;
-  let identity = schemaIdentity(current);
-  for (const rawSegment of pathSegments) {
-    const isArray = rawSegment.endsWith("[]");
-    const name = rawSegment.replace(/\[\]$/, "");
-    const property = (current?.properties ?? []).find((item) => item.name === name);
-    if (!property) return { schema: undefined, identity };
-    current = property.schema;
-    identity = schemaIdentity(current) ?? identity;
-    if (isArray) {
-      current = current?.items;
-      identity = schemaIdentity(current) ?? identity;
-    }
-  }
-  return { schema: current, identity };
 }
 
 function operationFacts(finding: AssessmentFinding) {
@@ -627,11 +607,7 @@ function restContractDelta(finding: AssessmentFinding): RestContractDelta {
     beforeValue = { display: finding.expected };
     afterValue = { display: finding.actual };
   }
-  const identity =
-    beforeValue.identity ??
-    afterValue.identity ??
-    finding.operationIds?.[0] ??
-    "Unmapped REST contract change";
+  const identity = restContractIdentity(finding);
 
   let areaKind: string | undefined;
   let member = location;
@@ -1400,6 +1376,7 @@ function renderSourceHunks(sources: SourceChange[] = []) {
 export function renderCompleteModelDeclarations(
   sources: SourceChange[] = [],
   declarationNames: string[] = [],
+  declarationKinds: readonly string[] = ["model"],
 ) {
   const requestedNames = declarationNames
     .map((name) => name?.trim())
@@ -1408,7 +1385,9 @@ export function renderCompleteModelDeclarations(
     .flatMap((source) =>
       (source.declarations ?? []).map((declaration) => ({ source, declaration })),
     )
-    .filter(({ declaration }) => declaration.kind === "model" && declaration.sourceSnippet)
+    .filter(
+      ({ declaration }) => declarationKinds.includes(declaration.kind) && declaration.sourceSnippet,
+    )
     .filter(({ declaration }) => {
       if (!requestedNames.length) return true;
       const qualifiedName = declaration.qualifiedName ?? "";
@@ -1428,21 +1407,114 @@ export function renderCompleteModelDeclarations(
         .flatMap((source) =>
           (source.declarations ?? []).map((declaration) => ({ source, declaration })),
         )
-        .filter(({ declaration }) => declaration.kind === "model" && declaration.sourceSnippet);
-  return [...new Map(selected.map((item) => [item.declaration.id, item])).values()]
-    .sort((left, right) => {
-      const name = left.declaration.qualifiedName.localeCompare(right.declaration.qualifiedName);
-      if (name) return name;
-      return left.declaration.source.revision === "base" ? -1 : 1;
-    })
-    .map(({ source, declaration }) => {
-      const revision = declaration.source.revision === "base" ? "Baseline" : "Target";
-      const snippet = declaration.sourceSnippet!;
-      return `<div class="diff declaration"><div class="diff-path">${escapeHtml(source.path)} · ${revision} · ${escapeHtml(declaration.qualifiedName)}</div><pre>${snippet.lines
-        .map((line) => `<span class="context">${escapeHtml(line)}</span>`)
+        .filter(
+          ({ declaration }) =>
+            declarationKinds.includes(declaration.kind) && declaration.sourceSnippet,
+        );
+  const grouped = new Map<
+    string,
+    {
+      qualifiedName: string;
+      base?: { source: SourceChange; declaration: SourceDeclaration };
+      current?: { source: SourceChange; declaration: SourceDeclaration };
+    }
+  >();
+  for (const item of selected) {
+    if (
+      selected.some(
+        (other) =>
+          other.declaration.id !== item.declaration.id &&
+          other.source.path === item.source.path &&
+          other.declaration.source.revision === item.declaration.source.revision &&
+          other.declaration.source.startLine <= item.declaration.source.startLine &&
+          other.declaration.source.endLine >= item.declaration.source.endLine &&
+          (other.declaration.source.startLine < item.declaration.source.startLine ||
+            other.declaration.source.endLine > item.declaration.source.endLine),
+      )
+    )
+      continue;
+    const key = item.declaration.qualifiedName;
+    const group = grouped.get(key) ?? { qualifiedName: key };
+    if (item.declaration.source.revision === "base") group.base ??= item;
+    else group.current ??= item;
+    grouped.set(key, group);
+  }
+  return [...grouped.values()]
+    .sort((left, right) => left.qualifiedName.localeCompare(right.qualifiedName))
+    .map(({ qualifiedName, base, current }) => {
+      const baseSnippet = base?.declaration.sourceSnippet;
+      const currentSnippet = current?.declaration.sourceSnippet;
+      const baseLines = baseSnippet?.lines ?? [];
+      const currentLines = currentSnippet?.lines ?? [];
+      const rowCount = baseLines.length + 1;
+      const columnCount = currentLines.length + 1;
+      const lengths = Array.from({ length: rowCount }, () => Array<number>(columnCount).fill(0));
+      for (let baseIndex = baseLines.length - 1; baseIndex >= 0; baseIndex -= 1) {
+        for (let currentIndex = currentLines.length - 1; currentIndex >= 0; currentIndex -= 1) {
+          lengths[baseIndex][currentIndex] =
+            baseLines[baseIndex] === currentLines[currentIndex]
+              ? lengths[baseIndex + 1][currentIndex + 1] + 1
+              : Math.max(
+                  lengths[baseIndex + 1][currentIndex],
+                  lengths[baseIndex][currentIndex + 1],
+                );
+        }
+      }
+      const rows: {
+        kind: "context" | "remove" | "add";
+        text: string;
+        baseLine?: number;
+        currentLine?: number;
+      }[] = [];
+      let baseIndex = 0;
+      let currentIndex = 0;
+      while (baseIndex < baseLines.length || currentIndex < currentLines.length) {
+        if (
+          baseIndex < baseLines.length &&
+          currentIndex < currentLines.length &&
+          baseLines[baseIndex] === currentLines[currentIndex]
+        ) {
+          rows.push({
+            kind: "context",
+            text: baseLines[baseIndex],
+            baseLine: (baseSnippet?.startLine ?? 1) + baseIndex,
+            currentLine: (currentSnippet?.startLine ?? 1) + currentIndex,
+          });
+          baseIndex += 1;
+          currentIndex += 1;
+        } else if (
+          baseIndex < baseLines.length &&
+          (currentIndex >= currentLines.length ||
+            lengths[baseIndex + 1][currentIndex] >= lengths[baseIndex][currentIndex + 1])
+        ) {
+          rows.push({
+            kind: "remove",
+            text: baseLines[baseIndex],
+            baseLine: (baseSnippet?.startLine ?? 1) + baseIndex,
+          });
+          baseIndex += 1;
+        } else {
+          rows.push({
+            kind: "add",
+            text: currentLines[currentIndex],
+            currentLine: (currentSnippet?.startLine ?? 1) + currentIndex,
+          });
+          currentIndex += 1;
+        }
+      }
+      const path =
+        base?.source.path === current?.source.path
+          ? base?.source.path
+          : [base?.source.path, current?.source.path].filter(Boolean).join(" → ");
+      const truncated = Boolean(baseSnippet?.truncated || currentSnippet?.truncated);
+      return `<div class="diff declaration model-declaration-diff"><div class="diff-path model-diff-path"><span>${escapeHtml(path ?? "")} · ${escapeHtml(qualifiedName)}</span><span class="model-diff-legend"><span class="model-diff-baseline">Baseline</span><span class="model-diff-target">Target</span></span></div><div class="model-diff-code">${rows
+        .map(
+          (row) =>
+            `<div class="model-diff-line ${row.kind}"><span class="model-diff-number">${row.baseLine ?? ""}</span><span class="model-diff-number">${row.currentLine ?? ""}</span><span class="model-diff-marker">${row.kind === "add" ? "+" : row.kind === "remove" ? "−" : " "}</span><span class="model-diff-text">${escapeHtml(row.text)}</span></div>`,
+        )
         .join(
           "",
-        )}</pre>${snippet.truncated ? '<p class="report-small">Declaration excerpt truncated.</p>' : ""}</div>`;
+        )}</div>${truncated ? '<p class="report-small">Declaration excerpt truncated.</p>' : ""}</div>`;
     })
     .join("");
 }
@@ -2247,6 +2319,12 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
     complianceCode,
     renderSourceHunks,
     renderCompleteModelDeclarations,
+    renderCompleteSourceDeclarations: (sources: SourceChange[]) =>
+      renderCompleteModelDeclarations(
+        sources,
+        [],
+        ["model", "operation", "interface", "enum", "union"],
+      ),
     focusedSourceChanges,
     sourceLinks,
     legacyEvidence,
@@ -2296,7 +2374,8 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
 <title>TypeSpec Assessment</title>
 <style>
 :root{color-scheme:light dark;--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--line:#dbe3ef;--accent:#2563eb;--good:#047857;--warn:#b45309;--danger:#b91c1c;--add-bg:#dcfce7;--add-text:#166534;--remove-bg:#fee2e2;--remove-text:#991b1b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,sans-serif}.container{width:min(1100px,calc(100% - 32px));margin:auto}.hero{padding:38px 0 42px;background:linear-gradient(120deg,#172554,#2554d8);color:white}.hero .eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:800;color:#dbeafe}.hero h1{margin:.35em 0 .55em;font-size:clamp(34px,4.2vw,58px);line-height:1.08;letter-spacing:-.025em}.hero-meta{font-size:16px;color:#e0e7ff}.hero-meta strong{color:#86efac;text-transform:capitalize}.hero a{color:#dbeafe}.summary-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:28px}.summary-card{display:block;min-height:150px;padding:18px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(255,255,255,.09);color:white!important;text-decoration:none;transition:background .15s,border-color .15s,transform .15s}.summary-card:hover,.summary-card:focus-visible{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.5);transform:translateY(-2px);outline:none}.summary-card:focus-visible{box-shadow:0 0 0 3px #93c5fd}.summary-value{display:flex;gap:10px;align-items:center;font-size:25px;font-weight:800}.summary-value .pass{color:#86efac}.summary-value .fail{color:#fecaca}.summary-label{margin-top:8px;font-size:16px;font-weight:750}.summary-detail{margin-top:7px;color:#dbeafe;font-size:13px}.notice{padding:16px 0;background:#fffbeb;color:#713f12;border-bottom:1px solid #fde68a}main{padding:28px 0}section{margin:0 0 30px}.dimension-details>summary{cursor:pointer;list-style-position:outside}.dimension-details>summary h2{display:inline-block;margin:0 0 12px}.panel,.finding,.intent,.operation,.compliance-intent,.compliance-comparison{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:10px 0}.finding{border-left:4px solid var(--warn)}.finding.high,.compliance-comparison.applicable-fail{border-left:4px solid var(--danger)}.finding.low{border-left-color:var(--muted)}.intent>summary{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.intent>summary .action{margin-left:0}.intent-finding-badges{display:inline-flex;gap:7px;flex-wrap:wrap;margin-left:auto}.intent-finding-badge{border:1px solid #991b1b;border-radius:999px;padding:3px 10px;background:#b91c1c;color:#fff!important;font-size:13px;font-weight:800;text-decoration:none}.intent-finding-badge:hover,.intent-finding-badge:focus-visible{background:#7f1d1d;outline:2px solid #fca5a5;outline-offset:2px}.intent>summary,.representative-example>summary,.operation summary,.compliance-intent>summary,.compliance-comparison>summary,.finding>summary,.comparison-details>summary,.affected-operations>summary,.root-cause-provenance>summary{cursor:pointer}.intent>summary,.compliance-intent>summary{font-size:18px}.intent-body,.compliance-intent-body,.compliance-comparison-body{padding-top:12px}.finding>summary{display:flex;align-items:center;gap:12px;font-size:18px}.sdk-contract-card>summary,.sdk-method-card>summary{flex-wrap:wrap}.finding-summary{margin-left:auto;color:var(--muted);font-size:15px}.severity,.origin-tag,.contract-tag{border-radius:999px;padding:3px 10px;font-size:13px;font-weight:800}.contract-tag{background:#dbeafe;color:#1e40af}.severity{text-transform:lowercase}.severity.high{background:#fee2e2;color:#991b1b}.severity.medium{background:#fef3c7;color:#92400e}.severity.low{background:#dbeafe;color:#1e40af}.origin-tag.rest-breaking-tag{background:#fee2e2;color:#991b1b}.downstream-rest-link{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}.downstream-rest-link:hover strong,.downstream-rest-link:focus-visible strong{text-decoration:underline}.finding-body{padding-top:12px}.comparison-details{margin:14px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--panel) 94%,var(--accent))}.comparison-details>summary{font-size:16px}.comparison-body{padding-top:12px}.contract-metadata{grid-template-columns:max-content minmax(0,1fr);margin:4px 0 22px}.http-contract{display:inline-flex;align-items:baseline;gap:8px;flex-wrap:wrap}.contract-change-table{border:1px solid var(--line);border-radius:10px;border-collapse:separate;border-spacing:0;overflow:hidden}.contract-change-table th{background:#eaf0f9}.contract-change-table th,.contract-change-table td{padding:13px 15px;border-right:1px solid var(--line)}.contract-change-table th:last-child,.contract-change-table td:last-child{border-right:0}.contract-member{width:31%;background:color-mix(in srgb,#eaf0f9 70%,var(--panel))}.contract-area-kind{display:block;margin-bottom:3px;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.contract-before{width:34.5%;background:#fff1f1}.contract-after{width:34.5%;background:#eefaf3}.contract-value{display:inline-block;padding:3px 7px;border-radius:5px;font-weight:700}.contract-value.before{background:var(--remove-bg);color:var(--remove-text)}.contract-value.after{background:var(--add-bg);color:var(--add-text)}.contract-detail{display:block;margin-top:4px;color:var(--muted);font-size:13px}.breaking-rationale{margin:17px 0 22px;padding:12px 14px;border-left:3px solid #e7a400;background:#fff9e8}.affected-operations{margin:20px 0}.affected-operations>summary{font-size:18px}.affected-operation-list{display:grid;gap:7px;margin-top:10px}.affected-operation{display:grid;grid-template-columns:minmax(230px,.8fr) 65px minmax(300px,1.8fr);align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:8px}.http-method{color:#075cab;font-family:ui-monospace,monospace;font-weight:800}.contract-footer{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:18px;color:var(--muted);font-size:13px}.root-cause-provenance{margin-top:14px}.mapping-unavailable{color:var(--muted)}.representative-example{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:9px}.operation summary{display:flex;gap:12px;align-items:center}.operation summary span,.action{margin-left:auto;border-radius:999px;padding:2px 8px;background:#dbeafe;color:#1e40af}.operation-body{padding-top:12px}.diff{background:#111827;color:#e5e7eb;border-radius:10px;overflow:auto;margin:12px 0}.diff-path{padding:7px 12px;background:#1f2937}.diff-path a{color:#93c5fd}.diff pre{padding:12px;margin:0}.diff pre span{display:block}.diff pre .line-number{display:inline-block;width:42px;color:#94a3b8;user-select:none}.diff .add{background:#123d2a;color:#bbf7d0}.diff .remove{background:#51212a;color:#fecaca}.parameter-diff{margin:12px 0}.parameter-line{display:flex;gap:8px;align-items:baseline;padding:5px 9px;margin:3px 0;border-radius:6px}.parameter-line.add,.delta-after,ins{background:var(--add-bg);color:var(--add-text)}.parameter-line.remove,.delta-before,del{background:var(--remove-bg);color:var(--remove-text)}.parameter-line.modify,.parameter-line.reorder{background:#fef3c7;color:#92400e}.parameter-line>span:first-child{font-weight:800}.parameter-attribute{white-space:nowrap}.delta-before,.delta-after,del,ins{padding:2px 5px;border-radius:4px;text-decoration:none}dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 14px}dt{font-weight:700}dd{margin:0}.not-assessed{color:var(--muted);font-weight:700}.good,.compliance-summary.passed{color:var(--good)}.compliance-summary.failed{color:var(--danger)}.sources{color:var(--muted);font-size:13px}blockquote{margin:8px 0;padding:8px 12px;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--panel) 90%,var(--accent))}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line)}code{overflow-wrap:anywhere}@media(max-width:1050px){.summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.affected-operation{grid-template-columns:1fr 65px}.affected-operation code{grid-column:1/-1}}@media(max-width:700px){.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.finding-summary{width:100%;margin-left:0}.contract-change-table{display:block;overflow-x:auto}.contract-change-table th,.contract-change-table td{min-width:210px}}@media(max-width:540px){.summary-grid{grid-template-columns:1fr}.hero h1{font-size:32px}}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--panel:#172033;--text:#e5e7eb;--muted:#9ca3af;--line:#334155;--add-bg:#123d2a;--add-text:#bbf7d0;--remove-bg:#51212a;--remove-text:#fecaca}.notice{background:#422006;color:#fde68a}.parameter-line.modify,.parameter-line.reorder{background:#422006;color:#fde68a}.contract-change-table th{background:#202d45}.contract-member{background:#1d293d}.contract-before{background:#431f29}.contract-after{background:#15382b}.breaking-rationale{background:#3b2f13}.http-method{color:#76b9ff}}
-.tag{border-radius:999px;padding:3px 10px;background:#dbeafe;color:#1e40af;font-size:13px;font-weight:800}.finding-summary-meta{margin-left:auto;color:var(--muted);font-size:14px}.rest-operation-list{display:grid;gap:7px}.rest-operation-line{display:grid;grid-template-columns:minmax(220px,1fr) auto minmax(260px,2fr);gap:12px;padding:9px 11px;border:1px solid var(--line);border-radius:8px}.rest-operation-line>span{color:var(--muted)}@media(max-width:700px){.rest-operation-line{grid-template-columns:1fr}.finding-summary-meta{width:100%;margin-left:0}}
+.model-diff-path{display:flex;justify-content:space-between;gap:16px}.model-diff-legend{display:flex;gap:12px;white-space:nowrap;color:#cbd5e1}.model-diff-legend>span::before{display:inline-block;width:8px;height:8px;margin-right:5px;border-radius:2px;content:""}.model-diff-baseline::before{background:#f87171}.model-diff-target::before{background:#86efac}.model-diff-code{padding:12px 0;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.model-diff-line{display:grid;grid-template-columns:48px 48px 28px minmax(max-content,1fr);min-height:21px}.model-diff-number{padding:0 9px;border-right:1px solid #30363d;color:#94a3b8;text-align:right;user-select:none}.model-diff-marker{text-align:center;user-select:none}.model-diff-text{padding:0 14px 0 4px;white-space:pre}.model-diff-line.add .model-diff-number{border-color:#1f6f43}.model-diff-line.remove .model-diff-number{border-color:#8e2f3b}
+.tag{border-radius:999px;padding:3px 10px;background:#dbeafe;color:#1e40af;font-size:13px;font-weight:800}.finding-summary-meta{margin-left:auto;color:var(--muted);font-size:14px}.rest-operation-list{display:grid;gap:7px}.rest-operation-line{display:grid;grid-template-columns:minmax(220px,1fr) auto minmax(260px,2fr);gap:12px;padding:9px 11px;border:1px solid var(--line);border-radius:8px}.rest-operation-line>span{color:var(--muted)}@media(max-width:700px){.rest-operation-line{grid-template-columns:1fr}.finding-summary-meta{width:100%;margin-left:0}.model-diff-path{flex-direction:column}.model-diff-line{grid-template-columns:40px 40px 24px minmax(max-content,1fr)}}
 .finding{border-left:1px solid var(--line)}
 .rest-contract-card .contract-tag{background:#fee2e2;color:#991b1b}.rest-contract-card .rest-operation-list{margin-top:10px}
 .notice{padding:0}.notice>summary{display:flex;min-height:46px;align-items:center;gap:10px;padding:8px 0;cursor:pointer;list-style:none}.notice>summary::-webkit-details-marker{display:none}.notice>summary::before{content:"▸";flex:none;color:#b45309;font-size:15px;font-weight:900;transition:transform .15s ease}.notice[open]>summary::before{transform:rotate(90deg)}.notice-title{flex:none;font-size:14px;font-weight:800}.notice-summary{overflow:hidden;color:color-mix(in srgb,currentColor 78%,var(--muted));font-size:12.5px;text-overflow:ellipsis;white-space:nowrap}.notice-body{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:0 0 12px 25px;font-size:12.5px;line-height:1.4}.notice-body p{margin:0}@media(max-width:700px){.notice-summary{display:none}.notice-body{grid-template-columns:1fr;gap:6px}}@media(prefers-color-scheme:dark){.notice>summary::before{color:#fbbf24}}

@@ -11,6 +11,7 @@ import { assembleAssessment } from "./assemble-assessment.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { renderAssessmentHtml } from "./render-assessment-html.ts";
 import { validateAssessment } from "./validate-assessment.ts";
+import { loadSourceAssociation } from "./source-association.ts";
 import {
   atomicWriteFile,
   atomicWriteJson,
@@ -51,10 +52,17 @@ export function finalizeAssessment({
 }) {
   const root = path.resolve(work);
   const started = performance.now();
+  let failurePhase = "awaiting-agent-judgment";
   try {
     const runtime = verifyAssessmentRuntime(root, import.meta.url);
     const preparation = verifyRuntimePhaseProvenance(root, "preparation", runtime);
     const materialization = verifyRuntimePhaseProvenance(root, "materialization", runtime);
+    const model = readJsonObject(path.join(root, "model-input.json"));
+    if (model.pipelineVersion === 2) {
+      failurePhase = "awaiting-source-association";
+      loadSourceAssociation(root);
+      failurePhase = "awaiting-finalization";
+    }
     const inferenceArtifactAt = fileTimestamp(path.join(root, "inference.json"));
     const guidelineEvidenceAt = fileTimestamp(path.join(root, "compliance-search-evidence.json"));
     const judgmentArtifactAt = fileTimestamp(path.join(root, "assessment-judgment.json"));
@@ -148,7 +156,7 @@ export function finalizeAssessment({
     return { assessmentPath, reportPath, finalizationMs };
   } catch (error) {
     const message = compactError(error);
-    transitionWorkflowState(root, "awaiting-agent-judgment", {
+    transitionWorkflowState(root, failurePhase, {
       failure: {
         code:
           error instanceof AssessmentRuntimeError ? "runtime-tooling-error" : "finalization-failed",

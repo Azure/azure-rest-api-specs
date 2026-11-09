@@ -8,7 +8,6 @@
     "semanticSummaries",
     "restDecisions",
     "downstreamDecisions",
-    "sourceReviews",
     "catalogScores",
     "fetchedDocuments",
     "failedRetrievals",
@@ -19,7 +18,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": 1
+      "enum": [1, 2]
     },
     "semanticSummaries": {
       "type": "array",
@@ -78,11 +77,7 @@
       }
     },
     "overallConfidence": {
-      "enum": [
-        "high",
-        "medium",
-        "low"
-      ]
+      "enum": ["high", "medium", "low"]
     },
     "blockers": {
       "type": "array",
@@ -92,6 +87,16 @@
       }
     }
   },
+  "allOf": [
+    {
+      "if": { "properties": { "schemaVersion": { "const": 1 } } },
+      "then": { "required": ["sourceReviews"] }
+    },
+    {
+      "if": { "properties": { "schemaVersion": { "const": 2 } } },
+      "then": { "not": { "required": ["sourceReviews"] } }
+    }
+  ],
   "$defs": {
     "catalogId": {
       "type": "string",
@@ -100,11 +105,7 @@
     "semanticSummary": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "reviewUnitId",
-        "title",
-        "summary"
-      ],
+      "required": ["reviewUnitId", "title", "summary"],
       "properties": {
         "reviewUnitId": {
           "type": "string",
@@ -123,28 +124,17 @@
     "candidateDecision": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "candidateId",
-        "decision",
-        "rationale"
-      ],
+      "required": ["candidateId", "decision", "rationale"],
       "properties": {
         "candidateId": {
           "type": "string",
           "minLength": 1
         },
         "decision": {
-          "enum": [
-            "approve",
-            "reject"
-          ]
+          "enum": ["approve", "reject"]
         },
         "severity": {
-          "enum": [
-            "high",
-            "medium",
-            "low"
-          ]
+          "enum": ["high", "medium", "low"]
         },
         "rationale": {
           "type": "string",
@@ -161,15 +151,11 @@
             }
           },
           "then": {
-            "required": [
-              "severity"
-            ]
+            "required": ["severity"]
           },
           "else": {
             "not": {
-              "required": [
-                "severity"
-              ]
+              "required": ["severity"]
             }
           }
         }
@@ -184,25 +170,14 @@
     "sourceReview": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "candidateId",
-        "outcome",
-        "selectedDeclarationIds",
-        "rationale"
-      ],
+      "required": ["candidateId", "outcome", "selectedDeclarationIds", "rationale"],
       "properties": {
         "candidateId": {
           "type": "string",
           "minLength": 1
         },
         "outcome": {
-          "enum": [
-            "keep",
-            "refine",
-            "associate",
-            "unresolved",
-            "not-applicable"
-          ]
+          "enum": ["keep", "refine", "associate", "unresolved", "not-applicable"]
         },
         "selectedDeclarationIds": {
           "type": "array",
@@ -222,11 +197,7 @@
           "if": {
             "properties": {
               "outcome": {
-                "enum": [
-                  "keep",
-                  "refine",
-                  "associate"
-                ]
+                "enum": ["keep", "refine", "associate"]
               }
             }
           },
@@ -250,23 +221,14 @@
     "inferenceResult": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "requestId",
-        "decision",
-        "rationale",
-        "candidates"
-      ],
+      "required": ["requestId", "decision", "rationale", "candidates"],
       "properties": {
         "requestId": {
           "type": "string",
           "pattern": "^inference-request-"
         },
         "decision": {
-          "enum": [
-            "candidates",
-            "no-impact",
-            "blocked"
-          ]
+          "enum": ["candidates", "no-impact", "blocked"]
         },
         "rationale": {
           "type": "string",
@@ -324,21 +286,14 @@
           "pattern": "^inferred-(rest|downstream)-"
         },
         "dimension": {
-          "enum": [
-            "rest",
-            "downstream"
-          ]
+          "enum": ["rest", "downstream"]
         },
         "rule": {
           "type": "string",
           "minLength": 1
         },
         "defaultSeverity": {
-          "enum": [
-            "high",
-            "medium",
-            "low"
-          ]
+          "enum": ["high", "medium", "low"]
         },
         "actual": {
           "type": "string",
@@ -379,9 +334,7 @@
             }
           },
           "then": {
-            "required": [
-              "crossLanguageDefinitionId"
-            ]
+            "required": ["crossLanguageDefinitionId"]
           }
         }
       ]
@@ -402,24 +355,16 @@
           "$ref": "#/$defs/catalogId"
         },
         "exactSymbol": {
-          "enum": [
-            0, 4
-          ]
+          "enum": [0, 4]
         },
         "patternCategory": {
-          "enum": [
-            0, 3
-          ]
+          "enum": [0, 3]
         },
         "servicePlane": {
-          "enum": [
-            0, 2
-          ]
+          "enum": [0, 2]
         },
         "changeContext": {
-          "enum": [
-            0, 1
-          ]
+          "enum": [0, 1]
         },
         "rationale": {
           "type": "string",
@@ -430,12 +375,7 @@
     "guidance": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "section",
-        "excerpt",
-        "queryTerms",
-        "examples"
-      ],
+      "required": ["section", "excerpt", "queryTerms", "examples"],
       "properties": {
         "section": {
           "type": "string",
@@ -538,10 +478,7 @@
     "failedRetrieval": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "catalogId",
-        "error"
-      ],
+      "required": ["catalogId", "error"],
       "properties": {
         "catalogId": {
           "$ref": "#/$defs/catalogId"
@@ -555,10 +492,7 @@
     "applicableGuidance": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "catalogId",
-        "guidanceSection"
-      ],
+      "required": ["catalogId", "guidanceSection"],
       "properties": {
         "catalogId": {
           "$ref": "#/$defs/catalogId"
@@ -572,13 +506,7 @@
     "complianceJudgment": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "reviewUnitId",
-        "applicableGuidance",
-        "decision",
-        "actual",
-        "rationale"
-      ],
+      "required": ["reviewUnitId", "applicableGuidance", "decision", "actual", "rationale"],
       "properties": {
         "reviewUnitId": {
           "type": "string",
@@ -610,23 +538,14 @@
           }
         },
         "decision": {
-          "enum": [
-            "applicable-pass",
-            "applicable-fail",
-            "no-applicable-guidance",
-            "not-assessed"
-          ]
+          "enum": ["applicable-pass", "applicable-fail", "no-applicable-guidance", "not-assessed"]
         },
         "title": {
           "type": "string",
           "minLength": 1
         },
         "severity": {
-          "enum": [
-            "high",
-            "medium",
-            "low"
-          ]
+          "enum": ["high", "medium", "low"]
         },
         "expected": {
           "type": "string",
@@ -645,23 +564,15 @@
         {
           "oneOf": [
             {
-              "required": [
-                "declarationNames"
-              ],
+              "required": ["declarationNames"],
               "not": {
-                "required": [
-                  "declarationIds"
-                ]
+                "required": ["declarationIds"]
               }
             },
             {
-              "required": [
-                "declarationIds"
-              ],
+              "required": ["declarationIds"],
               "not": {
-                "required": [
-                  "declarationNames"
-                ]
+                "required": ["declarationNames"]
               }
             }
           ]
@@ -670,17 +581,12 @@
           "if": {
             "properties": {
               "decision": {
-                "enum": [
-                  "applicable-pass",
-                  "applicable-fail"
-                ]
+                "enum": ["applicable-pass", "applicable-fail"]
               }
             }
           },
           "then": {
-            "required": [
-              "expected"
-            ],
+            "required": ["expected"],
             "properties": {
               "applicableGuidance": {
                 "minItems": 1
@@ -688,9 +594,7 @@
             },
             "anyOf": [
               {
-                "required": [
-                  "declarationNames"
-                ],
+                "required": ["declarationNames"],
                 "properties": {
                   "declarationNames": {
                     "minItems": 1
@@ -698,9 +602,7 @@
                 }
               },
               {
-                "required": [
-                  "declarationIds"
-                ],
+                "required": ["declarationIds"],
                 "properties": {
                   "declarationIds": {
                     "minItems": 1
@@ -711,9 +613,7 @@
           },
           "else": {
             "not": {
-              "required": [
-                "expected"
-              ]
+              "required": ["expected"]
             },
             "properties": {
               "applicableGuidance": {
@@ -731,23 +631,16 @@
             }
           },
           "then": {
-            "required": [
-              "title",
-              "severity"
-            ]
+            "required": ["title", "severity"]
           },
           "else": {
             "not": {
               "anyOf": [
                 {
-                  "required": [
-                    "title"
-                  ]
+                  "required": ["title"]
                 },
                 {
-                  "required": [
-                    "severity"
-                  ]
+                  "required": ["severity"]
                 }
               ]
             }

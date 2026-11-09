@@ -1,7 +1,7 @@
 # Assessment Skill Refactor Design
 
-**Status: Baseline refactor implemented; AI-assisted source selection extension
-is design-only, pending implementation approval.**
+**Status: Baseline refactor, consumer-propagation removal, and two-stage source
+association implemented; four fresh PR assessments and measurements completed.**
 
 This document defines the approved simpler implementation and report layout for
 `azure-typespec-assessment`.
@@ -9,9 +9,16 @@ This document defines the approved simpler implementation and report layout for
 The [existing design](design.md) describes the current system. This proposal
 does not replace that document or change the current skill instructions.
 
-The AI-assisted source selection described below is a user-directed follow-up
-design. Do not implement it, rerun assessments, or refresh reports as part of
-this design update.
+The source-selection sections below retain the original joint-phase proposal
+for context. The user subsequently approved implementation and a separate
+post-judgment source phase.
+
+The newer [post-judgment source association design](post-judgment-source-association-design.md)
+defines the implemented two bounded AI stages: freeze candidate judgment first, then
+associate complete TypeSpec source only for confirmed breaking findings. It
+supersedes the single-phase source-review timing described below. Current
+runtime and skill instructions use the two-stage path for new assessments;
+historical single-phase artifacts remain readable.
 
 ## 1. Goal
 
@@ -226,6 +233,98 @@ final-result validation.
 The renderer consumes prepared display data. It escapes values and emits HTML;
 it does not rediscover changes, infer causality, or reconstruct Semantic groups.
 
+### Consumer-propagation simplification
+
+The assessment does not need to enumerate every REST operation or SDK method
+that consumes a changed model/type. Its primary responsibilities are:
+
+- identify direct operation/method contract changes;
+- identify model/type contract changes;
+- explain why each accepted change is breaking; and
+- associate each finding with the most relevant TypeSpec declaration and
+  source.
+
+Consumer inventories are a separate concern. A REST model finding currently
+collects operation IDs from accepted operation-scoped findings, while an SDK
+type impact follows the TCGC reference graph from a changed type through
+intermediate types to every reachable public method. These are different
+relations with different coverage semantics. Presenting both as "affected"
+lists suggests equivalence that the evidence does not establish.
+
+The implemented simplification removes consumer-propagation analysis and display
+without weakening direct breaking-change detection:
+
+| Remove or simplify                  | Implemented change                                                                                                                                                                                            |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SDK type-to-method reference graph  | Remove graph construction, reverse traversal, shortest-method paths, reference edges, path locations, and consumer-method facts used only for propagation.                                                    |
+| SDK propagation root causes         | Stop creating type-contract/enum-union propagation roots. Group accepted method findings by method identity and accepted type findings by type identity directly.                                             |
+| SDK affected-method aggregation     | Remove `affectedMethods`, `affectedMethodCount`, aggregate locations, reference fact IDs, and unresolved consumer-relationship reasons from newly assembled type impacts.                                     |
+| SDK report enrichment               | Remove type-to-method path reconstruction, indirect method cards created only from type consumption, affected-method lists, and the historical sidecar path used only to replay these associations.           |
+| REST affected-operation aggregation | Stop collecting and rendering operation inventories beneath model/type cards. Keep operation IDs on operation-scoped REST evidence while they are required for compatibility direction and Semantic matching. |
+| Agent input                         | Do not retain unchanged public methods, intermediate types, propagation roots, or reference edges solely to explain which consumers expose a changed type.                                                    |
+| Validation and schemas              | Remove consumer-count/path consistency checks from the new output contract. Continue accepting historical fields during compatibility migration rather than reinterpreting or rejecting old reports.          |
+
+This simplification deliberately preserves the following analysis:
+
+- `compareMethods` and method-delta analysis for direct SDK method changes;
+- model, enum, and union comparison for direct SDK type changes;
+- TCGC public reachability and usage needed to determine whether a type belongs
+  to the public SDK contract;
+- AutoRest request/response direction, visibility, schema traversal, and
+  reference resolution needed to judge REST compatibility;
+- finding-to-TypeSpec declaration/source association and complete owning-model
+  diffs; and
+- finding-to-Semantic-intent relationships.
+
+Public reachability and consumer propagation are distinct. The assessment must
+still answer whether a changed SDK type is public and compatibility-relevant.
+It does not need to answer which public methods expose that type or through
+which nested property path.
+
+REST requires a narrower first step than SDK. REST model changes are currently
+discovered while comparing baseline and target operation request/response
+schemas. Removing the displayed operation inventory does not justify removing
+that traversal or its operation IDs: request versus response direction changes
+the compatibility judgment, and operation identity currently supports
+Semantic-intent matching. A future independent named-model comparison would be
+a separate analyzer redesign with explicit identity, visibility, direction,
+versioning, and deduplication rules.
+
+The intended report after this simplification is:
+
+- operation cards for direct REST operation changes;
+- REST model/type cards for wire model changes, without an affected-operation
+  list;
+- method cards for direct SDK method changes; and
+- SDK model/type cards for public type changes, without affected-method lists
+  or duplicate indirect method cards.
+
+Performance improvement is expected primarily from reducing bounded Agent
+input, not from HTML changes or deterministic execution. In the isolated PR
+46679 measurement, downstream deterministic analysis took about 1.163 seconds,
+so removing graph traversal alone cannot materially reduce the 117-second
+preparation phase. However, the existing consumer graph contributed 32
+graph-only facts, 96 reference edges, approximately 48 KB of compact facts,
+and approximately 19 KB of root-cause data to the bounded input: roughly 16%
+of that compact model input. This is potential removable payload, not a
+guaranteed 16% reasoning-time reduction. Some evidence may remain necessary
+for direct candidates or inference, and model latency is not linear in input
+bytes.
+
+Post-implementation validation records a same-PR before/after comparison that measures:
+
+1. preparation and downstream-analysis duration;
+2. physical and compact bounded-input size;
+3. retained fact, root, and reference-edge counts;
+4. Agent reasoning duration across repeated runs;
+5. findings, severity, coverage, and source-association equivalence; and
+6. removal of consumer-only cards and lists without loss of direct
+   operation/method or model/type findings.
+
+Do not claim a performance improvement unless repeated equivalent assessments
+show it. Agent nondeterminism must be reported separately from deterministic
+payload and execution changes.
+
 ## 5. Data ownership and presentation boundary
 
 Keep the current serialized assessment and evidence contracts unless an
@@ -352,13 +451,14 @@ proven. A REST operation ID is not a TypeSpec declaration name; display-name
 equality, a shared file, or a shared Semantic intent alone does not prove a
 source association.
 
-For model/type cards, show the complete owning model declaration for both
-baseline and target whenever canonical declaration snippets are available.
-This includes model-level decorators, all members, and member decorators, not
-only the changed property. The complete model is the most directly associated
-and sufficiently coherent context for a model contract change. Keep the exact
-changed-line diff available as a secondary collapsed view. Do not expand to
-other models merely because they share the same Git hunk or source file.
+For model/type cards, show one unified diff of the complete owning model
+declaration whenever canonical baseline and target declaration snippets are
+available. Include model-level decorators, all members, and member decorators,
+not only the changed property. Unchanged lines provide coherent model context;
+removed and added lines identify the exact contract delta. Do not render
+separate baseline and target blocks or a secondary changed-line diff, and do
+not expand to other models merely because they share the same Git hunk or
+source file.
 
 For operation/method cards, select the complete affected operation signature,
 relevant decorators, and supporting model/helper declarations needed to
@@ -639,6 +739,49 @@ Use existing focused tests and type checks for the changed modules. Replay
 retained current and historical assessment artifacts. Inspect the rendered cards
 for property-only, direct method, removal, empty, and blocked cases.
 
+After implementing the consumer-propagation simplification, rerun all four
+named validation PRs from fresh output directories:
+
+- [PR 46679](https://github.com/Azure/azure-rest-api-specs/pull/46679);
+- [PR 44988](https://github.com/Azure/azure-rest-api-specs/pull/44988);
+- [PR 44288](https://github.com/Azure/azure-rest-api-specs/pull/44288); and
+- [PR 43918](https://github.com/Azure/azure-rest-api-specs/pull/43918).
+
+Complete preparation, deterministic analysis, fresh Agent judgment,
+materialization, guarded finalization, report serving, and browser inspection
+for every PR. Generate and retain a new `assessment.json` and
+`assessment.html` for each run. Previous source-layer reports, HTML-only
+rerenders, reused decisions, and frozen compiler evidence do not satisfy this
+post-simplification validation.
+
+Record performance for every PR with the same timing boundaries and include:
+
+- preparation, deterministic REST analysis, and deterministic downstream
+  analysis;
+- bounded-input physical bytes, compact bytes, retained fact count,
+  propagation-root count, and reference-edge count;
+- dispatch-to-first-action and fresh Agent reasoning/decision time where
+  measurable;
+- materialization, correction, and finalization attempts and durations;
+- successful-attempt and cumulative end-to-end wall time, including failed
+  attempts and retries; and
+- report-serving/readiness time separately from assessment completion.
+
+Compare these results descriptively with the most methodologically compatible
+pre-simplification measurements. Report payload reduction and runtime changes
+separately. Do not attribute Agent timing differences solely to the graph
+removal when findings, decisions, retries, or model behavior differ. There is
+no performance threshold for any of the four PRs.
+
+For content validation, confirm that direct REST operation changes, direct SDK
+method changes, REST model/type changes, SDK model/type changes, compatibility
+coverage, blockers, and complete TypeSpec model diffs remain correct. Confirm
+that consumer-only affected-operation/method lists, indirect SDK method cards,
+propagation roots, and reference-path evidence are absent from newly generated
+output. Any finding-count or verdict difference must be explained from
+evidence or Agent judgment rather than accepted as an assumed consequence of
+the simplification.
+
 User-directed required validation: after design approval and implementation,
 run fresh, complete assessments of both
 [PR 46679](https://github.com/Azure/azure-rest-api-specs/pull/46679) and
@@ -676,8 +819,9 @@ For each of the two reference PRs:
 5. Give the user a separately labeled clickable report URL and absolute
    `assessment.json` path for each PR, together with the validation outcome.
 
-For PR 46679, inspect the RoleAssignment model/type card: show only its relevant
-property changes and decorators, not all hunks from the enclosing intent.
+For PR 46679, inspect the RoleAssignment model/type card: show one complete
+owning-model diff with unchanged context plus the relevant property and
+decorator changes, not all hunks from the enclosing intent.
 For PR 44988, inspect the Service Gateway direct method-change cards and their
 relevant TypeSpec source. Check changed-only Before/After values, source
 disclosures, and preserved finding/intent links against the approved design.

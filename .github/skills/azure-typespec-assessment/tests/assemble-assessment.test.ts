@@ -1749,7 +1749,7 @@ void test("assembles changed-only parameters and suppresses URI-template-only LR
   assert.deepEqual(validateAssessment(assessment), []);
 });
 
-void test("assembles SDK type impacts from deterministic method paths", () => {
+void test("assembles SDK type impacts without consumer method paths", () => {
   const work = fixture();
   const before = {
     id: "sdk-type-before",
@@ -1857,12 +1857,10 @@ void test("assembles SDK type impacts from deterministic method paths", () => {
   const impact = typeImpacts[0];
   assert.ok(impact);
   assert.equal(impact.type, "Contoso.Widget");
-  assert.deepEqual(impact.locations, ["response-body"]);
-  assert.ok(impact.affectedMethods);
-  assert.deepEqual(
-    impact.affectedMethods.map((item) => item.symbol),
-    ["Contoso.Widgets.get"],
-  );
+  assert.equal(impact.locations, undefined);
+  assert.equal(impact.affectedMethods, undefined);
+  assert.equal(impact.affectedMethodCount, undefined);
+  assert.equal(impact.rootCauseIds, undefined);
   const relatedFindings = assessment.dimensions.semantic.items[0].relatedFindings;
   assert.ok(relatedFindings);
   assert.deepEqual(relatedFindings.typeImpact, [impact.id]);

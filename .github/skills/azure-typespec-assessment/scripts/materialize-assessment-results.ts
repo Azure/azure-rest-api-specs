@@ -401,7 +401,7 @@ function materializeInference(
         ],
         `Inferred candidate ${candidate.id ?? "<unknown>"}`,
       );
-      for (const field of ["id", "rule", "actual", "expected"]) {
+      for (const field of ["id", "rule", "actual", "expected"] as const) {
         requireText(candidate[field], `Inferred candidate ${candidate.id ?? "<unknown>"}.${field}`);
       }
       if (!request.allowedDimensions.includes(candidate.dimension)) {
@@ -996,6 +996,7 @@ function materializeJudgment(
     validateCandidateDecision(item, `Downstream decision ${item.candidateId}`),
   );
   const withSourceReview = (decision: CompactCandidateDecision) => {
+    if (decisions.schemaVersion === 2) return { ...decision };
     const sourceReview = sourceReviews.get(decision.candidateId);
     if (!sourceReview) {
       throw new Error(`Missing source review for ${decision.candidateId}.`);
@@ -1120,6 +1121,7 @@ function materializeJudgment(
   });
   return {
     schemaVersion: 1,
+    ...(decisions.schemaVersion === 2 ? { pipelineVersion: 2 as const } : {}),
     semanticIntents: decisions.semanticSummaries,
     restDecisions: decisions.restDecisions.map(withSourceReview),
     downstreamDecisions: decisions.downstreamDecisions.map(withSourceReview),
@@ -1151,14 +1153,16 @@ export function validateCompactDecisions(
     ],
     "Agent decisions",
   );
-  if (decisions.schemaVersion !== 1) {
+  if (decisions.schemaVersion !== 1 && decisions.schemaVersion !== 2) {
     throw new Error("Unsupported Agent decisions schemaVersion.");
+  }
+  if (decisions.schemaVersion === 2 && decisions.sourceReviews !== undefined) {
+    throw new Error("Judgment-only decisions must not contain sourceReviews.");
   }
   for (const field of [
     "semanticSummaries",
     "restDecisions",
     "downstreamDecisions",
-    "sourceReviews",
     "catalogScores",
     "fetchedDocuments",
     "failedRetrievals",
@@ -1172,7 +1176,9 @@ export function validateCompactDecisions(
   if (decisions.inferenceResults !== undefined) {
     requireArray(decisions.inferenceResults, "Agent decisions.inferenceResults");
   }
-  requireArray(decisions.sourceReviews, "Agent decisions.sourceReviews");
+  if (decisions.schemaVersion === 1) {
+    requireArray(decisions.sourceReviews, "Agent decisions.sourceReviews");
+  }
   if (!isSeverity(decisions.overallConfidence)) {
     throw new Error("Agent decisions.overallConfidence is invalid.");
   }
@@ -1222,7 +1228,7 @@ function validateIndexCoverage(index: AgentIndex, modelInput: AssessmentModelInp
     "Agent index downstream candidate",
   );
   exactCoverage(
-    modelInput.sourceReviewRequests.map((item) => item.candidateId),
+    (modelInput.sourceReviewRequests ?? []).map((item) => item.candidateId),
     coverage.sourceReviewCandidateIds ?? [],
     "Agent index source review request",
   );
@@ -1360,6 +1366,9 @@ export function materializeAssessmentResults({
     const materializationInputs = hashArtifacts(root, [INDEX_FILE, decisionsPath]);
     const agentDecisions = readJsonObject(resolveWorkPath(root, decisionsPath));
     validateCompactDecisions(agentDecisions);
+    if ((agentDecisions.schemaVersion === 2) !== (modelInput.pipelineVersion === 2)) {
+      throw new Error("Agent decisions pipeline does not match the canonical model input.");
+    }
     const requests = canonicalRequests(modelInput, artifacts);
     const catalog = readComplianceCatalog();
     const sourceArtifact = modelInput.artifactReferences?.sourceIndex ?? "source/source-index.json";
@@ -1372,13 +1381,16 @@ export function materializeAssessmentResults({
       sourceChanges,
     );
     const { inference, candidates } = materializeInference(agentDecisions, modelInput);
-    const sourceReviews = materializeSourceReviews(
-      agentDecisions.sourceReviews,
-      [...agentDecisions.restDecisions, ...agentDecisions.downstreamDecisions],
-      modelInput,
-      candidates,
-      sourceChanges,
-    );
+    const sourceReviews =
+      agentDecisions.schemaVersion === 2
+        ? new Map<string, SourceReviewDecision>()
+        : materializeSourceReviews(
+            agentDecisions.sourceReviews ?? [],
+            [...agentDecisions.restDecisions, ...agentDecisions.downstreamDecisions],
+            modelInput,
+            candidates,
+            sourceChanges,
+          );
     const { evidence, catalogById, fetchedById } = materializeSearch(
       agentDecisions,
       requests,
@@ -1427,31 +1439,43 @@ export function materializeAssessmentResults({
         : total + fs.statSync(resolveWorkPath(root, relativePath)).size;
     }, 0);
     const materializationMs = Math.round(performance.now() - started);
-    transitionWorkflowState(root, "awaiting-finalization", {
-      runtimePhases: {
-        preparation,
-        materialization: createRuntimePhaseProvenance(
-          root,
-          runtime,
-          [INDEX_FILE, decisionsPath],
-          outputArtifacts.filter(([, value]) => value !== undefined).map(([file]) => file),
-        ),
+    transitionWorkflowState(
+      root,
+      modelInput.pipelineVersion === 2 ? "judgment-materialized" : "awaiting-finalization",
+      {
+        runtimePhases: {
+          preparation,
+          materialization: createRuntimePhaseProvenance(
+            root, runtime, [INDEX_FILE, decisionsPath],
+            outputArtifacts.filter(([, value]) => value !== undefined).map(([file]) => file),
+          ),
+        },
+        ...(modelInput.pipelineVersion === 2
+          ? {
+              judgmentArtifactHashes: hashArtifacts(
+                root,
+                outputArtifacts
+                  .filter(([, value]) => value !== undefined)
+                  .map(([relativePath]) => relativePath),
+              ),
+            }
+          : {}),
+        artifacts: {
+          ...(workflowState?.artifacts ?? {}),
+          inference: inference ? "inference.json" : null,
+          guidelineEvidence: "compliance-search-evidence.json",
+          judgment: "assessment-judgment.json",
+          agentDecisions: decisionsPath,
+        },
+        failure: undefined,
+        telemetry: {
+          materializedAt: new Date().toISOString(),
+          materializationMs,
+          materializedOutputBytes: outputBytes,
+          agentDecisionBytes: fs.statSync(resolveWorkPath(root, decisionsPath)).size,
+        },
       },
-      artifacts: {
-        ...(workflowState?.artifacts ?? {}),
-        inference: inference ? "inference.json" : null,
-        guidelineEvidence: "compliance-search-evidence.json",
-        judgment: "assessment-judgment.json",
-        agentDecisions: decisionsPath,
-      },
-      failure: undefined,
-      telemetry: {
-        materializedAt: new Date().toISOString(),
-        materializationMs,
-        materializedOutputBytes: outputBytes,
-        agentDecisionBytes: fs.statSync(resolveWorkPath(root, decisionsPath)).size,
-      },
-    });
+    );
     return {
       inferencePath: inference ? resolveWorkPath(root, "inference.json") : null,
       guidelineEvidencePath: resolveWorkPath(root, "compliance-search-evidence.json"),

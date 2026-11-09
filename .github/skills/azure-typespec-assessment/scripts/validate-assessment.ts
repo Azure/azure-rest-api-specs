@@ -858,8 +858,9 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
       }
     }
     if (
+      impact.affectedMethodCount !== undefined &&
       impact.affectedMethodCount !==
-      new Set((impact.affectedMethods ?? []).map((item) => item.symbol)).size
+        new Set((impact.affectedMethods ?? []).map((item) => item.symbol)).size
     ) {
       errors.push(`SDK type impact ${impact.id} has inconsistent method count.`);
     }

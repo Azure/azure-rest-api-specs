@@ -53,6 +53,12 @@ rejected.
 
 ## Compact Agent decisions
 
+New runs use `model-input.json.pipelineVersion: 2`, schema-version-2 judgment
+decisions without source reviews, and a separate post-judgment
+[source-association artifact](workflow/source-association.md). Historical
+single-phase decision artifacts remain readable. Final source selections are
+joined only after both stages validate their frozen hashes.
+
 Write `agent-workspace\agent-decisions.json` conforming to
 `scripts\agent-decisions.schema.json`. It contains only Agent-authored
 summaries, REST/downstream choices, optional inference, four score signals and
@@ -188,13 +194,14 @@ Every confirmed REST finding must contain actual and expected behavior, rational
 Downstream SDK method and SDK type cards must not repeat `Changed TypeSpec`
 source links. Keep that evidence in `assessment.json`, Semantic intents, and
 the appendix; retain only related Semantic intent links in the cards.
-Method cards use direct, mixed, or indirect cause labels. Red impact links
+Method cards represent direct method changes only. Red impact links
 are reserved for confirmed REST/downstream impacts and failed documentation
 findings; guideline links are separate.
 Downstream data and cards must not contain affected REST operations, HTTP
 routes, REST-derived counts, or REST/downstream suppression records. Direct
 method findings are assembled into `methodGroups`; type findings are assembled
-into `typeImpacts` with deterministic TCGC `affectedMethods`.
+directly into `typeImpacts` without consumer-method inventories or reference
+paths.
 
 HTML finding cards must not display `high`, `medium`, or `low` severity labels
 or severity-colored borders. Severity remains available in `assessment.json`

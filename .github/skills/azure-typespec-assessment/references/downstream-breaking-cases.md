@@ -1,35 +1,31 @@
 # Downstream SDK Breaking Cases
 
-Review candidate evidence first; explain confirmed impacts using the
-method-first report layout. A candidate, a finding, a changed type, and an
-affected method are different units.
+Review candidate evidence first. Direct method changes and changed SDK types
+are separate report units; do not infer or enumerate consumer methods for a
+type-only change.
 
 ## 1. Read the bounded input
 
 1. Read `context.projects[].artifactComparison` for the baseline/target API
    versions and source revisions. Do not assume array order identifies sides.
 2. For each `downstreamCandidates` entry, retain its `id`, `rule`,
-   `crossLanguageDefinitionId`, `evidenceFactIds`, and `rootCauseIds`.
+   `crossLanguageDefinitionId`, and `evidenceFactIds`.
    `reviewRequired`, `defaultSeverity`, and generated `actual`/`expected` text
    describe a potential change, not a confirmed incompatibility.
 3. Read the referenced `facts` by `comparisonRole` and `factKind`. When compact
    facts omit necessary details, resolve `evidenceSetId` through `evidenceSets`
    and the declared `artifactReferences` to the canonical candidate, facts,
    declarations, and source hunks. Older inputs may embed source evidence.
-4. Read linked `downstreamRootCauses` for method/type facts and reference edges.
-   Root labels are not verdicts: `method-return-propagation` also groups
-   parameter, client, and customization candidates.
-
-Use normalized TCGC evidence and changed customization decorators, independently
-of REST compatibility. Never infer SDK behavior from REST findings or prior
-reports. Use cross-language IDs, scoped by project, with guarded fallback
-identities only when needed.
+   Use normalized TCGC evidence and changed customization decorators, independently
+   of REST compatibility. Never infer SDK behavior from REST findings or prior
+   reports. Use cross-language IDs, scoped by project, with guarded fallback
+   identities only when needed.
 
 ## 2. Judge each candidate
 
 Apply the [candidate rules](downstream-candidate-rules.md), including
-compatibility exceptions. Require an existing public or public-method-reachable
-contract and a source-linked cause; project-wide source membership alone does
+compatibility exceptions. Require an existing public SDK contract and a
+source-linked cause; project-wide source membership alone does
 not establish causality.
 
 Return exactly one `downstreamDecisions` entry per supplied candidate, including

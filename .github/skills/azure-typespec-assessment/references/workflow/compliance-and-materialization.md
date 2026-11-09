@@ -24,8 +24,9 @@ intent-owned compliance judgment that cites the catalog ID and section.
 `compliance-assessment.ts` later consumes and validates evidence.
 
 The same compact file contains the Semantic review, REST/downstream coverage,
-inference results when requested, exactly one source review per candidate
-decision, and one Azure Guidelines decision per compliance search request.
+inference results when requested and one Azure Guidelines decision per compliance
+search request. New pipeline-version-2 decisions use schemaVersion 2 and omit
+source reviews; legacy schemaVersion 1 retains one source review per candidate.
 Documentation decisions are deterministic and excluded from Agent authorship.
 
 Run the indexed deterministic materializer:
@@ -45,5 +46,6 @@ excerpts; and atomically writes `inference.json` when required,
 `assessment-judgment.json`. It preserves supplied `web_fetch` provenance and
 never retrieves network content or authors judgment.
 
-After successful materialization, proceed directly to
-[guarded finalization](finalization.md).
+After successful materialization, pipeline-version-2 runs proceed to
+[source association](source-association.md), then guarded finalization.
+Historical single-phase runs proceed directly to [finalization](finalization.md).

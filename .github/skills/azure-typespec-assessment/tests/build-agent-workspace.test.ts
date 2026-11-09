@@ -227,7 +227,6 @@ function fixture() {
         evidenceSetId: "evidence-downstream",
       },
     ],
-    downstreamRootCauses: [],
     sourceReviewDeclarations: [],
     sourceReviewRequests: [
       {

@@ -909,7 +909,8 @@ export function dedupeSemanticHunks(
   const unitsByHunk = new Map<string, { hunkId: string; units: InternalSemanticUnit[] }>();
   for (const unit of reviewUnits) {
     for (const hunkId of unit.hunkIds) {
-      const key = projectHunkKey(unit, hunkId);
+      // Canonical hunk IDs identify physical source globally, including shared projects.
+      const key = hunkId;
       const entry = unitsByHunk.get(key) ?? { hunkId, units: [] };
       entry.units.push(unit);
       unitsByHunk.set(key, entry);
@@ -943,9 +944,7 @@ export function dedupeSemanticHunks(
   }
 
   return reviewUnits.flatMap((unit) => {
-    const hunkIds = unit.hunkIds.filter(
-      (hunkId) => ownerByHunk.get(projectHunkKey(unit, hunkId)) === unit.id,
-    );
+    const hunkIds = unit.hunkIds.filter((hunkId) => ownerByHunk.get(hunkId) === unit.id);
     const transferredProjects = projectTransfers.get(unit.id) ?? [];
     const transferredOperations = operationTransfers.get(unit.id) ?? [];
     if (
@@ -1015,6 +1014,14 @@ export function dedupeSemanticHunks(
       ) as import("./runtime-types.ts").SemanticChangeType[],
       operations,
       operationIds: unique(operations.map((operation) => operation.operationId)),
+      beforeFactIds: unique([
+        ...(unit.beforeFactIds ?? []),
+        ...operations.map((operation) => operation.beforeFactId),
+      ]),
+      afterFactIds: unique([
+        ...(unit.afterFactIds ?? []),
+        ...operations.map((operation) => operation.afterFactId),
+      ]),
       ownedOperationIds: unique([
         ...unit.ownedOperationIds,
         ...transferredOperations.map((operation) => operation.operationId),

@@ -124,7 +124,7 @@ function decisionsDraft(modelInput: AssessmentModelInput, declarationNames: Map<
     rationale: "",
   });
   return {
-    schemaVersion: 1,
+    schemaVersion: modelInput.pipelineVersion === 2 ? 2 : 1,
     semanticSummaries: modelInput.semanticReviewUnits.map((unit) => ({
       reviewUnitId: unit.reviewUnitId,
       title: "",
@@ -132,12 +132,16 @@ function decisionsDraft(modelInput: AssessmentModelInput, declarationNames: Map<
     })),
     restDecisions: modelInput.restCandidates.map(decision),
     downstreamDecisions: modelInput.downstreamCandidates.map(decision),
-    sourceReviews: (modelInput.sourceReviewRequests ?? []).map((request) => ({
-      candidateId: request.candidateId,
-      outcome: "__UNRESOLVED__",
-      selectedDeclarationIds: request.deterministicDeclarationIds,
-      rationale: "",
-    })),
+    ...(modelInput.pipelineVersion === 2
+      ? {}
+      : {
+          sourceReviews: (modelInput.sourceReviewRequests ?? []).map((request) => ({
+            candidateId: request.candidateId,
+            outcome: "__UNRESOLVED__",
+            selectedDeclarationIds: request.deterministicDeclarationIds,
+            rationale: "",
+          })),
+        }),
     ...(modelInput.inferenceRequests.length
       ? {
           inferenceResults: modelInput.inferenceRequests.map((request) => ({
@@ -213,6 +217,7 @@ export function buildAgentWorkspace({ work }: { work: string }) {
     schemaVersion: 1,
     preparationId: randomUUID(),
     runtime,
+    ...(modelInput.pipelineVersion === 2 ? { pipelineVersion: 2 } : {}),
     comparisonIdentity: comparisonIdentity(modelInput),
     input: {
       path: "model-input.json",
@@ -295,10 +300,16 @@ export function buildAgentWorkspace({ work }: { work: string }) {
       "Read model-input.json exactly once.",
       ...(modelInput.inferenceRequests.length
         ? [
-            "Resolve every inference request in the compact Agent decisions. Add one sourceReviews entry for every inferred candidate.",
+            "Resolve every inference request in the compact Agent decisions and judge any inferred candidates.",
           ]
         : []),
-      "Review deterministic TypeSpec source proposals for every candidate. Use keep/refine/associate/unresolved for approved findings and not-applicable for rejected candidates; select only declaration IDs supplied by the bounded source-review request or inference source evidence.",
+      ...(modelInput.pipelineVersion === 2
+        ? [
+            "Do not complete display source in this judgment phase. After materialization freezes judgment, run source-association.ts --work <work-directory> and process its source-only index in a separate AI context.",
+          ]
+        : [
+            "Review deterministic TypeSpec source proposals for every candidate, including inferred candidates; select only canonical declaration IDs.",
+          ]),
       ...(modelInput.complianceSearchRequests.length
         ? [
             "Score the full catalog, fetch the first four retrievable documents with fallback, and complete the compact Agent decisions; use only prefilled intent-scoped declarationNames in complianceJudgments.",

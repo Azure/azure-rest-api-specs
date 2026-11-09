@@ -636,30 +636,9 @@ void test("model input requests inference only for unknown hunks", () => {
     hunkId: "hunk-1",
   });
   assert.deepEqual(input.inferenceRequests[0].allowedDimensions, ["rest", "downstream"]);
-  assert.deepEqual(input.sourceReviewRequests, [
-    {
-      candidateId: "rest-1",
-      dimension: "rest",
-      evidenceSetId: input.restCandidates[0].evidenceSetId!,
-      deterministicStatus: "unresolved",
-      deterministicDeclarationIds: [],
-      availableDeclarationIds: ["declaration-1"],
-      sourceChangeIds: ["source-1"],
-      hunkIds: [],
-    },
-  ]);
-  assert.deepEqual(input.sourceReviewDeclarations, [
-    {
-      declarationId: "declaration-1",
-      sourceChangeId: "source-1",
-      qualifiedName: "Widget",
-      kind: "model",
-      revision: "current",
-      startLine: 1,
-      endLine: 1,
-      hunkIds: ["hunk-1"],
-    },
-  ]);
+  assert.equal(input.pipelineVersion, 2);
+  assert.equal("sourceReviewRequests" in input, false);
+  assert.equal("sourceReviewDeclarations" in input, false);
 });
 
 void test("model input bounds repeated review evidence and retains downstream facts", () => {
@@ -754,7 +733,7 @@ void test("model input bounds repeated review evidence and retains downstream fa
   );
 });
 
-void test("model input retains downstream method and bridge path facts", () => {
+void test("model input omits downstream consumer path facts", () => {
   const facts = Object.fromEntries(
     ["method", "wrapper", "type"].map((name) => [
       `sdk-${name}`,
@@ -828,14 +807,8 @@ void test("model input retains downstream method and bridge path facts", () => {
     },
   });
 
-  assert.deepEqual(Object.keys(input.facts), ["sdk-method", "sdk-type", "sdk-wrapper"]);
-  assert.ok(
-    input.downstreamRootCauses[0].referenceEvidence.every((edge) => {
-      assert.ok(edge.fromFactId);
-      assert.ok(edge.toFactId);
-      return Boolean(input.facts[edge.fromFactId] && input.facts[edge.toFactId]);
-    }),
-  );
+  assert.deepEqual(Object.keys(input.facts), ["sdk-type"]);
+  assert.equal("downstreamRootCauses" in input, false);
 });
 
 void test("model input retains downstream identity blocker facts", () => {

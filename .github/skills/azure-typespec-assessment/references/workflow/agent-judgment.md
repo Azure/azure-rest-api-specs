@@ -8,6 +8,11 @@ the single bounded model input, required outputs, drafts, exact coverage IDs,
 and completion checklist. Read `model-input.json` exactly once unless guarded
 finalization requests the one permitted correction turn.
 
+If the host transports the result through a saved output buffer, continue
+reading that exact tool-reported buffer in ranges. It is the same bounded input
+read, even when the buffer is outside the repository. Do not list temporary
+directories, read unrelated buffers, or reread the canonical input.
+
 `api-version-publication` and `api-version-wide-change` are excluded from Agent
 coverage. Guarded finalization restores them as deterministic informational
 Semantic intents with canonical affected operations and no finding
@@ -54,7 +59,13 @@ answers, or use catalog descriptions as guidance. Candidate and review-unit
 evidence omitted from the bounded input is available only through declared
 canonical artifact references; do not scan unrelated artifact entries.
 
-Write exactly one `sourceReviews` entry for every deterministic or inferred
+For `pipelineVersion: 2`, use schema-version-2 Agent decisions without
+`sourceReviews`. This phase judges compatibility, not display-source completion.
+After materialization, follow [source association](source-association.md) in a
+separate AI context, covering accepted findings only.
+
+The following source-review instructions apply only to historical single-phase
+inputs. Write exactly one `sourceReviews` entry for every deterministic or inferred
 REST/downstream candidate decision. The goal is the complete minimal relevant
 TypeSpec code set: enough canonical declarations to understand the breaking
 change, without isolated contextless lines or unrelated surrounding changes.
@@ -78,7 +89,8 @@ Treat every supplied Semantic review-unit ID and boundary as authoritative.
 Never merge, split, reorder ownership, or move source hunks, declarations,
 change facts, or operations between units. Mixed version-publication and
 feature evidence has already been separated by the coordinator; ambiguous
-facts remain explicit rather than being assigned by similarity.
+facts remain explicit rather than being assigned by similarity. Coarse normal
+groups may retain mixed-source notices; do not regroup them in either AI phase.
 
 Documentation Completeness is assembled deterministically from
 `dimensions/document-quality-input.json`. The Agent neither reads that artifact

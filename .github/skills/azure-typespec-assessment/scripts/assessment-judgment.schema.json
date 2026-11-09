@@ -13,6 +13,7 @@
     "blockers"
   ],
   "properties": {
+    "pipelineVersion": { "const": 2 },
     "schemaVersion": {
       "const": 1
     },
@@ -21,11 +22,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "reviewUnitId",
-          "title",
-          "summary"
-        ],
+        "required": ["reviewUnitId", "title", "summary"],
         "properties": {
           "reviewUnitId": {
             "type": "string",
@@ -74,10 +71,7 @@
             "items": {
               "type": "object",
               "additionalProperties": false,
-              "required": [
-                "canonicalDocumentUrl",
-                "guidanceSection"
-              ],
+              "required": ["canonicalDocumentUrl", "guidanceSection"],
               "properties": {
                 "canonicalDocumentUrl": {
                   "type": "string",
@@ -117,23 +111,14 @@
             }
           },
           "decision": {
-            "enum": [
-              "applicable-pass",
-              "applicable-fail",
-              "no-applicable-guidance",
-              "not-assessed"
-            ]
+            "enum": ["applicable-pass", "applicable-fail", "no-applicable-guidance", "not-assessed"]
           },
           "title": {
             "type": "string",
             "minLength": 1
           },
           "severity": {
-            "enum": [
-              "high",
-              "medium",
-              "low"
-            ]
+            "enum": ["high", "medium", "low"]
           },
           "expected": {
             "type": "string",
@@ -153,17 +138,12 @@
             "if": {
               "properties": {
                 "decision": {
-                  "enum": [
-                    "applicable-pass",
-                    "applicable-fail"
-                  ]
+                  "enum": ["applicable-pass", "applicable-fail"]
                 }
               }
             },
             "then": {
-              "required": [
-                "expected"
-              ],
+              "required": ["expected"],
               "properties": {
                 "applicableGuidance": {
                   "minItems": 1
@@ -189,21 +169,14 @@
               }
             },
             "then": {
-              "required": [
-                "title",
-                "severity"
-              ]
+              "required": ["title", "severity"]
             }
           }
         ]
       }
     },
     "overallConfidence": {
-      "enum": [
-        "high",
-        "medium",
-        "low"
-      ]
+      "enum": ["high", "medium", "low"]
     },
     "blockers": {
       "type": "array",
@@ -218,28 +191,16 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "candidateId",
-          "decision",
-          "rationale",
-          "sourceReview"
-        ],
+        "required": ["candidateId", "decision", "rationale", "sourceReview"],
         "properties": {
           "candidateId": {
             "type": "string"
           },
           "decision": {
-            "enum": [
-              "approve",
-              "reject"
-            ]
+            "enum": ["approve", "reject"]
           },
           "severity": {
-            "enum": [
-              "high",
-              "medium",
-              "low"
-            ]
+            "enum": ["high", "medium", "low"]
           },
           "rationale": {
             "type": "string",
@@ -248,20 +209,10 @@
           "sourceReview": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "outcome",
-              "selectedDeclarations",
-              "rationale"
-            ],
+            "required": ["outcome", "selectedDeclarations", "rationale"],
             "properties": {
               "outcome": {
-                "enum": [
-                  "keep",
-                  "refine",
-                  "associate",
-                  "unresolved",
-                  "not-applicable"
-                ]
+                "enum": ["keep", "refine", "associate", "unresolved", "not-applicable"]
               },
               "selectedDeclarations": {
                 "type": "array",
@@ -296,10 +247,7 @@
                       "minLength": 1
                     },
                     "revision": {
-                      "enum": [
-                        "base",
-                        "current"
-                      ]
+                      "enum": ["base", "current"]
                     },
                     "startLine": {
                       "type": "integer",
@@ -337,9 +285,7 @@
               }
             },
             "then": {
-              "required": [
-                "severity"
-              ]
+              "required": ["severity"]
             }
           }
         ]

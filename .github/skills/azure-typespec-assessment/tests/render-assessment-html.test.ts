@@ -31,6 +31,70 @@ type AssessmentOutput = import("../scripts/runtime-types.ts").AssessmentOutput;
 
 type SourceChange = import("../scripts/runtime-types.ts").SourceChange;
 
+void test("complete selected operation source retains unchanged multiline template arguments", () => {
+  const source: SourceChange = {
+    id: "source-operation",
+    path: "ServiceGateway.tsp",
+    status: "modified",
+    origins: [],
+    hunks: [
+      {
+        id: "hunk-operation",
+        base: { startLine: 1, endLine: 1 },
+        current: { startLine: 1, endLine: 1 },
+        lines: ["+op update is ActionSync<"],
+      },
+    ],
+    declarations: [
+      {
+        id: "decl-operation",
+        kind: "operation",
+        qualifiedName: "ServiceGateways.update",
+        decorators: [],
+        versionedMembers: [],
+        hunkIds: ["hunk-operation"],
+        source: { revision: "current", startLine: 1, endLine: 5 },
+        sourceSnippet: {
+          startLine: 1,
+          endLine: 5,
+          truncated: false,
+          lines: [
+            "op update is ActionSync<",
+            "  ServiceGateway,",
+            "  UpdateRequest,",
+            "  UpdateResponse",
+            ">;",
+          ],
+        },
+      },
+    ],
+  };
+  const html = renderCompleteModelDeclarations([source], [], ["operation"]);
+  assert.include(html, "UpdateRequest,");
+  assert.include(html, "UpdateResponse");
+  assert.include(html, "ActionSync&lt;");
+  const operation = source.declarations[0];
+  operation.source = { revision: "current", startLine: 2, endLine: 6 };
+  operation.sourceSnippet = { ...operation.sourceSnippet!, startLine: 2, endLine: 6 };
+  source.declarations.push({
+    id: "decl-interface",
+    kind: "interface",
+    qualifiedName: "ServiceGateways",
+    decorators: [],
+    versionedMembers: [],
+    hunkIds: ["hunk-operation"],
+    source: { revision: "current", startLine: 1, endLine: 7 },
+    sourceSnippet: {
+      startLine: 1,
+      endLine: 7,
+      truncated: false,
+      lines: ["interface ServiceGateways {", ...operation.sourceSnippet.lines, "}"],
+    },
+  });
+  const nested = renderCompleteModelDeclarations([source], [], ["operation", "interface"]);
+  assert.equal((nested.match(/ActionSync&lt;/g) ?? []).length, 1);
+});
+
 type AssessmentTypeImpact = import("../scripts/runtime-types.ts").AssessmentTypeImpact;
 
 type DocumentQualityDimension = import("../scripts/runtime-types.ts").DocumentQualityDimension;
@@ -357,7 +421,7 @@ void test("prefers AI-reviewed display sources over broader canonical evidence",
   );
 });
 
-void test("renders complete baseline and target model declarations for model changes", () => {
+void test("renders one complete unified model diff for model changes", () => {
   const html = renderCompleteModelDeclarations(
     [
       {
@@ -423,9 +487,17 @@ void test("renders complete baseline and target model declarations for model cha
     ] as SourceChange[],
     ["Widget"],
   );
-  assert.include(html, "Baseline · Service.Widget");
-  assert.include(html, "Target · Service.Widget");
+  assert.equal((html.match(/model-declaration-diff/g) ?? []).length, 1);
+  assert.include(html, "main.tsp · Service.Widget");
+  assert.include(html, "model-diff-baseline");
+  assert.include(html, "model-diff-target");
+  assert.include(html, '<div class="model-diff-line add">');
+  assert.include(html, '<div class="model-diff-line remove">');
+  assert.include(html, "10");
+  assert.include(html, "20");
   assert.include(html, "@madeRequired(Versions.v2)");
+  assert.include(html, "name?: string;");
+  assert.include(html, "name: string;");
   assert.notInclude(html, "Service.Unrelated");
 });
 
@@ -700,7 +772,7 @@ void test("renders SDK contract changes without REST operation association", () 
     provenance: {},
   });
 
-  assert.match(html, /<strong>CloudHsmClusters\.get<\/strong>/);
+  assert.notMatch(html, /<strong>CloudHsmClusters\.get<\/strong>/);
   assert.match(html, /\.contract-tag\{background:#dbeafe;color:#1e40af\}/);
   assert.notMatch(html, /SDK contract changes — 3 affected REST operations/);
   assert.notMatch(html, /Mapped SDK methods/);
@@ -716,8 +788,8 @@ void test("renders SDK contract changes without REST operation association", () 
     1,
   );
   assert.notMatch(downstream, /Affected REST operations/);
-  assert.match(downstream, /1 mapped methods/);
-  assert.match(downstream, /Microsoft\.HardwareSecurityModules\.CloudHsmClusters\.get/);
+  assert.notMatch(downstream, /mapped methods/);
+  assert.notMatch(downstream, /Microsoft\.HardwareSecurityModules\.CloudHsmClusters\.get/);
   assert.match(html, /Impacts \(1\)/);
   assert.match(
     html,
@@ -728,7 +800,7 @@ void test("renders SDK contract changes without REST operation association", () 
   assert.match(downstream, /Affected intents \(1\)/);
 });
 
-void test("groups REST contract deltas by schema identity and retains affected operations", () => {
+void test("groups REST property removals by declaring schema, retaining referenced value display", () => {
   const operation = (comparisonRole: string, operationId: string): AssessmentFact =>
     ({
       comparisonRole,
@@ -742,6 +814,7 @@ void test("groups REST contract deltas by schema identity and retains affected o
           headers: [],
           schema: {
             kind: "object",
+            reference: "stable/v1.json#/definitions/Widget",
             properties:
               comparisonRole === "baseline"
                 ? [
@@ -780,7 +853,7 @@ void test("groups REST contract deltas by schema identity and retains affected o
   const cards = fixtureRestContractCards(findings);
 
   assert.equal(cards.length, 1);
-  assert.equal(cards[0].identity, "WidgetState");
+  assert.equal(cards[0].identity, "Widget");
   assert.equal(cards[0].operations.length, 2);
   assert.equal(cards[0].findings[0].contractDelta.before, "WidgetState { Ready | Deleted }");
   assert.equal(cards[0].findings[0].contractDelta.after, "removed");
