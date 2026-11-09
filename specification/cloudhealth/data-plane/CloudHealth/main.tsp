@@ -522,12 +522,7 @@ interface Model {
   @doc("Return whether the health model exists and its current health state.")
   @route("/api")
   @get
-  status is RpcOperation<
-    {},
-    QueryEchoResult,
-    {},
-    EntityDiagnosticDefaultError
-  >;
+  status is RpcOperation<{}, QueryEchoResult, {}, EntityDiagnosticDefaultError>;
 }
 
 @route("/api/entities/{entityName}/transitions")
