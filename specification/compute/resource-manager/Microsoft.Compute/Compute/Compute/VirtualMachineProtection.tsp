@@ -48,16 +48,13 @@ interface VirtualMachineProtections {
   /**
    * [Preview Feature] Creates or updates the protection configuration of a virtual machine. Transitioning from None to AzureBackup is handled only internally by the Azure Backup service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "CRP returns 200 for synchronous updates and 202 for asynchronous updates to the always-addressable protection singleton."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "VirtualMachineProtection is a singleton that always exists on the virtual machine, so the service never returns 201. It returns 200 for both synchronous and asynchronous updates."
   @added(Versions.v2026_09_01)
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     VirtualMachineProtection,
-    Response =
-      | ArmResourceUpdatedResponse<VirtualMachineProtection>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualMachineProtection>> & {
-          @bodyRoot _: VirtualMachineProtection;
-        })
+    Response = ArmResourceUpdatedResponse<VirtualMachineProtection> &
+      ArmCombinedLroHeaders<FinalResult = VirtualMachineProtection>
   >;
 
   /**

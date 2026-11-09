@@ -693,7 +693,7 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}"].put
   - code: PutResponseCodes
-    reason: VirtualMachineProtection is a singleton that always exists on the virtual machine, so the service never returns 201. It returns 200 for synchronous updates and 202 for asynchronous updates, the same response shape as VirtualMachineScaleSetVMs_Update.
+    reason: VirtualMachineProtection is a singleton that always exists on the virtual machine, so the service never returns 201. It returns 200 for both synchronous and asynchronous updates.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection/default"].put
 
