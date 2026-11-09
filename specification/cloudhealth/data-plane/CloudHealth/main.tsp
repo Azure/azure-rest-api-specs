@@ -27,7 +27,7 @@ alias NoResourceLifecycleTraits = Azure.Core.Traits.NoConditionalRequests &
 
 alias EntityReadOperations = Azure.Core.ResourceOperations<
   NoResourceLifecycleTraits,
-  NotFoundError | BadRequestError | EntityDiagnosticDefaultError
+  EntityDiagnosticDefaultError
 >;
 
 @doc("Service API versions.")
@@ -282,31 +282,7 @@ model EntitySignalRoute {
 }
 
 @error
-@doc("Returned when the requested health model does not exist.")
-model ModelNotFoundError is Azure.Core.Foundations.ErrorResponse {
-  @doc("HTTP status code indicating that the requested health model was not found.")
-  @statusCode
-  statusCode: 404;
-}
-
-@error
-@doc("Returned when the requested resource does not exist.")
-model NotFoundError is Azure.Core.Foundations.ErrorResponse {
-  @doc("HTTP status code indicating that the requested resource was not found.")
-  @statusCode
-  statusCode: 404;
-}
-
-@error
-@doc("Returned when the request is malformed, or a query parameter is invalid.")
-model BadRequestError is Azure.Core.Foundations.ErrorResponse {
-  @doc("HTTP status code indicating that the request was invalid.")
-  @statusCode
-  statusCode: 400;
-}
-
-@error
-@doc("Returned when entity diagnostics fail for reasons outside the explicit user-fault contract.")
+@doc("Returned when a data-plane request fails.")
 model EntityDiagnosticDefaultError is Azure.Core.Foundations.ErrorResponse {
   @doc("Retry guidance supplied by the service as an HTTP date or delay in seconds.")
   @header("Retry-After")
@@ -550,7 +526,7 @@ interface Model {
     {},
     QueryEchoResult,
     {},
-    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
+    EntityDiagnosticDefaultError
   >;
 }
 
@@ -583,7 +559,7 @@ interface EntityTransitionHistory {
     },
     EntityTransitionHistoryPage,
     {},
-    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
+    EntityDiagnosticDefaultError
   >;
 }
 
@@ -621,7 +597,7 @@ interface EntityHealthStateHistory {
     },
     EntityHealthStateHistoryPage,
     {},
-    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
+    EntityDiagnosticDefaultError
   >;
 }
 
@@ -654,7 +630,7 @@ interface SignalHistory {
     },
     SignalDataPointHistoryPage,
     {},
-    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
+    EntityDiagnosticDefaultError
   >;
 }
 
@@ -687,7 +663,7 @@ interface DataAnnotations {
     },
     DataAnnotationsPage,
     {},
-    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
+    EntityDiagnosticDefaultError
   >;
 }
 
@@ -721,8 +697,6 @@ interface HealthReportIngestion {
         Azure.Core.Traits.TraitContext.Action
       >,
     Azure.Core.Traits.SupportsRepeatableRequests,
-    | BadRequestError
-    | ModelNotFoundError
     | PayloadTooLargeError
     | UnsupportedMediaTypeError
     | TooManyRequestsError
