@@ -1574,6 +1574,7 @@ model RecommendationUsageDetails {
   /**
    * On-demand charges for each hour between firstConsumptionDate and lastConsumptionDate that were used for computing benefit recommendations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Preserve the existing decimal wire format for compatibility; changing numeric precision requires service review."
   @visibility(Lifecycle.Read)
   charges?: decimal[];
 }
