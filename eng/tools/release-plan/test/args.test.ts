@@ -28,6 +28,15 @@ describe("parseCliArguments", () => {
 
     expect(result.releasePlanId).toBe("12345");
     expect(result.commitSha).toBeUndefined();
-    expect(result.prNumber).toBeUndefined();
+  });
+
+  it("rejects the removed testing-only --pr-number option", () => {
+    expect(() => parseCliArguments(["--pr-number", "123"])).toThrow(/Unknown option '--pr-number'/);
+  });
+
+  it("requires a commit SHA or release plan ID", () => {
+    expect(() => parseCliArguments([])).toThrow(
+      "One of --release-plan-id or --commit-sha is required.",
+    );
   });
 });

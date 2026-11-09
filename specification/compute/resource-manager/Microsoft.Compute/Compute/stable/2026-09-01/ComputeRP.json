@@ -11271,6 +11271,9 @@
           },
           "Get a virtual machine with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithVMSizeProperties.json"
+          },
+          "Get a virtual machine with a FlexProfile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithFlexProfile.json"
           }
         }
       },
@@ -11399,6 +11402,9 @@
           },
           "Create a VM with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizeProperties.json"
+          },
+          "Create a VM with a FlexProfile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -11610,6 +11616,9 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
+          },
+          "Update a VM's FlexProfile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithFlexProfile.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15173,7 +15182,7 @@
         },
         "sharingProfile": {
           "$ref": "#/definitions/ResourceSharingProfile",
-          "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
+          "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can be shared only across subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
         },
         "reservationType": {
           "$ref": "#/definitions/ReservationType",
@@ -16686,6 +16695,19 @@
           "description": "Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H)."
         }
       }
+    },
+    "FlexProfile": {
+      "type": "object",
+      "description": "Specifies the FlexProfile for a virtual machine. When set, Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and the deployed size is returned in hardwareProfile.vmSize. See the properties.flexProfile description for the full usage rules, including how it interacts with hardwareProfile.vmSize.",
+      "properties": {
+        "preferredVMSize": {
+          "type": "string",
+          "description": "Specifies the preferred VM size, for example Standard_D4s_v5. Azure may deploy a compatible alternative size based on capacity and placement considerations. Supported VM families for FlexProfile may vary by region. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)."
+        }
+      },
+      "required": [
+        "preferredVMSize"
+      ]
     },
     "HardwareProfile": {
       "type": "object",
@@ -18790,7 +18812,7 @@
       "properties": {
         "zonePlacementPolicy": {
           "$ref": "#/definitions/ZonePlacementPolicyType",
-          "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation."
+          "description": "Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation."
         },
         "includeZones": {
           "type": "array",
@@ -19720,7 +19742,7 @@
         },
         "statuses": {
           "type": "array",
-          "description": "The resource status information.",
+          "description": "The aggregate status information for the restore point. The list may include separate aggregate entries for replication and, in supported API versions, Instant Access, as applicable. For more information about Instant Access, see [Use virtual machine restore points](https://learn.microsoft.com/azure/virtual-machines/virtual-machines-create-restore-points#instant-access).",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
@@ -21029,10 +21051,6 @@
           "$ref": "#/definitions/DiskControllerTypes",
           "description": "Specifies the disk controller type configured for the VM. **Note:** This property will be set to the default disk controller type if not specified provided virtual machine is being created with 'hyperVGeneration' set to V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. Minimum api-version: 2022-08-01."
         },
-        "alignRegionalDisksToVMZone": {
-          "type": "boolean",
-          "description": "Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01."
-        },
         "diskApiVersion": {
           "$ref": "#/definitions/DiskApiVersion",
           "description": "Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., \"2026-03-02\")."
@@ -21081,11 +21099,11 @@
       "properties": {
         "secureBootEnabled": {
           "type": "boolean",
-          "description": "Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01."
+          "description": "Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless vTpmEnabled is explicitly set to false."
         },
         "vTpmEnabled": {
           "type": "boolean",
-          "description": "Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01."
+          "description": "Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless secureBootEnabled is explicitly set to false."
         }
       }
     },
@@ -23237,6 +23255,10 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "flexProfile": {
+          "$ref": "#/definitions/FlexProfile",
+          "description": "[Preview Feature] Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and returns the deployed size in hardwareProfile.vmSize. A request that adds flexProfile must omit hardwareProfile.vmSize. For a virtual machine that uses FlexProfile, a hardwareProfile.vmSize equal to the deployed size is ignored, so a GET response can be sent back unchanged. A PATCH request that omits flexProfile keeps it. A PUT request that omits flexProfile and sets hardwareProfile.vmSize clears it. This property cannot exist along with a non-null properties.availabilitySet, properties.capacityReservation, properties.host, properties.hostGroup, properties.proximityPlacementGroup or properties.virtualMachineScaleSet."
         },
         "scheduledEventsPolicy": {
           "$ref": "#/definitions/ScheduledEventsPolicy",
@@ -27268,19 +27290,14 @@
     },
     "ZonePlacementPolicyType": {
       "type": "string",
-      "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.",
+      "description": "Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.",
       "enum": [
-        "Any",
         "Auto"
       ],
       "x-ms-enum": {
         "name": "ZonePlacementPolicyType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Any",
-            "value": "Any"
-          },
           {
             "name": "Auto",
             "value": "Auto",

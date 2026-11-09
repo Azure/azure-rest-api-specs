@@ -1032,17 +1032,32 @@ union PatchOperationStatus {
 }
 
 /**
- * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+ * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
  */
-union ZonePlacementPolicyType {
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "ZonePlacementPolicyType")
+union ZonePlacementPolicyTypeLegacy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Any: "Any",
 
   /**
-   * Automatic zone placement in a Virtual Machine Scale Set.
+   * Automatic zone placement for Virtual Machines and Virtual Machine Scale Sets.
    */
   @added(Versions.v2025_04_01)
+  Auto: "Auto",
+}
+
+/**
+ * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+ */
+@added(Versions.v2026_09_01)
+union ZonePlacementPolicyType {
+  string,
+
+  /**
+   * Automatic zone placement in a Virtual Machine Scale Set.
+   */
   Auto: "Auto",
 }
 
@@ -1755,7 +1770,8 @@ model ListUsagesResult is Azure.Core.Page<Usage>;
 
 @@identifiers(ListUsagesResult.value, #[]);
 @@doc(ListUsagesResult.value, "The list of compute resource usages.");
-@@doc(ListUsagesResult.nextLink,
+@@doc(
+  ListUsagesResult.nextLink,
   "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
 );
 
@@ -1858,10 +1874,12 @@ model VirtualMachineSize {
 model VirtualMachineScaleSetListResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
 
-@@doc(VirtualMachineScaleSetListResult.value,
+@@doc(
+  VirtualMachineScaleSetListResult.value,
   "The list of virtual machine scale sets."
 );
-@@doc(VirtualMachineScaleSetListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
 );
 
@@ -3108,7 +3126,7 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   /**
    * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
    */
-  @added(Versions.v2026_09_01)
+  @added(Versions.v2026_04_01)
   @minValue(1)
   @maxValue(128)
   privateIPAddressPrefixLength?: int32;
@@ -3289,12 +3307,12 @@ model SecurityProfile {
  */
 model UefiSettings {
   /**
-   * Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
+   * Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless vTpmEnabled is explicitly set to false.
    */
   secureBootEnabled?: boolean;
 
   /**
-   * Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
+   * Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless secureBootEnabled is explicitly set to false.
    */
   vTpmEnabled?: boolean;
 }
@@ -3572,7 +3590,6 @@ model ApplicationProfile {
 /**
  * Specifies the required information to reference a compute gallery application version
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing VM application response does not include provisioningState."
 model VMGalleryApplication {
   /**
    * Optional, Specifies a passthrough value for more generic context.
@@ -3585,30 +3602,9 @@ model VMGalleryApplication {
   order?: int32;
 
   /**
-   * Specifies whether the gallery application is managed outside the VM application extension.
-   */
-  @added(Versions.v2026_09_01)
-  manuallyManaged?: boolean;
-
-  /**
    * Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}
    */
   packageReferenceId: string;
-
-  /**
-   *  This is the id of "Directly" SharedGalleries. Such references represent the "fake" proxy-only resources
-   *  created in "sharedTo" subscriptions. These are shared directly to a subscription/Microsoft Entra ID tenant, instead of using RBAC-based sharing.
-   *  The resource id looks like:
-   *  /sharedGalleries/{SharedGalleryUniqueName}/applications/{applicationName}/versions/1.0.0
-   */
-  @added(Versions.v2026_09_01)
-  sharedGalleryApplicationId?: string;
-
-  /**
-   * Specifies the community gallery application version resource id on the form of /communityGalleries/{PublicGalleryName}/applications/{applicationName}/versions/{version}
-   */
-  @added(Versions.v2026_09_01)
-  communityGalleryApplicationId?: string;
 
   /**
    * Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided
@@ -3621,127 +3617,9 @@ model VMGalleryApplication {
   treatFailureAsDeploymentFailure?: boolean;
 
   /**
-   * Contains the deployment status of this application
-   * Populated only if requested using GET {VMApplicationName}?$expand=instanceView
-   * It is ignored if set in the request body of the PUT api.
-   */
-  @added(Versions.v2026_09_01)
-  @visibility(Lifecycle.Read)
-  instanceView?: VMGalleryApplicationInstanceView;
-
-  /**
    * If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS
    */
   enableAutomaticUpgrade?: boolean;
-
-  /**
-   * Zero or more custom actions. These are always processed with PATCH semantics.
-   */
-  @added(Versions.v2026_09_01)
-  @identifiers(#[])
-  customActions?: VMGalleryApplicationCustomAction[];
-}
-
-/**
- * Specifies the properties of a gallery application resource.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing VM application response does not include provisioningState."
-@added(Versions.v2026_09_01)
-model VMGalleryApplicationProperties
-  is OmitProperties<VMGalleryApplication, "tags">;
-
-/**
- * Specifies a custom action for a gallery application.
- */
-@added(Versions.v2026_09_01)
-model VMGalleryApplicationCustomAction {
-  /**
-   * Required. The name of the action to run.
-   */
-  name: string;
-
-  /**
-   * Optional. A unique identifier that distinguishes this run of the action from any other.
-   * Note that in practice this should be a guid, but we have no constraints. We really only
-   * care whether it's different than the previous value. The unique identifier of the custom action.
-   */
-  uniqueIdentifier?: string;
-
-  /**
-   * Optional. The order in which the custom action should be executed.
-   */
-  order?: int32;
-
-  /**
-   * Optional. The list of parameters for the custom action.
-   */
-  @identifiers(#[])
-  parameters?: VMGalleryApplicationCustomActionParameter[];
-}
-
-/**
- * Specifies a custom action parameter for a gallery application.
- */
-@added(Versions.v2026_09_01)
-model VMGalleryApplicationCustomActionParameter {
-  /**
-   * The name of the custom action parameter.
-   */
-  name: string;
-
-  /**
-   * The value of the custom action parameter.
-   */
-  value: string;
-}
-
-/**
- * Specifies the instance view of a gallery application.
- */
-@added(Versions.v2026_09_01)
-model VMGalleryApplicationInstanceView {
-  /**
-   * The application status status information.
-   */
-  @identifiers(#[])
-  statuses?: InstanceViewStatus[];
-
-  /**
-   * The name of the application.
-   */
-  name?: string;
-
-  /**
-   * The version of the application.
-   */
-  version?: string;
-
-  /**
-   * The current status of the application
-   */
-  result?: string;
-
-  /**
-   * The list of actions performed on the application instance.
-   */
-  @identifiers(#[])
-  actionsPerformed: VMGalleryApplicationInstanceViewAction[];
-}
-
-/**
- * Specifies the action being performed on the application instance and its result.
- */
-@added(Versions.v2026_09_01)
-model VMGalleryApplicationInstanceViewAction {
-  /**
-   * The action being performed.
-   */
-  operation?: string;
-
-  /**
-   * The result of the action performed.
-   */
-  result?: string;
 }
 
 /**
@@ -4124,10 +4002,12 @@ model VirtualMachineScaleSetIdentity {
 model VirtualMachineScaleSetListWithLinkResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
 
-@@doc(VirtualMachineScaleSetListWithLinkResult.value,
+@@doc(
+  VirtualMachineScaleSetListWithLinkResult.value,
   "The list of virtual machine scale sets."
 );
-@@doc(VirtualMachineScaleSetListWithLinkResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListWithLinkResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
 );
 /**
@@ -4588,7 +4468,7 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
    * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable only on the update (PATCH) model so callers can explicitly clear an allocated prefix; the create/read models use a plain optional int32."
-  @added(Versions.v2026_09_01)
+  @added(Versions.v2026_04_01)
   @minValue(1)
   @maxValue(128)
   privateIPAddressPrefixLength?: int32 | null;
@@ -4730,10 +4610,12 @@ model VirtualMachineScaleSetExtensionListResult
 
 @@identifiers(VirtualMachineScaleSetExtensionListResult.value, #["name", "id"]);
 
-@@doc(VirtualMachineScaleSetExtensionListResult.value,
+@@doc(
+  VirtualMachineScaleSetExtensionListResult.value,
   "The list of VM scale set extensions."
 );
-@@doc(VirtualMachineScaleSetExtensionListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetExtensionListResult.nextLink,
   "The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions."
 );
 
@@ -4919,7 +4801,8 @@ model OrchestrationServiceSummary {
   lastStatusChangeTime?: utcDateTime;
 }
 
-@@identifiers(VirtualMachineScaleSetListOSUpgradeHistory.value,
+@@identifiers(
+  VirtualMachineScaleSetListOSUpgradeHistory.value,
   #["location", "type"]
 );
 
@@ -4929,10 +4812,12 @@ model OrchestrationServiceSummary {
 model VirtualMachineScaleSetListOSUpgradeHistory
   is Azure.Core.Page<UpgradeOperationHistoricalStatusInfo>;
 
-@@doc(VirtualMachineScaleSetListOSUpgradeHistory.value,
+@@doc(
+  VirtualMachineScaleSetListOSUpgradeHistory.value,
   "The list of OS upgrades performed on the virtual machine scale set."
 );
-@@doc(VirtualMachineScaleSetListOSUpgradeHistory.nextLink,
+@@doc(
+  VirtualMachineScaleSetListOSUpgradeHistory.nextLink,
   "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
 );
 
@@ -5207,7 +5092,8 @@ model OrchestrationServiceStateInput {
   action: OrchestrationServiceStateAction;
 }
 
-@@identifiers(VirtualMachineScaleSetListSkusResult.value,
+@@identifiers(
+  VirtualMachineScaleSetListSkusResult.value,
   #["resourceType", "sku/name"]
 );
 /**
@@ -5216,10 +5102,12 @@ model OrchestrationServiceStateInput {
 model VirtualMachineScaleSetListSkusResult
   is Azure.Core.Page<VirtualMachineScaleSetSku>;
 
-@@doc(VirtualMachineScaleSetListSkusResult.value,
+@@doc(
+  VirtualMachineScaleSetListSkusResult.value,
   "The list of skus available for the virtual machine scale set."
 );
-@@doc(VirtualMachineScaleSetListSkusResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListSkusResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
 );
 
@@ -5281,10 +5169,12 @@ model VirtualMachineScaleSetSkuCapacity {
 model VirtualMachineScaleSetVMListResult
   is Azure.Core.Page<VirtualMachineScaleSetVM>;
 
-@@doc(VirtualMachineScaleSetVMListResult.value,
+@@doc(
+  VirtualMachineScaleSetVMListResult.value,
   "The list of virtual machine scale sets VMs."
 );
-@@doc(VirtualMachineScaleSetVMListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetVMListResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs."
 );
 
@@ -5735,6 +5625,17 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
+ * Specifies the FlexProfile for a virtual machine. When set, Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and the deployed size is returned in hardwareProfile.vmSize. See the properties.flexProfile description for the full usage rules, including how it interacts with hardwareProfile.vmSize.
+ */
+@added(Versions.v2026_04_01)
+model FlexProfile {
+  /**
+   * Specifies the preferred VM size, for example Standard_D4s_v5. Azure may deploy a compatible alternative size based on capacity and placement considerations. Supported VM families for FlexProfile may vary by region. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes).
+   */
+  preferredVMSize: string;
+}
+
+/**
  * Specifies the hardware settings for the virtual machine.
  */
 model HardwareProfile {
@@ -5781,8 +5682,9 @@ model StorageProfile {
   diskControllerType?: DiskControllerTypes;
 
   /**
-   * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
+   * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable **only** for VMs with placement.zonePlacementPolicy set to **Any**. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
+  @removed(Versions.v2026_09_01)
   alignRegionalDisksToVMZone?: boolean;
 
   /**
@@ -6390,7 +6292,7 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
   /**
    * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
    */
-  @added(Versions.v2026_09_01)
+  @added(Versions.v2026_04_01)
   @minValue(1)
   @maxValue(128)
   privateIPAddressPrefixLength?: int32;
@@ -6843,7 +6745,8 @@ model RetrieveBootDiagnosticsDataResult {
 model VirtualMachineListResult is Azure.Core.Page<VirtualMachine>;
 
 @@doc(VirtualMachineListResult.value, "The list of virtual machines.");
-@@doc(VirtualMachineListResult.nextLink,
+@@doc(
+  VirtualMachineListResult.nextLink,
   "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
 );
 /**
@@ -6854,6 +6757,12 @@ model VirtualMachineProperties {
    * Specifies the hardware settings for the virtual machine.
    */
   hardwareProfile?: HardwareProfile;
+
+  /**
+   * [Preview Feature] Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and returns the deployed size in hardwareProfile.vmSize. A request that adds flexProfile must omit hardwareProfile.vmSize. For a virtual machine that uses FlexProfile, a hardwareProfile.vmSize equal to the deployed size is ignored, so a GET response can be sent back unchanged. A PATCH request that omits flexProfile keeps it. A PUT request that omits flexProfile and sets hardwareProfile.vmSize clears it. This property cannot exist along with a non-null properties.availabilitySet, properties.capacityReservation, properties.host, properties.hostGroup, properties.proximityPlacementGroup or properties.virtualMachineScaleSet.
+   */
+  @added(Versions.v2026_04_01)
+  flexProfile?: FlexProfile;
 
   /**
    * Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.
@@ -7001,12 +6910,6 @@ model VirtualMachineProperties {
    */
   @added(Versions.v2025_11_01)
   resiliencyProfile?: ResiliencyProfile;
-
-  /**
-   * Sets up run command service for supporting immediate run command execution in the future.
-   */
-  @added(Versions.v2026_09_01)
-  installRunCommandAsService?: boolean;
 }
 
 /**
@@ -7270,8 +7173,16 @@ model LastPatchInstallationSummary {
  */
 model Placement {
   /**
-   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+   * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "zonePlacementPolicy")
+  zonePlacementPolicyLegacy?: ZonePlacementPolicyTypeLegacy;
+
+  /**
+   * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+   */
+  @added(Versions.v2026_09_01)
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
   /**
@@ -8153,7 +8064,8 @@ model ExtensionFeatureTag {
 model AvailabilitySetListResult is Azure.Core.Page<AvailabilitySet>;
 
 @@doc(AvailabilitySetListResult.value, "The list of availability sets.");
-@@doc(AvailabilitySetListResult.nextLink,
+@@doc(
+  AvailabilitySetListResult.nextLink,
   "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
 );
 
@@ -8278,10 +8190,12 @@ model AvailabilitySetUpdate extends UpdateResource {
 model ProximityPlacementGroupListResult
   is Azure.Core.Page<ProximityPlacementGroup>;
 
-@@doc(ProximityPlacementGroupListResult.value,
+@@doc(
+  ProximityPlacementGroupListResult.value,
   "The list of proximity placement groups."
 );
-@@doc(ProximityPlacementGroupListResult.nextLink,
+@@doc(
+  ProximityPlacementGroupListResult.nextLink,
   "The URI to fetch the next page of proximity placement groups."
 );
 
@@ -8356,7 +8270,8 @@ model ProximityPlacementGroupUpdate extends UpdateResource {}
 model DedicatedHostGroupListResult is Azure.Core.Page<DedicatedHostGroup>;
 
 @@doc(DedicatedHostGroupListResult.value, "The list of dedicated host groups.");
-@@doc(DedicatedHostGroupListResult.nextLink,
+@@doc(
+  DedicatedHostGroupListResult.nextLink,
   "The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups."
 );
 
@@ -8498,7 +8413,8 @@ model DedicatedHostGroupUpdate extends UpdateResource {
 model DedicatedHostListResult is Azure.Core.Page<DedicatedHost>;
 
 @@doc(DedicatedHostListResult.value, "The list of dedicated hosts.");
-@@doc(DedicatedHostListResult.nextLink,
+@@doc(
+  DedicatedHostListResult.nextLink,
   "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
 );
 
@@ -8600,7 +8516,8 @@ model DedicatedHostSizeListResult {
 model SshPublicKeysGroupListResult is Azure.Core.Page<SshPublicKeyResource>;
 
 @@doc(SshPublicKeysGroupListResult.value, "The list of SSH public keys.");
-@@doc(SshPublicKeysGroupListResult.nextLink,
+@@doc(
+  SshPublicKeysGroupListResult.nextLink,
   "The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys."
 );
 
@@ -8622,7 +8539,8 @@ model SshPublicKeyResourceProperties {
 model InterconnectBlockListResult is Azure.Core.Page<InterconnectBlock>;
 
 @@doc(InterconnectBlockListResult.value, "The list of Interconnect Blocks.");
-@@doc(InterconnectBlockListResult.nextLink,
+@@doc(
+  InterconnectBlockListResult.nextLink,
   "The URI to fetch the next page of Interconnect Blocks. Call ListNext() with this URI to fetch the next page of Interconnect Blocks."
 );
 
@@ -8809,7 +8727,8 @@ model SshPublicKeyGenerateKeyPairResult {
 model ImageListResult is Azure.Core.Page<Image>;
 
 @@doc(ImageListResult.value, "The list of Images");
-@@doc(ImageListResult.nextLink,
+@@doc(
+  ImageListResult.nextLink,
   "The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images."
 );
 
@@ -8947,10 +8866,12 @@ model ImageUpdate extends UpdateResource {
 model RestorePointCollectionListResult
   is Azure.Core.Page<RestorePointCollection>;
 
-@@doc(RestorePointCollectionListResult.value,
+@@doc(
+  RestorePointCollectionListResult.value,
   "Gets the list of restore point collections."
 );
-@@doc(RestorePointCollectionListResult.nextLink,
+@@doc(
+  RestorePointCollectionListResult.nextLink,
   "The uri to fetch the next page of RestorePointCollections. Call ListNext() with this to fetch the next page of RestorePointCollections."
 );
 
@@ -9277,7 +9198,7 @@ model RestorePointInstanceView {
   diskRestorePoints?: DiskRestorePointInstanceView[];
 
   /**
-   * The resource status information.
+   * The aggregate status information for the restore point. The list may include separate aggregate entries for replication and, in supported API versions, Instant Access, as applicable. For more information about Instant Access, see [Use virtual machine restore points](https://learn.microsoft.com/azure/virtual-machines/virtual-machines-create-restore-points#instant-access).
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
@@ -9338,10 +9259,12 @@ model RestorePointCollectionUpdate extends UpdateResource {
 model CapacityReservationGroupListResult
   is Azure.Core.Page<CapacityReservationGroup>;
 
-@@doc(CapacityReservationGroupListResult.value,
+@@doc(
+  CapacityReservationGroupListResult.value,
   "The list of capacity reservation groups."
 );
-@@doc(CapacityReservationGroupListResult.nextLink,
+@@doc(
+  CapacityReservationGroupListResult.nextLink,
   "The URI to fetch the next page of capacity reservation groups. Call ListNext() with this URI to fetch the next page of capacity reservation groups."
 );
 /**
@@ -9368,7 +9291,7 @@ model CapacityReservationGroupProperties {
   instanceView?: CapacityReservationGroupInstanceView;
 
   /**
-   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure Microsoft Entra ID tenant or across Microsoft Entra ID tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can be shared only across subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   sharingProfile?: ResourceSharingProfile;
 
@@ -9631,10 +9554,12 @@ model CapacityReservationGroupUpdate extends UpdateResource {
  */
 model CapacityReservationListResult is Azure.Core.Page<CapacityReservation>;
 
-@@doc(CapacityReservationListResult.value,
+@@doc(
+  CapacityReservationListResult.value,
   "The list of capacity reservations."
 );
-@@doc(CapacityReservationListResult.nextLink,
+@@doc(
+  CapacityReservationListResult.nextLink,
   "The URI to fetch the next page of capacity reservations. Call ListNext() with this URI to fetch the next page of capacity reservations."
 );
 
@@ -9801,7 +9726,8 @@ model ThrottledRequestsInput extends LogAnalyticsInputBase {}
 model RunCommandListResult is Azure.Core.Page<RunCommandDocumentBase>;
 
 @@doc(RunCommandListResult.value, "The list of virtual machine run commands.");
-@@doc(RunCommandListResult.nextLink,
+@@doc(
+  RunCommandListResult.nextLink,
   "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
 );
 
@@ -9885,7 +9811,8 @@ model VirtualMachineRunCommandsListResult
   is Azure.Core.Page<VirtualMachineRunCommand>;
 
 @@doc(VirtualMachineRunCommandsListResult.value, "The list of run commands.");
-@@doc(VirtualMachineRunCommandsListResult.nextLink,
+@@doc(
+  VirtualMachineRunCommandsListResult.nextLink,
   "The uri to fetch the next page of run commands."
 );
 
@@ -9896,10 +9823,12 @@ model VirtualMachineRunCommandsListResult
 model VirtualMachineDiagnosticRunCommandsListResult
   is Azure.Core.Page<VirtualMachineDiagnosticRunCommand>;
 
-@@doc(VirtualMachineDiagnosticRunCommandsListResult.value,
+@@doc(
+  VirtualMachineDiagnosticRunCommandsListResult.value,
   "The list of diagnostic run commands."
 );
-@@doc(VirtualMachineDiagnosticRunCommandsListResult.nextLink,
+@@doc(
+  VirtualMachineDiagnosticRunCommandsListResult.nextLink,
   "The uri to fetch the next page of diagnostic run commands."
 );
 
@@ -9939,12 +9868,6 @@ model VirtualMachineRunCommandProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Backward compatibility: keeping wire format unchanged for existing API versions"
   runAsPassword?: string;
-
-  /**
-   * Optional. If set to true, the command will be run immediately bypassing typical pipelines to reach the VM directly..
-   */
-  @added(Versions.v2026_09_01)
-  runImmediately?: boolean;
 
   /**
    * The timeout in seconds to execute the run command.
@@ -9988,13 +9911,6 @@ model VirtualMachineRunCommandProperties {
    * Optional. If set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results
    */
   treatFailureAsDeploymentFailure?: boolean;
-
-  /**
-   * Optional. If true, sequence number of the extension will be incremented even if the script and settings have been executed in previous execution part of previous sequence number.
-   * Increasing the sequence number should result in re-running the Run Command again when Linux or Windows Run Command is execution on VM.
-   */
-  @added(Versions.v2026_09_01)
-  forceRerun?: boolean;
 }
 
 /**

@@ -36,7 +36,7 @@ runs:
     #   for npm, the detection still probes pnpm for its store path, and that first
     #   pnpm invocation pays a ~3s PNPM_HOME v10->v11 layout migration. Disabling it
     #   removes that probe from the first install step of every job.
-    - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+    - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
       with:
         node-version: ${{ inputs.node-version }}
         package-manager-cache: false

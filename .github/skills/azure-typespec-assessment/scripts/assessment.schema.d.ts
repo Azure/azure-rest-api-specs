@@ -53,6 +53,19 @@ export type Ids1 = [NonemptyString];
 export type Ids2 = [NonemptyString];
 /**
  * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
+ * via the `definition` "compatibilityDimension".
+ */
+export interface CompatibilityDimension {
+  status: "passed" | "failed" | "not-assessed";
+  verdict?: "passed" | "failed" | "unknown";
+  coverage?: "complete" | "partial" | "blocked";
+  findings: unknown[];
+  blockers?: unknown[];
+  rejectedCandidateCount?: number;
+  [k: string]: unknown;
+}
+/**
+ * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
  * via the `definition` "documentCheck".
  */
 export type DocumentCheck = {
@@ -87,9 +100,13 @@ export interface TypeSpecAssessment {
   safety: {
     scope: "rest-and-downstream-only";
     status: "passed" | "failed" | "not-assessed";
+    verdict?: "passed" | "failed" | "unknown";
+    coverage?: "complete" | "partial" | "blocked";
     [k: string]: unknown;
   };
   dimensions: {
+    rest: CompatibilityDimension;
+    downstream: CompatibilityDimension;
     compliance: {
       status: "passed" | "failed" | "not-assessed";
       summary: string;
