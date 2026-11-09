@@ -205,7 +205,7 @@ model FetchRecoveryPointsRequest {
   @added(Versions.v2026_12_30_preview)
   @doc("Selected sets of recovery resources, each with an optional shared recovery point policy override.")
   @identifiers(#[])
-  recoveryResourceSets?: RecoveryResourcePolicySet[];
+  recoveryResources?: RecoveryResourcePolicySet[];
 }
 
 @added(Versions.v2026_12_30_preview)
@@ -225,7 +225,7 @@ model RecoveryGroupPolicyInput {
 model RecoveryResourcePolicySet {
   @added(Versions.v2026_12_30_preview)
   @doc("GUIDs identifying recovery resources within the recovery plan.")
-  recoveryResourceUniqueIds: string[];
+  recoveryResourceIds: string[];
 
   @added(Versions.v2026_12_30_preview)
   @doc("The recovery point policy override shared by the recovery resources in this set.")
