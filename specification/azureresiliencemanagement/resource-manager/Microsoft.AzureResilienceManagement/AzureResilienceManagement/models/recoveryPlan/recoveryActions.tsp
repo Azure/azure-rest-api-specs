@@ -181,8 +181,8 @@ model RecoveryResourcesInput {
 @doc("Selects a recovery group in the recovery plan, with an optional request-only recovery point policy override. Used by Restore, ValidateForRestore, and FetchRecoveryPoints.")
 model RecoveryGroupsInput {
   @added(Versions.v2026_12_30_preview)
-  @doc("The GUID, name, or full Azure resource ID of a recovery group belonging unambiguously to the selected recovery plan.")
-  @minLength(1)
+  @doc("The GUID identifying the recovery group within the recovery plan.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   recoveryGroupId: string;
 
   @added(Versions.v2026_12_30_preview)

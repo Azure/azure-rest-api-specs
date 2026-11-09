@@ -10578,8 +10578,8 @@
       "properties": {
         "recoveryGroupId": {
           "type": "string",
-          "description": "The GUID, name, or full Azure resource ID of a recovery group belonging unambiguously to the selected recovery plan.",
-          "minLength": 1
+          "description": "The GUID identifying the recovery group within the recovery plan.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "recoveryPointPolicy": {
           "$ref": "#/definitions/RecoveryPointPolicy",
