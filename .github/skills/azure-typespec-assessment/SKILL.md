@@ -27,7 +27,7 @@ remain required and are displayed with their related finding links.
 ## Before starting a local assessment
 
 Check whether the user explicitly supplied or confirmed the baseline for this
-assessment. If not, your first assessment action must be to ask:
+assessment. If not, your first assessment action must be to ask exactly:
 **"Compare against origin/main, or a different branch or commit?"**
 Use the host's user-question tool when available and wait for the answer.
 Do not start preflight, compute a merge base, create work artifacts, or run

@@ -17,7 +17,7 @@ Use the host's user-question tool to ask exactly:
 
 **"Would you like to quickly assess your changes?"**
 
-Choices:
+Use these exact choice labels, preserving capitalization and punctuation:
 
 - **Run fast assessment (Recommended)**
 - **Skip**
@@ -36,7 +36,7 @@ If the user explicitly requested full mode instead, preserve that choice.
 
 Carry forward an explicitly supplied or confirmed assessment baseline. Accepting
 the offer does not choose a baseline: if none was supplied, the assessment skill
-must first ask **"Compare against origin/main, or a different branch or commit?"**
+must first ask exactly **"Compare against origin/main, or a different branch or commit?"**
 and wait. An authoring branch, an earlier Git merge, and a suggested default are
 not baseline confirmation. For an explicitly requested PR assessment, use its
 actual target baseline according to the assessment skill.
@@ -52,7 +52,9 @@ through `HEAD`, staged, unstaged, and relevant untracked changes. It is not
 limited to edits made by the authoring agent. Do not commit, stash, switch
 branches, stage files, or discard existing changes to prepare the assessment.
 The assessment must preserve the authored source and the user's index and
-working tree.
+working tree. When structured output describes the handoff scope, represent
+agent-only scope as false (for example, `agentEditsOnly: false`); never narrow
+the comparison to the agent's edits.
 
 Fast mode retains Semantic intents and the existing full report layout.
 Only Azure Guidelines search and judgment are skipped; the existing Guidelines

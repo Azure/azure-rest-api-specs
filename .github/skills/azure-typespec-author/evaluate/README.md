@@ -167,6 +167,8 @@ local entry point.
 | `dataplane-forced`            | Data-plane cases (006xxx) — forced mode        |
 | `naming-forced`               | Client configuration and naming handoffs       |
 | `assessment-forced`           | Post-authoring fast assessment decisions       |
+| `assessment-trigger`          | Assessment decisions with skill auto-routing   |
+| `assessment-no-skill`         | Assessment decisions without installed skills  |
 | `naming-trigger`              | Naming handoffs and skill routing boundaries   |
 | `naming-no-skill`             | Naming task quality without installed skills   |
 | `forced`                      | All cases — forced mode                        |

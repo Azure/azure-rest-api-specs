@@ -1,0 +1,95 @@
+name: azure-typespec-author-eval
+description: block assessment offer after failed validation
+version: "1.0"
+type: capability
+tags:
+  area: assessment
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 009003-validation-blocker-prevents-offer-trigger
+    tags:
+      suite: assessment
+      mode: trigger
+    prompt: |
+      Continue the TypeSpec authoring workflow by deciding only the next action. TypeSpec edits were applied, but
+      mandatory compilation still fails after the validation retry limit. No
+      assessment decision has been made.
+      Return only JSON with "nextAction" and "offerAssessment".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Consult the local authoring skill reference, but do not execute the action,
+      ask a user question, edit, compile, use network or MCP, or run assessment.
+    constraints: &constraints
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - &author-skill
+        type: skill-invocation
+        config:
+          required: [azure-typespec-author]
+          disallowed: [azure-typespec-assessment]
+      - &tools
+        type: tool-calls
+        config:
+          required:
+            - name: ^(view|rg)$
+              pattern: post-authoring-assessment\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search|ask_user)$
+      - &action
+        type: output-matches
+        config:
+          pattern: '"nextAction"\s*:\s*"report-validation-blocker"'
+      - &offer
+        type: output-matches
+        config:
+          pattern: '"offerAssessment"\s*:\s*false'
+  - name: 009003-validation-blocker-prevents-offer-forced
+    tags:
+      suite: assessment
+      mode: forced
+    prompt: |
+      @azure-typespec-author Continue the TypeSpec authoring workflow by deciding only the next action. TypeSpec edits
+      were applied, but mandatory compilation still fails after the validation
+      retry limit. No assessment decision has been made.
+      Return only JSON with "nextAction" and "offerAssessment".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Consult the local authoring skill reference, but do not execute the action,
+      ask a user question, edit, compile, use network or MCP, or run assessment.
+    constraints: *constraints
+    graders:
+      - *author-skill
+      - *tools
+      - *action
+      - *offer
+  - name: 009003-validation-blocker-prevents-offer-no-skill
+    tags:
+      suite: assessment
+      mode: no-skill
+    prompt: |
+      Continue the TypeSpec authoring workflow by deciding only the next action. TypeSpec edits
+      were applied, but mandatory compilation still fails after the validation
+      retry limit. No assessment decision has been made.
+      Return only JSON with "nextAction" and "offerAssessment".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Do not execute the action, ask a user question, inspect files, edit, compile,
+      use network or MCP, or run assessment.
+    constraints: *constraints
+    graders:
+      - type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search|ask_user|powershell|bash)$
+      - *action
+      - *offer
