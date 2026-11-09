@@ -198,7 +198,11 @@ export async function analyzeSdkProjects({
         configPath,
         "--output",
         "json",
-      ]);
+      ],
+      {
+        streamlog: true,
+      }
+    );
       console.log("breakingChangesStdout: " + breakingChangesStdout);
       const breakingChangesResponse: AzsdkDetectBreakingChangeResponse =
         parseAzsdkResponse(breakingChangesStdout);

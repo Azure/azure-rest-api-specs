@@ -134,7 +134,7 @@ export async function mitigateSdkBreakingChanges({
           isResolved: false,
         };
         try {
-          const { stdout } = await execFile(
+          const { stdout, stderr } = await execFile(
             join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk"),
             [
               "typespec",
@@ -143,7 +143,7 @@ export async function mitigateSdkBreakingChanges({
               "--tsp-project-path",
               typeSpecProjectPath,
               "--customization-request",
-              `Resolve this SDK breaking change: ${JSON.stringify({
+              `Resolve ${analysisResult.sdkLanguage} SDK breaking change: ${JSON.stringify({
                 breakingChange: change.breakingChange,
                 category: change.category,
                 suggestedFix: change.suggestedFix,
@@ -153,8 +153,14 @@ export async function mitigateSdkBreakingChanges({
               "--output",
               "json",
             ],
+            {
+              streamlog: true
+            }
           );
           await writeFile(commandResultPath, stdout);
+          // if (stderr) {
+          //   console.error(`Error output from azsdk SDK mitigation: ${stderr}`);
+          // }
 
           try {
             mitigatedChange = BuildMigratedBreakingChange(
