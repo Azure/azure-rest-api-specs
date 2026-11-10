@@ -854,16 +854,6 @@ namespace JavaScriptToolCompatibility {
 @@clientName(Skills.listSkillVersions, "list_versions");
 @@clientName(Skills.updateSkill, "update");
 
-// Existing-skill SDK parameters use IDs; creation still accepts a new name or an existing ID.
-@@clientName(GetSkillRequest.name, "skill_id");
-@@clientName(UpdateSkillRequest.name, "skill_id");
-@@clientName(DeleteSkillRequest.name, "skill_id");
-@@clientName(ListSkillVersionsRequest.name, "skill_id");
-@@clientName(GetSkillVersionRequest.name, "skill_id");
-@@clientName(DeleteSkillVersionRequest.name, "skill_id");
-@@clientName(GetSkillContentRequest.name, "skill_id");
-@@clientName(GetSkillVersionContentRequest.name, "skill_id");
-
 @@clientName(Skill, "SkillDetails", "python");
 @@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
 @@clientName(DeleteSkillVersionResponse, "DeleteSkillVersionResult", "python");
