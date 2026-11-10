@@ -8,6 +8,7 @@ import "../../recoveryPlans.tsp";
 import "./recoveryResource.tsp";
 
 using Azure.ResourceManager;
+using Azure.Core;
 using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
@@ -108,6 +109,198 @@ model ValidateForRecoveryOperationBaseResponse {
 model RecoveryPlanActionBaseResponse {
   @doc("JobId of the job triggered for Recovery Orchestration Plan.")
   jobId: string;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Specifies how recovery resources are selected when fetching recovery points.")
+union RecoveryResourceSelectionMode {
+  @added(Versions.v2026_10_31_preview)
+  @doc("Processes every applicable recovery resource in the recovery plan. Supplied group and resource entries provide policy overrides.")
+  All: "All",
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Processes the supplied recovery groups and recovery resources. When no selectors are supplied, processes every applicable recovery resource.")
+  Selected: "Selected",
+
+  string,
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Specifies the recovery point selection policy type.")
+union RecoveryPointPolicyType {
+  @added(Versions.v2026_10_31_preview)
+  @doc("Selects the latest eligible recovery point.")
+  Latest: "Latest",
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Selects a random eligible recovery point within the specified time range.")
+  Random: "Random",
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Selects the recovery point associated with the specified point in time.")
+  PointInTime: "PointInTime",
+
+  string,
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Defines a recovery point selection policy.")
+@discriminator("type")
+model RecoveryPointPolicy {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The recovery point selection policy type.")
+  type: RecoveryPointPolicyType;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Selects the latest eligible recovery point.")
+model LatestRecoveryPointPolicy extends RecoveryPointPolicy {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The recovery point selection policy type.")
+  type: RecoveryPointPolicyType.Latest;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Selects a random eligible recovery point within an inclusive time range.")
+model RandomRecoveryPointPolicy extends RecoveryPointPolicy {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The recovery point selection policy type.")
+  type: RecoveryPointPolicyType.Random;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The inclusive lower time bound.")
+  startTime: utcDateTime;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The inclusive upper time bound.")
+  endTime: utcDateTime;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Selects the recovery point associated with a specified point in time.")
+model PointInTimeRecoveryPointPolicy extends RecoveryPointPolicy {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The recovery point selection policy type.")
+  type: RecoveryPointPolicyType.PointInTime;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The requested recovery point time.")
+  pointInTime: utcDateTime;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Defines a recovery group selector and its optional recovery point policy override.")
+model RecoveryGroupPolicyInput {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The full Azure resource ID of a recovery group in the current recovery plan.")
+  recoveryGroupId: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryGroups";
+    }
+  ]>;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The recovery point policy override for resources in the recovery group.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Defines a set of recovery resource selectors that share an optional recovery point policy override.")
+model RecoveryResourcePolicySet {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The full Azure resource IDs of recovery resources in the current recovery plan.")
+  recoveryResourceIds: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources";
+    }
+  ]>[];
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The recovery point policy override for the recovery resources.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Request body for fetching recovery points for recovery resources in a recovery plan.")
+model FetchRecoveryPointsContent {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The resource selection mode. The default is Selected.")
+  resourceSelectionMode?: RecoveryResourceSelectionMode = RecoveryResourceSelectionMode.Selected;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The request-level recovery point policy override.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Recovery group selectors and policy overrides.")
+  @identifiers(#["recoveryGroupId"])
+  recoveryGroups?: RecoveryGroupPolicyInput[];
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Recovery resource selectors grouped by shared policy override.")
+  @identifiers(#[])
+  recoveryResourceSets?: RecoveryResourcePolicySet[];
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Details of a selected recovery point.")
+model RecoveryPointResult {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The full Azure resource ID of the selected recovery point.")
+  recoveryPointId: armResourceIdentifier;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The selected recovery point time.")
+  recoveryPointTime: utcDateTime;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The workload-specific recovery point type.")
+  recoveryPointType: string;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The exact requested point in time for a database point-in-time selection.")
+  pointInTime?: utcDateTime;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Fetch-specific recovery point details for an existing recovery resource.")
+model RecoveryResourceRecoveryPointProperties {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The selected recovery point. Omitted when no usable recovery point was found.")
+  recoveryPoint?: RecoveryPointResult;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("A recovery point result projected onto an existing recovery resource identity.")
+model RecoveryResourceRecoveryPointResult {
+  @added(Versions.v2026_10_31_preview)
+  @doc("The full Azure resource ID of the existing recovery resource.")
+  id: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources";
+    }
+  ]>;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The name of the existing recovery resource.")
+  name: string;
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("The Azure resource type of the existing recovery resource.")
+  type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources";
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Fetch-specific recovery point details.")
+  properties: RecoveryResourceRecoveryPointProperties;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("The recovery point results for processed recovery resources.")
+model FetchRecoveryPointsResult {
+  @added(Versions.v2026_10_31_preview)
+  @doc("Recovery point results identified by their existing recovery resource identities.")
+  @identifiers(#["id"])
+  value: RecoveryResourceRecoveryPointResult[];
 }
 
 @doc("TestFailoverCleanup post action request.")

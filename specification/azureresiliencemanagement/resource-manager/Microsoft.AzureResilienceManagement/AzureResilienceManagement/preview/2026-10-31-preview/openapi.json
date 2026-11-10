@@ -2868,6 +2868,84 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/fetchRecoveryPoints": {
+      "post": {
+        "operationId": "RecoveryPlanActions_FetchRecoveryPoints",
+        "tags": [
+          "RecoveryPlanActions"
+        ],
+        "description": "Fetches recovery points for applicable recovery resources in the recovery orchestration plan.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RequiredRequestHeaders"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "description": "The name of the recovery orchestration plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{5,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FetchRecoveryPointsContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FetchRecoveryPointsResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RecoveryPlanActions_FetchRecoveryPoints_MaximumSet": {
+            "$ref": "./examples/RecoveryPlanActions_FetchRecoveryPoints_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/finalize": {
       "post": {
         "operationId": "RecoveryPlanActions_Finalize",
@@ -7313,6 +7391,78 @@
         }
       }
     },
+    "FetchRecoveryPointsContent": {
+      "type": "object",
+      "description": "Request body for fetching recovery points for recovery resources in a recovery plan.",
+      "properties": {
+        "resourceSelectionMode": {
+          "type": "string",
+          "description": "The resource selection mode. The default is Selected.",
+          "default": "Selected",
+          "enum": [
+            "All",
+            "Selected"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryResourceSelectionMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "All",
+                "value": "All",
+                "description": "Processes every applicable recovery resource in the recovery plan. Supplied group and resource entries provide policy overrides."
+              },
+              {
+                "name": "Selected",
+                "value": "Selected",
+                "description": "Processes the supplied recovery groups and recovery resources. When no selectors are supplied, processes every applicable recovery resource."
+              }
+            ]
+          }
+        },
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicy",
+          "description": "The request-level recovery point policy override."
+        },
+        "recoveryGroups": {
+          "type": "array",
+          "description": "Recovery group selectors and policy overrides.",
+          "items": {
+            "$ref": "#/definitions/RecoveryGroupPolicyInput"
+          },
+          "x-ms-identifiers": [
+            "recoveryGroupId"
+          ]
+        },
+        "recoveryResourceSets": {
+          "type": "array",
+          "description": "Recovery resource selectors grouped by shared policy override.",
+          "items": {
+            "$ref": "#/definitions/RecoveryResourcePolicySet"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FetchRecoveryPointsResult": {
+      "type": "object",
+      "description": "The recovery point results for processed recovery resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Recovery point results identified by their existing recovery resource identities.",
+          "items": {
+            "$ref": "#/definitions/RecoveryResourceRecoveryPointResult"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ForceInclusionAndUpdate": {
       "type": "string",
       "description": "Enum for ForceInclusionAndUpdate",
@@ -8358,6 +8508,16 @@
         }
       }
     },
+    "LatestRecoveryPointPolicy": {
+      "type": "object",
+      "description": "Selects the latest eligible recovery point.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPointPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "Latest"
+    },
     "ListReportDownloadUrlRequest": {
       "type": "object",
       "description": "Request to mint a short-lived, read-only download URL for a Drill Run report.",
@@ -8560,6 +8720,26 @@
         "qualificationState"
       ]
     },
+    "PointInTimeRecoveryPointPolicy": {
+      "type": "object",
+      "description": "Selects the recovery point associated with a specified point in time.",
+      "properties": {
+        "pointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The requested recovery point time."
+        }
+      },
+      "required": [
+        "pointInTime"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPointPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "PointInTime"
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation.",
@@ -8710,6 +8890,32 @@
           }
         ]
       }
+    },
+    "RandomRecoveryPointPolicy": {
+      "type": "object",
+      "description": "Selects a random eligible recovery point within an inclusive time range.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The inclusive lower time bound."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The inclusive upper time bound."
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPointPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "Random"
     },
     "ReasonForRequestingConfirmation": {
       "type": "string",
@@ -9010,6 +9216,31 @@
         }
       ],
       "x-ms-discriminator-value": "ManualAction"
+    },
+    "RecoveryGroupPolicyInput": {
+      "type": "object",
+      "description": "Defines a recovery group selector and its optional recovery point policy override.",
+      "properties": {
+        "recoveryGroupId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full Azure resource ID of a recovery group in the current recovery plan.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryGroups"
+              }
+            ]
+          }
+        },
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicy",
+          "description": "The recovery point policy override for resources in the recovery group."
+        }
+      },
+      "required": [
+        "recoveryGroupId"
+      ]
     },
     "RecoveryGroupProperties": {
       "type": "object",
@@ -9689,6 +9920,80 @@
         }
       ]
     },
+    "RecoveryPointPolicy": {
+      "type": "object",
+      "description": "Defines a recovery point selection policy.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RecoveryPointPolicyType",
+          "description": "The recovery point selection policy type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "RecoveryPointPolicyType": {
+      "type": "string",
+      "description": "Specifies the recovery point selection policy type.",
+      "enum": [
+        "Latest",
+        "Random",
+        "PointInTime"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryPointPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Latest",
+            "value": "Latest",
+            "description": "Selects the latest eligible recovery point."
+          },
+          {
+            "name": "Random",
+            "value": "Random",
+            "description": "Selects a random eligible recovery point within the specified time range."
+          },
+          {
+            "name": "PointInTime",
+            "value": "PointInTime",
+            "description": "Selects the recovery point associated with the specified point in time."
+          }
+        ]
+      }
+    },
+    "RecoveryPointResult": {
+      "type": "object",
+      "description": "Details of a selected recovery point.",
+      "properties": {
+        "recoveryPointId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full Azure resource ID of the selected recovery point."
+        },
+        "recoveryPointTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The selected recovery point time."
+        },
+        "recoveryPointType": {
+          "type": "string",
+          "description": "The workload-specific recovery point type."
+        },
+        "pointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The exact requested point in time for a database point-in-time selection."
+        }
+      },
+      "required": [
+        "recoveryPointId",
+        "recoveryPointTime",
+        "recoveryPointType"
+      ]
+    },
     "RecoveryResource": {
       "type": "object",
       "description": "RecoveryPlan Resource a AzureResilienceProviderHub resource",
@@ -9723,6 +10028,35 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "RecoveryResourcePolicySet": {
+      "type": "object",
+      "description": "Defines a set of recovery resource selectors that share an optional recovery point policy override.",
+      "properties": {
+        "recoveryResourceIds": {
+          "type": "array",
+          "description": "The full Azure resource IDs of recovery resources in the current recovery plan.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources"
+                }
+              ]
+            }
+          }
+        },
+        "recoveryPointPolicy": {
+          "$ref": "#/definitions/RecoveryPointPolicy",
+          "description": "The recovery point policy override for the recovery resources."
+        }
+      },
+      "required": [
+        "recoveryResourceIds"
       ]
     },
     "RecoveryResourceProperties": {
@@ -9842,6 +10176,82 @@
         "recoveryResource",
         "operationQualificationDetails"
       ]
+    },
+    "RecoveryResourceRecoveryPointProperties": {
+      "type": "object",
+      "description": "Fetch-specific recovery point details for an existing recovery resource.",
+      "properties": {
+        "recoveryPoint": {
+          "$ref": "#/definitions/RecoveryPointResult",
+          "description": "The selected recovery point. Omitted when no usable recovery point was found."
+        }
+      }
+    },
+    "RecoveryResourceRecoveryPointResult": {
+      "type": "object",
+      "description": "A recovery point result projected onto an existing recovery resource identity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full Azure resource ID of the existing recovery resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the existing recovery resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Azure resource type of the existing recovery resource.",
+          "enum": [
+            "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RecoveryResourceRecoveryPointProperties",
+          "description": "Fetch-specific recovery point details."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type",
+        "properties"
+      ]
+    },
+    "RecoveryResourceSelectionMode": {
+      "type": "string",
+      "description": "Specifies how recovery resources are selected when fetching recovery points.",
+      "enum": [
+        "All",
+        "Selected"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryResourceSelectionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Processes every applicable recovery resource in the recovery plan. Supplied group and resource entries provide policy overrides."
+          },
+          {
+            "name": "Selected",
+            "value": "Selected",
+            "description": "Processes the supplied recovery groups and recovery resources. When no selectors are supplied, processes every applicable recovery resource."
+          }
+        ]
+      }
     },
     "RefreshGoalResourcesResponse": {
       "type": "object",
