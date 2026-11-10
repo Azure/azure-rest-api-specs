@@ -4968,6 +4968,9 @@
           }
         },
         "x-ms-examples": {
+          "List NFS Provisioned v2 shares with their Scale Namespace feature modes": {
+            "$ref": "./examples/FileSharesList_ScaleMode.json"
+          },
           "ListDeletedShares": {
             "$ref": "./examples/DeletedFileSharesList.json"
           },
@@ -5055,6 +5058,9 @@
           }
         },
         "x-ms-examples": {
+          "Get the default Compatibility mode of the Scale Namespace feature for an NFS share": {
+            "$ref": "./examples/FileSharesGet_ScaleMode.json"
+          },
           "GetSharePaidBursting": {
             "$ref": "./examples/FileSharesGet_PaidBursting.json"
           },
@@ -5144,6 +5150,15 @@
         "x-ms-examples": {
           "Create NFS Shares": {
             "$ref": "./examples/FileSharesPut_NFS.json"
+          },
+          "Create an NFS Provisioned v2 share with the Scale Namespace feature defaulting to Compatibility": {
+            "$ref": "./examples/FileSharesPut_ScaleMode_Default.json"
+          },
+          "Create an NFS Provisioned v2 share with the Scale Namespace feature in Compatibility mode": {
+            "$ref": "./examples/FileSharesPut_ScaleMode_Compatibility.json"
+          },
+          "Create an NFS Provisioned v2 share with the Scale Namespace feature in Scale mode": {
+            "$ref": "./examples/FileSharesPut_ScaleMode.json"
           },
           "PutShares": {
             "$ref": "./examples/FileSharesPut.json"
@@ -13207,6 +13222,14 @@
             "create"
           ]
         },
+        "scaleMode": {
+          "$ref": "#/definitions/FileShareScaleMode",
+          "description": "The mode of the Scale Namespace feature for the file share. Supported only for NFS shares in FileStorage Provisioned v2 accounts. If omitted on creation, the mode defaults to Compatibility. Can only be specified when creating the share and cannot be changed afterward. Get and list operations return Compatibility when no mode was specified.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "rootSquash": {
           "$ref": "#/definitions/RootSquashType",
           "description": "The property is for NFS share only. The default is NoRootSquash."
@@ -13336,6 +13359,30 @@
           "description": "The scalar for bandwidth in the file share provisioned bandwidth recommendation formula.",
           "readOnly": true
         }
+      }
+    },
+    "FileShareScaleMode": {
+      "type": "string",
+      "description": "The mode of the Scale Namespace feature for an NFS file share.",
+      "enum": [
+        "Compatibility",
+        "Scale"
+      ],
+      "x-ms-enum": {
+        "name": "FileShareScaleMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compatibility",
+            "value": "Compatibility",
+            "description": "Uses Compatibility mode for the Scale Namespace feature. This is the default when no mode is specified."
+          },
+          {
+            "name": "Scale",
+            "value": "Scale",
+            "description": "Uses Scale mode for the Scale Namespace feature."
+          }
+        ]
       }
     },
     "Format": {
