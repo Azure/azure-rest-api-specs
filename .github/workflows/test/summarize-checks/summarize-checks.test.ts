@@ -515,7 +515,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(token).toBeDefined();
       return token?.rows.map((row) =>
         row.map((cell, index) =>
-          index === 1 ? cell.text.replace(/<\/?picture>|<img\b[^>]*>/g, "").trim() : cell.text,
+          index === 1 ? cell.text.replace(/<[^>]*>/g, "").trim() : cell.text,
         ),
       );
     }
@@ -860,7 +860,7 @@ describe("Summarize Checks Unit Tests", () => {
 
         expect(rows(visible)).toContainEqual([
           expect.stringContaining("Contributor readiness"),
-          "Non-blocking",
+          "Warning",
           expect.stringContaining("`/azsdk check-access`"),
         ]);
         const html = marked.parse(visible);
