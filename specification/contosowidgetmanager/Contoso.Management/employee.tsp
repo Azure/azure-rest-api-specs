@@ -20,7 +20,7 @@ model EmployeeProperties {
   /** Age of employee */
   age?: int32;
 
-  /** City of employee */
+  /** The city where the employee is located. */
   city?: string;
 
   /** Profile of employee */
