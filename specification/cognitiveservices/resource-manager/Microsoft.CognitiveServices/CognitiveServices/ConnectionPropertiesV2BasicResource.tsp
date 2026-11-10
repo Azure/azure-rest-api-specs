@@ -49,12 +49,14 @@ model ConnectionPropertiesV2BasicResource is Azure.ResourceManager.ProxyResource
   @segment("connections")
   @path
   @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
+  @typeChangedFrom(Versions.v2026_11_01, ConnectionName)
+  @typeChangedFrom(Versions.v2026_11_15_preview, LegacyConnectionName)
   name: ConnectionName;
 }
 
 /** Connection properties returned by ordinary resource operations. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The read projection preserves the existing synchronous connection contract, which does not expose provisioningState."
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 @discriminator("authType")
 model ConnectionPropertiesV2Read {
   ...OmitProperties<ConnectionPropertiesV2, "authType">;
@@ -64,13 +66,13 @@ model ConnectionPropertiesV2Read {
 }
 
 /** Personal access token connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model PatAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
   ...PickProperties<PATAuthTypeConnectionProperties, "authType">;
 }
 
 /** Managed identity connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model ManagedIdentityAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
   ...PickProperties<
@@ -80,7 +82,7 @@ model ManagedIdentityAuthTypeConnectionPropertiesRead
 }
 
 /** Username and password connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model UsernamePasswordAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
   ...PickProperties<UsernamePasswordAuthTypeConnectionProperties, "authType">;
@@ -90,33 +92,33 @@ model UsernamePasswordAuthTypeConnectionPropertiesRead
 }
 
 /** Username metadata returned without the password or security token. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model ConnectionUsernamePasswordRead is PickProperties<
   ConnectionUsernamePassword,
   "username"
 >;
 
 /** Unauthenticated connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model NoneAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
   ...PickProperties<NoneAuthTypeConnectionProperties, "authType">;
 }
 
 /** Shared access signature connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model SasAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
   ...PickProperties<SASAuthTypeConnectionProperties, "authType">;
 }
 
 /** Account key connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model AccountKeyAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
   ...PickProperties<AccountKeyAuthTypeConnectionProperties, "authType">;
 }
 
 /** Service principal connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model ServicePrincipalAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
   ...PickProperties<ServicePrincipalAuthTypeConnectionProperties, "authType">;
@@ -126,14 +128,14 @@ model ServicePrincipalAuthTypeConnectionPropertiesRead
 }
 
 /** Service principal identifiers returned without the client secret. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model ConnectionServicePrincipalRead is PickProperties<
   ConnectionServicePrincipal,
   "clientId" | "tenantId"
 >;
 
 /** Access key connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model AccessKeyAuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
   ...PickProperties<AccessKeyAuthTypeConnectionProperties, "authType">;
@@ -143,27 +145,27 @@ model AccessKeyAuthTypeConnectionPropertiesRead
 }
 
 /** Access key identifier returned without the secret access key. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model ConnectionAccessKeyRead is PickProperties<
   ConnectionAccessKey,
   "accessKeyId"
 >;
 
 /** API key connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model ApiKeyAuthConnectionPropertiesRead extends ConnectionPropertiesV2Read {
   ...PickProperties<ApiKeyAuthConnectionProperties, "authType">;
 }
 
 /** Custom-key connection properties returned without stored credentials. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model CustomKeysConnectionPropertiesRead extends ConnectionPropertiesV2Read {
   /** Authentication type of the connection target. */
   authType: "CustomKeys";
 }
 
 /** OAuth connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model Oauth2AuthTypeConnectionPropertiesRead
   extends ConnectionPropertiesV2Read {
   ...PickProperties<OAuth2AuthTypeConnectionProperties, "authType">;
@@ -173,20 +175,20 @@ model Oauth2AuthTypeConnectionPropertiesRead
 }
 
 /** OAuth identifiers and endpoint metadata returned without credential values. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model ConnectionOauth2Read is PickProperties<
   ConnectionOAuth2,
   "authUrl" | "clientId" | "tenantId" | "username"
 >;
 
 /** Microsoft Entra connection properties returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model AadAuthTypeConnectionPropertiesRead extends ConnectionPropertiesV2Read {
   ...PickProperties<AADAuthTypeConnectionProperties, "authType">;
 }
 
 /** A connection returned by ordinary resource operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 @parentResource(Account)
 model ConnectionPropertiesV2BasicResourceRead is Azure.ResourceManager.ProxyResource<
   ConnectionPropertiesV2Read,
@@ -206,7 +208,7 @@ model ConnectionReadResult<Resource extends Azure.ResourceManager.Foundations.Si
 
   @doc("The body type of the operation request or response.")
   @bodyRoot
-  @typeChangedFrom(Versions.v2026_11_15_preview, Resource)
+  @typeChangedFrom(Versions.v2026_11_01, Resource)
   body: ConnectionPropertiesV2BasicResourceRead;
 }
 
@@ -239,6 +241,8 @@ interface ConnectionPropertiesV2BasicResourceOps
         @segment("connections")
         @key
         @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
+        @typeChangedFrom(Versions.v2026_11_01, ConnectionName)
+        @typeChangedFrom(Versions.v2026_11_15_preview, LegacyConnectionName)
         connectionName: ConnectionName,
       },
       ResourceName = "CognitiveServicesConnection"
@@ -327,6 +331,8 @@ interface ProjectConnectionOps
         @segment("connections")
         @key
         @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
+        @typeChangedFrom(Versions.v2026_11_01, ConnectionName)
+        @typeChangedFrom(Versions.v2026_11_15_preview, LegacyConnectionName)
         connectionName: ConnectionName,
       },
       ResourceName = "CognitiveServicesProjectConnection"

@@ -13,6 +13,7 @@ options:
     use-read-only-status-schema: true
     examples-dir: "{project-root}/examples"
   "@azure-typespec/http-client-csharp-mgmt":
+    api-version: "2026-11-01"
     namespace: "Azure.ResourceManager.CognitiveServices"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     enable-wire-path-attribute: true
@@ -21,12 +22,14 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     api-version: "2026-05-01"
   "@azure-tools/typespec-python":
+    api-version: "2026-11-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-cognitiveservices"
     namespace: "azure.mgmt.cognitiveservices"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    api-version: "2026-11-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cognitiveservices"
     namespace: "com.azure.resourcemanager.cognitiveservices"
     service-name: "CognitiveServices"
@@ -37,6 +40,7 @@ options:
       - resource: ConnectionPropertiesV2BasicResource
         collection: AccountConnections
   "@azure-tools/typespec-ts":
+    api-version: "2026-11-01"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-cognitiveservices"
     flavor: azure
     compatibility-lro: true
@@ -44,6 +48,7 @@ options:
     package-details:
       name: "@azure/arm-cognitiveservices"
   "@azure-tools/typespec-go":
+    api-version: "2026-11-01"
     service-dir: "sdk/resourcemanager/cognitiveservices"
     emitter-output-dir: "{output-dir}/{service-dir}/armcognitiveservices"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcognitiveservices"

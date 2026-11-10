@@ -1,0 +1,49 @@
+{
+  "operationId": "RaiPolicies_CreateOrUpdate",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-11-01",
+    "If-Match": "\"00000000-0000-0000-0000-000000000003\"",
+    "raiPolicyName": "agent-guard",
+    "raiPolicy": {
+      "properties": {
+        "customBlocklists": []
+      }
+    },
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Replace an ACS policy conditionally",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000004\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/agent-guard",
+        "name": "agent-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000004\"",
+        "properties": {
+          "type": "UserManaged",
+          "customBlocklists": []
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000004\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/agent-guard",
+        "name": "agent-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000004\"",
+        "properties": {
+          "type": "UserManaged",
+          "customBlocklists": []
+        }
+      }
+    }
+  }
+}

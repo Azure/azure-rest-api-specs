@@ -58,14 +58,10 @@ model Account is Azure.ResourceManager.ProxyResource<AccountPropertiesRead> {
   identity?: Identity;
 }
 
-@@typeChangedFrom(
-  Account.properties,
-  Versions.v2026_11_15_preview,
-  AccountProperties
-);
+@@typeChangedFrom(Account.properties, Versions.v2026_11_01, AccountProperties);
 
 /** Cognitive Services account parameters accepted by create and update operations. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model AccountWrite is Azure.ResourceManager.ProxyResource<AccountProperties> {
   ...ResourceNameParameter<
     Resource = AccountWrite,
@@ -88,12 +84,12 @@ model AccountWrite is Azure.ResourceManager.ProxyResource<AccountProperties> {
 model AccountWriteBody<LegacyResource extends Azure.ResourceManager.Foundations.SimpleResource> {
   /** The parameters to provide for the created account. */
   @bodyRoot
-  @typeChangedFrom(Versions.v2026_11_15_preview, LegacyResource)
+  @typeChangedFrom(Versions.v2026_11_01, LegacyResource)
   account: AccountWrite;
 }
 
 /** Account properties returned without stored credentials. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model AccountPropertiesRead {
   ...OmitProperties<
     AccountProperties,
@@ -105,7 +101,7 @@ model AccountPropertiesRead {
 }
 
 /** API-specific properties returned without stored credentials. */
-@added(Versions.v2026_11_15_preview)
+@added(Versions.v2026_11_01)
 model ApiPropertiesRead is OmitProperties<
   ApiProperties,
   | "qnaAzureSearchEndpointKey"
@@ -316,6 +312,8 @@ interface Accounts {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
   @tag("CognitiveServicesAccounts")
   evaluateDeploymentPolicies is AccountOps.ActionSync<
     Account,

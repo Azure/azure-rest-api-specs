@@ -82,7 +82,7 @@ interface ManagedComputeCapacities {
        * surrounding whitespace, or the request returns HTTP 400. Capacity is still
        * returned for the deployment's backend region.
        */
-      @added(Versions.v2026_11_15_preview)
+      @added(Versions.v2026_11_01)
       @query("location")
       location?: string;
     },
