@@ -409,7 +409,7 @@ model EmbeddingContent {
 
 /** The implementation of an embedding result item. */
 @added(Versions.v2026_11_01_preview)
-union EmbeddingDataType {
+union EmbeddingDataKind {
   string,
 
   /** One dense vector from a multimodal model. */
@@ -424,10 +424,10 @@ union EmbeddingDataType {
 
 /** Common metadata for one embedding result item, in request order. */
 @added(Versions.v2026_11_01_preview)
-@discriminator("type")
+@discriminator("kind")
 model EmbeddingData {
   /** The embedding implementation that produced this item. */
-  type: EmbeddingDataType;
+  kind: EmbeddingDataKind;
 
   /** The zero-based position of the item in the request. */
   index: int32;
@@ -474,12 +474,12 @@ model MultimodalEmbeddingData {
 @added(Versions.v2026_11_01_preview)
 model MultimodalDenseEmbedding extends EmbeddingData {
   /** The embedding implementation. */
-  type: EmbeddingDataType.MultimodalDense;
+  kind: EmbeddingDataKind.MultimodalDense;
 
   ...MultimodalEmbeddingData;
 
   /** The kind of vectors returned. */
-  kind: EmbeddingVectorKind.Dense;
+  vectorKind: EmbeddingVectorKind.Dense;
 
   /**
    * The vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian
@@ -492,12 +492,12 @@ model MultimodalDenseEmbedding extends EmbeddingData {
 @added(Versions.v2026_11_01_preview)
 model MultimodalMultiVectorEmbedding extends EmbeddingData {
   /** The embedding implementation. */
-  type: EmbeddingDataType.MultimodalMultiVector;
+  kind: EmbeddingDataKind.MultimodalMultiVector;
 
   ...MultimodalEmbeddingData;
 
   /** The kind of vectors returned. */
-  kind: EmbeddingVectorKind.Multi;
+  vectorKind: EmbeddingVectorKind.Multi;
 
   /** The number of vectors and the number of dimensions: `[vectors, dimensions]`. */
   shape: int32[];
@@ -515,12 +515,12 @@ model MultimodalMultiVectorEmbedding extends EmbeddingData {
 @added(Versions.v2026_11_01_preview)
 model MultimodalDenseAndMultiVectorEmbedding extends EmbeddingData {
   /** The embedding implementation. */
-  type: EmbeddingDataType.MultimodalDenseAndMultiVector;
+  kind: EmbeddingDataKind.MultimodalDenseAndMultiVector;
 
   ...MultimodalEmbeddingData;
 
   /** The kind of vectors returned. */
-  kind: EmbeddingVectorKind.DenseAndMulti;
+  vectorKind: EmbeddingVectorKind.DenseAndMulti;
 
   /** The number of multi-vectors and their number of dimensions: `[vectors, multiDimensions]`. */
   shape: int32[];
@@ -570,7 +570,7 @@ union MultiEmbeddingVector {
 
 /** The implementation that reported embedding usage. */
 @added(Versions.v2026_11_01_preview)
-union EmbeddingUsageType {
+union EmbeddingUsageKind {
   string,
 
   /** Usage from a multimodal embedding model. */
@@ -579,10 +579,10 @@ union EmbeddingUsageType {
 
 /** Common usage for an embedding operation. Token counts are omitted when the model doesn't report them. */
 @added(Versions.v2026_11_01_preview)
-@discriminator("type")
+@discriminator("kind")
 model EmbeddingUsage {
   /** The embedding implementation that reported this usage. */
-  type: EmbeddingUsageType;
+  kind: EmbeddingUsageKind;
 
   /** The number of input tokens. */
   promptTokens?: int64;
@@ -595,7 +595,7 @@ model EmbeddingUsage {
 @added(Versions.v2026_11_01_preview)
 model MultimodalEmbeddingUsage extends EmbeddingUsage {
   /** The embedding implementation, always `multimodal`. */
-  type: EmbeddingUsageType.Multimodal;
+  kind: EmbeddingUsageKind.Multimodal;
 
   /**
    * Tokens that aren't image tokens: the query and text items (including the query instruction) and the short prompt

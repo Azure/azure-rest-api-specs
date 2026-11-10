@@ -566,8 +566,8 @@
       "type": "object",
       "description": "Common metadata for one embedding result item, in request order.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/EmbeddingDataType",
+        "kind": {
+          "$ref": "#/definitions/EmbeddingDataKind",
           "description": "The embedding implementation that produced this item."
         },
         "index": {
@@ -580,13 +580,13 @@
           "description": "The item's `id` from the request, if it had one."
         }
       },
-      "discriminator": "type",
+      "discriminator": "kind",
       "required": [
-        "type",
+        "kind",
         "index"
       ]
     },
-    "EmbeddingDataType": {
+    "EmbeddingDataKind": {
       "type": "string",
       "description": "The implementation of an embedding result item.",
       "enum": [
@@ -595,7 +595,7 @@
         "multimodal_dense_multi"
       ],
       "x-ms-enum": {
-        "name": "EmbeddingDataType",
+        "name": "EmbeddingDataKind",
         "modelAsString": true,
         "values": [
           {
@@ -852,8 +852,8 @@
       "type": "object",
       "description": "Common usage for an embedding operation. Token counts are omitted when the model doesn't report them.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/EmbeddingUsageType",
+        "kind": {
+          "$ref": "#/definitions/EmbeddingUsageKind",
           "description": "The embedding implementation that reported this usage."
         },
         "promptTokens": {
@@ -867,19 +867,19 @@
           "description": "The total number of tokens."
         }
       },
-      "discriminator": "type",
+      "discriminator": "kind",
       "required": [
-        "type"
+        "kind"
       ]
     },
-    "EmbeddingUsageType": {
+    "EmbeddingUsageKind": {
       "type": "string",
       "description": "The implementation that reported embedding usage.",
       "enum": [
         "multimodal"
       ],
       "x-ms-enum": {
-        "name": "EmbeddingUsageType",
+        "name": "EmbeddingUsageKind",
         "modelAsString": true,
         "values": [
           {
@@ -1026,7 +1026,7 @@
           "format": "int64",
           "description": "For truncated items only: the item's tokens before truncation."
         },
-        "kind": {
+        "vectorKind": {
           "type": "string",
           "description": "The kind of vectors returned.",
           "enum": [
@@ -1055,7 +1055,7 @@
       },
       "required": [
         "contentKind",
-        "kind",
+        "vectorKind",
         "shape",
         "embedding",
         "multiEmbedding"
@@ -1108,7 +1108,7 @@
           "format": "int64",
           "description": "For truncated items only: the item's tokens before truncation."
         },
-        "kind": {
+        "vectorKind": {
           "type": "string",
           "description": "The kind of vectors returned.",
           "enum": [
@@ -1125,7 +1125,7 @@
       },
       "required": [
         "contentKind",
-        "kind",
+        "vectorKind",
         "embedding"
       ],
       "allOf": [
@@ -1346,7 +1346,7 @@
           "format": "int64",
           "description": "For truncated items only: the item's tokens before truncation."
         },
-        "kind": {
+        "vectorKind": {
           "type": "string",
           "description": "The kind of vectors returned.",
           "enum": [
@@ -1371,7 +1371,7 @@
       },
       "required": [
         "contentKind",
-        "kind",
+        "vectorKind",
         "shape",
         "multiEmbedding"
       ],
