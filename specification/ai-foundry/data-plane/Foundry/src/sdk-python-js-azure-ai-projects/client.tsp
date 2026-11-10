@@ -520,6 +520,33 @@ namespace JavaScriptToolCompatibility {
 @@usage(VoiceAgentTransport, Usage.input | Usage.json);
 @@access(VoiceAgentTransport, Access.public);
 
+@@clientName(
+  VoiceAgentCollectionStartArguments.timeout_seconds,
+  "timeout",
+  "python"
+);
+@@clientName(
+  VoiceAgentCollectDtmfStartArguments.first_digit_timeout_seconds,
+  "first_digit_timeout",
+  "python"
+);
+@@clientName(
+  VoiceAgentDtmfCompletionTiming.inter_digit_timeout_seconds,
+  "inter_digit_timeout",
+  "python"
+);
+@@clientName(
+  VoiceAgentSubagent.invoke_timeout_seconds,
+  "invoke_timeout",
+  "python"
+);
+@@clientName(VoiceAgentSystemTool.timeout_seconds, "timeout", "python");
+@@clientName(
+  VoiceAgentTransferRouting.ring_timeout_seconds,
+  "ring_timeout",
+  "python"
+);
+
 // --------------------------------------------------------------------------------
 // Beta Voice Agent Conversations sub-client
 // --------------------------------------------------------------------------------

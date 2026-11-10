@@ -539,7 +539,7 @@ namespace Azure.AI.Projects {
     @doc("Preferred bare name for the output variable, required for `secret: true` and forbidden otherwise.")
     output_variable_name?: VoiceAgentOutputReference;
 
-    @doc("Total deadline in seconds (1-300), including receiver setup. Overrides the Agent timeout; if both are omitted, defaults to 60. Duplicate calls do not reset it.")
+    @doc("The collection timeout in seconds, from 1 to 300, including receiver setup. Overrides the agent timeout; if both are omitted, defaults to 60 seconds. Duplicate calls do not reset the timeout.")
     @minValue(1)
     @maxValue(300)
     timeout_seconds?: int32;
@@ -572,7 +572,7 @@ namespace Azure.AI.Projects {
 
   @doc("The wait after each received digit, scoped to the selected completion policy.")
   model VoiceAgentDtmfCompletionTiming {
-    @doc("Seconds between digits, reset after each digit; defaults to 5.")
+    @doc("The timeout in seconds between received digits, from 1 to 300, reset after each digit. Defaults to 5 seconds.")
     @minValue(1)
     @maxValue(300)
     inter_digit_timeout_seconds?: int32 = 5;
@@ -627,7 +627,7 @@ namespace Azure.AI.Projects {
     @doc("Required typed object selecting one completion policy and its parameters, not an array of simultaneous rules.")
     completion_mode: VoiceAgentDtmfCompletionMode;
 
-    @doc("The maximum wait for the first digit in integer seconds, starting at receiver readiness and bounded by the remaining total deadline. Omit for fifteen seconds.")
+    @doc("The maximum wait for the first digit in seconds, starting at receiver readiness and bounded by the remaining total deadline. Defaults to 15 seconds.")
     @minValue(1)
     @maxValue(300)
     first_digit_timeout_seconds?: int32 = 15;
