@@ -1527,6 +1527,10 @@ export function analyzeDownstreamBreaking(options: {
   for (const project of [...(manifest.projects ?? [])].sort((left, right) =>
     left.id.localeCompare(right.id),
   )) {
+    if (project.classification === "new" || project.artifactComparison?.mode === "new-project") {
+      analyzedProjects += 1;
+      continue;
+    }
     const baseArtifact = project.artifacts?.baseline?.tcgc ?? project.artifacts?.base?.tcgc;
     const currentArtifact = project.artifacts?.target?.tcgc ?? project.artifacts?.current?.tcgc;
     if (!artifactReady(baseArtifact) || !artifactReady(currentArtifact)) {

@@ -88,17 +88,40 @@ namespace Azure.AI.Projects {
   model RoutingConfiguration {
     /**
      * Session affinity configuration for reusing an eligible model across requests in the same conversation.
-     * If omitted, sticky affinity is used when a supported conversation identifier is available.
+     * If omitted, adaptive affinity is used when a supported conversation identifier is available.
      */
     @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
     session_affinity?: SessionAffinityConfiguration;
+
+    /** Overrides the routing objective for this request. If omitted, the configured routing mode is used. */
+    mode?: ModelRouterMode;
+
+    /** Model names used to narrow the configured model pool for this request. If omitted, the configured model pool is used. */
+    @minItems(1)
+    models?: string[];
+
+    /**
+     * When true, restricts routing to qualified model and serving API combinations that support
+     * all applicable request parameters. Returns 400 (Bad Request) when none qualify.
+     * Defaults to false when omitted. Explicit null and non-boolean values return 400.
+     * Requires the Foundry-Features: ModelRouterControls=V1Preview header.
+     * Applies only to qualified model, API, and adapter mappings, not every provider-native option.
+     * This setting is request-scoped; it does not introduce stored deployment defaults.
+     */
+    // Naming aligns with OpenRouter's require_parameters; LiteLLM exposes the inverse as drop_params.
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    require_parameters?: boolean = false;
   }
 
   /** Request settings that control Model Router session affinity. */
   @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   model SessionAffinityConfiguration {
-    /** Controls whether Model Router applies session affinity to this request. */
-    mode?: SessionAffinityRequestMode = SessionAffinityRequestMode.sticky;
+    /** Controls how session affinity influences model selection for this request. When omitted, adaptive affinity is used. */
+    strategy?: SessionAffinityRequestStrategy = SessionAffinityRequestStrategy.adaptive;
+
+    /** Deprecated request alias for `strategy`. Ignored when `strategy` is also supplied. */
+    #deprecated "Use `strategy` instead."
+    mode?: SessionAffinityRequestStrategy;
 
     /**
      * An opaque, application-owned conversation identifier. Use the same value for related requests.
@@ -107,12 +130,15 @@ namespace Azure.AI.Projects {
     session_id?: string;
   }
 
-  /** Request modes supported by Model Router session affinity. */
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown request modes with a 400 response."
+  /** Request strategies supported by Model Router session affinity. */
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown request strategies with a 400 response."
   @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-  union SessionAffinityRequestMode {
+  union SessionAffinityRequestStrategy {
     /** Attempts to reuse the model associated with the selected conversation identifier. */
     sticky: "sticky",
+
+    /** Chooses between the associated model and a newly ranked model by balancing expected response quality and cache benefit. */
+    adaptive: "adaptive",
 
     /** Disables affinity state lookup and update for this request. */
     none: "none",
@@ -242,23 +268,26 @@ namespace Azure.AI.Projects {
   /** Effective Model Router session affinity metadata for a request. */
   @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   model SessionAffinityDetails {
-    /** The effective session affinity mode. */
-    mode: SessionAffinityMode;
+    /** The effective session affinity strategy. */
+    strategy: SessionAffinityStrategy;
 
-    /** The identity source selected after applying precedence. `conversation` and `previous_response_id` apply only to the Responses API. Omitted when affinity is disabled. */
+    /** The identity source selected after applying precedence. Omitted when affinity is disabled. */
     source?: SessionAffinitySource;
 
     /** The final affinity outcome for the model that served the response. Omitted when affinity is disabled or no usable identity was available. */
     decision?: SessionAffinityDecision;
   }
 
-  /** Effective modes reported for Model Router session affinity. */
+  /** Effective strategies reported for Model Router session affinity. */
   @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-  union SessionAffinityMode {
+  union SessionAffinityStrategy {
     string,
 
-    /** Affinity was enabled for the request. */
+    /** The associated eligible model was preferred for the request. */
     sticky: "sticky",
+
+    /** Model Router chose between the associated model and a newly ranked model for the request. */
+    adaptive: "adaptive",
 
     /** Affinity was disabled for the request. */
     none: "none",
@@ -278,11 +307,8 @@ namespace Azure.AI.Projects {
     /** No usable conversation identifier was available. */
     not_available: "not_available",
 
-    /** The Responses conversation identifier. */
-    conversation: "conversation",
-
-    /** The Responses previous response identifier. */
-    previous_response_id: "previous_response_id",
+    /** A service-derived fingerprint based on Responses linkage or request content. */
+    derived_fingerprint: "derived_fingerprint",
   }
 
   /** Final outcomes reported for Model Router session affinity. */
@@ -345,7 +371,9 @@ namespace Azure.AI.Projects {
     conversation_id?: string;
   };
 
+  @doc("Identifies an agent by name and, optionally, a specific version.")
   model AgentReference {
+    @doc("Identifies this object as an agent reference.")
     type: "agent_reference";
 
     @doc("The name of the agent.")
