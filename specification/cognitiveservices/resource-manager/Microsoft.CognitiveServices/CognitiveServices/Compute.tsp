@@ -53,6 +53,7 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   tags?: Record<string>;
 
   /**

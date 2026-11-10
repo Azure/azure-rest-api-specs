@@ -54,6 +54,7 @@ model Workbench is Azure.ResourceManager.ProxyResource<
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
@@ -71,6 +72,7 @@ model Workbench is Azure.ResourceManager.ProxyResource<
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   tagsLegacy?: Record<string>;
 
   /**
@@ -122,6 +124,7 @@ interface Workbenches {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   @renamedFrom(Versions.v2026_09_15_preview, "createOrUpdate")
   @tag("Workbenches")
   createOrUpdateLegacy is ArmResourceCreateOrReplaceAsync<Workbench>;
@@ -160,6 +163,7 @@ interface Workbenches {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   @renamedFrom(Versions.v2026_09_15_preview, "update")
   @tag("Workbenches")
   @patch(#{ implicitOptionality: false })
