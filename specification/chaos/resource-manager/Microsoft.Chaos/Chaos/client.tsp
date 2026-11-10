@@ -37,6 +37,11 @@ using Microsoft.Chaos;
 @@clientName(ScenarioTemplate, "ChaosScenarioTemplate", "csharp");
 @@clientName(ScenarioTemplateVersion, "ChaosScenarioTemplateVersion", "csharp");
 @@clientName(ScenarioRun, "ChaosScenarioRun", "csharp");
+@@clientName(
+  ScenarioRunSummaryResource,
+  "ScenarioRunResourceSummary",
+  "csharp"
+);
 @@clientName(ScenarioConfiguration, "ChaosScenarioConfiguration", "csharp");
 @@clientName(DiscoveredResource, "ChaosDiscovered", "csharp");
 @@clientName(PrivateAccess, "ChaosPrivateAccess", "csharp");
