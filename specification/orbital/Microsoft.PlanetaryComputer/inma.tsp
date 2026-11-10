@@ -235,6 +235,7 @@ model IngestionRun {
   @doc("Run id which this run is associated to because it has been retried or rerun")
   parentRunId?: uuid;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Operation")
   operation: IngestionRunOperation;
 

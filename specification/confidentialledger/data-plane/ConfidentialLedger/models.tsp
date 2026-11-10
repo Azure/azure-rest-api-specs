@@ -9,6 +9,7 @@ namespace ConfidentialLedger;
 
 /** Roles */
 model UserDefinedRoles {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Roles */
   roles: Role[];
 }
@@ -586,6 +587,7 @@ model ReceiptContents {
    */
   cert?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Leaf
    */
@@ -601,11 +603,13 @@ model ReceiptContents {
    */
   nodeId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Proof
    */
   proof: ReceiptElement[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Root
    */
@@ -646,11 +650,13 @@ model ReceiptLeafComponents {
  * Receipt element
  */
 model ReceiptElement {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Left
    */
   left?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Right
    */
@@ -863,11 +869,13 @@ model InterpreterReusePolicy {
  * Module definition
  */
 model ModuleDef {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Module
    */
   module: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Name
    */

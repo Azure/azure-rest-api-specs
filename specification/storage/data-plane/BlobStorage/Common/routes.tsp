@@ -1040,6 +1040,7 @@ interface Blob {
       ...IfTagsParameter;
     },
     {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
       /** Content-type. */
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation, so content-type header can be returned."
       @header("Content-Type")
@@ -1718,6 +1719,7 @@ interface Blob {
         #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
         @statusCode statusCode: 204;
 
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
         /** Content-type. */
         #suppress "@typespec/http/content-type-ignored" "There is no response body, so the content-type header can be returned."
         @header("Content-Type")

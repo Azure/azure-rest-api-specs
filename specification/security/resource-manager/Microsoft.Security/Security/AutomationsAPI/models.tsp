@@ -18,66 +18,79 @@ namespace AutomationsAPI;
 union EventSource {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Assessments
    */
   Assessments: "Assessments",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AssessmentsSnapshot
    */
   AssessmentsSnapshot: "AssessmentsSnapshot",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SubAssessments
    */
   SubAssessments: "SubAssessments",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SubAssessmentsSnapshot
    */
   SubAssessmentsSnapshot: "SubAssessmentsSnapshot",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Alerts
    */
   Alerts: "Alerts",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SecureScores
    */
   SecureScores: "SecureScores",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SecureScoresSnapshot
    */
   SecureScoresSnapshot: "SecureScoresSnapshot",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SecureScoreControls
    */
   SecureScoreControls: "SecureScoreControls",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SecureScoreControlsSnapshot
    */
   SecureScoreControlsSnapshot: "SecureScoreControlsSnapshot",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegulatoryComplianceAssessment
    */
   RegulatoryComplianceAssessment: "RegulatoryComplianceAssessment",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegulatoryComplianceAssessmentSnapshot
    */
   RegulatoryComplianceAssessmentSnapshot: "RegulatoryComplianceAssessmentSnapshot",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AttackPaths
    */
   AttackPaths: "AttackPaths",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AttackPathsSnapshot
    */
@@ -90,21 +103,25 @@ union EventSource {
 union PropertyType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * String
    */
   String: "String",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Integer
    */
   Integer: "Integer",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Number
    */
   Number: "Number",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Boolean
    */
@@ -169,11 +186,13 @@ union Operator {
 union SourceType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Alert
    */
   Alert: "Alert",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AttackPath
    */

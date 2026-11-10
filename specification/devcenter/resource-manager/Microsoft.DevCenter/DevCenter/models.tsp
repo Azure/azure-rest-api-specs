@@ -386,6 +386,7 @@ union ImageValidationStatus {
 union UsageUnit {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Count.")
   Count: "Count",
 }
@@ -607,24 +608,31 @@ union ScheduleEnableStatus {
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Days of week will never change."
 @doc("The days of the week.")
 union DayOfWeek {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Monday")
   Monday: "Monday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Tuesday")
   Tuesday: "Tuesday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Wednesday")
   Wednesday: "Wednesday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Thursday")
   Thursday: "Thursday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Friday")
   Friday: "Friday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Saturday")
   Saturday: "Saturday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Sunday")
   Sunday: "Sunday",
 }

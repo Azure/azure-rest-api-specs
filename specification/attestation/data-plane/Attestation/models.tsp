@@ -20,6 +20,7 @@ union SigningCertificatesContentType {
   "application/json",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 /**
  * AttestationType
  */
@@ -490,6 +491,7 @@ model TcbBaseline {
   isSelectedTcb?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 /**
  * JsonWebKeySet
  */
@@ -504,6 +506,7 @@ model JsonWebKeySet {
   keys?: JsonWebKey[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 /**
  * JsonWebKey
  */
@@ -700,6 +703,7 @@ model PolicyCertificatesModificationResult {
   certificateResolution?: CertificateModification;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 /**
  * StoredAttestationPolicy
  */

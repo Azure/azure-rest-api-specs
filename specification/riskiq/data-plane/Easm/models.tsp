@@ -1644,9 +1644,11 @@ model ObservationRemediationItem {
 union ObservationRemediationState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("active")
   "active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("nonApplicable")
   "nonApplicable",
 }
@@ -1677,15 +1679,18 @@ union ReportBillableAssetBreakdownKind {
 union GlobalInventoryState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("candidate")
   "candidate",
 
   @doc("candidate investigate")
   "candidateInvestigate",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("confirmed")
   "confirmed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("associated")
   "associated",
 
@@ -1695,9 +1700,11 @@ union GlobalInventoryState {
   @doc("associated third party")
   "associatedThirdParty",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("archived")
   "archived",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("dismissed")
   "dismissed",
 
@@ -1728,9 +1735,11 @@ union AssetResponseType {
 union DeltaDetailType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("added")
   "added",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("removed")
   "removed",
 }
@@ -1740,9 +1749,11 @@ union DeltaDetailType {
 union GlobalAssetType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("page")
   "page",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("resource")
   "resource",
 
@@ -1752,9 +1763,11 @@ union GlobalAssetType {
   @doc("name server")
   "nameServer",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("host")
   "host",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("domain")
   "domain",
 
@@ -1767,6 +1780,7 @@ union GlobalAssetType {
   @doc("autonomous system number")
   "as",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("contact")
   "contact",
 
@@ -1927,6 +1941,7 @@ union ObservationType {
   @doc("common vulnerabilities and exposures")
   "cve",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("insight")
   "insight",
 }
@@ -1936,15 +1951,19 @@ union ObservationType {
 union ObservationPriority {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("high")
   "high",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("medium")
   "medium",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("low")
   "low",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("none")
   "none",
 }
@@ -1997,6 +2016,7 @@ union AssetChainSource {
   @doc("discovery group")
   "DISCO_GROUP",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("asset")
   "ASSET",
 }

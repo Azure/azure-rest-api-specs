@@ -239,6 +239,7 @@ union AssestKind {
    */
   qnas: "qnas",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Synonyms.
    */
@@ -295,6 +296,7 @@ union sourceKind {
 union sourceContentStructureKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Unstructured.
    */

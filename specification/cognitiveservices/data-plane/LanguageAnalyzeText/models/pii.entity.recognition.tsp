@@ -780,15 +780,19 @@ union PiiCategoriesExclude {
   /** UA Passport Number International */
   UAPassportNumberInternational: "UAPassportNumberInternational",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Organization */
   Organization: "Organization",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Email */
   Email: "Email",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** URL */
   URL: "URL",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Age */
   Age: "Age",
 
@@ -798,12 +802,15 @@ union PiiCategoriesExclude {
   /** IP Address */
   IPAddress: "IPAddress",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Date */
   Date: "Date",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Person */
   Person: "Person",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Address */
   Address: "Address",
 
@@ -823,6 +830,7 @@ union PiiCategoriesExclude {
   @added(Versions.v2025_11_01)
   DriversLicenseNumber: "DriversLicenseNumber",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Neighborhood */
   @added(Versions.v2026_05_15_preview)
   Neighborhood: "Neighborhood",
@@ -831,10 +839,12 @@ union PiiCategoriesExclude {
   @added(Versions.v2025_11_01)
   SortCode: "SortCode",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** PIN */
   @added(Versions.v2026_05_01)
   PIN: "PIN",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** VIN */
   @added(Versions.v2026_05_15_preview)
   VIN: "VIN",
@@ -863,6 +873,7 @@ union PiiCategoriesExclude {
   @added(Versions.v2026_05_01)
   GovernmentIssuedId: "GovernmentIssuedId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Password */
   @added(Versions.v2026_05_01)
   Password: "Password",
@@ -891,18 +902,22 @@ union PiiCategoriesExclude {
   @added(Versions.v2026_05_01)
   MedicareBeneficiaryId: "USMedicareBeneficiaryId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Location */
   @added(Versions.v2026_05_01)
   Location: "Location",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** City */
   @added(Versions.v2026_05_01)
   City: "City",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** State */
   @added(Versions.v2026_05_01)
   State: "State",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Airport */
   @added(Versions.v2026_05_01)
   Airport: "Airport",

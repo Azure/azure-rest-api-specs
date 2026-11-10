@@ -1401,9 +1401,11 @@ model AcsIncomingCallTeamsPhoneSourceDetails {
 
 /** The type of engagement user have with email. */
 union AcsUserEngagement {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** View */
   "view",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Click */
   "click",
 
@@ -1433,6 +1435,7 @@ model CommunicationIdentifierModel {
 
 /** Communication model identifier kind */
 union CommunicationIdentifierModelKind {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Unknown */
   "unknown",
 
@@ -1704,9 +1707,11 @@ union AcsInteractiveReplyKind {
 
 /** Chat Retention Policy kind */
 union AcsChatRetentionPolicyKind {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** None */
   "none",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ThreadCreationDate */
   "threadCreationDate",
 
@@ -1715,9 +1720,11 @@ union AcsChatRetentionPolicyKind {
 
 /** Chat Thread Deletion Reason Type */
 union AcsChatThreadDeletedReasonType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** DeletedByUser */
   "deletedByUser",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** DeletedByPolicy */
   "deletedByPolicy",
 
@@ -1734,21 +1741,27 @@ union AcsMessageChannelKind {
 
 /** Message delivery status */
 union AcsMessageDeliveryStatus {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Read */
   "read",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Delivered */
   "delivered",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Failed */
   "failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Sent */
   "sent",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Warning */
   "warning",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Unknown */
   "unknown",
 
@@ -1757,21 +1770,27 @@ union AcsMessageDeliveryStatus {
 
 /** Worker properties that can be updated */
 union AcsRouterUpdatedWorkerProperty {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AvailableForOffers */
   "AvailableForOffers",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** TotalCapacity */
   "TotalCapacity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** QueueAssignments */
   "QueueAssignments",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Labels */
   "Labels",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Tags */
   "Tags",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ChannelConfigurations */
   "ChannelConfigurations",
 
@@ -1780,9 +1799,11 @@ union AcsRouterUpdatedWorkerProperty {
 
 /** Call ended participant kind. */
 union AcsCallEndedByKind {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Participant */
   "Participant",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MicrosoftInternal */
   "MicrosoftInternal",
 
@@ -1791,18 +1812,23 @@ union AcsCallEndedByKind {
 
 /** Call participant kind. */
 union AcsCallParticipantKind {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Attendee */
   "Attendee",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Presenter */
   "Presenter",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Organizer */
   "Organizer",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Consumer */
   "Consumer",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Collaborator */
   "Collaborator",
 
@@ -1811,12 +1837,15 @@ union AcsCallParticipantKind {
 
 /** Communication cloud environment model. */
 union CommunicationCloudEnvironmentModel {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Public */
   "public",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Dod */
   "dod",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Gcch */
   "gcch",
 

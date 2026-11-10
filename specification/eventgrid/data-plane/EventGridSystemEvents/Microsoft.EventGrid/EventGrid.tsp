@@ -5,9 +5,11 @@ namespace Microsoft.EventGrid.SystemEvents;
 
 /** EventGrid MQTT Client State */
 union EventGridMQTTClientState {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Enabled */
   "Enabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Disabled */
   "Disabled",
 

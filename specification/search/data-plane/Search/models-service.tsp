@@ -1709,9 +1709,11 @@ union VisualFeature {
   /** Visual features recognized as commercial brands. */
   Brands: "brands",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Categories. */
   Categories: "categories",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Description. */
   Description: "description",
 
@@ -1721,6 +1723,7 @@ union VisualFeature {
   /** Visual features recognized as objects. */
   Objects: "objects",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Tags. */
   Tags: "tags",
 }

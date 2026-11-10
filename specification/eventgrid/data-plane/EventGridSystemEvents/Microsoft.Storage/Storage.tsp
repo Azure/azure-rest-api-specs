@@ -375,12 +375,15 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** The status for a LCM policy. */
   union StorageLifecycleCompletionStatus {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /** Completed */
     "Completed",
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /** CompletedWithError */
     "CompletedWithError",
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /** Incomplete */
     "Incomplete",
 
@@ -389,9 +392,11 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** The status for a storage task. */
   union StorageTaskAssignmentCompletedStatus {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /** Succeeded */
     "Succeeded",
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /** Failed */
     "Failed",
 
@@ -400,9 +405,11 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** The status for a storage task. */
   union StorageTaskCompletedStatus {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /** Succeeded */
     "Succeeded",
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /** Failed */
     "Failed",
 

@@ -293,8 +293,11 @@ union MetricUnit {
   @doc("No unit specified.") "NotSpecified",
   @doc("Percentage.") "Percent",
   @doc("Value count.") "Count",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Seconds.") "Seconds",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Milliseconds") "Milliseconds",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Bytes") "Bytes",
   @doc("Bytes per second") "BytesPerSecond",
   @doc("Count per second") "CountPerSecond",
@@ -539,6 +542,7 @@ model PassFailServerMetric {
   result?: PassFailResult;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("Secret")
 model Secret {
   @doc("The value of the secret for the respective type")
@@ -1089,6 +1093,7 @@ model TestRunStatistics {
   @visibility(Lifecycle.Read)
   pct9999ResTime?: float64;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Throughput.")
   @visibility(Lifecycle.Read)
   throughput?: float64;

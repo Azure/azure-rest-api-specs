@@ -129,6 +129,7 @@ union RouterJobStatus {
 union LabelOperator {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Equal.")
   "equal",
 
@@ -252,6 +253,7 @@ union ScoringRuleParameterSelector {
 union ExpressionRouterRuleLanguage {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("PowerFx")
   "powerFx",
 }

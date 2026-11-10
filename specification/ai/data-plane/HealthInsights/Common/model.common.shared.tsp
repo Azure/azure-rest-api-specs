@@ -36,6 +36,7 @@ model HealthInsightsJobBase {
   error?: Foundations.Error;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("ConditionStage")
 model ConditionStage {
   @doc("""
@@ -51,13 +52,16 @@ model ConditionStage {
   type?: Fhir.R4.CodeableConcept;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("InterpretationType ")
 union InterpretationType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Normal")
   Normal: "normal",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Abnormal")
   Abnormal: "abnormal",
 
@@ -67,15 +71,19 @@ union InterpretationType {
   @doc("Above normal")
   High: "high",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Better")
   Better: "better",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Worse")
   Worse: "worse",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Resistant")
   Resistant: "resistant",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Susceptible")
   Susceptible: "susceptible",
 

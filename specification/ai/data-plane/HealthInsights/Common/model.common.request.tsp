@@ -197,9 +197,11 @@ union EncounterClass {
 union SpecialtyType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("pathology")
   Pathology: "pathology",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("radiology")
   Radiology: "radiology",
 }

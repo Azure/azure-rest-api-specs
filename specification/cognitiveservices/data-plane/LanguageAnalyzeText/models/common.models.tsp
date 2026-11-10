@@ -525,9 +525,11 @@ model JobState {
   /** last updated date and time */
   lastUpdatedDateTime: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** status */
   status: State;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** errors */
   errors?: Error[];
 
@@ -537,6 +539,7 @@ model JobState {
 
 /** job errors */
 model JobErrors {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** errors */
   errors?: Error[];
 }

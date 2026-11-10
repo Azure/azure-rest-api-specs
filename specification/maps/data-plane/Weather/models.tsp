@@ -43,6 +43,7 @@ union WeatherDataUnit {
 union IconCode {
   integer,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Sunny */
   Sunny: 1,
 
@@ -61,15 +62,18 @@ union IconCode {
   /** Mostly Cloudy */
   MostlyCloudy: 6,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Cloudy */
   Cloudy: 7,
 
   /** Dreary (Overcast) */
   Dreary: 8,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Fog */
   Fog: 11,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Showers */
   Showers: 12,
 
@@ -79,6 +83,7 @@ union IconCode {
   /** Partly Sunny with Showers */
   PartlySunnyWithShowers: 14,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Thunderstorms */
   Thunderstorms: 15,
 
@@ -88,9 +93,11 @@ union IconCode {
   /** Partly Sunny with Thunderstorms */
   PartlySunnyWithThunderstorms: 17,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Rain */
   Rain: 18,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Flurries */
   Flurries: 19,
 
@@ -100,15 +107,18 @@ union IconCode {
   /** Partly Sunny with Flurries */
   PartlySunnyWithFlurries: 21,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Snow */
   Snow: 22,
 
   /** Mostly Cloudy with Snow */
   MostlyCloudyWithSnow: 23,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Ice */
   Ice: 24,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Sleet */
   Sleet: 25,
 
@@ -118,21 +128,27 @@ union IconCode {
   /** Rain and Snow */
   RainAndSnow: 29,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Hot */
   Hot: 30,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Cold */
   Cold: 31,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Windy */
   Windy: 32,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Clear */
   Clear: 33,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Mostly Clear */
   `Mostly Clear`: 34,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Partly Cloudy */
   `Partly Cloudy`: 35,
 
@@ -151,6 +167,7 @@ union IconCode {
   /** Mostly Cloudy with Showers */
   MostlyCloudyWithShowersNight: 40,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Partly Cloudy with Thunderstorms */
   `Partly Cloudy with Thunderstorms`: 41,
 
@@ -174,121 +191,145 @@ union IconCode {
 union UnitType {
   integer,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * feet
    */
   Feet: 0,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * inches
    */
   Inches: 1,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * miles
    */
   Miles: 2,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * millimeter
    */
   Millimeter: 3,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * centimeter
    */
   Centimeter: 4,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * meter
    */
   Meter: 5,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * kilometer
    */
   Kilometer: 6,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * kilometersPerHour
    */
   KilometersPerHour: 7,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * knots
    */
   Knots: 8,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * milesPerHour
    */
   MilesPerHour: 9,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * metersPerSecond
    */
   MetersPerSecond: 10,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * hectoPascals
    */
   HectoPascals: 11,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * inchesOfMercury
    */
   InchesOfMercury: 12,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * kiloPascals
    */
   KiloPascals: 13,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * millibars
    */
   Millibars: 14,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * millimetersOfMercury
    */
   MillimetersOfMercury: 15,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * poundsPerSquareInch
    */
   PoundsPerSquareInch: 16,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Celsius
    */
   Celsius: 17,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Fahrenheit
    */
   Fahrenheit: 18,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * kelvin
    */
   Kelvin: 19,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * percent
    */
   Percent: 20,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * float
    */
   Float: 21,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * integer
    */
   Integer: 22,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MicrogramsPerCubicMeterOfAir
    */
@@ -302,15 +343,19 @@ union UnitType {
 union PrecipitationType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Ice */
   Ice: "Ice",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Mix */
   Mix: "Mix",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Rain */
   Rain: "Rain",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Snow */
   Snow: "Snow",
 }
@@ -366,6 +411,7 @@ union HazardIndex {
   /** Take action */
   TakeAction: 3,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Emergency */
   Emergency: 4,
 }

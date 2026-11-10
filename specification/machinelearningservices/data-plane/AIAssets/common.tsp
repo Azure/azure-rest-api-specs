@@ -38,6 +38,7 @@ model OnlineRequestSettings {
   maxConcurrentRequestsPerInstance: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("LongRunningNullResponse")
 model LongRunningNullResponse {
@@ -46,6 +47,7 @@ model LongRunningNullResponse {
   location: ResourceLocation<ResourceOperationStatus<PutAssetLROResponse>>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("PutAssetLROResponse")
 model PutAssetLROResponse {

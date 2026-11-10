@@ -179,24 +179,30 @@ union RecommendationFindingStatusType {
 union DiseaseCourseType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Acute")
   Acute: "acute",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Chronic")
   Chronic: "chronic",
 
   @doc("Acute on chronic")
   AcuteOnChronic: "acuteOnChronic",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Intermittent")
   Intermittent: "intermittent",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Relapsing")
   Relapsing: "relapsing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Prolonged")
   Prolonged: "prolonged",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Paroxysmal")
   Paroxysmal: "paroxysmal",
 
@@ -275,24 +281,31 @@ union QualityMeasureType {
   @doc("Acrad 42")
   Acrad42: "acrad42",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Mednax55")
   Mednax55: "mednax55",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Msn13")
   Msn13: "msn13",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Msn15")
   Msn15: "msn15",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Qmm26")
   Qmm26: "qmm26",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Qmm17")
   Qmm17: "qmm17",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Qmm18")
   Qmm18: "qmm18",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Qmm19")
   Qmm19: "qmm19",
 }
@@ -302,9 +315,11 @@ union QualityMeasureType {
 union GuidanceRankingType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("high")
   High: "high",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("low")
   Low: "low",
 }
@@ -314,6 +329,7 @@ union GuidanceRankingType {
 union ScoringAndAssessmentCategoryType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("BIRADS")
   BIRADS: "BIRADS",
 

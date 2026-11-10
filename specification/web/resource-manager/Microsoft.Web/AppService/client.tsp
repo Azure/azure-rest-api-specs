@@ -5823,6 +5823,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 union ClientCredentialMethod {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ClientSecretPost. */
   ClientSecretPost: "ClientSecretPost",
 }
@@ -5837,6 +5838,7 @@ union ClientCredentialMethod {
 union ConfigReferenceSource {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** KeyVault. */
   KeyVault: "KeyVault",
 }

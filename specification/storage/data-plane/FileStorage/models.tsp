@@ -15,234 +15,311 @@ namespace Storage.File;
 union StorageErrorCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AccountAlreadyExists */
   AccountAlreadyExists: "AccountAlreadyExists",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AccountBeingCreated */
   AccountBeingCreated: "AccountBeingCreated",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AccountIsDisabled */
   AccountIsDisabled: "AccountIsDisabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthenticationFailed */
   AuthenticationFailed: "AuthenticationFailed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationFailure */
   AuthorizationFailure: "AuthorizationFailure",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ConditionHeadersNotSupported */
   ConditionHeadersNotSupported: "ConditionHeadersNotSupported",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ConditionNotMet */
   ConditionNotMet: "ConditionNotMet",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** EmptyMetadataKey */
   EmptyMetadataKey: "EmptyMetadataKey",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** FileShareProvisionedBandwidthDowngradeNotAllowed */
   FileShareProvisionedBandwidthDowngradeNotAllowed: "FileShareProvisionedBandwidthDowngradeNotAllowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** FileShareProvisionedIopsDowngradeNotAllowed */
   FileShareProvisionedIopsDowngradeNotAllowed: "FileShareProvisionedIopsDowngradeNotAllowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InsufficientAccountPermissions */
   InsufficientAccountPermissions: "InsufficientAccountPermissions",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InternalError */
   InternalError: "InternalError",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidAuthenticationInfo */
   InvalidAuthenticationInfo: "InvalidAuthenticationInfo",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidHeaderValue */
   InvalidHeaderValue: "InvalidHeaderValue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidHttpVerb */
   InvalidHttpVerb: "InvalidHttpVerb",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidInput */
   InvalidInput: "InvalidInput",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidMd5 */
   InvalidMd5: "InvalidMd5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidMetadata */
   InvalidMetadata: "InvalidMetadata",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidQueryParameterValue */
   InvalidQueryParameterValue: "InvalidQueryParameterValue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidRange */
   InvalidRange: "InvalidRange",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidResourceName */
   InvalidResourceName: "InvalidResourceName",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidUri */
   InvalidUri: "InvalidUri",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidXmlDocument */
   InvalidXmlDocument: "InvalidXmlDocument",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidXmlNodeValue */
   InvalidXmlNodeValue: "InvalidXmlNodeValue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Md5Mismatch */
   Md5Mismatch: "Md5Mismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MetadataTooLarge */
   MetadataTooLarge: "MetadataTooLarge",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MissingContentLengthHeader */
   MissingContentLengthHeader: "MissingContentLengthHeader",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MissingRequiredQueryParameter */
   MissingRequiredQueryParameter: "MissingRequiredQueryParameter",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MissingRequiredHeader */
   MissingRequiredHeader: "MissingRequiredHeader",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MissingRequiredXmlNode */
   MissingRequiredXmlNode: "MissingRequiredXmlNode",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MultipleConditionHeadersNotSupported */
   MultipleConditionHeadersNotSupported: "MultipleConditionHeadersNotSupported",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** OperationTimedOut */
   OperationTimedOut: "OperationTimedOut",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** OutOfRangeInput */
   OutOfRangeInput: "OutOfRangeInput",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** OutOfRangeQueryParameterValue */
   OutOfRangeQueryParameterValue: "OutOfRangeQueryParameterValue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** RequestBodyTooLarge */
   RequestBodyTooLarge: "RequestBodyTooLarge",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ResourceTypeMismatch */
   ResourceTypeMismatch: "ResourceTypeMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** RequestUrlFailedToParse */
   RequestUrlFailedToParse: "RequestUrlFailedToParse",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ResourceAlreadyExists */
   ResourceAlreadyExists: "ResourceAlreadyExists",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ResourceNotFound */
   ResourceNotFound: "ResourceNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ServerBusy */
   ServerBusy: "ServerBusy",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** UnsupportedHeader */
   UnsupportedHeader: "UnsupportedHeader",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** UnsupportedXmlNode */
   UnsupportedXmlNode: "UnsupportedXmlNode",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** UnsupportedQueryParameter */
   UnsupportedQueryParameter: "UnsupportedQueryParameter",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** UnsupportedHttpVerb */
   UnsupportedHttpVerb: "UnsupportedHttpVerb",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** CannotDeleteFileOrDirectory */
   CannotDeleteFileOrDirectory: "CannotDeleteFileOrDirectory",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ClientCacheFlushDelay */
   ClientCacheFlushDelay: "ClientCacheFlushDelay",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** DeletePending */
   DeletePending: "DeletePending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** DirectoryNotEmpty */
   DirectoryNotEmpty: "DirectoryNotEmpty",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** FileLockConflict */
   FileLockConflict: "FileLockConflict",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidFileOrDirectoryPathName */
   InvalidFileOrDirectoryPathName: "InvalidFileOrDirectoryPathName",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ParentNotFound */
   ParentNotFound: "ParentNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ReadOnlyAttribute */
   ReadOnlyAttribute: "ReadOnlyAttribute",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ShareAlreadyExists */
   ShareAlreadyExists: "ShareAlreadyExists",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ShareBeingDeleted */
   ShareBeingDeleted: "ShareBeingDeleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ShareDisabled */
   ShareDisabled: "ShareDisabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ShareNotFound */
   ShareNotFound: "ShareNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** SharingViolation */
   SharingViolation: "SharingViolation",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ShareSnapshotInProgress */
   ShareSnapshotInProgress: "ShareSnapshotInProgress",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ShareSnapshotCountExceeded */
   ShareSnapshotCountExceeded: "ShareSnapshotCountExceeded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ShareSnapshotOperationNotSupported */
   ShareSnapshotOperationNotSupported: "ShareSnapshotOperationNotSupported",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ShareHasSnapshots */
   ShareHasSnapshots: "ShareHasSnapshots",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** PreviousSnapshotNotFound */
   PreviousSnapshotNotFound: "PreviousSnapshotNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ContainerQuotaDowngradeNotAllowed */
   ContainerQuotaDowngradeNotAllowed: "ContainerQuotaDowngradeNotAllowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationSourceIPMismatch */
   AuthorizationSourceIPMismatch: "AuthorizationSourceIPMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationProtocolMismatch */
   AuthorizationProtocolMismatch: "AuthorizationProtocolMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationPermissionMismatch */
   AuthorizationPermissionMismatch: "AuthorizationPermissionMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationServiceMismatch */
   AuthorizationServiceMismatch: "AuthorizationServiceMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationResourceTypeMismatch */
   AuthorizationResourceTypeMismatch: "AuthorizationResourceTypeMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** FeatureVersionMismatch */
   FeatureVersionMismatch: "FeatureVersionMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ShareSnapshotNotFound */
   ShareSnapshotNotFound: "ShareSnapshotNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** FileShareProvisionedIopsInvalid */
   FileShareProvisionedIopsInvalid: "FileShareProvisionedIopsInvalid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** FileShareProvisionedBandwidthInvalid */
   FileShareProvisionedBandwidthInvalid: "FileShareProvisionedBandwidthInvalid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** FileShareProvisionedStorageInvalid */
   FileShareProvisionedStorageInvalid: "FileShareProvisionedStorageInvalid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** TotalSharesProvisionedCapacityExceedsAccountLimit */
   TotalSharesProvisionedCapacityExceedsAccountLimit: "TotalSharesProvisionedCapacityExceedsAccountLimit",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** TotalSharesProvisionedIopsExceedsAccountLimit */
   TotalSharesProvisionedIopsExceedsAccountLimit: "TotalSharesProvisionedIopsExceedsAccountLimit",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** TotalSharesProvisionedBandwidthExceedsAccountLimit */
   TotalSharesProvisionedBandwidthExceedsAccountLimit: "TotalSharesProvisionedBandwidthExceedsAccountLimit",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** TotalSharesCountExceedsAccountLimit */
   TotalSharesCountExceedsAccountLimit: "TotalSharesCountExceedsAccountLimit",
 }
@@ -251,15 +328,19 @@ union StorageErrorCode {
 union ShareAccessTier {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** TransactionOptimized */
   TransactionOptimized: "TransactionOptimized",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Hot */
   Hot: "Hot",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Cool */
   Cool: "Cool",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Premium */
   Premium: "Premium",
 }
@@ -268,6 +349,7 @@ union ShareAccessTier {
 union ShareTokenIntent {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** backup */
   backup: "backup",
 }
@@ -276,12 +358,15 @@ union ShareTokenIntent {
 union NfsFileType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Regular */
   Regular: "Regular",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Directory */
   Directory: "Directory",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** SymLink */
   SymLink: "SymLink",
 }
@@ -290,9 +375,11 @@ union NfsFileType {
 union FilePropertySemantics {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** New */
   New: "New",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Restore */
   Restore: "Restore",
 }
@@ -300,12 +387,15 @@ union FilePropertySemantics {
 /** Access rights of the access policy. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum AccessRight {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Read */
   Read,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Write */
   Write,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Delete */
   Delete,
 }
@@ -313,9 +403,11 @@ enum AccessRight {
 /** The current lease status of the share. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseStatusType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** locked */
   locked,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** unlocked */
   unlocked,
 }
@@ -323,18 +415,23 @@ enum LeaseStatusType {
 /** Lease state of the share. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseStateType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** available */
   available,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** leased */
   leased,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** expired */
   expired,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** breaking */
   breaking,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** broken */
   broken,
 }
@@ -345,9 +442,11 @@ enum LeaseStateType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseDurationType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** infinite */
   infinite,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** fixed */
   fixed,
 }
@@ -355,12 +454,15 @@ enum LeaseDurationType {
 /** The root squash setting for the share. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ShareRootSquash {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** NoRootSquash */
   NoRootSquash,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** RootSquash */
   RootSquash,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AllSquash */
   AllSquash,
 }
@@ -368,9 +470,11 @@ enum ShareRootSquash {
 /** The file permission format. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum FilePermissionFormat {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Sddl */
   Sddl,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Binary */
   Binary,
 }
@@ -378,30 +482,38 @@ enum FilePermissionFormat {
 /** The type of file information to include in the listing. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListFilesIncludeType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Timestamps */
   Timestamps,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Etag */
   Etag,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Attributes */
   Attributes,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** PermissionKey */
   PermissionKey,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Permissions */
   @added(Versions.v2027_03_07)
   Permissions,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** LinkCount */
   @added(Versions.v2027_03_07)
   LinkCount,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** NfsAttributes */
   @added(Versions.v2027_03_07)
   NfsAttributes,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** All */
   @added(Versions.v2027_03_07)
   All,
@@ -410,12 +522,15 @@ enum ListFilesIncludeType {
 /** The type of share information to include in the listing. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListSharesIncludeType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** snapshots */
   snapshots,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** metadata */
   metadata,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** deleted */
   deleted,
 }
@@ -423,9 +538,11 @@ enum ListSharesIncludeType {
 /** The permission copy mode type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum PermissionCopyModeType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** source */
   source,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** override */
   override,
 }
@@ -433,9 +550,11 @@ enum PermissionCopyModeType {
 /** The mode copy mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ModeCopyMode {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** source */
   source,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** override */
   override,
 }
@@ -443,9 +562,11 @@ enum ModeCopyMode {
 /** The owner copy mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum OwnerCopyMode {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** source */
   source,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** override */
   override,
 }
@@ -453,9 +574,11 @@ enum OwnerCopyMode {
 /** The delete snapshots option type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum DeleteSnapshotsOptionType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** include */
   include,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** include-leased */
   `include-leased`,
 }
@@ -463,9 +586,11 @@ enum DeleteSnapshotsOptionType {
 /** The file last written mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum FileLastWrittenMode {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Now */
   Now,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Preserve */
   Preserve,
 }

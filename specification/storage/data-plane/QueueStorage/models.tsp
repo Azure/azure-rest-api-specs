@@ -12,174 +12,231 @@ namespace Storage.Queues;
 
 /** Error codes returned by the service */
 union StorageErrorCode {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AccountAlreadyExists */
   AccountAlreadyExists: "AccountAlreadyExists",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AccountBeingCreated */
   AccountBeingCreated: "AccountBeingCreated",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AccountIsDisabled */
   AccountIsDisabled: "AccountIsDisabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthenticationFailed */
   AuthenticationFailed: "AuthenticationFailed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationFailure */
   AuthorizationFailure: "AuthorizationFailure",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ConditionHeadersNotSupported */
   ConditionHeadersNotSupported: "ConditionHeadersNotSupported",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ConditionNotMet */
   ConditionNotMet: "ConditionNotMet",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** EmptyMetadataKey */
   EmptyMetadataKey: "EmptyMetadataKey",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InsufficientAccountPermissions */
   InsufficientAccountPermissions: "InsufficientAccountPermissions",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InternalError */
   InternalError: "InternalError",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidAuthenticationInfo */
   InvalidAuthenticationInfo: "InvalidAuthenticationInfo",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidHeaderValue */
   InvalidHeaderValue: "InvalidHeaderValue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidHttpVerb */
   InvalidHttpVerb: "InvalidHttpVerb",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidInput */
   InvalidInput: "InvalidInput",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidMd5 */
   InvalidMd5: "InvalidMd5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidMetadata */
   InvalidMetadata: "InvalidMetadata",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidQueryParameterValue */
   InvalidQueryParameterValue: "InvalidQueryParameterValue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidRange */
   InvalidRange: "InvalidRange",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidResourceName */
   InvalidResourceName: "InvalidResourceName",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidUri */
   InvalidUri: "InvalidUri",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidXmlDocument */
   InvalidXmlDocument: "InvalidXmlDocument",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidXmlNodeValue */
   InvalidXmlNodeValue: "InvalidXmlNodeValue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Md5Mismatch */
   Md5Mismatch: "Md5Mismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MetadataTooLarge */
   MetadataTooLarge: "MetadataTooLarge",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MissingContentLengthHeader */
   MissingContentLengthHeader: "MissingContentLengthHeader",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MissingRequiredQueryParameter */
   MissingRequiredQueryParameter: "MissingRequiredQueryParameter",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MissingRequiredHeader */
   MissingRequiredHeader: "MissingRequiredHeader",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MissingRequiredXmlNode */
   MissingRequiredXmlNode: "MissingRequiredXmlNode",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MultipleConditionHeadersNotSupported */
   MultipleConditionHeadersNotSupported: "MultipleConditionHeadersNotSupported",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** OperationTimedOut */
   OperationTimedOut: "OperationTimedOut",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** OutOfRangeInput */
   OutOfRangeInput: "OutOfRangeInput",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** OutOfRangeQueryParameterValue */
   OutOfRangeQueryParameterValue: "OutOfRangeQueryParameterValue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** RequestBodyTooLarge */
   RequestBodyTooLarge: "RequestBodyTooLarge",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ResourceTypeMismatch */
   ResourceTypeMismatch: "ResourceTypeMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** RequestUrlFailedToParse */
   RequestUrlFailedToParse: "RequestUrlFailedToParse",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ResourceAlreadyExists */
   ResourceAlreadyExists: "ResourceAlreadyExists",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ResourceNotFound */
   ResourceNotFound: "ResourceNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ServerBusy */
   ServerBusy: "ServerBusy",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** UnsupportedHeader */
   UnsupportedHeader: "UnsupportedHeader",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** UnsupportedXmlNode */
   UnsupportedXmlNode: "UnsupportedXmlNode",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** UnsupportedQueryParameter */
   UnsupportedQueryParameter: "UnsupportedQueryParameter",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** UnsupportedHttpVerb */
   UnsupportedHttpVerb: "UnsupportedHttpVerb",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InvalidMarker */
   InvalidMarker: "InvalidMarker",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MessageNotFound */
   MessageNotFound: "MessageNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** MessageTooLarge */
   MessageTooLarge: "MessageTooLarge",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** PopReceiptMismatch */
   PopReceiptMismatch: "PopReceiptMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** QueueAlreadyExists */
   QueueAlreadyExists: "QueueAlreadyExists",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** QueueBeingDeleted */
   QueueBeingDeleted: "QueueBeingDeleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** QueueDisabled */
   QueueDisabled: "QueueDisabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** QueueNotEmpty */
   QueueNotEmpty: "QueueNotEmpty",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** QueueNotFound */
   QueueNotFound: "QueueNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationSourceIPMismatch */
   AuthorizationSourceIPMismatch: "AuthorizationSourceIPMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationProtocolMismatch */
   AuthorizationProtocolMismatch: "AuthorizationProtocolMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationPermissionMismatch */
   AuthorizationPermissionMismatch: "AuthorizationPermissionMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationServiceMismatch */
   AuthorizationServiceMismatch: "AuthorizationServiceMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AuthorizationResourceTypeMismatch */
   AuthorizationResourceTypeMismatch: "AuthorizationResourceTypeMismatch",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** FeatureVersionMismatch */
   FeatureVersionMismatch: "FeatureVersionMismatch",
 

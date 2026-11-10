@@ -19,11 +19,13 @@ namespace Components;
 union ApplicationType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * web
    */
   web: "web",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * other
    */
@@ -36,6 +38,7 @@ union ApplicationType {
 union FlowType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Bluefield
    */
@@ -48,6 +51,7 @@ union FlowType {
 union RequestSource {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * rest
    */
@@ -77,16 +81,19 @@ union PublicNetworkAccessType {
 union IngestionMode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ApplicationInsights
    */
   ApplicationInsights: "ApplicationInsights",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ApplicationInsightsWithDiagnosticSettings
    */
   ApplicationInsightsWithDiagnosticSettings: "ApplicationInsightsWithDiagnosticSettings",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * LogAnalytics
    */
@@ -99,11 +106,13 @@ union IngestionMode {
 union PurgeState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * pending
    */
   pending: "pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * completed
    */

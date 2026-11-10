@@ -304,6 +304,7 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
 @clientName("ManagementPolicyName", "csharp")
 union CSharpManagementPolicyName {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Default. */
   Default: "default",
 }
@@ -314,6 +315,7 @@ union CSharpManagementPolicyName {
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
 @clientName("BlobInventoryPolicyName", "csharp")
 union CSharpBlobInventoryPolicyName {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Default. */
   Default: "default",
 }

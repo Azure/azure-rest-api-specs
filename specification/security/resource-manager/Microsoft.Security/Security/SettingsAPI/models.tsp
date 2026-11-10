@@ -18,16 +18,19 @@ namespace SettingsAPI;
 union SettingKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DataExportSettings
    */
   DataExportSettings: "DataExportSettings",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AlertSuppressionSetting
    */
   AlertSuppressionSetting: "AlertSuppressionSetting",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AlertSyncSettings
    */

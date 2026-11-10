@@ -724,6 +724,7 @@ model DatasetV2 {
   /** The user who last modified this dataset. */
   modifiedBy?: User;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Properties. */
   properties?: Record<string>;
 

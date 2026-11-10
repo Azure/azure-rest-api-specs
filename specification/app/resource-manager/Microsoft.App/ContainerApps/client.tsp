@@ -134,6 +134,7 @@ model CSharpDiagnosticsDefinition
 union UsageUnit {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Count. */
   Count: "Count",
 }

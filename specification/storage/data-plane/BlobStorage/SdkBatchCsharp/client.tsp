@@ -71,6 +71,7 @@ model BatchBlobClientOptions {
 /** The type of blob deletions. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum BlobDeleteTypeCustom {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** None. */
   None: "None",
 

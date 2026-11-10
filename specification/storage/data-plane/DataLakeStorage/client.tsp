@@ -102,6 +102,7 @@ enum EncryptionAlgorithmTypeCustom {
   /** Deprecated */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AES256 */
   AES256: "AES256",
 }

@@ -19,21 +19,25 @@ namespace SensitivitySettingsAPI;
 union MipIntegrationStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Ok
    */
   Ok: "Ok",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * noConsent
    */
   noConsent: "noConsent",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * noAutoLabelingRules
    */
   noAutoLabelingRules: "noAutoLabelingRules",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * noMipLabels
    */

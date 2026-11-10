@@ -54,6 +54,7 @@ model DomainResource extends Resource {
   Based on [FHIR Condition](https://www.hl7.org/fhir/R4/condition.html)
   """)
 model Condition extends DomainResource {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("resourceType")
   resourceType: "Condition";
 
@@ -139,6 +140,7 @@ model ConditionStage {
   Based on [FHIR Observation](https://www.hl7.org/fhir/R4/observation.html)
   """)
 model Observation extends DomainResource {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("resourceType")
   resourceType: "Observation";
 
@@ -316,6 +318,7 @@ union ObservationStatusCodeType {
   Based on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)
   """)
 model ResearchStudy extends DomainResource {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("resourceType")
   resourceType: "ResearchStudy";
 

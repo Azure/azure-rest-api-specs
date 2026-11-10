@@ -439,6 +439,7 @@ model Iteration {
   result?: IterationResult;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("Operation.")
 @TypeSpec.Rest.resource("operations")
 model Operation {

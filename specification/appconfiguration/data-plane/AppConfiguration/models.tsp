@@ -126,15 +126,19 @@ union SnapshotFields {
 
 @doc("Snapshot status.")
 union SnapshotStatus {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Provisioning")
   provisioning: "provisioning",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Ready")
   ready: "ready",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Archived")
   archived: "archived",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Failed")
   failed: "failed",
 

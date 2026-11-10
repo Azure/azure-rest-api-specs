@@ -2864,6 +2864,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 union CosmosDBAccountOfferType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard.
    */

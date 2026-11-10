@@ -513,6 +513,7 @@ interface BusinessDomain {
       @query("$skipToken")
       skipToken?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
       @doc("writeOnly")
       @query
       writeOnly?: boolean;

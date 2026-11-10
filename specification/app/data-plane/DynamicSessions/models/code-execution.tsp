@@ -92,12 +92,15 @@ model SessionCodeExecutionResource {
 union CodeInputType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Inline. */
   inline: "Inline",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InlineBase64. */
   inlineBase64: "InlineBase64",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** InlineText. */
   inlineText: "InlineText",
 }
@@ -106,9 +109,11 @@ union CodeInputType {
 union ExecutionType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Synchronous */
   synchronous: "Synchronous",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Asynchronous */
   asynchronous: "Asynchronous",
 }

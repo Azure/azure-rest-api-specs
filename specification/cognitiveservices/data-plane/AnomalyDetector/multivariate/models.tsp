@@ -200,6 +200,7 @@ model AnomalyValue {
 
 @doc("Interpretation of the anomalous time stamp.")
 model AnomalyInterpretation {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Variable.")
   variable?: string;
 

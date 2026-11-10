@@ -11,12 +11,15 @@ namespace MapsRender;
 union Tileset {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** microsoft.base.road */
   `microsoft.base.road`: "microsoft.base.road",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** microsoft.base.darkgrey */
   `microsoft.base.darkgrey`: "microsoft.base.darkgrey",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** microsoft.imagery */
   `microsoft.imagery`: "microsoft.imagery",
 }
