@@ -146,9 +146,15 @@ using Commvault.ContentStore;
 
 // [TYPE001] Properties that hold ARM resource IDs should be typed as
 // Azure.Core.ResourceIdentifier rather than a raw string.
+@@clientName(SaaSData.saaSResourceId, "SaasResourceId", "csharp");
 @@alternateType(
   SaaSData.saaSResourceId,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  LatestLinkedSaaSResponse.saaSResourceId,
+  "SaasResourceId",
   "csharp"
 );
 @@alternateType(
@@ -157,6 +163,11 @@ using Commvault.ContentStore;
   "csharp"
 );
 @@clientName(LatestLinkedSaaSResponse.isHiddenSaaS, "IsHiddenSaas", "csharp");
+@@clientName(
+  SaaSResourceDetailsResponse.saaSResourceId,
+  "SaasResourceId",
+  "csharp"
+);
 @@alternateType(
   SaaSResourceDetailsResponse.saaSResourceId,
   Azure.Core.armResourceIdentifier,
@@ -368,5 +379,3 @@ using Commvault.ContentStore;
 @@clientName(BackupRuleType.QuarterlyFulls, "QuarterlyFullBackups", "csharp");
 @@clientName(BackupRuleType.HalfYearlyFulls, "HalfYearlyFullBackups", "csharp");
 @@clientName(BackupRuleType.YearlyFulls, "YearlyFullBackups", "csharp");
-
-@@clientName(CloudAccountProperties.ssoUrl, "SsoUrl", "csharp");
