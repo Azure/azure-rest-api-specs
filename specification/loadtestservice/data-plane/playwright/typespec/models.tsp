@@ -1,7 +1,9 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 namespace Playwright;
 
 // Models ////////////////////
@@ -56,6 +58,11 @@ model Workspace {
   @doc("When set on Playwright workspace resource, it provides the URI of the Azure storage account used to store workspace artifacts, test results, and reports.")
   @visibility(Lifecycle.Read)
   storageUri?: url;
+
+  @doc("The browser proxy enablement status for the workspace.")
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  browserProxy?: EnablementStatus = EnablementStatus.Enabled;
 }
 
 @doc("The Playwright workspace state.")
