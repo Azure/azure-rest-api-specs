@@ -60,4 +60,4 @@ using Azure.Data.AI;
 );
 @@clientName(MultimodalEmbeddingOutput.records, "recordCount", "csharp");
 @@clientName(MultimodalEmbeddingWarning.number, "codeNumber", "csharp");
-@@access(MultimodalEmbeddingResult.object, Access.internal, "csharp");
+@@scope(MultimodalEmbeddingResult.object, "!csharp");
