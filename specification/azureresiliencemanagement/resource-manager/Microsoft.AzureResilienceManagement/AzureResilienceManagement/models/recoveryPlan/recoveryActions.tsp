@@ -213,7 +213,7 @@ model FetchRecoveryPointsRequest {
 model RecoveryResourcePolicySet {
   @added(Versions.v2026_12_30_preview)
   @doc("GUIDs identifying recovery resources within the recovery plan.")
-  recoveryResourceIds: string[];
+  recoveryResourceIds: RecoveryResourceGuid[];
 
   @added(Versions.v2026_12_30_preview)
   @doc("The recovery point policy override shared by the recovery resources in this set.")
@@ -234,10 +234,12 @@ model FetchRecoveryPointsResult {
 model RecoveryPointDetails {
   @added(Versions.v2026_12_30_preview)
   @doc("The GUID identifying the recovery resource within the recovery plan.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   recoveryResourceId?: string;
 
   @added(Versions.v2026_12_30_preview)
   @doc("The GUID of the recovery group that contains the recovery resource.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   recoveryGroupId?: string;
 
   @added(Versions.v2026_12_30_preview)
@@ -245,26 +247,44 @@ model RecoveryPointDetails {
   recoveryPointId?: string;
 
   @added(Versions.v2026_12_30_preview)
-  @doc("The recovery point time for virtual machine and Azure Files workloads.")
+  @doc("The UTC time at which the selected recovery point was created.")
   recoveryPointTime?: utcDateTime;
 
   @added(Versions.v2026_12_30_preview)
-  @doc("The recovery point category for virtual machine and Azure Files workloads, such as AppConsistent.")
-  recoveryPointType?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the backup service recovery point wire name recoveryPointTimeInUTC returned for database workloads."
-  @added(Versions.v2026_12_30_preview)
-  @doc("The recovery point time in UTC for database workloads.")
-  recoveryPointTimeInUTC?: utcDateTime;
+  @doc("The consistency of the selected recovery point for virtual machine and Azure Files workloads.")
+  recoveryPointType?: RecoveryPointType;
 
   @added(Versions.v2026_12_30_preview)
-  @doc("The recovery point backup type for database workloads, such as Full or Differential.")
-  backupType?: string;
+  @doc("The backup mechanism of the selected recovery point for database workloads.")
+  backupType?: BackupType;
 
   @added(Versions.v2026_12_30_preview)
   @doc("The optional threat status reported by the backup service.")
   threatStatus?: string;
 }
+
+@added(Versions.v2026_12_30_preview)
+@doc("The consistency of a recovery point.")
+union RecoveryPointType {
+  @added(Versions.v2026_12_30_preview)
+  @doc("Application-consistent recovery point.")
+  AppConsistent: "AppConsistent",
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Crash-consistent recovery point.")
+  CrashConsistent: "CrashConsistent",
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("File-system-consistent recovery point.")
+  FileSystemConsistent: "FileSystemConsistent",
+
+  string,
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("A GUID identifying a recovery resource within a recovery plan.")
+@pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+scalar RecoveryResourceGuid extends string;
 
 @doc("TestFailoverCleanup post action request.")
 model TestFailoverCleanupRequest {

@@ -11226,11 +11226,13 @@
       "properties": {
         "recoveryResourceId": {
           "type": "string",
-          "description": "The GUID identifying the recovery resource within the recovery plan."
+          "description": "The GUID identifying the recovery resource within the recovery plan.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "recoveryGroupId": {
           "type": "string",
-          "description": "The GUID of the recovery group that contains the recovery resource."
+          "description": "The GUID of the recovery group that contains the recovery resource.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "recoveryPointId": {
           "type": "string",
@@ -11239,20 +11241,15 @@
         "recoveryPointTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The recovery point time for virtual machine and Azure Files workloads."
+          "description": "The UTC time at which the selected recovery point was created."
         },
         "recoveryPointType": {
-          "type": "string",
-          "description": "The recovery point category for virtual machine and Azure Files workloads, such as AppConsistent."
-        },
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The recovery point time in UTC for database workloads."
+          "$ref": "#/definitions/RecoveryPointType",
+          "description": "The consistency of the selected recovery point for virtual machine and Azure Files workloads."
         },
         "backupType": {
-          "type": "string",
-          "description": "The recovery point backup type for database workloads, such as Full or Differential."
+          "$ref": "#/definitions/BackupType",
+          "description": "The backup mechanism of the selected recovery point for database workloads."
         },
         "threatStatus": {
           "type": "string",
@@ -11392,6 +11389,36 @@
         }
       }
     },
+    "RecoveryPointType": {
+      "type": "string",
+      "description": "The consistency of a recovery point.",
+      "enum": [
+        "AppConsistent",
+        "CrashConsistent",
+        "FileSystemConsistent"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryPointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AppConsistent",
+            "value": "AppConsistent",
+            "description": "Application-consistent recovery point."
+          },
+          {
+            "name": "CrashConsistent",
+            "value": "CrashConsistent",
+            "description": "Crash-consistent recovery point."
+          },
+          {
+            "name": "FileSystemConsistent",
+            "value": "FileSystemConsistent",
+            "description": "File-system-consistent recovery point."
+          }
+        ]
+      }
+    },
     "RecoveryResource": {
       "type": "object",
       "description": "RecoveryPlan Resource a AzureResilienceProviderHub resource",
@@ -11406,6 +11433,11 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "RecoveryResourceGuid": {
+      "type": "string",
+      "description": "A GUID identifying a recovery resource within a recovery plan.",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "RecoveryResourceInclusionEligibility": {
       "type": "string",
@@ -11460,7 +11492,7 @@
           "type": "array",
           "description": "GUIDs identifying recovery resources within the recovery plan.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/RecoveryResourceGuid"
           }
         },
         "recoveryPointPolicy": {
