@@ -1354,6 +1354,9 @@
           "StorageAccountCreateEnablePublicNetworkAccess": {
             "$ref": "./examples/StorageAccountCreateEnablePublicNetworkAccess.json"
           },
+          "StorageAccountCreateMinimumTls13": {
+            "$ref": "./examples/StorageAccountCreateMinimumTls13.json"
+          },
           "StorageAccountCreatePremiumBlockBlobStorage": {
             "$ref": "./examples/StorageAccountCreatePremiumBlockBlobStorage.json"
           },
@@ -1465,6 +1468,9 @@
           },
           "StorageAccountUpdateEnableIpv6Features": {
             "$ref": "./examples/StorageAccountLeverageIPv6Ability.json"
+          },
+          "StorageAccountUpdateMinimumTls13": {
+            "$ref": "./examples/StorageAccountUpdateMinimumTls13.json"
           },
           "StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK": {
             "$ref": "./examples/StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK.json"
@@ -14926,7 +14932,7 @@
     },
     "MinimumTlsVersion": {
       "type": "string",
-      "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.",
+      "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.",
       "enum": [
         "TLS1_0",
         "TLS1_1",
@@ -14951,7 +14957,8 @@
           },
           {
             "name": "TLS1_3",
-            "value": "TLS1_3"
+            "value": "TLS1_3",
+            "description": "Minimum api-version: 2026-12-01."
           }
         ]
       }
@@ -17670,7 +17677,7 @@
         },
         "minimumTlsVersion": {
           "$ref": "#/definitions/MinimumTlsVersion",
-          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported."
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         },
         "allowSharedKeyAccess": {
           "type": "boolean",
@@ -17831,7 +17838,7 @@
         },
         "minimumTlsVersion": {
           "$ref": "#/definitions/MinimumTlsVersion",
-          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported."
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         },
         "allowSharedKeyAccess": {
           "type": "boolean",
@@ -17954,7 +17961,7 @@
         },
         "minimumTlsVersion": {
           "$ref": "#/definitions/MinimumTlsVersion",
-          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported."
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         },
         "allowSharedKeyAccess": {
           "type": "boolean",
