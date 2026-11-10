@@ -30,6 +30,11 @@ namespace Azure.AI.Projects {
   );
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.AgentOptimizationJobs.downloadFile,
+    Agents,
+    "python, javascript"
+  );
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);

@@ -1,0 +1,2908 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Resource Graph Onboarding",
+    "version": "2026-05-01-preview",
+    "description": "Azure Resource Graph onboarding control plane. Partners declare an offering, the ontology\n(demand) they need, and the query endpoints that consume it; Azure Resource Graph resolves the\nrequired publisher supply (data onboardings) and rolls the result out region by region.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Offerings"
+    },
+    {
+      "name": "Ontologies"
+    },
+    {
+      "name": "DataOnboardings"
+    },
+    {
+      "name": "DataOnboardingLocations"
+    },
+    {
+      "name": "DataOnboardingActivations"
+    },
+    {
+      "name": "QueryEndpoints"
+    },
+    {
+      "name": "OntologyLocations"
+    },
+    {
+      "name": "QueryEndpointLocations"
+    },
+    {
+      "name": "OntologyActivations"
+    },
+    {
+      "name": "QueryEndpointActivations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ResourceGraph/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Resource Graph operations including onboarding permissions": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings": {
+      "get": {
+        "operationId": "Offerings_ListBySubscription",
+        "tags": [
+          "Offerings"
+        ],
+        "description": "Lists the offerings in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OfferingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the offerings in a subscription": {
+            "$ref": "./examples/Offerings_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}": {
+      "get": {
+        "operationId": "Offerings_Get",
+        "tags": [
+          "Offerings"
+        ],
+        "description": "Gets an offering.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Offering"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an offering": {
+            "$ref": "./examples/Offerings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Offerings_CreateOrUpdate",
+        "tags": [
+          "Offerings"
+        ],
+        "description": "Creates an offering or updates an existing one.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Offering"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Offering' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Offering"
+            }
+          },
+          "201": {
+            "description": "Resource 'Offering' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Offering"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an offering": {
+            "$ref": "./examples/Offerings_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/dataOnboardings": {
+      "get": {
+        "operationId": "DataOnboardings_ListByOffering",
+        "tags": [
+          "DataOnboardings"
+        ],
+        "description": "Lists the data onboardings in an offering.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataOnboardingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the data onboardings in an offering": {
+            "$ref": "./examples/DataOnboardings_ListByOffering.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/dataOnboardings/{dataOnboardingName}": {
+      "get": {
+        "operationId": "DataOnboardings_Get",
+        "tags": [
+          "DataOnboardings"
+        ],
+        "description": "Gets a data onboarding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "dataOnboardingName",
+            "in": "path",
+            "description": "The name of the DataOnboarding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataOnboarding"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a data onboarding": {
+            "$ref": "./examples/DataOnboardings_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/dataOnboardings/{dataOnboardingName}/locations": {
+      "get": {
+        "operationId": "DataOnboardingLocations_ListByDataOnboarding",
+        "tags": [
+          "DataOnboardingLocations"
+        ],
+        "description": "Lists the Azure regions where a data onboarding has activation records.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "dataOnboardingName",
+            "in": "path",
+            "description": "The name of the DataOnboarding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataOnboardingLocationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the Azure regions a data onboarding can be activated in": {
+            "$ref": "./examples/DataOnboardingLocations_ListByDataOnboarding.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/dataOnboardings/{dataOnboardingName}/locations/{location}": {
+      "get": {
+        "operationId": "DataOnboardingLocations_Get",
+        "tags": [
+          "DataOnboardingLocations"
+        ],
+        "description": "Gets an Azure region where a data onboarding has an activation record.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "dataOnboardingName",
+            "in": "path",
+            "description": "The name of the DataOnboarding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the DataOnboardingLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataOnboardingLocation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an Azure region a data onboarding can be activated in": {
+            "$ref": "./examples/DataOnboardingLocations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/dataOnboardings/{dataOnboardingName}/locations/{location}/activation": {
+      "get": {
+        "operationId": "DataOnboardingActivations_ListByLocation",
+        "tags": [
+          "DataOnboardingActivations"
+        ],
+        "description": "Lists the data onboarding activations in a single Azure region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "dataOnboardingName",
+            "in": "path",
+            "description": "The name of the DataOnboarding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the DataOnboardingLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataOnboardingActivationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the data onboarding activations in one region": {
+            "$ref": "./examples/DataOnboardingActivations_ListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/dataOnboardings/{dataOnboardingName}/locations/{location}/activation/default": {
+      "get": {
+        "operationId": "DataOnboardingActivations_Get",
+        "tags": [
+          "DataOnboardingActivations"
+        ],
+        "description": "Gets the activation of a data onboarding in a single Azure region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "dataOnboardingName",
+            "in": "path",
+            "description": "The name of the DataOnboarding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the DataOnboardingLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataOnboardingActivation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the activation of a data onboarding in one region": {
+            "$ref": "./examples/DataOnboardingActivations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/ontologies": {
+      "get": {
+        "operationId": "Ontologies_ListByOffering",
+        "tags": [
+          "Ontologies"
+        ],
+        "description": "Lists the ontologies in an offering.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OntologyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the ontologies in an offering": {
+            "$ref": "./examples/Ontologies_ListByOffering.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/ontologies/{ontologyName}": {
+      "get": {
+        "operationId": "Ontologies_Get",
+        "tags": [
+          "Ontologies"
+        ],
+        "description": "Gets an ontology.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "ontologyName",
+            "in": "path",
+            "description": "The name of the Ontology",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ontology"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an ontology": {
+            "$ref": "./examples/Ontologies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Ontologies_CreateOrUpdate",
+        "tags": [
+          "Ontologies"
+        ],
+        "description": "Creates an ontology or updates an existing one. Creating or updating an ontology re-runs gap\nanalysis against the supply currently available, and, when `autoOnboard` is set, materializes\ndata onboardings for every unmet type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "ontologyName",
+            "in": "path",
+            "description": "The name of the Ontology",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ontology"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Ontology' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ontology"
+            }
+          },
+          "201": {
+            "description": "Resource 'Ontology' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ontology"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an ontology covered by approved supply": {
+            "$ref": "./examples/Ontologies_CreateOrUpdate.json"
+          },
+          "Declare a node-only ontology using default onboarding settings": {
+            "$ref": "./examples/Ontologies_CreateOrUpdate_NodeOnlyDefaults.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/ontologies/{ontologyName}/locations": {
+      "get": {
+        "operationId": "OntologyLocations_ListByOntology",
+        "tags": [
+          "OntologyLocations"
+        ],
+        "description": "Lists the Azure regions where an ontology has activation records.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "ontologyName",
+            "in": "path",
+            "description": "The name of the Ontology",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OntologyLocationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the Azure regions an ontology can be activated in": {
+            "$ref": "./examples/OntologyLocations_ListByOntology.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/ontologies/{ontologyName}/locations/{location}": {
+      "get": {
+        "operationId": "OntologyLocations_Get",
+        "tags": [
+          "OntologyLocations"
+        ],
+        "description": "Gets an Azure region where an ontology has an activation record.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "ontologyName",
+            "in": "path",
+            "description": "The name of the Ontology",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the OntologyLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OntologyLocation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an Azure region an ontology can be activated in": {
+            "$ref": "./examples/OntologyLocations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/ontologies/{ontologyName}/locations/{location}/activation": {
+      "get": {
+        "operationId": "OntologyActivations_ListByLocation",
+        "tags": [
+          "OntologyActivations"
+        ],
+        "description": "Lists the ontology activations in a single Azure region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "ontologyName",
+            "in": "path",
+            "description": "The name of the Ontology",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the OntologyLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OntologyActivationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the ontology activations in one region": {
+            "$ref": "./examples/OntologyActivations_ListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/ontologies/{ontologyName}/locations/{location}/activation/default": {
+      "get": {
+        "operationId": "OntologyActivations_Get",
+        "tags": [
+          "OntologyActivations"
+        ],
+        "description": "Gets the activation of an ontology in a single Azure region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "ontologyName",
+            "in": "path",
+            "description": "The name of the Ontology",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the OntologyLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OntologyActivation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the activation of an ontology in one region": {
+            "$ref": "./examples/OntologyActivations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OntologyActivations_CreateOrUpdate",
+        "tags": [
+          "OntologyActivations"
+        ],
+        "description": "Activates an ontology in a single Azure region, or updates an existing activation. Azure\nResource Manager routes the request to the Azure Resource Graph stamp that owns the region\nnamed by the `locations` segment. A terminal provisioning state returns HTTP 200; a\nnonterminal state returns HTTP 201. Control-plane completion does not imply completed\ningestion execution.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "ontologyName",
+            "in": "path",
+            "description": "The name of the Ontology",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the OntologyLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OntologyActivation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OntologyActivation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OntologyActivation"
+            }
+          },
+          "201": {
+            "description": "Resource 'OntologyActivation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OntologyActivation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Activate an ontology in one region": {
+            "$ref": "./examples/OntologyActivations_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/queryEndpoints": {
+      "get": {
+        "operationId": "QueryEndpoints_ListByOffering",
+        "tags": [
+          "QueryEndpoints"
+        ],
+        "description": "Lists the query endpoints in an offering.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpointListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the query endpoints in an offering": {
+            "$ref": "./examples/QueryEndpoints_ListByOffering.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/queryEndpoints/{queryEndpointName}": {
+      "get": {
+        "operationId": "QueryEndpoints_Get",
+        "tags": [
+          "QueryEndpoints"
+        ],
+        "description": "Gets a query endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "queryEndpointName",
+            "in": "path",
+            "description": "The name of the QueryEndpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a query endpoint": {
+            "$ref": "./examples/QueryEndpoints_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "QueryEndpoints_CreateOrUpdate",
+        "tags": [
+          "QueryEndpoints"
+        ],
+        "description": "Creates a query endpoint or updates an existing one. The ontology the endpoint references must\nalready be approved. This operation stores the consumer declaration; it does not provision a\nquery backend.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "queryEndpointName",
+            "in": "path",
+            "description": "The name of the QueryEndpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryEndpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'QueryEndpoint' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpoint"
+            }
+          },
+          "201": {
+            "description": "Resource 'QueryEndpoint' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a query endpoint over an approved ontology": {
+            "$ref": "./examples/QueryEndpoints_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/queryEndpoints/{queryEndpointName}/locations": {
+      "get": {
+        "operationId": "QueryEndpointLocations_ListByQueryEndpoint",
+        "tags": [
+          "QueryEndpointLocations"
+        ],
+        "description": "Lists the Azure regions where a query endpoint has activation records.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "queryEndpointName",
+            "in": "path",
+            "description": "The name of the QueryEndpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpointLocationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the Azure regions a query endpoint can be activated in": {
+            "$ref": "./examples/QueryEndpointLocations_ListByQueryEndpoint.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/queryEndpoints/{queryEndpointName}/locations/{location}": {
+      "get": {
+        "operationId": "QueryEndpointLocations_Get",
+        "tags": [
+          "QueryEndpointLocations"
+        ],
+        "description": "Gets an Azure region where a query endpoint has an activation record.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "queryEndpointName",
+            "in": "path",
+            "description": "The name of the QueryEndpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the QueryEndpointLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpointLocation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an Azure region a query endpoint can be activated in": {
+            "$ref": "./examples/QueryEndpointLocations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/queryEndpoints/{queryEndpointName}/locations/{location}/activation": {
+      "get": {
+        "operationId": "QueryEndpointActivations_ListByLocation",
+        "tags": [
+          "QueryEndpointActivations"
+        ],
+        "description": "Lists the query endpoint activations in a single Azure region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "queryEndpointName",
+            "in": "path",
+            "description": "The name of the QueryEndpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the QueryEndpointLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpointActivationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the query endpoint activations in one region": {
+            "$ref": "./examples/QueryEndpointActivations_ListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceGraph/offerings/{offeringName}/queryEndpoints/{queryEndpointName}/locations/{location}/activation/default": {
+      "get": {
+        "operationId": "QueryEndpointActivations_Get",
+        "tags": [
+          "QueryEndpointActivations"
+        ],
+        "description": "Gets the activation of a query endpoint in a single Azure region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "queryEndpointName",
+            "in": "path",
+            "description": "The name of the QueryEndpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the QueryEndpointLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpointActivation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the activation of a query endpoint in one region": {
+            "$ref": "./examples/QueryEndpointActivations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "QueryEndpointActivations_CreateOrUpdate",
+        "tags": [
+          "QueryEndpointActivations"
+        ],
+        "description": "Activates a query endpoint in a single Azure region, or updates an existing activation. Azure\nResource Manager routes the request to the Azure Resource Graph stamp that owns the region\nnamed by the `locations` segment. The referenced ontology must be approved and have a\nsucceeded activation in this region. The operation stores the regional control-plane\nrecord; it does not provision a query backend.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offeringName",
+            "in": "path",
+            "description": "The name of the Offering",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "queryEndpointName",
+            "in": "path",
+            "description": "The name of the QueryEndpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the QueryEndpointLocation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryEndpointActivation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'QueryEndpointActivation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpointActivation"
+            }
+          },
+          "201": {
+            "description": "Resource 'QueryEndpointActivation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QueryEndpointActivation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Activate a query endpoint in one region": {
+            "$ref": "./examples/QueryEndpointActivations_CreateOrUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActivationStatus": {
+      "type": "string",
+      "description": "Aggregate control-plane rollout state of a data onboarding, computed from its regional\nactivation children and its declared `targetRegions`. This does not indicate whether an\noperator has completed ingestion execution.\n\nThis lives on supply only. An ontology is a blueprint with no physical footprint, so it carries\nno activation state: its lifecycle is fully described by `provisioningState`, `reviewStatus` and\n`validationStatus`. A query endpoint likewise reports where it is live through its own regional\nactivation children.",
+      "enum": [
+        "Pending",
+        "RollingOut",
+        "Active"
+      ],
+      "x-ms-enum": {
+        "name": "ActivationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "No regional rollout has started."
+          },
+          {
+            "name": "RollingOut",
+            "value": "RollingOut",
+            "description": "At least one target region has completed control-plane activation, but not all of them."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Every target region has completed control-plane activation. Regional execution is tracked\nseparately through `UnderExecution` and `Executed`."
+          }
+        ]
+      }
+    },
+    "DataOnboarding": {
+      "type": "object",
+      "description": "A data onboarding, the publisher-side supply record for the types an ontology demands. Partners\nread these to discover which publisher covers a type they declared. Global ontology writes\ngenerate unmet supply when `autoOnboard` is enabled; operators approve the generated records.\nThere is no public data-onboarding write operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataOnboardingProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataOnboardingActivation": {
+      "type": "object",
+      "description": "The activation of a data onboarding in a single Azure region. Azure Resource Graph materializes\none of these when an ontology is activated in the region, and operators advance it through the\nreview workflow as the supply is rolled out. There is exactly one activation per region, so the\nresource is a singleton addressed by the fixed name `default`.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegionalActivationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataOnboardingActivationListResult": {
+      "type": "object",
+      "description": "The response of a DataOnboardingActivation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataOnboardingActivation items on this page",
+          "items": {
+            "$ref": "#/definitions/DataOnboardingActivation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataOnboardingListResult": {
+      "type": "object",
+      "description": "The response of a DataOnboarding list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataOnboarding items on this page",
+          "items": {
+            "$ref": "#/definitions/DataOnboarding"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataOnboardingLocation": {
+      "type": "object",
+      "description": "An Azure region a data onboarding can be activated in. This resource exists to make per-region\nactivations addressable and to let Azure Resource Manager route each activation to the regional\nAzure Resource Graph stamp that owns it.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OnboardingLocationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataOnboardingLocationListResult": {
+      "type": "object",
+      "description": "The response of a DataOnboardingLocation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataOnboardingLocation items on this page",
+          "items": {
+            "$ref": "#/definitions/DataOnboardingLocation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataOnboardingProperties": {
+      "type": "object",
+      "description": "The properties of a data onboarding, the publisher-side supply record that covers one or more\nnode and edge types for a single provider namespace.",
+      "properties": {
+        "publisherNamespace": {
+          "type": "string",
+          "description": "The provider namespace that owns every entry in `types`, for example `microsoft.compute`.\nRelationships use their own relationship type's namespace, not the source node's namespace.",
+          "pattern": "^[A-Za-z][A-Za-z0-9.]+$"
+        },
+        "types": {
+          "type": "array",
+          "description": "Every node and edge type this publisher supplies.",
+          "items": {
+            "$ref": "#/definitions/OnboardingTypeSpec"
+          },
+          "x-ms-identifiers": []
+        },
+        "targetRegions": {
+          "type": "array",
+          "description": "The regions this supply is intended to reach. This is the denominator for `activationStatus`:\nthe roll-up reports `Active` only once every declared region has a succeeded regional\nactivation. An empty list means no target set was declared, in which case `activationStatus`\nreports `Active` as soon as any region succeeds.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ontologyRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the ontology whose declared types caused this data onboarding\nto be created. Reusing covered types within the same offering does not overwrite this\nprovenance. Newly unmet types are grouped by publisher within each generation batch, so a\npublisher namespace can have multiple onboarding records.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ResourceGraph/offerings/ontologies"
+              }
+            ]
+          }
+        },
+        "activatedRegions": {
+          "type": "array",
+          "description": "The regions that have completed control-plane activation, derived from the regional\nactivation children. This is the numerator to `targetRegions`, not an execution-readiness signal.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OnboardingProvisioningState",
+          "description": "The provisioning state of the data onboarding.",
+          "readOnly": true
+        },
+        "reviewStatus": {
+          "$ref": "#/definitions/ReviewStatus",
+          "description": "The review lifecycle of the data onboarding.",
+          "readOnly": true
+        },
+        "activationStatus": {
+          "$ref": "#/definitions/ActivationStatus",
+          "description": "The aggregate regional rollout state of the data onboarding.",
+          "readOnly": true
+        },
+        "rejectionReason": {
+          "type": "string",
+          "description": "The reason the data onboarding was rejected.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "publisherNamespace",
+        "types",
+        "targetRegions"
+      ]
+    },
+    "EdgeOnboardingTypeSpec": {
+      "type": "object",
+      "description": "An edge (relationship) type a data onboarding supplies.",
+      "properties": {
+        "relationshipType": {
+          "type": "string",
+          "description": "The relationship type that connects the source and target node types."
+        },
+        "sourceNodeType": {
+          "type": "string",
+          "description": "The Azure resource type at the source of the relationship."
+        },
+        "targetNodeType": {
+          "type": "string",
+          "description": "The Azure resource type at the target of the relationship."
+        },
+        "expectedEdgeCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of edges the publisher expects to supply."
+        }
+      },
+      "required": [
+        "relationshipType",
+        "sourceNodeType",
+        "targetNodeType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnboardingTypeSpec"
+        }
+      ],
+      "x-ms-discriminator-value": "Edge"
+    },
+    "EdgeTypeRef": {
+      "type": "object",
+      "description": "An edge-type reference declared on an ontology.",
+      "properties": {
+        "relationshipType": {
+          "type": "string",
+          "description": "The fully qualified relationship type that connects the source and target node types.\nIts own provider namespace identifies the publisher.",
+          "pattern": "^[A-Za-z][A-Za-z0-9.]+/[A-Za-z0-9._/-]+$"
+        },
+        "sourceNodeType": {
+          "type": "string",
+          "description": "The source node's Azure resource type or its ontology-local alias."
+        },
+        "targetNodeType": {
+          "type": "string",
+          "description": "The target node's Azure resource type or its ontology-local alias."
+        }
+      },
+      "required": [
+        "relationshipType",
+        "sourceNodeType",
+        "targetNodeType"
+      ]
+    },
+    "IngestionEndpoint": {
+      "type": "object",
+      "description": "The ingestion endpoint resolved from the approved storage assignments during regional\ncontrol-plane activation. Its presence does not indicate completed ingestion execution.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI the publisher sends notifications to."
+        },
+        "supportedFormats": {
+          "type": "array",
+          "description": "The notification payload formats the endpoint accepts.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "uri",
+        "supportedFormats"
+      ]
+    },
+    "NodeOnboardingTypeSpec": {
+      "type": "object",
+      "description": "A node type a data onboarding supplies.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The fully qualified Azure resource type, for example `microsoft.compute/virtualmachines`.",
+          "pattern": "^[A-Za-z][A-Za-z0-9.]+/[A-Za-z0-9._/-]+$"
+        },
+        "totalRowCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of rows the publisher expects to supply."
+        }
+      },
+      "required": [
+        "resourceType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnboardingTypeSpec"
+        }
+      ],
+      "x-ms-discriminator-value": "Node"
+    },
+    "NodeTypeRef": {
+      "type": "object",
+      "description": "A node-type reference declared on an ontology.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The fully qualified Azure resource type, for example `microsoft.compute/virtualmachines`.",
+          "pattern": "^[A-Za-z][A-Za-z0-9.]+/[A-Za-z0-9._/-]+$"
+        },
+        "alias": {
+          "type": "string",
+          "description": "An optional partner-facing alias for the node type."
+        }
+      },
+      "required": [
+        "resourceType"
+      ]
+    },
+    "Offering": {
+      "type": "object",
+      "description": "An offering, the global product boundary a partner onboards under. It owns the demand side\n(ontologies and query endpoints) and the supply side (data onboardings).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfferingProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OfferingListResult": {
+      "type": "object",
+      "description": "The response of a Offering list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Offering items on this page",
+          "items": {
+            "$ref": "#/definitions/Offering"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OfferingProperties": {
+      "type": "object",
+      "description": "The properties of an offering, the global product boundary that owns both the demand\n(ontologies, query endpoints) and the supply (data onboardings).",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The partner-facing display name of the offering."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The commercial tier of the offering.",
+          "default": "Shared",
+          "enum": [
+            "Shared",
+            "Dedicated"
+          ],
+          "x-ms-enum": {
+            "name": "OfferingTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Shared",
+                "value": "Shared",
+                "description": "The offering runs on shared Azure Resource Graph capacity."
+              },
+              {
+                "name": "Dedicated",
+                "value": "Dedicated",
+                "description": "The offering runs on capacity dedicated to the partner."
+              }
+            ]
+          }
+        },
+        "lifecycleState": {
+          "type": "string",
+          "description": "The public lifecycle state of the offering.",
+          "default": "Preview",
+          "enum": [
+            "Preview",
+            "GA",
+            "Deprecated"
+          ],
+          "x-ms-enum": {
+            "name": "LifecycleState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Preview",
+                "value": "Preview",
+                "description": "The offering is in preview."
+              },
+              {
+                "name": "GA",
+                "value": "GA",
+                "description": "The offering is generally available."
+              },
+              {
+                "name": "Deprecated",
+                "value": "Deprecated",
+                "description": "The offering is deprecated and accepts no new consumers."
+              }
+            ]
+          }
+        },
+        "organizationName": {
+          "type": "string",
+          "description": "The name of the organization that owns the offering."
+        },
+        "contactEmails": {
+          "type": "array",
+          "description": "Contact email addresses for the team that owns the offering.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "scenarioDescription": {
+          "type": "string",
+          "description": "A description of the scenario the offering serves."
+        },
+        "documentationLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "A link to the offering's partner-facing documentation."
+        },
+        "serviceTreeId": {
+          "type": "string",
+          "description": "The Service Tree identifier of the owning service."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OnboardingProvisioningState",
+          "description": "The provisioning state of the offering.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "organizationName",
+        "contactEmails",
+        "scenarioDescription"
+      ]
+    },
+    "OnboardingLocationProperties": {
+      "type": "object",
+      "description": "The properties of a location grouping. The location resource carries no partner-settable state\nof its own; it exists so that per-region activations are addressable and routable region by\nregion.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/OnboardingProvisioningState",
+          "description": "The provisioning state of the location grouping.",
+          "readOnly": true
+        }
+      }
+    },
+    "OnboardingProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of an onboarding resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Running"
+      ],
+      "x-ms-enum": {
+        "name": "OnboardingProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The request has been accepted and is queued for processing."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The request is being processed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "OnboardingTypeSpec": {
+      "type": "object",
+      "description": "One type a data onboarding supplies, either a node type or an edge (relationship) type,\ndiscriminated by `kind`. Nodes and edges share a single collection because a publisher onboards\nboth through the same pipeline and they are approved, provisioned and activated together.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/OntologyEntryKind",
+          "description": "Whether this entry describes a node type or an edge type."
+        },
+        "payloadSizeKb": {
+          "type": "number",
+          "format": "float",
+          "description": "The average notification payload size, in kilobytes."
+        },
+        "peakNotificationRates": {
+          "$ref": "#/definitions/PeakNotificationRates",
+          "description": "Peak per-minute notification rates for this type."
+        },
+        "visibility": {
+          "$ref": "#/definitions/Visibility",
+          "description": "The visibility of this type to consumers."
+        },
+        "status": {
+          "$ref": "#/definitions/ReviewStatus",
+          "description": "The review lifecycle state of this type.",
+          "readOnly": true
+        },
+        "ingestionEndpoint": {
+          "$ref": "#/definitions/IngestionEndpoint",
+          "description": "The ingestion endpoint resolved for this type during regional activation.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "visibility",
+        "status"
+      ]
+    },
+    "Ontology": {
+      "type": "object",
+      "description": "An ontology, the data-model blueprint that declares the node and edge types a partner's scenario\nneeds. The definition is global; its per-region rollout lives on the activation children.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OntologyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OntologyActivation": {
+      "type": "object",
+      "description": "The activation of an ontology in a single Azure region. There is exactly one activation per\nregion, so the resource is a singleton addressed by the fixed name `default`.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegionalActivationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OntologyActivationListResult": {
+      "type": "object",
+      "description": "The response of a OntologyActivation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OntologyActivation items on this page",
+          "items": {
+            "$ref": "#/definitions/OntologyActivation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OntologyEntryKind": {
+      "type": "string",
+      "description": "Identifies whether an ontology entry describes a node type or an edge (relationship) type.",
+      "enum": [
+        "Node",
+        "Edge"
+      ],
+      "x-ms-enum": {
+        "name": "OntologyEntryKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Node",
+            "value": "Node",
+            "description": "The entry describes a node type."
+          },
+          {
+            "name": "Edge",
+            "value": "Edge",
+            "description": "The entry describes an edge (relationship) type."
+          }
+        ]
+      }
+    },
+    "OntologyListResult": {
+      "type": "object",
+      "description": "The response of a Ontology list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Ontology items on this page",
+          "items": {
+            "$ref": "#/definitions/Ontology"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OntologyLocation": {
+      "type": "object",
+      "description": "An Azure region an ontology can be activated in. This resource exists to make per-region\nactivations addressable and to let Azure Resource Manager route each activation to the regional\nAzure Resource Graph stamp that owns it.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OnboardingLocationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OntologyLocationListResult": {
+      "type": "object",
+      "description": "The response of a OntologyLocation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OntologyLocation items on this page",
+          "items": {
+            "$ref": "#/definitions/OntologyLocation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OntologyProperties": {
+      "type": "object",
+      "description": "The properties of an ontology, the data-model blueprint that declares the node and edge types a\npartner needs.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The partner-facing display name of the ontology."
+        },
+        "autoOnboard": {
+          "type": "boolean",
+          "description": "When `true`, creating or updating the ontology immediately materializes global data\nonboardings for every unmet type. When `false`, gap analysis still runs and\n`validationDetails` reports the gaps, but no new supply is created. Existing approved supply\ncan still satisfy the ontology; unmet demand keeps its derived `reviewStatus` at `Submitted`.",
+          "default": false
+        },
+        "nodeTypeRefs": {
+          "type": "array",
+          "description": "The node types the ontology declares.",
+          "items": {
+            "$ref": "#/definitions/NodeTypeRef"
+          },
+          "x-ms-identifiers": []
+        },
+        "edgeTypeRefs": {
+          "type": "array",
+          "description": "The edge types the ontology declares.",
+          "items": {
+            "$ref": "#/definitions/EdgeTypeRef"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OnboardingProvisioningState",
+          "description": "The provisioning state of the ontology.",
+          "readOnly": true
+        },
+        "reviewStatus": {
+          "$ref": "#/definitions/ReviewStatus",
+          "description": "The review lifecycle of the ontology. It is derived from the data onboardings referenced by\n`validationDetails` and reaches `Approved` only once every one of them is approved. Regional\nactivation is blocked until then.",
+          "readOnly": true
+        },
+        "rejectionReason": {
+          "type": "string",
+          "description": "The rejection reason propagated from backing supply. Rejected supply leaves the ontology's\nderived review status at `Submitted`.",
+          "readOnly": true
+        },
+        "approvedBy": {
+          "type": "string",
+          "description": "The reviewer who last approved the ontology.",
+          "readOnly": true
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the ontology was last approved.",
+          "readOnly": true
+        },
+        "rejectedBy": {
+          "type": "string",
+          "description": "The reviewer who last rejected the ontology.",
+          "readOnly": true
+        },
+        "rejectedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the ontology was last rejected.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/ValidationAvailability",
+          "description": "The aggregate availability of every type the ontology declares. It is the worst per-type\navailability across `validationDetails`.",
+          "readOnly": true
+        },
+        "validationDetails": {
+          "type": "array",
+          "description": "The per-type gap-analysis results for the ontology.",
+          "items": {
+            "$ref": "#/definitions/ValidationDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OntologySnapshot": {
+      "type": "object",
+      "description": "A point-in-time snapshot of an ontology's semantic body that a regional activation was\ngenerated from. Only semantic fields are captured; read-only and cosmetic fields are excluded.",
+      "properties": {
+        "nodeTypeRefs": {
+          "type": "array",
+          "description": "The node types declared by the ontology at snapshot time.",
+          "items": {
+            "$ref": "#/definitions/NodeTypeRef"
+          },
+          "x-ms-identifiers": []
+        },
+        "edgeTypeRefs": {
+          "type": "array",
+          "description": "The edge types declared by the ontology at snapshot time.",
+          "items": {
+            "$ref": "#/definitions/EdgeTypeRef"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OntologyStorageAssignment": {
+      "type": "object",
+      "description": "An operator-assigned physical storage placement for one ontology node or edge. Read-only on the\nAPI surface: it is set when an operator approves the parent data onboarding and is copied onto\neach regional activation so that a regional record is self-describing.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/OntologyEntryKind",
+          "description": "Whether this assignment covers a node type or an edge type."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The Azure resource type. Node assignments only."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "The relationship type. Edge assignments only."
+        },
+        "sourceNodeType": {
+          "type": "string",
+          "description": "The Azure resource type at the source of the relationship. Edge assignments only."
+        },
+        "targetNodeType": {
+          "type": "string",
+          "description": "The Azure resource type at the target of the relationship. Edge assignments only."
+        },
+        "scaleUnit": {
+          "type": "string",
+          "description": "The scale unit the type is placed on."
+        },
+        "dataset": {
+          "type": "string",
+          "description": "The dataset the type is placed in."
+        },
+        "logicalTableName": {
+          "type": "string",
+          "description": "The logical table name the type is written to."
+        },
+        "physicalTableName": {
+          "type": "string",
+          "description": "The physical table name backing the logical table."
+        },
+        "lookbackHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How far back, in hours, the type's data is retained for reconciliation.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "kind",
+        "scaleUnit",
+        "dataset",
+        "logicalTableName",
+        "physicalTableName",
+        "lookbackHours"
+      ]
+    },
+    "PeakNotificationRates": {
+      "type": "object",
+      "description": "Peak per-minute notification rates for a node or edge type.",
+      "properties": {
+        "write": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Peak write notifications per minute."
+        },
+        "delete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Peak delete notifications per minute."
+        },
+        "snapshot": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Peak snapshot notifications per minute."
+        },
+        "event": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Peak event notifications per minute."
+        }
+      },
+      "required": [
+        "write",
+        "delete",
+        "snapshot",
+        "event"
+      ]
+    },
+    "QueryEndpoint": {
+      "type": "object",
+      "description": "A query endpoint, the consumer-side activation request that binds an approved ontology to a\nqueryable surface.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryEndpointProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QueryEndpointActivation": {
+      "type": "object",
+      "description": "The activation of a query endpoint in a single Azure region. There is exactly one activation per\nregion, so the resource is a singleton addressed by the fixed name `default`.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryEndpointActivationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QueryEndpointActivationListResult": {
+      "type": "object",
+      "description": "The response of a QueryEndpointActivation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QueryEndpointActivation items on this page",
+          "items": {
+            "$ref": "#/definitions/QueryEndpointActivation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryEndpointActivationProperties": {
+      "type": "object",
+      "description": "The properties of a per-region query endpoint activation.",
+      "properties": {
+        "ontologyRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full Azure resource identifier of the ontology this regional endpoint serves, copied\nfrom the parent query endpoint rather than supplied by the caller.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ResourceGraph/offerings/ontologies"
+              }
+            ]
+          }
+        },
+        "enginePreference": {
+          "$ref": "#/definitions/QueryEnginePreference",
+          "description": "The preferred query backend copied from the parent query endpoint.",
+          "readOnly": true
+        },
+        "region": {
+          "type": "string",
+          "description": "The Azure region this activation covers. It matches the `locations` segment of the resource\nidentifier.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OnboardingProvisioningState",
+          "description": "The provisioning state of the activation.",
+          "readOnly": true
+        },
+        "validationDetails": {
+          "type": "array",
+          "description": "The per-type gap-analysis results for this region.",
+          "items": {
+            "$ref": "#/definitions/ValidationDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "QueryEndpointListResult": {
+      "type": "object",
+      "description": "The response of a QueryEndpoint list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QueryEndpoint items on this page",
+          "items": {
+            "$ref": "#/definitions/QueryEndpoint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryEndpointLocation": {
+      "type": "object",
+      "description": "An Azure region a query endpoint can be activated in. This resource exists to make per-region\nactivations addressable and to let Azure Resource Manager route each activation to the regional\nAzure Resource Graph stamp that owns it.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OnboardingLocationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QueryEndpointLocationListResult": {
+      "type": "object",
+      "description": "The response of a QueryEndpointLocation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QueryEndpointLocation items on this page",
+          "items": {
+            "$ref": "#/definitions/QueryEndpointLocation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryEndpointProperties": {
+      "type": "object",
+      "description": "The properties of a query endpoint, a consumer activation request that references an approved\nontology within the same offering.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The partner-facing display name of the query endpoint.",
+          "minLength": 1
+        },
+        "ontologyRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full Azure resource identifier of an approved ontology in the same subscription and\noffering. The reference cannot be changed after creation. Legacy bare ontology names are\naccepted on input and normalized; responses always contain the full resource identifier.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ResourceGraph/offerings/ontologies"
+              }
+            ]
+          }
+        },
+        "enginePreference": {
+          "$ref": "#/definitions/QueryEnginePreference",
+          "description": "The preferred query backend. Omission records no preference and does not provision a backend."
+        },
+        "estimatedQueriesPerDay": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The expected daily query volume, used for capacity planning.",
+          "minimum": 1
+        },
+        "peakQueriesPerMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The expected peak query rate, in queries per minute.",
+          "minimum": 1
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OnboardingProvisioningState",
+          "description": "The provisioning state of the query endpoint.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "displayName",
+        "ontologyRef",
+        "estimatedQueriesPerDay"
+      ]
+    },
+    "QueryEnginePreference": {
+      "type": "string",
+      "description": "Preferred query backend recorded on an onboarding query endpoint. This preference does not\nprovision a query backend.",
+      "enum": [
+        "Galaxy",
+        "Kusto",
+        "Pacific",
+        "NoPreference"
+      ],
+      "x-ms-enum": {
+        "name": "QueryEnginePreference",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Galaxy",
+            "value": "Galaxy",
+            "description": "The Galaxy query backend."
+          },
+          {
+            "name": "Kusto",
+            "value": "Kusto",
+            "description": "The Kusto query backend."
+          },
+          {
+            "name": "Pacific",
+            "value": "Pacific",
+            "description": "The Pacific query backend."
+          },
+          {
+            "name": "NoPreference",
+            "value": "NoPreference",
+            "description": "No preferred query backend."
+          }
+        ]
+      }
+    },
+    "RegionalActivationProperties": {
+      "type": "object",
+      "description": "The properties of a per-region activation. The same body is returned whether the activation\nhangs off an ontology or off a data onboarding; the fields that do not apply to a given parent\nare simply empty. `assignments` is populated only for a data-onboarding activation, and\n`materializedDataOnboardingRefs` only for an ontology activation.",
+      "properties": {
+        "ontologySnapshot": {
+          "$ref": "#/definitions/OntologySnapshot",
+          "description": "The snapshot of the ontology body this activation was generated from. When supplied on create\nor update, Azure Resource Graph compares it against the currently approved global ontology and\nrejects the activation if they differ, enforcing the one-active-rollout invariant. When\nomitted, the drift check is skipped. It is persisted and returned on read."
+        },
+        "region": {
+          "type": "string",
+          "description": "The Azure region this activation covers. It matches the `locations` segment of the resource\nidentifier.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OnboardingProvisioningState",
+          "description": "The provisioning state of the activation.",
+          "readOnly": true
+        },
+        "reviewStatus": {
+          "$ref": "#/definitions/ReviewStatus",
+          "description": "For data-onboarding activations, `UnderExecution` until the operator closes the region out\nas `Executed`; approval happens globally on the supply record. The shared field is unused\nfor ontology activations and is returned with its default value, `Submitted`.",
+          "readOnly": true
+        },
+        "validationDetails": {
+          "type": "array",
+          "description": "The per-type gap-analysis results for this region.",
+          "items": {
+            "$ref": "#/definitions/ValidationDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "assignments": {
+          "type": "array",
+          "description": "The approved storage assignments this region has to execute, copied from the parent data\nonboarding's approved configuration so that a regional record is self-describing. It is also\nwhat a re-activation compares against to decide whether a region that already reported\n`Executed` still is. Empty for an ontology activation.",
+          "items": {
+            "$ref": "#/definitions/OntologyStorageAssignment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "ingestionEndpoint": {
+          "$ref": "#/definitions/IngestionEndpoint",
+          "description": "The ingestion endpoint resolved for this region.",
+          "readOnly": true
+        },
+        "materializedDataOnboardingRefs": {
+          "type": "array",
+          "description": "ARM resource identifiers of the data onboardings materialized for this region as a side effect\nof the activation. Empty when nothing was materialized.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ResourceGraph/offerings/dataOnboardings"
+                }
+              ]
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ReviewStatus": {
+      "type": "string",
+      "description": "The onboarding review lifecycle. Advanced by Azure Resource Graph operators, never by the\npartner. `Rejected` and `Executed` are terminal.",
+      "enum": [
+        "Submitted",
+        "UnderReview",
+        "UnderExecution",
+        "Approved",
+        "Rejected",
+        "Executed"
+      ],
+      "x-ms-enum": {
+        "name": "ReviewStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Submitted",
+            "value": "Submitted",
+            "description": "The record has been submitted and is awaiting operator triage."
+          },
+          {
+            "name": "UnderReview",
+            "value": "UnderReview",
+            "description": "An operator is actively reviewing the record."
+          },
+          {
+            "name": "UnderExecution",
+            "value": "UnderExecution",
+            "description": "The approved record is being rolled out."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The record is approved to execute."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The record was rejected. Terminal."
+          },
+          {
+            "name": "Executed",
+            "value": "Executed",
+            "description": "Rollout finished and the operator closed the region out. Terminal. Distinct from `Approved`,\nwhich means \"approved to execute\" rather than \"execution finished\"."
+          }
+        ]
+      }
+    },
+    "ValidationAvailability": {
+      "type": "string",
+      "description": "Per-type availability produced by ontology gap analysis, also used as the ontology-wide roll-up\nin `validationStatus`. Declaration order is severity order — `Available` is best, `Unknown`\nworst — and the roll-up is the worst value across every declared node and edge reference.",
+      "enum": [
+        "Available",
+        "OnboardingInProgress",
+        "NotOnboarded",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationAvailability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Approved supply covers the type, or the platform catalog reports it as active."
+          },
+          {
+            "name": "OnboardingInProgress",
+            "value": "OnboardingInProgress",
+            "description": "A data onboarding declares the type but has not been approved yet. This is the normal state\nbetween a partner creating an ontology and an operator approving the resulting supply."
+          },
+          {
+            "name": "NotOnboarded",
+            "value": "NotOnboarded",
+            "description": "Nothing supplies the type and the platform knows it is not onboarded: either the catalog\nresolved it and reported no coverage, or, for relationships, no data onboarding declares it."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The platform cannot say. No data onboarding covers the type and the catalog has no entry for\nit at all, so reporting `NotOnboarded` would assert more than is actually known."
+          }
+        ]
+      }
+    },
+    "ValidationDetail": {
+      "type": "object",
+      "description": "Per-type gap-analysis result. Carries the resolved data onboarding reference when the type is\n(being) onboarded, which is how a partner discovers the supply record covering a type they\ndeclared.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/OntologyEntryKind",
+          "description": "Whether this detail describes a declared node type or edge type."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The Azure resource type. Node entries only."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "The relationship type. Edge entries only."
+        },
+        "sourceNodeType": {
+          "type": "string",
+          "description": "The Azure resource type at the source of the relationship. Edge entries only."
+        },
+        "targetNodeType": {
+          "type": "string",
+          "description": "The Azure resource type at the target of the relationship. Edge entries only."
+        },
+        "availability": {
+          "$ref": "#/definitions/ValidationAvailability",
+          "description": "The availability of the type."
+        },
+        "dataOnboardingRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the data onboarding that covers this type.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ResourceGraph/offerings/dataOnboardings"
+              }
+            ]
+          }
+        },
+        "reviewStatus": {
+          "$ref": "#/definitions/ReviewStatus",
+          "description": "The review status of the data onboarding named by `dataOnboardingRef`. The ontology's own\n`reviewStatus` is a roll-up of these: it reads `Approved` only when every entry does, and\nregional activation is rejected while any entry is still `Submitted`."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable explanation of the availability result. Emitted only when `availability` is\nnot `Available`, that is, only when there is something to explain."
+        }
+      },
+      "required": [
+        "kind",
+        "availability",
+        "reviewStatus"
+      ]
+    },
+    "Visibility": {
+      "type": "string",
+      "description": "Per node/edge type visibility.",
+      "enum": [
+        "InternalOnly",
+        "PublicPreview",
+        "GA"
+      ],
+      "x-ms-enum": {
+        "name": "Visibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InternalOnly",
+            "value": "InternalOnly",
+            "description": "Visible only to Microsoft-internal consumers."
+          },
+          {
+            "name": "PublicPreview",
+            "value": "PublicPreview",
+            "description": "Available in public preview."
+          },
+          {
+            "name": "GA",
+            "value": "GA",
+            "description": "Generally available."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

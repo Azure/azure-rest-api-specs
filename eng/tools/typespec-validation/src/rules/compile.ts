@@ -1,21 +1,19 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
+import { globFiles } from "@azure-tools/specs-shared/glob";
 import { untilLastSegmentWithParent } from "@azure-tools/specs-shared/path";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { readFile } from "node:fs/promises";
-import { stripVTControlCharacters } from "node:util";
 import path, { basename, dirname, normalize } from "pathe";
-import { reportCommandOutput } from "../command-output.ts";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
-import { globFiles } from "../glob.ts";
 import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
+import { compileTypeSpec } from "../typespec-compiler.ts";
 import {
   fileExists,
   getStructureVersion,
   getSuppressions,
   gitDiffTopSpecFolder,
-  runNodeBin,
 } from "../utils.ts";
 
 export class CompileRule implements Rule {
@@ -28,42 +26,15 @@ export class CompileRule implements Rule {
 
     const mainTspExists = await fileExists(path.join(folder, "main.tsp"));
     if (mainTspExists) {
-      const [err, stdout, stderr] = await runNodeBin(
-        "@typespec/compiler",
-        // Capture the inventory even when quiet: ExtraSwagger validation depends on it.
-        ["tsp", "compile", "--list-files", "--warn-as-error", folder],
-        logger,
-      );
-      const compiled = reportCommandOutput(
-        "compile",
-        "TypeSpec compilation",
-        [err, stdout, stderr],
-        logger,
-      );
+      const compiled = await compileTypeSpec(folder);
+      const { emittedFiles } = compiled;
       diagnostics.push(...(compiled.diagnostics ?? []));
 
       if (success) {
-        if (!err) {
+        if (compiled.success) {
           // Check for *extra* typespec-generated swagger files under the output folder, which
           // indicates a mismatch between TypeSpec and swaggers.
-
-          // Example 'stdout':
-          //
-          // TypeSpec compiler v0.67.2
-          //
-          // ../resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json
-          // ../resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Operations_List.json
-          //
-          // Compilation completed successfully.
-
-          // Remove ANSI color codes, handle windows and linux line endings
-          const outputLines = stripVTControlCharacters(stdout).split(/\r?\n/);
-
-          // TODO: Use helpers in /.github once they support platform-specific paths
-          // Header, footer, and empty lines should be excluded by JSON filter
-          const outputSwaggers = outputLines
-            // Remove leading and trailing whitespace
-            .map((l) => l.trim())
+          const outputSwaggers = emittedFiles
             // Normalize separators to forward slashes
             .map((l) => normalize(l))
             // Filter to JSON files
@@ -243,19 +214,9 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (!mainTspExists && (await fileExists(clientTsp))) {
-      const [err, stdout, stderr] = await runNodeBin(
-        "@typespec/compiler",
-        ["tsp", "compile", "--no-emit", "--warn-as-error", clientTsp],
-        logger,
-      );
-      const compiled = reportCommandOutput(
-        "compile",
-        "Client TypeSpec compilation",
-        [err, stdout, stderr],
-        logger,
-      );
+      const compiled = await compileTypeSpec(clientTsp, { noEmit: true });
       diagnostics.push(...(compiled.diagnostics ?? []));
-      if (err) {
+      if (!compiled.success) {
         success = false;
       }
     }
