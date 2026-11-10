@@ -33,5 +33,6 @@ enum Versions {
 
   @doc("The 2024-04-02 API version for production US/EU environments.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
   `2024-04-02`,
 }

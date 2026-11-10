@@ -69,6 +69,7 @@ enum Versions {
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-02-preview.")
   @Azure.Core.previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
   v2026_11_02_preview: "2026-11-02-preview",
 }
 

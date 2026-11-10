@@ -31,6 +31,7 @@ namespace Napster.CompanionAPI {
     /** 2026-08-11 version */
     @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
     @useDependency(LiftrBase.Versions.v3_preview)
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
     v2026_08_11: "2026-08-11",
   }
 

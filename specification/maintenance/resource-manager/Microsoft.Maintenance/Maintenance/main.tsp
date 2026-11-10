@@ -48,6 +48,7 @@ enum Versions {
    * The 2025-10-01-preview API version.
    * This API version includes new API to acknowledge list of ScheduledEvents
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
   v2025_10_01_preview: "2025-10-01-preview",
 }
 

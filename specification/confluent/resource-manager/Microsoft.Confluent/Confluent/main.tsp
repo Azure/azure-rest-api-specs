@@ -68,6 +68,7 @@ enum Versions {
    * The 2026-06-02-preview API version.
    */
   @useDependency(LiftrBase.Versions.v3_preview)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
   v2026_06_02_preview: "2026-06-02-preview",
 }
 
