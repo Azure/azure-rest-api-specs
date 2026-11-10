@@ -1,5 +1,5 @@
 {
-  "title": "Update runtime link capacity",
+  "title": "Update runtime link capacity intent",
   "operationId": "RuntimeLinks_Update",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -22,7 +22,6 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeLinks/default",
         "name": "default",
         "type": "Microsoft.Compute/workloadSpaces/runtimeLinks",
-        "location": "eastus2",
         "properties": {
           "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
           "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
@@ -30,14 +29,15 @@
             "minimumNodes": 2,
             "maximumNodes": 150
           },
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "state": "Pending"
         }
       }
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000007?api-version=2026-11-01-preview",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000007?api-version=2026-11-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/workloadSpaceOperationStatuses/00000000-0000-0000-0000-000000000007?api-version=2026-11-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/workloadSpaceOperationResults/00000000-0000-0000-0000-000000000007?api-version=2026-11-01-preview",
         "Retry-After": 10
       }
     }

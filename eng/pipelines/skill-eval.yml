@@ -9,8 +9,8 @@ trigger: none
 pr: none
 
 schedules:
-  - cron: '0 8 * * *'
-    displayName: 'Daily skill-eval run'
+  - cron: "0 8 * * *"
+    displayName: "Daily skill-eval run"
     branches:
       include:
         - main
@@ -37,8 +37,8 @@ extends:
     #     .vally.yaml/fixtures, no MCP server needed; folded in here instead of a second
     #     pipeline since eval-shard.yml only supports one Prepare stage per pipeline).
     evalGlobs:
-      - '*/evals/*.eval.yaml'
-      - '*/evals/eval.yaml'
-      - 'evals/arm-api-reviewer/vally/eval-*.yaml'
+      - "*/evals/*.eval.yaml"
+      - "*/evals/eval.yaml"
+      - "evals/arm-api-reviewer/vally/eval-*.yaml"
     # Raised from 20 to 45m to cover the ARM suite's single fallback shard (17 files, no area tags).
     shardTimeoutInMinutes: 45

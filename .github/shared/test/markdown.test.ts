@@ -5,11 +5,13 @@ import {
   escapeMarkdown,
   inlineCode,
   link,
+  paragraph,
   renderMarkdownDoc,
   section,
   table,
   unorderedList,
 } from "../src/markdown.ts";
+import { d } from "../src/testing.ts";
 
 describe("Markdown composition", () => {
   it("composes optional blocks and nested sections without leaking heading depth", () => {
@@ -22,9 +24,21 @@ describe("Markdown composition", () => {
         section("First", ["Body", section("Nested", "Details")]),
         section("Second", "Last"),
       ]),
-    ).toBe(
-      ["Introduction", "# First", "Body", "## Nested", "Details", "# Second", "Last"].join("\n\n"),
-    );
+    ).toBe(d`
+      Introduction
+
+      # First
+
+      Body
+
+      ## Nested
+
+      Details
+
+      # Second
+
+      Last
+    `);
   });
 
   it("supports an explicit starting heading and empty documents", () => {
@@ -32,6 +46,81 @@ describe("Markdown composition", () => {
     expect(renderMarkdownDoc([])).toBe("");
     expect(renderMarkdownDoc(undefined)).toBe("");
     expect(renderMarkdownDoc(section("Title", "Body"), 6)).toBe("###### Title\n\nBody");
+  });
+
+  it("preserves an explicit section ID and omits it when not supplied", () => {
+    expect(section("Title", "Body", "custom-id")).toEqual({
+      kind: "section",
+      title: "Title",
+      body: "Body",
+      id: "custom-id",
+    });
+    expect(section("Title", "Body")).not.toHaveProperty("id");
+    expect(section("Title", "Body", undefined)).not.toHaveProperty("id");
+  });
+
+  it("renders explicit anchors before headings without changing heading levels", () => {
+    const markdown = renderMarkdownDoc(
+      [
+        section(
+          "Analysis",
+          ["Body", section("Details", "Changes", "details_123")],
+          "breaking-change",
+        ),
+        section("Mitigation", undefined, "Mitigation"),
+        section("Without an ID", "Last"),
+      ],
+      2,
+    );
+    expect(markdown).toBe(d`
+      <a name="breaking-change"></a>
+
+      ## Analysis
+
+      Body
+
+      <a name="details_123"></a>
+
+      ### Details
+
+      Changes
+
+      <a name="Mitigation"></a>
+
+      ## Mitigation
+
+      ## Without an ID
+
+      Last
+    `);
+    expect(marked.parse(markdown)).toContain(
+      '<p><a name="breaking-change"></a></p>\n<h2>Analysis</h2>',
+    );
+  });
+
+  it.each(["", "has space", 'quote"id', "<tag>", "with/slash", "line\nbreak"])(
+    "rejects invalid heading ID %j",
+    (id) => {
+      expect(() => renderMarkdownDoc(section("Title", "Body", id))).toThrow(
+        "Markdown heading IDs must contain only letters, digits, underscores or hyphens",
+      );
+    },
+  );
+
+  it.each([
+    { doc: [section("First", "", "same-id"), section("Second", "", "same-id")] },
+    { doc: section("Parent", section("Child", "", "same-id"), "same-id") },
+  ])("rejects duplicate IDs across the document %#", ({ doc }) => {
+    expect(() => renderMarkdownDoc(doc)).toThrow("Duplicate Markdown heading ID: same-id");
+  });
+
+  it("allows repeated titles with distinct IDs and reuses IDs in separate renders", () => {
+    expect(renderMarkdownDoc([section("Title", "", "first"), section("Title", "", "second")])).toBe(
+      '<a name="first"></a>\n\n# Title\n\n<a name="second"></a>\n\n# Title',
+    );
+    const doc = section("Title", "", "reusable");
+    expect(renderMarkdownDoc(doc)).toBe('<a name="reusable"></a>\n\n# Title');
+    expect(renderMarkdownDoc(doc)).toBe('<a name="reusable"></a>\n\n# Title');
   });
 
   it.each([0, -1, 1.5, 7])("rejects invalid heading level %s", (level) => {
@@ -57,6 +146,20 @@ describe("Markdown composition", () => {
 });
 
 describe("inline Markdown", () => {
+  it("keeps wrapped guidance in one paragraph while preserving inline Markdown", () => {
+    const markdown = renderMarkdownDoc([
+      paragraph(
+        "Run",
+        inlineCode("pnpm check"),
+        `and consult the ${link("guide", "https://example.com/docs")}.`,
+      ),
+      "Then request review.",
+    ]);
+    expect(marked.parse(markdown)).toBe(
+      '<p>Run <code>pnpm check</code> and consult the <a href="https://example.com/docs">guide</a>.</p>\n<p>Then request review.</p>\n',
+    );
+  });
+
   it("creates an ordinary code span and trusted link", () => {
     expect(inlineCode("command")).toBe("`command`");
     expect(link("Documentation", "https://example.com/docs")).toBe(
@@ -93,7 +196,11 @@ describe("tables, lists and details", () => {
         ["First", "Second"],
         ["one", "two"],
       ]),
-    ).toBe("| First | Second |\n| --- | --- |\n| one | two |");
+    ).toBe(d`
+      | First | Second |
+      | --- | --- |
+      | one | two |
+    `);
   });
 
   it("escapes pipes and line breaks without breaking inline code or existing escapes", () => {
@@ -139,16 +246,30 @@ describe("tables, lists and details", () => {
   );
 
   it("renders lists and indents continuation lines", () => {
-    expect(unorderedList(["one", "two\ncontinued\r\nagain"])).toBe(
-      "- one\n- two\n  continued\n  again",
-    );
+    expect(unorderedList(["one", "two\ncontinued\r\nagain"])).toBe(d`
+      - one
+      - two
+        continued
+        again
+    `);
     expect(unorderedList([])).toBe("");
   });
 
   it("renders collapsible content with an HTML-escaped plain-text summary", () => {
-    expect(details("<Members> & reviewers", unorderedList(["one"]))).toBe(
-      "<details><summary>&lt;Members&gt; &amp; reviewers</summary>\n\n- one\n\n</details>",
-    );
+    expect(details("<Members> & reviewers", unorderedList(["one"]))).toBe(d`
+      <details><summary>&lt;Members&gt; &amp; reviewers</summary>
+
+      - one
+
+      </details>
+    `);
     expect(details("Empty", "")).toBe("<details><summary>Empty</summary>\n\n\n</details>");
+  });
+
+  it("supports expanded details without changing the default collapsed behavior", () => {
+    expect(details("<Changes>", "Body", true)).toBe(
+      "<details open><summary>&lt;Changes&gt;</summary>\n\nBody\n\n</details>",
+    );
+    expect(details("Changes", "Body", false)).toBe(details("Changes", "Body"));
   });
 });

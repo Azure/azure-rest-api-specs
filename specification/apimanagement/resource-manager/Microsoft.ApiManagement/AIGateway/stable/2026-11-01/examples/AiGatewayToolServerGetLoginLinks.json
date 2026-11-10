@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default",
+    "toolServerName": "weather-tools",
+    "endpointId": "endpoint-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "loginLink": "https://example-gateway.azure-api.net/oauth2/start?state=example-signed-capability",
+        "redirectUri": "https://example-gateway.azure-api.net/oauth2/callback",
+        "expiresUtc": "2026-10-13T00:00:00Z"
+      }
+    }
+  },
+  "operationId": "AiGatewayToolServerEndpointOperations_GetLoginLinks",
+  "title": "Get OAuth consent links for a tool-server endpoint"
+}

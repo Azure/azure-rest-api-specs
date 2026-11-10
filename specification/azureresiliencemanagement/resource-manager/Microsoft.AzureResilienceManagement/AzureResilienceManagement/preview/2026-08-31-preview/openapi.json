@@ -1856,7 +1856,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1900,7 +1900,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1981,7 +1981,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2056,7 +2056,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2127,7 +2127,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2176,7 +2176,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2184,7 +2184,7 @@
           {
             "name": "goalResourceName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal resource.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2236,7 +2236,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2313,7 +2313,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2381,7 +2381,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -7397,12 +7397,12 @@
           {
             "name": "Excluded",
             "value": "Excluded",
-            "description": "Resource is not included in the goals."
+            "description": "The resource is excluded from the goals."
           },
           {
             "name": "Included",
             "value": "Included",
-            "description": "Resource is excluded from the goals."
+            "description": "The resource is included in the goals."
           }
         ]
       }
@@ -7714,7 +7714,7 @@
     },
     "GoalAssignment": {
       "type": "object",
-      "description": "Goal assignment a AzureResilienceProviderHub resource",
+      "description": "A goal assignment resource in the Azure Resilience Management provider.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GoalAssignmentProperties",
@@ -7750,7 +7750,7 @@
     },
     "GoalAssignmentProperties": {
       "type": "object",
-      "description": "Definition of goal assignment property.",
+      "description": "Properties of a goal assignment.",
       "properties": {
         "goalTemplateId": {
           "type": "string",
@@ -7775,7 +7775,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state",
+          "description": "The provisioning state of the goal assignment.",
           "readOnly": true
         },
         "errorDetails": {
@@ -7805,7 +7805,7 @@
     },
     "GoalAssignmentUpdate": {
       "type": "object",
-      "description": "Goal assignment a AzureResilienceProviderHub resource",
+      "description": "A goal assignment resource in the Azure Resilience Management provider.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GoalAssignmentProperties",
@@ -7820,7 +7820,7 @@
     },
     "GoalResource": {
       "type": "object",
-      "description": "Goal Resource a AzureResilienceProviderHub resource",
+      "description": "A goal resource in the Azure Resilience Management provider.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GoalResourceProperties",
@@ -7856,12 +7856,12 @@
     },
     "GoalResourceProperties": {
       "type": "object",
-      "description": "Definition of goal assignment property.",
+      "description": "Properties of a goal resource.",
       "properties": {
         "resourceArmId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Arm Id of resource under the SG for which the extension resource is maintained."
+          "description": "The fully qualified ARM resource ID represented by this goal resource."
         },
         "highAvailabilityGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
@@ -7873,7 +7873,7 @@
         },
         "zonalResiliency": {
           "$ref": "#/definitions/ResiliencyProperties",
-          "description": "Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource."
+          "description": "The zonal resiliency posture for the ARM resource, including participation, attestation, exclusion reason, and user confirmations."
         },
         "disasterRecoveryGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
@@ -7916,7 +7916,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state",
+          "description": "The provisioning state of the goal resource.",
           "readOnly": true
         }
       },
@@ -10660,20 +10660,20 @@
       "properties": {
         "goalParticipation": {
           "$ref": "#/definitions/ExclusionState",
-          "description": "Flag which depicts whether the Arm resource is excluded for resiliency recommendation."
+          "description": "Indicates whether the ARM resource is excluded from resiliency recommendations."
         },
         "attestationStatus": {
           "$ref": "#/definitions/AttestationState",
-          "description": "Flag which depicts whether the Arm resource is manually attested for resiliency recommendation."
+          "description": "Indicates whether the ARM resource's resiliency posture is manually attested."
         },
         "exclusionReason": {
           "$ref": "#/definitions/ExclusionReason",
-          "description": "Reason for exclusion from resiliency goals.",
+          "description": "The reason the ARM resource is excluded from resiliency goals.",
           "readOnly": true
         },
         "userConfirmation": {
           "type": "array",
-          "description": "List of user confirmations for resiliency solutions.",
+          "description": "User confirmations for resiliency solutions recommended for the ARM resource.",
           "items": {
             "$ref": "#/definitions/UserConfirmationItem"
           },
@@ -11253,7 +11253,7 @@
           {
             "name": "AzureSiteRecoveryVMsPresent",
             "value": "AzureSiteRecoveryVMsPresent",
-            "description": "Indicates that alteast one Azure Site Recovery VMs are present."
+            "description": "Indicates that at least one Azure Site Recovery VM is present."
           }
         ]
       }
@@ -11350,17 +11350,17 @@
     },
     "ServiceLevelResource": {
       "type": "object",
-      "description": "The Service level resource model",
+      "description": "A service-level resource associated with a goal assignment.",
       "properties": {
         "serviceLevelIndicatorResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The arm id of the service level indicator resource"
+          "description": "The ARM resource ID of the service-level indicator resource."
         },
         "serviceLevelObjectiveResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The arm id of the service level object resource"
+          "description": "The ARM resource ID of the service-level objective resource."
         }
       },
       "required": [
@@ -11768,11 +11768,11 @@
     },
     "UpdateGoalResourceRequest": {
       "type": "object",
-      "description": "Request model for update goal resource.",
+      "description": "Request body for updating goal resources.",
       "properties": {
         "resources": {
           "type": "array",
-          "description": "List of update goal resource.",
+          "description": "The goal resources to update.",
           "items": {
             "$ref": "#/definitions/GoalResource"
           }
@@ -11784,11 +11784,11 @@
     },
     "UpdateGoalResourceResponse": {
       "type": "object",
-      "description": "Response model for update goal resource.",
+      "description": "Response from updating goal resources.",
       "properties": {
         "resources": {
           "type": "array",
-          "description": "List of update goal resource.",
+          "description": "The updated goal resources.",
           "items": {
             "$ref": "#/definitions/GoalResource"
           }
@@ -11995,7 +11995,7 @@
           {
             "name": "Present",
             "value": "Present",
-            "description": "Atleast one VM Present."
+            "description": "At least one VM is present."
           },
           {
             "name": "Absent",

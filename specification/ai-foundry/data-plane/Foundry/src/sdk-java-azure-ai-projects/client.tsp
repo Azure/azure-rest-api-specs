@@ -20,6 +20,7 @@ import "../data_generation_jobs/routes.tsp";
 
 import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
+import "../sdk-common/ops-relocation-datasets.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -203,6 +204,12 @@ namespace Azure.AI.Projects;
 
 @@clientName(EvaluatorDefinition.init_parameters, "initializationParameters");
 
+@@clientName(
+  DataGenerationJobResult.generated_samples,
+  "generatedSampleCount",
+  "java"
+);
+
 @@clientName(AttackStrategy.Base64, "Base_64");
 @@clientName(AttackStrategy.ROT13, "ROT_13");
 
@@ -297,6 +304,13 @@ namespace Azure.AI.Projects;
   },
   "java"
 );
+@@alternateType(
+  OpenAI.MisalignmentErrorDetailsResource,
+  {
+    identity: "com.openai.models.ErrorObject.Misalignment",
+  },
+  "java"
+);
 
 // GrammarSyntax1 → expandable GrammarSyntax enum
 // The OpenAI TypeSpec names this enum "GrammarSyntax1"; replace with an open union
@@ -369,3 +383,19 @@ model TimeZoneType {}
 @@clientLocation(EvaluatorGenerationJobs.list, Evaluators);
 @@clientLocation(EvaluatorGenerationJobs.cancel, Evaluators);
 @@clientLocation(EvaluatorGenerationJobs.delete, Evaluators);
+
+// Preserve the existing Java paging overloads that accept an initial continuation token.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  PageAfterQueryParameter.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  AgentInsightsPageQueryParameters.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);

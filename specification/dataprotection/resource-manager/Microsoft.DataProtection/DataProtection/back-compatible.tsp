@@ -380,10 +380,6 @@ using Microsoft.DataProtection;
   "parameters"
 );
 @@clientName(
-  BackupInstanceResources.resumeProtection::parameters.body,
-  "parameters"
-);
-@@clientName(
   BackupInstanceResources.resumeProtectionPreview::parameters.body,
   "parameters"
 );

@@ -1,6 +1,6 @@
-import { randomUUID } from "crypto";
-import { readdir } from "fs/promises";
-import { dirname, isAbsolute, join, resolve } from "path";
+import { randomUUID } from "node:crypto";
+import { readdir } from "node:fs/promises";
+import { dirname, isAbsolute, join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.ts";
 import { ConsoleLogger } from "../src/logger.ts";

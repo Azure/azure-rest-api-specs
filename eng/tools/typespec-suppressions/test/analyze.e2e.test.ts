@@ -179,6 +179,78 @@ interface Widgets {
     expect(report.changedSuppressions[0].after.justification).toBe("updated reason");
   });
 
+  it("does not duplicate suppressions from nested TypeSpec projects", async () => {
+    const repoRoot = await initTempRepo();
+    tempRepos.push(repoRoot);
+
+    const parentSpecPath = "specification/demo/resource-manager/Microsoft.Demo";
+    const childSpecPath = `${parentSpecPath}/Demo`;
+    await mkdir(path.join(repoRoot, childSpecPath), { recursive: true });
+
+    await writeFile(
+      path.join(repoRoot, parentSpecPath, "tspconfig.yaml"),
+      "linter:\n  disable: {}\n",
+    );
+    await writeFile(path.join(repoRoot, parentSpecPath, "main.tsp"), "namespace Demo.Parent;\n");
+    await writeFile(
+      path.join(repoRoot, childSpecPath, "tspconfig.yaml"),
+      "linter:\n  disable: {}\n",
+    );
+    await writeFile(path.join(repoRoot, childSpecPath, "main.tsp"), "namespace Demo.Child;\n");
+
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "base"]);
+    const baseRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    await writeFile(
+      path.join(repoRoot, parentSpecPath, "main.tsp"),
+      `namespace Demo.Parent;
+
+#suppress "@azure-tools/rule-parent" "parent reason"
+model ParentWidget {}
+`,
+    );
+    await writeFile(
+      path.join(repoRoot, childSpecPath, "main.tsp"),
+      `namespace Demo.Child;
+
+#suppress "@azure-tools/rule-child" "child reason"
+model ChildWidget {}
+`,
+    );
+
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "head"]);
+    const headRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    const report = await analyzeTypeSpecSuppressions({
+      cwd: repoRoot,
+      baseRevision,
+      headRevision,
+      specPaths: [parentSpecPath, childSpecPath],
+    });
+
+    expect(report.counts).toEqual({
+      specs: 2,
+      base: 0,
+      head: 2,
+      new: 2,
+      removed: 0,
+      changed: 0,
+      unchanged: 0,
+    });
+    expect(report.newSuppressions.map((suppression) => suppression.ruleName)).toEqual([
+      "@azure-tools/rule-parent",
+      "@azure-tools/rule-child",
+    ]);
+    expect(report.specs[0].headSuppressions.map((suppression) => suppression.ruleName)).toEqual([
+      "@azure-tools/rule-parent",
+    ]);
+    expect(report.specs[1].headSuppressions.map((suppression) => suppression.ruleName)).toEqual([
+      "@azure-tools/rule-child",
+    ]);
+  });
+
   it("preserves suppressions when a TypeSpec project directory is renamed", async () => {
     const repoRoot = await initTempRepo();
     tempRepos.push(repoRoot);
