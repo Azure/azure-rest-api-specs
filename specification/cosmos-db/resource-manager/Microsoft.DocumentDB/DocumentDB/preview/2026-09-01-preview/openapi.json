@@ -25270,7 +25270,10 @@
         "enableEmbeddingGenerator": {
           "type": "boolean",
           "description": "Flag to indicate whether Integrated Embeddings is enabled on the Cosmos DB account. This property is supported only for API for NoSQL accounts.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
