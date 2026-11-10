@@ -89,7 +89,8 @@ interface BotChannelOps
         @segment("channels")
         channelName: ChannelName,
       },
-      ErrorType = Error
+      ErrorType = Error,
+      ResourceName = "BotChannel"
     > {}
 
 @armResourceOperations
@@ -119,7 +120,8 @@ interface BotChannelRegenerateKeysOps
         @segment("channels")
         channelName: RegenerateKeysChannelName,
       },
-      ErrorType = Error
+      ErrorType = Error,
+      ResourceName = "BotChannel"
     > {}
 
 @armResourceOperations
