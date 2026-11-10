@@ -760,17 +760,19 @@ describe("Summarize Checks Unit Tests", () => {
     });
 
     it.each([["Swagger Avocado"], ["Swagger Avocado", "Swagger BreakingChange"]])(
-      "keeps FYI failures collapsed and non-blocking %#",
+      "keeps FYI warnings collapsed without blocking merging %#",
       (...names) => {
         const [comment, status] = summarize({
           fyi: ["license/cla", ...names].map((name) => run(name, "completed", "failure")),
         });
 
-        expect(comment).toContain(
-          "<summary>Non-blocking failures (" + (names.length + 1) + ")</summary>",
-        );
+        const summary = `<summary>Warnings (${names.length + 1})</summary>`;
+        expect(comment).toContain(summary);
         expect(comment).toContain("| `license/cla` |");
-        expect(comment).toMatch(/warning\.svg"[^>]*><\/picture> Non-blocking/);
+        const warningDetails = comment.split(summary)[1]?.split("</details>")[0] ?? "";
+        expect(marked.parse(warningDetails)).toContain(
+          '<span title="Needs attention, but does not block automated merge requirements.">Warning</span>',
+        );
         expect(comment.split("<details>")[0]).not.toContain("license/cla");
         expect(comment).not.toContain("Other outstanding requirements");
         expect(status.result).toBe("SUCCESS");

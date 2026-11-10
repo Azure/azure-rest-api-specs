@@ -1068,15 +1068,11 @@ function getCommentBody(
       if (!anyBlockerPresent && requirementsMet) {
         headline = statusBadge(
           "warning",
-          "**Automated requirements met; non-blocking checks need attention.**",
+          "**Automated requirements met; warnings need attention.**",
         );
         summaryData = renderMarkdownDoc([
-          paragraph(
-            "⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR,",
-            "but soon these requirements will be blocking.",
-          ),
-          `See ${inlineCode("Next Steps to merge")} comment on this PR for details on how to address them.`,
-          `If you want to proceed with merging this PR without fixing them, refer to ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
+          "⚠️ Automated requirements met; warnings need attention.",
+          `To merge this PR, refer to ${link("aka.ms/azsdk/specreview/merge", "https://aka.ms/azsdk/specreview/merge")}.`,
         ]);
         status = "SUCCESS";
       }
@@ -1115,10 +1111,7 @@ function getCommentBody(
           ],
     ),
     nonBlockingChecks.length > 0
-      ? details(
-          `Non-blocking failures (${nonBlockingChecks.length})`,
-          buildRequirementsTable(nonBlockingChecks),
-        )
+      ? details(`Warnings (${nonBlockingChecks.length})`, buildRequirementsTable(nonBlockingChecks))
       : undefined,
     completedChecks.length > 0
       ? details(
