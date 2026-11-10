@@ -37,7 +37,7 @@ model SecretStore {
 
   @doc("The managed identity used to access the Key Vault secrets referenced by this secret store.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  keyVaultReferenceIdentity?: ManagedIdentity;
+  keyVaultReferenceIdentity: ManagedIdentity;
 
   @doc("The read-only creation and modification metadata.")
   @visibility(Lifecycle.Read)

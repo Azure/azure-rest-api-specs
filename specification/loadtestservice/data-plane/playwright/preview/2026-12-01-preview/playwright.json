@@ -3782,6 +3782,7 @@
         "id",
         "name",
         "domainSecrets",
+        "keyVaultReferenceIdentity",
         "systemData"
       ]
     },
@@ -4155,6 +4156,63 @@
         "microsoftSigningKeyStatus": {
           "$ref": "#/definitions/MicrosoftSigningKeyStatus",
           "description": "The review status of the Microsoft signing key for the workspace.",
+          "readOnly": true
+        },
+        "sessionArtifacts": {
+          "type": "string",
+          "description": "Specifies whether session artifact recording is enabled for the workspace.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "storageIdentity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The managed identity used to manage session artifacts in the storage account.",
+          "readOnly": true
+        },
+        "browserProfile": {
+          "type": "string",
+          "description": "Specifies whether the browser profile is enabled for the workspace.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
           "readOnly": true
         }
       },
