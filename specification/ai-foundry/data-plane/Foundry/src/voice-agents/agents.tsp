@@ -1104,6 +1104,23 @@ union VoiceAgentEndOfUtteranceDetectionModel {
 
   @doc("The smart end-of-turn detection model.")
   smart_end_of_turn_detection: "smart_end_of_turn_detection",
+
+  @doc("Judges from the transcript and the agent's last utterance whether the user has finished. `timeout_ms` must be greater than 0. Available only in some regions.")
+  microsoft_decision_1: "microsoft-decision-1",
+}
+
+@doc("Text that replaces one part of the `microsoft-decision-1` prompt.")
+@minLength(1)
+@maxLength(4000)
+scalar VoiceAgentEndOfUtterancePromptText extends string;
+
+@doc("Criteria for whether the user has finished the turn.")
+model VoiceAgentEndOfUtteranceCriteria {
+  @doc("When the user has finished and the agent should respond.")
+  finished?: VoiceAgentEndOfUtterancePromptText | null;
+
+  @doc("When the user has only paused and is likely to go on.")
+  not_finished?: VoiceAgentEndOfUtterancePromptText | null;
 }
 
 @doc("The sensitivity threshold for semantic end-of-utterance detection.")
@@ -1133,6 +1150,12 @@ model VoiceAgentEndOfUtteranceDetection {
 
   @doc("The detection timeout in milliseconds.")
   timeout_ms?: FoundryDurationMilliseconds;
+
+  @doc("Replaces the built-in task description. Only for `microsoft-decision-1`.")
+  instructions?: VoiceAgentEndOfUtterancePromptText | null;
+
+  @doc("Replaces the built-in criteria. Only for `microsoft-decision-1`.")
+  criteria?: VoiceAgentEndOfUtteranceCriteria | null;
 }
 
 /** Options shared by Azure semantic voice activity detection configurations. */

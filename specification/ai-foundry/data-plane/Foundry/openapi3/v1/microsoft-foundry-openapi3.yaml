@@ -98983,6 +98983,20 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: A service-managed control that ends the active conversation.
+    VoiceAgentEndOfUtteranceCriteria:
+      type: object
+      properties:
+        finished:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentEndOfUtterancePromptText'
+            - type: 'null'
+          description: When the user has finished and the agent should respond.
+        not_finished:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentEndOfUtterancePromptText'
+            - type: 'null'
+          description: When the user has only paused and is likely to go on.
+      description: Criteria for whether the user has finished the turn.
     VoiceAgentEndOfUtteranceDetection:
       type: object
       required:
@@ -98997,6 +99011,16 @@ components:
         timeout_ms:
           $ref: '#/components/schemas/FoundryDurationMilliseconds'
           description: The detection timeout in milliseconds.
+        instructions:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentEndOfUtterancePromptText'
+            - type: 'null'
+          description: Replaces the built-in task description. Only for `microsoft-decision-1`.
+        criteria:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceCriteria'
+            - type: 'null'
+          description: Replaces the built-in criteria. Only for `microsoft-decision-1`.
       description: Semantic end-of-utterance detection configuration.
     VoiceAgentEndOfUtteranceDetectionModel:
       anyOf:
@@ -99007,7 +99031,13 @@ components:
             - semantic_detection_v1_en
             - semantic_detection_v1_multilingual
             - smart_end_of_turn_detection
+            - microsoft-decision-1
       description: The semantic end-of-utterance detection model.
+    VoiceAgentEndOfUtterancePromptText:
+      type: string
+      minLength: 1
+      maxLength: 4000
+      description: Text that replaces one part of the `microsoft-decision-1` prompt.
     VoiceAgentEndOfUtteranceThresholdLevel:
       anyOf:
         - type: string
