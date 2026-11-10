@@ -515,7 +515,13 @@ describe("Summarize Checks Unit Tests", () => {
       expect(token).toBeDefined();
       return token?.rows.map((row) =>
         row.map((cell, index) =>
-          index === 1 ? cell.text.replace(/<[^>]*>/g, "").trim() : cell.text,
+          index === 1
+            ? cell.tokens
+                .filter((token): token is Tokens.Text => token.type === "text")
+                .map((token) => token.text)
+                .join("")
+                .trim()
+            : cell.text,
         ),
       );
     }
