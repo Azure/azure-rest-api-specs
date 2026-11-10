@@ -643,6 +643,41 @@ model RaiAcsModerationBindingExtension {
 @added(Versions.v2026_09_15_preview)
 model RaiAcsEmptyObject {}
 
+/** Extensible kinds of Agent Control Specification annotator dispatchers. */
+@added(Versions.v2026_11_15_preview)
+union RaiAcsAnnotatorType {
+  string,
+
+  /** Obtains annotations from a classifier dispatcher. */
+  Classifier: "classifier",
+
+  /** Obtains annotations from a language-model dispatcher. */
+  Llm: "llm",
+
+  /** Obtains annotations from an external endpoint dispatcher. */
+  Endpoint: "endpoint",
+}
+
+/** A named Agent Control Specification annotator declaration with host-defined configuration. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS annotators permit extensible host-defined configuration"
+@added(Versions.v2026_11_15_preview)
+model RaiAcsAnnotatorDefinition {
+  ...Record<unknown>;
+
+  /** The dispatcher kind. Supported configuration is determined by the evaluation host. */
+  type: RaiAcsAnnotatorType;
+}
+
+/** Binds an annotator to a subject at one intervention point. The map key selects its declaration. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS annotation bindings permit extensible host-defined configuration"
+@added(Versions.v2026_11_15_preview)
+model RaiAcsAnnotationBinding {
+  ...Record<unknown>;
+
+  /** The Agent Control Specification path selecting the subject passed to the annotator. */
+  from: string;
+}
+
 /** Static policy metadata for one Agent Control Specification tool catalog entry. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS tool entries permit extensible policy metadata"
 @added(Versions.v2026_09_15_preview)
@@ -692,8 +727,20 @@ model RaiAcsPolicyBinding {
 union RaiAcsPolicyTarget {
   string,
 
+  /** Selects the agent initialization payload. */
+  @added(Versions.v2026_11_15_preview)
+  AgentInitialization: "$snap.agent_init",
+
   /** Selects the incoming user input. */
   Input: "$snap.input",
+
+  /** Selects the model messages proposed for dispatch. */
+  @added(Versions.v2026_11_15_preview)
+  ModelMessages: "$snap.messages",
+
+  /** Selects the completed model response. */
+  @added(Versions.v2026_11_15_preview)
+  ModelResponse: "$snap.response",
 
   /** Selects the assistant output. */
   Output: "$snap.output",
@@ -703,6 +750,10 @@ union RaiAcsPolicyTarget {
 
   /** Selects a tool result. */
   ToolResult: "$snap.tool_result.value",
+
+  /** Selects the final agent execution summary. */
+  @added(Versions.v2026_11_15_preview)
+  AgentSummary: "$snap.summary",
 }
 
 /** Canonical target kinds supported by the Azure AI Content Safety Unified Moderate host profile. */
@@ -710,8 +761,20 @@ union RaiAcsPolicyTarget {
 union RaiAcsPolicyTargetKind {
   string,
 
+  /** The target contains agent initialization state. */
+  @added(Versions.v2026_11_15_preview)
+  AgentInitialization: "agent_init",
+
   /** The target contains user input. */
   UserInput: "user_input",
+
+  /** The target contains model messages. */
+  @added(Versions.v2026_11_15_preview)
+  ModelMessages: "messages",
+
+  /** The target contains a completed model response. */
+  @added(Versions.v2026_11_15_preview)
+  ModelResponse: "model_response",
 
   /** The target contains assistant output. */
   AssistantOutput: "assistant_output",
@@ -721,6 +784,10 @@ union RaiAcsPolicyTargetKind {
 
   /** The target contains a tool result. */
   ToolResult: "tool_result",
+
+  /** The target contains the final agent execution summary. */
+  @added(Versions.v2026_11_15_preview)
+  AgentSummary: "agent_summary",
 }
 
 /**
@@ -741,38 +808,105 @@ union RaiAcsToolNameSelector {
 /**
  * Binds one logical policy to an Agent Control Specification intervention point.
  */
-@added(Versions.v2026_09_15_preview)
-model RaiAcsInterventionPoint {
+@added(Versions.v2026_11_15_preview)
+model RaiAcsInterventionPointTemplate<PolicyTarget, PolicyTargetKind> {
   /** The canonical Agent Hooks snapshot path projected as the policy target. */
   @encodedName("application/json", "policy_target")
-  policyTarget: RaiAcsPolicyTarget;
+  policyTarget: PolicyTarget;
 
   /** The semantic kind of the projected policy target. */
   @encodedName("application/json", "policy_target_kind")
-  policyTargetKind: RaiAcsPolicyTargetKind;
+  policyTargetKind: PolicyTargetKind;
 
   /** The logical policy evaluated at this intervention point. */
   policy: RaiAcsPolicyBinding;
 
   /** Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty. */
-  annotations?: RaiAcsEmptyObject;
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_15_preview)
+  @renamedFrom(Versions.v2026_11_15_preview, "annotations")
+  legacyAnnotations?: RaiAcsEmptyObject;
+
+  /** Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines annotations as a name-keyed map"
+  @added(Versions.v2026_11_15_preview)
+  annotations?: Record<RaiAcsAnnotationBinding>;
 }
 
-/** Binds one logical policy to a tool-call intervention point. */
+/**
+ * Binds one logical policy to an Agent Control Specification intervention point.
+ */
 @added(Versions.v2026_09_15_preview)
-model RaiAcsToolInterventionPoint {
-  ...RaiAcsInterventionPoint;
+model RaiAcsInterventionPoint is RaiAcsInterventionPointTemplate<
+  RaiAcsPolicyTarget,
+  RaiAcsPolicyTargetKind
+>;
+
+/** Binds one logical policy to a tool-call intervention point. */
+@added(Versions.v2026_11_15_preview)
+model RaiAcsToolInterventionPointTemplate<PolicyTarget, PolicyTargetKind> {
+  ...RaiAcsInterventionPointTemplate<PolicyTarget, PolicyTargetKind>;
 
   /** Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path. */
   @encodedName("application/json", "tool_name_from")
   toolNameFrom?: RaiAcsToolNameSelector;
 }
 
+/** Binds one logical policy to a tool-call intervention point. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolInterventionPoint is RaiAcsToolInterventionPointTemplate<
+  RaiAcsPolicyTarget,
+  RaiAcsPolicyTargetKind
+>;
+
+/** Agent-startup binding with the canonical initialization target. */
+@added(Versions.v2026_11_15_preview)
+model RaiAcsAgentStartupInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.agent_init",
+  "agent_init"
+>;
+
+/** Pre-model binding with the canonical messages target. */
+@added(Versions.v2026_11_15_preview)
+model RaiAcsPreModelCallInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.messages",
+  "messages"
+>;
+
+/** Post-model binding with the canonical model-response target. */
+@added(Versions.v2026_11_15_preview)
+model RaiAcsPostModelCallInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.response",
+  "model_response"
+>;
+
+/** Agent-shutdown binding with the canonical summary target. */
+@added(Versions.v2026_11_15_preview)
+model RaiAcsAgentShutdownInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.summary",
+  "agent_summary"
+>;
+
 /** Intervention points supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsInterventionPoints {
+  /** The policy evaluated when the agent execution session starts. */
+  @encodedName("application/json", "agent_startup")
+  @added(Versions.v2026_11_15_preview)
+  agentStartup?: RaiAcsAgentStartupInterventionPoint;
+
   /** The policy evaluated for user input. */
   input?: RaiAcsInterventionPoint;
+
+  /** The policy evaluated before a model call. */
+  @encodedName("application/json", "pre_model_call")
+  @added(Versions.v2026_11_15_preview)
+  preModelCall?: RaiAcsPreModelCallInterventionPoint;
+
+  /** The policy evaluated after a model call. */
+  @encodedName("application/json", "post_model_call")
+  @added(Versions.v2026_11_15_preview)
+  postModelCall?: RaiAcsPostModelCallInterventionPoint;
 
   /** The policy evaluated before a tool call. */
   @encodedName("application/json", "pre_tool_call")
@@ -784,6 +918,11 @@ model RaiAcsInterventionPoints {
 
   /** The policy evaluated for final output. */
   output?: RaiAcsInterventionPoint;
+
+  /** The policy evaluated when the agent execution session shuts down. */
+  @encodedName("application/json", "agent_shutdown")
+  @added(Versions.v2026_11_15_preview)
+  agentShutdown?: RaiAcsAgentShutdownInterventionPoint;
 }
 
 /**
@@ -817,7 +956,15 @@ model RaiAcsManifest {
   tools?: Record<RaiAcsToolDefinition>;
 
   /** Standard Agent Control Specification annotator dispatch is disabled; when present, this object must be empty. */
-  annotators?: RaiAcsEmptyObject;
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_15_preview)
+  @renamedFrom(Versions.v2026_11_15_preview, "annotators")
+  legacyAnnotators?: RaiAcsEmptyObject;
+
+  /** Optional annotator declarations keyed by name. Omitted or empty maps request no annotator declarations. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines annotators as a name-keyed map"
+  @added(Versions.v2026_11_15_preview)
+  annotators?: Record<RaiAcsAnnotatorDefinition>;
 }
 
 /**
@@ -865,10 +1012,12 @@ model RaiBindingProperties {
 @added(Versions.v2026_09_15_preview)
 model RaiResourcePutConditionalHeaders {
   /** Proceed only when the current resource ETag matches this value. */
+  @added(Versions.v2026_09_15_preview)
   @header("If-Match")
   ifMatch?: string;
 
   /** Proceed only when no current resource ETag matches this value. */
+  @added(Versions.v2026_09_15_preview)
   @header("If-None-Match")
   ifNoneMatch?: string;
 }
@@ -877,6 +1026,7 @@ model RaiResourcePutConditionalHeaders {
 @added(Versions.v2026_09_15_preview)
 model RaiResourceDeleteConditionalHeaders {
   /** Proceed only when the current resource ETag matches this value. */
+  @added(Versions.v2026_09_15_preview)
   @header("If-Match")
   ifMatch?: string;
 }
@@ -885,6 +1035,7 @@ model RaiResourceDeleteConditionalHeaders {
 @added(Versions.v2026_09_15_preview)
 model RaiResourceEtagResponseHeader {
   /** The entity tag for the returned resource representation. */
+  @added(Versions.v2026_09_15_preview)
   @header("ETag")
   etagHeader?: string;
 }
@@ -919,6 +1070,22 @@ union RaiPolicyContentSource {
   PreRun: "PreRun",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated after a run execution"
   PostRun: "PostRun",
+
+  @doc("Content evaluated when an agent execution session starts.")
+  @added(Versions.v2026_11_15_preview)
+  AgentStartup: "AgentStartup",
+
+  @doc("Content evaluated before a model call is made.")
+  @added(Versions.v2026_11_15_preview)
+  PreModelCall: "PreModelCall",
+
+  @doc("Content evaluated after a model call returns.")
+  @added(Versions.v2026_11_15_preview)
+  PostModelCall: "PostModelCall",
+
+  @doc("Content evaluated when an agent execution session shuts down.")
+  @added(Versions.v2026_11_15_preview)
+  AgentShutdown: "AgentShutdown",
 }
 
 /**
@@ -1905,7 +2072,17 @@ model AccountProperties {
   /**
    * Resource migration token.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "'migrationToken' is correctly marked as secret matching service-side security handling"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Preserve the historical migrationToken schema before November 2026; the replacement is a secret write-only property."
+  @renamedFrom(Versions.v2026_11_15_preview, "migrationToken")
+  @removed(Versions.v2026_11_15_preview)
+  migrationTokenLegacy?: string;
+
+  /**
+   * Resource migration token.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   migrationToken?: string;
 
   /**
@@ -2110,6 +2287,7 @@ model AccountProperties {
    * At the moment the service only supports a single cost control. This will be expanded in future API versions.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_15_preview)
   @maxItems(1)
   costControlIds?: Azure.Core.armResourceIdentifier<[
     {
@@ -2122,6 +2300,19 @@ model AccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted costControlConnections object from an explicit null in PATCH so callers can clear the value."
   @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @removed(Versions.v2026_11_15_preview)
+  @renamedFrom(Versions.v2026_11_15_preview, "costControlConnections")
+  costControlConnectionsLegacy?: LegacyCostControlConnections | null;
+
+  /**
+   * Account-level cost-control telemetry connections. Application Insights is optional.
+   * Budget notifications use their own Event Grid connection IDs; account-level Event Grid configuration is not exposed or accepted by this API version.
+   * Set this object to null in an account update to clear the Application Insights connection. Existing legacy Event Grid configuration is preserved.
+   * This property is available independently of Microsoft.CognitiveServices/CostControls subscription registration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted costControlConnections object from an explicit null in PATCH so callers can clear the value."
+  @added(Versions.v2026_11_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Update)
   costControlConnections?: CostControlConnections | null;
 }
@@ -2567,7 +2758,17 @@ model ApiProperties {
   /**
    * (QnAMaker Only) The Azure Search endpoint key of QnAMaker.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "'qnaAzureSearchEndpointKey' is correctly marked as secret matching service-side security handling"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Preserve the historical qnaAzureSearchEndpointKey schema before November 2026; the replacement is a secret write-only property."
+  @renamedFrom(Versions.v2026_11_15_preview, "qnaAzureSearchEndpointKey")
+  @removed(Versions.v2026_11_15_preview)
+  qnaAzureSearchEndpointKeyLegacy?: string;
+
+  /**
+   * (QnAMaker Only) The Azure Search endpoint key of QnAMaker.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   qnaAzureSearchEndpointKey?: string;
 
   /**
@@ -2585,6 +2786,18 @@ model ApiProperties {
    */
   @maxLength(1000)
   @pattern("^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$")
+  @renamedFrom(Versions.v2026_11_15_preview, "eventHubConnectionString")
+  @removed(Versions.v2026_11_15_preview)
+  eventHubConnectionStringLegacy?: string;
+
+  /**
+   * (Personalization Only) The flag to enable statistics of Bing Search.
+   */
+  @maxLength(1000)
+  @pattern("^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$")
+  @added(Versions.v2026_11_15_preview)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   eventHubConnectionString?: string;
 
   /**
@@ -2592,6 +2805,18 @@ model ApiProperties {
    */
   @maxLength(1000)
   @pattern("^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$")
+  @renamedFrom(Versions.v2026_11_15_preview, "storageAccountConnectionString")
+  @removed(Versions.v2026_11_15_preview)
+  storageAccountConnectionStringLegacy?: string;
+
+  /**
+   * (Personalization Only) The storage account connection string.
+   */
+  @maxLength(1000)
+  @pattern("^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$")
+  @added(Versions.v2026_11_15_preview)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccountConnectionString?: string;
 
   /**
@@ -2792,11 +3017,29 @@ model ApiKeys {
   /**
    * Gets the value of key 1.
    */
+  @renamedFrom(Versions.v2026_11_15_preview, "key1")
+  @removed(Versions.v2026_11_15_preview)
+  key1Legacy?: string;
+
+  /**
+   * Gets the value of key 1.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @secret
   key1?: string;
 
   /**
    * Gets the value of key 2.
    */
+  @renamedFrom(Versions.v2026_11_15_preview, "key2")
+  @removed(Versions.v2026_11_15_preview)
+  key2Legacy?: string;
+
+  /**
+   * Gets the value of key 2.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @secret
   key2?: string;
 }
 
@@ -3845,6 +4088,7 @@ model DeploymentProperties {
    * At the moment the service only supports a single cost control. This will be expanded in future API versions.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_15_preview)
   @maxItems(1)
   costControlIds?: Azure.Core.armResourceIdentifier<[
     {
@@ -5104,7 +5348,11 @@ model ConnectionPropertiesV2BasicResourceArmPaginatedResult {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The value for ConnectionPropertiesV2BasicResourceArmPaginatedResult"
   @pageItems
-  value?: ConnectionPropertiesV2BasicResource[];
+  @typeChangedFrom(
+    Versions.v2026_11_15_preview,
+    ConnectionPropertiesV2BasicResource[]
+  )
+  value?: ConnectionPropertiesV2BasicResourceRead[];
 }
 /**
  * A paginated list of Capability Host entities.
@@ -5959,6 +6207,16 @@ model CustomKeysConnectionProperties extends ConnectionPropertiesV2 {
   /**
    * Custom Keys credential object
    */
+  @renamedFrom(Versions.v2026_11_15_preview, "credentials")
+  @removed(Versions.v2026_11_15_preview)
+  credentialsLegacy?: CustomKeys;
+
+  /**
+   * Custom Keys credential object
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   credentials?: CustomKeys;
 
   /**
@@ -5975,6 +6233,16 @@ model CustomKeys {
    * Dictionary of <string>
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<keys> type used for 'CustomKeys' to support extensible key-value pairs matching service behavior"
+  @renamedFrom(Versions.v2026_11_15_preview, "keys")
+  @removed(Versions.v2026_11_15_preview)
+  keysLegacy?: Record<string>;
+
+  /**
+   * Dictionary of <string>
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<keys> type used for 'CustomKeys' to support extensible key-value pairs matching service behavior"
+  @added(Versions.v2026_11_15_preview)
+  @secret
   keys?: Record<string>;
 }
 
@@ -7252,6 +7520,7 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   targetClusterIdLegacy: string;
 
   /**
@@ -7270,6 +7539,7 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   imageLinkLegacy: string;
 
   /**
@@ -7307,6 +7577,7 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   datasetIdLegacy?: string;
 
   /**
@@ -7326,6 +7597,7 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   sshSettingsLegacy?: SshSettings;
 
   /**
@@ -7357,6 +7629,7 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_15_preview)
   @visibility(Lifecycle.Read)
   provisioningStateLegacy?: ComputeProvisioningState;
 
@@ -7855,6 +8128,21 @@ model ManagedComputeCapacityProperties {
   acceleratorType?: string;
 
   /**
+   * The capacity offer scope: Global or DataZone. Omitted for deployment-scoped results.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  offerScope?: string;
+
+  /**
+   * The identifier within the offer scope: an empty string for Global, or US or EU
+   * for DataZone. Omitted for deployment-scoped results.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  scopeId?: string;
+
+  /**
    * The Azure region where the capacity is available.
    */
   @removed(Versions.v2026_05_01)
@@ -7866,6 +8154,14 @@ model ManagedComputeCapacityProperties {
    */
   @visibility(Lifecycle.Read)
   availableAccelerators?: int32;
+
+  /**
+   * The total number of available accelerators summed across regions within the scope.
+   * Omitted for deployment-scoped results.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  totalAvailableAccelerators?: int32;
 
   /**
    * Capacity information broken down by deployment size.
