@@ -1,4 +1,5 @@
 import "../common/models.tsp";
+import "../common/debug-latency-headers.tsp";
 import "./models.tsp";
 import "../voice-agents/agents.tsp";
 
@@ -17,7 +18,7 @@ interface Agents {
   @get
   @route("/agents/{agent_name}")
   @tag("Agents")
-  getAgent is FoundryDataPlaneOperation<
+  getAgent is AgentDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
@@ -39,7 +40,7 @@ interface Agents {
     "x-ms-description-override",
     "Creates a new agent or a new version of an existing agent."
   )
-  createAgent is FoundryDataPlanePreviewOperation<
+  createAgent is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     CreateAgentRequest,
     AgentObject
@@ -54,7 +55,7 @@ interface Agents {
   @route("/agents:generate")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   @tag("Agents")
-  generateAgent is FoundryDataPlaneRequiredPreviewOperation<
+  generateAgent is AgentDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The kind-specific inputs for generating and creating an agent. */
@@ -76,7 +77,7 @@ interface Agents {
   @route("/agents")
   @sharedRoute
   @tag("Agents")
-  createAgentFromCode is FoundryDataPlaneOperation<
+  createAgentFromCode is AgentDataPlaneOperation<
     {
       /** The content type of the request body. */
       @header contentType: "multipart/form-data";
@@ -110,7 +111,7 @@ interface Agents {
     "x-ms-description-override",
     "Updates the agent by adding a new version if there are any changes to the agent definition. If no changes, returns the existing agent version."
   )
-  updateAgent is FoundryDataPlanePreviewOperation<
+  updateAgent is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
       /** The name of the agent to retrieve. */
@@ -133,7 +134,7 @@ interface Agents {
   @route("/agents/{agent_name}")
   @sharedRoute
   @tag("Agents")
-  updateAgentFromCode is FoundryDataPlaneOperation<
+  updateAgentFromCode is AgentDataPlaneOperation<
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -165,7 +166,7 @@ interface Agents {
   @post
   @route("/agents:import")
   @tag("Agents")
-  createAgentFromManifest is FoundryDataPlaneOperation<
+  createAgentFromManifest is AgentDataPlaneOperation<
     CreateAgentFromManifestRequest,
     AgentObject
   >;
@@ -178,7 +179,7 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/import")
   @tag("Agents")
-  updateAgentFromManifest is FoundryDataPlaneOperation<
+  updateAgentFromManifest is AgentDataPlaneOperation<
     {
       /** The name of the agent to update. */
       @path agent_name: string;
@@ -197,7 +198,7 @@ interface Agents {
   @delete
   @route("/agents/{agent_name}")
   @tag("Agents")
-  deleteAgent is FoundryDataPlaneOperation<
+  deleteAgent is AgentDataPlaneOperation<
     {
       /** The name of the agent to delete. */
       @path agent_name: string;
@@ -215,7 +216,7 @@ interface Agents {
   @route("/agents")
   @list
   @tag("Agents")
-  listAgents is FoundryDataPlaneOperation<
+  listAgents is AgentDataPlaneOperation<
     {
       ...ListAgentQueryParameters;
     },
@@ -236,7 +237,7 @@ interface Agents {
     "x-ms-description-override",
     "Creates a new version for the specified agent and returns the created version resource."
   )
-  createAgentVersion is FoundryDataPlanePreviewOperation<
+  createAgentVersion is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
       /**
@@ -261,7 +262,7 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/versions:import")
   @tag("Agent Versions")
-  createAgentVersionFromManifest is FoundryDataPlaneOperation<
+  createAgentVersionFromManifest is AgentDataPlaneOperation<
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -285,7 +286,7 @@ interface Agents {
   @get
   @route("/agents/{agent_name}/versions/{agent_version}")
   @tag("Agent Versions")
-  getAgentVersion is FoundryDataPlaneOperation<
+  getAgentVersion is AgentDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
@@ -305,7 +306,7 @@ interface Agents {
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
   @tag("Agent Versions")
-  deleteAgentVersion is FoundryDataPlaneOperation<
+  deleteAgentVersion is AgentDataPlaneOperation<
     {
       /** The name of the agent to delete. */
       @path agent_name: string;
@@ -333,7 +334,7 @@ interface Agents {
       conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview],
     }
   )
-  listAgentVersions is FoundryDataPlaneOperation<
+  listAgentVersions is AgentDataPlaneOperation<
     {
       /** The name of the agent to retrieve versions for. */
       @path agent_name: string;
@@ -364,7 +365,7 @@ interface Agents {
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")
   @tag("Agents")
-  patchAgentObject is FoundryDataPlaneOperation<
+  patchAgentObject is AgentDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
       @summary("The name of the agent to retrieve")
@@ -392,7 +393,7 @@ interface Agents {
   @route("/agents/{agent_name}/versions")
   @sharedRoute
   @tag("Agent Versions")
-  createAgentVersionFromCode is FoundryDataPlaneOperation<
+  createAgentVersionFromCode is AgentDataPlaneOperation<
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -442,7 +443,8 @@ interface Agents {
        */
       @query agent_version?: string;
     },
-    DownloadAgentCodeResponse
+    DownloadAgentCodeResponse,
+    AgentErrorResult
   >;
 
   // ── Agent Enable/Disable Operations ─────────────────────
@@ -455,7 +457,7 @@ interface Agents {
   @post
   @route("/agents/{agent_name}:enable")
   @tag("Agents")
-  enableAgent is FoundryDataPlaneOperation<
+  enableAgent is AgentDataPlaneOperation<
     {
       /** The name of the agent to enable. */
       @path agent_name: string;
@@ -472,7 +474,7 @@ interface Agents {
   @post
   @route("/agents/{agent_name}:disable")
   @tag("Agents")
-  disableAgent is FoundryDataPlaneOperation<
+  disableAgent is AgentDataPlaneOperation<
     {
       /** The name of the agent to disable. */
       @path agent_name: string;
@@ -491,14 +493,16 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/endpoint/sessions")
   @tag("Agent Sessions")
-  createSession is FoundryDataPlaneOperation<
+  createSession is AgentDataPlaneOperation<
     {
       /** The name of the agent to create a session for. */
       @path agent_name: string;
 
       ...CreateAgentSessionRequest;
+      ...DebugLatencyRequestHeader;
     },
-    ResourceCreatedResponse<AgentSessionResource>
+    ResourceCreatedResponse<AgentSessionResource> &
+      SessionDebugLatencyResponseHeaders
   >;
 
   /**
@@ -508,15 +512,17 @@ interface Agents {
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @tag("Agent Sessions")
-  getSession is FoundryDataPlaneOperation<
+  getSession is AgentDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
 
       /** The session identifier. */
       @path session_id: string;
+
+      ...DebugLatencyRequestHeader;
     },
-    AgentSessionResource
+    AgentSessionResource & SessionDebugLatencyResponseHeaders
   >;
 
   /**
@@ -527,7 +533,7 @@ interface Agents {
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @tag("Agent Sessions")
-  deleteSession is FoundryDataPlaneOperation<
+  deleteSession is AgentDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -545,7 +551,7 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}:stop")
   @tag("Agent Sessions")
-  stopSession is FoundryDataPlaneOperation<
+  stopSession is AgentDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -564,7 +570,7 @@ interface Agents {
   @route("/agents/{agent_name}/endpoint/sessions")
   @list
   @tag("Agent Sessions")
-  listSessions is FoundryDataPlaneOperation<
+  listSessions is AgentDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -606,7 +612,7 @@ interface Agents {
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream")
   @tag("Agent Sessions")
-  getSessionLogStream is FoundryDataPlaneOperation<
+  getSessionLogStream is AgentDataPlaneOperation<
     {
       /** The name of the hosted agent. */
       @path agent_name: string;

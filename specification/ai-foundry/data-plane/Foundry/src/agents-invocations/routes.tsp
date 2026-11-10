@@ -1,4 +1,5 @@
 import "../common/models.tsp";
+import "../common/debug-latency-headers.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -16,7 +17,7 @@ interface AgentInvocations {
   @summary("Get an agent invocation OpenAPI spec")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/invocations/docs/openapi.json")
-  getAgentInvocationOpenApiSpec is FoundryDataPlaneOperation<
+  getAgentInvocationOpenApiSpec is AgentDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -36,7 +37,7 @@ interface AgentInvocations {
   @summary("Create an agent invocation")
   @post
   @route("/agents/{agent_name}/endpoint/protocols/invocations")
-  createAgentInvocation is FoundryDataPlaneOperation<
+  createAgentInvocation is AgentDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -51,8 +52,11 @@ interface AgentInvocations {
       @body request: unknown;
 
       ...UserDelegationHeader;
+      ...DebugLatencyRequestHeader;
     },
     {
+      ...DebugLatencyResponseHeaders;
+
       /** Unique identifier for this invocation. */
       @header("x-agent-invocation-id") invocationId: string;
 
@@ -74,7 +78,7 @@ interface AgentInvocations {
   @summary("Get an agent invocation")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}")
-  getAgentInvocation is FoundryDataPlaneOperation<
+  getAgentInvocation is AgentDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -83,8 +87,11 @@ interface AgentInvocations {
       @path invocation_id: string;
 
       ...UserDelegationHeader;
+      ...DebugLatencyRequestHeader;
     },
     {
+      ...PersistedDebugLatencyResponseHeaders;
+
       /** Session ID for this invocation. Returns the session ID associated with the invocation. */
       @header("x-agent-session-id") agentSessionId: string;
 
@@ -103,7 +110,7 @@ interface AgentInvocations {
   @summary("Cancel an agent invocation")
   @post
   @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}/cancel")
-  cancelAgentInvocation is FoundryDataPlaneOperation<
+  cancelAgentInvocation is AgentDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
