@@ -239,7 +239,13 @@ export function validateTypeSpecRemediationResult(
     if (!CONFIDENCE_LEVELS.includes(String(value.remediation.confidence))) {
       throw new Error(`${findingLabel} has an invalid remediation confidence`);
     }
-    requireStringArray(value.remediation.languageScopes, "remediation.languageScopes");
+    const languageScopes = requireStringArray(
+      value.remediation.languageScopes,
+      "remediation.languageScopes",
+    );
+    if (languageScopes.length !== 1 || languageScopes[0] !== "csharp") {
+      throw new Error(`${findingLabel} remediation.languageScopes must contain only csharp`);
+    }
     requireNonEmptyString(value.remediation.suggestion, "remediation.suggestion");
     if (value.remediation.sourceLocation !== undefined) {
       validateSourceLocation(value.remediation.sourceLocation, typeSpecContext, findingLabel);

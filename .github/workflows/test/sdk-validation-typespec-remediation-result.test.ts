@@ -126,6 +126,21 @@ describe("validateTypeSpecRemediationResult", () => {
     ).toThrow("does not match its SDK review finding");
   });
 
+  it("rejects non-C# language scopes", () => {
+    const result = createResult();
+    result.findings[0].remediation.languageScopes = ["python"];
+
+    expect(() =>
+      validateTypeSpecRemediationResult(
+        reviewContext,
+        rawReviewResult,
+        typeSpecContext,
+        result,
+        "# TypeSpec remediation\n",
+      ),
+    ).toThrow("languageScopes must contain only csharp");
+  });
+
   it("rejects source locations outside changed TypeSpec files", () => {
     const result = createResult();
     result.findings[0].remediation.sourceLocation.file =
