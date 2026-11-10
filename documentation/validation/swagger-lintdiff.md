@@ -62,6 +62,10 @@ Check `Swagger LintDiff` may fail for the OpenAPI generated from TypeSpec, even 
 
 We are working to address the root causes (where possible).  Until then, we recommend you [suppress](https://aka.ms/pr-suppressions) these LintDiff errors, using a "permanent suppression" with a descriptive "reason".
 
+LintDiff evaluates the generated Swagger/OpenAPI, not the TypeSpec source annotations directly. When a rule fails for a TypeSpec-authored specification, inspect the emitted OpenAPI for the affected operation before dismissing the validation result.
+
+For example, when troubleshooting a pageable-rule failure, verify that the emitted operation contains the expected paging contract and extensions, such as `x-ms-pageable`. The presence of a TypeSpec annotation such as `@list` does not by itself guarantee that the expected paging shape was emitted.
+
 ## `AvoidAdditionalProperties`
 The use of `Record<unknown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the OpenAPI spec generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations.
 

@@ -37,4 +37,12 @@ Error: Multiple input-file definitions for tag package-preview-2024-01 in
     at async Readme.getTags (file:///home/user/specs-pr/.github/shared/src/readme.js:188:13)
 ```
 
+### Troubleshooting file-not-found errors
+
+If spec-model or LintDiff reports a `ResolverError`, `ENOENT`, or another file-not-found error, verify that every referenced file exists at the configured path.
+
+Check the relevant `readme.md` tag for incorrect `input-file` entries, and inspect `$ref` values, example-file links, and other cross-file references for paths that may have been moved, renamed, or removed.
+
+If the reported path is from the baseline or before tree, inspect the corresponding files and configuration on the target branch. Correct or remove stale references so that every configured input and linked file resolves successfully.
+
 Any errors from spec-model are fatal, and must be fixed before proceeding.  There are no exceptions or suppressions.

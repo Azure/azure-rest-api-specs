@@ -4,6 +4,9 @@
 # AutoRest Exceptions
 If `Swagger BreakingChange` fails with `AutoRest threw a runtime error`, the root cause is likely a problem in your spec causing AutoRest to crash. Complete the Node.js and pnpm setup in [Contributing](../contributing/toolchain-setup.md), then debug with all commands run from the repository root:
 
+> [!IMPORTANT]
+> A crashed `Swagger BreakingChange` run does not produce a complete comparison. Findings reported before the crash may still be valid, but they should not be treated as the final result. Resolve the AutoRest exception first, rerun the check successfully, and then evaluate the remaining breaking-change findings.
+
 1. Determine if the problem is "before" or "after" your PR (or both)
    1. Checkout the target branch of your PR (likely `main` or `RPSaaSMaster`)
    2. `pnpm ci`

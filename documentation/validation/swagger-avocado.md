@@ -2,6 +2,8 @@
 - [Overview](#overview)
 - [Fixing Errors](#fixing-errors)
 - [Running Locally](#running-locally)
+- [Troubleshooting](#troubleshooting)
+  - [NOT_LATEST_API_VERSION_IN_DEFAULT_TAG](#not_latest_api_version_in_default_tag)
 - [Known Issues](#known-issues)
   - [MULTIPLE_API_VERSION](#multiple_api_version)
 - [Future Plans](#future-plans)
@@ -24,6 +26,22 @@ $ cd azure-rest-api-specs
 $ pnpm ci
 $ pnpm avocado --excludePaths common-types -d specification/contosowidgetmanager
 ```
+
+## Troubleshooting
+
+### NOT_LATEST_API_VERSION_IN_DEFAULT_TAG
+
+This error means that the default tag in the publishing `resource-manager/readme.md` does not include the latest API version for every API path.
+
+To diagnose the error:
+
+1. Open the `resource-manager/readme.md` used for publishing and identify its default tag.
+2. Find the OpenAPI input files included by that tag.
+3. For each affected API path, check whether another JSON file outside the default tag defines the same path with a newer API version.
+
+Avocado determines the latest version for each API path. It does not only check whether the default tag name appears correct. This error can occur when an outer README and a nested README contain overlapping API paths, but the newer API version is included only by the nested README.
+
+To fix the error, update the publishing README configuration so that its default tag includes the latest-version file for each affected API path.
 
 # Known Issues
 Workaround is for PR reviewer to apply label `Approved-Avocado` until tool issues are fixed.
