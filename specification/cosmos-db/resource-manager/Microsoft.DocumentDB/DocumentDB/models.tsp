@@ -270,10 +270,6 @@ model DataMaskingPolicy {
   @identifiers(#[])
   excludedPaths?: DataMaskingPolicyExcludedPathsItem[];
 
-  /**
-   * Flag indicating whether the data masking policy is enabled.
-   */
-  isPolicyEnabled?: boolean;
 }
 
 /**
