@@ -89,16 +89,6 @@ interface AiGatewayResources {
   >;
   listByResourceGroup is ArmResourceListByParent<AiGatewayResource>;
   listBySubscription is ArmListBySubscription<AiGatewayResource>;
-
-  /** Lists primary and secondary key values for the AI Gateway. */
-  @added(Versions.v2026_11_01)
-  @post
-  @action("listSecrets")
-  listSecrets is ArmResourceActionSync<
-    AiGatewayResource,
-    void,
-    ArmResponse<AiGatewayApiKeyValues>
-  >;
 }
 
 alias AiGatewayPrivateEndpointOps = Azure.ResourceManager.PrivateEndpoints<AiGatewayPrivateEndpointConnection>;
@@ -235,20 +225,13 @@ interface AiGatewayToolServerResources {
     void,
     ArmResponse<AiGatewayToolServerSecrets>
   >;
-}
-
-@added(Versions.v2026_11_01)
-@armResourceOperations
-interface AiGatewayToolServerEndpointResources {
-  get is ArmResourceRead<AiGatewayToolServerEndpointResource>;
-  listByToolServer is ArmResourceListByParent<AiGatewayToolServerEndpointResource>;
 
   /** Gets links to complete OAuth consent for a tool server endpoint. */
   @post
   @action("getOauth2LoginLinks")
   getOauth2LoginLinks is ArmResourceActionSync<
-    AiGatewayToolServerEndpointResource,
-    void,
+    AiGatewayToolServerResource,
+    AiGatewayToolServerLoginLinksRequest,
     ArmResponse<AiGatewayToolServerOauth2LoginLinks>
   >;
 }

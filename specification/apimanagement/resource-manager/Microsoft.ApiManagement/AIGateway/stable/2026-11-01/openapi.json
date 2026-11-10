@@ -75,9 +75,6 @@
       "name": "AiGatewayToolServerResources"
     },
     {
-      "name": "AiGatewayToolServerEndpointResources"
-    },
-    {
       "name": "AiGatewayApiKeyResources"
     }
   ],
@@ -1031,53 +1028,6 @@
         "x-ms-examples": {
           "Regenerate the secondary AI Gateway API key": {
             "$ref": "./examples/AiGatewayApiKeyRegenerateSecondaryKey.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/listSecrets": {
-      "post": {
-        "operationId": "AiGatewayResources_ListSecrets",
-        "tags": [
-          "AiGatewayResources"
-        ],
-        "description": "Lists primary and secondary key values for the AI Gateway.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "aiGatewayName",
-            "in": "path",
-            "description": "The name of the AiGatewayResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AiGatewayApiKeyValues"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List AI Gateway secrets": {
-            "$ref": "./examples/AiGatewayListSecrets.json"
           }
         }
       }
@@ -3911,148 +3861,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/endpoints": {
-      "get": {
-        "operationId": "AiGatewayToolServerEndpointResources_ListByToolServer",
-        "tags": [
-          "AiGatewayToolServerEndpointResources"
-        ],
-        "description": "List AiGatewayToolServerEndpointResource resources by AiGatewayToolServerResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "aiGatewayName",
-            "in": "path",
-            "description": "The name of the AiGatewayResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the AiGatewayWorkspaceResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^default$"
-          },
-          {
-            "name": "toolServerName",
-            "in": "path",
-            "description": "The name of the AiGatewayToolServerResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AiGatewayToolServerEndpointResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List tool server endpoints": {
-            "$ref": "./examples/AiGatewayToolServerEndpointList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/endpoints/{endpointName}": {
-      "get": {
-        "operationId": "AiGatewayToolServerEndpointResources_Get",
-        "tags": [
-          "AiGatewayToolServerEndpointResources"
-        ],
-        "description": "Get a AiGatewayToolServerEndpointResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "aiGatewayName",
-            "in": "path",
-            "description": "The name of the AiGatewayResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the AiGatewayWorkspaceResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^default$"
-          },
-          {
-            "name": "toolServerName",
-            "in": "path",
-            "description": "The name of the AiGatewayToolServerResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "The name of the AiGatewayToolServerEndpointResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,62}[a-zA-Z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AiGatewayToolServerEndpointResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a tool server endpoint": {
-            "$ref": "./examples/AiGatewayToolServerEndpointGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/endpoints/{endpointName}/getOauth2LoginLinks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/getOauth2LoginLinks": {
       "post": {
-        "operationId": "AiGatewayToolServerEndpointResources_GetOauth2LoginLinks",
+        "operationId": "AiGatewayToolServerResources_GetOauth2LoginLinks",
         "tags": [
-          "AiGatewayToolServerEndpointResources"
+          "AiGatewayToolServerResources"
         ],
         "description": "Gets links to complete OAuth consent for a tool server endpoint.",
         "parameters": [
@@ -4090,12 +3903,13 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "endpointName",
-            "in": "path",
-            "description": "The name of the AiGatewayToolServerEndpointResource",
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,62}[a-zA-Z0-9])?$"
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerLoginLinksRequest"
+            }
           }
         ],
         "responses": {
@@ -4114,7 +3928,7 @@
         },
         "x-ms-examples": {
           "Get OAuth consent links for a tool server endpoint": {
-            "$ref": "./examples/AiGatewayToolServerEndpointGetOauth2LoginLinks.json"
+            "$ref": "./examples/AiGatewayToolServerGetOauth2LoginLinks.json"
           }
         }
       }
@@ -7310,7 +7124,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Stable endpoint identifier, also used as the endpoint resource name. Up to 64 alphanumeric characters or hyphens, starting and ending with an alphanumeric character. Generated when omitted."
+          "description": "Stable endpoint identifier. Up to 64 alphanumeric characters or hyphens, starting and ending with an alphanumeric character. Generated when omitted."
         },
         "namespace": {
           "type": "string",
@@ -7367,94 +7181,6 @@
       },
       "required": [
         "kind"
-      ]
-    },
-    "AiGatewayToolServerEndpointProperties": {
-      "type": "object",
-      "description": "Read-only properties of an AI Gateway tool server endpoint. Endpoints are configured through the endpoints array of the parent tool server.",
-      "properties": {
-        "namespace": {
-          "type": "string",
-          "description": "Optional namespace used to prefix tool names.",
-          "readOnly": true
-        },
-        "kind": {
-          "$ref": "#/definitions/AiGatewayToolServerEndpointSourceKind",
-          "description": "Endpoint type.",
-          "readOnly": true
-        },
-        "mcp": {
-          "$ref": "#/definitions/AiGatewayMcpUrlConfiguration",
-          "description": "Backend MCP configuration. Present when kind is mcp.",
-          "readOnly": true
-        },
-        "openApi": {
-          "$ref": "#/definitions/AiGatewayOpenApiConfiguration",
-          "description": "OpenAPI configuration. Present when kind is openApi.",
-          "readOnly": true
-        },
-        "authentication": {
-          "$ref": "#/definitions/AiGatewayToolServerAuthentication",
-          "description": "Backend authentication configuration. Secret values are not returned.",
-          "readOnly": true
-        },
-        "tools": {
-          "type": "array",
-          "description": "Upstream tool names or glob patterns to expose.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "mode": {
-          "$ref": "#/definitions/AiGatewayFailureMode",
-          "description": "Failure mode when the endpoint fails.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/AiGatewayProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "kind"
-      ]
-    },
-    "AiGatewayToolServerEndpointResource": {
-      "type": "object",
-      "description": "A read-only AI Gateway tool server endpoint. The resource name is the endpoint id configured on the parent tool server.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AiGatewayToolServerEndpointProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AiGatewayToolServerEndpointResourceListResult": {
-      "type": "object",
-      "description": "The response of a AiGatewayToolServerEndpointResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AiGatewayToolServerEndpointResource items on this page",
-          "items": {
-            "$ref": "#/definitions/AiGatewayToolServerEndpointResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "AiGatewayToolServerEndpointSourceKind": {
@@ -7570,6 +7296,19 @@
           }
         ]
       }
+    },
+    "AiGatewayToolServerLoginLinksRequest": {
+      "type": "object",
+      "description": "Parameters for getting OAuth consent links for a tool server endpoint.",
+      "properties": {
+        "endpointId": {
+          "type": "string",
+          "description": "Identifier of the endpoint configured on the tool server."
+        }
+      },
+      "required": [
+        "endpointId"
+      ]
     },
     "AiGatewayToolServerManagedIdentityAuthentication": {
       "type": "object",

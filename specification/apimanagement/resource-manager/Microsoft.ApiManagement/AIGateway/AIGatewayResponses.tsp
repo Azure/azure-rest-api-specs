@@ -61,6 +61,13 @@ model AiGatewayCheckNameAvailabilityResponse {
   message?: string;
 }
 
+/** Parameters for getting OAuth consent links for a tool server endpoint. */
+@added(Versions.v2026_11_01)
+model AiGatewayToolServerLoginLinksRequest {
+  /** Identifier of the endpoint configured on the tool server. */
+  endpointId: string;
+}
+
 /** Links for completing OAuth consent for a tool-server endpoint. */
 @added(Versions.v2026_11_01)
 model AiGatewayToolServerOauth2LoginLinks {
