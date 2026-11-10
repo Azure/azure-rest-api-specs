@@ -49,6 +49,18 @@ alias BrowserSessionReadRequiredProperties = {
   @doc("The browser session operating system.")
   operatingSystem: OS;
 };
+
+@doc("The browser profile configuration for a browser session.")
+model BrowserProfileBrowserSessionConfiguration {
+  @doc("The ID in GUID format of the browser profile used by the browser session. Cannot be changed after creation.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  id?: Azure.Core.uuid;
+
+  @doc("Whether to save the changes in the browser profile done by the browser session. Can be changed after session creation.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  saveChanges?: boolean;
+}
+
 alias BrowserSessionOptionalProperties = {
   @doc("The browser session start time in UTC.")
   @visibility(Lifecycle.Read)
@@ -86,6 +98,16 @@ alias BrowserSessionOptionalProperties = {
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   proxyConfig?: ProxyConfigReference;
+
+  @added(Versions.v2026_12_01_preview)
+  @doc("The ID in GUID format of the secret store used by the browser session.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  secretStoreId?: Azure.Core.uuid;
+
+  @added(Versions.v2026_12_01_preview)
+  @doc("The browser profile configuration for the browser session.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  browserProfile?: BrowserProfileBrowserSessionConfiguration;
 };
 
 @doc("A reference to a saved proxy configuration in the session's workspace.")
