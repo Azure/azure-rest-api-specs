@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "versioning"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       add a default value `21` for property age in model EmployeeProperties only for the new api version 2025-11-01
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/001002-version-default-value/employee.tsp
           dest: employee.tsp
@@ -53,7 +53,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author add a default value `21` for property age in model EmployeeProperties only for the new api version 2025-11-01
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
@@ -95,7 +95,7 @@ stimuli:
       suite: "versioning"
       mode: "no-skill"
     prompt: "add a default value `21` for property age in model EmployeeProperties only for the new api version 2025-11-01"
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric:
       - EmployeeProperties.age has a default value of 21 only in API version 2025-11-01.
       - The previous age property shape is preserved for earlier versions through valid TypeSpec versioning decorators.
