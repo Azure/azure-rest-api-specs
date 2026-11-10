@@ -51,3 +51,5 @@ using Azure.Data.AI;
 @@clientName(MetaResult, "SemanticRerankingMetadata", "csharp");
 @@clientName(SemanticRerankingInferenceResult.meta, "metadata", "csharp");
 @@clientName(MultimodalEmbeddingData, "MultimodalEmbeddingItem", "csharp");
+@@clientName(EmbeddingContentItem.url, "uri", "csharp");
+@@clientName(MultimodalEmbeddingOutput.url, "uri", "csharp");
