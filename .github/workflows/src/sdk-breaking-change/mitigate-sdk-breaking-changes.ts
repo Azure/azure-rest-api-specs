@@ -73,8 +73,10 @@ export async function mitigateSdkBreakingChanges({
   specificationRepositoryPath: unresolvedSpecificationRepositoryPath,
   resultDirPath,
   azureSdkCliPath,
-  streamOutput,
-}: { core: Core } & MitigateSdkBreakingChangesOptions & { streamOutput?: boolean }): Promise<void> {
+  forwardOutput,
+}: { core: Core } & MitigateSdkBreakingChangesOptions & {
+    forwardOutput?: boolean;
+  }): Promise<void> {
   const analysisResult = AnalysisResultSchema.parse(
     JSON.parse(await readFile(analysisResultPath, "utf8")),
   );
@@ -88,9 +90,9 @@ export async function mitigateSdkBreakingChanges({
       : undefined,
   ];
   let azsdkOptions = undefined;
-  if (streamOutput) {
+  if (forwardOutput) {
     azsdkOptions = {
-      streamOutput: true,
+      forwardOutput: true,
     };
   }
   try {

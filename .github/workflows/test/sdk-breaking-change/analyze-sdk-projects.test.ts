@@ -92,8 +92,8 @@ afterEach(async () => {
 
 describe("analyzeSdkProjects", () => {
   it.each([undefined, false, true])(
-    "runs generation, build, and detection and writes the analysis artifact and summary (streamOutput: %s)",
-    async (streamOutput) => {
+    "runs generation, build, and detection and writes the analysis artifact and summary (forwardOutput: %s)",
+    async (forwardOutput) => {
       await analyzeSdkProjects({
         core,
         localSdkRepositoryPath: sdkRepositoryPath,
@@ -106,7 +106,7 @@ describe("analyzeSdkProjects", () => {
         workflowUrl: "https://github.com/owner/repo/actions/runs/123",
         resultFilePath,
         azureSdkCliPath,
-        streamOutput,
+        forwardOutput,
       });
 
       const artifact = AnalysisResultSchema.parse(
@@ -163,7 +163,7 @@ describe("analyzeSdkProjects", () => {
         3,
         azureSdkCli,
         expect.arrayContaining(["detect-breaking-change"]),
-        streamOutput ? { streamOutput: true } : undefined,
+        forwardOutput ? { forwardOutput: true } : undefined,
       );
       expect(generateTypeSpecMetadataMock).toHaveBeenCalledWith(
         join(specificationRepositoryPath, "specification", "service", "Widget.Service"),

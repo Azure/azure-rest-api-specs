@@ -59,8 +59,8 @@ export async function analyzeSdkProjects({
   workflowUrl,
   resultFilePath,
   azureSdkCliPath,
-  streamOutput,
-}: { core: Core } & AnalyzeSdkProjectsOptions & { streamOutput?: boolean }): Promise<void> {
+  forwardOutput,
+}: { core: Core } & AnalyzeSdkProjectsOptions & { forwardOutput?: boolean }): Promise<void> {
   const localSdkRepositoryPath = await realpath(unresolvedLocalSdkRepositoryPath);
   await mkdir(dirname(resultFilePath), { recursive: true });
 
@@ -75,9 +75,9 @@ export async function analyzeSdkProjects({
   };
   const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
   let azsdkOptions = undefined;
-  if (streamOutput) {
+  if (forwardOutput) {
     azsdkOptions = {
-      streamOutput: true,
+      forwardOutput: true,
     };
   }
 

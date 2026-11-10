@@ -30,13 +30,19 @@ describe("execFile", () => {
   const expected = "test\n";
 
   it.each([undefined, false, true])(
-    "captures output and streams only when enabled (streamOutput: %s)",
-    async (streamOutput) => {
-      const chunks: string[] = [];
+    "captures output and streams only when enabled (forwardOutput: %s)",
+    async (forwardOutput) => {
+      const stdoutChunks: string[] = [];
+      const stderrChunks: string[] = [];
       const outputBeforeCompletion: boolean[] = [];
       let completed = false;
       const write = vi.spyOn(process.stdout, "write").mockImplementation((chunk) => {
-        chunks.push(String(chunk));
+        stdoutChunks.push(String(chunk));
+        outputBeforeCompletion.push(!completed);
+        return true;
+      });
+      const writeError = vi.spyOn(process.stderr, "write").mockImplementation((chunk) => {
+        stderrChunks.push(String(chunk));
         outputBeforeCompletion.push(!completed);
         return true;
       });
@@ -44,49 +50,72 @@ describe("execFile", () => {
         const result = await execFile(
           process.execPath,
           ["-e", "process.stdout.write('child-output'); process.stderr.write('child-diagnostic')"],
-          { streamOutput },
+          { forwardOutput },
         ).finally(() => {
           completed = true;
         });
 
         expect(result).toEqual({ stdout: "child-output", stderr: "child-diagnostic" });
-        if (streamOutput) {
-          expect(chunks.join("")).toContain("child-output");
-          expect(chunks.join("")).toContain("child-diagnostic");
+        if (forwardOutput) {
+          expect(stdoutChunks.join("")).toBe("child-output");
+          expect(stderrChunks.join("")).toBe("child-diagnostic");
           expect(outputBeforeCompletion.length).toBeGreaterThan(0);
           expect(outputBeforeCompletion.every(Boolean)).toBe(true);
         } else {
           expect(write).not.toHaveBeenCalled();
+          expect(writeError).not.toHaveBeenCalled();
         }
+        expect(process.stdout.writableEnded).toBe(false);
+        expect(process.stderr.writableEnded).toBe(false);
       } finally {
         write.mockRestore();
+        writeError.mockRestore();
       }
     },
   );
 
-  it.each([
-    { stdout: "child-output", stderr: "" },
-    { stdout: "", stderr: "child-diagnostic" },
-    { stdout: "child-output", stderr: "child-diagnostic" },
-  ])("prints captured failure output without a logger (%j)", async ({ stdout, stderr }) => {
-    const chunks: string[] = [];
-    const write = vi.spyOn(process.stdout, "write").mockImplementation((chunk) => {
-      chunks.push(String(chunk));
-      return true;
-    });
-    try {
-      await expect(
-        execFile(process.execPath, [
-          "-e",
-          `process.stdout.write(${JSON.stringify(stdout)}); process.stderr.write(${JSON.stringify(stderr)}); process.exitCode = 7;`,
-        ]),
-      ).rejects.toMatchObject({ code: 7, stdout, stderr });
+  it.each([undefined, false, true])(
+    "preserves failure details and forwards output only when enabled (forwardOutput: %s)",
+    async (forwardOutput) => {
+      const stdout = "child-output";
+      const stderr = "child-diagnostic";
+      const stdoutChunks: string[] = [];
+      const stderrChunks: string[] = [];
+      const write = vi.spyOn(process.stdout, "write").mockImplementation((chunk) => {
+        stdoutChunks.push(String(chunk));
+        return true;
+      });
+      const writeError = vi.spyOn(process.stderr, "write").mockImplementation((chunk) => {
+        stderrChunks.push(String(chunk));
+        return true;
+      });
+      try {
+        await expect(
+          execFile(
+            process.execPath,
+            [
+              "-e",
+              `process.stdout.write(${JSON.stringify(stdout)}); process.stderr.write(${JSON.stringify(stderr)}); process.exitCode = 7;`,
+            ],
+            forwardOutput === undefined ? undefined : { forwardOutput },
+          ),
+        ).rejects.toMatchObject({ code: 7, stdout, stderr });
 
-      expect(chunks.join("")).toBe(stdout + stderr);
-    } finally {
-      write.mockRestore();
-    }
-  });
+        if (forwardOutput) {
+          expect(stdoutChunks.join("")).toBe(stdout);
+          expect(stderrChunks.join("")).toBe(stderr);
+        } else {
+          expect(write).not.toHaveBeenCalled();
+          expect(writeError).not.toHaveBeenCalled();
+        }
+        expect(process.stdout.writableEnded).toBe(false);
+        expect(process.stderr.writableEnded).toBe(false);
+      } finally {
+        write.mockRestore();
+        writeError.mockRestore();
+      }
+    },
+  );
 
   it("forwards command-specific environment without mutating the parent", async () => {
     const original = process.env.TSV_EXEC_TEST;

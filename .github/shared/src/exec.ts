@@ -22,10 +22,10 @@ export interface ExecFileOptions extends ExecOptions {
   /** Maximum execution time in milliseconds. Defaults to no timeout. */
   timeout?: number;
   /**
-   * Whether to stream the command's stdout and stderr to the process's stdout.
+   * Whether to stream the command's stdout and stderr to the corresponding process streams.
    * Defaults to false.
    */
-  streamOutput?: boolean;
+  forwardOutput?: boolean;
 }
 
 export interface NpmPrefixOptions {
@@ -69,7 +69,7 @@ export async function execFile(
     // Node default is 1024 * 1024, which is too small for some git commands returning many entities or large file content.
     // To support "git show", should be larger than the largest swagger file in the repo (2.5 MB as of 2/28/2025).
     maxBuffer = 16 * 1024 * 1024,
-    streamOutput = false,
+    forwardOutput = false,
   } = options;
 
   logger?.debug(`execFile("${file}", ${JSON.stringify(args)})`);
@@ -83,13 +83,9 @@ export async function execFile(
       ...(env === undefined ? {} : { env }),
     });
 
-    if (streamOutput) {
-      execution.child.stdout?.on("data", (chunk: Buffer) => {
-        process.stdout.write(chunk);
-      });
-      execution.child.stderr?.on("data", (chunk: Buffer) => {
-        process.stdout.write(chunk);
-      });
+    if (forwardOutput) {
+      execution.child.stdout?.pipe(process.stdout, { end: false });
+      execution.child.stderr?.pipe(process.stderr, { end: false });
     }
 
     const result = await execution;
@@ -99,10 +95,6 @@ export async function execFile(
     return result;
   } catch (error) {
     /* v8 ignore next */
-    if (isExecError(error)) {
-      if (error.stdout) process.stdout.write(error.stdout);
-      if (error.stderr) process.stdout.write(error.stderr);
-    }
     logger?.debug(`error: '${JSON.stringify(error)}'`);
 
     throw error;
