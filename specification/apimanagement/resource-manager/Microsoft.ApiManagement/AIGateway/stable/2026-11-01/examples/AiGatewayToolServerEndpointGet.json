@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default",
+    "toolServerName": "weather-tools",
+    "endpointName": "endpoint-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/toolServers/weather-tools/endpoints/endpoint-1",
+        "name": "endpoint-1",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/toolServers/endpoints",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "namespace": "weather",
+          "kind": "mcp",
+          "mcp": {
+            "endpoint": {
+              "url": "https://example.invalid/mcp"
+            },
+            "transport": "streamableHttp"
+          },
+          "authentication": {
+            "oauth2": {
+              "issuer": "https://identity.example.com/",
+              "authorizationEndpoint": {
+                "url": "https://identity.example.com/authorize"
+              },
+              "tokenEndpoint": {
+                "url": "https://identity.example.com/token"
+              },
+              "clientId": "example-client",
+              "scopes": [
+                "tools.read"
+              ],
+              "grantType": "authorizationCode",
+              "status": "connected",
+              "statusUpdatedUtc": "2026-10-12T00:00:00Z"
+            }
+          },
+          "mode": "failClosed"
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayToolServerEndpointResources_Get",
+  "title": "Get a tool server endpoint"
+}

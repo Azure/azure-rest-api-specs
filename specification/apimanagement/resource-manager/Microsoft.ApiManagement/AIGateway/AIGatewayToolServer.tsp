@@ -253,7 +253,7 @@ model AiGatewayOpenApiConfiguration {
 /** A tool server endpoint. */
 @added(Versions.v2026_11_01)
 model AiGatewayToolServerEndpoint {
-  /** Stable endpoint identifier. Generated when omitted. */
+  /** Stable endpoint identifier, also used as the endpoint resource name. Up to 64 alphanumeric characters or hyphens, starting and ending with an alphanumeric character. Generated when omitted. */
   id?: string;
 
   /** Optional namespace used to prefix tool names. */
@@ -456,5 +456,54 @@ model AiGatewayToolServerResource
     KeyName = "toolServerName",
     SegmentName = "toolServers",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+  >;
+}
+
+/** Read-only properties of an AI Gateway tool server endpoint. Endpoints are configured through the endpoints array of the parent tool server. */
+@added(Versions.v2026_11_01)
+model AiGatewayToolServerEndpointProperties {
+  /** Optional namespace used to prefix tool names. */
+  @visibility(Lifecycle.Read)
+  `namespace`?: string;
+
+  /** Endpoint type. */
+  @visibility(Lifecycle.Read)
+  kind: AiGatewayToolServerEndpointSourceKind;
+
+  /** Backend MCP configuration. Present when kind is mcp. */
+  @visibility(Lifecycle.Read)
+  mcp?: AiGatewayMcpUrlConfiguration;
+
+  /** OpenAPI configuration. Present when kind is openApi. */
+  @visibility(Lifecycle.Read)
+  openApi?: AiGatewayOpenApiConfiguration;
+
+  /** Backend authentication configuration. Secret values are not returned. */
+  @visibility(Lifecycle.Read)
+  authentication?: AiGatewayToolServerAuthentication;
+
+  /** Upstream tool names or glob patterns to expose. */
+  @visibility(Lifecycle.Read)
+  tools?: string[];
+
+  /** Failure mode when the endpoint fails. */
+  @visibility(Lifecycle.Read)
+  mode?: AiGatewayFailureMode;
+
+  /** Provisioning state of the resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: AiGatewayProvisioningState;
+}
+
+/** A read-only AI Gateway tool server endpoint. The resource name is the endpoint id configured on the parent tool server. */
+@added(Versions.v2026_11_01)
+@parentResource(AiGatewayToolServerResource)
+model AiGatewayToolServerEndpointResource
+  is Azure.ResourceManager.ProxyResource<AiGatewayToolServerEndpointProperties> {
+  ...ResourceNameParameter<
+    Resource = AiGatewayToolServerEndpointResource,
+    KeyName = "endpointName",
+    SegmentName = "endpoints",
+    NamePattern = "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,62}[a-zA-Z0-9])?$"
   >;
 }

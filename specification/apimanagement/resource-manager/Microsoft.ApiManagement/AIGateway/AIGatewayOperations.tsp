@@ -22,39 +22,6 @@ interface AiGatewayNameAvailabilityOperations {
   >;
 }
 
-/** OAuth actions on a tool-server endpoint, which is not an independent resource. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "The nested OAuth endpoint action uses the implemented explicit route and is not a separate ARM resource."
-@added(Versions.v2026_11_01)
-interface AiGatewayToolServerEndpointOperations {
-  /** Gets links to complete OAuth consent for a tool-server endpoint. */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/endpoints/{endpointId}/oauth2/getLoginLinks")
-  @post
-  getLoginLinks(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /** AI Gateway resource name. */
-    @pattern("^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$")
-    @path
-    aiGatewayName: string,
-
-    /** Default workspace resource name. */
-    @pattern("^default$")
-    @path
-    workspaceName: string,
-
-    /** Tool server resource name. */
-    @pattern("^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$")
-    @path
-    toolServerName: string,
-
-    /** Stable identifier of the tool-server endpoint. */
-    @path
-    endpointId: string,
-  ): ArmResponse<AiGatewayToolServerOauth2LoginLinks> | ErrorResponse;
-}
-
 @added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayTelemetryExporterResources {
@@ -174,6 +141,7 @@ interface AiGatewayWorkspaceResources {
     PatchModel = AiGatewayWorkspaceUpdateParameters,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
+  listByAiGateway is ArmResourceListByParent<AiGatewayWorkspaceResource>;
 }
 
 @added(Versions.v2026_11_01)
@@ -266,6 +234,22 @@ interface AiGatewayToolServerResources {
     AiGatewayToolServerResource,
     void,
     ArmResponse<AiGatewayToolServerSecrets>
+  >;
+}
+
+@added(Versions.v2026_11_01)
+@armResourceOperations
+interface AiGatewayToolServerEndpointResources {
+  get is ArmResourceRead<AiGatewayToolServerEndpointResource>;
+  listByToolServer is ArmResourceListByParent<AiGatewayToolServerEndpointResource>;
+
+  /** Gets links to complete OAuth consent for a tool server endpoint. */
+  @post
+  @action("getOauth2LoginLinks")
+  getOauth2LoginLinks is ArmResourceActionSync<
+    AiGatewayToolServerEndpointResource,
+    void,
+    ArmResponse<AiGatewayToolServerOauth2LoginLinks>
   >;
 }
 

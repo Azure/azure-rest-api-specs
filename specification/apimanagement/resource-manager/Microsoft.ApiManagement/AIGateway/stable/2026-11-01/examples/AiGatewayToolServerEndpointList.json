@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default",
+    "toolServerName": "weather-tools"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/toolServers/weather-tools/endpoints/endpoint-1",
+            "name": "endpoint-1",
+            "type": "Microsoft.ApiManagement/aigateways/workspaces/toolServers/endpoints",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "namespace": "weather",
+              "kind": "mcp",
+              "mcp": {
+                "endpoint": {
+                  "url": "https://example.invalid/mcp"
+                },
+                "transport": "streamableHttp"
+              },
+              "authentication": {
+                "headers": [
+                  {
+                    "name": "x-api-key"
+                  }
+                ]
+              },
+              "mode": "failClosed"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AiGatewayToolServerEndpointResources_ListByToolServer",
+  "title": "List tool server endpoints"
+}
