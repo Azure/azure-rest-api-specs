@@ -52,6 +52,14 @@ Most guides here require for you to have `npm` installed, which you can get by i
 If a PR pipeline fails with a fetch-related error and the logs do not identify
 an actionable problem in the submitted changes, retry the failed run once
 before starting a deeper specification or pipeline investigation.
+For example, the CI run reported the following annotation:
+
+```
+Unhandled error: HttpError: fetch failed
+```
+
+This message indicates that a fetch operation failed, but does not by itself 
+identify the cause or establish that the submitted specification caused the failure.
 
 If the retry succeeds, ensure all required CI checks pass before requesting or
 re-requesting review. If the same fetch-related failure occurs again,
