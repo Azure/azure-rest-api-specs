@@ -4,7 +4,7 @@ version: "1.0"
 type: capability
 tags:
   area: naming
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 defaults:
   runs: 1
   timeout: 180s
@@ -29,7 +29,7 @@ stimuli:
       customization MCP tool is available. Stop after the handoff result; the next authoring
       step will run TypeSpec validation. Return JSON "applied" and "generatedNamesVerified".
       Do not compile or generate an SDK in this bounded handoff.
-    environment: &a1
+    agent_environment: &a1
       files:
         - src: ../../../azure-typespec-sdk-naming/evals/fixtures/customization-mcp.mjs
           dest: customization-mcp.mjs
@@ -99,7 +99,7 @@ stimuli:
       customization MCP tool is available. Stop after the handoff result; the next authoring
       step will run TypeSpec validation. Return JSON "applied" and "generatedNamesVerified".
       Do not compile or generate an SDK in this bounded handoff.
-    environment: *a1
+    agent_environment: *a1
     constraints: *a2
     graders:
       - type: skill-invocation
@@ -129,7 +129,7 @@ stimuli:
       customization MCP tool is available. Stop after the handoff result; the next authoring
       step will run TypeSpec validation. Return JSON "applied" and "generatedNamesVerified".
       Do not compile or generate an SDK in this bounded handoff.
-    environment: *a1
+    agent_environment: *a1
     constraints: *a2
     graders:
       - type: tool-calls
