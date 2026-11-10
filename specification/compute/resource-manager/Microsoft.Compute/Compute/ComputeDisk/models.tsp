@@ -1310,6 +1310,7 @@ model AccessUri {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility(Lifecycle.Read)
+  @secret
   accessSAS?: string;
 
   /**
@@ -1317,12 +1318,14 @@ model AccessUri {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility(Lifecycle.Read)
+  @secret
   securityDataAccessSAS?: string;
 
   /** A SAS uri for accessing a VM metadata. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_01_02)
+  @secret
   securityMetadataAccessSAS?: string;
 }
 
