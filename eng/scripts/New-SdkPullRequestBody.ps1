@@ -63,13 +63,36 @@ function Format-LinkLabel([string]$Value) {
     return $Value.Replace('\', '\\').Replace('[', '\[').Replace(']', '\]').Replace('|', '\|').Replace("`r", ' ').Replace("`n", ' ')
 }
 
-$apiVersions = ConvertFrom-Json -InputObject $ApiVersionsJson -AsHashtable -NoEnumerate
-if ($apiVersions -isnot [array]) {
-    throw 'API versions must be a JSON array.'
+function Write-MetadataWarning([string]$Message) {
+    Write-Host "##vso[task.logissue type=warning]$Message"
 }
-$releasePlan = ConvertFrom-Json -InputObject $ReleasePlanJson -AsHashtable
-if ($releasePlan -isnot [System.Collections.IDictionary]) {
-    throw 'Release plan metadata must be a JSON object.'
+
+$apiVersions = @()
+try {
+    $parsedVersions = ConvertFrom-Json -InputObject $ApiVersionsJson -AsHashtable -NoEnumerate
+    if ($parsedVersions -is [array]) {
+        $apiVersions = $parsedVersions
+    } else {
+        Write-MetadataWarning 'API version metadata must be a JSON array; API versions will be omitted.'
+    }
+}
+catch {
+    Write-MetadataWarning 'Could not parse API version metadata; API versions will be omitted.'
+}
+
+$releasePlan = @{ unavailable = $true }
+try {
+    $parsedPlan = ConvertFrom-Json -InputObject $ReleasePlanJson -AsHashtable -NoEnumerate
+    if ($parsedPlan -isnot [System.Collections.IDictionary]) {
+        Write-MetadataWarning 'Release plan metadata must be a JSON object; release plan information is unavailable.'
+    } elseif ($parsedPlan.Contains('unavailable') -and $parsedPlan['unavailable'] -isnot [bool]) {
+        Write-MetadataWarning 'The release plan unavailable flag must be a boolean; release plan information is unavailable.'
+    } else {
+        $releasePlan = $parsedPlan
+    }
+}
+catch {
+    Write-MetadataWarning 'Could not parse release plan metadata; release plan information is unavailable.'
 }
 
 $specRepository = $SpecRepoUrl.TrimEnd('/')
@@ -82,16 +105,16 @@ $rows.Add("| **$sourceLabel** | [$(Format-CodeSpan $ConfigPath)]($configurationU
 
 $versionValues = foreach ($entry in $apiVersions) {
     if ($entry -isnot [System.Collections.IDictionary] -or $entry['version'] -isnot [string] -or [string]::IsNullOrWhiteSpace($entry['version'])) {
-        throw 'Each API version must have a nonempty string version.'
+        Write-MetadataWarning 'An API version must have a nonempty string version; the invalid entry will be omitted.'
+        continue
+    }
+    if ($null -ne $entry['namespace'] -and $entry['namespace'] -isnot [string]) {
+        Write-MetadataWarning 'An API version namespace must be a string; the invalid entry will be omitted.'
+        continue
     }
     $value = Format-CodeSpan $entry['version']
-    if ($null -ne $entry['namespace']) {
-        if ($entry['namespace'] -isnot [string]) {
-            throw 'An API version namespace must be a string.'
-        }
-        if ($entry['namespace']) {
-            $value += " (Namespace: $(Format-CodeSpan $entry['namespace']))"
-        }
+    if ($entry['namespace']) {
+        $value += " (Namespace: $(Format-CodeSpan $entry['namespace']))"
     }
     $value
 }
@@ -107,20 +130,30 @@ $pipelineId = Get-QueryParameter $PipelineRun 'buildId'
 $pipelineLabel = if ($pipelineId) { "SDK Generation #$(Format-LinkLabel $pipelineId)" } else { 'Open pipeline run' }
 $rows.Add("| **Pipeline run** | [$pipelineLabel]($pipelineUrl) |")
 
-if ($releasePlan['url']) {
-    if ($releasePlan['url'] -isnot [string]) {
-        throw 'The release plan URL must be a string.'
+$releasePlanUnavailable = $releasePlan['unavailable'] -eq $true
+if (-not $releasePlanUnavailable -and $releasePlan.Contains('url')) {
+    try {
+        if ($releasePlan['url'] -isnot [string] -or [string]::IsNullOrWhiteSpace($releasePlan['url'])) {
+            throw 'The release plan URL must be a nonempty string.'
+        }
+        $releasePlanUrl = Format-MarkdownUrl $releasePlan['url']
+        $releasePlanId = Get-QueryParameter $releasePlan['url'] 'releaseplan'
+        $releasePlanLabel = if ($releasePlanId) { "Release plan #$(Format-LinkLabel $releasePlanId)" } else { 'Open release plan' }
+        $rows.Add("| **Release plan** | [$releasePlanLabel]($releasePlanUrl) |")
     }
-    $releasePlanUrl = Format-MarkdownUrl $releasePlan['url']
-    $releasePlanId = Get-QueryParameter $releasePlan['url'] 'releaseplan'
-    $releasePlanLabel = if ($releasePlanId) { "Release plan #$(Format-LinkLabel $releasePlanId)" } else { 'Open release plan' }
-    $rows.Add("| **Release plan** | [$releasePlanLabel]($releasePlanUrl) |")
+    catch {
+        Write-MetadataWarning 'The release plan URL is invalid; release plan information is unavailable.'
+        $releasePlanUnavailable = $true
+    }
 }
-if ($releasePlan['submittedBy']) {
+if ($releasePlanUnavailable) {
+    $rows.Add('| **Release plan** | Release plan information is not available. Create a release plan and link SDK pull request to the release plan. Refer [aka.ms/azsdk/releaseplan-dashboard](https://aka.ms/azsdk/releaseplan-dashboard) for more info. |')
+} elseif ($releasePlan.Contains('submittedBy')) {
     if ($releasePlan['submittedBy'] -isnot [string]) {
-        throw 'The release plan submitter must be a string.'
+        Write-MetadataWarning 'The release plan submitter must be a string; the Submitted by row will be omitted.'
+    } elseif ($releasePlan['submittedBy']) {
+        $rows.Add("| **Submitted by** | $(Format-CodeSpan $releasePlan['submittedBy']) |")
     }
-    $rows.Add("| **Submitted by** | $(Format-CodeSpan $releasePlan['submittedBy']) |")
 }
 
 @(

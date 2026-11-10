@@ -124,7 +124,8 @@ stages:
               Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
               $prStatus = 'draft'
               Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
-              Write-Host "##vso[task.setvariable variable=ReleasePlanMetadata]{}"
+              $releasePlanMetadata = if (${{ parameters.ReleasePlanWorkItemId }} -ne 0) { '{"unavailable":true}' } else { '{}' }
+              Write-Host "##vso[task.setvariable variable=ReleasePlanMetadata]$releasePlanMetadata"
               Write-Host "##vso[task.setvariable variable=GeneratedSDKApiVersionsJson][]"
               $prUrl = ""
               Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
@@ -352,6 +353,7 @@ stages:
                       azureSubscription: opensource-api-connection
                       scriptType: pscore
                       scriptLocation: inlineScript
+                      powerShellIgnoreLASTEXITCODE: true
                       inlineScript: |
                         $releasePlanMetadata = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }} -AsJson
                         $escapedMetadata = $releasePlanMetadata.Replace('%', '%AZP25').Replace("`r", '%0D').Replace("`n", '%0A')

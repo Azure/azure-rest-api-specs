@@ -60,12 +60,15 @@ test("passes structured metadata to the renderer as data, not PowerShell source"
 
 test("initializes optional metadata before generation can fail and keeps the commit message separate", () => {
   expect(pipelineTemplate).toContain(
-    'Write-Host "##vso[task.setvariable variable=ReleasePlanMetadata]{}"',
-  );
-  expect(pipelineTemplate).toContain(
     'Write-Host "##vso[task.setvariable variable=GeneratedSDKApiVersionsJson][]"',
   );
   expect(pipelineTemplate).toContain("CommitMsg: $(GeneratedSDKInformation)");
+});
+
+test("keeps release-plan lookup best-effort even after a native CLI failure", () => {
+  const step = findPipelineStep(parse(pipelineTemplate), "Get Release Plan details");
+  expect(step?.continueOnError).toBe(true);
+  expect(step?.inputs).toEqual(expect.objectContaining({ powerShellIgnoreLASTEXITCODE: true }));
 });
 
 test("passes the composed PR body directly to the existing submission script", () => {
