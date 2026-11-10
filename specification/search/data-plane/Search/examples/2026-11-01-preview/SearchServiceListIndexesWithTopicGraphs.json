@@ -1,0 +1,100 @@
+{
+  "operationId": "Indexes_List",
+  "title": "SearchServiceListIndexesWithTopicGraphs",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "api-version": "2026-11-01-preview",
+    "search": "preview",
+    "pageSize": 1,
+    "searchType": null,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "Accept": "application/json;odata.metadata=minimal"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "preview-topic-test-topic-graph-index",
+            "purviewEnabled": false,
+            "fields": [
+              {
+                "name": "id",
+                "type": "Edm.String",
+                "searchable": true,
+                "filterable": true,
+                "retrievable": true,
+                "stored": true,
+                "sortable": true,
+                "facetable": true,
+                "key": true,
+                "synonymMaps": []
+              },
+              {
+                "name": "subject_id",
+                "type": "Edm.String",
+                "searchable": true,
+                "filterable": true,
+                "retrievable": true,
+                "stored": true,
+                "sortable": true,
+                "facetable": true,
+                "key": false,
+                "synonymMaps": []
+              },
+              {
+                "name": "object_vector",
+                "type": "Collection(Edm.Single)",
+                "searchable": true,
+                "filterable": false,
+                "retrievable": true,
+                "stored": true,
+                "sortable": false,
+                "facetable": false,
+                "key": false,
+                "dimensions": 10,
+                "vectorSearchProfile": "topic-cosine-profile",
+                "synonymMaps": []
+              }
+            ],
+            "scoringProfiles": [],
+            "suggesters": [],
+            "analyzers": [],
+            "normalizers": [],
+            "tokenizers": [],
+            "tokenFilters": [],
+            "charFilters": [],
+            "similarity": {
+              "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+            },
+            "vectorSearch": {
+              "algorithms": [
+                {
+                  "name": "topic-cosine",
+                  "kind": "hnsw",
+                  "hnswParameters": {
+                    "metric": "cosine",
+                    "m": 4,
+                    "efConstruction": 400,
+                    "efSearch": 500
+                  }
+                }
+              ],
+              "profiles": [
+                {
+                  "name": "topic-cosine-profile",
+                  "algorithm": "topic-cosine"
+                }
+              ],
+              "vectorizers": [],
+              "compressions": [],
+              "topicGraphProfiles": []
+            }
+          }
+        ],
+        "@odata.nextLink": "https://typespecpreviewexampleservice.search.windows.net/indexes?api-version=2026-11-01-preview&service=typespecpreviewexampleservice&$skiptoken=MXxwcmV2aWV3fHByZXZpZXctdG9waWMtdGVzdA%3d%3d"
+      }
+    }
+  }
+}
