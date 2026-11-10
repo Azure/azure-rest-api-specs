@@ -45,9 +45,10 @@ using Microsoft.Compute;
   "ComputeRecommenderGenerateResult",
   "csharp"
 );
+@@clientName(SpotPlacementScoresBase, "ComputeRecommenderDiagnostic", "csharp");
 @@clientName(
-  SpotPlacementScoresBase,
-  "ComputeRecommenderPlacementScores",
+  PlacementScoresProperties.supportedResourceTypes,
+  "ComputeRecommenderDiagnosticSupportedResourceTypes",
   "csharp"
 );
 @@clientName(SpotPlacementScores.post, "generate", "csharp");
