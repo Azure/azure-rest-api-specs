@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01",
+    "networkVirtualApplianceName": "nva-vhub",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "nvaSku": {
+          "bundledScaleUnit": "1",
+          "marketPlaceVersion": "12.1",
+          "vendor": "Cisco SDWAN"
+        },
+        "virtualHub": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+        },
+        "addressFamily": [
+          "IPv4"
+        ],
+        "virtualApplianceAsn": 10000,
+        "loadBalancerConfiguration": {
+          "loadDistribution": "SourceIPProtocol",
+          "idleTimeoutInMinutes": 15
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "nva-vhub",
+        "type": "Microsoft.Network/networkVirtualAppliances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva-vhub",
+        "location": "West US",
+        "properties": {
+          "nvaSku": {
+            "bundledScaleUnit": "1",
+            "marketPlaceVersion": "12.1",
+            "vendor": "Cisco SDWAN"
+          },
+          "virtualHub": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+          },
+          "addressFamily": [
+            "IPv4"
+          ],
+          "virtualApplianceAsn": 10000,
+          "loadBalancerConfiguration": {
+            "loadDistribution": "SourceIPProtocol",
+            "idleTimeoutInMinutes": 15
+          },
+          "privateIpAddress": "192.168.12.11",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "nva-vhub",
+        "type": "Microsoft.Network/networkVirtualAppliances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva-vhub",
+        "location": "West US",
+        "properties": {
+          "nvaSku": {
+            "bundledScaleUnit": "1",
+            "marketPlaceVersion": "12.1",
+            "vendor": "Cisco SDWAN"
+          },
+          "virtualHub": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+          },
+          "addressFamily": [
+            "IPv4"
+          ],
+          "virtualApplianceAsn": 10000,
+          "loadBalancerConfiguration": {
+            "loadDistribution": "SourceIPProtocol",
+            "idleTimeoutInMinutes": 15
+          },
+          "provisioningState": "Updating"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/nfvOperations/00000000-0000-0000-0000-000000000000?api-version=2026-05-01"
+      }
+    }
+  },
+  "operationId": "NetworkVirtualAppliances_CreateOrUpdate",
+  "title": "Create or update a managed NVA in a virtual hub with SourceIPProtocol load distribution"
+}
