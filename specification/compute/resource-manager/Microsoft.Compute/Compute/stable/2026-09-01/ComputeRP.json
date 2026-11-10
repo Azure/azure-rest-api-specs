@@ -16053,6 +16053,16 @@
         ]
       }
     },
+    "ExtendedScheduledEvents": {
+      "type": "object",
+      "description": "Specifies Extended Scheduled Events related configurations. Extended Scheduled Events give longer deadlines to respond to platform-initiated maintenance.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Specifies whether to opt in to Extended Scheduled Events. The setting takes effect only on supported hardware."
+        }
+      }
+    },
     "ExtensionFeatureMetadata": {
       "type": "object",
       "description": "Additional metadata about extension features, including compliance and capability tags.",
@@ -19881,6 +19891,10 @@
         "allInstancesDown": {
           "$ref": "#/definitions/AllInstancesDown",
           "description": "The configuration parameters used while creating AllInstancesDown scheduled event setting creation."
+        },
+        "extendedScheduledEvents": {
+          "$ref": "#/definitions/ExtendedScheduledEvents",
+          "description": "The configuration parameters used to opt in to Extended Scheduled Events."
         }
       }
     },

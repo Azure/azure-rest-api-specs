@@ -2144,6 +2144,23 @@ model ScheduledEventsPolicy {
    */
   @added(Versions.v2025_04_01)
   allInstancesDown?: AllInstancesDown;
+
+  /**
+   * The configuration parameters used to opt in to Extended Scheduled Events.
+   */
+  @added(Versions.v2026_09_01)
+  extendedScheduledEvents?: ExtendedScheduledEvents;
+}
+
+/**
+ * Specifies Extended Scheduled Events related configurations. Extended Scheduled Events give longer deadlines to respond to platform-initiated maintenance.
+ */
+@added(Versions.v2026_09_01)
+model ExtendedScheduledEvents {
+  /**
+   * Specifies whether to opt in to Extended Scheduled Events. The setting takes effect only on supported hardware.
+   */
+  enable?: boolean;
 }
 
 /**
