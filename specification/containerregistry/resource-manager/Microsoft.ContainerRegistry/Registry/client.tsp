@@ -28,6 +28,7 @@ using Microsoft.ContainerRegistry;
 );
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
+@@usage(TriggerStatus, Usage.input | Usage.output, "java");
 
 @@clientName(
   MyPrivateLinkResource,
