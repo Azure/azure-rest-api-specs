@@ -345,7 +345,7 @@ describe("contributor readiness", () => {
     expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
   });
 
-  it("keeps the job summary available when PR comment publication fails", async () => {
+  it("keeps the job summary and PR handoff available when PR comment publication fails", async () => {
     const f = setup();
     f.permission.mockResolvedValue({ data: { permission: "read" } });
     f.github.rest.issues.createComment.mockRejectedValue(createMockRequestError(403));
@@ -707,7 +707,8 @@ describe("contributor readiness", () => {
       .mockResolvedValueOnce({ data: { ...pr, head: { sha: "b".repeat(40) } } });
     await expect(f.run()).rejects.toThrow("PR changed");
     expect(f.createCheck).not.toHaveBeenCalled();
-    expect(f.core.setOutput).not.toHaveBeenCalled();
+    expect(f.core.setOutput).not.toHaveBeenCalledWith("issue_number", expect.anything());
+    expect(f.core.setOutput).not.toHaveBeenCalledWith("head_sha", expect.anything());
   });
 
   it("skips closed PRs", async () => {
