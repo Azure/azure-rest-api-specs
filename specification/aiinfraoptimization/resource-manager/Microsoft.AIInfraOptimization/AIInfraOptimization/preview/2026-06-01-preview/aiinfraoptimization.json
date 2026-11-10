@@ -1083,16 +1083,16 @@
         "promptTokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of prompt, or input, tokens per inference request. Must be supplied together with `maxOutputTokens`, and the two must total from 1 through 131072.",
+          "description": "The number of prompt, or input, tokens per inference request. Must be supplied together with `maxOutputTokens`, and the two must total from 1 through 2147483647 without exceeding the model's maximum context length.",
           "minimum": 0,
-          "maximum": 131072
+          "maximum": 2147483647
         },
         "maxOutputTokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of generated output tokens per inference request. Must be supplied together with `promptTokens`, and the two must total from 1 through 131072.",
+          "description": "The maximum number of generated output tokens per inference request. Must be supplied together with `promptTokens`, and the two must total from 1 through 2147483647 without exceeding the model's maximum context length.",
           "minimum": 0,
-          "maximum": 131072
+          "maximum": 2147483647
         }
       }
     },

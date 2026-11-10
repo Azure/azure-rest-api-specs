@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "warning"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       Add suppressions for the warnings produced by "tsp compile .", and set the justification to "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details".
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/005001-warning-suppress-warning/main.tsp
           dest: main.tsp
@@ -51,7 +51,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author Add suppressions for the warnings produced by "tsp compile .", and set the justification to "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details".
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
@@ -83,7 +83,7 @@ stimuli:
       suite: "warning"
       mode: "no-skill"
     prompt: 'Add suppressions for the warnings produced by "tsp compile .", and set the justification to "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details".'
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "tool-calls"
         config:
