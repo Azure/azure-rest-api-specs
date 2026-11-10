@@ -15,9 +15,6 @@ union AiGatewayAliasSelectionStage {
   string,
 
   /** Deterministic priority and weight routing stage. */
-  Routing: "routing",
-
-  /** Deterministic priority and weight routing stage. */
   Priority: "priority",
 
   /** Automatic model selection stage. */
