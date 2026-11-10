@@ -497,7 +497,7 @@ model VoiceAgentSubagent {
   @doc("Policy for acknowledging forwarded requests and filling gaps while waiting for this subagent's response.")
   response_policy?: VoiceAgentSubagentResponsePolicy;
 
-  @doc("The wall-clock timeout, in seconds, for each invocation of this subagent. When omitted, the service timeout is used.")
+  @doc("The wall-clock timeout in seconds for each invocation of this subagent. When omitted, the service timeout is used.")
   @encode(DurationKnownEncoding.seconds, int32)
   @minValue(duration.fromISO("PT5S"))
   @maxValue(duration.fromISO("PT20M"))
@@ -705,7 +705,7 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
   @doc("An optional description of the system tool.")
   description?: string;
 
-  @doc("Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.")
+  @doc("The execution timeout in seconds, from 1 to 300. If omitted, the service defaults to 60 seconds.")
   @extension("minimum", 1)
   @extension("maximum", 300)
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
@@ -793,7 +793,7 @@ model VoiceAgentTransferRouting {
   @doc("The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.")
   strategy: VoiceAgentTransferStrategy;
 
-  @doc("Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.")
+  @doc("The per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's execution timeout. ACS allows at most 180 seconds.")
   @extension("minimum", 1)
   @extension("maximum", 300)
   ring_timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT20S");
