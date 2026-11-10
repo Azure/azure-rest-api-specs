@@ -105,8 +105,13 @@ alias AiGatewayPrivateLinkOps = Azure.ResourceManager.PrivateLinks<
 @armResourceOperations
 interface AiGatewayPrivateEndpointConnections {
   get is AiGatewayPrivateEndpointOps.Read<AiGatewayResource>;
+
+  /** Approves or rejects a private endpoint connection. While the decision is applied, `properties.provisioningState` is `Updating`, a service-defined value of the extensible provisioning state. */
   createOrUpdate is AiGatewayPrivateEndpointOps.CreateOrUpdateAsync<AiGatewayResource>;
+
+  /** Deletes a private endpoint connection. Until the connection is removed, `properties.provisioningState` is `Deleting`. */
   delete is AiGatewayPrivateEndpointOps.DeleteAsync<AiGatewayResource>;
+
   listByAiGateway is AiGatewayPrivateEndpointOps.ListByParent<AiGatewayResource>;
 }
 
