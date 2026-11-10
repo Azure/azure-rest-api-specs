@@ -1,0 +1,59 @@
+steps:
+  - script: |
+      set -e
+      BRANCH="${SKILL_BRANCH:-}"
+      if [ "$BRANCH" = '$(SkillBranch)' ]; then
+        BRANCH=""
+      fi
+      if [ -z "$BRANCH" ]; then
+        echo "SkillBranch not set; keep current checked-out skill files."
+        exit 0
+      fi
+
+      BRANCH_REF="$BRANCH"
+      case "$BRANCH_REF" in
+        refs/heads/*)
+          ;;
+        refs/remotes/origin/*)
+          BRANCH_REF="refs/heads/${BRANCH_REF#refs/remotes/origin/}"
+          ;;
+        origin/*)
+          BRANCH_REF="refs/heads/${BRANCH_REF#origin/}"
+          ;;
+        refs/*)
+          ;;
+        *)
+          BRANCH_REF="refs/heads/$BRANCH_REF"
+          ;;
+      esac
+
+      echo "Overlaying azure-typespec-author skill from: $BRANCH_REF"
+      git fetch origin "$BRANCH_REF"
+      rm -rf .github/skills/azure-typespec-author/SKILL.md \
+             .github/skills/azure-typespec-author/references
+      git checkout FETCH_HEAD -- \
+        .github/skills/azure-typespec-author/SKILL.md \
+        .github/skills/azure-typespec-author/references
+      echo "Skill source overlaid from $BRANCH_REF"
+    displayName: "Overlay skill source from SkillBranch (if set)"
+    env:
+      SKILL_BRANCH: $(SkillBranch)
+
+  - template: /eng/pipelines/templates/steps/npm-install.yml
+    parameters:
+      NodeVersion: 24.x
+      WorkingDirectory: $(Build.SourcesDirectory)
+
+  - script: |
+      set -e
+      echo "tsp version:"
+      echo "##vso[task.prependpath]$(Build.SourcesDirectory)/node_modules/.bin"
+      echo "##vso[task.setvariable variable=FIXTURE_NODE_MODULES]$(Build.SourcesDirectory)/node_modules"
+      export PATH="$(Build.SourcesDirectory)/node_modules/.bin:$PATH"
+      tsp --version
+    displayName: "Verify TypeSpec toolchain on PATH"
+
+  - script: |
+      set -e
+      node .github/skills/azure-typespec-author/evaluate/scripts/setup-fixture-files.ts
+    displayName: "Prepare fixture files"

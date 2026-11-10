@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @parentResource(Namespace)
 @doc("Device definition.")
 model NamespaceDevice is TrackedResource<NamespaceDeviceProperties> {
@@ -46,7 +46,7 @@ alias NamespaceDevicePropertiesUpdate = {
     "enabled"
   >>>;
 
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2025_10_01)
   @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
   enabled?: boolean;
 };
@@ -72,7 +72,7 @@ model DeviceCredentialsRevokeResponse {
   error?: Error;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @armResourceOperations
 interface NamespaceDevices {
   get is ArmResourceRead<NamespaceDevice>;
@@ -90,7 +90,8 @@ interface NamespaceDevices {
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDevice>;
-  listByResourceGroup is ArmResourceListByParent<NamespaceDevice>;
+  @renamedFrom(Versions.v2026_11_01, "listByResourceGroup")
+  listByNamespace is ArmResourceListByParent<NamespaceDevice>;
 
   @doc("A long-running resource action.")
   @added(Versions.v2026_03_01_preview)

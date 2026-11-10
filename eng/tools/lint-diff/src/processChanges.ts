@@ -1,8 +1,8 @@
 import { readme, swagger } from "@azure-tools/specs-shared/changed-files";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
-import deepEqual from "deep-eql";
-import { readFile } from "fs/promises";
-import { join, relative, resolve, sep } from "path";
+import { readFile } from "node:fs/promises";
+import { isDeepStrictEqual } from "node:util";
+import { join, relative, resolve, sep } from "node:path";
 import { type ReadmeAffectedTags } from "./lintdiff-types.ts";
 import { getUnsuppressedSwaggers } from "./swagger-suppressions.ts";
 import { pathExists } from "./util.ts";
@@ -363,7 +363,7 @@ export async function getChangedSwaggers(
     });
 
     // Compare the dereferenced objects
-    if (!deepEqual(derefBefore, derefAfter)) {
+    if (!isDeepStrictEqual(derefBefore, derefAfter)) {
       affectedSwaggers.add(swagger);
     }
   }

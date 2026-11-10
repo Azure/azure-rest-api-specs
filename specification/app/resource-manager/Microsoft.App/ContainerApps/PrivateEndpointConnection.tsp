@@ -57,7 +57,8 @@ alias PrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.LegacyOperatio
     @segment("privateEndpointConnections")
     @key
     privateEndpointConnectionName: string;
-  }
+  },
+  ResourceName = "ContainerAppPrivateEndpointConnection"
 >;
 
 alias ContainerAppPrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -80,7 +81,8 @@ alias ContainerAppPrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.Le
     @segment("privateEndpointConnections")
     @key
     privateEndpointConnectionName: string;
-  }
+  },
+  ResourceName = "ContainerAppContainerPrivateEndpointConnection"
 >;
 
 alias ContainerAppPrivateLinkResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<

@@ -21,6 +21,7 @@ import "./operations/sessions.tsp";
 import "./operations/providers.tsp";
 import "./operations/storage.tsp";
 import "./operations/quotas.tsp";
+import "./operations/suiteOffers.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;

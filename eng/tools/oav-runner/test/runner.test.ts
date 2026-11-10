@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import { simpleGit } from "simple-git";
 import { describe, expect, it } from "vitest";
 import { preCheckFiltering, processFilesToSpecificationList } from "../src/runner.ts";

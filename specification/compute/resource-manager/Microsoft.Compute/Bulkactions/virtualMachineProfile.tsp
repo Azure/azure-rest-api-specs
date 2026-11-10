@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Compute;
 @doc("Describes the properties of a Virtual Machine for bulk create.")
@@ -53,6 +55,25 @@ model BulkactionVMProperties {
 
   @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
   vmExtensions?: BulkactionVMExtension[];
+
+  @added(Versions.`2026-10-06-preview`)
+  @doc("Specifies the priority for the virtual machines. Mirrors the priority property on Microsoft.Compute/virtualMachines.")
+  priority?: PriorityType;
+
+  @added(Versions.`2026-10-06-preview`)
+  @doc("Specifies the billing related details of the Azure Spot virtual machines. Mirrors the billingProfile property on Microsoft.Compute/virtualMachines. Only applies when priority is Spot.")
+  billingProfile?: BillingProfile;
+
+  @added(Versions.`2026-10-06-preview`)
+  @doc("Specifies the eviction policy for the Azure Spot virtual machines. Both Deallocate and Delete are supported. Mirrors the evictionPolicy property on Microsoft.Compute/virtualMachines. Only applies when priority is Spot.")
+  evictionPolicy?: EvictionPolicy;
+}
+
+@added(Versions.`2026-10-06-preview`)
+@doc("Specifies the billing related details of the Azure Spot virtual machines.")
+model BillingProfile {
+  @doc("Specifies the maximum price, in US Dollars, you are willing to pay per hour for each Azure Spot virtual machine. This price is compared with the current Azure Spot price for the virtual machine size at create time, and the operation only succeeds if maxPrice is greater than the current Azure Spot price. It is also used to evict a virtual machine if the current Azure Spot price rises above it after creation. Possible values are any decimal value greater than zero, or -1 to indicate the default price is up-to on-demand and the virtual machine should not be evicted for price reasons. The default is -1 when not provided.")
+  maxPrice?: float64;
 }
 
 @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations.")
@@ -502,6 +523,7 @@ model OSProfile {
 
   @doc("Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)")
   @secret
+  @visibility(Lifecycle.Create)
   adminPassword?: string;
 
   /**

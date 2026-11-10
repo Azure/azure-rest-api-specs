@@ -79,6 +79,7 @@ alias ToolboxOpenApiToolType = "openapi";
 alias ToolboxA2AToolType = "a2a";
 alias ToolboxA2APreviewToolType = "a2a_preview";
 alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
+alias ToolboxBrowserAutomationToolType = "browser_automation";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
 alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
@@ -97,6 +98,7 @@ union ToolboxToolType {
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
+  #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
@@ -106,6 +108,7 @@ union ToolboxToolType {
   a2a: ToolboxA2AToolType,
   shell: ToolboxShellToolType,
   web_iq_preview: ToolboxWebIQPreviewToolType,
+  browser_automation: ToolboxBrowserAutomationToolType,
 }
 
 /**
@@ -271,11 +274,24 @@ model A2APreviewToolboxTool extends ToolboxTool {
 
 /**
  * A browser automation tool stored in a toolbox.
+ * BrowserAutomationPreviewToolboxTool is deprecated.
+ * Please use BrowserAutomationToolboxTool instead.
+ * See https://aka.ms/bat/docs for more information on Browser automation tool.
  */
+#deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
 @extension("x-ms-foundry-meta", PreviewTool)
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
+  #suppress "deprecated" "Intentional reuse of the legacy model for backward compatibility."
   ...ToolFields<BrowserAutomationPreviewTool>;
+}
+
+/**
+ * A browser automation tool stored in a toolbox.
+ */
+model BrowserAutomationToolboxTool extends ToolboxTool {
+  type: ToolboxBrowserAutomationToolType;
+  ...ToolFields<BrowserAutomationTool>;
 }
 
 /**
@@ -358,6 +374,12 @@ model ToolboxSkillReference extends ToolboxSkill {
   version?: string;
 }
 
+@doc("The versions associated with a toolbox.")
+model ToolboxVersions {
+  @doc("The latest version of the toolbox.")
+  latest: ToolboxVersionObject;
+}
+
 @doc("A toolbox that stores reusable tool definitions for agents.")
 model ToolboxObject {
   @doc("The unique identifier of the toolbox.")
@@ -366,6 +388,12 @@ model ToolboxObject {
   @doc("The name of the toolbox.")
   @maxLength(256)
   name: string;
+
+  @doc("The Unix timestamp (seconds) when the toolbox was last updated. This value changes when a new toolbox version is created or the toolbox is updated.")
+  updated_at: FoundryTimestamp;
+
+  @doc("The versions associated with the toolbox.")
+  versions: ToolboxVersions;
 
   @doc("The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.")
   default_version: string;

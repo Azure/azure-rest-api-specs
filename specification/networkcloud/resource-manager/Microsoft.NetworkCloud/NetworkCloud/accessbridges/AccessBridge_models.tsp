@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetworkCloud;
 
@@ -27,6 +28,12 @@ union AccessBridgeAllowedName {
    * The access bridge for access to the storage dashboard.
    */
   StorageDashboard: "StorageDashboard",
+
+  /**
+   * The access bridge for edge management.
+   */
+  @added(Versions.v2026_08_01_preview)
+  EdgeManagement: "EdgeManagement",
 }
 
 /**
@@ -276,7 +283,7 @@ model AccessBridgePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  ...Foundations.ArmTagsProperty;
+  ...TagsParameter;
 }
 
 /**

@@ -53,7 +53,7 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
   type: EvaluationTaxonomyInputType.agent;
 
   @doc("Target configuration for the agent.")
-  target: Target;
+  target: FoundryEvaluationTarget;
 
   @doc("List of risk categories to evaluate against.")
   riskCategories: RiskCategory[];
