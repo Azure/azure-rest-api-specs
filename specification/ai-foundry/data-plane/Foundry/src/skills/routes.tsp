@@ -7,6 +7,8 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+alias SkillsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.skills_v1_preview>;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Skills")
 interface Skills {
@@ -15,17 +17,22 @@ interface Skills {
    */
   @summary("Retrieve a skill")
   @get
-  @route("/openai/v1/skills/{name}")
-  getSkill is FoundryDataPlaneOperation<GetSkillRequest, Skill>;
+  @route("/skills/{name}")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+  getSkill is FoundryDataPlaneOperation<
+    GetSkillRequest & SkillsPreviewHeader,
+    Skill
+  >;
 
   /**
    * Returns the skills available in the current project.
    */
   @summary("List skills")
-  @route("/openai/v1/skills")
+  @route("/skills")
   @list
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkills is FoundryDataPlaneOperation<
-    ListSkillsRequest,
+    ListSkillsRequest & SkillsPreviewHeader,
     AgentsPagedResult<Skill>
   >;
 
@@ -36,8 +43,12 @@ interface Skills {
   @summary("Update a skill")
   @operationId("updateSkill")
   @post
-  @route("/openai/v1/skills/{name}")
-  updateSkill is FoundryDataPlaneOperation<UpdateSkillRequest, Skill>;
+  @route("/skills/{name}")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+  updateSkill is FoundryDataPlaneOperation<
+    UpdateSkillRequest & SkillsPreviewHeader,
+    Skill
+  >;
 
   /**
    * Removes the specified skill and its associated versions.
@@ -45,9 +56,10 @@ interface Skills {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @summary("Delete a skill")
   @delete
-  @route("/openai/v1/skills/{name}")
+  @route("/skills/{name}")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   deleteSkill is FoundryDataPlaneOperation<
-    DeleteSkillRequest,
+    DeleteSkillRequest & SkillsPreviewHeader,
     DeleteSkillResponse
   >;
 
@@ -60,15 +72,16 @@ interface Skills {
   @summary("Create a new version of a skill")
   @operationId("createSkillVersion")
   @post
-  @route("/openai/v1/skills/{name}/versions")
+  @route("/skills/{name}/versions")
   @sharedRoute
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   @extension("x-ms-summary-override", "Create a new version of a skill")
   @extension(
     "x-ms-description-override",
     "Creates a new version of a skill. If the skill does not exist, it will be created."
   )
   createSkillVersion is FoundryDataPlaneOperation<
-    CreateSkillVersionRequest,
+    CreateSkillVersionRequest & SkillsPreviewHeader,
     SkillVersion
   >;
 
@@ -80,20 +93,21 @@ interface Skills {
   @summary("Create a skill version from uploaded files")
   @operationId("createSkillVersionFromFiles")
   @post
-  @route("/openai/v1/skills/{name}/versions")
+  @route("/skills/{name}/versions")
   @sharedRoute
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkillVersionFromFiles is FoundryDataPlaneOperation<
     {
-      @doc("The public ID of an existing skill, or the skill name when creating a new skill.")
+      @doc("The name of the skill.")
       @path
-      name: SkillIdentifier;
+      name: SkillName;
 
       /** The content type of the request body. */
       @header contentType: "multipart/form-data";
 
       /** The multipart request content. */
       @multipartBody content: CreateSkillVersionFromFilesBody;
-    },
+    } & SkillsPreviewHeader,
     SkillVersion
   >;
 
@@ -105,22 +119,24 @@ interface Skills {
   @operationId("listSkillVersions")
   @get
   @list
-  @route("/openai/v1/skills/{name}/versions")
+  @route("/skills/{name}/versions")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkillVersions is FoundryDataPlaneOperation<
-    ListSkillVersionsRequest,
+    ListSkillVersionsRequest & SkillsPreviewHeader,
     AgentsPagedResult<SkillVersion>
   >;
 
   /**
-   * Retrieves the specified version of a skill by public ID and version identifier.
+   * Retrieves the specified version of a skill by name and version identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @summary("Retrieve a specific version of a skill")
   @operationId("getSkillVersion")
   @get
-  @route("/openai/v1/skills/{name}/versions/{version}")
+  @route("/skills/{name}/versions/{version}")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   getSkillVersion is FoundryDataPlaneOperation<
-    GetSkillVersionRequest,
+    GetSkillVersionRequest & SkillsPreviewHeader,
     SkillVersion
   >;
 
@@ -131,9 +147,10 @@ interface Skills {
   @summary("Download the zip content for the default version of a skill")
   @operationId("getSkillContent")
   @get
-  @route("/openai/v1/skills/{name}/content")
+  @route("/skills/{name}/content")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   getSkillContent is FoundryDataPlaneOperation<
-    GetSkillContentRequest,
+    GetSkillContentRequest & SkillsPreviewHeader,
     DownloadSkillResponse
   >;
 
@@ -144,9 +161,10 @@ interface Skills {
   @summary("Download the zip content for a specific version of a skill")
   @operationId("getSkillVersionContent")
   @get
-  @route("/openai/v1/skills/{name}/versions/{version}/content")
+  @route("/skills/{name}/versions/{version}/content")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   getSkillVersionContent is FoundryDataPlaneOperation<
-    GetSkillVersionContentRequest,
+    GetSkillVersionContentRequest & SkillsPreviewHeader,
     DownloadSkillResponse
   >;
 
@@ -157,9 +175,10 @@ interface Skills {
   @summary("Delete a specific version of a skill")
   @operationId("deleteSkillVersion")
   @delete
-  @route("/openai/v1/skills/{name}/versions/{version}")
+  @route("/skills/{name}/versions/{version}")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   deleteSkillVersion is FoundryDataPlaneOperation<
-    DeleteSkillVersionRequest,
+    DeleteSkillVersionRequest & SkillsPreviewHeader,
     DeleteSkillVersionResponse
   >;
 }
