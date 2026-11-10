@@ -97650,33 +97650,12 @@
             "description": "Function calls made by the assistant."
           }
         },
-        "description": "A public assistant message containing text, function calls, or both."
-      },
-      "SessionFineTuning.FineTuningTextOnlyContextMessage": {
-        "type": "object",
-        "required": [
-          "role",
-          "content"
-        ],
-        "properties": {
-          "role": {
-            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyContextRole",
-            "description": "Source of this message."
-          },
-          "content": {
-            "type": "string",
-            "description": "Public text content."
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyMessage"
           }
-        },
-        "description": "A system or user message in the public text-only history."
-      },
-      "SessionFineTuning.FineTuningTextOnlyContextRole": {
-        "type": "string",
-        "enum": [
-          "system",
-          "user"
         ],
-        "description": "Supported text-only context-message roles."
+        "description": "A public assistant message containing text, function calls, or both."
       },
       "SessionFineTuning.FineTuningTextOnlyFunctionCall": {
         "type": "object",
@@ -97732,18 +97711,36 @@
         "description": "Supported loss functions for opaque-reference training."
       },
       "SessionFineTuning.FineTuningTextOnlyMessage": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyContextMessage"
-          },
-          {
-            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyAssistantMessage"
-          },
-          {
-            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyToolMessage"
-          }
+        "type": "object",
+        "required": [
+          "role"
         ],
+        "properties": {
+          "role": {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyMessageRole",
+            "description": "Source of this message."
+          }
+        },
+        "discriminator": {
+          "propertyName": "role",
+          "mapping": {
+            "system": "#/components/schemas/SessionFineTuning.FineTuningTextOnlySystemMessage",
+            "user": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyUserMessage",
+            "assistant": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyAssistantMessage",
+            "tool": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyToolMessage"
+          }
+        },
         "description": "An editable public message without private tokens or reasoning."
+      },
+      "SessionFineTuning.FineTuningTextOnlyMessageRole": {
+        "type": "string",
+        "enum": [
+          "system",
+          "user",
+          "assistant",
+          "tool"
+        ],
+        "description": "Supported roles in the input-only text-only message history."
       },
       "SessionFineTuning.FineTuningTextOnlyReasoningEffort": {
         "type": "string",
@@ -97789,6 +97786,32 @@
         },
         "description": "Complete public input for opt-in text-only sampling."
       },
+      "SessionFineTuning.FineTuningTextOnlySystemMessage": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "system"
+            ],
+            "description": "Source of this message."
+          },
+          "content": {
+            "type": "string",
+            "description": "Public text content."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyMessage"
+          }
+        ],
+        "description": "System instructions in the public text-only history."
+      },
       "SessionFineTuning.FineTuningTextOnlyTool": {
         "type": "object",
         "required": [
@@ -97808,7 +97831,31 @@
             "description": "Public function definition."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyToolBase"
+          }
+        ],
         "description": "A function available to a public text-only conversation."
+      },
+      "SessionFineTuning.FineTuningTextOnlyToolBase": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Identifies the tool-definition variant."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "function": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyTool"
+          }
+        },
+        "description": "A public text-only tool definition. Only the function variant is currently supported."
       },
       "SessionFineTuning.FineTuningTextOnlyToolCall": {
         "type": "object",
@@ -97893,6 +97940,11 @@
             "description": "Function name, required if its preceding call is absent from the history."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyMessage"
+          }
+        ],
         "description": "A public function result."
       },
       "SessionFineTuning.FineTuningTextOnlyTrainingInput": {
@@ -97948,6 +98000,32 @@
           }
         },
         "description": "One opaque sample reference and its finite scalar training advantage."
+      },
+      "SessionFineTuning.FineTuningTextOnlyUserMessage": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user"
+            ],
+            "description": "Source of this message."
+          },
+          "content": {
+            "type": "string",
+            "description": "Public text content."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningTextOnlyMessage"
+          }
+        ],
+        "description": "User input in the public text-only history."
       },
       "SessionFineTuning.FineTuningTrainingType": {
         "anyOf": [

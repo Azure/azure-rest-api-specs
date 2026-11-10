@@ -817,29 +817,51 @@ model FineTuningTextOnlyToolCall extends FineTuningTextOnlyToolCallBase {
   function: FineTuningTextOnlyFunctionCall;
 }
 
-/** Supported text-only context-message roles. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The text-only service validates this closed role set."
-union FineTuningTextOnlyContextRole {
+/** Supported roles in the input-only text-only message history. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This input-only discriminator accepts exactly the four message roles supported by the text-only service."
+union FineTuningTextOnlyMessageRole {
   /** System instructions. */
   system: "system",
 
   /** User input. */
   user: "user",
+
+  /** Previous assistant output. */
+  assistant: "assistant",
+
+  /** Public function results. */
+  tool: "tool",
 }
 
-/** A system or user message in the public text-only history. */
-model FineTuningTextOnlyContextMessage {
+/** An editable public message without private tokens or reasoning. */
+@discriminator("role")
+model FineTuningTextOnlyMessage {
   /** Source of this message. */
-  role: FineTuningTextOnlyContextRole;
+  role: FineTuningTextOnlyMessageRole;
+}
+
+/** System instructions in the public text-only history. */
+model FineTuningTextOnlySystemMessage extends FineTuningTextOnlyMessage {
+  /** Source of this message. */
+  role: FineTuningTextOnlyMessageRole.system;
+
+  /** Public text content. */
+  content: string;
+}
+
+/** User input in the public text-only history. */
+model FineTuningTextOnlyUserMessage extends FineTuningTextOnlyMessage {
+  /** Source of this message. */
+  role: FineTuningTextOnlyMessageRole.user;
 
   /** Public text content. */
   content: string;
 }
 
 /** A public assistant message containing text, function calls, or both. */
-model FineTuningTextOnlyAssistantMessage {
+model FineTuningTextOnlyAssistantMessage extends FineTuningTextOnlyMessage {
   /** Source of this message. */
-  role: "assistant";
+  role: FineTuningTextOnlyMessageRole.assistant;
 
   /** Public text, required unless at least one tool call is supplied. */
   content?: string | null;
@@ -849,9 +871,9 @@ model FineTuningTextOnlyAssistantMessage {
 }
 
 /** A public function result. */
-model FineTuningTextOnlyToolMessage {
+model FineTuningTextOnlyToolMessage extends FineTuningTextOnlyMessage {
   /** Source of this message. */
-  role: "tool";
+  role: FineTuningTextOnlyMessageRole.tool;
 
   /** Identifier of the function call that produced this result. */
   @minLength(1)
@@ -864,14 +886,6 @@ model FineTuningTextOnlyToolMessage {
   /** Function name, required if its preceding call is absent from the history. */
   @pattern("^[a-zA-Z0-9_-]{1,64}$")
   name?: string;
-}
-
-/** An editable public message without private tokens or reasoning. */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "The existing wire alternatives are flat message objects; retain stable syntax without the experimental union-extends feature."
-union FineTuningTextOnlyMessage {
-  FineTuningTextOnlyContextMessage,
-  FineTuningTextOnlyAssistantMessage,
-  FineTuningTextOnlyToolMessage,
 }
 
 /** A public function definition whose parameters describe a JSON object. */
@@ -887,8 +901,15 @@ model FineTuningTextOnlyFunctionDefinition {
   parameters: Record<unknown>;
 }
 
+/** A public text-only tool definition. Only the function variant is currently supported. */
+@discriminator("type")
+model FineTuningTextOnlyToolBase {
+  /** Identifies the tool-definition variant. */
+  type: string;
+}
+
 /** A function available to a public text-only conversation. */
-model FineTuningTextOnlyTool {
+model FineTuningTextOnlyTool extends FineTuningTextOnlyToolBase {
   /** The supported tool kind. */
   type: "function";
 
