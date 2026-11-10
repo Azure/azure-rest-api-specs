@@ -83,6 +83,11 @@ namespace Microsoft.InsightsCombinedClient;
   "VmInsightsOnboardingStatus",
   "csharp"
 );
+@@alternateType(
+  VmInsightsOnboarding.VMInsightsOnboardingStatusProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(
   VmInsightsOnboarding.WorkspaceInfo,
   "DataContainerWorkspace",
