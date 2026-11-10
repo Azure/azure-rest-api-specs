@@ -108,7 +108,7 @@ If you have an issue or with any of checks listed in the first column of the tab
 |-----------------------------------|----------------| ------------------------------------------------------------- |
 | `SDK Validation - Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
 | `SDK Validation - Java`          | Weidong Xu      | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
-| `SDK Validation - JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `SDK Validation - JS`            | Jialin Huang    | [JialinHuang803](https://github.com/JialinHuang803)           |
 | `SDK Validation - .NET`          | Wei Hu          | [live1206](https://github.com/live1206)                       |
 | `SDK Validation - Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
@@ -143,7 +143,7 @@ reviewer:
 | Language        | Reviewer        | GitHub login                                                  |
 |-----------------|-----------------| ------------------------------------------------------------- |
 | `Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
-| `JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `JS`            | Jialin Huang    | [JialinHuang803](https://github.com/JialinHuang803)           |
 | `Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
 ## `Swagger APIView`
