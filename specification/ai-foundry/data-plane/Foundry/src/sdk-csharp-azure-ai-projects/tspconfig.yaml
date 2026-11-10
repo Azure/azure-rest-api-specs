@@ -2,15 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/ai"
 options:
-  "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
-    package-name: Azure.AI.Projects
-    api-version: "v1"
-    sdk-context-options:
-      additionalDecorators:
-        - 'TypeSpec\.OpenAPI\.@extension'
-    plugins:
-      - "../codegen"
   "@typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Projects
@@ -53,7 +44,6 @@ imports:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-    - "@azure-tools/typespec-azure-rulesets/client-sdk"
   disable:
     "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in the form XxxxAIXxxx"
     "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"
