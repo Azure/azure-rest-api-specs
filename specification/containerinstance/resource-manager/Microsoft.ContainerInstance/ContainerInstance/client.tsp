@@ -4,6 +4,31 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.ContainerInstance;
 
+// Go
+@@clientName(AiAgentsGroups, "AIAgentsGroups", "go");
+@@clientName(
+  AiAgentsGroupProvisioningState,
+  "AIAgentsGroupProvisioningState",
+  "go"
+);
+@@clientName(AiAgentsGroupNetworkProfile, "AIAgentsGroupNetworkProfile", "go");
+@@clientName(AiAgentsGroupProperties, "AIAgentsGroupProperties", "go");
+@@clientName(AiAgentsGroup, "AIAgentsGroup", "go");
+@@clientName(AiAgentsGroupTagsUpdate, "AIAgentsGroupTagsUpdate", "go");
+@@clientName(AiAgentsGroupAccessToken, "AIAgentsGroupAccessToken", "go");
+@@clientName(AiAgentGroupResourceId, "AIAgentGroupResourceID", "go");
+@@clientName(AksClusterResourceId, "AKSClusterResourceID", "go");
+@@clientName(
+  ManagedVirtualNodePoolProperties.aiAgentGroupResourceId,
+  "AIAgentGroupResourceID",
+  "go"
+);
+@@clientName(
+  ManagedVirtualNodePoolProperties.aksClusterResourceId,
+  "AKSClusterResourceID",
+  "go"
+);
+
 @@clientName(
   Microsoft.ContainerInstance,
   "ContainerInstanceManagementClient",
