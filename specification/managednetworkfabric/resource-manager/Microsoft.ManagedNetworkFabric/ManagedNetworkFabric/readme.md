@@ -30,6 +30,52 @@ openapi-subtype: rpaas
 tag: package-2025-07-15
 ```
 
+### Tag: package-2026-07-15-preview
+
+These settings apply only when `--tag=package-2026-07-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-15-preview'
+input-file:
+  - preview/2026-07-15-preview/managednetworkfabric.json
+suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: >-
+      InternetGateway.properties.type is an existing GatewayType field in the
+      published 2025-07-15 stable API. The InternetGateway and
+      InternetGatewayProperties definitions are unchanged in this preview.
+      Although properties.type repeats the ARM envelope property name, removing
+      or renaming it would introduce an additional breaking change for clients
+      adopting this version. Retained to preserve the published contract.
+    from: managednetworkfabric.json
+    where: $.definitions["InternetGateway"]
+  - code: ArmResourcePropertiesBag
+    from: managednetworkfabric.json
+    reason: >-
+      NetworkFabricSku.properties.type is an existing read-only FabricSkuType
+      field in the published 2025-07-15 stable API. The NetworkFabricSku and
+      NetworkFabricSkuProperties definitions are unchanged in this preview.
+      Although properties.type repeats the ARM envelope property name, removing
+      or renaming it would change the published response contract and client
+      models. Retained to preserve the published contract.
+    where: $.definitions["NetworkFabricSku"]
+  - code: GuidUsage
+    where: $.definitions.Azure.Core.uuid
+    reason: GUIDs are required for validationId and correlationId fields as per ARM API review guidance.
+  - code: AvoidAdditionalProperties
+    where: $.definitions.DeviceCommand.properties.validationRules
+    reason: validationRules is intentionally a free-form JSON object so callers can define their own arbitrary validation rules to evaluate device command output.
+  - code: PatchBodyParametersSchema
+    from: managednetworkfabric.json
+    # Positional index: PatchBodyParametersSchema reports at the path/operation location, not at a
+    # definition, so a $.definitions.<Model> anchor does not match. Verified correct against
+    # preview/2026-07-15-preview/managednetworkfabric.json. Re-verify this index if a path
+    # parameter is added, removed or reordered on this PATCH - a stale index silently
+    # un-scopes the suppression or lands on an unrelated parameter.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/fabrics/{fabricName}"].patch.parameters[4].schema.properties.properties
+    reason: The PATCH body and its properties object are fully optional. The only required member anywhere beneath it is url on ControllerEndpoint (properties.controllerManagedConfig.endpoints[].url), which the rule reports transitively. An endpoint array entry with no URL cannot be acted on, so url is required on the array item rather than on the PATCH body itself; making it optional would let callers submit endpoint entries the service must reject at runtime.
+
+```
+
 ### Tag: package-2026-01-15-preview
 
 These settings apply only when `--tag=package-2026-01-15-preview` is specified on the command line.

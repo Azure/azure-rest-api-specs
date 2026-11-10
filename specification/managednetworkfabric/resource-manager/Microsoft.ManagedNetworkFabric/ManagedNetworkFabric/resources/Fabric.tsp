@@ -17,8 +17,16 @@ model Fabric is Azure.ResourceManager.TrackedResource<FabricProperties, false> {
   @segment("fabrics")
   @visibility(Lifecycle.Read)
   name: string;
+
+  @doc("Fabric kind: which party drives the switches. Set at create time and immutable.")
+  @added(Versions.v2026_07_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  kind: FabricKind;
+
+  ...ManagedServiceIdentityProperty;
 }
 
+@@added(Fabric.identity, Versions.v2026_07_15_preview);
 @@doc(Fabric.properties, "Fabric properties.");
 
 @armResourceOperations
