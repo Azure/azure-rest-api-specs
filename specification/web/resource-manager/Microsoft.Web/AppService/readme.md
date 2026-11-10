@@ -35,16 +35,6 @@ title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
 tag: package-2026-11
-
-suppressions:
-  - code: PathForNestedResource
-    reason: The slot OneDeploy endpoint uses the existing fixed extension URI; onedeploy is a fixed extension identifier, not a client-supplied nested-resource name.
-    from: stable/2026-11-15/openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"]
-  - code: EvenSegmentedPathForPutOperation
-    reason: OneDeploy publication uses the existing fixed PUT extension URI; changing the route or verb would change the service contract.
-    from: stable/2026-11-15/openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"]
 ```
 
 ### Suppression
@@ -119,6 +109,15 @@ These settings apply only when `--tag=package-2026-11` is specified on the comma
 ```yaml $(tag) == 'package-2026-11'
 input-file:
     - stable/2026-11-15/openapi.json
+suppressions:
+  - code: PathForNestedResource
+    reason: The slot OneDeploy endpoint uses the existing fixed extension URI; onedeploy is a fixed extension identifier, not a client-supplied nested-resource name.
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"]
+  - code: EvenSegmentedPathForPutOperation
+    reason: OneDeploy publication uses the existing fixed PUT extension URI; changing the route or verb would change the service contract.
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"]
 ```
 
 ### Tag: package-2026-07
