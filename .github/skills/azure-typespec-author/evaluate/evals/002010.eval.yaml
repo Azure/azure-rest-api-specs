@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "armtemplate"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       In the Widget project, add a synchronous exportData operation for the Employee resource in API version `2024-10-01-preview`. The operation should take no request body and return an optional exported data string. All required decisions are provided; no separate confirmation is needed. Ensure the definition meets TypeSpec Azure guidelines.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/002010-arm-action-sync-operation/employee.tsp
           dest: employee.tsp
@@ -53,7 +53,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author In the Widget project, add a synchronous exportData operation for the Employee resource in API version `2024-10-01-preview`. The operation should take no request body and return an optional exported data string. All required decisions are provided; no separate confirmation is needed. Ensure the definition meets TypeSpec Azure guidelines.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
@@ -81,7 +81,7 @@ stimuli:
       mode: "no-skill"
     prompt: |
       In the Widget project, add a synchronous exportData operation for the Employee resource in API version `2024-10-01-preview`. The operation should take no request body and return an optional exported data string. All required decisions are provided; no separate confirmation is needed. Ensure the definition meets TypeSpec Azure guidelines.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric:
       - Employee has a synchronous resource action named exportData in API version 2024-10-01-preview using ArmResourceActionSync.
       - The operation has no request body and returns a response model containing optional exported string data.

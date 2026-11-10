@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp, realpath, rm, symlink, writeFile } from "node:fs/promises";
+import { cp, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
@@ -49,9 +49,9 @@ beforeEach(async () => {
       "junction",
     );
   }
-  const compiled = await compileTypeSpec(join(root, project));
+  const compiled = await compileTypeSpec(join(root, project), { fix: true });
   expect(compiled.success, JSON.stringify(compiled.diagnostics)).toBe(true);
-  expect((await formatTypeSpec(join(root, project))).success).toBe(true);
+  expect((await formatTypeSpec(join(root, project), true)).success).toBe(true);
   await simpleGit(root)
     .init()
     .addConfig("user.name", "Test")
@@ -63,7 +63,7 @@ beforeEach(async () => {
 
 afterEach(async () => {
   vi.unstubAllEnvs();
-  await rm(root, { recursive: true, force: true });
+  await rm(root, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
 });
 
 async function run(...args: string[]): Promise<{ code: number; stdout: string; stderr: string }> {
@@ -242,4 +242,84 @@ it("retains per-project CI annotations and compiler diagnostics in batch mode", 
   expect(result.stdout).toContain(`::error::TypeSpec Validation failed for project ${project}`);
   expect(result.stdout.match(/invalid-ref/g)).toHaveLength(1);
   expect(result.stderr).not.toContain("invalid-ref");
+});
+
+it.each(["--all", "--changed"])(
+  "checks sibling emissions in %s without changing their shared baseline or Git index",
+  async (mode) => {
+    const sibling = "specification/service/data-plane/Sibling";
+    await cp(join(root, project), join(root, sibling), { recursive: true });
+    for (const folder of [project, sibling]) {
+      await writeFile(
+        join(root, folder, "tspconfig.yaml"),
+        tspConfig.replace("emit:\n", "emit:\n  - ../../../../emitter.mjs\n"),
+      );
+    }
+    const output = join(root, "specification/service/generated.txt");
+    const missingDir = join(root, "specification/service/new");
+    await writeFile(output, "old\n");
+    await writeFile(
+      join(root, "emitter.mjs"),
+      `export async function $onEmit({ program }) {
+  await program.host.mkdirp(${JSON.stringify(missingDir)});
+  await program.host.writeFile(${JSON.stringify(output)}, "new\\n");
+  await program.host.writeFile(${JSON.stringify(join(missingDir, "output.txt"))}, "new\\n");
+}
+`,
+    );
+    await simpleGit(root).add(".").commit("Set stale shared output");
+    const index = await readFile(join(root, ".git/index"));
+
+    const result = await run(mode, "--git-clean");
+
+    expect(result.code, result.stderr).toBe(1);
+    expect(result.stdout).toContain("2 failed");
+    expect(result.stderr.match(/error tsv\/generated-files-changed:/g)).toHaveLength(2);
+    expect(await readFile(output, "utf8")).toBe("old\n");
+    await expect(readFile(missingDir)).rejects.toMatchObject({ code: "ENOENT" });
+    expect(await readFile(join(root, ".git/index"))).toEqual(index);
+
+    const fixed = await run(mode, "--fix", "--git-clean");
+    expect(fixed.code, fixed.stderr).toBe(1);
+    expect(fixed.stderr).toContain("error tsv/generated-files-changed:");
+    expect(await readFile(output, "utf8")).toBe("new\n");
+    expect(await readFile(join(missingDir, "output.txt"), "utf8")).toBe("new\n");
+    expect(await readFile(join(root, ".git/index"))).toEqual(index);
+  },
+  // Check and fix each start a batch plus two compiler processes.
+  30_000,
+);
+
+it("checks batch formatting and only updates shared files with --fix", async () => {
+  const shared = join(root, "specification/service/data-plane/shared.tsp");
+  await writeFile(shared, "model   Shared{}");
+  await simpleGit(root).add(".").commit("Set formatting fixture");
+
+  const result = await run("--all");
+
+  expect(result.code, result.stderr).toBe(1);
+  expect(result.stderr).toContain("error tsv/format-changed:");
+  expect(result.stderr).toContain("shared.tsp");
+  expect(await readFile(shared, "utf8")).toBe("model   Shared{}");
+
+  const fixed = await run("--all", "--fix");
+  expect(fixed.code, fixed.stderr).toBe(1);
+  expect(fixed.stderr).toContain("error tsv/format-changed:");
+  expect(await readFile(shared, "utf8")).toBe("model Shared {}\n");
+});
+
+it("supports explicit single-project check mode without changing the existing fix default", async () => {
+  const source = join(root, project, "main.tsp");
+  await writeFile(source, "// Comment.   ");
+  await simpleGit(root).add(".").commit("Set single-project formatting fixture");
+
+  const checked = await run(project, "--check");
+  expect(checked.code, checked.stderr).toBe(1);
+  expect(checked.stderr).toContain("error tsv/format-changed:");
+  expect(await readFile(source, "utf8")).toBe("// Comment.   ");
+
+  const fixed = await run(project);
+  expect(fixed.code, fixed.stderr).toBe(1);
+  expect(fixed.stderr).toContain("error tsv/format-changed:");
+  expect(await readFile(source, "utf8")).toBe("// Comment.\n");
 });
