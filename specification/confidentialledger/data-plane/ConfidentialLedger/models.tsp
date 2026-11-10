@@ -374,6 +374,7 @@ model UserDefinedFunctionExecutionProperties {
 /**
  * JS runtime options for user defined endpoints and functions
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model JsRuntimeOptions {
   /**
    * Whether to log exception details in the runtime.
@@ -435,6 +436,40 @@ model LedgerWriteResult {
    * The collection identifier of the ledger entry.
    */
   collectionId: string;
+
+  /**
+   * The receipt certifying the committed transaction.
+   */
+  @added(Versions.v2026_07_31_preview)
+  receipt?: ReceiptContents;
+
+  /**
+   * State of the write transaction.
+   */
+  @added(Versions.v2026_07_31_preview)
+  state: TransactionState;
+
+  /**
+   * The list of application claims.
+   */
+  @added(Versions.v2026_07_31_preview)
+  applicationClaims?: ApplicationClaim[];
+}
+
+/**
+ * The transaction was rolled back before it could be committed.
+ */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.v2026_07_31_preview)
+@error
+model TransactionRolledBackErrorResponse {
+  /**
+   * The HTTP status code.
+   */
+  @statusCode
+  statusCode: 503;
+
+  ...ConfidentialLedgerCommon.ConfidentialLedgerError;
 }
 
 /**

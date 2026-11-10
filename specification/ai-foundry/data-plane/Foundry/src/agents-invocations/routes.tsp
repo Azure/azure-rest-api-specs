@@ -22,7 +22,10 @@ interface AgentInvocations {
       @path agent_name: string;
     },
     {
+      /** The content type of the request body. */
       @header contentType: "application/json";
+
+      /** The invocation specification request body. */
       @body spec: Record<unknown>;
     }
   >;

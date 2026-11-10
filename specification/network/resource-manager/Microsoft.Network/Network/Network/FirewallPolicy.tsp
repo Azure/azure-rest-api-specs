@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -68,6 +70,14 @@ interface FirewallPolicies {
   @tag("FirewallPolicies")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallPolicy,
+    Parameters = {
+      /**
+       * Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.
+       */
+      @added(Versions.v2025_09_01)
+      @query("afcManagedSync")
+      afcManagedSync?: boolean;
+    },
     Error = CloudError
   >;
 

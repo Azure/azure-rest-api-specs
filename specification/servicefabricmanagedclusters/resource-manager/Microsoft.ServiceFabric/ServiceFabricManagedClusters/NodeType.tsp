@@ -564,6 +564,7 @@ model NodeTypeProperties {
   /**
    * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_02_01)
   enableResilientEphemeralOsDisk?: boolean;
 
@@ -876,8 +877,10 @@ model VaultSecretGroup {
 /**
  * Azure resource identifier.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backwards compatibility to match existing spec"
-@OpenAPI.extension("x-ms-azure-resource", true)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "SubResource is a legacy payload reference model; customAzureResource is required to preserve generated x-ms-azure-resource metadata without using OpenAPI extensions."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "SubResource is a legacy payload reference model with only an optional id, not an addressable Azure resource."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "SubResource is a brownfield payload reference model; customAzureResource preserves the generated Swagger metadata without using OpenAPI extensions."
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model SubResource {
   /**
    * Azure resource identifier.

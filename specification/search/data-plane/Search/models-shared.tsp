@@ -39,6 +39,95 @@ alias acceptHeaderNone = {
   accept?: "application/json;odata.metadata=none";
 };
 
+/** Specifies how the search parameter is interpreted when narrowing down a listing result set. Currently only 'prefix' is supported. */
+@added(Versions.v2026_08_01_preview)
+union ListingSearchType {
+  string,
+
+  /** Matches items whose name starts with the value of the search parameter. */
+  Prefix: "prefix",
+}
+
+/** Base type for topic graph vector search options. */
+@discriminator("kind")
+@added(Versions.v2026_11_01_preview)
+model VectorQueryTopicGraph {
+  /** The kind of topic graph vector search to use. */
+  kind: VectorSearchTopicGraphKind;
+}
+
+/** Uses normal vector search without topic graph diverse retrieval. */
+@added(Versions.v2026_11_01_preview)
+model NoneVectorQueryTopicGraph extends VectorQueryTopicGraph {
+  /** The discriminator value. */
+  kind: VectorSearchTopicGraphKind.None;
+}
+
+/** Uses topic graph diverse retrieval. */
+@added(Versions.v2026_11_01_preview)
+model DiverseVectorQueryTopicGraph extends VectorQueryTopicGraph {
+  /** The discriminator value. */
+  kind: VectorSearchTopicGraphKind.Diverse;
+
+  /** The diversity factor used for topic graph diverse retrieval. If omitted, the default configured on the topic graph profile is used. */
+  @minValue(0)
+  @maxValue(1)
+  diversityFactor?: float32;
+
+  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000. */
+  @minValue(250)
+  @maxValue(10000)
+  minDiversityPoolSize?: int32;
+}
+
+/** Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance. */
+@added(Versions.v2026_11_01_preview)
+model BalancedVectorQueryTopicGraph extends VectorQueryTopicGraph {
+  /** The discriminator value. */
+  kind: VectorSearchTopicGraphKind.Balanced;
+
+  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000. */
+  @minValue(250)
+  @maxValue(10000)
+  minDiversityPoolSize?: int32;
+}
+
+/** The kind of topic graph vector search to use. */
+@added(Versions.v2026_11_01_preview)
+union VectorSearchTopicGraphKind {
+  string,
+
+  /** Use normal vector search when topic graph diverse retrieval is off. */
+  None: "none",
+
+  /** Use topic graph diverse retrieval. */
+  Diverse: "diverse",
+
+  /** Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance. */
+  Balanced: "balanced",
+}
+
+/** Reusable server-driven pagination query parameters shared by all listing operations. */
+alias listingPaginationQuery = {
+  /** A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied. */
+  @added(Versions.v2026_08_01_preview)
+  @query
+  search?: string;
+
+  /** The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default. */
+  @added(Versions.v2026_08_01_preview)
+  @minValue(1)
+  @maxValue(3000)
+  @pageSize
+  @query
+  pageSize?: int32;
+
+  /** Specifies how the search parameter is interpreted. Currently only 'prefix' is supported. */
+  @added(Versions.v2026_08_01_preview)
+  @query
+  searchType?: ListingSearchType = ListingSearchType.Prefix;
+};
+
 alias selectQuery = {
   /** Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
@@ -107,8 +196,20 @@ alias querySourceAuthorizationHeader = {
   /** Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents. */
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
+  @secret
   @header("x-ms-query-source-authorization")
   querySourceAuthorization?: string;
+};
+
+alias queryWorkIQSourceAuthorizationHeader = {
+  /** User assertion token for a customer-owned Entra app registration configured on a Work IQ knowledge source. Used for on-behalf-of authentication to the Work IQ API. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @added(Versions.v2026_11_01_preview)
+  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_08_01_preview)
+  @secret
+  @header("x-ms-query-work-iq-source-authorization")
+  queryWorkIQSourceAuthorization?: string;
 };
 
 alias enableElevatedReadHeader = {
@@ -132,7 +233,7 @@ alias SearchOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader,
+  ClientRequestIdHeader & TParams,
   TResponse,
   Traits,
   TError
@@ -144,7 +245,7 @@ alias SearchIndexOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & indexNamePath,
+  ClientRequestIdHeader & indexNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -156,7 +257,7 @@ alias SearchIndexerOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & indexerNamePath,
+  ClientRequestIdHeader & indexerNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -168,7 +269,7 @@ alias SearchDataSourceOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & dataSourceNamePath,
+  ClientRequestIdHeader & dataSourceNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -180,7 +281,7 @@ alias SearchSkillsetOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & skillsetNamePath,
+  ClientRequestIdHeader & skillsetNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -192,7 +293,7 @@ alias SearchSynonymMapOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & synonymMapNamePath,
+  ClientRequestIdHeader & synonymMapNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -204,7 +305,7 @@ alias SearchAliasOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & aliasNamePath,
+  ClientRequestIdHeader & aliasNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -216,7 +317,7 @@ alias SearchSourceOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & sourceNamePath,
+  ClientRequestIdHeader & sourceNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -228,13 +329,14 @@ alias SearchKnowledgeBaseOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & knowledgeBaseNamePath,
+  ClientRequestIdHeader & knowledgeBaseNamePath & TParams,
   TResponse,
   Traits,
   TError
 >;
 
 /** Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /** The error object. */

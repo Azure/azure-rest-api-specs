@@ -192,7 +192,9 @@ union AssociationEntityProvisioningState {
 /**
  * override for DeletedServiceContracts.getByName
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op replaceGetByName(
   ...ApiVersionParameter,
@@ -217,7 +219,9 @@ op replaceGetByName(
 /**
  * override for DeletedServiceContracts.purge
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "matches the original DeletedServiceContracts.purge operation"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "matches the original DeletedServiceContracts.purge operation"
@@ -1617,6 +1621,33 @@ enum GatewayRegenerateKeyType {
   Azure.Core.azureLocation,
   "csharp"
 );
+@@alternateType(
+  AdditionalLocation.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(AdditionalLocation.gatewayRegionalUrl, url, "csharp");
+@@alternateType(
+  AdditionalLocation.publicIPAddresses,
+  Azure.Core.ipV4Address[],
+  "csharp"
+);
+@@alternateType(
+  AdditionalLocation.privateIPAddresses,
+  Azure.Core.ipV4Address[],
+  "csharp"
+);
+@@alternateType(ApiContactInformation.url, url, "csharp");
+@@alternateType(ApiLicenseInformation.url, url, "csharp");
+@@alternateType(
+  ApiEntityBaseContract.apiVersionSetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AuthorizationProviderOAuth2Settings.redirectUrl, url, "csharp");
+@@alternateType(BackendProxyContract.url, url, "csharp");
+@@alternateType(HostnameConfiguration.keyVaultId, url, "csharp");
+@@alternateType(PortalConfigDelegationProperties.delegationUrl, url, "csharp");
 
 // BackendSubnetConfiguration.id -> SubnetId (ResourceIdentifier) to match old SDK surface
 @@clientName(BackendSubnetConfiguration.id, "SubnetId", "csharp");

@@ -4,6 +4,31 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.ContainerInstance;
 
+// Go
+@@clientName(AiAgentsGroups, "AIAgentsGroups", "go");
+@@clientName(
+  AiAgentsGroupProvisioningState,
+  "AIAgentsGroupProvisioningState",
+  "go"
+);
+@@clientName(AiAgentsGroupNetworkProfile, "AIAgentsGroupNetworkProfile", "go");
+@@clientName(AiAgentsGroupProperties, "AIAgentsGroupProperties", "go");
+@@clientName(AiAgentsGroup, "AIAgentsGroup", "go");
+@@clientName(AiAgentsGroupTagsUpdate, "AIAgentsGroupTagsUpdate", "go");
+@@clientName(AiAgentsGroupAccessToken, "AIAgentsGroupAccessToken", "go");
+@@clientName(AiAgentGroupResourceId, "AIAgentGroupResourceID", "go");
+@@clientName(AksClusterResourceId, "AKSClusterResourceID", "go");
+@@clientName(
+  ManagedVirtualNodePoolProperties.aiAgentGroupResourceId,
+  "AIAgentGroupResourceID",
+  "go"
+);
+@@clientName(
+  ManagedVirtualNodePoolProperties.aksClusterResourceId,
+  "AKSClusterResourceID",
+  "go"
+);
+
 @@clientName(
   Microsoft.ContainerInstance,
   "ContainerInstanceManagementClient",
@@ -377,8 +402,29 @@ using Microsoft.ContainerInstance;
 @@clientName(ContainerGroups.listLogs, "GetContainerLogs", "csharp");
 
 @@clientName(ContainerGroupUpdate, "Resource", "!autorest");
+@@clientName(ContainerGroupUpdate, "ContainerGroupPatch", "csharp");
 
 // Category D: Property renames for backward compat
 @@clientName(AzureFileVolume.readOnly, "IsReadOnly", "csharp");
 @@clientName(VolumeMount.readOnly, "IsReadOnly", "csharp");
 @@clientName(SecurityContextDefinition.privileged, "IsPrivileged", "csharp");
+
+@@clientName(SandboxGroup, "ContainerGroupSandbox", "csharp");
+@@clientName(
+  SandboxGroupProperties,
+  "ContainerGroupSandboxProperties",
+  "csharp"
+);
+@@clientName(
+  SandboxGroupProvisioningState,
+  "ContainerGroupSandboxProvisioningState",
+  "csharp"
+);
+@@clientName(SubnetReference, "ContainerSandboxGroupSubnetReference", "csharp");
+@@clientName(SandboxGroupTagsUpdate, "ContainerSandboxGroupPatch", "csharp");
+@@clientName(
+  SandboxGroupAccessToken,
+  "ContainerSandboxGroupAccessToken",
+  "csharp"
+);
+@@clientName(SandboxGroupAccessToken.notAfter, "NotAfterOn", "csharp");

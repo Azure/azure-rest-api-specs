@@ -11,11 +11,15 @@ steps:
     parameters:
       NodeVersion: ${{ parameters.NodeVersion }}
 
-  - script: npm ci
-    displayName: npm ci
+  - script: npm run install-pnpm
+    displayName: Install pnpm
     workingDirectory: ${{ parameters.WorkingDirectory }}
 
-  - script: npm ls -a || true
-    displayName: npm ls -a
+  - script: pnpm ci
+    displayName: pnpm install
+    workingDirectory: ${{ parameters.WorkingDirectory }}
+
+  - script: pnpm ls || true
+    displayName: pnpm ls
     condition: succeededOrFailed()
     workingDirectory: ${{ parameters.WorkingDirectory }}

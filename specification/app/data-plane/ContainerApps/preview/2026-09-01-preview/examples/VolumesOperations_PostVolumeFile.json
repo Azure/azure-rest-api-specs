@@ -1,0 +1,75 @@
+{
+  "title": "Create or replace volume file example",
+  "operationId": "VolumesOperations_CreateOrReplaceVolumeFile",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "volumeName": "example-volume",
+    "path": "/workspace/example.txt",
+    "overwrite": true,
+    "content": "SGVsbG8="
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "itemName": "example.txt",
+        "path": "/workspace/example.txt",
+        "isDirectory": false,
+        "sizeBytes": 1024,
+        "lastModifiedUtc": "2026-08-15T10:00:00Z",
+        "contentType": "text/plain",
+        "eTag": "example-e-tag"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "The request is invalid."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "The request is not authorized."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "message": "The requested resource was not found."
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "Conflict",
+          "message": "The request conflicts with the current resource state."
+        }
+      }
+    },
+    "412": {
+      "body": {
+        "error": {
+          "code": "PreconditionFailed",
+          "message": "A request precondition failed."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An internal server error occurred."
+        }
+      }
+    }
+  }
+}

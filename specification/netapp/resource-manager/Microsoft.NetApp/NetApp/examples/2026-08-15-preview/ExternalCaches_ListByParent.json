@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalClusterName": "contosoExternalCluster",
+    "externalSvmName": "contosoExternalSvm",
+    "api-version": "2026-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/externalSvms/contosoExternalSvm/externalCaches/contosoCache_AB12",
+            "name": "contosoCache_AB12",
+            "type": "Microsoft.NetApp/externalClusters/externalSvms/externalCaches",
+            "properties": {
+              "externalCacheName": "contosoCache",
+              "originVolumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/netAppAccounts/contosoAccount/capacityPools/contosoPool/volumes/contosoVolume",
+              "originVolumeName": "contosoVolume",
+              "originSvmName": "anfSvm",
+              "sizeInBytes": 107374182400,
+              "state": "online",
+              "connectionStatus": "Connected",
+              "createCommand": "volume flexcache create -vserver contosoExternalSvm -volume contosoCache -origin-vserver anfSvm -origin-volume contosoVolume"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/externalSvms/contosoExternalSvm/externalCaches/contosoUnsupportedCache_AB12",
+            "name": "contosoUnsupportedCache_AB12",
+            "type": "Microsoft.NetApp/externalClusters/externalSvms/externalCaches",
+            "properties": {
+              "externalCacheName": "contosoUnsupportedCache",
+              "originVolumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/netAppAccounts/contosoAccount/capacityPools/contosoPool/volumes/contosoUnsupportedVolume",
+              "originVolumeName": "N/A",
+              "originSvmName": "N/A",
+              "state": "unsupported",
+              "connectionStatus": "Unsupported",
+              "createCommand": "N/A"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ExternalCaches_ListByParent",
+  "title": "ExternalCaches_ListByParent"
+}

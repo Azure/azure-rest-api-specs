@@ -1,0 +1,138 @@
+{
+  "operationId": "KnowledgeSources_Create",
+  "title": "SearchServiceCreateKnowledgeSourceIndexedSql",
+  "parameters": {
+    "endpoint": "https://typespecstableexampleservice.search.windows.net",
+    "api-version": "2026-10-01",
+    "Accept": "application/json;odata.metadata=minimal",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "knowledgeSource": {
+      "name": "ks-stable-test",
+      "description": "Description of the SQL knowledge source.",
+      "kind": "indexedSql",
+      "@odata.etag": "0x1234568AE7E58A1",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
+      },
+      "indexedSqlParameters": {
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+        "tableOrView": "dbo.Products",
+        "contentColumns": [
+          {
+            "name": "title",
+            "sourceField": "Title",
+            "searchFieldType": "Edm.String"
+          },
+          {
+            "name": "description",
+            "sourceField": "Description",
+            "searchFieldType": "Edm.String"
+          },
+          {
+            "name": "price",
+            "sourceField": "Price",
+            "searchFieldType": "Edm.Double"
+          }
+        ],
+        "embeddingColumns": [
+          {
+            "name": "descriptionEmbedding",
+            "sourceField": "Description"
+          }
+        ],
+        "ingestionParameters": {
+          "identity": {
+            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+            "userAssignedIdentity": "/my/userassigned/id"
+          },
+          "embeddingModel": {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "model",
+              "apiKey": "api-key",
+              "modelName": "text-embedding-3-large"
+            }
+          },
+          "ingestionSchedule": {
+            "interval": "P1D",
+            "startTime": "2025-01-07T19:30:00Z"
+          },
+          "contentExtractionMode": "minimal"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "ks-stable-test",
+        "kind": "indexedSql",
+        "description": "Description of the SQL knowledge source.",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        },
+        "indexedSqlParameters": {
+          "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+          "tableOrView": "dbo.Products",
+          "contentColumns": [
+            {
+              "name": "title",
+              "sourceField": "Title",
+              "searchFieldType": "Edm.String"
+            },
+            {
+              "name": "description",
+              "sourceField": "Description",
+              "searchFieldType": "Edm.String"
+            },
+            {
+              "name": "price",
+              "sourceField": "Price",
+              "searchFieldType": "Edm.Double"
+            }
+          ],
+          "embeddingColumns": [
+            {
+              "name": "descriptionEmbedding",
+              "sourceField": "Description"
+            }
+          ],
+          "ingestionParameters": {
+            "contentExtractionMode": "minimal",
+            "identity": {
+              "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+              "userAssignedIdentity": "/my/userassigned/id"
+            },
+            "embeddingModel": {
+              "kind": "azureOpenAI",
+              "azureOpenAIParameters": {
+                "resourceUri": "https://test-sample.openai.azure.com/",
+                "deploymentId": "model",
+                "apiKey": "api-key",
+                "modelName": "text-embedding-3-large"
+              }
+            },
+            "ingestionSchedule": {
+              "interval": "P1D",
+              "startTime": "2024-06-06T00:01:50.265Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}

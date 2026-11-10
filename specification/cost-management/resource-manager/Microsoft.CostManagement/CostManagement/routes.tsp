@@ -58,7 +58,9 @@ interface BenefitRecommendationsOperationGroup {
    * List of recommendations for purchasing savings plan.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitRecommendations_List")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/CostManagement/")
   @get
@@ -102,7 +104,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListByBillingAccountId")
   @autoRoute
   @get
@@ -144,7 +148,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily' and 'Monthly'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListByBillingProfileId")
   @autoRoute
   @get
@@ -193,7 +199,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists the savings plan utilization summaries for daily or monthly grain.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListBySavingsPlanOrder")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/cost-management/")
   @autoRoute
@@ -234,7 +242,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists the savings plan utilization summaries for daily or monthly grain.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListBySavingsPlanId")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/cost-management/")
   @autoRoute
@@ -650,6 +660,7 @@ interface ForecastOperationGroup {
     /**
      * May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing usage POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
 
@@ -683,6 +694,7 @@ interface ForecastOperationGroup {
       /**
        * May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing externalCloudProviderUsage POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
 
@@ -897,12 +909,14 @@ interface GenerateReservationDetailsReportOperationGroup {
     /**
      * Start Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingAccountId POST contract uses startDate in the query; preserve wire compatibility."
     @query("startDate")
     startDate: string,
 
     /**
      * End Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingAccountId POST contract uses endDate in the query; preserve wire compatibility."
     @query("endDate")
     endDate: string,
   ):
@@ -947,12 +961,14 @@ interface GenerateReservationDetailsReportOperationGroup {
     /**
      * Start Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingProfileId POST contract uses startDate in the query; preserve wire compatibility."
     @query("startDate")
     startDate: string,
 
     /**
      * End Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingProfileId POST contract uses endDate in the query; preserve wire compatibility."
     @query("endDate")
     endDate: string,
   ):

@@ -344,12 +344,18 @@ using Http;
   "csharp"
 );
 @@clientName(TestResultStatus, "IotHubTestResultStatus", "csharp");
+@@clientName(ConnectionProfile, "IotHubConnectionProfile", "csharp");
+@@clientName(MessagePayloadFormat, "IotHubMessagePayloadFormat", "csharp");
+@@clientName(ErrorDetails, "DeviceRegistryLinkingErrorDetails", "csharp");
+@@clientName(TopicGroup, "MqttV5TopicGroup", "csharp");
 @@clientLocation(IotHubDescriptions.manualFailover, "IotHubResource", "csharp");
 
 /**
  * override for IotHubDescriptions.manualFailover
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op replaceManualFailover(
   ...ApiVersionParameter,
@@ -376,7 +382,9 @@ op replaceManualFailover(
 /**
  * override for IotHubDescriptions.testAllRoutes
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op replaceTestAllRoutes(
   ...ApiVersionParameter,
@@ -398,7 +406,9 @@ op replaceTestAllRoutes(
 /**
  * override for IotHubDescriptions.testRoute
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op replaceTestRoute(
   ...ApiVersionParameter,

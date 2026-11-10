@@ -462,6 +462,7 @@ union IsMonitoringEnabled {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Internal Network Administrative State Request")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBgpAdministrativeStateRequest {
@@ -483,6 +484,7 @@ model InternalNetworkUpdateBgpAdministrativeStateRequest {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for InternalNetwork BGP Administrative State response"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Internal Network Administrative State Response")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBgpAdministrativeStateResponse
@@ -512,6 +514,7 @@ model InternalNetworkUpdateBgpAdministrativeStateResponseProperties {
   neighborAddressAdministrativeStatus?: NeighborAddressBgpAdministrativeStatus[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Internal Network BFD Administrative State request")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBfdAdministrativeStateRequest {
@@ -556,6 +559,7 @@ model InternalNetworkUpdateBfdAdministrativeStateResponseProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for InternalNetwork BFD Administrative State response"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Internal Network BFD Administrative State response")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBfdAdministrativeStateResponse
@@ -600,6 +604,7 @@ model InternalNetworkBmpProperties {
 @doc("Internal Network BMP Configuration")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBmpPatchProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("BMP Collector Address.")
   @added(Versions.v2024_06_15_preview)
   @minItems(1)

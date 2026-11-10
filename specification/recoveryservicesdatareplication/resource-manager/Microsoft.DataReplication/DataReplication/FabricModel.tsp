@@ -22,19 +22,6 @@ model FabricModel
     NamePattern = "^[a-zA-Z0-9]*$"
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(
-  Fabric.create::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(
-  Fabric.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
-);
-
 @armResourceOperations
 interface Fabric {
   /**

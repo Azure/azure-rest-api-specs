@@ -70,6 +70,44 @@ using Microsoft.Quota;
 @@clientName(GroupQuotasEntityBase, "GroupQuotaEntityBase", "csharp");
 @@clientName(GroupQuotaLimitLists.list, "get", "csharp");
 @@clientName(SubscriptionQuotaAllocationsLists.list, "get", "csharp");
+@@clientName(
+  IncomingQuotaTransfers.listBySubscription,
+  "getIncomingQuotaTransfers",
+  "csharp"
+);
+
+// Avoids .NET analyzer AZC0030, which rejects model names ending in "Request".
+@@clientName(
+  QuotaTransferCancelRequest,
+  "QuotaTransferCancelContent",
+  "csharp"
+);
+@@clientName(
+  IncomingQuotaTransferApproveRequest,
+  "IncomingQuotaTransferApproveContent",
+  "csharp"
+);
+@@clientName(
+  IncomingQuotaTransferRejectRequest,
+  "IncomingQuotaTransferRejectContent",
+  "csharp"
+);
+
+@@clientName(
+  QuotaTransferProperties.autoApprove,
+  "IsAutoApproveEnabled",
+  "csharp"
+);
+@@clientName(ApprovalRecord, "QuotaTransferApprovalRecord", "csharp");
+@@clientName(CancellationRecord, "QuotaTransferCancellationRecord", "csharp");
+@@clientName(RejectionRecord, "QuotaTransferRejectionRecord", "csharp");
+@@alternateType(QuotaTransfer.etag, Azure.Core.eTag, "csharp");
+@@alternateType(IncomingQuotaTransfer.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  IncomingQuotaTransferProperties.sourceEtag,
+  Azure.Core.eTag,
+  "csharp"
+);
 
 @@usage(QuotaAllocationRequestStatus, Usage.input, "csharp");
 @@usage(QuotaAllocationRequestBase, Usage.input, "csharp");
@@ -86,11 +124,12 @@ using Microsoft.Quota;
 // Java-specific fixes for breaking changes
 @@clientName(ResponseETagHeader.eTag, "etag", "java");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentQuotaLimitBasesCreateOrUpdate(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
+  ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -111,14 +150,15 @@ op currentQuotaLimitBasesCreateOrUpdate(
 @@override(
   CurrentQuotaLimitBases.createOrUpdate,
   currentQuotaLimitBasesCreateOrUpdate,
-  "java,python"
+  "java,python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentQuotaLimitBasesGet(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
+  ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -136,14 +176,15 @@ op currentQuotaLimitBasesGet(
 @@override(
   CurrentQuotaLimitBases.get,
   currentQuotaLimitBasesGet,
-  "java,python"
+  "java,python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentQuotaLimitBasesUpdate(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
+  ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -164,14 +205,15 @@ op currentQuotaLimitBasesUpdate(
 @@override(
   CurrentQuotaLimitBases.update,
   currentQuotaLimitBasesUpdate,
-  "java,python"
+  "java,python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op quotaRequestStatusGet(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
+  ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -186,13 +228,18 @@ op quotaRequestStatusGet(
   scope: string,
 ): QuotaRequestDetails;
 
-@@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,python");
+@@override(
+  QuotaRequestStatus.get,
+  quotaRequestStatusGet,
+  "java,python,go,javascript"
+);
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentUsagesBasesGet(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
+  ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -207,4 +254,8 @@ op currentUsagesBasesGet(
   scope: string,
 ): CurrentUsagesBase;
 
-@@override(CurrentUsagesBases.get, currentUsagesBasesGet, "java,python");
+@@override(
+  CurrentUsagesBases.get,
+  currentUsagesBasesGet,
+  "java,python,go,javascript"
+);

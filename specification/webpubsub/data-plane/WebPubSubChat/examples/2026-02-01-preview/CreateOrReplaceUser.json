@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "hub": "WebPubSubChatService_hub",
+    "userId": "user1",
+    "resource": {
+      "kind": "Human",
+      "nickname": "John",
+      "roleName": "user.normal"
+    },
+    "if-match": "etag1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "Human",
+        "id": "user1",
+        "nickname": "John",
+        "roleName": "user.normal",
+        "etag": "etag2"
+      }
+    },
+    "201": {
+      "body": {
+        "kind": "Human",
+        "id": "user1",
+        "nickname": "John",
+        "roleName": "user.normal",
+        "etag": "etag3"
+      }
+    }
+  },
+  "operationId": "WebPubSubChatServiceClient_CreateOrReplaceUser",
+  "title": "CreateOrReplaceUser"
+}

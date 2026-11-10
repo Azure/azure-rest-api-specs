@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
+
 /**
  * Describes a VM Sizes.
  */
@@ -45,7 +46,9 @@ interface ManagedUnsupportedVMSizes {
   /**
    * Get unsupported vm size for Service Fabric Managed Clusters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Necessary to avoid standard routing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Necessary to avoid standard routing"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedUnsupportedVMSizes/{vmSize}")
   @tag("ManagedVMSizes")
@@ -58,16 +61,12 @@ interface ManagedUnsupportedVMSizes {
     /**
      * The location for the unsupported VM sizes. This is different from cluster location.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
 
     /**
      * VM Size name.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     vmSize: string,
   ): ArmResponse<ManagedVMSize> | ErrorResponse;
@@ -75,7 +74,9 @@ interface ManagedUnsupportedVMSizes {
   /**
    * Get the lists of unsupported vm sizes for Service Fabric Managed Clusters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Necessary to avoid standard routing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Necessary to avoid standard routing"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedUnsupportedVMSizes")
   @operationId("managedUnsupportedVMSizes_List")
@@ -89,8 +90,6 @@ interface ManagedUnsupportedVMSizes {
     /**
      * The location for the unsupported VM sizes. This is different from cluster location.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
   ): ArmResponse<ManagedVMSizesResult> | ErrorResponse;

@@ -109,6 +109,7 @@ model DbSystemShapeProperties {
   shapeAttributes?: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20241201_preview)
 @doc("Provides GiMinorVersion query parameter for list operations.")
 model DbSystemShapeFilter {

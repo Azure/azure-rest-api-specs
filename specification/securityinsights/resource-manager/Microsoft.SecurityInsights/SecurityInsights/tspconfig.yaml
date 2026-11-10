@@ -18,6 +18,9 @@ options:
     service-name: "Security Insights"
     remove-inner: SecurityAlert,HuntingBookmark,Entity
     use-object-for-unknown: true
+    resource-collection-associations:
+      - resource: Relation
+        collection: IncidentRelations
   "@azure-tools/typespec-python":
     service-dir: "sdk/securityinsight"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-securityinsight"

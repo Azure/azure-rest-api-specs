@@ -41,11 +41,6 @@ interface PrivateEndpointConnections {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -66,11 +61,6 @@ interface PrivateEndpointConnections {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>,
@@ -94,11 +84,6 @@ interface PrivateEndpointConnections {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = ArmResponse<PrivateEndpointConnection> | NotFoundResponse,
@@ -119,11 +104,6 @@ interface PrivateEndpointConnections {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = PrivateEndpointConnectionListResult,

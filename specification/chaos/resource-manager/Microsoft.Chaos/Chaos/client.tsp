@@ -4,15 +4,44 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
+// Go
+@@clientName(
+  WorkspaceDiscoveryWarningReason.RbacValidationFailed,
+  "RBACValidationFailed",
+  "go"
+);
+
 // csharp
+@@clientName(
+  WorkspaceCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
+  "keyEncryptionKeyUri",
+  "csharp"
+);
+@@clientName(
+  WorkspaceCustomerManagedKeyEncryptionPatch.keyEncryptionKeyUrl,
+  "keyEncryptionKeyUri",
+  "csharp"
+);
+@@clientName(
+  WorkspaceEncryptionStatus.observedKeyEncryptionKeyUrl,
+  "observedKeyEncryptionKeyUri",
+  "csharp"
+);
 @@clientName(Workspace, "ChaosWorkspace", "csharp");
 @@clientName(Scenario, "ChaosScenario", "csharp");
+@@clientName(ScenarioTemplate, "ChaosScenarioTemplate", "csharp");
+@@clientName(ScenarioTemplateVersion, "ChaosScenarioTemplateVersion", "csharp");
 @@clientName(ScenarioRun, "ChaosScenarioRun", "csharp");
 @@clientName(ScenarioConfiguration, "ChaosScenarioConfiguration", "csharp");
 @@clientName(DiscoveredResource, "ChaosDiscovered", "csharp");
 @@clientName(PrivateAccess, "ChaosPrivateAccess", "csharp");
 @@clientName(PrivateAccessPatch, "ChaosPrivateAccessPatch", "csharp");
 @@clientName(PrivateAccessProperties, "ChaosPrivateAccessProperties", "csharp");
+@@clientName(Connection, "ChaosConnection", "csharp");
+@@clientName(ConnectionProperties, "ChaosConnectionProperties", "csharp");
+@@clientName(ConnectionKind, "ChaosConnectionKind", "csharp");
+@@clientName(ConnectionStatus, "ChaosConnectionStatus", "csharp");
+@@clientName(ConnectionListResult, "ChaosConnectionListResult", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
 @@clientName(Experiment, "ChaosExperiment", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
@@ -74,12 +103,26 @@ using Microsoft.Chaos;
 @@clientName(PermissionsFixProperties.whatIfMode, "IsWhatIfMode", "csharp");
 @@clientName(Recommendation, "ChaosScenarioRecommendation", "csharp");
 @@clientName(Validation, "ChaosScenarioValidationData", "csharp");
-@@clientName(WorkspaceEvaluation, "ChaosWorkspaceEvaluationData", "csharp");
+@@clientName(
+  WorkspaceEvaluation,
+  "ChaosWorkspaceTemplateEvaluationData",
+  "csharp"
+);
+@@clientName(
+  LegacyWorkspaceEvaluation,
+  "ChaosWorkspaceEvaluationData",
+  "csharp"
+);
 @@clientName(
   ActionSupportedTargetType,
   "ChaosActionSupportedTargetType",
   "csharp"
 );
+
+// 2026-08-01-preview: `resultsV2` is the TypeSpec property name (renamed to avoid
+// collision with the legacy `results: ScenarioEvaluationResultItem[]`), but the
+// wire format is `results` via @encodedName and SDKs should expose it as `Results`.
+@@clientName(WorkspaceEvaluationProperties.resultsV2, "Results");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(

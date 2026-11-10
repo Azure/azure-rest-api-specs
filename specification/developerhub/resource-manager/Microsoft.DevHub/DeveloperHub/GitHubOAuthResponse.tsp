@@ -14,6 +14,7 @@ namespace Microsoft.DevHub;
  * Singleton response of GitHubOAuth containing
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @singleton("default")
 @subscriptionResource
 model GitHubOAuthResponse

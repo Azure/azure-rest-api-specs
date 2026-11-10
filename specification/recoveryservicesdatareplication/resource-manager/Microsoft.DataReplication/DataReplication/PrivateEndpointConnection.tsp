@@ -25,12 +25,6 @@ model PrivateEndpointConnection
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(
-  PrivateEndpointConnections.update::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**

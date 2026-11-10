@@ -1,0 +1,52 @@
+{
+  "title": "Agents_CreateVoiceAgent_HostedAgentLatest",
+  "operationId": "Agents_createAgent_Agents_createAgentFromCode",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "name": "customer-support-voice-agent",
+    "description": "A voice bridge for a hosted customer support agent.",
+    "definition": {
+      "kind": "voice",
+      "conversation_engine": {
+        "type": "hosted_agent",
+        "name": "customer-support-text-agent"
+      },
+      "output_modalities": [
+        "audio"
+      ],
+      "store": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "agent",
+        "id": "agent_customer_support_voice",
+        "name": "customer-support-voice-agent",
+        "state": "enabled",
+        "versions": {
+          "latest": {
+            "metadata": null,
+            "object": "agent.version",
+            "id": "agent_customer_support_voice:1",
+            "name": "customer-support-voice-agent",
+            "version": "1",
+            "created_at": 1785772800,
+            "definition": {
+              "kind": "voice",
+              "conversation_engine": {
+                "type": "hosted_agent",
+                "name": "customer-support-text-agent"
+              },
+              "output_modalities": [
+                "audio"
+              ],
+              "store": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

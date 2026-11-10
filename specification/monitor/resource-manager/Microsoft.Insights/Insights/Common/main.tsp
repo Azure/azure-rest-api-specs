@@ -274,6 +274,7 @@ model Context {
 /**
  * Describes the format of Error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -374,6 +375,7 @@ model ErrorResponseErrorAdditionalInfoItem {
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model CommonErrorResponse {
   /**

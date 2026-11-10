@@ -14,6 +14,9 @@ namespace Azure.Communication.Identity;
 enum Versions {
   @doc("Communication Identity 2025-06-30 api version")
   c2025_06_30: "2025-06-30",
+
+  @doc("Communication Identity 2026-09-23 api version")
+  c2026_09_23: "2026-09-23",
 }
 
 alias IdentityOperation<
@@ -29,6 +32,7 @@ alias IdentityOperation<
 
 // --- Error models (matching common.json) ---
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The Communication Services error.")
 @error
 model CommunicationErrorResponse {
@@ -84,6 +88,7 @@ model CommunicationIdentityAccessTokenResult {
   accessToken?: CommunicationIdentityAccessToken;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request to create a new identity with optional access token.")
 model CommunicationIdentityCreateRequest {
   @doc("Also create access token for the created identity.")
@@ -95,6 +100,7 @@ model CommunicationIdentityCreateRequest {
   expiresInMinutes?: int32 = 1440;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request to issue a new access token for an identity.")
 model CommunicationIdentityAccessTokenRequest {
   @doc("List of scopes attached to the token.")
@@ -128,6 +134,7 @@ union CommunicationIdentityTokenScope {
 
 // --- Teams User models ---
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A request to exchange a Teams user access token.")
 model TeamsUserExchangeTokenRequest {
   @doc("Entra ID access token of a Teams User to acquire a new Communication Identity access token.")
@@ -143,9 +150,11 @@ model TeamsUserExchangeTokenRequest {
 // --- Teams Extension models ---
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque token exchange request body with unknown value types"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A request to exchange a Teams Extension token.")
 model TeamsExtensionExchangeTokenRequest is Record<unknown>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A request to create or update a Teams Extension assignment.")
 model TeamsExtensionAssignmentCreateOrUpdateRequest {
   @doc("The type of principal the assignment is for.")
@@ -155,6 +164,7 @@ model TeamsExtensionAssignmentCreateOrUpdateRequest {
   clientIds?: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A Teams Extension assignment response.")
 model TeamsExtensionAssignmentResponse {
   @doc("The object ID of the assignment.")

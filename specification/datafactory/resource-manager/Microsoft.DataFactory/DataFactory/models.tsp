@@ -17,6 +17,7 @@ scalar ChangeDataCaptureStatusResponse extends string;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @Azure.ClientGenerator.Core.alternateType(
   {
     identity: "Azure.Core.Expressions.DataFactoryElement",
@@ -3283,6 +3284,7 @@ enum DayOfWeek {
 }
 
 /** A list of operations that can be performed by the Data Factory service. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OperationListResponse {
   /** List of Data Factory operations supported by the Data Factory resource provider. */
   @pageItems
@@ -3976,6 +3978,7 @@ model SubResource {
 /**
  * Update integration runtime request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateIntegrationRuntimeRequest {
   /**
    * Enables or disables the auto-update feature of the self-hosted integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189.
@@ -5920,6 +5923,7 @@ model PrivateLinkConnectionApprovalRequestResource extends SubResource {
 /**
  * A request to approve or reject a private endpoint connection
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrivateLinkConnectionApprovalRequest {
   /**
    * The state of a private link connection
@@ -6400,6 +6404,7 @@ model AzureKeyVaultSecretReference extends SecretBase {
 /**
  * A list of integration runtime status.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntegrationRuntimeStatusListResponse
   is Azure.Core.Page<IntegrationRuntimeStatusResponse>;
 
@@ -6509,6 +6514,7 @@ model DatasetReference {
 /**
  * Response body structure for get data factory operation status.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetDataFactoryOperationStatusResponse {
   ...Record<unknown>;
 
@@ -7869,6 +7875,7 @@ model CosmosDbSqlApiCollectionDataset extends Dataset {
 /**
  * CosmosDB (SQL API) Collection dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbSqlApiCollectionDatasetTypeProperties {
   /**
    * CosmosDB (SQL API) collection name. Type: string (or Expression with resultType string).
@@ -7894,6 +7901,7 @@ model DocumentDbCollectionDataset extends Dataset {
 /**
  * DocumentDB Collection dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DocumentDbCollectionDatasetTypeProperties {
   /**
    * Document Database collection name. Type: string (or Expression with resultType string).
@@ -8161,6 +8169,7 @@ model MongoDbCollectionDataset extends Dataset {
 /**
  * MongoDB database dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbCollectionDatasetTypeProperties {
   /**
    * The table name of the MongoDB database. Type: string (or Expression with resultType string).
@@ -8186,6 +8195,7 @@ model MongoDbAtlasCollectionDataset extends Dataset {
 /**
  * MongoDB Atlas database dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbAtlasCollectionDatasetTypeProperties {
   /**
    * The collection name of the MongoDB Atlas database. Type: string (or Expression with resultType string).
@@ -8211,6 +8221,7 @@ model MongoDbV2CollectionDataset extends Dataset {
 /**
  * MongoDB database dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbV2CollectionDatasetTypeProperties {
   /**
    * The collection name of the MongoDB database. Type: string (or Expression with resultType string).
@@ -8236,6 +8247,7 @@ model CosmosDbMongoDbApiCollectionDataset extends Dataset {
 /**
  * CosmosDB (MongoDB API) database dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbMongoDbApiCollectionDatasetTypeProperties {
   /**
    * The collection name of the CosmosDB (MongoDB API) database. Type: string (or Expression with resultType string).
@@ -8433,6 +8445,7 @@ model AmazonRedshiftTableDatasetTypeProperties {
 /**
  * The Db2 table dataset.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2TableDataset extends Dataset {
   /**
    * Db2 table dataset properties.
@@ -8448,6 +8461,7 @@ model Db2TableDataset extends Dataset {
 /**
  * Db2 table dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2TableDatasetTypeProperties {
   /**
    * This property will be retired. Please consider using schema + table properties instead.
@@ -12134,6 +12148,7 @@ model CosmosDbLinkedService extends LinkedService {
 /**
  * CosmosDB linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbLinkedServiceTypeProperties {
   /**
    * The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.
@@ -13361,6 +13376,7 @@ model SybaseLinkedServiceTypeProperties {
 /**
  * Linked service for DB2 data source.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2LinkedService extends LinkedService {
   /**
    * DB2 linked service properties.
@@ -13376,6 +13392,7 @@ model Db2LinkedService extends LinkedService {
 /**
  * DB2 linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2LinkedServiceTypeProperties {
   /**
    * The connection string. It is mutually exclusive with server, database, authenticationType, userName, packageCollection and certificateCommonName property. Type: string, SecureString or AzureKeyVaultSecretReference.
@@ -14074,6 +14091,7 @@ model MongoDbLinkedService extends LinkedService {
 /**
  * MongoDB linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbLinkedServiceTypeProperties {
   /**
    * The IP address or server name of the MongoDB server. Type: string (or Expression with resultType string).
@@ -14145,6 +14163,7 @@ model MongoDbAtlasLinkedService extends LinkedService {
 /**
  * MongoDB Atlas linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbAtlasLinkedServiceTypeProperties {
   /**
    * The MongoDB Atlas connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.
@@ -14180,6 +14199,7 @@ model MongoDbV2LinkedService extends LinkedService {
 /**
  * MongoDB linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbV2LinkedServiceTypeProperties {
   /**
    * The MongoDB connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.
@@ -14210,6 +14230,7 @@ model CosmosDbMongoDbApiLinkedService extends LinkedService {
 /**
  * CosmosDB (MongoDB API) linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbMongoDbApiLinkedServiceTypeProperties {
   /**
    * Whether the CosmosDB (MongoDB API) server version is higher than 3.2. The default value is false. Type: boolean (or Expression with resultType boolean).
@@ -21551,6 +21572,7 @@ model MicrosoftAccessSource extends CopySource {
  * A copy activity source for Db2 databases.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
 model Db2Source extends CopySource {
   ...TabularSourceProperties;

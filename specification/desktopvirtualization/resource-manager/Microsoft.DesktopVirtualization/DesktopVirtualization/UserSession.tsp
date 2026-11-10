@@ -130,6 +130,7 @@ interface UserSessions {
 /**
  * Request body for sending a message to a UserSession.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SendMessageRequest {
   /**
    * Represents message sent to a UserSession.

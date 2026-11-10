@@ -17,3 +17,14 @@
     - Discovery.Bookshelf
     - Discovery.Workspace
     - Discovery.Management
+    - Discovery.Combined
+- tool: TypeSpecValidation
+  rules: [EmitAutorest]
+  reason: >-
+    Discovery.Combined is a client-generation-only entrypoint that composes the Workspace and
+    Bookshelf services into a single TypeSpec compilation so each language SDK can be produced as
+    one idiomatic Azure.AI.Discovery package. It intentionally does not emit @azure-tools/typespec-autorest;
+    the OpenAPI/Swagger contract is emitted by the per-service Discovery.Workspace and Discovery.Bookshelf
+    projects, which are unaffected.
+  paths:
+    - Discovery.Combined

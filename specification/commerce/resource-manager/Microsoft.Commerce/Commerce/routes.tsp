@@ -35,6 +35,7 @@ alias UsageAggregatesOperationGroupListParameters = {
   /**
    * `Daily` (default) returns the data in daily granularity, `Hourly` returns the data in hourly granularity.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/client-default-value-type-mismatch" "Default value kept for backward compatibility"
   @query("aggregationGranularity")
   aggregationGranularity?: AggregationGranularity = AggregationGranularity.Daily;
 

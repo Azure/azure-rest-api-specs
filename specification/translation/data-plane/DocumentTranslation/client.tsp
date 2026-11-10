@@ -8,9 +8,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@TypeSpec.Versioning.useDependency(
-  DocumentTranslation.Versions.v2025_12_01_preview
-)
+@TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v2026_03_01)
 namespace ClientCustomizations;
 
 @client({
@@ -50,6 +48,20 @@ interface SingleDocumentTranslationClient {
   SingleDocumentTranslationClient.documentTranslate,
   "translate",
   "!autorest"
+);
+
+@@clientDoc(
+  DocumentTranslationClient,
+  "Client for the Azure AI Document Translation service, used to translate batches of documents stored in Azure Blob Storage.",
+  DocumentationMode.replace,
+  "javascript"
+);
+
+@@clientDoc(
+  SingleDocumentTranslationClient,
+  "Client for the Azure AI Document Translation service, used to translate a single document.",
+  DocumentationMode.replace,
+  "javascript"
 );
 
 @@clientName(
@@ -152,6 +164,18 @@ interface SingleDocumentTranslationClient {
 );
 
 @@clientName(
+  DocumentTranslationClient.getDocumentsStatus,
+  "listDocumentStatuses",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslationClient.getTranslationsStatus,
+  "listTranslationStatuses",
+  "javascript"
+);
+
+@@clientName(
   DocumentTranslation.TranslationStatus.createdDateTimeUtc,
   "created_on",
   "python"
@@ -161,6 +185,66 @@ interface SingleDocumentTranslationClient {
   DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
   "last_updated_on",
   "python"
+);
+
+@@clientName(
+  DocumentTranslation.TranslationStatus.createdDateTimeUtc,
+  "createdAt",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
+  "updatedAt",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetTranslationsStatusOptions.createdDateTimeUtcStart,
+  "createdAfter",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetTranslationsStatusOptions.createdDateTimeUtcEnd,
+  "createdBefore",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.createdDateTimeUtcStart,
+  "createdAfter",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.createdDateTimeUtcEnd,
+  "createdBefore",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetTranslationsStatusOptions.maxpagesize,
+  "maxPageSize",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.maxpagesize,
+  "maxPageSize",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetTranslationsStatusOptions.orderby,
+  "orderBy",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.orderby,
+  "orderBy",
+  "javascript"
 );
 
 @@clientName(DocumentTranslation.Glossary.format, "file_format", "python");
@@ -183,6 +267,18 @@ interface SingleDocumentTranslationClient {
   DocumentTranslation.DocumentStatus.lastActionDateTimeUtc,
   "last_updated_on",
   "python"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.createdDateTimeUtc,
+  "createdAt",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.lastActionDateTimeUtc,
+  "lastActionAt",
+  "javascript"
 );
 
 @@clientName(
@@ -224,6 +320,18 @@ interface SingleDocumentTranslationClient {
 );
 
 @@clientName(
+  DocumentTranslation.DocumentStatus.imageCharged,
+  "imagesCharged",
+  "csharp"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharacterDetected,
+  "imageCharactersDetected",
+  "csharp"
+);
+
+@@clientName(
   DocumentTranslation.StatusSummary.totalCharacterCharged,
   "total_characters_charged",
   "python"
@@ -257,7 +365,11 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.TargetInput.category, "category_id", "python");
+@@clientName(
+  DocumentTranslation.TargetInput.deploymentName,
+  "deployment_name",
+  "python"
+);
 
 @@clientName(DocumentTranslation.TargetInput, "TranslationTarget", "python");
 
@@ -350,6 +462,48 @@ interface SingleDocumentTranslationClient {
 @@clientName(
   DocumentTranslation.StatusSummary.totalImageCharged,
   "totalImagesChargedCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.StatusSummary.totalImageScansSucceeded,
+  "totalImageScansSucceededCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.StatusSummary.totalImageScansFailed,
+  "totalImageScansFailedCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.totalImageScansSucceeded,
+  "totalImageScansSucceededCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.totalImageScansFailed,
+  "totalImageScansFailedCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.characterCharged,
+  "characterChargedCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharged,
+  "imageChargedCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharacterDetected,
+  "imageCharacterDetectedCount",
   "java"
 );
 

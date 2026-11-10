@@ -60,3 +60,37 @@ using Azure.ClientGenerator.Core;
   "DiscoveryInvestigationsClient",
   "csharp"
 );
+
+// Java operation names
+@@clientName(
+  Microsoft.Discovery.Workspace.Conversations.stableUpdate,
+  "update",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tasks.stableUpdate,
+  "update",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tools.cancelRunLro,
+  "cancelRun",
+  "java"
+);
+
+// Retired pre-GA PUT ops are create-or-update; name them accurately so the GA PATCH ops can be `update`.
+@@clientName(
+  Microsoft.Discovery.Workspace.Conversations.update,
+  "createOrUpdate",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tasks.update,
+  "createOrUpdate",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tools.cancelRun,
+  "cancelRunSync",
+  "java"
+);

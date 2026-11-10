@@ -4,6 +4,7 @@ import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
+using Microsoft.ContainerService;
 
 @@clientName(
   Microsoft.ContainerService,
@@ -41,3 +42,5 @@ namespace Microsoft.ContainerService {
   Microsoft.ContainerService.DeploymentSafeguardCreate,
   "javascript"
 );
+
+@@alternateType(DeploymentSafeguard.eTag, Azure.Core.eTag, "csharp");

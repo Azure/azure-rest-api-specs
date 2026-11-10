@@ -1423,11 +1423,13 @@ model CustomImagePropertiesFromVm {
   /**
    * The Windows OS information of the VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   windowsOsInfo?: WindowsOsInfo;
 
   /**
    * The Linux OS information of the VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   linuxOsInfo?: LinuxOsInfo;
 }
 
@@ -1519,6 +1521,22 @@ model CustomImageFragment extends UpdateResource {}
 model FormulaList is Azure.Core.Page<Formula>;
 
 /**
+ * The configured credential state of a formula.
+ */
+union FormulaCredentialState {
+  string,
+
+  /** No credential is configured. */
+  NotConfigured: "NotConfigured",
+
+  /** A password credential is configured. */
+  PasswordConfigured: "PasswordConfigured",
+
+  /** An SSH key credential is configured. */
+  SshKeyConfigured: "SshKeyConfigured",
+}
+
+/**
  * Properties of a formula.
  */
 model FormulaProperties {
@@ -1549,6 +1567,12 @@ model FormulaProperties {
    * The content of the formula.
    */
   formulaContent?: LabVirtualMachineCreationParameter;
+
+  /**
+   * The configured credential state of the formula. This property does not expose the credential value or storage mechanism.
+   */
+  @visibility(Lifecycle.Read)
+  credentialState?: FormulaCredentialState;
 
   /**
    * Information about a VM from which a formula is to be created.
@@ -1645,7 +1669,8 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The password of the virtual machine administrator.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   password?: string;
 
   /**
@@ -1877,6 +1902,7 @@ model NetworkInterfaceProperties {
 /**
  * Properties of a virtual machine that determine how it is connected to a load balancer.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SharedPublicIpAddressConfiguration {
   /**
    * The incoming NAT rules
@@ -2819,7 +2845,7 @@ model LabVirtualMachineProperties {
   /**
    * The password of the virtual machine administrator.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   password?: string;
 
   /**

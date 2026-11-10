@@ -10,8 +10,8 @@ alias DeploymentOperations = FoundryAzureOperations<{}>;
 
 @tag("Deployments")
 interface Deployments {
+  /** Retrieves a deployed model. */
   @summary("Get a deployment")
-  @doc("Gets a deployed model.")
   get is DeploymentOperations.ResourceRead<Deployment>;
 
   /** Returns the deployed models available in the current project, optionally filtered by publisher, model name, or deployment type. */

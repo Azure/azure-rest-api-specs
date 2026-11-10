@@ -3,7 +3,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-import "./shared.tsp";
+import "../Discovery.Common/shared.tsp";
+import "./versions.tsp";
 import "./_knowledgeBase.tsp";
 import "./_knowledgeBase_version.tsp";
 import "./client.tsp";

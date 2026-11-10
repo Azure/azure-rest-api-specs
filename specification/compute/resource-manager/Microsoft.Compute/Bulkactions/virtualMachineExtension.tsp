@@ -40,6 +40,7 @@ model BulkActionVmExtensionProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This field is using the existing compute context for protectedSettings where this field is a free-form JSON object."
   @secret
+  @visibility(Lifecycle.Create)
   @doc("The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.")
   protectedSettings?: Record<unknown>;
 
@@ -47,6 +48,7 @@ model BulkActionVmExtensionProperties {
   suppressFailures?: boolean;
 
   @secret
+  @visibility(Lifecycle.Create)
   @doc("The extensions protected settings that are passed by reference, and consumed from key vault")
   protectedSettingsFromKeyVault?: KeyVaultSecretReference;
 

@@ -53,28 +53,76 @@ export interface AzsdkPackResponse {
 }
 
 /**
+ * Result payload from `azsdk pkg detect-breaking-change` when the tool produced
+ * a result.
+ */
+export interface AzsdkBreakingChangeResult {
+  hasBreakingChange?: boolean;
+  breakingChanges?: unknown[];
+  changes?: string;
+}
+
+/**
+ * Response shape from `azsdk pkg detect-breaking-change --output json`.
+ *
+ * `result` is polymorphic: a definitive run yields an {@link AzsdkBreakingChangeResult}
+ * object; a failed run yields the string `"failed"`.
+ */
+export interface AzsdkDetectBreakingChangeResponse {
+  result?: string | AzsdkBreakingChangeResult;
+  message?: string;
+  package_name?: string;
+  language?: string;
+  response_error?: string;
+  response_errors?: string[];
+}
+
+/**
+ * Extract a definitive breaking-change signal from a detect-breaking-change response.
+ *
+ * Returns a boolean only when the tool produced a result carrying a
+ * `hasBreakingChange` value. Any error shape (no result, `result === "failed"`, a
+ * response error, or a missing `hasBreakingChange`) yields `undefined` so the caller
+ * preserves the existing label instead of overriding it.
+ */
+export function getBreakingChangeSignal(
+  response: AzsdkDetectBreakingChangeResponse,
+): boolean | undefined {
+  if (response.response_error || (response.response_errors?.length ?? 0) > 0) {
+    return undefined;
+  }
+  const result = response.result;
+  if (result && typeof result === "object" && typeof result.hasBreakingChange === "boolean") {
+    return result.hasBreakingChange;
+  }
+  return undefined;
+}
+
+/**
  * Parses JSON output from an azsdk-cli command.
  * The CLI emits log lines before the JSON payload. The JSON object is always
- * the last block in the output, so we search backwards for the opening brace.
+ * the last block in the output, so candidate opening braces are tried from
+ * the end until the complete top-level object parses successfully.
  */
 export function parseAzsdkResponse<T>(output: string): T {
-  // The azsdk CLI emits log lines before the JSON payload.
-  // Find the last line that starts with '{' — this is the beginning of the JSON block.
   const lines = output.split("\n");
-  let jsonStartLine = -1;
+  let parseError: unknown;
+  let foundCandidate = false;
   for (let i = lines.length - 1; i >= 0; i--) {
     if (lines[i].trimStart().startsWith("{")) {
-      jsonStartLine = i;
-      break;
+      foundCandidate = true;
+      try {
+        return JSON.parse(lines.slice(i).join("\n")) as T;
+      } catch (error) {
+        parseError = error;
+      }
     }
   }
 
-  if (jsonStartLine === -1) {
+  if (!foundCandidate) {
     throw new SyntaxError(`No JSON object found in azsdk output: ${output.slice(0, 200)}`);
   }
-
-  const jsonText = lines.slice(jsonStartLine).join("\n");
-  return JSON.parse(jsonText) as T;
+  throw parseError;
 }
 
 // Deferred: extractArtifactPath will be re-enabled when stagedArtifactsFolder is published as pipeline artifact

@@ -224,6 +224,7 @@ interface VirtualMachineScaleSetVMS {
    * Gets the status of a virtual machine from a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @get
   @action("instanceView")
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
@@ -307,6 +308,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing powerOff POST contract uses skipShutdown in the query; preserve wire compatibility."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },
@@ -350,6 +352,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing retrieveBootDiagnosticsData POST contract uses sasUriExpirationTimeInMinutes in the query; preserve wire compatibility."
       @query("sasUriExpirationTimeInMinutes")
       sasUriExpirationTimeInMinutes?: int32;
     }

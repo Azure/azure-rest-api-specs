@@ -41,7 +41,9 @@ interface OperationResultOperationGroup {
    * Gets the operation result for a resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the operation status for a resource.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationResults/{operationId}")
   @get
@@ -187,12 +189,14 @@ interface FetchSecondaryRecoveryPointsOperationGroup {
     /**
      * OData filter options.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing list POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
 
     /**
      * skipToken Filter.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing list POST contract uses $skipToken in the query; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
 
@@ -242,6 +246,7 @@ interface FetchCrossRegionRestoreJobsOperationGroup {
     /**
      * OData filter options.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing list POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
 

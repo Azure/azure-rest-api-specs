@@ -4,6 +4,58 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Mission;
 
+@@clientName(
+  GovernedServiceItemOption,
+  "VirtualEnclaveGovernedServiceItemOption",
+  "csharp"
+);
+@@clientName(
+  GovernedServiceItemEnforcement,
+  "VirtualEnclaveGovernedServiceItemEnforcement",
+  "csharp"
+);
+@@clientName(
+  GovernedServiceItemPolicyAction,
+  "VirtualEnclaveGovernedServiceItemPolicyAction",
+  "csharp"
+);
+@@clientName(
+  MaintenanceModeConfigurationModelMode,
+  "VirtualEnclaveMaintenanceModeConfigurationMode",
+  "csharp"
+);
+@@clientName(
+  MaintenanceModeConfigurationModelMode.CanNotDelete,
+  "CannotDelete",
+  "csharp"
+);
+@@clientName(
+  MaintenanceModeConfigurationModelJustification,
+  "VirtualEnclaveMaintenanceModeJustification",
+  "csharp"
+);
+@@clientName(PrincipalType, "VirtualEnclavePrincipalType", "csharp");
+@@clientName(
+  ApprovalCallbackRequestResourceRequestAction,
+  "VirtualEnclaveApprovalCallbackResourceAction",
+  "csharp"
+);
+@@clientName(
+  ApprovalDeletionCallbackRequestResourceRequestAction,
+  "VirtualEnclaveApprovalDeletionCallbackResourceAction",
+  "csharp"
+);
+@@clientName(
+  CommunityPropertiesPolicyOverride,
+  "CommunityPolicyOverride",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.MoboBrokerResource,
+  "VirtualEnclaveManagedOnBehalfOfBroker",
+  "csharp"
+);
+
 @@clientName(ApprovalResource, "VirtualEnclaveApproval", "csharp");
 @@clientName(ApprovalProperties, "VirtualEnclaveApprovalProperties", "csharp");
 @@clientName(
@@ -80,7 +132,11 @@ using Microsoft.Mission;
   "IsAvailable",
   "csharp"
 );
-@@clientName(DestinationType, "CommunityEndpointDestinationType", "csharp");
+@@clientName(
+  DestinationType,
+  "VirtualEnclaveCommunityEndpointDestinationType",
+  "csharp"
+);
 @@clientName(CommunityEndpointProtocol.ANY, "Any", "csharp");
 @@clientName(CommunityEndpointProtocol.TCP, "Tcp", "csharp");
 @@clientName(CommunityEndpointProtocol.UDP, "Udp", "csharp");
@@ -166,5 +222,86 @@ using Microsoft.Mission;
 );
 @@clientName(ServiceIdentifier.PrivateDNSZones, "PrivateDnsZones", "csharp");
 @@clientName(ActionPerformed, "ApproverActionPerformed", "csharp");
+@@clientName(DedicatedHubResource, "VirtualEnclaveDedicatedHub", "csharp");
+@@clientName(
+  DedicatedHubProperties,
+  "VirtualEnclaveDedicatedHubProperties",
+  "csharp"
+);
+@@clientName(
+  DedicatedHubPatchModel,
+  "VirtualEnclaveDedicatedHubPatch",
+  "csharp"
+);
+@@clientName(
+  DedicatedHubPatchProperties,
+  "VirtualEnclaveDedicatedHubPatchProperties",
+  "csharp"
+);
+@@clientName(
+  CommunityEndpointDestinationRule,
+  "VirtualEnclaveCommunityEndpointDestinationRule",
+  "csharp"
+);
+@@clientName(
+  CommunityEndpointPatchProperties,
+  "VirtualEnclaveCommunityEndpointPatchProperties",
+  "csharp"
+);
+@@clientName(
+  CommunityEndpointProtocol,
+  "VirtualEnclaveCommunityEndpointProtocol",
+  "csharp"
+);
+@@clientName(Designation, "VirtualEnclaveDesignation", "csharp");
+@@clientName(
+  EnclaveEndpointPatchProperties,
+  "VirtualEnclaveEndpointPatchProperties",
+  "csharp"
+);
+@@clientName(
+  MonitoringDestination,
+  "VirtualEnclaveMonitoringDestination",
+  "csharp"
+);
+@@clientName(
+  MonitoringDestinationPatchModel,
+  "VirtualEnclaveMonitoringDestinationPatch",
+  "csharp"
+);
+@@clientName(
+  MonitoringDestinationType,
+  "VirtualEnclaveMonitoringDestinationType",
+  "csharp"
+);
+@@clientName(
+  MonitoringSettingsModel,
+  "VirtualEnclaveMonitoringSettings",
+  "csharp"
+);
+@@clientName(
+  MonitoringSettingsPatchModel,
+  "VirtualEnclaveMonitoringSettingsPatch",
+  "csharp"
+);
+@@clientName(
+  RbacInheritanceMode,
+  "VirtualEnclaveRbacInheritanceMode",
+  "csharp"
+);
+@@clientName(
+  ResourceVisibilityMode,
+  "VirtualEnclaveResourceVisibilityMode",
+  "csharp"
+);
+@@clientName(SecurityProvider, "VirtualEnclaveSecurityProvider", "csharp");
+@@clientName(TransitHubState, "VirtualEnclaveTransitHubState", "csharp");
+@@clientName(
+  TransitOptionParams,
+  "VirtualEnclaveTransitOptionContent",
+  "csharp"
+);
+@@clientName(TransitOptionType, "VirtualEnclaveTransitOptionType", "csharp");
+@@clientName(UpdateMode, "VirtualEnclaveUpdateMode", "csharp");
 
 @@clientName(Microsoft.Mission, "EnclaveMgmtClient", "python");

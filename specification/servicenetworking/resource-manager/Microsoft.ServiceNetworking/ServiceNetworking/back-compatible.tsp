@@ -28,6 +28,16 @@ using Microsoft.ServiceNetworking;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Microsoft.ServiceNetworking.PrivateEndpointConnection.properties,
+  "autorest"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Microsoft.ServiceNetworking.PrivateLinkResource.properties,
+  "autorest"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
 );

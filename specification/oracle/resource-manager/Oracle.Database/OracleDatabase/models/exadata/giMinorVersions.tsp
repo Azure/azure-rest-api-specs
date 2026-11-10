@@ -37,6 +37,23 @@ model GiMinorVersionFilter {
   @query
   @doc("Filters the result for the given Azure Availability Zone")
   zone?: string;
+
+  @added(Versions.v20260401_preview)
+  @query
+  @doc("If provided, filters the results to the set of GI minor versions supported for the given shape.")
+  @minLength(1)
+  @maxLength(255)
+  shape?: string;
+
+  @added(Versions.v20260401_preview)
+  @query
+  @doc("If true, filters the results to GI minor versions supported during VM cluster provisioning.")
+  isGiVersionForProvisioning?: boolean;
+
+  @added(Versions.v20260401_preview)
+  @query
+  @doc("Sort order for the returned GI minor versions.")
+  sortOrder?: GiMinorVersionSortOrder;
 }
 
 @added(Versions.v20241201_preview)
@@ -47,6 +64,18 @@ union ShapeFamily {
 
   @doc("Family value for Exadb XS Shape")
   ExadbXs: "EXADB_XS",
+
+  string,
+}
+
+@added(Versions.v20260401_preview)
+@doc("Allowed values for GI minor version sort order.")
+union GiMinorVersionSortOrder {
+  @doc("Ascending sort order.")
+  Asc: "ASC",
+
+  @doc("Descending sort order.")
+  Desc: "DESC",
 
   string,
 }

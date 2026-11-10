@@ -318,7 +318,11 @@ interface Container {
     }
   >;
 
-  /** Deletes the specified container. */
+  /**
+   * Deletes the specified container.
+   *
+   * When a container is deleted, a container with the same name can't be created for at least 30 seconds. The container might not be available for more than 30 seconds if the service is still processing the request. While the container is being deleted, attempts to create a container of the same name fail with status code 409 (Conflict). The service indicates that the container is being deleted. Operations on blobs within the container, including reads and writes, may continue to succeed for up to 30 seconds after the delete request is accepted. After this period, all operations on the container and its blobs fail with status code 404 (Not Found).
+   */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
@@ -444,6 +448,28 @@ interface Container {
       ...TimeoutParameter;
     },
     {}
+  >;
+
+  /** The Create Session operation enables users to create a session scoped to a container. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  @added(Versions.v2026_10_06)
+  @post
+  @route("?restype=container&comp=session")
+  createSession is StorageOperation<
+    {
+      ...TimeoutParameter;
+
+      /** The configuration used to create the session. */
+      @body
+      createSessionConfiguration: CreateSessionConfiguration;
+    },
+    {
+      @statusCode statusCode: 201;
+
+      /** The created session. */
+      @body
+      createSessionResponse: CreateSessionResponse;
+    }
   >;
 
   /** Allows multiple API calls to be embedded into a single HTTP request. */
@@ -664,6 +690,37 @@ interface Container {
     "application/vnd.apache.arrow.stream" | "application/xml"
   >;
 
+  /** Returns a list of the blobs as raw data, to be deserialized by the client. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+  @added(Versions.v2026_12_06)
+  @access(Access.internal)
+  @scope("rust")
+  @get
+  @sharedRoute
+  @route("?restype=container&comp=list")
+  listBlobsInternal is StorageOperationResponseBody<
+    {
+      /** The Accept header indicating the requested response media type. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      @header("accept")
+      accept: string;
+
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+      ...ListBlobsEndBefore;
+    },
+    {
+      @body body: bytes;
+    },
+    "application/vnd.apache.arrow.stream" | "application/xml"
+  >;
+
   /** Returns a list of the blobs in the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -704,6 +761,40 @@ interface Container {
       #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
       @header("accept")
       accept: "application/vnd.apache.arrow.stream,application/xml";
+
+      /** If specified, the operation returns a BlobPrefix element that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
+      @query delimiter: string;
+
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+      ...ListBlobsEndBefore;
+    },
+    {
+      @body body: bytes;
+    },
+    "application/vnd.apache.arrow.stream" | "application/xml"
+  >;
+
+  /** Returns a list of the blobs as raw data, to be deserialized by the client. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+  @added(Versions.v2026_12_06)
+  @access(Access.internal)
+  @scope("rust")
+  @get
+  @sharedRoute
+  @route("?restype=container&comp=list")
+  listBlobsHierarchicalInternal is StorageOperationResponseBody<
+    {
+      /** The Accept header indicating the requested response media type. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      @header("accept")
+      accept: string;
 
       /** If specified, the operation returns a BlobPrefix element that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
       @query delimiter: string;
@@ -844,18 +935,14 @@ interface Blob {
         @header("x-ms-access-tier-inferred")
         accessTierInferred?: boolean;
 
-        /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-        #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-        @added(Versions.v2026_10_06)
-        @encode("rfc7231")
-        @header("x-ms-access-tier-change-time")
-        accessTierChangeTime?: utcDateTime;
+        ...AccessTierChangeTimeResponseHeaderV2026_10_06;
 
         /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
         @added(Versions.v2026_10_06)
         @header("x-ms-smart-access-tier")
         smartAccessTier?: string;
 
+        ...DownloadHintResponseHeader;
         ...ApiVersionHeader;
       })
     | (BodyParameter & {
@@ -921,18 +1008,14 @@ interface Blob {
         @header("x-ms-access-tier-inferred")
         accessTierInferred?: boolean;
 
-        /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-        #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-        @added(Versions.v2026_10_06)
-        @encode("rfc7231")
-        @header("x-ms-access-tier-change-time")
-        accessTierChangeTime?: utcDateTime;
+        ...AccessTierChangeTimeResponseHeaderV2026_10_06;
 
         /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
         @added(Versions.v2026_10_06)
         @header("x-ms-smart-access-tier")
         smartAccessTier?: string;
 
+        ...DownloadHintResponseHeader;
         ...ApiVersionHeader;
       })
     | Error;
@@ -1013,11 +1096,7 @@ interface Blob {
       @alternateType(string, "go")
       archiveStatus?: ArchiveStatus;
 
-      /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-      @encode("rfc7231")
-      @header("x-ms-access-tier-change-time")
-      accessTierChangeTime?: utcDateTime;
+      ...AccessTierChangeTimeResponseHeader;
 
       /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
       @added(Versions.v2026_06_06)
@@ -1592,6 +1671,65 @@ interface Blob {
       @statusCode statusCode: 204;
     }
   >;
+
+  /** The Get Blob Layout operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob.  In addition, it may optionally return the layout of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @added(Versions.v2026_10_06)
+  @list
+  @get
+  @route("?comp=layout")
+  getLayout(
+    ...ApiVersionHeader,
+    ...ClientRequestIdHeader,
+    ...SnapshotParameter,
+    ...VersionIdParameter,
+    ...MarkerParameter,
+    ...MaxResultsParameter,
+    ...TimeoutParameter,
+    ...RangeParameter,
+    ...LeaseIdOptionalParameter,
+    ...IfTagsParameter,
+    ...IfModifiedSinceParameter,
+    ...IfUnmodifiedSinceParameter,
+    ...IfMatchParameter,
+    ...IfNoneMatchParameter,
+    ...EncryptionKeyParameter,
+    ...EncryptionKeySha256Parameter,
+    ...EncryptionAlgorithmParameter,
+  ):
+    | {
+        /** The content type of the body of the response. */
+        @header("Content-Type")
+        contentType: "application/xml";
+
+        ...BlobLayoutResponseHeaders;
+        ...ClientRequestIdHeader;
+        ...RequestIdResponseHeader;
+        ...ApiVersionHeader;
+        ...DateResponseHeaderPrivate;
+
+        /** The layout of the blob. */
+        @body
+        blobLayout: BlobLayout;
+      }
+    | {
+        #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+        @statusCode statusCode: 204;
+
+        /** Content-type. */
+        #suppress "@typespec/http/content-type-ignored" "There is no response body, so the content-type header can be returned."
+        @header("Content-Type")
+        contentType?: string;
+
+        ...BlobLayoutResponseHeaders;
+        ...ClientRequestIdHeader;
+        ...RequestIdResponseHeader;
+        ...ApiVersionHeader;
+        ...DateResponseHeaderPrivate;
+      }
+    | Error;
 }
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -2238,12 +2376,7 @@ interface BlockBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
-
-      /** The CRC64 hash of the content. */
-      @added(Versions.v2026_10_06)
-      @header("x-ms-content-crc64")
-      contentCrc64?: bytes;
-
+      ...ContentCrc64ResponseHeaderV2026_10_06;
       ...VersionIdResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;

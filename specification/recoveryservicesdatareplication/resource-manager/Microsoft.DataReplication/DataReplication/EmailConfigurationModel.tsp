@@ -25,13 +25,6 @@ model EmailConfigurationModel
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(
-  EmailConfiguration.create::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "This resource does not need a delete operation defined"
 @armResourceOperations
 interface EmailConfiguration {

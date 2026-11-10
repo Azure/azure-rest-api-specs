@@ -28,25 +28,41 @@ jobs:
     # For label events, only run when ARMModelingSignedOff is the label being added or removed,
     # since that label represents a manual reviewer sign-off that affects this workflow's output.
     if: |
-      (github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
-      github.event.label.name == 'ARMModelingSignedOff'
+      github.event.pull_request.state == 'open' &&
+      ((github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
+       github.event.label.name == 'ARMModelingSignedOff')
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 2
+
+      # Public main is the single source of truth for leases, so a lease merged there is
+      # honored without syncing it into each private branch.
+      - name: Checkout ARM leases from public main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          repository: Azure/azure-rest-api-specs
+          ref: main
+          path: arm-leases
+          sparse-checkout: |
+            .github/arm-leases/
 
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
       - name: ARM Modeling Review
         id: detect
-        uses: actions/github-script@v8
+        env:
+          ARM_LEASES_DIR: ${{ github.workspace }}/arm-leases
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: armModelingReview } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-modeling-review/arm-modeling-review.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-modeling-review/arm-modeling-review.ts');
             return await armModelingReview({ context, core });
 
       - name: Upload artifact for ARMModelingReviewRequired label

@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 import "./_conversation_message.tsp";
@@ -7,6 +8,7 @@ import "./_conversation_message.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.Core.Traits;
 
@@ -24,6 +26,7 @@ model TaskAssignee {
   type: ByType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for starting a task.")
 model StartTaskRequest {
   @doc("Assignee that will execute the task. Optional.")
@@ -264,7 +267,16 @@ interface Tasks {
   >;
 
   @doc("Patch (partial update) a task (e.g. status, description, validation requirements, dependencies, result).")
+  @sharedRoute
+  @removed(Versions.`2026-06-01`)
   update is StandardResourceOperations.ResourceCreateOrUpdate<Task>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Versioned operation needs explicit operationId"
+  @doc("Patch (partial update) a task (e.g. status, description, validation requirements, dependencies, result).")
+  @sharedRoute
+  @added(Versions.`2026-06-01`)
+  @operationId("Tasks_Update")
+  stableUpdate is StandardResourceOperations.ResourceUpdate<Task>;
 
   @doc("Delete a task by ID.")
   delete is ResourceDelete<Task>;
@@ -303,11 +315,6 @@ interface Tasks {
   @post
   addComment is Azure.Core.Foundations.Operation<
     {
-      @doc("The task name.")
-      @path
-      @pattern(taskNamePattern)
-      taskName: string;
-
       @doc("The project name.")
       @path
       @pattern(resourceNamePattern)
@@ -317,6 +324,11 @@ interface Tasks {
       @path
       @pattern(resourceNamePattern)
       investigationName: string;
+
+      @doc("The task name.")
+      @path
+      @pattern(taskNamePattern)
+      taskName: string;
 
       @doc("Comment to add.")
       @body

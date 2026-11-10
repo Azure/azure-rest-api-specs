@@ -245,6 +245,9 @@ model SkuSummary {
 
   /** Category IDs for this SKU. */
   categoryIds?: string[];
+
+  /** Pricing audiences for the SKU. */
+  pricingAudiences?: string[];
 }
 
 // ============================================================================

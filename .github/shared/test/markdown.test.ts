@@ -1,0 +1,275 @@
+import { marked } from "marked";
+import { describe, expect, it } from "vitest";
+import {
+  details,
+  escapeMarkdown,
+  inlineCode,
+  link,
+  paragraph,
+  renderMarkdownDoc,
+  section,
+  table,
+  unorderedList,
+} from "../src/markdown.ts";
+import { d } from "../src/testing.ts";
+
+describe("Markdown composition", () => {
+  it("composes optional blocks and nested sections without leaking heading depth", () => {
+    expect(
+      renderMarkdownDoc([
+        "Introduction",
+        "",
+        undefined,
+        [],
+        section("First", ["Body", section("Nested", "Details")]),
+        section("Second", "Last"),
+      ]),
+    ).toBe(d`
+      Introduction
+
+      # First
+
+      Body
+
+      ## Nested
+
+      Details
+
+      # Second
+
+      Last
+    `);
+  });
+
+  it("supports an explicit starting heading and empty documents", () => {
+    expect(renderMarkdownDoc(section("Title", undefined), 2)).toBe("## Title");
+    expect(renderMarkdownDoc([])).toBe("");
+    expect(renderMarkdownDoc(undefined)).toBe("");
+    expect(renderMarkdownDoc(section("Title", "Body"), 6)).toBe("###### Title\n\nBody");
+  });
+
+  it("preserves an explicit section ID and omits it when not supplied", () => {
+    expect(section("Title", "Body", "custom-id")).toEqual({
+      kind: "section",
+      title: "Title",
+      body: "Body",
+      id: "custom-id",
+    });
+    expect(section("Title", "Body")).not.toHaveProperty("id");
+    expect(section("Title", "Body", undefined)).not.toHaveProperty("id");
+  });
+
+  it("renders explicit anchors before headings without changing heading levels", () => {
+    const markdown = renderMarkdownDoc(
+      [
+        section(
+          "Analysis",
+          ["Body", section("Details", "Changes", "details_123")],
+          "breaking-change",
+        ),
+        section("Mitigation", undefined, "Mitigation"),
+        section("Without an ID", "Last"),
+      ],
+      2,
+    );
+    expect(markdown).toBe(d`
+      <a name="breaking-change"></a>
+
+      ## Analysis
+
+      Body
+
+      <a name="details_123"></a>
+
+      ### Details
+
+      Changes
+
+      <a name="Mitigation"></a>
+
+      ## Mitigation
+
+      ## Without an ID
+
+      Last
+    `);
+    expect(marked.parse(markdown)).toContain(
+      '<p><a name="breaking-change"></a></p>\n<h2>Analysis</h2>',
+    );
+  });
+
+  it.each(["", "has space", 'quote"id', "<tag>", "with/slash", "line\nbreak"])(
+    "rejects invalid heading ID %j",
+    (id) => {
+      expect(() => renderMarkdownDoc(section("Title", "Body", id))).toThrow(
+        "Markdown heading IDs must contain only letters, digits, underscores or hyphens",
+      );
+    },
+  );
+
+  it.each([
+    { doc: [section("First", "", "same-id"), section("Second", "", "same-id")] },
+    { doc: section("Parent", section("Child", "", "same-id"), "same-id") },
+  ])("rejects duplicate IDs across the document %#", ({ doc }) => {
+    expect(() => renderMarkdownDoc(doc)).toThrow("Duplicate Markdown heading ID: same-id");
+  });
+
+  it("allows repeated titles with distinct IDs and reuses IDs in separate renders", () => {
+    expect(renderMarkdownDoc([section("Title", "", "first"), section("Title", "", "second")])).toBe(
+      '<a name="first"></a>\n\n# Title\n\n<a name="second"></a>\n\n# Title',
+    );
+    const doc = section("Title", "", "reusable");
+    expect(renderMarkdownDoc(doc)).toBe('<a name="reusable"></a>\n\n# Title');
+    expect(renderMarkdownDoc(doc)).toBe('<a name="reusable"></a>\n\n# Title');
+  });
+
+  it.each([0, -1, 1.5, 7])("rejects invalid heading level %s", (level) => {
+    expect(() => renderMarkdownDoc(section("Title", ""), level)).toThrow("level from 1 to 6");
+  });
+
+  it("rejects nested headings beyond level six", () => {
+    expect(() => renderMarkdownDoc(section("Parent", section("Child", "")), 6)).toThrow(
+      "level from 1 to 6",
+    );
+  });
+
+  it("escapes external text rather than turning it into markup or mentions", () => {
+    const text = escapeMarkdown(
+      "@team | <b>& `code` [link](url) *bold* _italic_ ~strike~\\\r\nnext",
+    );
+    expect(text).toBe(
+      "&#64;team &#124; &lt;b&gt;&amp; &#96;code&#96; \\[link\\]\\(url\\) \\*bold\\* \\_italic\\_ \\~strike\\~\\\\  next",
+    );
+    expect(marked.parseInline(text)).not.toContain("<b>");
+    expect(marked.parseInline(text)).not.toContain("<a ");
+  });
+});
+
+describe("inline Markdown", () => {
+  it("keeps wrapped guidance in one paragraph while preserving inline Markdown", () => {
+    const markdown = renderMarkdownDoc([
+      paragraph(
+        "Run",
+        inlineCode("pnpm check"),
+        `and consult the ${link("guide", "https://example.com/docs")}.`,
+      ),
+      "Then request review.",
+    ]);
+    expect(marked.parse(markdown)).toBe(
+      '<p>Run <code>pnpm check</code> and consult the <a href="https://example.com/docs">guide</a>.</p>\n<p>Then request review.</p>\n',
+    );
+  });
+
+  it("creates an ordinary code span and trusted link", () => {
+    expect(inlineCode("command")).toBe("`command`");
+    expect(link("Documentation", "https://example.com/docs")).toBe(
+      "[Documentation](https://example.com/docs)",
+    );
+  });
+
+  it.each([
+    ["a`b", "a`b"],
+    ["`leading", "`leading"],
+    ["trailing`", "trailing`"],
+    ["``", "``"],
+    ["`both`", "`both`"],
+    [" padded ", " padded "],
+    [" leading", " leading"],
+    ["trailing ", "trailing "],
+    [" ", " "],
+    ["first\r\nsecond\rthird\nfourth", "first second third fourth"],
+    ["<value>&", "&lt;value&gt;&amp;"],
+  ])("preserves code text %j", (code, expected) => {
+    expect(marked.parseInline(inlineCode(code))).toBe(`<code>${expected}</code>`);
+  });
+
+  it("rejects an empty code span instead of emitting ambiguous backticks", () => {
+    expect(() => inlineCode("")).toThrow("nonempty text");
+  });
+});
+
+describe("tables, lists and details", () => {
+  it("renders a header-only or populated table with stable columns", () => {
+    expect(table([["Header"]])).toBe("| Header |\n| --- |");
+    expect(
+      table([
+        ["First", "Second"],
+        ["one", "two"],
+      ]),
+    ).toBe(d`
+      | First | Second |
+      | --- | --- |
+      | one | two |
+    `);
+  });
+
+  it("escapes pipes and line breaks without breaking inline code or existing escapes", () => {
+    const value = table([
+      ["First|column", "Second\ncolumn"],
+      [inlineCode("a|b"), "first\r\nsecond\rthird\nfourth"],
+      ["\\|", "\\\\|"],
+    ]);
+    expect(value).toContain("| First\\|column | Second<br />column |");
+    expect(value).toContain("| \\| | \\\\\\| |");
+    const html = marked.parse(value);
+    expect(html).toContain("<td><code>a|b</code></td>");
+    expect(html).toContain("first<br />second<br />third<br />fourth");
+  });
+
+  it("preserves long backslash runs without a pipe", () => {
+    const value = "\\".repeat(100_000);
+    expect(table([["Value"], [value]])).toBe(`| Value |\n| --- |\n| ${value} |`);
+  });
+
+  it.each([0, 1, 2, 3, 50_000, 50_001])(
+    "preserves pipe escaping after %s consecutive backslashes",
+    (length) => {
+      const backslashes = "\\".repeat(length);
+      const escape = length % 2 === 0 ? "\\" : "";
+      expect(table([["Value"], [`${backslashes}|tail|`]])).toBe(
+        `| Value |\n| --- |\n| ${backslashes}${escape}|tail\\| |`,
+      );
+    },
+  );
+
+  it("resets backslash parity across ordinary text and line breaks", () => {
+    expect(table([["Value"], ["\\text|\\\n|\\\r\n|"]])).toBe(
+      "| Value |\n| --- |\n| \\text\\|\\<br />\\|\\<br />\\| |",
+    );
+  });
+
+  it.each([{ rows: [] }, { rows: [[]] }, { rows: [["One"], ["Two", "Three"]] }])(
+    "rejects invalid table rows %j",
+    ({ rows }) => {
+      expect(() => table(rows)).toThrow("nonempty header and equal column counts");
+    },
+  );
+
+  it("renders lists and indents continuation lines", () => {
+    expect(unorderedList(["one", "two\ncontinued\r\nagain"])).toBe(d`
+      - one
+      - two
+        continued
+        again
+    `);
+    expect(unorderedList([])).toBe("");
+  });
+
+  it("renders collapsible content with an HTML-escaped plain-text summary", () => {
+    expect(details("<Members> & reviewers", unorderedList(["one"]))).toBe(d`
+      <details><summary>&lt;Members&gt; &amp; reviewers</summary>
+
+      - one
+
+      </details>
+    `);
+    expect(details("Empty", "")).toBe("<details><summary>Empty</summary>\n\n\n</details>");
+  });
+
+  it("supports expanded details without changing the default collapsed behavior", () => {
+    expect(details("<Changes>", "Body", true)).toBe(
+      "<details open><summary>&lt;Changes&gt;</summary>\n\nBody\n\n</details>",
+    );
+    expect(details("Changes", "Body", false)).toBe(details("Changes", "Body"));
+  });
+});

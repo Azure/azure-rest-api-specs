@@ -24,7 +24,7 @@ interface Experiments {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Experiment>;
 
   /**
-   * The operation to update an experiment.
+   * Update an experiment.
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Experiment, ExperimentUpdate>;

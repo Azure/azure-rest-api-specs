@@ -1,0 +1,41 @@
+{
+  "title": "List telephony calls",
+  "operationId": "AgentTelephony_listTelephonyCalls",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "support-agent",
+    "provider": "twilio",
+    "status": "success",
+    "started_after": 1787490000,
+    "started_before": 1787510000,
+    "limit": 20
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "call_01J6SUPPORT",
+            "provider": "twilio",
+            "provider_call_id": "CA11111111111111111111111111111111",
+            "caller_number": "+14255550199",
+            "provider_number": "+14255550123",
+            "status": "success",
+            "phase": "completed",
+            "started_at": 1787500000,
+            "answered_at": 1787500002,
+            "media_connected_at": 1787500003,
+            "agent_session_ready_at": 1787500004,
+            "ended_at": 1787500064,
+            "duration_ms": 62000,
+            "end_reason": "caller_disconnected"
+          }
+        ],
+        "first_id": "call_01J6SUPPORT",
+        "last_id": "call_01J6SUPPORT",
+        "has_more": false
+      }
+    }
+  }
+}

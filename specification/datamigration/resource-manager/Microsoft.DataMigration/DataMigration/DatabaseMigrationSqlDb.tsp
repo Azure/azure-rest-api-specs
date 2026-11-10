@@ -36,6 +36,7 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     providerNamespace: "Microsoft.Sql";
 
     /** The name of the target SQL DB instance. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("servers")
     @key
@@ -46,6 +47,7 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     ...Extension.ExtensionProviderNamespace<DatabaseMigrationSqlDb>;
 
     /** The name of the target database. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("databaseMigrations")
     @key
@@ -66,6 +68,7 @@ alias DatabaseMigrationSqlDbOpsWithPattern = Azure.ResourceManager.Legacy.Extens
     providerNamespace: "Microsoft.Sql";
 
     /** The name of the target SQL DB instance. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("servers")
     @key
@@ -77,6 +80,7 @@ alias DatabaseMigrationSqlDbOpsWithPattern = Azure.ResourceManager.Legacy.Extens
     ...Extension.ExtensionProviderNamespace<DatabaseMigrationSqlDb>;
 
     /** The name of the target database. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("databaseMigrations")
     @key

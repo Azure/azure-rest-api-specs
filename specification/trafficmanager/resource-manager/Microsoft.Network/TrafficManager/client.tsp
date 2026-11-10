@@ -10,7 +10,9 @@ using TypeSpec.Rest;
 /**
  * override for HeatMapModels.get
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op getReplace(
   ...ApiVersionParameter,
@@ -234,6 +236,7 @@ op getReplace(
 /**
  * The type of the heatmap.
  */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
 union TrafficManagerHeatMapType {
   HeatMapType,
   string,

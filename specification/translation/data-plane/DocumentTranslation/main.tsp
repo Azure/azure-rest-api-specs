@@ -35,10 +35,10 @@ using Azure.Core;
 @doc("Document translation service")
 namespace DocumentTranslation;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 @doc("Document Translation supported versions")
 enum Versions {
   v2024_05_01: "2024-05-01",
   v2024_11_01_preview: "2024-11-01-preview",
   v2025_12_01_preview: "2025-12-01-preview",
+  v2026_03_01: "2026-03-01",
 }

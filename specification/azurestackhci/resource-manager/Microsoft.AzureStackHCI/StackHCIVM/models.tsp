@@ -781,9 +781,20 @@ model VirtualHardDiskArmReference {
 @doc("Properties under the gallery image resource")
 model GalleryImageProperties {
   @doc("Storage ContainerID of the storage container to be used for gallery image")
+  @typeChangedFrom(
+    Versions.v2026_07_01_preview,
+    armResourceIdentifier<[
+      {
+        type: "Microsoft.AzureStackHCI/storageContainers",
+      }
+    ]>
+  )
   containerId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/clusters/volumes";
     }
   ]>;
 
@@ -917,6 +928,7 @@ model ExtendedLocation {
   type?: ExtendedLocationTypes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -954,6 +966,7 @@ model LogicalNetworkProperties {
   networkType?: LogicalNetworkTypeEnum;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
 model LogicalNetworkPropertiesDhcpOptions {
   @doc("The list of DNS servers IP addresses.")
@@ -1336,6 +1349,7 @@ model LogicalNetworkStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1367,6 +1381,7 @@ model VirtualNetworkAddressSpace {
   addressPrefixes: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_09_01_preview)
 @doc("DHCP options for virtual networks")
 model VirtualNetworkDhcpOptions {
@@ -1823,6 +1838,7 @@ model LoadBalancerStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The virtual network subnet resource patch definition.")
 @added(Versions.v2025_09_01_preview)
 model VirtualNetworkSubnetUpdateRequest {
@@ -1843,9 +1859,20 @@ model VirtualNetworkSubnetUpdateProperties {
 @doc("Properties under the marketplace gallery image resource")
 model MarketplaceGalleryImageProperties {
   @doc("Storage ContainerID of the storage container to be used for marketplace gallery image")
+  @typeChangedFrom(
+    Versions.v2026_07_01_preview,
+    armResourceIdentifier<[
+      {
+        type: "Microsoft.AzureStackHCI/storageContainers",
+      }
+    ]>
+  )
   containerId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/clusters/volumes";
     }
   ]>;
 
@@ -1909,6 +1936,7 @@ model MarketplaceGalleryImageStatusDownloadStatus {
   downloadSizeInMB?: int64;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1916,6 +1944,7 @@ model MarketplaceGalleryImagesUpdateRequest {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1992,6 +2021,7 @@ model StorageContainerStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -2119,9 +2149,20 @@ model VirtualHardDiskProperties {
   provisioningState?: ProvisioningStateEnum;
 
   @doc("Storage ContainerID of the storage container to be used for VHD")
+  @typeChangedFrom(
+    Versions.v2026_07_01_preview,
+    armResourceIdentifier<[
+      {
+        type: "Microsoft.AzureStackHCI/storageContainers",
+      }
+    ]>
+  )
   containerId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/clusters/volumes";
     }
   ]>;
 
@@ -2211,6 +2252,7 @@ model VirtualHardDiskUploadStatus {
   errorMessage?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -2300,7 +2342,7 @@ model VirtualMachineInstanceProperties {
   @doc("Guest agent install status.")
   guestAgentInstallStatus?: GuestAgentInstallStatus;
 
-  @doc("Unique identifier for the vm resource.")
+  @doc("The SMBIOS GUID of the VM (hybrid compute identity). This is null for non-secure VMs and is populated for TrustedLaunch and ConfidentialVM VMs.")
   @visibility(Lifecycle.Read)
   vmId?: string;
 
@@ -2368,6 +2410,10 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 
   @doc("Defines the amount of extra memory that should be reserved for a virtual machine instance at runtime, as a percentage of the total memory that the virtual machine instance is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000.")
   targetMemoryBuffer?: int32;
+
+  @added(Versions.v2026_07_01_preview)
+  @doc("Specifies whether dynamic memory is enabled for the virtual machine instance. When omitted, dynamic memory remains enabled; setting this to false converts the virtual machine instance to static memory.")
+  enabled?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
@@ -2497,9 +2543,20 @@ model VirtualMachineInstancePropertiesStorageProfile {
   osDisk?: VirtualMachineInstancePropertiesStorageProfileOsDisk;
 
   @doc("Id of the storage container that hosts the VM configuration file")
+  @typeChangedFrom(
+    Versions.v2026_07_01_preview,
+    armResourceIdentifier<[
+      {
+        type: "Microsoft.AzureStackHCI/storageContainers",
+      }
+    ]>
+  )
   vmConfigStoragePathId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/clusters/volumes";
     }
   ]>;
 }
@@ -2596,6 +2653,31 @@ model VirtualMachineInstanceStatus {
 
   @doc("Provisioning status of the virtual machine instance")
   provisioningStatus?: VirtualMachineInstanceStatusProvisioningStatus;
+
+  @added(Versions.v2026_07_01_preview)
+  @doc("Ordered steps of the current operation on the virtual machine instance. Steps are replaced when a new operation begins and are omitted when no step details are available.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  operationDetails?: OperationStepResult[];
+}
+
+@added(Versions.v2026_07_01_preview)
+@doc("The observed result of a step in a resource operation.")
+model OperationStepResult {
+  @doc("The stable identifier of the step, unique within the operation.")
+  @minLength(1)
+  @maxLength(128)
+  name: string;
+
+  @doc("The current status of the step.")
+  status: Status;
+
+  @doc("Additional information about the step, such as the reason for a failure.")
+  @maxLength(512)
+  message?: string;
+
+  @doc("The time the step completed, in UTC. Omitted while the step is in progress.")
+  completedTime?: utcDateTime;
 }
 
 @doc("Virtual machine instance provisioning status.")
@@ -2646,6 +2728,7 @@ model Identity {
   type?: "SystemAssigned";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The virtual machine instance resource patch definition.")
 model VirtualMachineInstanceUpdateRequest {
   @doc("Defines the resource properties for the update.")
@@ -2687,6 +2770,10 @@ model HardwareProfileUpdate {
   @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
   @Azure.ResourceManager.identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
+
+  @added(Versions.v2026_07_01_preview)
+  @doc("Dynamic memory config for day-2 updates and static-to-dynamic conversion of the virtual machine instance.")
+  dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
 }
 
 @doc("Storage profile update")
@@ -2826,6 +2913,7 @@ model GuestCredential {
   password?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_04_01_preview)
 @doc("The operation gracefully shuts down a virtual machine by requesting the operating system to shut down. The virtual machine can be restarted with the same provisioned resources. To force an immediate shut down, see the skipShutdown flag.")
 model PowerOffVirtualMachineOptions {

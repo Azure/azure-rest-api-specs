@@ -313,6 +313,61 @@ union EnableStatus {
 }
 
 /**
+ * Whether a TCP reset is sent when a session is terminated
+ */
+@added(Versions.v2026_08_27_preview)
+union TcpReset {
+  string,
+
+  /**
+   * A TCP reset is sent to the client and server
+   */
+  Enabled: "Enabled",
+
+  /**
+   * No TCP reset is sent
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * The firewall mode a Marketplace plan provisions. The value is derived by the service from the
+ * Marketplace plan the firewall is purchased under and is never supplied by the caller.
+ */
+@added(Versions.v2026_09_25_preview)
+union FirewallMode {
+  string,
+
+  /**
+   * Cloud Next-Generation Firewall.
+   */
+  CNGFW: "CNGFW",
+
+  /**
+   * Managed AI Runtime Security.
+   */
+  AIRSM: "AIRSM",
+}
+
+/**
+ * Hash algorithm used to distribute inbound traffic
+ */
+@added(Versions.v2026_08_27_preview)
+union LoadDistribution {
+  string,
+
+  /**
+   * Five-tuple hash: source IP, source port, destination IP, destination port and protocol
+   */
+  Default: "Default",
+
+  /**
+   * Two-tuple hash: source IP and destination IP
+   */
+  SourceIP: "SourceIP",
+}
+
+/**
  * Possible log types
  */
 union LogType {
@@ -1248,6 +1303,14 @@ model FirewallDeploymentProperties {
   firewallSku?: string = "STANDARD";
 
   /**
+   * Time in minutes to keep serving existing traffic during scale-in or upgrade events before removing a firewall instance. Can only be set on PUT, not updatable via PATCH, Default will be 15.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(15)
+  @maxValue(120)
+  sessionDrainTimeoutInMinutes?: int32 = 15;
+
+  /**
    * Network settings
    */
   networkProfile: NetworkProfile;
@@ -1271,6 +1334,16 @@ model FirewallDeploymentProperties {
    * Strata Cloud Manager Configuration, only applicable if Strata Cloud Manager is selected.
    */
   strataCloudManagerConfig?: StrataCloudManagerConfig;
+
+  /**
+   * The firewall mode this resource provisions, derived by the service from the Marketplace plan.
+   * This property is read-only: any caller-supplied value is discarded and replaced with the mode
+   * derived from the plan. It is absent on firewalls stored before this property was introduced,
+   * and a reader must treat an absent value as CNGFW.
+   */
+  @added(Versions.v2026_09_25_preview)
+  @visibility(Lifecycle.Read)
+  firewallMode?: FirewallMode;
 
   /**
    * Associated Rulestack
@@ -1350,6 +1423,20 @@ model NetworkProfile {
    * Array of ipv4 destination address for which source NAT is to be performed
    */
   privateSourceNatRulesDestination?: string[];
+
+  /**
+   * Time in minutes an outbound source NAT session can stay inactive before termination, Default will be 4.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(4)
+  @maxValue(120)
+  outboundIdleTimeoutInMinutes?: int32;
+
+  /**
+   * Send a TCP reset when an inactive outbound source NAT session is terminated, Default will be Enabled.
+   */
+  @added(Versions.v2026_08_27_preview)
+  outboundTcpReset?: TcpReset;
 }
 
 /**
@@ -1450,7 +1537,7 @@ model PanoramaConfig {
   /**
    * VM auth key for panorama connectivity
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value returned by this read-only property in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   @visibility(Lifecycle.Read)
   vmAuthKey?: string;
 
@@ -1499,6 +1586,13 @@ model StrataCloudManagerConfig {
    * Strata Cloud Manager name which is intended to manage the policy for this firewall.
    */
   cloudManagerName: string;
+
+  /**
+   * The Strata Cloud Manager link code supplied by the customer and validated through the
+   * resolveStrataCloudManager provider action.
+   */
+  @added(Versions.v2026_09_25_preview)
+  scmLinkCode?: string;
 }
 
 /**
@@ -1566,6 +1660,26 @@ model FrontendSetting {
    * Backend configurations
    */
   backendConfiguration: EndpointConfiguration;
+
+  /**
+   * Time in minutes an inbound session can stay inactive before termination, Default will be 4.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(4)
+  @maxValue(100)
+  idleTimeoutInMinutes?: int32;
+
+  /**
+   * Send a TCP reset when an inactive inbound session is terminated, Default will be Disabled.
+   */
+  @added(Versions.v2026_08_27_preview)
+  tcpReset?: TcpReset;
+
+  /**
+   * Hash algorithm used to distribute inbound traffic, Default will be a five-tuple hash.
+   */
+  @added(Versions.v2026_08_27_preview)
+  loadDistribution?: LoadDistribution;
 }
 
 /**
@@ -1890,7 +2004,7 @@ model ApplicationInsights {
   /**
    * Application Insights key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value present in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   key?: string;
 }
 
@@ -1986,14 +2100,105 @@ model MonitorLog {
   /**
    * Primary Key value for Monitor
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value present in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   primaryKey?: string;
 
   /**
    * Secondary Key value for Monitor
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value present in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   secondaryKey?: string;
+}
+
+/**
+ * Log collection using the Azure Monitor Log Ingestion API (Data Collection Rule based).
+ * This supersedes the legacy HTTP Data Collector `MonitorLog` for firewalls that have migrated
+ * to the modern DCR ingestion path. When this block is supplied, all four fields are required.
+ */
+@added(Versions.v2026_07_29_preview)
+model MonitorLogV2 {
+  /**
+   * ARM resource ID of the Data Collection Rule (DCR) that governs how these logs are transformed and routed.
+   */
+  dcrId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * HTTPS logs ingestion endpoint that receives the data (the DCR's logs ingestion endpoint or its Data Collection Endpoint).
+   */
+  logIngestionEndpoint: url;
+
+  /**
+   * Immutable ID of the Data Collection Rule (the value that begins with `dcr-`).
+   */
+  dcrImmutableId: string;
+
+  /**
+   * DCR input stream that receives the data. For a custom table this is typically `Custom-<TableName>`.
+   */
+  streamName: string;
+}
+
+/**
+ * Log Destination for the Azure Monitor Log Ingestion (Data Collection Rule) method. Carries the DCR-based `monitorConfigurationsV2`.
+ */
+@added(Versions.v2026_07_29_preview)
+model LogDestinationV2 {
+  /**
+   * Storage account configurations
+   */
+  storageConfigurations?: StorageAccount;
+
+  /**
+   * Event Hub configurations
+   */
+  eventHubConfigurations?: EventHub;
+
+  /**
+   * Azure Monitor Log Ingestion (Data Collection Rule) configuration for this destination.
+   */
+  monitorConfigurationsV2?: MonitorLogV2;
+}
+
+/**
+ * Log Ingestion Settings for a firewall (Azure Monitor Log Ingestion / Data Collection Rule based).
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Sync proxy resource: log ingestion settings are forwarded to the partner synchronously (no async provisioning), so there is intentionally no provisioningState field — consistent with the firewall's other sync child resources."
+@added(Versions.v2026_07_29_preview)
+model LogIngestionSettingsProperties {
+  /**
+   * One of possible log type
+   */
+  logType?: LogType;
+
+  /**
+   * Log option SAME/INDIVIDUAL
+   */
+  logOption?: LogOption;
+
+  /**
+   * Application Insight details
+   */
+  applicationInsights?: ApplicationInsights;
+
+  /**
+   * Common destination configurations
+   */
+  commonDestination?: LogDestinationV2;
+
+  /**
+   * Traffic destination configurations
+   */
+  trafficLogDestination?: LogDestinationV2;
+
+  /**
+   * Threat destination configurations
+   */
+  threatLogDestination?: LogDestinationV2;
+
+  /**
+   * Decrypt destination configurations
+   */
+  decryptLogDestination?: LogDestinationV2;
 }
 
 /**
@@ -2286,6 +2491,7 @@ model CustomCaptureConfigurationsFilter {
   @doc("Network protocol — TCP or UDP.")
   protocol: CustomCaptureConfigurationsProtocol;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Source IPv4 address in dotted format (e.g., 10.0.0.5).")
   sourceIpAddress: string;
 
@@ -2294,6 +2500,7 @@ model CustomCaptureConfigurationsFilter {
   @maxValue(65535)
   sourcePort?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Destination IPv4 address in dotted format (e.g., 52.39.204.87).")
   destinationIpAddress: string;
 
@@ -2341,4 +2548,120 @@ model CustomCaptureConfigurationsProperties {
   @doc("Human-readable status message for display in client UIs (Portal blade, CLI output, etc.). English only. Read-only.")
   @visibility(Lifecycle.Read)
   message?: string;
+}
+
+/**
+ * A single Marketplace plan, enriched with the firewall mode it provisions.
+ */
+@added(Versions.v2026_09_25_preview)
+model MarketplacePlanInfo {
+  /**
+   * The Marketplace plan identifier.
+   */
+  planId: string;
+
+  /**
+   * The plan display name shown to the customer. The property is omitted when the Marketplace
+   * catalogue does not publish a display name for the plan.
+   */
+  displayName?: string;
+
+  /**
+   * The plan description.
+   */
+  description?: string;
+
+  /**
+   * The firewall mode this plan provisions. The property is omitted when the plan cannot be
+   * classified into exactly one mode, in which case the mode is left out rather than guessed.
+   */
+  firewallMode?: FirewallMode;
+}
+
+/**
+ * A single Marketplace offer and the plans it exposes to the caller. The entry carries the standard
+ * Azure Resource Manager proxy-resource identity.
+ */
+@subscriptionResource
+@added(Versions.v2026_09_25_preview)
+model OfferPlanGroup
+  is Azure.ResourceManager.ProxyResource<OfferPlanGroupProperties> {
+  /**
+   * The Marketplace offer identifier.
+   */
+  ...ResourceNameParameter<
+    Resource = OfferPlanGroup,
+    KeyName = "offerName",
+    SegmentName = "marketplaceOffers",
+    NamePattern = "^[A-Za-z0-9_-]{1,50}$"
+  >;
+}
+
+@@doc(OfferPlanGroup.name, "The Marketplace offer identifier.");
+
+/**
+ * The plans belonging to a single Marketplace offer.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "marketplaceOffers is a read-only pure proxy resource with no provisioning lifecycle."
+@added(Versions.v2026_09_25_preview)
+model OfferPlanGroupProperties {
+  /**
+   * The Marketplace publisher identifier.
+   */
+  publisherId: string;
+
+  /**
+   * The Marketplace offer identifier.
+   */
+  offerId: string;
+
+  /**
+   * The plans visible to the caller for this offer. The list may be empty.
+   */
+  @identifiers(#[])
+  plans: MarketplacePlanInfo[];
+}
+
+/**
+ * The Marketplace offers available to the subscription, each carrying the plans visible to the caller.
+ */
+@added(Versions.v2026_09_25_preview)
+model MarketplaceOffersResult {
+  /**
+   * The offer groups. An empty catalogue is returned as an empty list.
+   */
+  @identifiers(#[])
+  @TypeSpec.pageItems
+  value: OfferPlanGroup[];
+
+  /**
+   * The link to the next page of offer groups. The catalogue is returned in a single page today,
+   * so this is not populated; it is declared so that pagination can be introduced later without a
+   * breaking change. Clients must follow it when present and stop when it is absent.
+   */
+  @TypeSpec.nextLink
+  nextLink?: url;
+}
+
+/**
+ * The Strata Cloud Manager link code to resolve.
+ */
+@added(Versions.v2026_09_25_preview)
+model ScmLinkCodeRequest {
+  /**
+   * The Strata Cloud Manager link code supplied by the customer.
+   */
+  scmLinkCode: string;
+}
+
+/**
+ * The Strata Cloud Manager instance a link code is bound to.
+ */
+@added(Versions.v2026_09_25_preview)
+model StrataCloudManagerInstance {
+  /**
+   * The resolved Strata Cloud Manager instance name. This value feeds
+   * properties.strataCloudManagerConfig.cloudManagerName on the firewall create payload.
+   */
+  cloudManagerTenantName: string;
 }

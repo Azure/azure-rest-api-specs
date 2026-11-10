@@ -1,0 +1,77 @@
+{
+  "title": "Get Analysis Result with Chunks",
+  "operationId": "ContentAnalyzers_GetResult",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "operationId": "7a2c4e01-9d3f-4b8a-a1c5-6e8f2d0b3a7c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "7a2c4e01-9d3f-4b8a-a1c5-6e8f2d0b3a7c",
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "myRagAnalyzer",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-05-18T10:30:00.000Z",
+          "contents": [
+            {
+              "kind": "document",
+              "mimeType": "application/pdf",
+              "markdown": "# Introduction\n\nThis document describes the architecture of the system.\n\n## Components\n\nThe system consists of three main components...\n\n## Deployment\n\nThe system is deployed using containerized services...",
+              "startPageNumber": 1,
+              "endPageNumber": 3,
+              "unit": "inch",
+              "pages": [
+                {
+                  "pageNumber": 1,
+                  "width": 8.5,
+                  "height": 11
+                },
+                {
+                  "pageNumber": 2,
+                  "width": 8.5,
+                  "height": 11
+                },
+                {
+                  "pageNumber": 3,
+                  "width": 8.5,
+                  "height": 11
+                }
+              ],
+              "chunks": [
+                {
+                  "spans": [
+                    {
+                      "offset": 0,
+                      "length": 72
+                    }
+                  ],
+                  "source": "D(1,0.63,1.08,7.86,1.08,7.86,3.52,0.63,3.52)"
+                },
+                {
+                  "spans": [
+                    {
+                      "offset": 72,
+                      "length": 65
+                    }
+                  ],
+                  "source": "D(1,0.63,3.60,7.86,3.60,7.86,8.50,0.63,8.50);D(2,0.63,0.50,7.86,0.50,7.86,4.20,0.63,4.20)"
+                },
+                {
+                  "spans": [
+                    {
+                      "offset": 137,
+                      "length": 69
+                    }
+                  ],
+                  "source": "D(2,0.63,4.30,7.86,4.30,7.86,10.50,0.63,10.50);D(3,0.63,0.50,7.86,0.50,7.86,5.00,0.63,5.00)"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

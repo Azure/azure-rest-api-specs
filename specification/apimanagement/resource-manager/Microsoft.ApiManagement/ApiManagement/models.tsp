@@ -5046,6 +5046,7 @@ model FailureStatusCodeRange {
 /**
  * The response to be returned when a backend fails to respond
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BackendFailureResponse {
   /**
    * The status code of the response.

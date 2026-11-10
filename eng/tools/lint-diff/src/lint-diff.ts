@@ -5,6 +5,7 @@ import { correlateRuns } from "./correlateResults.ts";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.ts";
 import { getRunList } from "./processChanges.ts";
 import { getAutorestErrors, runChecks } from "./runChecks.ts";
+import { getUnsuppressedSwaggers } from "./swagger-suppressions.ts";
 import { getDependencyVersion, getPathToDependency, pathExists } from "./util.ts";
 
 function usage() {
@@ -129,6 +130,10 @@ async function runLintDiff(
 
     throw error;
   }
+
+  // Filter suppressed Swagger files discovered by SpecModel, including files affected through references.
+  // Directly changed Swagger files are also filtered before SpecModel processing in getRunList().
+  affectedSwaggers = await getUnsuppressedSwaggers(beforePath, afterPath, affectedSwaggers);
 
   if (beforeList.size === 0 && afterList.size === 0) {
     await writeFile(outFile, "No changes found. Exiting.");

@@ -202,6 +202,7 @@ model CostByStorageType {
 
 @doc("The distribution by operating system.")
 model DistributionByOperatingSystem {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The Os classification type.")
   @visibility(Lifecycle.Read)
   osClassificationType?: string;

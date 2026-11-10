@@ -1,0 +1,25 @@
+{
+  "title": "StoragePools_ConfigurePlatformConsoleAuth",
+  "operationId": "StoragePools_ConfigurePlatformConsoleAuth",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "config": {
+      "authType": "ssh",
+      "username": "alice",
+      "publicKey": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl alice@example.com",
+      "role": "storage_admin"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "authType": "ssh",
+        "username": "alice",
+        "role": "storage_admin"
+      }
+    }
+  }
+}
