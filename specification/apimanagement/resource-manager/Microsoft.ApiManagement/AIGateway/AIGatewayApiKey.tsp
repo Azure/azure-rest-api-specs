@@ -12,7 +12,6 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** Properties of an AI Gateway API key. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayApiKeyProperties {
   /** Display name of the key. */
@@ -37,6 +36,10 @@ model AiGatewayApiKeyProperties {
   @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   secondaryKey?: string;
+
+  /** Provisioning state of the resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: AiGatewayProvisioningState;
 }
 
 /** Properties for updating an AI Gateway API key. */

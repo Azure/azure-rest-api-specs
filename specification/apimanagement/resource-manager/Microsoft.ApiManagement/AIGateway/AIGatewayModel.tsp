@@ -569,7 +569,6 @@ model AiGatewayModelUpdateParameters {
 }
 
 /** Properties of an AI Gateway model. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayModelProperties {
   /** Display name of the model. */
@@ -595,6 +594,10 @@ model AiGatewayModelProperties {
   /** Inline policies applied to this model. */
   @identifiers(#[])
   policies?: AiGatewayPolicy[];
+
+  /** Provisioning state of the resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: AiGatewayProvisioningState;
 }
 
 /** An AI Gateway model resource. */

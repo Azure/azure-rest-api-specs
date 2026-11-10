@@ -93,15 +93,4 @@ suppressions:
       - $.definitions.AiGatewayAliasProperties.properties.failures
       - $.definitions.AiGatewayAliasUpdateProperties.properties.failures
     reason: Alias failure rules are evaluated in order and do not have a unique identifier property; x-ms-identifiers is intentionally empty.
-  - code: ProvisioningStateSpecifiedForPullStatusOp
-    from: openapi.json
-    where:
-      - $.definitions.AiGatewayWorkspaceProperties
-      - $.definitions.AiGatewayModelProviderProperties
-      - $.definitions.AiGatewayModelProperties
-      - $.definitions.AiGatewayAliasProperties
-      - $.definitions.AiGatewayToolServerProperties
-      - $.definitions.AiGatewayTelemetryExporterProperties
-      - $.definitions.AiGatewayApiKeyProperties
-    reason: Synchronous child resources complete immediately and do not return properties.provisioningState.
 ```
