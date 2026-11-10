@@ -32,6 +32,6 @@ enum Versions {
 
   @doc("The 2026-04-01 version.")
   @armCommonTypesVersion("v5")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2026_04_01: "2026-04-01",
 }

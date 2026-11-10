@@ -41,7 +41,7 @@ enum Versions {
   v2024_03_15_preview: "2024-03-15-preview",
 
   @doc("Azure API Center 2024-06-01-preview")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2024_06_01_preview: "2024-06-01-preview",
 }
 

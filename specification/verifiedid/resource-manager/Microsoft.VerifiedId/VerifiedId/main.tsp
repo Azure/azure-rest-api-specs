@@ -27,7 +27,7 @@ enum Versions {
   /**
    * The 2024-01-26-preview version of the Microsoft.VerifiedId resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2024_01_26_preview: "2024-01-26-preview",
 }
 

@@ -53,7 +53,7 @@ enum Versions {
    */
   @Azure.Core.previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v3 common-types contract pending a separately reviewed upgrade."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v3 common-types contract for backward compatibility."
   v2026_05_22_preview: "2026-05-22-preview",
 }
 

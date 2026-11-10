@@ -68,7 +68,7 @@ enum Versions {
 
   @doc("Azure VMware Solution API version 2026-03-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2026_03_01: "2026-03-01",
 }
 

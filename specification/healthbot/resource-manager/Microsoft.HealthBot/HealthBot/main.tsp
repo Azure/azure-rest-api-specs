@@ -42,7 +42,7 @@ enum Versions {
    */
   v2025_05_25: "2025-05-25",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v3 common-types contract pending a separately reviewed upgrade."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v3 common-types contract for backward compatibility."
   v2025_11_01: "2025-11-01",
 }
 

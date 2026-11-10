@@ -79,7 +79,7 @@ enum Versions {
    * The 2026-08-31-preview API version.
    */
   @Azure.Core.previewVersion
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract pending a separately reviewed upgrade."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2026_08_31_preview: "2026-08-31-preview",
 }
 
