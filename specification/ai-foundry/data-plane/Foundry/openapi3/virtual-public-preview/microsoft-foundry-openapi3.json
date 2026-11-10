@@ -116230,7 +116230,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "Total deadline in seconds (1-300), including receiver setup. Overrides the Agent timeout; if both are omitted, defaults to 60. Duplicate calls do not reset it."
+            "description": "The collection timeout in seconds, from 1 to 300, including receiver setup. Overrides the agent timeout; if both are omitted, defaults to 60 seconds. Duplicate calls do not reset the timeout."
           },
           "completion_mode": {
             "$ref": "#/components/schemas/VoiceAgentDtmfCompletionMode",
@@ -116241,7 +116241,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "The maximum wait for the first digit in integer seconds, starting at receiver readiness and bounded by the remaining total deadline. Omit for fifteen seconds.",
+            "description": "The maximum wait for the first digit in seconds, starting at receiver readiness and bounded by the remaining total deadline. Defaults to 15 seconds.",
             "default": 15
           }
         },
@@ -116288,7 +116288,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "Total deadline in seconds (1-300), including receiver setup. Overrides the Agent timeout; if both are omitted, defaults to 60. Duplicate calls do not reset it."
+            "description": "The collection timeout in seconds, from 1 to 300, including receiver setup. Overrides the agent timeout; if both are omitted, defaults to 60 seconds. Duplicate calls do not reset the timeout."
           },
           "from_phone_number": {
             "type": "string",
@@ -116338,7 +116338,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "Total deadline in seconds (1-300), including receiver setup. Overrides the Agent timeout; if both are omitted, defaults to 60. Duplicate calls do not reset it."
+            "description": "The collection timeout in seconds, from 1 to 300, including receiver setup. Overrides the agent timeout; if both are omitted, defaults to 60 seconds. Duplicate calls do not reset the timeout."
           }
         },
         "description": "Arguments for starting a collection on a model call."
@@ -116530,7 +116530,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "Seconds between digits, reset after each digit; defaults to 5.",
+            "description": "The timeout in seconds between received digits, from 1 to 300, reset after each digit. Defaults to 5 seconds.",
             "default": 5
           }
         },
@@ -116547,7 +116547,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "Seconds between digits, reset after each digit; defaults to 5.",
+            "description": "The timeout in seconds between received digits, from 1 to 300, reset after each digit. Defaults to 5 seconds.",
             "default": 5
           },
           "type": {
@@ -116579,7 +116579,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "Seconds between digits, reset after each digit; defaults to 5.",
+            "description": "The timeout in seconds between received digits, from 1 to 300, reset after each digit. Defaults to 5 seconds.",
             "default": 5
           },
           "type": {
@@ -116612,7 +116612,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "Seconds between digits, reset after each digit; defaults to 5.",
+            "description": "The timeout in seconds between received digits, from 1 to 300, reset after each digit. Defaults to 5 seconds.",
             "default": 5
           },
           "type": {
@@ -120826,7 +120826,7 @@
             "format": "int32",
             "minimum": 5,
             "maximum": 1200,
-            "description": "The wall-clock timeout, in seconds, for each invocation of this subagent. When omitted, the service timeout is used."
+            "description": "The wall-clock timeout in seconds for each invocation of this subagent. When omitted, the service timeout is used."
           }
         },
         "description": "A sibling Foundry text agent that a voice agent may consult as a background specialist."
@@ -120960,7 +120960,7 @@
           },
           "timeout_seconds": {
             "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.",
+            "description": "The execution timeout in seconds, from 1 to 300. If omitted, the service defaults to 60 seconds.",
             "maximum": 300,
             "minimum": 1,
             "default": 60
@@ -121350,7 +121350,7 @@
           },
           "ring_timeout_seconds": {
             "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.",
+            "description": "The per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's execution timeout. ACS allows at most 180 seconds.",
             "maximum": 300,
             "minimum": 1,
             "default": 20
