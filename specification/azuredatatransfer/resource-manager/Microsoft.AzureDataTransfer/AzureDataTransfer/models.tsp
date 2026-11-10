@@ -563,6 +563,18 @@ union TargetType {
   FlowType: "FlowType",
 
   /**
+   * The action executing is targeting a storage flow.
+   */
+  @added(Versions.v2026_06_29_preview)
+  StorageTransferFlow: "StorageTransferFlow",
+
+  /**
+   * The action executing is targeting a messaging flow.
+   */
+  @added(Versions.v2026_06_29_preview)
+  MessagingTransferFlow: "MessagingTransferFlow",
+
+  /**
    * The action executing is targeting a flow profile.
    */
   @added(Versions.v2026_02_06_preview)
@@ -1730,4 +1742,38 @@ model DirectionSettings {
    * The pricing options available for messaging flows in this direction.
    */
   messagingFlowsPricingOptions?: FlowBillingTier[];
+
+  /**
+   * The one-to-one mappings between storage flow locations in this cloud and
+   * corresponding storage flow locations in the other cloud for this direction.
+   * Each location and paired location appears in at most one mapping.
+   */
+  @added(Versions.v2026_06_29_preview)
+  @identifiers(#["location"])
+  storageLocationMappings?: LocationMapping[];
+
+  /**
+   * The one-to-one mappings between messaging flow locations in this cloud and
+   * corresponding messaging flow locations in the other cloud for this direction.
+   * Each location and paired location appears in at most one mapping.
+   */
+  @added(Versions.v2026_06_29_preview)
+  @identifiers(#["location"])
+  messagingLocationMappings?: LocationMapping[];
+}
+/**
+ * Maps a flow location in this cloud to the corresponding flow location
+ * in the other cloud.
+ */
+@added(Versions.v2026_06_29_preview)
+model LocationMapping {
+  /**
+   * The Azure location name of the flow in this cloud.
+   */
+  location: string;
+
+  /**
+   * The Azure location name of the corresponding flow in the other cloud.
+   */
+  pairedLocation: string;
 }

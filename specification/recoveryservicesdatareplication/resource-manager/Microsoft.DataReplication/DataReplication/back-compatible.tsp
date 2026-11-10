@@ -5,14 +5,22 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.DataReplication;
 
-@@clientName(PrivateEndpointConnections.update::parameters.resource, "body");
-@@clientName(EmailConfiguration.create::parameters.resource, "body");
-@@clientName(FabricAgent.create::parameters.resource, "body");
-@@clientName(Fabric.create::parameters.resource, "body");
-@@clientName(Fabric.update::parameters.properties, "body");
-@@clientName(ProtectedItem.create::parameters.resource, "body");
-@@clientName(Policy.create::parameters.resource, "body");
-@@clientName(Vault.create::parameters.resource, "body");
-@@clientName(ProtectedItem.update::parameters.properties, "body");
-@@clientName(ReplicationExtension.create::parameters.resource, "body");
-@@clientName(Vault.update::parameters.properties, "body");
+@@clientName(
+  PrivateEndpointConnections.update::parameters.resource,
+  "body",
+  "!python"
+);
+@@clientName(EmailConfiguration.create::parameters.resource, "body", "!python");
+@@clientName(FabricAgent.create::parameters.resource, "body", "!python");
+@@clientName(Fabric.create::parameters.resource, "body", "!python");
+@@clientName(Fabric.update::parameters.properties, "body", "!python");
+@@clientName(ProtectedItem.create::parameters.resource, "body", "!python");
+@@clientName(Policy.create::parameters.resource, "body", "!python");
+@@clientName(Vault.create::parameters.resource, "body", "!python");
+@@clientName(ProtectedItem.update::parameters.properties, "body", "!python");
+@@clientName(
+  ReplicationExtension.create::parameters.resource,
+  "body",
+  "!python"
+);
+@@clientName(Vault.update::parameters.properties, "body", "!python");
