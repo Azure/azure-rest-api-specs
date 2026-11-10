@@ -363,7 +363,7 @@ model EmbeddingContent {
    */
   @minItems(1)
   @maxItems(32)
-  contents: EmbeddingContentItem[];
+  inputs: EmbeddingContentItem[];
 
   /** The model to use. Defaults to `microsoft-embedding-1-large` (Microsoft Embedding 1-large). */
   `model`?: string;
@@ -628,7 +628,7 @@ model EmbeddingResult {
   /** The numeric type of the returned values. */
   outputDataKind: EmbeddingOutputDataKind;
 
-  /** One entry per item in `contents`, in request order. Empty when `output` is present. */
+  /** One entry per item in `inputs`, in request order. Empty when `output` is present. */
   data: EmbeddingData[];
 
   /** Usage for the operation. */
@@ -704,7 +704,7 @@ model MultimodalEmbeddingWarning {
   /** A stable numeric alias of `code`: `1001` for `EMBEDDING_INPUT_TRUNCATED`, `1002` for `EMBEDDING_SAS_LONG_LIVED`. */
   codeNumber?: int32;
 
-  /** The zero-based position of the item the warning is about, in `contents` and `data`. */
+  /** The zero-based position of the item the warning is about, in `inputs` and `data`. */
   index: int32;
 
   /** For `EMBEDDING_INPUT_TRUNCATED`: the item's tokens before truncation. */
@@ -713,7 +713,7 @@ model MultimodalEmbeddingWarning {
   /** For `EMBEDDING_INPUT_TRUNCATED`: the tokens embedded. */
   tokens?: int64;
 
-  /** A human-readable description that names the item, for example `contents[1]`. */
+  /** A human-readable description that names the item, for example `inputs[1]`. */
   message: string;
 }
 
@@ -733,7 +733,7 @@ model EmbeddingOperationResult {
 
 /**
  * The embedding request was not valid. The `error.code` identifies the problem:
- * - `InvalidRequest`: the request isn't supported on this endpoint, for example `contents` isn't enabled.
+ * - `InvalidRequest`: the request isn't supported on this endpoint, for example `inputs` isn't enabled.
  * - `InvalidRequestBody`: malformed JSON, a wrong type, an unknown or snake_case field, or a value outside its allowed
  *   set. `error.details` describes each problem.
  * - `EMBEDDING_INPUT_INVALID`: an item's kind, source, size, format or count, or a model or version isn't valid.

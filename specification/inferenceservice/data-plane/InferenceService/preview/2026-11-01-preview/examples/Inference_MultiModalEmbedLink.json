@@ -5,7 +5,7 @@
     "api-version": "2026-11-01-preview",
     "body": {
       "model": "microsoft-embedding-1-large",
-      "contents": [
+      "inputs": [
         {
           "kind": "query",
           "content": "invoice due date"
@@ -95,7 +95,7 @@
       "body": {
         "error": {
           "code": "EMBEDDING_BLOB_READ_FAILED",
-          "message": "The model service couldn't read the blob: contents[3].url: the request's blobs are larger than 20 MB together"
+          "message": "The model service couldn't read the blob: inputs[3].url: the request's blobs are larger than 20 MB together"
         }
       }
     },
@@ -125,7 +125,7 @@
       "body": {
         "error": {
           "code": "EMBEDDING_BLOB_READ_FAILED",
-          "message": "The model service couldn't read the blob: contents[2].url: storage returned 503"
+          "message": "The model service couldn't read the blob: inputs[2].url: storage returned 503"
         }
       }
     },
@@ -149,7 +149,7 @@
       "body": {
         "error": {
           "code": "EMBEDDING_BLOB_READ_FAILED",
-          "message": "The model service couldn't read the blob: contents[1].url: storage did not return the blob within 10 seconds"
+          "message": "The model service couldn't read the blob: inputs[1].url: storage did not return the blob within 10 seconds"
         }
       }
     }

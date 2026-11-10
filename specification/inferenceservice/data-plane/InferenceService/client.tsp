@@ -51,5 +51,5 @@ using Azure.Data.AI;
 @@clientName(InferenceOperationGroup.embed, "getEmbeddings", "csharp, python");
 // Python accepts plain dictionaries for input items without changing the REST
 // schema or the typed .NET input model.
-@@alternateType(EmbeddingContent.contents, Record<unknown>[], "python");
+@@alternateType(EmbeddingContent.inputs, Record<unknown>[], "python");
 @@scope(EmbeddingResult.object, "!csharp");
