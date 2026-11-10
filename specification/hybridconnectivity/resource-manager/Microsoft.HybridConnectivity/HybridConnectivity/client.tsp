@@ -236,3 +236,42 @@ namespace Microsoft.HybridConnectivity;
   "GcpOrganizationPropertiesPatch",
   "csharp"
 );
+
+@@clientName(GenerateGcpTemplate, "GenerateGCPTemplate", "go");
+@@clientName(
+  GenerateGcpTemplate.post::parameters.generateGcpTemplateRequest,
+  "generateGCPTemplateRequest",
+  "go"
+);
+@@clientName(GenerateGcpTemplateRequest, "GenerateGCPTemplateRequest", "go");
+@@clientName(GenerateGcpTemplateResponse, "GenerateGCPTemplateResponse", "go");
+@@clientName(
+  GenerateGcpTemplateRequest.gcpCloudProfile,
+  "GCPCloudProfile",
+  "go"
+);
+@@clientName(
+  GenerateGcpTemplateRequest.gcpTemplateFormat,
+  "GCPTemplateFormat",
+  "go"
+);
+@@clientName(GcpTemplateFormat, "GCPTemplateFormat", "go");
+@@clientName(GcpCloudProfile, "GCPCloudProfile", "go");
+@@clientName(GcpCloudProfileUpdate, "GCPCloudProfileUpdate", "go");
+@@clientName(GcpProjectProperties, "GCPProjectProperties", "go");
+@@clientName(GcpOrganizationProperties, "GCPOrganizationProperties", "go");
+@@clientName(
+  GcpOrganizationPropertiesUpdate,
+  "GCPOrganizationPropertiesUpdate",
+  "go"
+);
+@@clientName(
+  PublicCloudConnectorProperties.gcpCloudProfile,
+  "GCPCloudProfile",
+  "go"
+);
+@@clientName(
+  PublicCloudConnectorPropertiesUpdate.gcpCloudProfile,
+  "GCPCloudProfile",
+  "go"
+);

@@ -110,6 +110,7 @@ export function parseArguments(): SpecGenSdkCmdInput {
     prNumber: getArgumentValue(args, "--pr-number", ""),
     apiVersion: getArgumentValue(args, "--api-version", ""),
     sdkReleaseType: getArgumentValue(args, "--sdk-release-type", ""),
+    typespecEmitter: getArgumentValue(args, "--typespec-emitter", "") || undefined,
     specCommitSha: getArgumentValue(args, "--commit", "HEAD"),
     specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
     headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),
@@ -162,6 +163,9 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
   }
   if (commandInput.sdkReleaseType) {
     specGenSdkCommand.push("--sdk-release-type", commandInput.sdkReleaseType);
+  }
+  if (commandInput.typespecEmitter) {
+    specGenSdkCommand.push("--typespec-emitter", commandInput.typespecEmitter);
   }
   return specGenSdkCommand;
 }
@@ -404,6 +408,7 @@ export function generateArtifact(
         hasManagementPlaneSpecs,
         hasTypeSpecProjects,
         commandInput.sdkLanguage,
+        commandInput.typespecEmitter,
       );
     }
 
@@ -439,13 +444,23 @@ export function generateArtifact(
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
  * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.
  * @param sdkName - The SDK name.
+ * @param typespecEmitter - The explicitly selected TypeSpec emitter.
  * @returns boolean indicating whether the SDK check is required.
  */
 export function getRequiredSettingValue(
   hasManagementPlaneSpecs: boolean,
   hasTypeSpecProjects: boolean,
   sdkName: SdkName,
+  typespecEmitter?: string,
 ): boolean {
+  // Provisioning validation runs and reports failures, but is not yet a merge gate.
+  if (
+    (sdkName === SdkName.Js && typespecEmitter === "@azure-tools/typespec-ts-provisioning") ||
+    (sdkName === SdkName.Net &&
+      typespecEmitter === "@azure-typespec/http-client-csharp-provisioning")
+  ) {
+    return false;
+  }
   // If the SDK is azure-sdk-for-net, return false if there are no TypeSpec projects.
   if (sdkName === "azure-sdk-for-net" && !hasTypeSpecProjects) {
     return false;
