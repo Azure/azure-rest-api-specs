@@ -359,6 +359,11 @@ model CompletedFineTuningRequest extends FineTuningRequestStatus {
    * Raw result payload, whose properties depend on the submitted request.
    * Completed text-only reference training reports loss_fn_output_type as
    * "scalar", an empty loss_fn_outputs array, and aggregate numeric metrics.
+   * Completed text-only sampling returns choices with index, sample_ref, and
+   * finish_reason. Valid choices include a public assistant message without
+   * an outcome field. Invalid choices include outcome "invalid_model_output"
+   * and a safe reason, without a public message. Their opaque sample_ref
+   * remains usable for reference training.
    */
   result: Record<unknown>;
 }
@@ -955,98 +960,6 @@ model FineTuningTextOnlyTrainingInput {
 
   /** Optional configuration for the selected reference loss function. */
   loss_fn_config?: Record<unknown> | null;
-}
-
-/** Common identity of an intact generated completion. */
-model FineTuningTextOnlySampleChoice {
-  /** Unique nonnegative index of the choice. */
-  @minValue(0)
-  index: int32;
-
-  /** Opaque reference to the exact generated evidence; not an authorization credential. */
-  @minLength(1)
-  sample_ref: string;
-}
-
-/** Supported termination of a valid public assistant completion. */
-union FineTuningTextOnlyFinishReason {
-  string,
-
-  /** The assistant completed its response. */
-  stop: "stop",
-
-  /** The assistant emitted function calls. */
-  tool_calls: "tool_calls",
-}
-
-/** Safe classifications for an intact but non-public generated completion. */
-union FineTuningTextOnlyInvalidReason {
-  string,
-
-  /** The output token limit was reached. */
-  output_token_limit: "output_token_limit",
-
-  /** The expected private/public boundary was absent. */
-  missing_private_boundary: "missing_private_boundary",
-
-  /** A function call was malformed. */
-  malformed_tool_call: "malformed_tool_call",
-
-  /** Function arguments were not a valid JSON object. */
-  invalid_tool_arguments: "invalid_tool_arguments",
-
-  /** The completion could not be represented as a public assistant action. */
-  invalid_public_output: "invalid_public_output",
-}
-
-/** Recorded termination of an invalid, still-trainable completion. */
-union FineTuningTextOnlyInvalidFinishReason {
-  string,
-
-  /** Generation ended without reaching its output limit. */
-  stop: "stop",
-
-  /** Generation reached its output limit. */
-  length: "length",
-}
-
-/** A valid public completion and its opaque reference. */
-model FineTuningTextOnlyValidSampleChoice {
-  ...FineTuningTextOnlySampleChoice;
-
-  /** Public assistant output, without private reasoning or token evidence. */
-  message: FineTuningTextOnlyAssistantMessage;
-
-  /** Completion termination, consistent with the presence of tool calls. */
-  finish_reason: FineTuningTextOnlyFinishReason;
-}
-
-/** An intact trainable completion that has no safe public message. */
-model FineTuningTextOnlyInvalidSampleChoice {
-  ...FineTuningTextOnlySampleChoice;
-
-  /** Classification of this choice, not a failure of the sampling operation. */
-  outcome: "invalid_model_output";
-
-  /** Safe classification, never generated text or private evidence. */
-  reason: FineTuningTextOnlyInvalidReason;
-
-  /** Recorded termination. Length occurs exactly when the reason is output_token_limit. */
-  finish_reason: FineTuningTextOnlyInvalidFinishReason;
-}
-
-/** A public completion or a safely classified, still-trainable invalid completion. */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "The existing wire alternatives are flat objects without a shared discriminator; retain stable syntax without the experimental union-extends feature."
-union FineTuningTextOnlyChoice {
-  FineTuningTextOnlyValidSampleChoice,
-  FineTuningTextOnlyInvalidSampleChoice,
-}
-
-/** Public result payload for a completed text-only sample request. */
-model FineTuningTextOnlySampleResult {
-  /** Valid public completions or safely classified, still-trainable invalid choices. */
-  @minItems(1)
-  choices: FineTuningTextOnlyChoice[];
 }
 
 /** Metadata for one version-bound file in an authorized staged checkpoint copy. */

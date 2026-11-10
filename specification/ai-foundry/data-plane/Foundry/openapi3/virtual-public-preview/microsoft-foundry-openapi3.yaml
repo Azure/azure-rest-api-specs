@@ -92053,6 +92053,11 @@ components:
             Raw result payload, whose properties depend on the submitted request.
             Completed text-only reference training reports loss_fn_output_type as
             "scalar", an empty loss_fn_outputs array, and aggregate numeric metrics.
+            Completed text-only sampling returns choices with index, sample_ref, and
+            finish_reason. Valid choices include a public assistant message without
+            an outcome field. Invalid choices include outcome "invalid_model_output"
+            and a safe reason, without a public message. Their opaque sample_ref
+            remains usable for reference training.
       allOf:
         - $ref: '#/components/schemas/SessionFineTuning.FineTuningRequestStatus'
       description: A request that completed successfully.
@@ -92832,11 +92837,6 @@ components:
             $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyToolCall'
           description: Function calls made by the assistant.
       description: A public assistant message containing text, function calls, or both.
-    SessionFineTuning.FineTuningTextOnlyChoice:
-      anyOf:
-        - $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyValidSampleChoice'
-        - $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyInvalidSampleChoice'
-      description: A public completion or a safely classified, still-trainable invalid completion.
     SessionFineTuning.FineTuningTextOnlyContextMessage:
       type: object
       required:
@@ -92856,14 +92856,6 @@ components:
         - system
         - user
       description: Supported text-only context-message roles.
-    SessionFineTuning.FineTuningTextOnlyFinishReason:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - stop
-            - tool_calls
-      description: Supported termination of a valid public assistant completion.
     SessionFineTuning.FineTuningTextOnlyFunctionCall:
       type: object
       required:
@@ -92896,55 +92888,6 @@ components:
           additionalProperties: {}
           description: JSON schema with type equal to object.
       description: A public function definition whose parameters describe a JSON object.
-    SessionFineTuning.FineTuningTextOnlyInvalidFinishReason:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - stop
-            - length
-      description: Recorded termination of an invalid, still-trainable completion.
-    SessionFineTuning.FineTuningTextOnlyInvalidReason:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - output_token_limit
-            - missing_private_boundary
-            - malformed_tool_call
-            - invalid_tool_arguments
-            - invalid_public_output
-      description: Safe classifications for an intact but non-public generated completion.
-    SessionFineTuning.FineTuningTextOnlyInvalidSampleChoice:
-      type: object
-      required:
-        - index
-        - sample_ref
-        - outcome
-        - reason
-        - finish_reason
-      properties:
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-          description: Unique nonnegative index of the choice.
-        sample_ref:
-          type: string
-          minLength: 1
-          description: Opaque reference to the exact generated evidence; not an authorization credential.
-        outcome:
-          type: string
-          enum:
-            - invalid_model_output
-          description: Classification of this choice, not a failure of the sampling operation.
-        reason:
-          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyInvalidReason'
-          description: Safe classification, never generated text or private evidence.
-        finish_reason:
-          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyInvalidFinishReason'
-          description: Recorded termination. Length occurs exactly when the reason is output_token_limit.
-      description: An intact trainable completion that has no safe public message.
     SessionFineTuning.FineTuningTextOnlyLossFn:
       type: string
       enum:
@@ -92966,22 +92909,6 @@ components:
         - medium
         - high
       description: Supported reasoning effort for model-specific protected text-only sampling.
-    SessionFineTuning.FineTuningTextOnlySampleChoice:
-      type: object
-      required:
-        - index
-        - sample_ref
-      properties:
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-          description: Unique nonnegative index of the choice.
-        sample_ref:
-          type: string
-          minLength: 1
-          description: Opaque reference to the exact generated evidence; not an authorization credential.
-      description: Common identity of an intact generated completion.
     SessionFineTuning.FineTuningTextOnlySampleInput:
       type: object
       required:
@@ -93004,18 +92931,6 @@ components:
             - type: 'null'
           description: Model-specific reasoning effort. Omission or null leaves the model codec's default unchanged.
       description: Complete public input for opt-in text-only sampling.
-    SessionFineTuning.FineTuningTextOnlySampleResult:
-      type: object
-      required:
-        - choices
-      properties:
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyChoice'
-          minItems: 1
-          description: Valid public completions or safely classified, still-trainable invalid choices.
-      description: Public result payload for a completed text-only sample request.
     SessionFineTuning.FineTuningTextOnlyTool:
       type: object
       required:
@@ -93129,30 +93044,6 @@ components:
           format: double
           description: Finite scalar advantage assigned to this exact generated sample.
       description: One opaque sample reference and its finite scalar training advantage.
-    SessionFineTuning.FineTuningTextOnlyValidSampleChoice:
-      type: object
-      required:
-        - index
-        - sample_ref
-        - message
-        - finish_reason
-      properties:
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-          description: Unique nonnegative index of the choice.
-        sample_ref:
-          type: string
-          minLength: 1
-          description: Opaque reference to the exact generated evidence; not an authorization credential.
-        message:
-          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyAssistantMessage'
-          description: Public assistant output, without private reasoning or token evidence.
-        finish_reason:
-          $ref: '#/components/schemas/SessionFineTuning.FineTuningTextOnlyFinishReason'
-          description: Completion termination, consistent with the presence of tool calls.
-      description: A valid public completion and its opaque reference.
     SessionFineTuning.FineTuningTrainingType:
       anyOf:
         - type: string
