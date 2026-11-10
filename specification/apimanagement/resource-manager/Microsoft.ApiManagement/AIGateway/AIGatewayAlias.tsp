@@ -39,7 +39,7 @@ union AiGatewayModelSelectionObjective {
   Quality: "Quality",
 }
 
-/** Request field permitted to override automatic model selection. */
+/** Per-request behavior allowed for automatic model selection. */
 @added(Versions.v2026_11_01)
 union AiGatewayAllowedRequestOverride {
   string,
@@ -49,6 +49,9 @@ union AiGatewayAllowedRequestOverride {
 
   /** Allow overriding the selection objective. */
   Objective: "objective",
+
+  /** Enable chat function-tool compatibility filtering without granting either override. */
+  FilterModelsForToolCompatibility: "filterModelsForToolCompatibility",
 }
 
 /** Stateless backend preference using an existing caller session key. */
@@ -73,7 +76,7 @@ model AiGatewayModelSelection {
   /** Configured quality/cost objective. */
   objective: AiGatewayModelSelectionObjective;
 
-  /** Permitted per-request overrides. */
+  /** Allowed per-request behaviors. Omitting the property or sending an empty array denies overrides and disables function-tool compatibility filtering. */
   allowedRequestOverrides?: AiGatewayAllowedRequestOverride[];
 }
 
@@ -85,14 +88,14 @@ model AiGatewayModelSelectionUpdate
 /** An ordered failure rule for an AI Gateway alias. */
 @added(Versions.v2026_11_01)
 model AiGatewayAliasFailureRule {
-  /** Boolean @cel(...) expression evaluated against the current routing failure. */
+  @doc("Boolean @cel(...) expression evaluated against the current routing failure.")
   when: string;
 
   /** Maximum additional attempts on the same backend; defaults to zero. */
   @minValue(0)
   retryAttempts?: int32;
 
-  /** Optional ISO 8601 duration or duration-valued @cel(...) expression for excluding the failed backend. */
+  @doc("Optional ISO 8601 duration or duration-valued @cel(...) expression for excluding the failed backend.")
   excludeFor?: string;
 }
 
@@ -118,7 +121,7 @@ model AiGatewayAliasTarget {
   @minLength(1)
   selectorModelName?: string;
 
-  /** Optional Boolean CEL expression wrapped in @cel(...) controlling eligibility for new backend selections. */
+  @doc("Optional Boolean CEL expression wrapped in @cel(...) controlling eligibility for new backend selections.")
   when?: string;
 
   /** Routing priority. Lower values are preferred; the effective default is zero. */

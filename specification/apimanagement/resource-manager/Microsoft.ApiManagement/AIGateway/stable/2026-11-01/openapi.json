@@ -1814,6 +1814,9 @@
           }
         },
         "x-ms-examples": {
+          "Create an AI Gateway alias with automatic model selection and failover": {
+            "$ref": "./examples/AiGatewayAliasCreateAutoModelSelection.json"
+          },
           "Create or update an AI Gateway Alias": {
             "$ref": "./examples/AiGatewayAliasCreate.json"
           }
@@ -4138,7 +4141,7 @@
       "properties": {
         "when": {
           "type": "string",
-          "description": "Boolean"
+          "description": "Boolean @cel(...) expression evaluated against the current routing failure."
         },
         "retryAttempts": {
           "type": "integer",
@@ -4148,7 +4151,7 @@
         },
         "excludeFor": {
           "type": "string",
-          "description": "Optional ISO 8601 duration or duration-valued"
+          "description": "Optional ISO 8601 duration or duration-valued @cel(...) expression for excluding the failed backend."
         }
       },
       "required": [
@@ -4161,7 +4164,7 @@
       "properties": {
         "when": {
           "type": "string",
-          "description": "Boolean"
+          "description": "Boolean @cel(...) expression evaluated against the current routing failure."
         },
         "retryAttempts": {
           "type": "integer",
@@ -4171,7 +4174,7 @@
         },
         "excludeFor": {
           "type": "string",
-          "description": "Optional ISO 8601 duration or duration-valued"
+          "description": "Optional ISO 8601 duration or duration-valued @cel(...) expression for excluding the failed backend."
         }
       }
     },
@@ -4358,7 +4361,7 @@
         },
         "when": {
           "type": "string",
-          "description": "Optional Boolean CEL expression wrapped in"
+          "description": "Optional Boolean CEL expression wrapped in @cel(...) controlling eligibility for new backend selections."
         },
         "priority": {
           "type": "integer",
@@ -4405,7 +4408,7 @@
         },
         "when": {
           "type": "string",
-          "description": "Optional Boolean CEL expression wrapped in"
+          "description": "Optional Boolean CEL expression wrapped in @cel(...) controlling eligibility for new backend selections."
         },
         "priority": {
           "type": "integer",
@@ -4497,10 +4500,11 @@
     },
     "AiGatewayAllowedRequestOverride": {
       "type": "string",
-      "description": "Request field permitted to override automatic model selection.",
+      "description": "Per-request behavior allowed for automatic model selection.",
       "enum": [
         "model",
-        "objective"
+        "objective",
+        "filterModelsForToolCompatibility"
       ],
       "x-ms-enum": {
         "name": "AiGatewayAllowedRequestOverride",
@@ -4515,6 +4519,11 @@
             "name": "Objective",
             "value": "objective",
             "description": "Allow overriding the selection objective."
+          },
+          {
+            "name": "FilterModelsForToolCompatibility",
+            "value": "filterModelsForToolCompatibility",
+            "description": "Enable chat function-tool compatibility filtering without granting either override."
           }
         ]
       }
@@ -5628,7 +5637,7 @@
         },
         "allowedRequestOverrides": {
           "type": "array",
-          "description": "Permitted per-request overrides.",
+          "description": "Allowed per-request behaviors. Omitting the property or sending an empty array denies overrides and disables function-tool compatibility filtering.",
           "items": {
             "$ref": "#/definitions/AiGatewayAllowedRequestOverride"
           }
@@ -5678,7 +5687,7 @@
         },
         "allowedRequestOverrides": {
           "type": "array",
-          "description": "Permitted per-request overrides.",
+          "description": "Allowed per-request behaviors. Omitting the property or sending an empty array denies overrides and disables function-tool compatibility filtering.",
           "items": {
             "$ref": "#/definitions/AiGatewayAllowedRequestOverride"
           }

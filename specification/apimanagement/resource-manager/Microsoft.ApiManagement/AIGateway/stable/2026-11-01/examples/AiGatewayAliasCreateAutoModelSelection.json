@@ -1,0 +1,166 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default",
+    "aliasId": "chat-router",
+    "resource": {
+      "properties": {
+        "aliasName": "chat-router",
+        "description": "Chat alias with automatic model selection and failover",
+        "backendModels": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/foundry-provider/models/gpt-4o",
+            "selectorModelName": "gpt-4o",
+            "priority": 0,
+            "weight": 1
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/foundry-provider/models/gpt-4o-mini",
+            "selectorModelName": "gpt-4o-mini",
+            "priority": 0,
+            "weight": 1
+          }
+        ],
+        "selectionOrder": [
+          "autoModelSelection",
+          "priority"
+        ],
+        "autoModelSelection": {
+          "objective": "Balanced",
+          "allowedRequestOverrides": [
+            "model",
+            "objective",
+            "filterModelsForToolCompatibility"
+          ]
+        },
+        "failures": [
+          {
+            "when": "@cel(response != null && response.status_code in [429, 500, 503])",
+            "retryAttempts": 1,
+            "excludeFor": "PT30S"
+          }
+        ],
+        "maxRetryAttempts": 2
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/aliases/chat-router",
+        "name": "chat-router",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/aliases",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "aliasName": "chat-router",
+          "description": "Chat alias with automatic model selection and failover",
+          "backendModels": [
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/foundry-provider/models/gpt-4o",
+              "selectorModelName": "gpt-4o",
+              "priority": 0,
+              "weight": 1
+            },
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/foundry-provider/models/gpt-4o-mini",
+              "selectorModelName": "gpt-4o-mini",
+              "priority": 0,
+              "weight": 1
+            }
+          ],
+          "selectionOrder": [
+            "autoModelSelection",
+            "priority"
+          ],
+          "autoModelSelection": {
+            "objective": "Balanced",
+            "allowedRequestOverrides": [
+              "model",
+              "objective",
+              "filterModelsForToolCompatibility"
+            ]
+          },
+          "failures": [
+            {
+              "when": "@cel(response != null && response.status_code in [429, 500, 503])",
+              "retryAttempts": 1,
+              "excludeFor": "PT30S"
+            }
+          ],
+          "maxRetryAttempts": 2,
+          "supportedEndpoints": [
+            "openai/v1/chat/completions"
+          ],
+          "gatewayEndpoints": [
+            {
+              "url": "https://example-gateway.azure-api.net/default/models/openai/v1/chat/completions",
+              "baseUrl": "https://example-gateway.azure-api.net/default/models/openai/v1",
+              "api": "v1/chat/completions"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/aliases/chat-router",
+        "name": "chat-router",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/aliases",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "aliasName": "chat-router",
+          "description": "Chat alias with automatic model selection and failover",
+          "backendModels": [
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/foundry-provider/models/gpt-4o",
+              "selectorModelName": "gpt-4o",
+              "priority": 0,
+              "weight": 1
+            },
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/foundry-provider/models/gpt-4o-mini",
+              "selectorModelName": "gpt-4o-mini",
+              "priority": 0,
+              "weight": 1
+            }
+          ],
+          "selectionOrder": [
+            "autoModelSelection",
+            "priority"
+          ],
+          "autoModelSelection": {
+            "objective": "Balanced",
+            "allowedRequestOverrides": [
+              "model",
+              "objective",
+              "filterModelsForToolCompatibility"
+            ]
+          },
+          "failures": [
+            {
+              "when": "@cel(response != null && response.status_code in [429, 500, 503])",
+              "retryAttempts": 1,
+              "excludeFor": "PT30S"
+            }
+          ],
+          "maxRetryAttempts": 2,
+          "supportedEndpoints": [
+            "openai/v1/chat/completions"
+          ],
+          "gatewayEndpoints": [
+            {
+              "url": "https://example-gateway.azure-api.net/default/models/openai/v1/chat/completions",
+              "baseUrl": "https://example-gateway.azure-api.net/default/models/openai/v1",
+              "api": "v1/chat/completions"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayAliasResources_CreateOrUpdate",
+  "title": "Create an AI Gateway alias with automatic model selection and failover"
+}
