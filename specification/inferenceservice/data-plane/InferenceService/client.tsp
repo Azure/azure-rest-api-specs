@@ -48,3 +48,16 @@ using Azure.Data.AI;
 @@clientName(MultimodalEmbeddingData, "MultimodalEmbeddingItem", "csharp");
 @@clientName(EmbeddingContentItem.url, "uri", "csharp");
 @@clientName(MultimodalEmbeddingOutput.url, "uri", "csharp");
+@@clientName(
+  InferenceOperationGroup.multiModalEmbed,
+  "getMultimodalEmbeddings",
+  "csharp"
+);
+@@clientName(
+  MultimodalEmbeddingContent.maxNumVectors,
+  "maxVectorCount",
+  "csharp"
+);
+@@clientName(MultimodalEmbeddingOutput.records, "recordCount", "csharp");
+@@clientName(MultimodalEmbeddingWarning.number, "codeNumber", "csharp");
+@@access(MultimodalEmbeddingResult.object, Access.internal, "csharp");
