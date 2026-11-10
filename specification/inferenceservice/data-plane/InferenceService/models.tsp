@@ -353,9 +353,9 @@ union EmbeddingDelivery {
   Link: "link",
 }
 
-/** The input for a multimodal embedding operation. */
+/** The input for an embedding operation. */
 @added(Versions.v2026_11_01_preview)
-model MultimodalEmbeddingContent {
+model EmbeddingContent {
   /**
    * The items to embed, in order: 1 to 32 items. Currently a request can have at most one `text` or `query` item and
    * at most 8 images. Images can be up to 20 MiB and 50 megapixels each (JPEG, PNG, GIF or WebP), with at most 20 MiB
@@ -562,9 +562,9 @@ model MultimodalEmbeddingUsage {
   visualTokens?: int64;
 }
 
-/** The result of a multimodal embedding operation. */
+/** The result of an embedding operation. */
 @added(Versions.v2026_11_01_preview)
-model MultimodalEmbeddingResult {
+model EmbeddingResult {
   /** The object type, always `list`. */
   object: "list";
 
@@ -666,18 +666,18 @@ model MultimodalEmbeddingWarning {
   message: string;
 }
 
-/** A successful multimodal embedding response. */
+/** A successful embedding response. */
 @added(Versions.v2026_11_01_preview)
-model MultimodalEmbeddingOperationResult {
+model EmbeddingOperationResult {
   ...CorrelatedResponseHeaders;
 
   /** The HTTP status code. */
   @statusCode
   statusCode: 200;
 
-  /** The multimodal embedding result. */
+  /** The embedding result. */
   @bodyRoot
-  result: MultimodalEmbeddingResult;
+  result: EmbeddingResult;
 }
 
 /**

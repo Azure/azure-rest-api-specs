@@ -35,11 +35,11 @@ interface InferenceOperationGroup {
   @added(Versions.v2026_11_01_preview)
   @route("/inference/embedding")
   @post
-  multiModalEmbed is Azure.Core.RpcOperation<
+  embed is Azure.Core.RpcOperation<
     {
-      ...MultimodalEmbeddingContent;
+      ...EmbeddingContent;
     },
-    MultimodalEmbeddingOperationResult,
+    EmbeddingOperationResult,
     {},
     EmbeddingOperationError
   >;

@@ -10,7 +10,7 @@ using Azure.Data.AI;
 @@clientName(DocumentType, "SemanticRerankingDocumentType");
 
 @@clientLocation(InferenceOperationGroup.semanticRerank, Azure.Data.AI);
-@@clientLocation(InferenceOperationGroup.multiModalEmbed, Azure.Data.AI);
+@@clientLocation(InferenceOperationGroup.embed, Azure.Data.AI);
 
 // These are Milliseconds-encoded elapsed times, so a "Time" suffix reads as a point
 // in time rather than a duration (most visible in .NET, where they map to TimeSpan).
@@ -49,23 +49,11 @@ using Azure.Data.AI;
 @@clientName(EmbeddingContentItem, "EmbeddingsInputContent", "csharp");
 @@clientName(EmbeddingContentItem.url, "uri", "csharp");
 @@clientName(MultimodalEmbeddingOutput.url, "uri", "csharp");
-@@clientName(
-  InferenceOperationGroup.multiModalEmbed,
-  "getEmbeddings",
-  "csharp, python"
-);
+@@clientName(InferenceOperationGroup.embed, "getEmbeddings", "csharp, python");
 // Python accepts plain dictionaries for input items without changing the REST
 // schema or the typed .NET input model.
-@@alternateType(
-  MultimodalEmbeddingContent.contents,
-  Record<unknown>[],
-  "python"
-);
-@@clientName(
-  MultimodalEmbeddingContent.maxNumVectors,
-  "maxVectorCount",
-  "csharp"
-);
+@@alternateType(EmbeddingContent.contents, Record<unknown>[], "python");
+@@clientName(EmbeddingContent.maxNumVectors, "maxVectorCount", "csharp");
 @@clientName(MultimodalEmbeddingOutput.records, "recordCount", "csharp");
 @@clientName(MultimodalEmbeddingWarning.number, "codeNumber", "csharp");
-@@scope(MultimodalEmbeddingResult.object, "!csharp");
+@@scope(EmbeddingResult.object, "!csharp");

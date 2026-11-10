@@ -65,7 +65,7 @@
   "paths": {
     "/inference/embedding": {
       "post": {
-        "operationId": "MultiModalEmbed",
+        "operationId": "Embed",
         "description": "Embeds text, queries and document images and returns dense or multi-vector embeddings as numbers or base64. Text\nand queries are sent inline. Images are read from the caller's Azure Blob Storage with a caller-signed user\ndelegation SAS (Microsoft Entra callers only). Results come back in the response or, with `delivery: link`, as a\ntime-limited read-only link.",
         "parameters": [
           {
@@ -76,7 +76,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MultimodalEmbeddingContent"
+              "$ref": "#/definitions/EmbeddingContent"
             }
           }
         ],
@@ -84,7 +84,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/MultimodalEmbeddingResult"
+              "$ref": "#/definitions/EmbeddingResult"
             },
             "headers": {
               "X-Correlation-ID": {
@@ -415,6 +415,66 @@
         "error"
       ]
     },
+    "EmbeddingContent": {
+      "type": "object",
+      "description": "The input for an embedding operation.",
+      "properties": {
+        "contents": {
+          "type": "array",
+          "description": "The items to embed, in order: 1 to 32 items. Currently a request can have at most one `text` or `query` item and\nat most 8 images. Images can be up to 20 MiB and 50 megapixels each (JPEG, PNG, GIF or WebP), with at most 20 MiB\nof images per request. The request body can be up to 30,000,000 bytes.",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/definitions/EmbeddingContentItem"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use. Defaults to `microsoft-embedding-1-large` (Microsoft Embedding 1-large)."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The model version. Defaults to the latest; the response always names the version used."
+        },
+        "vectorKind": {
+          "$ref": "#/definitions/EmbeddingVectorKind",
+          "description": "The kind of vectors to return. Defaults to `dense`."
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of dimensions per vector; with `dense_multi`, of the dense vector. Must be a value the model supports for the\nrequested vector kind; the model's native width is the default.",
+          "minimum": 1
+        },
+        "multiDimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For `dense_multi` only: the number of dimensions per multi-vector. Must be a value the model supports for multi-vectors;\nthe model's native multi-vector width is the default.",
+          "minimum": 1
+        },
+        "maxNumVectors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For `multi` and `dense_multi` only: the most multi-vectors to return per item.",
+          "minimum": 1
+        },
+        "outputDataKind": {
+          "$ref": "#/definitions/EmbeddingOutputDataKind",
+          "description": "The numeric type of the returned values, for every vector in the response. Defaults to `float32` for `dense` and\n`float16` for `multi` and `dense_multi`."
+        },
+        "encodingFormat": {
+          "$ref": "#/definitions/EmbeddingEncodingFormat",
+          "description": "How vectors are encoded in the response. Defaults to `float`."
+        },
+        "delivery": {
+          "$ref": "#/definitions/EmbeddingDelivery",
+          "description": "How to return the results. An explicit value wins. Without it, a request with images gets `link` where the\nendpoint has a result store, and every other request gets `inline`."
+        }
+      },
+      "required": [
+        "contents"
+      ]
+    },
     "EmbeddingContentItem": {
       "type": "object",
       "description": "One item to embed: its `kind`, an optional `id`, and exactly one source: `content`, or `url` with `sasToken`.",
@@ -589,6 +649,19 @@
       }
     },
     "EmbeddingOperationError": {},
+    "EmbeddingOperationResult": {
+      "type": "object",
+      "description": "A successful embedding response.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/EmbeddingResult",
+          "description": "The embedding result."
+        }
+      },
+      "required": [
+        "result"
+      ]
+    },
     "EmbeddingOutputDataKind": {
       "type": "string",
       "description": "The numeric type of the returned vector values.",
@@ -624,6 +697,64 @@
       },
       "required": [
         "error"
+      ]
+    },
+    "EmbeddingResult": {
+      "type": "object",
+      "description": "The result of an embedding operation.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, always `list`.",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The name of the model that produced the vectors."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The model version that produced the vectors. Pin it to keep an index stable."
+        },
+        "outputDataKind": {
+          "$ref": "#/definitions/EmbeddingOutputDataKind",
+          "description": "The numeric type of the returned values."
+        },
+        "data": {
+          "type": "array",
+          "description": "One entry per item in `contents`, in request order. Empty when `output` is present.",
+          "items": {
+            "$ref": "#/definitions/MultimodalEmbeddingData"
+          }
+        },
+        "usage": {
+          "$ref": "#/definitions/MultimodalEmbeddingUsage",
+          "description": "Usage for the operation."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Things to know about a successful response, such as truncated items. Omitted when there are none.",
+          "items": {
+            "$ref": "#/definitions/MultimodalEmbeddingWarning"
+          }
+        },
+        "output": {
+          "$ref": "#/definitions/MultimodalEmbeddingOutput",
+          "description": "With `delivery: link`: where to read the results."
+        }
+      },
+      "required": [
+        "object",
+        "model",
+        "modelVersion",
+        "outputDataKind",
+        "data",
+        "usage"
       ]
     },
     "EmbeddingServiceUnavailableResult": {
@@ -786,66 +917,6 @@
       ],
       "x-ms-discriminator-value": "dense"
     },
-    "MultimodalEmbeddingContent": {
-      "type": "object",
-      "description": "The input for a multimodal embedding operation.",
-      "properties": {
-        "contents": {
-          "type": "array",
-          "description": "The items to embed, in order: 1 to 32 items. Currently a request can have at most one `text` or `query` item and\nat most 8 images. Images can be up to 20 MiB and 50 megapixels each (JPEG, PNG, GIF or WebP), with at most 20 MiB\nof images per request. The request body can be up to 30,000,000 bytes.",
-          "minItems": 1,
-          "maxItems": 32,
-          "items": {
-            "$ref": "#/definitions/EmbeddingContentItem"
-          }
-        },
-        "model": {
-          "type": "string",
-          "description": "The model to use. Defaults to `microsoft-embedding-1-large` (Microsoft Embedding 1-large)."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "The model version. Defaults to the latest; the response always names the version used."
-        },
-        "vectorKind": {
-          "$ref": "#/definitions/EmbeddingVectorKind",
-          "description": "The kind of vectors to return. Defaults to `dense`."
-        },
-        "dimensions": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of dimensions per vector; with `dense_multi`, of the dense vector. Must be a value the model supports for the\nrequested vector kind; the model's native width is the default.",
-          "minimum": 1
-        },
-        "multiDimensions": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For `dense_multi` only: the number of dimensions per multi-vector. Must be a value the model supports for multi-vectors;\nthe model's native multi-vector width is the default.",
-          "minimum": 1
-        },
-        "maxNumVectors": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For `multi` and `dense_multi` only: the most multi-vectors to return per item.",
-          "minimum": 1
-        },
-        "outputDataKind": {
-          "$ref": "#/definitions/EmbeddingOutputDataKind",
-          "description": "The numeric type of the returned values, for every vector in the response. Defaults to `float32` for `dense` and\n`float16` for `multi` and `dense_multi`."
-        },
-        "encodingFormat": {
-          "$ref": "#/definitions/EmbeddingEncodingFormat",
-          "description": "How vectors are encoded in the response. Defaults to `float`."
-        },
-        "delivery": {
-          "$ref": "#/definitions/EmbeddingDelivery",
-          "description": "How to return the results. An explicit value wins. Without it, a request with images gets `link` where the\nendpoint has a result store, and every other request gets `inline`."
-        }
-      },
-      "required": [
-        "contents"
-      ]
-    },
     "MultimodalEmbeddingData": {
       "type": "object",
       "description": "The result for one item, in request order. `kind` says which vectors it holds: `dense` (`MultimodalDenseEmbedding`),\n`multi` (`MultimodalMultiVectorEmbedding`) or `dense_multi` (`MultimodalDenseAndMultiVectorEmbedding`).",
@@ -908,19 +979,6 @@
         "kind"
       ]
     },
-    "MultimodalEmbeddingOperationResult": {
-      "type": "object",
-      "description": "A successful multimodal embedding response.",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/MultimodalEmbeddingResult",
-          "description": "The multimodal embedding result."
-        }
-      },
-      "required": [
-        "result"
-      ]
-    },
     "MultimodalEmbeddingOutput": {
       "type": "object",
       "description": "A `delivery: link` result: a JSON file with the complete response (the same body as an inline response, including\n`data`), readable with `sasToken` until `expiresAt`.",
@@ -974,64 +1032,6 @@
         "sizeInBytes",
         "sha256",
         "contentType"
-      ]
-    },
-    "MultimodalEmbeddingResult": {
-      "type": "object",
-      "description": "The result of a multimodal embedding operation.",
-      "properties": {
-        "object": {
-          "type": "string",
-          "description": "The object type, always `list`.",
-          "enum": [
-            "list"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "model": {
-          "type": "string",
-          "description": "The name of the model that produced the vectors."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "The model version that produced the vectors. Pin it to keep an index stable."
-        },
-        "outputDataKind": {
-          "$ref": "#/definitions/EmbeddingOutputDataKind",
-          "description": "The numeric type of the returned values."
-        },
-        "data": {
-          "type": "array",
-          "description": "One entry per item in `contents`, in request order. Empty when `output` is present.",
-          "items": {
-            "$ref": "#/definitions/MultimodalEmbeddingData"
-          }
-        },
-        "usage": {
-          "$ref": "#/definitions/MultimodalEmbeddingUsage",
-          "description": "Usage for the operation."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Things to know about a successful response, such as truncated items. Omitted when there are none.",
-          "items": {
-            "$ref": "#/definitions/MultimodalEmbeddingWarning"
-          }
-        },
-        "output": {
-          "$ref": "#/definitions/MultimodalEmbeddingOutput",
-          "description": "With `delivery: link`: where to read the results."
-        }
-      },
-      "required": [
-        "object",
-        "model",
-        "modelVersion",
-        "outputDataKind",
-        "data",
-        "usage"
       ]
     },
     "MultimodalEmbeddingUsage": {
