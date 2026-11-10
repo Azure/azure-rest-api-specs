@@ -265,9 +265,9 @@ using Commvault.ContentStore;
   "csharp"
 );
 @@clientName(RestorePoints, "ProtectedItemRestorePoints", "csharp");
-@@clientName(VmInfo, "CommvaultVirtualMachineRestoreSettings", "csharp");
-@@clientName(VmListItem, "CommvaultVirtualMachineReference", "csharp");
-@@clientName(VmTag, "CommvaultVirtualMachineTag", "csharp");
+@@clientName(VmInfo, "CommvaultVmRestoreSettings", "csharp");
+@@clientName(VmListItem, "CommvaultVmReference", "csharp");
+@@clientName(VmTag, "CommvaultVmTag", "csharp");
 @@clientName(WeeklyDays, "CommvaultScheduleDayOfWeek", "csharp");
 
 @@clientName(
@@ -288,7 +288,7 @@ using Commvault.ContentStore;
   "BackupConfiguration",
   "csharp"
 );
-@@clientName(BackupProtectionGroupRequest.vmList, "VirtualMachines", "csharp");
+@@clientName(BackupProtectionGroupRequest.vmList, "VmList", "csharp");
 @@clientName(
   ProtectionGroupProperties.resources,
   "ResourceSelection",
@@ -327,18 +327,17 @@ using Commvault.ContentStore;
   "ResourceGroupName",
   "csharp"
 );
-@@clientName(ProtectedItemProperties.vmGuid, "VirtualMachineGuid", "csharp");
-@@clientName(VmListItem.vmGuid, "VirtualMachineGuid", "csharp");
-@@clientName(VmInfo.sourceVmGuid, "SourceVirtualMachineGuid", "csharp");
-@@clientName(VmInfo.targetVmGuid, "TargetVirtualMachineGuid", "csharp");
+@@clientName(VmListItem.vmGuid, "VmGuid", "csharp");
+@@clientName(VmInfo.sourceVmGuid, "SourceVmGuid", "csharp");
+@@clientName(VmInfo.targetVmGuid, "TargetVmGuid", "csharp");
 @@clientName(VmInfo.resourceGroup, "ResourceGroupName", "csharp");
 @@clientName(VmInfo.networkId, "VirtualNetworkId", "csharp");
 @@clientName(
   RestoreProtectionItemRequest.vmDestinationInfo,
-  "VirtualMachineDestination",
+  "VmDestinationInfo",
   "csharp"
 );
-@@clientName(VmDestinationInfo.vmInfoList, "VirtualMachines", "csharp");
+@@clientName(VmDestinationInfo.vmInfoList, "VmInfoList", "csharp");
 @@clientName(RestoreProtectionItemRequest.toTime, "RestorePointTime", "csharp");
 @@clientName(LiftrBase.UserDetails.upn, "UserPrincipalName", "csharp");
 @@clientName(CloudAccountUserUpdate.upn, "UserPrincipalName", "csharp");
