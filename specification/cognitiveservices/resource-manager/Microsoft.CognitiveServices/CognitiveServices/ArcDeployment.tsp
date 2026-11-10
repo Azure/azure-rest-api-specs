@@ -20,6 +20,8 @@ namespace Microsoft.CognitiveServices;
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Account)
 model ArcDeployment is Azure.ResourceManager.ProxyResource<
   ArcDeploymentProperties,
@@ -54,6 +56,8 @@ alias ArcDeploymentCreateLroHeaders = ArmCombinedLroHeaders<
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface ArcDeployments {
   /**
@@ -121,6 +125,8 @@ interface ArcDeployments {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentProperties {
   /**
    * Model reference. Required on creation and immutable after creation.
@@ -144,7 +150,7 @@ model ArcDeploymentProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
-  @removed(Versions.v2026_11_15_preview)
+  @removed(Versions.v2026_11_01)
   @renamedFrom(Versions.v2026_11_15_preview, "runtime")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   legacyRuntime: ArcDeploymentRuntime;
@@ -162,7 +168,7 @@ model ArcDeploymentProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
-  @removed(Versions.v2026_11_15_preview)
+  @removed(Versions.v2026_11_01)
   @renamedFrom(Versions.v2026_11_15_preview, "compute")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   legacyCompute: ArcDeploymentComputeType;
@@ -248,6 +254,8 @@ model ArcDeploymentProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentUpdate {
   /**
    * Properties that can be updated on an Arc deployment.
@@ -261,6 +269,8 @@ model ArcDeploymentUpdate {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentUpdateProperties {
   /**
    * Physical replica count on the Arc cluster.
@@ -287,6 +297,8 @@ model ArcDeploymentUpdateProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentModel {
   /**
    * Deployment model format.
@@ -294,7 +306,7 @@ model ArcDeploymentModel {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
-  @removed(Versions.v2026_11_15_preview)
+  @removed(Versions.v2026_11_01)
   @renamedFrom(Versions.v2026_11_15_preview, "format")
   legacyFormat: string;
 
@@ -311,7 +323,7 @@ model ArcDeploymentModel {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
-  @removed(Versions.v2026_11_15_preview)
+  @removed(Versions.v2026_11_01)
   @renamedFrom(Versions.v2026_11_15_preview, "name")
   legacyName: string;
 
@@ -342,6 +354,8 @@ model ArcDeploymentModel {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union ArcDeploymentComputeType {
   string,
 
@@ -362,6 +376,8 @@ union ArcDeploymentComputeType {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union ArcDeploymentRuntime {
   string,
 
@@ -382,6 +398,8 @@ union ArcDeploymentRuntime {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentKubernetesResources {
   /**
    * Kubernetes CPU and memory resource requests for each deployment replica.
@@ -400,6 +418,8 @@ model ArcDeploymentKubernetesResources {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentPatchKubernetesResources {
   /**
    * Kubernetes CPU and memory resource requests for each deployment replica.
@@ -418,6 +438,8 @@ model ArcDeploymentPatchKubernetesResources {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentCpuMemoryResourceRequirements {
   /**
    * Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.
@@ -436,6 +458,8 @@ model ArcDeploymentCpuMemoryResourceRequirements {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentPatchCpuMemoryResourceRequirements {
   /**
    * Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.
@@ -455,6 +479,8 @@ model ArcDeploymentPatchCpuMemoryResourceRequirements {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentResourceRequirements {
   /**
    * Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.
@@ -482,6 +508,8 @@ model ArcDeploymentResourceRequirements {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentProvisioningDetails {
   /**
    * A human-readable status message from the last provisioning operation.
@@ -500,6 +528,8 @@ model ArcDeploymentProvisioningDetails {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentListResult {
   /**
    * The link used to get the next page of Arc deployments.
@@ -521,6 +551,8 @@ model ArcDeploymentListResult {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union ArcDeploymentSkuName {
   string,
 
@@ -536,6 +568,8 @@ union ArcDeploymentSkuName {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentSku {
   /**
    * The name of the Arc deployment SKU. Must be Arc.
@@ -549,6 +583,8 @@ model ArcDeploymentSku {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model ArcDeploymentVllmParameters {
   /**
    * Number of GPUs used for tensor parallelism.

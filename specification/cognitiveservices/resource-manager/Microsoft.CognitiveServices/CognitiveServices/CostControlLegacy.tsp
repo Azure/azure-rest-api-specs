@@ -18,8 +18,8 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_09_15_preview)
 @parentResource(Account)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControl")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControl")
 model LegacyCostControl
   is Azure.ResourceManager.ProxyResource<LegacyCostControlProperties> {
   ...ResourceNameParameter<
@@ -42,8 +42,8 @@ model LegacyCostControl
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources and the service contract does not expose provisioningState."
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlProperties")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlProperties")
 model LegacyCostControlProperties {
   /**
    * An optional human-readable name for the cost control.
@@ -64,8 +64,8 @@ model LegacyCostControlProperties {
  * The properties that can be changed on a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlPatchProperties")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlPatchProperties")
 model LegacyCostControlPatchProperties {
   /**
    * An optional human-readable name for the cost control. Set this property to null to clear it.
@@ -87,8 +87,8 @@ model LegacyCostControlPatchProperties {
  * The request used to update a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlPatch")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlPatch")
 model LegacyCostControlPatch {
   /**
    * The cost control properties to update.
@@ -102,8 +102,8 @@ model LegacyCostControlPatch {
  * Event Grid is required for alerts; supplied connection references must still be valid.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlConnections")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlConnections")
 model LegacyCostControlConnections {
   /**
    * Gets or sets the full resource ID of the optional Application Insights connection.
@@ -134,8 +134,8 @@ model LegacyCostControlConnections {
  * A cost limit and the population to which it applies.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlRule")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlRule")
 model LegacyCostControlRule {
   /**
    * The stable rule identifier, unique within the cost control without regard to case.
@@ -203,8 +203,8 @@ model LegacyCostControlRule {
  * Legacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlMatch")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlMatch")
 model LegacyCostControlMatch {
   /**
    * Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.
@@ -244,16 +244,16 @@ model LegacyCostControlMatch {
  */
 @added(Versions.v2026_09_15_preview)
 @minLength(1)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlMatchValue")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlMatchValue")
 scalar LegacyCostControlMatchValue extends string;
 
 /**
  * A request dimension used to partition cost control consumption.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlDimension")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlDimension")
 model LegacyCostControlDimension {
   /**
    * The kind of request dimension.
@@ -274,8 +274,8 @@ model LegacyCostControlDimension {
  * Cost control counter dimensions, including Custom retained for legacy read compatibility.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlDimensionType")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlDimensionType")
 union LegacyCostControlDimensionType {
   string,
 
@@ -315,8 +315,8 @@ union LegacyCostControlDimensionType {
  * The supported unit for cost control amounts and thresholds.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlUnit")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlUnit")
 union LegacyCostControlUnit {
   string,
 
@@ -330,8 +330,8 @@ union LegacyCostControlUnit {
  * Calendar-aligned UTC renewal periods, including legacy values retained for read compatibility.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlPeriod")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlPeriod")
 union LegacyCostControlPeriod {
   string,
 
@@ -364,8 +364,8 @@ union LegacyCostControlPeriod {
  * An action evaluated when cost control consumption reaches a threshold.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlThreshold")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlThreshold")
 model LegacyCostControlThreshold {
   /**
    * How the threshold value is interpreted.
@@ -390,8 +390,8 @@ model LegacyCostControlThreshold {
  * The supported threshold value interpretations.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlThresholdType")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlThresholdType")
 union LegacyCostControlThresholdType {
   string,
 
@@ -410,8 +410,8 @@ union LegacyCostControlThresholdType {
  * The supported actions when a threshold is reached.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlThresholdAction")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlThresholdAction")
 union LegacyCostControlThresholdAction {
   string,
 
@@ -435,8 +435,8 @@ union LegacyCostControlThresholdAction {
  * A page of cost controls.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlListResult")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlListResult")
 model LegacyCostControlListResult {
   /**
    * The link used to get the next page of cost controls.
@@ -456,8 +456,8 @@ model LegacyCostControlListResult {
  * Conditional request headers accepted when creating or replacing a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlCreateOrUpdateHeaders")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlCreateOrUpdateHeaders")
 model LegacyCostControlCreateOrUpdateHeaders {
   /**
    * Proceeds only when the current entity tag matches this value.
@@ -476,8 +476,8 @@ model LegacyCostControlCreateOrUpdateHeaders {
  * The conditional request header accepted when updating or deleting a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControlIfMatchHeader")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControlIfMatchHeader")
 model LegacyCostControlIfMatchHeader {
   /**
    * Proceeds only when the current entity tag matches this value.
@@ -502,8 +502,8 @@ alias LegacyCostControlEtagHeader = {
  */
 @added(Versions.v2026_09_15_preview)
 @armResourceOperations
-@removed(Versions.v2026_11_15_preview)
-@renamedFrom(Versions.v2026_11_15_preview, "CostControls")
+@removed(Versions.v2026_11_01)
+@renamedFrom(Versions.v2026_11_01, "CostControls")
 interface LegacyCostControls {
   /**
    * Gets a cost control.
