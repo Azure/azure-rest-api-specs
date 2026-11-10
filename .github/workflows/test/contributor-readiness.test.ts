@@ -325,6 +325,8 @@ describe("contributor readiness", () => {
     expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
     expect(f.core.summary.write).toHaveBeenCalledOnce();
     expect(f.core.summary.addRaw).not.toHaveBeenCalledWith(expect.stringContaining("<details>"));
+    expect(f.core.setOutput).toHaveBeenCalledWith("issue_number", pr.number);
+    expect(f.core.setOutput).toHaveBeenCalledWith("head_sha", pr.head.sha);
   });
 
   it("requires only Azure membership, not Microsoft membership", async () => {
@@ -355,6 +357,8 @@ describe("contributor readiness", () => {
       expect.stringContaining("No repository write access"),
     );
     expect(f.core.summary.write).toHaveBeenCalledOnce();
+    expect(f.core.setOutput).toHaveBeenCalledWith("issue_number", pr.number);
+    expect(f.core.setOutput).toHaveBeenCalledWith("head_sha", pr.head.sha);
   });
 
   it.each([null, {}])("reports an unavailable PR author as incomplete: %j", async (user) => {
@@ -703,6 +707,7 @@ describe("contributor readiness", () => {
       .mockResolvedValueOnce({ data: { ...pr, head: { sha: "b".repeat(40) } } });
     await expect(f.run()).rejects.toThrow("PR changed");
     expect(f.createCheck).not.toHaveBeenCalled();
+    expect(f.core.setOutput).not.toHaveBeenCalled();
   });
 
   it("skips closed PRs", async () => {

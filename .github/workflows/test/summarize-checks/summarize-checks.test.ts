@@ -336,6 +336,59 @@ describe("Summarize Checks Integration Tests", () => {
 });
 
 describe("Summarize Checks Unit Tests", () => {
+  it.each(["neutral", "success"])(
+    "uses the latest contributor-readiness result (%s) in merge guidance",
+    async (conclusion) => {
+      const github = createMockGithub();
+      const core = createMockCore();
+      github.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              name: "Contributor readiness",
+              status: "completed",
+              conclusion: "neutral",
+              completed_at: "2026-11-09T00:00:00Z",
+              html_url: "https://github.com/owner/repo/runs/old",
+            },
+            {
+              name: "Contributor readiness",
+              status: "completed",
+              conclusion,
+              completed_at: "2026-11-10T00:00:00Z",
+              html_url: "https://github.com/owner/repo/runs/current",
+            },
+          ],
+        },
+      });
+
+      const [required, fyi] = await getCheckRunTuple(
+        github,
+        core,
+        "owner",
+        "repo",
+        fullGitSha,
+        "main",
+        [],
+      );
+      const [comment, result] = createNextStepsComment(
+        core,
+        "repo",
+        [],
+        "main",
+        required,
+        fyi,
+        true,
+        WORKFLOW_URL,
+      );
+
+      expect(comment).toContain("https://github.com/owner/repo/runs/current");
+      expect(comment).not.toContain("https://github.com/owner/repo/runs/old");
+      expect(comment.includes("`/azsdk check-access`")).toBe(conclusion === "neutral");
+      expect(result.result).toBe("SUCCESS");
+    },
+  );
+
   it("preserves the latest provider URLs and keeps legacy pending statuses ambiguous", async () => {
     const github = createMockGithub();
     const core = createMockCore();
@@ -776,6 +829,51 @@ describe("Summarize Checks Unit Tests", () => {
         expect(comment.split("<details>")[0]).not.toContain("license/cla");
         expect(comment).not.toContain("Other outstanding requirements");
         expect(status.result).toBe("SUCCESS");
+      },
+    );
+
+    it.each([
+      { description: "otherwise met", required: [], result: "SUCCESS" },
+      {
+        description: "pending",
+        required: [run("TypeSpec Validation", "in_progress", null)],
+        result: "pending",
+      },
+      {
+        description: "blocked",
+        required: [run("TypeSpec Validation", "completed", "failure")],
+        result: "FAILURE",
+      },
+    ])(
+      "shows readiness findings as a visible warning when merge requirements are $description",
+      ({ required, result }) => {
+        const [comment, status] = summarize({
+          required,
+          fyi: [
+            run(
+              "Contributor readiness",
+              "completed",
+              "neutral",
+              "https://github.com/owner/repo/runs/readiness",
+            ),
+            run("Swagger LintDiff", "completed", "failure"),
+            run("Other neutral check", "completed", "neutral"),
+          ],
+        });
+        const visible = comment.split("<details>")[0];
+
+        expect(rows(comment)).toContainEqual([
+          "[Contributor readiness](<https://github.com/owner/repo/runs/readiness>)",
+          "Non-blocking",
+          "Open the access report, [set up / renew access](https://aka.ms/azsdk/access), then comment `/azsdk check-access`.",
+        ]);
+        expect(visible).toContain("Contributor readiness");
+        expect(visible).toMatch(/warning\.svg"[^>]*><\/picture> Non-blocking/);
+        expect(visible).not.toContain("Swagger LintDiff");
+        expect(comment).not.toContain("Other neutral check");
+        expect(comment).toContain("<summary>Non-blocking failures (1)</summary>");
+        expect(status.result).toBe(result);
+        expect(status.summary).not.toContain("soon");
       },
     );
 

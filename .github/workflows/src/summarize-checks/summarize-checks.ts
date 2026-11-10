@@ -42,6 +42,11 @@ import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
 import { commentOrUpdate } from "../comment.ts";
+import {
+  CONTRIBUTOR_ONBOARDING_URL,
+  CONTRIBUTOR_READINESS_CHECK_NAME,
+  CONTRIBUTOR_READINESS_COMMAND,
+} from "../contributor-readiness.ts";
 import { statusBadge, type CommentStatus } from "./comment-status.ts";
 import { buildSdkBreakingChangesSummary, hasSdkBreakingChanges } from "./sdk-breaking-changes.ts";
 import { extractInputs } from "../context.ts";
@@ -119,6 +124,7 @@ export type CheckRun = CheckRuns[0];
 
 // Placing these configuration items here until we decide another way to pull them in.
 const FYI_CHECK_NAMES = [
+  CONTRIBUTOR_READINESS_CHECK_NAME,
   "Swagger LintDiff",
   "SDK Validation Status",
   "Swagger BreakingChange",
@@ -917,7 +923,13 @@ export function createNextStepsComment(
     (run) => run.status.toLowerCase() !== "completed",
   );
 
-  const failingFyiChecks = fyiRuns.filter((run) => checkRunIsSuccessful(run) === false);
+  const failingFyiChecks = fyiRuns.filter(
+    (run) =>
+      checkRunIsSuccessful(run) === false ||
+      (run.name === CONTRIBUTOR_READINESS_CHECK_NAME &&
+        run.status.toLowerCase() === "completed" &&
+        run.conclusion?.toLowerCase() === "neutral"),
+  );
   const completedChecks = [...requiredRuns, ...fyiRuns].filter(
     (run) =>
       run.status.toLowerCase() === "completed" && run.conclusion?.toLowerCase() === "success",
@@ -1092,24 +1104,35 @@ function getCommentBody(
     ...buildFailingCheckSummaries(failingRequiredChecks, "required"),
     ...pendingRequirements,
   ];
-  const nonBlockingChecks = buildFailingCheckSummaries(failingFyiChecks, "FYI");
+  const readinessWarnings: RequirementSummary[] = failingFyiChecks
+    .filter((check) => check.name === CONTRIBUTOR_READINESS_CHECK_NAME)
+    .map((check) => ({
+      name: formatCheckName(check),
+      status: "warning",
+      nextStep: `Open the access report, ${link("set up / renew access", CONTRIBUTOR_ONBOARDING_URL)}, then comment ${inlineCode(CONTRIBUTOR_READINESS_COMMAND)}.`,
+    }));
+  const nonBlockingChecks = buildFailingCheckSummaries(
+    failingFyiChecks.filter((check) => check.name !== CONTRIBUTOR_READINESS_CHECK_NAME),
+    "FYI",
+  );
   const guidance = [...blockingRequirements, ...nonBlockingChecks]
     .filter((requirement) => requirement.guidance)
     .map((requirement) => section(requirement.name, requirement.guidance));
 
   const body: MarkdownDoc = [
     headline,
-    buildRequirementsTable(
-      blockingRequirements.length > 0
+    buildRequirementsTable([
+      ...(blockingRequirements.length > 0
         ? blockingRequirements
         : [
             {
               name: "Automated requirements",
-              status: "passed",
+              status: "passed" as const,
               nextStep: "Follow the merge process linked below.",
             },
-          ],
-    ),
+          ]),
+      ...readinessWarnings,
+    ]),
     nonBlockingChecks.length > 0
       ? details(`Warnings (${nonBlockingChecks.length})`, buildRequirementsTable(nonBlockingChecks))
       : undefined,
