@@ -81,6 +81,7 @@ enum Versions {
   /**
    * The latest preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Keep the published preview last to preserve its version projections while adding the GA."
   @previewVersion
   vLatestPreview: "2026-10-15-preview",
 }
