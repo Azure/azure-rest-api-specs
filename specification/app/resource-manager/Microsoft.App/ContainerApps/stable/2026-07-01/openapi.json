@@ -1323,7 +1323,7 @@
           {
             "name": "connectedEnvironmentName",
             "in": "path",
-            "description": "Name of the connected environment.",
+            "description": "Name of the connectedEnvironment.",
             "required": true,
             "type": "string"
           }
@@ -1373,7 +1373,7 @@
           {
             "name": "connectedEnvironmentName",
             "in": "path",
-            "description": "Name of the connected environment.",
+            "description": "Name of the connectedEnvironment.",
             "required": true,
             "type": "string"
           },
@@ -1508,7 +1508,7 @@
           {
             "name": "connectedEnvironmentName",
             "in": "path",
-            "description": "Name of the connected environment.",
+            "description": "Name of the connectedEnvironment.",
             "required": true,
             "type": "string"
           },
@@ -1577,7 +1577,7 @@
           {
             "name": "connectedEnvironmentName",
             "in": "path",
-            "description": "Name of the connected environment.",
+            "description": "Name of the connectedEnvironment.",
             "required": true,
             "type": "string"
           },
@@ -8644,9 +8644,10 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "Name of the Managed Environment.",
+            "description": "Name of the Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "managedCertificateName",
