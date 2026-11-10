@@ -210,7 +210,9 @@ export async function analyzeSdkProjects({
         ],
         azsdkOptions,
       );
-      console.log("breakingChangesStdout: " + breakingChangesStdout);
+      if (!forwardOutput) {
+        console.log("breakingChangesStdout: " + breakingChangesStdout);
+      }
       const breakingChangesResponse: AzsdkDetectBreakingChangeResponse =
         parseAzsdkResponse(breakingChangesStdout);
       if (
