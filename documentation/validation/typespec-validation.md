@@ -28,13 +28,16 @@ To ensure you see the same results from TypeSpecValidation in your PR check and 
    4. `pnpm tsv specification/contosowidgetmanager/Contoso.Management`
    5. `git status`
    6. If any changes, `git add`, `git commit`, `git push` to update your PR.
+
+  Unexpected generated Swagger or example differences are commonly caused by either:
+
+  - running `pnpm tsv <folder>` before synchronizing the PR branch with its base branch; or
+  - changing TypeSpec source or examples without rerunning `pnpm tsv <folder>` and committing the generated files.
+
+  Synchronize your PR branch with the base branch, rerun `pnpm tsv <folder>`, and review the generated changes. If the changes are expected, commit and push them to your PR branch.
+
 3. If you are still having problems, try cloning your branch to a new folder, or try on another machine.
 4. If the problem can be reproduced on a clean machine, request assistance from the [TypeSpec Discussion](https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47) teams channel.
-
-> [!TIP]
-> If `pnpm tsv <folder>` reports unexpected generated Swagger or example changes, run `pnpm tsp compile .` from the TypeSpec project folder to isolate the source of the difference.
->
-> If direct compilation reproduces the same output, inspect the TypeSpec definitions, source examples, compilation inputs, and compiler behavior. If the difference appears only when running `tsv`, investigate the validation wrapper, comparison baseline, and repository workflow instead. Examples must be updated in the TypeSpec source location rather than edited only in the generated Swagger destination.
 
 # Examples Source and Destination
 If you are having problems with diffs from "tsp compile" related to examples, ensure you understand how examples flow from source to destination.
