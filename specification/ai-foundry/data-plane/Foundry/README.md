@@ -24,6 +24,14 @@ model MyNewPreviewModel {
 The models.tsp files associated with OpenAI routes `openai/responses`, `"openai/conversations` and `openai/evals` should not have
 these decorators. The interfaces using those will have the appropriate decorators.
 
+### OpenAI-style Skills routes
+
+Skills operations under `/openai/v1/skills` use `OpenAIOperation`, matching
+the project-level Responses and Files APIs. The version is in the path;
+these operations must not add an `api-version` query parameter.
+Use `FoundryDataPlaneOperation` only for operations that require query-based
+API versioning.
+
 ### Compiling and sending a PR
 
 Before you send a PR for changes in this folder, do the following:

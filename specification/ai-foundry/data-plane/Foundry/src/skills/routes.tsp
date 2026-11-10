@@ -7,7 +7,8 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Skills use OpenAI path versioning."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Skills follow the OpenAI API contract."
 @tag("Skills")
 interface Skills {
   /**
@@ -16,7 +17,7 @@ interface Skills {
   @summary("Retrieve a skill")
   @get
   @route("/openai/v1/skills/{name}")
-  getSkill is FoundryDataPlaneOperation<GetSkillRequest, Skill>;
+  getSkill is OpenAIOperation<GetSkillRequest, Skill>;
 
   /**
    * Returns the skills available in the current project.
@@ -24,10 +25,7 @@ interface Skills {
   @summary("List skills")
   @route("/openai/v1/skills")
   @list
-  listSkills is FoundryDataPlaneOperation<
-    ListSkillsRequest,
-    AgentsPagedResult<Skill>
-  >;
+  listSkills is OpenAIOperation<ListSkillsRequest, AgentsPagedResult<Skill>>;
 
   /**
    * Modifies the specified skill's configuration.
@@ -37,7 +35,7 @@ interface Skills {
   @operationId("updateSkill")
   @post
   @route("/openai/v1/skills/{name}")
-  updateSkill is FoundryDataPlaneOperation<UpdateSkillRequest, Skill>;
+  updateSkill is OpenAIOperation<UpdateSkillRequest, Skill>;
 
   /**
    * Removes the specified skill and its associated versions.
@@ -46,10 +44,7 @@ interface Skills {
   @summary("Delete a skill")
   @delete
   @route("/openai/v1/skills/{name}")
-  deleteSkill is FoundryDataPlaneOperation<
-    DeleteSkillRequest,
-    DeleteSkillResponse
-  >;
+  deleteSkill is OpenAIOperation<DeleteSkillRequest, DeleteSkillResponse>;
 
   // ── Versioned Skill Operations ────────────────────────
 
@@ -67,7 +62,7 @@ interface Skills {
     "x-ms-description-override",
     "Creates a new version of a skill. If the skill does not exist, it will be created."
   )
-  createSkillVersion is FoundryDataPlaneOperation<
+  createSkillVersion is OpenAIOperation<
     CreateSkillVersionRequest,
     SkillVersion
   >;
@@ -82,7 +77,7 @@ interface Skills {
   @post
   @route("/openai/v1/skills/{name}/versions")
   @sharedRoute
-  createSkillVersionFromFiles is FoundryDataPlaneOperation<
+  createSkillVersionFromFiles is OpenAIOperation<
     {
       @doc("The public ID of an existing skill, or the skill name when creating a new skill.")
       @path
@@ -106,7 +101,7 @@ interface Skills {
   @get
   @list
   @route("/openai/v1/skills/{name}/versions")
-  listSkillVersions is FoundryDataPlaneOperation<
+  listSkillVersions is OpenAIOperation<
     ListSkillVersionsRequest,
     AgentsPagedResult<SkillVersion>
   >;
@@ -119,10 +114,7 @@ interface Skills {
   @operationId("getSkillVersion")
   @get
   @route("/openai/v1/skills/{name}/versions/{version}")
-  getSkillVersion is FoundryDataPlaneOperation<
-    GetSkillVersionRequest,
-    SkillVersion
-  >;
+  getSkillVersion is OpenAIOperation<GetSkillVersionRequest, SkillVersion>;
 
   /**
    * Downloads the zip content for the default version of a skill.
@@ -132,7 +124,7 @@ interface Skills {
   @operationId("getSkillContent")
   @get
   @route("/openai/v1/skills/{name}/content")
-  getSkillContent is FoundryDataPlaneOperation<
+  getSkillContent is OpenAIOperation<
     GetSkillContentRequest,
     DownloadSkillResponse
   >;
@@ -145,7 +137,7 @@ interface Skills {
   @operationId("getSkillVersionContent")
   @get
   @route("/openai/v1/skills/{name}/versions/{version}/content")
-  getSkillVersionContent is FoundryDataPlaneOperation<
+  getSkillVersionContent is OpenAIOperation<
     GetSkillVersionContentRequest,
     DownloadSkillResponse
   >;
@@ -158,7 +150,7 @@ interface Skills {
   @operationId("deleteSkillVersion")
   @delete
   @route("/openai/v1/skills/{name}/versions/{version}")
-  deleteSkillVersion is FoundryDataPlaneOperation<
+  deleteSkillVersion is OpenAIOperation<
     DeleteSkillVersionRequest,
     DeleteSkillVersionResponse
   >;
