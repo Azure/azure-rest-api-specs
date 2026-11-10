@@ -50,6 +50,7 @@ jobs:
       # PR conversation comments need pull-request write access, despite using the Issues API.
       pull-requests: write
       checks: write
+      actions: write # Delete stale SHA handoffs when rerunning this workflow.
     steps:
       # Never check out or execute PR code, including when refreshing a fork review.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

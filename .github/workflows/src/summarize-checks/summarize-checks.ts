@@ -395,6 +395,7 @@ export async function summarizeChecksImpl(
     head_sha,
     targetBranch,
     EXCLUDED_CHECK_NAMES,
+    issue_number,
   );
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
@@ -654,6 +655,7 @@ export function getRequiredChecksFromBranchRuleOutput(
  * @param repo - The repository name.
  * @param head_sha - The commit SHA to check.
  * @param targetBranch - The current target branch of the pull request.
+ * @param issue_number - The PR whose contributor-readiness result should be summarized.
  */
 export async function getCheckRunTuple(
   github: GitHub,
@@ -663,6 +665,7 @@ export async function getCheckRunTuple(
   head_sha: string,
   targetBranch: string,
   excludedCheckNames: string[],
+  issue_number: number,
 ): Promise<
   [CheckRunData[], CheckRunData[], import("./labelling.ts").ImpactAssessment | undefined]
 > {
@@ -675,12 +678,33 @@ export async function getCheckRunTuple(
 
   let impactAssessment: import("./labelling.ts").ImpactAssessment | undefined = undefined;
 
-  const allCheckRuns = await github.paginate(github.rest.checks.listForRef, {
+  let allCheckRuns: CheckRun[] = await github.paginate(github.rest.checks.listForRef, {
     owner: owner,
     repo: repo,
     ref: head_sha,
     per_page: PER_PAGE_MAX,
   });
+  const readinessExternalId = `contributor-readiness:${issue_number}`;
+  if (
+    allCheckRuns.some(
+      (check) =>
+        check.name === CONTRIBUTOR_READINESS_CHECK_NAME &&
+        check.external_id !== readinessExternalId,
+    )
+  ) {
+    const readinessHistory = await github.paginate(github.rest.checks.listForRef, {
+      owner,
+      repo,
+      ref: head_sha,
+      check_name: CONTRIBUTOR_READINESS_CHECK_NAME,
+      filter: "all",
+      per_page: PER_PAGE_MAX,
+    });
+    allCheckRuns = [
+      ...allCheckRuns.filter((check) => check.name !== CONTRIBUTOR_READINESS_CHECK_NAME),
+      ...readinessHistory,
+    ];
+  }
 
   const allCommitStatuses = await github.paginate(github.rest.repos.listCommitStatusesForRef, {
     owner: owner,
@@ -699,6 +723,11 @@ export async function getCheckRunTuple(
   > = [];
 
   allCheckRuns.forEach((checkRun) => {
+    if (
+      checkRun.name === CONTRIBUTOR_READINESS_CHECK_NAME &&
+      checkRun.external_id !== readinessExternalId
+    )
+      return;
     const url = checkRun.details_url || checkRun.html_url;
     allChecks.push({
       name: checkRun.name,
@@ -713,6 +742,7 @@ export async function getCheckRunTuple(
   });
 
   allCommitStatuses.forEach((status) => {
+    if (status.context === CONTRIBUTOR_READINESS_CHECK_NAME) return;
     // Map commit status state to check run conclusion
     let conclusion = null;
     let checkStatus = "completed";

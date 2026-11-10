@@ -297,6 +297,7 @@ describe("Summarize Checks Integration Tests", () => {
           head_sha,
           pr.base.ref,
           [],
+          issue_number,
         );
 
         let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
@@ -344,6 +345,7 @@ describe("Summarize Checks Unit Tests", () => {
         check_runs: [
           {
             name: "Contributor readiness",
+            external_id: "contributor-readiness:1",
             status: "completed",
             conclusion: "neutral",
             completed_at: "2026-11-09T00:00:00Z",
@@ -351,6 +353,7 @@ describe("Summarize Checks Unit Tests", () => {
           },
           {
             name: "Contributor readiness",
+            external_id: "contributor-readiness:1",
             status: "completed",
             conclusion: "success",
             completed_at: "2026-11-10T00:00:00Z",
@@ -368,6 +371,7 @@ describe("Summarize Checks Unit Tests", () => {
       fullGitSha,
       "main",
       [],
+      1,
     );
     const [comment, result] = createNextStepsComment(
       core,
@@ -385,6 +389,77 @@ describe("Summarize Checks Unit Tests", () => {
     expect(completed).toContain("https://github.com/owner/repo/runs/current");
     expect(comment).not.toContain("https://github.com/owner/repo/runs/old");
     expect(result.result).toBe("SUCCESS");
+    expect(github.rest.checks.listForRef).toHaveBeenCalledOnce();
+  });
+
+  it.each([
+    { description: "has findings", hasReport: true },
+    { description: "has no report", hasReport: false },
+  ])("isolates readiness for a shared-head PR that $description", async ({ hasReport }) => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    const ownReport = {
+      name: "Contributor readiness",
+      external_id: "contributor-readiness:1",
+      status: "completed",
+      conclusion: "neutral",
+      completed_at: "2026-11-09T00:00:00Z",
+      html_url: "https://github.com/owner/repo/runs/own-report",
+    };
+    const otherReport = {
+      ...ownReport,
+      external_id: "contributor-readiness:2",
+      conclusion: "success",
+      completed_at: "2026-11-10T00:00:00Z",
+      html_url: "https://github.com/owner/repo/runs/other-report",
+    };
+    github.rest.checks.listForRef
+      .mockResolvedValueOnce({ data: { check_runs: [otherReport] } })
+      .mockResolvedValueOnce({
+        data: { check_runs: hasReport ? [ownReport, otherReport] : [otherReport] },
+      });
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        {
+          context: "Contributor readiness",
+          state: "success",
+          updated_at: "2026-11-11T00:00:00Z",
+          target_url: "https://github.com/owner/repo/runs/unscoped-report",
+        },
+      ],
+    });
+
+    const [required, fyi] = await getCheckRunTuple(
+      github,
+      core,
+      "owner",
+      "repo",
+      fullGitSha,
+      "main",
+      [],
+      1,
+    );
+    const [comment] = createNextStepsComment(
+      core,
+      "repo",
+      [],
+      "main",
+      required,
+      fyi,
+      true,
+      WORKFLOW_URL,
+    );
+
+    if (hasReport) {
+      expect(comment.split("<details>")[0]).toContain(ownReport.html_url);
+    } else {
+      expect(comment).not.toContain("Contributor readiness");
+    }
+    expect(comment).not.toContain(otherReport.html_url);
+    expect(comment).not.toContain("https://github.com/owner/repo/runs/unscoped-report");
+    expect(github.rest.checks.listForRef).toHaveBeenLastCalledWith(
+      expect.objectContaining({ check_name: "Contributor readiness", filter: "all" }),
+    );
   });
 
   it("preserves the latest provider URLs and keeps legacy pending statuses ambiguous", async () => {
@@ -437,6 +512,7 @@ describe("Summarize Checks Unit Tests", () => {
       fullGitSha,
       "main",
       [],
+      1,
     );
 
     expect(checks.map(({ name, status, url }) => ({ name, status, url }))).toEqual([

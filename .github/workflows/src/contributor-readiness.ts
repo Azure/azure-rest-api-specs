@@ -580,6 +580,19 @@ async function publishReadinessReport(
       summary: body,
     },
   });
+  if (context.runAttempt > 1) {
+    const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+      owner,
+      repo,
+      run_id: context.runId,
+      per_page: PER_PAGE_MAX,
+    });
+    for (const artifact of artifacts) {
+      if (artifact.name.startsWith("head-sha=") && artifact.name !== `head-sha=${pr.head.sha}`) {
+        await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: artifact.id });
+      }
+    }
+  }
   core.setOutput("issue_number", pr.number);
   core.setOutput("head_sha", pr.head.sha);
   await updateReadinessComment(github, owner, repo, pr.number, body, findings.length > 0);
