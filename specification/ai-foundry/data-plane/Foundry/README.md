@@ -2,6 +2,16 @@
 
 This folder contains the TypeSpec for all data-plane REST APIs of the Foundry service.
 
+## Microsoft 365 unpublish permissions
+
+`POST /agents/{agent_name}/microsoft365/unpublish` requires permission to unpublish the
+agent in its Foundry project. Authorization to the Foundry agent and authorization
+to remove the Microsoft 365 title are separate checks. In delegated-user cleanup
+flows, the caller must also be authorized to remove that title; agent write access
+alone does not allow a different user to remove a title owned by its publisher.
+Automation must use a service-supported application-identity cleanup flow rather
+than assume that permission to publish also grants permission to unpublish.
+
 ## Contributing
 
 ### Adding preview features
