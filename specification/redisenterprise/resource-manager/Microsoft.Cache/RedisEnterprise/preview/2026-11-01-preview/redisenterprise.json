@@ -4489,43 +4489,8 @@
       "description": "Provisioning and execution details of a node maintenance fault.",
       "properties": {
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/NodeMaintenanceFaultProvisioningState",
           "description": "The provisioning state of the fault resource. Successful provisioning indicates that fault execution was dispatched, not that execution has completed.",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Creating",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Succeeded",
-                "value": "Succeeded",
-                "description": "Resource has been created."
-              },
-              {
-                "name": "Failed",
-                "value": "Failed",
-                "description": "Resource creation failed."
-              },
-              {
-                "name": "Canceled",
-                "value": "Canceled",
-                "description": "Resource creation was canceled."
-              },
-              {
-                "name": "Creating",
-                "value": "Creating"
-              },
-              {
-                "name": "Deleting",
-                "value": "Deleting"
-              }
-            ]
-          },
           "readOnly": true
         },
         "faultStatus": {
@@ -4555,6 +4520,48 @@
           "description": "Error details when fault execution fails.",
           "readOnly": true
         }
+      }
+    },
+    "NodeMaintenanceFaultProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a node maintenance fault.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "NodeMaintenanceFaultProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The fault resource is being created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The fault resource is being deleted."
+          }
+        ]
       }
     },
     "NodeMaintenanceFaultStatus": {

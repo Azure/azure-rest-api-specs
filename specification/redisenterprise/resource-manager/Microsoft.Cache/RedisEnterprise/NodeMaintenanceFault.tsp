@@ -30,14 +30,8 @@ model NodeMaintenanceFault
 @added(Versions.v2026_11_01_preview)
 model NodeMaintenanceFaultProperties {
   /** The provisioning state of the fault resource. Successful provisioning indicates that fault execution was dispatched, not that execution has completed. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keep this read-only enum inline: Swagger 2.0 ignores readOnly beside a $ref, causing ARM validation to treat a referenced provisioning state as writable."
   @visibility(Lifecycle.Read)
-  @lroStatus
-  provisioningState?:
-    | ResourceProvisioningState
-    | "Creating"
-    | "Deleting"
-    | string;
+  provisioningState?: NodeMaintenanceFaultProvisioningState;
 
   /** The execution status of the fault. This property is absent if the fault could not be dispatched. */
   @visibility(Lifecycle.Read)
@@ -60,6 +54,21 @@ model NodeMaintenanceFaultProperties {
   faultError?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
 
+/** The provisioning state of a node maintenance fault. */
+@added(Versions.v2026_11_01_preview)
+@lroStatus
+union NodeMaintenanceFaultProvisioningState {
+  ResourceProvisioningState,
+
+  /** The fault resource is being created. */
+  Creating: "Creating",
+
+  /** The fault resource is being deleted. */
+  Deleting: "Deleting",
+
+  string,
+}
+
 /** The execution status of a node maintenance fault, independent of resource provisioning. */
 @added(Versions.v2026_11_01_preview)
 union NodeMaintenanceFaultStatus {
@@ -77,6 +86,12 @@ union NodeMaintenanceFaultStatus {
 
   string,
 }
+
+/** Parameters for polling the result of deleting a node maintenance fault. */
+alias NodeMaintenanceFaultOperationResultParameters = {
+  ...ResourceInstanceParameters<NodeMaintenanceFault>;
+  ...Azure.ResourceManager.CommonTypes.OperationIdParameter;
+};
 
 /** Operations for node maintenance fault resources on an Azure Managed Redis cluster. */
 @added(Versions.v2026_11_01_preview)
@@ -108,20 +123,18 @@ interface NodeMaintenanceFaults {
   listByCluster is ArmResourceListByParent<NodeMaintenanceFault>;
 
   /** Gets the result of deleting a node maintenance fault. Returns no content after successful deletion, or error details if deletion failed. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This GET polls resource-scoped DELETE operation results (202/204), rather than reading a resource or invoking a POST action."
   @autoRoute
   @get
-  getOperationResult(
-    ...ResourceInstanceParameters<NodeMaintenanceFault>,
-    ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
-  ):
+  getOperationResult is ArmReadOperation<
+    NodeMaintenanceFaultOperationResultParameters,
     | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = void>>
-    | ArmDeletedNoContentResponse
-    | ErrorResponse;
+    | ArmDeletedNoContentResponse,
+    ErrorResponse
+  >;
 }
 
 @@segment(
-  NodeMaintenanceFaults.getOperationResult::parameters.operationId,
+  NodeMaintenanceFaultOperationResultParameters.operationId,
   "operationresults"
 );
 
