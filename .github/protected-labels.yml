@@ -30,7 +30,14 @@ data-plane-review-signoff: &data-plane-reviewers
 # shares its ARM reviewer team with the ARM signoff and validation labels below.
 # See the stewardship board member guide (aka.ms/azsdk/architect-guidance).
 typespec-suppressions-approved:
-  data-plane: *data-plane-reviewers
+  data-plane:
+    team: azure-data-plane-api-reviewers
+    users:
+      - glecaros
+      - rhurey
+      - glharper
+      - baywet
+      - dargilco
   management-plane: &arm-api-reviewers
     team: arm-api-reviewers
 
@@ -124,10 +131,9 @@ package-name-approved-all:
 # The Automation App resolves the live `azure-sdk-team` roster. Explicit users
 # preserve access for current approvers who are not members of that team.
 #
-# Only the labels that currently exist in the repo are listed. The Java and Python-Track2
-# approval labels (BreakingChange-Java-Sdk-Approved, BreakingChange-Java-Sdk-Suppression-Approved,
-# BreakingChange-Python-Track2-Sdk-Approved) are defined in labelling.ts but not yet created
-# as repo labels; add them here once they exist.
+# Only the labels that currently exist in the repo are listed. The Java approval labels
+# (BreakingChange-Java-Sdk-Approved and BreakingChange-Java-Sdk-Suppression-Approved)
+# are defined in labelling.ts but not yet created as repo labels; add them here once they exist.
 BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
   team: azure-sdk-team
   users:

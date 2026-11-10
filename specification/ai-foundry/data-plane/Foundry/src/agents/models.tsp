@@ -11,12 +11,12 @@ namespace Azure.AI.Projects;
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
-    AgentDefinitionOptInKeys.external_agents_v1_preview,
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     AgentDefinitionOptInKeys.draft_agents_v1_preview,
     AgentDefinitionOptInKeys.digital_worker_v1_preview,
     AgentDefinitionOptInKeys.github_copilot_v1_preview,
-    AgentDefinitionOptInKeys.skills_v1_preview
+    AgentDefinitionOptInKeys.skills_v1_preview,
+    AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
   ],
 };
 
@@ -304,6 +304,9 @@ union AgentEndpointProtocol {
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
+
+  @doc("Text conversation protocol for a hosted agent used by Voice Live Bridge. Declare version `1.0.0`; audio transport remains outside this protocol.")
+  voice_conversation_engine: "voice_conversation_engine",
 }
 
 union AgentKind {
@@ -411,7 +414,10 @@ model PromptAgentDefinition extends AgentDefinition {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.github_copilot_v1_preview,
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
     }
   )
   harness?: AgentHarness;
@@ -475,7 +481,12 @@ model PromptAgentDefinition extends AgentDefinition {
 @doc("A managed runtime and agent loop used to execute a prompt agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+  #{
+    conditional_previews: #[
+      AgentDefinitionOptInKeys.github_copilot_v1_preview,
+      AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+    ],
+  }
 )
 @discriminator("type")
 model AgentHarness {
@@ -483,13 +494,25 @@ model AgentHarness {
   type: string;
 }
 
-@doc("The GitHub Copilot managed harness for prompt agents.")
+@doc("The Microsoft Copilot managed harness for prompt agents.")
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.microsoft_copilot_v1_preview],
+  }
+)
+model MicrosoftCopilotHarness extends AgentHarness {
+  @doc("The type of managed harness. Always `microsoft_copilot_preview`.")
+  type: "microsoft_copilot_preview";
+}
+
+@doc("The legacy GitHub Copilot managed harness retained for compatibility. Use `MicrosoftCopilotHarness` for new prompt agents.")
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
 )
 model GitHubCopilotHarness extends AgentHarness {
-  @doc("The type of managed harness. Always `github_copilot_preview`.")
+  @doc("The legacy type of managed harness. Always `github_copilot_preview`; use `microsoft_copilot_preview` for new prompt agents.")
   type: "github_copilot_preview";
 }
 
@@ -548,12 +571,11 @@ model ContainerConfiguration {
 @doc("Session defaults applied to sessions created for a hosted agent version.")
 model SessionConfiguration {
   @doc("""
-    The idle duration, in seconds, before a session's sandbox is suspended. Optional — when
-    unset, the server default of 900 seconds is used. Must be between 120 and 3600 seconds
-    (inclusive).
+    The idle duration, in seconds, before a session's sandbox is suspended. When omitted,
+    the server defaults to 900 seconds. Must be between 120 and 14400 seconds (4 hours).
     """)
   @minValue(duration.fromISO("PT120S"))
-  @maxValue(duration.fromISO("PT3600S"))
+  @maxValue(duration.fromISO("PT14400S"))
   @example(duration.fromISO("PT300S"))
   @encode(DurationKnownEncoding.seconds, int32)
   idle_timeout_seconds?: duration = duration.fromISO("PT900S");
@@ -596,10 +618,6 @@ union CodeDependencyResolution {
   Registration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)
   over customer-emitted OpenTelemetry data.
   """)
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.external_agents_v1_preview] }
-)
 model ExternalAgentDefinition extends AgentDefinition {
   kind: AgentKind.external;
 
@@ -652,6 +670,23 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.")
   @example(#{ idle_timeout_seconds: duration.fromISO("PT300S") })
   session_configuration?: SessionConfiguration;
+
+  @doc("Whether this agent version uses memory snapshots. Sessions for a snapshot-enabled version start from a snapshot of the agent's initialized process rather than starting the process from its image. Defaults to false.")
+  enable_memory_snapshot?: boolean = false;
+
+  @doc("Opt-in to session compute primitives (exec, ports) for sessions created for this agent version. Requires the `SessionCompute=V1Preview` feature. Each primitive defaults to off.")
+  @removed(Versions.v1)
+  compute_primitives?: SessionComputePrimitives;
+}
+
+@doc("Opt-in flags for session compute primitives on a hosted agent version.")
+@removed(Versions.v1)
+model SessionComputePrimitives {
+  @doc("Whether exec (one-shot and interactive) is enabled on session computes for this agent version. Defaults to false.")
+  exec?: boolean = false;
+
+  @doc("Whether ports can be exposed and proxied on session computes for this agent version. Defaults to false.")
+  ports?: boolean = false;
 }
 
 @doc("The container app agent definition.")
@@ -1357,7 +1392,7 @@ model OtlpTelemetryEndpoint extends TelemetryEndpoint {
 
   @doc("The OTLP collector endpoint URL.")
   @example("https://my-collector.example.com/otlp")
-  endpoint: string;
+  endpoint: url;
 
   @doc("The transport protocol for the OTLP endpoint.")
   @example("Http")

@@ -1,7 +1,6 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 using Azure.Core;
 
@@ -39,6 +38,26 @@ interface AgentOptimizationJobs {
   get is queryJobStatus<AgentOptimizationJob>;
 
   /**
+   * Downloads a declared file as a binary stream. The path must match a file descriptor returned by the service. When candidate_id is omitted, the request is scoped to the job.
+   */
+  @summary("Download an agent optimization job file")
+  @route("agent_optimization_jobs/{jobId}/files")
+  @get
+  downloadFile is FoundryDataPlaneOperation<
+    {
+      /** The ID of the parent optimization job. */
+      @path jobId: string;
+
+      /** The candidate that owns the file. Omit to request a job-level file. */
+      @query candidate_id?: string;
+
+      /** The file path returned in the file descriptor. */
+      @query path: string;
+    },
+    bytes
+  >;
+
+  /**
    * Lists optimization jobs with cursor pagination and optional status or agent name filters.
    */
   @summary("List agent optimization jobs")
@@ -48,7 +67,7 @@ interface AgentOptimizationJobs {
     {
       @doc("Filter to jobs in this lifecycle state.")
       @query
-      status?: JobStatus;
+      status?: AgentOptimizationJobStatus;
 
       @doc("Filter to jobs targeting this agent name.")
       @query
@@ -79,7 +98,7 @@ interface AgentOptimizationJobs {
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobCandidates {
   /**
-   * Lists candidates for the given optimization job with cursor pagination, including the original baseline and generated candidates. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
+   * Lists candidates for the given optimization job with cursor pagination. Agent optimization can include the original baseline and multiple generated candidates; prompt and skill optimization generate a single candidate. Evaluated skill jobs also expose the original baseline for reporting through the existing evaluation field; the baseline is not a generated alternative. A generated skill candidate contains zero or more skill outcomes, not one candidate per skill. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
    */
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
@@ -99,7 +118,7 @@ interface AgentOptimizationJobCandidates {
   >;
 
   /**
-   * Retrieves a single candidate. Mutation values are always included.
+   * Retrieves a single candidate. Mutation values are always included. Skill optimization detail includes independent skill results, resolved context, and the persisted execution snapshot when available; these detail fields are omitted from candidate lists.
    */
   @summary("Get a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
@@ -115,7 +134,7 @@ interface AgentOptimizationJobCandidates {
   >;
 
   /**
-   * Promotes a candidate to the Foundry agent stored in the parent job's target configuration. Promotion is unavailable when the job omitted target_configuration. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
+   * Promotes a supported completed candidate to the Foundry agent stored in the parent job's target configuration. A skill-optimization candidate must be the evaluated learned candidate for a supported Prompt or Managed target; baseline, unevaluated, agentless, and unsupported-runtime skill candidates cannot be promoted. Skill promotion releases the exact evaluated candidate configuration without regenerating skills. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
    */
   @summary("Promote a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")
