@@ -1443,6 +1443,7 @@ model DataBoxEdgeDeviceProperties {
   /**
    * DataBoxEdge Device Properties
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-reserved-resource-property" "Existing API exposes systemData in the device properties bag; preserve the published response contract."
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
 
