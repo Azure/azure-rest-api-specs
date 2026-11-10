@@ -5,9 +5,12 @@ Run from the repository root after installing dependencies with `pnpm install`:
 ```sh
 pnpm tsv --help
 pnpm tsv specification/<service>/<project>
+pnpm tsv specification/<service>/<project> --check
 pnpm tsv --all
+pnpm tsv --all --fix
 pnpm tsv --all specification/<service> --shard=1/3
 pnpm tsv --changed
+pnpm tsv --changed --fix
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
@@ -74,7 +77,7 @@ Compiler and formatter failures retain their native diagnostic codes, source
 excerpts, and colors, reported once beneath a TSV command-failure diagnostic.
 Unexpected output from successful commands also remains visible. Successful
 compiler banners, progress messages, and emitted-file lists are debug-only.
-If compilation or formatting changes files, TSV shows an indented cyan file list,
+In fix mode, if compilation or formatting changes files, TSV shows an indented cyan file list,
 the Git diff, and the command to fix them. The diff includes staged, unstaged, and
 untracked files under the project's service folder and retains Git's colors when
 color output is enabled. `--verbose` also includes Git status.
@@ -131,17 +134,33 @@ an empty all-project selection fails.
 and balances the sorted project list before suppressions. Each shard requires
 its own checkout.
 
-`--dry-run` lists the selected projects and context without validating or cleaning
+`--dry-run` lists the selected projects and context without validating or changing
 files. It works with `--all` and `--changed`.
 
-Validation may update generated files and formatting. By default these changes
-are retained. In a disposable checkout, `--git-clean` restores tracked files and
-removes untracked files and directories across the entire repository after each
-project. It requires an initially clean checkout; ignored files are retained.
-Do not use it while other work is in progress. `--dry-run` disables cleanup.
+Batch validation is check-only by default. It compares
+emitted contents with the checkout and checks formatting without saving files
+or creating output directories. Findings list affected files and commands to fix
+them. Ignored untracked outputs are not treated as missing generated files;
+tracked outputs are checked even if they match an ignore rule.
 
-Cleanup is skipped when the checkout is already clean. Otherwise, tracked files
-are restored from the index and untracked files are cleaned repository-wide.
-Git errors or changes remaining after cleanup stop validation rather than letting
-the next project run in a dirty checkout. Nested repositories are not forcibly deleted.
-Use `--verbose` to include per-command cleanup timings.
+Use `--fix` to apply and retain updates during `--all` or `--changed` validation.
+Single-project validation still applies fixes by default; pass `--check` to
+check a single project without modifying files. `--check` and `--fix` cannot
+be combined.
+
+Fix mode keeps the existing failure-on-change behavior: applying updates does
+not turn the validation result into a success. The first failed rule still
+stops that project's remaining rules, and batch runs continue to other projects.
+Run `pnpm tsv <project>`, a batch command with `--fix`, or the reported
+compiler/formatter command to apply fixes.
+
+Rules receive an optional execution-options object through
+`execute(folder, logger, { fix })`. Rules check files by default (`fix: false`);
+rules that support fixes can apply them when `fix` is true. Validation-only
+rules continue checking normally in either mode.
+
+`--git-clean` optionally requires the entire checkout to be clean once before
+batch validation, including staged, unstaged, and untracked changes. It never
+restores or deletes files, and ignored files remain untouched. `--dry-run`
+disables this check. Do not edit files concurrently if you need a consistent
+validation baseline.
