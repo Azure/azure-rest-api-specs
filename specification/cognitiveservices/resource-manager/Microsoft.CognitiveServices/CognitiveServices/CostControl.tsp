@@ -15,8 +15,7 @@ namespace Microsoft.CognitiveServices;
 
 /**
  * A budget that measures consumption and optionally alerts or blocks requests within an account.
- * This API version does not require Microsoft.CognitiveServices/CostControls subscription registration.
- * Reading, deleting, and enforcing stored identity selections do not require Microsoft.CognitiveServices/CostControlsByIdentity registration.
+ * Reading, deleting, and enforcing stored identity selections requires Microsoft.CognitiveServices/CostControlsByIdentity registration.
  */
 @added(Versions.v2026_11_15_preview)
 @parentResource(Account)
@@ -36,8 +35,7 @@ model AccountCostControl is ProxyResource<CostControlProperties> {
 
 /**
  * A budget that measures consumption and optionally alerts or blocks requests within its owning Foundry project.
- * This API version does not require Microsoft.CognitiveServices/CostControls subscription registration.
- * Reading, deleting, and enforcing stored identity selections do not require Microsoft.CognitiveServices/CostControlsByIdentity registration.
+ * Reading, deleting, and enforcing stored identity selections requires Microsoft.CognitiveServices/CostControlsByIdentity registration.
  */
 @added(Versions.v2026_11_15_preview)
 @parentResource(Project)
