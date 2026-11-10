@@ -20,7 +20,7 @@ using Commvault.ContentStore;
 // [SUFFIX002] The "Request" suffix is reserved for HTTP protocol types; use "Content" for request-body models.
 @@clientName(
   ActivateSaaSParameterRequest,
-  "ActivateSaaSParameterContent",
+  "CommvaultSaaSActivationContent",
   "csharp"
 );
 @@clientName(
@@ -35,7 +35,7 @@ using Commvault.ContentStore;
 );
 @@clientName(
   RestoreProtectionItemRequest,
-  "RestoreProtectionItemContent",
+  "RestoreProtectedItemContent",
   "csharp"
 );
 @@clientName(
@@ -58,7 +58,7 @@ using Commvault.ContentStore;
 );
 @@clientName(
   RestoreProtectionItemResponse,
-  "RestoreProtectionItemResult",
+  "RestoreProtectedItemResult",
   "csharp"
 );
 @@clientName(LatestLinkedSaaSResponse, "LatestLinkedSaaSResult", "csharp");
@@ -68,7 +68,7 @@ using Commvault.ContentStore;
 @@clientName(SaaSData, "CommvaultSaaSDetails", "csharp");
 
 // [SUFFIX003] The "Options" suffix is reserved for client configuration types.
-@@clientName(BackupOptions, "BackupConfig", "csharp");
+@@clientName(BackupOptions, "CommvaultBackupConfiguration", "csharp");
 
 // [BOOL001] Boolean properties require an Is/Can/Has/Should prefix (and corrected "Snapshot" casing).
 @@clientName(
@@ -93,14 +93,12 @@ using Commvault.ContentStore;
 );
 @@clientName(
   VmInfo.powerOnVmAfterRestore,
-  "ShouldPowerOnVmAfterRestore",
+  "ShouldPowerOnVirtualMachineAfterRestore",
   "csharp"
 );
 @@clientName(VmInfo.attachAndSwapOsDisk, "ShouldAttachAndSwapOsDisk", "csharp");
 
-// [CSPELL] "vmtags" is flagged as an unknown word; use the compound "VmTags"
-// so the generated .NET name splits into known words.
-@@clientName(VmInfo.vmtags, "VmTags", "csharp");
+@@clientName(VmInfo.vmtags, "Tags", "csharp");
 
 // [ACRONYM] "BackUp" should be treated as the compound word "Backup".
 // [Contextual naming] "BackupType" is too generic; prefix with the RP name.
@@ -114,6 +112,7 @@ using Commvault.ContentStore;
 
 // The "Equals" union member collides with the generated value-type's Equals(object) method.
 @@clientName(Operator.Equals, "Equal", "csharp");
+@@clientName(Operator.DoesNotContains, "DoesNotContain", "csharp");
 
 // [RESNAME001] The "Storage" resource trio (StorageCollection/StorageData/StorageResource)
 // lacks RP/domain context after stripping reserved suffixes and collides with
@@ -124,19 +123,19 @@ using Commvault.ContentStore;
 @@clientName(RoleAssignment, "CommvaultRoleAssignment", "csharp");
 @@clientName(Rule, "ProtectionGroupRule", "csharp");
 @@clientName(Schedule, "CommvaultBackupSchedule", "csharp");
-@@clientName(EntityInfo, "CommvaultEntityInfo", "csharp");
+@@clientName(EntityInfo, "CommvaultRolePrincipal", "csharp");
 @@clientName(PlanProperties, "CommvaultPlanProperties", "csharp");
 @@clientName(LiftrBase.OfferDetails, "CommvaultOfferDetails", "csharp");
 @@clientName(LiftrBase.UserDetails, "CommvaultUserDetails", "csharp");
 
 // [Contextual naming] Generic/unprefixed type names are unclear in IntelliSense
 // without relying on the namespace; add RP/domain-context prefixes.
-@@clientName(EntityType, "CommvaultEntityType", "csharp");
+@@clientName(EntityType, "CommvaultRolePrincipalType", "csharp");
 @@clientName(Frequency, "CommvaultBackupFrequency", "csharp");
 @@clientName(MatchType, "ProtectionGroupMatchType", "csharp");
 @@clientName(ProtectionStatus, "CommvaultProtectionStatus", "csharp");
 @@clientName(RestoreType, "CommvaultRestoreType", "csharp");
-@@clientName(RetentionTime, "CommvaultRetentionTime", "csharp");
+@@clientName(RetentionTime, "CommvaultRetentionInterval", "csharp");
 @@clientName(RoleName, "CommvaultRoleName", "csharp");
 @@clientName(RuleProperty, "ProtectionGroupRuleProperty", "csharp");
 @@clientName(StorageClassType, "CommvaultStorageClassType", "csharp");
@@ -232,3 +231,150 @@ using Commvault.ContentStore;
   "LastBackupTime",
   "csharp"
 );
+
+// Use descriptive names consistently for related models and operations.
+@@clientName(BackupLevel, "CommvaultBackupLevel", "csharp");
+@@clientName(BackupRuleType, "CommvaultBackupRuleType", "csharp");
+@@clientName(CloudAccountIdentityUpdate, "CloudAccountIdentityPatch", "csharp");
+@@clientName(
+  CloudAccountMarketplaceUpdate,
+  "CloudAccountMarketplacePatch",
+  "csharp"
+);
+@@clientName(
+  CloudAccountOfferDetailsUpdate,
+  "CloudAccountOfferDetailsPatch",
+  "csharp"
+);
+@@clientName(CloudAccountUserUpdate, "CloudAccountUserPatch", "csharp");
+@@clientName(CompanyProfile, "CommvaultCompanyProfile", "csharp");
+@@clientName(
+  LiftrBase.MarketplaceDetails,
+  "CommvaultMarketplaceDetails",
+  "csharp"
+);
+@@clientName(
+  ExtendedRetentionTime,
+  "CommvaultExtendedRetentionPolicy",
+  "csharp"
+);
+@@clientName(
+  ProtectionGroupResources,
+  "ProtectionGroupResourceSelection",
+  "csharp"
+);
+@doc("Rules that select resources to protect in a protection group.")
+model ProtectionGroupResourceMatchCriteria {
+  ...ProtectionGroupResources.matchRules::type;
+}
+@@alternateType(
+  ProtectionGroupResources.matchRules,
+  ProtectionGroupResourceMatchCriteria,
+  "csharp"
+);
+@@clientName(RestorePoints, "ProtectedItemRestorePoints", "csharp");
+@@clientName(VmInfo, "CommvaultVirtualMachineRestoreSettings", "csharp");
+@@clientName(VmListItem, "CommvaultVirtualMachineReference", "csharp");
+@@clientName(VmTag, "CommvaultVirtualMachineTag", "csharp");
+@@clientName(WeeklyDays, "CommvaultScheduleDayOfWeek", "csharp");
+
+@@clientName(
+  SaaSOperationGroup.activateResource,
+  "ActivateSaaSResource",
+  "csharp"
+);
+@@clientName(CloudAccounts.latestLinkedSaaS, "GetLatestLinkedSaaS", "csharp");
+@@clientName(
+  ProtectedItemsOperationGroup.countByProtectionGroups,
+  "CountProtectedItems",
+  "csharp"
+);
+
+@@clientName(
+  BackupProtectionGroupRequest.backupOptions,
+  "BackupConfiguration",
+  "csharp"
+);
+@@clientName(BackupProtectionGroupRequest.vmList, "VirtualMachines", "csharp");
+@@clientName(
+  ProtectionGroupProperties.resources,
+  "ResourceSelection",
+  "csharp"
+);
+@@clientName(
+  ProtectionGroupProperties.numberOfProtectedItems,
+  "ProtectedItemCount",
+  "csharp"
+);
+@@clientName(
+  ProtectionGroupResources.manual,
+  "ManuallySelectedItems",
+  "csharp"
+);
+@@clientName(RoleMappingProperties.roles, "RoleAssignments", "csharp");
+@@clientName(RoleAssignment.entities, "Principals", "csharp");
+@@clientName(EntityInfo.entityType, "PrincipalType", "csharp");
+@@clientName(Retention.numberOfSnapshots, "SnapshotCount", "csharp");
+@@clientName(Schedule.runsEvery, "Interval", "csharp");
+@@clientName(Schedule.weeklyDays, "DaysOfWeek", "csharp");
+@@clientName(StoragePlan.retentionTime, "RetentionInterval", "csharp");
+@@clientName(
+  ExtendedRetentionTime.retentionTime,
+  "RetentionInterval",
+  "csharp"
+);
+@@clientName(
+  StoragePlan.extendedRetention,
+  "ExtendedRetentionPolicies",
+  "csharp"
+);
+@@clientName(StorageProperties.class, "StorageClass", "csharp");
+@@clientName(
+  ProtectedItemProperties.resourceGroup,
+  "ResourceGroupName",
+  "csharp"
+);
+@@clientName(ProtectedItemProperties.vmGuid, "VirtualMachineGuid", "csharp");
+@@clientName(VmListItem.vmGuid, "VirtualMachineGuid", "csharp");
+@@clientName(VmInfo.sourceVmGuid, "SourceVirtualMachineGuid", "csharp");
+@@clientName(VmInfo.targetVmGuid, "TargetVirtualMachineGuid", "csharp");
+@@clientName(VmInfo.resourceGroup, "ResourceGroupName", "csharp");
+@@clientName(VmInfo.networkId, "VirtualNetworkId", "csharp");
+@@clientName(
+  RestoreProtectionItemRequest.vmDestinationInfo,
+  "VirtualMachineDestination",
+  "csharp"
+);
+@@clientName(VmDestinationInfo.vmInfoList, "VirtualMachines", "csharp");
+@@clientName(RestoreProtectionItemRequest.toTime, "RestorePointTime", "csharp");
+@@clientName(LiftrBase.UserDetails.upn, "UserPrincipalName", "csharp");
+@@clientName(CloudAccountUserUpdate.upn, "UserPrincipalName", "csharp");
+@@clientName(ActivateSaaSParameterRequest.saasGuid, "SaaSGuid", "csharp");
+@@clientName(
+  ActivateSaaSRequestParam.saasResourceId,
+  "SaaSResourceId",
+  "csharp"
+);
+@@clientName(
+  LiftrBase.MarketplaceDetails.saasResourceId,
+  "SaaSResourceId",
+  "csharp"
+);
+@@clientName(
+  CloudAccountMarketplaceUpdate.saasResourceId,
+  "SaaSResourceId",
+  "csharp"
+);
+
+@@clientName(RoleName.BackupAdmin, "BackupAdministrator", "csharp");
+@@clientName(RoleName.SecurityAdmin, "SecurityAdministrator", "csharp");
+@@clientName(BackupRuleType.AllFulls, "AllFullBackups", "csharp");
+@@clientName(BackupRuleType.HourlyFulls, "HourlyFullBackups", "csharp");
+@@clientName(BackupRuleType.DailyFulls, "DailyFullBackups", "csharp");
+@@clientName(BackupRuleType.WeeklyFulls, "WeeklyFullBackups", "csharp");
+@@clientName(BackupRuleType.MonthlyFulls, "MonthlyFullBackups", "csharp");
+@@clientName(BackupRuleType.QuarterlyFulls, "QuarterlyFullBackups", "csharp");
+@@clientName(BackupRuleType.HalfYearlyFulls, "HalfYearlyFullBackups", "csharp");
+@@clientName(BackupRuleType.YearlyFulls, "YearlyFullBackups", "csharp");
+
+@@clientName(CloudAccountProperties.ssoUrl, "SingleSignOnUriString", "csharp");
