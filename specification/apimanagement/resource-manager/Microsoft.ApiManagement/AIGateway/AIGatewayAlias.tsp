@@ -140,7 +140,7 @@ model AiGatewayAliasTarget {
 model AiGatewayAliasTargetUpdate is OptionalProperties<AiGatewayAliasTarget>;
 
 /** Properties of a stable client-facing model alias. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous SMAPI child resource does not return properties.provisioningState."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayAliasProperties {
   /** Client-facing routing name sent in the request model field. */

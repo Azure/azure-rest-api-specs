@@ -77,7 +77,7 @@ model AiGatewayProperties {
   @added(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
-  privateEndpointConnections?: Azure.ResourceManager.CommonTypes.PrivateEndpointConnection[];
+  privateEndpointConnections?: AiGatewayPrivateEndpointConnection[];
 }
 
 /** An AI Gateway resource. */

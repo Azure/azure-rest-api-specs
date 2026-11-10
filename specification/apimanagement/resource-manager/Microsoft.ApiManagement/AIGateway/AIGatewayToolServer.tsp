@@ -399,7 +399,7 @@ model AiGatewayToolServerUpdateParameters {
 }
 
 /** Properties of an AI Gateway tool server. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous SMAPI child resource does not return properties.provisioningState."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Synchronous child resource does not return properties.provisioningState."
 @added(Versions.v2026_11_01)
 model AiGatewayToolServerProperties {
   /** Display name of the tool server. */

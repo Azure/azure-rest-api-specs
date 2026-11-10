@@ -103,5 +103,5 @@ suppressions:
       - $.definitions.AiGatewayToolServerProperties
       - $.definitions.AiGatewayTelemetryExporterProperties
       - $.definitions.AiGatewayApiKeyProperties
-    reason: Synchronous SMAPI child resources complete immediately and do not return properties.provisioningState.
+    reason: Synchronous child resources complete immediately and do not return properties.provisioningState.
 ```
