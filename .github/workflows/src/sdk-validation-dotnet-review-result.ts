@@ -84,8 +84,7 @@ function validateFinding(
 function markdownText(value: string): string {
   return value
     .replace(/\p{Cc}/gu, " ")
-    .replaceAll("\\", "\\\\")
-    .replace(/([`*_#[\]<>|])/g, "\\$1")
+    .replace(/([\\`*_#[\]<>|])/g, "\\$1")
     .trim();
 }
 
