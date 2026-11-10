@@ -59,8 +59,18 @@ using Microsoft.Compute;
   "csharp"
 );
 @@clientName(
+  ComputePlacementScoresInput.availabilityZones,
+  "IsZonal",
+  "csharp"
+);
+@@clientName(
   ComputePlacementScoresResponse,
   "ComputePlacementScoresGenerateResult",
+  "csharp"
+);
+@@clientName(
+  ComputePlacementScoresResponse.availabilityZones,
+  "IsZonal",
   "csharp"
 );
 @@clientName(ComputePlacementScoresBase, "ComputePlacementScores", "csharp");
