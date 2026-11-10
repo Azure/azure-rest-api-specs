@@ -58,7 +58,6 @@ model ProjectCostControl is ProxyResource<CostControlProperties> {
 /**
  * The consumption budget and its traffic selection, notifications, and enforcement actions.
  * A cost control applies within its owner's scope.
- * Explicitly authoring identityObjectId grouping or filter selections requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources; the service does not expose provisioningState."
 @added(Versions.v2026_11_15_preview)
@@ -109,7 +108,6 @@ model CostControlProperties {
  * Edits applied when properties is a non-empty object. Omitted fields retain their existing values; no defaults are applied.
  * The complete merged result may contain at most one notification, including disabled notifications, and one Block action.
  * Exceeding either limit returns HTTP 400 without changing the stored definition.
- * Explicit identityObjectId grouping or filter selections, including unchanged selections and conditions nested under filter.and, require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.
  * Missing registration returns 403 FeatureNotRegistered before merging or no-op detection.
  * Omitting or removing identity selections does not require this registration; omitted stored selections are preserved, subject to existing validation rules.
  */
@@ -191,9 +189,6 @@ union CostControlGroupingName {
   /** Creates an independent counter for each Foundry agent, qualified by its Foundry project so identical agent names in different projects do not share counters. */
   Agent: "agent",
 
-  /** Creates an independent counter for each authenticated principal object ID. Authoring this grouping requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity. */
-  IdentityObjectId: "identityObjectId",
-
   /** Creates an independent counter for each Foundry session ID. */
   SessionId: "sessionId",
 }
@@ -243,7 +238,6 @@ model CostControlTimePeriodPatch is OptionalProperties<CostControlTimePeriod>;
  * Traffic selection using exactly one of `additionalInfo` or `and`. Additional-info names must be unique across the complete expression.
  * Filters narrow the owner's scope and cannot extend a project-owned control to another project.
  * Values within one condition are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.
- * Authoring identityObjectId conditions, including conditions nested under `and`, requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.
  */
 @added(Versions.v2026_11_15_preview)
 model CostControlFilter {
@@ -260,7 +254,7 @@ model CostControlFilter {
 @added(Versions.v2026_11_15_preview)
 model CostControlAdditionalInfoFilter {
   /**
-   * The built-in attribute: agent, identityObjectId, sessionId, project, deployment, or tokenType.
+   * The built-in attribute: agent, sessionId, project, deployment, or tokenType.
    * Resource selectors use owner-scoped short names, not Azure resource IDs. Agent selections require an explicit project filter selecting exactly one project; multiple agents in that project are supported.
    * A project-owned control can select only its owning project. Project, agent, and deployment values must be plain names of 1-64 characters without leading or trailing whitespace, control characters, path/query/fragment separators, percent signs, or . and .. path segments.
    * tokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens.
@@ -282,9 +276,6 @@ union CostControlFilterName {
 
   /** The Foundry agent name within the single explicitly selected Foundry project. */
   Agent: "agent",
-
-  /** The authenticated principal object ID. Authoring this filter requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity. */
-  IdentityObjectId: "identityObjectId",
 
   /** The Foundry session ID. */
   SessionId: "sessionId",
