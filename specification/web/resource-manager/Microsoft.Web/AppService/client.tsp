@@ -14,6 +14,7 @@ namespace Customizations;
 @@clientName(AiGateways, "AIGateways", "go");
 @@clientName(AiGateway, "AIGateway", "go");
 @@clientName(AiGatewayProperties, "AIGatewayProperties", "go");
+@@clientName(AiGatewayProperties.aiGatewayId, "AIGatewayID", "go");
 @@clientName(
   ServerFarmSiloVnetIntegrationsResult,
   "ServerFarmSiloVNETIntegrationsResult",
