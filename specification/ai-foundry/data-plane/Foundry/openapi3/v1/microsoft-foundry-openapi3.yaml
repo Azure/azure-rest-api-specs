@@ -33197,6 +33197,14 @@ paths:
           schema:
             type: string
           explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33244,6 +33252,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
   /openai/v1/skills/{name}:
     get:
       operationId: Skills_getSkill
@@ -33256,6 +33267,14 @@ paths:
           description: The public ID of the skill.
           schema:
             $ref: '#/components/schemas/SkillIdentifier'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33284,6 +33303,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     post:
       operationId: updateSkill
       summary: Update a skill
@@ -33295,6 +33317,14 @@ paths:
           description: The public ID of the skill to update.
           schema:
             $ref: '#/components/schemas/SkillIdentifier'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33335,6 +33365,9 @@ paths:
                   description: The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest.
               required:
                 - default_version
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     delete:
       operationId: Skills_deleteSkill
       summary: Delete a skill
@@ -33346,6 +33379,14 @@ paths:
           description: The public ID of the skill.
           schema:
             $ref: '#/components/schemas/SkillIdentifier'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33374,6 +33415,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
   /openai/v1/skills/{name}/content:
     get:
       operationId: getSkillContent
@@ -33386,6 +33430,14 @@ paths:
           description: The public ID of the skill.
           schema:
             $ref: '#/components/schemas/SkillIdentifier'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33414,6 +33466,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
   /openai/v1/skills/{name}/versions:
     post:
       operationId: createSkillVersion_createSkillVersionFromFiles
@@ -33424,6 +33479,14 @@ paths:
           description: The public ID of an existing skill, or the skill name when creating a new skill.
           schema:
             $ref: '#/components/schemas/SkillIdentifier'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33454,6 +33517,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-description-override: Creates a new version of a skill. If the skill does not exist, it will be created.
       x-ms-summary-override: Create a new version of a skill
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
       tags:
         - Skills
       requestBody:
@@ -33529,6 +33595,14 @@ paths:
           schema:
             type: string
           explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33576,6 +33650,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
   /openai/v1/skills/{name}/versions/{version}:
     get:
       operationId: getSkillVersion
@@ -33594,6 +33671,14 @@ paths:
           description: The version identifier to retrieve.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33622,6 +33707,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     delete:
       operationId: deleteSkillVersion
       summary: Delete a specific version of a skill
@@ -33639,6 +33727,14 @@ paths:
           description: The version identifier to delete.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33667,6 +33763,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
   /openai/v1/skills/{name}/versions/{version}/content:
     get:
       operationId: getSkillVersionContent
@@ -33685,6 +33784,14 @@ paths:
           description: The version to download content for.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -33713,6 +33820,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
   /openai/v1/threads:
     post:
       operationId: Threads_createThread
@@ -50772,6 +50882,9 @@ components:
           type: boolean
           description: Whether the skill was successfully deleted.
       description: A deleted skill.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     DeleteSkillVersionResponse:
       type: object
       required:
@@ -50793,6 +50906,9 @@ components:
           type: string
           description: The version that was deleted.
       description: A deleted skill version.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     Deployment:
       type: object
       required:
@@ -94712,6 +94828,9 @@ components:
           type: string
           description: The latest version for the skill.
       description: A skill resource.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     SkillIdentifier:
       type: string
       description: A public skill identifier. Existing skills can have opaque IDs such as skill_abc123 or name-valued IDs. When creating a new skill, supply a valid skill name.
@@ -94746,6 +94865,9 @@ components:
             type: string
           description: List of pre-approved tools the skill may use. Experimental.
       description: Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     SkillName:
       type: string
       maxLength: 64
@@ -94874,6 +94996,9 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the skill version was created.
       description: A specific version of a skill.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     Sku:
       type: object
       required:

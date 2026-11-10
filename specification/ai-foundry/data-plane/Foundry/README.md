@@ -24,6 +24,14 @@ model MyNewPreviewModel {
 The models.tsp files associated with OpenAI routes `openai/responses`, `"openai/conversations` and `openai/evals` should not have
 these decorators. The interfaces using those will have the appropriate decorators.
 
+### Skills preview contract
+
+Skills remain a preview feature under `/openai/v1/skills`. The Python and
+JavaScript Projects SDKs expose these operations under `beta.skills`.
+All Skills operations require `Foundry-Features: Skills=V1Preview` and retain
+query-based `api-version` handling. Existing-skill path parameters keep the
+SDK name `name` and support public skill identifiers.
+
 ### Compiling and sending a PR
 
 Before you send a PR for changes in this folder, do the following:
