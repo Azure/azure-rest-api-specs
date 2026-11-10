@@ -7,6 +7,22 @@ using Azure.ResourceManager.CommonTypes;
 using Microsoft.StandbyPool;
 
 @@clientName(
+  StandbyVirtualMachinePoolElasticityProfile,
+  "StandbyVirtualMachinePoolElasticityProfileTestOnly",
+  "python"
+);
+@@clientName(
+  StandbyVirtualMachinePoolElasticityProfile,
+  "StandbyVirtualMachinePoolElasticityProfileTestOnly",
+  "javascript"
+);
+@@clientName(
+  StandbyVirtualMachinePoolElasticityProfile,
+  "StandbyVirtualMachinePoolElasticityProfileTestOnly",
+  "go"
+);
+
+@@clientName(
   StandbyContainerGroupPoolResource,
   "StandbyContainerGroupPool",
   "csharp"
