@@ -11690,7 +11690,7 @@ model PushDataConnector extends DataConnector {
 @added(Versions.v2026_07_01)
 model PushDataConnectorProperties {
   /**
-   * The connector definition name (the dataConnectorDefinition resource id).
+   * The name of the data connector definition resource in this workspace.
    */
   connectorDefinitionName: string;
 
