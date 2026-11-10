@@ -2153,7 +2153,7 @@ model ScheduledEventsPolicy {
 }
 
 /**
- * Specifies Extended Scheduled Events related configurations. Extended Scheduled Events give longer deadlines to respond to platform-initiated maintenance.
+ * Specifies Extended Scheduled Events related configurations. Extended Scheduled Events give longer notice before maintenance and repair events.
  */
 @added(Versions.v2026_09_01)
 model ExtendedScheduledEvents {
