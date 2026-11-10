@@ -63,7 +63,7 @@ beforeEach(async () => {
 
 afterEach(async () => {
   vi.unstubAllEnvs();
-  await rm(root, { recursive: true, force: true });
+  await rm(root, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
 });
 
 async function run(...args: string[]): Promise<{ code: number; stdout: string; stderr: string }> {
@@ -286,6 +286,8 @@ it.each(["--all", "--changed"])(
     expect(await readFile(join(missingDir, "output.txt"), "utf8")).toBe("new\n");
     expect(await readFile(join(root, ".git/index"))).toEqual(index);
   },
+  // Check and fix each start a batch plus two compiler processes.
+  30_000,
 );
 
 it("checks batch formatting and only updates shared files with --fix", async () => {
