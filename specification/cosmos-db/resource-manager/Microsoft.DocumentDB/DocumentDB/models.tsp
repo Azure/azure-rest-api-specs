@@ -4124,7 +4124,6 @@ model SqlContainerResource {
   /**
    * The Data Masking policy for the container.
    */
-  @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   dataMaskingPolicy?: DataMaskingPolicy;
 }
