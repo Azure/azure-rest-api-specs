@@ -16,6 +16,8 @@ import "./FlowProfile.tsp";
 import "./Connection.tsp";
 import "./Pipeline.tsp";
 import "./Flow.tsp";
+import "./StorageTransferFlow.tsp";
+import "./MessagingTransferFlow.tsp";
 import "./ProviderActions.tsp";
 import "./client.tsp";
 
@@ -59,6 +61,12 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_02_06_preview: "2026-02-06-preview",
+
+  /**
+   * The 2026-06-29-preview API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_06_29_preview: "2026-06-29-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

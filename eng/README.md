@@ -4,6 +4,36 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## SDK generation pipeline variables
+
+The [spec-gen-sdk pipeline](pipelines/spec-gen-sdk.yml) selects its SDK repository
+using the Azure DevOps pipeline UI variable `SdkRepoUrl`. Provisioning library
+pipelines can also set the optional UI variable `TypeSpecEmitter`, for example
+`@azure-tools/typespec-ts-provisioning`. The shared stage template also supports
+this variable for batch generation.
+
+When configured, the emitter is passed unchanged through `spec-gen-sdk-runner`
+to `spec-gen-sdk --typespec-emitter` and then to language automation as
+`generateInput.json`'s `typespecEmitter`. When the variable is missing or empty,
+the option is omitted and existing emitter selection is unchanged. There is no
+default emitter, and existing pipelines do not need to configure the variable.
+
+This requires `@azure-tools/spec-gen-sdk` **0.9.10 or later**, which adds the
+optional contract in [Azure/azure-sdk-tools#17457](https://github.com/Azure/azure-sdk-tools/pull/17457).
+The repository's catalog and frozen lockfile include this support. Language
+automation must also support the selected emitter; this wiring does not install
+emitters, change SDK enablement checks, or create provisioning pipelines.
+
+For spec PR validation, selecting `@azure-tools/typespec-ts-provisioning` for
+JavaScript or `@azure-typespec/http-client-csharp-provisioning` for .NET makes
+the runner artifact's `isSpecGenSdkCheckRequired` flag `false`. Provisioning
+validation still runs and reports its actual result, including failures, but
+those failures do not fail the aggregate **SDK Validation Status** check.
+Ordinary SDK validation and other custom emitters retain their existing
+requiredness, as do pipelines with a missing or empty `TypeSpecEmitter`.
+Dedicated provisioning validation pipelines must configure the matching emitter;
+this does not create pipelines or change live pipeline settings.
+
 ## Spec Change Policies
 
 [Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage and
@@ -257,8 +287,9 @@ pnpm --dir .github labels --preview
 
 Validation is offline. Preview reads upstream labels without changing anything;
 set `GITHUB_TOKEN` to authenticate if needed. It lists proposed creates, metadata
-updates (including unarchiving), archives, expired archives to delete, and
-unconfigured labels and alias migrations. It does not enumerate affected items.
+updates (including unarchiving), archives, skipped archives with their reasons,
+expired archives to delete, and unconfigured labels and alias migrations.
+It does not enumerate affected items.
 
 [Sync repository labels](../.github/workflows/sync-repo-labels.yaml) runs after
 relevant changes on `main`, when repository label definitions change, and daily.
@@ -268,6 +299,14 @@ Mutating runs use the default branch of `Azure/azure-rest-api-specs` or
 `Azure/azure-rest-api-specs-pr` and are disabled on forks. Each repository
 synchronizes labels from its own checked-in catalog. PR validation never changes
 GitHub labels.
+
+If the synchronization job fails, a separate job creates a failure-tracking issue
+or updates the existing open bot-created issue in that repository. The issue links
+to the failed run attempt and identifies failed jobs and steps. Reporting does not
+require the synchronization job's dependency installation to succeed. Repeated
+failures update the issue body rather than posting comments. Close the issue once
+the failure is resolved; a later failure creates a new issue. Skipped archives
+that only produce warnings do not open an issue.
 
 The `unconfiguredLabels: archive` policy creates/updates configured labels and
 archives labels absent from the catalog. This applies repository-wide, including
@@ -294,11 +333,19 @@ The `archived: ` prefix is reserved and cannot be used in catalog definitions.
 
 Archiving preserves existing assignments and prevents new ones. GitHub records
 the archive date in `archived_at`; subsequent synchronization does not reset it.
-The daily workflow only considers a label for deletion when it is still absent
+The daily workflow only considers an archived label for deletion when it is still absent
 from the catalog, has been archived for at least **14 full days**, and still has
 that exact warning description. Manually archived labels without the warning
 are left alone, even if they are old. Missing or invalid archive timestamps fail
 validation rather than being inferred.
+
+If another actor recreates the original name while its managed archive still
+exists, archive mode deletes that unconfigured active copy immediately on the next
+sync, without another grace period. The original archive keeps its identity,
+timestamp, and assignments until its own grace period expires. The recreated
+copy's assignments are audited before deletion; explicit aliases receive their
+canonical labels first. Dry runs and preserve mode leave both labels unchanged.
+The archived original is revalidated before the copy is deleted.
 
 Adding the original name back to the catalog restores the same label's name,
 description, and color and removes its archived state, including in preserve
@@ -306,13 +353,17 @@ mode. The synchronizer recognizes the prefix together with the exact warning;
 it does not create a duplicate. This cancels its deletion.
 Removing it again starts a new grace period on the next archive.
 
-Name collisions stop synchronization for manual resolution, including when both
-the original and managed archived name already exist. Prefixing a name longer
-than 40 characters exceeds GitHub's 50-character limit and also fails explicitly:
-rename it deliberately before removing it from the catalog. Names are never
-silently truncated. Earlier managed archives without the prefix acquire it on
-the next archive-mode run without resetting their timestamp, unless already
-eligible for deletion.
+Labels that cannot be safely renamed for archival are skipped with an actionable
+workflow warning and recorded in the pre-change audit. This includes names longer
+than 40 characters (the prefix would exceed GitHub's 50-character limit),
+unmanaged active labels using the reserved prefix, and occupied archive target
+names. Rename these labels deliberately or resolve the collision; names are never
+silently truncated. Other labels still synchronize, including deletion of expired
+archives. Other ambiguous identities, including active/archive collisions for a
+configured label, still stop synchronization for manual resolution.
+Audit validation, stale-state checks, and API failures also remain blocking.
+Earlier managed archives without the prefix acquire it on the next archive-mode
+run without resetting their timestamp, unless already eligible for deletion.
 
 After the grace period, the archived label is deleted without adding a generic
 replacement label. Its existing assignments remain intact until deletion;

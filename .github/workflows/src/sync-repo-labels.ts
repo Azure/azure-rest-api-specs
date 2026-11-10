@@ -8,6 +8,7 @@ import {
   ARCHIVE_DESCRIPTION,
   ARCHIVE_PREFIX,
   existingLabelSchema,
+  findRecreatedLabelArchive,
   isArchivedLabelExpired,
   labelCatalogSchema,
   labelPlanSchema,
@@ -203,6 +204,9 @@ export async function prepareLabelSync(
       `Label not in ${CATALOG_PATH}: ${JSON.stringify(label.name)} (${catalog.unconfiguredLabels})`,
     );
   }
+  for (const { label, reason } of plan.skippedArchives) {
+    args.core.warning(`Skipping archive of ${JSON.stringify(label.name)}: ${reason}`);
+  }
   for (const label of plan.delete) {
     deletions.push({ label, items: await findLabelAssignments(args.github, label) });
   }
@@ -238,10 +242,11 @@ export async function prepareLabelSync(
     .addRaw(
       `## Repository labels\n\nPolicy: **${catalog.unconfiguredLabels}**; dry-run: **${options.dryRun}**.\n\n` +
         `Create: ${plan.create.length}; update: ${plan.update.length}; ` +
-        `archive: ${plan.archive.length}; delete after grace period: ${plan.delete.length}; ` +
+        `archive: ${plan.archive.length}; skipped archives: ${plan.skippedArchives.length}; ` +
+        `delete: ${plan.delete.length}; ` +
         `alias migrations: ${plan.migrate.length}; ` +
         `unconfigured: ${plan.unconfigured.length}; unchanged: ${plan.unchanged}.\n\n` +
-        "Full definitions and proposed changes are in the pre-change audit artifact.\n",
+        "Full definitions, proposed changes, and skipped archive reasons are in the pre-change audit artifact.\n",
     )
     .write();
   return audit;
@@ -313,8 +318,16 @@ function validateCleanupPlan(audit: Audit) {
       throw new Error("Invalid archive rename in the audited plan");
     }
   }
-  if (audit.plan.delete.some((label) => !isArchivedLabelExpired(label))) {
-    throw new Error("Deletion requires an archived label with our warning past its grace period");
+  if (
+    audit.plan.delete.some(
+      (label) =>
+        !isArchivedLabelExpired(label) &&
+        !findRecreatedLabelArchive(label, audit.plan.unconfigured),
+    )
+  ) {
+    throw new Error(
+      "Deletion requires a managed archive past its grace period or a recreated retired label",
+    );
   }
 }
 
@@ -521,10 +534,14 @@ export async function applyLabelSync(
       const migration = audit.migrations.find(({ before }) => before.id === label.id);
       await verifyAssignments(label, items, migration?.target);
       await verifyCatalog(args, branch, audit.catalogHash);
-      await verifyLabel(github, context.repo, label);
       if (!isArchivedLabelExpired(label)) {
-        throw new Error(`Archive grace period has not elapsed for ${label.name}`);
+        const archive = findRecreatedLabelArchive(label, audit.plan.unconfigured);
+        if (!archive) {
+          throw new Error(`Archive grace period has not elapsed for ${label.name}`);
+        }
+        await verifyLabel(github, context.repo, archive);
       }
+      await verifyLabel(github, context.repo, label);
       await mutate({ action: "delete", label: label.name }, () =>
         github.rest.issues.deleteLabel({ ...context.repo, name: label.name }),
       );

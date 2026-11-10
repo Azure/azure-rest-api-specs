@@ -2,8 +2,9 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability
-area: "dataplane"
-environment: azsdk-mcp
+tags:
+  area: "dataplane"
+agent_environment: azsdk-mcp
 defaults:
   runs: 1
   timeout: 660s
@@ -15,7 +16,7 @@ stimuli:
       suite: dataplane
       mode: trigger
     prompt: Remove the `color` property from the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum.
-    environment: &id001
+    agent_environment: &id001
       files:
         - src: ../fixtures/006008-dp-version-property-removed/main.tsp
           dest: main.tsp
@@ -40,7 +41,7 @@ stimuli:
       suite: dataplane
       mode: forced
     prompt: "@azure-typespec-author Remove the `color` property from the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum."
-    environment: *id001
+    agent_environment: *id001
     rubric: &shared_rubric
       - WidgetSuite.color is marked as removed only in API version 2023-06-01-preview rather than being deleted from the model.
       - Version 2023-06-01-preview is added to the Versions enum and the property uses valid TypeSpec versioning.
@@ -57,13 +58,11 @@ stimuli:
           pattern: v2023_06_01_Preview
       - &id004
         type: file-matches
-        name: file-matches-removed-property
         config:
           path: main.tsp
           pattern: '@removed\(Versions\.v2023_06_01_Preview\)'
       - &id005
         type: file-matches
-        name: file-matches-color-property
         config:
           path: main.tsp
           pattern: color
@@ -84,7 +83,7 @@ stimuli:
       suite: dataplane
       mode: no-skill
     prompt: Remove the `color` property from the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum.
-    environment: *id001
+    agent_environment: *id001
     rubric: *shared_rubric
     graders:
       - type: tool-calls
