@@ -9,6 +9,342 @@ using TypeSpec.Versioning;
 
 namespace Search;
 
+/** Request fields for querying the logical graph mapped by an index's graphProfile. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryRequest {
+  /** The nonempty GQL query to bind and execute. */
+  @minLength(1)
+  gql: string;
+
+  /** Full-text search text used to constrain graph backend requests. */
+  search?: string;
+
+  /** An OData filter over graph-index fields applied throughout graph execution. */
+  filter?: string;
+
+  /** Vector queries used to constrain the graph's backend searches. */
+  vectorQueries?: VectorQuery[];
+
+  /** Executes the query by default. planOnly builds the plan without backend query execution and requires at least one explain stage. */
+  executionMode?: GraphQueryExecutionMode = GraphQueryExecutionMode.Execute;
+
+  /** Diagnostic plan stages to include in the response. Plan representations are diagnostic information rather than an executable client contract. */
+  explain?: GraphQueryExplainStage[];
+
+  /** Whether to include graph execution statistics. Defaults to true. */
+  includeStatistics?: boolean = true;
+
+  /** Whether to include informational diagnostics. Errors and warnings are returned regardless of this setting. */
+  includeDiagnostics?: boolean = false;
+
+  /** Controls bounded assertion evidence and optional source-document hydration. */
+  provenance?: GraphQueryProvenanceParameters;
+}
+
+/** Whether a graph query is executed or only planned. */
+@added(Versions.v2026_11_01_preview)
+union GraphQueryExecutionMode {
+  string,
+
+  /** Build and execute the graph plan. */
+  Execute: "execute",
+
+  /** Build the graph plan without executing backend searches. */
+  PlanOnly: "planOnly",
+}
+
+/** Diagnostic stages available when inspecting a graph query. */
+@added(Versions.v2026_11_01_preview)
+union GraphQueryExplainStage {
+  string,
+
+  /** Parsed query syntax. */
+  Syntax: "syntax",
+
+  /** Bound semantic intermediate representation. */
+  SemanticIr: "semanticIr",
+
+  /** Logical plan before optimization. */
+  LogicalPlan: "logicalPlan",
+
+  /** Logical plan after optimization. */
+  OptimizedLogicalPlan: "optimizedLogicalPlan",
+
+  /** Physical execution plan. */
+  PhysicalPlan: "physicalPlan",
+
+  /** Attribution of backend requests to execution-plan nodes. */
+  RequestAttributions: "requestAttributions",
+
+  /** All available diagnostic stages. */
+  Full: "full",
+}
+
+/** The kind of assertion evidence returned with graph rows. */
+@added(Versions.v2026_11_01_preview)
+union GraphQueryProvenanceKind {
+  string,
+
+  /** Return evidence identifiers without source documents. */
+  Ids: "ids",
+
+  /** Return evidence identifiers and selected documents from the profile-configured provenance index. */
+  Hydrate: "hydrate",
+}
+
+/** Bounded provenance collection options for a graph query. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryProvenanceParameters {
+  /** Whether to return evidence identifiers or also hydrate their source documents. */
+  kind: GraphQueryProvenanceKind;
+
+  /** Maximum evidence entries collected per result row. When bounded, the response indicates whether the evidence count is exact or a lower bound. */
+  @minValue(1)
+  maxEvidencePerRow?: int32;
+
+  /** Source-document selection options. Required when kind is hydrate. */
+  hydrateDocuments?: GraphQueryProvenanceHydrateDocumentsParameters;
+}
+
+/** Selects fields from the source index configured by graphProfile.provenanceIndexName. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryProvenanceHydrateDocumentsParameters {
+  /** Comma-separated source document fields to return; omitted selects the service's default retrievable fields. */
+  select?: string;
+}
+
+/** A graph query's projected rows and optional execution information. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryResult {
+  /** Number of projected rows in this response, not the size of an unbounded graph population. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "@odata.count")
+  count?: int64;
+
+  /** Query projection rows. planOnly returns an empty collection. */
+  @visibility(Lifecycle.Read)
+  value: GraphQueryRow[];
+
+  /** Execution statistics, when requested and available. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "@search.graphStats")
+  statistics?: GraphQueryStatistics;
+
+  /** Structured errors, warnings, and requested informational diagnostics. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "@search.graphDiagnostics")
+  diagnostics?: GraphQueryDiagnostic[];
+
+  /** Requested diagnostic stages. Absent stages are omitted. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Requested diagnostic stages contain structured JSON."
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "@search.graphExplain")
+  explain?: GraphQueryExplain;
+
+  /** Hydrated source documents keyed by document ID, shared across result rows. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "@search.graphProvenanceDocuments")
+  provenanceDocuments?: GraphQueryProvenanceDocuments;
+}
+
+/** A failed graph request with standard Search error information and optional graph diagnostics. */
+@added(Versions.v2026_11_01_preview)
+@error
+model GraphQueryError {
+  ...OptionalProperties<GraphQueryResult>;
+
+  /** Error category matching the standard error object's code, when provided in response headers. */
+  @header("x-ms-error-code")
+  errorCode?: string;
+
+  /** Standard Search error information. Graph query rejections use InvalidRequestParameter and preserve their specific codes in graph diagnostics. */
+  error: ErrorDetail;
+}
+
+/** A dynamic graph projection row with optional bounded assertion evidence. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "GQL projection names and values are query-defined."
+@added(Versions.v2026_11_01_preview)
+model GraphQueryRow {
+  ...Record<unknown>;
+
+  /** Assertion evidence supporting this projected row. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "@search.graphProvenance")
+  provenance?: GraphQueryRowProvenance;
+}
+
+/** Diagnostic query-plan representations keyed by requested explain stage. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Plan diagnostic representations are intentionally extensible JSON."
+@added(Versions.v2026_11_01_preview)
+model GraphQueryExplain {
+  ...Record<unknown>;
+}
+
+/** A source document containing the selected retrievable fields. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Source document fields are defined by the source index."
+@added(Versions.v2026_11_01_preview)
+model GraphQueryProvenanceDocument {
+  ...Record<unknown>;
+}
+
+/** Source documents keyed by document ID. Each document contains the selected retrievable source fields. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Source document fields are defined by the source index."
+@added(Versions.v2026_11_01_preview)
+model GraphQueryProvenanceDocuments {
+  ...Record<GraphQueryProvenanceDocument>;
+}
+
+/** Execution statistics for a graph query; counters describe work performed rather than result-row counts. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryStatistics {
+  /** Whether the request executed or only produced a plan. */
+  executionMode?: GraphQueryExecutionMode;
+
+  /** Backend search requests performed by the graph query. */
+  queryCount?: int32;
+
+  /** Backend assertion documents fetched during execution. */
+  documentsFetched?: int32;
+
+  /** Whether execution reports an estimated result. */
+  isEstimated?: boolean;
+
+  /** Reported total execution time in milliseconds. */
+  totalMs?: int64;
+
+  /** Reported search time in milliseconds. */
+  searchMs?: int64;
+
+  /** Time spent producing the query plan, in milliseconds. */
+  planningMs?: int64;
+}
+
+/** A graph planning or execution diagnostic. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryDiagnostic {
+  /** Stable machine-readable diagnostic identifier. */
+  code?: string;
+
+  /** The diagnostic's importance. */
+  severity?: GraphQueryDiagnosticSeverity;
+
+  /** The stage that produced the diagnostic. */
+  phase?: GraphQueryDiagnosticPhase;
+
+  /** Human-readable explanation; applications should use code rather than parse this text. */
+  message?: string;
+
+  /** Optional source-span description associated with the diagnostic. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The graph diagnostic wire contract returns null when no source span is available."
+  span?: string | null;
+
+  /** Suggested corrections or alternatives. */
+  suggestions?: string[];
+}
+
+/** The importance of a graph query diagnostic. */
+@added(Versions.v2026_11_01_preview)
+union GraphQueryDiagnosticSeverity {
+  string,
+
+  /** The query was rejected or could not be evaluated successfully. */
+  Error: "error",
+
+  /** Execution returned a result with a caveat, such as an execution or provenance limit. */
+  Warning: "warning",
+
+  /** Informational diagnostics, such as an optional execution summary. */
+  Info: "info",
+}
+
+/** The stage that produced a graph query diagnostic. */
+@added(Versions.v2026_11_01_preview)
+union GraphQueryDiagnosticPhase {
+  string,
+
+  /** Query syntax and parsing. */
+  Parse: "parse",
+
+  /** Variable, parameter, function, and semantic binding. */
+  Bind: "bind",
+
+  /** Request-option validation. */
+  Validation: "validation",
+
+  /** Query planning, including unsupported query shapes and query-breadth restrictions. */
+  Planning: "planning",
+
+  /** Runtime evaluation, execution-limit warnings, and execution summaries. */
+  Execution: "execution",
+}
+
+/** Assertion evidence supporting one projected graph row. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryRowProvenance {
+  /** Whether the query requested evidence IDs or source hydration. */
+  kind?: GraphQueryProvenanceKind;
+
+  /** Number of supporting assertions and the completeness relation of that count. */
+  evidenceCount?: GraphQueryEvidenceCount;
+
+  /** Bounded evidence entries for this result row. */
+  evidence?: GraphQueryEvidence[];
+}
+
+/** An evidence count whose relation describes whether collection was complete. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryEvidenceCount {
+  /** Number of supporting evidence entries observed. */
+  value?: int32;
+
+  /** Whether value is the exact count or a lower bound. */
+  relation?: GraphQueryEvidenceCountRelation;
+}
+
+/** Completeness of an evidence count. */
+@added(Versions.v2026_11_01_preview)
+union GraphQueryEvidenceCountRelation {
+  string,
+
+  /** All supporting evidence was counted. */
+  Exact: "exact",
+
+  /** At least this many supporting entries exist; collection was bounded. */
+  LowerBound: "lowerBound",
+}
+
+/** Source assertion identifiers and confidence values retained as graph evidence. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryEvidence {
+  /** Assertion document identifier in the graph index. */
+  edgeId?: string;
+
+  /** Source chunk identifier used for source-document lookup. */
+  chunkId?: string;
+
+  /** Parent source document identifier. */
+  parentId?: string;
+
+  /** Confidence values associated with the assertion and its components. */
+  confidence?: GraphQueryEvidenceConfidence;
+}
+
+/** Confidence values recorded on a supporting assertion. */
+@added(Versions.v2026_11_01_preview)
+model GraphQueryEvidenceConfidence {
+  /** Confidence in the complete relationship. */
+  edge?: float64;
+
+  /** Confidence in the subject grounding. */
+  subject?: float64;
+
+  /** Confidence in predicate alignment. */
+  predicate?: float64;
+
+  /** Confidence in the object grounding. */
+  object?: float64;
+}
+
 /** Allows the user to choose whether a semantic call should fail completely, or to return partial results. */
 union SemanticErrorMode {
   string,
@@ -43,6 +379,7 @@ union QueryCaptionType {
 }
 
 /** This parameter is only valid if the query type is `semantic`. When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -72,6 +409,10 @@ union QueryDebugMode {
   /** Allows the user to explore the list of query rewrites generated for their search request. */
   QueryRewrites: "queryRewrites",
 
+  /** Returns bounded diagnostics for agentic search under \@search.debug.agentic. Combine with other supported modes using |; this selector does not enable agentic retrieval or query rewriting. */
+  @added(Versions.v2026_11_01_preview)
+  Agentic: "agentic",
+
   /** Allows the user to retrieve scoring information regarding vectors matched within a collection of complex types. */
   InnerHits: "innerHits",
 
@@ -80,6 +421,7 @@ union QueryDebugMode {
 }
 
 /** The language of the query. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -304,6 +646,7 @@ union QueryLanguage {
 }
 
 /** Improve search recall by spell-correcting individual search query terms. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -328,12 +671,14 @@ union VectorQueryKind {
   Text: "text",
 
   /** Vector query where an url that represents an image value that needs to be vectorized is provided. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   ImageUrl: "imageUrl",
 
   /** Vector query where a base 64 encoded binary of an image that needs to be vectorized is provided. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -362,6 +707,7 @@ union VectorFilterMode {
   PreFilter: "preFilter",
 
   /** The filter will be applied after the global top-k candidate set of vector results is returned. This will result in fewer results than requested by the parameter 'k'. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -419,6 +765,7 @@ union SemanticSearchResultsType {
 }
 
 /** Type of query rewrite that was used for this request. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -441,6 +788,77 @@ union QueryType {
 
   /** Best suited for queries expressed in natural language as opposed to keywords. Improves precision of search results by re-ranking the top search results using a ranking model trained on the Web corpus. */
   Semantic: "semantic",
+
+  /** Uses an agentic model to generate queries and rerank search results within one index. Requires nonempty natural-language search text. */
+  @added(Versions.v2026_11_01_preview)
+  Agentic: "agentic",
+}
+
+/** Request-scoped runtime options for agentic search; service safety limits apply independently. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Align with the agenticOptions property and existing search options naming."
+@added(Versions.v2026_11_01_preview)
+model AgenticSearchOptions {
+  /** Maximum duration in seconds for the complete agentic search request, including retrieval, ranking and retries. */
+  @minValue(1)
+  maxRuntimeInSeconds?: int32;
+}
+
+/** Why agentic processing stopped. Non-model failures retain their existing error details and HTTP status. */
+@added(Versions.v2026_11_01_preview)
+union AgenticSearchTerminationReason {
+  string,
+
+  /** Processing completed normally after a valid model stop or a service-owned iteration bound. This does not guarantee complete evidence. */
+  ModelStopped: "modelStopped",
+
+  /** The request deadline ended agentic processing before a valid stop. */
+  MaxRuntimeExceeded: "maxRuntimeExceeded",
+
+  /** Agentic model processing failed before a valid model stop. */
+  ModelFailed: "modelFailed",
+}
+
+/** Token usage for agentic query planning and ranking across the search request, including documents not returned in the response. */
+@added(Versions.v2026_11_01_preview)
+model AgenticSearchUsage {
+  /** The number of tokens consumed by the agentic model for query planning, excluding ranking work. */
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  agenticPlanningTokens: int64;
+
+  /** The number of tokens consumed for semantic ranking, including documents not returned in the response. Excludes agentic query-planning tokens. */
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  reasoningTokens: int64;
+}
+
+/** One issued subquery from agentic search. The object permits future query metadata without changing the subquery collection shape. */
+@added(Versions.v2026_11_01_preview)
+model AgenticSearchSubQuery {
+  /** The text of the issued search query. Does not expose model prompts, raw reasoning or retrieved document content. */
+  @visibility(Lifecycle.Read)
+  search: string;
+
+  /** One-based logical model turn that produced the query. Multiple subqueries can share the same iteration. */
+  @visibility(Lifecycle.Read)
+  @minValue(1)
+  iteration: int32;
+}
+
+/** Bounded diagnostics returned for agentic search when debug selects agentic or all. Retrieved documents remain in value; prompts and raw model reasoning are excluded. Disabling diagnostics does not disable usage accounting or actionable error reporting. */
+@added(Versions.v2026_11_01_preview)
+model AgenticSearchDebugInfo {
+  /** The reason agentic processing stopped, when available. */
+  @visibility(Lifecycle.Read)
+  terminationReason?: AgenticSearchTerminationReason;
+
+  /** Issued subqueries with their originating model turns. This is not a per-document trace or a stable pagination contract. */
+  @visibility(Lifecycle.Read)
+  subQueries?: AgenticSearchSubQuery[];
+
+  /** Token usage for agentic query planning and ranking across this request. */
+  @visibility(Lifecycle.Read)
+  usage?: AgenticSearchUsage;
 }
 
 /** Specifies whether any or all of the search terms must be matched in order to count the document as a match. */
@@ -601,6 +1019,7 @@ model SearchOptions {
   semanticQuery?: string;
 
   /** When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -612,6 +1031,7 @@ model SearchOptions {
   debug?: QueryDebugMode;
 
   /** The language of the query. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -619,6 +1039,7 @@ model SearchOptions {
   queryLanguage?: QueryLanguage;
 
   /** Improve search recall by spell-correcting individual search query terms. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -626,11 +1047,18 @@ model SearchOptions {
   speller?: QuerySpellerType;
 
   /** The list of field names used for semantic ranking. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @query
   semanticFields?: string[];
+
+  /** Maximum duration in seconds for the complete agentic search request, including retrieval, ranking and retries. Not supported with other query modes. */
+  @added(Versions.v2026_11_01_preview)
+  @minValue(1)
+  @query
+  agenticMaxRuntimeInSeconds?: int32;
 }
 
 /** Parameters grouped for suggest operations. */
@@ -698,6 +1126,7 @@ model SearchDocumentsResult {
 
   /** Debug information that applies to the search results as a whole. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -732,6 +1161,7 @@ model SearchDocumentsResult {
   semanticPartialResponseType?: SemanticSearchResultsType;
 
   /** Type of query rewrite that was used to retrieve documents. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -748,6 +1178,7 @@ model FacetResult is Record<unknown> {
   count?: int64;
 
   /** The resulting total avg for the facet when a avg metric is requested. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -755,6 +1186,7 @@ model FacetResult is Record<unknown> {
   avg?: float64;
 
   /** The resulting total min for the facet when a min metric is requested. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -762,6 +1194,7 @@ model FacetResult is Record<unknown> {
   min?: float64;
 
   /** The resulting total max for the facet when a max metric is requested. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -769,6 +1202,7 @@ model FacetResult is Record<unknown> {
   max?: float64;
 
   /** The resulting total sum for the facet when a sum metric is requested. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -776,6 +1210,7 @@ model FacetResult is Record<unknown> {
   sum?: float64;
 
   /** The resulting total cardinality for the facet when a cardinality metric is requested. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -783,6 +1218,7 @@ model FacetResult is Record<unknown> {
   cardinality?: int64;
 
   /** The nested facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not contain any nested facets. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -813,6 +1249,7 @@ model QueryAnswerResult is Record<unknown> {
 }
 
 /** Contains debugging information that can be used to further explore your search results. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -820,9 +1257,15 @@ model DebugInfo {
   /** Contains debugging information specific to query rewrites. */
   @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
+
+  /** Contains request-wide agentic diagnostics when debug selects agentic or all. Does not imply that classic query rewriting executed. */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  agentic?: AgenticSearchDebugInfo;
 }
 
 /** Contains debugging information specific to query rewrites. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -837,6 +1280,7 @@ model QueryRewritesDebugInfo {
 }
 
 /** Contains debugging information specific to query rewrites. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -890,6 +1334,10 @@ model SearchRequest {
   /** A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax. */
   queryType?: QueryType;
 
+  /** Request-scoped runtime options when queryType is set to 'agentic'. Not supported with other query modes. Use the existing debug selector for diagnostics. */
+  @added(Versions.v2026_11_01_preview)
+  agenticOptions?: AgenticSearchOptions;
+
   /** A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries. */
   scoringStatistics?: ScoringStatistics;
 
@@ -918,12 +1366,14 @@ model SearchRequest {
   searchMode?: SearchMode;
 
   /** A value that specifies the language of the search query. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   queryLanguage?: QueryLanguage;
 
   /** A value that specifies the type of the speller to use to spell-correct individual search query terms. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -961,6 +1411,7 @@ model SearchRequest {
   captions?: QueryCaptionType;
 
   /** A value that specifies whether query rewrites should be generated to augment the search query. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -969,6 +1420,7 @@ model SearchRequest {
   /** The comma-separated list of field names used for semantic ranking. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -982,6 +1434,7 @@ model SearchRequest {
   vectorFilterMode?: VectorFilterMode;
 
   /** The query parameters to configure hybrid search behaviors. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -1007,22 +1460,29 @@ model VectorQuery {
   weight?: float32;
 
   /** The threshold used for vector queries. Note this can only be set if all 'fields' use the same similarity metric. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   threshold?: VectorThreshold;
 
   /** The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   filterOverride?: string;
 
   /** Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched. Default is 0. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   perDocumentVectorLimit?: int32;
+
+  /** Topic graph vector search options. */
+  @added(Versions.v2026_11_01_preview)
+  topicGraph?: VectorQueryTopicGraph;
 
   /** Type of query. */
   kind: VectorQueryKind;
@@ -1036,6 +1496,7 @@ model VectorThreshold {
 }
 
 /** The query parameters to configure hybrid search behaviors. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -1105,6 +1566,7 @@ model QueryCaptionResult {
 /** Contains debugging information that can be used to further explore your search results. */
 model DocumentDebugInfo {
   /** Contains debugging information specific to semantic ranking requests. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -1116,6 +1578,7 @@ model DocumentDebugInfo {
   vectors?: VectorsDebugInfo;
 
   /** Contains debugging information specific to vectors matched within a collection of complex types. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -1124,6 +1587,7 @@ model DocumentDebugInfo {
 }
 
 /** Contains debugging information specific to semantic ranking requests. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -1422,6 +1886,7 @@ model VectorizableTextQuery extends VectorQuery {
   text: string;
 
   /** Can be configured to let a generative model rewrite the query before sending it to be vectorized. */
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -1432,6 +1897,7 @@ model VectorizableTextQuery extends VectorQuery {
 }
 
 /** The query parameters to use for vector search when an url that represents an image value that needs to be vectorized is provided. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
@@ -1444,6 +1910,7 @@ model VectorizableImageUrlQuery extends VectorQuery {
 }
 
 /** The query parameters to use for vector search when a base 64 encoded binary of an image that needs to be vectorized is provided. */
+@added(Versions.v2026_11_01_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
