@@ -78,6 +78,7 @@ using Microsoft.Compute;
 @@clientName(ComputePlacementScores.post, "generate", "csharp");
 
 // SKU mix placement score SDK names.
+@@clientName(SkuMixPlacementVMSize, "SkuMixPlacementVmSize", "csharp");
 @@clientName(
   SkuMixPlacementRequest,
   "ComputeSkuMixPlacementGenerateContent",
