@@ -1979,14 +1979,15 @@ interface WebApps {
   getOneDeployStatusSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<unknown>,
+    ArmResponse<OneDeployStatusCollection>,
     OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
    * Description for Invoke the OneDeploy publish web app extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The service defines this as a legacy OneDeploy extension invocation over PUT, not an ARM resource create-or-replace operation; the documented contract is synchronous 200 OK with default error only."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "OneDeploy invokes deployment and returns 200 OK with no response body on synchronous completion; it does not create or return an ARM resource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Synchronous OneDeploy publication returns 200 OK without a response body; adding a response model would misrepresent the existing service contract."
   @added(Versions.v2026_11_15)
   @summary("Invoke the OneDeploy publish web app extension.")
   @put
@@ -1994,7 +1995,7 @@ interface WebApps {
   createOneDeployOperationSlot is WebAppOps.ActionSync<
     Site,
     OneDeployContent,
-    ArmResponse<unknown>,
+    OkResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 

@@ -25509,7 +25509,9 @@
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/OneDeployStatusCollection"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -25562,8 +25564,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {}
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -48851,6 +48852,183 @@
       "required": [
         "packageUri",
         "type"
+      ]
+    },
+    "OneDeployStatusCollection": {
+      "type": "object",
+      "description": "Deployment status entries returned by the OneDeploy extension.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The deployment status entries.",
+          "items": {
+            "$ref": "#/definitions/OneDeployStatusEnvelope"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OneDeployStatusEnvelope": {
+      "type": "object",
+      "description": "The envelope of a deployment status entry returned by the OneDeploy extension.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the deployment status entry.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the deployment status entry.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the deployment status entry.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the app.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OneDeployStatusProperties",
+          "description": "The deployment status details.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type",
+        "properties"
+      ]
+    },
+    "OneDeployStatusProperties": {
+      "type": "object",
+      "description": "Deployment status details returned by the OneDeploy extension.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The deployment identifier.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The deployment status: 0 pending, 1 building, 2 deploying, 3 failed, or 4 successful.",
+          "readOnly": true
+        },
+        "status_text": {
+          "type": "string",
+          "description": "The description of the deployment status.",
+          "readOnly": true,
+          "x-ms-client-name": "statusText"
+        },
+        "author_email": {
+          "type": "string",
+          "description": "The email address of the deployment author.",
+          "readOnly": true,
+          "x-ms-client-name": "authorEmail"
+        },
+        "author": {
+          "type": "string",
+          "description": "The deployment author.",
+          "readOnly": true
+        },
+        "deployer": {
+          "type": "string",
+          "description": "The deployment initiator.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The deployment message.",
+          "readOnly": true
+        },
+        "progress": {
+          "type": "string",
+          "description": "The deployment progress details.",
+          "readOnly": true
+        },
+        "received_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the deployment was received.",
+          "readOnly": true,
+          "x-ms-client-name": "receivedTime"
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the deployment started.",
+          "readOnly": true,
+          "x-ms-client-name": "startTime"
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the deployment ended.",
+          "readOnly": true,
+          "x-ms-client-name": "endTime"
+        },
+        "last_success_end_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the last successful deployment ended.",
+          "readOnly": true,
+          "x-ms-client-name": "lastSuccessEndTime"
+        },
+        "complete": {
+          "type": "boolean",
+          "description": "Whether the deployment has completed.",
+          "readOnly": true
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether this is the active deployment.",
+          "readOnly": true
+        },
+        "is_temp": {
+          "type": "boolean",
+          "description": "Whether this is a temporary deployment.",
+          "readOnly": true,
+          "x-ms-client-name": "isTemp"
+        },
+        "is_readonly": {
+          "type": "boolean",
+          "description": "Whether the deployment is read-only.",
+          "readOnly": true,
+          "x-ms-client-name": "isReadonly"
+        },
+        "url": {
+          "type": "string",
+          "description": "The absolute or relative URL of the deployment status.",
+          "readOnly": true
+        },
+        "log_url": {
+          "type": "string",
+          "description": "The absolute or relative URL of the deployment log.",
+          "readOnly": true,
+          "x-ms-client-name": "logUri"
+        },
+        "site_name": {
+          "type": "string",
+          "description": "The name of the app.",
+          "readOnly": true,
+          "x-ms-client-name": "siteName"
+        }
+      },
+      "required": [
+        "id",
+        "status"
       ]
     },
     "OpenAuthenticationAccessPolicies": {

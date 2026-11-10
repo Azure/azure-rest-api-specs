@@ -118,6 +118,37 @@ suppressions:
     reason: OneDeploy publication uses the existing fixed PUT extension URI; changing the route or verb would change the service contract.
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"]
+  - code: PutGetPatchResponseSchema
+    reason: OneDeploy GET returns deployment status entries, while synchronous PUT invokes deployment and returns no body; these are not CRUD operations on the same resource.
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"]
+  - code: PutRequestResponseSchemeArm
+    reason: The PUT request supplies deployment instructions, while synchronous completion returns no body; the service does not echo the request as a resource.
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"].put
+  - code: PutResponseCodes
+    reason: Synchronous OneDeploy publication returns 200 OK, not 201 Created, because it invokes deployment rather than creating an ARM resource.
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"].put
+  - code: ResponseSchemaSpecifiedForSuccessStatusCode
+    reason: Synchronous OneDeploy publication returns 200 OK without a response body; specifying a resource response schema would misrepresent the service.
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"].put
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: These response field names are serialized by the existing Kudu deployment-status contract; changing their casing would change the wire format.
+    from: openapi.json
+    where:
+      - $.definitions.OneDeployStatusProperties.properties.status_text
+      - $.definitions.OneDeployStatusProperties.properties.author_email
+      - $.definitions.OneDeployStatusProperties.properties.received_time
+      - $.definitions.OneDeployStatusProperties.properties.start_time
+      - $.definitions.OneDeployStatusProperties.properties.end_time
+      - $.definitions.OneDeployStatusProperties.properties.last_success_end_time
+      - $.definitions.OneDeployStatusProperties.properties.is_temp
+      - $.definitions.OneDeployStatusProperties.properties.is_readonly
+      - $.definitions.OneDeployStatusProperties.properties.log_url
+      - $.definitions.OneDeployStatusProperties.properties.site_name
 ```
 
 ### Tag: package-2026-07
