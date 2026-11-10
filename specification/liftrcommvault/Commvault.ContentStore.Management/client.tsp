@@ -20,7 +20,7 @@ using Commvault.ContentStore;
 // [SUFFIX002] The "Request" suffix is reserved for HTTP protocol types; use "Content" for request-body models.
 @@clientName(
   ActivateSaaSParameterRequest,
-  "CommvaultSaaSActivationContent",
+  "CommvaultSaasActivationContent",
   "csharp"
 );
 @@clientName(
@@ -35,7 +35,7 @@ using Commvault.ContentStore;
 );
 @@clientName(
   RestoreProtectionItemRequest,
-  "RestoreProtectedItemContent",
+  "RestoreProtectionItemContent",
   "csharp"
 );
 @@clientName(
@@ -58,14 +58,14 @@ using Commvault.ContentStore;
 );
 @@clientName(
   RestoreProtectionItemResponse,
-  "RestoreProtectedItemResult",
+  "RestoreProtectionItemResult",
   "csharp"
 );
-@@clientName(LatestLinkedSaaSResponse, "LatestLinkedSaaSResult", "csharp");
-@@clientName(SaaSResourceDetailsResponse, "SaaSResourceDetailsData", "csharp");
+@@clientName(LatestLinkedSaaSResponse, "LatestLinkedSaasResult", "csharp");
+@@clientName(SaaSResourceDetailsResponse, "SaasResourceDetailsData", "csharp");
 
 // [AZC0032] Non-resource models must not end with "Data"; give it a descriptive service-specific name.
-@@clientName(SaaSData, "CommvaultSaaSDetails", "csharp");
+@@clientName(SaaSData, "CommvaultSaasDetails", "csharp");
 
 // [SUFFIX003] The "Options" suffix is reserved for client configuration types.
 @@clientName(BackupOptions, "CommvaultBackupConfiguration", "csharp");
@@ -93,7 +93,7 @@ using Commvault.ContentStore;
 );
 @@clientName(
   VmInfo.powerOnVmAfterRestore,
-  "ShouldPowerOnVirtualMachineAfterRestore",
+  "ShouldPowerOnVmAfterRestore",
   "csharp"
 );
 @@clientName(VmInfo.attachAndSwapOsDisk, "ShouldAttachAndSwapOsDisk", "csharp");
@@ -156,6 +156,7 @@ using Commvault.ContentStore;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@clientName(LatestLinkedSaaSResponse.isHiddenSaaS, "IsHiddenSaas", "csharp");
 @@alternateType(
   SaaSResourceDetailsResponse.saaSResourceId,
   Azure.Core.armResourceIdentifier,
@@ -184,10 +185,10 @@ using Commvault.ContentStore;
   "go"
 );
 
-// [PR63699-1] "SaaSActivationDetails" is more descriptive than the raw wire-name-derived
+// [PR63699-1] "SaasActivationDetails" is more descriptive than the raw wire-name-derived
 // "ActivateSaaSRequestParam"; the property that carries it is renamed similarly, while
 // the wire name "activateSaaSRequestParam" is preserved for serialization.
-@@clientName(ActivateSaaSRequestParam, "SaaSActivationDetails", "csharp");
+@@clientName(ActivateSaaSRequestParam, "SaasActivationDetails", "csharp");
 @@clientName(
   ActivateSaaSParameterRequest.activateSaaSRequestParam,
   "ActivationDetails",
@@ -263,15 +264,6 @@ using Commvault.ContentStore;
   "ProtectionGroupResourceSelection",
   "csharp"
 );
-@doc("Rules that select resources to protect in a protection group.")
-model ProtectionGroupResourceMatchCriteria {
-  ...ProtectionGroupResources.matchRules::type;
-}
-@@alternateType(
-  ProtectionGroupResources.matchRules,
-  ProtectionGroupResourceMatchCriteria,
-  "csharp"
-);
 @@clientName(RestorePoints, "ProtectedItemRestorePoints", "csharp");
 @@clientName(VmInfo, "CommvaultVirtualMachineRestoreSettings", "csharp");
 @@clientName(VmListItem, "CommvaultVirtualMachineReference", "csharp");
@@ -280,10 +272,11 @@ model ProtectionGroupResourceMatchCriteria {
 
 @@clientName(
   SaaSOperationGroup.activateResource,
-  "ActivateSaaSResource",
+  "ActivateSaasResource",
   "csharp"
 );
-@@clientName(CloudAccounts.latestLinkedSaaS, "GetLatestLinkedSaaS", "csharp");
+@@clientName(CloudAccounts.latestLinkedSaaS, "GetLatestLinkedSaas", "csharp");
+@@clientName(CloudAccounts.linkSaaS, "LinkSaas", "csharp");
 @@clientName(
   ProtectedItemsOperationGroup.countByProtectionGroups,
   "CountProtectedItems",
@@ -349,20 +342,20 @@ model ProtectionGroupResourceMatchCriteria {
 @@clientName(RestoreProtectionItemRequest.toTime, "RestorePointTime", "csharp");
 @@clientName(LiftrBase.UserDetails.upn, "UserPrincipalName", "csharp");
 @@clientName(CloudAccountUserUpdate.upn, "UserPrincipalName", "csharp");
-@@clientName(ActivateSaaSParameterRequest.saasGuid, "SaaSGuid", "csharp");
+@@clientName(ActivateSaaSParameterRequest.saasGuid, "SaasGuid", "csharp");
 @@clientName(
   ActivateSaaSRequestParam.saasResourceId,
-  "SaaSResourceId",
+  "SaasResourceId",
   "csharp"
 );
 @@clientName(
   LiftrBase.MarketplaceDetails.saasResourceId,
-  "SaaSResourceId",
+  "SaasResourceId",
   "csharp"
 );
 @@clientName(
   CloudAccountMarketplaceUpdate.saasResourceId,
-  "SaaSResourceId",
+  "SaasResourceId",
   "csharp"
 );
 
@@ -377,4 +370,4 @@ model ProtectionGroupResourceMatchCriteria {
 @@clientName(BackupRuleType.HalfYearlyFulls, "HalfYearlyFullBackups", "csharp");
 @@clientName(BackupRuleType.YearlyFulls, "YearlyFullBackups", "csharp");
 
-@@clientName(CloudAccountProperties.ssoUrl, "SingleSignOnUriString", "csharp");
+@@clientName(CloudAccountProperties.ssoUrl, "SsoUrl", "csharp");
