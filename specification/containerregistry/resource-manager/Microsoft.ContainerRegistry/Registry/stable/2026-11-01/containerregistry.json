@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContainerRegistryManagementClient",
-    "version": "2025-11-01",
+    "version": "2026-11-01",
     "description": "The Microsoft Azure Container Registry management API provides create, read, update, and delete functionality for Azure Container Registry resources including registries, replications, webhooks, tasks, runs, and other registry components.",
     "x-typespec-generated": [
       {
@@ -4686,6 +4686,30 @@
         ]
       }
     },
+    "EndpointProtocol": {
+      "type": "string",
+      "description": "The connectivity protocol for the registry.",
+      "enum": [
+        "IPv4",
+        "IPv4AndIPv6"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4 connectivity only"
+          },
+          {
+            "name": "IPv4AndIPv6",
+            "value": "IPv4AndIPv6",
+            "description": "IPv4 and IPv6 (dual stack) connectivity"
+          }
+        ]
+      }
+    },
     "Event": {
       "type": "object",
       "description": "The event for a webhook.",
@@ -5192,6 +5216,14 @@
             ]
           }
         },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "The virtual network rules.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "x-ms-identifiers": []
+        },
         "ipRules": {
           "type": "array",
           "description": "The IP ACL rules.",
@@ -5614,6 +5646,30 @@
         "name"
       ]
     },
+    "RegionalEndpoints": {
+      "type": "string",
+      "description": "Whether or not per-region endpoints are enabled for accessing the registry.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "RegionalEndpoints",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Regional endpoints are enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Regional endpoints are disabled."
+          }
+        ]
+      }
+    },
     "Registry": {
       "type": "object",
       "description": "An object that represents a container registry.",
@@ -5783,6 +5839,43 @@
           },
           "readOnly": true
         },
+        "regionalEndpoints": {
+          "$ref": "#/definitions/RegionalEndpoints",
+          "description": "Enable per-region endpoints for accessing registry."
+        },
+        "regionalEndpointHostNames": {
+          "type": "array",
+          "description": "List of host names that will serve registry when RegionalEndpoints is enabled.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "endpointProtocol": {
+          "type": "string",
+          "description": "The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6).",
+          "default": "IPv4",
+          "enum": [
+            "IPv4",
+            "IPv4AndIPv6"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "IPv4",
+                "value": "IPv4",
+                "description": "IPv4 connectivity only"
+              },
+              {
+                "name": "IPv4AndIPv6",
+                "value": "IPv4AndIPv6",
+                "description": "IPv4 and IPv6 (dual stack) connectivity"
+              }
+            ]
+          }
+        },
         "privateEndpointConnections": {
           "type": "array",
           "description": "List of private endpoint connections for a container registry.",
@@ -5918,6 +6011,14 @@
         "dataEndpointEnabled": {
           "type": "boolean",
           "description": "Enable a single data endpoint per region for serving data."
+        },
+        "regionalEndpoints": {
+          "$ref": "#/definitions/RegionalEndpoints",
+          "description": "Enable per-region endpoints for accessing registry."
+        },
+        "endpointProtocol": {
+          "$ref": "#/definitions/EndpointProtocol",
+          "description": "The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6)."
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
@@ -6537,7 +6638,6 @@
         }
       },
       "required": [
-        "tokenId",
         "messageTtl"
       ]
     },
@@ -6945,6 +7045,45 @@
           "readOnly": true
         }
       }
+    },
+    "VirtualNetworkRule": {
+      "type": "object",
+      "description": "Virtual network rule.",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "The action of virtual network rule.",
+          "default": "Allow",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Allow",
+                "value": "Allow"
+              }
+            ]
+          }
+        },
+        "virtualNetworkSubnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "virtualNetworkSubnetResourceId"
+      ]
     },
     "Webhook": {
       "type": "object",

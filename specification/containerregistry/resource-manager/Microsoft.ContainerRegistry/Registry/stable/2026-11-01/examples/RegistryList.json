@@ -2,7 +2,7 @@
   "title": "RegistryList",
   "operationId": "Registries_List",
   "parameters": {
-    "api-version": "2025-11-01",
+    "api-version": "2026-11-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -18,8 +18,8 @@
               "key": "value"
             },
             "sku": {
-              "name": "Standard",
-              "tier": "Standard"
+              "name": "Premium",
+              "tier": "Premium"
             },
             "properties": {
               "loginServer": "myRegistry.azurecr.io",
@@ -28,7 +28,8 @@
               "adminUserEnabled": false,
               "networkRuleSet": {
                 "defaultAction": "Allow",
-                "ipRules": []
+                "ipRules": [],
+                "virtualNetworkRules": []
               },
               "policies": {
                 "quarantinePolicy": {
@@ -54,8 +55,15 @@
                 "status": "disabled"
               },
               "status": null,
-              "dataEndpointEnabled": false,
-              "dataEndpointHostNames": [],
+              "dataEndpointEnabled": true,
+              "dataEndpointHostNames": [
+                "myRegistry.westus.data.azurecr.io"
+              ],
+              "endpointProtocol": "IPv4AndIPv6",
+              "regionalEndpoints": "Enabled",
+              "regionalEndpointHostNames": [
+                "myRegistry.westus.geo.azurecr.io"
+              ],
               "privateEndpointConnections": [],
               "publicNetworkAccess": "Enabled",
               "networkRuleBypassOptions": "AzureServices",

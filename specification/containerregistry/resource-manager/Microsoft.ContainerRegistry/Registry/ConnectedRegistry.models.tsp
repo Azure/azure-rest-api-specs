@@ -292,7 +292,7 @@ model SyncProperties {
   /**
    * The resource ID of the ACR token used to authenticate the connected registry to its parent during sync.
    */
-  @madeOptional(Versions.vLatestPreview)
+  @madeOptional(Versions.v2026_11_01)
   tokenId?: string;
 
   /**
@@ -511,9 +511,8 @@ model ConnectedRegistryUpdateParameters {
   ...ManagedServiceIdentityProperty;
 }
 @@added(ConnectedRegistryUpdateParameters.identity, Versions.vLatestPreview);
-@@doc(
-  ConnectedRegistryUpdateParameters.identity,
-  "The user-assigned managed identity used to authenticate the connected registry with its parent during synchronization. Requires authType to be ManagedIdentity."
+@@doc(ConnectedRegistryUpdateParameters.identity,
+"The user-assigned managed identity used to authenticate the connected registry with its parent during synchronization. Requires authType to be ManagedIdentity."
 );
 
 /**
