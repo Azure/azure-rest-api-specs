@@ -658,6 +658,10 @@ scalar FoundryTimestamp extends utcDateTime;
 @encode(DurationKnownEncoding.seconds, int32)
 scalar FoundryDurationSeconds extends duration;
 
+@doc("A duration encoded as a floating-point number of seconds.")
+@encode(DurationKnownEncoding.seconds, float64)
+scalar FoundryDurationSecondsFloat extends FoundryDurationSeconds;
+
 #suppress "@azure-tools/typespec-azure-core/known-encoding" "Foundry wire contracts encode duration values as integer milliseconds."
 @doc("A duration encoded as an integer number of milliseconds.")
 @encode(DurationKnownEncoding.milliseconds, int32)
