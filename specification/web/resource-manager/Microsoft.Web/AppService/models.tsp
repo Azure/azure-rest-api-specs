@@ -11966,6 +11966,176 @@ model MSDeployStatusProperties {
   complete?: boolean;
 }
 
+/** Deployment status entries returned by the OneDeploy extension. */
+@added(Versions.v2026_11_15)
+model OneDeployStatusCollection {
+  /** The deployment status entries. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  value: OneDeployStatusEnvelope[];
+}
+
+/** The envelope of a deployment status entry returned by the OneDeploy extension. */
+@added(Versions.v2026_11_15)
+model OneDeployStatusEnvelope {
+  /** The identifier of the deployment status entry. */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The name of the deployment status entry. */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /** The type of the deployment status entry. */
+  @visibility(Lifecycle.Read)
+  type: string;
+
+  /** The location of the app. */
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /** The deployment status details. */
+  @visibility(Lifecycle.Read)
+  properties: OneDeployStatusProperties;
+}
+
+/** Deployment status details returned by the OneDeploy extension. */
+@added(Versions.v2026_11_15)
+model OneDeployStatusProperties {
+  /** The deployment identifier. */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The deployment status: 0 pending, 1 building, 2 deploying, 3 failed, or 4 successful. */
+  @visibility(Lifecycle.Read)
+  status: int32;
+
+  /** The description of the deployment status. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "status_text")
+  statusText?: string;
+
+  /** The email address of the deployment author. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "author_email")
+  authorEmail?: string;
+
+  /** The deployment author. */
+  @visibility(Lifecycle.Read)
+  author?: string;
+
+  /** The deployment initiator. */
+  @visibility(Lifecycle.Read)
+  deployer?: string;
+
+  /** The deployment message. */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /** The deployment progress details. */
+  @visibility(Lifecycle.Read)
+  progress?: string;
+
+  /** The time the deployment was received. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "received_time")
+  receivedTime?: utcDateTime;
+
+  /** The time the deployment started. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "start_time")
+  startTime?: utcDateTime;
+
+  /** The time the deployment ended. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "end_time")
+  endTime?: utcDateTime;
+
+  /** The time the last successful deployment ended. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "last_success_end_time")
+  lastSuccessEndTime?: utcDateTime;
+
+  /** Whether the deployment has completed. */
+  @visibility(Lifecycle.Read)
+  complete?: boolean;
+
+  /** Whether this is the active deployment. */
+  @visibility(Lifecycle.Read)
+  active?: boolean;
+
+  /** Whether this is a temporary deployment. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "is_temp")
+  isTemp?: boolean;
+
+  /** Whether the deployment is read-only. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "is_readonly")
+  isReadonly?: boolean;
+
+  /** The absolute or relative URL of the deployment status. */
+  @visibility(Lifecycle.Read)
+  url?: string;
+
+  /** The absolute or relative URL of the deployment log. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "log_url")
+  logUri?: string;
+
+  /** The name of the app. */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "site_name")
+  siteName?: string;
+}
+
+/** The types of artifacts supported by OneDeploy. */
+@added(Versions.v2026_11_15)
+union OneDeployArtifactType {
+  /** A Java web application archive. */
+  War: "war",
+
+  /** A Java archive. */
+  Jar: "jar",
+
+  /** A Java enterprise application archive. */
+  Ear: "ear",
+
+  /** A library file. */
+  Lib: "lib",
+
+  /** An application startup script. */
+  Startup: "startup",
+
+  /** A static file. */
+  Static: "static",
+
+  /** A ZIP package. */
+  Zip: "zip",
+
+  string,
+}
+
+/** The properties of a OneDeploy deployment request. */
+@added(Versions.v2026_11_15)
+model OneDeployRequestProperties {
+  /** The URI of the package or file to deploy. */
+  packageUri: url;
+
+  /** The type of artifact to deploy. */
+  type: OneDeployArtifactType;
+
+  /** The absolute target path for the deployed artifact. */
+  path?: string;
+}
+
+/** The request to deploy a package or file using OneDeploy. */
+@added(Versions.v2026_11_15)
+model OneDeployContent {
+  /** The deployment properties. */
+  properties: OneDeployRequestProperties;
+}
+
 /**
  * MSDeploy ARM PUT information properties
  */
