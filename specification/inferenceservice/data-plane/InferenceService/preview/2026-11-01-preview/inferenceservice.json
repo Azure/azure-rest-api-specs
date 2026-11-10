@@ -404,7 +404,7 @@
     },
     "EmbeddingBadRequestResult": {
       "type": "object",
-      "description": "The embedding request was not valid. The `error.code` identifies the problem:\n- `InvalidRequest`: the request isn't supported on this endpoint, for example `contents` isn't enabled.\n- `InvalidRequestBody`: malformed JSON, a wrong type, an unknown or snake_case field, or a value outside its allowed\nset. `error.details` describes each problem.\n- `EMBEDDING_INPUT_INVALID`: an item's type, source, size, format or count, or a model or version isn't valid.\nText over the model's token limit isn't an error; see `EMBEDDING_INPUT_TRUNCATED`.\n- `EMBEDDING_URL_NOT_ALLOWED`: `input_images`, a link in an image's `content`, a `url` where blob inputs are off or\nfrom an API-key caller, or a `sasToken` that isn't a read-only, https-only user delegation SAS for one blob signed\nby the caller. Nothing is read.\n- `EMBEDDING_BLOB_READ_FAILED`: Storage refused the blob, for example because of an expired SAS or a missing blob.\n- `EMBEDDING_DELIVERY_NOT_SUPPORTED`: `delivery: link` isn't enabled on this endpoint. Use `inline`.",
+      "description": "The embedding request was not valid. The `error.code` identifies the problem:\n- `InvalidRequest`: the request isn't supported on this endpoint, for example `contents` isn't enabled.\n- `InvalidRequestBody`: malformed JSON, a wrong type, an unknown or snake_case field, or a value outside its allowed\nset. `error.details` describes each problem.\n- `EMBEDDING_INPUT_INVALID`: an item's kind, source, size, format or count, or a model or version isn't valid.\nText over the model's token limit isn't an error; see `EMBEDDING_INPUT_TRUNCATED`.\n- `EMBEDDING_URL_NOT_ALLOWED`: `input_images`, a link in an image's `content`, a `url` where blob inputs are off or\nfrom an API-key caller, or a `sasToken` that isn't a read-only, https-only user delegation SAS for one blob signed\nby the caller. Nothing is read.\n- `EMBEDDING_BLOB_READ_FAILED`: Storage refused the blob, for example because of an expired SAS or a missing blob.\n- `EMBEDDING_DELIVERY_NOT_SUPPORTED`: `delivery: link` isn't enabled on this endpoint. Use `inline`.",
       "properties": {
         "error": {
           "$ref": "#/definitions/ProblemDetails",
@@ -417,15 +417,15 @@
     },
     "EmbeddingContentItem": {
       "type": "object",
-      "description": "One item to embed: its `type`, an optional `id`, and exactly one source: `content`, or `url` with `sasToken`.",
+      "description": "One item to embed: its `kind`, an optional `id`, and exactly one source: `content`, or `url` with `sasToken`.",
       "properties": {
         "id": {
           "type": "string",
           "description": "A caller-chosen identifier, up to 256 characters, echoed on the matching result.",
           "maxLength": 256
         },
-        "type": {
-          "$ref": "#/definitions/EmbeddingContentType",
+        "kind": {
+          "$ref": "#/definitions/EmbeddingContentKind",
           "description": "What the item is: a document (`text`), a search query (`query`) or a document image (`image`)."
         },
         "content": {
@@ -445,10 +445,10 @@
         }
       },
       "required": [
-        "type"
+        "kind"
       ]
     },
-    "EmbeddingContentType": {
+    "EmbeddingContentKind": {
       "type": "string",
       "description": "The kind of an item to embed.",
       "enum": [
@@ -457,7 +457,7 @@
         "image"
       ],
       "x-ms-enum": {
-        "name": "EmbeddingContentType",
+        "name": "EmbeddingContentKind",
         "modelAsString": true,
         "values": [
           {
@@ -589,7 +589,7 @@
       }
     },
     "EmbeddingOperationError": {},
-    "EmbeddingOutputDataType": {
+    "EmbeddingOutputDataKind": {
       "type": "string",
       "description": "The numeric type of the returned vector values.",
       "enum": [
@@ -597,7 +597,7 @@
         "float16"
       ],
       "x-ms-enum": {
-        "name": "EmbeddingOutputDataType",
+        "name": "EmbeddingOutputDataKind",
         "modelAsString": true,
         "values": [
           {
@@ -640,7 +640,7 @@
       ]
     },
     "EmbeddingVector": {},
-    "EmbeddingVectorType": {
+    "EmbeddingVectorKind": {
       "type": "string",
       "description": "The kind of vectors to return.",
       "enum": [
@@ -649,7 +649,7 @@
         "dense_multi"
       ],
       "x-ms-enum": {
-        "name": "EmbeddingVectorType",
+        "name": "EmbeddingVectorKind",
         "modelAsString": true,
         "values": [
           {
@@ -736,7 +736,7 @@
     "MultiEmbeddingVector": {},
     "MultimodalDenseAndMultiVectorEmbedding": {
       "type": "object",
-      "description": "The result for one item when `vectorType` is `dense_multi`: a dense vector and one vector per token, from one model run.",
+      "description": "The result for one item when `vectorKind` is `dense_multi`: a dense vector and one vector per token, from one model run.",
       "properties": {
         "shape": {
           "type": "array",
@@ -748,11 +748,11 @@
         },
         "embedding": {
           "$ref": "#/definitions/EmbeddingVector",
-          "description": "The dense vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian\n`outputDtype` values."
+          "description": "The dense vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian\n`outputDataKind` values."
         },
         "multiEmbedding": {
           "$ref": "#/definitions/MultiEmbeddingVector",
-          "description": "The multi-vectors: an array of arrays of numbers, or, when `encodingFormat` is `base64`, one base64 string of all\ntheir little-endian `outputDtype` values in row-major order. Decode it and reshape it to `shape`."
+          "description": "The multi-vectors: an array of arrays of numbers, or, when `encodingFormat` is `base64`, one base64 string of all\ntheir little-endian `outputDataKind` values in row-major order. Decode it and reshape it to `shape`."
         }
       },
       "required": [
@@ -769,11 +769,11 @@
     },
     "MultimodalDenseEmbedding": {
       "type": "object",
-      "description": "The result for one item when `vectorType` is `dense`: one vector.",
+      "description": "The result for one item when `vectorKind` is `dense`: one vector.",
       "properties": {
         "embedding": {
           "$ref": "#/definitions/EmbeddingVector",
-          "description": "The vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian\n`outputDtype` values."
+          "description": "The vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian\n`outputDataKind` values."
         }
       },
       "required": [
@@ -807,14 +807,14 @@
           "type": "string",
           "description": "The model version. Defaults to the latest; the response always names the version used."
         },
-        "vectorType": {
-          "$ref": "#/definitions/EmbeddingVectorType",
+        "vectorKind": {
+          "$ref": "#/definitions/EmbeddingVectorKind",
           "description": "The kind of vectors to return. Defaults to `dense`."
         },
         "dimensions": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of dimensions per vector; with `dense_multi`, of the dense vector. Must be a value the model supports for the\nrequested vector type; the model's native width is the default.",
+          "description": "The number of dimensions per vector; with `dense_multi`, of the dense vector. Must be a value the model supports for the\nrequested vector kind; the model's native width is the default.",
           "minimum": 1
         },
         "multiDimensions": {
@@ -829,10 +829,9 @@
           "description": "For `multi` and `dense_multi` only: the most multi-vectors to return per item.",
           "minimum": 1
         },
-        "outputDtype": {
-          "$ref": "#/definitions/EmbeddingOutputDataType",
-          "description": "The numeric type of the returned values, for every vector in the response. Defaults to `float32` for `dense` and\n`float16` for `multi` and `dense_multi`.",
-          "x-ms-client-name": "outputDataType"
+        "outputDataKind": {
+          "$ref": "#/definitions/EmbeddingOutputDataKind",
+          "description": "The numeric type of the returned values, for every vector in the response. Defaults to `float32` for `dense` and\n`float16` for `multi` and `dense_multi`."
         },
         "encodingFormat": {
           "$ref": "#/definitions/EmbeddingEncodingFormat",
@@ -860,13 +859,13 @@
           "type": "string",
           "description": "The item's `id` from the request, if it had one."
         },
-        "type": {
-          "$ref": "#/definitions/EmbeddingContentType",
-          "description": "The item's kind."
+        "contentKind": {
+          "$ref": "#/definitions/EmbeddingContentKind",
+          "description": "The item's content kind, as supplied in the request's `kind`."
         },
         "kind": {
-          "$ref": "#/definitions/EmbeddingVectorType",
-          "description": "The kind of vectors returned, as requested in `vectorType`."
+          "$ref": "#/definitions/EmbeddingVectorKind",
+          "description": "The kind of vectors returned, as requested in `vectorKind`."
         },
         "width": {
           "type": "integer",
@@ -905,7 +904,7 @@
       "discriminator": "kind",
       "required": [
         "index",
-        "type",
+        "contentKind",
         "kind"
       ]
     },
@@ -952,7 +951,7 @@
           "format": "int32",
           "description": "The number of `data` items in the file."
         },
-        "bytes": {
+        "sizeInBytes": {
           "type": "integer",
           "format": "int64",
           "description": "The size of the file in bytes."
@@ -972,7 +971,7 @@
         "sasToken",
         "expiresAt",
         "records",
-        "bytes",
+        "sizeInBytes",
         "sha256",
         "contentType"
       ]
@@ -999,10 +998,9 @@
           "type": "string",
           "description": "The model version that produced the vectors. Pin it to keep an index stable."
         },
-        "outputDtype": {
-          "$ref": "#/definitions/EmbeddingOutputDataType",
-          "description": "The numeric type of the returned values.",
-          "x-ms-client-name": "outputDataType"
+        "outputDataKind": {
+          "$ref": "#/definitions/EmbeddingOutputDataKind",
+          "description": "The numeric type of the returned values."
         },
         "data": {
           "type": "array",
@@ -1031,7 +1029,7 @@
         "object",
         "model",
         "modelVersion",
-        "outputDtype",
+        "outputDataKind",
         "data",
         "usage"
       ]
@@ -1111,7 +1109,7 @@
     },
     "MultimodalMultiVectorEmbedding": {
       "type": "object",
-      "description": "The result for one item when `vectorType` is `multi`: one vector per token, for late-interaction (MaxSim) scoring.",
+      "description": "The result for one item when `vectorKind` is `multi`: one vector per token, for late-interaction (MaxSim) scoring.",
       "properties": {
         "shape": {
           "type": "array",
@@ -1123,7 +1121,7 @@
         },
         "multiEmbedding": {
           "$ref": "#/definitions/MultiEmbeddingVector",
-          "description": "The vectors: an array of arrays of numbers, or, when `encodingFormat` is `base64`, one base64 string of all their\nlittle-endian `outputDtype` values in row-major order. Decode it and reshape it to `shape`."
+          "description": "The vectors: an array of arrays of numbers, or, when `encodingFormat` is `base64`, one base64 string of all their\nlittle-endian `outputDataKind` values in row-major order. Decode it and reshape it to `shape`."
         }
       },
       "required": [

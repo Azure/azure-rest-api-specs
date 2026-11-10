@@ -8,17 +8,18 @@
       "contents": [
         {
           "id": "q-1",
-          "type": "query",
+          "kind": "query",
           "content": "When is invoice 1042 due?"
         },
         {
           "id": "inv-1042-p1",
-          "type": "image",
+          "kind": "image",
           "url": "https://contoso.blob.core.windows.net/invoices/2026/inv-1042-p1.jpg",
           "sasToken": "sv=2025-07-05&st=2026-11-05T16%3A25%3A00Z&se=2026-11-05T16%3A40%3A00Z&skoid=00000000-0000-0000-0000-000000000000&sktid=00000000-0000-0000-0000-000000000000&skt=2026-11-05T16%3A25%3A00Z&ske=2026-11-05T17%3A25%3A00Z&sks=b&skv=2025-07-05&sr=b&sp=r&spr=https&sig=REDACTED"
         }
       ],
-      "vectorType": "dense_multi",
+      "vectorKind": "dense_multi",
+      "outputDataKind": "float16",
       "maxNumVectors": 1024,
       "encodingFormat": "base64",
       "delivery": "inline"
@@ -33,12 +34,12 @@
         "object": "list",
         "model": "microsoft-embedding-1-large",
         "modelVersion": "3",
-        "outputDtype": "float16",
+        "outputDataKind": "float16",
         "data": [
           {
             "index": 0,
             "id": "q-1",
-            "type": "query",
+            "contentKind": "query",
             "kind": "dense_multi",
             "shape": [
               20,
@@ -51,7 +52,7 @@
           {
             "index": 1,
             "id": "inv-1042-p1",
-            "type": "image",
+            "contentKind": "image",
             "kind": "dense_multi",
             "shape": [
               1024,

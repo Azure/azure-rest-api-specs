@@ -230,7 +230,7 @@ union InferenceOperationError {
 
 /** The kind of an item to embed. */
 @added(Versions.v2026_11_01_preview)
-union EmbeddingContentType {
+union EmbeddingContentKind {
   string,
 
   /** A document to index. */
@@ -245,7 +245,7 @@ union EmbeddingContentType {
 
 /** The kind of vectors to return. */
 @added(Versions.v2026_11_01_preview)
-union EmbeddingVectorType {
+union EmbeddingVectorKind {
   string,
 
   /** One vector per item. */
@@ -263,7 +263,7 @@ union EmbeddingVectorType {
 
 /** The numeric type of the returned vector values. */
 @added(Versions.v2026_11_01_preview)
-union EmbeddingOutputDataType {
+union EmbeddingOutputDataKind {
   string,
 
   /** 32-bit floating point. The default for dense vectors. */
@@ -303,7 +303,7 @@ union EmbeddingImageFormat {
   Webp: "webp",
 }
 
-/** One item to embed: its `type`, an optional `id`, and exactly one source: `content`, or `url` with `sasToken`. */
+/** One item to embed: its `kind`, an optional `id`, and exactly one source: `content`, or `url` with `sasToken`. */
 @added(Versions.v2026_11_01_preview)
 model EmbeddingContentItem {
   /** A caller-chosen identifier, up to 256 characters, echoed on the matching result. */
@@ -311,7 +311,7 @@ model EmbeddingContentItem {
   id?: string;
 
   /** What the item is: a document (`text`), a search query (`query`) or a document image (`image`). */
-  type: EmbeddingContentType;
+  kind: EmbeddingContentKind;
 
   /**
    * The item, inline. For `text` and `query`: the text, up to 100,000 characters; text over the model's token limit
@@ -372,11 +372,11 @@ model MultimodalEmbeddingContent {
   modelVersion?: string;
 
   /** The kind of vectors to return. Defaults to `dense`. */
-  vectorType?: EmbeddingVectorType;
+  vectorKind?: EmbeddingVectorKind;
 
   /**
    * The number of dimensions per vector; with `dense_multi`, of the dense vector. Must be a value the model supports for the
-   * requested vector type; the model's native width is the default.
+   * requested vector kind; the model's native width is the default.
    */
   @minValue(1)
   dimensions?: int32;
@@ -396,7 +396,7 @@ model MultimodalEmbeddingContent {
    * The numeric type of the returned values, for every vector in the response. Defaults to `float32` for `dense` and
    * `float16` for `multi` and `dense_multi`.
    */
-  outputDtype?: EmbeddingOutputDataType;
+  outputDataKind?: EmbeddingOutputDataKind;
 
   /** How vectors are encoded in the response. Defaults to `float`. */
   encodingFormat?: EmbeddingEncodingFormat;
@@ -421,11 +421,11 @@ model MultimodalEmbeddingData {
   /** The item's `id` from the request, if it had one. */
   id?: string;
 
-  /** The item's kind. */
-  type: EmbeddingContentType;
+  /** The item's content kind, as supplied in the request's `kind`. */
+  contentKind: EmbeddingContentKind;
 
-  /** The kind of vectors returned, as requested in `vectorType`. */
-  kind: EmbeddingVectorType;
+  /** The kind of vectors returned, as requested in `vectorKind`. */
+  kind: EmbeddingVectorKind;
 
   /** For images: the width in pixels. */
   width?: int32;
@@ -455,55 +455,55 @@ model MultimodalEmbeddingData {
   inputTokens?: int64;
 }
 
-/** The result for one item when `vectorType` is `dense`: one vector. */
+/** The result for one item when `vectorKind` is `dense`: one vector. */
 @added(Versions.v2026_11_01_preview)
 model MultimodalDenseEmbedding extends MultimodalEmbeddingData {
   /** The kind of vectors returned. */
-  kind: EmbeddingVectorType.Dense;
+  kind: EmbeddingVectorKind.Dense;
 
   /**
    * The vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian
-   * `outputDtype` values.
+   * `outputDataKind` values.
    */
   embedding: EmbeddingVector;
 }
 
-/** The result for one item when `vectorType` is `multi`: one vector per token, for late-interaction (MaxSim) scoring. */
+/** The result for one item when `vectorKind` is `multi`: one vector per token, for late-interaction (MaxSim) scoring. */
 @added(Versions.v2026_11_01_preview)
 model MultimodalMultiVectorEmbedding extends MultimodalEmbeddingData {
   /** The kind of vectors returned. */
-  kind: EmbeddingVectorType.Multi;
+  kind: EmbeddingVectorKind.Multi;
 
   /** The number of vectors and the number of dimensions: `[vectors, dimensions]`. */
   shape: int32[];
 
   /**
    * The vectors: an array of arrays of numbers, or, when `encodingFormat` is `base64`, one base64 string of all their
-   * little-endian `outputDtype` values in row-major order. Decode it and reshape it to `shape`.
+   * little-endian `outputDataKind` values in row-major order. Decode it and reshape it to `shape`.
    */
   multiEmbedding: MultiEmbeddingVector;
 }
 
 /**
- * The result for one item when `vectorType` is `dense_multi`: a dense vector and one vector per token, from one model run.
+ * The result for one item when `vectorKind` is `dense_multi`: a dense vector and one vector per token, from one model run.
  */
 @added(Versions.v2026_11_01_preview)
 model MultimodalDenseAndMultiVectorEmbedding extends MultimodalEmbeddingData {
   /** The kind of vectors returned. */
-  kind: EmbeddingVectorType.DenseAndMulti;
+  kind: EmbeddingVectorKind.DenseAndMulti;
 
   /** The number of multi-vectors and their number of dimensions: `[vectors, multiDimensions]`. */
   shape: int32[];
 
   /**
    * The dense vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian
-   * `outputDtype` values.
+   * `outputDataKind` values.
    */
   embedding: EmbeddingVector;
 
   /**
    * The multi-vectors: an array of arrays of numbers, or, when `encodingFormat` is `base64`, one base64 string of all
-   * their little-endian `outputDtype` values in row-major order. Decode it and reshape it to `shape`.
+   * their little-endian `outputDataKind` values in row-major order. Decode it and reshape it to `shape`.
    */
   multiEmbedding: MultiEmbeddingVector;
 }
@@ -521,7 +521,7 @@ union EmbeddingVector {
 }
 
 /**
- * Multi-vectors: arrays of numbers, or one base64 string of all values (little-endian `outputDtype`, row-major) to
+ * Multi-vectors: arrays of numbers, or one base64 string of all values (little-endian `outputDataKind`, row-major) to
  * decode and reshape to the item's `shape`.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "The vectors are returned as numbers or as a base64 string, depending on the requested encoding format."
@@ -532,7 +532,7 @@ union MultiEmbeddingVector {
   float32[][],
 
   /**
-   * All vectors as one base64 string: the little-endian `outputDtype` values in row-major order, `shape[0]` vectors of
+   * All vectors as one base64 string: the little-endian `outputDataKind` values in row-major order, `shape[0]` vectors of
    * `shape[1]` values each. For example, in Python: `numpy.frombuffer(base64.b64decode(value), dtype).reshape(shape)`.
    */
   string,
@@ -575,7 +575,7 @@ model MultimodalEmbeddingResult {
   modelVersion: string;
 
   /** The numeric type of the returned values. */
-  outputDtype: EmbeddingOutputDataType;
+  outputDataKind: EmbeddingOutputDataKind;
 
   /** One entry per item in `contents`, in request order. Empty when `output` is present. */
   data: MultimodalEmbeddingData[];
@@ -617,7 +617,7 @@ model MultimodalEmbeddingOutput {
   records: int32;
 
   /** The size of the file in bytes. */
-  bytes: int64;
+  sizeInBytes: int64;
 
   /** The lowercase hexadecimal SHA-256 hash of the file. */
   sha256: string;
@@ -685,7 +685,7 @@ model MultimodalEmbeddingOperationResult {
  * - `InvalidRequest`: the request isn't supported on this endpoint, for example `contents` isn't enabled.
  * - `InvalidRequestBody`: malformed JSON, a wrong type, an unknown or snake_case field, or a value outside its allowed
  *   set. `error.details` describes each problem.
- * - `EMBEDDING_INPUT_INVALID`: an item's type, source, size, format or count, or a model or version isn't valid.
+ * - `EMBEDDING_INPUT_INVALID`: an item's kind, source, size, format or count, or a model or version isn't valid.
  *   Text over the model's token limit isn't an error; see `EMBEDDING_INPUT_TRUNCATED`.
  * - `EMBEDDING_URL_NOT_ALLOWED`: `input_images`, a link in an image's `content`, a `url` where blob inputs are off or
  *   from an API-key caller, or a `sasToken` that isn't a read-only, https-only user delegation SAS for one blob signed

@@ -12,11 +12,6 @@ using Azure.Data.AI;
 @@clientLocation(InferenceOperationGroup.semanticRerank, Azure.Data.AI);
 @@clientLocation(InferenceOperationGroup.multiModalEmbed, Azure.Data.AI);
 
-// The JSON name is outputDtype, after the familiar NumPy "dtype". Keep the clearer
-// outputDataType for generated client properties; the wire name is unchanged.
-@@clientName(MultimodalEmbeddingContent.outputDtype, "outputDataType");
-@@clientName(MultimodalEmbeddingResult.outputDtype, "outputDataType");
-
 // These are Milliseconds-encoded elapsed times, so a "Time" suffix reads as a point
 // in time rather than a duration (most visible in .NET, where they map to TimeSpan).
 // This renames the generated client properties only; the wire names
