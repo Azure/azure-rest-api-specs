@@ -1,6 +1,7 @@
 param(    
     [Parameter(Mandatory = $true)]
-    $ReleasePlanWorkItemId
+    $ReleasePlanWorkItemId,
+    [switch]$AsJson
 )
 
 <#
@@ -10,6 +11,9 @@ Updates the pull request URL and status in the specified release plan work item 
 .PARAMETER ReleasePlanWorkItemId
 The ID of the release plan work item to update.
 
+.PARAMETER AsJson
+Returns structured release plan metadata instead of the legacy description text.
+
 #>
 
 Set-StrictMode -Version 3
@@ -18,11 +22,16 @@ Set-StrictMode -Version 3
 
 $releasePlanInfoUnavailableMessage = "Release plan information is not available. Create a release plan and link SDK pull request to the release plan. Refer aka.ms/azsdk/releaseplan-dashboard for more info."
 $releasePlanInfo = $releasePlanInfoUnavailableMessage
+$releasePlanMetadata = @{}
 
 if (([string]::IsNullOrWhiteSpace("$ReleasePlanWorkItemId")) -or ($ReleasePlanWorkItemId -eq 0))
 {
     Write-Host "Release plan information is not available for work item ID: $ReleasePlanWorkItemId"
-    Write-Output $releasePlanInfo
+    if ($AsJson) {
+        Write-Output '{}'
+    } else {
+        Write-Output $releasePlanInfo
+    }
     return
 }
 
@@ -45,6 +54,11 @@ else
         $releasePlanLink = "https://azsdk-releaseplan-dashboard-hveph5aqhhcfhtgu.westus-01.azurewebsites.net/?releaseplan=" + $releasePlanId
         $submittedBy = $releasePlan["Custom.ReleasePlanSubmittedby"]
         $releasePlanInfo = "**Release plan link:** [$releasePlanLink]($releasePlanLink) **Submitted by**: $submittedBy"
+        $releasePlanMetadata = @{ url = $releasePlanLink; submittedBy = [string]$submittedBy }
     }
 }
-Write-Output $releasePlanInfo
+if ($AsJson) {
+    $releasePlanMetadata | ConvertTo-Json -Compress
+} else {
+    Write-Output $releasePlanInfo
+}
