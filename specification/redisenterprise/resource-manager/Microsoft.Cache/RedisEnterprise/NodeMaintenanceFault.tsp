@@ -57,6 +57,7 @@ model NodeMaintenanceFaultProperties {
 /** The provisioning state of a node maintenance fault. */
 @added(Versions.v2026_11_01_preview)
 @lroStatus
+@TypeSpec.OpenAPI.extension("readOnly", true)
 union NodeMaintenanceFaultProvisioningState {
   ResourceProvisioningState,
 
