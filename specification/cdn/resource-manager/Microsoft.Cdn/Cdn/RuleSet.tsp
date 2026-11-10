@@ -40,6 +40,7 @@ interface RuleSets {
   @renamedFrom(Versions.v2025_12_01, "create")
   @sharedRoute
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   createV1 is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     RuleSet,
     void,

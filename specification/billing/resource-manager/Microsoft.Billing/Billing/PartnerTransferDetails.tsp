@@ -49,6 +49,7 @@ interface PartnerTransfers {
    * Sends a request to a user in a customer's billing account to transfer billing ownership of their subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   @tag("Transfers")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing PartnerInitiateTransferRequest PUT request contract for backward compatibility."
   initiate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     PartnerTransferDetails,
     Request = PartnerInitiateTransferRequest,

@@ -487,6 +487,7 @@ interface RecoveryPointOperationResultsFromCrossTenantVault {
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
   @tag("CrossTenant")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   get is RecoveryPointOperationResultsFromCrossTenantVaultOps.Read<
     RecoveryPointResource,
     Response =
@@ -830,6 +831,7 @@ interface ValidateOperationResultFromCrossTenantVault {
    * there is no body to return.
    */
   @tag("CrossTenant")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   get is ValidateOperationResultFromCrossTenantVaultOps.Read<
     CrossTenantVaultMapping,
     Response =

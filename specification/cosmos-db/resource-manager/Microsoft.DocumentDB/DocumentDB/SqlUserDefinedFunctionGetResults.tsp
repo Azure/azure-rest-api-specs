@@ -52,6 +52,7 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
    * Create or update an Azure Cosmos DB SQL userDefinedFunction
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing SqlUserDefinedFunctionCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateSqlUserDefinedFunction is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlUserDefinedFunctionGetResults,
     Request = SqlUserDefinedFunctionCreateUpdateParameters,

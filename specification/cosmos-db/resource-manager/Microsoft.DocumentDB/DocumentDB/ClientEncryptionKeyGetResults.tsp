@@ -37,6 +37,7 @@ interface ClientEncryptionKeyGetResultsOperationGroup {
    * Create or update a ClientEncryptionKey. This API is meant to be invoked via tools such as the Azure Powershell (instead of directly).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ClientEncryptionKeyCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateClientEncryptionKey is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ClientEncryptionKeyGetResults,
     Request = ClientEncryptionKeyCreateUpdateParameters,

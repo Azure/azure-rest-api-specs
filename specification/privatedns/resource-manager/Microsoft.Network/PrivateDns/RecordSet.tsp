@@ -154,6 +154,7 @@ interface RecordSets {
    * Lists the record sets of a specified type in a Private DNS zone.
    */
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listByType is RecordSetOperationOps.Read<
     RecordSet,
     Parameters = {

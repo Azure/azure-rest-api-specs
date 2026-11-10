@@ -309,6 +309,7 @@ interface SearchServices {
   @externalDocs("https://aka.ms/search-manage")
   @tag("QueryKeys")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/createQueryKey/{name}")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   create is QueryKeysOps.CreateOrUpdateSync<
     SearchService,
     Request = void,

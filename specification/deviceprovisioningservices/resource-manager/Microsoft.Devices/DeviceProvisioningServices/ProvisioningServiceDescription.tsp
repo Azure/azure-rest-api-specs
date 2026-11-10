@@ -98,6 +98,7 @@ interface ProvisioningServiceDescriptionOperations {
   /**
    * Gets the status of a long running operation, such as create, update or delete a provisioning service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getOperationResult is ProvisioningServiceDescriptionOperationOps.Read<
     ProvisioningServiceDescription,
     Parameters = GetOperationResultParameters,

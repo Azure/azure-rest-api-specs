@@ -152,6 +152,7 @@ interface ExportJobsOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   get is ExportJobsOperationResultsOps.Read<
     JobResource,
     Response =

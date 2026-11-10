@@ -79,6 +79,7 @@ interface MSDeployStatuses {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Invoke the MSDeploy web app extension.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing MSDeploy PUT request contract for backward compatibility."
   createMSDeployOperation is MSDeployStatusOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response =
@@ -158,6 +159,7 @@ interface MSDeployStatusOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Invoke the MSDeploy web app extension.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing MSDeploy PUT request contract for backward compatibility."
   createInstanceMSDeployOperation is MSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response =
@@ -236,6 +238,7 @@ interface MSDeployStatusSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Invoke the MSDeploy web app extension.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing MSDeploy PUT request contract for backward compatibility."
   createMSDeployOperationSlot is MSDeployStatusSlotOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response =
@@ -321,6 +324,7 @@ interface InstanceMSDeployStatusOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Invoke the MSDeploy web app extension.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing MSDeploy PUT request contract for backward compatibility."
   createInstanceMSDeployOperationSlot is InstanceMSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response =

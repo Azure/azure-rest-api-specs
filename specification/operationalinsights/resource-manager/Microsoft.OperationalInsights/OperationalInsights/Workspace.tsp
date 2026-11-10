@@ -318,6 +318,7 @@ interface Workspaces {
   @tag("Workspaces")
   @post
   @autoRoute
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   schemaGet is SchemaOps.ListSinglePage<
     Workspace,
     Response = ArmResponse<SearchGetSchemaResponse>
@@ -386,6 +387,7 @@ interface Workspaces {
    */
   @tag("Workspaces")
   @autoRoute
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getPurgeStatus is PurgeOps.Read<
     Workspace,
     Response = ArmResponse<WorkspacePurgeStatusResponse>

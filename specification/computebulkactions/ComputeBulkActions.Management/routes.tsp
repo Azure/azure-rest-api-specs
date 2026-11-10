@@ -24,6 +24,7 @@ interface BulkActions {
   >;
 
   @doc("Get the status of a LaunchBulkInstancesOperation.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getOperationStatus is ArmResourceRead<
     Resource = LocationBasedLaunchBulkInstancesOperation,
     Parameters = OperationParameter,

@@ -204,6 +204,7 @@ interface FunctionEnvelopes {
   @summary("Add or update a function secret.")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   createOrUpdateFunctionSecret is FunctionEnvelopesOps.ActionSync<
     FunctionEnvelope,
     KeyInfo,
@@ -347,6 +348,7 @@ interface FunctionEnvelopeOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @summary("Add or update a function secret.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing distinct PUT request and response contracts for backward compatibility."
   createOrUpdateFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.CreateOrUpdateAsync<
     FunctionEnvelope,
     Request = KeyInfo,

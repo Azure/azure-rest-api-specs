@@ -35,6 +35,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Skus {
   /** Lists SKUs for billing account. */
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listByBillingAccount is ArmListByBillingAccount<
     Sku,
     Parameters = {
@@ -75,6 +76,7 @@ interface Skus {
 
   /** Lists SKUs for billing profile. */
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listByBillingProfile is ArmListByBillingProfile<
     Sku,
     Parameters = {
@@ -124,6 +126,7 @@ interface Skus {
   @autoRoute
   @get
   @armResourceRead(Sku)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getByBillingAccount(
     ...ApiVersionParameter,
     ...BillingAccountIdParameter,
@@ -152,6 +155,7 @@ interface Skus {
   @autoRoute
   @get
   @armResourceRead(Sku)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getByBillingProfile(
     ...ApiVersionParameter,
     ...BillingAccountIdParameter,

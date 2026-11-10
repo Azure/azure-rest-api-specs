@@ -50,6 +50,7 @@ interface SubscriptionUnderManagementGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
     Extension.Tenant,
     SubscriptionUnderManagementGroup,

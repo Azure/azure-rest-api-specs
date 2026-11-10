@@ -44,6 +44,7 @@ interface ServiceResources {
   @tag("SqlDedicatedGateway")
   @tag("GraphAPICompute")
   @tag("MaterializedViewsBuilder")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ServiceResourceCreateUpdateParameters PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ServiceResource,
     Request = ServiceResourceCreateUpdateParameters,

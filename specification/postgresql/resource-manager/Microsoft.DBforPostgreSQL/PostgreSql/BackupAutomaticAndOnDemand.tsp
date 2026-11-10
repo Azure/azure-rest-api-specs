@@ -38,6 +38,7 @@ interface BackupAutomaticAndOnDemands {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   create is Legacy.CreateOrReplaceAsync<
     BackupAutomaticAndOnDemand,
     Request = void,

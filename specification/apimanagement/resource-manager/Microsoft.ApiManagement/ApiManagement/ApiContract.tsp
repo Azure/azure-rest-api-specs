@@ -90,6 +90,7 @@ interface ApiContracts {
   /**
    * Creates new or updates existing specified API of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ApiCreateOrUpdateParameter PUT request contract for backward compatibility."
   createOrUpdate is ApiContractOps.CreateOrUpdateAsync<
     ApiContract,
     Request = ApiCreateOrUpdateParameter,
@@ -392,6 +393,7 @@ interface WorkspaceApi {
   /**
    * Creates new or updates existing specified API of the workspace in an API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ApiCreateOrUpdateParameter PUT request contract for backward compatibility."
   createOrUpdate is WorkspaceApiOps.CreateOrUpdateAsync<
     ApiContract,
     Request = ApiCreateOrUpdateParameter,

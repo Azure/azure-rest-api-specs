@@ -50,6 +50,7 @@ interface AnnotationsOperationGroup {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   create(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -307,6 +308,7 @@ interface ExportConfigurationsOperationGroup {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   update(
     ...ApiVersionParameter,
     ...ResourceGroupParameter,
@@ -360,6 +362,7 @@ interface ComponentCurrentBillingFeaturesOperationGroup {
   @autoRoute
   @put
   @action("currentbillingfeatures")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   update is ArmProviderActionSync<
     Request = ApplicationInsightsComponentBillingFeatures,
     Response = ApplicationInsightsComponentBillingFeatures,
@@ -500,6 +503,7 @@ interface ProactiveDetectionConfigurationsOperationGroup {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs/{ConfigurationId}")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   update(
     ...ApiVersionParameter,
     ...ResourceGroupParameter,

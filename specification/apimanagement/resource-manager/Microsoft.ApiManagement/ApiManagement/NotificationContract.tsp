@@ -230,6 +230,7 @@ interface NotificationContracts {
    * Create or Update API Management publisher notification.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   createOrUpdate is NotificationContractOps.CreateOrUpdateSync<
     NotificationContract,
     Request = void,
@@ -421,6 +422,7 @@ interface WorkspaceNotification {
    * Create or Update API Management publisher notification for the workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   createOrUpdate is WorkspaceNotificationOps.CreateOrUpdateSync<
     NotificationContract,
     Request = void,
@@ -482,6 +484,7 @@ interface WorkspaceNotification {
    * Adds the API Management User to the list of Recipients for the Notification.
    */
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT and response contracts for backward compatibility."
   workspaceNotificationRecipientUserCreateOrUpdate is WorkspaceNotificationOps.CreateOrUpdateSync<
     NotificationContract,
     Request = void,
@@ -535,6 +538,7 @@ interface WorkspaceNotification {
    * Adds the Email address to the list of Recipients for the Notification.
    */
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT and response contracts for backward compatibility."
   workspaceNotificationRecipientEmailCreateOrUpdate is WorkspaceNotificationOps.CreateOrUpdateSync<
     NotificationContract,
     Request = void,

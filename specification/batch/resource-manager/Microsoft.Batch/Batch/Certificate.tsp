@@ -66,6 +66,7 @@ interface Certificates {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy behavior"
   #deprecated "Removal of feature"
   @removed(Versions.v2025_06_01)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CertificateCreateOrUpdateParameters PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Certificate,
     Request = CertificateCreateOrUpdateParameters,

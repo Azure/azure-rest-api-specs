@@ -88,6 +88,7 @@ interface FavoritesOperationGroup {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/favorites/{favoriteId}")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   add(
     ...ApiVersionParameter,
     ...ResourceGroupParameter,

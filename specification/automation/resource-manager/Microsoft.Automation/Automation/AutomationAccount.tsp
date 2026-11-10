@@ -73,6 +73,7 @@ interface AutomationAccounts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("AutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AutomationAccountCreateOrUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     AutomationAccount,
     Request = AutomationAccountCreateOrUpdateParameters
@@ -120,6 +121,7 @@ interface AutomationAccounts {
   @tag("NodeCountInformation")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/nodecounts")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   nodeCountInformationGet is ArmResourceRead<
     AutomationAccount,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
@@ -311,6 +313,7 @@ interface AutomationAccounts {
   @list
   @get
   @action("fields")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listFieldsByType is ArmResourceRead<
     AutomationAccount,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
@@ -344,6 +347,7 @@ interface AutomationAccounts {
   @tag("Software Update Configuration Machine Run")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getById is ArmResourceRead<
     AutomationAccount,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
@@ -403,6 +407,7 @@ interface AutomationAccounts {
   @tag("Software Update Configuration Run")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationrunoperations")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   softwareUpdateConfigurationRunsGetById is ArmResourceRead<
     AutomationAccount,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,

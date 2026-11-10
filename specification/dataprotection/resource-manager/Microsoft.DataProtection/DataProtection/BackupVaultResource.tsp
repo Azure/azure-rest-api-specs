@@ -161,6 +161,7 @@ interface BackupVaultResources {
    * Gets the operation status for an operation over a BackupVault's context.
    */
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   operationStatusBackupVaultContextGet is BackupVaultResourceOps.Read<
     BackupVaultResource,
     Response = ArmResponse<OperationResource>,
@@ -206,6 +207,7 @@ interface BackupVaultResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   exportJobsOperationResultGet is BackupVaultResourceOps.Read<
     BackupVaultResource,
     Response = ArmResponse<ExportJobsResult> | AcceptedResponse,

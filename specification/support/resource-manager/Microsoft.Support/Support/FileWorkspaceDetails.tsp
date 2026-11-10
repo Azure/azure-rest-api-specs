@@ -51,6 +51,7 @@ interface FileWorkspaces {
    * Creates a new file workspace for the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   create is FileWorkspaceOps.CreateOrUpdateSync<
     FileWorkspaceDetails,
     Request = void,
@@ -84,6 +85,7 @@ interface FileWorkspacesNoSubscription {
    * Creates a new file workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   create is FileWorkspacesNoSubscriptionOps.CreateOrUpdateSync<
     FileWorkspaceDetails,
     Request = void,

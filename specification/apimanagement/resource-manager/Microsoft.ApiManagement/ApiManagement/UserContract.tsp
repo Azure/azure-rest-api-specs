@@ -58,6 +58,7 @@ interface UserContracts {
   /**
    * Creates or Updates a user.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing UserCreateParameters PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     UserContract,
     Request = UserCreateParameters,

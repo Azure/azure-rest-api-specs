@@ -38,6 +38,7 @@ interface DomainTopics {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update a domain topic.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DomainTopic,
     Request = void,

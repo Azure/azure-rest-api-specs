@@ -157,6 +157,7 @@ interface SiteSiloVirtualNetworkConnections {
   /**
    * Lists the virtual network connections of a Web App silo. Returns the singleton virtualNetwork connection when configured, or an empty collection otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listSiteSiloVnetConnections is ArmResourceListByParent<
     SiteSiloVirtualNetworkConnection,
     Response = ArmResponse<SiteSiloVirtualNetworkConnectionCollection>,

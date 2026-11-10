@@ -86,6 +86,7 @@ interface EmailTemplateContracts {
   /**
    * Updates an Email Template.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing EmailTemplateUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is EmailTemplateContractsOps.CreateOrUpdateSync<
     EmailTemplateContract,
     Request = EmailTemplateUpdateParameters,

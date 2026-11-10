@@ -163,6 +163,7 @@ interface ClusterResources {
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getCommandAsync is ArmResourceRead<
     ClusterResource,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
@@ -202,6 +203,7 @@ interface ClusterResources {
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getBackup is ArmResourceRead<
     ClusterResource,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,

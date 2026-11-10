@@ -110,6 +110,7 @@ interface StorageAccounts {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @armResourceCreateOrUpdate(StorageAccount)
   @autoRoute
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing StorageAccountCreateParameters PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<
       StorageAccount,

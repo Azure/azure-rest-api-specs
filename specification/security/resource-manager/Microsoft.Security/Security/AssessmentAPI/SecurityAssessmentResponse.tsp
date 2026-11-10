@@ -53,6 +53,7 @@ interface SecurityAssessmentResponses {
    * Create a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result
    */
   @tag("Assessments")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing SecurityAssessment PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
     SecurityAssessmentResponsesScopeParameter,
     SecurityAssessmentResponse,

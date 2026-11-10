@@ -58,6 +58,7 @@ interface ApiCollections {
   @summary("Onboard an Azure API Management API to Microsoft Defender for APIs")
   @tag("OnboardToD4API")
   @tag("APIMConfig")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   onboardAzureApiManagementApi is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     serviceExternalResource,
     ApiCollection,

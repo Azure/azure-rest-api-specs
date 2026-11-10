@@ -830,6 +830,7 @@ interface SubscriptionUsages {
   @armResourceList(Location)
   @doc("List Quota resources by subscription ID")
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   usages(
     ...SubscriptionIdParameter,
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,

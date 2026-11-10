@@ -97,6 +97,7 @@ interface PrivateEndpointOperationStatuses {
    * Gets the operation status for a private endpoint connection.
    */
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getOperationStatus is PrivateEndpointOperationStatusOps.Read<
     PrivateEndpointConnectionResource,
     Response = ArmResponse<OperationStatus>

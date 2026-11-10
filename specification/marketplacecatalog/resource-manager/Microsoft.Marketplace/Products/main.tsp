@@ -80,6 +80,7 @@ interface ProductList {
     | DiscoveryErrorPayload;
 
   /** Lists products for subscription. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listBySubscription is ArmListBySubscriptionCustom<
     Products,
     Parameters = {
@@ -115,6 +116,7 @@ interface ProductList {
   >;
 
   /** Lists products for billing account. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listByBillingAccount is ArmListByBillingAccount<
     Products,
     Parameters = {
@@ -154,6 +156,7 @@ interface ProductList {
   >;
 
   /** Lists products for billing profile. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listByBillingProfile is ArmListByBillingProfile<
     Products,
     Parameters = {
@@ -199,6 +202,7 @@ interface ProductGet {
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getByTenant(
     ...ApiVersionParameter,
     ...ProductIdParameter,
@@ -240,6 +244,7 @@ interface ProductGet {
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getBySubscription(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -278,6 +283,7 @@ interface ProductGet {
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getByBillingAccount(
     ...ApiVersionParameter,
     ...BillingAccountIdParameter,
@@ -312,6 +318,7 @@ interface ProductGet {
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getByBillingProfile(
     ...ApiVersionParameter,
     ...BillingAccountIdParameter,

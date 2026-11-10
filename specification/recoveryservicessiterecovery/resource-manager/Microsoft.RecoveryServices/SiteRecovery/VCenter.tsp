@@ -46,6 +46,7 @@ interface VCenters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Add vCenter.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AddVCenterRequest PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     VCenter,
     Request = AddVCenterRequest,

@@ -118,6 +118,7 @@ interface DscNodes {
   @tag("NodeReports")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   nodeReportsGet is ArmResourceRead<
     DscNode,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DscNode>,
@@ -140,6 +141,7 @@ interface DscNodes {
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @get
   @action("content")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getContent is ArmResourceRead<
     DscNode,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DscNode>,
