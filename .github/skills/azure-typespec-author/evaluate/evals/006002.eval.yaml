@@ -4,7 +4,7 @@ version: "1.0"
 type: capability
 tags:
   area: "dataplane"
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 defaults:
   runs: 1
   timeout: 660s
@@ -16,7 +16,7 @@ stimuli:
       suite: dataplane
       mode: trigger
     prompt: Add a synchronous get operation for the WidgetSuite resource to the Widgets interface. The operation should fetch a WidgetSuite resource by its existing name key. All material design decisions are provided, so proceed without confirmation.
-    environment: &id001
+    agent_environment: &id001
       files:
         - src: ../fixtures/006002-dp-add-get-operation/main.tsp
           dest: main.tsp
@@ -41,7 +41,7 @@ stimuli:
       suite: dataplane
       mode: forced
     prompt: "@azure-typespec-author Add a synchronous get operation for the WidgetSuite resource to the Widgets interface. The operation should fetch a WidgetSuite resource by its existing name key. All material design decisions are provided, so proceed without confirmation."
-    environment: *id001
+    agent_environment: *id001
     rubric: &shared_rubric
       - The Widgets interface includes a get/read operation for WidgetSuite using the Azure.Core ResourceRead<WidgetSuite> template.
       - The operation supports fetching a WidgetSuite resource by name and has a descriptive @doc decorator.
@@ -76,7 +76,7 @@ stimuli:
       suite: dataplane
       mode: no-skill
     prompt: Add a synchronous get operation for the WidgetSuite resource to the Widgets interface. The operation should fetch a WidgetSuite resource by its existing name key. All material design decisions are provided, so proceed without confirmation.
-    environment: *id001
+    agent_environment: *id001
     rubric: *shared_rubric
     graders:
       - type: tool-calls

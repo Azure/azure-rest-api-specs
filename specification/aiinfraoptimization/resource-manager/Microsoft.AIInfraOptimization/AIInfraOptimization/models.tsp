@@ -76,14 +76,14 @@ model RecommendVmSkuWorkload {
 
 /** The per-request token budget used to size the inference key-value cache. */
 model RecommendVmSkuTokenBudget {
-  /** The number of prompt, or input, tokens per inference request. Must be supplied together with `maxOutputTokens`, and the two must total from 1 through 131072. */
+  /** The number of prompt, or input, tokens per inference request. Must be supplied together with `maxOutputTokens`, and the two must total from 1 through 2147483647 without exceeding the model's maximum context length. */
   @minValue(0)
-  @maxValue(131072)
+  @maxValue(2147483647)
   promptTokens?: int32;
 
-  /** The maximum number of generated output tokens per inference request. Must be supplied together with `promptTokens`, and the two must total from 1 through 131072. */
+  /** The maximum number of generated output tokens per inference request. Must be supplied together with `promptTokens`, and the two must total from 1 through 2147483647 without exceeding the model's maximum context length. */
   @minValue(0)
-  @maxValue(131072)
+  @maxValue(2147483647)
   maxOutputTokens?: int32;
 }
 
