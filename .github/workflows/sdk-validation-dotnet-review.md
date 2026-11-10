@@ -67,7 +67,7 @@ jobs:
           SDK_REVIEW_RESULT_ROOT: ${{ runner.temp }}/sdk-review-final
         with:
           script: |
-            const { readFile } = await import("node:fs/promises");
+            const { readFile, writeFile } = await import("node:fs/promises");
             const { validateSdkReviewResult } = await import(
               "${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-result.ts"
             );
@@ -77,11 +77,12 @@ jobs:
               readFile(`${root}/sdk-review-result.json`, "utf8"),
               readFile(`${root}/sdk-review-result.md`, "utf8"),
             ]);
-            validateSdkReviewResult(
+            const validatedReport = validateSdkReviewResult(
               JSON.parse(contextText),
               JSON.parse(resultText),
               reportMarkdown,
             );
+            await writeFile(`${root}/sdk-review-result.md`, validatedReport, "utf8");
       - name: Upload validated SDK review result
         uses: actions/upload-artifact@v7
         with:

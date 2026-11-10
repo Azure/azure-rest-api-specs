@@ -12,7 +12,12 @@ const context = {
   workspaces: [
     {
       baselineCommitSha: "abcdef0123456789abcdef0123456789abcdef01",
-      packages: [{ packageName: "Azure.Widget" }],
+      packages: [
+        {
+          packageName: "Azure.Widget",
+          changedFiles: ["sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs"],
+        },
+      ],
     },
   ],
 };
@@ -43,14 +48,18 @@ function createResult() {
 
 describe("validateSdkReviewResult", () => {
   it("accepts a complete result and Markdown report", () => {
-    expect(() => validateSdkReviewResult(context, createResult(), "# SDK review\n")).not.toThrow();
+    expect(validateSdkReviewResult(context, createResult(), "# SDK review\n")).toContain(
+      "Incorrect generated behavior",
+    );
   });
 
   it("accepts an explicitly empty findings array", () => {
     const result = createResult();
     result.reviews[0].findings = [];
 
-    expect(() => validateSdkReviewResult(context, result, "# No findings\n")).not.toThrow();
+    expect(validateSdkReviewResult(context, result, "# No findings\n")).toContain(
+      "No high-confidence findings were found.",
+    );
   });
 
   it("rejects mismatched source identity", () => {
@@ -79,6 +88,26 @@ describe("validateSdkReviewResult", () => {
     expect(() => validateSdkReviewResult(context, result, "# SDK review\n")).toThrow(
       "invalid line",
     );
+  });
+
+  it("rejects findings outside the declared changed files", () => {
+    const result = createResult();
+    result.reviews[0].findings[0].file = "sdk/widget/Azure.Widget/README.md";
+
+    expect(() => validateSdkReviewResult(context, result, "# SDK review\n")).toThrow(
+      "outside the declared changed files",
+    );
+  });
+
+  it("replaces a contradictory agent report with Markdown generated from validated findings", () => {
+    const report = validateSdkReviewResult(
+      context,
+      createResult(),
+      "# No high-confidence findings were found.\n",
+    );
+
+    expect(report).toContain("Incorrect generated behavior");
+    expect(report).not.toContain("No high-confidence findings were found.");
   });
 
   it("rejects an empty Markdown report", () => {

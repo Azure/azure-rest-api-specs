@@ -404,6 +404,45 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     ).toBe("public class WidgetClient {}");
   });
 
+  it("validates a large streamed ZIP without exhausting the call stack", async () => {
+    const fileCount = 4_500;
+    const snapshotFiles = Object.fromEntries(
+      Array.from({ length: fileCount }, (_, index) => [
+        `Azure.Widget/review-input/src/Generated/Model${index}.cs`,
+        new Uint8Array(),
+      ]),
+    );
+    const request = createSampleArtifact().apiViewRequestData[0];
+    const artifact = createSampleArtifact({
+      apiViewRequestData: [
+        {
+          ...request,
+          changedFiles: ["sdk/widget/Azure.Widget/src/Generated/Model0.cs"],
+          reviewInputFileCount: fileCount,
+          reviewInputBytes: 0,
+        },
+      ],
+    });
+    const archive = await createStreamingZip(snapshotFiles);
+    const outputDirectory = createTempOutputDir();
+
+    expect(() =>
+      extractAndValidateSdkReviewInputArchive(archive, artifact, outputDirectory),
+    ).not.toThrow();
+    expect(
+      fs.existsSync(
+        path.join(
+          outputDirectory,
+          "Azure.Widget",
+          "review-input",
+          "src",
+          "Generated",
+          "Model4499.cs",
+        ),
+      ),
+    ).toBe(true);
+  });
+
   it("rejects highly compressible oversized entries before extraction", () => {
     const outputDirectory = createTempOutputDir();
     const oversizedContent = new Uint8Array(MAX_SNAPSHOT_FILE_BYTES + 1);

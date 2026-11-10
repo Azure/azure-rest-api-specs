@@ -35,6 +35,7 @@ export const MAX_SPEC_GEN_SDK_ARTIFACT_BYTES = 1024 * 1024;
 export const MAX_PACKAGES_ARCHIVE_BYTES = 256 * 1024 * 1024;
 export const MAX_SNAPSHOT_FILE_BYTES = 8 * 1024 * 1024;
 export const MAX_SDK_REVIEW_PACKAGES = 128;
+const ZIP_HEADER_VALIDATION_CHUNK_BYTES = 4 * 1024;
 
 const CheckRunAppSchema = z
   .object({
@@ -677,7 +678,14 @@ function validateLocalZipHeaders(
     }
     seenArchiveEntries.add(normalizedName);
   });
-  unzip.push(archiveBytes, true);
+  for (
+    let offset = 0;
+    offset < archiveBytes.byteLength;
+    offset += ZIP_HEADER_VALIDATION_CHUNK_BYTES
+  ) {
+    const end = Math.min(offset + ZIP_HEADER_VALIDATION_CHUNK_BYTES, archiveBytes.byteLength);
+    unzip.push(archiveBytes.subarray(offset, end), end === archiveBytes.byteLength);
+  }
 
   if (seenArchiveEntries.size !== archiveEntryMetadata.size) {
     throw new Error("ZIP archive contains an incomplete review input entry");

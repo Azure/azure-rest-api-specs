@@ -12,8 +12,16 @@ type ReviewContext = {
   };
   workspaces: Array<{
     baselineCommitSha: string;
-    packages: Array<{ packageName: string }>;
+    packages: Array<{ packageName: string; changedFiles: string[] }>;
   }>;
+};
+
+type ValidatedFinding = {
+  severity: string;
+  file: string;
+  line: number;
+  title: string;
+  description: string;
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -41,7 +49,12 @@ function requireStringArray(value: unknown, fieldName: string): string[] {
   return strings;
 }
 
-function validateFinding(value: unknown, reviewIndex: number, findingIndex: number): void {
+function validateFinding(
+  value: unknown,
+  reviewIndex: number,
+  findingIndex: number,
+  allowedFindingFiles: Set<string>,
+): ValidatedFinding {
   if (!isRecord(value)) {
     throw new Error(`SDK review finding #${reviewIndex + 1}.${findingIndex + 1} must be an object`);
   }
@@ -50,12 +63,67 @@ function validateFinding(value: unknown, reviewIndex: number, findingIndex: numb
       `SDK review finding #${reviewIndex + 1}.${findingIndex + 1} has invalid severity`,
     );
   }
-  requireNonEmptyString(value.file, "finding file");
+  const file = requireNonEmptyString(value.file, "finding file");
+  if (!allowedFindingFiles.has(file)) {
+    throw new Error(
+      `SDK review finding #${reviewIndex + 1}.${findingIndex + 1} targets '${file}', which is outside the declared changed files`,
+    );
+  }
   if (!Number.isInteger(value.line) || Number(value.line) < 1) {
     throw new Error(`SDK review finding #${reviewIndex + 1}.${findingIndex + 1} has invalid line`);
   }
-  requireNonEmptyString(value.title, "finding title");
-  requireNonEmptyString(value.description, "finding description");
+  return {
+    severity: String(value.severity),
+    file,
+    line: Number(value.line),
+    title: requireNonEmptyString(value.title, "finding title"),
+    description: requireNonEmptyString(value.description, "finding description"),
+  };
+}
+
+function markdownText(value: string): string {
+  return value
+    .replace(/\p{Cc}/gu, " ")
+    .replaceAll("\\", "\\\\")
+    .replace(/([`*_#[\]<>|])/g, "\\$1")
+    .trim();
+}
+
+function inlineCode(value: string): string {
+  return value
+    .replace(/\p{Cc}/gu, " ")
+    .replaceAll("`", "'")
+    .trim();
+}
+
+function buildValidatedMarkdown(
+  context: ReviewContext,
+  reviews: Array<{ baselineCommitSha: string; findings: ValidatedFinding[] }>,
+): string {
+  const findings = reviews.flatMap((review) =>
+    review.findings.map((finding) => ({ ...finding, baselineCommitSha: review.baselineCommitSha })),
+  );
+  const lines = [
+    "# Generated .NET SDK review",
+    "",
+    `Reviewed specification PR #${context.source.specPrNumber} at \`${inlineCode(context.source.specHeadSha)}\`.`,
+    "",
+  ];
+  if (findings.length === 0) {
+    lines.push("No high-confidence findings were found.", "");
+    return lines.join("\n");
+  }
+
+  lines.push(`## Findings (${findings.length})`, "");
+  for (const finding of findings) {
+    lines.push(
+      `- **${finding.severity.toUpperCase()}** \`${inlineCode(finding.file)}:${finding.line}\` ${markdownText(finding.title)}`,
+      `  ${markdownText(finding.description)}`,
+      `  Baseline: \`${inlineCode(finding.baselineCommitSha)}\``,
+      "",
+    );
+  }
+  return lines.join("\n");
 }
 
 /**
@@ -69,7 +137,7 @@ export function validateSdkReviewResult(
   contextValue: unknown,
   resultValue: unknown,
   reportMarkdown: string,
-): void {
+): string {
   if (!isRecord(contextValue) || !isRecord(contextValue.source)) {
     throw new Error("SDK review context is missing source identity");
   }
@@ -124,6 +192,10 @@ export function validateSdkReviewResult(
     throw new Error("SDK review result baseline set does not match reconstructed workspaces");
   }
 
+  const validatedReviews: Array<{
+    baselineCommitSha: string;
+    findings: ValidatedFinding[];
+  }> = [];
   for (const [reviewIndex, reviewValue] of reviews.entries()) {
     const review = reviewValue as Record<string, unknown>;
     const workspace = context.workspaces.find(
@@ -144,12 +216,21 @@ export function validateSdkReviewResult(
         `SDK review result findings must be an array for baseline ${workspace.baselineCommitSha}`,
       );
     }
-    review.findings.forEach((finding, findingIndex) =>
-      validateFinding(finding, reviewIndex, findingIndex),
+    const allowedFindingFiles = new Set(
+      workspace.packages.flatMap((sdkPackage) =>
+        requireStringArray(sdkPackage.changedFiles, "changedFiles"),
+      ),
     );
+    validatedReviews.push({
+      baselineCommitSha: String(review.baselineCommitSha),
+      findings: review.findings.map((finding, findingIndex) =>
+        validateFinding(finding, reviewIndex, findingIndex, allowedFindingFiles),
+      ),
+    });
   }
 
   if (reportMarkdown.trim().length === 0) {
     throw new Error("SDK review Markdown report must not be empty");
   }
+  return buildValidatedMarkdown(context, validatedReviews);
 }

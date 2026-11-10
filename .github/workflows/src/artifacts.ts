@@ -220,7 +220,8 @@ function getArtifactAttempt(
   requestedArtifactName: string,
 ): number | undefined {
   if (artifactName === requestedArtifactName) {
-    return 0;
+    // Azure Pipelines omits the suffix for the initial job attempt.
+    return 1;
   }
   const escapedArtifactName = requestedArtifactName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const match = artifactName.match(new RegExp(`^${escapedArtifactName}-FailedAttempt([1-9]\\d*)$`));
@@ -252,7 +253,7 @@ function indexArtifactsByAttempt(
 }
 
 function selectPreferredAttempt(attempts: number[]): number | undefined {
-  return attempts.includes(0) ? 0 : attempts.sort((left, right) => right - left)[0];
+  return attempts.sort((left, right) => right - left)[0];
 }
 
 /**

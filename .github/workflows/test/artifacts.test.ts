@@ -627,7 +627,7 @@ describe("getAzurePipelineArtifact function", () => {
     expect(mockFetch).toHaveBeenCalledTimes(1);
   });
 
-  it("does not use an older pair when the preferred manifest is unpaired", async () => {
+  it("prefers the newest complete retry pair over initial-attempt artifacts", async () => {
     mockFetch.mockResolvedValue({
       ok: true,
       json: vi.fn().mockResolvedValue({
@@ -656,12 +656,48 @@ describe("getAzurePipelineArtifact function", () => {
     });
 
     expect(resolution).toMatchObject({
-      status: "first-only",
-      artifact: { artifactName: "spec-gen-sdk-artifact" },
+      status: "found",
+      artifacts: [
+        { artifactName: "spec-gen-sdk-artifact-FailedAttempt2" },
+        { artifactName: "packages-FailedAttempt2" },
+      ],
     });
   });
 
-  it("prefers the successful artifact pair over failed attempts", async () => {
+  it("pairs differently named artifacts from the initial job attempt", async () => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        value: [
+          {
+            name: "spec-gen-sdk-artifact",
+            resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
+          },
+          {
+            name: "packages-FailedAttempt1",
+            resource: { downloadUrl: "https://dev.azure.com/packages-1" },
+          },
+        ],
+      }),
+    });
+
+    const resolution = await resolveAzurePipelineArtifactPair({
+      ado_build_id: inputs.ado_build_id,
+      ado_project_url: inputs.ado_project_url,
+      artifactNames: ["spec-gen-sdk-artifact", "packages"],
+      core: mockCore,
+    });
+
+    expect(resolution).toMatchObject({
+      status: "found",
+      artifacts: [
+        { artifactName: "spec-gen-sdk-artifact" },
+        { artifactName: "packages-FailedAttempt1" },
+      ],
+    });
+  });
+
+  it("prefers the newest retry pair over the initial successful names", async () => {
     mockFetch.mockResolvedValue({
       ok: true,
       json: vi.fn().mockResolvedValue({
@@ -695,7 +731,10 @@ describe("getAzurePipelineArtifact function", () => {
 
     expect(resolution).toMatchObject({
       status: "found",
-      artifacts: [{ artifactName: "spec-gen-sdk-artifact" }, { artifactName: "packages" }],
+      artifacts: [
+        { artifactName: "spec-gen-sdk-artifact-FailedAttempt3" },
+        { artifactName: "packages-FailedAttempt3" },
+      ],
     });
   });
 
