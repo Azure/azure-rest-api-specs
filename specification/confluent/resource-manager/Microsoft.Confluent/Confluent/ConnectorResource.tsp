@@ -27,47 +27,6 @@ model ConnectorResource is Azure.ResourceManager.ProxyResource<
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface ConnectorResourcesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * Organization resource name
-         */
-        @path
-        @segment("organizations")
-        organizationName: string,
-
-        /**
-         * Confluent environment id
-         */
-        @path
-        @segment("environments")
-        environmentId: string,
-
-        /**
-         * Confluent kafka or schema registry cluster id
-         */
-        @path
-        @segment("clusters")
-        clusterId: string,
-      },
-      {
-        /**
-         * Confluent connector name
-         */
-        @path
-        @segment("connectors")
-        connectorName: string,
-      },
-      ResourceProviderDefaultErrorResponse
-    > {}
-
 @armResourceOperations
 interface ConnectorResources {
   /**
@@ -83,8 +42,10 @@ interface ConnectorResources {
    * Create confluent connector by Name
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is ConnectorResourcesOps.CreateOrUpdateSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     ConnectorResource,
+    ConnectorResource,
+    Error = ResourceProviderDefaultErrorResponse,
     OptionalRequestBody = true
   >;
 

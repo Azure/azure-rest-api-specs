@@ -40,34 +40,6 @@ model SCEnvironmentRecord extends Foundations.ProxyResource {
   properties?: EnvironmentProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface SCEnvironmentRecordsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * Organization resource name
-         */
-        @path
-        @segment("organizations")
-        organizationName: string,
-      },
-      {
-        /**
-         * Confluent environment id
-         */
-        @path
-        @segment("environments")
-        environmentId: string,
-      },
-      ResourceProviderDefaultErrorResponse
-    > {}
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SCEnvironmentRecords {
@@ -84,8 +56,10 @@ interface SCEnvironmentRecords {
    * Create confluent environment
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is SCEnvironmentRecordsOps.CreateOrUpdateSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     SCEnvironmentRecord,
+    SCEnvironmentRecord,
+    Error = ResourceProviderDefaultErrorResponse,
     OptionalRequestBody = true
   >;
 
