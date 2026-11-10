@@ -22,7 +22,7 @@ export interface ExecFileOptions extends ExecOptions {
   /** Maximum execution time in milliseconds. Defaults to no timeout. */
   timeout?: number;
   /**
-   * Whether to stream the command's stdout and stderr to the corresponding process streams.
+   * Whether to forward the command's stdout and stderr to the corresponding process streams.
    * Defaults to false.
    */
   forwardOutput?: boolean;
