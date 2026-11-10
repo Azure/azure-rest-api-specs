@@ -135,6 +135,7 @@ op customLocationsUpdate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Preserve the existing JavaScript resourceSyncRulesUpdate response shape for backward compatibility."
 op resourceSyncRulesUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
