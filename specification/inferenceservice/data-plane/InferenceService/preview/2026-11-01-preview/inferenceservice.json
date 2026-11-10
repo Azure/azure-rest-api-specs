@@ -452,7 +452,7 @@
           "description": "For `dense_multi` only: the number of dimensions per multi-vector. Must be a value the model supports for multi-vectors;\nthe model's native multi-vector width is the default.",
           "minimum": 1
         },
-        "maxNumVectors": {
+        "maxVectorCount": {
           "type": "integer",
           "format": "int32",
           "description": "For `multi` and `dense_multi` only: the most multi-vectors to return per item.",
@@ -477,7 +477,7 @@
     },
     "EmbeddingContentItem": {
       "type": "object",
-      "description": "One item to embed: its `kind`, an optional `id`, and exactly one source: `content`, or `url` with `sasToken`.",
+      "description": "One item to embed, defaulting to text: an optional `id` and exactly one source, `content` or `url` with `sasToken`.",
       "properties": {
         "id": {
           "type": "string",
@@ -485,8 +485,35 @@
           "maxLength": 256
         },
         "kind": {
-          "$ref": "#/definitions/EmbeddingContentKind",
-          "description": "What the item is: a document (`text`), a search query (`query`) or a document image (`image`)."
+          "type": "string",
+          "description": "What the item is: a document (`text`, the default), a search query (`query`) or a document image (`image`).",
+          "default": "text",
+          "enum": [
+            "text",
+            "query",
+            "image"
+          ],
+          "x-ms-enum": {
+            "name": "EmbeddingContentKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Text",
+                "value": "text",
+                "description": "A document to index."
+              },
+              {
+                "name": "Query",
+                "value": "query",
+                "description": "A search query. Queries are embedded for retrieval against documents and must be sent inline."
+              },
+              {
+                "name": "Image",
+                "value": "image",
+                "description": "A document image, such as a scanned page."
+              }
+            ]
+          }
         },
         "content": {
           "type": "string",
@@ -503,10 +530,7 @@
           "description": "Required with `url`: a user delegation SAS for that one blob (its query string, with or without a leading `?`):\nread-only (`sp=r`), for the blob (`sr=b`), https-only (`spr=https`), and signed by the identity that calls this\nAPI. A SAS valid for more than 15 minutes is accepted with warning `EMBEDDING_SAS_LONG_LIVED`. The service uses\nit for one read and never stores, logs or returns it.",
           "x-ms-secret": true
         }
-      },
-      "required": [
-        "kind"
-      ]
+      }
     },
     "EmbeddingContentKind": {
       "type": "string",
@@ -534,6 +558,60 @@
             "name": "Image",
             "value": "image",
             "description": "A document image, such as a scanned page."
+          }
+        ]
+      }
+    },
+    "EmbeddingData": {
+      "type": "object",
+      "description": "Common metadata for one embedding result item, in request order.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EmbeddingDataType",
+          "description": "The embedding implementation that produced this item."
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based position of the item in the request."
+        },
+        "id": {
+          "type": "string",
+          "description": "The item's `id` from the request, if it had one."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "index"
+      ]
+    },
+    "EmbeddingDataType": {
+      "type": "string",
+      "description": "The implementation of an embedding result item.",
+      "enum": [
+        "multimodal_dense",
+        "multimodal_multi",
+        "multimodal_dense_multi"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MultimodalDense",
+            "value": "multimodal_dense",
+            "description": "One dense vector from a multimodal model."
+          },
+          {
+            "name": "MultimodalMultiVector",
+            "value": "multimodal_multi",
+            "description": "One vector per token from a multimodal model."
+          },
+          {
+            "name": "MultimodalDenseAndMultiVector",
+            "value": "multimodal_dense_multi",
+            "description": "A dense vector and one vector per token from a multimodal model."
           }
         ]
       }
@@ -729,11 +807,11 @@
           "type": "array",
           "description": "One entry per item in `contents`, in request order. Empty when `output` is present.",
           "items": {
-            "$ref": "#/definitions/MultimodalEmbeddingData"
+            "$ref": "#/definitions/EmbeddingData"
           }
         },
         "usage": {
-          "$ref": "#/definitions/MultimodalEmbeddingUsage",
+          "$ref": "#/definitions/EmbeddingUsage",
           "description": "Usage for the operation."
         },
         "warnings": {
@@ -769,6 +847,48 @@
       "required": [
         "error"
       ]
+    },
+    "EmbeddingUsage": {
+      "type": "object",
+      "description": "Common usage for an embedding operation. Token counts are omitted when the model doesn't report them.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EmbeddingUsageType",
+          "description": "The embedding implementation that reported this usage."
+        },
+        "promptTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of input tokens."
+        },
+        "totalTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of tokens."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EmbeddingUsageType": {
+      "type": "string",
+      "description": "The implementation that reported embedding usage.",
+      "enum": [
+        "multimodal"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingUsageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Multimodal",
+            "value": "multimodal",
+            "description": "Usage from a multimodal embedding model."
+          }
+        ]
+      }
     },
     "EmbeddingVector": {},
     "EmbeddingVectorKind": {
@@ -869,6 +989,53 @@
       "type": "object",
       "description": "The result for one item when `vectorKind` is `dense_multi`: a dense vector and one vector per token, from one model run.",
       "properties": {
+        "contentKind": {
+          "$ref": "#/definitions/EmbeddingContentKind",
+          "description": "The item's content kind, as supplied in the request's `kind`."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the width in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the height in pixels."
+        },
+        "format": {
+          "$ref": "#/definitions/EmbeddingImageFormat",
+          "description": "For images: the detected image format."
+        },
+        "tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The tokens the model read for this item, including any text the service adds to queries and, for images, the\nimage prompt and image tokens. For a truncated item, the tokens embedded. Omitted when the model doesn't report it."
+        },
+        "visualTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For images: how many of `tokens` were image tokens."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "`true` when the item was over the model's token limit and only its start was embedded; `warnings` then has an\n`EMBEDDING_INPUT_TRUNCATED` entry for it. Omitted otherwise."
+        },
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For truncated items only: the item's tokens before truncation."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of vectors returned.",
+          "enum": [
+            "dense_multi"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
         "shape": {
           "type": "array",
           "description": "The number of multi-vectors and their number of dimensions: `[vectors, multiDimensions]`.",
@@ -887,56 +1054,94 @@
         }
       },
       "required": [
+        "contentKind",
+        "kind",
         "shape",
         "embedding",
         "multiEmbedding"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MultimodalEmbeddingData"
+          "$ref": "#/definitions/EmbeddingData"
         }
       ],
-      "x-ms-discriminator-value": "dense_multi"
+      "x-ms-discriminator-value": "multimodal_dense_multi"
     },
     "MultimodalDenseEmbedding": {
       "type": "object",
       "description": "The result for one item when `vectorKind` is `dense`: one vector.",
       "properties": {
+        "contentKind": {
+          "$ref": "#/definitions/EmbeddingContentKind",
+          "description": "The item's content kind, as supplied in the request's `kind`."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the width in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the height in pixels."
+        },
+        "format": {
+          "$ref": "#/definitions/EmbeddingImageFormat",
+          "description": "For images: the detected image format."
+        },
+        "tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The tokens the model read for this item, including any text the service adds to queries and, for images, the\nimage prompt and image tokens. For a truncated item, the tokens embedded. Omitted when the model doesn't report it."
+        },
+        "visualTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For images: how many of `tokens` were image tokens."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "`true` when the item was over the model's token limit and only its start was embedded; `warnings` then has an\n`EMBEDDING_INPUT_TRUNCATED` entry for it. Omitted otherwise."
+        },
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For truncated items only: the item's tokens before truncation."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of vectors returned.",
+          "enum": [
+            "dense"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
         "embedding": {
           "$ref": "#/definitions/EmbeddingVector",
           "description": "The vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian\n`outputDataKind` values."
         }
       },
       "required": [
+        "contentKind",
+        "kind",
         "embedding"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MultimodalEmbeddingData"
+          "$ref": "#/definitions/EmbeddingData"
         }
       ],
-      "x-ms-discriminator-value": "dense"
+      "x-ms-discriminator-value": "multimodal_dense"
     },
     "MultimodalEmbeddingData": {
       "type": "object",
-      "description": "The result for one item, in request order. `kind` says which vectors it holds: `dense` (`MultimodalDenseEmbedding`),\n`multi` (`MultimodalMultiVectorEmbedding`) or `dense_multi` (`MultimodalDenseAndMultiVectorEmbedding`).",
+      "description": "Shared metadata for the results from a multimodal embedding model.",
       "properties": {
-        "index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The zero-based position of the item in the request."
-        },
-        "id": {
-          "type": "string",
-          "description": "The item's `id` from the request, if it had one."
-        },
         "contentKind": {
           "$ref": "#/definitions/EmbeddingContentKind",
           "description": "The item's content kind, as supplied in the request's `kind`."
-        },
-        "kind": {
-          "$ref": "#/definitions/EmbeddingVectorKind",
-          "description": "The kind of vectors returned, as requested in `vectorKind`."
         },
         "width": {
           "type": "integer",
@@ -972,11 +1177,8 @@
           "description": "For truncated items only: the item's tokens before truncation."
         }
       },
-      "discriminator": "kind",
       "required": [
-        "index",
-        "contentKind",
-        "kind"
+        "contentKind"
       ]
     },
     "MultimodalEmbeddingOutput": {
@@ -1004,7 +1206,7 @@
           "format": "date-time",
           "description": "When `sasToken` stops working. After that, send the request again, or use `delivery: inline`."
         },
-        "records": {
+        "recordCount": {
           "type": "integer",
           "format": "int32",
           "description": "The number of `data` items in the file."
@@ -1028,7 +1230,7 @@
         "url",
         "sasToken",
         "expiresAt",
-        "records",
+        "recordCount",
         "sizeInBytes",
         "sha256",
         "contentType"
@@ -1036,18 +1238,8 @@
     },
     "MultimodalEmbeddingUsage": {
       "type": "object",
-      "description": "Usage for a multimodal embedding operation. Token counts are omitted when the model doesn't report them.",
+      "description": "Usage for a multimodal embedding operation.",
       "properties": {
-        "promptTokens": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of input tokens."
-        },
-        "totalTokens": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The total number of tokens."
-        },
         "textTokens": {
           "type": "integer",
           "format": "int64",
@@ -1066,7 +1258,13 @@
       },
       "required": [
         "imageCount"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EmbeddingUsage"
+        }
+      ],
+      "x-ms-discriminator-value": "multimodal"
     },
     "MultimodalEmbeddingWarning": {
       "type": "object",
@@ -1076,7 +1274,7 @@
           "$ref": "#/definitions/EmbeddingWarningCode",
           "description": "A machine-readable warning code."
         },
-        "number": {
+        "codeNumber": {
           "type": "integer",
           "format": "int32",
           "description": "A stable numeric alias of `code`: `1001` for `EMBEDDING_INPUT_TRUNCATED`, `1002` for `EMBEDDING_SAS_LONG_LIVED`."
@@ -1111,6 +1309,53 @@
       "type": "object",
       "description": "The result for one item when `vectorKind` is `multi`: one vector per token, for late-interaction (MaxSim) scoring.",
       "properties": {
+        "contentKind": {
+          "$ref": "#/definitions/EmbeddingContentKind",
+          "description": "The item's content kind, as supplied in the request's `kind`."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the width in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the height in pixels."
+        },
+        "format": {
+          "$ref": "#/definitions/EmbeddingImageFormat",
+          "description": "For images: the detected image format."
+        },
+        "tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The tokens the model read for this item, including any text the service adds to queries and, for images, the\nimage prompt and image tokens. For a truncated item, the tokens embedded. Omitted when the model doesn't report it."
+        },
+        "visualTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For images: how many of `tokens` were image tokens."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "`true` when the item was over the model's token limit and only its start was embedded; `warnings` then has an\n`EMBEDDING_INPUT_TRUNCATED` entry for it. Omitted otherwise."
+        },
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For truncated items only: the item's tokens before truncation."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of vectors returned.",
+          "enum": [
+            "multi"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
         "shape": {
           "type": "array",
           "description": "The number of vectors and the number of dimensions: `[vectors, dimensions]`.",
@@ -1125,15 +1370,17 @@
         }
       },
       "required": [
+        "contentKind",
+        "kind",
         "shape",
         "multiEmbedding"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MultimodalEmbeddingData"
+          "$ref": "#/definitions/EmbeddingData"
         }
       ],
-      "x-ms-discriminator-value": "multi"
+      "x-ms-discriminator-value": "multimodal_multi"
     },
     "ProblemDetails": {
       "type": "object",

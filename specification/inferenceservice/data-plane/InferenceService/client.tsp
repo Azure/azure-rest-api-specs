@@ -45,7 +45,6 @@ using Azure.Data.AI;
 );
 @@clientName(MetaResult, "SemanticRerankingMetadata", "csharp");
 @@clientName(SemanticRerankingInferenceResult.meta, "metadata", "csharp");
-@@clientName(MultimodalEmbeddingData, "MultimodalEmbeddingItem", "csharp");
 @@clientName(EmbeddingContentItem, "EmbeddingsInputContent", "csharp");
 @@clientName(EmbeddingContentItem.url, "uri", "csharp");
 @@clientName(MultimodalEmbeddingOutput.url, "uri", "csharp");
@@ -53,7 +52,4 @@ using Azure.Data.AI;
 // Python accepts plain dictionaries for input items without changing the REST
 // schema or the typed .NET input model.
 @@alternateType(EmbeddingContent.contents, Record<unknown>[], "python");
-@@clientName(EmbeddingContent.maxNumVectors, "maxVectorCount", "csharp");
-@@clientName(MultimodalEmbeddingOutput.records, "recordCount", "csharp");
-@@clientName(MultimodalEmbeddingWarning.number, "codeNumber", "csharp");
 @@scope(EmbeddingResult.object, "!csharp");

@@ -303,15 +303,15 @@ union EmbeddingImageFormat {
   Webp: "webp",
 }
 
-/** One item to embed: its `kind`, an optional `id`, and exactly one source: `content`, or `url` with `sasToken`. */
+/** One item to embed, defaulting to text: an optional `id` and exactly one source, `content` or `url` with `sasToken`. */
 @added(Versions.v2026_11_01_preview)
 model EmbeddingContentItem {
   /** A caller-chosen identifier, up to 256 characters, echoed on the matching result. */
   @maxLength(256)
   id?: string;
 
-  /** What the item is: a document (`text`), a search query (`query`) or a document image (`image`). */
-  kind: EmbeddingContentKind;
+  /** What the item is: a document (`text`, the default), a search query (`query`) or a document image (`image`). */
+  kind?: EmbeddingContentKind = "text";
 
   /**
    * The item, inline. For `text` and `query`: the text, up to 100,000 characters; text over the model's token limit
@@ -390,7 +390,7 @@ model EmbeddingContent {
 
   /** For `multi` and `dense_multi` only: the most multi-vectors to return per item. */
   @minValue(1)
-  maxNumVectors?: int32;
+  maxVectorCount?: int32;
 
   /**
    * The numeric type of the returned values, for every vector in the response. Defaults to `float32` for `dense` and
@@ -408,24 +408,40 @@ model EmbeddingContent {
   delivery?: EmbeddingDelivery;
 }
 
-/**
- * The result for one item, in request order. `kind` says which vectors it holds: `dense` (`MultimodalDenseEmbedding`),
- * `multi` (`MultimodalMultiVectorEmbedding`) or `dense_multi` (`MultimodalDenseAndMultiVectorEmbedding`).
- */
+/** The implementation of an embedding result item. */
 @added(Versions.v2026_11_01_preview)
-@discriminator("kind")
-model MultimodalEmbeddingData {
+union EmbeddingDataType {
+  string,
+
+  /** One dense vector from a multimodal model. */
+  MultimodalDense: "multimodal_dense",
+
+  /** One vector per token from a multimodal model. */
+  MultimodalMultiVector: "multimodal_multi",
+
+  /** A dense vector and one vector per token from a multimodal model. */
+  MultimodalDenseAndMultiVector: "multimodal_dense_multi",
+}
+
+/** Common metadata for one embedding result item, in request order. */
+@added(Versions.v2026_11_01_preview)
+@discriminator("type")
+model EmbeddingData {
+  /** The embedding implementation that produced this item. */
+  type: EmbeddingDataType;
+
   /** The zero-based position of the item in the request. */
   index: int32;
 
   /** The item's `id` from the request, if it had one. */
   id?: string;
+}
 
+/** Shared metadata for the results from a multimodal embedding model. */
+@added(Versions.v2026_11_01_preview)
+model MultimodalEmbeddingData {
   /** The item's content kind, as supplied in the request's `kind`. */
   contentKind: EmbeddingContentKind;
-
-  /** The kind of vectors returned, as requested in `vectorKind`. */
-  kind: EmbeddingVectorKind;
 
   /** For images: the width in pixels. */
   width?: int32;
@@ -457,7 +473,12 @@ model MultimodalEmbeddingData {
 
 /** The result for one item when `vectorKind` is `dense`: one vector. */
 @added(Versions.v2026_11_01_preview)
-model MultimodalDenseEmbedding extends MultimodalEmbeddingData {
+model MultimodalDenseEmbedding extends EmbeddingData {
+  /** The embedding implementation. */
+  type: EmbeddingDataType.MultimodalDense;
+
+  ...MultimodalEmbeddingData;
+
   /** The kind of vectors returned. */
   kind: EmbeddingVectorKind.Dense;
 
@@ -470,7 +491,12 @@ model MultimodalDenseEmbedding extends MultimodalEmbeddingData {
 
 /** The result for one item when `vectorKind` is `multi`: one vector per token, for late-interaction (MaxSim) scoring. */
 @added(Versions.v2026_11_01_preview)
-model MultimodalMultiVectorEmbedding extends MultimodalEmbeddingData {
+model MultimodalMultiVectorEmbedding extends EmbeddingData {
+  /** The embedding implementation. */
+  type: EmbeddingDataType.MultimodalMultiVector;
+
+  ...MultimodalEmbeddingData;
+
   /** The kind of vectors returned. */
   kind: EmbeddingVectorKind.Multi;
 
@@ -488,7 +514,12 @@ model MultimodalMultiVectorEmbedding extends MultimodalEmbeddingData {
  * The result for one item when `vectorKind` is `dense_multi`: a dense vector and one vector per token, from one model run.
  */
 @added(Versions.v2026_11_01_preview)
-model MultimodalDenseAndMultiVectorEmbedding extends MultimodalEmbeddingData {
+model MultimodalDenseAndMultiVectorEmbedding extends EmbeddingData {
+  /** The embedding implementation. */
+  type: EmbeddingDataType.MultimodalDenseAndMultiVector;
+
+  ...MultimodalEmbeddingData;
+
   /** The kind of vectors returned. */
   kind: EmbeddingVectorKind.DenseAndMulti;
 
@@ -533,19 +564,39 @@ union MultiEmbeddingVector {
 
   /**
    * All vectors as one base64 string: the little-endian `outputDataKind` values in row-major order, `shape[0]` vectors of
-   * `shape[1]` values each. For example, in Python: `numpy.frombuffer(base64.b64decode(value), dtype).reshape(shape)`.
+   * `shape[1]` values each. For example, in Python: `numpy.frombuffer(base64.b64decode(value), datatype).reshape(shape)`.
    */
   string,
 }
 
-/** Usage for a multimodal embedding operation. Token counts are omitted when the model doesn't report them. */
+/** The implementation that reported embedding usage. */
 @added(Versions.v2026_11_01_preview)
-model MultimodalEmbeddingUsage {
+union EmbeddingUsageType {
+  string,
+
+  /** Usage from a multimodal embedding model. */
+  Multimodal: "multimodal",
+}
+
+/** Common usage for an embedding operation. Token counts are omitted when the model doesn't report them. */
+@added(Versions.v2026_11_01_preview)
+@discriminator("type")
+model EmbeddingUsage {
+  /** The embedding implementation that reported this usage. */
+  type: EmbeddingUsageType;
+
   /** The number of input tokens. */
   promptTokens?: int64;
 
   /** The total number of tokens. */
   totalTokens?: int64;
+}
+
+/** Usage for a multimodal embedding operation. */
+@added(Versions.v2026_11_01_preview)
+model MultimodalEmbeddingUsage extends EmbeddingUsage {
+  /** The embedding implementation, always `multimodal`. */
+  type: EmbeddingUsageType.Multimodal;
 
   /**
    * Tokens that aren't image tokens: the query and text items (including the query instruction) and the short prompt
@@ -578,10 +629,10 @@ model EmbeddingResult {
   outputDataKind: EmbeddingOutputDataKind;
 
   /** One entry per item in `contents`, in request order. Empty when `output` is present. */
-  data: MultimodalEmbeddingData[];
+  data: EmbeddingData[];
 
   /** Usage for the operation. */
-  usage: MultimodalEmbeddingUsage;
+  usage: EmbeddingUsage;
 
   /** Things to know about a successful response, such as truncated items. Omitted when there are none. */
   warnings?: MultimodalEmbeddingWarning[];
@@ -614,7 +665,7 @@ model MultimodalEmbeddingOutput {
   expiresAt: utcDateTime;
 
   /** The number of `data` items in the file. */
-  records: int32;
+  recordCount: int32;
 
   /** The size of the file in bytes. */
   sizeInBytes: int64;
@@ -651,7 +702,7 @@ model MultimodalEmbeddingWarning {
   code: EmbeddingWarningCode;
 
   /** A stable numeric alias of `code`: `1001` for `EMBEDDING_INPUT_TRUNCATED`, `1002` for `EMBEDDING_SAS_LONG_LIVED`. */
-  number?: int32;
+  codeNumber?: int32;
 
   /** The zero-based position of the item the warning is about, in `contents` and `data`. */
   index: int32;
