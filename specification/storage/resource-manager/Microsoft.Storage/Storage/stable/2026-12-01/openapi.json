@@ -5215,7 +5215,7 @@
             "description": "Properties to update for the file share.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FileShare"
+              "$ref": "#/definitions/FileSharePatch"
             }
           }
         ],
@@ -13152,6 +13152,16 @@
         }
       }
     },
+    "FileSharePatch": {
+      "type": "object",
+      "description": "The parameters for updating a file share.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileShareUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
     "FileShareProperties": {
       "type": "object",
       "description": "The properties of the file share.",
@@ -13379,6 +13389,53 @@
           "format": "double",
           "description": "The scalar for bandwidth in the file share provisioned bandwidth recommendation formula.",
           "readOnly": true
+        }
+      }
+    },
+    "FileShareUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the FileShare.",
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "description": "A name-value pair to associate with the share as metadata.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "shareQuota": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The provisioned size of the share, in gibibytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. For file shares created under Files Provisioned v2 account type, please refer to the GetFileServiceUsage API response for the minimum and maximum allowed provisioned storage size."
+        },
+        "provisionedIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The provisioned IOPS of the share. This property is only for file shares created under Files Provisioned v2 account type. Please refer to the GetFileServiceUsage API response for the minimum and maximum allowed value for provisioned IOPS."
+        },
+        "provisionedBandwidthMibps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The provisioned bandwidth of the share, in mebibytes per second. This property is only for file shares created under Files Provisioned v2 account type. Please refer to the GetFileServiceUsage API response for the minimum and maximum allowed value for provisioned bandwidth."
+        },
+        "rootSquash": {
+          "$ref": "#/definitions/RootSquashType",
+          "description": "The property is for NFS share only. The default is NoRootSquash."
+        },
+        "accessTier": {
+          "$ref": "#/definitions/ShareAccessTier",
+          "description": "Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium."
+        },
+        "signedIdentifiers": {
+          "type": "array",
+          "description": "List of stored access policies specified on the share.",
+          "items": {
+            "$ref": "#/definitions/SignedIdentifier"
+          }
+        },
+        "fileSharePaidBursting": {
+          "$ref": "#/definitions/FileSharePropertiesFileSharePaidBursting",
+          "description": "File Share Paid Bursting properties."
         }
       }
     },

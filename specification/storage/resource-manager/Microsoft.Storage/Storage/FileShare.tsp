@@ -2,13 +2,16 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./FileServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Storage;
 /**
@@ -30,6 +33,11 @@ model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+/**
+ * The parameters for updating a file share.
+ */
+model FileSharePatch is ResourceUpdateModel<FileShare, FileShareProperties>;
 
 @armResourceOperations
 interface FileShares {
@@ -76,7 +84,7 @@ interface FileShares {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     FileShare,
-    PatchModel = FileShare,
+    PatchModel = FileSharePatch,
     Error = CloudError
   >;
 
@@ -146,5 +154,10 @@ interface FileShares {
 @@doc(
   FileShares.update::parameters.properties,
   "Properties to update for the file share."
+);
+@@typeChangedFrom(
+  FileShares.update::parameters.properties,
+  Versions.v2026_12_01,
+  FileShare
 );
 @@doc(FileShares.restore::parameters.body, "");
