@@ -289,7 +289,50 @@ The renderer consumes these validated selections. Model cards keep one
 complete owning-model unified diff; direct operation/method cards keep complete
 relevant constructs. No affected-operation/type-to-method inventories return.
 
+SDK member-change tables project each finding's baseline/target member evidence:
+show the actual member name, type, and explicit optional/required state, plus
+changed access, flattening, or wire-name values when recorded. Candidate
+`expected`/`actual` prose is not a substitute for these Before/After values.
+Only members represented by accepted findings are shown; a model-wide fact
+must not introduce rows for rejected changes. Missing metadata stays explicit
+rather than assuming requiredness.
+
 ## 7. Missing evidence, contradictions, and recovery
+
+### Generated-model removal regression: PR 46679
+
+The November 10 repair was validated by a fresh complete assessment, not by
+editing failed artifacts or rejecting accepted removals. Both generated public
+types, `CloudAccountUpdate` and `CloudAccountUpdateProperties`, now retain the
+canonical changed `CloudAccounts.update` declarations and show the custom PATCH
+template/`ResourceUpdateModel` to resource PATCH transition. Finalization succeeds
+with 7 REST and 12 SDK findings, and source association covers all 19 findings
+with no unresolved entries. Compatibility evidence coverage remains partial.
+
+The pinned repaired runtime fingerprint is
+`sha256:034187aced1bebc4c74c51f011266bcf0f238afdf8d0641c17b19b73b0ba16a8`.
+Evidence and complete observable phase metrics are stored in
+`C:\Users\haolingdong\.copilot\session-state\4c19cb4f-10f3-40f5-9a96-a8b7e6eca3bb\files\pr46679-provenance-fixed-20261110\run-metrics.json`.
+Preparation wall time was 176.222 seconds; judgment-ready to materializer start
+was 104.304 seconds; source-agent wall time was 59.808 seconds. Compact judgment
+and source inputs were 163,303 and 80,297 bytes respectively. These intervals
+are not pure AI compute time and do not replace the historical benchmark table.
+
+Removed generated generic models can be attributed through their baseline
+public method input reference, including nested generic-property references
+with matching instantiation arguments, and compiler-backed before/current
+operation declarations sharing a changed hunk. The operation must reference
+the template and its arguments before the change and stop referencing the
+removed definition afterward. Matching generated names or a shared file alone
+is insufficient; the resulting context contains only the proven declarations,
+not an affected-method inventory. Model cards show the unambiguous generated
+name while retaining the canonical template identity.
+
+An evidence-backed finding with a materialized `unresolved` source review,
+nonempty explanation, and no selected/display source may retain empty
+canonical source attribution. Missing deterministic evidence, a missing review,
+or invalid selections still fail validation. This permits explicit partial
+source coverage without suppressing accepted removals to make reports pass.
 
 Source coverage is independent from compatibility coverage:
 

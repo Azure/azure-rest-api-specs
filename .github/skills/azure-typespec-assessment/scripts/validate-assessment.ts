@@ -81,7 +81,14 @@ function validateFinding(
     errors.push(`${prefix} has invalid severity.`);
   }
   if (!finding.rationale?.trim()) errors.push(`${prefix} is missing rationale.`);
-  if (!finding.sources?.length) errors.push(`${prefix} has no changed TypeSpec source.`);
+  const unresolvedSource =
+    finding.sourceReview?.outcome === "unresolved" &&
+    Boolean(finding.sourceReview.rationale?.trim()) &&
+    finding.sourceReview.selectedDeclarations.length === 0 &&
+    !finding.displaySources?.length &&
+    Boolean(finding.evidence?.length);
+  if (!finding.sources?.length && !unresolvedSource)
+    errors.push(`${prefix} has no changed TypeSpec source.`);
   for (const source of finding.sources ?? []) {
     if (!source.hunks?.length)
       errors.push(`${prefix} links source ${source.id} without changed hunks.`);

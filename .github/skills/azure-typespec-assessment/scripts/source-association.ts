@@ -269,6 +269,25 @@ export function buildSourceAssociation({ work }: { work: string }) {
                 declaration.kind === "operation" &&
                 declaration.hunkIds.some((id) => operationHunks.has(id)),
             );
+      if (
+        !selected.length &&
+        dimension === "downstream" &&
+        candidate.rule === "public-surface-changed" &&
+        evidence.some((item) => item.comparisonRole === "baseline") &&
+        !evidence.some((item) => item.comparisonRole === "target")
+      ) {
+        const declarationIds = new Set(candidate.declarationIds ?? []);
+        const hunkIds = new Set(candidate.hunkIds ?? []);
+        selected.push(
+          ...[...registered.values()].filter(
+            ({ sourceChangeId, declaration }) =>
+              candidate.sourceChangeIds.includes(sourceChangeId) &&
+              declarationIds.has(declaration.id) &&
+              declaration.kind === "operation" &&
+              declaration.hunkIds.some((id) => hunkIds.has(id)),
+          ),
+        );
+      }
       for (const entry of selected) {
         group.proposalIds.add(entry.declaration.id);
         group.allowedSourceIds.add(entry.sourceChangeId);

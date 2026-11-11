@@ -5,6 +5,7 @@ import {
 } from "./comparison-execution.ts";
 import { DOCUMENT_QUALITY_CRITERION } from "./document-quality-input.ts";
 import { semanticGroupingPresentation } from "./semantic-assessment-scope.ts";
+import { canonicalJson } from "./stable-id.ts";
 
 type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
 
@@ -359,19 +360,60 @@ function typeRows(type: string, findings: AssessmentFinding[]): ReportRow[] {
   const rows: ReportRow[] = [];
   for (const finding of findings) {
     const { before, after } = factPair(finding);
+    const propertyNames = unique(
+      [...(before?.properties ?? []), ...(after?.properties ?? [])].map(
+        (property) => property.name,
+      ),
+    );
+    const changedNames = propertyNames.filter(
+      (name) =>
+        finding.actual ===
+        `${finding.crossLanguageDefinitionId ?? type}.${name} changed type, optionality, flattening, or access.`,
+    );
     const name =
+      (changedNames.length === 1 ? changedNames[0] : undefined) ??
       finding.actual?.match(/\bproperty\s+([A-Za-z_$][\w$]*)\b/)?.[1] ??
       finding.expected?.match(/\bproperty\s+([A-Za-z_$][\w$]*)\b/)?.[1];
-    if (finding.rule === "model-property-removed" && name && before) {
-      const previous = before.properties?.find((property) => property.name === name);
+    if (
+      [
+        "model-property-removed",
+        "model-property-changed",
+        "model-property-added-required",
+      ].includes(finding.rule ?? "") &&
+      name &&
+      propertyNames.includes(name)
+    ) {
+      const previous = before?.properties?.find((property) => property.name === name);
       const current = after?.properties?.find((property) => property.name === name);
+      type Property = NonNullable<AssessmentFact["properties"]>[number];
+      const changedType =
+        canonicalJson(previous?.type ?? null) !== canonicalJson(current?.type ?? null);
+      const sameTypeLabel =
+        previous && current && sdkTypeName(previous.type) === sdkTypeName(current.type);
+      const display = (property: Property | undefined, missing: string) => {
+        if (!property) return missing;
+        const parts = [
+          changedType && sameTypeLabel ? JSON.stringify(property.type) : sdkTypeName(property.type),
+          property.optional === true
+            ? "optional"
+            : property.optional === false
+              ? "required"
+              : "optionality not recorded",
+        ];
+        for (const field of ["access", "flatten", "serializedName"] as const) {
+          if (previous && current && previous[field] !== current[field]) {
+            parts.push(
+              `${field}: ${property[field] === undefined ? "not recorded" : String(property[field])}`,
+            );
+          }
+        }
+        return parts.join(" · ");
+      };
       rows.push({
         area: "SDK type member",
         label: name,
-        before: previous
-          ? `${sdkTypeName(previous.type)}${previous.optional ? "?" : ""}`
-          : finding.expected,
-        after: current ? sdkTypeName(current.type) : "removed",
+        before: before ? display(previous, "not present") : "Baseline member evidence unavailable",
+        after: after ? display(current, "removed") : "Target member evidence unavailable",
       });
     } else if (finding.rule === "public-surface-changed") {
       const surface = (fact: AssessmentFact | undefined) =>
@@ -1052,7 +1094,9 @@ export function renderReportSections(
       .map((finding) => finding.sourceReview)
       .filter((review) => review?.outcome === "unresolved");
     const completeDeclarations = completeModel
-      ? renderCompleteModelDeclarations(sources, declarationNames)
+      ? renderCompleteModelDeclarations(sources, declarationNames) ||
+        renderCompleteSourceDeclarations?.(sources) ||
+        ""
       : findings.some((finding) => finding.sourceReview?.selectedDeclarations.length)
         ? (renderCompleteSourceDeclarations?.(sources) ?? "")
         : "";
@@ -1219,8 +1263,20 @@ export function renderReportSections(
     `${operationCards ? `<h3>Operation changes</h3>${operationCards}` : ""}${modelCards ? `<h3>Model and type changes</h3>${modelCards}` : ""}` +
     (dimensions.rest.legacyFindings ?? []).map((finding) => legacyCard(finding)).join("");
 
+  const typeLabel = (type: TypePresentation) => {
+    const names = unique(
+      type.findings.flatMap((finding) =>
+        (finding.evidence ?? [])
+          .filter(
+            (fact) => fact.factKind === "model" && fact.crossLanguageDefinitionId === type.type,
+          )
+          .map((fact) => fact.name),
+      ),
+    );
+    return names.length === 1 ? names[0] : type.type.split(".").at(-1);
+  };
   const typeContent = (type: TypePresentation) =>
-    `<div class="report-type-impact">${emitAnchor(type.anchorId)}${emitAnchor(`downstream-${anchor(type.id)}`)}${findingAnchors(type.findings, "downstream")}${findingAnchors(type.findings)}<h4>${escape(type.type.split(".").at(-1))}</h4><p class="report-small"><code>${escape(type.type)}</code></p>${table(type.rows)}${rationale(type.findings)}${relevantSource(type.findings, [type.type], true)}</div>`;
+    `<div class="report-type-impact">${emitAnchor(type.anchorId)}${emitAnchor(`downstream-${anchor(type.id)}`)}${findingAnchors(type.findings, "downstream")}${findingAnchors(type.findings)}<h4>${escape(typeLabel(type))}</h4><p class="report-small"><code>${escape(type.type)}</code></p>${table(type.rows)}${rationale(type.findings)}${relevantSource(type.findings, [type.type], true)}</div>`;
 
   const directMethodCards = downstream.methods
     .filter((method) => method.group)
@@ -1256,7 +1312,7 @@ export function renderReportSections(
 
   const typeCards = downstream.types
     .map((type) => {
-      return `<details class="report-card sdk-contract-card" id="downstream-type-card-${anchor(type.id)}">${summary(escape(type.type.split(".").at(-1)), "The normalized SDK model/type contract changes.", `<span class="report-badge">${type.findings.length} type changes</span>`, affectedIntents(type.semanticIds))}<div class="report-card-body">${typeContent(type)}</div></details>`;
+      return `<details class="report-card sdk-contract-card" id="downstream-type-card-${anchor(type.id)}">${summary(escape(typeLabel(type)), "The normalized SDK model/type contract changes.", `<span class="report-badge">${type.findings.length} type changes</span>`, affectedIntents(type.semanticIds))}<div class="report-card-body">${typeContent(type)}</div></details>`;
     })
     .join("");
 
@@ -1434,7 +1490,7 @@ export function renderReportSections(
         );
       for (const type of downstream.types.filter((type) => type.semanticIds.includes(item.id)))
         downstreamLinks.push(
-          `<a class="report-link impact" href="#${type.anchorId}">Downstream: ${escape(type.type.split(".").at(-1))} (SDK type)</a>`,
+          `<a class="report-link impact" href="#${type.anchorId}">Downstream: ${escape(typeLabel(type))} (SDK type)</a>`,
         );
       for (const finding of legacyDownstream) {
         if (

@@ -285,6 +285,48 @@ test("no approved breakings skips source AI with a validated not-applicable resu
   assert.equal(loadSourceAssociation(root).status, "not-applicable");
 });
 
+test("removed generated type uses its proven operation declarations without consumer enumeration", (context) => {
+  const { root, write } = fixture(context);
+  const raw = JSON.parse(
+    fs.readFileSync(path.join(root, "dimensions/rest-breaking-input.json"), "utf8"),
+  );
+  const generated = {
+    ...raw.candidates[0],
+    id: "generated-removal",
+    rule: "public-surface-changed",
+    crossLanguageDefinitionId: "Contoso.GenericUpdate",
+    operationIds: undefined,
+    sourceChangeIds: ["source-op"],
+    declarationIds: ["decl-operation"],
+    hunkIds: ["hunk-op"],
+  };
+  write("dimensions/downstream-breaking-input.json", {
+    facts: {},
+    candidates: [generated],
+    blockers: [],
+  });
+  const judgment = JSON.parse(fs.readFileSync(path.join(root, "assessment-judgment.json"), "utf8"));
+  judgment.restDecisions = [];
+  judgment.downstreamDecisions = [
+    {
+      candidateId: generated.id,
+      decision: "approve",
+      severity: "high",
+      rationale: "Public generated type removed.",
+    },
+  ];
+  write("assessment-judgment.json", judgment);
+  const model = JSON.parse(fs.readFileSync(path.join(root, "model-input.json"), "utf8"));
+  model.facts["operation-fact"].comparisonRole = "baseline";
+  write("model-input.json", model);
+  raw.facts["operation-fact"].comparisonRole = "baseline";
+  write("dimensions/rest-breaking-input.json", raw);
+  freeze(root);
+  buildSourceAssociation({ work: root });
+  assert.deepEqual(input(root).items[0].proposal.declarationIds, ["decl-operation"]);
+  assert.deepEqual(input(root).items[0].allowedSourceChangeIds, ["source-op"]);
+});
+
 test("targeted queries add canonical support without opening unrelated model inventory", (context) => {
   const { root } = fixture(context);
   buildSourceAssociation({ work: root });

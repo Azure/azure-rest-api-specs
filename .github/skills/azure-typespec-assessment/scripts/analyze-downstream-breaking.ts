@@ -633,6 +633,7 @@ function pushCandidate(
   kind: string,
   detail?: CandidateDetail,
   identityEvidence?: DownstreamIdentityEvidence,
+  generatedSource?: ReturnType<typeof removedGenericSource>,
 ) {
   const beforeFactId = before
     ? addFact(facts, projectId, "baseline", kind, before, source.artifactComparison)
@@ -641,7 +642,8 @@ function pushCandidate(
     ? addFact(facts, projectId, "target", kind, after, source.artifactComparison)
     : undefined;
   const text = candidateText(rule, symbol, detail);
-  const ownership = candidateEvidence(source, symbol, before, after, kind, detail);
+  const ownership =
+    generatedSource ?? candidateEvidence(source, symbol, before, after, kind, detail);
 
   const candidate: Omit<DownstreamCandidate, "id"> = {
     rule,
@@ -657,6 +659,99 @@ function pushCandidate(
     ...(identityEvidence ? { identityEvidence } : {}),
   };
   candidates.push({ id: stableId("downstream", candidate), ...candidate });
+}
+
+function removedGenericSource(
+  model: NormalizedTcgcNamedType,
+  baseline: NormalizedTcgcContract,
+  source: DownstreamEvidence,
+) {
+  if (!model.templateArguments?.length || !model.crossLanguageDefinitionId) return undefined;
+  const definitionName = model.crossLanguageDefinitionId.split(".").at(-1);
+  const args = model.templateArguments;
+  const argumentNames = args.flatMap((arg) =>
+    isRecord(arg) && typeof arg.name === "string" ? [arg.name] : [],
+  );
+  if (argumentNames.length !== args.length) return undefined;
+  const declarations = new Map<string, SourceDeclaration>();
+  const reaches = (type: NormalizedTcgcType | undefined, seen = new Set<string>()): boolean => {
+    if (!type) return false;
+    if (type.id === model.identity) return true;
+    if (type.id && !seen.has(type.id)) {
+      seen.add(type.id);
+      const matches = baseline.models.filter((item) => item.identity === type.id);
+      if (matches.length === 1) {
+        const owner = matches[0];
+        if (
+          owner.templateArguments?.length &&
+          canonicalJson(owner.templateArguments) === canonicalJson(args) &&
+          (owner.properties ?? []).some((property) => reaches(property.type, seen))
+        )
+          return true;
+      }
+    }
+    return [
+      type.valueType,
+      type.type,
+      ...(type.valueTypes ?? []),
+      ...(type.variantTypes ?? []),
+    ].some((child) => reaches(child, seen));
+  };
+  for (const method of baseline.methods) {
+    if (
+      !method.crossLanguageDefinitionId ||
+      !method.parameters.some((parameter) => reaches(parameter.type))
+    )
+      continue;
+    const mapped = candidateEvidence(
+      source,
+      method.crossLanguageDefinitionId,
+      method,
+      undefined,
+      "method",
+      undefined,
+    );
+    const ids = new Set(mapped.declarationIds);
+    const operations = source.declarations.filter(
+      (declaration) => ids.has(declaration.id) && declaration.kind === "operation",
+    );
+    for (const before of operations.filter(
+      (declaration) => declaration.source.revision === "base",
+    )) {
+      const refs = before.compilerEvidence?.referencedNames ?? [];
+      if (
+        !definitionName ||
+        !refs.includes(definitionName) ||
+        !argumentNames.every((name) => refs.includes(name))
+      )
+        continue;
+      const after = operations.find(
+        (declaration) =>
+          declaration.source.revision === "current" &&
+          declaration.qualifiedName === before.qualifiedName &&
+          declaration.hunkIds.some((id) => before.hunkIds.includes(id)),
+      );
+      if (
+        !after?.compilerEvidence ||
+        after.compilerEvidence.referencedNames.includes(definitionName)
+      )
+        continue;
+      declarations.set(before.id, before);
+      declarations.set(after.id, after);
+    }
+  }
+  if (!declarations.size) return undefined;
+  const ids = new Set(declarations.keys());
+  return {
+    sourceChangeIds: source.sources
+      .filter((item) => item.declarations.some((declaration) => ids.has(declaration.id)))
+      .map((item) => item.id)
+      .sort(),
+    declarationIds: [...ids].sort(),
+    hunkIds: [
+      ...new Set([...declarations.values()].flatMap((declaration) => declaration.hunkIds)),
+    ].sort(),
+  };
 }
 
 function compareMethods(
@@ -858,6 +953,9 @@ function compareModels(
         before,
         undefined,
         "model",
+        undefined,
+        undefined,
+        removedGenericSource(before, base, source),
       );
       continue;
     }

@@ -536,6 +536,57 @@ void test.each([false, true])(
   },
 );
 
+void test("verified unresolved source does not discard an evidence-backed finding", () => {
+  const work = fixture();
+  try {
+    const result = assembleTestAssessment({
+      work,
+      judgment: {
+        schemaVersion: 1,
+        overallConfidence: "high",
+        blockers: [],
+        semanticIntents: [
+          {
+            reviewUnitId: "semantic-1",
+            title: "Change Widget",
+            summary: "Change Widget contract.",
+          },
+        ],
+        restDecisions: [
+          {
+            candidateId: "rest-1",
+            decision: "approve",
+            severity: "high",
+            rationale: "Required member breaks callers.",
+          },
+        ],
+        downstreamDecisions: [],
+        complianceDecisions: [],
+      },
+    });
+    const finding = result.dimensions.rest.findings[0];
+    finding.sources = [];
+    finding.sourceReview = {
+      outcome: "unresolved",
+      selectedDeclarations: [],
+      rationale: "Canonical source attribution reviewed but unavailable.",
+    };
+    const sourceError = () =>
+      validateAssessment(result).filter((error) => /no changed TypeSpec source/.test(error));
+    assert.deepEqual(sourceError(), []);
+    finding.sourceReview.rationale = "";
+    assert.equal(sourceError().length, 1);
+    finding.sourceReview.rationale = "Source unavailable.";
+    finding.evidence = [];
+    assert.equal(sourceError().length, 1);
+    finding.evidence = [{ id: "rest-fact-1" }];
+    finding.sourceReview = undefined;
+    assert.equal(sourceError().length, 1);
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
 void test("assembly retains mapped operations without treating paging metadata as a wire change", () => {
   for (const wireField of [undefined, "responses", "produces"]) {
     const work = fixture();

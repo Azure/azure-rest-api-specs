@@ -383,6 +383,79 @@ void test("missing-head-baseline sections contain only their heading and approve
   assert.match(reportSection(generic.html, "rest-breaking"), /No REST compatibility verdict/);
 });
 
+test("SDK property-change rows show each member's concrete optionality without generic repeated prose", () => {
+  const { dimension } = fixture();
+  const properties = [
+    { name: "lastBackUpTime", type: { kind: "int64" }, optional: true },
+    { name: "protectionStatus", type: { kind: "enum", name: "ProtectionStatus" }, optional: true },
+    { name: "numberOfProtectedItems", type: { kind: "int32" }, optional: true },
+  ];
+  const original = dimension.findings[0];
+  dimension.methodGroups = [];
+  dimension.findings = properties.map((property, index) => ({
+    ...original,
+    id: `required-${index}`,
+    rule: "model-property-changed",
+    actual: `Contoso.Widget.${property.name} changed type, optionality, flattening, or access.`,
+    expected: "Contoso.Widget preserves its existing language-neutral generated SDK contract.",
+    evidence: [
+      { comparisonRole: "baseline", factKind: "model", properties },
+      {
+        comparisonRole: "target",
+        factKind: "model",
+        properties: properties.map((p) => ({ ...p, optional: false })),
+      },
+    ],
+  }));
+  dimension.typeImpacts![0].findingIds = dimension.findings.map((f) => f.id);
+  const rows = downstreamMethodData(dimension).types[0].rows;
+  assert.equal(rows.length, 3);
+  assert.deepEqual(
+    rows.map((row) => row.label),
+    properties.map((p) => p.name),
+  );
+  assert.deepEqual(
+    rows.map((row) => row.before),
+    ["int64 · optional", "ProtectionStatus · optional", "int32 · optional"],
+  );
+  assert.deepEqual(
+    rows.map((row) => row.after),
+    ["int64 · required", "ProtectionStatus · required", "int32 · required"],
+  );
+  assert.notInclude(JSON.stringify(rows), "preserves its existing");
+  dimension.findings = [dimension.findings[0]];
+  assert.equal(downstreamMethodData(dimension).types[0].rows.length, 1);
+});
+
+test("SDK member rows preserve concrete type, access and flattening changes", () => {
+  const { dimension } = fixture();
+  const finding = dimension.findings[0];
+  finding.rule = "model-property-changed";
+  finding.actual = "Contoso.Widget.old changed type, optionality, flattening, or access.";
+  finding.evidence = [
+    {
+      comparisonRole: "baseline",
+      properties: [
+        { name: "old", type: { kind: "string" }, optional: true, access: "public", flatten: false },
+      ],
+    },
+    {
+      comparisonRole: "target",
+      properties: [
+        { name: "old", type: { kind: "int32" }, optional: true, access: "internal", flatten: true },
+      ],
+    },
+  ];
+  const row = downstreamMethodData(dimension).types[0].rows[0];
+  assert.equal(row.label, "old");
+  assert.include(row.before!, "string · optional");
+  assert.include(row.after!, "int32 · optional");
+  assert.include(row.before!, "access: public");
+  assert.include(row.after!, "access: internal");
+  assert.include(row.before!, "flatten: false");
+  assert.include(row.after!, "flatten: true");
+});
+
 void test("renders stable semantic grouping identity, diagnostics, and evidence provenance", () => {
   const input = assessment();
   const item = required(input.dimensions.semantic.items[0]);
