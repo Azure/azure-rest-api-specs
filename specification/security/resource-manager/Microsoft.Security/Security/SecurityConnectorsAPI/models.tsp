@@ -26,41 +26,49 @@ namespace SecurityConnectorsAPI;
 union CloudName {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Azure
    */
   Azure: "Azure",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AWS
    */
   AWS: "AWS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * GCP
    */
   GCP: "GCP",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Github
    */
   Github: "Github",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureDevOps
    */
   AzureDevOps: "AzureDevOps",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * GitLab
    */
   GitLab: "GitLab",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DockerHub
    */
   DockerHub: "DockerHub",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * JFrog
    */
@@ -73,96 +81,115 @@ union CloudName {
 union OfferingType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CspmMonitorAws
    */
   CspmMonitorAws: "CspmMonitorAws",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderForContainersAws
    */
   DefenderForContainersAws: "DefenderForContainersAws",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderForServersAws
    */
   DefenderForServersAws: "DefenderForServersAws",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderForDatabasesAws
    */
   DefenderForDatabasesAws: "DefenderForDatabasesAws",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CspmMonitorGcp
    */
   CspmMonitorGcp: "CspmMonitorGcp",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CspmMonitorGithub
    */
   CspmMonitorGithub: "CspmMonitorGithub",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CspmMonitorAzureDevOps
    */
   CspmMonitorAzureDevOps: "CspmMonitorAzureDevOps",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderForServersGcp
    */
   DefenderForServersGcp: "DefenderForServersGcp",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderForContainersGcp
    */
   DefenderForContainersGcp: "DefenderForContainersGcp",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderForDatabasesGcp
    */
   DefenderForDatabasesGcp: "DefenderForDatabasesGcp",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderCspmAws
    */
   DefenderCspmAws: "DefenderCspmAws",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderCspmGcp
    */
   DefenderCspmGcp: "DefenderCspmGcp",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CspmMonitorGitLab
    */
   CspmMonitorGitLab: "CspmMonitorGitLab",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CspmMonitorDockerHub
    */
   CspmMonitorDockerHub: "CspmMonitorDockerHub",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderForContainersDockerHub
    */
   DefenderForContainersDockerHub: "DefenderForContainersDockerHub",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderCspmDockerHub
    */
   DefenderCspmDockerHub: "DefenderCspmDockerHub",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CspmMonitorJFrog
    */
   CspmMonitorJFrog: "CspmMonitorJFrog",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderForContainersJFrog
    */
   DefenderForContainersJFrog: "DefenderForContainersJFrog",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DefenderCspmJFrog
    */
@@ -175,36 +202,43 @@ union OfferingType {
 union EnvironmentType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AwsAccount
    */
   AwsAccount: "AwsAccount",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * GcpProject
    */
   GcpProject: "GcpProject",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * GithubScope
    */
   GithubScope: "GithubScope",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureDevOpsScope
    */
   AzureDevOpsScope: "AzureDevOpsScope",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * GitlabScope
    */
   GitlabScope: "GitlabScope",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DockerHubOrganization
    */
   DockerHubOrganization: "DockerHubOrganization",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * JFrogArtifactory
    */
@@ -217,11 +251,13 @@ union EnvironmentType {
 union OrganizationMembershipType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Member
    */
   Member: "Member",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Organization
    */
@@ -234,6 +270,7 @@ union OrganizationMembershipType {
 union AuthenticationType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AccessToken
    */
@@ -246,6 +283,7 @@ union AuthenticationType {
 union ScanningMode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Default
    */
@@ -258,11 +296,13 @@ union ScanningMode {
 union Type {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Qualys
    */
   Qualys: "Qualys",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TVM
    */
@@ -275,11 +315,13 @@ union Type {
 union SubPlan {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * P1
    */
   P1: "P1",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * P2
    */

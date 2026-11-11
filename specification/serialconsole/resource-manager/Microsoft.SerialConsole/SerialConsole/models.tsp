@@ -17,21 +17,25 @@ namespace Microsoft.SerialConsole;
 union CreatedByType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * User
    */
   User: "User",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Application
    */
   Application: "Application",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ManagedIdentity
    */
   ManagedIdentity: "ManagedIdentity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Key
    */
@@ -43,11 +47,13 @@ union CreatedByType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SerialPortState {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * enabled
    */
   enabled,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * disabled
    */
@@ -59,11 +65,13 @@ enum SerialPortState {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SerialPortConnectionState {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * active
    */
   active,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * inactive
    */

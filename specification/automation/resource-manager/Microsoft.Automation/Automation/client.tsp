@@ -987,6 +987,7 @@ using TypeSpec.Rest;
 union DscConfigurationProvisioningState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Succeeded. */
   Succeeded: "Succeeded",
 }
@@ -1002,6 +1003,7 @@ union DscConfigurationProvisioningState {
 union RunbookProvisioningState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Succeeded. */
   Succeeded: "Succeeded",
 }

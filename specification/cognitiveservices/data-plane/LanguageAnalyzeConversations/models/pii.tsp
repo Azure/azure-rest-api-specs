@@ -54,6 +54,7 @@ model AnalyzeConversationConversationPiiResult
   /** discriminator kind */
   kind: AnalyzeConversationResultsKind.ConversationalPIIResults;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** results */
   results: ConversationPiiResults;
 }
@@ -98,6 +99,7 @@ model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   /** discriminator kind */
   kind: AnalyzeConversationLROTaskKind.ConversationalPIITask;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** parameters */
   parameters?: ConversationPiiTaskParameters;
 }

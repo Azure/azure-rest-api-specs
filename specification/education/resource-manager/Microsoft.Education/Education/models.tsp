@@ -16,16 +16,19 @@ namespace Microsoft.Education;
 union Origin {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * user
    */
   user: "user",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * system
    */
   system: "system",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * user,system
    */
@@ -38,6 +41,7 @@ union Origin {
 union ActionType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Internal
    */
@@ -50,11 +54,13 @@ union ActionType {
 union GrantType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Student
    */
   Student: "Student",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Academic
    */
@@ -67,11 +73,13 @@ union GrantType {
 union GrantStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Inactive
    */
@@ -84,21 +92,25 @@ union GrantStatus {
 union CreatedByType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * User
    */
   User: "User",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Application
    */
   Application: "Application",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ManagedIdentity
    */
   ManagedIdentity: "ManagedIdentity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Key
    */
@@ -111,16 +123,19 @@ union CreatedByType {
 union LabStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */
   Deleted: "Deleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
@@ -133,11 +148,13 @@ union LabStatus {
 union JoinRequestStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Denied
    */
@@ -150,11 +167,13 @@ union JoinRequestStatus {
 union StudentRole {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Student
    */
   Student: "Student",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Admin
    */
@@ -167,26 +186,31 @@ union StudentRole {
 union StudentLabStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
   Expired: "Expired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */

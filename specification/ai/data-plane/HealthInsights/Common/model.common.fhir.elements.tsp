@@ -346,24 +346,31 @@ model ContactPoint {
 union ContactPointSystem {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Phone")
   Phone: "phone",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Fax")
   Fax: "fax",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Email")
   Email: "email",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Pager")
   Pager: "pager",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Url")
   Url: "url",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Sms")
   Sms: "sms",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Other")
   Other: "other",
 }
@@ -375,18 +382,23 @@ union ContactPointSystem {
 union ContactPointUse {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Home")
   Home: "home",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Work")
   Work: "work",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Temp")
   Temp: "temp",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Old")
   Old: "old",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Mobile")
   Mobile: "mobile",
 }

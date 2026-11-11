@@ -1043,9 +1043,11 @@ model GetItemPointOptions {
   @pattern(".*")
   itemId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Longitude. */
   @path longitude: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Latitude. */
   @path latitude: float32;
 
@@ -1314,9 +1316,11 @@ model GetCollectionPointOptions {
   @pattern(".*")
   collectionId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Longitude. */
   @path longitude: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Latitude. */
   @path latitude: float32;
 
@@ -1343,9 +1347,11 @@ model GetSearchPointOptions {
   @pattern(".*")
   searchId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Longitude. */
   @path longitude: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Latitude. */
   @path latitude: float32;
 
@@ -4425,12 +4431,14 @@ model GetCollectionPointAssetsOptions {
   @pattern(".*")
   collectionId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Longitude
    */
   @path
   longitude: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Latitude
    */
@@ -4531,12 +4539,14 @@ model GetSearchPointWithAssetsOptions {
   @pattern(".*")
   searchId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Longitude
    */
   @path
   longitude: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Latitude
    */

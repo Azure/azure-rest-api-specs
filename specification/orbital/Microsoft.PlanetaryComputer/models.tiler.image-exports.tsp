@@ -9,17 +9,20 @@ namespace Microsoft.PlanetaryComputer;
  * Parameters for requesting a rendered image from a collection
  */
 model ImageParameters {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Cql
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
   cql: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Zoom
    */
   zoom?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Geometry
    */

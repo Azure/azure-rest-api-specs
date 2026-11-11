@@ -335,24 +335,31 @@ union HairColorType {
   @doc("Unknown.")
   unknownHairColor: "unknown",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("White.")
   "white",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Gray.")
   "gray",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Blond.")
   "blond",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Brown.")
   "brown",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Red.")
   "red",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Black.")
   "black",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Other.")
   "other",
 }
@@ -387,9 +394,11 @@ union AccessoryType {
   @doc("Head wear.")
   "headwear",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Glasses.")
   "glasses",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Mask.")
   "mask",
 }
@@ -491,6 +500,7 @@ union MaskType {
   @doc("Other types of mask or occlusion.")
   "otherMaskOrOcclusion",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Uncertain.")
   "uncertain",
 }

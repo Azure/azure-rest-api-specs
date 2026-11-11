@@ -18,16 +18,19 @@ namespace HealthReportsAPI;
 union StatusName {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Healthy
    */
   Healthy: "Healthy",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotHealthy
    */
   NotHealthy: "NotHealthy",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotApplicable
    */

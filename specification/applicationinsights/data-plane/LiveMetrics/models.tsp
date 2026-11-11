@@ -509,6 +509,7 @@ union AggregationType {
   @doc("Average")
   Avg: "Avg",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Sum")
   Sum: "Sum",
 

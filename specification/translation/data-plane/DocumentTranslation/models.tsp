@@ -86,24 +86,31 @@ union StorageInputType {
 
 @doc("Enums containing high level error codes.")
 union TranslationErrorCode {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("InvalidRequest")
   InvalidRequest: "InvalidRequest",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("InvalidArgument")
   InvalidArgument: "InvalidArgument",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("InternalServerError")
   InternalServerError: "InternalServerError",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("ServiceUnavailable")
   ServiceUnavailable: "ServiceUnavailable",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("ResourceNotFound")
   ResourceNotFound: "ResourceNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Unauthorized")
   Unauthorized: "Unauthorized",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("RequestRateTooHigh")
   RequestRateTooHigh: "RequestRateTooHigh",
 
@@ -112,24 +119,31 @@ union TranslationErrorCode {
 
 @doc("List of possible statuses for job or document")
 union Status {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("NotStarted")
   NotStarted: "NotStarted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Running")
   Running: "Running",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Succeeded")
   Succeeded: "Succeeded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Failed")
   Failed: "Failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Cancelled")
   Cancelled: "Cancelled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Cancelling")
   Cancelling: "Cancelling",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("ValidationFailed")
   ValidationFailed: "ValidationFailed",
 
@@ -240,6 +254,7 @@ model Glossary {
     """)
   glossaryUrl: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Format")
   format: string;
 

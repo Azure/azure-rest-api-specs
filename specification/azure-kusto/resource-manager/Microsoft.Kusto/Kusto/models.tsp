@@ -17,321 +17,385 @@ namespace Microsoft.Kusto;
 union AzureSkuName {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Dev(No SLA)_Standard_D11_v2
    */
   `Dev(No SLA)_Standard_D11_v2`: "Dev(No SLA)_Standard_D11_v2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Dev(No SLA)_Standard_E2a_v4
    */
   `Dev(No SLA)_Standard_E2a_v4`: "Dev(No SLA)_Standard_E2a_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_D11_v2
    */
   Standard_D11_v2: "Standard_D11_v2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_D12_v2
    */
   Standard_D12_v2: "Standard_D12_v2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_D13_v2
    */
   Standard_D13_v2: "Standard_D13_v2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_D14_v2
    */
   Standard_D14_v2: "Standard_D14_v2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_D32d_v4
    */
   Standard_D32d_v4: "Standard_D32d_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_D16d_v5
    */
   Standard_D16d_v5: "Standard_D16d_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_D32d_v5
    */
   Standard_D32d_v5: "Standard_D32d_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_DS13_v2+1TB_PS
    */
   `Standard_DS13_v2+1TB_PS`: "Standard_DS13_v2+1TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_DS13_v2+2TB_PS
    */
   `Standard_DS13_v2+2TB_PS`: "Standard_DS13_v2+2TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_DS14_v2+3TB_PS
    */
   `Standard_DS14_v2+3TB_PS`: "Standard_DS14_v2+3TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_DS14_v2+4TB_PS
    */
   `Standard_DS14_v2+4TB_PS`: "Standard_DS14_v2+4TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L4s
    */
   Standard_L4s: "Standard_L4s",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L8s
    */
   Standard_L8s: "Standard_L8s",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L16s
    */
   Standard_L16s: "Standard_L16s",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L8s_v2
    */
   Standard_L8s_v2: "Standard_L8s_v2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L16s_v2
    */
   Standard_L16s_v2: "Standard_L16s_v2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L8s_v3
    */
   Standard_L8s_v3: "Standard_L8s_v3",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L16s_v3
    */
   Standard_L16s_v3: "Standard_L16s_v3",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L32s_v3
    */
   Standard_L32s_v3: "Standard_L32s_v3",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L8as_v3
    */
   Standard_L8as_v3: "Standard_L8as_v3",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L16as_v3
    */
   Standard_L16as_v3: "Standard_L16as_v3",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_L32as_v3
    */
   Standard_L32as_v3: "Standard_L32as_v3",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E64i_v3
    */
   Standard_E64i_v3: "Standard_E64i_v3",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E80ids_v4
    */
   Standard_E80ids_v4: "Standard_E80ids_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E2a_v4
    */
   Standard_E2a_v4: "Standard_E2a_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E4a_v4
    */
   Standard_E4a_v4: "Standard_E4a_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8a_v4
    */
   Standard_E8a_v4: "Standard_E8a_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16a_v4
    */
   Standard_E16a_v4: "Standard_E16a_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8as_v4+1TB_PS
    */
   `Standard_E8as_v4+1TB_PS`: "Standard_E8as_v4+1TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8as_v4+2TB_PS
    */
   `Standard_E8as_v4+2TB_PS`: "Standard_E8as_v4+2TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16as_v4+3TB_PS
    */
   `Standard_E16as_v4+3TB_PS`: "Standard_E16as_v4+3TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16as_v4+4TB_PS
    */
   `Standard_E16as_v4+4TB_PS`: "Standard_E16as_v4+4TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8as_v5+1TB_PS
    */
   `Standard_E8as_v5+1TB_PS`: "Standard_E8as_v5+1TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8as_v5+2TB_PS
    */
   `Standard_E8as_v5+2TB_PS`: "Standard_E8as_v5+2TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16as_v5+3TB_PS
    */
   `Standard_E16as_v5+3TB_PS`: "Standard_E16as_v5+3TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16as_v5+4TB_PS
    */
   `Standard_E16as_v5+4TB_PS`: "Standard_E16as_v5+4TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E2ads_v5
    */
   Standard_E2ads_v5: "Standard_E2ads_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E4ads_v5
    */
   Standard_E4ads_v5: "Standard_E4ads_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8ads_v5
    */
   Standard_E8ads_v5: "Standard_E8ads_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16ads_v5
    */
   Standard_E16ads_v5: "Standard_E16ads_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_EC8as_v5+1TB_PS
    */
   `Standard_EC8as_v5+1TB_PS`: "Standard_EC8as_v5+1TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_EC8as_v5+2TB_PS
    */
   `Standard_EC8as_v5+2TB_PS`: "Standard_EC8as_v5+2TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_EC16as_v5+3TB_PS
    */
   `Standard_EC16as_v5+3TB_PS`: "Standard_EC16as_v5+3TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_EC16as_v5+4TB_PS
    */
   `Standard_EC16as_v5+4TB_PS`: "Standard_EC16as_v5+4TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_EC8ads_v5
    */
   Standard_EC8ads_v5: "Standard_EC8ads_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_EC16ads_v5
    */
   Standard_EC16ads_v5: "Standard_EC16ads_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8s_v4+1TB_PS
    */
   `Standard_E8s_v4+1TB_PS`: "Standard_E8s_v4+1TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8s_v4+2TB_PS
    */
   `Standard_E8s_v4+2TB_PS`: "Standard_E8s_v4+2TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16s_v4+3TB_PS
    */
   `Standard_E16s_v4+3TB_PS`: "Standard_E16s_v4+3TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16s_v4+4TB_PS
    */
   `Standard_E16s_v4+4TB_PS`: "Standard_E16s_v4+4TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8s_v5+1TB_PS
    */
   `Standard_E8s_v5+1TB_PS`: "Standard_E8s_v5+1TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8s_v5+2TB_PS
    */
   `Standard_E8s_v5+2TB_PS`: "Standard_E8s_v5+2TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16s_v5+3TB_PS
    */
   `Standard_E16s_v5+3TB_PS`: "Standard_E16s_v5+3TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16s_v5+4TB_PS
    */
   `Standard_E16s_v5+4TB_PS`: "Standard_E16s_v5+4TB_PS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E2d_v4
    */
   Standard_E2d_v4: "Standard_E2d_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E4d_v4
    */
   Standard_E4d_v4: "Standard_E4d_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8d_v4
    */
   Standard_E8d_v4: "Standard_E8d_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16d_v4
    */
   Standard_E16d_v4: "Standard_E16d_v4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E2d_v5
    */
   Standard_E2d_v5: "Standard_E2d_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E4d_v5
    */
   Standard_E4d_v5: "Standard_E4d_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E8d_v5
    */
   Standard_E8d_v5: "Standard_E8d_v5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard_E16d_v5
    */
@@ -344,11 +408,13 @@ union AzureSkuName {
 union AzureSkuTier {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Basic
    */
   Basic: "Basic",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard
    */
@@ -361,21 +427,25 @@ union AzureSkuTier {
 union CreatedByType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * User
    */
   User: "User",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Application
    */
   Application: "Application",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ManagedIdentity
    */
   ManagedIdentity: "ManagedIdentity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Key
    */
@@ -388,21 +458,25 @@ union CreatedByType {
 union IdentityType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SystemAssigned
    */
   SystemAssigned: "SystemAssigned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UserAssigned
    */
   UserAssigned: "UserAssigned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SystemAssigned, UserAssigned
    */
@@ -415,51 +489,61 @@ union IdentityType {
 union State {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Creating
    */
   Creating: "Creating",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Unavailable
    */
   Unavailable: "Unavailable",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Running
    */
   Running: "Running",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleting
    */
   Deleting: "Deleting",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */
   Deleted: "Deleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Stopping
    */
   Stopping: "Stopping",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Stopped
    */
   Stopped: "Stopped",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Starting
    */
   Starting: "Starting",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Updating
    */
   Updating: "Updating",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Migrated
    */
@@ -472,36 +556,43 @@ union State {
 union ProvisioningState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Running
    */
   Running: "Running",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Creating
    */
   Creating: "Creating",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleting
    */
   Deleting: "Deleting",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Succeeded
    */
   Succeeded: "Succeeded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Failed
    */
   Failed: "Failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Moving
    */
   Moving: "Moving",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Canceled
    */
@@ -514,11 +605,13 @@ union ProvisioningState {
 union VnetState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Enabled
    */
   Enabled: "Enabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
@@ -531,11 +624,13 @@ union VnetState {
 union LanguageExtensionName {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PYTHON
    */
   PYTHON: "PYTHON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * R
    */
@@ -548,36 +643,43 @@ union LanguageExtensionName {
 union LanguageExtensionImageName {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * R
    */
   R: "R",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Python3_6_5
    */
   Python3_6_5: "Python3_6_5",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Python3_10_8
    */
   Python3_10_8: "Python3_10_8",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Python3_10_8_DL
    */
   Python3_10_8_DL: "Python3_10_8_DL",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PythonCustomImage
    */
   PythonCustomImage: "PythonCustomImage",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Python3_11_7
    */
   Python3_11_7: "Python3_11_7",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Python3_11_7_DL
    */
@@ -590,16 +692,19 @@ union LanguageExtensionImageName {
 union PublicNetworkAccess {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Enabled
    */
   Enabled: "Enabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SecuredByPerimeter
    */
@@ -612,11 +717,13 @@ union PublicNetworkAccess {
 union EngineType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * V2
    */
   V2: "V2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * V3
    */
@@ -629,11 +736,13 @@ union EngineType {
 union ClusterNetworkAccessFlag {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Enabled
    */
   Enabled: "Enabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
@@ -646,56 +755,67 @@ union ClusterNetworkAccessFlag {
 union CalloutType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * kusto
    */
   kusto: "kusto",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * sql
    */
   sql: "sql",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * cosmosdb
    */
   cosmosdb: "cosmosdb",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * external_data
    */
   external_data: "external_data",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * azure_digital_twins
    */
   azure_digital_twins: "azure_digital_twins",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * sandbox_artifacts
    */
   sandbox_artifacts: "sandbox_artifacts",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * webapi
    */
   webapi: "webapi",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * mysql
    */
   mysql: "mysql",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * postgresql
    */
   postgresql: "postgresql",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * genevametrics
    */
   genevametrics: "genevametrics",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * azure_openai
    */
@@ -708,11 +828,13 @@ union CalloutType {
 union OutboundAccess {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allow
    */
   Allow: "Allow",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deny
    */
@@ -725,11 +847,13 @@ union OutboundAccess {
 union PublicIPType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IPv4
    */
   IPv4: "IPv4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DualStack
    */
@@ -742,11 +866,13 @@ union PublicIPType {
 union MigrationClusterRole {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Source
    */
   Source: "Source",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Destination
    */
@@ -759,16 +885,19 @@ union MigrationClusterRole {
 union ZoneStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NonZonal
    */
   NonZonal: "NonZonal",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ZonalInconsistency
    */
   ZonalInconsistency: "ZonalInconsistency",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Zonal
    */
@@ -781,11 +910,13 @@ union ZoneStatus {
 union Reason {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Invalid
    */
   Invalid: "Invalid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AlreadyExists
    */
@@ -798,16 +929,19 @@ union Reason {
 union ClusterPrincipalRole {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AllDatabasesAdmin
    */
   AllDatabasesAdmin: "AllDatabasesAdmin",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AllDatabasesViewer
    */
   AllDatabasesViewer: "AllDatabasesViewer",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AllDatabasesMonitor
    */
@@ -820,16 +954,19 @@ union ClusterPrincipalRole {
 union PrincipalType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * App
    */
   App: "App",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Group
    */
   Group: "Group",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * User
    */
@@ -842,16 +979,19 @@ union PrincipalType {
 union DatabaseShareOrigin {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Direct
    */
   Direct: "Direct",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DataShare
    */
   DataShare: "DataShare",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
@@ -864,16 +1004,19 @@ union DatabaseShareOrigin {
 union AzureScaleType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * automatic
    */
   automatic: "automatic",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * manual
    */
   manual: "manual",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * none
    */
@@ -886,11 +1029,13 @@ union AzureScaleType {
 union Kind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ReadWrite
    */
   ReadWrite: "ReadWrite",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ReadOnlyFollowing
    */
@@ -918,31 +1063,37 @@ union CallerRole {
 union DatabasePrincipalRole {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Admin
    */
   Admin: "Admin",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Ingestor
    */
   Ingestor: "Ingestor",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Monitor
    */
   Monitor: "Monitor",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * User
    */
   User: "User",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnrestrictedViewer
    */
   UnrestrictedViewer: "UnrestrictedViewer",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Viewer
    */
@@ -955,16 +1106,19 @@ union DatabasePrincipalRole {
 union DatabasePrincipalType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * App
    */
   App: "App",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Group
    */
   Group: "Group",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * User
    */
@@ -977,11 +1131,13 @@ union DatabasePrincipalType {
 union ScriptLevel {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Database
    */
   Database: "Database",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Cluster
    */
@@ -994,11 +1150,13 @@ union ScriptLevel {
 union PrincipalPermissionsAction {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RetainPermissionOnScriptCompletion
    */
   RetainPermissionOnScriptCompletion: "RetainPermissionOnScriptCompletion",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RemovePermissionOnScriptCompletion
    */
@@ -1011,6 +1169,7 @@ union PrincipalPermissionsAction {
 union Language {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Python
    */
@@ -1023,16 +1182,19 @@ union Language {
 union DefaultPrincipalsModificationKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Union
    */
   Union: "Union",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Replace
    */
   Replace: "Replace",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
@@ -1045,31 +1207,37 @@ union DefaultPrincipalsModificationKind {
 union DataConnectionKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * EventHub
    */
   EventHub: "EventHub",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * EventGrid
    */
   EventGrid: "EventGrid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IotHub
    */
   IotHub: "IotHub",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CosmosDb
    */
   CosmosDb: "CosmosDb",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * EventHubWithManagedIdentity
    */
   EventHubWithManagedIdentity: "EventHubWithManagedIdentity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * EventGridWithManagedIdentity
    */
@@ -1082,21 +1250,25 @@ union DataConnectionKind {
 union Status {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Succeeded
    */
   Succeeded: "Succeeded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Canceled
    */
   Canceled: "Canceled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Failed
    */
   Failed: "Failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Running
    */
@@ -1109,16 +1281,19 @@ union Status {
 union PrincipalsModificationKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Union
    */
   Union: "Union",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Replace
    */
   Replace: "Replace",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
@@ -1131,86 +1306,103 @@ union PrincipalsModificationKind {
 union EventHubDataFormat {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MULTIJSON
    */
   MULTIJSON: "MULTIJSON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * JSON
    */
   JSON: "JSON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CSV
    */
   CSV: "CSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TSV
    */
   TSV: "TSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SCSV
    */
   SCSV: "SCSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SOHSV
    */
   SOHSV: "SOHSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PSV
    */
   PSV: "PSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TXT
    */
   TXT: "TXT",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RAW
    */
   RAW: "RAW",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SINGLEJSON
    */
   SINGLEJSON: "SINGLEJSON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AVRO
    */
   AVRO: "AVRO",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TSVE
    */
   TSVE: "TSVE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PARQUET
    */
   PARQUET: "PARQUET",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ORC
    */
   ORC: "ORC",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * APACHEAVRO
    */
   APACHEAVRO: "APACHEAVRO",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * W3CLOGFILE
    */
   W3CLOGFILE: "W3CLOGFILE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AZMONSTREAM
    */
@@ -1223,11 +1415,13 @@ union EventHubDataFormat {
 union Compression {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * GZip
    */
@@ -1240,11 +1434,13 @@ union Compression {
 union DatabaseRouting {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Single
    */
   Single: "Single",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Multi
    */
@@ -1257,86 +1453,103 @@ union DatabaseRouting {
 union IotHubDataFormat {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MULTIJSON
    */
   MULTIJSON: "MULTIJSON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * JSON
    */
   JSON: "JSON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CSV
    */
   CSV: "CSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TSV
    */
   TSV: "TSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SCSV
    */
   SCSV: "SCSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SOHSV
    */
   SOHSV: "SOHSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PSV
    */
   PSV: "PSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TXT
    */
   TXT: "TXT",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RAW
    */
   RAW: "RAW",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SINGLEJSON
    */
   SINGLEJSON: "SINGLEJSON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AVRO
    */
   AVRO: "AVRO",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TSVE
    */
   TSVE: "TSVE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PARQUET
    */
   PARQUET: "PARQUET",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ORC
    */
   ORC: "ORC",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * APACHEAVRO
    */
   APACHEAVRO: "APACHEAVRO",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * W3CLOGFILE
    */
   W3CLOGFILE: "W3CLOGFILE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AZMONSTREAM
    */
@@ -1349,86 +1562,103 @@ union IotHubDataFormat {
 union EventGridDataFormat {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MULTIJSON
    */
   MULTIJSON: "MULTIJSON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * JSON
    */
   JSON: "JSON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CSV
    */
   CSV: "CSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TSV
    */
   TSV: "TSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SCSV
    */
   SCSV: "SCSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SOHSV
    */
   SOHSV: "SOHSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PSV
    */
   PSV: "PSV",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TXT
    */
   TXT: "TXT",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RAW
    */
   RAW: "RAW",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SINGLEJSON
    */
   SINGLEJSON: "SINGLEJSON",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AVRO
    */
   AVRO: "AVRO",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TSVE
    */
   TSVE: "TSVE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PARQUET
    */
   PARQUET: "PARQUET",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ORC
    */
   ORC: "ORC",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * APACHEAVRO
    */
   APACHEAVRO: "APACHEAVRO",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * W3CLOGFILE
    */
   W3CLOGFILE: "W3CLOGFILE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AZMONSTREAM
    */
@@ -1441,11 +1671,13 @@ union EventGridDataFormat {
 union BlobStorageEventType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Microsoft.Storage.BlobCreated
    */
   `Microsoft.Storage.BlobCreated`: "Microsoft.Storage.BlobCreated",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Microsoft.Storage.BlobRenamed
    */
@@ -1457,11 +1689,13 @@ union BlobStorageEventType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum Type {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Microsoft.Kusto/clusters/databases
    */
   `Microsoft.Kusto/clusters/databases`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Microsoft.Kusto/clusters/attachedDatabaseConfigurations
    */

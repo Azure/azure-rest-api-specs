@@ -17,36 +17,43 @@ namespace Microsoft.Billing;
 union AcceptanceMode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ClickToAccept
    */
   ClickToAccept: "ClickToAccept",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ESignEmbedded
    */
   ESignEmbedded: "ESignEmbedded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ESignOffline
    */
   ESignOffline: "ESignOffline",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Implicit
    */
   Implicit: "Implicit",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Offline
    */
   Offline: "Offline",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PhysicalSign
    */
@@ -59,31 +66,37 @@ union AcceptanceMode {
 union Category {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AffiliatePurchaseTerms
    */
   AffiliatePurchaseTerms: "AffiliatePurchaseTerms",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IndirectForGovernmentAgreement
    */
   IndirectForGovernmentAgreement: "IndirectForGovernmentAgreement",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MicrosoftCustomerAgreement
    */
   MicrosoftCustomerAgreement: "MicrosoftCustomerAgreement",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MicrosoftPartnerAgreement
    */
   MicrosoftPartnerAgreement: "MicrosoftPartnerAgreement",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UKCloudComputeFramework
    */
@@ -96,21 +109,25 @@ union Category {
 union CreatedByType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * User
    */
   User: "User",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Application
    */
   Application: "Application",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ManagedIdentity
    */
   ManagedIdentity: "ManagedIdentity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Key
    */
@@ -123,56 +140,67 @@ union CreatedByType {
 union ProvisioningState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Succeeded
    */
   Succeeded: "Succeeded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Canceled
    */
   Canceled: "Canceled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Failed
    */
   Failed: "Failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * New
    */
   New: "New",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Provisioning
    */
   Provisioning: "Provisioning",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PendingBilling
    */
   PendingBilling: "PendingBilling",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ConfirmedBilling
    */
   ConfirmedBilling: "ConfirmedBilling",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Creating
    */
   Creating: "Creating",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Created
    */
   Created: "Created",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
@@ -185,21 +213,25 @@ union ProvisioningState {
 union BillingManagementTenantState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
   NotAllowed: "NotAllowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Revoked
    */
@@ -212,36 +244,43 @@ union BillingManagementTenantState {
 union ProvisioningTenantState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotRequested
    */
   NotRequested: "NotRequested",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BillingRequestExpired
    */
   BillingRequestExpired: "BillingRequestExpired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BillingRequestDeclined
    */
   BillingRequestDeclined: "BillingRequestDeclined",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Revoked
    */
@@ -254,41 +293,49 @@ union ProvisioningTenantState {
 union PaymentMethodFamily {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CreditCard
    */
   CreditCard: "CreditCard",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Credits
    */
   Credits: "Credits",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CheckWire
    */
   CheckWire: "CheckWire",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * EWallet
    */
   EWallet: "EWallet",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TaskOrder
    */
   TaskOrder: "TaskOrder",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DirectDebit
    */
@@ -301,56 +348,67 @@ union PaymentMethodFamily {
 union AccountStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnderReview
    */
   UnderReview: "UnderReview",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */
   Deleted: "Deleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Extended
    */
   Extended: "Extended",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * New
    */
   New: "New",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
   Expired: "Expired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Terminated
    */
   Terminated: "Terminated",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Transferred
    */
@@ -363,46 +421,55 @@ union AccountStatus {
 union AccountType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Enterprise
    */
   Enterprise: "Enterprise",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Individual
    */
   Individual: "Individual",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Partner
    */
   Partner: "Partner",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Reseller
    */
   Reseller: "Reseller",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ClassicPartner
    */
   ClassicPartner: "ClassicPartner",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Internal
    */
   Internal: "Internal",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Tenant
    */
   Tenant: "Tenant",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Business
    */
@@ -415,26 +482,31 @@ union AccountType {
 union AccountSubType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Individual
    */
   Individual: "Individual",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Professional
    */
   Professional: "Professional",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Enterprise
    */
@@ -447,31 +519,37 @@ union AccountSubType {
 union BillingAccountStatusReasonCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnusualActivity
    */
   UnusualActivity: "UnusualActivity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ManuallyTerminated
    */
   ManuallyTerminated: "ManuallyTerminated",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
   Expired: "Expired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Transferred
    */
   Transferred: "Transferred",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TerminateProcessing
    */
@@ -484,26 +562,31 @@ union BillingAccountStatusReasonCode {
 union AgreementType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MicrosoftCustomerAgreement
    */
   MicrosoftCustomerAgreement: "MicrosoftCustomerAgreement",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * EnterpriseAgreement
    */
   EnterpriseAgreement: "EnterpriseAgreement",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MicrosoftOnlineServicesProgram
    */
   MicrosoftOnlineServicesProgram: "MicrosoftOnlineServicesProgram",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MicrosoftPartnerAgreement
    */
@@ -516,16 +599,19 @@ union AgreementType {
 union ExtendedTermOption {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Opted-In
    */
   `Opted-In`: "Opted-In",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Opted-Out
    */
@@ -538,21 +624,25 @@ union ExtendedTermOption {
 union SupportLevel {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard
    */
   Standard: "Standard",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pro-Direct
    */
   `Pro-Direct`: "Pro-Direct",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Developer
    */
@@ -565,26 +655,31 @@ union SupportLevel {
 union MarkupStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Preview
    */
   Preview: "Preview",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Published
    */
   Published: "Published",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Locked
    */
@@ -597,31 +692,37 @@ union MarkupStatus {
 union BillingRelationshipType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Direct
    */
   Direct: "Direct",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IndirectCustomer
    */
   IndirectCustomer: "IndirectCustomer",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IndirectPartner
    */
   IndirectPartner: "IndirectPartner",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CSPPartner
    */
   CSPPartner: "CSPPartner",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CSPCustomer
    */
@@ -634,101 +735,121 @@ union BillingRelationshipType {
 union TaxIdentifierType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BrazilCcmId
    */
   BrazilCcmId: "BrazilCcmId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BrazilCnpjId
    */
   BrazilCnpjId: "BrazilCnpjId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BrazilCpfId
    */
   BrazilCpfId: "BrazilCpfId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CanadianFederalExempt
    */
   CanadianFederalExempt: "CanadianFederalExempt",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CanadianProvinceExempt
    */
   CanadianProvinceExempt: "CanadianProvinceExempt",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ExternalTaxation
    */
   ExternalTaxation: "ExternalTaxation",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IndiaFederalTanId
    */
   IndiaFederalTanId: "IndiaFederalTanId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IndiaFederalServiceTaxId
    */
   IndiaFederalServiceTaxId: "IndiaFederalServiceTaxId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IndiaPanId
    */
   IndiaPanId: "IndiaPanId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IndiaStateCstId
    */
   IndiaStateCstId: "IndiaStateCstId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IndiaStateGstINId
    */
   IndiaStateGstINId: "IndiaStateGstINId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IndiaStateVatId
    */
   IndiaStateVatId: "IndiaStateVatId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IntlExempt
    */
   IntlExempt: "IntlExempt",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * USExempt
    */
   USExempt: "USExempt",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * VatId
    */
   VatId: "VatId",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * LoveCode
    */
   LoveCode: "LoveCode",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MobileBarCode
    */
   MobileBarCode: "MobileBarCode",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NationalIdentificationNumber
    */
   NationalIdentificationNumber: "NationalIdentificationNumber",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PublicSectorId
    */
@@ -741,16 +862,19 @@ union TaxIdentifierType {
 union TaxIdentifierStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Valid
    */
   Valid: "Valid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Invalid
    */
@@ -763,31 +887,37 @@ union TaxIdentifierStatus {
 union BillingProfileStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Warned
    */
   Warned: "Warned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */
   Deleted: "Deleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnderReview
    */
@@ -800,26 +930,31 @@ union BillingProfileStatus {
 union BillingProfileStatusReasonCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PastDue
    */
   PastDue: "PastDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnusualActivity
    */
   UnusualActivity: "UnusualActivity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SpendingLimitReached
    */
   SpendingLimitReached: "SpendingLimitReached",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SpendingLimitExpired
    */
@@ -832,11 +967,13 @@ union BillingProfileStatusReasonCode {
 union SpendingLimit {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Off
    */
   Off: "Off",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * On
    */
@@ -849,16 +986,19 @@ union SpendingLimit {
 union PaymentTermsEligibilityStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Valid
    */
   Valid: "Valid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Invalid
    */
@@ -871,51 +1011,61 @@ union PaymentTermsEligibilityStatus {
 union PaymentTermsEligibilityCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * OverlappingPaymentTerms
    */
   OverlappingPaymentTerms: "OverlappingPaymentTerms",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvalidDateFormat
    */
   InvalidDateFormat: "InvalidDateFormat",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvalidDateRange
    */
   InvalidDateRange: "InvalidDateRange",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InactiveBillingAccount
    */
   InactiveBillingAccount: "InactiveBillingAccount",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvalidBillingAccountType
    */
   InvalidBillingAccountType: "InvalidBillingAccountType",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NullOrEmptyPaymentTerms
    */
   NullOrEmptyPaymentTerms: "NullOrEmptyPaymentTerms",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BillingAccountNotFound
    */
   BillingAccountNotFound: "BillingAccountNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IneligibleBillingAccountStatus
    */
   IneligibleBillingAccountStatus: "IneligibleBillingAccountStatus",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvalidTerms
    */
@@ -928,16 +1078,19 @@ union PaymentTermsEligibilityCode {
 union AddressValidationStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Valid
    */
   Valid: "Valid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Invalid
    */
@@ -950,16 +1103,19 @@ union AddressValidationStatus {
 union AccessDecision {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
   Allowed: "Allowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
@@ -972,11 +1128,13 @@ union AccessDecision {
 union DeleteBillingProfileEligibilityStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
   Allowed: "Allowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
@@ -989,46 +1147,55 @@ union DeleteBillingProfileEligibilityStatus {
 union DeleteBillingProfileEligibilityCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ActiveCredits
    */
   ActiveCredits: "ActiveCredits",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ActiveCreditCard
    */
   ActiveCreditCard: "ActiveCreditCard",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * LastBillingProfile
    */
   LastBillingProfile: "LastBillingProfile",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotSupported
    */
   NotSupported: "NotSupported",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * OutstandingCharges
    */
   OutstandingCharges: "OutstandingCharges",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PendingCharges
    */
   PendingCharges: "PendingCharges",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ReservedInstances
    */
   ReservedInstances: "ReservedInstances",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ActiveBillingSubscriptions
    */
@@ -1041,76 +1208,91 @@ union DeleteBillingProfileEligibilityCode {
 union SpendingLimitType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * FreeAccount
    */
   FreeAccount: "FreeAccount",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Sandbox
    */
   Sandbox: "Sandbox",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureForStudents
    */
   AzureForStudents: "AzureForStudents",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AcademicSponsorship
    */
   AcademicSponsorship: "AcademicSponsorship",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureConsumptionCredit
    */
   AzureConsumptionCredit: "AzureConsumptionCredit",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzurePassSponsorship
    */
   AzurePassSponsorship: "AzurePassSponsorship",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MpnSponsorship
    */
   MpnSponsorship: "MpnSponsorship",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MSDN
    */
   MSDN: "MSDN",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NonProfitSponsorship
    */
   NonProfitSponsorship: "NonProfitSponsorship",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Sponsorship
    */
   Sponsorship: "Sponsorship",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * StartupSponsorship
    */
   StartupSponsorship: "StartupSponsorship",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureForStudentsStarter
    */
   AzureForStudentsStarter: "AzureForStudentsStarter",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * VisualStudio
    */
@@ -1123,31 +1305,37 @@ union SpendingLimitType {
 union SpendingLimitStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
   Expired: "Expired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * LimitReached
    */
   LimitReached: "LimitReached",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * LimitRemoved
    */
@@ -1160,36 +1348,43 @@ union SpendingLimitStatus {
 union CustomerStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Warned
    */
   Warned: "Warned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */
   Deleted: "Deleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnderReview
    */
@@ -1202,36 +1397,43 @@ union CustomerStatus {
 union InvoiceSectionState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */
   Deleted: "Deleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnderReview
    */
   UnderReview: "UnderReview",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Warned
    */
   Warned: "Warned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Restricted
    */
@@ -1244,26 +1446,31 @@ union InvoiceSectionState {
 union InvoiceSectionStateReasonCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PastDue
    */
   PastDue: "PastDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnusualActivity
    */
   UnusualActivity: "UnusualActivity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SpendingLimitReached
    */
   SpendingLimitReached: "SpendingLimitReached",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SpendingLimitExpired
    */
@@ -1276,61 +1483,73 @@ union InvoiceSectionStateReasonCode {
 union BillingSubscriptionStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Unknown
    */
   Unknown: "Unknown",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */
   Deleted: "Deleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Warned
    */
   Warned: "Warned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expiring
    */
   Expiring: "Expiring",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
   Expired: "Expired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AutoRenew
    */
   AutoRenew: "AutoRenew",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Cancelled
    */
   Cancelled: "Cancelled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Suspended
    */
   Suspended: "Suspended",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Failed
    */
@@ -1343,46 +1562,55 @@ union BillingSubscriptionStatus {
 union SubscriptionStatusReason {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Cancelled
    */
   Cancelled: "Cancelled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PastDue
    */
   PastDue: "PastDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SuspiciousActivity
    */
   SuspiciousActivity: "SuspiciousActivity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Transferred
    */
   Transferred: "Transferred",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PolicyViolation
    */
   PolicyViolation: "PolicyViolation",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SpendingLimitReached
    */
   SpendingLimitReached: "SpendingLimitReached",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
@@ -1395,26 +1623,31 @@ union SubscriptionStatusReason {
 union SubscriptionBillingType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Benefit
    */
   Benefit: "Benefit",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Free
    */
   Free: "Free",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Paid
    */
   Paid: "Paid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PrePaid
    */
@@ -1427,21 +1660,25 @@ union SubscriptionBillingType {
 union SubscriptionWorkloadType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Production
    */
   Production: "Production",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DevTest
    */
   DevTest: "DevTest",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Internal
    */
@@ -1454,36 +1691,43 @@ union SubscriptionWorkloadType {
 union BillingRequestStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Approved
    */
   Approved: "Approved",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Declined
    */
   Declined: "Declined",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Cancelled
    */
   Cancelled: "Cancelled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Completed
    */
   Completed: "Completed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
@@ -1496,26 +1740,31 @@ union BillingRequestStatus {
 union BillingRequestType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvoiceAccess
    */
   InvoiceAccess: "InvoiceAccess",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ProvisioningAccess
    */
   ProvisioningAccess: "ProvisioningAccess",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RoleAssignment
    */
   RoleAssignment: "RoleAssignment",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UpdateBillingPolicy
    */
@@ -1528,36 +1777,43 @@ union BillingRequestType {
 union PrincipalType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Unknown
    */
   Unknown: "Unknown",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * User
    */
   User: "User",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Group
    */
   Group: "Group",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DirectoryRole
    */
   DirectoryRole: "DirectoryRole",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ServicePrincipal
    */
   ServicePrincipal: "ServicePrincipal",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Everyone
    */
@@ -1570,16 +1826,19 @@ union PrincipalType {
 union SavingsPlanTerm {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * P1Y
    */
   P1Y: "P1Y",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * P3Y
    */
   P3Y: "P3Y",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * P5Y
    */
@@ -1592,6 +1851,7 @@ union SavingsPlanTerm {
 union BillingPlan {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * P1M
    */
@@ -1604,31 +1864,37 @@ union BillingPlan {
 union PaymentStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Succeeded
    */
   Succeeded: "Succeeded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Failed
    */
   Failed: "Failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Scheduled
    */
   Scheduled: "Scheduled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Cancelled
    */
   Cancelled: "Cancelled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Completed
    */
   Completed: "Completed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
@@ -1641,16 +1907,19 @@ union PaymentStatus {
 union AppliedScopeType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Single
    */
   Single: "Single",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Shared
    */
   Shared: "Shared",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ManagementGroup
    */
@@ -1663,6 +1932,7 @@ union AppliedScopeType {
 union CommitmentGrain {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Hourly
    */
@@ -1675,11 +1945,13 @@ union CommitmentGrain {
 union AutoRenew {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Off
    */
   Off: "Off",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * On
    */
@@ -1692,36 +1964,43 @@ union AutoRenew {
 union SubscriptionEnrollmentAccountStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Cancelled
    */
   Cancelled: "Cancelled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
   Expired: "Expired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */
   Deleted: "Deleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TransferredOut
    */
   TransferredOut: "TransferredOut",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Transferring
    */
   Transferring: "Transferring",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Inactive
    */
@@ -1734,11 +2013,13 @@ union SubscriptionEnrollmentAccountStatus {
 union Cancellation {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
   NotAllowed: "NotAllowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
@@ -1751,16 +2032,19 @@ union Cancellation {
 union BillingSubscriptionOperationStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * LockedForUpdate
    */
@@ -1773,16 +2057,19 @@ union BillingSubscriptionOperationStatus {
 union CancellationReason {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Compromise
    */
   Compromise: "Compromise",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Dispute
    */
@@ -1795,141 +2082,169 @@ union CancellationReason {
 union SubscriptionTransferValidationErrorCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BillingAccountInactive
    */
   BillingAccountInactive: "BillingAccountInactive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationBillingProfileInactive
    */
   DestinationBillingProfileInactive: "DestinationBillingProfileInactive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationBillingProfileNotFound
    */
   DestinationBillingProfileNotFound: "DestinationBillingProfileNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationBillingProfilePastDue
    */
   DestinationBillingProfilePastDue: "DestinationBillingProfilePastDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationInvoiceSectionInactive
    */
   DestinationInvoiceSectionInactive: "DestinationInvoiceSectionInactive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationInvoiceSectionNotFound
    */
   DestinationInvoiceSectionNotFound: "DestinationInvoiceSectionNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InsufficientPermissionOnDestination
    */
   InsufficientPermissionOnDestination: "InsufficientPermissionOnDestination",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InsufficientPermissionOnSource
    */
   InsufficientPermissionOnSource: "InsufficientPermissionOnSource",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvalidDestination
    */
   InvalidDestination: "InvalidDestination",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvalidSource
    */
   InvalidSource: "InvalidSource",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MarketplaceNotEnabledOnDestination
    */
   MarketplaceNotEnabledOnDestination: "MarketplaceNotEnabledOnDestination",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ProductInactive
    */
   ProductInactive: "ProductInactive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ProductNotFound
    */
   ProductNotFound: "ProductNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ProductTypeNotSupported
    */
   ProductTypeNotSupported: "ProductTypeNotSupported",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SourceBillingProfilePastDue
    */
   SourceBillingProfilePastDue: "SourceBillingProfilePastDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SourceInvoiceSectionInactive
    */
   SourceInvoiceSectionInactive: "SourceInvoiceSectionInactive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AccountIsLocked
    */
   AccountIsLocked: "AccountIsLocked",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AssetHasCap
    */
   AssetHasCap: "AssetHasCap",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AssetNotActive
    */
   AssetNotActive: "AssetNotActive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BillingProfilePastDue
    */
   BillingProfilePastDue: "BillingProfilePastDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CrossBillingAccountNotAllowed
    */
   CrossBillingAccountNotAllowed: "CrossBillingAccountNotAllowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NoActiveAzurePlan
    */
   NoActiveAzurePlan: "NoActiveAzurePlan",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SubscriptionNotActive
    */
   SubscriptionNotActive: "SubscriptionNotActive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SubscriptionHasReservations
    */
   SubscriptionHasReservations: "SubscriptionHasReservations",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SubscriptionTypeNotSupported
    */
   SubscriptionTypeNotSupported: "SubscriptionTypeNotSupported",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvoiceSectionIsRestricted
    */
@@ -1942,36 +2257,43 @@ union SubscriptionTransferValidationErrorCode {
 union InvoiceDocumentType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Invoice
    */
   Invoice: "Invoice",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * VoidNote
    */
   VoidNote: "VoidNote",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TaxReceipt
    */
   TaxReceipt: "TaxReceipt",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CreditNote
    */
   CreditNote: "CreditNote",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Summary
    */
   Summary: "Summary",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Transactions
    */
@@ -1984,16 +2306,19 @@ union InvoiceDocumentType {
 union DocumentSource {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DRS
    */
   DRS: "DRS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ENF
    */
@@ -2006,21 +2331,25 @@ union DocumentSource {
 union FailedPaymentReason {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BankDeclined
    */
   BankDeclined: "BankDeclined",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CardExpired
    */
   CardExpired: "CardExpired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * IncorrectCardDetails
    */
@@ -2033,21 +2362,25 @@ union FailedPaymentReason {
 union InvoiceType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureServices
    */
   AzureServices: "AzureServices",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureMarketplace
    */
   AzureMarketplace: "AzureMarketplace",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureSupport
    */
@@ -2060,31 +2393,37 @@ union InvoiceType {
 union InvoiceStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Due
    */
   Due: "Due",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * OverDue
    */
   OverDue: "OverDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Paid
    */
   Paid: "Paid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Void
    */
   Void: "Void",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Locked
    */
@@ -2097,11 +2436,13 @@ union InvoiceStatus {
 union SpecialTaxationType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SubtotalLevel
    */
   SubtotalLevel: "SubtotalLevel",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvoiceLevel
    */
@@ -2114,36 +2455,43 @@ union SpecialTaxationType {
 union RefundStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Approved
    */
   Approved: "Approved",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Declined
    */
   Declined: "Declined",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Cancelled
    */
   Cancelled: "Cancelled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Completed
    */
   Completed: "Completed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
@@ -2156,31 +2504,37 @@ union RefundStatus {
 union RefundReasonCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AccidentalConversion
    */
   AccidentalConversion: "AccidentalConversion",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnclearPricing
    */
   UnclearPricing: "UnclearPricing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AccidentalPurchase
    */
   AccidentalPurchase: "AccidentalPurchase",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ForgotToCancel
    */
   ForgotToCancel: "ForgotToCancel",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnclearDocumentation
    */
@@ -2193,11 +2547,13 @@ union RefundReasonCode {
 union DeleteInvoiceSectionEligibilityStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
   Allowed: "Allowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
@@ -2210,26 +2566,31 @@ union DeleteInvoiceSectionEligibilityStatus {
 union DeleteInvoiceSectionEligibilityCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * LastInvoiceSection
    */
   LastInvoiceSection: "LastInvoiceSection",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ActiveAzurePlans
    */
   ActiveAzurePlans: "ActiveAzurePlans",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ReservedInstances
    */
   ReservedInstances: "ReservedInstances",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ActiveBillingSubscriptions
    */
@@ -2242,11 +2603,13 @@ union DeleteInvoiceSectionEligibilityCode {
 union PaymentMethodStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * active
    */
   active: "active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * inactive
    */
@@ -2269,16 +2632,19 @@ union ServiceDefinedResourceName {
 union ViewChargesPolicy {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
   Allowed: "Allowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
@@ -2291,16 +2657,19 @@ union ViewChargesPolicy {
 union PolicyType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UserControlled
    */
   UserControlled: "UserControlled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SystemControlled
    */
@@ -2313,26 +2682,31 @@ union PolicyType {
 union EnrollmentAuthLevelState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MicrosoftAccountOnly
    */
   MicrosoftAccountOnly: "MicrosoftAccountOnly",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MixedAccount
    */
   MixedAccount: "MixedAccount",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * OrganizationalAccountCrossTenant
    */
   OrganizationalAccountCrossTenant: "OrganizationalAccountCrossTenant",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * OrganizationalAccountOnly
    */
@@ -2345,21 +2719,25 @@ union EnrollmentAuthLevelState {
 union EnrollmentAccountOwnerViewCharges {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
   Allowed: "Allowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
@@ -2372,21 +2750,25 @@ union EnrollmentAccountOwnerViewCharges {
 union EnrollmentDepartmentAdminViewCharges {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
   Allowed: "Allowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
@@ -2399,16 +2781,19 @@ union EnrollmentDepartmentAdminViewCharges {
 union InvoiceSectionLabelManagementPolicy {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
   Allowed: "Allowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
@@ -2421,26 +2806,31 @@ union InvoiceSectionLabelManagementPolicy {
 union MarketplacePurchasesPolicy {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AllAllowed
    */
   AllAllowed: "AllAllowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
   NotAllowed: "NotAllowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * OnlyFreeAllowed
    */
@@ -2453,21 +2843,25 @@ union MarketplacePurchasesPolicy {
 union ReservationPurchasesPolicy {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
   Allowed: "Allowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
@@ -2480,21 +2874,25 @@ union ReservationPurchasesPolicy {
 union SavingsPlanPurchasesPolicy {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allowed
    */
   Allowed: "Allowed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotAllowed
    */
@@ -2507,51 +2905,61 @@ union SavingsPlanPurchasesPolicy {
 union ProductStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
   Disabled: "Disabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deleted
    */
   Deleted: "Deleted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PastDue
    */
   PastDue: "PastDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expiring
    */
   Expiring: "Expiring",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
   Expired: "Expired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AutoRenew
    */
   AutoRenew: "AutoRenew",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Canceled
    */
   Canceled: "Canceled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Suspended
    */
@@ -2564,86 +2972,103 @@ union ProductStatus {
 union MoveValidationErrorCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BillingAccountInactive
    */
   BillingAccountInactive: "BillingAccountInactive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationBillingProfileInactive
    */
   DestinationBillingProfileInactive: "DestinationBillingProfileInactive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationBillingProfileNotFound
    */
   DestinationBillingProfileNotFound: "DestinationBillingProfileNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationBillingProfilePastDue
    */
   DestinationBillingProfilePastDue: "DestinationBillingProfilePastDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationInvoiceSectionInactive
    */
   DestinationInvoiceSectionInactive: "DestinationInvoiceSectionInactive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DestinationInvoiceSectionNotFound
    */
   DestinationInvoiceSectionNotFound: "DestinationInvoiceSectionNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InsufficientPermissionOnDestination
    */
   InsufficientPermissionOnDestination: "InsufficientPermissionOnDestination",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InsufficientPermissionOnSource
    */
   InsufficientPermissionOnSource: "InsufficientPermissionOnSource",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvalidDestination
    */
   InvalidDestination: "InvalidDestination",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InvalidSource
    */
   InvalidSource: "InvalidSource",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MarketplaceNotEnabledOnDestination
    */
   MarketplaceNotEnabledOnDestination: "MarketplaceNotEnabledOnDestination",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ProductInactive
    */
   ProductInactive: "ProductInactive",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ProductNotFound
    */
   ProductNotFound: "ProductNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ProductTypeNotSupported
    */
   ProductTypeNotSupported: "ProductTypeNotSupported",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SourceBillingProfilePastDue
    */
   SourceBillingProfilePastDue: "SourceBillingProfilePastDue",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SourceInvoiceSectionInactive
    */
@@ -2656,11 +3081,13 @@ union MoveValidationErrorCode {
 union InstanceFlexibility {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * On
    */
   On: "On",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Off
    */
@@ -2673,101 +3100,121 @@ union InstanceFlexibility {
 union ReservationStatusCode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Processing
    */
   Processing: "Processing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Active
    */
   Active: "Active",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PurchaseError
    */
   PurchaseError: "PurchaseError",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * PaymentInstrumentError
    */
   PaymentInstrumentError: "PaymentInstrumentError",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Split
    */
   Split: "Split",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Merged
    */
   Merged: "Merged",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
   Expired: "Expired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Succeeded
    */
   Succeeded: "Succeeded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CapacityError
    */
   CapacityError: "CapacityError",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CapacityRestricted
    */
   CapacityRestricted: "CapacityRestricted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Exchanged
    */
   Exchanged: "Exchanged",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UnknownError
    */
   UnknownError: "UnknownError",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RiskCheckFailed
    */
   RiskCheckFailed: "RiskCheckFailed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CreditLineCheckFailed
    */
   CreditLineCheckFailed: "CreditLineCheckFailed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Warning
    */
   Warning: "Warning",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NoBenefitDueToSubscriptionTransfer
    */
   NoBenefitDueToSubscriptionTransfer: "NoBenefitDueToSubscriptionTransfer",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NoBenefitDueToSubscriptionDeletion
    */
   NoBenefitDueToSubscriptionDeletion: "NoBenefitDueToSubscriptionDeletion",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NoBenefit
    */
@@ -2780,11 +3227,13 @@ union ReservationStatusCode {
 union ReservationBillingPlan {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Upfront
    */
   Upfront: "Upfront",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Monthly
    */
@@ -2817,26 +3266,31 @@ union TransactionType {
 union CreditType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureFreeCredit
    */
   AzureFreeCredit: "AzureFreeCredit",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureCreditOffer
    */
   AzureCreditOffer: "AzureCreditOffer",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ServiceInterruption
    */
   ServiceInterruption: "ServiceInterruption",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Refund
    */
@@ -2849,16 +3303,19 @@ union CreditType {
 union TransactionKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Other
    */
   Other: "Other",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * All
    */
   All: "All",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Reservation
    */
@@ -2871,41 +3328,49 @@ union TransactionKind {
 union TransferStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Expired
    */
   Expired: "Expired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InProgress
    */
   InProgress: "InProgress",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Completed
    */
   Completed: "Completed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * CompletedWithErrors
    */
   CompletedWithErrors: "CompletedWithErrors",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Failed
    */
   Failed: "Failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Canceled
    */
   Canceled: "Canceled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Declined
    */
@@ -2918,26 +3383,31 @@ union TransferStatus {
 union ProductType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureSubscription
    */
   AzureSubscription: "AzureSubscription",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureReservation
    */
   AzureReservation: "AzureReservation",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Department
    */
   Department: "Department",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SavingsPlan
    */
   SavingsPlan: "SavingsPlan",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SAAS
    */
@@ -2950,21 +3420,25 @@ union ProductType {
 union ProductTransferStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotStarted
    */
   NotStarted: "NotStarted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InProgress
    */
   InProgress: "InProgress",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Completed
    */
   Completed: "Completed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Failed
    */
@@ -2977,11 +3451,13 @@ union ProductTransferStatus {
 union InitiatorCustomerType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Partner
    */
   Partner: "Partner",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * EA
    */
@@ -2994,16 +3470,19 @@ union InitiatorCustomerType {
 union EligibleProductType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DevTestAzureSubscription
    */
   DevTestAzureSubscription: "DevTestAzureSubscription",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * StandardAzureSubscription
    */
   StandardAzureSubscription: "StandardAzureSubscription",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AzureReservation
    */
@@ -3016,21 +3495,25 @@ union EligibleProductType {
 union SupportedAccountType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Partner
    */
   Partner: "Partner",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Individual
    */
   Individual: "Individual",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Enterprise
    */

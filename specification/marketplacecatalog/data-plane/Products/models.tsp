@@ -53,6 +53,7 @@ model SkuSummary {
   @doc("Sku type")
   skuType?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Language")
   language?: string;
 
@@ -710,6 +711,7 @@ model IncludedQuantityProperty {
   @doc("Term id")
   termId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Quantity")
   quantity?: string;
 }
@@ -737,9 +739,11 @@ model Meter {
 
 @doc("The parameters of the term description")
 model TermDescriptionParameter {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Parameter")
   parameter?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Value")
   value?: string;
 }
@@ -755,9 +759,11 @@ model BillingPlan {
   @doc("Billing period")
   billingPeriod?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Title")
   title?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Description")
   description?: string;
 
@@ -854,6 +860,7 @@ model Price {
 
 @doc("Product Video")
 model ProductVideo {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Caption")
   caption?: string;
 

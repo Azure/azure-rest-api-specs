@@ -131,39 +131,50 @@ union SpanStatus {
   /** Not started. */
   NotStarted: "NotStarted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Unapproved. */
   Unapproved: "Unapproved",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Pausing. */
   Pausing: "Pausing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Paused. */
   Paused: "Paused",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Starting. */
   Starting: "Starting",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Preparing. */
   Preparing: "Preparing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Queued. */
   Queued: "Queued",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Running. */
   Running: "Running",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Finalizing. */
   Finalizing: "Finalizing",
 
   /** Cancel requested. */
   CancelRequested: "CancelRequested",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Completed. */
   Completed: "Completed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Failed. */
   Failed: "Failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Canceled. */
   Canceled: "Canceled",
 }

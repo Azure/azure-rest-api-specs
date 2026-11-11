@@ -207,6 +207,7 @@ model LROResponseProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GroupQuotasEntityPatch
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Properties
    */

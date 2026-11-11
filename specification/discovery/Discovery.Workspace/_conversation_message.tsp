@@ -113,6 +113,7 @@ model Citation {
   @visibility(Lifecycle.Read)
   title: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Description */
   @visibility(Lifecycle.Read)
   description: string;
@@ -136,9 +137,11 @@ union MessageStatus {
   @removed(Versions.`2026-02-01-preview`)
   AwaitingUserInput: "AwaitingUserInput",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Running */
   Running: "Running",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Succeeded */
   @lroSucceeded
   Succeeded: "Succeeded",
@@ -147,10 +150,12 @@ union MessageStatus {
   @lroCanceled
   Cancelled: "Cancelled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Failed */
   @lroFailed
   Failed: "Failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Expired */
   Expired: "Expired",
 

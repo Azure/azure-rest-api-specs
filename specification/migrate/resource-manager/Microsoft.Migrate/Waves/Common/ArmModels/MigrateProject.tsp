@@ -111,9 +111,11 @@ union Items {
   @doc("CorentTech Item")
   CorentTech: "CorentTech",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("ServerAssessmentV1")
   ServerAssessmentV1: "ServerAssessmentV1",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("ServerMigration_Replication")
   ServerMigration_Replication: "ServerMigration_Replication",
 

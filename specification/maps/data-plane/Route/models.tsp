@@ -746,6 +746,7 @@ union ManeuverTypeEnum {
    */
   ExitRoundaboutLeft: "ExitRoundaboutLeft",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Follow.
    */
@@ -987,11 +988,13 @@ union ManeuverTypeEnum {
    */
   UTurn: "UTurn",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Wait
    */
   Wait: "Wait",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Walk
    */
@@ -1022,16 +1025,19 @@ union DrivingSideEnum {
 union SideOfStreetEnum {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Left.
    */
   Left: "Left",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Right.
    */
   Right: "Right",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Unknown.
    */
@@ -1073,26 +1079,31 @@ union RoutePathTravelModeEnum {
 union TrafficCongestionEnum {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Unknown.
    */
   Unknown: "Unknown",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None.
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Mild.
    */
   Mild: "Mild",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Medium.
    */
   Medium: "Medium",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Heavy.
    */

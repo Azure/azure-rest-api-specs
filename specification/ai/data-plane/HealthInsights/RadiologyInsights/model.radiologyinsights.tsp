@@ -46,6 +46,7 @@ model RadiologyInsightsInferenceOptions {
   @doc("Guidance options.")
   guidanceOptions?: GuidanceOptions;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @added(ApiVersion.v2024_10_01)
   @doc("QualityMeasureOptions.")
   qualityMeasureOptions?: QualityMeasureOptions;

@@ -601,46 +601,55 @@ namespace Microsoft.EventHub {
    */
   #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
   enum EventHubEntityStatus {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /**
      * Unknown
      */
     Unknown,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /**
      * Active
      */
     Active,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /**
      * Disabled
      */
     Disabled,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /**
      * Restoring
      */
     Restoring,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /**
      * SendDisabled
      */
     SendDisabled,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /**
      * ReceiveDisabled
      */
     ReceiveDisabled,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /**
      * Creating
      */
     Creating,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /**
      * Deleting
      */
     Deleting,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
     /**
      * Renaming
      */

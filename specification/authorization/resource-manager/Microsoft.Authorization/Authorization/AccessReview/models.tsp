@@ -15,26 +15,31 @@ namespace Microsoft.AttributeNamespaces;
 union AccessReviewResult {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Approve
    */
   Approve: "Approve",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deny
    */
   Deny: "Deny",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotReviewed
    */
   NotReviewed: "NotReviewed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DontKnow
    */
   DontKnow: "DontKnow",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotNotified
    */
@@ -47,21 +52,25 @@ union AccessReviewResult {
 union AccessReviewHistoryDefinitionStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Requested
    */
   Requested: "Requested",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InProgress
    */
   InProgress: "InProgress",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Done
    */
   Done: "Done",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Error
    */
@@ -74,11 +83,13 @@ union AccessReviewHistoryDefinitionStatus {
 union AccessReviewActorIdentityType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * user
    */
   user: "user",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * servicePrincipal
    */
@@ -91,26 +102,31 @@ union AccessReviewActorIdentityType {
 union AccessReviewScopePrincipalType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * user
    */
   user: "user",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * guestUser
    */
   guestUser: "guestUser",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * servicePrincipal
    */
   servicePrincipal: "servicePrincipal",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * user,group
    */
   `user,group`: "user,group",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * redeemedGuestUser
    */
@@ -123,11 +139,13 @@ union AccessReviewScopePrincipalType {
 union AccessReviewScopeAssignmentState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * eligible
    */
   eligible: "eligible",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * active
    */
@@ -140,11 +158,13 @@ union AccessReviewScopeAssignmentState {
 union AccessReviewRecurrencePatternType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * weekly
    */
   weekly: "weekly",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * absoluteMonthly
    */
@@ -157,16 +177,19 @@ union AccessReviewRecurrencePatternType {
 union AccessReviewRecurrenceRangeType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * endDate
    */
   endDate: "endDate",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * noEnd
    */
   noEnd: "noEnd",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * numbered
    */
@@ -179,56 +202,67 @@ union AccessReviewRecurrenceRangeType {
 union AccessReviewScheduleDefinitionStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotStarted
    */
   NotStarted: "NotStarted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InProgress
    */
   InProgress: "InProgress",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Completed
    */
   Completed: "Completed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Applied
    */
   Applied: "Applied",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Initializing
    */
   Initializing: "Initializing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Applying
    */
   Applying: "Applying",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Completing
    */
   Completing: "Completing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Scheduled
    */
   Scheduled: "Scheduled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AutoReviewing
    */
   AutoReviewing: "AutoReviewing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AutoReviewed
    */
   AutoReviewed: "AutoReviewed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Starting
    */
@@ -241,16 +275,19 @@ union AccessReviewScheduleDefinitionStatus {
 union DefaultDecisionType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Approve
    */
   Approve: "Approve",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deny
    */
   Deny: "Deny",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Recommendation
    */
@@ -263,11 +300,13 @@ union DefaultDecisionType {
 union AccessReviewReviewerType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * user
    */
   user: "user",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * servicePrincipal
    */
@@ -280,16 +319,19 @@ union AccessReviewReviewerType {
 union AccessReviewScheduleDefinitionReviewersType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Assigned
    */
   Assigned: "Assigned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Self
    */
   Self: "Self",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Managers
    */
@@ -302,56 +344,67 @@ union AccessReviewScheduleDefinitionReviewersType {
 union AccessReviewInstanceStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotStarted
    */
   NotStarted: "NotStarted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * InProgress
    */
   InProgress: "InProgress",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Completed
    */
   Completed: "Completed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Applied
    */
   Applied: "Applied",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Initializing
    */
   Initializing: "Initializing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Applying
    */
   Applying: "Applying",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Completing
    */
   Completing: "Completing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Scheduled
    */
   Scheduled: "Scheduled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AutoReviewing
    */
   AutoReviewing: "AutoReviewing",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AutoReviewed
    */
   AutoReviewed: "AutoReviewed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Starting
    */
@@ -364,16 +417,19 @@ union AccessReviewInstanceStatus {
 union AccessReviewInstanceReviewersType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Assigned
    */
   Assigned: "Assigned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Self
    */
   Self: "Self",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Managers
    */
@@ -386,11 +442,13 @@ union AccessReviewInstanceReviewersType {
 union DecisionTargetType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * user
    */
   user: "user",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * servicePrincipal
    */
@@ -403,6 +461,7 @@ union DecisionTargetType {
 union DecisionResourceType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * azureRole
    */
@@ -415,16 +474,19 @@ union DecisionResourceType {
 union AccessRecommendationType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Approve
    */
   Approve: "Approve",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deny
    */
   Deny: "Deny",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NoInfoAvailable
    */
@@ -437,31 +499,37 @@ union AccessRecommendationType {
 union AccessReviewApplyResult {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * New
    */
   New: "New",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Applying
    */
   Applying: "Applying",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AppliedSuccessfully
    */
   AppliedSuccessfully: "AppliedSuccessfully",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AppliedWithUnknownFailure
    */
   AppliedWithUnknownFailure: "AppliedWithUnknownFailure",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AppliedSuccessfullyButObjectNotFound
    */
   AppliedSuccessfullyButObjectNotFound: "AppliedSuccessfullyButObjectNotFound",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ApplyNotSupported
    */
@@ -474,6 +542,7 @@ union AccessReviewApplyResult {
 union AccessReviewDecisionInsightType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * userSignInInsight
    */
@@ -501,11 +570,13 @@ union AccessReviewDecisionPrincipalResourceMembershipType {
 union RecordAllDecisionsResult {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Approve
    */
   Approve: "Approve",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deny
    */

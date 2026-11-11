@@ -340,6 +340,7 @@ model TilerInfoGeoJsonFeature {
    */
   geometry: Geometry;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Properties
    */
@@ -377,6 +378,7 @@ model TilerAssetGeoJson {
   @encodedName("application/json", "bbox")
   boundingBox: float32[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Assets
    */
@@ -389,6 +391,7 @@ model TilerAssetGeoJson {
  * Based on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0
  */
 model TileJsonMetadata {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TileJson
    */
@@ -406,6 +409,7 @@ model TileJsonMetadata {
    */
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Version
    */
@@ -460,6 +464,7 @@ model TileJsonMetadata {
   @encodedName("application/json", "maxzoom")
   maxZoom?: int32 = 30;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Bounds
    */

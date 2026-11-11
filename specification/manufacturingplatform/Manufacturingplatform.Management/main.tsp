@@ -27,6 +27,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A ManufacturingPlatformProviderHub resource")
 model MdsResource is TrackedResource<MdsResourceProperties> {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @pattern("^[a-zA-Z0-9-]{3,23}$")
   @key("mdsResourceName")
   @segment("manufacturingDataServices")

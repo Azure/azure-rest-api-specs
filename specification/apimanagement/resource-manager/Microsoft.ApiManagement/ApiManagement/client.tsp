@@ -43,6 +43,7 @@ model CSharpApiManagementServicePatch
 union AssociationEntityProvisioningState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Created.
    */

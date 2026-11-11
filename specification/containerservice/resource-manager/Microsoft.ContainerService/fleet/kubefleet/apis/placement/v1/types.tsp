@@ -87,6 +87,7 @@ model ClusterAffinity {
   requiredDuringSchedulingIgnoredDuringExecution?: ClusterSelector;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("ClusterSelector")
 model ClusterSelector {
   @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
@@ -94,6 +95,7 @@ model ClusterSelector {
   clusterSelectorTerms: ClusterSelectorTerm[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("ClusterSelectorTerm")
 model ClusterSelectorTerm {
   @doc("LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected. If you specify both label and property selectors in the same term, the results are AND'd.")

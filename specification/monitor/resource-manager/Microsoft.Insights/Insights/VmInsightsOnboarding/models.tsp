@@ -15,16 +15,19 @@ namespace VmInsightsOnboarding;
 union OnboardingStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * onboarded
    */
   onboarded: "onboarded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * notOnboarded
    */
   notOnboarded: "notOnboarded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * unknown
    */
@@ -37,11 +40,13 @@ union OnboardingStatus {
 union DataStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * present
    */
   present: "present",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * notPresent
    */

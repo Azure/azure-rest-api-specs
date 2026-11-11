@@ -149,6 +149,7 @@ model StacLandingPage {
    */
   links: StacLink[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Type
    */
@@ -371,12 +372,14 @@ model StacCollection {
    */
   title?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Type
    */
   @minLength(1)
   type?: string = "Collection";
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Assets
    */
@@ -702,6 +705,7 @@ model StacItem extends StacItemOrStacItemCollection {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
   properties: StacItemProperties;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Assets
    */

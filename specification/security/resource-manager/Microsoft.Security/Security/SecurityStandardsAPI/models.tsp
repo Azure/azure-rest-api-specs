@@ -18,16 +18,19 @@ namespace SecurityStandardsAPI;
 union StandardType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Custom
    */
   Custom: "Custom",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Default
    */
   Default: "Default",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Compliance
    */
@@ -40,16 +43,19 @@ union StandardType {
 union StandardSupportedCloud {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Azure
    */
   Azure: "Azure",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AWS
    */
   AWS: "AWS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * GCP
    */
@@ -62,16 +68,19 @@ union StandardSupportedCloud {
 union Effect {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Audit
    */
   Audit: "Audit",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Exempt
    */
   Exempt: "Exempt",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Attest
    */
@@ -84,11 +93,13 @@ union Effect {
 union ExemptionCategory {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * waiver
    */
   waiver: "waiver",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * mitigated
    */
@@ -101,16 +112,19 @@ union ExemptionCategory {
 union attestationComplianceState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * unknown
    */
   `unknown`: "unknown",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * compliant
    */
   compliant: "compliant",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * nonCompliant
    */
@@ -123,16 +137,19 @@ union attestationComplianceState {
 union RecommendationSupportedClouds {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Azure
    */
   Azure: "Azure",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AWS
    */
   AWS: "AWS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * GCP
    */
@@ -145,16 +162,19 @@ union RecommendationSupportedClouds {
 union SeverityEnum {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * High
    */
   High: "High",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Medium
    */
   Medium: "Medium",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Low
    */
@@ -167,31 +187,37 @@ union SeverityEnum {
 union SecurityIssue {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Vulnerability
    */
   Vulnerability: "Vulnerability",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ExcessivePermissions
    */
   ExcessivePermissions: "ExcessivePermissions",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AnonymousAccess
    */
   AnonymousAccess: "AnonymousAccess",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NetworkExposure
    */
   NetworkExposure: "NetworkExposure",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TrafficEncryption
    */
   TrafficEncryption: "TrafficEncryption",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * BestPractices
    */

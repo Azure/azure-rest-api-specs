@@ -20,6 +20,7 @@ model AnalyzeCustomConversationSummarizationTask
   /** discriminator kind */
   kind: AnalyzeConversationLROTaskKind.CustomConversationalSummarizationTask;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** parameters */
   parameters?: CustomConversationSummarizationTaskParameters;
 }
@@ -30,6 +31,7 @@ model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
   /** discriminator kind */
   kind: AnalyzeConversationLROTaskKind.ConversationalSummarizationTask;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** parameters */
   parameters?: ConversationSummarizationTaskParameters;
 }
@@ -101,6 +103,7 @@ model AnalyzeConversationSummarizationResult
   /** discriminator kind */
   kind: AnalyzeConversationResultsKind.ConversationalSummarizationResults;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** results */
   results: SummaryResult;
 }
@@ -149,9 +152,11 @@ model ConversationsSummaryResult {
 /** Summary Result Item */
 @added(Versions.v2023_04_01)
 model SummaryResultItem {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** aspect */
   aspect: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** text */
   text: string;
 

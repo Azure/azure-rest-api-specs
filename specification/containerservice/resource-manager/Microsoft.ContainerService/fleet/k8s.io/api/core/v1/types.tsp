@@ -11,6 +11,7 @@ union TolerationOperator {
   string,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("TaintEffect")
 union TaintEffect {
   @doc("Do not allow new pods to schedule onto the node unless they tolerate the taint, but allow all pods submitted to Kubelet without going through the scheduler to start, and allow all already-running pods to continue running. Enforced by the scheduler.")

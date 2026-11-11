@@ -202,12 +202,14 @@ model RegisterMosaic {
    */
   intersects?: Geometry;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Query
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC query requires union types."
   query?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Filter
    */
@@ -273,6 +275,7 @@ model MosaicMetadata {
    */
   assets?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Defaults
    */
@@ -324,6 +327,7 @@ model TilerStacSearchDefinition {
    */
   hash: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Search
    */
@@ -373,6 +377,7 @@ model ApplicationJsonResponse {
    */
   @statusCode statusCode: 200;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * body
    */

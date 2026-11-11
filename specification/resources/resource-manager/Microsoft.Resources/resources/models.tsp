@@ -82,21 +82,25 @@ union AliasPathAttributes {
 union ProviderAuthorizationConsentState {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotSpecified
    */
   NotSpecified: "NotSpecified",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Required
    */
   Required: "Required",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * NotRequired
    */
   NotRequired: "NotRequired",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Consented
    */
@@ -109,6 +113,7 @@ union ProviderAuthorizationConsentState {
 union ExtendedLocationType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * EdgeZone
    */
@@ -121,11 +126,13 @@ union ExtendedLocationType {
 union ExportTemplateOutputFormat {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Json
    */
   Json: "Json",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Bicep
    */
@@ -196,21 +203,25 @@ enum AliasType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResourceIdentityType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SystemAssigned
    */
   SystemAssigned,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UserAssigned
    */
   UserAssigned,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SystemAssigned, UserAssigned
    */
   `SystemAssigned, UserAssigned`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */

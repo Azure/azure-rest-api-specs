@@ -18,16 +18,19 @@ namespace Microsoft.RoleManagementAlerts;
 union SeverityLevel {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Low
    */
   Low: "Low",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Medium
    */
   Medium: "Medium",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * High
    */

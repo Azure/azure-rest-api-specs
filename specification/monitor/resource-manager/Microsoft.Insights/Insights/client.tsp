@@ -1425,24 +1425,31 @@ namespace Microsoft.InsightsCombinedClient;
 union MonitorDayOfWeek {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Sunday. */
   Sunday: "Sunday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Monday. */
   Monday: "Monday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Tuesday. */
   Tuesday: "Tuesday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Wednesday. */
   Wednesday: "Wednesday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Thursday. */
   Thursday: "Thursday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Friday. */
   Friday: "Friday",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Saturday. */
   Saturday: "Saturday",
 }

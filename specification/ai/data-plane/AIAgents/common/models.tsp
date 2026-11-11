@@ -149,6 +149,7 @@ union ResponseFormat {
  * The type of response format being defined: `json_schema`
  */
 model ResponseFormatJsonSchemaType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Type */
   type: "json_schema";
 

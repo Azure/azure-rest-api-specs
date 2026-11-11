@@ -75,9 +75,11 @@ union SortType {
 union ImportStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Success")
   Success: "SUCCESS",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Failed")
   Failed: "FAILED",
 }
@@ -86,18 +88,23 @@ union ImportStatus {
 union AtlasTermRelationshipStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("draft")
   Draft: "DRAFT",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("active")
   Active: "ACTIVE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("deprecated")
   Deprecated: "DEPRECATED",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("obsolete")
   Obsolete: "OBSOLETE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("other")
   Other: "OTHER",
 }
@@ -106,15 +113,19 @@ union AtlasTermRelationshipStatus {
 union TermStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("draft")
   Draft: "Draft",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("approved")
   Approved: "Approved",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("alert")
   Alert: "Alert",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("expired")
   Expired: "Expired",
 }
@@ -123,9 +134,11 @@ union TermStatus {
 union StatusAtlasRelationship {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("active")
   Active: "ACTIVE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("deleted")
   Deleted: "DELETED",
 }
@@ -134,12 +147,15 @@ union StatusAtlasRelationship {
 union LineageDirection {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("input")
   Input: "INPUT",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("output")
   Output: "OUTPUT",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("both")
   Both: "BOTH",
 }
@@ -148,12 +164,15 @@ union LineageDirection {
 union CardinalityValue {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("single")
   Single: "SINGLE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("list")
   List: "LIST",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("set")
   Set: "SET",
 }
@@ -162,30 +181,38 @@ union CardinalityValue {
 union TypeCategory {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("primitive")
   Primitive: "PRIMITIVE",
 
   @doc("object id type")
   ObjectIdType: "OBJECT_ID_TYPE",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("enum")
   Enum: "ENUM",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("struct")
   Struct: "STRUCT",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("classification")
   Classification: "CLASSIFICATION",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("entity")
   Entity: "ENTITY",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("array")
   Array: "ARRAY",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("map")
   Map: "MAP",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("relationship")
   Relationship: "RELATIONSHIP",
 
@@ -197,15 +224,19 @@ union TypeCategory {
 union RoundingMode {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("up")
   Up: "UP",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("down")
   Down: "DOWN",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("ceiling")
   Ceiling: "CEILING",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("floor")
   Floor: "FLOOR",
 
@@ -218,6 +249,7 @@ union RoundingMode {
   @doc("half even")
   HalfEven: "HALF_EVEN",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("unnecessary")
   Unnecessary: "UNNECESSARY",
 }
@@ -226,12 +258,15 @@ union RoundingMode {
 union RelationshipCategory {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("association")
   Association: "ASSOCIATION",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("aggregation")
   Aggregation: "AGGREGATION",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("composition")
   Composition: "COMPOSITION",
 }
@@ -258,18 +293,21 @@ union FilterOperator {
   @doc("less than or equal to")
   le: "le",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("contains")
   contains: "contains",
 
   @doc("start with")
   startswith: "startswith",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("prefix")
   prefix: "prefix",
 
   @doc("time range")
   timerange: "timerange",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("exists")
   exists: "exists",
 }
@@ -318,6 +356,7 @@ model AtlasEntity {
   @doc("Whether it is a shell entity")
   isIncomplete?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("labels")
   labels?: string[];
 
@@ -435,6 +474,7 @@ model AtlasTermAssignmentHeader {
   termGuid?: Azure.Core.uuid;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("ContactInfo")
 model ContactInfo {
   @doc("Azure Active Directory object Id.")
@@ -484,6 +524,7 @@ model AtlasEntityHeader {
   @doc("Whether it is a shell entity")
   isIncomplete?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("labels")
   labels?: string[];
 
@@ -588,21 +629,27 @@ model BusinessMetadataOptions {
   file: HttpPart<bytes>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("ImportInfo")
 model ImportInfo {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("childObjectName")
   childObjectName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("importStatus")
   importStatus?: ImportStatus;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("parentObjectName")
   parentObjectName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("remarks")
   remarks?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("MoveEntitiesOptions")
 model MoveEntitiesOptions {
   @doc("An array of entity guids to be moved to target collection.")
@@ -827,10 +874,12 @@ model AtlasGlossaryTerm {
   validValuesFor?: AtlasRelatedTermHeader[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("PurviewObjectId")
 model PurviewObjectId {
   ...AtlasObjectId;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Name")
   name?: string;
 
@@ -861,6 +910,7 @@ model AtlasObjectId {
   uniqueAttributes?: Record<unknown>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("ResourceLink")
 model ResourceLink {
   @doc("Display name for url.")
@@ -1044,9 +1094,11 @@ model SearchFacetResultValue {
   @doc("Asset type")
   assetType?: SearchFacetItemValue[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Classification")
   classification?: SearchFacetItemValue[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Term")
   term?: SearchFacetItemValue[];
 
@@ -1056,6 +1108,7 @@ model SearchFacetResultValue {
   @doc("Contact type")
   contactType?: SearchFacetItemValue[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Label")
   label?: SearchFacetItemValue[];
 
@@ -1170,15 +1223,18 @@ model SearchResultValue {
   @search.highlights.
   """)
 model SearchHighlights {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Id")
   id?: string[];
 
   @doc("Qualified name")
   qualifiedName?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Name")
   name?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Description")
   description?: string[];
 
@@ -1577,6 +1633,7 @@ model DateFormat {
   @doc("An array of available locales.")
   availableLocales?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Calendar")
   calendar?: float32;
 
@@ -1947,6 +2004,7 @@ model AtlasExtraTypeDef {
 
 @doc("The definitions of types.")
 model AtlasTypesDef {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("businessMetadataDefs")
   businessMetadataDefs?: AtlasBusinessMetadataDef[];
 

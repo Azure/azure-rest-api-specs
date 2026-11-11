@@ -339,12 +339,15 @@ model CriticalDataElementQueryRequest {
   managedAttributes?: SharedSearchManageAttributeSearchFilter[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("ModelsFacetRequestObject.")
 model ModelsFacetRequestObject {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("name")
   name?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("CriticalDataElementFacetRequest.")
 model CriticalDataElementFacetRequest {
   @doc("To filter by Ids.")
@@ -369,6 +372,7 @@ model CriticalDataElementFacetRequest {
   facets?: ModelsFacetRequestObject[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("DataElementProperties.")
 model DataElementProperties {
   @doc("The first additional property.")
@@ -539,6 +543,7 @@ union DataAssetType {
   string,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("DataAsset.")
 @resource("dataAssets")
 @discriminator("type")
@@ -652,6 +657,7 @@ model DataAssetRequest {
   @doc("A redirection link.")
   openInUrl?: url;
 }
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("DataAssetQueryRequest.")
 model DataAssetQueryRequest {
   @doc("To filter by Ids.")
@@ -673,6 +679,7 @@ model DataAssetQueryRequest {
   includingOrphans?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("FacetValue.")
 model FacetValue {
   @doc("The value of the facet.")
@@ -682,6 +689,7 @@ model FacetValue {
   count: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("FacetsResponse.")
 model FacetsResponse {
   @doc("The list of facets.")
@@ -710,6 +718,7 @@ model DataAssetsResponse {
   nextLink?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("CatalogModelDataProductTypeEnum")
 union CatalogModelDataProductTypeEnum {
   @doc("The status is Master.")
@@ -757,6 +766,7 @@ union CatalogModelDataProductTypeEnum {
   string,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("UpdateFrequencyEnum")
 union UpdateFrequencyEnum {
   @doc("The status is Hourly.")
@@ -901,6 +911,7 @@ model DataProductResponse {
   nextLink?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("DataProductQueryRequest.")
 model DataProductQueryRequest {
   @doc("Number of items to skip.")
@@ -940,6 +951,7 @@ model DataProductQueryRequest {
   managedAttributes?: SharedSearchManageAttributeSearchFilter[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("DataProductFacetRequest.")
 model DataProductFacetRequest {
   @doc("To filter by Ids.")
@@ -1009,6 +1021,7 @@ model Domain {
   managedAttributes: CatalogModelManagedAttribute[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("CatalogModelDomainTypeEnum")
 union CatalogModelDomainTypeEnum {
   @doc("The status is FunctionalUnit.")
@@ -1088,8 +1101,10 @@ union RelatedCollectionParentCollectionTypeEnum {
 //   nextLink?: string;
 // }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("ControllersModelsPolicyAddAdminRequest.")
 model ControllersModelsPolicyAddAdminRequest {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("userObjectId")
   userObjectId?: string;
 }
@@ -1192,6 +1207,7 @@ model TermQueryRequest {
   managedAttributes?: SharedSearchManageAttributeSearchFilter[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("TermFacetRequest.")
 model TermFacetRequest {
   @doc("To filter by Ids.")
@@ -1219,6 +1235,7 @@ model TermFacetRequest {
   facets?: ModelsFacetRequestObject[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("TermRelationship.")
 @resource("relationships")
 @parentResource(Term)
@@ -1250,6 +1267,7 @@ model TermRelationship {
 //   nextLink?: string;
 // }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("TermRelationshipType")
 union TermRelationshipType {
   @doc("The status is Related.")
@@ -1294,6 +1312,7 @@ model ObjectiveWithAdditionalProperties {
   additionalProperties?: ObjectiveAdditionalProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("OkrSharedEntityStatus")
 union OkrSharedEntityStatus {
   @doc("The status is Draft.")
@@ -1308,6 +1327,7 @@ union OkrSharedEntityStatus {
   string,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("OkrSystemDataWithExpired")
 model OkrSystemDataWithExpired {
   @doc("The created time of the record.")
@@ -1347,6 +1367,7 @@ model ObjectiveAdditionalProperties {
   keyResultsCount?: int64;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("OverallStatusEnum")
 union OverallStatusEnum {
   @doc("The status is NotTracked.")
@@ -1375,6 +1396,7 @@ model ObjectiveWithAdditionalPropertiesResponse {
   nextLink?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("ObjectiveQueryRequest.")
 model ObjectiveQueryRequest {
   @doc("Number of items to skip.")
@@ -1716,6 +1738,7 @@ model CreateCriticalDataElementRequest {
   criticalDataElement: CriticalDataElement;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("CatalogResponse.")
 model CatalogResponse {
   @doc("The list of catalog values.")
@@ -1725,6 +1748,7 @@ model CatalogResponse {
   skipToken?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("CatalogValue.")
 model CatalogValue {
   @doc("The name of the catalog.")
@@ -1740,6 +1764,7 @@ model CatalogValue {
   properties: CatalogProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("CatalogProperties.")
 model CatalogProperties {
   @doc("The description of the catalog.")
@@ -1758,6 +1783,7 @@ model CatalogProperties {
   parentEntityName?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("DecisionRule.")
 model DecisionRule {
   @doc("The kind of decision rule.")
@@ -1770,6 +1796,7 @@ model DecisionRule {
   dnfCondition: Condition[][];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("AttributeRule.")
 model AttributeRule {
   @doc("The kind of attribute rule.")
@@ -1785,6 +1812,7 @@ model AttributeRule {
   dnfCondition: Condition[][];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("Condition.")
 model Condition {
   @doc("The name of the attribute.")
@@ -1800,6 +1828,7 @@ model Condition {
   fromRule?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("EntityReference.")
 model EntityReference {
   @doc("The type of the entity.")
@@ -1838,6 +1867,7 @@ model DataColumn {
   assetDetails?: DataColumnAssetDetails;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
 @doc("DataColumnSource.")
 model DataColumnSource {
   @doc("The type of the entity.")

@@ -93,10 +93,12 @@ union DiscoveryEngineStatus {
 @doc("Working memory entry type.")
 @added(Versions.`2026-02-01-preview`)
 union WorkingMemoryEntryType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Thought */
   @removed(Versions.`2026-06-01`)
   thought: "thought",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Thought */
   @added(Versions.`2026-06-01`)
   Thought: "Thought",

@@ -702,6 +702,7 @@ model AnswersFromTextResult {
  * Represents answer result.
  */
 model TextAnswer {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Answer.
    */

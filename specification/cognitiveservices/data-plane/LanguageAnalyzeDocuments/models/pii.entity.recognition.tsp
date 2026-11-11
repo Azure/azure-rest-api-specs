@@ -772,15 +772,19 @@ union PiiCategories {
   /** UA Passport Number International */
   UAPassportNumberInternational: "UAPassportNumberInternational",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Organization */
   Organization: "Organization",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Email */
   Email: "Email",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** URL */
   URL: "URL",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Age */
   Age: "Age",
 
@@ -790,12 +794,15 @@ union PiiCategories {
   /** IP Address */
   IPAddress: "IPAddress",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Date */
   Date: "Date",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Person */
   Person: "Person",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Address */
   Address: "Address",
 }

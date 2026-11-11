@@ -137,21 +137,26 @@ union healthcareEntityCategory {
   /** Body structure */
   BodyStructure: "BodyStructure",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Age */
   Age: "Age",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Gender */
   Gender: "Gender",
 
   /** Examination name */
   ExaminationName: "ExaminationName",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Date */
   Date: "Date",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Direction */
   Direction: "Direction",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Frequency */
   Frequency: "Frequency",
 
@@ -164,12 +169,14 @@ union healthcareEntityCategory {
   /** Relational operator */
   RelationalOperator: "RelationalOperator",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Time */
   Time: "Time",
 
   /** Gene or protein */
   GeneOrProtein: "GeneOrProtein",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Variant */
   Variant: "Variant",
 
@@ -182,6 +189,7 @@ union healthcareEntityCategory {
   /** Healthcare profession */
   HealthcareProfession: "HealthcareProfession",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Diagnosis */
   Diagnosis: "Diagnosis",
 
@@ -197,6 +205,7 @@ union healthcareEntityCategory {
   /** Medication name */
   MedicationName: "MedicationName",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Dosage */
   Dosage: "Dosage",
 
@@ -212,14 +221,17 @@ union healthcareEntityCategory {
   /** Treatment name */
   TreatmentName: "TreatmentName",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Ethnicity */
   @added(Versions.v2023_04_01)
   Ethnicity: "Ethnicity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Course */
   @added(Versions.v2023_04_01)
   Course: "Course",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Expression */
   @added(Versions.v2023_04_01)
   Expression: "Expression",
@@ -232,10 +244,12 @@ union healthcareEntityCategory {
   @added(Versions.v2023_04_01)
   ConditionScale: "ConditionScale",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Allergen */
   @added(Versions.v2023_04_01)
   Allergen: "Allergen",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Employment */
   @added(Versions.v2023_04_01)
   Employment: "Employment",
@@ -270,6 +284,7 @@ model HealthcareRelation {
 union relationType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Abbreviation */
   Abbreviation: "Abbreviation",
 

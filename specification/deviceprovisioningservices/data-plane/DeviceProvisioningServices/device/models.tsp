@@ -17,28 +17,33 @@ namespace ProvisioningDeviceClient;
 union EnrollmentStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * unassigned
    */
   unassigned: "unassigned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * assigning
    */
   assigning: "assigning",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * assigned
    */
   @lroSucceeded
   assigned: "assigned",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * failed
    */
   @lroFailed
   failed: "failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * disabled
    */
@@ -59,21 +64,25 @@ union EnrollmentStatus {
 union AssignedDeviceSubstatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * initialAssignment
    */
   initialAssignment: "initialAssignment",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * deviceDataMigrated
    */
   deviceDataMigrated: "deviceDataMigrated",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * deviceDataReset
    */
   deviceDataReset: "deviceDataReset",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * reprovisionedToInitialAssignment
    */

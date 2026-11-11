@@ -8,6 +8,7 @@ using TypeSpec.Http;
 namespace MapsRoute;
 
 alias ContentTypeHeader<T extends string> = {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Content-Type */
   @header("Content-Type")
   contentType: T;

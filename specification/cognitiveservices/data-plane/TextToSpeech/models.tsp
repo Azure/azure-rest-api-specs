@@ -18,9 +18,11 @@ scalar resourceId extends string;
 union ProjectKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** ProfessionalVoice */
   ProfessionalVoice: "ProfessionalVoice",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** PersonalVoice */
   PersonalVoice: "PersonalVoice",
 }
@@ -43,21 +45,27 @@ union ConsentFailureReason {
 union Status {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** NotStarted */
   NotStarted: "NotStarted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Running */
   Running: "Running",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Succeeded */
   Succeeded: "Succeeded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Failed */
   Failed: "Failed",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Disabling */
   Disabling: "Disabling",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Disabled */
   Disabled: "Disabled",
 }
@@ -66,9 +74,11 @@ union Status {
 union VoiceKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Male */
   Male: "Male",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Female */
   Female: "Female",
 }
@@ -77,12 +87,15 @@ union VoiceKind {
 union DatasetKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AudioAndScript */
   AudioAndScript: "AudioAndScript",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** LongAudio */
   LongAudio: "LongAudio",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** AudioOnly */
   AudioOnly: "AudioOnly",
 }
@@ -135,9 +148,11 @@ union ModelFailureReason {
 union EndpointKind {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** HighPerformance */
   HighPerformance: "HighPerformance",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** FastResume */
   FastResume: "FastResume",
 }
@@ -146,6 +161,7 @@ union EndpointKind {
 union ModelCapability {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** PersonalVoice */
   PersonalVoice: "PersonalVoice",
 }
@@ -154,15 +170,19 @@ union ModelCapability {
 union OperationStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** NotStarted */
   NotStarted: "NotStarted",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Running */
   Running: "Running",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Succeeded */
   Succeeded: "Succeeded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** Failed */
   Failed: "Failed",
 }
@@ -730,6 +750,7 @@ model ConsentPostFormData {
    */
   locale: HttpPart<string>;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** properties. */
   properties?: HttpPart<string>;
 }
@@ -748,6 +769,7 @@ model PersonalVoicePostFormData {
   /** Audio files. Maximum file size is 30MB. */
   audioData?: HttpPart<bytes>;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** properties. */
   properties?: HttpPart<string>;
 }

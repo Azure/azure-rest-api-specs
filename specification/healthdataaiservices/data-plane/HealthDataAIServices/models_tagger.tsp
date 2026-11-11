@@ -84,18 +84,21 @@ union PhiCategory {
   @doc("Account Number.")
   Account: "Account",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Age.")
   Age: "Age",
 
   @doc("Biological Identifier, such as a fingerprint or retinal scan.")
   BioID: "BioID",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("City.")
   City: "City",
 
   @doc("Country or Region.")
   CountryOrRegion: "CountryOrRegion",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Date.")
   Date: "Date",
 
@@ -143,15 +146,18 @@ union PhiCategory {
   @doc("Phone Number.")
   Phone: "Phone",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Profession.")
   Profession: "Profession",
 
   @doc("Social Security Number.")
   SocialSecurity: "SocialSecurity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("State.")
   State: "State",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("Street.")
   Street: "Street",
 

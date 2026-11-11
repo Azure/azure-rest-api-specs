@@ -112,9 +112,11 @@ model JobState {
   /** last updated date and time */
   lastUpdatedDateTime: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** status */
   status: State;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** errors */
   errors?: Array<Error>;
 
@@ -124,6 +126,7 @@ model JobState {
 
 /** job errors */
 model JobErrors {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** errors */
   errors: Array<Error>;
 }
@@ -169,6 +172,7 @@ model PreBuiltResult {
   /** Errors by document id. */
   errors: Array<DocumentError>;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** statistics */
   statistics?: RequestStatistics;
 
@@ -948,9 +952,11 @@ model Conversation {
   /** Language of the conversation item in BCP-47 format. */
   language: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** modality */
   modality: InputModality;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** domain */
   domain?: ConversationDomain;
 }

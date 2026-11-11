@@ -40,21 +40,25 @@ union SubAssessmentStatusCode {
 union AssessedResourceType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SqlServerVulnerability
    */
   SqlServerVulnerability: "SqlServerVulnerability",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ContainerRegistryVulnerability
    */
   ContainerRegistryVulnerability: "ContainerRegistryVulnerability",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ServerVulnerability
    */
   ServerVulnerability: "ServerVulnerability",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ServerVulnerabilityAssessment
    */

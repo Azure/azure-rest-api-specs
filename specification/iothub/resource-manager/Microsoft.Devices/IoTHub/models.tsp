@@ -19,11 +19,13 @@ namespace Microsoft.Devices;
 union PublicNetworkAccess {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Enabled
    */
   Enabled: "Enabled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disabled
    */
@@ -36,11 +38,13 @@ union PublicNetworkAccess {
 union DefaultAction {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Deny
    */
   Deny: "Deny",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allow
    */
@@ -53,6 +57,7 @@ union DefaultAction {
 union NetworkRuleIPAction {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Allow
    */
@@ -65,21 +70,25 @@ union NetworkRuleIPAction {
 union PrivateLinkServiceConnectionStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Pending
    */
   Pending: "Pending",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Approved
    */
   Approved: "Approved",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Rejected
    */
   Rejected: "Rejected",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Disconnected
    */
@@ -92,11 +101,13 @@ union PrivateLinkServiceConnectionStatus {
 union AuthenticationType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * keyBased
    */
   keyBased: "keyBased",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * identityBased
    */
@@ -121,16 +132,19 @@ union EventStreamAuthenticationType {
 union RoutingStorageContainerPropertiesEncoding {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Avro
    */
   Avro: "Avro",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AvroDeflate
    */
   AvroDeflate: "AvroDeflate",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * JSON
    */
@@ -143,42 +157,50 @@ union RoutingStorageContainerPropertiesEncoding {
 union RoutingSource {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Invalid
    */
   Invalid: "Invalid",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DeviceMessages
    */
   DeviceMessages: "DeviceMessages",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * TwinChangeEvents
    */
   TwinChangeEvents: "TwinChangeEvents",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DeviceLifecycleEvents
    */
   DeviceLifecycleEvents: "DeviceLifecycleEvents",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DeviceJobLifecycleEvents
    */
   DeviceJobLifecycleEvents: "DeviceJobLifecycleEvents",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DigitalTwinChangeEvents
    */
   @removed(Versions.v2026_11_01)
   DigitalTwinChangeEvents: "DigitalTwinChangeEvents",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DeviceConnectionStateEvents
    */
   DeviceConnectionStateEvents: "DeviceConnectionStateEvents",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * MqttBrokerMessages
    */
@@ -205,11 +227,13 @@ union FallbackRouteSource {
 union Capabilities {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
   None: "None",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DeviceManagement
    */
@@ -222,11 +246,13 @@ union Capabilities {
 union IotHubReplicaRoleType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * primary
    */
   primary: "primary",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * secondary
    */
@@ -239,16 +265,19 @@ union IotHubReplicaRoleType {
 union IpVersion {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ipv4
    */
   ipv4: "ipv4",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ipv6
    */
   ipv6: "ipv6",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ipv4ipv6
    */
@@ -261,41 +290,49 @@ union IpVersion {
 union IotHubSku {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * F1
    */
   F1: "F1",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * S1
    */
   S1: "S1",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * S2
    */
   S2: "S2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * S3
    */
   S3: "S3",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * B1
    */
   B1: "B1",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * B2
    */
   B2: "B2",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * B3
    */
   B3: "B3",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * GEN2
    */
@@ -309,21 +346,25 @@ union IotHubSku {
 union CreatedByType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * User
    */
   User: "User",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Application
    */
   Application: "Application",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ManagedIdentity
    */
   ManagedIdentity: "ManagedIdentity",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Key
    */
@@ -336,51 +377,61 @@ union CreatedByType {
 union JobType {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * unknown
    */
   `unknown`: "unknown",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * export
    */
   export: "export",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * import
    */
   `import`: "import",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * backup
    */
   backup: "backup",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * readDeviceProperties
    */
   readDeviceProperties: "readDeviceProperties",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * writeDeviceProperties
    */
   writeDeviceProperties: "writeDeviceProperties",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * updateDeviceConfiguration
    */
   updateDeviceConfiguration: "updateDeviceConfiguration",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * rebootDevice
    */
   rebootDevice: "rebootDevice",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * factoryResetDevice
    */
   factoryResetDevice: "factoryResetDevice",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * firmwareUpdate
    */
@@ -393,26 +444,31 @@ union JobType {
 union EndpointHealthStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * unknown
    */
   `unknown`: "unknown",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * healthy
    */
   healthy: "healthy",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * degraded
    */
   degraded: "degraded",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * unhealthy
    */
   unhealthy: "unhealthy",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * dead
    */
@@ -425,16 +481,19 @@ union EndpointHealthStatus {
 union TestResultStatus {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * undefined
    */
   undefined: "undefined",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * false
    */
   `false`: "false",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * true
    */
@@ -447,11 +506,13 @@ union TestResultStatus {
 union RouteErrorSeverity {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * error
    */
   error: "error",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * warning
    */
@@ -463,76 +524,91 @@ union RouteErrorSeverity {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of access-right combinations (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum AccessRights {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryRead
    */
   RegistryRead,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryWrite
    */
   RegistryWrite,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ServiceConnect
    */
   ServiceConnect,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * DeviceConnect
    */
   DeviceConnect,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryRead, RegistryWrite
    */
   `RegistryRead, RegistryWrite`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryRead, ServiceConnect
    */
   `RegistryRead, ServiceConnect`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryRead, DeviceConnect
    */
   `RegistryRead, DeviceConnect`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryWrite, ServiceConnect
    */
   `RegistryWrite, ServiceConnect`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryWrite, DeviceConnect
    */
   `RegistryWrite, DeviceConnect`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * ServiceConnect, DeviceConnect
    */
   `ServiceConnect, DeviceConnect`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryRead, RegistryWrite, ServiceConnect
    */
   `RegistryRead, RegistryWrite, ServiceConnect`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryRead, RegistryWrite, DeviceConnect
    */
   `RegistryRead, RegistryWrite, DeviceConnect`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryRead, ServiceConnect, DeviceConnect
    */
   `RegistryRead, ServiceConnect, DeviceConnect`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryWrite, ServiceConnect, DeviceConnect
    */
   `RegistryWrite, ServiceConnect, DeviceConnect`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * RegistryRead, RegistryWrite, ServiceConnect, DeviceConnect
    */
@@ -544,11 +620,13 @@ enum AccessRights {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of values (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IpFilterActionType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Accept
    */
   Accept,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Reject
    */
@@ -560,21 +638,25 @@ enum IpFilterActionType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of billing tiers (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IotHubSkuTier {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Free
    */
   Free,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Standard
    */
   Standard,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Basic
    */
   Basic,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Generation2
    */
@@ -587,21 +669,25 @@ enum IotHubSkuTier {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of identity types (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum ResourceIdentityType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SystemAssigned
    */
   SystemAssigned,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * UserAssigned
    */
   UserAssigned,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * SystemAssigned, UserAssigned
    */
   `SystemAssigned, UserAssigned`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
@@ -613,16 +699,19 @@ enum ResourceIdentityType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of values (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IotHubScaleType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Automatic
    */
   Automatic,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Manual
    */
   Manual,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * None
    */
@@ -634,31 +723,37 @@ enum IotHubScaleType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of job statuses (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum JobStatus {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * unknown
    */
   `unknown`,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * enqueued
    */
   enqueued,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * running
    */
   running,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * completed
    */
   completed,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * failed
    */
   failed,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * cancelled
    */
@@ -670,11 +765,13 @@ enum JobStatus {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of values (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IotHubNameUnavailabilityReason {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * Invalid
    */
   Invalid,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /**
    * AlreadyExists
    */
@@ -1029,9 +1126,11 @@ model IotHubDetails {
 union GatewayVersion {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** V1 */
   V1: "V1",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   /** V2 */
   V2: "V2",
 }

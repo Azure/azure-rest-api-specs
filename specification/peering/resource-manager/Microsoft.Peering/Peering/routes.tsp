@@ -37,9 +37,11 @@ interface CdnPeeringPrefixesOperationGroup {
 union CheckServiceProviderAvailabilityResponse {
   string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("available")
   "Available",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserve the existing published API description for backward compatibility."
   @doc("unavailable")
   "Unavailable",
 }
