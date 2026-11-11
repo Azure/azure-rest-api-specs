@@ -96,7 +96,7 @@ function createSampleArtifact(
 }
 
 function createArtifactListResponse(
-  artifacts: Array<{ name: string; downloadUrl: string }> = [
+  artifacts: Array<{ name: string; downloadUrl: string; source?: string }> = [
     {
       name: SPEC_GEN_SDK_ARTIFACT_NAME,
       downloadUrl: "https://artifacts.example.com/spec-gen",
@@ -109,8 +109,9 @@ function createArtifactListResponse(
 ): Response {
   return new Response(
     JSON.stringify({
-      value: artifacts.map(({ name, downloadUrl }) => ({
+      value: artifacts.map(({ name, downloadUrl, source = "job-1" }) => ({
         name,
+        source,
         resource: { downloadUrl },
       })),
     }),

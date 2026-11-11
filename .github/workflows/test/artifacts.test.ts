@@ -820,7 +820,7 @@ describe("getAzurePipelineArtifact function", () => {
     });
   });
 
-  it("maps unsuffixed retry artifacts to their real successful attempt", async () => {
+  it("maps retry artifacts without a suffix to their real successful attempt", async () => {
     mockFetch.mockImplementation((url) =>
       Promise.resolve({
         ok: true,
