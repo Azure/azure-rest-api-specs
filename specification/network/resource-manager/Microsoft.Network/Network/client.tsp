@@ -68,6 +68,12 @@ using Common;
   "csharp"
 );
 
+@@clientName(
+  Microsoft.Network.FirewallPolicyPurviewIpAddressToUserMapping.csvFileUrl,
+  "csvFileUri",
+  "csharp"
+);
+
 // This empty namespace is the merged SDK client target used by later client
 // customizations such as @@clientName and @@clientLocation.
 #suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "CombineClient intentionally merges the Microsoft.Network and Microsoft.Compute (VMSS) services into a single SDK client surface via autoMergeService; the resulting multiple-service dependency is by design for this combined client target."
