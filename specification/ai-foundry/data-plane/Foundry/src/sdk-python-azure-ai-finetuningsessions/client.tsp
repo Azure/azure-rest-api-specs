@@ -58,6 +58,18 @@ namespace Azure.AI.FineTuning.Sessions;
   "python"
 );
 @@clientNamespace(OpenAI, "azure.ai.finetuningsessions", "python");
+@@clientNamespace(Azure.AI.ProjectsInternal, "Azure.AI.Projects", "javascript");
+@@clientNamespace(Azure.AI.ProjectsInternal, "Azure.AI.Projects", "csharp");
+@@clientNamespace(
+  Azure.AI.ProjectsInternal.FineTuningSampledSequence,
+  "Azure.AI.Projects.SessionFineTuning",
+  "javascript"
+);
+@@clientNamespace(
+  Azure.AI.ProjectsInternal.FineTuningSampledSequence,
+  "Azure.AI.Projects.SessionFineTuning",
+  "csharp"
+);
 
 // Document shared types only in this Python entrypoint, without changing the
 // shared REST sources or importing this projection into the REST entrypoint.
