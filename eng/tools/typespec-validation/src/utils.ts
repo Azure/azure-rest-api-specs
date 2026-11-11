@@ -6,7 +6,7 @@ import {
   type Suppression,
 } from "@azure-tools/suppressions";
 import { access, readdir, readFile } from "node:fs/promises";
-import { basename, dirname, join, relative, resolve } from "pathe";
+import { basename, dirname, join, resolve } from "pathe";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
 import { supportsColor } from "./diagnostics.ts";
@@ -68,29 +68,17 @@ export async function getSuppressions(path: string): Promise<Suppression[]> {
   return getSuppressionsImpl("TypeSpecValidation", path, context);
 }
 
-export async function readFileAtCommit(
-  folder: string,
-  commitish: string,
-  file: string,
-): Promise<string | undefined> {
-  const git = simpleGit(folder);
-  await git.revparse(["--verify", `${commitish}^{commit}`]);
-  const repositoryRoot = (await git.revparse(["--show-toplevel"])).trim();
-  const repositoryPath = relative(repositoryRoot, file);
-
-  try {
-    return await git.show([`${commitish}:${repositoryPath}`]);
-  } catch {
-    return undefined;
-  }
-}
-
 export function getStructureVersion(relativePath: string): 1 | 2 {
   return relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
 }
 
 export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
-  const git = simpleGit(folder);
+  // Neither status nor diff should refresh cached stat data in the index.
+  const git = simpleGit({
+    baseDir: folder,
+    allowEnvironment: ["GIT_OPTIONAL_LOCKS"],
+    config: ["diff.autoRefreshIndex=false"],
+  }).env("GIT_OPTIONAL_LOCKS", "0");
   const topSpecFolder = resolve(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
   logger.debug(`Checking generated files in ${topSpecFolder}`);
   const gitStatus = await git.status(["--porcelain", "--untracked-files=all", "--", topSpecFolder]);

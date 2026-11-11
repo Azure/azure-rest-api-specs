@@ -118,6 +118,7 @@ describe("label planning", () => {
       create: [canonical],
       update: [{ before: oldBug, after: bug }],
       archive: [],
+      skippedArchives: [],
       delete: [],
       migrate: [],
       unconfigured: [unknown],
@@ -131,6 +132,7 @@ describe("label planning", () => {
       create: [],
       update: [],
       archive: [],
+      skippedArchives: [],
       delete: [],
       migrate: [],
       unconfigured: [],
@@ -234,41 +236,69 @@ describe("label planning", () => {
       expect(plan.delete).toEqual([]);
     });
 
+    it("still rejects conflicting identities for a configured label", () => {
+      const duplicate = { ...archived, name: "Archived: BUG" };
+      expect(() => planLabels(archiveCatalog, [existing(bug), duplicate], now)).toThrow(
+        "Label name collision",
+      );
+    });
+
     it.each([false, true])(
-      "fails on an active/archive name collision (configured=%s)",
-      (configured) => {
-        const duplicate = { ...archived, name: "Archived: BUG" };
-        expect(() =>
-          planLabels(
-            configured ? archiveCatalog : { ...archiveCatalog, labels: [canonical] },
-            [existing(bug), duplicate],
-            now,
-          ),
-        ).toThrow("Label name collision");
+      "deletes recreated copies before expired archives without restarting retention (reversed=%s)",
+      (reversed) => {
+        const original = { ...archived, archived_at: "2026-10-14T00:00:00Z" };
+        const copy = existing({ ...bug, name: "RETIRED" }, 4);
+        const expired = { ...archived, id: 5, node_id: "label-5", name: "archived: obsolete" };
+        const inventory = [original, copy, expired];
+        const plan = planLabels(archiveCatalog, reversed ? inventory.reverse() : inventory, now);
+        expect(plan.delete).toEqual([copy, expired]);
+        expect(plan.archive).toEqual([]);
+        expect(plan.skippedArchives).toEqual([]);
+        expect(plan.unconfigured).toContainEqual(original);
       },
     );
 
-    it("fails on a target occupied by an unmanaged archive", () => {
+    it("leaves recreated copies and their archives alone in preserve mode", () => {
+      const copy = existing({ ...bug, name: "retired" }, 4);
+      const plan = planLabels(catalog, [archived, copy], now);
+      expect(plan.unconfigured).toHaveLength(2);
+      expect(plan.delete).toEqual([]);
+      expect(plan.archive).toEqual([]);
+    });
+
+    it("does not treat a manually unarchived original as proof of retirement", () => {
+      const copy = existing({ ...bug, name: "retired" }, 4);
+      expect(() =>
+        planLabels(archiveCatalog, [{ ...archived, archived_at: null }, copy], now),
+      ).toThrow("Label name collision");
+    });
+
+    it("skips a target occupied by an unmanaged archive", () => {
       const manual = { ...archived, description: "Manual archive" };
       const active = existing({ ...bug, name: "retired" }, 4);
-      expect(() => planLabels(archiveCatalog, [manual, active], now)).toThrow(
-        "Label name collision",
-      );
+      const plan = planLabels(archiveCatalog, [manual, active], now);
+      expect(plan.archive).toEqual([]);
+      expect(plan.skippedArchives.map(({ label }) => label)).toEqual([active]);
+      expect(plan.skippedArchives[0].reason).toContain("Label name collision");
     });
 
     it.each([40, 41, 50])(
       "enforces the complete 50-character name limit (original=%s)",
       (length) => {
         const before = existing({ ...bug, name: "x".repeat(length) });
+        const plan = planLabels(archiveCatalog, [before], now);
         if (length > 40) {
-          expect(() => planLabels(archiveCatalog, [before], now)).toThrow("exceeds 50 characters");
+          expect(plan.archive).toEqual([]);
+          expect(plan.skippedArchives.map(({ label }) => label)).toEqual([before]);
+          expect(plan.skippedArchives[0].reason).toContain("exceeds 50 characters");
         } else {
-          expect(planLabels(archiveCatalog, [before], now).archive).toEqual([
+          expect(plan.archive).toEqual([
             {
               before,
               name: ARCHIVE_PREFIX + before.name,
             },
           ]);
+          expect(plan.skippedArchives).toEqual([]);
         }
       },
     );
@@ -278,9 +308,12 @@ describe("label planning", () => {
       expect(planLabels(catalog, [before], now).archive).toEqual([]);
     });
 
-    it("rejects an unmanaged active label using the reserved prefix", () => {
+    it("skips an unmanaged active label using the reserved prefix", () => {
       const before = { ...archived, archived_at: null, description: "" };
-      expect(() => planLabels(archiveCatalog, [before], now)).toThrow("prefix is reserved");
+      const plan = planLabels(archiveCatalog, [before], now);
+      expect(plan.archive).toEqual([]);
+      expect(plan.skippedArchives.map(({ label }) => label)).toEqual([before]);
+      expect(plan.skippedArchives[0].reason).toContain("prefix is reserved");
     });
 
     it("prefixes an earlier managed archive without making it eligible for deletion early", () => {

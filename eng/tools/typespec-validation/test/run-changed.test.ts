@@ -60,7 +60,7 @@ it("uses the repository root and passes the default revisions to each project", 
     logger: expect.any(ConsoleLogger) as unknown,
   });
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
-    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
     project,
     '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
   ]);
@@ -96,7 +96,7 @@ it("forwards verbose logging without adding presentation options to suppression 
   );
   expect(vi.mocked(findChangedProjects).mock.calls[0][1].logger.isDebug()).toBe(true);
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
-    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
     project,
     '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
     "--verbose",
@@ -179,13 +179,21 @@ it.each(["false", "true"])(
       projects: [project, other],
       checkingAllSpecs: false,
     });
+    const git = simpleGit(root);
+    await git
+      .addConfig("user.name", "Test")
+      .addConfig("user.email", "test@example.com")
+      .addConfig("commit.gpgsign", "false")
+      .add(".")
+      .commit("Fixture");
     vi.mocked(spawn).mockImplementationOnce(() => {
       const child = new ChildProcess();
       queueMicrotask(() => child.emit("close", 1, null));
       return child;
     });
-    await expect(runChanged(root)).resolves.toBe(false);
+    await expect(runChanged(root, { gitClean: true })).resolves.toBe(false);
     expect(spawn).toHaveBeenCalledTimes(2);
+    expect((await git.status()).isClean()).toBe(true);
     expect(console.error).toHaveBeenLastCalledWith(d`
       TypeSpec Validation failed for some folder to fix run and address any errors:
        > pnpm install

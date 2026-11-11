@@ -4313,6 +4313,13 @@ model BackupShortTermRetentionPolicyProperties {
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ServerBlobAuditingPolicyProperties {
   /**
+   * **Note:** This field will soon be deprecated. Going forward, use the dedicated Server DevOps Audit Settings APIs to configure DevOps audit. See:
+   *
+   * - [Server DevOps Audit Settings - Create Or Update](https://learn.microsoft.com/en-us/rest/api/sql/server-devops-audit-settings/create-or-update)
+   * - [Server DevOps Audit Settings - Get](https://learn.microsoft.com/en-us/rest/api/sql/server-devops-audit-settings/get)
+   *
+   * ---
+   *
    * Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.
    * In order to send the events to Azure Monitor, specify 'State' as 'Enabled', 'IsAzureMonitorTargetEnabled' as true and 'IsDevopsAuditEnabled' as true
    *
@@ -4774,6 +4781,13 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ExtendedServerBlobAuditingPolicyProperties {
   /**
+   * **Note:** This field will soon be deprecated. Going forward, use the dedicated Server DevOps Audit Settings APIs to configure DevOps audit. See:
+   *
+   * - [Server DevOps Audit Settings - Create Or Update](https://learn.microsoft.com/en-us/rest/api/sql/server-devops-audit-settings/create-or-update)
+   * - [Server DevOps Audit Settings - Get](https://learn.microsoft.com/en-us/rest/api/sql/server-devops-audit-settings/get)
+   *
+   * ---
+   *
    * Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.
    * In order to send the events to Azure Monitor, specify 'State' as 'Enabled', 'IsAzureMonitorTargetEnabled' as true and 'IsDevopsAuditEnabled' as true
    *
@@ -12473,7 +12487,7 @@ model ManagedInstanceLongTermRetentionPolicyProperties {
   timeBasedImmutability?: TimeBasedImmutability;
 
   /**
-   * The setting for time-based immutability mode for future backup (Value can be either Locked or UnLocked. Only effective if TimeBasedImmutability is enabled). Caution: Immutability of LTR backup cannot be removed if TimeBasedImmutabilityMode is Locked.
+   * The setting for time-based immutability mode for future backup (Value can be either Locked or Unlocked. Only effective if TimeBasedImmutability is enabled). Caution: Immutability of LTR backup cannot be removed if TimeBasedImmutabilityMode is Locked.
    */
   @added(Versions.v2026_08_01_preview)
   timeBasedImmutabilityMode?: TimeBasedImmutabilityMode;
