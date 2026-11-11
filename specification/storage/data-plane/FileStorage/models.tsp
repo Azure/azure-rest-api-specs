@@ -1370,26 +1370,6 @@ alias ApiVersionHeader = {
   version: string;
 };
 
-/** Optional priority for a request to the File service. */
-alias RequestPriorityParameter = {
-  /**
-   * Specifies the requested priority from 0 through 7. Integers outside this range
-   * do not cause the request to fail; the service uses priority 3 instead.
-   */
-  @header("x-ms-request-priority")
-  requestPriority?: int32;
-};
-
-/** The priority applied by the File service to a request. */
-alias RequestPriorityResponseHeader = {
-  /** Reports the effective request priority from 0 through 7. */
-  @access(Access.internal)
-  @header("x-ms-request-priority")
-  @minValue(0)
-  @maxValue(7)
-  effectiveRequestPriority: int32;
-};
-
 /** The timeout parameter. */
 alias TimeoutParameter = {
   @doc("The timeout parameter is expressed in seconds.")
