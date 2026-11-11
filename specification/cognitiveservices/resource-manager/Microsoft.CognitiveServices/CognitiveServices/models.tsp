@@ -2338,8 +2338,6 @@ model AccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service accepts explicit null on account PUT and PATCH to preserve existing trust sources; an empty array clears the configuration."
   @added(Versions.v2026_09_15_preview)
-  @removed(Versions.v2026_11_01)
-  @added(Versions.v2026_11_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @maxItems(1)
   // @identifiers does not support nullable arrays.
@@ -2362,8 +2360,6 @@ model AccountProperties {
  * An Azure resource containing the CA certificate bundles trusted by supported features in the account.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 model TrustedCertificateSource {
   /**
    * Type of resource containing the certificate bundles. Currently only AzureKeyVault is supported.
@@ -2392,8 +2388,6 @@ model TrustedCertificateSource {
  * Type of Azure resource containing trusted CA certificate bundles.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 union TrustedCertificateSourceType {
   string,
 
@@ -2405,8 +2399,6 @@ union TrustedCertificateSourceType {
  * A reference to a specific version of a Key Vault secret containing a PEM-encoded CA certificate or certificate bundle.
  */
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 model CertificateBundleReference {
   /**
    * Name of the Key Vault secret containing the CA certificate or certificate bundle.
