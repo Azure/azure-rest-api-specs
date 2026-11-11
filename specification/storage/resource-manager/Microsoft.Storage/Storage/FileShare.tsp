@@ -8,7 +8,6 @@ import "./FileServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
@@ -35,9 +34,22 @@ model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
 }
 
 /**
+ * The file-share properties retained for update compatibility, excluding the create-only Scale Namespace setting.
+ */
+model FileShareUpdateProperties is OmitProperties<
+  FileShareProperties,
+  "scaleMode"
+>;
+
+/**
  * The parameters for updating a file share.
  */
-model FileSharePatch is ResourceUpdateModel<FileShare, FileShareProperties>;
+model FileSharePatch {
+  /**
+   * The resource-specific properties for this resource.
+   */
+  properties?: FileShareUpdateProperties;
+}
 
 @armResourceOperations
 interface FileShares {

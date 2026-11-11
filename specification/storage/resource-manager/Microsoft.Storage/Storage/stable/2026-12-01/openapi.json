@@ -13394,8 +13394,14 @@
     },
     "FileShareUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the FileShare.",
+      "description": "The file-share properties retained for update compatibility, excluding the create-only Scale Namespace setting.",
       "properties": {
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Returns the date and time the share was last modified.",
+          "readOnly": true
+        },
         "metadata": {
           "type": "object",
           "description": "A name-value pair to associate with the share as metadata.",
@@ -13418,13 +13424,105 @@
           "format": "int32",
           "description": "The provisioned bandwidth of the share, in mebibytes per second. This property is only for file shares created under Files Provisioned v2 account type. Please refer to the GetFileServiceUsage API response for the minimum and maximum allowed value for provisioned bandwidth."
         },
+        "includedBurstIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The calculated burst IOPS of the share. This property is only for file shares created under Files Provisioned v2 account type.",
+          "readOnly": true
+        },
+        "maxBurstCreditsForIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The calculated maximum burst credits for the share. This property is only for file shares created under Files Provisioned v2 account type.",
+          "readOnly": true
+        },
+        "nextAllowedQuotaDowngradeTime": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Returns the next allowed provisioned storage size downgrade time for the share. This property is only for file shares created under Files Provisioned v1 SSD and Files Provisioned v2 account type",
+          "readOnly": true
+        },
+        "nextAllowedProvisionedIopsDowngradeTime": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Returns the next allowed provisioned IOPS downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.",
+          "readOnly": true
+        },
+        "nextAllowedProvisionedBandwidthDowngradeTime": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Returns the next allowed provisioned bandwidth downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.",
+          "readOnly": true
+        },
+        "enabledProtocols": {
+          "$ref": "#/definitions/EnabledProtocols",
+          "description": "The authentication protocol that is used for the file share. Can only be specified when creating a share.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "rootSquash": {
           "$ref": "#/definitions/RootSquashType",
           "description": "The property is for NFS share only. The default is NoRootSquash."
         },
+        "version": {
+          "type": "string",
+          "description": "The version of the share.",
+          "readOnly": true
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "Indicates whether the share was deleted.",
+          "readOnly": true
+        },
+        "deletedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deleted time if the share was deleted.",
+          "readOnly": true
+        },
+        "remainingRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Remaining retention days for share that was soft deleted.",
+          "readOnly": true
+        },
         "accessTier": {
           "$ref": "#/definitions/ShareAccessTier",
           "description": "Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium."
+        },
+        "accessTierChangeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the last modification time for share access tier.",
+          "readOnly": true
+        },
+        "accessTierStatus": {
+          "type": "string",
+          "description": "Indicates if there is a pending transition for access tier.",
+          "readOnly": true
+        },
+        "shareUsageBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files.",
+          "readOnly": true
+        },
+        "leaseStatus": {
+          "$ref": "#/definitions/LeaseStatus",
+          "description": "The lease status of the share.",
+          "readOnly": true
+        },
+        "leaseState": {
+          "$ref": "#/definitions/LeaseState",
+          "description": "Lease state of the share.",
+          "readOnly": true
+        },
+        "leaseDuration": {
+          "$ref": "#/definitions/LeaseDuration",
+          "description": "Specifies whether the lease on a share is of infinite or fixed duration, only when the share is leased.",
+          "readOnly": true
         },
         "signedIdentifiers": {
           "type": "array",
@@ -13432,6 +13530,12 @@
           "items": {
             "$ref": "#/definitions/SignedIdentifier"
           }
+        },
+        "snapshotTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of share snapshot returned in the response of list shares with expand param \"snapshots\".",
+          "readOnly": true
         },
         "fileSharePaidBursting": {
           "$ref": "#/definitions/FileSharePropertiesFileSharePaidBursting",
