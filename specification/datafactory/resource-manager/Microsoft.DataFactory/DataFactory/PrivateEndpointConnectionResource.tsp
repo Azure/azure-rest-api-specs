@@ -51,6 +51,7 @@ interface PrivateEndpointConnectionResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("privateEndpointConnections")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing PrivateLinkConnectionApprovalRequestResource PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     PrivateEndpointConnectionResource,
     Request = PrivateLinkConnectionApprovalRequestResource,

@@ -44,6 +44,7 @@ interface Alerts {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Configures email notifications for this vault.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ConfigureAlertRequest PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Alert,
     Request = ConfigureAlertRequest,

@@ -214,6 +214,7 @@ interface StaticSiteARMResources {
   @summary("Creates or updates the app settings of a static site.")
   @put
   @action("config/appsettings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   createOrUpdateStaticSiteAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
     StringDictionary,
@@ -228,6 +229,7 @@ interface StaticSiteARMResources {
   @summary("Creates or updates the function app settings of a static site.")
   @put
   @action("config/functionappsettings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   createOrUpdateStaticSiteFunctionAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
     StringDictionary,

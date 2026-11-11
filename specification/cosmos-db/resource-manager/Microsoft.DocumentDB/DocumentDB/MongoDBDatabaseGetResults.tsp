@@ -56,6 +56,7 @@ interface MongoDBDatabaseGetResultsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing MongoDBDatabaseCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateMongoDBDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBDatabaseGetResults,
     Request = MongoDBDatabaseCreateUpdateParameters,

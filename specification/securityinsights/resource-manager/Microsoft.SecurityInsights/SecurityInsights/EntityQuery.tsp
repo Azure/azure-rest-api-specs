@@ -85,6 +85,7 @@ interface EntityQueries {
   /**
    * Creates or updates the entity query.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CustomEntityQuery PUT request contract for backward compatibility."
   createOrUpdate is EntityQueriesOps.CreateOrUpdateSync<
     EntityQuery,
     Request = CustomEntityQuery,

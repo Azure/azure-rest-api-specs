@@ -44,6 +44,7 @@ interface ReplicationProtectionIntents {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create protection intent Resource.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CreateProtectionIntentInput PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     ReplicationProtectionIntent,
     Request = CreateProtectionIntentInput,

@@ -182,6 +182,7 @@ interface DbAgents {
   @operationId("DBAgent_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing DbAgentForUpdate PUT request contract for backward compatibility."
   createOrUpdate is Legacy.CreateOrReplaceAsync<
     DbAgent,
     Request = DbAgentForUpdate,

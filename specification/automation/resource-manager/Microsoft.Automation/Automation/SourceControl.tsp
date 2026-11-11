@@ -52,6 +52,7 @@ interface SourceControls {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SourceControl")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing SourceControlCreateOrUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     SourceControl,
     Request = SourceControlCreateOrUpdateParameters
@@ -102,6 +103,7 @@ interface SourceControls {
   @tag("SourceControlSyncJob")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   create is ArmResourceRead<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
@@ -122,6 +124,7 @@ interface SourceControls {
   @tag("SourceControlSyncJob")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   sourceControlSyncJobGet is ArmResourceRead<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
@@ -180,6 +183,7 @@ interface SourceControls {
   @tag("SourceControlSyncJobStreams")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   sourceControlSyncJobStreamsGet is ArmResourceRead<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,

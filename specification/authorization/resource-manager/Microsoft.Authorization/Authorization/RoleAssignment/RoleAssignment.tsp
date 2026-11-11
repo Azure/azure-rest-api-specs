@@ -158,6 +158,7 @@ interface RoleAssignments {
   /**
    * Create or update a role assignment by scope and name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing RoleAssignmentCreateParameters PUT request contract for backward compatibility."
   create is RoleAssignmentsOps.CreateOrUpdateSync<
     RoleAssignment,
     Request = RoleAssignmentCreateParameters
@@ -307,6 +308,7 @@ interface RoleAssignmentsByIdOperations {
    * Create or update a role assignment by ID.
    */
   @tag("RoleAssignments")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing RoleAssignmentCreateParameters PUT request contract for backward compatibility."
   createById is RoleAssignmentByIdOps.CreateOrUpdateSync<
     RoleAssignment,
     Request = RoleAssignmentCreateParameters

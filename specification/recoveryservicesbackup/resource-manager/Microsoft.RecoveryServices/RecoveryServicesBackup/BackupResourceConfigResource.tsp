@@ -132,6 +132,7 @@ interface BMSPrepareDataMoveOperationResult {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   get is BackupResourceConfigOperationResultOps.Read<
     BackupResourceConfigResource,
     Response =
@@ -172,6 +173,7 @@ interface BackupResourceConfigOperationStatuses {
    * Fetches Operation Result for Prepare Data Move
    */
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getOperationStatus is BackupResourceConfigOperationStatusOps.Read<
     BackupResourceConfigResource,
     Response = ArmResponse<OperationStatus>

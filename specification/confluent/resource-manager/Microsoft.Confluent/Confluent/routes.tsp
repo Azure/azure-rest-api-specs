@@ -36,6 +36,7 @@ interface MarketplaceAgreementsOperationGroup {
   @autoRoute
   @put
   @action("agreements/default")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   create is ArmProviderActionSync<
     Request = ConfluentAgreementResource,
     Response = ConfluentAgreementResource,

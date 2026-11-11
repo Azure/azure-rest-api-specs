@@ -41,6 +41,7 @@ interface HybridRunbookWorkerGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HybridRunbookWorkerGroup")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing HybridRunbookWorkerGroupCreateOrUpdateParameters PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     HybridRunbookWorkerGroup,
     Request = HybridRunbookWorkerGroupCreateOrUpdateParameters

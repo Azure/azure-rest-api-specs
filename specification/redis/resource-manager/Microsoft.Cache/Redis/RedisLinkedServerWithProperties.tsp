@@ -60,6 +60,7 @@ interface LinkedServer {
    * Adds a linked server to the Redis cache (requires Premium SKU).
    */
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing RedisLinkedServerCreateParameters PUT request contract for backward compatibility."
   create is LinkedServerOps.CreateOrUpdateAsync<
     RedisLinkedServerWithProperties,
     Request = RedisLinkedServerCreateParameters,

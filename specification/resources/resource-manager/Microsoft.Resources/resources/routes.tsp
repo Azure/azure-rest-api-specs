@@ -255,6 +255,7 @@ interface TagsOperationGroup {
   @summary("Creates a predefined value for a predefined tag name.")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}/tagValues/{tagValue}")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   createOrUpdateValue(
     ...ApiVersionParameter,
 
@@ -286,6 +287,7 @@ interface TagsOperationGroup {
   @summary("Creates a predefined tag name.")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   createOrUpdate(
     ...ApiVersionParameter,
 

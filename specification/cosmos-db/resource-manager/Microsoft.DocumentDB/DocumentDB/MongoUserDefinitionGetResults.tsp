@@ -39,6 +39,7 @@ interface MongoUserDefinitionGetResultsOperationGroup {
    * Creates or updates an Azure Cosmos DB Mongo User Definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing MongoUserDefinitionCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateMongoUserDefinition is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoUserDefinitionGetResults,
     Request = MongoUserDefinitionCreateUpdateParameters,

@@ -82,6 +82,7 @@ interface Deployments {
    */
   @summary("Deploys resources at a given scope.")
   @tag("Deployments")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing Deployment PUT request contract for backward compatibility."
   createOrUpdateAtScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.ScopeParameter,
     DeploymentExtended,
@@ -261,6 +262,7 @@ interface DeploymentsExtendedTenant {
    */
   @summary("Deploys resources at tenant scope.")
   @tag("Deployments")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ScopedDeployment PUT request contract for backward compatibility."
   createOrUpdateAtTenantScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.Tenant,
     DeploymentExtended,
@@ -459,6 +461,7 @@ interface DeploymentExtendedManagementGroup {
    */
   @summary("Deploys resources at management group scope.")
   @tag("Deployments")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ScopedDeployment PUT request contract for backward compatibility."
   createOrUpdateAtManagementGroupScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.ManagementGroup<"groupId">,
     DeploymentExtended,
@@ -651,6 +654,7 @@ interface DeploymentExtendedSubscriptionGroup {
    */
   @summary("Deploys resources at subscription scope.")
   @tag("Deployments")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing Deployment PUT request contract for backward compatibility."
   createOrUpdateAtSubscriptionScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.Subscription,
     DeploymentExtended,
@@ -843,6 +847,7 @@ interface DeploymentExtendedOperationGroup {
    */
   @summary("Deploys resources to a resource group.")
   @tag("Deployments")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing Deployment PUT request contract for backward compatibility."
   createOrUpdate is DeploymentExtendedResourceGroupOps.CreateOrUpdateAsync<
     DeploymentExtended,
     Request = Deployment,

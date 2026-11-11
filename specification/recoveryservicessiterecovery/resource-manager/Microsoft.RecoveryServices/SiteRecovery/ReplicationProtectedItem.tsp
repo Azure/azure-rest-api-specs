@@ -92,6 +92,7 @@ interface ReplicationProtectedItems {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Enables protection.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing EnableProtectionInput PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ReplicationProtectedItem,
     Request = EnableProtectionInput,

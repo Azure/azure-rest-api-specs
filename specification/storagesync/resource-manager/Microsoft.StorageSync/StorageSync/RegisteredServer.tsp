@@ -51,6 +51,7 @@ interface RegisteredServers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @Azure.Core.useFinalStateVia("location")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing RegisteredServerCreateParameters PUT request contract for backward compatibility."
   create is Legacy.CreateOrReplaceAsync<
     RegisteredServer,
     RegisteredServerCreateParameters,

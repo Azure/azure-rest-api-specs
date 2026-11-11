@@ -40,6 +40,7 @@ interface AdministratorMicrosoftEntras {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AdministratorMicrosoftEntraAdd PUT request contract for backward compatibility."
   createOrUpdate is Legacy.CreateOrReplaceAsync<
     AdministratorMicrosoftEntra,
     Request = AdministratorMicrosoftEntraAdd,

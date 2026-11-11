@@ -133,6 +133,7 @@ interface Configurations {
   /**
    * The configuration object for the specified cluster. This API is not recommended and might be removed in the future. Please consider using List configurations API instead.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   get is ArmResourceRead<
     Cluster,
     Response = ArmResponse<ClusterConfiguration>,
@@ -276,6 +277,7 @@ interface Extensions {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing Extension PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Cluster,
     Request = Extension,
@@ -295,6 +297,7 @@ interface Extensions {
   /**
    * Gets the extension properties for the specified HDInsight cluster extension.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   get is ArmResourceRead<
     Cluster,
     Response = ArmResponse<ClusterMonitoringResponse>,
@@ -335,6 +338,7 @@ interface Extensions {
   /**
    * Gets the async operation status.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getAzureAsyncOperationStatus is ArmResourceRead<
     Cluster,
     Response = ArmResponse<AsyncOperationResult>,
@@ -397,6 +401,7 @@ interface ScriptActions {
    * Gets the async operation status of execution operation.
    */
   @tag("ScriptActions")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getExecutionAsyncOperationStatus is ArmResourceRead<
     Cluster,
     Response = ArmResponse<AsyncOperationResult>,
@@ -416,6 +421,7 @@ interface ScriptActions {
    * Gets the script execution detail for the given script execution ID.
    */
   @tag("ScriptExecutionHistory")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getExecutionDetail is ArmResourceRead<
     Cluster,
     Response = ArmResponse<RuntimeScriptActionDetail>,
@@ -497,6 +503,7 @@ interface VirtualMachines {
    * Gets the async operation status.
    */
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getAsyncOperationStatus is ArmResourceRead<
     Cluster,
     Response = ArmResponse<AsyncOperationResult>,

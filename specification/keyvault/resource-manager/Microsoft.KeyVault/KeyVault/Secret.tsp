@@ -51,6 +51,7 @@ interface Secrets {
    * Create or update a secret in a key vault in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
    */
   @armResourceCreateOrUpdate(Secret)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing SecretCreateOrUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<
       Secret,

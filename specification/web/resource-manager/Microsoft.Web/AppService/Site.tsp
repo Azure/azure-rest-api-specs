@@ -241,6 +241,7 @@ interface Sites {
   @summary("Replaces the application settings of an app.")
   @put
   @action("config/appsettings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateApplicationSettings is SiteOps.ActionSync<
     Site,
     StringDictionary,
@@ -267,6 +268,7 @@ interface Sites {
   @summary("Updates the Authentication / Authorization settings associated with web app.")
   @put
   @action("config/authsettings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateAuthSettings is SiteOps.ActionSync<
     Site,
     SiteAuthSettings,
@@ -293,6 +295,7 @@ interface Sites {
   @summary("Updates the Azure storage account configurations of an app.")
   @put
   @action("config/azurestorageaccounts")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateAzureStorageAccounts is SiteOps.ActionSync<
     Site,
     AzureStoragePropertyDictionaryResource,
@@ -319,6 +322,7 @@ interface Sites {
   @summary("Updates the backup configuration of an app.")
   @put
   @action("config/backup")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateBackupConfiguration is SiteOps.ActionSync<
     Site,
     BackupRequest,
@@ -360,6 +364,7 @@ interface Sites {
   @summary("Replaces the connection strings of an app.")
   @put
   @action("config/connectionstrings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateConnectionStrings is SiteOps.ActionSync<
     Site,
     ConnectionStringDictionary,
@@ -386,6 +391,7 @@ interface Sites {
   @summary("Replaces the metadata of an app.")
   @put
   @action("config/metadata")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateMetadata is SiteOps.ActionSync<
     Site,
     StringDictionary,
@@ -426,6 +432,7 @@ interface Sites {
   @summary("Updates the Push settings associated with web app.")
   @put
   @action("config/pushsettings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateSitePushSettings is SiteOps.ActionSync<
     Site,
     PushSettings,
@@ -519,6 +526,7 @@ interface Sites {
   @summary("Invoke the OneDeploy publish web app extension.")
   @put
   @action("extensions/onedeploy")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   createOneDeployOperation is SiteOps.ActionSync<
     Site,
     void,
@@ -581,6 +589,7 @@ interface Sites {
   @summary("Add or update a host level secret.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   createOrUpdateHostSecret is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     KeyInfo,
@@ -711,6 +720,7 @@ interface Sites {
   @summary("Restores a web app.")
   @put
   @action("migrate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   migrateStorage is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Site,
     StorageMigrationOptions,
@@ -1712,6 +1722,7 @@ interface WebApps {
   @summary("Replaces the application settings of an app.")
   @put
   @action("config/appsettings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateApplicationSettingsSlot is WebAppOps.ActionSync<
     Site,
     StringDictionary,
@@ -1738,6 +1749,7 @@ interface WebApps {
   @summary("Updates the Authentication / Authorization settings associated with web app.")
   @put
   @action("config/authsettings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateAuthSettingsSlot is WebAppOps.ActionSync<
     Site,
     SiteAuthSettings,
@@ -1764,6 +1776,7 @@ interface WebApps {
   @summary("Updates the Azure storage account configurations of an app.")
   @put
   @action("config/azurestorageaccounts")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateAzureStorageAccountsSlot is WebAppOps.ActionSync<
     Site,
     AzureStoragePropertyDictionaryResource,
@@ -1790,6 +1803,7 @@ interface WebApps {
   @summary("Updates the backup configuration of an app.")
   @put
   @action("config/backup")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateBackupConfigurationSlot is WebAppOps.ActionSync<
     Site,
     BackupRequest,
@@ -1831,6 +1845,7 @@ interface WebApps {
   @summary("Replaces the connection strings of an app.")
   @put
   @action("config/connectionstrings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateConnectionStringsSlot is WebAppOps.ActionSync<
     Site,
     ConnectionStringDictionary,
@@ -1857,6 +1872,7 @@ interface WebApps {
   @summary("Replaces the metadata of an app.")
   @put
   @action("config/metadata")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateMetadataSlot is WebAppOps.ActionSync<
     Site,
     StringDictionary,
@@ -1905,6 +1921,7 @@ interface WebApps {
   @summary("Updates the Push settings associated with web app.")
   @put
   @action("config/pushsettings")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   updateSitePushSettingsSlot is WebAppOps.ActionSync<
     Site,
     PushSettings,
@@ -2035,6 +2052,7 @@ interface WebApps {
   @summary("Add or update a host level secret.")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   createOrUpdateHostSecretSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     KeyInfo,

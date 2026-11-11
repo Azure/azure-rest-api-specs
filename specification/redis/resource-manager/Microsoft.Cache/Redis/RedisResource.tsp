@@ -57,6 +57,7 @@ interface RedisResources {
   /**
    * Create or replace (overwrite/recreate, with potential downtime) an existing Redis cache.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing RedisCreateParameters PUT request contract for backward compatibility."
   create is RedisResourcesOps.CreateOrUpdateAsync<
     RedisResource,
     Request = RedisCreateParameters,

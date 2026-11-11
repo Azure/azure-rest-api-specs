@@ -87,6 +87,7 @@ interface DeletedVaults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getOperationStatus is DeletedVaultsOperationStatus.Read<
     DeletedVault,
     Response = ArmResponse<OperationResource>

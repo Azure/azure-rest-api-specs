@@ -127,6 +127,7 @@ interface MetricAlertResources {
   @action("status")
   @tag("MetricAlertsStatus")
   @segment("")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     MetricAlertResource,
     Response = ArmResponse<MetricAlertStatusCollection>,
@@ -146,6 +147,7 @@ interface MetricAlertResources {
    */
   @tag("MetricAlertsStatus")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listByName is MetricAlertResourcesOps.ListSinglePage<
     MetricAlertResource,
     Response = ArmResponse<MetricAlertStatusCollection>,

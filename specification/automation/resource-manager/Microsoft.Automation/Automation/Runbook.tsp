@@ -62,6 +62,7 @@ interface Runbooks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Runbook")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing RunbookCreateOrUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Runbook,
     Request = RunbookCreateOrUpdateParameters
@@ -260,6 +261,7 @@ interface Runbooks {
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/testjoboperations")
   @put
   @action("draft/testJob")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   create is ArmResourceActionSync<
     Runbook,
     TestJobCreateParameters,

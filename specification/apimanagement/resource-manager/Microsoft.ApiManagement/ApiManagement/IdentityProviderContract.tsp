@@ -59,6 +59,7 @@ interface IdentityProviderContracts {
   /**
    * Creates or Updates the IdentityProvider configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing IdentityProviderCreateContract PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     IdentityProviderContract,
     Request = IdentityProviderCreateContract,

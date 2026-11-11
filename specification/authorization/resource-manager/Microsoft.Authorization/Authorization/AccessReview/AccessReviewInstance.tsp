@@ -69,6 +69,7 @@ interface AccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PutAccessReviewInstance")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AccessReviewInstanceProperties PUT request contract for backward compatibility."
   create is AccessReviewInstanceOps.CreateOrUpdateSync<
     AccessReviewInstance,
     Request = AccessReviewInstanceProperties,
@@ -221,6 +222,7 @@ interface ScopeAccessReviewInstances {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PutAccessReviewInstance")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AccessReviewInstanceProperties PUT request contract for backward compatibility."
   create is ScopeAccessReviewInstanceOps.CreateOrUpdateSync<
     AccessReviewInstance,
     Request = AccessReviewInstanceProperties,

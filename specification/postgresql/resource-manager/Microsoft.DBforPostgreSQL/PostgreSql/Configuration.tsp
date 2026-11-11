@@ -40,6 +40,7 @@ interface Configurations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @useFinalStateVia("azure-async-operation")
   @put
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ConfigurationForUpdate PUT request contract for backward compatibility."
   put is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Configuration,
     ConfigurationForUpdate,

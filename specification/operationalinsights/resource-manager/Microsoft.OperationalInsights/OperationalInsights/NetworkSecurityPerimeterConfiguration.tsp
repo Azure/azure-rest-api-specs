@@ -63,6 +63,7 @@ interface NetworkSecurityPerimeterConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterConfigurations")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getNSP is NSPOps.Read<
     NetworkSecurityPerimeterConfiguration,
     Response = ArmResponse<CommonTypes.NetworkSecurityPerimeterConfiguration>
@@ -73,6 +74,7 @@ interface NetworkSecurityPerimeterConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterConfigurations")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listNSP is NSPOps.List<
     NetworkSecurityPerimeterConfiguration,
     Response = CommonTypes.NetworkSecurityPerimeterConfigurationListResult

@@ -180,6 +180,7 @@ interface IotHubDescriptions {
   @summary("Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry")
   @tag("GET")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getJob is ArmResourceRead<
     IotHubDescription,
     Response = ArmResponse<JobResponse>,

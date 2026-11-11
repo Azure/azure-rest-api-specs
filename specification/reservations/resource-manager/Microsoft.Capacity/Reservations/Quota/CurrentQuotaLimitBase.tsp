@@ -68,6 +68,7 @@ interface CurrentQuotaLimitBases {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" ""
   @tag("QuotaInformation")
   @Azure.Core.useFinalStateVia("original-uri")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CurrentQuotaLimitBase,
     QuotaPutBaseParam,
@@ -92,6 +93,7 @@ interface CurrentQuotaLimitBases {
   @tag("QuotaInformation")
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("original-uri")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   update is ArmCustomPatchAsync<
     CurrentQuotaLimitBase,
     PatchModel = CurrentQuotaLimitBase,

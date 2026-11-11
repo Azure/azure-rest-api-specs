@@ -51,6 +51,7 @@ interface GremlinGraphGetResultsOperationGroup {
    * Create or update an Azure Cosmos DB Gremlin graph
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing GremlinGraphCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateGremlinGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinGraphGetResults,
     Request = GremlinGraphCreateUpdateParameters,

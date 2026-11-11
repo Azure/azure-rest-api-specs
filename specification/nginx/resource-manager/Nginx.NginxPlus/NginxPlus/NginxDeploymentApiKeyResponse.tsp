@@ -35,6 +35,7 @@ interface NginxDeploymentApiKeyResponses {
   /**
    * Create or update an API Key for the Nginx deployment in order to access the dataplane API endpoint
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing NginxDeploymentApiKeyRequest PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     NginxDeploymentApiKeyResponse,
     Request = NginxDeploymentApiKeyRequest,

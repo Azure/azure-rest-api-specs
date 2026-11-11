@@ -68,6 +68,7 @@ interface Modules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Module")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ModuleCreateOrUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is ModuleOps.CreateOrUpdateSync<
     Module,
     Request = ModuleCreateOrUpdateParameters
@@ -109,6 +110,7 @@ interface Modules {
   @tag("Activity")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/activityoperations")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   activityGet is ModuleOps.Read<
     Module,
     Response = ArmResponse<Activity>,
@@ -220,6 +222,7 @@ interface Python2Package {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing PythonPackageCreateParameters PUT request contract for backward compatibility."
   createOrUpdate is Python2PackageOps.CreateOrUpdateSync<
     Module,
     Request = PythonPackageCreateParameters
@@ -288,6 +291,7 @@ interface Python3Package {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing PythonPackageCreateParameters PUT request contract for backward compatibility."
   createOrUpdate is Python3PackageOps.CreateOrUpdateSync<
     Module,
     Request = PythonPackageCreateParameters

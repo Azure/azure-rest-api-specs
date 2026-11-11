@@ -58,6 +58,7 @@ interface AttestationProviders {
   /**
    * Creates or updates an Attestation Provider.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AttestationServiceCreationParams PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     AttestationProvider,
     Request = AttestationServiceCreationParams,

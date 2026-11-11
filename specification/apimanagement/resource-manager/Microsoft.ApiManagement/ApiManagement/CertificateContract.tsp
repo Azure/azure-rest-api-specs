@@ -94,6 +94,7 @@ interface CertificateContracts {
     "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/",
     "How to secure back-end services using client certificate authentication in Azure API Management"
   )
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CertificateCreateOrUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is CertificateContractOps.CreateOrUpdateSync<
     CertificateContract,
     Request = CertificateCreateOrUpdateParameters,
@@ -270,6 +271,7 @@ interface WorkspaceCertificate {
     "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/",
     "How to secure back-end services using client certificate authentication in Azure API Management"
   )
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CertificateCreateOrUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is WorkspaceCertificateOps.CreateOrUpdateSync<
     CertificateContract,
     Request = CertificateCreateOrUpdateParameters,
