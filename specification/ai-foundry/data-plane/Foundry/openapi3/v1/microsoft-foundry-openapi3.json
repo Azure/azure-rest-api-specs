@@ -1682,7 +1682,7 @@
             "required": false,
             "description": "Filter to jobs in this lifecycle state.",
             "schema": {
-              "$ref": "#/components/schemas/AgentOptimizationJobStatus"
+              "$ref": "#/components/schemas/JobStatus"
             },
             "explode": false
           },
@@ -37877,7 +37877,7 @@
             "readOnly": true
           },
           "status": {
-            "$ref": "#/components/schemas/AgentOptimizationJobStatus",
+            "$ref": "#/components/schemas/JobStatus",
             "description": "Current lifecycle status.",
             "readOnly": true
           },
@@ -37988,20 +37988,6 @@
           }
         },
         "description": "Partial or terminal result produced by an agent optimization job."
-      },
-      "AgentOptimizationJobStatus": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/JobStatus"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "skipped"
-            ]
-          }
-        ],
-        "description": "Optimization job lifecycle, including a terminal skip when required input is unavailable."
       },
       "AgentOptimizationJobTokenUsage": {
         "type": "object",
@@ -48845,7 +48831,8 @@
               "in_progress",
               "succeeded",
               "failed",
-              "cancelled"
+              "cancelled",
+              "skipped"
             ]
           }
         ],
