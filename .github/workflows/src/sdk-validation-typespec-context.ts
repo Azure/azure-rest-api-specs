@@ -1,6 +1,5 @@
 import path from "node:path";
 import { isSafeRelativePosixPath } from "../../shared/src/sdk-types.ts";
-import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import type { Context, GitHub } from "./github.ts";
 
 export const TYPESPEC_REVIEW_CONTEXT_FILE_NAME = "typespec-review-context.json";
@@ -76,16 +75,6 @@ function requireSafePreviousPath(filePath: string): string {
   return filePath;
 }
 
-function getProjectRootCandidates(filePath: string): string[] {
-  const candidates: string[] = [];
-  let directory = path.posix.dirname(filePath);
-  while (directory !== "." && directory.startsWith("specification/")) {
-    candidates.push(directory);
-    directory = path.posix.dirname(directory);
-  }
-  return candidates;
-}
-
 function getFileRole(filePath: string): TypeSpecContextFileRole {
   const fileName = path.posix.basename(filePath);
   if (fileName === TYPESPEC_CONFIG_FILE_NAME) {
@@ -110,27 +99,26 @@ function getChangedTypeSpecPath(file: {
   return undefined;
 }
 
-function calculateMaximumContentRequests(
+function calculateContentRequests(
   changedFiles: Array<{
     filename: string;
     previous_filename?: string;
     status: string;
   }>,
+  projectRoots: readonly string[],
 ): number {
-  const initialPaths = new Set<string>();
-  const changedPaths: string[] = [];
+  const contentPaths = new Set<string>();
   for (const changedFile of changedFiles) {
-    const changedPath = getChangedTypeSpecPath(changedFile)!;
-    changedPaths.push(changedPath);
     if (isTypeSpecContextPath(changedFile.filename) && changedFile.status !== "removed") {
-      initialPaths.add(changedFile.filename);
-    }
-    for (const candidate of getProjectRootCandidates(changedPath)) {
-      initialPaths.add(path.posix.join(candidate, TYPESPEC_CONFIG_FILE_NAME));
+      contentPaths.add(requireSafeContextPath(changedFile.filename));
     }
   }
-  const maximumProjectRoots = Math.min(changedPaths.length, initialPaths.size);
-  return initialPaths.size + maximumProjectRoots * 2;
+  for (const projectRoot of projectRoots) {
+    for (const fileName of PROJECT_CONTEXT_FILE_NAMES) {
+      contentPaths.add(requireSafeContextPath(path.posix.join(projectRoot, fileName)));
+    }
+  }
+  return contentPaths.size;
 }
 
 async function fetchRepositoryFile(params: {
@@ -188,14 +176,22 @@ export async function collectTypeSpecReviewContext(params: {
   prNumber: number;
   headSha: string;
   baseSha: string;
+  changedFileCount: number;
+  projectRoots: readonly string[];
 }): Promise<TypeSpecReviewContext> {
-  const { github, context, prNumber, headSha, baseSha } = params;
-  const pullRequestFiles = await github.paginate(github.rest.pulls.listFiles, {
+  const { github, context, prNumber, headSha, baseSha, changedFileCount, projectRoots } = params;
+  // Compare immutable commits so patches and file contents describe the same revision.
+  const { data: comparison } = await github.rest.repos.compareCommitsWithBasehead({
     owner: context.repo.owner,
     repo: context.repo.repo,
-    pull_number: prNumber,
-    per_page: PER_PAGE_MAX,
+    basehead: `${baseSha}...${headSha}`,
   });
+  const pullRequestFiles = comparison.files ?? [];
+  if (pullRequestFiles.length !== changedFileCount) {
+    throw new Error(
+      `The exact ${baseSha}...${headSha} comparison returned ${pullRequestFiles.length} of ${changedFileCount} changed files`,
+    );
+  }
   const changedFiles = pullRequestFiles.filter(
     (file) => getChangedTypeSpecPath(file) !== undefined,
   );
@@ -204,16 +200,16 @@ export async function collectTypeSpecReviewContext(params: {
       `TypeSpec context has ${changedFiles.length} changed files; maximum is ${MAX_TYPESPEC_CONTEXT_FILES}`,
     );
   }
-  const maximumContentRequests = calculateMaximumContentRequests(changedFiles);
-  if (maximumContentRequests > MAX_TYPESPEC_CONTEXT_API_REQUESTS) {
+  const safeProjectRoots = [...new Set(projectRoots.map(requireSafeContextPath))].sort();
+  const contentRequests = calculateContentRequests(changedFiles, safeProjectRoots);
+  if (contentRequests > MAX_TYPESPEC_CONTEXT_API_REQUESTS) {
     throw new Error(
-      `TypeSpec context may require ${maximumContentRequests} GitHub content requests; maximum is ${MAX_TYPESPEC_CONTEXT_API_REQUESTS}`,
+      `TypeSpec context requires ${contentRequests} GitHub content requests; maximum is ${MAX_TYPESPEC_CONTEXT_API_REQUESTS}`,
     );
   }
 
   const files = new Map<string, MutableTypeSpecContextFile>();
   const contentCache = new Map<string, Promise<string | undefined>>();
-  const projectRootCache = new Map<string, Promise<string | undefined>>();
   const requestCount = { value: 0 };
 
   const getContent = (filePath: string): Promise<string | undefined> => {
@@ -251,26 +247,6 @@ export async function collectTypeSpecReviewContext(params: {
     }
   };
 
-  const findProjectRoot = (filePath: string): Promise<string | undefined> => {
-    const directory = path.posix.dirname(filePath);
-    const cached = projectRootCache.get(directory);
-    if (cached) {
-      return cached;
-    }
-    const pending = (async () => {
-      for (const candidate of getProjectRootCandidates(filePath)) {
-        const configPath = path.posix.join(candidate, TYPESPEC_CONFIG_FILE_NAME);
-        if ((await getContent(configPath)) !== undefined) {
-          return candidate;
-        }
-      }
-      return undefined;
-    })();
-    projectRootCache.set(directory, pending);
-    return pending;
-  };
-
-  const projectRoots = new Set<string>();
   for (const changedFile of changedFiles) {
     const changedPath = getChangedTypeSpecPath(changedFile)!;
     const filePath = requireSafeContextPath(changedPath);
@@ -295,14 +271,10 @@ export async function collectTypeSpecReviewContext(params: {
       patch,
       content,
     });
-    const projectRoot = await findProjectRoot(filePath);
-    if (projectRoot) {
-      projectRoots.add(projectRoot);
-    }
   }
 
   const projects = [];
-  for (const projectRoot of [...projectRoots].sort()) {
+  for (const projectRoot of safeProjectRoots) {
     const projectFiles: string[] = [];
     for (const fileName of PROJECT_CONTEXT_FILE_NAMES) {
       const filePath = path.posix.join(projectRoot, fileName);

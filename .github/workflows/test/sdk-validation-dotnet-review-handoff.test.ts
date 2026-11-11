@@ -35,6 +35,9 @@ const SAMPLE_SNAPSHOT_FILES = {
   "Azure.Widget/review-input/src/Generated/WidgetClient.cs": strToU8(
     "public class WidgetClient {}",
   ),
+  "Azure.Widget/review-input/tsp-location.yaml": strToU8(
+    "directory: specification/widget/Widget.Management\n",
+  ),
 };
 const SAMPLE_SNAPSHOT_BYTES = Object.values(SAMPLE_SNAPSHOT_FILES).reduce(
   (total, content) => total + content.byteLength,
@@ -342,7 +345,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         artifact,
         createTempOutputDir(),
       ),
-    ).toThrow("expected 2 files");
+    ).toThrow("expected 3 files");
   });
 
   it("extracts snapshots using the selected failed-attempt artifact prefix", () => {
@@ -513,10 +516,14 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       data: {
         number: 47607,
         state: "open",
+        changed_files: 0,
         head: { sha: SAMPLE_HEAD_SHA },
         base: { sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
       },
     });
+    mockGithub.rest.repos.getContent.mockRejectedValue(
+      Object.assign(new Error("Not Found"), { status: 404 }),
+    );
     mockFetch.mockImplementation((url) => {
       const requestUrl = getRequestUrl(url);
       if (requestUrl.includes("artifacts?api-version=7.0")) {
@@ -561,7 +568,12 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         specHeadSha: SAMPLE_HEAD_SHA,
         specBaseSha: "1".repeat(40),
       },
-      projects: [],
+      projects: [
+        {
+          root: "specification/widget/Widget.Management",
+          files: [],
+        },
+      ],
       files: [],
     });
     expect(
@@ -591,6 +603,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       data: {
         number: 47607,
         state: "open",
+        changed_files: 0,
         head: { sha: "9".repeat(40) },
         base: { sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
       },
@@ -669,6 +682,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       data: {
         number: 47607,
         state: "open",
+        changed_files: 0,
         head: { sha: SAMPLE_HEAD_SHA },
         base: { sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
       },

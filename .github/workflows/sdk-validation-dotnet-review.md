@@ -1,5 +1,5 @@
 ---
-name: "Generated .NET SDK Review and TypeSpec Translation (Report-Only)"
+name: "Generated .NET SDK Review and TypeSpec Remediation (Report-Only)"
 description: Review generated .NET SDK changes and translate findings into TypeSpec remediation guidance.
 on:
   workflow_run:
