@@ -1,5 +1,11 @@
 import path from "node:path";
-import { deriveSafety, dimensionStatus } from "./assessment-display.ts";
+import {
+  deriveLegacySafety,
+  deriveSafety,
+  dimensionCompatibility,
+  legacyDimensionStatus,
+} from "./assessment-display.ts";
+import { hasOnlyApiVersionDeclarations } from "./semantic-change-facts.ts";
 import { isMain, readJsonObject, runMain } from "./cli.ts";
 import { readComplianceCatalog } from "./compliance-assessment.ts";
 import {
@@ -460,7 +466,7 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
       errors.push(`Artifact comparison references unknown project ${comparison.projectId}.`);
     }
     if (
-      !["new-api-version", "existing-api-version", "unversioned", "legacy"].includes(
+      !["new-project", "new-api-version", "existing-api-version", "unversioned", "legacy"].includes(
         comparison.mode ?? "",
       )
     ) {
@@ -468,12 +474,14 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
     }
     for (const role of ["baseline", "target"] as const) {
       const selection = comparison[role];
-      if (!selection || !["base", "current"].includes(selection.sourceRevision)) {
+      const newProjectBaseline = comparison.mode === "new-project" && role === "baseline";
+      const allowedRevisions = newProjectBaseline ? ["absent"] : ["base", "current"];
+      if (!selection || !allowedRevisions.includes(selection.sourceRevision)) {
         errors.push(
           `Artifact comparison ${comparison.projectId} has invalid ${role} source revision.`,
         );
       }
-      if (!selection?.commit) {
+      if (!newProjectBaseline && !selection?.commit) {
         errors.push(`Artifact comparison ${comparison.projectId} is missing ${role} commit.`);
       }
       if (!selection?.reason) {
@@ -491,6 +499,17 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
     ) {
       errors.push(
         `New-version artifact comparison ${comparison.projectId} must compile both roles from the head source.`,
+      );
+    }
+    if (
+      comparison.mode === "new-project" &&
+      (comparison.baseline?.sourceRevision !== "absent" ||
+        comparison.baseline.commit !== undefined ||
+        comparison.target?.sourceRevision !== "current" ||
+        comparison.target?.commit !== assessment.comparison.headCommit)
+    ) {
+      errors.push(
+        `New-project artifact comparison ${comparison.projectId} must omit the baseline commit and compile only the target from the head source.`,
       );
     }
   }
@@ -538,6 +557,16 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
         !["normal", "api-version-publication", "api-version-wide-change"].includes(item.intentType)
       ) {
         errors.push(`Semantic item ${item.id} has invalid intentType.`);
+      }
+      if (
+        item.classificationVersion !== undefined &&
+        item.classificationVersion >= 3 &&
+        item.intentType === "api-version-publication" &&
+        (!hasOnlyApiVersionDeclarations(item) ||
+          !item.changeFacts?.length ||
+          item.changeFacts.some((fact) => fact.changeType !== "versioning"))
+      ) {
+        errors.push(`Semantic item ${item.id} publication contains non-version declaration facts.`);
       }
       if (!item.sources?.length) errors.push(`Semantic item ${item.id} has no changed source.`);
       for (const source of item.sources ?? []) {
@@ -695,26 +724,54 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
       `Downstream aggregate coverage mismatch. Missing: ${missingAggregates.join(", ") || "none"}; duplicate: ${duplicateAggregates.join(", ") || "none"}.`,
     );
   }
-  const expectedRestStatus = dimensionStatus(
-    (dimensions.rest?.blockers ?? []).length > 0,
-    dimensions.rest?.findings ?? [],
+  const validateCompatibilityDimension = (label: string, dimension: typeof dimensions.rest) => {
+    const findings = dimension?.findings ?? [];
+    const blocked = (dimension?.blockers ?? []).length > 0;
+    const usesSeparatedStatus =
+      dimension?.verdict !== undefined || dimension?.coverage !== undefined;
+    if (!usesSeparatedStatus) {
+      const expectedStatus = legacyDimensionStatus(blocked, findings);
+      if (dimension?.status !== expectedStatus) {
+        errors.push(`${label} status must be ${expectedStatus}.`);
+      }
+      return false;
+    }
+    const expected = dimensionCompatibility(
+      blocked,
+      findings,
+      findings.length + (dimension?.rejectedCandidateCount ?? 0),
+    );
+    if (dimension?.status !== expected.status) {
+      errors.push(`${label} status must be ${expected.status}.`);
+    }
+    if (dimension?.verdict !== expected.verdict) {
+      errors.push(`${label} verdict must be ${expected.verdict}.`);
+    }
+    if (dimension?.coverage !== expected.coverage) {
+      errors.push(`${label} coverage must be ${expected.coverage}.`);
+    }
+    return true;
+  };
+  const restUsesSeparatedStatus = validateCompatibilityDimension("REST", dimensions.rest);
+  const downstreamUsesSeparatedStatus = validateCompatibilityDimension(
+    "Downstream",
+    dimensions.downstream,
   );
-  if (dimensions.rest?.status !== expectedRestStatus) {
-    errors.push(`REST status must be ${expectedRestStatus}.`);
-  }
-  const expectedDownstreamStatus = dimensionStatus(
-    (dimensions.downstream?.blockers ?? []).length > 0,
-    dimensions.downstream?.findings ?? [],
-  );
-  if (dimensions.downstream?.status !== expectedDownstreamStatus) {
-    errors.push(`Downstream status must be ${expectedDownstreamStatus}.`);
-  }
-  const expectedSafety = deriveSafety(dimensions.rest, dimensions.downstream);
+  const expectedSafety =
+    restUsesSeparatedStatus || downstreamUsesSeparatedStatus
+      ? deriveSafety(dimensions.rest, dimensions.downstream)
+      : deriveLegacySafety(dimensions.rest, dimensions.downstream);
   if (
     assessment.safety?.scope !== expectedSafety.scope ||
     assessment.safety?.status !== expectedSafety.status
   ) {
     errors.push("Scoped safety is inconsistent with REST/downstream dimensions.");
+  }
+  if ("verdict" in expectedSafety && assessment.safety?.verdict !== expectedSafety.verdict) {
+    errors.push(`Scoped safety verdict must be ${String(expectedSafety.verdict)}.`);
+  }
+  if ("coverage" in expectedSafety && assessment.safety?.coverage !== expectedSafety.coverage) {
+    errors.push(`Scoped safety coverage must be ${String(expectedSafety.coverage)}.`);
   }
   return errors;
 }

@@ -246,6 +246,9 @@ union StorageErrorCode {
   /** Feature version mismatch. */
   FeatureVersionMismatch: "FeatureVersionMismatch",
 
+  /** Feature is not enabled. */
+  FeatureNotEnabled: "FeatureNotEnabled",
+
   /** Incremental copy blob mismatch. */
   IncrementalCopyBlobMismatch: "IncrementalCopyBlobMismatch",
 
@@ -467,6 +470,55 @@ model SignedIdentifier {
   @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
 
+/** The type of authentication required to create the session. The only type currently supported is HMAC. */
+@added(Versions.v2026_10_06)
+union AuthenticationType {
+  /** HMAC authentication. */
+  Hmac: "HMAC",
+
+  /** Extensible. */
+  string,
+}
+
+/** The configuration used to create a session. */
+@added(Versions.v2026_10_06)
+@Xml.name("CreateSessionRequest")
+model CreateSessionConfiguration {
+  /** The type of authentication required to create the session. The only type currently supported is HMAC. */
+  @Xml.name("AuthenticationType") authenticationType: AuthenticationType;
+}
+
+/** The response of the Create Session API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for consistency with the service API contract"
+@added(Versions.v2026_10_06)
+@Xml.name("CreateSessionResult")
+model CreateSessionResponse {
+  /** A unique identifier for the created session. */
+  @Xml.name("Id") id?: string;
+
+  /** The time when the session will expire. */
+  @encode("rfc7231")
+  @Xml.name("Expiration")
+  expiration?: utcDateTime;
+
+  /** The type of authentication required to create the session. The only type currently supported is HMAC. */
+  @Xml.name("AuthenticationType") authenticationType?: AuthenticationType;
+
+  /** The credentials used to authorize subsequent requests in the session. */
+  @Xml.name("Credentials") credentials?: SessionCredentials;
+}
+
+/** The credentials associated with a session. */
+@added(Versions.v2026_10_06)
+@Xml.name("Credentials")
+model SessionCredentials {
+  /** An opaque token used to authorize subsequent requests in the session. Must be treated as a security credential. */
+  @Xml.name("SessionToken") sessionToken?: string;
+
+  /** Only returned when AuthenticationType is HMAC. A symmetric encryption key used to sign requests in the session using the Shared Key protocol. */
+  @Xml.name("SessionKey") sessionKey?: string;
+}
+
 /** The result of the Find Blobs by Tags API. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
@@ -635,7 +687,6 @@ model ContainerItem {
 /** The properties of a container. */
 model ContainerProperties {
   /** The date-time that the container was last modified. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
@@ -669,7 +720,6 @@ model ContainerProperties {
   preventEncryptionScopeOverride?: boolean;
 
   /** The date-time the container was deleted. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeletedTime")
   deletedTime?: utcDateTime;
@@ -694,7 +744,6 @@ model GeoReplication {
   @Xml.name("Status") status: GeoReplicationStatusType;
 
   /** A date-time value that indicates where all primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastSyncTime")
   lastSyncTime: utcDateTime;
@@ -925,6 +974,24 @@ union ArchiveStatus {
   string,
 }
 
+/** The download hint for a blob. */
+@added(Versions.v2026_10_06)
+union DownloadHint {
+  /** The blob layout can be retrieved with the Get Blob Layout operation. */
+  Layout: "layout",
+
+  /** Extensible. */
+  string,
+}
+
+/** The download hint response header. */
+alias DownloadHintResponseHeader = {
+  /** Indicates the download hint for the blob. */
+  @added(Versions.v2026_10_06)
+  @header("x-ms-download-hint")
+  downloadHint?: DownloadHint;
+};
+
 /** Represents a blob. */
 @Xml.name("Blob")
 model BlobItem {
@@ -965,13 +1032,11 @@ model BlobItem {
 @Xml.name("Properties")
 model BlobProperties {
   /** The date-time the blob was created. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Creation-Time")
   creationTime?: utcDateTime;
 
   /** The date-time the blob was last modified. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
@@ -1028,7 +1093,6 @@ model BlobProperties {
   @Xml.name("CopyProgress") copyProgress?: string;
 
   /** The copy completion date-time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("CopyCompletionTime")
   copyCompletionTime?: utcDateTime;
@@ -1046,7 +1110,6 @@ model BlobProperties {
   @Xml.name("DestinationSnapshot") destinationSnapshot?: string;
 
   /** The date-time the blob was deleted. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeletedTime")
   deletedTime?: utcDateTime;
@@ -1075,7 +1138,6 @@ model BlobProperties {
   @Xml.name("EncryptionScope") encryptionScope?: string;
 
   /** The date-time that the access tier of the blob changed. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("AccessTierChangeTime")
   accessTierChangeTime?: utcDateTime;
@@ -1084,7 +1146,6 @@ model BlobProperties {
   @Xml.name("TagCount") tagCount?: int32;
 
   /** The expiry time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Expiry-Time")
   expiresOn?: utcDateTime;
@@ -1097,13 +1158,11 @@ model BlobProperties {
   @Xml.name("RehydratePriority") rehydratePriority?: RehydratePriority;
 
   /** The date-time the blob was last accessed. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastAccessTime")
   lastAccessedOn?: utcDateTime;
 
   /** The date-time the immutability policy of the blob expires. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("ImmutabilityPolicyUntilDate")
   immutabilityPolicyExpiresOn?: utcDateTime;
@@ -1363,6 +1422,167 @@ model ClearRange {
   @Xml.name("End") end: int64;
 }
 
+/** The result of the Get Blob Layout API. */
+@added(Versions.v2026_10_06)
+@Xml.name("BlobLayout")
+model BlobLayout {
+  /** The ranges that make up the blob. */
+  @Xml.name("Ranges")
+  ranges?: BlobLayoutRanges;
+
+  /** The endpoints that serve the ranges of the blob. */
+  @Xml.name("Endpoints")
+  endpoints?: BlobLayoutEndpoints;
+
+  /** The continuation marker used for this request. */
+  @Xml.name("Marker")
+  marker?: string;
+
+  /** If the number of ranges exceeds MaxResults, a NextMarker is returned for use in subsequent requests to continue listing. */
+  @continuationToken
+  @Xml.name("NextMarker")
+  nextMarker?: string;
+
+  /** The maximum number of ranges to return per request. */
+  @Xml.name("MaxResults")
+  maxResults?: int32;
+}
+
+/** The ranges that make up a blob. */
+@added(Versions.v2026_10_06)
+@Xml.name("Ranges")
+model BlobLayoutRanges {
+  /** The list of ranges. */
+  @pageItems
+  @Xml.unwrapped
+  @Xml.name("Range")
+  range?: BlobLayoutRange[];
+}
+
+/** A range of a blob, and the endpoint that serves it. */
+@added(Versions.v2026_10_06)
+@Xml.name("Range")
+model BlobLayoutRange {
+  /** The start byte offset of the range. */
+  @Xml.attribute
+  @Xml.name("Start")
+  start: int64;
+
+  /** The end byte offset of the range. */
+  @Xml.attribute
+  @Xml.name("End")
+  end: int64;
+
+  /** Index into the Endpoints array indicating which endpoint serves this range. */
+  @Xml.attribute
+  @Xml.name("EndpointIndex")
+  endpointIndex: int32;
+}
+
+/** The endpoints that serve the ranges of a blob. */
+@added(Versions.v2026_10_06)
+@Xml.name("Endpoints")
+model BlobLayoutEndpoints {
+  /** The list of endpoints. */
+  @Xml.unwrapped
+  @Xml.name("Endpoint")
+  endpoint?: BlobLayoutEndpoint[];
+}
+
+/** An endpoint that serves ranges of a blob. */
+@added(Versions.v2026_10_06)
+@Xml.name("Endpoint")
+model BlobLayoutEndpoint {
+  /** The index of the endpoint, referenced by Range elements. */
+  @Xml.attribute
+  @Xml.name("Index")
+  index: int32;
+
+  /** The host:port of the endpoint. */
+  @Xml.attribute
+  @Xml.name("Value")
+  value: string;
+}
+
+/** The response headers common to the success responses of the Get Blob Layout API. */
+alias BlobLayoutResponseHeaders = {
+  ...LastModifiedResponseHeader;
+  ...BlobContentLengthResponseHeader;
+  ...BlobContentTypeResponseHeader;
+  ...BlobContentEncodingResponseHeader;
+  ...BlobContentMd5ResponseHeader;
+  ...BlobCreationTimeResponseHeader;
+  ...CreationTimeResponseHeader;
+  ...MetadataHeaders;
+  ...ObjectReplicationPolicyIdResponseHeader;
+  ...ObjectReplicationHeaders;
+  ...BlobTypeResponseHeader;
+  ...CopyCompletionTimeResponseHeader;
+  ...CopyStatusDescriptionResponseHeader;
+  ...CopyIdResponseHeader;
+  ...CopyProgressResponseHeader;
+  ...CopySourceResponseHeader;
+  ...CopyStatusResponseHeader;
+
+  /** Included if the blob is incremental copy blob. */
+  @header("x-ms-incremental-copy")
+  isIncrementalCopy?: boolean;
+
+  /** Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. */
+  @header("x-ms-copy-destination-snapshot")
+  destinationSnapshot?: string;
+
+  ...LeaseDurationResponseHeader;
+  ...LeaseStateResponseHeader;
+  ...LeaseStatusResponseHeader;
+  ...ContentLengthResponseHeader;
+  ...EtagResponseHeader;
+  ...ContentMd5ResponseHeader;
+  ...ContentEncodingResponseParameter;
+  ...ContentDispositionResponseHeader;
+  ...ContentLanguageResponseHeader;
+  ...CacheControlResponseHeader;
+  ...BlobSequenceNumberResponseHeader;
+  ...AcceptRangesResponseHeaderPrivate;
+  ...BlobCommittedBlockCountResponseHeader;
+  ...ServerEncryptedResponseHeader;
+  ...EncryptionKeySha256ResponseHeader;
+  ...EncryptionScopeResponseHeader;
+
+  /** The access tier of the blob. */
+  @header("x-ms-access-tier")
+  accessTier?: string;
+
+  /** Included if the access tier is inferred. */
+  @header("x-ms-access-tier-inferred")
+  accessTierInferred?: boolean;
+
+  /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+  @header("x-ms-smart-access-tier")
+  smartAccessTier?: string;
+
+  /** Included if the blob rehydrate operation is pending. Indicates the destination tier. */
+  @header("x-ms-archive-status")
+  @alternateType(string, "go")
+  archiveStatus?: ArchiveStatus;
+
+  /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+  @encode("rfc7231")
+  @header("x-ms-access-tier-change-time")
+  accessTierChangeTime?: utcDateTime;
+
+  ...VersionIdResponseHeader;
+  ...IsCurrentVersionResponseHeader;
+  ...TagCountResponseHeader;
+  ...ExpiryTimeResponseHeader;
+  ...IsSealedResponseHeader;
+  ...RehydratePriorityResponseHeader;
+  ...LastAccessedResponseHeader;
+  ...ImmutabilityPolicyExpiresOnResponseHeader;
+  ...ImmutabilityPolicyModeResponseHeader;
+  ...LegalHoldOptionalResponseHeader;
+};
+
 /** A list of blob tags. */
 @Xml.name("Tags")
 model BlobTags {
@@ -1597,7 +1817,6 @@ alias RehydratePriorityResponseHeader = {
 /** The expiry time parameter. */
 alias ExpiryTimeParameter = {
   /** The date-time this blob will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-expiry-time")
   expiresOn?: utcDateTime;
@@ -1606,7 +1825,6 @@ alias ExpiryTimeParameter = {
 /** The expiry time response header. */
 alias ExpiryTimeResponseHeader = {
   /** The date-time this blob will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-expiry-time")
   expiresOn?: utcDateTime;
@@ -1615,7 +1833,6 @@ alias ExpiryTimeResponseHeader = {
 /** The immutability policy expires on response header. */
 alias ImmutabilityPolicyExpiresOnResponseHeader = {
   /** The date-time that indicates the time at which the blob immutability policy will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   immutabilityPolicyExpiresOn?: utcDateTime;
@@ -1624,7 +1841,6 @@ alias ImmutabilityPolicyExpiresOnResponseHeader = {
 /** The immutability policy expires on response header. (Internal) */
 alias ImmutabilityPolicyExpiresOnResponseHeaderPrivate = {
   /** The date-time that indicates the time at which the blob immutability policy will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @access(Access.internal)
   @header("x-ms-immutability-policy-until-date")
@@ -1634,7 +1850,6 @@ alias ImmutabilityPolicyExpiresOnResponseHeaderPrivate = {
 /** The last accessed response header. */
 alias LastAccessedResponseHeader = {
   /** The date-time value that indicates the time at which the blob was last read or written. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-last-access-time")
   lastAccessed?: utcDateTime;
@@ -1643,7 +1858,6 @@ alias LastAccessedResponseHeader = {
 /** The access tier change time response header */
 alias AccessTierChangeTimeResponseHeader = {
   /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-access-tier-change-time")
   accessTierChangeTime?: utcDateTime;
@@ -1739,7 +1953,6 @@ alias CopyStatusDescriptionResponseHeader = {
 /** The copy completion time response header. */
 alias CopyCompletionTimeResponseHeader = {
   /** If this blob was the destination of a copy, specifies the completion time of the last attempted copy operation. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-copy-completion-time")
   copyCompletionTime?: utcDateTime;
@@ -1876,7 +2089,6 @@ alias CopyIdResponseHeader = {
 /** The source if unmodified since parameter. */
 alias SourceIfUnmodifiedSinceParameter = {
   /** Specify this header value to operate only on a blob if it has not been modified since the specified date-time. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-source-if-unmodified-since")
   sourceIfUnmodifiedSince?: utcDateTime;
@@ -2090,16 +2302,22 @@ alias VersionIdResponseHeaderPrivate = {
 /** The creation time response header. */
 alias CreationTimeResponseHeader = {
   /** The date-time the blob was created. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-creation-time")
   creationTime: utcDateTime;
 };
 
+/** The blob creation time response header. */
+alias BlobCreationTimeResponseHeader = {
+  /** The date-time the blob was created. */
+  @encode("rfc7231")
+  @header("x-ms-blob-creation-time")
+  blobCreationTime?: utcDateTime;
+};
+
 /** The last modified response header. */
 alias LastModifiedResponseHeader = {
   /** The date-time that the resource was last modified. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("Last-Modified")
   lastModified: utcDateTime;
@@ -2108,7 +2326,6 @@ alias LastModifiedResponseHeader = {
 /** The last modified response header. (Internal) */
 alias LastModifiedResponseHeaderPrivate = {
   /** The date-time that the resource was last modified. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @access(Access.internal)
   @header("Last-Modified")
@@ -2118,7 +2335,6 @@ alias LastModifiedResponseHeaderPrivate = {
 /** The Date response header. */
 alias DateResponseHeader = {
   /** Date-time value generated by the service that indicates the time at which the response was initiated. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("Date")
   date: utcDateTime;
@@ -2127,7 +2343,6 @@ alias DateResponseHeader = {
 /** The Date response header. (Internal) */
 alias DateResponseHeaderPrivate = {
   /** Date-time value generated by the service that indicates the time at which the response was initiated. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @access(Access.internal)
   @header("Date")
@@ -2282,7 +2497,6 @@ alias ImmutabilityPolicyModeParameter = {
 /** The immutability policy expiration parameter. */
 alias ImmutabilityPolicyExpiryRequiredParameter = {
   /** The date-time that indicates the time at which the blob immutability policy will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   expiry: utcDateTime;
@@ -2291,7 +2505,6 @@ alias ImmutabilityPolicyExpiryRequiredParameter = {
 /** The immutability policy expiration parameter. */
 alias ImmutabilityPolicyExpiryParameter = {
   /** The date-time that indicates the time at which the blob immutability policy will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   immutabilityPolicyExpiry?: utcDateTime;
@@ -2374,6 +2587,20 @@ alias BlobContentTypeParameter = {
   /** Specifies the blob's Content-Type. If specified, this property is stored with the blob and returned with a read request. */
   @header("x-ms-blob-content-type")
   blobContentType?: string;
+};
+
+/** The blob content type response header. */
+alias BlobContentTypeResponseHeader = {
+  /** The Content-Type of the blob. */
+  @header("x-ms-blob-content-type")
+  blobContentType?: string;
+};
+
+/** The blob content encoding response header. */
+alias BlobContentEncodingResponseHeader = {
+  /** The Content-Encoding of the blob. */
+  @header("x-ms-blob-content-encoding")
+  blobContentEncoding?: string;
 };
 
 /** The premium page blob access tier types. */
@@ -2682,7 +2909,6 @@ alias ObjectReplicationHeaders = {
 /** The If-Unmodified-Since header. */
 alias IfUnmodifiedSinceParameter = {
   /** Specify this value to operate only on a blob if it has not been modified since the specified date-time. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("If-Unmodified-Since")
   ifUnmodifiedSince?: utcDateTime;
@@ -2691,7 +2917,6 @@ alias IfUnmodifiedSinceParameter = {
 /** The If-Modified-Since header. */
 alias IfModifiedSinceParameter = {
   /** Specify this value to operate only on a blob if it has been modified since the specified date-time. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("If-Modified-Since")
   ifModifiedSince?: utcDateTime;

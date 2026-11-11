@@ -1783,6 +1783,9 @@
         "x-ms-examples": {
           "Get Account": {
             "$ref": "./examples/GetAccount.json"
+          },
+          "Get an account with private CA trust": {
+            "$ref": "./examples/GetAccountWithTrustedCertificateSources.json"
           }
         }
       },
@@ -1875,6 +1878,9 @@
           },
           "Create a Foundry account with customer-owned AKS hosting": {
             "$ref": "./examples/CreateAccountWithAgentHostingConfiguration.json"
+          },
+          "Create an account with private CA trust": {
+            "$ref": "./examples/CreateAccountWithTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1951,8 +1957,17 @@
           }
         },
         "x-ms-examples": {
+          "Clear account private CA trust using an empty array": {
+            "$ref": "./examples/UpdateAccountClearTrustedCertificateSources.json"
+          },
+          "Rotate a pinned CA bundle while retaining other references": {
+            "$ref": "./examples/UpdateAccountRotateTrustedCertificateSources.json"
+          },
           "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
+          },
+          "Update account tags while preserving private CA trust with null": {
+            "$ref": "./examples/UpdateAccountPreserveTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7457,6 +7472,9 @@
           },
           "Create Project Min": {
             "$ref": "./examples/CreateProjectMin.json"
+          },
+          "Create a Foundry project with tool controls": {
+            "$ref": "./examples/CreateProjectWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7538,8 +7556,14 @@
           }
         },
         "x-ms-examples": {
+          "Clear a Foundry project's tool controls with explicit null": {
+            "$ref": "./examples/UpdateProjectClearToolControls.json"
+          },
           "Update Project": {
             "$ref": "./examples/UpdateProjects.json"
+          },
+          "Update a Foundry project with no explicitly allowed tools": {
+            "$ref": "./examples/UpdateProjectWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13337,6 +13361,23 @@
             "create"
           ]
         },
+        "trustedCertificateSources": {
+          "type": "array",
+          "description": "Private CA trust sources for supported features in an AIServices account with allowProjectManagement enabled. Supports one Azure Key Vault source containing version-pinned references to secrets with PEM-encoded CA certificates or certificate bundles. On PUT or PATCH, a non-null array replaces the complete configuration, so include all references to retain. Omit this property or send null to preserve the existing configuration; send an empty array to clear it.",
+          "maxItems": 1,
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/TrustedCertificateSource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "costControlIds": {
           "type": "array",
           "description": "The full resource IDs of cost controls directly attached to this account.\nAt the moment the service only supports a single cost control. This will be expanded in future API versions.",
@@ -15125,6 +15166,30 @@
           }
         }
       }
+    },
+    "CertificateBundleReference": {
+      "type": "object",
+      "description": "A reference to a specific version of a Key Vault secret containing a PEM-encoded CA certificate or certificate bundle.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the Key Vault secret containing the CA certificate or certificate bundle.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Required, pinned version of the Key Vault secret. Newer secret versions are not followed automatically. To rotate a bundle, update this value and resubmit the complete account trust configuration.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        }
+      },
+      "required": [
+        "secretName",
+        "secretVersion"
+      ]
     },
     "ChannelsBuiltInAuthorizationPolicy": {
       "type": "object",
@@ -20715,6 +20780,11 @@
             "read",
             "create"
           ]
+        },
+        "toolControls": {
+          "$ref": "#/definitions/ToolControls",
+          "description": "The project-level tool access policy. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured.",
+          "x-nullable": true
         }
       }
     },
@@ -23807,6 +23877,249 @@
         ]
       }
     },
+    "ToolControlEntry": {
+      "type": "object",
+      "description": "Identifies a tool by its canonical type and optional MCP server URL or connector.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ToolControlType",
+          "description": "The canonical tool type. For type mcp, exactly one of serverUrl or connectorId must be specified. Other tool types must omit both properties."
+        },
+        "serverUrl": {
+          "type": "string",
+          "description": "The absolute HTTPS URL or URL pattern of an MCP server, stored as a string to support wildcards. The entire URL may contain at most one literal '*' across its hostname, path, query, and fragment. Supported patterns include https://*.contoso.com/mcp, https://contoso.com/mcp/*, https://contoso.com/mcp?tenant=*, and https://contoso.com/mcp#*. A hostname wildcard must be the leftmost label. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId."
+        },
+        "connectorId": {
+          "type": "string",
+          "description": "The opaque MCP connector catalog identifier, not an Azure resource ID. Applies only to type mcp and cannot be specified together with serverUrl."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ToolControlType": {
+      "type": "string",
+      "description": "The canonical tool type supported by Foundry agents. Additional tool types may be specified as strings.",
+      "enum": [
+        "a2a",
+        "azure_ai_search",
+        "azure_function",
+        "bing_grounding",
+        "browser_automation",
+        "capture_structured_outputs",
+        "openapi",
+        "function",
+        "file_search",
+        "computer_use_preview",
+        "web_search",
+        "mcp",
+        "code_interpreter",
+        "image_generation",
+        "local_shell",
+        "shell",
+        "custom",
+        "web_search_preview",
+        "apply_patch",
+        "a2a_preview",
+        "bing_custom_search_preview",
+        "browser_automation_preview",
+        "fabric_dataagent_preview",
+        "sharepoint_grounding_preview",
+        "memory_search_preview",
+        "work_iq_preview",
+        "fabric_iq_preview",
+        "toolbox_search_preview",
+        "web_iq_preview"
+      ],
+      "x-ms-enum": {
+        "name": "ToolControlType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "a2a",
+            "value": "a2a",
+            "description": "Agent-to-agent tool."
+          },
+          {
+            "name": "azure_ai_search",
+            "value": "azure_ai_search",
+            "description": "Azure AI Search tool."
+          },
+          {
+            "name": "azure_function",
+            "value": "azure_function",
+            "description": "Azure Function tool."
+          },
+          {
+            "name": "bing_grounding",
+            "value": "bing_grounding",
+            "description": "Grounding with Bing Search tool."
+          },
+          {
+            "name": "browser_automation",
+            "value": "browser_automation",
+            "description": "Browser automation tool."
+          },
+          {
+            "name": "capture_structured_outputs",
+            "value": "capture_structured_outputs",
+            "description": "Capture structured outputs tool."
+          },
+          {
+            "name": "openapi",
+            "value": "openapi",
+            "description": "OpenAPI tool."
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "Function tool."
+          },
+          {
+            "name": "file_search",
+            "value": "file_search",
+            "description": "File search tool."
+          },
+          {
+            "name": "computer_use_preview",
+            "value": "computer_use_preview",
+            "description": "Computer use tool."
+          },
+          {
+            "name": "web_search",
+            "value": "web_search",
+            "description": "Web search tool."
+          },
+          {
+            "name": "mcp",
+            "value": "mcp",
+            "description": "Model Context Protocol (MCP) tool."
+          },
+          {
+            "name": "code_interpreter",
+            "value": "code_interpreter",
+            "description": "Code interpreter tool."
+          },
+          {
+            "name": "image_generation",
+            "value": "image_generation",
+            "description": "Image generation tool."
+          },
+          {
+            "name": "local_shell",
+            "value": "local_shell",
+            "description": "Local shell tool."
+          },
+          {
+            "name": "shell",
+            "value": "shell",
+            "description": "Shell tool."
+          },
+          {
+            "name": "custom",
+            "value": "custom",
+            "description": "Custom tool."
+          },
+          {
+            "name": "web_search_preview",
+            "value": "web_search_preview",
+            "description": "Web search preview tool."
+          },
+          {
+            "name": "apply_patch",
+            "value": "apply_patch",
+            "description": "Apply patch tool."
+          },
+          {
+            "name": "a2a_preview",
+            "value": "a2a_preview",
+            "description": "Agent-to-agent preview tool."
+          },
+          {
+            "name": "bing_custom_search_preview",
+            "value": "bing_custom_search_preview",
+            "description": "Grounding with Bing Custom Search preview tool."
+          },
+          {
+            "name": "browser_automation_preview",
+            "value": "browser_automation_preview",
+            "description": "Browser automation preview tool."
+          },
+          {
+            "name": "fabric_dataagent_preview",
+            "value": "fabric_dataagent_preview",
+            "description": "Fabric data agent preview tool."
+          },
+          {
+            "name": "sharepoint_grounding_preview",
+            "value": "sharepoint_grounding_preview",
+            "description": "SharePoint grounding preview tool."
+          },
+          {
+            "name": "memory_search_preview",
+            "value": "memory_search_preview",
+            "description": "Memory search preview tool."
+          },
+          {
+            "name": "work_iq_preview",
+            "value": "work_iq_preview",
+            "description": "Work IQ preview tool."
+          },
+          {
+            "name": "fabric_iq_preview",
+            "value": "fabric_iq_preview",
+            "description": "Fabric IQ preview tool."
+          },
+          {
+            "name": "toolbox_search_preview",
+            "value": "toolbox_search_preview",
+            "description": "Toolbox search preview tool."
+          },
+          {
+            "name": "web_iq_preview",
+            "value": "web_iq_preview",
+            "description": "Web IQ preview tool."
+          }
+        ]
+      }
+    },
+    "ToolControls": {
+      "type": "object",
+      "description": "Defines the default and per-tool access policy for a Foundry project.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/ToolControlsDefaultAction",
+          "description": "The action applied when a tool is not listed explicitly. Only Deny is currently supported."
+        },
+        "allowedTools": {
+          "type": "array",
+          "description": "The tools explicitly allowed by the policy. Omission or an empty array specifies no explicitly allowed tools.",
+          "items": {
+            "$ref": "#/definitions/ToolControlEntry"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ToolControlsDefaultAction": {
+      "type": "string",
+      "description": "Specifies the default action for a tool that is not listed explicitly.",
+      "enum": [
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "ToolControlsDefaultAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Tools that are not listed explicitly are denied."
+          }
+        ]
+      }
+    },
     "TrafficRoutingProtocol": {
       "type": "string",
       "description": "Traffic routing protocol, used to distribute an application's inbound traffic to its deployments.",
@@ -23849,6 +24162,64 @@
           "format": "int32",
           "description": "Gets or sets the percentage of traffic allocated to this instance."
         }
+      }
+    },
+    "TrustedCertificateSource": {
+      "type": "object",
+      "description": "An Azure resource containing the CA certificate bundles trusted by supported features in the account.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TrustedCertificateSourceType",
+          "description": "Type of resource containing the certificate bundles. Currently only AzureKeyVault is supported."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the Key Vault containing the referenced secrets. The account identity must have permission to read these secrets.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "certificateBundleReferences": {
+          "type": "array",
+          "description": "References to secrets containing one or more PEM-encoded CA certificates. Each secret name and version pair must be unique within the source, using case-insensitive comparison. The same secret name can be referenced with different versions.",
+          "minItems": 1,
+          "maxItems": 25,
+          "items": {
+            "$ref": "#/definitions/CertificateBundleReference"
+          },
+          "x-ms-identifiers": [
+            "secretName",
+            "secretVersion"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "resourceId",
+        "certificateBundleReferences"
+      ]
+    },
+    "TrustedCertificateSourceType": {
+      "type": "string",
+      "description": "Type of Azure resource containing trusted CA certificate bundles.",
+      "enum": [
+        "AzureKeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "TrustedCertificateSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault",
+            "description": "Azure Key Vault secrets containing CA certificates or certificate bundles."
+          }
+        ]
       }
     },
     "UnitType": {

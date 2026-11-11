@@ -10,6 +10,232 @@ using Search;
 @versioned(CustomizationVersions)
 namespace Customizations;
 
+@@clientName(Search.GraphQueryRequest, "GraphQueryContent", "csharp");
+
+// Graph query, index configuration, and knowledge retrieval use the same client families as
+// their existing document/index/knowledge-base counterparts.
+@@clientNamespace(Search.GraphQueryRequest, "Azure.Search.Documents");
+@@clientNamespace(Search.GraphQueryExecutionMode, "Azure.Search.Documents");
+@@clientNamespace(Search.GraphQueryExplainStage, "Azure.Search.Documents");
+@@clientNamespace(Search.GraphQueryProvenanceKind, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.GraphQueryProvenanceParameters,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(
+  Search.GraphQueryProvenanceHydrateDocumentsParameters,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(Search.GraphQueryResult, "Azure.Search.Documents");
+@@clientNamespace(Search.GraphQueryError, "Azure.Search.Documents");
+@@clientNamespace(Search.GraphQueryRow, "Azure.Search.Documents");
+@@clientNamespace(Search.GraphQueryExplain, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.GraphQueryProvenanceDocument,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(
+  Search.GraphQueryProvenanceDocuments,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(Search.GraphQueryStatistics, "Azure.Search.Documents");
+@@clientNamespace(Search.GraphQueryDiagnostic, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.GraphQueryDiagnosticSeverity,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(Search.GraphQueryDiagnosticPhase, "Azure.Search.Documents");
+@@clientNamespace(Search.GraphQueryRowProvenance, "Azure.Search.Documents");
+@@clientNamespace(Search.GraphQueryEvidenceCount, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.GraphQueryEvidenceCountRelation,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(Search.GraphQueryEvidence, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.GraphQueryEvidenceConfidence,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(Search.GraphProfile, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.GraphProfileKind, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.GraphFieldMappings, "Azure.Search.Documents.Indexes");
+@@clientNamespace(
+  Search.AgentRuntimeGraphParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.AgentRuntimeGraphProvenanceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.AgentRuntimeGraphHydrateDocumentsParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphProvenanceKind,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseGraphSearchActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseGraphSearchActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseGraphSearchReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+
+@@clientNamespace(
+  Search.GraphQueryRequest,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryExecutionMode,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryExplainStage,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryProvenanceKind,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryProvenanceParameters,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryProvenanceHydrateDocumentsParameters,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryResult,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(Search.GraphQueryError, "com.azure.search.documents", "java");
+@@clientNamespace(Search.GraphQueryRow, "com.azure.search.documents", "java");
+@@clientNamespace(
+  Search.GraphQueryExplain,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryProvenanceDocument,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryProvenanceDocuments,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryStatistics,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryDiagnostic,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryDiagnosticSeverity,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryDiagnosticPhase,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryRowProvenance,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryEvidenceCount,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryEvidenceCountRelation,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryEvidence,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryEvidenceConfidence,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphProfile,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphProfileKind,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphFieldMappings,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.AgentRuntimeGraphParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.AgentRuntimeGraphProvenanceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.AgentRuntimeGraphHydrateDocumentsParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphProvenanceKind,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseGraphSearchActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseGraphSearchActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseGraphSearchReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+
 /** The service API versions supported by client customizations. */
 enum CustomizationVersions {
   /** Client customizations for the 2025-11-01-preview API version. */
@@ -30,6 +256,10 @@ enum CustomizationVersions {
 
   @useDependency(Search.Versions.v2026_10_01)
   v2026_10_01: "2026-10-01",
+
+  /** Client customizations for the 2026-11-01-preview API version. */
+  @useDependency(Search.Versions.v2026_11_01_preview)
+  v2026_11_01_preview: "2026-11-01-preview",
 }
 
 @client({
@@ -41,6 +271,10 @@ enum CustomizationVersions {
 @clientNamespace("com.azure.search.documents", "java")
 @versioned(CustomizationVersions)
 namespace SearchClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Graph queries use the existing document action routing convention."
+  @added(CustomizationVersions.v2026_11_01_preview)
+  op graph is Search.Documents.graph;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op count is Search.Documents.count;
@@ -221,6 +455,10 @@ namespace SearchIndexClient {
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
   op uploadKnowledgeSourceFileMultipart is Search.KnowledgeSources.uploadFileMultipart;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Feature-owned asynchronous ingestion action."
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct upload is intentional for File knowledge source."
+  op ingestKnowledgeSourceFileMultipart is Search.KnowledgeSources.ingestFileMultipart;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   op listKnowledgeSourceFiles is Search.KnowledgeSources.listFiles;
 
@@ -231,6 +469,17 @@ namespace SearchIndexClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
   op updateKnowledgeSourceFile is Search.KnowledgeSources.updateFile;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Feature-owned asynchronous ingestion action."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserve existing file update client naming."
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct upload is intentional for File knowledge source."
+  op ingestKnowledgeSourceFileReplacement is Search.KnowledgeSources.ingestFileReplacement;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Feature-owned status monitor."
+  op getKnowledgeSourceFileIngestionOperation is Search.KnowledgeSources.getFileIngestionOperation;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Feature-owned status monitor collection."
+  op listKnowledgeSourceFileIngestionOperations is Search.KnowledgeSources.listFileIngestionOperations;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -377,6 +626,18 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@access(ListingSearchType, Access.public);
 @@usage(ListingSearchType, Usage.input);
+@@access(AgenticSearchOptions, Access.public);
+@@usage(AgenticSearchOptions, Usage.input);
+@@access(AgenticSearchDebugInfo, Access.public);
+@@usage(AgenticSearchDebugInfo, Usage.output | Usage.json);
+@@access(AgenticSearchUsage, Access.public);
+@@usage(AgenticSearchUsage, Usage.output | Usage.json);
+@@access(AgenticSearchSubQuery, Access.public);
+@@usage(AgenticSearchSubQuery, Usage.output | Usage.json);
+@@access(AgenticSearchTerminationReason, Access.public);
+@@usage(AgenticSearchTerminationReason, Usage.output | Usage.json);
+@@access(KnowledgeBaseMicrosoftRetriever1Model, Access.public);
+@@usage(KnowledgeBaseMicrosoftRetriever1Model, Usage.input | Usage.output);
 @@access(KnowledgeBaseRetrieveDefaults, Access.public);
 @@usage(KnowledgeBaseRetrieveDefaults, Usage.input);
 @@access(KnowledgeBaseRetrievalStartedEvent, Access.public);
@@ -401,6 +662,12 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(IndexerResyncBody, Usage.input);
 @@access(KnowledgeBaseAzureOpenAIModel, Access.public);
 @@usage(KnowledgeBaseAzureOpenAIModel, Usage.input);
+@@access(KnowledgeBaseOpenAICompatibleModel, Access.public);
+@@usage(KnowledgeBaseOpenAICompatibleModel, Usage.input);
+@@access(OpenAICompatibleVectorizer, Access.public);
+@@usage(OpenAICompatibleVectorizer, Usage.input);
+@@access(KnowledgeSourceOpenAICompatibleVectorizer, Access.public);
+@@usage(KnowledgeSourceOpenAICompatibleVectorizer, Usage.input);
 @@access(AnalyzedTokenInfo, Access.public);
 @@usage(AnalyzedTokenInfo, Usage.input);
 @@access(IndexerExecutionStatus, Access.public);
@@ -463,6 +730,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(FileKnowledgeSourceExtractionMode, Usage.output);
 @@access(FileUploadMetadata, Access.public);
 @@usage(FileUploadMetadata, Usage.input);
+@@access(UploadKnowledgeSourceFileMultipartRequest, Access.public, "csharp");
+@@access(UpdateKnowledgeSourceFileRequest, Access.public, "csharp");
 @@access(FabricDataAgentKnowledgeSource, Access.public);
 @@usage(FabricDataAgentKnowledgeSource, Usage.input);
 @@access(FabricOntologyKnowledgeSource, Access.public);
@@ -777,6 +1046,12 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents",
   "java"
 );
+@@clientNamespace(Search.VectorSearchTopicGraphKind, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.VectorSearchTopicGraphKind,
+  "com.azure.search.documents",
+  "java"
+);
 @@clientNamespace(Search.VectorFilterMode, "Azure.Search.Documents");
 @@clientNamespace(
   Search.VectorFilterMode,
@@ -819,6 +1094,39 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(Search.QueryType, "Azure.Search.Documents");
 @@clientNamespace(Search.QueryType, "com.azure.search.documents", "java");
+@@clientNamespace(Search.AgenticSearchOptions, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.AgenticSearchOptions,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(Search.AgenticSearchDebugInfo, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.AgenticSearchDebugInfo,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(Search.AgenticSearchUsage, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.AgenticSearchUsage,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(Search.AgenticSearchSubQuery, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.AgenticSearchSubQuery,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.AgenticSearchTerminationReason,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(
+  Search.AgenticSearchTerminationReason,
+  "com.azure.search.documents",
+  "java"
+);
 @@clientNamespace(Search.SearchMode, "Azure.Search.Documents");
 @@clientNamespace(Search.SearchMode, "com.azure.search.documents", "java");
 @@clientNamespace(Search.ScoringStatistics, "Azure.Search.Documents");
@@ -872,6 +1180,12 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.VectorQuery, "com.azure.search.documents", "java");
 @@clientNamespace(Search.VectorThreshold, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorThreshold, "com.azure.search.documents", "java");
+@@clientNamespace(Search.VectorQueryTopicGraph, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.VectorQueryTopicGraph,
+  "com.azure.search.documents",
+  "java"
+);
 @@clientNamespace(Search.HybridSearch, "Azure.Search.Documents");
 @@clientNamespace(Search.HybridSearch, "com.azure.search.documents", "java");
 @@clientNamespace(Search.SearchResult, "Azure.Search.Documents");
@@ -1010,6 +1324,30 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.SearchScoreThreshold, "Azure.Search.Documents");
 @@clientNamespace(
   Search.SearchScoreThreshold,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(Search.NoneVectorQueryTopicGraph, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.NoneVectorQueryTopicGraph,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.DiverseVectorQueryTopicGraph,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(
+  Search.DiverseVectorQueryTopicGraph,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.BalancedVectorQueryTopicGraph,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(
+  Search.BalancedVectorQueryTopicGraph,
   "com.azure.search.documents",
   "java"
 );
@@ -1858,6 +2196,15 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents",
   "java"
 );
+@@clientNamespace(
+  Search.OneLakeSecuritySource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.OneLakeSecuritySource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.SearchField, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.SearchField,
@@ -1891,6 +2238,21 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.KnowledgeBase, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.KnowledgeBase,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseTool, "Azure.Search.Documents.Indexes");
+@@clientNamespace(
+  Search.KnowledgeBaseTool,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseToolKnowledgeSourceReference,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseToolKnowledgeSourceReference,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -1973,6 +2335,33 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeBaseOpenAICompatibleModel,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseOpenAICompatibleModel,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseOpenAICompatibleParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseOpenAICompatibleParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseMicrosoftRetriever1Model,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseMicrosoftRetriever1Model,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
   Search.AzureOpenAiParameters,
   "Azure.Search.Documents.Indexes"
 );
@@ -2039,6 +2428,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.SearchIndexKnowledgeSourceFilterHintAutoConfiguration,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceFilterHintAutoConfiguration,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
   Search.SearchIndexKnowledgeSourceBoost,
   "Azure.Search.Documents.Indexes"
 );
@@ -2089,6 +2487,60 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.AzureBlobKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphExtractionParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphExtractionParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphOntologySourceKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphOntologySourceKind,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGroundingSourceKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGroundingSourceKind,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphOntology,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphOntology,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGrounding,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGrounding,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGroundingIndex,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGroundingIndex,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -2422,7 +2874,34 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(Search.KnowledgeSourceFile, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
+  Search.KnowledgeSourceFileIngestionOperation,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceFileIngestionError,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.ListKnowledgeSourceFileIngestionOperationsResult,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
   Search.KnowledgeSourceFile,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceFileIngestionOperation,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceFileIngestionError,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.ListKnowledgeSourceFileIngestionOperationsResult,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -2645,6 +3124,15 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.VectorSearchProfile, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.VectorSearchProfile,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.VectorSearchTopicGraphProfile,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.VectorSearchTopicGraphProfile,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -3186,6 +3674,24 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.OpenAICompatibleVectorizer,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.OpenAICompatibleVectorizer,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.OpenAICompatibleVectorizerParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.OpenAICompatibleVectorizerParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
   Search.SearchIndexerDataIdentity,
   "Azure.Search.Documents.Indexes"
 );
@@ -3344,6 +3850,24 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.MagnitudeScoringParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.RandomScoringFunction,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.RandomScoringFunction,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.RandomScoringParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.RandomScoringParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -4282,6 +4806,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(DistanceScoringFunction.distance, "parameters", "!autorest");
 @@clientName(FreshnessScoringFunction.freshness, "parameters", "!autorest");
 @@clientName(MagnitudeScoringFunction.magnitude, "parameters", "!autorest");
+@@clientName(RandomScoringFunction.random, "parameters", "!autorest");
 @@clientName(
   MagnitudeScoringParameters.constantBoostBeyondRange,
   "shouldBoostBeyondRangeByConstant",
@@ -4693,6 +5218,11 @@ namespace KnowledgeBaseRetrievalClient {
   "javascript"
 );
 @@clientName(
+  Search.KnowledgeBaseActivityRecord.elapsedMs,
+  "elapsedInMs",
+  "javascript"
+);
+@@clientName(
   Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsVitBasePatch32,
   "OpenAIClipImageTextEmbeddingsVitBasePatch32",
   "javascript"
@@ -5020,11 +5550,29 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeSourceOpenAICompatibleVectorizer,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceOpenAICompatibleVectorizer,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
   Search.KnowledgeSourceIngestionParameters,
   "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(
   Search.KnowledgeSourceIngestionParameters,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceCache,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceCache,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
@@ -5048,6 +5596,15 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.KnowledgeSourceStatistics,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphStatistics,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphStatistics,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
@@ -5809,3 +6366,266 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(Search.KnowledgeBaseReferencesCompletedStreamEvent, Access.public);
 @@access(Search.KnowledgeBaseErrorStreamEvent, Access.public);
 @@access(Search.KnowledgeBaseResponseCompletedStreamEvent, Access.public);
+
+// Preserve the body-first protocol signatures released in the JavaScript 13.0.0 SDK.
+namespace JavaScriptCompatibility {
+  /** Shows how an analyzer breaks text into tokens. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
+  op analyze(
+    /** The text and analyzer or analysis components to test. */
+    @TypeSpec.Http.body request: Search.AnalyzeRequest,
+
+    ...Search.indexNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+  ): void;
+
+  /** Creates a new search index or updates an index if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
+  op createOrUpdateIndex(
+    /** The definition of the index to create or update. */
+    @TypeSpec.Http.body index: Search.SearchIndex,
+
+    ...Search.indexNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+
+    /** Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. */
+    @TypeSpec.Http.query allowIndexDowntime?: boolean,
+
+    ...Search.preferHeader,
+  ): void;
+
+  /** Creates a new synonym map or updates a synonym map if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
+  op createOrUpdateSynonymMap(
+    /** The synonym map definition to create or update. */
+    @TypeSpec.Http.body synonymMap: Search.SynonymMap,
+
+    ...Search.synonymMapNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  /** Creates a new search alias or updates an alias if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
+  op createOrUpdateAlias(
+    /** The alias definition to create or update. */
+    @TypeSpec.Http.body `alias`: Search.SearchAlias,
+
+    ...Search.aliasNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  /** Creates a new knowledge base or updates a knowledge base if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
+  op createOrUpdateKnowledgeBase(
+    /** The knowledge base definition to create or update. */
+    @TypeSpec.Http.body knowledgeBase: Search.KnowledgeBase,
+
+    ...Search.knowledgeBaseNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  /** Creates a new knowledge source or updates a knowledge source if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
+  op createOrUpdateKnowledgeSource(
+    /** The knowledge source definition to create or update. */
+    @TypeSpec.Http.body knowledgeSource: Search.KnowledgeSource,
+
+    ...Search.sourceNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+  ): void;
+
+  /** Creates a new indexer or updates an indexer if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
+  op createOrUpdateIndexer(
+    /** The indexer definition to create or update. */
+    @TypeSpec.Http.body indexer: Search.SearchIndexer,
+
+    ...Search.indexerNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+
+    /** Ignores cache reset requirements. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("ignoreResetRequirements")
+    skipIndexerResetRequirementForCache?: boolean,
+
+    /** Disables cache reprocessing change detection. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("disableCacheReprocessingChangeDetection")
+    disableCacheReprocessingChangeDetection?: boolean,
+  ): void;
+
+  /** Creates a new skillset or updates a skillset if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
+  op createOrUpdateSkillset(
+    /** The skillset definition to create or update. */
+    @TypeSpec.Http.body skillset: Search.SearchIndexerSkillset,
+
+    ...Search.skillsetNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+
+    /** Ignores cache reset requirements. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("ignoreResetRequirements")
+    skipIndexerResetRequirementForCache?: boolean,
+
+    /** Disables cache reprocessing change detection. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("disableCacheReprocessingChangeDetection")
+    disableCacheReprocessingChangeDetection?: boolean,
+  ): void;
+
+  /** Creates a new datasource or updates a datasource if it already exists. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Client-only compatibility signature for an existing operation"
+  op createOrUpdateDataSource(
+    /** The datasource definition to create or update. */
+    @TypeSpec.Http.body dataSource: Search.SearchIndexerDataSource,
+
+    ...Search.dataSourceNamePath,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...Azure.Core.ClientRequestIdHeader,
+    ...Search.acceptHeaderMinimal,
+    ...Search.matchingHeader,
+    ...Search.preferHeader,
+
+    /** Ignores cache reset requirements. */
+    @added(Search.Versions.v2026_11_01_preview)
+    @removed(Search.Versions.v2026_10_01)
+    @added(Search.Versions.v2026_05_01_preview)
+    @removed(Search.Versions.v2026_04_01)
+    @TypeSpec.Http.query("ignoreResetRequirements")
+    skipIndexerResetRequirementForCache?: boolean,
+  ): void;
+}
+
+@@override(
+  SearchIndexClient.analyze,
+  JavaScriptCompatibility.analyze,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateIndex,
+  JavaScriptCompatibility.createOrUpdateIndex,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateSynonymMap,
+  JavaScriptCompatibility.createOrUpdateSynonymMap,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateAlias,
+  JavaScriptCompatibility.createOrUpdateAlias,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateKnowledgeBase,
+  JavaScriptCompatibility.createOrUpdateKnowledgeBase,
+  "javascript"
+);
+@@override(
+  SearchIndexClient.createOrUpdateKnowledgeSource,
+  JavaScriptCompatibility.createOrUpdateKnowledgeSource,
+  "javascript"
+);
+@@override(
+  SearchIndexerClient.createOrUpdateIndexer,
+  JavaScriptCompatibility.createOrUpdateIndexer,
+  "javascript"
+);
+@@override(
+  SearchIndexerClient.createOrUpdateSkillset,
+  JavaScriptCompatibility.createOrUpdateSkillset,
+  "javascript"
+);
+@@override(
+  SearchIndexerClient.createOrUpdateDataSource,
+  JavaScriptCompatibility.createOrUpdateDataSource,
+  "javascript"
+);
+
+// Keep the released result-wrapper APIs alongside the new paged operations.
+namespace SearchIndexClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing JavaScript SDK contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserve the released JavaScript getter name"
+  @scope("javascript")
+  op getSynonymMaps is Search.SynonymMaps.list;
+}
+
+namespace SearchIndexerClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing JavaScript SDK contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserve the released JavaScript getter name"
+  @scope("javascript")
+  op getIndexers is Search.Indexers.list;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing JavaScript SDK contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserve the released JavaScript getter name"
+  @scope("javascript")
+  op getSkillsets is Search.Skillsets.list;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing JavaScript SDK contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserve the released JavaScript getter name"
+  @scope("javascript")
+  op getDataSourceConnections is Search.DataSources.list;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released non-pageable JavaScript getter contract"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  SearchIndexClient.getSynonymMaps,
+  "javascript"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released non-pageable JavaScript getter contract"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  SearchIndexerClient.getIndexers,
+  "javascript"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released non-pageable JavaScript getter contract"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  SearchIndexerClient.getSkillsets,
+  "javascript"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released non-pageable JavaScript getter contract"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  SearchIndexerClient.getDataSourceConnections,
+  "javascript"
+);

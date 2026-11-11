@@ -6,21 +6,18 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.ContainerService;
 
+// Preserve existing single-response SDK methods; .NET already exposes pageable methods.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep existing SDK list methods and response-envelope return types."
+@@disablePageable(PrivateEndpointConnections.list, "!csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep existing SDK list methods and response-envelope return types."
+@@disablePageable(ManagedClusters.privateLinkResourcesList, "!csharp");
+
 // Fix .NET code generation naming conflict: BootstrapAzureConfig has both an internal
 // BootstrapTokenInfo property and a flattened public string property that both resolve
 // to "BootstrapToken". Renaming the backing property avoids the CS0102 duplicate error.
 @@clientName(
   BootstrapAzureConfig.bootstrapToken,
   "BootstrapTokenDetail",
-  "csharp"
-);
-
-// .NET SDK naming: "Request" suffix is reserved for HTTP pipeline types; add the
-// AgentPool owner prefix so the request pairs symmetrically with its response
-// (PoolBootstrapData -> AgentPoolBootstrapInfo).
-@@clientName(
-  ListBootstrapDataRequest,
-  "AgentPoolBootstrapDataContent",
   "csharp"
 );
 
@@ -95,6 +92,50 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(BootstrapKubeletConfig.clusterFQDN, "clusterFqdn", "csharp");
+@@clientName(
+  UpgradeIssueType.APIBreakingChange,
+  exact("ApiBreakingChange"),
+  "csharp"
+);
+@@clientName(
+  ManagedClusterAgentSandboxProfile.enabled,
+  "IsAgentSandboxProfileEnabled",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterPodSnapshotProfile.enabled,
+  "IsPodSnapshotProfileEnabled",
+  "csharp"
+);
+@@alternateType(
+  ResourceSkuLocationInfo.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(UpgradeContext, "ContainerServiceUpgradeContext", "csharp");
+@@clientName(
+  UpgradeIssueSeverity,
+  "ContainerServiceUpgradeIssueSeverity",
+  "csharp"
+);
+@@clientName(UpgradeIssueType, "ContainerServiceUpgradeIssueType", "csharp");
+@@clientName(
+  DetectedUpgradeIssue,
+  "ContainerServiceDetectedUpgradeIssue",
+  "csharp"
+);
+@@clientName(NodeDisruptionPolicy, "AgentPoolNodeDisruptionPolicy", "csharp");
+@@clientName(SeccompDefault, "ContainerServiceSeccompDefault", "csharp");
+@@clientName(PodLinkLocalAccess, "AgentPoolPodLinkLocalAccess", "csharp");
+@@clientName(NvidiaDriverMode, "AgentPoolNvidiaDriverMode", "csharp");
+@@clientName(GuardrailsSupport, "ContainerServiceGuardrailsSupport", "csharp");
+@@clientName(SafeguardsSupport, "ContainerServiceSafeguardsSupport", "csharp");
+@@clientName(
+  ScopeEvaluationResult,
+  "UpgradeInsightScopeEvaluationResult",
+  "csharp"
+);
+@@clientName(NodeImageVersion, "ContainerServiceNodeImageVersion", "csharp");
 @@clientName(
   ManagedClusterNATGatewaySku,
   "ManagedClusterNatGatewaySku",
@@ -1325,7 +1366,7 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ManagementMode, "GpuManagementMode", "csharp");
-@@clientName(MigStrategy, "MultiInstanceGpuStrategy", "csharp");
+@@clientName(MigStrategy, "AgentPoolMultiInstanceGpuStrategy", "csharp");
 @@clientName(ResourceSku, "ContainerServiceVmSku", "csharp");
 @@clientName(
   ResourceSkuCapabilities,
@@ -1405,11 +1446,6 @@ using Microsoft.ContainerService;
   "GetManagedClusterKubernetesVersions",
   "csharp"
 );
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
-@@markAsPageable(PrivateEndpointConnections.list, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
-@@markAsPageable(ManagedClusters.privateLinkResourcesList, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
@@ -1709,7 +1745,11 @@ namespace Azure.ResourceManager.Models {
 );
 // Resource models: drop redundant "Resource" suffix / add service prefix so the
 // generated {Name}Resource/{Name}Data/{Name}Collection follow ARM conventions.
-@@clientName(MaintenanceWindowResource, "MaintenanceWindow", "csharp");
+@@clientName(
+  MaintenanceWindowResource,
+  "ContainerServiceManagedMaintenanceWindow",
+  "csharp"
+);
 @@clientName(
   GuardrailsAvailableVersion,
   "ContainerServiceGuardrailsAvailableVersion",

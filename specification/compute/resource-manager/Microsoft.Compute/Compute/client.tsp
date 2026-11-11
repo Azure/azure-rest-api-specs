@@ -1015,15 +1015,6 @@ model VMSizePropertiesWithAdditionalProperties {
   "csharp"
 );
 
-// Disable safe-flatten on AllInstancesDown / UserInitiatedRedeploy so they remain
-// public types in the C# SDK (preserves backward compatibility with previously shipped surface).
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
-#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
-@@clientOption(UserInitiatedRedeploy, "disable-safe-flatten", true, "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
-#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
-@@clientOption(AllInstancesDown, "disable-safe-flatten", true, "csharp");
-
 // Resource type rename for backward compatibility.
 @@clientName(
   RollingUpgradeStatusInfo,
@@ -1542,6 +1533,7 @@ model VMSizePropertiesWithAdditionalProperties {
   "TargetVmSize",
   "csharp"
 );
+@@clientName(FlexProfile.preferredVMSize, "PreferredVmSize", "csharp");
 @@clientName(
   VirtualMachineExtensionImageProperties.vmScaleSetEnabled,
   "VirtualMachineScaleSetEnabled",

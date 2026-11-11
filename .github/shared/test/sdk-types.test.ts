@@ -1,8 +1,30 @@
 import { describe, expect, it } from "vitest";
-import { sdkLabels, SpecGenSdkArtifactInfoSchema } from "../src/sdk-types.ts";
+import {
+  getSdkLanguage,
+  sdkLabels,
+  SdkName,
+  SpecGenSdkArtifactInfoSchema,
+} from "../src/sdk-types.ts";
 import { createMockSpecGenSdkArtifactInfo } from "./sdk-types.ts";
 
 describe("sdk-types", () => {
+  it.each([
+    [SdkName.Go, "Go"],
+    [SdkName.Java, "Java"],
+    [SdkName.Js, "JavaScript"],
+    [SdkName.Net, "DotNet"],
+    [SdkName.Python, "Python"],
+    [SdkName.Rust, "Rust"],
+  ])("returns the language name for %s", (repo, language) => {
+    expect(getSdkLanguage(repo)).toBe(language);
+  });
+
+  it("rejects unsupported SDK repositories", () => {
+    expect(() => getSdkLanguage("unknown-repository" as SdkName)).toThrow(
+      "Unsupported SDK repository: unknown-repository",
+    );
+  });
+
   it("defines sdkLabels", () => {
     // Ensures constant "sdkLabels" is considered "covered" by codecov
     expect(sdkLabels).toBeDefined();

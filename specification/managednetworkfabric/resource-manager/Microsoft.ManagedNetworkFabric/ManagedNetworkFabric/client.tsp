@@ -6,6 +6,10 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.ResourceManager.Foundations;
 using Microsoft.ManagedNetworkFabric;
 
+// Go
+@@clientName(ControllerType.ciscoAci, "CiscoACI", "go");
+@@clientName(NetworkFabricRefreshDeviceTypes.ToR, "TOR", "go");
+
 @@clientName(AccessControlList, "NetworkFabricAccessControlList", "csharp");
 @@clientName(ExternalNetwork, "NetworkFabricExternalNetwork", "csharp");
 @@clientName(InternalNetwork, "NetworkFabricInternalNetwork", "csharp");
@@ -1999,21 +2003,6 @@ model IpExtendedCommunityAddOperationProperties {
 @@clientName(
   Microsoft.ManagedNetworkFabric,
   "ManagedNetworkFabricMgmtClient",
-  "python"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
-  "ManagementNetworkConfigurationPatchableProperties",
-  "python"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
-  "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
-  "python"
-);
-@@clientName(
-  Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
-  "OptionBProperties",
   "python"
 );
 @@clientName(

@@ -15,6 +15,14 @@ using Microsoft.Compute;
 );
 
 // Shared placement score SDK types.
+@@doc(
+  PlacementScore,
+  "The placement score for a virtual machine SKU, region, and availability zone combination."
+);
+@@doc(
+  PlacementScore.score,
+  "A placement score indicating the likelihood of successfully allocating the specified virtual machines."
+);
 @@alternateType(PlacementScore.region, azureLocation, "csharp");
 @@clientName(PlacementScore, "ComputeRecommenderPlacementScore", "csharp");
 @@clientName(ResourceSize, "ComputeRecommenderResourceSize", "csharp");
@@ -45,17 +53,31 @@ using Microsoft.Compute;
   "ComputeRecommenderGenerateResult",
   "csharp"
 );
+@@clientName(SpotPlacementScoresBase, "ComputeRecommenderDiagnostic", "csharp");
 @@clientName(
-  SpotPlacementScoresBase,
-  "ComputeRecommenderPlacementScores",
+  PlacementScoresProperties.supportedResourceTypes,
+  "ComputeRecommenderDiagnosticSupportedResourceTypes",
   "csharp"
 );
 @@clientName(SpotPlacementScores.post, "generate", "csharp");
 
 // Regular compute placement score SDK names use the explicit operation group name.
+@@doc(
+  ComputePlacementScoresResponse,
+  "The results of scoring placement for regular virtual machines."
+);
+@@doc(
+  ComputePlacementScoresResponse.placementScores,
+  "Placement scores indicating the likelihood of successfully allocating the specified regular virtual machines."
+);
 @@clientName(
   ComputePlacementScoresInput,
   "ComputePlacementScoresGenerateContent",
+  "csharp"
+);
+@@clientName(
+  ComputePlacementScoresInput.availabilityZones,
+  "IsZonal",
   "csharp"
 );
 @@clientName(
@@ -63,10 +85,16 @@ using Microsoft.Compute;
   "ComputePlacementScoresGenerateResult",
   "csharp"
 );
+@@clientName(
+  ComputePlacementScoresResponse.availabilityZones,
+  "IsZonal",
+  "csharp"
+);
 @@clientName(ComputePlacementScoresBase, "ComputePlacementScores", "csharp");
 @@clientName(ComputePlacementScores.post, "generate", "csharp");
 
 // SKU mix placement score SDK names.
+@@clientName(SkuMixPlacementVMSize, "SkuMixPlacementVmSize", "csharp");
 @@clientName(
   SkuMixPlacementRequest,
   "ComputeSkuMixPlacementGenerateContent",

@@ -139,8 +139,8 @@ async function processResult({
 
   // Create a summary of the results
   let summaryContent = "## SDK Validation CI Checks Result\n\n";
-  summaryContent += "| Language | Status | Required Check |\n";
-  summaryContent += "|----------|--------|---------------|\n";
+  summaryContent += "| Check | Status | Required Check |\n";
+  summaryContent += "|-------|--------|---------------|\n";
 
   for (const checkRun of checkRuns) {
     core.info(`Processing check run: ${checkRun.name} (${checkRun.conclusion})`);
@@ -190,7 +190,10 @@ async function processResult({
               ? "⏳"
               : "❓";
 
-    summaryContent += `| ${shortLanguageName} | ${statusEmoji} ${executionResult} | ${isSpecGenSdkCheckRequired} |\n`;
+    const checkDisplayName = checkRun.name
+      .replace(/^SDK Validation - /, "")
+      .replace(/ Libraries$/, "");
+    summaryContent += `| ${checkDisplayName} | ${statusEmoji} ${executionResult} | ${isSpecGenSdkCheckRequired} |\n`;
   }
 
   if (state === CommitStatusState.FAILURE) {
