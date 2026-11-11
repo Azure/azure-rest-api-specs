@@ -41,6 +41,14 @@ model SandboxGroupProperties {
   @visibility(Lifecycle.Read)
   defaultDomain?: string;
 
+  /** Whether to publish per-sandbox resource metrics for this group. Omitted on PUT means false; omitted on PATCH preserves the current value. */
+  @added(Versions.v2026_11_01_preview)
+  enableDetailedMetrics?: boolean;
+
+  /** Lifecycle event export configuration for sandboxes in this group. */
+  @added(Versions.v2026_11_01_preview)
+  telemetryConfig?: SandboxGroupTelemetryConfig;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Description is on the referenced type to avoid emitting a sibling of $ref."
   @visibility(Lifecycle.Read)
   provisioningState?: SandboxGroupProvisioningState;
@@ -115,5 +123,86 @@ model SandboxGroupIdentity
 /** SandboxGroup resource specific properties for patch requests. */
 @added(Versions.v2026_07_01)
 model SandboxGroupPatchProperties {
-  ...PickProperties<SandboxGroupProperties, "environmentId">;
+  ...PickProperties<
+    SandboxGroupProperties,
+    "environmentId" | "enableDetailedMetrics" | "telemetryConfig"
+  >;
+}
+
+/** Lifecycle event export configuration for a sandbox group. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupTelemetryConfig {
+  /** Event Hub destinations for sandbox lifecycle events. */
+  @minItems(1)
+  @identifiers(#["fullyQualifiedNamespace", "eventHubName"])
+  endpoints: SandboxGroupEventHubTelemetryEndpoint[];
+}
+
+/** An Event Hub destination for sandbox lifecycle events, delivered by the ADC platform. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupEventHubTelemetryEndpoint {
+  /** The telemetry destination kind. */
+  kind: "EventHub";
+
+  /** The Event Hubs namespace hostname, such as example.servicebus.windows.net. Must end with .servicebus.windows.net. */
+  fullyQualifiedNamespace: string;
+
+  /** The name of the destination Event Hub. */
+  @minLength(1)
+  @maxLength(256)
+  @pattern("^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?$")
+  eventHubName: string;
+
+  /** The event data to export. Only sandbox lifecycle events are supported. */
+  @minItems(1)
+  data: "LifecycleEvents"[];
+
+  /** The delivery route. Sandbox group lifecycle events require platform-side delivery. */
+  egressRouting: "Platform";
+
+  /** Managed identity authentication for sending to the destination Event Hub. The identity must be assigned to this sandbox group and have permission to send to the Event Hub. */
+  auth: SandboxGroupTelemetryAuth;
+}
+
+/** Managed identity authentication for sandbox group lifecycle event export. */
+@added(Versions.v2026_11_01_preview)
+@discriminator("kind")
+model SandboxGroupTelemetryAuth {
+  /** The managed identity authentication kind. */
+  kind: SandboxGroupTelemetryAuthKind;
+}
+
+/** The supported managed identity authentication kinds. */
+@added(Versions.v2026_11_01_preview)
+union SandboxGroupTelemetryAuthKind {
+  /** A user-assigned managed identity attached to the sandbox group. */
+  ManagedIdentity: "ManagedIdentity",
+
+  /** The sandbox group's system-assigned managed identity. */
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+
+  string,
+}
+
+/** Uses the sandbox group's system-assigned managed identity to send lifecycle events. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupSystemAssignedIdentityTelemetryAuth
+  extends SandboxGroupTelemetryAuth {
+  /** Selects the sandbox group's system-assigned managed identity. */
+  kind: "SystemAssignedManagedIdentity";
+}
+
+/** Uses a user-assigned managed identity attached to the sandbox group to send lifecycle events. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupUserAssignedIdentityTelemetryAuth
+  extends SandboxGroupTelemetryAuth {
+  /** Selects a user-assigned managed identity. */
+  kind: "ManagedIdentity";
+
+  /** The resource ID of the user-assigned managed identity attached to the sandbox group. */
+  identity: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
