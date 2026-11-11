@@ -405,6 +405,10 @@ namespace Azure.AI.Projects {
     /** Job was cancelled by the caller. */
     @lroCanceled
     cancelled: "cancelled",
+
+    /** Job was skipped. */
+    @lroSucceeded
+    skipped: "skipped",
   }
 
   /**
