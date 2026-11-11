@@ -17,6 +17,7 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
   workflow_run:
     workflows:
       - "Breaking Change(Cross-Version) - Set Status"
+      - "Format"
       - "Package Name Approval - Set Status"
       - "Package Name Approval - Validate Labels"
       - "Protected Files"
@@ -66,7 +67,10 @@ jobs:
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped')
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion != 'skipped' &&
+       (github.event.workflow_run.name != 'Format' ||
+        github.event.workflow_run.event == 'pull_request'))
     name: "Summarize Checks"
     runs-on: ubuntu-slim
 
