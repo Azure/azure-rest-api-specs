@@ -2409,7 +2409,7 @@ model FileShareProperties {
   enabledProtocols?: EnabledProtocols;
 
   /**
-   * The mode of the Scale Namespace feature for the file share. Supported only for NFS shares in FileStorage Provisioned v2 accounts. If omitted on creation, the mode defaults to Compatibility. Can only be specified when creating the share and cannot be changed afterward. Get and list operations return Compatibility when no mode was specified.
+   * The mode of the Scale Namespace feature for the file share. Supported only for NFS shares in FileStorage Provisioned v2 accounts. If omitted when creating a share, the mode defaults to Compatibility. PATCH requests that omit this property preserve the existing mode. The mode cannot be changed after creation; an attempt to change it through PATCH returns HTTP 400 with error code PropertyIsImmutable. Get and list operations return Compatibility when no mode was specified at creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_12_01)

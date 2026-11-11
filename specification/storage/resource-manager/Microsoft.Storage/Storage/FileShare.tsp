@@ -42,7 +42,7 @@ model FileShareUpdateProperties is OmitProperties<
 >;
 
 /**
- * The parameters for updating a file share.
+ * The parameters for updating a file share without applying the creation-only Scale Namespace default. The existing mode is preserved when omitted. Attempts to change the mode return HTTP 400 with error code PropertyIsImmutable.
  */
 model FileSharePatch {
   ...OmitProperties<CommonTypes.AzureEntityResource, "type">;

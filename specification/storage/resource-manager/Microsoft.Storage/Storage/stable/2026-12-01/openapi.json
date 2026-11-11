@@ -5234,6 +5234,9 @@
           }
         },
         "x-ms-examples": {
+          "Update metadata while preserving the Scale Namespace mode of an existing NFS share": {
+            "$ref": "./examples/FileSharesPatch_PreserveScaleMode.json"
+          },
           "UpdateShareAcls": {
             "$ref": "./examples/FileShareAclsPatch.json"
           },
@@ -13154,7 +13157,7 @@
     },
     "FileSharePatch": {
       "type": "object",
-      "description": "The parameters for updating a file share.",
+      "description": "The parameters for updating a file share without applying the creation-only Scale Namespace default. The existing mode is preserved when omitted. Attempts to change the mode return HTTP 400 with error code PropertyIsImmutable.",
       "properties": {
         "etag": {
           "type": "string",
@@ -13260,7 +13263,7 @@
         },
         "scaleMode": {
           "type": "string",
-          "description": "The mode of the Scale Namespace feature for the file share. Supported only for NFS shares in FileStorage Provisioned v2 accounts. If omitted on creation, the mode defaults to Compatibility. Can only be specified when creating the share and cannot be changed afterward. Get and list operations return Compatibility when no mode was specified.",
+          "description": "The mode of the Scale Namespace feature for the file share. Supported only for NFS shares in FileStorage Provisioned v2 accounts. If omitted when creating a share, the mode defaults to Compatibility. PATCH requests that omit this property preserve the existing mode. The mode cannot be changed after creation; an attempt to change it through PATCH returns HTTP 400 with error code PropertyIsImmutable. Get and list operations return Compatibility when no mode was specified at creation.",
           "default": "Compatibility",
           "enum": [
             "Compatibility",
