@@ -4426,14 +4426,6 @@
           "type": "string",
           "description": "The Azure Portal FQDN of the Fleet hub.",
           "readOnly": true
-        },
-        "placedMemberIds": {
-          "type": "array",
-          "description": "The resource IDs of the Fleet members where the current-generation ClusterResourcePlacement status reports the managed namespace as successfully applied. This property is omitted while current-generation placement status is unavailable, including while an update is being scheduled. An empty array indicates that current-generation placement status is available but the managed namespace is not successfully applied to any members.",
-          "items": {
-            "$ref": "#/definitions/FleetMemberResourceId"
-          },
-          "readOnly": true
         }
       },
       "required": [
@@ -4664,18 +4656,6 @@
         ]
       },
       "readOnly": true
-    },
-    "FleetMemberResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.ContainerService/fleets/members"
-          }
-        ]
-      }
     },
     "FleetMemberStatus": {
       "type": "object",
