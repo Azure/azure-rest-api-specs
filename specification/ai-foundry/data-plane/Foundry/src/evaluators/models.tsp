@@ -263,6 +263,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   pass_threshold?: float32;
 
   @doc("Simple scoring choices. Omission preserves existing legacy scoring for existing clients. No policy version is required from the caller.")
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
   scoring?: RubricScoring;
 }
 
@@ -280,6 +281,7 @@ model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Contract version for an endpoint-based evaluator.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EndpointEvaluatorSchemaVersion {
   string,
 
@@ -402,6 +404,7 @@ model EvaluatorGenerationInputs {
   evaluator_description?: string;
 
   @doc("Scoring choices for the generated evaluator. For quality, supplied scoring defaults to Likert; omitted weights on first creation yield equal contribution, and regeneration preserves saved choices. Omitting scoring preserves existing quality generation behavior. Safety generation resolves omitted scoring to Boolean and rejects a conflicting supplied mode; its dimensions use allowed rather than weights and its two metric results are not combined.")
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
   scoring?: RubricScoring;
 
   @doc("Optional normalized Likert threshold: omission uses 0.5 for fresh generation and inherits the saved threshold on regeneration. For ordinary Boolean generation, omit this field or set it to 1; other values are rejected and its all-pass threshold is fixed at 1. Safety generation omits this field because its two violation metrics have no overall threshold.")
@@ -538,6 +541,7 @@ model EvaluatorGenerationJob is JobLike<EvaluatorVersion, never> {
 
   @doc("Rubric scoring selected for this generation attempt, including an inherited saved mode. Omitted for legacy generation.")
   @visibility(Lifecycle.Read)
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
   scoring?: RubricScoring;
 
   @doc("Normalized pass threshold supplied or inherited for this generation attempt. Omitted when no threshold was supplied or saved. Boolean scoring always uses an effective threshold of 1.")
