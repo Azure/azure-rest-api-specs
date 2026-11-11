@@ -535,6 +535,28 @@ namespace Azure.AI.Projects {
   }
 
   /**
+   * The cloud computer provider.
+   */
+  @added(Versions.PuPr)
+  enum CloudComputerUsePreviewKind {
+    /**
+     * A Windows 365 Cloud PC.
+     */
+    Windows365CloudPc: "windows365_cloud_pc",
+  }
+
+  /**
+   * Configuration for the cloud computer use preview tool.
+   */
+  @added(Versions.PuPr)
+  model CloudComputerUsePreviewToolParameters {
+    /**
+     * The cloud computer provider. Only windows365_cloud_pc is supported.
+     */
+    kind: CloudComputerUsePreviewKind;
+  }
+
+  /**
    * The input definition information for a cloud computer use tool, as used to configure an agent.
    */
   @added(Versions.PuPr)
@@ -544,6 +566,11 @@ namespace Azure.AI.Projects {
      * The object type, which is always `cloud_computer_use_preview`.
      */
     type: "cloud_computer_use_preview";
+
+    /**
+     * Optional provider configuration. Omission retains the existing Windows 365 behavior.
+     */
+    cloud_computer_use_preview?: CloudComputerUsePreviewToolParameters;
   }
 
   /**

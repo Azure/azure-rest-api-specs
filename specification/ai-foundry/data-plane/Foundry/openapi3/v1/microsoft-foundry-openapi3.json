@@ -38620,6 +38620,13 @@
           ]
         }
       },
+      "CloudComputerUsePreviewKind": {
+        "type": "string",
+        "enum": [
+          "windows365_cloud_pc"
+        ],
+        "description": "The cloud computer provider."
+      },
       "CloudComputerUsePreviewTool": {
         "type": "object",
         "required": [
@@ -38632,6 +38639,10 @@
               "cloud_computer_use_preview"
             ],
             "description": "The object type, which is always `cloud_computer_use_preview`."
+          },
+          "cloud_computer_use_preview": {
+            "$ref": "#/components/schemas/CloudComputerUsePreviewToolParameters",
+            "description": "Optional provider configuration. Omission retains the existing Windows 365 behavior."
           }
         },
         "allOf": [
@@ -38646,6 +38657,19 @@
           ]
         }
       },
+      "CloudComputerUsePreviewToolParameters": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/CloudComputerUsePreviewKind",
+            "description": "The cloud computer provider. Only windows365_cloud_pc is supported."
+          }
+        },
+        "description": "Configuration for the cloud computer use preview tool."
+      },
       "CloudComputerUsePreviewToolboxTool": {
         "type": "object",
         "required": [
@@ -38657,6 +38681,10 @@
             "enum": [
               "cloud_computer_use_preview"
             ]
+          },
+          "cloud_computer_use_preview": {
+            "$ref": "#/components/schemas/CloudComputerUsePreviewToolParameters",
+            "description": "Optional provider configuration. Omission retains the existing Windows 365 behavior."
           }
         },
         "allOf": [
