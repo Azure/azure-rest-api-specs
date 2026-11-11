@@ -8,10 +8,8 @@ on:
     paths-ignore:
       - specification/**
       - eng/common/**
+  # Required checks must run even when a PR only changes excluded paths.
   pull_request:
-    paths-ignore:
-      - specification/**
-      - eng/common/**
   workflow_dispatch:
 
 permissions:
