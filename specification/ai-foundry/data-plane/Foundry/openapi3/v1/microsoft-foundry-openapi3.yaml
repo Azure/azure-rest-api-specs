@@ -1081,7 +1081,7 @@ paths:
           required: false
           description: Filter to jobs in this lifecycle state.
           schema:
-            $ref: '#/components/schemas/AgentOptimizationJobStatus'
+            $ref: '#/components/schemas/JobStatus'
           explode: false
         - name: agent_name
           in: query
@@ -45355,7 +45355,7 @@ components:
           readOnly: true
         error:
           $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
+          description: Error details, populated on failure or when a skipped job provides a reason.
           readOnly: true
         monitor_id:
           type: string
@@ -46215,7 +46215,7 @@ components:
           description: Result produced on success.
           readOnly: true
         status:
-          $ref: '#/components/schemas/AgentOptimizationJobStatus'
+          $ref: '#/components/schemas/JobStatus'
           description: Current lifecycle status.
           readOnly: true
         error:
@@ -46298,13 +46298,6 @@ components:
           $ref: '#/components/schemas/AgentOptimizationTerminationReason'
           description: Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.
       description: Partial or terminal result produced by an agent optimization job.
-    AgentOptimizationJobStatus:
-      anyOf:
-        - $ref: '#/components/schemas/JobStatus'
-        - type: string
-          enum:
-            - skipped
-      description: Optimization job lifecycle, including a terminal skip when required input is unavailable.
     AgentOptimizationJobTokenUsage:
       type: object
       required:
@@ -50197,7 +50190,7 @@ components:
           readOnly: true
         error:
           $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
+          description: Error details, populated on failure or when a skipped job provides a reason.
           readOnly: true
         name:
           type: string
@@ -52533,7 +52526,7 @@ components:
           readOnly: true
         error:
           $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
+          description: Error details, populated on failure or when a skipped job provides a reason.
           readOnly: true
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
@@ -53247,7 +53240,7 @@ components:
           readOnly: true
         error:
           $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
+          description: Error details, populated on failure or when a skipped job provides a reason.
           readOnly: true
         sources:
           type: array
@@ -55113,6 +55106,7 @@ components:
             - succeeded
             - failed
             - cancelled
+            - skipped
       description: Extensible status values shared by Foundry jobs.
     LatencySummary:
       type: object
@@ -96502,7 +96496,7 @@ components:
           readOnly: true
         error:
           $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
+          description: Error details, populated on failure or when a skipped job provides a reason.
           readOnly: true
         kind:
           $ref: '#/components/schemas/TelephonyCampaignOperationKind'

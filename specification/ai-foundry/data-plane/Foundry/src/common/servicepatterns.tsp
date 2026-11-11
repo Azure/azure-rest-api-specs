@@ -396,6 +396,10 @@ union JobStatus {
   /** Job was cancelled by the caller. */
   @lroCanceled
   cancelled: "cancelled",
+
+  /** Required input was unavailable, so the job was skipped. Terminal, but not evidence that output was produced; error explains the skip. */
+  @lroSucceeded
+  skipped: "skipped",
 }
 
 /**
@@ -426,7 +430,7 @@ model JobLike<
   @lroStatus
   status: TStatus;
 
-  /** Error details — populated only on failure. */
+  /** Error details, populated on failure or when a skipped job provides a reason. */
   @visibility(Lifecycle.Read)
   error?: ApiError;
 }

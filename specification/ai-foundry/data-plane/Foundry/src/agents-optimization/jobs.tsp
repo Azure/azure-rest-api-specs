@@ -129,21 +129,8 @@ model AgentOptimizationJobResult {
 // Job resource — extends JobLike per Foundry job guidelines
 // ---------------------------------------------------------------------------
 
-/** Optimization job lifecycle, including a terminal skip when required input is unavailable. */
-union AgentOptimizationJobStatus {
-  JobStatus,
-
-  @doc("Required input was unavailable and optimization was skipped. Terminal, but not evidence that skills were created; error explains the skip.")
-  @Azure.Core.lroSucceeded
-  skipped: "skipped",
-}
-
 @doc("Agent optimization job resource — a long-running job that produces candidate changes or versioned skill packages. For failed or skipped jobs, error explains the outcome; status distinguishes failure from a skip.")
-model AgentOptimizationJob is JobLike<
-  AgentOptimizationJobResult,
-  never,
-  AgentOptimizationJobStatus
-> {
+model AgentOptimizationJob is JobLike<AgentOptimizationJobResult> {
   @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
   @maxLength(256)
   display_name?: string;

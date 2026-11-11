@@ -1691,7 +1691,7 @@
             "required": false,
             "description": "Filter to jobs in this lifecycle state.",
             "schema": {
-              "$ref": "#/components/schemas/AgentOptimizationJobStatus"
+              "$ref": "#/components/schemas/JobStatus"
             },
             "explode": false
           },
@@ -41765,7 +41765,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details — populated only on failure.",
+            "description": "Error details, populated on failure or when a skipped job provides a reason.",
             "readOnly": true
           },
           "monitor_id": {
@@ -42977,7 +42977,7 @@
             "readOnly": true
           },
           "status": {
-            "$ref": "#/components/schemas/AgentOptimizationJobStatus",
+            "$ref": "#/components/schemas/JobStatus",
             "description": "Current lifecycle status.",
             "readOnly": true
           },
@@ -43088,20 +43088,6 @@
           }
         },
         "description": "Partial or terminal result produced by an agent optimization job."
-      },
-      "AgentOptimizationJobStatus": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/JobStatus"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "skipped"
-            ]
-          }
-        ],
-        "description": "Optimization job lifecycle, including a terminal skip when required input is unavailable."
       },
       "AgentOptimizationJobTokenUsage": {
         "type": "object",
@@ -48658,7 +48644,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details — populated only on failure.",
+            "description": "Error details, populated on failure or when a skipped job provides a reason.",
             "readOnly": true
           },
           "name": {
@@ -51676,7 +51662,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details — populated only on failure.",
+            "description": "Error details, populated on failure or when a skipped job provides a reason.",
             "readOnly": true
           },
           "created_at": {
@@ -52899,7 +52885,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details — populated only on failure.",
+            "description": "Error details, populated on failure or when a skipped job provides a reason.",
             "readOnly": true
           },
           "sources": {
@@ -55670,7 +55656,8 @@
               "in_progress",
               "succeeded",
               "failed",
-              "cancelled"
+              "cancelled",
+              "skipped"
             ]
           }
         ],
@@ -113196,7 +113183,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details — populated only on failure.",
+            "description": "Error details, populated on failure or when a skipped job provides a reason.",
             "readOnly": true
           },
           "kind": {
