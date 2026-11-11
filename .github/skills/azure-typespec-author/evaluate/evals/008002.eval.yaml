@@ -1,0 +1,57 @@
+name: azure-typespec-author-eval
+description: distinguish shipped, unshipped and unknown go names
+version: "1.0"
+type: capability
+tags:
+  area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 008002-respect-go-name-release-status-forced
+    tags:
+      suite: naming
+      mode: forced
+      language: go
+    prompt: |
+      Use the azure-typespec-author skill to review Go casing in this ARM TypeSpec project.
+      FooAbcOperation and preview ExistingTpmDetails have shipped.
+      ExistingAciSettings is confirmed unshipped; preview ExistingDpuSettings has unknown release status.
+      Docs define ABC, TPM, ACI, and DPU as acronyms; no related naming patterns exist.
+      Also review new WidgetProperties.count: int32.
+    rubric:
+      - Preserves the shipped FooAbcOperation and ExistingTpmDetails names, including the shipped preview name.
+      - Recommends ExistingACISettings for the confirmed-unshipped name, with any clientName override scoped to Go rather than renaming the TypeSpec declaration.
+      - Blocks the casing decision for ExistingDpuSettings pending release evidence; preview status alone does not justify renaming or unconditional preservation.
+      - Uses Count for the new count property without a redundant override and does not let the unknown release status block other confirmed recommendations.
+    constraints:
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azure-typespec-sdk-naming
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: go-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch)$
+      - type: prompt
+        config:
+          model: gpt-5.6-sol
+          scoring: binary
+          threshold: 1
+          prompt: >-
+            Pass only if all rubric criteria are met. Judge naming recommendations,
+            not response formatting. Reject unsupported claims that changes were
+            applied or generated names were verified.

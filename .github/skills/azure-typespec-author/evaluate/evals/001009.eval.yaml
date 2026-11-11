@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "versioning"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       In the TypeSpec project at `./Microsoft.Widget/Widget/`, make the `email` property required in EmployeeProperties only for version `2025-05-04-preview`.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/001-share-version-new-feature/employee.tsp
           dest: Microsoft.Widget/Widget/employee.tsp
@@ -53,7 +53,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author In the TypeSpec project at `./Microsoft.Widget/Widget/`, make the `email` property required in EmployeeProperties only for version `2025-05-04-preview`.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: &shared_rubric
       - EmployeeProperties.email becomes required only in API version 2025-05-04-preview using valid TypeSpec versioning.
       - The email property remains optional in earlier API versions.
@@ -102,7 +102,7 @@ stimuli:
       suite: "versioning"
       mode: "no-skill"
     prompt: "In the TypeSpec project at `./Microsoft.Widget/Widget/`, make the `email` property required in EmployeeProperties only for version `2025-05-04-preview`."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: *shared_rubric
     graders:
       - type: "tool-calls"
