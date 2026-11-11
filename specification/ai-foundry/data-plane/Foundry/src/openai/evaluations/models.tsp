@@ -618,7 +618,7 @@ model EvalCsvFileIdSource {
  *
  * See [evaluation datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluation-datasets).
  */
-model EvalCsvRunDataSource extends EvalRunDataSource {
+model CsvEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `csv`. */
   type: "csv";
 
@@ -670,7 +670,7 @@ union TraceSourceType {
   agentFilter: "agent_filter",
 }
 
-/** Base class for polymorphic trace sources nested within an AzureAITraceDataSourceEvalRunDataSource. */
+/** Base class for polymorphic trace sources nested within a TraceSourceEvalRunDataSource. */
 @discriminator("type")
 model TraceSource {
   /** The discriminator that identifies which kind of trace source this is. */
@@ -740,7 +740,7 @@ model AgentFilterTraceSource extends TraceSource {
  *
  * See [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python).
  */
-model AzureAITraceDataSourceEvalRunDataSource extends EvalRunDataSource {
+model TraceSourceEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_trace_data_source`. */
   type: "azure_ai_trace_data_source";
 
@@ -800,7 +800,7 @@ model UserConversationSimulationEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | SyntheticDataGenerationWithSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourceEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | SyntheticDataGenerationWithSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | TraceSourceEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -968,7 +968,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | SyntheticDataGenerationWithSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourceEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | SyntheticDataGenerationWithSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | TraceSourceEvalRunDataSource */
 );
 
 @@doc(
