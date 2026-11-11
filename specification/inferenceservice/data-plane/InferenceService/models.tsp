@@ -17,7 +17,6 @@ union DocumentType {
 }
 
 /** The input for a semantic reranking operation. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "This request model is the options bag passed to SemanticRerank, so the Options suffix is intended."
 model SemanticRerankingInferenceContent {
   /** The query used to rank the documents. */
   @maxLength(2147483647)

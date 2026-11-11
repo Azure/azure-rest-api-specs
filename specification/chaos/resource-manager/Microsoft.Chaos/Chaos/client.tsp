@@ -4,6 +4,13 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
+// Go
+@@clientName(
+  WorkspaceDiscoveryWarningReason.RbacValidationFailed,
+  "RBACValidationFailed",
+  "go"
+);
+
 // csharp
 @@clientName(
   WorkspaceCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
