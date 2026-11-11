@@ -73,6 +73,11 @@ directive:
     suppress: PatchBodyParametersSchema
     reason: Connector and DataShare PATCH carry forward their existing polymorphic discriminator requirements. Blob Access Point also requires a source discriminator to select the concrete polymorphic shape being updated.
 
+  - from: openapi.json
+    where: $.definitions.FileShareUpdateProperties.properties.metadata
+    suppress: AvoidAdditionalProperties
+    reason: FileShareUpdateProperties.metadata preserves the string-to-string metadata dictionary accepted by FileShareProperties in stable API version 2026-09-01. The separate PATCH model excludes only the new create-only scaleMode property. Removing or restricting metadata would break existing PATCH requests.
+
   - where:
     - $.definitions["Azure.Core.uuid"].format
     suppress: GuidUsage

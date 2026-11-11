@@ -45,6 +45,14 @@ model FileShareUpdateProperties is OmitProperties<
  * The parameters for updating a file share.
  */
 model FileSharePatch {
+  ...OmitProperties<CommonTypes.AzureEntityResource, "type">;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts".
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
   /**
    * The resource-specific properties for this resource.
    */
