@@ -5144,18 +5144,6 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 );
 
 @@clientName(
-  Microsoft.Network.DdosSettingsProtectionMode,
-  "DdosSettingsProtectionCoverage",
-  "csharp"
-);
-
-@@clientName(
-  Microsoft.Network.DdosTrafficType,
-  "DdosCustomPolicyProtocol",
-  "csharp"
-);
-
-@@clientName(
   Microsoft.Network.DisassociateCloudServicePublicIpRequest,
   "DisassociateCloudServicePublicIPContent",
   "csharp"
@@ -6647,12 +6635,6 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 @@alternateType(
   Microsoft.Network.PublicIpDdosProtectionStatusResult.publicIpAddressId,
-  armResourceIdentifier,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.QueryInboundNatRulePortMappingRequest.ipConfiguration,
   armResourceIdentifier,
   "csharp"
 );
