@@ -190,14 +190,26 @@ namespace Azure.AI.FineTuning.Sessions;
 @@usage(Customization.Cursor, Usage.input | Usage.output, "python");
 @@usage(Customization.LossFnConfig, Usage.input | Usage.output, "python");
 @@usage(Customization.Datum, Usage.input | Usage.output, "python");
-@@usage(Customization.ForwardBackwardInput, Usage.input | Usage.output, "python");
-@@usage(Customization.ForwardBackwardRequest, Usage.input | Usage.output, "python");
+@@usage(
+  Customization.ForwardBackwardInput,
+  Usage.input | Usage.output,
+  "python"
+);
+@@usage(
+  Customization.ForwardBackwardRequest,
+  Usage.input | Usage.output,
+  "python"
+);
 @@usage(Customization.ForwardRequest, Usage.input | Usage.output, "python");
 @@usage(Customization.OptimStepRequest, Usage.input | Usage.output, "python");
 @@usage(Customization.Session, Usage.input | Usage.output, "python");
 @@usage(Customization.SessionList, Usage.input | Usage.output, "python");
 @@usage(Customization.CheckpointList, Usage.input | Usage.output, "python");
-@@usage(Customization.SaveCheckpointRequest, Usage.input | Usage.output, "python");
+@@usage(
+  Customization.SaveCheckpointRequest,
+  Usage.input | Usage.output,
+  "python"
+);
 
 // Only genuine compatibility exceptions use alternate types. Optional Python
 // constructors and legacy result classes are not alternate server contracts.
