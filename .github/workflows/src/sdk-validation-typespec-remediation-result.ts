@@ -151,7 +151,7 @@ export function validateTypeSpecRemediationResult(
   rawReviewResultValue: unknown,
   typeSpecContextValue: unknown,
   remediationResultValue: unknown,
-  _existingReportMarkdown?: string,
+  existingReportMarkdown?: string,
 ): {
   result: {
     schemaVersion: 1;
@@ -251,14 +251,21 @@ export function validateTypeSpecRemediationResult(
     actualKeys.add(key);
     // Raw skill output omits canonical fields. A normalized artifact reaching
     // the publisher includes them, so revalidation must reject any tampering.
+    const canonicalFieldsMatch =
+      value.severity === expected.finding.severity &&
+      value.title === expected.finding.title &&
+      value.evidence === expected.finding.description &&
+      isRecord(value.generatedLocation) &&
+      value.generatedLocation.file === expected.finding.file &&
+      value.generatedLocation.line === expected.finding.line;
+    const hasCanonicalFields =
+      value.severity !== undefined ||
+      value.title !== undefined ||
+      value.evidence !== undefined ||
+      value.generatedLocation !== undefined;
     if (
-      (value.severity !== undefined && value.severity !== expected.finding.severity) ||
-      (value.title !== undefined && value.title !== expected.finding.title) ||
-      (value.evidence !== undefined && value.evidence !== expected.finding.description) ||
-      (value.generatedLocation !== undefined &&
-        (!isRecord(value.generatedLocation) ||
-          value.generatedLocation.file !== expected.finding.file ||
-          value.generatedLocation.line !== expected.finding.line))
+      (existingReportMarkdown !== undefined && !canonicalFieldsMatch) ||
+      (existingReportMarkdown === undefined && hasCanonicalFields && !canonicalFieldsMatch)
     ) {
       throw new Error(`${findingLabel} does not match its canonical SDK finding`);
     }
@@ -273,11 +280,13 @@ export function validateTypeSpecRemediationResult(
     if (!CONFIDENCE_LEVELS.includes(confidence)) {
       throw new Error(`${findingLabel} has an invalid remediation confidence`);
     }
+    const hasOnlyCsharpScope =
+      Array.isArray(value.remediation.languageScopes) &&
+      value.remediation.languageScopes.length === 1 &&
+      value.remediation.languageScopes[0] === "csharp";
     if (
-      value.remediation.languageScopes !== undefined &&
-      (!Array.isArray(value.remediation.languageScopes) ||
-        value.remediation.languageScopes.length !== 1 ||
-        value.remediation.languageScopes[0] !== "csharp")
+      (existingReportMarkdown !== undefined && !hasOnlyCsharpScope) ||
+      (value.remediation.languageScopes !== undefined && !hasOnlyCsharpScope)
     ) {
       throw new Error(`${findingLabel} remediation.languageScopes must contain only csharp`);
     }
@@ -308,6 +317,9 @@ export function validateTypeSpecRemediationResult(
     };
   });
 
+  if (existingReportMarkdown !== undefined && existingReportMarkdown.trim().length === 0) {
+    throw new Error("TypeSpec remediation Markdown report must not be empty");
+  }
   return {
     result: {
       schemaVersion: 1,

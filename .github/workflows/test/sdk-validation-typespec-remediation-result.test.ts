@@ -193,6 +193,32 @@ describe("validateTypeSpecRemediationResult", () => {
         rawReviewResult,
         typeSpecContext,
         normalized,
+        "# TypeSpec remediation\n",
+      ),
+    ).toThrow("does not match its canonical SDK finding");
+  });
+
+  it("requires canonical fields in normalized publisher artifacts", () => {
+    const normalized = validateTypeSpecRemediationResult(
+      reviewContext,
+      rawReviewResult,
+      typeSpecContext,
+      createResult(),
+    ).result;
+    const incomplete = structuredClone(normalized) as unknown as {
+      findings: Array<Record<string, unknown>>;
+    };
+    delete incomplete.findings[0].title;
+    delete incomplete.findings[0].evidence;
+    delete incomplete.findings[0].generatedLocation;
+
+    expect(() =>
+      validateTypeSpecRemediationResult(
+        reviewContext,
+        rawReviewResult,
+        typeSpecContext,
+        incomplete,
+        "# TypeSpec remediation\n",
       ),
     ).toThrow("does not match its canonical SDK finding");
   });
@@ -213,6 +239,7 @@ describe("validateTypeSpecRemediationResult", () => {
         rawReviewResult,
         typeSpecContext,
         normalized,
+        "# TypeSpec remediation\n",
       ),
     ).toThrow("languageScopes must contain only csharp");
   });
