@@ -8,8 +8,7 @@ export const MAX_SUMMARY_FINDINGS = 100;
 export const MAX_SUMMARY_BODY_LENGTH = 60_000;
 
 const BOT_LOGIN = "github-actions[bot]";
-const INLINE_MARKER_PATTERN =
-  /<!-- generated-dotnet-sdk-review-inline:(\d+):(\d+) -->/;
+const INLINE_MARKER_PATTERN = /<!-- generated-dotnet-sdk-review-inline:(\d+):(\d+) -->/;
 
 type SourceLocation = {
   file: string;
@@ -55,9 +54,8 @@ function truncate(value: string, maximumLength: number): string {
 function sanitizeMarkdownText(value: string, maximumLength = 1000): string {
   return truncate(
     value
-      .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\u202A-\u202E\u2066-\u2069]/g, "")
-      .replaceAll("\\", "\\\\")
-      .replace(/([`*_#[\]<>|])/g, "\\$1")
+      .replace(/\p{Cc}|[\u202A-\u202E\u2066-\u2069]/gu, "")
+      .replace(/([\\`*_#[\]<>|])/g, "\\$1")
       .replace(/@(?=[A-Za-z0-9])/g, "@\u200B")
       .trim(),
     maximumLength,
@@ -67,7 +65,7 @@ function sanitizeMarkdownText(value: string, maximumLength = 1000): string {
 function inlineCode(value: string): string {
   return `\`${truncate(
     value
-      .replace(/[\u0000-\u001F\u007F]/g, " ")
+      .replace(/\p{Cc}/gu, " ")
       .replaceAll("`", "'")
       .trim(),
     500,
@@ -159,10 +157,7 @@ export function buildSdkReviewSummary(params: {
   return lines.join("\n");
 }
 
-export function buildSdkReviewFailureSummary(
-  headSha: string,
-  workflowRunUrl: string,
-): string {
+export function buildSdkReviewFailureSummary(headSha: string, workflowRunUrl: string): string {
   return [
     "## Generated .NET SDK review",
     "",

@@ -9,7 +9,7 @@ on: # zizmor: ignore[dangerous-triggers] Only default-branch workflow code runs 
 permissions: {}
 
 concurrency:
-  group: publish-generated-dotnet-sdk-review
+  group: publish-generated-dotnet-sdk-review-${{ github.event.workflow_run.id }}
   cancel-in-progress: false
 
 jobs:

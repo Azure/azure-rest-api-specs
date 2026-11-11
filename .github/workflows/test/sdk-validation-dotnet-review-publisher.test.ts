@@ -34,7 +34,12 @@ async function createFixture(): Promise<{
     workspaces: [
       {
         baselineCommitSha: BASELINE_SHA,
-        packages: [{ packageName: "Azure.Widget" }],
+        packages: [
+          {
+            packageName: "Azure.Widget",
+            changedFiles: ["sdk/widget/Azure.Widget/src/Generated/Widget.cs"],
+          },
+        ],
       },
     ],
   };
@@ -101,7 +106,10 @@ async function createFixture(): Promise<{
   };
   await Promise.all([
     writeJson(publicationContextPath, typeSpecContext),
-    writeJson(path.join(resultRootPath, "sdk-review-workspaces", "sdk-review-context.json"), reviewContext),
+    writeJson(
+      path.join(resultRootPath, "sdk-review-workspaces", "sdk-review-context.json"),
+      reviewContext,
+    ),
     writeJson(path.join(resultRootPath, "sdk-review-result.json"), rawResult),
     writeFile(path.join(resultRootPath, "sdk-review-result.md"), "# SDK review\n"),
     writeJson(
@@ -120,9 +128,9 @@ async function createFixture(): Promise<{
 afterEach(async () => {
   const { rm } = await import("node:fs/promises");
   await Promise.all(
-    temporaryDirectories.splice(0).map((directory) =>
-      rm(directory, { recursive: true, force: true }),
-    ),
+    temporaryDirectories
+      .splice(0)
+      .map((directory) => rm(directory, { recursive: true, force: true })),
   );
 });
 
@@ -160,12 +168,12 @@ describe("publishSdkReviewResult", () => {
       workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
     });
 
-    expect(github.rest.issues.createComment).toHaveBeenCalledWith(
-      expect.objectContaining({
-        issue_number: 42,
-        body: expect.stringContaining("did not finish"),
-      }),
-    );
+    const failureComment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      issue_number: number;
+      body: string;
+    };
+    expect(failureComment.issue_number).toBe(42);
+    expect(failureComment.body).toContain("did not finish");
     expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
   });
 
@@ -184,12 +192,12 @@ describe("publishSdkReviewResult", () => {
     });
 
     expect(github.rest.pulls.createReviewComment).toHaveBeenCalledTimes(1);
-    expect(github.rest.issues.createComment).toHaveBeenCalledWith(
-      expect.objectContaining({
-        issue_number: 42,
-        body: expect.stringContaining("Posted 1 exact changed-line comment"),
-      }),
-    );
+    const summaryComment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      issue_number: number;
+      body: string;
+    };
+    expect(summaryComment.issue_number).toBe(42);
+    expect(summaryComment.body).toContain("Posted 1 exact changed-line comment");
   });
 
   it("rejects results for a different source than the trusted publication context", async () => {
@@ -199,7 +207,9 @@ describe("publishSdkReviewResult", () => {
       "sdk-review-workspaces",
       "sdk-review-context.json",
     );
-    const reviewContext = JSON.parse(await (await import("node:fs/promises")).readFile(reviewContextPath, "utf8"));
+    const reviewContext = JSON.parse(
+      await (await import("node:fs/promises")).readFile(reviewContextPath, "utf8"),
+    ) as { source: { specPrNumber: number } };
     reviewContext.source.specPrNumber = 99;
     await writeJson(reviewContextPath, reviewContext);
     const github = createMockGithub();
@@ -218,6 +228,47 @@ describe("publishSdkReviewResult", () => {
 
     expect(github.rest.pulls.get).not.toHaveBeenCalled();
     expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+  });
+
+  it("validates exact-line mappings against the protected pre-agent context", async () => {
+    const fixture = await createFixture();
+    const remediationResultPath = path.join(
+      fixture.resultRootPath,
+      "typespec-remediation-result.json",
+    );
+    const remediationResult = JSON.parse(
+      await (await import("node:fs/promises")).readFile(remediationResultPath, "utf8"),
+    ) as {
+      findings: Array<{
+        remediation: { sourceLocation: { line: number } };
+      }>;
+    };
+    remediationResult.findings[0].remediation.sourceLocation.line = 2;
+    await writeJson(remediationResultPath, remediationResult);
+    const resultContextPath = path.join(
+      fixture.resultRootPath,
+      "sdk-review-input",
+      "typespec-review-context.json",
+    );
+    const resultContext = JSON.parse(
+      await (await import("node:fs/promises")).readFile(resultContextPath, "utf8"),
+    ) as { files: Array<{ patch: string }> };
+    resultContext.files[0].patch =
+      "@@ -1,3 +1,3 @@\n model Widget {\n-  oldName: string;\n+  name: string;\n }";
+    await writeJson(resultContextPath, resultContext);
+    const github = createMockGithub();
+
+    await expect(
+      publishSdkReviewResult({
+        githubScript: { github, context: createMockContext(), core: createMockCore() },
+        ...fixture,
+        workflowConclusion: "success",
+        workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+      }),
+    ).rejects.toThrow("is not changed by the spec PR");
+
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
     expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
   });
 });

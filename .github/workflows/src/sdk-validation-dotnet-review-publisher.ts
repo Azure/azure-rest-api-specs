@@ -91,34 +91,22 @@ export async function publishSdkReviewResult(params: {
     );
     const rawResultPath = path.join(resultRootPath, "sdk-review-result.json");
     const rawReportPath = path.join(resultRootPath, "sdk-review-result.md");
-    const typeSpecContextPath = path.join(
-      resultRootPath,
-      "sdk-review-input",
-      "typespec-review-context.json",
-    );
     const remediationResultPath = path.join(resultRootPath, "typespec-remediation-result.json");
     const remediationReportPath = path.join(resultRootPath, "typespec-remediation-result.md");
-    const [
-      reviewContext,
-      rawResult,
-      rawReport,
-      typeSpecContext,
-      remediationResultValue,
-      remediationReport,
-    ] = await Promise.all([
-      readJson(reviewContextPath),
-      readJson(rawResultPath),
-      readFile(rawReportPath, "utf8"),
-      readJson(typeSpecContextPath),
-      readJson(remediationResultPath),
-      readFile(remediationReportPath, "utf8"),
-    ]);
+    const [reviewContext, rawResult, rawReport, remediationResultValue, remediationReport] =
+      await Promise.all([
+        readJson(reviewContextPath),
+        readJson(rawResultPath),
+        readFile(rawReportPath, "utf8"),
+        readJson(remediationResultPath),
+        readFile(remediationReportPath, "utf8"),
+      ]);
     validateResultSource(reviewContext, publicationContext);
     validateSdkReviewResult(reviewContext, rawResult, rawReport);
     validateTypeSpecRemediationResult(
       reviewContext,
       rawResult,
-      typeSpecContext,
+      publicationContext,
       remediationResultValue,
       remediationReport,
     );
