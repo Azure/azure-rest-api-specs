@@ -1606,6 +1606,7 @@ paths:
       x-ms-summary-override: Create an agent
       x-ms-foundry-meta:
         conditional_previews:
+          - A2AAgents=V1Preview
           - WorkflowAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
@@ -1823,6 +1824,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-description-override: Updates the agent by adding a new version if there are any changes to the agent definition. If no changes, returns the existing agent version.
       x-ms-summary-override: Update an agent
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
       tags:
         - Agents
       requestBody:
@@ -1893,6 +1897,14 @@ paths:
       summary: Update an agent endpoint
       description: Applies a merge-patch update to the specified agent endpoint configuration.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - A2AAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1934,6 +1946,9 @@ paths:
           application/merge-patch+json:
             schema:
               $ref: '#/components/schemas/PatchAgentRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
   /agents/{agent_name}/code:download:
     get:
       operationId: Agents_downloadAgentCode
@@ -4754,6 +4769,14 @@ paths:
         Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.
         If no changes, returns the existing agent version.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - A2AAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -4794,6 +4817,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAgentFromManifestRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
   /agents/{agent_name}/microsoft365/publish:
     post:
       operationId: Microsoft365Publishing_publishAgentToMicrosoft365
@@ -6963,6 +6989,7 @@ paths:
       x-ms-summary-override: Create an agent version
       x-ms-foundry-meta:
         conditional_previews:
+          - A2AAgents=V1Preview
           - WorkflowAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
@@ -7291,6 +7318,14 @@ paths:
       summary: Create an agent version from manifest
       description: Imports the provided manifest to create a new version for the specified agent.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - A2AAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -7336,6 +7371,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentVersionFromManifestRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
   /agents/{agent_name}:disable:
     post:
       operationId: Agents_disableAgent
@@ -7462,6 +7500,14 @@ paths:
       summary: Create an agent from a manifest
       description: Imports the provided manifest to create an agent and returns the created resource.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - A2AAgents=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7496,6 +7542,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentFromManifestRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
   /connections:
     get:
       operationId: Connections_list
@@ -44188,7 +44237,10 @@ components:
           - preview_tool
     A2AProtocolConfiguration:
       type: object
-      description: Configuration specific to the A2A protocol.
+      description: (Preview) Configuration specific to the A2A protocol.
+      x-ms-foundry-meta:
+        required_previews:
+          - A2AAgents=V1Preview
     A2AProtocolVersion:
       anyOf:
         - type: string
@@ -44575,6 +44627,7 @@ components:
     AgentDefinitionOptInKeys:
       type: string
       enum:
+        - A2AAgents=V1Preview
         - WorkflowAgents=V1Preview
         - ExternalAgents=V1Preview
         - DraftAgents=V1Preview
@@ -44652,6 +44705,9 @@ components:
             - voice
             - invocations_ws
             - voice_conversation_engine
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
     AgentEvaluatorGenerationJobSource:
       type: object
       required:
@@ -49141,6 +49197,7 @@ components:
           description: The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.
           x-ms-foundry-meta:
             conditional_previews:
+              - A2AAgents=V1Preview
               - WorkflowAgents=V1Preview
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
@@ -49172,6 +49229,7 @@ components:
           description: Optional agent card for the agent
       x-ms-foundry-meta:
         conditional_previews:
+          - A2AAgents=V1Preview
           - WorkflowAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
@@ -49287,6 +49345,7 @@ components:
           description: The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.
           x-ms-foundry-meta:
             conditional_previews:
+              - A2AAgents=V1Preview
               - WorkflowAgents=V1Preview
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
@@ -90957,7 +91016,10 @@ components:
           description: Configuration for the responses protocol.
         a2a:
           $ref: '#/components/schemas/A2AProtocolConfiguration'
-          description: Configuration for the A2A protocol.
+          description: (Preview) Configuration for the A2A protocol.
+          x-ms-foundry-meta:
+            required_previews:
+              - A2AAgents=V1Preview
         mcp:
           $ref: '#/components/schemas/McpProtocolConfiguration'
           description: Configuration for the MCP protocol.
@@ -90968,6 +91030,9 @@ components:
           $ref: '#/components/schemas/InvocationsWsProtocolConfiguration'
           description: Configuration for the WebSocket-based invocations protocol.
       description: Per-protocol configuration for the agent endpoint.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
     ProtocolVersionRecord:
       type: object
       required:
@@ -96369,6 +96434,7 @@ components:
           description: The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.
           x-ms-foundry-meta:
             conditional_previews:
+              - A2AAgents=V1Preview
               - WorkflowAgents=V1Preview
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
@@ -96381,6 +96447,7 @@ components:
           description: The blueprint reference for the agent.
       x-ms-foundry-meta:
         conditional_previews:
+          - A2AAgents=V1Preview
           - WorkflowAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview

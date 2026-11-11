@@ -15,13 +15,35 @@ in order to enable preview features on these GA routes.
 
 | Operation Group | Operation | Method | Path | Foundry-Features Header Value |
 |-----------------|-----------|--------|------|-------------------------------|
-| Agents | Create | POST | `/agents` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
-| Agents | Update | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
-| Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
+| Agents | Create (JSON or code upload) | POST | `/agents` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview`, `A2AAgents=V1Preview` |
+| Agents | Update (JSON or code upload) | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview`, `A2AAgents=V1Preview` |
+| Agents | Create Version (JSON or code upload) | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview`, `A2AAgents=V1Preview` |
+| Agents | Update Endpoint | PATCH | `/agents/{agent_name}` | Required when creating or modifying A2A configuration: `A2AAgents=V1Preview` |
+| Agents | Create From Manifest | POST | `/agents:import` | Required when the materialized agent enables A2A: `A2AAgents=V1Preview` |
+| Agents | Update From Manifest | POST | `/agents/{agent_name}/import` | Required when the materialized agent enables A2A: `A2AAgents=V1Preview` |
+| Agents | Create Version From Manifest | POST | `/agents/{agent_name}/versions:import` | Required when the materialized agent version enables A2A: `A2AAgents=V1Preview` |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
 | Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required for `type: conversations`, `type: traces` with `generate_test_case_rubric: true`, `scenario: supervised_finetuning_preview`, or `scenario: reinforcement_finetuning_preview`: `DataGenerationJobs=V1Preview`; not required for ordinary evaluation turn samples without rubric generation |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
+
+### A2A agents
+
+Creating or modifying A2A-enabled agents requires
+`Foundry-Features: A2AAgents=V1Preview`. This includes selecting `a2a` in
+`protocol_versions` (or the legacy preview-only `container_protocol_versions`
+and endpoint `protocols` fields), setting
+`agent_endpoint.protocol_configuration.a2a`, and importing a manifest that
+materializes A2A configuration. The header is supported on JSON and multipart
+code-upload writes, endpoint PATCH, and manifest imports in both `v1` and
+`virtual-public-preview`.
+
+These are shared operations: the header remains optional in OpenAPI and is
+required only when creating or modifying A2A configuration. Other protocols
+and agent-card-only updates do not require the A2A opt-in. Getting, listing,
+deleting, or referencing existing A2A-enabled agents does not require it.
+The `x-ms-foundry-meta` annotations describe this preview contract; they do
+not implement runtime enforcement.
 
 ## v1 Preview routes with required "Foundry-Features" HTTP header to enable preview features
 

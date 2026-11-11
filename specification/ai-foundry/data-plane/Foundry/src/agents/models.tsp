@@ -48,6 +48,7 @@ namespace Azure.AI.ProjectsInternal {
 namespace Azure.AI.Projects {
   const AllConditionalAgentDefinitionPreviews = #{
     conditional_previews: #[
+      AgentDefinitionOptInKeys.a2a_agents_v1_preview,
       AgentDefinitionOptInKeys.workflow_agents_v1_preview,
       AgentDefinitionOptInKeys.voice_agents_v1_preview,
       AgentDefinitionOptInKeys.draft_agents_v1_preview,
@@ -332,11 +333,18 @@ namespace Azure.AI.Projects {
     deleted: "deleted",
   }
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
   union AgentEndpointProtocol {
     string,
     activity: "activity",
     responses: "responses",
+
+    @doc("(Preview) The A2A protocol. Creating or modifying an agent to use this protocol requires `Foundry-Features: A2AAgents=V1Preview`.")
     a2a: "a2a",
+
     mcp: "mcp",
     invocations: "invocations",
     voice: "voice",
@@ -887,6 +895,10 @@ namespace Azure.AI.Projects {
   }
 
   @doc("Per-protocol configuration for the agent endpoint.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
   model ProtocolConfiguration {
     @doc("Configuration for the activity protocol.")
     activity?: ActivityProtocolConfiguration;
@@ -894,7 +906,11 @@ namespace Azure.AI.Projects {
     @doc("Configuration for the responses protocol.")
     responses?: ResponsesProtocolConfiguration;
 
-    @doc("Configuration for the A2A protocol.")
+    @doc("(Preview) Configuration for the A2A protocol.")
+    @extension(
+      "x-ms-foundry-meta",
+      #{ required_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+    )
     a2a?: A2AProtocolConfiguration;
 
     @doc("Configuration for the MCP protocol.")
@@ -979,7 +995,11 @@ namespace Azure.AI.Projects {
   @doc("Configuration specific to the responses protocol.")
   model ResponsesProtocolConfiguration {}
 
-  @doc("Configuration specific to the A2A protocol.")
+  @doc("(Preview) Configuration specific to the A2A protocol.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
   model A2AProtocolConfiguration {}
 
   @doc("Configuration specific to the MCP protocol.")

@@ -74,7 +74,9 @@ interface Agents {
   @route("/agents")
   @sharedRoute
   @tag("Agents")
-  createAgentFromCode is FoundryDataPlaneOperation<
+  @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
+  createAgentFromCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
     {
       /** The content type of the request body. */
       @header contentType: "multipart/form-data";
@@ -131,7 +133,12 @@ interface Agents {
   @route("/agents/{agent_name}")
   @sharedRoute
   @tag("Agents")
-  updateAgentFromCode is FoundryDataPlaneOperation<
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
+  updateAgentFromCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -163,7 +170,12 @@ interface Agents {
   @post
   @route("/agents:import")
   @tag("Agents")
-  createAgentFromManifest is FoundryDataPlaneOperation<
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
+  createAgentFromManifest is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.a2a_agents_v1_preview,
     CreateAgentFromManifestRequest,
     AgentObject
   >;
@@ -176,7 +188,12 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/import")
   @tag("Agents")
-  updateAgentFromManifest is FoundryDataPlaneOperation<
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
+  updateAgentFromManifest is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.a2a_agents_v1_preview,
     {
       /** The name of the agent to update. */
       @path agent_name: string;
@@ -259,7 +276,12 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/versions:import")
   @tag("Agent Versions")
-  createAgentVersionFromManifest is FoundryDataPlaneOperation<
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
+  createAgentVersionFromManifest is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.a2a_agents_v1_preview,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -362,7 +384,12 @@ interface Agents {
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")
   @tag("Agents")
-  patchAgentObject is FoundryDataPlaneOperation<
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
+  patchAgentObject is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.a2a_agents_v1_preview,
     {
       /** The name of the agent to retrieve. */
       @summary("The name of the agent to retrieve")
@@ -390,7 +417,9 @@ interface Agents {
   @route("/agents/{agent_name}/versions")
   @sharedRoute
   @tag("Agent Versions")
-  createAgentVersionFromCode is FoundryDataPlaneOperation<
+  @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
+  createAgentVersionFromCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
