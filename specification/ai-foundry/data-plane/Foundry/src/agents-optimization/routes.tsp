@@ -67,7 +67,7 @@ interface AgentOptimizationJobs {
     {
       @doc("Filter to jobs in this lifecycle state.")
       @query
-      status?: AgentOptimizationJobStatus;
+      status?: JobStatus;
 
       @doc("Filter to jobs targeting this agent name.")
       @query
