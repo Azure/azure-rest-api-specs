@@ -156,6 +156,17 @@ using Azure.AI.Projects;
   "python"
 );
 
+// Preserve the enum member names released in Python 2.10.0 to avoid a source-breaking rename.
+// These Python-only overrides do not change wire values or JavaScript names.
+@@clientName(ActivityProtocolAccessBoundary.read_1on1_manager, "READ1_ON1_MANAGER", "python");
+@@clientName(ActivityProtocolAccessBoundary.read_1on1_developers, "READ1_ON1_DEVELOPERS", "python");
+@@clientName(ActivityProtocolAccessBoundary.read_1on1_allowlisted, "READ1_ON1_ALLOWLISTED", "python");
+@@clientName(ActivityProtocolAccessBoundary.read_1on1_tenant, "READ1_ON1_TENANT", "python");
+@@clientName(ActivityProtocolAccessBoundary.write_1on1_manager, "WRITE1_ON1_MANAGER", "python");
+@@clientName(ActivityProtocolAccessBoundary.write_1on1_developers, "WRITE1_ON1_DEVELOPERS", "python");
+@@clientName(ActivityProtocolAccessBoundary.write_1on1_allowlisted, "WRITE1_ON1_ALLOWLISTED", "python");
+@@clientName(ActivityProtocolAccessBoundary.write_1on1_tenant, "WRITE1_ON1_TENANT", "python");
+
 // Exclude these operations entirely from the Python SDK.
 // Note that JavaScript SDK already shipped 2.0.0 with these, so they can't be removed.
 @@scope(Agents.createAgent, "!(python)");
