@@ -1897,6 +1897,14 @@ paths:
       summary: Update an agent endpoint
       description: Applies a merge-patch update to the specified agent endpoint configuration.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - A2AAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1938,6 +1946,9 @@ paths:
           application/merge-patch+json:
             schema:
               $ref: '#/components/schemas/PatchAgentRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
   /agents/{agent_name}/code:download:
     get:
       operationId: Agents_downloadAgentCode

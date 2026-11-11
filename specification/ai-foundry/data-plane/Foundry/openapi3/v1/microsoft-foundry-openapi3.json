@@ -2890,6 +2890,18 @@
         "description": "Applies a merge-patch update to the specified agent endpoint configuration.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A2AAgents=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -2954,6 +2966,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "A2AAgents=V1Preview"
+          ]
         }
       }
     },
