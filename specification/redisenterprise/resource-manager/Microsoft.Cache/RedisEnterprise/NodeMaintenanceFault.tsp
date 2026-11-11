@@ -90,7 +90,10 @@ union NodeMaintenanceFaultStatus {
 
 /** Parameters for polling the result of deleting a node maintenance fault. */
 alias NodeMaintenanceFaultOperationResultParameters = {
-  ...ResourceInstanceParameters<NodeMaintenanceFault>;
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ProviderNamespace<NodeMaintenanceFault>;
+  ...LocationResourceParameter;
   ...Azure.ResourceManager.CommonTypes.OperationIdParameter;
 };
 
@@ -136,7 +139,7 @@ interface NodeMaintenanceFaults {
 
 @@segment(
   NodeMaintenanceFaultOperationResultParameters.operationId,
-  "operationresults"
+  "operationResults"
 );
 
 @@doc(
