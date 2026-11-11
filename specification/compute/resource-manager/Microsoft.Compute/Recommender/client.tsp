@@ -45,9 +45,11 @@ using Microsoft.Compute;
   "ComputeRecommenderGenerateResult",
   "csharp"
 );
+@@clientName(SpotPlacementScoresBase, "ComputeRecommenderDiagnostic", "csharp");
+// Preserve the GA flattened property name on ComputeRecommenderDiagnostic.
 @@clientName(
-  SpotPlacementScoresBase,
-  "ComputeRecommenderPlacementScores",
+  PlacementScoresProperties.supportedResourceTypes,
+  "ComputeRecommenderDiagnosticSupportedResourceTypes",
   "csharp"
 );
 @@clientName(SpotPlacementScores.post, "generate", "csharp");
