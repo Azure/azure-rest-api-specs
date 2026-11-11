@@ -10,9 +10,9 @@
 // Do not mark them internal merely because they support SDK custom code.
 // Any future internal-only helper must use @access(Access.internal, "python")
 // (or the corresponding language scope) and must not appear in public signatures.
-// The existing namespace is retained to preserve generated type identifiers.
-// Maintained Python hooks provide additional behavior; the model-by-model
-// rationale and generation toolchain are recorded in the SDK generation guide.
+// Public Python names and namespaces remain unchanged. The source-only
+// customization namespace groups these SDK projections.
+// Maintained Python hooks provide additional behavior.
 
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
@@ -20,7 +20,7 @@ import "./models.tsp";
 using Azure.ClientGenerator.Core;
 
 @clientNamespace("azure.ai.finetuningsessions", "python")
-namespace Azure.AI.FineTuning.Sessions.Loom;
+namespace Azure.AI.FineTuning.Sessions.Customization;
 
 // Aliases reference the same type graph; no fields or enum values are copied.
 alias CheckpointType = Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointType;
@@ -417,8 +417,8 @@ model SampleOperationResult extends OperationResult {
   topk_prompt_logprobs?: (unknown[][] | null)[];
 
   /**
-   * Per-call prefill and sample token COGS, including counts,
-   * duration, throughput, and prefill cache-hit tokens when supported.
+   * Service-reported sampling metrics, including token counts, duration,
+   * throughput, and prompt cache-hit counts when supported.
    */
   metrics?: Record<unknown>;
 }

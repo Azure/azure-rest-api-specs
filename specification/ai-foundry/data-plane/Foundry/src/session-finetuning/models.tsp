@@ -547,10 +547,9 @@ model CreateFineTuningSessionRequest {
 
   /**
    * Training tier. Set this property explicitly to select the tier.
-   * If omitted, tier selection is left to the service: sessions assigned to
-   * the M365 worker pool default to DatazoneStandard; other pools retain the
-   * GlobalStandard baseline. Existing DeveloperTier metadata selection and
-   * explicit tier choices are preserved. No client-side default is applied.
+   * If omitted, the service selects the default for the account and available
+   * capacity. Explicit tier choices are preserved. No client-side default
+   * is applied.
    */
   training_type?: FineTuningTrainingType;
 }

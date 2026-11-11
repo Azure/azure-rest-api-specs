@@ -103512,7 +103512,7 @@
           },
           "training_type": {
             "$ref": "#/components/schemas/SessionFineTuning.FineTuningTrainingType",
-            "description": "Training tier. Set this property explicitly to select the tier.\nIf omitted, tier selection is left to the service: sessions assigned to\nthe M365 worker pool default to DatazoneStandard; other pools retain the\nGlobalStandard baseline. Existing DeveloperTier metadata selection and\nexplicit tier choices are preserved. No client-side default is applied."
+            "description": "Training tier. Set this property explicitly to select the tier.\nIf omitted, the service selects the default for the account and available\ncapacity. Explicit tier choices are preserved. No client-side default\nis applied."
           }
         },
         "description": "Request body for POST /fine_tuning/sessions."
