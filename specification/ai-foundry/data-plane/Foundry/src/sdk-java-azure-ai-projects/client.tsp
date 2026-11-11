@@ -146,6 +146,34 @@ namespace Azure.AI.Projects;
 @@clientName(AgentInsightMonitors.getInsight, "getAgentInsight");
 @@clientName(AgentInsightMonitors.updateInsight, "updateAgentInsight");
 
+// Options bags for the SDK-written list convenience methods.
+/** Options for listing insights for an Agent Insights monitor. */
+model ListAgentInsightsOptions {
+  /** The identifier of the monitor. */
+  monitor_id: string;
+
+  ...TypeSpec.Http.PlainData<AgentInsightsPageQueryParameters>;
+  ...TypeSpec.Http.PlainData<AgentInsightListFilters>;
+  ...TypeSpec.Http.PlainData<AgentInsightReadOptions>;
+}
+
+/** Options for listing runs for an Agent Insights monitor. */
+model ListAgentInsightRunsOptions {
+  /** The identifier of the monitor. */
+  monitor_id: string;
+
+  ...TypeSpec.Http.PlainData<AgentInsightsPageQueryParameters>;
+  ...TypeSpec.Http.PlainData<AgentInsightRunFilters>;
+}
+
+@@usage(ListAgentInsightsOptions, Usage.input, "java");
+@@access(ListAgentInsightsOptions, Access.public, "java");
+@@usage(ListAgentInsightRunsOptions, Usage.input, "java");
+@@access(ListAgentInsightRunsOptions, Access.public, "java");
+
+@@convenientAPI(AgentInsightMonitors.listInsights, false, "java");
+@@convenientAPI(AgentInsightMonitors.listRuns, false, "java");
+
 // --------------------------------------------------------------------------------
 // Renames - models
 // --------------------------------------------------------------------------------
