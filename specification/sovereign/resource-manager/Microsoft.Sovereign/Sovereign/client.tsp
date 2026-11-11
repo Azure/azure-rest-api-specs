@@ -36,6 +36,16 @@ using Azure.ClientGenerator.Core;
 
 // C#: name availability
 @@clientName(
+  Microsoft.Sovereign.Operations.checkNameAvailability,
+  "CheckSovereignNameAvailability",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Sovereign.Operations.checkNameAvailabilityLocal,
+  "CheckSovereignNameAvailabilityLocal",
+  "csharp"
+);
+@@clientName(
   Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "SovereignNameAvailabilityContent",
   "csharp"

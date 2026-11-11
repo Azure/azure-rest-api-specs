@@ -8,8 +8,21 @@
     "description": "Creates a new agent version with personalized voice activity detection and Azure Speech streaming transcription.",
     "definition": {
       "kind": "voice",
+      "sub_protocol": "realtime",
       "model_type": "managed",
       "model": "gpt-4.1",
+      "post_call": {
+        "destinations": [
+          {
+            "type": "routine",
+            "name": "archive"
+          },
+          {
+            "type": "routine",
+            "name": "analysis"
+          }
+        ]
+      },
       "audio": {
         "input": {
           "noise_reduction": {
@@ -52,8 +65,21 @@
             "created_at": 1785776400,
             "definition": {
               "kind": "voice",
+              "sub_protocol": "realtime",
               "model_type": "managed",
               "model": "gpt-4.1",
+              "post_call": {
+                "destinations": [
+                  {
+                    "type": "routine",
+                    "name": "archive"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "analysis"
+                  }
+                ]
+              },
               "audio": {
                 "input": {
                   "noise_reduction": {
