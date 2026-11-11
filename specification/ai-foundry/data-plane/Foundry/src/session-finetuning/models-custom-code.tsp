@@ -10,8 +10,8 @@
 // Do not mark them internal merely because they support SDK custom code.
 // Any future internal-only helper must use @access(Access.internal, "python")
 // (or the corresponding language scope) and must not appear in public signatures.
-// Public Python names and namespaces remain unchanged. The source-only
-// customization namespace groups these SDK projections.
+// Public Python names and namespaces remain unchanged. These SDK projections
+// share the domain namespace configured by the SDK generation entrypoint.
 // Maintained Python hooks provide additional behavior.
 
 import "@azure-tools/typespec-client-generator-core";
@@ -19,8 +19,7 @@ import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@clientNamespace("azure.ai.finetuningsessions", "python")
-namespace Azure.AI.FineTuning.Sessions.Customization;
+namespace Azure.AI.FineTuning.Sessions;
 
 // Aliases reference the same type graph; no fields or enum values are copied.
 alias CheckpointType = Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointType;

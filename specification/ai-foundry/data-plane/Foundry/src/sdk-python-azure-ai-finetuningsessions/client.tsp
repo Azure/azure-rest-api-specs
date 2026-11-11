@@ -164,58 +164,46 @@ namespace Azure.AI.FineTuning.Sessions;
 
 // Reuse authoritative REST types whenever their Python shape is compatible.
 // Compatibility aliases reference canonical models rather than copying them.
-@@clientName(Customization.CheckpointType, "CheckpointType", "python");
-@@clientName(Customization.LossFn, "LossFn", "python");
-@@clientName(Customization.SessionType, "SessionType", "python");
-@@clientName(Customization.StopCriteria, "StopCriteria", "python");
-@@clientName(Customization.ModelInputChunk, "ModelInputChunk", "python");
-@@clientName(Customization.ModelInput, "ModelInput", "python");
+@@clientName(CheckpointType, "CheckpointType", "python");
+@@clientName(LossFn, "LossFn", "python");
+@@clientName(SessionType, "SessionType", "python");
+@@clientName(StopCriteria, "StopCriteria", "python");
+@@clientName(ModelInputChunk, "ModelInputChunk", "python");
+@@clientName(ModelInput, "ModelInput", "python");
 @@clientName(FineTuningInputChunk, "InputChunk", "python");
 @@clientName(FineTuningInputChunkType, "InputChunkType", "python");
 @@clientName(FineTuningInputChunkImage, "ImageChunk", "python");
 // Preserve the existing ImageChunk.format string API and local validation.
 @@alternateType(FineTuningImageFormat, string, "python");
-@@clientName(Customization.Cursor, "Cursor", "python");
-@@clientName(Customization.Datum, "Datum", "python");
-@@clientName(Customization.Session, "Session", "python");
-@@clientName(Customization.SessionList, "SessionList", "python");
-@@clientName(Customization.CheckpointList, "CheckpointList", "python");
-@@usage(Customization.CheckpointType, Usage.input | Usage.output, "python");
-@@usage(Customization.LossFn, Usage.input | Usage.output, "python");
-@@usage(Customization.SessionType, Usage.input | Usage.output, "python");
-@@usage(Customization.StopCriteria, Usage.input | Usage.output, "python");
-@@usage(Customization.TensorData, Usage.input | Usage.output, "python");
-@@usage(Customization.ModelInputChunk, Usage.input | Usage.output, "python");
-@@usage(Customization.ModelInput, Usage.input | Usage.output, "python");
-@@usage(Customization.Cursor, Usage.input | Usage.output, "python");
-@@usage(Customization.LossFnConfig, Usage.input | Usage.output, "python");
-@@usage(Customization.Datum, Usage.input | Usage.output, "python");
-@@usage(
-  Customization.ForwardBackwardInput,
-  Usage.input | Usage.output,
-  "python"
-);
-@@usage(
-  Customization.ForwardBackwardRequest,
-  Usage.input | Usage.output,
-  "python"
-);
-@@usage(Customization.ForwardRequest, Usage.input | Usage.output, "python");
-@@usage(Customization.OptimStepRequest, Usage.input | Usage.output, "python");
-@@usage(Customization.Session, Usage.input | Usage.output, "python");
-@@usage(Customization.SessionList, Usage.input | Usage.output, "python");
-@@usage(Customization.CheckpointList, Usage.input | Usage.output, "python");
-@@usage(
-  Customization.SaveCheckpointRequest,
-  Usage.input | Usage.output,
-  "python"
-);
+@@clientName(Cursor, "Cursor", "python");
+@@clientName(Datum, "Datum", "python");
+@@clientName(Session, "Session", "python");
+@@clientName(SessionList, "SessionList", "python");
+@@clientName(CheckpointList, "CheckpointList", "python");
+@@usage(CheckpointType, Usage.input | Usage.output, "python");
+@@usage(LossFn, Usage.input | Usage.output, "python");
+@@usage(SessionType, Usage.input | Usage.output, "python");
+@@usage(StopCriteria, Usage.input | Usage.output, "python");
+@@usage(TensorData, Usage.input | Usage.output, "python");
+@@usage(ModelInputChunk, Usage.input | Usage.output, "python");
+@@usage(ModelInput, Usage.input | Usage.output, "python");
+@@usage(Cursor, Usage.input | Usage.output, "python");
+@@usage(LossFnConfig, Usage.input | Usage.output, "python");
+@@usage(Datum, Usage.input | Usage.output, "python");
+@@usage(ForwardBackwardInput, Usage.input | Usage.output, "python");
+@@usage(ForwardBackwardRequest, Usage.input | Usage.output, "python");
+@@usage(ForwardRequest, Usage.input | Usage.output, "python");
+@@usage(OptimStepRequest, Usage.input | Usage.output, "python");
+@@usage(Session, Usage.input | Usage.output, "python");
+@@usage(SessionList, Usage.input | Usage.output, "python");
+@@usage(CheckpointList, Usage.input | Usage.output, "python");
+@@usage(SaveCheckpointRequest, Usage.input | Usage.output, "python");
 
 // Only genuine compatibility exceptions use alternate types. Optional Python
 // constructors and legacy result classes are not alternate server contracts.
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningSessionStatus,
-  Customization.SessionStatus,
+  SessionStatus,
   "python"
 );
 // An extensible string-backed enum adds discoverability without restricting
@@ -232,110 +220,106 @@ namespace Azure.AI.FineTuning.Sessions;
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningSessionSummary,
-  Customization.SessionSummary,
+  SessionSummary,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningCheckpoint,
-  Customization.Checkpoint,
+  Checkpoint,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointInfo,
-  Customization.CheckpointInfo,
+  CheckpointInfo,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningPendingOperation,
-  Customization.OperationResult,
+  OperationResult,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningActionOperation,
-  Customization.OperationResult,
+  OperationResult,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningRequestStatus,
-  Customization.OperationResult,
+  OperationResult,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningSampleRequest,
-  Customization.SampleRequest,
+  SampleRequest,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.ForwardBackwardRequest,
-  Customization.ForwardBackwardRequest,
+  ForwardBackwardRequest,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningSamplingParams,
-  Customization.SamplingParams,
+  SamplingParams,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningSampledSequence,
-  Customization.SampledSequence,
+  SampledSequence,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningCompleteResponse,
-  Customization.OperationResult,
+  OperationResult,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningHeartbeatResponse,
-  Customization.HeartbeatResponse,
+  HeartbeatResponse,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningSessionModelData,
-  Customization.SessionModelData,
+  SessionModelData,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.CreateFineTuningSessionRequest,
-  Customization.CreateSessionRequest,
+  CreateSessionRequest,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.CreateFineTuningSessionResponse,
-  Customization.OperationResult,
+  OperationResult,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.AdamParams,
-  Customization.AdamParams,
+  AdamParams,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.LoRAConfig,
-  Customization.LoRAConfig,
+  LoRAConfig,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.LossFnInputs,
-  Customization.LossFnInputs,
+  LossFnInputs,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.ForwardInput,
-  Customization.ForwardInput,
+  ForwardInput,
   "python"
 );
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.SaveSamplerWeightsRequest,
-  Customization.SaveSamplerWeightsRequest,
+  SaveSamplerWeightsRequest,
   "python"
 );
-@@alternateType(OpenAI.Error, Customization.ApiError, "python");
-@@alternateType(
-  Azure.AI.Projects.ApiErrorResponse,
-  Customization.ApiErrorResponse,
-  "python"
-);
+@@alternateType(OpenAI.Error, ApiError, "python");
+@@alternateType(Azure.AI.Projects.ApiErrorResponse, ApiErrorResponse, "python");
 // Generate the opt-in enum from its sole shared declaration. Existing members
 // retain their names/wire values; the remaining shared members are additive.
 @@clientName(
