@@ -207,6 +207,106 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultComparison, "EvaluationRunResultComparison");
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
 
+@@clientName(ItemGenerationParams, "ItemGenerationParameters", "java");
+@@clientName(ItemGenerationParamsType, "ItemGenerationParametersType", "java");
+@@clientName(
+  RedTeamItemGenerationParams,
+  "RedTeamItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  RedTeamSeedPromptsItemGenerationParams,
+  "RedTeamSeedPromptsItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  RedTeamTaxonomyItemGenerationParams,
+  "RedTeamTaxonomyItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  ResponseRetrievalItemGenerationParams,
+  "ResponseRetrievalItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  SyntheticDataGenerationItemGenerationParams,
+  "SyntheticDataGenerationItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  TargetCompletionItemGenerationParams,
+  "TargetCompletionItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  SyntheticDataGenItemGenerationParamsType,
+  "SyntheticDataGenerationItemGenerationParametersType",
+  "java"
+);
+@@clientName(
+  AgentInsightPrioritiesRead,
+  "AgentInsightPrioritiesDetails",
+  "java"
+);
+
+@@clientName(RedTeamItemGenerationParams.num_turns, "numberOfTurns", "java");
+@@clientName(
+  RedTeamSeedPromptsItemGenerationParams.num_turns,
+  "numberOfTurns",
+  "java"
+);
+@@clientName(
+  RedTeamTaxonomyItemGenerationParams.num_turns,
+  "numberOfTurns",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationDefaultConfiguration.max_num_turns,
+  "maximumNumberOfTurns",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationDefaultConfiguration.desired_num_turns,
+  "desiredNumberOfTurns",
+  "java"
+);
+@@clientName(
+  ResponseRetrievalItemGenerationParams.max_num_turns,
+  "maximumNumberOfTurns",
+  "java"
+);
+@@clientName(AgentFilterTraceSource.start_time, "startAt", "java");
+@@clientName(AgentFilterTraceSource.end_time, "endAt", "java");
+@@clientName(
+  AgentInsightDetails.recommended_actions,
+  "recommendedAction",
+  "java"
+);
+@@clientName(CronTrigger.startTime, "startAt", "java");
+@@clientName(CronTrigger.endTime, "endAt", "java");
+@@clientName(RecurrenceTrigger.startTime, "startAt", "java");
+@@clientName(RecurrenceTrigger.endTime, "endAt", "java");
+@@clientName(
+  TargetCompletionEvalRunDataSource.item_generation_params,
+  "itemGenerationParameters",
+  "java"
+);
+@@clientName(TracesEvalRunDataSource.end_time, "endAt", "java");
+@@clientName(
+  TracesEvalRunDataSource.ingestion_delay_seconds,
+  "ingestionDelay",
+  "java"
+);
+@@clientName(TracesPreviewEvalRunDataSource.end_time, "endAt", "java");
+@@clientName(
+  TracesPreviewEvalRunDataSource.ingestion_delay_seconds,
+  "ingestionDelay",
+  "java"
+);
+@@clientName(DatasetEvaluationRuleAction.evalId, "evaluationId", "java");
+@@clientName(TraceEvaluationRuleAction.evalId, "evaluationId", "java");
+
 @@clientName(Index, "AIProjectIndex", "java");
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
@@ -488,6 +588,8 @@ union GrammarSyntaxExpandable {
 model TimeZoneType {}
 
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
+@@alternateType(CronTrigger.timeZone, TimeZoneType, "java");
+@@alternateType(OneTimeTrigger.timeZone, TimeZoneType, "java");
 
 @@alternateType(RoutineRunStatus, string, "java");
 
