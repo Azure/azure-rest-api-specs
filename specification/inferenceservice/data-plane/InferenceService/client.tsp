@@ -47,6 +47,7 @@ using Azure.Data.AI;
 @@clientName(SemanticRerankingInferenceResult.meta, "metadata", "csharp");
 @@clientName(EmbeddingContentItem, "EmbeddingsInputContent", "csharp");
 @@clientName(EmbeddingContentItem.url, "uri", "csharp");
+@@clientName(EmbeddingData, "EmbeddingItem", "csharp");
 @@clientName(MultimodalEmbeddingOutput.url, "uri", "csharp");
 @@clientName(InferenceOperationGroup.embed, "getEmbeddings", "csharp, python");
 // Python accepts plain dictionaries for input items without changing the REST
