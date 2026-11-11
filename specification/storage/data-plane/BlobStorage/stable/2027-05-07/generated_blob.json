@@ -615,6 +615,48 @@
                 "format": "int64",
                 "description": "The number of tags associated with the blob."
               },
+              "x-ms-tier-managed-by": {
+                "type": "string",
+                "description": "Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user, independently of migration completion.",
+                "enum": [
+                  "system",
+                  "user"
+                ],
+                "x-ms-enum": {
+                  "name": "TierManagedBy",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "System",
+                      "value": "system",
+                      "description": "The blob's tier was implicitly set to Turbo on ingestion."
+                    },
+                    {
+                      "name": "User",
+                      "value": "user",
+                      "description": "Turbo was explicitly selected by the user."
+                    }
+                  ]
+                }
+              },
+              "x-ms-turbo-status": {
+                "type": "string",
+                "description": "Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes.",
+                "enum": [
+                  "pending"
+                ],
+                "x-ms-enum": {
+                  "name": "TurboStatus",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "Migration to SSD storage is pending. The status is omitted after migration completes."
+                    }
+                  ]
+                }
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -1016,6 +1058,48 @@
                 "format": "int64",
                 "description": "The number of tags associated with the blob."
               },
+              "x-ms-tier-managed-by": {
+                "type": "string",
+                "description": "Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user, independently of migration completion.",
+                "enum": [
+                  "system",
+                  "user"
+                ],
+                "x-ms-enum": {
+                  "name": "TierManagedBy",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "System",
+                      "value": "system",
+                      "description": "The blob's tier was implicitly set to Turbo on ingestion."
+                    },
+                    {
+                      "name": "User",
+                      "value": "user",
+                      "description": "Turbo was explicitly selected by the user."
+                    }
+                  ]
+                }
+              },
+              "x-ms-turbo-status": {
+                "type": "string",
+                "description": "Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes.",
+                "enum": [
+                  "pending"
+                ],
+                "x-ms-enum": {
+                  "name": "TurboStatus",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "Migration to SSD storage is pending. The status is omitted after migration completes."
+                    }
+                  ]
+                }
+              },
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
@@ -1110,7 +1194,8 @@
               "Archive",
               "Premium",
               "Cold",
-              "Smart"
+              "Smart",
+              "Turbo"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -1200,6 +1285,11 @@
                   "name": "Smart",
                   "value": "Smart",
                   "description": "The Smart access tier."
+                },
+                {
+                  "name": "Turbo",
+                  "value": "Turbo",
+                  "description": "The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier."
                 }
               ]
             },
@@ -2272,6 +2362,48 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The number of tags associated with the blob."
+              },
+              "x-ms-tier-managed-by": {
+                "type": "string",
+                "description": "Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user, independently of migration completion.",
+                "enum": [
+                  "system",
+                  "user"
+                ],
+                "x-ms-enum": {
+                  "name": "TierManagedBy",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "System",
+                      "value": "system",
+                      "description": "The blob's tier was implicitly set to Turbo on ingestion."
+                    },
+                    {
+                      "name": "User",
+                      "value": "user",
+                      "description": "Turbo was explicitly selected by the user."
+                    }
+                  ]
+                }
+              },
+              "x-ms-turbo-status": {
+                "type": "string",
+                "description": "Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes.",
+                "enum": [
+                  "pending"
+                ],
+                "x-ms-enum": {
+                  "name": "TurboStatus",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "Migration to SSD storage is pending. The status is omitted after migration completes."
+                    }
+                  ]
+                }
               },
               "x-ms-version": {
                 "type": "string",
@@ -3955,7 +4087,8 @@
               "Archive",
               "Premium",
               "Cold",
-              "Smart"
+              "Smart",
+              "Turbo"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -4045,6 +4178,11 @@
                   "name": "Smart",
                   "value": "Smart",
                   "description": "The Smart access tier."
+                },
+                {
+                  "name": "Turbo",
+                  "value": "Turbo",
+                  "description": "The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier."
                 }
               ]
             },
@@ -11567,7 +11705,8 @@
               "Archive",
               "Premium",
               "Cold",
-              "Smart"
+              "Smart",
+              "Turbo"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -11657,6 +11796,11 @@
                   "name": "Smart",
                   "value": "Smart",
                   "description": "The Smart access tier."
+                },
+                {
+                  "name": "Turbo",
+                  "value": "Turbo",
+                  "description": "The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier."
                 }
               ]
             },
@@ -14882,7 +15026,8 @@
               "Archive",
               "Premium",
               "Cold",
-              "Smart"
+              "Smart",
+              "Turbo"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -14972,6 +15117,11 @@
                   "name": "Smart",
                   "value": "Smart",
                   "description": "The Smart access tier."
+                },
+                {
+                  "name": "Turbo",
+                  "value": "Turbo",
+                  "description": "The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier."
                 }
               ]
             },
@@ -15842,7 +15992,8 @@
               "Archive",
               "Premium",
               "Cold",
-              "Smart"
+              "Smart",
+              "Turbo"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -15932,6 +16083,11 @@
                   "name": "Smart",
                   "value": "Smart",
                   "description": "The Smart access tier."
+                },
+                {
+                  "name": "Turbo",
+                  "value": "Turbo",
+                  "description": "The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier."
                 }
               ]
             },
@@ -16351,7 +16507,8 @@
               "Archive",
               "Premium",
               "Cold",
-              "Smart"
+              "Smart",
+              "Turbo"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -16441,6 +16598,11 @@
                   "name": "Smart",
                   "value": "Smart",
                   "description": "The Smart access tier."
+                },
+                {
+                  "name": "Turbo",
+                  "value": "Turbo",
+                  "description": "The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier."
                 }
               ]
             },
@@ -16814,7 +16976,8 @@
         "Archive",
         "Premium",
         "Cold",
-        "Smart"
+        "Smart",
+        "Turbo"
       ],
       "x-ms-enum": {
         "name": "AccessTier",
@@ -16904,6 +17067,11 @@
             "name": "Smart",
             "value": "Smart",
             "description": "The Smart access tier."
+          },
+          {
+            "name": "Turbo",
+            "value": "Turbo",
+            "description": "The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier."
           }
         ]
       }
@@ -17598,6 +17766,16 @@
           "$ref": "#/definitions/ArchiveStatus",
           "description": "The archive status of the blob.",
           "x-ms-client-name": "archiveStatus"
+        },
+        "TurboStatus": {
+          "$ref": "#/definitions/TurboStatus",
+          "description": "Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes.",
+          "x-ms-client-name": "turboStatus"
+        },
+        "TierManagedBy": {
+          "$ref": "#/definitions/TierManagedBy",
+          "description": "Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user.",
+          "x-ms-client-name": "tierManagedBy"
         },
         "SmartAccessTier": {
           "$ref": "#/definitions/AccessTier",
@@ -20240,6 +20418,48 @@
           "description": "The geo-replication stats.",
           "x-ms-client-name": "geoReplication"
         }
+      }
+    },
+    "TierManagedBy": {
+      "type": "string",
+      "description": "Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user, independently of migration completion.",
+      "enum": [
+        "system",
+        "user"
+      ],
+      "x-ms-enum": {
+        "name": "TierManagedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "System",
+            "value": "system",
+            "description": "The blob's tier was implicitly set to Turbo on ingestion."
+          },
+          {
+            "name": "User",
+            "value": "user",
+            "description": "Turbo was explicitly selected by the user."
+          }
+        ]
+      }
+    },
+    "TurboStatus": {
+      "type": "string",
+      "description": "Indicates whether migration to Turbo storage is pending.",
+      "enum": [
+        "pending"
+      ],
+      "x-ms-enum": {
+        "name": "TurboStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "Migration to SSD storage is pending. The status is omitted after migration completes."
+          }
+        ]
       }
     },
     "UserDelegationKey": {
