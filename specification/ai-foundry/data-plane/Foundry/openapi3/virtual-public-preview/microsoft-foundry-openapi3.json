@@ -105698,9 +105698,9 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "steering_prompt": "#/components/schemas/SteeringPromptOptimizationContext",
             "skill_references": "#/components/schemas/SkillReferencesOptimizationContext",
-            "agent_traces": "#/components/schemas/AgentTracesOptimizationContext",
-            "steering_prompt": "#/components/schemas/SteeringPromptOptimizationContext"
+            "agent_traces": "#/components/schemas/AgentTracesOptimizationContext"
           }
         },
         "description": "Base model for typed optimization context."
@@ -106559,7 +106559,7 @@
           "context": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SteeringPromptOptimizationContext"
+              "$ref": "#/components/schemas/OptimizationContext"
             },
             "minItems": 1,
             "description": "Steering context for prompt optimization. Agent trace and skill reference context are supported only by skill optimization. Omitted when no context is supplied."

@@ -407,7 +407,7 @@ model PromptOptimizationConfiguration
 
   @doc("Steering context for prompt optimization. Agent trace and skill reference context are supported only by skill optimization. Omitted when no context is supplied.")
   @minItems(1)
-  context?: SteeringPromptOptimizationContext[];
+  context?: OptimizationContext[];
 }
 
 /** Types of skill references used by optimization. */
