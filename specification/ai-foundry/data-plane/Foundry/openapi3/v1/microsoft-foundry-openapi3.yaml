@@ -47652,41 +47652,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An Azure AI Search tool stored in a toolbox.
-    AzureAITraceDataSourceEvalRunDataSource:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - azure_ai_trace_data_source
-          description: The type of data source, always `azure_ai_trace_data_source`.
-        trace_source:
-          $ref: '#/components/schemas/TraceSource'
-          description: The trace source that defines how traces are selected for evaluation.
-      allOf:
-        - $ref: '#/components/schemas/EvalRunDataSource'
-      description: |-
-        A data source that selects traces for evaluation.
-
-        See [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python).
-    AzureAITraceDataSourcePreviewEvalRunDataSource:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - azure_ai_trace_data_source_preview
-          description: The type of data source, always `azure_ai_trace_data_source_preview`.
-        trace_source:
-          $ref: '#/components/schemas/TraceSource'
-          description: The trace source that defines how traces are selected for evaluation.
-      allOf:
-        - $ref: '#/components/schemas/EvalRunDataSource'
-      description: Preview form of `azure_ai_trace_data_source`. Returned only for rules backed by existing preview schedules; rejected on create and update.
     AzureContentFilterBlocklistIdResult:
       type: object
       required:
@@ -49067,6 +49032,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobConfiguration'
       description: 'The configuration for reconstructing existing traced conversations for evaluation, not synthetic conversation simulation. This preview requires `scenario` to be `evaluation`, sources of type `traces`, and the `Foundry-Features: DataGenerationJobs=V1Preview` request header. Conversation-level sampling is implicit; `sample_level` is not supported. Existing trace selection, annotations, and output dataset row schemas are unchanged. Create, get, and list responses preserve `type: conversations`. The service enforces the scenario, source, and conditional model-options requirements. Conversation-level output rows contain `test_case_id`, `messages`, `tool_definitions`, and `metadata`. A successful optional description adds `test_case_description`. If description generation fails, the row is retained with safe row-level status and error metadata, without raw provider or model error bodies.'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     CosmosDBIndex:
       type: object
       required:
@@ -49509,6 +49477,26 @@ components:
       allOf:
         - $ref: '#/components/schemas/Trigger'
       description: Cron based trigger.
+    CsvEvalRunDataSource:
+      type: object
+      required:
+        - type
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - csv
+          description: The type of data source, always `csv`.
+        source:
+          $ref: '#/components/schemas/EvalCsvFileIdSource'
+          description: The source of the CSV data, either inline content or a file reference.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: |-
+        A CSV data source for evaluation runs.
+
+        See [evaluation datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluation-datasets).
     CustomCredential:
       type: object
       required:
@@ -49920,7 +49908,7 @@ components:
     DatasetEvaluationSource:
       anyOf:
         - $ref: '#/components/schemas/OpenAI.CreateEvalJsonlRunDataSource'
-        - $ref: '#/components/schemas/EvalCsvRunDataSource'
+        - $ref: '#/components/schemas/CsvEvalRunDataSource'
         - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSource'
         - $ref: '#/components/schemas/TargetCompletionEvalRunDataSource'
         - $ref: '#/components/schemas/UserConversationSimulationEvalRunDataSource'
@@ -50492,6 +50480,9 @@ components:
             - 0.0.1
             - 0.0.2
       description: Contract version for an endpoint-based evaluator.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EntraAuthorizationScheme:
       type: object
       required:
@@ -50690,26 +50681,6 @@ components:
           type: string
           description: The identifier of the uploaded CSV file.
       description: Represents a reference to an uploaded CSV file used as a source for evaluation data.
-    EvalCsvRunDataSource:
-      type: object
-      required:
-        - type
-        - source
-      properties:
-        type:
-          type: string
-          enum:
-            - csv
-          description: The type of data source, always `csv`.
-        source:
-          $ref: '#/components/schemas/EvalCsvFileIdSource'
-          description: The source of the CSV data, either inline content or a file reference.
-      allOf:
-        - $ref: '#/components/schemas/EvalRunDataSource'
-      description: |-
-        A CSV data source for evaluation runs.
-
-        See [evaluation datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluation-datasets).
     EvalGraderInspectAI:
       type: object
       required:
@@ -51075,13 +51046,13 @@ components:
           azure_ai_synthetic_data_generation_with_simulation: '#/components/schemas/SyntheticDataGenerationWithSimulationEvalRunDataSource'
           azure_ai_responses: '#/components/schemas/AzureAIResponsesEvalRunDataSource'
           azure_ai_target_completions: '#/components/schemas/TargetCompletionEvalRunDataSource'
-          csv: '#/components/schemas/EvalCsvRunDataSource'
+          csv: '#/components/schemas/CsvEvalRunDataSource'
           azure_ai_red_team: '#/components/schemas/RedTeamEvalRunDataSource'
-          azure_ai_trace_data_source: '#/components/schemas/AzureAITraceDataSourceEvalRunDataSource'
+          azure_ai_trace_data_source: '#/components/schemas/TraceSourceEvalRunDataSource'
           azure_ai_benchmark_preview: '#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource'
           azure_ai_user_conversation_simulation: '#/components/schemas/UserConversationSimulationEvalRunDataSource'
           azure_ai_traces_preview: '#/components/schemas/TracesPreviewEvalRunDataSource'
-          azure_ai_trace_data_source_preview: '#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource'
+          azure_ai_trace_data_source_preview: '#/components/schemas/TraceSourcePreviewEvalRunDataSource'
           azure_ai_user_conversation_simulation_preview: '#/components/schemas/UserConversationSimulationPreviewEvalRunDataSource'
           azure_ai_traces: '#/components/schemas/TracesEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
@@ -52157,6 +52128,9 @@ components:
         scoring:
           $ref: '#/components/schemas/RubricScoring'
           description: Scoring choices for the generated evaluator. For quality, supplied scoring defaults to Likert; omitted weights on first creation yield equal contribution, and regeneration preserves saved choices. Omitting scoring preserves existing quality generation behavior. Safety generation resolves omitted scoring to Boolean and rejects a conflicting supplied mode; its dimensions use allowed rather than weights and its two metric results are not combined.
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
         pass_threshold:
           type: number
           format: float
@@ -52225,6 +52199,9 @@ components:
         scoring:
           $ref: '#/components/schemas/RubricScoring'
           description: Rubric scoring selected for this generation attempt, including an inherited saved mode. Omitted for legacy generation.
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
           readOnly: true
         pass_threshold:
           type: number
@@ -91839,6 +91816,9 @@ components:
         scoring:
           $ref: '#/components/schemas/RubricScoring'
           description: Simple scoring choices. Omission preserves existing legacy scoring for existing clients. No policy version is required from the caller.
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Rubric evaluator definition. Ordinary quality rubrics report one aggregate. Safety rubrics require Boolean scoring and an explicit allowed classification on every dimension, and report disallowed_behavior_violated and allowed_behavior_violated as two independent lower-is-better metrics. Safety rubrics have no weights, threshold, or combined safety score.
@@ -95983,9 +95963,9 @@ components:
     TraceEvaluationSource:
       anyOf:
         - $ref: '#/components/schemas/TracesEvalRunDataSource'
-        - $ref: '#/components/schemas/AzureAITraceDataSourceEvalRunDataSource'
+        - $ref: '#/components/schemas/TraceSourceEvalRunDataSource'
         - $ref: '#/components/schemas/TracesPreviewEvalRunDataSource'
-        - $ref: '#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource'
+        - $ref: '#/components/schemas/TraceSourcePreviewEvalRunDataSource'
       description: Existing trace-evaluation inputs supported by scheduled rules.
     TraceIdTraceSource:
       type: object
@@ -96020,7 +96000,45 @@ components:
           trace_id_source: '#/components/schemas/TraceIdTraceSource'
           conversation_id_source: '#/components/schemas/ConversationIdTraceSource'
           agent_filter: '#/components/schemas/AgentFilterTraceSource'
-      description: Base class for polymorphic trace sources nested within an AzureAITraceDataSourceEvalRunDataSource.
+      description: Base class for polymorphic trace sources nested within a TraceSourceEvalRunDataSource.
+    TraceSourceEvalRunDataSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_trace_data_source
+          description: The type of data source, always `azure_ai_trace_data_source`.
+        trace_source:
+          $ref: '#/components/schemas/TraceSource'
+          description: The trace source that defines how traces are selected for evaluation.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: |-
+        A data source that selects traces for evaluation.
+
+        See [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python).
+    TraceSourcePreviewEvalRunDataSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_trace_data_source_preview
+          description: The type of data source, always `azure_ai_trace_data_source_preview`.
+        trace_source:
+          $ref: '#/components/schemas/TraceSource'
+          description: The trace source that defines how traces are selected for evaluation.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: Preview form of `azure_ai_trace_data_source`. Returned only for rules backed by existing preview schedules; rejected on create and update.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     TraceSourceType:
       anyOf:
         - type: string
@@ -96051,6 +96069,9 @@ components:
         generate_test_case_rubric:
           type: boolean
           description: 'Whether to generate test-case rubric dimensions for each captured turn sample. This is a preview feature requiring the `Foundry-Features: DataGenerationJobs=V1Preview` request header. When true, requires a nonempty `model_options.model`.'
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DataGenerationJobs=V1Preview
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobConfiguration'
       description: The configuration for a data generation job with Traces type.
@@ -96229,6 +96250,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Preview form of `azure_ai_traces`. Returned only for rules backed by existing preview schedules; rejected on create and update.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     TreatmentEffectType:
       anyOf:
         - type: string
@@ -96645,6 +96669,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Preview form of `azure_ai_user_conversation_simulation`. Returned only for rules backed by existing preview schedules; rejected on create and update.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     UserConversationSimulationSource:
       anyOf:
         - $ref: '#/components/schemas/OpenAI.EvalJsonlFileContentSource'
