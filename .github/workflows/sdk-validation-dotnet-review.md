@@ -298,10 +298,10 @@ contract fixes, `client.tsp` for C#-scoped API surface adjustments,
 `sdk-repository` when a spec author cannot resolve the finding, `duplicate`
 only when the provided evidence proves another signal already reported it, and
 `manual-investigation` when mapping or remediation is uncertain.
-10. Call `publish_sdk_review` exactly once with:
-    - `result`: the complete SDK review result as a JSON string.
-    - `remediation_result`: the complete TypeSpec remediation result as a JSON
-      string.
+
+10. Call `publish_sdk_review` exactly once. Set `result` to the complete SDK
+    review result as a JSON string and `remediation_result` to the complete
+    TypeSpec remediation result as a JSON string.
 
 The trusted safe-output job validates both structured results after threat
 detection, restores canonical finding data, and generates both Markdown reports
