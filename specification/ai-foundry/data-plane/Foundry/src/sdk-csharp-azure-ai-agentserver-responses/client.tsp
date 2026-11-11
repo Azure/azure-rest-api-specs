@@ -586,10 +586,6 @@ namespace Azure.AI.Projects {
 // OpenAI.Responses.ResponseError, so a generated type named Error would be shadowed.
 @@clientName(OpenAI.Error, "ApiError");
 
-// These are surfaced on this package's public hosting API (ResponseStreamEvent.EventType and
-// the tool-choice extension helpers), so they must not be emitted as internal.
-@@access(OpenAI.ToolChoiceParam, Access.public);
-
 // ============================================================================
 // Stream event subtypes -> OpenAI.Responses.Streaming*Update.
 // OpenAI's StreamingResponseUpdate has a single `private protected` constructor, so no
@@ -1266,10 +1262,12 @@ namespace Azure.AI.Projects {
 @@access(OpenAI.CodeInterpreterOutputLogs, Access.internal, "csharp");
 @@access(OpenAI.CompactResource, Access.internal, "csharp");
 @@access(OpenAI.ComputerCallSafetyCheckParam, Access.internal, "csharp");
+@@access(OpenAI.ComputerScreenshotContent, Access.internal, "csharp");
 @@access(OpenAI.ComputerScreenshotImage, Access.internal, "csharp");
 @@access(OpenAI.ContainerReferenceResource, Access.internal, "csharp");
 @@access(OpenAI.ContextManagementParam, Access.internal, "csharp");
 @@access(OpenAI.Error, Access.internal, "csharp");
+@@access(OpenAI.FileInputDetail, Access.internal, "csharp");
 @@access(OpenAI.FileSearchToolCallResults, Access.internal, "csharp");
 @@access(OpenAI.FunctionShellAction, Access.internal, "csharp");
 @@access(OpenAI.FunctionShellCallEnvironment, Access.internal, "csharp");
@@ -1284,6 +1282,7 @@ namespace Azure.AI.Projects {
 );
 @@access(OpenAI.FunctionShellCallStatus, Access.internal, "csharp");
 @@access(OpenAI.ImageBackground, Access.internal, "csharp");
+@@access(OpenAI.ImageDetail, Access.internal, "csharp");
 @@access(OpenAI.ImageGenActionEnum, Access.internal, "csharp");
 @@access(OpenAI.ImageOutputFormat, Access.internal, "csharp");
 @@access(OpenAI.IncludeEnum, Access.internal, "csharp");
@@ -1325,9 +1324,17 @@ namespace Azure.AI.Projects {
 @@access(OpenAI.ItemFieldWebSearchToolCall, Access.internal, "csharp");
 @@access(OpenAI.LocalEnvironmentResource, Access.internal, "csharp");
 @@access(OpenAI.LocalShellExecAction, Access.internal, "csharp");
+@@access(OpenAI.LogProb, Access.internal, "csharp");
 @@access(OpenAI.MCPListToolsTool, Access.internal, "csharp");
 @@access(OpenAI.MCPListToolsToolAnnotations, Access.internal, "csharp");
 @@access(OpenAI.MCPListToolsToolInputSchema, Access.internal, "csharp");
+@@access(OpenAI.MessageContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentInputFileContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentInputImageContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentInputTextContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentOutputTextContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentReasoningTextContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentRefusalContent, Access.internal, "csharp");
 @@access(OpenAI.MessagePhase, Access.internal, "csharp");
 @@access(OpenAI.MessageRole, Access.internal, "csharp");
 @@access(OpenAI.MessageStatus, Access.internal, "csharp");
@@ -1337,6 +1344,7 @@ namespace Azure.AI.Projects {
 @@access(OpenAI.ModerationParam, Access.internal, "csharp");
 @@access(OpenAI.ModerationPolicyParam, Access.internal, "csharp");
 @@access(OpenAI.ProgramOutputStatus, Access.internal, "csharp");
+@@access(OpenAI.PromptCacheBreakpointConfig, Access.internal, "csharp");
 @@access(OpenAI.PromptCacheOptionsParam, Access.internal, "csharp");
 @@access(OpenAI.PromptCacheRetentionEnum, Access.internal, "csharp");
 @@access(OpenAI.RealtimeMCPError, Access.internal, "csharp");
@@ -1347,7 +1355,31 @@ namespace Azure.AI.Projects {
 @@access(OpenAI.ResponsePromptCacheOptionsParam, Access.internal, "csharp");
 @@access(OpenAI.ResponseStreamOptions, Access.internal, "csharp");
 @@access(OpenAI.ServiceTierEnum, Access.internal, "csharp");
+@@access(OpenAI.SpecificApplyPatchParam, Access.internal, "csharp");
+@@access(OpenAI.SpecificFunctionShellParam, Access.internal, "csharp");
+@@access(
+  OpenAI.SpecificProgrammaticToolCallingParam,
+  Access.internal,
+  "csharp"
+);
+@@access(OpenAI.SummaryTextContent, Access.internal, "csharp");
+@@access(OpenAI.TextContent, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceAllowed, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceCodeInterpreter, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceComputer, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceComputerUse, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceComputerUsePreview, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceCustom, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceFileSearch, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceFunction, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceImageGeneration, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceMCP, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceOptions, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceParam, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceWebSearchPreview, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceWebSearchPreview20250311, Access.internal, "csharp");
 @@access(OpenAI.ToolSearchExecutionType, Access.internal, "csharp");
+@@access(OpenAI.TopLogProb, Access.internal, "csharp");
 @@access(OpenAI.VectorStoreFileAttributes, Access.internal, "csharp");
 @@access(OpenAI.WebSearchActionFind, Access.internal, "csharp");
 @@access(OpenAI.WebSearchActionOpenPage, Access.internal, "csharp");
