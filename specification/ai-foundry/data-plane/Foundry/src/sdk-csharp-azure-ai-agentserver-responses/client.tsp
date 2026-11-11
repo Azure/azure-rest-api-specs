@@ -15,6 +15,12 @@ namespace OpenAI {
 // Map Azure.AI.Projects augmentation types into our SDK namespace
 @clientNamespace("Azure.AI.AgentServer.Responses.Models")
 namespace Azure.AI.Projects {
+  @@clientNamespace(
+    Azure.AI.ProjectsInternal,
+    "Azure.AI.AgentServer.Responses.Models",
+    "csharp"
+  );
+
   // The single-value `ResponseObjectType` union is otherwise emitted as a fixed enum that the emitter
   // initializes with a string literal (`ResponseObjectType Object { get; } = "response"`), which does not compile.
   @@alternateType(Azure.AI.Projects.ResponseObjectType, string, "csharp");

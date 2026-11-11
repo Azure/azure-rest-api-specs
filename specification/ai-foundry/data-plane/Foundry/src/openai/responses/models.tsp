@@ -7,6 +7,74 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
+namespace Azure.AI.ProjectsInternal {
+  using Azure.AI.Projects;
+
+  /** Azure specific fields used in the creation of "Response" object (i.e. "AgentReference") */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+  model AzureCreateResponseOptions {
+    /** The agent to use for generating the response. */
+    agent_reference?: AgentReference;
+
+    /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
+    structured_inputs?: Record<unknown>;
+
+    /**
+     * User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+     */
+    user_security_context?: AzureUserSecurityContext;
+
+    /**
+     * Per-request configuration for Model Router inference calls.
+     * Supported on Model Router endpoints (deployed or instant if supported).
+     * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+     */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    routing_config?: RoutingConfiguration;
+  }
+
+  /** Azure specific fields returned in a "Response" object */
+  model AzureCreateResponseDetails {
+    /** The agent used for this response */
+    agent_reference: AgentReference | null;
+
+    /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    model_selection_details?: ModelSelectionDetails;
+  }
+
+  union _AgentItemType {
+    structured_outputs: "structured_outputs",
+    oauth_consent_request: "oauth_consent_request",
+    memory_search_call: "memory_search_call",
+    memory_command_preview_call: "memory_command_preview_call",
+    memory_command_preview_call_output: "memory_command_preview_call_output",
+    workflow_action: "workflow_action",
+    a2a_preview_call: "a2a_preview_call",
+    a2a_preview_call_output: "a2a_preview_call_output",
+    bing_grounding_call: "bing_grounding_call",
+    bing_grounding_call_output: "bing_grounding_call_output",
+    sharepoint_grounding_preview_call: "sharepoint_grounding_preview_call",
+    sharepoint_grounding_preview_call_output: "sharepoint_grounding_preview_call_output",
+    azure_ai_search_call: "azure_ai_search_call",
+    azure_ai_search_call_output: "azure_ai_search_call_output",
+    bing_custom_search_preview_call: "bing_custom_search_preview_call",
+    bing_custom_search_preview_call_output: "bing_custom_search_preview_call_output",
+    openapi_call: "openapi_call",
+    openapi_call_output: "openapi_call_output",
+    browser_automation_preview_call: "browser_automation_preview_call",
+    browser_automation_preview_call_output: "browser_automation_preview_call_output",
+    fabric_dataagent_preview_call: "fabric_dataagent_preview_call",
+    fabric_dataagent_preview_call_output: "fabric_dataagent_preview_call_output",
+    azure_function_call: "azure_function_call",
+    azure_function_call_output: "azure_function_call_output",
+  }
+
+  union ResponseObjectType {
+    response: "response",
+  }
+}
+
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Experimental features applied to augment inherited OpenAI models"
 namespace Azure.AI.Projects {
   const ModelRoutersRequiredPreviews = #{
@@ -57,28 +125,7 @@ namespace Azure.AI.Projects {
   );
 
   // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
-  /** Azure specific fields used in the creation of "Response" object (i.e. "AgentReference") */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-  model AzureCreateResponseOptions {
-    /** The agent to use for generating the response. */
-    agent_reference?: AgentReference;
-
-    /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
-    structured_inputs?: Record<unknown>;
-
-    /**
-     * User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
-     */
-    user_security_context?: AzureUserSecurityContext;
-
-    /**
-     * Per-request configuration for Model Router inference calls.
-     * Supported on Model Router endpoints (deployed or instant if supported).
-     * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
-     */
-    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-    routing_config?: RoutingConfiguration;
-  }
+  alias AzureCreateResponseOptions = Azure.AI.ProjectsInternal.AzureCreateResponseOptions;
 
   /**
    * Per-request configuration for Model Router inference calls.
@@ -168,15 +215,7 @@ namespace Azure.AI.Projects {
   );
 
   // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
-  /** Azure specific fields returned in a "Response" object */
-  model AzureCreateResponseDetails {
-    /** The agent used for this response */
-    agent_reference: AgentReference | null;
-
-    /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
-    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-    model_selection_details?: ModelSelectionDetails;
-  }
+  alias AzureCreateResponseDetails = Azure.AI.ProjectsInternal.AzureCreateResponseDetails;
 
   /** The routing mode used by Model Router for the request. */
   @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
@@ -403,32 +442,7 @@ namespace Azure.AI.Projects {
   //  2. Define extended base types using the new extended discriminator
   //  3. Replace references to pre-extension base types with extended base types
 
-  union _AgentItemType {
-    structured_outputs: "structured_outputs",
-    oauth_consent_request: "oauth_consent_request",
-    memory_search_call: "memory_search_call",
-    memory_command_preview_call: "memory_command_preview_call",
-    memory_command_preview_call_output: "memory_command_preview_call_output",
-    workflow_action: "workflow_action",
-    a2a_preview_call: "a2a_preview_call",
-    a2a_preview_call_output: "a2a_preview_call_output",
-    bing_grounding_call: "bing_grounding_call",
-    bing_grounding_call_output: "bing_grounding_call_output",
-    sharepoint_grounding_preview_call: "sharepoint_grounding_preview_call",
-    sharepoint_grounding_preview_call_output: "sharepoint_grounding_preview_call_output",
-    azure_ai_search_call: "azure_ai_search_call",
-    azure_ai_search_call_output: "azure_ai_search_call_output",
-    bing_custom_search_preview_call: "bing_custom_search_preview_call",
-    bing_custom_search_preview_call_output: "bing_custom_search_preview_call_output",
-    openapi_call: "openapi_call",
-    openapi_call_output: "openapi_call_output",
-    browser_automation_preview_call: "browser_automation_preview_call",
-    browser_automation_preview_call_output: "browser_automation_preview_call_output",
-    fabric_dataagent_preview_call: "fabric_dataagent_preview_call",
-    fabric_dataagent_preview_call_output: "fabric_dataagent_preview_call_output",
-    azure_function_call: "azure_function_call",
-    azure_function_call_output: "azure_function_call_output",
-  }
+  alias _AgentItemType = Azure.AI.ProjectsInternal._AgentItemType;
 
   @@copyVariants(OpenAI.ItemType, _AgentItemType);
   @@copyVariants(OpenAI.ItemResourceType, _AgentItemType);
@@ -488,9 +502,7 @@ namespace Azure.AI.Projects {
     status: "completed" | "failed" | "in_progress" | "cancelled";
   }
 
-  union ResponseObjectType {
-    response: "response",
-  }
+  alias ResponseObjectType = Azure.AI.ProjectsInternal.ResponseObjectType;
 
   @doc("The result of a delete response operation.")
   model DeleteResponseResult {
