@@ -69,6 +69,8 @@ using Azure.AI.Projects;
 );
 
 @@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
+@@clientName(AgentOptimizationFixedTraceWindow.start_time, "startAt", "java");
+@@clientName(AgentOptimizationFixedTraceWindow.end_time, "endAt", "java");
 @@clientName(
   VoiceAgentPostCallConfig,
   "VoiceAgentPostCallConfiguration",
@@ -1047,6 +1049,16 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
 @@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
 @@clientName(MCPToolboxTool, "McpToolboxTool");
+@@clientName(
+  MCPToolboxRequestHeaderBinding,
+  "McpToolboxRequestHeaderBinding",
+  "java"
+);
+@@clientName(
+  MCPToolboxRequestHeaderBindingSource,
+  "McpToolboxRequestHeaderBindingSource",
+  "java"
+);
 @@clientName(OpenAI.RealtimeMCPApprovalRequest, "RealtimeMcpApprovalInput");
 @@clientName(OpenAI.RealtimeMCPApprovalResponse, "RealtimeMcpApprovalOutput");
 @@clientName(OpenAI.RealtimeMCPApprovalResponse.approve, "approved");
