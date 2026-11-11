@@ -1,0 +1,94 @@
+{
+  "title": "MonitorResources_CreateOrUpdate_MaximumSet",
+  "operationId": "MonitorResources_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-10-21-preview",
+    "subscriptionId": "DC34558A-05D3-4370-AED8-75E60B381F94",
+    "resourceGroupName": "rgconfluent",
+    "organizationName": "myOrganization",
+    "monitorName": "productionLogs",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "organizationId": "org-xyz789",
+        "environmentId": "env-abc123",
+        "environmentName": "Production",
+        "clusterId": "lkc-def456",
+        "clusterName": "Production Cluster",
+        "topicId": "topic-ghi789",
+        "topicName": "azure-logs",
+        "dictionary": [
+          {
+            "key": "source",
+            "value": "azure"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Confluent/organizations/myOrganization/monitors/productionLogs",
+        "name": "productionLogs",
+        "type": "Microsoft.Confluent/organizations/monitors",
+        "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "organizationId": "org-xyz789",
+          "environmentId": "env-abc123",
+          "environmentName": "Production",
+          "clusterId": "lkc-def456",
+          "clusterName": "Production Cluster",
+          "topicId": "topic-ghi789",
+          "topicName": "azure-logs",
+          "dictionary": [
+            {
+              "key": "source",
+              "value": "azure"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "monitoringStatus": "Disabled"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/providers/Microsoft.Confluent/locations/eastus/operationStatuses/op-12345?api-version=2026-10-21-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Confluent/organizations/myOrganization/monitors/productionLogs",
+        "name": "productionLogs",
+        "type": "Microsoft.Confluent/organizations/monitors",
+        "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "organizationId": "org-xyz789",
+          "environmentId": "env-abc123",
+          "environmentName": "Production",
+          "clusterId": "lkc-def456",
+          "clusterName": "Production Cluster",
+          "topicId": "topic-ghi789",
+          "topicName": "azure-logs",
+          "dictionary": [
+            {
+              "key": "source",
+              "value": "azure"
+            }
+          ],
+          "provisioningState": "Creating",
+          "monitoringStatus": "Disabled"
+        }
+      }
+    }
+  }
+}
