@@ -1,0 +1,38 @@
+{
+  "title": "Approves pending transfer flow requests in a pipeline",
+  "operationId": "Pipelines_ApproveTransferFlow",
+  "parameters": {
+    "api-version": "2026-06-29-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "pipelineName": "testPipeline",
+    "body": {
+      "id": [
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/storageTransferFlows/testStorageTransferFlow",
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/testMessagingTransferFlow"
+      ],
+      "statusReason": "Example reason"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/storageTransferFlows/testStorageTransferFlow",
+            "status": "ApprovedWaitingToBeLinked"
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/testMessagingTransferFlow",
+            "status": "ApprovedWaitingToBeLinked"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.AzureDataTransfer/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-06-29-preview"
+      }
+    }
+  }
+}

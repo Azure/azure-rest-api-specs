@@ -125,23 +125,73 @@ function same(left: unknown, right: unknown) {
     : canonicalJson(left) === canonicalJson(right);
 }
 
+function unresolvedReferenceIdentity(value: unknown): string | undefined {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const record = value as Record<string, unknown>;
+  if (record.unresolved !== true && typeof record.unresolvedReference !== "string") {
+    return undefined;
+  }
+  for (const field of ["ref", "reference", "unresolvedReference"]) {
+    if (typeof record[field] === "string") return record[field];
+  }
+  return "<unresolved>";
+}
+
+function isArmCommonTypeReference(identity: string): boolean {
+  const normalized = identity.replaceAll("\\", "/");
+  return (
+    /(?:^|\/)specification\/common-types\//i.test(normalized) ||
+    /^(?:\.\.\/|\.\/)*common-types\//i.test(normalized)
+  );
+}
+
+function unresolvedArrayKey(value: unknown, index: number): string {
+  if (value !== null && typeof value === "object" && !Array.isArray(value)) {
+    const record = value as Record<string, unknown>;
+    if (typeof record.operationId === "string") return `operation:${record.operationId}`;
+    if (typeof record.status === "string") return `status:${record.status}`;
+    if (typeof record.name === "string" && typeof record.in === "string") {
+      return `parameter:${record.in}:${record.name}`;
+    }
+    if (typeof record.name === "string") return `name:${record.name}`;
+  }
+  return `index:${index}`;
+}
+
+function collectBlockingUnresolvedEvidence(
+  value: unknown,
+  location: string,
+  result: Map<string, string>,
+) {
+  if (value === null || typeof value !== "object") return;
+  const identity = unresolvedReferenceIdentity(value);
+  if (identity !== undefined) {
+    if (!isArmCommonTypeReference(identity)) result.set(location, identity);
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) =>
+      collectBlockingUnresolvedEvidence(
+        item,
+        `${location}[${unresolvedArrayKey(item, index)}]`,
+        result,
+      ),
+    );
+    return;
+  }
+  for (const [key, nested] of Object.entries(value)) {
+    collectBlockingUnresolvedEvidence(nested, `${location}.${key}`, result);
+  }
+}
+
 function changedUnresolvedEvidence(before: unknown, after: unknown): boolean {
   if (same(before, after)) return false;
-  const isObject = (value: unknown): value is Record<string, unknown> =>
-    value !== null && typeof value === "object";
-  if (
-    [before, after].some(
-      (value) =>
-        isObject(value) &&
-        (value.unresolved === true || typeof value.unresolvedReference === "string"),
-    )
-  ) {
-    return true;
-  }
-  const baseline = isObject(before) ? before : {};
-  const target = isObject(after) ? after : {};
-  return [...new Set([...Object.keys(baseline), ...Object.keys(target)])].some((key) =>
-    changedUnresolvedEvidence(baseline[key], target[key]),
+  const baseline = new Map<string, string>();
+  const target = new Map<string, string>();
+  collectBlockingUnresolvedEvidence(before, "$", baseline);
+  collectBlockingUnresolvedEvidence(after, "$", target);
+  return [...new Set([...baseline.keys(), ...target.keys()])].some(
+    (key) => baseline.get(key) !== target.get(key),
   );
 }
 
@@ -177,6 +227,82 @@ function visibleIn(schema: NormalizedSchema, direction: SchemaDirection): boolea
   return !mutability?.length || mutability.includes("read");
 }
 
+type ObjectContract = {
+  properties: NonNullable<NormalizedSchema["properties"]>;
+  constraints: Record<string, unknown[]>;
+  additionalProperties: unknown;
+};
+
+function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | undefined {
+  if (schema.kind !== "object" && schema.kind !== "intersection") return undefined;
+  const properties = new Map<string, NonNullable<NormalizedSchema["properties"]>[number]>();
+  const constraints = new Map<string, unknown[]>();
+  const additionalProperties: unknown[] = [];
+
+  const visit = (current: NormalizedSchema): boolean => {
+    const unresolved = unresolvedReferenceIdentity(current);
+    if (unresolved !== undefined) return isArmCommonTypeReference(unresolved);
+    if (current.kind !== "object" && current.kind !== "intersection" && current.kind !== "any") {
+      return false;
+    }
+    if (current.allOf?.length) return current.allOf.every(visit);
+
+    for (const field of WIRE_CONSTRAINT_FIELDS) {
+      if (current[field] === undefined) continue;
+      const values = constraints.get(field) ?? [];
+      values.push(current[field]);
+      constraints.set(field, values);
+    }
+    if (current.additionalProperties !== undefined) {
+      additionalProperties.push(current.additionalProperties);
+    }
+    for (const property of current.properties ?? []) {
+      const existing = properties.get(property.name);
+      if (!existing) {
+        properties.set(property.name, property);
+      } else {
+        properties.set(property.name, {
+          name: property.name,
+          required: existing.required || property.required,
+          schema: same(existing.schema, property.schema)
+            ? existing.schema
+            : {
+                kind: "intersection",
+                allOf: [existing.schema, property.schema],
+              },
+        });
+      }
+    }
+    return true;
+  };
+
+  if (!visit(schema)) return undefined;
+  return {
+    properties: [...properties.values()].sort((left, right) => left.name.localeCompare(right.name)),
+    constraints: Object.fromEntries(
+      [...constraints.entries()].map(([field, values]) => [
+        field,
+        [...new Map(values.map((value) => [canonicalJson(value), value])).values()].sort(
+          (left, right) => canonicalJson(left).localeCompare(canonicalJson(right)),
+        ),
+      ]),
+    ),
+    additionalProperties: additionalProperties.includes(false)
+      ? false
+      : (() => {
+          const schemas = [
+            ...new Map(
+              additionalProperties
+                .filter((value) => value !== true)
+                .map((value) => [canonicalJson(value), value]),
+            ).values(),
+          ].sort((left, right) => canonicalJson(left).localeCompare(canonicalJson(right)));
+          if (!schemas.length) return true;
+          return schemas.length === 1 ? schemas[0] : schemas;
+        })(),
+  };
+}
+
 function pairs(base: NormalizedAutorestOperation[], current: NormalizedAutorestOperation[]) {
   const currentByKey = new Map(current.map((item) => [logicalKey(item), item]));
   const used = new Set();
@@ -202,9 +328,22 @@ function schemaChanges(
 ): BreakingChange[] {
   if (same(before, after)) return [];
   if (!before || !after) return [{ rule: "wire-schema-changed", location }];
+  const beforeUnresolved = unresolvedReferenceIdentity(before);
+  const afterUnresolved = unresolvedReferenceIdentity(after);
+  if (
+    beforeUnresolved !== undefined &&
+    afterUnresolved !== undefined &&
+    isArmCommonTypeReference(beforeUnresolved) &&
+    isArmCommonTypeReference(afterUnresolved)
+  ) {
+    return [];
+  }
 
+  const beforeObject = effectiveObjectContract(before);
+  const afterObject = effectiveObjectContract(after);
+  const objectContracts = beforeObject && afterObject;
   const changes: BreakingChange[] = [];
-  if (before.kind !== after.kind || before.type !== after.type) {
+  if (!objectContracts && (before.kind !== after.kind || before.type !== after.type)) {
     return [{ rule: "wire-type-changed", location }];
   }
   if (before.nullable && !after.nullable) changes.push({ rule: "nullable-restricted", location });
@@ -216,14 +355,19 @@ function schemaChanges(
         schema[field],
       ]),
     );
-  if (!same(constraints(before), constraints(after))) {
+  if (
+    !same(
+      objectContracts ? beforeObject.constraints : constraints(before),
+      objectContracts ? afterObject.constraints : constraints(after),
+    )
+  ) {
     changes.push({ rule: "wire-schema-changed", location });
   }
-  if (before.kind === "object" || before.kind === "intersection") {
-    const beforeVisibleProperties = (before.properties ?? []).filter((item) =>
+  if (objectContracts) {
+    const beforeVisibleProperties = beforeObject.properties.filter((item) =>
       visibleIn(item.schema, direction),
     );
-    const afterVisibleProperties = (after.properties ?? []).filter((item) =>
+    const afterVisibleProperties = afterObject.properties.filter((item) =>
       visibleIn(item.schema, direction),
     );
     const beforeProperties = new Map(beforeVisibleProperties.map((item) => [item.name, item]));
@@ -254,9 +398,10 @@ function schemaChanges(
         changes.push({ rule: "required-property-added", location: `${location}.${property.name}` });
       }
     }
-    if (!same(before.additionalProperties, after.additionalProperties)) {
+    if (!same(beforeObject.additionalProperties, afterObject.additionalProperties)) {
       changes.push({ rule: "additional-properties-changed", location });
     }
+  } else if (before.kind === "object" || before.kind === "intersection") {
     if (before.kind === "intersection") {
       const beforeParts = before.allOf ?? [];
       const afterParts = after.allOf ?? [];

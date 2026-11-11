@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "armtemplate"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       In API version `2024-10-01-preview`, add a tracked Employee ARM resource to the Microsoft.Widget service. It should have optional age, city, and binary profile data, along with a read-only provisioning state. Support the standard operations for a tracked ARM resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/002005-ARM-define-the-resource/main.tsp
           dest: main.tsp
@@ -53,7 +53,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author In API version `2024-10-01-preview`, add a tracked Employee ARM resource to the Microsoft.Widget service. It should have optional age, city, and binary profile data, along with a read-only provisioning state. Support the standard operations for a tracked ARM resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: &shared_rubric
       - Employee is defined under Microsoft.Widget as a tracked ARM resource with optional age, city, and binary profile properties plus a read-only provisioning state.
       - The provisioning state incorporates the standard ARM ResourceProvisioningState behavior, directly or through a standard inherited resource shape.
@@ -71,10 +71,9 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - &compiled_employee
-        type: "run-command"
+      - type: "run-command"
         name: "compiled-employee-service"
-        config:
+        config: &compiled_employee_config
           command: "node check-employee-service.ts"
           expected_exit_code: 0
       - &file_matches
@@ -84,44 +83,37 @@ stimuli:
           path: "*.tsp"
       - &file_matches_age_property
         type: "file-matches"
-        name: "file-matches-age-property"
         config:
           pattern: 'age\?: int32'
           path: "*.tsp"
       - &file_matches_visibility
         type: "file-matches"
-        name: "file-matches-visibility"
         config:
-          pattern: '@visibility\(Lifecycle\.Read\)'
+          pattern: '(@visibility\(Lifecycle\.Read\)|DefaultProvisioningStateProperty)'
           path: "*.tsp"
       - &file_matches_provisioning_state
         type: "file-matches"
-        name: "file-matches-provisioning-state"
         config:
-          pattern: "ResourceProvisioningState"
+          pattern: "(ResourceProvisioningState|DefaultProvisioningStateProperty)"
           path: "*.tsp"
       - &file_matches_create_operation
         type: "file-matches"
-        name: "file-matches-create-operation"
         config:
-          pattern: "ArmResourceCreateOrReplaceAsync<Employee>|ArmResourceCreateOrUpdateAsync<Employee>"
+          pattern: "(ArmResourceCreateOrReplaceAsync<Employee>|ArmResourceCreateOrUpdateAsync<Employee>|TrackedResourceOperations<Employee,\\s*EmployeeProperties>)"
           path: "*.tsp"
       - &file_matches_parent_list_operation
         type: "file-matches"
-        name: "file-matches-parent-list-operation"
         config:
-          pattern: "ArmResourceListByParent<Employee>"
+          pattern: "(ArmResourceListByParent<Employee>|TrackedResourceOperations<Employee,\\s*EmployeeProperties>)"
           path: "*.tsp"
       - &file_matches_subscription_list_operation
         type: "file-matches"
-        name: "file-matches-subscription-list-operation"
         config:
-          pattern: "ArmListBySubscription<Employee>"
+          pattern: "(ArmListBySubscription<Employee>|TrackedResourceOperations<Employee,\\s*EmployeeProperties>)"
           path: "*.tsp"
-      - &semantic_resource_contract
-        type: "prompt"
+      - type: "prompt"
         name: "semantic-resource-contract"
-        config:
+        config: &semantic_resource_contract_config
           prompt: "Verify the emitted resource contract rather than requiring a particular file split or template spelling: Employee is a tracked ARM resource under Microsoft.Widget; its properties include optional age, city, and binary profile data plus a read-only provisioning state with standard ARM behavior; and it exposes standard CRUD, resource-group list, and subscription list operations. Reject missing operations or fields and unrelated edits."
           model: "gpt-5.6-sol"
           scoring: "scale_1_10"
@@ -135,7 +127,7 @@ stimuli:
       mode: "no-skill"
     prompt: |
       In API version `2024-10-01-preview`, add a tracked Employee ARM resource to the Microsoft.Widget service. It should have optional age, city, and binary profile data, along with a read-only provisioning state. Support the standard operations for a tracked ARM resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: *shared_rubric
     graders:
       - type: "tool-calls"
@@ -146,7 +138,9 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - *compiled_employee
+      - type: "run-command"
+        name: "compiled-employee-service-no-skill"
+        config: *compiled_employee_config
       - *file_matches
       - *file_matches_age_property
       - *file_matches_visibility
@@ -154,7 +148,9 @@ stimuli:
       - *file_matches_create_operation
       - *file_matches_parent_list_operation
       - *file_matches_subscription_list_operation
-      - *semantic_resource_contract
+      - type: "prompt"
+        name: "semantic-resource-contract-no-skill"
+        config: *semantic_resource_contract_config
     constraints:
       max_turns: 6
       max_tokens: 100000

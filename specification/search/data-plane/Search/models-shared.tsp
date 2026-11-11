@@ -48,6 +48,65 @@ union ListingSearchType {
   Prefix: "prefix",
 }
 
+/** Base type for topic graph vector search options. */
+@discriminator("kind")
+@added(Versions.v2026_11_01_preview)
+model VectorQueryTopicGraph {
+  /** The kind of topic graph vector search to use. */
+  kind: VectorSearchTopicGraphKind;
+}
+
+/** Uses normal vector search without topic graph diverse retrieval. */
+@added(Versions.v2026_11_01_preview)
+model NoneVectorQueryTopicGraph extends VectorQueryTopicGraph {
+  /** The discriminator value. */
+  kind: VectorSearchTopicGraphKind.None;
+}
+
+/** Uses topic graph diverse retrieval. */
+@added(Versions.v2026_11_01_preview)
+model DiverseVectorQueryTopicGraph extends VectorQueryTopicGraph {
+  /** The discriminator value. */
+  kind: VectorSearchTopicGraphKind.Diverse;
+
+  /** The diversity factor used for topic graph diverse retrieval. If omitted, the default configured on the topic graph profile is used. */
+  @minValue(0)
+  @maxValue(1)
+  diversityFactor?: float32;
+
+  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000. */
+  @minValue(250)
+  @maxValue(10000)
+  minDiversityPoolSize?: int32;
+}
+
+/** Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance. */
+@added(Versions.v2026_11_01_preview)
+model BalancedVectorQueryTopicGraph extends VectorQueryTopicGraph {
+  /** The discriminator value. */
+  kind: VectorSearchTopicGraphKind.Balanced;
+
+  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000. */
+  @minValue(250)
+  @maxValue(10000)
+  minDiversityPoolSize?: int32;
+}
+
+/** The kind of topic graph vector search to use. */
+@added(Versions.v2026_11_01_preview)
+union VectorSearchTopicGraphKind {
+  string,
+
+  /** Use normal vector search when topic graph diverse retrieval is off. */
+  None: "none",
+
+  /** Use topic graph diverse retrieval. */
+  Diverse: "diverse",
+
+  /** Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance. */
+  Balanced: "balanced",
+}
+
 /** Reusable server-driven pagination query parameters shared by all listing operations. */
 alias listingPaginationQuery = {
   /** A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied. */
@@ -137,6 +196,7 @@ alias querySourceAuthorizationHeader = {
   /** Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents. */
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
+  @secret
   @header("x-ms-query-source-authorization")
   querySourceAuthorization?: string;
 };
@@ -144,6 +204,7 @@ alias querySourceAuthorizationHeader = {
 alias queryWorkIQSourceAuthorizationHeader = {
   /** User assertion token for a customer-owned Entra app registration configured on a Work IQ knowledge source. Used for on-behalf-of authentication to the Work IQ API. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @secret
