@@ -43,7 +43,7 @@ specification/
     └── data-plane/
         └── <ServiceName3>/	// Customer-facing service name; contents identical to above structure
 ```
-In this structure, Azure services are represented as an RPNamespace that is used to manage services (both with customer-facing names). Each service has versions (some preview and some GA) and each version has its own API contract, documentation, and (beta/stable) SDK package(s).
+In this structure, Azure services are presented as an RPNamespace that is used to manage services (both with customer-facing names). Each service has versions (some preview and some GA) and each version has its own API contract, documentation, and (beta/stable) SDK package(s).\
 
 For an RP namespace that contains a single service, the service name may repeat the namespace suffix, for example `Microsoft.Foo/Foo`. This naming pattern is not inherently invalid. The service folder should instead be evaluated based on whether it represents a customer-facing service boundary that versions uniformly and has its own API contract, documentation, and SDK package or packages.
 
