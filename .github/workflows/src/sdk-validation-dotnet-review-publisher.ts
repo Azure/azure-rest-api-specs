@@ -17,6 +17,7 @@ type PublicationContext = {
   source: {
     specPrNumber: number;
     specHeadSha: string;
+    specBaseSha: string;
   };
 };
 
@@ -32,12 +33,15 @@ function requirePublicationContext(value: unknown): PublicationContext {
   const context = value as Partial<PublicationContext>;
   const pullNumber = context?.source?.specPrNumber;
   const headSha = context?.source?.specHeadSha;
+  const baseSha = context?.source?.specBaseSha;
   if (
     context?.schemaVersion !== 1 ||
     !Number.isSafeInteger(pullNumber) ||
     Number(pullNumber) <= 0 ||
     typeof headSha !== "string" ||
-    !isFullGitSha(headSha)
+    !isFullGitSha(headSha) ||
+    typeof baseSha !== "string" ||
+    !isFullGitSha(baseSha)
   ) {
     throw new Error("SDK review publication context has invalid source identity");
   }
@@ -81,7 +85,7 @@ export async function publishSdkReviewResult(params: {
   } = params;
   const { github, context, core } = githubScript;
   const publicationContext = requirePublicationContext(await readJson(publicationContextPath));
-  const { specPrNumber, specHeadSha } = publicationContext.source;
+  const { specPrNumber, specHeadSha, specBaseSha } = publicationContext.source;
   let remediationResult: RemediationResult | undefined;
   if (workflowConclusion === "success") {
     const reviewContextPath = path.join(
@@ -118,9 +122,13 @@ export async function publishSdkReviewResult(params: {
     repo: context.repo.repo,
     pull_number: specPrNumber,
   });
-  if (pullRequest.state !== "open" || pullRequest.head.sha !== specHeadSha) {
+  if (
+    pullRequest.state !== "open" ||
+    pullRequest.head.sha !== specHeadSha ||
+    pullRequest.base.sha !== specBaseSha
+  ) {
     core.info(
-      `Skipping generated SDK review publication because PR #${specPrNumber} is closed or moved past ${specHeadSha}.`,
+      `Skipping generated SDK review publication because PR #${specPrNumber} is closed or moved from ${specBaseSha}...${specHeadSha}.`,
     );
     return;
   }

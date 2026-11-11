@@ -9,6 +9,7 @@ const HEAD_SHA = "1".repeat(40);
 const SKILL_REVISION = "2".repeat(40);
 const REMEDIATION_SKILL_REVISION = "3".repeat(40);
 const BASELINE_SHA = "4".repeat(40);
+const SPEC_BASE_SHA = "5".repeat(40);
 const SPEC_FILE = "specification/widget/Widget.Management/models.tsp";
 const temporaryDirectories: string[] = [];
 
@@ -66,7 +67,7 @@ async function createFixture(): Promise<{
   };
   const typeSpecContext = {
     schemaVersion: 1,
-    source: { ...source, specBaseSha: "5".repeat(40) },
+    source: { ...source, specBaseSha: SPEC_BASE_SHA },
     projects: [],
     files: [
       {
@@ -139,7 +140,33 @@ describe("publishSdkReviewResult", () => {
     const fixture = await createFixture();
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({
-      data: { state: "open", head: { sha: "9".repeat(40) } },
+      data: {
+        state: "open",
+        head: { sha: "9".repeat(40) },
+        base: { sha: SPEC_BASE_SHA },
+      },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+  });
+
+  it("does not mutate a PR after its base changes", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { sha: "9".repeat(40) },
+      },
     });
 
     await publishSdkReviewResult({
@@ -157,7 +184,11 @@ describe("publishSdkReviewResult", () => {
     const fixture = await createFixture();
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({
-      data: { state: "open", head: { sha: HEAD_SHA } },
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { sha: SPEC_BASE_SHA },
+      },
     });
 
     await publishSdkReviewResult({
@@ -181,7 +212,11 @@ describe("publishSdkReviewResult", () => {
     const fixture = await createFixture();
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({
-      data: { state: "open", head: { sha: HEAD_SHA } },
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { sha: SPEC_BASE_SHA },
+      },
     });
 
     await publishSdkReviewResult({
@@ -214,7 +249,11 @@ describe("publishSdkReviewResult", () => {
     await writeJson(reviewContextPath, reviewContext);
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({
-      data: { state: "open", head: { sha: HEAD_SHA } },
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { sha: SPEC_BASE_SHA },
+      },
     });
 
     await expect(
