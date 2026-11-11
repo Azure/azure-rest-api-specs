@@ -87,6 +87,19 @@ suppressions:
     from: vmssNetwork.json
     reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
   # --- stable/2026-05-01/firewallPolicy.json ---
+  - code: ResourceNameRestriction
+    from: firewallPolicy.json
+    reason: >-
+      firewallPolicyName is an existing parent resource path parameter used throughout the
+      Firewall Policy API without a pattern restriction. The new security profile and security
+      profile group routes retain that parent contract; adding a pattern would restrict names
+      accepted by existing clients. The new securityProfileName and securityProfileGroupName
+      parameters already define pattern restrictions.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}"]
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: firewallPolicy.json
     reason: The Network TypeSpec project targets ARM common types v5. Firewall Policy follows the same project-wide common-types version to avoid unrelated contract churn across the 2026-05-01 package.
