@@ -51,8 +51,11 @@ model SemanticRerankingInferenceContent {
    * This property is required for JSON documents. Use dot notation for a nested property, for example `meta.content`.
    * You can specify multiple property paths separated by commas, for example `meta.content,id`.
    */
-  @maxLength(2147483647)
-  targetPaths?: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The service contract takes the paths as one comma-separated string; commaDelimited encoding lets SDKs expose a string collection while sending that string."
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "AutoRest cannot express array delimiter encoding, so the OpenAPI keeps the existing string definition, which matches the wire contract."
+  @encode(ArrayEncoding.commaDelimited)
+  @maxItems(100)
+  targetPaths?: string[];
 
   /** The name of the model used for the semantic reranking operation. */
   @maxLength(2147483647)
@@ -209,6 +212,7 @@ model InferenceErrorResult
 
 /** Errors returned by an inference operation. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "The union defines distinct HTTP error responses and is not emitted as a response body schema."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union InferenceOperationError {
   /** The request was rate limited. */
   tooManyRequests: TooManyRequestsResult,

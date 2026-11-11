@@ -3,6 +3,7 @@ import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
+import { resolve } from "pathe";
 import {
   exceptionDiagnostic,
   formatRuleStatus,
@@ -12,21 +13,20 @@ import {
   type RuleStatus,
 } from "./diagnostics.ts";
 import type { Diagnostic, RuleResult } from "./rule-result.ts";
-import { type Rule } from "./rule.ts";
+import { type Rule, type RuleExecutionOptions } from "./rule.ts";
 import { runAll, runChanged } from "./run-projects.ts";
 import { ClientTspImportRule } from "./rules/client-tsp-import.ts";
 import { CompileRule } from "./rules/compile.ts";
+import { DisallowedFileTypesRule } from "./rules/disallowed-file-types.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";
 import { FlavorAzureRule } from "./rules/flavor-azure.ts";
 import { FolderStructureRule } from "./rules/folder-structure.ts";
 import { FormatRule } from "./rules/format.ts";
 import { LinterRulesetRule } from "./rules/linter-ruleset.ts";
-import { MultipleNewApiVersionsRule } from "./rules/multiple-new-api-versions.ts";
 import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
 import { ServiceYamlRule } from "./rules/service-yaml.ts";
-import { StaleApiVersionPinRule } from "./rules/stale-api-version-pin.ts";
-import { fileExists, getSuppressions, normalizePath } from "./utils.ts";
+import { fileExists, getSuppressions } from "./utils.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
 export let context: Record<string, unknown> = { checkingAllSpecs: false };
@@ -39,7 +39,7 @@ export interface RunRulesResult {
 }
 
 /**
- * Runs the given rules against a folder, handling per-rule suppressions
+ * Runs the given rules against a folder in check or fix mode, handling per-rule suppressions
  * for rules that opt in via `suppressable: true`.
  */
 export async function runRules(
@@ -47,6 +47,7 @@ export async function runRules(
   folder: string,
   suppressions: Suppression[],
   logger: ILogger,
+  options: RuleExecutionOptions = {},
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
   const diagnostics: Diagnostic[] = [];
@@ -71,7 +72,7 @@ export async function runRules(
 
     let ruleResult: RuleResult;
     try {
-      ruleResult = await rule.execute(folder, logger);
+      ruleResult = await rule.execute(folder, logger, options);
     } catch (error) {
       logger.debug(error instanceof Error ? (error.stack ?? error.message) : String(error));
       ruleResult = { success: false, diagnostics: [exceptionDiagnostic(error, folder)] };
@@ -131,24 +132,38 @@ const help = {
   ],
   notes: [
     "Run from the repository root after installing dependencies with pnpm install.",
-    "Validation may update generated files and formatting. Changes are retained unless --git-clean is used.",
-    "Do not use --git-clean while other work is in progress.",
+    "By default, batch runs check generated files and formatting without modifying the checkout.",
+    "Single-project validation applies fixes by default; use --check to disable them.",
+    "Use --fix to retain batch updates. Validation still fails when files change.",
   ],
   examples: [
     "specification/<service>/<project>",
     "--all",
+    "--all --fix",
     "--changed --base=origin/main --head=HEAD --dry-run",
   ],
   documentation: "https://aka.ms/azsdk/specs/typespec-validation",
 };
 
-export async function main() {
+export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
   const args = process.argv.slice(2);
   const options = {
     verbose: {
       type: "boolean",
       short: "v",
       description: "Include rule progress, debug details, and Git traces.",
+    },
+    check: {
+      type: "boolean",
+      group: "Validation mode",
+      description: "Check without modifying files (default for --all and --changed).",
+    },
+    fix: {
+      type: "boolean",
+      group: "Validation mode",
+      description:
+        "Apply fixes and retain changes (default for single-project runs). " +
+        "Validation still fails when files change.",
     },
     all: {
       type: "boolean",
@@ -184,6 +199,11 @@ export async function main() {
       description:
         "Select a shard using one-based indices. Each shard requires a separate checkout.",
     },
+    "github-summary": {
+      type: "boolean",
+      group: "Options for --all",
+      description: "Append failed project paths to the GitHub job summary.",
+    },
     "dry-run": {
       type: "boolean",
       group: "Options for --all or --changed",
@@ -194,15 +214,21 @@ export async function main() {
       type: "boolean",
       group: "Options for --all or --changed",
       description:
-        "Restore tracked files and remove untracked files and directories across the entire repository " +
-        "after each project. Requires a clean, disposable checkout; " +
-        "ignored files are retained.",
+        "Require a clean checkout, including untracked files, once before validation. " +
+        "Does not restore or delete files; ignored files are retained.",
     },
   } satisfies Record<string, CliOption>;
   const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });
   if (!parsedArgs) return;
 
   const { values } = parsedArgs;
+  if (values.check && values.fix) {
+    console.error("--check and --fix cannot be combined");
+    process.exitCode = 1;
+    return;
+  }
+  const fix =
+    values.fix ?? (values.check ? false : (defaultFix ?? !(values.all || values.changed)));
   const logger = new ConsoleLogger(values.verbose);
   if (values.verbose) {
     debug.enable([process.env.DEBUG, "simple-git"].filter(Boolean).join(","));
@@ -231,6 +257,17 @@ export async function main() {
     process.exitCode = 1;
     return;
   }
+  if (values["github-summary"] && !values.all) {
+    console.error("--github-summary requires --all");
+    process.exitCode = 1;
+    return;
+  }
+  const summaryFile = values["github-summary"] ? process.env.GITHUB_STEP_SUMMARY : undefined;
+  if (values["github-summary"] && !summaryFile) {
+    console.error("--github-summary requires the GITHUB_STEP_SUMMARY environment variable");
+    process.exitCode = 1;
+    return;
+  }
 
   if (values.changed) {
     if (parsedArgs.positionals.length > 0) {
@@ -247,6 +284,7 @@ export async function main() {
       gitClean: values["git-clean"],
       dryRun: values["dry-run"],
       verbose: values.verbose,
+      fix,
     });
     if (!success) process.exitCode = 1;
     return;
@@ -255,7 +293,7 @@ export async function main() {
   if (values.all) {
     if (parsedArgs.positionals.length > 1) {
       console.error(
-        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean] [--dry-run]",
+        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--git-clean] [--dry-run]",
       );
       process.exitCode = 1;
       return;
@@ -265,18 +303,25 @@ export async function main() {
       shard: values.shard,
       dryRun: values["dry-run"],
       verbose: values.verbose,
+      summaryFile,
+      fix,
     });
     if (!success) process.exitCode = 1;
     return;
   }
 
   const folder = parsedArgs.positionals[0];
+  if (folder === undefined) {
+    console.error("A project folder is required. Use --help for usage.");
+    process.exitCode = 1;
+    return;
+  }
 
   if (parsedArgs.positionals[1]) {
     context = { ...context, ...(JSON.parse(parsedArgs.positionals[1]) as Record<string, unknown>) };
   }
 
-  const absolutePath = normalizePath(folder);
+  const absolutePath = resolve(folder);
 
   if (!(await fileExists(absolutePath))) {
     console.log(`Folder ${absolutePath} does not exist`);
@@ -301,6 +346,7 @@ export async function main() {
 
   const rules: Rule[] = [
     new FolderStructureRule(),
+    new DisallowedFileTypesRule(),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
     new ServiceYamlRule(),
@@ -310,11 +356,9 @@ export async function main() {
     new CompileRule(),
     new FormatRule(),
     new SdkTspConfigValidationRule(),
-    new MultipleNewApiVersionsRule(),
-    new StaleApiVersionPinRule(),
   ];
 
-  const result = await runRules(rules, absolutePath, suppressions, logger);
+  const result = await runRules(rules, absolutePath, suppressions, logger, { fix });
 
   if (!result.success) {
     process.exitCode = 1;

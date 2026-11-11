@@ -14,6 +14,7 @@ import "../agents-microsoft365/routes.tsp";
 import "../agents-optimization/routes.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
+import "../openai/evaluations/models.tsp";
 import "../openai/responses/models.tsp";
 import "../openai/conversations/routes.tsp";
 
@@ -23,9 +24,166 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
+@@alternateType(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionSegment.start,
+  FoundryDurationSecondsFloat,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionSegment.end,
+  FoundryDurationSecondsFloat,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeTurnDetectionServerVad.prefix_padding_ms,
+  FoundryDurationMilliseconds,
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeTurnDetectionServerVad.prefix_padding_ms,
+  "prefixPadding",
+  "java"
+);
+
+// Reuse equivalent openai-java models instead of generating duplicate public types.
+@@alternateType(
+  OpenAI.ChatCompletionTool,
+  {
+    identity: "com.openai.models.chat.completions.ChatCompletionFunctionTool",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.FunctionObject,
+  {
+    identity: "com.openai.models.FunctionDefinition",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.FunctionParameters,
+  {
+    identity: "com.openai.models.FunctionParameters",
+  },
+  "java"
+);
+
+@@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
+@@clientName(
+  VoiceAgentPostCallConfig,
+  "VoiceAgentPostCallConfiguration",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationConfiguration.max_num_turns,
+  "maximumNumberOfTurns",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationConfiguration.desired_num_turns,
+  "desiredNumberOfTurns",
+  "java"
+);
+@@alternateType(ModelSamplingParams.max_completion_tokens, int64, "java");
+
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
+@@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!java");
+
+// Keep both concrete voice definitions public.
+@@access(VoiceAgentDefinition, Access.public, "java");
+@@access(VoiceAgentLiveDefinition, Access.public, "java");
+
+@@alternateType(
+  OpenAI.LiveClientDelegationParam.acknowledgement_delay_ms,
+  FoundryDurationMilliseconds,
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveResponsesDelegationParam.acknowledgement_delay_ms,
+  FoundryDurationMilliseconds,
+  "java"
+);
+@@clientName(
+  OpenAI.LiveClientDelegationParam.acknowledgement_delay_ms,
+  "acknowledgementDelay",
+  "java"
+);
+@@clientName(
+  OpenAI.LiveResponsesDelegationParam.acknowledgement_delay_ms,
+  "acknowledgementDelay",
+  "java"
+);
+@@clientName(
+  VoiceAgentLiveFoundryManagedAgentDelegationItem.offset_ms,
+  "offset",
+  "java"
+);
+
+@@clientName(VoiceAgentSystemTool.timeout_seconds, "timeout", "java");
+@@clientName(
+  VoiceAgentServerEventSystemToolArgumentsDelta,
+  "VoiceAgentSystemToolArgumentsDeltaEvent",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventSystemToolArgumentsDone,
+  "VoiceAgentSystemToolArgumentsDoneEvent",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventInputCollectionStatus,
+  "VoiceAgentInputCollectionStatusEvent",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventInputCollectionStatus.output_ref,
+  "outputReference",
+  "java"
+);
+@@clientName(VoiceAgentSystemToolItem.object, "objectType", "java");
+@@clientName(
+  VoiceAgentTransferRouting.ring_timeout_seconds,
+  "ringTimeout",
+  "java"
+);
+
+@@alternateType(
+  OpenAI.LiveResponsesDelegationSettingsInputParam,
+  {
+    identity: "com.openai.models.live.ResponsesDelegationConfig",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveInitialSessionAudioParam,
+  {
+    identity: "com.openai.models.live.SessionConfig.Audio",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveInitialSessionAudioOutputParam,
+  {
+    identity: "com.openai.models.live.SessionConfig.Audio.Output",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveCustomVoiceParam,
+  {
+    identity: "com.openai.models.live.CustomVoice",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LiveSessionUsage,
+  {
+    identity: "com.openai.models.live.SessionUsage",
+  },
+  "java"
+);
 
 // Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
 @@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
@@ -50,11 +208,6 @@ using Azure.AI.Projects;
 @@clientName(
   OpenAI.RealtimeServerEventErrorError,
   "RealtimeServerErrorDetails",
-  "java"
-);
-@@clientName(
-  PSTNTelephonyTransferDestination,
-  "PstnTelephonyTransferDestination",
   "java"
 );
 
@@ -175,18 +328,6 @@ using Azure.AI.Projects;
 );
 @@clientName(UpdateToolboxRequest, "UpdateToolboxInput");
 
-// Java names operation request-body models as inputs.
-@@clientName(
-  CreateTeamsPhoneExtensionTelephonyBindingRequest,
-  "CreateTeamsPhoneExtensionTelephonyBindingInput"
-);
-@@clientName(CreateTelephonyBindingRequest, "CreateTelephonyBindingInput");
-@@clientName(CreateTelephonyCallJobRequest, "CreateTelephonyCallJobInput");
-@@clientName(
-  CreateTwilioTelephonyBindingRequest,
-  "CreateTwilioTelephonyBindingInput"
-);
-
 // Replace OpenAPI schema-derived names with domain-oriented names.
 @@clientName(
   OpenAI.CreateTranscriptionResponseJsonUsage,
@@ -197,7 +338,28 @@ using Azure.AI.Projects;
   "TranscriptTextUsageType"
 );
 
-// Use descriptive Java names for configuration properties
+@@clientName(
+  MicrosoftCopilotToolsetConfig,
+  "MicrosoftCopilotToolsetConfiguration"
+);
+@@clientName(
+  MicrosoftCopilotToolsetDefaultConfig,
+  "MicrosoftCopilotToolsetDefaultConfiguration"
+);
+@@doc(
+  GitHubCopilotToolsetConfig,
+  "The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfiguration` for new integrations."
+);
+@@doc(
+  GitHubCopilotToolsetDefaultConfig,
+  "The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfiguration` for new integrations."
+);
+@@clientName(MicrosoftCopilotToolsetConfig.name, "toolName");
+@@clientName(
+  MicrosoftCopilotToolsetPreview.default_config,
+  "defaultConfiguration"
+);
+@@clientName(MicrosoftCopilotToolsetPreview.configs, "toolConfigurations");
 @@clientName(GitHubCopilotToolsetConfig.name, "toolName");
 @@clientName(
   GitHubCopilotToolsetPreview.default_config,
@@ -411,6 +573,16 @@ using Azure.AI.Projects;
   OpenAI.RealtimeServerEventSessionUpdated,
   "RealtimeSessionUpdatedEvent"
 );
+@@clientName(
+  OpenAI.RealtimeServerEventSessionCreated.session,
+  "sessionResponseConfiguration",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventSessionUpdated.session,
+  "sessionResponseConfiguration",
+  "java"
+);
 
 @@clientName(
   OpenAI.RealtimeSessionCreateRequestUnion,
@@ -467,19 +639,53 @@ using Azure.AI.Projects;
 );
 
 @@clientName(TelephonyBindingListItem.etag, "eTag");
-@@clientName(TelephonyCallJob.object, "objectType");
+@@clientName(TelephonyCampaign.etag, "eTag", "java");
+
+@@clientName(TelephonyCampaigns.create, "createCampaign", "java");
+@@clientName(TelephonyCampaigns.get, "getCampaign", "java");
+@@clientName(TelephonyCampaigns.list, "listCampaigns", "java");
+@@clientName(TelephonyCampaigns.cancel, "cancelCampaign", "java");
+@@clientName(TelephonyCampaigns.delete, "deleteCampaign", "java");
+@@clientName(TelephonyCampaigns.getOperation, "getCampaignOperation", "java");
+@@clientName(
+  TelephonyCampaigns.listValidationErrors,
+  "listCampaignValidationErrors",
+  "java"
+);
+
+@@TypeSpec.OpenAPI.extension(
+  DatasetReference,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
 @@clientName(
   OpenAI.TranscriptTextUsageTokensInputTokenDetails,
   "TranscriptTextInputTokenDetails"
 );
 @@clientName(UpdateTelephonyBindingRequest, "UpdateTelephonyBindingInput");
 
+@@clientName(ImmediateSchedule, "TelephonyCampaignImmediateSchedule", "java");
+@@clientName(AtTimeSchedule, "TelephonyCampaignAtTimeSchedule", "java");
+@@clientName(
+  PerRecipientSchedule,
+  "TelephonyCampaignPerRecipientSchedule",
+  "java"
+);
+@@clientName(
+  FixedIntervalRetryPolicy,
+  "TelephonyFixedIntervalRetryPolicy",
+  "java"
+);
+@@clientName(PhoneNumber, "TelephonyPhoneNumber", "java");
+@@clientName(TeamsAddress, "TelephonyTeamsAddress", "java");
+@@clientName(SipAddress, "TelephonySipAddress", "java");
+
 // Use Configuration rather than Config in voice-agent model names and properties.
 @@clientName(VoiceAgentAnimationConfig, "VoiceAgentAnimationConfiguration");
 @@clientName(VoiceAgentAudioConfig, "VoiceAgentAudioConfiguration");
 @@clientName(VoiceAgentAudioInputConfig, "VoiceAgentAudioInputConfiguration");
 @@clientName(VoiceAgentAudioOutputConfig, "VoiceAgentAudioOutputConfiguration");
-@@clientName(VoiceAgentAudioOutputConfig.prefer_locales, "preferredLocales");
+@@clientName(VoiceAgentVoiceConfig.prefer_locales, "preferredLocales");
 @@clientName(VoiceAgentAvatarConfig, "VoiceAgentAvatarConfiguration");
 @@clientName(VoiceAgentAvatarVideoParams, "VoiceAgentAvatarVideoParameters");
 @@clientName(
@@ -488,6 +694,82 @@ using Azure.AI.Projects;
 );
 
 // Duration-typed Java properties do not need wire-unit suffixes in their client names.
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
+  "logProbs",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta.logprobs,
+  "logProbs",
+  "java"
+);
+@@clientName(TelephonyCallRecord.duration_ms, "duration", "java");
+@@clientName(TelephonyCallSummary.duration_ms, "duration", "java");
+@@clientName(
+  VoiceAgentAzureSemanticVadEnTurnDetection.idle_timeout_ms,
+  "idleTimeout",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadEnTurnDetection.prefix_padding_ms,
+  "prefixPadding",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadEnTurnDetection.silence_duration_ms,
+  "silenceDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadEnTurnDetection.speech_duration_ms,
+  "speechDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentInterimResponseConfig.latency_threshold_ms,
+  "latencyThreshold",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventResponseAnimationVisemeDelta.audio_offset_ms,
+  "audioOffset",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerVadTurnDetection.speech_duration_ms,
+  "speechDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSubagent.invoke_timeout_seconds,
+  "invokeTimeout",
+  "java"
+);
+@@clientName(
+  VoiceAgentTranscriptionPhrase.duration_milliseconds,
+  "duration",
+  "java"
+);
+@@clientName(
+  VoiceAgentTranscriptionPhrase.offset_milliseconds,
+  "offset",
+  "java"
+);
+@@clientName(
+  VoiceAgentTranscriptionWord.duration_milliseconds,
+  "duration",
+  "java"
+);
+@@clientName(VoiceAgentTranscriptionWord.offset_milliseconds, "offset", "java");
+@@clientName(VoiceAudioItem.duration_ms, "duration", "java");
+@@clientName(VoiceAudioItem.start_offset_ms, "offset", "java");
+@@clientName(VoiceAudioItem.blob_uri, "blobUrl", "java");
+@@clientName(VoiceGeneratedAudioItem.duration_ms, "duration", "java");
+@@clientName(VoiceGeneratedAudioItem.start_offset_ms, "offset", "java");
+@@clientName(VoiceGeneratedAudioItem.blob_uri, "blobUrl", "java");
+@@clientName(VoiceRecording.duration_ms, "duration", "java");
+@@clientName(VoiceRecording.blob_uri, "blobUrl", "java");
 @@clientName(
   VoiceAgentAzureSemanticVadMultilingualTurnDetection.prefix_padding_ms,
   "prefixPadding",
@@ -529,6 +811,23 @@ using Azure.AI.Projects;
   "java"
 );
 @@clientName(VoiceAgentEndOfUtteranceDetection.timeout_ms, "timeout", "java");
+@@clientName(VoiceAgentHandoffCondition.delay_ms, "delay", "java");
+@@clientName(VoiceAgentHandoffEdgeState.delay_ms, "delay", "java");
+@@clientName(
+  VoiceAgentServerEventSessionHandoffCompleted.prepare_duration_ms,
+  "prepareDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventSessionHandoffCompleted.duration_ms,
+  "duration",
+  "java"
+);
+@@clientName(
+  InlineVoiceSubagent.parallel_tool_calls,
+  "parallelToolCallsEnabled",
+  "java"
+);
 @@clientName(
   VoiceAgentServerEventResponseAudioTimestampDelta.audio_duration_ms,
   "audioDuration",
@@ -555,7 +854,15 @@ using Azure.AI.Projects;
   VoiceAgentEndOfUtteranceDetectionModel.semantic_detection_v1_en,
   "SEMANTIC_DETECTION_V1_ENGLISH"
 );
+@@clientName(
+  VoiceAgentDelegateSubagentConfig,
+  "VoiceAgentDelegateSubagentConfiguration"
+);
 @@clientName(VoiceAgentGreetingConfig, "VoiceAgentGreetingConfiguration");
+@@clientName(
+  VoiceAgentInlineSubagentConfig,
+  "VoiceAgentInlineSubagentConfiguration"
+);
 @@clientName(
   VoiceAgentInterimResponseConfig,
   "VoiceAgentInterimResponseConfiguration"
@@ -641,6 +948,18 @@ using Azure.AI.Projects;
   VoiceAgentServerEventSessionSubagentStarted,
   "VoiceAgentSessionSubagentStartedEvent"
 );
+@@clientName(
+  VoiceAgentServerEventSessionHandoffStarted,
+  "VoiceAgentSessionHandoffStartedEvent"
+);
+@@clientName(
+  VoiceAgentServerEventSessionHandoffAborted,
+  "VoiceAgentSessionHandoffAbortedEvent"
+);
+@@clientName(
+  VoiceAgentServerEventSessionHandoffCompleted,
+  "VoiceAgentSessionHandoffCompletedEvent"
+);
 @@clientName(VoiceAgentServerEventWarning, "VoiceAgentWarningEvent");
 @@clientName(VoiceAgentServerEventWarningDetails, "VoiceAgentWarningDetails");
 @@clientName(
@@ -652,6 +971,7 @@ using Azure.AI.Projects;
   "VoiceAgentSessionResponseConfiguration"
 );
 @@clientName(VoiceAgentSessionResponseConfig.object, "objectType");
+
 @@clientName(
   VoiceAgentSessionUpdateConfig,
   "VoiceAgentSessionUpdateConfiguration"
@@ -673,10 +993,11 @@ using Azure.AI.Projects;
   VoiceAgentTurnDetectionType.azure_semantic_vad_en,
   "AZURE_SEMANTIC_VAD_ENGLISH"
 );
+@@clientName(VoiceAgentVoiceConfig, "VoiceAgentVoiceConfiguration");
 
 @@clientName(VoiceConversation.object, "objectType");
+@@clientName(OpenAI.RealtimeResponse.object, "objectType");
 @@clientName(OpenAI.VoiceIdsShared, "VoiceIds");
-@@clientName(VoiceResponseBase.object, "objectType");
 
 // Use natural Java ordering for Realtime conversation-message model names.
 @@clientName(
@@ -697,6 +1018,8 @@ using Azure.AI.Projects;
 );
 
 // Use idiomatic Java word boundaries for file-system enum members.
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 
@@ -717,6 +1040,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
+@@alternateType(OpenAI.MCPTool, OpenAI.ToolMcpTool, "java");
 @@clientName(OpenAI.MCPListToolsToolInputSchema, "McpListToolsToolInputSchema");
 @@clientName(OpenAI.MCPToolCallStatus, "McpToolCallStatus");
 @@clientName(OpenAI.MCPTool.connector_id, "connectorType");
@@ -771,20 +1095,31 @@ using Azure.AI.Projects;
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
+@@clientName(
+  HostedAgentDefinition.enable_memory_snapshot,
+  "memorySnapshotEnabled",
+  "java"
+);
 
-@@clientName(AgentOptimizationCandidate.avg_score, "averageScore");
-@@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
-@@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
-@@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
+@@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
 @@clientName(
-  AgentOptimizationDatasetItem.desired_num_turns,
-  "desiredNumberTurns"
+  AgentOptimizationCandidateEvaluation.avg_latency_ms,
+  "averageLatency",
+  "java"
+);
+@@clientName(AgentOptimizationCandidateEvaluation.eval_id, "evaluationId");
+@@clientName(
+  AgentOptimizationCandidateEvaluation.eval_run_id,
+  "evaluationRunId"
 );
 @@clientName(
-  AgentOptimizationEvaluatorRef,
-  "AgentOptimizationEvaluatorReference"
+  AgentOptimizationJobLatency.avg_latency_ms,
+  "averageLatency",
+  "java"
 );
-@@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
+@@clientName(AgentOptimizationJob.run_duration_ms, "runDuration", "java");
+@@clientName(AgentOptimizationEvaluator, "AgentOptimizationEvaluatorReference");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 @@clientName(Microsoft365PublishResponse, "Microsoft365PublishResult");
@@ -892,8 +1227,45 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.estimate, "estimateOptimizationJob", "java");
+@@clientName(
+  AgentOptimizationJobCandidates.listCandidates,
+  "listOptimizationCandidates",
+  "java"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.getCandidate,
+  "getOptimizationCandidate",
+  "java"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.promoteCandidate,
+  "promoteOptimizationCandidate",
+  "java"
+);
 
 // Voice Agent Renames
+@@clientName(
+  VoiceAgentSoundscapeConfig,
+  "VoiceAgentSoundscapeConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeTrackConfig,
+  "VoiceAgentSoundscapeTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeWorkingTrackConfig,
+  "VoiceAgentSoundscapeWorkingTrackConfiguration",
+  "java"
+);
+@@clientName(
+  VoiceAgentSoundscapeSourceConfig,
+  "VoiceAgentSoundscapeSourceConfiguration",
+  "java"
+);
+@@clientName(VoiceAgentSoundscapeWorkingTrackConfig.delay_ms, "delay", "java");
 @@clientName(
   Azure.AI.Projects.Agents.generateAgent,
   "createAgentFromPrompt",
@@ -911,6 +1283,53 @@ using Azure.AI.Projects;
 );
 @@clientName(
   AgentEndpointConversations.getAgentConversationAudioContent,
+  "downloadAgentConversationAudio",
+  "java"
+);
+
+// Match the Realtime method names on the separate Live conversations client.
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversations,
+  "listAgentConversations",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversation,
+  "getAgentConversation",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.deleteLiveAgentConversation,
+  "deleteAgentConversation",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversationItems,
+  "listAgentConversationItems",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationItem,
+  "getAgentConversationItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+  "getAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+  "downloadAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+  "getAgentConversationAudio",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
   "downloadAgentConversationAudio",
   "java"
 );
@@ -1084,9 +1503,33 @@ using Azure.AI.Projects;
 @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
 @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
 
+// Preserve the existing Java paging overloads that accept an initial continuation token.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  PageAfterQueryParameter.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  AgentOptimizationCandidatePageQueryParameters.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
+
+@@alternateType(
+  OpenAI.MisalignmentErrorDetailsResource,
+  {
+    identity: "com.openai.models.ErrorObject.Misalignment",
+  },
+  "java"
+);
 
 @@alternateType(
   OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived.received_at,
@@ -1120,6 +1563,7 @@ using Azure.AI.Projects;
 // Structurally replace every emitted tool_choice property with an opaque union so Java exposes the wire value as
 // BinaryData. The Java emitter already emits these tool choice union as BinaryData, this type override makes the
 // tool choice discriminated hierarchy unreachable and prevents its emission in the generated Java code.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union ToolChoiceValue {
   string,
   object: Record<unknown>,
@@ -1127,6 +1571,8 @@ union ToolChoiceValue {
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(VoiceAgentDefinition.tool_choice, ToolChoiceValue);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(InlineVoiceSubagent.tool_choice, ToolChoiceValue);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(
   VoiceAgentLlmGeneratedGreetingConfig.tool_choice,
@@ -1321,6 +1767,7 @@ model OpenAIRealtimeSessionOutputModality {}
 )
 model OpenAIRealtimeTruncationRetentionRatio {}
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union OpenAIRealtimeTruncationUnion {
   auto: "auto",
   disabled: "disabled",
@@ -1640,17 +2087,6 @@ model TimeZoneType {}
   "java"
 );
 
-// Java-only helper scalar so `elapsed_seconds` (wire = fractional seconds as float64)
-// is exposed to callers as java.time.Duration while keeping the wire format unchanged.
-@encode(DurationKnownEncoding.seconds, float64)
-scalar DurationInFloatSeconds extends duration;
-
-@@alternateType(
-  AgentOptimizationJobProgress.elapsed_seconds,
-  DurationInFloatSeconds,
-  "java"
-);
-
 // ---- Expandable enum overrides ------------------------------------------------
 // Convert fixed OpenAI enums / inline literal unions to expandable string enums
 // by defining open unions (with `string` base) and mapping via @@alternateType.
@@ -1846,8 +2282,73 @@ union McpToolConnectorIdExpandable {
   "java"
 );
 
+@@alternateType(
+  OpenAI.RealtimeResponseInputMessageDeveloper.status,
+  OpenAI.RealtimeResponseInputMessageSystem.status,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputMessageUser.status,
+  OpenAI.RealtimeResponseInputMessageSystem.status,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputMessageAssistant.status,
+  OpenAI.RealtimeResponseInputMessageSystem.status,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputFunctionCall.status,
+  OpenAI.RealtimeResponseInputMessageSystem.status,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseInputFunctionCallOutput.status,
+  OpenAI.RealtimeResponseInputMessageSystem.status,
+  "java"
+);
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemUserMessage.Content.Detail",
+  },
+  "java"
+)
+model OpenAIRealtimeInputImageDetail {}
+
+@@alternateType(
+  OpenAI.RealtimeResponseInputImage.detail,
+  OpenAIRealtimeInputImageDetail,
+  "java"
+);
+
 // Reuse one expandable type for the repeated `object: "realtime.item"` literal.
-@TypeSpec.OpenAPI.extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@@clientName(
+  OpenAI.RealtimeConversationItemMessageSystem.object,
+  "objectType",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeConversationItemMessageUser.object,
+  "objectType",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeConversationItemMessageAssistant.object,
+  "objectType",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeConversationItemFunctionCall.object,
+  "objectType",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeConversationItemFunctionCallOutput.object,
+  "objectType",
+  "java"
+);
+
 union RealtimeConversationItemObject {
   string,
   realtime_item: "realtime.item",
@@ -1876,6 +2377,73 @@ union RealtimeConversationItemObject {
 @@alternateType(
   OpenAI.RealtimeConversationItemFunctionCallOutput.object,
   RealtimeConversationItemObject,
+  "java"
+);
+
+// Flatten the Foundry session response's single-member union for Java.
+@@alternateType(
+  OpenAI.RealtimeServerEventSessionCreated.session,
+  VoiceAgentSessionResponseConfig,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeServerEventSessionUpdated.session,
+  VoiceAgentSessionResponseConfig,
+  "java"
+);
+
+@@alternateType(
+  OpenAI.CreateTranscriptionResponseJsonUsage,
+  {
+    identity: "com.openai.models.realtime.ConversationItemInputAudioTranscriptionCompletedEvent.Usage",
+  },
+  "java"
+);
+
+@@alternateType(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted.usage,
+  OpenAI.CreateTranscriptionResponseJsonUsage,
+  "java"
+);
+
+// Reuse standalone OpenAI models.
+@@alternateType(
+  OpenAI.TranscriptionLanguage,
+  {
+    identity: "com.openai.models.audio.transcriptions.TranscriptionLanguage",
+  },
+  "java"
+);
+// Preserve the OpenAI Tool list in Java; its simple name collides with the SDK Tool root.
+@@alternateType(OpenAI.MCPListToolsTool, unknown, "java");
+
+// Reuse complete OpenAI hierarchies at their model-property boundaries.
+@@alternateType(
+  OpenAI.RealtimeSessionCreateRequestUnion,
+  {
+    identity: "com.openai.models.realtime.SessionUpdateEvent.Session",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeAudioFormats,
+  {
+    identity: "com.openai.models.realtime.RealtimeAudioFormats",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeTurnDetection,
+  {
+    identity: "com.openai.models.realtime.RealtimeAudioInputTurnDetection",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeMCPError,
+  {
+    identity: "com.openai.models.realtime.RealtimeMcpToolCall.Error",
+  },
   "java"
 );
 

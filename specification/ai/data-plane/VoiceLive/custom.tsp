@@ -611,6 +611,7 @@ model AzureRealtimeNativeVoice {
 
 /** Union of all supported voice configurations. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how the service implemented the model...
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union Voice {
   OAIVoice,
   OpenAIVoice,
@@ -1218,6 +1219,7 @@ union InterimResponseTrigger {
 
 /** Union of interim response configuration types. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" // Discriminated union for interim response config types.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @added(Versions.v2026_01_01_preview)
 union InterimResponseConfig {
   StaticInterimResponseConfig,

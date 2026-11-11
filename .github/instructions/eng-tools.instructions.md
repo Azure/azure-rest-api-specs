@@ -22,7 +22,7 @@ The `eng/tools` directory contains a collection of standalone Node.js packages u
 - `suppressions`
 - `tsp-client-tests`
 - `typespec-migration-validation`
-- `typespec-requirement`
+- `spec-change-policies`
 - `typespec-validation`
 
 The top-level `eng/tools` directory holds shared configuration that the individual packages extend:
@@ -81,6 +81,10 @@ eng/tools/
 ### Shared Utilities
 
 - Reuse `@azure-tools/specs-shared` (referenced as `workspace:*`) instead of duplicating helpers such as logging, git, or changed-file utilities.
+- Tools that call GitHub APIs must follow the
+  [GitHub API efficiency standards](./github-actions.instructions.md#github-api-efficiency).
+  Reuse the affected tool's API client and pagination helpers rather than introducing a parallel
+  implementation.
 
 ## Per-Tool Configuration
 

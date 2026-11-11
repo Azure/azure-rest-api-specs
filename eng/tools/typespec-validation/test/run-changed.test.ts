@@ -3,7 +3,7 @@ import { d } from "@azure-tools/specs-shared/testing";
 import { ChildProcess, spawn } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { findChangedProjects } from "../src/find-projects.ts";
@@ -22,7 +22,7 @@ let root: string;
 let project: string;
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-changed-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-changed-"))));
   project = join(root, "specification/service/Project");
   await mkdir(project, { recursive: true });
   await writeFile(join(project, "tspconfig.yaml"), "");
@@ -60,7 +60,7 @@ it("uses the repository root and passes the default revisions to each project", 
     logger: expect.any(ConsoleLogger) as unknown,
   });
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
-    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
     project,
     '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
   ]);
@@ -96,7 +96,7 @@ it("forwards verbose logging without adding presentation options to suppression 
   );
   expect(vi.mocked(findChangedProjects).mock.calls[0][1].logger.isDebug()).toBe(true);
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
-    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
     project,
     '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
     "--verbose",
@@ -164,10 +164,9 @@ it("dry runs list project context but do not validate or clean a dirty checkout"
   await expect(runChanged(root, { dryRun: true, gitClean: true })).resolves.toBe(true);
   expect(spawn).not.toHaveBeenCalled();
   expect(await readFile(untracked, "utf8")).toBe("keep");
-  expect(console.log).toHaveBeenCalledWith(
+  expect(console.log).toHaveBeenLastCalledWith(
     'Dry run: would validate specification/service/Project with context {"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
   );
-  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
 it.each(["false", "true"])(
@@ -180,13 +179,21 @@ it.each(["false", "true"])(
       projects: [project, other],
       checkingAllSpecs: false,
     });
+    const git = simpleGit(root);
+    await git
+      .addConfig("user.name", "Test")
+      .addConfig("user.email", "test@example.com")
+      .addConfig("commit.gpgsign", "false")
+      .add(".")
+      .commit("Fixture");
     vi.mocked(spawn).mockImplementationOnce(() => {
       const child = new ChildProcess();
       queueMicrotask(() => child.emit("close", 1, null));
       return child;
     });
-    await expect(runChanged(root)).resolves.toBe(false);
+    await expect(runChanged(root, { gitClean: true })).resolves.toBe(false);
     expect(spawn).toHaveBeenCalledTimes(2);
+    expect((await git.status()).isClean()).toBe(true);
     expect(console.error).toHaveBeenLastCalledWith(d`
       TypeSpec Validation failed for some folder to fix run and address any errors:
        > pnpm install
