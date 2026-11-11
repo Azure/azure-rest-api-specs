@@ -11,6 +11,29 @@
     "input": "{\"qubits\":1,\"circuit\":[{\"gate\":\"h\",\"target\":0}]}"
   },
   "responses": {
+    "200": {
+      "body": {
+        "id": "00000000-0000-0000-0000-000000000002",
+        "name": "my-job",
+        "itemType": "Job",
+        "jobType": "QuantumComputing",
+        "providerId": "ionq",
+        "target": "ionq.simulator",
+        "inputDataFormat": "ionq.circuit.v1",
+        "outputDataFormat": "ionq.quantum-results.v1",
+        "inputParams": {
+          "shots": 100
+        },
+        "metadata": {
+          "purpose": "example"
+        },
+        "priority": "Standard",
+        "tags": [
+          "example"
+        ],
+        "status": "Waiting"
+      }
+    },
     "201": {
       "body": {
         "id": "00000000-0000-0000-0000-000000000002",
@@ -32,6 +55,14 @@
           "example"
         ],
         "status": "Waiting"
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "JobIdConflict",
+          "message": "Job id has been taken."
+        }
       }
     }
   }

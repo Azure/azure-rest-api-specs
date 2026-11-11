@@ -340,7 +340,7 @@
       },
       "put": {
         "operationId": "Jobs_Create",
-        "description": "Creates and submits a job with a client-generated job ID, JSON properties first,\nand a binary input part second. The service finalizes the complete\nmultipart and HTTP request body before admitting the job for execution.\nAccepted input is immutable: a retry must not replace it or schedule the job again.",
+        "description": "Creates and submits a job, or returns an equivalent existing committed job, using a\nclient-generated job ID, JSON properties first, and a binary input part second.\nFor a new job, the service finalizes the complete multipart and HTTP request\nbody before committing the job and admitting it for execution, then returns 201.\nIf the ID identifies an existing committed job, returns 200 only when the input\nbytes and normalized submission properties match the accepted submission.\nReturns 409 when they differ or equivalence cannot be verified, including\npreviously committed jobs without a saved submission fingerprint.\nThe fingerprint is computed and stored by the service; clients do not supply it.\nThe accepted input is never overwritten, and a retry does not create another\njob or duplicate scheduling. Any required publication repair must succeed before\nreturning 200. Both the complete MIME body and HTTP framing must validate before 200.\n\nCompared properties are name, providerId, target, sessionId, inputDataFormat,\noutputDataFormat, inputParams, metadata, tags, and priority where supported.\nJSON object member order and whitespace in properties are ignored; array order\nand values are preserved, except tags are a case-insensitive deduplicated set.\nProvider, target, and format identifiers are case-insensitive, and GUID spellings\nare canonicalized. Omitted inputParams, metadata, and tags are empty.\nOmitted inputDataFormat is qir.v1; omitted outputDataFormat uses the original\naccepted target-selected default. DPv2 defaults omitted priority to Standard.\nJob type is derived by admission; jobType, storage URI fields, and lifecycle\nfields do not participate in comparison. Input bytes are not JSON-normalized.\n\nAn in-flight submission or cleanup that has not committed a job does not qualify\nfor a successful retry response.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -406,11 +406,30 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/JobDetails"
             }
+          },
+          "409": {
+            "description": "The job ID is already committed to a different submission, or equivalence cannot be verified.",
+            "schema": {
+              "$ref": "#/definitions/JobSubmissionConflictResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -428,6 +447,9 @@
         "x-ms-examples": {
           "Creates and submits a job with JSON properties followed by binary input.": {
             "$ref": "./examples/Jobs_Create.json"
+          },
+          "Returns an equivalent committed job after normalizing JSON properties without replacing accepted input.": {
+            "$ref": "./examples/Jobs_Create_Existing.json"
           }
         }
       },
@@ -674,7 +696,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}/artifacts": {
       "get": {
         "operationId": "JobStorage_ListArtifacts",
-        "description": "Lists job-relative paths of customer-readable artifacts, not every blob in a container.\nFollow the opaque absolute nextLink, including its\napi-version, unchanged; it is omitted on the last page. Listing and direct reads share\nthe same visibility policy.",
+        "description": "Lists customer-readable artifacts for the job, including input, outputs, and other supporting files.\nEach reference's id is the job-relative path used to retrieve that artifact.\nFollow the opaque absolute nextLink, including its\napi-version, unchanged; it is omitted on the last page. Listing and direct reads share\nthe same visibility policy.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -750,10 +772,10 @@
           }
         },
         "x-ms-examples": {
-          "Lists artifact paths matching a prefix on the final page.": {
+          "Lists artifact references matching a prefix on the final page.": {
             "$ref": "./examples/JobStorage_ListArtifacts_Prefix.json"
           },
-          "Lists artifact paths with an opaque next page link.": {
+          "Lists artifact references with an opaque next page link.": {
             "$ref": "./examples/JobStorage_ListArtifacts.json"
           }
         },
@@ -1592,13 +1614,13 @@
   "definitions": {
     "ArtifactListResult": {
       "type": "object",
-      "description": "A page of customer-readable artifact paths.",
+      "description": "A page of customer-readable artifact references.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The job-relative artifact paths on this page.",
+          "description": "The artifact references on this page.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/JobArtifact"
           }
         },
         "nextLink": {
@@ -1952,6 +1974,19 @@
         ]
       }
     },
+    "JobArtifact": {
+      "type": "object",
+      "description": "A reference to a customer-readable job artifact.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The hierarchical artifact-relative path, such as diagnostics/logs/run.txt.\nUse this value as the path parameter when retrieving the artifact."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "JobDetails": {
       "type": "object",
       "description": "A job to be run in the workspace.",
@@ -2113,6 +2148,19 @@
           }
         ]
       }
+    },
+    "JobSubmissionConflictResult": {
+      "type": "object",
+      "description": "The job ID is already committed to a different submission, or equivalence cannot be verified.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
     },
     "JobType": {
       "type": "string",

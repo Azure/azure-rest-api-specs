@@ -13,11 +13,12 @@ using TypeSpec.Versioning;
 namespace Quantum.Workspace.Services;
 
 /** Job-scoped access to customer-readable files. Workspace and job authorization still apply. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job-scoped binary transfer and artifact path listing use custom ResourceOperation signatures rather than JSON job CRUD."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job-scoped binary transfer and artifact reference listing use custom ResourceOperation signatures rather than JSON job CRUD."
 @added(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
 interface JobStorage {
   /**
-   * Lists job-relative paths of customer-readable artifacts, not every blob in a container.
+   * Lists customer-readable artifacts for the job, including input, outputs, and other supporting files.
+   * Each reference's id is the job-relative path used to retrieve that artifact.
    * Follow the opaque absolute nextLink, including its
    * api-version, unchanged; it is omitted on the last page. Listing and direct reads share
    * the same visibility policy.

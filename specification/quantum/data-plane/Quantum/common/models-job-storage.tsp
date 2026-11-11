@@ -29,12 +29,33 @@ model JobSubmission {
   input: HttpPart<TypeSpec.Http.File<"application/octet-stream">>;
 }
 
-/** A page of customer-readable artifact paths. */
+/** The job ID is already committed to a different submission, or equivalence cannot be verified. */
+@added(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
+@error
+model JobSubmissionConflictResult {
+  /** The existing committed job cannot be replaced. */
+  @statusCode
+  statusCode: 409;
+
+  ...Azure.Core.Foundations.ErrorResponse;
+}
+
+/** A reference to a customer-readable job artifact. */
+@added(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
+model JobArtifact {
+  /**
+   * The hierarchical artifact-relative path, such as diagnostics/logs/run.txt.
+   * Use this value as the path parameter when retrieving the artifact.
+   */
+  id: string;
+}
+
+/** A page of customer-readable artifact references. */
 @added(QuantumWorkspaceAPIVersion.v2026_11_01_preview)
 model ArtifactListResult {
-  /** The job-relative artifact paths on this page. */
+  /** The artifact references on this page. */
   @pageItems
-  value: string[];
+  value: JobArtifact[];
 
   /** The opaque link to the next page, omitted on the final page. */
   @nextLink

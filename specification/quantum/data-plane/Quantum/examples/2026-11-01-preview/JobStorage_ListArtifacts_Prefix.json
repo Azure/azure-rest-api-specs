@@ -1,6 +1,6 @@
 {
   "operationId": "JobStorage_ListArtifacts",
-  "title": "Lists artifact paths matching a prefix on the final page.",
+  "title": "Lists artifact references matching a prefix on the final page.",
   "parameters": {
     "api-version": "2026-11-01-preview",
     "jobId": "00000000-0000-0000-0000-000000000002",
@@ -13,7 +13,9 @@
     "200": {
       "body": {
         "value": [
-          "files/summary.txt"
+          {
+            "id": "files/summary.txt"
+          }
         ]
       }
     }
