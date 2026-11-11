@@ -128,10 +128,6 @@ safe-outputs:
           description: "The complete TypeSpec remediation result as a JSON object string"
           required: true
           type: string
-        remediation_report:
-          description: "The human-readable TypeSpec remediation report"
-          required: true
-          type: string
       steps:
         - name: Checkout trusted validator
           uses: actions/checkout@v7
@@ -158,7 +154,10 @@ safe-outputs:
               } = await import(
                 "${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-result.ts"
               );
-              const { validateTypeSpecRemediationResult } = await import(
+              const {
+                parseTypeSpecRemediationSafeOutput,
+                validateTypeSpecRemediationResult,
+              } = await import(
                 "${{ github.workspace }}/.github/workflows/src/sdk-validation-typespec-remediation-result.ts"
               );
               const root = process.env.SDK_REVIEW_RESULT_ROOT;
@@ -169,20 +168,16 @@ safe-outputs:
               ]);
               const output = JSON.parse(outputText);
               const result = parseSdkReviewSafeOutput(output);
-              const call = output.items.find(
-                (item) => item?.type === "publish_sdk_review",
-              );
-              const remediationResult = JSON.parse(call.remediation_result);
+              const remediationResult = parseTypeSpecRemediationSafeOutput(output);
               const validatedReport = validateSdkReviewResult(
                 JSON.parse(contextText),
                 result,
               );
-              validateTypeSpecRemediationResult(
+              const normalizedRemediation = validateTypeSpecRemediationResult(
                 JSON.parse(contextText),
                 result,
                 JSON.parse(typeSpecContextText),
                 remediationResult,
-                call.remediation_report,
               );
               await Promise.all([
                 writeFile(
@@ -193,12 +188,12 @@ safe-outputs:
                 writeFile(`${root}/sdk-review-result.md`, validatedReport, "utf8"),
                 writeFile(
                   `${root}/typespec-remediation-result.json`,
-                  `${JSON.stringify(remediationResult, null, 2)}\n`,
+                  `${JSON.stringify(normalizedRemediation.result, null, 2)}\n`,
                   "utf8",
                 ),
                 writeFile(
                   `${root}/typespec-remediation-result.md`,
-                  call.remediation_report,
+                  normalizedRemediation.report,
                   "utf8",
                 ),
               ]);
@@ -281,18 +276,8 @@ include an empty `findings` array.
     {
       "reviewIndex": 0,
       "findingIndex": 0,
-      "severity": "high|medium|low",
-      "generatedLocation": {
-        "file": "sdk/.../GeneratedFile.cs",
-        "line": 123,
-        "symbol": "Optional generated symbol"
-      },
-      "category": "Short stable category",
-      "title": "The unchanged SDK finding title",
-      "evidence": "Why this generated SDK finding applies",
       "remediation": {
         "target": "typespec|client.tsp|sdk-repository|duplicate|manual-investigation",
-        "languageScopes": ["csharp"],
         "specSymbol": "Optional TypeSpec symbol",
         "suggestion": "Concrete remediation or investigation guidance",
         "confidence": "high|medium|low",
@@ -313,14 +298,11 @@ contract fixes, `client.tsp` for C#-scoped API surface adjustments,
 `sdk-repository` when a spec author cannot resolve the finding, `duplicate`
 only when the provided evidence proves another signal already reported it, and
 `manual-investigation` when mapping or remediation is uncertain.
-
 10. Call `publish_sdk_review` exactly once with:
     - `result`: the complete SDK review result as a JSON string.
     - `remediation_result`: the complete TypeSpec remediation result as a JSON
       string.
-    - `remediation_report`: a concise human-readable translation report that
-      preserves unmapped and SDK-only findings with their classification and
-      reason.
 
 The trusted safe-output job validates both structured results after threat
-detection and generates the SDK review Markdown deterministically.
+detection, restores canonical finding data, and generates both Markdown reports
+deterministically.

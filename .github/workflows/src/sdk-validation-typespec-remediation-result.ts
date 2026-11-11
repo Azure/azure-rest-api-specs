@@ -1,11 +1,6 @@
 type ReviewContext = {
-  source: {
-    specPrNumber: number;
-    specHeadSha: string;
-  };
-  remediationSkill: {
-    skillRevision: string;
-  };
+  source: { specPrNumber: number; specHeadSha: string };
+  remediationSkill: { skillRevision: string };
 };
 
 type RawFinding = {
@@ -13,19 +8,15 @@ type RawFinding = {
   file: string;
   line: number;
   title: string;
+  description: string;
 };
 
 type RawReviewResult = {
-  reviews: Array<{
-    findings: RawFinding[];
-  }>;
+  reviews: Array<{ findings: RawFinding[] }>;
 };
 
 type TypeSpecContext = {
-  source: {
-    specPrNumber: number;
-    specHeadSha: string;
-  };
+  source: { specPrNumber: number; specHeadSha: string };
   files: Array<{
     path: string;
     roles: string[];
@@ -33,6 +24,27 @@ type TypeSpecContext = {
     patch?: string;
   }>;
 };
+
+type SourceLocation = { file: string; line: number };
+
+type NormalizedFinding = {
+  reviewIndex: number;
+  findingIndex: number;
+  severity: string;
+  generatedLocation: { file: string; line: number };
+  title: string;
+  evidence: string;
+  remediation: {
+    target: string;
+    languageScopes: ["csharp"];
+    specSymbol?: string;
+    suggestion: string;
+    confidence: string;
+    sourceLocation?: SourceLocation;
+  };
+};
+
+const MAX_COMBINED_SAFE_OUTPUT_BYTES = 64 * 1024;
 
 const REMEDIATION_TARGETS = [
   "typespec",
@@ -47,25 +59,11 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-function requireNonEmptyString(value: unknown, fieldName: string): string {
+function requireString(value: unknown, fieldName: string): string {
   if (typeof value !== "string" || value.trim().length === 0) {
     throw new Error(`TypeSpec remediation result has an invalid ${fieldName}`);
   }
   return value;
-}
-
-function requireStringArray(value: unknown, fieldName: string): string[] {
-  if (!Array.isArray(value) || value.length === 0) {
-    throw new Error(`TypeSpec remediation result has an invalid ${fieldName}`);
-  }
-  const strings: string[] = [];
-  for (const item of value) {
-    if (typeof item !== "string" || item.trim().length === 0) {
-      throw new Error(`TypeSpec remediation result has an invalid ${fieldName}`);
-    }
-    strings.push(item);
-  }
-  return strings;
 }
 
 function getChangedRightSideLines(patch: string): Set<number> {
@@ -75,18 +73,10 @@ function getChangedRightSideLines(patch: string): Set<number> {
     const hunk = /^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/.exec(line);
     if (hunk) {
       newLine = Number.parseInt(hunk[1], 10);
-      continue;
-    }
-    if (newLine === 0 || line.startsWith("\\ ")) {
-      continue;
-    }
-    if (line.startsWith("+") && !line.startsWith("+++")) {
-      changedLines.add(newLine);
-      newLine += 1;
-      continue;
-    }
-    if (!line.startsWith("-")) {
-      newLine += 1;
+    } else if (newLine > 0 && line.startsWith("+") && !line.startsWith("+++")) {
+      changedLines.add(newLine++);
+    } else if (newLine > 0 && !line.startsWith("-") && !line.startsWith("\\ ")) {
+      newLine++;
     }
   }
   return changedLines;
@@ -94,42 +84,84 @@ function getChangedRightSideLines(patch: string): Set<number> {
 
 function validateSourceLocation(
   value: unknown,
-  typeSpecContext: TypeSpecContext,
+  context: TypeSpecContext,
   findingLabel: string,
-): void {
+): SourceLocation {
   if (!isRecord(value)) {
     throw new Error(`${findingLabel} has an invalid sourceLocation`);
   }
-  const file = requireNonEmptyString(value.file, "sourceLocation.file");
+  const file = requireString(value.file, "sourceLocation.file");
   if (!Number.isInteger(value.line) || Number(value.line) < 1) {
     throw new Error(`${findingLabel} has an invalid sourceLocation.line`);
   }
-  const contextFile = typeSpecContext.files.find((candidate) => candidate.path === file);
-  if (!contextFile || !contextFile.roles.includes("changed")) {
+  const line = Number(value.line);
+  const contextFile = context.files.find((candidate) => candidate.path === file);
+  if (!contextFile?.roles.includes("changed")) {
     throw new Error(`${findingLabel} sourceLocation must reference a changed TypeSpec file`);
   }
   if (typeof contextFile.content !== "string" || typeof contextFile.patch !== "string") {
     throw new Error(`${findingLabel} sourceLocation requires current file content and diff`);
   }
-  if (Number(value.line) > contextFile.content.split(/\r?\n/).length) {
+  if (line > contextFile.content.split(/\r?\n/).length) {
     throw new Error(`${findingLabel} sourceLocation.line is outside the TypeSpec file`);
   }
-  if (!getChangedRightSideLines(contextFile.patch).has(Number(value.line))) {
+  if (!getChangedRightSideLines(contextFile.patch).has(line)) {
     throw new Error(`${findingLabel} sourceLocation.line is not changed by the spec PR`);
+  }
+  return { file, line };
+}
+
+export function parseTypeSpecRemediationSafeOutput(outputValue: unknown): unknown {
+  if (!isRecord(outputValue) || !Array.isArray(outputValue.items)) {
+    throw new Error("Invalid TypeSpec remediation safe output");
+  }
+  const calls = outputValue.items.filter(
+    (item) => isRecord(item) && item.type === "publish_sdk_review",
+  );
+  if (
+    calls.length !== 1 ||
+    !isRecord(calls[0]) ||
+    typeof calls[0].result !== "string" ||
+    typeof calls[0].remediation_result !== "string"
+  ) {
+    throw new Error("Expected exactly one complete TypeSpec remediation safe output");
+  }
+  const combinedBytes = new TextEncoder().encode(
+    calls[0].result + calls[0].remediation_result,
+  ).byteLength;
+  if (combinedBytes > MAX_COMBINED_SAFE_OUTPUT_BYTES) {
+    throw new Error(
+      `Combined SDK review safe output exceeds ${MAX_COMBINED_SAFE_OUTPUT_BYTES} bytes`,
+    );
+  }
+  try {
+    return JSON.parse(calls[0].remediation_result);
+  } catch (error) {
+    throw new Error("TypeSpec remediation safe output must be valid JSON", { cause: error });
   }
 }
 
 /**
- * Validates that translation produced exactly one remediation classification
- * for each canonical SDK review finding.
+ * The skill decides only how each finding maps to TypeSpec. This trusted
+ * boundary restores canonical SDK identity, validates exact TypeSpec lines,
+ * and emits the stable artifact consumed by the write-enabled publisher.
  */
 export function validateTypeSpecRemediationResult(
   reviewContextValue: unknown,
   rawReviewResultValue: unknown,
   typeSpecContextValue: unknown,
   remediationResultValue: unknown,
-  reportMarkdown: string,
-): void {
+  _existingReportMarkdown?: string,
+): {
+  result: {
+    schemaVersion: 1;
+    status: "completed";
+    skillRevision: string;
+    source: ReviewContext["source"];
+    findings: NormalizedFinding[];
+  };
+  report: string;
+} {
   if (
     !isRecord(reviewContextValue) ||
     !isRecord(reviewContextValue.source) ||
@@ -170,11 +202,11 @@ export function validateTypeSpecRemediationResult(
   ) {
     throw new Error("TypeSpec review context source identity does not match the SDK review");
   }
-
-  if (!isRecord(remediationResultValue)) {
-    throw new Error("TypeSpec remediation result must be an object");
-  }
-  if (remediationResultValue.schemaVersion !== 1 || remediationResultValue.status !== "completed") {
+  if (
+    !isRecord(remediationResultValue) ||
+    remediationResultValue.schemaVersion !== 1 ||
+    remediationResultValue.status !== "completed"
+  ) {
     throw new Error("TypeSpec remediation result must use schemaVersion 1 and completed status");
   }
   if (
@@ -193,8 +225,6 @@ export function validateTypeSpecRemediationResult(
     review.findings.map((finding, findingIndex) => ({
       finding,
       key: `${reviewIndex}:${findingIndex}`,
-      reviewIndex,
-      findingIndex,
     })),
   );
   if (remediationResultValue.findings.length !== expectedFindings.length) {
@@ -202,12 +232,13 @@ export function validateTypeSpecRemediationResult(
   }
 
   const actualKeys = new Set<string>();
-  for (const [index, value] of remediationResultValue.findings.entries()) {
+  const findings = remediationResultValue.findings.map((value, index): NormalizedFinding => {
     const findingLabel = `TypeSpec remediation finding #${index + 1}`;
-    if (!isRecord(value)) {
-      throw new Error(`${findingLabel} must be an object`);
-    }
-    if (!Number.isInteger(value.reviewIndex) || !Number.isInteger(value.findingIndex)) {
+    if (
+      !isRecord(value) ||
+      !Number.isInteger(value.reviewIndex) ||
+      !Number.isInteger(value.findingIndex)
+    ) {
       throw new Error(`${findingLabel} has an invalid SDK finding reference`);
     }
     const reviewIndex = Number(value.reviewIndex);
@@ -218,41 +249,73 @@ export function validateTypeSpecRemediationResult(
       throw new Error(`${findingLabel} has an unknown or duplicate SDK finding reference`);
     }
     actualKeys.add(key);
-
+    // Raw skill output omits canonical fields. A normalized artifact reaching
+    // the publisher includes them, so revalidation must reject any tampering.
     if (
-      value.severity !== expected.finding.severity ||
-      value.title !== expected.finding.title ||
-      !isRecord(value.generatedLocation) ||
-      value.generatedLocation.file !== expected.finding.file ||
-      value.generatedLocation.line !== expected.finding.line
+      (value.severity !== undefined && value.severity !== expected.finding.severity) ||
+      (value.title !== undefined && value.title !== expected.finding.title) ||
+      (value.evidence !== undefined && value.evidence !== expected.finding.description) ||
+      (value.generatedLocation !== undefined &&
+        (!isRecord(value.generatedLocation) ||
+          value.generatedLocation.file !== expected.finding.file ||
+          value.generatedLocation.line !== expected.finding.line))
     ) {
-      throw new Error(`${findingLabel} does not match its SDK review finding`);
+      throw new Error(`${findingLabel} does not match its canonical SDK finding`);
     }
-    requireNonEmptyString(value.category, "category");
-    requireNonEmptyString(value.evidence, "evidence");
     if (!isRecord(value.remediation)) {
       throw new Error(`${findingLabel} has an invalid remediation`);
     }
-    if (!REMEDIATION_TARGETS.includes(String(value.remediation.target))) {
+    const target = String(value.remediation.target);
+    const confidence = String(value.remediation.confidence);
+    if (!REMEDIATION_TARGETS.includes(target)) {
       throw new Error(`${findingLabel} has an invalid remediation target`);
     }
-    if (!CONFIDENCE_LEVELS.includes(String(value.remediation.confidence))) {
+    if (!CONFIDENCE_LEVELS.includes(confidence)) {
       throw new Error(`${findingLabel} has an invalid remediation confidence`);
     }
-    const languageScopes = requireStringArray(
-      value.remediation.languageScopes,
-      "remediation.languageScopes",
-    );
-    if (languageScopes.length !== 1 || languageScopes[0] !== "csharp") {
+    if (
+      value.remediation.languageScopes !== undefined &&
+      (!Array.isArray(value.remediation.languageScopes) ||
+        value.remediation.languageScopes.length !== 1 ||
+        value.remediation.languageScopes[0] !== "csharp")
+    ) {
       throw new Error(`${findingLabel} remediation.languageScopes must contain only csharp`);
     }
-    requireNonEmptyString(value.remediation.suggestion, "remediation.suggestion");
-    if (value.remediation.sourceLocation !== undefined) {
-      validateSourceLocation(value.remediation.sourceLocation, typeSpecContext, findingLabel);
-    }
-  }
+    const sourceLocation =
+      value.remediation.sourceLocation === undefined
+        ? undefined
+        : validateSourceLocation(value.remediation.sourceLocation, typeSpecContext, findingLabel);
+    const specSymbol =
+      value.remediation.specSymbol === undefined
+        ? undefined
+        : requireString(value.remediation.specSymbol, "remediation.specSymbol");
 
-  if (reportMarkdown.trim().length === 0) {
-    throw new Error("TypeSpec remediation Markdown report must not be empty");
-  }
+    return {
+      reviewIndex,
+      findingIndex,
+      severity: expected.finding.severity,
+      generatedLocation: { file: expected.finding.file, line: expected.finding.line },
+      title: expected.finding.title,
+      evidence: expected.finding.description,
+      remediation: {
+        target,
+        languageScopes: ["csharp"],
+        ...(specSymbol ? { specSymbol } : {}),
+        suggestion: requireString(value.remediation.suggestion, "remediation.suggestion"),
+        confidence,
+        ...(sourceLocation ? { sourceLocation } : {}),
+      },
+    };
+  });
+
+  return {
+    result: {
+      schemaVersion: 1,
+      status: "completed",
+      skillRevision: reviewContext.remediationSkill.skillRevision,
+      source: reviewContext.source,
+      findings,
+    },
+    report: `# TypeSpec remediation\n\nValidated ${findings.length} remediation mapping${findings.length === 1 ? "" : "s"} for specification PR #${reviewContext.source.specPrNumber}.\n`,
+  };
 }
