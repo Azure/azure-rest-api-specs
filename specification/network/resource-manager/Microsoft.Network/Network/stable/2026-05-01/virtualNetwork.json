@@ -8611,6 +8611,12 @@
           },
           "Get NetworkVirtualAppliance in Virtual Hub with Dual Stack": {
             "$ref": "./examples/NetworkVirtualApplianceVhubDualStackGet.json"
+          },
+          "Get a managed NVA in a virtual hub with SourceIP load distribution": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubSourceIPGet.json"
+          },
+          "Get a managed NVA in a virtual hub with SourceIPProtocol load distribution": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubSourceIPProtocolGet.json"
           }
         }
       },
@@ -8716,6 +8722,12 @@
           },
           "Create SaaS NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualApplianceSaaSPut.json"
+          },
+          "Create or update a managed NVA in a virtual hub with SourceIP load distribution": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubSourceIPPut.json"
+          },
+          "Create or update a managed NVA in a virtual hub with SourceIPProtocol load distribution": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubSourceIPProtocolPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9161,6 +9173,12 @@
         "x-ms-examples": {
           "Create Network Virtual Appliance Inbound Security Rules": {
             "$ref": "./examples/InboundSecurityRuleGet.json"
+          },
+          "Get a Permanent Internet Ingress rule with SourceIP load distribution": {
+            "$ref": "./examples/InboundSecurityRuleSourceIPGet.json"
+          },
+          "Get a Permanent Internet Ingress rule with SourceIPProtocol load distribution": {
+            "$ref": "./examples/InboundSecurityRuleSourceIPProtocolGet.json"
           }
         }
       },
@@ -9235,6 +9253,12 @@
         "x-ms-examples": {
           "Create Network Virtual Appliance Inbound Security Rules": {
             "$ref": "./examples/InboundSecurityRulePut.json"
+          },
+          "Create or update a Permanent Internet Ingress rule with SourceIP load distribution": {
+            "$ref": "./examples/InboundSecurityRuleSourceIPPut.json"
+          },
+          "Create or update a Permanent Internet Ingress rule with SourceIPProtocol load distribution": {
+            "$ref": "./examples/InboundSecurityRuleSourceIPProtocolPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -17023,6 +17047,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "loadBalancerConfiguration": {
+          "$ref": "#/definitions/NetworkVirtualApplianceLoadBalancerConfiguration",
+          "description": "Configuration of the Internet Ingress load-balancing rule for a managed Network Virtual Appliance. Supported only when the enclosing ruleType is Permanent; supplying this configuration for AutoExpire rules is rejected with HTTP 400 Bad Request. When omitted on create or update, Default distribution and a 5-minute idle timeout are used."
         }
       }
     },
@@ -17940,6 +17968,12 @@
           "description": "The MAC address of the network interface.",
           "readOnly": true
         },
+        "networkAdapterIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the physical network adapter.",
+          "minimum": 0
+        },
         "primary": {
           "type": "boolean",
           "description": "Whether this is a primary network interface on a virtual machine.",
@@ -18383,6 +18417,51 @@
         "value"
       ]
     },
+    "NetworkVirtualApplianceLoadBalancerConfiguration": {
+      "type": "object",
+      "description": "Load balancer settings shared by managed Network Virtual Appliances and their Permanent inbound security rules.",
+      "properties": {
+        "loadDistribution": {
+          "type": "string",
+          "description": "The load distribution policy. Default uses a five-tuple hash of source IP, destination IP, source port, destination port, and protocol. SourceIP uses a two-tuple hash of source IP and destination IP. SourceIPProtocol uses a three-tuple hash of source IP, destination IP, and protocol. When omitted, Default is used.",
+          "default": "Default",
+          "enum": [
+            "Default",
+            "SourceIP",
+            "SourceIPProtocol"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkVirtualApplianceLoadDistribution",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "Default",
+                "description": "Distributes traffic using a five-tuple hash of source IP, destination IP, source port, destination port, and protocol."
+              },
+              {
+                "name": "SourceIP",
+                "value": "SourceIP",
+                "description": "Distributes traffic using a two-tuple hash of source IP and destination IP."
+              },
+              {
+                "name": "SourceIPProtocol",
+                "value": "SourceIPProtocol",
+                "description": "Distributes traffic using a three-tuple hash of source IP, destination IP, and protocol."
+              }
+            ]
+          }
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The idle timeout of the load-balancing rule, in minutes. When omitted, the managed NVA platform default of 5 minutes is used. Values outside 4 through 100 are rejected with HTTP 400 InvalidParameter.",
+          "default": 5,
+          "minimum": 4,
+          "maximum": 100
+        }
+      }
+    },
     "NetworkVirtualApplianceMigrationStatus": {
       "type": "object",
       "description": "The migration status of a Network Virtual Appliance.",
@@ -18435,6 +18514,10 @@
         "nvaSku": {
           "$ref": "#/definitions/VirtualApplianceSkuProperties",
           "description": "Network Virtual Appliance SKU."
+        },
+        "loadBalancerConfiguration": {
+          "$ref": "#/definitions/NetworkVirtualApplianceLoadBalancerConfiguration",
+          "description": "Configuration of the internal load balancer for a managed Network Virtual Appliance in a virtual hub or virtual network. Not applicable to partner-managed load balancers on SaaS NVAs. When omitted on create or update, Default distribution and a 5-minute idle timeout are used."
         },
         "addressPrefix": {
           "type": "string",
