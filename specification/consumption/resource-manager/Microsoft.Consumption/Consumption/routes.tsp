@@ -698,6 +698,7 @@ interface ReservationTransactionsOperationGroup {
     /**
      * Preview markup percentage to be applied.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Preserve the existing decimal wire format for compatibility; changing numeric precision requires service review."
     @query("previewMarkupPercentage")
     previewMarkupPercentage?: decimal,
   ): ReservationTransactionsListResult | ErrorResponse;
