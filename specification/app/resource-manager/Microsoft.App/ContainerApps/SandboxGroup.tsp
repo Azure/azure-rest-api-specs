@@ -112,7 +112,10 @@ model SandboxGroupPatch {
 
   /** Managed identity updates. Omit to preserve the current identities. */
   @added(Versions.v2026_11_01_preview)
-  identity?: OptionalProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>;
+  identity?: OptionalProperties<PickProperties<
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "type" | "userAssignedIdentities"
+  >>;
 }
 
 /** SandboxGroup resource specific properties for patch requests. */
@@ -120,8 +123,12 @@ model SandboxGroupPatch {
 model SandboxGroupPatchProperties {
   ...PickProperties<
     SandboxGroupProperties,
-    "environmentId" | "enableDetailedMetrics" | "telemetryConfig"
+    "environmentId" | "enableDetailedMetrics"
   >;
+
+  /** Lifecycle event export updates. Omit endpoints to preserve the current destinations; a supplied array replaces them. */
+  @added(Versions.v2026_11_01_preview)
+  telemetryConfig?: OptionalProperties<SandboxGroupTelemetryConfig>;
 }
 
 /** Lifecycle event export configuration for a sandbox group. */
