@@ -26,47 +26,6 @@ model TagDescriptionContract
 }
 
 @armResourceOperations
-interface TagDescriptionContractsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        @minLength(1)
-        @maxLength(50)
-        serviceName: string,
-
-        /**
-         * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
-         */
-        @path
-        @segment("apis")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        @minLength(1)
-        @maxLength(256)
-        apiId: string,
-      },
-      {
-        /** Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names. */
-        @path
-        @segment("tagDescriptions")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        @minLength(1)
-        @maxLength(80)
-        tagDescriptionId: string,
-      }
-    > {}
-
-@armResourceOperations
 interface TagDescriptionContracts {
   /**
    * Get Tag description in scope of API
@@ -99,7 +58,7 @@ interface TagDescriptionContracts {
   /**
    * Create/Update tag description in scope of the Api.
    */
-  createOrUpdate is TagDescriptionContractsOps.CreateOrUpdateSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     TagDescriptionContract,
     Request = TagDescriptionCreateParameters,
     Parameters = {
