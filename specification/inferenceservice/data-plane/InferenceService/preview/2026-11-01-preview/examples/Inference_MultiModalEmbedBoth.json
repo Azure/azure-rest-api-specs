@@ -1,0 +1,173 @@
+{
+  "title": "MultiModalEmbed_Both",
+  "operationId": "Embed",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "body": {
+      "model": "microsoft-embedding-1-large",
+      "inputs": [
+        {
+          "id": "q-1",
+          "kind": "query",
+          "content": "When is invoice 1042 due?"
+        },
+        {
+          "id": "inv-1042-p1",
+          "kind": "image",
+          "url": "https://contoso.blob.core.windows.net/invoices/2026/inv-1042-p1.jpg",
+          "sasToken": "sv=2025-07-05&st=2026-11-05T16%3A25%3A00Z&se=2026-11-05T16%3A40%3A00Z&skoid=00000000-0000-0000-0000-000000000000&sktid=00000000-0000-0000-0000-000000000000&skt=2026-11-05T16%3A25%3A00Z&ske=2026-11-05T17%3A25%3A00Z&sks=b&skv=2025-07-05&sr=b&sp=r&spr=https&sig=REDACTED"
+        }
+      ],
+      "vectorKind": "dense_multi",
+      "outputDataKind": "float16",
+      "maxVectorCount": 1024,
+      "encodingFormat": "base64",
+      "delivery": "inline"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "X-Correlation-ID": "f0a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b"
+      },
+      "body": {
+        "object": "list",
+        "model": "microsoft-embedding-1-large",
+        "modelVersion": "3",
+        "outputDataKind": "float16",
+        "data": [
+          {
+            "kind": "multimodal_dense_multi",
+            "index": 0,
+            "id": "q-1",
+            "contentKind": "query",
+            "vectorKind": "dense_multi",
+            "shape": [
+              20,
+              128
+            ],
+            "tokens": 20,
+            "embedding": "AC4AvgA8ADwALgC+",
+            "multiEmbedding": "ADwAPAA8ADwAPAA8ADwAPA=="
+          },
+          {
+            "kind": "multimodal_dense_multi",
+            "index": 1,
+            "id": "inv-1042-p1",
+            "contentKind": "image",
+            "vectorKind": "dense_multi",
+            "shape": [
+              1024,
+              128
+            ],
+            "width": 1280,
+            "height": 1281,
+            "format": "jpeg",
+            "tokens": 1236,
+            "visualTokens": 1225,
+            "embedding": "ADwALgC+ADwALgC+",
+            "multiEmbedding": "AC4APAA8AC4APAA8AC4APA=="
+          }
+        ],
+        "usage": {
+          "kind": "multimodal",
+          "promptTokens": 1256,
+          "totalTokens": 1256,
+          "textTokens": 31,
+          "imageCount": 1,
+          "visualTokens": 1225
+        }
+      }
+    },
+    "400": {
+      "headers": {
+        "X-Correlation-ID": "f1a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "EMBEDDING_INPUT_INVALID"
+      },
+      "body": {
+        "error": {
+          "code": "EMBEDDING_INPUT_INVALID",
+          "message": "'multiDimensions' must be one of 128, 256 for multi vectors from microsoft-embedding-1-large."
+        }
+      }
+    },
+    "403": {
+      "headers": {
+        "X-Correlation-ID": "f2a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "Forbidden"
+      },
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "The caller doesn't have permission to run embedding inference on this account."
+        }
+      }
+    },
+    "413": {
+      "headers": {
+        "X-Correlation-ID": "f3a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "EMBEDDING_BLOB_READ_FAILED"
+      },
+      "body": {
+        "error": {
+          "code": "EMBEDDING_BLOB_READ_FAILED",
+          "message": "The model service couldn't read the blob: inputs[1].url: the blob is larger than 20 MB"
+        }
+      }
+    },
+    "429": {
+      "headers": {
+        "Retry-After": 30,
+        "X-Correlation-ID": "f4a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "TooManyRequests"
+      },
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "The request rate exceeded the service limit. Retry after 30 seconds.",
+          "type": "https://example.inference.azure.com/errors/too-many-requests",
+          "title": "Too many requests",
+          "status": 429,
+          "detail": "The request rate exceeded the service limit. Retry after 30 seconds.",
+          "instance": "/inference/embedding"
+        }
+      }
+    },
+    "502": {
+      "headers": {
+        "X-Correlation-ID": "f5a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "EMBEDDING_BLOB_READ_FAILED"
+      },
+      "body": {
+        "error": {
+          "code": "EMBEDDING_BLOB_READ_FAILED",
+          "message": "The model service couldn't read the blob: inputs[1].url: storage returned 503"
+        }
+      }
+    },
+    "503": {
+      "headers": {
+        "X-Correlation-ID": "f6a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "ServiceUnavailable"
+      },
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "Failed to communicate with the inference backend. Please retry your request. If the problem persists, contact support."
+        }
+      }
+    },
+    "504": {
+      "headers": {
+        "X-Correlation-ID": "f7a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "EMBEDDING_BLOB_READ_FAILED"
+      },
+      "body": {
+        "error": {
+          "code": "EMBEDDING_BLOB_READ_FAILED",
+          "message": "The model service couldn't read the blob: inputs[1].url: storage did not return the blob within 10 seconds"
+        }
+      }
+    }
+  }
+}
