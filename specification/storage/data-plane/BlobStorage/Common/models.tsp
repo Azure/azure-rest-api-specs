@@ -963,7 +963,7 @@ union AccessTier {
 @added(Versions.v2027_05_07)
 union TurboStatus {
   /** Migration to SSD storage is pending. The status is omitted after migration completes. */
-  Pending: "Pending",
+  Pending: "pending",
 
   /** Extensible. */
   string,
