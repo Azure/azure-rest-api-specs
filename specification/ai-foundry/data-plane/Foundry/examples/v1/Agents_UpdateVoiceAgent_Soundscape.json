@@ -3,11 +3,11 @@
   "operationId": "Agents_updateAgent_Agents_updateAgentFromCode",
   "parameters": {
     "api-version": "v1",
-    "Foundry-Features": "VoiceAgents=V1Preview",
     "agent_name": "support-soundscape-agent",
     "description": "Mute background ambience, delay working audio, and disable omitted opening and transfer cues.",
     "definition": {
       "kind": "voice",
+      "sub_protocol": "realtime",
       "model_type": "managed",
       "model": "gpt-realtime",
       "instructions": "Help callers with their support requests.",
@@ -54,6 +54,7 @@
             "created_at": 1791795600,
             "definition": {
               "kind": "voice",
+              "sub_protocol": "realtime",
               "model_type": "managed",
               "model": "gpt-realtime",
               "instructions": "Help callers with their support requests.",
