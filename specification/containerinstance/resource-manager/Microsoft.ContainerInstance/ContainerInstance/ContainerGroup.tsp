@@ -73,6 +73,7 @@ interface ContainerGroups {
    * Delete the specified container group in the specified subscription and resource group. The operation does not delete other resources provided by the user, such as volumes.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   @summary("Delete the specified container group.")
   delete is ArmResourceDeleteAsyncBase<
     ContainerGroup,
