@@ -5,37 +5,37 @@ trigger: none
 pr: none
 
 parameters:
-- name: Mode
-  displayName: Benchmark mode
-  type: string
-  default: forced
-  values:
-    - forced
-    - trigger
-- name: SkillBranch
-  displayName: Branch containing the azure-typespec-author skill source (SKILL.md + references/) to evaluate. Defaults to the full source branch ref.
-  type: string
-  default: $(Build.SourceBranch)
-- name: McpKind
-  displayName: MCP implementation
-  type: string
-  default: live
-  values:
-    - live
-    - mock
-- name: Runs
-  displayName: Vally trials per stimulus
-  type: number
-  default: 1
+  - name: Mode
+    displayName: Benchmark mode
+    type: string
+    default: forced
+    values:
+      - forced
+      - trigger
+  - name: SkillBranch
+    displayName: Branch containing the azure-typespec-author skill source (SKILL.md + references/) to evaluate. Defaults to the full source branch ref.
+    type: string
+    default: $(Build.SourceBranch)
+  - name: McpKind
+    displayName: MCP implementation
+    type: string
+    default: live
+    values:
+      - live
+      - mock
+  - name: Runs
+    displayName: Vally trials per stimulus
+    type: number
+    default: 1
 
 variables:
-- template: /eng/pipelines/templates/variables/image.yml
-- name: SkillBranch
-  value: ${{ parameters.SkillBranch }}
-- name: TypeSpecAuthorEvalMode
-  value: ${{ parameters.Mode }}
-- name: AZSDK_EVAL_MCP_KIND
-  value: ${{ parameters.McpKind }}
+  - template: /eng/pipelines/templates/variables/image.yml
+  - name: SkillBranch
+    value: ${{ parameters.SkillBranch }}
+  - name: TypeSpecAuthorEvalMode
+    value: ${{ parameters.Mode }}
+  - name: AZSDK_EVAL_MCP_KIND
+    value: ${{ parameters.McpKind }}
 
 extends:
   template: /eng/common/pipelines/templates/stages/archetype-eval.yml
@@ -43,30 +43,30 @@ extends:
     vallyRoot: .github/skills/azure-typespec-author/evaluate
     ${{ if eq(parameters.Mode, 'trigger') }}:
       evalGlobs:
-        - 'evals/001*.eval.yaml'
-        - 'evals/002*.eval.yaml'
-        - 'evals/003*.eval.yaml'
-        - 'evals/004*.eval.yaml'
-        - 'evals/005*.eval.yaml'
-        - 'evals/006*.eval.yaml'
-        - 'evals/007*.eval.yaml'
+        - "evals/001*.eval.yaml"
+        - "evals/002*.eval.yaml"
+        - "evals/003*.eval.yaml"
+        - "evals/004*.eval.yaml"
+        - "evals/005*.eval.yaml"
+        - "evals/006*.eval.yaml"
+        - "evals/007*.eval.yaml"
     ${{ else }}:
       evalGlobs:
         # Routing-only files have no forced stimuli.
-        - 'evals/001*.eval.yaml'
-        - 'evals/002*.eval.yaml'
-        - 'evals/003*.eval.yaml'
-        - 'evals/004*.eval.yaml'
-        - 'evals/005*.eval.yaml'
-        - 'evals/006*.eval.yaml'
-        - 'evals/007001.eval.yaml'
-        - 'evals/007002.eval.yaml'
-        - 'evals/007003.eval.yaml'
-        - 'evals/007004.eval.yaml'
-        - 'evals/007005.eval.yaml'
-        - 'evals/007006.eval.yaml'
-        - 'evals/007007.eval.yaml'
-        - 'evals/007008.eval.yaml'
+        - "evals/001*.eval.yaml"
+        - "evals/002*.eval.yaml"
+        - "evals/003*.eval.yaml"
+        - "evals/004*.eval.yaml"
+        - "evals/005*.eval.yaml"
+        - "evals/006*.eval.yaml"
+        - "evals/007001.eval.yaml"
+        - "evals/007002.eval.yaml"
+        - "evals/007003.eval.yaml"
+        - "evals/007004.eval.yaml"
+        - "evals/007005.eval.yaml"
+        - "evals/007006.eval.yaml"
+        - "evals/007007.eval.yaml"
+        - "evals/007008.eval.yaml"
     mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
     TestType: ${{ parameters.McpKind }}
     vallyArguments:

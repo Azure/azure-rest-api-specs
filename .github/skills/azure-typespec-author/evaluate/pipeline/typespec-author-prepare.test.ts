@@ -8,8 +8,13 @@ import { test } from "node:test";
 import { configureSkillEnvironments, prepareBenchmark } from "./typespec-author-prepare.ts";
 
 function createMcpBinary(root: string, kind: "live" | "mock") {
-  const file = path.join(root, "artifacts", "mcp", kind === "live" ? "cli" : "mock",
-    kind === "live" ? "azsdk.dll" : "azsdk-mock.dll");
+  const file = path.join(
+    root,
+    "artifacts",
+    "mcp",
+    kind === "live" ? "cli" : "mock",
+    kind === "live" ? "azsdk.dll" : "azsdk-mock.dll",
+  );
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, "");
   return file;
@@ -25,8 +30,10 @@ function fixture(t: { after: (fn: () => void) => void }, naming = true, required
     const dir = path.join(root, name);
     fs.mkdirSync(path.join(dir, "references"), { recursive: true });
     fs.mkdirSync(path.join(dir, "evals"), { recursive: true });
-    fs.writeFileSync(path.join(dir, "SKILL.md"), name === "azure-typespec-author" && required
-      ? "Depends on azure-typespec-sdk-naming" : name);
+    fs.writeFileSync(
+      path.join(dir, "SKILL.md"),
+      name === "azure-typespec-author" && required ? "Depends on azure-typespec-sdk-naming" : name,
+    );
     fs.writeFileSync(path.join(dir, "references", "rules.md"), name);
     fs.writeFileSync(path.join(dir, "evals", "secret-grader.yaml"), "must not leak");
   }
@@ -38,8 +45,12 @@ function fixture(t: { after: (fn: () => void) => void }, naming = true, required
     "azsdk-mcp": {
       mcpServers: {
         "azure-sdk-mcp": {
-          type: "stdio", command: "node", args: ["local-launcher.cjs"], cwd: root,
-          timeout: "5m", env: { AZURE_SDK_KB_ENDPOINT: "https://example.test" },
+          type: "stdio",
+          command: "node",
+          args: ["local-launcher.cjs"],
+          cwd: root,
+          timeout: "5m",
+          env: { AZURE_SDK_KB_ENDPOINT: "https://example.test" },
         },
       },
     },
@@ -55,7 +66,10 @@ test("mounts declared definitions and references, never evaluators or fixture de
   assert.equal(environments.sdk.skills.length, 2);
   for (const skill of environments.sdk.skills) {
     assert.deepEqual(fs.readdirSync(skill).sort(), ["SKILL.md", "references"]);
-    assert.equal(fs.readFileSync(path.join(skill, "references", "rules.md"), "utf8"), path.basename(skill));
+    assert.equal(
+      fs.readFileSync(path.join(skill, "references", "rules.md"), "utf8"),
+      path.basename(skill),
+    );
     assert.ok(path.isAbsolute(skill));
   }
   assert.equal(environments.sdk.mcpServers.sdk.cwd, path.resolve(evalRoot, "../../.."));
@@ -72,7 +86,10 @@ test("no-skill mode overrides explicit mounts and does not stage source skills",
 test("a branch predating naming mounts only its own authoring skill", (t) => {
   const { evalRoot, environments, stage } = fixture(t, false, false);
   configureSkillEnvironments(environments, evalRoot, false, stage);
-  assert.deepEqual(environments.sdk.skills.map((entry) => path.basename(entry)), ["azure-typespec-author"]);
+  assert.deepEqual(
+    environments.sdk.skills.map((entry) => path.basename(entry)),
+    ["azure-typespec-author"],
+  );
   assert.equal(fs.existsSync(path.join(stage, "azure-typespec-sdk-naming")), false);
 });
 
@@ -94,12 +111,15 @@ test("missing non-naming inputs are not silently omitted", (t) => {
 });
 
 for (const [mode, kind] of ["forced", "trigger", "no-skill"].flatMap((mode) =>
-  ["live", "mock"].map((kind) => [mode, kind]))) {
+  ["live", "mock"].map((kind) => [mode, kind]),
+)) {
   test(`${mode}/${kind} prepares direct MCP startup and isolated skill inputs`, async (t) => {
     const { root, evalRoot, environments, stage } = fixture(t);
     fs.writeFileSync(path.join(evalRoot, ".vally.yaml"), JSON.stringify({ environments }));
     await prepareBenchmark(evalRoot, mode, stage, kind);
-    const prepared = JSON.parse(fs.readFileSync(path.join(evalRoot, ".vally.yaml"), "utf8")).environments;
+    const prepared = JSON.parse(
+      fs.readFileSync(path.join(evalRoot, ".vally.yaml"), "utf8"),
+    ).environments;
     const skills: string[] = prepared.sdk.skills;
     if (mode === "no-skill") {
       assert.deepEqual(skills, []);
@@ -113,8 +133,13 @@ for (const [mode, kind] of ["forced", "trigger", "no-skill"].flatMap((mode) =>
     }
     assert.equal(prepared.sdk.mcpServers.sdk.cwd, path.resolve(evalRoot, "../../.."));
     const server = prepared["azsdk-mcp"].mcpServers["azure-sdk-mcp"];
-    const expectedDll = path.join(root, "artifacts", "mcp", kind === "live" ? "cli" : "mock",
-      kind === "live" ? "azsdk.dll" : "azsdk-mock.dll");
+    const expectedDll = path.join(
+      root,
+      "artifacts",
+      "mcp",
+      kind === "live" ? "cli" : "mock",
+      kind === "live" ? "azsdk.dll" : "azsdk-mock.dll",
+    );
     assert.equal(server.command, "dotnet");
     assert.deepEqual(server.args, kind === "live" ? [expectedDll, "mcp"] : [expectedDll]);
     assert.equal(server.cwd, root);
@@ -129,14 +154,23 @@ test("invalid MCP kinds and missing binaries fail before writing prepared config
   const original = JSON.stringify({ environments });
   fs.writeFileSync(configPath, original);
   for (const kind of ["", "LIVE", "unknown"]) {
-    await assert.rejects(prepareBenchmark(evalRoot, "forced", stage, kind), /AZSDK_EVAL_MCP_KIND must be live or mock/);
+    await assert.rejects(
+      prepareBenchmark(evalRoot, "forced", stage, kind),
+      /AZSDK_EVAL_MCP_KIND must be live or mock/,
+    );
   }
   for (const kind of ["live", "mock"] as const) {
     const file = createMcpBinary(root, kind);
     fs.unlinkSync(file);
-    await assert.rejects(prepareBenchmark(evalRoot, "forced", stage, kind), /Prebuilt .* MCP binary does not exist/);
+    await assert.rejects(
+      prepareBenchmark(evalRoot, "forced", stage, kind),
+      /Prebuilt .* MCP binary does not exist/,
+    );
     fs.mkdirSync(file);
-    await assert.rejects(prepareBenchmark(evalRoot, "forced", stage, kind), /Prebuilt .* MCP binary does not exist or is not a file/);
+    await assert.rejects(
+      prepareBenchmark(evalRoot, "forced", stage, kind),
+      /Prebuilt .* MCP binary does not exist or is not a file/,
+    );
   }
   assert.equal(fs.readFileSync(configPath, "utf8"), original);
   assert.equal(fs.existsSync(stage), false);
@@ -146,16 +180,29 @@ test("the prepare CLI reads the pipeline MCP kind and rejects a missing selectio
   const { evalRoot, environments, stage } = fixture(t);
   const configPath = path.join(evalRoot, ".vally.yaml");
   fs.writeFileSync(configPath, JSON.stringify({ environments }));
-  const args = ["--experimental-strip-types", path.join(import.meta.dirname, "typespec-author-prepare.ts"),
-    "--prepare", "--eval-root", evalRoot, "--mode", "no-skill", "--skill-root", stage];
+  const args = [
+    "--experimental-strip-types",
+    path.join(import.meta.dirname, "typespec-author-prepare.ts"),
+    "--prepare",
+    "--eval-root",
+    evalRoot,
+    "--mode",
+    "no-skill",
+    "--skill-root",
+    stage,
+  ];
   const env = { ...process.env };
   delete env.AZSDK_EVAL_MCP_KIND;
   const missing = spawnSync(process.execPath, args, { env, encoding: "utf8" });
   assert.ifError(missing.error);
   assert.equal(missing.status, 1);
   assert.match(missing.stderr, /AZSDK_EVAL_MCP_KIND must be live or mock/);
-  execFileSync(process.execPath, args, { env: { ...env, AZSDK_EVAL_MCP_KIND: "live" }, stdio: "pipe" });
-  const server = JSON.parse(fs.readFileSync(configPath, "utf8")).environments["azsdk-mcp"].mcpServers["azure-sdk-mcp"];
+  execFileSync(process.execPath, args, {
+    env: { ...env, AZSDK_EVAL_MCP_KIND: "live" },
+    stdio: "pipe",
+  });
+  const server = JSON.parse(fs.readFileSync(configPath, "utf8")).environments["azsdk-mcp"]
+    .mcpServers["azure-sdk-mcp"];
   assert.equal(server.command, "dotnet");
   assert.equal(server.args[1], "mcp");
 });
