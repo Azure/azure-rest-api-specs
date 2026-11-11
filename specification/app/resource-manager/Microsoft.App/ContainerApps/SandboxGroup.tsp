@@ -22,6 +22,7 @@ model SandboxGroup is TrackedResource<SandboxGroupProperties> {
     SegmentName = "sandboxGroups",
     NamePattern = "^(?![.-])[A-Za-z0-9-]{1,32}$"
   >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 /** SandboxGroup resource specific properties. */
@@ -98,6 +99,9 @@ model SandboxGroupPatch {
 
   /** SandboxGroup properties that can be updated. */
   properties?: SandboxGroupPatchProperties;
+
+  /** Managed identity updates. Omit to preserve the current identities. */
+  identity?: OptionalProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>;
 }
 
 /** SandboxGroup resource specific properties for patch requests. */
