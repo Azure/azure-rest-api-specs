@@ -38,58 +38,6 @@ jobs:
       has_input: ${{ steps.find-input.outputs.has_input }}
   agent:
     needs: pre-activation
-  validate-result:
-    needs: agent
-    runs-on: ubuntu-slim
-    permissions:
-      actions: read
-      contents: read
-    steps:
-      - name: Checkout trusted validator
-        uses: actions/checkout@v7
-        with:
-          sparse-checkout: |
-            .github/workflows/src/sdk-validation-dotnet-review-result.ts
-          persist-credentials: false
-      - name: Download raw SDK review result
-        uses: actions/download-artifact@v8
-        with:
-          name: sdk-review-raw-result-workflow-${{ github.event.workflow_run.id }}
-          path: ${{ runner.temp }}/sdk-review-final
-      - name: Download trusted SDK review context
-        uses: actions/download-artifact@v8
-        with:
-          name: sdk-review-trusted-context-${{ github.event.workflow_run.id }}
-          path: ${{ runner.temp }}/sdk-review-final/sdk-review-workspaces
-      - name: Validate SDK review result
-        uses: actions/github-script@v9
-        env:
-          SDK_REVIEW_RESULT_ROOT: ${{ runner.temp }}/sdk-review-final
-        with:
-          script: |
-            const { readFile, writeFile } = await import("node:fs/promises");
-            const { validateSdkReviewResult } = await import(
-              "${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-result.ts"
-            );
-            const root = process.env.SDK_REVIEW_RESULT_ROOT;
-            const [contextText, resultText, reportMarkdown] = await Promise.all([
-              readFile(`${root}/sdk-review-workspaces/sdk-review-context.json`, "utf8"),
-              readFile(`${root}/sdk-review-result.json`, "utf8"),
-              readFile(`${root}/sdk-review-result.md`, "utf8"),
-            ]);
-            const validatedReport = validateSdkReviewResult(
-              JSON.parse(contextText),
-              JSON.parse(resultText),
-              reportMarkdown,
-            );
-            await writeFile(`${root}/sdk-review-result.md`, validatedReport, "utf8");
-      - name: Upload validated SDK review result
-        uses: actions/upload-artifact@v7
-        with:
-          name: sdk-review-result-workflow-${{ github.event.workflow_run.id }}
-          path: ${{ runner.temp }}/sdk-review-final
-          if-no-files-found: error
-          retention-days: 7
 if: >-
   github.repository == 'Azure/azure-rest-api-specs' &&
   github.event.workflow_run.conclusion == 'success' &&
@@ -160,19 +108,71 @@ safe-outputs:
   report-incomplete: false
   report-missing-data: false
   report-missing-tool: false
+  jobs:
+    publish-sdk-review:
+      description: "Validate and publish the generated SDK review result"
+      if: needs.detection.outputs.detection_success == 'true'
+      runs-on: ubuntu-slim
+      permissions:
+        actions: read
+        contents: read
+      inputs:
+        result:
+          description: "The complete generated SDK review result as a JSON object string"
+          required: true
+          type: string
+      steps:
+        - name: Checkout trusted validator
+          uses: actions/checkout@v7
+          with:
+            sparse-checkout: |
+              .github/workflows/src/sdk-validation-dotnet-review-result.ts
+            persist-credentials: false
+        - name: Download trusted SDK review context
+          uses: actions/download-artifact@v8
+          with:
+            name: sdk-review-trusted-context-${{ github.event.workflow_run.id }}
+            path: ${{ runner.temp }}/sdk-review-final/sdk-review-workspaces
+        - name: Validate SDK review result
+          uses: actions/github-script@v9
+          env:
+            SDK_REVIEW_RESULT_ROOT: ${{ runner.temp }}/sdk-review-final
+          with:
+            script: |
+              const { readFile, writeFile } = await import("node:fs/promises");
+              const {
+                parseSdkReviewSafeOutput,
+                validateSdkReviewResult,
+              } = await import(
+                "${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-result.ts"
+              );
+              const root = process.env.SDK_REVIEW_RESULT_ROOT;
+              const [contextText, outputText] = await Promise.all([
+                readFile(`${root}/sdk-review-workspaces/sdk-review-context.json`, "utf8"),
+                readFile(process.env.GH_AW_AGENT_OUTPUT, "utf8"),
+              ]);
+              const result = parseSdkReviewSafeOutput(JSON.parse(outputText));
+              const validatedReport = validateSdkReviewResult(
+                JSON.parse(contextText),
+                result,
+              );
+              await Promise.all([
+                writeFile(
+                  `${root}/sdk-review-result.json`,
+                  `${JSON.stringify(result, null, 2)}\n`,
+                  "utf8",
+                ),
+                writeFile(`${root}/sdk-review-result.md`, validatedReport, "utf8"),
+              ]);
+        - name: Upload validated SDK review result
+          uses: actions/upload-artifact@v7
+          with:
+            name: sdk-review-result-workflow-${{ github.event.workflow_run.id }}
+            path: ${{ runner.temp }}/sdk-review-final
+            if-no-files-found: error
+            retention-days: 7
   noop:
     report-as-issue: false
-post-steps:
-  - name: Upload raw SDK review result
-    if: ${{ success() }}
-    uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-    with:
-      name: sdk-review-raw-result-workflow-${{ github.event.workflow_run.id }}
-      path: |
-        /tmp/gh-aw/sdk-review-result.json
-        /tmp/gh-aw/sdk-review-result.md
-      if-no-files-found: error
-      retention-days: 7
 ---
 
 # Generated .NET SDK Review
@@ -191,7 +191,8 @@ update, label, approve, or otherwise mutate any GitHub pull request.
    the canonical skill requires context.
 5. Report only reproducible, high-confidence defects. Do not invent an SDK PR or
    assume prior SDK review discussion exists.
-6. Write `/tmp/gh-aw/sdk-review-result.json` with this shape:
+6. Call `publish_sdk_review` exactly once with `result` set to a JSON string
+   using this shape:
 
 ```json
 {
@@ -220,7 +221,6 @@ update, label, approve, or otherwise mutate any GitHub pull request.
 }
 ```
 
-Also write a concise human-readable report to
-`/tmp/gh-aw/sdk-review-result.md`. If no findings remain after applying the
-canonical skill's confidence gate, include an empty `findings` array and state
-that no high-confidence findings were found.
+If no findings remain after applying the canonical skill's confidence gate,
+include an empty `findings` array. The trusted safe-output job validates the
+structured result and generates the human-readable Markdown deterministically.

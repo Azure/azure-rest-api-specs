@@ -8,6 +8,7 @@ export type ArtifactResource = {
 export type ArtifactValue = {
   name: string;
   id?: string;
+  source?: string;
   resource?: ArtifactResource;
 };
 
@@ -17,6 +18,22 @@ export type Artifacts = {
 
 export type ListArtifactsResponse = {
   value: Array<ArtifactValue>;
+};
+
+type TimelineAttempt = {
+  attempt?: number;
+  recordId?: string;
+};
+
+type TimelineRecord = {
+  id?: string;
+  type?: string;
+  attempt?: number;
+  previousAttempts?: TimelineAttempt[];
+};
+
+type TimelineResponse = {
+  records: TimelineRecord[];
 };
 
 export type AzurePipelineArtifactResult = {
@@ -216,15 +233,26 @@ function parseResolvedArtifactName(
 }
 
 function getArtifactAttempt(
-  artifactName: string,
+  artifact: ArtifactValue,
   requestedArtifactName: string,
+  attemptsBySource: ReadonlyMap<string, number>,
 ): number | undefined {
-  if (artifactName === requestedArtifactName) {
-    // Azure Pipelines omits the suffix for the initial job attempt.
-    return 1;
+  if (artifact.name === requestedArtifactName) {
+    if (!artifact.source) {
+      throw new Error(`Artifact '${requestedArtifactName}' is missing its source job`);
+    }
+    const attempt = attemptsBySource.get(artifact.source);
+    if (attempt === undefined) {
+      throw new Error(
+        `Artifact '${requestedArtifactName}' source job '${artifact.source}' is missing from the build timeline`,
+      );
+    }
+    return attempt;
   }
   const escapedArtifactName = requestedArtifactName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const match = artifactName.match(new RegExp(`^${escapedArtifactName}-FailedAttempt([1-9]\\d*)$`));
+  const match = artifact.name.match(
+    new RegExp(`^${escapedArtifactName}-FailedAttempt([1-9]\\d*)$`),
+  );
   if (!match) {
     return undefined;
   }
@@ -235,10 +263,11 @@ function getArtifactAttempt(
 function indexArtifactsByAttempt(
   artifacts: ArtifactValue[],
   requestedArtifactName: string,
+  attemptsBySource: ReadonlyMap<string, number>,
 ): Map<number, ArtifactValue> {
   const artifactsByAttempt = new Map<number, ArtifactValue>();
   for (const artifact of artifacts) {
-    const attempt = getArtifactAttempt(artifact.name, requestedArtifactName);
+    const attempt = getArtifactAttempt(artifact, requestedArtifactName, attemptsBySource);
     if (attempt === undefined) {
       continue;
     }
@@ -254,6 +283,61 @@ function indexArtifactsByAttempt(
 
 function selectPreferredAttempt(attempts: number[]): number | undefined {
   return attempts.sort((left, right) => right - left)[0];
+}
+
+async function getArtifactSourceAttempts(
+  adoBuildId: string,
+  adoProjectUrl: string,
+  retryOptions: import("./retries.ts").RetryOptions,
+  headers: Record<string, string>,
+  fetchImpl: typeof fetch,
+): Promise<Map<string, number>> {
+  const response = await fetchWithRetry(
+    `${adoProjectUrl}/_apis/build/builds/${adoBuildId}/timeline?api-version=7.0`,
+    {
+      method: "GET",
+      headers,
+    },
+    retryOptions,
+    fetchImpl,
+  );
+  if (!response.ok) {
+    throw new Error(`Failed to fetch build timeline: ${response.status}, ${response.statusText}`);
+  }
+
+  const metadata: unknown = await response.json();
+  if (
+    !metadata ||
+    typeof metadata !== "object" ||
+    !("records" in metadata) ||
+    !Array.isArray((metadata as TimelineResponse).records)
+  ) {
+    throw new Error("Malformed Azure Pipelines build timeline");
+  }
+
+  const attemptsBySource = new Map<string, number>();
+  for (const record of (metadata as TimelineResponse).records) {
+    if (record.type !== "Job") {
+      continue;
+    }
+    if (
+      typeof record.id === "string" &&
+      Number.isSafeInteger(record.attempt) &&
+      Number(record.attempt) > 0
+    ) {
+      attemptsBySource.set(record.id, Number(record.attempt));
+    }
+    for (const previousAttempt of record.previousAttempts ?? []) {
+      if (
+        typeof previousAttempt.recordId === "string" &&
+        Number.isSafeInteger(previousAttempt.attempt) &&
+        Number(previousAttempt.attempt) > 0
+      ) {
+        attemptsBySource.set(previousAttempt.recordId, Number(previousAttempt.attempt));
+      }
+    }
+  }
+  return attemptsBySource;
 }
 
 /**
@@ -359,8 +443,46 @@ export async function resolveAzurePipelineArtifactPair({
   core.info(`Artifacts found: ${JSON.stringify(metadata)}`);
 
   const [firstArtifactName, secondArtifactName] = artifactNames;
-  const firstArtifactsByAttempt = indexArtifactsByAttempt(artifacts, firstArtifactName);
-  const secondArtifactsByAttempt = indexArtifactsByAttempt(artifacts, secondArtifactName);
+  const exactArtifacts = artifacts.filter(
+    (artifact) => artifact.name === firstArtifactName || artifact.name === secondArtifactName,
+  );
+  const escapedArtifactNames = artifactNames.map((name) =>
+    name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+  );
+  const hasFailedArtifacts = artifacts.some((artifact) =>
+    escapedArtifactNames.some((name) =>
+      new RegExp(`^${name}-FailedAttempt[1-9]\\d*$`).test(artifact.name),
+    ),
+  );
+  const attemptsBySource =
+    exactArtifacts.length === 0
+      ? new Map<string, number>()
+      : hasFailedArtifacts
+        ? await getArtifactSourceAttempts(
+            ado_build_id,
+            ado_project_url,
+            retryOptions,
+            headers,
+            fetchImpl,
+          )
+        : new Map(
+            exactArtifacts
+              .filter(
+                (artifact): artifact is ArtifactValue & { source: string } =>
+                  typeof artifact.source === "string",
+              )
+              .map((artifact) => [artifact.source, 1]),
+          );
+  const firstArtifactsByAttempt = indexArtifactsByAttempt(
+    artifacts,
+    firstArtifactName,
+    attemptsBySource,
+  );
+  const secondArtifactsByAttempt = indexArtifactsByAttempt(
+    artifacts,
+    secondArtifactName,
+    attemptsBySource,
+  );
   const selectedAttempt = selectPreferredAttempt([...firstArtifactsByAttempt.keys()]);
 
   const resolveArtifact = (

@@ -627,26 +627,75 @@ describe("getAzurePipelineArtifact function", () => {
     expect(mockFetch).toHaveBeenCalledTimes(1);
   });
 
-  it("prefers the newest complete retry pair over initial-attempt artifacts", async () => {
+  it("does not fetch the timeline when only successful artifacts exist", async () => {
     mockFetch.mockResolvedValue({
       ok: true,
       json: vi.fn().mockResolvedValue({
         value: [
           {
             name: "spec-gen-sdk-artifact",
+            source: "successful-job",
             resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
           },
           {
-            name: "spec-gen-sdk-artifact-FailedAttempt2",
-            resource: { downloadUrl: "https://dev.azure.com/spec-gen-2" },
-          },
-          {
-            name: "packages-FailedAttempt2",
-            resource: { downloadUrl: "https://dev.azure.com/packages-2" },
+            name: "packages",
+            source: "successful-job",
+            resource: { downloadUrl: "https://dev.azure.com/packages" },
           },
         ],
       }),
     });
+
+    const resolution = await resolveAzurePipelineArtifactPair({
+      ado_build_id: inputs.ado_build_id,
+      ado_project_url: inputs.ado_project_url,
+      artifactNames: ["spec-gen-sdk-artifact", "packages"],
+      core: mockCore,
+    });
+
+    expect(resolution).toMatchObject({
+      status: "found",
+      artifacts: [{ artifactName: "spec-gen-sdk-artifact" }, { artifactName: "packages" }],
+    });
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+  });
+
+  it("prefers the newest complete retry pair over initial-attempt artifacts", async () => {
+    mockFetch.mockImplementation((url) =>
+      Promise.resolve({
+        ok: true,
+        json: vi.fn().mockResolvedValue(
+          url.includes("/timeline?")
+            ? {
+                records: [
+                  {
+                    id: "initial-job",
+                    type: "Job",
+                    attempt: 1,
+                    previousAttempts: [],
+                  },
+                ],
+              }
+            : {
+                value: [
+                  {
+                    name: "spec-gen-sdk-artifact",
+                    source: "initial-job",
+                    resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
+                  },
+                  {
+                    name: "spec-gen-sdk-artifact-FailedAttempt2",
+                    resource: { downloadUrl: "https://dev.azure.com/spec-gen-2" },
+                  },
+                  {
+                    name: "packages-FailedAttempt2",
+                    resource: { downloadUrl: "https://dev.azure.com/packages-2" },
+                  },
+                ],
+              },
+        ),
+      }),
+    );
 
     const resolution = await resolveAzurePipelineArtifactPair({
       ado_build_id: inputs.ado_build_id,
@@ -665,21 +714,37 @@ describe("getAzurePipelineArtifact function", () => {
   });
 
   it("pairs differently named artifacts from the initial job attempt", async () => {
-    mockFetch.mockResolvedValue({
-      ok: true,
-      json: vi.fn().mockResolvedValue({
-        value: [
-          {
-            name: "spec-gen-sdk-artifact",
-            resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
-          },
-          {
-            name: "packages-FailedAttempt1",
-            resource: { downloadUrl: "https://dev.azure.com/packages-1" },
-          },
-        ],
+    mockFetch.mockImplementation((url) =>
+      Promise.resolve({
+        ok: true,
+        json: vi.fn().mockResolvedValue(
+          url.includes("/timeline?")
+            ? {
+                records: [
+                  {
+                    id: "initial-job",
+                    type: "Job",
+                    attempt: 1,
+                    previousAttempts: [],
+                  },
+                ],
+              }
+            : {
+                value: [
+                  {
+                    name: "spec-gen-sdk-artifact",
+                    source: "initial-job",
+                    resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
+                  },
+                  {
+                    name: "packages-FailedAttempt1",
+                    resource: { downloadUrl: "https://dev.azure.com/packages-1" },
+                  },
+                ],
+              },
+        ),
       }),
-    });
+    );
 
     const resolution = await resolveAzurePipelineArtifactPair({
       ado_build_id: inputs.ado_build_id,
@@ -698,29 +763,46 @@ describe("getAzurePipelineArtifact function", () => {
   });
 
   it("prefers the newest retry pair over the initial successful names", async () => {
-    mockFetch.mockResolvedValue({
-      ok: true,
-      json: vi.fn().mockResolvedValue({
-        value: [
-          {
-            name: "spec-gen-sdk-artifact",
-            resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
-          },
-          {
-            name: "packages",
-            resource: { downloadUrl: "https://dev.azure.com/packages" },
-          },
-          {
-            name: "spec-gen-sdk-artifact-FailedAttempt3",
-            resource: { downloadUrl: "https://dev.azure.com/spec-gen-3" },
-          },
-          {
-            name: "packages-FailedAttempt3",
-            resource: { downloadUrl: "https://dev.azure.com/packages-3" },
-          },
-        ],
+    mockFetch.mockImplementation((url) =>
+      Promise.resolve({
+        ok: true,
+        json: vi.fn().mockResolvedValue(
+          url.includes("/timeline?")
+            ? {
+                records: [
+                  {
+                    id: "initial-job",
+                    type: "Job",
+                    attempt: 1,
+                    previousAttempts: [],
+                  },
+                ],
+              }
+            : {
+                value: [
+                  {
+                    name: "spec-gen-sdk-artifact",
+                    source: "initial-job",
+                    resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
+                  },
+                  {
+                    name: "packages",
+                    source: "initial-job",
+                    resource: { downloadUrl: "https://dev.azure.com/packages" },
+                  },
+                  {
+                    name: "spec-gen-sdk-artifact-FailedAttempt3",
+                    resource: { downloadUrl: "https://dev.azure.com/spec-gen-3" },
+                  },
+                  {
+                    name: "packages-FailedAttempt3",
+                    resource: { downloadUrl: "https://dev.azure.com/packages-3" },
+                  },
+                ],
+              },
+        ),
       }),
-    });
+    );
 
     const resolution = await resolveAzurePipelineArtifactPair({
       ado_build_id: inputs.ado_build_id,
@@ -735,6 +817,68 @@ describe("getAzurePipelineArtifact function", () => {
         { artifactName: "spec-gen-sdk-artifact-FailedAttempt3" },
         { artifactName: "packages-FailedAttempt3" },
       ],
+    });
+  });
+
+  it("maps unsuffixed retry artifacts to their real successful attempt", async () => {
+    mockFetch.mockImplementation((url) =>
+      Promise.resolve({
+        ok: true,
+        json: vi.fn().mockResolvedValue(
+          url.includes("/timeline?")
+            ? {
+                records: [
+                  {
+                    id: "successful-retry-job",
+                    type: "Job",
+                    attempt: 2,
+                    previousAttempts: [
+                      {
+                        attempt: 1,
+                        recordId: "failed-initial-job",
+                      },
+                    ],
+                  },
+                ],
+              }
+            : {
+                value: [
+                  {
+                    name: "spec-gen-sdk-artifact-FailedAttempt1",
+                    source: "failed-initial-job",
+                    resource: { downloadUrl: "https://dev.azure.com/spec-gen-1" },
+                  },
+                  {
+                    name: "packages-FailedAttempt1",
+                    source: "failed-initial-job",
+                    resource: { downloadUrl: "https://dev.azure.com/packages-1" },
+                  },
+                  {
+                    name: "spec-gen-sdk-artifact",
+                    source: "successful-retry-job",
+                    resource: { downloadUrl: "https://dev.azure.com/spec-gen" },
+                  },
+                  {
+                    name: "packages",
+                    source: "successful-retry-job",
+                    resource: { downloadUrl: "https://dev.azure.com/packages" },
+                  },
+                ],
+              },
+        ),
+      }),
+    );
+
+    const resolution = await resolveAzurePipelineArtifactPair({
+      ado_build_id: inputs.ado_build_id,
+      ado_project_url: inputs.ado_project_url,
+      artifactNames: ["spec-gen-sdk-artifact", "packages"],
+      core: mockCore,
+    });
+
+    expect(resolution).toMatchObject({
+      status: "found",
+      artifacts: [{ artifactName: "spec-gen-sdk-artifact" }, { artifactName: "packages" }],
     });
   });
 

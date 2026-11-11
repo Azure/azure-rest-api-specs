@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { validateSdkReviewResult } from "../src/sdk-validation-dotnet-review-result.ts";
+import {
+  parseSdkReviewSafeOutput,
+  validateSdkReviewResult,
+} from "../src/sdk-validation-dotnet-review-result.ts";
 
 const context = {
   source: {
@@ -48,7 +51,7 @@ function createResult() {
 
 describe("validateSdkReviewResult", () => {
   it("accepts a complete result and Markdown report", () => {
-    expect(validateSdkReviewResult(context, createResult(), "# SDK review\n")).toContain(
+    expect(validateSdkReviewResult(context, createResult())).toContain(
       "Incorrect generated behavior",
     );
   });
@@ -57,7 +60,7 @@ describe("validateSdkReviewResult", () => {
     const result = createResult();
     result.reviews[0].findings = [];
 
-    expect(validateSdkReviewResult(context, result, "# No findings\n")).toContain(
+    expect(validateSdkReviewResult(context, result)).toContain(
       "No high-confidence findings were found.",
     );
   });
@@ -66,9 +69,7 @@ describe("validateSdkReviewResult", () => {
     const result = createResult();
     result.source.specHeadSha = "f".repeat(40);
 
-    expect(() => validateSdkReviewResult(context, result, "# SDK review\n")).toThrow(
-      "source identity",
-    );
+    expect(() => validateSdkReviewResult(context, result)).toThrow("source identity");
   });
 
   it("rejects a missing findings array", () => {
@@ -76,43 +77,69 @@ describe("validateSdkReviewResult", () => {
     const review = result.reviews[0] as { findings?: unknown[] };
     delete review.findings;
 
-    expect(() => validateSdkReviewResult(context, result, "# SDK review\n")).toThrow(
-      "findings must be an array",
-    );
+    expect(() => validateSdkReviewResult(context, result)).toThrow("findings must be an array");
   });
 
   it("rejects malformed findings", () => {
     const result = createResult();
     result.reviews[0].findings[0].line = 0;
 
-    expect(() => validateSdkReviewResult(context, result, "# SDK review\n")).toThrow(
-      "invalid line",
-    );
+    expect(() => validateSdkReviewResult(context, result)).toThrow("invalid line");
   });
 
   it("rejects findings outside the declared changed files", () => {
     const result = createResult();
     result.reviews[0].findings[0].file = "sdk/widget/Azure.Widget/README.md";
 
-    expect(() => validateSdkReviewResult(context, result, "# SDK review\n")).toThrow(
+    expect(() => validateSdkReviewResult(context, result)).toThrow(
       "outside the declared changed files",
     );
   });
 
-  it("replaces a contradictory agent report with Markdown generated from validated findings", () => {
-    const report = validateSdkReviewResult(
-      context,
-      createResult(),
-      "# No high-confidence findings were found.\n",
-    );
+  it("generates Markdown from validated findings", () => {
+    const report = validateSdkReviewResult(context, createResult());
 
     expect(report).toContain("Incorrect generated behavior");
     expect(report).not.toContain("No high-confidence findings were found.");
   });
+});
 
-  it("rejects an empty Markdown report", () => {
-    expect(() => validateSdkReviewResult(context, createResult(), " \n")).toThrow(
-      "must not be empty",
-    );
+describe("parseSdkReviewSafeOutput", () => {
+  it("extracts one bounded review result", () => {
+    const result = createResult();
+    expect(
+      parseSdkReviewSafeOutput({
+        items: [{ type: "publish_sdk_review", result: JSON.stringify(result) }],
+        errors: [],
+      }),
+    ).toEqual(result);
+  });
+
+  it("rejects missing or duplicate review submissions", () => {
+    expect(() => parseSdkReviewSafeOutput({ items: [], errors: [] })).toThrow("exactly one");
+    expect(() =>
+      parseSdkReviewSafeOutput({
+        items: [
+          { type: "publish_sdk_review", result: "{}" },
+          { type: "publish_sdk_review", result: "{}" },
+        ],
+        errors: [],
+      }),
+    ).toThrow("exactly one");
+  });
+
+  it("rejects malformed or oversized JSON", () => {
+    expect(() =>
+      parseSdkReviewSafeOutput({
+        items: [{ type: "publish_sdk_review", result: "{" }],
+        errors: [],
+      }),
+    ).toThrow("valid JSON");
+    expect(() =>
+      parseSdkReviewSafeOutput({
+        items: [{ type: "publish_sdk_review", result: `"${"x".repeat(64 * 1024)}"` }],
+        errors: [],
+      }),
+    ).toThrow("exceeds");
   });
 });

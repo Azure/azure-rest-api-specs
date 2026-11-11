@@ -24,6 +24,8 @@ type ValidatedFinding = {
   description: string;
 };
 
+const MAX_SAFE_OUTPUT_BYTES = 64 * 1024;
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -132,11 +134,7 @@ function buildValidatedMarkdown(
  * @throws When the result or Markdown report is missing, malformed, incomplete,
  * or inconsistent with the reconstruction context.
  */
-export function validateSdkReviewResult(
-  contextValue: unknown,
-  resultValue: unknown,
-  reportMarkdown: string,
-): string {
+export function validateSdkReviewResult(contextValue: unknown, resultValue: unknown): string {
   if (!isRecord(contextValue) || !isRecord(contextValue.source)) {
     throw new Error("SDK review context is missing source identity");
   }
@@ -228,8 +226,40 @@ export function validateSdkReviewResult(
     });
   }
 
-  if (reportMarkdown.trim().length === 0) {
-    throw new Error("SDK review Markdown report must not be empty");
-  }
   return buildValidatedMarkdown(context, validatedReviews);
+}
+
+/**
+ * Extracts the single bounded review result submitted through gh-aw safe
+ * outputs. Threat detection inspects this envelope before the trusted
+ * validation job reads it.
+ */
+export function parseSdkReviewSafeOutput(outputValue: unknown): unknown {
+  if (
+    !isRecord(outputValue) ||
+    !Array.isArray(outputValue.items) ||
+    (outputValue.errors !== undefined &&
+      (!Array.isArray(outputValue.errors) ||
+        !outputValue.errors.every((error: unknown) => typeof error === "string")))
+  ) {
+    throw new Error("Invalid SDK review safe output");
+  }
+
+  const calls = outputValue.items.filter(
+    (item) => isRecord(item) && item.type === "publish_sdk_review",
+  );
+  if (calls.length !== 1 || !isRecord(calls[0]) || typeof calls[0].result !== "string") {
+    throw new Error("Expected exactly one SDK review safe output");
+  }
+
+  const resultText = calls[0].result;
+  if (new TextEncoder().encode(resultText).byteLength > MAX_SAFE_OUTPUT_BYTES) {
+    throw new Error(`SDK review safe output exceeds ${MAX_SAFE_OUTPUT_BYTES} bytes`);
+  }
+
+  try {
+    return JSON.parse(resultText);
+  } catch (error) {
+    throw new Error("SDK review safe output result must be valid JSON", { cause: error });
+  }
 }
