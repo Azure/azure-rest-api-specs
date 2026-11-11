@@ -123,6 +123,8 @@ using Microsoft.NetApp;
 @@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
 @@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");
 
+@@clientName(LdapServerType.OpenLdap, "OpenLDAP", "go");
+
 @@clientName(ExternalSvm, "ExternalSVM", "go");
 @@clientName(ExternalSvmProperties, "ExternalSVMProperties", "go");
 @@clientName(ExternalSvmList, "ExternalSVMList", "go");
