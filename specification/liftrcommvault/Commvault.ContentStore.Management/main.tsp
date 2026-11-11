@@ -62,6 +62,7 @@ enum Versions {
 
   @doc("The 2026-11-03 stable API version, dependent on LiftrBase.Versions.v3_preview.")
   @useDependency(LiftrBase.Versions.v3_preview)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2026_11_03: "2026-11-03",
 }
 interface Operations extends Azure.ResourceManager.Operations {}

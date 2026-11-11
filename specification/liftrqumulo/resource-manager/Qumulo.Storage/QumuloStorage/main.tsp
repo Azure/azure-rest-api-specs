@@ -55,6 +55,7 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2026_04_16)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v3 common-types contract for backward compatibility."
   v2026_04_16: "2026-04-16",
 }
 

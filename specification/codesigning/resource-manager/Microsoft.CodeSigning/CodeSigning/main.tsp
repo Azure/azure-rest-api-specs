@@ -29,5 +29,6 @@ enum Versions {
 
   v2024_09_30_preview: "2024-09-30-preview",
   v2025_10_13: "2025-10-13",
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2026_05_15_preview: "2026-05-15-preview",
 }

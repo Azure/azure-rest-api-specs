@@ -19,6 +19,7 @@ namespace Microsoft.AgriculturePlatform;
 enum Versions {
   @doc("The 2024-06-01-preview version.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2024_06_01_preview: "2024-06-01-preview",
 }
 

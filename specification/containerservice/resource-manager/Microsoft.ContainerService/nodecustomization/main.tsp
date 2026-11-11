@@ -21,5 +21,6 @@ enum Versions {
 
   @doc("Azure Kubernetes Node Customization api version 2025-09-02-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2025_09_02_preview: "2025-09-02-preview",
 }

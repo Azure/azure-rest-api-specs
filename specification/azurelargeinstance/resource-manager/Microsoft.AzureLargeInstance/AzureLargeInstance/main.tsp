@@ -31,5 +31,6 @@ enum Versions {
   v2024_04_10: "2024-04-10",
 
   @doc("Azure Large Instance api version 2024-08-01-preview.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2024_08_01_preview: "2024-08-01-preview",
 }

@@ -32,5 +32,6 @@ enum Versions {
   v2024_11_30_preview: "2024-11-30-preview",
 
   @doc("Microsoft Connected Cache Rest Api version 2026-06-01")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2026_06_01: "2026-06-01",
 }

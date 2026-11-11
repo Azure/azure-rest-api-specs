@@ -22,6 +22,7 @@ namespace Microsoft.Purview;
 /** The available API versions. */
 enum Versions {
   /** 2023-06-01-preview version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2023_06_01_preview: "2023-06-01-preview",
 }
 

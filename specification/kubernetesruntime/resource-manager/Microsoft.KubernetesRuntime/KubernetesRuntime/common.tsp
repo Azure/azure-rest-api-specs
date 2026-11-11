@@ -21,6 +21,7 @@ enum Versions {
   v2023_10_01_preview: "2023-10-01-preview",
 
   @doc("2024-03-01, added bgpPeers field in LoadBalancer")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2024_03_01: "2024-03-01",
 }
 

@@ -20,6 +20,7 @@ namespace Microsoft.Marketplace;
 /** The available API versions. */
 enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2025_05_01: "2025-05-01",
 }
 

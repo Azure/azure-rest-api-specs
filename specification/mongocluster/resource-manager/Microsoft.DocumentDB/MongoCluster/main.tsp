@@ -56,5 +56,6 @@ enum Versions {
   v2026_06_01: "2026-06-01",
 
   /** Azure DocumentDB clusters api version 2026-06-15-preview. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2026_06_15_preview: "2026-06-15-preview",
 }

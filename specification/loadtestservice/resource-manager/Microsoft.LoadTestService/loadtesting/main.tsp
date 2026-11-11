@@ -31,5 +31,6 @@ enum APIVersions {
 
   @doc("The 2024-12-01-preview version of the Azure Load Testing Resource manager API.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2024_12_01_preview: "2024-12-01-preview",
 }

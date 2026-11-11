@@ -16,5 +16,6 @@ enum ApiVersion {
 
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @Azure.Core.previewVersion
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2026_10_01_preview: "2026-10-01-preview",
 }

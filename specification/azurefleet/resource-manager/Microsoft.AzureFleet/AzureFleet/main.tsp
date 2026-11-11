@@ -45,6 +45,7 @@ enum Versions {
 
   /** Fleet stable Api version with mode, vmNamePrefix, capacityType properties */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2026_08_01: "2026-08-01",
 }
 

@@ -20,6 +20,7 @@ namespace Microsoft.ManufacturingPlatform;
 @doc("Supported API versions for the Microsoft.ManufacturingPlatform resource provider.")
 enum Versions {
   @doc("The 2025-03-01 version.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Preserve the existing v5 common-types contract for backward compatibility."
   v2025_03_01: "2025-03-01",
 }
 
