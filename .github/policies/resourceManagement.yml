@@ -1,4 +1,4 @@
-id: 
+id: service-label
 name: GitOps.PullRequestIssueManagement
 description: GitOps.PullRequestIssueManagement primitive
 owner: 
@@ -150,15 +150,6 @@ configuration:
         then:
         - addLabel:
             label: Batch
-      - if:
-        - includesModifiedFiles:
-            files:
-            - specification/batchai/
-            excludedFiles:
-            - ''
-        then:
-        - addLabel:
-            label: BatchAI
       - if:
         - includesModifiedFiles:
             files:
@@ -412,15 +403,6 @@ configuration:
         then:
         - addLabel:
             label: Media Services
-      - if:
-        - includesModifiedFiles:
-            files:
-            - specification/mobileengagement/
-            excludedFiles:
-            - ''
-        then:
-        - addLabel:
-            label: Mobile Engagement
       - if:
         - includesModifiedFiles:
             files:

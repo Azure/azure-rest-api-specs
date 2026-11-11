@@ -23,13 +23,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: $/.github/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Required since "HEAD^" is passed to Get-ChangedFiles
           fetch-depth: 2
 
       - name: Setup Node and install deps
-        uses: $/.github/actions/setup-node-install-deps
+        uses: ./.github/actions/setup-node-install-deps
 
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -73,28 +74,28 @@ jobs:
       #     If the output of the step does not include the BreakingChange-Go-Sdk-Suppression, no action will be taken.
       #     If the step's output is "BreakingChange-Go-Sdk-Suppression='true'", the label "BreakingChange-Go-Sdk-Suppression" will be applied to the PR.
       #     If the step's output is "BreakingChange-Go-Sdk-Suppression='false'", the label "BreakingChange-Go-Sdk-Suppression" will be removed from the PR.
-      - uses: $/.github/actions/add-label-artifact
+      - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results-go
         if: ${{ steps.run-suppressions-script.outputs.BreakingChange-Go-Sdk-Suppression }}
         with:
           name: "BreakingChange-Go-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Go-Sdk-Suppression == 'true' }}"
 
-      - uses: $/.github/actions/add-label-artifact
+      - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results java
         if: ${{ steps.run-suppressions-script.outputs.BreakingChange-Java-Sdk-Suppression }}
         with:
           name: "BreakingChange-Java-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Java-Sdk-Suppression == 'true' }}"
 
-      - uses: $/.github/actions/add-label-artifact
+      - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results js
         if: ${{ steps.run-suppressions-script.outputs.BreakingChange-JavaScript-Sdk-Suppression }}
         with:
           name: "BreakingChange-JavaScript-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-JavaScript-Sdk-Suppression == 'true' }}"
 
-      - uses: $/.github/actions/add-label-artifact
+      - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results python
         if: ${{ steps.run-suppressions-script.outputs.BreakingChange-Python-Sdk-Suppression }}
         with:

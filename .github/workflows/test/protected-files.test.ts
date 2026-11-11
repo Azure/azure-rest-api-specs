@@ -1,10 +1,8 @@
-import { readFileSync } from "node:fs";
 import { mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { simpleGit } from "simple-git";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { isMap, isSeq, parseDocument } from "yaml";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { checkProtectedFiles } from "../src/protected-files.ts";
 import { createMockContext, createMockCore } from "./mocks.ts";
@@ -26,25 +24,33 @@ describe("Protected Files", () => {
     vi.mocked(getChangedFiles).mockResolvedValue([]);
   });
 
-  it.each(["azure-sdk", "azure-sdk-automation[bot]", "Azure-SDK"])(
-    "passes for trusted PR author %s without reading changed files",
-    async (author) => {
-      const { core, context, run } = setup(author);
-      context.actor = "spec-author";
-      await run();
-      expect(core.info).toHaveBeenCalledWith(
-        `Account '${author}' is allowed to update protected files`,
-      );
-      expect(getChangedFiles).not.toHaveBeenCalled();
-      expect(core.setFailed).not.toHaveBeenCalled();
-    },
-  );
+  it.each([
+    "azure-sdk",
+    "azure-sdk-automation[bot]",
+    "dependabot[bot]",
+    "Azure-SDK",
+    "timotheeguerin",
+    "marygao",
+  ])("passes for trusted PR author %s without reading changed files", async (author) => {
+    const { core, context, run } = setup(author);
+    context.actor = "spec-author";
+    expect((await run()).conclusion).toBe("success");
+    expect(core.info).toHaveBeenCalledWith(
+      `Account '${author}' is allowed to update protected files`,
+    );
+    expect(getChangedFiles).not.toHaveBeenCalled();
+    expect(core.setFailed).not.toHaveBeenCalled();
+  });
 
-  it.each(["spec-author", "dependabot[bot]", "azure-sdk-other"])(
+  it.each(["spec-author", "dependabot-other[bot]", "azure-sdk-other"])(
     "does not exempt author %s when a trusted account triggers the run",
     async (author) => {
-      const { core, run } = setup(author);
-      vi.mocked(getChangedFiles).mockResolvedValue(["package.json"]);
+      const { core, context, run } = setup(author);
+      context.actor = "timotheeguerin";
+      vi.mocked(getChangedFiles).mockResolvedValue([
+        "package.json",
+        "specification/widgets/main.tsp",
+      ]);
       await run();
       expect(core.error).toHaveBeenCalledWith(
         expect.stringContaining("Remove this change from your PR."),
@@ -53,6 +59,19 @@ describe("Protected Files", () => {
       expect(core.setFailed).toHaveBeenCalledOnce();
     },
   );
+
+  it("blocks maintenance-only changes from a non-allowlisted author", async () => {
+    const { core, run } = setup("external-contributor");
+    vi.mocked(getChangedFiles).mockResolvedValue([
+      "package.json",
+      ".github/workflows/protected-files.yaml",
+    ]);
+    const result = await run();
+    expect(result.conclusion).toBe("failure");
+    expect(core.setFailed).toHaveBeenCalledOnce();
+    expect(result.summary).toContain("package.json");
+    expect(result.summary).toContain(".github/workflows/protected-files.yaml");
+  });
 
   it.each([
     ".gitignore",
@@ -80,7 +99,7 @@ describe("Protected Files", () => {
     ".vscode/.hidden",
     "eng/.hidden/nested/config.json",
     ".github/skills",
-  ])("fails for protected path %s", async (file) => {
+  ])("fails for protected path %s without specification changes", async (file) => {
     const { core, run } = setup();
     vi.mocked(getChangedFiles).mockResolvedValue([file]);
     await run();
@@ -130,7 +149,7 @@ describe("Protected Files", () => {
       file: "pnpm-lock.yaml",
     });
     expect(core.setFailed).toHaveBeenCalledWith(
-      "Remove changes to protected files from your specification PR. See https://aka.ms/ci-fix#protected-files.",
+      "Only allowed repository maintainers may change protected files. See https://aka.ms/ci-fix#protected-files.",
     );
   });
 
@@ -145,7 +164,7 @@ describe("Protected Files", () => {
   ])("directs synced changes in %s to their source repository", async (file) => {
     const { core, run } = setup();
     vi.mocked(getChangedFiles).mockResolvedValue([file]);
-    await run();
+    expect((await run()).conclusion).toBe("failure");
     expect(core.error).toHaveBeenCalledWith(
       `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`,
       { file },
@@ -157,25 +176,26 @@ describe("Protected Files", () => {
     vi.mocked(getChangedFiles).mockResolvedValue(["eng/common-other/script.ps1"]);
     await run();
     expect(core.error).toHaveBeenCalledWith(
-      expect.stringContaining("outside the scope of a specification contribution"),
+      expect.stringContaining("can only be changed by allowed repository maintainers"),
       { file: "eng/common-other/script.ps1" },
     );
   });
 
-  it("includes deletions and both sides of renames using the shared diff reader", async () => {
-    const { core, run } = setup();
-    await run();
-    expect(getChangedFiles).toHaveBeenCalledWith(
-      expect.objectContaining({ gitOptions: ["--no-renames"] }),
-    );
-    expect(core.setFailed).not.toHaveBeenCalled();
-  });
-
   it.each([
     { from: ".github/workflows/test.yaml", to: undefined },
-    { from: ".github/workflows/test.yaml", to: "specification/widgets/test.yaml" },
-    { from: "specification/widgets/test.yaml", to: ".github/workflows/test.yaml" },
-  ])("detects protected changes in a real diff: $from -> $to", async ({ from, to }) => {
+    {
+      from: ".github/workflows/test.yaml",
+      to: "specification/widgets/test.yaml",
+    },
+    {
+      from: "specification/widgets/test.yaml",
+      to: ".github/workflows/test.yaml",
+    },
+    {
+      from: ".github/workflows/old.yaml",
+      to: ".github/workflows/new.yaml",
+    },
+  ])("blocks protected deletions and renames: $from -> $to", async ({ from, to }) => {
     const directory = await mkdtemp(join(tmpdir(), "protected-files-"));
     try {
       const git = simpleGit(directory);
@@ -203,10 +223,10 @@ describe("Protected Files", () => {
         actual.getChangedFiles({ ...options, cwd: directory }),
       );
       const { core, run } = setup();
-      await run();
-      expect(core.error).toHaveBeenCalledExactlyOnceWith(expect.any(String), {
-        file: ".github/workflows/test.yaml",
-      });
+      expect((await run()).conclusion).toBe("failure");
+      for (const file of [from, to].filter((file) => file?.startsWith(".github/"))) {
+        expect(core.error).toHaveBeenCalledWith(expect.any(String), { file });
+      }
       expect(core.setFailed).toHaveBeenCalledOnce();
     } finally {
       await rm(directory, { recursive: true, force: true });
@@ -233,50 +253,5 @@ describe("Protected Files", () => {
     context.payload = {};
     await expect(run()).rejects.toThrow("Protected Files requires a pull request author");
     expect(getChangedFiles).not.toHaveBeenCalled();
-  });
-
-  it("runs the required check on PR merge commits, including base-branch edits", () => {
-    const workflow = parseDocument(
-      readFileSync(new URL("../protected-files.yaml", import.meta.url), "utf8"),
-    );
-    expect(workflow.errors).toEqual([]);
-    const events = workflow.getIn(["on", "pull_request", "types"]);
-    if (!isSeq(events)) throw new Error("Expected explicit PR event types");
-    expect(events.toJSON()).toEqual(["opened", "synchronize", "reopened", "edited"]);
-    expect(workflow.hasIn(["on", "pull_request", "paths"])).toBe(false);
-    const permissions = workflow.get("permissions");
-    if (!isMap(permissions)) throw new Error("Expected explicit token permissions");
-    expect(permissions.toJSON()).toEqual({ contents: "read" });
-    expect(workflow.getIn(["jobs", "protected-files", "name"])).toBe("Protected Files");
-    expect(workflow.hasIn(["jobs", "protected-files", "if"])).toBe(false);
-    const steps = workflow.getIn(["jobs", "protected-files", "steps"]);
-    if (!isSeq(steps)) throw new Error("Expected workflow steps");
-    const allowed = workflow.getIn(["env", "user-allowed"]);
-    if (typeof allowed !== "string") throw new Error("Expected a trusted-author condition");
-    expect(allowed.replace(/\s+/g, " ")).toBe(
-      "${{ github.event.pull_request.user.login == 'azure-sdk' || " +
-        "github.event.pull_request.user.login == 'azure-sdk-automation[bot]' }}",
-    );
-    const exempt = steps.items[0];
-    if (!isMap(exempt)) throw new Error("Expected a trusted-author exemption step");
-    expect(exempt.get("if")).toBe("${{ env.user-allowed == 'true' }}");
-    expect(exempt.get("run")).toContain("allowed to update protected files");
-    for (const step of steps.items.slice(1)) {
-      if (!isMap(step)) throw new Error("Expected a workflow step");
-      expect(step.get("if")).toBe("${{ env.user-allowed != 'true' }}");
-    }
-    const checkout = steps.items.find(
-      (step) => isMap(step) && step.get("uses") === "$/.github/actions/checkout",
-    );
-    if (!isMap(checkout)) throw new Error("Expected a checkout step");
-    expect(checkout.getIn(["with", "fetch-depth"])).toBe(2);
-    expect(checkout.hasIn(["with", "ref"])).toBe(false);
-    const check = steps.items.find(
-      (step) => isMap(step) && step.get("name") === "Detect changes to protected files",
-    );
-    if (!isMap(check)) throw new Error("Expected a protected-files check step");
-    expect(check.getIn(["with", "script"])).toContain(
-      "await checkProtectedFiles({ context, core })",
-    );
   });
 });

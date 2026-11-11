@@ -46,6 +46,11 @@ to get approval.
 
 A [release plan](https://aka.ms/azsdkdocs/release-plans) should have been created. If not, please create one as it will help guide you through the REST API and SDK creation process. 
 
+## Due diligence checklist
+
+- [ ] **Authors:** I have checked every new or changed TypeSpec suppression (`#suppress`) in this PR. Each one is needed and has a clear justification that explains why the rule doesn't apply. Suppressions that can be fixed have been removed.
+- [ ] **Data-plane stewardship reviewers:** When `typespec-suppressions-review-required` is applied, I have reviewed the TypeSpec suppressions and their justifications before applying `typespec-suppressions-approved` to clear the `TypeSpec Suppressions` check.
+
 ## ❔Got questions? Need additional info?? We are here to help!
 
 <details>
