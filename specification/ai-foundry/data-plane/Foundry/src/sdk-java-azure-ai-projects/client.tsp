@@ -441,6 +441,25 @@ namespace Azure.AI.Projects;
 )
 model OpenAICompletionsRunDataSource {}
 
+@alternateType(
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalJsonlRunDataSource.Source",
+  },
+  "java"
+)
+model OpenAIJsonlRunDataSourceSource {}
+
+@@alternateType(
+  TargetCompletionEvalRunDataSource.source,
+  OpenAIJsonlRunDataSourceSource,
+  "java"
+);
+@@alternateType(
+  ResponseRetrievalItemGenerationParams.source,
+  OpenAIJsonlRunDataSourceSource,
+  "java"
+);
+
 @@alternateType(
   OpenAI.CreateEvalCompletionsRunDataSource,
   OpenAICompletionsRunDataSource,
