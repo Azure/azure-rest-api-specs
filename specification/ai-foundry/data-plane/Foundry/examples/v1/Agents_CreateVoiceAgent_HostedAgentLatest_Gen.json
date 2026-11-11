@@ -3,11 +3,11 @@
   "operationId": "Agents_createAgent_Agents_createAgentFromCode",
   "parameters": {
     "api-version": "v1",
-    "Foundry-Features": "VoiceAgents=V1Preview",
     "name": "customer-support-voice-agent",
     "description": "A voice bridge for a hosted customer support agent.",
     "definition": {
       "kind": "voice",
+      "sub_protocol": "realtime",
       "conversation_engine": {
         "type": "hosted_agent",
         "name": "customer-support-text-agent"
@@ -35,6 +35,7 @@
             "created_at": 1785772800,
             "definition": {
               "kind": "voice",
+              "sub_protocol": "realtime",
               "conversation_engine": {
                 "type": "hosted_agent",
                 "name": "customer-support-text-agent"

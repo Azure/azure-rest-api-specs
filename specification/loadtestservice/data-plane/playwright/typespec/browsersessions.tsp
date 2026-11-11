@@ -49,6 +49,18 @@ alias BrowserSessionReadRequiredProperties = {
   @doc("The browser session operating system.")
   operatingSystem: OS;
 };
+
+@doc("The browser profile configuration for a browser session.")
+model BrowserProfileBrowserSessionConfiguration {
+  @doc("The ID in GUID format of the browser profile used by the browser session. Cannot be changed after creation.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  id?: Azure.Core.uuid;
+
+  @doc("Whether to save the changes in the browser profile done by the browser session. Can be changed after session creation.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  saveChanges?: boolean;
+}
+
 alias BrowserSessionOptionalProperties = {
   @doc("The browser session start time in UTC.")
   @visibility(Lifecycle.Read)
@@ -76,7 +88,45 @@ alias BrowserSessionOptionalProperties = {
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
   liveViewUri?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The artifact configuration and finalized artifacts for the browser session.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  sessionArtifacts?: BrowserSessionArtifacts;
+
+  @doc("The saved proxy configuration selected at session creation.")
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  proxyConfig?: ProxyConfigReference;
+
+  @added(Versions.v2026_12_01_preview)
+  @doc("The ID in GUID format of the secret store used by the browser session.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  secretStoreId?: Azure.Core.uuid;
+
+  @added(Versions.v2026_12_01_preview)
+  @doc("The browser profile configuration for the browser session.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  browserProfile?: BrowserProfileBrowserSessionConfiguration;
 };
+
+@doc("A reference to a saved proxy configuration in the session's workspace.")
+@added(Versions.v2026_11_01_preview)
+model ProxyConfigReference {
+  @doc("The saved proxy configuration ID in GUID form. Takes precedence over name.")
+  @minLength(3)
+  @maxLength(36)
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  id: string;
+
+  @doc("The saved proxy configuration name, resolved ignoring case when id is omitted.")
+  @minLength(3)
+  @maxLength(24)
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  name: string;
+}
 
 @doc("Model of a browser session used for tracking purposes.")
 @resource("browser-sessions")
@@ -94,6 +144,69 @@ model PatchRequestBrowserSession {
   ...BrowserSessionRequiredProperties;
   ...OptionalProperties<BrowserSessionReadRequiredProperties>;
   ...BrowserSessionOptionalProperties;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The artifact configuration and finalized artifacts for a browser session.")
+model BrowserSessionArtifacts {
+  @doc("The artifact collection enablement status for the browser session. This setting can only disable artifact collection for an individual session; it cannot enable it when artifact collection is disabled at the workspace level.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  enabled: EnablementStatus = EnablementStatus.Disabled;
+
+  @doc("The status of artifact collection for the browser session.")
+  @visibility(Lifecycle.Read)
+  status?: BrowserSessionArtifactsStatus;
+
+  @doc("The URI used to view the browser session recording.")
+  @visibility(Lifecycle.Read)
+  webUri?: url;
+
+  @doc("The error that occurred while collecting artifacts for the browser session.")
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
+
+  @doc("The finalized artifacts uploaded for the browser session.")
+  @visibility(Lifecycle.Read)
+  artifacts?: BrowserSessionArtifact[];
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The runtime status of artifact collection for a browser session.")
+union BrowserSessionArtifactsStatus {
+  string,
+
+  @doc("Artifact collection has not started.")
+  NotStarted: "NotStarted",
+
+  @doc("Artifact collection is in progress.")
+  InProgress: "InProgress",
+
+  @doc("Artifact collection completed successfully.")
+  Completed: "Completed",
+
+  @doc("Artifact collection failed.")
+  Failed: "Failed",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("An artifact uploaded for a browser session.")
+model BrowserSessionArtifact {
+  @doc("The URI of the individual artifact for the browser session.")
+  @visibility(Lifecycle.Read)
+  uri: url;
+
+  @doc("The type of the uploaded artifact.")
+  @visibility(Lifecycle.Read)
+  type: BrowserSessionArtifactType;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The type of an artifact uploaded for a browser session.")
+union BrowserSessionArtifactType {
+  string,
+
+  @doc("A Playwright trace artifact.")
+  Trace: "Trace",
 }
 
 @doc("The browser session source details.")

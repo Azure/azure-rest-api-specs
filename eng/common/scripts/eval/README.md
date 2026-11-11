@@ -13,17 +13,103 @@ templates.
   its own pnpm package/lock for **fflate only** and CLI/PowerShell tests. Shard evaluator
   restores do not install it; publication adds no Node Azure SDK dependencies.
 
+## Extending a shard job
+
+The shared `eng/common/pipelines/templates/jobs/eval-shard.yml` owns checkout,
+Node/Vally installation, MCP staging, git fixture initialization and Copilot login.
+Its defaults preserve the standard Prepare/Eval/Summary pipeline behavior.
+Repo-local adapters can customize it without copying that infrastructure:
+
+| Parameter | Contract |
+| --- | --- |
+| `preEvalTemplate` / `postEvalTemplate` | Existing parameter-free setup/teardown step templates. |
+| `evalInvokeTemplate` | Existing invocation template accepting `vallyRoot`, `UseAzSdkAuthentication` and `threshold`. |
+| `azureSubscription` | Optional service-connection override. Stage/job templates default to `''` and omit an empty override; the common invoke template retains its `opensource-api-connection` default. |
+| `vallyArguments` | Optional array of supplementary Vally option/value pairs. Strings are required except that trial/worker counts also accept numbers. Available through the stage, shard job and common invoke template. Defaults to `[]`. |
+
+Supported supplementary options are `--tag`, `--runs`, `--workers` and `--timeout`.
+For example, `['--tag', 'mode=forced', '--runs', '3']` selects a local benchmark
+configuration without replacing the common runner. Trial/worker counts must be
+positive integer strings or safe integer numbers. Azure template expansion can
+serialize numeric parameters as JSON numbers even when using `format`; the runner
+validates and converts only `--runs` / `--workers` numeric values to strings.
+All other options and values must be strings. Both authentication branches forward the array as JSON in
+`VALLY_ARGUMENTS_JSON`; the runner passes literal arguments to the pinned CLI using
+Node directly, without a shell or whitespace splitting of supplementary values.
+The template JSON-escapes dollar signs before agent macro expansion; the runner's
+JSON decoding restores them. Tags such as `build=$(Build.BuildId)` stay literal,
+even when the pipeline variable exists.
+Unsupported flags (including aliases and `--flag=value`) are rejected. Eval
+selection, output paths, JUnit, plugins and verdict settings remain framework-owned.
+Legacy custom invoke templates retain their existing parameter contract when the
+array is empty. A custom template opting into a non-empty array must declare its
+own `vallyArguments` parameter; otherwise template compilation rejects it.
+
+`--runs` greater than 1 must not be combined with `failOnFailedTests: true`.
+Use `failOnFailedTests: false` (the default) for multi-run observations;
+explicit `--runs 1` may still be used with the gate enabled. Unsupported
+combinations fail the common shard's configuration check before installation or
+evaluation. When composing shard and summary jobs directly, pass the same
+`failOnFailedTests` value to both. This check covers explicit `--runs` values in
+`vallyArguments` only; Summary does not infer run counts from results. Callers must
+ensure that repetition configured in `.vally.yaml` or custom invoke templates is
+not combined with the enabled gate.
+
+`--tag` filters stimuli during execution only; it does not filter Prepare's matrix.
+The caller must align `evalGlobs` (or its custom matrix) with the tags so every
+planned eval retains at least one matching stimulus. For example, `--tag area=github`
+alone does not remove other areas from the matrix: also restrict the selected files
+to the intended GitHub evals. Recheck this alignment when adding evals or changing tags.
+Zero-match evals are not treated as successful skips; a zero-trial shard still fails
+the verdict/completeness checks even with `failOnFailedTests: false`.
+
+Use the existing pre/post-eval and MCP setup hooks for repository-specific work.
+Authenticated callers can pass `azureSubscription` explicitly to the stage or shard
+template. Nonempty overrides are forwarded to the common invoke step; otherwise
+the invoke template retains its existing `opensource-api-connection` default.
+An explicitly empty or whitespace-only value passed directly to the invoke template fails with
+a configuration error without creating an `AzureCLI@2` task. Unauthenticated runs
+do not need the parameter. Custom invoke templates receive it only when nonempty
+and must declare their own `azureSubscription` parameter to opt in.
+Configure an authorized connection in repo-owned YAML and explicitly pass it from
+the entrypoint to the stage template. Do not rely on an
+ambient variable being visible across nested templates, or on task/output variables
+that are unavailable during template expansion.
+The `eng/common/pipelines/live-eval.yml` entrypoint imports the repo-owned
+`eng/pipelines/templates/variables/globals.yml` and passes its `EvalAzureSubscription`
+value as `azureSubscription`. Nested stage, job and invoke templates use only the
+parameter. Scheduled runs use the same YAML configuration without a connection run
+parameter. Other repos must configure their own authorized connection in that
+repo-owned variable template.
+Do not replace authentication, result collection or retry/completeness checks.
+Supplementary reports must not rewrite JUnit thresholds or raw results.
+
+The shared job templates use the `Prepare` matrix and `Eval` timeline stage, with
+one build-wide Summary depending on both stages. Result/debug artifacts are named
+`eval-result-<shard>-<attempt>` / `eval-debug-<shard>-<attempt>`; the summary artifact
+is `eval-summary-<attempt>`. Summary downloads `eval-result-*` result data and selects
+only the latest verified attempt for each expected shard.
+Shard names must start with an ASCII letter, digit or underscore, contain only
+ASCII letters, digits, underscores or hyphens, and be at most 200 characters.
+
+Benchmarks select one mode per build through repo-owned pipeline parameters,
+aligned `evalGlobs` and `vallyArguments`. Run separate builds to compare modes;
+multiple independently published tracks within one build are not supported.
+
 ## Complete build results and direct Blob publishing
 
 Shards now retain the newest invocation's raw JSONL, JUnit and a completion marker
 via [shard-results](lib/shard-results.ts), including failed evaluations.
-Summary checks the full Prepare matrix and selects each expected shard's highest
-attempt once for Markdown, the Tests tab and bundling. Missing, interrupted or
+Summary checks the full Prepare matrix and selects the artifact matching each
+shard's latest timeline attempt once for Markdown, the Tests tab and bundling. Missing, interrupted or
 corrupt results remain incomplete; later failed attempts never fall back to older
 successful artifacts. A separate step reads the current-build timeline with
 `System.AccessToken` and three bounded transient retries, saving the latest attempt
 evidence beside the summary. Rendering reads that file and needs no token or network.
-Unverified or ambiguous attempts cannot authorize publication. The legacy JUnit-only
+If that exact attempt has no artifact, older JUnit is not copied or counted.
+Missing or invalid timeline evidence also excludes unverified diagnostics and blocks publication.
+Matching latest-attempt JUnit remains available when its result data is incomplete.
+The legacy JUnit-only
 summary remains supported. No historical build download or reconstruction is involved.
 The bundler accepts exactly one already-selected attempt per expected shard; it
 does not repeat Summary's selection or accept an ambiguous list of attempts.
@@ -47,11 +133,11 @@ explicit bootstrap, without changing dependency checks or the frozen lock.
 
 | Control | Current use |
 | --- | --- |
-| `publishDashboardResults` | The only checkbox; defaults to `true` in the three tools entrypoints. Set `false` to disable both upload and Azure Storage egress |
+| `publishDashboardResults` | The only checkbox; defaults to `true` in the three standard tools entrypoints. Set `false` to disable both upload and Azure Storage egress |
 | `EvalStorageAccountName` | Pipeline-owner configuration. Upload is skipped when absent; set it to `evaltestsummary` for this dashboard |
 | `EvalDashboardRefreshUrl` | Pipeline-owner configuration: `https://azsdk-eval-bue6a7dwanatgpb3.westus3-01.azurewebsites.net/api/refresh` |
 | `EvalDashboardResource` | Pipeline-owner configuration: `api://258998df-81ec-460c-bdd7-56a9bdde1e48` (resource URI, not a `/.default` scope) |
-| `createDashboardBundle` | Shared-template artifact-only mode; enabled for all three tools entrypoints |
+| `createDashboardBundle` | Shared-template artifact-only mode; enabled for the three standard tools entrypoints |
 
 The pipeline owner must set **`EvalStorageAccountName=evaltestsummary`** and the two
 dashboard variables above in each onboarded DevOps pipeline, with **queue-time
@@ -64,11 +150,17 @@ publishing to another account does not redirect the reader. Service-connection
 authorization, approved branch checks and existing RBAC remain required.
 
 Publishing policy stays in YAML: organization `https://dev.azure.com/azure-sdk/`,
-project `internal`, repository `Azure/azure-sdk-tools`, exact `refs/heads/main`, and
-a CI, scheduled or manual reason. There is no hardcoded definition-ID allowlist or
-variable template in shared code. Feature branches, other repositories, PRs, pull
-refs and public-project runs do not get the credential-bearing task. At runtime it
-also requires a complete summary and a configured storage account.
+project `internal`, an Azure-owned repository whose name does not end in `-pr`,
+exact `refs/heads/main`, and a CI, scheduled or manual reason. There is no per-repo
+or definition-ID allowlist in shared code. New Azure SDK repos do not need another
+shared-template edit. Personal forks, private `-pr` repos, feature branches, PRs,
+pull refs and public-project runs do not get the credential-bearing task. At runtime
+it also requires a complete summary and a configured storage account.
+
+Each consuming pipeline must opt in through its repo-local entrypoint. A repo-local
+1ES redirect must expose the existing `AllowAzureStorage` hook. The pipeline owner
+must authorize the publisher service connection and configure storage before uploads
+can run. This support does not enable the separate TypeSpec authoring benchmarks.
 
 There is no separate automatic-publication, feature-branch override or network-access
 flag. Publication requests the documented
@@ -105,8 +197,11 @@ compressed-size cap is checked afterward. Full ZIP decoding remains in contract
 tests rather than reopening the archive in production. JSONL is decoded once and
 parsed directly as text, with byte limits on both source and serialized records.
 
-Uploads use `--auth-mode login --overwrite false --if-none-match '*'` with the **same
+Uploads use `--auth-mode login --overwrite false --if-none-match=*` with the **same
 saved ZIP**; Azure CLI owns transport retries, without another script/task retry loop.
+The condition is one argument so Linux does not expand a standalone `*` into file names.
+`--no-progress` keeps CLI progress out of captured command results. JSON is parsed
+from stdout only; captured native stderr is never mixed into JSON or echoed.
 Request/socket timeouts and the task deadline bound execution. Existing archives must match metadata,
 owner, checksum and size. Changed content needs a new Summary attempt, not an overwrite.
 The publisher never deletes archives; the dashboard's separate identity stays read-only.
@@ -140,14 +235,26 @@ With **Node 24.14.1+ and pnpm 12.6.0**, run `pnpm --ignore-workspace install
 --pm-on-fail=ignore --frozen-lockfile --prod --ignore-scripts` and
 `pnpm --ignore-workspace --pm-on-fail=ignore test` from `publisher`,
 then `node --experimental-strip-types --test` from this directory.
-Publisher tests require **PowerShell 7.4+ and
-Pester 5**; pipeline upload uses the agent's authenticated Azure CLI. The existing
-common-tests PR pipeline runs all shared/archive Node tests and discovers the tagged
-PowerShell suite under `eng/common-tests/eval`; failures fail the CI job.
+These shared Node tests do not need Tools-owned CI files, PowerShell tests or
+the consuming repository's redirect settings. A consumer-copy regression runs
+them without Tools files or Git history, with absent and different redirect templates.
+Template contract checks use bounded text assertions, not a YAML parser, and need
+no evaluator dependencies. They do not evaluate Azure template expressions;
+server-side expansion and service-connection authorization require separate validation.
+
+In Tools, run `Invoke-Pester -Path eng/common-tests/eval/Publish-EvalResults.Tests.ps1 -CI`
+from the repository root for the **PowerShell 7.4+ / Pester 5 / Azure CLI** tests. That Tools-only
+suite also checks the Tools CI wiring and network policy. The existing common-tests
+PR pipeline runs both the shared/archive Node tests and this tagged PowerShell suite;
+failures fail the CI job. Other repositories do not need to copy this Tools test setup.
+Pipeline upload uses the agent's authenticated Azure CLI.
 CI restores only the locked archive dependency, not the Vally evaluator.
 Regression coverage includes the actual HTTP
 cmdlet against loopback, invalid collision metadata, upload-before-notification
 ordering and publication without local status files.
+One integration test also runs the real Azure CLI against a localhost-only Blob
+fixture with synthetic credentials and an isolated CLI profile. It verifies one
+successful upload does not trigger a fallback read. No production storage is used.
 Construction regressions exercise the exact entry/trial boundaries, aggregate
 expanded bytes, final compressed bytes, required inputs and UTF-8 JSONL limits.
 The loopback fixture selects the first Node application when CI has multiple Node
@@ -159,6 +266,8 @@ separate from local checks and should use an already approved evaluation run.
 
 The task logs the stored Blob name and notification outcome. Failures include a
 bounded operation/error code, never raw Azure responses, tokens or result contents.
+CLI failures include the exit code and a fixed known storage error code, when
+available. If the fallback read also fails, the original upload code is retained.
 Token acquisition failures require checking the
 service connection; Blob 403 requires checking its data-role scope; network failures
 require checking approved egress. Preserve the original archive for conflicts, and
@@ -168,10 +277,9 @@ relax TLS or broaden permissions to hide a failed request.
 ## TypeScript (no build step)
 
 The `*.ts` sources run directly through Node's native type stripping (erasable syntax only —
-no `enum`/`namespace`/parameter properties, no emit). Shard/Summary jobs and publisher
-CI use Node `24.x`; the publisher requires `>=24.14.1`. The older dependency-free
-glue still supports its declared Node 22 minimum, but that is not the publisher's
-runtime requirement. Relative imports use explicit `.ts` specifiers, as Node requires.
+no `enum`/`namespace`/parameter properties, no emit). Matrix/Shard/Summary jobs and publisher
+CI use Node `24.x`; both evaluator projects and the publisher require `>=24.14.1`,
+matching azure-rest-api-specs. Relative imports use explicit `.ts` specifiers, as Node requires.
 The standalone Blob publisher uses the same execution model; it adds no compiler or TypeScript runtime dependency.
 
 ## Vendored files

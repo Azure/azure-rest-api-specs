@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default",
+    "telemetryExporterName": "insights-exporter",
+    "resource": {
+      "properties": {
+        "kind": "ApplicationInsights",
+        "payloadCapture": false,
+        "applicationInsights": {
+          "connectionString": "{connection-string}",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Insights/components/example-insights"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/telemetryExporters/insights-exporter",
+        "name": "insights-exporter",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/telemetryExporters",
+        "eTag": "W/\"1\"",
+        "properties": {
+          "kind": "ApplicationInsights",
+          "payloadCapture": false,
+          "applicationInsights": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Insights/components/example-insights"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/telemetryExporters/insights-exporter",
+        "name": "insights-exporter",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/telemetryExporters",
+        "eTag": "W/\"1\"",
+        "properties": {
+          "kind": "ApplicationInsights",
+          "payloadCapture": false,
+          "applicationInsights": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Insights/components/example-insights"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayTelemetryExporterResources_CreateOrUpdate",
+  "title": "Create an Application Insights telemetry exporter"
+}
