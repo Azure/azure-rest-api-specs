@@ -269,7 +269,6 @@ model DataMaskingPolicy {
    */
   @identifiers(#[])
   excludedPaths?: DataMaskingPolicyExcludedPathsItem[];
-
 }
 
 /**
