@@ -168,6 +168,39 @@ namespace Azure.AI.Projects;
 @@clientName(EvalResult, "EvaluationResult");
 @@clientName(EvalRun, "EvaluationRun");
 @@clientName(EvalRunDataSource, "EvaluationRunDataSource");
+@@clientName(
+  UserConversationSimulationEvalRunDataSource,
+  "UserConversationSimulationEvaluationRunDataSource",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationPreviewEvalRunDataSource,
+  "UserConversationSimulationPreviewEvaluationRunDataSource",
+  "java"
+);
+@@clientName(
+  TraceSourceEvalRunDataSource,
+  "TraceSourceEvaluationRunDataSource",
+  "java"
+);
+@@clientName(
+  TraceSourcePreviewEvalRunDataSource,
+  "TraceSourcePreviewEvaluationRunDataSource",
+  "java"
+);
+@@clientName(CsvEvalRunDataSource, "CsvEvaluationRunDataSource", "java");
+@@clientName(EvalCsvFileIdSource, "EvaluationCsvFileIdSource", "java");
+@@clientName(TracesEvalRunDataSource, "TracesEvaluationRunDataSource", "java");
+@@clientName(
+  TracesPreviewEvalRunDataSource,
+  "TracesPreviewEvaluationRunDataSource",
+  "java"
+);
+@@clientName(
+  TargetCompletionEvalRunDataSource,
+  "TargetCompletionEvaluationRunDataSource",
+  "java"
+);
 @@clientName(EvalRunOutputItem, "EvaluationRunOutputItem");
 @@clientName(EvalRunOutputItemResult, "EvaluationRunOutputItemResult");
 @@clientName(EvalRunResultCompareItem, "EvaluationRunResultCompareItem");
