@@ -18,9 +18,10 @@
             "prefix_padding_ms": 250,
             "silence_duration_ms": 450,
             "end_of_utterance_detection": {
-              "model": "semantic_detection_v1_multilingual",
+              "model": "microsoft-decision-1",
               "threshold_level": "high",
-              "timeout_ms": 1500
+              "timeout_ms": 1500,
+              "instructions": "Decide whether the user has finished their conversational turn, so the assistant should respond now, or has only paused and is likely to keep talking. user_utterance is a live speech transcript up to the current pause; its punctuation is unreliable. Use assistant_last_utterance to judge what kind of answer the user is giving. When assistant_last_utterance is (none), judge from user_utterance alone. Order numbers always have 12 characters."
             },
             "speech_duration_ms": 120,
             "remove_filler_words": true,
@@ -31,6 +32,10 @@
               "es-ES"
             ],
             "auto_truncate": true
+          },
+          "transcription": {
+            "model": "azure-speech-streaming",
+            "language": "en-US,es-ES"
           }
         }
       }
@@ -64,9 +69,10 @@
                     "prefix_padding_ms": 250,
                     "silence_duration_ms": 450,
                     "end_of_utterance_detection": {
-                      "model": "semantic_detection_v1_multilingual",
+                      "model": "microsoft-decision-1",
                       "threshold_level": "high",
-                      "timeout_ms": 1500
+                      "timeout_ms": 1500,
+                      "instructions": "Decide whether the user has finished their conversational turn, so the assistant should respond now, or has only paused and is likely to keep talking. user_utterance is a live speech transcript up to the current pause; its punctuation is unreliable. Use assistant_last_utterance to judge what kind of answer the user is giving. When assistant_last_utterance is (none), judge from user_utterance alone. Order numbers always have 12 characters."
                     },
                     "speech_duration_ms": 120,
                     "remove_filler_words": true,
@@ -77,6 +83,10 @@
                       "es-ES"
                     ],
                     "auto_truncate": true
+                  },
+                  "transcription": {
+                    "model": "azure-speech-streaming",
+                    "language": "en-US,es-ES"
                   }
                 }
               }

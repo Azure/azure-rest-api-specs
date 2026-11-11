@@ -83833,6 +83833,9 @@ components:
                 $ref: '#/components/schemas/VoiceAgentTranscriptionPhrase'
             - type: 'null'
           description: Phrase-level transcription timing and confidence details.
+        backchannel:
+          type: boolean
+          description: True when `speech_start_detection` rejected this speech as a backchannel.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: |-
@@ -102706,6 +102709,9 @@ components:
           type: boolean
           description: Whether user speech may interrupt the agent's response.
           default: true
+        speech_start_detection:
+          $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
+          description: Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: English-optimized Azure semantic voice activity detection.
@@ -102753,6 +102759,9 @@ components:
           type: boolean
           description: Whether user speech may interrupt the agent's response.
           default: true
+        speech_start_detection:
+          $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
+          description: Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.
         languages:
           type: array
           items:
@@ -102805,6 +102814,9 @@ components:
           type: boolean
           description: Whether user speech may interrupt the agent's response.
           default: true
+        speech_start_detection:
+          $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
+          description: Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`; realtime models also accept `azure-speech` with `custom_speech`.
         languages:
           type: array
           items:
@@ -103289,6 +103301,20 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: A service-managed control that ends the active conversation.
+    VoiceAgentEndOfUtteranceCriteria:
+      type: object
+      properties:
+        finished:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentEndOfUtterancePromptText'
+            - type: 'null'
+          description: When the user has finished and the agent should respond.
+        not_finished:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentEndOfUtterancePromptText'
+            - type: 'null'
+          description: When the user has only paused and is likely to go on.
+      description: Criteria for whether the user has finished the turn.
     VoiceAgentEndOfUtteranceDetection:
       type: object
       required:
@@ -103303,6 +103329,16 @@ components:
         timeout_ms:
           $ref: '#/components/schemas/FoundryDurationMilliseconds'
           description: The detection timeout in milliseconds.
+        instructions:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentEndOfUtterancePromptText'
+            - type: 'null'
+          description: Replaces the built-in task description. Only for `microsoft-decision-1`.
+        criteria:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceCriteria'
+            - type: 'null'
+          description: Replaces the built-in criteria. Only for `microsoft-decision-1`.
       description: Semantic end-of-utterance detection configuration.
     VoiceAgentEndOfUtteranceDetectionModel:
       anyOf:
@@ -103313,7 +103349,13 @@ components:
             - semantic_detection_v1_en
             - semantic_detection_v1_multilingual
             - smart_end_of_turn_detection
+            - microsoft-decision-1
       description: The semantic end-of-utterance detection model.
+    VoiceAgentEndOfUtterancePromptText:
+      type: string
+      minLength: 1
+      maxLength: 4000
+      description: Text that replaces one part of the `microsoft-decision-1` prompt.
     VoiceAgentEndOfUtteranceThresholdLevel:
       anyOf:
         - type: string
@@ -103756,7 +103798,7 @@ components:
               Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
         model:
           $ref: '#/components/schemas/VoiceAgentInputTranscriptionModel'
-          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
+          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.
         custom_speech:
           type: object
           additionalProperties:
@@ -103780,10 +103822,6 @@ components:
       description: |-
         Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
         and phrase hints.
-        When `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model
-        conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
-        `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
-        `profanity_filter`.
     VoiceAgentInputTranscriptionModel:
       anyOf:
         - type: string
@@ -103799,10 +103837,10 @@ components:
             - mai-transcribe
             - azure-speech
             - azure-speech-streaming
+            - mai-transcribe-2-streaming
       description: |-
         The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
         voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
-        `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
         Additional values may be added over time.
     VoiceAgentInterimResponseConfig:
       type: object
@@ -105824,6 +105862,9 @@ components:
             - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
             - type: 'null'
           description: Semantic end-of-utterance detection configuration. Set to null to disable it.
+        speech_start_detection:
+          $ref: '#/components/schemas/VoiceAgentSpeechStartDetection'
+          description: Rules a speech start must pass before it takes the turn. Requires transcription `azure-speech-streaming` or `mai-transcribe-2-streaming`. Not supported on realtime models.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: Server-side voice activity detection.
@@ -106094,6 +106135,67 @@ components:
           description: The delay in milliseconds before working audio starts, from 0 to 10000. If omitted, the service defaults to 1000 milliseconds. This delays only working audio, not tool execution, and is valid only on the working track.
           default: 1000
       description: A working-loop track with a delay measured from the first pending non-call-control tool.
+    VoiceAgentSpeechStartDetection:
+      type: object
+      properties:
+        while_assistant_speaking:
+          $ref: '#/components/schemas/VoiceAgentSpeechStartWhileAssistantSpeaking'
+          description: Rules for speech that starts while the agent is speaking.
+        while_assistant_not_speaking:
+          $ref: '#/components/schemas/VoiceAgentSpeechStartWhileAssistantNotSpeaking'
+          description: Rules for speech that starts while the agent is not speaking.
+      description: Keeps backchannels such as "mm-hm" from interrupting the agent. An omitted scenario has no rules.
+    VoiceAgentSpeechStartPhrase:
+      type: string
+      minLength: 1
+      maxLength: 100
+      description: A phrase matched against the transcript, ignoring case and punctuation.
+    VoiceAgentSpeechStartWhileAssistantNotSpeaking:
+      type: object
+      properties:
+        num_words:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 50
+          description: Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.
+          default: 0
+        turn_taking_classifier:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnTakingClassifier'
+            - type: 'null'
+          description: Decides instead of `num_words`. Phrases still apply first.
+      description: Rules for speech that starts while the agent is not speaking.
+    VoiceAgentSpeechStartWhileAssistantSpeaking:
+      type: object
+      properties:
+        num_words:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 50
+          description: Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.
+          default: 0
+        turn_taking_classifier:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnTakingClassifier'
+            - type: 'null'
+          description: Decides instead of `num_words`. Phrases still apply first.
+        acknowledgement_phrases:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentSpeechStartPhrase'
+          maxItems: 100
+          description: Transcripts that exactly match one of these phrases do not take the turn.
+          default: []
+        interruption_phrases:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentSpeechStartPhrase'
+          maxItems: 100
+          description: Transcripts that contain one of these phrases take the turn regardless of the word count.
+          default: []
+      description: Rules for speech that starts while the agent is speaking.
     VoiceAgentStaticInterimResponseConfig:
       type: object
       required:
@@ -106601,6 +106703,46 @@ components:
             - azure_semantic_vad_en
             - azure_semantic_vad_multilingual
       description: The turn-detection strategy. Additional values may be added over time.
+    VoiceAgentTurnTakingClassifier:
+      type: object
+      properties:
+        threshold:
+          type: number
+          format: float
+          description: Probability at or above which the speech counts as a turn.
+          exclusiveMinimum: 0
+          exclusiveMaximum: 1
+          default: 0.5
+        instructions:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnTakingPromptText'
+            - type: 'null'
+          description: Replaces the built-in task description given to the classifier.
+        criteria:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnTakingCriteria'
+            - type: 'null'
+          description: Replaces the built-in criteria for what is and is not a turn.
+      description: A classifier that judges whether the user's speech takes the turn.
+    VoiceAgentTurnTakingCriteria:
+      type: object
+      properties:
+        turn:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnTakingPromptText'
+            - type: 'null'
+          description: When the user's speech is a turn the agent must respond to.
+        not_turn:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnTakingPromptText'
+            - type: 'null'
+          description: When the user's speech is not a turn, such as a backchannel.
+      description: Criteria for what the turn-taking classifier counts as a turn.
+    VoiceAgentTurnTakingPromptText:
+      type: string
+      minLength: 1
+      maxLength: 4000
+      description: Text that replaces one part of the turn-taking classifier's prompt.
     VoiceAgentVoiceConfig:
       type: object
       properties:
