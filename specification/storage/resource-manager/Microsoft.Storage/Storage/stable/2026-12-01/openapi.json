@@ -13223,8 +13223,29 @@
           ]
         },
         "scaleMode": {
-          "$ref": "#/definitions/FileShareScaleMode",
+          "type": "string",
           "description": "The mode of the Scale Namespace feature for the file share. Supported only for NFS shares in FileStorage Provisioned v2 accounts. If omitted on creation, the mode defaults to Compatibility. Can only be specified when creating the share and cannot be changed afterward. Get and list operations return Compatibility when no mode was specified.",
+          "default": "Compatibility",
+          "enum": [
+            "Compatibility",
+            "Scale"
+          ],
+          "x-ms-enum": {
+            "name": "FileShareScaleMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Compatibility",
+                "value": "Compatibility",
+                "description": "Uses Compatibility mode for the Scale Namespace feature. This is the default when no mode is specified."
+              },
+              {
+                "name": "Scale",
+                "value": "Scale",
+                "description": "Uses Scale mode for the Scale Namespace feature."
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -13359,30 +13380,6 @@
           "description": "The scalar for bandwidth in the file share provisioned bandwidth recommendation formula.",
           "readOnly": true
         }
-      }
-    },
-    "FileShareScaleMode": {
-      "type": "string",
-      "description": "The mode of the Scale Namespace feature for an NFS file share.",
-      "enum": [
-        "Compatibility",
-        "Scale"
-      ],
-      "x-ms-enum": {
-        "name": "FileShareScaleMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Compatibility",
-            "value": "Compatibility",
-            "description": "Uses Compatibility mode for the Scale Namespace feature. This is the default when no mode is specified."
-          },
-          {
-            "name": "Scale",
-            "value": "Scale",
-            "description": "Uses Scale mode for the Scale Namespace feature."
-          }
-        ]
       }
     },
     "Format": {

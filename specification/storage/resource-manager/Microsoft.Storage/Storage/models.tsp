@@ -2413,7 +2413,7 @@ model FileShareProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_12_01)
-  scaleMode?: FileShareScaleMode;
+  scaleMode?: FileShareScaleMode = "Compatibility";
 
   /**
    * The property is for NFS share only. The default is NoRootSquash.
