@@ -291,6 +291,89 @@ namespace Azure.AI.Projects;
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
 
+@@alternateType(
+  OpenAI.CreateEvalJsonlRunDataSource,
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalJsonlRunDataSource",
+  },
+  "java"
+);
+
+// Keep the unused input-message and response-format discriminator hierarchies opaque.
+@alternateType(
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalCompletionsRunDataSource",
+  },
+  "java"
+)
+model OpenAICompletionsRunDataSource {}
+
+@@alternateType(
+  OpenAI.CreateEvalCompletionsRunDataSource,
+  OpenAICompletionsRunDataSource,
+  "java"
+);
+
+@@alternateType(
+  OpenAI.EvalJsonlFileContentSource,
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalJsonlRunDataSource.Source.FileContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.EvalJsonlFileIdSource,
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalJsonlRunDataSource.Source.FileId",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference,
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalCompletionsRunDataSource.InputMessages.ItemReference",
+  },
+  "java"
+);
+
+// AzureAIModelTarget still uses the Projects sampling parameters independently.
+@alternateType(
+  {
+    identity: "com.azure.ai.agents.models.EvaluationModelConfiguration",
+  },
+  "java"
+)
+model AgentsEvaluationModelConfiguration {}
+
+@@alternateType(
+  EvaluationModelConfiguration,
+  AgentsEvaluationModelConfiguration,
+  "java"
+);
+
+@@alternateType(
+  UserConversationSimulationAudioEffectsConfiguration,
+  {
+    identity: "com.azure.ai.agents.models.UserConversationSimulationAudioEffectsConfiguration",
+  },
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationUserBehaviorConfiguration,
+  {
+    identity: "com.azure.ai.agents.models.UserConversationSimulationUserBehaviorConfiguration",
+  },
+  "java"
+);
+
+@@alternateType(
+  UserConversationSimulationTestCase,
+  {
+    identity: "com.azure.ai.agents.models.UserConversationSimulationTestCase",
+  },
+  "java"
+);
+
 // OpenAI de-dup: suppress ComparisonFilter & CompoundFilter (and their anonymous
 // enum types FileSearchToolFiltersType / FileSearchToolFiltersType1) in favour of
 // the equivalent openai-java models.
