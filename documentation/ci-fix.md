@@ -80,6 +80,12 @@ pnpm format
 
 Tooling formatting uses Oxfmt and excludes Swagger JSON.
 
+When the Format workflow runs on a PR, its `format` check must pass before
+**Automated merging requirements met** can pass. PRs excluded by the workflow's
+path filters do not need a `format` result. Keep the aggregate merge gate required
+instead of requiring `format` directly, which would leave excluded PRs waiting
+for a check that never runs.
+
 ## `CredScan`
 
 This check is owned by One Engineering System. See [1ES CredScan] for help.

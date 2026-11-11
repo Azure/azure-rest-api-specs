@@ -852,6 +852,9 @@ export async function getCheckRunTuple(
     requiredCheckNames = [IMPACT_CHECK_NAME];
   }
 
+  // Format is path-filtered, so require its result only when the check is present.
+  requiredCheckNames.push("format");
+
   const filteredReqCheckRuns = unifiedCheckRuns.filter(
     (checkRun) =>
       !excludedCheckNames.includes(checkRun.name) && requiredCheckNames.includes(checkRun.name),

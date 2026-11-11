@@ -23,7 +23,7 @@ export type CheckRunData = import("../../src/summarize-checks/summarize-checks.t
 const mockCore = createMockCore();
 const WORKFLOW_URL = "http://github.com/a/fake/workflowrun/url";
 
-describe("ARM review label handoff", () => {
+describe("Summarize Checks", () => {
   describe("Summarize Checks integration", () => {
     function createSummary(existingLabels: string[] = ["ARMReview"]) {
       const github = createMockGithub();
@@ -174,6 +174,106 @@ describe("ARM review label handoff", () => {
       expect(github.rest.actions.downloadArtifact).not.toHaveBeenCalled();
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
       expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    });
+
+    describe("path-filtered formatting", () => {
+      function createFormatSummary(
+        formatRuns: {
+          status: string;
+          conclusion: string | null;
+          started_at?: string;
+          completed_at?: string;
+        }[],
+      ) {
+        const summary = createSummary([]);
+        summary.github.rest.actions.downloadArtifact.mockImplementation(() =>
+          Promise.resolve({
+            data: new Response(JSON.stringify({ schemaVersion: 2, services: [] })).body,
+          }),
+        );
+        summary.github.rest.checks.listForRef.mockResolvedValue({
+          data: {
+            check_runs: [
+              {
+                name: "Summarize PR Impact",
+                status: "completed",
+                conclusion: "success",
+                check_suite: { id: 1 },
+              },
+              ...formatRuns.map((run) => ({
+                name: "format",
+                details_url: "https://github.com/Azure/azure-rest-api-specs/actions/runs/2",
+                ...run,
+              })),
+            ],
+          },
+        });
+        return summary;
+      }
+
+      it.each([
+        { status: "queued", conclusion: null, expected: "pending" },
+        { status: "in_progress", conclusion: null, expected: "pending" },
+        { status: "completed", conclusion: "failure", expected: "failure" },
+        { status: "completed", conclusion: "cancelled", expected: "failure" },
+        { status: "completed", conclusion: "timed_out", expected: "failure" },
+        { status: "completed", conclusion: "success", expected: "success" },
+      ])(
+        "sets the merge gate to $expected for format $status/$conclusion without a branch requirement",
+        async ({ status, conclusion, expected }) => {
+          const { github, run } = createFormatSummary([{ status, conclusion }]);
+
+          await run();
+
+          expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+            expect.objectContaining({
+              context: "Automated merging requirements met",
+              state: expected,
+              sha: fullGitSha,
+            }),
+          );
+        },
+      );
+
+      it("does not require a format result when the workflow did not run", async () => {
+        const { github, run } = createFormatSummary([]);
+
+        await run();
+
+        expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+          expect.objectContaining({
+            context: "Automated merging requirements met",
+            state: "success",
+          }),
+        );
+      });
+
+      it.each([
+        { status: "in_progress", conclusion: null, expected: "pending" },
+        { status: "completed", conclusion: "success", expected: "success" },
+      ])("uses the latest format rerun's $expected result", async (latest) => {
+        const { github, run } = createFormatSummary([
+          {
+            status: latest.status,
+            conclusion: latest.conclusion,
+            started_at: "2026-01-02T00:00:00Z",
+          },
+          {
+            status: "completed",
+            conclusion: "failure",
+            completed_at: "2026-01-01T00:00:00Z",
+          },
+        ]);
+
+        await run();
+
+        expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+          expect.objectContaining({
+            context: "Automated merging requirements met",
+            state: latest.expected,
+          }),
+        );
+      });
     });
   });
 
