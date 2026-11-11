@@ -1236,6 +1236,11 @@ using Azure.AI.Projects;
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
+@@clientName(
+  AgentOptimizationJobs.downloadFile,
+  "downloadOptimizationJobFile",
+  "java"
+);
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
