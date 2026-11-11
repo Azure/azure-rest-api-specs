@@ -1084,7 +1084,7 @@ paths:
           required: false
           description: Filter to jobs in this lifecycle state.
           schema:
-            $ref: '#/components/schemas/AgentOptimizationJobStatus'
+            $ref: '#/components/schemas/JobStatus'
           explode: false
         - name: agent_name
           in: query
@@ -49487,7 +49487,7 @@ components:
           description: Result produced on success.
           readOnly: true
         status:
-          $ref: '#/components/schemas/AgentOptimizationJobStatus'
+          $ref: '#/components/schemas/JobStatus'
           description: Current lifecycle status.
           readOnly: true
         error:
@@ -49570,13 +49570,6 @@ components:
           $ref: '#/components/schemas/AgentOptimizationTerminationReason'
           description: Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.
       description: Partial or terminal result produced by an agent optimization job.
-    AgentOptimizationJobStatus:
-      anyOf:
-        - $ref: '#/components/schemas/JobStatus'
-        - type: string
-          enum:
-            - skipped
-      description: Optimization job lifecycle, including a terminal skip when required input is unavailable.
     AgentOptimizationJobTokenUsage:
       type: object
       required:
@@ -58739,6 +58732,7 @@ components:
             - succeeded
             - failed
             - cancelled
+            - skipped
       description: Extensible status values shared by Foundry jobs.
     LatencySummary:
       type: object

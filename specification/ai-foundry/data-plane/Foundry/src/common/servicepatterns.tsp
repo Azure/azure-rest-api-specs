@@ -126,11 +126,9 @@ union FoundryFeaturesOptInKeys {
   session_compute_v1_preview: "SessionCompute=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<
-  RequiredPreviewOptInHeader extends
-    | FoundryFeaturesOptInKeys
-    | AgentDefinitionOptInKeys
-> = {
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -138,11 +136,9 @@ alias WithRequiredFoundryPreviewHeader<
   foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<
-  OptionalPreviewOptInHeader extends
-    | FoundryFeaturesOptInKeys
-    | AgentDefinitionOptInKeys
-> = {
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
