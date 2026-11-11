@@ -150,6 +150,12 @@ model JobErrorInfo {
   @doc("A list of recommendations to resolve the error.")
   @visibility(Lifecycle.Read)
   recommendations?: string[];
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Structured child errors that provide additional details about this error. Each child can contain further errors.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  additionalErrorDetails?: JobErrorInfo[];
 }
 
 @doc("Job Retry Details.")
