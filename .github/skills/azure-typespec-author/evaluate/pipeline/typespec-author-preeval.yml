@@ -50,10 +50,11 @@ steps:
 
   - script: |
       set -e
-      npm ci --legacy-peer-deps --userconfig $(Build.SourcesDirectory)/.npmrc
-      echo "##vso[task.prependpath]$(Build.SourcesDirectory)/eng/pipelines/azure-typespec-author-eval/node_modules/.bin"
+      export NPM_CONFIG_USERCONFIG="$(Build.SourcesDirectory)/.npmrc"
+      node eng/scripts/install-pnpm.mts
+      pnpm install --frozen-lockfile
+      echo "##vso[task.prependpath]$(Build.SourcesDirectory)/node_modules/.bin"
     displayName: "Install TypeSpec toolchain (pinned)"
-    workingDirectory: $(Build.SourcesDirectory)/eng/pipelines/azure-typespec-author-eval
 
   - script: |
       node --experimental-strip-types .github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-prepare.ts \
@@ -74,11 +75,9 @@ steps:
 
   - script: |
       set -e
-      export NPM_CONFIG_USERCONFIG="$(Build.SourcesDirectory)/.npmrc"
       node .github/skills/azure-typespec-author/evaluate/scripts/setup-fixture-files.ts
-      node .github/skills/azure-typespec-author/evaluate/scripts/install-pnpm.ts
       FIXTURE_DIR="$(Build.SourcesDirectory)/.github/skills/azure-typespec-author/evaluate/fixtures/Microsoft.Widget/Widget"
-      pnpm install --dir "$FIXTURE_DIR"
-      echo "##vso[task.setvariable variable=FIXTURE_NODE_MODULES]$FIXTURE_DIR/node_modules"
-      echo "##vso[task.prependpath]$FIXTURE_DIR/node_modules/.bin"
+      export FIXTURE_NODE_MODULES="$(Build.SourcesDirectory)/node_modules"
+      (cd "$FIXTURE_DIR" && node "$(Build.SourcesDirectory)/.github/skills/azure-typespec-author/evaluate/scripts/check-node-dependencies.ts" packages)
+      echo "##vso[task.setvariable variable=FIXTURE_NODE_MODULES]$FIXTURE_NODE_MODULES"
     displayName: "Prepare fixture files and node_modules"
