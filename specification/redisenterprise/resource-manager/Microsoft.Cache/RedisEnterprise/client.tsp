@@ -106,8 +106,18 @@ using Microsoft.Cache;
   "csharp"
 );
 @@clientName(
+  MigrationProperties.rollbackEligibleUntil,
+  "RollbackEligibilityExpiresOn",
+  "csharp"
+);
+@@clientName(
   MigrationProvisioningState,
   "RedisEnterpriseMigrationProvisioningState",
+  "csharp"
+);
+@@clientName(
+  MigrationRollbackReason,
+  "RedisEnterpriseMigrationRollbackReason",
   "csharp"
 );
 @@clientName(

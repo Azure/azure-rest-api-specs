@@ -6,19 +6,23 @@ import type { Core } from "../github.ts";
 */
 
 import * as z from "zod";
-import type { ReviewContext } from "./review-requirements.ts";
+import {
+  ImpactAssessmentSchema as ChangeImpactSchema,
+  type ImpactAssessment,
+} from "../../../shared/src/impact.ts";
+import {
+  evaluateReviewRequirements,
+  specReviewApplies,
+  type ReviewContext,
+} from "./review-requirements.ts";
 import { includesEvery, includesNone } from "../../../shared/src/array.ts";
+import { link, paragraph, renderMarkdownDoc, unorderedList } from "../../../shared/src/markdown.ts";
+import { labelBadge } from "./label-badge.ts";
 import {
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
   TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
 } from "../label.ts";
-import {
-  brchTsg,
-  diagramTsg,
-  href,
-  notReadyForArmReviewReason,
-  wrapInArmReviewMessage,
-} from "./tsgs.ts";
+import { brchTsg, diagramTsg, notReadyForArmReviewReason, wrapInArmReviewMessage } from "./tsgs.ts";
 
 // #region typedefs
 /**
@@ -52,7 +56,7 @@ export type LabelContext = {
   toRemove: Set<string>;
 };
 
-export const ImpactAssessmentSchema = z.object({
+const LegacyImpactAssessmentSchema = z.object({
   resourceManagerRequired: z.boolean().describe("Whether a resource manager review is required."),
   dataPlaneRequired: z.boolean().describe("Whether a data plane review is required."),
   suppressionReviewRequired: z.boolean().describe("Whether a suppression review is required."),
@@ -68,7 +72,35 @@ export const ImpactAssessmentSchema = z.object({
   targetBranch: z.string().describe("The name of the target branch for the PR."),
 });
 
-export type ImpactAssessment = import("zod").infer<typeof ImpactAssessmentSchema>;
+// Runs already in flight can still produce the old, PR-wide artifact.
+export const ImpactAssessmentSchema = z.union([
+  ChangeImpactSchema,
+  LegacyImpactAssessmentSchema.transform((legacy): ImpactAssessment => ({
+    schemaVersion: 2,
+    services: [
+      ...(legacy.resourceManagerRequired ? ["resource-manager" as const] : []),
+      ...(legacy.dataPlaneRequired ? ["data-plane" as const] : []),
+      ...(!legacy.resourceManagerRequired && !legacy.dataPlaneRequired ? ["unknown" as const] : []),
+    ].map((plane) => ({
+      path: "specification/legacy",
+      plane,
+      changes: ["api"],
+      hasAffectedReadme: false,
+      typeSpec: legacy.typeSpecChanged,
+      // Legacy artifacts know only whether a version was added, not its name or owning service.
+      newApiVersions: legacy.isNewApiVersion ? ["unknown"] : [],
+      suppressionsChanged: legacy.suppressionReviewRequired,
+      resourceProvider: {
+        newNamespaces: legacy.newRP ? ["unknown"] : [],
+        usesRpaas: legacy.rpaasChange,
+        hasAddedDefinitions: legacy.rpaasRpNotInPrivateRepo,
+        registered: !legacy.rpaasRpNotInPrivateRepo,
+      },
+    })),
+  })),
+]);
+
+export type { ImpactAssessment };
 
 /**
  * This file is the single source of truth for the labels used by the SDK generation tooling
@@ -91,6 +123,9 @@ export type ImpactAssessment = import("zod").infer<typeof ImpactAssessmentSchema
  * THEN display the troubleshootingGuide in "Next Steps to Merge" comment.
  */
 export type RequiredLabelRule = {
+  name: string;
+  nextStep: string;
+  awaitingReview?: boolean;
   precedence: number;
   branches?: string[];
   anyPrerequisiteLabels?: string[];
@@ -250,7 +285,9 @@ export class Label {
     } else {
       console.warn(
         "ASSERTION VIOLATION! " +
-          `Label.applyStateChange: '${this.name}' is ${this.present ? "present" : "not present"} while it should be ${this.shouldBePresent ? "present" : "not present"}. ` +
+          `Label.applyStateChange: '${this.name}' is ` +
+          `${this.present ? "present" : "not present"} while it should be ` +
+          `${this.shouldBePresent ? "present" : "not present"}. ` +
           `At this point of execution this should not happen.`,
       );
     }
@@ -326,15 +363,6 @@ export const sdkLabels = {
     breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
     breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
     deprecatedBreakingChange: "CI-BreakingChange-Python",
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
-  },
-  "azure-sdk-for-python-track2": {
-    breakingChange: "BreakingChange-Python-Track2-Sdk",
-    breakingChangeApproved: "BreakingChange-Python-Track2-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-Python-Track2",
-    // Note that deprecatedBreakingChangeApproved is the same for python and python-track2
     deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
   },
   "azure-sdk-for-trenton": {
@@ -416,47 +444,32 @@ export function processArmReviewLabels(context: LabelContext, existingLabels: st
   }
 }
 
-/**
-This function determines which labels of the ARM review should
-be applied to given PR. It adds and removes the labels as appropriate. It used to be called
-ProcessARMReview, but was renamed to processImpactAssessment to better reflect its purpose given that is
-merely evaluating the impact assessment of the PR and returning a final set of labels to be applied/removed
-from the PR.
-
-This function does the following, **among other things**:
-
-- Adds the "ARMReview" label if all of the following conditions hold:
-  - The processed PR "isReleaseBranch" or "isShiftLeftPRWithRPSaaSDev"
-  - The PR is not a draft, as determined by "isDraftPR"
-  - The PR is labelled with "resource-manager" label, meaning it pertains
-    to ARM, as previously determined by the "isManagementPR" function,
-    called from the "getPRType" function.
-
-- Calls the "processARMReviewWorkflowLabels" function if "ARMReview" label applies.
-*/
-
 export function processImpactAssessment(
   labelContext: LabelContext,
   impactAssessment: ImpactAssessment,
   context: ReviewContext,
 ): { armReviewLabelShouldBePresent: boolean } {
-  console.log("ENTER definition processARMReview");
+  const reviews = evaluateReviewRequirements(impactAssessment, context);
+  const services = impactAssessment.services;
+  const managementServices = services.filter((service) => service.plane === "resource-manager");
+  const newResourceProvider =
+    (context.targetBranch === "main" || context.targetBranch === "ARMCoreRPDev") &&
+    managementServices.some((service) => service.resourceProvider.newNamespaces.length > 0);
 
-  // By default these two should not be present. We may determine later in this function that they should be present after all.
   const armReviewLabel = new Label("ARMReview", labelContext.present);
-  armReviewLabel.shouldBePresent = false;
+  armReviewLabel.shouldBePresent = reviews.arm;
   const newApiVersionLabel = new Label("new-api-version", labelContext.present);
-  newApiVersionLabel.shouldBePresent = false;
+  newApiVersionLabel.shouldBePresent =
+    specReviewApplies(context) && services.some((service) => service.newApiVersions.length > 0);
 
   const resourceManagerLabel = new Label("resource-manager", labelContext.present);
-  resourceManagerLabel.shouldBePresent = impactAssessment.resourceManagerRequired || false;
+  resourceManagerLabel.shouldBePresent = managementServices.length > 0;
 
   const dataplaneLabel = new Label("data-plane", labelContext.present);
-  dataplaneLabel.shouldBePresent = impactAssessment.dataPlaneRequired || false;
+  dataplaneLabel.shouldBePresent = services.some((service) => service.plane === "data-plane");
 
   // Auto-applied intake signal for data-plane stewardship review. Present exactly when a
-  // data-plane PR introduces a new API version (i.e. when both `data-plane` and
-  // `new-api-version` would be present). This single label is what the merge gate, reviewer
+  // data-plane service introduces a new API version. This single label is what the merge gate, reviewer
   // assignment, and the review queue all key off. Reviewer assignment is owned by the
   // azure-sdk-automation GitHub App (it requests the reviewer team with its own identity,
   // which the default Actions token cannot do). See rulesPri0dataPlane below.
@@ -468,29 +481,35 @@ export function processImpactAssessment(
   // PR adds it below; otherwise it's left as-is. Preserves manual requests and avoids a
   // remove/re-add flip that would re-queue an approved PR.
   dataPlaneReviewRequestedLabel.shouldBePresent = dataPlaneReviewRequestedLabel.present ?? false;
+  if (reviews.dataPlane) dataPlaneReviewRequestedLabel.shouldBePresent = true;
 
   const typeSpecLabel = new Label("TypeSpec", labelContext.present);
-  typeSpecLabel.shouldBePresent = impactAssessment.typeSpecChanged || false;
+  typeSpecLabel.shouldBePresent = services.some((service) => service.typeSpec);
 
   const suppressionReviewRequiredLabel = new Label(
     "SuppressionReviewRequired",
     labelContext.present,
   );
-  suppressionReviewRequiredLabel.shouldBePresent =
-    (impactAssessment.resourceManagerRequired && impactAssessment.suppressionReviewRequired) ||
-    false;
+  suppressionReviewRequiredLabel.shouldBePresent = reviews.suppressions;
 
   const rpassReviewRequiredLabel = new Label("RPaaS", labelContext.present);
-  rpassReviewRequiredLabel.shouldBePresent = impactAssessment.rpaasChange || false;
+  rpassReviewRequiredLabel.shouldBePresent = services.some(
+    (service) => service.resourceProvider.usesRpaas,
+  );
 
   const newRPNamespaceLabel = new Label("new-rp-namespace", labelContext.present);
-  newRPNamespaceLabel.shouldBePresent = impactAssessment.newRP || false;
+  newRPNamespaceLabel.shouldBePresent = newResourceProvider;
 
   const ciNewRPNamespaceWithoutRpaaSLabel = new Label(
     "CI-NewRPNamespaceWithoutRPaaS",
     labelContext.present,
   );
-  ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = impactAssessment.rpaasRPMissing || false;
+  ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent =
+    newResourceProvider &&
+    managementServices.some(
+      (service) =>
+        service.resourceProvider.newNamespaces.length > 0 && !service.resourceProvider.usesRpaas,
+    );
 
   const rpaasExceptionLabelPresent = labelContext.present.has("RPaaSException");
 
@@ -499,39 +518,21 @@ export function processImpactAssessment(
     labelContext.present,
   );
   ciRpaasRPNotInPrivateRepoLabel.shouldBePresent =
-    impactAssessment.rpaasRpNotInPrivateRepo || false;
+    context.targetBranch === "main" &&
+    managementServices.some(
+      (service) =>
+        service.resourceProvider.usesRpaas &&
+        service.resourceProvider.hasAddedDefinitions &&
+        !service.resourceProvider.registered,
+    );
 
-  const branch = context.targetBranch;
-  const isReleaseBranchVal = isReleaseBranch(branch);
-
-  // we used to also calculate if the branch name was from ShiftLeft, in which case we would or that
-  // with isReleaseBranchVal to see if it's in scope of ARM review. ShiftLeft is not supported anymore,
-  // so we only check if the branch is a release branch.
-  // const prTitle = await getPrTitle(owner, repo, prNumber)
-  // const isShiftLeftPRWithRPSaaSDevVal = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
-  const isBranchInScopeOfSpecReview = isReleaseBranchVal;
-
-  // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
-  // determines which kind of review exactly we need.
-  const specReviewApplies = !context.isDraft && isBranchInScopeOfSpecReview;
-  if (specReviewApplies) {
-    if (impactAssessment.isNewApiVersion) {
-      newApiVersionLabel.shouldBePresent = true;
-
-      // Classify from PR content only; never read the protected signoff label here (racy,
-      // not proof of sign-off). The label is add-only, so an approved PR is never re-queued.
-      if (impactAssessment.dataPlaneRequired) {
-        dataPlaneReviewRequestedLabel.shouldBePresent = true;
-      }
-    }
-
-    armReviewLabel.shouldBePresent = impactAssessment.resourceManagerRequired;
+  if (specReviewApplies(context)) {
     processARMReviewWorkflowLabels(
       labelContext,
-      armReviewLabel.shouldBePresent,
-      impactAssessment.rpaasRPMissing,
+      reviews.arm,
+      ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent,
       rpaasExceptionLabelPresent,
-      impactAssessment.rpaasRpNotInPrivateRepo,
+      ciRpaasRPNotInPrivateRepoLabel.shouldBePresent,
     );
   }
 
@@ -558,23 +559,7 @@ export function processImpactAssessment(
     ),
   );
 
-  console.log(
-    `RETURN definition processARMReview. ` +
-      `isReleaseBranch: ${isReleaseBranchVal}, ` +
-      `isArmReview: ${armReviewLabel.shouldBePresent}, ` +
-      `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, ` +
-      `isNewApiVersion: ${impactAssessment.isNewApiVersion}, ` +
-      `isDraft: ${context.isDraft}, ` +
-      `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, ` +
-      `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`,
-  );
-
   return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent };
-}
-
-function isReleaseBranch(branchName: string): boolean {
-  const branchRegex = [/^main$/, /^RPSaaSMaster$/, /^release.*$/, /^ARMCoreRPDev$/];
-  return branchRegex.some((b) => b.test(branchName));
 }
 
 /**
@@ -763,21 +748,25 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
     branches: ["azure-rest-api-specs/main", "azure-rest-api-specs-pr/RPSaaSMaster"],
     anyPrerequisiteLabels: ["data-plane", "resource-manager"],
     anyRequiredLabels: ["PublishToCustomers"],
-    troubleshootingGuide:
-      `This PR targets either the <code>main</code> branch of the public ` +
-      `specs repo or the <code>RPSaaSMaster</code> branch of the private specs repo. These ` +
-      `branches are not intended for iterative development. Therefore, you must acknowledge ` +
-      `you understand that after this PR is merged, the APIs are considered shipped to ` +
-      `Azure customers. Any further attempts at in-place modifications to the APIs will be ` +
-      `subject to Azure's versioning and breaking change policies. <b>Additionally, for control ` +
-      `plane APIs, you must acknowledge that you are following all the best practices ` +
-      `documented by ARM at ` +
-      `${href("aka.ms/armapibestpractices", "https://aka.ms/armapibestpractices")}.</b> ` +
-      `If you do intend to release the APIs to your customers by merging this PR, ` +
-      `add the <code>PublishToCustomers</code> label to your PR in acknowledgement ` +
-      `of the above. ` +
-      `Otherwise, retarget this PR onto a feature branch, i.e. with prefix <code>release-</code> ` +
-      `(see ${href("aka.ms/azsdk/api-versions#release--branches", "https://aka.ms/azsdk/api-versions#release--branches")}).`,
+    name: "Publication intent",
+    nextStep: paragraph(
+      `Add ${labelBadge("PublishToCustomers")}`,
+      "if these APIs are ready to ship; otherwise target a feature branch.",
+    ),
+    troubleshootingGuide: paragraph(
+      `This PR targets either the \`main\` branch of the public specs repo or the`,
+      `\`RPSaaSMaster\` branch of the private specs repo. These branches are not intended`,
+      `for iterative development. Therefore, you must acknowledge you understand that after`,
+      `this PR is merged, the APIs are considered shipped to Azure customers. Any further`,
+      `attempts at in-place modifications to the APIs will be subject to Azure's versioning`,
+      `and breaking change policies. **Additionally, for control plane APIs, you must`,
+      `acknowledge that you are following all the best practices documented by ARM at`,
+      `${link("aka.ms/armapibestpractices", "https://aka.ms/armapibestpractices")}.** If you`,
+      `do intend to release the APIs to your customers by merging this PR, add the`,
+      `${labelBadge("PublishToCustomers")} label to your PR in acknowledgement of the above. Otherwise,`,
+      `retarget this PR onto a feature branch, i.e. with prefix \`release-\` (see`,
+      `${link("aka.ms/azsdk/api-versions#release--branches", "https://aka.ms/azsdk/api-versions#release--branches")}).`,
+    ),
   },
   // For context on this rule see https://github.com/Azure/azure-sdk-tools/issues/6184
   // and https://github.com/Azure/azure-sdk-tools/issues/6612
@@ -794,11 +783,21 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["data-plane-review-requested"],
     anyRequiredLabels: ["data-plane-review-signoff"],
-    troubleshootingGuide:
-      `Your PR requires an API stewardship review as it introduces a new data-plane API version (label: <code>data-plane-review-requested</code>). ` +
-      `A data-plane API reviewer is assigned from the pool and unblocks merge by applying the protected <code>data-plane-review-signoff</code> label. ` +
-      `To request or expedite the ${href("offline REST API review", "https://eng.ms/docs/products/azure-developer-experience/design/api-review#requesting-an-offline-rest-api-review")}, ` +
-      `email ${href("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")} with your PR link.`,
+    name: "Data-plane API review",
+    awaitingReview: true,
+    nextStep: paragraph(
+      "Request API stewardship review and wait for",
+      `${labelBadge("data-plane-review-signoff")}.`,
+    ),
+    troubleshootingGuide: paragraph(
+      `Your PR requires an API stewardship review as it introduces a new data-plane API`,
+      `version (label: ${labelBadge("data-plane-review-requested")}). A data-plane API reviewer is`,
+      `assigned from the pool and unblocks merge by applying the protected`,
+      `${labelBadge("data-plane-review-signoff")} label. To request or expedite the`,
+      `${link("offline REST API review", "https://eng.ms/docs/products/azure-developer-experience/design/api-review#requesting-an-offline-rest-api-review")},`,
+      `email ${link("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")}`,
+      `with your PR link.`,
+    ),
   },
 ];
 
@@ -807,30 +806,45 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
     anyRequiredLabels: [],
-    troubleshootingGuide: wrapInArmReviewMessage(
-      "This PR has <code>ARMModelingReviewRequired</code> label. " +
-        "This means it is introducing a new Resource Provider namespace or a new resource type. " +
-        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/><br/>" +
-        "<b>If you haven't discussed yet:</b><br/>" +
-        "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served session (no booking required):<br/>" +
-        "<ul>" +
-        "<li><b>When:</b> Every Tuesday and Thursday, 9:30–10:30 AM PST</li>" +
-        `<li><b>How to join:</b> ${href("Join via Teams", "https://aka.ms/apimodelingreview")}</li>` +
-        `<li><b>Required Doc:</b> Please use the ${href("RP Agent", "https://aka.ms/rpagent")} and run the <code>/model-rp-contract</code> skill. ` +
-        "The agent can interview you or review your design docs, then generate a resource contract, design rationale, " +
-        "deployment prerequisites, and <b>an HTML review package with open questions. For Office Hours:</b> bring the HTML " +
-        "review package, and we'll use the open questions as the basis for discussion so we can focus on design decisions " +
-        "and gaps instead of starting from scratch. You can provide feedback using: <code>/rp-agent-feedback</code> or " +
-        `${href("RP Agent Feedback", "https://aka.ms/rpagent/feedback")}.</li>` +
-        `<li>For more details refer: ${href("API Review Workflow | ARM Wiki", "https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours")}</li>` +
-        "</ul>" +
-        "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
-        "This happens when the lease file is not found. Please check with the PM you discussed your design with " +
-        "to confirm if the lease file PR has been merged. " +
-        "In the public repo, lease files reflect immediately after merge. " +
-        "In the private repo (<code>azure-rest-api-specs-pr</code>), lease files typically sync within a few hours, but it can take up to 1-2 business days depending on sync pipeline timing and queue load. " +
-        "Please wait for the sync to complete.",
-    ),
+    name: "ARM modeling review",
+    nextStep:
+      "Discuss the new RP or resource type at [office hours](https://aka.ms/apimodelingreview); bring the RP Agent review package.",
+    troubleshootingGuide: wrapInArmReviewMessage([
+      paragraph(
+        `This PR has ${labelBadge("ARMModelingReviewRequired")} label. This means it is introducing a new`,
+        `Resource Provider namespace or a new resource type. New RPs and new resource types`,
+        `require a discussion with the ARM Modeling Review team before merging.`,
+      ),
+      "**If you haven't discussed yet:**",
+      "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served session (no booking required):",
+      unorderedList([
+        "**When:** Every Tuesday and Thursday, 9:30–10:30 AM PST",
+        `**How to join:** ${link("Join via Teams", "https://aka.ms/apimodelingreview")}`,
+        paragraph(
+          `**Required Doc:** Please use the ${link("RP Agent", "https://aka.ms/rpagent")} and`,
+          `run the \`/model-rp-contract\` skill. The agent can interview you or review your`,
+          `design docs, then generate a resource contract, design rationale, deployment`,
+          `prerequisites, and **an HTML review package with open questions. For Office Hours:**`,
+          `bring the HTML review package, and we'll use the open questions as the basis for`,
+          `discussion so we can focus on design decisions and gaps instead of starting from`,
+          `scratch. You can provide feedback using: \`/rp-agent-feedback\` or`,
+          `${link("RP Agent Feedback", "https://aka.ms/rpagent/feedback")}.`,
+        ),
+        paragraph(
+          `For more details refer:`,
+          `${link("API Review Workflow | ARM Wiki", "https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours")}`,
+        ),
+      ]),
+      `**If ${labelBadge("ARMModelingSignedOff")} label was removed by automation:**`,
+      paragraph(
+        `This happens when the lease file is not found. Please check with the PM you discussed`,
+        `your design with to confirm if the lease file PR has been merged. In the public repo,`,
+        `lease files reflect immediately after merge. In the private repo`,
+        `(\`azure-rest-api-specs-pr\`), lease files typically sync within a few hours, but it`,
+        `can take up to 1-2 business days depending on sync pipeline timing and queue load.`,
+        `Please wait for the sync to complete.`,
+      ),
+    ]),
   },
   // Note this rule can be circumvented e.g. by adding approval mismatching the actual problem.
   // E.g. PR may not be ready for ARM review due to pending breaking changes review, but this rule
@@ -846,37 +860,51 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
     anyPrerequisiteLabels: ["NotReadyForARMReview"],
     allPrerequisiteAbsentLabels: [verRevApproval, brChRevApproval, "RPaaSException"],
     anyRequiredLabels: ["ARMSignedOff"],
-    troubleshootingGuide: wrapInArmReviewMessage(
-      "This PR is not ready for ARM review (label: <code>NotReadyForARMReview</code>). " +
-        "This PR will not be reviewed by ARM until relevant problems are fixed. " +
-        "Consult the rest of this <code>Next Steps to Merge</code> comment for details.<br/>" +
-        "Once the blocking problems are addressed, add to the PR a comment with contents <code>/azp run</code>. " +
-        "Automation will re-evaluate this PR and if everything looks good, it will add <code>WaitForARMFeedback</code> label " +
-        "which will put this PR on the ARM review queue.",
-    ),
+    name: "ARM review readiness",
+    nextStep: "Resolve the blocking requirements, then comment `/azp run`.",
+    troubleshootingGuide: wrapInArmReviewMessage([
+      paragraph(
+        `This PR is not ready for ARM review (label: ${labelBadge("NotReadyForARMReview")}). This PR will`,
+        `not be reviewed by ARM until relevant problems are fixed. Consult the rest of this`,
+        `\`Next Steps to Merge\` comment for details.`,
+      ),
+      paragraph(
+        `Once the blocking problems are addressed, add to the PR a comment with contents`,
+        `\`/azp run\`. Automation will re-evaluate this PR and if everything looks good, it`,
+        `will add ${labelBadge("WaitForARMFeedback")} label which will put this PR on the ARM review queue.`,
+      ),
+    ]),
   },
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", "CI-NewRPNamespaceWithoutRPaaS"],
     anyRequiredLabels: ["RPaaSException"],
+    name: "RPaaS prerequisite",
+    nextStep: "Onboard the new RP to RPaaS or obtain an approved exception.",
     troubleshootingGuide: notReadyForArmReviewReason("CI-NewRPNamespaceWithoutRPaaS"),
   },
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", "CI-RpaaSRPNotInPrivateRepo"],
     anyRequiredLabels: ["RPaaSException"],
+    name: "Private RP registration prerequisite",
+    nextStep: "Merge the new RP into the private `RPSaaSMaster` branch first.",
     troubleshootingGuide: notReadyForArmReviewReason("CI-RpaaSRPNotInPrivateRepo"),
   },
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", verRev],
     anyRequiredLabels: [verRevApproval],
+    name: "Versioning review prerequisite",
+    nextStep: "Introduce a new API version or obtain versioning approval.",
     troubleshootingGuide: notReadyForArmReviewReason(verRev),
   },
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
     anyRequiredLabels: [brChRevApproval],
+    name: "Breaking-change review prerequisite",
+    nextStep: "Follow the [breaking-change review process](https://aka.ms/brch).",
     troubleshootingGuide: notReadyForArmReviewReason(brChRev),
   },
 ];
@@ -886,27 +914,40 @@ const rulesPri0ArmRpaas: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["CI-NewRPNamespaceWithoutRPaaS"],
     anyRequiredLabels: ["RPaaSException"],
-    troubleshootingGuide:
-      "This PR has <code>CI-NewRPNamespaceWithoutRPaaS</code> label. " +
-      "This means it is introducing a new RP (Resource Provider) namespace that has not been onboarded with " +
-      `${href("RPaaS", "https://armwiki.azurewebsites.net/rpaas/overview.html")}. ` +
-      "Merging this PR to the <code>main</code> branch is blocked as RPaaS is required for new RPs.<br/>" +
-      `To resolve, ${href(
-        "use RPaaS to onboard the new RP",
-        "https://armwiki.azurewebsites.net/rpaas/gettingstarted.html",
-      )}. ` +
-      `To apply for exception, see ${href("aka.ms/RPaaSException", "https://aka.ms/RPaaSException")}.`,
+    name: "RPaaS onboarding",
+    nextStep:
+      "Onboard the new RP to [RPaaS](https://armwiki.azurewebsites.net/rpaas/gettingstarted.html) or obtain an approved exception.",
+    troubleshootingGuide: renderMarkdownDoc([
+      paragraph(
+        `This PR has ${labelBadge("CI-NewRPNamespaceWithoutRPaaS")} label. This means it is introducing a`,
+        `new RP (Resource Provider) namespace that has not been onboarded with`,
+        `${link("RPaaS", "https://armwiki.azurewebsites.net/rpaas/overview.html")}. Merging`,
+        `this PR to the \`main\` branch is blocked as RPaaS is required for new RPs.`,
+      ),
+      paragraph(
+        `To resolve,`,
+        `${link(
+          "use RPaaS to onboard the new RP",
+          "https://armwiki.azurewebsites.net/rpaas/gettingstarted.html",
+        )}.`,
+        `To apply for exception, see`,
+        `${link("aka.ms/RPaaSException", "https://aka.ms/RPaaSException")}.`,
+      ),
+    ]),
   },
   {
     precedence: 0,
     anyPrerequisiteLabels: ["CI-RpaaSRPNotInPrivateRepo"],
     anyRequiredLabels: ["RPaaSException"],
-    troubleshootingGuide:
-      "This PR has <code>CI-RpaaSRPNotInPrivateRepo</code> label. " +
-      "This means it is introducing a new RP (Resource Provider) namespace to the <code>main</code> branch " +
-      "without first merging the new RP to the <code>RPSaaSMaster</code> branch. " +
-      "To resolve, first submit and merge a PR with the new RP namespace to the <code>RPSaaSMaster</code>branch." +
-      "This PR will remain blocked until then.",
+    name: "Private RP registration",
+    nextStep: "Merge the new RP into the private `RPSaaSMaster` branch first.",
+    troubleshootingGuide: paragraph(
+      `This PR has ${labelBadge("CI-RpaaSRPNotInPrivateRepo")} label. This means it is introducing a new`,
+      `RP (Resource Provider) namespace to the \`main\` branch without first merging the new`,
+      `RP to the \`RPSaaSMaster\` branch. To resolve, first submit and merge a PR with the`,
+      `new RP namespace to the \`RPSaaSMaster\`branch.This PR will remain blocked until`,
+      `then.`,
+    ),
   },
 ];
 
@@ -915,17 +956,30 @@ const rulesPri0Changes: RequiredLabelRule[] = [
     precedence: 0,
     allPrerequisiteLabels: [verRev],
     anyRequiredLabels: [verRevApproval],
-    troubleshootingGuide:
-      `This PR has at least one change violating Azure versioning policy (label: <code>${verRev}</code>).<br/>` +
-      `To unblock this PR, either a) introduce a new API version with these changes instead of modifying an existing API version, ` +
-      `or b) ${brchTsg.replace("To unblock this PR, ", "")}`,
+    name: "API versioning",
+    nextStep: "Introduce a new API version or follow the [review process](https://aka.ms/brch).",
+    troubleshootingGuide: renderMarkdownDoc([
+      paragraph(
+        `This PR has at least one change violating Azure versioning policy (label:`,
+        `${labelBadge(verRev)}).`,
+      ),
+      paragraph(
+        `To unblock this PR, either a) introduce a new API version with these changes instead`,
+        `of modifying an existing API version, or b)`,
+        `${brchTsg.replace("To unblock this PR, ", "")}`,
+      ),
+    ]),
   },
   {
     precedence: 0,
     allPrerequisiteLabels: [brChRev],
     anyRequiredLabels: [brChRevApproval],
-    troubleshootingGuide:
-      `This PR has at least one breaking change (label: <code>${brChRev}</code>).<br/>` + brchTsg,
+    name: "API breaking changes",
+    nextStep: "Follow the [breaking-change review process](https://aka.ms/brch).",
+    troubleshootingGuide: renderMarkdownDoc([
+      `This PR has at least one breaking change (label: ${labelBadge(brChRev)}).`,
+      brchTsg,
+    ]),
   },
 ];
 
@@ -934,38 +988,61 @@ const rulesPri0ArmRev: RequiredLabelRule[] = [
     precedence: 0,
     anyPrerequisiteLabels: ["WaitForARMFeedback"],
     anyRequiredLabels: ["ARMSignedOff"],
-    troubleshootingGuide: wrapInArmReviewMessage(
-      `This PR is awaiting ARM reviewer feedback (label: <code>WaitForARMFeedback</code>).<br/>` +
-        `To learn when this PR will get reviewed, see ARM review queue at ` +
-        `${href("aka.ms/azsdk/pr-arm-review", "https://aka.ms/azsdk/pr-arm-review")}`,
-    ),
+    name: "ARM API review",
+    awaitingReview: true,
+    nextStep: "Wait for ARM reviewer feedback. [Review queue](https://aka.ms/azsdk/pr-arm-review).",
+    troubleshootingGuide: wrapInArmReviewMessage([
+      `This PR is awaiting ARM reviewer feedback (label: ${labelBadge("WaitForARMFeedback")}).`,
+      paragraph(
+        `To learn when this PR will get reviewed, see ARM review queue at`,
+        `${link("aka.ms/azsdk/pr-arm-review", "https://aka.ms/azsdk/pr-arm-review")}`,
+      ),
+    ]),
   },
   {
     precedence: 0,
     anyPrerequisiteLabels: ["ARMChangesRequested"],
     anyRequiredLabels: ["ARMSignedOff"],
-    troubleshootingGuide: wrapInArmReviewMessage(
-      "This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>" +
-        "When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>" +
-        "Automation should then add <code>WaitForARMFeedback</code> label. <br/>" +
-        "❗If you don't have permissions to remove the label, request <code>write access</code> per " +
-        `${href("aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories", "https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories")}` +
-        ".",
-    ),
+    name: "ARM review feedback",
+    nextStep: `Address reviewer feedback, then remove ${labelBadge("ARMChangesRequested")}.`,
+    troubleshootingGuide: wrapInArmReviewMessage([
+      paragraph(
+        `This PR has ${labelBadge("ARMChangesRequested")} label. Please address or respond to feedback from`,
+        `the ARM API reviewer. `,
+      ),
+      paragraph(
+        `When you are ready to continue the ARM API review, please remove the`,
+        `${labelBadge("ARMChangesRequested")} label. `,
+      ),
+      `Automation should then add ${labelBadge("WaitForARMFeedback")} label. `,
+      paragraph(
+        `❗If you don't have permissions to remove the label, request \`write access\` per`,
+        `${link("aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories", "https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories")}.`,
+      ),
+    ]),
   },
 ];
 
 const rulesPri1ArmRev: RequiredLabelRule[] = [
-  // This rule should never kick-in in normal flow, as there should always be one of rules for the ARM review workflow
-  // labels active, and all of them have higher precedence than this rule.
-  // However, we may still end up in this situation if someone manually tampered with the labels.
+  // Repair guidance is only needed when the ARM workflow-state label is missing.
   {
     precedence: 1,
     anyPrerequisiteLabels: ["ARMReview"],
+    allPrerequisiteAbsentLabels: [
+      "NotReadyForARMReview",
+      "WaitForARMFeedback",
+      "ARMChangesRequested",
+      "ARMSignedOff",
+    ],
     anyRequiredLabels: ["ARMSignedOff"],
+    name: "ARM review workflow",
+    nextStep: "Comment `/azp run` to refresh ARM review readiness.",
     troubleshootingGuide: wrapInArmReviewMessage(
-      "❗❗❗ ARM review workflow label is missing! ❗❗❗" +
-        "<strong>TO UNBLOCK THIS PR, add <code>/azp run</code> comment to this PR to allow automation to determine where this PR is in the ARM review workflow.</strong>",
+      paragraph(
+        `❗❗❗ ARM review workflow label is missing! ❗❗❗**TO UNBLOCK THIS PR, add \`/azp run\``,
+        `comment to this PR to allow automation to determine where this PR is in the ARM`,
+        `review workflow.**`,
+      ),
     ),
   },
 ];
@@ -975,9 +1052,13 @@ const rulesPri1Suppressions: RequiredLabelRule[] = [
     precedence: 1,
     anyPrerequisiteLabels: ["SuppressionReviewRequired"],
     anyRequiredLabels: ["Approved-Suppression"],
-    troubleshootingGuide:
-      `The suppressions added to the AutoRest config files (README.mds) require review. ${diagramTsg(1, true)}, ` +
-      `or to step 3, depending on the kind of suppression you did.`,
+    name: "AutoRest suppressions",
+    awaitingReview: true,
+    nextStep: `Request suppression review and ${labelBadge("Approved-Suppression")} approval.`,
+    troubleshootingGuide: paragraph(
+      `The suppressions added to the AutoRest config files (README.mds) require review.`,
+      `${diagramTsg(1, true)}, or to step 3, depending on the kind of suppression you did.`,
+    ),
   },
 ];
 
@@ -993,73 +1074,71 @@ const rulesPri2Sdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChange],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeApproved],
-    troubleshootingGuide:
-      `Your PR has breaking changes in the generated SDK for Go (label: <code>${
-        sdkLabels["azure-sdk-for-go"].breakingChange
-      }</code>). ` + `${diagramTsg(3, true)}.`,
+    name: "Go SDK breaking changes",
+    nextStep: "Fix or obtain approval for the Go SDK breaking changes.",
+    troubleshootingGuide: paragraph(
+      `Your PR has breaking changes in the generated SDK for Go (label:`,
+      `${labelBadge(sdkLabels["azure-sdk-for-go"].breakingChange)}). ${diagramTsg(3, true)}.`,
+    ),
   },
   {
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChange],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeApproved],
-    troubleshootingGuide:
-      `Your PR has breaking changes in the generated SDK for JavaScript (label: <code>${
-        sdkLabels["azure-sdk-for-js"].breakingChange
-      }</code>). ` + `${diagramTsg(3, true)}.`,
+    name: "JavaScript SDK breaking changes",
+    nextStep: "Fix or obtain approval for the JavaScript SDK breaking changes.",
+    troubleshootingGuide: paragraph(
+      `Your PR has breaking changes in the generated SDK for JavaScript (label:`,
+      `${labelBadge(sdkLabels["azure-sdk-for-js"].breakingChange)}). ${diagramTsg(3, true)}.`,
+    ),
   },
   {
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChange],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeApproved],
-    troubleshootingGuide:
-      `Your PR has breaking changes in the generated SDK for Python (label: <code>${
-        sdkLabels["azure-sdk-for-python"].breakingChange
-      }</code>). ` + `${diagramTsg(3, true)}.`,
-  },
-  {
-    precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChange],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeApproved],
-    troubleshootingGuide:
-      `Your PR has breaking changes in the generated SDK for Python track-2 (label: <code>${
-        sdkLabels["azure-sdk-for-python-track2"].breakingChange
-      }</code>). ` + `${diagramTsg(3, true)}.`,
+    name: "Python SDK breaking changes",
+    nextStep: "Fix or obtain approval for the Python SDK breaking changes.",
+    troubleshootingGuide: paragraph(
+      `Your PR has breaking changes in the generated SDK for Python (label:`,
+      `${labelBadge(sdkLabels["azure-sdk-for-python"].breakingChange)}). ${diagramTsg(3, true)}.`,
+    ),
   },
   {
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved],
-    troubleshootingGuide:
-      `Your PR modified the suppressions for Go SDK breaking changes (label: ${
-        sdkLabels["azure-sdk-for-go"].breakingChangeSuppression
-      }).  ` + `${diagramTsg(3, true)}.`,
+    name: "Go SDK suppressions",
+    awaitingReview: true,
+    nextStep: "Request approval for the changed Go SDK breaking-change suppressions.",
+    troubleshootingGuide: paragraph(
+      `Your PR modified the suppressions for Go SDK breaking changes (label:`,
+      `${labelBadge(sdkLabels["azure-sdk-for-go"].breakingChangeSuppression)}).  ${diagramTsg(3, true)}.`,
+    ),
   },
   {
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppressionApproved],
-    troubleshootingGuide:
-      `Your PR modified the suppressions for JavaScript SDK breaking changes (label: ${
-        sdkLabels["azure-sdk-for-js"].breakingChangeSuppression
-      }).  ` + `${diagramTsg(3, true)}.`,
+    name: "JavaScript SDK suppressions",
+    awaitingReview: true,
+    nextStep: "Request approval for the changed JavaScript SDK breaking-change suppressions.",
+    troubleshootingGuide: paragraph(
+      `Your PR modified the suppressions for JavaScript SDK breaking changes (label:`,
+      `${labelBadge(sdkLabels["azure-sdk-for-js"].breakingChangeSuppression)}).  ${diagramTsg(3, true)}.`,
+    ),
   },
   {
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppression],
     anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppressionApproved],
-    troubleshootingGuide:
-      `Your PR modified the suppressions for Python SDK breaking changes (label: ${
-        sdkLabels["azure-sdk-for-python"].breakingChangeSuppression
-      }).  ` + `${diagramTsg(3, true)}.`,
-  },
-  {
-    precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppressionApproved],
-    troubleshootingGuide:
-      `Your PR modified the suppressions for Python track-2 SDK breaking changes (label: ${
-        sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression
-      }).  ` + `${diagramTsg(3, true)}.`,
+    name: "Python SDK suppressions",
+    awaitingReview: true,
+    nextStep: "Request approval for the changed Python SDK breaking-change suppressions.",
+    troubleshootingGuide: paragraph(
+      `Your PR modified the suppressions for Python SDK breaking changes (label:`,
+      `${labelBadge(sdkLabels["azure-sdk-for-python"].breakingChangeSuppression)}). `,
+      `${diagramTsg(3, true)}.`,
+    ),
   },
 ];
 
@@ -1081,25 +1160,20 @@ const rulesPri2LegacySdk: RequiredLabelRule[] = [
     precedence: 2,
     anyPrerequisiteLabels: ["CI-BreakingChange-Go"],
     anyRequiredLabels: ["Approved-SdkBreakingChange-Go"],
-    troubleshootingGuide:
-      `Your PR has breaking changes in the generated SDK for go (label: <code>CI-BreakingChange-Go</code>). ` +
-      `${diagramTsg(3, true)}.`,
-  },
-  {
-    precedence: 2,
-    anyPrerequisiteLabels: ["CI-BreakingChange-Python-Track2"],
-    anyRequiredLabels: ["Approved-SdkBreakingChange-Python"],
-    troubleshootingGuide:
-      `Your PR has breaking changes in the generated SDK for python (label: <code>CI-BreakingChange-Python-Track2</code>). ` +
-      `${diagramTsg(3, true)}.`,
+    name: "Go SDK breaking changes (legacy)",
+    nextStep: "Fix or obtain approval for the Go SDK breaking changes.",
+    troubleshootingGuide: `Your PR has breaking changes in the generated SDK for go (label: ${labelBadge("CI-BreakingChange-Go")}). ${diagramTsg(3, true)}.`,
   },
   {
     precedence: 2,
     anyPrerequisiteLabels: ["CI-BreakingChange-JavaScript"],
     anyRequiredLabels: ["Approved-SdkBreakingChange-JavaScript"],
-    troubleshootingGuide:
-      `Your PR has breaking changes in the generated SDK for javascript (label: <code>CI-BreakingChange-JavaScript</code>). ` +
-      `${diagramTsg(3, true)}.`,
+    name: "JavaScript SDK breaking changes (legacy)",
+    nextStep: "Fix or obtain approval for the JavaScript SDK breaking changes.",
+    troubleshootingGuide: paragraph(
+      `Your PR has breaking changes in the generated SDK for javascript (label:`,
+      `${labelBadge("CI-BreakingChange-JavaScript")}). ${diagramTsg(3, true)}.`,
+    ),
   },
 ];
 
@@ -1108,13 +1182,30 @@ const rulesPri3Blockers: RequiredLabelRule[] = [
     precedence: 3,
     anyPrerequisiteLabels: ["Approved-OkToMerge"],
     anyRequiredLabels: [],
-    troubleshootingGuide:
-      "This PR has been approved with <code>Approved-OkToMerge</code> label.<br/>" +
-      "This label should be used only to approve PRs targeting private specs repo <code>main</code> branch.<br/>" +
-      "PRs targeting this branch cannot be merged, as this branch is a mirror of the public specs repo <code>main</code> branch.<br/>" +
-      "If you want to publish changes in this PR to the public repo, see: " +
-      `${href("aka.ms/azsdk/move-pr", "https://aka.ms/azsdk/move-pr")}.<br/>` +
-      "If this label was applied erroneously to a different branch than private specs repo <code>main</code> branch, remove the label.",
+    name: "Private mirror branch",
+    nextStep: paragraph(
+      "Move this PR to the public repository, or remove an incorrectly applied",
+      `${labelBadge("Approved-OkToMerge")} label.`,
+    ),
+    troubleshootingGuide: renderMarkdownDoc([
+      `This PR has been approved with ${labelBadge("Approved-OkToMerge")} label.`,
+      paragraph(
+        `This label should be used only to approve PRs targeting private specs repo \`main\``,
+        `branch.`,
+      ),
+      paragraph(
+        `PRs targeting this branch cannot be merged, as this branch is a mirror of the public`,
+        `specs repo \`main\` branch.`,
+      ),
+      paragraph(
+        `If you want to publish changes in this PR to the public repo, see:`,
+        `${link("aka.ms/azsdk/move-pr", "https://aka.ms/azsdk/move-pr")}.`,
+      ),
+      paragraph(
+        `If this label was applied erroneously to a different branch than private specs repo`,
+        `\`main\` branch, remove the label.`,
+      ),
+    ]),
   },
 ];
 
@@ -1126,13 +1217,25 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
     anyPrerequisiteLabels: ["package-name-review-required"],
     allPrerequisiteAbsentLabels: ["package-name-approved"],
     anyRequiredLabels: ["package-name-approved"],
-    troubleshootingGuide:
-      "This PR modifies SDK package name configuration in <code>tspconfig.yaml</code> and requires " +
-      "package name approval from language architects before it can be merged.<br/>" +
-      "Check the <b>Package Name Review Required</b> comment on this PR for a detailed status table " +
-      "showing which languages are pending and who can approve.<br/>" +
-      "Architects: apply <code>package-name-&lt;language&gt;-approved</code> labels for each language. " +
-      "For management-plane PRs, <code>package-name-approved-all</code> can be used to approve all languages at once.",
+    name: "SDK package names",
+    awaitingReview: true,
+    nextStep:
+      "Ask language architects to approve the pending package names. See the package-name review comment.",
+    troubleshootingGuide: renderMarkdownDoc([
+      paragraph(
+        `This PR modifies SDK package name configuration in \`tspconfig.yaml\` and requires`,
+        `package name approval from language architects before it can be merged.`,
+      ),
+      paragraph(
+        `Check the **Package Name Review Required** comment on this PR for a detailed status`,
+        `table showing which languages are pending and who can approve.`,
+      ),
+      paragraph(
+        `Architects: apply \`package-name-<language>-approved\` labels for each language. For`,
+        `management-plane PRs, ${labelBadge("package-name-approved-all")} can be used to approve all`,
+        `languages at once.`,
+      ),
+    ]),
   },
 ];
 
@@ -1148,12 +1251,20 @@ const rulesPri1TypeSpecSuppressions = [
     precedence: 1,
     anyPrerequisiteLabels: [TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL],
     anyRequiredLabels: [TYPESPEC_SUPPRESSIONS_APPROVED_LABEL],
-    troubleshootingGuide:
-      "This PR introduced or changed TypeSpec suppressions that require review.<br/>" +
-      "Check the <b>TypeSpec suppressions requiring review</b> comment on this PR for the list of " +
-      "suppressions, their justifications, and source locations.<br/>" +
-      `Reviewers: apply the <code>${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL}</code> label after confirming every ` +
-      "justification is acceptable.",
+    name: "TypeSpec suppressions",
+    awaitingReview: true,
+    nextStep: "Request approval for the suppressions listed in the TypeSpec review comment.",
+    troubleshootingGuide: renderMarkdownDoc([
+      `This PR introduced or changed TypeSpec suppressions that require review.`,
+      paragraph(
+        `Check the **TypeSpec suppressions requiring review** comment on this PR for the list`,
+        `of suppressions, their justifications, and source locations.`,
+      ),
+      paragraph(
+        `Reviewers: apply the ${labelBadge(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)} label after`,
+        `confirming every justification is acceptable.`,
+      ),
+    ]),
   },
 ];
 

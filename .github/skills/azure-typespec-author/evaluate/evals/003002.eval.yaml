@@ -2,9 +2,10 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability # capability | regression
-area: "longrunningoperation"
+tags:
+  area: "longrunningoperation"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -20,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
           dest: employee.tsp
@@ -28,8 +29,8 @@ stimuli:
           dest: main.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/check-node-dependencies.js
-          dest: check-node-dependencies.js
+        - src: ../scripts/check-node-dependencies.ts
+          dest: check-node-dependencies.ts
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -56,15 +57,15 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js node_modules"
+          command: "node check-node-dependencies.ts node_modules"
           expected_exit_code: 0
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js packages"
+          command: "node check-node-dependencies.ts packages"
           expected_exit_code: 0
       - type: "run-command"
         config:
@@ -76,19 +77,16 @@ stimuli:
           path: "employee.tsp"
       - &file_matches_create_operation
         type: "file-matches"
-        name: "file-matches-create-operation"
         config:
           pattern: "createOrUpdate is ArmResourceCreateOrReplaceAsync<"
           path: "employee.tsp"
       - &file_matches_update_operation
         type: "file-matches"
-        name: "file-matches-update-operation"
         config:
           pattern: "update is ArmResourcePatchSync<Employee"
           path: "employee.tsp"
       - &file_matches_delete_operation
         type: "file-matches"
-        name: "file-matches-delete-operation"
         config:
           pattern: "delete is ArmResourceDeleteWithoutOkAsync<Employee>"
           path: "employee.tsp"
@@ -100,7 +98,7 @@ stimuli:
       suite: "lro"
       mode: "no-skill"
     prompt: "Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric:
       - The Employees createOrUpdate operation still uses ArmResourceCreateOrReplaceAsync<Employee> and returns Azure-AsyncOperation without Retry-After in the 201 response.
       - Existing update and delete operations remain unchanged.

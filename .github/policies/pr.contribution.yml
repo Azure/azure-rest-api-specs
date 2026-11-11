@@ -1,6 +1,6 @@
 id: pr.contribution
 name: PR Contribution
-description: Label and greet external pull request contributors
+description: Label external pull request contributors
 owner:
 resource: repository
 disabled: false
@@ -8,7 +8,7 @@ where:
 configuration:
   resourceManagementConfiguration:
     eventResponderTasks:
-      - description: Label and greet external contributors on pull request creation
+      - description: Label external contributors on pull request creation
         if:
           - payloadType: Pull_Request
           - isAction:
@@ -41,8 +41,6 @@ configuration:
         then:
           - addLabel:
               label: customer-reported
-          - addReply:
-              reply: Thank you for your contribution ${issueAuthor}! We will review the pull request and get back to you soon.
 
 onFailure:
 onSuccess:
