@@ -242,6 +242,35 @@ op regenerateKeyCustom(
 @@alternateType(CommitmentPlan.etag, eTag, "csharp");
 @@clientName(Deployment, "CognitiveServicesAccountDeployment", "csharp");
 @@alternateType(Deployment.etag, eTag, "csharp");
+@@alternateType(AdapterDeployment.etag, eTag, "csharp");
+@@alternateType(RaiBinding.etag, eTag, "csharp");
+@@alternateType(RaiRego.etag, eTag, "csharp");
+@@alternateType(ArcDeploymentModel.assetId, url, "csharp");
+@@alternateType(
+  ClusterComputeProperties.subnetArmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeDeploymentInfo.deploymentId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeDeploymentInfo.projectId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.CognitiveServices.Usage.type,
+  armResourceType,
+  "csharp"
+);
+@@clientName(
+  RaiAcsAnnotatorDefinition,
+  "RaiAcsAnnotatorConfiguration",
+  "csharp"
+);
 @@clientName(AgentApplication, "CognitiveServicesAgentApplication", "csharp");
 @@clientName(
   AgenticApplicationProperties,
@@ -471,6 +500,7 @@ op regenerateKeyCustom(
 @@clientName(ConnectionCategory.MariaDb, "MariaDB", "csharp");
 @@clientName(ConnectionCategory.MongoDbAtlas, "MongoDBAtlas", "csharp");
 @@clientName(ConnectionCategory.MongoDbV2, "MongoDBV2", "csharp");
+@@clientName(ConnectionCategory.OpenAPI, "OpenApi", "csharp");
 @@clientName(ConnectionGroup, "CognitiveServicesConnectionGroup", "csharp");
 @@clientName(
   ConnectionManagedIdentity,
