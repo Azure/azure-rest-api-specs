@@ -390,14 +390,8 @@ interface Agents {
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")
   @tag("Agents")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
-  )
   patchAgentObject is FoundryDataPlaneOperation<
     {
-      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.a2a_agents_v1_preview>;
-
       /** The name of the agent to retrieve. */
       @summary("The name of the agent to retrieve")
       @path

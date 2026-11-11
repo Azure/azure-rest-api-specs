@@ -1897,14 +1897,6 @@ paths:
       summary: Update an agent endpoint
       description: Applies a merge-patch update to the specified agent endpoint configuration.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - A2AAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1946,9 +1938,6 @@ paths:
           application/merge-patch+json:
             schema:
               $ref: '#/components/schemas/PatchAgentRequest'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - A2AAgents=V1Preview
   /agents/{agent_name}/code:download:
     get:
       operationId: Agents_downloadAgentCode
@@ -44237,10 +44226,7 @@ components:
           - preview_tool
     A2AProtocolConfiguration:
       type: object
-      description: (Preview) Configuration specific to the A2A protocol.
-      x-ms-foundry-meta:
-        required_previews:
-          - A2AAgents=V1Preview
+      description: Configuration specific to the A2A protocol.
     A2AProtocolVersion:
       anyOf:
         - type: string
@@ -44705,9 +44691,6 @@ components:
             - voice
             - invocations_ws
             - voice_conversation_engine
-      x-ms-foundry-meta:
-        conditional_previews:
-          - A2AAgents=V1Preview
     AgentEvaluatorGenerationJobSource:
       type: object
       required:
@@ -53350,12 +53333,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProtocolVersionRecord'
-          description: The protocols that the agent supports for ingress communication.
+          description: 'The protocols that the agent supports for ingress communication. (Preview) Declaring the `a2a` protocol enables A2A passthrough to the hosted agent and requires `Foundry-Features: A2AAgents=V1Preview` when creating or modifying the hosted agent definition.'
           examples:
             - - protocol: responses
                 version: v0.1.1
               - protocol: a2a
                 version: v0.3.0
+          x-ms-foundry-meta:
+            conditional_previews:
+              - A2AAgents=V1Preview
         code_configuration:
           $ref: '#/components/schemas/CodeConfiguration'
           description: Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.
@@ -91016,10 +91002,7 @@ components:
           description: Configuration for the responses protocol.
         a2a:
           $ref: '#/components/schemas/A2AProtocolConfiguration'
-          description: (Preview) Configuration for the A2A protocol.
-          x-ms-foundry-meta:
-            required_previews:
-              - A2AAgents=V1Preview
+          description: Configuration for the A2A protocol.
         mcp:
           $ref: '#/components/schemas/McpProtocolConfiguration'
           description: Configuration for the MCP protocol.
@@ -91030,9 +91013,6 @@ components:
           $ref: '#/components/schemas/InvocationsWsProtocolConfiguration'
           description: Configuration for the WebSocket-based invocations protocol.
       description: Per-protocol configuration for the agent endpoint.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - A2AAgents=V1Preview
     ProtocolVersionRecord:
       type: object
       required:

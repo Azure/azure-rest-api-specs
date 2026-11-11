@@ -333,18 +333,11 @@ namespace Azure.AI.Projects {
     deleted: "deleted",
   }
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
-  )
   union AgentEndpointProtocol {
     string,
     activity: "activity",
     responses: "responses",
-
-    @doc("(Preview) The A2A protocol. Creating or modifying an agent to use this protocol requires `Foundry-Features: A2AAgents=V1Preview`.")
     a2a: "a2a",
-
     mcp: "mcp",
     invocations: "invocations",
     voice: "voice",
@@ -707,11 +700,17 @@ namespace Azure.AI.Projects {
     @doc("Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.")
     container_configuration?: ContainerConfiguration;
 
-    @doc("The protocols that the agent supports for ingress communication.")
+    @doc("The protocols that the agent supports for ingress communication. (Preview) Declaring the `a2a` protocol enables A2A passthrough to the hosted agent and requires `Foundry-Features: A2AAgents=V1Preview` when creating or modifying the hosted agent definition.")
     @example(#[
       #{ protocol: "responses", version: "v0.1.1" },
       #{ protocol: "a2a", version: "v0.3.0" }
     ])
+    @extension(
+      "x-ms-foundry-meta",
+      #{
+        conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview],
+      }
+    )
     protocol_versions?: ProtocolVersionRecord[];
 
     @doc("Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.")
@@ -895,10 +894,6 @@ namespace Azure.AI.Projects {
   }
 
   @doc("Per-protocol configuration for the agent endpoint.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
-  )
   model ProtocolConfiguration {
     @doc("Configuration for the activity protocol.")
     activity?: ActivityProtocolConfiguration;
@@ -906,11 +901,7 @@ namespace Azure.AI.Projects {
     @doc("Configuration for the responses protocol.")
     responses?: ResponsesProtocolConfiguration;
 
-    @doc("(Preview) Configuration for the A2A protocol.")
-    @extension(
-      "x-ms-foundry-meta",
-      #{ required_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
-    )
+    @doc("Configuration for the A2A protocol.")
     a2a?: A2AProtocolConfiguration;
 
     @doc("Configuration for the MCP protocol.")
@@ -995,11 +986,7 @@ namespace Azure.AI.Projects {
   @doc("Configuration specific to the responses protocol.")
   model ResponsesProtocolConfiguration {}
 
-  @doc("(Preview) Configuration specific to the A2A protocol.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
-  )
+  @doc("Configuration specific to the A2A protocol.")
   model A2AProtocolConfiguration {}
 
   @doc("Configuration specific to the MCP protocol.")
