@@ -31,6 +31,15 @@ openapi-subtype: rpaas
 tag: package-2026-10-01
 ```
 
+### Tag: package-2026-12-30-preview
+
+These settings apply only when `--tag=package-2026-12-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-12-30-preview'
+input-file:
+  - preview/2026-12-30-preview/openapi.json
+```
+
 ### Tag: package-2026-11-30-preview
 
 These settings apply only when `--tag=package-2026-11-30-preview` is specified on the command line.
@@ -147,4 +156,16 @@ directive:
       https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716959,
       https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716968,
       and https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716988.
+```
+
+```yaml $(tag) == 'package-2026-12-30-preview'
+directive:
+  - suppress: GuidUsage
+    from: openapi.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: >-
+      Used only for TargetScope.subscriptionId and TargetEnvironment.targetSubscriptionIds.
+      These are Azure subscription identifiers, which are GUIDs.
+      Carried forward from package-2026-11-30-preview; see
+      https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716799.
 ```
