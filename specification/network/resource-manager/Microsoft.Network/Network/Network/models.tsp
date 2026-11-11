@@ -6551,6 +6551,12 @@ model ApplicationGatewayPropertiesFormat {
   enableFips?: boolean;
 
   /**
+   * Whether Confidential Compute is enabled on the application gateway resource.
+   */
+  @added(Versions.v2026_05_01)
+  enableConfidentialCompute?: boolean;
+
+  /**
    * Autoscale Configuration.
    */
   autoscaleConfiguration?: ApplicationGatewayAutoscaleConfiguration;
@@ -18073,6 +18079,12 @@ model NetworkVirtualAppliancePropertiesFormat {
   nvaSku?: VirtualApplianceSkuProperties;
 
   /**
+   * Configuration of the internal load balancer for a managed Network Virtual Appliance in a virtual hub or virtual network. Not applicable to partner-managed load balancers on SaaS NVAs. When omitted on create or update, Default distribution and a 5-minute idle timeout are used.
+   */
+  @added(Versions.v2026_05_01)
+  loadBalancerConfiguration?: NetworkVirtualApplianceLoadBalancerConfiguration;
+
+  /**
    * Address Prefix.
    */
   @visibility(Lifecycle.Read)
@@ -18213,6 +18225,49 @@ model NetworkVirtualAppliancePropertiesFormat {
   @added(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   migrationStatus?: NetworkVirtualApplianceMigrationStatus;
+}
+
+/**
+ * The load distribution policy for a managed Network Virtual Appliance load-balancing rule.
+ */
+@added(Versions.v2026_05_01)
+union NetworkVirtualApplianceLoadDistribution {
+  string,
+
+  /**
+   * Distributes traffic using a five-tuple hash of source IP, destination IP, source port, destination port, and protocol.
+   */
+  Default: "Default",
+
+  /**
+   * Distributes traffic using a two-tuple hash of source IP and destination IP.
+   */
+  SourceIP: "SourceIP",
+
+  /**
+   * Distributes traffic using a three-tuple hash of source IP, destination IP, and protocol.
+   */
+  SourceIPProtocol: "SourceIPProtocol",
+}
+
+/**
+ * Load balancer settings shared by managed Network Virtual Appliances and their Permanent inbound security rules.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep the shared NVA configuration in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_05_01)
+model NetworkVirtualApplianceLoadBalancerConfiguration {
+  /**
+   * The load distribution policy. Default uses a five-tuple hash of source IP, destination IP, source port, destination port, and protocol. SourceIP uses a two-tuple hash of source IP and destination IP. SourceIPProtocol uses a three-tuple hash of source IP, destination IP, and protocol. When omitted, Default is used.
+   */
+  loadDistribution?: NetworkVirtualApplianceLoadDistribution = NetworkVirtualApplianceLoadDistribution.Default;
+
+  /**
+   * The idle timeout of the load-balancing rule, in minutes. When omitted, the managed NVA platform default of 5 minutes is used. Values outside 4 through 100 are rejected with HTTP 400 InvalidParameter.
+   */
+  @minValue(4)
+  @maxValue(100)
+  idleTimeoutInMinutes?: int32 = 5;
 }
 
 /**
@@ -18826,6 +18881,12 @@ model InboundSecurityRules {
    * Public IP name in case of Permanent Rule type & Interface Name in case of Auto Expire Rule type
    */
   appliesOn?: string[];
+
+  /**
+   * Configuration of the Internet Ingress load-balancing rule for a managed Network Virtual Appliance. Supported only when the enclosing ruleType is Permanent; supplying this configuration for AutoExpire rules is rejected with HTTP 400 Bad Request. When omitted on create or update, Default distribution and a 5-minute idle timeout are used.
+   */
+  @added(Versions.v2026_05_01)
+  loadBalancerConfiguration?: NetworkVirtualApplianceLoadBalancerConfiguration;
 }
 
 /**
