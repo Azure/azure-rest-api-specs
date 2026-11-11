@@ -134,6 +134,7 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Delete Configuration record
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   delete is MaintenanceConfigurationOperationGroupOps.DeleteSync<
     MaintenanceConfiguration,
     Response =
