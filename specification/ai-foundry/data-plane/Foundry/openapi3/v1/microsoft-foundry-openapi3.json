@@ -35416,30 +35416,6 @@
         ],
         "description": "An agent implementing the A2A protocol."
       },
-      "A2AToolBase": {
-        "type": "object",
-        "properties": {
-          "base_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "Base URL of the agent."
-          },
-          "agent_card_path": {
-            "type": "string",
-            "description": "The path to the agent card relative to the `base_url`.\nIf not provided, defaults to  `/.well-known/agent-card.json`"
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
-          },
-          "send_credentials_for_agent_card": {
-            "type": "boolean",
-            "description": "When `true`, Foundry sends its credentials when fetching the remote\nagent's Agent Card. The service defaults to `false` if a value is not\nspecified by the caller (anonymous fetch).",
-            "default": false
-          }
-        },
-        "description": "Common configuration for an agent implementing the A2A protocol."
-      },
       "A2AToolCall": {
         "type": "object",
         "required": [
@@ -35602,22 +35578,6 @@
           }
         },
         "description": "A AI Search Index resource."
-      },
-      "AcceptedAgentContainerOperation": {
-        "type": "object",
-        "required": [
-          "body"
-        ],
-        "properties": {
-          "body": {
-            "$ref": "#/components/schemas/AgentContainerOperationObject"
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ContainerAgents=V1Preview"
-          ]
-        }
       },
       "ActivityProtocolAccessBoundary": {
         "anyOf": [
@@ -35868,189 +35828,6 @@
           ]
         }
       },
-      "AgentContainerObject": {
-        "type": "object",
-        "required": [
-          "object",
-          "status",
-          "created_at",
-          "updated_at"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "agent.container"
-            ],
-            "description": "The object type, which is always 'agent.container'.",
-            "readOnly": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The identifier of the container.",
-            "readOnly": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/AgentContainerStatus",
-            "description": "The status of the container of a specific version of an agent.",
-            "readOnly": true
-          },
-          "max_replicas": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum number of replicas for the container. Default is 1.",
-            "examples": [
-              10
-            ]
-          },
-          "min_replicas": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The minimum number of replicas for the container. Default is 1.",
-            "examples": [
-              1
-            ]
-          },
-          "error_message": {
-            "type": "string",
-            "description": "The error message if the container failed to operate, if any.",
-            "readOnly": true
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The creation time of the container.",
-            "readOnly": true
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The last update time of the container.",
-            "readOnly": true
-          },
-          "container": {
-            "$ref": "#/components/schemas/ContainerDetails",
-            "description": "The detailed container information.",
-            "readOnly": true
-          }
-        },
-        "description": "The details of the container of a specific version of an agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ContainerAgents=V1Preview"
-          ]
-        }
-      },
-      "AgentContainerOperationError": {
-        "type": "object",
-        "required": [
-          "code",
-          "type",
-          "message"
-        ],
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "The error code of the container operation."
-          },
-          "type": {
-            "type": "string",
-            "description": "The error type of the container operation."
-          },
-          "message": {
-            "type": "string",
-            "description": "The error message of the container operation."
-          }
-        },
-        "description": "The error details of the container operation, if any.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ContainerAgents=V1Preview"
-          ]
-        }
-      },
-      "AgentContainerOperationObject": {
-        "type": "object",
-        "required": [
-          "id",
-          "agent_id",
-          "agent_version_id",
-          "status"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The ID of the container operation. This id is a globally unique identifier."
-          },
-          "agent_id": {
-            "type": "string",
-            "description": "The ID of the agent."
-          },
-          "agent_version_id": {
-            "type": "string",
-            "description": "The ID of the agent version."
-          },
-          "status": {
-            "$ref": "#/components/schemas/AgentContainerOperationStatus",
-            "description": "The status of the container operation."
-          },
-          "error": {
-            "$ref": "#/components/schemas/AgentContainerOperationError",
-            "description": "The error of the container operation, if any."
-          },
-          "container": {
-            "$ref": "#/components/schemas/AgentContainerObject",
-            "description": "The container of the specific version of an agent."
-          }
-        },
-        "description": "The container operation for a specific version of an agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ContainerAgents=V1Preview"
-          ]
-        }
-      },
-      "AgentContainerOperationStatus": {
-        "type": "string",
-        "enum": [
-          "NotStarted",
-          "InProgress",
-          "Succeeded",
-          "Failed"
-        ],
-        "description": "Status of the container operation for a specific version of an agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ContainerAgents=V1Preview"
-          ]
-        }
-      },
-      "AgentContainerStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "Starting",
-              "Running",
-              "Stopping",
-              "Stopped",
-              "Failed",
-              "Deleting",
-              "Deleted",
-              "Updating"
-            ]
-          }
-        ],
-        "description": "Status of the container of a specific version of an agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ContainerAgents=V1Preview"
-          ]
-        }
-      },
       "AgentDataGenerationJobSource": {
         "type": "object",
         "required": [
@@ -36224,45 +36001,6 @@
             ]
           }
         ]
-      },
-      "AgentEvaluationSuiteJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "agent_name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "agent"
-            ],
-            "description": "The source type for this source, which is Agent."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch instructions from."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, the latest version is used."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
-          }
-        ],
-        "description": "Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
       },
       "AgentEvaluatorGenerationJobSource": {
         "type": "object",
@@ -37203,35 +36941,6 @@
         },
         "description": "Token usage for an Agent Insights run."
       },
-      "AgentJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "agent_name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "agent"
-            ],
-            "description": "The source type for this source, which is Agent."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch instructions from."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, the latest version is used."
-          }
-        },
-        "description": "Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Add a separate prompt source entry to `sources[]` to provide supplementary text alongside the agent. Reusable shape spread into per-context discriminated subtypes."
-      },
       "AgentKind": {
         "anyOf": [
           {
@@ -37335,16 +37044,6 @@
             "$ref": "#/components/schemas/AgentCard"
           }
         }
-      },
-      "AgentObjectType": {
-        "type": "string",
-        "enum": [
-          "agent",
-          "agent.version",
-          "agent.deleted",
-          "agent.version.deleted",
-          "agent.container"
-        ]
       },
       "AgentOptimizationAgentCandidateOutput": {
         "type": "object",
@@ -39418,432 +39117,6 @@
           }
         }
       },
-      "AgentServerTaskCreateRequest": {
-        "type": "object",
-        "required": [
-          "agent_name",
-          "session_id",
-          "title"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Optional caller-supplied task identifier. If omitted, the provider generates one."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "Agent scope that owns this task."
-          },
-          "session_id": {
-            "type": "string",
-            "description": "Session scope that owns this task."
-          },
-          "title": {
-            "type": "string",
-            "maxLength": 256,
-            "description": "Human-readable title."
-          },
-          "description": {
-            "type": "string",
-            "maxLength": 1024,
-            "description": "Optional human-readable description."
-          },
-          "status": {
-            "$ref": "#/components/schemas/AgentServerTaskStatus",
-            "description": "Initial task status. Defaults to `pending`.",
-            "default": "pending"
-          },
-          "payload": {
-            "description": "Initial arbitrary JSON task payload."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Initial string tags."
-          },
-          "source": {
-            "$ref": "#/components/schemas/AgentServerTaskSource",
-            "description": "Source/provenance metadata that identifies the task producer."
-          },
-          "attachments": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Initial JSON-serializable attachment values keyed by attachment name."
-          }
-        },
-        "description": "Request body for creating an AgentServer durable task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskError": {
-        "type": "object",
-        "required": [
-          "type",
-          "message"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Error type discriminator, such as `timeout` or `retries_exhausted`."
-          },
-          "message": {
-            "type": "string",
-            "description": "Human-readable error message."
-          },
-          "code": {
-            "type": "string",
-            "description": "Optional machine-readable error code. Defaults to `error` when omitted by the caller.",
-            "default": "error"
-          }
-        },
-        "additionalProperties": {},
-        "description": "Structured error persisted on a task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskLease": {
-        "type": "object",
-        "required": [
-          "owner",
-          "instance_id",
-          "generation",
-          "expires_at",
-          "expiry_count"
-        ],
-        "properties": {
-          "owner": {
-            "type": "string",
-            "description": "Stable lease owner, typically scoped to the agent and session."
-          },
-          "instance_id": {
-            "type": "string",
-            "description": "Ephemeral worker instance identifier."
-          },
-          "generation": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Fencing generation. Increments whenever a different instance re-acquires the lease.",
-            "default": 0
-          },
-          "expires_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC instant after which the lease is expired."
-          },
-          "expiry_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of times ownership changed via expiry.",
-            "default": 0
-          }
-        },
-        "description": "Lease details on an AgentServer durable task record.\nThe lease is the optimistic ownership/fencing token for a single worker instance.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskListOrder": {
-        "type": "string",
-        "enum": [
-          "asc",
-          "desc"
-        ]
-      },
-      "AgentServerTaskListResponse": {
-        "type": "object",
-        "required": [
-          "object",
-          "data",
-          "has_more"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "list"
-            ],
-            "description": "Object discriminator. Always `list`."
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentServerTaskRecord"
-            },
-            "description": "Page of matching task records."
-          },
-          "first_id": {
-            "type": "string",
-            "description": "First task id represented in this page."
-          },
-          "has_more": {
-            "type": "boolean",
-            "description": "Whether more records are available."
-          },
-          "last_id": {
-            "type": "string",
-            "description": "Cursor to pass as `after` for the next page when `has_more` is true."
-          }
-        },
-        "description": "Cursor-paged list response for AgentServer durable task records.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskRecord": {
-        "type": "object",
-        "required": [
-          "object",
-          "id",
-          "agent_name",
-          "session_id",
-          "status",
-          "title",
-          "description",
-          "lease",
-          "payload",
-          "tags",
-          "source",
-          "attachments",
-          "error",
-          "suspension_reason",
-          "created_at",
-          "updated_at",
-          "started_at",
-          "completed_at",
-          "etag"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "task"
-            ],
-            "description": "Envelope discriminator. Always `task`."
-          },
-          "id": {
-            "type": "string",
-            "description": "Stable task identifier."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "Agent scope that owns this task."
-          },
-          "session_id": {
-            "type": "string",
-            "description": "Session scope that owns this task."
-          },
-          "status": {
-            "$ref": "#/components/schemas/AgentServerTaskStatus",
-            "description": "Current task status."
-          },
-          "title": {
-            "type": "string",
-            "maxLength": 256,
-            "description": "Human-readable title."
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "maxLength": 1024,
-            "description": "Optional human-readable description."
-          },
-          "lease": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentServerTaskLease"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Active lease details, or null when no lease is held."
-          },
-          "payload": {
-            "anyOf": [
-              {},
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Arbitrary JSON payload used by the agent as task input or mutable task state."
-          },
-          "tags": {
-            "anyOf": [
-              {
-                "type": "object",
-                "additionalProperties": {
-                  "type": "string"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "String tags associated with this task."
-          },
-          "source": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentServerTaskSource"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Source/provenance metadata that identifies the task producer."
-          },
-          "attachments": {
-            "anyOf": [
-              {
-                "type": "object",
-                "additionalProperties": {}
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "JSON-serializable attachment values keyed by attachment name."
-          },
-          "error": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentServerTaskError"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Structured terminal error details."
-          },
-          "suspension_reason": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "maxLength": 256,
-            "description": "Reason the task was suspended."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC creation timestamp."
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC last-update timestamp."
-          },
-          "started_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "ISO 8601 UTC timestamp of the first transition to `in_progress`, or null."
-          },
-          "completed_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "ISO 8601 UTC completion timestamp, or null."
-          },
-          "etag": {
-            "type": "string",
-            "description": "Optimistic-concurrency token."
-          }
-        },
-        "description": "Client-facing representation of an AgentServer durable task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskSource": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Source system or producer type."
-          },
-          "routine_name": {
-            "type": "string",
-            "description": "Routine name that produced the task, when applicable."
-          },
-          "routine_run_id": {
-            "type": "string",
-            "description": "Routine run identifier that produced the task, when available."
-          },
-          "dispatch_id": {
-            "type": "string",
-            "description": "Dispatch identifier associated with the source event."
-          },
-          "action_correlation_id": {
-            "type": "string",
-            "description": "Correlation identifier for the source action that created the task."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC instant when the source object was created."
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC instant when the source object was last updated."
-          }
-        },
-        "additionalProperties": {},
-        "description": "Provenance and recovery-routing metadata for an AgentServer durable task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "pending",
-              "in_progress",
-              "suspended",
-              "completed"
-            ]
-          }
-        ],
-        "description": "Status values persisted on an AgentServer durable task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
       "AgentSessionResource": {
         "type": "object",
         "required": [
@@ -40331,6 +39604,45 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "RedTeams=V1Preview"
+          ]
+        }
+      },
+      "Azure.AI.ProjectsInternal.VoiceAgentClientEventTypeExtension": {
+        "type": "string",
+        "enum": [
+          "session.avatar.connect",
+          "rtc.call.sdp.create"
+        ]
+      },
+      "Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension": {
+        "type": "string",
+        "enum": [
+          "warning",
+          "session.subagent.started",
+          "session.subagent.completed",
+          "session.subagent.aborted",
+          "session.avatar.connecting",
+          "session.avatar.switch_to_speaking",
+          "session.avatar.switch_to_idle",
+          "rtc.call.sdp.created",
+          "rtc.call.error",
+          "response.audio_timestamp.delta",
+          "response.audio_timestamp.done",
+          "response.animation_blendshapes.delta",
+          "response.animation_blendshapes.done",
+          "response.animation_viseme.delta",
+          "response.animation_viseme.done",
+          "response.video.delta",
+          "response.system_tool_arguments.delta",
+          "response.system_tool_arguments.done",
+          "input_collection.status",
+          "session.handoff.started",
+          "session.handoff.completed",
+          "session.handoff.aborted"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
           ]
         }
       },
@@ -41297,63 +40609,6 @@
           }
         },
         "description": "A content filter result indicating severity level and whether content was filtered."
-      },
-      "AzureCreateResponseDetails": {
-        "type": "object",
-        "required": [
-          "agent_reference"
-        ],
-        "properties": {
-          "agent_reference": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentReference"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The agent used for this response"
-          },
-          "model_selection_details": {
-            "$ref": "#/components/schemas/ModelSelectionDetails",
-            "description": "Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router.",
-            "x-ms-foundry-meta": {
-              "conditional_previews": [
-                "ModelRouterControls=V1Preview"
-              ]
-            }
-          }
-        },
-        "description": "Azure specific fields returned in a \"Response\" object"
-      },
-      "AzureCreateResponseOptions": {
-        "type": "object",
-        "properties": {
-          "agent_reference": {
-            "$ref": "#/components/schemas/AgentReference",
-            "description": "The agent to use for generating the response."
-          },
-          "structured_inputs": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
-          },
-          "user_security_context": {
-            "$ref": "#/components/schemas/AzureUserSecurityContext",
-            "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
-          },
-          "routing_config": {
-            "$ref": "#/components/schemas/RoutingConfiguration",
-            "description": "Per-request configuration for Model Router inference calls.\nSupported on Model Router endpoints (deployed or instant if supported).\nReturns a 400 (Bad Request) error when the target is not a Model Router endpoint.",
-            "x-ms-foundry-meta": {
-              "conditional_previews": [
-                "ModelRouterControls=V1Preview"
-              ]
-            }
-          }
-        },
-        "description": "Azure specific fields used in the creation of \"Response\" object (i.e. \"AgentReference\")"
       },
       "AzureFunctionBinding": {
         "type": "object",
@@ -42827,93 +42082,6 @@
         },
         "description": "Container-based deployment configuration for a hosted agent."
       },
-      "ContainerDetails": {
-        "type": "object",
-        "required": [
-          "provisioning_state",
-          "state",
-          "health_state",
-          "replicas",
-          "updated_on"
-        ],
-        "properties": {
-          "provisioning_state": {
-            "type": "string",
-            "description": "The provisioning state of the container."
-          },
-          "provisioning_error": {
-            "type": "string",
-            "description": "The provisioning error of the container, if any."
-          },
-          "state": {
-            "type": "string",
-            "description": "The state of the container."
-          },
-          "health_state": {
-            "type": "string",
-            "description": "The health state of the container."
-          },
-          "replicas": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContainerReplica"
-            },
-            "description": "The list of replicas in the container."
-          },
-          "updated_on": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The last update time of the container."
-          }
-        },
-        "description": "Detailed information about the container.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ContainerAgents=V1Preview"
-          ]
-        }
-      },
-      "ContainerLogKind": {
-        "type": "string",
-        "enum": [
-          "console",
-          "system"
-        ],
-        "description": "The type of logs to stream from a container.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ContainerAgents=V1Preview"
-          ]
-        }
-      },
-      "ContainerReplica": {
-        "type": "object",
-        "required": [
-          "name",
-          "state",
-          "container_state"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the replica."
-          },
-          "state": {
-            "type": "string",
-            "description": "The state of the replica."
-          },
-          "container_state": {
-            "type": "string",
-            "description": "The container state of the replica."
-          }
-        },
-        "description": "Information about a container replica.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ContainerAgents=V1Preview"
-          ]
-        }
-      },
       "ContentFilterResult": {
         "type": "object",
         "required": [
@@ -43526,19 +42694,6 @@
         },
         "description": "The request used to create an evaluation run.\n\nSee [cloud evaluation with the Microsoft Foundry SDK](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation?tabs=python).",
         "title": "CreateEvalRunRequest"
-      },
-      "CreateOrUpdateManagedAgentIdentityBlueprintRequest": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "maxLength": 63,
-            "description": "The unique name that identifies the managed agent identity blueprint.\nName can be used to retrieve/update/delete the managed agent identity blueprint.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
-          }
-        }
       },
       "CreateSkillVersionFromFilesBody": {
         "type": "object",
@@ -44219,45 +43374,6 @@
         ],
         "description": "Dataset inputs supported by scheduled rules. Targets are configured within the selected source."
       },
-      "DatasetEvaluationSuiteJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "dataset"
-            ],
-            "description": "The source type for this source, which is Dataset."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the dataset."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the dataset. If not specified, the latest version is used."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
-          }
-        ],
-        "description": "Dataset source for evaluation suite generation jobs — reference to a dataset.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "DatasetEvaluatorGenerationJobSource": {
         "type": "object",
         "required": [
@@ -44291,35 +43407,6 @@
           }
         ],
         "description": "Dataset source for evaluator generation jobs — reference to a dataset."
-      },
-      "DatasetJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "dataset"
-            ],
-            "description": "The source type for this source, which is Dataset."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the dataset."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the dataset. If not specified, the latest version is used."
-          }
-        },
-        "description": "Dataset source — reference to a dataset. Reusable shape spread into per-context discriminated subtypes."
       },
       "DatasetReference": {
         "type": "object",
@@ -45328,13 +44415,6 @@
         },
         "description": "Grader inspect_ai definition for inspect_ai benchmark evaluators."
       },
-      "EvalObjectType": {
-        "type": "string",
-        "enum": [
-          "eval.deleted"
-        ],
-        "description": "The object type for evaluation deletion responses."
-      },
       "EvalResult": {
         "type": "object",
         "required": [
@@ -45769,66 +44849,6 @@
         ],
         "description": "The evaluation status for an evaluation run output item result."
       },
-      "EvalRunOutputItemSample": {
-        "type": "object",
-        "required": [
-          "input",
-          "output",
-          "finish_reason",
-          "model",
-          "usage",
-          "error",
-          "temperature",
-          "max_completion_tokens",
-          "top_p",
-          "seed"
-        ],
-        "properties": {
-          "input": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvalRunOutputItemSampleInput"
-            }
-          },
-          "output": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvalRunOutputItemSampleOutput"
-            }
-          },
-          "finish_reason": {
-            "type": "string"
-          },
-          "model": {
-            "type": "string"
-          },
-          "usage": {
-            "$ref": "#/components/schemas/OpenAI.EvalRunOutputItemSampleUsage"
-          },
-          "error": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.EvalApiError"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "temperature": {
-            "$ref": "#/components/schemas/OpenAI.numeric"
-          },
-          "max_completion_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
-          },
-          "top_p": {
-            "$ref": "#/components/schemas/OpenAI.numeric"
-          },
-          "seed": {
-            "$ref": "#/components/schemas/OpenAI.integer"
-          }
-        }
-      },
       "EvalRunOutputItemSampleInput": {
         "type": "object",
         "required": [
@@ -46185,28 +45205,6 @@
         },
         "description": "Dataset output configuration for an evaluation data generation job."
       },
-      "EvaluationDataGenerationType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "simple_qna",
-              "traces",
-              "tool_use",
-              "task"
-            ]
-          }
-        ],
-        "description": "The data generation type.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "EvaluationDataset": {
         "type": "object",
         "required": [
@@ -46229,32 +45227,6 @@
           }
         },
         "description": "Identifies a versioned Foundry dataset associated with an evaluation."
-      },
-      "EvaluationDatasetReference": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Dataset name."
-          },
-          "version": {
-            "type": "string",
-            "description": "Dataset version. If not provided, resolves to the latest version."
-          },
-          "schema_file_name": {
-            "type": "string",
-            "description": "Name of the schema file within the dataset's blob folder (e.g., \"a3f2b1c4_schema.json\").\nOptional — if not provided, schema is inferred at runtime from the data.\nOnly applicable for uri_folder datasets."
-          }
-        },
-        "description": "Reference to a dataset by name and version.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
       },
       "EvaluationLevel": {
         "anyOf": [
@@ -46598,448 +45570,6 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "Schedules=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteDataGenerationOptions": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/EvaluationDataGenerationType",
-            "description": "The data generation type. Defaults to 'simple_qna' if not specified."
-          },
-          "max_samples": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 15,
-            "maximum": 1000,
-            "description": "Maximum number of samples to generate. Valid range: 15-1000."
-          }
-        },
-        "description": "Options for dataset generation within an evaluation suite generation job.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteGenerationCategory": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "quality",
-              "safety"
-            ]
-          }
-        ],
-        "description": "The category of evaluator generation.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteGenerationJob": {
-        "type": "object",
-        "required": [
-          "id",
-          "status",
-          "created_at"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Server-assigned unique identifier.",
-            "readOnly": true
-          },
-          "inputs": {
-            "$ref": "#/components/schemas/EvaluationSuiteGenerationJobInputs",
-            "description": "Caller-supplied inputs."
-          },
-          "result": {
-            "$ref": "#/components/schemas/EvaluationSuiteVersion",
-            "description": "Result produced on success.",
-            "readOnly": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/JobStatus",
-            "description": "Current lifecycle status.",
-            "readOnly": true
-          },
-          "error": {
-            "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details — populated only on failure.",
-            "readOnly": true
-          },
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The timestamp when the job was created, represented in Unix time.",
-            "readOnly": true
-          },
-          "finished_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The timestamp when the job finished, represented in Unix time.",
-            "readOnly": true
-          },
-          "usage": {
-            "$ref": "#/components/schemas/EvaluationSuiteGenerationTokenUsage",
-            "description": "Token consumption summary. Populated on terminal states.",
-            "readOnly": true
-          }
-        },
-        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteGenerationJobInputs": {
-        "type": "object",
-        "required": [
-          "evaluation_suite_name",
-          "sources",
-          "generation_model"
-        ],
-        "properties": {
-          "evaluation_suite_name": {
-            "type": "string",
-            "description": "The evaluation suite name to create."
-          },
-          "sources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationSuiteJobSource"
-            },
-            "description": "Source materials for generation — agent context, prompts, traces, or datasets."
-          },
-          "generation_model": {
-            "type": "string",
-            "description": "The LLM model to use for rubric and data generation (e.g., 'gpt-4o')."
-          },
-          "category": {
-            "$ref": "#/components/schemas/EvaluationSuiteGenerationCategory",
-            "description": "Category determines the generation focus. Default: quality.",
-            "default": "quality"
-          },
-          "initialization_parameters": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Optional initialization parameters applied to all generated evaluators.\nFor example, deployment_name for LLM judge model, default threshold."
-          },
-          "data_generation_options": {
-            "$ref": "#/components/schemas/EvaluationSuiteDataGenerationOptions",
-            "description": "Data generation options. Controls how the evaluation dataset is generated.\nIf omitted, defaults are used (simple_qna, 100 max_samples)."
-          },
-          "target": {
-            "$ref": "#/components/schemas/FoundryEvaluationTarget",
-            "description": "Target for the generated suite. Stored on the suite so it can be run\nimmediately after generation completes.\nSupports azure_ai_agent, azure_ai_model, azure_ai_assistant."
-          },
-          "input_messages": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference"
-              }
-            ],
-            "description": "How to send dataset rows to the target.\nIf omitted and target is provided, defaults to a template using item.query."
-          },
-          "evaluation_level": {
-            "$ref": "#/components/schemas/EvaluationLevel",
-            "description": "Evaluation level for the generated suite.\nDefault: turn (single-turn evaluation).\nUse conversation for multi-turn evaluation."
-          }
-        },
-        "description": "Caller-supplied inputs for an evaluation suite generation job.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteGenerationTokenUsage": {
-        "type": "object",
-        "properties": {
-          "input_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Number of input tokens consumed."
-          },
-          "output_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Number of output tokens consumed."
-          },
-          "total_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Total tokens consumed."
-          }
-        },
-        "description": "Token usage summary for an evaluation suite generation job.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteJobSource": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/EvaluationSuiteJobSourceType",
-            "description": "The type of source."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "prompt": "#/components/schemas/PromptEvaluationSuiteJobSource",
-            "agent": "#/components/schemas/AgentEvaluationSuiteJobSource",
-            "traces": "#/components/schemas/TracesEvaluationSuiteJobSource",
-            "dataset": "#/components/schemas/DatasetEvaluationSuiteJobSource"
-          }
-        },
-        "description": "The base source model for evaluation suite generation jobs. Polymorphic over `type`.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteJobSourceType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "prompt",
-              "agent",
-              "traces",
-              "dataset"
-            ]
-          }
-        ],
-        "description": "The supported source types for evaluation suite generation jobs.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteRunRequest": {
-        "type": "object",
-        "properties": {
-          "evaluation_name": {
-            "type": "string",
-            "description": "Name for the evaluation. Default: '{suiteName}-runs'."
-          },
-          "evaluation_suite_version": {
-            "type": "string",
-            "description": "Evaluation suite version to run. Default: latest."
-          },
-          "evaluation_level": {
-            "$ref": "#/components/schemas/EvaluationLevel",
-            "description": "Overrides the suite's default evaluation level. If omitted, uses the level from the suite."
-          }
-        },
-        "description": "Request body for running an evaluation from a suite.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteRunResponse": {
-        "type": "object",
-        "required": [
-          "evaluation_suite_name",
-          "evaluation_suite_version",
-          "results"
-        ],
-        "properties": {
-          "evaluation_suite_name": {
-            "type": "string",
-            "description": "The evaluation suite name used."
-          },
-          "evaluation_suite_version": {
-            "type": "string",
-            "description": "The evaluation suite version resolved."
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationSuiteRunResult"
-            },
-            "description": "The run results. Currently a single-element array; will support multiple runs in the future."
-          }
-        },
-        "description": "Response from running an evaluation suite.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteRunResult": {
-        "type": "object",
-        "required": [
-          "eval_id",
-          "run_id",
-          "status",
-          "created_at"
-        ],
-        "properties": {
-          "eval_id": {
-            "type": "string",
-            "description": "The evaluation ID created."
-          },
-          "run_id": {
-            "type": "string",
-            "description": "The eval run ID created."
-          },
-          "status": {
-            "$ref": "#/components/schemas/JobStatus",
-            "description": "Status of the run."
-          },
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "Timestamp when the run was created."
-          }
-        },
-        "description": "Result of a single evaluation run within a suite execution.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteSubtype": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "default",
-              "benchmark"
-            ]
-          }
-        ],
-        "description": "The subtype of an evaluation suite.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationSuiteVersion": {
-        "type": "object",
-        "required": [
-          "testing_criteria",
-          "name",
-          "version"
-        ],
-        "properties": {
-          "display_name": {
-            "type": "string",
-            "description": "Human-readable display name.\nDoes not need to be unique. Shown in Foundry portal list views and eval reports."
-          },
-          "subtype": {
-            "$ref": "#/components/schemas/EvaluationSuiteSubtype",
-            "description": "Subtype of the evaluation suite."
-          },
-          "dataset": {
-            "$ref": "#/components/schemas/EvaluationDatasetReference",
-            "description": "Dataset reference for evaluation.\nOptional — omit for evaluator-only suites where data comes from\nlive production traces or is provided at run time.\nThe referenced dataset must exist in the project's dataset registry."
-          },
-          "testing_criteria": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/OpenAI.EvalGraderLabelModel"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.EvalGraderStringCheck"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.EvalGraderTextSimilarity"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.EvalGraderPython"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.EvalGraderScoreModel"
-                },
-                {
-                  "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
-                }
-              ]
-            },
-            "minItems": 1,
-            "description": "Testing criteria — the evaluator configurations for this suite.\nSupports all grader types: azure_ai_evaluator, string_check, label_model,\nscore_model, text_similarity, python, etc.\nAt least one entry is required."
-          },
-          "target": {
-            "$ref": "#/components/schemas/FoundryEvaluationTarget",
-            "description": "Target for this evaluation suite. Uses the existing FoundryEvaluationTarget discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
-          },
-          "input_messages": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference"
-              }
-            ],
-            "description": "How to send dataset rows to the target (agent or model).\nSupports template type (prompt with column placeholders) and\nitem_reference type (column containing pre-built messages)."
-          },
-          "evaluation_level": {
-            "$ref": "#/components/schemas/EvaluationLevel",
-            "description": "Default evaluation level for this suite. Can be overridden at run time."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the resource.",
-            "readOnly": true
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the resource.",
-            "readOnly": true
-          },
-          "description": {
-            "type": "string",
-            "description": "The asset description text."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Tag dictionary. Tags can be added, removed, and updated."
-          }
-        },
-        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
           ]
         }
       },
@@ -48790,22 +47320,6 @@
         },
         "description": "Base class for targets with discriminator support."
       },
-      "FoundryFeaturesOptInKeys": {
-        "type": "string",
-        "enum": [
-          "Evaluations=V1Preview",
-          "Schedules=V1Preview",
-          "RedTeams=V1Preview",
-          "Insights=V1Preview",
-          "MemoryStores=V1Preview",
-          "Routines=V2Preview",
-          "Skills=V1Preview",
-          "DataGenerationJobs=V1Preview",
-          "Models=V1Preview",
-          "ModelRouterControls=V1Preview",
-          "FineTuningSessions=V1Preview"
-        ]
-      },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [
           {
@@ -49205,48 +47719,6 @@
           ]
         }
       },
-      "GraderAzureAIEvaluator": {
-        "type": "object",
-        "required": [
-          "type",
-          "name",
-          "evaluator_name"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_ai_evaluator"
-            ],
-            "description": "The object type, which is always `azure_ai_evaluator`."
-          },
-          "name": {
-            "type": "string",
-            "description": "A caller-defined name that identifies this testing criterion in the\nevaluation configuration and run results."
-          },
-          "evaluator_name": {
-            "type": "string",
-            "description": "The registered name of the evaluator implementation to run. Built-in\nevaluators use names in the `builtin.<evaluator>` format. Custom evaluators\nuse the registered name assigned to the evaluator.\n\nAvailable evaluator families include [general-purpose evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/general-purpose-evaluators),\n[risk and safety evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/risk-safety-evaluators),\nand [agent evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/agent-evaluators)."
-          },
-          "evaluator_version": {
-            "type": "string",
-            "description": "The version of the evaluator. Latest version if not specified."
-          },
-          "initialization_parameters": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Evaluator-specific configuration applied when the evaluator is initialized.\nAccepted parameters and defaults depend on the selected evaluator and\nversion. AI-assisted evaluators require a judge model setting, such as\n`model` or `deployment_name`, that identifies a chat-completion deployment\nin the current project. The judge model must support structured outputs.\nEvaluators without required initialization parameters can omit this\nproperty and use their documented defaults."
-          },
-          "data_mapping": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Maps the evaluator's input names to fields in the evaluation data. Use\n`{{item.<field>}}` to reference a field from a dataset item and\n`{{sample.<field>}}` to reference output generated by a model or agent\ntarget. Field names are case-sensitive.\n\nThis property can be omitted when the evaluator uses standard dataset\ncolumns with matching names. Provide a mapping when dataset columns use\ndifferent names, when a target generates the response at run time, or when\nthe evaluator consumes structured target output."
-          }
-        },
-        "description": "An Azure AI evaluator used as a grader.\n\nSee the [built-in evaluators reference](https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators)."
-      },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
         "required": [
@@ -49540,20 +48012,6 @@
           }
         },
         "description": "Index resource Definition"
-      },
-      "IndexResource": {
-        "type": "object",
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "An index connection ID in an IndexResource attached to this agent."
-          },
-          "index_name": {
-            "type": "string",
-            "description": "The name of an index in an IndexResource attached to this agent."
-          }
-        },
-        "description": "A Index resource."
       },
       "IndexType": {
         "anyOf": [
@@ -50694,18 +49152,6 @@
         ],
         "description": "An MCP tool stored in a toolbox."
       },
-      "ManagedAgentIdentityBlueprint": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      },
       "ManagedAgentIdentityBlueprintReference": {
         "type": "object",
         "required": [
@@ -51298,20 +49744,6 @@
           }
         },
         "description": "A memory store that can store and retrieve user memories.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "MemoryStores=V1Preview"
-          ]
-        }
-      },
-      "MemoryStoreObjectType": {
-        "type": "string",
-        "enum": [
-          "memory_store",
-          "memory_store.deleted",
-          "memory_store.scope.deleted",
-          "memory_store.item.deleted"
-        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "MemoryStores=V1Preview"
@@ -84007,7 +82439,7 @@
             ]
           },
           {
-            "$ref": "#/components/schemas/VoiceAgentClientEventTypeExtension"
+            "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentClientEventTypeExtension"
           }
         ]
       },
@@ -88192,7 +86624,7 @@
             ]
           },
           {
-            "$ref": "#/components/schemas/VoiceAgentServerEventTypeExtension"
+            "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension"
           }
         ]
       },
@@ -100616,20 +99048,6 @@
           }
         }
       },
-      "PendingUploadCredentialType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "SAS"
-            ]
-          }
-        ],
-        "description": "The type of credential used to access the storage account."
-      },
       "PendingUploadRequest": {
         "type": "object",
         "required": [
@@ -100683,22 +99101,6 @@
           }
         },
         "description": "Represents the response for a pending upload request"
-      },
-      "PendingUploadType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "None",
-              "BlobReference",
-              "TemporaryBlobReference"
-            ]
-          }
-        ],
-        "description": "The type of pending upload."
       },
       "PerRecipientSchedule": {
         "type": "object",
@@ -100975,41 +99377,6 @@
         ],
         "description": "Prompt source for data generation jobs — inline text provided by the user."
       },
-      "PromptEvaluationSuiteJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "prompt"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "prompt"
-            ],
-            "description": "The source type for this source, which is Prompt."
-          },
-          "prompt": {
-            "type": "string",
-            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
-          }
-        ],
-        "description": "Prompt source for evaluation suite generation jobs — inline text provided by the user.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "PromptEvaluatorGenerationJobSource": {
         "type": "object",
         "required": [
@@ -101039,31 +99406,6 @@
           }
         ],
         "description": "Prompt source for evaluator generation jobs — inline text provided by the user."
-      },
-      "PromptJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "prompt"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "prompt"
-            ],
-            "description": "The source type for this source, which is Prompt."
-          },
-          "prompt": {
-            "type": "string",
-            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
-          }
-        },
-        "description": "Prompt source — inline text provided by the user. Reusable shape spread into per-context discriminated subtypes."
       },
       "PromptOptimizationConfiguration": {
         "type": "object",
@@ -101713,12 +100055,6 @@
             "preview_tool"
           ]
         }
-      },
-      "ResponseObjectType": {
-        "type": "string",
-        "enum": [
-          "response"
-        ]
       },
       "ResponseRetrievalItemGenerationParams": {
         "type": "object",
@@ -103797,49 +102133,6 @@
         },
         "description": "Request body for POST /fine_tuning/sessions/{sessionId}/sample."
       },
-      "SessionFineTuning.FineTuningSampledSequence": {
-        "type": "object",
-        "required": [
-          "tokens"
-        ],
-        "properties": {
-          "tokens": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Generated token identifiers, in sequence order."
-          },
-          "text": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Decoded text of the generated sequence, when available."
-          },
-          "logprobs": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "number",
-                  "format": "double"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Log-probabilities of the generated tokens, when available."
-          }
-        },
-        "description": "A single sampled sequence within a sampling result payload."
-      },
       "SessionFineTuning.FineTuningSamplingParams": {
         "type": "object",
         "required": [
@@ -105300,20 +103593,6 @@
           ]
         }
       },
-      "SyntheticDataGenItemGenerationParamsType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "synthetic_data_gen"
-            ]
-          }
-        ],
-        "description": "The types of parameters for synthetic data generation item generation."
-      },
       "SyntheticDataGenerationConfiguration": {
         "type": "object",
         "required": [
@@ -106221,69 +104500,6 @@
           }
         },
         "description": "A cancellation request recorded for an outbound call job."
-      },
-      "TelephonyCallJobConfiguration": {
-        "type": "object",
-        "required": [
-          "destination",
-          "connection_name",
-          "source"
-        ],
-        "properties": {
-          "destination": {
-            "$ref": "#/components/schemas/TelephonyAddress",
-            "description": "The phone destination to call."
-          },
-          "connection_name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee."
-          },
-          "source": {
-            "$ref": "#/components/schemas/TelephonyAddress",
-            "description": "Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI."
-          },
-          "purpose": {
-            "type": "string",
-            "minLength": 1,
-            "description": "An optional customer-declared purpose for placing the call."
-          },
-          "structured_inputs": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Agent/greeting inputs, including nested JSON and null. Agent schemas, required fields and defaults apply."
-          },
-          "schedule": {
-            "$ref": "#/components/schemas/TelephonyCallJobSchedule",
-            "description": "The optional execution window."
-          }
-        },
-        "description": "Customer-controlled configuration shared by direct and campaign-created call jobs.",
-        "examples": [
-          {
-            "connection_name": "telephony-acs",
-            "source": {
-              "type": "teams",
-              "value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-            },
-            "destination": {
-              "type": "phone_number",
-              "value": "+14255550123"
-            }
-          },
-          {
-            "connection_name": "telephony-twilio",
-            "source": {
-              "type": "phone_number",
-              "value": "+14255550100"
-            },
-            "destination": {
-              "type": "phone_number",
-              "value": "+14255550123"
-            }
-          }
-        ]
       },
       "TelephonyCallJobCreate": {
         "type": "object",
@@ -107612,22 +105828,6 @@
           ]
         }
       },
-      "ToolArgumentBinding": {
-        "type": "object",
-        "required": [
-          "argument_name"
-        ],
-        "properties": {
-          "tool_name": {
-            "type": "string",
-            "description": "The name of the tool to participate in the argument binding. If not provided, then all tools with matching arguments will participate in binding."
-          },
-          "argument_name": {
-            "type": "string",
-            "description": "The name of the argument within the tool."
-          }
-        }
-      },
       "ToolCallOutputContent": {
         "anyOf": [
           {
@@ -107695,20 +105895,6 @@
           }
         },
         "description": "A project connection resource."
-      },
-      "ToolProjectConnectionList": {
-        "type": "object",
-        "properties": {
-          "project_connections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ToolProjectConnection"
-            },
-            "maxItems": 1,
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
-          }
-        },
-        "description": "A set of project connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools."
       },
       "ToolSearchToolboxTool": {
         "type": "object",
@@ -108445,57 +106631,6 @@
         ],
         "description": "A data source for evaluation runs over agent traces stored in Application Insights.\n\nSee [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python)."
       },
-      "TracesEvaluationSuiteJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "start_time"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "traces"
-            ],
-            "description": "The source type for this source, which is Traces."
-          },
-          "agent_id": {
-            "type": "string",
-            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
-          },
-          "start_time": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
-          },
-          "end_time": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
-          }
-        ],
-        "description": "Traces source for evaluation suite generation jobs — conversation traces from Application Insights.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "TracesEvaluatorGenerationJobSource": {
         "type": "object",
         "required": [
@@ -108548,47 +106683,6 @@
           }
         ],
         "description": "Traces source for evaluator generation jobs — conversation traces from Application Insights."
-      },
-      "TracesJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "start_time"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "traces"
-            ],
-            "description": "The source type for this source, which is Traces."
-          },
-          "agent_id": {
-            "type": "string",
-            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
-          },
-          "start_time": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
-          },
-          "end_time": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
-          }
-        },
-        "description": "Traces source — conversation traces from Application Insights. Reusable shape spread into per-context discriminated subtypes."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
@@ -110304,15 +108398,8 @@
         },
         "description": "The `session.update` client event."
       },
-      "VoiceAgentClientEventTypeExtension": {
-        "type": "string",
-        "enum": [
-          "session.avatar.connect",
-          "rtc.call.sdp.create"
-        ]
-      },
       "VoiceAgentClientEventTypeExtensions": {
-        "$ref": "#/components/schemas/VoiceAgentClientEventTypeExtension",
+        "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentClientEventTypeExtension",
         "description": "Voice-specific members added to the OpenAI client-event discriminator."
       },
       "VoiceAgentCollectDtmfStartArguments": {
@@ -114164,34 +112251,6 @@
         ],
         "description": "The `session.subagent.completed` server event."
       },
-      "VoiceAgentServerEventSessionSubagentLifecycle": {
-        "type": "object",
-        "required": [
-          "event_id",
-          "consultation_id",
-          "call_id",
-          "subagent_name"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "description": "The server-generated event identifier."
-          },
-          "consultation_id": {
-            "type": "string",
-            "description": "The identifier of the subagent consultation."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The identifier of the function call that initiated the consultation."
-          },
-          "subagent_name": {
-            "type": "string",
-            "description": "The name of the consulted subagent."
-          }
-        },
-        "description": "Fields shared by server events that report the lifecycle of a subagent consultation."
-      },
       "VoiceAgentServerEventSessionSubagentStarted": {
         "type": "object",
         "required": [
@@ -114346,40 +112405,8 @@
         ],
         "description": "The completed intent arguments for a system tool, not provider success or a request for a customer function result."
       },
-      "VoiceAgentServerEventTypeExtension": {
-        "type": "string",
-        "enum": [
-          "warning",
-          "session.subagent.started",
-          "session.subagent.completed",
-          "session.subagent.aborted",
-          "session.avatar.connecting",
-          "session.avatar.switch_to_speaking",
-          "session.avatar.switch_to_idle",
-          "rtc.call.sdp.created",
-          "rtc.call.error",
-          "response.audio_timestamp.delta",
-          "response.audio_timestamp.done",
-          "response.animation_blendshapes.delta",
-          "response.animation_blendshapes.done",
-          "response.animation_viseme.delta",
-          "response.animation_viseme.done",
-          "response.video.delta",
-          "response.system_tool_arguments.delta",
-          "response.system_tool_arguments.done",
-          "input_collection.status",
-          "session.handoff.started",
-          "session.handoff.completed",
-          "session.handoff.aborted"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAgentServerEventTypeExtensions": {
-        "$ref": "#/components/schemas/VoiceAgentServerEventTypeExtension",
+        "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension",
         "description": "Voice-specific members added to the OpenAI server-event discriminator."
       },
       "VoiceAgentServerEventWarning": {
@@ -115678,17 +113705,6 @@
         },
         "description": "Voice output configuration. Inline subagents use it directly as their voice override, and the session-level\noutput audio configuration extends it.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`."
       },
-      "VoiceAgentWebSocketMessage": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEvent"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentServerEvent"
-          }
-        ],
-        "description": "A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are base64-encoded in JSON event fields."
-      },
       "VoiceAgentWebSocketSubprotocol": {
         "type": "string",
         "enum": [
@@ -116581,82 +114597,9 @@
           ]
         }
       },
-      "_AgentIncludable": {
-        "type": "string",
-        "enum": [
-          "memory_search_call.results"
-        ]
-      },
-      "_AgentItemType": {
-        "type": "string",
-        "enum": [
-          "structured_outputs",
-          "oauth_consent_request",
-          "memory_search_call",
-          "memory_command_preview_call",
-          "memory_command_preview_call_output",
-          "workflow_action",
-          "a2a_preview_call",
-          "a2a_preview_call_output",
-          "bing_grounding_call",
-          "bing_grounding_call_output",
-          "sharepoint_grounding_preview_call",
-          "sharepoint_grounding_preview_call_output",
-          "azure_ai_search_call",
-          "azure_ai_search_call_output",
-          "bing_custom_search_preview_call",
-          "bing_custom_search_preview_call_output",
-          "openapi_call",
-          "openapi_call_output",
-          "browser_automation_preview_call",
-          "browser_automation_preview_call_output",
-          "fabric_dataagent_preview_call",
-          "fabric_dataagent_preview_call_output",
-          "azure_function_call",
-          "azure_function_call_output"
-        ]
-      },
-      "_AgentToolType": {
-        "type": "string",
-        "enum": [
-          "a2a",
-          "azure_ai_search",
-          "azure_function",
-          "bing_grounding",
-          "browser_automation",
-          "capture_structured_outputs",
-          "openapi"
-        ]
-      },
-      "_MicrosoftCopilotAgentToolType": {
-        "type": "string",
-        "enum": [
-          "microsoft_copilot_toolset_preview"
-        ]
-      },
-      "_PreviewAgentToolType": {
-        "type": "string",
-        "enum": [
-          "a2a_preview",
-          "bing_custom_search_preview",
-          "browser_automation_preview",
-          "fabric_dataagent_preview",
-          "sharepoint_grounding_preview",
-          "memory_search_preview",
-          "work_iq_preview",
-          "fabric_iq_preview",
-          "toolbox_search_preview",
-          "web_iq_preview",
-          "github_copilot_toolset_preview"
-        ]
-      },
       "integer": {
         "type": "integer",
         "format": "int64"
-      },
-      "numeric": {
-        "type": "number",
-        "format": "double"
       }
     },
     "securitySchemes": {

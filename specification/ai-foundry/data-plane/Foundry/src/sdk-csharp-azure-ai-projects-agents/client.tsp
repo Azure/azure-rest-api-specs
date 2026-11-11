@@ -38,6 +38,11 @@ namespace Azure.AI.Projects {
   // Fix the xref.
   // --------------------------------------------------------------------------------
   @@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
+  @@clientNamespace(
+    Azure.AI.ProjectsInternal,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
 
   // --------------------------------------------------------------------------------
   // Root client

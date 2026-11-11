@@ -40031,30 +40031,6 @@
         ],
         "description": "An agent implementing the A2A protocol."
       },
-      "A2AToolBase": {
-        "type": "object",
-        "properties": {
-          "base_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "Base URL of the agent."
-          },
-          "agent_card_path": {
-            "type": "string",
-            "description": "The path to the agent card relative to the `base_url`.\nIf not provided, defaults to  `/.well-known/agent-card.json`"
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
-          },
-          "send_credentials_for_agent_card": {
-            "type": "boolean",
-            "description": "When `true`, Foundry sends its credentials when fetching the remote\nagent's Agent Card. The service defaults to `false` if a value is not\nspecified by the caller (anonymous fetch).",
-            "default": false
-          }
-        },
-        "description": "Common configuration for an agent implementing the A2A protocol."
-      },
       "A2AToolCall": {
         "type": "object",
         "required": [
@@ -42003,35 +41979,6 @@
         },
         "description": "Token usage for an Agent Insights run."
       },
-      "AgentJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "agent_name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "agent"
-            ],
-            "description": "The source type for this source, which is Agent."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch instructions from."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, the latest version is used."
-          }
-        },
-        "description": "Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Add a separate prompt source entry to `sources[]` to provide supplementary text alongside the agent. Reusable shape spread into per-context discriminated subtypes."
-      },
       "AgentKind": {
         "anyOf": [
           {
@@ -42136,16 +42083,6 @@
             "$ref": "#/components/schemas/AgentCard"
           }
         }
-      },
-      "AgentObjectType": {
-        "type": "string",
-        "enum": [
-          "agent",
-          "agent.version",
-          "agent.deleted",
-          "agent.version.deleted",
-          "agent.container"
-        ]
       },
       "AgentOptimizationAgentCandidateOutput": {
         "type": "object",
@@ -45165,6 +45102,45 @@
           ]
         }
       },
+      "Azure.AI.ProjectsInternal.VoiceAgentClientEventTypeExtension": {
+        "type": "string",
+        "enum": [
+          "session.avatar.connect",
+          "rtc.call.sdp.create"
+        ]
+      },
+      "Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension": {
+        "type": "string",
+        "enum": [
+          "warning",
+          "session.subagent.started",
+          "session.subagent.completed",
+          "session.subagent.aborted",
+          "session.avatar.connecting",
+          "session.avatar.switch_to_speaking",
+          "session.avatar.switch_to_idle",
+          "rtc.call.sdp.created",
+          "rtc.call.error",
+          "response.audio_timestamp.delta",
+          "response.audio_timestamp.done",
+          "response.animation_blendshapes.delta",
+          "response.animation_blendshapes.done",
+          "response.animation_viseme.delta",
+          "response.animation_viseme.done",
+          "response.video.delta",
+          "response.system_tool_arguments.delta",
+          "response.system_tool_arguments.done",
+          "input_collection.status",
+          "session.handoff.started",
+          "session.handoff.completed",
+          "session.handoff.aborted"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "Azure.Core.Foundations.Error": {
         "type": "object",
         "required": [
@@ -46128,63 +46104,6 @@
           }
         },
         "description": "A content filter result indicating severity level and whether content was filtered."
-      },
-      "AzureCreateResponseDetails": {
-        "type": "object",
-        "required": [
-          "agent_reference"
-        ],
-        "properties": {
-          "agent_reference": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentReference"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The agent used for this response"
-          },
-          "model_selection_details": {
-            "$ref": "#/components/schemas/ModelSelectionDetails",
-            "description": "Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router.",
-            "x-ms-foundry-meta": {
-              "conditional_previews": [
-                "ModelRouterControls=V1Preview"
-              ]
-            }
-          }
-        },
-        "description": "Azure specific fields returned in a \"Response\" object"
-      },
-      "AzureCreateResponseOptions": {
-        "type": "object",
-        "properties": {
-          "agent_reference": {
-            "$ref": "#/components/schemas/AgentReference",
-            "description": "The agent to use for generating the response."
-          },
-          "structured_inputs": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
-          },
-          "user_security_context": {
-            "$ref": "#/components/schemas/AzureUserSecurityContext",
-            "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
-          },
-          "routing_config": {
-            "$ref": "#/components/schemas/RoutingConfiguration",
-            "description": "Per-request configuration for Model Router inference calls.\nSupported on Model Router endpoints (deployed or instant if supported).\nReturns a 400 (Bad Request) error when the target is not a Model Router endpoint.",
-            "x-ms-foundry-meta": {
-              "conditional_previews": [
-                "ModelRouterControls=V1Preview"
-              ]
-            }
-          }
-        },
-        "description": "Azure specific fields used in the creation of \"Response\" object (i.e. \"AgentReference\")"
       },
       "AzureFunctionBinding": {
         "type": "object",
@@ -49196,35 +49115,6 @@
         ],
         "description": "Dataset source for evaluator generation jobs — reference to a dataset."
       },
-      "DatasetJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "dataset"
-            ],
-            "description": "The source type for this source, which is Dataset."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the dataset."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the dataset. If not specified, the latest version is used."
-          }
-        },
-        "description": "Dataset source — reference to a dataset. Reusable shape spread into per-context discriminated subtypes."
-      },
       "DatasetReference": {
         "type": "object",
         "required": [
@@ -50258,13 +50148,6 @@
         },
         "description": "Grader inspect_ai definition for inspect_ai benchmark evaluators."
       },
-      "EvalObjectType": {
-        "type": "string",
-        "enum": [
-          "eval.deleted"
-        ],
-        "description": "The object type for evaluation deletion responses."
-      },
       "EvalResult": {
         "type": "object",
         "required": [
@@ -50698,66 +50581,6 @@
           }
         ],
         "description": "The evaluation status for an evaluation run output item result."
-      },
-      "EvalRunOutputItemSample": {
-        "type": "object",
-        "required": [
-          "input",
-          "output",
-          "finish_reason",
-          "model",
-          "usage",
-          "error",
-          "temperature",
-          "max_completion_tokens",
-          "top_p",
-          "seed"
-        ],
-        "properties": {
-          "input": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvalRunOutputItemSampleInput"
-            }
-          },
-          "output": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvalRunOutputItemSampleOutput"
-            }
-          },
-          "finish_reason": {
-            "type": "string"
-          },
-          "model": {
-            "type": "string"
-          },
-          "usage": {
-            "$ref": "#/components/schemas/OpenAI.EvalRunOutputItemSampleUsage"
-          },
-          "error": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.EvalApiError"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "temperature": {
-            "$ref": "#/components/schemas/OpenAI.numeric"
-          },
-          "max_completion_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
-          },
-          "top_p": {
-            "$ref": "#/components/schemas/OpenAI.numeric"
-          },
-          "seed": {
-            "$ref": "#/components/schemas/OpenAI.integer"
-          }
-        }
       },
       "EvalRunOutputItemSampleInput": {
         "type": "object",
@@ -54008,23 +53831,6 @@
         },
         "description": "Base class for targets with discriminator support."
       },
-      "FoundryFeaturesOptInKeys": {
-        "type": "string",
-        "enum": [
-          "Evaluations=V1Preview",
-          "Schedules=V1Preview",
-          "RedTeams=V1Preview",
-          "Insights=V1Preview",
-          "MemoryStores=V1Preview",
-          "Routines=V2Preview",
-          "Skills=V1Preview",
-          "DataGenerationJobs=V1Preview",
-          "Models=V1Preview",
-          "ModelRouterControls=V1Preview",
-          "FineTuningSessions=V1Preview",
-          "SessionCompute=V1Preview"
-        ]
-      },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [
           {
@@ -54424,48 +54230,6 @@
           ]
         }
       },
-      "GraderAzureAIEvaluator": {
-        "type": "object",
-        "required": [
-          "type",
-          "name",
-          "evaluator_name"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_ai_evaluator"
-            ],
-            "description": "The object type, which is always `azure_ai_evaluator`."
-          },
-          "name": {
-            "type": "string",
-            "description": "A caller-defined name that identifies this testing criterion in the\nevaluation configuration and run results."
-          },
-          "evaluator_name": {
-            "type": "string",
-            "description": "The registered name of the evaluator implementation to run. Built-in\nevaluators use names in the `builtin.<evaluator>` format. Custom evaluators\nuse the registered name assigned to the evaluator.\n\nAvailable evaluator families include [general-purpose evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/general-purpose-evaluators),\n[risk and safety evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/risk-safety-evaluators),\nand [agent evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/agent-evaluators)."
-          },
-          "evaluator_version": {
-            "type": "string",
-            "description": "The version of the evaluator. Latest version if not specified."
-          },
-          "initialization_parameters": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Evaluator-specific configuration applied when the evaluator is initialized.\nAccepted parameters and defaults depend on the selected evaluator and\nversion. AI-assisted evaluators require a judge model setting, such as\n`model` or `deployment_name`, that identifies a chat-completion deployment\nin the current project. The judge model must support structured outputs.\nEvaluators without required initialization parameters can omit this\nproperty and use their documented defaults."
-          },
-          "data_mapping": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Maps the evaluator's input names to fields in the evaluation data. Use\n`{{item.<field>}}` to reference a field from a dataset item and\n`{{sample.<field>}}` to reference output generated by a model or agent\ntarget. Field names are case-sensitive.\n\nThis property can be omitted when the evaluator uses standard dataset\ncolumns with matching names. Provide a mapping when dataset columns use\ndifferent names, when a target generates the response at run time, or when\nthe evaluator consumes structured target output."
-          }
-        },
-        "description": "An Azure AI evaluator used as a grader.\n\nSee the [built-in evaluators reference](https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators)."
-      },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
         "required": [
@@ -54788,20 +54552,6 @@
           }
         },
         "description": "Index resource Definition"
-      },
-      "IndexResource": {
-        "type": "object",
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "An index connection ID in an IndexResource attached to this agent."
-          },
-          "index_name": {
-            "type": "string",
-            "description": "The name of an index in an IndexResource attached to this agent."
-          }
-        },
-        "description": "A Index resource."
       },
       "IndexType": {
         "anyOf": [
@@ -56631,20 +56381,6 @@
           }
         },
         "description": "A memory store that can store and retrieve user memories.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "MemoryStores=V1Preview"
-          ]
-        }
-      },
-      "MemoryStoreObjectType": {
-        "type": "string",
-        "enum": [
-          "memory_store",
-          "memory_store.deleted",
-          "memory_store.scope.deleted",
-          "memory_store.item.deleted"
-        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "MemoryStores=V1Preview"
@@ -89386,7 +89122,7 @@
             ]
           },
           {
-            "$ref": "#/components/schemas/VoiceAgentClientEventTypeExtension"
+            "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentClientEventTypeExtension"
           }
         ]
       },
@@ -93571,7 +93307,7 @@
             ]
           },
           {
-            "$ref": "#/components/schemas/VoiceAgentServerEventTypeExtension"
+            "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension"
           }
         ]
       },
@@ -106068,20 +105804,6 @@
           }
         }
       },
-      "PendingUploadCredentialType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "SAS"
-            ]
-          }
-        ],
-        "description": "The type of credential used to access the storage account."
-      },
       "PendingUploadRequest": {
         "type": "object",
         "required": [
@@ -106135,22 +105857,6 @@
           }
         },
         "description": "Represents the response for a pending upload request"
-      },
-      "PendingUploadType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "None",
-              "BlobReference",
-              "TemporaryBlobReference"
-            ]
-          }
-        ],
-        "description": "The type of pending upload."
       },
       "PerRecipientSchedule": {
         "type": "object",
@@ -106491,31 +106197,6 @@
           }
         ],
         "description": "Prompt source for evaluator generation jobs — inline text provided by the user."
-      },
-      "PromptJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "prompt"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "prompt"
-            ],
-            "description": "The source type for this source, which is Prompt."
-          },
-          "prompt": {
-            "type": "string",
-            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
-          }
-        },
-        "description": "Prompt source — inline text provided by the user. Reusable shape spread into per-context discriminated subtypes."
       },
       "PromptOptimizationConfiguration": {
         "type": "object",
@@ -107165,12 +106846,6 @@
             "preview_tool"
           ]
         }
-      },
-      "ResponseObjectType": {
-        "type": "string",
-        "enum": [
-          "response"
-        ]
       },
       "ResponseRetrievalItemGenerationParams": {
         "type": "object",
@@ -109810,49 +109485,6 @@
         },
         "description": "Request body for POST /fine_tuning/sessions/{sessionId}/sample."
       },
-      "SessionFineTuning.FineTuningSampledSequence": {
-        "type": "object",
-        "required": [
-          "tokens"
-        ],
-        "properties": {
-          "tokens": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Generated token identifiers, in sequence order."
-          },
-          "text": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Decoded text of the generated sequence, when available."
-          },
-          "logprobs": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "number",
-                  "format": "double"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Log-probabilities of the generated tokens, when available."
-          }
-        },
-        "description": "A single sampled sequence within a sampling result payload."
-      },
       "SessionFineTuning.FineTuningSamplingParams": {
         "type": "object",
         "required": [
@@ -111313,20 +110945,6 @@
           ]
         }
       },
-      "SyntheticDataGenItemGenerationParamsType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "synthetic_data_gen"
-            ]
-          }
-        ],
-        "description": "The types of parameters for synthetic data generation item generation."
-      },
       "SyntheticDataGenerationConfiguration": {
         "type": "object",
         "required": [
@@ -112260,69 +111878,6 @@
           }
         },
         "description": "A cancellation request recorded for an outbound call job."
-      },
-      "TelephonyCallJobConfiguration": {
-        "type": "object",
-        "required": [
-          "destination",
-          "connection_name",
-          "source"
-        ],
-        "properties": {
-          "destination": {
-            "$ref": "#/components/schemas/TelephonyAddress",
-            "description": "The phone destination to call."
-          },
-          "connection_name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee."
-          },
-          "source": {
-            "$ref": "#/components/schemas/TelephonyAddress",
-            "description": "Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI."
-          },
-          "purpose": {
-            "type": "string",
-            "minLength": 1,
-            "description": "An optional customer-declared purpose for placing the call."
-          },
-          "structured_inputs": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Agent/greeting inputs, including nested JSON and null. Agent schemas, required fields and defaults apply."
-          },
-          "schedule": {
-            "$ref": "#/components/schemas/TelephonyCallJobSchedule",
-            "description": "The optional execution window."
-          }
-        },
-        "description": "Customer-controlled configuration shared by direct and campaign-created call jobs.",
-        "examples": [
-          {
-            "connection_name": "telephony-acs",
-            "source": {
-              "type": "teams",
-              "value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-            },
-            "destination": {
-              "type": "phone_number",
-              "value": "+14255550123"
-            }
-          },
-          {
-            "connection_name": "telephony-twilio",
-            "source": {
-              "type": "phone_number",
-              "value": "+14255550100"
-            },
-            "destination": {
-              "type": "phone_number",
-              "value": "+14255550123"
-            }
-          }
-        ]
       },
       "TelephonyCallJobCreate": {
         "type": "object",
@@ -113651,22 +113206,6 @@
           ]
         }
       },
-      "ToolArgumentBinding": {
-        "type": "object",
-        "required": [
-          "argument_name"
-        ],
-        "properties": {
-          "tool_name": {
-            "type": "string",
-            "description": "The name of the tool to participate in the argument binding. If not provided, then all tools with matching arguments will participate in binding."
-          },
-          "argument_name": {
-            "type": "string",
-            "description": "The name of the argument within the tool."
-          }
-        }
-      },
       "ToolCallOutputContent": {
         "anyOf": [
           {
@@ -113734,20 +113273,6 @@
           }
         },
         "description": "A project connection resource."
-      },
-      "ToolProjectConnectionList": {
-        "type": "object",
-        "properties": {
-          "project_connections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ToolProjectConnection"
-            },
-            "maxItems": 1,
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
-          }
-        },
-        "description": "A set of project connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools."
       },
       "ToolSearchToolboxTool": {
         "type": "object",
@@ -114587,47 +114112,6 @@
           }
         ],
         "description": "Traces source for evaluator generation jobs — conversation traces from Application Insights."
-      },
-      "TracesJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "start_time"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "traces"
-            ],
-            "description": "The source type for this source, which is Traces."
-          },
-          "agent_id": {
-            "type": "string",
-            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
-          },
-          "start_time": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
-          },
-          "end_time": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
-          }
-        },
-        "description": "Traces source — conversation traces from Application Insights. Reusable shape spread into per-context discriminated subtypes."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
@@ -116369,15 +115853,8 @@
         },
         "description": "The `session.update` client event."
       },
-      "VoiceAgentClientEventTypeExtension": {
-        "type": "string",
-        "enum": [
-          "session.avatar.connect",
-          "rtc.call.sdp.create"
-        ]
-      },
       "VoiceAgentClientEventTypeExtensions": {
-        "$ref": "#/components/schemas/VoiceAgentClientEventTypeExtension",
+        "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentClientEventTypeExtension",
         "description": "Voice-specific members added to the OpenAI client-event discriminator."
       },
       "VoiceAgentCollectDtmfStartArguments": {
@@ -120229,34 +119706,6 @@
         ],
         "description": "The `session.subagent.completed` server event."
       },
-      "VoiceAgentServerEventSessionSubagentLifecycle": {
-        "type": "object",
-        "required": [
-          "event_id",
-          "consultation_id",
-          "call_id",
-          "subagent_name"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "description": "The server-generated event identifier."
-          },
-          "consultation_id": {
-            "type": "string",
-            "description": "The identifier of the subagent consultation."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The identifier of the function call that initiated the consultation."
-          },
-          "subagent_name": {
-            "type": "string",
-            "description": "The name of the consulted subagent."
-          }
-        },
-        "description": "Fields shared by server events that report the lifecycle of a subagent consultation."
-      },
       "VoiceAgentServerEventSessionSubagentStarted": {
         "type": "object",
         "required": [
@@ -120411,40 +119860,8 @@
         ],
         "description": "The completed intent arguments for a system tool, not provider success or a request for a customer function result."
       },
-      "VoiceAgentServerEventTypeExtension": {
-        "type": "string",
-        "enum": [
-          "warning",
-          "session.subagent.started",
-          "session.subagent.completed",
-          "session.subagent.aborted",
-          "session.avatar.connecting",
-          "session.avatar.switch_to_speaking",
-          "session.avatar.switch_to_idle",
-          "rtc.call.sdp.created",
-          "rtc.call.error",
-          "response.audio_timestamp.delta",
-          "response.audio_timestamp.done",
-          "response.animation_blendshapes.delta",
-          "response.animation_blendshapes.done",
-          "response.animation_viseme.delta",
-          "response.animation_viseme.done",
-          "response.video.delta",
-          "response.system_tool_arguments.delta",
-          "response.system_tool_arguments.done",
-          "input_collection.status",
-          "session.handoff.started",
-          "session.handoff.completed",
-          "session.handoff.aborted"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAgentServerEventTypeExtensions": {
-        "$ref": "#/components/schemas/VoiceAgentServerEventTypeExtension",
+        "$ref": "#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension",
         "description": "Voice-specific members added to the OpenAI server-event discriminator."
       },
       "VoiceAgentServerEventWarning": {
@@ -121743,17 +121160,6 @@
         },
         "description": "Voice output configuration. Inline subagents use it directly as their voice override, and the session-level\noutput audio configuration extends it.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`."
       },
-      "VoiceAgentWebSocketMessage": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEvent"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentServerEvent"
-          }
-        ],
-        "description": "A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are base64-encoded in JSON event fields."
-      },
       "VoiceAgentWebSocketSubprotocol": {
         "type": "string",
         "enum": [
@@ -122646,76 +122052,6 @@
           ]
         }
       },
-      "_AgentIncludable": {
-        "type": "string",
-        "enum": [
-          "memory_search_call.results"
-        ]
-      },
-      "_AgentItemType": {
-        "type": "string",
-        "enum": [
-          "structured_outputs",
-          "oauth_consent_request",
-          "memory_search_call",
-          "memory_command_preview_call",
-          "memory_command_preview_call_output",
-          "workflow_action",
-          "a2a_preview_call",
-          "a2a_preview_call_output",
-          "bing_grounding_call",
-          "bing_grounding_call_output",
-          "sharepoint_grounding_preview_call",
-          "sharepoint_grounding_preview_call_output",
-          "azure_ai_search_call",
-          "azure_ai_search_call_output",
-          "bing_custom_search_preview_call",
-          "bing_custom_search_preview_call_output",
-          "openapi_call",
-          "openapi_call_output",
-          "browser_automation_preview_call",
-          "browser_automation_preview_call_output",
-          "fabric_dataagent_preview_call",
-          "fabric_dataagent_preview_call_output",
-          "azure_function_call",
-          "azure_function_call_output"
-        ]
-      },
-      "_AgentToolType": {
-        "type": "string",
-        "enum": [
-          "a2a",
-          "azure_ai_search",
-          "azure_function",
-          "bing_grounding",
-          "browser_automation",
-          "capture_structured_outputs",
-          "openapi",
-          "memory_search"
-        ]
-      },
-      "_MicrosoftCopilotAgentToolType": {
-        "type": "string",
-        "enum": [
-          "microsoft_copilot_toolset_preview"
-        ]
-      },
-      "_PreviewAgentToolType": {
-        "type": "string",
-        "enum": [
-          "a2a_preview",
-          "bing_custom_search_preview",
-          "browser_automation_preview",
-          "fabric_dataagent_preview",
-          "sharepoint_grounding_preview",
-          "memory_search_preview",
-          "work_iq_preview",
-          "fabric_iq_preview",
-          "toolbox_search_preview",
-          "web_iq_preview",
-          "github_copilot_toolset_preview"
-        ]
-      },
       "integer": {
         "type": "integer",
         "format": "int64"
@@ -122759,10 +122095,6 @@
           }
         ],
         "description": "Evaluation target for generating responses using a given model and dataset."
-      },
-      "numeric": {
-        "type": "number",
-        "format": "double"
       }
     },
     "securitySchemes": {
