@@ -1,0 +1,1677 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Data AI",
+    "version": "2026-11-01-preview",
+    "description": "Azure Data AI provides semantic reranking operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The Azure Data AI endpoint.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://dbinference.azure.com/.default"
+      ]
+    },
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://dbinference.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/inference/embedding": {
+      "post": {
+        "operationId": "Embed",
+        "description": "Embeds text, queries and document images and returns dense or multi-vector embeddings as numbers or base64. Text\nand queries are sent inline. Images are read from the caller's Azure Blob Storage with a caller-signed user\ndelegation SAS (Microsoft Entra callers only). Results come back in the response or, with `delivery: link`, as a\ntime-limited read-only link.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmbeddingContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              }
+            }
+          },
+          "400": {
+            "description": "The request was not valid.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingBadRequestResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "The caller isn't allowed to perform the operation.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingForbiddenResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "413": {
+            "description": "The request or a blob it names is too large.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingPayloadTooLargeResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "The request was rate limited.",
+            "schema": {
+              "$ref": "#/definitions/TooManyRequestsResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The number of seconds the client should wait before retrying the request."
+              },
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "502": {
+            "description": "Azure Blob Storage failed while the service was reading a blob.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingBadGatewayResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "The service couldn't complete the request.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingServiceUnavailableResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "504": {
+            "description": "Azure Blob Storage didn't return a blob in time.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingGatewayTimeoutResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "#/definitions/InferenceErrorResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MultiModalEmbed_BlobImage": {
+            "$ref": "./examples/Inference_MultiModalEmbedImage.json"
+          },
+          "MultiModalEmbed_Both": {
+            "$ref": "./examples/Inference_MultiModalEmbedBoth.json"
+          },
+          "MultiModalEmbed_Link": {
+            "$ref": "./examples/Inference_MultiModalEmbedLink.json"
+          },
+          "MultiModalEmbed_SasLongLived": {
+            "$ref": "./examples/Inference_MultiModalEmbedSasWarning.json"
+          },
+          "MultiModalEmbed_TextBlob": {
+            "$ref": "./examples/Inference_MultiModalEmbed.json"
+          },
+          "MultiModalEmbed_TruncatedText": {
+            "$ref": "./examples/Inference_MultiModalEmbedTruncated.json"
+          }
+        }
+      }
+    },
+    "/inference/semanticReranking": {
+      "post": {
+        "operationId": "SemanticRerank",
+        "description": "Reranks documents by their relevance to a query.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The semantic reranking request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SemanticRerankingInferenceContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SemanticRerankingInferenceResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              }
+            }
+          },
+          "429": {
+            "description": "The request was rate limited.",
+            "schema": {
+              "$ref": "#/definitions/TooManyRequestsResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The number of seconds the client should wait before retrying the request."
+              },
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "#/definitions/InferenceErrorResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SemanticRerank_Post": {
+            "$ref": "./examples/Inference_SemanticRerank.json"
+          },
+          "SemanticRerank_PostJsonDocuments": {
+            "$ref": "./examples/Inference_SemanticRerankJson.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CorrelatedResponseHeaders": {
+      "type": "object",
+      "description": "Headers returned by every inference response."
+    },
+    "EmbeddingBadGatewayResult": {
+      "type": "object",
+      "description": "Azure Blob Storage failed while the service was reading a blob. `error.code` is `EMBEDDING_BLOB_READ_FAILED`.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "EmbeddingBadRequestResult": {
+      "type": "object",
+      "description": "The embedding request was not valid. The `error.code` identifies the problem:\n- `InvalidRequest`: the request isn't supported on this endpoint, for example `inputs` isn't enabled.\n- `InvalidRequestBody`: malformed JSON, a wrong type, an unknown or snake_case field, or a value outside its allowed\nset. `error.details` describes each problem.\n- `EMBEDDING_INPUT_INVALID`: an item's kind, source, size, format or count, or a model or version isn't valid.\nText over the model's token limit isn't an error; see `EMBEDDING_INPUT_TRUNCATED`.\n- `EMBEDDING_URL_NOT_ALLOWED`: `input_images`, a link in an image's `content`, a `url` where blob inputs are off or\nfrom an API-key caller, or a `sasToken` that isn't a read-only, https-only user delegation SAS for one blob signed\nby the caller. Nothing is read.\n- `EMBEDDING_BLOB_READ_FAILED`: Storage refused the blob, for example because of an expired SAS or a missing blob.\n- `EMBEDDING_DELIVERY_NOT_SUPPORTED`: `delivery: link` isn't enabled on this endpoint. Use `inline`.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "EmbeddingContent": {
+      "type": "object",
+      "description": "The input for an embedding operation.",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "description": "The items to embed, in order: 1 to 32 items. Currently a request can have at most one `text` or `query` item and\nat most 8 images. Images can be up to 20 MiB and 50 megapixels each (JPEG, PNG, GIF or WebP), with at most 20 MiB\nof images per request. The request body can be up to 30,000,000 bytes.",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/definitions/EmbeddingContentItem"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use. Defaults to `microsoft-embedding-1-large` (Microsoft Embedding 1-large)."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The model version. Defaults to the latest; the response always names the version used."
+        },
+        "vectorKind": {
+          "$ref": "#/definitions/EmbeddingVectorKind",
+          "description": "The kind of vectors to return. Defaults to `dense`."
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of dimensions per vector; with `dense_multi`, of the dense vector. Must be a value the model supports for the\nrequested vector kind; the model's native width is the default.",
+          "minimum": 1
+        },
+        "multiDimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For `dense_multi` only: the number of dimensions per multi-vector. Must be a value the model supports for multi-vectors;\nthe model's native multi-vector width is the default.",
+          "minimum": 1
+        },
+        "maxVectorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For `multi` and `dense_multi` only: the most multi-vectors to return per item.",
+          "minimum": 1
+        },
+        "outputDataKind": {
+          "$ref": "#/definitions/EmbeddingOutputDataKind",
+          "description": "The numeric type of the returned values, for every vector in the response. Defaults to `float32` for `dense` and\n`float16` for `multi` and `dense_multi`."
+        },
+        "encodingFormat": {
+          "$ref": "#/definitions/EmbeddingEncodingFormat",
+          "description": "How vectors are encoded in the response. Defaults to `float`."
+        },
+        "delivery": {
+          "$ref": "#/definitions/EmbeddingDelivery",
+          "description": "How to return the results. An explicit value wins. Without it, a request with images gets `link` where the\nendpoint has a result store, and every other request gets `inline`."
+        }
+      },
+      "required": [
+        "inputs"
+      ]
+    },
+    "EmbeddingContentItem": {
+      "type": "object",
+      "description": "One item to embed, defaulting to text: an optional `id` and exactly one source, `content` or `url` with `sasToken`.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A caller-chosen identifier, up to 256 characters, echoed on the matching result.",
+          "maxLength": 256
+        },
+        "kind": {
+          "type": "string",
+          "description": "What the item is: a document (`text`, the default), a search query (`query`) or a document image (`image`).",
+          "default": "text",
+          "enum": [
+            "text",
+            "query",
+            "image"
+          ],
+          "x-ms-enum": {
+            "name": "EmbeddingContentKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Text",
+                "value": "text",
+                "description": "A document to index."
+              },
+              {
+                "name": "Query",
+                "value": "query",
+                "description": "A search query. Queries are embedded for retrieval against documents and must be sent inline."
+              },
+              {
+                "name": "Image",
+                "value": "image",
+                "description": "A document image, such as a scanned page."
+              }
+            ]
+          }
+        },
+        "content": {
+          "type": "string",
+          "description": "The item, inline. For `text` and `query`: the text, up to 100,000 characters; text over the model's token limit\n(currently 8,192 tokens) isn't rejected: only its start is embedded, and the result is flagged with `truncated` and\nan `EMBEDDING_INPUT_TRUNCATED` warning. For `image`, only where the endpoint accepts inline images (off by\ndefault): a `data:image/...;base64,` URI or raw base64. The service never fetches URLs in `content`."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "For `text` and `image` items, from Microsoft Entra callers, where enabled: the Azure Blob Storage URL of the blob\nto embed, `https://{account}.blob.core.windows.net/{container}/{blob}`, with no query string. This is how images\nare sent by default. Text blobs are read as UTF-8, currently up to 1 MiB. Queries must be sent inline."
+        },
+        "sasToken": {
+          "type": "string",
+          "format": "password",
+          "description": "Required with `url`: a user delegation SAS for that one blob (its query string, with or without a leading `?`):\nread-only (`sp=r`), for the blob (`sr=b`), https-only (`spr=https`), and signed by the identity that calls this\nAPI. A SAS valid for more than 15 minutes is accepted with warning `EMBEDDING_SAS_LONG_LIVED`. The service uses\nit for one read and never stores, logs or returns it.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "EmbeddingContentKind": {
+      "type": "string",
+      "description": "The kind of an item to embed.",
+      "enum": [
+        "text",
+        "query",
+        "image"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingContentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Text",
+            "value": "text",
+            "description": "A document to index."
+          },
+          {
+            "name": "Query",
+            "value": "query",
+            "description": "A search query. Queries are embedded for retrieval against documents and must be sent inline."
+          },
+          {
+            "name": "Image",
+            "value": "image",
+            "description": "A document image, such as a scanned page."
+          }
+        ]
+      }
+    },
+    "EmbeddingData": {
+      "type": "object",
+      "description": "Common metadata for one embedding result item, in request order.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EmbeddingDataKind",
+          "description": "The embedding implementation that produced this item."
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based position of the item in the request."
+        },
+        "id": {
+          "type": "string",
+          "description": "The item's `id` from the request, if it had one."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "index"
+      ]
+    },
+    "EmbeddingDataKind": {
+      "type": "string",
+      "description": "The implementation of an embedding result item.",
+      "enum": [
+        "multimodal_dense",
+        "multimodal_multi",
+        "multimodal_dense_multi"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingDataKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MultimodalDense",
+            "value": "multimodal_dense",
+            "description": "One dense vector from a multimodal model."
+          },
+          {
+            "name": "MultimodalMultiVector",
+            "value": "multimodal_multi",
+            "description": "One vector per token from a multimodal model."
+          },
+          {
+            "name": "MultimodalDenseAndMultiVector",
+            "value": "multimodal_dense_multi",
+            "description": "A dense vector and one vector per token from a multimodal model."
+          }
+        ]
+      }
+    },
+    "EmbeddingDelivery": {
+      "type": "string",
+      "description": "How the results of a multimodal embedding operation are returned.",
+      "enum": [
+        "inline",
+        "link"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingDelivery",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inline",
+            "value": "inline",
+            "description": "The vectors are in the response's `data`."
+          },
+          {
+            "name": "Link",
+            "value": "link",
+            "description": "The service stores the response as a JSON file and returns `output`, a read-only link valid for up to 15\nminutes, with an empty `data`. Not available on every endpoint (`EMBEDDING_DELIVERY_NOT_SUPPORTED`)."
+          }
+        ]
+      }
+    },
+    "EmbeddingEncodingFormat": {
+      "type": "string",
+      "description": "How vectors are encoded in the response.",
+      "enum": [
+        "float",
+        "base64"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingEncodingFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Float",
+            "value": "float",
+            "description": "JSON arrays of numbers."
+          },
+          {
+            "name": "Base64",
+            "value": "base64",
+            "description": "A base64 string of little-endian values; row-major for multi-vectors."
+          }
+        ]
+      }
+    },
+    "EmbeddingForbiddenResult": {
+      "type": "object",
+      "description": "The caller isn't allowed to perform the operation.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "EmbeddingGatewayTimeoutResult": {
+      "type": "object",
+      "description": "Azure Blob Storage didn't return a blob in time. `error.code` is `EMBEDDING_BLOB_READ_FAILED`.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "EmbeddingImageFormat": {
+      "type": "string",
+      "description": "The format of an embedded image.",
+      "enum": [
+        "jpeg",
+        "png",
+        "gif",
+        "webp"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingImageFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Jpeg",
+            "value": "jpeg",
+            "description": "JPEG."
+          },
+          {
+            "name": "Png",
+            "value": "png",
+            "description": "PNG."
+          },
+          {
+            "name": "Gif",
+            "value": "gif",
+            "description": "GIF."
+          },
+          {
+            "name": "Webp",
+            "value": "webp",
+            "description": "WebP."
+          }
+        ]
+      }
+    },
+    "EmbeddingOperationError": {},
+    "EmbeddingOperationResult": {
+      "type": "object",
+      "description": "A successful embedding response.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/EmbeddingResult",
+          "description": "The embedding result."
+        }
+      },
+      "required": [
+        "result"
+      ]
+    },
+    "EmbeddingOutputDataKind": {
+      "type": "string",
+      "description": "The numeric type of the returned vector values.",
+      "enum": [
+        "float32",
+        "float16"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingOutputDataKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Float32",
+            "value": "float32",
+            "description": "32-bit floating point. The default for dense vectors."
+          },
+          {
+            "name": "Float16",
+            "value": "float16",
+            "description": "16-bit floating point. The default for `multi` and `dense_multi`."
+          }
+        ]
+      }
+    },
+    "EmbeddingPayloadTooLargeResult": {
+      "type": "object",
+      "description": "The request or a blob it names is too large. `error.code` is `EMBEDDING_BLOB_READ_FAILED` when a blob exceeds its size limit.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "EmbeddingResult": {
+      "type": "object",
+      "description": "The result of an embedding operation.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, always `list`.",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The name of the model that produced the vectors."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The model version that produced the vectors. Pin it to keep an index stable."
+        },
+        "outputDataKind": {
+          "$ref": "#/definitions/EmbeddingOutputDataKind",
+          "description": "The numeric type of the returned values."
+        },
+        "data": {
+          "type": "array",
+          "description": "One entry per item in `inputs`, in request order. Empty when `output` is present.",
+          "items": {
+            "$ref": "#/definitions/EmbeddingData"
+          }
+        },
+        "usage": {
+          "$ref": "#/definitions/EmbeddingUsage",
+          "description": "Usage for the operation."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Things to know about a successful response, such as truncated items. Omitted when there are none.",
+          "items": {
+            "$ref": "#/definitions/MultimodalEmbeddingWarning"
+          }
+        },
+        "output": {
+          "$ref": "#/definitions/MultimodalEmbeddingOutput",
+          "description": "With `delivery: link`: where to read the results."
+        }
+      },
+      "required": [
+        "object",
+        "model",
+        "modelVersion",
+        "outputDataKind",
+        "data",
+        "usage"
+      ]
+    },
+    "EmbeddingServiceUnavailableResult": {
+      "type": "object",
+      "description": "The service couldn't complete the request. `error.code` is `EMBEDDING_OUTPUT_WRITE_FAILED` when a `delivery: link`\nresult couldn't be stored. Try again, or use `delivery: inline`.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "EmbeddingUsage": {
+      "type": "object",
+      "description": "Common usage for an embedding operation. Token counts are omitted when the model doesn't report them.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EmbeddingUsageKind",
+          "description": "The embedding implementation that reported this usage."
+        },
+        "promptTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of input tokens."
+        },
+        "totalTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of tokens."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "EmbeddingUsageKind": {
+      "type": "string",
+      "description": "The implementation that reported embedding usage.",
+      "enum": [
+        "multimodal"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingUsageKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Multimodal",
+            "value": "multimodal",
+            "description": "Usage from a multimodal embedding model."
+          }
+        ]
+      }
+    },
+    "EmbeddingVector": {},
+    "EmbeddingVectorKind": {
+      "type": "string",
+      "description": "The kind of vectors to return.",
+      "enum": [
+        "dense",
+        "multi",
+        "dense_multi"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingVectorKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dense",
+            "value": "dense",
+            "description": "One vector per item."
+          },
+          {
+            "name": "Multi",
+            "value": "multi",
+            "description": "One vector per token, for late-interaction (MaxSim) scoring."
+          },
+          {
+            "name": "DenseAndMulti",
+            "value": "dense_multi",
+            "description": "Both, from one model run: one dense vector (`dimensions` wide) and one vector per token (`multiDimensions` wide)\nfor each item."
+          }
+        ]
+      }
+    },
+    "EmbeddingWarningCode": {
+      "type": "string",
+      "description": "A machine-readable embedding warning code.",
+      "enum": [
+        "EMBEDDING_INPUT_TRUNCATED",
+        "EMBEDDING_SAS_LONG_LIVED"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingWarningCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InputTruncated",
+            "value": "EMBEDDING_INPUT_TRUNCATED",
+            "description": "A `text` or `query` item was over the model's token limit, and only its start was embedded. Numeric alias\n`1001`."
+          },
+          {
+            "name": "SasLongLived",
+            "value": "EMBEDDING_SAS_LONG_LIVED",
+            "description": "An item's `sasToken` stays valid for more than 15 minutes (plus 5 minutes of clock skew). The blob was read and\nembedded; a shorter SAS is recommended. Numeric alias `1002`."
+          }
+        ]
+      }
+    },
+    "InferenceErrorResult": {
+      "type": "object",
+      "description": "An unexpected error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "InferenceOperationError": {},
+    "LatencyResult": {
+      "type": "object",
+      "description": "The result of the latency in the semantic reranking operation.",
+      "properties": {
+        "dataPreprocessTime": {
+          "$ref": "#/definitions/Milliseconds",
+          "description": "The time spent on data preprocessing in the semantic reranking operation, in milliseconds.",
+          "x-ms-client-name": "dataPreprocessDuration"
+        },
+        "inferenceTime": {
+          "$ref": "#/definitions/Milliseconds",
+          "description": "The time spent on inference in the semantic reranking operation, in milliseconds.",
+          "x-ms-client-name": "inferenceDuration"
+        },
+        "postProcessTime": {
+          "$ref": "#/definitions/Milliseconds",
+          "description": "The time spent on post-processing in the semantic reranking operation, in milliseconds.",
+          "x-ms-client-name": "postProcessDuration"
+        }
+      }
+    },
+    "Milliseconds": {
+      "type": "number",
+      "format": "float"
+    },
+    "MultiEmbeddingVector": {},
+    "MultimodalDenseAndMultiVectorEmbedding": {
+      "type": "object",
+      "description": "The result for one item when `vectorKind` is `dense_multi`: a dense vector and one vector per token, from one model run.",
+      "properties": {
+        "contentKind": {
+          "$ref": "#/definitions/EmbeddingContentKind",
+          "description": "The item's content kind, as supplied in the request's `kind`."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the width in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the height in pixels."
+        },
+        "format": {
+          "$ref": "#/definitions/EmbeddingImageFormat",
+          "description": "For images: the detected image format."
+        },
+        "tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The tokens the model read for this item, including any text the service adds to queries and, for images, the\nimage prompt and image tokens. For a truncated item, the tokens embedded. Omitted when the model doesn't report it."
+        },
+        "visualTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For images: how many of `tokens` were image tokens."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "`true` when the item was over the model's token limit and only its start was embedded; `warnings` then has an\n`EMBEDDING_INPUT_TRUNCATED` entry for it. Omitted otherwise."
+        },
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For truncated items only: the item's tokens before truncation."
+        },
+        "vectorKind": {
+          "type": "string",
+          "description": "The kind of vectors returned.",
+          "enum": [
+            "dense_multi"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "shape": {
+          "type": "array",
+          "description": "The number of multi-vectors and their number of dimensions: `[vectors, multiDimensions]`.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "embedding": {
+          "$ref": "#/definitions/EmbeddingVector",
+          "description": "The dense vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian\n`outputDataKind` values."
+        },
+        "multiEmbedding": {
+          "$ref": "#/definitions/MultiEmbeddingVector",
+          "description": "The multi-vectors: an array of arrays of numbers, or, when `encodingFormat` is `base64`, one base64 string of all\ntheir little-endian `outputDataKind` values in row-major order. Decode it and reshape it to `shape`."
+        }
+      },
+      "required": [
+        "contentKind",
+        "vectorKind",
+        "shape",
+        "embedding",
+        "multiEmbedding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EmbeddingData"
+        }
+      ],
+      "x-ms-discriminator-value": "multimodal_dense_multi"
+    },
+    "MultimodalDenseEmbedding": {
+      "type": "object",
+      "description": "The result for one item when `vectorKind` is `dense`: one vector.",
+      "properties": {
+        "contentKind": {
+          "$ref": "#/definitions/EmbeddingContentKind",
+          "description": "The item's content kind, as supplied in the request's `kind`."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the width in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the height in pixels."
+        },
+        "format": {
+          "$ref": "#/definitions/EmbeddingImageFormat",
+          "description": "For images: the detected image format."
+        },
+        "tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The tokens the model read for this item, including any text the service adds to queries and, for images, the\nimage prompt and image tokens. For a truncated item, the tokens embedded. Omitted when the model doesn't report it."
+        },
+        "visualTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For images: how many of `tokens` were image tokens."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "`true` when the item was over the model's token limit and only its start was embedded; `warnings` then has an\n`EMBEDDING_INPUT_TRUNCATED` entry for it. Omitted otherwise."
+        },
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For truncated items only: the item's tokens before truncation."
+        },
+        "vectorKind": {
+          "type": "string",
+          "description": "The kind of vectors returned.",
+          "enum": [
+            "dense"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "embedding": {
+          "$ref": "#/definitions/EmbeddingVector",
+          "description": "The vector: an array of numbers, or, when `encodingFormat` is `base64`, a base64 string of its little-endian\n`outputDataKind` values."
+        }
+      },
+      "required": [
+        "contentKind",
+        "vectorKind",
+        "embedding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EmbeddingData"
+        }
+      ],
+      "x-ms-discriminator-value": "multimodal_dense"
+    },
+    "MultimodalEmbeddingData": {
+      "type": "object",
+      "description": "Shared metadata for the results from a multimodal embedding model.",
+      "properties": {
+        "contentKind": {
+          "$ref": "#/definitions/EmbeddingContentKind",
+          "description": "The item's content kind, as supplied in the request's `kind`."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the width in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the height in pixels."
+        },
+        "format": {
+          "$ref": "#/definitions/EmbeddingImageFormat",
+          "description": "For images: the detected image format."
+        },
+        "tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The tokens the model read for this item, including any text the service adds to queries and, for images, the\nimage prompt and image tokens. For a truncated item, the tokens embedded. Omitted when the model doesn't report it."
+        },
+        "visualTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For images: how many of `tokens` were image tokens."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "`true` when the item was over the model's token limit and only its start was embedded; `warnings` then has an\n`EMBEDDING_INPUT_TRUNCATED` entry for it. Omitted otherwise."
+        },
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For truncated items only: the item's tokens before truncation."
+        }
+      },
+      "required": [
+        "contentKind"
+      ]
+    },
+    "MultimodalEmbeddingOutput": {
+      "type": "object",
+      "description": "A `delivery: link` result: a JSON file with the complete response (the same body as an inline response, including\n`data`), readable with `sasToken` until `expiresAt`.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The result's identifier, for support requests.",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The result file's URL, without a query string. Read it with `sasToken`."
+        },
+        "sasToken": {
+          "type": "string",
+          "format": "password",
+          "description": "A read-only SAS for the result file only, valid until `expiresAt` (at most 15 minutes). Read the file with\n`GET {url}?{sasToken}`.",
+          "x-ms-secret": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When `sasToken` stops working. After that, send the request again, or use `delivery: inline`."
+        },
+        "recordCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of `data` items in the file."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size of the file in bytes."
+        },
+        "sha256": {
+          "type": "string",
+          "description": "The lowercase hexadecimal SHA-256 hash of the file."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The media type of the file: `application/json`."
+        }
+      },
+      "required": [
+        "id",
+        "url",
+        "sasToken",
+        "expiresAt",
+        "recordCount",
+        "sizeInBytes",
+        "sha256",
+        "contentType"
+      ]
+    },
+    "MultimodalEmbeddingUsage": {
+      "type": "object",
+      "description": "Usage for a multimodal embedding operation.",
+      "properties": {
+        "textTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Tokens that aren't image tokens: the query and text items (including the query instruction) and the short prompt\nthe model adds around each image. Equal to `promptTokens` minus `visualTokens`, so text and image tokens can be\npriced separately. Omitted when the split isn't known: `promptTokens` isn't reported, or the request has images\nand `visualTokens` isn't reported."
+        },
+        "imageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of images embedded."
+        },
+        "visualTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of tokens the images produced."
+        }
+      },
+      "required": [
+        "imageCount"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EmbeddingUsage"
+        }
+      ],
+      "x-ms-discriminator-value": "multimodal"
+    },
+    "MultimodalEmbeddingWarning": {
+      "type": "object",
+      "description": "Something about a successful multimodal embedding response the caller should know.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/EmbeddingWarningCode",
+          "description": "A machine-readable warning code."
+        },
+        "codeNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A stable numeric alias of `code`: `1001` for `EMBEDDING_INPUT_TRUNCATED`, `1002` for `EMBEDDING_SAS_LONG_LIVED`."
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based position of the item the warning is about, in `inputs` and `data`."
+        },
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For `EMBEDDING_INPUT_TRUNCATED`: the item's tokens before truncation."
+        },
+        "tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For `EMBEDDING_INPUT_TRUNCATED`: the tokens embedded."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable description that names the item, for example `inputs[1]`."
+        }
+      },
+      "required": [
+        "code",
+        "index",
+        "message"
+      ]
+    },
+    "MultimodalMultiVectorEmbedding": {
+      "type": "object",
+      "description": "The result for one item when `vectorKind` is `multi`: one vector per token, for late-interaction (MaxSim) scoring.",
+      "properties": {
+        "contentKind": {
+          "$ref": "#/definitions/EmbeddingContentKind",
+          "description": "The item's content kind, as supplied in the request's `kind`."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the width in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For images: the height in pixels."
+        },
+        "format": {
+          "$ref": "#/definitions/EmbeddingImageFormat",
+          "description": "For images: the detected image format."
+        },
+        "tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The tokens the model read for this item, including any text the service adds to queries and, for images, the\nimage prompt and image tokens. For a truncated item, the tokens embedded. Omitted when the model doesn't report it."
+        },
+        "visualTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For images: how many of `tokens` were image tokens."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "`true` when the item was over the model's token limit and only its start was embedded; `warnings` then has an\n`EMBEDDING_INPUT_TRUNCATED` entry for it. Omitted otherwise."
+        },
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For truncated items only: the item's tokens before truncation."
+        },
+        "vectorKind": {
+          "type": "string",
+          "description": "The kind of vectors returned.",
+          "enum": [
+            "multi"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "shape": {
+          "type": "array",
+          "description": "The number of vectors and the number of dimensions: `[vectors, dimensions]`.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "multiEmbedding": {
+          "$ref": "#/definitions/MultiEmbeddingVector",
+          "description": "The vectors: an array of arrays of numbers, or, when `encodingFormat` is `base64`, one base64 string of all their\nlittle-endian `outputDataKind` values in row-major order. Decode it and reshape it to `shape`."
+        }
+      },
+      "required": [
+        "contentKind",
+        "vectorKind",
+        "shape",
+        "multiEmbedding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EmbeddingData"
+        }
+      ],
+      "x-ms-discriminator-value": "multimodal_multi"
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "description": "Details about an HTTP API error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        },
+        "type": {
+          "type": "string",
+          "description": "A URI reference identifying the problem type.",
+          "x-nullable": true
+        },
+        "title": {
+          "type": "string",
+          "description": "A short, human-readable summary of the problem.",
+          "x-nullable": true
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code associated with the problem.",
+          "x-nullable": true
+        },
+        "detail": {
+          "type": "string",
+          "description": "A human-readable explanation specific to this occurrence.",
+          "x-nullable": true
+        },
+        "instance": {
+          "type": "string",
+          "description": "A URI reference identifying this occurrence of the problem.",
+          "x-nullable": true
+        },
+        "extensions": {
+          "type": "object",
+          "description": "Additional service-defined details about the problem.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": {}
+    },
+    "SemanticRerankingDocumentType": {
+      "type": "string",
+      "description": "The format of a document submitted for semantic reranking.",
+      "enum": [
+        "text",
+        "json"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticRerankingDocumentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Text",
+            "value": "text",
+            "description": "A plain-text document."
+          },
+          {
+            "name": "Json",
+            "value": "json",
+            "description": "A JSON document."
+          }
+        ]
+      }
+    },
+    "SemanticRerankingInferenceContent": {
+      "type": "object",
+      "description": "The input for a semantic reranking operation.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query used to rank the documents.",
+          "minLength": 1,
+          "maxLength": 2147483647
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents to rank against the query.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "returnDocuments": {
+          "type": "boolean",
+          "description": "Whether the response should include the submitted documents."
+        },
+        "topK": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of ranked documents to return.",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of documents processed in each batch.",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "sort": {
+          "type": "boolean",
+          "description": "Whether to return documents sorted by relevance score."
+        },
+        "documentType": {
+          "$ref": "#/definitions/SemanticRerankingDocumentType",
+          "description": "The format of the submitted documents."
+        },
+        "targetPaths": {
+          "type": "string",
+          "description": "The property containing text to rank when the document type is JSON.\nThis property is required for JSON documents. Use dot notation for a nested property, for example `meta.content`.\nYou can specify multiple property paths separated by commas, for example `meta.content,id`.",
+          "maxItems": 100
+        },
+        "model": {
+          "type": "string",
+          "description": "The name of the model used for the semantic reranking operation.",
+          "maxLength": 2147483647
+        },
+        "returnSentenceScore": {
+          "type": "boolean",
+          "description": "Whether to return sentence-level scores in the response."
+        }
+      },
+      "required": [
+        "query",
+        "documents"
+      ]
+    },
+    "SemanticRerankingInferenceResult": {
+      "type": "object",
+      "description": "The result of a semantic reranking operation.",
+      "properties": {
+        "scores": {
+          "type": "array",
+          "description": "The relevance scores for the submitted documents.",
+          "items": {
+            "$ref": "#/definitions/SemanticRerankingScore"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/SemanticRerankingMetaResult",
+          "description": "Additional metadata about the semantic reranking operation."
+        }
+      }
+    },
+    "SemanticRerankingMetaResult": {
+      "type": "object",
+      "description": "Additional metadata about the semantic reranking operation.",
+      "properties": {
+        "tokenUsage": {
+          "$ref": "#/definitions/TokenUsageResult",
+          "description": "The number of tokens processed in the request."
+        },
+        "latency": {
+          "$ref": "#/definitions/LatencyResult",
+          "description": "The latency of the semantic reranking operation."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used for the semantic reranking operation."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The version of the model used for the semantic reranking operation."
+        }
+      }
+    },
+    "SemanticRerankingResult": {
+      "type": "object",
+      "description": "A successful semantic reranking response.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/SemanticRerankingInferenceResult",
+          "description": "The semantic reranking result."
+        }
+      },
+      "required": [
+        "result"
+      ]
+    },
+    "SemanticRerankingScore": {
+      "type": "object",
+      "description": "A relevance score assigned to a submitted document.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based position of the document in the request."
+        },
+        "document": {
+          "type": "string",
+          "description": "The submitted document when requested in the response."
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The relevance score assigned to the document."
+        },
+        "sentenceScores": {
+          "type": "array",
+          "description": "The sentence-level relevance scores for the submitted document.",
+          "items": {
+            "$ref": "#/definitions/SentenceScore"
+          }
+        }
+      }
+    },
+    "SentenceScore": {
+      "type": "object",
+      "description": "A sentence-level relevance score for a submitted document.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based position of the sentence in the document.",
+          "minimum": 0
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The relevance score assigned to the sentence.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "index",
+        "score"
+      ]
+    },
+    "TokenUsageResult": {
+      "type": "object",
+      "description": "The result of the token usage in the semantic reranking operation.",
+      "properties": {
+        "totalTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed in the semantic reranking operation."
+        }
+      }
+    },
+    "TooManyRequestsResult": {
+      "type": "object",
+      "description": "The request was rejected because the service is receiving too many requests.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

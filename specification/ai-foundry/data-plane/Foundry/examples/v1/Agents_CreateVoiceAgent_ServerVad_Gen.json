@@ -8,8 +8,25 @@
     "description": "A voice agent that uses headset-optimized voice activity detection and Azure Speech streaming transcription.",
     "definition": {
       "kind": "voice",
+      "sub_protocol": "realtime",
       "model_type": "managed",
       "model": "gpt-4.1",
+      "post_call": {
+        "destinations": [
+          {
+            "type": "event_grid",
+            "connection_name": "post-call-events"
+          },
+          {
+            "type": "routine",
+            "name": "archive"
+          },
+          {
+            "type": "routine",
+            "name": "analysis"
+          }
+        ]
+      },
       "audio": {
         "input": {
           "noise_reduction": {
@@ -52,8 +69,25 @@
             "created_at": 1785772800,
             "definition": {
               "kind": "voice",
+              "sub_protocol": "realtime",
               "model_type": "managed",
               "model": "gpt-4.1",
+              "post_call": {
+                "destinations": [
+                  {
+                    "type": "event_grid",
+                    "connection_name": "post-call-events"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "archive"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "analysis"
+                  }
+                ]
+              },
               "audio": {
                 "input": {
                   "noise_reduction": {

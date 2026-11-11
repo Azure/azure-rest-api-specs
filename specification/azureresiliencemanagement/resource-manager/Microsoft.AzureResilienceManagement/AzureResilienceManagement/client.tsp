@@ -7,6 +7,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
+// Go
+@@clientName(WorkloadType.SapAseInAzureVm, "SAPASEInAzureVM", "go");
+@@clientName(WorkloadType.SapHanaInAzureVm, "SAPHANAInAzureVM", "go");
+@@clientName(IsoDuration, "ISODuration", "go");
+
 @@clientName(
   Microsoft.AzureResilienceManagement,
   "ResilienceManagementClient",
@@ -29,6 +34,11 @@ using TypeSpec.Versioning;
   "csharp"
 );
 @@clientName(DrillStartRequest, "DrillStartContent", "csharp");
+@@clientName(
+  FetchRecoveryPointsRequest,
+  "FetchRecoveryPointsContent",
+  "csharp"
+);
 @@clientName(DrillRunAddNotesRequest, "DrillRunAddNotesContent", "csharp");
 @@clientName(RecommendCapacityRequest, "RecommendCapacityContent", "csharp");
 @@clientName(RecoveryActionRequest, "RecoveryActionContent", "csharp");
