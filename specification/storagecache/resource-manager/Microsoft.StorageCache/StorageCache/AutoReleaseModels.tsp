@@ -211,7 +211,7 @@ model OnceAtTrigger extends AutoReleaseTrigger {
   /** The trigger kind. */
   type: AutoReleaseTriggerType.OnceAt;
 
-  /** UTC timestamp at which the policy starts. */
+  /** UTC timestamp at which the policy starts. The timestamp must use whole-second precision; fractional seconds are not accepted. */
   value: utcDateTime;
 }
 
@@ -292,6 +292,7 @@ model LastRestoreOlderThanFilter extends AutoReleaseFilter {
 @added(Versions.v2027_01_01)
 model AutoReleasePolicy {
   /** Unique policy name within the policy set. */
+  @maxLength(255)
   name: string;
 
   /** Unique priority from 0 through 10. Lower values have higher priority. */
@@ -299,10 +300,10 @@ model AutoReleasePolicy {
   @maxValue(10)
   priority: int32;
 
-  /** Trigger that makes the policy ready. */
+  /** Trigger that makes the policy ready. Accepted trigger types are `CapacityPercentAbove`, `CronTime`, `Immediate`, and `OnceAt`. */
   start: AutoReleaseTrigger;
 
-  /** Optional trigger that finishes the policy. */
+  /** Optional trigger that finishes the policy. Accepted trigger types are `CapacityPercentBelow`, `CronTime`, and `ReleasedSizeAbove`. */
   stop?: AutoReleaseTrigger;
 
   /** Filesystem-root-relative paths. When omitted during creation, the service uses the root path. */

@@ -1516,16 +1516,16 @@ model AmlFilesystemPropertiesMaintenanceWindow {
 }
 
 /**
- * Controls how additional properties are handled during HSM export.
+ * Controls whether file and directory renames and deletes in Lustre are propagated to the container during HSM export.
  */
 @added(Versions.v2027_01_01)
 union AmlFilesystemExportAdditionalProperties {
   string,
 
-  /** Do not export additional properties. */
+  /** Do not propagate file and directory renames or deletes from Lustre to the container. */
   None: "None",
 
-  /** Rename additional properties when deleting the source. */
+  /** Propagate file and directory renames and deletes from Lustre to the container. */
   RenameDelete: "RenameDelete",
 }
 
@@ -1561,7 +1561,7 @@ model AmlFilesystemHsmSettings {
   loggingContainer: string;
 
   /**
-   * Controls how additional properties are handled during HSM export.
+   * Controls whether file and directory renames and deletes in Lustre are propagated to the container during HSM export.
    */
   @added(Versions.v2027_01_01)
   exportAdditionalProperties?: AmlFilesystemExportAdditionalProperties;
