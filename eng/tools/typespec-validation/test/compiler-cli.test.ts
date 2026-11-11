@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp, realpath, rm, symlink, writeFile } from "node:fs/promises";
+import { cp, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
@@ -49,9 +49,9 @@ beforeEach(async () => {
       "junction",
     );
   }
-  const compiled = await compileTypeSpec(join(root, project));
+  const compiled = await compileTypeSpec(join(root, project), { fix: true });
   expect(compiled.success, JSON.stringify(compiled.diagnostics)).toBe(true);
-  expect((await formatTypeSpec(join(root, project))).success).toBe(true);
+  expect((await formatTypeSpec(join(root, project), true)).success).toBe(true);
   await simpleGit(root)
     .init()
     .addConfig("user.name", "Test")
@@ -63,7 +63,7 @@ beforeEach(async () => {
 
 afterEach(async () => {
   vi.unstubAllEnvs();
-  await rm(root, { recursive: true, force: true });
+  await rm(root, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
 });
 
 async function run(...args: string[]): Promise<{ code: number; stdout: string; stderr: string }> {
@@ -88,7 +88,7 @@ async function run(...args: string[]): Promise<{ code: number; stdout: string; s
 it("prints only a final summary by default and compact rule statuses with --verbose", async () => {
   const quiet = await run(project);
   expect(quiet.code, quiet.stderr).toBe(0);
-  expect(quiet.stdout).toBe("8 passed | 1 skipped | 1 suppressed\n");
+  expect(quiet.stdout).toBe("9 passed | 1 skipped | 1 suppressed\n");
   expect(quiet.stderr).toBe("");
   const verbose = await run(project, "--verbose");
   expect(verbose.code).toBe(quiet.code);
@@ -98,12 +98,13 @@ it("prints only a final summary by default and compact rule statuses with --verb
       .trim()
       .split("\n")
       .filter((line) =>
-        /^[\u2714\u00d7!-] (?:FolderStructure|NpmPrefix|EmitAutorest|ServiceYaml|FlavorAzure|LinterRuleset|ClientTspImport|Compile|Format|SdkTspConfigValidation)\b/.test(
+        /^[\u2714\u00d7!-] (?:FolderStructure|DisallowedFileTypes|NpmPrefix|EmitAutorest|ServiceYaml|FlavorAzure|LinterRuleset|ClientTspImport|Compile|Format|SdkTspConfigValidation)\b/.test(
           line,
         ),
       ),
   ).toEqual([
     "\u2714 FolderStructure",
+    "\u2714 DisallowedFileTypes",
     "\u2714 NpmPrefix",
     "\u2714 EmitAutorest",
     "\u2714 ServiceYaml",
@@ -115,7 +116,7 @@ it("prints only a final summary by default and compact rule statuses with --verb
     "- SdkTspConfigValidation (suppressed)",
   ]);
   expect(verbose.stdout).toContain(
-    "- SdkTspConfigValidation (suppressed)\n\n8 passed | 1 skipped | 1 suppressed",
+    "- SdkTspConfigValidation (suppressed)\n\n9 passed | 1 skipped | 1 suppressed",
   );
 });
 
@@ -163,10 +164,10 @@ it.each([
     if (command === "compile") {
       await writeFile(
         join(folder, "tspconfig.yaml"),
-        tspConfig.replace("emit:\n", "emit:\n  - ./emitter.mjs\n"),
+        tspConfig.replace("emit:\n", "emit:\n  - ../../../../emitter.mjs\n"),
       );
       await writeFile(
-        join(folder, "emitter.mjs"),
+        join(root, "emitter.mjs"),
         `export async function $onEmit({ program }) {
   await program.host.writeFile(${JSON.stringify(join(folder, "generated.txt"))}, "new content\\n");
 }
@@ -175,7 +176,7 @@ it.each([
     } else {
       await writeFile(join(folder, "main.tsp"), "// Comment.   ");
     }
-    await simpleGit(root).add(project).commit("Set changed-file fixture");
+    await simpleGit(root).add(".").commit("Set changed-file fixture");
 
     const result = await run(project, ...(verbose ? ["--verbose"] : []));
     expect(result.code).toBe(1);
@@ -216,12 +217,12 @@ it.each([
     );
     expect(stripVTControlCharacters(result.stdout).includes("\u00d7 Compile")).toBe(verbose);
     expect(stripVTControlCharacters(result.stdout)).toContain(
-      "6 passed | 1 failed | 1 skipped | 2 not run",
+      "7 passed | 1 failed | 1 skipped | 2 not run",
     );
     expect(stripVTControlCharacters(result.stdout)).not.toContain("\u2714 Format");
     if (!verbose) {
       expect(stripVTControlCharacters(result.stdout)).toBe(
-        "\n6 passed | 1 failed | 1 skipped | 2 not run\n",
+        "\n7 passed | 1 failed | 1 skipped | 2 not run\n",
       );
     }
   },
@@ -241,4 +242,84 @@ it("retains per-project CI annotations and compiler diagnostics in batch mode", 
   expect(result.stdout).toContain(`::error::TypeSpec Validation failed for project ${project}`);
   expect(result.stdout.match(/invalid-ref/g)).toHaveLength(1);
   expect(result.stderr).not.toContain("invalid-ref");
+});
+
+it.each(["--all", "--changed"])(
+  "checks sibling emissions in %s without changing their shared baseline or Git index",
+  async (mode) => {
+    const sibling = "specification/service/data-plane/Sibling";
+    await cp(join(root, project), join(root, sibling), { recursive: true });
+    for (const folder of [project, sibling]) {
+      await writeFile(
+        join(root, folder, "tspconfig.yaml"),
+        tspConfig.replace("emit:\n", "emit:\n  - ../../../../emitter.mjs\n"),
+      );
+    }
+    const output = join(root, "specification/service/generated.txt");
+    const missingDir = join(root, "specification/service/new");
+    await writeFile(output, "old\n");
+    await writeFile(
+      join(root, "emitter.mjs"),
+      `export async function $onEmit({ program }) {
+  await program.host.mkdirp(${JSON.stringify(missingDir)});
+  await program.host.writeFile(${JSON.stringify(output)}, "new\\n");
+  await program.host.writeFile(${JSON.stringify(join(missingDir, "output.txt"))}, "new\\n");
+}
+`,
+    );
+    await simpleGit(root).add(".").commit("Set stale shared output");
+    const index = await readFile(join(root, ".git/index"));
+
+    const result = await run(mode, "--git-clean");
+
+    expect(result.code, result.stderr).toBe(1);
+    expect(result.stdout).toContain("2 failed");
+    expect(result.stderr.match(/error tsv\/generated-files-changed:/g)).toHaveLength(2);
+    expect(await readFile(output, "utf8")).toBe("old\n");
+    await expect(readFile(missingDir)).rejects.toMatchObject({ code: "ENOENT" });
+    expect(await readFile(join(root, ".git/index"))).toEqual(index);
+
+    const fixed = await run(mode, "--fix", "--git-clean");
+    expect(fixed.code, fixed.stderr).toBe(1);
+    expect(fixed.stderr).toContain("error tsv/generated-files-changed:");
+    expect(await readFile(output, "utf8")).toBe("new\n");
+    expect(await readFile(join(missingDir, "output.txt"), "utf8")).toBe("new\n");
+    expect(await readFile(join(root, ".git/index"))).toEqual(index);
+  },
+  // Check and fix each start a batch plus two compiler processes.
+  30_000,
+);
+
+it("checks batch formatting and only updates shared files with --fix", async () => {
+  const shared = join(root, "specification/service/data-plane/shared.tsp");
+  await writeFile(shared, "model   Shared{}");
+  await simpleGit(root).add(".").commit("Set formatting fixture");
+
+  const result = await run("--all");
+
+  expect(result.code, result.stderr).toBe(1);
+  expect(result.stderr).toContain("error tsv/format-changed:");
+  expect(result.stderr).toContain("shared.tsp");
+  expect(await readFile(shared, "utf8")).toBe("model   Shared{}");
+
+  const fixed = await run("--all", "--fix");
+  expect(fixed.code, fixed.stderr).toBe(1);
+  expect(fixed.stderr).toContain("error tsv/format-changed:");
+  expect(await readFile(shared, "utf8")).toBe("model Shared {}\n");
+});
+
+it("supports explicit single-project check mode without changing the existing fix default", async () => {
+  const source = join(root, project, "main.tsp");
+  await writeFile(source, "// Comment.   ");
+  await simpleGit(root).add(".").commit("Set single-project formatting fixture");
+
+  const checked = await run(project, "--check");
+  expect(checked.code, checked.stderr).toBe(1);
+  expect(checked.stderr).toContain("error tsv/format-changed:");
+  expect(await readFile(source, "utf8")).toBe("// Comment.   ");
+
+  const fixed = await run(project);
+  expect(fixed.code, fixed.stderr).toBe(1);
+  expect(fixed.stderr).toContain("error tsv/format-changed:");
+  expect(await readFile(source, "utf8")).toBe("// Comment.\n");
 });
