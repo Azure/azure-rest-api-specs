@@ -776,21 +776,6 @@
         ]
       }
     },
-    "LinkedKeyVaultProperties": {
-      "type": "object",
-      "description": "Linked Key Vault properties for the Playwright workspace.",
-      "properties": {
-        "vaultUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URI of the linked Azure Key Vault."
-        },
-        "vaultIdentity": {
-          "$ref": "#/definitions/ManagedIdentity",
-          "description": "The managed identity used to access the linked Azure Key Vault."
-        }
-      }
-    },
     "ManagedIdentity": {
       "type": "object",
       "description": "Managed identity properties for accessing Azure resources.",
@@ -1103,7 +1088,7 @@
         "browserProxy": {
           "type": "string",
           "description": "Specifies whether the browser proxy is enabled for the workspace.",
-          "default": "Disabled",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1124,10 +1109,6 @@
               }
             ]
           }
-        },
-        "linkedKeyVault": {
-          "$ref": "#/definitions/LinkedKeyVaultProperties",
-          "description": "The Azure Key Vault linked to the workspace and the managed identity used to access it."
         }
       }
     },
@@ -1238,10 +1219,6 @@
         "browserProxy": {
           "$ref": "#/definitions/EnablementStatus",
           "description": "Specifies whether the browser proxy is enabled for the workspace."
-        },
-        "linkedKeyVault": {
-          "$ref": "#/definitions/LinkedKeyVaultProperties",
-          "description": "The Azure Key Vault linked to the workspace and the managed identity used to access it."
         }
       }
     },

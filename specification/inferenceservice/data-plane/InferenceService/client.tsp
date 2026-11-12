@@ -19,3 +19,8 @@ using Azure.Data.AI;
 @@clientName(LatencyResult.dataPreprocessTime, "dataPreprocessDuration");
 @@clientName(LatencyResult.inferenceTime, "inferenceDuration");
 @@clientName(LatencyResult.postProcessTime, "postProcessDuration");
+
+// RFC 9457 `detail` describes this specific occurrence, while the inherited Azure error
+// `details` lists nested errors. Python and JavaScript expose both on ProblemDetails, so
+// rename `detail` in those clients only; the wire name (detail) is unchanged.
+@@clientName(ProblemDetails.detail, "explanation", "python, javascript");

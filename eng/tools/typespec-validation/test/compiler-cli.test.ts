@@ -88,7 +88,7 @@ async function run(...args: string[]): Promise<{ code: number; stdout: string; s
 it("prints only a final summary by default and compact rule statuses with --verbose", async () => {
   const quiet = await run(project);
   expect(quiet.code, quiet.stderr).toBe(0);
-  expect(quiet.stdout).toBe("8 passed | 1 skipped | 1 suppressed\n");
+  expect(quiet.stdout).toBe("9 passed | 1 skipped | 1 suppressed\n");
   expect(quiet.stderr).toBe("");
   const verbose = await run(project, "--verbose");
   expect(verbose.code).toBe(quiet.code);
@@ -98,12 +98,13 @@ it("prints only a final summary by default and compact rule statuses with --verb
       .trim()
       .split("\n")
       .filter((line) =>
-        /^[\u2714\u00d7!-] (?:FolderStructure|NpmPrefix|EmitAutorest|ServiceYaml|FlavorAzure|LinterRuleset|ClientTspImport|Compile|Format|SdkTspConfigValidation)\b/.test(
+        /^[\u2714\u00d7!-] (?:FolderStructure|DisallowedFileTypes|NpmPrefix|EmitAutorest|ServiceYaml|FlavorAzure|LinterRuleset|ClientTspImport|Compile|Format|SdkTspConfigValidation)\b/.test(
           line,
         ),
       ),
   ).toEqual([
     "\u2714 FolderStructure",
+    "\u2714 DisallowedFileTypes",
     "\u2714 NpmPrefix",
     "\u2714 EmitAutorest",
     "\u2714 ServiceYaml",
@@ -115,7 +116,7 @@ it("prints only a final summary by default and compact rule statuses with --verb
     "- SdkTspConfigValidation (suppressed)",
   ]);
   expect(verbose.stdout).toContain(
-    "- SdkTspConfigValidation (suppressed)\n\n8 passed | 1 skipped | 1 suppressed",
+    "- SdkTspConfigValidation (suppressed)\n\n9 passed | 1 skipped | 1 suppressed",
   );
 });
 
@@ -163,10 +164,10 @@ it.each([
     if (command === "compile") {
       await writeFile(
         join(folder, "tspconfig.yaml"),
-        tspConfig.replace("emit:\n", "emit:\n  - ./emitter.mjs\n"),
+        tspConfig.replace("emit:\n", "emit:\n  - ../../../../emitter.mjs\n"),
       );
       await writeFile(
-        join(folder, "emitter.mjs"),
+        join(root, "emitter.mjs"),
         `export async function $onEmit({ program }) {
   await program.host.writeFile(${JSON.stringify(join(folder, "generated.txt"))}, "new content\\n");
 }
@@ -175,7 +176,7 @@ it.each([
     } else {
       await writeFile(join(folder, "main.tsp"), "// Comment.   ");
     }
-    await simpleGit(root).add(project).commit("Set changed-file fixture");
+    await simpleGit(root).add(".").commit("Set changed-file fixture");
 
     const result = await run(project, ...(verbose ? ["--verbose"] : []));
     expect(result.code).toBe(1);
@@ -216,12 +217,12 @@ it.each([
     );
     expect(stripVTControlCharacters(result.stdout).includes("\u00d7 Compile")).toBe(verbose);
     expect(stripVTControlCharacters(result.stdout)).toContain(
-      "6 passed | 1 failed | 1 skipped | 2 not run",
+      "7 passed | 1 failed | 1 skipped | 2 not run",
     );
     expect(stripVTControlCharacters(result.stdout)).not.toContain("\u2714 Format");
     if (!verbose) {
       expect(stripVTControlCharacters(result.stdout)).toBe(
-        "\n6 passed | 1 failed | 1 skipped | 2 not run\n",
+        "\n7 passed | 1 failed | 1 skipped | 2 not run\n",
       );
     }
   },

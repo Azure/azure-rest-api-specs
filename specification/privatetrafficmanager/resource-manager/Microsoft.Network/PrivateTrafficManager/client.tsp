@@ -42,11 +42,34 @@ using Azure.ClientGenerator.Core;
   "TopologyMapSiteProperties",
   "csharp"
 );
-@@clientName(Microsoft.Network.CustomHeader, "ProbeCustomHeader", "csharp");
-@@clientName(Microsoft.Network.Protocol, "ProbeProtocol", "csharp");
+@@clientName(
+  Microsoft.Network.CustomHeader,
+  "PrivateTrafficManagerProbeCustomHeader",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.Protocol,
+  "PrivateTrafficManagerProbeProtocol",
+  "csharp"
+);
 @@clientName(Microsoft.Network.Protocol.HTTP, "Http", "csharp");
 @@clientName(Microsoft.Network.Protocol.HTTPS, "Https", "csharp");
 @@clientName(Microsoft.Network.Protocol.TCP, "Tcp", "csharp");
+@@clientName(
+  Microsoft.Network.ExpectedStatusCodeRange,
+  "PrivateTrafficManagerExpectedStatusCodeRange",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.HealthPolicyProperties,
+  "PrivateTrafficManagerHealthPolicyProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ProbeConfig,
+  "PrivateTrafficManagerProbeConfig",
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.DnsConfig,
   "PrivateTrafficManagerDnsConfig",
@@ -66,6 +89,11 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Microsoft.Network.ProfileStatus,
   "PrivateTrafficManagerProfileStatus",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.TrafficRoutingMethod,
+  "PrivateTrafficManagerRoutingMethod",
   "csharp"
 );
 @@clientName(

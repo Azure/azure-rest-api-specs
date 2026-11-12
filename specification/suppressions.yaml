@@ -2,6 +2,14 @@
 # Remove suppressions as specs are fixed
 
 - tool: TypeSpecValidation
+  rules: [DisallowedFileTypes]
+  reason: Cleanup needed by service team, those files shouldn't exists
+  paths:
+    - cognitiveservices/resource-manager/Microsoft.CognitiveServices/CognitiveServices/test/adapter-source-model-id.test.mjs
+    - cognitiveservices/resource-manager/Microsoft.CognitiveServices/CognitiveServices/test/cost-control-contract.test.mjs
+    - cognitiveservices/resource-manager/Microsoft.CognitiveServices/CognitiveServices/test/workbench-contract.test.mjs
+
+- tool: TypeSpecValidation
   rules: [FolderStructure]
   sub-rules: [MustUseV2]
   reason: Specs added as folder structure v1, not yet converted to v2

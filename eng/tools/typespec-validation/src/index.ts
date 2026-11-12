@@ -17,6 +17,7 @@ import { type Rule } from "./rule.ts";
 import { runAll, runChanged } from "./run-projects.ts";
 import { ClientTspImportRule } from "./rules/client-tsp-import.ts";
 import { CompileRule } from "./rules/compile.ts";
+import { DisallowedFileTypesRule } from "./rules/disallowed-file-types.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";
 import { FlavorAzureRule } from "./rules/flavor-azure.ts";
 import { FolderStructureRule } from "./rules/folder-structure.ts";
@@ -322,6 +323,7 @@ export async function main() {
 
   const rules: Rule[] = [
     new FolderStructureRule(),
+    new DisallowedFileTypesRule(),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
     new ServiceYamlRule(),

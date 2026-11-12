@@ -124,6 +124,7 @@ interface ConfigurationStores {
       /**
        * A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listKeys POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }

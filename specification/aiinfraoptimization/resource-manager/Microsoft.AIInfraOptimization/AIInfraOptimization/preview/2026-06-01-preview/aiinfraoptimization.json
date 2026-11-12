@@ -1,0 +1,1249 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AIInfraOptimization",
+    "version": "2026-06-01-preview",
+    "description": "Microsoft.AIInfraOptimization Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Recommendations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AIInfraOptimization/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the Microsoft.AIInfraOptimization resource provider": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AIInfraOptimization/locations/{location}/recommendVmSku": {
+      "post": {
+        "operationId": "Recommendations_RecommendVmSku",
+        "tags": [
+          "Recommendations"
+        ],
+        "description": "Recommends Azure virtual machine sizes for an AI workload in the specified subscription and azure location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendVmSkuRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RecommendVmSkuResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Recommend virtual machine sizes for an AI inference workload": {
+            "$ref": "./examples/Recommendations_RecommendVmSku.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BenchmarkLevel": {
+      "type": "string",
+      "description": "How closely benchmark evidence matches a recommended topology.",
+      "enum": [
+        "Benchmarked",
+        "TopologyMatched"
+      ],
+      "x-ms-enum": {
+        "name": "BenchmarkLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Benchmarked",
+            "value": "Benchmarked",
+            "description": "The accelerator family has benchmark evidence at a different topology."
+          },
+          {
+            "name": "TopologyMatched",
+            "value": "TopologyMatched",
+            "description": "The benchmark matches the recommended node and accelerator counts."
+          }
+        ]
+      }
+    },
+    "ContextLengthSource": {
+      "type": "string",
+      "description": "Where a context length was resolved from.",
+      "enum": [
+        "Request",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "ContextLengthSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Request",
+            "value": "Request",
+            "description": "The context length is the sum of the request's `workload.tokenBudget.promptTokens` and `maxOutputTokens`."
+          },
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "No token budget was supplied, so the service default context length was used."
+          }
+        ]
+      }
+    },
+    "CostSource": {
+      "type": "string",
+      "description": "The source a price was resolved from.",
+      "enum": [
+        "AzureRetail",
+        "AzureSubscription",
+        "StaticPreview"
+      ],
+      "x-ms-enum": {
+        "name": "CostSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureRetail",
+            "value": "AzureRetail",
+            "description": "The price came from the public Azure retail catalog."
+          },
+          {
+            "name": "AzureSubscription",
+            "value": "AzureSubscription",
+            "description": "The price came from the caller's Azure subscription."
+          },
+          {
+            "name": "StaticPreview",
+            "value": "StaticPreview",
+            "description": "The price is fixed illustrative data for a contract preview."
+          }
+        ]
+      }
+    },
+    "ModelWeightsCalculation": {
+      "type": "string",
+      "description": "How model weight memory was calculated.",
+      "enum": [
+        "ArtifactSize",
+        "EstimatedFromParameterCount"
+      ],
+      "x-ms-enum": {
+        "name": "ModelWeightsCalculation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ArtifactSize",
+            "value": "ArtifactSize",
+            "description": "The memory was calculated from the published model artifact size."
+          },
+          {
+            "name": "EstimatedFromParameterCount",
+            "value": "EstimatedFromParameterCount",
+            "description": "The memory was estimated from the model parameter count."
+          }
+        ]
+      }
+    },
+    "ParameterCountSource": {
+      "type": "string",
+      "description": "Where a model parameter count was resolved from.",
+      "enum": [
+        "Request",
+        "HuggingFace"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterCountSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Request",
+            "value": "Request",
+            "description": "The parameter count was supplied in the request."
+          },
+          {
+            "name": "HuggingFace",
+            "value": "HuggingFace",
+            "description": "The parameter count was resolved from Hugging Face metadata."
+          }
+        ]
+      }
+    },
+    "PlacementStatus": {
+      "type": "string",
+      "description": "The outcome of a capacity placement query.",
+      "enum": [
+        "Evaluated",
+        "Failed",
+        "NotEvaluated",
+        "Unsupported"
+      ],
+      "x-ms-enum": {
+        "name": "PlacementStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Evaluated",
+            "value": "Evaluated",
+            "description": "The placement check completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The placement check failed."
+          },
+          {
+            "name": "NotEvaluated",
+            "value": "NotEvaluated",
+            "description": "The placement check was not run."
+          },
+          {
+            "name": "Unsupported",
+            "value": "Unsupported",
+            "description": "The placement check is not supported for this option."
+          }
+        ]
+      }
+    },
+    "ProcurementOption": {
+      "type": "string",
+      "description": "The Azure virtual machine procurement option.",
+      "enum": [
+        "OnDemand",
+        "Spot"
+      ],
+      "x-ms-enum": {
+        "name": "ProcurementOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OnDemand",
+            "value": "OnDemand",
+            "description": "Use standard on-demand capacity."
+          },
+          {
+            "name": "Spot",
+            "value": "Spot",
+            "description": "Use interruptible Spot capacity."
+          }
+        ]
+      }
+    },
+    "QuotaStatus": {
+      "type": "string",
+      "description": "Whether subscription quota is sufficient for a requested deployment.",
+      "enum": [
+        "Available",
+        "Unavailable",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Quota is sufficient for the requested replicas."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "Quota is insufficient for the requested replicas."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Quota could not be determined."
+          }
+        ]
+      }
+    },
+    "RankingPreference": {
+      "type": "string",
+      "description": "The preference used to rank the recommended options.",
+      "enum": [
+        "Cost",
+        "Latency"
+      ],
+      "x-ms-enum": {
+        "name": "RankingPreference",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cost",
+            "value": "Cost",
+            "description": "Rank the options by deployment cost."
+          },
+          {
+            "name": "Latency",
+            "value": "Latency",
+            "description": "Rank the options by inference latency."
+          }
+        ]
+      }
+    },
+    "ReadinessStatus": {
+      "type": "string",
+      "description": "The current actionability of a recommended option.",
+      "enum": [
+        "ReadyToAttempt",
+        "QuotaIncreaseRequired",
+        "VerificationRequired",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "ReadinessStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadyToAttempt",
+            "value": "ReadyToAttempt",
+            "description": "The option can be attempted without a known prerequisite action."
+          },
+          {
+            "name": "QuotaIncreaseRequired",
+            "value": "QuotaIncreaseRequired",
+            "description": "The option requires a quota increase before deployment."
+          },
+          {
+            "name": "VerificationRequired",
+            "value": "VerificationRequired",
+            "description": "The option requires an external verification before deployment."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "The option is not available to the subscription in the requested region."
+          }
+        ]
+      }
+    },
+    "RecommendVmSkuAccelerator": {
+      "type": "object",
+      "description": "The accelerator hardware available in each virtual machine.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The accelerator model name, for example `A100` or `H100`."
+        },
+        "countPerVm": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of accelerator devices in each virtual machine."
+        },
+        "memoryGiBPerAccelerator": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The memory capacity of a single accelerator device, in gibibytes."
+        }
+      },
+      "required": [
+        "model",
+        "countPerVm",
+        "memoryGiBPerAccelerator"
+      ]
+    },
+    "RecommendVmSkuBenchmark": {
+      "type": "object",
+      "description": "The external benchmark evidence selected for one virtual machine size option.",
+      "properties": {
+        "level": {
+          "$ref": "#/definitions/BenchmarkLevel",
+          "description": "How closely the benchmark evidence matches the recommended topology."
+        },
+        "modelClass": {
+          "type": "string",
+          "description": "The model size class the benchmark covers, for example `70b`."
+        },
+        "scenario": {
+          "type": "string",
+          "description": "The benchmark scenario, for example `Server` or `Offline`."
+        },
+        "submitterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of submitters that published results for this configuration."
+        },
+        "submissionId": {
+          "type": "string",
+          "description": "The identifier of the selected benchmark submission."
+        },
+        "benchmarkModel": {
+          "type": "string",
+          "description": "The model the benchmark was measured on."
+        },
+        "submitter": {
+          "type": "string",
+          "description": "The organization that published the benchmark submission."
+        },
+        "system": {
+          "type": "string",
+          "description": "The system the benchmark was measured on."
+        },
+        "throughput": {
+          "type": "number",
+          "format": "double",
+          "description": "The throughput observed in the benchmark submission."
+        },
+        "throughputUnit": {
+          "type": "string",
+          "description": "The unit the observed throughput is expressed in, for example `Tokens/s`."
+        },
+        "software": {
+          "type": "string",
+          "description": "The serving software the benchmark was measured with."
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "The operating system the benchmark was measured on."
+        },
+        "weightDataTypes": {
+          "type": "string",
+          "description": "The weight data types used in the benchmark submission."
+        },
+        "p99TtftMs": {
+          "type": "number",
+          "format": "double",
+          "description": "The 99th-percentile time to first token observed in the benchmark, in milliseconds."
+        },
+        "p99TpotMs": {
+          "type": "number",
+          "format": "double",
+          "description": "The 99th-percentile time per output token observed in the benchmark, in milliseconds."
+        }
+      },
+      "required": [
+        "level",
+        "modelClass",
+        "scenario",
+        "submitterCount"
+      ]
+    },
+    "RecommendVmSkuCost": {
+      "type": "object",
+      "description": "The deployment cost for one virtual machine size option.",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "The ISO 4217 currency code all amounts in this object are expressed in.",
+          "pattern": "^[A-Za-z]{3}$"
+        },
+        "vmHourly": {
+          "type": "number",
+          "format": "double",
+          "description": "The price per hour for a single virtual machine, in the stated currency."
+        },
+        "deploymentHourly": {
+          "type": "number",
+          "format": "double",
+          "description": "The price per hour for the whole deployment, in the stated currency."
+        },
+        "source": {
+          "$ref": "#/definitions/CostSource",
+          "description": "The source the price was resolved from."
+        },
+        "priceAsOf": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the price was observed."
+        },
+        "error": {
+          "$ref": "#/definitions/RecommendVmSkuStageError",
+          "description": "The error that prevented subscription-scoped pricing from being resolved, if any."
+        }
+      },
+      "required": [
+        "currencyCode",
+        "vmHourly",
+        "deploymentHourly",
+        "source"
+      ]
+    },
+    "RecommendVmSkuDeployment": {
+      "type": "object",
+      "description": "Deployment scale and procurement inputs.",
+      "properties": {
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of deployment replicas used for cost, quota, and placement calculations.",
+          "minimum": 1
+        },
+        "procurementOption": {
+          "$ref": "#/definitions/ProcurementOption",
+          "description": "The Azure virtual machine procurement option."
+        }
+      }
+    },
+    "RecommendVmSkuHourlyCost": {
+      "type": "object",
+      "description": "A currency-qualified deployment-wide hourly cost.",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum cost per hour for the whole deployment. Must be greater than zero when supplied."
+        },
+        "currencyCode": {
+          "type": "string",
+          "description": "The ISO 4217 currency code the amount is expressed in. The recommendation service currently supports `USD`.",
+          "pattern": "^[A-Za-z]{3}$"
+        }
+      }
+    },
+    "RecommendVmSkuMemory": {
+      "type": "object",
+      "description": "The memory calculation shared by every returned option.",
+      "properties": {
+        "modelWeightsGiB": {
+          "type": "number",
+          "format": "double",
+          "description": "The memory required for the model weights, in gibibytes."
+        },
+        "kvCacheGiBPerRequest": {
+          "type": "number",
+          "format": "double",
+          "description": "The key-value cache memory required for a single concurrent request, in gibibytes."
+        },
+        "kvCacheGiBTotal": {
+          "type": "number",
+          "format": "double",
+          "description": "The key-value cache memory required for all concurrent requests on a replica, in gibibytes."
+        },
+        "modelAndKvCacheGiB": {
+          "type": "number",
+          "format": "double",
+          "description": "The combined model-weight and key-value cache memory required per replica, in gibibytes."
+        }
+      },
+      "required": [
+        "modelWeightsGiB",
+        "kvCacheGiBPerRequest",
+        "kvCacheGiBTotal",
+        "modelAndKvCacheGiB"
+      ]
+    },
+    "RecommendVmSkuModel": {
+      "type": "object",
+      "description": "Model inputs used for metadata resolution and memory sizing.",
+      "properties": {
+        "huggingFaceModelId": {
+          "type": "string",
+          "description": "The Hugging Face model identifier, for example `meta-llama/Llama-3.1-70B-Instruct`."
+        },
+        "parameterCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The logical total model parameter count, including all mixture-of-experts experts. May be supplied with or without a model identifier.",
+          "minimum": 1
+        },
+        "weightPrecision": {
+          "$ref": "#/definitions/WeightPrecision",
+          "description": "The precision the model weights are served at. Matched case-insensitively."
+        },
+        "numLayers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The model layer count, used for architecture-aware key-value cache sizing. Supply all architecture fields together with a parameter count.",
+          "minimum": 1
+        },
+        "numKeyValueHeads": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The model key-value head count, used for architecture-aware key-value cache sizing. Supply all architecture fields together with a parameter count.",
+          "minimum": 1
+        },
+        "headDim": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The attention head dimension, used for architecture-aware key-value cache sizing. Supply all architecture fields together with a parameter count.",
+          "minimum": 1
+        },
+        "maxContextLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum context length the model supports, in tokens. Used only as an upper bound for the sizing context length when Hugging Face metadata provides no usable maximum.",
+          "minimum": 1
+        }
+      }
+    },
+    "RecommendVmSkuOptimization": {
+      "type": "object",
+      "description": "Ranking preference and optional deployment-wide hourly cost limit.",
+      "properties": {
+        "rankingPreference": {
+          "$ref": "#/definitions/RankingPreference",
+          "description": "The preference used to rank the recommended options."
+        },
+        "maxDeploymentCostPerHour": {
+          "$ref": "#/definitions/RecommendVmSkuHourlyCost",
+          "description": "The deployment-wide hourly cost ceiling."
+        }
+      }
+    },
+    "RecommendVmSkuOption": {
+      "type": "object",
+      "description": "One ranked virtual machine size recommendation.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The Azure virtual machine size name, for example `Standard_NC24ads_A100_v4`."
+        },
+        "recommendationRank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The rank of this option within the response, where 1 is the best match."
+        },
+        "readiness": {
+          "$ref": "#/definitions/RecommendVmSkuReadiness",
+          "description": "How ready this option is to deploy."
+        },
+        "topology": {
+          "$ref": "#/definitions/RecommendVmSkuTopology",
+          "description": "The deployment topology for this option."
+        },
+        "cost": {
+          "$ref": "#/definitions/RecommendVmSkuCost",
+          "description": "The deployment cost for this option."
+        },
+        "quota": {
+          "$ref": "#/definitions/RecommendVmSkuQuota",
+          "description": "The subscription quota evidence for this option. Returned only when `subscriptionOptions.includeQuota` is set."
+        },
+        "placement": {
+          "$ref": "#/definitions/RecommendVmSkuPlacement",
+          "description": "The capacity placement evidence for this option. Returned only when `subscriptionOptions.includePlacement` is set."
+        },
+        "azureMlRecommended": {
+          "type": "boolean",
+          "description": "Whether the Azure Machine Learning model catalog recommends this virtual machine size for the model."
+        },
+        "benchmark": {
+          "$ref": "#/definitions/RecommendVmSkuBenchmark",
+          "description": "The external benchmark evidence selected for this option."
+        },
+        "documentationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URL to the Azure documentation page for this virtual machine size."
+        },
+        "performanceEstimate": {
+          "$ref": "#/definitions/RecommendVmSkuPerformanceEstimate",
+          "description": "The advisory deployment throughput and per-request latency estimate for this option."
+        }
+      },
+      "required": [
+        "vmSize",
+        "recommendationRank",
+        "readiness",
+        "topology",
+        "cost"
+      ]
+    },
+    "RecommendVmSkuPerformanceEstimate": {
+      "type": "object",
+      "description": "An advisory deployment throughput and per-request latency estimate.",
+      "properties": {
+        "deploymentOutputTokensPerSecond": {
+          "type": "number",
+          "format": "double",
+          "description": "The estimated number of output tokens generated per second across the whole deployment."
+        },
+        "ttftMs": {
+          "type": "number",
+          "format": "double",
+          "description": "The estimated time to first token for a single request, in milliseconds."
+        }
+      },
+      "required": [
+        "deploymentOutputTokensPerSecond",
+        "ttftMs"
+      ]
+    },
+    "RecommendVmSkuPlacement": {
+      "type": "object",
+      "description": "The capacity placement evidence for one virtual machine size option.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PlacementStatus",
+          "description": "The outcome of the placement query."
+        },
+        "reason": {
+          "type": "string",
+          "description": "A human-readable explanation of the placement status."
+        },
+        "error": {
+          "$ref": "#/definitions/RecommendVmSkuStageError",
+          "description": "The error that prevented placement from being evaluated, if any."
+        },
+        "recommendedAvailabilityZones": {
+          "type": "array",
+          "description": "The availability zones recommended for the deployment, in preference order.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "RecommendVmSkuQuota": {
+      "type": "object",
+      "description": "The subscription quota evidence for one virtual machine size option.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/QuotaStatus",
+          "description": "Whether subscription quota is sufficient for the requested deployment."
+        },
+        "reason": {
+          "type": "string",
+          "description": "A human-readable explanation of the quota status."
+        },
+        "error": {
+          "$ref": "#/definitions/RecommendVmSkuStageError",
+          "description": "The error that prevented quota from being evaluated, if any."
+        },
+        "maxAvailableReplicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of replicas that can be deployed with the available quota."
+        },
+        "increase": {
+          "$ref": "#/definitions/RecommendVmSkuQuotaIncrease",
+          "description": "The quota increase required before this option can be deployed."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "RecommendVmSkuQuotaIncrease": {
+      "type": "object",
+      "description": "The quota limits to raise before retrying a deployment.",
+      "properties": {
+        "limits": {
+          "type": "array",
+          "description": "The individual quota limits that block the requested deployment.",
+          "items": {
+            "$ref": "#/definitions/RecommendVmSkuQuotaLimit"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "portalUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URL to the Azure portal page for submitting the quota increase."
+        }
+      },
+      "required": [
+        "limits",
+        "portalUrl"
+      ]
+    },
+    "RecommendVmSkuQuotaLimit": {
+      "type": "object",
+      "description": "One quota limit that blocks the requested deployment.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the quota to raise."
+        },
+        "currentUsage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current usage against the quota."
+        },
+        "currentLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current quota limit."
+        },
+        "requiredLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The quota limit required to deploy the workload."
+        }
+      },
+      "required": [
+        "name",
+        "currentUsage",
+        "currentLimit",
+        "requiredLimit"
+      ]
+    },
+    "RecommendVmSkuReadiness": {
+      "type": "object",
+      "description": "How ready a recommended option is to deploy.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ReadinessStatus",
+          "description": "The current actionability of the recommendation."
+        },
+        "reason": {
+          "type": "string",
+          "description": "A human-readable explanation of the readiness status."
+        }
+      },
+      "required": [
+        "status",
+        "reason"
+      ]
+    },
+    "RecommendVmSkuRequest": {
+      "type": "object",
+      "description": "The parameters used to request an Azure virtual machine size recommendation for an AI workload.",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/RecommendVmSkuModel",
+          "description": "Model identity, sizing inputs, and optional maximum model context length."
+        },
+        "workload": {
+          "$ref": "#/definitions/RecommendVmSkuWorkload",
+          "description": "Inference request concurrency and token shape assumptions."
+        },
+        "deployment": {
+          "$ref": "#/definitions/RecommendVmSkuDeployment",
+          "description": "Deployment scale and Azure virtual machine procurement option."
+        },
+        "optimization": {
+          "$ref": "#/definitions/RecommendVmSkuOptimization",
+          "description": "Ranking preference and optional deployment-wide hourly cost limit."
+        },
+        "targetVmSizes": {
+          "type": "array",
+          "description": "The Azure virtual machine candidate set. When supplied, only these virtual machine sizes are ranked. Entries must be non-blank and unique, compared case-insensitively.",
+          "minItems": 1,
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/VmSizeName"
+          }
+        },
+        "subscriptionOptions": {
+          "$ref": "#/definitions/RecommendVmSkuSubscriptionOptions",
+          "description": "The subscription-scoped lookups to include in the recommendation."
+        }
+      }
+    },
+    "RecommendVmSkuResponse": {
+      "type": "object",
+      "description": "The recommended Azure virtual machine sizes for the workload, with the sizing calculation they were derived from.",
+      "properties": {
+        "options": {
+          "type": "array",
+          "description": "The recommended virtual machine size options, ordered from the best to the worst match.",
+          "items": {
+            "$ref": "#/definitions/RecommendVmSkuOption"
+          },
+          "x-ms-identifiers": [
+            "vmSize"
+          ]
+        },
+        "sizing": {
+          "$ref": "#/definitions/RecommendVmSkuSizing",
+          "description": "The resolved workload sizing shared by every option."
+        }
+      },
+      "required": [
+        "options",
+        "sizing"
+      ]
+    },
+    "RecommendVmSkuSizing": {
+      "type": "object",
+      "description": "The resolved workload sizing shared by every recommended option.",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/RecommendVmSkuSizingModel",
+          "description": "The resolved model identity and weight precision."
+        },
+        "workload": {
+          "$ref": "#/definitions/RecommendVmSkuSizingWorkload",
+          "description": "The resolved per-replica workload inputs used for memory sizing."
+        },
+        "memory": {
+          "$ref": "#/definitions/RecommendVmSkuMemory",
+          "description": "The memory calculation shared by every returned option."
+        },
+        "basis": {
+          "$ref": "#/definitions/RecommendVmSkuSizingBasis",
+          "description": "The sources used for the sizing calculation."
+        }
+      },
+      "required": [
+        "model",
+        "workload",
+        "memory",
+        "basis"
+      ]
+    },
+    "RecommendVmSkuSizingBasis": {
+      "type": "object",
+      "description": "The sources used for the sizing calculation.",
+      "properties": {
+        "parameterCountSource": {
+          "$ref": "#/definitions/ParameterCountSource",
+          "description": "Where the model parameter count was resolved from."
+        },
+        "modelWeightsCalculation": {
+          "$ref": "#/definitions/ModelWeightsCalculation",
+          "description": "How the model weight memory was calculated."
+        },
+        "contextLengthSource": {
+          "$ref": "#/definitions/ContextLengthSource",
+          "description": "Where the context length was resolved from."
+        }
+      },
+      "required": [
+        "parameterCountSource",
+        "modelWeightsCalculation",
+        "contextLengthSource"
+      ]
+    },
+    "RecommendVmSkuSizingModel": {
+      "type": "object",
+      "description": "The resolved model identity and weight precision.",
+      "properties": {
+        "parameterCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The logical total model parameter count used for sizing."
+        },
+        "weightPrecision": {
+          "$ref": "#/definitions/WeightPrecision",
+          "description": "The precision the model weights were sized at."
+        },
+        "huggingFaceModelId": {
+          "type": "string",
+          "description": "The Hugging Face model identifier the sizing metadata was resolved from."
+        }
+      },
+      "required": [
+        "parameterCount",
+        "weightPrecision"
+      ]
+    },
+    "RecommendVmSkuSizingWorkload": {
+      "type": "object",
+      "description": "The resolved per-replica workload inputs used for memory sizing.",
+      "properties": {
+        "maxConcurrentRequestsPerReplica": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of simultaneous inference requests handled by each replica."
+        },
+        "contextLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The context length, in tokens, used to size the key-value cache: the sum of `promptTokens` and `maxOutputTokens` when a token budget is supplied, otherwise the service default."
+        }
+      },
+      "required": [
+        "maxConcurrentRequestsPerReplica",
+        "contextLength"
+      ]
+    },
+    "RecommendVmSkuStageError": {
+      "type": "object",
+      "description": "An error from an optional subscription-scoped recommendation stage.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/StageErrorCode",
+          "description": "The reason the stage did not complete."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable description of the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "RecommendVmSkuSubscriptionOptions": {
+      "type": "object",
+      "description": "The subscription-scoped lookups to include in the recommendation.",
+      "properties": {
+        "includeQuota": {
+          "type": "boolean",
+          "description": "Whether to evaluate subscription quota for candidate virtual machine sizes.",
+          "default": false
+        },
+        "includePlacement": {
+          "type": "boolean",
+          "description": "Whether to query placement scores for candidate virtual machine sizes with available quota.",
+          "default": false
+        },
+        "includePricing": {
+          "type": "boolean",
+          "description": "Whether to fetch subscription-scoped virtual machine pricing.",
+          "default": false
+        }
+      }
+    },
+    "RecommendVmSkuTokenBudget": {
+      "type": "object",
+      "description": "The per-request token budget used to size the inference key-value cache.",
+      "properties": {
+        "promptTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of prompt, or input, tokens per inference request. Must be supplied together with `maxOutputTokens`, and the two must total from 1 through 131072.",
+          "minimum": 0,
+          "maximum": 131072
+        },
+        "maxOutputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of generated output tokens per inference request. Must be supplied together with `promptTokens`, and the two must total from 1 through 131072.",
+          "minimum": 0,
+          "maximum": 131072
+        }
+      }
+    },
+    "RecommendVmSkuTopology": {
+      "type": "object",
+      "description": "The deployment topology for one virtual machine size option.",
+      "properties": {
+        "estimatedNodeCountPerReplica": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The estimated number of virtual machine nodes required for a single replica."
+        },
+        "estimatedTotalNodeCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The estimated total number of virtual machine nodes across all replicas."
+        },
+        "accelerator": {
+          "$ref": "#/definitions/RecommendVmSkuAccelerator",
+          "description": "The accelerator hardware available in each virtual machine."
+        }
+      },
+      "required": [
+        "estimatedNodeCountPerReplica",
+        "estimatedTotalNodeCount",
+        "accelerator"
+      ]
+    },
+    "RecommendVmSkuWorkload": {
+      "type": "object",
+      "description": "Inference workload assumptions that affect memory sizing.",
+      "properties": {
+        "maxConcurrentRequestsPerReplica": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of simultaneous inference requests handled by each deployment replica.",
+          "minimum": 1
+        },
+        "tokenBudget": {
+          "$ref": "#/definitions/RecommendVmSkuTokenBudget",
+          "description": "The prompt and output token budget used for key-value cache sizing."
+        }
+      }
+    },
+    "StageErrorCode": {
+      "type": "string",
+      "description": "The reason an optional subscription-scoped stage did not complete.",
+      "enum": [
+        "TimedOut",
+        "Throttled",
+        "PartitionCapacityExceeded",
+        "DependencyError",
+        "DataUnavailable",
+        "EvaluationBudgetExceeded"
+      ],
+      "x-ms-enum": {
+        "name": "StageErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TimedOut",
+            "value": "TimedOut",
+            "description": "The stage exceeded its deadline."
+          },
+          {
+            "name": "Throttled",
+            "value": "Throttled",
+            "description": "The stage was throttled."
+          },
+          {
+            "name": "PartitionCapacityExceeded",
+            "value": "PartitionCapacityExceeded",
+            "description": "The service reached its active caller partition capacity."
+          },
+          {
+            "name": "DependencyError",
+            "value": "DependencyError",
+            "description": "A downstream dependency call failed."
+          },
+          {
+            "name": "DataUnavailable",
+            "value": "DataUnavailable",
+            "description": "Required downstream data was unavailable."
+          },
+          {
+            "name": "EvaluationBudgetExceeded",
+            "value": "EvaluationBudgetExceeded",
+            "description": "The optional evaluation call budget was exhausted."
+          }
+        ]
+      }
+    },
+    "VmSizeName": {
+      "type": "string",
+      "description": "An Azure virtual machine size name, for example `Standard_NC24ads_A100_v4`.",
+      "maxLength": 128
+    },
+    "WeightPrecision": {
+      "type": "string",
+      "description": "The precision a model's weights are served at.",
+      "enum": [
+        "FP32",
+        "FP16",
+        "BF16",
+        "FP8",
+        "INT8",
+        "INT4",
+        "FP4"
+      ],
+      "x-ms-enum": {
+        "name": "WeightPrecision",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FP32",
+            "value": "FP32",
+            "description": "32-bit floating point."
+          },
+          {
+            "name": "FP16",
+            "value": "FP16",
+            "description": "16-bit floating point."
+          },
+          {
+            "name": "BF16",
+            "value": "BF16",
+            "description": "16-bit brain floating point."
+          },
+          {
+            "name": "FP8",
+            "value": "FP8",
+            "description": "8-bit floating point."
+          },
+          {
+            "name": "INT8",
+            "value": "INT8",
+            "description": "8-bit integer."
+          },
+          {
+            "name": "INT4",
+            "value": "INT4",
+            "description": "4-bit integer."
+          },
+          {
+            "name": "FP4",
+            "value": "FP4",
+            "description": "4-bit floating point."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

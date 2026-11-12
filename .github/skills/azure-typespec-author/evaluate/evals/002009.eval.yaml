@@ -2,7 +2,8 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability # capability | regression
-area: "armtemplate"
+tags:
+  area: "armtemplate"
 # Root-level environment
 environment: azsdk-mcp
 # Execution configuration
@@ -28,8 +29,8 @@ stimuli:
           dest: main.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/check-node-dependencies.js
-          dest: check-node-dependencies.js
+        - src: ../scripts/check-node-dependencies.ts
+          dest: check-node-dependencies.ts
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -56,11 +57,11 @@ stimuli:
     graders:
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js node_modules"
+          command: "node check-node-dependencies.ts node_modules"
           expected_exit_code: 0
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js packages"
+          command: "node check-node-dependencies.ts packages"
           expected_exit_code: 0
       - type: "run-command"
         config:

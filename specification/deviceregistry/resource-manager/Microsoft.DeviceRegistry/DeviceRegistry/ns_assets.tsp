@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @parentResource(Namespace)
 @doc("Asset definition.")
 model NamespaceAsset is TrackedResource<NamespaceAssetProperties> {
@@ -92,7 +92,7 @@ model NamespaceAssetExecuteActionResponse {
   error?: Error;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @armResourceOperations
 interface NamespaceAssets {
   get is ArmResourceRead<NamespaceAsset>;

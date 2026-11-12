@@ -2,7 +2,8 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability
-area: "dataplane"
+tags:
+  area: "dataplane"
 environment: azsdk-mcp
 defaults:
   runs: 1
@@ -61,19 +62,16 @@ stimuli:
           pattern: ResourceRead<WidgetSuite>
       - &id004
         type: file-matches
-        name: file-matches-create-operation
         config:
           path: main.tsp
           pattern: ResourceCreateOrReplace<WidgetSuite>|ResourceCreateOrUpdate<WidgetSuite>
       - &id005
         type: file-matches
-        name: file-matches-list-operation
         config:
           path: main.tsp
           pattern: 'ResourceList<\s*WidgetSuite'
       - &id006
         type: file-matches
-        name: file-matches-delete-operation
         config:
           path: main.tsp
           pattern: ResourceDelete<WidgetSuite>

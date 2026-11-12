@@ -1,12 +1,20 @@
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;
 
-namespace Azure.AI.Projects.Beta {
-  interface Agents {}
-  @@clientLocation(Azure.AI.Projects.Agents.generateAgent, Agents);
+namespace Azure.AI.Projects.Beta.VoiceAgents {
+  interface Telephony {}
+  @@clientLocation(TelephonyCampaigns.getOperation, Telephony);
+  @@clientLocation(TelephonyCampaigns.create, Telephony);
+  @@clientLocation(TelephonyCampaigns.get, Telephony);
+  @@clientLocation(TelephonyCampaigns.list, Telephony);
+  @@clientLocation(TelephonyCampaigns.cancel, Telephony);
+  @@clientLocation(TelephonyCampaigns.delete, Telephony);
+  @@clientLocation(TelephonyCampaigns.listValidationErrors, Telephony);
 }
 
-namespace Azure.AI.Projects.Beta.VoiceAgents {
+/** Operations for managing voice-agent telephony calls and stored Realtime conversations. */
+namespace Azure.AI.Projects.VoiceAgents {
+  /** Operations for reading and deleting stored Realtime conversations and their audio. */
   interface Conversations {}
   @@clientLocation(
     AgentEndpointConversations.listAgentConversations,
@@ -64,7 +72,50 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
     AgentEndpointConversations.getAgentConversationAudioContent,
     Conversations
   );
+}
 
+namespace Azure.AI.Projects.Beta.VoiceAgents {
+  interface LiveConversations {}
+  @@clientLocation(
+    AgentEndpointLiveConversations.listLiveAgentConversations,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversation,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.deleteLiveAgentConversation,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.listLiveAgentConversationItems,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationItem,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+    LiveConversations
+  );
+  @@clientLocation(
+    AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
+    LiveConversations
+  );
+}
+
+namespace Azure.AI.Projects.VoiceAgents {
+  /** Operations for managing voice-agent telephony bindings, calls, and call jobs. */
   interface Telephony {}
   @@clientLocation(AgentTelephony.createTelephonyBinding, Telephony);
   @@clientLocation(AgentTelephony.listTelephonyBindings, Telephony);
@@ -79,5 +130,7 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
   @@clientLocation(AgentTelephony.replaceTelephonyTransferTargets, Telephony);
   @@clientLocation(AgentTelephony.createTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.getTelephonyCallJob, Telephony);
+  @@clientLocation(AgentTelephony.listTelephonyCallJobs, Telephony);
+  @@clientLocation(AgentTelephony.deleteTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.cancelTelephonyCallJob, Telephony);
 }

@@ -2,7 +2,8 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability # capability | regression
-area: "versioning"
+tags:
+  area: "versioning"
 # Root-level environment
 environment: azsdk-mcp
 # Execution configuration
@@ -28,8 +29,8 @@ stimuli:
           dest: main.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/check-node-dependencies.js
-          dest: check-node-dependencies.js
+        - src: ../scripts/check-node-dependencies.ts
+          dest: check-node-dependencies.ts
         - src: ../fixtures/001005-version-add-preview-after-preview/shared.tsp
           dest: shared.tsp
         - src: ../fixtures/001005-version-add-preview-after-preview/tspconfig.yaml
@@ -108,11 +109,11 @@ stimuli:
             - "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge"
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js node_modules"
+          command: "node check-node-dependencies.ts node_modules"
           expected_exit_code: 0
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js packages"
+          command: "node check-node-dependencies.ts packages"
           expected_exit_code: 0
       - type: "run-command"
         config:
@@ -138,31 +139,26 @@ stimuli:
           path: "main.tsp"
       - &file_not_matches_old_property
         type: "file-not-matches"
-        name: "file-not-matches-old-property"
         config:
           pattern: "oldAge"
           path: "employee.tsp"
       - &file_matches_added_property
         type: "file-matches"
-        name: "file-matches-added-property"
         config:
           pattern: '@added\((?:Microsoft\.Widget\.)?Versions\.v2025_05_04_preview\)\s+workLocation\?: WorkLocation;'
           path: "employee.tsp"
       - &file_not_matches_old_version
         type: "file-not-matches"
-        name: "file-not-matches-old-version"
         config:
           pattern: "v2024_10_01_preview"
           path: "employee.tsp"
       - &file_matches_property
         type: "file-matches"
-        name: "file-matches-property"
         config:
           pattern: 'age\?: int32;'
           path: "employee.tsp"
       - &file_matches_type_change
         type: "file-matches"
-        name: "file-matches-type-change"
         config:
           pattern: '@typeChangedFrom\((?:Microsoft\.Widget\.)?Versions\.v2025_05_04_preview, string\[\]\)'
           path: "employee.tsp"

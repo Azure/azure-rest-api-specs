@@ -226,6 +226,7 @@ interface DataBoxEdgeDevices {
       /**
        * The capacity name.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing checkResourceCreationFeasibility POST contract uses capacityName in the query; preserve wire compatibility."
       @query("capacityName")
       capacityName?: string;
     },

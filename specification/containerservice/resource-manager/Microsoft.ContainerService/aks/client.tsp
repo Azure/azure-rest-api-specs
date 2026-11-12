@@ -96,6 +96,50 @@ using Microsoft.ContainerService;
 );
 @@clientName(BootstrapKubeletConfig.clusterFQDN, "clusterFqdn", "csharp");
 @@clientName(
+  UpgradeIssueType.APIBreakingChange,
+  exact("ApiBreakingChange"),
+  "csharp"
+);
+@@clientName(
+  ManagedClusterAgentSandboxProfile.enabled,
+  "IsAgentSandboxProfileEnabled",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterPodSnapshotProfile.enabled,
+  "IsPodSnapshotProfileEnabled",
+  "csharp"
+);
+@@alternateType(
+  ResourceSkuLocationInfo.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(UpgradeContext, "ContainerServiceUpgradeContext", "csharp");
+@@clientName(
+  UpgradeIssueSeverity,
+  "ContainerServiceUpgradeIssueSeverity",
+  "csharp"
+);
+@@clientName(UpgradeIssueType, "ContainerServiceUpgradeIssueType", "csharp");
+@@clientName(
+  DetectedUpgradeIssue,
+  "ContainerServiceDetectedUpgradeIssue",
+  "csharp"
+);
+@@clientName(NodeDisruptionPolicy, "AgentPoolNodeDisruptionPolicy", "csharp");
+@@clientName(SeccompDefault, "ContainerServiceSeccompDefault", "csharp");
+@@clientName(PodLinkLocalAccess, "AgentPoolPodLinkLocalAccess", "csharp");
+@@clientName(NvidiaDriverMode, "AgentPoolNvidiaDriverMode", "csharp");
+@@clientName(GuardrailsSupport, "ContainerServiceGuardrailsSupport", "csharp");
+@@clientName(SafeguardsSupport, "ContainerServiceSafeguardsSupport", "csharp");
+@@clientName(
+  ScopeEvaluationResult,
+  "UpgradeInsightScopeEvaluationResult",
+  "csharp"
+);
+@@clientName(NodeImageVersion, "ContainerServiceNodeImageVersion", "csharp");
+@@clientName(
   ManagedClusterNATGatewaySku,
   "ManagedClusterNatGatewaySku",
   "csharp"
@@ -1325,7 +1369,7 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ManagementMode, "GpuManagementMode", "csharp");
-@@clientName(MigStrategy, "MultiInstanceGpuStrategy", "csharp");
+@@clientName(MigStrategy, "AgentPoolMultiInstanceGpuStrategy", "csharp");
 @@clientName(ResourceSku, "ContainerServiceVmSku", "csharp");
 @@clientName(
   ResourceSkuCapabilities,
@@ -1709,7 +1753,11 @@ namespace Azure.ResourceManager.Models {
 );
 // Resource models: drop redundant "Resource" suffix / add service prefix so the
 // generated {Name}Resource/{Name}Data/{Name}Collection follow ARM conventions.
-@@clientName(MaintenanceWindowResource, "MaintenanceWindow", "csharp");
+@@clientName(
+  MaintenanceWindowResource,
+  "ContainerServiceManagedMaintenanceWindow",
+  "csharp"
+);
 @@clientName(
   GuardrailsAvailableVersion,
   "ContainerServiceGuardrailsAvailableVersion",

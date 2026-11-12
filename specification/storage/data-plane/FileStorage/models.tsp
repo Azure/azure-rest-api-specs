@@ -389,6 +389,22 @@ enum ListFilesIncludeType {
 
   /** PermissionKey */
   PermissionKey,
+
+  /** Permissions */
+  @added(Versions.v2027_03_07)
+  Permissions,
+
+  /** LinkCount */
+  @added(Versions.v2027_03_07)
+  LinkCount,
+
+  /** NfsAttributes */
+  @added(Versions.v2027_03_07)
+  NfsAttributes,
+
+  /** All */
+  @added(Versions.v2027_03_07)
+  All,
 }
 
 /** The type of share information to include in the listing. */
@@ -525,6 +541,36 @@ model FilesAndDirectoriesListSegment {
   @Xml.unwrapped
   @Xml.name("File")
   fileItems: FileItem[];
+
+  /** The symbolic link items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("SymLink")
+  symLinkItems?: SymLinkItem[];
+
+  /** The block device items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("BlockDevice")
+  blockDeviceItems?: BlockDeviceItem[];
+
+  /** The character device items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("CharDevice")
+  charDeviceItems?: CharDeviceItem[];
+
+  /** The FIFO items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("Fifo")
+  fifoItems?: FifoItem[];
+
+  /** The socket items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("Socket")
+  socketItems?: SocketItem[];
 }
 
 /** A listed directory item. */
@@ -544,6 +590,11 @@ model DirectoryItem {
 
   /** The permission key. */
   @Xml.name("PermissionKey") permissionKey?: string;
+
+  /** The link count of the directory. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("LinkCount")
+  linkCount?: int64;
 }
 
 /** An encoded string value. */
@@ -590,6 +641,21 @@ model FileProperty {
 
   /** The ETag of the file. */
   @Xml.name("Etag") eTag?: Azure.Core.eTag;
+
+  /** NFS only. The owner user identifier (UID) of the file. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("Uid")
+  owner?: string;
+
+  /** NFS only. The owner group identifier (GID) of the file. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("Gid")
+  group?: string;
+
+  /** NFS only. The mode of the file. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("Mode")
+  fileMode?: string;
 }
 
 /** A listed file item. */
@@ -609,6 +675,111 @@ model FileItem {
 
   /** The permission key. */
   @Xml.name("PermissionKey") permissionKey?: string;
+
+  /** The link count of the file. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("LinkCount")
+  linkCount?: int64;
+}
+
+/** A listed symbolic link item. */
+@added(Versions.v2027_03_07)
+@Xml.name("SymLink")
+model SymLinkItem {
+  /** The symbolic link name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the symbolic link. */
+  @Xml.name("LinkCount") linkCount?: int64;
+
+  /** The path to the original file, the symbolic link is pointing to. */
+  @Xml.name("LinkText") linkText?: string;
+}
+
+/** A listed block device item. */
+@added(Versions.v2027_03_07)
+@Xml.name("BlockDevice")
+model BlockDeviceItem {
+  /** The block device name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the block device. */
+  @Xml.name("LinkCount") linkCount?: int64;
+
+  /** The major device number of the block device. */
+  @Xml.name("DeviceMajor") deviceMajor?: int64;
+
+  /** The minor device number of the block device. */
+  @Xml.name("DeviceMinor") deviceMinor?: int64;
+}
+
+/** A listed character device item. */
+@added(Versions.v2027_03_07)
+@Xml.name("CharDevice")
+model CharDeviceItem {
+  /** The character device name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the character device. */
+  @Xml.name("LinkCount") linkCount?: int64;
+
+  /** The major device number of the character device. */
+  @Xml.name("DeviceMajor") deviceMajor?: int64;
+
+  /** The minor device number of the character device. */
+  @Xml.name("DeviceMinor") deviceMinor?: int64;
+}
+
+/** A listed FIFO item. */
+@added(Versions.v2027_03_07)
+@Xml.name("Fifo")
+model FifoItem {
+  /** The FIFO name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the FIFO. */
+  @Xml.name("LinkCount") linkCount?: int64;
+}
+
+/** A listed socket item. */
+@added(Versions.v2027_03_07)
+@Xml.name("Socket")
+model SocketItem {
+  /** The socket name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the socket. */
+  @Xml.name("LinkCount") linkCount?: int64;
 }
 
 /** A listed Azure Storage handle item. */
@@ -871,6 +1042,12 @@ model SharePropertiesInternal {
 
   /** Whether SMB directory lease is enabled. */
   @Xml.name("EnableSmbDirectoryLease") enableSmbDirectoryLease?: boolean;
+
+  /** The creation time. */
+  @added(Versions.v2027_03_07)
+  @encode("rfc7231")
+  @Xml.name("Creation-Time")
+  creationTime?: utcDateTime;
 }
 
 /** Storage Analytics metrics for file service. */
@@ -1011,6 +1188,27 @@ model ShareFileRangeListSegment {
   @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
+}
+
+/** A hard link to a file. */
+@added(Versions.v2027_03_07)
+@Xml.name("HardLink")
+model HardLink {
+  /** The name of the hard link. */
+  @Xml.name("FileName") fileName: StringEncoded;
+
+  /** The fileId of the parent directory of the hard link. */
+  @Xml.name("ParentId") parentId: string;
+}
+
+/** The list of hard links for a file. */
+@added(Versions.v2027_03_07)
+@Xml.name("HardLinks")
+model HardLinkList {
+  /** The hard links. */
+  @Xml.unwrapped
+  @Xml.name("HardLink")
+  hardLinks: HardLink[];
 }
 
 /**
@@ -1452,6 +1650,27 @@ alias FileContentRequestHeaders = {
   @header("x-ms-content-disposition") fileContentDisposition?: string;
 };
 
+/** The file's own content properties, x-ms-prefixed so they do not collide with the headers describing the response body. */
+alias FileMsContentResponseHeaders = {
+  /** The MIME content type of the file. */
+  @header("x-ms-content-type") fileContentType?: string;
+
+  ...FileContentLengthResponseHeader;
+  ...FileContentMD5ResponseHeader;
+
+  /** The content encodings that have been applied to the file. */
+  @header("x-ms-content-encoding") fileContentEncoding?: string;
+
+  /** The natural languages used by the file. */
+  @header("x-ms-content-language") fileContentLanguage?: string;
+
+  /** The cache control of the file. */
+  @header("x-ms-cache-control") fileCacheControl?: string;
+
+  /** The Content-Disposition of the file. */
+  @header("x-ms-content-disposition") fileContentDisposition?: string;
+};
+
 //
 // Share Paid Bursting Headers
 //
@@ -1672,6 +1891,14 @@ alias LinkCountResponseHeader = {
   @header("x-ms-link-count") linkCount?: int32;
 };
 
+/** File name response header. */
+alias FileNameResponseHeader = {
+  /** The name of the file or directory. */
+  @added(Versions.v2027_03_07)
+  @header("x-ms-file-name")
+  fileName?: string;
+};
+
 /** Content-MD5 request header. */
 alias ContentMD5RequestHeader = {
   /** An MD5 hash of the content. This hash is used to verify the integrity of the data during transport. */
@@ -1753,6 +1980,34 @@ alias EnableSmbDirectoryLeaseHeader = {
   /** Optional. Used to enable SMB directory lease. */
   @header("x-ms-enable-smb-directory-lease")
   enableSmbDirectoryLease?: boolean;
+};
+
+/** Change feed request headers for share operations. */
+alias ChangeFeedRequestHeaders = {
+  /** Optional. Boolean. Default if not specified is false. This property enables change feed on the share. */
+  @header("x-ms-file-enable-change-feed") enableChangeFeed?: boolean;
+
+  /** Optional. Integer. Specifies the number of days that change feed records are retained, between 1 and 365. Default if not specified is 7 days. */
+  @maxValue(365)
+  @minValue(1)
+  @header("x-ms-file-change-feed-retention-in-days")
+  changeFeedRetentionInDays?: int32;
+};
+
+/** Change feed response headers for share get properties. */
+alias ChangeFeedResponseHeaders = {
+  /** Whether change feed is enabled. */
+  @header("x-ms-file-enable-change-feed") enableChangeFeed?: boolean;
+
+  /** The number of days that change feed records are retained. */
+  @maxValue(365)
+  @minValue(1)
+  @header("x-ms-file-change-feed-retention-in-days")
+  changeFeedRetentionInDays?: int32;
+
+  /** The blob container in which change feed records are stored, in the format "$fileschangefeed-<guid>". */
+  @header("x-ms-file-blob-container-for-xfiles-change-feed")
+  changeFeedBlobContainerName?: string;
 };
 
 /** Destination lease ID parameter. */
