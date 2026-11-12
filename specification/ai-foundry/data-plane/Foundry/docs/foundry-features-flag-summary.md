@@ -28,6 +28,10 @@ Note that only v1 operations are included in the above table. If an operation (o
 You must include this HTTP request header, with the value specified below,
 in order to successfully complete operations using these routes.
 
+These operations still use `api-version=v1`. Their
+`x-ms-foundry-meta.required_previews` metadata marks them as preview operations
+independently of the wire API version.
+
 | Operation Group | Operation | Method | Path | Foundry-Features Header Value |
 |-----------------|-----------|--------|------|-------------------------------|
 | Evaluators | List Latest Versions | GET | `/evaluators` | Required: `Evaluations=V1Preview` |
@@ -87,5 +91,22 @@ in order to successfully complete operations using these routes.
 | Agent Insight Monitors | List Insights | GET | `/agent_insight_monitors/{monitor_id}/insights` | Required: `AgentInsights=V1Preview` |
 | Agent Insight Monitors | Get Insight | GET | `/agent_insight_monitors/{monitor_id}/insights/{insight_id}` | Required: `AgentInsights=V1Preview` |
 | Agent Insight Monitors | Update Insight | PATCH | `/agent_insight_monitors/{monitor_id}/insights/{insight_id}` | Required: `AgentInsights=V1Preview` |
+| Fine-Tuning Sessions | Create | POST | `/fine_tuning_sessions` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | List | GET | `/fine_tuning_sessions` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Get | GET | `/fine_tuning_sessions/{sessionId}` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Delete | DELETE | `/fine_tuning_sessions/{sessionId}` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Save Checkpoint | POST | `/fine_tuning_sessions/{sessionId}/checkpoint` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Save Sampler Weights | POST | `/fine_tuning_sessions/{sessionId}/checkpoint_sample` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | List Checkpoints | GET | `/fine_tuning_sessions/{sessionId}/checkpoints` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Get Checkpoint | GET | `/fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Prepare Checkpoint Download | POST | `/fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}/download` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Read Checkpoint File | GET | `/fine_tuning_sessions/{sessionId}/checkpoints/{checkpointId}/download/files/{fileId}` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Unload | POST | `/fine_tuning_sessions/{sessionId}/complete` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Forward | POST | `/fine_tuning_sessions/{sessionId}/forward` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Forward and Backward | POST | `/fine_tuning_sessions/{sessionId}/forward_backward` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Heartbeat | POST | `/fine_tuning_sessions/{sessionId}/heartbeat` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Optimizer Step | POST | `/fine_tuning_sessions/{sessionId}/optim_step` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Get Operation | GET | `/fine_tuning_sessions/{sessionId}/request/{requestId}` | Required: `FineTuningSessions=V1Preview` |
+| Fine-Tuning Sessions | Sample | POST | `/fine_tuning_sessions/{sessionId}/sample` | Required: `FineTuningSessions=V1Preview` |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
