@@ -19,7 +19,6 @@ interface CustomOperations {
    * @template Error Optional. The error response, if non-standard.
    */
   @autoRoute
-  @armResourceList(Resource)
   @armResourceAction(Resource)
   @get
   @returnsDoc("Azure operation completed successfully.")
