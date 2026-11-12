@@ -21,12 +21,16 @@ model AttachedAksCluster is ProxyResource<AttachedAksClusterProperties, false> {
     Resource = AttachedAksCluster,
     KeyName = "attachedAksClusterName",
     SegmentName = "attachedAksClusters",
-    NamePattern = "^[^/\\\\]+$"
+    NamePattern = "^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?$"
   >;
 }
 
+@@maxLength(AttachedAksCluster.name, 63);
 @@minLength(AttachedAksCluster.name, 1);
-@@doc(AttachedAksCluster.name, "The name of the account-level AKS attachment.");
+@@doc(
+  AttachedAksCluster.name,
+  "The name of the account-level AKS attachment. It must contain 1-63 letters, digits, periods, underscores, or hyphens, and start and end with a letter or digit."
+);
 
 /**
  * Manages account-level attachments to existing AKS clusters.
@@ -114,13 +118,14 @@ model AttachedAksClusterProperties {
   ]>;
 
   /**
-   * Capabilities enabled on this attachment, without duplicates.
-   * When omitted on creation, defaults to foundryNative; when omitted on an
-   * update, retains the existing capabilities.
+   * The complete set of capabilities for this attachment, without duplicates.
+   * PUT replaces the set. foundryNative is added automatically unless aiManager
+   * is the only capability. After attach, the only supported change is adding
+   * kuberay; other changes return 409 Conflict and require detaching first.
    */
   @minItems(1)
   @maxItems(3)
-  capabilities?: AttachedAksClusterCapability[];
+  capabilities: AttachedAksClusterCapability[];
 
   /** Configuration of the training extension on the attached cluster. */
   extensionProfile?: AttachedAksClusterExtensionProfile;
