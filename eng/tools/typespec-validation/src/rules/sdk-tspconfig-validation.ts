@@ -477,6 +477,13 @@ export class TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule extends Tspconfi
         "Please fix the Java emitter namespace.",
       );
 
+    const serviceName = resolvedNamespace.resolved.split(".")[3];
+    if (!serviceName)
+      return this.createFailedResult(
+        `Cannot derive the Java service-dir from namespace "${resolvedNamespace.resolved}": the fourth namespace segment is missing or empty`,
+        `Please update "options.${this.emitterName}.namespace" to "com.azure.resourcemanager.<service-name>".`,
+      );
+
     const override = this.tryFindOption(config);
     const serviceDir =
       override !== undefined ? override : config?.parameters?.["service-dir"]?.default;
@@ -488,7 +495,7 @@ export class TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule extends Tspconfi
 
     const resolvedServiceDir = this.resolveVariables(serviceDir, config, ["output-dir"]);
     const actual = resolvedServiceDir.resolved.replace(/^\{output-dir\}\//, "");
-    const expected = `sdk/${resolvedNamespace.resolved.split(".")[3]}`;
+    const expected = `sdk/${serviceName}`;
     if (resolvedServiceDir.error || actual !== expected)
       return this.createFailedResult(
         resolvedServiceDir.error ??

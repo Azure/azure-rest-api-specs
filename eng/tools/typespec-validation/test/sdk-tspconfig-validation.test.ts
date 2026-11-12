@@ -1204,6 +1204,18 @@ describe("tspconfig", function () {
       success: false,
     },
     {
+      description: "rejects a short namespace before deriving the service directory",
+      options: { namespace: "com.azure.oracle" },
+      success: false,
+      error: "the fourth namespace segment is missing or empty",
+    },
+    {
+      description: "rejects an empty service segment in a resolved namespace",
+      options: { namespace: "{java-namespace}", "java-namespace": "com.azure.resourcemanager." },
+      success: false,
+      error: "the fourth namespace segment is missing or empty",
+    },
+    {
       description: "rejects a missing output directory",
       options: { "emitter-output-dir": undefined },
       success: false,
@@ -1263,6 +1275,12 @@ describe("tspconfig", function () {
         result.diagnostics?.some((d) => d.message.includes(c.error!)),
         true,
       );
+    strictEqual(
+      result.diagnostics?.some(
+        (d) => d.message.includes("sdk/undefined") || d.help?.includes("sdk/undefined"),
+      ) ?? false,
+      false,
+    );
   });
 
   it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {
