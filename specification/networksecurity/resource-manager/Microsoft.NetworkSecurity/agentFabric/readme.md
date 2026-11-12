@@ -296,6 +296,10 @@ input-file:
 
 ```yaml $(tag) == 'package-preview-2026-11-03'
 directive:
+  - suppress: GuidUsage
+    from: agentFabric.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: resourceGuid and memberGuid are dataplane identifiers used in customer-authored policies, not ARM resource IDs. Retain the existing UUID typing for compatibility. The earlier suppression was approved in https://github.com/Azure/azure-rest-api-specs-pr/pull/30665; this extension still requires approval in this public PR.
   - suppress: PatchBodyParametersSchema
     from: agentFabric.json
     where:
@@ -320,6 +324,10 @@ input-file:
 
 ```yaml $(tag) == 'package-preview-2026-11-02'
 directive:
+  - suppress: GuidUsage
+    from: agentFabric.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: resourceGuid and memberGuid are dataplane identifiers used in customer-authored policies, not ARM resource IDs. Retain the existing UUID typing for compatibility. The earlier suppression was approved in https://github.com/Azure/azure-rest-api-specs-pr/pull/30665; this extension still requires approval in this public PR.
   - suppress: PatchBodyParametersSchema
     from: agentFabric.json
     where:
@@ -344,6 +352,10 @@ input-file:
 
 ```yaml $(tag) == 'package-preview-2026-11-01'
 directive:
+  - suppress: GuidUsage
+    from: agentFabric.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: resourceGuid and memberGuid are dataplane identifiers used in customer-authored policies, not ARM resource IDs. Retain the existing UUID typing for compatibility. The earlier suppression was approved in https://github.com/Azure/azure-rest-api-specs-pr/pull/30665; this extension still requires approval in this public PR.
   - suppress: PatchBodyParametersSchema
     from: agentFabric.json
     where:
@@ -368,6 +380,10 @@ input-file:
 
 ```yaml $(tag) == 'package-preview-2026-10-07'
 directive:
+  - suppress: GuidUsage
+    from: agentFabric.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: resourceGuid and memberGuid are dataplane identifiers used in customer-authored policies, not ARM resource IDs. Retain the existing UUID typing for compatibility. The earlier suppression was approved in https://github.com/Azure/azure-rest-api-specs-pr/pull/30665; this extension still requires approval in this public PR.
   - suppress: PatchBodyParametersSchema
     from: agentFabric.json
     where:

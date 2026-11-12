@@ -1,17 +1,3 @@
-- tool: LintDiff
-  reason: >
-    resourceGuid and memberGuid are dataplane identifiers used in customer-authored
-    policies, not ARM resource IDs. Retain the existing UUID typing for compatibility.
-    The GuidUsage suppression was approved in
-    https://github.com/Azure/azure-rest-api-specs-pr/pull/30665.
-    Extend it to the unchanged Azure.Core.uuid definition in each listed version;
-    this does not assert approval of the extension in this public PR.
-  rules: [GuidUsage]
-  paths:
-    - preview/2026-10-07-preview/agentFabric.json
-    - preview/2026-11-01-preview/agentFabric.json
-    - preview/2026-11-02-preview/agentFabric.json
-    - preview/2026-11-03-preview/agentFabric.json
 - tool: SpecChangePolicies
   reason: >
     This PR publishes six existing preview API versions that already shipped
