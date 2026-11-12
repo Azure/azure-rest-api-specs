@@ -7666,8 +7666,23 @@ model ManagedComputeUsage {
   currentValue?: float64;
 
   /**
+   * Offer scope (e.g., 'Global', 'Datazone-US').
+   */
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "offerScope")
+  offerScopeLegacy?: string;
+
+  /**
    * Offer scope. Supported values are 'Global' and 'DataZone'.
    */
+  @added(Versions.v2026_11_15_preview)
   offerScope?: string;
 
   /**
