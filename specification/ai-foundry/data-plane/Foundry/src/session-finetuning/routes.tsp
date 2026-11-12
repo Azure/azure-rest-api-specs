@@ -347,6 +347,8 @@ interface CheckpointDownloads {
    * Rechecks download admission and ownership. If-Match must contain the
    * advertised strong ETag; arbitrary storage URLs and unversioned reads are
    * not accepted. This read does not create or renew a checkpoint copy.
+   * Clients saving the export locally read every advertised file and verify its
+   * ETag and exact byte count. Successful preparation alone is not file delivery.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Checkpoint file reads use an opaque advertised file identifier and required strong If-Match rather than a standard resource representation."
   @get
