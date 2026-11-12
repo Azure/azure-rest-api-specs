@@ -9,7 +9,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
 
@@ -33,16 +33,14 @@ stimuli:
         - src: "../fixtures/typespec/segment-casing-violations.tsp"
           dest: "specification/connectorgateway/resource-manager/Microsoft.ConnectorGateway/main.tsp"
     prompt: >
-      Review the following TypeSpec specification file for compliance with
-      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
-      rules. This is a new service with no previous API version. Report all
-      findings with rule IDs, line numbers, and fix suggestions.
+      Review the following TypeSpec specification file for compliance with Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/connectorgateway/resource-manager/Microsoft.ConnectorGateway/main.tsp
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)segment|casing|camelCase"
@@ -68,16 +66,14 @@ stimuli:
         - src: "../fixtures/typespec/secret-and-type-violations.tsp"
           dest: "specification/databaseservice/resource-manager/Microsoft.DatabaseService/main.tsp"
     prompt: >
-      Review the following TypeSpec specification file for compliance with
-      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
-      rules. This is a new service with no previous API version. Report all
-      findings with rule IDs, line numbers, and fix suggestions.
+      Review the following TypeSpec specification file for compliance with Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/databaseservice/resource-manager/Microsoft.DatabaseService/main.tsp
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)secret|SEC-SECRET"
@@ -103,16 +99,14 @@ stimuli:
         - src: "../fixtures/typespec/anti-patterns.tsp"
           dest: "specification/workflowservice/resource-manager/Microsoft.WorkflowService/main.tsp"
     prompt: >
-      Review the following TypeSpec specification file for compliance with
-      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
-      rules. This is a new service with no previous API version. Report all
-      findings with rule IDs, line numbers, and fix suggestions.
+      Review the following TypeSpec specification file for compliance with Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/workflowservice/resource-manager/Microsoft.WorkflowService/main.tsp
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "void"
@@ -135,17 +129,14 @@ stimuli:
         - src: "../fixtures/typespec/x-ms-identifiers-violations.tsp"
           dest: "specification/identifierdemo/resource-manager/Microsoft.IdentifierDemo/main.tsp"
     prompt: >
-      Review the following TypeSpec specification file for compliance with
-      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
-      rules. This is a new service with no previous API version. Report all
-      findings with rule IDs, line numbers, and fix suggestions. Pay special
-      attention to how array properties declare x-ms-identifiers.
+      Review the following TypeSpec specification file for compliance with Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions. Pay special attention to how array properties declare x-ms-identifiers.
 
       File: specification/identifierdemo/resource-manager/Microsoft.IdentifierDemo/main.tsp
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)@extension|x-ms-identifiers"
@@ -192,10 +183,11 @@ stimuli:
 
       Report only operation-template or operation-naming findings. Explain
       whether the operation name and each sync/async choice are valid.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "createOrUpdate"
@@ -237,10 +229,11 @@ stimuli:
 
       Should the ARM API Reviewer file a published-version immutability finding?
       State what it must and must not recommend as a fix.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)wire|REST|ARM semantic"
@@ -280,10 +273,11 @@ stimuli:
 
       Should the ARM API Reviewer file a published-version finding? Give the
       native TypeSpec correction and explain the required logical final result.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
         config:
           pattern: "ArmResourceDeleteWithoutOkAsync"

@@ -8,7 +8,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
   files:
@@ -55,28 +55,29 @@ stimuli:
       Render what the human sees next. The response MUST begin with
       `<!-- review-state: critic-mode=unavailable | iteration=1 |
       pr=Azure/azure-rest-api-specs#12345 -->` as the literal first line.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "review-state unavailable marker"
+        name: "review-state-unavailable-marker"
         config:
           pattern: '(?s)^<!-- review-state: critic-mode=unavailable \| iteration=1 \| pr=Azure/azure-rest-api-specs#12345 -->'
       - type: output-not-matches
-        name: "no session-handoff prompt emitted"
+        name: "no-session-handoff-prompt-emitted"
         config:
           pattern: "(?i)open a new chat|paste.*critic|session.handoff"
       - type: output-not-matches
-        name: "no finding bodies rendered"
+        name: "no-finding-bodies-rendered"
         config:
           pattern: '(?i)\*\*\[(?:NEW|EXISTING)\]\s*(?:🔴|🟠|🔵)'
       - type: output-contains
-        name: "manual decision recommendation present"
+        name: "manual-decision-recommendation-present"
         config:
           substring: "MANUAL DECISION REQUIRED"
       - type: output-contains
-        name: "unavailable banner present"
+        name: "unavailable-banner-present"
         config:
           substring: "CAUTION"
       - type: prompt
@@ -133,28 +134,29 @@ stimuli:
       `<full-40-char-current-head-sha>` with
       `cccccccccccccccccccccccccccccccccccccccc`, and pick
       `session-sha-moved` for the invalidation reason.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "review-state invalidated marker"
+        name: "review-state-invalidated-marker"
         config:
           pattern: '(?s)^<!-- review-state: critic-mode=invalidated \| iteration=1 \| pr=Azure/azure-rest-api-specs#12345 -->'
       - type: output-contains
-        name: "session invalidated stated"
+        name: "session-invalidated-stated"
         config:
           substring: "SESSION INVALIDATED"
       - type: output-contains
-        name: "old sha shown"
+        name: "old-sha-shown"
         config:
           substring: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       - type: output-contains
-        name: "new sha shown"
+        name: "new-sha-shown"
         config:
           substring: "cccccccccccccccccccccccccccccccccccccccc"
       - type: output-not-matches
-        name: "no findings rendered"
+        name: "no-findings-rendered"
         config:
           pattern: "(?i)## API Review:|### Blocking Issues|### Warnings|### Suggestions"
       - type: prompt
@@ -209,24 +211,25 @@ stimuli:
       after `head-sha:` (this is the 8-field downstream variant of the
       7-field base marker). Substitute the placeholder head SHA above; leave
       `<RULE-ID>`, `<file-path>`, and `<N>` as literal placeholders.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "multi-option recommendation"
+        name: "multi-option-recommendation"
         config:
           pattern: '(?is)(three options|1\..*2\..*3\.|Switch to `uuid`.*Keep `type: string`.*override)'
       - type: output-contains
-        name: "downstream-rule marker present"
+        name: "downstream-rule-marker-present"
         config:
           substring: "downstream-rule: R3017"
       - type: output-matches
-        name: "downstream marker carries a canonical category"
+        name: "downstream-marker-carries-a-canonical-category"
         config:
           pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*category:\s*sdk-and-client-impact\s*\|\s*severity:\s*suggestion\s*\|\s*classification:\s*new\s*\|\s*critic:\s*pass\s*\|\s*head-sha:\s*(?:[0-9a-fA-F]{40}|<full-40-char-sha>)\s*\|\s*downstream-rule:\s*R3017\s*-->'
       - type: output-matches
-        name: "not directive phrasing"
+        name: "not-directive-phrasing"
         config:
           pattern: "(?i)Suggestion"
       - type: prompt
@@ -287,24 +290,25 @@ stimuli:
       `classification`, `critic`, `head-sha`. Do NOT render telemetry as a visible blockquote
       (`> **Telemetry:** ...`) or with `=` separators -- those forms are not
       machine-readable.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "review-state subagent marker"
+        name: "review-state-subagent-marker"
         config:
           pattern: '(?s)^<!-- review-state: critic-mode=subagent \| iteration=1 \| pr=Azure/azure-rest-api-specs#54321 -->'
       - type: output-contains
-        name: "READY TO POST recommendation rendered"
+        name: "ready-to-post-recommendation-rendered"
         config:
           substring: "READY TO POST"
       - type: output-matches
-        name: "full 7-field telemetry marker on findings"
+        name: "full-7-field-telemetry-marker-on-findings"
         config:
           pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*category:\s*(schema-and-property-design|naming-enums-and-identifiers|sdk-and-client-impact|resource-modeling|operations-and-http-semantics|long-running-operations|suppressions-and-tooling|review-readiness-and-ci|documentation-and-examples|versioning-and-compatibility|security-and-secrets)\s*\|\s*severity:\s*(blocking|warning|suggestion)\s*\|\s*classification:\s*(new|existing)\s*\|\s*critic:\s*pass\s*\|\s*head-sha:\s*(?:[0-9a-fA-F]{40}|<full-40-char-sha>)'
       - type: output-not-matches
-        name: "no CAUTION banner or session-invalidated on happy path"
+        name: "no-caution-banner-or-session-invalidated-on-happy-path"
         config:
           pattern: '(?i)\[!CAUTION\]|SESSION INVALIDATED|Subagent invocation is not available'
       - type: prompt
@@ -318,43 +322,28 @@ stimuli:
   # 160005 -- Step 1 SHA pinning emits the marker on the very first progress message
   - name: step1-pins-session-and-base-sha
     prompt: >
-      Start an ARM API review for pull request
-      `https://github.com/Azure/azure-rest-api-specs/pull/77777`. Perform
-      Step 1 (pin the session head SHA and base SHA, decline if the PR is
-      not in an ARM-eligible repo). Assume the host's GitHub adapter returns
-      head SHA `1111111111111111111111111111111111111111` and base SHA
-      `2222222222222222222222222222222222222222`. The PR is in
-      `Azure/azure-rest-api-specs` so it IS in scope; do not decline.
+      Start an ARM API review for pull request `https://github.com/Azure/azure-rest-api-specs/pull/77777`. Perform Step 1 (pin the session head SHA and base SHA, decline if the PR is not in an ARM-eligible repo). Assume the host's GitHub adapter returns head SHA `1111111111111111111111111111111111111111` and base SHA `2222222222222222222222222222222222222222`. The PR is in `Azure/azure-rest-api-specs` so it IS in scope; do not decline.
 
-      Emit ONLY your very first chat response after Step 1 completes -- the
-      progress message that reports the pinned SHAs and announces that you
-      are starting Step 2 (loading instructions). The response MUST begin
-      with `<!-- review-state: critic-mode=pending | iteration=1 |
-      pr=Azure/azure-rest-api-specs#77777 -->` as the literal first line,
-      then report both the session head SHA
-      `1111111111111111111111111111111111111111` and the base SHA
-      `2222222222222222222222222222222222222222` verbatim (full 40 chars
-      each), and then announce that Step 2 is starting. Do NOT render
-      findings, a Reconciliation Plan, or a Critic verdict -- those happen
-      in later steps.
-    constraints:
-      expect_skills:
-        - azure-api-review
+      Emit ONLY your very first chat response after Step 1 completes -- the progress message that reports the pinned SHAs and announces that you are starting Step 2 (loading instructions). The response MUST begin with `<!-- review-state: critic-mode=pending | iteration=1 | pr=Azure/azure-rest-api-specs#77777 -->` as the literal first line, then report both the session head SHA `1111111111111111111111111111111111111111` and the base SHA `2222222222222222222222222222222222222222` verbatim (full 40 chars each), and then announce that Step 2 is starting. Do NOT render findings, a Reconciliation Plan, or a Critic verdict -- those happen in later steps.
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "review-state pending marker on first turn"
+        name: "review-state-pending-marker-on-first-turn"
         config:
           pattern: '(?s)^<!-- review-state: critic-mode=pending \| iteration=1 \| pr=Azure/azure-rest-api-specs#77777 -->'
       - type: output-contains
-        name: "head SHA pinned verbatim"
+        name: "head-sha-pinned-verbatim"
         config:
           substring: "1111111111111111111111111111111111111111"
       - type: output-contains
-        name: "base SHA pinned verbatim"
+        name: "base-sha-pinned-verbatim"
         config:
           substring: "2222222222222222222222222222222222222222"
       - type: output-not-matches
-        name: "no premature findings or critic verdict"
+        name: "no-premature-findings-or-critic-verdict"
         config:
           pattern: "(?i)## API Review:|### Blocking Issues|### Warnings|Next-step recommendation|Critic verdict"
       - type: prompt
@@ -419,16 +408,17 @@ stimuli:
       remain as `<RULE-ID-F1>` and `<RULE-ID-F3>` placeholders.
       Do not narrate your preparation or announce that you are about to render
       the report. The first character of the response must be `<`.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "iteration 2 report keeps required state and finding metadata"
+        name: "iteration-2-report-keeps-required-state-and-finding-metadata"
         config:
           pattern: '(?s)^(?=<!-- review-state: critic-mode=subagent \| iteration=2 \| pr=Azure/azure-rest-api-specs#88888 -->)(?=.*REVISE RECOMMENDED)(?=.*category:\s*resource-modeling.*head-sha:\s*9999999999999999999999999999999999999999).*$'
       - type: output-not-matches
-        name: "F2 dropped from findings list"
+        name: "f2-dropped-from-findings-list"
         config:
           # A prose iteration-history sentence may mention F2, but F2 must not
           # survive as a heading, canonical bold finding, or telemetry rule.
@@ -496,20 +486,21 @@ stimuli:
       The abbreviated marker form `<!-- posted-by: arm-api-reviewer-agent -->`
       is NEVER acceptable on a `critic=override` post; the full 8-field form
       (with `override-reason:` as the last field) is required.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "telemetry marker has critic=override and override-reason"
+        name: "telemetry-marker-has-critic-override-and-override-reason"
         config:
           pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*RPC-Put-V1-22\s*\|\s*category:\s*resource-modeling\s*\|\s*severity:\s*blocking\s*\|\s*classification:\s*new\s*\|\s*critic:\s*override\s*\|\s*head-sha:\s*abcdefabcdefabcdefabcdefabcdefabcdefabcd\s*\|\s*override-reason:\s*[^>]{20,}\s*-->'
       - type: output-matches
-        name: "reviewer-override note present in body"
+        name: "reviewer-override-note-present-in-body"
         config:
           pattern: '(?is)\*\*Note:\*\*\s*Critic\s*FAILed\s*this\s*finding'
       - type: output-not-matches
-        name: "abbreviated marker form not used"
+        name: "abbreviated-marker-form-not-used"
         config:
           # Disallows the short marker form `<!-- posted-by: arm-api-reviewer-agent -->`
           # only when it appears OUTSIDE inline-code backticks. Agents
@@ -549,27 +540,28 @@ stimuli:
       degraded marker. Do not fabricate a head SHA. Return only the finding
       body; do not add preparation or explanation before it, and stop
       immediately after the marker.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "minimal degraded marker is the literal final line"
+        name: "minimal-degraded-marker-is-the-literal-final-line"
         config:
           pattern: '(?s)<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*telemetry:\s*degraded\s*\|\s*reason:\s*head-sha-unavailable\s*-->\s*$'
       - type: output-contains
-        name: "reason field populated"
+        name: "reason-field-populated"
         config:
           substring: "reason: head-sha-unavailable"
       - type: output-not-matches
-        name: "full 7-field marker not emitted"
+        name: "full-7-field-marker-not-emitted"
         config:
           # The minimal marker form replaces the full 7-field marker -- the
           # full form would have severity/classification/critic/head-sha
           # fields that the prompt explicitly says cannot be assembled.
           pattern: 'posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:'
       - type: output-not-matches
-        name: "no fabricated head-sha"
+        name: "no-fabricated-head-sha"
         config:
           # head-sha must be omitted entirely, not faked. Reject any
           # head-sha: token in the marker outside the fixed example
@@ -606,16 +598,17 @@ stimuli:
       complete interactive marker using the correct fallback value. Return only
       the finding body; do not add preparation or explanation before it, and
       stop immediately after the marker.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "critic: unknown marker present"
+        name: "critic-unknown-marker-present"
         config:
           pattern: '(?s)<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*category:\s*resource-modeling\s*\|\s*severity:\s*blocking\s*\|\s*classification:\s*new\s*\|\s*critic:\s*unknown\s*\|\s*head-sha:\s*1234567890abcdef1234567890abcdef12345678\s*-->\s*$'
       - type: output-not-matches
-        name: "no fabricated critic: pass"
+        name: "no-fabricated-critic-pass"
         config:
           # Must not silently fall back to `pass` when no Critic ran. The
           # prompt explicitly says no per-finding verdict was produced.
@@ -651,23 +644,24 @@ stimuli:
       `WaitForARMFeedback` (it isn't present). State explicitly in the
       bundled label section that no label changes are needed because the
       review is clean.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "review-state subagent marker"
+        name: "review-state-subagent-marker-2"
         config:
           pattern: '(?s)^<!-- review-state: critic-mode=subagent \| iteration=1 \| pr=Azure/azure-rest-api-specs#54321 -->'
       - type: output-not-matches
-        name: "ARMChangesRequested NOT proposed for add"
+        name: "armchangesrequested-not-proposed-for-add"
         config:
           # Reject any phrasing that proposes adding the label. The label
           # name may still appear in prose explaining WHY it's being
           # skipped, so match only proposal-shaped contexts.
           pattern: '(?im)(?:^\s*(?:[-*]\s*)?(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?|\b(?:will|would|should|must|can|may|plan(?:s)? to|going to|proposal:?)\s+(?!not\b|never\b|no\b)(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?)'
       - type: output-contains
-        name: "explicit skip stated"
+        name: "explicit-skip-stated"
         config:
           # The disclosure rule (Step 9) says the bundled section MUST
           # report which labels were intentionally skipped and why.
@@ -695,20 +689,21 @@ stimuli:
       Critic returns an empty response: whether it is treated as PASS or
       failure, what happens next, and what the final outcome is if all
       retries also return empty responses.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "empty response not treated as pass"
+        name: "empty-response-not-treated-as-pass"
         config:
           pattern: "(?i)empty.*treated as pass|no output.*clean pass|blank.*indicates pass"
       - type: output-contains
-        name: "empty response is a failure"
+        name: "empty-response-is-a-failure"
         config:
           substring: "failure"
       - type: output-matches
-        name: "retry or unavailable mentioned"
+        name: "retry-or-unavailable-mentioned"
         config:
           pattern: "(?i)retr|unavailable"
       - type: prompt
@@ -742,20 +737,21 @@ stimuli:
       Apply the workflow's Run Context and Trigger Validation step 1 exactly.
       Do not reinterpret the validated target as an issue, and do not emit a
       `noop`.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
-        name: "validated PR target retained"
+        name: "validated-pr-target-retained"
         config:
           substring: "44499"
       - type: output-matches
-        name: "first GitHub read fetches PR metadata"
+        name: "first-github-read-fetches-pr-metadata"
         config:
           pattern: "(?i)get_pull_request|get pull request|fetch pull request"
       - type: output-not-matches
-        name: "false built-in field does not cause noop"
+        name: "false-built-in-field-does-not-cause-noop"
         config:
           pattern: "(?i)noop|no pull request|not a pull request|context is issue|unresolvable|cannot resolve"
       - type: prompt
@@ -769,8 +765,6 @@ stimuli:
   - name: top-level-comment-suppresses-duplicate
     environment:
       files:
-        - src: "../../../../agents/arm-api-reviewer.agent.md"
-          dest: ".github/agents/arm-api-reviewer.agent.md"
         - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
           dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
     prompt: |
@@ -801,20 +795,21 @@ stimuli:
       rationale must explicitly state whether the line-number difference and
       missing agent marker make the finding new. Do not render the finding
       body, post a comment, or discuss unrelated steps.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
-        name: "duplicate is covered"
+        name: "duplicate-is-covered"
         config:
           substring: "SKIP-COVERED"
       - type: output-not-matches
-        name: "duplicate is not posted"
+        name: "duplicate-is-not-posted"
         config:
           pattern: "(?i)POST-NEW|post (?:a )?(?:new|duplicate)|CLARIFY-CONFLICT"
       - type: output-matches
-        name: "top-level semantic coverage recognized"
+        name: "top-level-semantic-coverage-recognized"
         config:
           pattern: "(?i)top-level|semantic|same (?:rule|finding|API element)|already cover"
       - type: prompt
@@ -827,8 +822,6 @@ stimuli:
   - name: contradictory-thread-requires-clarification
     environment:
       files:
-        - src: "../../../../agents/arm-api-reviewer.agent.md"
-          dest: ".github/agents/arm-api-reviewer.agent.md"
         - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
           dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
     prompt: |
@@ -853,24 +846,25 @@ stimuli:
       evidence, current guidance, and why the conclusion changed. The thread
       is human-origin, so it must remain unresolved. Do not render or propose a
       separate standalone finding.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
-        name: "conflict action selected"
+        name: "conflict-action-selected"
         config:
           substring: "CLARIFY-CONFLICT"
       - type: output-not-matches
-        name: "no competing finding or resolution"
+        name: "no-competing-finding-or-resolution"
         config:
           pattern: "(?i)POST-NEW|new standalone finding|(?:will|should|plan to) resolve|RESOLVE-AND-REPOST"
       - type: output-matches
-        name: "prior and current positions stated"
+        name: "prior-and-current-positions-stated"
         config:
           pattern: "(?is)(?:prior|previous).*required.*(?:readOnly|read-only).*(?:optional|must not be required)"
       - type: output-matches
-        name: "reason for changed guidance stated"
+        name: "reason-for-changed-guidance-stated"
         config:
           pattern: "(?i)because|therefore|changed|supersed"
       - type: prompt
@@ -898,28 +892,29 @@ stimuli:
       The response MUST begin with `<!-- review-state: critic-mode=subagent
       | iteration=1 | pr=Azure/azure-rest-api-specs#44941 -->` as the
       literal first line.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
-        name: "preamble heading named"
+        name: "preamble-heading-named"
         config:
           substring: "## ARM API Review"
       - type: output-matches
-        name: "non-empty body mandate stated"
+        name: "non-empty-body-mandate-stated"
         config:
           pattern: "(?i)(REQUIRED and MUST be non-empty|must not be empty|never .{0,20}empty)"
       - type: output-matches
-        name: "post-condition re-fetch described"
+        name: "post-condition-re-fetch-described"
         config:
           pattern: "(?is)(re-?fetch|verify|confirm).{0,80}(review bod|top-level comment)"
       - type: output-matches
-        name: "hidden marker rejected as sufficient"
+        name: "hidden-marker-rejected-as-sufficient"
         config:
           pattern: "(?is)(hidden|HTML comment|posted-by).{0,120}(does not|not sufficient|doesn't|never).{0,40}(satisf|count|render)"
       - type: output-matches
-        name: "top-level fallback stated"
+        name: "top-level-fallback-stated"
         config:
           pattern: "(?is)top-level (PR )?comment"
       - type: prompt
@@ -951,20 +946,21 @@ stimuli:
       The response MUST begin with `<!-- review-state: critic-mode=subagent
       | iteration=1 | pr=Azure/azure-rest-api-specs#44324 -->` as the
       literal first line.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "diagnosed as client-side, not a GitHub failure"
+        name: "diagnosed-as-client-side-not-a-github-failure"
         config:
           pattern: "(?is)client-?side"
       - type: output-matches
-        name: "switches to the MCP tool"
+        name: "switches-to-the-mcp-tool"
         config:
           pattern: "(?i)(pull_request_read|get_file_contents|MCP tool)"
       - type: output-not-matches
-        name: "no further quoting permutation proposed"
+        name: "no-further-quoting-permutation-proposed"
         config:
           pattern: '(?is)\b(?:will|would|should|must|can|may|plan(?:s)? to|going to|next action:?)\s+(?!not\b|never\b|no\b)(?:try|retry|attempt)\b.{0,60}(?:different|another|escap|single quote|double quote).{0,40}quot'
       - type: prompt
@@ -993,24 +989,25 @@ stimuli:
       The response MUST begin with `<!-- review-state:
       critic-mode=unavailable | iteration=1 |
       pr=Azure/azure-rest-api-specs#45013 -->` as the literal first line.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "review-state unavailable marker"
+        name: "review-state-unavailable-marker-2"
         config:
           pattern: '(?s)^<!-- review-state: critic-mode=unavailable \| iteration=1 \| pr=Azure/azure-rest-api-specs#45013 -->'
       - type: output-not-matches
-        name: "severity NOT downgraded to Warning"
+        name: "severity-not-downgraded-to-warning"
         config:
           pattern: '(?is)(?:\b(?:will|would|should|must|can|may|is|are|was|were|gets?|got)\s+(?!not\b|never\b|no\b)(?:be\s+|being\s+)?downgrad\w*.{0,40}(?:to\s+)?Warning|\b(?:severity|finding)\s+(?:is\s+)?downgrad\w*.{0,20}\bfrom\b.{0,20}\bBlocking\b.{0,20}(?:to|->)\s*Warning)'
       - type: output-not-matches
-        name: "ARMChangesRequested NOT proposed for add"
+        name: "armchangesrequested-not-proposed-for-add-2"
         config:
           pattern: '(?im)(?:^\s*(?:[-*]\s*)?(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?|\b(?:will|would|should|must|can|may|plan(?:s)? to|going to|proposal:?)\s+(?!not\b|never\b|no\b)(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?)'
       - type: output-matches
-        name: "unavailability disclosed"
+        name: "unavailability-disclosed"
         config:
           pattern: "(?i)(critic).{0,40}(unavailable|could not|failed)"
       - type: prompt
@@ -1043,24 +1040,25 @@ stimuli:
       reconciliation skipped
 
       Return the Critic verdict and per-finding correction.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "false paging finding rejected"
+        name: "false-paging-finding-rejected"
         config:
           pattern: "(?i)FAIL: rule-misapplied"
       - type: output-matches
-        name: "RPC paging parameter named"
+        name: "rpc-paging-parameter-named"
         config:
           pattern: '(?i)\$(?:top|skipToken)'
       - type: output-matches
-        name: "finding is dropped rather than downgraded"
+        name: "finding-is-dropped-rather-than-downgraded"
         config:
           pattern: "(?i)DROP"
       - type: output-not-matches
-        name: "no Warning finding retained"
+        name: "no-warning-finding-retained"
         config:
           pattern: "(?is)DOWNGRADE.{0,100}Warning"
       - type: prompt
@@ -1093,16 +1091,17 @@ stimuli:
       reconciliation skipped
 
       Return the Critic verdict and per-finding correction.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "Blocking downgraded to Warning"
+        name: "blocking-downgraded-to-warning"
         config:
           pattern: "(?is)DOWNGRADE.{0,100}(?:Blocking.{0,30}Warning|Warning)"
       - type: output-matches
-        name: "extensibility rationale stated"
+        name: "extensibility-rationale-stated"
         config:
           pattern: "(?is)modelAsString.{0,160}(?:accept|extensib|unknown|arbitrary)"
       - type: prompt
@@ -1134,16 +1133,17 @@ stimuli:
       reconciliation skipped
 
       Return the Critic verdict and per-finding correction.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "valid token-scope finding is not dropped"
+        name: "valid-token-scope-finding-is-not-dropped"
         config:
           pattern: "(?is)(?:DROP|false positive).{0,200}(?:finding|\\$skipToken)"
       - type: output-matches
-        name: "scope security requirement retained"
+        name: "scope-security-requirement-retained"
         config:
           pattern: "(?is)(?:tenant|subscription|scope).{0,200}(?:MUST|Blocking|security|data)"
       - type: prompt
@@ -1174,16 +1174,17 @@ stimuli:
       reconciliation skipped
 
       Return the Critic verdict and per-finding correction.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "discriminator finding is not downgraded"
+        name: "discriminator-finding-is-not-downgraded"
         config:
           pattern: "(?is)(?:Required action|Recommended action|Critic verdict:).{0,100}DOWNGRADE.{0,100}Warning"
       - type: output-matches
-        name: "Blocking discriminator exception applied"
+        name: "blocking-discriminator-exception-applied"
         config:
           pattern: "(?is)(?:discriminator).{0,200}(?:Blocking|deserial|subtype)"
       - type: prompt
@@ -1215,16 +1216,17 @@ stimuli:
       reconciliation skipped
 
       Return the Critic verdict and per-finding correction.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "request URL finding is not downgraded"
+        name: "request-url-finding-is-not-downgraded"
         config:
           pattern: "(?is)(?:Required action|Recommended action|Critic verdict:).{0,100}DOWNGRADE.{0,100}Warning"
       - type: output-matches
-        name: "Blocking request URL exception applied"
+        name: "blocking-request-url-exception-applied"
         config:
           pattern: "(?is)(?:path|request URL).{0,200}(?:Blocking|routing|operation contract)"
       - type: prompt
@@ -1251,20 +1253,21 @@ stimuli:
 
       The dispatch omits the entire `## Step 5.5 reconciliation plan` input.
       Return the Critic verdict without inventing a default sentinel.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "missing reconciliation input fails validation"
+        name: "missing-reconciliation-input-fails-validation"
         config:
           pattern: "(?is)Finding accuracy.{0,100}FAIL"
       - type: output-contains
-        name: "missing-inputs reason returned"
+        name: "missing-inputs-reason-returned"
         config:
           substring: "missing-inputs"
       - type: output-matches
-        name: "reconciliation accuracy fails rather than becoming N/A"
+        name: "reconciliation-accuracy-fails-rather-than-becoming-n-a"
         config:
           pattern: "(?is)Reconciliation accuracy.{0,100}FAIL"
       - type: prompt
@@ -1289,28 +1292,29 @@ stimuli:
       route before any findings are presented. Include source inventory and
       snapshot behavior, breaking-change sources, Critic input, reconciliation,
       posting/labels, and cleanup. Do not invent a PR.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "full local snapshot and comparison path"
+        name: "full-local-snapshot-and-comparison-path"
         config:
           pattern: "(?is)^(?=.*(?:full.inventory|full.review|all supported|every supported))(?=.*(?:untracked|modified))(?=.*local-sha256)(?=.*(?:previous.version|breaking.change|git diff)).*$"
       - type: output-matches
-        name: "Critic receives local binding"
+        name: "critic-receives-local-binding"
         config:
           pattern: "(?is)(?:Critic).{0,400}(?:source manifest|SHA-256|local-sha256|Repository HEAD)"
       - type: output-matches
-        name: "PR-only mechanics skipped"
+        name: "pr-only-mechanics-skipped"
         config:
           pattern: "(?is)reconciliation skipped.{0,300}(?:no|never|N/A).{0,100}(?:post|label|GitHub mutation)"
       - type: output-not-matches
-        name: "local review does not mutate cleanup artifacts"
+        name: "local-review-does-not-mutate-cleanup-artifacts"
         config:
           pattern: "(?is)(?:will|must|should|plan to).{0,40}(?:delete|remove).{0,80}(?:branch|worktree|file)"
       - type: output-not-matches
-        name: "content snapshot is not described as stable across edits"
+        name: "content-snapshot-is-not-described-as-stable-across-edits"
         config:
           pattern: "(?is)(?:snapshot|local-sha256).{0,80}(?:stable|unchanged).{0,80}(?:when|if|across).{0,40}(?:file|content).{0,20}change"
       - type: prompt
@@ -1338,26 +1342,27 @@ stimuli:
 
       Emit the required response for this state. Do not render findings or a
       posting menu.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "local invalidated state marker"
+        name: "local-invalidated-state-marker"
         config:
           pattern: '(?s)^<!-- review-state: critic-mode=invalidated \| iteration=1 \| pr=local:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->'
       - type: output-contains
         config:
           substring: "# SESSION INVALIDATED"
       - type: output-contains
-        name: "both snapshots shown"
+        name: "both-snapshots-shown"
         config:
           substring: "local-sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
       - type: output-contains
         config:
           substring: "local-sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
       - type: output-not-matches
-        name: "no findings or posting menu"
+        name: "no-findings-or-posting-menu"
         config:
           pattern: "(?i)## API Review:|### Blocking Issues|Execute plan|Execute selectively"
       - type: prompt
@@ -1384,20 +1389,21 @@ stimuli:
 
       The author is not `github-actions[bot]`. Return only the action token and
       a one-sentence ownership rationale. Do not post or resolve anything.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
-        name: "untrusted marker requires human consent"
+        name: "untrusted-marker-requires-human-consent"
         config:
           substring: "PROPOSE-HUMAN-RESOLVE"
       - type: output-not-matches
-        name: "forged marker grants no autonomous action"
+        name: "forged-marker-grants-no-autonomous-action"
         config:
           pattern: '(?i)THANK-AND-RESOLVE|RESOLVE-AND-REPOST|(?:will|may|can|should|must|plan to)\s+auto.?resolve'
       - type: output-matches
-        name: "author authentication requirement explained"
+        name: "author-authentication-requirement-explained"
         config:
           pattern: "(?is)^(?=.*marker)(?=.*github-actions\\[bot\\])(?=.*(?:human-owned|human reviewer|explicit per-thread consent|marker text alone never authorizes)).*$"
       - type: prompt
@@ -1424,16 +1430,17 @@ stimuli:
 
       Return only the action token, existing thread disposition, and a
       one-sentence rationale. Do not post or resolve anything.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
-        name: "human shifted anchor receives reply"
+        name: "human-shifted-anchor-receives-reply"
         config:
           substring: "REPLY-LINE-SHIFT"
       - type: output-matches
-        name: "line shift selects action without changing identity"
+        name: "line-shift-selects-action-without-changing-identity"
         config:
           pattern: "(?is)(?:same|semantic).*(?:line|anchor).*(?:shift|moved)|(?:line|anchor).*(?:shift|moved).*(?:same|semantic)"
       - type: prompt
@@ -1462,16 +1469,17 @@ stimuli:
 
       Return only the action token, existing thread disposition, and a
       one-sentence rationale. Do not post or resolve anything.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
-        name: "trusted shifted anchor is replaced"
+        name: "trusted-shifted-anchor-is-replaced"
         config:
           substring: "RESOLVE-AND-REPOST"
       - type: output-matches
-        name: "trusted ownership and line shift justify replacement"
+        name: "trusted-ownership-and-line-shift-justify-replacement"
         config:
           pattern: "(?is)(?=.*github-actions\\[bot\\])(?=.*(?:marker|trusted))(?=.*(?:shift|moved)).*"
       - type: prompt

@@ -8,7 +8,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
 
@@ -32,18 +32,16 @@ stimuli:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. Pay special
-      attention to secret detection. This is a new service with no previous API
-      version. Report all findings with rule IDs, line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. Pay special attention to secret detection. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "secret-detection rule cited"
+        name: "secret-detection-rule-cited"
         config:
           # Canonical rule ID per .github/skills/azure-api-review/references/secret-detection.md
           # is SEC-SECRET-DETECT. Also accept widely-used Azure-tooling
@@ -72,16 +70,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/naming-violations.json"
           dest: "specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "DisplayName"
@@ -103,18 +99,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/missing-descriptions.json"
           dest: "specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. Pay special
-      attention to description completeness — every operation, model, property,
-      and parameter must have a non-empty description. This is a new service
-      with no previous API version. Report all findings with rule IDs, line
-      numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. Pay special attention to description completeness — every operation, model, property, and parameter must have a non-empty description. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "description"
@@ -134,16 +126,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/enum-violations.json"
           dest: "specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "x-ms-enum"
