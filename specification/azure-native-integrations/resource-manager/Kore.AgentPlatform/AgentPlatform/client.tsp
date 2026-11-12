@@ -122,3 +122,19 @@ using Kore.AgentPlatform;
   "KoreAIArtemisResourceProvisioningState",
   "csharp"
 );
+
+@@clientName(
+  LiftrBase.SingleSignOnStates,
+  "KoreAIArtemisSingleSignOnState",
+  "csharp"
+);
+@@clientName(
+  LiftrBase.SingleSignOnType,
+  "KoreAIArtemisSingleSignOnType",
+  "csharp"
+);
+@@clientName(
+  LiftrBase.MarketplaceSubscriptionStatus,
+  "KoreAIArtemisMarketplaceSubscriptionStatus",
+  "csharp"
+);
