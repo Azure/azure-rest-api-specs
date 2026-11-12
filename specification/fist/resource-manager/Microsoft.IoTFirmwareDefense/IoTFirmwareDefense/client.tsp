@@ -30,6 +30,8 @@ using Microsoft.IoTFirmwareDefense;
   "UnsafeFunctionCallsResult",
   "csharp"
 );
+@@clientName(LatestCveResource, "LatestCveData", "csharp");
+@@clientName(LatestCveSummaryResource, "LatestCveSummary", "csharp");
 
 @@clientName(
   SummaryResourceProperties,
