@@ -23,6 +23,11 @@ using Microsoft.Chaos;
   "csharp"
 );
 @@clientName(
+  WorkspaceCustomerManagedKeyEncryptionPatch,
+  "WorkspaceCustomerManagedKeyEncryptionPatch",
+  "csharp"
+);
+@@clientName(
   WorkspaceCustomerManagedKeyEncryptionPatch.keyEncryptionKeyUrl,
   "keyEncryptionKeyUri",
   "csharp"
