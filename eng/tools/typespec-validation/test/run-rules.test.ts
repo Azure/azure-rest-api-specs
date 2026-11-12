@@ -27,6 +27,19 @@ afterEach(() => {
 });
 
 describe("runRules", function () {
+  it("forwards fix mode while still running validation-only rules", async () => {
+    const fixable = createRule("Fixable", { success: true });
+    const validationOnly = createRule("ValidationOnly", { success: true });
+
+    const result = await runRules([fixable, validationOnly], "/test", [], defaultLogger, {
+      fix: true,
+    });
+
+    expect(result.executed).toEqual(["Fixable", "ValidationOnly"]);
+    expect(fixable.executeFn).toHaveBeenCalledWith("/test", defaultLogger, { fix: true });
+    expect(validationOnly.executeFn).toHaveBeenCalledWith("/test", defaultLogger, { fix: true });
+  });
+
   it("prints compact verbose statuses, accurately distinguishing skips and suppressions", async () => {
     vi.stubEnv("NO_COLOR", "1");
     const stdout = vi.spyOn(console, "log").mockImplementation(() => {});
@@ -168,7 +181,7 @@ describe("runRules", function () {
       });
       const result = await runRules([rule], "/test", [], logger);
       expect(result.success).toBe(false);
-      expect(rule.executeFn).toHaveBeenCalledWith("/test", logger);
+      expect(rule.executeFn).toHaveBeenCalledWith("/test", logger, {});
       expect(log.mock.calls.flat()).toEqual(["", "1 failed"]);
       expect(log.mock.invocationCallOrder[0]).toBeGreaterThan(error.mock.invocationCallOrder[0]);
       expect(error).toHaveBeenCalledExactlyOnceWith(d`
