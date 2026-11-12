@@ -4971,6 +4971,9 @@
           }
         },
         "x-ms-examples": {
+          "List NFS Provisioned v2 shares with their Scale Namespace feature modes": {
+            "$ref": "./examples/FileSharesList_ScaleMode.json"
+          },
           "ListDeletedShares": {
             "$ref": "./examples/DeletedFileSharesList.json"
           },
@@ -5058,6 +5061,9 @@
           }
         },
         "x-ms-examples": {
+          "Get the default Compatibility mode of the Scale Namespace feature for an NFS share": {
+            "$ref": "./examples/FileSharesGet_ScaleMode.json"
+          },
           "GetSharePaidBursting": {
             "$ref": "./examples/FileSharesGet_PaidBursting.json"
           },
@@ -5148,6 +5154,15 @@
           "Create NFS Shares": {
             "$ref": "./examples/FileSharesPut_NFS.json"
           },
+          "Create an NFS Provisioned v2 share with the Scale Namespace feature defaulting to Compatibility": {
+            "$ref": "./examples/FileSharesPut_ScaleMode_Default.json"
+          },
+          "Create an NFS Provisioned v2 share with the Scale Namespace feature in Compatibility mode": {
+            "$ref": "./examples/FileSharesPut_ScaleMode_Compatibility.json"
+          },
+          "Create an NFS Provisioned v2 share with the Scale Namespace feature in Scale mode": {
+            "$ref": "./examples/FileSharesPut_ScaleMode.json"
+          },
           "PutShares": {
             "$ref": "./examples/FileSharesPut.json"
           },
@@ -5203,7 +5218,7 @@
             "description": "Properties to update for the file share.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FileShare"
+              "$ref": "#/definitions/FileSharePatch"
             }
           }
         ],
@@ -5222,6 +5237,9 @@
           }
         },
         "x-ms-examples": {
+          "Update metadata while preserving the Scale Namespace mode of an existing NFS share": {
+            "$ref": "./examples/FileSharesPatch_PreserveScaleMode.json"
+          },
           "UpdateShareAcls": {
             "$ref": "./examples/FileShareAclsPatch.json"
           },
@@ -13163,9 +13181,275 @@
         }
       }
     },
+    "FileSharePatch": {
+      "type": "object",
+      "description": "The parameters for updating a file share without applying the creation-only Scale Namespace default. The existing mode is preserved when omitted. Attempts to change the mode return HTTP 400 with error code PropertyIsImmutable.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\".",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/FileShareUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
     "FileShareProperties": {
       "type": "object",
       "description": "The properties of the file share.",
+      "properties": {
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Returns the date and time the share was last modified.",
+          "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A name-value pair to associate with the share as metadata.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "shareQuota": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The provisioned size of the share, in gibibytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. For file shares created under Files Provisioned v2 account type, please refer to the GetFileServiceUsage API response for the minimum and maximum allowed provisioned storage size."
+        },
+        "provisionedIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The provisioned IOPS of the share. This property is only for file shares created under Files Provisioned v2 account type. Please refer to the GetFileServiceUsage API response for the minimum and maximum allowed value for provisioned IOPS."
+        },
+        "provisionedBandwidthMibps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The provisioned bandwidth of the share, in mebibytes per second. This property is only for file shares created under Files Provisioned v2 account type. Please refer to the GetFileServiceUsage API response for the minimum and maximum allowed value for provisioned bandwidth."
+        },
+        "includedBurstIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The calculated burst IOPS of the share. This property is only for file shares created under Files Provisioned v2 account type.",
+          "readOnly": true
+        },
+        "maxBurstCreditsForIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The calculated maximum burst credits for the share. This property is only for file shares created under Files Provisioned v2 account type.",
+          "readOnly": true
+        },
+        "nextAllowedQuotaDowngradeTime": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Returns the next allowed provisioned storage size downgrade time for the share. This property is only for file shares created under Files Provisioned v1 SSD and Files Provisioned v2 account type",
+          "readOnly": true
+        },
+        "nextAllowedProvisionedIopsDowngradeTime": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Returns the next allowed provisioned IOPS downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.",
+          "readOnly": true
+        },
+        "nextAllowedProvisionedBandwidthDowngradeTime": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Returns the next allowed provisioned bandwidth downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.",
+          "readOnly": true
+        },
+        "enabledProtocols": {
+          "$ref": "#/definitions/EnabledProtocols",
+          "description": "The authentication protocol that is used for the file share. Can only be specified when creating a share.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "scaleMode": {
+          "type": "string",
+          "description": "The mode of the Scale Namespace feature for the file share. Supported only for NFS shares in FileStorage Provisioned v2 accounts. If omitted when creating a share, the mode defaults to Compatibility. PATCH requests that omit this property preserve the existing mode. The mode cannot be changed after creation; an attempt to change it through PATCH returns HTTP 400 with error code PropertyIsImmutable. Get and list operations return Compatibility when no mode was specified at creation.",
+          "default": "Compatibility",
+          "enum": [
+            "Compatibility",
+            "Scale"
+          ],
+          "x-ms-enum": {
+            "name": "FileShareScaleMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Compatibility",
+                "value": "Compatibility",
+                "description": "Uses Compatibility mode for the Scale Namespace feature. This is the default when no mode is specified."
+              },
+              {
+                "name": "Scale",
+                "value": "Scale",
+                "description": "Uses Scale mode for the Scale Namespace feature."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "rootSquash": {
+          "$ref": "#/definitions/RootSquashType",
+          "description": "The property is for NFS share only. The default is NoRootSquash."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the share.",
+          "readOnly": true
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "Indicates whether the share was deleted.",
+          "readOnly": true
+        },
+        "deletedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deleted time if the share was deleted.",
+          "readOnly": true
+        },
+        "remainingRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Remaining retention days for share that was soft deleted.",
+          "readOnly": true
+        },
+        "accessTier": {
+          "$ref": "#/definitions/ShareAccessTier",
+          "description": "Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium."
+        },
+        "accessTierChangeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the last modification time for share access tier.",
+          "readOnly": true
+        },
+        "accessTierStatus": {
+          "type": "string",
+          "description": "Indicates if there is a pending transition for access tier.",
+          "readOnly": true
+        },
+        "shareUsageBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files.",
+          "readOnly": true
+        },
+        "leaseStatus": {
+          "$ref": "#/definitions/LeaseStatus",
+          "description": "The lease status of the share.",
+          "readOnly": true
+        },
+        "leaseState": {
+          "$ref": "#/definitions/LeaseState",
+          "description": "Lease state of the share.",
+          "readOnly": true
+        },
+        "leaseDuration": {
+          "$ref": "#/definitions/LeaseDuration",
+          "description": "Specifies whether the lease on a share is of infinite or fixed duration, only when the share is leased.",
+          "readOnly": true
+        },
+        "signedIdentifiers": {
+          "type": "array",
+          "description": "List of stored access policies specified on the share.",
+          "items": {
+            "$ref": "#/definitions/SignedIdentifier"
+          }
+        },
+        "snapshotTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of share snapshot returned in the response of list shares with expand param \"snapshots\".",
+          "readOnly": true
+        },
+        "fileSharePaidBursting": {
+          "$ref": "#/definitions/FileSharePropertiesFileSharePaidBursting",
+          "description": "File Share Paid Bursting properties."
+        }
+      }
+    },
+    "FileSharePropertiesFileSharePaidBursting": {
+      "type": "object",
+      "description": "File Share Paid Bursting properties.",
+      "properties": {
+        "paidBurstingEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether paid bursting is enabled for the share. This property is only for file shares created under Files Provisioned v1 SSD account type."
+        },
+        "paidBurstingMaxIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum paid bursting IOPS for the share. This property is only for file shares created under Files Provisioned v1 SSD account type. The maximum allowed value is 102400 which is the maximum allowed IOPS for a share."
+        },
+        "paidBurstingMaxBandwidthMibps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum paid bursting bandwidth for the share, in mebibytes per second. This property is only for file shares created under Files Provisioned v1 SSD account type. The maximum allowed value is 10340 which is the maximum allowed bandwidth for a share."
+        }
+      }
+    },
+    "FileShareRecommendations": {
+      "type": "object",
+      "description": "Constants used for calculating recommended provisioned IOPS and bandwidth for a file share in the storage account.",
+      "properties": {
+        "baseIOPS": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The base IOPS in the file share provisioned IOPS recommendation formula.",
+          "readOnly": true
+        },
+        "ioScalar": {
+          "type": "number",
+          "format": "double",
+          "description": "The scalar for IO in the file share provisioned IOPS recommendation formula.",
+          "readOnly": true
+        },
+        "baseBandwidthMiBPerSec": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The base bandwidth in the file share provisioned bandwidth recommendation formula.",
+          "readOnly": true
+        },
+        "bandwidthScalar": {
+          "type": "number",
+          "format": "double",
+          "description": "The scalar for bandwidth in the file share provisioned bandwidth recommendation formula.",
+          "readOnly": true
+        }
+      }
+    },
+    "FileShareUpdateProperties": {
+      "type": "object",
+      "description": "The file-share properties retained for update compatibility, excluding the create-only Scale Namespace setting.",
       "properties": {
         "lastModifiedTime": {
           "type": "string",
@@ -13311,56 +13595,6 @@
         "fileSharePaidBursting": {
           "$ref": "#/definitions/FileSharePropertiesFileSharePaidBursting",
           "description": "File Share Paid Bursting properties."
-        }
-      }
-    },
-    "FileSharePropertiesFileSharePaidBursting": {
-      "type": "object",
-      "description": "File Share Paid Bursting properties.",
-      "properties": {
-        "paidBurstingEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether paid bursting is enabled for the share. This property is only for file shares created under Files Provisioned v1 SSD account type."
-        },
-        "paidBurstingMaxIops": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum paid bursting IOPS for the share. This property is only for file shares created under Files Provisioned v1 SSD account type. The maximum allowed value is 102400 which is the maximum allowed IOPS for a share."
-        },
-        "paidBurstingMaxBandwidthMibps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum paid bursting bandwidth for the share, in mebibytes per second. This property is only for file shares created under Files Provisioned v1 SSD account type. The maximum allowed value is 10340 which is the maximum allowed bandwidth for a share."
-        }
-      }
-    },
-    "FileShareRecommendations": {
-      "type": "object",
-      "description": "Constants used for calculating recommended provisioned IOPS and bandwidth for a file share in the storage account.",
-      "properties": {
-        "baseIOPS": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The base IOPS in the file share provisioned IOPS recommendation formula.",
-          "readOnly": true
-        },
-        "ioScalar": {
-          "type": "number",
-          "format": "double",
-          "description": "The scalar for IO in the file share provisioned IOPS recommendation formula.",
-          "readOnly": true
-        },
-        "baseBandwidthMiBPerSec": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The base bandwidth in the file share provisioned bandwidth recommendation formula.",
-          "readOnly": true
-        },
-        "bandwidthScalar": {
-          "type": "number",
-          "format": "double",
-          "description": "The scalar for bandwidth in the file share provisioned bandwidth recommendation formula.",
-          "readOnly": true
         }
       }
     },

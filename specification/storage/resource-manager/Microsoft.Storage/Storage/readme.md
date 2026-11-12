@@ -18,6 +18,44 @@ To see additional help and options, run:
 
 ---
 
+## Scale Namespace update behavior
+
+Starting with API version `2026-12-01`, NFS shares in FileStorage Provisioned v2 accounts support the Scale Namespace feature. The `Compatibility` default applies when `scaleMode` is omitted during creation. Omitting the property from a PATCH request preserves the share's existing mode; it does not reset a `Scale` share to `Compatibility`.
+
+The [PATCH example](./examples/2026-12-01/FileSharesPatch_PreserveScaleMode.json) updates metadata on an existing `Scale` share without supplying `scaleMode`. The response still contains `"scaleMode": "Scale"`.
+
+The separate PATCH model retains the legacy request fields but excludes `scaleMode`, so it does not inherit the creation-time default from the create/read model. This follows [RPC-Patch-V1-10](https://github.com/Azure/azure-openapi-validator/blob/main/docs/patch-body-parameters-schema.md), which prohibits defaults in PATCH request bodies.
+
+### Rejected attempt to change an existing mode
+
+Assume the following share already exists with `scaleMode` set to `Scale`. Attempting to change it to `Compatibility` through PATCH returns `400 Bad Request` with error code `PropertyIsImmutable`; the existing mode is unchanged. Authentication and incidental HTTP headers are omitted below.
+
+```http
+PATCH /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scaleNamespaceExample/providers/Microsoft.Storage/storageAccounts/filestoragepv2/fileServices/default/shares/scale-share?api-version=2026-12-01 HTTP/1.1
+Host: management.azure.com
+Content-Type: application/json
+
+{
+  "properties": {
+    "scaleMode": "Compatibility"
+  }
+}
+```
+
+```http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": {
+    "code": "PropertyIsImmutable",
+    "message": "The property 'scaleMode' was specified in the input, but it cannot be updated as it is immutable."
+  }
+}
+```
+
+This is an intentionally invalid request, not a supported PATCH payload. It is documented here rather than registered as an `x-ms-examples` entry because example validation also validates the request against the PATCH schema.
+
 ## Configuration
 
 ### Basic Information
@@ -77,6 +115,11 @@ directive:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobAccessPointConfigurations/{blobAccessPointConfigurationName}"].patch.parameters[5].schema.properties.properties
     suppress: PatchBodyParametersSchema
     reason: Connector and DataShare PATCH carry forward their existing polymorphic discriminator requirements. Blob Access Point also requires a source discriminator to select the concrete polymorphic shape being updated.
+
+  - from: openapi.json
+    where: $.definitions.FileShareUpdateProperties.properties.metadata
+    suppress: AvoidAdditionalProperties
+    reason: FileShareUpdateProperties.metadata preserves the string-to-string metadata dictionary accepted by FileShareProperties in stable API version 2026-09-01. The separate PATCH model excludes only the new create-only scaleMode property. Removing or restricting metadata would break existing PATCH requests.
 
   - where:
     - $.definitions["Azure.Core.uuid"].format
