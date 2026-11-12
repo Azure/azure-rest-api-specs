@@ -6,9 +6,7 @@
 
 import "../../common/models.tsp";
 import "@typespec/http";
-import "@azure-tools/openai-typespec/models/common";
 import "@typespec/openapi";
-import "@azure-tools/openai-typespec/models/vector-stores";
 using TypeSpec.Http;
 using OpenAI;
 using TypeSpec.OpenAPI;
