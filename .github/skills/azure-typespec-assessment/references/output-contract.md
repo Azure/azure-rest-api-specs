@@ -5,12 +5,32 @@
 Artifact comparison provenance must retain each role's exact API version and
 source commit in `artifactComparisons`, compiler records, and the report
 appendix. Preview-only services compare against the latest previous preview:
-head projections when retained, or the actual PR comparison-base revision when
-that preview was explicitly removed from head. Existing-version modifications
+head projections when retained. If the selected previous version is missing
+from head, preserve the planned head-source baseline and target selections,
+`mode: new-api-version`, `classification: existing`, discovered version sets,
+and baseline `availability: "unavailable-in-head"`. Omit baseline artifacts;
+never compare historical base@oldVersion with head@target. Existing-version modifications
 compare base/head at the same version. Do not equate no stable version with
 skipped REST/downstream assessment, nor turn discovery or compiler failures
 into contract absence. Semantic, Guidelines, and documentation dimensions remain
 independently evidence-driven.
+
+For an unavailable head baseline, REST/downstream have no project candidates
+or inference and no no-impact conclusions. A wholly unavailable comparison has
+`status: not-assessed`, `verdict: unknown`, `coverage: blocked` for both
+compatibility dimensions and their safety summary. Semantic intents reuse the
+target-only path with real base-to-head source evidence; absent before facts
+are unknown, not proof operations were added or historically absent. Continue
+Azure Guidelines and compiler-driven Documentation Completeness independently.
+Available projects retain their findings and partial compatibility coverage.
+
+Both top compatibility cards and detailed sections use exactly
+`Not assessed: the baseline API version is not available in head.`
+for a wholly unavailable scope, without zero-findings text or pass badges.
+Mixed reports retain ordinary finding counts and project-scoped availability
+notes. The appendix shows the selected version/head commit and explicitly says
+the baseline was unavailable and not compiled. Other unknown/blocked cases do
+not use this special wording.
 
 After deterministic analysis, read
 `agent-workspace\agent-index.json` and its referenced bounded

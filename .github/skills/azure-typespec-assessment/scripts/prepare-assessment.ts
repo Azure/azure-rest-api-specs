@@ -7,6 +7,7 @@ import {
 } from "./api-version-selection.ts";
 import { isMain, parseArgs, runMain, writeJson } from "./cli.ts";
 import { runProjectCompilers } from "./compiler-runner.ts";
+import { unavailableHeadBaselineBlocker, usesTargetOnlyArtifacts } from "./comparison-execution.ts";
 import {
   collectChanges,
   createSparseWorktree,
@@ -161,8 +162,11 @@ export function prepareProjectRecords({
       }
     }
     if (enabled && !projectBlockers.length) {
-      const comparisonRoles =
-        record.classification === "new" ? (["target"] as const) : (["baseline", "target"] as const);
+      const baselineBlocker = unavailableHeadBaselineBlocker(record);
+      if (baselineBlocker) addBlocker(baselineBlocker);
+      const comparisonRoles = usesTargetOnlyArtifacts(record)
+        ? (["target"] as const)
+        : (["baseline", "target"] as const);
       for (const comparisonRole of comparisonRoles) {
         const selection = record.artifactComparison?.[comparisonRole];
         if (!selection) throw new Error(`Missing ${comparisonRole} artifact selection.`);
