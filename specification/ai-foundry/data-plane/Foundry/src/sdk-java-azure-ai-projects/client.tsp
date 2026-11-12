@@ -379,6 +379,7 @@ model ListAgentInsightRunsOptions {
 @@clientName(AttackStrategy.ROT13, "ROT_13");
 
 @@clientName(AgentInsightHighlightedTrace.duration_ms, "Duration");
+@@clientName(EvaluatorHealthMetrics.n_dimensions, "numberOfDimensions", "java");
 
 // Preserve name on GA'd model
 @@clientName(FoundryEvaluationTarget, "Target");
