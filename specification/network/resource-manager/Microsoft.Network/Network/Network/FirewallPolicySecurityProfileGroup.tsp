@@ -35,8 +35,7 @@ model FirewallPolicySecurityProfileGroup extends SubResourceModel {
   @path
   @key("securityProfileGroupName")
   @segment("securityProfileGroups")
-  @pattern("^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$")
-  name: string;
+  name: FirewallPolicyName;
 
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 
